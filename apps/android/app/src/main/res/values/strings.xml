@@ -660,4 +660,42 @@
     <string name="sources_use_refused">odrzucone z powodem</string>
     <string name="sources_use_none">nieużyte</string>
     <string name="sources_use_element">%1$s → element %2$s</string>
+
+    <!-- SHAPE-LIVE-01: podgląd źródła w trakcie analizy -->
+    <string name="live_waiting">Analiza rusza: czekam na pierwszy arkusz</string>
+    <string name="live_now">%1$s — %2$s</string>
+    <string name="live_phase">Faza: %1$s (bez czytania obrazu)</string>
+    <string name="live_elapsed">Czas: %1$d s</string>
+    <string name="live_no_sheet_yet">Pobieranie strony projektu i obrazów… Tu pojawi się arkusz, który analizator właśnie czyta.</string>
+    <string name="live_no_sheet_phase">Ta faza nie czyta żadnego obrazu.</string>
+    <string name="live_last_sheet">Pokazany ostatni czytany arkusz (przygaszony): bieżąca faza go nie czyta.</string>
+    <string name="live_loading_sheet">Wczytywanie arkusza…</string>
+    <string name="live_sheet_description">Arkusz czytany przez analizator, z zaznaczonymi odczytami</string>
+    <string name="live_sheet_missing">Kopia tego arkusza nie jest dostępna na telefonie.</string>
+    <string name="live_sheet_mismatch">Bajty arkusza nie zgadzają się z tymi, które odczytał analizator — nie pokazuję.</string>
+    <string name="live_sheet_undecodable">Nie udało się zdekodować arkusza.</string>
+    <string name="live_marks">Na arkuszu: kandydaci %1$d (żółte), odczytane %2$d (niebieskie), przyjęte %3$d (zielone), odrzucone %4$d (czerwone)</string>
+    <string name="live_counts">Obrazy %1$d · odczytane %2$d · odrzucone po treści %3$d · kandydaci tekstu %4$d · odczyty wymiarów %5$d · użyte w modelu %6$d</string>
+    <string name="live_openings">Otwory zbudowane w modelu: %1$d (kilka odczytów jednego otworu to jeden otwór)</string>
+    <string name="live_step_fetching">Pobieranie źródeł</string>
+    <string name="live_step_content">Rozpoznawanie treści obrazu</string>
+    <string name="live_step_refused">Obraz odrzucony po treści</string>
+    <string name="live_step_reading">Czytanie rysunku</string>
+    <string name="live_step_read">Odczytano rysunek</string>
+    <string name="live_step_numbers">Czytanie wymiarów</string>
+    <string name="live_step_numbers_read">Odczytano wymiary</string>
+    <string name="live_step_solving">Budowanie bryły z odczytów</string>
+    <string name="live_step_built">Zastosowanie odczytów w modelu</string>
+    <string name="live_step_compiling">Kompilowanie sceny 3D</string>
+    <string name="live_step_verifying">Sprawdzanie modelu</string>
+    <!-- SHAPE-LIVE-01: source inspection, every reading reachable and its element -->
+    <string name="sources_show_in_model">Pokaż w modelu (%1$d el.)</string>
+    <string name="sources_no_element">Ten odczyt nie trafił do żadnego elementu modelu.</string>
+    <string name="sources_page">Strona %1$d z %2$d · %3$d odczytów</string>
+    <string name="sources_page_previous">Poprzednie</string>
+    <string name="sources_page_next">Następne</string>
+    <string name="sources_picture_changed">Obraz pod tym adresem nie jest już tym, który odczytała analiza (inny skrót SHA-256) — nie pokazuję go pod starymi odczytami.</string>
+    <string name="sources_openings">Otwory: z rzutów %1$d · odczyty na elewacjach %2$d (kilka odczytów jednego otworu) · w modelu %3$d</string>
+    <string name="live_elements">Różne elementy modelu z przyjętych odczytów: %1$d · hipotezy solvera: %2$d</string>
+    <string name="live_linked">Odczyty powiązane z elementem: %1$d · bez elementu: %2$d</string>
 </resources>

@@ -25,7 +25,7 @@
 import { rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { analysisFilesOf, runAnalysis } from '@buildapp/analysis-service'
-import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTelemetry, AnalysisTimings, PhaseStats } from '@buildapp/analysis-service'
+import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTelemetry, AnalysisTimings, LiveSink, PhaseStats } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import type { LabelRecogniser } from '@buildapp/source-metrics'
@@ -54,6 +54,8 @@ export type LocalAnalysisRequest = {
   recogniser?: LocalRecogniser
   /** SOURCE-01: this job's image-content encoder, made from `wiring.content` by the caller. */
   content?: LocalContent
+  /** SHAPE-LIVE-01: the sheet the analyzer is looking at, as it looks (write-only). */
+  live?: LiveSink
   signal?: AbortSignal
   progress?: (event: AnalysisProgress) => void
   /** Phase, counts and heartbeat from inside the long loops (protocol 3). */
@@ -75,6 +77,8 @@ export type LocalAnalysisOutput = {
 
 /** The scratch directory a run keeps its fetched bytes in. */
 export const bytesDirOf = (workDir: string): string => join(workDir, 'bytes')
+/** SHAPE-LIVE-01: the job-private copies of the sheets the live preview shows; they go with the bytes. */
+export const liveDirOf = (workDir: string): string => join(workDir, 'live')
 
 export async function runLocalAnalysis(request: LocalAnalysisRequest): Promise<LocalAnalysisOutput> {
   const bytesDir = bytesDirOf(request.workDir)
@@ -97,11 +101,13 @@ export async function runLocalAnalysis(request: LocalAnalysisRequest): Promise<L
         rss: () => process.memoryUsage.rss(),
         recogniser: request.recogniser,
         ...(request.content ? { content: request.content } : {}),
+        ...(request.live ? { live: request.live } : {}),
       },
     )
     return { run, files: analysisFilesOf(run), timings: run.timings, memory: memorySample() }
   } finally {
-    // Success, failure or cancel: the source bytes go. Only the result is kept.
+    // Success, failure or cancel: the source bytes go, and the live preview's copies of them. Only the result is kept.
     await rm(bytesDir, { recursive: true, force: true })
+    await rm(liveDirOf(request.workDir), { recursive: true, force: true })
   }
 }

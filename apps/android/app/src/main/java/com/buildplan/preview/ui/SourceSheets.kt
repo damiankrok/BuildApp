@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +32,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import com.buildplan.preview.R
 import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
 import com.buildplan.preview.analyzer.SourceInspection
@@ -45,18 +50,19 @@ import kotlinx.coroutines.withContext
  * real picture, read or worked out, and what the model made of it. The phone shows the service's records only.
  */
 @Composable
-internal fun SourceSheetsDetails(sources: SourceInspection) {
+internal fun SourceSheetsDetails(sources: SourceInspection, onShowElement: (String) -> Unit = {}) {
     var open by rememberSaveable { mutableStateOf(false) }
     val c = sources.counts
     Foldout(stringResource(R.string.sources_title, c.sheets, c.read, c.refusedByContent), open, onToggle = { open = !open }) {
         StatusText(stringResource(R.string.sources_numbers, c.readings, c.printedUsed, c.derived))
+        c.openings?.let { StatusText(stringResource(R.string.sources_openings, it.plan, it.elevationReadings, it.model)) }
         StatusText(if (sources.classifier != null) stringResource(R.string.sources_classifier, sources.classifier.id) else stringResource(R.string.sources_no_classifier))
-        for (sheet in sources.sheets) SheetDetails(sheet)
+        for (sheet in sources.sheets) SheetDetails(sheet, onShowElement)
     }
 }
 
 @Composable
-private fun SheetDetails(sheet: SourceSheet) {
+private fun SheetDetails(sheet: SourceSheet, onShowElement: (String) -> Unit) {
     var open by rememberSaveable(sheet.assetId) { mutableStateOf(false) }
     val title = listOfNotNull(
         documentText(sheet.claimed.document),
@@ -68,13 +74,27 @@ private fun SheetDetails(sheet: SourceSheet) {
         Text(sheet.why, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
         sheet.side?.let { StatusText(stringResource(R.string.sources_side, it, sheet.sideBasis.orEmpty())) }
         var selected by remember(sheet.assetId) { mutableStateOf<String?>(null) }
-        SheetPicture(sheet, selected)
+        var picture by remember(sheet.url) { mutableStateOf<PictureLoad>(PictureLoad.Loading) }
+        LaunchedEffect(sheet.url) { picture = withContext(Dispatchers.IO) { loadPicture(sheet.url, sheet.byteHash) } }
+        SheetPicture(sheet, selected, picture)
         sheet.readings.firstOrNull { it.id == selected }?.let { r ->
             Text(readingText(r) + " — " + useText(r), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
             StatusText(r.why, maxLines = 4)
+            // the reading's own crop, enlarged: a label of a few pixels is read here, not on the whole sheet
+            (picture as? PictureLoad.Shown)?.let { shown -> (r.box ?: r.line)?.let { ReadingCrop(shown.bitmap, sheet, it) } }
+            // SHAPE-LIVE-01: the element it went into, selected in the model; or, said plainly, none
+            val target = r.elementIds.firstOrNull()
+            if (target != null) {
+                InkButton(stringResource(R.string.sources_show_in_model, r.elementIds.size), onClick = { onShowElement(target) }, modifier = Modifier.fillMaxWidth())
+            } else {
+                StatusText(stringResource(R.string.sources_no_element))
+            }
         }
+        // every reading can be chosen: the list is paged, not cut
+        var page by remember(sheet.assetId) { mutableStateOf(0) }
+        val pages = (sheet.readings.size + READINGS_PER_PAGE - 1) / READINGS_PER_PAGE
         Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
-            for (r in sheet.readings.take(40)) {
+            for (r in sheet.readings.drop(page * READINGS_PER_PAGE).take(READINGS_PER_PAGE)) {
                 StatusText(
                     readingText(r) + " · " + useText(r),
                     modifier = Modifier.fillMaxWidth().heightIn(min = Sizes.touch).clickable(role = Role.Button) { selected = r.id },
@@ -82,24 +102,50 @@ private fun SheetDetails(sheet: SourceSheet) {
                     maxLines = 2,
                 )
             }
-            if (sheet.readings.size > 40) StatusText(stringResource(R.string.assessment_more, sheet.readings.size - 40))
+            if (pages > 1) {
+                StatusText(stringResource(R.string.sources_page, page + 1, pages, sheet.readings.size))
+                Row(horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+                    InkButton(stringResource(R.string.sources_page_previous), onClick = { page = (page - 1).coerceAtLeast(0) }, enabled = page > 0, modifier = Modifier.weight(1f))
+                    InkButton(stringResource(R.string.sources_page_next), onClick = { page = (page + 1).coerceAtMost(pages - 1) }, enabled = page < pages - 1, modifier = Modifier.weight(1f))
+                }
+            }
+        }
+    }
+}
+
+private const val READINGS_PER_PAGE = 40
+
+internal sealed interface PictureLoad {
+    data object Loading : PictureLoad
+    data class Shown(val bitmap: ImageBitmap) : PictureLoad
+    data class Refused(val reason: Int) : PictureLoad
+}
+
+/** The reading's box (or line), with a margin, cut from the verified picture and drawn at the panel's width. */
+@Composable
+private fun ReadingCrop(bitmap: ImageBitmap, sheet: SourceSheet, r: com.buildplan.preview.analyzer.SourceRect) {
+    val k = bitmap.width.toDouble() / sheet.width.coerceAtLeast(1)
+    val margin = 24.0
+    val x0 = ((minOf(r.x0, r.x1) - margin) * k).toInt().coerceIn(0, bitmap.width - 1)
+    val y0 = ((minOf(r.y0, r.y1) - margin) * k).toInt().coerceIn(0, bitmap.height - 1)
+    val x1 = ((maxOf(r.x0, r.x1) + margin) * k).toInt().coerceIn(x0 + 1, bitmap.width)
+    val y1 = ((maxOf(r.y0, r.y1) + margin) * k).toInt().coerceIn(y0 + 1, bitmap.height)
+    val w = x1 - x0
+    val h = y1 - y0
+    Box(Modifier.fillMaxWidth().aspectRatio((w.toFloat() / h).coerceIn(0.5f, 6f)).semantics { contentDescription = "" }) {
+        Canvas(Modifier.fillMaxSize()) {
+            drawImage(bitmap, srcOffset = IntOffset(x0, y0), srcSize = IntSize(w, h), dstSize = IntSize(size.width.toInt(), size.height.toInt()))
         }
     }
 }
 
 /** The real picture, fetched from the address the analysis read it from, with each reading's crop and line on it. */
 @Composable
-private fun SheetPicture(sheet: SourceSheet, selected: String?) {
-    var bitmap by remember(sheet.url) { mutableStateOf<ImageBitmap?>(null) }
-    var failed by remember(sheet.url) { mutableStateOf(false) }
-    LaunchedEffect(sheet.url) {
-        val got = withContext(Dispatchers.IO) { runCatching { loadPicture(sheet.url) }.getOrNull() }
-        if (got == null) failed = true else bitmap = got
-    }
-    val b = bitmap
-    if (b == null) {
-        StatusText(stringResource(if (failed) R.string.sources_picture_failed else R.string.sources_picture_loading))
-        return
+private fun SheetPicture(sheet: SourceSheet, selected: String?, picture: PictureLoad) {
+    val b = when (picture) {
+        PictureLoad.Loading -> { StatusText(stringResource(R.string.sources_picture_loading)); return }
+        is PictureLoad.Refused -> { StatusText(stringResource(picture.reason)); return }
+        is PictureLoad.Shown -> picture.bitmap
     }
     Box(Modifier.fillMaxWidth().aspectRatio(sheet.width.toFloat() / sheet.height.coerceAtLeast(1))) {
         Image(b, contentDescription = stringResource(R.string.sources_picture), modifier = Modifier.fillMaxSize(), contentScale = ContentScale.FillBounds)
@@ -133,17 +179,21 @@ private fun SheetPicture(sheet: SourceSheet, selected: String?) {
 
 /**
  * Fetched through the app's one transport (HTTPS, no redirects, a size limit), from the address the analysis read it
- * from; downsampled to at most ~1600 px on its long side — enough to see a dimension, small enough for a phone's heap.
+ * from, and shown only when its SHA-256 is the hash of the bytes the analysis read (SHAPE-LIVE-01): a publisher that has
+ * since replaced the picture shows a refusal, not a different picture under the old readings. Downsampled to at most
+ * ~1600 px on its long side — enough to see a dimension, small enough for a phone's heap.
  */
-private fun loadPicture(url: String): ImageBitmap? {
-    val response = HttpUrlConnectionTransport().get(url, PICTURE_MAX_BYTES)
-    if (response.status != 200) return null
+private fun loadPicture(url: String, byteHash: String): PictureLoad {
+    val response = runCatching { HttpUrlConnectionTransport().get(url, PICTURE_MAX_BYTES) }.getOrNull() ?: return PictureLoad.Refused(R.string.sources_picture_failed)
+    if (response.status != 200) return PictureLoad.Refused(R.string.sources_picture_failed)
     val bytes = response.body
+    if (byteHash.isBlank() || sha256(bytes) != byteHash.lowercase()) return PictureLoad.Refused(R.string.sources_picture_changed)
     val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
     BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
     var sample = 1
     while (maxOf(bounds.outWidth, bounds.outHeight) / sample > 1600) sample *= 2
-    return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, BitmapFactory.Options().apply { inSampleSize = sample })?.asImageBitmap()
+    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, BitmapFactory.Options().apply { inSampleSize = sample }) ?: return PictureLoad.Refused(R.string.sources_picture_failed)
+    return PictureLoad.Shown(bitmap.asImageBitmap())
 }
 
 private const val PICTURE_MAX_BYTES = 20L * 1024 * 1024

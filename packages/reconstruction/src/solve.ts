@@ -238,7 +238,15 @@ export type LevelFacts = {
   evidenceIds: string[]
   /** Whether the heights came from printed datums or from a convention. */
   measured: boolean
+  /**
+   * SHAPE-LIVE-01: the highest datum read was refused as the ridge because the section draws its roof well above it
+   * (`v2/section-datums.ts`); why, and whether it was kept as a floor.
+   */
+  topRefused?: { value: number; keptAsFloor: boolean; onSlab: boolean; why: string; datums: Array<{ id: string; value: number; row: number }> }
 }
+
+/** What the section's drawing says about the highest datum read: the ridge, or a mark below the drawn roof. */
+export type TopDatumCheck = (datums: Array<{ id: string; value: number; row: number }>) => { belowDrawnRoof: boolean; onSlab: boolean; why: string } | undefined
 
 /**
  * The storeys, from the heights a section prints.
@@ -249,7 +257,7 @@ export type LevelFacts = {
  * rule, and the rule is geometric: the top datum is the ridge when the drawing
  * also shows a roof, and a gap smaller than a door is not a storey at all.
  */
-export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string): LevelFacts {
+export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string, topCheck?: TopDatumCheck): LevelFacts {
   const datums = metrics.evidence
     .filter((e) => e.kind === 'LEVEL_DATUM' && (frameId === undefined || e.frameId === frameId))
     .filter((e) => e.association.kind !== 'UNATTACHED')
@@ -272,6 +280,27 @@ export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string): LevelF
   const values = read.filter((v) => !terrain(v))
   if (values.length > 0 && !values.some((v) => Math.abs(v) < 0.05) && values[0] > 0) values.unshift(0)
   if (values.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false }
+  // SHAPE-LIVE-01: the highest datum is the ridge only if nothing of the building is drawn far above it. A section
+  // whose apex label was not read still draws its roof; the datum under it is the eaves or the attic floor, and the
+  // ridge is left to the roof's own rules rather than sunk to that datum.
+  const rowOf = (v: number): number | undefined => {
+    const d = datums.find((x) => Math.abs(x.value - v) < 1e-6 && x.measuredGeometry?.type === 'SEGMENT')
+    return d && d.measuredGeometry?.type === 'SEGMENT' ? d.measuredGeometry.a.y : undefined
+  }
+  // every datum the reader placed on the sheet, the ones a few centimetres from another included: each is a row
+  const placed = datums.map((d) => ({ id: d.id, value: round6(d.value), row: rowOf(d.value) })).filter((d): d is { id: string; value: number; row: number } => d.row !== undefined)
+  const check = topCheck && placed.some((d) => Math.abs(d.value - values[values.length - 1]) < 1e-6) ? topCheck(placed) : undefined
+  if (check?.belowDrawnRoof) {
+    // It is the top of the walls below it — an eave mark, or the slab of an attic or a ceiling under the roof — and
+    // never a floor of its own: which storeys the house has is the plans' to say, and a slab under a bungalow's roof
+    // would otherwise make a storey no plan shows.
+    const top = values[values.length - 1]
+    const floors = values.slice(0, values.length - 1)
+    const heights: number[] = []
+    for (let i = 0; i + 1 < floors.length; i += 1) heights.push(round6(floors[i + 1] - floors[i]))
+    if (floors.length > 0) heights.push(round6(top - floors[floors.length - 1]))
+    return { floors, heights, topDatum: undefined, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, topRefused: { value: top, keptAsFloor: false, onSlab: check.onSlab, why: check.why, datums: placed } }
+  }
   const topDatum = values[values.length - 1]
   // A section of a pitched house marks its heights in a fixed order: the floor
   // of each storey, then the EAVES where the walls stop, then the ridge. So

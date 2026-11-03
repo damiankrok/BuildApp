@@ -40,6 +40,8 @@ sealed interface AnalysisState {
         val lastFailure: AnalyzerFailure? = null,
         /** Set when the job runs on this phone: the runtime and what the run has cost so far. */
         val local: LocalRunReport? = null,
+        /** SHAPE-LIVE-01: the sheet the analyzer is looking at (a run on this phone only). */
+        val live: LiveView? = null,
     ) : AnalysisState {
         val connectionLost: Boolean get() = consecutiveFailures > 0
     }
@@ -52,6 +54,7 @@ sealed interface AnalysisState {
         val consecutiveFailures: Int = 0,
         val lastFailure: AnalyzerFailure? = null,
         val local: LocalRunReport? = null,
+        val live: LiveView? = null,
     ) : AnalysisState {
         val connectionLost: Boolean get() = consecutiveFailures > 0
     }

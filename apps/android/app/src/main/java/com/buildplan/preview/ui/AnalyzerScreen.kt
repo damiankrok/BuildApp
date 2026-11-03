@@ -83,6 +83,7 @@ import com.buildplan.preview.analyzer.StageRow
 import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.scene.ModelCompleteness
+import com.buildplan.preview.analyzer.LiveView
 import com.buildplan.preview.analyzer.ModelAssessment
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
@@ -116,7 +117,7 @@ import kotlinx.coroutines.delay
  * model, benchmark or expected value anywhere here.
  */
 @Composable
-fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit) {
+fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit, onOpenElement: (key: String, objectId: String) -> Unit = { key, _ -> onOpenScene(key) }) {
     var settingsOpen by rememberSaveable { mutableStateOf(false) }
     // The task keeps clear of the status bar, the navigation bar, the cutout and the keyboard (cycle 3, P-03).
     Column(Modifier.fillMaxSize().background(Palette.Ground).safeDrawingPadding().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax)) {
@@ -153,7 +154,7 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
                         model.clearNotice()
                     }
                 }
-                JobSection(model, onOpenScene)
+                JobSection(model, onOpenScene, onOpenElement)
             }
             Foldout(
                 title = stringResource(R.string.analyzer_settings),
@@ -309,7 +310,7 @@ private fun LinkForm(model: AnalyzerViewModel) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
+private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit, onOpenElement: (String, String) -> Unit) {
     when (val state = model.state) {
         AnalysisState.Idle -> Unit
         is AnalysisState.Submitting -> Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.m)) {
@@ -318,6 +319,8 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         }
         is AnalysisState.Polling -> JobProgress(
             status = state.status,
+            live = state.live,
+            showLive = model.mode == AnalyzerMode.LOCAL,
             headline = null,
             note = if (model.mode == AnalyzerMode.LOCAL) stringResource(R.string.analyzer_running_note_local) else null,
             connectionLost = state.connectionLost,
@@ -327,6 +330,8 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         )
         is AnalysisState.Finishing -> JobProgress(
             status = state.status,
+            live = state.live,
+            showLive = state.local != null,
             headline = stringResource(if (state.local != null) R.string.analyzer_finishing_local else R.string.analyzer_finishing_service),
             note = null,
             connectionLost = state.connectionLost,
@@ -334,7 +339,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
             cancelling = false,
             onCancel = null,
         )
-        is AnalysisState.Completed -> Result(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) })
+        is AnalysisState.Completed -> Result(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) }, onOpenElement = { id -> onOpenElement(state.entry.key, id) })
         is AnalysisState.Failed -> {
             val context = LocalContext.current
             val share = model.diagnosticsShareIntent(state.failure)
@@ -368,6 +373,8 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
 @Composable
 private fun JobProgress(
     status: JobStatus?,
+    live: LiveView?,
+    showLive: Boolean,
     headline: String?,
     note: String?,
     connectionLost: Boolean,
@@ -381,6 +388,8 @@ private fun JobProgress(
     val percent = (progress * 100).roundToInt()
     val stage = status?.stage
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+        // SHAPE-LIVE-01: the source's place, from the start of a run on this phone
+        if (showLive) LiveSourcePanel(live, status?.activity?.elapsedMs)
         Text(
             headline ?: when {
                 status == null -> stringResource(R.string.analyzer_asking)
@@ -622,7 +631,7 @@ private fun Failure(
 // ---------------------------------------------------------------------------
 
 @Composable
-private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
+private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit, onOpenElement: (String) -> Unit) {
     var open by rememberSaveable { mutableStateOf(false) }
     // N7-P1: a partial 3D preview is never said as a ready model, however few warnings it carries
     val headline = resultHeadline(summary)
@@ -662,7 +671,7 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         // N9-01: the three axes, apart, before anything else about the model; none of them withholds the 3D view
         summary.assessment?.let { AssessmentDetails(it) }
         // SOURCE-01: which pictures were read, which refused by their pixels, and each number read off them
-        summary.sources?.let { SourceSheetsDetails(it) }
+        summary.sources?.let { SourceSheetsDetails(it, onShowElement = onOpenElement) }
         // N7-FIX-04 follow-up: the completeness verdict is shown with every result that carries one, not only a partial one
         if (summary.preview.hasDetails) PreviewOutcomeDetails(summary.preview)
         InkButton(stringResource(if (partial) R.string.analyzer_open_partial_3d else R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())

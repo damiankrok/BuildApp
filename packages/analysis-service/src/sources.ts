@@ -31,6 +31,8 @@ export type SourceReading = {
   /** What the model did with it: the solver's disposition, the feature it went into, and why. */
   use: string
   featureId?: string
+  /** SHAPE-LIVE-01: the model elements built from that feature (the emitter's bindings); empty when none was. */
+  elementIds: string[]
   why: string
 }
 
@@ -57,7 +59,19 @@ export type SourceSheet = {
 export type SourceInspection = {
   classifier: { id: string; modelSha256: string; headVersion: string } | null
   sheets: SourceSheet[]
-  counts: { sheets: number; read: number; refusedByContent: number; readings: number; printedUsed: number; derived: number }
+  counts: {
+    sheets: number
+    read: number
+    refusedByContent: number
+    readings: number
+    printedUsed: number
+    derived: number
+    /**
+     * SHAPE-LIVE-01: openings, reconciled — what the plans gave (one per opening), how many times the elevations read
+     * one (several readings of one opening are not several windows), and how many the model holds.
+     */
+    openings?: { plan: number; elevationReadings: number; model: number }
+  }
 }
 
 type Ledger = ReadonlyArray<{ evidenceId: string; disposition: string; featureId?: string; reason: string }>
@@ -85,7 +99,13 @@ export function sourceInspectionOf(input: {
   content: readonly ContentVerdict[]
   skipped: ReadonlyArray<{ assetId: string; reason: string }>
   classifier: SourceInspection['classifier']
+  /** The emitter's feature → model element bindings. */
+  bindings?: ReadonlyArray<{ solvedFeatureId: string; objectId: string }>
+  openingCounts?: { plan: number; elevationIndependent: number; model: number }
 }): SourceInspection {
+  const elementsOf = new Map<string, string[]>()
+  for (const b of input.bindings ?? []) elementsOf.set(b.solvedFeatureId, [...(elementsOf.get(b.solvedFeatureId) ?? []), b.objectId])
+  const elementIdsOf = (featureId: string | undefined): string[] => (featureId ? [...new Set([...(elementsOf.get(featureId) ?? []), ...(elementsOf.get(`feat-${featureId}`) ?? [])])].sort() : [])
   const ledger = new Map<string, Ledger[number]>()
   for (const r of input.ledger) if (!ledger.has(r.evidenceId) || r.disposition === 'USED_IN_MODEL') ledger.set(r.evidenceId, r)
   const content = new Map(input.content.map((c) => [c.assetId, c]))
@@ -145,6 +165,7 @@ export function sourceInspectionOf(input: {
           ...(line ? { line } : {}),
           use: l?.disposition ?? 'NOT_CONSULTED',
           ...(l?.featureId ? { featureId: l.featureId } : {}),
+          elementIds: elementIdsOf(l?.featureId),
           why: l?.reason ?? (printed ? 'read, but no model decision consulted it' : 'worked out from the chain, never printed'),
         })
       }
@@ -162,6 +183,7 @@ export function sourceInspectionOf(input: {
       readings: all.length,
       printedUsed: all.filter((r) => r.printed && (r.use === 'USED_IN_MODEL' || r.use === 'USED_AS_CORROBORATION')).length,
       derived: all.filter((r) => !r.printed).length,
+      ...(input.openingCounts ? { openings: { plan: input.openingCounts.plan, elevationReadings: input.openingCounts.elevationIndependent, model: input.openingCounts.model } } : {}),
     },
   }
 }

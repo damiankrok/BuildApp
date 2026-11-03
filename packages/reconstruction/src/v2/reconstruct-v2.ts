@@ -10,6 +10,7 @@
  *
  * Everything here is generic. It knows drawings and buildings, and no project.
  */
+import { readDrawnApex, readTopDatum } from './section-datums.js'
 import { round6, stableId } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
@@ -184,7 +185,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.20.0' as const
+export const SOLVER_V2_VERSION = '2.21.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -366,7 +367,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // A/B/C. composition (03R), world frame, registrations
   // ---------------------------------------------------------------------------
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
-  const levels = levelsFrom(metrics, sectionFrame?.id)
+  // SHAPE-LIVE-01: the section's drawing says whether its highest datum read is the top of the building
+  const sectionRaster = sectionFrame ? options.raster(sectionFrame) : undefined
+  const levels = levelsFrom(metrics, sectionFrame?.id, sectionRaster ? (datums) => readTopDatum(sectionRaster, datums) : undefined)
+  if (levels.topRefused) {
+    gap({ what: 'the ridge datum of the section', reason: `the highest datum read, ${levels.topRefused.value.toFixed(2)} m, is not the ridge: ${levels.topRefused.why}; the ridge's own label was not read`, status: 'MISSING', observationIds: [], evidenceIds: levels.evidenceIds })
+    step({ stage: 'levels', what: 'the highest datum read refused as the ridge', method: 'DIRECT', detail: levels.topRefused.why, inputs: levels.evidenceIds.length, outputs: 0 })
+  }
   const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}), ...(options.debug ? { debug: options.debug } : {}) }
   const incumbent = composeStructuralLayout(structuralOptions)
   let { draft, layout } = incumbent
@@ -619,7 +626,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const topStorey = Math.max(...main.storeys)
 
   // Levels.
-  const ridgeY = levels.topDatum
+  // SHAPE-LIVE-01: a ridge whose label was not read, measured where the section draws it (`section-datums.ts`): on the
+  // scale the printed datums give, at the stated pitch. Measured on the drawing, not printed: SOURCE_DERIVED.
+  const pitchSupport = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
+  const drawnApex =
+    levels.topDatum === undefined && levels.topRefused && sectionRaster && pitchSupport?.pitchDeg && (pitchSupport.authority === 'PUBLISHED_SPECIFICATION' || pitchSupport.authority === 'PRINTED_ANGLE') && pitchSupport.kind !== 'FLAT' && pitchSupport.kind !== 'UNKNOWN'
+      ? readDrawnApex(sectionRaster, levels.topRefused.datums, pitchSupport.pitchDeg.value)
+      : undefined
+  if (drawnApex) step({ stage: 'roof', what: 'the ridge datum, measured on the section drawing', method: 'DIRECT', detail: drawnApex.why, inputs: levels.topRefused?.datums.length ?? 0, outputs: 1 })
+  const ridgeY = levels.topDatum ?? drawnApex?.ridgeY
   const levelsV2: BuildingV2['levels'] = []
   // 005L (council B5L-6): a storey's datum is found by its index from the ground floor's, not by its place in the
   // main body's list — a basement below the ground floor is not the ground floor's datum — and the levels are every
@@ -916,7 +931,35 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const endsFrontRear = apexVotes.filter((a) => (a.side === 'FRONT' || a.side === 'REAR') && a.gableEnd).length
     const endsSides = apexVotes.filter((a) => (a.side === 'LEFT' || a.side === 'RIGHT') && a.gableEnd).length
     const votedAxis: 'X' | 'Z' | undefined = endsFrontRear > 0 && endsSides === 0 ? 'Z' : endsSides > 0 && endsFrontRear === 0 ? 'X' : undefined
-    const ridgeAxis: 'X' | 'Z' = votedAxis ?? support.ridgeAxis ?? 'Z'
+    // SHAPE-LIVE-01: with no gable end voted and no axis from the layout, the views still measured how far the
+    // outline rises from 15 % to 50 % of their span, and the stated pitch says what each axis would show there: a view
+    // across the ridge's end sees the full rise (0.35 of its span at the pitch), a view of the eaves side only a
+    // hip's run — or nothing, over a gable. The axis whose prediction every measured view fits, and the other none
+    // of them, is taken; otherwise the default stands and says so.
+    const fittedAxis = ((): { axis: 'X' | 'Z'; why: string } | undefined => {
+      if (votedAxis || support.ridgeAxis || !(support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE') || !support.pitchDeg || apexVotes.length === 0) return undefined
+      const tan = Math.tan((support.pitchDeg.value * Math.PI) / 180)
+      const Lx = main.x1 - main.x0
+      const Lz = main.z1 - main.z0
+      const peakAt = (axis: 'X' | 'Z', side: string): number => {
+        const frontRear = side === 'FRONT' || side === 'REAR'
+        const span = frontRear ? Lx : Lz
+        const depth = frontRear ? Lz : Lx
+        const seesEnd = (axis === 'Z') === frontRear
+        if (seesEnd) return 0.35 * span * tan
+        if (support.kind !== 'HIP') return 0
+        return (Math.min(span / 2, depth / 2) - Math.min(0.15 * span, depth / 2)) * tan
+      }
+      const fits = (axis: 'X' | 'Z'): boolean => apexVotes.every((v) => Math.abs(v.peakM - peakAt(axis, v.side)) <= Math.max(0.25, 0.3 * peakAt(axis, v.side)))
+      const fx = fits('X')
+      const fz = fits('Z')
+      if (fx === fz) return undefined
+      const axis: 'X' | 'Z' = fx ? 'X' : 'Z'
+      const other: 'X' | 'Z' = fx ? 'Z' : 'X'
+      return { axis, why: `no view shows a gable end and the layout states no axis; the views' rise over their middle (${apexVotes.map((v) => `${v.side.toLowerCase()} ${v.peakM.toFixed(2)} m`).join(', ')}) fits a ridge along ${axis} at the stated ${support.pitchDeg.value}° (${apexVotes.map((v) => peakAt(axis, v.side).toFixed(2)).join(', ')} m) and not one along ${other} (${apexVotes.map((v) => peakAt(other, v.side).toFixed(2)).join(', ')} m)` }
+    })()
+    if (fittedAxis) step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
+    const ridgeAxis: 'X' | 'Z' = votedAxis ?? support.ridgeAxis ?? fittedAxis?.axis ?? 'Z'
     const ridgeAt = ridgeAxis === 'Z' ? round6((main.x0 + main.x1) / 2) : round6((main.z0 + main.z1) / 2)
     const halfSpan = ridgeAxis === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
     // A measured pitch is a rise over the layout's half span; if the views put
@@ -924,7 +967,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const printedPitch = support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE'
     const supportHalfSpan = (support.ridgeAxis ?? 'Z') === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
     const pitch = !printedPitch && support.ridgeAxis && support.ridgeAxis !== ridgeAxis ? round6((Math.atan((supportHalfSpan * Math.tan((support.pitchDeg.value * Math.PI) / 180)) / halfSpan) * 180) / Math.PI) : support.pitchDeg.value
-    const axisWhy = votedAxis ? `the ${apexVotes.filter((a) => a.gableEnd).map((a) => a.side.toLowerCase()).join(' and ')} render${apexVotes.filter((a) => a.gableEnd).length === 1 ? ' shows' : 's show'} a gable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM >= 0 ? '+' : ''}${a.peakM.toFixed(2)}`).join(', ')})` : `no render shows an unmistakable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM.toFixed(2)}`).join(', ') || 'none registered'}); the layout's axis stands`
+    const axisWhy = fittedAxis ? fittedAxis.why : votedAxis ? `the ${apexVotes.filter((a) => a.gableEnd).map((a) => a.side.toLowerCase()).join(' and ')} render${apexVotes.filter((a) => a.gableEnd).length === 1 ? ' shows' : 's show'} a gable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM >= 0 ? '+' : ''}${a.peakM.toFixed(2)}`).join(', ')})` : `no render shows an unmistakable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM.toFixed(2)}`).join(', ') || 'none registered'}); the layout's axis stands`
     const derivedEave = round6(ridgeY - halfSpan * Math.tan((pitch * Math.PI) / 180))
     const eaveY = derivedEave
     const sideViews = views.filter((v) => (ridgeAxis === 'Z' ? v.view.side === 'LEFT' || v.view.side === 'RIGHT' : v.view.side === 'FRONT' || v.view.side === 'REAR'))
@@ -939,8 +982,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const footprint = ridgeAxis === 'Z' ? { x0: main.x0, x1: main.x1, z0: coversZones ? world.envelope.z0 : main.z0, z1: coversZones ? world.envelope.z1 : main.z1 } : { x0: coversZones ? world.envelope.x0 : main.x0, x1: coversZones ? world.envelope.x1 : main.x1, z0: main.z0, z1: main.z1 }
     const sids = sideViews.map((v) => sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'roof silhouette spanning the zones', 0.8))
     if (sectionFrame) sids.push(sighting(sectionFrame, 'roof pitch and ridge', 0.9))
-    const featureId = feature('ROOF', 'roof-main', { pitchDeg: { value: pitch, low: pitch - 0.5, high: pitch + 0.5, unit: 'deg' }, ridgeY: { value: ridgeY, low: ridgeY - 0.02, high: ridgeY + 0.02 }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, extent: { value: footprint.z1 - footprint.z0, low: footprint.z1 - footprint.z0 - 0.1, high: footprint.z1 - footprint.z0 + 0.1 } }, sids, roofDatum ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', roofDatum ? `${support.why}; ${roofDatum.why}` : support.why, { printed: !roofDatum, uncertaintyM: roofDatum ? 0.3 : 0.05, parameterProvenance: { extent: coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', eaveY: roofDatum ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', ...(roofDatum ? { ridgeY: 'ASSUMED_FOR_RENDERING' } : {}) } })
-    mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: roofDatum ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
+    const featureId = feature('ROOF', 'roof-main', { pitchDeg: { value: pitch, low: pitch - 0.5, high: pitch + 0.5, unit: 'deg' }, ridgeY: { value: ridgeY, low: ridgeY - 0.02, high: ridgeY + 0.02 }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, extent: { value: footprint.z1 - footprint.z0, low: footprint.z1 - footprint.z0 - 0.1, high: footprint.z1 - footprint.z0 + 0.1 } }, sids, roofDatum || drawnApex ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', roofDatum ? `${support.why}; ${roofDatum.why}` : drawnApex ? `${support.why}; ${drawnApex.why}` : support.why, { printed: !roofDatum && !drawnApex, uncertaintyM: roofDatum ? 0.3 : drawnApex ? 0.1 : 0.05, parameterProvenance: { extent: coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', eaveY: roofDatum ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', ...(roofDatum ? { ridgeY: 'ASSUMED_FOR_RENDERING' } : drawnApex ? { ridgeY: 'SOURCE_DERIVED' } : {}) } })
+    mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: roofDatum || drawnApex ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
     for (const e of support.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'the roof pitch statement', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the main roof pitch', stage: 'METRIC_SOLVE' })
     step({ stage: 'roof', what: 'the main roof', method: 'DISCRETE_SELECTION', detail: `${pitch}° ${support.kind.toLowerCase()} ridge along ${ridgeAxis} (${axisWhy}), eave ${eaveY}, ${mainRoof.coversZonesWhy}`, inputs: sideViews.length, outputs: 1 })
     // 005Y: what stands at each end of the ridge. On an elevation of an eaves side, d metres in from an end wall a hip's

@@ -441,7 +441,18 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const mainMass = b.masses.find((m) => m.role === 'MAIN')
     const isTop = r.storeyIndex === Math.max(...(mainMass?.storeys ?? [0]))
     const ownTone = b.returnTones.find((t) => t.returnId === r.id)
-    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: ownTone && ownTone.share >= 0.5 ? materialForTone(ownTone.tone, MATERIALS_V2.member) : MATERIALS_V2.member }, r.featureId, 'walls')
+    // SHAPE-LIVE-01: a return on the top storey is capped by the roof over it. One standing outside the main roof's
+    // footprint and under no attached roof has no roof over it: capped by the main roof's planes it would follow their
+    // extension past the eaves and the ridge and stand up as a spike. It stops at its storey's wall head instead.
+    const rx0 = Math.min(r.start.x, r.end.x)
+    const rx1 = Math.max(r.start.x, r.end.x)
+    const rz0 = Math.min(r.start.z, r.end.z)
+    const rz1 = Math.max(r.start.z, r.end.z)
+    const mf = b.mainRoof?.footprint
+    const underMain = !!mf && rx0 >= mf.x0 - 0.01 && rx1 <= mf.x1 + 0.01 && rz0 >= mf.z0 - 0.01 && rz1 <= mf.z1 + 0.01
+    const underAny = underMain || b.attachedRoofs.some((a) => rx0 >= a.footprint.x0 - 0.01 && rx1 <= a.footprint.x1 + 0.01 && rz0 >= a.footprint.z0 - 0.01 && rz1 <= a.footprint.z1 + 0.01)
+    const uncovered = isTop && !underAny && l.wallTop < l.elevation + l.height - 1e-6
+    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(uncovered ? l.wallTop - l.elevation : l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: ownTone && ownTone.share >= 0.5 ? materialForTone(ownTone.tone, MATERIALS_V2.member) : MATERIALS_V2.member }, r.featureId, 'walls')
     const x0 = Math.min(r.start.x, r.end.x)
     const x1 = Math.max(r.start.x, r.end.x)
     const z0 = Math.min(r.start.z, r.end.z)
@@ -451,8 +462,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       return !!mass && mass.storeys.includes(r.storeyIndex) && x0 >= a.footprint.x0 - 0.01 && x1 <= a.footprint.x1 + 0.01 && z0 >= a.footprint.z0 - 0.01 && z1 <= a.footprint.z1 + 0.01 && (r.side === 'FRONT' || r.side === 'REAR' ? r.alongInterval[0] >= a.footprint.x0 - 0.01 && r.alongInterval[1] <= a.footprint.x1 + 0.01 : r.alongInterval[0] >= a.footprint.z0 - 0.01 && r.alongInterval[1] <= a.footprint.z1 + 0.01)
     })
     if (under) returnsUnderAttached.set(under.massId, [...(returnsUnderAttached.get(under.massId) ?? []), r.id])
-    else if (isTop) capWallIds.push(r.id)
-    evidence(r.id, r.provenance, r.why)
+    else if (isTop && !uncovered) capWallIds.push(r.id)
+    evidence(r.id, r.provenance, uncovered ? `${r.why}; no roof covers it, so it stops at the storey's wall head (${l.wallTop.toFixed(2)} m) instead of following the main roof's planes past its edge` : r.why)
   }
 
   // N7-P2R: a band the plan draws solid, read first as a body: one wall of its drawn thickness

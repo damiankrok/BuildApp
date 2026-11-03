@@ -70,7 +70,19 @@ export type AnalyzeOptions = {
   content?: ImageEmbedder
   /** Cancels the content pass's worker. */
   signal?: AbortSignal
+  /**
+   * SHAPE-LIVE-01: told which picture is being looked at and what was found on it, as it happens. Write-only: nothing
+   * it does reaches the graph; a listener that throws is ignored.
+   */
+  onSheet?: (e: SheetEvent) => void
 }
+
+/** SHAPE-LIVE-01: one step on one picture. */
+export type SheetEvent =
+  | { step: 'CONTENT_CHECK'; asset: SourceAsset }
+  | { step: 'CONTENT_REFUSED'; asset: SourceAsset; verdict: ContentVerdict }
+  | { step: 'READING_DRAWING'; asset: SourceAsset }
+  | { step: 'DRAWING_READ'; asset: SourceAsset; observations: readonly SourceObservation[] }
 
 export type AssetAnalysis = {
   asset: SourceAsset
@@ -132,6 +144,14 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   const ordered = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).slice(0, options.maxAssets ?? pkg.assets.length)
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT
+  const tell = (e: SheetEvent): void => {
+    try {
+      options.onSheet?.(e)
+    } catch (err) {
+      // the preview is write-only; a cancellation still cancels
+      if ((err as { name?: unknown }).name === 'AbortError') throw err
+    }
+  }
 
   // ---- SOURCE-01: what each picture shows, before any reader sees it ------
   const verdicts = new Map<string, ContentVerdict>()
@@ -140,6 +160,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     const tensors: Float32Array[] = []
     for (const asset of ordered) {
       checkpoint.tick({ subphase: { id: 'CONTENT', label: 'what each picture shows' } })
+      tell({ step: 'CONTENT_CHECK', asset })
       const fetched = await options.bytes(selectedVariant(asset).url)
       if (!fetched) continue
       try {
@@ -153,7 +174,9 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     const embeddings = await options.content.embed(tensors, options.signal)
     for (const [i, id] of ids.entries()) {
       const asset = ordered.find((a) => a.id === id) as SourceAsset
-      verdicts.set(id, contentVerdict(id, asset.roles, contentProbabilities(embeddings[i])))
+      const v = contentVerdict(id, asset.roles, contentProbabilities(embeddings[i]))
+      verdicts.set(id, v)
+      if (v.decision === 'VETOED') tell({ step: 'CONTENT_REFUSED', asset, verdict: v })
     }
   }
   const content = ordered.map((a) => verdicts.get(a.id) ?? contentVerdict(a.id, a.roles, undefined))
@@ -205,6 +228,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
       projection: asset.roles.projection,
     })
     const before = builder.observationCount
+    tell({ step: 'READING_DRAWING', asset })
     const analysis: AssetAnalysis = { asset, frame, prepared, observations: [], visionAttempted: false, visionAccepted: 0 }
 
     // The facade readers, deterministic and vision alike, read an ORTHOGRAPHIC facade: an outline, a ridge,
@@ -277,6 +301,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     checkpoint.tick()
     if (options.retainPrepared === false) delete analysis.prepared
     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
+    tell({ step: 'DRAWING_READ', asset, observations: analysis.observations })
     if (builder.observationCount === before && !analysis.visionAttempted && !perspectiveRefused) {
       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
     }

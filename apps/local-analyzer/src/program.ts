@@ -28,17 +28,17 @@
  * `candidate.json`. The source bytes never leave `--work/bytes`, which is
  * removed before any terminal event is written.
  */
-import { readSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readSync } from 'node:fs'
 import { mkdir, rename, writeFile } from 'node:fs/promises'
 import { arch, cpus, platform, totalmem } from 'node:os'
 import { isAbsolute, join } from 'node:path'
 import { ANALYSIS_SERVICE_VERSION, AnalysisError, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTelemetry, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary, PhaseStats } from '@buildapp/analysis-service'
+import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTelemetry, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary, LiveSink, PhaseStats } from '@buildapp/analysis-service'
 import { stableJson } from '@buildapp/source-common'
 import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
-import { selectedVariant } from '@buildapp/source-package'
+import { cacheKeyFor, selectedVariant } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
-import { runLocalAnalysis } from './local.js'
+import { bytesDirOf, liveDirOf, runLocalAnalysis } from './local.js'
 import type { LocalWiring } from './local.js'
 import { memorySample } from './memory.js'
 import type { MemorySample } from './memory.js'
@@ -61,7 +61,7 @@ export const LOCAL_ANALYZER_PROTOCOL = 3 as const
  * (005H): `hello` names the external numeric recogniser the job reads with (or null), telemetry may carry the
  * `OCR_EXTERNAL` sub-phase, and the performance record carries the recogniser's batches.
  */
-export const LOCAL_ANALYZER_CAPABILITIES = ['telemetry.v1', 'control.poll', 'recogniser.v1'] as const
+export const LOCAL_ANALYZER_CAPABILITIES = ['telemetry.v1', 'control.poll', 'recogniser.v1', 'source.v1'] as const
 
 export const OUTPUT_FILES = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json' } as const
 
@@ -120,6 +120,8 @@ export type LocalAnalyzerEvent =
   | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; capabilities: readonly string[]; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string }; recogniser: { id: string; modelSha256: string; runtime: string } | null }
   | { type: 'progress'; event: AnalysisProgress; elapsedMs: number; rssBytes: number }
   | { type: 'telemetry'; event: AnalysisTelemetry; rssBytes: number }
+  /** SHAPE-LIVE-01 (`source.v1`): the sheet the analyzer is looking at, its marks and the step; `sheet.file` is the copy of its exact bytes. */
+  | { type: 'source'; event: Record<string, unknown> }
   | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes; diagnostics?: DiagnosticsFiles }
   | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics; failure?: AnalysisFailure; diagnostics?: DiagnosticsFiles }
   | { type: 'cancelled'; metrics: RunMetrics; diagnostics?: DiagnosticsFiles }
@@ -314,6 +316,7 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       wiring,
       recogniser,
       ...(content ? { content } : {}),
+      live: liveSheets(args.workDir, (event) => sink.emitBestEffort({ type: 'source', event })),
       jobId: args.jobId,
       signal: controller.signal,
       now: options.now,
@@ -368,3 +371,36 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   }
 }
 
+
+/**
+ * SHAPE-LIVE-01: the live preview's sheets. Each sheet the analyzer looks at is copied ONCE, byte for byte, from this
+ * job's own byte cache (the exact bytes the run read) into `<work>/live/<sha256>`; the event names that file and the
+ * SHA-256, and the phone shows it only when the two agree. The folder is removed with the bytes when the run ends
+ * (`local.ts`): nothing leaves the app's private storage and nothing is fetched again.
+ */
+export function liveSheets(workDir: string, emit: (event: Record<string, unknown>) => void): LiveSink {
+  const dir = liveDirOf(workDir)
+  const copied = new Map<string, string | null>()
+  return (e) => {
+    let sheet: Record<string, unknown> | null = null
+    if (e.sheet) {
+      let file = copied.get(e.sheet.byteHash)
+      if (file === undefined) {
+        file = null
+        try {
+          const source = join(bytesDirOf(workDir), `${cacheKeyFor(e.sheet.url)}.bin`)
+          if (existsSync(source)) {
+            mkdirSync(dir, { recursive: true })
+            copyFileSync(source, join(dir, e.sheet.byteHash))
+            file = `live/${e.sheet.byteHash}`
+          }
+        } catch {
+          file = null
+        }
+        copied.set(e.sheet.byteHash, file)
+      }
+      sheet = { ...e.sheet, file }
+    }
+    emit({ ...e, sheet })
+  }
+}

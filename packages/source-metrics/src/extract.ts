@@ -67,9 +67,14 @@ export const METRIC_READER_VERSION = '1.5.0' as const
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
 
+/** SHAPE-LIVE-01: a frame begins (START) or is done (END, with the tokens and evidence read on it). Write-only. */
+export type FrameEvent = { phase: 'START' | 'END'; frame: SourceCoordinateFrame; tokens: readonly OcrToken[]; evidence: readonly MetricEvidence[] }
+
 export type ExtractOptions = {
   /** Told at each frame and inside the long readers, for progress and cancellation; nothing it does reaches the evidence. */
   checkpoint?: Checkpoint
+  /** SHAPE-LIVE-01: told when a frame begins and ends, for a live preview; nothing it does reaches the evidence. */
+  onFrame?: (e: FrameEvent) => void
   sourcePackageId: string
   sourcePackageHash: string
   graph: SourceObservationGraph
@@ -373,9 +378,20 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   const latticeCache: LatticeCache = new Map()
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT
+  const tellFrame = (e: FrameEvent): void => {
+    try {
+      options.onFrame?.(e)
+    } catch (err) {
+      if ((err as { name?: unknown }).name === 'AbortError') throw err
+    }
+  }
+  const frameDone = (f: SourceCoordinateFrame): void => tellFrame({ phase: 'END', frame: f, tokens: ocrTokens.filter((t) => t.frameId === f.id), evidence: evidence.filter((e) => e.frameId === f.id) })
   const frames = [...graph.coordinateFrames].sort((a, b) => a.id.localeCompare(b.id)).filter((f) => keep(f))
   for (const [frameIndex, frame] of frames.entries()) {
     checkpoint.tick({ done: frameIndex, total: frames.length, assetIndex: frameIndex + 1, assetTotal: frames.length, subphase: { id: 'FRAME', label: `${frame.roles.document.toLowerCase().replace(/_/g, ' ')}` }, counters: { tokens: ocrTokens.length, chains: chains.length, evidence: evidence.length } })
+    // SHAPE-LIVE-01: the frame before is done; this one begins (write-only)
+    if (frameIndex > 0) frameDone(frames[frameIndex - 1])
+    tellFrame({ phase: 'START', frame, tokens: [], evidence: [] })
     const plane = planeOf(frame)
     const raster = options.raster(frame)
     if (!raster) {
@@ -965,6 +981,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   }
 
   // --- what the publisher wrote down, as against what it drew ---
+  if (frames.length > 0) frameDone(frames[frames.length - 1])
   const spec = options.specifications && options.specifications.length > 0 && options.specificationHash ? readSpecifications(options.specifications, options.specificationHash) : undefined
   if (spec) {
     evidence.push(...spec.evidence)

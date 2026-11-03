@@ -80,6 +80,14 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: P
             state = ShellState()
         }
     }
+    // SHAPE-LIVE-01: a source reading's link to the element it went into opens the house with that element selected
+    val openHouseAt: (String, String) -> Unit = { key, objectId ->
+        preview.refreshScenes()
+        if (preview.openKeyAndSelect(key, objectId)) {
+            readyKey = null
+            state = ShellState()
+        }
+    }
     val openAnalyzer: () -> Unit = {
         analyzer.refreshDownloads()
         state = state.openAnalyzer()
@@ -94,6 +102,7 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: P
                     preview.refreshScenes()
                 },
                 onOpenScene = openHouse,
+                onOpenElement = openHouseAt,
             )
             preview.scenes.isEmpty() -> NoHouseScreen(preview = preview, analyzer = analyzer, onAnalyze = openAnalyzer)
             else -> HouseWorkspace(

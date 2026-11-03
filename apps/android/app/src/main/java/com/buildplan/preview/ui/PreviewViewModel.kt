@@ -189,8 +189,27 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
                 viewer = ViewerState(style = viewer.style, presentation = viewer.presentation)
                 animation = null
                 screen = ScreenState.Ready(model)
+                // SHAPE-LIVE-01: a reading's "show in the model" opened this scene to select that element
+                pendingSelection?.let { id -> if (model.objectById(id) != null) choose(id, System.currentTimeMillis()) }
+                pendingSelection = null
             }
         }
+    }
+
+    /** The element a source reading asked to be shown, selected once its scene is open (SHAPE-LIVE-01). */
+    private var pendingSelection: String? = null
+
+    /**
+     * Open the scene with this key and select `objectId` in it — from a reading's link to the element it went into.
+     * The house already open is not reloaded; the selection is then made at once. False when no such scene is listed.
+     */
+    fun openKeyAndSelect(key: String, objectId: String): Boolean {
+        if (scene?.key == key) {
+            choose(objectId, System.currentTimeMillis())
+            return true
+        }
+        pendingSelection = objectId
+        return openKey(key).also { if (!it) pendingSelection = null }
     }
 
     // -----------------------------------------------------------------------

@@ -136,6 +136,47 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
   })
 })
 
+describe('SHAPE-LIVE-01: the live source preview, as the phone receives it', () => {
+  it('source events name a job-private copy of the exact bytes read, verified by their hash; the copies go with the run', async () => {
+    let verified = 0
+    let mismatched = 0
+    const steps: string[] = []
+    const { work: workDir, out } = dirs()
+    const run = runHost({
+      dir: bundleDir,
+      url: fixturePageUrl(FIXTURE_PROJECTS.larchfield),
+      fixture: true,
+      node: process.execPath,
+      nodeArgs: [],
+      work: workDir,
+      out,
+      onEvent: (e: Event) => {
+        if (e.type !== 'source') return
+        const ev = (e as unknown as { event: { step: string; sheet: { byteHash: string; file: string | null } | null } }).event
+        steps.push(ev.step)
+        if (!ev.sheet?.file) return
+        const f = join(workDir, ev.sheet.file)
+        if (!existsSync(f)) return
+        if (sha256(readFileSync(f)) === ev.sheet.byteHash) verified += 1
+        else mismatched += 1
+      },
+    }) as HostRun
+    const result = await run.done
+    const types = result.events.map((x) => x.type)
+    expect(types.filter((t) => t === 'source').length).toBeGreaterThan(3)
+    // the first source event comes before the terminal one, and sheets before the solver
+    expect(types.indexOf('source')).toBeLessThan(types.indexOf('done'))
+    expect(steps.findIndex((s) => s === 'READING_DRAWING' || s === 'CONTENT_CHECK')).toBeLessThan(steps.indexOf('SOLVING'))
+    const named = result.events.filter((x) => x.type === 'source').map((x) => (x as unknown as { event: { sheet: { file: string | null; byteHash: string } | null } }).event.sheet).filter((x): x is { file: string | null; byteHash: string } => !!x)
+    expect(named.length).toBeGreaterThan(0)
+    for (const sh of named) if (sh.file) expect(sh.file).toBe(`live/${sh.byteHash}`)
+    expect(mismatched).toBe(0)
+    expect(verified).toBeGreaterThan(0)
+    expect(existsSync(join(result.workDir, 'live'))).toBe(false)
+    expect(existsSync(join(result.workDir, 'bytes'))).toBe(false)
+  }, 240_000)
+})
+
 describe('as on Android: V8 without ICU, the text adapter standing in for it', () => {
   it('Larchfield: every hash equal to the desktop runAnalysis', async () => {
     const result = await expectParity(FIXTURE_PROJECTS.larchfield, undefined, true)

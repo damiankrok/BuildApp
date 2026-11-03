@@ -9,6 +9,7 @@ import com.buildplan.preview.analyzer.AppBuild
 import com.buildplan.preview.analyzer.CurrentStage
 import com.buildplan.preview.analyzer.JobActivity
 import com.buildplan.preview.analyzer.JobStatus
+import com.buildplan.preview.analyzer.LiveView
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.RunProvenance
@@ -168,6 +169,7 @@ class LocalAnalysis(
         var handle: LocalRunHandle? = null
         var progress: LocalProgress? = null
         var activity: JobActivity? = null
+        var live: LiveView? = null
         var terminal = false
         var cancelRequested = false
         var cancelTimer: (() -> Unit)? = null
@@ -180,7 +182,7 @@ class LocalAnalysis(
 
         fun publishProgress() {
             if (!current || terminal) return
-            publish(AnalysisState.Polling(job.jobId, job.sourceUrl, statusOf(progress, null).copy(activity = activity), local = report))
+            publish(AnalysisState.Polling(job.jobId, job.sourceUrl, statusOf(progress, null).copy(activity = activity), local = report, live = live))
         }
 
         override fun onStarted(pid: Int) = Unit
@@ -206,6 +208,10 @@ class LocalAnalysis(
                     report = report.copy(elapsedMs = event.activity.elapsedMs, rssBytes = event.rssBytes)
                     publishProgress()
                 }
+                is LocalEvent.Source -> {
+                    live = LiveView.next(live, event.event, job.workDir)
+                    publishProgress()
+                }
                 is LocalEvent.Done -> {
                     report = report.withMetrics(event.metrics).copy(
                         sceneSha256 = event.summary.sceneSha256,
@@ -213,7 +219,7 @@ class LocalAnalysis(
                         candidateHash = event.summary.candidateHash,
                         sources = event.sources,
                     )
-                    publish(AnalysisState.Finishing(job.jobId, job.sourceUrl, statusOf(progress, AnalysisStages.COMPLETED), local = report))
+                    publish(AnalysisState.Finishing(job.jobId, job.sourceUrl, statusOf(progress, AnalysisStages.COMPLETED), local = report, live = live))
                     finish(Ending.Done(event))
                 }
                 is LocalEvent.Failed -> {

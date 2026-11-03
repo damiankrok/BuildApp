@@ -4,6 +4,7 @@ import com.buildplan.preview.analyzer.AnalysisSummary
 import com.buildplan.preview.analyzer.AnalyzerJson
 import com.buildplan.preview.analyzer.FailureDetails
 import com.buildplan.preview.analyzer.JobActivity
+import com.buildplan.preview.analyzer.LiveSourceEvent
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -116,6 +117,9 @@ sealed interface LocalEvent {
     /** Protocol 3: what the analyzer is doing inside its stage, and that it is alive. */
     data class Telemetry(val activity: JobActivity, val rssBytes: Long) : LocalEvent
 
+    /** SHAPE-LIVE-01 (`source.v1`): the sheet the analyzer is looking at, its marks and the step. */
+    data class Source(val event: LiveSourceEvent) : LocalEvent
+
     /** The run finished; its four files are in the job's output folder. `sources` lists the hashes of what it read. */
     data class Done(val summary: AnalysisSummary, val metrics: LocalMetrics, val sources: JsonElement?, val diagnostics: LocalDiagnosticsFiles? = null) : LocalEvent
 
@@ -161,6 +165,7 @@ sealed interface LocalEvent {
                         activity = AnalyzerJson.decodeFromJsonElement(obj.getValue("event")),
                         rssBytes = (obj["rssBytes"] as? JsonPrimitive)?.contentOrNull?.toLongOrNull() ?: 0,
                     )
+                    "source" -> Source(AnalyzerJson.decodeFromJsonElement(obj.getValue("event")))
                     "done" -> Done(
                         summary = AnalyzerJson.decodeFromJsonElement(obj.getValue("summary")),
                         metrics = obj["metrics"]?.let { AnalyzerJson.decodeFromJsonElement<LocalMetrics>(it) } ?: LocalMetrics(),

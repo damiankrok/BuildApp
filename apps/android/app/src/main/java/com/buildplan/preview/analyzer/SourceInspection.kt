@@ -20,7 +20,11 @@ data class SourceInspection(
 data class ContentClassifier(val id: String = "", val modelSha256: String = "", val headVersion: String = "")
 
 @Serializable
-data class SourceCounts(val sheets: Int = 0, val read: Int = 0, val refusedByContent: Int = 0, val readings: Int = 0, val printedUsed: Int = 0, val derived: Int = 0)
+data class SourceCounts(val sheets: Int = 0, val read: Int = 0, val refusedByContent: Int = 0, val readings: Int = 0, val printedUsed: Int = 0, val derived: Int = 0, val openings: SourceOpenings? = null)
+
+/** SHAPE-LIVE-01: openings reconciled — from the plans (one per opening), elevation readings (several per opening), in the model. */
+@Serializable
+data class SourceOpenings(val plan: Int = 0, val elevationReadings: Int = 0, val model: Int = 0)
 
 @Serializable
 data class SourceSheet(
@@ -67,5 +71,7 @@ data class SourceReading(
     val line: SourceRect? = null,
     val use: String = "",
     val featureId: String? = null,
+    /** SHAPE-LIVE-01: the model elements this reading's feature was built into; empty when it went into none. */
+    val elementIds: List<String> = emptyList(),
     val why: String = "",
 )

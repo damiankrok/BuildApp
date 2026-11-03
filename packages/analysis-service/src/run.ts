@@ -24,6 +24,11 @@ import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePack
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
 import type { ContentVerdict, ImageEmbedder } from '@buildapp/source-analyzer'
 import { sourceInspectionOf } from './sources.js'
+import { liveEmitter } from './live.js'
+import type { LiveMark, LiveSheet, LiveSink } from './live.js'
+import type { SourceAsset } from '@buildapp/source-package'
+import type { SourceObservation } from '@buildapp/source-observations'
+import type { MetricEvidence, OcrToken } from '@buildapp/source-metrics'
 import type { SourceInspection } from './sources.js'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { nullVisionReasoner } from '@buildapp/source-vision'
@@ -50,7 +55,7 @@ import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.6.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.7.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -81,6 +86,11 @@ export type AnalysisOptions = {
    * publisher's roles decide alone, as before; the result's `sources` says which was the case.
    */
   content?: ImageEmbedder
+  /**
+   * SHAPE-LIVE-01: what the analyzer is looking at, as it looks (`live.ts`): the sheet, the marks on it and what the
+   * step is for. Write-only; never reaches the result or a hash.
+   */
+  live?: LiveSink
   /**
    * BUILDPLAN-ANALYZER-005K, experimental: the boundary's drawn-gap rule. Absent or OFF — the default, and all the
    * product ever runs — the boundary reads exactly as before; the research harness asks for ON to measure the rule.
@@ -216,9 +226,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   let metricsSoFar: MetricEvidenceSet | undefined
   const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
 
+  const liveView = liveEmitter(options.live)
   try {
     // --- ACQUIRING_SOURCE ---------------------------------------------------
     report('ACQUIRING_SOURCE', 0, input.kind === 'URL' ? 'fetching the project page' : 'reading a sealed source package')
+    liveView.emit({ step: 'FETCHING', stage: 'ACQUIRING_SOURCE', sheet: null, keepsLastSheet: false, detail: input.kind === 'URL' ? 'fetching the project page and its pictures' : 'reading a sealed source package' })
     checkpoint.phase('ACQUIRE_PAGE')
     throwIfAborted(signal)
     let pkg: SourcePackage
@@ -249,6 +261,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     pkgSoFar = pkg
     throwIfAborted(signal)
+    liveView.counts.images = pkg.assets.length
     const acquisitionMs = lap()
     {
       const failureCodes: Record<string, number> = {}
@@ -307,6 +320,18 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         checkpoint,
         ...(options.content ? { content: options.content } : {}),
         ...(signal ? { signal } : {}),
+        onSheet: (e) => {
+          const sheet = sheetOf(e.asset)
+          if (e.step === 'CONTENT_CHECK') liveView.emit({ step: 'CONTENT_CHECK', stage: 'EXTRACTING_OBSERVATIONS', sheet, detail: 'what this picture shows' })
+          else if (e.step === 'CONTENT_REFUSED') {
+            liveView.counts.imagesRefused += 1
+            liveView.emit({ step: 'CONTENT_REFUSED', stage: 'EXTRACTING_OBSERVATIONS', sheet, detail: e.verdict.why })
+          } else if (e.step === 'READING_DRAWING') liveView.emit({ step: 'READING_DRAWING', stage: 'EXTRACTING_OBSERVATIONS', sheet, detail: `reading the ${e.asset.roles.document.toLowerCase().replace(/_/g, ' ')}` })
+          else {
+            liveView.counts.imagesRead += 1
+            liveView.emit({ step: 'DRAWING_READ', stage: 'EXTRACTING_OBSERVATIONS', sheet, detail: `${e.observations.length} observation${e.observations.length === 1 ? '' : 's'} on the ${e.asset.roles.document.toLowerCase().replace(/_/g, ' ')}`, marks: observationMarks(e.observations) })
+          }
+        },
         // only the graph is used from here on: release each drawing's masks as soon as it is read
         retainPrepared: false,
         // reading the drawings is about two thirds of this stage, the printed dimensions the rest
@@ -393,6 +418,14 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         recogniser: timed,
         signal,
         onRecognise: (e) => checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } }),
+        onFrame: (e) => {
+          const asset = pkg.assets.find((a) => a.id === e.frame.assetId)
+          if (!asset) return
+          if (e.phase === 'START') return liveView.emit({ step: 'READING_NUMBERS', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset), detail: 'reading the numbers printed on this sheet' })
+          liveView.counts.ocrCandidates += e.tokens.length
+          liveView.counts.measurementsRead += e.evidence.length
+          liveView.emit({ step: 'NUMBERS_READ', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset), detail: `${e.tokens.length} text candidate${e.tokens.length === 1 ? '' : 's'}, ${e.evidence.length} reading${e.evidence.length === 1 ? '' : 's'} bound to a line or a callout`, marks: [...evidenceMarks(e.evidence, () => 'READ'), ...tokenMarks(e.tokens, e.evidence)] })
+        },
       })
     } finally {
       // released here whatever happened; a failure to release is recorded, never put in place of the run's own error
@@ -418,6 +451,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     })
 
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
+    liveView.emit({ step: 'SOLVING', stage: 'REGISTERING_VIEWS', sheet: null, detail: 'registering the views and building the house from what was read' })
     let resolving = false
     const reconstruction = reconstructV2({
       debug: options.debug,
@@ -434,6 +468,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       onPhase: (phase) => {
         report(PHASE_STAGE[phase], 0)
         checkpoint.phase(SOLVER_PHASE[phase])
+        liveView.emit({ step: 'SOLVING', stage: PHASE_STAGE[phase], sheet: null, detail: `solver: ${String(phase).toLowerCase().replace(/_/g, ' ')}` })
       },
       checkpoint,
       resolverProgress: (e) => {
@@ -452,10 +487,35 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const reconstructionMs = lap()
     trace.record('BUILDING_MODEL', 'SEAL', reconstruction.partialPreview ? 'DEGRADED' : 'PASSED', { commands: reconstruction.candidate.program.length, masses: reconstruction.building.masses.length, unresolved: reconstruction.unresolved.length, ...(reconstruction.partialPreview ? { partialPreview: true, refusals: reconstruction.partialPreview.failures.length } : {}) }, reconstruction.partialPreview ? { reasonCode: 'PARTIAL_3D_PREVIEW' } : {})
     report('BUILDING_MODEL', 1)
+    {
+      // what the model did with each sheet's readings: the plans it was built from first, then the other sheets
+      const used = new Map(reconstruction.ledger.records.filter((r) => r.evidenceKind === 'METRIC').map((r) => [r.evidenceId, r]))
+      liveView.counts.measurementsUsed = [...used.values()].filter((r) => r.disposition === 'USED_IN_MODEL' || r.disposition === 'USED_AS_CORROBORATION').length
+      liveView.counts.openingsBuilt = reconstruction.building.openings.length + reconstruction.building.sharedDoors.length
+      // the model element a reading went into: the emitter's binding of its feature, never the feature's name alone
+      const boundTo = new Map<string, string>()
+      for (const b of reconstruction.featureGraph.bindings) if (!boundTo.has(b.solvedFeatureId)) boundTo.set(b.solvedFeatureId, b.objectId)
+      const elementOfFeature = (fid: string | undefined): string | undefined => (fid ? boundTo.get(fid) ?? boundTo.get(`feat-${fid}`) : undefined)
+      liveView.counts.elementsFromReadings = new Set([...used.values()].filter((r) => r.disposition === 'USED_IN_MODEL').map((r) => elementOfFeature(r.featureId)).filter((x): x is string => x !== undefined)).size
+      liveView.counts.hypotheses = reconstruction.featureGraph.hypotheses.length
+      const planIds = new Set(reconstruction.registrations.plans.map((p) => p.frameId))
+      const frames = [...graph.coordinateFrames].sort((a, b) => Number(planIds.has(b.id)) - Number(planIds.has(a.id)) || a.id.localeCompare(b.id))
+      for (const f of frames) {
+        const ev = metrics.evidence.filter((e) => e.frameId === f.id)
+        const asset = pkg.assets.find((a) => a.id === f.assetId)
+        if (!asset || ev.length === 0) continue
+        const status = (e: MetricEvidence): LiveMark['status'] => {
+          const r = used.get(e.id)
+          return !r ? 'READ' : r.disposition === 'USED_IN_MODEL' || r.disposition === 'USED_AS_CORROBORATION' ? 'ACCEPTED' : r.disposition === 'UNRESOLVED' ? 'READ' : 'REJECTED'
+        }
+        liveView.emit({ step: 'BUILT_FROM', stage: 'BUILDING_MODEL', sheet: sheetOf(asset), detail: planIds.has(f.id) ? 'the plan the walls were built from: each reading as the model used or refused it' : 'this sheet’s readings as the model used or refused them', marks: evidenceMarks(ev, status, (e) => elementOfFeature(used.get(e.id)?.featureId)) })
+      }
+    }
 
     // --- COMPILING_SCENE ----------------------------------------------------
     report('COMPILING_SCENE', 0)
     checkpoint.phase('COMPILE_SCENE')
+    liveView.emit({ step: 'COMPILING', stage: 'COMPILING_SCENE', sheet: null, detail: 'compiling the 3D scene from the model' })
     let scene: ReturnType<typeof compileBuilding>
     try {
       scene = compileBuilding(model)
@@ -475,6 +535,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     // --- VERIFYING ----------------------------------------------------------
     report('VERIFYING', 0)
     checkpoint.phase('VERIFY')
+    liveView.emit({ step: 'VERIFYING', stage: 'VERIFYING', sheet: null, detail: 'checking the model against the drawings' })
     checkpoint.tick({ subphase: { id: 'REPLAY', label: 'replaying the candidate' } })
     const replay = verifyReplay(reconstruction.candidate)
     checkpoint.tick({ subphase: { id: 'ROUND_TRIP', label: 'reloading the scene' } })
@@ -533,7 +594,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
     const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
 
-    const sources = sourceInspectionOf({ pkg, graph, metrics, ledger: reconstruction.ledger.records, viewAudit: reconstruction.viewAudit, planFrameIds: new Set(reconstruction.registrations.plans.map((p) => p.frameId)), cameras: reconstruction.registrations.cameras, content: contentVerdicts, skipped: skippedAssets, classifier: contentClassifier })
+    const sources = sourceInspectionOf({ pkg, graph, metrics, ledger: reconstruction.ledger.records, viewAudit: reconstruction.viewAudit, planFrameIds: new Set(reconstruction.registrations.plans.map((p) => p.frameId)), cameras: reconstruction.registrations.cameras, content: contentVerdicts, skipped: skippedAssets, classifier: contentClassifier, bindings: reconstruction.featureGraph.bindings, openingCounts: reconstruction.openingCounts })
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',
       schemaVersion: '1.0.0',
@@ -676,3 +737,44 @@ export const hashesOf = (result: LinkAnalysisResult): Record<string, string> => 
 })
 
 export const stableResultJson = (value: unknown): string => stableJson(value)
+
+// ---------------------------------------------------------------------------
+// SHAPE-LIVE-01: the marks a live preview draws, from the records the run already keeps
+// ---------------------------------------------------------------------------
+function sheetOf(asset: SourceAsset): LiveSheet {
+  const v = selectedVariant(asset)
+  return { assetId: asset.id, url: v.url, byteHash: v.byteHash, width: v.decoded.width, height: v.decoded.height, document: asset.roles.document }
+}
+
+const MARKED_OBSERVATIONS = new Set(['OPENING', 'WINDOW', 'DOOR'])
+function observationMarks(observations: readonly SourceObservation[]): LiveMark[] {
+  const out: LiveMark[] = []
+  for (const o of observations) {
+    if (!MARKED_OBSERVATIONS.has(o.kind) || o.pixelGeometry.type !== 'RECT') continue
+    out.push({ kind: 'OPENING', status: 'CANDIDATE', box: o.pixelGeometry.rect, label: o.kind.toLowerCase() })
+  }
+  return out
+}
+
+function evidenceMarks(evidence: readonly MetricEvidence[], status: (e: MetricEvidence) => LiveMark['status'], elementOf: (e: MetricEvidence) => string | undefined = () => undefined): LiveMark[] {
+  const out: LiveMark[] = []
+  for (const e of evidence) {
+    if (e.kind === 'DIMENSION_CHAIN' || e.kind === 'SCALE_ANCHOR') continue
+    const g = e.measuredGeometry
+    const line = g?.type === 'SEGMENT' ? { x0: g.a.x, y0: g.a.y, x1: g.b.x, y1: g.b.y } : undefined
+    if (!e.textBox && !line) continue
+    const printed = e.origin === 'READ' || e.origin === 'CHAIN_CORRECTED'
+    const value = `${Number.isInteger(e.value) ? e.value : e.value.toFixed(2)} ${e.unit}`
+    const label = !printed ? `≈ ${value} (worked out)` : e.origin === 'CHAIN_CORRECTED' ? `"${e.rawText}" → ${value}` : `"${e.rawText}"`
+    const kind: LiveMark['kind'] = e.kind === 'OPENING_CALLOUT' ? 'OPENING' : e.kind === 'LEVEL_DATUM' ? 'LEVEL' : 'DIMENSION'
+    const elementId = elementOf(e)
+    out.push({ kind, status: status(e), ...(e.textBox ? { box: e.textBox } : {}), ...(line ? { line } : {}), label, ...(elementId ? { elementId } : {}) })
+  }
+  return out
+}
+
+/** Text the reader found that no reading was bound to: candidates. A token a reading came from is drawn as the reading. */
+function tokenMarks(tokens: readonly OcrToken[], evidence: readonly MetricEvidence[]): LiveMark[] {
+  const usedTokens = new Set(evidence.flatMap((e) => e.ocrTokenIds))
+  return tokens.filter((t) => !usedTokens.has(t.id)).map((t) => ({ kind: 'TEXT' as const, status: 'CANDIDATE' as const, box: t.box, label: t.text }))
+}
