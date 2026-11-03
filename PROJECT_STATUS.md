@@ -3056,3 +3056,17 @@ Status: **DONE — APK 1312 (`0.1312.0-owner`), solver 2.20.0, z commita `b4aa5d
 (update over 1311), APK SHA-256 `2e0171f8…429d5`, 39 958 890 B. Local analyzer embedded and rebuilt fresh: 8/8 assets
 match the manifest, F1C markers present. Smoke test on the APK's assets (live Marcówki, Node 22 host): done, solver
 2.20.0. Delivered as a session attachment. No build-process changes. Phone/emulator NOT_RUN (no device in session).
+
+### Rozpoznanie obrazów i znaczenia wymiarów (STAGE BUILDPLAN SOURCE-01)
+
+Status: **DONE — APK 1313 (`0.1313.0-owner`), usługa 1.6.0, solver 2.20.0 bez zmian.** Report
+`stage-reports/STAGE_BUILDPLAN_SOURCE_01_IMAGE_UNDERSTANDING.md`, numbers `stage-reports/artifacts/analyzer-source-01/`,
+preregistration `748d7cb`. First wrong decision: gallery interiors became `PERSPECTIVE_RENDER` and got a "solved"
+exterior camera (10 in the 8 houses, 54/54 on 10 held-out houses). Now a local encoder (MobileNetV4-conv-small,
+Apache-2.0, built from pinned timm weights by `tools/fetch-image-role.mjs`, no weight in Git) + linear head reads six
+content kinds and may only VETO a reader (never adds one); on 10 held-out TEST houses: 0/270 pixel errors, wrongly
+admitted 54 → 0 with no drawing coverage lost, adversarial captions 1134 → 20. Eight houses: models and scenes
+byte-identical, interior cameras 10 → 0, 60 pictures refused, 0 wrong. `thin-body` weighs printed values only
+(DERIVED/origin-less → NOT_PRINTED). `result.sources` + web/Android "Arkusze źródłowe": the real sheet, claim vs
+pixels, outcome and why, every number with crop, line, read/accepted value, printed/derived, use and model element.
+Limits: agent labels, ARCHON only, phone cost not measured, wall thickness not its own kind, sides not re-evaluated.
