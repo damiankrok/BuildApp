@@ -75,7 +75,8 @@ const mass = (id: string, role: 'MAIN' | 'ATTACHED', x0: number, x1: number, z0 
 const main = mass('main', 'MAIN', 0, 8)
 const thin = mass('band', 'ATTACHED', 8, 8.55)
 const chain = (id: string, axis: 'HORIZONTAL' | 'VERTICAL', segments: Array<{ from: number; to: number; cm: number }>): DimensionChain =>
-  ({ id, frameId: 'plan-0', assetId: 'asset-plan', axis, baselinePx: 10, ticksPx: [], segments: segments.map((s, i) => ({ index: i, fromPx: (axis === 'HORIZONTAL' ? OX : OY) + s.from * PPM, toPx: (axis === 'HORIZONTAL' ? OX : OY) + s.to * PPM, pixelLength: (s.to - s.from) * PPM, evidenceId: `${id}-e${i}`, valueCm: s.cm, confidence: 0.9 })), closes: true, observationIds: [], ocrTokenIds: [] }) as DimensionChain
+// SOURCE-01: as every valued segment of real metric evidence, the segments say they were read on the drawing
+  ({ id, frameId: 'plan-0', assetId: 'asset-plan', axis, baselinePx: 10, ticksPx: [], segments: segments.map((s, i) => ({ index: i, fromPx: (axis === 'HORIZONTAL' ? OX : OY) + s.from * PPM, toPx: (axis === 'HORIZONTAL' ? OX : OY) + s.to * PPM, pixelLength: (s.to - s.from) * PPM, evidenceId: `${id}-e${i}`, valueCm: s.cm, origin: 'READ', confidence: 0.9 })), closes: true, observationIds: [], ocrTokenIds: [] }) as DimensionChain
 
 const input = (raster: Raster, over: Partial<ThinBodyInput> = {}): ThinBodyInput => ({
   masses: [main, thin],

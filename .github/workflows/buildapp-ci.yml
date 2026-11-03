@@ -60,7 +60,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Typecheck
         run: npm run typecheck
       - name: Unit / integration / architecture tests
@@ -278,7 +278,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Regenerate mobile scene bundles
         run: npm run mobile:export-scenes
       - name: Assert committed mobile bundles are current
@@ -359,7 +359,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Node 18.20.4 (the runtime version inside the APK)
         run: |
           curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
@@ -467,7 +467,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: APKs WITHOUT the local analyzer (the size baseline; clean build)
         working-directory: apps/android
         run: |
@@ -678,7 +678,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Node 18.20.4 (the runtime version inside the APK)
         run: |
           curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
@@ -978,7 +978,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Telemetry, progress, cancellation and severities
         run: npx vitest run packages/analysis-service/test/telemetry.test.ts packages/analysis-service/test/warnings.test.ts packages/analysis-service/test/service.test.ts apps/local-analyzer/test/program.test.ts apps/analyzer-api/test/android-contract.test.ts
 
@@ -1106,7 +1106,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Pinned bytes, exact runtime, licences, no network; the P2 rule and the OFF identity; non-circularity
         run: npx vitest run packages/numeric-recogniser-ort packages/source-metrics/test/recogniser-ensemble.test.ts tests/architecture/recogniser.test.ts
       - name: Synthetic quality gate (005G's 672 labels and protocol)
@@ -1173,7 +1173,7 @@ jobs:
             packages/numeric-recogniser-ort/models/*.dict.json
           key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
       - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
-        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs && node packages/numeric-recogniser-ort/tools/fetch-image-role.mjs
       - name: Evidence Pack ON/OFF identity, determinism, sidecars, bounds, no publisher raster
         run: npx vitest run packages/analysis-service/test/evidence-pack.test.ts tests/architecture/generalization.test.ts
       - name: Committed packs match their manifests

@@ -1,0 +1,684 @@
+[
+ {
+  "house": "a01",
+  "model": "SAME",
+  "modelBefore": "94605d809c6d",
+  "modelAfter": "94605d809c6d",
+  "sceneSame": true,
+  "counts": {
+   "masses": 1,
+   "openings": 14,
+   "rooms": 11,
+   "chimneys": 3,
+   "frames": 19
+  },
+  "exteriorErrors": "1→1",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "1→1",
+  "interiorCamerasSolved": "0→0",
+  "unchecked": "17→17",
+  "refusedByContent": 0,
+  "wrongRefusals": [],
+  "refused": [],
+  "contentCost": {
+   "images": 21,
+   "loadMs": 449,
+   "embedMs": 865,
+   "rssBeforeMB": 370,
+   "rssAfterLoadMB": 492,
+   "rssAfterExitMB": 435
+  },
+  "peakRssMB": "835→929",
+  "totalMs": "329833→279424"
+ },
+ {
+  "house": "gozd",
+  "model": "SAME",
+  "modelBefore": "b1aa6c0f6147",
+  "modelAfter": "b1aa6c0f6147",
+  "sceneSame": true,
+  "counts": {
+   "masses": 1,
+   "openings": 14,
+   "rooms": 13,
+   "chimneys": 1,
+   "frames": "29→18"
+  },
+  "exteriorErrors": "0→0",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "3→2",
+  "interiorCamerasSolved": "1→0",
+  "unchecked": "27→16",
+  "refusedByContent": 11,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-218a269834",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9994,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-2a69615ece",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-2dd61c1a74",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-2f533b06ca",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-309975505f",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9996,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-9181ce1dc2",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-da7a7603e5",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-e2c073d47e",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-f090f75f2c",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9993,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-fcdfe2df49",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-gozdzikowcach-3-fd0e0a59a0",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 30,
+   "loadMs": 375,
+   "embedMs": 1199,
+   "rssBeforeMB": 398,
+   "rssAfterLoadMB": 520,
+   "rssAfterExitMB": 462
+  },
+  "peakRssMB": "884→968",
+  "totalMs": "314642→259329"
+ },
+ {
+  "house": "marcowki",
+  "model": "SAME",
+  "modelBefore": "28877080d79f",
+  "modelAfter": "28877080d79f",
+  "sceneSame": true,
+  "counts": {
+   "masses": 2,
+   "openings": 12,
+   "rooms": 12,
+   "chimneys": 2,
+   "frames": 18
+  },
+  "exteriorErrors": "2→2",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "3→3",
+  "interiorCamerasSolved": "0→0",
+  "unchecked": "14→14",
+  "refusedByContent": 0,
+  "wrongRefusals": [],
+  "refused": [],
+  "contentCost": {
+   "images": 20,
+   "loadMs": 502,
+   "embedMs": 893,
+   "rssBeforeMB": 377,
+   "rssAfterLoadMB": 500,
+   "rssAfterExitMB": 444
+  },
+  "peakRssMB": "857→979",
+  "totalMs": "260154→236719"
+ },
+ {
+  "house": "ciesz",
+  "model": "SAME",
+  "modelBefore": "c50995131c1f",
+  "modelAfter": "c50995131c1f",
+  "sceneSame": true,
+  "counts": {
+   "masses": 1,
+   "openings": 11,
+   "rooms": 8,
+   "chimneys": 2,
+   "frames": "28→14"
+  },
+  "exteriorErrors": "0→0",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "1→1",
+  "interiorCamerasSolved": "0→0",
+  "unchecked": "27→13",
+  "refusedByContent": 14,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-079fc6b432",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-0d71f33419",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-2c99c0986d",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9967,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-5680e057f1",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-5777e73069",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-5ea8b6b7c6",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-68519ceb77",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9988,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-6c1a936d98",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-77c3d3c706",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-816fb076d8",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-89f28b183e",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-947401446a",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-a992e1d4c7",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-cieszyniankach-12-ge-fc4c98a07a",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 30,
+   "loadMs": 399,
+   "embedMs": 998,
+   "rssBeforeMB": 436,
+   "rssAfterLoadMB": 559,
+   "rssAfterExitMB": 495
+  },
+  "peakRssMB": "855→891",
+  "totalMs": "168859→221074"
+ },
+ {
+  "house": "rary",
+  "model": "SAME",
+  "modelBefore": "74b92bcad149",
+  "modelAfter": "74b92bcad149",
+  "sceneSame": true,
+  "counts": {
+   "masses": 2,
+   "openings": 13,
+   "rooms": 9,
+   "chimneys": 1,
+   "frames": "35→16"
+  },
+  "exteriorErrors": "0→0",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "11→6",
+  "interiorCamerasSolved": "5→0",
+  "unchecked": "32→13",
+  "refusedByContent": 19,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-1a9d527e2f",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-2f92ef67e4",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-33629afaa5",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-3672af1cff",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-415e0cdd54",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-4f7cbdeb18",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-6566de3cd6",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-6a6e5df10f",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-724e2ee0eb",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-862367e641",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-9235ffdaaf",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-a5dabd1195",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-aab6c2f7ac",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-ae35b1f8bb",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-aff6760d89",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9995,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-b8a59fecd3",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-ba42a7ec29",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-edd3db23d3",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-rarytasach-5-g2e-ef246c3318",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 37,
+   "loadMs": 548,
+   "embedMs": 2296,
+   "rssBeforeMB": 508,
+   "rssAfterLoadMB": 632,
+   "rssAfterExitMB": 578
+  },
+  "peakRssMB": "913→982",
+  "totalMs": "203000→310140"
+ },
+ {
+  "house": "trytomach",
+  "model": "SAME",
+  "modelBefore": "4009d4eee6e9",
+  "modelAfter": "4009d4eee6e9",
+  "sceneSame": true,
+  "counts": {
+   "masses": 1,
+   "openings": 13,
+   "rooms": 11,
+   "chimneys": 1,
+   "frames": "22→19"
+  },
+  "exteriorErrors": "2→2",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "2→2",
+  "interiorCamerasSolved": "0→0",
+  "unchecked": "20→17",
+  "refusedByContent": 3,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-trytomach-g-1dfae0d421",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-trytomach-g-8e05eb17a0",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-trytomach-g-ad29f4a1e8",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 24,
+   "loadMs": 522,
+   "embedMs": 1548,
+   "rssBeforeMB": 408,
+   "rssAfterLoadMB": 531,
+   "rssAfterExitMB": 464
+  },
+  "peakRssMB": "839→937",
+  "totalMs": "189905→303768"
+ },
+ {
+  "house": "arganiach",
+  "model": "SAME",
+  "modelBefore": "266ba3d87874",
+  "modelAfter": "266ba3d87874",
+  "sceneSame": true,
+  "counts": {
+   "masses": 2,
+   "openings": 13,
+   "rooms": 15,
+   "chimneys": 2,
+   "frames": "30→23"
+  },
+  "exteriorErrors": "3→3",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "7→4",
+  "interiorCamerasSolved": "3→0",
+  "unchecked": "27→20",
+  "refusedByContent": 7,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-02598705a5",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-10aca086c7",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-19ed912605",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9994,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-580eeafbd4",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9986,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-641bc2d0b1",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9997,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-9242667801",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9989,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-arganiach-g2e-ca3c04dde3",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 32,
+   "loadMs": 710,
+   "embedMs": 1694,
+   "rssBeforeMB": 415,
+   "rssAfterLoadMB": 538,
+   "rssAfterExitMB": 483
+  },
+  "peakRssMB": "916→967",
+  "totalMs": "217446→255054"
+ },
+ {
+  "house": "sasankach3",
+  "model": "SAME",
+  "modelBefore": "98cf970ca894",
+  "modelAfter": "98cf970ca894",
+  "sceneSame": true,
+  "counts": {
+   "masses": 2,
+   "openings": 16,
+   "rooms": 11,
+   "chimneys": 0,
+   "frames": "24→18"
+  },
+  "exteriorErrors": "0→0",
+  "replay": "BYTE_IDENTICAL",
+  "perspectiveCamerasSolved": "3→2",
+  "interiorCamerasSolved": "1→0",
+  "unchecked": "22→16",
+  "refusedByContent": 6,
+  "wrongRefusals": [],
+  "refused": [
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-5794f09351",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9999,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-5f1f54e9bf",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-775459e17e",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 1,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-788ce260bf",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-943fcb7f4d",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   },
+   {
+    "assetId": "asset-projekt-dom-w-sasankach-3-g-bcc7af924b",
+    "claimed": "PERSPECTIVE_RENDER",
+    "pixels": "INTERIOR",
+    "p": 0.9998,
+    "label": "INTERIOR_PERSPECTIVE"
+   }
+  ],
+  "contentCost": {
+   "images": 25,
+   "loadMs": 391,
+   "embedMs": 893,
+   "rssBeforeMB": 336,
+   "rssAfterLoadMB": 461,
+   "rssAfterExitMB": 394
+  },
+  "peakRssMB": "910→957",
+  "totalMs": "205903→200665"
+ }
+]

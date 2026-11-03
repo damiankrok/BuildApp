@@ -32,13 +32,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import com.buildplan.preview.R
+import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
 import com.buildplan.preview.analyzer.SourceInspection
 import com.buildplan.preview.analyzer.SourceReading
 import com.buildplan.preview.analyzer.SourceSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.net.HttpURLConnection
-import java.net.URL
 
 /**
  * SOURCE-01: the source inspection — each picture the page published, what the publisher called it, what its pixels
@@ -132,22 +131,22 @@ private fun SheetPicture(sheet: SourceSheet, selected: String?) {
     }
 }
 
-/** Downsampled to at most ~1600 px on its long side: enough to see a dimension, small enough for a phone's heap. */
+/**
+ * Fetched through the app's one transport (HTTPS, no redirects, a size limit), from the address the analysis read it
+ * from; downsampled to at most ~1600 px on its long side — enough to see a dimension, small enough for a phone's heap.
+ */
 private fun loadPicture(url: String): ImageBitmap? {
-    val conn = URL(url).openConnection() as HttpURLConnection
-    conn.connectTimeout = 15_000
-    conn.readTimeout = 30_000
-    return try {
-        val bytes = conn.inputStream.use { it.readBytes() }
-        val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
-        var sample = 1
-        while (maxOf(bounds.outWidth, bounds.outHeight) / sample > 1600) sample *= 2
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, BitmapFactory.Options().apply { inSampleSize = sample })?.asImageBitmap()
-    } finally {
-        conn.disconnect()
-    }
+    val response = HttpUrlConnectionTransport().get(url, PICTURE_MAX_BYTES)
+    if (response.status != 200) return null
+    val bytes = response.body
+    val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+    BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
+    var sample = 1
+    while (maxOf(bounds.outWidth, bounds.outHeight) / sample > 1600) sample *= 2
+    return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, BitmapFactory.Options().apply { inSampleSize = sample })?.asImageBitmap()
 }
+
+private const val PICTURE_MAX_BYTES = 20L * 1024 * 1024
 
 @Composable
 private fun documentText(document: String): String = when (document) {

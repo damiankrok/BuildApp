@@ -75,7 +75,7 @@ export async function layOutRecogniserAssets(outdir) {
     try {
       bytes = await readFile(from)
     } catch {
-      throw new Error(`${name}: ${from} is missing (run node packages/numeric-recogniser-ort/tools/fetch-model.mjs)`)
+      throw new Error(`${name}: ${from} is missing (run node packages/numeric-recogniser-ort/tools/fetch-model.mjs and tools/fetch-image-role.mjs)`)
     }
     const sha = sha256(bytes)
     if (sha !== pin.sha256 || (pin.bytes !== undefined && bytes.length !== pin.bytes)) throw new Error(`${name}: SHA-256 ${sha} (${bytes.length} B), pinned ${pin.sha256} — refused`)

@@ -286,8 +286,16 @@ val fetchRecogniserModel = tasks.register<FetchNodeRuntimeTask>("fetchRecogniser
     script.set(File(repositoryRoot, "packages/numeric-recogniser-ort/tools/fetch-model.mjs").path)
     outputDir.set(File(repositoryRoot, "packages/numeric-recogniser-ort/models"))
 }
-bundleLocalAnalyzer.configure { dependsOn(fetchRecogniserModel) }
-bundleLocalAnalyzerFixture.configure { dependsOn(fetchRecogniserModel) }
+/** SOURCE-01: the image-content encoder, built from its pinned upstream weights (no weight is committed). */
+val fetchImageRoleEncoder = tasks.register<FetchNodeRuntimeTask>("fetchImageRoleEncoder") {
+    group = "build"
+    description = "Fetch timm MobileNetV4-conv-small at its pinned revision and build the pinned ONNX encoder (SHA-256 refused on mismatch)."
+    node.set(nodeExecutable)
+    script.set(File(repositoryRoot, "packages/numeric-recogniser-ort/tools/fetch-image-role.mjs").path)
+    outputDir.set(File(repositoryRoot, "packages/numeric-recogniser-ort/models"))
+}
+bundleLocalAnalyzer.configure { dependsOn(fetchRecogniserModel, fetchImageRoleEncoder) }
+bundleLocalAnalyzerFixture.configure { dependsOn(fetchRecogniserModel, fetchImageRoleEncoder) }
 
 val fetchNodeRuntime = tasks.register<FetchNodeRuntimeTask>("fetchNodeRuntime") {
     group = "build"

@@ -71,7 +71,13 @@ describe('the production analyzer service, as bundled', () => {
   it('contains no reference, candidate, benchmark, research, fixture or stage-artefact module', () => {
     const offenders = inputs.filter((p) => FORBIDDEN_MODULE.test(p))
     expect(offenders).toEqual([])
-    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules'))).toEqual([])
+    // SOURCE-01: the one JSON is the image-content head: 6 × 1280 fitted numbers, bound to the pinned encoder by its
+    // SHA-256 and to six content classes — no house, no URL, no reading
+    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules'))).toEqual(['packages/source-analyzer/src/content-head.json'])
+    const head = JSON.parse(readFileSync(join(ROOT, 'packages/source-analyzer/src/content-head.json'), 'utf8')) as Record<string, unknown>
+    const pin = JSON.parse(readFileSync(join(ROOT, 'packages/numeric-recogniser-ort/models/image-role.json'), 'utf8')) as { sha256: string }
+    expect(head.encoderSha256).toBe(pin.sha256)
+    expect(Object.keys(head).sort()).toEqual(['bias', 'classes', 'encoderSha256', 'mean', 'provenance', 'scale', 'schema', 'version', 'weights'])
   })
 
   it('names no project: not the house it was tuned on, not its code, not a sealed model id', () => {

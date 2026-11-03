@@ -126,7 +126,9 @@ describe('2–4. no truth, no benchmark, no project in what the phone runs', () 
   it('contains no reference, candidate, benchmark, research, fixture, app or stage-artefact module', () => {
     expect(inputs.filter((p) => FORBIDDEN_MODULE.test(p))).toEqual([])
     // 005H: the one JSON in the analyzer is the recogniser's pins (ids and SHA-256s) — never data, never an answer
-    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules'))).toEqual(['packages/numeric-recogniser-ort/models/manifest.json'])
+    // SOURCE-01: and the encoder's pins, and the image-content head — fitted parameters bound to that encoder by its
+    // SHA-256 (asserted in the analyzer-api architecture test), never data about a house
+    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules')).sort()).toEqual(['packages/numeric-recogniser-ort/models/image-role.json', 'packages/numeric-recogniser-ort/models/manifest.json', 'packages/source-analyzer/src/content-head.json'])
   })
 
   it('names no project: not the house it was tuned on, not its code', () => {
@@ -291,7 +293,8 @@ describe('005H. the recogniser beside the analyzer', () => {
 
   it('the analyzer carries no ONNX Runtime and no recogniser engine: it only spawns the worker', () => {
     expect(inputs.filter((p) => p.includes('onnxruntime'))).toEqual([])
-    expect(inputs.filter((p) => p.startsWith('packages/numeric-recogniser-ort/')).sort()).toEqual(['packages/numeric-recogniser-ort/models/manifest.json', 'packages/numeric-recogniser-ort/src/client-entry.ts', 'packages/numeric-recogniser-ort/src/client.ts', 'packages/numeric-recogniser-ort/src/manifest.ts'])
+    // SOURCE-01: plus the image-content encoder's client and its pins — no engine, no runtime
+    expect(inputs.filter((p) => p.startsWith('packages/numeric-recogniser-ort/')).sort()).toEqual(['packages/numeric-recogniser-ort/models/image-role.json', 'packages/numeric-recogniser-ort/models/manifest.json', 'packages/numeric-recogniser-ort/src/client-entry.ts', 'packages/numeric-recogniser-ort/src/client.ts', 'packages/numeric-recogniser-ort/src/image-role-client.ts', 'packages/numeric-recogniser-ort/src/manifest.ts'])
   })
 
   it('the worker carries ONNX Runtime Web and the decoder, and nothing of the pipeline', async () => {

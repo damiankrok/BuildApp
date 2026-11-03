@@ -92,7 +92,8 @@ describe('no runtime where it does not belong', () => {
     expect(offenders).toEqual([])
     // inside it, only the engine does
     const inside = filesUnder('packages/numeric-recogniser-ort/src').filter((f) => importsOf(read(f)).some((i) => i.startsWith('onnxruntime')))
-    expect(inside).toEqual(['packages/numeric-recogniser-ort/src/engine.ts'])
+    // SOURCE-01: and the image-content encoder's engine; its client (`image-role-client.ts`) imports none
+    expect(inside).toEqual(['packages/numeric-recogniser-ort/src/engine.ts', 'packages/numeric-recogniser-ort/src/image-role.ts'])
   })
 
   it('source-metrics depends on no runtime and no recogniser implementation', () => {
