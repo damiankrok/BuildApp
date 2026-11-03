@@ -328,7 +328,7 @@ export type EavesReading = {
 }
 
 /** The eaves projections a section may show: below the lower bound there is nothing to draw, above the upper it is no eaves. */
-const EAVES_OVERHANG_M = { min: 0.12, max: 1.5 } as const
+export const EAVES_OVERHANG_M = { min: 0.12, max: 1.5 } as const
 /** How far the two eaves of one roof may differ for one projection to stand for both. */
 const EAVES_SIDES_AGREE_M = 0.3
 /** How far the slope the section draws may differ from the stated pitch, in degrees, for the lines to be the roof's. */

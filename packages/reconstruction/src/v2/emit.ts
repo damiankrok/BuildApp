@@ -398,8 +398,10 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       // Under its own pitched roof a body's walls die into the roof's planes: the gable ends rise to the ridge.
       const height = planeRoof ? round6(planeRoof.ridgeY - l.elevation + 0.5) : pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
       const ringId = `ring-${m.id}-${storey}`
-      // The body's walls take the tone the renders show for them: a dark body is built in dark render.
-      const tone = b.massTones.find((t) => t.massId === m.id)
+      // The body's walls take the tone the renders show for them: a dark body is built in dark render. Each storey takes
+      // its own reading; one the renders do not show takes the ground storey's, as every storey did before.
+      const groundTone = b.massTones.find((t) => t.massId === m.id && t.storeyIndex === undefined)
+      const tone = storey === 0 ? groundTone : (b.massTones.find((t) => t.massId === m.id && t.storeyIndex === storey) ?? groundTone)
       const ringMaterial = tone && tone.share >= 0.5 ? materialForTone(tone.tone, MATERIALS_V2.wall) : MATERIALS_V2.wall
       const topProfile = planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : pitched ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: pitchedPlaneIds(pitched.massId) } } : {}
       let ownWalls = [0, 1, 2, 3].filter((i) => i !== openIndex(m)).map((i) => `${ringId}-w${i}`)

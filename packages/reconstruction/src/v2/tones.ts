@@ -36,6 +36,7 @@ import type { LevelV2, MassToneV2, MassV2, ReturnToneV2, ReturnWallV2 } from './
 import type { ElevationFrameV2 } from './frame.js'
 import type { OpeningV2 } from './openings-v2.js'
 import type { RecessTopology } from './recesses.js'
+import { EAVES_OVERHANG_M } from './roof-details.js'
 import { rgbAt, toneClass } from './scan.js'
 
 /** Relative brightness at or above which a finish reads light, and under which it reads dark. */
@@ -85,56 +86,91 @@ function familyOf(rels: readonly number[]): { tone: ToneFamily; share: number; m
   return { tone, share: round6(share), median: round6(med) }
 }
 
-export function readMassTones(masses: readonly MassV2[], views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, openings: readonly OpeningV2[], recesses: readonly RecessTopology[], levels: readonly LevelV2[]): MassToneV2[] {
+/**
+ * EXTERIOR-COMPLETE: one reading per storey. A house rendered grey on the ground storey and white above is two finishes,
+ * and the ground storey's tone painted on the whole body built a white attic in grey. Each storey is sampled in its own
+ * band — from 0.3 m over its floor to 0.3 m under the lower of its top and the main roof's eave — with the same masks.
+ * Under a pitched roof — the body's own: the main roof over the main body, an attached body's gable over that body — an
+ * upper storey's band ends under that roof's eave on the gable ends, and on the eave sides (every side of a roof hipped
+ * at an end) under the overhang's drop as well: the eaves hang past the wall and below the eave datum by the overhang
+ * times the slope, over the knee wall, and what that strip shows is the roof's underside and edge, not the wall. The
+ * overhang is the one the section reads, or the largest an eaves may have (`EAVES_OVERHANG_M.max`) when none was read:
+ * a margin of what is sampled, never a dimension of the model. A knee wall under that drop is not read at all; a full
+ * storey wall under a high eave is. A balcony on that storey
+ * stands in front of the wall over its length — its railing, slab and shade are not the finish — and is masked as a
+ * nearer body is; so is a lower body nearer the viewer whose pitched roof rises into the band.
+ * The ground storey's entry carries no `storeyIndex`, as before; an upper storey's entry carries its index, and a
+ * storey the renders do not show well enough gets none.
+ */
+export const MASS_TONE_MIN_BAND_M = 0.6
+
+/** The pitched roof over one body: its eave datum, its ridge's axis, and whether it is hipped at an end. */
+export type PitchedRoofOverBody = { massId: string; eaveY: number; ridgeY: number; ridgeAxis: 'X' | 'Z'; pitchDeg: number; overhangM?: number; hipped?: boolean }
+/** A balcony slab on a storey, in plan, with the facade it stands on. */
+export type BalconyInFront = { storeyIndex: number; side?: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; x0: number; z0: number; x1: number; z1: number }
+export type MassToneContext = { roofs?: readonly PitchedRoofOverBody[]; balconies?: readonly BalconyInFront[] }
+
+export function readMassTones(masses: readonly MassV2[], views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, openings: readonly OpeningV2[], recesses: readonly RecessTopology[], levels: readonly LevelV2[], context: MassToneContext = {}): MassToneV2[] {
+  const roofOf = (massId: string): PitchedRoofOverBody | undefined => context.roofs?.find((r) => r.massId === massId)
   const out: MassToneV2[] = []
-  const ground = levels.find((l) => l.index === 0)
-  if (!ground) return out
+  const whites = views.map(({ raster }) => whitePointOf(raster))
   for (const m of masses) {
-    if (!m.storeys.includes(0)) continue
-    const rels: number[] = []
-    let viewsUsed = 0
-    const used: string[] = []
-    for (const { view, raster } of views) {
-      const white = whitePointOf(raster)
-      const facade = view.side === 'LEFT' ? 'WEST' : view.side === 'RIGHT' ? 'EAST' : view.side
-      const alongX = facade === 'FRONT' || facade === 'REAR'
-      // This body's face on that side, and whether another body stands nearer the viewer there.
-      const faceAt = facade === 'FRONT' ? m.z0 : facade === 'REAR' ? m.z1 : facade === 'WEST' ? m.x0 : m.x1
-      const span: [number, number] = alongX ? [m.x0, m.x1] : [m.z0, m.z1]
-      const nearer = (a: number): boolean =>
-        masses.some((o) => {
-          if (o === m || !o.storeys.includes(0)) return false
-          const inSpan = alongX ? a > o.x0 && a < o.x1 : a > o.z0 && a < o.z1
-          if (!inSpan) return false
-          const oFace = facade === 'FRONT' ? o.z0 : facade === 'REAR' ? o.z1 : facade === 'WEST' ? o.x0 : o.x1
-          return facade === 'FRONT' || facade === 'WEST' ? oFace < faceAt - 0.05 : oFace > faceAt + 0.05
-        })
-      // A recess on this side at the ground storey sets this face back over its open intervals.
-      const recessed = (a: number): boolean => recesses.some((r) => r.storeyIndex === 0 && r.side === facade && r.open.some((o) => a > o.from - 0.05 && a < o.to + 0.05))
-      const inOpening = (a: number): boolean => openings.some((o) => o.facade === facade && o.storeyIndex === 0 && o.massId === m.id && a > o.interval[0] - 0.15 && a < o.interval[1] + 0.15)
-      const y0 = ground.elevation + 0.3
-      const y1 = ground.elevation + Math.min(ground.height, 2.8) - 0.3
-      let samples = 0
-      const mpp = view.registration.metresPerPixelU
-      for (let a = span[0] + 0.2; a <= span[1] - 0.2; a += mpp * 2) {
-        if (nearer(a) || recessed(a) || inOpening(a)) continue
-        const px = Math.round(view.pxOf(a))
-        for (let y = y0; y <= y1; y += mpp * 2) {
-          const py = Math.round(view.pyOf(y))
-          const rel = relativeSample(raster, px, py, white)
-          if (rel === undefined) continue
-          rels.push(rel)
-          samples += 1
+    const roof = roofOf(m.id)
+    for (const storey of m.storeys) {
+      const level = levels.find((l) => l.index === storey)
+      if (!level) continue
+      const y0 = level.elevation + 0.3
+      // the ground storey keeps its band as it was read (its top at most 2.8 m over the floor)
+      const top = level.elevation + Math.min(level.height, 2.8)
+      const gableTop = (storey === 0 ? top : Math.min(top, roof?.eaveY ?? top)) - 0.3
+      const eaveTop = storey === 0 || !roof ? gableTop : Math.min(top, roof.eaveY - (roof.overhangM ?? EAVES_OVERHANG_M.max) * Math.tan((roof.pitchDeg * Math.PI) / 180)) - 0.3
+      if (gableTop - y0 < MASS_TONE_MIN_BAND_M) continue
+      const rels: number[] = []
+      const used: string[] = []
+      views.forEach(({ view, raster }, vi) => {
+        const white = whites[vi]
+        const facade = view.side === 'LEFT' ? 'WEST' : view.side === 'RIGHT' ? 'EAST' : view.side
+        const alongX = facade === 'FRONT' || facade === 'REAR'
+        // an eave side of the body's roof (a hipped end is one too): the band ends under the overhang's drop
+        const eaveSide = storey > 0 && roof !== undefined && (roof.hipped === true || (roof.ridgeAxis === 'X') === alongX)
+        const y1 = eaveSide ? eaveTop : gableTop
+        if (y1 - y0 < MASS_TONE_MIN_BAND_M) return
+        // This body's face on that side, and whether another body stands nearer the viewer there at this storey.
+        const faceAt = facade === 'FRONT' ? m.z0 : facade === 'REAR' ? m.z1 : facade === 'WEST' ? m.x0 : m.x1
+        const span: [number, number] = alongX ? [m.x0, m.x1] : [m.z0, m.z1]
+        const nearer = (a: number): boolean =>
+          masses.some((o) => {
+            // a lower body nearer the viewer hides this storey where its own pitched roof rises into the band
+            if (o === m || !(o.storeys.includes(storey) || (roofOf(o.id)?.ridgeY ?? -Infinity) > y0)) return false
+            const inSpan = alongX ? a > o.x0 && a < o.x1 : a > o.z0 && a < o.z1
+            if (!inSpan) return false
+            const oFace = facade === 'FRONT' ? o.z0 : facade === 'REAR' ? o.z1 : facade === 'WEST' ? o.x0 : o.x1
+            return facade === 'FRONT' || facade === 'WEST' ? oFace < faceAt - 0.05 : oFace > faceAt + 0.05
+          })
+        // A recess on this side at this storey sets this face back over its open intervals.
+        const recessed = (a: number): boolean => recesses.some((r) => r.storeyIndex === storey && r.side === facade && r.open.some((o) => a > o.from - 0.05 && a < o.to + 0.05))
+        const inOpening = (a: number): boolean => openings.some((o) => o.facade === facade && o.storeyIndex === storey && o.massId === m.id && a > o.interval[0] - 0.15 && a < o.interval[1] + 0.15)
+        const behindBalcony = (a: number): boolean => storey > 0 && (context.balconies ?? []).some((b) => b.storeyIndex === storey && b.side === facade && (alongX ? a > b.x0 - 0.15 && a < b.x1 + 0.15 : a > b.z0 - 0.15 && a < b.z1 + 0.15))
+        let samples = 0
+        const mpp = view.registration.metresPerPixelU
+        for (let a = span[0] + 0.2; a <= span[1] - 0.2; a += mpp * 2) {
+          if (nearer(a) || recessed(a) || inOpening(a) || behindBalcony(a)) continue
+          const px = Math.round(view.pxOf(a))
+          for (let y = y0; y <= y1; y += mpp * 2) {
+            const py = Math.round(view.pyOf(y))
+            const rel = relativeSample(raster, px, py, white)
+            if (rel === undefined) continue
+            rels.push(rel)
+            samples += 1
+          }
         }
-      }
-      if (samples >= 50) {
-        viewsUsed += 1
-        used.push(view.side.toLowerCase())
-      }
+        if (samples >= 50) used.push(view.side.toLowerCase())
+      })
+      if (rels.length < 100) continue
+      const { tone, share, median: med } = familyOf(rels)
+      const where = storey === 0 ? 'its open ground-storey faces' : `its open faces on storey ${storey}`
+      out.push({ massId: m.id, ...(storey === 0 ? {} : { storeyIndex: storey }), tone, share, views: used.length, why: `the median of ${rels.length} samples of ${where} on the ${used.join(', ')} render${used.length === 1 ? '' : 's'} is ${Math.round(med * 100)} % of the render's white: ${tone.toLowerCase()} (${Math.round(share * 100)} % of the samples read ${tone.toLowerCase()})` })
     }
-    if (rels.length < 100) continue
-    const { tone, share, median: med } = familyOf(rels)
-    out.push({ massId: m.id, tone, share, views: viewsUsed, why: `the median of ${rels.length} samples of its open ground-storey faces on the ${used.join(', ')} render${used.length === 1 ? '' : 's'} is ${Math.round(med * 100)} % of the render's white: ${tone.toLowerCase()} (${Math.round(share * 100)} % of the samples read ${tone.toLowerCase()})` })
   }
   return out
 }

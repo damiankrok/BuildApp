@@ -81,7 +81,7 @@ type Building = {
   openings: Array<{ id: string; facade: string; storeyIndex: number; interval: [number, number]; sillY: number; headY: number; profile?: string; kind?: string }>
   chimneys: Array<{ id: string; x0: number; x1: number; z0: number; z1: number; topY: number }>
   rooflights: Array<{ id: string; slope: string } & Dict>
-  massTones: Array<{ massId: string; tone: string; share: number }>
+  massTones: Array<{ massId: string; storeyIndex?: number; tone: string; share: number }>
   returnTones: Array<{ returnId: string; side: string; storeyIndex: number; tone: string; share: number }>
   facadeGraph: { nodes: Array<{ id: string; kind: string }>; edges: Array<{ from: string; to: string; kind: string; gapM?: number }> }
 }
@@ -509,7 +509,7 @@ function main(): void {
     const g = bundle.styling.groups
     const used = new Set(bundle.scene.meshes.map((m) => m.semanticGroup))
     const tooClose = ADJACENT_GROUPS.filter(([a, b]) => used.has(a) && used.has(b) && Math.abs(relativeLuminance(g[a].color) - relativeLuminance(g[b].color)) < MIN_ADJACENT_LUMINANCE_GAP)
-    const tone = (id: string) => building.massTones.find((t) => t.massId === id)
+    const tone = (id: string) => building.massTones.find((t) => t.massId === id && t.storeyIndex === undefined)
     // The attached body's own exterior walls: those standing inside its footprint.
     const inAttached = (p: { x: number; z: number }): boolean => !!attached && p.x >= attached.x0 - 0.05 && p.x <= attached.x1 + 0.05 && p.z >= attached.z0 - 0.05 && p.z <= attached.z1 + 0.05
     const garageWallIds = new Set(model.walls.filter((w) => w.kind === 'EXTERIOR' && inAttached(w.start) && inAttached(w.end) && !(Math.abs(w.start.x - (attached?.x0 ?? NaN)) < 0.05 && Math.abs(w.end.x - (attached?.x0 ?? NaN)) < 0.05)).map((w) => w.id))

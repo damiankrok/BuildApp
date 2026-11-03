@@ -229,7 +229,8 @@ export type TerraceV2 = {
 }
 
 /** A broad tone read for one body's walls on the registered renders. */
-export type MassToneV2 = { massId: string; tone: string; share: number; views: number; why: string }
+/** `storeyIndex` absent: the ground storey's reading; present: that upper storey's own reading. */
+export type MassToneV2 = { massId: string; storeyIndex?: number; tone: string; share: number; views: number; why: string }
 
 /** A broad tone read for one return's outer face: the frame's finish where it stands in the outer plane. */
 export type ReturnToneV2 = { returnId: string; side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; storeyIndex: number; tone: string; share: number; why: string }

@@ -114,3 +114,36 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   ridge axis (the section's rise fits both spans once the eave datum is the overhang's lip); Arlety's rooflight ring
   (printed 78/140) is misread 217/140 and refused; Rary's front 105/210 now reads as a floor-length window (a callout
   newly read on a gap the plan draws glazed) — to be checked against the elevation before delivery.
+
+## E4 — delivery 1315 checked against the regression houses; finish per storey
+
+- Delivery 1315 (commit `845b13a`): `BuildPlan-owner-preview-1315.apk`, `com.buildplan.preview` / 1315 / `0.1315.0-owner`,
+  SHA-256 `1e2a93c7ba8e9789487b186d0b2b9ac810cfcabfb7449ac5aad314c77c969745`, signer
+  `6e48fac4…ca0da` (unchanged), embedded `analyzer.mjs` `6b6b671b97272d8c298e8481f5604f10df7075e6f19a72eca9d9a85dfce7ec0e`
+  (service 1.8.0, solver 2.22.0; 10/10 asset manifest entries match). Live smoke on the APK's assets (Muraje live page,
+  host Node 22 x64 — not a phone): first sheet 13.9 s, done 314 s, 129 events, 32 sheets, 121 copies SHA-verified,
+  0 mismatched, copies removed, model hash `db38772602a0828a` = the desktop run; peak RSS 888 MB (host).
+- Full production path at `845b13a` (f2): 32/70 on the frozen DEV checker (E0 25/70; SHAPE-LIVE final 26/70).
+- Regression 8 (f2 vs SHAPE-LIVE final): marcowki, trytomach identical; ciesz eave 3.32 → 3.30; arganiach one window →
+  door; gozd 4 windows → doors with heights from callouts (2.2/2.3 m); rary front 105/210 → floor-length window (the
+  render shows a glazed panel beside the door: plausible); sasankach3 eave 3.69 → 4.04, the garage now a sectional gate;
+  a01 eave 4.87 → 4.68, side and rear windows now as the elevations draw them (two tall gable windows, rear roof windows).
+- **First wrong decision found on the a01 board:** its walls turned grey to the ridge. The ground storey of a01 is grey
+  (the reading was right) but the ground storey's tone was painted on every storey of the body, and its attic is white.
+  Fix (`tones.ts`, solver 2.23.0): each storey is read in its own band, with the same masks. Under a pitched roof (the
+  body's own: the main roof, or the attached body's gable) an upper storey's band ends under the eave on the gable ends,
+  and on the eave sides (every side of a hipped roof) under the overhang's drop too — overhang × tan(pitch), the
+  overhang the section reads or the largest an eaves may have (`EAVES_OVERHANG_M.max`, 1.5 m) when none was read: a
+  sampling margin, never a model dimension. A knee wall under the drop is then not read; a full storey wall under a
+  high eave is. A balcony on that storey and a lower body nearer the viewer whose pitched roof rises into the band are
+  masked like a nearer body. A storey not read keeps the ground storey's reading, as every storey did before.
+  Three intermediate versions were rejected on the boards: eave clipping alone read Arganiach's and Trytomach's attics
+  dark (the eave sides sampled the roof); the main roof's axis on Sasanki's attached wing read the wing's roof; gable
+  ends only lost Muraje's grey upper storey (only its front, an eave side, is registered).
+- Effect (same f2 evidence, solver alone): a01 attic white over a grey ground storey; Muraje grey upper storey over a
+  white ground storey; Sasanki main attic MID (its gables read 0.75 of the render's white against 0.95 below — the
+  elevations show a light-grey gable over white); the other 18 houses identical in walls; checker unchanged 32/70 (it
+  does not score finishes).
+- Test of the cause: `storey-tones-exterior-complete.test.ts` (7 cases; the first fails on the old reader).
+- Sliverton (`wall-recovery-n7-fix01`) had been red since E1 (command index 21 → 22, the gate material) and was missed
+  in E3 — it fails identically at `845b13a`; the expectation is updated with that reason.

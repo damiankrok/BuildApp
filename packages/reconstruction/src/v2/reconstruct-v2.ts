@@ -186,7 +186,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.22.0' as const
+export const SOLVER_V2_VERSION = '2.23.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -2389,7 +2389,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // Finish regions (colour, never geometry): the dominant tones of the recessed walls and the side bands.
   // ---------------------------------------------------------------------------
   // Broad tone of each body's walls, where they stand in the open on a registered render.
-  const massTones: MassToneV2[] = readMassTones(masses, views, openings, recesses, levelsV2)
+  const massTones: MassToneV2[] = readMassTones(masses, views, openings, recesses, levelsV2, {
+    roofs: [...(mainRoof ? [{ massId: mainRoof.massId, eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, ridgeAxis: mainRoof.ridgeAxis, pitchDeg: mainRoof.pitchDeg, ...(mainRoof.eaves ? { overhangM: mainRoof.eaves.overhangM } : {}), hipped: mainRoof.ends !== undefined }] : []), ...pitchedAttachedRoofs.map((r) => ({ massId: r.massId, eaveY: r.eaveY, ridgeY: r.ridgeY, ridgeAxis: r.ridgeAxis, pitchDeg: r.pitchDeg }))],
+    balconies,
+  })
   const surfaceRegions: BuildingV2['surfaceRegions'] = []
   for (const recess of recesses.filter((r) => r.storeyIndex === 0)) {
     for (const v of viewsOf(recess.side)) {
@@ -2404,7 +2407,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // The recessed wall's finishes, run by run along it; its openings are glass, not wall.
         const skip = openings.filter((o) => o.facade === recess.side && o.storeyIndex === 0).map((o) => o.interval)
         const runs = readFinishRuns(v.view, v.raster, clipped, [l.elevation + 0.4, l.elevation + 2.0], skip)
-        const bodyTone = massTones.find((t) => t.massId === massOn.id)?.tone
+        const bodyTone = massTones.find((t) => t.massId === massOn.id && t.storeyIndex === undefined)?.tone
         for (const run of runs) {
           if (run.to - run.from < 0.5 || run.tone === 'LIGHT' || run.tone === bodyTone) continue
           const id = `finish-${recess.side.toLowerCase()}-${Math.round(run.from * 100)}`
@@ -2487,7 +2490,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   for (const t of returnTones) closureNotes.push({ subject: t.returnId, what: `reads ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
   for (const t of massTones) {
     const m = masses.find((x) => x.id === t.massId)
-    if (m) closureNotes.push({ subject: m.id, what: `walls read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
+    if (m) closureNotes.push({ subject: m.id, what: `${t.storeyIndex === undefined ? 'walls' : `storey ${t.storeyIndex} walls`} read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
   }
   const facadeGraph = buildFacadeGraph({ returns, verges, balconies, railings, portalHeads, terraces, recesses, levels: levelsV2, ends: new Map(balconies.filter((b) => b.ends).map((b) => [b.id, (b.ends as [EndCondition, EndCondition]).map((e) => ({ ...e, railStopAt: e.at, turns: false })) as [BalconyEnd, BalconyEnd]])), roofEaveY: mainRoof?.eaveY })
   step({ stage: 'facade', what: 'assembly closure: how the members meet', method: 'DISCRETE_SELECTION', detail: `${closureNotes.length} decisions; ${terraces.length} terrace${terraces.length === 1 ? '' : 's'}${terraces.some((t) => t.extension) ? ` (${terraces.filter((t) => t.extension).length} with a platform beyond the mouth)` : ''}; ${railings.filter((r) => (r.path?.length ?? 2) > 2).length} railing${railings.filter((r) => (r.path?.length ?? 2) > 2).length === 1 ? '' : 's'} turning; facade graph ${facadeGraph.nodes.length} nodes, ${facadeGraph.edges.length} edges`, inputs: balconies.length + railings.length + verges.length + portalHeads.length + returns.length, outputs: facadeGraph.edges.length })
