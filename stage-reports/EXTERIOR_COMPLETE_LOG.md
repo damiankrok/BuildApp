@@ -147,3 +147,32 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
 - Test of the cause: `storey-tones-exterior-complete.test.ts` (7 cases; the first fails on the old reader).
 - Sliverton (`wall-recovery-n7-fix01`) had been red since E1 (command index 21 → 22, the gate material) and was missed
   in E3 — it fails identically at `845b13a`; the expectation is updated with that reason.
+
+## E5 — a unit drawn beside its faded neighbour; a leaf with a strip
+
+- Private delivery for 1315 built outside Git: `BuildPlan-EXTERIOR-COMPLETE-Private-1315.zip`, 792 files, SHA-256
+  `e3754813cd7d959cea78f676f42e1d0dd6faff0a5874626de548d27bbf328cbe` (PO `program.json` regenerated at `845b13a` on the
+  f2 evidence: 19 houses, every model hash equal to the full run's).
+- **First wrong decision (Bratki):** the front and rear elevations draw both units of the pair — the unit in full
+  contrast, its mirror image washed out — so the silhouette spans 2 × the plan's width (794 px at the ridge scale ≈
+  14.8 m against 7.34 m), fits no span, and both views were refused: the front openings were built from the plan at
+  assumed heights, the rear balcony was never tried. Fix (`twin-elevation.ts`): when a silhouette fits no span, its two
+  halves' luma spread over the walls is compared; a half drawn with under half the other's spread is the neighbour, and
+  the unit's half is registered exactly as a silhouette (taken only when it fits). Two halves drawn alike are not split.
+  Bratki: front 71.6 / 28.2 → the left half, 0.0185 m/px; rear 28.2 / 74.6 → the right half (the mirror), 0.0186 m/px.
+- **Second (Bratki):** the unit's two front doors — a dark leaf with a narrow glazed strip and a long handle — read
+  UNCLEAR (spread along a row 45–51) and were built as floor-length windows. Fix (`opening-reading.ts`): a neutral face
+  whose median column changes by at most 8 (luma std) down its height is one opaque leaf. Measured on four houses: the
+  Bratki leaves 2.7 and 4.0; every other neutral face (windows, gates, glazing in shade) 16–29.
+- Effect (same f2 evidence): Bratki window + 2 doors on the front, rear balcony + railing (checker 1/5 → 4/5); Rary's
+  front 105/210 is a door again (as before E3; printed where the entrance is); the other 19 houses identical in doors,
+  windows, openings, balconies, railings and walls. Checker 32 → 35/70.
+- Checker correction (`check.py`, stated because it changes a count): a railing that turns is judged by its longest run
+  (along the facade), not by the chord between its two ends — a U round a balcony starts and ends at the wall, so its
+  chord lies inside the house. A first version (the outermost run by midpoint) moved Willa Maja's rear railing to a side
+  leg and was rejected. With the correction: PRZED 26/70 and f2 32/70 unchanged; E5 35 instead of 34 (Bratki's rear
+  railing).
+- Tests of the causes: `twin-elevation-exterior-complete.test.ts` (pair left/right, halves alike not split, a leaf with
+  a strip, neutral glass is not a leaf). Solver 2.24.0.
+- Not yet: Bratki's thin glass canopy over the doors; Miniaturka's "canopy" is a small gabled timber porch roof ~0.8 m over the door head — a
+  different element from a plate, not read.

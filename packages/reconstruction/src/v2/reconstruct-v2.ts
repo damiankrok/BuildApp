@@ -88,6 +88,7 @@ import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, clos
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
 import { readFinishRuns, readMassTones, readReturnTones } from './tones.js'
+import { readTwinHalf } from './twin-elevation.js'
 import { featureGraphViolations, sealFeatureGraph } from './graph.js'
 import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, ProvenanceStatus, SolvedFeature, SourceSighting, ViewFamily } from './graph.js'
 import { ledgerViolations, sealLedger } from './ledger.js'
@@ -186,7 +187,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.23.0' as const
+export const SOLVER_V2_VERSION = '2.24.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -783,6 +784,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM)
     options.debug?.(`elevation-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} ridge ${ridgeY} terrain ${terrain} -> ${reg ? `${reg.mpp} m/px ground ${reg.bottomY}` : 'none'}`)
+    // EXTERIOR-COMPLETE: a silhouette that fits no span may draw the unit beside its faded neighbour (`twin-elevation.ts`):
+    // the unit's half is registered as a silhouette would be, and taken only when it fits.
+    if (!reg) {
+      const twin = readTwinHalf(raster, r.extent)
+      const half = twin ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, twin.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
+      options.debug?.(`twin-elevation ${r.side} ${r.frameId}: ${twin ? `${twin.half} half ${twin.extent.x0}..${twin.extent.x1} (spreads ${twin.spreads.join('/')}) -> ${half ? `${half.mpp} m/px ground ${half.bottomY}` : 'none'}` : 'not a pair'}`)
+      if (twin && half) reg = { ...half, why: `${half.why}; ${twin.why}` }
+    }
     // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
     // overhang. The walls are then looked for as a repeated band of neutral pixels across the silhouette, scaled by the
     // walled width alone; the apex stays the ridge datum, and only a band whose ground then lands on the terrain within

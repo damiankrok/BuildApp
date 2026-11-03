@@ -2,7 +2,7 @@
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
 dostawie testowej 1315 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E4).
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E5).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -28,12 +28,14 @@ dostawie testowej 1315 i jest aktualizowany przy kolejnych dostawach. Dziennik p
 | Najwyższa rzędna odrzucona jako kalenica, gdy publikowana wysokość i rysunek przekroju mówią, że nad nią stoi dach | +5,50 (okap) brane za kalenicę | `roof-datum.ts`, `section-datums.ts` |
 | Pionowe etykiety: arkusz ma jeden kierunek tekstu (reguła vii, zależna od skali drugiej osi) | 740 bez kierunku | `metric-solution.ts` 1.5.0 |
 | E4: wykończenie ścian per kondygnacja (pasy pod okapem i spadkiem okapu, maski balkonu i niższej bryły) | ton parteru na całą bryłę | `tones.ts`, `emit.ts` |
+| E5: elewacja rysuje parę (segment w pełnym kontraście, sąsiad wyblakły) → rejestrowana połowa segmentu | elewacje frontu i tyłu odrzucone, otwory z rzutu | `twin-elevation.ts` |
+| E5: skrzydło drzwi z wąską szybą i klamką — kolumny bez zmian w dół = jedno skrzydło | drzwi wejściowe jako okna do podłogi | `opening-reading.ts` |
 | Wnęka wejściowa z pustym otworem: cały otwór testowany jako jedna wnęka (zwroty + ściana cofnięta) | ganek zabudowany jako pokój z oknem 4 m | `compound-facade.ts` 1.1.0 |
 | Komórki ganku (≤ 2 m głębokości) przed ścianą cofniętą należą do wnęki | ganek obcięty, drzwi zgubione | `plan-decomposition.ts` |
 | Otwory ściany cofniętej czytane na elewacji tej ściany | wysokości przyjęte | `reconstruct-v2.ts` |
 | Okna balkonowe za balustradą: zarys balkonu w rzucie + balustrada na elewacji | balkon nigdy nie próbowany | `projecting-balcony.ts` |
 
-Wersje: usługa 1.8.0, solver 2.23.0 (E4; dostawa 1315 ma 2.22.0), czytnik metryczny 1.6.0.
+Wersje: usługa 1.8.0, solver 2.24.0 (E5; dostawa 1315 ma 2.22.0), czytnik metryczny 1.6.0.
 
 ## 3. Wynik na zamrożonej ocenie
 
@@ -46,6 +48,7 @@ lukarna, zadaszenie, słupki, skrzydło, okna dachowe, kominy); odbiór wymaga c
 | SHAPE-LIVE-01 (finał, ta sama sprawdzarka) | 26/70 |
 | E3, pełna ścieżka produkcyjna, commit `845b13a` (dostawa 1315) | **32/70**, 2/13 bez modelu |
 | E4 (wykończenie per kondygnacja, ten sam dowód) | 32/70 (sprawdzarka nie ocenia wykończeń) |
+| E5 (para bliźniacza, skrzydło z listwą; korekta balustrady w sprawdzarce) | **35/70** (PRZED 26 i f2 32 bez zmian po korekcie) |
 
 Per dom przy `845b13a`: Miniaturka 5/6 (zadaszenie), Pod Miłorzębem 0/6 (brak modelu), Arlety 4/5 (okna dachowe),
 Aurory 1/5, Azalie 3/5, Bratki 1/5, Dalie 2/7, Jabłonki 5/7, Kostrzewy 1/4, Lipienniki 3/4 (kominy), Modrzewnica 0/6
@@ -55,7 +58,7 @@ Aurory 1/5, Azalie 3/5, Bratki 1/5, Dalie 2/7, Jabłonki 5/7, Kostrzewy 1/4, Lip
 - Pod Miłorzębem i Modrzewnica — brak modelu (skala rzutu nierozstrzygnięta / brak ramy wymiarowej);
 - Muraje — głębokość 6,63 m zamiast 7,40 (740 odrzucone przy założonej izotropii), drzwi i brama w narożnym wcięciu pod
   piętrem nieczytane;
-- Bratki — elewacja frontu/tyłu pokazuje parę bliźniaczą (2 × szerokość rzutu): niezarejestrowana, drzwi wejściowe brak;
+- Bratki — para bliźniacza zarejestrowana (E5), drzwi i balkon są; zostaje cienkie szklane zadaszenie nad drzwiami;
 - zadaszenia wejść (Azalie, Bratki, Dalie, Miniaturka, Modrzewnica) — brak czytnika;
 - okna dachowe (Arlety, Aurory, Azalie, Dalie) — pierścienie nieodczytane lub błędnie odczytane (bramka OCR);
 - Aurory — kierunek kalenicy (wznios pasuje do obu rozpiętości, gdy rzędna okapu jest na krawędzi okapu);
@@ -67,7 +70,7 @@ Aurory 1/5, Azalie 3/5, Bratki 1/5, Dalie 2/7, Jabłonki 5/7, Kostrzewy 1/4, Lip
 
 Nowe testy przyczyn: `exterior-complete-openings`, `occluded-line-exterior-complete`, `section-top-datum-shape-live-01`
 (niska połać i publikowana wysokość), `metric-solution` (kierunek arkusza), `recessed-entrance-exterior-complete`,
-`balcony-behind-balustrade-exterior-complete`, `storey-tones-exterior-complete` (E4). Wyniki pełnego zestawu: §5.
+`balcony-behind-balustrade-exterior-complete`, `storey-tones-exterior-complete` (E4), `twin-elevation-exterior-complete` (E5). Wyniki pełnego zestawu: §5.
 
 ## 5. Regresja, APK, prywatna dostawa
 
@@ -104,9 +107,11 @@ poprawiony w E4 z tym uzasadnieniem. Typecheck zielony. Testy jednostkowe Androi
   koniec 314 s, 129 zdarzeń, 32 arkusze, 121 kopii zweryfikowanych po SHA-256, 0 niezgodnych, kopie usunięte; hash
   modelu `db38772602a0828a` = bieg desktopowy; szczyt RSS 888 MB (host).
 - **Interfejs Androida: NOT_VERIFIED** (brak urządzenia). Czasy telefonu niezmierzone.
-- E4 nie ma jeszcze APK: następna dostawa zbierze E4 i kolejne poprawki.
+- E4–E5 nie mają jeszcze APK: następna dostawa je zbierze.
 
-**Prywatna dostawa** (poza Git i publicznym CI): ZIP z oryginałami i hashami, listami elementów, odbiorem per dom,
-modelami PRZED/PO, renderami wszystkich stron i tablicami, manifestem; budowany skryptem poza repozytorium.
+**Prywatna dostawa 1315** (poza Git i publicznym CI): `BuildPlan-EXTERIOR-COMPLETE-Private-1315.zip`, 792 pliki,
+SHA-256 `e3754813cd7d959cea78f676f42e1d0dd6faff0a5874626de548d27bbf328cbe` — oryginały z hashami, listy elementów,
+odbiór per dom (PRZED/PO), modele i `program.json` PRZED/PO, rendery wszystkich stron i tablice, manifest, dowody
+próby na żywo i ograniczenia.
 
 **Holdout H2**: zapieczętowany, nieotwarty — rozwiązanie jeszcze nie jest stabilne.

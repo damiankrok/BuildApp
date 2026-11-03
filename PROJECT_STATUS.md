@@ -3104,13 +3104,13 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 ### Cały dom z zewnątrz (STAGE BUILDPLAN EXTERIOR-COMPLETE)
 
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
-- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E4);
+- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E5);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
 - **Ostatnia dostawa testowa: APK 1315** (`0.1315.0-owner`, commit `845b13a`, SHA-256 `1e2a93c7…9745`, ten sam
   podpis; analizator `6b6b671b…ec0e`, usługa 1.8.0, solver 2.22.0).
 - **Wynik:** sprawdzarka 25/70 (E0) → 32/70 na pełnej ścieżce produkcyjnej; Pod Miłorzębem i Modrzewnica nadal bez
   modelu. Regresja 8: bez cofnięć po obejrzeniu tablic; a01 dało przyczynę E4.
-- **E4 (po 1315, bez APK):** wykończenie ścian czytane per kondygnacja (solver 2.23.0).
+- **E4–E5 (po 1315, bez APK):** wykończenie ścian per kondygnacja; elewacja pary bliźniaczej rejestrowana na
+  segmencie; skrzydło drzwi z listwą szkła (solver 2.24.0). Sprawdzarka 35/70 na tym samym dowodzie.
 - **Interfejs Androida: NOT_VERIFIED** (brak urządzenia); czasy tylko z hosta.
-- **Otwarte:** zadaszenia wejść, okna dachowe, kominy, lukarny, skrzydła, oś kalenicy Aurory, elewacja bliźniacza
-  Bratków, głębokość i wcięcie Muraj, drzwi w ganku Kostrzew, skala rzutu Miłorzębu i Modrzewnicy.
+- **Otwarte:** zadaszenia wejść, okna dachowe, kominy, lukarny, skrzydła, oś kalenicy Aurory, głębokość i wcięcie Muraj, drzwi w ganku Kostrzew, skala rzutu Miłorzębu i Modrzewnicy.

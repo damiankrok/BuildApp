@@ -288,7 +288,7 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   // opaque panel, or timber — and not glass is a door, whatever lines the plan draws across its gap (a threshold, a
   // leaf's sidelight): a French window shows sky and trees in its panes, a door does not.
   if (reachesFloor && f.storeyIndex === 0 && doorSized && f.widthM >= 0.75 && (f.face?.kind === 'OPAQUE_PANEL' || f.face?.kind === 'CLAD')) {
-    return { family: 'DOOR', provenance: 'VISUAL_SEMANTIC', notes: [`a door by its face on the elevation: ${f.face.kind === 'CLAD' ? `a clad leaf (saturation ${f.face.meanSaturation})` : `one opaque leaf (${(f.face.neutralShare * 100).toFixed(0)} % neutral, ${f.face.alongRowStd} spread along a row)`}, not glass`] }
+    return { family: 'DOOR', provenance: 'VISUAL_SEMANTIC', notes: [`a door by its face on the elevation: ${f.face.kind === 'CLAD' ? `a clad leaf (saturation ${f.face.meanSaturation})` : `one opaque leaf (${(f.face.neutralShare * 100).toFixed(0)} % neutral, ${f.face.alongRowStd} spread along a row${f.face.downColumnStd !== undefined ? `, ${f.face.downColumnStd} down a column` : ''})`}, not glass`] }
   }
   // N8-03B: on the ground storey, an opening to the floor wider than one door with a leaf drawn in it shorter than the
   // gap — a leaf beside a fixed light, or two leaves meeting — is a door that opens: a terrace door, not a screen of
@@ -328,7 +328,7 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
  * drawings mirrors sky and trees, so along a row it is anything but flat and a good part of it is coloured; timber is
  * coloured throughout. Measured inside the opening with a margin off the frame.
  */
-export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number; toneChangesPerRow: number }
+export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number; toneChangesPerRow: number; downColumnStd?: number }
 /** Thresholds, from the pixels of drawn gates against drawn glass (EXTERIOR-COMPLETE §gate): gates 0.98 / 1.8 / 8, glass 0.51–0.58 / 13–26 / 19–26, timber 0.03 / 18 / 55. */
 export const OPAQUE_PANEL_MIN_NEUTRAL = 0.85
 export const OPAQUE_PANEL_MAX_ROW_STD = 6
@@ -340,6 +340,13 @@ export const OPAQUE_PANEL_MAX_ROW_STD = 6
  */
 export const PANEL_ROW_TONE_LUMA = 24
 export const PANEL_MAX_TONE_CHANGES_PER_ROW = 0.12
+/**
+ * EXTERIOR-COMPLETE: a leaf with a strip. A door drawn with a narrow glazed strip, a long handle or its frame has a
+ * large spread along each row, but every column reads the same down the whole leaf; glass mirrors what stands before it
+ * and changes down every column. A neutral face whose median column changes by at most this much (luma std) down its
+ * height is one opaque leaf.
+ */
+export const PANEL_MAX_DOWN_COLUMN_STD = 8
 export const CLAD_MIN_SATURATION = 40
 /** Timber's mean red-over-blue (measured on a published front elevation: timber +54, its glass −20 and −14). */
 export const CLAD_MIN_WARMTH = 30
@@ -379,6 +386,24 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
     rowStds.push(Math.sqrt(Math.max(0, sq / k - (sum / k) ** 2)))
     rowMeans.push(sum / k)
   }
+  // EXTERIOR-COMPLETE: how much each column's tone changes down the face — a leaf's strip, handle and frame run down it
+  // unchanged; glass mirrors what stands before it and changes down every column
+  const colStds: number[] = []
+  for (let x = x0; x <= x1; x += 1) {
+    let sum = 0
+    let sq = 0
+    let k = 0
+    for (let y = y0; y <= y1; y += 1) {
+      const o = (y * raster.width + x) * 4
+      const l = 0.299 * raster.data[o] + 0.587 * raster.data[o + 1] + 0.114 * raster.data[o + 2]
+      sum += l
+      sq += l * l
+      k += 1
+    }
+    colStds.push(Math.sqrt(Math.max(0, sq / k - (sum / k) ** 2)))
+  }
+  colStds.sort((a, b) => a - b)
+  const downColumnStd = colStds[Math.floor(colStds.length / 2)]
   rowStds.sort((a, b) => a - b)
   const medianTone = [...rowMeans].sort((a, b) => a - b)[Math.floor(rowMeans.length / 2)]
   // a panel's tone changes at its grooves, its lintel's shadow and its frame — a few times over its height; a blind's
@@ -392,6 +417,6 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
   const meanSaturation = satSum / n
   // timber is warm (red well above blue); glass mirroring sky is cool however saturated
   const warm = warmSum / n >= CLAD_MIN_WARMTH
-  const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD && toneChangesPerRow <= PANEL_MAX_TONE_CHANGES_PER_ROW ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
-  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000 }
+  const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && (alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD || downColumnStd <= PANEL_MAX_DOWN_COLUMN_STD) && toneChangesPerRow <= PANEL_MAX_TONE_CHANGES_PER_ROW ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
+  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000, downColumnStd: Math.round(downColumnStd * 10) / 10 }
 }

@@ -75,7 +75,13 @@ def check(run):
     has['entrance'] = [d['side'] for d in doors if 0.8 <= d['w'] <= 2.1 and not d['gate'] and d['side'] != 'inner']
     has['frontWindow'] = any(w['side'] == 'front' for w in wins)
     has['balcony'] = [box_side(b['footprint'], bb) for b in m['balconies']]
-    has['railing'] = [side_of(r['start']['x'], r['start']['z'], r['end']['x'], r['end']['z'], (bb[0] - 3, bb[1] - 3, bb[2] + 3, bb[3] + 3), tol=4) for r in m['railings']]
+    # EC-E5 checker correction: a railing that turns is judged by its longest run (its path: the run along the facade),
+    # not by the chord between its two ends — a U round a balcony starts and ends at the wall, and its chord lies inside
+    def rail_side(r):
+        pts = r.get('path') or [r['start'], r['end']]
+        segs = sorted(zip(pts, pts[1:]), key=lambda q: -((q[0]['x'] - q[1]['x']) ** 2 + (q[0]['z'] - q[1]['z']) ** 2))
+        return side_of(segs[0][0]['x'], segs[0][0]['z'], segs[0][1]['x'], segs[0][1]['z'], (bb[0] - 3, bb[1] - 3, bb[2] + 3, bb[3] + 3), tol=4)
+    has['railing'] = [rail_side(r) for r in m['railings']]
     has['dormer'] = asm.count('DORMER') + sum(1 for r in m['roofs'] if 'dormer' in r['id'])
     has['canopy'] = [a for a in asm if a in ('CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE')] + [max(set(v), key=v.count) for v in pergolas.values()]
     has['posts'] = [lside(l) for l in posts]
