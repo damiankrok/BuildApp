@@ -1,0 +1,172 @@
+{
+ "note": "LINK-F1C: the Jarzmianki attic-door phase probes of LINK-F1B (49 frame phases, the current reader), each reading converted back to the sheet pixel of its hinge with that phase's own frame. A reading whose hinge pixel and radius stay put across phases names the same drawn ink. The full-width reading (doorSwingInGap returns hinge = the gap's low jamb and radius = the gap when swingDrawn finds a leaf as long as the gap) is a placeholder hinge, not a second symbol. The door the solver emits takes its from/to/at/host from the gap only (interior.ts: doors.push from gap[0]/gap[1]); hinge and radius reach only its evidence text.",
+ "doors": {
+  "jarzmianki-door-1-1": {
+   "gapM": [
+    3.736856,
+    4.630452
+   ],
+   "readings": [
+    {
+     "kind": "SHORT_LEAF",
+     "hingePx": 508,
+     "radiusPx": 40,
+     "phases": 48,
+     "at": "rest"
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 549,
+     "radiusPx": 44,
+     "phases": 1,
+     "at": [
+      [
+       -2,
+       -2
+      ]
+     ]
+    }
+   ]
+  },
+  "jarzmianki-door-1-2": {
+   "gapM": [
+    6.863762,
+    7.78992
+   ],
+   "readings": [
+    {
+     "kind": "SHORT_LEAF",
+     "hingePx": 517,
+     "radiusPx": 44,
+     "phases": 28,
+     "at": "rest"
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 517,
+     "radiusPx": 46,
+     "phases": 10,
+     "at": "rest"
+    },
+    {
+     "kind": "SHORT_LEAF",
+     "hingePx": 518,
+     "radiusPx": 44,
+     "phases": 6,
+     "at": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       0.5
+      ],
+      [
+       2,
+       -0.5
+      ],
+      [
+       2,
+       -1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       -2
+      ]
+     ]
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 516,
+     "radiusPx": 46,
+     "phases": 3,
+     "at": [
+      [
+       -2,
+       -0.5
+      ],
+      [
+       -2,
+       -1
+      ],
+      [
+       -2,
+       -2
+      ]
+     ]
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 519,
+     "radiusPx": 46,
+     "phases": 1,
+     "at": [
+      [
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 520,
+     "radiusPx": 46,
+     "phases": 1,
+     "at": [
+      [
+       2,
+       1
+      ]
+     ]
+    }
+   ]
+  },
+  "jarzmianki-door-1-3": {
+   "gapM": [
+    4.767313,
+    5.66054
+   ],
+   "readings": [
+    {
+     "kind": "SHORT_LEAF",
+     "hingePx": 419,
+     "radiusPx": 39,
+     "phases": 49,
+     "at": "rest"
+    }
+   ]
+  },
+  "jarzmianki-door-1-5": {
+   "gapM": [
+    3.639312,
+    4.600244
+   ],
+   "readings": [
+    {
+     "kind": "SHORT_LEAF",
+     "hingePx": 401,
+     "radiusPx": 42,
+     "phases": 48,
+     "at": "rest"
+    },
+    {
+     "kind": "FULL_WIDTH_PLACEHOLDER",
+     "hingePx": 361,
+     "radiusPx": 47,
+     "phases": 1,
+     "at": [
+      [
+       2,
+       2
+      ]
+     ]
+    }
+   ]
+  }
+ }
+}

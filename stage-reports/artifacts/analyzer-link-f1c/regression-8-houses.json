@@ -1,0 +1,1361 @@
+{
+ "runs": {
+  "F1": "514f96a production runAnalysis",
+  "F1B": "d9bc4ef production runAnalysis",
+  "F1C": "this stage (solver v2 2.20.0) production runAnalysis"
+ },
+ "inputs": "the same sealed DEV packages and byte cache for all three; Rarytasy is DEV m84f2903cb8e14, not a holdout",
+ "houses": [
+  {
+   "key": "a01",
+   "name": "Jarzmianki",
+   "F1": {
+    "modelHash": "7c0d735543576a0a0dc10f8ca2dd0cd16685f8f31b73367584b91d38f66001ae",
+    "sceneContentHash": "1ee6453c3e99307625bf789df38804e4c0a4686144c6e3967f870aa29b1dd51c",
+    "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 27,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    "rooms": 11,
+    "chimneys": 3,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      1,
+      35
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 5 unchecked; 17 source item(s) not compared; elevations: 0 full, 4 along only, 0 vertical only, 0 unregistered; elevation comparisons: 21 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 5,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 13,
+     "partial": 4,
+     "total": 17
+    }
+   },
+   "F1B": {
+    "modelHash": "94605d809c6d1076df6eb73c63ea99821ce9826fa138041c1bfeee75061106b7",
+    "sceneContentHash": "dbd77824ad82051740467c6b09e163a766ebc341a7d632e82c9d67c6edd68d9b",
+    "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 27,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    "rooms": 11,
+    "chimneys": 3,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 112 count",
+     "WARNING NON_MANIFOLD roof-main 45 count"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      1,
+      37
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 5 unchecked; 17 source item(s) not compared; elevations: 0 full, 4 along only, 0 vertical only, 0 unregistered; elevation comparisons: 21 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 5,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 13,
+     "partial": 4,
+     "total": 17
+    }
+   },
+   "F1C": {
+    "modelHash": "94605d809c6d1076df6eb73c63ea99821ce9826fa138041c1bfeee75061106b7",
+    "sceneContentHash": "9dfd0a2575c452709e36d1447dce35eb2614e76defc228478616c3b7d34c4bcd",
+    "sourcePackageHash": "019e70a1dcd30bf289f9fcd01071686fd87d519e9e98c46990e928365808ec3f",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 27,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 13
+    },
+    "rooms": 11,
+    "chimneys": 3,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      1,
+      35
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 5 unchecked; 17 source item(s) not compared; elevations: 0 full, 4 along only, 0 vertical only, 0 unregistered; elevation comparisons: 21 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 5,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 13,
+     "partial": 4,
+     "total": 17
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  },
+  {
+   "key": "gozd",
+   "name": "Goździkowce 3",
+   "F1": {
+    "modelHash": "058d8348e3710a6a59cf2f372b58a3e4fba3616e83362c6cdaf40b0798f32412",
+    "sceneContentHash": "8ba92de2f4e251cd312c9752306207f9a6688a326978a7189537973cc999865a",
+    "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 39,
+    "openings": {
+     "DOOR": 19,
+     "WINDOW": 12,
+     "PASSAGE": 1
+    },
+    "rooms": 13,
+    "chimneys": 1,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      72
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 8 unchecked; 27 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 15,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 24,
+     "partial": 3,
+     "total": 27
+    }
+   },
+   "F1B": {
+    "modelHash": "4101d72838dcf58f2a03e6bbfa15cc65066b04e0f573448dedeff044eacd3bcf",
+    "sceneContentHash": "9ea1dececc4e528e449286c19280ef3895833da234d1db4003fb1c1b702ce176",
+    "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 31,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 12,
+     "PASSAGE": 1
+    },
+    "rooms": 13,
+    "chimneys": 1,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      38
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 8 unchecked; 27 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 15,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 24,
+     "partial": 3,
+     "total": 27
+    }
+   },
+   "F1C": {
+    "modelHash": "b1aa6c0f6147c41f40da4b2f007cc4f25a8bc36f223f2eae578d2fbb412bf768",
+    "sceneContentHash": "c7957940289f87cbfc58a3c10e6afb3850e03e854453998b578e652f1cef8ad1",
+    "sourcePackageHash": "37be1543b0a9ae16b522ab864efd83f09653641c58bb308713c434d42541ad12",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 31,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 12,
+     "PASSAGE": 1
+    },
+    "rooms": 13,
+    "chimneys": 1,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      38
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 8 unchecked; 27 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 15,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 24,
+     "partial": 3,
+     "total": 27
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  },
+  {
+   "key": "marcowki",
+   "name": "Marcówki GE",
+   "F1": {
+    "modelHash": "e14fcc39445960c32827eb05d6e3a27c96c86bc426162445f9aa9408e7ecb151",
+    "sceneContentHash": "d1ab2a06b944a33169c1eba337fa02815281124bc8aadbbac2e6f6ef7bb70990",
+    "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 41,
+    "openings": {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    "rooms": 12,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0446 m",
+     "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0372 m2",
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0 0.0215 m",
+     "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0157 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      4,
+      43
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "4 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 7 pass, 3 unchecked; 14 source item(s) not compared; elevations: 4 full, 0 along only, 0 vertical only, 0 unregistered; elevation comparisons: 53 potential, 62 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 4,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 8,
+     "partial": 6,
+     "total": 14
+    }
+   },
+   "F1B": {
+    "modelHash": "28877080d79f589d9dd39dea9accbd01dfb49a4a2543322808097e0232df247c",
+    "sceneContentHash": "173356aea67516d743e96ea1263bde704bac5034d276d2cd80877f4a0ce6830c",
+    "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 39,
+    "openings": {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    "rooms": 12,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0451 m2",
+     "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0191 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      2,
+      35
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 7 pass, 3 unchecked; 14 source item(s) not compared; elevations: 4 full, 0 along only, 0 vertical only, 0 unregistered; elevation comparisons: 53 potential, 62 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 4,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 8,
+     "partial": 6,
+     "total": 14
+    }
+   },
+   "F1C": {
+    "modelHash": "28877080d79f589d9dd39dea9accbd01dfb49a4a2543322808097e0232df247c",
+    "sceneContentHash": "173356aea67516d743e96ea1263bde704bac5034d276d2cd80877f4a0ce6830c",
+    "sourcePackageHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 39,
+    "openings": {
+     "DOOR": 13,
+     "WINDOW": 8
+    },
+    "rooms": 12,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0451 m2",
+     "ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0191 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      2,
+      35
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 7 pass, 3 unchecked; 14 source item(s) not compared; elevations: 4 full, 0 along only, 0 vertical only, 0 unregistered; elevation comparisons: 53 potential, 62 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 4,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 8,
+     "partial": 6,
+     "total": 14
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  },
+  {
+   "key": "ciesz",
+   "name": "Cieszynianki 12 GE",
+   "F1": {
+    "modelHash": "d29bb7ea590837a0efbd558ce5c18d707e0f856cf62496977b374dcd7afa7a80",
+    "sceneContentHash": "0f6e3b43b59fb8ea395b63b13dfec0bc6d2a6cdb3a199cda2bf0c79743f81787",
+    "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 25,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11,
+     "PASSAGE": 3
+    },
+    "rooms": 8,
+    "chimneys": 2,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      25
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 3 pass, 5 unchecked; 27 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 29 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 18,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 23,
+     "partial": 4,
+     "total": 27
+    }
+   },
+   "F1B": {
+    "modelHash": "851d7b0362e5d3fd05dd056396c3849f3c185d033e6a7fc274d3365cf62fb818",
+    "sceneContentHash": "a78aeb1fe83310ef9f5d74b60148f589f651a99534230b827cf9f001f0da51b5",
+    "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 25,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11,
+     "PASSAGE": 3
+    },
+    "rooms": 8,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE pocket-main-0-1-back + pocket-main-0-2-back 0.5793 m2",
+     "WARNING SLIVER_TRIANGLES pocket-main-0-1-back 16 count"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      1,
+      27
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 3 pass, 5 unchecked; 27 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 29 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 18,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 23,
+     "partial": 4,
+     "total": 27
+    }
+   },
+   "F1C": {
+    "modelHash": "c50995131c1f17511218cff0a749024ff8d61c887734a75f42ca71642d88366a",
+    "sceneContentHash": "fca0a9d7ccd41967f45ef3ad4dbba83f055be1492586554bdd2b0b082032e171",
+    "sourcePackageHash": "63034b633b353f90f9a7f6dad38f47f993ffba78500f4b803c267a26e22c2324",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 25,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11,
+     "PASSAGE": 3
+    },
+    "rooms": 8,
+    "chimneys": 2,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      26
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 3 pass, 5 unchecked; 27 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 29 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 18,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 23,
+     "partial": 4,
+     "total": 27
+    }
+   },
+   "openingChangesF1BtoF1C": [
+    {
+     "id": "pocket-main-0-1-opening-0-rear-5-0",
+     "F1B": {
+      "kind": "WINDOW",
+      "wallId": "pocket-main-0-1-back",
+      "offset": 0.0001,
+      "width": 2.121
+     },
+     "F1C": {
+      "kind": "WINDOW",
+      "wallId": "pocket-main-0-1-back",
+      "offset": 0.05,
+      "width": 2.0342
+     }
+    }
+   ]
+  },
+  {
+   "key": "rary",
+   "name": "Rarytasy 5 G2E (DEV m84f2903cb8e14)",
+   "F1": {
+    "modelHash": "4e323c07b9a3ea782d41e392aa3bc30be38c96599561c072a20ddff9e4a57805",
+    "sceneContentHash": "5204b9f1d8d303bbda54019b71a36f6c978d55eca5d9459311199caf4a9c5403",
+    "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 21,
+    "openings": {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    "rooms": 9,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3",
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      1
+     ],
+     "CLOSURE": [
+      2,
+      23
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE; source fidelity CONFLICT: 2 conflict(s), 3 pass, 2 unchecked; 32 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 42 potential, 15 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974471 m): the registered view and the model disagree",
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 7 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+    ],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 25,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 21,
+     "partial": 11,
+     "total": 32
+    }
+   },
+   "F1B": {
+    "modelHash": "2ebdffe9b9453128834040484e415348ff608e92f2ed99e171077bd9230b8216",
+    "sceneContentHash": "76ed364907e63818820a45e148993e9e1ce69d7c5d4eaf34cb58ce79688a935c",
+    "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 21,
+    "openings": {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    "rooms": 9,
+    "chimneys": 1,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3",
+     "ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3",
+     "ERROR INTERSECTION ring-main-0-w0-party-attached-0 + roof-attached-0-plane-high 0.0028 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      3,
+      23
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "3 technical errors; reading completeness COMPLETE; source fidelity CONFLICT: 2 conflict(s), 3 pass, 2 unchecked; 32 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 42 potential, 15 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974504 m): the registered view and the model disagree",
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 7 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+    ],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 25,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 21,
+     "partial": 11,
+     "total": 32
+    }
+   },
+   "F1C": {
+    "modelHash": "74b92bcad1492da9b380a5b17446df2d97fe641010a4e7ff52a4cf76626513ff",
+    "sceneContentHash": "4f4236a30533abd5c1de2d42c0c25a3c1a46f0a935b124e5baa911a168d63cfd",
+    "sourcePackageHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 21,
+    "openings": {
+     "DOOR": 14,
+     "WINDOW": 6
+    },
+    "rooms": 9,
+    "chimneys": 1,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      23
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE; source fidelity CONFLICT: 2 conflict(s), 3 pass, 2 unchecked; 32 source item(s) not compared; elevations: 2 full, 2 along only, 0 vertical only, 0 unregistered; elevation comparisons: 42 potential, 15 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: FRONT elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-5de5935285: 6 of 8 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.974504 m): the registered view and the model disagree",
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elew-c383df2964: 7 of 7 observed checks on 2 features stand outside tolerance (worst OPENING_SILL -1.000492 m): the registered view and the model disagree"
+    ],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 2,
+      "PERSPECTIVE": 25,
+      "PLAN": 4,
+      "SECTION": 1
+     },
+     "none": 21,
+     "partial": 11,
+     "total": 32
+    }
+   },
+   "openingChangesF1BtoF1C": [
+    {
+     "id": "shared-party-0-front-0-0",
+     "F1B": {
+      "kind": "DOOR",
+      "wallId": "ring-main-0-w0-party-attached-0",
+      "offset": 5.0295,
+      "width": 1
+     },
+     "F1C": {
+      "kind": "DOOR",
+      "wallId": "ring-main-0-w0-party-attached-0",
+      "offset": 4.9866,
+      "width": 1
+     }
+    }
+   ]
+  },
+  {
+   "key": "trytomach",
+   "name": "Trytomy G",
+   "F1": {
+    "modelHash": "82a44fe82ffc14fccbd521b063b3e5b803aaa4b34f24a7d2e3808625e26d94d1",
+    "sceneContentHash": "17b3a74d37bfa1005a95ece14843905d37ba28f911c3e5ed536f3e236b2275e5",
+    "sourcePackageHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 36,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    "rooms": 11,
+    "chimneys": 1,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3",
+     "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 76 count",
+     "WARNING NON_MANIFOLD roof-main 40 count"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      2,
+      39
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 12 unchecked; 20 source item(s) not compared; elevations: 0 full, 1 along only, 0 vertical only, 3 unregistered; elevation comparisons: 5 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 8,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 16,
+     "partial": 4,
+     "total": 20
+    }
+   },
+   "F1B": {
+    "modelHash": "4009d4eee6e9c85716d98c8b89424c28fade4115c728ac4cddcbcdac27466c73",
+    "sceneContentHash": "8929de065068cdd5e67aba2b8a19db139de240b61cedc2a217ac0592443afff7",
+    "sourcePackageHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 36,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    "rooms": 11,
+    "chimneys": 1,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3",
+     "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3",
+     "WARNING SLIVER_TRIANGLES roof-main 76 count",
+     "WARNING NON_MANIFOLD roof-main 21 count"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      2,
+      39
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 12 unchecked; 20 source item(s) not compared; elevations: 0 full, 1 along only, 0 vertical only, 3 unregistered; elevation comparisons: 5 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 8,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 16,
+     "partial": 4,
+     "total": 20
+    }
+   },
+   "F1C": {
+    "modelHash": "4009d4eee6e9c85716d98c8b89424c28fade4115c728ac4cddcbcdac27466c73",
+    "sceneContentHash": "f098651690c6978fa6ceb134a1f80b495356a71e921192b68f6a3eb16b4e591c",
+    "sourcePackageHash": "de2296125305456274a1e1b013c75055af8990722ba0f81a425388b2726804e2",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 36,
+    "openings": {
+     "DOOR": 10,
+     "WINDOW": 11
+    },
+    "rooms": 11,
+    "chimneys": 1,
+    "exteriorClosure": [
+     "ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3",
+     "ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      2,
+      37
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "2 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 12 unchecked; 20 source item(s) not compared; elevations: 0 full, 1 along only, 0 vertical only, 3 unregistered; elevation comparisons: 5 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 8,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 16,
+     "partial": 4,
+     "total": 20
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  },
+  {
+   "key": "arganiach",
+   "name": "Arganiach G2E",
+   "F1": {
+    "modelHash": "7b501aa5f768fbbe273be0d886eca6c852acd2380f79630a7c98e6b1c4d9ff2c",
+    "sceneContentHash": "b4562ebe3b8a52606548a736d6bd130a2e4f3565b4d36fb347a997a7f31b5e6a",
+    "sourcePackageHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 30,
+    "openings": {
+     "DOOR": 18,
+     "WINDOW": 8
+    },
+    "rooms": 15,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      3,
+      36
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 28 source item(s) not compared; elevations: 2 full, 0 along only, 0 vertical only, 2 unregistered; elevation comparisons: 28 potential, 8 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 16,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 19,
+     "partial": 9,
+     "total": 28
+    }
+   },
+   "F1B": {
+    "modelHash": "266ba3d87874068f0a75841c8b3174595e6efb3629f59dda3ee4f3a273bffb35",
+    "sceneContentHash": "eb37679c6e0d89a27f6a2f583d65b62a3136104460aac25756982720891415f7",
+    "sourcePackageHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 30,
+    "openings": {
+     "DOOR": 19,
+     "WINDOW": 7
+    },
+    "rooms": 15,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      3,
+      36
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity CONFLICT: 1 conflict(s), 5 pass, 3 unchecked; 27 source item(s) not compared; elevations: 2 full, 0 along only, 0 vertical only, 2 unregistered; elevation comparisons: 28 potential, 10 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d: 6 of 6 observed checks on 2 features stand outside tolerance (worst OPENING_HEAD 0.830306 m): the registered view and the model disagree"
+    ],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 3,
+      "PERSPECTIVE": 16,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 19,
+     "partial": 8,
+     "total": 27
+    }
+   },
+   "F1C": {
+    "modelHash": "266ba3d87874068f0a75841c8b3174595e6efb3629f59dda3ee4f3a273bffb35",
+    "sceneContentHash": "eb37679c6e0d89a27f6a2f583d65b62a3136104460aac25756982720891415f7",
+    "sourcePackageHash": "167a3f3c8407196304722accccdc2b89bffe0ed52d6dd66dfd9a0c88f2920a11",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 30,
+    "openings": {
+     "DOOR": 19,
+     "WINDOW": 7
+    },
+    "rooms": 15,
+    "chimneys": 2,
+    "exteriorClosure": [
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2",
+     "ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      3,
+      36
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity CONFLICT: 1 conflict(s), 5 pass, 3 unchecked; 27 source item(s) not compared; elevations: 2 full, 0 along only, 0 vertical only, 2 unregistered; elevation comparisons: 28 potential, 10 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [
+     "R5_REGISTERED_ELEVATIONS: REAR elevation frame-asset-gotowy-projekt-dom-w-arganiach-g2e-elewacj-134561073d: 6 of 6 observed checks on 2 features stand outside tolerance (worst OPENING_HEAD 0.830306 m): the registered view and the model disagree"
+    ],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 3,
+      "PERSPECTIVE": 16,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 19,
+     "partial": 8,
+     "total": 27
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  },
+  {
+   "key": "sasankach3",
+   "name": "Sasanki 3 G",
+   "F1": {
+    "modelHash": "3aa678d8a59f211ff63f4904594b880f2131a3c5d9a1193c8b79ff7f8541a36b",
+    "sceneContentHash": "eeab1d58940062b6fbbbf602f4d4f04228f8121e988813735d6dc38e57d193d3",
+    "sourcePackageHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 34,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    "rooms": 11,
+    "chimneys": 0,
+    "exteriorClosure": [
+     "ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0054 m",
+     "ERROR GAP ring-main-1-w1-party-attached-0 + slab-main-1 0.0054 m",
+     "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0042 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      3,
+      33
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "3 technical errors; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 6 unchecked; 22 source item(s) not compared; elevations: 0 full, 3 along only, 0 vertical only, 1 unregistered; elevation comparisons: 18 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 10,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 18,
+     "partial": 4,
+     "total": 22
+    }
+   },
+   "F1B": {
+    "modelHash": "98cf970ca89479e6b608ee32d0b9ecb6a2cef8c6b13e3d2ffbec42a3774fc81e",
+    "sceneContentHash": "1bee3834b2a782fbb1874eee990282ed0a1985a9f9c26caeab7badc8e3824b61",
+    "sourcePackageHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 33,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    "rooms": 11,
+    "chimneys": 0,
+    "exteriorClosure": [
+     "ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0041 m3"
+    ],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      1,
+      32
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "1 technical error; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 6 unchecked; 22 source item(s) not compared; elevations: 0 full, 3 along only, 0 vertical only, 1 unregistered; elevation comparisons: 18 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 10,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 18,
+     "partial": 4,
+     "total": 22
+    }
+   },
+   "F1C": {
+    "modelHash": "98cf970ca89479e6b608ee32d0b9ecb6a2cef8c6b13e3d2ffbec42a3774fc81e",
+    "sceneContentHash": "5e566828ea3508f827ba55602b63c3f175f69356845e53f88b486b273c0e03ee",
+    "sourcePackageHash": "cb2e8c3b20fd2aa720e3c65145b34f34896c4730dbc8d55e85b7f22fa873c14e",
+    "replay": "BYTE_IDENTICAL",
+    "refusals": 0,
+    "walls": 33,
+    "openings": {
+     "DOOR": 15,
+     "WINDOW": 8
+    },
+    "rooms": 11,
+    "chimneys": 0,
+    "exteriorClosure": [],
+    "technical": {
+     "PROGRAM_REFUSALS": [
+      0,
+      0
+     ],
+     "MODEL_VALIDATION": [
+      0,
+      0
+     ],
+     "COMPILER": [
+      0,
+      0
+     ],
+     "CLOSURE": [
+      0,
+      32
+     ],
+     "REPLAY": [
+      0,
+      0
+     ]
+    },
+    "summary": "technically valid; reading completeness COMPLETE_WITH_OPEN_QUESTIONS; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 6 unchecked; 22 source item(s) not compared; elevations: 0 full, 3 along only, 0 vertical only, 1 unregistered; elevation comparisons: 18 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case",
+    "sourceFidelityConflicts": [],
+    "sourceUnchecked": {
+     "byKind": {
+      "ELEVATION": 4,
+      "PERSPECTIVE": 10,
+      "PLAN": 7,
+      "SECTION": 1
+     },
+     "none": 18,
+     "partial": 4,
+     "total": 22
+    }
+   },
+   "openingChangesF1BtoF1C": []
+  }
+ ]
+}

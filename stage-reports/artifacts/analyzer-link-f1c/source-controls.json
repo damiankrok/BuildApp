@@ -1,0 +1,306 @@
+{
+ "note": "LINK-F1C source controls. Three outcomes are kept apart: ABSENT (the source shows the feature is not there), NOT_CONFIRMED (a check ran or a confirming source was looked for, and it did not confirm), NOT_CHECKED (no valid check ran). Nothing here was changed in the model to match an elevation or a render.",
+ "items": [
+  {
+   "house": "Rarytasy 5 G2E (DEV m84f2903cb8e14)",
+   "feature": "chimney-1 (F1) — the solid block over the shared wall",
+   "F1": [
+    {
+     "maxX": 10.576163,
+     "maxZ": 10.963181,
+     "minX": 10.024603,
+     "minZ": 10.328887
+    },
+    {
+     "maxX": 6.660087,
+     "maxZ": 7.047105,
+     "minX": 5.750013,
+     "minZ": 6.605857
+    }
+   ],
+   "F1B": [
+    {
+     "maxX": 10.560295,
+     "maxZ": 10.995502,
+     "minX": 10.007305,
+     "minZ": 10.369135
+    }
+   ],
+   "F1C": [
+    {
+     "maxX": 10.560295,
+     "maxZ": 10.995502,
+     "minX": 10.007305,
+     "minZ": 10.369135
+    }
+   ],
+   "classification": "NOT_CONFIRMED",
+   "evidence": [
+    "plan (frame …59a406b738): a solid grey block drawn on the shared wall, rows 445–459 px (z 6.75–7.14 m), the wall rows 460–469 px (z 6.47–6.75 m); the block is read (SOLID_BLOCK z 6.725–7.129) in F1B and F1C, in F1 it was read at z 6.606–7.047, partly inside the wall",
+    "readChimneys keeps a block only with a stack ≥ 0.4 m above the roof on a registered render, or on two storeys: the block is on one storey; over its projected width the LEFT render has long dark runs in 3 of 26 pixel columns and the RIGHT render in 3 of 27, the rest 2–4 px — a real stack (chimney-0) shows 36 px on nearly every column of both",
+    "F1 accepted it on the one column 2 px off its (misplaced) centre that met one of those narrow features"
+   ],
+   "decision": "not restored: the plan draws a block, no render shows a stack over it; the block is not a chimney the sources confirm, and it is not claimed absent either"
+  },
+  {
+   "house": "Arganiach G2E",
+   "feature": "opening-0-rear-2-1 (DOOR in F1, F1B, F1C)",
+   "planPixels": "columns 327–368 on the rear wall, the same in F1 and F1B/F1C (map exports)",
+   "modelOffset": {
+    "F1": 7.4805,
+    "F1B": 7.521306,
+    "F1C": 7.521306
+   },
+   "R5_REAR": {
+    "F1": {
+     "status": "UNCHECKED",
+     "code": "DISAGREEMENT_NOT_STABLE",
+     "checks": [
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0.359357,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.591428,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.594407,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.547735,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "silhouette-rear",
+       "kind": "SILHOUETTE_WIDTH",
+       "residualM": -0.122258,
+       "validity": "CIRCULAR",
+       "observed": true
+      }
+     ],
+     "coverage": {
+      "executed": 4,
+      "facadeOpenings": 3,
+      "facadeOpeningsChecked": 0,
+      "independent": 0,
+      "kindsObserved": "ROOF_EDGE",
+      "mpp": 0.017091
+     },
+     "measured": {
+      "vertical": "VALID",
+      "checks": 4,
+      "rawChecks": 5,
+      "rawObserved": 5,
+      "outsideTolerance": 4
+     }
+    },
+    "F1C": {
+     "status": "CONFLICT",
+     "code": "ELEVATION_DISAGREES",
+     "checks": [
+      {
+       "featureId": "opening-0-rear-2-1",
+       "kind": "OPENING_SILL",
+       "residualM": -0.72761,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "opening-0-rear-2-1",
+       "kind": "OPENING_HEAD",
+       "residualM": 0.830306,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0.359357,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.591428,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.594407,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": -0.547735,
+       "validity": "VALID",
+       "observed": true
+      },
+      {
+       "featureId": "silhouette-rear",
+       "kind": "SILHOUETTE_WIDTH",
+       "residualM": -0.122258,
+       "validity": "CIRCULAR",
+       "observed": true
+      }
+     ],
+     "coverage": {
+      "executed": 6,
+      "facadeOpenings": 3,
+      "facadeOpeningsChecked": 1,
+      "independent": 0,
+      "kindsObserved": "OPENING_HEAD, OPENING_SILL, ROOF_EDGE",
+      "mpp": 0.017091
+     },
+     "measured": {
+      "vertical": "VALID",
+      "checks": 6,
+      "rawChecks": 7,
+      "rawObserved": 7,
+      "outsideTolerance": 6
+     }
+    }
+   },
+   "classification": "NOT_CONFIRMED",
+   "evidence": [
+    "the same drawn gap maps to metres 4 cm further along through the one plan map (F1B) than through F1’s linear frame; the rear elevation is registered linearly between the wall ends, so the door’s interval now lands on a dark band read 0.73–1.35 m up the elevation (a window-like band) and R5 pairs them: sill −0.73 m, head +0.83 m, outside 0.16 m",
+    "in F1 the interval landed where the extent reader found no opening ≥ 0.5 m tall: no check, the item UNCHECKED"
+   ],
+   "decision": "not changed: the plan draws a door (leaf and arc are not read here, the kind comes from the plan gap); whether the elevation band is this door’s glazing or a window beside it is a registration question (elevations are not mapped through the plan’s chain map), named, not resolved by moving the model"
+  },
+  {
+   "house": "Rarytasy 5 G2E (DEV m84f2903cb8e14)",
+   "feature": "opening-0-east-5-0 (DOOR in F1, F1B, F1C, garage east wall)",
+   "planPixels": "rows 513–549 on the east wall in F1 and F1B/F1C (within 0.15 px)",
+   "modelOffset": {
+    "F1": 4.175,
+    "F1B": 4.288,
+    "F1C": 4.287949
+   },
+   "R5_RIGHT": {
+    "F1": {
+     "status": "UNCHECKED",
+     "code": "REGISTRATION_DISPUTED",
+     "checks": [
+      {
+       "featureId": "opening-0-east-5-0",
+       "kind": "OPENING_SILL",
+       "residualM": -0.713842,
+       "validity": "DISPUTED",
+       "observed": true
+      },
+      {
+       "featureId": "opening-0-east-5-0",
+       "kind": "OPENING_HEAD",
+       "residualM": 0.82711,
+       "validity": "DISPUTED",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0.015423,
+       "validity": "DISPUTED",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0,
+       "validity": "DISPUTED",
+       "observed": false
+      },
+      {
+       "featureId": "silhouette-right",
+       "kind": "SILHOUETTE_WIDTH",
+       "residualM": 0.077518,
+       "validity": "CIRCULAR",
+       "observed": true
+      }
+     ],
+     "coverage": {
+      "executed": 0,
+      "facadeOpenings": 3,
+      "facadeOpeningsChecked": 0,
+      "independent": 0,
+      "kindsObserved": "none",
+      "mpp": 0.015589
+     },
+     "measured": {
+      "vertical": "DISPUTED",
+      "checks": 0,
+      "rawChecks": 5,
+      "rawObserved": 4,
+      "outsideTolerance": 0
+     }
+    },
+    "F1C": {
+     "status": "UNCHECKED",
+     "code": "REGISTRATION_DISPUTED",
+     "checks": [
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0.015423,
+       "validity": "DISPUTED",
+       "observed": true
+      },
+      {
+       "featureId": "feat-roof-main",
+       "kind": "ROOF_EDGE",
+       "residualM": 0,
+       "validity": "DISPUTED",
+       "observed": false
+      },
+      {
+       "featureId": "silhouette-right",
+       "kind": "SILHOUETTE_WIDTH",
+       "residualM": 0.077518,
+       "validity": "CIRCULAR",
+       "observed": true
+      }
+     ],
+     "coverage": {
+      "executed": 0,
+      "facadeOpenings": 3,
+      "facadeOpeningsChecked": 0,
+      "independent": 0,
+      "kindsObserved": "none",
+      "mpp": 0.015589
+     },
+     "measured": {
+      "vertical": "DISPUTED",
+      "checks": 0,
+      "rawChecks": 3,
+      "rawObserved": 2,
+      "outsideTolerance": 0
+     }
+    }
+   },
+   "classification": "NOT_CHECKED",
+   "evidence": [
+    "the RIGHT elevation’s vertical registration is DISPUTED (SOLVER_REFUSED_LOW_HEIGHTS) in all three runs: no opening check on it counts, before or after",
+    "F1 recorded raw residuals for the door (sill −0.71, head +0.83, DISPUTED); since F1B the door’s metres are 0.11 m further along (the plan’s Y ladder is ~2 % compressed there) and the linearly registered elevation finds no opening ≥ 0.5 m tall over the new interval, so no raw residual is recorded"
+   ],
+   "decision": "the door stays as the plan draws it; the view is not evidence either way"
+  }
+ ]
+}

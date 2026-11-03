@@ -1,0 +1,37 @@
+LINK-F1C: exterior closure findings, F1 (514f96a) / F1B (d9bc4ef) / F1C, production runAnalysis, the same sealed inputs; geometryClosureAudit defaults (tolerances and severities unchanged). Marks: F1C column "+" new against F1B, "-" gone.
+Exterior ERROR total: F1 15, F1B 13, F1C 8.
+
+== a01 (Jarzmianki): ERROR F1 1 / F1B 1 / F1C 1
+   [F1 F1B F1C] ERROR INTERSECTION pergola-west-beam-1 + ring-main-0-w3 0.0269 m3
+   [   F1B    ] WARNING NON_MANIFOLD roof-main 45 count
+   [   F1B    ] WARNING SLIVER_TRIANGLES roof-main 112 count
+== gozd (Goździkowce 3): ERROR F1 0 / F1B 0 / F1C 0
+== marcowki (Marcówki GE): ERROR F1 4 / F1B 2 / F1C 2
+   [F1        ] ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0372 m2
+   [   F1B F1C] ERROR COPLANAR_DUPLICATE balcony-front-1 + roof-attached-0:fascia-min-z 0.0451 m2
+   [F1        ] ERROR GAP ring-main-0-w1-party-attached-0 + slab-attached-0-0 0.0215 m
+   [F1        ] ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0446 m
+   [F1        ] ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0157 m3
+   [   F1B F1C] ERROR INTERSECTION balcony-front-1 + roof-attached-0:fascia-min-z 0.0191 m3
+== ciesz (Cieszynianki 12 GE): ERROR F1 0 / F1B 1 / F1C 0
+   [   F1B    ] ERROR COPLANAR_DUPLICATE pocket-main-0-1-back + pocket-main-0-2-back 0.5793 m2
+   [   F1B    ] WARNING SLIVER_TRIANGLES pocket-main-0-1-back 16 count
+== rary (Rarytasy 5 G2E (DEV m84f2903cb8e14)): ERROR F1 2 / F1B 3 / F1C 0
+   [F1 F1B    ] ERROR INTERSECTION ring-main-0-w0-1 + roof-attached-0-plane-high 0.0047 m3
+   [F1 F1B    ] ERROR INTERSECTION ring-main-0-w0-1 + roof-main-plane-low 0.0038 m3
+   [   F1B    ] ERROR INTERSECTION ring-main-0-w0-party-attached-0 + roof-attached-0-plane-high 0.0028 m3
+== trytomach (Trytomy G): ERROR F1 2 / F1B 2 / F1C 2
+   [F1 F1B F1C] ERROR INTERSECTION pergola-rear-beam-0 + pergola-rear-post-3 0.0035 m3
+   [F1 F1B F1C] ERROR INTERSECTION pergola-rear-beam-2 + pergola-rear-post-1 0.0035 m3
+   [   F1B    ] WARNING NON_MANIFOLD roof-main 21 count
+   [F1        ] WARNING NON_MANIFOLD roof-main 40 count
+   [F1 F1B    ] WARNING SLIVER_TRIANGLES roof-main 76 count
+== arganiach (Arganiach G2E): ERROR F1 3 / F1B 3 / F1C 3
+   [F1 F1B F1C] ERROR COPLANAR_DUPLICATE ring-attached-0-0-w0 + roof-attached-0 1.4455 m2
+   [F1 F1B F1C] ERROR COPLANAR_DUPLICATE ring-attached-0-0-w1 + roof-attached-0 0.7409 m2
+   [F1 F1B F1C] ERROR COPLANAR_DUPLICATE ring-attached-0-0-w3 + roof-attached-0 0.7409 m2
+== sasankach3 (Sasanki 3 G): ERROR F1 3 / F1B 1 / F1C 0
+   [F1        ] ERROR GAP ring-main-0-w1-party-attached-0 + slab-main-1 0.0054 m
+   [F1        ] ERROR GAP ring-main-1-w1-party-attached-0 + slab-main-1 0.0054 m
+   [   F1B    ] ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0041 m3
+   [F1        ] ERROR INTERSECTION ring-main-1-w1-party-attached-0 + roof-main-plane-high-1 0.0042 m3

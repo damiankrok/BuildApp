@@ -3027,3 +3027,24 @@ a new R5 CONFLICT in Arganiach (rear-2-1 now paired with the elevation's window)
 analysis-service all green (wall-strip 005Q: versioned delta, the frozen record untouched); one new red app test
 (Android legacy-member: Larchfield's phantom `INTERIOR_WALL` family is gone — OWNER decision). F2 / N9-02S not started;
 APK NOT_RUN.
+
+## Spójny model po imporcie (STAGE BUILDPLAN LINK-F1C)
+
+Status: **PASS** (baza `d9bc4ef`; solver v2 2.19.0 → **2.20.0**; compiler rules changed, model 1.7.0 and analysis
+service unchanged). Report `stage-reports/STAGE_BUILDPLAN_LINK_F1C_COHERENT_IMPORT.md`, artefakty
+`stage-reports/artifacts/analyzer-link-f1c/`. FIRST_BAD: (1) a wall top that follows roof planes was ruled face to
+face and rose through a valley crossing its thickness (Rarytasy shared wall — F1B's new ERROR — plus two older
+Rarytasy and one Sasanki ERROR of the same mechanism); (2) the roof compiler kept cut lines 1 µm apart (two rooflights
+of one row) and cut a hairline band (Jarzmianki, Trytomy slivers / non-manifold); (3) on a wall between faces an
+opening drawn up to the abutting face was emitted 0.12 mm from the wall end, its reveal in the neighbour's face
+(Cieszynianki coplanar pocket walls). Fixes: lowest underside across the section over the valley band; cut lines
+within 0.1 mm welded; a stated 5 cm jamb at such a face (a printed width kept, the opening moved instead). Contract:
+`quality.byFamily`, `counts.assetsByDocument`, `sourceUnchecked.counts.byKind` checked as dictionaries (keys are data,
+member and value type required). 8 houses, one production pass: families, hosts, walls as F1B in 8/8; replay
+byte-identical, 0 refusals; exterior ERROR F1 15 → F1B 13 → F1C 8, none new (the F1B report's "17" for F1 was a
+miscount); Jarzmianki/Trytomy roof warnings 0. Jarzmianki phase alternatives: same drawn symbol, door position/width/
+host from the gap only. Limitations: elevations still registered linearly while the plan uses the chain map
+(Arganiach rear-2-1 NOT_CONFIRMED, Rarytasy east-5-0 NOT_CHECKED); Cieszynianki's printed 220/240 unmatched by the
+reader (window 2.034 m with jambs); Marcówki balcony ↔ fascia (2 ERROR since F1) explained, not fixed; Rarytasy
+chimney-1 NOT_CONFIRMED. Tests: geometry 117/117, reconstruction 1231/1231, analysis-service green; architecture 11
+and apps 6 failures all pre-existing. F2 / N9-02S not started; APK NOT_RUN.
