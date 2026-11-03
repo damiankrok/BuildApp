@@ -180,7 +180,11 @@ import type { ApproximateRidge } from './roof-datum.js'
 // raster's own pixel grid about the wall band the plan draws beside the gap, so the map's sub-pixel phase and local
 // scale no longer change a family; a party wall's contact allows the pixel uncertainty of the anchors pinning its line;
 // outer-wall ink beyond a modelled face is not read as a partition; slabs end on the face of the wall that carries them
-export const SOLVER_V2_VERSION = '2.19.0' as const
+// 2.20.0 (LINK-F1C): on a wall that runs between the faces of the walls it abuts, an opening the plan draws up to such
+// a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
+// its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
+// valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
+export const SOLVER_V2_VERSION = '2.20.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1

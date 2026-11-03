@@ -125,6 +125,13 @@ function surfaceBreaksAlong(s: PlaneSurface, p: Vec2, d: Vec2, L: number): numbe
   return out
 }
 
+/** LINK-F1C: how far either side of a crease inside a wall's section its underside is read (m). */
+const CREASE_PROBE_M = 1e-4
+/** LINK-F1C: how far past a wall's ends a plane edge's crossing of its face line is followed (m, beyond its thickness). */
+const CREASE_REACH_M = 1
+/** LINK-F1C: the sections sampled between the two faces' crossings of one plane edge. */
+const CREASE_SAMPLES = 4
+
 /**
  * The top of a wall that dies into roof planes (FOLLOW_ROOF_PLANES): its
  * nominal height where no plane covers it, else the lowest underside above
@@ -133,21 +140,54 @@ function surfaceBreaksAlong(s: PlaneSurface, p: Vec2, d: Vec2, L: number): numbe
  */
 export function wallTopUnderPlanes(wall: Wall, level: Level, surface: PlaneSurface, span: { a0: number; a1: number }): { top: TopFunction; breaks: number[]; diagnostics: CompileDiagnostic[] } {
   const f = wallFrame(wall, level)
+  const T = wall.thickness
+  // LINK-F1C: a plane edge crossing the wall's thickness at a slant (a valley, or a step between planes, running across
+  // the wall top) puts a crease inside the sections between where it crosses the two faces. The top is drawn through
+  // the two faces only; under a valley the crease is lower than both, and a top ruled from face to face rises through
+  // the plane. Over that band every section's top is its lowest underside — on the faces and on the crease — so the top
+  // there is flat across the wall and follows the crease along it, never above either plane.
+  const undersideAt = (p: Vec2): number | undefined => (surface.covers(p.x, p.z) ? surface.undersideAt(p.x, p.z) - f.baseY : undefined)
+  const faceCrossings = [0, T].map((c) => surfaceBreaksAlong(surface, wallPlanPoint(f, span.a0, c), { x: f.u.x, z: f.u.z }, span.a1 - span.a0).map((t) => t + span.a0))
+  const bands: Array<[number, number]> = []
+  for (const e of surface.edges) {
+    // where the edge crosses each face's line, past the wall's ends too: a crease may leave through an end face
+    const reach = CREASE_REACH_M + T
+    const cross = (c: number): number | undefined => {
+      const at = surfaceBreaksAlong({ ...surface, edges: [e] }, wallPlanPoint(f, span.a0 - reach, c), { x: f.u.x, z: f.u.z }, span.a1 - span.a0 + 2 * reach)
+      return at.length === 1 ? at[0] + span.a0 - reach : undefined
+    }
+    const u0 = cross(0)
+    const u1 = cross(T)
+    if (u0 === undefined || u1 === undefined || Math.abs(u1 - u0) <= 1e-6) continue
+    const lo = Math.max(span.a0, Math.min(u0, u1))
+    const hi = Math.min(span.a1, Math.max(u0, u1))
+    if (hi - lo > 1e-6) bands.push([lo, hi])
+  }
+  const sectionLow = (u: number): number | undefined => {
+    const a = wallPlanPoint(f, u, 0)
+    const b = wallPlanPoint(f, u, T)
+    const cs = [0, T, ...surfaceBreaksAlong(surface, a, { x: (b.x - a.x) / T, z: (b.z - a.z) / T }, T).flatMap((k) => [k - CREASE_PROBE_M, k + CREASE_PROBE_M])]
+    const heights = cs.map((c) => undersideAt(wallPlanPoint(f, u, Math.min(T, Math.max(0, c))))).filter((h): h is number => h !== undefined)
+    return heights.length > 0 ? Math.min(...heights) : undefined
+  }
   const top: TopFunction = (u, c) => {
-    const p = wallPlanPoint(f, u, c)
-    if (!surface.covers(p.x, p.z)) return wall.height
-    return Math.min(wall.height, surface.undersideAt(p.x, p.z) - f.baseY)
+    const own = undersideAt(wallPlanPoint(f, u, c))
+    if (own === undefined) return wall.height
+    const inBand = bands.some(([lo, hi]) => u >= lo - 1e-9 && u <= hi + 1e-9)
+    const low = inBand ? sectionLow(u) : undefined
+    return Math.min(wall.height, low === undefined ? own : Math.min(own, low))
   }
   const breaks: number[] = []
   let uncovered = false
-  for (const c of [0, wall.thickness]) {
-    const p = wallPlanPoint(f, span.a0, c)
-    breaks.push(...surfaceBreaksAlong(surface, p, { x: f.u.x, z: f.u.z }, span.a1 - span.a0).map((t) => t + span.a0))
+  for (const [i, c] of [0, T].entries()) {
+    breaks.push(...faceCrossings[i])
     for (const u of [span.a0, span.a1, ...breaks]) {
       const q = wallPlanPoint(f, u, c)
       if (!surface.covers(q.x, q.z)) uncovered = true
     }
   }
+  // the band's sections are sampled between its ends, so the top follows the crease along it
+  for (const [lo, hi] of bands) for (let k = 1; k < CREASE_SAMPLES; k += 1) breaks.push(lo + ((hi - lo) * k) / CREASE_SAMPLES)
   const sorted = [...new Set([span.a0, span.a1, ...breaks])].sort((a, b) => a - b)
   for (const c of [0, wall.thickness]) {
     const under = (u: number): number => {

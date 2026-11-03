@@ -170,10 +170,18 @@ export type RoofCompileOutput = {
 
 const EPS = 1e-9
 
+/**
+ * LINK-F1C: cut lines of one roof closer than this are one line (m). Two roof openings stating the same edge a
+ * micrometre apart (each computed on its own) would otherwise cut a band a micrometre wide across the slope: hairline
+ * triangles and edges the mesh cannot share. Each hole's edges are snapped to the welded line, so the cells and reveals
+ * still share every edge; nothing moves by more than this.
+ */
+export const ROOF_CUT_WELD_M = 1e-4
+
 function uniqueSorted(values: number[]): number[] {
   const all = [...values].sort((a, b) => a - b)
   const out: number[] = []
-  for (const x of all) if (out.length === 0 || x - out[out.length - 1] > EPS) out.push(x)
+  for (const x of all) if (out.length === 0 || x - out[out.length - 1] > ROOF_CUT_WELD_M) out.push(x)
   return out
 }
 
@@ -209,7 +217,7 @@ function tilePlate(
 ): void {
   const crossBreaks = uniqueSorted([p.cross0, p.cross1, ...p.holes.flatMap((h) => [h.c0, h.c1, h.c0 + h.shift, h.c1 + h.shift])])
   const ys = crossBreaks.map((c) => p.topY(c))
-  const snap = (v: number, list: number[]): number => list.find((x) => Math.abs(x - v) <= EPS) ?? v
+  const snap = (v: number, list: number[]): number => list.find((x) => Math.abs(x - v) <= ROOF_CUT_WELD_M) ?? v
   const alongBreaks = p.alongBreaks
   const holes = p.holes.map((h) => ({
     ...h,

@@ -153,6 +153,38 @@ export function calloutPair(evidence: MetricEvidence): { widthCm: number; height
   return null
 }
 
+/**
+ * LINK-F1C: the jamb an opening keeps where the plan draws its gap up to the face of a wall its own wall abuts (m).
+ * Assumed for rendering: the plan draws the other wall as the jamb, the model keeps a strip of the opening's own wall,
+ * a frame's narrowest reveal. One pixel at these sheets' scales (2–3 cm) is under it, so a gap read to the face within
+ * the map's pixel uncertainty is treated as reaching it.
+ */
+export const OPENING_END_JAMB_M = 0.05
+
+/**
+ * LINK-F1C: an opening's interval on a wall that runs between the faces of the walls it abuts (`endsAtFaces`), kept
+ * OPENING_END_JAMB_M off each face it reaches. A printed width (`keepWidth`) is kept: the opening is moved off the face
+ * instead, when the other end stays clear of its own jamb; otherwise, and for a width read off the plan, the edge at the
+ * face is taken in. Undefined when it reaches neither face: the interval is the source's.
+ */
+export function endJambs(interval: [number, number], span: [number, number], keepWidth = false): { interval: [number, number]; why: string } | undefined {
+  const minLo = span[0] + OPENING_END_JAMB_M
+  const maxHi = span[1] - OPENING_END_JAMB_M
+  const lowHit = interval[0] < minLo
+  const highHit = interval[1] > maxHi
+  if (!lowHit && !highHit) return undefined
+  const width = interval[1] - interval[0]
+  if (keepWidth && lowHit !== highHit && maxHi - minLo >= width) {
+    const shift = lowHit ? minLo - interval[0] : maxHi - interval[1]
+    return { interval: [round6(interval[0] + shift), round6(interval[1] + shift)], why: `its printed width reaches the face of the wall it abuts at its ${lowHit ? 'low' : 'high'} end; the model keeps a ${OPENING_END_JAMB_M.toFixed(2)} m jamb of its own wall there (assumed: an opening leaves wall on both sides) and moves the opening ${Math.abs(shift).toFixed(3)} m off the face, its printed width kept` }
+  }
+  const lo = lowHit ? round6(minLo) : interval[0]
+  const hi = highHit ? round6(maxHi) : interval[1]
+  if (hi - lo <= 0) return undefined
+  const ends = [lowHit ? 'low' : '', highHit ? 'high' : ''].filter(Boolean).join(' and ')
+  return { interval: [lo, hi], why: `the plan draws it up to the face of the wall it abuts at its ${ends} end${ends.includes(' and ') ? 's' : ''}; the model keeps a ${OPENING_END_JAMB_M.toFixed(2)} m jamb of its own wall there (assumed: an opening leaves wall on both sides), ${round6(width - (hi - lo)).toFixed(3)} m off the width read` }
+}
+
 /** Gaps in one wall of a body on one plan, with the stubs (mullions) drawn inside them. */
 export function planGaps(raster: Raster, plan: PlanFrameV2, host: WallHost, wallThicknessM: number, options: OpeningOptions = {}): Array<{ interval: [number, number]; stubs: Array<[number, number]>; pixelRect: PixelRect }> {
   const opt = { ...DEFAULTS, ...options }
@@ -506,11 +538,19 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     const weighed = matched.weighed
     let callout = matched.callout
     // The interval: the plan gap, its width corrected to the printed one about the gap's centre.
-    const widthM = callout ? round6(callout.widthCm / 100) : widthPlan
-    const interval: [number, number] = callout ? [round6(centre - widthM / 2), round6(centre + widthM / 2)] : [lo, hi]
+    const widthRead = callout ? round6(callout.widthCm / 100) : widthPlan
+    const intervalRead: [number, number] = callout ? [round6(centre - widthRead / 2), round6(centre + widthRead / 2)] : [lo, hi]
+    // LINK-F1C: on a wall that runs between the faces of the walls it abuts, a gap the plan draws up to such a face has
+    // that wall for its jamb — which the model cannot say (an opening leaves wall on both sides; only a joined open
+    // corner runs through an end). The opening keeps OPENING_END_JAMB_M of its own wall there, its source edge kept as
+    // read on the other side, rather than a sliver of wall under a millimetre whose reveal lies in the other wall's face.
+    const jambs = host.endsAtFaces ? endJambs(intervalRead, [host.from, host.to], !!callout) : undefined
+    const interval: [number, number] = jambs ? jambs.interval : intervalRead
+    const widthM = jambs ? round6(interval[1] - interval[0]) : widthRead
     const elevation = readOpeningOnViews(views, interval, solids, host, wallTop(interval), !!callout)
     // --- sill and head
-    const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? (callout.widthCorroboratedByPlan ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT') : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
+    const narrowed = !!jambs && Math.abs(jambs.interval[1] - jambs.interval[0] - widthRead) > 1e-6
+    const prov: OpeningV2['provenance'] = { interval: jambs ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED', width: narrowed ? 'ASSUMED_FOR_RENDERING' : callout ? (callout.widthCorroboratedByPlan ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT') : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
     const calloutConfidence = (): number | undefined => input.callouts.find((e) => e.id === callout?.evidenceId)?.confidence
     const read = resolveSillAndHead(host, { callout, elevation }, (h, drawn, candidates) => ({ weak: weakPrintedHeight(calloutConfidence(), h, drawn, candidates), confidence: calloutConfidence() ?? 0 }))
     let heightsAssumed = false
@@ -623,7 +663,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       uncertaintyM: callout ? 0.03 : 0.06,
       unresolved,
       confidence,
-      why: `a ${widthPlan.toFixed(2)} m gap in the ${host.facade.toLowerCase()} wall of ${host.massId} on storey ${host.storeyIndex}${callout ? `, printed ${callout.widthCm}/${callout.heightCm}` : ', no callout read'}${elevation ? `, ${(elevation.headY - elevation.sillY).toFixed(2)} m tall on the elevation` : ', not read on an elevation'}${profile === 'RAKED_SINGLE' ? `; on a gable end its head rakes from ${headY.toFixed(2)} to ${headFarY?.toFixed(2)}` : ''}`,
+      why: `a ${widthPlan.toFixed(2)} m gap in the ${host.facade.toLowerCase()} wall of ${host.massId} on storey ${host.storeyIndex}${callout ? `, printed ${callout.widthCm}/${callout.heightCm}` : ', no callout read'}${elevation ? `, ${(elevation.headY - elevation.sillY).toFixed(2)} m tall on the elevation` : ', not read on an elevation'}${profile === 'RAKED_SINGLE' ? `; on a gable end its head rakes from ${headY.toFixed(2)} to ${headFarY?.toFixed(2)}` : ''}${jambs ? `; ${jambs.why}` : ''}`,
     })
   }
   // 005W-N1: a gap nothing read — no callout, no elevation — beside one of the same width (within 0.05 m) on the same
