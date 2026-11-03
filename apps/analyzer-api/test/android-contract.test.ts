@@ -14,7 +14,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { captureAndroidContract } from './support/android-contract.js'
-import { CURRENT_CONTRACT_DIR, LEGACY_CONTRACT_DIR, memberPaths } from './support/contract-shape.js'
+import { CURRENT_CONTRACT_DIR, LEGACY_CONTRACT_DIR, dictionaryViolations, memberPaths } from './support/contract-shape.js'
 
 const fresh = captureAndroidContract()
 fresh.catch(() => undefined)
@@ -32,6 +32,8 @@ describe('the Android contract fixtures', () => {
       const legacy = memberPaths(JSON.parse(readFileSync(join(LEGACY_CONTRACT_DIR, name), 'utf8')))
       const now = memberPaths(JSON.parse(files[name] ?? '{}'))
       expect([name, [...legacy].filter((p) => !now.has(p))]).toEqual([name, []])
+      // LINK-F1C: a dictionary's keys are data (a family without features has no entry); its values keep their type
+      expect([name, dictionaryViolations(JSON.parse(files[name] ?? '{}'))]).toEqual([name, []])
     }
   })
 
