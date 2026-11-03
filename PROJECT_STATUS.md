@@ -3048,3 +3048,11 @@ host from the gap only. Limitations: elevations still registered linearly while 
 reader (window 2.034 m with jambs); Marcówki balcony ↔ fascia (2 ERROR since F1) explained, not fixed; Rarytasy
 chimney-1 NOT_CONFIRMED. Tests: geometry 117/117, reconstruction 1231/1231, analysis-service green; architecture 11
 and apps 6 failures all pre-existing. F2 / N9-02S not started; APK NOT_RUN.
+
+### APK F1C dla OWNER-a (STAGE BUILDPLAN APK-F1C)
+
+Status: **DONE — APK 1312 (`0.1312.0-owner`), solver 2.20.0, z commita `b4aa5d2`.** Report
+`stage-reports/STAGE_BUILDPLAN_APK_F1C_OWNER.md`. arm64-v8a, `com.buildplan.preview`, cert SHA-256 `6e48fac4…ca0da`
+(update over 1311), APK SHA-256 `2e0171f8…429d5`, 39 958 890 B. Local analyzer embedded and rebuilt fresh: 8/8 assets
+match the manifest, F1C markers present. Smoke test on the APK's assets (live Marcówki, Node 22 host): done, solver
+2.20.0. Delivered as a session attachment. No build-process changes. Phone/emulator NOT_RUN (no device in session).
