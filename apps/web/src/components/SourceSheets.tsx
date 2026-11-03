@@ -11,7 +11,12 @@ import type { SourceInspectionView, SourceReadingView, SourceSheetView } from '.
 const CONTENT_LABEL: Record<string, string> = { FLOOR_PLAN: 'floor plan', ELEVATION: 'elevation', SECTION: 'section', SITE_PLAN: 'site plan', EXTERIOR_PERSPECTIVE: 'exterior view', INTERIOR: 'interior' }
 const OUTCOME_LABEL: Record<string, string> = { READ: 'read', REFUSED_BY_CONTENT: 'refused: the pixels contradict the caption', NOT_READ: 'not read', NO_READER: 'kept as a source only' }
 
-export const readingLabel = (r: SourceReadingView): string => `${r.measure.toLowerCase().replace(/_/g, ' ')} ${r.printed ? `printed “${r.rawText}”` : 'worked out (not printed)'} → ${r.value} ${r.unit}`
+export const readingLabel = (r: SourceReadingView): string => {
+  const what = r.measure.toLowerCase().replace(/_/g, ' ')
+  if (!r.printed) return `${what} worked out (not printed) → ${r.value} ${r.unit}`
+  if (r.origin === 'CHAIN_CORRECTED') return `${what} read “${r.rawText}”, accepted ${r.value} ${r.unit} (corrected against its chain)`
+  return `${what} printed “${r.rawText}” → ${r.value} ${r.unit}`
+}
 
 function Sheet({ sheet }: { sheet: SourceSheetView }): JSX.Element {
   const [selected, setSelected] = useState<string | null>(null)

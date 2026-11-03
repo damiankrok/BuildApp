@@ -180,8 +180,11 @@ private fun outcomeText(outcome: String): String = when (outcome) {
 
 @Composable
 private fun readingText(r: SourceReading): String =
-    if (r.printed) stringResource(R.string.sources_reading_printed, measureText(r.measure), r.rawText, formatValue(r.value), r.unit)
-    else stringResource(R.string.sources_reading_derived, measureText(r.measure), formatValue(r.value), r.unit)
+    when {
+        !r.printed -> stringResource(R.string.sources_reading_derived, measureText(r.measure), formatValue(r.value), r.unit)
+        r.origin == "CHAIN_CORRECTED" -> stringResource(R.string.sources_reading_corrected, measureText(r.measure), r.rawText, formatValue(r.value), r.unit)
+        else -> stringResource(R.string.sources_reading_printed, measureText(r.measure), r.rawText, formatValue(r.value), r.unit)
+    }
 
 @Composable
 private fun measureText(measure: String): String = when (measure) {
