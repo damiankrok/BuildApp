@@ -75,7 +75,9 @@ export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 // pixel uncertainty (`sheetScale`); its chain ladders pin a line only with a printed statement that agrees with the longer
 // statements to within its pixel uncertainty (two tick localisations, the ticks' miss of the lines, the print's rounding); a span summed over a
 // DERIVED segment pins nothing; a statement it contradicts is kept as a rejected anchor with its residual.
-export const LAYOUT_INFERENCE_VERSION = '1.3.0'
+// 1.4.0 (EXTERIOR-COMPLETE E7): the gate rule reads a garage's wall behind a lining of cupboards, a doorway through it,
+// a wide mouth's jambs off the ink; a shut garage's edges bound largest-first tiling.
+export const LAYOUT_INFERENCE_VERSION = '1.4.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
@@ -436,7 +438,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
       const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}) })
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), calloutRings: planCalloutRings(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
@@ -583,6 +585,14 @@ export function extentSidesOf(chains: readonly DimensionChain[], extent: PlanExt
 }
 
 /** The opening callouts printed on one plan, as the decomposition weighs them: where each sits and every width it might say. */
+/** EXTERIOR-COMPLETE: the plan's opening-callout rings (a circle split by its bar), read or not, by centre and radius. */
+export function planCalloutRings(metrics: MetricEvidenceSet, frameId: string): Array<{ at: { x: number; y: number }; radiusPx: number }> {
+  return (metrics.calloutRings ?? [])
+    .filter((r) => r.frameId === frameId && r.finders.includes('OPENING'))
+    .map((r) => ({ at: { x: r.centrePx.x, y: r.centrePx.y }, radiusPx: r.radiusPx }))
+    .sort((a, b) => a.at.y - b.at.y || a.at.x - b.at.x)
+}
+
 export function planCallouts(metrics: MetricEvidenceSet, frameId: string): PlanCallout[] {
   return metrics.evidence
     .filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === frameId && e.textBox !== undefined)

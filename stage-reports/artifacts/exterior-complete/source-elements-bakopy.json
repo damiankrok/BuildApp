@@ -1,0 +1,27 @@
+{
+  "house": "projekt-dom-w-bakopach-g2e-mbb9288266b05e",
+  "status": "DEV (disclosed by OWNER for diagnosis; not a blind result)",
+  "readAt": "2026-11-04",
+  "sources": "public project page: ground-floor plan (853 px), section, four elevations (1280 px; the 550 px copies are the same drawings), site plan, exterior renders; the white-walled renders are another colour variant and are not used",
+  "note": "Written from the originals, independently of every earlier log or model. Coordinates in centimetres as the plan prints them; x from the west wall, z from the front (street) face.",
+  "elements": [
+    { "id": "storeys", "check": "one storey (ground floor, ±0.00), no usable attic: the section shows the roof space open over the living room", "src": "S" },
+    { "id": "outline", "check": "overall 1500 × 2125 (bottom chain 690 + 810 = 1500; right chain 640 + 860 + 625 = 2125)", "src": "P" },
+    { "id": "main-body", "check": "long body 860 wide (x 0–860) from the garden face to the house front at z 625: bedrooms, bathrooms, utility, hall", "src": "P,E" },
+    { "id": "main-roof", "check": "long gable roof, ridge front-to-back (along z), 35°, eaves +3.27, ridge +6.28, over the whole depth including the garage and the covered approach; gable ends at the street (timber clad, over the garage) and at the garden (grey)", "src": "S,E,site,R" },
+    { "id": "living-wing", "check": "wing 640 × 860 on the east (x 860–1500, z 625–1485): living room and kitchen", "src": "P" },
+    { "id": "wing-roof", "check": "cross gable over the wing, ridge across (along x), meeting the main roof; its east gable timber clad with a tall glazed gable (two-storey high window)", "src": "site,E east,R" },
+    { "id": "garage", "check": "double garage 690 × 625 projecting at the front-west (x 0–690, z 0–625), inside 600 × 660 with built-in cupboards along its back wall, a side door 100/230 in its west wall and a door into the house hall", "src": "P,E front,R" },
+    { "id": "garage-gate", "check": "one sectional gate 500/225 in the garage front between two piers; dark grey sectional leaf", "src": "P,E front,R" },
+    { "id": "entrance", "check": "front door 105/210 set back at the house front (z 625) between the garage and the kitchen, dark leaf with a glazed strip", "src": "P,E front,R" },
+    { "id": "covered-approach", "check": "open covered approach to the door along the garage's east wall, under the main roof (x 690–860, z 0–625): no walls of its own, a corner post at the front and a vertical slat screen on part of its east side", "src": "P,E east,site,R" },
+    { "id": "terrace-pergola", "check": "garden terrace at the north-east (x 860–1500, z 1485–2125) under a separate open pergola roof on posts, beside the wing and the long body", "src": "P,E east,E rear,site,R" },
+    { "id": "east-terrace", "check": "terrace along the wing's east side with the dining area outside the glazing (280/470 opening)", "src": "P,site" },
+    { "id": "openings-front", "check": "front: garage gate, entrance door, kitchen window 300/230 in the wing's front wall", "src": "P,E front" },
+    { "id": "openings-west", "check": "west: garage side door 100/230, utility door 100/230, two bedroom windows 220/140, further windows to the north", "src": "P" },
+    { "id": "openings-garden", "check": "garden: bedroom terrace doors 180/230 ×2 and 400/230 onto the pergola terrace, small windows 80/230", "src": "P,E rear" },
+    { "id": "chimneys", "check": "two chimneys through the main roof", "src": "E,site,R" },
+    { "id": "palette", "check": "grey (anthracite-blue) render and roof, vertical timber cladding on the garage gable, the wing gable and panels beside openings; dark window frames", "src": "R,E" },
+    { "id": "not-a-body", "check": "planter boxes and the paving outline at the north edge are landscaping, not building", "src": "P,site" }
+  ]
+}

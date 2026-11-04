@@ -347,6 +347,15 @@ const GATE_BAY_MIN_WIDTH_M = 2.2
 /** A side wall is continuous when wall band runs along this share of it; a pocket is weighed (and named) from less. */
 const GATE_BAY_SIDE_WALL = 0.85
 const GATE_BAY_CANDIDATE_WALL = 0.6
+/**
+ * EXTERIOR-COMPLETE (Bakopy): how deep a lining may stand between a pocket's edge and the wall behind it — a row of
+ * built-in cupboards along a garage's back wall, its front drawn as line work. Behind that depth the side's wall is
+ * read in the ink itself; the wall must be at least `GATE_BAY_LINED_WALL_MIN_PX` (or a third of the wall band) thick.
+ */
+export const GATE_BAY_LINING_MAX_M = 0.9
+const GATE_BAY_LINED_WALL_MIN_PX = 3
+/** The narrowest doorway read through a lining (m): a hole in the wall behind it, between two pieces of that wall. */
+export const GATE_BAY_LINED_DOOR_MIN_M = 0.6
 
 export type PlanDecompositionOptions = {
   /** Two candidate lines of the SAME kind closer than this are one line. */
@@ -371,6 +380,11 @@ export type PlanDecompositionOptions = {
   minInfill?: number
   /** The plan's printed opening callouts. */
   callouts?: readonly PlanCallout[]
+  /**
+   * EXTERIOR-COMPLETE: every opening-callout ring found on the plan (a circle split by its bar), read or not — the
+   * symbol says "an opening is here" whatever its digits; the digits are the callouts' business.
+   */
+  calloutRings?: ReadonlyArray<{ at: { x: number; y: number }; radiusPx: number }>
   /**
    * Read every gap left open as the mouth of a pocket as a hole in the wall instead (005A). A wide
    * gap in front of a space shut on every other side is a carport or a garage behind a wide door,
@@ -433,6 +447,7 @@ const DEFAULTS: CoreOptions = {
   maxWideOpeningM: 8,
   minInfill: 0.7,
   callouts: [],
+  calloutRings: [],
   shutPocketMouths: false,
 }
 
@@ -2456,7 +2471,7 @@ function decomposeCore(
   // N8-01: a strip the flood could not reach because line work boxes it in — paving before a set-back garage, a canopy's
   // outline over a back door — lies outside the walls, not inside them (`lineWorkStrips`).
   const lineStrips = lineWorkStrips(cells, nx, ny, { x: Math.max(1, 2 * wallM + 0.2) / mppX, y: Math.max(1, 2 * wallM + 0.2) / mppY }, inside, mask)
-  const gateBays = override ? [] : shutGateBays({ mask, cells, byKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains })
+  const gateBays = override ? [] : shutGateBays({ mask, cells, byKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains, rings: opt.calloutRings ?? [] })
   // the drawn thickness of the wall band along each edge, for the seams (`facadeSeams`)
   const edgeThickness = (axis: 'X' | 'Y', line: number, k: number): number => {
     const l = axis === 'X' ? linesX[line] : linesY[line]
@@ -2473,7 +2488,7 @@ function decomposeCore(
     }
     return best
   }
-  const merged = mergeRegions(cells, linesX, linesY, registration, nx, ny, wallM, edgeThickness)
+  const merged = mergeRegions(cells, linesX, linesY, registration, nx, ny, wallM, edgeThickness, gateBayBarriers(gateBays, byKey))
   // 005F: with completions, the bodies the reading had stand as they were and the completions are laid against them.
   const regions = override?.completions && override.completions.length > 0 ? stableRegions(merged, cells, linesX, linesY, registration, nx, ny, override, wallM, edgeThickness) : merged
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
@@ -2620,7 +2635,7 @@ export function lineWorkStrips(cells: PlanCell[], nx: number, ny: number, minSpa
  * A shallow porch, a bay open across its whole front, a pocket with a side wall missing, and a mouth without jambs stay
  * open, and the record says what was missing. Shut cells become BUILT and the mouth an opening in its wall.
  */
-function shutGateBays(input: {
+export function shutGateBays(input: {
   mask: Mask
   cells: PlanCell[]
   byKey: Map<string, PlanCell>
@@ -2636,8 +2651,11 @@ function shutGateBays(input: {
   wallM: number
   wallPx: number
   chains: readonly DimensionChain[]
+  /** EXTERIOR-COMPLETE: the plan's opening-callout rings, read or not. */
+  rings?: ReadonlyArray<{ at: { x: number; y: number }; radiusPx: number }>
 }): GateBay[] {
   const { mask, cells, byKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains } = input
+  const rings = input.rings ?? []
   const out: GateBay[] = []
   const open = (c: PlanCell): boolean => c.classification === 'OUTSIDE' || (c.classification === 'RECESS' && !c.why.startsWith('inside the recess behind'))
   // A built strip narrower than a body inside the pocket — a jamb column the gate's printed width cut the grid into,
@@ -2722,6 +2740,29 @@ function shutGateBays(input: {
         break
       }
     }
+    // EXTERIOR-COMPLETE (Bakopy): a side whose edge carries no wall may still be walled a little way behind it — a row
+    // of built-in cupboards along a garage's back, drawn as line work in front of the wall that closes it. Each pixel
+    // along the side is walled when, walking out from the edge no further than a lining's depth, the walk crosses ink
+    // as thick as a wall can be (`GATE_BAY_LINED_WALL_MIN_PX`, a third of the band); the cupboards' own lines, one or
+    // two pixels across, never are. A door in that wall is a hole in it, as on an edge. Only an edge that IS a lining's
+    // front is read through: line work drawn along it, no opening in it — a doorway on the edge (into the house beside a
+    // carport) is a hole, never a lining with the house's ink behind it.
+    const liningFront = (e: EdgeClosure): boolean => e.line >= 0.5 && e.opening < 0.05
+    const liningPx = (side: number): number => GATE_BAY_LINING_MAX_M / (side % 2 === 0 ? mppY : mppX)
+    const minInkPx = Math.max(GATE_BAY_LINED_WALL_MIN_PX, Math.round(wallPx / 3))
+    const linedAt = (side: number, t: number, edgePx: number): boolean => {
+      const out = side === 0 || side === 3 ? -1 : 1
+      // the lining's depth to the wall's face, then the wall itself
+      const reach = Math.round(liningPx(side) + wallPx)
+      let run = 0
+      for (let k = 0; k <= reach; k += 1) {
+        const u = Math.round(edgePx + out * k)
+        const ink = side % 2 === 0 ? at(mask, Math.round(t), u) : at(mask, u, Math.round(t))
+        run = ink === 1 ? run + 1 : 0
+        if (run >= minInkPx) return true
+      }
+      return false
+    }
     // wall band along each side of a rectangle of the pocket's cells, weighted by length
     const wallsOf = (bx0: number, bx1: number, by0: number, by1: number): number[] =>
       [0, 1, 2, 3].map((side) => {
@@ -2733,7 +2774,20 @@ function shutGateBays(input: {
           if (!onSide) continue
           const l = side % 2 === 0 ? c.rect.x1 - c.rect.x0 : c.rect.y1 - c.rect.y0
           len += l
-          wall += l * c.edges[side].wall
+          if (c.edges[side].wall >= 0.5 || !liningFront(c.edges[side])) {
+            wall += l * c.edges[side].wall
+            continue
+          }
+          // no wall on the edge: read the wall behind a lining, pixel by pixel along it
+          const [t0, t1] = side % 2 === 0 ? [c.rect.x0, c.rect.x1] : [c.rect.y0, c.rect.y1]
+          const edgePx = side === 0 ? c.rect.y0 : side === 1 ? c.rect.x1 : side === 2 ? c.rect.y1 : c.rect.x0
+          let lined = 0
+          let n = 0
+          for (let t = Math.ceil(t0); t < t1; t += 1) {
+            n += 1
+            if (linedAt(side, t, edgePx)) lined += 1
+          }
+          wall += l * Math.max(c.edges[side].wall, n > 0 ? lined / n : 0)
         }
         return len > 0 ? wall / len : 0
       })
@@ -2772,7 +2826,13 @@ function shutGateBays(input: {
     const widthM = round6((s1 - s0) * mppAlong)
     const depthM = round6((across ? rect.y1 - rect.y0 : rect.x1 - rect.x0) * mppDeep)
     const pieces: Array<[number, number]> = []
-    for (const [a, b] of wallIntervals(inside, across ? 'Y' : 'X', line, s0, s1, tolerance, mask, 'EVERY_PROBE').sort((p, q) => p[0] - q[0])) {
+    // EXTERIOR-COMPLETE (Bakopy): the mouth's bands are read on its line and half a wall inside it — a gate's piers are
+    // bands drawn across the mouth's line, and a line on their outer face only grazes them; pieces that are no band (a
+    // carport's short piers) are not found either way
+    const inwardPx = (mouthSide === 1 || mouthSide === 2 ? -1 : 1) * (wallPx / 2)
+    const inner: GridLine = { ...line, px: line.px + inwardPx, probesPx: line.probesPx.map((p) => p + inwardPx) }
+    const onMouth = [...wallIntervals(inside, across ? 'Y' : 'X', line, s0, s1, tolerance, mask, 'EVERY_PROBE'), ...wallIntervals(inside, across ? 'Y' : 'X', inner, s0, s1, tolerance, mask, 'EVERY_PROBE')]
+    for (const [a, b] of onMouth.sort((p, q) => p[0] - q[0])) {
       const last = pieces[pieces.length - 1]
       if (last && a <= last[1] + 1) last[1] = Math.max(last[1], b)
       else pieces.push([a, b])
@@ -2791,8 +2851,15 @@ function shutGateBays(input: {
     // A door-sized hole whose jamb the band reader did not keep (a short pier of a thin wall, its run too short to be a
     // band): the jamb is read off the ink itself — from each end of the mouth inward, every position along it where a
     // run of ink across the mouth's line is at least half a wall thick. Only for a hole the bands already show is no
-    // wider than a door; a wide mouth keeps the jambs its bands draw.
-    if (gapPx <= maxOpeningPx && (jambLo < wallPx + 2 || jambHi < wallPx + 2)) {
+    // wider than a door; a wide mouth keeps the jambs its bands draw — EXTERIOR-COMPLETE (Bakopy): unless an opening
+    // callout is printed in it. The ring (read or not) says the hole is an opening in a wall that carries on as its
+    // jambs, so the jambs are read off the ink as for a door; without one (a carport's short piers) they are not.
+    const calloutInMouth = rings.find((r) => {
+      const along = across ? r.at.x : r.at.y
+      const deep = across ? r.at.y : r.at.x
+      return along > s0 + jambLo && along < s1 - jambHi && Math.abs(deep - line.px) <= r.radiusPx + wallPx
+    })
+    if ((gapPx <= maxOpeningPx || calloutInMouth) && (jambLo < wallPx + 2 || jambHi < wallPx + 2)) {
       // the mouth's own wall may stand up to a wall inside the line the grid kept (a front set back less than a cell)
       const probes = line.probesPx
       const inward = mouthSide === 1 || mouthSide === 2 ? -1 : 1
@@ -2821,7 +2888,9 @@ function shutGateBays(input: {
         jambLo = Math.max(jambLo, lo)
         jambHi = Math.max(jambHi, hi)
         const holePx = s1 - s0 - jambLo - jambHi
-        if (holePx > 0 && holePx < gapPx) {
+        // the hole between the jambs the ink shows; where the bands showed none at all (no piece of wall on the line,
+        // a hole of 0), it is the only hole there is, never a door-sized 0 m one
+        if (holePx > 0 && (gapPx === 0 || holePx < gapPx)) {
           gapPx = holePx
           hole = [s0 + jambLo, s1 - jambHi]
         }
@@ -2857,7 +2926,44 @@ function shutGateBays(input: {
       const next: Array<[number, number]> = [[c.ix, c.iy - 1], [c.ix + 1, c.iy], [c.ix, c.iy + 1], [c.ix - 1, c.iy]]
       return next.some(([jx, jy], side) => side !== mouthSide && byKey.get(`${jx}:${jy}`)?.classification === 'BUILT' && c.edges[side].opening > 0.05)
     })
-    const gateEvidence = [dimensioned ? 'the gate\u2019s width is printed (a chain breaks at both jambs)' : '', lineOver >= 0.6 ? 'a leaf is drawn across it' : '', doorInside ? 'a door leads from it into the building' : ''].filter((x) => x.length > 0)
+    // EXTERIOR-COMPLETE (Bakopy): a door from it into the building through its lining — along a side walled behind a
+    // lining, a run with no wall on the edge nor behind it (wall islands thinner than a partition, a swing's arc, are
+    // part of the run), between two pieces of that wall, as wide as a door, with built cells behind it
+    const doorThroughLining = ((): string | undefined => {
+      for (let side = 0; side < 4; side += 1) {
+        if (side === mouthSide) continue
+        const onSide = members.filter((c) => (side === 0 ? c.iy === iy0 : side === 1 ? c.ix === ix1 : side === 2 ? c.iy === iy1 : c.ix === ix0)).sort((p, q) => (side % 2 === 0 ? p.rect.x0 - q.rect.x0 : p.rect.y0 - q.rect.y0))
+        const marks: Array<{ t: number; walled: boolean; cell: PlanCell }> = []
+        for (const c of onSide) {
+          const [t0, t1] = side % 2 === 0 ? [c.rect.x0, c.rect.x1] : [c.rect.y0, c.rect.y1]
+          const edgePx = side === 0 ? c.rect.y0 : side === 1 ? c.rect.x1 : side === 2 ? c.rect.y1 : c.rect.x0
+          for (let t = Math.ceil(t0); t < t1; t += 1) marks.push({ t, walled: c.edges[side].wall >= 0.5 || (liningFront(c.edges[side]) && linedAt(side, t, edgePx)), cell: c })
+        }
+        // wall islands thinner than a partition inside a hole are the hole's
+        for (let i = 0; i < marks.length; ) {
+          if (!marks[i].walled) { i += 1; continue }
+          let j = i
+          while (j < marks.length && marks[j].walled) j += 1
+          if (i > 0 && j < marks.length && j - i < minInkPx) for (let k = i; k < j; k += 1) marks[k].walled = false
+          i = j
+        }
+        const mppT = side % 2 === 0 ? mppX : mppY
+        for (let i = 0; i < marks.length; ) {
+          if (marks[i].walled) { i += 1; continue }
+          let j = i
+          while (j < marks.length && !marks[j].walled) j += 1
+          const widthM = (j - i) * mppT
+          const bounded = i > 0 && j < marks.length
+          const mid = marks[Math.floor((i + j) / 2)].cell
+          const next: Array<[number, number]> = [[mid.ix, mid.iy - 1], [mid.ix + 1, mid.iy], [mid.ix, mid.iy + 1], [mid.ix - 1, mid.iy]]
+          const behind = byKey.get(`${next[side][0]}:${next[side][1]}`)
+          if (bounded && widthM >= GATE_BAY_LINED_DOOR_MIN_M && widthM <= maxOpeningPx * mppT && behind?.classification === 'BUILT') return `a ${widthM.toFixed(2)} m doorway in the wall behind its ${side4[side].toLowerCase()} lining leads into the building`
+          i = j
+        }
+      }
+      return undefined
+    })()
+    const gateEvidence = [dimensioned ? 'the gate\u2019s width is printed (a chain breaks at both jambs)' : '', calloutInMouth ? 'an opening callout is printed in its mouth' : '', lineOver >= 0.6 ? 'a leaf is drawn across it' : '', doorInside ? 'a door leads from it into the building' : '', !doorInside && doorThroughLining ? doorThroughLining : ''].filter((x) => x.length > 0)
     // a hole no wider than a lintel spans between jambs is an opening in its wall without more (`closureOf`)
     if (gateEvidence.length === 0 && gapPx <= maxOpeningPx) gateEvidence.push(`its ${(gapPx * mppAlong).toFixed(2)} m hole is no wider than a door, between jambs`)
     if (gateEvidence.length === 0) missing.push('nothing says its mouth is a gate: no printed width across it, no leaf drawn over it, no door from it into the building — walls round a hole are a loggia\u2019s or a carport\u2019s as much as a garage\u2019s')
@@ -2900,6 +3006,8 @@ function mergeRegions(
   ny: number,
   wallM: number,
   thickness?: (axis: 'X' | 'Y', line: number, k: number) => number,
+  /** EXTERIOR-COMPLETE: edges no rectangle crosses besides the facade seams (`gateBayBarriers`), keyed as they are. */
+  barriers?: { v: Set<string>; h: Set<string> },
 ): PlanRegion[] {
   const byIndex = new Map(cells.map((c) => [`${c.ix}:${c.iy}`, c]))
   const claimed = new Set<string>()
@@ -2920,7 +3028,8 @@ function mergeRegions(
   const heightPx = (iy: number): number => linesY[iy + 1].px - linesY[iy].px
   // a body holds two walls and a room (`minBodySpanM`), at the plan's own drawn wall
   const minSpanM = Math.max(1, 2 * wallM + 0.2)
-  const seams = facadeSeams(cells, nx, ny, { x: minSpanM / registration.metresPerPixelX, y: minSpanM / registration.metresPerPixelY }, thickness, wallM / Math.max(registration.metresPerPixelX, registration.metresPerPixelY))
+  const facade = facadeSeams(cells, nx, ny, { x: minSpanM / registration.metresPerPixelX, y: minSpanM / registration.metresPerPixelY }, thickness, wallM / Math.max(registration.metresPerPixelX, registration.metresPerPixelY))
+  const seams = barriers ? { v: new Set([...facade.v, ...barriers.v]), h: new Set([...facade.h, ...barriers.h]) } : facade
 
   for (;;) {
     let best: { ix: number; iy: number; w: number; h: number; area: number; klass: CellClass } | null = null
@@ -2968,6 +3077,31 @@ function mergeRegions(
     })
   }
   return regions.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || a.id.localeCompare(b.id))
+}
+
+/**
+ * EXTERIOR-COMPLETE (Bakopy): a garage the gate rule shut is a body against the house. Its back wall may stand behind
+ * a lining (the cupboards' line work is its edge, not wall), so the facade seams do not see the wall it stands
+ * against, and largest-first tiling took the garage and the wing beside it as one strip cut through the rooms. Every
+ * edge between a shut bay's cells and a built cell outside it, the mouth excepted, is a barrier no rectangle crosses.
+ */
+function gateBayBarriers(bays: readonly GateBay[], byKey: ReadonlyMap<string, PlanCell>): { v: Set<string>; h: Set<string> } {
+  const v = new Set<string>()
+  const h = new Set<string>()
+  for (const bay of bays) {
+    if (bay.decision !== 'GATE_SHUT') continue
+    const inBay = new Set(bay.cells.map((c) => `${c.ix}:${c.iy}`))
+    for (const c of bay.cells) {
+      const sides: Array<[number, number, () => void]> = [
+        [c.ix, c.iy - 1, () => h.add(`${c.iy}:${c.ix}`)],
+        [c.ix + 1, c.iy, () => v.add(`${c.ix + 1}:${c.iy}`)],
+        [c.ix, c.iy + 1, () => h.add(`${c.iy + 1}:${c.ix}`)],
+        [c.ix - 1, c.iy, () => v.add(`${c.ix}:${c.iy}`)],
+      ]
+      for (const [jx, jy, add] of sides) if (!inBay.has(`${jx}:${jy}`) && byKey.get(`${jx}:${jy}`)?.classification === 'BUILT') add()
+    }
+  }
+  return { v, h }
 }
 
 /** A continuous wall: wall band over half the edge or more, and shut over nine tenths of it with its doors counted. */

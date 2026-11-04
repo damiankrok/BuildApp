@@ -194,3 +194,47 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   `0ec3138e901fc7a87d997584e027c3b058734c2f2100b49f4d9dd5bc85d5fbfe` (PO models, programs and all-sides renders at
   solver 2.24.0, boards PRZED/PO, acceptance per house, live-smoke evidence, build log, limits).
 - Android UI NOT_VERIFIED (no device).
+
+## E7 — Bakopy (G2E), disclosed by OWNER: DEV, not a blind result
+
+- Input authorised by OWNER for this project only. H2 stays sealed. Source feature list written from the originals
+  before any fix: `stage-reports/artifacts/exterior-complete/source-elements-bakopy.json`.
+- **PRZED reproduced on the 1316 code (`53d4902`) from an own acquisition of the live page** (Node fetch worked here),
+  full production path (content encoder + local OCR recogniser): 32 assets, 3 bodies, 19 openings, 170 commands,
+  model hash `e2c66ccac7f2a629badd9998f15d57fdfc2c34a9c3ee87473aec789a236cf63d` — byte for byte the coordinator's
+  replay. (A first run failed INTERNAL_ERROR: the side worktree lacked the untracked content-classifier model; copied
+  from the main checkout, hashes equal to the APK's, and the run repeated — an environment fault, not a code one.)
+- **First wrong decision (garage lost):** the gate rule (`shutGateBays`, N7-FIX-03) never weighed the garage. The
+  plan draws a row of built-in cupboards (X) along the garage's back; the grid line the house's front face runs on is
+  their front, drawn as line work, and the wall that closes the garage (a 0.23 m partition, with the door into the
+  hall) stands 0.4–0.8 m behind it. The rule read wall only on cell edges: back side 27 % walled → "not three walls" →
+  silently skipped. The coordinator's two hypotheses (H0/H1) were equal because neither reached this rule.
+- Fixes (`plan-decomposition.ts`, general, no house names):
+  1. a side whose edge carries no wall is walled where, walking out from the edge no further than a lining's depth
+     (`GATE_BAY_LINING_MAX_M` 0.9 m) plus the wall itself, the walk crosses ink at least a third of a wall thick
+     (cupboard lines are 1–2 px and never count); the 0.85 continuity bar is unchanged;
+  2. a doorway in that wall (a run ≥ 0.6 m and no wider than a door, wall at both ends, built cells behind) is the
+     evidence "a door leads from it into the building";
+  3. an opening-callout ring (a circle split by its bar) printed in a wide mouth, read or not, says the hole is an
+     opening in a wall that carries on as its jambs: the piers are then read off the ink as for a door-sized hole, and
+     the ring is gate evidence. Bakopy's ring 500/225 is found (centre 176,714) but its digits are refused by the OCR
+     gates (unstable) — the symbol is enough, the digits are not used. Without a ring a wide mouth keeps its band-only
+     jambs: the first version read every wide mouth's piers off the ink and turned the 005F carport fixture (short
+     piers, a door from the house) into a garage — caught by `extent-envelope-orientation`, rejected. Where the bands
+     show no hole at all the ink's hole is the hole (a "0 m hole" no longer passes as door-sized evidence — found by
+     the cause test). The wall behind a lining is read only through an edge that is a lining's front (line work on
+     it, no opening in it): a doorway on the edge is a hole, never a lining with the house's ink behind it;
+  4. a shut garage's edges to built cells are barriers to largest-first tiling, like facade seams: without it the
+     garage and the west wing became one strip cut through the bedrooms (145.6 m² against 227.9 printed → refused).
+- Result on the same evidence: garage 6.82 × 6.25 m (printed 690 × 625) with its sectional gate (4.86 m hole,
+  printed 500) and the entrance door beside it; main body 8.69 × 15.00, wing 6.23 × 8.60 (printed 640 × 860).
+- Regression: all 19 modelled houses byte-identical (model hashes) after rules 1–4 (final form, see below).
+- Test of the cause: `gate-bay-lining-exterior-complete.test.ts` (built with a door behind the lining; left open
+  without one; a wall further back than a lining is not the back wall). The first case fails on the old rule.
+- Still wrong on Bakopy (next): the garage and the open covered approach are not under the long main roof (flat roof
+  of their own); the living wing's cross gable is read flat (both side views refuse the main-roof anchor by 0.86–1.37 m,
+  so no attached roof is read); front and rear elevations are not registered; the small planter at the north edge is
+  a body (0.46 × 1.57 m) — removed before emission but still in the decomposition; the ridge datum "+6,28" read
+  correctly is "chain-corrected" to 6.18 by the level ladder (its rule drawn 6.4 px off the ±0.00/+3.27 scale) — 10 cm,
+  recorded, the ladder's tolerance not loosened; the opening callout 500/225 on the garage front line is not read as a
+  ring; "71" in the kitchen chain is a misread "124" bound to a 20 px span that agrees with the chain's scale.

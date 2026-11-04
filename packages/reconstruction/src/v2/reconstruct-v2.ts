@@ -187,7 +187,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.24.0' as const
+export const SOLVER_V2_VERSION = '2.25.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
