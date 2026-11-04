@@ -1,8 +1,8 @@
 # STAGE BUILDPLAN EXTERIOR-COMPLETE — rozpoznawalny cały dom (raport roboczy)
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
-dostawie testowej 1316 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E6).
+dostawie testowej 1317 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E8).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -123,3 +123,22 @@ odbiór per dom (PRZED/PO), modele i `program.json` PRZED/PO, rendery wszystkich
 próby na żywo i ograniczenia.
 
 **Holdout H2**: zapieczętowany, nieotwarty — rozwiązanie jeszcze nie jest stabilne.
+
+## 6. Bakopy (G2E) — przypadek ujawniony przez OWNER-a (DEV, nie ślepy test)
+
+- PRZED odtworzony kodem 1316 z własnego pobrania strony, pełna ścieżka (klasyfikator treści + lokalny OCR): model
+  `e2c66cca…f63d`, bajt w bajt jak przebieg koordynatora. Lista cech źródłowych:
+  `stage-reports/artifacts/exterior-complete/source-elements-bakopy.json` (spisana z oryginałów przed poprawkami).
+- **Pierwsza zła decyzja:** reguła bramy (`shutGateBays`) nie zważyła garażu w ogóle. Ściana tylna garażu stoi za
+  rzędem szaf wnękowych, których front jest linią siatki; reguła czytała ścianę tylko na krawędziach komórek (27 %)
+  i pomijała garaż bez śladu. Poprawki ogólne (layout 1.4.0, solver 2.25.0): ściana za okładziną szaf (≤ 0,9 m),
+  drzwi w tej ścianie jako dowód bramy, symbol pierścienia otworu w wylocie (cyfry nieczytelne — sam symbol), koniec
+  dzielenia garażu i skrzydła na pas przez pokoje. Wersja pośrednia (węgary szerokiego wylotu zawsze z tuszu) zmieniła
+  wiatę z testu 005F w garaż — odrzucona.
+- **Wynik PO:** garaż 6,82 × 6,25 m (drukowane 690 × 625) z bramą segmentową 4,86 m (drukowane 500), drzwi wejściowe
+  obok, bryła główna 8,69 × 15,00, skrzydło 6,23 × 8,60 (640 × 860). Regresja: 19 domów bez zmian (hash modelu).
+- **Jeszcze nie:** dach główny nad garażem i dojściem, dach dwuspadowy skrzydła ze szklanym szczytem, słup i ekran
+  lamelowy dojścia, pergola tarasu, kominy, okładzina drewniana szczytów. Przyczyna dachów ustalona (kotwica dachu
+  na widokach bocznych czyta korony drzew za dachem) — następny krok.
+- **APK 1317** (`cf6a8d9`): SHA-256 `6388302f…6b97`, analizator `848937d0…b238`; ścieżka osadzona na żywej stronie
+  Bakop daje model identyczny z desktopowym PO (`7c1acde7…fa91`). Interfejs Androida: NOT_VERIFIED.

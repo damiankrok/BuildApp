@@ -3106,8 +3106,10 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
 - Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E5);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
-- **Ostatnia dostawa testowa: APK 1316** (`0.1316.0-owner`, commit `53d4902`, SHA-256 `2feb7e8e…f72f`, ten sam
-  podpis; analizator `8c275584…75e9`, usługa 1.8.0, solver 2.24.0). Poprzednia: 1315 (`845b13a`, `1e2a93c7…9745`).
+- **Ostatnia dostawa testowa: APK 1317** (`0.1317.0-owner`, commit `cf6a8d9`, SHA-256 `6388302f…6b97`, ten sam
+  podpis; analizator `848937d0…b238`, usługa 1.8.0, solver 2.25.0). Poprzednie: 1316 (`53d4902`), 1315 (`845b13a`).
+- **Bakopy (ujawnione przez OWNER-a, DEV):** garaż z bramą i wejściem odtworzony (E7); dachy garażu i skrzydła
+  nadal płaskie — przyczyna ustalona (kotwica dachu na widokach bocznych czyta drzewa), następny krok.
 - **Wynik:** sprawdzarka 25/70 (E0) → 32/70 na pełnej ścieżce produkcyjnej; Pod Miłorzębem i Modrzewnica nadal bez
   modelu. Regresja 8: bez cofnięć po obejrzeniu tablic; a01 dało przyczynę E4.
 - **E4–E5 (w 1316):** wykończenie ścian per kondygnacja; elewacja pary bliźniaczej rejestrowana na segmencie;

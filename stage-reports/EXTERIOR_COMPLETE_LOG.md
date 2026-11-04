@@ -238,3 +238,32 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   correctly is "chain-corrected" to 6.18 by the level ladder (its rule drawn 6.4 px off the ±0.00/+3.27 scale) — 10 cm,
   recorded, the ladder's tolerance not loosened; the opening callout 500/225 on the garage front line is not read as a
   ring; "71" in the kitchen chain is a misread "124" bound to a 20 px span that agrees with the chain's scale.
+
+## E8 — test delivery 1317 (E7: Bakopy's garage)
+
+- Commit `cf6a8d9df97f040ff8aa9e5f65c7c6b69a7d27b6`. `BuildPlan-owner-preview-1317.apk`, `com.buildplan.preview`,
+  versionCode 1317, `0.1317.0-owner`, arm64-v8a, 49 421 131 B, SHA-256
+  `6388302f17ab3a21fffc103840fba1f5beaab44dc187ab0cc9335d7d01616b97`; signer
+  `6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da` (unchanged); embedded `analyzer.mjs`
+  `848937d0d95b2e44d05077e78d5f564591210772f083fffe8b144576e195b238` (service 1.8.0, solver 2.25.0, layout 1.4.0);
+  10/10 asset manifest entries match.
+- The real embedded path (the APK's analyzer bundle, host Node x64 — not a phone) on Bakopy's live page: first sheet
+  14.2 s, done 243 s, 114 events, 32 sheets, 106 copies SHA-verified, 0 mismatched, copies removed; model hash
+  `7c1acde78e1a1c2206fca9767434caf781f3e6d026fe42cf63b811aea6befa91` = the desktop PO (garage built); peak RSS of the
+  process tree 962 MB (host).
+- Checker on the 13 frozen DEV houses unchanged 35/70 (Bakopy is outside that frozen list; it is judged by its own
+  source list, below).
+- Bakopy against its source list (`source-elements-bakopy.json`), PO: storeys ✓, outline 1500 × 2125 ✓ (bodies
+  8.69 × 15.00 + 6.23 × 8.60 + 6.82 × 6.25), main body ✓, living wing (footprint) ✓, garage ✓, garage gate ✓
+  (sectional, 4.86 m), entrance door beside it ✓; NOT YET: main roof over the garage and the open covered approach
+  (each has a flat roof of its own / nothing), the wing's cross gable with its tall glazed gable (flat), the
+  approach's post and slat screen, the pergola terrace roof, chimneys, the timber gable cladding (wall tone only);
+  ridge 6.18 against the printed 6.28 (ladder correction, recorded).
+- Private delivery outside Git: `BuildPlan-EXTERIOR-COMPLETE-Private-1317.zip`, 862 files, SHA-256
+  `e20e7099e39fe24f5e9ffe24882009b20041432c6d926b693cb17de1bb2a0745` (Bakopy originals with hashes, PRZED/PO models,
+  programs, plan diagnostics and all-sides renders, board, source list; regression PO at 2.25.0; live-smoke evidence).
+- Next concrete action: the side views' main-roof anchor (`topResiduals` in `side-orientation.ts`) reads dark tree
+  canopies behind the roof as its top (0.86–1.37 m above the ridge on both Bakopy side views), so every attached roof
+  form is refused as "not seen against the sky"; a vegetation test that holds dark foliage, with the 21-house
+  regression (it also drives side orientation), then the main roof's run over a front body under the same ridge.
+- Android UI NOT_VERIFIED (no device).
