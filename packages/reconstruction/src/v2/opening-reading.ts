@@ -281,13 +281,13 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   // drawing says the body is a garage there — the gap is in a garage room's wall (the publisher's room list), or its
   // face on the elevation is one opaque panel. Its width and the body's height alone say nothing: a one-storey living
   // wing's 4 m terrace glazing was built as a second garage gate.
-  if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle && (f.garageRoom || f.face?.kind === 'OPAQUE_PANEL')) {
+  if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle && (f.garageRoom || (f.face?.kind === 'OPAQUE_PANEL' && f.face.acrossOpaque !== false))) {
     return { family: 'GARAGE_DOOR', notes: [f.garageRoom ? `a vehicle door in a garage's wall: ${f.garageRoom.why}` : 'a vehicle door: its elevation face is one opaque panel'] }
   }
   // EXTERIOR-COMPLETE: on the ground storey of a house whose publisher states a garage, an opening to the floor at least
   // a vehicle door wide whose elevation face is one neutral flat panel — no sky or trees in it, no timber — is the
   // garage door, read on the drawing, not glazing however wide it is.
-  if (reachesFloor && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && f.heightM <= VEHICLE_DOOR_MAX_HEIGHT_M && f.garageStated && f.face?.kind === 'OPAQUE_PANEL') {
+  if (reachesFloor && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && f.heightM <= VEHICLE_DOOR_MAX_HEIGHT_M && f.garageStated && f.face?.kind === 'OPAQUE_PANEL' && f.face.acrossOpaque !== false) {
     return { family: 'GARAGE_DOOR', provenance: 'VISUAL_SEMANTIC', notes: [`a vehicle door by its face on the elevation: ${(f.face.neutralShare * 100).toFixed(0)} % neutral, ${f.face.alongRowStd} luma spread along a row (a flat panel, not glass), in a house the publisher states a garage for`] }
   }
   // EXTERIOR-COMPLETE: on the ground storey, a door-sized opening to the floor whose elevation face is a leaf — one
@@ -334,7 +334,19 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
  * drawings mirrors sky and trees, so along a row it is anything but flat and a good part of it is coloured; timber is
  * coloured throughout. Measured inside the opening with a margin off the frame.
  */
-export type OpeningFace = { kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'; neutralShare: number; alongRowStd: number; meanSaturation: number; toneChangesPerRow: number; downColumnStd?: number }
+export type OpeningFace = {
+  kind: 'OPAQUE_PANEL' | 'GLAZED' | 'CLAD' | 'UNCLEAR'
+  neutralShare: number
+  alongRowStd: number
+  meanSaturation: number
+  toneChangesPerRow: number
+  downColumnStd?: number
+  /**
+   * EXTERIOR-COMPLETE: for a face read as one opaque panel, whether each third of its width reads as one too — a vehicle
+   * door is one panel across its whole width; a span of wall beside a glazing reads opaque by its wall alone.
+   */
+  acrossOpaque?: boolean
+}
 /** Thresholds, from the pixels of drawn gates against drawn glass (EXTERIOR-COMPLETE §gate): gates 0.98 / 1.8 / 8, glass 0.51–0.58 / 13–26 / 19–26, timber 0.03 / 18 / 55. */
 export const OPAQUE_PANEL_MIN_NEUTRAL = 0.85
 export const OPAQUE_PANEL_MAX_ROW_STD = 6
@@ -356,7 +368,7 @@ export const PANEL_MAX_DOWN_COLUMN_STD = 8
 export const CLAD_MIN_SATURATION = 40
 /** Timber's mean red-over-blue (measured on a published front elevation: timber +54, its glass −20 and −14). */
 export const CLAD_MIN_WARMTH = 30
-export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: number; y1: number }): OpeningFace | undefined {
+export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: number; y1: number }, thirds = true): OpeningFace | undefined {
   const mx = Math.max(2, Math.round((box.x1 - box.x0) * 0.08))
   const my = Math.max(2, Math.round((box.y1 - box.y0) * 0.08))
   const x0 = Math.max(0, Math.round(box.x0) + mx)
@@ -424,5 +436,9 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
   // timber is warm (red well above blue); glass mirroring sky is cool however saturated
   const warm = warmSum / n >= CLAD_MIN_WARMTH
   const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && (alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD || downColumnStd <= PANEL_MAX_DOWN_COLUMN_STD) && toneChangesPerRow <= PANEL_MAX_TONE_CHANGES_PER_ROW ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
-  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000, downColumnStd: Math.round(downColumnStd * 10) / 10 }
+  const across = (): boolean => {
+    const w = (box.x1 - box.x0) / 3
+    return [0, 1, 2].every((k) => openingFace(raster, { x0: box.x0 + k * w, x1: box.x0 + (k + 1) * w, y0: box.y0, y1: box.y1 }, false)?.kind === 'OPAQUE_PANEL')
+  }
+  return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000, downColumnStd: Math.round(downColumnStd * 10) / 10, ...(kind === 'OPAQUE_PANEL' && thirds ? { acrossOpaque: across() } : {}) }
 }

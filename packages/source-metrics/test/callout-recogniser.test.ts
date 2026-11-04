@@ -213,9 +213,10 @@ describe('the recogniser in the metric reading', () => {
   })
 
   // EXTERIOR-COMPLETE (Bakopy): a 400/230 glazing whose lower half the recogniser read "230", stably but under its own
-  // gate, while the template's near-tie put "290" first — the template's reading was kept and the 4.0 m window built
-  // 2.9 m tall, as a second garage gate. Two readers that read one whole half two ways have not read it.
-  it('a half the recogniser read whole and stably, refused on its gate, that the template reads otherwise, is not read at all', async () => {
+  // gate, while the template's near-tie put "290" first — the template's reading alone was kept and the 4.0 m window
+  // built 2.9 m tall. Two readers that read one whole half two ways leave it ambiguous: the recogniser's reading is kept
+  // as a rival of equal weight after the template's (never in its place), so the opening names it and an elevation decides.
+  it('a half the recogniser read whole and stably, refused on its gate, that the template reads otherwise, carries both readings as rivals', async () => {
     const off = extractMetricEvidence(options)
     const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
     expect(offHeight).toMatch(/^\d{3}$/)
@@ -224,10 +225,13 @@ describe('the recogniser in the metric reading', () => {
     const set = await extractMetricEvidenceAsync({ ...options, recogniser })
     const rec = (set.calloutRings ?? []).find((r) => Math.abs(r.centrePx.x - 90) <= 3)
     expect(rec?.height.accepted).toBe(false)
-    // neither reading of the height survives: no candidate is the template's, none the refused one
-    const alts = ringCallout(set)?.alternatives ?? []
-    expect(alts.some((a) => a.why.startsWith('height') && (a.rawText === offHeight || a.rawText === other))).toBe(false)
-    expect(ringCallout(set)?.rawText ?? '').not.toContain(`/${offHeight}`)
+    const heights = (ringCallout(set)?.alternatives ?? []).filter((a) => a.why.startsWith('height candidate'))
+    // the template's reading first, the refused reading after it at the same weight, named a rival
+    expect(heights[0]?.rawText).toBe(offHeight)
+    const rival = heights.find((a) => a.rawText === other)
+    expect(rival?.why).toMatch(/a rival/)
+    expect(rival?.confidence).toBe(heights[0]?.confidence)
+    expect(ringCallout(set)?.rawText).toBe(`110/${offHeight}`)
   })
   it('the same refused half read as the template reads it keeps the template\'s reading', async () => {
     const off = extractMetricEvidence(options)

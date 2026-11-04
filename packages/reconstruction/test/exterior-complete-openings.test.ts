@@ -78,3 +78,23 @@ describe('a door leaf by its face', () => {
     expect(classifyOpeningFamily(facts({ widthM: 1.1, heightM: 2.1, face: openingFace(face('glass'), box) })).family).toBe('WINDOW')
   })
 })
+
+describe('EXTERIOR-COMPLETE: a vehicle door is one panel across its whole width', () => {
+  // Muraje's garden elevation: the plan's 5.21 m span on that wall is a stretch of flat grey wall and a large glazing;
+  // read whole, the wall alone made the face opaque and a sectional gate was built over the terrace glazing.
+  it('a flat panel with a glazing at one end reads opaque as a whole, but not across its width: no vehicle door', () => {
+    const r = face('panel')
+    const g = face('glass')
+    for (let y = 0; y < H; y += 1) for (let x = Math.round(W * 0.8); x < W; x += 1) r.data.set(g.data.subarray((y * W + x) * 4, (y * W + x) * 4 + 4), (y * W + x) * 4)
+    const f = openingFace(r, box)
+    expect(f?.kind).toBe('OPAQUE_PANEL')
+    expect(f?.acrossOpaque).toBe(false)
+    expect(classifyOpeningFamily(facts({ face: f, garageStated: true, widthM: 5.2 })).family).not.toBe('GARAGE_DOOR')
+  })
+  it('one even panel is one across its width, and is the garage door', () => {
+    const f = openingFace(face('panel'), box)
+    expect(f?.acrossOpaque).toBe(true)
+    expect(classifyOpeningFamily(facts({ face: f, garageStated: true })).family).toBe('GARAGE_DOOR')
+  })
+})
+
