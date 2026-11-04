@@ -332,3 +332,101 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   (the side views see the wing's gable against the main roof, not the sky); then the wall palette per facade zone
   (timber gable over grey), the approach's post and the pergola.
 - Android UI NOT_VERIFIED (no device). H2 still sealed.
+
+
+## E11 — Zefiranty (G2 ver. 2), disclosed by OWNER: DEV, not a blind result; Bakopy's partial preview; test delivery 1319
+
+- Case: https://www.archon.pl/projekty-domow/projekt-dom-w-zefirantach-g2-ver-2-m91f1f8409e8e1, this edition only.
+  Independent feature list written from the originals before any comparison: `/home/user/zef/features-zefiranty.md`
+  (private, F1–F17). Page: footprint 170.83 m², height 9.02 m, 38°, knee wall 90 cm; section +8.55 / −0.47 (9.02 is
+  from terrain, the section's ridge from ±0.00 — one datum each, not substituted).
+- **PRZED (1318 code, own acquisition, full path; kept):** RECONSTRUCTION_FAILED / METRIC_RESOLUTION_INCONCLUSIVE in
+  REGISTERING_VIEWS (the coordinator's run: PLAN_RESOLUTION_INCONCLUSIVE, the same chain of causes one step later). No
+  model. Stays in the denominator. After using its errors for diagnosis, no later Zefiranty result is called blind.
+- **FIRST_BAD 1 (metric reader, `dimension-lines.ts`):** the rear terrace's double arc crosses both top dimension lines;
+  every crossing was a TICK, so the overall `1452` (read correctly by the recogniser) bound to the arc's own ~131 px
+  interval (~11 cm/px, REJECTED) and `1142` likewise. Fix: CROSSING_OUTLINE (dimension-lines 1.4.0). A mark is an
+  outline across the line, REJECTED, when its stroke traces at least two mark reaches out on both sides and either side
+  slants: the drift from its first traced row to one reach is ≥ 0.15 of that run, so is the drift from one reach to the
+  end of the run, both the same way, and the tail (1.5 reaches to the end) is still moving, not parked. Exempt: a
+  straight line through the mark (a witness line, square for the whole run on one side and in line for a reach on the
+  other), and a mark under a printed label, whose glyphs are judged as text. A twin DUPLICATE of an outline inherits the
+  verdict. **Tuned on DEV sheets:** the bound and the share were set on Zefiranty, Kostrzewy and Bratki and checked mark by
+  mark (ticks end within one reach, 6–7 px; arcs and chairs run 18–21 px; on Kostrzewy a dashed void cross, a hatch band
+  and a diagonal stroke are rejected; an extension line meeting a neighbouring arrowhead, a jogged chain end and a faint
+  witness line are kept; on Bratki a window jamb's parked tail is kept). A stricter share (0.25) and a pace check were
+  tried and dropped: they kept Zefiranty's arcs and chairs as ticks. DEV results after this tuning are not independent
+  evidence; H2 stays sealed.
+- **FIRST_BAD 2 (metric solver, `textRegions`):** the overall and the chain number stacked 24 px apart were joined into
+  one text region by two rotated misreads spanning both ("212", "513"): one ink read two ways witnesses nothing. Fix:
+  two tokens one pass read apart are two inks; no third token joins their regions.
+- **FIRST_BAD 3 (same reader):** garden chairs drawn over the right-hand vertical chain made 20 px stubs at its top end
+  that were trimmed, cutting the plan's extent off below the rear wall, so the rear rooms flooded as outside. The
+  CROSSING_OUTLINE rule removes them; the extent now reaches the rear wall.
+- **FIRST_BAD 4 (roof datum, `roof-datum.ts`):** the only section is 400×300 px; its level marks are ~7 px glyphs, below
+  the legibility gate (not loosened), so no ridge datum, no registered elevation, no main roof. The approximate-ridge
+  rule answered gables only. A hip pitched alike on every side rises over half its body's shorter span — geometry — and
+  the published height checks it as it checks a gable: ridge 8.16 m (ASSUMED_FOR_RENDERING; the section draws +8.55,
+  not read). Elevations stay unregistered (printed datums only, by design).
+- **FIRST_BAD 5 (hip held as a gable):** the stated hip was kept a gable because the four plan rooflights were bound to
+  the gable's slopes. Fix: a rooflight whose whole plan footprint lies in one plane of the hipped layout is re-homed
+  there (`rooflightPlaneKey`); across a hip's line it still holds the gable.
+- **Zefiranty PO:** model `82cde3d5…8b97` (desktop = embedded bundle on the live page); scale 2.5656 cm/px SUPPORTED
+  (REPLACED the 3.86 page vote), 7 anchors, rms 0.02 m; footprint 153.3 m² (−10.3 %, the garage's front strip
+  missing); main hip 38° with its short ridge and 4 rooflights in their planes. Against F1–F17: F1 ✓ (hip, short ridge);
+  F9 partly (4 of the elevations' ~12 roof windows, from the plan); everything else NOT YET: F2 garage under its own
+  lower roof (the garage is split along the house's lines and has no roof of its own), F3 the lower roofs at the attic
+  band, F4–F6 three gabled dormers (one with balcony and balustrade, F17), F7 the curved eave, F8 valleys, F10 three
+  chimneys, F11 the rear terrace is a terrace (correctly not built as a bay), F12 arched windows, F14 corner glazing
+  (read as CORNER_GLAZING in the plan), F15/F16 palette. MODEL→SOURCE additions: a 2.2 m wide flat-roofed strip on the
+  garage's west side (a piece of the garage), a ridge 0.39 m below the drawn +8.55.
+- **Bakopy:** with the "71" chain now UNRELATED (`thin-body`: a chain printed inside the house more than 1 m off a thin
+  band's length measures its own line), attached-2 is read FALSE_STRIP alone; such a strip — no buildable reading, no
+  printed conflict, no registered elevation showing anything built — is now NOT_A_BODY, named and not built. Bakopy is
+  COMPLETE_WITH_OPEN_QUESTIONS with 0 refusals (was PARTIAL, 1 refusal, 7 objects skipped); the model's geometry is
+  unchanged. A first attempt (a sliver rule in the layout) was reverted: it dropped thin bodies before the thin-body
+  pass adjudicates them on the source (9 tests of N7-P1/P2R/FIX-01/02 failed).
+- **Bakopy "flat roof" seen by OWNER:** the 1318 bundle's live scene and the desktop scene both carry the pitched main
+  roof over garage and approach and the wing's cross gable (`/home/user/bakopy/scene-1318-apk.png`). Not reproduced;
+  causes that remain possible: an older stored analysis (stored analyses survive APK updates and are listed by last
+  use), or reading the wing's front slope square-on. Needed from OWNER: the copied run provenance (APK, bundle, model
+  hash) of the view that looks flat. Today's live page differs from the one acquired earlier only in its title
+  ("Dane projektu" → "Opis projektu"): model `16552727…`, geometry identical to `b1099a1d…`.
+- **Regression (full production path, content encoder + recogniser, from a frozen copy of the tree committed as
+  `82878c7`):** 13 DEV + 3 holdout-base + 8 regression houses + Bakopy + Zefiranty. Models byte-identical to 1318: the 8
+  regression houses, Arlety, Aurory, Azalie, Bratki, Dalie, Jabłonki, Lipienniki, Willa Maja; Pod Miłorzębem and
+  Modrzewnica still fail as before (PLAN_RESOLUTION_INCONCLUSIVE, PLAN_NO_DIMENSION_FRAME). Changed:
+  - Miniaturka: interior partitions move ≤ 2.2 cm (a crossing stroke no longer a mark on one chain); exterior unchanged.
+  - Muraje: the front's main rings move 0.22 m and open a 0.20 m recess along the front; the facade reader then builds a
+    front balcony (`balcony-front-1`, a 0.38 m dark band), a glass railing (`railing-front-1`, 0.72 m, 3.1 m along) and the
+    recess floor (`terrace-front-126`). The railing is the frozen expectation's ("railing: front") — the check goes FAIL →
+    PASS. The 0.20 m slab under it is not in the source's front view: MODEL→SOURCE addition.
+  - **Kostrzewy: regression.** The diagonal stroke at 197.5 px on chain `chain-horizontal-595` (frame `58cab67876`) is
+    now correctly REJECTED; the chain's ladder shifts 10 cm; the porch pocket's west end moves 4.58 → 5.63 m and the
+    entrance DOOR in its back wall is lost. The checker does not see it (Kostrzewy's entrance check was already FAIL: a
+    window/door/window instead of one glazed pane). The recess extent hangs on one chain end; the fragility is the cause
+    to fix, not the rejection. Open, next.
+  - Checker: **36/70** (1318: 35/70; Muraje railing). Zefiranty stays in the denominator as a new house without a frozen
+    expectation set; the historical 35/70 is kept.
+- **Test delivery 1319:** code commit `82878c7378601e276a726be7c599ca1bc1a6df40` (the APK was built from this tree; the
+  regression ran from a frozen copy byte-identical to it). `BuildPlan-owner-preview-1319.apk`, `com.buildplan.preview`,
+  versionCode 1319, `0.1319.0-owner`, 50 453 120 B, SHA-256
+  `98253f3ca3c7b885eb594db3dcd27ea73dfd2d68fe69bc4ec840279d9671e277`; signer `6e48fac4…0da` (unchanged); embedded
+  `analyzer.mjs` `1d76b4f7eedefa91c7a7a6a9612042d145b59622d0d3b59f8b520c15b6956ab2` (solver 2.27.0, metric reader 1.8.0);
+  10/10 asset manifest entries match; zipalign ok. The +1 MB over 1318 is padding between entries; the compressed
+  contents grow 3 KB.
+- Embedded path (the APK's bundle re-extracted from the final APK, host Node — not a phone), live pages:
+  Zefiranty first sheet 13.9 s, done 333 s, 131 events, 32 sheets, 123 copies SHA-verified, 0 mismatched, copies removed,
+  model `82cde3d5…8b97` = desktop, peak RSS 973 MB; Bakopy first sheet 13.6 s, done 260 s, 114 events, 106 verified,
+  0 mismatched, model `16552727…ee19` (today's page; geometry = `b1099a1d…`), peak RSS 938 MB.
+- Tests on `82878c7` (unloaded, 287 files complete): 3398 pass, 15 fail — the recorded baseline minus its two
+  load-sensitive WorkerExecutor tests, which pass unloaded; no new failure.
+- Private delivery outside Git: `BuildPlan-EXTERIOR-COMPLETE-Private-1319.zip`, 921 files, SHA-256
+  `621d5072551761cae90a40b2604f295b9da571e6a1af2acbfc4efcfe500ea1cf` (originals with hashes; PRZED = 1318 / PO = 1319
+  models, programs, all-sides renders; boards for every changed house, Bakopy and Zefiranty; Zefiranty's PRZED failure
+  with its diagnostics and its feature list; checker, tests, APK log, live summaries, the Kostrzewy regression note).
+- Android UI NOT_VERIFIED (no device). H2 still sealed.
+- **Next concrete action:** Kostrzewy — make the porch pocket's extent follow its drawn back wall instead of the nearest
+  chain end (restore the entrance door without reviving the rejected stroke); then Zefiranty ZF-2: split the garage
+  from the house's lines as its own lower-roofed body, the lower roofs at the attic band, and the three dormers (one
+  with the balcony and balustrade).

@@ -1,8 +1,8 @@
 # STAGE BUILDPLAN EXTERIOR-COMPLETE — rozpoznawalny cały dom (raport roboczy)
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
-dostawie testowej 1317 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E8).
+dostawie testowej 1319 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E11).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -156,3 +156,55 @@ próby na żywo i ograniczenia.
   - Ścieżka osadzona na żywej stronie Bakop: model identyczny z desktopowym PO (`b1099a1d…e031`). Interfejs Androida:
     NOT_VERIFIED. ZIP prywatny 1318: `cd5942b0…849d`, 893 pliki.
 
+
+## 7. Zefiranty (G2 wer. 2) i Bakopy — dostawa testowa 1319 (DEV, ujawnione przez OWNER-a, nie ślepy test)
+
+- **Przypadek:** dokładnie ta edycja (https://www.archon.pl/projekty-domow/projekt-dom-w-zefirantach-g2-ver-2-m91f1f8409e8e1).
+  Lista cech spisana z oryginałów przed porównaniem z modelem (prywatnie, F1–F17). Strona: 170,83 m², 9,02 m, 38°,
+  ścianka kolankowa 90 cm; przekrój +8,55 / −0,47 (9,02 liczone od terenu, kalenica przekroju od ±0,00 — nie
+  zamienione jedna za drugą).
+- **PRZED (kod 1318, zachowany):** RECONSTRUCTION_FAILED / METRIC_RESOLUTION_INCONCLUSIVE, brak modelu; dom zostaje
+  w mianowniku. Po użyciu jego błędów do diagnozy żaden kolejny wynik Zefirant nie jest nazywany ślepym.
+- **Pierwsze złe decyzje i poprawki ogólne:**
+  1. Podwójny łuk tarasu (i krzesła ogrodowe) przecinające linie wymiarowe brane za kreski wymiarowe — ogólny
+     „1452” (odczytany poprawnie) wiązany do przedziału łuku. Nowa reguła CROSSING_OUTLINE (dimension-lines 1.4.0):
+     kreska ciągnąca się ≥ 2 zasięgi po obu stronach i dryfująca wzdłuż linii od samej linii, w jedną stronę, nadal
+     w ruchu na końcu — to obrys, nie znacznik; prosta linia przez znacznik (linia pomocnicza) zostaje znacznikiem;
+     znacznik pod etykietą oceniany jako tekst. Kształt reguły ustalony na arkuszach DEV (Zefiranty, Kostrzewy,
+     Bratki) i sprawdzony znacznik po znaczniku — to jest strojenie na DEV, więc wyniki DEV nie są niezależnym
+     dowodem; H2 pozostaje zapieczętowany.
+  2. Dwie etykiety jedna nad drugą łączone w jeden region przez obrócone błędne odczyty (solver metryki 1.6.0):
+     dwa tokeny, które jedno przejście odczytało osobno, to dwa atramenty.
+  3. Przekrój 400×300 px: cyfry rzędnych ~7 px, poniżej bramki czytelności (nieluzowanej) — brak kalenicy. Reguła
+     przybliżonej kalenicy (005T-N3) obejmuje teraz dach kopertowy (połowa krótszej rozpiętości × tan kąta;
+     sprawdzenie wysokością ze strony jak dla dwuspadowego): kalenica 8,16 m, ASSUMED_FOR_RENDERING (przekrój rysuje
+     +8,55, nieodczytane). Elewacje nadal niezarejestrowane (tylko rzędne drukowane).
+  4. Kopertowy trzymany jako dwuspadowy przez okna dachowe z rzutu; teraz okno, którego cały obrys leży w jednej
+     połaci kopertowej, przechodzi do tej połaci.
+- **PO:** model `82cde3d5…8b97` (desktop = pakiet w APK na żywej stronie); skala 2,5656 cm/px SUPPORTED; zabudowa
+  153,3 m² (−10,3 %); dach główny kopertowy 38° z krótką kalenicą i 4 oknami dachowymi. Względem F1–F17: F1 ✓,
+  F9 częściowo; NIE MA: garażu z własnym niższym dachem (garaż podzielony liniami domu), niższych dachów na
+  poziomie poddasza, trzech lukarn (w tym z balkonem i balustradą), falistego okapu, koszy, kominów, łukowych okien,
+  palety. Dodane bez źródła: pas 2,2 m z płaskim dachem przy garażu (kawałek garażu), kalenica 0,39 m niżej niż +8,55.
+- **Bakopy:** łańcuch „71” w kuchni nie mierzy już pasa (solver 2.27.0); pas attached-2 = FALSE_STRIP jako jedyny
+  odczyt → NOT_A_BODY, nazwany i niebudowany. Wynik COMPLETE_WITH_OPEN_QUESTIONS, 0 odmów (był PARTIAL, 7 obiektów
+  pominiętych); geometria bez zmian. „Płaski dach” u OWNER-a: nie odtworzony (scena 1318 z APK ma dach spadzisty);
+  potrzebna skopiowana proweniencja przebiegu z telefonu. Żywa strona zmieniła dziś tylko tytuł — model
+  `16552727…`, geometria identyczna z `b1099a1d…`.
+- **Regresja (pełna ścieżka produkcyjna z zamrożonej kopii drzewa `82878c7`):** modele bajt w bajt jak w 1318:
+  8 domów regresji, Arlety, Aurory, Azalie, Bratki, Dalie, Jabłonki, Lipienniki, Willa Maja; Pod Miłorzębem
+  i Modrzewnica bez modelu jak wcześniej. Zmienione: Miniaturka (ścianki wewnętrzne ≤ 2,2 cm), Muraje (front cofnięty
+  o 0,20 m; balustrada frontowa zgodna z zamrożonym oczekiwaniem, FAIL → PASS; płyta 0,20 m pod nią nie występuje
+  w źródle — dodatek MODEL→ŹRÓDŁO). **Kostrzewy — regres:** poprawne odrzucenie ukośnej kreski na łańcuchu
+  `chain-horizontal-595` przesuwa drabinę o 10 cm, zachodni koniec wnęki ganku 4,58 → 5,63 m i znikają drzwi wejściowe.
+  Sprawdzarka tego nie widzi (wejście Kostrzew było FAIL już w 1318). Przyczyna (zasięg wnęki zależny od jednego końca
+  łańcucha) otwarta — następna. **Sprawdzarka 36/70** (1318: 35/70); historyczne 35/70 zachowane; Zefiranty
+  w mianowniku jako nowy dom bez zamrożonego zestawu oczekiwań.
+- **Dostawa 1319:** commit kodu `82878c7`; APK `0.1319.0-owner`, versionCode 1319, SHA-256 `98253f3c…e671e277`, ten sam
+  podpis; analizator `1d76b4f7…56ab2` (solver 2.27.0, czytnik 1.8.0). Ścieżka osadzona na żywych stronach (host, nie
+  telefon): Zefiranty model = desktop `82cde3d5…`, Bakopy `16552727…`. Testy: 3398 zielonych, 15 czerwonych — podzbiór
+  zapisanej linii bazowej, nic nowego. ZIP prywatny 1319: `621d5072…a1cf`, 921 plików. Interfejs Androida: NOT_VERIFIED;
+  H2 zapieczętowany.
+- **Następne:** Kostrzewy — zasięg wnęki ganku z narysowanej ściany tylnej, nie z najbliższego końca łańcucha; potem
+  Zefiranty ZF-2: garaż jako osobna, niższa bryła z własnym dachem, niższe dachy na poziomie poddasza, trzy lukarny
+  (w tym z balkonem i balustradą).

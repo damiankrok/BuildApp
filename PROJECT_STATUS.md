@@ -3104,15 +3104,20 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 ### Cały dom z zewnątrz (STAGE BUILDPLAN EXTERIOR-COMPLETE)
 
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
-- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E10);
+- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E11);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
-- **Ostatnia dostawa testowa: APK 1318** (`0.1318.0-owner`, commit `a79bcea`, SHA-256 `34bc9bb2…5505`, ten sam
-  podpis; analizator `faafc789…9ab7`, solver 2.26.0, czytnik 1.7.0). Poprzednie: 1317 (`cf6a8d9`), 1316 (`53d4902`).
+- **Ostatnia dostawa testowa: APK 1319** (`0.1319.0-owner`, commit kodu `82878c7`, SHA-256 `98253f3c…e671e277`, ten
+  sam podpis; analizator `1d76b4f7…56ab2`, solver 2.27.0, czytnik 1.8.0). Poprzednie: 1318 (`a79bcea`), 1317 (`cf6a8d9`).
+- **Zefiranty G2 wer. 2 (ujawnione przez OWNER-a, DEV, nie ślepy test; E11):** z braku modelu (1318, zachowany) do
+  modelu: skala rzutu SUPPORTED, dach kopertowy 38° z krótką kalenicą (8,16 przyjęte; przekrój +8,55 nieczytelny),
+  4 okna dachowe w połaciach. Brakuje: garażu z własnym dachem, niższych dachów, lukarn, koszy, kominów.
+  **Kostrzewy — regres w 1319** (wnęka ganku, drzwi wejściowe) — przyczyna znana, otwarte.
 - **Bakopy (ujawnione przez OWNER-a, DEV):** dach główny nad garażem i dojściem, skrzydło z dachem poprzecznym,
-  kalenica 6,28, jedna brama (E9). Otwarte: przeszklony szczyt skrzydła, przeszklenie tylne 2,9 zamiast 2,3,
+  kalenica 6,28, jedna brama (E9); od 1319 fałszywy pas attached-2 nazwany i niebudowany (NOT_A_BODY), 0 odmów,
+  „płaski dach” OWNER-a nieodtworzony (potrzebna proweniencja przebiegu). Otwarte: przeszklony szczyt skrzydła, przeszklenie tylne 2,9 zamiast 2,3,
   słup i lamele dojścia, pergola, paleta drewno/szary.
 - **Wynik:** sprawdzarka 25/70 (E0) → 32/70 na pełnej ścieżce produkcyjnej; Pod Miłorzębem i Modrzewnica nadal bez
-  modelu. Regresja 8: bez cofnięć po obejrzeniu tablic; a01 dało przyczynę E4.
+  modelu. W 1319: 36/70 (balustrada Muraj). Regresja 8: bez cofnięć po obejrzeniu tablic; a01 dało przyczynę E4.
 - **E4–E5 (w 1316):** wykończenie ścian per kondygnacja; elewacja pary bliźniaczej rejestrowana na segmencie;
   skrzydło drzwi z listwą szkła. Sprawdzarka 35/70.
 - **Interfejs Androida: NOT_VERIFIED** (brak urządzenia); czasy tylko z hosta.
