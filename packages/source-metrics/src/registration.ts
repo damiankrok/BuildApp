@@ -297,6 +297,8 @@ export type SolvedLadder = {
  * than this many times the tolerance — far enough off the line to be a misread, not a label drawn a few pixels off it.
  */
 export const LADDER_SUBSTITUTION_MIN_MISS = 2
+/** EXTERIOR-COMPLETE: with this many other rungs on the line the ladder is over-determined and substitutes as before. */
+export const LADDER_OVERDETERMINED_OTHERS = 3
 
 export function solveLevelLadder(candidates: readonly DatumCandidate[], options: { tolerancePx?: number } = {}): SolvedLadder {
   const tolerance = options.tolerancePx ?? 6
@@ -382,8 +384,8 @@ export function solveLevelLadder(candidates: readonly DatumCandidate[], options:
   }
 
   const final = support(line)
-  // EXTERIOR-COMPLETE (Bakopy): a substituted reading replaces the rung's clean one only where the clean one is clearly
-  // off the ladder — by more than `LADDER_SUBSTITUTION_MIN_MISS` tolerances. A misread digit puts a height metres or
+  // EXTERIOR-COMPLETE (Bakopy): on a ladder its other rungs fix exactly (two of them), a substituted reading replaces the
+  // rung's clean one only where the clean one is clearly off it — by more than `LADDER_SUBSTITUTION_MIN_MISS` tolerances. A misread digit puts a height metres or
   // half a metre off ("+2,46" for +2,96: 0.5 m; corrected); "+6,28" read clean 6.4 px off a ladder its two other rungs
   // fix exactly is the drawing's placement, not a misread, and was replaced by an unread "+6,18". The clean reading then
   // stays, unresolved against the scale, never the substitute.
@@ -391,7 +393,10 @@ export function solveLevelLadder(candidates: readonly DatumCandidate[], options:
     if (pick.reading.substitutions === 0) continue
     const clean = candidates[i].readings.filter((r) => r.substitutions === 0)
     const cleanMiss = Math.min(...clean.map((r) => Math.abs(line.zeroRow - r.value / line.scale - candidates[i].rowPx)))
-    if (clean.length > 0 && cleanMiss <= LADDER_SUBSTITUTION_MIN_MISS * tolerance) final.picks.delete(i)
+    // a line through three or more other rungs is over-determined, and a clean reading off it by more than the tolerance
+    // is a misread there as before; through two it is exact by construction, and only a gross miss is
+    const others = final.picks.size - 1
+    if (clean.length > 0 && cleanMiss <= LADDER_SUBSTITUTION_MIN_MISS * tolerance && others < LADDER_OVERDETERMINED_OTHERS) final.picks.delete(i)
   }
   let sumSquare = 0
   candidates.forEach((c, i) => {

@@ -29,6 +29,11 @@ describe('EXTERIOR-COMPLETE: a reading is substituted only where the clean one i
     expect(ridge.value).toBeUndefined()
     expect(LADDER_SUBSTITUTION_MIN_MISS).toBe(2)
   })
+  it('on a ladder three other rungs over-determine, a clean reading off it by more than the tolerance is corrected as before', () => {
+    // the synthetic section's "+5,40" read 5.1: 11.7 px off a line through three other rungs
+    const solved = solveLevelLadder([rung('a', 406, 0), rung('b', 301, 2.8), rung('c', 201, 5.1, [5.4]), rung('d', 119, 7.56)])
+    expect(solved.datums[2]).toMatchObject({ value: 5.4, origin: 'CHAIN_CORRECTED' })
+  })
   it('a misread by metres against three other heights is still corrected', () => {
     const solved = solveLevelLadder([rung('a', 642, 0), rung('b', 415.3, 5.06, [3.06]), rung('c', 296.1, 4.67), rung('d', 53.1, 7.95)])
     expect(solved.datums[1]).toMatchObject({ value: 3.06, origin: 'CHAIN_CORRECTED' })

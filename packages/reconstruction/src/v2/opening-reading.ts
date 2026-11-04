@@ -436,9 +436,10 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
   // timber is warm (red well above blue); glass mirroring sky is cool however saturated
   const warm = warmSum / n >= CLAD_MIN_WARMTH
   const kind: OpeningFace['kind'] = neutralShare >= OPAQUE_PANEL_MIN_NEUTRAL && (alongRowStd <= OPAQUE_PANEL_MAX_ROW_STD || downColumnStd <= PANEL_MAX_DOWN_COLUMN_STD) && toneChangesPerRow <= PANEL_MAX_TONE_CHANGES_PER_ROW ? 'OPAQUE_PANEL' : meanSaturation >= CLAD_MIN_SATURATION && warm ? 'CLAD' : neutralShare < 0.75 && alongRowStd > 10 ? 'GLAZED' : 'UNCLEAR'
+  // the thirds of the face as it was read — inside the same inset, clear of the reveals' shadows at the jambs
   const across = (): boolean => {
-    const w = (box.x1 - box.x0) / 3
-    return [0, 1, 2].every((k) => openingFace(raster, { x0: box.x0 + k * w, x1: box.x0 + (k + 1) * w, y0: box.y0, y1: box.y1 }, false)?.kind === 'OPAQUE_PANEL')
+    const w = (x1 - x0) / 3
+    return [0, 1, 2].every((k) => openingFace(raster, { x0: x0 + k * w, x1: x0 + (k + 1) * w, y0: box.y0, y1: box.y1 }, false)?.kind === 'OPAQUE_PANEL')
   }
   return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000, downColumnStd: Math.round(downColumnStd * 10) / 10, ...(kind === 'OPAQUE_PANEL' && thirds ? { acrossOpaque: across() } : {}) }
 }

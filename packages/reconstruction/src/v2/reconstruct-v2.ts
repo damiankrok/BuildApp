@@ -1668,19 +1668,23 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // 005Y-N5 (C3): a body's garage: a room of it the publisher's list names a garage, or — where the room's number was
   // not read — the whole body, when a vehicle door was read in one of its walls
   // EXTERIOR-COMPLETE: where no room's number was read, the one single-storey attached body whose floor inside its
-  // walls is the one garage the publisher's list states (within GARAGE_BODY_AREA_TOLERANCE) is that garage; two bodies
-  // that fit are both left unbound (named, not chosen)
+  // walls is the one garage the publisher's list states (within GARAGE_BODY_AREA_TOLERANCE) is that garage, when no other
+  // attached body comes within twice that; otherwise none is bound (named, not chosen)
   const listedGarages = publishedRooms.filter((x) => x.storey === 'GROUND' && GARAGE_LABEL.test(x.label))
   const bodyGarage = ((): { massId: string; why: string } | undefined => {
     if (garageRooms.length > 0 || listedGarages.length !== 1) return undefined
     const listed = listedGarages[0]
-    const fits = masses.filter((x) => x.role === 'ATTACHED' && x.storeys.length === 1 && x.storeys[0] === 0).flatMap((x) => {
+    // every attached body is weighed, and the one that fits must stand clear of all the others: a body within twice the
+    // tolerance is as near a fit (Bakopy: the living wing 40.58 m² and the garage 32.8 m² against 38.01 m²)
+    const weighed = masses.filter((x) => x.role === 'ATTACHED').map((x) => {
       const inside = Math.max(0, x.x1 - x.x0 - 2 * (x.wallThicknessM ?? T)) * Math.max(0, x.z1 - x.z0 - 2 * (x.wallThicknessM ?? T))
-      return Math.abs(inside - listed.area) <= GARAGE_BODY_AREA_TOLERANCE * listed.area ? [{ massId: x.id, inside }] : []
+      return { massId: x.id, inside, off: Math.abs(inside - listed.area) / listed.area, single: x.storeys.length === 1 && x.storeys[0] === 0 }
     })
-    if (fits.length > 1) gap({ what: 'the body that holds the listed garage', reason: `${fits.map((f) => `${f.massId} (${f.inside.toFixed(2)} m² inside its walls)`).join(' and ')} both fit the listed ${listed.label} of ${listed.area} m²: none is chosen`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
-    if (fits.length !== 1) return undefined
-    return { massId: fits[0].massId, why: `${fits[0].massId}, ${fits[0].inside.toFixed(2)} m² inside its walls, is the only single-storey attached body that fits the listed ${listed.label} of ${listed.area} m²` }
+    const fits = weighed.filter((f) => f.single && f.off <= GARAGE_BODY_AREA_TOLERANCE)
+    const near = weighed.filter((f) => f.off <= 2 * GARAGE_BODY_AREA_TOLERANCE)
+    if (fits.length === 1 && near.length > 1) gap({ what: 'the body that holds the listed garage', reason: `${near.map((f) => `${f.massId} (${f.inside.toFixed(2)} m² inside its walls)`).join(' and ')} all come near the listed ${listed.label} of ${listed.area} m²: none is chosen`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    if (fits.length !== 1 || near.length !== 1) return undefined
+    return { massId: fits[0].massId, why: `${fits[0].massId}, ${fits[0].inside.toFixed(2)} m² inside its walls, is the only attached body that comes near the listed ${listed.label} of ${listed.area} m²` }
   })()
   const garagesOf = (m: MassV2, r: { x0: number; z0: number; x1: number; z1: number }): Array<{ bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }> => {
     const named = garageRooms.filter((g) => g.massId === m.id)
