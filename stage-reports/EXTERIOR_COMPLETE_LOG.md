@@ -267,3 +267,68 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   form is refused as "not seen against the sky"; a vegetation test that holds dark foliage, with the 21-house
   regression (it also drives side orientation), then the main roof's run over a front body under the same ridge.
 - Android UI NOT_VERIFIED (no device).
+
+## E9 — Bakopy's roofs, the three checks the coordinator asked for (checkpoints 5–8)
+
+- **Callout ring with unread digits** (`shutGateBays`): the ring is gate evidence only where it stands in the hole the
+  ink jambs leave, on the mouth's line; tests now pass `rings` (in the mouth: built; a carport between short piers with
+  no ring: open; a ring in the room or over a pier: no evidence). The ring's digits are never a value.
+- **False second gate** (`opening-0-rear-6-0`, wing's 400/230 glazing): first wrong reading — the recogniser read
+  "230" stably but under its own gate, the template's near-tie "290" stood alone (Arlety 105/210 and Lipienniki 80/230
+  are the same pattern, template wrong each time); the template's reading now carries the recogniser's as an equal,
+  named rival (never in its place). First wrong classification — a wide opening to the floor in a low attached body
+  was a vehicle door by width alone; it now needs a garage room's wall or an opaque face read as one panel in each
+  third of its width. Where no room number is read, the one listed garage binds to an attached body by floor area
+  only when no other attached body comes within twice the tolerance (Rarytasy: bound; Bakopy: wing 40.58 / garage
+  32.8 m² against 38.01 — not bound, ambiguity recorded).
+- **Ridge +6,28 → 6.18**: the level ladder substituted a clean reading 6.4 px off a line two other rungs fix exactly.
+  A near miss (≤ 2 tolerances) now keeps the clean reading on such a ladder; on one three or more other rungs
+  over-determine, substitution is as before. Checked against the printed sheets: Bakopy +6,28 ✓; Willa Maja +2,96/+7,98
+  and Arganiach +7,99 (OCR read 4 for 9) still corrected ✓; the first attempt ("three other rungs") broke those two and
+  was replaced; a second attempt fixed Bratki (+2,96) and Dalie (+3,06) but broke a synthetic misread on four rungs and
+  was replaced — Bratki/Dalie stay at 1317 (2.86 / 3.00), recorded open.
+- **FIRST_BAD for the dark crowns** (shown on both Bakopy side views): the profile walk stopped on olive (157,163,63)
+  and near-black (0,2,0) crown pixels and sky cut off from the flood, 0.9–1.4 m over the ridge, so every attached
+  body's view was refused. `elevation-background.ts`: vegetation by neighbourhood (plant hue/saturation, textured), sky
+  seen through it; a 0.3 m solid run under the top. Dark roof, chimneys and the timber gable stay (test). Side views
+  then agree on the main roof (offset 0.137 m both).
+- **Front/rear renders** whose straight-edge outline fits no span are measured again against that background (largest
+  region over the ground line, paving cut, chimney blocks and flecks out of the top) and taken only when they fit a span:
+  Bakopy front and rear register (rear keeps ~0.4 m of crown at its top: recorded); Muraje's garden elevation registers
+  (10.2 m span, ground −0.31 at a terrain of −0.30).
+- **Roofs**: `UNDER_MAIN` — a body whose top is level at the main ridge, along it, within the main roof's width at an
+  end of its ridge, is under the main roof run on: Bakopy's garage and the covered approach under the long roof. The
+  wing reads a cross gable on the registered front/rear (2.81 m against 3.01 m at the stated 35°).
+- An opening read on an elevation has its sill below the storey's wall head (the garage gate was read in the timber
+  gable above it once the gable was the garage's).
+- Regression (full path t13 + solver t15 on the final code; Bratki/Dalie full path again): checker 35/70 (unchanged);
+  10 houses byte-identical to 1317; changed and judged against the sheets — Muraje (garden-view heights; a false
+  sectional gate on its terrace glazing found and removed), Ciesz/Aurory/Trytomach (heights read on registered views
+  instead of assumed), Marcówki (2.30 → 2.28 m), Rarytasy/Sasanki (notes only).
+
+## E10 — test delivery 1318
+
+- Commit `a79bcea44885ed665e2ac833286ba147f8fa6fe8`. `BuildPlan-owner-preview-1318.apk`, `com.buildplan.preview`,
+  versionCode 1318, `0.1318.0-owner`, arm64-v8a, 49 426 683 B, SHA-256
+  `34bc9bb2e68801e188e61d9f3093d76b93fc932478741daa5212f739b26e5505`; signer
+  `6e48fac4afaa3d70e70de5bc608aa4c4194206a9e6bc993dab56382b921ca0da` (unchanged); embedded `analyzer.mjs`
+  `faafc789cab6709c7650304ace4034f54d3d32a3b8fc82c068cb669681079ab7` (solver 2.26.0, metric reader 1.7.0); 10/10 asset
+  manifest entries match.
+- Embedded path (the APK's analyzer bundle, host Node — not a phone) on Bakopy's live page: first sheet 15.7 s, done
+  288 s, 114 events, 32 sheets, 106 copies SHA-verified, 0 mismatched, copies removed; model
+  `b1099a1d905b0ca53f2aa8d080e212274b94b472ab7186c53cb7b96cbc15e031` = the desktop PO; peak RSS 990 MB (host).
+- Tests on `a79bcea`: 3375 pass, 17 fail — exactly the recorded baseline (architecture 11, analyzer-api 4,
+  local-analyzer 2).
+- Bakopy against its source list, PO: main body, garage, gate (front, sectional), entrance door, wing — as in 1317;
+  NEW: one long main roof over the garage and the covered approach ✓; the wing's cross gable ✓; ridge 6.28 (printed) ✓;
+  no second gate ✓. NOT YET: the wing's tall glazed east gable (two windows and a low strip instead), the rear glazing
+  built 2.9 m (printed 400/230; 230 kept as a named rival, no registered view decides it), the approach's post and slat
+  screen, the pergola terrace, the timber gable cladding and grey/timber palette (the garage gable renders dark).
+- Private delivery outside Git: `BuildPlan-EXTERIOR-COMPLETE-Private-1318.zip`, 893 files, SHA-256
+  `cd5942b09cecb0dc3fa792e2006eef8bfbf32dec134753b00c1203771ecd849d` (all houses' originals with hashes, PRZED = 1317 /
+  PO = 1318 models, programs, all-sides renders, boards; Bakopy PRZED/PO with full-path evidence and board; checker,
+  tests, APK build and live-smoke evidence).
+- Next concrete action: the wing's gable end — read the gable glazing on the side view in front of the main roof
+  (the side views see the wing's gable against the main roof, not the sky); then the wall palette per facade zone
+  (timber gable over grey), the approach's post and the pergola.
+- Android UI NOT_VERIFIED (no device). H2 still sealed.

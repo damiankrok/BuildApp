@@ -142,3 +142,17 @@ próby na żywo i ograniczenia.
   na widokach bocznych czyta korony drzew za dachem) — następny krok.
 - **APK 1317** (`cf6a8d9`): SHA-256 `6388302f…6b97`, analizator `848937d0…b238`; ścieżka osadzona na żywej stronie
   Bakop daje model identyczny z desktopowym PO (`7c1acde7…fa91`). Interfejs Androida: NOT_VERIFIED.
+- **E9 / APK 1318** (`a79bcea`, SHA-256 `34bc9bb2…5505`, analizator `faafc789…9ab7`, solver 2.26.0, czytnik 1.7.0):
+  - FIRST_BAD dachów: korony drzew (oliwkowe i prawie czarne) i niebo między nimi brane za szczyt bryły na obu widokach
+    bocznych; teraz tło = roślinność i niebo za nią (`elevation-background.ts`), ciemny dach, kominy i szczyty zostają.
+  - Front i tył Bakop rejestrowane po sylwetce mierzonej na tym tle; dach główny przechodzi nad garaż i zadaszone
+    dojście (`UNDER_MAIN`); skrzydło ma dach dwuspadowy poprzeczny; kalenica 6,28 jak na rysunku; brak drugiej bramy.
+  - Rozbieżność dwóch czytników cyfr zostaje nazwana (odczyt rozpoznawacza jako równorzędny rywal, nigdy w miejsce);
+    brama samochodowa to jeden panel na całej szerokości; garaż przypisany po powierzchni tylko jednoznacznie.
+  - Regresja (pełna ścieżka): sprawdzarka 35/70 bez zmian, 10 domów bajt w bajt jak 1317, pozostałe ocenione względem
+    arkuszy (Muraje: wykryta i usunięta fałszywa brama na przeszkleniu tarasu).
+  - Jeszcze nie: przeszklony szczyt skrzydła, wysokość przeszklenia tylnego (2,9 zamiast 2,3 — rywal nazwany), słup
+    i lamele dojścia, pergola, paleta drewno/szary. Bratki/Dalie: +2,96/+3,06 nadal korygowane jak w 1317 (otwarte).
+  - Ścieżka osadzona na żywej stronie Bakop: model identyczny z desktopowym PO (`b1099a1d…e031`). Interfejs Androida:
+    NOT_VERIFIED. ZIP prywatny 1318: `cd5942b0…849d`, 893 pliki.
+
