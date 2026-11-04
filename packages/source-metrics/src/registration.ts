@@ -292,8 +292,11 @@ export type SolvedLadder = {
  * clean, the association is good, the value is plausible. It does not survive
  * being asked to agree with the other three heights on the same sheet.
  */
-/** EXTERIOR-COMPLETE: how many other rungs must stand on the scale before one rung's reading is substituted. */
-export const LADDER_CORRECTION_MIN_OTHERS = 3
+/**
+ * EXTERIOR-COMPLETE: a rung's clean reading is replaced by a substituted one only where it misses the ladder by more
+ * than this many times the tolerance — far enough off the line to be a misread, not a label drawn a few pixels off it.
+ */
+export const LADDER_SUBSTITUTION_MIN_MISS = 2
 
 export function solveLevelLadder(candidates: readonly DatumCandidate[], options: { tolerancePx?: number } = {}): SolvedLadder {
   const tolerance = options.tolerancePx ?? 6
@@ -379,15 +382,16 @@ export function solveLevelLadder(candidates: readonly DatumCandidate[], options:
   }
 
   const final = support(line)
-  // EXTERIOR-COMPLETE (Bakopy): a reading is replaced by a substituted one only on a ladder the OTHER rungs over-
-  // determine — at least `LADDER_CORRECTION_MIN_OTHERS` of them on the line. Through two other rungs the line is
-  // exact, and a third rung's rule drawn a few pixels off is as much the drawing's imprecision (or either of the two
-  // rungs') as a misread: "+6,28" read clean was replaced by an unread "+6,18" for a 6.4 px miss. The printed reading
-  // then stays, unresolved against the scale; a misread by metres against three other heights is still corrected.
+  // EXTERIOR-COMPLETE (Bakopy): a substituted reading replaces the rung's clean one only where the clean one is clearly
+  // off the ladder — by more than `LADDER_SUBSTITUTION_MIN_MISS` tolerances. A misread digit puts a height metres or
+  // half a metre off ("+2,46" for +2,96: 0.5 m; corrected); "+6,28" read clean 6.4 px off a ladder its two other rungs
+  // fix exactly is the drawing's placement, not a misread, and was replaced by an unread "+6,18". The clean reading then
+  // stays, unresolved against the scale, never the substitute.
   for (const [i, pick] of [...final.picks]) {
     if (pick.reading.substitutions === 0) continue
-    const others = [...final.picks.keys()].filter((k) => k !== i).length
-    if (others < LADDER_CORRECTION_MIN_OTHERS) final.picks.delete(i)
+    const clean = candidates[i].readings.filter((r) => r.substitutions === 0)
+    const cleanMiss = Math.min(...clean.map((r) => Math.abs(line.zeroRow - r.value / line.scale - candidates[i].rowPx)))
+    if (clean.length > 0 && cleanMiss <= LADDER_SUBSTITUTION_MIN_MISS * tolerance) final.picks.delete(i)
   }
   let sumSquare = 0
   candidates.forEach((c, i) => {

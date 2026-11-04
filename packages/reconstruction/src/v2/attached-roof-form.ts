@@ -31,6 +31,7 @@ import type { Mask, Raster } from '@buildapp/source-cv'
 import { skyMask } from './camera.js'
 import type { ElevationFrameV2 } from './frame.js'
 import { mainTopProfile, topOffset } from './side-orientation.js'
+import { elevationBackground } from './elevation-background.js'
 
 export type PlanBox = { x0: number; x1: number; z0: number; z1: number }
 
@@ -71,6 +72,12 @@ export type AttachedRoofForm =
       eaveY?: number
     }
   | { kind: 'FLAT'; readings: BodyTopReading[]; why: string }
+  /**
+   * EXTERIOR-COMPLETE (Bakopy): the main roof runs on over the body — its top is level at the main ridge, along the
+   * main ridge, and the body stands within the main roof's width at an end of its ridge. `footprint` is the main roof's
+   * footprint carried over the body (the main roof's width across the ridge, out to the body's far end along it).
+   */
+  | { kind: 'UNDER_MAIN'; footprint: PlanBox; measuredRiseM: number; readings: BodyTopReading[]; why: string }
   | { kind: 'UNREAD'; readings: BodyTopReading[]; why: string }
 
 export type AttachedRoofFormInput = {
@@ -153,9 +160,11 @@ export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: E
     }
   }
   const yAt = (row: number): number => view.yOf(row) - offset
+  // EXTERIOR-COMPLETE (Bakopy): trees behind the body and the sky seen through them are background too
+  const behind = elevationBackground(raster, sky)
   const background = (x: number, y: number): boolean => {
     const i = y * raster.width + x
-    if (sky.data[i] === 1) return true
+    if (behind.data[i] === 1) return true
     const o = i * 4
     return isGreen(raster.data[o], raster.data[o + 1], raster.data[o + 2])
   }
@@ -219,6 +228,29 @@ export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: E
   return { ...base, profile: 'IRREGULAR', riseM: round6(median), residualM: round6(Math.min(levelResidual, tentResidual)), why: `on the ${side} view the body's top is neither level nor a gable (median ${median.toFixed(2)} m above the wall head, residual ${Math.min(levelResidual, tentResidual).toFixed(2)} m): not read` }
 }
 
+/** A body further than this outside the main roof's width, or this far from an end of its ridge, is not under it (m). */
+export const UNDER_MAIN_REACH_M = 0.3
+
+/** Whether a body with a level top along `ridgeAxis` stands where the main roof can run on over it, and the roof's reach. */
+export function underMainRoof(input: AttachedRoofFormInput, ridgeAxis: 'X' | 'Z', riseM: number, tolerance: number): { footprint: PlanBox; why: string } | undefined {
+  const main = input.mainRoof
+  if (!main || main.ridgeAxis !== ridgeAxis) return undefined
+  if (Math.abs(input.wallTopY + riseM - main.ridgeY) > tolerance) return undefined
+  const f = main.footprint
+  const b = input.body
+  const R = UNDER_MAIN_REACH_M
+  const [a0, a1, ba0, ba1] = ridgeAxis === 'Z' ? [f.x0, f.x1, b.x0, b.x1] : [f.z0, f.z1, b.z0, b.z1]
+  if (ba0 < a0 - R || ba1 > a1 + R) return undefined
+  const [r0, r1, br0, br1] = ridgeAxis === 'Z' ? [f.z0, f.z1, b.z0, b.z1] : [f.x0, f.x1, b.x0, b.x1]
+  const before = Math.abs(br1 - r0) <= R && br0 < r0
+  const after = Math.abs(br0 - r1) <= R && br1 > r1
+  if (!before && !after) return undefined
+  const lo = before ? Math.min(r0, br0) : r0
+  const hi = after ? Math.max(r1, br1) : r1
+  const footprint = ridgeAxis === 'Z' ? { x0: f.x0, x1: f.x1, z0: lo, z1: hi } : { x0: lo, x1: hi, z0: f.z0, z1: f.z1 }
+  return { footprint, why: `the body stands within the main roof's width (${a0.toFixed(2)}..${a1.toFixed(2)} across its ridge) against the ${before ? 'low' : 'high'} end of its ridge` }
+}
+
 /** Decide the form of the roof over one attached body from every view that sees it against the sky. */
 export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoofForm {
   const readings = input.views.map(({ view, raster }) => readBodyTop(input, view, raster)).filter((r): r is BodyTopReading => !!r)
@@ -271,6 +303,11 @@ export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoof
         }
       }
     }
+    // EXTERIOR-COMPLETE (Bakopy): a level top at the main ridge, running along the main ridge, over a body standing
+    // within the main roof's width at an end of its ridge, is the main roof running on over the body — one roof over
+    // the body and whatever stands open beside it under that width (a covered approach), not a roof of the body's own
+    const under = peaked.length === 0 ? underMainRoof(input, ridgeAxis, measuredRiseM, tolerance) : undefined
+    if (under) return { kind: 'UNDER_MAIN', footprint: under.footprint, measuredRiseM: round6(measuredRiseM), readings, why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top level at ${(input.wallTopY + measuredRiseM).toFixed(2)} m, the main ridge (${input.mainRoof?.ridgeY.toFixed(2)} m, within ${tolerance.toFixed(2)} m), running along it, and ${under.why}: the main roof runs on over the body` }
     if (peaked.length === 0) return { kind: 'UNREAD', readings, why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top a level ${measuredRiseM.toFixed(2)} m above its wall head, which a gable at the stated ${input.statedPitchDeg}° would put at ${expectedRiseM.toFixed(2)} m: neither a flat roof nor that gable, left open` }
   }
   if (peaked.length > 0) {

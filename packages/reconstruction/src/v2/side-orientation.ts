@@ -19,6 +19,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { Mask, Raster } from '@buildapp/source-cv'
 import { skyMask } from './camera.js'
+import { elevationBackground } from './elevation-background.js'
 import type { ElevationFrameV2, ElevationRegistrationV2 } from './frame.js'
 
 export type SideProfile = {
@@ -34,6 +35,8 @@ export type SideProfile = {
 export type OrientationScore = { samples: number; medianErrorM: number }
 
 const isGreen = (r: number, g: number, b: number): boolean => g - Math.max(r, b) >= 8
+/** A body's top seen against what stands behind it is solid at least this far down (m). */
+export const TOP_SOLID_M = 0.3
 
 /**
  * The main roof's top seen on a view whose columns run along `alongAxis`: a
@@ -52,16 +55,31 @@ export function topResiduals(view: ElevationFrameV2, raster: Raster, profile: Si
   const out: number[] = []
   const N = 31
   const span = profile.to - profile.from
+  // EXTERIOR-COMPLETE (Bakopy): trees behind the roof and the sky seen through them are background too
+  const background = elevationBackground(raster, mask)
   for (let k = 0; k < N; k += 1) {
     const a = profile.from + span * (0.05 + (0.9 * k) / (N - 1))
     const px = Math.round(view.pxOf(a))
     if (px < 0 || px >= raster.width) continue
     const start = Math.max(0, Math.round(view.pyOf(profile.ceilingY)))
     let top: number | undefined
-    for (let y = start; y < raster.height; y += 1) {
+    const solid = (y: number): boolean => {
       const i = y * raster.width + px
       const o = i * 4
-      if (mask.data[i] === 1 || isGreen(raster.data[o], raster.data[o + 1], raster.data[o + 2])) continue
+      return !(background.data[i] === 1 || isGreen(raster.data[o], raster.data[o + 1], raster.data[o + 2]))
+    }
+    // EXTERIOR-COMPLETE (Bakopy): the top is where the body begins, solid for `TOP_SOLID_M` below it — a fleck of sky
+    // or a lit leaf among the crowns, background all round, is not the body's top; a chimney or a gable runs on down
+    // into the roof and is
+    const run = Math.max(3, Math.round(Math.abs(view.pyOf(0) - view.pyOf(TOP_SOLID_M))))
+    for (let y = start; y < raster.height; y += 1) {
+      if (!solid(y)) continue
+      let n = 1
+      while (n < run && y + n < raster.height && solid(y + n)) n += 1
+      if (n < run) {
+        y += n
+        continue
+      }
       top = y
       break
     }

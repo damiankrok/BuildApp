@@ -89,6 +89,7 @@ import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
 import { readFinishRuns, readMassTones, readReturnTones } from './tones.js'
 import { readTwinHalf } from './twin-elevation.js'
+import { silhouetteOverBackground } from './elevation-background.js'
 import { featureGraphViolations, sealFeatureGraph } from './graph.js'
 import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, ProvenanceStatus, SolvedFeature, SourceSighting, ViewFamily } from './graph.js'
 import { ledgerViolations, sealLedger } from './ledger.js'
@@ -187,7 +188,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a face keeps a stated 5 cm jamb there (the model needs wall on both sides of an opening; a sub-millimetre sliver put
 // its reveal into the other wall's face). The compiler, unversioned, also changed in this stage: a wall top over a
 // valley crossing its thickness takes the lowest underside across the wall; roof cut lines closer than 0.1 mm are one
-export const SOLVER_V2_VERSION = '2.25.0' as const
+// 2.26.0 (EXTERIOR-COMPLETE E9, Bakopy): trees behind a roof are background to the profile walks (`elevation-background`)
+// and a top must run solid 0.3 m; a render whose straight-edge outline fits no span is measured again against the sky and
+// the vegetation; an attached body whose top is level at the main ridge, within the main roof's width at an end of its
+// ridge, is under the main roof run on (`UNDER_MAIN`); an opening's elevation reading has its sill below the storey's wall
+// head; a wide low body is a vehicle door only in a garage's wall or with an opaque face; the one single-storey attached
+// body whose floor fits the one listed garage is that garage where no room number was read
+export const SOLVER_V2_VERSION = '2.26.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -350,6 +357,9 @@ export type PartialPreviewReport = {
 const ROOF_DETAILS_SUBPHASE = { id: 'ROOF_DETAILS', label: 'reading the roof details' }
 /** 005Y: an elevation whose registered ground lands farther than this from the terrain does not decide a roof's ends. */
 const ROOF_END_VIEW_MAX_GROUND_ERROR_M = 0.3
+/** EXTERIOR-COMPLETE: a body's floor inside its walls within this share of the listed garage's area is that garage. */
+export const GARAGE_BODY_AREA_TOLERANCE = 0.1
+
 /** 005Y: how far an end's outline may stray from a hip's line (as a share of its rise to the ridge, and of the pitch's slope) to be read as one. */
 const ROOF_END_SLOPE_TOLERANCE = 0.15
 
@@ -361,7 +371,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const keep = options.frameFilter
   const ctx = emptySolverRecord()
   const recorder = createSolverRecorder(ctx)
-  const { step, gap, record, sighting, feature, relate } = recorder
+  const { step, record, sighting, feature, relate } = recorder
+  const gap: typeof recorder.gap = (g) => {
+    options.debug?.(`gap: ${g.what}: ${g.reason}`)
+    return recorder.gap(g)
+  }
   const frameById = new Map(graph.coordinateFrames.map((f) => [f.id, f]))
 
 
@@ -791,6 +805,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const half = twin ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, twin.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
       options.debug?.(`twin-elevation ${r.side} ${r.frameId}: ${twin ? `${twin.half} half ${twin.extent.x0}..${twin.extent.x1} (spreads ${twin.spreads.join('/')}) -> ${half ? `${half.mpp} m/px ground ${half.bottomY}` : 'none'}` : 'not a pair'}`)
       if (twin && half) reg = { ...half, why: `${half.why}; ${twin.why}` }
+    }
+    // EXTERIOR-COMPLETE (Bakopy): a render set before trees measures no outline from its straight edges — the apex and
+    // a gable's far side against the crowns are lost. The silhouette is measured again against the sky and the vegetation
+    // behind it (`elevation-background.ts`), the ground kept, and taken only when it fits a span as any silhouette must.
+    if (!reg) {
+      let mask = skyMasks.get(raster)
+      if (!mask) {
+        mask = skyMask(raster)
+        skyMasks.set(raster, mask)
+      }
+      const outline = silhouetteOverBackground(raster, mask, r.extent.y1)
+      const again = outline ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, outline.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
+      options.debug?.(`elevation-registration ${r.side} ${r.frameId} over the background: ${outline ? `${outline.extent.x0},${outline.extent.y0}..${outline.extent.x1},${outline.extent.y1}` : 'none'} -> ${again ? `${again.mpp} m/px ground ${again.bottomY}` : 'none'}`)
+      if (outline && again) reg = { ...again, why: `${again.why}; ${outline.why}` }
     }
     // 005V-N4: a silhouette that fits no span of the house may take in what stands beside it (a pergola) or a roof's
     // overhang. The walls are then looked for as a repeated band of neutral pixels across the silhouette, scaled by the
@@ -1639,9 +1667,25 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   let hostIndex = 0
   // 005Y-N5 (C3): a body's garage: a room of it the publisher's list names a garage, or — where the room's number was
   // not read — the whole body, when a vehicle door was read in one of its walls
+  // EXTERIOR-COMPLETE: where no room's number was read, the one single-storey attached body whose floor inside its
+  // walls is the one garage the publisher's list states (within GARAGE_BODY_AREA_TOLERANCE) is that garage; two bodies
+  // that fit are both left unbound (named, not chosen)
+  const listedGarages = publishedRooms.filter((x) => x.storey === 'GROUND' && GARAGE_LABEL.test(x.label))
+  const bodyGarage = ((): { massId: string; why: string } | undefined => {
+    if (garageRooms.length > 0 || listedGarages.length !== 1) return undefined
+    const listed = listedGarages[0]
+    const fits = masses.filter((x) => x.role === 'ATTACHED' && x.storeys.length === 1 && x.storeys[0] === 0).flatMap((x) => {
+      const inside = Math.max(0, x.x1 - x.x0 - 2 * (x.wallThicknessM ?? T)) * Math.max(0, x.z1 - x.z0 - 2 * (x.wallThicknessM ?? T))
+      return Math.abs(inside - listed.area) <= GARAGE_BODY_AREA_TOLERANCE * listed.area ? [{ massId: x.id, inside }] : []
+    })
+    if (fits.length > 1) gap({ what: 'the body that holds the listed garage', reason: `${fits.map((f) => `${f.massId} (${f.inside.toFixed(2)} m² inside its walls)`).join(' and ')} both fit the listed ${listed.label} of ${listed.area} m²: none is chosen`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    if (fits.length !== 1) return undefined
+    return { massId: fits[0].massId, why: `${fits[0].massId}, ${fits[0].inside.toFixed(2)} m² inside its walls, is the only single-storey attached body that fits the listed ${listed.label} of ${listed.area} m²` }
+  })()
   const garagesOf = (m: MassV2, r: { x0: number; z0: number; x1: number; z1: number }): Array<{ bounds: { x0: number; z0: number; x1: number; z1: number }; why: string }> => {
     const named = garageRooms.filter((g) => g.massId === m.id)
     if (named.length > 0) return named
+    if (bodyGarage?.massId === m.id) return [{ bounds: r, why: bodyGarage.why }]
     const vehicle = openings.find((o) => o.massId === m.id && o.storeyIndex === 0 && o.family === 'GARAGE_DOOR')
     return vehicle ? [{ bounds: r, why: `the body ${m.id} holds a vehicle door (${vehicle.id})` }] : []
   }
@@ -1663,7 +1707,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const gable = isGableEnd(m, facade) && index === topStorey && mainRoof ? { eaveY: mainRoof.eaveY, pitchDeg: mainRoof.pitchDeg, ridgeAlongAt: mainRoof.ridgeAt, eaveAtLow: from, eaveAtHigh: to, buildUpVerticalM: mainRoof.buildUpVerticalM } : undefined
         // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
         const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
-        const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height }
+        const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height, wallHeadY: l.wallTop }
         const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), ...(garageStated ? { garageStated: true } : {}), faceViews: viewsOf(facade).filter((v) => openingHeightRefused.has(v.view.registration.frameId)), index: hostIndex++ })
         const faceIndex = hostIndex - 1
         // N8-02B: over a stretch this face shares as one wall, the gaps are read on that wall (below, or by its host)
@@ -1943,7 +1987,16 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       // N8-01: a body whose top storey is the main body's top storey may carry its roof on knee walls, as the main does
       const sharesTop = Math.max(...whole.storeys) === topStorey && topStorey > 0
       const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, debug: options.debug, ...(sharesTop ? { topStoreyFloorY: l.elevation } : {}) })
+      options.debug?.(`attached roof form ${m.id} (${m.x0},${m.z0}..${m.x1},${m.z1}): ${form.kind}: ${form.why}`)
       step({ stage: 'roof-details', what: `the form of the roof over ${m.id}, read on the elevations`, method: 'DISCRETE_SELECTION', detail: `${form.kind}: ${form.why}${form.readings.length > 0 ? ` [${form.readings.map((r) => `${r.side.toLowerCase()} ${r.profile.toLowerCase()} ${r.riseM.toFixed(2)} m over ${r.samples} columns`).join('; ')}]` : ''}`, inputs: views.length, outputs: form.readings.length })
+      // EXTERIOR-COMPLETE (Bakopy): the main roof runs on over the body: its footprint is carried over it, and the body
+      // has no roof of its own (its walls die into the main roof's planes as the main body's do)
+      if (form.kind === 'UNDER_MAIN' && mainRoof) {
+        const f = form.footprint
+        mainRoof = { ...mainRoof, footprint: { x0: Math.min(mainRoof.footprint.x0, f.x0), x1: Math.max(mainRoof.footprint.x1, f.x1), z0: Math.min(mainRoof.footprint.z0, f.z0), z1: Math.max(mainRoof.footprint.z1, f.z1) }, coversZonesWhy: `${mainRoof.coversZonesWhy}; it runs on over ${m.id}: ${form.why}` }
+        relate('SUPPORTS', m.featureId, mainRoof.featureId, `the main roof runs on over ${m.id}`)
+        continue
+      }
       if (form.kind === 'GABLE') {
         const eaveY = form.eaveY ?? round6(l.wallTop + buildUp)
         const layoutOfRoof = attachedGableLayout(m, form.ridgeAxis, form.pitchDeg, eaveY, mainRoof)

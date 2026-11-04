@@ -48,6 +48,11 @@ export type WallHost = {
   floorY: number
   storeyHeightM: number
   /**
+   * EXTERIOR-COMPLETE (Bakopy): the head of this storey's walls, absolute, where it is known: an opening of the storey
+   * has its sill below it, even where its head rises into a gable.
+   */
+  wallHeadY?: number
+  /**
    * 005Y-N5 (C5): `from` and `to` are the faces of the walls this one meets (a recess's back wall between its returns),
    * not the outer corners of a ring: nothing of the meeting walls lies inside the span, so a gap may start at either end.
    */
@@ -459,6 +464,9 @@ function readOpeningOnViews(views: OpeningReadingInput['views'], interval: [numb
     const byContrast = elevationExtent(raster, view, interval, host.floorY, host.storeyHeightM)
     const ext = preferredElevationExtent(byObject, byContrast)
     if (!ext) continue
+    // EXTERIOR-COMPLETE (Bakopy): an opening of this storey has its sill below the storey's wall head — an extent whose
+    // sill is above it is something on the gable over the storey (a change of cladding), not this gap
+    if (host.wallHeadY !== undefined && ext.sillY >= host.wallHeadY) continue
     const confidence = elevationConfidence(ext.contrast)
     if (!elevation || confidence > elevation.confidence) {
       // EXTERIOR-COMPLETE: what fills it, read inside the extent the elevation gives it

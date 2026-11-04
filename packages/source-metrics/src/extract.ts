@@ -63,6 +63,7 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.4.0 (005I): labels are assigned to chains globally, and label-ink marks are no measurement points. */
 /** 1.5.0 (N8-03B): a ring half refused only on stability or mean is read where its other half passed and a sibling ring reads that half the same outright. */
 /** 1.6.0 (EXTERIOR-COMPLETE): the occluded-line join and the sheet's vertical way up (dimension-lines 1.3.0, metric solver 1.5.0). */
+/** 1.7.0 (EXTERIOR-COMPLETE E9): two readers that read one ring half two ways have not read it; a ladder rung's clean reading is substituted only when it misses the ladder by more than two tolerances. */
 export const METRIC_READER_VERSION = '1.7.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
