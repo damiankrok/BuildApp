@@ -63,7 +63,7 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.4.0 (005I): labels are assigned to chains globally, and label-ink marks are no measurement points. */
 /** 1.5.0 (N8-03B): a ring half refused only on stability or mean is read where its other half passed and a sibling ring reads that half the same outright. */
 /** 1.6.0 (EXTERIOR-COMPLETE): the occluded-line join and the sheet's vertical way up (dimension-lines 1.3.0, metric solver 1.5.0). */
-export const METRIC_READER_VERSION = '1.6.0' as const
+export const METRIC_READER_VERSION = '1.7.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -788,8 +788,13 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         const refusedWidth = halfHeard ? planCorroborableWidth(halfHeard.width) : undefined
         // The template's reading of the other half is kept only where it read the half the recogniser passed the same
         // way: a template that misread this ring's ink once (700 for 200) has no claim on its other half either.
-        const templateWidths = heardHeightHalf && ring.heightCandidates[0]?.value !== heardHeightHalf.valueCm ? [] : ring.widthCandidates
-        const templateHeights = heardWidthHalf && ring.widthCandidates[0]?.value !== heardWidthHalf.valueCm ? [] : ring.heightCandidates
+        // EXTERIOR-COMPLETE (Bakopy): nor where the recogniser read the half itself, stably, and the template's first
+        // reading disagrees with it: two readers that read one half two ways have not read it (the recogniser's "230"
+        // refused on its own gate, the template's near-tie "290" over "230" and "240" — a 4.0 m window built 2.9 m tall).
+        // Both must have read the whole half — as many digits each — for it to be a disagreement and not a partial read.
+        const disagrees = (half: CalloutRingRecord['width'] | undefined, first: { value: number; text: string } | undefined): boolean => !!half && !half.accepted && half.stable && /^\d+$/.test(half.text) && first !== undefined && first.text.length === half.text.length && Number(half.text) !== first.value
+        const templateWidths = (heardHeightHalf && ring.heightCandidates[0]?.value !== heardHeightHalf.valueCm) || disagrees(heardRing?.width, ring.widthCandidates[0]) ? [] : ring.widthCandidates
+        const templateHeights = (heardWidthHalf && ring.widthCandidates[0]?.value !== heardWidthHalf.valueCm) || disagrees(heardRing?.height, ring.heightCandidates[0]) ? [] : ring.heightCandidates
         if (!recognised && (templateWidths.length === 0 && !heardWidthHalf && !refusedWidth)) continue
         if (!recognised && templateHeights.length === 0 && !heardHeightHalf) continue
         const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }

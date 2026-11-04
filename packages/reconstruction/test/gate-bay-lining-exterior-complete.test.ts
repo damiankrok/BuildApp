@@ -13,7 +13,7 @@
  * 1.0 m piers on the mouth's line.
  */
 import { describe, expect, it } from 'vitest'
-import type { Mask } from '@buildapp/source-cv'
+import type { Band, Mask } from '@buildapp/source-cv'
 import { shutGateBays } from '../src/plan-decomposition.js'
 import type { EdgeClosure, GridLine, PlanCell } from '../src/plan-decomposition.js'
 
@@ -70,12 +70,21 @@ function ink(o: { door: boolean; partitionAt?: number }): Mask {
   })
 }
 
-function run(m: Mask) {
+function run(m: Mask, o: { bands?: Band[]; rings?: Array<{ at: { x: number; y: number }; radiusPx: number }> } = {}) {
   const cs = cells()
   const byKey = new Map(cs.map((c) => [`${c.ix}:${c.iy}`, c]))
-  const bays = shutGateBays({ mask: m, cells: cs, byKey, linesX: LINES_X, linesY: LINES_Y, inside: [], tolerance: 3, minJambPx: 4, maxOpeningPx: 3.2 / MPP, maxWidePx: 7.0 / MPP, mppX: MPP, mppY: MPP, wallM: WALL_PX * MPP, wallPx: WALL_PX, chains: [] })
+  const bays = shutGateBays({ mask: m, cells: cs, byKey, linesX: LINES_X, linesY: LINES_Y, inside: o.bands ?? [], tolerance: 3, minJambPx: 4, maxOpeningPx: 3.2 / MPP, maxWidePx: 7.0 / MPP, mppX: MPP, mppY: MPP, wallM: WALL_PX * MPP, wallPx: WALL_PX, chains: [], ...(o.rings ? { rings: o.rings } : {}) })
   return { bays, cells: cs }
 }
+
+/**
+ * The band reader's view of the mouth's line: only the side walls' own ends lie on it (2 px each inside the pocket's
+ * span) — the piers are too short to be bands, as a carport's are. The mouth then reads 5.8 m wide: a wide mouth.
+ */
+const MOUTH_BANDS = [
+  { axis: 'HORIZONTAL', bounds: { x0: 2, y0: 166, x1: 12, y1: 174 }, thickness: 8, length: 10, fill: 1, axisPx: 170, pieces: 1, segments: [{ from: 2, to: 12 }] },
+  { axis: 'HORIZONTAL', bounds: { x0: 128, y0: 166, x1: 138, y1: 174 }, thickness: 8, length: 10, fill: 1, axisPx: 170, pieces: 1, segments: [{ from: 128, to: 138 }] },
+] as unknown as Band[]
 
 describe('EXTERIOR-COMPLETE: a garage whose back wall stands behind its cupboards', () => {
   it('the wall behind the lining closes the back, the door in it says the hole is a gate, the piers are its jambs: built', () => {
@@ -109,3 +118,27 @@ describe('EXTERIOR-COMPLETE: a garage whose back wall stands behind its cupboard
     expect(far.bays.some((b) => b.decision === 'GATE_SHUT')).toBe(false)
   })
 })
+
+describe('EXTERIOR-COMPLETE: an opening callout printed in a wide mouth', () => {
+  const RING = { at: { x: 70, y: 176 }, radiusPx: 10 }
+  it('the ring (its digits unread) says the hole is an opening in a wall: the piers are read off the ink and the garage is built', () => {
+    const { bays } = run(ink({ door: true }), { bands: MOUTH_BANDS, rings: [RING] })
+    const bay = bays.find((b) => b.decision === 'GATE_SHUT')
+    expect(bay?.why).toMatch(/an opening callout is printed in its mouth/)
+    // the hole is the drawing's, between the piers — no number from the ring is used anywhere
+    expect(bay?.gapM).toBeCloseTo(4.0, 1)
+    expect(bay?.jambsM[0]).toBeCloseTo(1.0, 1)
+  })
+  it('the same mouth with no ring — a carport between short piers — keeps its band jambs and stays open', () => {
+    const { bays } = run(ink({ door: true }), { bands: MOUTH_BANDS })
+    expect(bays.some((b) => b.decision === 'GATE_SHUT')).toBe(false)
+    expect(bays.find((b) => b.decision === 'LEFT_OPEN')?.why).toMatch(/no jamb of wall/)
+  })
+  it('a ring that is not in the mouth (in the room, or over a pier) says nothing about it', () => {
+    for (const ring of [{ at: { x: 70, y: 100 }, radiusPx: 10 }, { at: { x: 16, y: 176 }, radiusPx: 10 }]) {
+      const { bays } = run(ink({ door: true }), { bands: MOUTH_BANDS, rings: [ring] })
+      expect(bays.some((b) => b.decision === 'GATE_SHUT')).toBe(false)
+    }
+  })
+})
+

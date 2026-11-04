@@ -212,6 +212,31 @@ describe('the recogniser in the metric reading', () => {
     expect(alts.slice(1)).toEqual(ringCallout(off)?.alternatives)
   })
 
+  // EXTERIOR-COMPLETE (Bakopy): a 400/230 glazing whose lower half the recogniser read "230", stably but under its own
+  // gate, while the template's near-tie put "290" first — the template's reading was kept and the 4.0 m window built
+  // 2.9 m tall, as a second garage gate. Two readers that read one whole half two ways have not read it.
+  it('a half the recogniser read whole and stably, refused on its gate, that the template reads otherwise, is not read at all', async () => {
+    const off = extractMetricEvidence(options)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    expect(offHeight).toMatch(/^\d{3}$/)
+    const other = offHeight === '280' ? '260' : '280'
+    const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading(other, 0.5, 0.5) : undefined))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    const rec = (set.calloutRings ?? []).find((r) => Math.abs(r.centrePx.x - 90) <= 3)
+    expect(rec?.height.accepted).toBe(false)
+    // neither reading of the height survives: no candidate is the template's, none the refused one
+    const alts = ringCallout(set)?.alternatives ?? []
+    expect(alts.some((a) => a.why.startsWith('height') && (a.rawText === offHeight || a.rawText === other))).toBe(false)
+    expect(ringCallout(set)?.rawText ?? '').not.toContain(`/${offHeight}`)
+  })
+  it('the same refused half read as the template reads it keeps the template\'s reading', async () => {
+    const off = extractMetricEvidence(options)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading(offHeight, 0.5, 0.5) : undefined))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    expect(ringCallout(set)?.rawText).toBe(`110/${offHeight}`)
+  })
+
   it('without a recogniser the set carries no ring records and keeps its version', () => {
     const off = extractMetricEvidence(options)
     expect(off.calloutRings).toBeUndefined()

@@ -2854,12 +2854,16 @@ export function shutGateBays(input: {
     // wider than a door; a wide mouth keeps the jambs its bands draw — EXTERIOR-COMPLETE (Bakopy): unless an opening
     // callout is printed in it. The ring (read or not) says the hole is an opening in a wall that carries on as its
     // jambs, so the jambs are read off the ink as for a door; without one (a carport's short piers) they are not.
-    const calloutInMouth = rings.find((r) => {
+    // The ring must stand in the hole itself — between the jambs the ink then shows, on the mouth's line — not over a
+    // pier or in the room behind: a symbol beside the hole says nothing about it.
+    const ringIn = (lo: number, hi: number) => rings.find((r) => {
       const along = across ? r.at.x : r.at.y
       const deep = across ? r.at.y : r.at.x
-      return along > s0 + jambLo && along < s1 - jambHi && Math.abs(deep - line.px) <= r.radiusPx + wallPx
+      return along > lo && along < hi && Math.abs(deep - line.px) <= r.radiusPx + wallPx
     })
-    if ((gapPx <= maxOpeningPx || calloutInMouth) && (jambLo < wallPx + 2 || jambHi < wallPx + 2)) {
+    const doorSized = gapPx <= maxOpeningPx
+    let calloutInMouth = doorSized ? undefined : ringIn(s0 + jambLo, s1 - jambHi)
+    if ((doorSized || calloutInMouth) && (jambLo < wallPx + 2 || jambHi < wallPx + 2)) {
       // the mouth's own wall may stand up to a wall inside the line the grid kept (a front set back less than a cell)
       const probes = line.probesPx
       const inward = mouthSide === 1 || mouthSide === 2 ? -1 : 1
@@ -2884,7 +2888,9 @@ export function shutGateBays(input: {
       }
       const lo = inkRun(s0, 1, (s0 + s1) / 2)
       const hi = inkRun(s1 - 1, -1, (s0 + s1) / 2)
-      if (lo > jambLo || hi > jambHi) {
+      // a wide mouth's ink jambs stand only when the callout is in the hole they leave
+      if (!doorSized) calloutInMouth = ringIn(s0 + Math.max(jambLo, lo), s1 - Math.max(jambHi, hi))
+      if ((doorSized || calloutInMouth) && (lo > jambLo || hi > jambHi)) {
         jambLo = Math.max(jambLo, lo)
         jambHi = Math.max(jambHi, hi)
         const holePx = s1 - s0 - jambLo - jambHi

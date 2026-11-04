@@ -65,9 +65,9 @@ const callout = (text: string, gap: [number, number]): MetricEvidence => {
   return { id: `callout-${text}`, kind: 'OPENING_CALLOUT', rawText: text, alternatives: [], confidence: 0.8, textBox: { x0: c.x - 10, y0: c.y - 5, x1: c.x + 10, y1: c.y + 5 } } as unknown as MetricEvidence
 }
 
-function read(d: Draw, opts: { storey?: number; attached?: boolean; callouts?: MetricEvidence[] } = {}) {
+function read(d: Draw, opts: { storey?: number; attached?: boolean; callouts?: MetricEvidence[]; garageRooms?: OpeningReadingInput['garageRooms'] } = {}) {
   const { raster, plan } = planOf(d)
-  const found = readWallOpenings({ plan, planRaster: raster, host: host(opts.storey ?? 0), wallThicknessM: 0.4, callouts: opts.callouts ?? [], views: [], attachedSingleStorey: opts.attached ?? false, index: 0 })
+  const found = readWallOpenings({ plan, planRaster: raster, host: host(opts.storey ?? 0), wallThicknessM: 0.4, callouts: opts.callouts ?? [], views: [], attachedSingleStorey: opts.attached ?? false, index: 0, ...(opts.garageRooms ? { garageRooms: opts.garageRooms } : {}) })
   expect(found).toHaveLength(1)
   return found[0]
 }
@@ -114,8 +114,16 @@ describe('005U an assumed sill decides no opening kind', () => {
     expect(['DOOR', 'GLAZED_DOOR']).toContain(o.family)
   })
 
-  it('a printed wide height on an attached single-storey body still reads as a garage door', () => {
-    const o = read({ gap: [3, 5.5] }, { attached: true, callouts: [callout('250/220', [3, 5.5])] })
+  // EXTERIOR-COMPLETE (Bakopy): the rule changed consciously. A printed wide height in a low attached body is not by
+  // itself a vehicle door — a one-storey living wing's 400/230 terrace glazing was built as a second garage gate. The
+  // drawing must also say the body is a garage there: the gap in a garage room's wall, or an opaque panel on its face.
+  it('a printed wide height on an attached single-storey body is a garage door where the gap is in a garage room\'s wall', () => {
+    const garage = [{ bounds: { x0: 0, z0: 0, x1: 10, z1: 6 }, why: 'the room list names a garage here' }]
+    const o = read({ gap: [3, 5.5] }, { attached: true, callouts: [callout('250/220', [3, 5.5])], garageRooms: garage })
     expect(o.family).toBe('GARAGE_DOOR')
+  })
+  it('negative: the same printed wide height in a low attached body with no garage there is not a vehicle door', () => {
+    const o = read({ gap: [3, 5.5] }, { attached: true, callouts: [callout('250/220', [3, 5.5])] })
+    expect(o.family).not.toBe('GARAGE_DOOR')
   })
 })

@@ -292,6 +292,9 @@ export type SolvedLadder = {
  * clean, the association is good, the value is plausible. It does not survive
  * being asked to agree with the other three heights on the same sheet.
  */
+/** EXTERIOR-COMPLETE: how many other rungs must stand on the scale before one rung's reading is substituted. */
+export const LADDER_CORRECTION_MIN_OTHERS = 3
+
 export function solveLevelLadder(candidates: readonly DatumCandidate[], options: { tolerancePx?: number } = {}): SolvedLadder {
   const tolerance = options.tolerancePx ?? 6
   const datums: SolvedDatum[] = candidates.map((c) => ({ tokenId: c.tokenId, rowPx: c.rowPx, origin: 'UNRESOLVED', confidence: 0, rejected: [] }))
@@ -376,6 +379,16 @@ export function solveLevelLadder(candidates: readonly DatumCandidate[], options:
   }
 
   const final = support(line)
+  // EXTERIOR-COMPLETE (Bakopy): a reading is replaced by a substituted one only on a ladder the OTHER rungs over-
+  // determine — at least `LADDER_CORRECTION_MIN_OTHERS` of them on the line. Through two other rungs the line is
+  // exact, and a third rung's rule drawn a few pixels off is as much the drawing's imprecision (or either of the two
+  // rungs') as a misread: "+6,28" read clean was replaced by an unread "+6,18" for a 6.4 px miss. The printed reading
+  // then stays, unresolved against the scale; a misread by metres against three other heights is still corrected.
+  for (const [i, pick] of [...final.picks]) {
+    if (pick.reading.substitutions === 0) continue
+    const others = [...final.picks.keys()].filter((k) => k !== i).length
+    if (others < LADDER_CORRECTION_MIN_OTHERS) final.picks.delete(i)
+  }
   let sumSquare = 0
   candidates.forEach((c, i) => {
     const pick = final.picks.get(i)

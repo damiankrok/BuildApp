@@ -277,7 +277,13 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   if (f.vehicleMouth && !f.heightsAssumed && onFloorForVehicle) return { family: 'GARAGE_DOOR', notes: [] }
   if (f.overheadTracks && !f.heightsAssumed) return { family: 'GARAGE_DOOR', provenance: 'SOURCE_DERIVED', notes: [`a vehicle door: ${f.overheadTracks.why}`] }
   if (f.heightsAssumed) return f.doorBySymbol ? { family: 'DOOR', provenance: f.doorSwing ? 'SOURCE_DERIVED' : 'VISUAL_SEMANTIC', notes: [] } : { family: 'WINDOW', provenance: 'ASSUMED_FOR_RENDERING', notes: [] }
-  if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle) return { family: 'GARAGE_DOOR', notes: [] }
+  // EXTERIOR-COMPLETE (Bakopy): a wide opening to the floor in a low attached body is a vehicle door only where the
+  // drawing says the body is a garage there — the gap is in a garage room's wall (the publisher's room list), or its
+  // face on the elevation is one opaque panel. Its width and the body's height alone say nothing: a one-storey living
+  // wing's 4 m terrace glazing was built as a second garage gate.
+  if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle && (f.garageRoom || f.face?.kind === 'OPAQUE_PANEL')) {
+    return { family: 'GARAGE_DOOR', notes: [f.garageRoom ? `a vehicle door in a garage's wall: ${f.garageRoom.why}` : 'a vehicle door: its elevation face is one opaque panel'] }
+  }
   // EXTERIOR-COMPLETE: on the ground storey of a house whose publisher states a garage, an opening to the floor at least
   // a vehicle door wide whose elevation face is one neutral flat panel — no sky or trees in it, no timber — is the
   // garage door, read on the drawing, not glazing however wide it is.
