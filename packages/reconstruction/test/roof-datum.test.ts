@@ -65,10 +65,42 @@ describe('005T-N3 approximate ridge datum', () => {
     expect(approximateRidgeDatum(base({ metrics: { evidence: [knee(115, 'a'), knee(90, 'b'), pitch] } as unknown as ApproximateRidgeInput['metrics'] })).ok).toBe(false)
   })
 
-  it('no source pitch, or a hip / flat / unknown roof, is never answered as a gable', () => {
+  it('no source pitch, or a flat / unknown / mono roof, is never answered', () => {
     expect(approximateRidgeDatum(base({ roof: { kind: 'GABLE', pitchDeg: 40, pitchAuthority: 'ASSUMED', ridgeAxis: 'X' } })).ok).toBe(false)
     expect(approximateRidgeDatum(base({ roof: { kind: 'GABLE', pitchDeg: undefined, pitchAuthority: 'PUBLISHED_SPECIFICATION', ridgeAxis: 'X' } })).ok).toBe(false)
-    for (const kind of ['HIP', 'FLAT', 'UNKNOWN', 'MONO']) expect(approximateRidgeDatum(base({ roof: { kind, pitchDeg: 40, pitchAuthority: 'PUBLISHED_SPECIFICATION', ridgeAxis: 'X' } })).ok).toBe(false)
+    for (const kind of ['FLAT', 'UNKNOWN', 'MONO']) expect(approximateRidgeDatum(base({ roof: { kind, pitchDeg: 40, pitchAuthority: 'PUBLISHED_SPECIFICATION', ridgeAxis: 'X' } })).ok).toBe(false)
     expect(approximateRidgeDatum(base({ roof: undefined })).ok).toBe(false)
+  })
+})
+
+/**
+ * EXTERIOR-COMPLETE (Zefiranty G2 ver. 2): a hipped main roof the page specifies (38°, knee wall 90 cm, 9.02 m) whose
+ * only section is too small for its level marks to be read had no ridge and so no roof at all: the rule answered
+ * gables only. A hip pitched alike on every side rises over half its body's shorter span — geometry, whichever way a
+ * ridge would run — and the published height checks it exactly as it checks a gable.
+ */
+describe('EXTERIOR-COMPLETE approximate ridge datum for a hip', () => {
+  const hip = (ridgeAxis?: 'X' | 'Z', over: Partial<ApproximateRidgeInput> = {}) => base({ roof: { kind: 'HIP', pitchDeg: 40, pitchAuthority: 'PUBLISHED_SPECIFICATION', ridgeAxis }, ...over })
+
+  it('over 13.82 × 9.50 m it rises over half the shorter span: the same ridge as the gable across it', () => {
+    for (const axis of ['X', 'Z', undefined] as const) {
+      const r = approximateRidgeDatum(hip(axis))
+      expect(r.ok, `ridge axis ${axis}`).toBe(true)
+      if (!r.ok) continue
+      expect(r.datum.halfSpanM).toBeCloseTo(4.75, 6)
+      expect(r.datum.ridgeY).toBeCloseTo(2.8 + 1.15 + 4.75 * Math.tan((40 * Math.PI) / 180), 5)
+      expect(r.datum.why).toContain('a hip rises over half its shorter span')
+    }
+  })
+
+  it('counter-case: a published height the hip contradicts refuses it, as it refuses a gable', () => {
+    expect(approximateRidgeDatum(hip('X', { publishedFacts: [{ key: 'building_height', value: 7.5, unit: 'm' }] })).ok).toBe(false)
+    expect(approximateRidgeDatum(hip('X', { publishedFacts: [{ key: 'building_height', value: 10.5, unit: 'm' }] })).ok).toBe(false)
+    expect(approximateRidgeDatum(hip('X', { printedTerrainY: -0.2 })).ok).toBe(false)
+  })
+
+  it('counter-case: a hip with no printed knee wall or no source pitch gets no datum', () => {
+    expect(approximateRidgeDatum(hip('X', { metrics: { evidence: [pitch] } as unknown as ApproximateRidgeInput['metrics'] })).ok).toBe(false)
+    expect(approximateRidgeDatum(base({ roof: { kind: 'HIP', pitchDeg: 40, pitchAuthority: 'ASSUMED' } })).ok).toBe(false)
   })
 })

@@ -52,7 +52,7 @@ export const METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION = '1.9.0' as const
 export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'] as const
 
 /** Why a crossing mark is doubted or rejected (005D; `TEXT_INK` 005I: label ink beside the line, not a stroke across it). */
-export const DimensionMarkReasonSchema = z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE', 'TEXT_INK'])
+export const DimensionMarkReasonSchema = z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE', 'TEXT_INK', 'CROSSING_OUTLINE'])
 
 /** 005E: the four reading-quality classes the numeric lattice gives an ink, from the image alone. */
 export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])

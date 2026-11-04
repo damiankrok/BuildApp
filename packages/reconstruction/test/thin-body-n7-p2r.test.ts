@@ -176,11 +176,23 @@ describe('N7-P2R the body is left to the partial preview when the source does no
     expect(r.decision.why).toMatch(/elevation shows nothing built/)
   })
 
-  it('a strip the plan draws nothing for: named a false strip, not removed', () => {
+  it('a strip the plan draws nothing for: named a false strip, and (EXTERIOR-COMPLETE, Bakopy) not built', () => {
     const band = mass('band', 'ATTACHED', 8, 8.5)
     const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }]), band))
     expect(supported(r)).toEqual(['FALSE_STRIP'])
+    expect(r.decision.kind).toBe('NOT_A_BODY')
+    expect(r.decision.why).toMatch(/named, not built/)
+    expect(r.firstBad).toMatch(/^PLAN_DECOMPOSITION/)
+  })
+
+  it('counter-case: a false strip a registered elevation shows built over is left to the partial preview', () => {
+    const band = mass('band', 'ATTACHED', 8, 8.5)
+    const e = elevation(8.5)
+    const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }]), band, { views: [{ view: frontView, raster: e.raster }], skyOf: () => e.sky }))
+    expect(supported(r)).toEqual(['FALSE_STRIP'])
+    expect(r.elevations.map((v) => v.verdict)).toEqual(['CORROBORATES'])
     expect(r.decision.kind).toBe('KEEP_PARTIAL')
+    expect(r.decision.why).toMatch(/elevation shows something built over the band/)
   })
 
   it('a far face drawn as posts: named a canopy on posts, not built as walls', () => {
@@ -224,5 +236,36 @@ describe('SOURCE-01 only a printed value is a printed dimension', () => {
     const r = adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }, { from: 11.7, to: 12 }]), band, { chains: [c] }))
     expect(r.chains[0].role).toBe('NOT_PRINTED')
     expect(r.decision.kind).toBe('KEEP_PARTIAL')
+  })
+})
+
+/**
+ * EXTERIOR-COMPLETE (Bakopy): a chain printed inside the house measures what stands on its own line. On Bakopy a
+ * kitchen's "71" (a worktop to a wall, printed 7 m from the band) ended within tolerance of a strip's face at the
+ * terrace's edge and was read as the strip's conflicting width: SOURCE_CONFLICT, KEEP_PARTIAL, and seven objects left
+ * out of the preview. A chain round the plan, or one running across the band's own length, still decides as before.
+ */
+describe('EXTERIOR-COMPLETE a chain printed inside the house, off the band’s length', () => {
+  const deep: MassV2 = { ...main, z1: 12 }
+  const band = mass('band', 'ATTACHED', 8, 8.6)
+  const at = (z: number, cm = 360): DimensionChain => ({ ...chain([{ from: 5, to: 8.6, cm }]), baselinePx: OY + z * PPM })
+  const read = (z: number) => adjudicateThinBody(band, 'X', input(plan([{ from: 7.7, to: 8 }, { from: 8.3, to: 8.6 }]), band, { masses: [deep, band], chains: [at(z)] }))
+
+  it('3 m off the band, inside the main body: unrelated to the band, and no source conflict', () => {
+    const r = read(11)
+    expect(r.chains.map((c) => c.role)).toEqual(['UNRELATED'])
+    expect(r.chains[0].why).toMatch(/printed inside the house 3\.00 m off the band/)
+    expect(r.firstBad ?? '').not.toMatch(/^SOURCE_CONFLICT/)
+  })
+
+  it('counter-case: within a metre of the band’s end it still measures the band, and still conflicts', () => {
+    const r = read(8.5)
+    expect(r.chains.map((c) => c.role)).toEqual(['CONFLICTS'])
+    expect(r.firstBad).toMatch(/^SOURCE_CONFLICT/)
+  })
+
+  it('counter-case: across the band’s own length it conflicts, inside the house or not', () => {
+    expect(read(4).chains.map((c) => c.role)).toEqual(['CONFLICTS'])
+    expect(read(-0.6).chains.map((c) => c.role)).toEqual(['CONFLICTS'])
   })
 })

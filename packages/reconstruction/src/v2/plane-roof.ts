@@ -95,3 +95,23 @@ export function planeAt(layout: PlaneRoofLayout, p: Vec2): PlaneRoofPlane | unde
     return inside
   })
 }
+
+/**
+ * EXTERIOR-COMPLETE (Zefiranty): the plane of a layout that holds a rooflight's whole plan footprint — `along` the ridge
+ * and `slope` across it, as a gable's rooflights are read (`RooflightReading`) — or undefined when no one plane does (it
+ * straddles a hip's or the ridge's line). Its plan position decides: a light read on the gable's lower slope that stands
+ * where a hip's end plane is lies in that end plane. A side slope other than the one it was read on is no home: the
+ * reading put it on the other side of the ridge.
+ */
+export function rooflightPlaneKey(layout: PlaneRoofLayout, ridgeAxis: 'X' | 'Z', q: { slope: 'LOW' | 'HIGH'; alongFrom: number; alongTo: number; slopeFrom: number; slopeTo: number }): PlaneRoofKey | undefined {
+  const inset = 1e-3
+  const [a0, a1] = [Math.min(q.alongFrom, q.alongTo) + inset, Math.max(q.alongFrom, q.alongTo) - inset]
+  const [s0, s1] = [Math.min(q.slopeFrom, q.slopeTo) + inset, Math.max(q.slopeFrom, q.slopeTo) - inset]
+  const at = (along: number, slope: number): PlaneRoofKey | undefined => planeAt(layout, ridgeAxis === 'Z' ? { x: slope, z: along } : { x: along, z: slope })?.key
+  const keys = new Set([at(a0, s0), at(a0, s1), at(a1, s0), at(a1, s1)])
+  if (keys.size !== 1) return undefined
+  const [key] = [...keys]
+  if (key === undefined) return undefined
+  if ((key === 'LOW' || key === 'HIGH') && key !== q.slope) return undefined
+  return key
+}

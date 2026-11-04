@@ -16,7 +16,10 @@
  *   - SOLID_WALL: the band is ink right across — a thick wall or a wall's thickening, not an enclosed space: it is
  *     built as one wall of its drawn thickness.
  *   - CANOPY_ON_POSTS, FALSE_STRIP, RECESS_OF_MAIN: read and named, never built here: posts, a line the cells took for a
- *     wall, a piece of the main body.
+ *     wall, a piece of the main body. EXTERIOR-COMPLETE (Bakopy): a FALSE_STRIP that is the only reading the drawing
+ *     holds — nothing printed on the band, no buildable reading, no registered elevation showing anything built over it
+ *     — is NOT_A_BODY: named and not built. Handing it to the model only had it refused (its ring's walls overlap) and
+ *     the run delivered a partial preview for a body the drawing says is not there.
  *
  * Every reading is tested on the drawing itself: the plan's ink across the band (a profile in metres, from the face it
  * shares outward), the printed chains that end on its faces, and the registered elevations that see it side on. A body
@@ -40,7 +43,7 @@ import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 
 export type ThinBodyFacade = 'FRONT' | 'EAST' | 'REAR' | 'WEST'
 export type ThinBodyHypothesisKind = 'WIDEN' | 'SHARED_WALL' | 'DRAWN_THIN_WALLS' | 'SOLID_WALL' | 'CANOPY_ON_POSTS' | 'FALSE_STRIP' | 'RECESS_OF_MAIN'
-export type ThinBodyDecisionKind = 'WIDEN' | 'SHARED_WALL' | 'DRAWN_THIN_WALLS' | 'SOLID_WALL' | 'KEEP_PARTIAL'
+export type ThinBodyDecisionKind = 'WIDEN' | 'SHARED_WALL' | 'DRAWN_THIN_WALLS' | 'SOLID_WALL' | 'NOT_A_BODY' | 'KEEP_PARTIAL'
 
 export type ThinBodyRecord = {
   massId: string
@@ -206,6 +209,9 @@ export function thinBodies(masses: readonly MassV2[], T: number): Array<{ mass: 
   }
   return out
 }
+
+/** How far off a band's length a chain printed inside the house may run and still measure the band (m). */
+export const CHAIN_REACH_M = 1.0
 
 /** Adjudicate one thin body on the source. */
 export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBodyInput): ThinBodyRecord {
@@ -427,8 +433,16 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
 
   // --- printed chains on the band's axis: what they say about its width ----------------------------------------------
   const otherFaces = others.flatMap((m) => (axis === 'X' ? [m.x0, m.x1] : [m.z0, m.z1]))
+  // EXTERIOR-COMPLETE (Bakopy): where the chain's line runs across the band's length. A chain printed inside a body of
+  // the house measures what stands on its own line: more than CHAIN_REACH_M off the band's length, it is not about the
+  // band (a kitchen's "71" printed 7 m from a strip at the terrace's edge was read as the strip's conflicting width).
+  // A chain printed outside every body (the overall chains round the plan) may measure the band as before.
+  const [len0, len1] = axis === 'X' ? [mass.z0, mass.z1] : [mass.x0, mass.x1]
   for (const c of input.chains) {
     if (c.frameId !== frame.frameId || c.axis !== (axis === 'X' ? 'HORIZONTAL' : 'VERTICAL')) continue
+    const lineAt = axis === 'X' ? frame.toWorld(frame.originPx.x, c.baselinePx).z : frame.toWorld(c.baselinePx, frame.originPx.y).x
+    const lineInside = [mass, ...others].some((m) => (axis === 'X' ? lineAt > m.z0 + tol && lineAt < m.z1 - tol : lineAt > m.x0 + tol && lineAt < m.x1 - tol))
+    const lineAway = lineAt < len0 - CHAIN_REACH_M || lineAt > len1 + CHAIN_REACH_M
     for (const seg of c.segments) {
       if (seg.valueCm === undefined || !seg.evidenceId) continue
       const origin = seg.origin ?? 'UNKNOWN'
@@ -440,6 +454,10 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
       const farFace = near + dir * narrow
       const farEnd = Math.abs(a - farFace) <= tol ? a : Math.abs(b - farFace) <= tol ? b : undefined
       if (nearEnd === undefined && farEnd === undefined) continue
+      if (lineInside && lineAway) {
+        record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'UNRELATED', why: `printed inside the house ${Math.min(Math.abs(lineAt - len0), Math.abs(lineAt - len1)).toFixed(2)} m off the band's length: it measures what stands on its own line` })
+        continue
+      }
       if (!printedSegment(seg)) {
         record.chains.push({ chainId: c.id, valueCm: seg.valueCm, from: a, to: b, origin, role: 'NOT_PRINTED', why: `${seg.valueCm} cm is the chain's ${origin.toLowerCase()} value, not a number printed on the drawing: it neither corroborates nor contradicts the band` })
         continue
@@ -561,7 +579,7 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
   // never built here, but named
   if (!farBand && farEdgeInk > 0.05 && farEdgeInk < 0.45 && !beyond) H('CANOPY_ON_POSTS', 'SUPPORTED', `the far face is drawn intermittently (${(farEdgeInk * 100).toFixed(0)} % ink)${farWall ? ` and is no wall with openings (${farWall.why})` : ''}: posts or a parapet, not a wall — not built by this pass`)
   else H('CANOPY_ON_POSTS', 'REFUTED', continuousFar ? 'the far face is a continuous drawn wall' : farWall?.holds ? farWall.why : 'no intermittent ink at the far face')
-  if (!farBand && !beyond && farEdgeInk <= 0.05) H('FALSE_STRIP', 'SUPPORTED', 'the plan draws nothing at the read far face nor beyond it: a strip the cells took for a body — not removed by this pass')
+  if (!farBand && !beyond && farEdgeInk <= 0.05) H('FALSE_STRIP', 'SUPPORTED', 'the plan draws nothing at the read far face nor beyond it: a strip the cells took for a body')
   else H('FALSE_STRIP', 'REFUTED', 'the plan draws a wall at or beyond the read far face')
   const inside = others.find((m) => m.role === 'MAIN' && overlap1(m.x0, m.x1, rect.x0, rect.x1) > 0.5 * (rect.x1 - rect.x0) && overlap1(m.z0, m.z1, rect.z0, rect.z1) > 0.5 * (rect.z1 - rect.z0))
   H('RECESS_OF_MAIN', inside ? 'SUPPORTED' : 'REFUTED', inside ? `it lies inside ${inside.id}` : 'it stands outside the main body’s walls')
@@ -571,6 +589,18 @@ export function adjudicateThinBody(mass: MassV2, axis: 'X' | 'Z', input: ThinBod
   if (conflicts.length > 0) {
     record.decision.why = `printed and drawn disagree: ${conflicts.map((c) => `${c.valueCm} cm (${c.why})`).join('; ')} — the body is left to the partial preview`
     record.firstBad = 'SOURCE_CONFLICT: a printed dimension on the band contradicts its drawn width'
+    return record
+  }
+  const supportedKinds = record.hypotheses.filter((h) => h.status === 'SUPPORTED').map((h) => h.kind)
+  if (buildable.length === 0 && supportedKinds.length === 1 && supportedKinds[0] === 'FALSE_STRIP') {
+    record.elevations.push(...elevationOver(0, narrow))
+    const built = record.elevations.filter((e) => e.verdict === 'CORROBORATES')
+    if (built.length === 0) {
+      record.firstBad = 'PLAN_DECOMPOSITION: a strip the plan draws no wall for at its far face, nor beyond it, was read as an enclosed body'
+      record.decision = { kind: 'NOT_A_BODY', why: `${record.hypotheses.find((h) => h.kind === 'FALSE_STRIP')?.why ?? 'a false strip'}; no other reading holds and no registered elevation shows anything built over it — named, not built`, before: rect }
+      return record
+    }
+    record.decision.why = `FALSE_STRIP holds on the plan, but the ${built.map((e) => e.side.toLowerCase()).join(' and ')} elevation shows something built over the band — the body is left to the partial preview`
     return record
   }
   if (buildable.length !== 1) {

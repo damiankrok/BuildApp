@@ -58,7 +58,8 @@ import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricCo
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
 /** 1.4.0 (005I): labels meet chains through the global assignment (`assignLabels`), on measurement chains. */
 /** 1.5.0 (EXTERIOR-COMPLETE): a vertical chain nothing decided takes the sheet's way up, through the other axis's scale (rule vii). */
-export const METRIC_SOLVER_VERSION = '1.5.0' as const
+/** 1.6.0 (EXTERIOR-COMPLETE, Zefiranty): two tokens one pass read apart are two inks; no third token joins their text regions. */
+export const METRIC_SOLVER_VERSION = '1.6.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -158,6 +159,11 @@ export function textRegions(frameId: string, raw: readonly TextToken[]): { regio
     while (parent[r] !== r) r = parent[r]
     return r
   }
+  // EXTERIOR-COMPLETE (Zefiranty): two tokens one pass read apart are two inks, and no third token joins them — a
+  // rotated pass that reads one number across two labels stacked over each other (an overall over its chain) has read
+  // neither. Joining through it made the two labels one ink, read two ways, and so the witness of nothing.
+  const members = tokens.map((_, i) => [i])
+  const apart = (a: number, b: number): boolean => members[a].some((p) => members[b].some((q) => tokens[p].orientation === tokens[q].orientation && !sameInk(tokens[p].box, tokens[q].box)))
   for (let i = 0; i < tokens.length; i += 1) {
     for (let j = i + 1; j < tokens.length; j += 1) {
       // Tokens of one pass never overlap; only a different pass reads the same ink again.
@@ -166,7 +172,10 @@ export function textRegions(frameId: string, raw: readonly TextToken[]): { regio
       if (!sameInk(tokens[i].box, tokens[j].box)) continue
       const a = find(i)
       const b = find(j)
-      if (a !== b) parent[Math.max(a, b)] = Math.min(a, b)
+      if (a === b || apart(a, b)) continue
+      const [lo, hi] = [Math.min(a, b), Math.max(a, b)]
+      parent[hi] = lo
+      members[lo] = [...members[lo], ...members[hi]]
     }
   }
   const groups = new Map<number, TextToken[]>()

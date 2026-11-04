@@ -28,7 +28,8 @@ import type { PixelRect } from '@buildapp/source-common'
 export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
 /** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`); 1.2.0: a stroke reaching the line between labels is not (post-review A2), and only text running along the line is label ink. */
 /** 1.3.0 (EXTERIOR-COMPLETE): collinear runs a drawing covers (a logo over the line) are joined (`joinOccludedLines`). */
-export const DIMENSION_TOPOLOGY_VERSION = '1.3.0' as const
+/** 1.4.0 (EXTERIOR-COMPLETE, Zefiranty): an outline drawn across a line — a stroke that runs on past a tick on both sides and slants — is no mark on it (`CROSSING_OUTLINE`, REJECTED), nor is its twin. */
+export const DIMENSION_TOPOLOGY_VERSION = '1.4.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -61,7 +62,9 @@ export type DimensionLine = {
  *               its neighbour, or unlike the chain's own end marks. It is never deleted: a span
  *               may run across it or stop at it, and the label decides which.
  * REJECTED      ink lighter than the line that is either a band (a watermark's edge, a grey fill,
- *               a shadow) or touches the line from one side only. It is not a measurement point.
+ *               a shadow) or touches the line from one side only; or (EXTERIOR-COMPLETE) a drawn outline
+ *               crossing the line — a stroke that runs on far past a tick on both sides and slants
+ *               (a bay's arc, a splayed wall). It is not a measurement point.
  */
 export type DimensionMarkClass = 'TICK' | 'QUESTIONABLE' | 'REJECTED'
 
@@ -75,6 +78,7 @@ export type DimensionMarkReason =
   | 'STYLE_MISMATCH'
   | 'NO_LINE_REFERENCE'
   | 'TEXT_INK'
+  | 'CROSSING_OUTLINE'
 
 export type DimensionMark = {
   atPx: number
@@ -387,6 +391,16 @@ export const MARK_CLASS_BOUNDS = {
   /** A paper/line contrast under this, or fewer clean positions, leaves the darkness tests unasked. */
   minContrast: 24,
   minCleanPositions: 8,
+  /**
+   * EXTERIOR-COMPLETE: a stroke still traceable this many mark reaches out, on both sides, is longer than any
+   * tick (a slash, an arrow, a witness line's overshoot all end within one reach — 6–7 px on the development
+   * sheets, against 18–21 px for a garden chair's or a bay's outline drawn across the line) ...
+   */
+  outlineRunPerReach: 2,
+  /** ... and one that keeps drifting along the line beyond the mark's reach — by this share of the stretch from one
+   *  reach out to the run's end, on either side — is not a witness line (which stands square to the line, straight
+   *  through it): it is an outline crossing it — a bay's arc, a splayed wall, a chair drawn over the line. */
+  outlineSlant: 0.15,
 } as const
 
 /**
@@ -521,6 +535,81 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
   const band = t * B.bandPerThickness + B.bandPlusPx
   const narrowing = (s: Side): boolean => s.profile.length >= 2 && s.profile[s.profile.length - 1] < s.profile[0] - 2 && s.profile[s.profile.length - 1] <= band
 
+  // EXTERIOR-COMPLETE (Zefiranty): follow the stroke through a mark outward, one row at a time, to the nearest ink
+  // within a pixel or two of where it was (one blank row is anti-aliasing, two are its end). A tick ends within its
+  // reach; an outline drawn across the line runs on, on both sides, and — unlike a witness line — slants.
+  const outlineRun = B.outlineRunPerReach * reach
+  // The trace starts at the mark's own ink, wherever within its reach that is (two strokes meeting the line from
+  // either side at one position are found as one mark), and then keeps to the stroke it found, recording where along
+  // the line the stroke is at every step out.
+  const traceOf = (h0: number, h1: number, sign: number): { run: number; at: Array<number | null> } => {
+    const start = (h0 + h1) / 2
+    let at: number | null = null
+    let run = 0
+    let gap = 0
+    const path: Array<number | null> = []
+    for (let d = clear + 1; d <= outlineRun && gap <= 1; d += 1) {
+      const y = rowOf(sign * d)
+      const centre: number = at ?? start
+      const lo: number = at === null ? h0 - spread : Math.floor(at) - 2
+      const hi: number = at === null ? h1 + spread : Math.ceil(at) + 2
+      let best: number | null = null
+      for (let a: number = lo; a <= hi; a += 1) if (M(a, y) === 1 && (best === null || Math.abs(a - centre) < Math.abs(best - centre))) best = a
+      path[d] = best
+      if (best === null) {
+        if (at !== null) gap += 1
+        else if (d >= reach) break
+        continue
+      }
+      at = best
+      run = d
+      gap = 0
+    }
+    return { run, at: path }
+  }
+  // A side slants when the stroke drifts along the line from where it leaves the line: by `outlineSlant` of the distance
+  // between its first traced row and one reach out, and again between one reach out and the run's end, the same way.
+  // A witness line that a few pixels out runs into a neighbouring drawing's ink — a dashed diagonal, an arrowhead, an
+  // extension line it hops onto — is square near the line and drifts only where it hopped; an outline slants from the
+  // line on.
+  const posAt = (t: { at: Array<number | null> }, d: number): number | undefined => {
+    for (let k = d; k > clear; k -= 1) {
+      const v = t.at[k]
+      if (v !== null && v !== undefined) return v
+    }
+    return undefined
+  }
+  const slants = (t: { at: Array<number | null> }): boolean => {
+    const first = t.at.findIndex((v) => v !== null && v !== undefined)
+    if (first < 0 || first >= reach) return false
+    const [p0, a, b] = [t.at[first] as number, posAt(t, reach), posAt(t, outlineRun)]
+    if (a === undefined || b === undefined) return false
+    const [near, far] = [a - p0, b - a]
+    // ... and is still moving at its end: a window or a door drawn in a wall jogs sideways at its frame and then runs on
+    // straight along the wall, parked on one position for the last stretch; an arc or a ring is never straight there.
+    const tail = t.at.slice(Math.round(1.5 * reach), outlineRun + 1).filter((v): v is number => v !== null && v !== undefined)
+    const moving = tail.length > 0 && Math.max(...tail) - Math.min(...tail) >= 1
+    return Math.abs(near) >= B.outlineSlant * (reach - first) && Math.abs(far) >= B.outlineSlant * (outlineRun - reach) && Math.sign(near) === Math.sign(far) && moving
+  }
+  // A straight line through the mark — square to the line along its whole run on one side, and carrying on in line
+  // with it for a reach on the other — is a witness line, whatever it meets further out (a neighbouring chain's
+  // arrowhead, another line it hops onto): never an outline.
+  const positions = (t: { at: Array<number | null> }, upTo: number): number[] => t.at.slice(0, upTo + 1).filter((v): v is number => v !== null && v !== undefined)
+  const straightThrough = (a: { at: Array<number | null> }, b: { at: Array<number | null> }): boolean => {
+    const along = positions(a, outlineRun)
+    if (along.length === 0) return false
+    const line = medianOf(along)
+    if (along.some((v) => Math.abs(v - line) > 1)) return false
+    const near = positions(b, reach)
+    return near.length > 0 && near.every((v) => Math.abs(v - line) <= 1)
+  }
+  const crossingOutline = (h0: number, h1: number): boolean => {
+    const [lo, hi] = [traceOf(h0, h1, -1), traceOf(h0, h1, 1)]
+    if (lo.run < outlineRun || hi.run < outlineRun) return false
+    if (straightThrough(lo, hi) || straightThrough(hi, lo)) return false
+    return slants(lo) || slants(hi)
+  }
+
   type Draft = DimensionMark & { _sides: [Side, Side] }
   const drafts: Draft[] = hitRuns.map(([h0, h1], i) => {
     const before = sideOf(h0, h1, -1)
@@ -557,6 +646,7 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
     const wide = [before, after].some((s) => Number.isFinite(s.width) && s.width > band && !narrowing(s))
     if (wide) reasons.push('WEDGE_NOT_STROKE')
     if (raster && strongest >= B.chroma && colourDiff >= 0.5 * strongest) reasons.push('COLOUR_MISMATCH')
+    if (crossingOutline(h0, h1)) reasons.push('CROSSING_OUTLINE')
     return {
       atPx: line.ticksPx[i],
       hitFromPx: h0,
@@ -588,6 +678,10 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
     if (c.atPx - a.atPx > reach + 1 || a.reasons.includes('WEDGE_NOT_STROKE') || c.reasons.includes('WEDGE_NOT_STROKE')) continue
     const w = weaker(a, c)
     if (!w.reasons.includes('DUPLICATE')) w.reasons.push('DUPLICATE')
+    // One mark found twice is one ink: the twin of an outline's crossing is that crossing (where the outline runs
+    // shallow across the line it is found at two positions, and only one of them traces it on).
+    const twin = w === a ? c : a
+    if (twin.reasons.includes('CROSSING_OUTLINE') && !w.reasons.includes('CROSSING_OUTLINE')) w.reasons.push('CROSSING_OUTLINE')
   }
   // An internal mark unlike the chain's own clean end marks: far lighter, or far wider.
   const ends = drafts.length > 2 ? [drafts[0], drafts[drafts.length - 1]].filter((e) => e.reasons.length === 0) : []
@@ -600,13 +694,16 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
     }
   }
 
-  const marks: DimensionMark[] = drafts.map(({ _sides: _, ...m }) => {
-    const has = (r: DimensionMarkReason): boolean => m.reasons.includes(r)
-    const rejected = has('LIGHTER_THAN_LINE') && (has('WEDGE_NOT_STROKE') || has('ONE_SIDED'))
-    const questionable = has('LIGHTER_THAN_LINE') || has('ONE_SIDED') || has('DUPLICATE') || has('STYLE_MISMATCH') || (has('WEDGE_NOT_STROKE') && has('COLOUR_MISMATCH'))
-    return { ...m, class: rejected ? 'REJECTED' : questionable ? 'QUESTIONABLE' : 'TICK' }
-  })
+  const marks: DimensionMark[] = drafts.map(({ _sides: _, ...m }) => ({ ...m, class: markClassOf(m.reasons) }))
   return { marks, reference }
+}
+
+/** A mark's class from its reasons (005D; CROSSING_OUTLINE, EXTERIOR-COMPLETE). */
+function markClassOf(reasons: readonly DimensionMarkReason[]): DimensionMarkClass {
+  const has = (r: DimensionMarkReason): boolean => reasons.includes(r)
+  const rejected = (has('LIGHTER_THAN_LINE') && (has('WEDGE_NOT_STROKE') || has('ONE_SIDED'))) || has('CROSSING_OUTLINE')
+  const questionable = has('LIGHTER_THAN_LINE') || has('ONE_SIDED') || has('DUPLICATE') || has('STYLE_MISMATCH') || (has('WEDGE_NOT_STROKE') && has('COLOUR_MISMATCH'))
+  return rejected ? 'REJECTED' : questionable ? 'QUESTIONABLE' : 'TICK'
 }
 
 // ---------------------------------------------------------------------------
@@ -681,9 +778,20 @@ export function markLabelInk(lines: readonly DimensionLine[], labels: readonly L
       for (const g of label.glyphs) if (sideOfBox(g) === side) glyphs.push({ box: g, side })
     }
     if (glyphs.length === 0) return line
+    // EXTERIOR-COMPLETE: a stroke traced on into a label printed against the line ran into the label's glyphs, not along
+    // an outline: a mark within a label's span keeps no CROSSING_OUTLINE (its glyphs are judged below, as text).
+    const underLabel = (m: DimensionMark): boolean => glyphs.some((g) => {
+      const [a0, a1] = alongOf(g.box)
+      return m.hitToPx >= a0 - reach && m.hitFromPx <= a1 + reach
+    })
+    const unOutlined = (m: DimensionMark): DimensionMark => {
+      if (!m.reasons.includes('CROSSING_OUTLINE') || !underLabel(m)) return m
+      const reasons = m.reasons.filter((r) => r !== 'CROSSING_OUTLINE')
+      return { ...m, reasons, class: markClassOf(reasons) }
+    }
     const inGlyph = (x: number, y: number, side: -1 | 1): boolean =>
       glyphs.some((g) => g.side === side && x >= g.box.x0 - B.glyphPadPx && x <= g.box.x1 + B.glyphPadPx && y >= g.box.y0 - B.glyphPadPx && y <= g.box.y1 + B.glyphPadPx)
-    const marks = line.marks.map((m): DimensionMark => {
+    const marks = line.marks.map(unOutlined).map((m): DimensionMark => {
       const textSide = (sign: -1 | 1): boolean => {
         let ink = 0
         let text = 0

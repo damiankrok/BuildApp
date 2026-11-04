@@ -14,8 +14,12 @@
  * build-up is assumed, the terrain is not read, so the result says ASSUMED_FOR_RENDERING and the run warns. It feeds
  * the roof and nothing else — no render is measured on it.
  *
- * Precedence: a section's ridge datum wins; this rule only runs without one. Only a GABLE is answered: a hip, flat or
- * unknown roof is never routed through it. The ridge axis is the layout's; it is never changed to make numbers fit.
+ * Precedence: a section's ridge datum wins; this rule only runs without one. A GABLE and (EXTERIOR-COMPLETE,
+ * Zefiranty) a HIP are answered; a flat or unknown roof is never routed through it. A gable's span across the ridge is
+ * the layout's ridge axis, never changed to make numbers fit; a hip pitched alike on every side rises over its body's
+ * shorter span, which is geometry, not a choice:
+ *
+ *   R = F + K + min(w, d) / 2 · tan(pitch)
  */
 import { round6 } from '@buildapp/source-common'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
@@ -70,17 +74,18 @@ function kneeWallOf(metrics: Pick<MetricEvidenceSet, 'evidence'>): { m: number; 
 export function approximateRidgeDatum(input: ApproximateRidgeInput): ApproximateRidgeResult {
   if (input.printedRidgeY !== undefined) return { ok: false, reason: 'the section prints a ridge datum, which stands' }
   const roof = input.roof
-  if (!roof || roof.kind !== 'GABLE') return { ok: false, reason: `the main roof is ${roof?.kind ?? 'not known'}; only a gable is answered here` }
+  if (!roof || (roof.kind !== 'GABLE' && roof.kind !== 'HIP')) return { ok: false, reason: `the main roof is ${roof?.kind ?? 'not known'}; only a gable or a hip is answered here` }
   if (roof.pitchDeg === undefined || !PITCH_AUTHORITIES.has(roof.pitchAuthority ?? '')) return { ok: false, reason: 'no pitch the publisher or a drawing prints' }
   if (roof.pitchDeg < 15 || roof.pitchDeg > 60) return { ok: false, reason: `a pitch of ${roof.pitchDeg}° is outside what this rule answers` }
-  if (!roof.ridgeAxis) return { ok: false, reason: 'the layout chose no ridge axis' }
+  if (roof.kind === 'GABLE' && !roof.ridgeAxis) return { ok: false, reason: 'the layout chose no ridge axis' }
   const knee = kneeWallOf(input.metrics)
   if ('error' in knee) return { ok: false, reason: knee.error }
   const heights = input.publishedFacts.filter((f) => f.key === 'building_height' && f.unit === 'm')
   if (heights.length !== 1) return { ok: false, reason: heights.length === 0 ? 'the page prints no building height' : 'the page prints more than one building height' }
   const H = heights[0].value
   if (!(H >= 3 && H <= 20)) return { ok: false, reason: `a building height of ${H} m is not plausible` }
-  const half = round6(((roof.ridgeAxis === 'X' ? input.body.z1 - input.body.z0 : input.body.x1 - input.body.x0) / 2))
+  const [w, d] = [input.body.x1 - input.body.x0, input.body.z1 - input.body.z0]
+  const half = round6((roof.kind === 'HIP' ? Math.min(w, d) : roof.ridgeAxis === 'X' ? d : w) / 2)
   if (!(half > 0)) return { ok: false, reason: 'no span across the ridge' }
   const rise = half * Math.tan((roof.pitchDeg * Math.PI) / 180)
   const eaveY = round6(input.topFloorY + knee.m)
@@ -98,7 +103,7 @@ export function approximateRidgeDatum(input: ApproximateRidgeInput): Approximate
   }
   const pitchId = input.metrics.evidence.find((e) => e.kind === 'ANGLE' && e.association.kind === 'PUBLISHED_SPECIFICATION')?.id
   const why =
-    `no section prints a ridge: taken at ${ridgeY} m from the top storey's floor ${input.topFloorY} m${input.topFloorPrinted ? '' : ' (a conventional storey height, not printed)'} + the printed knee wall ${knee.m} m + ${half} m × tan ${roof.pitchDeg}°; ` +
+    `no section prints a ridge: taken at ${ridgeY} m from the top storey's floor ${input.topFloorY} m${input.topFloorPrinted ? '' : ' (a conventional storey height, not printed)'} + the printed knee wall ${knee.m} m + ${half} m × tan ${roof.pitchDeg}°${roof.kind === 'HIP' ? ' (a hip rises over half its shorter span)' : ''}; ` +
     `the published building height ${H} m leaves ${margin} m for terrain${input.printedTerrainY === undefined ? ' (not read)' : ''} and roof build-up (assumed nil at the eaves), which is consistent — an approximate datum for rendering, not a printed one`
   return { ok: true, datum: { ridgeY, eaveY, kneeWallM: knee.m, buildingHeightM: H, halfSpanM: half, heightMarginM: margin, evidenceIds: [knee.id, ...(pitchId ? [pitchId] : [])], why } }
 }

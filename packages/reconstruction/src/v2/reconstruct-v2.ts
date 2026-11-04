@@ -53,8 +53,8 @@ import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.j
 import { FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
-import { planeRoofLayout } from './plane-roof.js'
-import type { RoofEnd } from './plane-roof.js'
+import { planeRoofLayout, rooflightPlaneKey } from './plane-roof.js'
+import type { PlaneRoofKey, RoofEnd } from './plane-roof.js'
 import { hostRoofTopAt, readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection, registerSectionByTwoAnchors, sectionStackOver, withRecognisedHalves } from './roof-details.js'
 import type { PlanRooflightReading, RooflightReading, SectionFrame } from './roof-details.js'
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
@@ -63,7 +63,7 @@ import { skyMask, solvePerspectiveCamera } from './camera.js'
 import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.js'
 import { decideSideOrientation, decideSidesByOpenings, gableApexRow, gableOutline, mainTopProfile, roofTopOverBand, sameSheetSideRegistration } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
-import { emitBuilding, pitchedPlaneIds } from './emit.js'
+import { emitBuilding, pitchedPlaneIds, planeRoofPlaneId } from './emit.js'
 import { builtRoofUndersideAt, isValleyCut, mainRoofValleyCut, valleyCutWings } from './valley-cut.js'
 import { readSlabVoids, voidOnSlab } from './slab-void.js'
 import type { SlabVoid } from './slab-void.js'
@@ -194,7 +194,12 @@ import type { ApproximateRidge } from './roof-datum.js'
 // ridge, is under the main roof run on (`UNDER_MAIN`); an opening's elevation reading has its sill below the storey's wall
 // head; a wide low body is a vehicle door only in a garage's wall or with an opaque face; the one single-storey attached
 // body whose floor fits the one listed garage is that garage where no room number was read
-export const SOLVER_V2_VERSION = '2.26.0' as const
+// 2.27.0 (EXTERIOR-COMPLETE, Bakopy and Zefiranty): a chain printed inside the house more than CHAIN_REACH_M off a thin
+// band's length measures what stands on its own line, not the band (`thin-body`); a false strip that is the only reading
+// the drawing holds is NOT_A_BODY, named and not built; a hip the page specifies takes the approximate ridge a gable
+// would (`roof-datum`, half its shorter span); rooflights read against a gable's slopes are re-homed in the hipped
+// layout's planes (`rooflightPlaneKey`) instead of holding the roof a gable
+export const SOLVER_V2_VERSION = '2.27.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -672,7 +677,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (k < 0) return round6((levels.floors[0] ?? 0) - CONVENTIONS.storeyHeight * -k)
     return round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (k - levels.floors.length + 1))
   }
-  // 005T-N3: without a printed ridge, a gable the page specifies may take an approximate ridge from its printed knee
+  // 005T-N3: without a printed ridge, a gable (EXTERIOR-COMPLETE: or a hip) the page specifies may take an approximate ridge from its printed knee
   // wall and pitch, checked against the published building height (`roof-datum.ts`). It feeds the roof and the top
   // storey only; the elevations stay registered on printed datums alone.
   const mainSupport = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
@@ -1175,7 +1180,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // that row is the ridge instead (gableApexRow), for both views of the sheet.
         const apex = gableApexRow(outlineOf(mateMask), mainRoof.pitchDeg)
         const sheetMate: ElevationRegistrationV2 = apex ? { ...mateReg, zeroRow: round6(apex.row + ridgeY / mateReg.mpp), why: `${mateReg.why}; ${apex.why}, which is the ridge datum` } : mateReg
-        const built = (side: 'LEFT' | 'RIGHT') => sameSheetSideRegistration({ id: frame.id, assetId: frame.assetId }, side, sheetMate, mate.v.view, outlineOf(mateMask), outlineOf(mask), mainRoof.ridgeAt, r.why)
+        const ridgeAtNow = mainRoof.ridgeAt
+        const built = (side: 'LEFT' | 'RIGHT') => sameSheetSideRegistration({ id: frame.id, assetId: frame.assetId }, side, sheetMate, mate.v.view, outlineOf(mateMask), outlineOf(mask), ridgeAtNow, r.why)
         const reg = built(mateReg.side === 'LEFT' ? 'RIGHT' : 'LEFT')
         options.debug?.(`same-sheet side ${frame.id}: ${reg ? reg.why : 'refused'}`)
         if (!reg) continue
@@ -1311,6 +1317,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const line = far === 'EAST' ? { start: { x: mass.x1, z: mass.z0 }, end: { x: mass.x1, z: mass.z1 } } : far === 'WEST' ? { start: { x: mass.x0, z: mass.z1 }, end: { x: mass.x0, z: mass.z0 } } : far === 'REAR' ? { start: { x: mass.x1, z: mass.z1 }, end: { x: mass.x0, z: mass.z1 } } : { start: { x: mass.x0, z: mass.z0 }, end: { x: mass.x1, z: mass.z0 } }
       for (const st of mass.storeys) bandWalls.push({ id: `band-${mass.id}-${st}`, sourceMassId: mass.sourceMassId, storeyIndex: st, ...line, thicknessM: round6(rec.narrowM), featureId: mass.featureId, provenance: 'SOURCE_DERIVED', why: `${d.why}; built as one wall where ${mass.id} was read` })
       masses.splice(masses.indexOf(mass), 1)
+    } else if (d.kind === 'NOT_A_BODY') {
+      // EXTERIOR-COMPLETE (Bakopy): named, not built — the drawing says there is no body here
+      masses.splice(masses.indexOf(mass), 1)
+      gap({ what: `whether the ${rec.narrowM.toFixed(2)} m strip ${mass.id} is part of the building`, reason: `read as a body narrower than its own two walls, but ${d.why}`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: rec.source.evidenceIds })
     }
     step({ stage: 'massing', what: `N7-P2R: ${mass.id} is ${rec.narrowM.toFixed(2)} m across, narrower than two ${T.toFixed(2)} m walls`, method: d.kind === 'KEEP_PARTIAL' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${d.kind}: ${d.why}; readings ${rec.hypotheses.map((h) => `${h.kind.toLowerCase()} ${h.status.toLowerCase()}`).join(', ')}; first bad: ${rec.firstBad}`, inputs: rec.hypotheses.length, outputs: d.kind === 'KEEP_PARTIAL' ? 0 : 1 })
     if (d.kind === 'KEEP_PARTIAL') gap({ what: `the body ${mass.id}, ${rec.narrowM.toFixed(2)} m across`, reason: `narrower than its own two walls, and the source does not decide what it is: ${d.why}`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: rec.source.evidenceIds })
@@ -2573,15 +2583,26 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   let planeRoofs: PlaneRoofV2[] | undefined
   let builtMainRoof = mainRoof
   if (mainRoof?.ends) {
+    const r = mainRoof
+    const ends = mainRoof.ends
+    const oh = r.eaves?.overhangM ?? 0
+    const body = { x0: r.footprint.x0 - oh, x1: r.footprint.x1 + oh, z0: r.footprint.z0 - oh, z1: r.footprint.z1 + oh }
+    const eaveY = round6(r.eaveY - oh * Math.tan((r.pitchDeg * Math.PI) / 180))
+    const layout = planeRoofLayout(body, r.ridgeAxis, r.pitchDeg, eaveY, { min: ends.min, max: ends.max })
+    // EXTERIOR-COMPLETE (Zefiranty): a rooflight read against the gable's two slopes is in a plane of the hipped roof too
+    // when its whole plan footprint lies inside one plane (`rooflightPlaneKey`): it is re-homed there. One across a hip's
+    // line holds the gable, as before.
+    const homeOf = (q: (typeof rooflights)[number]): PlaneRoofKey | undefined => rooflightPlaneKey(layout, r.ridgeAxis, q)
+    const unhomed = rooflights.filter((q) => !q.planeId && homeOf(q) === undefined)
     // 005Y-N1: a chimney no longer holds the roof as a gable: its penetration is cut plumb in the plane it stands in (emit).
-    const bound = [...(rooflights.some((r) => !r.planeId) ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
+    const bound = [...(unhomed.length > 0 ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
     if (bound.length > 0) gap({ what: 'the hipped ends of the main roof', reason: `${mainRoof.ends.why}, but ${bound.join(', ')} are bound to it as a gable; the gable is kept`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     else {
-      const r = mainRoof
-      const oh = r.eaves?.overhangM ?? 0
-      const body = { x0: r.footprint.x0 - oh, x1: r.footprint.x1 + oh, z0: r.footprint.z0 - oh, z1: r.footprint.z1 + oh }
-      const eaveY = round6(r.eaveY - oh * Math.tan((r.pitchDeg * Math.PI) / 180))
-      const layout = planeRoofLayout(body, r.ridgeAxis, r.pitchDeg, eaveY, { min: r.ends!.min, max: r.ends!.max })
+      for (const q of rooflights) {
+        if (q.planeId) continue
+        const key = homeOf(q)
+        if (key) Object.assign(q, { planeId: planeRoofPlaneId(r.massId, key), ridgeAxis: r.ridgeAxis })
+      }
       planeRoofs = [{ massId: r.massId, ridgeAxis: r.ridgeAxis, pitchDeg: r.pitchDeg, eaveY, ridgeY: layout.ridgeY, ends: { min: r.ends!.min, max: r.ends!.max }, thicknessM: r.thicknessM, layout, featureId: r.featureId, provenance: r.provenance, why: `${r.pitchDeg}° roof on the authority of ${r.authority.toLowerCase().replace(/_/g, ' ')}; ${r.ends!.why}${r.eaves ? `; eaves ${oh.toFixed(2)} m past the walls on every side: ${r.eaves.why}` : ''}` }]
       builtMainRoof = undefined
     }
