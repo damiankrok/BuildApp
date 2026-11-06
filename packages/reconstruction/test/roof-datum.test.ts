@@ -3,7 +3,7 @@
  * which it must not be taken (research/analyzer-005t-n3-roof/preregistration.md).
  */
 import { describe, expect, it } from 'vitest'
-import { approximateRidgeDatum } from '../src/index.js'
+import { approximateRidgeDatum, printedTerrainOf } from '../src/index.js'
 import type { ApproximateRidgeInput } from '../src/index.js'
 
 const knee = (cm: number, tag = 'a') => ({ id: `metric-spec-knee-wall-linear-dimension-${tag}`, kind: 'LINEAR_DIMENSION', unit: 'cm', value: cm, association: { kind: 'PUBLISHED_SPECIFICATION' } })
@@ -102,5 +102,24 @@ describe('EXTERIOR-COMPLETE approximate ridge datum for a hip', () => {
   it('counter-case: a hip with no printed knee wall or no source pitch gets no datum', () => {
     expect(approximateRidgeDatum(hip('X', { metrics: { evidence: [pitch] } as unknown as ApproximateRidgeInput['metrics'] })).ok).toBe(false)
     expect(approximateRidgeDatum(base({ roof: { kind: 'HIP', pitchDeg: 40, pitchAuthority: 'ASSUMED' } })).ok).toBe(false)
+  })
+})
+
+// E13 (Azalie: −0,57 on the lowered floor under the stair, −0,32 on the ground outside, the page's 8.02 m over −0,32)
+describe('printedTerrainOf', () => {
+  const marks = (vs: number[], confidence = 0.7) => vs.map((value) => ({ value, confidence }))
+  const height = (value: number) => [{ key: 'building_height', value, unit: 'm' }]
+  it('of two marks below ±0,00, the one the published height is measured from', () => {
+    const t = printedTerrainOf(marks([-0.57, -0.32, 0, 2.96, 3.73, 7.7]), height(8.02))
+    expect(t?.value).toBe(-0.32)
+    expect(t?.why).toMatch(/published building height 8.02/)
+    // the order of the marks or a more confident sunk floor does not move it
+    expect(printedTerrainOf([{ value: -0.32, confidence: 0.6 }, { value: -0.57, confidence: 0.9 }, { value: 7.7, confidence: 0.9 }], height(8.02))?.value).toBe(-0.32)
+  })
+  it('counter: one mark, no published height, or no single mark meeting it: the most confident mark, as before', () => {
+    expect(printedTerrainOf(marks([-0.47, 0, 8.55]), height(9.02))?.value).toBe(-0.47)
+    expect(printedTerrainOf([{ value: -0.57, confidence: 0.9 }, { value: -0.32, confidence: 0.6 }, { value: 7.7, confidence: 0.9 }], [])?.value).toBe(-0.57)
+    expect(printedTerrainOf([{ value: -0.57, confidence: 0.9 }, { value: -0.32, confidence: 0.6 }, { value: 7.7, confidence: 0.9 }], height(9.5))?.value).toBe(-0.57)
+    expect(printedTerrainOf(marks([0, 2.8, 7.7]), height(8.02))).toBeUndefined()
   })
 })

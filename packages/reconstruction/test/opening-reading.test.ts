@@ -3,7 +3,7 @@
  * elevation raster, no house. Every case is invented.
  */
 import { describe, expect, it } from 'vitest'
-import { classifyOpeningFamily, matchOpeningCallout, preferredElevationExtent, resolveSillAndHead } from '../src/v2/opening-reading.js'
+import { classifyOpeningFamily, matchOpeningCallout, passageHead, preferredElevationExtent, resolveSillAndHead } from '../src/v2/opening-reading.js'
 import type { OpeningFamilyFacts, OpeningSymbols } from '../src/v2/opening-reading.js'
 import type { DrawnLeaves } from '../src/v2/openings-v2.js'
 
@@ -87,6 +87,24 @@ describe('resolveSillAndHead', () => {
     expect(r?.sill).toBe('IMAGE_METRIC_REGISTERED')
     expect(r?.sillY).toBe(0.9)
   })
+  // E13 (Goździkowce 260/140 read 0.86 m tall from 0.06 on the elevation; Bakopy 220/140 read 0.86 from 0.25)
+  it('a strong printed height the elevation refutes stands, and the refuted extent places neither end: the common head', () => {
+    const r = resolveSillAndHead(host, { callout: callout(260, 140), elevation: { frameId: 'f', sillY: 0.06, headY: 0.92, contrast: 30, confidence: 0.7 } }, strong)
+    expect(r?.head).toBe('SOURCE_EXACT')
+    expect(r?.sill).toBe('ASSUMED_FOR_RENDERING')
+    expect(r?.sillY).toBeCloseTo(0.8, 6)
+    expect(r?.headY).toBeCloseTo(2.2, 6)
+    expect(r?.notes.join(' ')).toMatch(/places neither end/)
+    // taller than printed, from higher up: the same
+    const t = resolveSillAndHead(host, { callout: callout(90, 140), elevation: { frameId: 'f', sillY: 1.25, headY: 1.96, contrast: 30, confidence: 0.7 } }, strong)
+    expect(t?.sillY).toBeCloseTo(0.8, 6)
+    // a printed door height still reaches the floor
+    expect(resolveSillAndHead(host, { callout: callout(100, 210), elevation: { frameId: 'f', sillY: 0.5, headY: 1.6, contrast: 30, confidence: 0.7 } }, strong)?.sillY).toBe(0)
+    // counter: an agreeing extent still places it, corroborated
+    const ok = resolveSillAndHead(host, { callout: callout(260, 140), elevation: { frameId: 'f', sillY: 0.9, headY: 2.25, contrast: 30, confidence: 0.7 } }, strong)
+    expect(ok?.sill).toBe('SOURCE_CORROBORATED')
+    expect(ok?.sillY).toBeCloseTo(0.875, 6)
+  })
   it('nothing read: null, so the caller assumes and says so', () => {
     expect(resolveSillAndHead(host, { callout: undefined, elevation: undefined }, strong)).toBeNull()
   })
@@ -100,9 +118,38 @@ describe('matchOpeningCallout and preferredElevationExtent', () => {
     expect(matchOpeningCallout({ centre: 3, widthM: 1.0 }, host, [near(150, 3)], 2, false).callout).toBeUndefined()
     expect(matchOpeningCallout({ centre: 3, widthM: 1.0 }, host, [near(100, 3, 0.1)], 2, false).callout).toBeUndefined()
   })
+  // E13 (Willa Maja: the template's 116 and the recogniser's rival 110 at the same score, over a 1.08 m gap)
+  it('two width readings tied on score: the plan gap they both fit picks the nearer; a clear score still wins', () => {
+    const tied = { id: 't', confidence: 0.3, textCentre: { x: 3, z: -0.6 }, pixelCentre: [0, 0] as [number, number], candidates: { widths: [{ cm: 116, score: 0.5267 }, { cm: 110, score: 0.5267 }], heights: [{ cm: 277, score: 0.47 }, { cm: 230, score: 0.47 }] } }
+    const m = matchOpeningCallout({ centre: 3, widthM: 1.08 }, host, [tied], 2, false).callout
+    expect(m?.widthCm).toBe(110)
+    expect(m?.resolvedBy).toMatch(/plan gap picked the width reading 110 over 116/)
+    const clear = { ...tied, candidates: { ...tied.candidates, widths: [{ cm: 116, score: 0.6 }, { cm: 110, score: 0.5 }] } }
+    expect(matchOpeningCallout({ centre: 3, widthM: 1.08 }, host, [clear], 2, false).callout?.widthCm).toBe(116)
+    // rotated wall, mirrored order: the same tie, the same pick
+    const side = { facade: 'WEST' as const, centreAt: 0.2 }
+    const turned = { ...tied, textCentre: { x: -0.6, z: 3 }, candidates: { ...tied.candidates, widths: [{ cm: 110, score: 0.5267 }, { cm: 116, score: 0.5267 }] } }
+    expect(matchOpeningCallout({ centre: 3, widthM: 1.08 }, side, [turned], 2, false).callout?.widthCm).toBe(110)
+  })
   it('the object reader replaces the contrast reader when it contains it; a frame-short extent is no opening', () => {
     expect(preferredElevationExtent({ sillY: 0.8, headY: 2.3, contrast: 30 }, { sillY: 1.2, headY: 2.2, contrast: 20 })?.sillY).toBe(0.8)
     expect(preferredElevationExtent({ sillY: 1.4, headY: 2.3, contrast: 30 }, { sillY: 0.9, headY: 2.2, contrast: 20 })?.sillY).toBe(0.9)
     expect(preferredElevationExtent({ sillY: 2.0, headY: 2.3, contrast: 30 }, null)).toBeNull()
+  })
+})
+
+// E13 (Goździkowce: the recess's mouth read 2.00 on the front elevation over a 2.10 m door in its back wall)
+describe('passageHead', () => {
+  it('a head read below an opening in the back wall is that opening seen through the mouth: the ceiling stays assumed', () => {
+    const h = passageHead(2.0, [2.1, 1.4], 2.52)
+    expect(h.read).toBe(false)
+    expect(h.headY).toBe(2.52)
+    expect(h.refused).toMatch(/seen through the mouth/)
+  })
+  it('counter: a head at or above the openings behind stands (the line weight allowed); nothing read is assumed; nothing behind, a reading stands', () => {
+    expect(passageHead(2.4, [2.1], 2.52)).toEqual({ headY: 2.4, read: true })
+    expect(passageHead(2.09, [2.1], 2.52)).toEqual({ headY: 2.09, read: true })
+    expect(passageHead(undefined, [2.1], 2.52)).toEqual({ headY: 2.52, read: false })
+    expect(passageHead(1.9, [], 2.52)).toEqual({ headY: 1.9, read: true })
   })
 })

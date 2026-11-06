@@ -155,3 +155,67 @@ describe('the ladder of heights is measured from ±0.00', () => {
     expect(levelsFrom(withDatums([-0.32]), 'frame-section').measured).toBe(false)
   })
 })
+
+// E13 (Zefiranty G2: ±0,00, +2,42 over the garage, +2,93 over the house, +8,55): a split level is one storey
+describe('a split level on the section', () => {
+  const placedDatum = (value: number, i: number, x: number, row: number): MetricEvidence => ({ ...datum(value, i), measuredGeometry: { type: 'SEGMENT', a: { x: x - 1, y: row }, b: { x: x + 1, y: row } } }) as MetricEvidence
+  const at = (marks: Array<[number, number, number]>): MetricEvidenceSet => ({ ...metricsOf([], []), evidence: marks.map(([v, x, row], i) => placedDatum(v, i, x, row)) })
+  const zef: Array<[number, number, number]> = [[-0.47, 382, 204], [0, 268, 197], [2.42, 94, 157], [2.93, 257, 150], [8.55, 203, 54]]
+  const slabUnder = (slabs: number[]) => (datums: Array<{ value: number }>) => {
+    const top = Math.max(...datums.map((d) => d.value))
+    return { belowDrawnRoof: false, onSlab: slabs.some((s) => Math.abs(s - top) < 1e-6), why: 'a fixture' }
+  }
+  it('two upper floor marks within 1.2 m, the higher over a slab: one storey, the main body\'s floor nearer the ridge mark, neither the eaves', () => {
+    const l = levelsFrom(at(zef), 'frame-section', slabUnder([2.93]), 2)
+    expect(l.floors).toEqual([0, 2.93])
+    expect(l.eaves).toBeUndefined()
+    expect(l.topDatum).toBe(8.55)
+    expect(l.splitLevel?.other).toBe(2.42)
+  })
+  it('mirrored on the sheet: the lower mark nearer the ridge is the main body\'s', () => {
+    const mirrored = zef.map(([v, x, row]) => [v, v === 2.42 ? 210 : v === 2.93 ? 380 : x, row] as [number, number, number])
+    expect(levelsFrom(at(mirrored), 'frame-section', slabUnder([2.93]), 2).floors).toEqual([0, 2.42])
+  })
+  it('without a ±0,00 read, the slab test still sees the building: its zero row comes from the other marks\' ladder', () => {
+    const noZero = zef.filter(([v]) => v !== 0)
+    let seen: Array<{ value: number; row: number }> = []
+    const l = levelsFrom(at(noZero), 'frame-section', (datums) => {
+      seen = datums
+      return slabUnder([2.93])(datums)
+    }, 2)
+    expect(l.floors).toEqual([0, 2.93])
+    expect(seen.some((d) => d.value === 0 && Math.abs(d.row - 197) < 4)).toBe(true)
+  })
+  it('a single upper floor mark below the ridge, over a slab (the eaves mark unread): a floor, not the eaves', () => {
+    const goz: Array<[number, number, number]> = [[-0.32, 50, 660], [0, 800, 641], [2.96, 790, 453], [8.36, 680, 104]]
+    const l = levelsFrom(at(goz), 'frame-section', slabUnder([2.96]), 2)
+    expect(l.floors).toEqual([0, 2.96])
+    expect(l.eaves).toBeUndefined()
+    // counter: the same mark not over a slab is the eaves
+    expect(levelsFrom(at(goz), 'frame-section', slabUnder([]), 2).eaves).toBe(2.96)
+  })
+  it('counter: a slab under the roof where the plans show no storey on it — a bungalow\'s ceiling, an upper storey\'s — is the walls\' head, never a storey', () => {
+    const bungalow: Array<[number, number, number]> = [[-0.32, 50, 660], [0, 800, 641], [2.96, 790, 453], [8.36, 680, 104]]
+    const one = levelsFrom(at(bungalow), 'frame-section', slabUnder([2.96]), 1)
+    expect(one.floors).toEqual([0])
+    expect(one.eaves).toBe(2.96)
+    const twoStorey: Array<[number, number, number]> = [[0, 800, 641], [2.75, 790, 470], [5.4, 790, 300], [8.9, 680, 80]]
+    const two = levelsFrom(at(twoStorey), 'frame-section', slabUnder([5.4]), 2)
+    expect(two.floors).toEqual([0, 2.75])
+    expect(two.eaves).toBe(5.4)
+    // and without the plans' count nothing is promoted
+    expect(levelsFrom(at(bungalow), 'frame-section', slabUnder([2.96])).eaves).toBe(2.96)
+  })
+  it('counter: the mark below the ridge not on a slab is the eaves, as before', () => {
+    const l = levelsFrom(at(zef), 'frame-section', slabUnder([]), 2)
+    expect(l.eaves).toBe(2.93)
+    expect(l.floors).toEqual([0, 2.42])
+    expect(l.splitLevel).toBeUndefined()
+  })
+  it('counter: two marks further apart than 1.2 m are a floor and the eaves; without a section raster nothing changes', () => {
+    const apart: Array<[number, number, number]> = [[0, 268, 197], [2.8, 94, 150], [4.3, 257, 120], [8.55, 203, 54]]
+    expect(levelsFrom(at(apart), 'frame-section', slabUnder([])).eaves).toBe(4.3)
+    expect(levelsFrom(at(apart), 'frame-section', slabUnder([])).splitLevel).toBeUndefined()
+    expect(levelsFrom(at(zef), 'frame-section').eaves).toBe(2.93)
+  })
+})

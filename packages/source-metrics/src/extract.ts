@@ -65,7 +65,8 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.6.0 (EXTERIOR-COMPLETE): the occluded-line join and the sheet's vertical way up (dimension-lines 1.3.0, metric solver 1.5.0). */
 /** 1.7.0 (EXTERIOR-COMPLETE E9): a ring half two readers read two ways carries the recogniser's reading as an equal rival after the template's; a ladder rung's clean reading is substituted only when it misses the ladder by more than two tolerances. */
 /** 1.8.0 (EXTERIOR-COMPLETE, Zefiranty): an outline crossing a dimension line is no measurement point (dimension-lines 1.4.0); two labels one pass read apart are two inks (metric solver 1.6.0). */
-export const METRIC_READER_VERSION = '1.8.0' as const
+/** 1.9.0 (EXTERIOR-COMPLETE E12): two barred rings on one bar row, overlapping or touching, are one callout ring split by ink touching it (`mergeSplitRings`). */
+export const METRIC_READER_VERSION = '1.9.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -796,9 +797,14 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         // the ambiguity is named on the opening and an elevation that shows it decides (the recogniser's "230" refused,
         // the template's near-tie "290": Bakopy 400/230, Lipienniki 80/230, Arlety 105/210 — the template wrong each
         // time). Both must have read the whole half, as many digits each, for it to be a disagreement, not a partial read.
-        const rivalOf = (half: CalloutRingRecord['width'] | undefined, first: { value: number; text: string; score: number } | undefined): { value: number; text: string; score: number; why: string } | undefined =>
-          half && !half.accepted && half.stable && /^\d+$/.test(half.text) && first !== undefined && first.text.length === half.text.length && Number(half.text) !== first.value
-            ? { value: Number(half.text), text: half.text, score: first.score, why: half.why }
+        // E13 (two development callouts read with a wrong half, the right one refused): a recogniser's reading that is not stable under
+        // the bracket is still the second reader's whole answer for the half, and it disagrees with the template's — the
+        // half is as ambiguous as with a stable one. And a rival of equal weight stands next to the reading it rivals,
+        // second, not after every lower-scored template reading: the storey's common head and the plan gap look at the
+        // runners-up, and a rival filed last was never seen by either.
+        const rivalOf = (half: CalloutRingRecord['width'] | undefined, first: { value: number; text: string; score: number } | undefined): { value: number; text: string; score: number; why: string; stable: boolean } | undefined =>
+          half && !half.accepted && /^\d+$/.test(half.text) && first !== undefined && first.text.length === half.text.length && Number(half.text) !== first.value
+            ? { value: Number(half.text), text: half.text, score: first.score, why: half.why, stable: half.stable }
             : undefined
         const widthRival = rivalOf(heardRing?.width, ring.widthCandidates[0])
         const heightRival = rivalOf(heardRing?.height, ring.heightCandidates[0])
@@ -845,10 +851,12 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
               : []),
             ...(heardWidthHalf ? [{ value: heardWidthHalf.valueCm as number, unit: 'cm' as const, rawText: heardWidthHalf.text, confidence: round6(heardWidthHalf.p), why: `width candidate: the recogniser read the upper half as ${heardWidthHalf.text} (p ${heardWidthHalf.p}, mean ${heardWidthHalf.meanP}, stable, ${heardWidthHalf.glyphs} glyphs; the lower half was refused: ${halfHeard?.height.why})` }] : []),
             ...(heardHeightHalf ? [{ value: heardHeightHalf.valueCm as number, unit: 'cm' as const, rawText: heardHeightHalf.text, confidence: round6(heardHeightHalf.p), why: `height candidate: the recogniser read the lower half as ${heardHeightHalf.text} (p ${heardHeightHalf.p}, mean ${heardHeightHalf.meanP}, stable, ${heardHeightHalf.glyphs} glyphs; the upper half was refused: ${halfHeard?.width.why})` }] : []),
-            ...templateWidths.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
-            ...templateHeights.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
-            ...(widthRival && templateWidths.length > 0 ? [{ value: widthRival.value, unit: 'cm' as const, rawText: widthRival.text, confidence: round6(Math.min(1, widthRival.score)), why: `width candidate: a rival — the recogniser read the upper half as ${widthRival.text} stably, which its gate refused (${widthRival.why}), and the template read it otherwise: the half is ambiguous` }] : []),
-            ...(heightRival && templateHeights.length > 0 ? [{ value: heightRival.value, unit: 'cm' as const, rawText: heightRival.text, confidence: round6(Math.min(1, heightRival.score)), why: `height candidate: a rival — the recogniser read the lower half as ${heightRival.text} stably, which its gate refused (${heightRival.why}), and the template read it otherwise: the half is ambiguous` }] : []),
+            ...templateWidths.slice(0, 1).map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
+            ...(widthRival && templateWidths.length > 0 ? [{ value: widthRival.value, unit: 'cm' as const, rawText: widthRival.text, confidence: round6(Math.min(1, widthRival.score)), why: `width candidate: a rival — the recogniser read the upper half as ${widthRival.text}${widthRival.stable ? ' stably' : ', not stably under the bracket'}, which its gate refused (${widthRival.why}), and the template read it otherwise: the half is ambiguous` }] : []),
+            ...templateWidths.slice(1).map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
+            ...templateHeights.slice(0, 1).map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
+            ...(heightRival && templateHeights.length > 0 ? [{ value: heightRival.value, unit: 'cm' as const, rawText: heightRival.text, confidence: round6(Math.min(1, heightRival.score)), why: `height candidate: a rival — the recogniser read the lower half as ${heightRival.text}${heightRival.stable ? ' stably' : ', not stably under the bracket'}, which its gate refused (${heightRival.why}), and the template read it otherwise: the half is ambiguous` }] : []),
+            ...templateHeights.slice(1).map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
             ...(refusedWidth ? [{ value: refusedWidth.valueCm, unit: 'cm' as const, rawText: refusedWidth.text, confidence: refusedWidth.confidence, why: `width candidate: ${PLAN_CORROBORATED_WIDTH}: the recogniser read the upper half as ${refusedWidth.text} but the gate refused it (${refusedWidth.why}); usable only where the plan gap agrees` }] : []),
           ],
           confidence: round6(Math.min(1, Math.max(0.05, Math.min(width.score, height.score))) * (ring.bar ? 1 : 0.5) * (readable ? 1 : 0.6)),

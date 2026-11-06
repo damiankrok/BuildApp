@@ -138,3 +138,28 @@ export function topDatumBelowPublishedHeight(input: {
   const terrain = input.printedTerrainY !== undefined ? `the printed terrain ${input.printedTerrainY} m` : `a terrain at most ${ROOF_DATUM_TERRAIN_DEPTH_M.max} m below ±0.00`
   return `the published building height ${H} m over ${terrain} leaves ${left} m above the highest datum read (+${input.topDatum.toFixed(2)}), more than a roof build-up of ${CONVENTIONS.roofThickness} m, and the section draws ink ${input.drawnRise.toFixed(2)} m above that datum across part of the building's width: a roof stands above it, so it is not the ridge`
 }
+
+/** E13: how far the published building height may differ from the ridge over a ground mark for that mark to be its base. */
+export const PUBLISHED_HEIGHT_BASE_TOLERANCE_M = 0.05
+
+/**
+ * E13 (a development section printing a floor sunk under the stair and the ground outside, both below ±0,00): the
+ * printed terrain. A section may print more than one mark a little below
+ * ±0,00 — the ground outside and a floor sunk inside — and nothing in the value says which is the ground. Where the page
+ * publishes the building height and the section prints the ridge, the ground is the mark that height is measured from:
+ * the one whose distance to the highest mark is the published height. Otherwise (one mark, no published height, no
+ * single mark meeting it) the most confident mark stands, as before.
+ */
+export function printedTerrainOf(levels: ReadonlyArray<{ value: number; confidence: number }>, publishedFacts: ReadonlyArray<{ key: string; value: number; unit: string }>): { value: number; why: string } | undefined {
+  const grounds = levels.filter((e) => e.value < 0 && e.value > -1.5)
+  if (grounds.length === 0) return undefined
+  const fallback = [...grounds].sort((a, b) => b.confidence - a.confidence)[0]
+  const distinct = [...new Set(grounds.map((g) => g.value))]
+  const heights = publishedFacts.filter((f) => f.key === 'building_height' && f.unit === 'm')
+  if (distinct.length < 2 || heights.length !== 1 || levels.length === 0) return { value: fallback.value, why: 'the most confident level mark printed below ±0,00' }
+  const top = Math.max(...levels.map((e) => e.value))
+  const H = heights[0].value
+  const meeting = distinct.filter((g) => Math.abs(top - g - H) <= PUBLISHED_HEIGHT_BASE_TOLERANCE_M)
+  if (meeting.length !== 1) return { value: fallback.value, why: `the most confident level mark printed below ±0,00 (${meeting.length === 0 ? 'none' : 'more than one'} of ${distinct.map((g) => g.toFixed(2)).join(', ')} is the base of the published ${H} m height under +${top.toFixed(2)})` }
+  return { value: meeting[0], why: `the published building height ${H} m is +${top.toFixed(2)} over ${meeting[0].toFixed(2)}, of the marks ${distinct.map((g) => g.toFixed(2)).join(', ')} printed below ±0,00` }
+}

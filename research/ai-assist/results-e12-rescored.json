@@ -1,0 +1,1049 @@
+{
+  "note": "E12 answers re-validated with the E13 validators: runtime validation without the reference answer; grading kept apart",
+  "e12ValidatedCorrectAsReported": {
+    "claude-haiku-5-5": 15,
+    "claude-opus-5-5": 15
+  },
+  "questions": [
+    {
+      "id": "kos-callout-105",
+      "house": "kostrzewach-4",
+      "kind": "CALLOUT",
+      "cropByteHash": "c59b9681b882065e54086dad31a21f7f72184ba258b6f7447fd676916d7ec45e",
+      "assetByteHash": "d09c1419d66252fe91e10589d10266b78f71b9b320597e1e88cd6fd41d8c57da",
+      "cropRectPx": {
+        "x0": 415,
+        "y0": 620,
+        "x1": 465,
+        "y1": 665
+      },
+      "question": "Read the size printed in the ring callout in this crop of a floor plan (width over height, in cm), exactly as printed.",
+      "hypotheses": [
+        {
+          "id": "w105h210",
+          "text": "105/210"
+        },
+        {
+          "id": "w70h210",
+          "text": "70/210"
+        },
+        {
+          "id": "w100h210",
+          "text": "100/210"
+        }
+      ],
+      "truth": "w105h210",
+      "cv": null,
+      "validator": {
+        "kind": "PLAN_GAP_WIDTH",
+        "gapM": 1.047,
+        "toleranceM": 0.06
+      },
+      "truthWhy": "the ring beside the porch door; its two neighbours on the same wall read 70/210; the plan gap it labels is 1.05 m wide"
+    },
+    {
+      "id": "kos-entrance-leaf",
+      "house": "kostrzewach-4",
+      "kind": "CHOICE",
+      "cropByteHash": "103ed820c56eb555122cf122d693c0effc3bbe5524167d01eb1a31f52f8f0897",
+      "assetByteHash": "d09c1419d66252fe91e10589d10266b78f71b9b320597e1e88cd6fd41d8c57da",
+      "cropRectPx": {
+        "x0": 330,
+        "y0": 560,
+        "x1": 560,
+        "y1": 680
+      },
+      "question": "This crop of a floor plan shows a recessed porch at the bottom with three openings in its back wall (left, middle, right). Which opening has a door leaf drawn swinging OUT into the porch (a straight leaf line from a jamb with an arc)?",
+      "hypotheses": [
+        {
+          "id": "LEFT",
+          "text": "the left opening"
+        },
+        {
+          "id": "MIDDLE",
+          "text": "the middle opening"
+        },
+        {
+          "id": "RIGHT",
+          "text": "the right opening"
+        }
+      ],
+      "truth": "MIDDLE",
+      "cv": "LEFT",
+      "validator": null,
+      "truthWhy": "the 105/210 opening: leaf drawn from its left jamb down into the porch with its arc; the left 70/210 swings into room 11, the right one has glazing lines"
+    },
+    {
+      "id": "zef-section-ridge",
+      "house": "zefiranty-g2-ver-2",
+      "kind": "CHOICE",
+      "cropByteHash": "73be3e6cef9ae3321cc5eb1e4a6388b150fe47935e2e945ef65bb9a8d93e293b",
+      "assetByteHash": "915ce9e244294044aa30305fd0ec0ef114938ccce3da36aabbfcd1a1f106ec89",
+      "cropRectPx": {
+        "x0": 0,
+        "y0": 0,
+        "x1": 400,
+        "y1": 300
+      },
+      "question": "This is a building section (cross-section) drawing. Read the level mark printed at the very top of the roof (the ridge level), exactly as printed.",
+      "hypotheses": [
+        {
+          "id": "R855",
+          "text": "+8,55"
+        },
+        {
+          "id": "R816",
+          "text": "+8,16"
+        },
+        {
+          "id": "R902",
+          "text": "+9,02"
+        }
+      ],
+      "truth": "R855",
+      "cv": null,
+      "validator": {
+        "kind": "PAIR_SUM",
+        "with": "zef-section-terrain",
+        "publishedM": 9.02,
+        "toleranceM": 0.011
+      },
+      "truthWhy": "the brief states the section prints +8,55 and the terrain -0,47; the page states 9.02 m height = 8.55 + 0.47"
+    },
+    {
+      "id": "zef-section-terrain",
+      "house": "zefiranty-g2-ver-2",
+      "kind": "CHOICE",
+      "cropByteHash": "73be3e6cef9ae3321cc5eb1e4a6388b150fe47935e2e945ef65bb9a8d93e293b",
+      "assetByteHash": "915ce9e244294044aa30305fd0ec0ef114938ccce3da36aabbfcd1a1f106ec89",
+      "cropRectPx": {
+        "x0": 0,
+        "y0": 0,
+        "x1": 400,
+        "y1": 300
+      },
+      "question": "This is a building section drawing. Read the level mark printed for the ground (terrain) level outside the building on the RIGHT-hand side of the drawing, exactly as printed.",
+      "hypotheses": [
+        {
+          "id": "T047",
+          "text": "-0,47"
+        },
+        {
+          "id": "T032",
+          "text": "-0,32"
+        },
+        {
+          "id": "T000",
+          "text": "±0,00"
+        }
+      ],
+      "truth": "T047",
+      "cv": null,
+      "validator": {
+        "kind": "PAIR_SUM",
+        "with": "zef-section-ridge",
+        "publishedM": 9.02,
+        "toleranceM": 0.011
+      },
+      "truthWhy": "two terrain marks are printed: -0,32 at the left, -0,47 at the right; the right one with +8,55 gives the page height 9.02 m"
+    },
+    {
+      "id": "zef-rear-arc",
+      "house": "zefiranty-g2-ver-2",
+      "kind": "CHOICE",
+      "cropByteHash": "72977d81e91813ded020ec43c939d0c8dc7709d8ed7fde8d98d90766240c1db0",
+      "assetByteHash": "4a8960919dcde49866034e3b342b4201981a4b613c85fd1e517ed8803593cc5e",
+      "cropRectPx": {
+        "x0": 140,
+        "y0": 0,
+        "x1": 760,
+        "y1": 190
+      },
+      "question": "This crop is the top (rear) edge of a ground-floor plan. Is the semicircular outline drawn there part of the house (a rounded bay enclosed by walls), or an outdoor terrace in front of the house?",
+      "hypotheses": [
+        {
+          "id": "TERRACE",
+          "text": "an outdoor terrace"
+        },
+        {
+          "id": "BAY",
+          "text": "a rounded bay of the house"
+        }
+      ],
+      "truth": "TERRACE",
+      "cv": "TERRACE",
+      "validator": null,
+      "truthWhy": "drawn with thin lines, no wall poché; garden chairs stand on it; the house wall with three doors runs straight behind it"
+    },
+    {
+      "id": "zef-garage-front",
+      "house": "zefiranty-g2-ver-2",
+      "kind": "CHOICE",
+      "cropByteHash": "05796d000090112cfc5d527e4e0bc097c40c28038343188756fc35ae1f3e5e7c",
+      "assetByteHash": "4a8960919dcde49866034e3b342b4201981a4b613c85fd1e517ed8803593cc5e",
+      "cropRectPx": {
+        "x0": 60,
+        "y0": 380,
+        "x1": 720,
+        "y1": 760
+      },
+      "question": "This crop of a ground-floor plan shows a two-car garage (left) and the house. Does the garage project forward (downward in the picture) beyond the front wall of the house, or is its front wall in line with the house front?",
+      "hypotheses": [
+        {
+          "id": "PROJECTS",
+          "text": "it projects forward beyond the house front",
+          "predicate": {
+            "quantity": "garageFrontBeyondHouseFrontM",
+            "min": 0.3
+          }
+        },
+        {
+          "id": "FLUSH",
+          "text": "its front is in line with the house front",
+          "predicate": {
+            "quantity": "garageFrontBeyondHouseFrontM",
+            "max": 0.1
+          }
+        }
+      ],
+      "truth": "PROJECTS",
+      "cv": "FLUSH",
+      "validator": {
+        "kind": "PRINTED_CHAIN",
+        "quantity": "garageFrontBeyondHouseFrontM",
+        "valueM": 2,
+        "fact": "printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63)",
+        "why": "a printed 200 on the plan right-hand chain spans from the house front line to the extent bottom"
+      },
+      "truthWhy": "the garage door wall is ~78 px (2.0 m, the printed 200) below the house front line"
+    },
+    {
+      "id": "mur-front-setback",
+      "house": "murajach",
+      "kind": "CHOICE",
+      "cropByteHash": "90b5818362192d00151ad8bc4ee871d1924a07957796b5960911b48b4cc6f13b",
+      "assetByteHash": "1510ed2a4c7ed56f6c678178ab3fbe8a5d82706ad999298537326b7134741d09",
+      "cropRectPx": {
+        "x0": 60,
+        "y0": 520,
+        "x1": 800,
+        "y1": 720
+      },
+      "question": "This crop is the bottom (front) edge of a ground-floor plan. Is the wall holding the entrance door and the garage door (right part) set back from the front face of the block on the left, or flush with it?",
+      "hypotheses": [
+        {
+          "id": "SET_BACK",
+          "text": "set back from the left block front",
+          "predicate": {
+            "quantity": "entranceWallBehindBlockFrontM",
+            "min": 0.3
+          }
+        },
+        {
+          "id": "FLUSH",
+          "text": "flush with the left block front",
+          "predicate": {
+            "quantity": "entranceWallBehindBlockFrontM",
+            "max": 0.1
+          }
+        }
+      ],
+      "truth": "SET_BACK",
+      "cv": "FLUSH",
+      "validator": {
+        "kind": "WALL_BAND",
+        "quantity": "entranceWallBehindBlockFrontM",
+        "valueM": 0.8,
+        "fact": "horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89)",
+        "why": "a horizontal wall band about 0.8 m behind the left block front spans the right part"
+      },
+      "truthWhy": "the left block front wall is at rows 660..685, the entrance/garage wall at rows ~610..632"
+    }
+  ],
+  "answers": [
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.0017881000000000001,
+      "latencyMs": 8216,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "Middle opening, between the two black blocks, labelled 105/210. A straight leaf line runs down from the left jamb at about x=170 into the porch, with a quarter-arc curving from the right jamb below the wall line.",
+      "cvCorrect": false,
+      "costUsd": 0.0009337,
+      "latencyMs": 6456,
+      "evidence": "The middle opening has a straight door-leaf line dropping from its left jamb (around x=170) into the porch area below the wall, with its swing arc on the porch side, while the left and right openings' arcs sit on the interior side above the wall line.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55",
+      "cvCorrect": false,
+      "costUsd": 0.0008192000000000001,
+      "latencyMs": 2786,
+      "evidence": "The level mark above the ridge of the roof, at the top center of the section, reads \"+8,55\" with its triangular marker pointing to the ridge.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "The level mark on the right-hand terrain line reads \"-0,47\".",
+      "cvCorrect": false,
+      "costUsd": 0.000855,
+      "latencyMs": 2999,
+      "evidence": "At the far right, beside the ground line outside the building, the printed level mark is \"-0,47\" with the level triangle symbol.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "TERRACE",
+      "aiSays": "A semicircular double-line outline projecting outward from the top edge of the plan, with two lounge-style chairs (hatched cushions) inside it, joined to thin parallel lines that run along the rear edge toward a plant.",
+      "cvCorrect": true,
+      "costUsd": 0.000834,
+      "latencyMs": 4632,
+      "evidence": "The rounded outline is drawn with thin single-weight lines like the adjacent paving edges, not with the solid black fills used for the house walls, and it contains two outdoor lounge chairs, so it reads as an outdoor terrace in front of the house.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "The garage's front wall is drawn as a black wall segment at the bottom left, around y≈330–350, with a \"455/220\" dimension beneath it. The house's front wall (where the entrance and the \"305\" and \"100/210\" dimensions sit) runs at about y≈250–265, which is higher on the page.",
+      "cvCorrect": false,
+      "costUsd": 0.0007808,
+      "latencyMs": 4245,
+      "evidence": "The garage's bottom wall line sits noticeably lower in the image than the house's front wall line near the entrance, so the garage extends further forward (downward) than the house front.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-haiku-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "The left block's black exterior wall runs along the bottom to about y≈330, while the right-hand wall segment holding the entrance door (tagged 105/210) ends at about y≈228, well above that line.",
+      "cvCorrect": false,
+      "costUsd": 0.0008621000000000001,
+      "latencyMs": 4434,
+      "evidence": "The front face of the left block (black wall with the 110 label beneath it) sits lower on the sheet than the black wall segment carrying the 105 door swing, which is visibly higher up, so the right-hand wall is recessed back from the left block's front.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.00050277,
+      "latencyMs": 4086,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "A solid door-swing arc in the middle opening curves from the right jamb down into the porch area below the wall line, ending near a vertical leaf line at the left side of the opening. The left opening's dashed arc sits above the wall line, inside the building, and the right opening has no arc.",
+      "cvCorrect": false,
+      "costUsd": 0.0005481,
+      "latencyMs": 5993,
+      "evidence": "The solid arc in the middle opening sweeps from its right jamb down into the porch, below the back wall line, while the left opening's dashed arc is drawn on the building side.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55 (printed as \"+8.55\" with a decimal point)",
+      "cvCorrect": false,
+      "costUsd": 0.00030004,
+      "latencyMs": 3373,
+      "evidence": "The level mark above the top of the roof ridge reads \"+8.55\" with its leader line pointing to the apex.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "-0,47",
+      "cvCorrect": false,
+      "costUsd": 0.00030375,
+      "latencyMs": 3002,
+      "evidence": "On the right side of the drawing, the ground-line level mark beside the short vertical post at the terrain line reads \"-0,47\" in italic type.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "BAY",
+      "aiSays": "A semicircular arc drawn as a double line (two concentric curves with a wall-like gap), joined to the house's double-line wall outlines on the left and right, with two chairs inside and dimensions 1452 and 1142 across it.",
+      "cvCorrect": true,
+      "costUsd": 0.00057711,
+      "latencyMs": 6484,
+      "evidence": "The rounded outline is a double-line wall with the same line style as the house's wall lines on either side, and it meets those walls at its base, so it reads as a rounded bay projecting from the house rather than a paved terrace edge.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": false
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "The garage's gray floor area and its front wall run down to about y≈350 in the crop, with the dimension \"455/220\" printed beneath it. The house's front wall (the black wall segments with the 305 and 100/210 dimensions) sits higher, at about y≈250–265.",
+      "cvCorrect": false,
+      "costUsd": 0.00046764,
+      "latencyMs": 4820,
+      "evidence": "The garage's bottom (front) wall line at roughly y≈350 lies well below the house front wall at roughly y≈255, so the garage extends forward past the house.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-haiku-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "The left block's bottom wall (rooms 2 and 3) runs along the lower edge of the crop at about y≈330, while the wall holding the entrance door (tag 105/210) and the right-hand wall segments under room 1 and the large room sit higher, at about y≈180–230.",
+      "cvCorrect": false,
+      "costUsd": 0.0004817300000000001,
+      "latencyMs": 4807,
+      "evidence": "The thick black front wall of the left block ends lower in the image (around y≈330) than the black wall segments under room 1 and the right room (around y≈180–230), so the right part's front face is recessed behind the left block's front.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.00072867,
+      "latencyMs": 5944,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "The middle opening, labelled 105/210, has a door leaf line from its jamb with a quarter-arc that sweeps down-left into the porch area below the back wall line. The left opening's arc sits above the wall line (inside the house), and the right opening shows no arc into the porch.",
+      "cvCorrect": false,
+      "costUsd": 0.000612,
+      "latencyMs": 6096,
+      "evidence": "In the middle opening, a curved door-swing arc runs from the right jamb near (255,135) down to about (170,195), which is below the back wall line and therefore inside the porch.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55",
+      "cvCorrect": false,
+      "costUsd": 0.00030034,
+      "latencyMs": 2718,
+      "evidence": "The level mark at the top of the roof ridge, above the apex of the roof, reads \"+8,55\" with a triangular level symbol beneath it.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "-0,47",
+      "cvCorrect": false,
+      "costUsd": 0.00032545,
+      "latencyMs": 3043,
+      "evidence": "On the right-hand side, the ground line outside the building has a level marker with a triangle symbol printed as \"-0,47\" just above the terrain line near the right edge.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "TERRACE",
+      "aiSays": "A semicircular outline with thin double lines, projecting beyond the house's solid black wall segments at the bottom of the crop, with two pieces of outdoor-style furniture (chairs) inside it and a potted plant/shrub to the right.",
+      "cvCorrect": true,
+      "costUsd": 0.00051571,
+      "latencyMs": 5230,
+      "evidence": "The rounded shape is drawn with thin single-weight lines and sits outside the heavy black walls, with garden chairs placed inside it and greenery beside it, so it reads as an outdoor terrace rather than an enclosed bay.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "The garage's front wall sits at the bottom of the garage block, below the house's front wall line. The garage outline extends down to about y=350, with a \"455 / 220\" dimension below it. The house's front wall near the entrance, with the \"100/210\" and \"160/120\" window labels, sits higher, at about y=255-265.",
+      "cvCorrect": false,
+      "costUsd": 0.00042164,
+      "latencyMs": 4035,
+      "evidence": "The garage's bottom edge (with the 455 dimension beneath it) extends noticeably further down the page than the house's front wall line near the entrance and the 160/120 window label, so the garage projects forward.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-haiku-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "The left block's bottom wall runs along y≈330 (black, from x≈100 to x≈690), while the right part's front wall (the black segments under room 1 and at the far right) sits higher at y≈180–230, with the entrance door 105 swinging in that recessed wall.",
+      "cvCorrect": false,
+      "costUsd": 0.00056273,
+      "latencyMs": 5591,
+      "evidence": "The black front wall segments beneath room 1 and at the far right end around y≈180–230, noticeably above the left block's bottom wall at y≈330, so the right part is recessed.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.052676,
+      "latencyMs": 5114,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "Middle opening (105/210) has a straight leaf line from its left jamb down into the porch with an arc going back to the right jamb; left opening's dashed arc is above the wall on the room side; right opening has no swing into the porch.",
+      "cvCorrect": false,
+      "costUsd": 0.030147999999999998,
+      "latencyMs": 8764,
+      "evidence": "Below the middle opening, a vertical leaf line drops from the left jamb (x≈172) to about y≈200, and an arc connects its end up to the right jamb.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55",
+      "cvCorrect": false,
+      "costUsd": 0.031804,
+      "latencyMs": 3385,
+      "evidence": "At the top center of the drawing, just above the roof ridge, the level mark reads \"+8,55\" over a small triangle marker.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "-0,47",
+      "cvCorrect": false,
+      "costUsd": 0.031904,
+      "latencyMs": 3267,
+      "evidence": "At the far right edge, next to the ground line outside the building, the level mark reads \"-0,47\" above a small triangle marker.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "TERRACE",
+      "aiSays": "A semicircular projection outlined with a thin double line, with dimensions 1452, 1142 and 90 above it and two sun loungers inside. It joins a rectangular paved area that runs along the house wall, and the black wall at the bottom has doors marked 100/220 and 254/220.",
+      "cvCorrect": true,
+      "costUsd": 0.034728,
+      "latencyMs": 9378,
+      "evidence": "The solid black house wall with its doors is along the bottom; the semicircle above it is a thin double-line outline (a parapet or edge, not a wall) with two sun loungers and corner plants, which shows it is an outdoor terrace.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "The garage's front wall, with the door labelled 455/220, is at about y≈330. The house front wall, with entrance door 100/210 and window 160/120, is higher at about y≈265.",
+      "cvCorrect": false,
+      "costUsd": 0.031268,
+      "latencyMs": 8764,
+      "evidence": "The garage door wall (455/220) sits about 65 px below the house front wall that holds the 100/210 entrance door, and the garage's right side wall continues down past the house front.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-opus-5-5",
+      "run": 0,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "Left block front wall at bottom (~y 280-330); right part's front wall segments with entrance door 105/210 and garage door 275/225 sit higher at ~y 180-228, leaving a recessed porch area in front.",
+      "cvCorrect": false,
+      "costUsd": 0.038776,
+      "latencyMs": 10924,
+      "evidence": "The black wall stubs beside the garage opening (x≈835–995 and x≈1318–1410) lie at y≈180–228, well above the left block's bottom wall at y≈280–330.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.0167372,
+      "latencyMs": 5425,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "Middle opening labelled 105/210 has a straight leaf line going down from the left jamb into the porch, with an arc running from the leaf tip up to the right jamb. Left 70/210 has only a dashed arc above, on the WC side. Right 70/210 has no leaf drawn.",
+      "cvCorrect": false,
+      "costUsd": 0.0195198,
+      "latencyMs": 8989,
+      "evidence": "Below the middle 105/210 opening, a door leaf line and its swing arc extend down into the porch area, while the left and right openings show no leaf or arc on the porch side.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55",
+      "cvCorrect": false,
+      "costUsd": 0.0102666,
+      "latencyMs": 3057,
+      "evidence": "The label \"+8,55\" sits directly above the roof apex, with a level triangle marker pointing to the ridge.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "-0,47",
+      "cvCorrect": false,
+      "costUsd": 0.010316800000000001,
+      "latencyMs": 3406,
+      "evidence": "At the far right, beside the ground line next to the low wall, the level mark reads \"-0,47\" above a triangle marker.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "TERRACE",
+      "aiSays": "A thin double-line semicircle, dimensioned 1452/1142, that continues the outline of a paved area. It contains two sun loungers. The black-walled house facade, with door tags 100/220 and 254/220, is below it, and planting is at the right corner.",
+      "cvCorrect": true,
+      "costUsd": 0.019110000000000002,
+      "latencyMs": 9305,
+      "evidence": "The semicircle holds two sun loungers and is drawn with the same thin edge line as the paved area, while the solid-black house walls with doors opening onto it are lower in the crop.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "Garage front wall with door tag 455/220 at the bottom of the crop; house front wall with entry door 100/210 and kitchen window 160/120 noticeably higher; right-side dimension 200 spanning the step.",
+      "cvCorrect": false,
+      "costUsd": 0.0178726,
+      "latencyMs": 9116,
+      "evidence": "The garage's bottom wall (door 455/220) sits well below the house front wall (entry door 100/210, about y≈265), and the 200 dimension on the right spans this offset.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-opus-5-5",
+      "run": 1,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "The left block (rooms 2/3) has its thick black front wall at the bottom of the image, around y≈285–330. To the right, the wall pieces beside the entrance door (105/210) and the garage opening (275/225) end at about y≈180–228. That is well above (behind) the left block's front face, with the door swinging out into the outdoor area in front.",
+      "cvCorrect": false,
+      "costUsd": 0.0196344,
+      "latencyMs": 9541,
+      "evidence": "The black wall stubs beside the entrance and garage door (around x≈835–995 and x≈1318–1410) end at about y≈228, while the left block's bottom wall reaches about y≈330, so the right wall is recessed about 100 px.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-callout-105",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "w105h210",
+      "aiSays": "105/210",
+      "cvCorrect": false,
+      "costUsd": 0.0164372,
+      "latencyMs": 5088,
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the width half only",
+        "why": "1.05 m fits the 1.05 m plan gap; the height half is not checked by the plan and stays a suggestion"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "kos-entrance-leaf",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "MIDDLE",
+      "aiSays": "Middle opening labelled 105/210, with a leaf line going down from the left jamb into the porch and an arc back to the right jamb. Left opening 70/210 has a dashed arc above the wall, toward the WC. Right opening 70/210 has no leaf drawn.",
+      "cvCorrect": false,
+      "costUsd": 0.0177478,
+      "latencyMs": 8170,
+      "evidence": "At the middle opening, a straight line drops from the left jamb into the porch below the wall, and an arc joins its lower end to the right jamb.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-ridge",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "R855",
+      "aiSays": "+8,55",
+      "cvCorrect": false,
+      "costUsd": 0.010226599999999999,
+      "latencyMs": 3360,
+      "evidence": "The label \"+8,55\" sits above a level triangle at the roof ridge peak, at the top center of the drawing.",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-section-terrain",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "T047",
+      "aiSays": "-0,47",
+      "cvCorrect": false,
+      "costUsd": 0.0103248,
+      "latencyMs": 3171,
+      "evidence": "At the far right edge, next to the ground line outside the building, the level mark with a triangle symbol reads \"-0,47\".",
+      "validation": {
+        "verdict": "PARTIAL",
+        "checked": "the two values only",
+        "why": "their difference is the published 9.02 m; where the labels stand on the drawing was not checked"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-rear-arc",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "TERRACE",
+      "aiSays": "A semicircular projection off a paved area, outlined with thin double lines, with two sun loungers inside it. The area lies outside a line of black wall pieces with doors marked 100/220 and 254/220, and there is a planter in the corner. The dimensions read 1452, 1142 and 90.",
+      "cvCorrect": true,
+      "costUsd": 0.018022,
+      "latencyMs": 8243,
+      "evidence": "The semicircle is drawn with thin double lines rather than the thick black walls of the house, and it holds two sun loungers on the outside of the door openings in the house wall.",
+      "validation": {
+        "verdict": "NO_CHECK",
+        "checked": "nothing",
+        "why": "no deterministic check exists for this question: it stays a question to the user"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "zef-garage-front",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "PROJECTS",
+      "aiSays": "The garage's side walls run down to about y≈330, with the garage door (455/220) at the bottom. The house's front wall, by the entrance door (100/210) and kitchen (room 3), is at about y≈260.",
+      "cvCorrect": false,
+      "costUsd": 0.0180326,
+      "latencyMs": 8469,
+      "evidence": "The garage's front wall, with the 455/220 door, sits about 70 px lower in the image than the house's front wall at the entrance door (100/210), so the entrance sits in a recess beside the garage.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "garageFrontBeyondHouseFrontM = 2 m (printed 200 bound PRIMARY on chain-vertical-685-65860ad8dc, 648..726 px (frame 4c35b58f63))",
+        "why": "the measured garageFrontBeyondHouseFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    },
+    {
+      "questionId": "mur-front-setback",
+      "model": "claude-opus-5-5",
+      "run": 2,
+      "status": "ANSWERED",
+      "aiHypothesisId": "SET_BACK",
+      "aiSays": "Left block's thick front wall ends at about y≈330; the right part's front wall pieces (around the entrance door and the garage, marked 275/225) sit at about y≈180–228, with an open porch in front.",
+      "cvCorrect": false,
+      "costUsd": 0.0181104,
+      "latencyMs": 8841,
+      "evidence": "The black wall pieces beside the entrance door and the garage end at about y≈228, well above where the left block's front wall ends (about y≈330), leaving a recessed porch in front of them.",
+      "validation": {
+        "verdict": "VALIDATED",
+        "checked": "entranceWallBehindBlockFrontM = 0.8 m (horizontal wall band x 476..556, rows 606..634, behind the left block front band at rows 660..685 (frame 18a0a3cc89))",
+        "why": "the measured entranceWallBehindBlockFrontM satisfies the hypothesis's ≥ 0.3"
+      },
+      "correct": true
+    }
+  ],
+  "summary": [
+    {
+      "model": "claude-haiku-5-5",
+      "asked": 21,
+      "uniqueQuestions": 7,
+      "correct": 20,
+      "wrongButChosen": 1,
+      "abstained": 0,
+      "validated": 6,
+      "validatedWrong": 0,
+      "partial": 9,
+      "failedCheck": 0,
+      "failedCheckButCorrect": 0,
+      "noCheck": 6,
+      "costUsd": 0.0135,
+      "meanLatencyMs": 4714
+    },
+    {
+      "model": "claude-opus-5-5",
+      "asked": 21,
+      "uniqueQuestions": 7,
+      "correct": 21,
+      "wrongButChosen": 0,
+      "abstained": 0,
+      "validated": 6,
+      "validatedWrong": 0,
+      "partial": 9,
+      "failedCheck": 0,
+      "failedCheckButCorrect": 0,
+      "noCheck": 6,
+      "costUsd": 0.4737,
+      "meanLatencyMs": 6847
+    }
+  ]
+}

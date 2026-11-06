@@ -80,7 +80,9 @@ export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 // 1.5.0 (EXTERIOR-COMPLETE E12): a recess mouth with returns and wall ink at both jambs puts grid lines on the jambs'
 // inner faces where no line lies within a wall's thickness (`jambLines`): the recess's sides follow its drawn returns,
 // not the nearest dimension tick.
-export const LAYOUT_INFERENCE_VERSION = '1.5.0'
+// 1.6.0 (EXTERIOR-COMPLETE E12): the boundary lines are read with every known opening-callout ring's outline and
+// interior taken out, never where the ink is wall-thick (`withoutCalloutRingInk`): a ring is not a post.
+export const LAYOUT_INFERENCE_VERSION = '1.6.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }

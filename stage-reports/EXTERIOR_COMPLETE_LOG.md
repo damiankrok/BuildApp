@@ -588,3 +588,74 @@ small AI as a helper, on the Claude Code budget.
   repository as `research/exterior-complete/e12b-callout-rings.patch` (it applies to `9eda430`, tests included); the
   runs are in the private work directory. Next concrete action: verify each changed opening against its plan and
   elevation (`regress.py` lists them), fix what the swaps show, then land with the vehicle-mouth rules above.
+
+## E13 — E12b landed after a source check of every changed opening; the causes the AI loop exposed; test delivery 1320
+
+- **E12b verified, then landed.** Every one of the 71 openings E12b changed in 13 models was looked at on its plan crop
+  (`tools/opening-boards.py`, the ring weighed for it, bound or refused) and, where the plan cannot say, on its
+  elevation. Verdicts (`changes/verification-e12b-rows.md` in the private ZIP): 50 IMPROVED (a printed size now read and
+  bound), 11 CAUSE FIXED, 4 CORRECT, 3 CONVENTION (named), 3 open — Aurory's garage door (size right, kind wrong,
+  pre-existing: the room number is not read), Willa Maja's east upper width (1.02 → 0.90, a ring beside it refused),
+  Trytomach's 277 against a 2.59 m gap. The rules that were wrong, each fixed at its cause with a test red on the old code
+  and counter-cases (rotations, scales, mirrored sheets):
+  - **ridge axis from the views** (`ridge-axis.ts`): a view that measures an eaves side where the layout's axis would
+    show a gable end overturns the layout's rise test (Aurory: compiler ERRORs 4 → 0, gable windows instead of doors
+    through an eaves wall); a rise both spans can reproduce with a believable overhang is ambiguous and named;
+  - **French windows** (`opening-reading.ts`): above the ground storey an opening to the floor wider than one leaf is a
+    window unless a balcony slab or a lower body's flat roof stands in front of it at its floor; a window an elevation
+    read behind a balustrade in front of a balcony is that balcony's door (`stepOutDoors`); a sibling drawn like a
+    printed one inherits that deferral (Goździkowce's second balcony door);
+  - **the template's rival** (`extract.ts`): an unstable recogniser reading is a rival too; a width tie is broken by
+    the plan gap (Willa Maja 110/230, Arlety 230);
+  - 220 cm or a width alone never makes a door: ring → digits → binding → kind → height, in that order.
+- **Causes the AI loop exposed, fixed in the solver for every house:**
+  - the mark below the ridge over a slab is a floor only where the plans show a storey on it (a ceiling slab is the
+    walls' head — the first version of this rule promoted a bungalow's ceiling to a storey: 15 red tests, corrected);
+  - a printed eaves mark the section's own roof lines put at the eaves' lip is not the walls' head (Azalie +3,73 beside
+    the printed 167 knee wall: the gable's windows are no longer cut under a soffit that is not there);
+  - the terrain is the ground mark the published building height is measured from (`printedTerrainOf`; Azalie −0,32,
+    not −0,57 under the stair) — which also refuses a view whose ground lands half a metre off;
+  - an elevation extent the printed height refutes places neither end of the opening (six sills in the corpus had been
+    "measured" from such an extent: Arlety, Dalie, Lipienniki, Rarytasy, Bakopy ×2 — now the convention, named);
+  - a recess's mouth is no lower than the openings in its back wall (`passageHead`, Goździkowce).
+- **Upper floors at their printed levels:** Aurory 3,00, Willa Maja 2,96, Sasanki 3,06 (the convention 2,80 before).
+- **Known wrong after this delivery:** Zefiranty's upper rear 180/230 is now a French window — the attic plan draws a
+  semicircular balcony in front of it, which the model does not build (open), so the rule that sees only built slabs
+  leaves it a window; E12 had it as a door with no balcony.
+- **AI review loop (contract v3.42, research, `research/ai-assist/section-levels-case.ts`):** the analyzer generates the
+  problem from its own record (a section with no registration and unread number-like ink); the answer is a typed
+  observation (box, uncertainty, OTHER/UNKNOWN allowed); a reading is admitted only by the same drawing (a level symbol
+  under its box, one leave-one-out ladder) and by the published building height over the ground mark it is measured
+  from; the admitted readings overrule the numeric reader's own misreads of the same labels (`supersededLevels`); the
+  proposal is a revision on a stated base, solved, compiled and compared with CV_ONLY on identical inputs. Outcomes
+  with the 1320 code, replaying the recorded answers (no new call):
+  - Goździkowce (regression house): **ACCEPTED** — ridge 7.94 → 8.36 m, the printed +8,36; 8.36 − (−0,32) = 8.68 m, the
+    published height; the upper floor at the printed +2,96 (the reader's +2,46 overruled as the same label); nothing
+    else changes but what the levels decide; compile errors 0 → 0. Board: section with admitted marks, CV_ONLY and AI
+    renders side by side.
+  - Azalie (DEV): **DEFERRED** — both source checks pass (ridge 7.28 → 7.70 m printed; 8.02 m published), but the
+    variant also reads the front door on an elevation the levels registered as 2.50 m tall (the render shows the 2.1 m
+    door inside a darker 2.5 m surround): a change nothing checked, so it is not applied and the person decides.
+  - Zefiranty (DEV): **REJECTED** — the readings pass (8,55; 9.02 m published) but the variant loses a rooflight: with
+    the printed ridge the side renders match the whole envelope, and the main roof is then carried over the garage's
+    front 2 m, which the layout does not build (#83).
+  - A confident wrong answer (fixture: +8,85 for +8,55, confidence 0.99): **DEFERRED** in both rounds — the ladder
+    holds it within the ridge's widened tolerance, the published height refuses it (9.17 vs 9.02 m).
+  Every replay first exposed a solver cause (the list above); each is fixed in the solver for every house, not in the
+  loop. Spend: 0.6084 USD counted of the 5 USD limit since E12 (E12 0.4904 + E13 0.1180), CLI token estimates, billing
+  unconfirmed; every E13 call traced (model asked and answered, session, credential category `none` = the session's
+  own sign-in, tokens, cache, latency). What works where: research only — the host production adapter
+  (`anthropicVisionReasoner`) was not run live, and the APK makes no AI call.
+- **Zefiranty garage (#83), FIRST_BAD found, not fixed:** the flood fill splits the double garage at the house's front
+  grid line — the cars drawn in it ink that line enough to close it — and its front 2 m joins the outside through the
+  4.55 m gate. The gate rule weighs only rectangular pockets; that strip is part of the one open region round the
+  house, so the gate is never weighed. An extension of the rule through a line-work back edge was written, found to
+  never fire on the real house for that reason, and reverted rather than landed unexercised. The fix is a pocket cut
+  from the outside at the gate's line, a corpus-wide change of its own.
+- **Regression (23 runs, 21 models; Pod Miłorzębem and Modrzewnica still fail as before):** E13 full path from a
+  frozen tree (metric reader 1.9.0; upstream of the solver the 1320 tree differs only by additions), then the 1320
+  solver on that evidence. From the landed E12 code: 90 element changes (the 71 E12b rows and 19 more), every one with a verdict
+  (`changes/` in the ZIP); compile ERRORs Aurory 1 → 0, Jabłonki 1, Zefiranty 5 (unchanged); no element lost
+  except Zefiranty's upper rear door (above). Checker 35 → 34/70, read honestly: Aurory's ridge now passes; Arlety and
+  Jabłonki lose an "entrance" that was an upper-floor French window built as a door — their real entrance door was
+  never built, and the checker counted the wrong door.

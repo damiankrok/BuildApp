@@ -243,7 +243,13 @@ export type LevelFacts = {
    * (`v2/section-datums.ts`); why, and whether it was kept as a floor.
    */
   topRefused?: { value: number; keptAsFloor: boolean; onSlab: boolean; why: string; datums: Array<{ id: string; value: number; row: number }> }
+  /** E13: two upper floor marks of one storey in two parts (a split level): the main body's kept, the other named. */
+  splitLevel?: { kept: number; other: number; why: string }
 }
+
+/** E13: two upper floor marks this close, both on slabs, are one storey's two parts; and a split level is above the ground. */
+export const SPLIT_LEVEL_MAX_M = 1.2
+export const SPLIT_LEVEL_MIN_FLOOR_M = 1.5
 
 /** What the section's drawing says about the highest datum read: the ridge, or a mark below the drawn roof. */
 export type TopDatumCheck = (datums: Array<{ id: string; value: number; row: number }>) => { belowDrawnRoof: boolean; onSlab: boolean; why: string } | undefined
@@ -257,7 +263,17 @@ export type TopDatumCheck = (datums: Array<{ id: string; value: number; row: num
  * rule, and the rule is geometric: the top datum is the ridge when the drawing
  * also shows a roof, and a gap smaller than a door is not a storey at all.
  */
-export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string, topCheck?: TopDatumCheck): LevelFacts {
+export function levelsFrom(
+  metrics: MetricEvidenceSet,
+  frameId?: string,
+  topCheck?: TopDatumCheck,
+  /**
+   * E13: how many storeys at or above the ground the plans show (one per storey a floor plan is drawn for), when
+   * known. Which storeys a house has is the plans' to say: a mark below the ridge printed over a slab is a floor only
+   * where reading it as the eaves would leave a storey the plans show without one.
+   */
+  planStoreys?: number,
+): LevelFacts {
   const datums = metrics.evidence
     .filter((e) => e.kind === 'LEVEL_DATUM' && (frameId === undefined || e.frameId === frameId))
     .filter((e) => e.association.kind !== 'UNATTACHED')
@@ -302,6 +318,43 @@ export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string, topChec
     return { floors, heights, topDatum: undefined, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, topRefused: { value: top, keptAsFloor: false, onSlab: check.onSlab, why: check.why, datums: placed } }
   }
   const topDatum = values[values.length - 1]
+  // E13 (a development section: two upper floor marks half a metre apart, one over a garage and one over the house): the mark below the ridge printed over
+  // a slab across the building is a floor, not the eaves; an upper-floor mark less than SPLIT_LEVEL_MAX_M below it is
+  // the same storey's other part — a split level — not a storey of its own. The main body's floor is the one printed nearer the ridge mark across the sheet (the ridge stands over
+  // the main body); the other is named, not dropped. Neither is the eaves: the walls' head is then left to the roof.
+  const xOf = (v: number): number | undefined => {
+    const d = datums.find((x) => Math.abs(x.value - v) < 1e-6 && x.measuredGeometry?.type === 'SEGMENT')
+    return d && d.measuredGeometry?.type === 'SEGMENT' ? (d.measuredGeometry.a.x + d.measuredGeometry.b.x) / 2 : undefined
+  }
+  // the section's own slab test (`readTopDatum`): a dark run along the mark's row across much of the building's width
+  // every height is measured from ±0,00: where its own mark was not read, its row is where the other marks' ladder puts it
+  const withZero = ((): Array<{ id: string; value: number; row: number }> => {
+    if (placed.some((d) => Math.abs(d.value) < 0.05) || placed.length < 2) return placed
+    const [a, b] = [placed[0], placed[placed.length - 1]]
+    if (Math.abs(a.row - b.row) < 1e-6) return placed
+    const mpp = (b.value - a.value) / (a.row - b.row)
+    return [...placed, { id: 'zero-from-ladder', value: 0, row: round6(a.row + a.value / mpp) }]
+  })()
+  const onSlab = (v: number): boolean => topCheck?.(withZero.filter((d) => d.value <= v + 1e-6))?.onSlab === true
+  if (values.length >= 4) {
+    const [lower, upper] = [values[values.length - 3], values[values.length - 2]]
+    const topX = xOf(topDatum)
+    const lx = xOf(lower)
+    const ux = xOf(upper)
+    // the mark below the ridge would be the eaves; one printed over a slab across the building is a floor instead, and
+    // a lower upper-floor mark within SPLIT_LEVEL_MAX_M of it is that storey's other part
+    // (the storeys the plans show must have room for it: the split level's floors, at or above ±0,00, no more than them)
+    const splitFloorsAbove = values.slice(0, values.length - 3).filter((v) => v > -0.05).length + 1
+    if (planStoreys !== undefined && splitFloorsAbove <= planStoreys && lower >= SPLIT_LEVEL_MIN_FLOOR_M && upper - lower <= SPLIT_LEVEL_MAX_M && topX !== undefined && lx !== undefined && ux !== undefined && onSlab(upper)) {
+      const main = Math.abs(lx - topX) <= Math.abs(ux - topX) ? lower : upper
+      const other = main === lower ? upper : lower
+      const floors = [...values.slice(0, values.length - 3), main]
+      const heights: number[] = []
+      for (let i = 0; i + 1 < floors.length; i += 1) heights.push(round6(floors[i + 1] - floors[i]))
+      heights.push(heights.length > 0 ? heights[heights.length - 1] : CONVENTIONS.storeyHeight)
+      return { floors, heights, topDatum, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, splitLevel: { kept: main, other, why: `${main.toFixed(2)} and ${other.toFixed(2)} are both printed over slabs ${round6(Math.abs(upper - lower)).toFixed(2)} m apart: one storey in two parts; ${main.toFixed(2)} is printed nearer the ridge mark, over the main body, and ${other.toFixed(2)} is the other part's floor` } }
+    }
+  }
   // A section of a pitched house marks its heights in a fixed order: the floor
   // of each storey, then the EAVES where the walls stop, then the ridge. So
   // the top two datums are not storeys — the highest is the roof's apex and
@@ -312,7 +365,13 @@ export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string, topChec
   // Below three datums there is nothing to split: a section that prints only a
   // floor and a ridge states no storey height at all, and the last gap is
   // taken as the storey rather than invented.
-  const hasEaves = values.length >= 3
+  // E13 (a section whose eaves mark was not read): the mark below the ridge printed over a
+  // slab across the building is that storey's floor, not the eaves — the walls' head is then left to the roof
+  // — only where the plans show a storey that, with that mark read as the eaves, would have no floor: a ceiling slab
+  // under a bungalow's roof, or over a two-storey house's upper storey, is the walls' head and never a storey no plan shows
+  const floorsIfEaves = values.slice(0, values.length - 2).filter((v) => v > -0.05).length
+  const belowTopOnSlab = planStoreys !== undefined && floorsIfEaves < planStoreys && values.length >= 3 && values[values.length - 2] >= SPLIT_LEVEL_MIN_FLOOR_M && onSlab(values[values.length - 2])
+  const hasEaves = values.length >= 3 && !belowTopOnSlab
   const eaves = hasEaves ? values[values.length - 2] : undefined
   const floors = hasEaves ? values.slice(0, values.length - 2) : values.slice(0, Math.max(1, values.length - 1))
   const heights: number[] = []

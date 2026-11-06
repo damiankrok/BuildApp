@@ -52,6 +52,8 @@ import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
 import { FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
+import { FRENCH_WINDOW_NOTE, passageHead, stepOutDoors } from './opening-reading.js'
+import { decideRidgeAxis } from './ridge-axis.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout, rooflightPlaneKey } from './plane-roof.js'
 import type { PlaneRoofKey, RoofEnd } from './plane-roof.js'
@@ -101,7 +103,7 @@ import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
-import { approximateRidgeDatum, topDatumBelowPublishedHeight } from './roof-datum.js'
+import { approximateRidgeDatum, printedTerrainOf, topDatumBelowPublishedHeight } from './roof-datum.js'
 import { viewAudit } from './view-audit.js'
 import { measureOpeningOnView, scanFacadeOpenings } from './facade-openings.js'
 import type { FacadeBand, FacadeView, FacadeOpeningReading, FacadeOpeningRejection } from './facade-openings.js'
@@ -199,7 +201,18 @@ import type { ApproximateRidge } from './roof-datum.js'
 // the drawing holds is NOT_A_BODY, named and not built; a hip the page specifies takes the approximate ridge a gable
 // would (`roof-datum`, half its shorter span); rooflights read against a gable's slopes are re-homed in the hipped
 // layout's planes (`rooflightPlaneKey`) instead of holding the roof a gable
-export const SOLVER_V2_VERSION = '2.27.0' as const
+// 2.28.0 (EXTERIOR-COMPLETE E13): the registered views overturn the layout's ridge axis where one measures an eaves side
+// the layout's axis would show as a gable end (`ridge-axis.ts`); above the ground storey a window to the floor
+// wider than one leaf is a French window unless a balcony or a lower body's flat roof stands in front of it, and a window
+// an elevation read behind a balustrade in front of a balcony is its door (`stepOutDoors`); a callout width tied on score
+// is broken by the plan gap; a split level on the section (two upper floor marks within 1.2 m, the higher on a slab) is
+// one storey, the main body's floor printed nearer the ridge, and neither is the eaves (`levelsFrom`); a roof the
+// specification states hipped stays hipped over a rooflight read across a hip line, which is named and not built; the
+// mark below the ridge over a slab is a floor only where the plans show a storey on it (a ceiling slab is the walls'
+// head); a printed eaves mark the section's roof lines put at the eaves' lip is not the walls' head; the terrain
+// is the ground mark the published building height is measured from (`printedTerrainOf`); an elevation extent the
+// printed height refutes places neither end of the opening; a passage's head is no lower than the openings behind it
+export const SOLVER_V2_VERSION = '2.28.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -376,7 +389,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const keep = options.frameFilter
   const ctx = emptySolverRecord()
   const recorder = createSolverRecorder(ctx)
-  const { step, record, sighting, feature, relate } = recorder
+  const { step, record, sighting, feature, amend, relate } = recorder
   const gap: typeof recorder.gap = (g) => {
     options.debug?.(`gap: ${g.what}: ${g.reason}`)
     return recorder.gap(g)
@@ -391,7 +404,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // SHAPE-LIVE-01: the section's drawing says whether its highest datum read is the top of the building
   const sectionRaster = sectionFrame ? options.raster(sectionFrame) : undefined
   // EXTERIOR-COMPLETE: or the published building height says so, and the drawing agrees (`roof-datum.ts`)
-  const printedTerrainY = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value
+  // E13: of the marks below ±0,00, the one the published building height is measured from (`printedTerrainOf`)
+  const printedTerrain = printedTerrainOf(metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM'), options.publishedAreas ?? [])
+  const printedTerrainY = printedTerrain?.value
+  if (printedTerrain?.why.startsWith('the published')) step({ stage: 'levels', what: 'the printed terrain, of the marks below ±0,00', method: 'DISCRETE_SELECTION', detail: printedTerrain.why, inputs: 2, outputs: 1 })
   const topCheck: TopDatumCheck | undefined = sectionRaster
     ? (datums) => {
         const drawn = readTopDatum(sectionRaster, datums)
@@ -400,7 +416,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         return why ? { ...drawn, belowDrawnRoof: true, why } : drawn
       }
     : undefined
-  const levels = levelsFrom(metrics, sectionFrame?.id, topCheck)
+  // E13: the storeys at or above the ground the plans show — one per storey a floor plan is drawn for
+  const planStoreyRoles = new Set(graph.coordinateFrames.filter((f) => f.roles.document === 'FLOOR_PLAN' && (keep ? keep(f) : true) && ['GROUND', 'UPPER', 'ATTIC'].includes(f.roles.storey)).map((f) => f.roles.storey))
+  const levels = levelsFrom(metrics, sectionFrame?.id, topCheck, planStoreyRoles.size > 0 ? planStoreyRoles.size : undefined)
+  if (levels.splitLevel) {
+    gap({ what: `the floor at ${levels.splitLevel.other.toFixed(2)} m`, reason: `a split level: ${levels.splitLevel.why}; the storey is built at the main body's ${levels.splitLevel.kept.toFixed(2)} m`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: levels.evidenceIds })
+    step({ stage: 'levels', what: 'a split level read on the section', method: 'DIRECT', detail: levels.splitLevel.why, inputs: levels.evidenceIds.length, outputs: 1 })
+  }
   if (levels.topRefused) {
     gap({ what: 'the ridge datum of the section', reason: `the highest datum read, ${levels.topRefused.value.toFixed(2)} m, is not the ridge: ${levels.topRefused.why}; the ridge's own label was not read`, status: 'MISSING', observationIds: [], evidenceIds: levels.evidenceIds })
     step({ stage: 'levels', what: 'the highest datum read refused as the ridge', method: 'DIRECT', detail: levels.topRefused.why, inputs: levels.evidenceIds.length, outputs: 0 })
@@ -765,7 +787,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   trace({ phase: 'REGISTRATION', substage: 'PLAN_REGISTRATION', status: planFrames.length === draft.plans.length ? 'PASSED' : 'DEGRADED', counts: { plans: draft.plans.length, registered: planFrames.length }, ...(planFrames.length === draft.plans.length ? {} : { reasonCode: 'PLAN_STOREY_ALIGNMENT_FAILED' }) })
 
   // Elevation registrations (v2): silhouettes from the 03R extents, scales from the plan width and the ridge datum.
-  const terrain = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value
+  const terrain = printedTerrainY
   const { registrations: legacy, refused: legacyRefused } = registerElevationFrames(graph, { width: main.x1 - main.x0 + masses.filter((m) => m.id !== main.id).reduce((a, m) => a + Math.max(0, m.x1 - main.x1) + Math.max(0, main.x0 - m.x0), 0), depth: world.walled.z1 - world.walled.z0, totalHeight: ridgeY ?? levelsV2[levelsV2.length - 1].wallTop }, keep, options.raster)
   const elevations: ElevationRegistrationV2[] = []
   const views: Array<{ view: ElevationFrameV2; raster: Raster }> = []
@@ -942,6 +964,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const support = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
   let mainRoof: BuildingV2['mainRoof']
+  // E13: the section's eaves reading, when it was needed early to tell an eaves' lip from the walls' head
+  let earlyEaves: { across: number; reading: ReturnType<typeof readEavesOverhang> } | undefined
   if (support && support.kind !== 'FLAT' && support.kind !== 'UNKNOWN' && support.pitchDeg && roofRidgeY !== undefined) {
     const ridgeY = roofRidgeY
     // Which way the ridge runs is read off the renders: a gable end has an
@@ -981,38 +1005,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const fullRise = statedPitch && support.pitchDeg ? 0.35 * Math.abs(along[1] - along[0]) * Math.tan((support.pitchDeg.value * Math.PI) / 180) : 0
       apexVotes.push({ side: v.view.side, peakM, gableEnd: peakM > 0.6 && (fullRise === 0 || peakM >= 0.75 * fullRise) })
     }
-    const endsFrontRear = apexVotes.filter((a) => (a.side === 'FRONT' || a.side === 'REAR') && a.gableEnd).length
-    const endsSides = apexVotes.filter((a) => (a.side === 'LEFT' || a.side === 'RIGHT') && a.gableEnd).length
-    const votedAxis: 'X' | 'Z' | undefined = endsFrontRear > 0 && endsSides === 0 ? 'Z' : endsSides > 0 && endsFrontRear === 0 ? 'X' : undefined
-    // SHAPE-LIVE-01: with no gable end voted and no axis from the layout, the views still measured how far the
-    // outline rises from 15 % to 50 % of their span, and the stated pitch says what each axis would show there: a view
-    // across the ridge's end sees the full rise (0.35 of its span at the pitch), a view of the eaves side only a
-    // hip's run — or nothing, over a gable. The axis whose prediction every measured view fits, and the other none
-    // of them, is taken; otherwise the default stands and says so.
-    const fittedAxis = ((): { axis: 'X' | 'Z'; why: string } | undefined => {
-      if (votedAxis || support.ridgeAxis || !(support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE') || !support.pitchDeg || apexVotes.length === 0) return undefined
-      const tan = Math.tan((support.pitchDeg.value * Math.PI) / 180)
-      const Lx = main.x1 - main.x0
-      const Lz = main.z1 - main.z0
-      const peakAt = (axis: 'X' | 'Z', side: string): number => {
-        const frontRear = side === 'FRONT' || side === 'REAR'
-        const span = frontRear ? Lx : Lz
-        const depth = frontRear ? Lz : Lx
-        const seesEnd = (axis === 'Z') === frontRear
-        if (seesEnd) return 0.35 * span * tan
-        if (support.kind !== 'HIP') return 0
-        return (Math.min(span / 2, depth / 2) - Math.min(0.15 * span, depth / 2)) * tan
-      }
-      const fits = (axis: 'X' | 'Z'): boolean => apexVotes.every((v) => Math.abs(v.peakM - peakAt(axis, v.side)) <= Math.max(0.25, 0.3 * peakAt(axis, v.side)))
-      const fx = fits('X')
-      const fz = fits('Z')
-      if (fx === fz) return undefined
-      const axis: 'X' | 'Z' = fx ? 'X' : 'Z'
-      const other: 'X' | 'Z' = fx ? 'Z' : 'X'
-      return { axis, why: `no view shows a gable end and the layout states no axis; the views' rise over their middle (${apexVotes.map((v) => `${v.side.toLowerCase()} ${v.peakM.toFixed(2)} m`).join(', ')}) fits a ridge along ${axis} at the stated ${support.pitchDeg.value}° (${apexVotes.map((v) => peakAt(axis, v.side).toFixed(2)).join(', ')} m) and not one along ${other} (${apexVotes.map((v) => peakAt(other, v.side).toFixed(2)).join(', ')} m)` }
-    })()
-    if (fittedAxis) step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
-    const ridgeAxis: 'X' | 'Z' = votedAxis ?? support.ridgeAxis ?? fittedAxis?.axis ?? 'Z'
+    const { votedAxis, fittedAxis, overturned, ridgeAxis } = decideRidgeAxis({ apexVotes, layoutAxis: support.ridgeAxis, statedPitchDeg: support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? support.pitchDeg?.value : undefined, hip: support.kind === 'HIP', spanX: main.x1 - main.x0, spanZ: main.z1 - main.z0 })
+    if (overturned && fittedAxis) {
+      step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured, over the layout\'s', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
+      gap({ what: `which way the ridge runs over ${main.id}`, reason: `the layout's rise test put the ridge along ${support.ridgeAxis}; ${fittedAxis.why}: the views stand`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    } else if (fittedAxis && !support.ridgeAxis) step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
+    options.debug?.(`ridge-axis support ${support.kind}/${support.authority}/${support.why?.slice(0, 160)}; votes ${apexVotes.map((a) => `${a.side}:${a.peakM.toFixed(2)}${a.gableEnd ? '*' : ''}`).join(' ')} voted ${votedAxis ?? '-'} layout ${support.ridgeAxis ?? '-'} fitted ${fittedAxis?.axis ?? '-'} -> ${ridgeAxis}`)
     const ridgeAt = ridgeAxis === 'Z' ? round6((main.x0 + main.x1) / 2) : round6((main.z0 + main.z1) / 2)
     const halfSpan = ridgeAxis === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
     // A measured pitch is a rise over the layout's half span; if the views put
@@ -1020,7 +1018,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const printedPitch = support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE'
     const supportHalfSpan = (support.ridgeAxis ?? 'Z') === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
     const pitch = !printedPitch && support.ridgeAxis && support.ridgeAxis !== ridgeAxis ? round6((Math.atan((supportHalfSpan * Math.tan((support.pitchDeg.value * Math.PI) / 180)) / halfSpan) * 180) / Math.PI) : support.pitchDeg.value
-    const axisWhy = fittedAxis ? fittedAxis.why : votedAxis ? `the ${apexVotes.filter((a) => a.gableEnd).map((a) => a.side.toLowerCase()).join(' and ')} render${apexVotes.filter((a) => a.gableEnd).length === 1 ? ' shows' : 's show'} a gable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM >= 0 ? '+' : ''}${a.peakM.toFixed(2)}`).join(', ')})` : `no render shows an unmistakable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM.toFixed(2)}`).join(', ') || 'none registered'}); the layout's axis stands`
+    const axisWhy = fittedAxis && (overturned || !support.ridgeAxis) ? fittedAxis.why : votedAxis ? `the ${apexVotes.filter((a) => a.gableEnd).map((a) => a.side.toLowerCase()).join(' and ')} render${apexVotes.filter((a) => a.gableEnd).length === 1 ? ' shows' : 's show'} a gable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM >= 0 ? '+' : ''}${a.peakM.toFixed(2)}`).join(', ')})` : `no render shows an unmistakable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM.toFixed(2)}`).join(', ') || 'none registered'}); the layout's axis stands`
     const derivedEave = round6(ridgeY - halfSpan * Math.tan((pitch * Math.PI) / 180))
     const eaveY = derivedEave
     const sideViews = views.filter((v) => (ridgeAxis === 'Z' ? v.view.side === 'LEFT' || v.view.side === 'RIGHT' : v.view.side === 'FRONT' || v.view.side === 'REAR'))
@@ -1039,6 +1037,33 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: roofDatum || drawnApex ? 'SOURCE_DERIVED' : support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
     for (const e of support.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'the roof pitch statement', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the main roof pitch', stage: 'METRIC_SOLVE' })
     step({ stage: 'roof', what: 'the main roof', method: 'DISCRETE_SELECTION', detail: `${pitch}° ${support.kind.toLowerCase()} ridge along ${ridgeAxis} (${axisWhy}), eave ${eaveY}, ${mainRoof.coversZonesWhy}`, inputs: sideViews.length, outputs: 1 })
+    // E13 (a development section: the eaves mark printed at the lip, beside a printed knee wall): the mark below the ridge is the walls' head only where the walls
+    // stop there. Where the section's own roof lines, drawn at the stated pitch, run past the walls to a lip that mark
+    // prints, it marks that lip: the walls run on up under the roof. Read as their head it is a knee wall a metre short
+    // of the roof, and a gable's windows are cut under a soffit that is not there. The walls' head is then the roof's
+    // underside at the walls; the eaves reading is kept for the roof's details.
+    if (sectionFrame && levels.eaves !== undefined) {
+      const raster = options.raster(sectionFrame)
+      const reg = metrics.coordinateRegistrations.find((r) => r.frameId === sectionFrame.id && r.plane === 'SECTION_HY')
+      const top = levelOf(topStorey)
+      if (raster && reg && top) {
+        const f = mainRoof.footprint
+        const across = mainRoof.ridgeAxis === 'X' ? f.z1 - f.z0 : f.x1 - f.x0
+        const printed = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.frameId === sectionFrame.id).map((e) => e.value)
+        const reading = readEavesOverhang(raster, across, { pitchDeg: mainRoof.pitchDeg, thicknessM: mainRoof.thicknessM }, { zeroRow: reg.originPx.y, mppY: reg.metresPerPixelY, printedLevels: printed }, options.debug)
+        earlyEaves = reading ? { across, reading } : undefined
+        const underside = round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180))
+        if (reading?.printedLipY !== undefined && Math.abs(reading.printedLipY - levels.eaves) <= 1e-6 && underside > top.wallTop) {
+          const lip = levels.eaves
+          const why = `the section prints ${lip >= 0 ? '+' : ''}${lip.toFixed(2)} at the eaves' lip ${reading.overhangM.toFixed(2)} m past the walls, where its roof lines at ${mainRoof.pitchDeg}° end, not where the walls stop: the walls run up under the roof to ${underside.toFixed(2)}`
+          top.wallTop = underside
+          mainRoof.buildUpVerticalM = round6(Math.max(0.15, mainRoof.eaveY - underside))
+          amend(top.featureId, 'height', { value: underside - top.elevation, low: underside - top.elevation - 0.1, high: underside - top.elevation + 0.1 }, why)
+          step({ stage: 'levels', what: `the walls' head of storey ${topStorey}, under the roof rather than at a printed eaves' lip`, method: 'DIRECT', detail: reading.why, inputs: 2, outputs: 1 })
+          options.debug?.(`eaves-lip ${why}`)
+        }
+      }
+    }
     // 005Y: what stands at each end of the ridge. On an elevation of an eaves side, d metres in from an end wall a hip's
     // outline stands at the eaves plus d at the pitch (an eaves projection moves the lip out and down along the same
     // slope, so the outline there is unchanged), a gable's at the ridge. Every eaves-side view that sees the end must
@@ -1674,6 +1699,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       }
     }
   }
+  options.debug?.(`garage-rooms ${garageRooms.map((g) => `${g.massId}:${g.why}`).join(' | ') || 'none'}; mouths ${[...vehicleMouths.keys()].join(',') || 'none'}; stated ${garageStated}`)
   let hostIndex = 0
   // 005Y-N5 (C3): a body's garage: a room of it the publisher's list names a garage, or — where the room's number was
   // not read — the whole body, when a vehicle door was read in one of its walls
@@ -1830,7 +1856,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const read = over.find((o) => o.elevation && o.interval[1] - o.interval[0] >= 0.8 * (to - from))
     const wallTop = main.id === host.id && index === topStorey && mainRoof ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : round6(l.elevation + l.height)
     const assumedHead = round6(Math.min(l.elevation + l.height - slabT, wallTop - 0.2))
-    const headY = read ? round6(Math.min(read.headY, wallTop - 0.2)) : assumedHead
+    let headY = read ? round6(Math.min(read.headY, wallTop - 0.2)) : assumedHead
     const id = `pocket-${host.id}-${index}-${pockets.length}`
     // each wall's face towards the pocket is where the plan's ink says: the recess's region may be cut on the walls'
     // faces or on their centre lines, as the grid fell. Across the line the region gives, at five places along it, the
@@ -1891,12 +1917,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // EXTERIOR-COMPLETE: the back wall stands parallel to the face it is set back from, so the face's elevation draws its
     // openings at their places along it (an orthographic view keeps no depth): their heights and faces are read there
     const backOpenings = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), plan: entry.frame, planRaster: entry.raster, host: backHost, wallThicknessM: T, callouts, views: viewsOf(facade), attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the back wall of the recess in ${host.id}'s ${facade.toLowerCase()} face`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: hostIndex++ }).map((o) => ({ ...o, id: `${id}-${o.id}` }))
-    const why = `${rec.why}; its mouth ${lowFace.toFixed(2)}..${highFace.toFixed(2)} m between the returns' faces the plan's ink gives, on the ${facade.toLowerCase()} face is a passage${read ? `, its head read on the ${read.elevation?.frameId} elevation` : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
+    // E13 (a regression house: the mouth's head read at 2.00 on the front elevation, the 2.10 m door in its back wall standing
+    // under it): a passage is no lower than the openings it leads to. A head read below the tallest of them is that
+    // opening's head seen through the mouth, not the mouth's: the head stays the storey's ceiling, assumed, and the
+    // reading is named.
+    const head = passageHead(read ? headY : undefined, backOpenings.map((o) => o.headY), assumedHead)
+    const headRead = head.read ? read : undefined
+    if (head.refused) gap({ what: `the head of the recess ${id}'s mouth`, reason: `${head.refused} (the ${read?.elevation?.frameId} elevation)`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    headY = head.headY
+    const why = `${rec.why}; its mouth ${lowFace.toFixed(2)}..${highFace.toFixed(2)} m between the returns' faces the plan's ink gives, on the ${facade.toLowerCase()} face is a passage${headRead ? `, its head read on the ${headRead.elevation?.frameId} elevation` : read ? ', its head the storey\'s ceiling (assumed: the head the elevation reads is an opening behind the mouth)' : ', its head the storey\'s ceiling (assumed: the elevation does not read it)'}, and ${backOpenings.length} opening${backOpenings.length === 1 ? '' : 's'} stand in its back wall`
     const sid = sighting(entry.plan.frame, `a recess in the ${facade.toLowerCase()} face on the storey ${index} plan`, rec.confidence, [], region.pixelRect)
-    const featureId = feature('RECESS', id, { depth: { value: Math.abs(backFace - mouthAt), low: Math.abs(backFace - mouthAt) - 0.05, high: Math.abs(backFace - mouthAt) + 0.05 }, width: { value: highFace - lowFace, low: highFace - lowFace - 0.05, high: highFace - lowFace + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
+    const featureId = feature('RECESS', id, { depth: { value: Math.abs(backFace - mouthAt), low: Math.abs(backFace - mouthAt) - 0.05, high: Math.abs(backFace - mouthAt) + 0.05 }, width: { value: highFace - lowFace, low: highFace - lowFace - 0.05, high: highFace - lowFace + 0.05 }, headY: { value: headY, low: headY - 0.1, high: headY + 0.1 } }, [sid], 'SOURCE_DERIVED', why, { storeyIndex: index, hostId: host.featureId, uncertaintyM: 0.05, parameterProvenance: { headY: headRead ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING' } })
     relate('HOSTED_BY', featureId, host.featureId, 'the recess opens through this body’s face')
     for (const o of over) gap({ what: `the gap ${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${host.id}, storey ${index}`, reason: `it is the mouth of a recess (${id}): a passage, not a ${o.family.toLowerCase().replace(/_/g, ' ')}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
-    pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(lowFace), to: round6(highFace), mouthAt: round6(mouthAt), backAt: round6(backFace), headY, headProvenance: read ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
+    pockets.push({ id, massId: host.id, facade, storeyIndex: index, from: round6(lowFace), to: round6(highFace), mouthAt: round6(mouthAt), backAt: round6(backFace), headY, headProvenance: headRead ? 'IMAGE_METRIC_REGISTERED' : 'ASSUMED_FOR_RENDERING', walls, backOpenings, featureId, why })
   }
   // 005Y-N7 (C): a covered terrace or porch cut out of a corner of a body (corner-recess.ts): two pockets, one in each
   // face, whose passages open through the corner, the two back walls the plan draws, and the post at the outer corner
@@ -1974,7 +2008,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const across = mainRoof.ridgeAxis === 'X' ? f.z1 - f.z0 : f.x1 - f.x0
       const printed = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.frameId === sectionFrame.id).map((e) => e.value)
       options.checkpoint?.tick({ subphase: ROOF_DETAILS_SUBPHASE })
-      const eaves = readEavesOverhang(raster, across, { pitchDeg: mainRoof.pitchDeg, thicknessM: mainRoof.thicknessM }, reg ? { zeroRow: reg.originPx.y, mppY: reg.metresPerPixelY, printedLevels: printed } : undefined, options.debug)
+      const eaves = earlyEaves && reg && Math.abs(earlyEaves.across - across) <= 1e-6 ? earlyEaves.reading : readEavesOverhang(raster, across, { pitchDeg: mainRoof.pitchDeg, thicknessM: mainRoof.thicknessM }, reg ? { zeroRow: reg.originPx.y, mppY: reg.metresPerPixelY, printedLevels: printed } : undefined, options.debug)
       options.debug?.(`eaves: ${eaves ? eaves.why : 'no reading'}`)
       if (eaves) {
         mainRoof.eaves = { overhangM: eaves.overhangM, provenance: eaves.printedLipY !== undefined ? 'SOURCE_CORROBORATED' : 'IMAGE_METRIC_REGISTERED', why: eaves.why }
@@ -2355,6 +2389,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       }
     }
   }
+  // E13: an upper storey's window to the floor wider than one leaf (`FRENCH_WINDOW_NOTE`) is a door where the model now
+  // stands something to step out onto in front of it — a balcony slab of its storey, or a flat roof of a lower body at
+  // its floor — and a French window everywhere else (`stepOutDoors`).
+  for (const o of stepOutDoors(openings, balconies, attachedRoofs, (s) => levelOf(s)?.elevation)) {
+    o.opening.family = 'GLAZED_DOOR'
+    const floor = levelOf(o.opening.storeyIndex)?.elevation ?? o.opening.sillY
+    const readSill = round6(o.opening.sillY - floor)
+    if (o.behindBalustrade) {
+      o.opening.sillY = floor
+      o.opening.provenance = { ...o.opening.provenance, sill: 'SOURCE_DERIVED' }
+    }
+    o.opening.unresolved = [...o.opening.unresolved.filter((u) => u !== FRENCH_WINDOW_NOTE), o.behindBalustrade ? `a door onto ${o.onto}: its sill is the floor there (the elevation read ${readSill.toFixed(2)} m, the balustrade's top in front of it)` : `a door onto ${o.onto}: it opens to the floor there`]
+    step({ stage: 'openings', what: `${o.opening.id} opens onto ${o.onto}`, method: 'DIRECT', detail: `a window to the floor with ${o.onto} in front of it, at its floor`, inputs: 2, outputs: 1 })
+  }
   // Terraces: the recess floors at the ground storey, and the outlined platform beyond the mouth where the plan draws one.
   const terraces: TerraceV2[] = []
   const groundPlan = planByStorey.get(0)
@@ -2582,6 +2630,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // named instead.
   let planeRoofs: PlaneRoofV2[] | undefined
   let builtMainRoof = mainRoof
+  const mainSupportKind = layout.roofSupports.find((s) => s.massId === main.sourceMassId)?.kind
   if (mainRoof?.ends) {
     const r = mainRoof
     const ends = mainRoof.ends
@@ -2594,6 +2643,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // line holds the gable, as before.
     const homeOf = (q: (typeof rooflights)[number]): PlaneRoofKey | undefined => rooflightPlaneKey(layout, r.ridgeAxis, q)
     const unhomed = rooflights.filter((q) => !q.planeId && homeOf(q) === undefined)
+    // E13: a roof the publisher's specification states hipped stays hipped over a rooflight read across one
+    // of its hip lines: the statement is the stronger evidence, and the rooflight — whose plane is then unknown — is the
+    // reading left unbuilt, named. A hip only the drawings suggest still yields to it, as before.
+    const statedHipped = mainSupportKind === 'HIP' && r.authority === 'PUBLISHED_SPECIFICATION'
+    if (statedHipped && unhomed.length > 0 && verges.length === 0 && pitchedAttachedRoofs.length === 0) {
+      for (const q of unhomed) {
+        rooflights.splice(rooflights.indexOf(q), 1)
+        gap({ what: `the rooflight ${q.id}`, reason: `it lies across a hip line of the main roof, which the publisher's specification states hipped: no plane of the roof holds it, and it is not built`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      }
+      unhomed.length = 0
+    }
     // 005Y-N1: a chimney no longer holds the roof as a gable: its penetration is cut plumb in the plane it stands in (emit).
     const bound = [...(unhomed.length > 0 ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
     if (bound.length > 0) gap({ what: 'the hipped ends of the main roof', reason: `${mainRoof.ends.why}, but ${bound.join(', ')} are bound to it as a gable; the gable is kept`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })

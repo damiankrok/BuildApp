@@ -3879,6 +3879,35 @@ const solidOf = (mask: Mask, wallPx: number): SolidLayer => {
   return layer
 }
 
+/**
+ * EXTERIOR-COMPLETE E12: an opening callout's ring and what is printed in it are not wall. A garage door's callout
+ * printed under it, its top arc on the door line, made the line read wall-thick ink over 17 px there — a "post" with no
+ * wall part behind it — that split the 4.57 m vehicle door into two blank gaps between a wall and a post, neither an
+ * opening; the outline stayed open and the garage's front 2 m was read as outside. The boundary lines are read from
+ * the mask with every known ring's outline and interior taken out (`calloutRings`: read or not), but never where the
+ * ink is wall-thick (the solid layer): a ring printed over a wall leaves the wall whole, and a door line running past
+ * the ring's top is not on its outline and stays.
+ */
+export function withoutCalloutRingInk(mask: Mask, solid: SolidLayer, rings: ReadonlyArray<{ at: { x: number; y: number }; radiusPx: number }>): Mask {
+  if (rings.length === 0) return mask
+  const data = mask.data.slice()
+  for (const r of rings) {
+    const reach = r.radiusPx + 2
+    for (let y = Math.floor(r.at.y - reach); y <= Math.ceil(r.at.y + reach); y += 1) {
+      for (let x = Math.floor(r.at.x - reach); x <= Math.ceil(r.at.x + reach); x += 1) {
+        if (x < 0 || y < 0 || x >= mask.width || y >= mask.height) continue
+        const d = Math.hypot(x - r.at.x, y - r.at.y)
+        // the outline (within a pixel and a half of the circle) and everything inside it
+        if (d > r.radiusPx + 1.5) continue
+        const i = y * mask.width + x
+        if (solid.labels[i] > 0) continue
+        data[i] = 0
+      }
+    }
+  }
+  return { ...mask, data }
+}
+
 function shadowLine(axis: 'X' | 'Y', px: number): GridLine {
   return {
     axis,
@@ -3945,6 +3974,7 @@ export function boundaryExtension(
   const mppX = registration.metresPerPixelX
   const mppY = registration.metresPerPixelY
   const solid = solidOf(mask, wallPx)
+  const lineMask = withoutCalloutRingInk(mask, solid, opt.calloutRings ?? [])
   // the shadow grid: the plan's own lines, and a line at every exterior tick with none within half a wall
   const addLines = (existing: readonly GridLine[], ticks: readonly number[], axis: 'X' | 'Y', lo: number, hi: number): { lines: GridLine[]; added: number[] } => {
     const added: number[] = []
@@ -3969,7 +3999,7 @@ export function boundaryExtension(
   const read = (axis: 'X' | 'Y', l: GridLine): WallLine => {
     linesRead += 1
     options.checkpoint?.tick({ subphase: { id: 'BOUNDARY', label: 'joining the outline' }, counters: { lines: linesRead, linesTotal } })
-    return axis === 'X' ? readWallLine(mask, solid, 'X', l.px, linesY[0].px, linesY[ny].px, lineOptions(mppY)) : readWallLine(mask, solid, 'Y', l.px, linesX[0].px, linesX[nx].px, lineOptions(mppX))
+    return axis === 'X' ? readWallLine(lineMask, solid, 'X', l.px, linesY[0].px, linesY[ny].px, lineOptions(mppY)) : readWallLine(lineMask, solid, 'Y', l.px, linesX[0].px, linesX[nx].px, lineOptions(mppX))
   }
   let wallsX = linesX.map((l) => read('X', l))
   let wallsY = linesY.map((l) => read('Y', l))

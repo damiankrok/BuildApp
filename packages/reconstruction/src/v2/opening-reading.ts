@@ -58,7 +58,11 @@ export function matchOpeningCallout(gap: { centre: number; widthM: number }, hos
       continue
     }
     if (seen) weighed.push({ ...seen, decision: 'AGREES' })
-    const width = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
+    // E13: readings a margin apart in score are a tie the score cannot break (a template reading and the recogniser's
+    // rival of equal weight): the plan gap they both fit breaks it, the nearer one taken
+    const top = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
+    const tied = agreeing.filter((c) => c.score >= top.score - HEIGHT_RIVAL_SCORE_MARGIN)
+    const width = tied.length > 1 ? tied.reduce((best, c) => (Math.abs(c.cm / 100 - gap.widthM) < Math.abs(best.cm / 100 - gap.widthM) ? c : best), top) : top
     const distance = round6(Math.hypot(alongDistance, acrossDistance))
     if (callout && callout.distanceM <= distance) continue
     callout = {
@@ -160,11 +164,13 @@ export function resolveSillAndHead(host: Pick<WallHost, 'floorY' | 'storeyHeight
       notes.push(`the printed height read ${h.toFixed(2)} m with confidence ${weak.confidence.toFixed(2)} against the elevation's ${(elevation.headY - elevation.sillY).toFixed(2)} m (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}), and none of its height readings fits the elevation: the elevation stands`)
       return { sillY: elevation.sillY, headY: elevation.headY, sill: 'IMAGE_METRIC_REGISTERED', head: 'IMAGE_METRIC_REGISTERED', callout, notes }
     }
-    // The printed height stands over an elevation that contradicts it; the elevation's sill is kept only where an
-    // opening of the printed height starting there would still fit in the storey.
-    const fits = elevation.sillY >= host.floorY - FLOOR_SLACK_M && elevation.sillY + h <= host.floorY + host.storeyHeightM + FLOOR_SLACK_M
-    const sill = h >= DOOR_HEIGHT_MIN_M ? { y: host.floorY, p: 'SOURCE_DERIVED' as const } : fits ? { y: elevation.sillY, p: 'IMAGE_METRIC_REGISTERED' as const } : { y: round6(host.floorY + Math.max(0, COMMON_HEAD_M - h)), p: 'ASSUMED_FOR_RENDERING' as const }
-    notes.push(`the elevation reads ${(elevation.headY - elevation.sillY).toFixed(2)} m tall (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}) against the printed ${h.toFixed(2)}; the printed height stands`)
+    // The printed height stands over an elevation that contradicts it. E13 (a 260/140 window read 0.86 m
+    // tall from 0.06; six openings in the development and regression houses alike): an extent the print refutes is not this
+    // opening's extent — at least one of its ends is something else (a surround, a shadow, a registration off by a
+    // plinth) and nothing says which — so neither end places it. A door-height opening reaches the floor; a shorter one
+    // takes the common head, as with no elevation, and the contradiction is named rather than its sill kept as measured.
+    const sill = h >= DOOR_HEIGHT_MIN_M ? { y: host.floorY, p: 'SOURCE_DERIVED' as const } : { y: round6(host.floorY + Math.max(0, COMMON_HEAD_M - h)), p: 'ASSUMED_FOR_RENDERING' as const }
+    notes.push(`the elevation reads ${(elevation.headY - elevation.sillY).toFixed(2)} m tall (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}) against the printed ${h.toFixed(2)}; the printed height stands, and an extent it refutes places neither end${h < DOOR_HEIGHT_MIN_M ? ': sill height (a common head is assumed)' : ''}`)
     return { sillY: sill.y, headY: round6(sill.y + h), sill: sill.p, head: 'SOURCE_EXACT', callout, notes }
   }
   if (callout) {
@@ -266,6 +272,9 @@ export const VEHICLE_DOOR_MAX_HEIGHT_M = 3.2
  * door and a glazed opening: a window is drawn with glazing lines across the gap, a door leaves the gap empty and
  * draws its leaf and swing beside it.
  */
+/** E13: what an upper storey's window to the floor is until the model builds something to step out onto in front of it. */
+export const FRENCH_WINDOW_NOTE = 'a window to the floor above the ground storey, wider than one leaf: a French window — a door only where a balcony or a roof terrace stands in front of it'
+
 export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecision {
   const reachesFloor = f.sillAboveFloorM < REACHES_FLOOR_M
   const onFloorForVehicle = f.sillAboveFloorM < VEHICLE_SILL_MAX_M
@@ -317,7 +326,15 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
     if (leaf) return { family: 'GLAZED_DOOR', provenance: 'SOURCE_DERIVED', leaf, notes: [...(leaf.swing === 'OUT' ? ['opens outward: its leaf and arc are drawn outside the wall'] : []), 'the leaf’s glazing (lines across the gap beside a drawn leaf and swing: glass, or a threshold the plan draws the same way)'] }
   }
   if (reachesFloor && glazed && f.widthM >= GLAZED_DOOR_MIN_WIDTH_M && f.widthM <= MULTI_PANEL_MIN_WIDTH_M && f.storeyIndex === 0 && !f.symbols.swingDrawn()) return { family: 'WINDOW', notes: [] }
-  if (reachesFloor && f.widthM > DOOR_MAX_WIDTH_M && f.widthM < MULTI_PANEL_MIN_WIDTH_M) return { family: 'GLAZED_DOOR', notes: [] }
+  // E13: wider than one leaf, to the floor, between a door and a screen of panes: on the ground storey a terrace door
+  // (the garden is outside it). Above it, nothing in its own reading says anyone steps out: its width and its height are
+  // a French window's as much as a balcony door's (160/220, 150/210 and 180/210 on three houses — a balustrade on
+  // the face, no slab). It stays a window to the floor here; the balcony or roof terrace the model builds in front of it
+  // makes it a door (`stepOutDoors`), and nothing else does.
+  if (reachesFloor && f.widthM > DOOR_MAX_WIDTH_M && f.widthM < MULTI_PANEL_MIN_WIDTH_M) {
+    if (f.storeyIndex === 0) return { family: 'GLAZED_DOOR', notes: [] }
+    return { family: 'WINDOW', notes: [FRENCH_WINDOW_NOTE] }
+  }
   if (reachesFloor && !glazed) return { family: 'DOOR', notes: [] }
   // Narrower than any glazed door, to the floor, with a leaf or its swing drawn: a plain door, and the lines across its
   // gap are the threshold the plan draws there. Without a leaf or a swing it stays a window; the width cut is not moved.
@@ -442,4 +459,72 @@ export function openingFace(raster: Raster, box: { x0: number; y0: number; x1: n
     return [0, 1, 2].every((k) => openingFace(raster, { x0: x0 + k * w, x1: x0 + (k + 1) * w, y0: box.y0, y1: box.y1 }, false)?.kind === 'OPAQUE_PANEL')
   }
   return { kind, neutralShare: Math.round(neutralShare * 1000) / 1000, alongRowStd: Math.round(alongRowStd * 10) / 10, meanSaturation: Math.round(meanSaturation * 10) / 10, toneChangesPerRow: Math.round(toneChangesPerRow * 1000) / 1000, downColumnStd: Math.round(downColumnStd * 10) / 10, ...(kind === 'OPAQUE_PANEL' && thirds ? { acrossOpaque: across() } : {}) }
+}
+
+/**
+ * E13: the upper storey's French windows (`FRENCH_WINDOW_NOTE`) that open onto something the model builds in front of
+ * them: a balcony slab of their storey whose edge lies on their wall's plane (within `STEP_OUT_REACH_M`) across at
+ * least half their width, or a flat roof of a lower body whose top is at their floor (within `STEP_OUT_LEVEL_M`) and
+ * whose edge lies on their wall's plane across at least half their width. Pure; the caller changes the family.
+ */
+export const STEP_OUT_REACH_M = 0.5
+export const STEP_OUT_LEVEL_M = 0.35
+/** The sill band of a door seen behind a balustrade (the elevation reads the balustrade's top as its sill), and its head: as `behindBalustradeGroups`. */
+export const STEP_OUT_FLOOR_SILL_M = 0.1
+export const STEP_OUT_BALUSTRADE_SILL_MAX_M = 1.2
+export const STEP_OUT_DOOR_HEAD_MIN_M = 2.0
+export function stepOutDoors<O extends { id: string; storeyIndex: number; facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; planeAt: number; interval: [number, number]; sillY: number; headY: number; family: string; unresolved: string[]; callout?: unknown; provenance: { sill: string } }>(
+  openings: readonly O[],
+  slabs: ReadonlyArray<{ id: string; storeyIndex: number; x0: number; z0: number; x1: number; z1: number }>,
+  roofs: ReadonlyArray<{ massId: string; slabTopY: number; parapetTopY?: number; footprint: { x0: number; z0: number; x1: number; z1: number } }>,
+  floorOf: (storey: number) => number | undefined,
+): Array<{ opening: O; onto: string; behindBalustrade: boolean }> {
+  const out: Array<{ opening: O; onto: string; behindBalustrade: boolean }> = []
+  for (const o of openings) {
+    if (o.storeyIndex === 0 || o.family !== 'WINDOW') continue
+    const floor = floorOf(o.storeyIndex)
+    if (floor === undefined) continue
+    // the French window this reading left a window, or a window whose sill an elevation read on the balustrade's top
+    // in front of it with its head at a door's (a house's rear: the balcony stood before the doors' own pass ran)
+    const french = o.unresolved.includes(FRENCH_WINDOW_NOTE)
+    // only a sill an elevation read: a printed height (a callout) says the window is that tall, wherever its sill is
+    const behindBalustrade = !french && !o.callout && o.provenance.sill === 'IMAGE_METRIC_REGISTERED' && o.sillY - floor > STEP_OUT_FLOOR_SILL_M && o.sillY - floor <= STEP_OUT_BALUSTRADE_SILL_MAX_M && o.headY - floor >= STEP_OUT_DOOR_HEAD_MIN_M
+    if (!french && !behindBalustrade) continue
+    const alongX = o.facade === 'FRONT' || o.facade === 'REAR'
+    const width = o.interval[1] - o.interval[0]
+    const fronts = (r: { x0: number; z0: number; x1: number; z1: number }): boolean => {
+      const [a0, a1] = alongX ? [r.x0, r.x1] : [r.z0, r.z1]
+      const overlap = Math.min(a1, o.interval[1]) - Math.max(a0, o.interval[0])
+      if (overlap < 0.5 * width) return false
+      // the rectangle's edge nearest the wall plane, on the outside of the face
+      const [c0, c1] = alongX ? [r.z0, r.z1] : [r.x0, r.x1]
+      const outwardLow = o.facade === 'FRONT' || o.facade === 'WEST'
+      const edge = outwardLow ? c1 : c0
+      return Math.abs(edge - o.planeAt) <= STEP_OUT_REACH_M && (outwardLow ? c0 < o.planeAt : c1 > o.planeAt)
+    }
+    const slab = slabs.find((b) => b.storeyIndex === o.storeyIndex && fronts(b))
+    if (slab) {
+      out.push({ opening: o, onto: slab.id, behindBalustrade })
+      continue
+    }
+    const roof = roofs.find((r) => Math.abs(r.slabTopY - floor) <= STEP_OUT_LEVEL_M && fronts(r.footprint))
+    if (roof) out.push({ opening: o, onto: `the flat roof of ${roof.massId}`, behindBalustrade })
+  }
+  return out
+}
+
+/** E13: how far below an opening behind it a passage's read head may lie (the line weight) before it is that opening's. */
+export const PASSAGE_HEAD_SLACK_M = 0.02
+
+/**
+ * E13 (a regression house: a recess's mouth read 2.00 high on the front elevation, a 2.10 m door in its back wall): the head of
+ * a passage — the open mouth of a recess — from what the elevation reads over it. A passage is no lower than the openings
+ * it leads to; a head read below the tallest of them is that opening seen through the mouth, not the mouth's own, and
+ * the storey's ceiling stays assumed. With nothing read the head is assumed; with no opening behind, a reading stands.
+ */
+export function passageHead(readHeadY: number | undefined, backHeadsY: readonly number[], assumedHeadY: number): { headY: number; read: boolean; refused?: string } {
+  if (readHeadY === undefined) return { headY: assumedHeadY, read: false }
+  const tallest = backHeadsY.reduce((m, h) => Math.max(m, h), Number.NEGATIVE_INFINITY)
+  if (readHeadY < tallest - PASSAGE_HEAD_SLACK_M) return { headY: assumedHeadY, read: false, refused: `read ${readHeadY.toFixed(2)}, below the ${tallest.toFixed(2)} head of an opening in its back wall: the opening seen through the mouth, not the mouth's head; the storey's ceiling is assumed` }
+  return { headY: readHeadY, read: true }
 }

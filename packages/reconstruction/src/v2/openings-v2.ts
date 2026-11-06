@@ -20,7 +20,7 @@ import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns, rgbAt, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
 import { CONVENTIONS } from '../solve.js'
-import { DOOR_MAX_WIDTH_M, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, openingFace, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
+import { DOOR_MAX_WIDTH_M, FRENCH_WINDOW_NOTE, REACHES_FLOOR_M, VEHICLE_DOOR_MIN_WIDTH_M, classifyOpeningFamily, elevationConfidence, matchOpeningCallout, openingFace, preferredElevationExtent, resolveSillAndHead } from './opening-reading.js'
 import type { OpeningFace } from './opening-reading.js'
 import type { NearbyCallout } from './opening-reading.js'
 
@@ -713,6 +713,9 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     o.headY = sibling.headY
     o.family = sibling.family
     o.unresolved = [...o.unresolved.filter((u) => !u.startsWith('sill and head') && !u.startsWith('kind')), `sill, head and kind assumed from ${sibling.id}, the same ${o.widthM.toFixed(2)} m width on this wall, printed ${sibling.callout?.widthCm}/${sibling.callout?.heightCm}`]
+    // E13 (a balcony with two 1.79 m doors, one printed): a French window's kind is decided once the
+    // balconies stand (`stepOutDoors`), so the note that defers it is the sibling's kind too
+    if (sibling.unresolved.includes(FRENCH_WINDOW_NOTE)) o.unresolved.push(FRENCH_WINDOW_NOTE)
     o.provenance = { ...o.provenance, family: 'VISUAL_SEMANTIC' }
     o.why = `${o.why}; drawn like ${sibling.id} (the same width on this wall, printed)`
   }

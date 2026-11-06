@@ -269,3 +269,63 @@ próby na żywo i ograniczenia.
   garażu jest jedną luką 4,52 m z podpisem 455. Regresja pokazała jednak szeroki skutek (13 z 21 modeli: okna 1,5–1,8 m
   zmieniają się w drzwi po odczytaniu wysokości 220, zamiany w Willi Mai, błędy Aurory 1 → 4). Bez sprawdzenia każdej
   zmiany ze źródłem nie wdrażam; łata `research/exterior-complete/e12b-callout-rings.patch` czeka na weryfikację.
+
+## 9. E13: E12b po weryfikacji źródłowej, przyczyny ujawnione przez pętlę AI i dostawa testowa 1320
+
+- **E12b wdrożone dopiero po sprawdzeniu każdego zmienionego otworu.** Wszystkie 71 otworów, które E12b zmieniło
+  w 13 modelach, obejrzane na kadrach rzutu (kółko opisu ważone dla luki, przypięte albo odrzucone) i na elewacji,
+  gdzie rzut nie rozstrzyga. Werdykty: 50 POPRAWA (wydrukowany wymiar odczytany i przypięty), 11 PRZYCZYNA
+  NAPRAWIONA, 4 POPRAWNE, 3 KONWENCJA (nazwana), 3 otwarte (brama Aurory — rozmiar dobry, rodzaj zły, wcześniejsze;
+  szerokość okna Willi Mai od wschodu; 277 Trytomachu wobec luki 2,59 m). Reguły błędne naprawione u przyczyny,
+  z testami czerwonymi na starym kodzie i przypadkami przeciwnymi (obroty, skale, lustra):
+  - **oś kalenicy z widoków** (`ridge-axis.ts`): widok, który mierzy bok okapowy tam, gdzie oś układu dałaby szczyt,
+    obala test wzniesienia układu (Aurory: błędy kompilatora 4 → 0, okna w szczytach zamiast drzwi przez okap);
+    wzniesienie, które obie rozpiętości odtwarzają z wiarygodnym okapem, jest niejednoznaczne i nazwane;
+  - **okno francuskie**: powyżej parteru otwór do podłogi szerszy niż jedno skrzydło jest oknem, chyba że przed nim
+    stoi płyta balkonu albo płaski dach niższej bryły na jego poziomie; okno odczytane z elewacji za balustradą przed
+    balkonem jest jego drzwiami (`stepOutDoors`); otwór rysowany jak wydrukowany sąsiad dziedziczy to odroczenie;
+  - **rywal szablonu**: niestabilny odczyt rozpoznawacza też jest rywalem; remis szerokości rozstrzyga luka rzutu;
+  - 220 cm albo sama szerokość nigdy nie robią drzwi: kółko → cyfry → wiązanie → rodzaj → wysokość.
+- **Przyczyny ujawnione przez pętlę AI — naprawione w solwerze dla wszystkich domów, nie w pętli:**
+  - znak pod kalenicą nad płytą jest podłogą tylko, gdy rzuty pokazują na nim kondygnację (strop pod dachem
+    parterówki to głowica ścian; pierwsza wersja tej reguły robiła z niego piętro — 15 czerwonych testów, poprawione);
+  - znak okapu, który linie dachu przekroju stawiają na kapinosie poza ścianami, nie jest głowicą ścian (Azalie:
+    +3,73 przy wydrukowanej ściance kolankowej 167 — okna szczytu nie są już ścinane pod nieistniejącym podbitkiem);
+  - teren to znak, od którego strona mierzy wysokość budynku (`printedTerrainOf`; Azalie −0,32, nie −0,57 pod
+    schodami) — co odmawia też widoku, którego grunt wypada pół metra obok;
+  - zasięg z elewacji sprzeczny z wydrukowaną wysokością nie ustawia żadnego końca otworu (sześć parapetów
+    w korpusie było „zmierzonych” z takiego zasięgu — Arlety, Dalie, Lipienniki, Rarytasy, Bakopy ×2 — teraz
+    konwencja, nazwana);
+  - wylot wnęki nie jest niższy niż otwory w jej ścianie tylnej (`passageHead`).
+  Piętra na wydrukowanych poziomach: Aurory 3,00, Willa Maja 2,96, Sasanki 3,06 (wcześniej konwencja 2,80).
+- **Pętla AI wg kontraktu v3.42 (badanie):** analizator sam tworzy problem (przekrój bez rejestracji, z nieodczytanym
+  atramentem liczb); odpowiedź to typowana obserwacja (ramka, niepewność, OTHER/UNKNOWN); odczyt wchodzi tylko przez
+  kontrolę na tym samym rysunku (symbol poziomu pod ramką, jedna drabina „zostaw jeden”) i przez wysokość budynku ze
+  strony nad znakiem terenu; propozycja to rewizja na podanej bazie, rozwiązana, skompilowana i porównana z CV_ONLY
+  na identycznych wejściach. Wyniki na kodzie 1320 (odtworzone zapisane odpowiedzi, bez nowego wywołania):
+  - **Goździkowce (dom regresyjny): ZAAKCEPTOWANE** — kalenica 7,94 → 8,36 m (wydruk +8,36), 8,36 − (−0,32) = 8,68 m
+    (wysokość ze strony), piętro na +2,96 (odczyt czytnika +2,46 tej samej etykiety uchylony); poza tym nic, czego
+    poziomy nie rozstrzygają; tablica: przekrój z przyjętymi znakami, render CV_ONLY i AI obok siebie;
+  - **Azalie: ODROCZONE** — obie kontrole źródła przechodzą (7,70; 8,02 m), ale wariant odczytuje też drzwi frontowe
+    z elewacji jako 2,50 m (render: drzwi 2,1 m w ciemnej obwódce 2,5 m) — zmiana bez kontroli, więc niewdrożona;
+  - **Zefiranty: ODRZUCONE** — odczyty przechodzą (8,55; 9,02 m), ale wariant gubi okno dachowe: z wydrukowaną
+    kalenicą boczne rendery pasują do całej obwiedni i dach główny wchodzi nad przednie 2 m garażu, których układ nie
+    buduje;
+  - **pewna siebie błędna odpowiedź** (fikstura +8,85 zamiast +8,55, pewność 0,99): ODROCZONE w obu rundach —
+    wysokość ze strony się nie zgadza (9,17 wobec 9,02 m).
+  Koszt: 0,6084 $ zliczone z limitu 5 $ od E12 (E12 0,4904 + E13 0,1180), szacunek tokenów CLI, rozliczenie
+  niepotwierdzone; każde wywołanie E13 ze śladem (model żądany i zwrócony, sesja, kategoria poświadczenia `none` =
+  własne logowanie sesji, tokeny, cache, opóźnienie). Działa tylko w badaniu: adapter produkcyjny hosta nie był
+  uruchomiony na żywo, APK nie wykonuje żadnego wywołania AI.
+- **Zefiranty — garaż (FIRST_BAD znalezione, nienaprawione):** zalanie dzieli garaż dwustanowiskowy na linii frontu
+  domu (narysowane samochody zaczerniają tę linię), a przednie 2 m łączą się z zewnętrzem przez bramę 4,55 m. Reguła
+  bramy waży tylko prostokątne kieszenie, a ten pas jest częścią jednego otwartego obszaru wokół domu. Rozszerzenie
+  reguły przez krawędź z samych linii napisano, sprawdzono, że na prawdziwym domu nie zadziała z tego powodu,
+  i wycofano zamiast wdrażać nieużywane. Naprawa to kieszeń odcięta od zewnętrza na linii bramy — osobna zmiana dla
+  całego korpusu. **Wiadomy błąd tej dostawy:** drzwi 180/230 na balkon tylny poddasza Zefirantów są teraz oknem
+  francuskim (model nie buduje półkolistego balkonu, który rysuje rzut); w E12 były drzwiami bez balkonu.
+- **Regresja (23 przebiegi, 21 modeli; Pod Miłorzębem i Modrzewnica bez modelu, jak wcześniej):** od kodu E12 — 90
+  zmian elementów (71 wierszy E12b i 19 kolejnych), każda z werdyktem; błędy kompilatora: Aurory 1 → 0, Jabłonki 1,
+  Zefiranty 5 (bez zmian). Sprawdzarka 35 → 34/70, czytana uczciwie: kalenica Aurory przechodzi; Arlety i Jabłonki
+  tracą „wejście”, którym było okno francuskie piętra zbudowane jako drzwi — ich prawdziwe drzwi wejściowe nigdy nie
+  były budowane, a sprawdzarka liczyła złe drzwi.

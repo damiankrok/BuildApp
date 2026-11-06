@@ -82,11 +82,21 @@ export function createSolverRecorder(ctx: SolverRecord) {
     ctx.solved.push(solved)
     return featureId
   }
+  /** E13: a solved feature's parameter restated by a later reading, with the reason appended to its why. */
+  const amend = (featureId: string, key: string, p: FeatureParameters[string], why: string): void => {
+    const solved = ctx.solved.find((f) => f.id === featureId)
+    if (!solved) return
+    const value = { value: round6(p.value), low: round6(p.low), high: round6(p.high), unit: p.unit ?? ('m' as const) }
+    solved.parameters = { ...solved.parameters, [key]: value }
+    solved.why = `${solved.why}; ${why}`
+    const hyp = ctx.hypotheses.find((h) => h.id === solved.hypothesisId)
+    if (hyp) hyp.parameters = { ...hyp.parameters, [key]: value }
+  }
   /** A relation between two features. */
   const relate = (kind: FeatureGraphDraft['relations'][number]['kind'], fromId: string, toId: string, why: string, confidence = 0.8): void => {
     ctx.relations.push({ id: stableId('rel', `${kind}-${fromId.slice(-10)}-${toId.slice(-10)}`, { kind, fromId, toId }), kind, fromId, toId, confidence, why })
   }
-  return { step, gap, record, sighting, feature, relate }
+  return { step, gap, record, sighting, feature, amend, relate }
 }
 
 export type SolverRecorder = ReturnType<typeof createSolverRecorder>

@@ -233,6 +233,44 @@ describe('the recogniser in the metric reading', () => {
     expect(rival?.confidence).toBe(heights[0]?.confidence)
     expect(ringCallout(set)?.rawText).toBe(`110/${offHeight}`)
   })
+  // E13 (Willa Maja 110/230 kept as 116/277): the rival stands second, next to the reading it rivals — the storey's
+  // common head and the plan gap look at the runners-up, and a rival filed after every template reading went unseen
+  it('the rival stands second among its half\'s readings, right after the template\'s first', async () => {
+    const off = extractMetricEvidence(options)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    const other = offHeight === '280' ? '260' : '280'
+    const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading(other, 0.5, 0.5) : undefined))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    const heights = (ringCallout(set)?.alternatives ?? []).filter((a) => a.why.startsWith('height candidate'))
+    expect(heights.length).toBeGreaterThan(2)
+    expect(heights[1]?.rawText).toBe(other)
+    expect(heights[1]?.why).toMatch(/a rival/)
+  })
+  // E13 (Arlety 355/230 kept as 355/240): a recogniser's whole reading of a half that is not stable under the bracket
+  // still disagrees with the template's: the half is ambiguous all the same
+  it('an unstable whole reading of a refused half that the template reads otherwise is a rival too, named unstable', async () => {
+    const off = extractMetricEvidence(options)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    const other = offHeight === '280' ? '260' : '280'
+    const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading(other, 0.95, 0.95, false) : undefined))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    const heights = (ringCallout(set)?.alternatives ?? []).filter((a) => a.why.startsWith('height candidate'))
+    expect(heights[0]?.rawText).toBe(offHeight)
+    expect(heights[1]?.rawText).toBe(other)
+    expect(heights[1]?.why).toMatch(/not stably/)
+    expect(heights[1]?.confidence).toBe(heights[0]?.confidence)
+    // the template's reading still leads: an unstable reading is a rival, never the reading
+    expect(ringCallout(set)?.rawText).toBe(`110/${offHeight}`)
+  })
+  it('counter: an unstable reading of part of the half (fewer digits) is no rival', async () => {
+    const off = extractMetricEvidence(options)
+    const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]
+    const { recogniser } = recogniserOf((k) => (k.key.endsWith('u') ? reading('110') : k.key.endsWith('l') ? reading('30', 0.95, 0.95, false) : undefined))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    const heights = (ringCallout(set)?.alternatives ?? []).filter((a) => a.why.startsWith('height candidate'))
+    expect(heights.some((a) => a.rawText === '30')).toBe(false)
+    expect(heights[0]?.rawText).toBe(offHeight)
+  })
   it('the same refused half read as the template reads it keeps the template\'s reading', async () => {
     const off = extractMetricEvidence(options)
     const offHeight = (ringCallout(off)?.rawText ?? '').split('/')[1]

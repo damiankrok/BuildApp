@@ -66,6 +66,19 @@ describe('which way the ridge runs', () => {
     expect(ridgeAxisFromRise(8, 12, 40, 9, 0.3)).toBeUndefined()
   })
 
+  // E13 (Aurory: 12 × 9.2 m, 40°, eaves +3,35 at the lip, ridge +8,34; Azalie: 10.35 × 6.7 m, eaves +3,73, ridge +7,70)
+  it('an eaves mark at the lip of an overhang: the wider span can match the rise by coincidence, so the rise says nothing', () => {
+    const aurory = ridgeAxisFromRise(12, 9.2, 40, 4.99, 0.45)
+    expect(aurory?.ambiguous).toBe(true)
+    const azalie = ridgeAxisFromRise(10.35, 6.7, 40, 3.97, 0.45)
+    expect(azalie?.ambiguous).toBe(true)
+  })
+  it('counter: a rise the narrower span cannot reach without an impossible overhang (beyond 1.6 m) is decided', () => {
+    // 12 m across rises 5.03 m; the 8 m span would need a 2.0 m overhang for it
+    expect(ridgeAxisFromRise(8, 12, 40, 5.03, 0.45)?.ambiguous).toBe(false)
+    // a rise below what the wider span gives at the walls: only the narrower span, with some overhang
+    expect(ridgeAxisFromRise(8, 12, 40, 3.8, 0.45)?.axis).toBe('Z')
+  })
   it('admits it when a square building makes both fit', () => {
     expect(ridgeAxisFromRise(10, 10, 35, 3.5, 0.3)?.ambiguous).toBe(true)
   })

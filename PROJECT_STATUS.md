@@ -3104,10 +3104,20 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 ### Cały dom z zewnątrz (STAGE BUILDPLAN EXTERIOR-COMPLETE)
 
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
-- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E12);
+- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E13);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
-- **Ostatnia dostawa testowa: APK 1319** (`0.1319.0-owner`, commit kodu `82878c7`, SHA-256 `98253f3c…e671e277`, ten
-  sam podpis; analizator `1d76b4f7…56ab2`, solver 2.27.0, czytnik 1.8.0). Poprzednie: 1318 (`a79bcea`), 1317 (`cf6a8d9`).
+- **Ostatnia dostawa testowa: APK 1320** (`0.1320.0-owner`, arm64-v8a, SHA-256 `a7a479bb…de287196`, ten sam podpis
+  `6e48fac4…2b921ca0da`; analizator `565b53d0…5a22eb46`, solver 2.28.0, czytnik 1.9.0; kod: commit z tym wpisem).
+  Poprzednie: 1319 (`82878c7`), 1318 (`a79bcea`), 1317 (`cf6a8d9`).
+- **E13 (dostawa 1320):** E12b wdrożone po sprawdzeniu każdego z 71 zmienionych otworów (50 poprawa, 11 przyczyna
+  naprawiona, 4 poprawne, 3 konwencja, 3 otwarte); oś kalenicy z widoków (Aurory: błędy 1 → 0), okna francuskie na
+  piętrze bez płyty przed nimi, drzwi balkonowe przed płytą; piętra na wydrukowanych poziomach (Aurory, Willa Maja,
+  Sasanki); kapinos okapu nie jest głowicą ścian; teren ze znaku, od którego strona mierzy wysokość; zasięg z elewacji
+  sprzeczny z wydrukiem nie ustawia parapetu. Pętla AI wg kontraktu v3.42 (badanie, nie APK): Goździkowce
+  ZAAKCEPTOWANE (kalenica 8,36 = wydruk, 8,68 = strona), Azalie ODROCZONE (zmiana drzwi bez kontroli), Zefiranty
+  ODRZUCONE (utracone okno dachowe), błędna pewna odpowiedź ODROCZONA; koszt 0,61 $ z 5 $. Sprawdzarka 34/70
+  (35 w E12 liczyło okna francuskie piętra jako wejście). Wiadomy błąd: drzwi na balkon tylny poddasza Zefirantów
+  są oknem (balkon niebudowany); przód garażu Zefirantów — przyczyna znaleziona, nienaprawiona.
 - **Zefiranty G2 wer. 2 (ujawnione przez OWNER-a, DEV, nie ślepy test; E11):** z braku modelu (1318, zachowany) do
   modelu: skala rzutu SUPPORTED, dach kopertowy 38° z krótką kalenicą (8,16 przyjęte; przekrój +8,55 nieczytelny),
   4 okna dachowe w połaciach. Brakuje: garażu z własnym dachem, niższych dachów, lukarn, koszy, kominów.

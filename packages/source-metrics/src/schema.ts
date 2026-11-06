@@ -249,7 +249,8 @@ export type Association = z.infer<typeof AssociationSchema>
 
 export const MetricProvenanceSchema = z
   .object({
-    extractor: z.enum(['NUMERIC_OCR', 'CHAIN_SOLVER', 'REGISTRATION', 'PACKAGE_METADATA', 'DERIVED']),
+    /** E13: VISION_VALIDATED — a vision model's reading admitted only by a deterministic check on the same drawing (`external-levels.ts`). */
+    extractor: z.enum(['NUMERIC_OCR', 'CHAIN_SOLVER', 'REGISTRATION', 'PACKAGE_METADATA', 'DERIVED', 'VISION_VALIDATED']),
     name: z.string().min(1),
     detail: z.string(),
   })

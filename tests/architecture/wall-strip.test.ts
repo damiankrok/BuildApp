@@ -253,11 +253,11 @@ describe('005Q one new bound, and the layout says it changed', () => {
   const code = codeOf(read(LAYOUT))
 
   // 005Q moved the layout to 1.2.0; LINK-F1 (the chain ladders' anchor gate) moved it on to 1.3.0; EXTERIOR-COMPLETE
-  // (a garage behind its lining, the gate rule) to 1.4.0; EXTERIOR-COMPLETE E12 (a recess's sides on its jambs) to 1.5.0
-  it('WALL_STRIP_BOUNDS is { cover: 0.25 } and the layout is 1.5.0 (1.2.0 since 005Q, 1.3.0 since LINK-F1, 1.4.0 since EXTERIOR-COMPLETE E7, 1.5.0 since E12)', () => {
+  // (a garage behind its lining, the gate rule) to 1.4.0; EXTERIOR-COMPLETE E12 (a recess's sides on its jambs) to 1.5.0, then (a callout ring is not a post) to 1.6.0
+  it('WALL_STRIP_BOUNDS is { cover: 0.25 } and the layout is 1.6.0 (1.2.0 since 005Q, 1.3.0 since LINK-F1, 1.4.0 since EXTERIOR-COMPLETE E7, 1.5.0 and 1.6.0 since E12)', () => {
     expect(WALL_STRIP_BOUNDS).toEqual({ cover: 0.25 })
     expect(bodyOf(code, 'WALL_STRIP_BOUNDS').trim()).toBe('export const WALL_STRIP_BOUNDS = { cover: 0.25 } as const')
-    expect(LAYOUT_INFERENCE_VERSION).toBe('1.5.0')
+    expect(LAYOUT_INFERENCE_VERSION).toBe('1.6.0')
   })
 
   it('the wall-strip code’s numbers are a frozen set: the bound by name, the rest conventions', () => {

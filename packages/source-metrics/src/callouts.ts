@@ -982,6 +982,54 @@ class SizeGroupedRenderCache extends Map<string, Float64Array> {
   }
 }
 
+/** The share of the circle `r` about (cx, cy) on ink in the original mask, searched a few pixels round the guess. */
+const SPLIT_RING_MIN_ANNULUS = 0.75
+/**
+ * EXTERIOR-COMPLETE E12: two barred rings found side by side on one bar row, overlapping, are one callout ring split
+ * by ink that touches it. A door line along a garage's front touching the top of its "455/220" ring, or a door leaf and
+ * its arc touching a porch door's "105/210", are long runs the search strips (`stripLongRuns`), and the ring's arc
+ * goes with them; what is left is fitted by two smaller circles left and right of the bar, each about the halves'
+ * size, neither of which reads. Two callouts never overlap, so two such rings (overlapping or touching) are one: the circle about their union,
+ * searched a few pixels round their union on the ORIGINAL ink, kept when its circle is inked over three quarters and a
+ * bar crosses it. What it then reads goes through the same gates as any ring.
+ */
+function mergeSplitRings<F extends { ring: Ring; source: { mask: Mask } }>(found: readonly F[]): F[] {
+  const out = [...found]
+  for (let i = 0; i < out.length; i += 1) {
+    for (let j = i + 1; j < out.length; j += 1) {
+      const a = out[i].ring
+      const b = out[j].ring
+      if (!a.bar || !b.bar || out[i].source !== out[j].source) continue
+      if (Math.abs((a.bar.y0 + a.bar.y1) / 2 - (b.bar.y0 + b.bar.y1) / 2) > 1.5 || Math.abs(a.cy - b.cy) > 3) continue
+      const d = Math.hypot(a.cx - b.cx, a.cy - b.cy)
+      // overlapping or touching: two real callouts side by side fail the inked-circle test below
+      if (d === 0 || d > a.r + b.r + 1) continue
+      const x0 = Math.min(a.cx - a.r, b.cx - b.r)
+      const x1 = Math.max(a.cx + a.r, b.cx + b.r)
+      const mask = out[i].source.mask
+      let best: { cx: number; cy: number; r: number; annulus: number } | undefined
+      const r0 = Math.round((x1 - x0) / 2)
+      for (let dy = -5; dy <= 5; dy += 1)
+        for (let dx = -4; dx <= 4; dx += 1)
+          for (let dr = -4; dr <= 2; dr += 1) {
+            const cx = Math.round((x0 + x1) / 2) + dx
+            const cy = Math.round((a.cy + b.cy) / 2) + dy
+            const r = r0 + dr
+            const annulus = annulusHits(mask, cx, cy, r, 1)
+            if (!best || annulus > best.annulus) best = { cx, cy, r, annulus }
+          }
+      if (!best || best.annulus < SPLIT_RING_MIN_ANNULUS) continue
+      const bar = findBar(mask, best)
+      if (!bar) continue
+      const partial = { ...best, interior: diskFill(mask, best.cx, best.cy, Math.max(2, best.r - 3)), inside: 0, outside: 0, bar }
+      out[i] = { ...out[i], ring: { ...partial, score: ringScore(partial) } }
+      out.splice(j, 1)
+      j = i
+    }
+  }
+  return out
+}
+
 export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}): CalloutReading[] {
   const opt = { ...DEFAULTS, ...options }
   const minR = Math.max(3, Math.round(opt.minRadiusPx))
@@ -1027,9 +1075,11 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
     kept.push(f)
   }
 
+  const merged = mergeSplitRings(kept)
+
   const cache = boundedRenderCache(options.renderCacheBytes, options.checkpoint ? () => options.checkpoint?.tick() : undefined)
   const readings: CalloutReading[] = []
-  for (const [index, { ring, source }] of kept.entries()) {
+  for (const [index, { ring, source }] of merged.entries()) {
     options.checkpoint?.tick({ subphase: CALLOUT_SUBPHASE, counters: { rings: index + 1, ringsTotal: kept.length, readings: readings.length } })
     const { bar } = ring
     const inner = innerEdge(source.grey, ring)

@@ -121,6 +121,9 @@ export function statedKind(findings: readonly SpecificationFinding[]): { kind: R
  * two metres apart, which no measurement error covers — and that is the span
  * the slopes fall across, so the ridge runs along the other axis.
  */
+/** E13: the longest eaves projection taken as real — the bound the elevation silhouettes' overhang readings use. */
+export const MAX_EAVES_PROJECTION_M = 1.6
+
 export function ridgeAxisFromRise(
   widthM: number,
   depthM: number,
@@ -138,6 +141,15 @@ export function ridgeAxisFromRise(
   const scored = candidates.map((c) => ({ ...c, residual: Math.abs(c.predicted - riseM) })).sort((a, b) => a.residual - b.residual)
   const best = scored[0]
   if (best.residual > tolerance) return undefined
+  // E13 (two development sections): a section prints the eaves at the roof's lip, past the walls, as often as at their
+  // head. Then the rise is the walled span's PLUS the overhang's, and the wider span can match it by coincidence. Each
+  // axis implies the overhang it would need; an axis needing one below zero (beyond the rise tolerance) or longer than
+  // MAX_EAVES_PROJECTION_M is impossible. Where both are possible, the rise does not say which way the ridge runs.
+  const overhangOf = (c: { span: number }): number => riseM / tan - c.span / 2
+  const possible = candidates.filter((c) => overhangOf(c) >= -tolerance / tan && overhangOf(c) <= MAX_EAVES_PROJECTION_M)
+  if (possible.length === 2) return { axis: best.axis, predicted: round6(best.predicted), residual: round6(best.residual), ambiguous: true }
+  const only = possible[0]
+  if (only && only.axis !== best.axis) return undefined
   return { axis: best.axis, predicted: round6(best.predicted), residual: round6(best.residual), ambiguous: scored.length > 1 && scored[1].residual <= tolerance }
 }
 
@@ -218,21 +230,23 @@ export function inferRoofSystems(options: RoofInferenceOptions): RoofInference {
     let ridgeWhy = ''
     if (roofKind === 'GABLE' || roofKind === 'MONOPITCH') {
       const fromRise = pitch && rise !== undefined ? ridgeAxisFromRise(widthM, depthM, pitch.evidence.value, rise, tolerance) : undefined
-      if (fromRise) {
+      if (fromRise && !fromRise.ambiguous) {
         ridgeAxis = fromRise.axis
         ridgeWhy = `a ${pitch?.evidence.value}° roof over the ${(fromRise.axis === 'X' ? depthM : widthM).toFixed(2)} m span rises ${fromRise.predicted.toFixed(2)} m, and the section measures ${rise?.toFixed(2)} m from eaves to ridge — ${fromRise.residual.toFixed(2)} m apart`
-        if (fromRise.ambiguous) {
+      } else {
+        // E13: both spans possible (the eaves mark may be the lip of an overhang): the section does not say, and the
+        // convention below stands — named; the registered views may still overturn it
+        if (fromRise?.ambiguous) {
           conflicts.push({
             id: stableId('conflict', `ridge-${mass.id}`, { massId: mass.id }),
             kind: 'ROOF_EVIDENCE_DISAGREES',
-            what: 'both of this body’s spans reproduce the measured ridge height at the stated pitch, so the section does not say which way the ridge runs',
+            what: 'both of this body’s spans can reproduce the measured ridge height at the stated pitch (the eaves mark may be at the lip of an overhang), so the section does not say which way the ridge runs',
             itemIds: [id, mass.id],
             evidenceIds: [...levels.evidenceIds],
             magnitude: round6(Math.abs(widthM - depthM)),
             unit: 'm',
           })
         }
-      } else {
         // The ridge runs the long way unless something says otherwise, which
         // is what a builder would assume and what a catalogue drawing almost
         // always shows. Stated as the assumption it is.
@@ -241,7 +255,7 @@ export function inferRoofSystems(options: RoofInferenceOptions): RoofInference {
         unresolved.push({
           id: stableId('gap', `ridge-${mass.id}`, { massId: mass.id }),
           what: `which way the ridge runs over ${mass.id}`,
-          reason: rise === undefined ? 'no section states an eaves level and a ridge level, so there is no rise to test a span against' : 'neither span reproduces the measured rise at the stated pitch',
+          reason: rise === undefined ? 'no section states an eaves level and a ridge level, so there is no rise to test a span against' : fromRise?.ambiguous ? 'both spans can reproduce the measured rise at the stated pitch, with an eaves projection between none and 1.6 m' : 'neither span reproduces the measured rise at the stated pitch',
           status: 'AMBIGUOUS',
           frameIds: [],
         })
