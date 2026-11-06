@@ -2,7 +2,7 @@
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
 dostawie testowej 1319 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E11).
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E12).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -208,3 +208,58 @@ próby na żywo i ograniczenia.
 - **Następne:** Kostrzewy — zasięg wnęki ganku z narysowanej ściany tylnej, nie z najbliższego końca łańcucha; potem
   Zefiranty ZF-2: garaż jako osobna, niższa bryła z własnym dachem, niższe dachy na poziomie poddasza, trzy lukarny
   (w tym z balkonem i balustradą).
+
+## 8. Po audycie 1319 (E12): regres Kostrzew, płyta Murajów, ewidencja dostawy i pierwsza żywa pomoc AI
+
+- **Kostrzewy — przyczyna i poprawka ogólna:** boki wnęki ganku to krótkie odcinki ścian (34 px przy grubości 22 px),
+  które nigdy nie dawały własnej linii siatki, więc wnęka brała boki z najbliższych kresek wymiarowych — w 1318 o 0,56 m
+  za szeroko, w 1319 (po poprawnym odrzuceniu kreski) o 0,49 m za wąsko, i drzwi 70/210 wypadły poza ścianę tylną.
+  Teraz wylot wnęki z atramentem ościeży po obu stronach stawia linie siatki na licach ościeży (`jambLines`, layout
+  1.5.0): wnęka 5,15–9,16 m jak na rzucie, trzy otwory tam, gdzie je rysuje rzut. Test przyczyny + 5 orientacji
+  (czerwony na 82878c7).
+- **Kostrzewy — otwarte (starsze niż 1319):** drzwi wejściowe 105/210 (skrzydło i łuk na zewnątrz, do ganku) są
+  budowane jako okno, bo ich kółko opisu nie zostało znalezione w całości (skrzydło i łuk dotykają pierścienia), więc
+  nie zostało zamaskowane. Kontrola wejścia pozostaje FAIL — jak w 1318.
+- **Muraje — przyczyna i poprawka ogólna:** bryła cięta na osi ściany frontowej zostawia zewnętrzną połowę muru jako
+  pas między bryłą a zasięgiem rysunku. Reguła 005Q uznawała pas za mur tylko, gdy mieścił całe pasmo — a 0,75 px
+  przesunięcia linii decydowało, czy pas w ogóle istnieje. W 1319 w połowie muru zbudowano „wnękę 0,20 m” z dwoma
+  zwrotami, posadzką, płytą balkonu i balustradą. Teraz pas, którego zewnętrzne lico leży na krawędzi zasięgu, a
+  pasmo sięga wewnętrznej krawędzi pasa (lub dalej), jest murem: zwroty, posadzka, płyta i balustrada znikają, bryła
+  jak w rysunku. Przypadek 5 testu 005Q, który zamrażał posadzkę w atramencie muru, zmieniony świadomie (uzasadnienie
+  w teście); pozostałe granice trzyma nowy test (czerwony na 82878c7 w dwóch przypadkach przyczyny).
+- **Muraje — balustrada:** źródło ma francuskie balkony (szklane balustrady przy oknach piętra, bez płyty). Balustrada
+  z 1319 pochodziła z fałszywej wnęki, więc kontrola balustrady wraca do FAIL. Francuski balkon wymaga osobnego odczytu.
+  Otwarte także (starsze): wejście i brama garażu w ścianie cofniętej ok. 0,8 m pod piętrem (pasmo 606–634 px).
+- **Zefiranty — przyczyny znalezione, jeszcze nie poprawione:** 153,28 wobec 170,83 m² to przednie 2,0 m garażu
+  (wydrukowane „200”, związane 648–726 px) i trójboczny wykusz od wschodu. Przód garażu jest klasyfikowany jako
+  zewnętrze, bo zalanie przecieka przez dwa narożniki z pełnym atramentem (100 %), których nie przypisuje żadne pasmo, a
+  bryła frontu garażu w zaakceptowanym obrysie jest „niezamknięta” (sprawdzone: rozszerzenie reguły narożnika na
+  własne lico linii niczego nie zmienia — decyduje test zamknięcia bryły w uzupełnianiu obrysu). „Płaski
+  pas” przy garażu to odcięta zachodnia część garażu. Kalenica: źródło drukuje +8,55 (z −0,47 zgodne z 9,02 ze strony);
+  model ma 8,16 (−0,39 m, −4,6 %) — rozjeżdża się założony poziom okapu, nie kąt. Następne: test zamknięcia bryły w uzupełnianiu
+  obrysu na pełnym atramencie narożnika (z przypadkiem przeciwnym: koniec ściany przy papierze zostaje otwarty), potem
+  garaż jako niższa bryła z własnym dachem, wykusz, lukarny.
+- **F11 (korekta jawna):** zamrożony wiersz „zaokrąglony wykusz z tyłu” zostaje; obok zapisana korekta z dowodem —
+  półkole jest tarasem (cienkie linie, leżaki, prosta ściana tylna z trojgiem drzwi). Model słusznie go nie buduje.
+- **Ewidencja dostawy:** ZIP1319 nie miał `program.json` PO — pełna ścieżka produkcyjna go nie zapisywała. Teraz zapisuje
+  `program.json` i `compile-diagnostics.json` (kompilator produkcyjny na tym samym modelu). „24 domy” w podsumowaniu
+  1319 to błąd: regresja to 23 przebiegi (13 DEV z 3 bazami holdoutu, 8 regresyjnych, Bakopy, Zefiranty) i 21 modeli
+  (Pod Miłorzębem i Modrzewnica nadal bez modelu, z zapisem porażki).
+- **Ocena, która widzi regres:** `research/exterior-complete/regress.py` porównuje PRZED/PO element po elemencie (drzwi i
+  otwory per strona, rodzaj i położenie; balkony, balustrady, tarasy, zwroty, pergole, kominy; błędy kompilatora; bryła).
+  Na 1318→1319 wskazuje utracone drzwi Kostrzew i sześć dodatków Murajów bez źródła — czego sprawdzarka 70 kontroli nie
+  widziała. Historyczne 35/70 i 36/70 zostają jako wyniki ograniczonej sprawdzarki.
+- **Pomoc AI (życzenie OWNER-a, badanie):** kontrakt „drugiego spojrzenia” istniał od 005Y-N4, ale nigdy nie działał na
+  żywo. Teraz działa przez tryb bezgłowy Claude Code (budżet OWNER-a, za jego zgodą, tylko jawne domy DEV). 7 pytań,
+  których analizator nie rozstrzyga albo myli, po 3 powtórzenia: Claude Haiku 5.5 — 20/21 poprawnych, 1 błędna (taras
+  jako wykusz, na pytaniu bez niezależnej kontroli — zostałaby pytaniem), koszt 0,014 $; Claude Opus 5.5 — 21/21, 0,47 $.
+  15 odpowiedzi potwierdziła niezależna kontrola deterministyczna, żadnej błędnej. Sam analizator miał rację w 1 z 7.
+  To nie jest test ślepy (odpowiedzi wzorcowe odczytane przez dewelopera po fakcie). Odpowiedź AI nigdy nie jest
+  faktem: jest `AI_SUGGESTED`, a staje się użyteczna dopiero, gdy zgodzi się z nią kontrola z rysunku lub ze strony;
+  inaczej zostaje pytaniem do użytkownika. Adapter produkcyjny zaktualizowany do dzisiejszego API (bez `temperature`
+  i wymuszonego narzędzia, które dziś dają 400).
+- **Regresja E12 (23 przebiegi, 21 modeli):** modele bajt w bajt jak w 1319 poza trzema zamierzonymi (Kostrzewy, Muraje,
+  Trytomach — w tym ostatnim zniknęły dwa „tarasy” 0,22 m i sześć „zwrotów” w zewnętrznych połowach ścian bocznych,
+  sprawdzone na rzucie poddasza). Sprawdzarka 35/70 (balustrada Murajów wraca do FAIL). Każdy przebieg ma teraz
+  `program.json` i diagnostykę kompilatora: błędy tylko Aurory (1), Jabłonki (1), Zefiranty (5). Bez APK w tym punkcie
+  kontrolnym — następna dostawa testowa (≥ 1320) razem z garażem i dachem Zefirantów.

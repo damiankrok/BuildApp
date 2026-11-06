@@ -237,6 +237,10 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     write('result-summary.json', { ...summaryOf(run.result), timings: run.timings })
     // the model itself, canonical, for the architecture exports (roof graph, assembly graph) of stage 03G
     writeFileSync(join(out, 'model.json'), serializeModel(run.result.model))
+    // E12: the program the model replays from, and what the production compiler says of the model (its technical
+    // ERRORs and WARNINGs), so that a delivery carries program → model → scene for every model it ships
+    write('program.json', run.result.candidate.program)
+    write('compile-diagnostics.json', compileBuilding(run.result.model).diagnostics)
     writeOverlays(out, run.planDiagnostics, rasterOf)
     writeFileSync(join(out, 'scene-views.png'), PNG.sync.write(renderSceneSheet(run.result.scene)))
     writeFileSync(join(out, 'scene-all-sides.png'), PNG.sync.write(renderSceneSheet(run.result.scene, 360, 'ALL')))

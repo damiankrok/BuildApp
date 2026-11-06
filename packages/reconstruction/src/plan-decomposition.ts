@@ -1794,6 +1794,46 @@ function backWallLines(spans: readonly CompoundFacadeSpan[], linesX: readonly Gr
 }
 
 /**
+ * EXTERIOR-COMPLETE E12: grid lines on the jamb faces of a recess mouth that no line of the grid lies near.
+ *
+ * A recess's side returns are as short as the recess is deep, so their bands never make a line of their own (a band
+ * shorter than two and a half thicknesses is not wall-to-wall, and its coverage of the sheet is a few per cent). The
+ * recess then took its sides from whatever dimension ticks happened to fall near them: on one reading a room chain's
+ * tick inside the bathroom beside it, on the next — once a stroke on that chain was rejected — a tick a room further
+ * on, and the recess, its back wall and the openings in it moved by half a metre either way while the mouth on the
+ * facade (read from the wall ink) stayed where the drawing has it. A mouth with returns at both ends and wall ink at
+ * both jambs states where the recess's sides are: on the jambs' inner faces. A line already within one wall thickness
+ * of the face is that jamb's own line and is kept.
+ */
+function jambLines(spans: readonly CompoundFacadeSpan[], linesX: readonly GridLine[], linesY: readonly GridLine[], wallPx: number): { x: GridLine[]; y: GridLine[] } {
+  const added = { x: [] as GridLine[], y: [] as GridLine[] }
+  for (const span of spans) {
+    // a mouth on a horizontal facade line (axis Y) has vertical jambs, which are lines of the X family, and the reverse
+    const family: 'X' | 'Y' = span.axis === 'Y' ? 'X' : 'Y'
+    for (const interval of span.intervals) {
+      if (interval.role !== 'RECESS_MOUTH' || !interval.recess) continue
+      for (const end of [0, 1] as const) {
+        if (interval.bounds[end] !== 'JAMB' || !interval.jambInk[end]) continue
+        const px = end === 0 ? interval.fromPx : interval.toPx
+        const existing = family === 'X' ? [...linesX, ...added.x] : [...linesY, ...added.y]
+        if (existing.some((l) => Math.abs(l.px - px) <= wallPx)) continue
+        const line: GridLine = {
+          axis: family,
+          px: round6(px),
+          probesPx: [round6(px)],
+          support: { chainIds: [], chainSpanPx: 0, printedChainIds: [], bandLength: 0, bandCoverage: 0, bandSpans: false },
+          confidence: round6(Math.min(0.9, 0.5 * interval.recess.cover)),
+          why: `the ${end === 0 ? 'low' : 'high'} jamb of a recess mouth on the facade (${interval.id}), its return ${interval.recess.returns[end].toFixed(2)} m deep: the recess's side is on the jamb's inner face`,
+        }
+        if (family === 'X') added.x.push(line)
+        else added.y.push(line)
+      }
+    }
+  }
+  return added
+}
+
+/**
  * What a compound span's topology shuts whatever its mouths are (005N): each accepted separator, which is wall ink,
  * on the span's own line; and each recess interval's set-back wall, on the grid line at that wall, across the
  * interval — wall and door-sized holes between wall jambs, the same convention every wall is read by.
@@ -2078,10 +2118,12 @@ function decomposeCore(
   // from the drawing's own back wall, never on a reading of the outline (whose grid is the outline's).
   if (!override) {
     const added = backWallLines(wide.spans, linesX, linesY, minCellPx)
-    if (added.x.length + added.y.length > 0) {
+    // E12: and on the jambs' inner faces, so that the recess's sides are where its returns are drawn
+    const jambs = jambLines(wide.spans, linesX, linesY, wallPx)
+    if (added.x.length + added.y.length + jambs.x.length + jambs.y.length > 0) {
       for (const l of [...added.x, ...added.y]) setBack.add(`${l.axis}:${l.px}`)
-      linesX = [...linesX, ...added.x].sort((a, b) => a.px - b.px)
-      linesY = [...linesY, ...added.y].sort((a, b) => a.px - b.px)
+      linesX = [...linesX, ...added.x, ...jambs.x].sort((a, b) => a.px - b.px)
+      linesY = [...linesY, ...added.y, ...jambs.y].sort((a, b) => a.px - b.px)
       wide = collinearWideGaps(ctxOf(), compoundOf)
     }
   }

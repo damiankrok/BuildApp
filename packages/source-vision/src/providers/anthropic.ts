@@ -8,14 +8,15 @@
  *
  * Four deliberate choices:
  *
- * **Forced tool use, not free prose.** The task schema is attached as a tool
- * and the model is required to call it. There is no prose-parsing path and no
+ * **The tool, not free prose.** The task schema is attached as a tool and the
+ * prompt requires the model to call it. There is no prose-parsing path and no
  * "extract the JSON from the markdown" fallback, because both of those are
- * ways to accept an answer the model did not commit to.
- *
- * **Temperature 0.** Not determinism — a language model is not deterministic —
- * but the least variance available, since the graph is content-addressed and
- * needless variance shows up as a changed hash.
+ * ways to accept an answer the model did not commit to: an answer that does not
+ * call the tool is `NO_ANSWER`. (1.1.0, EXTERIOR-COMPLETE E12: today's models
+ * refuse a forced `tool_choice` and any `temperature` with a 400, so the call
+ * asks for the tool with `auto` and sends no sampling parameter; the refusal of
+ * a prose answer is unchanged. The variance a temperature used to damp is what
+ * the validation and the deterministic check after it are for.)
  *
  * **The byte hash goes in the prompt and comes back in the answer.** It is the
  * cheapest possible check that the model answered about the picture it was
@@ -33,7 +34,7 @@ import { taskDefinition, visionResponseJsonSchema } from '../tasks.js'
 import { validateVisionResponse } from '../validate.js'
 
 /** The adapter's own version. Bump it whenever the prompt or the parsing below changes: it is part of every graph's hash. */
-export const ANTHROPIC_ADAPTER_VERSION = '1.0.0'
+export const ANTHROPIC_ADAPTER_VERSION = '1.1.0'
 
 const TOOL_NAME = 'record_source_observations'
 
@@ -66,7 +67,8 @@ const toBase64 = (bytes: Uint8Array): string => {
   return typeof btoa === 'function' ? btoa(binary) : Buffer.from(bytes).toString('base64')
 }
 
-const SYSTEM = [
+/** The system text every transport of the observation contract sends (exported so a second transport sends the same words). */
+export const VISION_SYSTEM = [
   'You are a source-observation extractor for an architectural reconstruction pipeline.',
   '',
   'You report WHAT YOU CAN SEE in one image, in that image\'s own normalized coordinates. You never describe a building, never state a dimension in metres, and never propose how anything should be modelled. Your entire output is 2D observations on the picture in front of you.',
@@ -80,7 +82,8 @@ const SYSTEM = [
   '- Echo the assetByteHash you are given, exactly.',
 ].join('\n')
 
-function buildPrompt(request: VisionObservationRequest): string {
+/** The user prompt for one request (exported for the same reason as `VISION_SYSTEM`). */
+export function buildVisionPrompt(request: VisionObservationRequest): string {
   const def = taskDefinition(request.task)
   const lines = [
     `Task: ${request.task}.`,
@@ -110,7 +113,7 @@ async function defaultClient(apiKey: string): Promise<AnthropicLike> {
 
 export function anthropicVisionReasoner(options: AnthropicVisionOptions = {}): VisionReasoner {
   const apiKey = options.apiKey ?? process.env.ANTHROPIC_API_KEY ?? ''
-  const model = options.model ?? 'claude-opus-5'
+  const model = options.model ?? 'claude-opus-5-5'
   const provider: VisionProviderInfo = { id: 'vision.anthropic', model, version: `${ANTHROPIC_ADAPTER_VERSION}+contract-${VISION_CONTRACT_VERSION}` }
   const createClient = options.createClient ?? defaultClient
 
@@ -133,16 +136,15 @@ export function anthropicVisionReasoner(options: AnthropicVisionOptions = {}): V
         message = await client.messages.create({
           model,
           max_tokens: options.maxTokens ?? 8192,
-          temperature: 0,
-          system: SYSTEM,
+          system: VISION_SYSTEM,
           tools: [{ name: TOOL_NAME, description: `Record the source observations you made for ${extractorNameFor(provider, request.task)}.`, input_schema: visionResponseJsonSchema(request.task) }],
-          tool_choice: { type: 'tool', name: TOOL_NAME },
+          tool_choice: { type: 'auto' },
           messages: [
             {
               role: 'user',
               content: [
                 { type: 'image', source: { type: 'base64', media_type: request.asset.mediaType, data: toBase64(request.asset.bytes) } },
-                { type: 'text', text: buildPrompt(request) },
+                { type: 'text', text: buildVisionPrompt(request) },
               ],
             },
           ],

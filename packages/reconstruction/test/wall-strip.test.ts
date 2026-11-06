@@ -375,10 +375,16 @@ describe('005Q wall strip — 5. the face window', () => {
     fires(o, f, 'front')
   })
 
-  it('thickened 10 px inward (28 px band, window 9.8 px): 10 px off, outside the window, no gap; the frozen terrace stays', () => {
+  // EXTERIOR-COMPLETE E12 changed this case deliberately. 005Q froze a terrace here: the band runs 10 px into the body
+  // past the strip's inner edge, outside the inner-face window, so the strip in front of the body — the wall's own outer
+  // part — was read as a paved floor. On a real plan (Muraje) the same reading built a 0.20 m recess with returns, a
+  // floor, a balcony slab and a railing inside a front wall's outer half, and half a pixel of grid line decided it. The
+  // rule now asks the band to REACH the strip's inner edge (its inner face on it or past it, into the body), its outer
+  // face on the strip's outer edge, the strip no deeper than the band; the bounds that remain are held by
+  // `wall-strip-half-wall.test.ts` (a band clear of the outer edge, a strip deeper than the band: no wall).
+  it('thickened 10 px inward (28 px band): the band reaches past the strip’s inner edge, the strip is its outer part — it fires, no terrace (E12)', () => {
     const { o, f } = run('inward10')
-    holdsFrozen(o, f)
-    expect(o.terraces).toEqual(['terrace-front-0'])
+    fires(o, f, 'front')
   })
 })
 

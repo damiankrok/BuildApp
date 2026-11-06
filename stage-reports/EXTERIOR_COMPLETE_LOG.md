@@ -430,3 +430,119 @@ Next action: read rec1; then the four failed plans; then balconies (Willa Maja, 
   chain end (restore the entrance door without reviving the rejected stroke); then Zefiranty ZF-2: split the garage
   from the house's lines as its own lower-roofed body, the lower roofs at the attic band, and the three dormers (one
   with the balcony and balustrade).
+
+
+## E12 — after the 1319 audit: Kostrzewy's recess, Muraje's half-wall strip, the evidence ledger, and a live AI second look
+
+Coordinator's audit of 1319 (reproduced the solver from the ZIP; Zefiranty `82cde3d5…`, Bakopy `b1099a1d…`; 45 targeted
+tests pass; not a test of the APK binary or Android UI): Kostrzewy lost its door, Muraje grew a slab without a source,
+Zefiranty has 9 technical ERRORs and no garage, ZIP1319 had no PO `program.json`, and the run ledger did not add up.
+OWNER (6 Nov): the analyzer has to become trustworthy and think for itself when it cannot resolve something; test a
+small AI as a helper, on the Claude Code budget.
+
+- **Kostrzewy (FIRST_BAD, `plan-decomposition.ts`, layout 1.5.0):** the porch's side returns are stubs 34 px long and
+  22 px thick, so their bands never make a grid line (not wall-to-wall under 2.5 thicknesses, a few per cent of the
+  sheet). The recess took its sides from the nearest dimension ticks: in 1318 a room chain's tick inside the bathroom
+  wall (4.58 m, 0.56 m too wide); in 1319, with a stroke on that chain correctly rejected, the next tick (5.63 m,
+  0.49 m too narrow), and the 70/210 door into room 11 fell outside the back wall. The mouth on the facade, read from the
+  jambs' ink, was right both times (5.15..9.16). Fix: a recess mouth with returns and wall ink at both jambs puts grid
+  lines on the jambs' inner faces where no line lies within a wall's thickness (`jambLines`). Now: recess 5.15..9.16,
+  the three openings where the plan draws them (70 at 5.20..5.90, 105 at 6.69..7.74, 70 at 8.41..9.11). Test
+  `recess-jamb-lines.test.ts` (5 orientations; fails on 82878c7: the cell beside the low jamb BUILT, no jamb line).
+- **Kostrzewy, not fixed (older than 1319):** the 105/210 opening is the entrance (its leaf and arc are drawn out into
+  the porch) but is built as a WINDOW. Its callout ring was found only as two 9–10 px fragments (the leaf and arc touch
+  the 15 px ring), so it was not read and its box was not masked; the ring's ink then fails the leaf test. The entrance
+  check stays FAIL (it was FAIL in 1318 for the same reason).
+- **Muraje (FIRST_BAD, `layout.ts` `wallStripsOf`):** the ground body is cut on the front wall band's AXIS (672 px), so
+  the wall's outer half (to 685 px) is a strip between the body and the extent. The 005Q rule named a strip as the wall
+  only when the whole band lay inside it. With the grid line at 672.75 (1318) the strip was 12.25 px, under the
+  half-wall minimum, and no zone existed; at 672 (1319) it was 13 px, a zone, and a "0.20 m recess" got two 1.25 m
+  returns, a paved floor, a balcony slab (a dark band) and a glass railing. Fix: a strip is the wall when the band's
+  outer face is on the strip's outer edge and the band reaches the strip's inner edge (on it or past it), the strip no
+  deeper than the band. The returns, floor, slab and railing are gone; the body is where the drawing has it (the front
+  face, as 005Q designed, an unresolved outer face 0.20 m behind z = 0). `wall-strip.test.ts` case 5 (inward10) froze a
+  terrace read inside the wall's own ink: changed deliberately, reason in the test; the bounds that remain are held by
+  `wall-strip-half-wall.test.ts` (fails on 82878c7 in the two cause cases; counter-cases pass on both).
+- **Muraje, the railing:** the source's French balconies are glass balustrades on the upper windows, no slab. 1319's
+  railing came from the false recess, so the railing check returns to FAIL. A French balcony needs its own reading
+  (railing on the wall face at a window). Not built.
+- **Muraje, older and open:** the entrance and the garage door stand in a wall set back about 0.8 m under the upper floor
+  (band rows 606..634 behind the kitchen front at 660..685); the corner-recess rule refuses a notch under 1.2 m, so the
+  front is built flat with a 5.27 m "window" for the set-back part.
+- **Zefiranty, causes found (not yet fixed):**
+  - The area gap (153.28 vs 170.83 m²) is two missing parts: the garage's front 2.0 m (printed 200, bound PRIMARY
+    648..726 px) and the canted bay on the east (608..643 px).
+  - The garage's front cells are classed outside. Its body in the accepted outline is "not enclosed" (side walls
+    walled 44 %, a 2.13 m "mouth"), though both front corners are solid ink (100 % dark): the left wall band ends at
+    708 px and the front pier band starts at x 95, and on the right the wall band breaks at 696..709 px where a
+    planter touches it.
+  - Tested and ruled out: extending the edge test's corner rule (N7-FIX-03/04) to a line's own face changes nothing
+    (model identical): with an accepted outline the decision is the boundary completion's enclosure of the body, not
+    the cell edge test. Next concrete action: trace that enclosure test on the garage's front body and close a body
+    side on solid corner ink.
+  - The "flat strip" is the garage's west part, cut off from the rest of the garage.
+  - The 5 `OPENING_ABOVE_WALL_TOP` compiler ERRORs reproduce on the evidence; the 4 `EXTERIOR_COPLANAR_DUPLICATE` are
+    from the result audit (`ring-attached-0-0` against `roof-attached-0`), not the compiler.
+- **The evidence ledger:** ZIP1319 had no PO `program.json`: the full production path (`second-house.ts` without
+  `--graph`) never wrote it. It now writes `program.json` and `compile-diagnostics.json` (the production compiler on the
+  same model). The 1319 summary's "24 houses" was wrong: the regression is 23 runs (13 DEV including the 3 holdout
+  bases, 8 regression houses, Bakopy, Zefiranty) and 21 models (Pod Miłorzębem and Modrzewnica still fail, with their
+  failure records).
+- **AI second look, live for the first time (research, `research/ai-assist/`):**
+  - The production contract existed since 005Y-N4 (`secondLook`): two or three readings from the reader, an answer that
+    is only `AI_SUGGESTED`, VALIDATED only where an independent deterministic check agrees, and the owner's consent
+    before a crop leaves the machine. It had never run: no key, no consent.
+  - The session authenticates Anthropic's host itself, so no key could be saved. The transport is Claude Code's headless
+    mode (`claude -p`, image as a base64 block, the answer as structured output against a JSON Schema, tools off), on
+    the owner's Claude Code budget, with the owner's consent for these disclosed DEV drawings.
+  - Seven questions the analyzer cannot settle or gets wrong, three repeats each:
+    - the Kostrzewy 105/210 callout (CV: unread);
+    - which porch opening has the outward leaf (CV: the left);
+    - the Zefiranty section's ridge and right-hand terrain levels (CV: under the legibility gate);
+    - the Zefiranty rear semicircle, terrace or bay (CV: terrace);
+    - whether the Zefiranty garage projects past the house front (CV: flush);
+    - whether the Muraje entrance/garage wall is set back (CV: flush).
+  - Reference answers were read from the sources by the developer: DEV labels, chosen after the cases were known, not
+    a blind test.
+  - Results:
+    - Claude Haiku 5.5: 20/21 correct, 1 wrong (the semicircle as a bay, on a question with no independent check, so
+      it would have stayed a question), $0.014 in all, 4.7 s mean.
+    - Claude Opus 5.5: 21/21, $0.47, 6.8 s.
+    - On both, 15 answers were confirmed by an independent check: the plan gap a callout must fit (1.05 m); ridge −
+      terrain = the published 9.02 m (+8,55 and −0,47); the printed 200 bound to the garage's projection; the wall band
+      0.83 m behind the kitchen front. None was validated wrong.
+    - The analyzer alone was right on 1 of the 7.
+  - The ridge: the source prints +8,55 (read by both models on every repeat, and with −0,47 consistent with the page's
+    9.02). The model's 8.16 is 0.39 m low (−4.6 %) — the hip at 38° over half the shorter span reaches 8.16 from the
+    eaves the model assumes, so the eave datum, not the pitch, is what is off.
+- **Production adapter (`anthropicVisionReasoner`, 1.1.0):** it sent `temperature: 0` and a forced `tool_choice`, both
+  refused with a 400 by today's models; now it asks for the tool with `auto` and no sampling parameter, and the default
+  model is `claude-opus-5-5`. A prose answer is still refused whole. `VISION_SYSTEM` and `buildVisionPrompt` are exported
+  so a second transport sends the same words.
+- **F11 correction (Zefiranty features, kept on record):** F11 was written as "rounded bay at the rear". The plan draws
+  the semicircle in thin double lines with two sun loungers in it, outside the straight rear wall with its three
+  doors: a terrace. The model was right not to build it. The frozen line stays as written, with this correction
+  beside it.
+- **Regression (full production path from a frozen copy of the analyzer packages; 23 runs, 21 models):**
+  - Models byte-identical to 1319 except three:
+    - Kostrzewy: the door to room 11 is back, the recess runs 5.15..9.16;
+    - Muraje: no slab, railing, floor or returns in the wall's outer half;
+    - Trytomach (regression house): two 0.22 m side "terraces" and six 1.3–1.5 m "returns" standing in 0.22 m side
+      strips are gone. Checked on its attic plan: the built region ends on the 112..132 px side band's axis, so the
+      strip is the wall's outer half, the same artefact as Muraje's.
+  - Pod Miłorzębem and Modrzewnica fail as before.
+  - The source-vision changes (exported prompt, adapter 1.1.0) came after the frozen copy; no run calls a provider.
+  - Every run now carries `program.json` and the compiler's diagnostics: 0 ERRORs everywhere except Aurory (1),
+    Jabłonki (1) and Zefiranty (5), all `OPENING_ABOVE_WALL_TOP`.
+  - Checker: 35/70. Muraje's railing returns to FAIL: 1319's railing stood in the false recess, and the source's French
+    balconies are not read yet.
+  - `regress.py` on 1319 → E12 names exactly the changes above.
+- **No APK in this checkpoint:** the next test delivery (≥ 1320) comes with the Zefiranty garage and roof work. Android
+  UI NOT_VERIFIED; H2 sealed.
+- **Next concrete actions, in order:**
+  1. The Zefiranty garage's front body: trace the outline completion's enclosure test on its two solid corners, and
+     close a side on solid corner ink (counter-case: a wall end beside paper stays open).
+  2. Then the garage as a lower body with its own roof, the east bay, the 5 `OPENING_ABOVE_WALL_TOP` (the attic
+     openings against the knee wall and roof), and the dormers.
+  3. Kostrzewy's 105/210 ring: find a ring whose outline is touched by a leaf and an arc.
+  4. Muraje's set-back entrance and garage wall (a notch under 1.2 m), and its French balconies.

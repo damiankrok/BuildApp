@@ -77,7 +77,10 @@ export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 // DERIVED segment pins nothing; a statement it contradicts is kept as a rejected anchor with its residual.
 // 1.4.0 (EXTERIOR-COMPLETE E7): the gate rule reads a garage's wall behind a lining of cupboards, a doorway through it,
 // a wide mouth's jambs off the ink; a shut garage's edges bound largest-first tiling.
-export const LAYOUT_INFERENCE_VERSION = '1.4.0'
+// 1.5.0 (EXTERIOR-COMPLETE E12): a recess mouth with returns and wall ink at both jambs puts grid lines on the jambs'
+// inner faces where no line lies within a wall's thickness (`jambLines`): the recess's sides follow its drawn returns,
+// not the nearest dimension tick.
+export const LAYOUT_INFERENCE_VERSION = '1.5.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
@@ -2759,7 +2762,11 @@ const outerFaceSlug = (zoneId: string): string => `outer-face-${zoneId}`
  * beyond the body is then read as a zone: a recess with returns in it and a paved terrace floor that are the wall's own
  * poché. A strip is that wall when a long (≥ 2.5 walls), wall-thick (≥ 0.7 of a wall) band lies in it with its two
  * faces on the strip's two edges — each within the band's face window, max(5 px, 0.35 of its thickness), the one
- * `gridLines` claims faces with — over at least `WALL_STRIP_BOUNDS.cover` of the strip's length. Such a strip is read as
+ * `gridLines` claims faces with — over at least `WALL_STRIP_BOUNDS.cover` of the strip's length. E12: or with its outer
+ * face on the strip's outer edge and its inner face past the strip's inner edge — the body cut on the band's axis, the
+ * strip the wall's outer half: on one plan a grid line on the axis at 672.75 px left a 12.25 px strip, under half a wall,
+ * and no zone; at 672 px it left 13 px, a zone, and a recess with returns, a floor, a balcony slab and a railing were
+ * built in the wall's own outer half. Such a strip is read as
  * no recess, no return and no terrace (`isWallStripZone`); its face is named as an unresolved gap (the body stops a
  * wall short of the plan's extent); and a body standing on its back edge, along the stretch the wall ink covers, loses
  * MEASURED across it and names the face (`openFacesOf`). The band must fill the strip: the strip is no deeper than the
@@ -2785,7 +2792,13 @@ export function wallStripsOf(base: PlanReading, envelope: PixelRect): WallStrip[
       if ((b.axis === 'VERTICAL') !== across || b.thickness < wallPx * 0.7 || b.length < wallPx * 2.5) continue
       const [f0, f1] = across ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
       const window = Math.max(5, b.thickness * 0.35)
-      if (Math.abs(f0 - e0) > window || Math.abs(f1 - e1) > window || e1 - e0 - b.thickness > window) continue
+      // E12: the band's outer face on the strip's outer edge, and the band reaching the strip's inner edge — its inner
+      // face on it (the body cut on the wall's inner face), or past it (the body cut on the band's axis, the strip the
+      // wall's outer part); the strip no deeper than the band
+      const outerIsMax = side === 'MAX_X' || side === 'MAX_Z'
+      const [fo, fi, eo, ei] = outerIsMax ? [f1, f0, e1, e0] : [f0, f1, e0, e1]
+      const reachesInner = outerIsMax ? fi <= ei + window : fi >= ei - window
+      if (Math.abs(fo - eo) > window || !reachesInner || e1 - e0 - b.thickness > window) continue
       const [a0, a1] = across ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1]
       if (Math.min(a1, s1) > Math.max(a0, s0)) runs.push([Math.max(a0, s0), Math.min(a1, s1)])
     }

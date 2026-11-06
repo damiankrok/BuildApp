@@ -3104,7 +3104,7 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 ### Cały dom z zewnątrz (STAGE BUILDPLAN EXTERIOR-COMPLETE)
 
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
-- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E11);
+- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E12);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
 - **Ostatnia dostawa testowa: APK 1319** (`0.1319.0-owner`, commit kodu `82878c7`, SHA-256 `98253f3c…e671e277`, ten
   sam podpis; analizator `1d76b4f7…56ab2`, solver 2.27.0, czytnik 1.8.0). Poprzednie: 1318 (`a79bcea`), 1317 (`cf6a8d9`).
@@ -3112,6 +3112,12 @@ Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
   modelu: skala rzutu SUPPORTED, dach kopertowy 38° z krótką kalenicą (8,16 przyjęte; przekrój +8,55 nieczytelny),
   4 okna dachowe w połaciach. Brakuje: garażu z własnym dachem, niższych dachów, lukarn, koszy, kominów.
   **Kostrzewy — regres w 1319** (wnęka ganku, drzwi wejściowe) — przyczyna znana, otwarte.
+- **E12 (po audycie 1319, punkt kontrolny bez APK):** regres Kostrzew naprawiony (boki wnęki z ościeży, drzwi wróciły);
+  w Murajach i Trytomach usunięte „wnęki” w zewnętrznej połowie muru (płyta, balustrada, posadzki, zwroty); każdy
+  przebieg zapisuje `program.json` i diagnostykę kompilatora; `regress.py` widzi utratę i dodatki element po elemencie.
+  Pomoc AI („drugie spojrzenie”, badanie): Haiku 5.5 20/21 za 0,014 $, Opus 5.5 21/21 za 0,47 $ na 7 pytaniach DEV
+  (nie test ślepy); odpowiedź AI to sugestia, faktem staje się tylko po niezależnej kontroli. Zefiranty: przyczyny
+  braków obrysu znalezione (przód garażu, wykusz), poprawka następna.
 - **Bakopy (ujawnione przez OWNER-a, DEV):** dach główny nad garażem i dojściem, skrzydło z dachem poprzecznym,
   kalenica 6,28, jedna brama (E9); od 1319 fałszywy pas attached-2 nazwany i niebudowany (NOT_A_BODY), 0 odmów,
   „płaski dach” OWNER-a nieodtworzony (potrzebna proweniencja przebiegu). Otwarte: przeszklony szczyt skrzydła, przeszklenie tylne 2,9 zamiast 2,3,

@@ -316,7 +316,7 @@ describe('providers', () => {
 describe('the live adapter, exercised against a stubbed transport', () => {
   const clientReturning = (content: Array<Record<string, unknown>>): AnthropicLike => ({ messages: { create: vi.fn(async () => ({ content: content as never, usage: { input_tokens: 10, output_tokens: 20 } })) } })
 
-  it('sends the image and the task schema, forces the tool, and accepts the tool input', async () => {
+  it('sends the image and the task schema, asks for the tool (auto, no sampling parameter: E12), and accepts the tool input', async () => {
     const sent: Array<Record<string, unknown>> = []
     const create = vi.fn(async (body: Record<string, unknown>) => {
       sent.push(body)
@@ -326,8 +326,10 @@ describe('the live adapter, exercised against a stubbed transport', () => {
     const response = await reasoner.analyze(request())
     expect(response.observations).toHaveLength(2)
     const body = sent[0]
-    expect(body.tool_choice).toEqual({ type: 'tool', name: 'record_source_observations' })
-    expect(body.temperature).toBe(0)
+    // E12: today's models refuse a forced tool_choice and any temperature with a 400; a prose answer is still refused below
+    expect(body.tool_choice).toEqual({ type: 'auto' })
+    expect(body.temperature).toBeUndefined()
+    expect((body.tools as Array<{ name: string }>)[0].name).toBe('record_source_observations')
     const content = (body.messages as Array<{ content: Array<Record<string, unknown>> }>)[0].content
     expect(content[0].type).toBe('image')
     expect((content[1].text as string)).toContain(HASH)
