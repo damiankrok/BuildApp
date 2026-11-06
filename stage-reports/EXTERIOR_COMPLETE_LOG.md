@@ -546,3 +546,45 @@ small AI as a helper, on the Claude Code budget.
      openings against the knee wall and roof), and the dormers.
   3. Kostrzewy's 105/210 ring: find a ring whose outline is touched by a leaf and an arc.
   4. Muraje's set-back entrance and garage wall (a notch under 1.2 m), and its French balconies.
+
+
+## E12b — callout rings touched by other ink: one cause behind Kostrzewy's entrance and Zefiranty's garage front
+
+- **FIRST_BAD (the ring reader, `callouts.ts`, metric reader 1.9.0):** a callout ring whose outline is touched by a long
+  line loses the touched arc with the long run the search strips (`stripLongRuns`). The rest was fitted by two smaller
+  circles side by side on the ring's bar, neither of which reads:
+  - Zefiranty's "455/220" under the garage door line (two radius-9 rings at 207 and 216 px);
+  - Kostrzewy's "105/210" beside a door leaf and its arc (radius 9 and 10 at 424 and 442 px).
+  Two callouts never overlap or merge. So two barred rings on one bar row, overlapping or touching, are one ring: the
+  circle about their union, searched a few pixels round it on the original ink, kept when it is inked over three
+  quarters and has its own bar (`mergeSplitRings`). Its reading passes the same gates. Now both are read and accepted
+  by the recogniser ("confident, stable, every glyph read"): 455/220 and 105/210. Test `callouts-split-ring.test.ts`
+  (fails on the old reader: two rings), counter-case: two separate callouts side by side stay two.
+- **FIRST_BAD (the boundary lines, `plan-decomposition.ts`, layout 1.6.0):** read across the garage's front line, the
+  ring's arc and digits with the door line made wall-thick ink over 17 px — a "post" with no wall part — that split the
+  4.57 m door into two blank gaps (1.95 m WALL|POST, 2.13 m POST|WALL), neither an opening; the outline stayed open and
+  the garage's front 2 m read as outside. The boundary lines are now read with every known ring's outline and interior
+  taken out, never where the ink is wall-thick (`withoutCalloutRingInk`). Now: one 4.52 m gap between two walls with
+  "a callout of 455 cm printed over it". Test `callout-ring-ink.test.ts` (ring, bar, digits out; walls and the door
+  line stay; counter-case: a ring printed over a wall leaves the wall whole).
+- **Tried and ruled out on the way:** the solid layer alone (dropping POST parts on a ring) changed nothing — the post
+  was ink density across the line, not a solid part.
+- **Still open on both houses (the next causes, recorded):**
+  - Kostrzewy: the 105 now carries its printed size and height but is still a window — the outward-leaf test fails on
+    a leaf whose tip ends on the porch mouth's line.
+  - Zefiranty: the 4.52 m garage gap is WEAK (only a dashed overhead-door line across it): "decided by what lies
+    behind it". But what lies behind is cut by the house box at the house's front line, so the garage's front part is
+    2 m deep and fails the vehicle-depth test of an open garage mouth. The completion's vehicle-door closure also caps
+    a vehicle door at 2.2–3.2 m, which excludes a two-car door (4.55 m printed).
+  - Next: measure a mouth's depth through the box cells its space continues into, and size the vehicle-door cap by
+    the printed callout where one agrees. Both with counter-cases (a terrace glazing, a carport).
+- **Regression (23 runs) — not landed:** with more rings read whole, 13 of 21 models change. They are not only the two
+  targets: many 1.5–1.8 m openings change kind from window to door once their ".../220" height is read:
+  - Sasanki rear ×2, Azalie ×2, Miniaturka, Muraje upper front, Aurory upper ×3 (its compiler ERRORs 1 → 4),
+    Trytomach upper ×3;
+  - window/door swaps in Willa Maja.
+  Several are probably right (French doors and terrace doors whose height callout was unread), but none is verified
+  against its source yet, and the swaps look wrong. A change this broad is not landed on trust. The patch is kept in the
+  repository as `research/exterior-complete/e12b-callout-rings.patch` (it applies to `9eda430`, tests included); the
+  runs are in the private work directory. Next concrete action: verify each changed opening against its plan and
+  elevation (`regress.py` lists them), fix what the swaps show, then land with the vehicle-mouth rules above.

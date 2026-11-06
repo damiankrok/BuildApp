@@ -263,3 +263,9 @@ próby na żywo i ograniczenia.
   sprawdzone na rzucie poddasza). Sprawdzarka 35/70 (balustrada Murajów wraca do FAIL). Każdy przebieg ma teraz
   `program.json` i diagnostykę kompilatora: błędy tylko Aurory (1), Jabłonki (1), Zefiranty (5). Bez APK w tym punkcie
   kontrolnym — następna dostawa testowa (≥ 1320) razem z garażem i dachem Zefirantów.
+- **E12b (nie wdrożone, łata w repozytorium):** jedna przyczyna wejścia Kostrzew i przodu garażu Zefirantów — kółko
+  opisu dotknięte linią (drzwi garażu, skrzydło drzwi) było znajdowane jako dwa małe fragmenty i nieczytane, a jego
+  atrament na linii ściany udawał słup. Po scaleniu kółek oba odczyty przechodzą bramki („455/220”, „105/210”), a brama
+  garażu jest jedną luką 4,52 m z podpisem 455. Regresja pokazała jednak szeroki skutek (13 z 21 modeli: okna 1,5–1,8 m
+  zmieniają się w drzwi po odczytaniu wysokości 220, zamiany w Willi Mai, błędy Aurory 1 → 4). Bez sprawdzenia każdej
+  zmiany ze źródłem nie wdrażam; łata `research/exterior-complete/e12b-callout-rings.patch` czeka na weryfikację.
