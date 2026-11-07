@@ -219,7 +219,12 @@ import type { ApproximateRidge } from './roof-datum.js'
 // convention is named (`ridge-axis.ts`); a door leaf drawn up to a sidelight's width short of its gap is the gap's own
 // leaf (`doorLeafFound`); the bounded reconciliation reads no opening height on a view whose opening heights were
 // refused, and never lifts a door's sill off its floor (`verify.ts`)
-export const SOLVER_V2_VERSION = '2.29.0' as const
+// 2.30.0 (v3.46): a view's heights are re-anchored on the main roof's own line — the lowest band of the top residuals
+// holding a fair share of the columns, since whatever stands behind or on a roof only raises the top a walk from the sky
+// finds (`topLineOffset`); a view whose vertical registration was refused is read only through that anchor, and gives no
+// reading without it (a refused registration is evidence of neither a flat nor a pitched roof); an attached roof whose
+// views see a pitched top they cannot settle is built by convention with that observation kept as an unresolved `form`
+export const SOLVER_V2_VERSION = '2.30.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -2040,6 +2045,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const m = { ...whole, ...rectAt(whole, Math.max(...whole.storeys)) }
     // The layout took this body's roof as flat by convention: the plans cannot
     // say otherwise. The elevations can, where they see the body against the sky.
+    // v3.46: what the views saw when they could not settle the form (a pitched top whose height they cannot confirm):
+    // kept on the roof built by convention, as an unresolved observation, not dropped.
+    let unsettledForm: string | undefined
     if (views.length > 0) {
       const mainWallTop = levelOf(topStorey)?.wallTop
       const stated = mainRoof && mainRoof.authority !== 'CONVENTION' ? mainRoof.pitchDeg : undefined
@@ -2047,7 +2055,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const occluders = [...masses.filter((x) => x.id !== m.id), ...(mainRoof ? [mainRoof.footprint] : [])]
       // N8-01: a body whose top storey is the main body's top storey may carry its roof on knee walls, as the main does
       const sharesTop = Math.max(...whole.storeys) === topStorey && topStorey > 0
-      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, debug: options.debug, ...(sharesTop ? { topStoreyFloorY: l.elevation } : {}) })
+      const verticalRefused = new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f)))
+      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, verticalRefused, debug: options.debug, ...(sharesTop ? { topStoreyFloorY: l.elevation } : {}) })
       options.debug?.(`attached roof form ${m.id} (${m.x0},${m.z0}..${m.x1},${m.z1}): ${form.kind}: ${form.why}`)
       step({ stage: 'roof-details', what: `the form of the roof over ${m.id}, read on the elevations`, method: 'DISCRETE_SELECTION', detail: `${form.kind}: ${form.why}${form.readings.length > 0 ? ` [${form.readings.map((r) => `${r.side.toLowerCase()} ${r.profile.toLowerCase()} ${r.riseM.toFixed(2)} m over ${r.samples} columns`).join('; ')}]` : ''}`, inputs: views.length, outputs: form.readings.length })
       // EXTERIOR-COMPLETE (Bakopy): the main roof runs on over the body: its footprint is carried over it, and the body
@@ -2057,6 +2066,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         mainRoof = { ...mainRoof, footprint: { x0: Math.min(mainRoof.footprint.x0, f.x0), x1: Math.max(mainRoof.footprint.x1, f.x1), z0: Math.min(mainRoof.footprint.z0, f.z0), z1: Math.max(mainRoof.footprint.z1, f.z1) }, coversZonesWhy: `${mainRoof.coversZonesWhy}; it runs on over ${m.id}: ${form.why}` }
         relate('SUPPORTS', m.featureId, mainRoof.featureId, `the main roof runs on over ${m.id}`)
         continue
+      }
+      if (form.kind === 'UNREAD' && form.readings.some((r) => r.profile === 'LEVEL' || r.profile === 'PEAKED')) {
+        unsettledForm = `the views see a pitched top over ${m.id} they cannot settle (${form.why}); the flat roof here is the convention, not what they show`
+        gap({ what: `the form of the roof over ${m.id}`, reason: unsettledForm, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       }
       if (form.kind === 'GABLE') {
         const eaveY = form.eaveY ?? round6(l.wallTop + buildUp)
@@ -2105,7 +2118,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const footprint = { x0: m.x0, x1: m.x1, z0: projects && zoneInFront ? zoneInFront.mouthAt : m.z0, z1: m.z1 }
     const sids = sectionFrame && reading ? [sighting(sectionFrame, `flat roof slab over ${m.id}`, reading.confidence)] : []
     if (projects && topPlan) sids.push(sighting(topPlan.plan.frame, `roof outline of ${m.id} reaching the zone`, 0.7))
-    const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sids, reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', reading ? reading.why : 'no section draws this roof; its slab is taken at the storey top', { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: reading ? [] : ['slabTopY'], printed: !!reading })
+    const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sids, reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', `${reading ? reading.why : 'no section draws this roof; its slab is taken at the storey top'}${unsettledForm ? `; ${unsettledForm}` : ''}`, { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: [...(reading ? [] : ['slabTopY']), ...(unsettledForm ? ['form'] : [])], printed: !!reading })
     relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
     attachedRoofs.push({ massId: m.id, reading, slabTopY, slabSoffitY, parapetTopY: reading?.parapetTopY, footprint, projectsOverZone: projects, featureId, provenance: reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
     if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the attached roof was read at', stage: 'METRIC_SOLVE' })

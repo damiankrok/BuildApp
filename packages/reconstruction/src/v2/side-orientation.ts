@@ -100,17 +100,47 @@ export function scoreOrientation(view: ElevationFrameV2, raster: Raster, profile
   return { samples: errors.length, medianErrorM: errors.length === 0 ? Number.POSITIVE_INFINITY : round6(medianOf(errors)) }
 }
 
+/** v3.46: residuals within this band (m) of the lowest one taken are one line drawn in the picture. */
+export const TOP_LINE_BAND_M = 0.3
+/** v3.46: the share of the columns read (at least `TOP_LINE_MIN_COLUMNS`) that one line must hold to be the roof's own. */
+export const TOP_LINE_MIN_SHARE = 0.3
+export const TOP_LINE_MIN_COLUMNS = 6
+
+/**
+ * v3.46: the offset of the roof's own line among a profile's residuals. A walk down from the sky stops on the first
+ * solid run, so whatever stands behind or on the roof — a tree crown the background model did not take, a chimney, a
+ * higher body further back — can only put the read top ABOVE the roof's line, never below it. The roof's line is then
+ * the lowest band of residuals that holds a fair share of the columns, and the offset is that band's median. With no
+ * occluder the band is the whole set and the result is the plain median. Undefined when no band holds enough columns.
+ *
+ * Found on a development elevation: crowns behind the main gable's slope read as solid in half its columns, +0.5 to
+ * +1.1 m over the slope, and the plain median (+0.73 m) moved every height on the view down by that much — the attached
+ * body's roof then read 0.8 m short of its stated pitch and was left unread (built flat by convention).
+ */
+export function topLineOffset(residuals: readonly number[]): { offsetM: number; support: number } | undefined {
+  if (residuals.length < 10) return undefined
+  const s = [...residuals].sort((p, q) => p - q)
+  const need = Math.max(TOP_LINE_MIN_COLUMNS, Math.ceil(TOP_LINE_MIN_SHARE * s.length))
+  for (let i = 0; i + need <= s.length; i += 1) {
+    let j = i
+    while (j + 1 < s.length && s[j + 1] - s[i] <= TOP_LINE_BAND_M) j += 1
+    if (j - i + 1 >= need) return { offsetM: round6(medianOf(s.slice(i, j + 1))), support: j - i + 1 }
+  }
+  return undefined
+}
+
 /**
  * How far this view's heights sit above the main roof's own top, as the
- * median over the roof's run: the registration puts the silhouette's top on
- * the ridge datum, and where the measured outline clipped a narrow apex every
- * height read on the view is lifted by the same amount. Undefined when too
- * few columns can be read.
+ * offset of the roof's own line over its run (`topLineOffset`): the
+ * registration puts the silhouette's top on the ridge datum, and where the
+ * measured outline clipped a narrow apex every height read on the view is
+ * lifted by the same amount. Undefined when too few columns can be read or no
+ * line holds enough of them.
  */
-export function topOffset(view: ElevationFrameV2, raster: Raster, profile: SideProfile, mask: Mask): { offsetM: number; samples: number } | undefined {
+export function topOffset(view: ElevationFrameV2, raster: Raster, profile: SideProfile, mask: Mask): { offsetM: number; samples: number; support: number } | undefined {
   const r = topResiduals(view, raster, profile, mask)
-  if (r.length < 10) return undefined
-  return { offsetM: round6(medianOf(r)), samples: r.length }
+  const line = topLineOffset(r)
+  return line ? { offsetM: line.offsetM, samples: r.length, support: line.support } : undefined
 }
 
 /** How much better, in median metres, a view must fit mirrored before it counts as preferring it. */

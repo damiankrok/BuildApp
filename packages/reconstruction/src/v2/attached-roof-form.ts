@@ -106,6 +106,11 @@ export type AttachedRoofFormInput = {
    * may then stand on knee walls under the main ridge, its eaves below the walls' head, as the main roof's do.
    */
   topStoreyFloorY?: number
+  /**
+   * v3.46: the views whose vertical registration was refused (their ground lands off the printed terrain): heights on
+   * them are read only through an anchor in the same picture (the main roof's own line), never through the registration.
+   */
+  verticalRefused?: ReadonlySet<string>
   debug?: (line: string) => void
 }
 
@@ -156,8 +161,16 @@ export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: E
       // A view that disagrees with the main roof by more than a storey's slab is not registered well enough to read.
       if (Math.abs(found.offsetM) > 1.0) return undefined
       offset = found.offsetM
-      anchored = `, heights re-anchored by ${(-offset).toFixed(2)} m on the main roof's top over ${found.samples} columns`
+      anchored = `, heights re-anchored by ${(-offset).toFixed(2)} m on the main roof's own line (${found.support} of ${found.samples} columns)`
     }
+  }
+  // v3.46: a view whose vertical registration was refused (its ground lands off the printed terrain) measures nothing in
+  // metres through that registration. Re-anchored on the main roof's own line in the same picture it can still measure;
+  // without that anchor it gives no reading here — neither a flat top nor a pitched one: a refused registration is not
+  // evidence of either.
+  if (!anchored && input.verticalRefused?.has(view.registration.frameId)) {
+    input.debug?.(`body top on the ${view.side.toLowerCase()} view (${view.registration.frameId}): its heights were refused against the printed terrain and no main roof line anchors them in the picture: not read`)
+    return undefined
   }
   const yAt = (row: number): number => view.yOf(row) - offset
   // EXTERIOR-COMPLETE (Bakopy): trees behind the body and the sky seen through them are background too
