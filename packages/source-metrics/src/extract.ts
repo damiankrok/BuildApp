@@ -55,7 +55,7 @@ import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from './external-levels.js'
 import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
-import { angleLabels, edgeSlope, judgeAngles, MIN_EDGE_PX, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
+import { angleLabels, judgeAngles, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
 import type { RoofEdge } from './section-angles.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
@@ -1063,14 +1063,13 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     }
 
     // --- v3.45: the section's roof pitch labels, read along their slope and admitted by it ---
-    // A template angle stands only where a long roof edge the section measured is drawn at it (a section is drawn at
-    // true aspect: the drawn slope is the pitch); the recogniser reads the labels along the slope, and what the slope
-    // admits replaces the template's reading of the same label.
+    // The recogniser reads the labels along each measured roof edge; a reading stands only where it equals a drawn
+    // slope beside it (a section is drawn at true aspect: the drawn slope is the pitch), and it replaces the template's
+    // reading of the same label.
     if (plane === 'SECTION_HY') {
       const edges: RoofEdge[] = observations
         .filter((o) => o.kind === 'ROOF_EDGE' && o.pixelGeometry.type === 'SEGMENT')
         .map((o) => ({ id: o.id, a: (o.pixelGeometry as { a: PixelPoint }).a, b: (o.pixelGeometry as { b: PixelPoint }).b }))
-      const slopes = edges.map(edgeSlope).filter((e) => e.length >= MIN_EDGE_PX && e.deg >= 10 && e.deg <= 80).map((e) => e.deg)
       let admitted: Array<{ value: number; box: PixelRect }> = []
       if (recogniser && edges.length > 0) {
         const { labels, crops } = angleLabels(toGray(raster), edges)
@@ -1105,18 +1104,21 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           admitted = admitted.filter((a, i) => admitted.findIndex((b) => b.value === a.value && Math.min(a.box.x1, b.box.x1) > Math.max(a.box.x0, b.box.x0) && Math.min(a.box.y1, b.box.y1) > Math.max(a.box.y0, b.box.y0)) === i)
         }
       }
+      // One value per label: a template angle on the label the recogniser read along its slope, and the slope admitted
+      // as another value, is that label misread. A template angle the slope does not carry but nothing re-read stays:
+      // a printed pitch that contradicts the drawing is a conflict the reconstruction reports (the printed number is not
+      // quietly replaced), not a reading this layer drops.
       for (let i = evidence.length - 1; i >= 0; i -= 1) {
         const e = evidence[i]
         if (e.frameId !== frame.id || e.kind !== 'ANGLE' || e.provenance.extractor === 'RECOGNISER_VALIDATED') continue
-        const onSlope = slopes.some((d) => Math.abs(d - e.value) <= SLOPE_TOLERANCE_DEG)
         const b = e.textBox
         const sameLabel = admitted.filter((a) => !!b && Math.min(a.box.x1, b.x1) > Math.max(a.box.x0, b.x0) && Math.min(a.box.y1, b.y1) > Math.max(a.box.y0, b.y0))
-        if (onSlope && sameLabel.length === 0) continue
+        if (sameLabel.length === 0 || sameLabel.every((a) => a.value === e.value)) continue
         unresolved.push({
           id: stableId('gap', 'angle-refused', { frameId: frame.id, evidenceId: e.id }),
           what: `the template's reading "${e.rawText ?? e.value}" of an angle on ${frame.assetId}`,
           frameId: frame.id,
-          reason: onSlope ? `the same label the recogniser read along its slope and the slope admitted as ${sameLabel.map((a) => `${a.value}°`).join(', ')}: one value per label` : `no long roof edge on the section is drawn at ${e.value}° (${slopes.map((d) => d.toFixed(1)).join(', ') || 'none measured'}): the drawing refuses it`,
+          reason: `the same label the recogniser read along its slope and the slope admitted as ${sameLabel.map((a) => `${a.value}°`).join(', ')}: one value per label`,
           status: 'AMBIGUOUS',
           ocrTokenIds: e.ocrTokenIds,
         })

@@ -59,7 +59,8 @@ export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
 /** 1.4.0 (005I): labels meet chains through the global assignment (`assignLabels`), on measurement chains. */
 /** 1.5.0 (EXTERIOR-COMPLETE): a vertical chain nothing decided takes the sheet's way up, through the other axis's scale (rule vii). */
 /** 1.6.0 (EXTERIOR-COMPLETE, Zefiranty): two tokens one pass read apart are two inks; no third token joins their text regions. */
-export const METRIC_SOLVER_VERSION = '1.6.0' as const
+/** 1.7.0 (v3.45): of the readings of one span on twin lines the best-read counts, then the heaviest. */
+export const METRIC_SOLVER_VERSION = '1.7.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -942,7 +943,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     return best
   }
   const statementOf = new Map<string, number>()
-  for (const w of bounded) {
+  // v3.45: of the readings of one span on twin lines the BEST-READ counts, then the heaviest: two readers agreeing on a
+  // value (CLEAR) outrank a value the two readers dispute (AMBIGUOUS), whatever the weights. Taken by weight alone, a
+  // disputed reading of a part chain (648 read 608, the 2 cm part beside it too short to tick) took the span from the
+  // overall 650 both readers agreed on, was then contested away by its own rival, and the plan was left with no scale.
+  const classRank = (w: Obs): number => (w.ocrClass === 'CLEAR' ? 4 : w.ocrClass === 'SUPPORTED' ? 3 : w.ocrClass === undefined ? 2 : w.ocrClass === 'AMBIGUOUS' ? 1 : 0)
+  for (const w of [...bounded].sort((a, b) => classRank(b) - classRank(a))) {
     if (!w.decisive) continue
     const [i, j] = [markIndex(w.chain, w.record.fromPx), markIndex(w.chain, w.record.toPx)]
     const key = i >= 0 && j >= 0 ? `${twins.get(w.chain) ?? w.chain}|m${i}|m${j}` : `${twins.get(w.chain) ?? w.chain}|${Math.round(w.record.fromPx)}|${Math.round(w.record.toPx)}`

@@ -553,3 +553,46 @@ describe('§18 one dimension drawn on twin lines is one statement, however its m
     expect(['STRONG', 'SUPPORTED']).not.toContain(s.confidence)
   })
 })
+
+/**
+ * v3.45: one span drawn twice — a part chain (648 | 2, its 2 cm part too short to tick) and the overall under it (650),
+ * the same two marks on parallel lines. The part's label is a coin toss read 608 (its 648 a close runner-up), the
+ * overall's is CLEAR. Of the two readings of the one span the better-read counts, whatever the weights: the CLEAR 650
+ * on X and a CLEAR overall on Y corroborate one scale (2.44 cm/px). Taken by weight, the coin toss counted, was
+ * contested away by its own runner-up, and the plan was left with no scale (a development house of the corpus).
+ */
+describe('v3.45 one span on twin lines: the better-read reading counts', () => {
+  const page = (overallClass: 'CLEAR' | 'AMBIGUOUS') => {
+    const chains = [hChain(740, [161, 426]), hChain(770, [161, 426]), vChain(120, [158, 677])]
+    // the template was surer of the coin toss than of the overall (its weight is the heavier of the two)
+    const part = { ...hLabel('608', 740, 161, 426, { 1: [{ char: '4', ratio: 0.93 }] }), confidence: 0.9 }
+    const overall = hLabel('650', 770, 161, 426)
+    const height = vLabel('1270', 120, 158, 677)
+    const lattices = held([
+      [part, lattice(part, 'AMBIGUOUS', [['608', 0.5], ['648', 0.46]])],
+      [overall, overallClass === 'CLEAR' ? lattice(overall, 'CLEAR', [['650', 0.9], ['630', 0.05]]) : lattice(overall, 'AMBIGUOUS', [['650', 0.5], ['630', 0.46]])],
+      [height, lattice(height, 'CLEAR', [['1270', 0.9], ['1770', 0.05]])],
+    ])
+    return { chains, tokens: [part, overall, height], lattices }
+  }
+  it('the CLEAR overall, not the coin toss, states the span: a scale on both axes, read near 2.44 cm/px', () => {
+    const { chains, tokens, lattices } = page('CLEAR')
+    const m = solve(chains, tokens, lattices)
+    expect(m.solution.relation).not.toBe('NO_SCALE')
+    expect(m.solution.cmPerPixelX ?? 0).toBeCloseTo(2.45, 1)
+    // the scale is stated by two independent readings on both axes (the 1.6.0 rule: one, on Y, WEAK) …
+    const top = m.solution.hypotheses[0]
+    expect(top.cmPerPixel).toBeCloseTo(2.45, 1)
+    expect(top.independentGroups).toBe(2)
+    expect(top.independentAxes).toEqual(['X', 'Y'])
+    expect(m.solution.confidence).toBe('STRONG')
+    // … and the coin toss's 2.29 cm/px is stated by no counted reading at all
+    expect(m.solution.hypotheses.find((h) => Math.abs(h.cmPerPixel - 2.29) < 0.01)?.independentGroups ?? 0).toBe(0)
+    expectNonCircular(m.observations, lattices, m)
+  })
+  it('counter: when both readings of the span are coin tosses nothing is promoted by the rule', () => {
+    const { chains, tokens, lattices } = page('AMBIGUOUS')
+    const m = solve(chains, tokens, lattices)
+    expect(['INCONCLUSIVE', 'WEAK']).toContain(m.solution.confidence)
+  })
+})
