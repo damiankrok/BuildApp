@@ -1,0 +1,102 @@
+{"_doc": "ground-plan opening callouts, read from the 853 px dimensioned ground plan (the __11815 edition; the __11915 edition has the same wall ink pixel for pixel). wall = side of the IMAGE (TOP/BOTTOM/LEFT/RIGHT), gap = [from,to] px along that wall, ring = [cx,cy] px. kind: WINDOW (sill drawn), DOOR (leaf arc drawn), GARAGE_DOOR, GLAZING_TO_FLOOR (no leaf drawn, to the floor: the plan does not decide door vs fixed/sliding glass — kind not scored except it must not be a garage door)."}
+{"project": "projekt-dom-w-balsamowcach-20-g2a-m250297bb3f46c", "blind": false, "note": "annotated from the image, but the annotator had seen this project's model opening list: non-blind, scored as DEV", "callouts": [
+ {"text": "400/230", "ring": [267, 175], "wall": "TOP", "gap": [183, 351], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "180/230", "ring": [442, 175], "wall": "TOP", "gap": [405, 480], "kind": "DOOR"},
+ {"text": "100/230", "ring": [603, 175], "wall": "TOP", "gap": [580, 623], "kind": "DOOR"},
+ {"text": "100/230", "ring": [722, 175], "wall": "TOP", "gap": [700, 742], "kind": "DOOR"},
+ {"text": "230/230", "ring": [122, 371], "wall": "LEFT", "gap": [323, 420], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "200/120", "ring": [813, 389], "wall": "RIGHT", "gap": [347, 430], "kind": "WINDOW"},
+ {"text": "220/140", "ring": [231, 603], "wall": "BOTTOM", "gap": [187, 277], "kind": "WINDOW"},
+ {"text": "105/210", "ring": [387, 603], "wall": "BOTTOM", "gap": [367, 410], "kind": "DOOR"},
+ {"text": "90/210", "ring": [457, 603], "wall": "BOTTOM", "gap": [437, 477], "kind": "DOOR"},
+ {"text": "500/225", "ring": [650, 603], "wall": "BOTTOM", "gap": [547, 753], "kind": "GARAGE_DOOR"}]}
+{"project": "projekt-dom-w-bukszpanach-g-mdad25e7a8408c", "blind": true, "callouts": [
+ {"text": "360/230", "ring": [477, 200], "wall": "TOP", "gap": [380, 577], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "120/140", "ring": [109, 422], "wall": "LEFT", "gap": [387, 457], "kind": "WINDOW"},
+ {"text": "160/230", "ring": [682, 427], "wall": "RIGHT", "gap": [383, 470], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "120/140", "ring": [682, 573], "wall": "RIGHT", "gap": [545, 615], "kind": "WINDOW", "note": "the gap's lower end at the corner is uncertain on the plan"},
+ {"text": "250/225", "ring": [247, 651], "wall": "BOTTOM", "gap": [179, 317], "kind": "GARAGE_DOOR"},
+ {"text": "105/210", "ring": [434, 651], "wall": "BOTTOM", "gap": [407, 463], "kind": "DOOR"},
+ {"text": "180/140", "ring": [593, 651], "wall": "BOTTOM", "gap": [540, 640], "kind": "WINDOW"}]}
+{"project": "projekt-dom-w-renklodach-39-g2e-m45128ec88f20c", "blind": true, "callouts": [
+ {"text": "260/150", "ring": [410, 55], "wall": "TOP", "gap": [367, 453], "kind": "WINDOW"},
+ {"text": "260/150", "ring": [538, 55], "wall": "TOP", "gap": [497, 583], "kind": "WINDOW"},
+ {"text": "330/240", "ring": [263, 184], "wall": "TOP", "gap": [210, 319], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "100/240", "ring": [305, 179], "wall": "LEFT", "gap": [163, 197], "kind": "DOOR"},
+ {"text": "200/240", "ring": [175, 270], "wall": "LEFT", "gap": [237, 303], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "240/240", "ring": [175, 375], "wall": "LEFT", "gap": [337, 413], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "112/150", "ring": [169, 549], "wall": "LEFT", "gap": [527, 572], "kind": "WINDOW"},
+ {"text": "213/150", "ring": [232, 597], "wall": "BOTTOM", "gap": [200, 273], "kind": "WINDOW"},
+ {"text": "150/210", "ring": [388, 595], "wall": "BOTTOM", "gap": [365, 413], "kind": "DOOR"},
+ {"text": "80/210", "ring": [388, 652], "wall": "LEFT", "gap": [632, 668], "kind": "DOOR", "note": "door from the porch into the garage, in the garage's left-facing wall"},
+ {"text": "500/225", "ring": [532, 723], "wall": "BOTTOM", "gap": [447, 613], "kind": "GARAGE_DOOR"},
+ {"text": "100/130", "ring": [649, 250], "wall": "RIGHT", "gap": [230, 267], "kind": "WINDOW"},
+ {"text": "190/130", "ring": [649, 341], "wall": "RIGHT", "gap": [307, 373], "kind": "WINDOW"},
+ {"text": "105/210", "ring": [647, 439], "wall": "RIGHT", "gap": [423, 457], "kind": "DOOR"}]}
+{"project": "projekt-dom-w-santanach-m32f23fb4152fe", "blind": true, "callouts": [
+ {"text": "240/150", "ring": [487, 100], "wall": "TOP", "gap": [427, 533], "kind": "WINDOW"},
+ {"text": "240/150", "ring": [655, 100], "wall": "TOP", "gap": [600, 710], "kind": "WINDOW"},
+ {"text": "400/230", "ring": [279, 172], "wall": "TOP", "gap": [190, 367], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "300/230", "ring": [127, 399], "wall": "LEFT", "gap": [331, 465], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "90/230", "ring": [781, 323], "wall": "RIGHT", "gap": [300, 343], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "90/230", "ring": [781, 418], "wall": "RIGHT", "gap": [397, 440], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "105/210", "ring": [415, 600], "wall": "BOTTOM", "gap": [393, 440], "kind": "DOOR"},
+ {"text": "60/210", "ring": [499, 603], "wall": "BOTTOM", "gap": [485, 513], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "240/140", "ring": [260, 643], "wall": "BOTTOM", "gap": [203, 313], "kind": "WINDOW"},
+ {"text": "240/140", "ring": [641, 643], "wall": "BOTTOM", "gap": [587, 697], "kind": "WINDOW"}]}
+{"project": "projekt-dom-w-skalnicach-m91a28365299b4", "blind": true, "callouts": [
+ {"text": "420/230", "ring": [264, 179], "wall": "TOP", "gap": [172, 357], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "150/230", "ring": [472, 179], "wall": "TOP", "gap": [440, 505], "kind": "DOOR"},
+ {"text": "150/230", "ring": [595, 179], "wall": "TOP", "gap": [565, 630], "kind": "DOOR"},
+ {"text": "150/230", "ring": [721, 179], "wall": "TOP", "gap": [690, 755], "kind": "DOOR"},
+ {"text": "130/230", "ring": [86, 417], "wall": "LEFT", "gap": [387, 445], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "105/210", "ring": [383, 629], "wall": "BOTTOM", "gap": [360, 407], "kind": "DOOR"},
+ {"text": "240/140", "ring": [205, 655], "wall": "BOTTOM", "gap": [153, 259], "kind": "WINDOW"},
+ {"text": "100/140", "ring": [487, 655], "wall": "BOTTOM", "gap": [465, 510], "kind": "WINDOW"},
+ {"text": "100/140", "ring": [587, 655], "wall": "BOTTOM", "gap": [565, 610], "kind": "WINDOW"},
+ {"text": "240/140", "ring": [712, 655], "wall": "BOTTOM", "gap": [660, 767], "kind": "WINDOW"}]}
+{"project": "projekt-dom-w-wisteriach-14-m4ac26d378b379", "blind": true, "callouts": [
+ {"text": "300/230", "ring": [269, 200], "wall": "TOP", "gap": [191, 350], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "180/140", "ring": [611, 200], "wall": "TOP", "gap": [563, 660], "kind": "WINDOW"},
+ {"text": "190/230", "ring": [111, 451], "wall": "LEFT", "gap": [400, 505], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "80/140", "ring": [742, 451], "wall": "RIGHT", "gap": [427, 475], "kind": "WINDOW"},
+ {"text": "180/120", "ring": [408, 655], "wall": "BOTTOM", "gap": [363, 459], "kind": "WINDOW"},
+ {"text": "105/210", "ring": [531, 655], "wall": "BOTTOM", "gap": [503, 560], "kind": "DOOR"},
+ {"text": "200/230", "ring": [241, 703], "wall": "BOTTOM", "gap": [189, 297], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "80/140", "ring": [644, 703], "wall": "BOTTOM", "gap": [623, 667], "kind": "WINDOW"}]}
+{"project": "projekt-willa-eliza-4-g2-md3321e3aee92e", "blind": true, "note": "glazing drawn between pillars on two sides; several gap ends are uncertain to about 5 px", "callouts": [
+ {"text": "110/230", "ring": [389, 89], "wall": "TOP", "gap": [370, 410], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "150/150", "ring": [620, 89], "wall": "TOP", "gap": [590, 650], "kind": "WINDOW"},
+ {"text": "120/150", "ring": [672, 135], "wall": "RIGHT", "gap": [107, 160], "kind": "WINDOW"},
+ {"text": "210/230", "ring": [337, 161], "wall": "LEFT", "gap": [123, 200], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "200/230", "ring": [315, 203], "wall": "TOP", "gap": [277, 351], "kind": "DOOR"},
+ {"text": "395/230", "ring": [246, 308], "wall": "LEFT", "gap": [233, 383], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "120/140", "ring": [281, 491], "wall": "LEFT", "gap": [467, 517], "kind": "WINDOW"},
+ {"text": "180/140", "ring": [339, 539], "wall": "BOTTOM", "gap": [305, 373], "kind": "WINDOW"},
+ {"text": "145/220", "ring": [493, 503], "wall": "BOTTOM", "gap": [460, 520], "kind": "DOOR"},
+ {"text": "180/70", "ring": [510, 581], "wall": "LEFT", "gap": [547, 613], "kind": "WINDOW"},
+ {"text": "485/229", "ring": [655, 660], "wall": "BOTTOM", "gap": [563, 745], "kind": "GARAGE_DOOR"},
+ {"text": "180/70", "ring": [799, 371], "wall": "RIGHT", "gap": [337, 403], "kind": "WINDOW"},
+ {"text": "180/70", "ring": [799, 465], "wall": "RIGHT", "gap": [430, 497], "kind": "WINDOW"},
+ {"text": "180/70", "ring": [799, 560], "wall": "RIGHT", "gap": [527, 593], "kind": "WINDOW"},
+ {"text": "90/150", "ring": [673, 265], "wall": "RIGHT", "gap": [247, 283], "kind": "WINDOW"},
+ {"text": "100/210", "ring": [724, 271], "wall": "TOP", "gap": [707, 743], "kind": "DOOR"}]}
+{"project": "projekt-willa-julia-17-m69e25ee4f256e", "blind": true, "callouts": [
+ {"text": "490/235", "ring": [371, 113], "wall": "TOP", "gap": [253, 488], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "200/235", "ring": [156, 241], "wall": "LEFT", "gap": [193, 289], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "140/140", "ring": [156, 421], "wall": "LEFT", "gap": [385, 455], "kind": "WINDOW"},
+ {"text": "100/140", "ring": [150, 658], "wall": "LEFT", "gap": [633, 680], "kind": "WINDOW"},
+ {"text": "250/140", "ring": [251, 719], "wall": "BOTTOM", "gap": [193, 313], "kind": "WINDOW"},
+ {"text": "105/210", "ring": [404, 675], "wall": "BOTTOM", "gap": [380, 430], "kind": "DOOR"},
+ {"text": "85/210", "ring": [469, 675], "wall": "BOTTOM", "gap": [448, 490], "kind": "DOOR"},
+ {"text": "80/235", "ring": [584, 521], "wall": "RIGHT", "gap": [500, 539], "kind": "GLAZING_TO_FLOOR"}]}
+{"project": "projekt-willa-malika-g2ae-m79329af34f4be", "blind": true, "callouts": [
+ {"text": "390/240", "ring": [237, 219], "wall": "TOP", "gap": [150, 300], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "230/240", "ring": [393, 219], "wall": "TOP", "gap": [351, 437], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "345/546", "ring": [116, 473], "wall": "LEFT", "gap": [410, 533], "kind": "GLAZING_TO_FLOOR", "note": "two storeys tall: 546 cm"},
+ {"text": "90/210", "ring": [473, 442], "wall": "RIGHT", "gap": [419, 450], "kind": "DOOR"},
+ {"text": "100/223", "ring": [507, 442], "wall": "TOP", "gap": [493, 527], "kind": "DOOR", "note": "the garage's door to the outside, in the garage's top wall"},
+ {"text": "280/240", "ring": [221, 715], "wall": "BOTTOM", "gap": [172, 270], "kind": "GLAZING_TO_FLOOR"},
+ {"text": "180/220", "ring": [327, 713], "wall": "BOTTOM", "gap": [300, 357], "kind": "DOOR"},
+ {"text": "500/225", "ring": [559, 713], "wall": "BOTTOM", "gap": [470, 647], "kind": "GARAGE_DOOR"}]}
+{"project": "projekt-willa-ofelia-2-g2e-me962948ba7d3f", "blind": true, "legible": false, "note": "14 callout rings about 16 px across with glyphs about 5 px tall on the 853 px plan: below the 10 px legibility gate; read by eye they are not certain (e.g. 322 or 320), so they are counted (N=14, illegible) and not annotated one by one", "illegibleCount": 14, "callouts": []}

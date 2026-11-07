@@ -14,6 +14,14 @@
   "scoring/score_content.py": "545e61a9c0f0120e4e210f4f00d9d076d510b24bf3da7768902c253f105cddd9",
   "scoring/score_levels.py": "f835bf03b391d1f7332623913057f0a4b80586ec8b0b690af7da7575402323bc",
   "scoring/score_views.py": "cf9e8e7a2281f85f2e4ac4e2149274da6233bc7342bd0f8a149658644c20c559",
-  "scoring/views.py": "9504b73346aac25dd0afbf811dad29cc3327dd26b1c4a3354bf9c972cc5d86cb"
- }
+  "scoring/views.py": "9504b73346aac25dd0afbf811dad29cc3327dd26b1c4a3354bf9c972cc5d86cb",
+  "annotations/callouts-eval.jsonl": "5b0d0c38c4d401df454e73050b06250fa55d84ee8dc9cc81f5e15d41d9654885"
+ },
+ "addenda": [
+  {
+   "file": "annotations/callouts-eval.jsonl",
+   "frozenAt": "2026-11-07",
+   "note": "callout\u2192target annotations of the EVAL ground plans, frozen before any EVAL feature trace or callout binding output was opened. Balsamowce is non-blind (the annotator had seen its model opening list) and is scored as DEV."
+  }
+ ]
 }
