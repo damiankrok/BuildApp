@@ -65,6 +65,13 @@
    ],
    "frozenAt": "2026-11-07",
    "note": "room-number scorer written against the frozen annotation and run on PRZED before PO-3 existed; przed_po.py gains the PO run as an argument and the room-number rows; overlay.py gains a rooms mode (PRZED | PO side by side). rooms_model.py is a proxy (published areas), never a substitute for the annotation."
+  },
+  {
+   "files": [
+    "scoring/score_room_numbers.py"
+   ],
+   "frozenAt": "2026-11-07",
+   "note": "one correction after PO-3 was extracted and before it was scored, applied to PRZED and PO alike: the scorer now replicates readInterior of solver 2.29.0 \u2014 the sheet's text height from the template's kept tokens only, and a recogniser token not held to it. PRZED has no recogniser token, so its score is unchanged (6/2/53 kept, 21/9 with set-aside); before the correction PO-3 scored 13/2 kept. Production was changed first (the size comparison refused every number on sheets whose dimension labels are as large), the scorer followed it."
   }
  ]
 }

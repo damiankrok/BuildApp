@@ -43,8 +43,11 @@ for s in ann['sheets']:
     sup = {i for t in toks for i in t.get('supersedes', [])}
     toks = [t for t in toks if t['id'] not in sup]
     kept = [t for t in toks if t.get('pageVote') != 'DISCARDED']
-    med = sorted(t['heightPx'] for t in kept)[len(kept) // 2] if kept else 0
-    big = lambda t: med == 0 or t['heightPx'] >= med * 1.15
+    # as `readInterior` (solver 2.29.0): the sheet's text height from the template's kept tokens only, and a recogniser
+    # token is not held to it (correction made after PO-3 was extracted and before it was scored; PRZED has no such token)
+    tmpl = sorted(t['heightPx'] for t in kept if t.get('reader') != 'RECOGNISER')
+    med = tmpl[len(tmpl) // 2] if tmpl else 0
+    big = lambda t: t.get('reader') == 'RECOGNISER' or med == 0 or t['heightPx'] >= med * 1.15
     shown = {
         'kept': [t for t in kept if t.get('orientation', 'HORIZONTAL') == 'HORIZONTAL' and DIG.match(t['text']) and big(t)],
     }
