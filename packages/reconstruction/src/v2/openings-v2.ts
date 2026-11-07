@@ -114,7 +114,9 @@ const WALL_SEARCH_MIN_COVER = 0.3
 const EAVE_CLEARANCE_M = 0.05
 /** 005V: the least window an assumed opening may be lowered to under the eaves; below it the gap is refused. */
 const MIN_ASSUMED_WINDOW_M = 1.0
-const DEFAULTS: Required<OpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: 2.0, stubMaxM: 0.3 }
+/** How far along and across a wall a printed callout may stand from the gap it labels (m). */
+export const CALLOUT_REACH_M = 2.0
+const DEFAULTS: Required<OpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: CALLOUT_REACH_M, stubMaxM: 0.3 }
 
 /**
  * The readings a callout evidence supports for each half, best first.
@@ -437,6 +439,10 @@ export type OpeningReadingInput = {
   garageStated?: boolean
   /** EXTERIOR-COMPLETE: the facade's registered views refused for opening heights, used only to read what fills an opening. */
   faceViews?: Array<{ view: ElevationFrameV2; raster: Raster }>
+  /** v3.46: the wall's plan gaps when the caller has found them already (to decide callout ownership across the storey). */
+  gaps?: ReturnType<typeof planGaps>
+  /** v3.46: which gap each callout of the storey belongs to (`calloutOwners`), keyed by `gapOwnerKey`. */
+  calloutOwners?: ReadonlyMap<string, string>
   /** 005V: a gap not built as an opening, and why — reported by the caller as a refusal, never dropped silently. */
   onRefused?: (refusal: { interval: [number, number]; why: string }) => void
   /** 005Y-N1: diagnostics only (FEATURE_DEBUG): every gap, every callout weighed for it and why, and what it became. Write-only. */
@@ -499,10 +505,25 @@ function garageRoomHolds(bounds: { x0: number; z0: number; x1: number; z1: numbe
 }
 
 /** Openings in one wall: plan gaps, then callouts, then the elevations. */
+/** The callouts of a plan that carry a reading, with their text placed in world metres. */
+export function nearbyCallouts(plan: PlanFrameV2, callouts: readonly MetricEvidence[]): NearbyCallout[] {
+  return callouts.flatMap((ev) => {
+    if (!ev.textBox) return []
+    const candidates = calloutCandidates(ev)
+    if (!candidates) return []
+    const cx = (ev.textBox.x0 + ev.textBox.x1) / 2
+    const cy = (ev.textBox.y0 + ev.textBox.y1) / 2
+    return [{ id: ev.id, rawText: ev.rawText, confidence: ev.confidence, textCentre: plan.toWorld(cx, cy), pixelCentre: [round6(cx), round6(cy)] as [number, number], candidates }]
+  })
+}
+
+/** v3.46: a plan gap's identity for callout ownership: its host and its interval. */
+export const gapOwnerKey = (host: Pick<WallHost, 'massId' | 'storeyIndex' | 'facade'>, interval: readonly [number, number]): string => `${host.massId}:${host.storeyIndex}:${host.facade}:${interval[0].toFixed(3)}:${interval[1].toFixed(3)}`
+
 export function readWallOpenings(input: OpeningReadingInput, options: OpeningOptions = {}): OpeningV2[] {
   const opt = { ...DEFAULTS, ...options }
   const { plan, host } = input
-  const gaps = planGaps(input.planRaster, plan, host, input.wallThicknessM, options)
+  const gaps = input.gaps ?? planGaps(input.planRaster, plan, host, input.wallThicknessM, options)
   const out: OpeningV2[] = []
   const along = host.facade === 'FRONT' || host.facade === 'REAR' ? 'X' : 'Z'
   // 005W: the solid stretches of this wall, between its gaps — where an elevation shows what the wall looks like.
@@ -527,14 +548,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     return accepted
   })
   // The callouts near this wall that carry a reading, with their text placed in world metres.
-  const nearby: NearbyCallout[] = input.callouts.flatMap((ev) => {
-    if (!ev.textBox) return []
-    const candidates = calloutCandidates(ev)
-    if (!candidates) return []
-    const cx = (ev.textBox.x0 + ev.textBox.x1) / 2
-    const cy = (ev.textBox.y0 + ev.textBox.y1) / 2
-    return [{ id: ev.id, rawText: ev.rawText, confidence: ev.confidence, textCentre: plan.toWorld(cx, cy), pixelCentre: [round6(cx), round6(cy)] as [number, number], candidates }]
-  })
+  const nearby = nearbyCallouts(plan, input.callouts)
   const calloutBoxes: PixelBox[] = input.callouts.flatMap((e) => (e.textBox ? [{ x0: e.textBox.x0 - 2, y0: e.textBox.y0 - 2, x1: e.textBox.x1 + 2, y1: e.textBox.y1 + 2 }] : []))
   for (const gap of gaps) {
     const [lo, hi] = gap.interval
@@ -553,7 +567,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     const symPlan = symbolFrame(plan, along === 'X' ? { x: (lo + hi) / 2, z: symHost.centreAt } : { x: symHost.centreAt, z: (lo + hi) / 2 })
     const bandCentre = ink ? ink.centrePx : predictedBand
     const unresolved: string[] = []
-    const matched = matchOpeningCallout({ centre, widthM: widthPlan }, host, nearby, opt.calloutReachM, !!input.trace)
+    const matched = matchOpeningCallout({ centre, widthM: widthPlan }, host, nearby, opt.calloutReachM, !!input.trace, input.calloutOwners ? { owners: input.calloutOwners, key: gapOwnerKey(host, gap.interval) } : undefined)
     const weighed = matched.weighed
     let callout = matched.callout
     // The interval: the plan gap, its width corrected to the printed one about the gap's centre.

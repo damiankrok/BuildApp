@@ -50,9 +50,10 @@ import { OPPOSITE_SIDE, partyFarFace, partyNearFace, partyStretch, readPartyWall
 import type { PartyWallRecord, PartyWallV2 } from './party-wall.js'
 import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
-import { FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
+import { CALLOUT_REACH_M, FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, gapOwnerKey, nearbyCallouts, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
-import { FRENCH_WINDOW_NOTE, passageHead, stepOutDoors } from './opening-reading.js'
+import { FRENCH_WINDOW_NOTE, calloutOwners, passageHead, stepOutDoors } from './opening-reading.js'
+import type { CalloutOwnerGap } from './opening-reading.js'
 import { decideRidgeAxis } from './ridge-axis.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
 import { planeRoofLayout, rooflightPlaneKey } from './plane-roof.js'
@@ -224,7 +225,10 @@ import type { ApproximateRidge } from './roof-datum.js'
 // finds (`topLineOffset`); a view whose vertical registration was refused is read only through that anchor, and gives no
 // reading without it (a refused registration is evidence of neither a flat nor a pitched roof); an attached roof whose
 // views see a pitched top they cannot settle is built by convention with that observation kept as an unresolved `form`
-export const SOLVER_V2_VERSION = '2.30.0' as const
+// 2.31.0 (v3.46): one callout, one opening — every printed callout of a storey belongs to the nearest gap it fits on any
+// wall (`calloutOwners`), and a gap takes only its own: a gap whose ring is unread no longer borrows its twin's, and a
+// ring by a corner no longer sizes a gap on each wall
+export const SOLVER_V2_VERSION = '2.31.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1747,6 +1751,40 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const vehicle = openings.find((o) => o.massId === m.id && o.storeyIndex === 0 && o.family === 'GARAGE_DOOR')
     return vehicle ? [{ bounds: r, why: `the body ${m.id} holds a vehicle door (${vehicle.id})` }] : []
   }
+  // A facade's wall as the opening reader sees it: its plane, run and centre line, its storey's floor and height, a
+  // gable's or the eaves' cut over its top.
+  const wallHostOf = (m: MassV2, index: number, facade: 'FRONT' | 'EAST' | 'REAR' | 'WEST'): WallHost => {
+    const l = levelOf(index) as NonNullable<ReturnType<typeof levelOf>>
+    const r = rectAt(m, index)
+    const planeAt = facade === 'FRONT' ? r.z0 : facade === 'REAR' ? r.z1 : facade === 'WEST' ? r.x0 : r.x1
+    const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
+    const from = facade === 'FRONT' || facade === 'REAR' ? r.x0 : r.z0
+    const to = facade === 'FRONT' || facade === 'REAR' ? r.x1 : r.z1
+    const gable = isGableEnd(m, facade) && index === topStorey && mainRoof ? { eaveY: mainRoof.eaveY, pitchDeg: mainRoof.pitchDeg, ridgeAlongAt: mainRoof.ridgeAt, eaveAtLow: from, eaveAtHigh: to, buildUpVerticalM: mainRoof.buildUpVerticalM } : undefined
+    // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
+    const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
+    return { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6((mainRoof as NonNullable<typeof mainRoof>).ridgeY - l.elevation) : l.height, wallHeadY: l.wallTop }
+  }
+  // v3.46: one callout, one opening. Every facade gap of a storey is found first, and each printed callout of that
+  // storey belongs to the nearest gap it fits, on any wall (`calloutOwners`); a gap then takes only its own callouts.
+  const facadeGaps = new Map<string, ReturnType<typeof planGaps>>()
+  const ownersByStorey = new Map<number, Map<string, string>>()
+  for (const index of [...new Set(masses.flatMap((x) => x.storeys))].sort((a, b) => a - b)) {
+    const entry = planByStorey.get(index)
+    if (!entry || !levelOf(index)) continue
+    const ownerGaps: CalloutOwnerGap[] = []
+    for (const m of masses.filter((x) => x.storeys.includes(index))) {
+      for (const facade of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
+        if (m.openSide === facade) continue
+        const host = wallHostOf(m, index, facade)
+        const found = planGaps(entry.raster, entry.frame, host, m.wallThicknessM ?? T)
+        facadeGaps.set(`${m.id}:${index}:${facade}`, found)
+        for (const g of found) ownerGaps.push({ key: gapOwnerKey(host, g.interval), facade, centre: (g.interval[0] + g.interval[1]) / 2, centreAt: host.centreAt, widthM: g.interval[1] - g.interval[0] })
+      }
+    }
+    const storeyCallouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
+    ownersByStorey.set(index, calloutOwners(ownerGaps, nearbyCallouts(entry.frame, storeyCallouts), CALLOUT_REACH_M))
+  }
   for (const m of masses) {
     for (const index of m.storeys) {
       const entry = planByStorey.get(index)
@@ -1758,15 +1796,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       for (const facade of ['FRONT', 'EAST', 'REAR', 'WEST'] as const) {
         // N7-P2R: no wall of its own on the side it shares: the other body's wall is read for that side's doors
         if (m.openSide === facade) continue
-        const planeAt = facade === 'FRONT' ? r.z0 : facade === 'REAR' ? r.z1 : facade === 'WEST' ? r.x0 : r.x1
-        const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
-        const from = facade === 'FRONT' || facade === 'REAR' ? r.x0 : r.z0
-        const to = facade === 'FRONT' || facade === 'REAR' ? r.x1 : r.z1
-        const gable = isGableEnd(m, facade) && index === topStorey && mainRoof ? { eaveY: mainRoof.eaveY, pitchDeg: mainRoof.pitchDeg, ridgeAlongAt: mainRoof.ridgeAt, eaveAtLow: from, eaveAtHigh: to, buildUpVerticalM: mainRoof.buildUpVerticalM } : undefined
-        // 005V: a top-storey wall of the main body parallel to the ridge stops where the roof's underside meets it.
-        const underEaves = !gable && mainRoof && m.id === main.id && index === topStorey ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
-        const host: WallHost = { massId: m.id, facade, planeAt, from, to, centreAt: round6(planeAt + (inward * T) / 2), storeyIndex: index, ...(gable ? { gable } : {}), ...(underEaves !== undefined ? { eaveTopY: underEaves } : {}), floorY: l.elevation, storeyHeightM: gable ? round6(mainRoof!.ridgeY - l.elevation) : l.height, wallHeadY: l.wallTop }
-        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), ...(garageStated ? { garageStated: true } : {}), faceViews: viewsOf(facade).filter((v) => openingHeightRefused.has(v.view.registration.frameId)), index: hostIndex++ })
+        const host = wallHostOf(m, index, facade)
+        const found = readWallOpenings({ ...(options.featureTrace ? { trace: options.featureTrace } : {}), gaps: facadeGaps.get(`${m.id}:${index}:${facade}`), calloutOwners: ownersByStorey.get(index), onBandViewAccepted: (frameId) => acceptedBandViews.add(frameId), plan: entry.frame, planRaster: entry.raster, host, wallThicknessM: m.wallThicknessM ?? T, callouts, views: [...viewsOf(facade).filter((v) => !openingHeightRefused.has(v.view.registration.frameId) || openingViewOverrides.has(v.view.registration.frameId)), ...openingOnlyViews.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))].map((v) => openingViewOverrides.get(v.view.registration.frameId) ?? v), attachedSingleStorey: m.role === 'ATTACHED' && m.storeys.length === 1, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} on the ${facade.toLowerCase()} wall of ${m.id}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), ...(vehicleMouths.has(`${m.id}:${facade}`) && index === 0 ? { vehicleMouth: vehicleMouths.get(`${m.id}:${facade}`) } : {}), ...(index === 0 ? { garageRooms: garagesOf(m, r) } : {}), ...(garageStated ? { garageStated: true } : {}), faceViews: viewsOf(facade).filter((v) => openingHeightRefused.has(v.view.registration.frameId)), index: hostIndex++ })
         const faceIndex = hostIndex - 1
         // N8-02B: over a stretch this face shares as one wall, the gaps are read on that wall (below, or by its host)
         const shared = partyWalls.filter((p) => p.storeyIndex === index && ((p.hostMassId === m.id && p.hostFacade === facade) || (p.otherMassId === m.id && OPPOSITE_SIDE[p.hostFacade] === facade)))
@@ -1799,7 +1830,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           const band: WallHost = { massId: m.id, facade, planeAt: partyFarFace(p), from, to, centreAt: round6((p.band[0] + p.band[1]) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height, endsAtFaces: true }
           const doors = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host: band, wallThicknessM: p.thicknessM, callouts, views: [], attachedSingleStorey: false, onRefused: (r) => gap({ what: `the gap ${r.interval[0].toFixed(2)}..${r.interval[1].toFixed(2)} in the wall ${m.id} shares with ${p.otherMassId}, storey ${index}`, reason: r.why, status: 'REFUSED', observationIds: [], evidenceIds: [] }), index: faceIndex })
           // under the main roof's slope the one wall stands as high as the roof's underside over its far face
-          const top = underEaves !== undefined && mainRoof ? round6(underEaves + Math.abs(planeAt - partyFarFace(p)) * Math.tan((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
+          const top = host.eaveTopY !== undefined && mainRoof ? round6(host.eaveTopY + Math.abs(host.planeAt - partyFarFace(p)) * Math.tan((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
           for (const o of doors) {
             const door = { ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR' as const, headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: p.otherMassId, why: `${o.why.replace(/ in the \w+ wall of \S+/, ` in the ${p.thicknessM.toFixed(2)} m wall ${m.id} shares with ${p.otherMassId}`)}; read on the one band the plan draws between the bodies, so the gap is a doorway between them` }
             if (top !== undefined && o.sillY + CONVENTIONS.doorHeight > top - 0.05) {

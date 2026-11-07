@@ -30,13 +30,50 @@ export type NearbyCallout = { id: string; rawText?: string; confidence: number; 
 
 export type CalloutMatch = { callout: OpeningV2['callout']; weighed: Array<Record<string, unknown>> }
 
+/** Whether a callout's width readings fit a gap: the reader's own first three, or else one the recogniser's gate refused that the plan corroborates. */
+export function calloutFitsGap(cands: CalloutCandidates, widthM: number): boolean {
+  const fits = (c: { cm: number }): boolean => Math.abs(c.cm / 100 - widthM) <= Math.max(CALLOUT_WIDTH_FIT_MIN_M, widthM * CALLOUT_WIDTH_FIT_SHARE)
+  const readerOwn = cands.widths.filter((c) => !c.planCorroborated).slice(0, 3).filter(fits)
+  return readerOwn.length > 0 || cands.widths.some((c) => c.planCorroborated && fits(c))
+}
+
+/** One plan gap of a storey, for deciding which gap each printed callout belongs to. */
+export type CalloutOwnerGap = { key: string; facade: WallHost['facade']; centre: number; centreAt: number; widthM: number }
+
+/**
+ * v3.46: which gap each printed callout belongs to — one callout, one opening. A callout ring is printed beside the one
+ * opening it describes; reading each gap on its own, a gap whose own ring was not read took its neighbour's (a twin of
+ * the same width, or a gap round the corner within reach), and one ring then sized two openings. Here every callout of
+ * the storey is given to the single gap, on any wall, nearest to its text among those within reach whose width it fits;
+ * ties go to the lower key. Geometry and the callout's own width readings only — never what the gap would like it to
+ * say. A gap may then take only callouts it owns (or that nothing owns); one whose ring is unread stays unbound.
+ * Found on development plans: two twin windows sharing one ring, and one ring sizing an east and a west window.
+ */
+export function calloutOwners(gaps: readonly CalloutOwnerGap[], callouts: readonly NearbyCallout[], reachM: number): Map<string, string> {
+  const owners = new Map<string, string>()
+  for (const ev of callouts) {
+    if (ev.confidence < CALLOUT_MIN_CONFIDENCE) continue
+    let best: { d: number; key: string } | undefined
+    for (const g of gaps) {
+      const alongX = g.facade === 'FRONT' || g.facade === 'REAR'
+      const along = Math.abs((alongX ? ev.textCentre.x : ev.textCentre.z) - g.centre)
+      const across = Math.abs((alongX ? ev.textCentre.z : ev.textCentre.x) - g.centreAt)
+      if (along > reachM || across > reachM || !calloutFitsGap(ev.candidates, g.widthM)) continue
+      const d = Math.hypot(along, across)
+      if (!best || d < best.d - 1e-9 || (Math.abs(d - best.d) <= 1e-9 && g.key < best.key)) best = { d, key: g.key }
+    }
+    if (best) owners.set(ev.id, best.key)
+  }
+  return owners
+}
+
 /**
  * The printed callout that labels a gap: the nearest one within reach whose width readings include one that fits the
  * gap. The gap's own width picks among the reader's width readings; a reading the recogniser's gate refused
  * (`planCorroborated`) counts only where none of the reader's own first three fits. `weighed` lists every callout
  * considered and why it was taken or not (diagnostics only).
  */
-export function matchOpeningCallout(gap: { centre: number; widthM: number }, host: Pick<WallHost, 'facade' | 'centreAt'>, callouts: readonly NearbyCallout[], reachM: number, traced: boolean): CalloutMatch {
+export function matchOpeningCallout(gap: { centre: number; widthM: number }, host: Pick<WallHost, 'facade' | 'centreAt'>, callouts: readonly NearbyCallout[], reachM: number, traced: boolean, ownership?: { owners: ReadonlyMap<string, string>; key: string }): CalloutMatch {
   const alongX = host.facade === 'FRONT' || host.facade === 'REAR'
   const fits = (c: { cm: number }): boolean => Math.abs(c.cm / 100 - gap.widthM) <= Math.max(CALLOUT_WIDTH_FIT_MIN_M, gap.widthM * CALLOUT_WIDTH_FIT_SHARE)
   let callout: OpeningV2['callout']
@@ -49,6 +86,11 @@ export function matchOpeningCallout(gap: { centre: number; widthM: number }, hos
     const seen = traced ? { evidenceId: ev.id, rawText: ev.rawText, px: ev.pixelCentre, confidence: ev.confidence, widths: cands.widths.slice(0, 3).map((c) => c.cm), heights: cands.heights.slice(0, 3).map((c) => c.cm), alongM: round6(alongDistance), acrossM: round6(acrossDistance) } : undefined
     if (ev.confidence < CALLOUT_MIN_CONFIDENCE) {
       if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `confidence ${ev.confidence} < ${CALLOUT_MIN_CONFIDENCE}` })
+      continue
+    }
+    const owner = ownership?.owners.get(ev.id)
+    if (ownership && owner !== undefined && owner !== ownership.key) {
+      if (seen) weighed.push({ ...seen, decision: 'REJECTED', reason: `the nearest gap it fits is ${owner}: one callout, one opening` })
       continue
     }
     const readerOwn = cands.widths.filter((c) => !c.planCorroborated).slice(0, 3).filter(fits)
