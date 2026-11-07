@@ -1,0 +1,25 @@
+# section numbers, developer non-blind, read from the original section image. kinds: R ridge, E eaves (top of wall/edge of roof printed at the eaves), F storey floor, f other floor (sub-level, cellar, landing), T terrain, O other level, A angle (deg), H vertical dimension (cm)
+projekt-dom-w-bratkach-26-r2be-m953292c7d56c7 +8.95:R +5.64:E +2.96:F 0.00:F -0.19:T 30:A 269:H 235:H 260:H
+projekt-dom-w-murajach-mfc224c195bead +7.67:R +5.50:E +2.88:F 0.00:F -0.30:T 30:A 284:H 233:H 261:H
+projekt-dom-w-azaliach-3-ma6726144fab3e +7.70:R +3.73:E +2.96:F 0.00:F -0.57:f -0.32:T 40:A 167:H 255:H 265:H
+projekt-dom-miniaturka-2-ver-3-m4c723a6c22f61 +7.33:R +2.68:E +2.85:F 0.00:F -0.32:T 40:A 268:H 58:H 258:H
+projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47 +8.97:R +3.52:O +2.96:F 0.00:F -0.15:f -0.32:T 35:A 269:H 130:H 267:H 277:H
+projekt-dom-w-arletach-3-e-oze-m504267f869cbe +8.29:R +3.34:E +2.96:F 0.00:F -0.15:f -0.32:T 40:A 125:H 259:H 264:H
+projekt-dom-w-daliach-5-ge-me3c2885945467 +8.82:R +4.60:E +3.06:F 0.00:F -0.32:T 42:A 338:H 121:H 273:H
+projekt-dom-w-jablonkach-22-mb0e2566e7cb18 +8.26:R +3.27:O +2.96:F 0.00:F -0.32:T 40:A 254:H 127.5:H 265:H
+projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734 +7.80:R +3.36:E +3.15:F 0.00:F -0.32:T 35:A 252:H 279:H
+projekt-willa-maja-r2-mcc7297f3e22da +7.98:R +5.73:E +2.96:F 0.00:F -0.32:T 22:A 265:H 261:H
+projekt-dom-w-aurorach-26-g-m3a528b90e5301 +8.34:R +3.35:E +3.00:F 0.00:F -0.32:T 40:A 121:H 258:H 264:H
+projekt-dom-w-kostrzewach-4-m1bb23c8d1cf2e +6.53:R +3.04:E 0.00:F -0.32:T 30:A 270:H
+projekt-dom-w-lipiennikach-5-m41c273a6dd2db +6.54:R +2.85:E 0.00:F -0.32:T 30:A 155:H 272:H
+a01 +8.16:R +3.60:E +3.06:F 0.00:F -0.32:T 40:A 136:H 255:H 274:H 201:H
+arganiach +7.99:R +3.57:E +3.06:F 0.00:F -0.32:T 38:A 286:H 125:H 272:H
+ciesz +7.20:R +2.93:E +3.34:O 0.00:F -0.32:T 30:A 283:H
+gozd +8.36:R +3.24:E +2.96:F 0.00:F -0.32:T 40:A 276:H 115:H 268:H
+marcowki +7.95:R +4.67:E +3.06:F 0.00:F -0.32:T 40:A 266:H 130:H 272:H 252:H
+rary +5.70:R +3.24:E 0.00:F -0.32:T 30:A 288:H
+sasankach3 +8.52:R +3.06:F 0.00:F -0.57:f -0.32:T 45:A 135:H 266:H 278:H 273:H
+trytomach +7.62:R +3.59:E +2.96:F 0.00:F -0.57:f -0.32:T 40:A 136:H 265:H 266:H
+bakopy +6.28:R +3.27:E 0.00:F -0.32:T 35:A 280:H
+# zefiranty: the only published section is 400x300 px; glyphs ~7 px, below the 10 px legibility gate -> every number marked ! (read by eye at 4x, excluded from the legible set, kept for coverage)
+zefiranty +8.55:R! +2.42:O! +2.93:F! +2.98:O! 0.00:F! -0.32:T! -0.47:T! 241:H! 297:H! 90:H! 269:H!

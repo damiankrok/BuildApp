@@ -1,0 +1,19 @@
+{
+ "frozenAt": "2026-11-07",
+ "note": "frozen before any EVAL reader output was opened; EVAL baseline = full production path run from the E13 tree (ebfb484) during acquisition",
+ "sha256": {
+  "annotations/CODES.md": "87d70dd2cc1023a211ad10178e48af7aca8fa13578be49ad3f009b2bf8579443",
+  "annotations/eval-split.json": "0013754d80426bfab96a1b8cd56bf3e8b4e9feab53ec391409873fa0057333c7",
+  "annotations/levels-dev.txt": "d974fc3da0d5daead9a88c092739e8ffe4847ec82740ff0a1365e60698cfdcda",
+  "annotations/levels-eval.txt": "5d066b2369f83872c29b57fd4265b8b9ce8cf7b7c5ff8238a5cb2cebd8cffeb4",
+  "annotations/roles-dev.txt": "b6a067e819635b0461cbe05c1bf7faf4f9b8712620d3b07627ae98b252fe4c5c",
+  "annotations/roles-eval.txt": "ccc0d99a3b6c88a8bcaaa4f9342ee7d3d330a6bc044b966453284a2452fcedb3",
+  "annotations/split.json": "106f77010e5ab39bdcc18ef9829c199314debd10bc5b2a7acebd84f4abee2e71",
+  "annotations/views-dev.json": "fbafd5a441b9654a14ababc4a747b6291ac637a5ace7142a03f90196a8d26305",
+  "annotations/views-eval.json": "8fc87cc8ecd0d0e232281116eac5c3d5d0ad1931d59003f6a9fe6358bdf9354a",
+  "scoring/score_content.py": "545e61a9c0f0120e4e210f4f00d9d076d510b24bf3da7768902c253f105cddd9",
+  "scoring/score_levels.py": "f835bf03b391d1f7332623913057f0a4b80586ec8b0b690af7da7575402323bc",
+  "scoring/score_views.py": "cf9e8e7a2281f85f2e4ac4e2149274da6233bc7342bd0f8a149658644c20c559",
+  "scoring/views.py": "9504b73346aac25dd0afbf811dad29cc3327dd26b1c4a3354bf9c972cc5d86cb"
+ }
+}
