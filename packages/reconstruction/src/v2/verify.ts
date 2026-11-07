@@ -36,7 +36,16 @@ export type RepairOperation = { kind: 'MOVE_WALL' | 'RESIZE_OPENING' | 'MOVE_OPE
 export type RepairRefusal = { featureId: string; kind: RepairOperation['kind']; why: string }
 export type RepairTrace = { iterations: Array<{ index: number; residualsBefore: number; residualsAfter: number; applied: RepairOperation[]; refused: RepairRefusal[] }>; converged: boolean }
 
-export type VerificationInput = { building: BuildingV2; views: Array<{ view: ElevationFrameV2; raster: Raster }>; silhouetteTop?: (view: ElevationFrameV2) => Array<number | null> | undefined }
+export type VerificationInput = {
+  building: BuildingV2
+  views: Array<{ view: ElevationFrameV2; raster: Raster }>
+  silhouetteTop?: (view: ElevationFrameV2) => Array<number | null> | undefined
+  /**
+   * v3.45: views whose opening heights the reconstruction refused (registered on a silhouette that puts the ground off
+   * the printed terrain): their heights low on the walls are not measured here either, so no repair rests on them.
+   */
+  openingHeightsRefused?: ReadonlySet<string>
+}
 
 /** Project the building into each view and measure the residuals. */
 export function verifyAgainstViews(input: VerificationInput): SourceViewResidual[] {
@@ -46,7 +55,7 @@ export function verifyAgainstViews(input: VerificationInput): SourceViewResidual
   for (const o of b.openings) {
     const level = b.levels.find((l) => l.index === o.storeyIndex)
     if (!level) continue
-    for (const { view, raster } of views.filter((v) => v.view.side === sideOf(o.facade))) {
+    for (const { view, raster } of views.filter((v) => v.view.side === sideOf(o.facade) && !input.openingHeightsRefused?.has(v.view.registration.frameId))) {
       const ext = elevationExtent(raster, view, o.interval, level.elevation, level.height)
       if (!ext || ext.headY - ext.sillY < 0.5) continue
       const tol = o.uncertaintyM + 0.1
@@ -289,6 +298,12 @@ export function repairFromResiduals(b: BuildingV2, residuals: SourceViewResidual
       // the printed height. The view's reading is recorded, not applied.
       if (r.kind === 'OPENING_SILL' && (o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED')) {
         refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `the height is printed (${(o.headY - o.sillY).toFixed(2)} m); a sill the view reads ${r.residualM.toFixed(2)} m away would change it, so it is recorded, not applied` })
+        continue
+      }
+      // v3.45: a door reaches its floor — its leaf, drawn on the plan, is what made it a door; a view that reads its sill
+      // above the floor reads something else (a step, a surround, a registration off by a plinth)
+      if (r.kind === 'OPENING_SILL' && (o.family === 'DOOR' || o.family === 'GLAZED_DOOR' || o.family === 'GARAGE_DOOR') && r.observedM > o.sillY) {
+        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `a ${o.family.toLowerCase().replace(/_/g, ' ')} reaches its floor; a view reading its sill ${r.observedM.toFixed(2)} m up is recorded, not applied` })
         continue
       }
       if (Math.abs(r.residualM) > 1.2) {

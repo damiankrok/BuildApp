@@ -217,7 +217,8 @@ import type { ApproximateRidge } from './roof-datum.js'
 // opening at least vehicle-wide to the floor in a garage room's wall is a garage door in any body; where no view, fit
 // or layout decides the ridge axis, a roof falling four ways at one pitch has its ridge along the longer side, and a
 // convention is named (`ridge-axis.ts`); a door leaf drawn up to a sidelight's width short of its gap is the gap's own
-// leaf (`doorLeafFound`)
+// leaf (`doorLeafFound`); the bounded reconciliation reads no opening height on a view whose opening heights were
+// refused, and never lifts a door's sill off its floor (`verify.ts`)
 export const SOLVER_V2_VERSION = '2.29.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
@@ -2818,9 +2819,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
   const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
-  const residualsBefore = verifyAgainstViews({ building, views })
+  const residualsBefore = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
   const repair = repairFromResiduals(building, residualsBefore, 2)
-  const residuals = verifyAgainstViews({ building, views })
+  const residuals = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
   // 005Y-N7 (B): the residuals per view and per kind, with what the bounded reconciliation did (cross-view.ts)
   const crossView = crossViewResiduals(residuals, elevations.map((e) => ({ frameId: e.frameId, side: e.side, mpp: e.mpp, spanM: e.spanM, spanWhy: e.spanWhy })), repair)
   step({ stage: 'verification', what: 'the model against each registered view', method: 'DIRECT', detail: crossView.views.map((v) => `${v.side.toLowerCase()} ${v.verdict.toLowerCase()} (${v.withinTolerance}/${v.checks})`).join('; ') || 'no view registered', inputs: residuals.length, outputs: crossView.views.length })
