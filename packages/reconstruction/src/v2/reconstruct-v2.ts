@@ -45,7 +45,7 @@ import { elevationFrameFromV2, flipZ, outerWallFaces, planFrameByOuterFaces, pla
 import type { ElevationFrameV2, ElevationRegistrationV2, PlanFrameV2, WorldFrameV2 } from './frame.js'
 import { scanZoneForReturns } from './recesses.js'
 import type { RecessTopology, ZoneSide } from './recesses.js'
-import { joinRooms, readInterior, roomEdgeOn } from './interior.js'
+import { joinRooms, labelTokensOf, readInterior, roomEdgeOn } from './interior.js'
 import { OPPOSITE_SIDE, partyFarFace, partyNearFace, partyStretch, readPartyWalls } from './party-wall.js'
 import type { PartyWallRecord, PartyWallV2 } from './party-wall.js'
 import type { InteriorReading, LabelToken } from './interior.js'
@@ -1599,7 +1599,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   for (const [index, entry] of planByStorey) {
     // Room labels are read from the page vote's tokens: the other passes' readings are raw evidence for the metric solver (005B).
     // 005U-N4: the readings the orientation vote discarded come along as set-aside candidates (`LabelToken.setAside`).
-    const tokens: LabelToken[] = metrics.ocrTokens.filter((t) => t.frameId === entry.plan.frame.id).map((t) => ({ text: t.text, box: t.box, heightPx: t.heightPx, confidence: t.confidence, orientation: t.orientation, ...(t.pageVote === 'DISCARDED' ? { setAside: true } : {}) }))
+    // v3.45: a room number the recogniser read supersedes the template's readings of the same ink (`labelTokensOf`)
+    const tokens: LabelToken[] = labelTokensOf(metrics.ocrTokens.filter((t) => t.frameId === entry.plan.frame.id))
     const storeyLabel = index === 0 ? 'GROUND' : index < 0 ? 'BASEMENT' : 'ATTIC'
     const rooms = publishedRooms.filter((r) => r.storey === storeyLabel || (index > 0 && r.storey === 'UPPER')).map((r) => ({ number: String(r.index), label: r.label, areaM2: r.area }))
     const barriers: Array<{ x0: number; z0: number; x1: number; z1: number }> = []

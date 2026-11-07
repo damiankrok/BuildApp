@@ -98,3 +98,24 @@ describe('EXTERIOR-COMPLETE: a vehicle door is one panel across its whole width'
   })
 })
 
+
+describe('v3.45 a garage room’s wall says vehicle door in any body', () => {
+  const garageRoom = { why: 'room-0-0, numbered 7 = Garaż on the publisher’s list' }
+  it('a 2.75 m opening to the floor in the main body’s wall of a garage room is its garage door', () => {
+    const d = classifyOpeningFamily(facts({ widthM: 2.75, heightM: 2.25, garageRoom }))
+    expect(d.family).toBe('GARAGE_DOOR')
+    expect(d.notes.join(' ')).toMatch(/garage's wall/)
+  })
+  it('never above the ground storey, never narrower than a vehicle door, never taller than one, never with a sill', () => {
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 2.25, garageRoom, storeyIndex: 1 })).family).not.toBe('GARAGE_DOOR')
+    expect(classifyOpeningFamily(facts({ widthM: 1.0, heightM: 2.1, garageRoom })).family).toBe('DOOR')
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 3.5, garageRoom })).family).not.toBe('GARAGE_DOOR')
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 1.2, sillAboveFloorM: 1.0, garageRoom })).family).not.toBe('GARAGE_DOOR')
+  })
+  it('without the garage room, the main body’s wide opening to the floor stays glazing; an opaque face alone decides only in a low attached body', () => {
+    const panel = openingFace(face('panel'), box)
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 2.25 })).family).toBe('MULTI_PANEL_GLAZING')
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 2.25, face: panel })).family).not.toBe('GARAGE_DOOR')
+    expect(classifyOpeningFamily(facts({ widthM: 2.75, heightM: 2.25, face: panel, attachedSingleStorey: true })).family).toBe('GARAGE_DOOR')
+  })
+})

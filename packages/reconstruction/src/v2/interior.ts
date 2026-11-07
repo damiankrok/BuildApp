@@ -182,6 +182,22 @@ export type LabelToken = {
   setAside?: boolean
   /** Which way up the reading was taken; a room number is printed upright. */
   orientation?: string
+  /**
+   * v3.45: read by the shipped numeric recogniser (`room-numbers.ts` in source-metrics), gated there, never on a
+   * dimension line. Its size is not compared with the sheet's other text: on sheets whose dimension labels are set as
+   * large as the room numbers that comparison refuses every number, whichever reader read it.
+   */
+  recognised?: boolean
+}
+
+/**
+ * v3.45: the room-number tokens a plan's interior reader is shown, from the frame's OCR tokens. A token the recogniser
+ * read (`reader: 'RECOGNISER'`, `room-numbers.ts` in source-metrics) supersedes the template's readings of the same
+ * ink: those stay in the evidence and are no token here. A reading the page vote discarded is set aside.
+ */
+export function labelTokensOf(frameTokens: ReadonlyArray<{ id: string; text: string; box: PixelRect; heightPx: number; confidence: number; orientation?: string; pageVote?: 'KEPT' | 'DISCARDED'; reader?: 'RECOGNISER'; supersedes?: readonly string[] }>): LabelToken[] {
+  const superseded = new Set(frameTokens.flatMap((t) => t.supersedes ?? []))
+  return frameTokens.filter((t) => !superseded.has(t.id)).map((t) => ({ text: t.text, box: t.box, heightPx: t.heightPx, confidence: t.confidence, orientation: t.orientation, ...(t.pageVote === 'DISCARDED' ? { setAside: true } : {}), ...(t.reader === 'RECOGNISER' ? { recognised: true } : {}) }))
 }
 
 export function readInterior(
@@ -870,25 +886,30 @@ export function readInterior(
 
   // Room numbers: large short digit tokens inside a room.
   const keptTokens = tokens.filter((t) => !t.setAside)
-  const heights = keptTokens.map((t) => t.heightPx).sort((a, b) => a - b)
+  // the sheet's text height, from the template's tokens only: the recogniser's room numbers neither set nor face it
+  const heights = keptTokens.filter((t) => !t.recognised).map((t) => t.heightPx).sort((a, b) => a - b)
   const medianHeight = heights.length > 0 ? heights[Math.floor(heights.length / 2)] : 0
+  // v3.45: every published number printed inside each room; a room holding two or more is several published rooms in one
+  // region (an open plan the walls do not divide, or a door the flood ran through): it takes none of them
+  const printedIn = new Map<string, Set<string>>()
   for (const t of keptTokens) {
     if (!/^\d{1,2}$/.test(t.text)) continue
     // N8-03D2: a room number is printed upright; a reading taken another way up is a dimension or a callout's text
     if (t.orientation !== undefined && t.orientation !== 'HORIZONTAL') continue
-    if (medianHeight > 0 && t.heightPx < medianHeight * 1.15) continue
+    if (!t.recognised && medianHeight > 0 && t.heightPx < medianHeight * 1.15) continue
     const cx = (t.box.x0 + t.box.x1) / 2
     const cy = (t.box.y0 + t.box.y1) / 2
     const w = plan.toWorld(cx, cy)
     const room = rooms.find((r) => pointInPolygon(w, r.polygon))
     if (!room) continue
+    const published = publishedRooms.find((p) => p.number === t.text)
+    // A number that names no published room on this storey is a misread; it is kept out of the room.
+    if (!published && publishedRooms.length > 0) continue
+    printedIn.set(room.id, (printedIn.get(room.id) ?? new Set<string>()).add(t.text))
     if (room.number && room.number !== t.text) {
       unresolved.push({ what: `the number of ${room.id}`, reason: `two numbers (${room.number}, ${t.text}) are printed inside it` })
       continue
     }
-    const published = publishedRooms.find((p) => p.number === t.text)
-    // A number that names no published room on this storey is a misread; it is kept out of the room.
-    if (!published && publishedRooms.length > 0) continue
     room.number = t.text
     if (published) {
       room.label = published.label
@@ -906,6 +927,18 @@ export function readInterior(
       }
     }
   }
+  const several = new Set<string>()
+  for (const room of rooms) {
+    const printed = [...(printedIn.get(room.id) ?? [])]
+    if (printed.length < 2) continue
+    several.add(room.id)
+    const names = printed.map((n) => `${n} ${publishedRooms.find((p) => p.number === n)?.label ?? ''}`.trim())
+    room.why += `; ${printed.length} published numbers are printed inside it (${names.join(', ')}): several published rooms in one region, none of them its number`
+    room.number = undefined
+    room.label = undefined
+    room.publishedAreaM2 = undefined
+    room.confidence = 0.5
+  }
   // 005U-N4: a room no kept reading numbers may take its number from a reading the orientation vote set aside — the
   // page-wide vote picks one way up per clash by summed merit, and a garbled reading of the same ink another way up
   // (more glyphs, each matched worse) can outvote a clean one. The set-aside reading is heard only when it is the ONE
@@ -916,7 +949,7 @@ export function readInterior(
   const sameInk = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0) > 0 && Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) > 0
   const taken = new Set(rooms.map((r) => r.number).filter((n): n is string => !!n))
   for (const room of rooms) {
-    if (room.number || publishedRooms.length === 0) continue
+    if (room.number || several.has(room.id) || publishedRooms.length === 0) continue
     const inside = tokens.filter((t) => t.setAside && t.orientation === 'HORIZONTAL' && (medianHeight === 0 || t.heightPx >= medianHeight * 1.15) && pointInPolygon(plan.toWorld((t.box.x0 + t.box.x1) / 2, (t.box.y0 + t.box.y1) / 2), room.polygon))
     const offers = new Set<string>()
     for (const t of inside) {

@@ -198,6 +198,13 @@ export const OcrTokenSchema = z
      * solver and not a token any legacy reader (room labels, datums, callouts) was ever shown.
      */
     pageVote: z.enum(['KEPT', 'DISCARDED']).optional(),
+    /**
+     * v3.45: a token read by the shipped numeric recogniser rather than the template reader (room numbers,
+     * `room-numbers.ts`). Absent: the template reader's.
+     */
+    reader: z.enum(['RECOGNISER']).optional(),
+    /** v3.45: the template tokens of the same ink this reading replaces for every reader downstream (they stay on record). */
+    supersedes: z.array(z.string().min(1)).optional(),
   })
   .strict()
 export type OcrToken = z.infer<typeof OcrTokenSchema>

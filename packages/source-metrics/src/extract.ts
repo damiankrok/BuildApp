@@ -57,6 +57,7 @@ import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from 
 import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
 import { angleLabels, judgeAngles, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
 import type { RoofEdge } from './section-angles.js'
+import { ROOM_NUMBERS_NAME, ROOM_NUMBERS_VERSION, roomNumberLabels, roomNumberTokens } from './room-numbers.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
 import type { Association, CalloutRingRecord, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
@@ -71,7 +72,8 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.8.0 (EXTERIOR-COMPLETE, Zefiranty): an outline crossing a dimension line is no measurement point (dimension-lines 1.4.0); two labels one pass read apart are two inks (metric solver 1.6.0). */
 /** 1.9.0 (EXTERIOR-COMPLETE E12): two barred rings on one bar row, overlapping or touching, are one callout ring split by ink touching it (`mergeSplitRings`). */
 /** 1.10.0 (v3.45): section pitch labels read along their slope and admitted by it; a callout ring whose own cut fails the gate is re-fitted to its stroke and read again; with a recogniser, a section's level marks are read by it and stand only by the same drawing — their symbols, one ladder, a printed ±0,00 on it (`level-marks.ts`); the template's datums they overrule are dropped. */
-export const METRIC_READER_VERSION = '1.10.0' as const
+/** 1.11.0 (v3.45): with a recogniser, a plan's upright one- or two-digit tokens are read again by it from their widened ink; a heard reading is a kept token that supersedes the template's readings of that ink (`room-numbers.ts`). */
+export const METRIC_READER_VERSION = '1.11.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -393,6 +395,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   let heard = 0
   // v3.45: how many section level marks the recogniser's readings put on an admitted ladder.
   let levelMarksAdmitted = 0
+  let roomNumbersHeard = 0
   // v3.45: how many section pitch labels the recogniser read along their slope and the slope admitted.
   let anglesAdmitted = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
@@ -512,6 +515,23 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           const reader = { name: NUMERIC_LATTICE_NAME, version: NUMERIC_LATTICE_ENSEMBLE_VERSION }
           lattices.set(token, { id: held.id, lattice: { ...held.lattice, reader, external, ensemble: ensembleOf(held.lattice, external) } })
           heard += 1
+        }
+      }
+      // v3.45: the room numbers — upright one- or two-digit tokens, either side of the page vote — read again by the
+      // recogniser from their widened ink (`room-numbers.ts`). A heard reading joins the frame's tokens as a kept upright
+      // token that supersedes the template's readings of the same ink; which room it numbers, if any, the plan's interior
+      // reader decides as for any token.
+      if (recogniser) {
+        // a label on a dimension line (the lattice read it as one) is a measurement, never a room number
+        const onLine = new Set([...lattices.keys()].map((t) => tokensById.get(t)?.id))
+        const frameTokens = ocrTokens.filter((t) => t.frameId === frame.id && !onLine.has(t.id))
+        const { labels, crops } = roomNumberLabels(toGray(raster), frameTokens)
+        if (crops.length > 0) {
+          const recognised: ExternalReading[] = yield { frameId: frame.id, crops }
+          heard += recognised.length
+          const { tokens: numbers } = roomNumberTokens(frame, labels, recognised)
+          ocrTokens.push(...numbers)
+          roomNumbersHeard += numbers.length
         }
       }
       for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
@@ -1225,6 +1245,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ...(heard > 0 ? [{ name: OCR_ENSEMBLE_NAME, version: OCR_ENSEMBLE_VERSION }] : []),
       ...(calloutRings.length > 0 ? [{ name: CALLOUT_RECOGNISER_NAME, version: CALLOUT_RECOGNISER_VERSION }] : []),
       ...(levelMarksAdmitted > 0 ? [{ name: LEVEL_MARKS_NAME, version: LEVEL_MARKS_VERSION }] : []),
+      ...(roomNumbersHeard > 0 ? [{ name: ROOM_NUMBERS_NAME, version: ROOM_NUMBERS_VERSION }] : []),
       ...(anglesAdmitted > 0 ? [{ name: SECTION_ANGLES_NAME, version: SECTION_ANGLES_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),

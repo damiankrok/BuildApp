@@ -53,6 +53,9 @@ const tokenMember = (t: OcrToken): unknown => ({
   glyphs: t.glyphs.map((g) => ({ char: g.char, score: g.score, confidence: g.confidence, box: g.box, alternatives: g.alternatives })),
   orientation: t.orientation ?? null,
   pageVote: t.pageVote ?? null,
+  // v3.45: present only on the recogniser's room numbers, so every older set hashes as it did
+  ...(t.reader ? { reader: t.reader } : {}),
+  ...(t.supersedes ? { supersedes: [...t.supersedes].sort() } : {}),
 })
 
 const evidenceMember = (e: MetricEvidence): unknown => ({

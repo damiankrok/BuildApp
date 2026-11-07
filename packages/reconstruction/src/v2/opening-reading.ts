@@ -290,7 +290,10 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   // drawing says the body is a garage there — the gap is in a garage room's wall (the publisher's room list), or its
   // face on the elevation is one opaque panel. Its width and the body's height alone say nothing: a one-storey living
   // wing's 4 m terrace glazing was built as a second garage gate.
-  if (f.attachedSingleStorey && f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle && (f.garageRoom || (f.face?.kind === 'OPAQUE_PANEL' && f.face.acrossOpaque !== false))) {
+  // v3.45: the garage room's wall says it in any body. A garage inside the main body (its number now read on the plan,
+  // `room-numbers.ts`) has its 2.75 m gate in the main body's front wall; only the opaque-face reading stays limited to
+  // a low attached body, as before.
+  if (f.storeyIndex === 0 && f.widthM >= VEHICLE_DOOR_MIN_WIDTH_M && onFloorForVehicle && f.heightM <= VEHICLE_DOOR_MAX_HEIGHT_M && (f.garageRoom || (f.attachedSingleStorey && f.face?.kind === 'OPAQUE_PANEL' && f.face.acrossOpaque !== false))) {
     return { family: 'GARAGE_DOOR', notes: [f.garageRoom ? `a vehicle door in a garage's wall: ${f.garageRoom.why}` : 'a vehicle door: its elevation face is one opaque panel'] }
   }
   // EXTERIOR-COMPLETE: on the ground storey of a house whose publisher states a garage, an opening to the floor at least
