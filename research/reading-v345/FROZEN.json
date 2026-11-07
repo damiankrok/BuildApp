@@ -45,6 +45,26 @@
    ],
    "frozenAt": "2026-11-07",
    "note": "binding scorer frozen before any PO run was scored. One correction made before freezing, applied to PRZED and PO alike: a gap must run along the annotated wall (a side-wall callout had matched a front gap at the corner). DEV callouts (57, five houses) are non-blind and used for diagnosis."
+  },
+  {
+   "files": [
+    "annotations/room-numbers-eval.json"
+   ],
+   "sha256": {
+    "annotations/room-numbers-eval.json": "4e2bb5198db537ad8a5711ed8eb3e8a63675c3d0ac16f99f0e1ddfb7a11456de"
+   },
+   "frozenAt": "2026-11-07",
+   "note": "room numbers on the 8 plan sheets the reconstruction reads for the EVAL houses that reach plan reading (61 blind numbers on 6 sheets of 4 houses; 19 on Balsamowce's 2 sheets, non-blind, scored as DEV), frozen (commit cba6205) before the room-number reader existed in production and before any of its readings on these sheets were seen. The five EVAL houses that fail before plan reading have no sheet here: their numbers count as missing only through the houses' failure, not in this denominator."
+  },
+  {
+   "files": [
+    "scoring/score_room_numbers.py",
+    "scoring/rooms_model.py",
+    "scoring/przed_po.py",
+    "scoring/overlay.py"
+   ],
+   "frozenAt": "2026-11-07",
+   "note": "room-number scorer written against the frozen annotation and run on PRZED before PO-3 existed; przed_po.py gains the PO run as an argument and the room-number rows; overlay.py gains a rooms mode (PRZED | PO side by side). rooms_model.py is a proxy (published areas), never a substitute for the annotation."
   }
  ]
 }

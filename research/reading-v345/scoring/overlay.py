@@ -60,6 +60,28 @@ def plan(img, ev, tr, fid, proj, out):
     d.text((6, 4), 'blue box = opening gap with the callout the solver bound (w/h, family); grey = gap, nothing bound; green ring = both halves read; orange = refused; purple = annotation', fill=(0, 0, 0), font=F)
     im.save(out)
 
+def rooms(img, sheet_json, przed_rows, po_rows, out):
+    # side by side: PRZED | PO. purple = annotated number; green box = shown, equal; red = shown, other text; orange = addition
+    base = Image.open(img).convert('RGB'); k = 1.2
+    S = json.loads(sheet_json); A = json.load(open(przed_rows)); B = json.load(open(po_rows))
+    def panel(rows, title):
+        im = scaled(base, k); d = ImageDraw.Draw(im)
+        for r in rows['withSetAside']['rows']:
+            x, y = r['at']
+            col = GREEN if r['result'] == 'CORRECT' else RED if r['result'] == 'WRONG' else ORANGE
+            d.ellipse([(x - 11) * k, (y - 11) * k, (x + 11) * k, (y + 11) * k], outline=col, width=3)
+            d.text(((x + 13) * k, (y - 14) * k), f"{r['number']}:{'/'.join(r['read']) or '-'}", fill=(120, 0, 160), font=F)
+        for a in rows['withSetAside']['additions']:
+            b = a['box']; d.rectangle([b['x0'] * k, b['y0'] * k, b['x1'] * k, b['y1'] * k], outline=RED, width=2)
+            d.text((b['x1'] * k + 2, b['y0'] * k - 10), f"+{a['text']}", fill=RED, font=F)
+        d.rectangle([0, 0, im.width, 18], fill=(255, 255, 255)); d.text((6, 3), title, fill=(0, 0, 0), font=F)
+        return im
+    pa = next(x for x in A['sheets'] if x['assetId'] == S['assetId']); pb = next(x for x in B['sheets'] if x['assetId'] == S['assetId'])
+    L = panel(pa, 'PRZED: circle green = read right, red = read otherwise, orange = not read; red box = extra published number')
+    R = panel(pb, 'PO (same sheet, same annotation)')
+    W = Image.new('RGB', (L.width + R.width + 10, max(L.height, R.height)), (255, 255, 255)); W.paste(L, (0, 0)); W.paste(R, (L.width + 10, 0)); W.save(out)
+
 if __name__ == '__main__':
     if sys.argv[1] == 'section': section(*sys.argv[2:7])
+    elif sys.argv[1] == 'rooms': rooms(*sys.argv[2:7])
     else: plan(*sys.argv[2:8])
