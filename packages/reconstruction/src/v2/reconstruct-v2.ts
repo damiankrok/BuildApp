@@ -212,7 +212,10 @@ import type { ApproximateRidge } from './roof-datum.js'
 // head); a printed eaves mark the section's roof lines put at the eaves' lip is not the walls' head; the terrain
 // is the ground mark the published building height is measured from (`printedTerrainOf`); an elevation extent the
 // printed height refutes places neither end of the opening; a passage's head is no lower than the openings behind it
-export const SOLVER_V2_VERSION = '2.28.0' as const
+// 2.29.0 (v3.45): a room number the recogniser read supersedes the template's readings of its ink and is not held to
+// the sheet's text height (`labelTokensOf`); a region holding two published numbers takes neither; a ground-storey
+// opening at least vehicle-wide to the floor in a garage room's wall is a garage door in any body
+export const SOLVER_V2_VERSION = '2.29.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
