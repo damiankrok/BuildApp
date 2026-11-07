@@ -1,0 +1,17 @@
+{
+ "frozenAt": "2026-11-07",
+ "supersedesFor": "reporting from v3.46 on; the v3.45 scorers and their 1321 tables are kept unchanged as history (research/reading-v345)",
+ "note": "frozen before any v3.46 production change was scored and before any v3.46 PO run. Why each scorer changed and what it changed is in README.md; the 21 counter-probes (test_counterprobes.py) reproduce the audit-1321 findings against the v3.45 scorers and pass against these.",
+ "sha256": {
+  "annotations/section-signs.txt": "7ca06c0a0beed4def6e505f759392803e6adfac0c1b7361e4db7d17d38b3127d",
+  "scoring/score_section_signs.py": "7bb8e4265118cf4fa08a8ce0f78c54f7d6e836957e16f67c15c9f4ed82d54b4e",
+  "scoring/score_callouts_v2.py": "57915f7af700db6d53473b438f1d378220a939280147d69c140acdf751b266fd",
+  "scoring/score_views_v2.py": "5ba02a7fe72663787b5fd1106bb9629c1e68a56edaa0c75f531bf070e93c49c4",
+  "scoring/test_counterprobes.py": "28b4f5e022b3dc4adf4a88bf72a960948102eb955eb3464082b05bd6acfe5b96",
+  "scoring/przed_po_v346.py": "1c26478ac8010347ded8334e0770f28d2d278f8bb704290f155c22a4e0865e27"
+ },
+ "disclosure": [
+  "section-signs.txt adds a position and the printed raw text to each of the 266 legible section numbers whose values were frozen in v3.45 (levels-dev.txt / levels-eval.txt, unchanged); the positions were placed by eye on the original images after the v3.45 PO scores were known, without overlaying or opening any reader output. EVAL sections are therefore no longer blind for the position layer; their values remain the frozen ones.",
+  "Balsamowce stays DEV for callouts and room numbers (non-blind), EVAL for views and section numbers, per skill."
+ ]
+}

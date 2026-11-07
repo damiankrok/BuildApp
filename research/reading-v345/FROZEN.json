@@ -72,6 +72,22 @@
    ],
    "frozenAt": "2026-11-07",
    "note": "one correction after PO-3 was extracted and before it was scored, applied to PRZED and PO alike: the scorer now replicates readInterior of solver 2.29.0 \u2014 the sheet's text height from the template's kept tokens only, and a recogniser token not held to it. PRZED has no recogniser token, so its score is unchanged (6/2/53 kept, 21/9 with set-aside); before the correction PO-3 scored 13/2 kept. Production was changed first (the size comparison refused every number on sheets whose dimension labels are as large), the scorer followed it."
+  },
+  {
+   "files": [
+    "scoring/overlay.py",
+    "scoring/przed_po.py"
+   ],
+   "frozenAt": "2026-11-07",
+   "sha256": {
+    "scoring/overlay.py": "dd17265b1fcb7240611018372e24b759df8b9043c1db2203957a04e5f0caa7e0",
+    "scoring/przed_po.py": "704254685b78db77c24acd53921a3ba0fbb9282083118e9525663a5dd304ec14"
+   },
+   "supersedes": {
+    "scoring/overlay.py": "313fc28e125969477dc359c82b0f6a6d195ac1a5c79388b53f250376c27e8baa",
+    "scoring/przed_po.py": "c345f92598d034722123321606a382ff2345d9cebe31d7fcc188e472d0856a17"
+   },
+   "note": "v3.46 (audit 1321 \u00a76): the current hashes of the two v3.45 tools whose files changed after the freeze above. Both were extended in commit 329ea82 (room-number rows in the PRZED/PO table, the rooms overlay); no scoring criterion is in either file (they call the scorers and draw). The historical hashes stay above; these are the versions that produced the 1321 tables. The v3.45 scorers and tables are history from v3.46 on: reporting uses research/reading-v346 (its own FROZEN.json)."
   }
  ]
 }
