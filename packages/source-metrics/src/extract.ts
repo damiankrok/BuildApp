@@ -56,6 +56,7 @@ import { sealMetricEvidence } from './hash.js'
 import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from './external-levels.js'
 import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
 import { angleLabels, judgeAngles, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
+import { judgeSectionHeights, sectionHeightCrops, sectionHeightLabels, segmentOf, SECTION_HEIGHTS_NAME, SECTION_HEIGHTS_VERSION } from './section-heights.js'
 import type { RoofEdge } from './section-angles.js'
 import { ROOM_NUMBERS_NAME, ROOM_NUMBERS_VERSION, roomNumberLabels, roomNumberTokens } from './room-numbers.js'
 import type { MetricEvidenceDraft } from './hash.js'
@@ -73,7 +74,8 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.9.0 (EXTERIOR-COMPLETE E12): two barred rings on one bar row, overlapping or touching, are one callout ring split by ink touching it (`mergeSplitRings`). */
 /** 1.10.0 (v3.45): section pitch labels read along their slope and admitted by it; a callout ring whose own cut fails the gate is re-fitted to its stroke and read again; with a recogniser, a section's level marks are read by it and stand only by the same drawing — their symbols, one ladder, a printed ±0,00 on it (`level-marks.ts`); the template's datums they overrule are dropped. */
 /** 1.11.0 (v3.45): with a recogniser, a plan's upright one- or two-digit tokens are read again by it from their widened ink; a heard reading is a kept token that supersedes the template's readings of that ink (`room-numbers.ts`). */
-export const METRIC_READER_VERSION = '1.11.0' as const
+/** 1.12.0 (v3.46): with a recogniser, a section's vertical dimensions are read along their own dimension line — the label heard upright by the recogniser, the line beside it, its ends at a face or a tick — and stand only where the span at the section's level-ladder scale is the printed value (`section-heights.ts`). */
+export const METRIC_READER_VERSION = '1.12.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -398,6 +400,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   let roomNumbersHeard = 0
   // v3.45: how many section pitch labels the recogniser read along their slope and the slope admitted.
   let anglesAdmitted = 0
+  let sectionHeightsAdmitted = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
   // plan are seldom byte-identical crops: on the development rows the cache never hit.)
   const latticeCache: LatticeCache = new Map()
@@ -1146,6 +1149,83 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       }
     }
 
+    // --- v3.46: the section's vertical dimensions, read along their own line and admitted by the ladder's scale ---
+    // A section's clear heights and knee walls stand one to a faint line: the chains above never see them. Each vertical
+    // label the template found is heard upright by the recogniser, followed to the line beside it and that line's ends,
+    // and stands only where the span at the scale the section's level marks registered is the heard value. One value
+    // per label: a chain reading of the same label that says otherwise is dropped and named.
+    if (recogniser && plane === 'SECTION_HY') {
+      const mpp = levelRegistration?.metresPerPixelY ?? (ladder.metresPerPixel !== undefined && ladder.fitted >= 2 ? ladder.metresPerPixel : undefined)
+      const sectionTokens = read.raw ?? read.tokens
+      const byId = new Map<string, TextToken>()
+      const labels = sectionHeightLabels(
+        sectionTokens.map((t, i) => {
+          const id = tokensById.get(t)?.id ?? `token-${i}`
+          byId.set(id, t)
+          return { id, text: t.text, box: t.box, orientation: t.orientation }
+        }),
+      )
+      if (mpp !== undefined && labels.length > 0) {
+        const gray = toGray(raster)
+        const recognised: ExternalReading[] = yield { frameId: frame.id, crops: sectionHeightCrops(gray, labels) }
+        heard += recognised.length
+        const sheet = judgeSectionHeights(gray, labels, recognised, mpp * 100)
+        const overlaps = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) > Math.max(a.x0, b.x0) && Math.min(a.y1, b.y1) > Math.max(a.y0, b.y0)
+        for (const v of sheet.verdicts) {
+          const box = v.label.token.box
+          if (!v.admitted || v.valueCm === undefined || !v.line) {
+            if (v.valueCm !== undefined)
+              unresolved.push({
+                id: stableId('gap', 'section-height', { frameId: frame.id, box }),
+                what: `the vertical dimension "${v.text}" on ${frame.assetId}`,
+                frameId: frame.id,
+                reason: `${v.why} (${sheet.why})`,
+                status: 'AMBIGUOUS',
+                ocrTokenIds: byId.has(v.label.token.id) ? [v.label.token.id] : [],
+              })
+            continue
+          }
+          const same = evidence.filter((e) => e.frameId === frame.id && e.kind === 'LINEAR_DIMENSION' && e.textBox && overlaps(e.textBox, box))
+          if (same.some((e) => e.value === v.valueCm)) continue
+          for (const e of same) {
+            unresolved.push({
+              id: stableId('gap', 'section-height-overruled', { frameId: frame.id, evidenceId: e.id }),
+              what: `the chain reading "${e.rawText ?? e.value}" of a vertical dimension on ${frame.assetId}`,
+              frameId: frame.id,
+              reason: `the same label heard as ${v.text} and admitted by its own line at the section's scale: one value per label`,
+              status: 'AMBIGUOUS',
+              ocrTokenIds: e.ocrTokenIds,
+            })
+            evidence.splice(evidence.indexOf(e), 1)
+          }
+          const token = byId.get(v.label.token.id)
+          if (token) usedTokens.add(token)
+          const p = round6(v.meanP ?? 0.9)
+          evidence.push({
+            id: stableId('metric', 'section-height', { frameId: frame.id, box, value: v.valueCm }),
+            kind: 'LINEAR_DIMENSION',
+            frameId: frame.id,
+            assetId: frame.assetId,
+            variantByteHash: frame.variantByteHash,
+            value: v.valueCm,
+            unit: 'cm',
+            origin: 'READ',
+            rawText: v.text ?? '',
+            textBox: box,
+            measuredGeometry: segmentOf(v),
+            pixelLength: v.line.bottom - v.line.top,
+            association: { kind: 'DIMENSION_LINE', score: round6(Math.min(0.9, p)), why: v.why, observationIds: [] },
+            ocrTokenIds: byId.has(v.label.token.id) ? [v.label.token.id] : [],
+            observationIds: [],
+            alternatives: [],
+            confidence: round6(Math.min(0.85, p * 0.85)),
+            provenance: { extractor: 'RECOGNISER_VALIDATED', name: `${recogniser.id}/${recogniser.model.name}@${SECTION_HEIGHTS_NAME}-${SECTION_HEIGHTS_VERSION}`, detail: `${v.why}; ${sheet.why}` },
+          } as MetricEvidence)
+          sectionHeightsAdmitted += 1
+        }
+      }
+    }
+
     // --- the numbers nothing could be done with ---
     const orphaned = read.tokens.filter((t) => !usedTokens.has(t) && t.score >= 0.25)
     if (orphaned.length > 0) {
@@ -1247,6 +1327,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ...(levelMarksAdmitted > 0 ? [{ name: LEVEL_MARKS_NAME, version: LEVEL_MARKS_VERSION }] : []),
       ...(roomNumbersHeard > 0 ? [{ name: ROOM_NUMBERS_NAME, version: ROOM_NUMBERS_VERSION }] : []),
       ...(anglesAdmitted > 0 ? [{ name: SECTION_ANGLES_NAME, version: SECTION_ANGLES_VERSION }] : []),
+      ...(sectionHeightsAdmitted > 0 ? [{ name: SECTION_HEIGHTS_NAME, version: SECTION_HEIGHTS_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
