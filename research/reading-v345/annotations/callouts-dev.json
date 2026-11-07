@@ -1,0 +1,778 @@
+{
+ "schema": "buildapp.reading-annotations.callouts/1",
+ "doc": "DEV ground-plan callouts, same conventions as callouts-eval.json; annotator non-blind (DEV houses known from earlier stages)",
+ "projects": [
+  {
+   "project": "bakopy",
+   "blind": false,
+   "callouts": [
+    {
+     "text": "80/230",
+     "ring": [
+      157,
+      35
+     ],
+     "wall": "TOP",
+     "gap": [
+      150,
+      170
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "80/230",
+     "ring": [
+      195,
+      35
+     ],
+     "wall": "TOP",
+     "gap": [
+      183,
+      207
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "180/230",
+     "ring": [
+      345,
+      120
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      93,
+      150
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "180/230",
+     "ring": [
+      345,
+      215
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      187,
+      243
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "400/230",
+     "ring": [
+      398,
+      233
+     ],
+     "wall": "TOP",
+     "gap": [
+      335,
+      460
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "280/479",
+     "ring": [
+      541,
+      318
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      270,
+      355
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "220/140",
+     "ring": [
+      50,
+      227
+     ],
+     "wall": "LEFT",
+     "gap": [
+      193,
+      260
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "220/140",
+     "ring": [
+      50,
+      335
+     ],
+     "wall": "LEFT",
+     "gap": [
+      300,
+      370
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "100/230",
+     "ring": [
+      50,
+      441
+     ],
+     "wall": "LEFT",
+     "gap": [
+      420,
+      451
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "100/230",
+     "ring": [
+      50,
+      525
+     ],
+     "wall": "LEFT",
+     "gap": [
+      507,
+      537
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "105/210",
+     "ring": [
+      295,
+      527
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      278,
+      312
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "300/230",
+     "ring": [
+      443,
+      532
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      397,
+      490
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "500/225",
+     "ring": [
+      173,
+      713
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      93,
+      250
+     ],
+     "kind": "GARAGE_DOOR"
+    }
+   ]
+  },
+  {
+   "project": "arganiach",
+   "blind": false,
+   "callouts": [
+    {
+     "text": "330/230",
+     "ring": [
+      205,
+      148
+     ],
+     "wall": "TOP",
+     "gap": [
+      143,
+      267
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "110/230",
+     "ring": [
+      347,
+      148
+     ],
+     "wall": "TOP",
+     "gap": [
+      327,
+      368
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "220/230",
+     "ring": [
+      550,
+      148
+     ],
+     "wall": "TOP",
+     "gap": [
+      510,
+      592
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "320/230",
+     "ring": [
+      99,
+      297
+     ],
+     "wall": "LEFT",
+     "gap": [
+      237,
+      355
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "90/230",
+     "ring": [
+      665,
+      345
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      327,
+      363
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "90/230",
+     "ring": [
+      665,
+      437
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      420,
+      453
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "250/140",
+     "ring": [
+      209,
+      507
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      163,
+      257
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "150/210",
+     "ring": [
+      360,
+      507
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      333,
+      390
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "90/210",
+     "ring": [
+      373,
+      537
+     ],
+     "wall": "LEFT",
+     "gap": [
+      513,
+      553
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "500/225",
+     "ring": [
+      519,
+      643
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      427,
+      612
+     ],
+     "kind": "GARAGE_DOOR"
+    }
+   ]
+  },
+  {
+   "project": "projekt-dom-w-aurorach-26-g-m3a528b90e5301",
+   "blind": false,
+   "callouts": [
+    {
+     "text": "100/230",
+     "ring": [
+      231,
+      198
+     ],
+     "wall": "TOP",
+     "gap": [
+      207,
+      257
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "100/230",
+     "ring": [
+      427,
+      198
+     ],
+     "wall": "TOP",
+     "gap": [
+      400,
+      453
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "280/230",
+     "ring": [
+      599,
+      198
+     ],
+     "wall": "TOP",
+     "gap": [
+      527,
+      670
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "250/230",
+     "ring": [
+      731,
+      358
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      293,
+      417
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "160/120",
+     "ring": [
+      79,
+      529
+     ],
+     "wall": "LEFT",
+     "gap": [
+      490,
+      570
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "140/140",
+     "ring": [
+      731,
+      638
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      603,
+      667
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "275/225",
+     "ring": [
+      231,
+      699
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      163,
+      303
+     ],
+     "kind": "GARAGE_DOOR"
+    },
+    {
+     "text": "105/210",
+     "ring": [
+      384,
+      708
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      351,
+      405
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "80/140",
+     "ring": [
+      517,
+      708
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      493,
+      533
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "200/140",
+     "ring": [
+      647,
+      708
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      597,
+      700
+     ],
+     "kind": "WINDOW"
+    }
+   ]
+  },
+  {
+   "project": "projekt-dom-w-kostrzewach-4-m1bb23c8d1cf2e",
+   "blind": false,
+   "callouts": [
+    {
+     "text": "180/140",
+     "ring": [
+      216,
+      185
+     ],
+     "wall": "TOP",
+     "gap": [
+      170,
+      260
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "180/140",
+     "ring": [
+      385,
+      185
+     ],
+     "wall": "TOP",
+     "gap": [
+      340,
+      430
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "400/230",
+     "ring": [
+      634,
+      183
+     ],
+     "wall": "TOP",
+     "gap": [
+      533,
+      733
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "70/230",
+     "ring": [
+      61,
+      437
+     ],
+     "wall": "LEFT",
+     "gap": [
+      417,
+      457
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "230/230",
+     "ring": [
+      811,
+      437
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      380,
+      493
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "180/140",
+     "ring": [
+      185,
+      685
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      140,
+      230
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "70/210",
+     "ring": [
+      352,
+      645
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      333,
+      370
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "105/210",
+     "ring": [
+      435,
+      641
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      400,
+      453
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "70/210",
+     "ring": [
+      513,
+      645
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      497,
+      533
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "180/140",
+     "ring": [
+      680,
+      685
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      633,
+      723
+     ],
+     "kind": "WINDOW"
+    }
+   ]
+  },
+  {
+   "project": "projekt-willa-maja-r2-mcc7297f3e22da",
+   "blind": false,
+   "note": "semi-detached pair: two mirrored dwellings",
+   "callouts": [
+    {
+     "text": "360/230",
+     "ring": [
+      178,
+      197
+     ],
+     "wall": "TOP",
+     "gap": [
+      100,
+      253
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "110/230",
+     "ring": [
+      344,
+      197
+     ],
+     "wall": "TOP",
+     "gap": [
+      323,
+      365
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "110/230",
+     "ring": [
+      491,
+      197
+     ],
+     "wall": "TOP",
+     "gap": [
+      471,
+      513
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "360/230",
+     "ring": [
+      657,
+      197
+     ],
+     "wall": "TOP",
+     "gap": [
+      583,
+      735
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "180/230",
+     "ring": [
+      24,
+      337
+     ],
+     "wall": "LEFT",
+     "gap": [
+      297,
+      377
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "180/230",
+     "ring": [
+      811,
+      337
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      297,
+      377
+     ],
+     "kind": "GLAZING_TO_FLOOR"
+    },
+    {
+     "text": "120/140",
+     "ring": [
+      24,
+      527
+     ],
+     "wall": "LEFT",
+     "gap": [
+      497,
+      557
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "120/140",
+     "ring": [
+      811,
+      527
+     ],
+     "wall": "RIGHT",
+     "gap": [
+      497,
+      557
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "240/140",
+     "ring": [
+      102,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      50,
+      155
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "105/210",
+     "ring": [
+      320,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      300,
+      343
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "70/210",
+     "ring": [
+      371,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      355,
+      385
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "70/210",
+     "ring": [
+      466,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      450,
+      480
+     ],
+     "kind": "WINDOW"
+    },
+    {
+     "text": "105/210",
+     "ring": [
+      515,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      493,
+      537
+     ],
+     "kind": "DOOR"
+    },
+    {
+     "text": "240/140",
+     "ring": [
+      733,
+      576
+     ],
+     "wall": "BOTTOM",
+     "gap": [
+      680,
+      785
+     ],
+     "kind": "WINDOW"
+    }
+   ]
+  }
+ ]
+}

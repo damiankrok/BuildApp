@@ -16,7 +16,11 @@
   "scoring/score_views.py": "cf9e8e7a2281f85f2e4ac4e2149274da6233bc7342bd0f8a149658644c20c559",
   "scoring/views.py": "9504b73346aac25dd0afbf811dad29cc3327dd26b1c4a3354bf9c972cc5d86cb",
   "annotations/callouts-eval.jsonl": "5b0d0c38c4d401df454e73050b06250fa55d84ee8dc9cc81f5e15d41d9654885",
-  "annotations/callouts-eval.json": "f068f2d974d0c80fa9b6c97f1deca25ede4db4afd37af7d4bcf7104dc018d980"
+  "annotations/callouts-eval.json": "f068f2d974d0c80fa9b6c97f1deca25ede4db4afd37af7d4bcf7104dc018d980",
+  "scoring/score_callouts.py": "07ca8b15b753607b3ebe0716d73fd878df5f727fdc8176e17f2d31529dddbd64",
+  "scoring/overlay.py": "313fc28e125969477dc359c82b0f6a6d195ac1a5c79388b53f250376c27e8baa",
+  "scoring/przed_po.py": "c345f92598d034722123321606a382ff2345d9cebe31d7fcc188e472d0856a17",
+  "annotations/callouts-dev.json": "9a79f1b0bcad90ee1ef9e6ba118bd514f4b230969b1871536370dd688c764ead"
  },
  "addenda": [
   {
@@ -31,6 +35,16 @@
    ],
    "frozenAt": "2026-11-07",
    "note": "callout-to-target annotations of the EVAL ground plans (the .json is the same content as the committed .jsonl, parsed), frozen before any EVAL feature trace or callout binding output was opened. Balsamowce is non-blind (the annotator had seen its model opening list) and is scored as DEV."
+  },
+  {
+   "files": [
+    "scoring/score_callouts.py",
+    "scoring/overlay.py",
+    "scoring/przed_po.py",
+    "annotations/callouts-dev.json"
+   ],
+   "frozenAt": "2026-11-07",
+   "note": "binding scorer frozen before any PO run was scored. One correction made before freezing, applied to PRZED and PO alike: a gap must run along the annotated wall (a side-wall callout had matched a front gap at the corner). DEV callouts (57, five houses) are non-blind and used for diagnosis."
   }
  ]
 }
