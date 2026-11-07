@@ -750,11 +750,19 @@ export type DrawnDoorLeaf = { swing: 'IN' | 'OUT'; hingeAt: 'LOW' | 'HIGH' }
 export function doorLeafFound(raster: Raster, plan: PlanFrameV2, host: WallHost, interval: [number, number], wallThicknessM: number, occluders: readonly PixelBox[] = [], debug?: (record: Record<string, unknown>) => void): DrawnDoorLeaf | undefined {
   const w = interval[1] - interval[0]
   const into = host.facade === 'FRONT' || host.facade === 'WEST' ? 1 : -1
+  // v3.45: a plan draws the leaf the frame's width short of the gap as often as the gap's full width (Aurory's rear
+  // 100/230 door: a 0.82 leaf, its arc to match). A leaf within a sidelight's width of the gap is the gap's own leaf
+  // (`SIDELIGHT_MIN_M`), so its length is searched from the gap's width down to that, the leaf as long as its arc's
+  // radius about a pivot at the wall's face (the strict test; a pivot inside the wall would let a leaf beside a fixed
+  // light pass as the gap's own); shorter than that it is a leaf beside a fixed light, `drawnLeaves`'s to read.
+  const step = (plan.mppX + plan.mppY) / 2
+  const shorter: number[] = []
+  for (let r = w - step; r >= Math.max(PARTIAL_LEAF_MIN_M, w - SIDELIGHT_MIN_M) - 1e-9; r -= step) shorter.push(r)
   let found: DrawnDoorLeaf | undefined
   ;[into, -into].some((inward) => {
     const probe = leafProbe(raster, plan, host, interval, wallThicknessM, occluders, inward as 1 | -1, debug)
     for (const hingeAt of ['LOW', 'HIGH'] as const) {
-      if (probe.test(hingeAt, w)) {
+      if (probe.test(hingeAt, w) || shorter.some((r) => probe.test(hingeAt, r))) {
         found = { swing: inward === into ? 'IN' : 'OUT', hingeAt }
         return true
       }

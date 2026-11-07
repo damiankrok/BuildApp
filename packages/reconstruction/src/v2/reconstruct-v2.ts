@@ -216,7 +216,8 @@ import type { ApproximateRidge } from './roof-datum.js'
 // the sheet's text height (`labelTokensOf`); a region holding two published numbers takes neither; a ground-storey
 // opening at least vehicle-wide to the floor in a garage room's wall is a garage door in any body; where no view, fit
 // or layout decides the ridge axis, a roof falling four ways at one pitch has its ridge along the longer side, and a
-// convention is named (`ridge-axis.ts`)
+// convention is named (`ridge-axis.ts`); a door leaf drawn up to a sidelight's width short of its gap is the gap's own
+// leaf (`doorLeafFound`)
 export const SOLVER_V2_VERSION = '2.29.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
