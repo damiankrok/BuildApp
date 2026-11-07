@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest'
 import { repairFromResiduals } from '../src/v2/verify.js'
 import type { SourceViewResidual } from '../src/v2/verify.js'
-import type { BuildingV2 } from '../src/v2/emit.js'
+import type { BuildingV2 } from '../src/v2/building.js'
 
 const opening = (id: string, family: string, sillY: number, headY: number) => ({ id, family, sillY, headY, storeyIndex: 0, facade: 'REAR', interval: [2, 3], uncertaintyM: 0.05, unresolved: [], provenance: { sill: 'ASSUMED_FOR_RENDERING', head: 'ASSUMED_FOR_RENDERING' } })
 const building = (openings: ReturnType<typeof opening>[]) => ({ openings, levels: [{ index: 0, elevation: 0, height: 2.96 }] }) as unknown as BuildingV2
