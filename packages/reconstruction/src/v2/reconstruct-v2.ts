@@ -214,7 +214,9 @@ import type { ApproximateRidge } from './roof-datum.js'
 // printed height refutes places neither end of the opening; a passage's head is no lower than the openings behind it
 // 2.29.0 (v3.45): a room number the recogniser read supersedes the template's readings of its ink and is not held to
 // the sheet's text height (`labelTokensOf`); a region holding two published numbers takes neither; a ground-storey
-// opening at least vehicle-wide to the floor in a garage room's wall is a garage door in any body
+// opening at least vehicle-wide to the floor in a garage room's wall is a garage door in any body; where no view, fit
+// or layout decides the ridge axis, a roof falling four ways at one pitch has its ridge along the longer side, and a
+// convention is named (`ridge-axis.ts`)
 export const SOLVER_V2_VERSION = '2.29.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
@@ -1008,11 +1010,16 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const fullRise = statedPitch && support.pitchDeg ? 0.35 * Math.abs(along[1] - along[0]) * Math.tan((support.pitchDeg.value * Math.PI) / 180) : 0
       apexVotes.push({ side: v.view.side, peakM, gableEnd: peakM > 0.6 && (fullRise === 0 || peakM >= 0.75 * fullRise) })
     }
-    const { votedAxis, fittedAxis, overturned, ridgeAxis } = decideRidgeAxis({ apexVotes, layoutAxis: support.ridgeAxis, statedPitchDeg: support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? support.pitchDeg?.value : undefined, hip: support.kind === 'HIP', spanX: main.x1 - main.x0, spanZ: main.z1 - main.z0 })
+    const { votedAxis, fittedAxis, overturned, ridgeAxis, fallback } = decideRidgeAxis({ apexVotes, layoutAxis: support.ridgeAxis, statedPitchDeg: support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? support.pitchDeg?.value : undefined, hip: support.kind === 'HIP', spanX: main.x1 - main.x0, spanZ: main.z1 - main.z0 })
     if (overturned && fittedAxis) {
       step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured, over the layout\'s', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
       gap({ what: `which way the ridge runs over ${main.id}`, reason: `the layout's rise test put the ridge along ${support.ridgeAxis}; ${fittedAxis.why}: the views stand`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     } else if (fittedAxis && !support.ridgeAxis) step({ stage: 'roof', what: 'the ridge axis, from the rise the views measured', method: 'DISCRETE_SELECTION', detail: fittedAxis.why, inputs: apexVotes.length, outputs: 1 })
+    // v3.45: nothing decided the axis — say how it was settled; a convention is a named gap, geometry a step
+    if (fallback) {
+      step({ stage: 'roof', what: 'the ridge axis, with no view, fit or layout deciding it', method: 'DIRECT', detail: fallback.why, inputs: apexVotes.length, outputs: 1 })
+      if (!fallback.geometric) gap({ what: `which way the ridge runs over ${main.id}`, reason: fallback.why, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    }
     options.debug?.(`ridge-axis support ${support.kind}/${support.authority}/${support.why?.slice(0, 160)}; votes ${apexVotes.map((a) => `${a.side}:${a.peakM.toFixed(2)}${a.gableEnd ? '*' : ''}`).join(' ')} voted ${votedAxis ?? '-'} layout ${support.ridgeAxis ?? '-'} fitted ${fittedAxis?.axis ?? '-'} -> ${ridgeAxis}`)
     const ridgeAt = ridgeAxis === 'Z' ? round6((main.x0 + main.x1) / 2) : round6((main.z0 + main.z1) / 2)
     const halfSpan = ridgeAxis === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2

@@ -12,6 +12,10 @@
  *   rise test reads the eaves datum as the walls' head; where the section prints it at the lip of an overhang, the
  *   walled span across the wrong axis can reproduce the rise by coincidence, and the views, which see the roof itself,
  *   then overturn it.
+ * - v3.45: where nothing above decides — no gable end voted, no fit, no layout axis — a roof that falls four ways at
+ *   one pitch has its ridge along the body's longer side: with every plane at the same pitch the hips meet the ridge
+ *   at 45° in plan, and the ridge is the long side less the short one. That is geometry, not a convention; only a
+ *   square body (a pyramid) or a gable roof is left to the default, and the default is named (`geometric`).
  */
 export type ApexVote = { side: string; peakM: number; gableEnd: boolean }
 
@@ -20,6 +24,8 @@ export type RidgeAxisDecision = {
   votedAxis?: 'X' | 'Z'
   fittedAxis?: { axis: 'X' | 'Z'; contradicts: boolean; why: string }
   overturned: boolean
+  /** v3.45: how the axis was settled when no view, fit or layout decided it. */
+  fallback?: { axis: 'X' | 'Z'; geometric: boolean; why: string }
 }
 
 export function decideRidgeAxis(input: { apexVotes: readonly ApexVote[]; layoutAxis?: 'X' | 'Z'; statedPitchDeg?: number; hip: boolean; spanX: number; spanZ: number }): RidgeAxisDecision {
@@ -49,6 +55,12 @@ export function decideRidgeAxis(input: { apexVotes: readonly ApexVote[]; layoutA
     return { axis, contradicts, why: `no view shows a gable end${layoutAxis ? '' : ' and the layout states no axis'}; the views' rise over their middle (${apexVotes.map((v) => `${v.side.toLowerCase()} ${v.peakM.toFixed(2)} m`).join(', ')}) fits a ridge along ${axis} at the stated ${statedPitchDeg}° (${apexVotes.map((v) => peakAt(axis, v.side).toFixed(2)).join(', ')} m) and not one along ${other} (${apexVotes.map((v) => peakAt(other, v.side).toFixed(2)).join(', ')} m)` }
   })()
   const overturned = !votedAxis && layoutAxis !== undefined && fittedAxis !== undefined && fittedAxis.axis !== layoutAxis && fittedAxis.contradicts
-  const ridgeAxis: 'X' | 'Z' = votedAxis ?? (overturned && fittedAxis ? fittedAxis.axis : (layoutAxis ?? fittedAxis?.axis)) ?? 'Z'
-  return { ridgeAxis, ...(votedAxis ? { votedAxis } : {}), ...(fittedAxis ? { fittedAxis } : {}), overturned }
+  const decided: 'X' | 'Z' | undefined = votedAxis ?? (overturned && fittedAxis ? fittedAxis.axis : (layoutAxis ?? fittedAxis?.axis))
+  if (decided) return { ridgeAxis: decided, ...(votedAxis ? { votedAxis } : {}), ...(fittedAxis ? { fittedAxis } : {}), overturned }
+  const longer: 'X' | 'Z' | undefined = Math.abs(input.spanX - input.spanZ) < 0.01 ? undefined : input.spanX > input.spanZ ? 'X' : 'Z'
+  const fallback: NonNullable<RidgeAxisDecision['fallback']> =
+    input.hip && longer
+      ? { axis: longer, geometric: true, why: `no view, fit or layout decides; a roof falling four ways at one pitch has its ridge along the longer side (${longer}: ${input.spanX.toFixed(2)} × ${input.spanZ.toFixed(2)} m)` }
+      : { axis: 'Z', geometric: false, why: `no view, fit or layout decides, and ${input.hip ? 'a square hipped body has no longer side' : 'a gable roof has no geometric axis'}: the ridge runs along Z by convention` }
+  return { ridgeAxis: fallback.axis, ...(fittedAxis ? { fittedAxis } : {}), overturned, fallback }
 }

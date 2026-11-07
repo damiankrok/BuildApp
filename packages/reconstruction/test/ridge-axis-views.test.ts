@@ -56,4 +56,29 @@ describe('decideRidgeAxis', () => {
     expect(d.ridgeAxis).toBe('Z')
     expect(d.overturned).toBe(false)
   })
+
+  // v3.45 (Willa Maja): a 17.22 × 7.80 m hipped body at a stated 22°; its one voting view rises 1.00 m, which fits
+  // neither axis (a hip's run would show 0.53 m, an end 2.43 m), and the layout states no axis
+  const maja = { statedPitchDeg: 22, hip: true, spanX: 17.22, spanZ: 7.8 }
+  it('v3.45: where nothing decides, a roof falling four ways at one pitch has its ridge along the longer side', () => {
+    const d = decideRidgeAxis({ ...maja, apexVotes: [flat('REAR', 1.0)] })
+    expect(d.fittedAxis).toBeUndefined()
+    expect(d.ridgeAxis).toBe('X')
+    expect(d.fallback).toMatchObject({ axis: 'X', geometric: true })
+  })
+  it('v3.45: the same body turned gives Z; with no view at all the geometry still decides', () => {
+    expect(decideRidgeAxis({ ...maja, spanX: 7.8, spanZ: 17.22, apexVotes: [flat('LEFT', 1.0)] }).ridgeAxis).toBe('Z')
+    expect(decideRidgeAxis({ ...maja, apexVotes: [] }).ridgeAxis).toBe('X')
+  })
+  it('counter: a gable roof or a square hipped body has no geometric axis: the convention stands and is named', () => {
+    const g = decideRidgeAxis({ ...maja, hip: false, apexVotes: [flat('REAR', 1.0)] })
+    expect(g.ridgeAxis).toBe('Z')
+    expect(g.fallback).toMatchObject({ geometric: false })
+    expect(decideRidgeAxis({ ...maja, spanX: 10, spanZ: 10, apexVotes: [] }).fallback).toMatchObject({ axis: 'Z', geometric: false })
+  })
+  it('counter: a layout axis, a fit or a voted gable end is never replaced by the geometric fallback', () => {
+    expect(decideRidgeAxis({ ...maja, apexVotes: [flat('REAR', 1.0)], layoutAxis: 'Z' }).ridgeAxis).toBe('Z')
+    expect(decideRidgeAxis({ ...maja, apexVotes: [{ side: 'FRONT', peakM: 2.4, gableEnd: true }] }).ridgeAxis).toBe('Z')
+    expect(decideRidgeAxis({ ...maja, apexVotes: [flat('REAR', 1.0)], layoutAxis: 'Z' }).fallback).toBeUndefined()
+  })
 })
