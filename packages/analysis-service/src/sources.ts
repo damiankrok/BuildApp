@@ -28,6 +28,14 @@ export type SourceReading = {
   box?: { x0: number; y0: number; x1: number; y1: number }
   /** The line it measures and its two ends, in the sheet's pixels. */
   line?: { x0: number; y0: number; x1: number; y1: number }
+  /**
+   * v3.45: who read the number and on what grounds it stands — the reader (NUMERIC_OCR: the template reader;
+   * RECOGNISER_VALIDATED: the shipped numeric recogniser, admitted only by checks on the same drawing; CHAIN_SOLVER: a
+   * value the chain's arithmetic corrected; VISION_VALIDATED: a vision model's reading the drawing admitted) and its
+   * own account.
+   */
+  reader?: string
+  readerDetail?: string
   /** What the model did with it: the solver's disposition, the feature it went into, and why. */
   use: string
   featureId?: string
@@ -163,6 +171,8 @@ export function sourceInspectionOf(input: {
           origin: e.origin,
           ...(e.textBox ? { box: { x0: e.textBox.x0, y0: e.textBox.y0, x1: e.textBox.x1, y1: e.textBox.y1 } } : {}),
           ...(line ? { line } : {}),
+          reader: e.provenance.extractor,
+          ...(e.provenance.detail ? { readerDetail: e.provenance.detail } : {}),
           use: l?.disposition ?? 'NOT_CONSULTED',
           ...(l?.featureId ? { featureId: l.featureId } : {}),
           elementIds: elementIdsOf(l?.featureId),

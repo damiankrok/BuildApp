@@ -689,6 +689,12 @@
     <string name="live_step_compiling">Kompilowanie sceny 3D</string>
     <string name="live_step_verifying">Sprawdzanie modelu</string>
     <!-- SHAPE-LIVE-01: source inspection, every reading reachable and its element -->
+    <string name="sources_reader_template">Odczyt czytnika wzorcowego</string>
+    <string name="sources_reader_recogniser">Odczyt rozpoznawania cyfr, przyjęty przez sprawdzenie na tym samym rysunku</string>
+    <string name="sources_reader_chain">Wartość poprawiona arytmetyką łańcucha wymiarowego</string>
+    <string name="sources_reader_vision">Odczyt modelu wizyjnego, przyjęty przez sprawdzenie na rysunku</string>
+    <string name="sources_reader_other">Inne źródło odczytu</string>
+    <string name="sources_reader_detail">%1$s: %2$s</string>
     <string name="sources_show_in_model">Pokaż w modelu (%1$d el.)</string>
     <string name="sources_no_element">Ten odczyt nie trafił do żadnego elementu modelu.</string>
     <string name="sources_page">Strona %1$d z %2$d · %3$d odczytów</string>

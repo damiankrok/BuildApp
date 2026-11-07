@@ -79,6 +79,8 @@ private fun SheetDetails(sheet: SourceSheet, onShowElement: (String) -> Unit) {
         SheetPicture(sheet, selected, picture)
         sheet.readings.firstOrNull { it.id == selected }?.let { r ->
             Text(readingText(r) + " — " + useText(r), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+            // v3.45: who read it and on what grounds it stands (the drawing's own checks for a recogniser's reading)
+            readerText(r.reader)?.let { who -> StatusText(r.readerDetail?.let { stringResource(R.string.sources_reader_detail, who, it) } ?: who, maxLines = 4) }
             StatusText(r.why, maxLines = 4)
             // the reading's own crop, enlarged: a label of a few pixels is read here, not on the whole sheet
             (picture as? PictureLoad.Shown)?.let { shown -> (r.box ?: r.line)?.let { ReadingCrop(shown.bitmap, sheet, it) } }
@@ -244,6 +246,16 @@ private fun measureText(measure: String): String = when (measure) {
     "ANGLE" -> stringResource(R.string.sources_measure_angle)
     "AREA" -> stringResource(R.string.sources_measure_area)
     else -> stringResource(R.string.sources_measure_dimension)
+}
+
+@Composable
+private fun readerText(reader: String?): String? = when (reader) {
+    "NUMERIC_OCR" -> stringResource(R.string.sources_reader_template)
+    "RECOGNISER_VALIDATED" -> stringResource(R.string.sources_reader_recogniser)
+    "CHAIN_SOLVER" -> stringResource(R.string.sources_reader_chain)
+    "VISION_VALIDATED" -> stringResource(R.string.sources_reader_vision)
+    null, "" -> null
+    else -> stringResource(R.string.sources_reader_other)
 }
 
 @Composable

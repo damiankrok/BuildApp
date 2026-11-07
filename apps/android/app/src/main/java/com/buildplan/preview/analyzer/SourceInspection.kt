@@ -69,6 +69,9 @@ data class SourceReading(
     val origin: String = "",
     val box: SourceRect? = null,
     val line: SourceRect? = null,
+    /** v3.45: who read the number (NUMERIC_OCR, RECOGNISER_VALIDATED, CHAIN_SOLVER, VISION_VALIDATED) and its own account. */
+    val reader: String? = null,
+    val readerDetail: String? = null,
     val use: String = "",
     val featureId: String? = null,
     /** SHAPE-LIVE-01: the model elements this reading's feature was built into; empty when it went into none. */
