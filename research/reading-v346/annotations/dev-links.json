@@ -1,0 +1,39 @@
+{
+ "schema": "buildapp.reading-annotations.dev-links/1",
+ "frozenAt": "2026-11-07",
+ "split": "DEV",
+ "annotator": "developer, non-blind (the DEV houses are known from earlier stages; the section-heights reader's DEV probe output had been seen for these sections, its end rows had not been compared with these)",
+ "doc": "A small set of links between a printed number or an element and what it measures, read from the original images (zoomed 2x crops with a pixel grid in original coordinates) before the v3.46 outputs were scored against them. N, tolerances and categories fixed here. Coordinates: px of the 1138 px section edition.",
+ "categories": {
+  "SECTION_DIMENSION_ENDS": {
+   "what": "a vertical dimension on a section: the rows of its two ends — the face it runs to (slab underside, slab top) or, where the line runs on past it, the tick that ends it",
+   "toleranceRowsPx": 3,
+   "note": "items marked uncertain carry their own tolerance; the scorer uses max(3, uncertaintyPx)"
+  },
+  "RELATION": {
+   "what": "a relation between source evidence and the canonical model, checked in the model"
+  }
+ },
+ "items": [
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "marcowki", "value": 266, "at": [312, 325], "lineX": 330, "top": 226, "topEnd": "FACE", "bottom": 420, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "marcowki", "value": 130, "at": [183, 373], "lineX": 200, "top": 326, "topEnd": "TICK", "bottom": 420, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "marcowki", "value": 272, "at": [312, 545], "lineX": 330, "top": 449, "topEnd": "FACE", "bottom": 644, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "marcowki", "value": 252, "at": [805, 553], "lineX": 823, "top": 459, "topEnd": "FACE", "bottom": 642, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe", "value": 125, "at": [322, 412], "lineX": 340, "top": 370, "topEnd": "TICK", "bottom": 456, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe", "value": 259, "at": [420, 368], "lineX": 437, "top": 284, "topEnd": "FACE", "bottom": 456, "bottomEnd": "FACE", "uncertaintyPx": 6, "note": "the slab underside at the top is hard to place under the sloping roof band at 2x"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe", "value": 264, "at": [420, 567], "lineX": 437, "top": 477, "topEnd": "FACE", "bottom": 655, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-daliach-5-ge-me3c2885945467", "value": 338, "at": [482, 338], "lineX": 499, "top": 217, "topEnd": "FACE", "bottom": 452, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-daliach-5-ge-me3c2885945467", "value": 121, "at": [730, 412], "lineX": 746, "top": 366, "topEnd": "TICK", "bottom": 451, "bottomEnd": "FACE", "note": "the line runs on up to the roof's underside (~360); its tick is lower"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "projekt-dom-w-daliach-5-ge-me3c2885945467", "value": 273, "at": [482, 572], "lineX": 499, "top": 474, "topEnd": "FACE", "bottom": 664, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "a01", "value": 136, "at": [383, 377], "lineX": 400, "top": 332, "topEnd": "TICK", "bottom": 427, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "a01", "value": 201, "at": [812, 612], "lineX": 830, "top": 540, "topEnd": "FACE", "bottom": 678, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "sasankach3", "value": 135, "at": [245, 410], "lineX": 261, "top": 368, "topEnd": "TICK", "bottom": 456, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "sasankach3", "value": 278, "at": [245, 572], "lineX": 261, "top": 476, "topEnd": "FACE", "bottom": 660, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "trytomach", "value": 136, "at": [273, 367], "lineX": 288, "top": 318, "topEnd": "TICK", "bottom": 422, "bottomEnd": "FACE"},
+  {"cat": "SECTION_DIMENSION_ENDS", "project": "trytomach", "value": 266, "at": [372, 545], "lineX": 387, "top": 447, "topEnd": "FACE", "bottom": 644, "bottomEnd": "FACE", "uncertaintyPx": 6, "note": "several parallel lines (a door frame) beside the label; the slab underside read at 437-447"},
+  {"cat": "RELATION", "project": "bakopy", "id": "wing-roof-form", "claim": "the attached wing beside the main gable (the body whose plan box starts at the main body's east end) carries a pitched roof, its ridge along X, level with the main ridge (front elevation: a slope seen side on from eaves to a level ridge on the main apex's row)", "check": "a pitched attached roof (not FLAT) over the attached body east of the main body, ridge along X"},
+  {"cat": "RELATION", "project": "ciesz", "id": "attic-floor", "claim": "a single-storey house (the page: 'parterówka'; all 13 published rooms on the ground storey); the section prints the attic floor (the ceiling slab's top) at +3,34 and the ground storey's clear height 283", "check": "no room above the ground level, and any level above it has its floor at 3.34 ± 0.05"},
+  {"cat": "RELATION", "project": "ciesz", "id": "east-window-heights", "claim": "the four east windows are drawn one height on the east elevation (top and bottom on the same rows, about 1.45-1.5 m tall)", "check": "the ground-storey windows of the east wall differ in height by at most 0.15 m"},
+  {"cat": "RELATION", "project": "ciesz", "id": "rear-window-heights", "claim": "the two rear windows are drawn one height on the rear elevation (about 1.43-1.5 m tall)", "check": "the ground-storey windows of the rear wall, excluding glazing to the floor, differ in height by at most 0.15 m"}
+ ]
+}
