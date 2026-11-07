@@ -13,3 +13,14 @@ both are reproduced in `scoring/test_counterprobes.py` against the old scorers a
 Run the probes: `python3 -m unittest -v research/reading-v346/scoring/test_counterprobes.py`.
 
 Tables: `scoring/przed_po_v346.py <config.json> <out.json> <out.md>` (config names the run roots of each column).
+
+Results of delivery 1322 (PRZED = E13/1320, PO-1321, PO-1322 from the frozen tree `572b875`):
+`results/przed-po-v346-1322.md`; discussion in `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md` §11 and
+`stage-reports/EXTERIOR_COMPLETE_LOG.md` E15. Per-sign, per-callout and per-image outputs stay in the private ZIP.
+
+Coverage after v3.46 (addendum to `../reading-v345/COVERAGE.md`, which stays as the v3.45 snapshot):
+- Numbers: every legible section sign (266 on 32 sections) has a place; levels, pitch and vertical dimensions are scored
+  at that place, raw / normalised / corrected / origin apart.
+- Binding: callout → its own opening one-to-one; 16 section dimension end pairs (text → line → ends) and 4
+  source-checked relations (`annotations/dev-links.json`, frozen before scoring).
+- Still without a measure: walls vs furniture, columns, balconies, dormers, mixed-sheet regions, exact L/R side.

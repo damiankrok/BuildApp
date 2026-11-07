@@ -714,3 +714,108 @@ billing unconfirmed). Android UI NOT_VERIFIED (no device).
 - **Next concrete action:** Bakopy wing roof — the elevation silhouette registration once the terrain is printed (the
   rear view's ground moved −0.27 → −0.92 m between runs); then plan-reading failures (scale under crossed ticks,
   decomposition) that keep five EVAL houses from openings.
+
+## E15 — v3.46: a trustworthy measure, dimension ends on sections, roof shape under a refused registration, one callout per opening; test delivery 1322
+
+Same campaign, continued from the E14 code (`4328439`). WORK_IN_PROGRESS. H2 sealed. Android UI NOT_VERIFIED. No AI call.
+
+**Measurement (research/reading-v346; the v3.45 scorers and 1321 tables kept unchanged as history).**
+- `score_section_signs.py`: each of 266 legible section numbers (32 sections) has a place and its printed raw text
+  (`annotations/section-signs.txt`, placed on the originals after the v3.45 scores were known — disclosed). Matching by
+  geometry only; raw text, raw value, final value, origin and measure kind reported apart; two different claims on one
+  sign are a conflict; R/T/F checked against the model's datums and storeys.
+- `score_callouts_v2.py`: one-to-one geometric assignment (along-wall IoU ≥ 0.5), MERGED_GAP / SPLIT_GAP, readings one
+  per ring, the bound callout must be this ring's, NO_MODEL kept in the denominator.
+- `score_views_v2.py`: graph / pixels / side as separate layers; pixel coverage with the reason for each undecided image;
+  verdicts kept by failed runs read; PROPAGATED apart; exact L/R not measured (no L/R reference).
+- `test_counterprobes.py`: 21 probes. Audit 1321's two probes reproduced against the old scorers (2/2, 3/3) and rejected by
+  the new ones; eaves/ridge swap, right number on a neighbouring host, same digits from the other ring, removed run,
+  L/R swap under SIDE; opposite cases pass.
+- The 139 NOT_CLASSIFIED of EVAL-PO-content were all images of the five EVAL houses that failed in the solver before the
+  summary that stores the verdicts was written (no variant propagation involved). Fixed in the service.
+- `annotations/dev-links.json` (frozen before scoring): 16 section dimension end pairs on 6 sections and 4 source-checked
+  relations. Walls vs furniture, columns, balconies, dormers, mixed-sheet regions and exact L/R still have no measure.
+
+**Production (general causes).**
+1. Solver 2.30.0 — roof shape survives a refused registration. FIRST_BAD (Bakopy wing): a view's heights were re-anchored
+   on the main roof's own line by the median of the top residuals; crowns and a chimney behind the slope raised half the
+   columns by 0.5–1.1 m, the median (+0.73 m) moved every height, the wing's gable read 0.8 m short, was left unread and
+   built flat by convention. Now `topLineOffset`: the lowest band of residuals holding a fair share of the columns
+   (occluders only raise the top a walk from the sky finds); a refused view is read only through that anchor and gives
+   no reading without it; an unsettled pitched observation is kept as an unresolved `form`. On the 1321 evidence the
+   change touches Bakopy alone (wing: flat → gable along X, as the front elevation shows).
+2. Metric reader 1.12.0 — section vertical dimensions read as text → line → ends → span (`section-heights.ts`): the
+   recogniser hears the label (the template only finds it), the faint line beside it is followed to the face of a slab,
+   wall or roof or to the tick before a free end, and the span at the section's own level-ladder scale must equal the
+   value; the sheet's reading direction is decided once, from what the drawing admits. DEV probe: 39/59 right, 0 wrong,
+   0 spurious (was 3/59). The v2 solver does not consume section dimensions yet: the effect is in the evidence and its
+   measure, not in the models.
+3. Solver 2.31.0 — one callout, one opening (`calloutOwners`): every callout of a storey belongs to the nearest gap it
+   fits on any wall, decided before any gap is read. 8 double bindings on 7 houses (3 across two walls) resolved; 3
+   openings whose own ring is unread lose a borrowed size (named; Bakopy's rear-left window now wrong by convention).
+4. Service — a run that fails after the content check writes its verdicts (`content-verdicts.json`).
+
+**Ciesz source check.** Page: a single-storey house (parterówka) with a hip roof, 13 rooms on the ground storey, usable
+area = floor area. Section: ceiling slab (underside ≈ +2.83 from the 283 dimension, top +3.34), walls up under the roof to
+≈ +3.8. Model: the ceiling slab is now there (PRZED had none) and the new level holds no room, but its floor stands at
++2.93 (the eaves mark) instead of the printed +3.34 — a level-semantics error, named. The east and rear elevations draw
+all windows one height (~1.45–1.5 m); the model has 0.73 and 0.90 m for two of them (extent read on reflective glass) —
+a 1321 error still open.
+
+**PRZED / PO-1321 / PO-1322, same v3.46 scorers** (PRZED = E13/1320; PO-1322 = fresh full path from the frozen tree
+`572b875`; `research/reading-v346/` and the ZIP hold every class):
+- DEV: section levels right at the sign 49 → 107 → 108/110 (located 68 → 109 → 109; conflicts 2 → 2 → 1); model role
+  of storey floors 25 → 34 → 34/39, ridge 21/21 and terrain 20/21 now assessed (1 each without assessment); roof pitch
+  0 → 12 → 12/22 (3 additions); **vertical dimensions 3 → 3 → 39/59, 0 wrong** (5 additions, all from the older chain
+  reader); callout ring found 42 → 55 → 55/67, digits 37 → 50 → 50/67, callout → its own opening complete
+  28 → 43 → 43/67 (wrong binding 1 → 1 → 0); view roles graph macro F1 0.975, pixels 0.996 with coverage
+  608 → 629 → 650/650; side coarse 89/92; exact L/R not measured.
+- EVAL: levels 24 → 44 → 44/46 (0 wrong); storey role 6 → 7 → 7/17 (signs on houses without a model count as wrong),
+  ridge 5/5 and terrain 4/5 assessed (5 each without assessment); pitch 0 → 2 → 2/7 (one located wrong);
+  **vertical dimensions 1 → 1 → 14/22, 0 wrong** — the reader's first EVAL measurement (tuned on DEV only); callouts
+  24/81 complete (41 in the five houses without a model; wrong kind 2 → 0 → 0, additions 3 → 3 → 2); pixel coverage
+  119 → 119 → 258/258, macro F1 1.000; side coarse 34/40. EVAL sign positions were placed after the v3.45 results were
+  known (disclosed in FROZEN.json).
+- The 1321 tables (v3.45 scorers: levels 51 → 109/110, callouts 28 → 33/57) stay unchanged in E14 as history; the
+  difference is the measure, not the code.
+
+**Gates (v3.45 thresholds, not lowered).** View roles macro F1 ≥ 95 %: met. Numbers ≥ 98 % exact at ≥ 90 % coverage:
+met for levels (DEV 108/109 located at 99 % coverage, EVAL 44/44 at 96 %); not met for vertical dimensions (exact
+100 %, coverage 66 % / 64 %), pitch and callout digits. Complete assignment ≥ 95 %: not met (64 % DEV, 30 % EVAL).
+
+**DEV link set.** Dimension ends 12/16 within tolerance (≤ 2 px); 2 with the right value and ends off (Marcówki 272:
+−4/−3 px against 3; Sasanki 278 is the old chain reader's reading, whose geometry is the chain line); 2 not read
+(Dalie 121, Trytomy 266). Relations 1/4: Bakopy wing roof OK; Ciesz attic floor, east and rear window heights WRONG.
+
+**Integration (1321 → 1322, all 33 projects, element by element).** 31 SAME. Bakopy: wing flat → gable along X (two
+planes "need a source": the front elevation; edges 2 eaves, ridge, 2 verges), four wing walls change, the rear-left
+window loses the height it borrowed from its twin (2.30, sill 0) and gets the 1.30 / 0.90 convention against the
+source's 80/230 — named cost. Zefiranty: two front openings lose a borrowed callout size (1.50×1.20/1.00 →
+1.35×1.30/0.90; 0.78×0.57/1.02 → 0.69×0.76/0.90). Compile ERRORs equal PRZED and 1321 (Balsamowce 2, Jabłonki 1,
+Zefiranty 5, all `OPENING_ABOVE_WALL_TOP`). Old exterior checker 39/70 (as 1321).
+
+**Production.** 33 full-path runs from `572b875`: 27 models, 6 failures recorded as results (Bukszpany, Modrzewnica
+`METRIC_RESOLUTION_INCONCLUSIVE`; Santany, Eliza `PLAN_RESOLUTION_INCONCLUSIVE`; Julia `PLAN_NO_WALLED_ENVELOPE`;
+Ofelia `PLAN_LAYOUT_REJECTED` — the same six as 1321), each with its content verdicts kept; solver replays 27/27
+byte-identical (they supply the feature traces, which the full path does not write). Tests on the frozen tree:
+root typecheck including tests 0 errors, source-metrics 405/405, reconstruction 1378/1378,
+service and analyzer 270/270, counter-probes 21/21.
+
+**Test delivery 1322:** code `572b875`; `BuildPlan-owner-preview-1322.apk`, versionCode 1322, `0.1322.0-owner`, universal (four ABIs;
+1321 was a single-ABI build), 71 533 012 B, SHA-256 `342ea3c78f18d022fbe78bcd4c30fa71969e4de3892bb1b5256eb335634303d4`;
+signer `6e48fac4…ca0da` (unchanged, v2); zipalign `-P 16` ok; embedded `analyzer.mjs`
+`242917f8686e7d6d9d4a9dbac5ec95dde0f6a97d1de35e82a47267652e6be6a3` (solver 2.31.0, metric reader 1.12.0); 10/10 asset
+manifest entries match; the build's `VERSION.txt` records commit `572b875`. Android UI NOT_VERIFIED (no device).
+
+**Private delivery outside Git:** `BuildPlan-EXTERIOR-COMPLETE-Private-1322.zip`, 701 files, 43 469 888 B, SHA-256
+`34295dcad6c3508396320c197b045fefdba25a548fb7f100e554679aa8bbe5ec`: `RUNS.json` (every run, successes and failures,
+replay identity), per project the source package, decoded-byte hashes, graph, evidence, model, program, feature trace
+(from the byte-identical replay), diagnostics, analysis trace, scene; v3.46 scores and the v3.45 table as history;
+examples on the originals; changes 1321 → 1322; build and test logs; originals limited to the 187 annotated sheets
+(the other 721 images listed by hash and URL). Not included: other publisher images, H2 (sealed), the OWNER's private
+benchmark (out of scope).
+
+**Open, named:** Ciesz level semantics (+2.93 vs +3.34) and two window heights (0.73 / 0.90 vs ~1.5); Bakopy rear-left
+window by convention; callout assignment (unread own rings, five EVAL houses without openings), roof pitch and
+vertical-dimension coverage below the gates; the v2 solver does not consume section dimensions yet; no measure yet for
+walls vs furniture, columns, balconies, dormers, mixed-sheet regions and exact L/R.

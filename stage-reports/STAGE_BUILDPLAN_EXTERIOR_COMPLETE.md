@@ -1,8 +1,8 @@
 # STAGE BUILDPLAN EXTERIOR-COMPLETE — rozpoznawalny cały dom (raport roboczy)
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
-dostawie testowej 1321 (§10, v3.45: czytanie rysunków) i jest aktualizowany przy kolejnych dostawach. Dziennik punktów
-kontrolnych: `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E14).
+dostawie testowej 1322 (§11, v3.46: wiarygodny pomiar, końce wymiarów) i jest aktualizowany przy kolejnych dostawach.
+Dziennik punktów kontrolnych: `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E15).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -433,3 +433,141 @@ Bakopy i Zefiranty są tu tylko świadkami (DEV, ujawnione wcześniej). H2 niena
   niepotwierdzone). Porównanie z AI na tych samych zadaniach możliwe w kolejnym kroku w ramach kontraktu.
 - **Dostawa testowa 1321:** `BuildPlan-owner-preview-1321.apk`, `0.1321.0-owner`, 50 500 031 B, SHA-256 `8c0f28e8…8d12a8ea`, ten sam podpis `6e48fac4…ca0da` (v2), zipalign ok; analizator `2b621b67…fb94337c` (solver 2.29.0, czytnik metryczny 1.11.0), manifest zasobów 10/10; kod: `4328439`. Android UI: **NOT_VERIFIED** (brak urządzenia).
 - **Prywatna dostawa poza Git:** `BuildPlan-EXTERIOR-COMPLETE-Private-1321.zip` (oryginały arkuszy z adnotacjami z sumami SHA-256, manifest 908 obrazów, wyniki, nakładki PRZED | PO na oryginałach — 35 przekrojów, 8 arkuszy numerów pomieszczeń — modele i wejścia PO, zmiany element po elemencie, rendery, dzienniki); 60 489 098 B, 707 plików, SHA-256 `3430d694…001676d5`.
+
+## 11. v3.46: wiarygodny pomiar, końce wymiarów, kształt dachu przy odrzuconej rejestracji, jeden opis — jeden otwór; dostawa testowa 1322
+
+Kontynuacja tej samej kampanii od kodu E14 (`4328439`). Status: **WORK_IN_PROGRESS**. H2 nienaruszone. Android UI:
+**NOT_VERIFIED** (brak urządzenia). Brak nowego wywołania AI (licznik bez zmian: 0,60838938 USD z 5 USD, szacunek,
+rozliczenie niepotwierdzone).
+
+- **Pomiar (nowe scorery obok historycznych, `research/reading-v346`; tabele 1321 bez zmian jako historia):**
+  - rzędne, kąty i wymiary pionowe na przekrojach liczone **per znak**: każdy z 266 czytelnych znaków na 32 przekrojach
+    ma położenie i surowy napis (dopisane na oryginałach po poznaniu wyników v3.45 — ujawnione w `FROZEN.json`);
+    dopasowanie wyłącznie geometryczne, osobno: surowe znaki, wartość z surowego napisu, wartość po korekcie, pochodzenie
+    (READ / poprawione rysunkiem / wyliczone), rodzaj, dwa różne odczyty jednego znaku = konflikt; R/T/F sprawdzane
+    w modelu;
+  - opisy otworów: przypisanie jeden-do-jednego wyłącznie z geometrii (IoU ≥ 0,5 wzdłuż ściany), `MERGED_GAP`,
+    `SPLIT_GAP`, związany opis musi być opisem **tego** kółka, dom bez otworów = `NO_MODEL` w mianowniku;
+  - role widoków: graf, piksele (z pokryciem i przyczyną każdego braku decyzji), strona zgrubnie (F/R/S) i dokładnie
+    (L/R — w adnotacjach v3.45 brak L/R: **nie zmierzone**, N = 0);
+  - 21 kontrprób (`test_counterprobes.py`): obie kontrpróby audytu odtworzone na starych scorerach (2/2 dla scalonej
+    szczeliny, 3/3 dla zamienionych wartości) i odrzucone przez nowe; zamiana okap↔kalenica, właściwa liczba na
+    sąsiednim hoście, ten sam opis z drugiego kółka, usunięty bieg, L↔R przy zachowanym SIDE — każda pogarsza właściwą
+    kategorię; przypadki przeciwne przechodzą.
+  - 139 „NOT_CLASSIFIED” z EVAL-PO-content to **nie** propagacja wariantów: to wszystkie obrazy pięciu domów EVAL, które
+    upadły w solverze, zanim zapisano podsumowanie przechowujące werdykty. Naprawione w serwisie (werdykty idą z porażką:
+    `content-verdicts.json`); werdykt na innym wariancie tego samego zasobu jest liczony osobno jako PROPAGATED.
+- **Mały zróżnicowany DEV (zamrożony przed oceną, `annotations/dev-links.json`):** 16 par końców wymiarów pionowych na
+  6 przekrojach (lico płyty / kreska końca, niepewność ±3 px, dwa ±6 px) i 4 relacje sprawdzone w źródle (dach skrzydła
+  Bakop; poziom poddasza Ciesz; jednakowa wysokość okien na dwóch ścianach Ciesz). Ściany vs meble, słupy, balkony
+  i lukarny, regiony arkuszy mieszanych i L/R **nie mają jeszcze miernika** — nazwane, nie zaliczone.
+- **Poprawki produkcyjne (przyczyny ogólne, bez wyjątków po domu):**
+  1. **Kształt dachu nie ginie przy odrzuconej rejestracji (solver 2.30.0).** Pierwsza błędna decyzja Bakop: wysokości
+     widoku kotwiczone na własnej linii dachu głównego medianą reszt, a korony drzew i komin za połacią dawały połowie
+     kolumn +0,5…+1,1 m — mediana +0,73 m przesunęła wszystkie wysokości, dwuspad skrzydła wyszedł 0,8 m za niski,
+     zostawiony nieodczytany, zbudowany płasko z konwencji. Teraz kotwica to najniższe pasmo reszt z rozsądnym udziałem
+     kolumn (cokolwiek stoi za dachem, tylko podnosi odczyt); widok z odrzuconą rejestracją czytany tylko przez tę kotwicę,
+     bez niej nie daje odczytu (ani płaskiego, ani spadzistego); dach widziany jako spadzisty, ale nierozstrzygnięty,
+     zachowuje tę obserwację jako nierozstrzygnięte `form`. Testy: przypadki padające na starym kodzie i przeciwne
+     (prawdziwy płaski dach zostaje płaski; widok bez kotwicy nie daje płaskiego).
+  2. **Wymiary pionowe przekroju: napis → linia → końce → rozpiętość (metric reader 1.12.0).** Szablon miał właściwe
+     cyfry na 38 z 59 znaków DEV, a pomiarem stawały się 3: łańcuchy wymagają kilku liczb na jednej linii, a wymiar na
+     przekroju stoi sam na cienkiej szarej linii, a skalę daje drabina rzędnych. Teraz etykietę czyta rozpoznawacz (szablon
+     tylko ją znajduje; bliskich cyfr nie rozstrzyga długość), linię obok i jej końce (lico płyty/ściany/dachu albo kreska
+     przed wolnym końcem), a odczyt stoi tylko, gdy rozpiętość w skali drabiny tego przekroju równa się wartości; kierunek
+     czytania etykiet ustala arkusz z tego, co rysunek przyjmuje.
+  3. **Jeden opis — jeden otwór (solver 2.31.0).** Wiązanie wybierało dla każdej szczeliny osobno najbliższy pasujący
+     opis w promieniu 2 m: szczelina bez własnego odczytanego kółka brała kółko bliźniaka, a kółko przy narożniku
+     wymiarowało szczelinę na każdej ze ścian (8 opisów związanych podwójnie na 7 domach, trzy przez dwie ściany). Teraz
+     każdy opis kondygnacji należy do najbliższej pasującej szczeliny na dowolnej ścianie, a szczelina bierze tylko swoje.
+     Koszt nazwany: trzy otwory w dwóch domach, których kółko nie zostało odczytane, tracą pożyczony wymiar i są rysowane
+     jako założone (Bakopy: lewe okno tylne 80/230 → konwencja 1,30/0,90 — sprzeczne ze źródłem, zostaje jako znany błąd).
+  4. **Obserwacja nie znika przy porażce (serwis):** werdykty zawartości zapisywane z porażką.
+- **PRZED/PO tymi samymi scorerami v3.46** (PRZED = E13/1320; PO-1321 = dostawa 1321; PO-1322 = świeża pełna ścieżka
+  z zamrożonego drzewa `572b875`):
+
+  | umiejętność (scorer v3.46) | zbiór | N | PRZED | PO-1321 | PO-1322 |
+  |---|---|---|---|---|---|
+  | role widoków, graf (macro F1) | DEV | 650 | 0,975 | 0,975 | 0,975 |
+  | role widoków, piksele (macro F1 na rozstrzygniętych; rozstrzygnięte) | DEV | 650 | 0,996 (608) | 0,996 (629) | 0,996 (650) |
+  | strona elewacji zgrubnie F/R/S | DEV | 92 | 89 | 89 | 89 |
+  | strona elewacji dokładnie L/R | DEV | 0 | nie zmierzone | nie zmierzone | nie zmierzone |
+  | rzędne: dobrze przy znaku (zajęte; konflikty) | DEV | 110 | 49 (68; 2) | 107 (109; 2) | 108 (109; 1) |
+  |   kalenica / okap / kondygnacja / teren | DEV | 22/19/39/22 | 11/8/20/6 | 21/19/37/22 | 21/19/38/22 |
+  |   rola w modelu: kondygnacja F | DEV | 39 | 25 | 34 | 34 |
+  |   rola w modelu: kalenica R / teren T | DEV | 22/22 | brak oceny | brak oceny | 21/21, 20/21 (po 1 bez oceny) |
+  | kąt dachu: dobrze przy znaku (dodatki) | DEV | 22 | 0 (3) | 12 (3) | 12 (3) |
+  | wymiary pionowe: dobrze przy znaku (zajęte; dodatki) | DEV | 59 | 3 (3; 5) | 3 (3; 5) | **39 (39; 5)** |
+  | kółko opisu znalezione | DEV | 67 | 42 | 55 | 55 |
+  | cyfry opisu dokładnie | DEV | 67 | 37 | 50 | 50 |
+  | opis → **własny** otwór, kompletny | DEV | 67 | 28 | 43 | 43 |
+  |   niezwiązany / błędne wiązanie / złe cyfry / zły rodzaj | DEV | | 19/1/2/6 | 16/1/2/4 | 17/0/2/4 |
+  |   scalona / rozdzielona szczelina / brak otworu / brak modelu | DEV | | 0/0/1/0 | 0/0/1/0 | 0/0/1/0 |
+  |   dodatki (szczelina związana bez opisu) | DEV | | 1 | 1 | 1 |
+  | role widoków, graf (macro F1) | EVAL | 258 | 0,975 | 0,975 | 0,975 |
+  | role widoków, piksele (macro F1 na rozstrzygniętych; rozstrzygnięte) | EVAL | 258 | 1,000 (119) | 1,000 (119) | 1,000 (258) |
+  | strona elewacji zgrubnie F/R/S | EVAL | 40 | 34 | 34 | 34 |
+  | rzędne: dobrze przy znaku (zajęte; konflikty) | EVAL | 46 | 24 (29; 0) | 44 (44; 0) | 44 (44; 0) |
+  |   kalenica / okap / kondygnacja / teren | EVAL | 10/7/17/10 | 4/4/12/3 | 10/7/16/9 | 10/7/16/9 |
+  |   rola w modelu: kondygnacja F (dom bez modelu = źle) | EVAL | 17 | 6 | 7 | 7 |
+  |   rola w modelu: kalenica R / teren T | EVAL | 10/10 | brak oceny | brak oceny | 5/5, 4/5 (po 5 bez oceny) |
+  | kąt dachu: dobrze przy znaku (zajęte; dodatki) | EVAL | 7 | 0 (1; 2) | 2 (3; 2) | 2 (3; 2) |
+  | wymiary pionowe: dobrze przy znaku (zajęte; dodatki) | EVAL | 22 | 1 (2; 3) | 1 (2; 3) | **14 (14; 3)** |
+  | kółko opisu znalezione | EVAL | 81 | 63 | 66 | 66 |
+  | cyfry opisu dokładnie | EVAL | 81 | 57 | 61 | 61 |
+  | opis → **własny** otwór, kompletny | EVAL | 81 | 22 | 24 | 24 |
+  |   niezwiązany / błędne wiązanie / złe cyfry / zły rodzaj | EVAL | | 11/0/3/2 | 11/0/3/0 | 11/0/3/0 |
+  |   brak otworu / brak modelu | EVAL | | 2/41 | 2/41 | 2/41 |
+  |   dodatki (szczelina związana bez opisu) | EVAL | | 3 | 3 | 2 |
+
+  Tabele 1321 (scorery v3.45: rzędne 51 → 109/110, opis → otwór 28 → 33/57) zostają w §10 jako historia; różnica
+  wynika z miernika (per znak zamiast najbliższego odczytu; 67 zamiast 57 opisów po dodaniu kółek z pierścieniami
+  przypisanych geometrycznie), nie z kodu. Wymiary pionowe EVAL to **pierwszy pomiar** czytnika 1.12.0 na EVAL
+  (strojony wyłącznie na DEV). Położenia znaków EVAL zostały naniesione po poznaniu wyników v3.45 — ujawnione.
+
+- **Bramki (progi v3.45, nie obniżane):** role widoków macro F1 ≥ 95 % — **spełnione** (graf 0,975 DEV i EVAL; piksele 0,996 / 1,000 przy pełnym
+  pokryciu). Liczby ≥ 98 % zgodności przy ≥ 90 % pokrycia — **spełnione dla rzędnych** (DEV 108/109 zajętych = 99,1 %
+  przy pokryciu 99 %; EVAL 44/44 przy 96 %); **niespełnione** dla wymiarów pionowych (zgodność 100 %: 39/39 i 14/14, ale
+  pokrycie 66 % i 64 %), kątów (12/22; EVAL 2/7, jeden zajęty błędnie) i cyfr opisów (50/67, 61/81). Przypisanie
+  kompletne ≥ 95 % — **niespełnione** (opis → własny otwór DEV 43/67 = 64 %, EVAL 24/81 = 30 %, z czego 41 opisów EVAL
+  w pięciu domach bez modelu).
+- **Lista DEV (końce, relacje):** końce wymiarów pionowych **12/16** w tolerancji (odchyłka ≤ 2 px); 2 z dobrą wartością i końcami poza
+  tolerancją (Marcówki 272: −4/−3 px przy tolerancji 3; Sasanki 278: to odczyt łańcucha starego czytnika, nie nowego —
+  jego geometria to linia łańcucha, nie wymiar, 42/−70 px); 2 nieodczytane (Dalie 121, Trytomy 266). Relacje **1/4**:
+  dach skrzydła Bakop — OK (dwuspad wzdłuż X, jak na elewacji frontowej; w 1321 płaski); Ciesz: poziom poddasza ŹLE
+  (+2,93 zamiast +3,34), okna wschodnie ŹLE (1,59 ×3 i 0,73), okna tylne ŹLE (1,55; 0,90; 1,30).
+- **Integracja (regress 1321 → 1322, wszystkie 33 domy):** 31 z 33 projektów bez żadnej zmiany elementu. **Bakopy:** dach skrzydła płaski → dwuspad wzdłuż X
+  (dwie połacie oznaczone „wymaga źródła” — źródłem jest elewacja frontowa; krawędzie: 2 okapy, kalenica, 2 wiatrownice),
+  cztery ściany skrzydła zmieniają geometrię (wysokość pod dachem), lewe okno tylne traci pożyczoną od bliźniaka wysokość
+  2,30 (parapet 0) i dostaje konwencję 1,30 / 0,90 — źródło podaje 80/230, **koszt nazwany**. **Zefiranty:** dwa otwory
+  frontowe zmieniają wymiar przez własność opisu (parter 1,50×1,20/1,00 → 1,35×1,30/0,90; poddasze 0,78×0,57/1,02 →
+  0,69×0,76/0,90 — oba tracą wymiar pożyczony z cudzego opisu; ich własne kółka nie są odczytane, więc wymiar nie
+  pochodzi już z żadnego opisu). Błędy kompilatora bez zmian względem
+  PRZED i 1321 (Balsamowce 2, Jabłonki 1, Zefiranty 5, wszystkie `OPENING_ABOVE_WALL_TOP`). Stara sprawdzarka zewnętrza
+  39/70 (bez zmian względem 1321).
+- **Ciesz — kontrola źródłowa:** strona: „parterówka” z dachem czterospadowym, 13 pomieszczeń na parterze, powierzchnia
+  użytkowa = podłóg (143,54 m²); przekrój: strop nad parterem (spód ok. +2,83 z wymiaru 283, wierzch +3,34), ściany pod
+  dachem do ok. +3,8. Model 1321/1322: strop jest (PRZED go nie miał), nowy poziom nie ma pomieszczeń (powierzchnia
+  użytkowa nietknięta), ale jego podłoga stoi na +2,93 (znak okapu), nie na wydrukowanym +3,34 — **błąd semantyki
+  poziomu, nazwany**. Okna: elewacje wschodnia i tylna rysują wszystkie okna jedną wysokością (~1,45–1,5 m), a model ma
+  0,73 m i 0,90 m dla dwóch z nich (odczyt zakresu na odbijającym szkle: dolna połowa szyby z odbiciem drzew); PRZED miał
+  1,56/1,59 — **błąd 1321, nadal otwarty**.
+- **Produkcja:** 33 przebiegi pełnej ścieżki produkcyjnej z zamrożonego drzewa `572b875`: 27 modeli, 6 porażek zapisanych
+  jako wynik (Bukszpany, Modrzewnica `METRIC_RESOLUTION_INCONCLUSIVE`; Santany, Eliza `PLAN_RESOLUTION_INCONCLUSIVE`;
+  Julia `PLAN_NO_WALLED_ENVELOPE`; Ofelia `PLAN_LAYOUT_REJECTED` — te same sześć co w 1321), każda z zachowanymi
+  werdyktami zawartości; powtórki solvera 27/27 bajt w bajt (z nich pochodzą ślady cech, których pełna ścieżka nie
+  zapisuje). Testy na tym drzewie: typecheck całości z testami 0 błędów, source-metrics 405/405, reconstruction 1378/1378,
+  serwis i analizator 270/270, kontrpróby 21/21.
+- **Dostawa testowa 1322:** `BuildPlan-owner-preview-1322.apk`, versionCode 1322, `0.1322.0-owner`, uniwersalny (cztery ABI; 1321 był
+  jednym ABI), 71 533 012 B, SHA-256 `342ea3c78f18d022fbe78bcd4c30fa71969e4de3892bb1b5256eb335634303d4`; ten sam podpis
+  `6e48fac4…ca0da` (v2), zipalign `-P 16` ok; osadzony `analyzer.mjs` `242917f8…2e6be6a3` (solver 2.31.0, czytnik
+  metryczny 1.12.0), manifest zasobów 10/10; kod `572b875` (zapisany w `VERSION.txt` budowy). Android UI:
+  **NOT_VERIFIED** (brak urządzenia).
+- **Prywatna dostawa poza Git:** `BuildPlan-EXTERIOR-COMPLETE-Private-1322.zip` — manifest wszystkich 33 przebiegów
+  (modele i porażki, kody wyjścia, wersje, sumy modeli, diagnostyka kompilatora, zachowane werdykty, tożsamość powtórek),
+  na projekt: pakiet źródłowy i sumy każdego zdekodowanego bajtu, graf, dowody metryczne, model, program, ślad cech
+  (z powtórki bajt w bajt), diagnostyka, ślad analizy, scena; wyniki scorerów v3.46 i tabela v3.45 jako historia;
+  przykłady na oryginałach; zmiany 1321 → 1322; dzienniki budowy i testów; oryginały ograniczone do 187 arkuszy
+  z adnotacjami (pozostałe 721 obrazów wymienione sumą i adresem). 43 469 888 B, 701 plików, SHA-256
+  `34295dcad6c3508396320c197b045fefdba25a548fb7f100e554679aa8bbe5ec`. Czego nie ma: pozostałych obrazów wydawcy, H2
+  (zapieczętowane) i prywatnego benchmarku OWNER-a (poza kampanią).
