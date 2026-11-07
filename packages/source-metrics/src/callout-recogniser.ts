@@ -25,7 +25,8 @@ import { RECOGNISER_CROP } from './recogniser.js'
 import type { ExternalReading, LabelCrop } from './recogniser.js'
 
 export const CALLOUT_RECOGNISER_NAME = 'metrics.callout-recogniser' as const
-export const CALLOUT_RECOGNISER_VERSION = '1' as const
+/** 2 (v3.45): a ring whose own cut fails the gate is re-fitted to its own stroke and read again (`refineRingCircle`). */
+export const CALLOUT_RECOGNISER_VERSION = '2' as const
 
 /** A printed callout's half is an opening's width or height in centimetres: 40 cm .. 7 m wide, 40 cm .. 4 m tall. */
 export const CALLOUT_RANGE_CM = { width: { min: 40, max: 700 }, height: { min: 40, max: 400 } } as const
@@ -41,13 +42,13 @@ export type RingHalfCrop = { crop: LabelCrop; glyphs: number }
  * out (the disc is cut 2.5 px inside the ring, the halves 2 px clear of the bar), tightened to the ink box and padded as
  * `cropForToken` pads. A half with no ink is null.
  */
-export function ringHalfCrops(ink: Gray, circle: { cx: number; cy: number; radiusPx: number }, barY: number, keyPrefix: string): { upper: RingHalfCrop | null; lower: RingHalfCrop | null } {
+export function ringHalfCrops(ink: Gray, circle: { cx: number; cy: number; radiusPx: number }, barY: number, keyPrefix: string, innerMarginPx = 2.5): { upper: RingHalfCrop | null; lower: RingHalfCrop | null } {
   const cx = Math.round(circle.cx)
   const cy = Math.round(circle.cy)
   const r = Math.round(circle.radiusPx)
   const bar = Math.round(barY)
   const g = (x: number, y: number): number => (x < 0 || y < 0 || x >= ink.width || y >= ink.height ? 255 : ink.data[y * ink.width + x])
-  const inner = r - 2.5
+  const inner = circle.radiusPx - innerMarginPx
   // The disc's own paper — tinted or white — is the 85th percentile of its interior.
   const vals: number[] = []
   for (let y = cy - r; y <= cy + r; y += 1) for (let x = cx - r; x <= cx + r; x += 1) if (Math.hypot(x - cx, y - cy) <= inner) vals.push(g(x, y))
@@ -86,6 +87,43 @@ export function ringHalfCrops(ink: Gray, circle: { cx: number; cy: number; radiu
     return { crop: { key, gray, capPx: h }, glyphs: glyphCount(gray) }
   }
   return { upper: cut(cy - r, bar - 2, `${keyPrefix}u`), lower: cut(bar + 2, cy + r, `${keyPrefix}l`) }
+}
+
+/**
+ * v3.45: the ring a finder found, re-fitted to its own stroke. A finder that locks onto an inner contour reports the
+ * circle a few pixels small and off centre (9 px at 446,533 for a 12 px ring at 442.5,532), and the halves cut from that
+ * circle clip a digit (`00` for `300`). Refit: the centre within ±`REFIT.shiftPx` and the radius from 1 px under the
+ * found one to `REFIT.growPx` over it that maximise the ink along the circle against the paper just inside it. Only
+ * the circle moves; nothing about the digits is assumed.
+ */
+export const REFIT = { shiftPx: 4, growPx: 4, step: 0.5, samples: 72, insidePx: 2.5, insideWeight: 0.6 } as const
+export function refineRingCircle(ink: Gray, circle: { cx: number; cy: number; radiusPx: number }): { cx: number; cy: number; radiusPx: number } {
+  const g = (x: number, y: number): number => {
+    const xi = Math.round(x)
+    const yi = Math.round(y)
+    return xi < 0 || yi < 0 || xi >= ink.width || yi >= ink.height ? 255 : ink.data[yi * ink.width + xi]
+  }
+  const cos: number[] = []
+  const sin: number[] = []
+  for (let k = 0; k < REFIT.samples; k += 1) {
+    cos.push(Math.cos((k / REFIT.samples) * 2 * Math.PI))
+    sin.push(Math.sin((k / REFIT.samples) * 2 * Math.PI))
+  }
+  let best = { cx: circle.cx, cy: circle.cy, radiusPx: circle.radiusPx, score: -Infinity }
+  for (let dx = -REFIT.shiftPx; dx <= REFIT.shiftPx; dx += REFIT.step)
+    for (let dy = -REFIT.shiftPx; dy <= REFIT.shiftPx; dy += REFIT.step)
+      for (let r = circle.radiusPx - 1; r <= circle.radiusPx + REFIT.growPx; r += REFIT.step) {
+        let on = 0
+        let inside = 0
+        for (let k = 0; k < REFIT.samples; k += 1) {
+          on += 255 - g(circle.cx + dx + r * cos[k], circle.cy + dy + r * sin[k])
+          inside += 255 - g(circle.cx + dx + (r - REFIT.insidePx) * cos[k], circle.cy + dy + (r - REFIT.insidePx) * sin[k])
+        }
+        const score = on - REFIT.insideWeight * inside
+        // the first best wins a tie: no drift from the circle the finder reported without a reason in the ink
+        if (score > best.score + 1e-9) best = { cx: circle.cx + dx, cy: circle.cy + dy, radiusPx: r, score }
+      }
+  return { cx: best.cx, cy: best.cy, radiusPx: best.radiusPx }
 }
 
 /**

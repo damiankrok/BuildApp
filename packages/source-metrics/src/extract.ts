@@ -45,7 +45,7 @@ import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.j
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts, readTintedCallouts } from './callouts.js'
 import type { CalloutReading } from './callouts.js'
-import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, corroborateHalfBySibling, judgeCalloutHalf, PLAN_CORROBORATED_WIDTH, planCorroborableWidth, ringHalfCrops } from './callout-recogniser.js'
+import { CALLOUT_RECOGNISER_NAME, CALLOUT_RECOGNISER_VERSION, corroborateBySibling, corroborateHalfBySibling, judgeCalloutHalf, PLAN_CORROBORATED_WIDTH, planCorroborableWidth, refineRingCircle, ringHalfCrops } from './callout-recogniser.js'
 import type { OcrResult, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
@@ -55,6 +55,8 @@ import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from './external-levels.js'
 import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
+import { angleLabels, edgeSlope, judgeAngles, MIN_EDGE_PX, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
+import type { RoofEdge } from './section-angles.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
 import type { Association, CalloutRingRecord, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
@@ -68,7 +70,7 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.7.0 (EXTERIOR-COMPLETE E9): a ring half two readers read two ways carries the recogniser's reading as an equal rival after the template's; a ladder rung's clean reading is substituted only when it misses the ladder by more than two tolerances. */
 /** 1.8.0 (EXTERIOR-COMPLETE, Zefiranty): an outline crossing a dimension line is no measurement point (dimension-lines 1.4.0); two labels one pass read apart are two inks (metric solver 1.6.0). */
 /** 1.9.0 (EXTERIOR-COMPLETE E12): two barred rings on one bar row, overlapping or touching, are one callout ring split by ink touching it (`mergeSplitRings`). */
-/** 1.10.0 (v3.45): with a recogniser, a section's level marks are read by it and stand only by the same drawing — their symbols, one ladder, a printed ±0,00 on it (`level-marks.ts`); the template's datums they overrule are dropped. */
+/** 1.10.0 (v3.45): section pitch labels read along their slope and admitted by it; a callout ring whose own cut fails the gate is re-fitted to its stroke and read again; with a recogniser, a section's level marks are read by it and stand only by the same drawing — their symbols, one ladder, a printed ±0,00 on it (`level-marks.ts`); the template's datums they overrule are dropped. */
 export const METRIC_READER_VERSION = '1.10.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
@@ -391,6 +393,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   let heard = 0
   // v3.45: how many section level marks the recogniser's readings put on an admitted ladder.
   let levelMarksAdmitted = 0
+  // v3.45: how many section pitch labels the recogniser read along their slope and the slope admitted.
+  let anglesAdmitted = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
   // plan are seldom byte-identical crops: on the development rows the cache never hit.)
   const latticeCache: LatticeCache = new Map()
@@ -734,6 +738,12 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         if (rings.length > 0) {
           const ink = inkChannel(raster)
           const crops: LabelCrop[] = []
+          // v3.45: a ring whose own cut does not pass the gate on both halves is re-fitted to its own stroke
+          // (`refineRingCircle`: a finder that locked onto an inner contour reports the circle small and off centre, and
+          // its halves clip a digit) and read again in a second batch. Each half is then the own cut's where that passed,
+          // else the refitted cut's where that passed — never against an own-cut half that passed with another value.
+          // Measured on 23 DEV plans (1299 rings): refitting every ring gains 11 complete rings and loses 9 good ones;
+          // refitting only the failed ones keeps the gains and loses none.
           const cut = rings.map((ring, i) => {
             const halves = ringHalfCrops(ink, ring.reading.circle, (ring.reading.bar as { y: number }).y, `r${i}`)
             for (const h of [halves.upper, halves.lower]) if (h) crops.push(h.crop)
@@ -741,6 +751,34 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           })
           const readings: ExternalReading[] = yield { frameId: frame.id, crops }
           const byKey = new Map(readings.map((r) => [r.key, r]))
+          const judgeCut = (c: ReturnType<typeof ringHalfCrops>) => ({
+            w: judgeCalloutHalf(c.upper ? byKey.get(c.upper.crop.key) : undefined, c.upper?.glyphs ?? 0, 'width'),
+            h: judgeCalloutHalf(c.lower ? byKey.get(c.lower.crop.key) : undefined, c.lower?.glyphs ?? 0, 'height'),
+          })
+          const own = cut.map(judgeCut)
+          const refitCrops: LabelCrop[] = []
+          const refit = rings.map((ring, i) => {
+            if (own[i].w.accepted && own[i].h.accepted) return undefined
+            const circle = refineRingCircle(ink, ring.reading.circle)
+            if (Math.hypot(circle.cx - ring.reading.circle.cx, circle.cy - ring.reading.circle.cy) < 0.5 && Math.abs(circle.radiusPx - ring.reading.circle.radiusPx) < 0.5) return undefined
+            const halves = ringHalfCrops(ink, circle, (ring.reading.bar as { y: number }).y, `f${i}`)
+            for (const h of [halves.upper, halves.lower]) if (h) refitCrops.push(h.crop)
+            return { circle, halves }
+          })
+          if (refitCrops.length > 0) {
+            const second: ExternalReading[] = yield { frameId: frame.id, crops: refitCrops }
+            for (const r of second) byKey.set(r.key, r)
+            for (const [i] of rings.entries()) {
+              const f = refit[i]
+              if (!f) continue
+              const j = judgeCut(f.halves)
+              const takeW = !own[i].w.accepted && j.w.accepted
+              const takeH = !own[i].h.accepted && j.h.accepted
+              if (!takeW && !takeH) continue
+              cut[i] = { upper: takeW ? f.halves.upper : cut[i].upper, lower: takeH ? f.halves.lower : cut[i].lower }
+              rings[i] = { ...rings[i], reading: { ...rings[i].reading, circle: { ...rings[i].reading.circle, cx: f.circle.cx, cy: f.circle.cy, radiusPx: f.circle.radiusPx } } }
+            }
+          }
           const records: CalloutRingRecord[] = []
           const unstableOnly = new Map<string, { width: boolean; height: boolean }>()
           const relaxed = new Map<string, { width: boolean; height: boolean }>()
@@ -1024,6 +1062,68 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       }
     }
 
+    // --- v3.45: the section's roof pitch labels, read along their slope and admitted by it ---
+    // A template angle stands only where a long roof edge the section measured is drawn at it (a section is drawn at
+    // true aspect: the drawn slope is the pitch); the recogniser reads the labels along the slope, and what the slope
+    // admits replaces the template's reading of the same label.
+    if (plane === 'SECTION_HY') {
+      const edges: RoofEdge[] = observations
+        .filter((o) => o.kind === 'ROOF_EDGE' && o.pixelGeometry.type === 'SEGMENT')
+        .map((o) => ({ id: o.id, a: (o.pixelGeometry as { a: PixelPoint }).a, b: (o.pixelGeometry as { b: PixelPoint }).b }))
+      const slopes = edges.map(edgeSlope).filter((e) => e.length >= MIN_EDGE_PX && e.deg >= 10 && e.deg <= 80).map((e) => e.deg)
+      let admitted: Array<{ value: number; box: PixelRect }> = []
+      if (recogniser && edges.length > 0) {
+        const { labels, crops } = angleLabels(toGray(raster), edges)
+        if (crops.length > 0) {
+          const recognised: ExternalReading[] = yield { frameId: frame.id, crops }
+          heard += recognised.length
+          for (const v of judgeAngles(labels, recognised)) {
+            if (v.value === undefined) continue
+            const e = v.label.edge
+            admitted.push({ value: v.value, box: v.label.box })
+            evidence.push({
+              id: stableId('metric', 'angle', { frameId: frame.id, box: v.label.box, value: v.value }),
+              kind: 'ANGLE',
+              frameId: frame.id,
+              assetId: frame.assetId,
+              variantByteHash: frame.variantByteHash,
+              value: v.value,
+              unit: 'deg',
+              origin: 'READ',
+              rawText: v.text,
+              textBox: v.label.box,
+              measuredGeometry: { type: 'SEGMENT', a: e.a, b: e.b },
+              association: { kind: 'ANGLE_MARKER', score: 0.8, why: v.why, observationIds: [e.id] },
+              ocrTokenIds: [],
+              observationIds: [e.id],
+              alternatives: [],
+              confidence: 0.8,
+              provenance: { extractor: 'RECOGNISER_VALIDATED', name: `${recogniser.id}/${recogniser.model.name}@${SECTION_ANGLES_NAME}-${SECTION_ANGLES_VERSION}`, detail: `${v.why}; read along the slope, admitted by the drawn slope within ${SLOPE_TOLERANCE_DEG}°` },
+            } as MetricEvidence)
+            anglesAdmitted += 1
+          }
+          admitted = admitted.filter((a, i) => admitted.findIndex((b) => b.value === a.value && Math.min(a.box.x1, b.box.x1) > Math.max(a.box.x0, b.box.x0) && Math.min(a.box.y1, b.box.y1) > Math.max(a.box.y0, b.box.y0)) === i)
+        }
+      }
+      for (let i = evidence.length - 1; i >= 0; i -= 1) {
+        const e = evidence[i]
+        if (e.frameId !== frame.id || e.kind !== 'ANGLE' || e.provenance.extractor === 'RECOGNISER_VALIDATED') continue
+        const onSlope = slopes.some((d) => Math.abs(d - e.value) <= SLOPE_TOLERANCE_DEG)
+        const b = e.textBox
+        const sameLabel = admitted.filter((a) => !!b && Math.min(a.box.x1, b.x1) > Math.max(a.box.x0, b.x0) && Math.min(a.box.y1, b.y1) > Math.max(a.box.y0, b.y0))
+        if (onSlope && sameLabel.length === 0) continue
+        unresolved.push({
+          id: stableId('gap', 'angle-refused', { frameId: frame.id, evidenceId: e.id }),
+          what: `the template's reading "${e.rawText ?? e.value}" of an angle on ${frame.assetId}`,
+          frameId: frame.id,
+          reason: onSlope ? `the same label the recogniser read along its slope and the slope admitted as ${sameLabel.map((a) => `${a.value}°`).join(', ')}: one value per label` : `no long roof edge on the section is drawn at ${e.value}° (${slopes.map((d) => d.toFixed(1)).join(', ') || 'none measured'}): the drawing refuses it`,
+          status: 'AMBIGUOUS',
+          ocrTokenIds: e.ocrTokenIds,
+        })
+        evidence.splice(i, 1)
+      }
+    }
+
     // --- the numbers nothing could be done with ---
     const orphaned = read.tokens.filter((t) => !usedTokens.has(t) && t.score >= 0.25)
     if (orphaned.length > 0) {
@@ -1123,6 +1223,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ...(heard > 0 ? [{ name: OCR_ENSEMBLE_NAME, version: OCR_ENSEMBLE_VERSION }] : []),
       ...(calloutRings.length > 0 ? [{ name: CALLOUT_RECOGNISER_NAME, version: CALLOUT_RECOGNISER_VERSION }] : []),
       ...(levelMarksAdmitted > 0 ? [{ name: LEVEL_MARKS_NAME, version: LEVEL_MARKS_VERSION }] : []),
+      ...(anglesAdmitted > 0 ? [{ name: SECTION_ANGLES_NAME, version: SECTION_ANGLES_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
