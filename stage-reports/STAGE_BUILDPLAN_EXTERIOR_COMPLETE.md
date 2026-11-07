@@ -1,8 +1,8 @@
 # STAGE BUILDPLAN EXTERIOR-COMPLETE — rozpoznawalny cały dom (raport roboczy)
 
 Status: **WORK_IN_PROGRESS.** Kryterium odbioru nie jest spełnione (§3); kampania trwa. Ten raport opisuje stan po
-dostawie testowej 1319 i jest aktualizowany przy kolejnych dostawach. Dziennik punktów kontrolnych:
-`stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E12).
+dostawie testowej 1321 (§10, v3.45: czytanie rysunków) i jest aktualizowany przy kolejnych dostawach. Dziennik punktów
+kontrolnych: `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E14).
 
 ## 1. Zamrożona ocena (przed strojeniem)
 
@@ -329,3 +329,107 @@ próby na żywo i ograniczenia.
   Zefiranty 5 (bez zmian). Sprawdzarka 35 → 34/70, czytana uczciwie: kalenica Aurory przechodzi; Arlety i Jabłonki
   tracą „wejście”, którym było okno francuskie piętra zbudowane jako drzwi — ich prawdziwe drzwi wejściowe nigdy nie
   były budowane, a sprawdzarka liczyła złe drzwi.
+
+## 10. v3.45: czytanie rysunków — niezależne adnotacje, świeża ekstrakcja PRZED/PO, poprawki czytników, dostawa testowa 1321
+
+OWNER zmienił priorytet: ogólne czytanie rysunków, wymiarów, elementów i ich mapowania zamiast „najpierw Zefiranty”.
+Bakopy i Zefiranty są tu tylko świadkami (DEV, ujawnione wcześniej). H2 nienaruszone.
+
+- **Mapa pokrycia** (`research/reading-v345/COVERAGE.md`): przed v3.45 żaden test vitest nie czytał prawdziwego
+  obrazu wydawcy, a żaden zbiór adnotacji z prawdziwych arkuszy nie obejmował znaczenia liczby, jej celu ani
+  elementów. Testy pokazywały, że funkcja robi to, co mówi, na podanych wejściach — nie mierzyły czytania rysunków.
+- **Zbiór i podział** (wersjonowane fakty tekstowe; oryginały poza repozytorium): 33 projekty, 908 obrazów. DEV = 23
+  domy znane z wcześniejszych etapów (adnotator nie-ślepy, ujawnione); EVAL = 10 domów z nowych rodzin nazw (ziarno
+  20261107), podział po całych projektach i rodzinach wariantów. Adnotacje z treści obrazu, zamrożone przed oceną
+  (`FROZEN.json` z sumami): role widoków, kondygnacja i strona; każda liczba na 33 przekrojach (rzędne z rodzajem,
+  kąty, wymiary pionowe); 81 opisów otworów na rzutach parteru EVAL (tekst, kółko, cel) i 57 DEV; 80 numerów
+  pomieszczeń z położeniem atramentu na 8 arkuszach rzutów EVAL, które czyta rekonstrukcja (61 ślepych; Balsamowce
+  nie-ślepe, liczone jako DEV). Przypadek staje się DEV po diagnozie.
+- **Poprawki (przyczyny ogólne, ścieżka produkcyjna; bez wyjątków po adresie, hashu ani współrzędnych):**
+  - **rzędne na przekrojach** (`level-marks.ts`, `external-levels.ts` 1.2.0): czytnik szablonowy był dopasowany do
+    wymiarów rzutu (17 błędnych wartości na DEV: zgubiony przecinek, `±` za `+`, zgubiony minus). Teraz cały znak czyta
+    dostarczony rozpoznawacz (dekoder swobodny + wiązka cyfr muszą się zgodzić), a znak staje się rzędną tylko przez
+    ten sam rysunek: własny symbol ▽ pod nim, jedna drabina „zostaw jeden” przez znaki i wydrukowane **±0,00 na tej
+    drabinie**. Zachowany test ujemny audytu 1320: wszystkie znaki przesunięte o +0,15 m dają równie prostą drabinę,
+    ale bez wydrukowanego zera nic nie wchodzi; dodany: przesunięcie +0,40 przy wydrukowanym zerze — odrzucone;
+  - **kąt dachu na przekroju** (`section-angles.ts`): napis leży wzdłuż połaci, więc czytnik pionowy go nie widział
+    (0 z 22). Pas wzdłuż każdej długiej krawędzi dachu jest prostowany i czytany; odczyt stoi tylko, gdy narysowane
+    nachylenie tej krawędzi zgadza się co do stopnia (przekrój jest rysowany w prawdziwych proporcjach);
+  - **kółka opisów otworów** (`callout-recognizer`, metric reader 1.10.0): kółko, którego własne cięcie nie przechodzi
+    bramki, jest dopasowywane do własnej kreski i czytane drugi raz; połówka z dopasowania tylko tam, gdzie własna
+    nie przeszła;
+  - **jeden wymiar na liniach bliźniaczych** (metric solver 1.7.0): ta sama rozpiętość na dwóch równoległych liniach
+    jest jednym stwierdzeniem, wypowiedzianym przez najlepiej odczytany napis (rzut monety przestał przeważać);
+  - **numery pomieszczeń** (`room-numbers.ts`, metric reader 1.11.0; solver 2.29.0): numery są kursywą, często na
+    czerwono, większe niż wymiary — szablon czytał `6` jako `8`, `3` jako `9`, a głosowanie orientacji odkładało
+    czysty odczyt. Teraz pionowe żetony 1–2 cyfr poza liniami wymiarowymi są czytane rozpoznawaczem z poszerzonego
+    atramentu (średnia ≥ 0,98, wiązka zgodna, szerokość pasująca do liczby cyfr) i zastępują odczyty szablonu tego
+    samego atramentu (które zostają w dowodach). Który pokój numerują — decyduje czytnik wnętrza jak dotąd (wewnątrz
+    pokoju, numer z listy wydawcy, jeden numer na pokój, powierzchnia jako sprawdzenie), bez porównania wysokości
+    pisma (na arkuszach, gdzie wymiary są tak duże jak numery, odrzucało każdy numer). Rozpoznawacz czyta też liście
+    i połówki kółek (`66` na żywopłocie z p = 0,9999) — odrzuca je miejsce i lista, nie prawdopodobieństwo. Region
+    z dwoma numerami wydawcy to kilka pokoi: nie dostaje żadnego (wcześniej pierwszy — „Hol” na 41,7 m²);
+  - **brama w ścianie garażu w każdej bryle**: otwór do podłogi szerszy niż 2,2 m na parterze w ścianie pokoju
+    nazwanego garażem jest bramą także w bryle głównej (Aurory: garaż w bryle głównej, numer 7 teraz odczytany);
+    ścieżka „lico nieprzezroczyste” zostaje tylko dla niskiej przybudówki;
+  - **oś kalenicy, gdy nic nie rozstrzyga** (znalezione w kontroli PRZED/PO): Willa Maja z odczytanym okapem +5,73
+    rejestruje elewację frontową na pasie ścian, więc ta nie głosuje, a sam tył nie pasuje do żadnej osi — dawniej
+    cicha konwencja Z (w poprzek bryły 17,22 × 7,80 m). Dach czterospadowy o jednym nachyleniu ma kalenicę wzdłuż
+    dłuższego boku (narożniki 45° w rzucie) — to geometria; konwencja dla dachu dwuspadowego jest teraz nazwana;
+  - **skrzydło drzwi krótsze od luki** (`doorLeafFound`): rzut rysuje skrzydło o szerokość ościeżnicy krótsze niż
+    luka (Aurory, drzwi tylne 100/230: skrzydło 0,82 luki z łukiem — budowane jako okno). Długość szukana od szerokości
+    luki do luki minus doświetle (`SIDELIGHT_MIN_M`, istniejąca definicja „własnego skrzydła luki”), przegub w licu
+    ściany; krótsze skrzydło obok doświetla zostaje dla `drawnLeaves` (testy przeciwne: skrzydło 0,60, skrzydło bez łuku);
+  - **uzgodnienie z widokami** (`verify.ts`, znalezione w kontroli element po elemencie): ograniczona naprawa
+    resztowa odczytywała wysokości otworów z widoku, któremu wcześniej w tym samym biegu odmówiono wysokości przy ziemi
+    (Willa Maja: dwoje drzwi przycięte do 0,97 i 0,71 m na progu 0,71 m). Teraz ten sam zbiór odmów obowiązuje w
+    uzgodnieniu, a próg drzwi nigdy nie podnosi się nad podłogę;
+  - **podgląd źródła mówi, kto przeczytał liczbę** (serwis + Android): szablon, łańcuch, rozpoznawacz walidowany
+    rysunkiem, wizja — i na jakiej podstawie stoi.
+- **PRZED/PO na tych samych wejściach, świeża ekstrakcja** (PRZED = kod E13 1320; PO = pełna ścieżka produkcyjna z
+  zamrożonego drzewa `d62268b` na tych samych pakietach i bajtach, potem solver `10b5cc2` na tych samych dowodach —
+  jak w E13; odtworzenie samego solvera daje modele bajt w bajt):
+
+  | skill | split | N | PRZED | PO | PRZED wrong/added | PO wrong/added |
+  |---|---|---|---|---|---|---|
+  | view roles (macro F1, graph) | DEV | 650 | 0.975 | 0.975 | | |
+  | storey of plans | DEV | 164 | 156 | 156 | | |
+  | elevation side | DEV | 92 | 89 | 89 | | |
+  | section levels exact | DEV | 110 | 51 (46%) | 109 (99%) | 17 | 0 |
+  | section pitch exact | DEV | 22 | 0 (0%) | 12 (55%) | 4 | 3 |
+  | section vertical dims exact | DEV | 59 | 3 (5%) | 3 (5%) | 7 | 7 |
+  | callout digits exact (DEV projects) | DEV | 57 | 38 (67%) | 41 (72%) | | |
+  | callout → opening complete (DEV projects) | DEV | 57 | 28 (49%) | 33 (58%) | 4 | 4 |
+  | view roles (macro F1, graph) | EVAL | 258 | 0.975 | 0.975 | | |
+  | storey of plans | EVAL | 68 | 68 | 68 | | |
+  | elevation side | EVAL | 40 | 34 | 34 | | |
+  | section levels exact | EVAL | 46 | 24 (52%) | 44 (96%) | 5 | 0 |
+  | section pitch exact | EVAL | 7 | 0 (0%) | 2 (29%) | 3 | 3 |
+  | section vertical dims exact | EVAL | 22 | 1 (5%) | 1 (5%) | 4 | 4 |
+  | callout digits exact (EVAL projects) | EVAL | 81 | 59 (73%) | 63 (78%) | | |
+  | callout → opening complete (EVAL projects) | EVAL | 81 | 20 (25%) | 22 (27%) | 6 | 6 |
+  | callout digits exact (DEV projects) | EVAL | 10 | 10 (100%) | 10 (100%) | | |
+  | callout → opening complete (DEV projects) | EVAL | 10 | 9 (90%) | 9 (90%) | 0 | 0 |
+  | room numbers shown (kept) (EVAL blind) | EVAL | 61 | 6 (10%) | 25 (41%) | 2/7 | 2/7 |
+  | room numbers shown (incl. set-aside) (EVAL blind) | EVAL | 61 | 21 (34%) | 27 (44%) | 9/20 | 8/20 |
+  | room numbers shown (kept) (Balsamowce, non-blind) | EVAL | 19 | 4 (21%) | 10 (53%) | 0/3 | 0/4 |
+  | room numbers shown (incl. set-aside) (Balsamowce, non-blind) | EVAL | 19 | 9 (47%) | 11 (58%) | 3/4 | 1/5 |
+
+  Bramki kampanii: role widoków macro F1 0,975 ≥ 0,95 — **spełnione** (bez zmiany: perspektywy z podpisem UNKNOWN
+  nie są kierowane, klasyfikator pikseli rozpoznaje je w 99,6–100 %). Przypisanie miara → cel ≥ 95 % —
+  **niespełnione** (opis otworu → otwór kompletny: DEV 33/57 = 58 %, EVAL 22/81 = 27 %; 42 opisy EVAL należą do pięciu domów, które nie dochodzą do otworów). Liczby czytelne ≥ 98 % zgodności przy ≥ 90 % pokrycia — **spełnione dla rzędnych**
+  (rzędne na przekrojach: EVAL 44/46 = 96 % pokrycia przy 0 błędnych, DEV 109/110 przy 0 błędnych), **niespełnione** dla kątów, wymiarów pionowych, cyfr opisów otworów i numerów pomieszczeń
+  (numery pomieszczeń EVAL: 25 dobrze, 2 źle z 61 — pokrycie 44 %, zgodność 93 %; kąty EVAL 2/7; wymiary pionowe 1/22). Pominięcia są w mianowniku, dodatki policzone.
+- **Per projekt** (pełna tabela: `research/reading-v345/scoring/per_project.py`, wynik w ZIP): rzędne poprawiają się w każdym domu z czytelnym przekrojem (żaden nie traci wartości), kąty w 12 z 22 domów DEV i 2 z 7 EVAL; opisy otworów: Bakopy 5 → 7/13, Aurory 7 → 9/10, Willa Maja 7 → 8/14, Renklody 8 → 9/14, Wisterie 5 → 6/8; numery pomieszczeń: Wisterie 5 → 10/15, Balsamowce 9 → 11/19 (błędne 3 → 1), Skalnice 7 → 8/13 (2 → 1), Renklody i Malika bez zmiany (3/12 i 6/21) — tam nic się nie pogorszyło, ale też nie poprawiło
+- **Integracja w modelach (DEV, kontrola element po elemencie):** sprawdzarka zamrożona 34 → **39/70** (Aurory: brama i okna dachowe; Kostrzewy: drzwi wejściowe; Pod Miłorzębem ma model — brama i kalenica); 287 zmian elementów w modelach DEV (`regress.py`, w ZIP); błędów kompilatora brak nowych. Kontrola element po elemencie znalazła i naprawiła dwie przyczyny (oś kalenicy Willi Mai; uzgodnienie wysokości otworów z widokiem odrzuconym dla wysokości — drzwi 0,97 m na progu 0,71 m). **Wiadome błędy tej dostawy:** skrzydło Bakop ma dach płaski (cztery elewacje odrzucone wobec wydrukowanego terenu −0,32, więc kształt dachu skrzydła nieodczytany i działa konwencja; PRZED odczytywało dwuspad 35°); okna Ciesz od wschodu i tyłu odczytane z elewacji jako 0,73 / 0,90 m (było 1,56 / 1,59) — niesprawdzone. Ciesz dostaje poziom poddasza nad wydrukowanym okapem +2,93 (strop i ścianki pod dachem kopertowym; w renderze bez widocznej zmiany)
+- **Nierozwiązane, nazwane:** pięć domów EVAL i Modrzewnica nie dochodzi do otworów — skala (Bukszpany; Modrzewnica:
+  dolny łańcuch przecięty narysowanymi roślinami wiąże „1000” z 186 px zamiast ~250, a trzy zgodne odczyty lewego
+  łańcucha nie mają drugiego łańcucha do potwierdzenia), rozkład rzutu (Santany, Eliza, Ofelia), obrys ścian (Julia);
+  ganek Kostrzew (trzy otwory w jednej luce 4,01 m — wylot wnęki zamiast ściany tylnej); okno narożne Willi Mai
+  (opis obejmuje część narożnika: 120 przy luce 1,00 m); drzwi do podłogi czytane jako okno, gdy rzut nie rysuje
+  skrzydła wcale (EVAL: dwa takie przypadki zostają); kąty: trzy niskopewne odczyty szablonu (1°, 5°, 15°) zostają policzone jako dodatki (zasada „wydrukowany
+  kąt wygrywa” z testem mutacji §26.4); wymiary pionowe na przekrojach bez zmian (3/59, 1/22).
+- **AI:** w tym etapie brak nowego wywołania; licznik bez zmian 0,6084 $ z 5 $ od E12 (szacunek, rozliczenie
+  niepotwierdzone). Porównanie z AI na tych samych zadaniach możliwe w kolejnym kroku w ramach kontraktu.
+- **Dostawa testowa 1321:** `BuildPlan-owner-preview-1321.apk`, `0.1321.0-owner`, 50 500 031 B, SHA-256 `8c0f28e8…8d12a8ea`, ten sam podpis `6e48fac4…ca0da` (v2), zipalign ok; analizator `2b621b67…fb94337c` (solver 2.29.0, czytnik metryczny 1.11.0), manifest zasobów 10/10; kod: `4328439`. Android UI: **NOT_VERIFIED** (brak urządzenia).
+- **Prywatna dostawa poza Git:** `BuildPlan-EXTERIOR-COMPLETE-Private-1321.zip` (oryginały arkuszy z adnotacjami z sumami SHA-256, manifest 908 obrazów, wyniki, nakładki PRZED | PO na oryginałach — 35 przekrojów, 8 arkuszy numerów pomieszczeń — modele i wejścia PO, zmiany element po elemencie, rendery, dzienniki); 60 489 098 B, 707 plików, SHA-256 `3430d694…001676d5`.

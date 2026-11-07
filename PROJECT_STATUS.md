@@ -3104,9 +3104,17 @@ Status: **DONE — APK 1314 (`0.1314.0-owner`, commit `80d5612`), usługa 1.7.0,
 ### Cały dom z zewnątrz (STAGE BUILDPLAN EXTERIOR-COMPLETE)
 
 Status: **WORK_IN_PROGRESS** — kryterium odbioru niespełnione; kampania trwa.
-- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E13);
+- Raport `stage-reports/STAGE_BUILDPLAN_EXTERIOR_COMPLETE.md`; dziennik `stage-reports/EXTERIOR_COMPLETE_LOG.md` (E0–E14);
   zamrożona ocena `stage-reports/artifacts/exterior-complete/` (13 DEV, 8 regresji, holdout H2 zapieczętowany).
-- **Ostatnia dostawa testowa: APK 1320** (`0.1320.0-owner`, arm64-v8a, SHA-256 `a7a479bb…de287196`, ten sam podpis
+- **Ostatnia dostawa testowa: APK 1321** (`0.1321.0-owner`, SHA-256 `8c0f28e8…8d12a8ea`, ten sam podpis
+  `6e48fac4…ca0da`; analizator `2b621b67…fb94337c`, solver 2.29.0, czytnik 1.11.0; kod `4328439`).
+- **v3.45 / E14 (dostawa 1321): czytanie rysunków.** Zbiór 33 projektów z niezależnymi adnotacjami (DEV 23 nie-ślepe,
+  EVAL 10), PRZED/PO na świeżej ekstrakcji: rzędne przekrojów DEV 51 → 109/110, EVAL 24 → 44/46 (błędne 17 → 0 i 5 → 0);
+  kąty dachu 0 → 12/22 i 0 → 2/7; opis otworu → otwór DEV 28 → 33/57, EVAL 20 → 22/81; numery pomieszczeń (EVAL ślepe)
+  6 → 25/61. Bramki: role widoków spełnione; przypisanie miara → cel ≥ 95 % niespełnione; liczby ≥ 98 % przy ≥ 90 %
+  pokrycia tylko dla rzędnych. Sprawdzarka 34 → 39/70. Wiadome błędy 1321: dach płaski skrzydła Bakop, wysokości dwóch
+  okien Ciesz z elewacji. `research/reading-v345/`.
+- Poprzednia: **APK 1320** (`0.1320.0-owner`, arm64-v8a, SHA-256 `a7a479bb…de287196`, ten sam podpis
   `6e48fac4…2b921ca0da`; analizator `565b53d0…5a22eb46`, solver 2.28.0, czytnik 1.9.0; kod: commit z tym wpisem).
   Poprzednie: 1319 (`82878c7`), 1318 (`a79bcea`), 1317 (`cf6a8d9`).
 - **E13 (dostawa 1320):** E12b wdrożone po sprawdzeniu każdego z 71 zmienionych otworów (50 poprawa, 11 przyczyna

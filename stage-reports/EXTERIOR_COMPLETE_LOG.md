@@ -659,3 +659,58 @@ small AI as a helper, on the Claude Code budget.
   except Zefiranty's upper rear door (above). Checker 35 → 34/70, read honestly: Aurory's ridge now passes; Arlety and
   Jabłonki lose an "entrance" that was an upper-floor French window built as a door — their real entrance door was
   never built, and the checker counted the wrong door.
+
+
+## E14 — v3.45: reading of drawings — independent annotations, fresh-extraction PRZED/PO, reader fixes, test delivery 1321
+
+OWNER (v3.45) replaced "Zefiranty first" with the general reading of drawings, dimensions, elements and their mapping.
+Bakopy and Zefiranty are witnesses only. H2 sealed. No AI call this stage (ledger 0.6084 of 5 USD since E12, estimate,
+billing unconfirmed). Android UI NOT_VERIFIED (no device).
+
+- **Coverage map** (`research/reading-v345/COVERAGE.md`): before v3.45 no vitest test read a real publisher image and no
+  real-sheet annotation covered a number's meaning, its target or elements.
+- **Dataset** (`research/reading-v345/`, textual facts only; originals outside Git): 33 projects, 908 images; DEV 23
+  (non-blind, disclosed), EVAL 10 from new family stems (seed 20261107), split by whole project and variant family.
+  Frozen before scoring (`FROZEN.json`): view roles/storey/side; every printed number on 33 sections; 81 EVAL and 57 DEV
+  callouts with ring and target; 80 room numbers with ink position on the 8 EVAL plan sheets the reconstruction reads
+  (61 blind; Balsamowce non-blind, scored as DEV). One scorer correction disclosed (room numbers: replicate solver
+  2.29.0's size rule; PRZED unchanged).
+- **Fixes (general causes, production path):** section level marks read by the shipped recogniser and admitted only by
+  the same drawing — own ▽, one leave-one-out ladder, a printed ±0,00 on it (the +0,15 m correlated-shift negative test
+  kept; +0,40 with a printed zero refused) (`level-marks.ts`, external-levels 1.2.0); section pitch read along its slope
+  and admitted by the drawn slope ±1° (`section-angles.ts`); callout rings that fail the gate re-fitted to their stroke;
+  one span on twin lines stated once (metric solver 1.7.0); room numbers re-read by the recogniser from widened ink,
+  superseding the template's readings of that ink, not held to the sheet's text height, off dimension lines (metric
+  reader 1.11.0, `room-numbers.ts`); a region with two published numbers takes neither; a garage room's wall says
+  vehicle door in any body; where nothing decides the ridge axis a hipped roof at one pitch runs along the longer side;
+  a door leaf up to a sidelight short of its gap is the gap's own leaf; the bounded reconciliation reads no opening
+  height on a refused view and never lifts a door's sill (solver 2.29.0); source inspection names the reader.
+- **PRZED/PO** (same inputs; PRZED = E13 code; PO = full path from frozen `d62268b`, solver `4328439` on that evidence):
+  section levels DEV 51 → 109/110 (wrong 17 → 0), EVAL 24 → 44/46 (5 → 0); pitch DEV 0 → 12/22, EVAL 0 → 2/7 (3
+  template additions remain); vertical dimensions unchanged (3/59, 1/22); callout digits DEV 38 → 41/57, EVAL 59 → 63/81;
+  callout → opening complete DEV 28 → 33/57, EVAL 20 → 22/81 (42 EVAL callouts sit in 5 houses that fail before
+  openings); room numbers shown (blind EVAL, kept path) 6 → 25/61, wrong 2 → 2; view roles macro F1 0.975 both (gate
+  met), storey/side unchanged. Gates: measure→target ≥95 % NOT met; ≥98 % exact at ≥90 % coverage met for section levels
+  only. Full tables: `scores/przed-po-final.md`, `per-project-final.md` in the ZIP.
+- **Models:** checker 34 → 39/70 (Aurory gate + rooflights, Kostrzewy entrance, Pod Miłorzębem builds: gate, ridge);
+  287 DEV element changes (regress.py, in the ZIP). The element check found and fixed two causes (Willa Maja ridge axis;
+  reconciliation on a refused view). **Known errors of 1321:** Bakopy's attached wing has a flat roof (all four
+  elevations refused against the printed terrain −0,32 → wing roof form unread → convention; PRZED read a 35° gable);
+  Ciesz east/rear windows read 0.73/0.90 m tall on elevations (were 1.56/1.59), unverified; Ciesz gains an attic level
+  over the printed eaves +2,93 (no visible change).
+- **Open, named:** 5 EVAL houses + Modrzewnica fail before openings (scale: Bukszpany, Modrzewnica — bottom chain ticks
+  crossed by drawn plants bind "1000" to 186 px; plan decomposition: Santany, Eliza, Ofelia; walled envelope: Julia);
+  Kostrzewy porch (three openings in one 4.01 m gap); Willa Maja corner window (callout includes part of the corner);
+  doors with no drawn leaf read as windows.
+- **Tests:** source-metrics 398/398; reconstruction 1366/1366 (119 files); analysis-service 186 pass, 17 pending as
+  before, 2 files hit vitest RPC timeouts under the regression's CPU load (the known load-sensitive class); typecheck
+  root + web clean.
+- **Test delivery 1321:** code `4328439`; `BuildPlan-owner-preview-1321.apk`, versionCode 1321, `0.1321.0-owner`,
+  50 500 031 B, SHA-256 `8c0f28e84ea12a058a2ee96b1e2157881f31ba725c17db428e0626db8d12a8ea`; signer `6e48fac4…ca0da`
+  (unchanged, v2); embedded `analyzer.mjs` `2b621b671fc4c70bfbd8aab086e6563ab8a41bbe529538979110b18fb94337c8`
+  (solver 2.29.0, metric reader 1.11.0); 10/10 asset manifest entries match; zipalign ok.
+- **Private delivery outside Git:** `BuildPlan-EXTERIOR-COMPLETE-Private-1321.zip`, 707 files, SHA-256
+  `3430d694a113977ec5da07f3049c5f8e780d3885fb638f17c5204176001676d5`.
+- **Next concrete action:** Bakopy wing roof — the elevation silhouette registration once the terrain is printed (the
+  rear view's ground moved −0.27 → −0.92 m between runs); then plan-reading failures (scale under crossed ticks,
+  decomposition) that keep five EVAL houses from openings.
