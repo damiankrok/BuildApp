@@ -13,5 +13,20 @@
  "disclosure": [
   "section-signs.txt adds a position and the printed raw text to each of the 266 legible section numbers whose values were frozen in v3.45 (levels-dev.txt / levels-eval.txt, unchanged); the positions were placed by eye on the original images after the v3.45 PO scores were known, without overlaying or opening any reader output. EVAL sections are therefore no longer blind for the position layer; their values remain the frozen ones.",
   "Balsamowce stays DEV for callouts and room numbers (non-blind), EVAL for views and section numbers, per skill."
+ ],
+ "amendments": [
+  {
+   "file": "scoring/score_views_v2.py",
+   "sha256": "c60d9d0a2eed580e73c3fdd57cd5cfbc0b2f8953d6b106a8b4e16d1534d9440a",
+   "supersedes": "5ba02a7fe72663787b5fd1106bb9629c1e68a56edaa0c75f531bf070e93c49c4",
+   "at": "2026-11-07, before any v3.46 PO run was scored",
+   "why": "the pixel layer reads a failed run's content verdicts (content-verdicts.json, written by the v3.46 service) instead of counting its images NO_SUMMARY, and reports an image decided only on another variant of its asset as PROPAGATED, apart from decisions on its own bytes. On the 1321 runs (no such file) the output is unchanged."
+  },
+  {
+   "file": "annotations/dev-links.json",
+   "sha256": "455e3abb050d93aebc2d0f5f02135481064df0798ba865ba673d520fdaccaa44",
+   "at": "2026-11-07 (commit b2fb32f), before any v3.46 output was scored against it",
+   "why": "new: the small DEV link set (16 section dimension ends, 4 relations)"
+  }
  ]
 }

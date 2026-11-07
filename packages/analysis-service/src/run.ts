@@ -223,6 +223,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   let pkgSoFar: SourcePackage | undefined
   let routeKind: 'SPECIALIST' | 'GENERIC' | 'SEALED' = 'SEALED'
   let graphSoFar: SourceObservationGraph | undefined
+  // v3.46: what the content check saw on each picture, kept for a run that fails later (an observation is not lost
+  // because a later stage could not use it)
+  let contentSoFar: ContentVerdict[] | undefined
   let metricsSoFar: MetricEvidenceSet | undefined
   const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
 
@@ -349,6 +352,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       visionProvider = live ? `${vision.provider.id}/${vision.provider.model}` : null
     }
     graphSoFar = graph
+    contentSoFar = contentVerdicts
     throwIfAborted(signal)
     const observationMs = lap()
     trace.record('EXTRACTING_OBSERVATIONS', 'OBSERVATIONS', 'PASSED', { frames: graph.coordinateFrames.length, observations: graph.observations.length, relations: graph.relations.length, vision: visionMode })
@@ -683,7 +687,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     // The sealed inputs the run had reached, so a failure in the solver can be replayed
     // on them alone (`second-house.ts --metrics`) without reading the drawings again.
-    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
+    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(contentSoFar && contentSoFar.length > 0 ? { content: contentSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
     throw e
   } finally {
     if (heartbeat) clearInterval(heartbeat)

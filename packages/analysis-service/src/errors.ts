@@ -70,6 +70,8 @@ export class AnalysisError extends Error {
     pkg?: import('@buildapp/source-package').SourcePackage
     graph?: import('@buildapp/source-observations').SourceObservationGraph
     metrics?: import('@buildapp/source-metrics').MetricEvidenceSet
+    /** v3.46: the content check's verdict on each picture, reached before the failure (what was seen, kept). */
+    content?: import('@buildapp/source-analyzer').ContentVerdict[]
     /** The raw error an unexpected failure mapped from. Server-side only: it may carry a path or a line of source and never crosses to a client. */
     cause?: unknown
   }

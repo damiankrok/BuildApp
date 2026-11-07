@@ -271,6 +271,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     if (e.attachments?.pkg) write('source-package.json', e.attachments.pkg)
     if (e.attachments?.graph) write('observation-graph.json', e.attachments.graph)
     if (e.attachments?.metrics) write('metric-evidence.json', e.attachments.metrics)
+    if (e.attachments?.content) write('content-verdicts.json', e.attachments.content)
     const bundle = e.attachments?.bundle ?? diagnosticsBundle({ outcome: 'FAILED', failure: e.failure(), trace: e.attachments?.trace ?? { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'FAILED', entries: [] } })
     write('diagnostics.json', bundle.diagnostics)
     if (bundle.overlay) writeFileSync(join(out, bundle.overlay.name), bundle.overlay.png)

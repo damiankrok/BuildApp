@@ -5,6 +5,9 @@
 #             it decided. Its coverage is reported with the reason for every image it did not decide: NO_SUMMARY (the run
 #             failed before the summary that stores the verdicts was written), NOT_CLASSIFIED (in a summary, no verdict).
 #             An image without a verdict is not counted as a wrong pixel decision, and it is never counted as a right one.
+#             A run that failed after the content check is read from its content-verdicts.json (v3.46 service). An image
+#             whose own bytes were not classified but whose asset's selected variant was is PROPAGATED: counted apart, with
+#             its agreement, never as a decision on its own bytes.
 #   side    - coarse (FRONT/REAR/SIDE) and exact (LEFT/RIGHT kept apart). A predicted LEFT or RIGHT for a reference that
 #             says only SIDE passes the coarse layer and is NOT_MEASURED in the exact one; a reference with LEFT/RIGHT is
 #             passed by the exact layer only with the same side. Production's LEFT/RIGHT comes from the summary sheet
@@ -50,13 +53,27 @@ def score(rows, runs):
         gconf[t][gp] += 1
         sheets = run.get('sheets') if run else None
         s = sheets.get(r['sha256']) if sheets is not None else None
+        propagated = None
+        if sheets is not None and (not s or not s.get('content')):
+            for b in (run.get('variants') or {}).get(r['sha256'], []):
+                o = sheets.get(b)
+                if b != r['sha256'] and o and o.get('content') and 'top' in o['content']:
+                    propagated = PIX[o['content']['top']]
+                    break
         if sheets is None:
             pp = 'NO_SUMMARY'
+        elif propagated is not None:
+            pp = 'PROPAGATED'
         elif not s or not s.get('content') or 'top' not in s['content']:
             pp = 'NOT_CLASSIFIED'
         else:
             pp = PIX[s['content']['top']]
         pconf[t][pp] += 1
+        if propagated is not None:
+            side['propagatedN'] += 1
+            side['propagatedOk'] += propagated == t
+        if s and s.get('fromFailure'):
+            side['fromFailedRuns'] += 1
         if t == 'ORTHOGRAPHIC_ELEVATION' and r['view']['side'] not in (None, 'UNDECIDED'):
             ts = r['view']['side']
             ps = (s or {}).get('side') if (s or {}).get('side') in ('LEFT', 'RIGHT') else pv
@@ -71,12 +88,12 @@ def score(rows, runs):
         out_rows.append({'project': r['project'], 'sha256': r['sha256'], 'truth': t, 'graph': gp, 'pixels': pp})
     truth = sorted(gconf)
     g = {c: prf(gconf, c) for c in truth}
-    decided = {t: collections.Counter({k: v for k, v in pconf[t].items() if k not in ('NO_SUMMARY', 'NOT_CLASSIFIED')}) for t in truth}
+    decided = {t: collections.Counter({k: v for k, v in pconf[t].items() if k not in ('NO_SUMMARY', 'NOT_CLASSIFIED', 'PROPAGATED')}) for t in truth}
     p = {c: prf(decided, c) for c in truth if sum(decided[c].values())}
     cov = collections.Counter()
     for t in truth:
         for k, v in pconf[t].items():
-            cov['decided' if k not in ('NO_SUMMARY', 'NOT_CLASSIFIED') else k] += v
+            cov['decided' if k not in ('NO_SUMMARY', 'NOT_CLASSIFIED', 'PROPAGATED') else k] += v
     return {
         'n': len(rows),
         'graph': {'macroF1': sum(x['f1'] for x in g.values()) / len(g) if g else 0.0, 'perClass': g, 'confusion': {t: dict(gconf[t]) for t in truth}},
@@ -93,11 +110,29 @@ def load(root):
         d = os.path.dirname(gp)
         h = ALIAS.get(os.path.basename(d), os.path.basename(d))
         rs = os.path.join(d, 'result-summary.json')
+        cv = os.path.join(d, 'content-verdicts.json')
+        pk = os.path.join(d, 'source-package.json')
         sheets = None
         if os.path.exists(rs):
             src = json.load(open(rs)).get('sources')
             sheets = {s['byteHash']: s for s in src.get('sheets', [])} if src else None
-        runs[h] = {'graph': json.load(open(gp)), 'sheets': sheets}
+        # v3.46: a run that failed after the content check keeps its verdicts (content-verdicts.json, per asset, on the
+        # asset's selected variant); they are what the pixels decided, whatever failed later
+        if sheets is None and os.path.exists(cv) and os.path.exists(pk):
+            sel = {a['id']: next((v.get('byteHash') for v in a.get('variants', []) if v.get('id') == a.get('selectedVariantId')), None) for a in json.load(open(pk))['assets']}
+            sheets = {}
+            for v in json.load(open(cv)):
+                b = sel.get(v['assetId'])
+                if b and v.get('decision') != 'NOT_CLASSIFIED':
+                    sheets[b] = {'byteHash': b, 'content': {'top': v['top'], 'probability': v.get('topProbability')}, 'fromFailure': True}
+        # an asset's other variants: the verdict on its selected variant, reported as PROPAGATED (not a decision on those bytes)
+        variants = {}
+        if os.path.exists(pk):
+            for a in json.load(open(pk))['assets']:
+                hashes = [v.get('byteHash') for v in a.get('variants', []) if v.get('byteHash')]
+                for b in hashes:
+                    variants[b] = hashes
+        runs[h] = {'graph': json.load(open(gp)), 'sheets': sheets, 'variants': variants}
     return runs
 
 
