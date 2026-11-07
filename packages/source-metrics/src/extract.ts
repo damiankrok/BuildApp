@@ -24,7 +24,7 @@
 import { NO_CHECKPOINT, round6, stableId } from '@buildapp/source-common'
 import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
-import { adaptiveInkMask, bandThicknessQuantile, inkChannel, runLengthBands } from '@buildapp/source-cv'
+import { adaptiveInkMask, bandThicknessQuantile, inkChannel, runLengthBands, toGray } from '@buildapp/source-cv'
 import type { Mask } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
@@ -53,6 +53,8 @@ import type { ScaleAnchorInput } from './registration.js'
 import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './specifications.js'
 import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
+import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from './external-levels.js'
+import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_CALLOUT_RING_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_TOPOLOGY_SCHEMA_VERSION } from './schema.js'
 import type { Association, CalloutRingRecord, ChainRelation, DimensionChain, DimensionObservation, DimensionTopologyRecord, FrameMetricSolution, LabelAssignmentRecord, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
@@ -66,7 +68,8 @@ export const TINTED_SEARCH_WITHOUT_SCALE = { minRadiusPx: 6, maxShareOfSheet: 0.
 /** 1.7.0 (EXTERIOR-COMPLETE E9): a ring half two readers read two ways carries the recogniser's reading as an equal rival after the template's; a ladder rung's clean reading is substituted only when it misses the ladder by more than two tolerances. */
 /** 1.8.0 (EXTERIOR-COMPLETE, Zefiranty): an outline crossing a dimension line is no measurement point (dimension-lines 1.4.0); two labels one pass read apart are two inks (metric solver 1.6.0). */
 /** 1.9.0 (EXTERIOR-COMPLETE E12): two barred rings on one bar row, overlapping or touching, are one callout ring split by ink touching it (`mergeSplitRings`). */
-export const METRIC_READER_VERSION = '1.9.0' as const
+/** 1.10.0 (v3.45): with a recogniser, a section's level marks are read by it and stand only by the same drawing — their symbols, one ladder, a printed ±0,00 on it (`level-marks.ts`); the template's datums they overrule are dropped. */
+export const METRIC_READER_VERSION = '1.10.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -263,10 +266,19 @@ export function markerApexBelow(raster: Raster, box: PixelRect): { row: number; 
     }
   }
   if (top < 0) return undefined
+  // v3.45: a row the symbol's point cannot lie inside — a solid fill (a slab, a wall) spanning the symbol's width around
+  // it. The ±0,00 mark is drawn with its point on the floor slab: the point is the fill's first row, never a row inside
+  // it (the deeper-apex rule below would otherwise walk 2 px into the slab and move the zero by as much).
+  const insideFill = (xa: number, ya: number): boolean => {
+    const half = Math.max(3, Math.round(h * 0.6))
+    let dark1 = 0
+    for (let x = xa - half; x <= xa + half; x += 1) if (dark(x, ya - 1)) dark1 += 1
+    return dark1 >= (2 * half + 1) * 0.8
+  }
   let best: { row: number; x: number; score: number } | undefined
   for (let ya = top + Math.max(3, Math.round(h * 0.2)); ya <= top + Math.round(h * 0.9); ya += 1) {
     for (let xa = x0; xa <= x1; xa += 1) {
-      if (!near(xa, ya)) continue
+      if (!near(xa, ya) || insideFill(xa, ya)) continue
       for (const t of [0.45, 0.577, 0.72]) {
         let seen = 0
         let rows = 0
@@ -377,6 +389,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   const calloutRings: CalloutRingRecord[] = []
   // 005H: how many labels the external recogniser read; none, and the set is the 1.5.0 set it was before.
   let heard = 0
+  // v3.45: how many section level marks the recogniser's readings put on an admitted ladder.
+  let levelMarksAdmitted = 0
   // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
   // plan are seldom byte-identical crops: on the development rows the cache never hit.)
   const latticeCache: LatticeCache = new Map()
@@ -955,6 +969,61 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ladderOrigin = { x: 0, y: ladder.zeroRowPx }
     }
 
+    // --- v3.45: the section's level marks, read by the recogniser and admitted by the same drawing ---
+    // The template's datums above stay where nothing admits better. Where the recogniser's readings stand on one ladder
+    // with a printed ±0,00 on it, they are the section's levels: a template datum on the same label, or one whose row
+    // the ladder puts at another value, is dropped (two values for one label are a storey that is not there), and the
+    // ladder's registration is the section's.
+    let levelRegistration: MetricEvidenceSet['coordinateRegistrations'][number] | undefined
+    if (recogniser && plane === 'SECTION_HY') {
+      const gray = toGray(raster)
+      const sectionTokens = read.raw ?? read.tokens
+      const labels = levelLabels(raster, gray, sectionTokens.map((t) => ({ box: t.box, upright: t.orientation === 'HORIZONTAL' })))
+      if (labels.length > 0) {
+        const recognised: ExternalReading[] = yield { frameId: frame.id, crops: levelCrops(gray, labels) }
+        heard += recognised.length
+        const { readings: marks, refused } = levelReadingsFrom(labels, recognised)
+        const verdict = checkLevelReadings(raster, marks, undefined, sectionTokens.map((t) => t.box))
+        if (verdict.admitted && verdict.zeroAnchor === 'PRINTED_ZERO') {
+          const made = levelEvidenceFromReadings(frame, marks, verdict, { id: recogniser.id, model: recogniser.model.name, kind: 'RECOGNISER' })
+          const admittedBoxes = made.evidence.map((e) => e.textBox).filter((b): b is PixelRect => b !== undefined)
+          const sameLabel = (b: PixelRect | undefined): boolean =>
+            !!b && admittedBoxes.some((a) => {
+              const ix = Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
+              const iy = Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0))
+              const small = Math.min((a.x1 - a.x0) * (a.y1 - a.y0), (b.x1 - b.x0) * (b.y1 - b.y0))
+              return small > 0 && (ix * iy) / small >= 0.5
+            })
+          const overruled = new Map(supersededLevels(evidence.filter((e) => e.frameId === frame.id), frame.id, marks, verdict).map((x) => [x.evidenceId, x.why]))
+          for (let i = evidence.length - 1; i >= 0; i -= 1) {
+            const e = evidence[i]
+            if (e.frameId !== frame.id || e.kind !== 'LEVEL_DATUM' || e.provenance.extractor === 'RECOGNISER_VALIDATED') continue
+            if (!overruled.has(e.id) && !sameLabel(e.textBox)) continue
+            unresolved.push({
+              id: stableId('gap', 'level-overruled', { frameId: frame.id, evidenceId: e.id }),
+              what: `the template's reading "${e.rawText ?? e.value}" of a level mark on ${frame.assetId}`,
+              frameId: frame.id,
+              reason: overruled.get(e.id) ?? 'the same printed label the recogniser read and the drawing admitted: one value per label',
+              status: 'AMBIGUOUS',
+              ocrTokenIds: e.ocrTokenIds,
+            })
+            evidence.splice(i, 1)
+          }
+          evidence.push(...made.evidence)
+          levelMarksAdmitted += made.evidence.length
+          levelRegistration = made.registration
+        } else if (marks.length > 0 || refused.length > 0) {
+          unresolved.push({
+            id: stableId('gap', 'level-marks', { frameId: frame.id }),
+            what: `the level marks the recogniser read on ${frame.assetId}`,
+            frameId: frame.id,
+            reason: `${marks.length} heard, ${refused.length} refused (${refused.slice(0, 3).map((r) => r.why).join('; ')}); ${verdict.why}`,
+            status: 'AMBIGUOUS',
+          })
+        }
+      }
+    }
+
     // --- the numbers nothing could be done with ---
     const orphaned = read.tokens.filter((t) => !usedTokens.has(t) && t.score >= 0.25)
     if (orphaned.length > 0) {
@@ -973,7 +1042,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     // metres" cannot be checked against anything, so it produces a scale with
     // a residual of exactly zero and no reason whatsoever to believe it; two
     // that agree are evidence, and two that disagree are at least honest.
-    if (plane && anchors.length >= 2) {
+    if (levelRegistration) registrations.push(levelRegistration)
+    else if (plane && anchors.length >= 2) {
       const registration = registerFrame({
         frameId: frame.id,
         assetId: frame.assetId,
@@ -1052,6 +1122,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       { name: NUMERIC_LATTICE_NAME, version: heard > 0 ? NUMERIC_LATTICE_ENSEMBLE_VERSION : NUMERIC_LATTICE_VERSION },
       ...(heard > 0 ? [{ name: OCR_ENSEMBLE_NAME, version: OCR_ENSEMBLE_VERSION }] : []),
       ...(calloutRings.length > 0 ? [{ name: CALLOUT_RECOGNISER_NAME, version: CALLOUT_RECOGNISER_VERSION }] : []),
+      ...(levelMarksAdmitted > 0 ? [{ name: LEVEL_MARKS_NAME, version: LEVEL_MARKS_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
