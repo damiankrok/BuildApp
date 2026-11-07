@@ -1,0 +1,481 @@
+{
+ "schema": "reading-v345/room-numbers/1",
+ "what": "every room number printed on the plan sheet the reconstruction reads for each storey (its plan-diagnostics frame), with the printed digits and the centre of their ink in the sheet's own pixels (853 px edition)",
+ "basis": "image content only, read on a 50 px grid at 1.4x; centre accurate to about 5 px",
+ "annotator": "developer; annotated before the room-number recogniser pass existed in production and before any of its readings on these sheets were seen. Balsamowce is non-blind (scored as DEV across this stage).",
+ "frozen": "2026-11-07",
+ "sheets": [
+  {
+   "project": "projekt-dom-w-renklodach-39-g2e-m45128ec88f20c",
+   "assetId": "asset-rzut-0ede47240e",
+   "storey": "GROUND",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     386,
+     480
+    ],
+    [
+     "2",
+     352,
+     545
+    ],
+    [
+     "3",
+     304,
+     482
+    ],
+    [
+     "4",
+     352,
+     355
+    ],
+    [
+     "5",
+     448,
+     355
+    ],
+    [
+     "6",
+     408,
+     175
+    ],
+    [
+     "7",
+     547,
+     175
+    ],
+    [
+     "8",
+     547,
+     266
+    ],
+    [
+     "9",
+     547,
+     355
+    ],
+    [
+     "10",
+     511,
+     482
+    ],
+    [
+     "11",
+     549,
+     443
+    ],
+    [
+     "12",
+     490,
+     622
+    ]
+   ],
+   "sha256": "2560488581c2cd6f466a74124ec961454634dd215831da9ab880bc1355a12065"
+  },
+  {
+   "project": "projekt-dom-w-skalnicach-m91a28365299b4",
+   "assetId": "asset-rzut-2fd2cb4e06",
+   "storey": "GROUND",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     374,
+     496
+    ],
+    [
+     "2",
+     287,
+     549
+    ],
+    [
+     "3",
+     181,
+     496
+    ],
+    [
+     "4",
+     373,
+     325
+    ],
+    [
+     "5",
+     547,
+     416
+    ],
+    [
+     "6",
+     464,
+     325
+    ],
+    [
+     "7",
+     595,
+     325
+    ],
+    [
+     "8",
+     711,
+     325
+    ],
+    [
+     "9",
+     734,
+     459
+    ],
+    [
+     "10",
+     711,
+     496
+    ],
+    [
+     "11",
+     596,
+     496
+    ],
+    [
+     "12",
+     464,
+     461
+    ],
+    [
+     "13",
+     464,
+     559
+    ]
+   ],
+   "sha256": "56c3de4409190f6c1bb2af2f4528c7ec5663daa7cd79b759003cd0ecf5cbdd2f"
+  },
+  {
+   "project": "projekt-dom-w-wisteriach-14-m4ac26d378b379",
+   "assetId": "asset-rzut-5ead0755c1",
+   "storey": "GROUND",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     514,
+     530
+    ],
+    [
+     "2",
+     474,
+     429
+    ],
+    [
+     "3",
+     369,
+     530
+    ],
+    [
+     "4",
+     288,
+     429
+    ],
+    [
+     "5",
+     407,
+     320
+    ],
+    [
+     "6",
+     611,
+     348
+    ],
+    [
+     "7",
+     611,
+     429
+    ],
+    [
+     "8",
+     611,
+     598
+    ]
+   ],
+   "sha256": "d3b40cf565484748f7fe57d2a907c602b43cb630f46afa23279f11de636345cb"
+  },
+  {
+   "project": "projekt-dom-w-wisteriach-14-m4ac26d378b379",
+   "assetId": "asset-rzut-727cc72c93",
+   "storey": "ATTIC",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     402,
+     221
+    ],
+    [
+     "2",
+     401,
+     430
+    ],
+    [
+     "3",
+     557,
+     341
+    ],
+    [
+     "4",
+     621,
+     494
+    ],
+    [
+     "5",
+     451,
+     494
+    ],
+    [
+     "6",
+     298,
+     494
+    ],
+    [
+     "7",
+     297,
+     341
+    ]
+   ],
+   "sha256": "fec90de2492c6a864f246e773e7ca055970579c4fe6e6cef3bc39f01d96aee60"
+  },
+  {
+   "project": "projekt-willa-malika-g2ae-m79329af34f4be",
+   "assetId": "asset-rzut-f20b9d40cb",
+   "storey": "GROUND",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     313,
+     639
+    ],
+    [
+     "2",
+     313,
+     480
+    ],
+    [
+     "3",
+     219,
+     560
+    ],
+    [
+     "4",
+     269,
+     344
+    ],
+    [
+     "5",
+     379,
+     344
+    ],
+    [
+     "6",
+     379,
+     436
+    ],
+    [
+     "7",
+     379,
+     516
+    ],
+    [
+     "8",
+     379,
+     561
+    ],
+    [
+     "9",
+     380,
+     639
+    ],
+    [
+     "10",
+     559,
+     556
+    ]
+   ],
+   "sha256": "b086a8339059790545f3d476320e88147427817593ab1ebf79c1bca38f4e8e63"
+  },
+  {
+   "project": "projekt-willa-malika-g2ae-m79329af34f4be",
+   "assetId": "asset-rzut-9923ecc29f",
+   "storey": "UPPER",
+   "split": "EVAL",
+   "numbers": [
+    [
+     "1",
+     299,
+     414
+    ],
+    [
+     "2",
+     207,
+     306
+    ],
+    [
+     "3",
+     206,
+     259
+    ],
+    [
+     "4",
+     376,
+     259
+    ],
+    [
+     "5",
+     299,
+     259
+    ],
+    [
+     "6",
+     376,
+     384
+    ],
+    [
+     "7",
+     377,
+     452
+    ],
+    [
+     "8",
+     377,
+     557
+    ],
+    [
+     "9",
+     291,
+     557
+    ],
+    [
+     "10",
+     219,
+     557
+    ],
+    [
+     "11",
+     259,
+     414
+    ]
+   ],
+   "sha256": "559792452c089ae4ccc83d5e5e80fdaf791e40ced73d056e12d8ef56e50cd276"
+  },
+  {
+   "project": "projekt-dom-w-balsamowcach-20-g2a-m250297bb3f46c",
+   "assetId": "asset-rzut-110bab5298",
+   "storey": "GROUND",
+   "split": "DEV",
+   "numbers": [
+    [
+     "1",
+     336,
+     550
+    ],
+    [
+     "2",
+     467,
+     550
+    ],
+    [
+     "3",
+     335,
+     466
+    ],
+    [
+     "4",
+     415,
+     466
+    ],
+    [
+     "5",
+     245,
+     320
+    ],
+    [
+     "6",
+     245,
+     496
+    ],
+    [
+     "7",
+     446,
+     261
+    ],
+    [
+     "8",
+     468,
+     361
+    ],
+    [
+     "9",
+     594,
+     261
+    ],
+    [
+     "10",
+     644,
+     341
+    ]
+   ],
+   "sha256": "2921ad31769ef56cb71e496ee743fd28806e876520b4036c8454d6b5a564a1a1"
+  },
+  {
+   "project": "projekt-dom-w-balsamowcach-20-g2a-m250297bb3f46c",
+   "assetId": "asset-rzut-c6444bf286",
+   "storey": "ATTIC",
+   "split": "DEV",
+   "numbers": [
+    [
+     "1",
+     468,
+     312
+    ],
+    [
+     "2",
+     468,
+     241
+    ],
+    [
+     "3",
+     337,
+     250
+    ],
+    [
+     "4",
+     221,
+     250
+    ],
+    [
+     "5",
+     221,
+     402
+    ],
+    [
+     "6",
+     354,
+     475
+    ],
+    [
+     "7",
+     494,
+     416
+    ],
+    [
+     "8",
+     666,
+     311
+    ],
+    [
+     "9",
+     468,
+     355
+    ]
+   ],
+   "sha256": "7ec315744ff55cc09998cac4b1c5631b666203c46615cec298fbef80a37df646"
+  }
+ ]
+}
