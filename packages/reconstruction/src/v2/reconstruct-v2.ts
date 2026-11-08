@@ -18,6 +18,8 @@ import type { Mask, Raster } from '@buildapp/source-cv'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '../solve.js'
 import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
+import { decideGroundClearHeight } from './section-clear-height.js'
+import type { ClearHeightRejection } from './section-clear-height.js'
 import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
 import { ringBounds } from '../structural-layout.js'
@@ -620,7 +622,18 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (houseWall.source !== 'EXTERIOR_FACE_BANDS') gap({ what: `the exterior wall thickness, taken as ${T.toFixed(2)} m`, reason: houseWall.why, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
   }
   const bodyWalls: Array<{ massId: string; reading: WallThicknessReading; applied: boolean; why?: string }> = []
-  const slabT = levels.measured && levels.floors.length > 1 ? round6(Math.min(0.4, Math.max(0.2, levels.floors[1] - levels.floors[0] - 2.72))) : CONVENTIONS.slabThickness
+  // v3.51 C1b: the ground storey's clear height, as the section dimensions it (finished floor → slab underside), fixes
+  // the slab-and-floor band under the printed floor above; without such a reading the band rests on an ASSUMED clear
+  // height (2.72 m), and is named so on the ground storey's feature
+  const groundFloorAt = Math.max(0, levels.floors.findIndex((v) => Math.abs(v) < 0.05))
+  const clearHeight = decideGroundClearHeight({ metrics, sectionFrameId: sectionFrame?.id, floors: levels.floors, floorBasis: levels.floorBasis, groundAt: groundFloorAt })
+  const slabT = clearHeight.accepted
+    ? round6(clearHeight.accepted.bandM)
+    : levels.measured && levels.floors.length > groundFloorAt + 1
+      ? round6(Math.min(0.4, Math.max(0.2, levels.floors[groundFloorAt + 1] - levels.floors[groundFloorAt] - ASSUMED_CLEAR_HEIGHT_M)))
+      : CONVENTIONS.slabThickness
+  if (clearHeight.accepted) step({ stage: 'massing', what: `the ground storey's clear height ${clearHeight.accepted.clearHeightM.toFixed(2)} m, from the section`, method: 'DIRECT', detail: `the printed dimension stands on the ±0,00 floor's row and its span at the section's ladder (${clearHeight.accepted.ladderMetresPerPx.toFixed(5)} m/px) is its value; the slab and floor over it are ${slabT.toFixed(2)} m to the printed floor above`, inputs: clearHeight.outcomes.length, outputs: 1 })
+  else if (clearHeight.status === 'AMBIGUOUS') gap({ what: "the ground storey's clear height", reason: `the section dimensions it twice, differently (${clearHeight.outcomes.filter((o) => o.rejected === 'CONFLICTS_WITH_ANOTHER_READING').map((o) => o.candidate.valueM.toFixed(2)).join(' / ')} m): neither is applied, the slab band stays assumed`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: clearHeight.outcomes.filter((o) => o.rejected === 'CONFLICTS_WITH_ANOTHER_READING').map((o) => o.candidate.evidenceId) })
 
   // Masses in the v2 frame.
   const v2Rect = (r: { x0: number; z0: number; x1: number; z1: number }): { x0: number; z0: number; x1: number; z1: number } => ({ x0: round6(r.x0), z0: round6(flipZ(world, r.z1)), x1: round6(r.x1), z1: round6(flipZ(world, r.z0)) })
@@ -766,10 +779,25 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const height = index === topStorey && pitched && roofRidgeY !== undefined && roofRidgeY > elevation + stated ? round6(roofRidgeY - elevation) : round6(stated)
     const levelWhy = `elevation: ${elevationBasis === 'PRINTED' ? 'a printed level datum on the section' : elevationBasis === 'DATUM_ZERO' ? 'the ±0,00 the printed datums are measured from (its own mark not read)' : 'not printed: the storey below plus a conventional storey height'}; height: ${heightProvenance === 'SOURCE_DERIVED' ? 'the gap between two printed datums' : heightBasis === 'REPEATED_BELOW' ? "not printed: the storey below's height taken again" : `not printed: a conventional ${CONVENTIONS.storeyHeight.toFixed(2)} m storey`}`
     const unresolvedLevel = [...(elevationProvenance === 'ASSUMED_FOR_RENDERING' ? ['elevation'] : []), ...(heightProvenance === 'ASSUMED_FOR_RENDERING' ? ['height'] : [])]
-    const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 } }, sectionFrame && elevationBasis !== 'CONVENTION' ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], elevationProvenance, levelWhy, { printed: elevationBasis === 'PRINTED', unresolvedProperties: unresolvedLevel, parameterProvenance: { elevation: elevationProvenance, height: heightProvenance } })
+    // v3.51 C1b: the ground storey under a printed floor carries its clear height and the slab band over it, each with
+    // its own authority — the printed dimension, or the assumed 2.72 m clear height
+    const slabParams = k === groundFloorAt && i + 1 < levelStoreys.length && levels.floors.length > groundFloorAt + 1
+      ? clearHeight.accepted
+        ? { params: { clearHeight: { value: clearHeight.accepted.clearHeightM, low: clearHeight.accepted.clearHeightM - 0.01, high: clearHeight.accepted.clearHeightM + 0.01 }, slabBand: { value: slabT, low: slabT - 0.02, high: slabT + 0.02 } }, provenance: { clearHeight: 'SOURCE_EXACT' as const, slabBand: 'SOURCE_DERIVED' as const }, unresolved: [] as string[], why: `; clear height ${clearHeight.accepted.clearHeightM.toFixed(2)} m: the section's printed dimension; slab band ${slabT.toFixed(2)} m: the printed floor above less it` }
+        : { params: { clearHeight: { value: round6(stated - slabT), low: round6(stated - slabT) - 0.1, high: round6(stated - slabT) + 0.1 }, slabBand: { value: slabT, low: slabT - 0.1, high: slabT + 0.1 } }, provenance: { clearHeight: 'ASSUMED_FOR_RENDERING' as const, slabBand: 'ASSUMED_FOR_RENDERING' as const }, unresolved: ['clearHeight', 'slabBand'], why: `; clear height and slab band: not read from the section (an assumed ${ASSUMED_CLEAR_HEIGHT_M.toFixed(2)} m clear height)` }
+      : undefined
+    const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 }, ...(slabParams?.params ?? {}) }, sectionFrame && elevationBasis !== 'CONVENTION' ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], elevationProvenance, `${levelWhy}${slabParams?.why ?? ''}`, { printed: elevationBasis === 'PRINTED', unresolvedProperties: [...unresolvedLevel, ...(slabParams?.unresolved ?? [])], parameterProvenance: { elevation: elevationProvenance, height: heightProvenance, ...(slabParams?.provenance ?? {}) } })
+    if (slabParams && clearHeight.accepted) record({ evidenceId: clearHeight.accepted.evidenceId, evidenceKind: 'METRIC', what: `the ground storey's clear height ${clearHeight.accepted.clearHeightM.toFixed(2)} m on the section`, authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the ground storey walls under the slab, and the slab band to the printed floor above', stage: 'METRIC_SOLVE' })
     levelsV2.push({ index, id: `lvl-${i}`, elevation, height, wallTop: round6(elevation + stated), featureId })
   })
   for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', featureId: levelsV2[0]?.featureId, disposition: 'USED_IN_MODEL', reason: 'the storey levels and the ridge', stage: 'METRIC_SOLVE' })
+  // v3.51 C1b: what the section's vertical dimensions were, for this relation, when not taken
+  for (const o of clearHeight.outcomes) {
+    if (!o.rejected || o.candidate.evidenceId === clearHeight.accepted?.evidenceId) continue
+    const why = CLEAR_HEIGHT_REJECTION_WHY[o.rejected]
+    if (!why) continue
+    record({ evidenceId: o.candidate.evidenceId, evidenceKind: 'METRIC', what: `a vertical dimension ${o.candidate.valueM.toFixed(2)} m on the section`, authority: 'HIGH', disposition: why.disposition, reason: `${why.reason}${o.bandM !== undefined ? ` (band ${o.bandM.toFixed(2)} m)` : ''}`, stage: 'METRIC_SOLVE' })
+  }
   const levelOf = (index: number) => levelsV2.find((l) => l.index === index)
 
   // Plan frames per storey.
@@ -2882,7 +2910,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, slabThicknessBasis: clearHeight.accepted ? 'SECTION_CLEAR_HEIGHT' : 'ASSUMED', levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
@@ -3217,4 +3245,15 @@ function heightsSummary(bases: ReadonlyMap<number, { elevation: LevelBasis; heig
     .map(({ l, b }) => ({ storeyIndex: l.index, heightM: round6(l.wallTop - l.elevation), basis: b.height === 'REPEATED_BELOW' ? ('REPEATED_BELOW' as const) : ('CONVENTION' as const) }))
   if (assumed.length === 0) return { measured: true }
   return { measured: false, assumedStoreyHeightM: assumed[0].heightM, assumedStoreys: assumed }
+}
+
+/** v3.51 C1b: the clear height assumed for the slab band where the section dimensions none (named, never printed). */
+export const ASSUMED_CLEAR_HEIGHT_M = 2.72
+
+/** v3.51 C1b: what a refused section dimension was, for the ledger (typed by the reason, not parsed from it). */
+const CLEAR_HEIGHT_REJECTION_WHY: Partial<Record<ClearHeightRejection, { disposition: EvidenceConsumptionRecord['disposition']; reason: string }>> = {
+  SPAN_DISAGREES_WITH_VALUE: { disposition: 'REJECTED_WITH_REASON', reason: "its line's span at the section's ladder scale is not its printed value: the line read is not this dimension's" },
+  BAND_NOT_PHYSICAL: { disposition: 'REJECTED_WITH_REASON', reason: 'it stands on the ground floor, but the band it leaves to the printed floor above is no slab and floor: another ceiling, not this storey\'s' },
+  NO_PRINTED_FLOOR_ABOVE: { disposition: 'IGNORED_WITH_REASON', reason: 'a clear height with no printed floor above it: no slab band follows (a single storey, or the top storey under the roof)' },
+  CONFLICTS_WITH_ANOTHER_READING: { disposition: 'CONFLICTED', reason: "another reading of the ground storey's clear height disagrees with it; neither is applied" },
 }

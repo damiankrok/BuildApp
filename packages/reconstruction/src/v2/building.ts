@@ -299,6 +299,11 @@ export type BuildingV2 = {
   label: string
   wallThicknessM: number
   slabThicknessM: number
+  /**
+   * v3.51 C1b: what the slab band rests on — the ground storey's clear height as the section dimensions it
+   * (SECTION_CLEAR_HEIGHT, derived from two printed facts), or an assumed clear height / the slab convention.
+   */
+  slabThicknessBasis?: 'SECTION_CLEAR_HEIGHT' | 'ASSUMED'
   levels: LevelV2[]
   masses: MassV2[]
   mainRoof?: MainRoofV2

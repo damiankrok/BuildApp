@@ -393,7 +393,10 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const voidsHere = voidsEmitted.filter((x) => x.slabId === `slab-${m.id}-${storey}`)
       // the hole is traced from the plan's fill (its outline SOURCE_DERIVED); that the fill means a void is read from its
       // tone and solidity, not from the words printed in it (VISUAL_SEMANTIC)
-      if (!m.pieceOf && voidsHere.length > 0) evidence(`slab-${m.id}-${storey}`, 'SOURCE_DERIVED', `the floor of storey ${storey}${stairHoles ? ', with the stair hole' : ''}; ${voidsHere.map((x) => x.v.why).join('; ')}; an edge within ${VOID_SNAP_M} m of the slab's edge is taken to it`, { holes: 'SOURCE_DERIVED', 'holes.meaning': 'VISUAL_SEMANTIC' })
+      // v3.51 C1b: a floor over a storey is as thick as the band the section's clear height leaves, or an assumption
+      const slabThickness: Record<string, ProvenanceStatus> = storey > 0 ? { thickness: b.slabThicknessBasis === 'SECTION_CLEAR_HEIGHT' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING' } : {}
+      if (!m.pieceOf && voidsHere.length > 0) evidence(`slab-${m.id}-${storey}`, 'SOURCE_DERIVED', `the floor of storey ${storey}${stairHoles ? ', with the stair hole' : ''}; ${voidsHere.map((x) => x.v.why).join('; ')}; an edge within ${VOID_SNAP_M} m of the slab's edge is taken to it`, { holes: 'SOURCE_DERIVED', 'holes.meaning': 'VISUAL_SEMANTIC', ...slabThickness })
+      else if (!m.pieceOf && storey > 0) evidence(`slab-${m.id}-${storey}`, 'SOURCE_DERIVED', `the floor of storey ${storey}`, slabThickness)
       // A single-storey attached body under a flat roof: its walls rise to the parapet where the section draws one.
       // Under its own pitched roof a body's walls die into the roof's planes: the gable ends rise to the ridge.
       const height = planeRoof ? round6(planeRoof.ridgeY - l.elevation + 0.5) : pitched ? round6(pitched.ridgeY - l.elevation + 0.5) : attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
@@ -612,7 +615,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', ...topProfile, materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
       emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), run.id])
       for (const piece of run.pieces) if (piece !== run.id) bindings.push({ featureId: piece, objectId: run.id, objectKind: 'walls', commandIndex: program.length - 1 })
-      evidence(run.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: 'SOURCE_DERIVED' })
+      // v3.51 C1b: under the storey above, a partition's height is the storey less the slab band, as derived as that band is
+      evidence(run.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: isTop || b.slabThicknessBasis === 'SECTION_CLEAR_HEIGHT' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING' })
       for (const d of run.doors) {
         // A door needs wall on both sides of it: a gap at a trimmed end (a block jamb) is narrowed to leave a stub.
         const runLength = round6(run.to - run.from)

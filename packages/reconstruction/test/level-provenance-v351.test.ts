@@ -78,7 +78,7 @@ describe('C1a: a feature with an assumed parameter is not L2', () => {
   const level = (parameterProvenance: Record<string, 'SOURCE_EXACT' | 'SOURCE_DERIVED' | 'ASSUMED_FOR_RENDERING'>) => ({
     provenance: 'SOURCE_EXACT' as const,
     sourceCoverage: { viewFamilies: [], sightings: 1, independentAssets: 1, printed: true },
-    parameters: { elevation: { value: 0, low: -0.02, high: 0.02 }, height: { value: 2.8, low: 2.75, high: 2.85 } },
+    parameters: { elevation: { value: 0, low: -0.02, high: 0.02, unit: 'm' as const }, height: { value: 2.8, low: 2.75, high: 2.85, unit: 'm' as const } },
     unresolvedProperties: [],
     parameterProvenance,
   })
