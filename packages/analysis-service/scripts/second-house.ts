@@ -154,6 +154,8 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       if (features.length > 0) write('feature-trace.json', features)
       // E13: the bodies the plan recovered (seam splits, gate bays) and what was decided, with the feature trace
       if (process.env.BUILDAPP_FEATURE_TRACE) write('body-recovery.json', r.bodyRecovery)
+      // v3.51: the solved feature graph (per-parameter provenance, the accepted decisions) of this very model, for the C1/C2 measures
+      if (process.env.BUILDAPP_FEATURE_TRACE) write('feature-graph.json', r.featureGraph)
       writeOverlays(out, r.planDiagnostics, rasterOf)
       // EXTERIOR-COMPLETE: the same four cameras as a full run, on the scene the production compiler makes of the model
       if (argv.includes('--views')) {
