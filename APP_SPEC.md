@@ -1,125 +1,109 @@
-# BuildApp — application specification
+# BuildPlan — product and core specification
 
-> Operational file. Created at the start of STAGE BUILDAPP-00 from the stage
-> brief supplied by the external orchestrator. It states what BuildApp is and
-> the design rules every stage must respect. It is not a roadmap; the external
-> orchestrator owns the roadmap and stage ordering.
+Post-audit operational summary, prepared08.11.2026. This replaces the historical
+BUILDAPP-00 foundation summary when adopted. The full OWNER Master Plan retains
+future scenarios and priorities; this file does not cancel them or copy history.
 
-## 1. What BuildApp is
+## 1. Product
 
-BuildApp is a semantic 3D building environment. Its core concept:
+BuildPlan starts on native Android. A recognizable, editable semantic house is
+the spatial index of a construction project: storeys, rooms, elements, real
+costs, stages, documents, photos and work history. Costs/documents remain useful
+with a partial model. Full personal statistics, manual costs and the local core
+remain FREE; do not change business scope during analyzer work.
 
-```
-Building DSL / semantic commands
-            ↓
-CanonicalBuildingModel
-            ↓
-Geometry Compiler
-            ↓
-BuildWorld (3D editor / viewer)
-```
+LINK reconstructs the source-grounded exterior from public project materials:
+masses/garage/wings, connected roofs, openings, balconies/loggias/guards,
+canopies/carports/pergolas/supports, dormers/chimneys/rooflights and characteristic
+facade zones with a coherent approximate low-poly/stylized palette. It does not
+promise unseen construction or full BIM. PROJECT uses supplied stronger drawings,
+vectors and schedules where available; AS-BUILT evolves the same project identity.
+A later single-photo fallback has hypothetical unseen sides and no false metric
+authority. Preserve these modes rather than making the active LINK task their deletion.
 
-Future image/web analyzers reconstruct a house by issuing high-level building
-operations (`createLevel`, `createWall`, `cutOpening`, `placeWindow`,
-`placeDoor`, `createRoof`, `createRoom`, `createBalcony`, `placeChimney`, …)
-instead of generating triangle meshes. BuildApp is the hands and the world
-those analyzers will use.
+Real expenses use exact Money in minor units with explicit currency, overflow
+checks and calendar dates. Allocation/refund semantics must be settled before
+their implementation. Geometry authority does not come from appearance alone.
 
-## 2. Design principles
+## 2. Core boundaries
 
-1. **The CanonicalBuildingModel is the source of truth.** Three.js objects are
-   never the record. Every rendered triangle is derived from validated model
-   data by the geometry compiler, and can be traced back to a semantic object
-   id.
-2. **Callers of the DSL never see rendering internals.** No Three.js buffer
-   geometry, triangle indices, boolean mesh details, React components or
-   renderer state leak into the command API.
-3. **One production path.** The viewer renders only what the compiler produces
-   from the model. No UI component invents walls, windows or roofs on its own.
-   Architecture tests enforce this so that good geometry can never again live
-   outside the real path (the failure the reference research repository
-   suffered).
-4. **Real openings.** A structural opening removes wall material. A window or
-   door painted on an intact wall is a defect. Window and door fills occupy
-   the opening as separate semantic objects.
-5. **Semantic ownership.** Window → Opening → Wall, Door → Opening → Wall,
-   Room → Level, Wall → Level, Roof → Level/Building. Every object has a stable
-   id that survives save/load.
-6. **Uncertainty survives.** Every object can carry evidence / provenance
-   metadata with the vocabulary `SOURCE_EXACT`, `SOURCE_CORROBORATED`,
-   `SOURCE_DERIVED`, `GEOMETRIC_INFERRED`, `VISUAL_INFERRED`, `ASSUMED`,
-   `UNRESOLVED`. Future inference systems must never be forced to throw
-   uncertainty away.
-7. **Validation, not silent repair.** Invalid references and impossible
-   geometry produce useful errors. Nothing is repaired silently.
-8. **Deterministic persistence.** Saving the same model twice produces
-   byte-identical JSON; loading it compiles to the same building.
+Accepted semantic Building → typed commands → validated model → geometry compiler
+→ native/web viewers. Geometry is derived; viewers never invent architectural
+meshes or become a second saved model. Temporary inference candidates are allowed.
 
-## 3. Coordinate system and units
+`packages/model`, `packages/commands`, `packages/geometry` do not depend on React,
+Three.js or Android UI. Keep source/readers/solver usable through explicit
+adapters. Android is the product path; the web editor is also an active consumer,
+not proof that native behavior was tested. Current capabilities belong to status,
+not to a claim that every envisioned mode is implemented.
 
-- `x` = right when looking at the front facade
-- `z` = away from the front facade, into the building
-- `y` = vertical (up)
-- finished ground-floor level: `y = 0`
-- canonical length unit: metres; persisted angles: degrees
+Semantic IDs survive save/load and regeneration. Window/Door → Opening → host
+wall; roof openings → host roof/plane; Room → storey; architectural assemblies
+retain their members and relationships. A shared wall is one element with
+separate room links. One element may compile into multiple primitives.
 
-The frame and units are recorded explicitly inside every persisted model.
-Taken literally this triple is a left-handed frame; the model keeps it exactly
-as specified and the viewer adapter mirrors `z` when building the Three.js
-scene (see `docs/CANONICAL_BUILDING_MODEL.md`).
+A structural opening removes wall/roof material. Painted fills on intact host
+material are a defect. Window/door frames, glazing/leaves remain separate
+semantic objects, capable of later operation without inventing new identity.
+Doors retain a frame, leaf, handle, hinge side and open angle. Windows retain
+frame/glazing and the ability to add sash or pivot behavior later.
 
-## 4. Technical stack
+Parameter editing updates the semantic model, recompiles, then renders. Stable
+canonical serialization and deterministic replay remain requirements. Invalid
+references/geometry get explicit errors; controlled corrections record their cause.
 
-- TypeScript-first npm-workspaces monorepo
-- `packages/model` — CanonicalBuildingModel, Zod schemas, validation,
-  canonical serialization (no React, no Three.js)
-- `packages/commands` — Building DSL / typed command layer, session with
-  undo/redo (no React, no Three.js)
-- `packages/demo` — the demonstration building, built only through commands
-- `packages/geometry` — geometry compiler: model → tagged triangle meshes
-  (no React, no Three.js)
-- `packages/verification` — independent geometry oracles used by tests
-- `packages/editor` — framework-agnostic editor store (session + selection +
-  visibility + recompile pipeline)
-- `apps/web` — BuildWorld: React + Three.js editor/viewer
-- Vitest for domain/geometry/architecture tests, Playwright for browser
-  verification
+## 3. Coordinates and data
 
-## 5. Minimum semantic vocabulary
+Canonical lengths are metres, persisted angles degrees. x points right looking
+at the front facade, z away into the building, y upward; plan usesXZ and finished
+ground floor is y=0 in that model frame. Record the frame explicitly. This
+specified triple is left-handed; preserve the documented viewer conversion
+(web mirrorsz), rather than silently changing model axes. Terrain, steps and
+split levels can differ from0; do not force all door thresholds to global zero.
 
-Building, Level/Storey, Room, Wall, Slab, Roof (gable, flat), Opening, Window,
-Door, Stair placeholder, Chimney, Balcony/Loggia/Terrace, Railing, Material
-assignment, Constraint, Evidence/provenance metadata.
+Source image coordinates have their own frame/crop/transform. They are not
+building metres. Store original bytes/hash, raw reading, meaning, provenance,
+uncertainty and target. A derived value is not a printed value. The accepted
+decision and applied geometry remain distinguishable after fitting or refusal.
+Only an actual user action can confer USER_CONFIRMED.
 
-Doors are semantic objects with a frame, a leaf, a handle, a hinge side and an
-open angle so that future animation does not require a new representation.
-Windows are semantic objects with a frame and glazing and remain capable of
-future sash/pivot behaviour.
+## 4. Analysis and presentation
 
-## 6. BuildWorld interface
+Distinguish document, projection, source region, edition/mirror, storey and side.
+Interior pictures do not verify the exterior. A section is not a side elevation;
+perspective pixels do not directly set metres. Technical drawings constrain
+geometry; renders help appearance/topology under their camera and visibility.
 
-A focused architectural editor with a restrained dark technical UI:
+One semantic exterior hypothesis can combine plan and exterior observations
+before every room is solved. Missing scale blocks exact quantities; it need not
+erase observed shape. Do not turn failure to build a balcony into evidence that
+the source has none, or inability to join a roof into a different roof assertion.
+See `docs/ANALYZER_CONTRACT.md` for the shared rules and acceptance boundaries.
 
-```
-+------------------------------------------------------+
-| toolbar / view controls                              |
-+----------------+-------------------------+-----------+
-| scene tree     |                         | inspector |
-| / outliner     |       3D viewport       |           |
-+----------------+-------------------------+-----------+
-| status / model information                           |
-+------------------------------------------------------+
-```
+During analysis show the actual current sheet/crop and marks using the same
+bytes/frame as the run. A final inspection screen is not this live preview.
+Separate counts of images, OCR candidates, measures, hypotheses and distinct
+physical elements. Source↔model selection exposes raw/accepted/applied values.
 
-Camera presets (perspective, front, rear, left, right, top), orbit/pan/zoom,
-semantic selection, scene hierarchy, property inspector, hide/show, isolate,
-reset visibility, grid, axes, hide/show roof, isolate storey, show all. Edits
-made in the inspector update the model first, then recompile geometry, then
-update the viewport.
+Orbit/pan/zoom, camera views, semantic selection, hide roof/storey, isolate room
+or element, and contextual inspection operate on the same house. Preserve the
+OWNER's mobile canvas direction. The historical dark desktop foundation layout
+is not a restriction against the current palette or native interaction design.
 
-## 7. Out of scope for the foundation
+## 5. Technology choices and scope
 
-Website scraping, OCR, image segmentation, computer-vision reconstruction,
-camera solving, LLM/VLM integrations, photogrammetry, Marcówki reconstruction,
-databases/user accounts, cloud infrastructure, photorealistic rendering and
-BIM/IFC compatibility belong to later orchestrated stages.
+Keep the existing semantic core and compiler as the baseline. OCR/DET/REC,
+ensembles, registration and inference order can be replaced on measured benefit;
+neither own code nor a library has priority by origin. No benchmark answers,
+house-identity exceptions or runtime reference-model fallback.
+
+Paid AI is optional source help/review with a controlled domain consumer, not
+arbitrary model commands. The key stays on the host/broker; no-network behavior
+remains useful. Native/library compatibility and licensing are verified for the
+actual delivery. ForgeShape is read-only under the current instruction.
+
+Scraping, numeric OCR, camera solving and source reconstruction are active work,
+not excluded by the old foundation stage. Invoice OCR, collaboration/sync,
+marketplace, broad import/export and future ports retain their roadmap status;
+they are not silently launched by this specification update. Photorealism and
+an unsolicited full application rewrite are not current requirements.

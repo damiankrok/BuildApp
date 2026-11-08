@@ -10,6 +10,16 @@
 > `TOP_RECOMMENDATION`, `ADOPT_NEXT`, `IMPORTANT_REJECT/DEFER`, `NEXT_STEP`, `FINAL_TOKEN` — at most about twelve
 > lines. The full report is never pasted into chat.
 
+## Current summary (read first)
+
+- **Active brief:** SOURCE-TO-MODEL after audit v3.51.0 (OWNER, 2026-11-08) — campaign on
+  `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR. Base `14ecb73` (production as `572b875`, APK 1322).
+- **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (adopted from the audit package).
+- **Milestone 1:** C1a (per-property provenance of levels), C1b (one real consumer of a section vertical relation),
+  C2 (one admission policy for opening corrections, typed meaning, final trace). Status per slice in
+  `stage-reports/SOURCE_TO_MODEL.md`.
+- **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED. H2 sealed; no paid calls in milestone 1.
+
 ## Completed stages
 
 | stage | branch | final commit | result |

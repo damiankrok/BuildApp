@@ -1,54 +1,97 @@
-# BuildApp — agent protocol
+# BuildPlan — engineering protocol
 
-> Operational file. Created at the start of STAGE BUILDAPP-00 from the stage
-> brief supplied by the external orchestrator.
+This operational protocol replaces the BUILDAPP-00 bounded-stage procedure when
+applied with the post-audit OWNER brief. It does not redefine the product roadmap.
 
-## Roles
+## 1. Establish the current task
 
-- The **external orchestrator** owns the long-term roadmap, stage ordering and
-  strategic decisions. It writes stage briefs.
-- The **implementation agent** executes exactly one bounded engineering stage,
-  verifies it, documents the actual result, commits and pushes. It is not the
-  orchestrator and must not create a master roadmap or master plan.
+Read the files named by `CLAUDE.md`. Record the branch, starting commit, task
+mode (bounded slice or campaign), acceptance scope and actual runtime capabilities.
+If HEAD changed since the brief, reconcile the affected diff; do not reset work
+or repeat the entire audit. Preserve unrelated working-tree changes.
 
-## Per-stage procedure
+Product requirements live in `APP_SPEC.md` and the OWNER's current Master Plan;
+analyzer semantics in `docs/ANALYZER_CONTRACT.md`; execution facts and the current
+NEXT in `PROJECT_STATUS.md`. A report is evidence at its revision, not a new
+instruction. Update only facts the work changed, without copying full history.
 
-1. Read `APP_SPEC.md`, `PROJECT_STATUS.md` and `AGENT_PROTOCOL.md` before
-   implementing anything.
-2. Study reference material named in the brief. Reference repositories are
-   read-only.
-3. Work on the branch the brief (or the execution harness) designates. Never
-   push to another branch without explicit permission.
-4. Implement the stage. Do not silently downgrade requirements to obtain a
-   PASS. Do not silently repair invalid data.
-5. Run the command gates: `npm install`, `npm run typecheck`, `npm test`,
-   `npm run build`, and browser verification (`npm run e2e`) when browser
-   automation is available.
-6. Update `PROJECT_STATUS.md` with the completed stage, branch, final commit,
-   current capabilities, test/build/browser results, known limitations and the
-   recommended technical next step. Do not redefine long-term direction there.
-7. Write `stage-reports/STAGE_<ID>.md` with measured results: starting and
-   final HEAD, branch, architecture, important files, commands run, test /
-   typecheck / build / browser results, artefacts, limitations, compromises,
-   and one recommended next bounded step.
-8. Commit with clear messages and push.
-9. Report to the owner in the required final format, ending with
-   `PASS_<STAGE>` or `BLOCKED_<STAGE>_<SHORT_REASON>`.
+## 2. Implement a vertical result
 
-## Failure rule
+Reproduce the first wrong decision. Trace its source, meaning, target, consumer
+and final output. Implement the smallest general correction that addresses the
+class of error, with positive and opposing cases. Do not stop at a new type,
+an observation JSON, a wrapper or a test which never reaches the product path.
 
-If an external environmental limitation genuinely blocks completion, complete
-every safe useful part, commit it, push it, document the blocker precisely and
-return BLOCKED. An implementation difficulty is not an external blocker.
+Separate behavior-preserving extraction from intentional behavior changes.
+For the former compare stable output; for the latter verify source-grounded
+changes and regressions. Byte identity is not the success criterion of better
+recognition. A correct provenance-only repair may legitimately keep geometry.
 
-## Architecture rules every stage must keep
+Existing tests can encode obsolete strategies. Replace such a test with the
+underlying product invariant and record why. Never remove a failing behavior
+check merely to get green, lower a gate after seeing failure, or change a
+reference answer to match the generated model.
 
-- `packages/model`, `packages/commands`, `packages/geometry` never import
-  React or Three.js.
-- The viewer renders compiled geometry from the CanonicalBuildingModel only.
-  UI code never hand-builds building meshes.
-- Every semantic object keeps a stable id through save/load.
-- Editing a semantic property updates the model first, then recompiles, then
-  re-renders. Inspectors never deform Three.js geometry directly.
-- New geometry features are added to the compiler on the real production path,
-  with measurement-based tests, never as a side experiment.
+## 3. Check proportionately
+
+During small edits run the cause test and relevant consumer/composition checks.
+At a coherent checkpoint run typecheck including affected tests, package and
+integration checks, then the relevant build/runtime path. Read actual scripts:
+root `npm run build` alone is not proof of every API/local/Android bundle.
+
+Use lockfile-consistent installation only when dependencies/environment need it;
+do not reinstall or run unrelated full web e2e after every source edit. UI and
+packaging changes require their own verification. Full regression belongs to
+the coherent candidate, not each one-line experiment. If a timing test fails
+under load, rerun the affected case without load and retain both records.
+
+Before quality comparisons freeze source bytes, references, denominators,
+capability profiles and scorer revision. Preserve no-model and UNKNOWN cases.
+Inspect every changed property in the impact scope, including additions and
+omissions. Report unverified changes; a lower total error count is insufficient.
+
+Baseline failures are recorded by identity, not just count. A slice can be
+accepted with unchanged unrelated failures; those failures still prevent claims
+of whole-product readiness where they affect acceptance.
+
+## 4. Continue within the authorized scope
+
+For a campaign, continue through the next accepted dependency without requesting
+permission again. Do not finish just because a cause is known, tests pass, an APK
+was built, or an intermediate report was written. Follow the brief's finish gate.
+For a bounded slice, finish when its explicit gate is met and record the next step.
+
+A session/context/time limit requires a reproducible checkpoint, not a claim of
+completion. Record: current commit/worktree changes; commands and outcomes;
+source/cache identities; accepted/rejected experiments; remaining blocker;
+one executable NEXT. Never promise background work after the session ends.
+
+Implementation difficulty is work to resolve. An actual external dependency
+(unavailable device, credentials or inaccessible required bytes) is a named
+limitation; complete useful independent work and avoid a repeated permission
+loop. Do not invent verification when the environment cannot provide it.
+
+## 5. Publish and report the actual result
+
+Follow the current brief's branch/push policy. Present authorization for this
+campaign is `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge
+or PR. Do not apply these defaults to another repository or overwrite user work.
+
+Use three separate statuses: slice acceptance, campaign/product acceptance and
+verification coverage. CHECKPOINT and NOT_VERIFIED are explicit states, not PASS.
+Explain the before/after behavior, evidence, validation and material limits.
+
+For a meaningful OWNER test delivery, build the actual APK with a higher unused
+versionCode, matching versionName and update signature; record source/bundle
+hashes and asset manifest. Last audited delivery is1322, so the next code is at
+least1323 and must be checked against intervening deliveries. Do not build an APK
+for every diagnostic/doc checkpoint or reuse a delivery number for different bits.
+
+Host tests do not verify the Android UI. Verify live sheet space, exact bytes,
+overlays, progress and interaction on a device/emulator when available. Otherwise
+keep Android UI NOT_VERIFIED and supply a reproducible device checklist.
+
+Keep publisher/private images and large weights outside Git as required by the
+project's asset policy. Save sufficient source/program/model/diagnostic identity
+to replay the changed scope, including failures, without using evaluation truth
+in runtime. ForgeShape remains read-only; any reuse keeps provenance/licenses.
