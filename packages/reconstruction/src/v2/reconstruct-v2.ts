@@ -17,7 +17,7 @@ import type { MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { Mask, Raster } from '@buildapp/source-cv'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '../solve.js'
-import type { TopDatumCheck } from '../solve.js'
+import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
 import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
 import { ringBounds } from '../structural-layout.js'
@@ -354,8 +354,12 @@ export type ReconstructionV2Result = {
    * left out by a partial preview.
    */
   openingCounts: { plan: number; elevationIndependent: number; model: number; skippedByPartialPreview: number }
-  /** N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. */
-  heights: { measured: boolean; assumedStoreyHeightM?: number }
+  /**
+   * N7-P1: the storey heights were read from a section, or are a convention taken for viewing only. v3.51 (C1a):
+   * `measured` holds only when EVERY storey's height is the gap between two printed datums; a section printing ±0,00
+   * and the ridge alone leaves the storey a convention, and that storey is named in `assumedStoreys`.
+   */
+  heights: { measured: boolean; assumedStoreyHeightM?: number; assumedStoreys?: Array<{ storeyIndex: number; heightM: number; basis: 'CONVENTION' | 'REPEATED_BELOW' }> }
   /** N7-COUNCIL-FIX-03 (§4): every walled area of the base plan against the bodies the model stands on it. */
   bodyCompleteness?: BodyCompleteness
   /**
@@ -724,7 +728,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     roof: mainSupport ? { kind: mainSupport.kind, pitchDeg: mainSupport.pitchDeg?.value, pitchAuthority: mainSupport.authority, ridgeAxis: mainSupport.ridgeAxis } : undefined,
     body: main,
     topFloorY: datumOf(topStorey),
-    topFloorPrinted: levels.measured && groundAt + topStorey < levels.floors.length,
+    topFloorPrinted: levels.measured && groundAt + topStorey < levels.floors.length && levels.floorBasis[groundAt + topStorey] !== 'CONVENTION',
     metrics,
     publishedFacts: options.publishedAreas ?? [],
     printedTerrainY,
@@ -736,6 +740,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     step({ stage: 'roof', what: 'an approximate ridge datum from the knee wall, the pitch and the span', method: 'DIRECT', detail: roofDatum.why, inputs: roofDatum.evidenceIds.length + 1, outputs: 1 })
   }
   const levelStoreys = [...new Set(masses.flatMap((m) => m.storeys))].sort((a, b) => a - b)
+  // v3.51 (C1a): what each storey's elevation and height rest on, for the result's own summary
+  const levelBases = new Map<number, { elevation: LevelBasis; height: HeightBasis }>()
   levelStoreys.forEach((index, i) => {
     const elevation = datumOf(index)
     // A storey's walls stop at the floor of the storey above. A section that prints one floor, the eaves and the
@@ -743,10 +749,24 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // storey's, and the one below it rises only to where the storey above begins.
     const above = i + 1 < levelStoreys.length ? datumOf(levelStoreys[i + 1]) : undefined
     const printed = levels.heights[groundAt + index] ?? CONVENTIONS.storeyHeight
-    const stated = above !== undefined && printed > above - elevation + 1e-6 ? round6(above - elevation) : printed
+    const clipped = above !== undefined && printed > above - elevation + 1e-6
+    const stated = clipped ? round6(above - elevation) : printed
+    // v3.51 (C1a): each property its own authority. An elevation is printed only where its own datum is; a height is
+    // at best derived (the gap between two printed datums); a conventional or repeated value is an assumption even in a
+    // bundle the section measured — two printed datums make neither the 2.80 m between them nor an extrapolated floor
+    // a reading.
+    const k = groundAt + index
+    const elevationBasis: LevelBasis = k >= 0 && k < levels.floors.length ? levels.floorBasis[k] : 'CONVENTION'
+    const aboveBasis: LevelBasis | undefined = above === undefined ? undefined : ((): LevelBasis => { const ka = groundAt + (levelStoreys[i + 1] as number); return ka >= 0 && ka < levels.floors.length ? levels.floorBasis[ka] : 'CONVENTION' })()
+    const heightBasis: HeightBasis = clipped ? (elevationBasis !== 'CONVENTION' && aboveBasis !== 'CONVENTION' ? 'PRINTED_DIFFERENCE' : 'CONVENTION') : k >= 0 && k < levels.heights.length ? levels.heightBasis[k] : 'CONVENTION'
+    const elevationProvenance: ProvenanceStatus = elevationBasis === 'PRINTED' ? 'SOURCE_EXACT' : elevationBasis === 'DATUM_ZERO' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING'
+    const heightProvenance: ProvenanceStatus = heightBasis === 'PRINTED_DIFFERENCE' && elevationBasis !== 'CONVENTION' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING'
+    levelBases.set(index, { elevation: elevationBasis, height: heightProvenance === 'SOURCE_DERIVED' ? 'PRINTED_DIFFERENCE' : heightBasis === 'REPEATED_BELOW' ? 'REPEATED_BELOW' : 'CONVENTION' })
     const pitched = layout.roofSupports.some((r) => r.massId === main.sourceMassId && r.kind !== 'FLAT' && r.kind !== 'UNKNOWN')
     const height = index === topStorey && pitched && roofRidgeY !== undefined && roofRidgeY > elevation + stated ? round6(roofRidgeY - elevation) : round6(stated)
-    const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 } }, sectionFrame ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], levels.measured ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', levels.measured ? 'a printed level datum on the section' : 'a conventional storey height', { printed: levels.measured, unresolvedProperties: levels.measured ? [] : ['elevation', 'height'] })
+    const levelWhy = `elevation: ${elevationBasis === 'PRINTED' ? 'a printed level datum on the section' : elevationBasis === 'DATUM_ZERO' ? 'the ±0,00 the printed datums are measured from (its own mark not read)' : 'not printed: the storey below plus a conventional storey height'}; height: ${heightProvenance === 'SOURCE_DERIVED' ? 'the gap between two printed datums' : heightBasis === 'REPEATED_BELOW' ? "not printed: the storey below's height taken again" : `not printed: a conventional ${CONVENTIONS.storeyHeight.toFixed(2)} m storey`}`
+    const unresolvedLevel = [...(elevationProvenance === 'ASSUMED_FOR_RENDERING' ? ['elevation'] : []), ...(heightProvenance === 'ASSUMED_FOR_RENDERING' ? ['height'] : [])]
+    const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 } }, sectionFrame && elevationBasis !== 'CONVENTION' ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], elevationProvenance, levelWhy, { printed: elevationBasis === 'PRINTED', unresolvedProperties: unresolvedLevel, parameterProvenance: { elevation: elevationProvenance, height: heightProvenance } })
     levelsV2.push({ index, id: `lvl-${i}`, elevation, height, wallTop: round6(elevation + stated), featureId })
   })
   for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', featureId: levelsV2[0]?.featureId, disposition: 'USED_IN_MODEL', reason: 'the storey levels and the ridge', stage: 'METRIC_SOLVE' })
@@ -3140,7 +3160,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, partyWalls: partyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: levels.measured ? { measured: true } : { measured: false, assumedStoreyHeightM: CONVENTIONS.storeyHeight } }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, partyWalls: partyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: heightsSummary(levelBases, levelsV2) }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */
@@ -3188,3 +3208,13 @@ const STRONG_GLASS_SHARE = 0.5
 const WALL_BAND_MIN_SHARE = 0.1
 /** … and spans this share of the silhouette's width. */
 const WALL_BAND_MIN_WIDTH = 0.4
+
+/** v3.51 (C1a): the result's storey-height summary from each storey's own basis — never the level bundle's flag. */
+function heightsSummary(bases: ReadonlyMap<number, { elevation: LevelBasis; height: HeightBasis }>, levels: BuildingV2['levels']): ReconstructionV2Result['heights'] {
+  const assumed = levels
+    .map((l) => ({ l, b: bases.get(l.index) }))
+    .filter((x): x is { l: BuildingV2['levels'][number]; b: { elevation: LevelBasis; height: HeightBasis } } => x.b !== undefined && x.b.height !== 'PRINTED_DIFFERENCE')
+    .map(({ l, b }) => ({ storeyIndex: l.index, heightM: round6(l.wallTop - l.elevation), basis: b.height === 'REPEATED_BELOW' ? ('REPEATED_BELOW' as const) : ('CONVENTION' as const) }))
+  if (assumed.length === 0) return { measured: true }
+  return { measured: false, assumedStoreyHeightM: assumed[0].heightM, assumedStoreys: assumed }
+}

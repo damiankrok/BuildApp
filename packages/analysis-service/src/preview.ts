@@ -115,14 +115,16 @@ export function sourceBasisOf(pkg: SourcePackage, plans: PlanDiagnosticsReport):
 export function previewOf(input: {
   model: CanonicalBuildingModel
   partial?: PartialPreviewReport
-  heights: { measured: boolean; assumedStoreyHeightM?: number }
+  heights: { measured: boolean; assumedStoreyHeightM?: number; assumedStoreys?: Array<{ storeyIndex: number; heightM: number; basis: 'CONVENTION' | 'REPEATED_BELOW' }> }
   source: SourceBasis | null
   approximateRoofDatum?: { ridgeY: number }
   completeness?: ModelCompleteness
 }): PreviewSummary {
   const { model, partial } = input
   const provisional: ProvisionalValue[] = []
-  if (!input.heights.measured) provisional.push({ code: 'HEIGHT_ASSUMED_FOR_PREVIEW', what: `no section prints the storey levels: every storey is drawn ${(input.heights.assumedStoreyHeightM ?? 0).toFixed(2)} m tall, for viewing only` })
+  // v3.51 (C1a): a section can print some storeys and leave others to a convention; name the assumed ones
+  const assumedStoreys = input.heights.assumedStoreys ?? []
+  if (!input.heights.measured) provisional.push({ code: 'HEIGHT_ASSUMED_FOR_PREVIEW', what: assumedStoreys.length > 0 && assumedStoreys.length < input.model.levels.length ? `the section does not close every storey: ${assumedStoreys.map((a) => `storey ${a.storeyIndex} is drawn ${a.heightM.toFixed(2)} m tall (${a.basis === 'REPEATED_BELOW' ? 'the storey below repeated' : 'a convention'})`).join('; ')}, for viewing only` : `no section prints the storey levels: every storey is drawn ${(input.heights.assumedStoreyHeightM ?? 0).toFixed(2)} m tall, for viewing only` })
   if (!input.source?.scale.verified) provisional.push({ code: 'SCALE_NOT_VERIFIED', what: input.source ? `the plan's scale (${input.source.scale.confidence.toLowerCase()}, ${input.source.scale.independentWitnesses} independent printed dimension${input.source.scale.independentWitnesses === 1 ? '' : 's'}) is not confirmed: the model shows proportions, its lengths are not for costing` : 'no plan scale was read: the model shows proportions only' })
   if (input.approximateRoofDatum) provisional.push({ code: 'APPROXIMATE_ROOF_DATUM', what: `the ridge is not printed: drawn at an approximate ${input.approximateRoofDatum.ridgeY.toFixed(2)} m, for viewing only` })
   return {

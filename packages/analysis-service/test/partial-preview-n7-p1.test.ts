@@ -82,7 +82,9 @@ describe('a refused attached ring after a valid main body', () => {
 describe('no section: the storeys are a convention, said as one', () => {
   it('the model is built at an explicit height for viewing (HEIGHT_ASSUMED_FOR_PREVIEW)', async () => {
     const { result, reconstruction } = await noSection
-    expect(reconstruction.heights).toEqual({ measured: false, assumedStoreyHeightM: 2.8 })
+    expect(reconstruction.heights).toMatchObject({ measured: false, assumedStoreyHeightM: 2.8 })
+    // v3.51 (C1a): and every storey is named as the convention it is
+    expect(reconstruction.heights.assumedStoreys?.every((a) => a.heightM === 2.8 && a.basis === 'CONVENTION')).toBe(true)
     expect(result.preview.provisional.map((p) => p.code)).toContain('HEIGHT_ASSUMED_FOR_PREVIEW')
     expect(result.warningDetails.find((w) => w.code === 'HEIGHT_ASSUMED_FOR_PREVIEW')).toMatchObject({ severity: 'LIMITING' })
     expect(result.preview.outcome).toBe('PARTIAL_3D_PREVIEW')

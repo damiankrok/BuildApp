@@ -236,8 +236,21 @@ export type LevelFacts = {
   /** The datum below the ridge: where the walls stop and the roof begins. */
   eaves?: number
   evidenceIds: string[]
-  /** Whether the heights came from printed datums or from a convention. */
+  /** Whether the floors came from printed datums (a ladder of at least two) or from a convention. */
   measured: boolean
+  /**
+   * v3.51 (C1a): what each floor rests on, index for index with `floors`. A floor is PRINTED where its own datum was
+   * read, DATUM_ZERO where it is the ±0,00 every printed height is measured from but whose own mark was not read, and
+   * CONVENTION where nothing printed states it.
+   */
+  floorBasis: LevelBasis[]
+  /**
+   * v3.51 (C1a): what each height rests on, index for index with `heights`. PRINTED_DIFFERENCE is the gap between two
+   * printed datums (a derived quantity, never a printed one); CONVENTION is the conventional storey height;
+   * REPEATED_BELOW is the storey below's height taken again for a storey no datum closes. A `measured` bundle can hold
+   * CONVENTION and REPEATED_BELOW heights: those are assumptions, whatever the bundle's flag says.
+   */
+  heightBasis: HeightBasis[]
   /**
    * SHAPE-LIVE-01: the highest datum read was refused as the ridge because the section draws its roof well above it
    * (`v2/section-datums.ts`); why, and whether it was kept as a floor.
@@ -246,6 +259,9 @@ export type LevelFacts = {
   /** E13: two upper floor marks of one storey in two parts (a split level): the main body's kept, the other named. */
   splitLevel?: { kept: number; other: number; why: string }
 }
+
+export type LevelBasis = 'PRINTED' | 'DATUM_ZERO' | 'CONVENTION'
+export type HeightBasis = 'PRINTED_DIFFERENCE' | 'CONVENTION' | 'REPEATED_BELOW'
 
 /** E13: two upper floor marks this close, both on slabs, are one storey's two parts; and a split level is above the ground. */
 export const SPLIT_LEVEL_MAX_M = 1.2
@@ -278,7 +294,7 @@ export function levelsFrom(
     .filter((e) => e.kind === 'LEVEL_DATUM' && (frameId === undefined || e.frameId === frameId))
     .filter((e) => e.association.kind !== 'UNATTACHED')
     .sort((a, b) => a.value - b.value)
-  if (datums.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false }
+  if (datums.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false, floorBasis: ['CONVENTION'], heightBasis: ['CONVENTION'] }
   const read: number[] = []
   for (const d of datums) {
     // Two datums a few centimetres apart are a finished floor and a structural
@@ -294,8 +310,11 @@ export function levelsFrom(
   // eaves the first-floor level.
   const terrain = (v: number): boolean => v < -0.05 && v > -1.5
   const values = read.filter((v) => !terrain(v))
-  if (values.length > 0 && !values.some((v) => Math.abs(v) < 0.05) && values[0] > 0) values.unshift(0)
-  if (values.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false }
+  const zeroAdded = values.length > 0 && !values.some((v) => Math.abs(v) < 0.05) && values[0] > 0
+  if (zeroAdded) values.unshift(0)
+  if (values.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false, floorBasis: ['CONVENTION'], heightBasis: ['CONVENTION'] }
+  // v3.51 (C1a): the ±0,00 put in where its mark was not read is the datum system's zero, not a reading
+  const basisOf = (floors: number[]): LevelBasis[] => floors.map((v) => (zeroAdded && Math.abs(v) < 1e-9 ? 'DATUM_ZERO' : 'PRINTED'))
   // SHAPE-LIVE-01: the highest datum is the ridge only if nothing of the building is drawn far above it. A section
   // whose apex label was not read still draws its roof; the datum under it is the eaves or the attic floor, and the
   // ridge is left to the roof's own rules rather than sunk to that datum.
@@ -315,7 +334,7 @@ export function levelsFrom(
     const heights: number[] = []
     for (let i = 0; i + 1 < floors.length; i += 1) heights.push(round6(floors[i + 1] - floors[i]))
     if (floors.length > 0) heights.push(round6(top - floors[floors.length - 1]))
-    return { floors, heights, topDatum: undefined, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, topRefused: { value: top, keptAsFloor: false, onSlab: check.onSlab, why: check.why, datums: placed } }
+    return { floors, heights, topDatum: undefined, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, floorBasis: basisOf(floors), heightBasis: heights.map((): HeightBasis => 'PRINTED_DIFFERENCE'), topRefused: { value: top, keptAsFloor: false, onSlab: check.onSlab, why: check.why, datums: placed } }
   }
   const topDatum = values[values.length - 1]
   // E13 (a development section: two upper floor marks half a metre apart, one over a garage and one over the house): the mark below the ridge printed over
@@ -351,8 +370,10 @@ export function levelsFrom(
       const floors = [...values.slice(0, values.length - 3), main]
       const heights: number[] = []
       for (let i = 0; i + 1 < floors.length; i += 1) heights.push(round6(floors[i + 1] - floors[i]))
+      const heightBasis: HeightBasis[] = heights.map((): HeightBasis => 'PRINTED_DIFFERENCE')
+      heightBasis.push(heights.length > 0 ? 'REPEATED_BELOW' : 'CONVENTION')
       heights.push(heights.length > 0 ? heights[heights.length - 1] : CONVENTIONS.storeyHeight)
-      return { floors, heights, topDatum, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, splitLevel: { kept: main, other, why: `${main.toFixed(2)} and ${other.toFixed(2)} are both printed over slabs ${round6(Math.abs(upper - lower)).toFixed(2)} m apart: one storey in two parts; ${main.toFixed(2)} is printed nearer the ridge mark, over the main body, and ${other.toFixed(2)} is the other part's floor` } }
+      return { floors, heights, topDatum, eaves: undefined, evidenceIds: datums.map((d) => d.id), measured: true, floorBasis: basisOf(floors), heightBasis, splitLevel: { kept: main, other, why: `${main.toFixed(2)} and ${other.toFixed(2)} are both printed over slabs ${round6(Math.abs(upper - lower)).toFixed(2)} m apart: one storey in two parts; ${main.toFixed(2)} is printed nearer the ridge mark, over the main body, and ${other.toFixed(2)} is the other part's floor` } }
     }
   }
   // A section of a pitched house marks its heights in a fixed order: the floor
@@ -376,10 +397,20 @@ export function levelsFrom(
   const floors = hasEaves ? values.slice(0, values.length - 2) : values.slice(0, Math.max(1, values.length - 1))
   const heights: number[] = []
   for (let i = 0; i + 1 < floors.length; i += 1) heights.push(round6(floors[i + 1] - floors[i]))
-  if (eaves !== undefined && floors.length > 0) heights.push(round6(eaves - floors[floors.length - 1]))
-  else if (heights.length === 0) heights.push(CONVENTIONS.storeyHeight)
-  else heights.push(heights[heights.length - 1])
-  return { floors, heights, topDatum, eaves, evidenceIds: datums.map((d) => d.id), measured: true }
+  const heightBasis: HeightBasis[] = heights.map((): HeightBasis => 'PRINTED_DIFFERENCE')
+  // v3.51 (C1a): the top storey's height is printed (a difference) only where the eaves close it; a section printing
+  // just ±0,00 and the ridge states no storey height, and the 2.80 m taken then is a convention, not a reading
+  if (eaves !== undefined && floors.length > 0) {
+    heights.push(round6(eaves - floors[floors.length - 1]))
+    heightBasis.push('PRINTED_DIFFERENCE')
+  } else if (heights.length === 0) {
+    heights.push(CONVENTIONS.storeyHeight)
+    heightBasis.push('CONVENTION')
+  } else {
+    heights.push(heights[heights.length - 1])
+    heightBasis.push('REPEATED_BELOW')
+  }
+  return { floors, heights, topDatum, eaves, evidenceIds: datums.map((d) => d.id), measured: true, floorBasis: basisOf(floors), heightBasis }
 }
 
 // ---------------------------------------------------------------------------

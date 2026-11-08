@@ -47,11 +47,16 @@ export const FeatureQualityReportSchema = z
 export type FeatureQualityReport = z.infer<typeof FeatureQualityReportSchema>
 
 /** The level a solved feature has EARNED, from its coverage and provenance. */
-export function qualityLevelOf(feature: Pick<SolvedFeature, 'provenance' | 'sourceCoverage' | 'parameters' | 'unresolvedProperties'>): QualityLevel {
+export function qualityLevelOf(feature: Pick<SolvedFeature, 'provenance' | 'sourceCoverage' | 'parameters' | 'unresolvedProperties'> & Partial<Pick<SolvedFeature, 'parameterProvenance'>>): QualityLevel {
   const c = feature.sourceCoverage
   if (feature.provenance === 'UNRESOLVED' || feature.provenance === 'ASSUMED_FOR_RENDERING') return 'L0'
   // A feature with no metric parameters of its own (an assembly, a finish region) is topology: L0 unless it is corroborated, when it is L1.
   if (Object.keys(feature.parameters).length === 0) return feature.provenance === 'SOURCE_CORROBORATED' ? 'L1' : 'L0'
+  // v3.51 (C1a): a printed datum does not lend its authority to a parameter the source does not state. A feature one of
+  // whose own metric parameters is assumed or unresolved (a storey whose height is the 2.80 m convention under a printed
+  // floor) is not corroborated metric as a whole.
+  const assumedParameter = Object.entries(feature.parameterProvenance ?? {}).some(([name, p]) => name in feature.parameters && (p === 'ASSUMED_FOR_RENDERING' || p === 'UNRESOLVED'))
+  if (assumedParameter) return 'L1'
   if (c.printed || c.independentAssets >= 2) return feature.provenance === 'VISUAL_SEMANTIC' ? 'L1' : 'L2'
   return 'L1'
 }
