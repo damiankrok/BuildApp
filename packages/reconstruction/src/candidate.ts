@@ -700,6 +700,15 @@ const bodyOf = (command: BuildingCommand): { mass: string; storey: number } | un
   return m ? { mass: m[2], storey: Number(m[3]) } : undefined
 }
 
+const OPENED_RING_WALL_ID = /^ring-(.+?)-(-?\d+)-w\d+(?:-|$)/
+
+/** The body an opened ring's wall belongs to: a wall emitted on its own under its ring's id (`ring-main-0-w2`, `ring-main-0-w0-1`). */
+export const openedRingWallOf = (command: BuildingCommand): { mass: string; storey: number } | undefined => {
+  if (command.type !== 'createWall') return undefined
+  const m = OPENED_RING_WALL_ID.exec(createdIdOf(command) ?? '')
+  return m ? { mass: m[1], storey: Number(m[2]) } : undefined
+}
+
 /** The ids a command creates: a ring creates its walls too. */
 const createdIdsOf = (command: BuildingCommand): string[] => {
   const id = createdIdOf(command)
@@ -953,7 +962,10 @@ export function fitPreviewProgram(program: BuildingCommand[], options: { label: 
   if (failures.length === 0) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), reconciliationHistory, failures, skipped, basis }
   // no preview could be built — or what is left has no main body walls to show: the run refuses exactly as the plain
   // fit would have
-  const mainWalls = current.some((c) => c.type === 'createWallRing' && bodyOf(c)?.mass === mainMassId)
+  // v3.51 ANY-LINK-3: a main body that shares a wall with an attached body is emitted as an opened ring — its walls
+  // one by one, under the ring's ids (`ring-<mass>-<storey>-w<k>…`). Those are the main body's walls as much as a
+  // closed ring is; counting only closed rings refused every preview of a house with a party wall.
+  const mainWalls = current.some((c) => (c.type === 'createWallRing' && bodyOf(c)?.mass === mainMassId) || (c.type === 'createWall' && openedRingWallOf(c)?.mass === mainMassId))
   if (!attempt.fit.ok || !mainWalls) return { fit: first.fit, ...(first.reconciled ? { reconciled: first.reconciled } : {}), reconciliationHistory, failures: [], skipped: [], basis }
   const keptAt = new Map(origin.map((o, k) => [o, k]))
   const fitIndex = attempt.fit.indexMap

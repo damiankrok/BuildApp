@@ -22,6 +22,8 @@ import { decideGroundClearHeight } from './section-clear-height.js'
 import { finalOpeningRecord } from './opening-final.js'
 import { scaleFromPublishedExtent, scaleFromPublishedFootprint } from './published-scale.js'
 import type { PublishedScaleRefusal } from './published-scale.js'
+import { partialFootprint } from './partial-footprint.js'
+import type { PartialFootprintRefusal } from './partial-footprint.js'
 import { STOREY_RANK, groundLabelledAmong, planStoreyOf } from '../layout.js'
 import type { PublishedScaleOutcome } from './published-scale.js'
 import type { ClearHeightRejection } from './section-clear-height.js'
@@ -241,7 +243,15 @@ import type { ApproximateRidge } from './roof-datum.js'
 // admission policy for every later correction of an opening's heights (`opening-correction.ts`); typed meanings where
 // notes and prose prefixes used to decide (French window, callout alternative roles); each opening's feature is closed
 // from the final decision and what the program applied (`opening-final.ts`)
-export const SOLVER_V2_VERSION = '2.33.0' as const
+// 2.33.0 (v3.51, ANY-LINK): a plan that states no scale may take one, as an approximation named as such, from the
+// building's two published dimensions or its published footprint (`published-scale.ts`), never where the drawing's own
+// statements conflict; a stated pitch with no kind and no rise is a gable by a named convention; a single-storey
+// house's ridge may be approximated from its storey's walls
+// 2.34.0 (v3.51, ANY-LINK-3): when no reading of the whole plan holds, a first reading refused only for covering less
+// than the published footprint is kept as a partial preview if the drawing states its scale, its bodies are the
+// sheet's walls and it shows the open parts that explain the shortfall (`partial-footprint.ts`); a main body emitted
+// as an opened ring counts as the main body when a refused object is cut out of the preview
+export const SOLVER_V2_VERSION = '2.34.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -553,12 +563,28 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const first = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
       const resolution = resolvePlan(structuralOptions, incumbent, options.resolverProgress)
       const record: Record<string, number | string | boolean> = { ...resolutionRecord(resolution), firstReading: first.code }
+      // v3.51 ANY-LINK-3: no reading of the whole building was found. A first reading refused only for covering less
+      // than the published footprint may still be a sound reading of PART of it (`partial-footprint.ts`): asked last,
+      // after the resolver, and kept only as a partial preview that names what it does not build.
+      const partialRefusals: PartialFootprintRefusal[] = []
+      const kept = resolution.kind === 'INCONCLUSIVE' && draft === incumbent.draft ? partialFootprint(structuralOptions, incumbent, partialRefusals) : undefined
+      if (resolution.kind === 'INCONCLUSIVE' && !kept && partialRefusals.length > 0 && partialRefusals[0] !== 'NOT_A_FOOTPRINT_REFUSAL') {
+        trace({ phase: 'REGISTRATION', substage: 'PARTIAL_FOOTPRINT_REFUSED', status: 'FAILED', counts: { [partialRefusals[0]]: 1 }, reasonCode: partialRefusals[0], detail: `the first reading was asked whether it is a sound reading of part of the building, and is not: ${partialRefusals[0]}` })
+      }
       if (resolution.kind === 'RESOLVED') {
         draft = resolution.result.draft
         layout = resolution.result.layout
         metrics = resolution.metrics
         planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), resolution: record }
         trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'DEGRADED', counts: record, detail: `the first reading stopped with ${first.code}; ${String(record.chosen)}` })
+      } else if (kept && resolution.kind === 'INCONCLUSIVE') {
+        draft = kept.result.draft
+        layout = kept.result.layout
+        planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), resolution: record }
+        trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: first.code, detail: resolution.message })
+        trace({ phase: 'REGISTRATION', substage: 'PARTIAL_FOOTPRINT', status: 'DEGRADED', counts: { builtM2: kept.builtM2, publishedM2: kept.publishedM2, shortfallM2: kept.shortfallM2, shortfallShare: kept.shortfallShare, openParts: kept.openParts.length }, reasonCode: 'FOOTPRINT_AREA_SHORT', detail: `${kept.shortfallM2.toFixed(2)} m² of the ${kept.publishedM2} m² published footprint is not in the model: ${kept.why}` })
+        gap({ what: `${kept.shortfallM2.toFixed(1)} m² of the building's published footprint (${Math.round(kept.shortfallShare * 100)} %)`, reason: `the lowest storey read covers ${kept.builtM2.toFixed(2)} m² of the ${kept.publishedM2} m² the page publishes, and no other reading of the plan held; ${kept.why}. The model is the part that was read, not the whole building`, status: 'MISSING', observationIds: [], evidenceIds: [] })
+        step({ stage: 'massing', what: 'a reading of part of the building, kept as a partial preview', method: 'DIRECT', detail: kept.why, inputs: 1, outputs: 1 })
       } else if (resolution.kind === 'INCONCLUSIVE' && resolution.why === 'NONE_HOLDS' && resolution.counts.compositions === 0) {
         // No other reading got as far as a whole composition: the first reading's own
         // missing link is still the best account of what stopped the run.

@@ -12,7 +12,7 @@ import { compileBuilding } from '@buildapp/geometry'
 import { createEmptyModel, serializeModel } from '@buildapp/model'
 import { buildMobileSceneBundle, loadBundle, serializeBundle } from '@buildapp/mobile-scene'
 import { sha256Hex } from '@buildapp/source-common'
-import { buildCandidateModel, cutFailedObject, fitOpeningsToHosts, fitPreviewProgram, isPreviewBase, minimalPreviewProgram, previewCheckpoint } from '../src/candidate.js'
+import { buildCandidateModel, cutFailedObject, fitOpeningsToHosts, fitPreviewProgram, isPreviewBase, minimalPreviewProgram, openedRingWallOf, previewCheckpoint } from '../src/candidate.js'
 
 const T = 0.3
 const ring = (id: string, levelId: string, x0: number, z0: number, x1: number, z1: number, extra: Record<string, unknown> = {}): BuildingCommand =>
@@ -194,6 +194,26 @@ describe('no reliable outline: no house is made up', () => {
     expect(r.fit.ok).toBe(false)
     expect(r.failures).toEqual([])
     expect(r.skipped).toEqual([])
+  })
+
+  it('v3.51: a main body emitted as an opened ring (its walls one by one, under the ring’s ids) is a main body', () => {
+    // the main body's four walls as an opened ring is emitted: clear of one another at the corners
+    const wall = (k: number, x0: number, z0: number, x1: number, z1: number): BuildingCommand =>
+      ({ type: 'createWall', id: `ring-main-0-w${k}`, levelId: 'lvl-0', start: { x: x0, z: z0 }, end: { x: x1, z: z1 }, thickness: T, height: 2.7, baseOffset: 0, kind: 'EXTERIOR' }) as BuildingCommand
+    const opened = [slab('slab-main-0', 'lvl-0', 0, 0, 8, 10), wall(0, 0, 0, 8, 0), wall(1, 8, T, 8, 10 - T), wall(2, 8, 10, 0, 10), wall(3, 0, 10 - T, 0, T)]
+    expect(opened.slice(1).map((c) => openedRingWallOf(c)?.mass)).toEqual(['main', 'main', 'main', 'main'])
+    const program = [...header(), ...opened, ...attachedBody(0.45)]
+    expect(fitOpeningsToHosts(program, OPTIONS.label, OPTIONS.modelId).ok).toBe(false)
+    const r = fitPreviewProgram(program, OPTIONS)
+    expect(r.fit.ok).toBe(true)
+    expect(r.failures.length).toBeGreaterThan(0)
+    expect(r.skipped.some((s) => s.id === 'ring-attached-0-0')).toBe(true)
+    if (r.fit.ok) expect(r.fit.program.filter((c) => c.type === 'createWall').length).toBe(4)
+    // what is and is not an opened ring's wall
+    expect(openedRingWallOf({ ...wall(0, 0, 0, 8, 0), id: 'ring-attached-0-0-w1-party-attached-2' } as BuildingCommand)).toEqual({ mass: 'attached-0', storey: 0 })
+    expect(openedRingWallOf({ ...wall(0, 0, 0, 8, 0), id: 'ring-main-0-w0-1' } as BuildingCommand)).toEqual({ mass: 'main', storey: 0 })
+    expect(openedRingWallOf({ ...wall(0, 0, 0, 8, 0), id: 'main-iwall-0-x-6' } as BuildingCommand)).toBeUndefined()
+    expect(openedRingWallOf(ring('ring-main-0', 'lvl-0', 0, 0, 8, 10))).toBeUndefined()
   })
 
   it('a program with no main body walls at all has no preview', () => {

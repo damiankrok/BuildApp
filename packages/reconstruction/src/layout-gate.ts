@@ -59,6 +59,14 @@ export type LayoutGateOptions = {
   /** How far a metric check may be out and still count as agreement, in metres. */
   toleranceM?: number
   /**
+   * v3.51 ANY-LINK-3: the caller has established (`v2/partial-footprint.ts`) that a lowest storey smaller than the
+   * published footprint is a sound reading of PART of the building — the drawing states its scale, the bodies are its
+   * walls, and it draws open or unresolved parts beside them. The shortfall is then said as `FOOTPRINT_AREA_SHORT`:
+   * still BLOCKING (the model is not the whole building, and is delivered as a partial preview), no longer a refusal.
+   * A lowest storey LARGER than the figure is never excused.
+   */
+  footprintShortfall?: { why: string }
+  /**
    * Findings from a check that runs beside this one and is weighed with it —
    * §21's projection audit, which needs the elevations and so cannot be done
    * from the numbers alone. They are the gate's own reasons once they arrive:
@@ -93,6 +101,12 @@ function statedSpans(metrics: MetricEvidenceSet, exceptFrameId: string): Array<{
 /** True when a second drawing states a span within tolerance of this one. */
 const corroborates = (spans: ReturnType<typeof statedSpans>, metres: number, tolerance: number): { frameId: string; chainId: string; metres: number } | undefined =>
   spans.filter((s) => Math.abs(s.metres - metres) <= tolerance).sort((a, b) => Math.abs(a.metres - metres) - Math.abs(b.metres - metres))[0]
+
+/** The area the lowest storey's BUILT regions cover, in m²: what the published footprint is checked against. */
+export function builtFootprintM2(storeys: readonly StoreyLayoutHypothesis[], regions: readonly FootprintRegionHypothesis[]): number {
+  const groundIndex = groundStoreyOf(storeys, regions)?.index
+  return round6(regions.filter((r) => r.kind === 'BUILT' && storeys.find((s) => s.id === r.storeyId)?.index === groundIndex).reduce((a, r) => a + ringArea(r.ring), 0))
+}
 
 /**
  * Judge a layout.
@@ -141,13 +155,13 @@ export function evaluateLayoutGate(options: LayoutGateOptions): LayoutGate {
   }
 
   // --- does it agree with what the publisher printed? -----------------------
-  const groundIndex = groundStoreyOf(storeys, regions)?.index
-  const builtArea = round6(regions.filter((r) => r.kind === 'BUILT' && storeys.find((s) => s.id === r.storeyId)?.index === groundIndex).reduce((a, r) => a + ringArea(r.ring), 0))
+  const builtArea = builtFootprintM2(storeys, regions)
   const published = options.publishedAreas?.find((f) => f.key === 'footprint_area' && f.unit === 'm2')
   if (published && builtArea > 0) {
     const error = Math.abs(builtArea - published.value) / published.value
     if (error <= 0.06) say('FOOTPRINT_AREA_AGREES', 'NOTED', `the lowest storey covers ${builtArea.toFixed(2)} m² against the ${published.value} m² the publisher prints`, `${(error * 100).toFixed(1)}% apart, which is closer than a rounded published figure can distinguish`)
     else if (error <= 0.2) say('FOOTPRINT_AREA_NEAR', 'DEGRADING', `the lowest storey covers ${builtArea.toFixed(2)} m² against the ${published.value} m² the publisher prints`, `${(error * 100).toFixed(1)}% apart: something the plans show is not in the layout, or something in the layout is not built`)
+    else if (options.footprintShortfall && builtArea < published.value) say('FOOTPRINT_AREA_SHORT', 'BLOCKING', `the lowest storey covers ${builtArea.toFixed(2)} m² of the ${published.value} m² the publisher prints`, `${(error * 100).toFixed(1)}% of the published footprint is not in the model: ${options.footprintShortfall.why}`)
     else say('FOOTPRINT_AREA_WRONG', 'BLOCKING', `the lowest storey covers ${builtArea.toFixed(2)} m² against the ${published.value} m² the publisher prints`, `${(error * 100).toFixed(1)}% apart: the decomposition is not of this building`)
   }
 

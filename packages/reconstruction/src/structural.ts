@@ -36,6 +36,8 @@ export type StructuralPassOptions = StructuralLayoutOptions & {
    * with the layout, so a resolved layout never looks like a first reading.
    */
   resolution?: { reasons: LayoutGateReason[]; alternatives: AlternativeGroup[]; conflicts: LayoutConflict[] }
+  /** v3.51 ANY-LINK-3: see `LayoutGateOptions.footprintShortfall` — set only by `v2/partial-footprint.ts`. */
+  footprintShortfall?: { why: string }
 }
 
 export type StructuralPassResult = {
@@ -153,6 +155,7 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
     metrics,
     baseFrameId: draft.base?.frame.id ?? '',
     publishedAreas: options.publishedAreas,
+    ...(options.footprintShortfall ? { footprintShortfall: options.footprintShortfall } : {}),
     extraReasons: [...projection.reasons, ...(options.resolution?.reasons ?? [])],
   })
 

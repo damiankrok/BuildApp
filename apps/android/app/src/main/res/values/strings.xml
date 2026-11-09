@@ -463,6 +463,7 @@
     <string name="partial_ring_removed">Model częściowy pominął tę bryłę.</string>
     <string name="partial_ring_narrowing_refused">Uzgadnianie nie zwęziło pierścienia z %1$s m do %2$s m (jego ściany potrzebują %3$s m); kolizja z %4$s pozostaje nierozwiązana.</string>
     <string name="partial_layout_blocking">Układ konstrukcyjny z nierozstrzygniętym błędem blokującym</string>
+    <string name="partial_footprint_short">Model pokazuje tylko część budynku. Odczytana z rzutu bryła ma mniejszą powierzchnię zabudowy, niż podaje strona projektu; pozostałych części (np. garażu, podcienia, zadaszonego tarasu) nie udało się odczytać i nie ma ich w modelu.</string>
     <!-- N9-01: three axes of the model, kept apart -->
     <string name="assessment_title">Ocena modelu: trzy osie</string>
     <string name="assessment_technical_valid">Poprawność techniczna: bez błędów</string>

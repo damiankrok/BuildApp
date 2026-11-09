@@ -763,6 +763,7 @@ internal fun PreviewOutcomeDetails(preview: PreviewOutcome) {
                     for (b in partial.layoutBlocking) {
                         Column(Modifier.padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xs)) {
                             Text(b.code, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                            if (b.code == "FOOTPRINT_AREA_SHORT") Body(stringResource(R.string.partial_footprint_short))
                             StatusText(b.what)
                         }
                     }
