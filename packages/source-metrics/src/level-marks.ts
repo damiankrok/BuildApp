@@ -2,7 +2,7 @@
  * v3.45: the level marks printed on a section (`+7,70` over a ▽), read by the shipped numeric recogniser and admitted
  * only by the same drawing.
  *
- * Measured on 23 development sections (`research/reading-v345`): the template reader read 51 of 110 legible level marks
+ * Measured on 23 development sections (the reading-v345 study): the template reader read 51 of 110 legible level marks
  * and carried 17 wrong values (a missed comma, `±` for `+`, a dropped minus, `+2,46` for `+2,96`), because its glyph
  * templates were fitted to plan dimension labels. The recogniser's unconstrained decode reads the whole mark — sign,
  * digits and decimal comma — and its digit-constrained beam reads the digits again; the two agree on nearly every mark.

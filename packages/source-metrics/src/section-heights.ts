@@ -2,7 +2,7 @@
  * v3.46: the vertical dimensions printed on a section — a clear storey height, a knee wall, a window's height — read as
  * what they are: a number printed along a dimension line, the line's two ends, and the span between them.
  *
- * Measured on development sections before this reader (`research/reading-v346`, per-sign scorer): of 59 legible
+ * Measured on development sections before this reader (the reading-v346 study, per-sign scorer): of 59 legible
  * vertical dimensions the template reader had the right numerals on the sign for 38, and 3 became measurements. The
  * chain reader that turns plan numbers into dimensions needs several numbers on one line agreeing on a scale; a
  * section's vertical dimensions stand one to a line, drawn in a faint grey the plan's ink mask does not keep, and the

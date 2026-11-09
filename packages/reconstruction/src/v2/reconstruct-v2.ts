@@ -614,6 +614,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
   } catch (error) {
     if (!(error instanceof ReconstructionFailure) || error.code !== 'METRIC_RESOLUTION_INCONCLUSIVE') throw error
+    // A published figure may set the scale of a plan that states none. Where the drawing itself states scales that
+    // contradict one another — a refused challenge, or printed readings against the one it was read at — the figure
+    // would be choosing among the drawing's own statements, which it never may: the stop stands.
+    const drawingConflicts = error.diagnostics?.why === 'SOURCE_CONFLICT' || Number(error.diagnostics?.conflictingReadings ?? 0) > 0
+    if (drawingConflicts) {
+      trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_SCALE_REFUSED', status: 'FAILED', counts: { DRAWING_STATES_CONFLICTING_SCALES: 1 }, reasonCode: 'DRAWING_STATES_CONFLICTING_SCALES', detail: 'the drawing states scales that contradict one another; a published figure does not choose among them' })
+      throw error
+    }
     const publishedFootprint = options.publishedAreas?.find((a) => a.key === 'footprint_area' && a.unit === 'm2')?.value
     const planFramesInView = graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_PLAN' && f.roles.document === 'FLOOR_PLAN' && (!keep || keep(f)))
     const groundLabelled = groundLabelledAmong(planFramesInView)

@@ -1,8 +1,8 @@
 /**
  * v3.51 C1b: the first consumer of a section's own vertical dimensions — the GROUND storey's clear height.
  *
- * A published section dimensions each storey from its finished floor up to the underside of the slab over it (Marcówki:
- * 272 from ±0,00, under the +3,06 floor). That one relation fixes two model parameters the levels alone cannot: the
+ * A published section dimensions each storey from its finished floor up to the underside of the slab over it (a
+ * "272" from ±0,00, under a floor printed at +3,06). That one relation fixes two model parameters the levels alone cannot: the
  * height of the storey's walls under the slab, and the band from that underside to the finished floor above (slab plus
  * floor build-up). Until now the band came from an assumed 2.72 m clear height — a convention that happened to be the
  * first reference house's printed value.

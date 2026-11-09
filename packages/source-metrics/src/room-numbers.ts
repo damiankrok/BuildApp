@@ -2,7 +2,7 @@
  * v3.45: the room numbers printed on a floor plan (`7` in the garage, `12` in a bathroom), read by the shipped numeric
  * recogniser instead of the template reader.
  *
- * Measured on development plans before this reader (`research/reading-v345/room-number-probe.ts`): of 281 rooms on 26
+ * Measured on development plans before this reader (the reading-v345 room-number probe): of 281 rooms on 26
  * houses 94 carried a number, and 47 labels were refused as "reads as 1 or 5 alike". The template reader's glyphs were
  * fitted to plan dimension labels; a room number is set larger, in a different (italic, often red) face, so it misreads
  * `6` as `8` and `3` as `9`, and the page's orientation vote then sets the clean upright reading aside for a garbled one
