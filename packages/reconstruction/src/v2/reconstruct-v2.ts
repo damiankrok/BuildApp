@@ -20,6 +20,9 @@ import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '.
 import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
 import { decideGroundClearHeight } from './section-clear-height.js'
 import { finalOpeningRecord } from './opening-final.js'
+import { scaleFromPublishedFootprint } from './published-scale.js'
+import { STOREY_RANK, groundLabelledAmong, planStoreyOf } from '../layout.js'
+import type { PublishedScaleOutcome } from './published-scale.js'
 import type { ClearHeightRejection } from './section-clear-height.js'
 import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
@@ -522,80 +525,115 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const earlyReview = footprintOnly ? sourceConflictReviewFor(structuralOptions, incumbent) : null
   noteWithdrawn(earlyReview)
   const earlyConflict = earlyReview?.conflict ?? null
-  if (earlyConflict) {
-    const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict: earlyConflict, footprintRefused: true })
-    const record = challengeRecord(outcome, `the published footprint refused the first reading, and the drawing contradicts its scale: ${earlyConflict.why}`)
-    if (outcome.kind === 'REPLACED') {
-      draft = outcome.result.draft
-      layout = outcome.result.layout
-      metrics = outcome.metrics
-      planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), challenge: record }
-      trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'DEGRADED', counts: record, detail: outcome.why })
-    } else if (outcome.kind === 'REFUSED') {
-      const report = { ...planDiagnostics, challenge: record }
-      const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', outcome.why, { ...planCounts(report), firstReading: 'FOOTPRINT_AREA_WRONG', why: 'SOURCE_CONFLICT', ...outcome.diagnostics }, 'PLAN_RESOLUTION', report)
-      trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'FAILED', counts: record, reasonCode: failure.code, detail: outcome.why })
-      throw metricStop(failure)
-    } else {
-      planDiagnostics = { ...planDiagnostics, challenge: record }
-      trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'PASSED', counts: record, detail: outcome.why })
-    }
-  }
-  if (!worldFrameFrom(draft) || layout.masses.length === 0 || layoutRefused(layout)) {
-    const first = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
-    const resolution = resolvePlan(structuralOptions, incumbent, options.resolverProgress)
-    const record: Record<string, number | string | boolean> = { ...resolutionRecord(resolution), firstReading: first.code }
-    if (resolution.kind === 'RESOLVED') {
-      draft = resolution.result.draft
-      layout = resolution.result.layout
-      metrics = resolution.metrics
-      planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), resolution: record }
-      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'DEGRADED', counts: record, detail: `the first reading stopped with ${first.code}; ${String(record.chosen)}` })
-    } else if (resolution.kind === 'INCONCLUSIVE' && resolution.why === 'NONE_HOLDS' && resolution.counts.compositions === 0) {
-      // No other reading got as far as a whole composition: the first reading's own
-      // missing link is still the best account of what stopped the run.
-      const report = { ...planDiagnostics, resolution: record }
-      const failure = new ReconstructionFailure(first.code, first.phase, `${first.message}; ${resolution.message}`, { ...first.diagnostics, readingsWeighed: resolution.counts.readings, distinctOutlines: resolution.counts.distinctOutlines, ...(resolution.diagnostics.bestReading !== undefined ? { bestReading: resolution.diagnostics.bestReading } : {}) }, first.substage, report)
-      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw boundaryStop(metricStop(failure))
-    } else if (resolution.kind === 'INCONCLUSIVE') {
-      const report = { ...planDiagnostics, resolution: record }
-      const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `${first.message} ${resolution.message}`, { ...planCounts(report), firstReading: first.code, ...resolution.diagnostics }, 'PLAN_RESOLUTION', report)
-      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw boundaryStop(metricStop(failure))
-    } else {
-      // Nothing but the first reading could be generated: its own failure stands.
-      planDiagnostics = { ...planDiagnostics, resolution: record }
-      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: first.code, detail: 'no other reading of the plan could be generated' })
-    }
-  } else {
-    // --- 005B: a first reading that completed on weak metric evidence is weighed --------
-    // 005D: so is one whose scale the drawing itself contradicts (a source conflict), whatever its confidence.
-    // A reading that already answered the drawing's own challenge above is not challenged a second time.
-    const need = earlyConflict ? { challenge: false, why: '' } : firstReadingNeedsChallenge(metrics, incumbent)
-    const lateReview = earlyConflict ? null : sourceConflictReviewFor(structuralOptions, incumbent)
-    noteWithdrawn(lateReview)
-    const conflict = lateReview?.conflict ?? null
-    if (need.challenge || conflict) {
-      const why = [need.challenge ? need.why : '', conflict ? `the drawing contradicts its scale: ${conflict.why}` : ''].filter(Boolean).join('; and ')
-      const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict })
-      const record = challengeRecord(outcome, why)
-      if (outcome.kind === 'REFUSED') {
-        const report = { ...planDiagnostics, challenge: record }
-        const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', outcome.why, { ...planCounts(report), why: 'SOURCE_CONFLICT', ...outcome.diagnostics }, 'PLAN_RESOLUTION', report)
-        trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'FAILED', counts: record, reasonCode: failure.code, detail: outcome.why })
-        throw metricStop(failure)
-      }
+  // v3.51 ANY-LINK: a run that would stop here for want of a scale asks one last source — the footprint the page
+  // publishes against the walls the plan draws (`published-scale.ts`). The scale it yields is an approximation and is
+  // named one: the gap below, the registration's own provenance, and a result whose scale stays unverified.
+  try {
+    if (earlyConflict) {
+      const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict: earlyConflict, footprintRefused: true })
+      const record = challengeRecord(outcome, `the published footprint refused the first reading, and the drawing contradicts its scale: ${earlyConflict.why}`)
       if (outcome.kind === 'REPLACED') {
         draft = outcome.result.draft
         layout = outcome.result.layout
         metrics = outcome.metrics
+        planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), challenge: record }
+        trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'DEGRADED', counts: record, detail: outcome.why })
+      } else if (outcome.kind === 'REFUSED') {
+        const report = { ...planDiagnostics, challenge: record }
+        const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', outcome.why, { ...planCounts(report), firstReading: 'FOOTPRINT_AREA_WRONG', why: 'SOURCE_CONFLICT', ...outcome.diagnostics }, 'PLAN_RESOLUTION', report)
+        trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'FAILED', counts: record, reasonCode: failure.code, detail: outcome.why })
+        throw metricStop(failure)
+      } else {
+        planDiagnostics = { ...planDiagnostics, challenge: record }
+        trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'PASSED', counts: record, detail: outcome.why })
       }
-      planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), challenge: record }
-      trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: outcome.kind === 'REPLACED' ? 'DEGRADED' : 'PASSED', counts: record, detail: `${why}; ${outcome.why}` })
-      // A pass on a scale the drawing contradicted, kept because nothing it states is better supported, is never silent.
-      if (outcome.kind === 'KEPT' && conflict) gap({ what: `the scale of the base plan`, reason: `the drawing contradicts the scale it was read at (${conflict.why}); no reading it states is better supported, so the first reading stands`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: conflict.evidenceIds })
     }
+    if (!worldFrameFrom(draft) || layout.masses.length === 0 || layoutRefused(layout)) {
+      const first = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
+      const resolution = resolvePlan(structuralOptions, incumbent, options.resolverProgress)
+      const record: Record<string, number | string | boolean> = { ...resolutionRecord(resolution), firstReading: first.code }
+      if (resolution.kind === 'RESOLVED') {
+        draft = resolution.result.draft
+        layout = resolution.result.layout
+        metrics = resolution.metrics
+        planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), resolution: record }
+        trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'DEGRADED', counts: record, detail: `the first reading stopped with ${first.code}; ${String(record.chosen)}` })
+      } else if (resolution.kind === 'INCONCLUSIVE' && resolution.why === 'NONE_HOLDS' && resolution.counts.compositions === 0) {
+        // No other reading got as far as a whole composition: the first reading's own
+        // missing link is still the best account of what stopped the run.
+        const report = { ...planDiagnostics, resolution: record }
+        const failure = new ReconstructionFailure(first.code, first.phase, `${first.message}; ${resolution.message}`, { ...first.diagnostics, readingsWeighed: resolution.counts.readings, distinctOutlines: resolution.counts.distinctOutlines, ...(resolution.diagnostics.bestReading !== undefined ? { bestReading: resolution.diagnostics.bestReading } : {}) }, first.substage, report)
+        trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
+        throw boundaryStop(metricStop(failure))
+      } else if (resolution.kind === 'INCONCLUSIVE') {
+        const report = { ...planDiagnostics, resolution: record }
+        const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `${first.message} ${resolution.message}`, { ...planCounts(report), firstReading: first.code, ...resolution.diagnostics }, 'PLAN_RESOLUTION', report)
+        trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
+        throw boundaryStop(metricStop(failure))
+      } else {
+        // Nothing but the first reading could be generated: its own failure stands.
+        planDiagnostics = { ...planDiagnostics, resolution: record }
+        trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: first.code, detail: 'no other reading of the plan could be generated' })
+      }
+    } else {
+      // --- 005B: a first reading that completed on weak metric evidence is weighed --------
+      // 005D: so is one whose scale the drawing itself contradicts (a source conflict), whatever its confidence.
+      // A reading that already answered the drawing's own challenge above is not challenged a second time.
+      const need = earlyConflict ? { challenge: false, why: '' } : firstReadingNeedsChallenge(metrics, incumbent)
+      const lateReview = earlyConflict ? null : sourceConflictReviewFor(structuralOptions, incumbent)
+      noteWithdrawn(lateReview)
+      const conflict = lateReview?.conflict ?? null
+      if (need.challenge || conflict) {
+        const why = [need.challenge ? need.why : '', conflict ? `the drawing contradicts its scale: ${conflict.why}` : ''].filter(Boolean).join('; and ')
+        const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict })
+        const record = challengeRecord(outcome, why)
+        if (outcome.kind === 'REFUSED') {
+          const report = { ...planDiagnostics, challenge: record }
+          const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', outcome.why, { ...planCounts(report), why: 'SOURCE_CONFLICT', ...outcome.diagnostics }, 'PLAN_RESOLUTION', report)
+          trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: 'FAILED', counts: record, reasonCode: failure.code, detail: outcome.why })
+          throw metricStop(failure)
+        }
+        if (outcome.kind === 'REPLACED') {
+          draft = outcome.result.draft
+          layout = outcome.result.layout
+          metrics = outcome.metrics
+        }
+        planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), challenge: record }
+        trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: outcome.kind === 'REPLACED' ? 'DEGRADED' : 'PASSED', counts: record, detail: `${why}; ${outcome.why}` })
+        // A pass on a scale the drawing contradicted, kept because nothing it states is better supported, is never silent.
+        if (outcome.kind === 'KEPT' && conflict) gap({ what: `the scale of the base plan`, reason: `the drawing contradicts the scale it was read at (${conflict.why}); no reading it states is better supported, so the first reading stands`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: conflict.evidenceIds })
+      }
+    }
+    // a first reading left standing with no frame, no body or a refused layout would stop just below; when what it
+    // lacks is a scale, that stop is raised here, where the last source is asked
+    if (!worldFrameFrom(draft) || layout.masses.length === 0 || layoutRefused(layout)) {
+      const standing = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
+      const stop = metricStop(standing)
+      if (stop.code === 'METRIC_RESOLUTION_INCONCLUSIVE') throw stop
+    }
+  } catch (error) {
+    if (!(error instanceof ReconstructionFailure) || error.code !== 'METRIC_RESOLUTION_INCONCLUSIVE') throw error
+    const publishedFootprint = options.publishedAreas?.find((a) => a.key === 'footprint_area' && a.unit === 'm2')?.value
+    const planFramesInView = graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_PLAN' && f.roles.document === 'FLOOR_PLAN' && (!keep || keep(f)))
+    const groundLabelled = groundLabelledAmong(planFramesInView)
+    const ranked = planFramesInView.filter((f) => planStoreyOf(f, groundLabelled) in STOREY_RANK).sort((x, y) => STOREY_RANK[planStoreyOf(x, groundLabelled)] - STOREY_RANK[planStoreyOf(y, groundLabelled)] || y.size.width * y.size.height - x.size.width * x.size.height || (x.id < y.id ? -1 : 1))
+    const lowest = ranked.length > 0 ? planStoreyOf(ranked[0], groundLabelled) : undefined
+    let approximate: PublishedScaleOutcome | undefined
+    if (publishedFootprint !== undefined) for (const frame of ranked.filter((f) => planStoreyOf(f, groundLabelled) === lowest).slice(0, 3)) {
+      const outcome = scaleFromPublishedFootprint(structuralOptions, frame, publishedFootprint)
+      if (outcome && worldFrameFrom(outcome.result.draft) && outcome.result.layout.masses.length > 0 && !layoutRefused(outcome.result.layout)) {
+        approximate = outcome
+        break
+      }
+    }
+    if (!approximate) throw error
+    draft = approximate.result.draft
+    layout = approximate.result.layout
+    metrics = approximate.metrics
+    planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
+    trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_FOOTPRINT_SCALE', status: 'DEGRADED', counts: { cmPerPx: approximate.cmPerPx, publishedM2: approximate.publishedM2, outlineM2: approximate.outlineM2, iterations: approximate.iterations }, detail: approximate.why })
+    gap({ what: 'the scale of the base plan', reason: `${approximate.why}. Every length of this model follows from it: proportions for viewing, not measurements`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    step({ stage: 'massing', what: 'an approximate plan scale from the published footprint', method: 'DIRECT', detail: approximate.why, inputs: 1, outputs: 1 })
   }
   const planCountsNow = planCounts(planDiagnostics)
   const world = worldFrameFrom(draft)
