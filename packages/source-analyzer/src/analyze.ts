@@ -32,7 +32,7 @@ import type { PlanHandles, PlanResult } from './extractors/plan.js'
 import { SECTION_EXTRACTORS, extractSection } from './extractors/section.js'
 import type { SectionHandles, SectionResult } from './extractors/section.js'
 import { IDENTITY_EXTRACTOR, relateAcrossViews } from './identity.js'
-import { CONTENT_HEAD, contentProbabilities, contentTensor, contentVerdict } from './content.js'
+import { CONTENT_HEAD, CONTENT_VETO, contentProbabilities, contentTensor, contentVerdict } from './content.js'
 import type { ContentVerdict, ImageEmbedder } from './content.js'
 
 /** Where the analyzer gets the bytes a package refers to. Offline by construction: it never fetches. */
@@ -181,11 +181,31 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   }
   const content = ordered.map((a) => verdicts.get(a.id) ?? contentVerdict(a.id, a.roles, undefined))
 
+  // ---- v3.51 ANY-LINK: a page whose words name no floor plan is read by what its pictures show ------
+  // The roles come from the words around each picture. A publisher that captions nothing leaves every drawing
+  // UNKNOWN, and the run used to stop with "no drawings" beside a gallery full of them. Only then — no picture is
+  // captioned a floor plan — a picture the words leave UNKNOWN takes the role its pixels show, when they show an
+  // orthographic drawing with the certainty the content veto itself asks (CONTENT_VETO.minOther). A page that
+  // captions its plans is never touched; a promoted role says nothing of the storey or the side, which stay unknown.
+  const promoted = new Map<string, SourceAsset['roles']>()
+  if (options.content && !ordered.some((a) => a.roles.document === 'FLOOR_PLAN')) {
+    for (const a of ordered) {
+      const v = verdicts.get(a.id)
+      if (a.roles.document !== 'UNKNOWN' || !v || v.projection !== 'ORTHOGRAPHIC' || v.topProbability < CONTENT_VETO.minOther) continue
+      if (v.top === 'FLOOR_PLAN') promoted.set(a.id, { ...a.roles, document: 'FLOOR_PLAN', projection: 'ORTHOGRAPHIC_PLAN', view: 'NOT_APPLICABLE' })
+      else if (v.top === 'ELEVATION') promoted.set(a.id, { ...a.roles, document: 'ELEVATION', projection: 'ORTHOGRAPHIC_ELEVATION', storey: 'NOT_APPLICABLE', view: a.roles.view === 'UNKNOWN' ? 'SIDE_UNSPECIFIED' : a.roles.view })
+      else if (v.top === 'SECTION') promoted.set(a.id, { ...a.roles, document: 'SECTION', projection: 'ORTHOGRAPHIC_SECTION', storey: 'NOT_APPLICABLE', view: 'NOT_APPLICABLE' })
+    }
+  }
+  const rolesOf = (a: SourceAsset): SourceAsset['roles'] => promoted.get(a.id) ?? a.roles
+
   for (const [index, asset] of ordered.entries()) {
     options.onAsset?.(index, ordered.length, asset.id)
-    checkpoint.tick({ done: index, total: ordered.length, assetIndex: index + 1, assetTotal: ordered.length, subphase: { id: asset.roles.document, label: asset.roles.document.toLowerCase().replace(/_/g, ' ') } })
+    const roles = rolesOf(asset)
+    checkpoint.tick({ done: index, total: ordered.length, assetIndex: index + 1, assetTotal: ordered.length, subphase: { id: roles.document, label: roles.document.toLowerCase().replace(/_/g, ' ') } })
     const variant = selectedVariant(asset)
-    const document = asset.roles.document
+    const document = roles.document
+    if (promoted.has(asset.id)) builder.unresolved(`the role of asset ${asset.id}`, `the page's words name no floor plan; this picture is read as a ${document.toLowerCase().replace(/_/g, ' ')} because its pixels show one (${verdicts.get(asset.id)?.why ?? 'content'}); its storey or side is not known`, 'AMBIGUOUS', asset.id)
     if (document === 'CHROME' || document === 'UNKNOWN') {
       skipped.push({ assetId: asset.id, reason: `document role ${document}: not a drawing this analyzer reads` })
       continue
@@ -221,11 +241,11 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     }
 
     const frame = builder.declareFrame(asset.id, variant.byteHash, prepared.size, {
-      document: asset.roles.document,
-      storey: asset.roles.storey,
-      annotation: asset.roles.annotation,
-      view: asset.roles.view,
-      projection: asset.roles.projection,
+      document: roles.document,
+      storey: roles.storey,
+      annotation: roles.annotation,
+      view: roles.view,
+      projection: roles.projection,
     })
     const before = builder.observationCount
     tell({ step: 'READING_DRAWING', asset })
@@ -237,10 +257,10 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     // exterior one alike, they could only write claims about the facade that nothing can measure. Such a frame is
     // still declared, because a perspective camera is solved from its raster, and it is refused by name instead of
     // being read as a facade (`readsAsFacade`).
-    const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && !readsAsFacade(asset.roles)
+    const perspectiveRefused = document === 'PERSPECTIVE_RENDER' && !readsAsFacade(roles)
     if (perspectiveRefused) {
-      builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors and the facade vision task read orthographic views only and this picture's projection is ${asset.roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
-      skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${asset.roles.projection} is not orthographic` })
+      builder.unresolved(`facade observations on the perspective render ${asset.id}`, `the facade extractors and the facade vision task read orthographic views only and this picture's projection is ${roles.projection}, so nothing on it was read as a facade`, 'NOT_ATTEMPTED', asset.id)
+      skipped.push({ assetId: asset.id, reason: `facade extractors not run: projection ${roles.projection} is not orthographic` })
     } else if (document === 'ELEVATION' || document === 'PERSPECTIVE_RENDER') {
       const handles = Object.fromEntries(ELEVATION_EXTRACTORS.map((e) => [e.key, declare(e.name, e.version, 'DETERMINISTIC_CV')])) as ElevationHandles
       analysis.elevation = extractElevation(builder, frame, prepared, handles)
@@ -256,7 +276,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     }
 
     // ---- the vision pass, alongside and never instead ---------------------
-    const tasks = tasksForRoles(asset.roles)
+    const tasks = tasksForRoles(roles)
       .map((t) => t.task)
       .filter((t) => options.visionTasks === undefined || options.visionTasks.includes(t))
     for (const task of tasks) {

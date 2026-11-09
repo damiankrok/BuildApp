@@ -280,7 +280,18 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const byDocument: Record<string, number> = {}
     for (const a of pkg.assets) byDocument[a.roles.document] = (byDocument[a.roles.document] ?? 0) + 1
     const drawings = pkg.assets.filter((a) => DRAWING_DOCUMENTS.has(a.roles.document)).length
-    if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0) {
+    // v3.51 ANY-LINK: where a content classifier runs, a page whose words name no drawing is first asked what its
+    // pictures show (`analyzeSourcePackage` promotes an unlabelled picture to the role its pixels show); the stop is
+    // then decided on what was actually read, below
+    const noDrawingStop = (documents: Record<string, number>, technicalCount: number): AnalysisError => {
+      const incomplete = technicalCount > 0
+      const message = incomplete ? 'the page exposes no floor plan and no elevation; a building cannot be reconstructed from the rest' : 'the page exposes no plan, elevation or section this analyzer reads'
+      const code = incomplete ? 'SOURCE_INCOMPLETE' : 'NO_DRAWINGS'
+      trace.record('CLASSIFYING_SOURCES', 'ROLES', 'FAILED', { drawings, ...documents }, { reasonCode: code, detail: message })
+      return new AnalysisError(code, message, { reasonCode: 'PLAN_NOT_FOUND', stage: 'CLASSIFYING_SOURCES', substage: 'ROLES', title: incomplete ? 'The project page has no floor plan' : 'No drawings to read', diagnostics: { drawings, ...documents } })
+    }
+    const askPixels = !!options.content && !(input.kind === 'PACKAGE' && input.graph) && pkg.assets.some((a) => a.roles.document === 'UNKNOWN')
+    if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0 && !askPixels) {
       // No technical drawing at all (renders are pictures, not drawings), or drawings but
       // neither of the two a building is reconstructed from. The first is a page without
       // drawings; the second is a project whose page is incomplete for this purpose, and
@@ -353,6 +364,12 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     graphSoFar = graph
     contentSoFar = contentVerdicts
+    if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0 && askPixels) {
+      const read: Record<string, number> = {}
+      for (const f of graph.coordinateFrames) read[f.roles.document] = (read[f.roles.document] ?? 0) + 1
+      if ((read.FLOOR_PLAN ?? 0) === 0 && (read.ELEVATION ?? 0) === 0) throw noDrawingStop({ ...byDocument, ...read }, graph.coordinateFrames.filter((f) => TECHNICAL_DOCUMENTS.has(f.roles.document)).length + pkg.assets.filter((a) => TECHNICAL_DOCUMENTS.has(a.roles.document)).length)
+      trace.record('CLASSIFYING_SOURCES', 'ROLES_FROM_PIXELS', 'DEGRADED', { ...read }, { detail: 'the page\'s words name no floor plan or elevation; unlabelled pictures were read by what their pixels show' })
+    }
     throwIfAborted(signal)
     const observationMs = lap()
     trace.record('EXTRACTING_OBSERVATIONS', 'OBSERVATIONS', 'PASSED', { frames: graph.coordinateFrames.length, observations: graph.observations.length, relations: graph.relations.length, vision: visionMode })
