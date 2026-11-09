@@ -390,7 +390,10 @@ export function fitOpeningsToHosts(program: readonly BuildingCommand[], label: s
     const command = program[i]
     const refers = (command.type === 'placeWindow' || command.type === 'placeDoor') && dropped.has(command.openingId)
     const describes = command.type === 'setEvidence' && dropped.has(command.targetId)
-    if (refers || describes) continue
+    // v3.51 ANY-LINK: a relation to an opening that was not built goes with it — one sentence about a dropped
+    // opening must not refuse the whole house
+    const relates = command.type === 'createRelationship' && (dropped.has(command.from) || dropped.has(command.to))
+    if (refers || describes || relates) continue
     const result = applyCommand(model, command)
     if (!result.ok && command.type === 'cutOpening' && result.errors.every((e) => FIT_CODES.has(e.code) || DROP_CODES.has(e.code))) {
       const code = result.errors[0].code

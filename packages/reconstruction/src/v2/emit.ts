@@ -943,7 +943,10 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     cutAndFill(o, at.wallId, at.offset, at.reversed, l, at.t)
   }
   // 005Y-N3 (H1): a corner assembly is one relationship between its two openings, written once
-  for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && b.openings.some((x) => x.id === o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: `CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces${o.openEnd ? '; the corner block is open between their common sill and head' : '; the corner square stays wall (the pieces do not share one band)'}` })
+  // v3.51 ANY-LINK: a relation is stated only between openings this program actually cut — a corner piece whose wall
+  // could not host it leaves no opening to relate to, and the model refused the whole house for that one sentence
+  const cutIds = new Set(program.flatMap((c) => (c.type === 'cutOpening' ? [c.id] : [])))
+  for (const o of b.openings) if (o.cornerWith && o.id < o.cornerWith && cutIds.has(o.id) && cutIds.has(o.cornerWith)) push({ type: 'createRelationship', kind: 'ALIGNS_WITH', from: o.id, to: o.cornerWith, note: `CORNER_GLAZING: one glazing round the corner of the body, in two walls; no pier drawn between the pieces${o.openEnd ? '; the corner block is open between their common sill and head' : '; the corner square stays wall (the pieces do not share one band)'}` })
   // 005Y-N2: a recess in a body's face — a passage through the ring wall over its mouth, its returns and back wall as
   // walls of their own, and the back wall's openings cut in it
   for (const p of b.pockets ?? []) {
