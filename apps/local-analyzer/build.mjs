@@ -17,6 +17,8 @@
  *   ort-wasm-simd-threaded.mjs     its loader, verified against the pins
  *   models/PP-OCRv6_tiny_rec.onnx  the pinned model, and its dictionary
  *   models/PP-OCRv6_tiny_rec.dict.json
+ *   webp_dec.wasm  libwebp's WebAssembly (@jsquash/webp 1.5.0), verified against
+ *                  its pin: the bundle has no node_modules to find it in
  *   manifest.json  protocol, runtime target and the sha256 and size of each
  *                  file, which the app checks before it runs them
  *   meta.json      esbuild's metafile: what went in (architecture tests,
@@ -35,6 +37,7 @@ import { build } from 'esbuild'
 import { bundleImageRoleWorker, bundleRecogniserWorker, IMAGE_ROLE_WORKER_FILE, layOutRecogniserAssets, WORKER_FILE } from '../../packages/numeric-recogniser-ort/build.mjs'
 import { createHash } from 'node:crypto'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { createRequire } from 'node:module'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -46,6 +49,18 @@ export const PROTOCOL = 3
 const BANNER = "import { createRequire as __createRequire } from 'node:module'; const require = __createRequire(import.meta.url);"
 
 const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
+
+/** libwebp's decoder as `@jsquash/webp` 1.5.0 ships it; `packages/source-package/src/image.ts` reads it beside the bundle. */
+export const WEBP_WASM = { file: 'webp_dec.wasm', sha256: '30fb52fa2a80166d25ba7debf902218904ba1f05ccce9f959f722beff9e2f344', bytes: 137960 }
+
+async function layOutWebpDecoder(outdir) {
+  const from = createRequire(join(here, '../../packages/source-package/package.json')).resolve('@jsquash/webp/codec/dec/webp_dec.wasm')
+  const bytes = await readFile(from)
+  const sha = sha256(bytes)
+  if (sha !== WEBP_WASM.sha256 || bytes.length !== WEBP_WASM.bytes) throw new Error(`${WEBP_WASM.file}: SHA-256 ${sha} (${bytes.length} B), pinned ${WEBP_WASM.sha256} — refused`)
+  await writeFile(join(outdir, WEBP_WASM.file), bytes)
+  return { [WEBP_WASM.file]: { sha256: sha, bytes: bytes.length } }
+}
 
 async function bundleOne(entry, outfile, external = []) {
   const result = await build({
@@ -92,6 +107,7 @@ export async function bundleLocalAnalyzer(outdir = join(here, 'dist'), { fixture
     files[name] = { sha256: sha256(bytes), bytes: bytes.length }
   }
   Object.assign(files, recogniserFiles)
+  Object.assign(files, await layOutWebpDecoder(outdir))
   const manifest = { schema: 'buildapp.local-analyzer-runtime', protocol: PROTOCOL, runtime: RUNTIME, entry: 'main.mjs', files }
   await writeFile(join(outdir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
   const metaFile = metaPath ? resolve(metaPath) : join(outdir, 'meta.json')

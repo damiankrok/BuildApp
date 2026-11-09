@@ -14,8 +14,9 @@
  * WebP was otherwise a page "without a plan") are supported; anything else is
  * an honest failure rather than a guess.
  */
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
 import jpeg from 'jpeg-js'
 import { PNG } from 'pngjs'
 import { GifReader } from 'omggif'
@@ -179,13 +180,30 @@ function decodeByFormat(bytes: Uint8Array, format: ImageFormat): Raster {
  * lossless, alpha and odd-sized files; a decoder that differs from the reference by a row would move every
  * measurement taken near a drawing's edge.
  */
+/** The file name libwebp's WebAssembly ships under beside a bundle (`apps/local-analyzer/build.mjs` copies and lists it). */
+export const WEBP_WASM_FILE = 'webp_dec.wasm'
+
+/**
+ * libwebp's WebAssembly. A bundle has no `node_modules` to resolve a package in — the app's embedded runtime runs one
+ * file from its private storage — so the copy laid beside the running module is read first; a checkout reads the
+ * package's own. (v3.51: the bundle used to resolve the package only, so on the phone every WebP sheet failed to
+ * decode and a publisher that serves WebP had no plan.)
+ */
+function webpWasmBytes(): Uint8Array {
+  if (import.meta.url.startsWith('file:')) {
+    const beside = fileURLToPath(new URL(`./${WEBP_WASM_FILE}`, import.meta.url))
+    if (existsSync(beside)) return readFileSync(beside)
+  }
+  return readFileSync(createRequire(import.meta.url).resolve('@jsquash/webp/codec/dec/webp_dec.wasm'))
+}
+
 type WasmRuntime = { Module: new (bytes: Uint8Array) => object; Instance: new (module: object, imports: object) => { exports: object } }
 let webp: { decode(data: ArrayBuffer): { width: number; height: number; data: Uint8ClampedArray } | null } | undefined
 function webpDecoder(): NonNullable<typeof webp> {
   if (webp) return webp
   // The project's TypeScript library is plain ES2022 (no DOM); the runtime itself is Node's.
   const { Module, Instance } = (globalThis as unknown as { WebAssembly: WasmRuntime }).WebAssembly
-  const wasm = new Module(readFileSync(createRequire(import.meta.url).resolve('@jsquash/webp/codec/dec/webp_dec.wasm')))
+  const wasm = new Module(webpWasmBytes())
   const module: Record<string, unknown> = {
     noInitialRun: true,
     instantiateWasm: (imports: object, ready: (instance: object) => void) => {
@@ -205,3 +223,19 @@ function webpDecoder(): NonNullable<typeof webp> {
 
 /** Media type implied by the actual bytes, for cross-checking a server's claim. */
 export const mediaTypeOfFormat = (format: ImageFormat): string => `image/${format}`
+
+/** A 1×1 lossless WebP: the smallest file that exercises the decoder end to end. */
+const WEBP_PROBE = 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA=='
+
+/**
+ * Can THIS runtime decode each format that needs more than plain JavaScript? Run where the code actually runs (the
+ * bundle on the phone, not the checkout): a decoder that cannot start there is a publisher format silently lost.
+ */
+export function decoderSelfCheck(): { webp: boolean; detail?: string } {
+  try {
+    const raster = decodeImage(Uint8Array.from(Buffer.from(WEBP_PROBE, 'base64')))
+    return { webp: raster.width === 1 && raster.height === 1 }
+  } catch (e) {
+    return { webp: false, detail: (e as Error).message }
+  }
+}

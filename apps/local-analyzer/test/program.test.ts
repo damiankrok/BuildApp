@@ -13,7 +13,7 @@
  * it and must give the same hashes again.
  */
 import { createHash } from 'node:crypto'
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -325,5 +325,40 @@ describe.skipIf(!NODE18)('under Node 18 — the runtime version in the APK (LOCA
     const result = await run.done
     expect(result.code).toBe(2)
     expect(result.terminal?.type).toBe('cancelled')
+  })
+})
+
+/**
+ * v3.51: the decoders that need WebAssembly, in the bundle as the phone runs it — a folder of files with no
+ * `node_modules` anywhere above it. The WebP decoder used to resolve its `.wasm` in the package, so it started in a
+ * checkout and never in the app: a publisher that serves WebP had no plan there, and no host test saw it.
+ */
+describe('the bundle decodes WebP where it runs', () => {
+  const probe = join(scratch, 'decoder-probe.mjs')
+  const check = (analyzer: string): { webp: boolean; detail?: string } => {
+    writeFileSync(probe, 'const m = await import(process.argv[2]); process.stdout.write(JSON.stringify(m.decoderSelfCheck()))\n')
+    const run = spawnSync(process.execPath, [probe, analyzer], { encoding: 'utf8' })
+    expect(run.status).toBe(0)
+    return JSON.parse(run.stdout) as { webp: boolean; detail?: string }
+  }
+
+  it('lists libwebp\'s WebAssembly in the manifest the app installs from, with the bytes beside the bundle', () => {
+    const manifest = JSON.parse(readFileSync(join(bundleDir, 'manifest.json'), 'utf8')) as { files: Record<string, { sha256: string; bytes: number }> }
+    const listed = manifest.files['webp_dec.wasm']
+    expect(listed).toBeDefined()
+    expect(sha256(readFileSync(join(bundleDir, 'webp_dec.wasm')))).toBe(listed.sha256)
+  })
+
+  it('decodes a WebP from the installed folder alone', () => {
+    expect(check(join(bundleDir, 'analyzer.mjs'))).toEqual({ webp: true })
+  })
+
+  it('counter-case: the same bundle without the file beside it cannot (the state every earlier APK shipped in)', () => {
+    const bare = join(scratch, 'bundle-without-webp')
+    mkdirSync(bare, { recursive: true })
+    copyFileSync(join(bundleDir, 'analyzer.mjs'), join(bare, 'analyzer.mjs'))
+    const answer = check(join(bare, 'analyzer.mjs'))
+    expect(answer.webp).toBe(false)
+    expect(answer.detail).toMatch(/webp_dec\.wasm/)
   })
 })
