@@ -56,7 +56,7 @@ function planOf(d: Draw): { raster: OpeningReadingInput['planRaster']; plan: Pla
 
 const host = (storeyIndex = 0): WallHost => ({ massId: 'm', facade: 'FRONT', planeAt: 0, from: 0, to: 10, centreAt: 0.2, storeyIndex, floorY: storeyIndex * 2.8, storeyHeightM: 2.8 })
 
-type Alt = { value: number; rawText: string; confidence: number; why: string }
+type Alt = { value: number; rawText: string; confidence: number; why: string; role?: 'WIDTH' | 'HEIGHT'; gate?: 'PLAN_CORROBORATION_REQUIRED' }
 const callout = (text: string, gap: [number, number], alternatives: Alt[]): MetricEvidence => {
   const c = px((gap[0] + gap[1]) / 2, 1.0)
   return { id: `callout-${text}`, kind: 'OPENING_CALLOUT', rawText: text, alternatives: alternatives.map((a) => ({ ...a, unit: 'cm' })), confidence: 0.8, textBox: { x0: c.x - 10, y0: c.y - 5, x1: c.x + 10, y1: c.y + 5 } } as unknown as MetricEvidence
@@ -65,10 +65,10 @@ const callout = (text: string, gap: [number, number], alternatives: Alt[]): Metr
 // upper half it read as 260 without passing it.
 const greyRing = (gap: [number, number], refusedWidth = 260): MetricEvidence =>
   callout('700/140', gap, [
-    { value: 140, rawText: '140', confidence: 0.996, why: 'height candidate: the recogniser read the lower half as 140 (p 0.996, mean 0.99, stable, 3 glyphs; the upper half was refused: not stable under the bracket)' },
-    { value: 700, rawText: '700', confidence: 0.6, why: 'width candidate: the upper half read as 700 (match 0.6)' },
-    { value: 40, rawText: '40', confidence: 0.6, why: 'height candidate: the lower half read as 40 (match 0.6)' },
-    { value: refusedWidth, rawText: String(refusedWidth), confidence: 0.37, why: `width candidate: ${PLAN_CORROBORATED_WIDTH}: the recogniser read the upper half as ${refusedWidth} but the gate refused it (not stable under the bracket); usable only where the plan gap agrees` },
+    { value: 140, rawText: '140', confidence: 0.996, role: 'HEIGHT', why: 'height candidate: the recogniser read the lower half as 140 (p 0.996, mean 0.99, stable, 3 glyphs; the upper half was refused: not stable under the bracket)' },
+    { value: 700, rawText: '700', confidence: 0.6, role: 'WIDTH', why: 'width candidate: the upper half read as 700 (match 0.6)' },
+    { value: 40, rawText: '40', confidence: 0.6, role: 'HEIGHT', why: 'height candidate: the lower half read as 40 (match 0.6)' },
+    { value: refusedWidth, rawText: String(refusedWidth), confidence: 0.37, role: 'WIDTH', gate: 'PLAN_CORROBORATION_REQUIRED', why: `width candidate: ${PLAN_CORROBORATED_WIDTH}: the recogniser read the upper half as ${refusedWidth} but the gate refused it (not stable under the bracket); usable only where the plan gap agrees` },
   ])
 
 function read(d: Draw, opts: { storey?: number; attached?: boolean; callouts?: MetricEvidence[] } = {}) {
@@ -94,7 +94,7 @@ describe('005Y-N5 a refused width reading needs the plan gap to agree', () => {
   })
   it('a refused reading ranks under a reader\'s own candidate that also fits the gap', () => {
     const ring = greyRing([3, 5.6])
-    const withOwn = { ...ring, alternatives: [...ring.alternatives, { value: 255, unit: 'cm', rawText: '255', confidence: 0.3, why: 'width candidate: the upper half read as 255 (match 0.3)' }] } as unknown as MetricEvidence
+    const withOwn = { ...ring, alternatives: [...ring.alternatives, { value: 255, unit: 'cm', rawText: '255', confidence: 0.3, role: 'WIDTH', why: 'width candidate: the upper half read as 255 (match 0.3)' }] } as unknown as MetricEvidence
     // the reader's own first three are 700 and 255 here; 255 fits the 2.60 m gap and outranks the refused 260
     const o = read({ gap: [3, 5.6] }, { callouts: [withOwn] })
     expect(o.callout?.widthCm).toBe(255)

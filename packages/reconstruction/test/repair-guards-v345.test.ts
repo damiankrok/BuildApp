@@ -19,7 +19,7 @@ describe('v3.45 the bounded reconciliation', () => {
     const o = b.openings[0]
     expect(o.sillY).toBe(0)
     expect(o.headY).toBeCloseTo(2.3)
-    expect(t.iterations[0].refused.some((r) => /reaches its floor/.test(r.why))).toBe(true)
+    expect(t.iterations[0].refused.some((r) => r.code === 'DOOR_OFF_ITS_ACCESS')).toBe(true)
   })
   it('the same for a glazed door and a garage door', () => {
     for (const family of ['GLAZED_DOOR', 'GARAGE_DOOR']) {

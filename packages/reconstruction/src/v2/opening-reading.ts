@@ -299,6 +299,8 @@ export type OpeningFamilyDecision = {
   leaf?: DrawnDoorLeaf
   /** N8-03B: the leaves of a door wider than one leaf, as drawn. */
   leaves?: DrawnLeaves
+  /** v3.51 (C2): the typed meaning of a window to the floor (the note beside it is for people only). */
+  glazingToFloor?: 'FRENCH_WINDOW'
   notes: string[]
 }
 
@@ -378,7 +380,7 @@ export function classifyOpeningFamily(f: OpeningFamilyFacts): OpeningFamilyDecis
   // makes it a door (`stepOutDoors`), and nothing else does.
   if (reachesFloor && f.widthM > DOOR_MAX_WIDTH_M && f.widthM < MULTI_PANEL_MIN_WIDTH_M) {
     if (f.storeyIndex === 0) return { family: 'GLAZED_DOOR', notes: [] }
-    return { family: 'WINDOW', notes: [FRENCH_WINDOW_NOTE] }
+    return { family: 'WINDOW', glazingToFloor: 'FRENCH_WINDOW', notes: [FRENCH_WINDOW_NOTE] }
   }
   if (reachesFloor && !glazed) return { family: 'DOOR', notes: [] }
   // Narrower than any glazed door, to the floor, with a leaf or its swing drawn: a plain door, and the lines across its
@@ -518,20 +520,20 @@ export const STEP_OUT_LEVEL_M = 0.35
 export const STEP_OUT_FLOOR_SILL_M = 0.1
 export const STEP_OUT_BALUSTRADE_SILL_MAX_M = 1.2
 export const STEP_OUT_DOOR_HEAD_MIN_M = 2.0
-export function stepOutDoors<O extends { id: string; storeyIndex: number; facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; planeAt: number; interval: [number, number]; sillY: number; headY: number; family: string; unresolved: string[]; callout?: unknown; provenance: { sill: string } }>(
+export function stepOutDoors<O extends { id: string; storeyIndex: number; facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; planeAt: number; interval: [number, number]; sillY: number; headY: number; family: string; glazingToFloor?: 'FRENCH_WINDOW'; callout?: unknown; provenance: { sill: string } }>(
   openings: readonly O[],
   slabs: ReadonlyArray<{ id: string; storeyIndex: number; x0: number; z0: number; x1: number; z1: number }>,
   roofs: ReadonlyArray<{ massId: string; slabTopY: number; parapetTopY?: number; footprint: { x0: number; z0: number; x1: number; z1: number } }>,
   floorOf: (storey: number) => number | undefined,
-): Array<{ opening: O; onto: string; behindBalustrade: boolean }> {
-  const out: Array<{ opening: O; onto: string; behindBalustrade: boolean }> = []
+): Array<{ opening: O; onto: string; kind: 'BALCONY' | 'ROOF_TERRACE'; behindBalustrade: boolean }> {
+  const out: Array<{ opening: O; onto: string; kind: 'BALCONY' | 'ROOF_TERRACE'; behindBalustrade: boolean }> = []
   for (const o of openings) {
     if (o.storeyIndex === 0 || o.family !== 'WINDOW') continue
     const floor = floorOf(o.storeyIndex)
     if (floor === undefined) continue
     // the French window this reading left a window, or a window whose sill an elevation read on the balustrade's top
     // in front of it with its head at a door's (a house's rear: the balcony stood before the doors' own pass ran)
-    const french = o.unresolved.includes(FRENCH_WINDOW_NOTE)
+    const french = o.glazingToFloor === 'FRENCH_WINDOW'
     // only a sill an elevation read: a printed height (a callout) says the window is that tall, wherever its sill is
     const behindBalustrade = !french && !o.callout && o.provenance.sill === 'IMAGE_METRIC_REGISTERED' && o.sillY - floor > STEP_OUT_FLOOR_SILL_M && o.sillY - floor <= STEP_OUT_BALUSTRADE_SILL_MAX_M && o.headY - floor >= STEP_OUT_DOOR_HEAD_MIN_M
     if (!french && !behindBalustrade) continue
@@ -549,11 +551,11 @@ export function stepOutDoors<O extends { id: string; storeyIndex: number; facade
     }
     const slab = slabs.find((b) => b.storeyIndex === o.storeyIndex && fronts(b))
     if (slab) {
-      out.push({ opening: o, onto: slab.id, behindBalustrade })
+      out.push({ opening: o, onto: slab.id, kind: 'BALCONY', behindBalustrade })
       continue
     }
     const roof = roofs.find((r) => Math.abs(r.slabTopY - floor) <= STEP_OUT_LEVEL_M && fronts(r.footprint))
-    if (roof) out.push({ opening: o, onto: `the flat roof of ${roof.massId}`, behindBalustrade })
+    if (roof) out.push({ opening: o, onto: `the flat roof of ${roof.massId}`, kind: 'ROOF_TERRACE', behindBalustrade })
   }
   return out
 }

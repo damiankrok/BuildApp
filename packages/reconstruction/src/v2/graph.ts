@@ -171,6 +171,20 @@ export const SolvedFeatureSchema = z
     /** Properties the sources do not settle, by name. Never empty when something is assumed. */
     unresolvedProperties: z.array(z.string().min(1)),
     why: z.string().min(1),
+    /**
+     * v3.51 (C2): what the final program built of this feature, apart from the accepted decision in `parameters`:
+     * AS_ACCEPTED, FITTED (with the applied values and the reason's code) or NOT_BUILT. The source reading stays in its
+     * evidence; the accepted decision is never rewritten to what fitted.
+     */
+    application: z
+      .object({
+        state: z.enum(['AS_ACCEPTED', 'FITTED', 'NOT_BUILT']),
+        acceptedKind: z.string().min(1).optional(),
+        reasonCode: z.string().min(1).optional(),
+        applied: z.object({ width: z.number(), sillY: z.number(), headY: z.number(), kind: z.string().min(1) }).strict().optional(),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
 export type SolvedFeature = z.infer<typeof SolvedFeatureSchema>

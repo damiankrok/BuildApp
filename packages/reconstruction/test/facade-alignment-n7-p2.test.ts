@@ -214,7 +214,8 @@ describe('N7-P2 plan against elevation: codes and the correction gate', () => {
     const o = opening('o4')
     const r = alignFacades({ openings: [o], views: [view(raster0)], levels: [LEVEL], unregistered: [], read: new Map([['frame-front', { measured: [{ opening: o, reading: reading('fm-o4', 1, 2.5, 1.2, 2.9) }], candidates: [], rejected: [], scanned: [reading('fo-0', 1, 2.5, 1.2, 2.9)] }]]) })
     expect(r.corrections).toEqual([])
-    expect(r.comparisons[0].note).toMatch(/do not fit the storey's wall/)
+    // v3.51 (C2): the refusal is the shared admission policy's, by code
+    expect(r.refusals?.map((x) => x.refusal)).toEqual(['DOES_NOT_FIT_WALL', 'DOES_NOT_FIT_WALL'])
   })
 
   it('names offsets and widths in metres but never moves an interval on pixels', () => {

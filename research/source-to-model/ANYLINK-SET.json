@@ -1,0 +1,20 @@
+{
+ "schema": "buildapp.source-to-model.anylink/1",
+ "frozenAt": "2026-11-09",
+ "purpose": "OWNER 2026-11-09: a link to any project on any house-plan site must yield a 3D model from its images and data. A first, small measurement of the whole path (acquire -> classify -> read -> solve -> compile) on publishers the analyzer was never developed against.",
+ "selection": "one project per publisher: the first individual project link found in the markup of the publisher's public listing page on 2026-11-09 (the second where the first was a guide page). Chosen before any run; no page was opened or judged first. Publishers whose listing did not expose project links in static markup, or which refused the client (HTTP 403), are listed as not sampled.",
+ "disclosure": "After the baseline run these pages are known (DEV, non-blind). They are not a statistical sample. The six ARCHON projects that reach no model in the 33-project corpus are counted beside them.",
+ "items": [
+  {"publisher": "extradom.pl", "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114"},
+  {"publisher": "lipinscy.pl", "url": "https://lipinscy.pl/projekt/mindelo/"},
+  {"publisher": "dobredomy.pl", "url": "https://www.dobredomy.pl/projekt/sonia"},
+  {"publisher": "domoweklimaty.pl", "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-adam/"},
+  {"publisher": "houseplans.com", "url": "https://www.houseplans.com/plan/3355-square-feet-3-bedroom-3-5-bathroom-3-garage-modern-contemporary-sp371040"},
+  {"publisher": "architecturaldesigns.com", "url": "https://www.architecturaldesigns.com/house-plans/perfectly-balanced-4-bed-modern-farmhouse-plan-56478sm"}
+ ],
+ "notSampled": [
+  {"publisher": "z500.pl", "why": "HTTP 403 to the client"},
+  {"publisher": "mgprojekt.com.pl", "why": "HTTP 403 to the client"},
+  {"publisher": "studioatrium.pl, domywstylu.pl, galeriadomow.pl, projektydomownowoczesnych.pl", "why": "no individual project link in the static markup of the listing page fetched; not pursued in this first measurement"}
+ ]
+}

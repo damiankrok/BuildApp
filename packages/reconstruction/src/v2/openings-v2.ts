@@ -15,7 +15,6 @@ import type { PixelRect } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
 import { verticalOpeningExtent } from '@buildapp/image-metrology'
 import type { MetricEvidence } from '@buildapp/source-metrics'
-import { PLAN_CORROBORATED_WIDTH } from '@buildapp/source-metrics'
 import type { ElevationFrameV2, PlanFrameV2 } from './frame.js'
 import { bandPieces, gapsBetween, inkFraction, mergeRuns, rgbAt, wallBodyPieces } from './scan.js'
 import type { ProvenanceStatus } from './graph.js'
@@ -101,6 +100,23 @@ export type OpeningV2 = {
    * one level head (`openCornerBand`); the model then opens the block between them (`Opening.openEnd`).
    */
   openEnd?: 'LOW' | 'HIGH'
+  /**
+   * v3.51 (C2): what a window to the floor is, as a typed meaning — FRENCH_WINDOW: above the ground storey, wider than
+   * one leaf, a door only where something to step out onto stands in front of it. The human note in `unresolved` says
+   * the same for people; no decision reads that note.
+   */
+  glazingToFloor?: 'FRENCH_WINDOW'
+  /**
+   * v3.51 (C2): the surface the opening is reached from where that is not its storey's floor — a landing, a step, the
+   * other floor of a split level — in metres. A door's sill refers to this (`opening-correction.ts`).
+   */
+  access?: { kind: 'LANDING' | 'STEP' | 'SPLIT_LEVEL_FLOOR'; y: number; why: string }
+  /**
+   * v3.51 (C2): what the opening steps out onto, as the SOURCES show it — recorded apart from whether that platform's
+   * slab was later built: a balcony the plan outlines in front of a door is its balcony even when the model could not
+   * emit the slab.
+   */
+  stepsOnto?: { kind: 'BALCONY' | 'ROOF_TERRACE'; id: string; observed: true }
 }
 
 export type OpeningOptions = { minWidthM?: number; maxWidthM?: number; calloutReachM?: number; stubMaxM?: number }
@@ -141,9 +157,9 @@ export function weakPrintedHeight(confidence: number | undefined, printedM: numb
 
 export function calloutCandidates(evidence: MetricEvidence): { widths: Array<{ cm: number; score: number; planCorroborated?: true }>; heights: Array<{ cm: number; score: number }> } | null {
   const widths = evidence.alternatives
-    .filter((a) => a.why.startsWith('width candidate'))
-    .map((a) => (a.why.includes(PLAN_CORROBORATED_WIDTH) ? { cm: a.value, score: a.confidence, planCorroborated: true as const } : { cm: a.value, score: a.confidence }))
-  const heights = evidence.alternatives.filter((a) => a.why.startsWith('height candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
+    .filter((a) => a.role === 'WIDTH')
+    .map((a) => (a.gate === 'PLAN_CORROBORATION_REQUIRED' ? { cm: a.value, score: a.confidence, planCorroborated: true as const } : { cm: a.value, score: a.confidence }))
+  const heights = evidence.alternatives.filter((a) => a.role === 'HEIGHT').map((a) => ({ cm: a.value, score: a.confidence }))
   if (widths.length > 0 && heights.length > 0) return { widths, heights }
   const pair = calloutPair(evidence)
   if (!pair) return null
@@ -702,6 +718,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       family,
       ...(leaf ? { leaf } : {}),
       ...(leaves ? { leaves } : {}),
+      ...(decision.glazingToFloor ? { glazingToFloor: decision.glazingToFloor } : {}),
       callout,
       elevation,
       mullions,
@@ -729,7 +746,10 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     o.unresolved = [...o.unresolved.filter((u) => !u.startsWith('sill and head') && !u.startsWith('kind')), `sill, head and kind assumed from ${sibling.id}, the same ${o.widthM.toFixed(2)} m width on this wall, printed ${sibling.callout?.widthCm}/${sibling.callout?.heightCm}`]
     // E13 (a balcony with two 1.79 m doors, one printed): a French window's kind is decided once the
     // balconies stand (`stepOutDoors`), so the note that defers it is the sibling's kind too
-    if (sibling.unresolved.includes(FRENCH_WINDOW_NOTE)) o.unresolved.push(FRENCH_WINDOW_NOTE)
+    if (sibling.glazingToFloor === 'FRENCH_WINDOW') {
+      o.glazingToFloor = 'FRENCH_WINDOW'
+      o.unresolved.push(FRENCH_WINDOW_NOTE)
+    }
     o.provenance = { ...o.provenance, family: 'VISUAL_SEMANTIC' }
     o.why = `${o.why}; drawn like ${sibling.id} (the same width on this wall, printed)`
   }

@@ -19,6 +19,7 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '../solve.js'
 import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
 import { decideGroundClearHeight } from './section-clear-height.js'
+import { finalOpeningRecord } from './opening-final.js'
 import type { ClearHeightRejection } from './section-clear-height.js'
 import { composeStructuralLayout } from '../structural.js'
 import type { PublishedArea } from '../layout-gate.js'
@@ -230,7 +231,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // 2.31.0 (v3.46): one callout, one opening — every printed callout of a storey belongs to the nearest gap it fits on any
 // wall (`calloutOwners`), and a gap takes only its own: a gap whose ring is unread no longer borrows its twin's, and a
 // ring by a corner no longer sizes a gap on each wall
-export const SOLVER_V2_VERSION = '2.31.0' as const
+// 2.32.0 (v3.51, C1/C2): each storey property carries its own authority (a printed elevation, a height derived from two
+// printed datums, a convention named as one) and an amended value restates its own; the section's ground-storey clear
+// height, bound by its line and ends, sets the slab band and the partitions under it (`section-clear-height.ts`); one
+// admission policy for every later correction of an opening's heights (`opening-correction.ts`); typed meanings where
+// notes and prose prefixes used to decide (French window, callout alternative roles); each opening's feature is closed
+// from the final decision and what the program applied (`opening-final.ts`)
+export const SOLVER_V2_VERSION = '2.32.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -2490,6 +2497,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           o.sillY = l.elevation
           o.provenance = { ...o.provenance, sill: 'SOURCE_DERIVED' }
           if (o.family === 'WINDOW') o.family = 'GLAZED_DOOR'
+          o.stepsOnto = { kind: 'BALCONY', id, observed: true }
+          delete o.glazingToFloor
           o.unresolved = [...o.unresolved, `a French window onto ${id}: its sill is the balcony floor (the elevation read ${readSill.toFixed(2)} m, the balustrade's top in front of it)`]
         }
       }
@@ -2500,6 +2509,10 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // its floor — and a French window everywhere else (`stepOutDoors`).
   for (const o of stepOutDoors(openings, balconies, attachedRoofs, (s) => levelOf(s)?.elevation)) {
     o.opening.family = 'GLAZED_DOOR'
+    // v3.51 (C2): the relation to what it steps out onto is the source's, recorded on the opening itself; the typed
+    // French-window meaning ends here (the note for people is replaced below)
+    o.opening.stepsOnto = { kind: o.kind, id: o.onto, observed: true }
+    delete o.opening.glazingToFloor
     const floor = levelOf(o.opening.storeyIndex)?.elevation ?? o.opening.sillY
     const readSill = round6(o.opening.sillY - floor)
     if (o.behindBalustrade) {
@@ -2996,6 +3009,33 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     gap({ what: `the opening ${f.openingId} as the drawings print it`, reason: f.why, status: f.action === 'DROPPED' ? 'REFUSED' : 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     const solved = ctx.solved.find((s) => s.id === `feat-${f.openingId}` || s.id === f.openingId)
     if (solved) solved.unresolvedProperties = [...solved.unresolvedProperties, f.action === 'DROPPED' ? f.why : `fitted to its host: ${f.why}`]
+  }
+  // v3.51 (C2): each opening's feature is closed from the FINAL state — the decision after the facade alignment and the
+  // repair, and what the fitted program built of it (`opening-final.ts`); the record written when the gap was read no
+  // longer stands for the result
+  for (const o of openings) {
+    const solved = ctx.solved.find((s) => s.id === `feat-${o.id}`)
+    if (!solved) continue
+    const cut = program.find((c) => c.type === 'cutOpening' && c.id === o.id)
+    const final = finalOpeningRecord(o, levelOf(o.storeyIndex)?.elevation ?? 0, cut && cut.type === 'cutOpening' ? { kind: cut.kind, sill: cut.sill, width: cut.width, height: cut.height } : undefined, fit.fits.find((f) => f.openingId === o.id))
+    solved.parameters = { ...solved.parameters, ...final.parameters }
+    solved.parameterProvenance = { ...solved.parameterProvenance, ...final.parameterProvenance }
+    solved.application = final.application
+    solved.quality = solved.provenance === 'UNRESOLVED' ? solved.quality : qualityLevelOf(solved)
+  }
+  // a doorway between two bodies is accepted as a door on its floor, one door-height tall — the decision the emitter
+  // applied without the record saying so (the gap's own window-like sill and head were what the feature still showed)
+  for (const d of sharedDoors) {
+    const solved = ctx.solved.find((s) => s.id === `feat-${d.id}`)
+    if (!solved) continue
+    const floorY = levelOf(d.storeyIndex)?.elevation ?? 0
+    const cut = program.find((c) => c.type === 'cutOpening' && c.id === d.id)
+    const accepted = { ...d, sillY: floorY, headY: round6(floorY + (d.headY - d.sillY)), provenance: { ...d.provenance, sill: 'SOURCE_DERIVED' as const } }
+    const final = finalOpeningRecord(accepted, floorY, cut && cut.type === 'cutOpening' ? { kind: cut.kind, sill: cut.sill, width: cut.width, height: cut.height } : undefined, fit.fits.find((f) => f.openingId === d.id))
+    solved.parameters = { ...solved.parameters, ...final.parameters }
+    solved.parameterProvenance = { ...solved.parameterProvenance, ...final.parameterProvenance }
+    solved.application = final.application
+    solved.quality = solved.provenance === 'UNRESOLVED' ? solved.quality : qualityLevelOf(solved)
   }
   if (fit.fits.length > 0) step({ stage: 'emission', what: 'openings fitted to the walls that host them', method: 'DIRECT', detail: fit.fits.map((f) => `${f.openingId} ${f.action.toLowerCase()} (${f.code})`).join('; '), inputs: emitted.program.length, outputs: program.length })
   trace({ phase: 'MODEL', substage: 'EMISSION', status: fit.fits.length > 0 ? 'DEGRADED' : 'PASSED', counts: { commands: program.length, openingsFitted: fit.fits.filter((f) => f.action !== 'DROPPED').length, openingsDropped: fit.fits.filter((f) => f.action === 'DROPPED').length } })

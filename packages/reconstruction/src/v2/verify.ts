@@ -14,6 +14,8 @@ import type { BuildingV2 } from './building.js'
 import type { ElevationFrameV2 } from './frame.js'
 import { elevationExtent } from './openings-v2.js'
 import { lumaAt } from './scan.js'
+import { admitHeightCorrections, refusalSentence } from './opening-correction.js'
+import type { CorrectionRefusal, CorrectionSubject } from './opening-correction.js'
 
 export type ResidualKind = 'OPENING_SILL' | 'OPENING_HEAD' | 'ROOF_EDGE' | 'RECESS_PLANE' | 'MEMBER_EDGE' | 'SILHOUETTE_WIDTH' | 'BAND_TOP' | 'BAND_SOFFIT' | 'RETURN_FACE' | 'VERGE_UNDERSIDE'
 
@@ -33,7 +35,8 @@ export type SourceViewResidual = {
 }
 
 export type RepairOperation = { kind: 'MOVE_WALL' | 'RESIZE_OPENING' | 'MOVE_OPENING' | 'ADJUST_RECESS' | 'ADJUST_ROOF_EDGE' | 'ADJUST_FACADE_MEMBER'; featureId: string; before: Record<string, number>; after: Record<string, number>; why: string }
-export type RepairRefusal = { featureId: string; kind: RepairOperation['kind']; why: string }
+/** `code`: the shared admission policy's reason (v3.51 C2); `why` is the same for people. */
+export type RepairRefusal = { featureId: string; kind: RepairOperation['kind']; code?: CorrectionRefusal; why: string }
 export type RepairTrace = { iterations: Array<{ index: number; residualsBefore: number; residualsAfter: number; applied: RepairOperation[]; refused: RepairRefusal[] }>; converged: boolean }
 
 export type VerificationInput = {
@@ -285,34 +288,19 @@ export function repairFromResiduals(b: BuildingV2, residuals: SourceViewResidual
     for (const r of current.filter((x) => !x.withinTolerance && (x.kind === 'OPENING_SILL' || x.kind === 'OPENING_HEAD'))) {
       const o = b.openings.find((x) => x.id === r.featureId)
       if (!o) continue
-      const prov = r.kind === 'OPENING_SILL' ? o.provenance.sill : o.provenance.head
-      if (prov === 'SOURCE_EXACT' || prov === 'SOURCE_CORROBORATED') {
-        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `${r.kind.toLowerCase()} is ${prov.toLowerCase().replace(/_/g, ' ')} and a view reading ${r.residualM.toFixed(2)} m away does not overrule it` })
-        continue
-      }
-      if (prov !== 'ASSUMED_FOR_RENDERING' && prov !== 'UNRESOLVED') {
-        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `${r.kind.toLowerCase()} already comes from a view; a second reading is recorded, not applied` })
-        continue
-      }
-      // 005Y-N1: a sill assumed under a printed height (the head derived from it) does not move alone: that would change
-      // the printed height. The view's reading is recorded, not applied.
-      if (r.kind === 'OPENING_SILL' && (o.provenance.head === 'SOURCE_EXACT' || o.provenance.head === 'SOURCE_CORROBORATED')) {
-        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `the height is printed (${(o.headY - o.sillY).toFixed(2)} m); a sill the view reads ${r.residualM.toFixed(2)} m away would change it, so it is recorded, not applied` })
-        continue
-      }
-      // v3.45: a door reaches its floor — its leaf, drawn on the plan, is what made it a door; a view that reads its sill
-      // above the floor reads something else (a step, a surround, a registration off by a plinth)
-      if (r.kind === 'OPENING_SILL' && (o.family === 'DOOR' || o.family === 'GLAZED_DOOR' || o.family === 'GARAGE_DOOR') && r.observedM > o.sillY) {
-        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `a ${o.family.toLowerCase().replace(/_/g, ' ')} reaches its floor; a view reading its sill ${r.observedM.toFixed(2)} m up is recorded, not applied` })
-        continue
-      }
-      if (Math.abs(r.residualM) > 1.2) {
-        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', why: `a ${r.residualM.toFixed(2)} m disagreement is not a repair, it is a different reading` })
+      // v3.51 (C2): the same admission policy the facade alignment meets (`opening-correction.ts`): the opening's own
+      // floor or access surface, never the building's ±0,00
+      const level = b.levels.find((l) => l.index === o.storeyIndex)
+      const property = r.kind === 'OPENING_SILL' ? ('sill' as const) : ('head' as const)
+      const subject: CorrectionSubject = { family: o.family, sillY: o.sillY, headY: o.headY, provenance: o.provenance, accessY: o.access?.y ?? level?.elevation ?? 0, wallTopY: level?.wallTop ?? Infinity }
+      const verdict = admitHeightCorrections(subject, { [property]: r.observedM })[property]
+      if (verdict && !verdict.admitted) {
+        refused.push({ featureId: o.id, kind: 'RESIZE_OPENING', code: verdict.refusal, why: refusalSentence(verdict.refusal, subject, property, r.observedM) })
         continue
       }
       const before = { sillY: o.sillY, headY: o.headY }
       if (r.kind === 'OPENING_SILL') {
-        o.sillY = round6(Math.max(0, r.observedM))
+        o.sillY = round6(Math.max(subject.accessY, r.observedM))
         o.provenance.sill = 'IMAGE_METRIC_REGISTERED'
       } else {
         o.headY = round6(r.observedM)

@@ -1,0 +1,14 @@
+{
+ "schema": "buildapp.source-to-model.frozen/1",
+ "frozenAt": "2026-11-09",
+ "slice": "C2",
+ "annotator": "developer; written before any C2 candidate replay existed. The measures are checks of the final artifacts against each other and against one source rule; they need no per-house answer.",
+ "disclosure": "All 33 projects are known from earlier stages (non-blind). H2 is not used.",
+ "denominator": "every exterior opening feature (family OPENING) of every replayed model; projects without a model are counted as NO_MODEL and reported apart",
+ "measures": {
+  "TRACE_FINAL": "for each OPENING feature: its accepted parameters (width, sillY, headY) equal what the final model built for that id (width, level elevation + sill, + height; tolerance 1e-4 m), OR the feature carries an explicit application record whose applied values equal the model's (FITTED), OR it is NOT_BUILT and the model has no such opening. Verdicts: CONSISTENT, EXPLICIT_DIFFERENCE, STALE (the graph states a value the model does not have, with nothing saying so), MISSING_STATE (no application record).",
+  "DOOR_ON_ACCESS": "for each model opening of kind DOOR hosted by an exterior wall: its sill above its level's floor is at most 0.05 m, unless the opening carries a typed access surface. Verdicts: ON_ACCESS, OFF_ACCESS. (The source rule: a door is reached from its floor, landing or step.)",
+  "KIND_AGREES": "the feature's accepted kind maps to the kind the model built (WINDOW, MULTI_PANEL_GLAZING -> WINDOW; DOOR, GLAZED_DOOR, GARAGE_DOOR -> DOOR), where the candidate records one."
+ },
+ "replay": "solver-only on the frozen 572b875 extraction (base: evidence as extracted; candidate: the same evidence with the typed alternative role/gate added by research/source-to-model/migrate_evidence_role.py, which copies what the 1.12.0 reader wrote as a prose prefix into the 1.13.0 typed fields and changes nothing else)"
+}

@@ -34,7 +34,7 @@ describe('a refused attached ring after a valid main body', () => {
     const p = result.preview.partial
     expect(p?.basis).toBe('CHECKPOINT')
     // EXTERIOR-COMPLETE: one more material (the gate's, `mat-gate`) is defined before the rings: 21 → 22
-    expect(p?.failure).toMatchObject({ commandIndex: 22, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'], objectIds: ['ring-attached-0-0-w1'] })
+    expect(p?.failure).toMatchObject({ commandIndex: 23, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'], objectIds: ['ring-attached-0-0-w1'] })
     expect(p?.failure.message).toMatch(/^walls ring-attached-0-0-w1 and ring-attached-0-0-w3 share [0-9.]+ m²/)
     expect(p?.missing.map((m) => `${m.id}:${m.cause}`)).toEqual(['slab-attached-0-0:SAME_BODY', 'ring-attached-0-0:FAILED', 'roof-attached-0:SAME_BODY'])
     expect(result.warningDetails.find((w) => w.code === 'PARTIAL_3D_PREVIEW')).toMatchObject({ severity: 'LIMITING' })

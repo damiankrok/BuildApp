@@ -115,7 +115,7 @@ describe('N7-FIX-01 the partial preview stands where the source does not decide'
     expect(result.preview.outcome).toBe('PARTIAL_3D_PREVIEW')
     const partial = result.preview.partial
     // EXTERIOR-COMPLETE: one more material (the gate's, `mat-gate`) is defined before the rings: 21 → 22
-    expect(partial?.failure).toMatchObject({ commandIndex: 22, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
+    expect(partial?.failure).toMatchObject({ commandIndex: 23, type: 'createWallRing', id: 'ring-attached-0-0', codes: ['WALLS_OVERLAP'] })
     // the main body's base is kept: its ring and slab are in the model
     expect(result.model.wallRings.map((r) => r.id)).toContain('ring-main-0')
     expect(result.model.wallRings.map((r) => r.id)).not.toContain('ring-attached-0-0')

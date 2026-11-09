@@ -29,6 +29,8 @@ import type { OpeningV2, Facade } from './openings-v2.js'
 import type { LevelV2 } from './building.js'
 import type { FacadeOpeningReading, FacadeOpeningRejection, FacadeView } from './facade-openings.js'
 import type { ProvenanceStatus } from './graph.js'
+import { admitHeightCorrections, refusalSentence } from './opening-correction.js'
+import type { CorrectionRefusal, CorrectionSubject } from './opening-correction.js'
 import { HEIGHT_AGREEMENT_M, HEIGHT_PICK_MIN_SCORE_SHARE, HEIGHT_PICK_TOLERANCE_M, HEIGHT_RIVAL_MIN_CM } from './opening-reading.js'
 
 export type AlignmentCode = 'MISSING_IN_MODEL' | 'EXTRA_IN_MODEL' | 'HORIZONTAL_OFFSET' | 'WIDTH_MISMATCH' | 'SILL_MISMATCH' | 'HEAD_MISMATCH' | 'WRONG_FACADE' | 'UNREGISTERED_VIEW'
@@ -87,6 +89,8 @@ export type FacadeAlignmentReport = {
   rejected: FacadeOpeningRejection[]
   comparisons: FacadeOpeningComparison[]
   corrections: OpeningCorrection[]
+  /** v3.51 (C2): proposals the shared admission policy refused, by code (the reading itself stays in `comparisons`). */
+  refusals?: Array<{ openingId: string; facade: Facade; property: 'sill' | 'head'; proposed: number; refusal: CorrectionRefusal; frameId: string }>
   /** Facades no registered view covers, and why. */
   unregistered: Array<{ facade: Facade; why: string }>
   /** Code counts, and PAIRED: model openings a reading was paired with (whether or not they agree). */
@@ -120,6 +124,7 @@ export function alignFacades(input: {
 }): FacadeAlignmentReport {
   const comparisons: FacadeOpeningComparison[] = []
   const corrections: OpeningCorrection[] = []
+  const refusals: NonNullable<FacadeAlignmentReport['refusals']> = []
   const summaries: FacadeViewSummary[] = []
   const allReadings: FacadeOpeningReading[] = []
   const allRejected: FacadeOpeningRejection[] = []
@@ -187,13 +192,18 @@ export function alignFacades(input: {
       const head = Math.abs(delta.headM) > th && conventionSource(o.provenance.head) && agreesHead ? round6((r.headY + (twin as FacadeOpeningReading).headY) / 2) : o.headY
       if ((Math.abs(delta.sillM) > th && conventionSource(o.provenance.sill) && !agreesSill) || (Math.abs(delta.headM) > th && conventionSource(o.provenance.head) && !agreesHead)) comparisons[comparisons.length - 1].note = `the view's heights differ from the model's convention, but the plan-free scan ${twin ? `reads ${twin.sillY.toFixed(2)}..${twin.headY.toFixed(2)} m` : 'reads nothing there'}: the two readings do not agree, the model is kept`
       if (sill === o.sillY && head === o.headY) continue
-      // the result must be an opening its wall holds: above the floor, under the top of the wall, at least 0.4 m tall
-      if (head - sill < 0.4 || sill < floor - 0.05 || head > wallTop - 0.05) {
-        comparisons[comparisons.length - 1].note = `the view's heights ${r.sillY.toFixed(2)}..${r.headY.toFixed(2)} m do not fit the storey's wall (${floor.toFixed(2)}..${wallTop.toFixed(2)} m): kept as the model has it`
-        continue
+      // v3.51 (C2): the one admission policy every later correction of an opening's heights meets (`opening-correction.ts`)
+      // — a door stays on its own access surface, a sill above its floor, the result an opening its wall holds
+      const subject: CorrectionSubject = { family: o.family, sillY: o.sillY, headY: o.headY, provenance: o.provenance, accessY: o.access?.y ?? floor, wallTopY: wallTop }
+      const verdict = admitHeightCorrections(subject, { ...(sill !== o.sillY ? { sill } : {}), ...(head !== o.headY ? { head } : {}) })
+      const refusedHere = (['sill', 'head'] as const).flatMap((k) => { const v = verdict[k]; return v && !v.admitted ? [{ property: k, refusal: v.refusal }] : [] })
+      if (refusedHere.length > 0) {
+        comparisons[comparisons.length - 1].note = refusedHere.map((x) => refusalSentence(x.refusal, subject, x.property, x.property === 'sill' ? sill : head)).join('; ')
+        refusals.push(...refusedHere.map((x) => ({ openingId: o.id, facade: fv.facade, property: x.property, proposed: x.property === 'sill' ? round6(sill) : round6(head), refusal: x.refusal, frameId: fv.frameId })))
       }
-      if (sill !== o.sillY) corrections.push({ openingId: o.id, facade: fv.facade, property: 'sill', before: o.sillY, after: round6(sill), frameId: fv.frameId, readingId: r.id, provenance: 'IMAGE_METRIC_REGISTERED', why: `the model's sill was a convention; on the ${fv.facade.toLowerCase()} view, registered on the ridge datum, the opening measured at the plan's gap and the plan-free scan agree on ${sill.toFixed(2)} m (±${th.toFixed(2)})` })
-      if (head !== o.headY) corrections.push({ openingId: o.id, facade: fv.facade, property: 'head', before: o.headY, after: round6(head), frameId: fv.frameId, readingId: r.id, provenance: 'IMAGE_METRIC_REGISTERED', why: `the model's head was a convention; on the ${fv.facade.toLowerCase()} view, registered on the ridge datum, the opening measured at the plan's gap and the plan-free scan agree on ${head.toFixed(2)} m (±${th.toFixed(2)})` })
+      if (!verdict.sill?.admitted && !verdict.head?.admitted) continue
+      if (verdict.sill?.admitted) corrections.push({ openingId: o.id, facade: fv.facade, property: 'sill', before: o.sillY, after: round6(sill), frameId: fv.frameId, readingId: r.id, provenance: 'IMAGE_METRIC_REGISTERED', why: `the model's sill was a convention; on the ${fv.facade.toLowerCase()} view, registered on the ridge datum, the opening measured at the plan's gap and the plan-free scan agree on ${sill.toFixed(2)} m (±${th.toFixed(2)})` })
+      if (verdict.head?.admitted) corrections.push({ openingId: o.id, facade: fv.facade, property: 'head', before: o.headY, after: round6(head), frameId: fv.frameId, readingId: r.id, provenance: 'IMAGE_METRIC_REGISTERED', why: `the model's head was a convention; on the ${fv.facade.toLowerCase()} view, registered on the ridge datum, the opening measured at the plan's gap and the plan-free scan agree on ${head.toFixed(2)} m (±${th.toFixed(2)})` })
     }
     // the view's own openings that no plan opening of this facade stands at: missing in the model — or, on a side
     // view, perhaps the other side's
@@ -226,7 +236,7 @@ export function alignFacades(input: {
     if (c.openingId && c.readingId) counts.PAIRED += 1
     for (const code of c.codes) counts[code] += 1
   }
-  return { views: summaries, readings: allReadings, rejected: allRejected, comparisons, corrections, unregistered: [...input.unregistered].filter((u) => !covered.has(u.facade)), counts, statusCounts }
+  return { views: summaries, readings: allReadings, rejected: allRejected, comparisons, corrections, refusals, unregistered: [...input.unregistered].filter((u) => !covered.has(u.facade)), counts, statusCounts }
 }
 
 /** The openings with the corrections applied, each property's provenance saying where it now comes from. */

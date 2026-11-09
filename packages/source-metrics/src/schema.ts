@@ -277,6 +277,13 @@ export const MetricAlternativeSchema = z
     rawText: z.string(),
     confidence: z.number().min(0).max(1),
     why: z.string().min(1),
+    /**
+     * v3.51 (C2): what the alternative is a reading OF, where the reader knows — a callout's width or its height.
+     * Typed: a consumer never tells them apart by the wording of `why`.
+     */
+    role: z.enum(['WIDTH', 'HEIGHT']).optional(),
+    /** v3.51 (C2): a reading the reader's own gate refused, admissible only where the plan's gap agrees with it. */
+    gate: z.enum(['PLAN_CORROBORATION_REQUIRED']).optional(),
   })
   .strict()
 export type MetricAlternative = z.infer<typeof MetricAlternativeSchema>
