@@ -1127,7 +1127,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           const why = `the section prints ${lip >= 0 ? '+' : ''}${lip.toFixed(2)} at the eaves' lip ${reading.overhangM.toFixed(2)} m past the walls, where its roof lines at ${mainRoof.pitchDeg}° end, not where the walls stop: the walls run up under the roof to ${underside.toFixed(2)}`
           top.wallTop = underside
           mainRoof.buildUpVerticalM = round6(Math.max(0.15, mainRoof.eaveY - underside))
-          amend(top.featureId, 'height', { value: underside - top.elevation, low: underside - top.elevation - 0.1, high: underside - top.elevation + 0.1 }, why)
+          // the underside is the printed lip's roof line less a CONVENTIONAL roof thickness: an assumption, not a datum gap
+          amend(top.featureId, 'height', { value: underside - top.elevation, low: underside - top.elevation - 0.1, high: underside - top.elevation + 0.1 }, `${why} (at an assumed ${mainRoof.thicknessM.toFixed(2)} m roof)`, 'ASSUMED_FOR_RENDERING')
           step({ stage: 'levels', what: `the walls' head of storey ${topStorey}, under the roof rather than at a printed eaves' lip`, method: 'DIRECT', detail: reading.why, inputs: 2, outputs: 1 })
           options.debug?.(`eaves-lip ${why}`)
         }

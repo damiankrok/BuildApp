@@ -7,18 +7,128 @@
  "measure": {
   "C1a": "every LEVEL feature of the replayed model carries per-parameter provenance: an elevation is SOURCE_EXACT only when it is a printed datum; a height is SOURCE_DERIVED only when it is the difference of two printed datums; a conventional value (2.80 storey height, extrapolated elevation, 2.72 clear height) is ASSUMED_FOR_RENDERING and named unresolved. Denominator: every LEVEL feature of every replayed model (no model = counted, reported apart).",
   "C1b": "relation GROUND_CLEAR_HEIGHT: the printed vertical dimension from the finished floor of storey k (a printed datum row) to the underside of the slab under the printed floor of storey k+1. Final-model check: the non-top exterior walls of storey k have height = H (±0.01 m) and the slab band = floor(k+1) - H, with the dimension's evidence id recorded as USED_IN_MODEL; ends checked separately (bottom end on the floor datum row, top end below the next floor by a physically possible band 0.15-0.50 m). Where no such reading exists the model keeps the convention and names it.",
-  "tolerances": {"heightM": 0.01, "bandMinM": 0.15, "bandMaxM": 0.5, "rowPx": "max(4 px, 0.05 m at the section's ladder scale)"}
+  "tolerances": {
+   "heightM": 0.01,
+   "bandMinM": 0.15,
+   "bandMaxM": 0.5,
+   "rowPx": "max(4 px, 0.05 m at the section's ladder scale)"
+  }
  },
  "items": [
-  {"role": "DEV", "project": "marcowki", "floors": [0, 3.06], "groundClearCm": 272, "expect": "CONSUMED", "others": "252 from ±0 too (band 0.54: a lower ceiling elsewhere, must not be the storey's), 266 upper storey (top storey: not this relation), 130 knee wall (tick)"},
-  {"role": "DEV", "project": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe", "floors": [0, 2.96], "groundClearCm": 264, "expect": "CONSUMED", "others": "259 upper, 125 knee wall"},
-  {"role": "DEV", "project": "projekt-dom-w-daliach-5-ge-me3c2885945467", "floors": [0, 3.06], "groundClearCm": 273, "expect": "CONSUMED", "others": "338 upper, 121 knee wall"},
-  {"role": "DEV", "project": "a01", "floors": [0, 3.06], "groundClearCm": 274, "expect": "CONSUMED_IF_READ", "others": "255 upper, 136 knee wall, 201 other"},
-  {"role": "DEV-COUNTER", "project": "sasankach3", "floors": [0, 3.06], "groundClearCm": 278, "expect": "NOT_CONSUMED", "why": "278 is read only by the chain reader, whose geometry is the chain line, not the dimension's ends (wrong line)"},
-  {"role": "CONTROL", "project": "projekt-dom-w-bratkach-26-r2be-m953292c7d56c7", "floors": [0, 2.96], "groundClearCm": 260, "expect": "CONSUMED_IF_READ", "others": "269 upper, 235 other"},
-  {"role": "CONTROL", "project": "projekt-dom-w-balsamowcach-20-g2a-m250297bb3f46c", "floors": [0, 2.96], "groundClearCm": 263, "expect": "CONSUMED_IF_READ", "others": "256 upper, 117 knee wall"},
-  {"role": "NEGATIVE", "project": "projekt-dom-w-renklodach-39-g2e-m45128ec88f20c", "floors": [0], "groundClearCm": 280, "expect": "NOT_CONSUMED", "why": "single storey: no printed floor above, so no slab band (no floor build-up evidence)"},
-  {"role": "NEGATIVE", "project": "projekt-dom-w-kostrzewach-4-m1bb23c8d1cf2e", "floors": [0], "groundClearCm": 270, "expect": "NOT_CONSUMED", "why": "single storey; the +3.04 eaves mark is not a floor"},
-  {"role": "NEGATIVE", "project": "ciesz", "floors": [0], "groundClearCm": 283, "expect": "NOT_CONSUMED", "why": "single storey; +2.93 is the eaves and +3.34 the ceiling slab's top, not a storey floor; a band from the eaves would be 0.10 m (impossible)"}
+  {
+   "role": "DEV",
+   "project": "marcowki",
+   "floors": [
+    0,
+    3.06
+   ],
+   "groundClearCm": 272,
+   "expect": "CONSUMED",
+   "others": "252 from ±0 too (band 0.54: a lower ceiling elsewhere, must not be the storey's), 266 upper storey (top storey: not this relation), 130 knee wall (tick)"
+  },
+  {
+   "role": "DEV",
+   "project": "projekt-dom-w-arletach-3-e-oze-m504267f869cbe",
+   "floors": [
+    0,
+    2.96
+   ],
+   "groundClearCm": 264,
+   "expect": "CONSUMED",
+   "others": "259 upper, 125 knee wall"
+  },
+  {
+   "role": "DEV",
+   "project": "projekt-dom-w-daliach-5-ge-me3c2885945467",
+   "floors": [
+    0,
+    3.06
+   ],
+   "groundClearCm": 273,
+   "expect": "CONSUMED",
+   "others": "338 upper, 121 knee wall"
+  },
+  {
+   "role": "DEV",
+   "project": "a01",
+   "floors": [
+    0,
+    3.06
+   ],
+   "groundClearCm": 274,
+   "expect": "CONSUMED_IF_READ",
+   "others": "255 upper, 136 knee wall, 201 other"
+  },
+  {
+   "role": "DEV-COUNTER",
+   "project": "sasankach3",
+   "floors": [
+    0,
+    3.06
+   ],
+   "groundClearCm": 278,
+   "expect": "NOT_CONSUMED",
+   "why": "278 is read only by the chain reader, whose geometry is the chain line, not the dimension's ends (wrong line)"
+  },
+  {
+   "role": "CONTROL",
+   "project": "projekt-dom-w-bratkach-26-r2be-m953292c7d56c7",
+   "floors": [
+    0,
+    2.96
+   ],
+   "groundClearCm": 260,
+   "expect": "CONSUMED_IF_READ",
+   "others": "269 upper, 235 other"
+  },
+  {
+   "role": "CONTROL",
+   "project": "projekt-dom-w-balsamowcach-20-g2a-m250297bb3f46c",
+   "floors": [
+    0,
+    2.96
+   ],
+   "groundClearCm": 263,
+   "expect": "CONSUMED_IF_READ",
+   "others": "256 upper, 117 knee wall"
+  },
+  {
+   "role": "NEGATIVE",
+   "project": "projekt-dom-w-renklodach-39-g2e-m45128ec88f20c",
+   "floors": [
+    0
+   ],
+   "groundClearCm": 280,
+   "expect": "NOT_CONSUMED",
+   "why": "single storey: no printed floor above, so no slab band (no floor build-up evidence)"
+  },
+  {
+   "role": "NEGATIVE",
+   "project": "projekt-dom-w-kostrzewach-4-m1bb23c8d1cf2e",
+   "floors": [
+    0
+   ],
+   "groundClearCm": 270,
+   "expect": "NOT_CONSUMED",
+   "why": "single storey; the +3.04 eaves mark is not a floor"
+  },
+  {
+   "role": "NEGATIVE",
+   "project": "ciesz",
+   "floors": [
+    0
+   ],
+   "groundClearCm": 283,
+   "expect": "NOT_CONSUMED",
+   "why": "single storey; +2.93 is the eaves and +3.34 the ceiling slab's top, not a storey floor; a band from the eaves would be 0.10 m (impossible)"
+  }
+ ],
+ "amendments": [
+  {
+   "at": "2026-11-09",
+   "after": "the first clean C1b candidate result (tree 0656a08)",
+   "item": "sasankach3 (DEV-COUNTER)",
+   "what": "The item was mis-specified, and is NOT rewritten: its verdict stays FAIL as frozen. The section prints TWO ground clear heights — 273 at x≈760 beside the ±0,00 and +3,06 marks (in section-signs.txt, omitted from the item) and 278 at x≈245. The candidate refuses the 278 chain reading (wrong line: SPAN_DISAGREES_WITH_VALUE, the intended counter-case, which holds) and consumes the 273, which is read on its own line from the ±0,00 row. Limit named: the solver does not see the source's own disagreement (273 vs 278) because the 278 is not bound to a line; a single slab band stands for a storey the section dimensions twice."
+  }
  ]
 }

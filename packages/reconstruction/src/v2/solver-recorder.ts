@@ -83,11 +83,17 @@ export function createSolverRecorder(ctx: SolverRecord) {
     return featureId
   }
   /** E13: a solved feature's parameter restated by a later reading, with the reason appended to its why. */
-  const amend = (featureId: string, key: string, p: FeatureParameters[string], why: string): void => {
+  // v3.51: an amended value restates its own authority — the authority of the value it replaced does not carry over
+  // (a height re-read under the roof at an assumed roof thickness is not the gap between two printed datums any more)
+  const amend = (featureId: string, key: string, p: FeatureParameters[string], why: string, provenance: ProvenanceStatus): void => {
     const solved = ctx.solved.find((f) => f.id === featureId)
     if (!solved) return
     const value = { value: round6(p.value), low: round6(p.low), high: round6(p.high), unit: p.unit ?? ('m' as const) }
     solved.parameters = { ...solved.parameters, [key]: value }
+    solved.parameterProvenance = { ...solved.parameterProvenance, [key]: provenance }
+    const assumed = provenance === 'ASSUMED_FOR_RENDERING' || provenance === 'UNRESOLVED'
+    solved.unresolvedProperties = assumed ? [...new Set([...solved.unresolvedProperties, key])] : solved.unresolvedProperties.filter((u) => u !== key)
+    solved.quality = qualityLevelOf(solved)
     solved.why = `${solved.why}; ${why}`
     const hyp = ctx.hypotheses.find((h) => h.id === solved.hypothesisId)
     if (hyp) hyp.parameters = { ...hyp.parameters, [key]: value }
