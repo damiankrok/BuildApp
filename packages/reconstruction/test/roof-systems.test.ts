@@ -278,3 +278,35 @@ describe('sealing', () => {
     expect(structuralLayoutContentHash(partial)).not.toBe(structuralLayoutContentHash(base))
   })
 })
+
+describe('v3.51: a stated pitch with no kind and no section is a pitched roof, its kind a named convention', () => {
+  const house = [mass('mass-0', 0, 0, 13.95, 9.26, 0, 0)]
+  const NO_SECTION: RoofLevels = { floors: [0], heights: [2.8], evidenceIds: [], measured: false }
+
+  it('takes a gable for the stated pitch, running the long way, and says the kind is assumed', () => {
+    const r = inferRoofSystems({ masses: house, metrics: withSpec(30, undefined), levels: NO_SECTION, storeyTop: () => 2.8 })
+    const main = r.roofs[0]
+    expect(main.kind).toBe('GABLE')
+    expect(main.pitchDeg?.value).toBe(30)
+    expect(main.ridgeAxis).toBe('X')
+    expect(main.why).toContain('a gable is assumed')
+    expect(r.unresolved.some((u) => u.what === 'the kind of roof over mass-0' && u.status === 'AMBIGUOUS' && u.reason.includes('by convention'))).toBe(true)
+  })
+
+  it('counter-case: a kind the page states stands, and nothing is called assumed', () => {
+    const r = inferRoofSystems({ masses: house, metrics: withSpec(30, 'HIP'), levels: NO_SECTION, storeyTop: () => 2.8 })
+    expect(r.roofs[0].kind).toBe('HIP')
+    expect(r.unresolved.some((u) => u.what === 'the kind of roof over mass-0')).toBe(false)
+  })
+
+  it('counter-case: no stated pitch, or a fall too slight to be a pitched roof, leaves the kind unknown', () => {
+    expect(inferRoofSystems({ masses: house, metrics: withSpec(undefined, undefined), levels: NO_SECTION, storeyTop: () => 2.8 }).roofs[0].kind).toBe('UNKNOWN')
+    expect(inferRoofSystems({ masses: house, metrics: withSpec(8, undefined), levels: NO_SECTION, storeyTop: () => 2.8 }).roofs[0].kind).toBe('UNKNOWN')
+  })
+
+  it('counter-case: where a section measures the rise, the section decides as before', () => {
+    const r = inferRoofSystems({ masses: [mass('mass-0', 0, 0, 8, 12.6, 0, 1)], metrics: withSpec(40, undefined), levels: LEVELS, storeyTop: () => 4.6 })
+    expect(r.roofs[0].kind).toBe('GABLE')
+    expect(r.roofs[0].why).not.toContain('a gable is assumed')
+  })
+})

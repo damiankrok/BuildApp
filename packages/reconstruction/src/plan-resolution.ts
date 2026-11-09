@@ -398,6 +398,22 @@ const bucketOf = (areaM2: number, published: number | undefined, spent = false):
 
 const overlaps = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) > Math.max(a.x0, b.x0) && Math.min(a.y1, b.y1) > Math.max(a.y0, b.y0)
 
+/** An exterior wall is between these thicknesses, in metres; a reading whose walls are not was read at the wrong scale. */
+export const PLAUSIBLE_WALL_M = { min: 0.15, max: 0.7 } as const
+export const wallThicknessPlausible = (wallM: number): boolean => wallM >= PLAUSIBLE_WALL_M.min && wallM <= PLAUSIBLE_WALL_M.max
+
+/** How much of the sheet's long wall (by length, inside `within`) the bodies explain: 0..1. */
+export function wallCoverageOf(sheet: PlanSheet, within: PixelRect | null | undefined, bodyRects: readonly PixelRect[]): number {
+  const { bands, wallPx } = sheet
+  const long = bands.filter((b) => b.length >= wallPx * 2.5)
+  const mid = (b: (typeof long)[number]): { x: number; y: number } => ({ x: (b.bounds.x0 + b.bounds.x1) / 2, y: (b.bounds.y0 + b.bounds.y1) / 2 })
+  const inside = (p: { x: number; y: number }, r: PixelRect, grow: number): boolean => p.x >= r.x0 - grow && p.x <= r.x1 + grow && p.y >= r.y0 - grow && p.y <= r.y1 + grow
+  const walls = within ? long.filter((b) => inside(mid(b), within, 0)) : []
+  const explained = walls.filter((b) => bodyRects.some((r) => inside(mid(b), r, wallPx)))
+  const total = walls.reduce((a, b) => a + b.length, 0)
+  return total === 0 ? 0 : round6(explained.reduce((a, b) => a + b.length, 0) / total)
+}
+
 /** Everything about one reading that the ranking and the acceptance rule ask. */
 function scoreReading(
   draft: StructuralLayoutDraft,
@@ -426,8 +442,7 @@ function scoreReading(
   if (base?.registration) {
     const r = base.registration
     if (Math.max(r.metresPerPixelX, r.metresPerPixelY) / Math.min(r.metresPerPixelX, r.metresPerPixelY) > 1.15) hard.push('ANISOTROPY')
-    const wallM = base.decomposition.wallThickness.m
-    if (!(wallM >= 0.15 && wallM <= 0.7)) hard.push('WALL_THICKNESS_IMPLAUSIBLE')
+    if (!wallThicknessPlausible(base.decomposition.wallThickness.m)) hard.push('WALL_THICKNESS_IMPLAUSIBLE')
     const margin = 2 * base.wallPx
     for (const region of built) {
       const p = region.pixelRect
@@ -435,17 +450,7 @@ function scoreReading(
     }
   }
 
-  // How much of the sheet's wall the bodies explain.
-  const { bands, wallPx } = context.sheet
-  const long = bands.filter((b) => b.length >= wallPx * 2.5)
-  const within = context.cluster ?? base?.extent
-  const mid = (b: (typeof long)[number]): { x: number; y: number } => ({ x: (b.bounds.x0 + b.bounds.x1) / 2, y: (b.bounds.y0 + b.bounds.y1) / 2 })
-  const inside = (p: { x: number; y: number }, r: PixelRect, grow: number): boolean => p.x >= r.x0 - grow && p.x <= r.x1 + grow && p.y >= r.y0 - grow && p.y <= r.y1 + grow
-  const walls = within ? long.filter((b) => inside(mid(b), within, 0)) : []
-  const bodyRects = built.map((r) => r.pixelRect).filter((r): r is PixelRect => r !== undefined)
-  const explained = walls.filter((b) => bodyRects.some((r) => inside(mid(b), r, wallPx)))
-  const total = walls.reduce((a, b) => a + b.length, 0)
-  const wallCoverage = total === 0 ? 0 : round6(explained.reduce((a, b) => a + b.length, 0) / total)
+  const wallCoverage = wallCoverageOf(context.sheet, context.cluster ?? base?.extent, built.map((r) => r.pixelRect).filter((r): r is PixelRect => r !== undefined))
 
   const corroborations: Corroboration[] = []
   if (context.supportedOnBothAxes) corroborations.push('ISOTROPY')

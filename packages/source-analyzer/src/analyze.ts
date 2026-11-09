@@ -16,6 +16,7 @@
  * code: the CV path runs first and runs unconditionally.
  */
 import { NO_CHECKPOINT } from '@buildapp/source-common'
+import { planReadingSize, resampleRaster } from '@buildapp/source-cv'
 import type { Checkpoint } from '@buildapp/source-common'
 import { ObservationGraphBuilder } from '@buildapp/source-observations'
 import type { ExtractorHandle, SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
@@ -23,7 +24,7 @@ import { decodeImage, selectedVariant } from '@buildapp/source-package'
 import type { SourceAsset, SourcePackage } from '@buildapp/source-package'
 import { VisionResponseRejected, VisionUnavailable, applyVisionResponse, extractorNameFor, extractorVersionFor, readsAsFacade, tasksForRoles } from '@buildapp/source-vision'
 import type { VisionContextFact, VisionReasoner, VisionTask, VisionTrace } from '@buildapp/source-vision'
-import { prepareRaster } from './prepare.js'
+import { prepareFromRaster } from './prepare.js'
 import type { Prepared } from './prepare.js'
 import { ELEVATION_EXTRACTORS, extractElevation } from './extractors/elevation.js'
 import type { ElevationHandles, ElevationResult } from './extractors/elevation.js'
@@ -32,6 +33,9 @@ import type { PlanHandles, PlanResult } from './extractors/plan.js'
 import { SECTION_EXTRACTORS, extractSection } from './extractors/section.js'
 import type { SectionHandles, SectionResult } from './extractors/section.js'
 import { IDENTITY_EXTRACTOR, relateAcrossViews } from './identity.js'
+/** A sealed package whose recorded size is not its bytes': raised past the decode handler, which names undecodable drawings. */
+class SealedSizeMismatch extends Error {}
+
 import { CONTENT_HEAD, CONTENT_VETO, contentProbabilities, contentTensor, contentVerdict } from './content.js'
 import type { ContentVerdict, ImageEmbedder } from './content.js'
 
@@ -82,7 +86,8 @@ export type SheetEvent =
   | { step: 'CONTENT_CHECK'; asset: SourceAsset }
   | { step: 'CONTENT_REFUSED'; asset: SourceAsset; verdict: ContentVerdict }
   | { step: 'READING_DRAWING'; asset: SourceAsset }
-  | { step: 'DRAWING_READ'; asset: SourceAsset; observations: readonly SourceObservation[] }
+  /** `size`: the frame the observations are in — the sheet's reading size, which is not always its bytes' */
+  | { step: 'DRAWING_READ'; asset: SourceAsset; observations: readonly SourceObservation[]; size: { width: number; height: number } }
 
 export type AssetAnalysis = {
   asset: SourceAsset
@@ -114,6 +119,8 @@ export type AnalysisResult = {
   traces: VisionTrace[]
   /** Assets the package holds that this analyzer had no extractor for. */
   skipped: Array<{ assetId: string; reason: string }>
+  /** v3.51: the plan sheets read at a smaller size than their bytes have, and why (their typical wall, in their own pixels). */
+  readingSizes: Array<{ assetId: string; decoded: { width: number; height: number }; readAt: { width: number; height: number }; typicalWallPx: number; reduction: number }>
   /** SOURCE-01: what each asset's pixels show and what was done with it, one per asset (NOT_CLASSIFIED without an encoder). */
   content: ContentVerdict[]
   /** The encoder and head that read them, or null when none ran. */
@@ -135,6 +142,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
   const assets: AssetAnalysis[] = []
   const skipped: AnalysisResult['skipped'] = []
+  const readingSizes: AnalysisResult['readingSizes'] = []
   const traces: VisionTrace[] = []
   const vision: VisionOutcome = { provider: options.vision ? `${options.vision.provider.id}/${options.vision.provider.model}` : null, attempted: 0, accepted: 0, rejected: [], unavailable: [] }
   const contextFacts = contextFactsFor(pkg)
@@ -224,21 +232,27 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     }
 
     let prepared: Prepared
+    // v3.51: a plan sheet drawn finer than the readers' measured range is read at a smaller size (source-cv/reading-size.ts)
+    let reading: ReturnType<typeof planReadingSize> | undefined
     try {
-      prepared = prepareRaster(fetched.bytes, { checkpoint })
+      const decoded = decodeImage(fetched.bytes)
+      // The package records the size the BYTES have. A package whose recorded decoded size disagrees with the pixels
+      // is a package that was sealed wrong, and the analyzer is the wrong place to paper over it.
+      if (decoded.width !== variant.decoded.width || decoded.height !== variant.decoded.height) {
+        throw new SealedSizeMismatch(`asset ${asset.id} is sealed as ${variant.decoded.width}x${variant.decoded.height} but its bytes decode to ${decoded.width}x${decoded.height}`)
+      }
+      if (document === 'FLOOR_PLAN') reading = planReadingSize(decoded)
+      prepared = prepareFromRaster(reading && reading.reduction > 1 ? resampleRaster(decoded, reading.size) : decoded, { checkpoint })
     } catch (err) {
+      if (err instanceof SealedSizeMismatch) throw new Error(err.message)
       // a cancellation is not an undecodable drawing
       if ((err as { name?: unknown }).name === 'AbortError') throw err
       builder.unresolved(`the raster of asset ${asset.id}`, `the bytes could not be decoded: ${(err as Error).message}`, 'MISSING', asset.id)
       skipped.push({ assetId: asset.id, reason: `decode failed: ${(err as Error).message}` })
       continue
     }
-    // The frame carries the size the BYTES have. A package whose recorded
-    // decoded size disagrees with the pixels is a package that was sealed
-    // wrong, and the analyzer is the wrong place to paper over it.
-    if (prepared.size.width !== variant.decoded.width || prepared.size.height !== variant.decoded.height) {
-      throw new Error(`asset ${asset.id} is sealed as ${variant.decoded.width}x${variant.decoded.height} but its bytes decode to ${prepared.size.width}x${prepared.size.height}`)
-    }
+    // The frame carries the size the sheet is READ at: the bytes' own, or a plan's reading size.
+    if (reading && reading.reduction > 1) readingSizes.push({ assetId: asset.id, decoded: { ...variant.decoded }, readAt: { ...reading.size }, typicalWallPx: reading.typicalWallPx, reduction: reading.reduction })
 
     const frame = builder.declareFrame(asset.id, variant.byteHash, prepared.size, {
       document: roles.document,
@@ -321,7 +335,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     checkpoint.tick()
     if (options.retainPrepared === false) delete analysis.prepared
     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
-    tell({ step: 'DRAWING_READ', asset, observations: analysis.observations })
+    tell({ step: 'DRAWING_READ', asset, observations: analysis.observations, size: prepared.size })
     if (builder.observationCount === before && !analysis.visionAttempted && !perspectiveRefused) {
       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)
     }
@@ -341,5 +355,5 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
   if (!options.vision) builder.unresolved('a vision pass over this package', 'no vision provider was configured for this run; every observation in this graph is from a deterministic extractor', 'NOT_ATTEMPTED')
 
-  return { graph: builder.seal(), assets, vision, traces, skipped, content, contentClassifier: options.content ? { id: options.content.id, modelSha256: options.content.modelSha256, headVersion: CONTENT_HEAD.version } : null }
+  return { graph: builder.seal(), assets, vision, traces, skipped, readingSizes, content, contentClassifier: options.content ? { id: options.content.id, modelSha256: options.content.modelSha256, headVersion: CONTENT_HEAD.version } : null }
 }

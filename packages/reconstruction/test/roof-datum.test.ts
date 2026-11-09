@@ -123,3 +123,56 @@ describe('printedTerrainOf', () => {
     expect(printedTerrainOf(marks([0, 2.8, 7.7]), height(8.02))).toBeUndefined()
   })
 })
+
+describe('v3.51: a single-storey house carries its roof on its only storey\'s walls', () => {
+  const pitch30 = { id: 'metric-spec-roof-angle-b', kind: 'ANGLE', unit: 'deg', value: 30, association: { kind: 'PUBLISHED_SPECIFICATION' } }
+  /** 13.95 × 9.26 m, one storey on ±0.00, 30°, no knee wall printed, the page's building height 6.40 m. */
+  const bungalow = (over: Partial<ApproximateRidgeInput> = {}): ApproximateRidgeInput => ({
+    printedRidgeY: undefined,
+    roof: { kind: 'GABLE', pitchDeg: 30, pitchAuthority: 'PUBLISHED_SPECIFICATION', ridgeAxis: 'X' },
+    body: { x0: 0, x1: 13.95, z0: 0, z1: 9.26 },
+    topFloorY: 0,
+    topFloorPrinted: false,
+    metrics: { evidence: [pitch30] } as unknown as ApproximateRidgeInput['metrics'],
+    publishedFacts: [{ key: 'building_height', value: 6.4, unit: 'm' }],
+    singleStoreyWalls: { heightM: 2.8, printed: false },
+    ...over,
+  })
+
+  it('R = 0 + 2.80 + 4.63·tan 30°, consistent with the published 6.40 m, and named for what it stands on', () => {
+    const r = approximateRidgeDatum(bungalow())
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.datum.eavesBasis).toBe('SINGLE_STOREY_WALLS')
+    expect(r.datum.eaveY).toBeCloseTo(2.8, 6)
+    expect(r.datum.ridgeY).toBeCloseTo(2.8 + 4.63 * Math.tan((30 * Math.PI) / 180), 5)
+    expect(r.datum.heightMarginM).toBeCloseTo(6.4 - r.datum.ridgeY, 5)
+    expect(r.datum.why).toContain('the walls of its only storey')
+    expect(r.datum.why).toContain('not a printed one')
+    // only the pitch is evidence: no knee wall was read
+    expect(r.datum.evidenceIds).toEqual(['metric-spec-roof-angle-b'])
+  })
+
+  it('counter-case: a house that is not single-storey is never answered this way', () => {
+    const r = approximateRidgeDatum(bungalow({ singleStoreyWalls: undefined }))
+    expect(r.ok).toBe(false)
+    if (!r.ok) expect(r.reason).toBe('the page prints no knee wall')
+  })
+
+  it('counter-case: a printed knee wall stands; the storey\'s walls do not replace it', () => {
+    const r = approximateRidgeDatum(bungalow({ topFloorY: 2.8, metrics: { evidence: [knee(115), pitch30] } as unknown as ApproximateRidgeInput['metrics'], publishedFacts: [{ key: 'building_height', value: 7.3, unit: 'm' }] }))
+    expect(r.ok).toBe(true)
+    if (r.ok) expect(r.datum.eavesBasis).toBe('PRINTED_KNEE_WALL')
+  })
+
+  it('counter-case: a published height the walls and the pitch contradict gives no datum', () => {
+    // too low: the ridge would stand above the whole building; too high: more than terrain and roof explain
+    expect(approximateRidgeDatum(bungalow({ publishedFacts: [{ key: 'building_height', value: 4.9, unit: 'm' }] })).ok).toBe(false)
+    expect(approximateRidgeDatum(bungalow({ publishedFacts: [{ key: 'building_height', value: 8.4, unit: 'm' }] })).ok).toBe(false)
+  })
+
+  it('counter-case: walls that are not a storey\'s give no datum', () => {
+    expect(approximateRidgeDatum(bungalow({ singleStoreyWalls: { heightM: 1.2, printed: true } })).ok).toBe(false)
+    expect(approximateRidgeDatum(bungalow({ singleStoreyWalls: { heightM: 5.5, printed: true } })).ok).toBe(false)
+  })
+})

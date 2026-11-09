@@ -15,11 +15,12 @@
  * each job an empty cache of its own, so no job ever reads another's bytes.
  */
 import { stableJson } from '@buildapp/source-common'
+import { frameRasters } from '@buildapp/source-cv'
 import type { Checkpoint } from '@buildapp/source-common'
 import { createCheckpoint } from './checkpoint.js'
 import { assessModel, printedDatumsOf } from './assessment/index.js'
 import type { AnalysisPhaseId, AnalysisTelemetry, PhaseStats } from './checkpoint.js'
-import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
+import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant, startDecoders } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePackage } from '@buildapp/source-package'
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
 import type { ContentVerdict, ImageEmbedder } from '@buildapp/source-analyzer'
@@ -55,7 +56,7 @@ import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.8.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.9.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -192,6 +193,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   const now = options.now ?? (() => new Date())
   const clock = options.clock ?? (() => performance.now())
   const startedAt = now().toISOString()
+  // a sealed package may carry a vector sheet: its rasteriser starts through a promise (source-package/image.ts)
+  await startDecoders()
   const t0 = clock()
   let mark = t0
   const lap = (): number => {
@@ -227,7 +230,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   // because a later stage could not use it)
   let contentSoFar: ContentVerdict[] | undefined
   let metricsSoFar: MetricEvidenceSet | undefined
-  const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
+  // each picture at its frame's size: a plan sheet read at a reading size is handed on at that size (source-cv/reading-size.ts)
+  const rasterCache = frameRasters()
+  const sheetSizes = new Map<string, { width: number; height: number }>()
 
   const liveView = liveEmitter(options.live)
   try {
@@ -335,7 +340,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         ...(options.content ? { content: options.content } : {}),
         ...(signal ? { signal } : {}),
         onSheet: (e) => {
-          const sheet = sheetOf(e.asset)
+          if (e.step === 'DRAWING_READ') sheetSizes.set(e.asset.id, e.size)
+          const sheet = sheetOf(e.asset, sheetSizes.get(e.asset.id))
           if (e.step === 'CONTENT_CHECK') liveView.emit({ step: 'CONTENT_CHECK', stage: 'EXTRACTING_OBSERVATIONS', sheet, detail: 'what this picture shows' })
           else if (e.step === 'CONTENT_REFUSED') {
             liveView.counts.imagesRefused += 1
@@ -353,6 +359,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       })
       graph = analysis.graph
       contentVerdicts = analysis.content
+      if (analysis.readingSizes.length > 0) trace.record('EXTRACTING_OBSERVATIONS', 'PLAN_SHEETS', 'DEGRADED', { reduced: analysis.readingSizes.length, maxTypicalWallPx: Math.max(...analysis.readingSizes.map((r) => r.typicalWallPx)), maxReduction: Math.max(...analysis.readingSizes.map((r) => r.reduction)) }, { detail: analysis.readingSizes.map((r) => `${r.assetId}: drawn at ${r.decoded.width}×${r.decoded.height} px with walls about ${r.typicalWallPx} px thick, finer than the plan readers' measured range; read at ${r.readAt.width}×${r.readAt.height} px`).join('; ') })
       skippedAssets = analysis.skipped
       contentClassifier = analysis.contentClassifier
       const live = vision.provider.id !== 'vision.none' && vision.available() && analysis.vision.attempted > 0
@@ -363,6 +370,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       visionProvider = live ? `${vision.provider.id}/${vision.provider.model}` : null
     }
     graphSoFar = graph
+    for (const f of graph.coordinateFrames) sheetSizes.set(f.assetId, f.size)
+    rasterCache.useFrames(graph.coordinateFrames)
     contentSoFar = contentVerdicts
     if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0 && askPixels) {
       const read: Record<string, number> = {}
@@ -442,10 +451,10 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         onFrame: (e) => {
           const asset = pkg.assets.find((a) => a.id === e.frame.assetId)
           if (!asset) return
-          if (e.phase === 'START') return liveView.emit({ step: 'READING_NUMBERS', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset), detail: 'reading the numbers printed on this sheet' })
+          if (e.phase === 'START') return liveView.emit({ step: 'READING_NUMBERS', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset, sheetSizes.get(asset.id)), detail: 'reading the numbers printed on this sheet' })
           liveView.counts.ocrCandidates += e.tokens.length
           liveView.counts.measurementsRead += e.evidence.length
-          liveView.emit({ step: 'NUMBERS_READ', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset), detail: `${e.tokens.length} text candidate${e.tokens.length === 1 ? '' : 's'}, ${e.evidence.length} reading${e.evidence.length === 1 ? '' : 's'} bound to a line or a callout`, marks: [...evidenceMarks(e.evidence, () => 'READ'), ...tokenMarks(e.tokens, e.evidence)] })
+          liveView.emit({ step: 'NUMBERS_READ', stage: 'EXTRACTING_OBSERVATIONS', sheet: sheetOf(asset, sheetSizes.get(asset.id)), detail: `${e.tokens.length} text candidate${e.tokens.length === 1 ? '' : 's'}, ${e.evidence.length} reading${e.evidence.length === 1 ? '' : 's'} bound to a line or a callout`, marks: [...evidenceMarks(e.evidence, () => 'READ'), ...tokenMarks(e.tokens, e.evidence)] })
         },
       })
     } finally {
@@ -529,7 +538,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
           const r = used.get(e.id)
           return !r ? 'READ' : r.disposition === 'USED_IN_MODEL' || r.disposition === 'USED_AS_CORROBORATION' ? 'ACCEPTED' : r.disposition === 'UNRESOLVED' ? 'READ' : 'REJECTED'
         }
-        liveView.emit({ step: 'BUILT_FROM', stage: 'BUILDING_MODEL', sheet: sheetOf(asset), detail: planIds.has(f.id) ? 'the plan the walls were built from: each reading as the model used or refused it' : 'this sheet’s readings as the model used or refused them', marks: evidenceMarks(ev, status, (e) => elementOfFeature(used.get(e.id)?.featureId)) })
+        liveView.emit({ step: 'BUILT_FROM', stage: 'BUILDING_MODEL', sheet: sheetOf(asset, sheetSizes.get(asset.id)), detail: planIds.has(f.id) ? 'the plan the walls were built from: each reading as the model used or refused it' : 'this sheet’s readings as the model used or refused them', marks: evidenceMarks(ev, status, (e) => elementOfFeature(used.get(e.id)?.featureId)) })
       }
     }
 
@@ -603,7 +612,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       ...(reconstruction.wallReconciliation ? { wallReconciliation: reconstruction.wallReconciliation } : {}),
       metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
       extentWeak: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.extentWeak,
-      ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM } } : {}),
+      ...(reconstruction.roofDatum ? { approximateRoofDatum: { ridgeY: reconstruction.roofDatum.ridgeY, buildingHeightM: reconstruction.roofDatum.buildingHeightM, eavesBasis: reconstruction.roofDatum.eavesBasis } } : {}),
       ...(reconstruction.partialPreview ? { partialPreview: { failure: reconstruction.partialPreview.failures[0], missing: reconstruction.partialPreview.skipped.filter((x) => x.type !== 'setEvidence').length, basis: reconstruction.partialPreview.basis, ...(reconstruction.partialPreview.missingBodies ? { missingBodies: reconstruction.partialPreview.missingBodies.map((b) => b.id) } : {}), ...(reconstruction.partialPreview.layoutBlocking ? { layoutBlocking: reconstruction.partialPreview.layoutBlocking.map((b) => b.code) } : {}) } } : {}),
       ...(reconstruction.heights.measured ? {} : { heightAssumedM: reconstruction.heights.assumedStoreyHeightM }),
     })
@@ -762,9 +771,10 @@ export const stableResultJson = (value: unknown): string => stableJson(value)
 // ---------------------------------------------------------------------------
 // SHAPE-LIVE-01: the marks a live preview draws, from the records the run already keeps
 // ---------------------------------------------------------------------------
-function sheetOf(asset: SourceAsset): LiveSheet {
+/** `readAt`: the frame the sheet's marks are in, once it is known — a plan's reading size is not always its bytes' size. */
+function sheetOf(asset: SourceAsset, readAt?: { width: number; height: number }): LiveSheet {
   const v = selectedVariant(asset)
-  return { assetId: asset.id, url: v.url, byteHash: v.byteHash, width: v.decoded.width, height: v.decoded.height, document: asset.roles.document }
+  return { assetId: asset.id, url: v.url, byteHash: v.byteHash, width: (readAt ?? v.decoded).width, height: (readAt ?? v.decoded).height, document: asset.roles.document }
 }
 
 const MARKED_OBSERVATIONS = new Set(['OPENING', 'WINDOW', 'DOOR'])

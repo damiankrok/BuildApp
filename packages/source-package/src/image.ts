@@ -13,6 +13,12 @@
  * default upload format of common publishing platforms; a plan served only as
  * WebP was otherwise a page "without a plan") are supported; anything else is
  * an honest failure rather than a guess.
+ *
+ * SVG (v3.51): a publisher that draws its plans as vectors serves no raster of them at all. An SVG has no pixels of
+ * its own, so this layer gives it some, by one fixed rule (`svgRasterSize`): the size the file states, brought into
+ * the range a plan sheet is read at. `probeImage` and `decodeImage` agree on that size, so everything downstream
+ * measures a raster like any other. Rendering is resvg's (`@resvg/resvg-wasm`, MPL-2.0): no script runs, nothing is
+ * fetched, and text set in a font (not outlined) is not drawn — no font is assumed.
  */
 import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
@@ -21,9 +27,10 @@ import jpeg from 'jpeg-js'
 import { PNG } from 'pngjs'
 import { GifReader } from 'omggif'
 import webpDecoderFactory from '@jsquash/webp/codec/dec/webp_dec.js'
+import { Resvg, initWasm as startResvg } from '@resvg/resvg-wasm'
 import type { PixelSize } from '@buildapp/source-common'
 
-export type ImageFormat = 'jpeg' | 'png' | 'gif' | 'webp' | 'bmp'
+export type ImageFormat = 'jpeg' | 'png' | 'gif' | 'webp' | 'bmp' | 'svg'
 
 export type ImageProbe = { format: ImageFormat; size: PixelSize }
 
@@ -115,7 +122,53 @@ export function probeImage(bytes: Uint8Array): ImageProbe | null {
     }
     return null
   }
+  const svg = svgIntrinsicSize(bytes)
+  if (svg) return { format: 'svg', size: svgRasterSize(svg.width, svg.height) }
+
   return null
+}
+
+/** An SVG larger than this is not a drawing sheet; it is refused before anything parses it. */
+export const SVG_MAX_BYTES = 8 * 1024 * 1024
+/** The long side of the raster an SVG is given: its own stated size, kept within what a sheet is read at. */
+export const SVG_MIN_LONG_SIDE_PX = 1600
+/** An SVG that states a long side under this is an icon or a mark, not a sheet. */
+export const SVG_MIN_STATED_LONG_SIDE = 256
+export const SVG_MAX_LONG_SIDE_PX = 2400
+
+/** The size an SVG states for itself: `width` × `height` in user units or px, else its `viewBox`. */
+export function svgIntrinsicSize(bytes: Uint8Array): PixelSize | null {
+  if (bytes.length > SVG_MAX_BYTES) return null
+  // the root element is at the top: a declaration, a doctype and comments may precede it, nothing else
+  const head = new TextDecoder('utf-8').decode(bytes.subarray(0, 4096)).replace(/^\uFEFF/, '')
+  const root = /^\s*(?:<\?xml[^>]*\?>\s*)?(?:<!--[\s\S]*?-->\s*)*(?:<!DOCTYPE[^>]*>\s*)?(?:<!--[\s\S]*?-->\s*)*<svg\b([^>]*)>/i.exec(head)
+  if (!root) return null
+  const attr = (name: string): string | undefined => new RegExp(`(?:^|\\s)${name}\\s*=\\s*["']([^"']*)["']`, 'i').exec(root[1])?.[1]
+  const length = (v: string | undefined): number | undefined => {
+    const m = v === undefined ? null : /^\s*(\d+(?:\.\d+)?)\s*(?:px)?\s*$/i.exec(v)
+    const n = m ? Number(m[1]) : NaN
+    return Number.isFinite(n) && n > 0 ? n : undefined
+  }
+  let width = length(attr('width'))
+  let height = length(attr('height'))
+  if (width === undefined || height === undefined) {
+    const box = (attr('viewBox') ?? '').trim().split(/[\s,]+/).map(Number)
+    if (box.length !== 4 || !box.every(Number.isFinite) || !(box[2] > 0) || !(box[3] > 0)) return null
+    width = box[2]
+    height = box[3]
+  }
+  // an icon is drawn at icon size: enlarged to a sheet it is a blur, not a drawing
+  if (Math.max(width, height) < SVG_MIN_STATED_LONG_SIDE) return null
+  // a sliver or a banner is not a sheet, and its raster would be all margin
+  if (Math.max(width, height) / Math.min(width, height) > 8) return null
+  return { width, height }
+}
+
+/** The raster an SVG of a stated size is given: the same aspect, its long side within the reading range. */
+export function svgRasterSize(width: number, height: number): PixelSize {
+  const long = Math.max(width, height)
+  const scale = Math.min(SVG_MAX_LONG_SIDE_PX, Math.max(SVG_MIN_LONG_SIDE_PX, long)) / long
+  return { width: Math.max(1, Math.round(width * scale)), height: Math.max(1, Math.round(height * scale)) }
 }
 
 /** An RGBA raster: `data` is width*height*4 bytes, row-major from the top-left. */
@@ -161,6 +214,7 @@ function decodeByFormat(bytes: Uint8Array, format: ImageFormat): Raster {
       if (!out) throw new Error('libwebp refused the bitstream')
       return { width: out.width, height: out.height, data: new Uint8ClampedArray(out.data.buffer, out.data.byteOffset, out.data.byteLength) }
     }
+    if (format === 'svg') return rasteriseSvg(bytes)
     if (format === 'gif') {
       const reader = new GifReader(Buffer.from(bytes) as unknown as Uint8Array)
       const data = new Uint8ClampedArray(reader.width * reader.height * 4)
@@ -221,8 +275,62 @@ function webpDecoder(): NonNullable<typeof webp> {
   return webp
 }
 
+/** resvg's WebAssembly as `@resvg/resvg-wasm` ships it; beside a bundle under this name (`apps/local-analyzer/build.mjs`). */
+export const SVG_WASM_FILE = 'resvg.wasm'
+
+function svgWasmBytes(): Uint8Array {
+  if (import.meta.url.startsWith('file:')) {
+    const beside = fileURLToPath(new URL(`./${SVG_WASM_FILE}`, import.meta.url))
+    if (existsSync(beside)) return readFileSync(beside)
+  }
+  return readFileSync(createRequire(import.meta.url).resolve('@resvg/resvg-wasm/index_bg.wasm'))
+}
+
+let svgStarting: Promise<void> | undefined
+let svgState: { ready: boolean; failure?: string } = { ready: false }
+
+/**
+ * Start the decoders that cannot start synchronously (resvg's WebAssembly instantiates through a promise). Called
+ * once at the top of an acquisition and of an analysis; idempotent. It never rejects: a runtime in which the
+ * rasteriser cannot start still reads every raster format, and an SVG there fails to decode with the reason kept.
+ */
+export function startDecoders(): Promise<void> {
+  svgStarting ??= (async () => {
+    try {
+      const { Module } = (globalThis as unknown as { WebAssembly: WasmRuntime }).WebAssembly
+      await startResvg(new Module(svgWasmBytes()) as unknown as Parameters<typeof startResvg>[0])
+      svgState = { ready: true }
+    } catch (e) {
+      svgState = { ready: false, failure: (e as Error).message }
+    }
+  })()
+  return svgStarting
+}
+
+function rasteriseSvg(bytes: Uint8Array): Raster {
+  if (!svgState.ready) throw new Error(svgState.failure ? `the SVG rasteriser did not start: ${svgState.failure}` : 'the SVG rasteriser has not been started in this process (startDecoders)')
+  const intrinsic = svgIntrinsicSize(bytes)
+  if (!intrinsic) throw new Error('the SVG states no size')
+  const size = svgRasterSize(intrinsic.width, intrinsic.height)
+  const resvg = new Resvg(bytes, { fitTo: { mode: 'width', value: size.width }, background: '#ffffff', font: { loadSystemFonts: false } })
+  const rendered = resvg.render()
+  try {
+    // resvg rounds the height its own way; the raster is the probed size exactly, a missing last row left white
+    const data = new Uint8ClampedArray(size.width * size.height * 4).fill(255)
+    const rows = Math.min(size.height, rendered.height)
+    const cols = Math.min(size.width, rendered.width)
+    if (Math.abs(rendered.height - size.height) > 2 || rendered.width !== size.width) throw new Error(`rendered ${rendered.width}x${rendered.height}, expected ${size.width}x${size.height}`)
+    const pixels = rendered.pixels
+    for (let y = 0; y < rows; y += 1) data.set(pixels.subarray(y * rendered.width * 4, y * rendered.width * 4 + cols * 4), y * size.width * 4)
+    return { width: size.width, height: size.height, data }
+  } finally {
+    rendered.free()
+    resvg.free()
+  }
+}
+
 /** Media type implied by the actual bytes, for cross-checking a server's claim. */
-export const mediaTypeOfFormat = (format: ImageFormat): string => `image/${format}`
+export const mediaTypeOfFormat = (format: ImageFormat): string => (format === 'svg' ? 'image/svg+xml' : `image/${format}`)
 
 /** A 1×1 lossless WebP: the smallest file that exercises the decoder end to end. */
 const WEBP_PROBE = 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA=='
@@ -231,11 +339,19 @@ const WEBP_PROBE = 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA=='
  * Can THIS runtime decode each format that needs more than plain JavaScript? Run where the code actually runs (the
  * bundle on the phone, not the checkout): a decoder that cannot start there is a publisher format silently lost.
  */
-export function decoderSelfCheck(): { webp: boolean; detail?: string } {
-  try {
-    const raster = decodeImage(Uint8Array.from(Buffer.from(WEBP_PROBE, 'base64')))
-    return { webp: raster.width === 1 && raster.height === 1 }
-  } catch (e) {
-    return { webp: false, detail: (e as Error).message }
+export async function decoderSelfCheck(): Promise<{ webp: boolean; svg: boolean; detail?: string }> {
+  await startDecoders()
+  const details: string[] = []
+  const attempt = (bytes: Uint8Array, width: number, height: number): boolean => {
+    try {
+      const raster = decodeImage(bytes)
+      return raster.width === width && raster.height === height
+    } catch (e) {
+      details.push((e as Error).message)
+      return false
+    }
   }
+  const webp = attempt(Uint8Array.from(Buffer.from(WEBP_PROBE, 'base64')), 1, 1)
+  const svg = attempt(new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1000"><rect width="2000" height="1000" fill="#000"/></svg>'), 2000, 1000)
+  return { webp, svg, ...(details.length > 0 ? { detail: details.join('; ') } : {}) }
 }

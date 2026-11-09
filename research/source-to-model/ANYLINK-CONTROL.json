@@ -1,0 +1,15 @@
+{
+  "schema": "buildapp.source-to-model.anylink/1",
+  "frozenAt": "2026-11-09",
+  "purpose": "CONTROL for the ANY-LINK slice: the general rules of ANY-LINK-2 (pictures behind extension-less addresses, SVG plans, galleries in structured data, the reading size of a plan sheet, the scale from published dimensions, a roof from a stated pitch) were developed on the six pages of ANYLINK-SET.json. These six pages were never fetched, opened or run before this file was written.",
+  "selection": "one further project per publisher of ANYLINK-SET.json: in the publisher's listing page as saved on 2026-11-09, the individual project link that follows the DEV page's link in markup order; for dobredomy.pl, whose saved listing does not contain the DEV page, the first individual project link. Chosen from the saved markup by address pattern alone.",
+  "disclosure": "Same publishers as the DEV set, other houses: this measures whether a rule holds on another page of a known publisher, not on an unknown publisher. Not a statistical sample. Run once on the frozen final revision; results are reported whatever they are, and no rule is changed on them within this delivery.",
+  "items": [
+    { "publisher": "extradom.pl", "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229" },
+    { "publisher": "lipinscy.pl", "url": "https://lipinscy.pl/projekt/lancaster-ii/" },
+    { "publisher": "dobredomy.pl", "url": "https://www.dobredomy.pl/projekt/dunkan/" },
+    { "publisher": "domoweklimaty.pl", "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord/" },
+    { "publisher": "houseplans.com", "url": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069" },
+    { "publisher": "architecturaldesigns.com", "url": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf" }
+  ]
+}

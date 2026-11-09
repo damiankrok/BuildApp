@@ -20,6 +20,12 @@
  * shorter span, which is geometry, not a choice:
  *
  *   R = F + K + min(w, d) / 2 · tan(pitch)
+ *
+ * v3.51 (ANY-LINK): a single-storey house has no knee wall to print — its roof sits on the walls of its only storey.
+ * There the storey's own wall height stands where the knee wall does (K = the storey's height as the solver has it,
+ * printed or the named convention), and the same published building height checks the result the same way. A house
+ * with a storey above the ground one, or an attic, is never answered this way: its eaves are a knee wall the page did
+ * not print.
  */
 import { round6 } from '@buildapp/source-common'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
@@ -43,11 +49,18 @@ export type ApproximateRidgeInput = {
   publishedFacts: ReadonlyArray<{ key: string; value: number; unit: string }>
   /** A terrain datum the drawings print (negative, metres), when one was read. */
   printedTerrainY?: number
+  /**
+   * v3.51: the wall height of the top storey when it is the house's ONLY storey (no storey above the ground one, no
+   * attic plan), and whether the sources print it. Absent for every other house.
+   */
+  singleStoreyWalls?: { heightM: number; printed: boolean }
 }
 
 export type ApproximateRidge = {
   ridgeY: number
   eaveY: number
+  /** What the eaves stand on above the top storey's floor: a printed knee wall, or (v3.51) a single storey's own walls. */
+  eavesBasis: 'PRINTED_KNEE_WALL' | 'SINGLE_STOREY_WALLS'
   kneeWallM: number
   buildingHeightM: number
   halfSpanM: number
@@ -61,11 +74,13 @@ export type ApproximateRidgeResult = { ok: true; datum: ApproximateRidge } | { o
 
 const PITCH_AUTHORITIES = new Set(['PUBLISHED_SPECIFICATION', 'PRINTED_ANGLE'])
 
+const NO_KNEE_WALL = 'the page prints no knee wall'
+
 /** The one knee-wall height the page's specification prints, in metres; several different ones are no answer. */
 function kneeWallOf(metrics: Pick<MetricEvidenceSet, 'evidence'>): { m: number; id: string } | { error: string } {
   const read = metrics.evidence.filter((e) => e.kind === 'LINEAR_DIMENSION' && e.association.kind === 'PUBLISHED_SPECIFICATION' && e.id.startsWith('metric-spec-knee-wall-'))
   const values = [...new Set(read.map((e) => round6(e.unit === 'cm' ? e.value / 100 : e.unit === 'mm' ? e.value / 1000 : e.value)))]
-  if (values.length === 0) return { error: 'the page prints no knee wall' }
+  if (values.length === 0) return { error: NO_KNEE_WALL }
   if (values.length > 1) return { error: `the page prints ${values.length} different knee walls (${values.join(', ')} m)` }
   if (values[0] < 0.3 || values[0] > 2) return { error: `a knee wall of ${values[0]} m is not one` }
   return { m: values[0], id: read[0].id }
@@ -78,8 +93,13 @@ export function approximateRidgeDatum(input: ApproximateRidgeInput): Approximate
   if (roof.pitchDeg === undefined || !PITCH_AUTHORITIES.has(roof.pitchAuthority ?? '')) return { ok: false, reason: 'no pitch the publisher or a drawing prints' }
   if (roof.pitchDeg < 15 || roof.pitchDeg > 60) return { ok: false, reason: `a pitch of ${roof.pitchDeg}° is outside what this rule answers` }
   if (roof.kind === 'GABLE' && !roof.ridgeAxis) return { ok: false, reason: 'the layout chose no ridge axis' }
-  const knee = kneeWallOf(input.metrics)
-  if ('error' in knee) return { ok: false, reason: knee.error }
+  const printedKnee = kneeWallOf(input.metrics)
+  const walls = input.singleStoreyWalls
+  // a single storey's roof sits on that storey's walls: they stand where a knee wall would, when the page prints none
+  const storeyWalls = 'error' in printedKnee && printedKnee.error === NO_KNEE_WALL && walls && walls.heightM >= 2.2 && walls.heightM <= 4 ? walls : undefined
+  if ('error' in printedKnee && !storeyWalls) return { ok: false, reason: printedKnee.error }
+  const knee = 'error' in printedKnee ? { m: round6((storeyWalls as NonNullable<typeof storeyWalls>).heightM), id: undefined } : printedKnee
+  const eavesBasis: ApproximateRidge['eavesBasis'] = storeyWalls ? 'SINGLE_STOREY_WALLS' : 'PRINTED_KNEE_WALL'
   const heights = input.publishedFacts.filter((f) => f.key === 'building_height' && f.unit === 'm')
   if (heights.length !== 1) return { ok: false, reason: heights.length === 0 ? 'the page prints no building height' : 'the page prints more than one building height' }
   const H = heights[0].value
@@ -103,9 +123,9 @@ export function approximateRidgeDatum(input: ApproximateRidgeInput): Approximate
   }
   const pitchId = input.metrics.evidence.find((e) => e.kind === 'ANGLE' && e.association.kind === 'PUBLISHED_SPECIFICATION')?.id
   const why =
-    `no section prints a ridge: taken at ${ridgeY} m from the top storey's floor ${input.topFloorY} m${input.topFloorPrinted ? '' : ' (a conventional storey height, not printed)'} + the printed knee wall ${knee.m} m + ${half} m × tan ${roof.pitchDeg}°${roof.kind === 'HIP' ? ' (a hip rises over half its shorter span)' : ''}; ` +
+    `no section prints a ridge: taken at ${ridgeY} m from the top storey's floor ${input.topFloorY} m${input.topFloorPrinted ? '' : ' (a conventional storey height, not printed)'} + ${storeyWalls ? `the walls of its only storey ${knee.m} m${storeyWalls.printed ? '' : ' (a conventional storey height, not printed)'}` : `the printed knee wall ${knee.m} m`} + ${half} m × tan ${roof.pitchDeg}°${roof.kind === 'HIP' ? ' (a hip rises over half its shorter span)' : ''}; ` +
     `the published building height ${H} m leaves ${margin} m for terrain${input.printedTerrainY === undefined ? ' (not read)' : ''} and roof build-up (assumed nil at the eaves), which is consistent — an approximate datum for rendering, not a printed one`
-  return { ok: true, datum: { ridgeY, eaveY, kneeWallM: knee.m, buildingHeightM: H, halfSpanM: half, heightMarginM: margin, evidenceIds: [knee.id, ...(pitchId ? [pitchId] : [])], why } }
+  return { ok: true, datum: { ridgeY, eaveY, eavesBasis, kneeWallM: knee.m, buildingHeightM: H, halfSpanM: half, heightMarginM: margin, evidenceIds: [...(knee.id ? [knee.id] : []), ...(pitchId ? [pitchId] : [])], why } }
 }
 
 /**

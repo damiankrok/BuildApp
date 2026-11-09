@@ -153,6 +153,9 @@ export function ridgeAxisFromRise(
   return { axis: best.axis, predicted: round6(best.predicted), residual: round6(best.residual), ambiguous: scored.length > 1 && scored[1].residual <= tolerance }
 }
 
+/** A stated pitch at or above this is a pitched roof's, not a flat roof's fall. */
+export const PITCHED_ROOF_MIN_DEG = 15
+
 /**
  * A roof system for every mass.
  *
@@ -224,6 +227,21 @@ export function inferRoofSystems(options: RoofInferenceOptions): RoofInference {
     if (roofKind === 'UNKNOWN' && rise !== undefined && rise <= 0.4) {
       roofKind = 'FLAT'
       authority = 'SECTION'
+    }
+    // v3.51 (ANY-LINK): a stated pitch says the roof is pitched even where nothing names its kind and no section
+    // measures a rise. Which pitched roof is not stated: a gable is taken, the commonest, and named as the convention
+    // it is — a roofless box under a roof the page gives an angle for is the worse reading.
+    let kindAssumed = false
+    if (roofKind === 'UNKNOWN' && rise === undefined && pitch && pitch.authority === 'PUBLISHED_SPECIFICATION' && pitch.evidence.value >= PITCHED_ROOF_MIN_DEG) {
+      roofKind = 'GABLE'
+      kindAssumed = true
+      unresolved.push({
+        id: stableId('gap', `roof-kind-${mass.id}`, { massId: mass.id }),
+        what: `the kind of roof over ${mass.id}`,
+        reason: `the page states a pitch of ${pitch.evidence.value}° and nothing says whether the roof is a gable, a hip or another: taken as a gable, by convention`,
+        status: 'AMBIGUOUS',
+        frameIds: [],
+      })
     }
 
     let ridgeAxis: 'X' | 'Z' | undefined
@@ -309,7 +327,7 @@ export function inferRoofSystems(options: RoofInferenceOptions): RoofInference {
       evidenceIds: [...(pitch ? [pitch.evidence.id] : []), ...levels.evidenceIds],
       confidence: round6(Math.min(0.95, 0.4 + rankOfAuthority(authority) * 0.1 + (ridgeAxis ? 0.1 : 0))),
       why: [
-        kind ? `${kind.finding.why}` : 'no specification names the roof kind',
+        kind ? `${kind.finding.why}` : kindAssumed ? 'no source names the roof kind: a gable is assumed for the stated pitch' : 'no specification names the roof kind',
         pitch ? `pitch printed as "${pitch.evidence.rawText}"` : 'no printed pitch',
         ridgeWhy,
       ]

@@ -10,4 +10,4 @@ export { runLocalAnalysis } from './local.js'
 export { RECOGNISER_WORKER_FILE, bundledRecogniser, localWiring } from './wiring.js'
 export { installTextAdapter, nfd, rootCompare, runtimeHasIcu } from './text.js'
 // v3.51: lets a launcher (and the bundle's own test) ask whether the decoders that need WebAssembly start in this runtime
-export { decoderSelfCheck, WEBP_WASM_FILE } from '@buildapp/source-package'
+export { decoderSelfCheck, startDecoders, SVG_WASM_FILE, WEBP_WASM_FILE } from '@buildapp/source-package'

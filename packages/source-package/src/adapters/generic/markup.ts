@@ -58,7 +58,7 @@ export type PageFacts = {
 }
 
 const ATTR = (tag: string, name: string): string | undefined => {
-  const m = new RegExp(`\\b${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
+  const m = new RegExp(`(?<![\\w:-])${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
   return m ? decodeEntities(m[2] ?? m[3] ?? m[4] ?? '') : undefined
 }
 

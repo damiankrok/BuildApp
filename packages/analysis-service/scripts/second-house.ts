@@ -44,12 +44,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { stableJson } from '@buildapp/source-common'
 import { serializeModel } from '@buildapp/model'
-import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache, genericProjectPageAdapter } from '@buildapp/source-package'
+import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache, genericProjectPageAdapter, startDecoders } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
 import { PLAN_OVERLAY_LAYERS, isReconstructionFailure, levelsFrom, reconstructV2, renderPlanOverlay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, SolverTraceEvent } from '@buildapp/reconstruction'
+import { frameRasters } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
 import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, identityOf, runAnalysis, sourceSummaryOf, summaryOf, toAnalysisError } from '../src/index.js'
 import type { AnalysisTelemetry, AnalysisTrace, PhaseStats } from '../src/index.js'
@@ -97,6 +98,7 @@ function writeOverlays(out: string, plans: PlanDiagnosticsReport, rasterOf: (has
 
 export async function secondHouse(argv: readonly string[], log: (line: string) => void = (l) => process.stdout.write(`${l}\n`)): Promise<'COMPLETED' | 'FAILED' | 'SOURCE_OUTAGE'> {
   const out = value(argv, 'out') ?? join(process.cwd(), '.cache', 'second-house')
+  await startDecoders()
   const cache = fileByteCache(value(argv, 'cache') ?? join(process.cwd(), '.cache', 'source-bytes'))
   mkdirSync(out, { recursive: true })
   const write = (name: string, data: unknown): void => writeFileSync(join(out, name), `${stableJson(data)}\n`)
@@ -107,7 +109,8 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
   // 005K, research only: `--drawn-gap-rule ON` measures the experimental boundary rule; the product never sets it
   const drawnGapRule = value(argv, 'drawn-gap-rule') === 'ON' ? ('ON' as const) : ('OFF' as const)
   if (drawnGapRule === 'ON') log('drawn-gap rule: ON (005K experiment)')
-  const rasters = new Map<string, Raster | undefined>()
+  // each picture at its frame's size (a plan read at a reading size is resampled to it): see source-cv/reading-size.ts
+  const rasters = frameRasters()
   const rasterOf = (hash: string): Raster | undefined => rasters.get(hash)
   const loadRasters = async (pkg: SourcePackage): Promise<void> => {
     for (const asset of pkg.assets) {
@@ -128,6 +131,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     if (!packagePath || !graphPath) throw new Error('--metrics needs --package and --graph')
     const pkg = SourcePackageSchema.parse(JSON.parse(readFileSync(packagePath, 'utf8')))
     const graph = JSON.parse(readFileSync(graphPath, 'utf8')) as SourceObservationGraph
+    rasters.useFrames(graph.coordinateFrames)
     const metrics = JSON.parse(readFileSync(metricsPath, 'utf8')) as MetricEvidenceSet
     await loadRasters(pkg)
     const dropped = new Set((value(argv, 'drop-frames') ?? '').split(',').filter(Boolean))
@@ -236,6 +240,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       progress: process.env.PROGRESS ? (e) => process.stderr.write(`  ${(e.progress * 100).toFixed(0).padStart(3)}% ${e.stage}${e.detail ? ` — ${e.detail}` : ''}\n`) : undefined,
     })
     await loadRasters(run.pkg)
+    rasters.useFrames(run.graph.coordinateFrames)
     write('source-package.json', run.pkg)
     write('observation-graph.json', run.graph)
     write('metric-evidence.json', run.metrics)
@@ -279,6 +284,8 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     if (bundle.overlay) writeFileSync(join(out, bundle.overlay.name), bundle.overlay.png)
     if (e.attachments?.plans) {
       if (pkgIn) await loadRasters(pkgIn)
+      else if (e.attachments.pkg) await loadRasters(e.attachments.pkg)
+      if (e.attachments.graph) rasters.useFrames(e.attachments.graph.coordinateFrames)
       writeOverlays(out, e.attachments.plans, rasterOf)
     }
     log(`failed: ${e.code} / ${e.failure().reasonCode ?? '-'} in ${e.failure().stage ?? '?'}: ${e.message}`)

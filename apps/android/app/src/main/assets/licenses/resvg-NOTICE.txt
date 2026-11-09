@@ -1,0 +1,17 @@
+resvg — SVG rendering library (WebAssembly build)
+
+Shipped in this app as assets/local-analyzer/resvg.wasm, the unmodified `index_bg.wasm` of the npm package
+@resvg/resvg-wasm 2.6.2 (SHA-256 22bf6e9f9a100d972da0411a69c5ba504367fc1fa87b3b64e3f35e53926d2d70), with that
+package's JavaScript loader bundled into analyzer.mjs. Used, on the device only, to rasterise a floor plan a
+publisher serves as an SVG file. Nothing is downloaded at run time.
+
+Licence: Mozilla Public License, version 2.0.
+
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+The Source Code Form of the covered software is available from its authors:
+  resvg      https://github.com/RazrFalcon/resvg
+  resvg-js   https://github.com/yisibl/resvg-js   (the WebAssembly packaging, version 2.6.2)
+
+No file of the covered software was modified.

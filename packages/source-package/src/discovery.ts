@@ -14,7 +14,7 @@
  */
 
 /** How an address was found. Ordered from most to least trustworthy as a statement of what the asset IS. */
-export type DiscoveryChannel = 'ANCHOR_HREF' | 'FLOOR_PLAN_ATTR' | 'OG_IMAGE' | 'LIGHTBOX_ENDPOINT' | 'IMG_SRCSET' | 'IMG_SRC' | 'IMG_LAZY_ATTR' | 'DOCUMENT_LINK' | 'VARIANT_CONVENTION'
+export type DiscoveryChannel = 'ANCHOR_HREF' | 'FLOOR_PLAN_ATTR' | 'VECTOR_DRAWING' | 'OG_IMAGE' | 'LIGHTBOX_ENDPOINT' | 'STRUCTURED_DATA_IMAGE' | 'IMG_SRCSET' | 'IMG_SRC' | 'IMG_LAZY_ATTR' | 'DOCUMENT_LINK' | 'VARIANT_CONVENTION'
 
 /**
  * How much a channel's copy can be trusted to define what the asset IS —
@@ -30,8 +30,12 @@ export type DiscoveryChannel = 'ANCHOR_HREF' | 'FLOOR_PLAN_ATTR' | 'OG_IMAGE' | 
 export const CHANNEL_TRUST: Record<DiscoveryChannel, number> = {
   ANCHOR_HREF: 90,
   FLOOR_PLAN_ATTR: 85,
+  // a vector drawing the page names as a drawing (v3.51): the publisher's own original, at any size
+  VECTOR_DRAWING: 85,
   OG_IMAGE: 80,
   LIGHTBOX_ENDPOINT: 75,
+  // the pictures the page's structured data lists for its own product (v3.51): full-size originals, without captions
+  STRUCTURED_DATA_IMAGE: 70,
   IMG_SRCSET: 60,
   IMG_SRC: 50,
   IMG_LAZY_ATTR: 45,
@@ -66,7 +70,7 @@ export type DiscoveredCandidate = {
 }
 
 const ATTR = (tag: string, name: string): string | undefined => {
-  const m = new RegExp(`\\b${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
+  const m = new RegExp(`(?<![\\w:-])${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
   if (!m) return undefined
   return decodeEntities(m[2] ?? m[3] ?? m[4] ?? '')
 }
@@ -115,6 +119,28 @@ const IMAGE_EXT = /\.(jpe?g|png|gif|webp|bmp)(\?|#|$)/i
 const DOC_EXT = /\.(pdf)(\?|#|$)/i
 
 export const looksLikeImage = (url: string): boolean => IMAGE_EXT.test(url)
+const VECTOR_EXT = /\.svgz?(\?|#|$)/i
+export const looksLikeVectorImage = (url: string): boolean => VECTOR_EXT.test(url)
+
+/**
+ * An address an image-resizing service serves a picture from without a file extension
+ * (`…/media/424184/source`, `…/image/8841`): http(s), with no extension on its last path segment. Such an address is
+ * a picture only by what exposes it — a NAMED `img`, or a lightbox anchor around one — never by itself: an unnamed
+ * extension-less `img` is how a tracking pixel looks. What it really is, the bytes say once fetched.
+ */
+export function extensionlessAddress(url: string): boolean {
+  try {
+    const u = new URL(url)
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') return false
+    const last = u.pathname.split('/').pop() ?? ''
+    return last !== '' && !/\.[a-z0-9]{1,5}$/i.test(last)
+  } catch {
+    return false
+  }
+}
+
+/** Marks a link as opening its target as a picture in place: the attributes and class names lightbox scripts read. */
+const LIGHTBOX_MARK = /\bdata-(?:fs)?lightbox\b|\bdata-fancybox\b|\bdata-gallery\b|\bdata-pswp-[a-z]+\b|\bdata-lg-size\b|\bdata-zoom(?:-image)?\b|\brel\s*=\s*["']?lightbox|\bclass\s*=\s*["'][^"']*\b(?:lightbox|fancybox|glightbox|photoswipe|image-popup|zoom-image)\b/i
 export const looksLikeDocument = (url: string): boolean => DOC_EXT.test(url)
 
 export type DiscoveryOptions = {
@@ -162,10 +188,13 @@ export function discoverImages(html: string, opts: DiscoveryOptions): Discovered
     }
     // the anchor and the images it wraps are one logical asset
     const hrefAbs = href && href !== 'javascript:;' ? absolutize(href, opts.base) : null
-    const groupKey = hrefAbs && looksLikeImage(hrefAbs) ? `anchor:${hrefAbs}` : innerUrls.length > 0 ? `anchor:${innerUrls[0]}` : undefined
+    const lightboxHref = !!hrefAbs && innerImgs.length > 0 && extensionlessAddress(hrefAbs) && LIGHTBOX_MARK.test(attrs)
+    const groupKey = hrefAbs && (looksLikeImage(hrefAbs) || lightboxHref) ? `anchor:${hrefAbs}` : innerUrls.length > 0 ? `anchor:${innerUrls[0]}` : undefined
 
-    if (hrefAbs && looksLikeImage(hrefAbs)) {
-      push({ url: hrefAbs, channel: 'ANCHOR_HREF', exposedBy: opts.exposedBy, locator: 'a[href]', caption, groupKey })
+    // a lightbox link around a picture, to an address that carries no extension, is still that picture's original
+    const lightboxOriginal = lightboxHref
+    if (hrefAbs && (looksLikeImage(hrefAbs) || lightboxOriginal)) {
+      push({ url: hrefAbs, channel: 'ANCHOR_HREF', exposedBy: opts.exposedBy, locator: lightboxOriginal ? 'a[href][lightbox]' : 'a[href]', caption: caption ?? (lightboxOriginal ? innerImgs.map((im) => ATTR(im[1], 'alt') ?? ATTR(im[1], 'title')).find((t) => !!t && t.trim() !== '') : undefined), groupKey })
       seenInAnchor.add(hrefAbs)
     } else if (hrefAbs && looksLikeDocument(hrefAbs)) {
       push({ url: hrefAbs, channel: 'DOCUMENT_LINK', exposedBy: opts.exposedBy, locator: 'a[href]', caption })
@@ -203,9 +232,11 @@ function imgCandidates(attrs: string, opts: DiscoveryOptions, inheritedCaption: 
   const caption = inheritedCaption ?? ATTR(attrs, 'alt') ?? ATTR(attrs, 'title')
   const declaredWidth = toInt(ATTR(attrs, 'width'))
   const declaredHeight = toInt(ATTR(attrs, 'height'))
+  // an extension-less address counts only on a NAMED picture (see `extensionlessAddress`)
+  const named = !!caption && caption.trim() !== ''
   const add = (url: string | undefined, channel: DiscoveryChannel, locator: string): void => {
     const abs = url ? absolutize(url, opts.base) : null
-    if (abs && looksLikeImage(abs)) out.push({ url: abs, channel, exposedBy: opts.exposedBy, locator, caption, declaredWidth, declaredHeight, groupKey })
+    if (abs && (looksLikeImage(abs) || (named && extensionlessAddress(abs)))) out.push({ url: abs, channel, exposedBy: opts.exposedBy, locator, caption, declaredWidth, declaredHeight, groupKey })
   }
   add(ATTR(attrs, 'src'), 'IMG_SRC', 'img[src]')
   // a plan published only through a bespoke attribute is invisible to any src-only scan
@@ -215,15 +246,17 @@ function imgCandidates(attrs: string, opts: DiscoveryOptions, inheritedCaption: 
   }
   for (const name of LAZY_ATTRS) {
     const v = ATTR(attrs, name)
-    if (v && IMAGE_EXT.test(v)) add(v, 'IMG_LAZY_ATTR', `img[${name}]`)
+    if (v) add(v, 'IMG_LAZY_ATTR', `img[${name}]`)
   }
-  const srcset = ATTR(attrs, 'srcset')
-  if (srcset) {
+  // `data-srcset` is the same list, held back until a script copies it over
+  for (const [attr, locator] of [['srcset', 'img[srcset]'], ['data-srcset', 'img[data-srcset]']] as const) {
+    const srcset = ATTR(attrs, attr)
+    if (!srcset) continue
     // descriptors are a CLAIM about size and are used only for ordering; whether a
     // copy really carries more pixels is settled by decoding it
     for (const entry of srcset.split(',')) {
       const url = entry.trim().split(/\s+/)[0]
-      if (url) add(url, 'IMG_SRCSET', 'img[srcset]')
+      if (url) add(url, 'IMG_SRCSET', locator)
     }
   }
   return out

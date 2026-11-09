@@ -26,7 +26,7 @@
 import { round6, stableId } from '@buildapp/source-common'
 import type { Checkpoint } from '@buildapp/source-common'
 import { CHANNEL_TRUST, type DiscoveredCandidate } from './discovery.js'
-import { DecodeFailed, probeImage } from './image.js'
+import { DecodeFailed, mediaTypeOfFormat, probeImage, startDecoders } from './image.js'
 import { DEFAULT_FETCH_POLICY, FetchRefused, isTransientFetchFailure, safeFetch, type FetchDeps, type FetchPolicy } from './net.js'
 import { mergeRoleClaims, normalizeRoles, type RoleClaim } from './roles.js'
 import { SOURCE_PACKAGE_SCHEMA, SOURCE_PACKAGE_SCHEMA_VERSION, SOURCE_PACKAGE_SCHEMA_VERSION_WITH_DOCUMENTS, SourcePackageSchema, type AcquisitionFailure, type SourceAsset, type SourceDocument, type SourcePackage, type SourceVariant } from './schema.js'
@@ -68,6 +68,7 @@ type Measured = {
 export async function acquireSourcePackage(requestedUrl: string, adapters: readonly SourceAdapter[], options: AcquireOptions = {}): Promise<SourcePackage> {
   const policy = options.policy ?? DEFAULT_FETCH_POLICY
   const failures: AcquisitionFailure[] = []
+  await startDecoders()
 
   // --- the page -----------------------------------------------------------
   const page = await fetchBytes(requestedUrl, policy, options, 'PAGE', failures)
@@ -160,7 +161,7 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
       id: stableId('var', candidate.url.split('/').pop() ?? 'asset', { byteHash }),
       url: candidate.url,
       discoveredVia: `${candidate.channel}:${candidate.locator}@${candidate.exposedBy}`,
-      mediaType: `image/${probe.format}`,
+      mediaType: mediaTypeOfFormat(probe.format),
       byteLength: fetched.bytes.length,
       byteHash,
       decoded: probe.size,

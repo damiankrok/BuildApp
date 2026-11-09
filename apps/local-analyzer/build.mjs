@@ -17,6 +17,7 @@
  *   ort-wasm-simd-threaded.mjs     its loader, verified against the pins
  *   models/PP-OCRv6_tiny_rec.onnx  the pinned model, and its dictionary
  *   models/PP-OCRv6_tiny_rec.dict.json
+ *   resvg.wasm     resvg's WebAssembly (@resvg/resvg-wasm 2.6.2, MPL-2.0), likewise
  *   webp_dec.wasm  libwebp's WebAssembly (@jsquash/webp 1.5.0), verified against
  *                  its pin: the bundle has no node_modules to find it in
  *   manifest.json  protocol, runtime target and the sha256 and size of each
@@ -52,6 +53,18 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex')
 
 /** libwebp's decoder as `@jsquash/webp` 1.5.0 ships it; `packages/source-package/src/image.ts` reads it beside the bundle. */
 export const WEBP_WASM = { file: 'webp_dec.wasm', sha256: '30fb52fa2a80166d25ba7debf902218904ba1f05ccce9f959f722beff9e2f344', bytes: 137960 }
+
+/** resvg's rasteriser as `@resvg/resvg-wasm` 2.6.2 ships it (MPL-2.0, unmodified); read beside the bundle as `resvg.wasm`. */
+export const SVG_WASM = { file: 'resvg.wasm', sha256: '22bf6e9f9a100d972da0411a69c5ba504367fc1fa87b3b64e3f35e53926d2d70', bytes: 2478606 }
+
+async function layOutSvgRasteriser(outdir) {
+  const from = createRequire(join(here, '../../packages/source-package/package.json')).resolve('@resvg/resvg-wasm/index_bg.wasm')
+  const bytes = await readFile(from)
+  const sha = sha256(bytes)
+  if (sha !== SVG_WASM.sha256 || bytes.length !== SVG_WASM.bytes) throw new Error(`${SVG_WASM.file}: SHA-256 ${sha} (${bytes.length} B), pinned ${SVG_WASM.sha256} — refused`)
+  await writeFile(join(outdir, SVG_WASM.file), bytes)
+  return { [SVG_WASM.file]: { sha256: sha, bytes: bytes.length } }
+}
 
 async function layOutWebpDecoder(outdir) {
   const from = createRequire(join(here, '../../packages/source-package/package.json')).resolve('@jsquash/webp/codec/dec/webp_dec.wasm')
@@ -108,6 +121,7 @@ export async function bundleLocalAnalyzer(outdir = join(here, 'dist'), { fixture
   }
   Object.assign(files, recogniserFiles)
   Object.assign(files, await layOutWebpDecoder(outdir))
+  Object.assign(files, await layOutSvgRasteriser(outdir))
   const manifest = { schema: 'buildapp.local-analyzer-runtime', protocol: PROTOCOL, runtime: RUNTIME, entry: 'main.mjs', files }
   await writeFile(join(outdir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
   const metaFile = metaPath ? resolve(metaPath) : join(outdir, 'meta.json')

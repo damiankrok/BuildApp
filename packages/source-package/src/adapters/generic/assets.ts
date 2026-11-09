@@ -19,12 +19,12 @@
  * order, each fetched under the same safety policy as the page. Nothing is
  * followed from a followed page: this is not a spider.
  */
-import { absolutize, decodeEntities, discoverImages, looksLikeDocument, looksLikeImage, type DiscoveredCandidate } from '../../discovery.js'
+import { absolutize, decodeEntities, discoverImages, looksLikeDocument, looksLikeImage, looksLikeVectorImage, type DiscoveredCandidate } from '../../discovery.js'
 import { registrableDomain } from '../../logical-url.js'
 import { compareCodeUnits, deaccent, safeDecode, stripTags } from '../../text.js'
-import { contextAt, pathAt, type PageFacts } from './markup.js'
+import { contextAt, pathAt, type JsonLdNode, type PageFacts } from './markup.js'
 import { pageRegions } from './regions.js'
-import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS } from './vocabulary.js'
+import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS, STOREY_WORDS, VIEW_WORDS } from './vocabulary.js'
 
 /** How many linked pages of the same site may be read for more drawings. */
 export const MAX_CRAWL_PAGES = 4
@@ -141,7 +141,7 @@ export type GenericDiscovery = {
 }
 
 const ATTR = (tag: string, name: string): string | undefined => {
-  const m = new RegExp(`\\b${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
+  const m = new RegExp(`(?<![\\w:-])${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
   return m ? decodeEntities(m[2] ?? m[3] ?? m[4] ?? '') : undefined
 }
 
@@ -309,6 +309,73 @@ export function drawingLinks(facts: PageFacts, pageUrl: string): string[] {
 }
 
 /**
+ * Vector drawings the page names as drawings (v3.51). A publisher that draws its plans as SVG shows them through an
+ * `<svg data-…src>` placeholder a script fills in, an `<img>`, an `<object>` or an `<embed>` — and so do its icons,
+ * its logo and its payment marks, by the dozen. The address alone cannot tell them apart; the words on the element
+ * can: only an element that names a drawing ("rzut", "elevation") AND which one — its storey ("parteru"), its side
+ * ("frontowa") or the page's own project — is a candidate. "Floor plans", on a pictogram beside a link to a
+ * catalogue of them, names a kind of thing and no sheet.
+ */
+export function vectorDrawings(facts: PageFacts, exposedBy: string, pageTitle?: string): DiscoveredCandidate[] {
+  const titleFolded = pageTitle ? deaccent(pageTitle).replace(/[^a-z0-9]+/g, ' ').trim() : ''
+  const out: DiscoveredCandidate[] = []
+  const seen = new Set<string>()
+  for (const m of facts.body.matchAll(/<(svg|img|object|embed)\b([^>]*)>/gi)) {
+    const tag = m[1].toLowerCase()
+    const attrs = m[2]
+    const names = tag === 'svg' ? ['data-svg-src', 'data-src', 'data-original', 'data-lazy-src'] : tag === 'object' ? ['data'] : ['src', 'data-src', 'data-original', 'data-lazy-src']
+    const words = ['alt', 'title', 'aria-label', 'data-caption', 'data-title', 'data-plan-name'].map((n) => ATTR(attrs, n) ?? '').filter((t) => t.trim() !== '')
+    const folded = deaccent(words.join(' '))
+    if (!ANY_DRAWING_WORD.test(folded)) continue
+    const whichSheet = STOREY_WORDS.some((r) => r.test.test(folded)) || VIEW_WORDS.some((r) => r.test.test(folded)) || (titleFolded !== '' && folded.replace(/[^a-z0-9]+/g, ' ').includes(titleFolded))
+    if (!whichSheet) continue
+    for (const name of names) {
+      const value = ATTR(attrs, name)
+      const abs = value ? absolutize(value, facts.url) : null
+      if (!abs || !abs.startsWith('https:') || !looksLikeVectorImage(abs) || seen.has(abs)) continue
+      seen.add(abs)
+      out.push({ url: abs, channel: 'VECTOR_DRAWING', exposedBy, locator: `${tag}[${name}]`, caption: words[0], context: contextAt(facts, m.index ?? 0) })
+    }
+  }
+  return out
+}
+
+/** Structured-data types that describe the site or its people, never the page's own subject. */
+const NOT_THE_SUBJECT = /^(organization|corporation|localbusiness|website|webpage|person|brand|breadcrumblist|listitem|searchaction|imageobject|offer|aggregaterating|review|rating)$/
+
+/**
+ * The pictures the page's structured data lists for its own subject (v3.51): `image` on a Product, a residence, an
+ * article — a string, a list, or an ImageObject's `url` / `contentUrl`. A page whose gallery a script builds still
+ * states its full-size pictures here, as data. They carry no caption; what each one is, its filename and its pixels
+ * say. The site's own logo (an Organization's `image`) is nobody's drawing.
+ */
+export function structuredDataImages(nodes: readonly JsonLdNode[], base: string, exposedBy: string): DiscoveredCandidate[] {
+  const out: DiscoveredCandidate[] = []
+  const seen = new Set<string>()
+  const take = (value: unknown, type: string): void => {
+    if (typeof value === 'string') {
+      const abs = absolutize(value, base)
+      if (abs && abs.startsWith('https:') && looksLikeImage(abs) && !seen.has(abs)) {
+        seen.add(abs)
+        out.push({ url: abs, channel: 'STRUCTURED_DATA_IMAGE', exposedBy, locator: `ld+json[${type}].image` })
+      }
+    } else if (Array.isArray(value)) {
+      for (const v of value.slice(0, 60)) take(v, type)
+    } else if (value && typeof value === 'object') {
+      const o = value as Record<string, unknown>
+      take(o.contentUrl ?? o.url, type)
+    }
+  }
+  for (const node of nodes) {
+    const t = node['@type']
+    const types = (Array.isArray(t) ? t : [t]).filter((x): x is string => typeof x === 'string')
+    if (types.length === 0 || types.every((x) => NOT_THE_SUBJECT.test(x.toLowerCase()))) continue
+    take(node.image, types[0])
+  }
+  return out
+}
+
+/**
  * Every candidate on one document, with its words, minus chrome and
  * navigation thumbnails. Off-site images (another registrable domain, a CDN
  * excepted only when the page links it as an image) are kept: a CDN is
@@ -319,7 +386,7 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
   const base = facts.url
   const words = imageWords(facts, base)
   const pictures = pictureSources(facts.body, base, exposedBy)
-  const raw = [...discoverImages(facts.body, { base, exposedBy }), ...pictures.candidates]
+  const raw = [...discoverImages(facts.body, { base, exposedBy }), ...pictures.candidates, ...vectorDrawings(facts, exposedBy, pageTitle), ...structuredDataImages(facts.jsonLd, base, exposedBy)]
   const out: DiscoveredCandidate[] = []
   const seenDropped = new Set<string>()
   const drop = (url: string, code: DroppedCandidate['code'], why: string): void => {
@@ -351,7 +418,7 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
       }
     }
     const caption = [c.caption ?? (info?.words || undefined), info?.figcaption].filter((t): t is string => !!t && t.trim() !== '').join(' · ') || undefined
-    out.push({ ...c, caption, context: info?.context, groupKey: c.groupKey ?? pictures.groups.get(c.url) })
+    out.push({ ...c, caption, context: c.context ?? info?.context, groupKey: c.groupKey ?? pictures.groups.get(c.url) })
   }
   return out.sort((a, b) => compareCodeUnits(a.url, b.url) || compareCodeUnits(a.channel, b.channel) || compareCodeUnits(a.locator, b.locator))
 }

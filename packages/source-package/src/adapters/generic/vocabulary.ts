@@ -18,16 +18,17 @@ export const DOCUMENT_WORDS: WordRule[] = [
   { test: /\bprzekr\w*|\bsections?\b|\bschnitt/, claim: { document: 'SECTION' }, confidence: 0.92, why: '"przekrój" / "section" names a section' },
   { test: /\belewacj\w*|\belevations?\b|\bfa[cç]ades?\b|\bfasad\w*|\bansicht/, claim: { document: 'ELEVATION' }, confidence: 0.92, why: '"elewacja" / "elevation" names an elevation' },
   { test: /\bsytuacj\w*|\bobrys\w*|\bsite[- ]?plan|\bplan zagospodarowania|\bdzialk\w*|\bplot\b/, claim: { document: 'SITE_PLAN' }, confidence: 0.88, why: '"sytuacja" / "obrys" / "site plan" names a site plan' },
-  { test: /\brzut\w*|\bfloor[- ]?plans?\b|\bfloorplans?\b|\bgrundriss|\bplan\b|\bplany\b/, claim: { document: 'FLOOR_PLAN' }, confidence: 0.92, why: '"rzut" / "floor plan" names a floor plan' },
+  // "plan" the drawing, never the product: a "house plan", a "home plan" and "Plan 892-47" name a design for sale (v3.51)
+  { test: /\brzut\w*|\bfloor[- ]?plans?\b|\bfloorplans?\b|\bgrundriss|(?<!\b(?:house|home|cottage|cabin|garage|barn|adu)\s)\bplan\b(?!\s*#?\s*\d)|\bplany\b/, claim: { document: 'FLOOR_PLAN' }, confidence: 0.92, why: '"rzut" / "floor plan" names a floor plan' },
   { test: /\bwizualizacj\w*|\bwizualka|\brender\w*|\bwidok\w*|\bperspekt\w*|\bvisuali[sz]\w*|\bstylizacj\w*|\b3d\b/, claim: { document: 'PERSPECTIVE_RENDER' }, confidence: 0.86, why: '"wizualizacja" / "render" / "widok" names a visualisation' },
 ]
 
 export const STOREY_WORDS: WordRule[] = [
   // "parter" the storey, never "parterowy" the house type: a single-storey house's render is not a ground-floor plan
-  { test: /\bparter(u|ze|em)?\b|\bprzyziem\w*|\bground\b|\berdgeschoss/, claim: { storey: 'GROUND' }, confidence: 0.92, why: '"parter" / "ground" is the ground storey' },
+  { test: /\bparter(u|ze|em)?\b|\bprzyziem\w*|\bground\b|\bmain (floor|level)\b|\berdgeschoss/, claim: { storey: 'GROUND' }, confidence: 0.92, why: '"parter" / "ground" is the ground storey' },
   { test: /\bpoddasz\w*|\bstrych\w*|\battic\b|\bloft\b|\bdachgeschoss/, claim: { storey: 'ATTIC' }, confidence: 0.92, why: '"poddasze" / "attic" is the attic storey' },
-  { test: /\bpi[eę]tr\w*|\bfirst[- ]?floor|\bupper\b|\b1st\b|\bobergeschoss/, claim: { storey: 'UPPER' }, confidence: 0.85, why: '"piętro" / "first floor" is an upper storey' },
-  { test: /\bpiwnic\w*|\bsuteren\w*|\bbasement\b|\bcellar\b|\bkeller/, claim: { storey: 'BASEMENT' }, confidence: 0.85, why: '"piwnica" / "basement" is a basement' },
+  { test: /\bpi[eę]tr\w*|\bfirst[- ]?floor|\bupper\b|\b1st\b|\b(second|2nd)[- ]?(floor|level)\b|\bobergeschoss/, claim: { storey: 'UPPER' }, confidence: 0.85, why: '"piętro" / "first floor" is an upper storey' },
+  { test: /\bpiwnic\w*|\bsuteren\w*|\bbasement\b|\bcellar\b|\blower level\b|\bkeller/, claim: { storey: 'BASEMENT' }, confidence: 0.85, why: '"piwnica" / "basement" is a basement' },
 ]
 
 export const VIEW_WORDS: WordRule[] = [

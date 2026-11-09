@@ -180,7 +180,7 @@ export function sourceInspectionOf(input: {
         })
       }
     }
-    sheets.push({ assetId: asset.id, url: v.url, width: v.decoded.width, height: v.decoded.height, byteHash: v.byteHash, claimed, content: verdict && verdict.decision !== 'NOT_CLASSIFIED' ? { top: verdict.top, probability: verdict.topProbability, projection: verdict.projection, decision: verdict.decision } : null, outcome, reader, ...(side ? { side } : {}), ...(sideBasis ? { sideBasis } : {}), why, readings })
+    sheets.push({ assetId: asset.id, url: v.url, width: (frame?.size ?? v.decoded).width, height: (frame?.size ?? v.decoded).height, byteHash: v.byteHash, claimed, content: verdict && verdict.decision !== 'NOT_CLASSIFIED' ? { top: verdict.top, probability: verdict.topProbability, projection: verdict.projection, decision: verdict.decision } : null, outcome, reader, ...(side ? { side } : {}), ...(sideBasis ? { sideBasis } : {}), why, readings })
   }
   const all = sheets.flatMap((s) => s.readings)
   return {

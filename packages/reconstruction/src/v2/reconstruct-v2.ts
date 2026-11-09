@@ -20,7 +20,8 @@ import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '.
 import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
 import { decideGroundClearHeight } from './section-clear-height.js'
 import { finalOpeningRecord } from './opening-final.js'
-import { scaleFromPublishedFootprint } from './published-scale.js'
+import { scaleFromPublishedExtent, scaleFromPublishedFootprint } from './published-scale.js'
+import type { PublishedScaleRefusal } from './published-scale.js'
 import { STOREY_RANK, groundLabelledAmong, planStoreyOf } from '../layout.js'
 import type { PublishedScaleOutcome } from './published-scale.js'
 import type { ClearHeightRejection } from './section-clear-height.js'
@@ -240,7 +241,7 @@ import type { ApproximateRidge } from './roof-datum.js'
 // admission policy for every later correction of an opening's heights (`opening-correction.ts`); typed meanings where
 // notes and prose prefixes used to decide (French window, callout alternative roles); each opening's feature is closed
 // from the final decision and what the program applied (`opening-final.ts`)
-export const SOLVER_V2_VERSION = '2.32.0' as const
+export const SOLVER_V2_VERSION = '2.33.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -618,22 +619,40 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const groundLabelled = groundLabelledAmong(planFramesInView)
     const ranked = planFramesInView.filter((f) => planStoreyOf(f, groundLabelled) in STOREY_RANK).sort((x, y) => STOREY_RANK[planStoreyOf(x, groundLabelled)] - STOREY_RANK[planStoreyOf(y, groundLabelled)] || y.size.width * y.size.height - x.size.width * x.size.height || (x.id < y.id ? -1 : 1))
     const lowest = ranked.length > 0 ? planStoreyOf(ranked[0], groundLabelled) : undefined
+    const publishedWidth = options.publishedAreas?.find((a) => a.key === 'building_width' && a.unit === 'm')?.value
+    const publishedLength = options.publishedAreas?.find((a) => a.key === 'building_length' && a.unit === 'm')?.value
+    const stands = (outcome: PublishedScaleOutcome | undefined): outcome is PublishedScaleOutcome => !!outcome && !!worldFrameFrom(outcome.result.draft) && outcome.result.layout.masses.length > 0 && !layoutRefused(outcome.result.layout)
+    const lowestFrames = ranked.filter((f) => planStoreyOf(f, groundLabelled) === lowest).slice(0, 3)
     let approximate: PublishedScaleOutcome | undefined
-    if (publishedFootprint !== undefined) for (const frame of ranked.filter((f) => planStoreyOf(f, groundLabelled) === lowest).slice(0, 3)) {
-      const outcome = scaleFromPublishedFootprint(structuralOptions, frame, publishedFootprint)
-      if (outcome && worldFrameFrom(outcome.result.draft) && outcome.result.layout.masses.length > 0 && !layoutRefused(outcome.result.layout)) {
+    const refusals: PublishedScaleRefusal[] = []
+    const extent = publishedWidth !== undefined && publishedLength !== undefined ? ([publishedWidth, publishedLength] as const) : undefined
+    // the building's two published dimensions first: they check each other, which one area cannot
+    if (extent) for (const frame of lowestFrames) {
+      const outcome = scaleFromPublishedExtent(structuralOptions, frame, extent[0], extent[1], { ...(publishedFootprint !== undefined ? { footprintM2: publishedFootprint } : {}), refusals })
+      if (stands(outcome)) {
         approximate = outcome
         break
       }
     }
-    if (!approximate) throw error
+    if (!approximate && publishedFootprint !== undefined) for (const frame of lowestFrames) {
+      const outcome = scaleFromPublishedFootprint(structuralOptions, frame, publishedFootprint, { ...(extent ? { extentM: extent } : {}), refusals })
+      if (stands(outcome)) {
+        approximate = outcome
+        break
+      }
+    }
+    if (!approximate) {
+      // the published figures were asked and set no scale: said, so the stop does not read as "nothing was published"
+      if (refusals.length > 0) trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_SCALE_REFUSED', status: 'FAILED', counts: Object.fromEntries([...new Set(refusals)].map((r) => [r, refusals.filter((x) => x === r).length])), reasonCode: refusals[0], detail: `the page's published figures were asked for a scale and set none: ${[...new Set(refusals)].join(', ')}` })
+      throw error
+    }
     draft = approximate.result.draft
     layout = approximate.result.layout
     metrics = approximate.metrics
     planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
-    trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_FOOTPRINT_SCALE', status: 'DEGRADED', counts: { cmPerPx: approximate.cmPerPx, publishedM2: approximate.publishedM2, outlineM2: approximate.outlineM2, iterations: approximate.iterations }, detail: approximate.why })
+    trace({ phase: 'REGISTRATION', substage: approximate.basis === 'PLAN_EXTENT' ? 'PUBLISHED_EXTENT_SCALE' : 'PUBLISHED_FOOTPRINT_SCALE', status: 'DEGRADED', counts: { cmPerPx: approximate.cmPerPx, publishedM2: approximate.publishedM2, outlineM2: approximate.outlineM2, iterations: approximate.iterations, ...(approximate.publishedExtentM && approximate.outlineExtentM ? { publishedLongM: approximate.publishedExtentM[0], publishedShortM: approximate.publishedExtentM[1], outlineLongM: approximate.outlineExtentM[0], outlineShortM: approximate.outlineExtentM[1] } : {}) }, detail: approximate.why })
     gap({ what: 'the scale of the base plan', reason: `${approximate.why}. Every length of this model follows from it: proportions for viewing, not measurements`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
-    step({ stage: 'massing', what: 'an approximate plan scale from the published footprint', method: 'DIRECT', detail: approximate.why, inputs: 1, outputs: 1 })
+    step({ stage: 'massing', what: approximate.basis === 'PLAN_EXTENT' ? 'an approximate plan scale from the published building dimensions' : 'an approximate plan scale from the published footprint', method: 'DIRECT', detail: approximate.why, inputs: 1, outputs: 1 })
   }
   const planCountsNow = planCounts(planDiagnostics)
   const world = worldFrameFrom(draft)
@@ -790,12 +809,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     metrics,
     publishedFacts: options.publishedAreas ?? [],
     printedTerrainY,
+    // v3.51: a house of one storey — no storey above the ground one in any body, no upper or attic plan — carries its roof on that storey's walls
+    ...(topStorey === 0 && masses.every((m) => Math.max(...m.storeys) === 0) && !planStoreyRoles.has('UPPER') && !planStoreyRoles.has('ATTIC') ? { singleStoreyWalls: { heightM: levels.heights[groundAt] ?? CONVENTIONS.storeyHeight, printed: levels.measured && levels.heightBasis[groundAt] === 'PRINTED_DIFFERENCE' } } : {}),
   })
   const roofDatum = approximateRidge.ok ? approximateRidge.datum : undefined
   const roofRidgeY = ridgeY ?? roofDatum?.ridgeY
   if (roofDatum) {
     gap({ what: 'the ridge height of the main roof', reason: `not printed: ${roofDatum.why}`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: roofDatum.evidenceIds })
-    step({ stage: 'roof', what: 'an approximate ridge datum from the knee wall, the pitch and the span', method: 'DIRECT', detail: roofDatum.why, inputs: roofDatum.evidenceIds.length + 1, outputs: 1 })
+    step({ stage: 'roof', what: roofDatum.eavesBasis === 'SINGLE_STOREY_WALLS' ? 'an approximate ridge datum from the single storey\'s walls, the pitch and the span' : 'an approximate ridge datum from the knee wall, the pitch and the span', method: 'DIRECT', detail: roofDatum.why, inputs: roofDatum.evidenceIds.length + 1, outputs: 1 })
   }
   const levelStoreys = [...new Set(masses.flatMap((m) => m.storeys))].sort((a, b) => a - b)
   // v3.51 (C1a): what each storey's elevation and height rest on, for the result's own summary

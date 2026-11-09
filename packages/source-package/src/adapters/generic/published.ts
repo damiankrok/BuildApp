@@ -34,15 +34,17 @@ const FACT_KEYS: Array<{ test: RegExp; key: string; unit: FactUnit }> = [
   { test: /^powierzchnia calkowita|\btotal area\b|\bgross area\b/, key: 'total_area', unit: 'm2' },
   // the roof's pitch, never the terrain's
   { test: /kat (nachylenia( dachu| polaci)?|dachu)$|^(glowny )?kat nachylenia (dachu|polaci)|nachylenie (dachu|polaci)|\broof pitch\b|^pitch$/, key: 'roof_pitch', unit: 'deg' },
-  { test: /szerokosc (budynku|domu)|\bbuilding width\b/, key: 'building_width', unit: 'm' },
-  { test: /dlugosc (budynku|domu)|\bbuilding length\b/, key: 'building_length', unit: 'm' },
+  // The building's own extent in plan. A publisher that files it under the elevation ("szerokość elewacji") or under a
+  // bare "Width" / "Depth" in a house's specification still states the building's; a plot's is read before these.
+  { test: /szerokosc (budynku|domu|elewacji)|\bbuilding width\b|^(overall |total )?width$/, key: 'building_width', unit: 'm' },
+  { test: /(dlugosc|glebokosc) (budynku|domu|elewacji)|\bbuilding (length|depth)\b|^(overall |total )?(depth|length)$/, key: 'building_length', unit: 'm' },
   // Counts, as the publisher counts them: "4 rooms" by its own convention, never checked against a plan here.
   { test: /^(liczba|ilosc) pokoi\b|^pokoje$|\bnumber of (bed)?rooms\b/, key: 'room_count', unit: 'count' },
   { test: /^(liczba|ilosc) lazienek\b|^lazienki$|\bnumber of bathrooms\b/, key: 'bathroom_count', unit: 'count' },
 ]
 
 const SPEC_KEYS: Array<{ test: RegExp; key: string }> = [
-  { test: /^dach\b|^roof\b/, key: 'roof' },
+  { test: /^dach\b|^roof\b|^(typ|rodzaj|ksztalt) dachu\b|^roof (type|style|shape)\b/, key: 'roof' },
   { test: /^scianka kolankowa|^knee wall/, key: 'knee_wall' },
   { test: /^scian|^wall/, key: 'walls' },
   { test: /^strop|^ceiling|^floor structure/, key: 'floor_structure' },
@@ -72,8 +74,19 @@ const STOREY_WORDS: Array<{ test: RegExp; storey: StoreyRole }> = [
 const NUMBER = String.raw`\d{1,6}(?:[   ]\d{3})*(?:[.,]\d+)?`
 const UNIT = String.raw`(?:m\s*²|m\s*³|m2|m3|mkw\.?|m\s*kw\.?|m|cm|mm|°|st\.?|stopni|%|szt\.?)`
 const QUALIFIER = String.raw`(?:ok\.?|ca\.?|~|≈|okolo|do|od|max\.?|maks\.?|min\.?|ponad|powyzej|ponizej|nie wiecej niz|up to|approx\.?|about|around|<|>|≤|≥)`
+/** A length in feet and inches as a house-plan page prints it: `95'`, `97' 4"`, `9'-6"`, `40 ft 6 in`. */
+const IMPERIAL = String.raw`\d{1,3}\s*(?:'|′|’|ft\.?|feet)(?:\s*-?\s*\d{1,2}(?:\s+\d\/\d{1,2})?\s*(?:"|″|”|''|in\.?|inch(?:es)?)?)?`
+const IMPERIAL_BLOCK = new RegExp(`^${IMPERIAL}$`)
+/** Feet and inches as metres, to the millimetre; null when the text is not one such length. */
+export function imperialMetres(text: string): number | null {
+  const m = /^(\d{1,3})\s*(?:'|′|’|ft\.?|feet)(?:\s*-?\s*(\d{1,2})(?:\s+(\d)\/(\d{1,2}))?\s*(?:"|″|”|''|in\.?|inch(?:es)?)?)?$/.exec(text.trim().toLowerCase())
+  if (!m) return null
+  const inches = (m[2] ? Number(m[2]) : 0) + (m[3] && m[4] && Number(m[4]) > 0 ? Number(m[3]) / Number(m[4]) : 0)
+  if (inches >= 12) return null
+  return Math.round((Number(m[1]) * 0.3048 + inches * 0.0254) * 1000) / 1000
+}
 /** A whole block that is one number and at most a unit: a figure. Prose with a number in it is not. */
-const VALUE_BLOCK = new RegExp(`^${NUMBER}\\s*${UNIT}?$`)
+const VALUE_BLOCK = new RegExp(`^(?:${NUMBER}\\s*${UNIT}?|${IMPERIAL})$`)
 /** Two plot dimensions in one: "21,15 x 24,60 m". */
 const PLOT_BLOCK = new RegExp(`^(${NUMBER})\\s*(?:m\\s*)?[x×]\\s*(${NUMBER})\\s*m$`)
 /** A bound, an estimate or a range where a figure would stand: it takes the figure's place and states none. */
@@ -81,7 +94,7 @@ const QUALIFIED_BLOCK = new RegExp(`^${QUALIFIER}\\s*${NUMBER}\\s*${UNIT}?$|^${N
 /** A value left blank. */
 const BLANK_BLOCK = /^(?:[-–—−]+|brak|n\/?a|b\/d|nie dotyczy)$/
 /** "Label: figure" in one block; the label part is judged separately. */
-const INLINE = new RegExp(`^(.{2,60}?)\\s*[:–—-]?\\s+(${QUALIFIER}\\s*)?(${NUMBER}\\s*${UNIT}?)$`)
+const INLINE = new RegExp(`^(.{2,60}?)\\s*[:–—-]?\\s+(${QUALIFIER}\\s*)?(${IMPERIAL}|${NUMBER}\\s*${UNIT}?)$`)
 
 /** A label that bounds or rates a figure instead of stating it: a planning limit, an index, a ratio. */
 const BOUND_WORDS = /\b(max\w*|maks\w*|min|minimaln\w*|minimum|wskaznik\w*|dopuszczaln\w*|przekrocz\w*|limit\w*|ratio|coverage)\b/
@@ -266,7 +279,40 @@ export function blockPairs(facts: PageFacts, regions: PageRegions = pageRegions(
 export function pagePairs(facts: PageFacts): LabelValue[] {
   const regions = pageRegions(facts)
   const structured = facts.pairs.filter((p) => !regions.excluded(p.offset))
-  return [...structured, ...blockPairs(facts, regions)].sort((a, b) => a.offset - b.offset)
+  return [...structuredDataPairs(facts), ...structured, ...blockPairs(facts, regions)].sort((a, b) => a.offset - b.offset)
+}
+
+/** UN/CEFACT unit codes schema.org quantities are stated in, as the units this reader knows. */
+const UNIT_CODES: Record<string, string> = { MTK: 'm²', MTR: 'm', MTQ: 'm³', CMT: 'cm', MMT: 'mm', DD: '°', FOT: "'" }
+
+/**
+ * The properties the page's structured data states for its own subject (v3.51): schema.org `additionalProperty`
+ * lists of `PropertyValue` — name, value and a unit code. The same statements a specification table makes, made as
+ * data; a page that prints its table through a script still makes them here. Read as label/value pairs like any
+ * other, so the one vocabulary and the one unit rule decide what each is.
+ */
+export function structuredDataPairs(facts: PageFacts): LabelValue[] {
+  const out: LabelValue[] = []
+  const visit = (node: unknown, depth: number): void => {
+    if (depth > 4 || !node || typeof node !== 'object') return
+    if (Array.isArray(node)) {
+      for (const n of node.slice(0, 200)) visit(n, depth + 1)
+      return
+    }
+    const record = node as Record<string, unknown>
+    const list = record.additionalProperty
+    for (const p of Array.isArray(list) ? list.slice(0, 200) : list ? [list] : []) {
+      if (!p || typeof p !== 'object') continue
+      const { name, value, unitCode, unitText } = p as Record<string, unknown>
+      if (typeof name !== 'string' || name.trim() === '' || (typeof value !== 'string' && typeof value !== 'number')) continue
+      const unit = typeof unitCode === 'string' && UNIT_CODES[unitCode.toUpperCase()] ? UNIT_CODES[unitCode.toUpperCase()] : typeof unitText === 'string' ? unitText : ''
+      const printed = typeof value === 'number' ? String(value).replace('.', ',') : value.trim()
+      out.push({ label: name.trim(), value: unit && /^[\d.,\s]+$/.test(printed) ? `${printed} ${unit}` : printed, source: 'meta', offset: 0 })
+    }
+    for (const [k, v] of Object.entries(record)) if (k !== 'additionalProperty' && v && typeof v === 'object') visit(v, depth + 1)
+  }
+  for (const n of facts.jsonLd) visit(n, 0)
+  return out
 }
 
 /** Physically possible, whatever the label: a pitch under 90°, a building between 1 and 100 m tall, a positive area. */
@@ -296,6 +342,13 @@ export function genericFacts(facts: PageFacts): PublishedFact[] {
       continue
     }
     if (!VALUE_BLOCK.test(folded)) continue
+    // feet and inches state their own unit: a length, in metres once converted
+    const imperial = IMPERIAL_BLOCK.test(folded) ? imperialMetres(folded) : null
+    if (IMPERIAL_BLOCK.test(folded)) {
+      const lengthKey = key === 'plot_min_width' || key === 'plot_min_depth' || FACT_KEYS.find((f) => f.key === key)?.unit === 'm'
+      if (lengthKey) add(key, p.label, raw, imperial, 'm')
+      continue
+    }
     const stated = statedUnit(raw)
     const mapped = key === 'plot_min_width' || key === 'plot_min_depth' ? { unit: 'm' as FactUnit } : FACT_KEYS.find((f) => f.key === key)
     if (!mapped) continue
@@ -366,7 +419,7 @@ export function genericSpecifications(facts: PageFacts): PublishedSpecification[
     out.push({ key, label, text: trimmed })
   }
   const regions = pageRegions(facts)
-  for (const p of facts.pairs.filter((x) => !regions.excluded(x.offset))) {
+  for (const p of [...structuredDataPairs(facts), ...facts.pairs.filter((x) => !regions.excluded(x.offset))]) {
     const label = deaccent(p.label)
     const spec = SPEC_KEYS.find((k) => k.test.test(label))
     if (spec) push(spec.key, p.label, p.value)

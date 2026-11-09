@@ -14,6 +14,7 @@
  */
 import { channelClaims } from '../../adapter.js'
 import type { AdapterContext, DocumentClaim, ProjectIdentity, SourceAdapter, SourceClassification } from '../../adapter.js'
+import type { PublishedFact, PublishedSpecification } from '../../schema.js'
 import type { DiscoveredCandidate } from '../../discovery.js'
 import type { RoleClaim } from '../../roles.js'
 import { compareCodeUnits, deaccent, safeDecode } from '../../text.js'
@@ -24,7 +25,7 @@ import { genericFacts, genericRooms, genericSpecifications } from './published.j
 import { ANNOTATION_WORDS, BASE_WORDS, DOCUMENT_KIND_WORDS, DOCUMENT_WORDS, GUIDE_WORDS, MIRROR_WORDS, STATED_SCALE, STOREY_WORDS, VIEW_WORDS, firstMatch, type WordRule } from './vocabulary.js'
 
 export const GENERIC_ADAPTER_ID = 'generic.project-page'
-export const GENERIC_ADAPTER_VERSION = '1.2.0'
+export const GENERIC_ADAPTER_VERSION = '1.3.0'
 
 /** Read once per page: the facts are pure in the markup, so the same markup gives the same facts. */
 const factsCache = new WeakMap<AdapterContext, PageFacts>()
@@ -145,6 +146,17 @@ export async function genericDiscover(ctx: AdapterContext, report?: GenericDisco
   return out.sort((a, b) => compareCodeUnits(a.url, b.url) || compareCodeUnits(a.channel, b.channel) || compareCodeUnits(a.locator, b.locator))
 }
 
+/**
+ * v3.51: the roof's pitch, printed as a figure of its own ("Kąt dachu: 30°") rather than inside a sentence about the
+ * roof, is a statement about the roof all the same. It is filed with the roof's specification lines, as printed, so
+ * the one reader of roof statements (source-metrics) reads it — unless a roof line already states an angle.
+ */
+export function withRoofPitchLine(specifications: PublishedSpecification[], figures: readonly PublishedFact[]): PublishedSpecification[] {
+  const pitch = figures.find((f) => f.key === 'roof_pitch' && f.unit === 'deg')
+  if (!pitch || specifications.some((s) => s.key === 'roof' && /\d/.test(s.text))) return specifications
+  return [...specifications, { key: 'roof', label: pitch.label, text: pitch.raw }].sort((a, b) => compareCodeUnits(a.key, b.key) || compareCodeUnits(a.label, b.label) || compareCodeUnits(a.text, b.text))
+}
+
 export const genericProjectPageAdapter: SourceAdapter = {
   id: GENERIC_ADAPTER_ID,
   version: GENERIC_ADAPTER_VERSION,
@@ -159,7 +171,8 @@ export const genericProjectPageAdapter: SourceAdapter = {
   groupKey: (candidate) => candidate.groupKey ?? sizeStem(candidate.url),
   parsePublished: (ctx) => {
     const facts = factsOf(ctx)
-    return { facts: genericFacts(facts), specifications: genericSpecifications(facts), rooms: genericRooms(facts) }
+    const figures = genericFacts(facts)
+    return { facts: figures, specifications: withRoofPitchLine(genericSpecifications(facts), figures), rooms: genericRooms(facts) }
   },
   documents: (ctx) => genericDocuments(ctx),
 }
