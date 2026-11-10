@@ -1,0 +1,165 @@
+{
+ "schema": "buildapp.source-to-model.experiment-result/1",
+ "experiment": "S53-E1",
+ "scoredAt": "2026-11-10",
+ "scorer": "the session, item by item against the frozen reference checklists and the all-sides sheets; the OWNER boards are the independent judgement and are pending",
+ "armB": {
+  "reader": "claude-sonnet-5-5, effort medium, one request per house after a claude-haiku-5-5 triage of the page's pictures",
+  "firstBlindRun": {
+   "models": 4,
+   "of": 6,
+   "refusals": {
+    "extradom-pl-1": "SCHEMA_INVALID balconies.1.depthM > 4 (a terrace 4.9 m deep over the rear canopy)",
+    "lipinscy-pl-1": "SCHEMA_INVALID balconies.1.depthM > 4 (a terrace 6.5 m deep on the garage roof)"
+   },
+   "note": "the two refusals were the harness's own bound on an optional feature refusing the whole house; fixed generally (an invalid list entry is dropped and named) and the SAME recorded descriptions rebuilt — no second call"
+  },
+  "afterBuilderFixes": {
+   "models": 6,
+   "of": 6,
+   "compileErrors": 0,
+   "modelRefusedObjects": 0
+  },
+  "items": [
+   "SCALE",
+   "BODIES",
+   "STOREYS",
+   "MAIN_ROOF_KIND",
+   "MAIN_RIDGE",
+   "ATTACHED_ROOFS",
+   "GARAGE",
+   "ENTRANCE",
+   "FRONT_OPENINGS",
+   "OTHER_SIDES_OPENINGS",
+   "LARGE_GLAZING",
+   "FEATURES",
+   "PALETTE"
+  ],
+  "verdicts": {
+   "architecturaldesigns-com-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "NA",
+    "PARTIAL",
+    "OK"
+   ],
+   "dobredomy-pl-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "OK",
+    "PARTIAL",
+    "PARTIAL"
+   ],
+   "domoweklimaty-pl-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "OK",
+    "PARTIAL",
+    "OK"
+   ],
+   "extradom-pl-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "OK",
+    "PARTIAL",
+    "PARTIAL"
+   ],
+   "houseplans-com-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "NA",
+    "OK",
+    "WRONG",
+    "OK",
+    "WRONG",
+    "NA",
+    "PARTIAL",
+    "WRONG"
+   ],
+   "lipinscy-pl-1": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "NA",
+    "PARTIAL",
+    "PARTIAL"
+   ]
+  },
+  "notes": {
+   "architecturaldesigns-com-1": "17.55 x 8.55 m bodies + two 1.83 m porches = the published 17.53 x 12.19; every facade's openings match the reference in count and order; porch roofs are flat plates where the source slopes them; the porch railing is not built.",
+   "dobredomy-pl-1": "overall scaled from the garage's published area (12.1 x 11.2 vs printed 12.92 x 11.72 on the site plan, which triage did not send); rear ground 2 of 4, left 1 of 2, right 0 of 4 openings; rooflights 2 of 6, chimneys 1 of 2; the garage's cross gable stands as a separate roof instead of dying into the main slope (builder); walls one tone where the source has two.",
+   "domoweklimaty-pl-1": "garage ridge read front-to-back, the source runs it along the front; rear 0 of 2 and right 0 of 4 openings; the lean-to roof over the side terrace and the entrance porch roof are not built; front dormer, balcony, two chimneys, left glazing right.",
+   "extradom-pl-1": "printed 6,04 + 7,93 x 1,40 + 8,50 + 4,92 read exactly; stated as two storeys where the reference says one storey and an attic with a high knee wall (same geometry); right side 0 of 4 and left 0 of 1 openings, rear ground 2 of 4; chimneys 1 of 2, rooflights 1 of 3; timber cladding zones not built.",
+   "houseplans-com-1": "single slope read highest on the LEFT, the source is highest at the REAR over the deck; entrance placed in the centre third, the source has it left; rear 3 of 6; roof colour read dark green where the source is black; one picture of another project correctly marked not-this-house.",
+   "lipinscy-pl-1": "the reader described ONE unit of the semi-detached pair (and said so); the reference describes the pair — scored as the unit: garage in front with its roof terrace and glass guard, two storeys, gable along the front, side entrance, 5 openings on the free side as drawn. Whether a semi is one unit or the pair is a product decision."
+  },
+  "recognisableCandidate": {
+   "architecturaldesigns-com-1": true,
+   "dobredomy-pl-1": true,
+   "domoweklimaty-pl-1": true,
+   "extradom-pl-1": true,
+   "houseplans-com-1": false,
+   "lipinscy-pl-1": true
+  },
+  "cost": {
+   "usdPerHouseMean": 0.116,
+   "usdTotalSix": 0.698,
+   "basis": "CLI_TOKEN_ESTIMATE"
+  },
+  "secondsPerHouseMean": 70
+ },
+ "armA": {
+  "models": 1,
+  "of": 6,
+  "recognisable": 0,
+  "note": "the one cascade model (lipinscy-pl-1) is two towers 18 m high at a wrong scale: counted as a model in the 3/12 of 1327, not a house"
+ },
+ "conclusion": [
+  "H1 holds on the pilot: read as a whole and built through the existing emitter and compiler, 5 of 6 pages give a recognisable candidate by the frozen rule (bodies, storeys, main roof kind and ridge all right); the cascade gives 0 of 6. The mandatory plan cascade was the bottleneck; the semantic core, emitter and compiler were not.",
+  "What is still wrong is in the READER's completeness and two directions, not in the approach: openings on the sides other than the front are short in 4 of 6 houses; an attached roof's ridge (1) and a single slope's high side (1) were read wrong.",
+  "And in the BUILDER's vocabulary: a cross gable does not yet die into the main roof; walls take one tone per body (no two-tone or cladding zones); porch roofs are flat plates.",
+  "Six pages are a pilot. They are DEV for arm B from now on."
+ ]
+}

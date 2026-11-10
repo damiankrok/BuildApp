@@ -132,11 +132,20 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
   const minZ = Math.min(...d.bodies.map((b) => Math.min(b.z0, b.z1)))
   const spanX = Math.max(...d.bodies.map((b) => Math.max(b.x0, b.x1))) - minX
   const spanZ = Math.max(...d.bodies.map((b) => Math.max(b.z0, b.z1))) - minZ
-  const rescale = Math.abs(spanX - d.overall.widthM) > 0.08 * d.overall.widthM || Math.abs(spanZ - d.overall.depthM) > 0.08 * d.overall.depthM
-  const kx = rescale ? d.overall.widthM / spanX : 1
-  const kz = rescale ? d.overall.depthM / spanZ : 1
+  // The overall size a page publishes often takes in porches and decks: the bodies are compared with it together with
+  // the roofs over open areas. Positions are scaled only by ONE factor on both axes (a unit or scale slip); a size that
+  // disagrees on one axis only is left as stated and the disagreement stays a named issue of the description.
+  const withCanopies = (pick: (r: { x0: number; x1: number; z0: number; z1: number }) => [number, number]): number => {
+    const all = [...d.bodies, ...d.canopies].map(pick)
+    return Math.max(...all.map((p) => Math.max(...p))) - Math.min(...all.map((p) => Math.min(...p)))
+  }
+  const fx = d.overall.widthM / withCanopies((r) => [r.x0, r.x1])
+  const fz = d.overall.depthM / withCanopies((r) => [r.z0, r.z1])
+  const rescale = Math.abs(fx - 1) > 0.08 && Math.abs(fz - 1) > 0.08 && Math.abs(fx / fz - 1) < 0.05
+  const kx = rescale ? (fx + fz) / 2 : 1
+  const kz = kx
   if (Math.abs(minX) > 1e-6 || Math.abs(minZ) > 1e-6) adj('FRAME_SHIFTED', 'frame', `the bodies started at x ${minX.toFixed(2)}, z ${minZ.toFixed(2)}: moved to the origin`)
-  if (rescale) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: positions scaled by ${kx.toFixed(3)} × ${kz.toFixed(3)}`)
+  if (rescale) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: every position scaled by ${kx.toFixed(3)}`)
   const X = (x: number): number => (x - minX) * kx
   const Z = (z: number): number => (z - minZ) * kz
   const snapX = snapper(d.bodies.flatMap((b) => [X(b.x0), X(b.x1)]))
@@ -187,7 +196,9 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
     const top = Math.max(...m.storeys)
     const attic = src.habitableAttic && src.roof.kind !== 'FLAT'
     const floorTop = top * H
-    const [lo, hi] = attic ? [floorTop + 0.3, floorTop + 2.2] : [floorTop + 2.2, floorTop + H + 0.8]
+    // rooms in the roof: the walls of that storey must clear the roof's own build-up at the eaves to have any material
+    const kneeMin = src.roof.kind === 'FLAT' ? 0.3 : ROOF_THICKNESS_M / cosDeg(clamp(src.roof.pitchDeg || 30, 8, 60)) + 0.15
+    const [lo, hi] = attic ? [floorTop + kneeMin, floorTop + 2.4] : [floorTop + 2.2, floorTop + H + 0.8]
     const eaveY = round6(clamp(src.eavesHeightM, lo, hi))
     if (Math.abs(eaveY - src.eavesHeightM) > 0.05) adj('EAVES_HEIGHT_CLAMPED', src.id, `eaves stated at ${src.eavesHeightM} m, ${src.storeys} full storey(s)${attic ? ' and rooms in the roof' : ''} at ${H} m each put them at ${lo.toFixed(2)}..${hi.toFixed(2)} m: built at ${eaveY}`)
     const others = bodies.filter((o) => o !== b).map((o) => o.rect)
@@ -380,6 +391,31 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
   const outside = (mass: MassV2, facade: Facade, from: number, to: number, depth: number): Rect => (facade === 'FRONT' ? { x0: from, x1: to, z0: mass.z0 - depth, z1: mass.z0 } : facade === 'REAR' ? { x0: from, x1: to, z0: mass.z1, z1: mass.z1 + depth } : facade === 'WEST' ? { x0: mass.x0 - depth, x1: mass.x0, z0: from, z1: to } : { x0: mass.x1, x1: mass.x1 + depth, z0: from, z1: to })
   d.balconies.forEach((bal, n) => {
     const mass = massOf(bal.bodyId)
+    // a terrace on the flat roof of a lower body: the roof is its floor, a guard runs round the roof's free edges
+    const flatUnder = mass ? flatOf(mass.id) : undefined
+    if (mass && flatUnder && bal.storey === Math.max(...mass.storeys) + 1) {
+      if (bal.railing === 'NONE') return adj('FEATURE_ADJUSTED', `balcony ${n + 1}`, `a terrace on ${bal.bodyId}'s flat roof with no guard: the roof itself is all there is to build`)
+      const others = masses.filter((x) => x !== mass && x.storeys.includes(bal.storey)).map((x) => ({ x0: x.x0, z0: x.z0, x1: x.x1, z1: x.z1 }))
+      const rect: Rect = { x0: mass.x0, z0: mass.z0, x1: mass.x1, z1: mass.z1 }
+      const in_ = 0.08
+      const corner = { FRONT: [{ x: rect.x0 + in_, z: rect.z0 + in_ }, { x: rect.x1 - in_, z: rect.z0 + in_ }], EAST: [{ x: rect.x1 - in_, z: rect.z0 + in_ }, { x: rect.x1 - in_, z: rect.z1 - in_ }], REAR: [{ x: rect.x1 - in_, z: rect.z1 - in_ }, { x: rect.x0 + in_, z: rect.z1 - in_ }], WEST: [{ x: rect.x0 + in_, z: rect.z1 - in_ }, { x: rect.x0 + in_, z: rect.z0 + in_ }] } as const
+      // the free sides in order round the roof, starting after a side a taller body stands against
+      const order: Facade[] = ['FRONT', 'EAST', 'REAR', 'WEST']
+      const free = order.map((sd) => coveredSpans(rect, sd, others).length === 0)
+      if (!free.some(Boolean)) return adj('FEATURE_DROPPED', `balcony ${n + 1}`, 'the flat roof it is stated on has no free edge')
+      const start = free.every(Boolean) ? 0 : (free.findIndex((f, i) => f && !free[(i + 3) % 4]) + 4) % 4
+      const path: Array<{ x: number; z: number }> = []
+      for (let k = 0; k < 4; k += 1) {
+        const i = (start + k) % 4
+        if (!free[i]) break
+        const [a, b] = corner[order[i]]
+        if (path.length === 0) path.push({ x: round6(a.x), z: round6(a.z) })
+        path.push({ x: round6(b.x), z: round6(b.z) })
+      }
+      const id = `roof-terrace-${n + 1}`
+      railings.push({ id: `${id}-railing`, storeyIndex: Math.max(...mass.storeys), start: path[0], end: path[path.length - 1], path, baseY: flatUnder.slabTopY, heightM: 1.1, featureId: `described-${id}-railing`, provenance: prov, why: `a terrace on the flat roof of ${bal.bodyId}, guarded round its free edges (${bal.railing.toLowerCase()}), as pictures ${bal.images.join(', ')} show it; 1.1 m high by convention` })
+      return
+    }
     if (!mass || !mass.storeys.includes(bal.storey)) return adj('FEATURE_DROPPED', `balcony ${n + 1}`, `${bal.bodyId} has no storey ${bal.storey} to carry it`)
     const facade = FACADE[bal.side]
     const alongX = facade === 'FRONT' || facade === 'REAR'
@@ -418,11 +454,27 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
   d.canopies.forEach((c, n) => {
     const r: Rect = { x0: round6(Math.min(X(c.x0), X(c.x1))), x1: round6(Math.max(X(c.x0), X(c.x1))), z0: round6(Math.min(Z(c.z0), Z(c.z1))), z1: round6(Math.max(Z(c.z0), Z(c.z1))) }
     if (r.x1 - r.x0 < 0.5 || r.z1 - r.z0 < 0.5) return adj('FEATURE_DROPPED', `canopy ${n + 1}`, 'smaller than half a metre')
-    // posts at the corners no body stands at, as many as stated (nearest the outside first)
-    const corners = [{ x: r.x0 + 0.15, z: r.z0 + 0.15 }, { x: r.x1 - 0.15, z: r.z0 + 0.15 }, { x: r.x1 - 0.15, z: r.z1 - 0.15 }, { x: r.x0 + 0.15, z: r.z1 - 0.15 }]
-    const freeCorners = corners.filter((p) => !masses.some((m) => p.x > m.x0 - 0.4 && p.x < m.x1 + 0.4 && p.z > m.z0 - 0.4 && p.z < m.z1 + 0.4))
-    const posts = freeCorners.slice(0, Math.min(c.posts, freeCorners.length)).map((p) => ({ x: round6(p.x), z: round6(p.z) }))
-    if (posts.length < Math.min(c.posts, 4)) adj('FEATURE_ADJUSTED', `canopy ${n + 1}`, `${c.posts} post(s) stated, ${posts.length} free corner(s) to stand them at`)
+    // its posts stand along the edge away from the bodies it leans on: at both ends of that edge and evenly between
+    const touches = (side: Facade): boolean => coveredSpans(r, side, masses.map((m) => ({ x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }))).length > 0
+    const inset = 0.15
+    const edges: Record<Facade, [{ x: number; z: number }, { x: number; z: number }]> = { FRONT: [{ x: r.x0 + inset, z: r.z0 + inset }, { x: r.x1 - inset, z: r.z0 + inset }], REAR: [{ x: r.x0 + inset, z: r.z1 - inset }, { x: r.x1 - inset, z: r.z1 - inset }], WEST: [{ x: r.x0 + inset, z: r.z0 + inset }, { x: r.x0 + inset, z: r.z1 - inset }], EAST: [{ x: r.x1 - inset, z: r.z0 + inset }, { x: r.x1 - inset, z: r.z1 - inset }] }
+    const opposite: Record<Facade, Facade> = { FRONT: 'REAR', REAR: 'FRONT', WEST: 'EAST', EAST: 'WEST' }
+    const leaning = (['FRONT', 'REAR', 'WEST', 'EAST'] as Facade[]).filter(touches)
+    const outerSides = leaning.map((sd) => opposite[sd]).filter((sd) => !touches(sd))
+    const outer = outerSides.sort((a, b) => Math.hypot(edges[b][1].x - edges[b][0].x, edges[b][1].z - edges[b][0].z) - Math.hypot(edges[a][1].x - edges[a][0].x, edges[a][1].z - edges[a][0].z))[0]
+    const posts: Array<{ x: number; z: number }> = []
+    if (c.posts > 0 && outer) {
+      const [a, b] = edges[outer]
+      const k = Math.max(1, c.posts)
+      for (let i = 0; i < k; i += 1) {
+        const t = k === 1 ? (touches(outer === 'FRONT' || outer === 'REAR' ? 'WEST' : 'FRONT') ? 1 : 0) : i / (k - 1)
+        posts.push({ x: round6(a.x + (b.x - a.x) * t), z: round6(a.z + (b.z - a.z) * t) })
+      }
+    } else if (c.posts > 0) {
+      // free-standing: at its corners
+      for (const p of [edges.FRONT[0], edges.FRONT[1], edges.REAR[1], edges.REAR[0]].slice(0, Math.min(4, c.posts))) posts.push({ x: round6(p.x), z: round6(p.z) })
+    }
+    if (posts.length < c.posts) adj('FEATURE_ADJUSTED', `canopy ${n + 1}`, `${c.posts} post(s) stated, ${posts.length} placed`)
     // under a body's eaves the eaves are the cover: a plate is built only where it stays clear below the roof plane
     const mid = { x: (r.x0 + r.x1) / 2, z: (r.z0 + r.z1) / 2 }
     let underside = clamp(c.undersideM, 2.0, 7)

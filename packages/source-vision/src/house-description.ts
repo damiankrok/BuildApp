@@ -118,7 +118,7 @@ export const DescribedBalconySchema = z
     storey: z.number().int().min(1).max(4),
     from: z.number().describe('Its two ends along the facade, in the plan frame.'),
     to: z.number(),
-    depthM: z.number().min(0.3).max(4),
+    depthM: z.number().min(0.1).max(12).describe('How far it stands out from the wall; a terrace on the flat roof of a lower body is a balcony of the storey above it, as deep as that roof.'),
     railing: z.enum(['GLASS', 'BARS', 'SOLID', 'NONE']),
     images,
     confidence,
@@ -249,6 +249,9 @@ export function buildHouseDescriptionPrompt(input: { images: HouseDescriptionIma
   ].join('\n')
 }
 
+/** The lists whose entries stand or fall one by one. Bodies and the overall size are the house itself: they do not. */
+const ITEM_SCHEMAS = { openings: DescribedOpeningSchema, dormers: DescribedDormerSchema, rooflights: DescribedRooflightSchema, chimneys: DescribedChimneySchema, balconies: DescribedBalconySchema, terraces: DescribedTerraceSchema, canopies: DescribedCanopySchema } as const
+
 export type HouseDescriptionIssue = { code: string; severity: 'REJECT' | 'WARN'; detail: string }
 
 const overlapArea = (a: { x0: number; x1: number; z0: number; z1: number }, b: { x0: number; x1: number; z0: number; z1: number }): number => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) * Math.max(0, Math.min(a.z1, b.z1) - Math.max(a.z0, b.z0))
@@ -259,10 +262,25 @@ const overlapArea = (a: { x0: number; x1: number; z0: number; z1: number }, b: {
  * result. Nothing here knows a house, a publisher or an expected answer.
  */
 export function checkHouseDescription(raw: unknown, published: PublishedFigure[] = []): { ok: true; description: HouseDescription; issues: HouseDescriptionIssue[] } | { ok: false; issues: HouseDescriptionIssue[] } {
-  const parsed = HouseDescriptionSchema.safeParse(raw)
-  if (!parsed.success) return { ok: false, issues: parsed.error.issues.slice(0, 12).map((i) => ({ code: 'SCHEMA_INVALID', severity: 'REJECT' as const, detail: `${i.path.join('.')}: ${i.message}` })) }
-  const d = parsed.data
   const issues: HouseDescriptionIssue[] = []
+  // one feature stated outside the vocabulary's bounds is that feature's loss, not the house's: it is dropped and named
+  let candidate = raw
+  if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
+    const copy: Record<string, unknown> = { ...(raw as Record<string, unknown>) }
+    for (const [key, item] of Object.entries(ITEM_SCHEMAS)) {
+      const list = copy[key]
+      if (!Array.isArray(list)) continue
+      copy[key] = list.filter((entry, i) => {
+        const r = item.safeParse(entry)
+        if (!r.success) issues.push({ code: 'ITEM_INVALID_DROPPED', severity: 'WARN', detail: `${key}[${i}] ${r.error.issues[0]?.path.join('.') ?? ''}: ${r.error.issues[0]?.message ?? 'invalid'}` })
+        return r.success
+      })
+    }
+    candidate = copy
+  }
+  const parsed = HouseDescriptionSchema.safeParse(candidate)
+  if (!parsed.success) return { ok: false, issues: [...issues, ...parsed.error.issues.slice(0, 12).map((i) => ({ code: 'SCHEMA_INVALID', severity: 'REJECT' as const, detail: `${i.path.join('.')}: ${i.message}` }))] }
+  const d = parsed.data
   const reject = (code: string, detail: string): void => void issues.push({ code, severity: 'REJECT', detail })
   const warn = (code: string, detail: string): void => void issues.push({ code, severity: 'WARN', detail })
   const ids = new Set<string>()
