@@ -14,7 +14,7 @@
 
 - **Active brief:** OWNER v3.53.0 (2026-11-10, replaces v3.52): make BuildPlan a reliable analyzer of a house from the
   sources a page publishes. Campaign on `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR.
-  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `0057611`.
+  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `e223cb2`.
   Report: `stage-reports/SOURCE_TO_MODEL_V353.md` (earlier campaign: `stage-reports/SOURCE_TO_MODEL.md`).
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1 added: what a described
   model is and is not).

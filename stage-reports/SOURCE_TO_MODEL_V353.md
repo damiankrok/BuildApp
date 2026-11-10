@@ -1,7 +1,7 @@
 # SOURCE-TO-MODEL v3.53 — dom czytany w całości (raport punktu kontrolnego)
 
 Zlecenie OWNER-a v3.53.0 (2026-11-10). Gałąź `claude/new-session-3kzcgh`, punkt odniesienia `1370a1d` (APK 1327 z kodu
-`0fe410a`). Kod tego punktu kontrolnego: **`0057611`**. Wcześniejszy raport kampanii: `stage-reports/SOURCE_TO_MODEL.md`.
+`0fe410a`). Kod tego punktu kontrolnego: **`e223cb2`**. Wcześniejszy raport kampanii: `stage-reports/SOURCE_TO_MODEL.md`.
 
 | | stan |
 |---|---|
@@ -111,7 +111,7 @@ czytnika opisu nie mierzono (budżet).
 6. Istniejący `anthropicVisionReasoner` (starsza ścieżka `ANALYZER_VISION=live`) używa wymuszonego `tool_choice`, którego
    bieżące modele nie przyjmują — zanotowane, nienaprawione (poza zakresem tego wycinka).
 
-## 6. Testy na drzewie `0057611`
+## 6. Testy na drzewie `e223cb2`
 
 Nowe: `packages/reconstruction/test/described-house.test.ts` (lustro, kalenica/rodzaj, dach jednospadowy, zablokowane
 otwory, przycinanie, kosz szczytu poprzecznego, reguły skali), `packages/source-vision/test/house-description.test.ts`,
