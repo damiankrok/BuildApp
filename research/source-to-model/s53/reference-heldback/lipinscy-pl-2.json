@@ -1,0 +1,62 @@
+{
+  "slug": "lipinscy-pl-2",
+  "imagesUsed": [
+    {"n": 13, "what": "ground floor plan with printed dimensions 564 x 1524 cm (entrance arrow on the right-hand long side of the sheet); 20 is the same plan"},
+    {"n": 26, "what": "front elevation (rendered) - long side with the entrance door"},
+    {"n": 24, "what": "rear elevation (rendered) - long garden/terrace side"},
+    {"n": 23, "what": "left gable elevation (blank)"},
+    {"n": 25, "what": "right gable elevation (blank)"},
+    {"n": 10, "what": "cross-section with levels (-0.30 ground, +3.91, +4.83 ridge); 17 is the same"},
+    {"n": 7, "what": "site plan (5.7 x 15.3 m footprint, terrace and entrance steps); 21 is the same"},
+    {"n": 8, "what": "exterior render of the entrance side, grey-panel finish"},
+    {"n": 6, "what": "exterior render of the entrance side, timber-slat finish variant"},
+    {"n": 15, "what": "exterior render of the garden side, grey-panel finish"},
+    {"n": 11, "what": "exterior render of the garden side, timber-slat finish variant"},
+    {"n": 5, "what": "close-up render of the terrace corner"}
+  ],
+  "mirrorOrOtherProjectWarning": "No mirror and no other project. The renders come in TWO FINISH VARIANTS of the same house: grey vertical fibre-cement/metal panels with white render (images 5, 8, 15 and all elevation drawings) and vertical timber slats with white render (images 6, 11). Geometry and openings are identical. Note the entrance is on a LONG side, so FRONT is the 15.24 m side and both gable ends (LEFT, RIGHT) are blank.",
+  "overall": {"widthM": 15.24, "depthM": 5.64, "heightM": 5.13, "basis": "width and depth printed on plan (1524 x 564 cm; site plan rounds to 15.3 x 5.7); height from the section: ridge +4.83 m above floor, ground at -0.30 m"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single long narrow rectangular block", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "15.24 x 5.64"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Simple symmetrical gable roof over the whole block, ridge along the long axis; no eaves or verge overhang (flush, hidden gutters), no dormers, no rooflights. Blank triangular gables at both short ends."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": false},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["ENTRANCE_DOOR", "WINDOW", "LARGE_GLAZING"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 5, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "GLAZED_DOOR", "WINDOW", "LARGE_GLAZING"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 0, "leftToRight": []}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 0, "leftToRight": []}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "FRONT", "position": "RIGHT", "what": "single floor-to-ceiling fixed pane of the dining area, about 2.5-2.6 m wide"},
+    {"facade": "REAR", "position": "LEFT", "what": "floor-to-ceiling living-room pane opening to the terrace, about 2.5-2.6 m wide, under the awning box"},
+    {"facade": "REAR", "position": "RIGHT", "what": "two-part floor-to-ceiling bedroom glazing (narrow opening leaf with top light + wide fixed pane), about 2.55 m wide"}
+  ],
+  "features": [
+    {"kind": "CANOPY", "count": 1, "where": "front, above the entrance door: flat open-slat (pergola-type) canopy projecting about 1.2 m, on a white rendered wall panel"},
+    {"kind": "CANOPY", "count": 1, "where": "rear, above the living-room glazing and narrow terrace door: retractable awning / awning box about 6 m long over the terrace"},
+    {"kind": "TERRACE", "count": 1, "where": "rear, left of centre as seen from the garden: timber deck / paved terrace about 3.5 x 5.9 m"},
+    {"kind": "CHIMNEY", "count": 2, "where": "two slim metal flue/vent pipes side by side just behind the ridge on the rear slope, roughly mid-length"},
+    {"kind": "OTHER", "count": 1, "where": "small entrance landing with steps in front of the door (1.7 on the plan)"}
+  ],
+  "palette": {"walls": "variant A (elevations, images 5/8/15): light grey vertical panel cladding with white render band under the eaves and white rendered panel around the entrance and around the living-room end of the garden side; variant B (images 6/11): natural grey-brown vertical timber slats in place of the grey panels; dark/black window frames and door in both", "roof": "dark blue-grey / graphite standing-seam metal sheet"},
+  "uncertain": [
+    "All three large panes are right at the 2.5 m threshold (2.5-2.6 m by plan and elevation); counted as LARGE_GLAZING because they are single floor-to-ceiling panes.",
+    "REAR left-to-right (seen from the garden): two-part floor-to-ceiling window/door of the small room (about 1.8 m, counted GLAZED_DOOR although it may be a fixed window with one opening leaf), living-room pane, narrow single glazed terrace door (about 1 m), tall narrow slit window of the bathroom, bedroom two-part glazing.",
+    "Entrance door centre is at about 0.35 of the front length - on the LEFT/CENTRE boundary.",
+    "Entrance has only an open-slat canopy and a small landing; it is neither recessed nor under a solid porch roof, so recessedOrPorch is false - a reader could argue true because of the canopy.",
+    "Height 5.13 m is ridge above ground (4.83 m above floor level); no height is published in the page text.",
+    "Wall finish differs between the two render sets (grey panels vs timber slats)."
+  ],
+  "confidence": "HIGH - dimensioned plan, section, four elevations and renders of both long sides all agree; the only soft points are threshold classifications."
+}

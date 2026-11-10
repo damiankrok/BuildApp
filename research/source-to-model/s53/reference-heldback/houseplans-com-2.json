@@ -1,0 +1,62 @@
+{
+  "slug": "houseplans-com-2",
+  "imagesUsed": [
+    {"n": 19, "what": "main floor plan (front/entrance porch at the bottom, shop/garage on the right)"},
+    {"n": 7, "what": "exterior render from the front-left (largest copy; 4, 5, 6, 11, 24 are the same picture)"},
+    {"n": 18, "what": "second exterior render from the front, showing all front porch posts"},
+    {"n": 15, "what": "rear elevation drawing (largest copy; 14 and 16 are the same)"},
+    {"n": 17, "what": "left elevation drawing"},
+    {"n": 13, "what": "right elevation drawing"}
+  ],
+  "mirrorOrOtherProjectWarning": "Images 0-3, 8-10, 12 and 20-23 are thumbnails of OTHER house plans (related plans / site navigation) and 25-27 are generic graphics - ignore them. No mirrored variant: both renders match the plan (garage on the right, porch wrapping the left end). No front elevation DRAWING is published; the front is read from the two renders and the plan. The two renders differ slightly in the number of porch posts drawn (image 18 matches the plan).",
+  "overall": {"widthM": 24.49, "depthM": 16.15, "heightM": 9.55, "basis": "published on page (80'4\" x 53' x 31'4\"); width and depth include the porches - the enclosed building is about 21.5 x 11.4 m (scaled from plan)"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main (house + integral shop/garage under one roof)", "role": "MAIN", "where": "single rectangular volume; living rooms at the left end, bedrooms in the middle, shop/garage occupying the right-hand third", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "about 21.5 x 11.4"},
+    {"name": "shop/garage", "role": "GARAGE", "where": "right-hand end of the same volume, full depth, under the same roof (not a separate block)", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "about 7.6 x 11.4 (interior 24'6\" x 37'0\")"},
+    {"name": "wrap-around porch", "role": "PORCH", "where": "L-shaped: across the front of the house part (not in front of the garage doors) and along the whole left gable end", "storeys": 1, "enclosed": false, "roofKind": "SHED", "ridge": "NA", "approxSizeM": "front arm 15.5 x 3.1 (51'0\" x 10'3\"), left arm 3.1 x 12.5 (10'3\" x 41'1\")"},
+    {"name": "rear covered patio", "role": "PORCH", "where": "rear, behind the master bedroom, right of centre as seen from the front (left of centre seen from behind), partly recessed into the rear wall", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "4.8 x 2.5 (15'9\" x 8'3\")"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "One tall, steep, symmetrical gable roof over the whole building including the garage; no dormers, no cross gables, no valleys. Louvred vent slot in each gable peak. Low-slope porch roof wraps the front and left sides below the main eaves. Pitch not stated (drawn roughly 45 degrees; ridge height 9.55 m over a single storey)."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 2},
+  "entrance": {"facade": "FRONT", "position": "LEFT", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 7, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW", "WINDOW", "GARAGE_DOOR", "GARAGE_DOOR"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["DOOR", "LARGE_GLAZING", "WINDOW", "WINDOW"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "GLAZED_DOOR"]},
+      {"storey": 1, "count": 0, "leftToRight": []}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 0, "leftToRight": []}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "CENTRE", "what": "master-bedroom group under the patio roof: double glazed door with transom flanked by a window each side, about 3.9 m overall (just left of centre seen from behind)"},
+    {"facade": "LEFT", "position": "RIGHT", "what": "8 ft (about 2.4 m) sliding glass door from the living room to the side porch - just under the large-glazing threshold, counted as GLAZED_DOOR"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 1, "where": "tall stack through the front roof slope, about one third along from the left end (over the living room)"},
+    {"kind": "PORCH_ROOF", "count": 1, "where": "low-slope roof of the L-shaped porch along the front and left sides"},
+    {"kind": "POSTS", "count": 10, "where": "porch posts per plan: six along the front edge (including both end posts) and four more along the left side edge; timber, square"},
+    {"kind": "POSTS", "count": 2, "where": "outer corners of the rear covered patio"},
+    {"kind": "CANOPY", "count": 1, "where": "flat roof over the rear covered patio"},
+    {"kind": "OTHER", "count": 2, "where": "narrow louvred vent in the peak of each gable (left and right)"}
+  ],
+  "palette": {"walls": "black vertical board-and-batten siding on the long front, light natural timber horizontal siding on the left gable end and porch corner; timber-look garage doors and entrance door, black window frames, timber porch posts and soffit", "roof": "black / dark charcoal standing-seam metal"},
+  "uncertain": [
+    "FRONT is read from renders and plan only (no front elevation drawing). Order left to right: living-room double window, entrance door, bedroom-3 double window, narrow bathroom window, bedroom-2 double window, two single garage doors.",
+    "REAR: the master-bedroom window + double door + window are separated only by narrow posts and share one head, so they are counted as ONE LARGE_GLAZING; read separately they would be WINDOW, GLAZED_DOOR, WINDOW (rear count 6 instead of 4). The first opening (far left seen from behind) is the garage's rear service door with glazed lites.",
+    "LEFT: living-room slider is 8 ft (2.44 m) wide - on the GLAZED_DOOR / LARGE_GLAZING boundary.",
+    "Render 7 draws only three porch posts; render 18 and the plan show six along the front.",
+    "No attic plan and vaulted ceilings: attic treated as not habitable although the roof is very tall.",
+    "Whether the shop/garage should count as a separate body is a judgement call: it is inside the same rectangular volume under the same roof.",
+    "Chimney is black/dark in one render and grey block in the other; rear-facade colours are not shown in colour anywhere."
+  ],
+  "confidence": "HIGH for counts on rear/left/right (labelled elevation drawings + plan) and for massing; MEDIUM for the front, which has no elevation drawing and relies on two renders plus the plan."
+}

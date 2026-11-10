@@ -1,0 +1,67 @@
+{
+  "slug": "dobredomy-pl-2",
+  "imagesUsed": [
+    {"n": 8, "what": "ground floor plan (front/entrance at the bottom)"},
+    {"n": 9, "what": "attic plan (mezzanine + optional attic room, roof outline)"},
+    {"n": 7, "what": "site/roof plan with overall dimensions 14.20 x 20.24 m"},
+    {"n": 5, "what": "front elevation (rendered)"},
+    {"n": 6, "what": "rear elevation (rendered)"},
+    {"n": 4, "what": "left elevation (rendered) - covered terrace at its left end, garage side wall at its right end"},
+    {"n": 3, "what": "right elevation (rendered) - three windows, terrace at its right end"},
+    {"n": 10, "what": "exterior render, rear-left corner with covered terrace"},
+    {"n": 13, "what": "exterior render, front-left"},
+    {"n": 15, "what": "exterior render, front"},
+    {"n": 16, "what": "exterior render, rear"}
+  ],
+  "mirrorOrOtherProjectWarning": "Images 0, 2, 11 and 17 are newsletter/pop-up pictures of OTHER houses (gabled house with balcony, flat-roofed house) and images 1 and 12 are adverts - ignore them. No mirrored variant of this house is shown; plans, elevations and renders all agree (garage on the right, kitchen on the left).",
+  "overall": {"widthM": 14.2, "depthM": 20.24, "heightM": 7.2, "basis": "width and depth printed on the site plan (width includes the left bay; depth includes the roofed rear terrace - walls alone are about 16.5 m deep); height published on page"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "rear two-thirds of the footprint, full width", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "about 13.4 x 11.6"},
+    {"name": "garage", "role": "GARAGE", "where": "front-right corner, flush with the right side wall and projecting about 4.9 m in front of the main (kitchen) front wall", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "FRONT_TO_BACK", "approxSizeM": "about 6.7 x 6.3 (32.3 m2 inside, two cars)"},
+    {"name": "covered rear terrace", "role": "PORCH", "where": "rear-left, behind the living room, under a hipped extension of the main roof carried on two stone-clad pillars", "storeys": 1, "enclosed": false, "roofKind": "HIP", "ridge": "FRONT_TO_BACK", "approxSizeM": "about 6.2 x 3.5"},
+    {"name": "dining bay", "role": "BAY", "where": "left side wall, about the middle of the main body, projecting about 0.8 m", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 3.0 x 0.8"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Multi-hip roof. The main body is almost pyramidal with a very short top ridge (about 1 m, parallel to the front); a lower hipped arm runs forward over the garage (ridge front-to-back, hip end facing the front) and another runs back over the roofed terrace at the rear-left (ridge front-to-back, hip end facing the rear), with valleys where the arms meet the main roof. Uniform eaves with white soffit all round."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["LARGE_GLAZING", "WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "CENTRE", "what": "full-height glazed dining bay, about 3 m wide"},
+    {"facade": "REAR", "position": "RIGHT", "what": "living-room wall under the roofed terrace: two full-height glazed doors (each about 1.7-1.8 m, with sloped top lights following the roof) either side of an outdoor fireplace stack - together an almost fully glazed wall about 4.8 m wide"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "one wide stone-clad fireplace stack at the rear-left over the terrace/living room; one near the roof peak, right of centre as seen from the front"},
+    {"kind": "ROOFLIGHT", "count": 2, "where": "front roof slope of the main body, above the entrance, side by side"},
+    {"kind": "ROOFLIGHT", "count": 2, "where": "right roof slope, side by side"},
+    {"kind": "ROOFLIGHT", "count": 1, "where": "small roof hatch on the left-facing slope of the garage roof arm (site plan only)"},
+    {"kind": "POSTS", "count": 2, "where": "square stone-clad pillars carrying the roof at the outer edge of the rear terrace"},
+    {"kind": "TERRACE", "count": 1, "where": "roofed timber deck at the rear-left; an open terrace continues along the rest of the rear in front of the two bedrooms"},
+    {"kind": "BAY", "count": 1, "where": "glazed dining bay on the left side wall"},
+    {"kind": "OTHER", "count": 1, "where": "outdoor fireplace built against the living-room rear wall inside the roofed terrace"}
+  ],
+  "palette": {"walls": "white render with light grey split-stone cladding (kitchen corner, terrace pillars, chimney) and horizontal light timber boarding (entrance niche, between rear and right-side windows); timber-coloured window frames and timber garage door", "roof": "anthracite/graphite flat concrete or ceramic tiles, white soffit, dark gutters"},
+  "uncertain": [
+    "Kitchen window on the front is about 2.4-2.5 m wide (two panes, with a sill) - on the WINDOW / LARGE_GLAZING boundary; counted as WINDOW.",
+    "REAR left-to-right (seen from behind): bedroom French door, bedroom French door, then the two living-room glazed doors either side of the fireplace stack under the terrace roof; each is under 2.5 m so they are counted as GLAZED_DOOR.",
+    "LEFT: the two small high windows are in the garage's left side wall (set forward, at the right end of the left elevation); the wall under the terrace roof at the left end has no opening facing left.",
+    "RIGHT: garage side wall (left end of the right elevation) is blank; third window position on the plan is hard to read, count taken from the elevation.",
+    "Attic: plan shows a 14.2 m2 mezzanine and a 16.1 m2 'attic / room' lit by rooflights, not counted in the 119.5 m2 usable area - treated as a (partial, optional) habitable attic.",
+    "A dark patch on the rear slope in the rear elevation is read as shadow, not a rooflight.",
+    "Ridge direction of an almost pyramidal roof is nominal."
+  ],
+  "confidence": "HIGH - four rendered elevations, dimensioned site/roof plan, both floor plans and four exterior renders are mutually consistent."
+}

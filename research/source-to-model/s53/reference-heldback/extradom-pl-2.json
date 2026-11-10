@@ -1,0 +1,61 @@
+{
+  "slug": "extradom-pl-2",
+  "imagesUsed": [
+    {"n": 12, "what": "ground floor plan with printed dimensions 1410 x 835 cm (front/entrance at the bottom); 34-36 are smaller copies"},
+    {"n": 37, "what": "front elevation (rendered)"},
+    {"n": 40, "what": "rear elevation (rendered)"},
+    {"n": 38, "what": "left gable elevation (rendered) - fully glazed gable"},
+    {"n": 39, "what": "right gable elevation (rendered) - service door"},
+    {"n": 2, "what": "cross-section (35 degrees, 648 cm overall height, 266 cm room height)"},
+    {"n": 7, "what": "site plan with roof outline and terraces"},
+    {"n": 25, "what": "exterior render, front (same picture as 5 / 19)"},
+    {"n": 29, "what": "exterior render, front-left corner (same as 8 / 30)"},
+    {"n": 27, "what": "exterior render, left glazed gable (same as 9 / 17)"}
+  ],
+  "mirrorOrOtherProjectWarning": "Images 41-73 are thumbnails of OTHER projects (similar-houses carousel) and 0, 1, 3, 4, 10, 13-16, 18, 20-24, 26, 28, 31-33 are interiors or duplicates; image 11 is an advert badge. No mirrored variant of this house is shown: plan, elevations and renders agree (glazed gable on the left, kitchen window left of the entrance).",
+  "overall": {"widthM": 14.1, "depthM": 8.35, "heightM": 6.48, "basis": "width and depth printed on plan and published on page; height printed on the section (648) and published"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single rectangular block; the glazed wall of the left gable is set back about 1.3 m inside the gable outline, forming a roofed niche", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "14.10 x 8.35"},
+    {"name": "entrance portal", "role": "PORCH", "where": "front facade, centre: timber-clad L-shaped frame (flat roof slab plus a side wall on its right) projecting about 1.2 m, with the door in a dark recessed niche behind it", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 2.5 x 1.2"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 35, "notes": "Plain symmetrical gable ('modern barn'), ridge along the 14.1 m length, no eaves overhang (flush eaves, hidden gutters), thick white verge frame at the gables; no dormers and no rooflights. At the left gable the roof and side walls run on about 1.3 m beyond the glazed wall."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["LARGE_GLAZING", "ENTRANCE_DOOR", "WINDOW"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 1, "leftToRight": ["LARGE_GLAZING"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 1, "leftToRight": ["DOOR"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "CENTRE", "what": "gable glazed from floor to apex: six panes (three columns, two rows, the upper row cut to the roof slope), about 5.1 m wide, shifted towards the rear; a dark grey solid panel fills the front part of the gable"},
+    {"facade": "FRONT", "position": "LEFT", "what": "two-pane kitchen window with sill, about 2.7 m wide x 1.4 m high (large only by the width rule)"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "one tall stack rising from the rear slope near the rear eave, left of centre as seen from the front (fireplace); one near the ridge on the front slope towards the right end (boiler)"},
+    {"kind": "CANOPY", "count": 1, "where": "front centre: timber-clad flat canopy with one timber side wall over the recessed entrance door"},
+    {"kind": "TERRACE", "count": 3, "where": "large terrace in front of the glazed left gable (partly under the roof niche); narrow terrace along the rear behind the two bedrooms; small entrance landing with steps at the front"},
+    {"kind": "OTHER", "count": 1, "where": "roofed niche at the left gable: glazing recessed about 1.3 m behind the white gable frame, reveal and soffit lined with timber boards"},
+    {"kind": "OTHER", "count": 1, "where": "small landing with steps at the service door on the right gable"},
+    {"kind": "OTHER", "count": 3, "where": "small roof vent pipes (one on the front slope, two near the ridge)"}
+  ],
+  "palette": {"walls": "white render with warm horizontal timber boarding (entrance portal, left-gable reveal and soffit, panel between the rear French doors), graphite/dark grey panels beside the gable glazing and in the door niche, dark grey plinth; anthracite window frames and doors", "roof": "graphite / dark grey standing-seam metal sheet, chimneys clad in the same dark grey"},
+  "uncertain": [
+    "FRONT left opening is a two-pane kitchen window about 2.67 m wide with a normal sill; it is LARGE_GLAZING only by the >2.5 m width rule and would otherwise read as a wide WINDOW.",
+    "LEFT gable glazing rises into the roof apex over a single-storey room open to the roof; counted once on storey 0 (no storey-1 opening).",
+    "RIGHT: service door with an attached side panel (small window above a solid panel) in one frame - counted as one DOOR; it sits left of centre (about 0.35 from the left as seen from outside).",
+    "REAR: two two-leaf French doors (about 1.5 m each) with a timber-clad wall panel between them, both in the left half of the rear elevation as seen from behind; the rest of the rear wall is blank.",
+    "The section shows a flat ceiling and roof trusses (attic not habitable) while the living room is rendered open to the ridge.",
+    "Renders show timber lining in the gable niche; the gable elevation drawing shows it white."
+  ],
+  "confidence": "HIGH - dimensioned plan, section, four rendered elevations and three exterior renders are fully consistent."
+}
