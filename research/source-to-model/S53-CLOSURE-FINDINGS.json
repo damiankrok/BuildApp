@@ -1,0 +1,196 @@
+{
+ "schema": "buildapp.source-to-model.closure-verdicts/1",
+ "what": "Every exterior finding of the joint audit (geometryClosureAudit) on the ten recorded descriptions, rebuilt with no reader call: a verdict per class, the cause, what was changed in the builder, and what stands. Severities were not changed; the audit was not changed.",
+ "scoredControlKept": "S53-E3-RESULT.json keeps the control as scored (builder 0.1.0: 3-7 findings per house, one compile error). Everything here is DEV work after it.",
+ "builder": {
+  "before": "0.2.0 (e223cb2)",
+  "after": "0.5.0"
+ },
+ "findings": {
+  "before": 50,
+  "after": 5,
+  "modelsWithNoneAfter": 7,
+  "models": 10,
+  "perHouse": {
+   "architecturaldesigns-com-2": {
+    "before": 6,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "dobredomy-pl-2": {
+    "before": 1,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "domoweklimaty-pl-2": {
+    "before": 7,
+    "after": 2,
+    "compileErrorsAfter": 0
+   },
+   "extradom-pl-2": {
+    "before": 5,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "houseplans-com-2": {
+    "before": 7,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "lipinscy-pl-2": {
+    "before": 4,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "dobredomy-pl-1": {
+    "before": 7,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "domoweklimaty-pl-1": {
+    "before": 2,
+    "after": 1,
+    "compileErrorsAfter": 0
+   },
+   "extradom-pl-1": {
+    "before": 7,
+    "after": 0,
+    "compileErrorsAfter": 0
+   },
+   "houseplans-com-1": {
+    "before": 4,
+    "after": 2,
+    "compileErrorsAfter": 0
+   }
+  },
+  "compileErrorsAfter": 0
+ },
+ "classes": [
+  {
+   "id": "F1",
+   "what": "TERRACE<->WALL GAP 0.020 m",
+   "count": 13,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "the builder set every terrace's top 2 cm below its storey's floor level, so the terrace stood 2 cm under the foot of the wall it lies against",
+   "fix": "terrace top at the level's elevation, as the drawings' path sets it",
+   "after": 0
+  },
+  {
+   "id": "F2",
+   "what": "canopy plate INTERSECTION with a roof plane (0.01-0.56 m3)",
+   "count": 11,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "the clearance under a roof was tested at the plate's centre only; the eaves that reach over the plate's inner part cut through it",
+   "fix": "where the plate as stated would stand in a roof, it begins at the roof's edge and is no higher than that edge; named in the result",
+   "after": 0
+  },
+  {
+   "id": "F3",
+   "what": "canopy plate COPLANAR_DUPLICATE / INTERSECTION with a body's walls, slab or with its own posts (plate stated partly or wholly within a body)",
+   "count": 8,
+   "verdict": "REAL_CONSTRUCTION_DEFECT, and behind three of them a DESCRIBED_BUT_LOST form",
+   "cause": "a canopy stated inside a body's rectangle was built as a plate through the walls. The reader states a recessed porch that way (the body's rectangle takes in the porch); one shallow case is a canopy the reader kept inside the frame (its own note says so)",
+   "fix": "cut back to open ground; under a metre deep against one face: built projecting from that face; across a whole face and deeper: the walls stand back under the body's own roof, which keeps its outline, on posts (extradom-pl-1: compared with its side elevations, which draw the roof running on over an open end on a post); part of a face or a corner: said and not built",
+   "after": 0,
+   "left": "a porch cut out of a corner or of part of a face (dobredomy-pl-1) is not built - the model has the form (PocketV2), the described builder does not use it yet"
+  },
+  {
+   "id": "F4",
+   "what": "canopy <-> canopy COPLANAR_DUPLICATE and INTERSECTION (an L-shaped porch stated as two rectangles that overlap)",
+   "count": 2,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "each canopy was built without regard to the others",
+   "fix": "a canopy is cut back from one already built at its height",
+   "after": 0
+  },
+  {
+   "id": "F5",
+   "what": "balcony slab INTERSECTION with the main roof plane (0.10 and 0.16 m3)",
+   "count": 2,
+   "verdict": "REPRESENTATION_LIMIT with a visible defect",
+   "cause": "a balcony in front of a dormer stands where the roof's eaves run on: the model has no way to interrupt an eave, so the slab passes through it",
+   "fix": "none",
+   "after": 2
+  },
+  {
+   "id": "F6",
+   "what": "balcony <-> entrance canopy INTERSECTION, COPLANAR_DUPLICATE and a post GAP",
+   "count": 3,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "a canopy stated under a balcony at the balcony's own height: two covers in one place",
+   "fix": "a canopy is cut back from under a balcony at its height (the balcony is the cover there)",
+   "after": 0
+  },
+  {
+   "id": "F7",
+   "what": "flat roof plate COPLANAR_DUPLICATE with the tops of its own walls (0.86-1.19 m2 a wall)",
+   "count": 4,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "the plate's top was set at the walls' top, so the strip of plate bearing on each wall and the wall's top were drawn in one plane",
+   "fix": "the stated eaves height is the walls' top; the plate lies 0.15 m below it within the walls",
+   "after": 0
+  },
+  {
+   "id": "F8",
+   "what": "canopy post INTERSECTION with a wall (0.10 m3)",
+   "count": 3,
+   "verdict": "REAL_CONSTRUCTION_DEFECT",
+   "cause": "posts were set along an edge that runs along another body's wall",
+   "fix": "a post is never placed within a body; a body carries the canopy there",
+   "after": 0
+  },
+  {
+   "id": "F9",
+   "what": "canopy <-> wall GAP of 0.01-0.09 m under PARAPET<->FLAT_ROOF BEARING",
+   "count": 6,
+   "verdict": "three REAL (an edge stated a few centimetres from a face it belongs on), three AUDIT_RELATION_ARTEFACT with no visible defect",
+   "cause": "real: canopies were not snapped to the bodies' faces as the bodies are to one another. Artefact: a canopy is emitted as a flat roof, so the audit expects it to bear into every wall beside it - also the wall ring of the storey above a plate whose top is 2 cm under that storey's floor (domoweklimaty-pl-2: plate 2.60-2.78 m against the ground-storey wall, which runs to 2.80 m behind it), and a wall whose top under a single slope is 9 cm below a plate that lies against the roof's edge (houseplans-com-1: wall top 2.71 m, roof edge 2.71-3.00 m, plate 2.80-2.98 m)",
+   "fix": "edges within 0.25 m of a face are put on it. The three artefacts stand as ERRORs: a canopy would need a type of its own for the audit to know what it meets",
+   "after": 3
+  }
+ ],
+ "describedVersusBuilt": {
+  "note": "over the ten descriptions, with builder 0.5.0: what the reader stated against what the model holds. Whatever is missing here was lost in the build and can be worked on with no new reading; what the reader never stated (dormers on one house, second chimneys, rooflights) is not in these counts and needs a reading.",
+  "total": {
+   "openings": {
+    "described": 124,
+    "built": 121
+   },
+   "dormers": {
+    "described": 2,
+    "built": 2
+   },
+   "rooflights": {
+    "described": 13,
+    "built": 9
+   },
+   "chimneys": {
+    "described": 12,
+    "built": 12
+   },
+   "balconies": {
+    "described": 6,
+    "built": 6
+   },
+   "terraces": {
+    "described": 10,
+    "built": 10
+   },
+   "canopies": {
+    "described": 15,
+    "built": 13
+   }
+  },
+  "lostInBuild": [
+   "3 of 124 openings (a wall 7 cm high under a roof; one blocked by a body; one stated on a side that is open under the porch)",
+   "4 of 13 rooflights (two on a hip's end plane, two on an attached cross gable: the described builder places rooflights only on a body's two main slopes)",
+   "2 of 15 canopies (one covered by the eaves; one a corner recess)"
+  ]
+ },
+ "sideEffects": [
+  "the two houses with a long porch keep every stated post (7; 6+3+2)",
+  "extradom-pl-1: one window stated on a side that is now open under the porch is dropped by name",
+  "lipinscy-pl-2: its 0.6 m entrance canopy is now covered by the eaves and not built as a plate (it was a plate through the wall before)",
+  "flat-roofed bodies show a 0.15 m upstand; their terraces' guards stand on the plate"
+ ]
+}

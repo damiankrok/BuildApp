@@ -16,7 +16,10 @@
 import { describe, expect, it } from 'vitest'
 import { LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
 import { genericProjectPageAdapter, memoryByteCache } from '@buildapp/source-package'
-import { compileBuilding } from '@buildapp/geometry'
+import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
+import { parseModel } from '@buildapp/model'
+import { checkHouseDescription } from '@buildapp/source-vision'
+import { reconstructFromHouseDescription } from '@buildapp/reconstruction'
 import { readFileSync } from 'node:fs'
 import type { StructuredVision } from '@buildapp/source-vision'
 import { AnalysisError, analyseLink, identityOf, anchorsOfDrawings, describedFollowUp, drawingsModelUnanchored, drawingsWeaknesses, runDescribedAnalysis, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
@@ -265,5 +268,22 @@ describe('after a drawings model: the description only where the model is weak b
     expect(events[0]).toBe('SORTING_PICTURES:0')
     expect(events.some((e) => e.startsWith('DESCRIBING_HOUSE:') && !e.endsWith(':0'))).toBe(true)
     expect(events[events.length - 1]).toMatch(/^BUILDING_MODEL:/)
+  })
+})
+
+describe('a described house\'s parts meet: the joint audit on the synthetic fixture (v3.53.1)', () => {
+  it('a gabled body with a flat-roofed garage, an entrance canopy, a terrace, a balcony, dormers and a chimney compiles with no error and no exterior finding', () => {
+    const description = JSON.parse(readFileSync(new URL('../../reconstruction/test/fixtures/described-house-a.json', import.meta.url), 'utf8')) as never
+    const checked = checkHouseDescription(description)
+    expect(checked.ok).toBe(true)
+    if (!checked.ok) return
+    const built = reconstructFromHouseDescription(checked.description, 'joints')
+    expect(built.ok).toBe(true)
+    if (!built.ok) return
+    const model = parseModel(built.modelJson)
+    const scene = compileBuilding(model)
+    expect(scene.diagnostics.filter((d) => d.severity === 'ERROR')).toEqual([])
+    const exterior = geometryClosureAudit(model, scene).findings.filter((f) => f.scope === 'EXTERIOR').map((f) => `${f.code} ${f.objects.join(' / ')}`)
+    expect(exterior).toEqual([])
   })
 })

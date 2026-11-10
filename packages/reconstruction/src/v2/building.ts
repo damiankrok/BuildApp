@@ -381,6 +381,9 @@ export type CanopyV2 = {
   undersideY: number
   thicknessM: number
   posts: Array<{ x: number; z: number }>
+  /** `false`: no plate of its own — the area lies under a body's roof (`hostId`: the roof plane over the posts), which the posts carry. */
+  plate?: false
+  hostId?: string
   featureId: string
   provenance: ProvenanceStatus
   why: string

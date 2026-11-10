@@ -224,3 +224,86 @@ describe('described house — measures the drawings give (v3.53.1)', () => {
     expect(JSON.stringify(buildingFromHouseDescription(d, { anchors: {} }))).toBe(JSON.stringify(buildingFromHouseDescription(d)))
   })
 })
+
+describe('described house — roofs over open areas, terraces and flat roofs meet what they stand against (v3.53.1)', () => {
+  const canopy = (over: Partial<HouseDescription['canopies'][number]>): HouseDescription['canopies'][number] => ({ kind: 'PORCH_ROOF', x0: 0, x1: 1, z0: 0, z1: 1, undersideM: 2.5, posts: 0, images: [1], confidence: 0.7, ...over })
+  // one gabled body 10.5 × 9 m, ridge along x, eaves 0.5 m out; nothing else on the plot
+  const alone = (canopies: HouseDescription['canopies'], roof: Partial<HouseDescription['bodies'][number]['roof']> = {}): HouseDescription => {
+    const d = fixture()
+    return { ...d, bodies: [{ ...d.bodies[0], roof: { ...d.bodies[0].roof, ...roof } }], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies }
+  }
+  const codes = (b: ReturnType<typeof buildingFromHouseDescription>, subject: string) => b.adjustments.filter((a) => a.subject === subject).map((a) => `${a.code}: ${a.why}`)
+
+  it('a terrace lies at its storey\'s floor level, against the wall it is stated on', () => {
+    const b = buildingFromHouseDescription(fixture())
+    expect(b.building.terraces.map((t) => t.topY)).toEqual([0])
+  })
+
+  it('a flat roof\'s plate lies within the walls, below their top: the stated eaves height is the walls\' top', () => {
+    const b = buildingFromHouseDescription(fixture())
+    const flat = b.building.attachedRoofs.find((r) => r.massId === 'body-garage')
+    expect(flat?.parapetTopY).toBe(2.9)
+    expect(flat?.slabTopY).toBeCloseTo(2.75, 6)
+  })
+
+  it('a canopy stated partly within a body is cut back to the open ground; an edge stated a hand from a face is on it', () => {
+    const b = buildingFromHouseDescription(alone([canopy({ x0: 2, x1: 6, z0: -1.5, z1: 1.9, undersideM: 2.4 })]))
+    const c = b.building.canopies?.[0]
+    expect(c).toBeDefined()
+    // the body's front face is the frame's z = 0 here (one body: its own face is the origin); nothing of the plate is inside it
+    expect(c?.rect.z1).toBeLessThanOrEqual(0)
+    expect(codes(b, 'canopy 1').join(' ')).toMatch(/within main's walls is not built|eaves reach over it/)
+  })
+
+  it('a shallow canopy stated inside a face projects from it; a deep one across a whole face is a porch under the body\'s own roof — the walls stand back, the roof keeps its outline, posts stand where the face was', () => {
+    const d = alone([])
+    const w = d.bodies[0].x1 - d.bodies[0].x0
+    const dep = d.bodies[0].z1 - d.bodies[0].z0
+    const z0 = d.bodies[0].z0
+    const shallow = buildingFromHouseDescription(alone([canopy({ kind: 'ENTRANCE_CANOPY', x0: 3, x1: 5, z0, z1: z0 + 0.6 })], { overhangM: 0 }))
+    expect(shallow.building.canopies?.[0]?.rect).toMatchObject({ z0: -0.6, z1: 0 })
+    expect(shallow.building.masses[0].z1 - shallow.building.masses[0].z0).toBeCloseTo(dep, 6)
+
+    const plain = buildingFromHouseDescription(d)
+    const recess = buildingFromHouseDescription(alone([canopy({ kind: 'COVERED_TERRACE', x0: 0, x1: w, z0: z0 + dep - 3, z1: z0 + dep, posts: 2 })]))
+    const m = recess.building.masses[0]
+    expect(m.z1 - m.z0).toBeCloseTo(dep - 3, 6)
+    // the roof's planes are the ones of the house without the porch: same outline, same ridge
+    expect(JSON.stringify(recess.building.planeRoofs?.[0].layout)).toBe(JSON.stringify(plain.building.planeRoofs?.[0].layout))
+    const porch = recess.building.canopies?.[0]
+    expect(porch?.plate).toBe(false)
+    expect(porch?.hostId).toMatch(/^roof-main-plane-/)
+    expect(porch?.posts).toHaveLength(2)
+    expect(porch?.posts.every((q) => q.z > m.z1 + 2)).toBe(true)
+    expect(reconstructFromHouseDescription(alone([canopy({ kind: 'COVERED_TERRACE', x0: 0, x1: w, z0: z0 + dep - 3, z1: z0 + dep, posts: 2 })]), 'porch').ok).toBe(true)
+  })
+
+  it('a deep recess over part of a face is not a form this builder cuts: it is said and not built — never a plate through the walls', () => {
+    const d = alone([])
+    const z0 = d.bodies[0].z0
+    const b = buildingFromHouseDescription(alone([canopy({ x0: 6, x1: d.bodies[0].x1, z0, z1: z0 + 1.8, posts: 1 })]))
+    expect(b.building.canopies ?? []).toEqual([])
+    expect(codes(b, 'canopy 1')[0]).toMatch(/^FEATURE_DROPPED: .*recessed porch/)
+  })
+
+  it('under a roof\'s eaves the plate begins at the roof\'s edge; its posts still stand along the long outer edge, as many as were stated', () => {
+    const d = alone([])
+    const w = d.bodies[0].x1 - d.bodies[0].x0
+    const z0 = d.bodies[0].z0
+    const b = buildingFromHouseDescription(alone([canopy({ x0: 0, x1: w, z0: z0 - 2.4, z1: z0, undersideM: 3.6, posts: 5 })]))
+    const c = b.building.canopies?.[0]
+    expect(c?.rect.z1).toBeCloseTo(-0.5, 6) // the eaves stand 0.5 m out: the plate starts there
+    expect(c?.posts).toHaveLength(5)
+    expect(new Set(c?.posts.map((q) => q.z)).size).toBe(1)
+    const xs = (c?.posts ?? []).map((q) => q.x).sort((p, q) => p - q)
+    expect(xs.every((x, i) => i === 0 || x - xs[i - 1] > 0.9)).toBe(true)
+  })
+
+  it('two covers do not lie in one another, and a post never stands in a wall', () => {
+    const d = fixture() // main and a garage to its right whose front stands 1 m forward of main's
+    const two = buildingFromHouseDescription({ ...d, balconies: [], terraces: [], canopies: [canopy({ x0: 2, x1: 8, z0: -2, z1: 1, undersideM: 2.4, posts: 2 }), canopy({ x0: 6, x1: 10.5, z0: -1, z1: 1, undersideM: 2.4, posts: 2 })] })
+    const [a, b] = two.building.canopies ?? []
+    expect(a && b && (b.rect.x0 >= a.rect.x1 || b.rect.z1 <= a.rect.z0 || b.rect.z0 >= a.rect.z1)).toBe(true)
+    for (const c of two.building.canopies ?? []) for (const q of c.posts) for (const m of two.building.masses) expect(q.x > m.x0 - 0.15 && q.x < m.x1 + 0.15 && q.z > m.z0 - 0.15 && q.z < m.z1 + 0.15).toBe(false)
+  })
+})

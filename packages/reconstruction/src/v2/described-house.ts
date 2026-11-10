@@ -27,7 +27,7 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.3.0'
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.5.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
@@ -63,6 +63,9 @@ const ROOF_THICKNESS_M = 0.28
 const WALL_T = 0.3
 const SNAP_M = 0.15
 const HIP_RIDGE_MARGIN_M = 1
+const FLAT_ROOF_UPSTAND_M = 0.15
+const CANOPY_SNAP_M = 0.25
+const RECESS_MIN_DEPTH_M = 1
 
 /** Cluster nearly equal coordinates onto one value, so bodies that touch share an exact line. */
 function snapper(values: number[]): (v: number) => number {
@@ -207,7 +210,8 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   const snapX = snapper(d.bodies.flatMap((b) => [X(b.x0), X(b.x1)]))
   const snapZ = snapper(d.bodies.flatMap((b) => [Z(b.z0), Z(b.z1)]))
 
-  type Body = { src: DescribedBody; id: string; rect: Rect }
+  /** `roofRect`: the outline the roof keeps where the walls stand back from it under a recessed porch. */
+  type Body = { src: DescribedBody; id: string; rect: Rect; roofRect?: Rect }
   const ordered = [...d.bodies].sort((a, b) => Number(b.role === 'MAIN') - Number(a.role === 'MAIN'))
   const bodies: Body[] = []
   for (const b of ordered) {
@@ -231,6 +235,52 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     }
     bodies.push({ src: b, id: b.role === 'MAIN' ? 'main' : `body-${b.id}`, rect })
   }
+  // --- canopies stated WITHIN a body's walls ------------------------------------------------------------------------------
+  // The reader was asked for roofs over OPEN areas. One stated inside a body, against one of its faces, is either
+  //  - shallow (under a metre): a canopy over a door that the reader kept inside the frame — it projects from that face;
+  //  - across the whole face and deeper: a porch or terrace under the body's own roof — the walls stand back by its
+  //    depth, the roof keeps its outline, its posts stand where the face was;
+  //  - anything else (part of a face, a corner): a recess this builder does not cut yet — said, and not built.
+  const canopyRect = (c: HouseDescription['canopies'][number]): Rect => ({ x0: round6(Math.min(X(c.x0), X(c.x1))), x1: round6(Math.max(X(c.x0), X(c.x1))), z0: round6(Math.min(Z(c.z0), Z(c.z1))), z1: round6(Math.max(Z(c.z0), Z(c.z1))) })
+  type CanopyPlan = { kind: 'OPEN' } | { kind: 'PROJECTS'; rect: Rect; from: string } | { kind: 'RECESS'; body: Body; facade: Facade; rect: Rect } | { kind: 'UNBUILT'; why: string }
+  const canopyPlans: CanopyPlan[] = d.canopies.map((c) => {
+    const r = canopyRect(c)
+    const host = bodies.find((b) => r.x0 >= b.rect.x0 - 0.05 && r.x1 <= b.rect.x1 + 0.05 && r.z0 >= b.rect.z0 - 0.05 && r.z1 <= b.rect.z1 + 0.05)
+    if (!host) return { kind: 'OPEN' }
+    const h = host.rect
+    const on: Facade[] = []
+    if (Math.abs(r.z0 - h.z0) <= 0.05) on.push('FRONT')
+    if (Math.abs(r.z1 - h.z1) <= 0.05) on.push('REAR')
+    if (Math.abs(r.x0 - h.x0) <= 0.05) on.push('WEST')
+    if (Math.abs(r.x1 - h.x1) <= 0.05) on.push('EAST')
+    const acrossX = Math.abs(r.x0 - h.x0) <= 0.3 && Math.abs(r.x1 - h.x1) <= 0.3
+    const acrossZ = Math.abs(r.z0 - h.z0) <= 0.3 && Math.abs(r.z1 - h.z1) <= 0.3
+    const face = on.find((f) => (f === 'FRONT' || f === 'REAR' ? !acrossZ : !acrossX))
+    if (!face) return { kind: 'UNBUILT', why: `it is stated in the middle of ${host.src.id}, against none of its faces` }
+    const alongX = face === 'FRONT' || face === 'REAR'
+    const depth = alongX ? r.z1 - r.z0 : r.x1 - r.x0
+    if (depth < RECESS_MIN_DEPTH_M && on.length === 1) {
+      const out: Rect = face === 'FRONT' ? { ...r, z0: h.z0 - depth, z1: h.z0 } : face === 'REAR' ? { ...r, z0: h.z1, z1: h.z1 + depth } : face === 'WEST' ? { ...r, x0: h.x0 - depth, x1: h.x0 } : { ...r, x0: h.x1, x1: h.x1 + depth }
+      return { kind: 'PROJECTS', rect: out, from: host.src.id }
+    }
+    const across = alongX ? acrossX : acrossZ
+    const left = alongX ? h.z1 - h.z0 - depth : h.x1 - h.x0 - depth
+    if (across && host.src.roof.kind !== 'FLAT' && depth >= RECESS_MIN_DEPTH_M && left >= 3) return { kind: 'RECESS', body: host, facade: face, rect: r }
+    return { kind: 'UNBUILT', why: `it is stated within ${host.src.id}'s walls${across ? '' : ', over part of a face'} — a recessed porch of a form this builder does not cut into a body yet` }
+  })
+  canopyPlans.forEach((plan, n) => {
+    if (plan.kind !== 'RECESS') return
+    const b = plan.body
+    if (b.roofRect) return void (canopyPlans[n] = { kind: 'UNBUILT', why: `${b.src.id} already stands back under its roof on another side` })
+    b.roofRect = { ...b.rect }
+    const r = plan.rect
+    if (plan.facade === 'FRONT') b.rect = { ...b.rect, z0: r.z1 }
+    else if (plan.facade === 'REAR') b.rect = { ...b.rect, z1: r.z0 }
+    else if (plan.facade === 'WEST') b.rect = { ...b.rect, x0: r.x1 }
+    else b.rect = { ...b.rect, x1: r.x0 }
+    adj('FEATURE_ADJUSTED', `canopy ${n + 1}`, `it is stated within ${b.src.id}'s walls across its whole ${plan.facade.toLowerCase()} face: ${b.src.id}'s walls stand back by its depth under the roof, which keeps its outline`)
+  })
+
   const mainMassId = 'main'
 
   // --- levels ------------------------------------------------------------------------------------------------------
@@ -262,7 +312,9 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const others = bodies.filter((o) => o !== b).map((o) => o.rect)
     let kind = src.roof.kind
     if (kind === 'FLAT') {
-      attachedRoofs.push({ massId: m.id, slabTopY: eaveY, slabSoffitY: round6(eaveY - 0.25), footprint: { ...b.rect }, projectsOverZone: false, featureId: `described-roof-${src.id}`, provenance: prov })
+      // The stated eaves height is the top of the walls; the roof plate lies within them, its top below their top by a
+      // low upstand — a plate flush with the wall tops would draw its bearing strip and the wall top in one plane.
+      attachedRoofs.push({ massId: m.id, slabTopY: round6(eaveY - FLAT_ROOF_UPSTAND_M), slabSoffitY: round6(eaveY - FLAT_ROOF_UPSTAND_M - 0.25), parapetTopY: eaveY, footprint: { ...b.rect }, projectsOverZone: false, featureId: `described-roof-${src.id}`, provenance: prov })
       return
     }
     let pitch = src.roof.pitchDeg
@@ -277,12 +329,14 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     }
     if (kind === 'SHED') {
       const highSide: HouseSide = src.roof.highSide === 'NA' ? 'REAR' : src.roof.highSide
-      const shed = shedLayout(b.rect, highSide, pitch, eaveY)
+      const shed = shedLayout(b.roofRect ?? b.rect, highSide, pitch, eaveY)
       planeRoofs.push({ massId: m.id, ridgeAxis: shed.ridgeAxis, pitchDeg: pitch, eaveY, ridgeY: shed.layout.ridgeY, ends: { min: 'GABLE', max: 'GABLE' }, thicknessM: ROOF_THICKNESS_M, layout: shed.layout, featureId: `described-roof-${src.id}`, provenance: prov, why: `a single slope at ${pitch}°, highest on the ${highSide.toLowerCase()} side, as the sources show it` })
       return
     }
-    const w = b.rect.x1 - b.rect.x0
-    const dep = b.rect.z1 - b.rect.z0
+    // the roof is laid out over the outline it keeps; under a recessed porch the walls stand back from it
+    const rr = b.roofRect ?? b.rect
+    const w = rr.x1 - rr.x0
+    const dep = rr.z1 - rr.z0
     let ridgeAxis: 'X' | 'Z' = src.roof.ridge === 'ALONG_X' ? 'X' : src.roof.ridge === 'ALONG_Z' ? 'Z' : w >= dep ? 'X' : 'Z'
     // A hip of one pitch over a rectangle has its ridge along the longer side — geometry, not a reading: across the
     // shorter side the two hip ends would meet before any ridge. A ridge stated that way is turned, by name. A body
@@ -295,14 +349,14 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     // the eaves stand out past the walls where nothing stands against them; the plane passes through the wall's top edge
     const eaveSides: Facade[] = ridgeAxis === 'X' ? ['FRONT', 'REAR'] : ['WEST', 'EAST']
     const endSides: Facade[] = ridgeAxis === 'X' ? ['WEST', 'EAST'] : ['FRONT', 'REAR']
-    const free = (s: Facade): boolean => coveredSpans(b.rect, s, others).length === 0
+    const free = (s: Facade): boolean => coveredSpans(rr, s, others).length === 0
     const over = clamp(src.roof.overhangM, 0, 0.8)
     // under a hip every side is an eave and all four lie at one height: the eaves stand out by one amount all round, or
     // (where a body stands against any side) not at all — an end eave set in from the others would sit below its wall
     const hipped = ends.min === 'HIP'
     const eaveOut = hipped ? ([...eaveSides, ...endSides].every(free) ? over : 0) : eaveSides.every(free) ? over : 0
     const endOut = (s: Facade): number => (hipped ? eaveOut : free(s) ? Math.min(over, 0.4) : 0)
-    const body: Rect = ridgeAxis === 'X' ? { x0: b.rect.x0 - endOut(endSides[0]), x1: b.rect.x1 + endOut(endSides[1]), z0: b.rect.z0 - eaveOut, z1: b.rect.z1 + eaveOut } : { x0: b.rect.x0 - eaveOut, x1: b.rect.x1 + eaveOut, z0: b.rect.z0 - endOut(endSides[0]), z1: b.rect.z1 + endOut(endSides[1]) }
+    const body: Rect = ridgeAxis === 'X' ? { x0: rr.x0 - endOut(endSides[0]), x1: rr.x1 + endOut(endSides[1]), z0: rr.z0 - eaveOut, z1: rr.z1 + eaveOut } : { x0: rr.x0 - eaveOut, x1: rr.x1 + eaveOut, z0: rr.z0 - endOut(endSides[0]), z1: rr.z1 + endOut(endSides[1]) }
     const layoutEave = round6(eaveY - eaveOut * tanDeg(pitch))
     const layout = planeRoofLayout({ x0: round6(body.x0), x1: round6(body.x1), z0: round6(body.z0), z1: round6(body.z1) }, ridgeAxis, pitch, layoutEave, ends)
     planeRoofs.push({ massId: m.id, ridgeAxis, pitchDeg: pitch, eaveY: layoutEave, ridgeY: layout.ridgeY, ends, thicknessM: ROOF_THICKNESS_M, layout, featureId: `described-roof-${src.id}`, provenance: prov, why: `a ${kind.toLowerCase()} roof at ${pitch}° (${src.roof.pitchBasis.toLowerCase().replace(/_/g, ' ')}), its ridge ${ridgeAxis === 'X' ? 'along the front' : 'front to back'}, eaves at ${eaveY} m, as the sources show it` })
@@ -549,14 +603,121 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const r = outside(host, facade, round6(from), round6(to), t.depthM)
     // not under another body
     if (masses.some((m) => m !== host && Math.min(r.x1, m.x1) - Math.max(r.x0, m.x0) > 0.3 && Math.min(r.z1, m.z1) - Math.max(r.z0, m.z0) > 0.3)) return adj('FEATURE_DROPPED', `terrace ${n + 1}`, 'another body stands where it is stated')
-    terraces.push({ id: `terrace-${n + 1}`, storeyIndex: 0, side: facade, polygon: [{ x: round6(r.x0), z: round6(r.z0) }, { x: round6(r.x1), z: round6(r.z0) }, { x: round6(r.x1), z: round6(r.z1) }, { x: round6(r.x0), z: round6(r.z1) }], topY: -0.02, thicknessM: 0.15, surface: 'UNKNOWN', edge: 'FLUSH', massIds: [host.id], featureId: `described-terrace-${n + 1}`, provenance: prov, why: `a terrace ${t.depthM} m deep against the ${t.side.toLowerCase()} side, as pictures ${t.images.join(', ')} show it` })
+    terraces.push({ id: `terrace-${n + 1}`, storeyIndex: 0, side: facade, polygon: [{ x: round6(r.x0), z: round6(r.z0) }, { x: round6(r.x1), z: round6(r.z0) }, { x: round6(r.x1), z: round6(r.z1) }, { x: round6(r.x0), z: round6(r.z1) }], topY: 0, thicknessM: 0.15, surface: 'UNKNOWN', edge: 'FLUSH', massIds: [host.id], featureId: `described-terrace-${n + 1}`, provenance: prov, why: `a terrace ${t.depthM} m deep against the ${t.side.toLowerCase()} side, as pictures ${t.images.join(', ')} show it` })
   })
   const canopies: CanopyV2[] = []
+  const massRects = masses.map((m) => ({ id: m.id, x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }))
+  /** `r` with whatever of it lies inside `o` cut away, along the axis that loses least; null when nothing worth building is left. */
+  const cutBack = (r: Rect, o: Rect): Rect | null => {
+    const ox = Math.min(r.x1, o.x1) - Math.max(r.x0, o.x0)
+    const oz = Math.min(r.z1, o.z1) - Math.max(r.z0, o.z0)
+    if (ox <= 0.01 || oz <= 0.01) return r
+    const options: Rect[] = []
+    if (r.x0 < o.x0 - 0.01) options.push({ ...r, x1: o.x0 })
+    if (r.x1 > o.x1 + 0.01) options.push({ ...r, x0: o.x1 })
+    if (r.z0 < o.z0 - 0.01) options.push({ ...r, z1: o.z0 })
+    if (r.z1 > o.z1 + 0.01) options.push({ ...r, z0: o.z1 })
+    const best = options.sort((p, q) => (q.x1 - q.x0) * (q.z1 - q.z0) - (p.x1 - p.x0) * (p.z1 - p.z0))[0]
+    return best && best.x1 - best.x0 >= 0.5 && best.z1 - best.z0 >= 0.5 ? best : null
+  }
+  const pitchedRoofs: Array<{ layout: { planes: PlaneRoofLayout['planes'] }; thicknessM: number }> = [...planeRoofs, ...pitchedAttachedRoofs.map((r) => ({ layout: r.layout as unknown as { planes: PlaneRoofLayout['planes'] }, thicknessM: ROOF_THICKNESS_M }))]
+  const outlineOf = (planes: PlaneRoofLayout['planes']): Rect => {
+    const pts = planes.flatMap((pl) => pl.boundary)
+    return { x0: Math.min(...pts.map((q) => q.x)), x1: Math.max(...pts.map((q) => q.x)), z0: Math.min(...pts.map((q) => q.z)), z1: Math.max(...pts.map((q) => q.z)) }
+  }
+  /** The roof's top surface over a plan point, or undefined outside it. */
+  const roofTopAt = (planes: PlaneRoofLayout['planes'], q: { x: number; z: number }): number | undefined => {
+    const plane = planeAt({ planes } as PlaneRoofLayout, q)
+    return plane ? plane.datum.y + ((plane.datum.x - q.x) * plane.downslope.x + (plane.datum.z - q.z) * plane.downslope.z) * tanDeg(plane.pitchDeg) : undefined
+  }
   d.canopies.forEach((c, n) => {
-    const r: Rect = { x0: round6(Math.min(X(c.x0), X(c.x1))), x1: round6(Math.max(X(c.x0), X(c.x1))), z0: round6(Math.min(Z(c.z0), Z(c.z1))), z1: round6(Math.max(Z(c.z0), Z(c.z1))) }
-    if (r.x1 - r.x0 < 0.5 || r.z1 - r.z0 < 0.5) return adj('FEATURE_DROPPED', `canopy ${n + 1}`, 'smaller than half a metre')
+    const name = `canopy ${n + 1}`
+    const plan = canopyPlans[n]
+    if (plan.kind === 'UNBUILT') return adj('FEATURE_DROPPED', name, plan.why)
+    if (plan.kind === 'RECESS') {
+      // under the body's own roof: no plate, the posts stand where the face was and carry the roof's edge
+      const rect = plan.rect
+      const host = masses[bodies.indexOf(plan.body)]
+      const roof = roofOf(host.id)
+      const alongX = plan.facade === 'FRONT' || plan.facade === 'REAR'
+      const line = plan.facade === 'FRONT' ? rect.z0 + 0.15 : plan.facade === 'REAR' ? rect.z1 - 0.15 : plan.facade === 'WEST' ? rect.x0 + 0.15 : rect.x1 - 0.15
+      const [lo, hi] = alongX ? [rect.x0 + 0.15, rect.x1 - 0.15] : [rect.z0 + 0.15, rect.z1 - 0.15]
+      const k = Math.min(Math.max(c.posts, 2), Math.floor((hi - lo) / 0.9) + 1)
+      const posts = Array.from({ length: k }, (_, i) => (alongX ? { x: round6(lo + ((hi - lo) * i) / (k - 1)), z: round6(line) } : { x: round6(line), z: round6(lo + ((hi - lo) * i) / (k - 1)) }))
+      const soffits = roof ? posts.map((q) => roofTopAt(roof.layout.planes, q)).filter((y): y is number => y !== undefined).map((y) => y - roof.thicknessM / cosDeg(roof.pitchDeg)) : []
+      if (!roof || soffits.length === 0 || Math.min(...soffits) < 2.05) return adj('FEATURE_ADJUSTED', name, `its posts are not built: the roof's edge stands too low over them`)
+      const key = planeAt(roof.layout, posts[0])?.key ?? 'LOW'
+      if (k !== c.posts) adj('FEATURE_ADJUSTED', name, `${c.posts} post(s) stated, ${k} placed along the face`)
+      canopies.push({ id: `canopy-${n + 1}`, kind: c.kind, rect, undersideY: round6(Math.min(...soffits) - 0.02), thicknessM: 0.18, posts, plate: false, hostId: `roof-${host.id}-plane-${key.toLowerCase().replace('_', '-')}`, featureId: `described-canopy-${n + 1}`, provenance: prov, why: `a ${c.kind.toLowerCase().replace(/_/g, ' ')} under ${plan.body.src.id}'s own roof, as pictures ${c.images.join(', ')} show it` })
+      return
+    }
+    let r: Rect = plan.kind === 'PROJECTS' ? plan.rect : canopyRect(c)
+    if (plan.kind === 'PROJECTS') adj('FEATURE_ADJUSTED', name, `it is stated within ${plan.from}'s walls and under a metre deep: built projecting from that face by its depth`)
+    if (r.x1 - r.x0 < 0.5 || r.z1 - r.z0 < 0.5) return adj('FEATURE_DROPPED', name, 'smaller than half a metre')
+    // An edge stated within a hand of a body's face IS on that face: the bodies were snapped, the canopy follows them.
+    for (const m of massRects) {
+      const overlapsZ = Math.min(r.z1, m.z1) - Math.max(r.z0, m.z0) > 0.2
+      const overlapsX = Math.min(r.x1, m.x1) - Math.max(r.x0, m.x0) > 0.2
+      const near = (v: number, face: number): boolean => Math.abs(v - face) > 1e-6 && Math.abs(v - face) <= CANOPY_SNAP_M
+      if (overlapsZ && near(r.x0, m.x1)) r = { ...r, x0: m.x1 }
+      if (overlapsZ && near(r.x1, m.x0)) r = { ...r, x1: m.x0 }
+      if (overlapsX && near(r.z0, m.z1)) r = { ...r, z0: m.z1 }
+      if (overlapsX && near(r.z1, m.z0)) r = { ...r, z1: m.z0 }
+    }
+    // A canopy covers open ground: what of it lies within a body's walls is cut away. One stated wholly inside a body
+    // is a recess under the body's own floor or roof, which this model does not cut — said, not built as a plate
+    // through the walls.
+    for (const m of massRects) {
+      const cut = cutBack(r, m)
+      if (!cut) return adj('FEATURE_DROPPED', name, `nothing of it lies outside ${m.id}'s walls`)
+      if (cut !== r) adj('FEATURE_ADJUSTED', name, `the part of it within ${m.id}'s walls is not built: ${(r.x1 - r.x0).toFixed(2)} × ${(r.z1 - r.z0).toFixed(2)} m cut back to ${(cut.x1 - cut.x0).toFixed(2)} × ${(cut.z1 - cut.z0).toFixed(2)} m`)
+      r = cut
+    }
+    // what it leans on is read off the canopy as stated against the bodies; clipping it under an eave must not turn a
+    // porch along a wall into a free-standing roof
+    const stated: Rect = { ...r }
+    let underside = clamp(c.undersideM, 2.0, 7)
+    // Two covers do not lie in one another: a canopy is cut back from one already built at its height, and from a
+    // balcony at its height, which is then the cover of what lies under it.
+    for (const prev of canopies) {
+      if (Math.abs(prev.undersideY - underside) > 0.6) continue
+      const cut = cutBack(r, prev.rect)
+      if (!cut) return adj('FEATURE_DROPPED', name, `${prev.id} already covers where it is stated`)
+      if (cut !== r) adj('FEATURE_ADJUSTED', name, `cut back from ${prev.id}, which covers part of it`)
+      r = cut
+    }
+    for (const bal of balconies) {
+      if (Math.abs(bal.topY - (underside + 0.18)) > 0.7) continue
+      const cut = cutBack(r, { x0: bal.x0, z0: bal.z0, x1: bal.x1, z1: bal.z1 })
+      if (!cut) return adj('FEATURE_DROPPED', name, `${bal.id} stands over it at that height and is its cover`)
+      if (cut !== r) adj('FEATURE_ADJUSTED', name, `cut back from under ${bal.id}, which covers part of it`)
+      r = cut
+    }
+    // Under a roof's edge the roof is the cover. Where the plate as stated would stand in a roof (its eaves reach over
+    // it and are not clear above it), the plate begins where the roof ends and is no higher than the roof's edge there.
+    for (const roof of pitchedRoofs) {
+      const outline = outlineOf(roof.layout.planes)
+      const ox = Math.min(r.x1, outline.x1) - Math.max(r.x0, outline.x0)
+      const oz = Math.min(r.z1, outline.z1) - Math.max(r.z0, outline.z0)
+      if (ox <= 0.01 || oz <= 0.01) continue
+      const inside = { x0: Math.max(r.x0, outline.x0), x1: Math.min(r.x1, outline.x1), z0: Math.max(r.z0, outline.z0), z1: Math.min(r.z1, outline.z1) }
+      const samples = [0.02, 0.5, 0.98].flatMap((u) => [0.02, 0.5, 0.98].map((v) => ({ x: inside.x0 + (inside.x1 - inside.x0) * u, z: inside.z0 + (inside.z1 - inside.z0) * v })))
+      const tops = samples.map((q) => roofTopAt(roof.layout.planes, q)).filter((y): y is number => y !== undefined)
+      if (tops.length === 0) continue
+      const lowestSoffit = Math.min(...tops) - roof.thicknessM / cosDeg(Math.max(...roof.layout.planes.map((pl) => pl.pitchDeg)))
+      if (lowestSoffit >= underside + 0.18 + 0.05) continue
+      const cut = cutBack(r, outline)
+      if (!cut) return adj('FEATURE_DROPPED', name, 'it lies under a roof\'s eaves, which are its cover')
+      const edgeTop = Math.min(...tops)
+      const lowered = Math.min(underside, edgeTop - 0.18)
+      if (cut !== r || lowered < underside - 0.01) adj('FEATURE_ADJUSTED', name, `a roof's eaves reach over it: the plate begins at the roof's edge${lowered < underside - 0.01 ? ` and stands at ${lowered.toFixed(2)} m, level with that edge (stated ${c.undersideM} m)` : ''}`)
+      r = cut
+      underside = lowered
+    }
+    if (underside < 2.05) return adj('FEATURE_DROPPED', name, `beside the roof's edge its plate would stand at ${underside.toFixed(2)} m, too low to walk under: the eaves are its cover`)
+    r = { x0: round6(r.x0), z0: round6(r.z0), x1: round6(r.x1), z1: round6(r.z1) }
     // its posts stand along the edge away from the bodies it leans on: at both ends of that edge and evenly between
-    const touches = (side: Facade): boolean => coveredSpans(r, side, masses.map((m) => ({ x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }))).length > 0
+    const touches = (side: Facade): boolean => coveredSpans(stated, side, masses.map((m) => ({ x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }))).length > 0
     const inset = 0.15
     const edges: Record<Facade, [{ x: number; z: number }, { x: number; z: number }]> = { FRONT: [{ x: r.x0 + inset, z: r.z0 + inset }, { x: r.x1 - inset, z: r.z0 + inset }], REAR: [{ x: r.x0 + inset, z: r.z1 - inset }, { x: r.x1 - inset, z: r.z1 - inset }], WEST: [{ x: r.x0 + inset, z: r.z0 + inset }, { x: r.x0 + inset, z: r.z1 - inset }], EAST: [{ x: r.x1 - inset, z: r.z0 + inset }, { x: r.x1 - inset, z: r.z1 - inset }] }
     const opposite: Record<Facade, Facade> = { FRONT: 'REAR', REAR: 'FRONT', WEST: 'EAST', EAST: 'WEST' }
@@ -566,7 +727,8 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const posts: Array<{ x: number; z: number }> = []
     if (c.posts > 0 && outer) {
       const [a, b] = edges[outer]
-      const k = Math.max(1, c.posts)
+      // as many as stand clear of one another along the edge: a post every 0.9 m at the closest
+      const k = Math.min(Math.max(1, c.posts), Math.floor(Math.hypot(b.x - a.x, b.z - a.z) / 0.9) + 1)
       for (let i = 0; i < k; i += 1) {
         const t = k === 1 ? (touches(outer === 'FRONT' || outer === 'REAR' ? 'WEST' : 'FRONT') ? 1 : 0) : i / (k - 1)
         posts.push({ x: round6(a.x + (b.x - a.x) * t), z: round6(a.z + (b.z - a.z) * t) })
@@ -575,21 +737,11 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
       // free-standing: at its corners
       for (const p of [edges.FRONT[0], edges.FRONT[1], edges.REAR[1], edges.REAR[0]].slice(0, Math.min(4, c.posts))) posts.push({ x: round6(p.x), z: round6(p.z) })
     }
-    if (posts.length < c.posts) adj('FEATURE_ADJUSTED', `canopy ${n + 1}`, `${c.posts} post(s) stated, ${posts.length} placed`)
-    // under a body's eaves the eaves are the cover: a plate is built only where it stays clear below the roof plane
-    const mid = { x: (r.x0 + r.x1) / 2, z: (r.z0 + r.z1) / 2 }
-    let underside = clamp(c.undersideM, 2.0, 7)
-    for (const roof of planeRoofs) {
-      const plane = planeAt(roof.layout, mid)
-      if (!plane) continue
-      const soffit = plane.datum.y + ((plane.datum.x - mid.x) * plane.downslope.x + (plane.datum.z - mid.z) * plane.downslope.z) * tanDeg(plane.pitchDeg) - roof.thicknessM / cosDeg(plane.pitchDeg)
-      underside = Math.min(underside, soffit - 0.18 - 0.1)
-    }
-    if (underside < 2.05) {
-      adj('FEATURE_DROPPED', `canopy ${n + 1}`, `it lies under a roof's eaves, which stand ${underside < 2.05 ? 'too low for a plate below them' : ''}: the eaves are its cover`)
-      return
-    }
-    if (underside < c.undersideM - 0.08) adj('FEATURE_ADJUSTED', `canopy ${n + 1}`, `underside stated at ${c.undersideM} m, a roof's eaves stand over it: built at ${underside.toFixed(2)} m`)
+    // a post never stands in a wall: where the edge runs along a body, that body carries the canopy there
+    const free = posts.filter((q) => !massRects.some((m) => q.x > m.x0 - 0.15 && q.x < m.x1 + 0.15 && q.z > m.z0 - 0.15 && q.z < m.z1 + 0.15))
+    posts.length = 0
+    posts.push(...free)
+    if (posts.length < c.posts) adj('FEATURE_ADJUSTED', name, `${c.posts} post(s) stated, ${posts.length} placed`)
     canopies.push({ id: `canopy-${n + 1}`, kind: c.kind, rect: r, undersideY: round6(underside), thicknessM: 0.18, posts, featureId: `described-canopy-${n + 1}`, provenance: prov, why: `a ${c.kind.toLowerCase().replace(/_/g, ' ')} over an open area, as pictures ${c.images.join(', ')} show it` })
   })
 

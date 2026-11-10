@@ -799,9 +799,10 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   for (const c of b.canopies ?? []) {
     const l = levelOf(0)
     if (!l) continue
-    push({ type: 'createRoof', id: c.id, levelId: l.id, kind: 'FLAT', footprint: { minX: c.rect.x0, maxX: c.rect.x1, minZ: c.rect.z0, maxZ: c.rect.z1 }, eaveOffset: round6(c.undersideY + c.thicknessM - l.elevation), overhang: 0, thickness: c.thicknessM, materialId: MATERIALS_V2.roof }, c.featureId, 'roofs')
-    c.posts.forEach((p, i) => push({ type: 'createColumn', id: `${c.id}-post-${i}`, levelId: l.id, role: 'POST', base: { x: round6(p.x), z: round6(p.z) }, baseOffset: 0, height: round6(c.undersideY - l.elevation), width: 0.2, depth: 0.2, hostId: c.id, materialId: MATERIALS_V2.member }, c.featureId, 'linearSolids'))
-    evidence(c.id, c.provenance, c.why)
+    if (c.plate !== false) push({ type: 'createRoof', id: c.id, levelId: l.id, kind: 'FLAT', footprint: { minX: c.rect.x0, maxX: c.rect.x1, minZ: c.rect.z0, maxZ: c.rect.z1 }, eaveOffset: round6(c.undersideY + c.thicknessM - l.elevation), overhang: 0, thickness: c.thicknessM, materialId: MATERIALS_V2.roof }, c.featureId, 'roofs')
+    c.posts.forEach((p, i) => push({ type: 'createColumn', id: `${c.id}-post-${i}`, levelId: l.id, role: 'POST', base: { x: round6(p.x), z: round6(p.z) }, baseOffset: 0, height: round6(c.undersideY - l.elevation), width: 0.2, depth: 0.2, hostId: c.plate === false && c.hostId ? c.hostId : c.id, materialId: MATERIALS_V2.member }, c.featureId, 'linearSolids'))
+    if (c.plate !== false) evidence(c.id, c.provenance, c.why)
+    else c.posts.forEach((_p, i) => evidence(`${c.id}-post-${i}`, c.provenance, c.why))
   }
 
   // --- balconies, railings, terraces -------------------------------------------
