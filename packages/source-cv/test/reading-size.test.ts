@@ -4,7 +4,7 @@
  * inside the range whatever its size, and one no larger than the measured sheets whatever its walls — keeps its size.
  */
 import { describe, expect, it } from 'vitest'
-import { READING_MAX_TYPICAL_WALL_PX, READING_MEASURED_LONG_SIDE_PX, READING_MIN_LONG_SIDE_PX, READING_TARGET_TYPICAL_WALL_PX, frameRasters, planReadingSize, resampleRaster, typicalWallPx } from '../src/index.js'
+import { READING_MAX_TYPICAL_WALL_PX, READING_MEASURED_LONG_SIDE_PX, READING_MIN_LONG_SIDE_PX, READING_TARGET_TYPICAL_WALL_PX, frameRasters, planReadingSize, planReadingSizes, resampleRaster, typicalWallPx } from '../src/index.js'
 import type { Raster } from '../src/index.js'
 import { BLACK, fillRect, whiteRaster } from './draw.js'
 
@@ -72,7 +72,7 @@ describe('the size a plan sheet is read at', () => {
   })
 })
 
-describe('the typical wall is measured on bands long enough to be walls', () => {
+describe('the second measure: the typical wall over bands long enough to be walls', () => {
   /**
    * A 1600×1200 sheet: an outer ring `wall` px thick, and inside it short bars `bar` px thick and 100 px long, laid
    * out so that no two share a row or a column (bars in line would read as one long band).
@@ -93,26 +93,42 @@ describe('the typical wall is measured on bands long enough to be walls', () => 
     return r
   }
 
-  it('thick outer walls among many short thin bars: the sheet is brought down, though the median over every band is thin', () => {
+  it('thick outer walls among many short thin bars: the first measure keeps the sheet, the second brings it down', () => {
     // 60 short bars of 12 px carry more length than the four 48 px walls, so the median over every band is 12 px:
-    // the sheet used to keep its size, and no reader's window reached its outer walls
+    // by the first measure the sheet keeps its size, and no reader's window reaches its outer walls
     const r = furnished(48, 12, 60)
-    expect(typicalWallPx(r)).toBe(48)
-    const reading = planReadingSize(r)
-    expect(reading.reduction).toBeGreaterThan(1)
-    expect(Math.max(reading.size.width, reading.size.height)).toBe(READING_MIN_LONG_SIDE_PX)
-  })
-
-  it('counter-case: thin walls among short thick blocks keep the sheet — a block is not a wall however thick', () => {
-    const r = furnished(14, 60, 12)
-    expect(typicalWallPx(r)).toBe(14)
+    expect(typicalWallPx(r)).toBe(12)
     expect(planReadingSize(r).reduction).toBe(1)
+    expect(typicalWallPx(r, 'WALL_LONG_BANDS')).toBe(48)
+    const second = planReadingSize(r, 'WALL_LONG_BANDS')
+    expect(second.reduction).toBeGreaterThan(1)
+    expect(Math.max(second.size.width, second.size.height)).toBe(READING_MIN_LONG_SIDE_PX)
+    // one survey gives both, and they are the two above
+    expect(planReadingSizes(r)).toEqual({ EVERY_BAND: planReadingSize(r), WALL_LONG_BANDS: second })
   })
 
-  it('counter-case: a sheet with no band long enough to be a wall is measured on every band, as before', () => {
+  it('counter-case: thin walls among short thick blocks keep the sheet under the second measure — a block is not a wall however thick', () => {
+    const r = furnished(14, 60, 12)
+    expect(typicalWallPx(r, 'WALL_LONG_BANDS')).toBe(14)
+    expect(planReadingSize(r, 'WALL_LONG_BANDS').reduction).toBe(1)
+  })
+
+  it('counter-case: a sheet with no band long enough to be a wall is measured on every band by both', () => {
     const r = whiteRaster(1600, 1200)
     for (let i = 0; i < 8; i += 1) fillRect(r, 220 + i * 110, 160 + i * 40, 319 + i * 110, 171 + i * 40, BLACK)
+    expect(typicalWallPx(r, 'WALL_LONG_BANDS')).toBe(12)
     expect(typicalWallPx(r)).toBe(12)
+  })
+
+  it('counter-case: a sheet no larger than the measured sheets has one reading size under both measures', () => {
+    const r = whiteRaster(800, 600)
+    fillRect(r, 100, 100, 700, 139, BLACK)
+    fillRect(r, 100, 460, 700, 499, BLACK)
+    fillRect(r, 100, 100, 139, 499, BLACK)
+    fillRect(r, 660, 100, 699, 499, BLACK)
+    const both = planReadingSizes(r)
+    expect(both.EVERY_BAND.size).toEqual({ width: 800, height: 600 })
+    expect(both.WALL_LONG_BANDS.size).toEqual({ width: 800, height: 600 })
   })
 })
 

@@ -16,7 +16,8 @@
  * code: the CV path runs first and runs unconditionally.
  */
 import { NO_CHECKPOINT } from '@buildapp/source-common'
-import { planReadingSize, resampleRaster } from '@buildapp/source-cv'
+import { planReadingSizes, resampleRaster } from '@buildapp/source-cv'
+import type { ReadingMeasure, ReadingSize } from '@buildapp/source-cv'
 import type { Checkpoint } from '@buildapp/source-common'
 import { ObservationGraphBuilder } from '@buildapp/source-observations'
 import type { ExtractorHandle, SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
@@ -72,6 +73,12 @@ export type AnalyzeOptions = {
    * captioned as an elevation) is kept as a source and given to no reader. Without one, roles decide alone, as before.
    */
   content?: ImageEmbedder
+  /**
+   * v3.51 ANY-LINK-4: what a large plan sheet's typical wall is measured over when its reading size is decided
+   * (source-cv/reading-size.ts). The first measure by default; a caller whose first reading was refused may read the
+   * sheets named in `rereadable` again by the other.
+   */
+  readingMeasure?: ReadingMeasure
   /** Cancels the content pass's worker. */
   signal?: AbortSignal
   /**
@@ -121,6 +128,8 @@ export type AnalysisResult = {
   skipped: Array<{ assetId: string; reason: string }>
   /** v3.51: the plan sheets read at a smaller size than their bytes have, and why (their typical wall, in their own pixels). */
   readingSizes: Array<{ assetId: string; decoded: { width: number; height: number }; readAt: { width: number; height: number }; typicalWallPx: number; reduction: number }>
+  /** v3.51 ANY-LINK-4: the plan sheets the other measure of a typical wall would read at another size than they were read at. */
+  rereadable: Array<{ assetId: string; readAt: { width: number; height: number }; otherwiseAt: { width: number; height: number } }>
   /** SOURCE-01: what each asset's pixels show and what was done with it, one per asset (NOT_CLASSIFIED without an encoder). */
   content: ContentVerdict[]
   /** The encoder and head that read them, or null when none ran. */
@@ -143,6 +152,8 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   const assets: AssetAnalysis[] = []
   const skipped: AnalysisResult['skipped'] = []
   const readingSizes: AnalysisResult['readingSizes'] = []
+  const rereadable: AnalysisResult['rereadable'] = []
+  const measure: ReadingMeasure = options.readingMeasure ?? 'EVERY_BAND'
   const traces: VisionTrace[] = []
   const vision: VisionOutcome = { provider: options.vision ? `${options.vision.provider.id}/${options.vision.provider.model}` : null, attempted: 0, accepted: 0, rejected: [], unavailable: [] }
   const contextFacts = contextFactsFor(pkg)
@@ -233,7 +244,8 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
     let prepared: Prepared
     // v3.51: a plan sheet drawn finer than the readers' measured range is read at a smaller size (source-cv/reading-size.ts)
-    let reading: ReturnType<typeof planReadingSize> | undefined
+    let reading: ReadingSize | undefined
+    let otherwise: ReadingSize | undefined
     try {
       const decoded = decodeImage(fetched.bytes)
       // The package records the size the BYTES have. A package whose recorded decoded size disagrees with the pixels
@@ -241,7 +253,11 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
       if (decoded.width !== variant.decoded.width || decoded.height !== variant.decoded.height) {
         throw new SealedSizeMismatch(`asset ${asset.id} is sealed as ${variant.decoded.width}x${variant.decoded.height} but its bytes decode to ${decoded.width}x${decoded.height}`)
       }
-      if (document === 'FLOOR_PLAN') reading = planReadingSize(decoded)
+      if (document === 'FLOOR_PLAN') {
+        const sizes = planReadingSizes(decoded)
+        reading = sizes[measure]
+        otherwise = sizes[measure === 'EVERY_BAND' ? 'WALL_LONG_BANDS' : 'EVERY_BAND']
+      }
       prepared = prepareFromRaster(reading && reading.reduction > 1 ? resampleRaster(decoded, reading.size) : decoded, { checkpoint })
     } catch (err) {
       if (err instanceof SealedSizeMismatch) throw new Error(err.message)
@@ -252,6 +268,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
       continue
     }
     // The frame carries the size the sheet is READ at: the bytes' own, or a plan's reading size.
+    if (reading && otherwise && (otherwise.size.width !== reading.size.width || otherwise.size.height !== reading.size.height)) rereadable.push({ assetId: asset.id, readAt: { ...reading.size }, otherwiseAt: { ...otherwise.size } })
     if (reading && reading.reduction > 1) readingSizes.push({ assetId: asset.id, decoded: { ...variant.decoded }, readAt: { ...reading.size }, typicalWallPx: reading.typicalWallPx, reduction: reading.reduction })
 
     const frame = builder.declareFrame(asset.id, variant.byteHash, prepared.size, {
@@ -355,5 +372,5 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
   if (!options.vision) builder.unresolved('a vision pass over this package', 'no vision provider was configured for this run; every observation in this graph is from a deterministic extractor', 'NOT_ATTEMPTED')
 
-  return { graph: builder.seal(), assets, vision, traces, skipped, readingSizes, content, contentClassifier: options.content ? { id: options.content.id, modelSha256: options.content.modelSha256, headVersion: CONTENT_HEAD.version } : null }
+  return { graph: builder.seal(), assets, vision, traces, skipped, readingSizes, rereadable, content, contentClassifier: options.content ? { id: options.content.id, modelSha256: options.content.modelSha256, headVersion: CONTENT_HEAD.version } : null }
 }

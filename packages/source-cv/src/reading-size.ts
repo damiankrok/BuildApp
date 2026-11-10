@@ -29,12 +29,10 @@ export const READING_SURVEY_MAX_THICKNESS_SHARE = 0.08
 export const READING_SURVEY_MIN_LENGTH_SHARE = 0.03
 export const READING_SURVEY_MIN_THICKNESS_PX = 6
 /**
- * A band counts towards the typical wall when it runs at least this share of the sheet's long side. A wall runs the
- * length of a room; what is shorter is as often a bed, a worktop, a jamb or a label box, and on a sheet that draws its
- * partitions as thin lines and furnishes every room those outnumber the walls: measured on a 1600 px plan with 46–49 px
- * outer walls, the median over every band was 28 px — under the limit, so the sheet kept its size and no reader's
- * window reached its outer walls. Over the bands long enough to be walls it is 46 px. Where no band is that long, every
- * band is measured, as before.
+ * The second measure of a sheet's typical wall counts only the bands that run at least this share of its long side. A
+ * wall runs the length of a room; what is shorter is as often a bed, a worktop, a jamb or a label box, and on a sheet
+ * that draws its partitions as thin lines and furnishes every room those outnumber the walls (measured: a 1600 px plan
+ * with 46–49 px outer walls whose median over every band is 28 px, and over its wall-long bands 46 px).
  */
 export const READING_SURVEY_WALL_LENGTH_SHARE = 0.1
 /**
@@ -57,24 +55,51 @@ export const READING_MIN_LONG_SIDE_PX = 600
 
 export type ReadingSize = { size: PixelSize; typicalWallPx: number; reduction: number }
 
-/** The sheet's typical wall thickness in its own pixels: the length-weighted median of its wall-long bands, surveyed sheet-relative. */
-export function typicalWallPx(raster: Raster): number {
+/**
+ * What a sheet's typical wall is measured over. Neither measure is the right one for every sheet: the median over
+ * every band is what the limits below were measured with, and on a furnished sheet with thin partitions it falls
+ * under the walls; the median over the wall-long bands follows the walls, and brings such a sheet down further than
+ * its print may bear. A sheet is read by the first; where that reading is refused and the second asks for another
+ * size, the sheet may be read again at that size (the caller's decision — the reading then passes the same gates).
+ */
+export type ReadingMeasure = 'EVERY_BAND' | 'WALL_LONG_BANDS'
+
+const surveyOf = (raster: Raster): ReturnType<typeof runLengthBands> => {
   const long = Math.max(raster.width, raster.height)
   const mask = adaptiveInkMask(inkChannel(raster), {})
-  const bands = runLengthBands(mask, { minThickness: READING_SURVEY_MIN_THICKNESS_PX, maxThickness: Math.max(READING_SURVEY_MIN_THICKNESS_PX + 1, Math.round(long * READING_SURVEY_MAX_THICKNESS_SHARE)), minLength: Math.max(8, Math.round(long * READING_SURVEY_MIN_LENGTH_SHARE)) })
+  return runLengthBands(mask, { minThickness: READING_SURVEY_MIN_THICKNESS_PX, maxThickness: Math.max(READING_SURVEY_MIN_THICKNESS_PX + 1, Math.round(long * READING_SURVEY_MAX_THICKNESS_SHARE)), minLength: Math.max(8, Math.round(long * READING_SURVEY_MIN_LENGTH_SHARE)) })
+}
+
+const typicalOf = (bands: ReturnType<typeof runLengthBands>, long: number, measure: ReadingMeasure): number => {
+  if (measure === 'EVERY_BAND') return bandThicknessQuantile(bands, 0.5, 0)
   const walls = bands.filter((b) => b.length >= long * READING_SURVEY_WALL_LENGTH_SHARE)
   return bandThicknessQuantile(walls.length > 0 ? walls : bands, 0.5, 0)
 }
 
-/** The size a plan sheet is read at: its own, unless it is larger than the measured sheets AND its walls are thicker than theirs. */
-export function planReadingSize(raster: Raster): ReadingSize {
+const sizeFor = (raster: Raster, wall: number): ReadingSize => {
   const own: PixelSize = { width: raster.width, height: raster.height }
-  const wall = typicalWallPx(raster)
   const long = Math.max(raster.width, raster.height)
   if (!(wall > READING_MAX_TYPICAL_WALL_PX) || long <= READING_MEASURED_LONG_SIDE_PX) return { size: own, typicalWallPx: wall, reduction: 1 }
   const reduction = Math.min(wall / READING_TARGET_TYPICAL_WALL_PX, long / READING_MIN_LONG_SIDE_PX)
   if (!(reduction > 1)) return { size: own, typicalWallPx: wall, reduction: 1 }
   return { size: { width: Math.max(1, Math.round(raster.width / reduction)), height: Math.max(1, Math.round(raster.height / reduction)) }, typicalWallPx: wall, reduction: Math.round(reduction * 1e6) / 1e6 }
+}
+
+/** The sheet's typical wall thickness in its own pixels: the length-weighted median of its bands, surveyed sheet-relative. */
+export function typicalWallPx(raster: Raster, measure: ReadingMeasure = 'EVERY_BAND'): number {
+  return typicalOf(surveyOf(raster), Math.max(raster.width, raster.height), measure)
+}
+
+/** The size a plan sheet is read at: its own, unless it is larger than the measured sheets AND its walls are thicker than theirs. */
+export function planReadingSize(raster: Raster, measure: ReadingMeasure = 'EVERY_BAND'): ReadingSize {
+  return sizeFor(raster, typicalWallPx(raster, measure))
+}
+
+/** The reading size under each measure, from one survey of the sheet. */
+export function planReadingSizes(raster: Raster): Record<ReadingMeasure, ReadingSize> {
+  const bands = surveyOf(raster)
+  const long = Math.max(raster.width, raster.height)
+  return { EVERY_BAND: sizeFor(raster, typicalOf(bands, long, 'EVERY_BAND')), WALL_LONG_BANDS: sizeFor(raster, typicalOf(bands, long, 'WALL_LONG_BANDS')) }
 }
 
 /**

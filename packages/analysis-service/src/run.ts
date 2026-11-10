@@ -55,8 +55,9 @@ import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result.js'
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
+import type { ReadingMeasure } from '@buildapp/source-cv'
 
-export const ANALYSIS_SERVICE_VERSION = '1.9.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.10.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -189,7 +190,39 @@ function cancellableDeps(deps: FetchDeps | undefined, signal: AbortSignal | unde
   return { ...deps, fetchImpl }
 }
 
+/**
+ * v3.51 ANY-LINK-4: a run, and — where its plan sheets have a second admissible reading size and the solver refused
+ * the first reading — one more run on the same sealed package with the sheets read at that size.
+ *
+ * A plan sheet drawn finer than the readers' measured range is read at a smaller size, and there is no single right
+ * one (source-cv/reading-size.ts: two measures of its typical wall). Measured on two sheets of one publisher, each
+ * reads at one of the two sizes and is refused at the other. So the first measure is tried first — every run that
+ * succeeds today is this run, unchanged — and only a solver refusal on sheets the other measure would read at another
+ * size asks for the second. The second reading passes every gate the first would have; if it is refused too, the
+ * first refusal is the run's answer. Sheets no larger than the measured range have one reading size and never come here.
+ */
 export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions): Promise<AnalysisRun> {
+  try {
+    return await runAnalysisAt(input, options, { measure: 'EVERY_BAND' })
+  } catch (first) {
+    const e = first instanceof AnalysisError ? first : undefined
+    const pkg = e?.attachments?.pkg
+    const sheets = e?.attachments?.rereadable ?? []
+    if (!e || e.code !== 'RECONSTRUCTION_FAILED' || !pkg || sheets.length === 0 || options.signal?.aborted) throw first
+    try {
+      return await runAnalysisAt({ kind: 'PACKAGE', pkg }, options, { measure: 'WALL_LONG_BANDS', after: { reasonCode: e.detail.reasonCode ?? e.code, sheets } })
+    } catch (second) {
+      const s = second instanceof AnalysisError ? second : undefined
+      // a cancellation of the second reading is the run's cancellation; any other outcome leaves the first refusal standing
+      if (s && (s.code === 'CANCELLED' || s.code === 'TIMEOUT')) throw second
+      throw first
+    }
+  }
+}
+
+type PlanReading = { measure: ReadingMeasure; after?: { reasonCode: string; sheets: Array<{ assetId: string; readAt: { width: number; height: number }; otherwiseAt: { width: number; height: number } }> } }
+
+async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, reading: PlanReading): Promise<AnalysisRun> {
   const now = options.now ?? (() => new Date())
   const clock = options.clock ?? (() => performance.now())
   const startedAt = now().toISOString()
@@ -230,6 +263,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   // because a later stage could not use it)
   let contentSoFar: ContentVerdict[] | undefined
   let metricsSoFar: MetricEvidenceSet | undefined
+  let rereadableSoFar: Array<{ assetId: string; readAt: { width: number; height: number }; otherwiseAt: { width: number; height: number } }> = []
   // each picture at its frame's size: a plan sheet read at a reading size is handed on at that size (source-cv/reading-size.ts)
   const rasterCache = frameRasters()
   const sheetSizes = new Map<string, { width: number; height: number }>()
@@ -337,6 +371,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         bytes: bytesFor,
         vision,
         checkpoint,
+        readingMeasure: reading.measure,
         ...(options.content ? { content: options.content } : {}),
         ...(signal ? { signal } : {}),
         onSheet: (e) => {
@@ -359,6 +394,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       })
       graph = analysis.graph
       contentVerdicts = analysis.content
+      rereadableSoFar = analysis.rereadable
+      if (reading.after) trace.record('EXTRACTING_OBSERVATIONS', 'PLAN_SHEETS_REREAD', 'DEGRADED', { sheets: reading.after.sheets.length }, { reasonCode: 'FIRST_READING_REFUSED', detail: `the first reading of the plan was refused (${reading.after.reasonCode}); ${reading.after.sheets.map((r) => `${r.assetId}: read at ${r.readAt.width}×${r.readAt.height} px, now at ${r.otherwiseAt.width}×${r.otherwiseAt.height} px`).join('; ')} — the size its wall-long bands ask for` })
       if (analysis.readingSizes.length > 0) trace.record('EXTRACTING_OBSERVATIONS', 'PLAN_SHEETS', 'DEGRADED', { reduced: analysis.readingSizes.length, maxTypicalWallPx: Math.max(...analysis.readingSizes.map((r) => r.typicalWallPx)), maxReduction: Math.max(...analysis.readingSizes.map((r) => r.reduction)) }, { detail: analysis.readingSizes.map((r) => `${r.assetId}: drawn at ${r.decoded.width}×${r.decoded.height} px with walls about ${r.typicalWallPx} px thick, finer than the plan readers' measured range; read at ${r.readAt.width}×${r.readAt.height} px`).join('; ') })
       skippedAssets = analysis.skipped
       contentClassifier = analysis.contentClassifier
@@ -713,7 +750,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     // The sealed inputs the run had reached, so a failure in the solver can be replayed
     // on them alone (`second-house.ts --metrics`) without reading the drawings again.
-    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(contentSoFar && contentSoFar.length > 0 ? { content: contentSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
+    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(rereadableSoFar.length > 0 ? { rereadable: rereadableSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(contentSoFar && contentSoFar.length > 0 ? { content: contentSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
     throw e
   } finally {
     if (heartbeat) clearInterval(heartbeat)
