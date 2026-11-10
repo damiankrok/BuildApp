@@ -12,7 +12,8 @@
  *    The day's ceilings (requests, descriptions) sit beside it.
  *  - **What is not known is counted in full.** A request that ended in an answer is settled down to what its usage
  *    says. One that failed, timed out, was cancelled, or whose worker died keeps its whole reservation: it may have
- *    been billed. Only a request refused before it left (no credentials) gives its reservation back.
+ *    been billed. Only a request that never left, or that the provider refused before running a model, gives its
+ *    reservation back.
  *  - **Never a reset.** A state file that does not parse, fails its checks or has gone missing beside its journal
  *    makes the reader unavailable until a person has looked: the books are never restarted at zero by a damaged file.
  *  - **Bounded input.** A request with more pictures, more bytes or a longer question than the limits is refused
@@ -314,9 +315,10 @@ export function spendGuardedStructuredVision(reader: StructuredVision, ledger: S
       try {
         answer = await reader.ask(request)
       } catch (e) {
-        // not sent at all: given back. Anything else — a timeout, a dropped connection, a refusal, a cancellation —
-        // may have been billed, and the reservation stands in full.
-        if (e instanceof HouseReaderUnavailable && e.reason === 'NO_CREDENTIALS') ledger.settle(reservation, 'NOT_SENT')
+        // not sent at all, or refused by the provider before a model ran (a bad key, a bad request, a rate limit): given
+        // back. Anything else — a timeout, a dropped connection, a server error, a cancellation — may have been billed,
+        // and the reservation stands in full.
+        if (e instanceof HouseReaderUnavailable && (e.reason === 'NO_CREDENTIALS' || e.reason === 'REJECTED_UNBILLED')) ledger.settle(reservation, 'NOT_SENT', e.reason)
         throw e
       }
       const { inputTokens, outputTokens } = answer.usage

@@ -134,6 +134,21 @@ describe('what is not known to be free is counted', () => {
     expect(journalOf(dir).filter((l) => l.event === 'SETTLED' || l.event === 'RELEASED')).toEqual([])
   })
 
+  it('a request the provider refused before running a model (a bad key, a rate limit) gives its reservation back; a server error does not', async () => {
+    const dir = fresh()
+    const ledger = openSpendLedger({ dir, limits: limits() })
+    const reader = standIn(async (_r, n) => {
+      throw new HouseReaderUnavailable(n === 1 ? 'REJECTED_UNBILLED' : 'TRANSPORT', n === 1 ? 'HTTP 401: invalid x-api-key' : 'HTTP 529: overloaded')
+    })
+    const guarded = spendGuardedStructuredVision(reader, ledger, { limits: limits(), prices: PRICES })
+    await guarded.ask(request('HOUSE_DESCRIPTION')).catch(() => undefined)
+    expect(ledger.read().cumulativeUsd).toBe(0)
+    await guarded.ask(request('HOUSE_DESCRIPTION')).catch(() => undefined)
+    expect(ledger.read().cumulativeUsd).toBe(reservationUsd(request('HOUSE_DESCRIPTION'), 4000, PRICES.m))
+    // both count as requests of the day: a host that keeps being refused does not keep trying for free
+    expect(ledger.read().dayRequests).toBe(2)
+  })
+
   it('only a request that never left gives its reservation back', async () => {
     const dir = fresh()
     const ledger = openSpendLedger({ dir, limits: limits() })

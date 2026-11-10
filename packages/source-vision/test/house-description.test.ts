@@ -112,3 +112,12 @@ describe('what a recorded answer is keyed by (v3.53.1)', () => {
     expect(bodies[1]).toMatchObject({ model: 'claude-haiku-5-5', max_tokens: 4096 })
   })
 })
+
+describe('the live adapter says whether a failure can have been billed (v3.53.1)', () => {
+  const base = { purpose: 'HOUSE_DESCRIPTION' as const, system: 's', text: 't', schema: { type: 'object' } as never, pictures: [] }
+  const failing = (error: unknown) => anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async () => ({ messages: { create: async () => { throw error } } }) })
+  it('a bad key, a bad request and a rate limit were refused before a model ran; a server error or a timeout may have been billed', async () => {
+    for (const status of [400, 401, 403, 404, 413, 429]) expect(((await failing(Object.assign(new Error('refused'), { status })).ask(base).catch((e: unknown) => e)) as HouseReaderUnavailable).reason).toBe('REJECTED_UNBILLED')
+    for (const error of [Object.assign(new Error('overloaded'), { status: 529 }), Object.assign(new Error('internal'), { status: 500 }), new Error('Request timed out.')]) expect(((await failing(error).ask(base).catch((e: unknown) => e)) as HouseReaderUnavailable).reason).toBe('TRANSPORT')
+  })
+})

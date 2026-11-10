@@ -40,7 +40,8 @@ export interface StructuredVision {
 
 export class HouseReaderUnavailable extends Error {
   constructor(
-    readonly reason: 'NO_PROVIDER' | 'NO_CREDENTIALS' | 'TRANSPORT' | 'NO_ANSWER' | 'FIXTURE_MISS' | 'BUDGET' | 'REQUEST_TOO_LARGE',
+    /** `REJECTED_UNBILLED`: the provider refused the request before running a model (bad key, bad request, rate limit) — nothing was billed. `TRANSPORT`: anything else that went wrong on the way, where it is not known. */
+    readonly reason: 'NO_PROVIDER' | 'NO_CREDENTIALS' | 'TRANSPORT' | 'REJECTED_UNBILLED' | 'NO_ANSWER' | 'FIXTURE_MISS' | 'BUDGET' | 'REQUEST_TOO_LARGE',
     message: string,
   ) {
     super(message)
@@ -173,7 +174,11 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
           request.signal ? { signal: request.signal } : undefined,
         )
       } catch (e) {
-        throw new HouseReaderUnavailable('TRANSPORT', (e as Error).message.slice(0, 300))
+        // 400 invalid request, 401/403 key or permission, 404 model, 413 too large, 429 rate limit: refused before any
+        // model ran, so nothing is billed. A timeout, a dropped connection or a 5xx may have been.
+        const status = (e as { status?: unknown }).status
+        const unbilled = typeof status === 'number' && [400, 401, 403, 404, 413, 429].includes(status)
+        throw new HouseReaderUnavailable(unbilled ? 'REJECTED_UNBILLED' : 'TRANSPORT', `${typeof status === 'number' ? `HTTP ${status}: ` : ''}${(e as Error).message.slice(0, 300)}`)
       }
       const text = response.content.find((b) => b.type === 'text' && typeof b.text === 'string')?.text
       if (response.stop_reason === 'refusal' || !text) throw new HouseReaderUnavailable('NO_ANSWER', `the provider returned no structured answer (${response.stop_reason ?? 'no text'})`)

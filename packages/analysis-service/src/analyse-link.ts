@@ -55,7 +55,7 @@ export type DrawingsWeakness = 'NO_METRIC_ANCHOR' | 'PARTIAL_MODEL' | 'BODY_MISS
  *  - NO_METRIC_ANCHOR: neither a verified scale nor a measured height;
  *  - PARTIAL_MODEL: the model is the last valid part of the reading, not the whole of it;
  *  - BODY_MISSING: a body the decomposition found is not in the model, or the layout left a blocking question open;
- *  - NO_ROOF_BUILT: walls with no roof of any kind over them.
+ *  - NO_ROOF_BUILT: walls with no roof of any kind over them — neither a plate nor a plane.
  * A model with none of these is the run's answer even where a reader is at hand.
  */
 export function drawingsWeaknesses(result: Pick<LinkAnalysisSummary, 'preview' | 'warningDetails'>): DrawingsWeakness[] {
@@ -64,7 +64,8 @@ export function drawingsWeaknesses(result: Pick<LinkAnalysisSummary, 'preview' |
   if (drawingsModelUnanchored(result)) out.push('NO_METRIC_ANCHOR')
   if (result.preview.outcome === 'PARTIAL_3D_PREVIEW') out.push('PARTIAL_MODEL')
   if (warned.has('BODY_MISSING_FROM_MODEL') || warned.has('LAYOUT_BLOCKING_UNRESOLVED')) out.push('BODY_MISSING')
-  if (result.preview.built.walls > 0 && result.preview.built.roofs === 0) out.push('NO_ROOF_BUILT')
+  // `roofs` are the flat plates and `roofPlanes` the pitched planes: a house roofed in planes alone has no `roofs`
+  if (result.preview.built.walls > 0 && result.preview.built.roofs === 0 && result.preview.built.roofPlanes === 0) out.push('NO_ROOF_BUILT')
   return out
 }
 

@@ -1,0 +1,175 @@
+{
+ "schema": "buildapp.source-to-model.routing/1",
+ "rule": "analysis-service analyseLink (describedFollowUp): the drawings' path first; the description after a refusal that leaves the pictures unread, or after a drawings model weak by its own account (NO_METRIC_ANCHOR, PARTIAL_MODEL, BODY_MISSING, NO_ROOF_BUILT). A verified scale or a measured height alone no longer closes the question; a complete model with none of the weaknesses still does. What the drawings measured goes to the described model as anchors.",
+ "ruleOnStoredResults": {
+  "how": "the predicate evaluated on result summaries already on disk (no run, no reader)",
+  "corpus33": {
+   "models": 28,
+   "weak": 3,
+   "which": [
+    "one with no metric anchor",
+    "two partial models whose scale is verified (anchored but weak: these were the drawings' answer under the previous rule)"
+   ],
+   "refusals": 5,
+   "wouldAskReader": "8 of 33 links (3 weak models + 5 refusals)"
+  },
+  "otherPublishers": {
+   "models": 10,
+   "weak": 10,
+   "note": "every drawings model built on another publisher's page so far is weak by the rule (CONTROL-2: 3 of 3, CONTROL: 4 of 4, DEV: 3 of 3); one of them has a verified scale and no roof (anchored but weak)"
+  },
+  "foundByMeasuring": "the first form of NO_ROOF_BUILT counted only flat plates and fired on 5 corpus houses roofed in planes alone; corrected to 'neither a plate nor a plane' before it was committed as behaviour, with a test"
+ },
+ "costOfTheDrawingsPathFirst": {
+  "what": "the twelve pilot and control pages: seconds of the 1327 drawings run (fetch included) and of the recorded described run (reader included), as measured when each ran",
+  "pages": {
+   "architecturaldesigns-com-1": {
+    "drawingsS": 80,
+    "describedS": 51,
+    "drawingsBuiltAModel": false
+   },
+   "architecturaldesigns-com-2": {
+    "drawingsS": 158,
+    "describedS": 47,
+    "drawingsBuiltAModel": false
+   },
+   "dobredomy-pl-1": {
+    "drawingsS": 315,
+    "describedS": 113,
+    "drawingsBuiltAModel": false
+   },
+   "dobredomy-pl-2": {
+    "drawingsS": 160,
+    "describedS": 96,
+    "drawingsBuiltAModel": true
+   },
+   "domoweklimaty-pl-1": {
+    "drawingsS": 44,
+    "describedS": 67,
+    "drawingsBuiltAModel": false
+   },
+   "domoweklimaty-pl-2": {
+    "drawingsS": 111,
+    "describedS": 110,
+    "drawingsBuiltAModel": false
+   },
+   "extradom-pl-1": {
+    "drawingsS": 110,
+    "describedS": 93,
+    "drawingsBuiltAModel": false
+   },
+   "extradom-pl-2": {
+    "drawingsS": 109,
+    "describedS": 70,
+    "drawingsBuiltAModel": false
+   },
+   "houseplans-com-1": {
+    "drawingsS": 468,
+    "describedS": 52,
+    "drawingsBuiltAModel": false
+   },
+   "houseplans-com-2": {
+    "drawingsS": 74,
+    "describedS": 47,
+    "drawingsBuiltAModel": false
+   },
+   "lipinscy-pl-1": {
+    "drawingsS": 333,
+    "describedS": 77,
+    "drawingsBuiltAModel": true
+   },
+   "lipinscy-pl-2": {
+    "drawingsS": 134,
+    "describedS": 43,
+    "drawingsBuiltAModel": true
+   }
+  },
+  "sumDrawingsS": 2096,
+  "sumDescribedS": 866,
+  "reading": "on these pages the drawings' path took 71 % of the whole time (44-468 s a page against 43-113 s) and contributed no anchor on any of the twelve (its three models are unanchored). On the corpus it is the answer alone on 25 of 28 models. Running the description first, or beside the drawings, would pay for a reader on every link; the order is kept and its cost is stated."
+ },
+ "wholePathOnCurrentCode": {
+  "what": "analyseLink on sealed source packages (no fetch), the recorded answers replayed by a stand-in reader (research/source-to-model/s53/url-to-result.ts); the reader's own recorded latency beside it",
+  "runs": {
+   "lipinscy-pl-2": {
+    "basis": "DESCRIPTION",
+    "after": {
+     "code": "DRAWINGS_MODEL_UNANCHORED",
+     "reasonCode": "NO_METRIC_ANCHOR+NO_ROOF_BUILT"
+    },
+    "drawingsMs": 51191,
+    "describedBuildMs": 1535,
+    "recordedReaderMs": 42567,
+    "asked": [
+     "HOUSE_TRIAGE:17",
+     "HOUSE_DESCRIPTION:11"
+    ],
+    "provisional": [
+     "SCALE_NOT_VERIFIED",
+     "HEIGHT_ASSUMED_FOR_PREVIEW"
+    ],
+    "anchorsApplied": [],
+    "technical": {
+     "compileErrors": 0,
+     "exteriorErrors": 0
+    },
+    "progressEverMovedBack": false,
+    "progressWhenDescribingStarted": 0.7174
+   },
+   "domoweklimaty-pl-1": {
+    "basis": "DESCRIPTION",
+    "after": {
+     "code": "SOURCE_INCOMPLETE",
+     "reasonCode": "PLAN_NOT_FOUND"
+    },
+    "drawingsMs": 300,
+    "describedBuildMs": 1938,
+    "recordedReaderMs": null,
+    "asked": [
+     "HOUSE_TRIAGE:13",
+     "HOUSE_DESCRIPTION:6"
+    ],
+    "provisional": [
+     "SCALE_NOT_VERIFIED",
+     "HEIGHT_ASSUMED_FOR_PREVIEW"
+    ],
+    "anchorsApplied": [],
+    "technical": {
+     "compileErrors": 0,
+     "exteriorErrors": 1
+    },
+    "progressEverMovedBack": false,
+    "progressWhenDescribingStarted": 0.7174
+   },
+   "dobredomy-pl-2": {
+    "basis": "DESCRIPTION",
+    "after": {
+     "code": "DRAWINGS_MODEL_UNANCHORED",
+     "reasonCode": "NO_METRIC_ANCHOR+PARTIAL_MODEL+BODY_MISSING+NO_ROOF_BUILT"
+    },
+    "drawingsMs": 69312,
+    "describedBuildMs": 2101,
+    "recordedReaderMs": 95119,
+    "asked": [
+     "HOUSE_TRIAGE:18",
+     "HOUSE_DESCRIPTION:11"
+    ],
+    "provisional": [
+     "SCALE_NOT_VERIFIED",
+     "HEIGHT_ASSUMED_FOR_PREVIEW"
+    ],
+    "anchorsApplied": [],
+    "technical": {
+     "compileErrors": 0,
+     "exteriorErrors": 0
+    },
+    "progressEverMovedBack": false,
+    "progressWhenDescribingStarted": 0.7174
+   }
+  }
+ },
+ "notMeasured": [
+  "the anchors on a real house: no page on disk has both a drawings model with a verified scale and a recorded description (the anchored-but-weak pages were never read by the reader); the behaviour is covered by tests on the synthetic house only",
+  "any change of what a house looks like on the three anchored-but-weak pages: that needs three paid readings"
+ ]
+}

@@ -202,8 +202,8 @@ describe('a refused page is described from its pictures when the host has a hous
 })
 
 describe('after a drawings model: the description only where the model is weak by its own account (v3.53.1)', () => {
-  const summary = (codes: string[], over: { outcome?: string; roofs?: number; walls?: number; warnings?: string[] } = {}) =>
-    ({ preview: { outcome: over.outcome ?? 'COMPLETE', built: { walls: over.walls ?? 12, roofs: over.roofs ?? 1 }, provisional: codes.map((code) => ({ code, what: '' })) }, warningDetails: (over.warnings ?? []).map((code) => ({ code, severity: 'LIMITING', message: '' })) }) as never
+  const summary = (codes: string[], over: { outcome?: string; roofs?: number; roofPlanes?: number; walls?: number; warnings?: string[] } = {}) =>
+    ({ preview: { outcome: over.outcome ?? 'COMPLETE', built: { walls: over.walls ?? 12, roofs: over.roofs ?? 1, roofPlanes: over.roofPlanes ?? 0 }, provisional: codes.map((code) => ({ code, what: '' })) }, warningDetails: (over.warnings ?? []).map((code) => ({ code, severity: 'LIMITING', message: '' })) }) as never
 
   it('no anchor at all is a weakness only when BOTH the scale is unverified and the heights are a convention', () => {
     expect(drawingsModelUnanchored(summary(['SCALE_NOT_VERIFIED', 'HEIGHT_ASSUMED_FOR_PREVIEW']))).toBe(true)
@@ -217,6 +217,8 @@ describe('after a drawings model: the description only where the model is weak b
     expect(drawingsWeaknesses(summary([], { warnings: ['LAYOUT_BLOCKING_UNRESOLVED'] }))).toEqual(['BODY_MISSING'])
     expect(drawingsWeaknesses(summary([], { outcome: 'PARTIAL_3D_PREVIEW' }))).toEqual(['PARTIAL_MODEL'])
     expect(drawingsWeaknesses(summary([], { roofs: 0 }))).toEqual(['NO_ROOF_BUILT'])
+    // a house roofed in planes alone has no flat plate and is not roofless (found on the corpus: 5 of 28 models)
+    expect(drawingsWeaknesses(summary([], { roofs: 0, roofPlanes: 4 }))).toEqual([])
     expect(drawingsWeaknesses(summary(['SCALE_NOT_VERIFIED', 'HEIGHT_ASSUMED_FOR_PREVIEW'], { roofs: 0, outcome: 'PARTIAL_3D_PREVIEW' }))).toEqual(['NO_METRIC_ANCHOR', 'PARTIAL_MODEL', 'NO_ROOF_BUILT'])
   })
 
@@ -251,7 +253,7 @@ describe('after a drawings model: the description only where the model is weak b
     const anchors = anchorsOfDrawings(run)
     expect(anchors.footprint?.widthM).toBeGreaterThan(5)
     expect(anchors.storeyHeightM?.value).toBeGreaterThan(2.2)
-    const roofless = { ...run, result: { ...run.result, preview: { ...run.result.preview, built: { ...run.result.preview.built, roofs: 0 } } } }
+    const roofless = { ...run, result: { ...run.result, preview: { ...run.result.preview, built: { ...run.result.preview.built, roofs: 0, roofPlanes: 0 } } } }
     const next = describedFollowUp(roofless)
     expect(next?.after).toEqual({ code: 'DRAWINGS_MODEL_WEAK', reasonCode: 'NO_ROOF_BUILT' })
     expect(next?.anchors).toEqual(anchors)
