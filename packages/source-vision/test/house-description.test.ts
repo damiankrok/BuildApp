@@ -54,3 +54,14 @@ describe('house description', () => {
     expect(r.issues.map((i) => i.code)).toContain('SIDE_NOT_SHOWN_NOT_DECLARED')
   })
 })
+
+describe('house description — a side is counted, then listed', () => {
+  it('names a side whose count and list disagree, and a side a picture shows with nothing listed', () => {
+    const d = raw() as { sides: Array<{ side: string; pictures: number[]; openingsByStorey: number[] }>; openings: Array<{ side: string }> }
+    const short = checkHouseDescription({ ...d, sides: d.sides.map((x) => (x.side === 'REAR' ? { ...x, openingsByStorey: [4] } : x)) })
+    expect(short.ok).toBe(true)
+    expect(short.issues.filter((i) => i.code === 'SIDE_COUNT_MISMATCH').map((i) => i.detail)).toEqual(['REAR storey 0: 4 counted, 1 listed'])
+    const empty = checkHouseDescription({ ...d, openings: d.openings.filter((o) => o.side !== 'LEFT') })
+    expect(empty.issues.map((i) => i.code)).toContain('SIDE_SHOWN_BUT_EMPTY')
+  })
+})

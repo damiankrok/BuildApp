@@ -15,7 +15,7 @@
  */
 import { z } from 'zod'
 
-export const HOUSE_DESCRIPTION_VERSION = '0.1.0'
+export const HOUSE_DESCRIPTION_VERSION = '0.2.0'
 
 export const HouseSideSchema = z.enum(['FRONT', 'REAR', 'LEFT', 'RIGHT'])
 export type HouseSide = z.infer<typeof HouseSideSchema>
@@ -168,6 +168,18 @@ export const HouseDescriptionSchema = z
       })
       .strict(),
     bodies: z.array(DescribedBodySchema).min(1).max(8),
+    sides: z
+      .array(
+        z
+          .object({
+            side: HouseSideSchema,
+            pictures: z.array(z.number().int().min(1)).max(12).describe('Every picture that shows this side: its elevation drawing first, then exterior views. Empty only when nothing shows it.'),
+            openingsByStorey: z.array(z.number().int().min(0).max(40)).max(5).describe('How many openings in exterior walls you COUNT on this side, per storey from the ground up (e.g. [5, 2]). Count on the elevation first; then list exactly these in `openings`.'),
+          })
+          .strict(),
+      )
+      .length(4)
+      .describe('One entry for each of FRONT, REAR, LEFT, RIGHT.'),
     openings: z.array(DescribedOpeningSchema).max(120),
     dormers: z.array(DescribedDormerSchema).max(12),
     rooflights: z.array(DescribedRooflightSchema).max(24),
@@ -238,9 +250,11 @@ export function buildHouseDescriptionPrompt(input: { images: HouseDescriptionIma
     'HOW TO WORK.',
     '1. Find the ground-floor plan. Locate the entrance; that fixes FRONT. Read the overall dimensions printed along the outer dimension lines (centimetres on Polish drawings, feet-inches on American ones) and convert to metres; if none is printed, use the published width/depth; if neither, scale from doors (about 0.9 m) or stairs and say ESTIMATED_FROM_PROPORTIONS.',
     '2. Decompose the footprint into bodies: the main body, an attached garage, wings, a projecting porch. A roof on posts over an open area (carport, covered terrace, entrance canopy) is a `canopy`, not a body.',
-    '3. For each body: full storeys, whether the roof holds rooms, the height of the eaves, and its roof — kind, ridge direction, pitch. Use the section and elevations for heights and pitch (printed level marks first); use exterior views for the roof\'s shape when drawings are missing. A roof whose kind you cannot see is `OTHER`, never a guessed FLAT.',
-    '4. Go round the four facades. For every opening in an exterior wall give its body, side, storey, kind, centre, width, sill and height. Take positions and widths from the plans, sills and heights from the elevations, and both from exterior views when there is nothing else (then say PICTURE_ONLY). Do not list interior doors. Windows in a roof slope are `rooflights`; windows in a dormer belong to the `dormer`.',
-    '5. Add what makes the house recognisable when a picture shows it: dormers, chimneys above the roof, balconies with their railing, terraces, canopies and their posts.',
+    '3. For each body: full storeys, whether the roof holds rooms, the height of the eaves, and its roof — kind, ridge direction, pitch. Use the section and elevations for heights and pitch (printed level marks first); a roof or site plan shows ridges and valleys from above; use exterior views for the roof\'s shape when drawings are missing. A roof whose kind you cannot see is `OTHER`, never a guessed FLAT.',
+    '   Ridge direction, checked two ways: the triangular (gable) walls stand at the two ENDS of the ridge, so a body whose triangle faces the front has its ridge ALONG_Z; and on the elevation of a side parallel to the ridge you see the roof slope as a broad band, not a triangle. A lower roof over a garage or wing has its own ridge — look at it on its own, it need not follow the main one.',
+    '   A single slope (SHED): `highSide` is the side whose wall is TALLEST, where the roof\'s upper edge is; `eavesHeightM` is the wall height on the opposite, low side. Check it on a side elevation or a view from the corner.',
+    '4. Go round the four facades, one at a time: FRONT, REAR, LEFT, RIGHT. For each, first name the pictures that show it and COUNT its openings per storey (`sides`); then list every one of them in `openings` with its body, side, storey, kind, centre, width, sill and height. A side that a picture shows and for which you list nothing is almost always an omission — look again. Take positions and widths from the plans, sills and heights from the elevations, and both from exterior views when there is nothing else (then say PICTURE_ONLY). Do not list interior doors. Windows in a roof slope are `rooflights` — count them on the elevations and views too; windows in a dormer belong to the `dormer`.',
+    '5. Add what makes the house recognisable when a picture shows it: dormers, every chimney above the roof, balconies with their railing, terraces, and roofs over open areas (porch, covered terrace, carport, entrance canopy) with their posts.',
     '6. Colours: one hex per body for its walls, and the roof, joinery, garage door and accent (cladding, plinth, frames).',
     '7. A side that no elevation and no exterior view shows goes in `hypotheticalSides`; openings you still place there from the plan are PLAN_ONLY, anything else there is HYPOTHETICAL.',
     '',
@@ -331,6 +345,23 @@ export function checkHouseDescription(raw: unknown, published: PublishedFigure[]
   d.balconies.forEach((o, i) => known(o.bodyId, `balcony ${i}`))
   const shown = new Set(d.images.filter((i) => i.thisHouse && (i.kind === 'ELEVATION' || i.kind === 'EXTERIOR_VIEW')).flatMap((i) => i.shows.split('_')))
   for (const s of HouseSideSchema.options) if (!shown.has(s) && !d.hypotheticalSides.includes(s)) warn('SIDE_NOT_SHOWN_NOT_DECLARED', `${s}: no elevation or view is listed for it, yet it is not declared hypothetical`)
+  // each side: what was counted on it against what was listed for it
+  for (const side of HouseSideSchema.options) {
+    const entries = d.sides.filter((x) => x.side === side)
+    if (entries.length !== 1) {
+      warn('SIDES_NOT_ONE_EACH', `${side} has ${entries.length} entries in sides`)
+      continue
+    }
+    const counted = entries[0].openingsByStorey
+    const listed = d.openings.filter((o) => o.side === side)
+    const storeys = Math.max(counted.length, ...listed.map((o) => o.storey + 1), 0)
+    for (let st = 0; st < storeys; st += 1) {
+      const c = counted[st] ?? 0
+      const l = listed.filter((o) => o.storey === st).length
+      if (c !== l) warn('SIDE_COUNT_MISMATCH', `${side} storey ${st}: ${c} counted, ${l} listed`)
+    }
+    if (entries[0].pictures.length > 0 && listed.length === 0 && !d.hypotheticalSides.includes(side)) warn('SIDE_SHOWN_BUT_EMPTY', `${side}: pictures ${entries[0].pictures.join(', ')} show it, no opening is listed`)
+  }
   if (d.overall.basis === 'PRINTED_ON_DRAWING' && d.overall.printedWidthLabel === '' && d.overall.printedDepthLabel === '') warn('PRINTED_BASIS_WITHOUT_LABEL', 'the overall size is called printed, but no printed label is quoted')
   return issues.some((i) => i.severity === 'REJECT') ? { ok: false, issues } : { ok: true, description: d, issues }
 }

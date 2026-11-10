@@ -1121,6 +1121,153 @@
     "cacheCreationTokens": 9992
    },
    "latencyMs": 67439
+  },
+  {
+   "at": "2026-11-10T13:57:29.841Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 1/1 /home/user/rd/s53/pilot/sonnet-v2/dobredomy-pl-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "f71225ad-b669-4fc9-90b7-f54768e4c967",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.0009314799999999999,
+   "countedUsd": 0.000931,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 1449,
+    "cacheReadTokens": 3798,
+    "cacheCreationTokens": 844
+   },
+   "latencyMs": 6941
+  },
+  {
+   "at": "2026-11-10T13:59:12.693Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "describe claude-sonnet-5-5 /home/user/rd/s53/pilot/sonnet-v2/dobredomy-pl-1",
+   "modelRequested": "claude-sonnet-5-5",
+   "modelsReturned": [
+    "claude-sonnet-5-5"
+   ],
+   "sessionId": "29b558fa-0c06-40da-9c75-b9b9bd6c1fdb",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.21310400000000002,
+   "countedUsd": 0.213104,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 13052,
+    "cacheReadTokens": 0,
+    "cacheCreationTokens": 20645
+   },
+   "latencyMs": 101563
+  },
+  {
+   "at": "2026-11-10T13:59:24.872Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 1/1 /home/user/rd/s53/pilot/sonnet-v2/domoweklimaty-pl-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "ff8ce7c5-ce2c-460a-aeca-a78ca7de0150",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.0007614400000000001,
+   "countedUsd": 0.000761,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 1129,
+    "cacheReadTokens": 2714,
+    "cacheCreationTokens": 848
+   },
+   "latencyMs": 6150
+  },
+  {
+   "at": "2026-11-10T14:00:23.994Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "describe claude-sonnet-5-5 /home/user/rd/s53/pilot/sonnet-v2/domoweklimaty-pl-1",
+   "modelRequested": "claude-sonnet-5-5",
+   "modelsReturned": [
+    "claude-sonnet-5-5"
+   ],
+   "sessionId": "66ee9e52-1b18-4036-bbdb-161925d6d63d",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.1215557,
+   "countedUsd": 0.121556,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 7678,
+    "cacheReadTokens": 5997,
+    "cacheCreationTokens": 11043
+   },
+   "latencyMs": 58273
+  },
+  {
+   "at": "2026-11-10T14:00:45.201Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 1/3 /home/user/rd/s53/pilot/sonnet-v2/extradom-pl-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "9915ca1c-1fbb-441a-b004-9c3cc00a5a9d",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.0016688,
+   "countedUsd": 0.001669,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 2886,
+    "cacheReadTokens": 5600,
+    "cacheCreationTokens": 848
+   },
+   "latencyMs": 12428
+  },
+  {
+   "at": "2026-11-10T14:01:06.122Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 2/3 /home/user/rd/s53/pilot/sonnet-v2/extradom-pl-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "d1e8e6fc-2697-432f-89cd-ff3955e3f67d",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.00255942,
+   "countedUsd": 0.002559,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 4673,
+    "cacheReadTokens": 5372,
+    "cacheCreationTokens": 845
+   },
+   "latencyMs": 19916
+  },
+  {
+   "at": "2026-11-10T14:01:19.208Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 3/3 /home/user/rd/s53/pilot/sonnet-v2/extradom-pl-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "7f2444c8-dc5d-482c-9d93-7052b4e0b58b",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.00172386,
+   "countedUsd": 0.001724,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 3029,
+    "cacheReadTokens": 4016,
+    "cacheCreationTokens": 845
+   },
+   "latencyMs": 12239
   }
  ]
 }

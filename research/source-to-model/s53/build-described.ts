@@ -19,7 +19,7 @@ export function buildDescribed(raw: unknown, outDir: string, modelId: string, pu
   writeFileSync(join(outDir, 'description-check.json'), JSON.stringify(checked.issues, null, 1))
   if (!checked.ok) return { ok: false, summary: { stage: 'CHECK', issues: checked.issues } }
   const t0 = Date.now()
-  const built = reconstructFromHouseDescription(checked.description, modelId)
+  const built = reconstructFromHouseDescription(checked.description, modelId, { published })
   if (!built.ok) {
     writeFileSync(join(outDir, 'build-failure.json'), JSON.stringify(built, null, 1))
     return { ok: false, summary: { stage: 'BUILD', reason: built.reason, adjustments: built.adjustments } }

@@ -119,7 +119,7 @@ async function main(): Promise<void> {
   kinds = new Map([...kinds].filter(([n]) => decoded.some((d) => d.n === n)))
   const area = (d: (typeof decoded)[number]): number => d.raster.width * d.raster.height
   const pick = (kind: Kind, max: number): typeof decoded => decoded.filter((d) => kinds.get(d.n)?.kind === kind && !(kinds.get(d.n)?.duplicateOf ?? 0)).sort((a, b) => area(b) - area(a)).slice(0, max)
-  const chosen = [...pick('FLOOR_PLAN', 4), ...pick('ELEVATION', 6), ...pick('SECTION', 1), ...pick('EXTERIOR_VIEW', 4)].sort((a, b) => a.n - b.n)
+  const chosen = [...pick('FLOOR_PLAN', 4), ...pick('ELEVATION', 6), ...pick('SECTION', 1), ...pick('SITE_PLAN', 1), ...pick('EXTERIOR_VIEW', 4)].sort((a, b) => a.n - b.n)
   writeFileSync(join(out, 'triage.json'), JSON.stringify({ decoded: decoded.map((d) => ({ n: d.n, assetId: d.asset.id, size: `${d.raster.width}x${d.raster.height}`, byteHash: d.byteHash, packageRoles: d.asset.roles, triage: kinds.get(d.n) ?? null })), undecodable, chosen: chosen.map((d) => d.n) }, null, 1))
   if (chosen.length === 0) {
     writeFileSync(join(out, 'run.json'), JSON.stringify({ outcome: 'NO_USABLE_PICTURE', calls }, null, 1))

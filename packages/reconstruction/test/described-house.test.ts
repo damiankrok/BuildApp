@@ -107,3 +107,51 @@ describe('described house → BuildingV2', () => {
     expect(over.adjustments.map((a) => a.code)).toContain('BODY_CLIPPED')
   })
 })
+
+describe('described house — a cross gable', () => {
+  it('a wing whose ridge runs into the main slope dies into it along two valleys, whatever the two eaves heights', () => {
+    const checked = checkHouseDescription(JSON.parse(readFileSync(new URL('./fixtures/described-house-a.json', import.meta.url), 'utf8')))
+    if (!checked.ok) throw new Error('fixture')
+    const d = checked.description
+    // the main body's ridge runs front to back; a lower wing stands against its right eave wall, its ridge along the front
+    const main = { ...d.bodies[0], x0: 0, x1: 9, z0: 0, z1: 11, roof: { ...d.bodies[0].roof, ridge: 'ALONG_Z' as const, overhangM: 0 } }
+    const wing = { ...d.bodies[1], x0: 9, x1: 12.5, z0: 2, z1: 9, eavesHeightM: 2.7, roof: { ...d.bodies[0].roof, ridge: 'ALONG_X' as const, overhangM: 0 } }
+    const house = { ...d, overall: { ...d.overall, widthM: 12.5, depthM: 11 }, bodies: [main, wing], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [], sides: d.sides.map((x) => ({ ...x, openingsByStorey: [] })) }
+    const { building } = buildingFromHouseDescription(house)
+    const cross = building.pitchedAttachedRoofs.find((r) => r.massId === 'body-garage')
+    expect(cross?.layout.join.kind).toBe('VALLEY')
+    expect(cross?.joinRoofId).toBe('roof-main-plane-high')
+    expect(building.planeRoofs?.map((r) => r.massId)).toEqual(['main'])
+    const mainRoof = building.planeRoofs?.[0]
+    expect(cross && mainRoof && cross.ridgeY < mainRoof.ridgeY).toBe(true)
+    const built = reconstructFromHouseDescription(house, 'cross')
+    expect(built.ok).toBe(true)
+    if (built.ok) expect(built.refused).toEqual([])
+    // the same wing with its ridge front to back does not run into the slope: it keeps a roof of its own
+    const parallel = buildingFromHouseDescription({ ...house, bodies: [main, { ...wing, roof: { ...wing.roof, ridge: 'ALONG_Z' as const } }] })
+    expect(parallel.building.pitchedAttachedRoofs).toEqual([])
+  })
+})
+
+describe('described house — scale', () => {
+  const load = (): HouseDescription => fixture()
+  const fig = (key: string, value: number) => ({ key, label: key, raw: String(value), value, unit: 'm' })
+  it('a size printed on the drawing is never rescaled by a published figure', () => {
+    const d = load()
+    const r = buildingFromHouseDescription(d, { published: [fig('footprint_area', 300)] })
+    expect(r.adjustments.map((a) => a.code)).not.toContain('SCALED_TO_PUBLISHED_FIGURE')
+    expect(r.building.masses[0].x1).toBeCloseTo(10.5, 6)
+  })
+  it('a size scaled or estimated takes its scale from the published footprint, by one factor, and says so', () => {
+    const d = load()
+    const area = d.bodies.reduce((s, b) => s + (b.x1 - b.x0) * (b.z1 - b.z0), 0)
+    const est = { ...d, overall: { ...d.overall, basis: 'SCALED_FROM_DRAWING' as const, printedWidthLabel: '', printedDepthLabel: '' } }
+    const r = buildingFromHouseDescription(est, { published: [fig('footprint_area', area * 0.81)] })
+    expect(r.adjustments.map((a) => a.code)).toContain('SCALED_TO_PUBLISHED_FIGURE')
+    expect(r.building.masses[0].x1).toBeCloseTo(10.5 * 0.9, 1)
+    expect(r.building.masses[0].z1 / r.building.masses[0].x1).toBeCloseTo(10 / 10.5, 1)
+    // agreeing figures change nothing
+    const same = buildingFromHouseDescription(est, { published: [fig('footprint_area', area * 1.03)] })
+    expect(same.adjustments.map((a) => a.code)).not.toContain('SCALED_TO_PUBLISHED_FIGURE')
+  })
+})

@@ -16,8 +16,10 @@
  */
 import { round6 } from '@buildapp/source-common'
 import { serializeModel } from '@buildapp/model'
-import type { DescribedBody, DescribedOpening, HouseDescription, HouseSide } from '@buildapp/source-vision'
-import type { BuildingV2, CanopyV2, DormerV2, LevelV2, MassV2, PlaneRoofV2, AttachedRoofV2, BalconyV2, RailingV2, TerraceV2 } from './building.js'
+import type { DescribedBody, DescribedOpening, HouseDescription, HouseSide, PublishedFigure } from '@buildapp/source-vision'
+import type { BuildingV2, CanopyV2, DormerV2, LevelV2, MassV2, PlaneRoofV2, AttachedRoofV2, BalconyV2, RailingV2, TerraceV2, PitchedAttachedRoofV2 } from './building.js'
+import { attachedGableLayout } from './attached-roof-form.js'
+import type { MainRoofForJoin } from './attached-roof-form.js'
 import type { Facade, OpeningFamily, OpeningV2 } from './openings-v2.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { PlaneRoofKey, PlaneRoofLayout, RoofEnd } from './plane-roof.js'
@@ -31,6 +33,7 @@ export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 export type DescribedAdjustmentCode =
   | 'FRAME_SHIFTED'
   | 'BODIES_RESCALED_TO_OVERALL'
+  | 'SCALED_TO_PUBLISHED_FIGURE'
   | 'BODY_CLIPPED'
   | 'BODY_DROPPED'
   | 'EAVES_HEIGHT_CLAMPED'
@@ -122,7 +125,7 @@ function wallTopAt(mass: MassV2, facade: Facade, at: number, roof: PlaneRoofV2 |
  * The described house as `BuildingV2`. Total: a description `checkHouseDescription` admitted always yields a building
  * with at least its main body; everything it could not place as stated is in `adjustments`.
  */
-export function buildingFromHouseDescription(input: HouseDescription): DescribedBuilding {
+export function buildingFromHouseDescription(input: HouseDescription, options: { published?: PublishedFigure[] } = {}): DescribedBuilding {
   const adjustments: DescribedAdjustment[] = []
   const adj = (code: DescribedAdjustmentCode, subject: string, why: string): void => void adjustments.push({ code, subject, why })
   const d = input
@@ -142,7 +145,31 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
   const fx = d.overall.widthM / withCanopies((r) => [r.x0, r.x1])
   const fz = d.overall.depthM / withCanopies((r) => [r.z0, r.z1])
   const rescale = Math.abs(fx - 1) > 0.08 && Math.abs(fz - 1) > 0.08 && Math.abs(fx / fz - 1) < 0.05
-  const kx = rescale ? (fx + fz) / 2 : 1
+  // A size that is NOT printed on a drawing (scaled or estimated) and that the page's own figures contradict takes its
+  // scale from those figures: the published width and length where both are given and the stated shape has their
+  // proportion, else the published footprint area. One factor for every position: the shape is the reader's, the size
+  // the page's. Named, and approximate — a published figure is not a dimension confirmed on the drawing.
+  let kp = 1
+  if (d.overall.basis !== 'PRINTED_ON_DRAWING' && !rescale) {
+    const fig = (key: string): number | undefined => options.published?.find((f) => f.key === key)?.value
+    const pw = fig('building_width')
+    const pl = fig('building_length')
+    const pa = fig('footprint_area')
+    const area = d.bodies.reduce((s, b) => s + Math.abs(b.x1 - b.x0) * Math.abs(b.z1 - b.z0), 0)
+    const spanW = withCanopies((r) => [r.x0, r.x1])
+    const spanD = withCanopies((r) => [r.z0, r.z1])
+    const candidates: Array<{ k: number; why: string }> = []
+    if (pw !== undefined && pl !== undefined) {
+      for (const [w, l] of [[pw, pl], [pl, pw]]) if (Math.abs(w / spanW / (l / spanD) - 1) < 0.06) candidates.push({ k: (w / spanW + l / spanD) / 2, why: `the page publishes ${pw} × ${pl} m` })
+    }
+    if (candidates.length === 0 && pa !== undefined && area > 0) candidates.push({ k: Math.sqrt(pa / area), why: `the page publishes a footprint of ${pa} m², the bodies as stated cover ${area.toFixed(1)} m²` })
+    const c = candidates.sort((a, b) => Math.abs(a.k - 1) - Math.abs(b.k - 1))[0]
+    if (c && Math.abs(c.k - 1) > 0.06 && c.k > 0.6 && c.k < 1.6) {
+      kp = c.k
+      adj('SCALED_TO_PUBLISHED_FIGURE', 'frame', `the overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')} (${d.overall.widthM} × ${d.overall.depthM} m) and ${c.why}: every position scaled by ${c.k.toFixed(3)} — approximate, a published figure is not a dimension confirmed on a drawing`)
+    }
+  }
+  const kx = rescale ? (fx + fz) / 2 : kp
   const kz = kx
   if (Math.abs(minX) > 1e-6 || Math.abs(minZ) > 1e-6) adj('FRAME_SHIFTED', 'frame', `the bodies started at x ${minX.toFixed(2)}, z ${minZ.toFixed(2)}: moved to the origin`)
   if (rescale) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: every position scaled by ${kx.toFixed(3)}`)
@@ -239,6 +266,37 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
     const layout = planeRoofLayout({ x0: round6(body.x0), x1: round6(body.x1), z0: round6(body.z0), z1: round6(body.z1) }, ridgeAxis, pitch, layoutEave, ends)
     planeRoofs.push({ massId: m.id, ridgeAxis, pitchDeg: pitch, eaveY: layoutEave, ridgeY: layout.ridgeY, ends, thicknessM: ROOF_THICKNESS_M, layout, featureId: `described-roof-${src.id}`, provenance: prov, why: `a ${kind.toLowerCase()} roof at ${pitch}° (${src.roof.pitchBasis.toLowerCase().replace(/_/g, ' ')}), its ridge ${ridgeAxis === 'X' ? 'along the front' : 'front to back'}, eaves at ${eaveY} m, as the sources show it` })
   })
+  // --- a gable whose ridge runs INTO a neighbour's slope is a cross gable: its planes run on over that slope to the
+  // valleys where the two surfaces meet, instead of stopping as a wall above the neighbour's eaves ---------------------
+  const pitchedAttachedRoofs: PitchedAttachedRoofV2[] = []
+  for (const own of [...planeRoofs]) {
+    if (own.massId === mainMassId || own.layout.planes.length !== 2 || own.ends.min !== 'GABLE' || own.ends.max !== 'GABLE') continue
+    const m = masses.find((x) => x.id === own.massId) as MassV2
+    const [t0, t1] = own.ridgeAxis === 'X' ? [m.x0, m.x1] : [m.z0, m.z1]
+    const [u0, u1] = own.ridgeAxis === 'X' ? [m.z0, m.z1] : [m.x0, m.x1]
+    for (const host of planeRoofs) {
+      if (host === own || host.ridgeAxis === own.ridgeAxis || host.layout.planes.length < 2) continue
+      const h = masses.find((x) => x.id === host.massId) as MassV2
+      const [ht0, ht1] = own.ridgeAxis === 'X' ? [h.x0, h.x1] : [h.z0, h.z1]
+      const [hu0, hu1] = own.ridgeAxis === 'X' ? [h.z0, h.z1] : [h.x0, h.x1]
+      const party: 'MIN' | 'MAX' | undefined = Math.abs(t0 - ht1) <= 0.05 ? 'MIN' : Math.abs(t1 - ht0) <= 0.05 ? 'MAX' : undefined
+      if (!party || u0 < hu0 - 0.05 || u1 > hu1 + 0.05) continue
+      // the host's top surface at its wall line on the party side: its ridge less the fall over the run to that wall
+      const partyAt = party === 'MIN' ? ht1 : ht0
+      const hostWallEave = host.ridgeY - Math.abs(host.layout.ridgeAt - partyAt) * tanDeg(host.pitchDeg)
+      const join: MainRoofForJoin = { ridgeAxis: host.ridgeAxis, ridgeAt: host.layout.ridgeAt, eaveY: round6(hostWallEave), ridgeY: host.ridgeY, pitchDeg: host.pitchDeg, footprint: { x0: h.x0, x1: h.x1, z0: h.z0, z1: h.z1 } }
+      const src = bodies.find((b) => b.id === m.id)?.src as DescribedBody
+      const body = { x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 }
+      // this roof's top surface at its own wall lines (no eaves projection on a cross gable)
+      const ownEave = round6(own.ridgeY - ((u1 - u0) / 2) * tanDeg(own.pitchDeg))
+      const layout = attachedGableLayout(body, own.ridgeAxis, own.pitchDeg, ownEave, join, { anyEaves: true })
+      if (layout.join.kind !== 'VALLEY') continue
+      const hostKey: PlaneRoofKey = party === 'MIN' ? 'HIGH' : 'LOW'
+      pitchedAttachedRoofs.push({ massId: m.id, kind: 'GABLE', ridgeAxis: own.ridgeAxis, pitchDeg: own.pitchDeg, pitchSource: src.roof.pitchBasis === 'PRINTED_ON_DRAWING' || src.roof.pitchBasis === 'PUBLISHED_ON_PAGE' ? 'STATED' : 'MEASURED', eaveY: ownEave, ridgeY: layout.ridgeY, thicknessM: ROOF_THICKNESS_M, footprint: body, layout, form: { kind: 'GABLE', ridgeAxis: own.ridgeAxis, pitchDeg: own.pitchDeg, pitchSource: 'MEASURED', measuredRiseM: round6(layout.ridgeY - ownEave), expectedRiseM: round6(layout.ridgeY - ownEave), readings: [], confidence: src.confidence, why: own.why }, joinRoofId: `roof-${host.massId}-plane-${hostKey.toLowerCase()}`, featureId: own.featureId, provenance: prov })
+      planeRoofs.splice(planeRoofs.indexOf(own), 1)
+      break
+    }
+  }
   // the main body's roof first: a chimney is cut in the first plane roof
   planeRoofs.sort((a, b) => Number(b.massId === mainMassId) - Number(a.massId === mainMassId))
   const roofOf = (massId: string): PlaneRoofV2 | undefined => planeRoofs.find((r) => r.massId === massId)
@@ -262,8 +320,8 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
     if (mass !== named) adj('OPENING_MOVED_TO_WALL', name, `${o.bodyId} has no wall there on that storey: placed in ${mass.id}'s wall, which stands at that position`)
     const rect: Rect = { x0: mass.x0, z0: mass.z0, x1: mass.x1, z1: mass.z1 }
     const [w0, w1] = alongX ? [mass.x0, mass.x1] : [mass.z0, mass.z1]
-    let lo = at - o.widthM / 2
-    let hi = at + o.widthM / 2
+    let lo = at - (o.widthM * kx) / 2
+    let hi = at + (o.widthM * kx) / 2
     // not where another body stands against this wall on this storey
     const against = coveredSpans(rect, facade, masses.filter((x) => x !== mass && x.storeys.includes(o.storey)).map((x) => ({ x0: x.x0, z0: x.z0, x1: x.x1, z1: x.z1 })))
     const blocked = [...against, ...(taken.get(`${mass.id}:${facade}:${o.storey}`) ?? [])]
@@ -283,7 +341,9 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
     const sill = round6(floor + (door ? 0 : clamp(o.sillM, 0, 2.2)))
     const roof = roofOf(mass.id)
     const flat = flatOf(mass.id)
-    const ceiling = isTop ? Math.min(wallTopAt(mass, facade, lo + 0.05, roof, flat, floor + H), wallTopAt(mass, facade, hi - 0.05, roof, flat, floor + H)) - 0.12 : floor + H - 0.3
+    const cross = pitchedAttachedRoofs.find((r) => r.massId === mass.id)
+    const crossTop = cross ? (alongX === (cross.ridgeAxis === 'X') ? cross.eaveY - cross.thicknessM / cosDeg(cross.pitchDeg) : cross.eaveY + Math.max(0, Math.min(lo - (alongX ? mass.x0 : mass.z0), (alongX ? mass.x1 : mass.z1) - hi)) * tanDeg(cross.pitchDeg) - cross.thicknessM / cosDeg(cross.pitchDeg)) : undefined
+    const ceiling = crossTop !== undefined && isTop ? crossTop - 0.12 : isTop ? Math.min(wallTopAt(mass, facade, lo + 0.05, roof, flat, floor + H), wallTopAt(mass, facade, hi - 0.05, roof, flat, floor + H)) - 0.12 : floor + H - 0.3
     let head = round6(sill + o.heightM)
     if (head > ceiling) {
       if (ceiling - sill < 0.45) return adj('OPENING_DROPPED', name, `the wall is ${(ceiling - floor).toFixed(2)} m high under the roof there: no room for it at a sill of ${(sill - floor).toFixed(2)} m`)
@@ -513,7 +573,7 @@ export function buildingFromHouseDescription(input: HouseDescription): Described
     levels,
     masses,
     attachedRoofs,
-    pitchedAttachedRoofs: [],
+    pitchedAttachedRoofs,
     planeRoofs,
     recesses: [],
     returns: [],
@@ -548,8 +608,8 @@ export type DescribedModel =
  * A description to a model: build, emit, fit — an object the model's validator refuses is taken out and named
  * (`refused`), as the drawings' preview does — and run through the model's own validator.
  */
-export function reconstructFromHouseDescription(description: HouseDescription, modelId: string): DescribedModel {
-  const { building, adjustments, mainMassId } = buildingFromHouseDescription(description)
+export function reconstructFromHouseDescription(description: HouseDescription, modelId: string, options: { published?: PublishedFigure[] } = {}): DescribedModel {
+  const { building, adjustments, mainMassId } = buildingFromHouseDescription(description, options)
   const emitted = emitBuilding(building, DESCRIBED_HOUSE_LABEL)
   const preview = fitPreviewProgram(emitted.program, { label: DESCRIBED_HOUSE_LABEL, modelId, mainMassId, toleranceM: 0.05 })
   if (!preview.fit.ok) return { ok: false, reason: `the model refused command ${preview.fit.failedAt} (${preview.fit.command.type}): ${preview.fit.errors.map((e) => `${e.code} ${e.message ?? ''}`).join('; ').slice(0, 400)}`, adjustments }

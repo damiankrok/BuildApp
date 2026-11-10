@@ -370,7 +370,12 @@ export type AttachedGableLayout = {
  * an intersecting gable is built — and stop there, so neither surface shows
  * through the other. Otherwise they stop at the party line.
  */
-export function attachedGableLayout(body: PlanBox, ridgeAxis: 'X' | 'Z', pitchDeg: number, eaveY: number, main?: MainRoofForJoin): AttachedGableLayout {
+export function attachedGableLayout(body: PlanBox, ridgeAxis: 'X' | 'Z', pitchDeg: number, eaveY: number, main?: MainRoofForJoin, options: { anyEaves?: boolean } = {}): AttachedGableLayout {
+  // v3.53 (`anyEaves`): the two surfaces are joined along their line of intersection whatever the two eaves' heights —
+  // eaves above the main ones start their valleys up the main slope, eaves below them abut the main wall up to the main
+  // eave and run over the slope from there — as long as this ridge stays under the main one. Off (the drawings' path),
+  // the join is made only for eaves level with the main ones, or lower eaves under a ridge at the main ridge's height.
+  const anyEaves = options.anyEaves === true
   const tan = Math.tan((pitchDeg * Math.PI) / 180)
   // Local frame: `u` across the ridge, `t` along it.
   const [u0, u1] = ridgeAxis === 'Z' ? [body.x0, body.x1] : [body.z0, body.z1]
@@ -400,7 +405,7 @@ export function attachedGableLayout(body: PlanBox, ridgeAxis: 'X' | 'Z', pitchDe
       const partyAt = partySide === 'MAX' ? t1 : t0
       const s = partySide === 'MAX' ? 1 : -1
       const toRidge = Math.abs(main.ridgeAt - partyAt)
-      if (within && crosswise && mainTan > 1e-6 && ridgeY < main.ridgeY - 0.05 && Math.abs(eaveY - main.eaveY) <= 0.25) {
+      if (within && crosswise && mainTan > 1e-6 && ridgeY < main.ridgeY - 0.05 && (anyEaves ? eaveY >= main.eaveY - 0.25 : Math.abs(eaveY - main.eaveY) <= 0.25)) {
         const meet = (y: number): number => partyAt + s * Math.max(0, (y - main.eaveY) / mainTan)
         const tR = meet(ridgeY)
         const tE = meet(eaveY)
@@ -418,8 +423,8 @@ export function attachedGableLayout(body: PlanBox, ridgeAxis: 'X' | 'Z', pitchDe
       // the plane meets the main body's wall at the party line (an abutment, under the main eave).
       const lowerEave = main.eaveY - eaveY
       const run = lowerEave / tan
-      if (join.kind === 'FREE' && within && crosswise && mainTan > 1e-6 && Math.abs(ridgeY - main.ridgeY) <= 0.05 && lowerEave > 0.25 && run < uR - u0 - 0.05) {
-        const tR = partyAt + s * toRidge
+      if (join.kind === 'FREE' && within && crosswise && mainTan > 1e-6 && (anyEaves ? ridgeY < main.ridgeY + 0.05 && ridgeY > main.eaveY + 0.1 : Math.abs(ridgeY - main.ridgeY) <= 0.05) && lowerEave > 0.25 && run < uR - u0 - 0.05) {
+        const tR = partyAt + s * (anyEaves ? Math.min(toRidge, Math.max(0, (ridgeY - main.eaveY) / mainTan)) : toRidge)
         if (partySide === 'MAX') tHigh = partyAt
         else tLow = partyAt
         lowerEaveRun = run
