@@ -1,0 +1,185 @@
+{
+ "schema": "buildapp.source-to-model.experiment-result/1",
+ "experiment": "S53-E3",
+ "runOn": "tree 882e366 (code 9069ec7), 2026-11-10T14:27:31Z, one run per page through analysis-service runDescribedAnalysis",
+ "scorer": "the session, item by item against the frozen reference checklists; the OWNER boards are the independent judgement and are pending",
+ "armB": {
+  "models": 6,
+  "of": 6,
+  "modelRefusedObjects": 0,
+  "compileErrors": {
+   "dobredomy-pl-2": 1
+  },
+  "closureAuditExteriorFindings": {
+   "architecturaldesigns-com-2": 6,
+   "dobredomy-pl-2": 3,
+   "domoweklimaty-pl-2": 7,
+   "extradom-pl-2": 5,
+   "houseplans-com-2": 7,
+   "lipinscy-pl-2": 4
+  },
+  "items": [
+   "SCALE",
+   "BODIES",
+   "STOREYS",
+   "MAIN_ROOF_KIND",
+   "MAIN_RIDGE",
+   "ATTACHED_ROOFS",
+   "GARAGE",
+   "ENTRANCE",
+   "FRONT_OPENINGS",
+   "OTHER_SIDES_OPENINGS",
+   "LARGE_GLAZING",
+   "FEATURES",
+   "PALETTE"
+  ],
+  "verdicts": {
+   "architecturaldesigns-com-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "OK"
+   ],
+   "dobredomy-pl-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "WRONG",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "PARTIAL",
+    "OK"
+   ],
+   "domoweklimaty-pl-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "WRONG",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "PARTIAL",
+    "OK"
+   ],
+   "extradom-pl-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "NA",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "PARTIAL",
+    "OK"
+   ],
+   "houseplans-com-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "OK",
+    "OK"
+   ],
+   "lipinscy-pl-2": [
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "NA",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "OK",
+    "PARTIAL",
+    "OK"
+   ]
+  },
+  "notes": {
+   "architecturaldesigns-com-2": "73'-0\" x 58'-7\" read; garage with a room over it front-left, main body, bedroom wing, front porch (7 posts) and rear patio; every facade's count within one of the reference (front 5+1 and rear 4 exact); the two roof dormers are not described.",
+   "dobredomy-pl-2": "printed 1420 x 2024 read; hip roofs on main body and garage, covered rear terrace on 2 posts, 2 chimneys; front 3 and rear 4 exact, left 3, right 2 of 3. WRONG by the frozen rule: the main hip (almost a pyramid, ridge about 1 m) is stated front-to-back where the reference has it along the front, and the garage's hip arm the other way round. Rooflights 2 of 5. One compile error (an attic wall under a hip end eave set lower than the side eaves) — builder defect, fixed after scoring; the scored run is the one with the error.",
+   "domoweklimaty-pl-2": "both the reference and the reader took the long entrance side as FRONT (16.65 x 11.55, the published 11.55 as depth); dormer with balcony and glass guard, 2 chimneys, lean-to terrace on 4 posts, entrance canopy; every side's count within one. The garage's ridge is stated front-to-back, the reference has it along the front.",
+   "extradom-pl-2": "printed 1410 x 835 read; one gable block, entrance canopy, three terraces; counts front 3, rear 2, left 1 exact, right 2 (reference 1); chimneys 1 of 2; the front kitchen glazing is listed as a window.",
+   "houseplans-com-2": "house and shop under one steep gable (two collinear bodies at one pitch), L-shaped porch as two plates on 6+3 posts, rear patio on 2; front 7 exact in order (two garage doors right), rear 4, left 3 exact, right 3; chimney; black walls, timber-toned garage doors.",
+   "lipinscy-pl-2": "printed 1524 x 564 read; one narrow gable block; front 3 exact in order, rear 5, both gable ends blank as drawn; front canopy, rear canopy (as a pergola), terrace; chimneys 1 of 2. The description's own check warned SIDE_SHOWN_BUT_EMPTY for the two blank ends — a false alarm of the check, fixed after scoring."
+  },
+  "recognisableCandidate": {
+   "architecturaldesigns-com-2": true,
+   "dobredomy-pl-2": false,
+   "domoweklimaty-pl-2": true,
+   "extradom-pl-2": true,
+   "houseplans-com-2": true,
+   "lipinscy-pl-2": true
+  },
+  "secondsAndUsd": {
+   "architecturaldesigns-com-2": [
+    52,
+    0.1138
+   ],
+   "dobredomy-pl-2": [
+    100,
+    0.1585
+   ],
+   "domoweklimaty-pl-2": [
+    115,
+    0.1785
+   ],
+   "extradom-pl-2": [
+    74,
+    0.1044
+   ],
+   "houseplans-com-2": [
+    51,
+    0.0893
+   ],
+   "lipinscy-pl-2": [
+    48,
+    0.0996
+   ]
+  },
+  "usdTotal": 0.7441,
+  "costBasis": "CLI_TOKEN_ESTIMATE"
+ },
+ "armA": {
+  "models": 2,
+  "of": 6,
+  "note": "both cascade models (dobredomy-pl-2, lipinscy-pl-2) carry SCALE_NOT_VERIFIED and HEIGHT_ASSUMED_FOR_PREVIEW; dobredomy-pl-2 is two flat-roofed open boxes for a hip-roofed bungalow (board delivered)"
+ },
+ "conclusion": [
+  "On six pages the path was not developed on, in one run each, every page gives a model and 5 of 6 are recognisable candidates by the frozen rule; front openings, the other sides' openings and scale are within the checklist on 6 of 6.",
+  "What repeats from the pilot is one reader error: the ridge direction of an attached roof (2 of 6 here, 1 of 6 in the pilot after the 0.2 prompt) and of a near-pyramidal hip. Roof features are under-read (dormers 0 of 2 on one house, rooflights 2 of 5, second chimneys).",
+  "The joint audit reports 3-7 exterior findings on every described model; they were not examined. One builder defect surfaced (hip end eaves) and was fixed after scoring.",
+  "Decision taken on this evidence: where the host has a reader, a drawings model with neither a verified scale nor a measured height gives way to the description (analyseLink, DRAWINGS_MODEL_UNANCHORED); the drawings model is kept beside it.",
+  "Twelve pages of six publishers in two sets. Not 'any link': publishers that refuse the client are still out of reach, and no page of an unknown publisher was in either set."
+ ]
+}

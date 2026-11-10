@@ -360,7 +360,8 @@ export function checkHouseDescription(raw: unknown, published: PublishedFigure[]
       const l = listed.filter((o) => o.storey === st).length
       if (c !== l) warn('SIDE_COUNT_MISMATCH', `${side} storey ${st}: ${c} counted, ${l} listed`)
     }
-    if (entries[0].pictures.length > 0 && listed.length === 0 && !d.hypotheticalSides.includes(side)) warn('SIDE_SHOWN_BUT_EMPTY', `${side}: pictures ${entries[0].pictures.join(', ')} show it, no opening is listed`)
+    // a side counted as blank is a statement (a gable end with no opening), not an omission
+    if (entries[0].pictures.length > 0 && listed.length === 0 && counted.some((c) => c > 0) && !d.hypotheticalSides.includes(side)) warn('SIDE_SHOWN_BUT_EMPTY', `${side}: pictures ${entries[0].pictures.join(', ')} show it, no opening is listed`)
   }
   if (d.overall.basis === 'PRINTED_ON_DRAWING' && d.overall.printedWidthLabel === '' && d.overall.printedDepthLabel === '') warn('PRINTED_BASIS_WITHOUT_LABEL', 'the overall size is called printed, but no printed label is quoted')
   return issues.some((i) => i.severity === 'REJECT') ? { ok: false, issues } : { ok: true, description: d, issues }

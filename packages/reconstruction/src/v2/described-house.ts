@@ -259,8 +259,11 @@ export function buildingFromHouseDescription(input: HouseDescription, options: {
     const endSides: Facade[] = ridgeAxis === 'X' ? ['WEST', 'EAST'] : ['FRONT', 'REAR']
     const free = (s: Facade): boolean => coveredSpans(b.rect, s, others).length === 0
     const over = clamp(src.roof.overhangM, 0, 0.8)
-    const eaveOut = eaveSides.every(free) ? over : 0
-    const endOut = (s: Facade): number => (free(s) ? Math.min(over, 0.4) : 0)
+    // under a hip every side is an eave and all four lie at one height: the eaves stand out by one amount all round, or
+    // (where a body stands against any side) not at all — an end eave set in from the others would sit below its wall
+    const hipped = ends.min === 'HIP'
+    const eaveOut = hipped ? ([...eaveSides, ...endSides].every(free) ? over : 0) : eaveSides.every(free) ? over : 0
+    const endOut = (s: Facade): number => (hipped ? eaveOut : free(s) ? Math.min(over, 0.4) : 0)
     const body: Rect = ridgeAxis === 'X' ? { x0: b.rect.x0 - endOut(endSides[0]), x1: b.rect.x1 + endOut(endSides[1]), z0: b.rect.z0 - eaveOut, z1: b.rect.z1 + eaveOut } : { x0: b.rect.x0 - eaveOut, x1: b.rect.x1 + eaveOut, z0: b.rect.z0 - endOut(endSides[0]), z1: b.rect.z1 + endOut(endSides[1]) }
     const layoutEave = round6(eaveY - eaveOut * tanDeg(pitch))
     const layout = planeRoofLayout({ x0: round6(body.x0), x1: round6(body.x1), z0: round6(body.z0), z1: round6(body.z1) }, ridgeAxis, pitch, layoutEave, ends)

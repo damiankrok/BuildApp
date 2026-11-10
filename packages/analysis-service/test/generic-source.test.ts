@@ -20,7 +20,7 @@ import type { FetchDeps } from '@buildapp/source-package'
 import { compileBuilding } from '@buildapp/geometry'
 import { readFileSync } from 'node:fs'
 import type { StructuredVision } from '@buildapp/source-vision'
-import { AnalysisError, analyseLink, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
+import { AnalysisError, analyseLink, drawingsModelUnanchored, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
 
 const HOST = 'domy.nieznany-wydawca.test'
 const PAGE = `https://${HOST}/oferta/dom-larchfield`
@@ -251,5 +251,15 @@ describe('a refused page is described from its pictures when the host has a hous
     const e = await analyseLink({ kind: 'URL', url: PAGE }, { ...options(unknownPublisher({ project: false })), houseReader: r }).catch((x: unknown) => x)
     expect((e as AnalysisError).code).toBe('SOURCE_NOT_PROJECT')
     expect(r.asked).toEqual([])
+  })
+})
+
+describe('a drawings model with no metric anchor gives way to the description (v3.53)', () => {
+  const preview = (codes: string[]) => ({ preview: { provisional: codes.map((code) => ({ code, what: '' })) } }) as never
+  it('only when BOTH its scale is unverified and its heights are a convention', () => {
+    expect(drawingsModelUnanchored(preview(['SCALE_NOT_VERIFIED', 'HEIGHT_ASSUMED_FOR_PREVIEW']))).toBe(true)
+    expect(drawingsModelUnanchored(preview(['SCALE_NOT_VERIFIED']))).toBe(false)
+    expect(drawingsModelUnanchored(preview(['HEIGHT_ASSUMED_FOR_PREVIEW']))).toBe(false)
+    expect(drawingsModelUnanchored(preview([]))).toBe(false)
   })
 })
