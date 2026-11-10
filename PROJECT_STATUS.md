@@ -12,29 +12,41 @@
 
 ## Current summary (read first)
 
-- **Active brief:** SOURCE-TO-MODEL after audit v3.51.0 (OWNER, 2026-11-08) plus the OWNER instruction of 2026-11-09
-  ("a link to any project on any house-plan site must yield a 3D model") — campaign on `claude/new-session-3kzcgh`,
-  commits/push with `[skip ci]`, no merge/PR. Base `14ecb73` (production as `572b875`, APK 1322).
-- **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (adopted from the audit package).
-- **Checkpoints delivered:** APK 1326 from `101f9d7` with a private evidence pack; APK 1327 from `0fe410a`
-  (solver 2.34.0, metric reader 1.13.0, generic adapter 1.3.0, service 1.10.0). Full report: `stage-reports/SOURCE_TO_MODEL.md`.
-- **Slices:** C1a PASS (per-property provenance of levels), C1b PASS in its declared scope (one consumer of a section
-  vertical relation), C2 PASS for policy/types/trace and PARTIAL for the balcony-without-slab relation, ANY-LINK PARTIAL.
-- **ANY-LINK, measured:** on pages nobody had opened before, a model is built in **6 of 18** cases (blind runs:
-  CONTROL 3/6, one at a wrong scale; CONTROL-2 3/12). On known pages: DEV 3/6 (0/6 on 1322 code), CONTROL 5/6.
-  ARCHON corpus 27 → 28 of 33. Every new foreign model is an approximate or partial single-storey preview; roofs only
-  where the page publishes pitch and building height. "Any link from any site" is **not met**.
-- **Round 4 (`0fe410a`):** a refused plan reading is tried once more at the sheet's other reading size. One model
-  gained on a known page, **nothing on the twelve blind pages**; a run refused at both sizes takes about twice as long.
-- **What the plan reader does not read** (stage report 5.5): vector plans with named layers read from their raster;
-  walls drawn as thin double lines (4–6 px); a filled ground instead of outer walls.
-- **NEXT (one action):** a reader of vector plans with named layers — walls and dimension lines taken from the SVG
-  groups — on a frozen set (the four known pages of that publisher as DEV, new pages and another publisher's SVG plans
-  as CONTROL, the corpus's raster plans as counter-cases).
-- **Open product decision (OWNER):** whether a page with no readable plan should get a massing from published figures
-  alone, labelled as such. Measured since: only 1 of the 10 known no-model cases publishes width, length, height and
-  pitch together, so this would add little. Not implemented.
-- **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED. H2 sealed; no paid calls.
+- **Active brief:** OWNER v3.53.0 (2026-11-10, replaces v3.52): make BuildPlan a reliable analyzer of a house from the
+  sources a page publishes. Campaign on `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR.
+  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `0057611`.
+  Report: `stage-reports/SOURCE_TO_MODEL_V353.md` (earlier campaign: `stage-reports/SOURCE_TO_MODEL.md`).
+- **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1 added: what a described
+  model is and is not).
+- **Diagnosis, measured:** the mandatory plan cascade was the bottleneck (a model on 6 of 18 unseen pages), not the
+  semantic core. **SLICE S53 — PASS in its declared scope:** a vision reader describes the whole house once, in a closed
+  vocabulary; a deterministic check and builder turn that into the same intermediate building; the existing emitter,
+  validator and compiler make the model. The reader issues no code, ids or mesh.
+- **Result on pages it was not developed on (S53-E3, six held-back pages, one run each, criteria and references frozen
+  first):** a model on 6/6, a recognisable candidate by the frozen rule on 5/6; the 1327 cascade on the same pages: 2/6,
+  both without a metric anchor. Pilot (S53-E1): 5/6 against 0/6; its first blind run built 4/6 and stays in history.
+  Scored by the session; **the OWNER's "is this the house" judgement on the delivered boards is pending.**
+- **In the product:** `analysis-service` `analyseLink` (drawings first; a refusal that leaves the pictures unread, or a
+  drawings model with neither verified scale nor measured height, is described when the host has a reader);
+  `analyzer-api` wires it with `ANALYZER_HOUSE_READER=live`, the host's key and a daily ceiling on paid descriptions.
+  A described model says so (`MODEL_FROM_SOURCE_DESCRIPTION`, L0 only, scale and heights provisional).
+- **Not running for the OWNER yet — exact blocker:** no host for `apps/analyzer-api` and no API key set as a host secret
+  (both need the OWNER's decision). The SDK adapter has not been run against the live API; the phone's embedded analyzer
+  has no reader; no APK was built (next is ≥ 1328).
+- **Spend:** 2.7281 of the cumulative 5 USD since E12 (CLI token estimates, billing UNCONFIRMED). H2 and the private
+  benchmark sealed and unsent.
+- **Still wrong, named:** ridge direction of attached roofs and near-pyramidal hips (3 of 12 pages); dormers, rooflights
+  and second chimneys under-read; no two-tone facades, porch roofs are flat plates; the joint audit's 3–7 findings per
+  described model are unexamined. Twelve pages of six publishers are not "any link".
+- **NEXT (one action):** with a host and a key — deploy the service with the reader on, run one paid job through the SDK
+  adapter on a DEV page, compare with the recorded CLI result, then build APK ≥ 1328 with the service address. Without
+  them — the ridge of attached roofs: ask the reader for what is observable (which facade of the body shows the gable)
+  and derive the ridge deterministically, on a frozen DEV/CONTROL split.
+- **Decision register (v3.53):** D53-1 the description is a candidate for recognition, never a measurement, and never
+  overrides a drawings model with a metric anchor. D53-2 paid requests only on a host, on the host's key, under a
+  host-wide daily ceiling. D53-3 an invalid optional item of a description is dropped and named; it never refuses the
+  house. D53-4 only uniform rescaling of a description; published figures set the scale only where no size is printed.
+- **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED.
 
 ## Completed stages
 
