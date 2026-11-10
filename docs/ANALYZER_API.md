@@ -224,3 +224,16 @@ The service is then at `https://buildapp-analyzer.fly.dev` (TLS by the platform;
 **Any other container host** (Cloud Run, Render, a VM): run the image with a volume at `/data`, put TLS in front, set `ANALYZER_TRUST_PROXY=1` and `ANALYZER_REQUIRE_HTTPS=1`, and give the phone the https address — in the build variable, or in the app's Analyzer screen under "Service address".
 
 **Optional vision.** `ANALYZER_VISION=live` plus the server-side `ANTHROPIC_API_KEY` lets the analyzer ask a vision provider; results then say `vision.mode = LIVE_PROVIDER`. The key stays in the server's environment: no endpoint returns it, and no client ever needs it.
+
+**Optional house reader (v3.53).** `ANALYZER_HOUSE_READER=live` plus the server-side `ANTHROPIC_API_KEY` lets a page the
+drawings' path refuses (no readable plan, no drawings, incomplete sources), or answers only with a model that has neither
+a verified scale nor a measured height, be read as a whole from its pictures: the job then completes with a model whose
+warnings say `MODEL_FROM_SOURCE_DESCRIPTION` (LIMITING), whose scale and heights are named provisional, and whose label
+ends in "(model z opisu źródeł)". The contract of the job and of its result is unchanged; progress never moves back when
+the second path starts. Each such analysis is two paid requests on the host's key (about 0.1–0.2 USD and 40–115 s at the
+default models, measured through the session's CLI — the SDK adapter itself has not been run against the live API from
+this repository). `ANALYZER_HOUSE_READER_MODEL` / `ANALYZER_HOUSE_TRIAGE_MODEL` choose the models;
+`ANALYZER_HOUSE_READER_MAX_PER_DAY` (default 20, `0` = off) is a host-wide ceiling on paid descriptions per UTC day,
+counted in the data directory before each request. Without the variable, without a key, or past the ceiling, the service
+answers exactly as before. The phone's embedded analyzer has no reader: the described path exists only behind this
+service ("Service address" in the app, or the build variable).

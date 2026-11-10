@@ -105,6 +105,28 @@ credentials, scoped data, durable reservation/settlement of costs, retry ownersh
 timeouts, cancellation and caches belong to orchestration, not to maxUsd alone.
 Pilot scope can be small; it need not build enterprise cloud/accounts first.
 
+### 6.1 Whole-house description (v3.53)
+
+A vision reader may be the PRIMARY reader of a page: one answer, in a closed
+vocabulary (`HouseDescription`: bodies, storeys, roofs, openings per side, features,
+palette), about every picture the page publishes. It never issues code, commands,
+ids or a mesh. A deterministic check admits or refuses it; the deterministic builder
+turns it into the same intermediate building the drawings' path builds, and the same
+emitter, validator and compiler make the model. Every repair the builder makes is a
+typed adjustment in the result.
+
+Such a model says what it is: `MODEL_FROM_SOURCE_DESCRIPTION`, evidence statuses
+`VISUAL_SEMANTIC` / `ASSUMED_FOR_RENDERING`, quality L0 only, source fidelity
+UNCHECKED, scale and heights provisional (a dimension the reader says is printed is
+still unverified). It is a candidate for recognition, not a measurement, and it never
+overrides a drawings model that has a metric anchor.
+
+The reader is given numbered pictures, the instructions and the page's published
+figures — never a reference, a benchmark answer, a URL, a host or a project name
+beyond the page title. Provider and model are replaceable behind `StructuredVision`.
+Paid requests happen on a host, on the host's key, under a host-wide ceiling; no
+client holds a key. A fixture replayer is a test device, never "the API working".
+
 ## 7. Measurement and acceptance
 
 Freeze labels/uncertainty, project-family splits, source bytes, profile, scorer,
