@@ -12,41 +12,43 @@
 
 ## Current summary (read first)
 
-- **Active brief:** OWNER v3.53.0 (2026-11-10, replaces v3.52): make BuildPlan a reliable analyzer of a house from the
-  sources a page publishes. Campaign on `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR.
-  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `e223cb2`.
-  Report: `stage-reports/SOURCE_TO_MODEL_V353.md` (earlier campaign: `stage-reports/SOURCE_TO_MODEL.md`).
-- **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1 added: what a described
-  model is and is not).
-- **Diagnosis, measured:** the mandatory plan cascade was the bottleneck (a model on 6 of 18 unseen pages), not the
-  semantic core. **SLICE S53 — PASS in its declared scope:** a vision reader describes the whole house once, in a closed
-  vocabulary; a deterministic check and builder turn that into the same intermediate building; the existing emitter,
-  validator and compiler make the model. The reader issues no code, ids or mesh.
-- **Result on pages it was not developed on (S53-E3, six held-back pages, one run each, criteria and references frozen
-  first):** a model on 6/6, a recognisable candidate by the frozen rule on 5/6; the 1327 cascade on the same pages: 2/6,
-  both without a metric anchor. Pilot (S53-E1): 5/6 against 0/6; its first blind run built 4/6 and stays in history.
-  Scored by the session; **the OWNER's "is this the house" judgement on the delivered boards is pending.**
-- **In the product:** `analysis-service` `analyseLink` (drawings first; a refusal that leaves the pictures unread, or a
-  drawings model with neither verified scale nor measured height, is described when the host has a reader);
-  `analyzer-api` wires it with `ANALYZER_HOUSE_READER=live`, the host's key and a daily ceiling on paid descriptions.
-  A described model says so (`MODEL_FROM_SOURCE_DESCRIPTION`, L0 only, scale and heights provisional).
-- **Not running for the OWNER yet — exact blocker:** no host for `apps/analyzer-api` and no API key set as a host secret
-  (both need the OWNER's decision). The SDK adapter has not been run against the live API; the phone's embedded analyzer
-  has no reader; no APK was built (next is ≥ 1328).
-- **Spend:** 2.7281 of the cumulative 5 USD since E12 (CLI token estimates, billing UNCONFIRMED). H2 and the private
-  benchmark sealed and unsent.
-- **Still wrong, named:** ridge direction of attached gable roofs on square plans (a hip's ridge now follows the longer
-  side by geometry, builder 0.2.0, verified by replaying the recorded descriptions — a DEV fix after the control); dormers, rooflights
-  and second chimneys under-read; no two-tone facades, porch roofs are flat plates; the joint audit's 3–7 findings per
-  described model are unexamined. Twelve pages of six publishers are not "any link".
-- **NEXT (one action):** with a host and a key — deploy the service with the reader on, run one paid job through the SDK
-  adapter on a DEV page, compare with the recorded CLI result, then build APK ≥ 1328 with the service address. Without
-  them — the ridge of attached roofs: ask the reader for what is observable (which facade of the body shows the gable)
-  and derive the ridge deterministically, on a frozen DEV/CONTROL split.
-- **Decision register (v3.53):** D53-1 the description is a candidate for recognition, never a measurement, and never
-  overrides a drawings model with a metric anchor. D53-2 paid requests only on a host, on the host's key, under a
-  host-wide daily ceiling. D53-3 an invalid optional item of a description is dropped and named; it never refuses the
-  house. D53-4 only uniform rescaling of a description; published figures set the scale only where no size is printed.
+- **Active brief:** OWNER v3.53.0 (2026-11-10) with its continuation v3.53.1 (same day): a working analyzer in the app
+  and a correct whole exterior. Campaign on `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR.
+  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `a2e2f45`.
+  Reports: `stage-reports/SOURCE_TO_MODEL_V3531.md` (current), `SOURCE_TO_MODEL_V353.md`, `SOURCE_TO_MODEL.md`.
+- **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
+  (the house reader as a private pilot).
+- **What exists:** the described path (a vision reader describes the whole house once in a closed vocabulary; a
+  deterministic check and builder; the existing emitter, validator, compiler). Held-back control S53-E3: a model on
+  6/6 pages, a recognisable candidate by the frozen narrow rule on 5/6 — not the OWNER's acceptance; the boards are
+  with the OWNER.
+- **v3.53.1, done without a paid call:**
+  spend is reserved before a request leaves, in one locked critical section, against a cumulative ceiling (failed and
+  uncertain requests keep their reservation; a damaged state never restarts at zero; the paid path needs a pilot token);
+  the joint audit's findings on the ten recorded descriptions went 50 → 5 with a verdict per class (builder 0.5.0);
+  routing asks the reader after a refusal or a drawings model weak by its own account, on the drawings' measures, and
+  not after a complete anchored model; a job shows what is being read (original and sent picture, hashed apart);
+  a recorded answer is keyed by its whole question.
+- **Blocked, exactly:** one paid reading through the SDK adapter — this session cannot hold the OWNER's API key safely
+  (its secret form refuses the provider's own host); the dry run reaches the API and is refused with 401, nothing
+  booked. The command for the OWNER's own terminal is in the report §6. No host exists; a proposal with prices is in
+  `docs/ANALYZER_API.md`. The Android client does not yet send the pilot token or show the reading phase.
+- **Spend:** unchanged, 2.72807938 of the cumulative 5 USD since E12 (92 entries, CLI token estimates, billing
+  UNCONFIRMED). H2 and the private benchmark sealed and unsent.
+- **Still wrong in houses, named:** ridge of an attached gable on a square plan; roof features the reader does not
+  state (dormers, second chimneys, rooflights); a balcony through an eave; a corner recess; rooflights on end planes
+  and cross gables; two-tone facades; porch roofs as flat plates. Twelve pages of six publishers are not "any link".
+- **Not measured:** the anchors on a real house; anything on a device.
+- **NEXT (one action):** the OWNER runs the one command of report §6 (about 0.10 USD) or decides on the pilot's host;
+  with a working service — the pilot token and the reading phase in the Android client, then APK ≥ 1328.
+- **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
+  only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
+  D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
+  D53.1-2 the paid path needs the pilot's token; no anonymous paid path, the older vision flag included.
+  D53.1-3 an anchor says the size is right, not the architecture: the reader is asked after a weak drawings model and
+  builds on the drawings' measures; a complete anchored model is the answer and is free.
+  D53.1-4 a canopy stated inside a body is a recess (walls stand back under the roof), a projection (under a metre) or
+  named and not built — never a plate through walls.
 - **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED.
 
 ## Completed stages

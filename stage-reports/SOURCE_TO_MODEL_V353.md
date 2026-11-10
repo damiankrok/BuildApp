@@ -110,6 +110,8 @@ czytnika opisu nie mierzono (budżet).
 5. Bliźniak: jedna połowa czy para — decyzja produktowa OWNER-a.
 6. Istniejący `anthropicVisionReasoner` (starsza ścieżka `ANALYZER_VISION=live`) używa wymuszonego `tool_choice`, którego
    bieżące modele nie przyjmują — zanotowane, nienaprawione (poza zakresem tego wycinka).
+   **Sprostowanie (v3.53.1):** to zdanie było błędne — adapter używa `tool_choice: auto` od E12; patrz
+   `SOURCE_TO_MODEL_V3531.md` §5.
 
 ## 6. Testy na drzewie `e223cb2`
 
