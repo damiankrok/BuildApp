@@ -343,6 +343,47 @@ export type BuildingV2 = {
   bandWalls?: BandWallV2[]
   /** N8-02B: walls the plan draws once between two bodies (`party-wall.ts`), each built by its host body alone. */
   partyWalls?: PartyWallV2[]
+  /** v3.53: dormers in the planes of plane roofs (`createDormer`), each by its front face across the host slope. */
+  dormers?: DormerV2[]
+  /** v3.53: roofs over open areas — an entrance canopy, a carport, a covered terrace — a plate on posts, no walls. */
+  canopies?: CanopyV2[]
+  /** v3.53: broad colours for the model's materials where a source states them; absent: the emitter's defaults. */
+  palette?: { wall?: string; roof?: string; joinery?: string; garageDoor?: string; accent?: string }
+  /**
+   * v3.53: what the bodies' rectangles rest on when they are NOT the plan's printed chains and wall bands (a described
+   * house). Absent: the drawings' path, whose rings are stated as it always stated them.
+   */
+  bodyBasis?: { status: ProvenanceStatus; why: string }
+}
+
+/** v3.53: a dormer in one plane of a body's plane roof. */
+export type DormerV2 = {
+  id: string
+  massId: string
+  /** The host plane of the body's plane roof. */
+  planeKey: 'LOW' | 'HIGH' | 'END_MIN' | 'END_MAX'
+  type: 'GABLE' | 'SHED' | 'FLAT'
+  front: { start: { x: number; z: number }; end: { x: number; z: number } }
+  eaveY: number
+  ridgeY?: number
+  shedPitchDeg?: number
+  window?: { width: number; height: number }
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+
+/** v3.53: a roof plate over an open area, with the posts that carry it. */
+export type CanopyV2 = {
+  id: string
+  kind: 'ENTRANCE_CANOPY' | 'PORCH_ROOF' | 'CARPORT' | 'COVERED_TERRACE' | 'PERGOLA'
+  rect: { x0: number; z0: number; x1: number; z1: number }
+  undersideY: number
+  thicknessM: number
+  posts: Array<{ x: number; z: number }>
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
 }
 
 /** N7-P2R: a wall the plan draws as a solid band, stated on its outer face line, its material to the left of its run. */

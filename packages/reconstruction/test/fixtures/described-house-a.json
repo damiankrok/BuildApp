@@ -1,0 +1,23 @@
+{"images":[{"image":1,"kind":"FLOOR_PLAN","storey":"GROUND","shows":"NA","thisHouse":true,"mirrored":false,"note":""},{"image":2,"kind":"ELEVATION","storey":"NA","shows":"FRONT","thisHouse":true,"mirrored":false,"note":""},{"image":3,"kind":"EXTERIOR_VIEW","storey":"NA","shows":"REAR_LEFT","thisHouse":true,"mirrored":false,"note":""}],
+"frame":{"planImage":1,"frontIsPlanEdge":"BOTTOM","how":"entrance at the bottom edge"},
+"overall":{"widthM":15.5,"depthM":10,"basis":"PRINTED_ON_DRAWING","printedWidthLabel":"1550","printedDepthLabel":"1000","ridgeHeightM":8.2,"ridgeHeightBasis":"PUBLISHED_ON_PAGE","storeyHeightM":3.0},
+"bodies":[
+ {"id":"main","role":"MAIN","x0":0,"x1":10.5,"z0":1,"z1":10,"storeys":1,"habitableAttic":true,"eavesHeightM":4.0,"heightBasis":"SCALED_FROM_DRAWING","roof":{"kind":"GABLE","ridge":"ALONG_X","highSide":"NA","pitchDeg":40,"pitchBasis":"PUBLISHED_ON_PAGE","overhangM":0.5},"wallColour":"#f2efe8","images":[1,2],"confidence":0.9},
+ {"id":"garage","role":"GARAGE","x0":10.5,"x1":15.5,"z0":0,"z1":6.5,"storeys":1,"habitableAttic":false,"eavesHeightM":2.9,"heightBasis":"SCALED_FROM_DRAWING","roof":{"kind":"FLAT","ridge":"NA","highSide":"NA","pitchDeg":0,"pitchBasis":"ESTIMATED_FROM_PROPORTIONS","overhangM":0},"wallColour":"#4a4a4c","images":[1,2],"confidence":0.9}],
+"openings":[
+ {"bodyId":"main","side":"FRONT","storey":0,"kind":"ENTRANCE_DOOR","at":8.6,"widthM":1.1,"sillM":0,"heightM":2.2,"panes":1,"basis":"PLAN_AND_ELEVATION","images":[1,2],"confidence":0.9},
+ {"bodyId":"main","side":"FRONT","storey":0,"kind":"WINDOW","at":2.5,"widthM":1.8,"sillM":0.9,"heightM":1.4,"panes":2,"basis":"PLAN_AND_ELEVATION","images":[1,2],"confidence":0.9},
+ {"bodyId":"main","side":"FRONT","storey":0,"kind":"WINDOW","at":5.6,"widthM":1.2,"sillM":0.9,"heightM":1.4,"panes":1,"basis":"PLAN_AND_ELEVATION","images":[1,2],"confidence":0.9},
+ {"bodyId":"garage","side":"FRONT","storey":0,"kind":"GARAGE_DOOR","at":13,"widthM":3,"sillM":0,"heightM":2.2,"panes":1,"basis":"PLAN_AND_ELEVATION","images":[1,2],"confidence":0.9},
+ {"bodyId":"main","side":"REAR","storey":0,"kind":"LARGE_GLAZING","at":4,"widthM":4,"sillM":0,"heightM":2.3,"panes":4,"basis":"PLAN_ONLY","images":[1],"confidence":0.7},
+ {"bodyId":"main","side":"LEFT","storey":0,"kind":"WINDOW","at":5,"widthM":1.5,"sillM":0.9,"heightM":1.4,"panes":2,"basis":"PICTURE_ONLY","images":[3],"confidence":0.7},
+ {"bodyId":"main","side":"LEFT","storey":1,"kind":"WINDOW","at":5.5,"widthM":1.5,"sillM":0.9,"heightM":1.4,"panes":2,"basis":"PICTURE_ONLY","images":[3],"confidence":0.7},
+ {"bodyId":"main","side":"RIGHT","storey":1,"kind":"WINDOW","at":5.5,"widthM":1.2,"sillM":0.9,"heightM":1.3,"panes":1,"basis":"HYPOTHETICAL","images":[1],"confidence":0.3}],
+"dormers":[{"bodyId":"main","slope":"FRONT","type":"GABLE","at":3,"widthM":2.2,"images":[2],"confidence":0.8},{"bodyId":"main","slope":"REAR","type":"SHED","at":5,"widthM":3.5,"images":[3],"confidence":0.7}],
+"rooflights":[{"bodyId":"main","slope":"FRONT","at":7.5,"widthM":0.8,"images":[2],"confidence":0.7}],
+"chimneys":[{"x":6,"z":4,"images":[2],"confidence":0.8}],
+"balconies":[{"bodyId":"main","side":"LEFT","storey":1,"from":4,"to":7,"depthM":1.2,"railing":"GLASS","images":[3],"confidence":0.6}],
+"terraces":[{"side":"REAR","from":1,"to":8,"depthM":3.5,"images":[1,3],"confidence":0.8}],
+"canopies":[{"kind":"ENTRANCE_CANOPY","x0":7.5,"x1":10.5,"z0":-0.3,"z1":1,"undersideM":2.5,"posts":1,"images":[2],"confidence":0.8}],
+"palette":{"roof":"#3b3d42","joinery":"#2e2e30","garageDoor":"#3a3a3c","accent":"#9a6b3f","accentWhere":"timber cladding beside the entrance"},
+"hypotheticalSides":["RIGHT"],"unknowns":["the right side is not shown"]}

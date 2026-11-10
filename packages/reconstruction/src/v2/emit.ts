@@ -178,18 +178,20 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
 
   push({ type: 'setModelName', name: modelName })
   push({ type: 'createBuilding', id: 'bld-auto-v2', name: modelName })
-  push({ type: 'defineMaterial', id: MATERIALS_V2.wall, name: 'Rendered wall', color: '#e8e4dc' })
+  // v3.53: a described house states its broad colours; the drawings' path keeps the defaults
+  const pal = b.palette ?? {}
+  push({ type: 'defineMaterial', id: MATERIALS_V2.wall, name: 'Rendered wall', color: pal.wall ?? '#e8e4dc' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.slab, name: 'Concrete slab', color: '#c9c6c0' })
-  push({ type: 'defineMaterial', id: MATERIALS_V2.roof, name: 'Roof covering', color: '#5a5550' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.roof, name: 'Roof covering', color: pal.roof ?? '#5a5550' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.member, name: 'Facade member', color: '#ece9e2' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.glass, name: 'Glazing', color: '#9fc3d8', opacity: 0.35 })
   push({ type: 'defineMaterial', id: MATERIALS_V2.dark, name: 'Dark render', color: '#3a3a3c' })
-  push({ type: 'defineMaterial', id: MATERIALS_V2.timber, name: 'Timber cladding', color: '#b07a4a' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.timber, name: 'Timber cladding', color: pal.accent ?? '#b07a4a' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.partition, name: 'Partition', color: '#d9d5cc' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.chimney, name: 'Chimney', color: '#6d6a66' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.terrace, name: 'Terrace paving', color: '#a49c92' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.mid, name: 'Grey render', color: '#8e8983' })
-  push({ type: 'defineMaterial', id: MATERIALS_V2.gate, name: 'Garage door', color: '#55585c' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.gate, name: 'Garage door', color: pal.garageDoor ?? '#55585c' })
 
   for (const m of b.masses) onDebug?.(`mass ${m.id} (${m.role}) x ${m.x0}..${m.x1} z ${m.z0}..${m.z1} storeys ${m.storeys.join(',')} wall ${b.wallThicknessM}`)
   // N8-03C: the main gable cut where a wing's roof runs over it, or why it is built whole (`valley-cut.ts`)
@@ -435,6 +437,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     if (openIndex(m) !== undefined || segmentsOf(m, measuredOn)) {
       // N7-P2R, N8-02B: no ring; each own wall carries its evidence (above)
     } else if (m.outerFacesOpen && m.outerFacesOpen.length > 0) evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_DERIVED', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body cut on a wall's inner face; unresolved: ${m.outerFacesOpen.join('; ')}`)
+    else if (b.bodyBasis) evidence(`ring-${m.id}-${measuredOn}`, b.bodyBasis.status, `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body: ${b.bodyBasis.why}`)
     else evidence(`ring-${m.id}-${measuredOn}`, 'SOURCE_EXACT', `${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m body from the plan's printed chains and wall bands`)
     for (const own of (m.storeyRects ?? []).filter((x) => !segmentsOf(m, x.storey))) evidence(`ring-${m.id}-${own.storey}`, 'SOURCE_DERIVED', `storey ${own.storey}'s own walls, ${(own.x1 - own.x0).toFixed(2)} × ${(own.z1 - own.z0).toFixed(2)} m: the walled region of that storey's plan, registered onto the body below, where it stands on the body`)
   }
@@ -780,6 +783,25 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       if (wallOf[plane.key] !== `${ring}-w${openIndex(mass)}` && emittedWalls.has(wallOf[plane.key])) push({ type: 'createRelationship', kind: 'SUPPORTED_BY', from: idOf(plane.key), to: wallOf[plane.key], note: 'the plane bears on the wall under its eave' })
       evidence(idOf(plane.key), r.provenance, r.why, { pitchDeg: r.provenance, boundary: r.provenance })
     }
+  }
+
+  // v3.53: dormers, each in the plane of its body's plane roof that carries it; the DSL lays it out and cuts the host
+  for (const d of b.dormers ?? []) {
+    const roof = (b.planeRoofs ?? []).find((r) => r.massId === d.massId)
+    if (!roof || !roof.layout.planes.some((pl) => pl.key === d.planeKey)) {
+      notes.push(`${d.id}: ${d.massId} has no roof plane ${d.planeKey.toLowerCase()} to carry a dormer: not built`)
+      continue
+    }
+    push({ type: 'createDormer', id: d.id, hostPlaneId: planeRoofPlaneId(d.massId, d.planeKey), dormerType: d.type, front: d.front, eaveY: round6(d.eaveY), ...(d.ridgeY !== undefined ? { ridgeY: round6(d.ridgeY) } : {}), ...(d.shedPitchDeg !== undefined ? { shedPitchDeg: d.shedPitchDeg } : {}), wallMaterialId: MATERIALS_V2.wall, roofMaterialId: MATERIALS_V2.roof, ...(d.window ? { window: { width: round6(d.window.width), height: round6(d.window.height), materialId: MATERIALS_V2.glass } } : {}) }, d.featureId, 'assemblies')
+    evidence(d.id, d.provenance, d.why)
+  }
+  // v3.53: a roof over an open area: a flat plate at its underside, on the posts that carry it; no walls
+  for (const c of b.canopies ?? []) {
+    const l = levelOf(0)
+    if (!l) continue
+    push({ type: 'createRoof', id: c.id, levelId: l.id, kind: 'FLAT', footprint: { minX: c.rect.x0, maxX: c.rect.x1, minZ: c.rect.z0, maxZ: c.rect.z1 }, eaveOffset: round6(c.undersideY + c.thicknessM - l.elevation), overhang: 0, thickness: c.thicknessM, materialId: MATERIALS_V2.roof }, c.featureId, 'roofs')
+    c.posts.forEach((p, i) => push({ type: 'createColumn', id: `${c.id}-post-${i}`, levelId: l.id, role: 'POST', base: { x: round6(p.x), z: round6(p.z) }, baseOffset: 0, height: round6(c.undersideY - l.elevation), width: 0.2, depth: 0.2, hostId: c.id, materialId: MATERIALS_V2.member }, c.featureId, 'linearSolids'))
+    evidence(c.id, c.provenance, c.why)
   }
 
   // --- balconies, railings, terraces -------------------------------------------
