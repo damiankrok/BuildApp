@@ -72,6 +72,50 @@ describe('the size a plan sheet is read at', () => {
   })
 })
 
+describe('the typical wall is measured on bands long enough to be walls', () => {
+  /**
+   * A 1600×1200 sheet: an outer ring `wall` px thick, and inside it short bars `bar` px thick and 100 px long, laid
+   * out so that no two share a row or a column (bars in line would read as one long band).
+   */
+  const furnished = (wall: number, bar: number, n: number): Raster => {
+    const r = whiteRaster(1600, 1200)
+    const [x0, y0, x1, y1] = [100, 60, 1500, 1140]
+    fillRect(r, x0, y0, x1, y0 + wall - 1, BLACK)
+    fillRect(r, x0, y1 - wall + 1, x1, y1, BLACK)
+    fillRect(r, x0, y0, x0 + wall - 1, y1, BLACK)
+    fillRect(r, x1 - wall + 1, y0, x1, y1, BLACK)
+    for (let i = 0; i < n; i += 1) {
+      // a diagonal staircase, wrapped: each bar starts 110 px right of and (bar + 8) px below the one before
+      const bx = 220 + ((i * 110) % 1100)
+      const by = 160 + ((i * (bar + 8)) % 820)
+      fillRect(r, bx, by, bx + 99, by + bar - 1, BLACK)
+    }
+    return r
+  }
+
+  it('thick outer walls among many short thin bars: the sheet is brought down, though the median over every band is thin', () => {
+    // 60 short bars of 12 px carry more length than the four 48 px walls, so the median over every band is 12 px:
+    // the sheet used to keep its size, and no reader's window reached its outer walls
+    const r = furnished(48, 12, 60)
+    expect(typicalWallPx(r)).toBe(48)
+    const reading = planReadingSize(r)
+    expect(reading.reduction).toBeGreaterThan(1)
+    expect(Math.max(reading.size.width, reading.size.height)).toBe(READING_MIN_LONG_SIDE_PX)
+  })
+
+  it('counter-case: thin walls among short thick blocks keep the sheet — a block is not a wall however thick', () => {
+    const r = furnished(14, 60, 12)
+    expect(typicalWallPx(r)).toBe(14)
+    expect(planReadingSize(r).reduction).toBe(1)
+  })
+
+  it('counter-case: a sheet with no band long enough to be a wall is measured on every band, as before', () => {
+    const r = whiteRaster(1600, 1200)
+    for (let i = 0; i < 8; i += 1) fillRect(r, 220 + i * 110, 160 + i * 40, 319 + i * 110, 171 + i * 40, BLACK)
+    expect(typicalWallPx(r)).toBe(12)
+  })
+})
+
 describe('resampling a picture to its reading size', () => {
   it('is the identity at the picture’s own size', () => {
     const r = house(1, 12)

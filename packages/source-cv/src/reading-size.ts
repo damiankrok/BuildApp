@@ -29,6 +29,15 @@ export const READING_SURVEY_MAX_THICKNESS_SHARE = 0.08
 export const READING_SURVEY_MIN_LENGTH_SHARE = 0.03
 export const READING_SURVEY_MIN_THICKNESS_PX = 6
 /**
+ * A band counts towards the typical wall when it runs at least this share of the sheet's long side. A wall runs the
+ * length of a room; what is shorter is as often a bed, a worktop, a jamb or a label box, and on a sheet that draws its
+ * partitions as thin lines and furnishes every room those outnumber the walls: measured on a 1600 px plan with 46–49 px
+ * outer walls, the median over every band was 28 px — under the limit, so the sheet kept its size and no reader's
+ * window reached its outer walls. Over the bands long enough to be walls it is 46 px. Where no band is that long, every
+ * band is measured, as before.
+ */
+export const READING_SURVEY_WALL_LENGTH_SHARE = 0.1
+/**
  * The typical wall (length-weighted median band thickness) of the sheets the plan readers were measured on runs from
  * about 7 px to 27 px; a sheet above this is finer than any of them.
  */
@@ -48,12 +57,13 @@ export const READING_MIN_LONG_SIDE_PX = 600
 
 export type ReadingSize = { size: PixelSize; typicalWallPx: number; reduction: number }
 
-/** The sheet's typical wall thickness in its own pixels: the length-weighted median of its bands, surveyed sheet-relative. */
+/** The sheet's typical wall thickness in its own pixels: the length-weighted median of its wall-long bands, surveyed sheet-relative. */
 export function typicalWallPx(raster: Raster): number {
   const long = Math.max(raster.width, raster.height)
   const mask = adaptiveInkMask(inkChannel(raster), {})
   const bands = runLengthBands(mask, { minThickness: READING_SURVEY_MIN_THICKNESS_PX, maxThickness: Math.max(READING_SURVEY_MIN_THICKNESS_PX + 1, Math.round(long * READING_SURVEY_MAX_THICKNESS_SHARE)), minLength: Math.max(8, Math.round(long * READING_SURVEY_MIN_LENGTH_SHARE)) })
-  return bandThicknessQuantile(bands, 0.5, 0)
+  const walls = bands.filter((b) => b.length >= long * READING_SURVEY_WALL_LENGTH_SHARE)
+  return bandThicknessQuantile(walls.length > 0 ? walls : bands, 0.5, 0)
 }
 
 /** The size a plan sheet is read at: its own, unless it is larger than the measured sheets AND its walls are thicker than theirs. */
