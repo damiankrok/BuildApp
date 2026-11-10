@@ -121,13 +121,15 @@ Paczka serwisu (`node build.mjs`) zawiera ścieżkę opisu i SDK, bez danych ref
 `ANALYZER_HOUSE_READER=live` i bez klucza odpowiada jak dotąd.
 
 Macierz pakietów dotkniętych zmianą (`packages/{reconstruction,source-vision,source-package,analysis-service,
-mobile-scene}`, `apps/{analyzer-api,local-analyzer}`, `tests/architecture`; pozostałych pakietów nie uruchamiano):
-2511 testów — 2489 przechodzi, **15 pada**, 7 pominiętych. Zestaw 15 jest co do nazwy tym samym zestawem co na
-`0fe410a` (snapshot kontraktu Android, `/health`, cztery strażniki izolacji badań, dwa testy modelu referencyjnego,
-cztery `wall-strip`, jeden `compound-facade`, NFD bez ICU, scena Larchfield). Pierwszy przebieg macierzy pokazał 17:
-dwa strażniki architektury serwisu naruszyła ta praca (nazwa zmiennej klucza w komentarzu `wiring.ts`; wejście
+mobile-scene}`, `apps/{analyzer-api,local-analyzer}`, `tests/architecture`; pozostałych pakietów nie uruchamiano)
+biegła w całości na `7e0f563`: 2511 testów — 2487 przechodzi, **17 pada**, 7 pominiętych. Piętnaście z nich to co do
+nazwy zestaw z `0fe410a` (snapshot kontraktu Android, `/health`, cztery strażniki izolacji badań, dwa testy modelu
+referencyjnego, cztery `wall-strip`, jeden `compound-facade`, NFD bez ICU, scena Larchfield). Dwa pozostałe to
+strażniki architektury serwisu naruszone przez tę pracę (nazwa zmiennej klucza w komentarzu `wiring.ts`; wejście
 serwisu zmienione z `runAnalysis` na `analyseLink`) — pierwszy poprawiony w kodzie, drugi świadomie zaktualizowany
-(strażnik sprawdza teraz łańcuch `executor → analyseLink → runAnalysis` i brak własnych kroków potoku w obu).
+(sprawdza łańcuch `executor → analyseLink → runAnalysis` i brak własnych kroków potoku w obu); oba uruchomione
+ponownie i zielone. Na końcowym drzewie `e223cb2` uruchomiono ponownie 8 plików testów ścieżki opisu i strażnika
+serwisu: 95/95; pełnej macierzy na `e223cb2` nie powtarzano.
 W szczególności: `apps/analyzer-api/test/android-contract.test.ts` (snapshot), `apps/analyzer-api/test/api.test.ts`
 (GET /health), `apps/local-analyzer/test/program.test.ts` (hashe Larchfield), `apps/local-analyzer/test/text.test.ts`
 (NFD).
