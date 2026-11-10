@@ -19,7 +19,7 @@ import type { Segment } from '@buildapp/source-cv'
 import type { ExtractorHandle, ObservationGraphBuilder, SourceCoordinateFrame, SourceObservation } from '@buildapp/source-observations'
 import { bandConfidence, linearBands } from '../depth.js'
 import type { LinearBand } from '../depth.js'
-import { scaleRect, scaleToFrame, workingSegments } from '../prepare.js'
+import { ontoFrame, scaleRect, scaleToFrame, workingSegments } from '../prepare.js'
 import type { Prepared } from '../prepare.js'
 
 export type ElevationHandles = {
@@ -135,7 +135,7 @@ export function extractElevation(builder: ObservationGraphBuilder, frame: Source
       builder.observe(handles.roof, {
         frame,
         kind: 'ROOF_EDGE',
-        pixelGeometry: { type: 'SEGMENT', a: scaleToFrame(best.a, scale), b: scaleToFrame(best.b, scale) },
+        pixelGeometry: { type: 'SEGMENT', a: ontoFrame(scaleToFrame(best.a, scale), frame.size), b: ontoFrame(scaleToFrame(best.b, scale), frame.size) },
         semanticHints: ['verge'],
         value: { unit: 'deg', number: round6(slope.angleDeg) },
         confidence: round6(Math.min(0.85, 0.45 + Math.min(0.4, slope.totalLength / (prepared.workingSize.width * 2)))),

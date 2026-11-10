@@ -20,7 +20,7 @@ import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '.
 import type { HeightBasis, LevelBasis, TopDatumCheck } from '../solve.js'
 import { decideGroundClearHeight } from './section-clear-height.js'
 import { finalOpeningRecord } from './opening-final.js'
-import { scaleFromPublishedExtent, scaleFromPublishedFootprint } from './published-scale.js'
+import { extentContradiction, scaleFromPublishedExtent, scaleFromPublishedFootprint } from './published-scale.js'
 import type { PublishedScaleRefusal } from './published-scale.js'
 import { partialFootprint } from './partial-footprint.js'
 import type { PartialFootprintRefusal } from './partial-footprint.js'
@@ -250,7 +250,9 @@ import type { ApproximateRidge } from './roof-datum.js'
 // 2.34.0 (v3.51, ANY-LINK-3): when no reading of the whole plan holds, a first reading refused only for covering less
 // than the published footprint is kept as a partial preview if the drawing states its scale, its bodies are the
 // sheet's walls and it shows the open parts that explain the shortfall (`partial-footprint.ts`); a main body emitted
-// as an opened ring counts as the main body when a refused object is cut out of the preview
+// as an opened ring counts as the main body when a refused object is cut out of the preview; a reading that stands on
+// a scale nothing on the drawing confirmed, with the published building's proportions at another size, gives way to
+// the scale the page's two published dimensions set (`extentContradiction`), or is kept with the contradiction named
 export const SOLVER_V2_VERSION = '2.34.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
@@ -539,6 +541,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // v3.51 ANY-LINK: a run that would stop here for want of a scale asks one last source — the footprint the page
   // publishes against the walls the plan draws (`published-scale.ts`). The scale it yields is an approximation and is
   // named one: the gap below, the registration's own provenance, and a result whose scale stays unverified.
+  // v3.51 ANY-LINK-3: set when a standing reading on an unconfirmed scale is contradicted by the page's two published
+  // dimensions; the published figures are then asked for the scale, and if they set none the reading is kept and the
+  // contradiction named
+  let sizeContradiction: { outlineM: [number, number]; publishedM: [number, number]; factor: number } | undefined
+  let scaleConflictSeen = !!earlyConflict
   try {
     if (earlyConflict) {
       const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict: earlyConflict, footprintRefused: true })
@@ -610,6 +617,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const lateReview = earlyConflict ? null : sourceConflictReviewFor(structuralOptions, incumbent)
       noteWithdrawn(lateReview)
       const conflict = lateReview?.conflict ?? null
+      if (conflict) scaleConflictSeen = true
       if (need.challenge || conflict) {
         const why = [need.challenge ? need.why : '', conflict ? `the drawing contradicts its scale: ${conflict.why}` : ''].filter(Boolean).join('; and ')
         const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress, { conflict })
@@ -637,6 +645,18 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const standing = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
       const stop = metricStop(standing)
       if (stop.code === 'METRIC_RESOLUTION_INCONCLUSIVE') throw stop
+    } else if (!scaleConflictSeen && draft.base) {
+      // A reading that stands, at a scale nothing on the drawing confirmed, with the published building's proportions
+      // at another size: the page's two dimensions contradict the scale, and are asked for it (the same last source).
+      const solution = metricSolutionFor(metrics, draft.base.frame.id)
+      const unconfirmed = !solution || solution.relation === 'LEGACY_UNCONFIRMED' || solution.relation === 'NO_SCALE'
+      const w = options.publishedAreas?.find((a) => a.key === 'building_width' && a.unit === 'm')?.value
+      const l = options.publishedAreas?.find((a) => a.key === 'building_length' && a.unit === 'm')?.value
+      const contradiction = unconfirmed && w !== undefined && l !== undefined ? extentContradiction({ draft, layout, projection: incumbent.projection }, w, l) : undefined
+      if (contradiction) {
+        sizeContradiction = contradiction
+        throw new ReconstructionFailure('METRIC_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `the plan was read at a scale nothing on it confirms, and its walled outline measures ${contradiction.outlineM[0].toFixed(2)} m by ${contradiction.outlineM[1].toFixed(2)} m against the published ${contradiction.publishedM[0]} m by ${contradiction.publishedM[1]} m: the same shape, ${Math.round(Math.abs(contradiction.factor - 1) * 100)} % ${contradiction.factor > 1 ? 'larger' : 'smaller'}`, { ...planCounts(planDiagnostics), why: 'PUBLISHED_EXTENT_CONTRADICTS_UNCONFIRMED_SCALE' }, 'PLAN_RESOLUTION', planDiagnostics)
+      }
     }
   } catch (error) {
     if (!(error instanceof ReconstructionFailure) || error.code !== 'METRIC_RESOLUTION_INCONCLUSIVE') throw error
@@ -678,15 +698,20 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (!approximate) {
       // the published figures were asked and set no scale: said, so the stop does not read as "nothing was published"
       if (refusals.length > 0) trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_SCALE_REFUSED', status: 'FAILED', counts: Object.fromEntries([...new Set(refusals)].map((r) => [r, refusals.filter((x) => x === r).length])), reasonCode: refusals[0], detail: `the page's published figures were asked for a scale and set none: ${[...new Set(refusals)].join(', ')}` })
-      throw error
+      if (!sizeContradiction) throw error
+      // the reading stood before it was asked: it is kept, and the contradiction is on the record
+      trace({ phase: 'REGISTRATION', substage: 'PUBLISHED_EXTENT_CONTRADICTION', status: 'DEGRADED', counts: { outlineLongM: sizeContradiction.outlineM[0], outlineShortM: sizeContradiction.outlineM[1], publishedLongM: sizeContradiction.publishedM[0], publishedShortM: sizeContradiction.publishedM[1], factor: sizeContradiction.factor }, reasonCode: 'PUBLISHED_EXTENT_CONTRADICTS_UNCONFIRMED_SCALE', detail: error.message })
+      gap({ what: 'the scale of the base plan', reason: `${error.message}; the published dimensions set no scale of their own on this sheet, so the reading stands at the unconfirmed one: its lengths are contradicted by the page`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     }
-    draft = approximate.result.draft
-    layout = approximate.result.layout
-    metrics = approximate.metrics
-    planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
-    trace({ phase: 'REGISTRATION', substage: approximate.basis === 'PLAN_EXTENT' ? 'PUBLISHED_EXTENT_SCALE' : 'PUBLISHED_FOOTPRINT_SCALE', status: 'DEGRADED', counts: { cmPerPx: approximate.cmPerPx, publishedM2: approximate.publishedM2, outlineM2: approximate.outlineM2, iterations: approximate.iterations, ...(approximate.publishedExtentM && approximate.outlineExtentM ? { publishedLongM: approximate.publishedExtentM[0], publishedShortM: approximate.publishedExtentM[1], outlineLongM: approximate.outlineExtentM[0], outlineShortM: approximate.outlineExtentM[1] } : {}) }, detail: approximate.why })
-    gap({ what: 'the scale of the base plan', reason: `${approximate.why}. Every length of this model follows from it: proportions for viewing, not measurements`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
-    step({ stage: 'massing', what: approximate.basis === 'PLAN_EXTENT' ? 'an approximate plan scale from the published building dimensions' : 'an approximate plan scale from the published footprint', method: 'DIRECT', detail: approximate.why, inputs: 1, outputs: 1 })
+    if (approximate) {
+      draft = approximate.result.draft
+      layout = approximate.result.layout
+      metrics = approximate.metrics
+      planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
+      trace({ phase: 'REGISTRATION', substage: approximate.basis === 'PLAN_EXTENT' ? 'PUBLISHED_EXTENT_SCALE' : 'PUBLISHED_FOOTPRINT_SCALE', status: 'DEGRADED', counts: { cmPerPx: approximate.cmPerPx, publishedM2: approximate.publishedM2, outlineM2: approximate.outlineM2, iterations: approximate.iterations, ...(approximate.publishedExtentM && approximate.outlineExtentM ? { publishedLongM: approximate.publishedExtentM[0], publishedShortM: approximate.publishedExtentM[1], outlineLongM: approximate.outlineExtentM[0], outlineShortM: approximate.outlineExtentM[1] } : {}) }, detail: approximate.why })
+      gap({ what: 'the scale of the base plan', reason: `${approximate.why}. Every length of this model follows from it: proportions for viewing, not measurements`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      step({ stage: 'massing', what: approximate.basis === 'PLAN_EXTENT' ? 'an approximate plan scale from the published building dimensions' : 'an approximate plan scale from the published footprint', method: 'DIRECT', detail: approximate.why, inputs: 1, outputs: 1 })
+    }
   }
   const planCountsNow = planCounts(planDiagnostics)
   const world = worldFrameFrom(draft)

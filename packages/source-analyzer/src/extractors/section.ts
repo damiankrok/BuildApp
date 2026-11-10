@@ -15,7 +15,7 @@ import type { PixelPoint } from '@buildapp/source-common'
 import { connectedComponents, dominantSlopes } from '@buildapp/source-cv'
 import type { Segment } from '@buildapp/source-cv'
 import type { ExtractorHandle, ObservationGraphBuilder, SourceCoordinateFrame, SourceObservation } from '@buildapp/source-observations'
-import { scaleRect, scaleToFrame, workingSegments } from '../prepare.js'
+import { ontoFrame, scaleRect, scaleToFrame, workingSegments } from '../prepare.js'
 import type { Prepared } from '../prepare.js'
 
 export type SectionHandles = { levels: ExtractorHandle; roof: ExtractorHandle; stair: ExtractorHandle }
@@ -109,7 +109,7 @@ export function extractSection(builder: ObservationGraphBuilder, frame: SourceCo
       builder.observe(handles.roof, {
         frame,
         kind: 'ROOF_EDGE',
-        pixelGeometry: { type: 'SEGMENT', a: scaleToFrame(best.a, scale), b: scaleToFrame(best.b, scale) },
+        pixelGeometry: { type: 'SEGMENT', a: ontoFrame(scaleToFrame(best.a, scale), frame.size), b: ontoFrame(scaleToFrame(best.b, scale), frame.size) },
         semanticHints: ['gable'],
         value: { unit: 'deg', number: round6(slope.angleDeg) },
         confidence: 0.7,
@@ -123,7 +123,7 @@ export function extractSection(builder: ObservationGraphBuilder, frame: SourceCo
     result.ridge = builder.observe(handles.roof, {
       frame,
       kind: 'RIDGE',
-      pixelGeometry: { type: 'POINT', point: scaleToFrame(apex, scale) },
+      pixelGeometry: { type: 'POINT', point: ontoFrame(scaleToFrame(apex, scale), frame.size) },
       semanticHints: ['ridge'],
       confidence: 0.65,
       uncertainty: { positionPx: round6(Math.max(2, larger * 0.005)) },

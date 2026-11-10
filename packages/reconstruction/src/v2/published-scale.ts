@@ -123,7 +123,7 @@ function unsound(result: StructuralPassResult, sheet: PlanSheet, cluster: PixelR
 }
 
 /** The walled outline's two plan dimensions, longer first, in metres. */
-function extentOf(r: StructuralPassResult): [number, number] | undefined {
+export function extentOf(r: StructuralPassResult): [number, number] | undefined {
   const points = r.layout.masses.flatMap((m) => m.ring.points)
   if (points.length < 3) return undefined
   const dx = Math.max(...points.map((p) => p.x)) - Math.min(...points.map((p) => p.x))
@@ -272,4 +272,24 @@ export function scaleFromPublishedExtent(options: StructuralPassOptions, frame: 
   }
   check.refusals?.push('NOT_CONVERGED')
   return undefined
+}
+
+/**
+ * v3.51 ANY-LINK-3: is a reading's size contradicted by the two plan dimensions the page publishes?
+ *
+ * Asked only of a reading whose scale nothing on the drawing confirmed. It is contradicted when BOTH sides of its
+ * walled outline miss the published ones by more than a published figure may differ (`PUBLISHED_EXTENT_FOOTPRINT_
+ * AGREEMENT`), in the same direction and by the same factor (`PUBLISHED_EXTENT_SIDE_AGREEMENT`): the outline has the
+ * published building's proportions at another size — the mark of a wrong scale, not of a part that was not read (one
+ * side short) or of figures that describe something else (two factors).
+ */
+export function extentContradiction(result: StructuralPassResult, widthM: number, lengthM: number): { outlineM: [number, number]; publishedM: [number, number]; factor: number } | undefined {
+  const outline = extentOf(result)
+  if (!outline || !(widthM > 3) || !(lengthM > 3)) return undefined
+  const published: [number, number] = widthM >= lengthM ? [widthM, lengthM] : [lengthM, widthM]
+  const [long, short] = [outline[0] / published[0], outline[1] / published[1]]
+  const off = (r: number): boolean => Math.abs(r - 1) > PUBLISHED_EXTENT_FOOTPRINT_AGREEMENT
+  if (!off(long) || !off(short) || long > 1 !== short > 1) return undefined
+  if (Math.abs(long / short - 1) > PUBLISHED_EXTENT_SIDE_AGREEMENT) return undefined
+  return { outlineM: [round6(outline[0]), round6(outline[1])], publishedM: published, factor: round6(Math.sqrt(long * short)) }
 }

@@ -1,10 +1,10 @@
 /**
- * v3.51 ANY-LINK: the size a plan sheet is read at (`reading-size.ts`). A sheet whose walls are thicker in pixels than
- * the range the plan readers were measured on is read smaller; a sheet inside the range — every sheet they were
- * measured on — keeps its own size, whatever its size in pixels.
+ * v3.51 ANY-LINK: the size a plan sheet is read at (`reading-size.ts`). A sheet LARGER than the sheets the plan readers
+ * were measured on, whose walls are thicker in pixels than theirs, is read smaller; every other sheet — one with walls
+ * inside the range whatever its size, and one no larger than the measured sheets whatever its walls — keeps its size.
  */
 import { describe, expect, it } from 'vitest'
-import { READING_MAX_TYPICAL_WALL_PX, READING_MIN_LONG_SIDE_PX, READING_TARGET_TYPICAL_WALL_PX, frameRasters, planReadingSize, resampleRaster, typicalWallPx } from '../src/index.js'
+import { READING_MAX_TYPICAL_WALL_PX, READING_MEASURED_LONG_SIDE_PX, READING_MIN_LONG_SIDE_PX, READING_TARGET_TYPICAL_WALL_PX, frameRasters, planReadingSize, resampleRaster, typicalWallPx } from '../src/index.js'
 import type { Raster } from '../src/index.js'
 import { BLACK, fillRect, whiteRaster } from './draw.js'
 
@@ -52,9 +52,23 @@ describe('the size a plan sheet is read at', () => {
   })
 
   it('never reads a sheet under the size at which its digits and partitions are gone', () => {
-    // walls 60 px on an 800×600 sheet ask for a reduction of 3.75; the long side stops at the floor
-    const reading = planReadingSize(house(1, 60))
+    // walls 75 px on a 1000×750 sheet ask for a reduction of 4.7; the long side stops at the floor
+    const reading = planReadingSize(house(1.25, 75))
     expect(Math.max(reading.size.width, reading.size.height)).toBe(READING_MIN_LONG_SIDE_PX)
+  })
+
+  it('counter-case: a sheet no larger than the measured sheets keeps its size, however thick its walls', () => {
+    // measured on the corpus: an 853 px attic plan with 32 px walls, read at 600 px, lost the "110/220" callouts of
+    // its balcony doors — a small sheet with thick walls is few rooms shown large, and its print is no larger
+    for (const wall of [32, 36, 60]) {
+      const reading = planReadingSize(house(1, wall))
+      expect(reading.typicalWallPx).toBe(wall)
+      expect(reading).toEqual({ size: { width: 800, height: 600 }, typicalWallPx: wall, reduction: 1 })
+    }
+    // exactly at the bound it is still inside; one step past it, with thick walls, it is brought down
+    const at = planReadingSize(house(READING_MEASURED_LONG_SIDE_PX / 800, 40))
+    expect(at.reduction).toBe(1)
+    expect(planReadingSize(house(1.25, 48)).reduction).toBeGreaterThan(1)
   })
 })
 

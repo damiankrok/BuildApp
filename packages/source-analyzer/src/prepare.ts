@@ -23,6 +23,7 @@ import type { PixelPoint, PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, axisAlignedSegments, downscaleGray, gradientMask, houghSegments, inkChannel, inkMask, toGray } from '@buildapp/source-cv'
 import type { Gray, Mask, Raster, Segment } from '@buildapp/source-cv'
 import { decodeImage } from '@buildapp/source-package'
+import { OUT_OF_BOUNDS_MARGIN } from '@buildapp/source-observations'
 import { thinStrokes } from './strokes.js'
 
 /** Longest working edge. Above this the drawing is analysed downscaled and the coordinates scaled back. */
@@ -63,6 +64,18 @@ const scaleSegment = (s: Segment, k: number): Segment => (k === 1 ? s : { a: sca
 export const scaleRect = (r: PixelRect, k: number): PixelRect => (k === 1 ? r : { x0: round6(r.x0 * k), y0: round6(r.y0 * k), x1: round6(r.x1 * k), y1: round6(r.y1 * k) })
 
 export const scaleToFrame = scalePoint
+
+/**
+ * A fitted stroke's end, brought onto the image it was found on. A line fitted through ink may run a pixel past the
+ * picture's edge; on a drawing that is within the tolerance an observation's frame allows (`OUT_OF_BOUNDS_MARGIN`) and
+ * the point stays exactly as measured, on a 34 px thumbnail it is 3 % of the height and the observation would claim a
+ * place outside its own frame — there, and only there, the point is brought onto the image.
+ */
+export const ontoFrame = (p: PixelPoint, size: { width: number; height: number }): PixelPoint => {
+  const [mx, my] = [OUT_OF_BOUNDS_MARGIN * size.width, OUT_OF_BOUNDS_MARGIN * size.height]
+  if (p.x >= -mx && p.y >= -my && p.x <= size.width + mx && p.y <= size.height + my) return p
+  return { x: round6(Math.min(size.width, Math.max(0, p.x))), y: round6(Math.min(size.height, Math.max(0, p.y))) }
+}
 
 export type PrepareOptions = {
   maxWorkingEdge?: number

@@ -33,6 +33,14 @@ export const READING_SURVEY_MIN_THICKNESS_PX = 6
  * about 7 px to 27 px; a sheet above this is finer than any of them.
  */
 export const READING_MAX_TYPICAL_WALL_PX = 30
+/**
+ * The largest sheet the plan readers were measured on (the corpus's plans are served at up to 853 px). A sheet no
+ * larger than that IS the measured range, whatever its walls: a small sheet with thick walls is a drawing of few rooms
+ * shown large, its printed callouts are as small as on any other sheet, and reducing it loses them (measured: an
+ * 853 px attic plan with 32 px walls, read at 600 px, lost the three "110/220" and "160/220" callouts of its balcony
+ * doors). Only a sheet LARGER than this is brought down.
+ */
+export const READING_MEASURED_LONG_SIDE_PX = 853
 /** The typical wall such a sheet is brought to: the middle of the measured range. */
 export const READING_TARGET_TYPICAL_WALL_PX = 16
 /** A sheet is never read under this long side: below it the digits and the partitions are gone. */
@@ -48,12 +56,12 @@ export function typicalWallPx(raster: Raster): number {
   return bandThicknessQuantile(bands, 0.5, 0)
 }
 
-/** The size a plan sheet is read at: its own, unless its walls are thicker than the measured range. */
+/** The size a plan sheet is read at: its own, unless it is larger than the measured sheets AND its walls are thicker than theirs. */
 export function planReadingSize(raster: Raster): ReadingSize {
   const own: PixelSize = { width: raster.width, height: raster.height }
   const wall = typicalWallPx(raster)
-  if (!(wall > READING_MAX_TYPICAL_WALL_PX)) return { size: own, typicalWallPx: wall, reduction: 1 }
   const long = Math.max(raster.width, raster.height)
+  if (!(wall > READING_MAX_TYPICAL_WALL_PX) || long <= READING_MEASURED_LONG_SIDE_PX) return { size: own, typicalWallPx: wall, reduction: 1 }
   const reduction = Math.min(wall / READING_TARGET_TYPICAL_WALL_PX, long / READING_MIN_LONG_SIDE_PX)
   if (!(reduction > 1)) return { size: own, typicalWallPx: wall, reduction: 1 }
   return { size: { width: Math.max(1, Math.round(raster.width / reduction)), height: Math.max(1, Math.round(raster.height / reduction)) }, typicalWallPx: wall, reduction: Math.round(reduction * 1e6) / 1e6 }
