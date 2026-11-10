@@ -223,9 +223,68 @@ The service is then at `https://buildapp-analyzer.fly.dev` (TLS by the platform;
 
 **Any other container host** (Cloud Run, Render, a VM): run the image with a volume at `/data`, put TLS in front, set `ANALYZER_TRUST_PROXY=1` and `ANALYZER_REQUIRE_HTTPS=1`, and give the phone the https address — in the build variable, or in the app's Analyzer screen under "Service address".
 
-**Optional vision.** `ANALYZER_VISION=live` plus the server-side `ANTHROPIC_API_KEY` lets the analyzer ask a vision provider; results then say `vision.mode = LIVE_PROVIDER`. The key stays in the server's environment: no endpoint returns it, and no client ever needs it.
+**Reading a house from its pictures (v3.53.1) — a private pilot, off by default.** The host may hold a paid house reader
+(`analysis-service` `analyseLink`). It is asked only after the drawings' path has refused a page whose pictures are
+still unread, or has built a model weak by its own account (no metric anchor, partial, a body missing, no roof); a
+complete, anchored drawings model is the answer and costs nothing. The job then completes in the unchanged contract
+with a model that says `MODEL_FROM_SOURCE_DESCRIPTION`, built on whatever the drawings did measure.
 
-**Optional house reader (v3.53).** `ANALYZER_HOUSE_READER=live` plus the server-side `ANTHROPIC_API_KEY` lets a page the
+It is on only when ALL of these are set (the service logs which is missing at start, never a secret):
+
+| variable | meaning |
+| --- | --- |
+| `ANALYZER_HOUSE_READER=live` | the switch |
+| `ANTHROPIC_API_KEY` | the provider's key, as a SECRET of the host — never in the repository, an image, an APK, a log or a chat |
+| `ANALYZER_HOUSE_READER_MAX_USD` | cumulative ceiling on everything the host has ever reserved; no ceiling, no reader |
+| `ANALYZER_HOUSE_READER_SPENT_USD` | opening balance: what was already spent elsewhere when the books are first opened (default 0) |
+| `ANALYZER_HOUSE_READER_TOKEN` | the pilot's access token (≥ 24 characters), as a SECRET; no token, no reader |
+| `ANALYZER_HOUSE_READER_MAX_PER_DAY`, `ANALYZER_HOUSE_READER_MAX_REQUESTS_PER_DAY` | daily ceilings (default 20 descriptions, 60 requests) |
+| `ANALYZER_HOUSE_READER_MODEL`, `ANALYZER_HOUSE_TRIAGE_MODEL` | default `claude-sonnet-5-5` and `claude-haiku-5-5`; a model with no list price in the service's table is never asked |
+
+**Who may use it.** A submission that carries `Authorization: Bearer <pilot token>` may reach the reader; one with a
+wrong token is `401 PILOT_TOKEN_INVALID`; one with none gets the drawings' path alone, exactly as before. The token is
+compared in constant time and is never stored on a job, logged or returned. The paid path is therefore not open to
+whoever finds the address.
+
+**What it may cost.** Every request (the sorting of the page's pictures and the description) is reserved in the host's
+spend books before it is sent — its conservative cost: every picture at 5 000 tokens, the whole question, the answer
+at its token ceiling, at list price — inside an exclusive lock, against the cumulative ceiling and the day's. An answer
+settles the reservation down to its stated usage. A timeout, a dropped connection, a server error or a cancellation
+keeps the reservation in full; a request the provider refused before running a model (a bad key, a rate limit) gives
+it back. The SDK does not retry on its own: one question is at most one billed request. The books live in the data
+volume (`house-reader-spend.json`, its `.bak` and an append-only `.journal.jsonl` of amounts, token counts and model
+names). A state that does not parse, or has gone missing beside its journal, keeps the reader OFF until a person has
+looked — the books are never restarted at zero. What this cannot survive is the loss of the whole volume: **set a spend
+limit on the key itself in the provider's console** as the backstop. Measured through the session's CLI: 0.09–0.18 USD
+and 43–113 s a house; a reservation is about 0.3–0.4 USD.
+
+**What a client sees.** While the house is being read the job record carries `describing`: the `phase`
+(`SORTING_PICTURES`, `DESCRIBING_HOUSE`, `BUILDING_MODEL`), `after` (why: the refusal or the weaknesses), the provider
+and model, and `pictures` — for each picture being interpreted the `original` the page published (address, SHA-256,
+size) and what was `sent` (a smaller JPEG: its own SHA-256, size, byte count). There are no marks: the reader returns a
+description of the house, not positions on a picture, and a client must not draw any. Progress and stage never move
+back; with a reader at hand the drawings' path uses 0.7 of the scale and the reading the rest.
+
+**What is not verified.** The SDK adapter has reached the live API from this repository only with a placeholder key
+(refused with 401, nothing booked); no reading has been paid for through it. Nothing has been deployed. The phone's
+embedded analyzer has no reader, and the app does not yet send the pilot token or show `describing`.
+
+**A host for the pilot (a proposal; nothing is ordered).** The repository already carries `apps/analyzer-api/fly.toml`
+(app `buildapp-analyzer`, region `waw`, 2 shared CPUs, 2 GB, a 3 GB volume at `/data`, machines stopped when idle and
+started on a request) and a CI job that deploys when the repository has a `FLY_API_TOKEN` secret. No account or token
+exists for it. Fly.io's published prices (docs.fly.io/about/pricing, read 2026-11-10, quoted for its cheapest regions;
+`waw` may differ): a started `shared-cpu-2x` with 2 GB 13.39 USD a month if it never stops; a stopped machine pays only
+its root file system (0.15 USD/GB/month); the volume 0.15 USD/GB/month (0.45 USD for 3 GB); no monthly fee, a monthly
+bill under 5 USD is waived for a personal organisation; a card is required. A pilot that analyses a few links a day
+runs minutes to an hour a day: about 1–2 USD a month, likely under the waiver. One job at a time
+(`ANALYZER_CONCURRENCY=1`), 15 minutes a job. Secrets go in with `fly secrets set ANTHROPIC_API_KEY=… ANALYZER_HOUSE_READER_TOKEN=…`
+typed by the owner in their own terminal, the rest as `[env]` or `fly secrets`. Any other container host works the
+same way (the image needs Node 22, a volume and TLS in front).
+
+**The older per-facade vision provider** (`ANALYZER_VISION=live`) is NOT a recommended configuration: it runs inside
+the drawings' path on every job, for any client, with no spend books and no access token, and it has never been run
+against the live API from this repository. The flag alone no longer switches it on; it also needs
+`ANALYZER_VISION_UNBOUNDED_SPEND=accept`, which no recipe here sets.
 drawings' path refuses (no readable plan, no drawings, incomplete sources), or answers only with a model that has neither
 a verified scale nor a measured height, be read as a whole from its pictures: the job then completes with a model whose
 warnings say `MODEL_FROM_SOURCE_DESCRIPTION` (LIMITING), whose scale and heights are named provisional, and whose label

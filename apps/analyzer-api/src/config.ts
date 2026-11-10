@@ -64,7 +64,8 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       .filter(Boolean),
     maxBodyBytes: 4096,
     workerMemoryMb: int(env.ANALYZER_WORKER_MEMORY_MB, 2048, 256, 16_384),
-    vision: env.ANALYZER_VISION === 'live' ? 'live' : 'deterministic',
+    // the same two conditions as the wiring's `legacyVisionOn`: /health must not claim a provider that is not wired
+    vision: env.ANALYZER_VISION === 'live' && env.ANALYZER_VISION_UNBOUNDED_SPEND === 'accept' ? 'live' : 'deterministic',
     houseReaderToken: env.ANALYZER_HOUSE_READER === 'live' ? (env.ANALYZER_HOUSE_READER_TOKEN?.trim() ?? '') : '',
     log: env.ANALYZER_LOG !== '0',
   }

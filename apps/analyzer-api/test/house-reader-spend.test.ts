@@ -13,7 +13,8 @@ import { HouseReaderUnavailable } from '@buildapp/source-vision'
 import type { StructuredVision, StructuredVisionRequest } from '@buildapp/source-vision'
 import { DEFAULT_SPEND_LIMITS, SpendLedgerError, costUsd, openSpendLedger, reservationUsd, spendGuardedStructuredVision } from '../src/house-reader-spend.js'
 import type { SpendLimits } from '../src/house-reader-spend.js'
-import { houseReaderPlan } from '../src/wiring.js'
+import { houseReaderPlan, legacyVisionOn, productionWiring } from '../src/wiring.js'
+import { loadConfig } from '../src/config.js'
 import { pilotAccess } from '../src/http.js'
 
 const dirs: string[] = []
@@ -325,6 +326,19 @@ describe('who may reach the paid reader, and when it is on at all', () => {
     expect(houseReaderPlan({ ...on, ANALYZER_HOUSE_READER_MODEL: 'a-model-nobody-priced' }).why).toMatch(/no list price/)
     // the plan never carries the token
     expect(JSON.stringify(houseReaderPlan(on))).not.toContain(on.ANALYZER_HOUSE_READER_TOKEN)
+  })
+  it('the older per-facade vision provider, which has no books and no token, is not switched on by its flag alone', () => {
+    expect(legacyVisionOn({ ANALYZER_VISION: 'live' })).toBe(false)
+    expect(productionWiring({ ANALYZER_VISION: 'live' }).vision).toBeUndefined()
+    expect(loadConfig({ ANALYZER_VISION: 'live' }).vision).toBe('deterministic')
+    expect(legacyVisionOn({ ANALYZER_VISION: 'live', ANALYZER_VISION_UNBOUNDED_SPEND: 'accept' })).toBe(true)
+    expect(loadConfig({ ANALYZER_VISION: 'live', ANALYZER_VISION_UNBOUNDED_SPEND: 'accept' }).vision).toBe('live')
+  })
+  it('with nothing configured the production wiring holds no reader of any kind', () => {
+    const w = productionWiring({})
+    expect(w.houseReader).toBeUndefined()
+    expect(w.vision).toBeUndefined()
+    expect(loadConfig({ ANALYZER_HOUSE_READER_TOKEN: 'a-token-without-the-switch-0123456789' }).houseReaderToken).toBe('')
   })
   it('a submission is granted only with the host\'s token; a wrong one is named, none is the free path', () => {
     const token = on.ANALYZER_HOUSE_READER_TOKEN

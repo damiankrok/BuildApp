@@ -42,13 +42,21 @@ export function houseReaderPlan(env: Record<string, string | undefined> = proces
 export const productionAdapters = (): SourceAdapter[] => [archonAdapter, genericProjectPageAdapter]
 
 /**
+ * The older per-facade vision provider (`ANALYZER_VISION=live`) runs inside the drawings' path on EVERY job, for any
+ * client, with no spend books and no access token. On a host anyone can reach that is an unbounded paid path, so the
+ * flag alone no longer switches it on: it also needs `ANALYZER_VISION_UNBOUNDED_SPEND=accept`, which a deployment
+ * recipe never sets. It has never been run against the live API from this repository.
+ */
+export const legacyVisionOn = (env: Record<string, string | undefined> = process.env): boolean => env.ANALYZER_VISION === 'live' && env.ANALYZER_VISION_UNBOUNDED_SPEND === 'accept'
+
+/**
  * `ANALYZER_VISION=live` gives the analyzer a server-side vision provider; its
  * key is read from the server's environment by the provider and is never
  * returned by any endpoint. Anything else: the deterministic analyzer alone.
  */
 export const productionWiring = (env: Record<string, string | undefined> = process.env): AnalysisWiring => ({
   adapters: productionAdapters(),
-  ...(env.ANALYZER_VISION === 'live' ? { vision: anthropicVisionReasoner({}) } : {}),
+  ...(legacyVisionOn(env) ? { vision: anthropicVisionReasoner({}) } : {}),
   // v3.53: `ANALYZER_HOUSE_READER=live` lets a page the drawings' path refuses be read as a whole (analysis-service
   // `analyseLink`). The provider reads its key from this server's environment: no endpoint returns it and no client
   // holds it. Every request is reserved in the host's spend books before it is sent (`house-reader-spend.ts`), and a
