@@ -11,5 +11,11 @@
     { "publisher": "domoweklimaty.pl", "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord/" },
     { "publisher": "houseplans.com", "url": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069" },
     { "publisher": "architecturaldesigns.com", "url": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf" }
+  ],
+  "amendments": [
+    {
+      "at": "2026-11-10",
+      "what": "The statement 'no rule is changed on them within this delivery' was not kept. The first and only blind run was made on revision f73c1cf: 3 of 6 pages gave a model, one of them at a wrong scale. Two of its findings were then fixed by general rules in revision 101f9d7: a crash on a section thumbnail (lipinscy.pl page) and a model kept at an unconfirmed scale that the published width and length contradict (architecturaldesigns.com page). Those two pages are therefore no longer blind; the result of the final revision on this set (4 of 6) is a DEV result for them. The blind figure of this set is the first run: 3 of 6, one at a wrong scale. The other four pages were not opened or judged between the two runs and no rule was changed on them."
+    }
   ]
 }

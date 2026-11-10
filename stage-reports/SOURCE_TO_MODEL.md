@@ -8,10 +8,10 @@ Zasady: `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT
 | **SLICE C1a** (pochodzenie per właściwość) | **PASS** |
 | **SLICE C1b** (konsument pionowej relacji przekroju) | **PASS** w zadeklarowanym zakresie (jedna rodzina: wysokość parteru w świetle); jeden wpis kontrolny zamrożony błędnie — patrz niżej |
 | **SLICE C2** (jedna polityka korekt, typowane znaczenie, finalny ślad) | **PASS** dla polityki, typów i śladu; relacja balkon/podest bez płyty — **PARTIAL** (typ i zapis są, brak przypadku w korpusie i testu kompozycji z odmową płyty) |
-| **SLICE ANY-LINK** (zlecenie OWNER-a z 2026-11-09: dowolny link → model) | **PARTIAL** — z 0 modeli na kodzie 1322 do modeli częściowych na 2 z 4 zmierzonych stron innych wydawców i na Bukszpanach; „dowolny link z dowolnej strony” **niespełnione** |
+| **SLICE ANY-LINK** (zlecenie OWNER-a z 2026-11-09: dowolny link → model) | **PARTIAL** — strony innych wydawców: DEV 0/6 → 3/6 modeli; CONTROL 3/6 w jedynym ślepym przebiegu (w tym 1 w złej skali), 4/6 po dwóch ogólnych poprawkach; korpus ARCHON 27 → 28 z 33. Nowe modele to przybliżone lub częściowe bryły parteru. „Dowolny link z dowolnej strony” **niespełnione** |
 | **CAMPAIGN** | **WORK_IN_PROGRESS** |
-| **VERIFICATION** | host: testy i replaye — tak; bundle APK — w toku (APK 1324 z rewizji `6ce867c`; wersje i manifest sprawdzane po budowie, uruchomienie bundla na hoście nie wykonane); Android UI — **NOT_VERIFIED** (brak urządzenia); live API — nie uruchamiane (0 płatnych wywołań) |
-| **NEXT** | dokończyć końcowy przebieg na `6ce867c` (próbka ANY-LINK + pełna ścieżka 33 domów), wpisać wyniki, dostarczyć APK 1324 i ZIP; potem dach i wysokości bez przekroju (z opublikowanego kąta, wysokości budynku i elewacji), bo to najsilniejsze ograniczenie nowych modeli |
+| **VERIFICATION** | host: pełna macierz testów na `101f9d7` (3654 przechodzą, 15 pada — wszystkie sprzed kampanii), świeża pełna ścieżka 33 projektów i obie próbki — tak; bundle: pakiet wyjęty z APK 1326 uruchomiony na hoście na 3 żywych adresach, hashe równe kodowi źródłowemu (Node 22, nie środowisko telefonu); Android UI — **NOT_VERIFIED** (brak urządzenia); live API — nie uruchamiane (0 płatnych wywołań) |
+| **NEXT** | jedna czynność: zamrozić zestaw (pięć stron bez modelu jako DEV, rzuty korpusu jako kontrprzypadki, nowe strony jako CONTROL) i zmierzyć czytnik obrysu dla rzutów, których ściany nie są litymi pasami (cienka podwójna linia, wypełnione tło) — jako wymienną alternatywę ważoną przez istniejący resolver rzutu |
 
 ## 1. Baseline i sposób porównania
 
@@ -120,55 +120,167 @@ Miary zamrożone (`FROZEN-C2.json`, `scoring/score_c2.py`), 354 cechy otworów w
 
 ## 5. ANY-LINK — dowolny link → model (zlecenie z 2026-11-09)
 
-Pomiar bazowy na kodzie 1322, pełna ścieżka od samego adresu, próbka zamrożona przed uruchomieniem (pierwszy link
-projektu z listingu każdego wydawcy):
+Miara: pełna ścieżka od samego adresu (pobranie → role → odczyt → solver → kompilator), bez podpowiedzi po stronie,
+hoście ani domu. Dwie próbki zamrożone przed uruchomieniem kandydata, obie małe i **nie-statystyczne**:
 
-| wydawca | kod 1322 (baza) | po poprawkach |
+- **DEV** (`ANYLINK-SET.json`): pierwszy link projektu z listingu sześciu wydawców. Po pomiarze bazowym strony są znane
+  i na nich powstawały reguły.
+- **CONTROL** (`ANYLINK-CONTROL.json`): kolejny projekt tych samych sześciu wydawców, wybrany z zapisanego listingu po
+  samym wzorcu adresu. Mierzy „inna strona znanego wydawcy”, nie „nieznany wydawca”.
+
+### 5.1 Wynik
+
+| próbka | kod 1322 (baza) | rewizja końcowa `101f9d7` |
 |---|---|---|
-| dobredomy.pl | brak modelu: skala rzutu | **model częściowy**: obrys 93,2 m² = opublikowana zabudowa (2,46 cm/px), 8 otworów; bez dachu i poddasza |
-| lipinscy.pl | brak modelu: skala rzutu | **model częściowy** (replay na zebranych dowodach): trzy bryły parterowe z otworami; bez dachu głównego |
-| extradom.pl | brak modelu: brak rysunków | brak modelu — 97 obrazów bez podpisów; piksele widzą rzuty z pewnością 0,51–0,83 (< 0,9); 99 adresów poza budżetem pobrań |
-| domoweklimaty.pl | brak modelu: brak rzutu | brak modelu — rzuty nie występują w statycznym kodzie strony |
-| houseplans.com | brak modelu: skala rzutu | w toku |
-| architecturaldesigns.com | w toku (przebieg bazowy nie wystartował przez błąd skryptu; powtarzany) | w toku |
-| ARCHON: Bukszpany | brak modelu: skala rzutu | **model** (replay): obrys 68,95 m² = opublikowana zabudowa, dach dwuspadowy, brama, wejście, okna dachowe, 0 błędów kompilatora |
-| ARCHON: Modrzewnica, Santany, Eliza, Julia, Ofelia | brak modelu | do potwierdzenia w końcowym przebiegu |
+| DEV, 6 stron innych wydawców | 0 modeli | **3 modele** (wszystkie oznaczone jako przybliżone lub częściowe) |
+| CONTROL, 6 stron — **pierwszy, ślepy przebieg** na `f73c1cf` | nie mierzono | **3 modele, w tym 1 w złej skali**; 1 awaria programu |
+| CONTROL — rewizja końcowa (dla 2 stron już nie-ślepa, patrz 5.3) | — | 4 modele, 0 awarii |
+| korpus ARCHON, 33 projekty, świeża pełna ścieżka | 27 modeli | **28 modeli** (zyskane Bukszpany); 5 odmów bez zmian |
 
-Przyczyny i poprawki ogólne (bez wyjątków po stronie, hoście czy domu):
-1. **Brak skali rzutu** (cztery przypadki: dwie obce strony, Bukszpany, Modrzewnica — ta sama postać: żadna wydrukowana
-   miara nie ustala skali, strona publikuje powierzchnię zabudowy). `v2/published-scale.ts`: skala, przy której obrys
-   ścian z rzutu ma opublikowaną powierzchnię zabudowy (iteracyjnie), pytana **tylko tam, gdzie bieg i tak by stanął**;
-   jawnie przybliżona — rejestracja bez kotwic, luka `AMBIGUOUS`, skala w wyniku niezweryfikowana („proporcje, nie
-   obmiar”). Opublikowana liczba jest tym samym zużyta i nie weryfikuje już układu.
-2. **Brak ról przy stronie bez podpisów**: gdy żaden obraz nie jest opisany jako rzut, nieopisany obraz dostaje rolę,
-   którą pokazują jego piksele (rzut/elewacja/przekrój, ortogonalny, pewność ≥ 0,9 — ta sama, której wymaga weto
-   treści); zatrzymanie „brak rysunków” czeka na ten odczyt. Strony z opisanymi rzutami są nietknięte.
+DEV, strona po stronie (baza → końcowa):
 
-3. **Relacja do niezbudowanego otworu** odmawiała całego domu (lipinscy): dopasowanie usuwa teraz relację razem
-   z otworem, a emiter stwierdza relację narożną tylko między otworami, które wyciął.
+| wydawca | baza 1322 | `101f9d7` |
+|---|---|---|
+| extradom.pl | brak modelu (nie znaleziono rzutu) | **model**: skala z opublikowanej szerokości i długości (2,54 cm/px; obrys 129,27 m² = wymiary strony), 18 ścian, 18 otworów, 9 pomieszczeń, dach dwuspadowy z opublikowanego kąta, kalenica przybliżona 5,47 m sprawdzona z opublikowaną wysokością 6,40 m |
+| dobredomy.pl | brak modelu (skala rzutu) | **podgląd częściowy**: obrys 93,2 m² = opublikowana zabudowa (11,18 × 8,34 m), 6 ścian, 15 otworów; **bez dachu i bez poddasza**; elewacje odstają od bryły do 2,7 m (`STRUCTURE_SILHOUETTE_DISAGREES`) |
+| lipinscy.pl | brak modelu (skala rzutu) | **podgląd częściowy części budynku**: korpus 23,75 × 9,37 m w skali z własnych wymiarów rysunku, 33 ściany, 41 otworów, 13 pomieszczeń; **bez garażu i bez dachu głównego**; wynik mówi wprost `FOOTPRINT_AREA_SHORT`: 206,91 z 267,63 m² opublikowanej zabudowy |
+| domoweklimaty.pl | brak modelu (nie znaleziono rzutu) | brak modelu — rzut jest już znajdowany (rola z pikseli), ale nie daje obrysu (`NO_OUTLINE`): rysunek ma wypełnione tło na zewnątrz i nie rysuje ścian zewnętrznych jako pasów |
+| houseplans.com | brak modelu (skala rzutu) | brak modelu — boki obrysu dają dwie różne skale (`SIDES_DISAGREE`): ściany to cienka podwójna linia 3–4 px, dom z dziedzińcem |
+| architecturaldesigns.com | brak modelu | brak modelu — brak obrysu na obu rzutach (`NO_OUTLINE`) |
 
-Uczciwie o wyniku: nowe modele to **częściowe podglądy** (`PARTIAL_3D_PREVIEW`) — poprawny obrys i otwory, skala
-i wysokości oznaczone jako przyjęte, na obcych stronach bez dachu (brak przekroju; układ zgłasza
-`STRUCTURE_SILHOUETTE_DISAGREES`). To jest „jakiś model zamiast odmowy”, nie „należycie odtworzony dom”.
+CONTROL, strona po stronie (pierwszy ślepy przebieg → końcowa):
 
-## 6. Świeża pełna ścieżka kandydata, testy, dostawa
+| wydawca | `f73c1cf`, ślepo | `101f9d7` |
+|---|---|---|
+| dobredomy.pl | podgląd częściowy: obrys 215,9 m² = opublikowana zabudowa (22,46 × 13,73 m), 2 bryły, dach dwuspadowy, 20 otworów | bez zmian |
+| houseplans.com | podgląd częściowy: 14,46 × 12,92 m przy opublikowanych 14,63 × 13,11 m, 67 ścian, 31 otworów, 11 pomieszczeń; rodzaj dachu nieustalony | bez zmian |
+| architecturaldesigns.com | model w **złej skali**: 30,0 × 24,4 m przy opublikowanych 24,8 × 20,0 m | model 24,70 × 20,32 m, 4 bryły, 49 ścian, 55 otworów; rodzaj dachu korpusu nieustalony (reguła 8) |
+| lipinscy.pl | **awaria** (`INTERNAL_ERROR`) | model: 18,66 × 8,10 m, 12 ścian, 19 otworów, zabudowa 151,21 wobec opublikowanych 140,47 m² (+7,6 %, `FOOTPRINT_AREA_NEAR`); bez dachu (reguła 7) |
+| domoweklimaty.pl | brak modelu (`NO_OUTLINE`) | bez zmian |
+| extradom.pl | brak modelu (`PLAN_NO_WALLED_ENVELOPE`) | bez zmian |
 
-**W toku (checkpoint):** świeża pełna ścieżka rewizji `6ce867c` (czytnik 1.13.0, solver 2.32.0) na 33 projektach korpusu — wynik i porównanie z replayem zostaną dopisane.
+**Czym te modele są, a czym nie.** Rendery czterech z siedmiu końcowych modeli obejrzano (extradom i lipinscy DEV,
+architecturaldesigns i houseplans CONTROL), pozostałe trzy opisano z danych wyniku: to parterowe bryły ze ścianami,
+ściankami i otworami w proporcjach rzutu. Najbliżej domu jest extradom DEV (prosta bryła z dachem dwuspadowym, oknami
+i drzwiami); pozostałe obejrzane wyglądają jak makieta parteru bez dachu. Dach istnieje tylko tam, gdzie strona podaje kąt i wysokość budynku (extradom DEV,
+dobredomy CONTROL); pozostałe mają dach płaski z konwencji albo są otwarte od góry. Poddaszy nie ma. Wysokości są
+przyjęte (2,80 m „do oglądania”), skala pięciu z siedmiu pochodzi z liczby ze strony, a nie z wymiaru potwierdzonego
+na rysunku. Każdy wynik niesie te zastrzeżenia w polach `provisional` / `layoutBlocking`. To jest „rozpoznawalny
+zarys domu zamiast odmowy”, a **nie** „należycie odtworzony dom”. Zlecenie „dowolny link z dowolnej strony” jest
+**niespełnione**: 5 z 12 zmierzonych stron innych wydawców nadal nie daje modelu, a 2 wydawców (z500.pl,
+mgprojekt.com.pl) odmawia klientowi (HTTP 403).
 
-Testy: zestawy pakietów po C2 — 2088 testów, 7 dawnej formy przepisanych na niezmienniki (wszystkie 7 przechodzą po zmianie); typecheck z testami 0 błędów. Pełna macierz na końcowej rewizji `6ce867c`: **do wykonania po przebiegach** (pod obciążeniem daje fałszywe timeouty).
+### 5.2 Reguły (wszystkie ogólne; żadnej po hoście, adresie, nazwie ani hashu)
 
-APK: **1324 w budowie** z `6ce867c` (ten sam podpis). Plik 1323 zbudowany z `68f2ead` nie został dostarczony i jest porzucony (rewizja zmieniła się o poprawkę relacji).
+Runda 1 (`fc2404c`, `68f2ead`, `6ce867c`):
+1. **Skala z opublikowanej zabudowy** (`v2/published-scale.ts`): gdy żadna wydrukowana miara nie ustala skali, a bieg
+   i tak by stanął — skala, przy której obrys ścian ma opublikowaną powierzchnię zabudowy. Jawnie przybliżona
+   (rejestracja bez kotwic, luka `AMBIGUOUS`, „proporcje, nie obmiar”); liczba jest tym samym zużyta i nie weryfikuje
+   już układu.
+2. **Rola z pikseli**, gdy żaden obraz nie jest podpisany jako rzut (pewność ≥ 0,9, ta sama co weto treści).
+3. **Relacja do niezbudowanego otworu** znika razem z otworem, zamiast odmawiać całego domu.
 
-Prywatna paczka dowodów (poza Git): po zakończeniu przebiegów — replaye baza/C1a/C1b/ablacja/C2, pełna ścieżka, próbka ANY-LINK, wyniki, zamrożone zestawy, dzienniki; bez obrazów wydawców.
+Runda 2 (`1b4926e`, `b208b39`, `f73c1cf`):
+4. **Rysunki, które inni wydawcy naprawdę serwują**: obrazy pod adresami bez rozszerzenia, galerie w danych
+   strukturalnych strony, rzuty SVG, WebP (dekoder dołączony do pakietu w APK), fakty w stopach i calach.
+5. **Skala z opublikowanej szerokości i długości** (pierwszeństwo przed zabudową), z bezpiecznikami: grubość ściany
+   fizycznie możliwa, bryły pokrywają narysowane ściany, oba boki dają tę samą skalę; nigdy, gdy wymiary samego rysunku
+   sobie przeczą; **liczba ze strony nigdy nie wybiera między skalami, które podaje rysunek** (`f73c1cf`).
+6. **Rozmiar odczytu arkusza** (`source-cv/reading-size.ts`): arkusz większy niż zmierzony zakres (> 853 px) i o ścianach
+   grubszych niż 30 px jest czytany w rozmiarze, w którym typowa ściana ma 16 px. Żaden arkusz korpusu nie jest
+   zmniejszany (sprawdzone w końcowym przebiegu: 0 z 33).
+7. **Dach z opublikowanego kąta** tylko razem z opublikowaną wysokością budynku jako sprawdzeniem; bez niej dachu nie ma
+   (świadoma odmowa, nie brak funkcji).
+
+Runda 3 (`3772e63`, `101f9d7`):
+8. **Poprawny odczyt części budynku zostaje jako podgląd częściowy** (`v2/partial-footprint.ts`), dopiero po tym, jak
+   resolver nie znalazł odczytu całości, i tylko gdy: zabudowa odczytana jest mniejsza od opublikowanej i stanowi co
+   najmniej 2/3; skalę podaje sam rysunek (≥ 2 kotwice, nigdy skala dopasowana do liczby); bryły pokrywają narysowane
+   ściany; rysunek sam pokazuje, czego brakuje (otwarte części obok brył, razem ≥ 80 % liczby). Wynik niesie
+   `FOOTPRINT_AREA_SHORT` (nadal `BLOCKING`) i polskie objaśnienie na ekranie.
+9. **Otwarty pierścień ścian korpusu liczy się jako ściany korpusu** przy dopasowaniu podglądu (wcześniej dom z otwartą
+   stroną był odmawiany jako „bez ścian”).
+10. **Miniatura przekroju nie wywraca biegu**: punkt odczytany poza kadrem ponad tolerancję wraca na brzeg kadru
+    (`ontoFrame`); punkty w tolerancji są nietknięte, więc działające biegi są bajt w bajt takie same.
+11. **Niepotwierdzona skala, której przeczą opublikowana szerokość i długość** (oba boki, ten sam kierunek, ten sam
+    współczynnik), ustępuje skali z tych liczb; gdy ta nie przechodzi bezpieczników, model zostaje z nazwaną
+    sprzecznością (`PUBLISHED_EXTENT_CONTRADICTION`). Skala potwierdzona wymiarem rysunku jest nietykalna.
+
+### 5.3 Ujawnienia
+
+- **CONTROL przestał być ślepy dla dwóch stron.** Plik zapowiadał jeden przebieg bez zmiany reguł. Pierwszy przebieg
+  (`f73c1cf`) dał 3/6 i odsłonił awarię oraz złą skalę; obie naprawiono regułami 10 i 11 i przebieg powtórzono.
+  Liczbą ślepą tej próbki jest **3 z 6, w tym 1 w złej skali**; 4/6 jest dla stron lipinscy.pl i architecturaldesigns.com
+  wynikiem DEV. Sprostowanie zapisane w pliku jako `amendments`. Pozostałe cztery strony nie były oglądane między
+  przebiegami.
+- **Próg 2/3 w regule 8** ustalono, znając dwie liczby: udział strony DEV lipinscy.pl (0,77) i to, że żadna odmowa
+  korpusu nie spełnia pozostałych warunków. Uzasadnienie jest rzeczowe (garaż, wejście, taras to mniejsza część
+  zabudowy), ale próg nie jest potwierdzony na niezależnych danych. W korpusie reguła nie zmieniła żadnego wyniku
+  (33/33 identyczne w replayu).
+- **Własna regresja, wykryta i cofnięta w tej samej dostawie.** Reguła 6 w pierwszej postaci zmniejszała też arkusz
+  853 px o grubych ścianach: w Azaliach zginęły wydruki „110/220” i „160/220”, trzy drzwi balkonowe stały się oknami
+  (2,20/0 → 1,30/0,90). Źródło obejrzane: stary odczyt był poprawny. Reguła dostała dolną granicę rozmiaru arkusza;
+  końcowy przebieg przywraca Azalie element po elemencie.
+- Odrzucone pomiarem, niewdrożone: filtr tonu pasów (w korpusie 20–28 % długości pasów to jaśniejsze, prawdziwe warstwy
+  ścian — filtr psułby działające domy).
+
+### 5.4 Pierwsze błędne decyzje, które zostają
+
+- **Czytnik rzutu wymaga ścian narysowanych jako lite pasy 6–40 px.** To wspólna przyczyna 4 z 5 stron bez modelu
+  (tło wypełnione zamiast ścian; cienka podwójna linia; brak obrysu) i `PLAN_NO_WALLED_ENVELOPE` na piątej.
+- lipinscy.pl DEV: garaż ginie, bo cienie i obrysy narysowanych samochodów są czytane jako pasy ścian (obwiednia kończy
+  się na zderzakach).
+- Dach i poddasze bez przekroju: tylko z opublikowanego kąta **i** wysokości; bez wysokości — brak dachu.
+- W dwóch modelach CONTROL kontrola grafu cech zgłasza naruszenia niezmienników (2 i 1) oraz znaleziska w audycie
+  styków zewnętrznych (15 i 2) — są w ostrzeżeniach wyniku, nie zostały zbadane.
+
+## 6. Końcowy przebieg, testy, dostawa
+
+Wszystko poniżej dotyczy rewizji **`101f9d7`** (solver 2.34.0, czytnik miar 1.13.0, adapter ogólny 1.3.0), z zamrożonego
+drzewa z własnymi dowiązaniami pakietów. Commit z tym raportem jest późniejszy i zmienia wyłącznie dokumenty oraz
+sprostowanie w `ANYLINK-CONTROL.json`.
+
+**Korpus, świeża pełna ścieżka 33 projektów:** 28 modeli, 5 odmów — Modrzewnica (`METRIC_RESOLUTION_INCONCLUSIVE`),
+Santany i Eliza (`PLAN_RESOLUTION_INCONCLUSIVE`), Julia (`PLAN_NO_WALLED_ENVELOPE`), Ofelia (`PLAN_LAYOUT_REJECTED`);
+te same pięć co na `f73c1cf`. Błędy kompilatora: 8 (`OPENING_ABOVE_WALL_TOP` w Balsamowcach ×2, Jabłonkach ×1,
+Zefirantach ×5) — identyczne jak na kodzie 1322, nietknięte.
+
+Porównanie element po elemencie (`regress.py`):
+- wobec zamrożonej ekstrakcji 1322 (`572b875`): 27 projektów bez zmian; Bukszpany — model zyskany; 5 projektów ze
+  zmianą stropu i ścianek pod nim (Arlety, Aurory, Bratki, Jabłonki, Muraje) — to skutek C1b opisany w §3;
+- wobec punktu kontrolnego C2 (replay solvera na końcowej ekstrakcji): jedyną zmianą są zyskane Bukszpany. **Żaden otwór, bryła
+  ani dach w działającym domu nie zmienił się przez ANY-LINK.**
+
+Mierniki na końcowych replayach: C1a — rzędne 47 OK, wysokości 47 OK, po 2 bez referencji, **0 autorytetu bez pokrycia**;
+C1b — jak w §3 (3 DEV PASS, Bratki CONTROL PASS, a01 i Balsamowce nieodczytane, negatywy PASS, Sasanki = wpis zamrożony
+błędnie); C2 — rodzaj przyjęty = zbudowany 361/361, ślad zgodny 335 + jawna różnica 29, **0 nieaktualnych**, drzwi
+zewnętrzne na własnym dostępie 133/133.
+
+**Testy** (pełna macierz na spokojnej maszynie, `101f9d7`): 3680 testów — **3654 przechodzą, 15 pada, 11 pominiętych**; typecheck 0 błędów. Zestaw 15 padających jest co do nazwy identyczny z zestawem na `f73c1cf` i żaden nie pochodzi z tej kampanii (przeterminowany snapshot kontraktu Android, `/health` oczekujące starej wersji solvera, cztery strażniki izolacji badań, dwa testy modelu referencyjnego, cztery testy `wall-strip` wymagające dawnej bazy w klonie, jeden `compound-facade`, NFD bez ICU, scena fikstury Larchfield). Nie zostały naprawione w tym etapie. Nowe testy tej rundy: 8 (część budynku), 5 (sprzeczność skali), 1 (otwarty pierścień), testy `ontoFrame` i rozmiaru odczytu — wszystkie przechodzą.
+
+**APK 1326**: `BuildPlan-owner-preview-1326.apk`, versionName `0.1326.0-owner`, z rewizji `101f9d72cd42…`, ten sam podpis
+(`6e48fac4…1ca0da`), 72 668 361 B, SHA-256 `2f9c4c5df63657beffa37588ce5763e7611df3772c0bd14191d1e5d5b872f7eb`,
+`zipalign -c -P 16 4` poprawny, manifest analizatora: 12 plików, wszystkie hashe zgodne. Pliki 1323–1325 nie zostały
+dostarczone (rewizja zmieniała się przed końcem pomiarów) i są porzucone.
+
+**Pakiet z APK uruchomiony na hoście:** pliki analizatora wyjęte z `BuildPlan-owner-preview-1326.apk` do pustego katalogu i uruchomione tym samym launcherem i protokołem co na telefonie (`run-host.mjs`), z żywych adresów, na trzech stronach: Bukszpany (ARCHON, 364 s), dobredomy.pl DEV (99 s), lipinscy.pl DEV (182 s, podgląd częściowy z `FOOTPRINT_AREA_SHORT`). We wszystkich trzech hash paczki źródeł, grafu obserwacji, dowodów metrycznych, modelu i sceny jest **równy** wynikowi kodu źródłowego. Ograniczenie: host to Node 22, nie środowisko telefonu (nodejs-mobile 18 bez ICU); test zgodności bez ICU przechodzi w macierzy tylko na fiksturze.
+
+**Prywatna paczka dowodów (poza Git):** `BuildPlan-SOURCE-TO-MODEL-Private-1326.zip`, 41 556 589 B, SHA-256 `173ab544bd504eccf1e0a40d22dd7d1abc40f1257855c6986af2a857d5f2d338`, 1889 plików: replaye baza/C1a/C1b/ablacja/C2, końcowa pełna ścieżka 33 projektów i replaye z grafami cech, próbka DEV (kod 1322, `f73c1cf`, końcowa), próbka CONTROL (pierwszy ślepy przebieg, końcowa), wyniki mierników i porównań, zamrożone zestawy, dzienniki testów i budowy, zapisy uruchomienia pakietu z APK. Bez obrazów wydawców (sprawdzone: 0 plików graficznych poza renderami modeli, 0 osadzonych danych obrazów).
 
 ## 7. Nierozwiązane, nazwane
 
-- ANY-LINK: dach, poddasze i wysokości przy braku przekroju; odkrywanie rzutów ładowanych skryptem (domoweklimaty); pewność klasyfikatora pikseli na rysunkach innych wydawców i budżet pobrań na stronach z galerią cudzych projektów (extradom); strony bez opublikowanej powierzchni zabudowy nie mają skali awaryjnej; z500.pl i mgprojekt.com.pl odmawiają klientowi (HTTP 403); próbka to 6 stron, nie statystyka.
+- ANY-LINK: patrz 5.4. Dodatkowo: strony bez opublikowanej powierzchni zabudowy ani wymiarów nie mają skali awaryjnej;
+  wydawcy odmawiający klientowi (HTTP 403) są poza zasięgiem; obie próbki razem to 12 stron sześciu wydawców.
+- Decyzja produktowa dla OWNER-a, niewdrożona: czy strona, z której nie da się odczytać rzutu, ma dostać **bryłę
+  z samych opublikowanych danych** (szerokość, długość, wysokość, kąt dachu) oznaczoną jako „bryła z danych, nie
+  z rysunków”. Dałoby to model dla większości stron bez modelu, ale byłby to prostopadłościan z dachem, bez otworów.
 - Sasanki: źródło drukuje dwie wysokości parteru (273/278); zastosowano jedną, konflikt niewidoczny dla solvera.
 - C1b obejmuje jedną rodzinę (wysokość w świetle parteru); ścianki kolankowe, wysokości wyższych kondygnacji i stropy
   nad nimi nadal nie mają konsumenta. a01 i Balsamowce: wymiar nieodczytany przez czytnik.
 - C2: relacja balkonu obserwowanego bez płyty ma typ i zapis, bez przypadku w korpusie; `access` (podest/stopień) nie
   ma jeszcze czytnika — politykę sprawdzają testy.
 - Znane z 1322 i nietknięte: poziom poddasza Ciesz (+2,93 zamiast +3,34), wysokości dwóch okien Ciesz, lewe okno tylne
-  Bakop z konwencji; bramki przypisania opisów, kątów i pokrycia wymiarów pionowych niespełnione.
-- 0 płatnych wywołań; księga bez zmian (0,60838938 USD z 5 USD, estymata, rozliczenie niepotwierdzone).
+  Bakop z konwencji; 8 błędów `OPENING_ABOVE_WALL_TOP`; bramki przypisania opisów, kątów i pokrycia wymiarów pionowych
+  niespełnione.
+- Android UI: **NOT_VERIFIED** (brak urządzenia) — w tym nowy tekst `partial_footprint_short`.
+- 0 płatnych wywołań; księga bez zmian (0,60838938 USD z 5 USD, estymata, rozliczenie niepotwierdzone). H2 nieużyte.
