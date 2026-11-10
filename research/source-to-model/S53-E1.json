@@ -1,0 +1,43 @@
+{
+ "schema": "buildapp.source-to-model.experiment/1",
+ "id": "S53-E1",
+ "frozenAt": "2026-11-10, before any candidate ran and before any reference was written",
+ "question": "Is the mandatory floor-plan cascade the bottleneck, i.e. does a whole-house description read from ALL of a page's sources at once, written through the existing BuildingV2 emitter and compiler, give a recognisable exterior where the 1327 cascade gives none — and no worse where it gives one?",
+ "hypothesis": "H1: a vision model given the page's drawings, pictures and published figures in one request states bodies, storeys, roofs, openings per facade, characteristic features and palette well enough that the emitted model matches the reference on most checklist items, on pages the cascade refused.",
+ "falsifiedIf": "on the pilot pages the described house is wrong on body layout, storeys or main roof in most houses, or the emitter cannot build what is described without house-specific fixes.",
+ "arms": {
+  "A": "1327 cascade (0fe410a), results already recorded blind in rd/anylink/control2-al5 — not re-run",
+  "B": "house description (vision model, one request per house after an image triage) -> BuildingV2 -> emitBuilding -> fitOpeningsToHosts -> model -> compileBuilding; same source packages and cached bytes as arm A"
+ },
+ "pilot": {
+  "rule": "the first page of each of the six publishers in CONTROL-2 (slug suffix -1), fixed by this rule before any image of them was opened",
+  "slugs": ["architecturaldesigns-com-1", "dobredomy-pl-1", "domoweklimaty-pl-1", "extradom-pl-1", "houseplans-com-1", "lipinscy-pl-1"],
+  "armA": {"architecturaldesigns-com-1": "NO_MODEL", "dobredomy-pl-1": "NO_MODEL", "domoweklimaty-pl-1": "NO_MODEL", "extradom-pl-1": "NO_MODEL", "houseplans-com-1": "NO_MODEL", "lipinscy-pl-1": "MODEL (partial preview)"},
+  "status": "these six become DEV for arm B once its output is inspected"
+ },
+ "heldBack": {
+  "rule": "the second page of each publisher in CONTROL-2 (suffix -2): not opened, not referenced and not run on arm B until arm B's code and prompts are frozen; then one run",
+  "slugs": ["architecturaldesigns-com-2", "dobredomy-pl-2", "domoweklimaty-pl-2", "extradom-pl-2", "houseplans-com-2", "lipinscy-pl-2"]
+ },
+ "reference": {
+  "how": "a checklist per house written from the source images and published figures by an annotator that never sees a candidate's output, before arm B runs; the annotator is the same model family as the reader, so agreement is not independent proof — the OWNER boards are the independent judgement",
+  "items": [
+   "SCALE: overall width and depth within 10 % of the printed/published figures (N/A when the page gives none)",
+   "BODIES: number of distinct bodies (main, garage, wings, porch) and on which side each stands",
+   "STOREYS: full storeys above ground and whether the attic is habitable",
+   "MAIN_ROOF_KIND: gable / hip / flat / shed / mixed",
+   "MAIN_RIDGE: along the front or front-to-back (N/A for flat)",
+   "ATTACHED_ROOFS: roof kind of each attached body",
+   "GARAGE: door present on the right facade and third of that facade, or correctly absent",
+   "ENTRANCE: door on the right facade and third of that facade",
+   "FRONT_OPENINGS: count per storey within one, in the right order",
+   "OTHER_SIDES_OPENINGS: for each side a source shows — count per storey within one; a side no source shows is N/A and must be marked hypothetical by the candidate",
+   "LARGE_GLAZING: terrace / garden glazing on the right facade",
+   "FEATURES: each of dormer, chimney, balcony, railing, canopy/porch roof, posts/columns, pergola/carport, rooflight, bay the sources show — built or missed; anything built that no source shows is a false addition",
+   "PALETTE: wall and roof tone plausible against the pictures"
+  ],
+  "verdicts": "per item OK / WRONG / MISSING / NA; a house is RECOGNISABLE_CANDIDATE only with BODIES, STOREYS, MAIN_ROOF_KIND and MAIN_RIDGE all OK and no false body; compile errors, time and cost are reported beside, never instead"
+ },
+ "budget": "paid calls through the session CLI transport of E12/E13, inside the cumulative 5 USD ledger (0.60838938 counted before this experiment); every call reserved at its cap before it starts",
+ "notClaimed": "six pages are a pilot, not evidence about all publishers; a compiled body is not a reconstructed house"
+}
