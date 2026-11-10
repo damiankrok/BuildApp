@@ -53,5 +53,25 @@
       "publisher": "architecturaldesigns.com",
       "url": "https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke"
     }
+  ],
+  "runs": [
+    {
+      "at": "2026-11-10",
+      "revision": "0fe410a",
+      "result": "3 of 12 pages gave a model (lipinscy.pl 2, dobredomy.pl 1); 9 refused",
+      "note": "the one blind run of the candidate; no rule was changed on it"
+    },
+    {
+      "at": "2026-11-10",
+      "revision": "101f9d7",
+      "result": "3 of 12, the same three models element for element",
+      "note": "the delivered revision on the same cached bytes, run after the candidate without anything being looked at in between"
+    }
+  ],
+  "amendments": [
+    {
+      "at": "2026-11-10",
+      "what": "After these two runs the nine refusals were grouped by how the plan is drawn (stage report 5.5) to choose the next work. From that moment these pages are known; a further blind figure needs a new set."
+    }
   ]
 }

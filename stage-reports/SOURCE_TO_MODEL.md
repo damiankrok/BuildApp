@@ -8,10 +8,10 @@ Zasady: `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT
 | **SLICE C1a** (pochodzenie per właściwość) | **PASS** |
 | **SLICE C1b** (konsument pionowej relacji przekroju) | **PASS** w zadeklarowanym zakresie (jedna rodzina: wysokość parteru w świetle); jeden wpis kontrolny zamrożony błędnie — patrz niżej |
 | **SLICE C2** (jedna polityka korekt, typowane znaczenie, finalny ślad) | **PASS** dla polityki, typów i śladu; relacja balkon/podest bez płyty — **PARTIAL** (typ i zapis są, brak przypadku w korpusie i testu kompozycji z odmową płyty) |
-| **SLICE ANY-LINK** (zlecenie OWNER-a z 2026-11-09: dowolny link → model) | **PARTIAL** — strony innych wydawców: DEV 0/6 → 3/6 modeli; CONTROL 3/6 w jedynym ślepym przebiegu (w tym 1 w złej skali), 4/6 po dwóch ogólnych poprawkach; korpus ARCHON 27 → 28 z 33. Nowe modele to przybliżone lub częściowe bryły parteru. „Dowolny link z dowolnej strony” **niespełnione** |
+| **SLICE ANY-LINK** (zlecenie OWNER-a z 2026-11-09: dowolny link → model) | **PARTIAL** — na stronach nieoglądanych wcześniej model powstaje w **6 z 18** przypadków (ślepe przebiegi: CONTROL 3/6, w tym 1 w złej skali; CONTROL-2 3/12). Na stronach znanych: DEV 3/6 (z 0/6 na kodzie 1322), CONTROL 5/6. Korpus ARCHON 27 → 28 z 33. Nowe modele to przybliżone lub częściowe bryły parteru. „Dowolny link z dowolnej strony” **niespełnione** |
 | **CAMPAIGN** | **WORK_IN_PROGRESS** |
-| **VERIFICATION** | host: pełna macierz testów na `101f9d7` (3654 przechodzą, 15 pada — wszystkie sprzed kampanii), świeża pełna ścieżka 33 projektów i obie próbki — tak; bundle: pakiet wyjęty z APK 1326 uruchomiony na hoście na 3 żywych adresach, hashe równe kodowi źródłowemu (Node 22, nie środowisko telefonu); Android UI — **NOT_VERIFIED** (brak urządzenia); live API — nie uruchamiane (0 płatnych wywołań) |
-| **NEXT** | jedna czynność: zamrozić zestaw (pięć stron bez modelu jako DEV, rzuty korpusu jako kontrprzypadki, nowe strony jako CONTROL) i zmierzyć czytnik obrysu dla rzutów, których ściany nie są litymi pasami (cienka podwójna linia, wypełnione tło) — jako wymienną alternatywę ważoną przez istniejący resolver rzutu |
+| **VERIFICATION** | host: pełna macierz testów na `101f9d7` i na `0fe410a` (padają wyłącznie testy sprzed kampanii), świeża pełna ścieżka 33 projektów na `101f9d7`, trzy domy korpusu i trzy próbki stron na `0fe410a` — tak; bundle: pakiety wyjęte z APK 1326 i 1327 uruchomione na hoście na żywych adresach, model i scena równe kodowi źródłowemu (Node 22, nie środowisko telefonu); Android UI — **NOT_VERIFIED** (brak urządzenia); live API — nie uruchamiane (0 płatnych wywołań) |
+| **NEXT** | jedna czynność: czytnik rzutu wektorowego z nazwanymi warstwami — ściany i linie wymiarowe wprost z grup SVG (rodzina 1 z §5.5), z zamrożonym zestawem: cztery znane strony extradom.pl jako DEV, nowe strony tego wydawcy i rzuty SVG innego wydawcy jako CONTROL, rzuty rastrowe korpusu jako kontrprzypadki |
 
 ## 1. Baseline i sposób porównania
 
@@ -234,6 +234,57 @@ Runda 3 (`3772e63`, `101f9d7`):
 - W dwóch modelach CONTROL kontrola grafu cech zgłasza naruszenia niezmienników (2 i 1) oraz znaleziska w audycie
   styków zewnętrznych (15 i 2) — są w ostrzeżeniach wyniku, nie zostały zbadane.
 
+### 5.5 Runda 4 po punkcie kontrolnym 1326 (`cda0590`, `0fe410a`) — drugi rozmiar odczytu i ślepy CONTROL-2
+
+**Pierwsza błędna decyzja** na klasycznym rzucie odrzuconym w CONTROL (extradom.pl, ściany jako lite szare pasy,
+wydrukowane wymiary całkowite): arkusz 1600 px ma ściany zewnętrzne 46–49 px, ale miara „typowej ściany” (mediana po
+wszystkich pasach) wypada 28 px, bo przeważają cienkie ścianki i meble. Arkusz nie jest zmniejszany i żadne okno
+czytnika nie sięga ścian zewnętrznych (`PLAN_NO_WALLED_ENVELOPE`).
+
+**Co zmierzono, zanim cokolwiek zostało:**
+- Zamiana miary na medianę po pasach „długości ściany” (`cda0590`) naprawia tę stronę i **psuje stronę DEV tego samego
+  wydawcy** (jej arkusz jest wtedy czytany w 628 zamiast 709 px i skala z opublikowanych wymiarów przestaje spełniać
+  oba boki). Zamiana jednego domu na drugi — odrzucona.
+- Skan trzech innych celów zmniejszenia (20, 25, 30 px) na obu stronach: przy 20 działa tylko DEV, przy 25 żadna, przy
+  30 tylko CONTROL. **Nie ma rozmiaru, przy którym czytają się obie**; wynik zależy od rozmiaru odczytu chaotycznie.
+- Korpus: mediana po wszystkich pasach 7–25 px (p5–p95), po pasach długości ściany 8–25 px — korpus nie uzasadnia
+  innego celu niż 16 px dla żadnej z miar.
+
+**Reguła 12 (`0fe410a`):** arkusz większy niż zmierzony zakres nie ma jednego właściwego rozmiaru odczytu. Bieg czyta
+arkusze pierwszą miarą, jak dotąd. Tylko gdy solver odrzuci ten odczyt **i** druga miara daje arkuszowi inny rozmiar,
+zapieczętowana paczka jest czytana jeszcze raz w tym rozmiarze; drugi odczyt przechodzi przez wszystkie te same
+bramki, ślad mówi wprost, że to drugi odczyt (`PLAN_SHEETS_REREAD`), a gdy i on zostanie odrzucony, odpowiedzią biegu
+jest pierwsza odmowa. Arkusze nie większe niż 853 px (wszystkie 232 arkusze rzutów korpusu) mają jeden rozmiar i nigdy
+tu nie trafiają. Usługa 1.10.0; solver i czytniki bez zmian wersji.
+
+| pomiar na `0fe410a` | wynik |
+|---|---|
+| DEV, 6 stron | 3 modele — **bez zmiany** element po elemencie |
+| CONTROL, 6 stron (już nie-ślepy) | **5 modeli** — extradom.pl zyskuje model (11,90 × 8,60 m przy opublikowanych 11,9 × 8,65 m, dach dwuspadowy; wejście odczytane jako wnęka, której na rzucie nie ma; 11 naruszeń niezmienników grafu cech w ostrzeżeniach) |
+| **CONTROL-2, 12 stron, ślepo, jeden przebieg** | **3 modele z 12** (lipinscy.pl ×2, dobredomy.pl ×1) |
+| CONTROL-2 na dostarczonej rewizji `101f9d7` (te same bajty) | 3 modele z 12, te same; **0 zmian** |
+| korpus, 3 domy pełną ścieżką (Azalie, Bukszpany, Julia) | hashe paczki, grafu, dowodów, modelu i sceny równe `101f9d7`; odmowa Julii ta sama, bez drugiego odczytu |
+
+**Uczciwie o tej rundzie:** reguła 12 dała jeden model na stronie, na której ją rozwijano, i **nic na dwunastu
+nieoglądanych stronach**. Jej koszt jest realny: bieg odrzucony w obu rozmiarach trwa około dwa razy dłużej (najdłuższy
+zmierzony: 965 s zamiast 476 s na hoście; w CONTROL-2, sądząc po czasie biegu, drugi odczyt uruchomił się na co najmniej dwóch z dziewięciu odmów). Zostaje w kodzie, bo
+niczego, co dziś działa, nie zmienia — ale nie jest postępem na danych ślepych.
+
+**Liczba, która opisuje stan:** na stronach, których nikt wcześniej nie oglądał, model powstaje w **6 z 18**
+przypadków (pierwszy przebieg CONTROL 3/6, w tym jeden w złej skali; CONTROL-2 3/12). Wyniki 3/6 i 5/6 na DEV
+i CONTROL są wynikami na stronach znanych. Po wydawcach, wszystkie 24 zmierzone strony na `0fe410a`: lipinscy.pl 4/4,
+dobredomy.pl 3/4, extradom.pl 2/4, houseplans.com 1/4, architecturaldesigns.com 1/4, domoweklimaty.pl 0/4.
+
+**Trzy rodziny rysunku, których obecny czytnik rzutu nie czyta** (9 odmów CONTROL-2 i 3 odmowy DEV się w nich mieszczą):
+1. *Rzut wektorowy z nazwanymi warstwami* (extradom.pl: SVG z grupami `extWall`, `intWall`, `extDim`, `furniture`;
+   tekst wymiarów jako krzywe). Ściany i linie wymiarowe są w pliku dokładnie, a czytane są z rastra — stąd
+   niestabilność od rozmiaru. To najmocniejsze dostępne źródło i największy wydawca w próbce.
+2. *Ściany jako cienka podwójna linia* (houseplans.com, architecturaldesigns.com): przy 850–1024 px ściana ma 4–6 px
+   razem z obiema liniami — poniżej okna czytnika (od 6 px). Sonda par linii potwierdza: samo wypełnianie par nie
+   wystarczy, arkusz trzeba by czytać powiększony.
+3. *Wypełnione tło zamiast ścian zewnętrznych* (domoweklimaty.pl): tło i ściany mają jeden ton; grubość ściany
+   zewnętrznej widać tylko we wnękach okien.
+
 ## 6. Końcowy przebieg, testy, dostawa
 
 Wszystko poniżej dotyczy rewizji **`101f9d7`** (solver 2.34.0, czytnik miar 1.13.0, adapter ogólny 1.3.0), z zamrożonego
@@ -266,6 +317,16 @@ dostarczone (rewizja zmieniała się przed końcem pomiarów) i są porzucone.
 **Pakiet z APK uruchomiony na hoście:** pliki analizatora wyjęte z `BuildPlan-owner-preview-1326.apk` do pustego katalogu i uruchomione tym samym launcherem i protokołem co na telefonie (`run-host.mjs`), z żywych adresów, na trzech stronach: Bukszpany (ARCHON, 364 s), dobredomy.pl DEV (99 s), lipinscy.pl DEV (182 s, podgląd częściowy z `FOOTPRINT_AREA_SHORT`). We wszystkich trzech hash paczki źródeł, grafu obserwacji, dowodów metrycznych, modelu i sceny jest **równy** wynikowi kodu źródłowego. Ograniczenie: host to Node 22, nie środowisko telefonu (nodejs-mobile 18 bez ICU); test zgodności bez ICU przechodzi w macierzy tylko na fiksturze.
 
 **Prywatna paczka dowodów (poza Git):** `BuildPlan-SOURCE-TO-MODEL-Private-1326.zip`, 41 556 589 B, SHA-256 `173ab544bd504eccf1e0a40d22dd7d1abc40f1257855c6986af2a857d5f2d338`, 1889 plików: replaye baza/C1a/C1b/ablacja/C2, końcowa pełna ścieżka 33 projektów i replaye z grafami cech, próbka DEV (kod 1322, `f73c1cf`, końcowa), próbka CONTROL (pierwszy ślepy przebieg, końcowa), wyniki mierników i porównań, zamrożone zestawy, dzienniki testów i budowy, zapisy uruchomienia pakietu z APK. Bez obrazów wydawców (sprawdzone: 0 plików graficznych poza renderami modeli, 0 osadzonych danych obrazów).
+
+**Po punkcie kontrolnym — rewizja `0fe410a`, APK 1327.** Testy: pełna macierz 3690 testów — 3664 przechodzą, 15 pada (zestaw co do nazwy identyczny z `101f9d7`, żaden z tej kampanii), 11 pominiętych; typecheck 0 błędów; nowe testy rundy: 4 (miary rozmiaru odczytu), 4 (analizator: która miara, które arkusze mają drugi rozmiar), 2 (kolejność zdarzeń drugiego odczytu; sukces drugiego odczytu zmierzony tylko na prawdziwej stronie). APK `BuildPlan-owner-preview-1327.apk`,
+versionName `0.1327.0-owner`, z rewizji `0fe410ae4a2e…`, ten sam podpis, 72 669 141 B, SHA-256
+`e7df048d75777ef31e5c22b84cd2bb36a8de9fd96fa63e0734d9da9b6625ac60`, `zipalign -c -P 16 4` poprawny, manifest analizatora
+12 plików zgodnych; w pakiecie usługa 1.10.0 i solver 2.34.0. Pakiet wyjęty z APK uruchomiony na hoście na żywym
+adresie strony CONTROL extradom.pl: pierwszy odczyt odrzucony po 89 s, drugi odczyt z zapieczętowanej paczki daje model
+po 144 s; hash modelu i sceny równy wynikowi kodu źródłowego (paczka źródeł pobrana na żywo różni się od tej z pamięci
+podręcznej pomiaru). Znane ograniczenie: przy drugim odczycie postęp wraca do początku — na ekranie telefonu
+niesprawdzone. Paczka dowodów 1326 nie została przebudowana; wyniki tej rundy (CONTROL-2 na obu rewizjach, skan,
+sondy) leżą poza Git w katalogu roboczym sesji.
 
 ## 7. Nierozwiązane, nazwane
 

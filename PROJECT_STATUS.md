@@ -16,21 +16,24 @@
   ("a link to any project on any house-plan site must yield a 3D model") — campaign on `claude/new-session-3kzcgh`,
   commits/push with `[skip ci]`, no merge/PR. Base `14ecb73` (production as `572b875`, APK 1322).
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (adopted from the audit package).
-- **Checkpoint delivered:** code revision `101f9d7` (solver 2.34.0, metric reader 1.13.0, generic adapter 1.3.0),
-  APK 1326 (same signature), private evidence pack outside Git. Full report: `stage-reports/SOURCE_TO_MODEL.md`.
+- **Checkpoints delivered:** APK 1326 from `101f9d7` with a private evidence pack; APK 1327 from `0fe410a`
+  (solver 2.34.0, metric reader 1.13.0, generic adapter 1.3.0, service 1.10.0). Full report: `stage-reports/SOURCE_TO_MODEL.md`.
 - **Slices:** C1a PASS (per-property provenance of levels), C1b PASS in its declared scope (one consumer of a section
   vertical relation), C2 PASS for policy/types/trace and PARTIAL for the balcony-without-slab relation, ANY-LINK PARTIAL.
-- **ANY-LINK, measured:** foreign publishers DEV 0/6 → 3/6 models; CONTROL (other pages of the same six publishers)
-  3/6 on its only blind run, one of them at a wrong scale, 4/6 after two general fixes (no longer blind for two pages);
+- **ANY-LINK, measured:** on pages nobody had opened before, a model is built in **6 of 18** cases (blind runs:
+  CONTROL 3/6, one at a wrong scale; CONTROL-2 3/12). On known pages: DEV 3/6 (0/6 on 1322 code), CONTROL 5/6.
   ARCHON corpus 27 → 28 of 33. Every new foreign model is an approximate or partial single-storey preview; roofs only
   where the page publishes pitch and building height. "Any link from any site" is **not met**.
-- **First wrong decision that remains:** the plan reader needs walls drawn as solid 6–40 px bands; 4 of the 5 foreign
-  pages without a model fail there.
-- **NEXT (one action):** freeze a small set (the five foreign pages without a model as DEV, corpus plans as
-  counter-cases, new pages as CONTROL) and measure an outline reader for plans whose walls are thin double lines or
-  whose exterior is a filled ground, as a replaceable alternative weighed by the existing plan resolver.
+- **Round 4 (`0fe410a`):** a refused plan reading is tried once more at the sheet's other reading size. One model
+  gained on a known page, **nothing on the twelve blind pages**; a run refused at both sizes takes about twice as long.
+- **What the plan reader does not read** (stage report 5.5): vector plans with named layers read from their raster;
+  walls drawn as thin double lines (4–6 px); a filled ground instead of outer walls.
+- **NEXT (one action):** a reader of vector plans with named layers — walls and dimension lines taken from the SVG
+  groups — on a frozen set (the four known pages of that publisher as DEV, new pages and another publisher's SVG plans
+  as CONTROL, the corpus's raster plans as counter-cases).
 - **Open product decision (OWNER):** whether a page with no readable plan should get a massing from published figures
-  alone, labelled as such. Not implemented.
+  alone, labelled as such. Measured since: only 1 of the 10 known no-model cases publishes width, length, height and
+  pitch together, so this would add little. Not implemented.
 - **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED. H2 sealed; no paid calls.
 
 ## Completed stages
