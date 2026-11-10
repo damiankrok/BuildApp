@@ -1,0 +1,57 @@
+{
+  "schema": "buildapp.source-to-model.anylink/1",
+  "frozenAt": "2026-11-10",
+  "purpose": "CONTROL-2 for the ANY-LINK slice. ANYLINK-CONTROL.json stopped being blind for two of its pages (see its amendment), and its extradom.pl page is opened as a development case for the next change (the thickness a plan sheet's reading size is decided from). These twelve pages were never fetched, opened or run before this file was committed.",
+  "selection": "two further projects per publisher of ANYLINK-SET.json: in the publisher's listing page as saved on 2026-11-09, the two distinct individual project links that follow the later of the DEV and CONTROL links in markup order; where fewer than two follow (lipinscy.pl), the listing wraps to its first link. Chosen from the saved markup by address pattern alone.",
+  "disclosure": "Same six publishers, other houses: this measures whether a rule holds on another page of a known publisher, not on an unknown publisher. Not a statistical sample. To be run once on a frozen candidate revision and reported whatever the result; if a rule is changed on what a run shows, that is recorded here as an amendment and the affected pages count as DEV from then on.",
+  "items": [
+    {
+      "publisher": "extradom.pl",
+      "url": "https://www.extradom.pl/projekt-domu-amber-5-WAH2179"
+    },
+    {
+      "publisher": "extradom.pl",
+      "url": "https://www.extradom.pl/projekt-domu-armonia-WOF1270"
+    },
+    {
+      "publisher": "lipinscy.pl",
+      "url": "https://lipinscy.pl/projekt/norwich-ii"
+    },
+    {
+      "publisher": "lipinscy.pl",
+      "url": "https://lipinscy.pl/projekt/praia-ii"
+    },
+    {
+      "publisher": "dobredomy.pl",
+      "url": "https://www.dobredomy.pl/projekt/tulio"
+    },
+    {
+      "publisher": "dobredomy.pl",
+      "url": "https://www.dobredomy.pl/projekt/piwonia"
+    },
+    {
+      "publisher": "domoweklimaty.pl",
+      "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10"
+    },
+    {
+      "publisher": "domoweklimaty.pl",
+      "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-11"
+    },
+    {
+      "publisher": "houseplans.com",
+      "url": "https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881"
+    },
+    {
+      "publisher": "houseplans.com",
+      "url": "https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600"
+    },
+    {
+      "publisher": "architecturaldesigns.com",
+      "url": "https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc"
+    },
+    {
+      "publisher": "architecturaldesigns.com",
+      "url": "https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke"
+    }
+  ]
+}
