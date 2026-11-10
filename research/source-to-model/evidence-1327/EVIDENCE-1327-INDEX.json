@@ -1,0 +1,1250 @@
+{
+ "schema": "buildapp.source-to-model.evidence-index/1",
+ "root": "session work directory (outside Git): rd/anylink",
+ "note": "Outcomes, hashes and timings only. Publisher images and page bodies are not in Git; the private ZIP holds the run directories and the byte cache.",
+ "sets": {
+  "base": {
+   "label": "DEV (ANYLINK-SET), baseline",
+   "runsHeader": "tree f239a2d start 2026-11-09T19:58:46Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": null,
+     "packageContentHash": null,
+     "assets": 0,
+     "seconds": 2400,
+     "outcome": "NO_RECORD"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/sonia",
+     "packageContentHash": "92e7bf54252c1aba3f5f032d95bc1cc6da4b09c566a0124c11051dea431933ab",
+     "assets": 20,
+     "seconds": 112,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-adam",
+     "packageContentHash": "c976627882d864dd3e020394a4dff4e27dce770efab4937bdccc35130416999e",
+     "assets": 9,
+     "seconds": 12,
+     "outcome": "NO_MODEL",
+     "code": "SOURCE_INCOMPLETE",
+     "reasonCode": "PLAN_NOT_FOUND",
+     "firstFailure": null
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+     "packageContentHash": "1aa1ec48961c1ee7a73e3fd00e689b2c44e5caa79641c7123974807a2085d6b7",
+     "assets": 97,
+     "seconds": 46,
+     "outcome": "NO_MODEL",
+     "code": "NO_DRAWINGS",
+     "reasonCode": "PLAN_NOT_FOUND",
+     "firstFailure": null
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/3355-square-feet-3-bedroom-3-5-bathroom-3-garage-modern-contemporary-sp371040",
+     "packageContentHash": "a87977a7b8db1148c281c4cdd7f583da57768ca12986e497a6af65a0499fa6c7",
+     "assets": 37,
+     "seconds": 222,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/mindelo",
+     "packageContentHash": "c592c43c63e161a1bb89f2a74b406317c33aee505585c09de614c377066df1a8",
+     "assets": 26,
+     "seconds": 125,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    }
+   ],
+   "models": 0,
+   "total": 6
+  },
+  "al4": {
+   "label": "DEV",
+   "runsHeader": "tree 101f9d7 start 2026-11-10T01:48:44Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/perfectly-balanced-4-bed-modern-farmhouse-plan-56478sm",
+     "packageContentHash": "36a281fe5972530a90e03a4f4aa4333fe8ef18789563b46d66100c8c42503154",
+     "assets": 43,
+     "seconds": 485,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_ENCLOSED_CELLS"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/sonia",
+     "packageContentHash": "410dab44211f2faf82199a139c0dc15e769509a6aa0d2c85d2ce433a7e1a8ae6",
+     "assets": 20,
+     "seconds": 129,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "9e36a38cdbea02c096f122da08957891dedc218bd68368394431e7fcab400bf3",
+      "modelHash": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.66 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the left elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the right elevation stands up to 2.73 m away from the outline that drawing traces",
+      "more than one storey was read and no body reaches past the first",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "11 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-adam",
+     "packageContentHash": "f8b14964f9fd842ddc0edbb724d42ed844a8f61ae35e15d15ca7490c09f3c789",
+     "assets": 11,
+     "seconds": 59,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+     "packageContentHash": "032675087e15a5fdcad67b1af3b10c4576f09a53ad02c8ba254bc32ece1e671f",
+     "assets": 111,
+     "seconds": 101,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "c9d8229bc19a36d7fe55d570900c565c7219fa8b83a4622330ed36c0b5dd41ef",
+      "modelHash": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "26 source addresses counted with another copy (different crop)",
+      "139 source addresses not used (budget exceeded)",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 5.47 m from the walls of the house's only storey and the stated pitch, checked against the published 6.40 m building height; its heights, and the chimney's, are for viewing only",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/3355-square-feet-3-bedroom-3-5-bathroom-3-garage-modern-contemporary-sp371040",
+     "packageContentHash": "22e6f58843ad91ec90111228b8dd743654dd6f42bef855ad75d71b9baf69174d",
+     "assets": 36,
+     "seconds": 91,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/mindelo",
+     "packageContentHash": "06309ca43294ab943405b36829b0613347af2e02a7e070fa503b530c59b76e67",
+     "assets": 30,
+     "seconds": 212,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "d89710cce39e72ed208cec8fda63535a8c3568982c4f8c403c256d8e9b868133",
+      "modelHash": "d8cdd17d454dd9e82874c9321174b7075460f7ee2d60047f6a8d7ed08647547d"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the pass found 5 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "the lowest storey covers 206.91 m² of the 267.63 m² the publisher prints",
+      "partial 3D preview, not a complete reconstruction: 2 bodies the plan draws walled are not in the model (region-built-0-1, region-built-1-10); everything built is kept",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds FOOTPRINT_AREA_SHORT BLOCKING, unresolved; the model is kept as it was built",
+      "partial 3D preview, not a complete reconstruction: the model refused createWall ring-attached-3-0-w1 (WALL_CONSUMED, WALLS_OVERLAP); 13 objects are not built, everything accepted before it is kept",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "the plan's scale rests on 2 printed dimensions read as printed and nothing independent confirms it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "17 exterior joint findings in the closure audit"
+     ],
+     "modelSha256": "d8cdd17d454dd9e82874c9321174b7075460f7ee2d60047f6a8d7ed08647547d"
+    }
+   ],
+   "models": 3,
+   "total": 6
+  },
+  "fin4": {
+   "label": "DEV",
+   "runsHeader": "tree f73c1cf start 2026-11-09T22:05:33Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/perfectly-balanced-4-bed-modern-farmhouse-plan-56478sm",
+     "packageContentHash": "36a281fe5972530a90e03a4f4aa4333fe8ef18789563b46d66100c8c42503154",
+     "assets": 43,
+     "seconds": 520,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_ENCLOSED_CELLS"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/sonia",
+     "packageContentHash": "410dab44211f2faf82199a139c0dc15e769509a6aa0d2c85d2ce433a7e1a8ae6",
+     "assets": 20,
+     "seconds": 125,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "74f7a668d130c55990615f71b802aa490165202fb0cd8641956bd9de1230f128",
+      "modelHash": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.33.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.66 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the left elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the right elevation stands up to 2.73 m away from the outline that drawing traces",
+      "more than one storey was read and no body reaches past the first",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "11 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-adam",
+     "packageContentHash": "f8b14964f9fd842ddc0edbb724d42ed844a8f61ae35e15d15ca7490c09f3c789",
+     "assets": 11,
+     "seconds": 50,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+     "packageContentHash": "032675087e15a5fdcad67b1af3b10c4576f09a53ad02c8ba254bc32ece1e671f",
+     "assets": 111,
+     "seconds": 99,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "2c66f139c2a360bdabc050de80335941bbc32374e8e90132f54348aa1c5bf030",
+      "modelHash": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.33.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "26 source addresses counted with another copy (different crop)",
+      "139 source addresses not used (budget exceeded)",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 5.47 m from the walls of the house's only storey and the stated pitch, checked against the published 6.40 m building height; its heights, and the chimney's, are for viewing only",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/3355-square-feet-3-bedroom-3-5-bathroom-3-garage-modern-contemporary-sp371040",
+     "packageContentHash": "22e6f58843ad91ec90111228b8dd743654dd6f42bef855ad75d71b9baf69174d",
+     "assets": 36,
+     "seconds": 86,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/mindelo",
+     "packageContentHash": "06309ca43294ab943405b36829b0613347af2e02a7e070fa503b530c59b76e67",
+     "assets": 30,
+     "seconds": 200,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "PLAN_LAYOUT_REJECTED",
+     "firstFailure": null
+    }
+   ],
+   "models": 2,
+   "total": 6
+  },
+  "w2": {
+   "label": "DEV",
+   "runsHeader": "tree cda0590 start 2026-11-10T04:05:36Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/perfectly-balanced-4-bed-modern-farmhouse-plan-56478sm",
+     "packageContentHash": "36a281fe5972530a90e03a4f4aa4333fe8ef18789563b46d66100c8c42503154",
+     "assets": 43,
+     "seconds": 975,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_ENCLOSED_CELLS"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/sonia",
+     "packageContentHash": "410dab44211f2faf82199a139c0dc15e769509a6aa0d2c85d2ce433a7e1a8ae6",
+     "assets": 20,
+     "seconds": 114,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "9e36a38cdbea02c096f122da08957891dedc218bd68368394431e7fcab400bf3",
+      "modelHash": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.66 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the left elevation stands up to 2.74 m away from the outline that drawing traces",
+      "the massing drawn against the right elevation stands up to 2.73 m away from the outline that drawing traces",
+      "more than one storey was read and no body reaches past the first",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "11 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "7541858293c40d77bca3312e19ef9d0997b5c6af2ccbdfddce67db5085af45fc"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-adam",
+     "packageContentHash": "f8b14964f9fd842ddc0edbb724d42ed844a8f61ae35e15d15ca7490c09f3c789",
+     "assets": 11,
+     "seconds": 50,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+     "packageContentHash": "032675087e15a5fdcad67b1af3b10c4576f09a53ad02c8ba254bc32ece1e671f",
+     "assets": 111,
+     "seconds": 90,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "c9d8229bc19a36d7fe55d570900c565c7219fa8b83a4622330ed36c0b5dd41ef",
+      "modelHash": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "26 source addresses counted with another copy (different crop)",
+      "139 source addresses not used (budget exceeded)",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 5.47 m from the walls of the house's only storey and the stated pitch, checked against the published 6.40 m building height; its heights, and the chimney's, are for viewing only",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "1995516385c8f110ab1e24a3541565608efb5dff7769e23a3c04496b2f5e3fc1"
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/3355-square-feet-3-bedroom-3-5-bathroom-3-garage-modern-contemporary-sp371040",
+     "packageContentHash": "22e6f58843ad91ec90111228b8dd743654dd6f42bef855ad75d71b9baf69174d",
+     "assets": 36,
+     "seconds": 89,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/mindelo",
+     "packageContentHash": "06309ca43294ab943405b36829b0613347af2e02a7e070fa503b530c59b76e67",
+     "assets": 30,
+     "seconds": 198,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "d89710cce39e72ed208cec8fda63535a8c3568982c4f8c403c256d8e9b868133",
+      "modelHash": "d8cdd17d454dd9e82874c9321174b7075460f7ee2d60047f6a8d7ed08647547d"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the pass found 5 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "the lowest storey covers 206.91 m² of the 267.63 m² the publisher prints",
+      "partial 3D preview, not a complete reconstruction: 2 bodies the plan draws walled are not in the model (region-built-0-1, region-built-1-10); everything built is kept",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds FOOTPRINT_AREA_SHORT BLOCKING, unresolved; the model is kept as it was built",
+      "partial 3D preview, not a complete reconstruction: the model refused createWall ring-attached-3-0-w1 (WALL_CONSUMED, WALLS_OVERLAP); 13 objects are not built, everything accepted before it is kept",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "the plan's scale rests on 2 printed dimensions read as printed and nothing independent confirms it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "17 exterior joint findings in the closure audit"
+     ],
+     "modelSha256": "d8cdd17d454dd9e82874c9321174b7075460f7ee2d60047f6a8d7ed08647547d"
+    }
+   ],
+   "models": 3,
+   "total": 6
+  },
+  "control": {
+   "label": "CONTROL (ANYLINK-CONTROL), first blind run",
+   "runsHeader": "tree f73c1cf start 2026-11-09T23:25:34Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+     "packageContentHash": "4f2f3b81a10a5cd2e43d8ba84c473a709c6149841d6d7a94db198fbd0b921d8e",
+     "assets": 67,
+     "seconds": 213,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "a963b30030a78f61b03f0bd23e8a99e9e8cd0f424868a2e0fcd72bb3b34a5dfc",
+      "modelHash": "ad09dc055e281ba3e3cf154658d835609c9d7764863fa81cf5387ff534be7de5"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.33.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "2 source addresses counted with another copy (byte identical)",
+      "45 source addresses not used (http status)",
+      "nothing states what kind of roof stands over mass-0",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "15 exterior joint findings in the closure audit",
+      "4 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "ad09dc055e281ba3e3cf154658d835609c9d7764863fa81cf5387ff534be7de5"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/dunkan",
+     "packageContentHash": "5faba1406b3817b8794f733edc8615cd15e274886fb081ba489434d72a4f462b",
+     "assets": 23,
+     "seconds": 82,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "e74d604ec94263e6e210e3a8754cf05e19578b3c9107e54e6f75372fbe8af9f7",
+      "modelHash": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.33.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.57 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 1.36 m away from the outline that drawing traces",
+      "the pass found 2 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "1 opening the drawings print was not built: shared-opening-0-west-3-4",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 4.68 m from the walls of the house's only storey and the stated pitch, checked against the published 5.50 m building height; its heights, and the chimney's, are for viewing only",
+      "4 exterior joint findings in the closure audit",
+      "2 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+     "packageContentHash": "758bd7c009cd217365d00259a14d9bcee21616061984080454d41b29ee6c844b",
+     "assets": 6,
+     "seconds": 34,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229",
+     "packageContentHash": "3bee225354a2288e8a3989ab93d0aede51900288a6b6091940846db45e68dd8b",
+     "assets": 102,
+     "seconds": 102,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+     "firstFailure": null
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+     "packageContentHash": "9a0c0af1382a7480710368b9f9a78ddd85ee2c1fa74b1884517276beb15248fa",
+     "assets": 25,
+     "seconds": 144,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "0580418ee6ad75bd5bebdd7b91121c81350b14d3b6c0691d81d9caff2e239881",
+      "modelHash": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.33.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "5 source addresses counted with another copy (different crop)",
+      "the massing drawn against the rear elevation stands up to 2.76 m away from the outline that drawing traces",
+      "the pass found 3 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "nothing states what kind of roof stands over mass-0",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "13 exterior joint findings in the closure audit"
+     ],
+     "modelSha256": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/lancaster-ii",
+     "packageContentHash": "18d5d16c20e8461f4608722aba521dc6e3ce83eb71022db0df033f36d79f38ea",
+     "assets": 36,
+     "seconds": 22,
+     "outcome": "NO_MODEL",
+     "code": "ANALYSIS_FAILED",
+     "reasonCode": "INTERNAL_ERROR",
+     "firstFailure": null
+    }
+   ],
+   "models": 3,
+   "total": 6
+  },
+  "control-al4": {
+   "label": "CONTROL, re-run (no longer blind for two pages)",
+   "runsHeader": "tree 101f9d7 start 2026-11-10T03:04:02Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+     "packageContentHash": "4f2f3b81a10a5cd2e43d8ba84c473a709c6149841d6d7a94db198fbd0b921d8e",
+     "assets": 67,
+     "seconds": 203,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "1af6ace7bdedb74ff1476c515e004e238f3706c59fbdc38605cc153262e45a39",
+      "modelHash": "b915eb4fbc8bd49e524e38c81bb356964980c85f13262bd53ed31031458b8400"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "2 source addresses counted with another copy (byte identical)",
+      "45 source addresses not used (http status)",
+      "nothing states what kind of roof stands over mass-0",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "15 exterior joint findings in the closure audit",
+      "2 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "b915eb4fbc8bd49e524e38c81bb356964980c85f13262bd53ed31031458b8400"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/dunkan",
+     "packageContentHash": "5faba1406b3817b8794f733edc8615cd15e274886fb081ba489434d72a4f462b",
+     "assets": 23,
+     "seconds": 86,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "ad08cc20bebf51e4e6e9b7fdc2f8046be0357a1cc77d0f3f386a3e0b51e41bae",
+      "modelHash": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.57 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 1.36 m away from the outline that drawing traces",
+      "the pass found 2 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "1 opening the drawings print was not built: shared-opening-0-west-3-4",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 4.68 m from the walls of the house's only storey and the stated pitch, checked against the published 5.50 m building height; its heights, and the chimney's, are for viewing only",
+      "4 exterior joint findings in the closure audit",
+      "2 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+     "packageContentHash": "758bd7c009cd217365d00259a14d9bcee21616061984080454d41b29ee6c844b",
+     "assets": 6,
+     "seconds": 33,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229",
+     "packageContentHash": "3bee225354a2288e8a3989ab93d0aede51900288a6b6091940846db45e68dd8b",
+     "assets": 102,
+     "seconds": 81,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+     "firstFailure": null
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+     "packageContentHash": "9a0c0af1382a7480710368b9f9a78ddd85ee2c1fa74b1884517276beb15248fa",
+     "assets": 25,
+     "seconds": 155,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "b48f369d829f7da3b2ec1731080704f5f97da75b4b9a0202c3fd4fc808ee4686",
+      "modelHash": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "5 source addresses counted with another copy (different crop)",
+      "the massing drawn against the rear elevation stands up to 2.76 m away from the outline that drawing traces",
+      "the pass found 3 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "nothing states what kind of roof stands over mass-0",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "13 exterior joint findings in the closure audit"
+     ],
+     "modelSha256": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/lancaster-ii",
+     "packageContentHash": "18d5d16c20e8461f4608722aba521dc6e3ce83eb71022db0df033f36d79f38ea",
+     "assets": 36,
+     "seconds": 143,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "38fdbab6094ca78449e9e8f4d42a465fcb822db8a9191098650cb6a02e594085",
+      "modelHash": "dc56a1b89c0f0092f098d9720e4808562f1d7cb5f48ebb3b3f0f79b83e8019f6"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the lowest storey covers 151.21 m² against the 140.47 m² the publisher prints",
+      "nothing states what kind of roof stands over mass-0",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "2 exterior joint findings in the closure audit",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "dc56a1b89c0f0092f098d9720e4808562f1d7cb5f48ebb3b3f0f79b83e8019f6"
+    }
+   ],
+   "models": 4,
+   "total": 6
+  },
+  "control-w2": {
+   "label": "CONTROL, re-run",
+   "runsHeader": "tree cda0590 start 2026-11-10T04:24:13Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com",
+     "url": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+     "packageContentHash": "4f2f3b81a10a5cd2e43d8ba84c473a709c6149841d6d7a94db198fbd0b921d8e",
+     "assets": 67,
+     "seconds": 211,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "1af6ace7bdedb74ff1476c515e004e238f3706c59fbdc38605cc153262e45a39",
+      "modelHash": "b915eb4fbc8bd49e524e38c81bb356964980c85f13262bd53ed31031458b8400"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "2 source addresses counted with another copy (byte identical)",
+      "45 source addresses not used (http status)",
+      "nothing states what kind of roof stands over mass-0",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "15 exterior joint findings in the closure audit",
+      "2 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "b915eb4fbc8bd49e524e38c81bb356964980c85f13262bd53ed31031458b8400"
+    },
+    {
+     "slug": "dobredomy-pl",
+     "url": "https://www.dobredomy.pl/projekt/dunkan",
+     "packageContentHash": "5faba1406b3817b8794f733edc8615cd15e274886fb081ba489434d72a4f462b",
+     "assets": 23,
+     "seconds": 92,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "ad08cc20bebf51e4e6e9b7fdc2f8046be0357a1cc77d0f3f386a3e0b51e41bae",
+      "modelHash": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.57 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 1.36 m away from the outline that drawing traces",
+      "the pass found 2 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "1 opening the drawings print was not built: shared-opening-0-west-3-4",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 4.68 m from the walls of the house's only storey and the stated pitch, checked against the published 5.50 m building height; its heights, and the chimney's, are for viewing only",
+      "4 exterior joint findings in the closure audit",
+      "2 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89"
+    },
+    {
+     "slug": "domoweklimaty-pl",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+     "packageContentHash": "758bd7c009cd217365d00259a14d9bcee21616061984080454d41b29ee6c844b",
+     "assets": 6,
+     "seconds": 36,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl",
+     "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229",
+     "packageContentHash": "3bee225354a2288e8a3989ab93d0aede51900288a6b6091940846db45e68dd8b",
+     "assets": 102,
+     "seconds": 149,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "9a29c3680a9c6944366a57edd7cf616605d2d256213ad32fac62c94766162b99",
+      "modelHash": "eab39ab4a15166d390b2099c6f036b1a1be0b66604e5624903f908a5fbd930e2"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "24 source addresses counted with another copy (different crop)",
+      "153 source addresses not used (budget exceeded)",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "no section prints the ridge: the roof is drawn at an approximate 5.81 m from the walls of the house's only storey and the stated pitch, checked against the published 6.73 m building height; its heights, and the chimney's, are for viewing only",
+      "11 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "eab39ab4a15166d390b2099c6f036b1a1be0b66604e5624903f908a5fbd930e2"
+    },
+    {
+     "slug": "houseplans-com",
+     "url": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+     "packageContentHash": "9a0c0af1382a7480710368b9f9a78ddd85ee2c1fa74b1884517276beb15248fa",
+     "assets": 25,
+     "seconds": 159,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "b48f369d829f7da3b2ec1731080704f5f97da75b4b9a0202c3fd4fc808ee4686",
+      "modelHash": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "5 source addresses counted with another copy (different crop)",
+      "the massing drawn against the rear elevation stands up to 2.76 m away from the outline that drawing traces",
+      "the pass found 3 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "nothing states what kind of roof stands over mass-0",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "13 exterior joint findings in the closure audit"
+     ],
+     "modelSha256": "f77c31b8e1923a137af71e80850f2388c51e644a55b7844a1538607828fe101d"
+    },
+    {
+     "slug": "lipinscy-pl",
+     "url": "https://lipinscy.pl/projekt/lancaster-ii",
+     "packageContentHash": "18d5d16c20e8461f4608722aba521dc6e3ce83eb71022db0df033f36d79f38ea",
+     "assets": 36,
+     "seconds": 157,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "38fdbab6094ca78449e9e8f4d42a465fcb822db8a9191098650cb6a02e594085",
+      "modelHash": "dc56a1b89c0f0092f098d9720e4808562f1d7cb5f48ebb3b3f0f79b83e8019f6"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the lowest storey covers 151.21 m² against the 140.47 m² the publisher prints",
+      "nothing states what kind of roof stands over mass-0",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "2 exterior joint findings in the closure audit",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "dc56a1b89c0f0092f098d9720e4808562f1d7cb5f48ebb3b3f0f79b83e8019f6"
+    }
+   ],
+   "models": 5,
+   "total": 6
+  },
+  "control2-al4": {
+   "label": "CONTROL-2 (12 pages), blind",
+   "runsHeader": "tree 101f9d7 start 2026-11-10T04:53:44Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com-1",
+     "url": "https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+     "packageContentHash": "e224d1f36891a86be89623db82aa7e3978d4872b799551ea98d431ad5582f157",
+     "assets": 13,
+     "seconds": 81,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "architecturaldesigns-com-2",
+     "url": "https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+     "packageContentHash": "5d6dc5df071fa7121686d4723068c3d239fa4651e9d7fdace0a28c8c08279689",
+     "assets": 30,
+     "seconds": 151,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "dobredomy-pl-1",
+     "url": "https://www.dobredomy.pl/projekt/tulio",
+     "packageContentHash": "d8b8c268d690a5cfd5744d491635bbff2b133cee468623bd361fd6e7d9c6d0fb",
+     "assets": 23,
+     "seconds": 150,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "dobredomy-pl-2",
+     "url": "https://www.dobredomy.pl/projekt/piwonia",
+     "packageContentHash": "c635fc62a6cdfd55a9bac484e1bb09c098bc5a1d548a75a136d0f7457fd64272",
+     "assets": 18,
+     "seconds": 155,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "a25638929b4c74d3024d5ceaa08ee4d5aa90424fae76af873c2f5f1dd27e4adb",
+      "modelHash": "8e428bee93673741056086d1f9d4d403120257ea517529e21d784fc406ea42ef"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.66 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 2.57 m away from the outline that drawing traces",
+      "the attic storey plan fits region-built-0-0 and region-built-0-0 almost equally well, standing on mass-0 against mass-0",
+      "the attic storey's walled region region-built-2-0 overhangs the bodies below by 35.6 m²",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it"
+     ],
+     "modelSha256": "8e428bee93673741056086d1f9d4d403120257ea517529e21d784fc406ea42ef"
+    },
+    {
+     "slug": "domoweklimaty-pl-1",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+     "packageContentHash": "dd796fe87eea2ce49655f4f13b2ffcb1f21af8e0705756ef964fa4837d7207e7",
+     "assets": 13,
+     "seconds": 43,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "domoweklimaty-pl-2",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-11",
+     "packageContentHash": "89090a005be51534f7ef2edb1ea9ec55d118b9f791e5127f0a67f580de41b04e",
+     "assets": 7,
+     "seconds": 58,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl-1",
+     "url": "https://www.extradom.pl/projekt-domu-amber-5-WAH2179",
+     "packageContentHash": "9f2725840cba87a1c83fc949851f3f56f0fc04ba2d570004a23c0f57d710e333",
+     "assets": 111,
+     "seconds": 93,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_LAYOUT_REJECTED"
+    },
+    {
+     "slug": "extradom-pl-2",
+     "url": "https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+     "packageContentHash": "8893125deb0dbd5cb844b782cec012503f2fb03ed3cd15324973efaded5c997c",
+     "assets": 74,
+     "seconds": 92,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "houseplans-com-1",
+     "url": "https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+     "packageContentHash": "ba342707ecf3547554676d26a4293328bbcc0bd6c55cf2680b7984b61f16de99",
+     "assets": 43,
+     "seconds": 445,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "houseplans-com-2",
+     "url": "https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+     "packageContentHash": "a3cfa2a581df71630aeadd01ff5d57ca712a76c3fa5a11f95d674150c80b5bff",
+     "assets": 28,
+     "seconds": 70,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl-1",
+     "url": "https://lipinscy.pl/projekt/norwich-ii",
+     "packageContentHash": "6b7abb701036edecebc1075d24066dd3493b5f38e53b15b0c2c8a6691a6871e0",
+     "assets": 33,
+     "seconds": 319,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "df369c2076e83ee9db5318bc14cdf46c470bf3e9480b68c969419c649e85a1cc",
+      "modelHash": "1f4347bf6c029f01f6cfcc57dc034b1659623f81caac5de5a895ebd0e90ae372"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the upper storey's walled region region-built-0-1 overhangs the bodies below by 4.0 m²",
+      "no section prints the storey levels: every storey is drawn 12.66 m tall, for viewing only",
+      "the plan's scale rests on 2 printed dimensions read as printed and nothing independent confirms it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "8 exterior joint findings in the closure audit",
+      "8 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "1f4347bf6c029f01f6cfcc57dc034b1659623f81caac5de5a895ebd0e90ae372"
+    },
+    {
+     "slug": "lipinscy-pl-2",
+     "url": "https://lipinscy.pl/projekt/praia-ii",
+     "packageContentHash": "8829431e417cb19792d3efbd11d96389ce9c4869242e5da7478924ed5c20ed4b",
+     "assets": 27,
+     "seconds": 123,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "e4c56cbf86958381728d051053ec5b736da31525786b4bbf9eb8d583b3a73aa6",
+      "modelHash": "bc269b8200e9aeabeb86617055f8c0f96adeb36126373ec2de18ee0279f48d72"
+     },
+     "analyzer": {
+      "service": "1.9.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "1 opening the drawings print was not built: opening-0-east-1-4",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "the plan's scale rests on 1 printed dimension read as printed and nothing independent confirms it",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "bc269b8200e9aeabeb86617055f8c0f96adeb36126373ec2de18ee0279f48d72"
+    }
+   ],
+   "models": 3,
+   "total": 12
+  },
+  "control2-al5": {
+   "label": "CONTROL-2 (12 pages), blind",
+   "runsHeader": "tree 0fe410a start 2026-11-10T04:38:40Z",
+   "items": [
+    {
+     "slug": "architecturaldesigns-com-1",
+     "url": "https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+     "packageContentHash": "e224d1f36891a86be89623db82aa7e3978d4872b799551ea98d431ad5582f157",
+     "assets": 13,
+     "seconds": 87,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "architecturaldesigns-com-2",
+     "url": "https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+     "packageContentHash": "5d6dc5df071fa7121686d4723068c3d239fa4651e9d7fdace0a28c8c08279689",
+     "assets": 30,
+     "seconds": 166,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "dobredomy-pl-1",
+     "url": "https://www.dobredomy.pl/projekt/tulio",
+     "packageContentHash": "d8b8c268d690a5cfd5744d491635bbff2b133cee468623bd361fd6e7d9c6d0fb",
+     "assets": 23,
+     "seconds": 324,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "dobredomy-pl-2",
+     "url": "https://www.dobredomy.pl/projekt/piwonia",
+     "packageContentHash": "c635fc62a6cdfd55a9bac484e1bb09c098bc5a1d548a75a136d0f7457fd64272",
+     "assets": 18,
+     "seconds": 165,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "a25638929b4c74d3024d5ceaa08ee4d5aa90424fae76af873c2f5f1dd27e4adb",
+      "modelHash": "8e428bee93673741056086d1f9d4d403120257ea517529e21d784fc406ea42ef"
+     },
+     "analyzer": {
+      "service": "1.10.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "the massing drawn against the front elevation stands up to 2.66 m away from the outline that drawing traces",
+      "the massing drawn against the rear elevation stands up to 2.57 m away from the outline that drawing traces",
+      "the attic storey plan fits region-built-0-0 and region-built-0-0 almost equally well, standing on mass-0 against mass-0",
+      "the attic storey's walled region region-built-2-0 overhangs the bodies below by 35.6 m²",
+      "partial 3D preview, not a complete reconstruction: the layout the model is built from holds STRUCTURE_SILHOUETTE_DISAGREES, STRUCTURE_SILHOUETTE_DISAGREES BLOCKING, unresolved; the model is kept as it was built",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it"
+     ],
+     "modelSha256": "8e428bee93673741056086d1f9d4d403120257ea517529e21d784fc406ea42ef"
+    },
+    {
+     "slug": "domoweklimaty-pl-1",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+     "packageContentHash": "dd796fe87eea2ce49655f4f13b2ffcb1f21af8e0705756ef964fa4837d7207e7",
+     "assets": 13,
+     "seconds": 50,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "domoweklimaty-pl-2",
+     "url": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-11",
+     "packageContentHash": "89090a005be51534f7ef2edb1ea9ec55d118b9f791e5127f0a67f580de41b04e",
+     "assets": 7,
+     "seconds": 117,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "extradom-pl-1",
+     "url": "https://www.extradom.pl/projekt-domu-amber-5-WAH2179",
+     "packageContentHash": "9f2725840cba87a1c83fc949851f3f56f0fc04ba2d570004a23c0f57d710e333",
+     "assets": 111,
+     "seconds": 120,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_LAYOUT_REJECTED"
+    },
+    {
+     "slug": "extradom-pl-2",
+     "url": "https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+     "packageContentHash": "8893125deb0dbd5cb844b782cec012503f2fb03ed3cd15324973efaded5c997c",
+     "assets": 74,
+     "seconds": 120,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "houseplans-com-1",
+     "url": "https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+     "packageContentHash": "ba342707ecf3547554676d26a4293328bbcc0bd6c55cf2680b7984b61f16de99",
+     "assets": 43,
+     "seconds": 476,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "houseplans-com-2",
+     "url": "https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+     "packageContentHash": "a3cfa2a581df71630aeadd01ff5d57ca712a76c3fa5a11f95d674150c80b5bff",
+     "assets": 28,
+     "seconds": 81,
+     "outcome": "NO_MODEL",
+     "code": "RECONSTRUCTION_FAILED",
+     "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+     "firstFailure": "PLAN_NO_DIMENSION_FRAME"
+    },
+    {
+     "slug": "lipinscy-pl-1",
+     "url": "https://lipinscy.pl/projekt/norwich-ii",
+     "packageContentHash": "6b7abb701036edecebc1075d24066dd3493b5f38e53b15b0c2c8a6691a6871e0",
+     "assets": 33,
+     "seconds": 339,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "df369c2076e83ee9db5318bc14cdf46c470bf3e9480b68c969419c649e85a1cc",
+      "modelHash": "1f4347bf6c029f01f6cfcc57dc034b1659623f81caac5de5a895ebd0e90ae372"
+     },
+     "analyzer": {
+      "service": "1.10.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "the upper storey's walled region region-built-0-1 overhangs the bodies below by 4.0 m²",
+      "no section prints the storey levels: every storey is drawn 12.66 m tall, for viewing only",
+      "the plan's scale rests on 2 printed dimensions read as printed and nothing independent confirms it",
+      "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "8 exterior joint findings in the closure audit",
+      "8 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "1f4347bf6c029f01f6cfcc57dc034b1659623f81caac5de5a895ebd0e90ae372"
+    },
+    {
+     "slug": "lipinscy-pl-2",
+     "url": "https://lipinscy.pl/projekt/praia-ii",
+     "packageContentHash": "8829431e417cb19792d3efbd11d96389ce9c4869242e5da7478924ed5c20ed4b",
+     "assets": 27,
+     "seconds": 140,
+     "outcome": "MODEL",
+     "hashes": {
+      "candidateHash": "e4c56cbf86958381728d051053ec5b736da31525786b4bbf9eb8d583b3a73aa6",
+      "modelHash": "bc269b8200e9aeabeb86617055f8c0f96adeb36126373ec2de18ee0279f48d72"
+     },
+     "analyzer": {
+      "service": "1.10.0",
+      "solver": "2.34.0"
+     },
+     "warnings": [
+      "no vision provider ran; every observation is from the deterministic analyzer",
+      "1 source address counted with another copy (byte identical)",
+      "1 opening the drawings print was not built: opening-0-east-1-4",
+      "no section prints the storey levels: every storey is drawn 2.80 m tall, for viewing only",
+      "the plan's scale rests on 1 printed dimension read as printed and nothing independent confirms it",
+      "1 feature-graph and 0 ledger invariant violations"
+     ],
+     "modelSha256": "bc269b8200e9aeabeb86617055f8c0f96adeb36126373ec2de18ee0279f48d72"
+    }
+   ],
+   "models": 3,
+   "total": 12
+  }
+ }
+}
