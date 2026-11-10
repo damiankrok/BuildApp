@@ -1,0 +1,47 @@
+{
+ "slug": "architecturaldesigns-com-1",
+ "imagesUsed": [
+  {"n": 0, "what": "exterior render, front (same picture again as 006)"},
+  {"n": 1, "what": "front elevation drawing (duplicate: 010)"},
+  {"n": 2, "what": "left elevation drawing (duplicate: 008)"},
+  {"n": 3, "what": "rear elevation drawing (duplicate: 011)"},
+  {"n": 4, "what": "right elevation drawing (duplicate: 012)"},
+  {"n": 7, "what": "dimensioned ground floor plan (duplicate: 009)"}
+ ],
+ "mirrorOrOtherProjectWarning": null,
+ "overall": {"widthM": 17.53, "depthM": 12.19, "heightM": null, "basis": "width 57'-6\" printed on plan and published on page; depth 40'-0\" published on page (= 28' body + two 6' porches, printed on plan); height not given"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "left ~62% of the front facade", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "10.8 x 8.5 (35'-6\" x 28'-0\")"},
+  {"name": "garage", "role": "GARAGE", "where": "attached to the right of the main body; front wall flush with the main front wall, rear wall about 1.5 m short of the main rear wall", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "6.7 x 7.0 (interior 21'-6\" x 22'-0\")"},
+  {"name": "front porch", "role": "PORCH", "where": "across the front of the main body only (not the garage), projecting 1.8 m", "storeys": 1, "enclosed": false, "roofKind": "SHED", "ridge": "NA", "approxSizeM": "9.4 x 1.8 (31'-0\" x 6'-0\")"},
+  {"name": "rear porch", "role": "PORCH", "where": "across the full rear of the main body, projecting 1.8 m", "storeys": 1, "enclosed": false, "roofKind": "SHED", "ridge": "NA", "approxSizeM": "10.8 x 1.8 (35'-6\" x 6'-0\")"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "pitchDeg": 37, "notes": "Two parallel gable roofs with ridges along the front: the main body higher, the garage lower (step down at the junction, gable ends on left and right). Low-slope shed porch roofs tucked under the main eaves at front and rear. No dormers, no cross gables. Pitch is not printed; ~37 deg (about 9:12) measured off the left elevation."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "LEFT", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "GARAGE_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 5, "leftToRight": ["WINDOW", "DOOR", "WINDOW", "WINDOW", "WINDOW"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["DOOR"]}]}
+ },
+ "largeGlazing": [],
+ "features": [
+  {"kind": "PORCH_ROOF", "count": 2, "where": "front porch (main body only) and rear porch (full width of main body), low-slope shed roofs"},
+  {"kind": "POSTS", "count": 8, "where": "4 timber posts on the front porch, 4 on the rear porch"},
+  {"kind": "RAILING", "count": 1, "where": "horizontal-bar railing between the front porch posts (render only; not drawn on the elevation)"},
+  {"kind": "CHIMNEY", "count": 0, "where": "none drawn (interior fireplace on the left wall has no visible chimney)"}
+ ],
+ "palette": {"walls": "black / charcoal horizontal lap siding with natural cedar-coloured porch posts and a wood-tone garage door; black window frames", "roof": "black standing-seam metal"},
+ "uncertain": [
+  "Entrance door centre is at ~0.31 of the full front width, i.e. just inside the LEFT third, close to the LEFT/CENTRE boundary (it is central within the main body).",
+  "The two front windows are triple units with transoms, about 2.1-2.3 m wide on the plan: counted as WINDOW (below the ~2.5 m threshold), but close to it.",
+  "REAR, seen from outside left to right: garage window (double slider), utility door, bedroom 1 window, small high bathroom window, bedroom 2 window. The garage rear window is drawn on the rear elevation but NOT on the floor plan.",
+  "LEFT facade: two tall narrow windows (flanking the fireplace), at CENTRE and RIGHT thirds (towards the front).",
+  "RIGHT facade: a single glazed side door into the garage near the rear end (RIGHT third as seen from outside); no windows. The taller main-house gable shows behind the garage gable.",
+  "Building height is not printed; scaled off the left elevation the ridge is roughly 6.7 m above ground (estimate only).",
+  "Garage door is one double-width door (16' x 8' roll-up), counted as 1."
+ ],
+ "confidence": "HIGH - four labelled orthographic elevations and a dimensioned plan agree with each other and with the render; only the garage rear window differs between plan and elevation."
+}

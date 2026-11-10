@@ -1,0 +1,63 @@
+{
+ "slug": "houseplans-com-1",
+ "imagesUsed": [
+  {"n": 31, "what": "main (1st) floor plan, basement version (stair down); same plan also 028/029/030/032/033, 028-030 labelled 'crawl/slab version'"},
+  {"n": 25, "what": "walkout basement floor plan (also 026, 027)"},
+  {"n": 34, "what": "main floor plan of the OPTIONAL 2-car garage variant (also 035, 036) - used only to describe the variant"},
+  {"n": 22, "what": "exterior render, rear, straight on (same view 020, 021)"},
+  {"n": 12, "what": "exterior render, aerial from front-left (same view 013, 014)"},
+  {"n": 9, "what": "exterior render, front seen from the front-left"},
+  {"n": 4, "what": "exterior render, close-up of the entrance porch"},
+  {"n": 11, "what": "exterior render from the front-right corner: front wall on the left, right side wall on the right"},
+  {"n": 15, "what": "exterior render, rear seen from the house-right side (right side wall visible)"},
+  {"n": 16, "what": "exterior render (restyled, dark posts), rear seen from the house-left side (left side wall visible); same view 017-019, 024, 039"}
+ ],
+ "mirrorOrOtherProjectWarning": "There are NO elevation drawings on this page - only renders and floor plans. Images 000-003, 005-008, 010, 037 and 038 are OTHER projects; 040-042 are generic construction-detail sheets. The page mixes three variants of this plan: walkout-basement version (plans 025-027, rear renders 015-024/039), crawl/slab version (plans 028-030, front renders 009/011-014 on flat ground) and an optional attached 2-car garage on the right (plans 034-036; never rendered). Renders 016-019, 023, 024, 039 are a restyled set (black steel posts instead of timber) of the same house. No mirrored picture seen.",
+ "overall": {"widthM": 12.19, "depthM": 13.11, "heightM": 6.48, "basis": "width 40', depth 43' and height 21'3\" published on page; the plan prints 40'-0\" for the covered deck width. Depth includes the 10' covered rear deck (enclosed body is about 33' = 10.1 m deep)."},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": true},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "whole footprint; single rectangular block under one mono-pitch roof (the rear wall steps: the master-bedroom part is ~1 m shallower than the great-room part)", "storeys": 1, "enclosed": true, "roofKind": "SHED", "ridge": "NA", "approxSizeM": "12.2 x 10.1 (40' x ~33', including the recessed porch corner)"},
+  {"name": "entrance porch", "role": "PORCH", "where": "recessed into the front-left corner of the block, under the main roof, one timber post at the outer corner", "storeys": 1, "enclosed": false, "roofKind": "NONE", "ridge": "NA", "approxSizeM": "4.3 x 2.1 (14'-0\" x 7'-0\")"},
+  {"name": "covered rear deck", "role": "PORCH", "where": "across the full rear, under the high end of the same roof; in the basement version it is a raised deck with a patio below", "storeys": 1, "enclosed": false, "roofKind": "NONE", "ridge": "NA", "approxSizeM": "12.2 x 3.05 (40'-0\" x 10'-0\")"}
+ ],
+ "mainRoof": {"kind": "SHED", "ridge": "NA", "pitchDeg": null, "notes": "One single low-slope mono-pitch plane over everything (house, porch recess and rear deck): LOW eave along the FRONT, HIGH edge at the REAR above the covered deck. Deep overhangs. No gables, dormers or steps. Pitch is not given."},
+ "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+ "entrance": {"facade": "FRONT", "position": "LEFT", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]}
+  ]},
+  "REAR": {"shown": true, "byStorey": [
+   {"storey": -1, "count": 3, "leftToRight": ["WINDOW", "GLAZED_DOOR", "WINDOW"]},
+   {"storey": 0, "count": 6, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR", "WINDOW", "WINDOW", "WINDOW"]}
+  ]},
+  "LEFT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}
+  ]},
+  "RIGHT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}
+  ]}
+ },
+ "largeGlazing": [],
+ "features": [
+  {"kind": "POSTS", "count": 5, "where": "4 full-height timber posts along the outer edge of the rear deck (two storeys tall in the basement version); 1 timber post at the front-left porch corner"},
+  {"kind": "RAILING", "count": 1, "where": "metal / glass-panel railing around the raised rear deck"},
+  {"kind": "TERRACE", "count": 2, "where": "covered rear deck at main-floor level and (basement version) a patio of the same size below it"},
+  {"kind": "CHIMNEY", "count": 1, "where": "stone-clad fireplace column on the rear wall, between the left and centre rear openings as seen from the garden, running from the ground up to the deck ceiling; it does NOT rise above the roof"},
+  {"kind": "PORCH_ROOF", "count": 0, "where": "no separate porch roof - porch and deck are under the main roof"},
+  {"kind": "ROOFLIGHT", "count": 0, "where": "none"}
+ ],
+ "palette": {"walls": "dark brown-grey / charcoal vertical board-and-batten siding; natural cedar horizontal siding inside the porch recess and on the rear deck wall; grey stone fireplace column; black window frames; timber posts", "roof": "black standing-seam metal with dark fascia, timber soffit over the deck"},
+ "uncertain": [
+  "No orthographic elevations exist on the page; all facade counts come from renders cross-checked against the floor plans.",
+  "FRAME: FRONT = the low-eave side with the recessed entrance porch (bottom edge of the plans). The entrance door itself is set in the side wall of the porch recess and physically faces LEFT (plan: door in the foyer's left wall); it is reached from the front and is counted on FRONT. It sits at ~0.35 of the facade width, on the LEFT/CENTRE boundary; the porch recess occupies the LEFT 35%.",
+  "FRONT storey 0, left to right: small window on the porch back wall (master bath), entrance door (in the porch side wall), tall narrow foyer window, double window of bedroom 2.",
+  "STOREY NUMBERING: storey 0 = main (entry) floor; storey -1 = walkout basement, exposed only at the rear (side walls are buried by the slope, no basement openings on FRONT, LEFT or RIGHT). In the crawl/slab version storey -1 does not exist.",
+  "REAR storey 0 list is the lower row left to right (three ~1.8 m two-pane sliding glass units reaching deck level) followed by the upper row left to right (three separate two-pane clerestory windows directly above them, under the high roof edge). The plan draws all three lower units identically; the left and right ones could be windows rather than doors.",
+  "REAR storey -1, left to right as seen from the garden: window (bedroom 3), sliding glass door, window.",
+  "LEFT facade: one small horizontal window (master-bath shower) near the centre. RIGHT facade: one small square window (kitchen sink) in the RIGHT third as seen from outside (towards the rear).",
+  "Garage: the published plan is '0 garage'; an optional attached 2-car garage (about 7.2 x 7.0 m, one double overhead door facing FRONT, attached to the right side, front wall set back from the house front) appears only on plans 034-036.",
+  "Roof pitch is not given and cannot be measured reliably from perspective renders."
+ ],
+ "confidence": "MEDIUM - plans are clear and the renders agree with them, but there are no elevation drawings, several renders are restyled, and the page mixes basement / slab / garage variants."
+}

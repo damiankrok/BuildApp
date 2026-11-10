@@ -1,0 +1,69 @@
+{
+ "slug": "domoweklimaty-pl-1",
+ "imagesUsed": [
+  {"n": 10, "what": "sheet with four small unlabelled elevation drawings: top-left = FRONT, top-right = RIGHT (garage gable end), bottom-left = REAR, bottom-right = LEFT (terrace gable end)"},
+  {"n": 0, "what": "ground floor plan (drawn with the entrance / front facade on the LEFT edge of the drawing, garage at the bottom)"},
+  {"n": 1, "what": "attic floor plan (same orientation as 000)"},
+  {"n": 12, "what": "roof / site plan (same orientation, entrance arrow on the left)"},
+  {"n": 2, "what": "exterior render, front seen from the front-right (011 is the same view, smaller)"},
+  {"n": 7, "what": "exterior render, left gable end with covered terrace, front facade receding to the right"}
+ ],
+ "mirrorOrOtherProjectWarning": "No mirrored or foreign-project pictures. NOTE the plans are rotated: the front (entrance + garage door) facade is the LEFT edge of the plan drawings, so the house LEFT side is the top of the plan and the house RIGHT side (garage end) is the bottom of the plan.",
+ "overall": {"widthM": 17.55, "depthM": null, "heightM": null, "basis": "width 17,55 m published on page (it is the long dimension along the front facade: main body + garage); depth and height not given"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "left ~2/3 of the front facade", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "about 11.6 (along front) x 9.4 deep, scaled from plan"},
+  {"name": "garage", "role": "GARAGE", "where": "attached to the right end of the main body, in line with it (rear walls flush); its front wall is set back about 3 m behind the main front wall; low storage attic above", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "about 5.9 (along front) x 6.5 deep, scaled from plan"},
+  {"name": "entrance porch", "role": "PORCH", "where": "on the front, at the junction of main body and garage (centre-right of the facade): the vestibule wall is recessed ~2.5 m and the main roof slope continues down over the porch; one square column at the outer corner", "storeys": 1, "enclosed": false, "roofKind": "SHED", "ridge": "NA", "approxSizeM": null},
+  {"name": "covered terrace", "role": "PORCH", "where": "against the whole LEFT gable end, about 2.8 m deep, lean-to tiled roof on corner posts", "storeys": 1, "enclosed": false, "roofKind": "SHED", "ridge": "NA", "approxSizeM": "about 8.6 x 2.8, scaled from plan"},
+  {"name": "kitchen corner bay", "role": "BAY", "where": "front wall, just left of the entrance porch; projects ~0.5 m, glazed to the front and to the right (towards the porch)", "storeys": 1, "enclosed": true, "roofKind": "NONE", "ridge": "NA", "approxSizeM": null}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "pitchDeg": 42, "notes": "Main gable roof with ridge along the front, gable ends on left and right. Garage roof is a lower, narrower gable with ridge in the same direction, ending in its own gable on the right. One front cross gable / gabled wall dormer (flush with the front wall) left of centre, with valleys into the front slope. Front slope extends lower over the entrance porch. Lean-to roof over the terrace across the left gable end. Decorative white king-post trusses in the gable peaks."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]},
+   {"storey": 1, "count": 1, "leftToRight": ["GLAZED_DOOR"]}
+  ]},
+  "REAR": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+   {"storey": 1, "count": 0, "leftToRight": []}
+  ]},
+  "LEFT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 2, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING"]},
+   {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}
+  ]},
+  "RIGHT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+   {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}
+  ]}
+ },
+ "largeGlazing": [
+  {"facade": "LEFT", "position": "CENTRE", "what": "two-pane sliding terrace doors of the living room, about 3.2-3.7 m wide, under the terrace roof; spans roughly 0.43-0.75 of the gable wall (centre, reaching into the right third as seen from outside)"}
+ ],
+ "features": [
+  {"kind": "DORMER", "count": 1, "where": "front, left of centre: gabled wall dormer / cross gable rising flush from the front wall, with a two-leaf balcony door and a decorative truss in its peak"},
+  {"kind": "BALCONY", "count": 1, "where": "front, in front of the cross-gable door, glass balustrade"},
+  {"kind": "CHIMNEY", "count": 2, "where": "two tall white chimneys on the rear roof plane of the main roof"},
+  {"kind": "PORCH_ROOF", "count": 2, "where": "lean-to roof over the terrace on the left gable end; extended front roof slope over the entrance porch"},
+  {"kind": "POSTS", "count": 3, "where": "one square grey column at the entrance porch corner; two corner posts carrying the terrace roof on the left (render also shows one slim intermediate post)"},
+  {"kind": "TERRACE", "count": 1, "where": "covered timber terrace along the left gable end"},
+  {"kind": "BAY", "count": 1, "where": "kitchen corner bay window on the front, next to the entrance porch"},
+  {"kind": "OTHER", "count": 3, "where": "decorative white timber trusses in the peaks of the front cross gable, the left gable and the right main gable"},
+  {"kind": "ROOFLIGHT", "count": 0, "where": "none shown"}
+ ],
+ "palette": {"walls": "white render; warm brown horizontal timber cladding around the entrance and kitchen bay; graphite-grey column and plinth; dark anthracite garage door and window frames in the renders (the elevation drawing shows brown frames)", "roof": "anthracite flat roof tiles, white barge boards and white decorative trusses"},
+ "uncertain": [
+  "Depth is not published. Scaling the ground plan with the published 17,55 m front length gives about 9.4 m front-to-back for the main body (plus ~0.5 m kitchen bay / ~1.6 m porch projection at the front and ~2.8 m terrace roof on the left end). Estimate only.",
+  "Building height is not given anywhere.",
+  "FRONT storey 1: the balcony door sits in a gabled wall dormer that is flush with the front wall; it is counted here as a storey-1 facade opening AND the gable is listed as a DORMER feature. Under a strict 'dormer windows are features' reading the FRONT storey-1 count would be 0.",
+  "FRONT storey 0, left to right: tall two-leaf living/dining window (~1.9 m, floor-to-ceiling, directly below the cross gable), kitchen bay window, entrance door (recessed under the porch roof), one double-width (~5 m) garage door.",
+  "LEFT storey 0 (under the terrace roof), seen from outside left to right: two-leaf floor-to-ceiling glazed door of the study (~1.7 m), then the living-room sliding glazing. LEFT storey 1: two two-sash gable windows.",
+  "RIGHT storey 0, left (front) to right (rear): side pane of the kitchen corner bay (set back inside the entrance porch, on the main body's wall, facing right) and a horizontal two-pane strip window in the garage gable wall. RIGHT storey 1: one narrow tall window in the main-body gable (bathroom) and a triangular multi-pane window in the garage gable (storage attic).",
+  "REAR: only two small glass-block windows (ground-floor WC and boiler room), at CENTRE and RIGHT thirds as seen from outside.",
+  "Entrance door centre is at ~0.58 of the enclosed front wall length (CENTRE); the garage door occupies the RIGHT third.",
+  "The elevation sheet (010) is small and its four views carry no labels; the assignment of views to facades was done by matching them against the plans and renders."
+ ],
+ "confidence": "MEDIUM - plans, four small unlabelled elevations and two renders agree, but the elevations are low resolution, depth and height are not published, and the frame had to be derived from a rotated plan."
+}

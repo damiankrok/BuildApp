@@ -1,0 +1,70 @@
+{
+ "slug": "extradom-pl-1",
+ "imagesUsed": [
+  {"n": 10, "what": "front elevation drawing"},
+  {"n": 26, "what": "rear elevation drawing"},
+  {"n": 15, "what": "left side elevation drawing (garage side, 2 rooflights + 2 chimneys)"},
+  {"n": 25, "what": "right side elevation drawing (timber-clad ground floor, 1 rooflight)"},
+  {"n": 36, "what": "dimensioned ground floor plan"},
+  {"n": 37, "what": "attic floor plan"},
+  {"n": 33, "what": "site / roof plan with printed overall dimensions"},
+  {"n": 21, "what": "exterior render, front (same view also 020, 022, 050, 054, 065, 067)"},
+  {"n": 11, "what": "exterior render, rear (same view also 006, 007, 012, 051, 061, 064, 069)"},
+  {"n": 24, "what": "exterior render, rear-left corner (same view also 013, 014, 023, 056, 057, 071, 074)"}
+ ],
+ "mirrorOrOtherProjectWarning": "Many pictures of OTHER projects on the page: 038-046 and 082-110 are different houses (some look similar: 109/110 is a sibling design with a timber garage door). 047-049 show this building shape in a dark-facade colour variant. 000-005, 016-019, 027-032, 052-053, 055, 058, 060, 063, 066, 068, 070, 072-073, 075-076, 078-079, 081 are interiors. No mirrored variant of this house is shown.",
+ "overall": {"widthM": 13.97, "depthM": 14.82, "heightM": 7.92, "basis": "width 13,97 m (6,04 garage + 7,93 main) and depth 14,82 m (4,92 + 8,50 + 1,40) printed on the plans and published on page; height 7,92 m published on page"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "right ~57% of the front facade; narrow and deep, gable end facing the street", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "FRONT_TO_BACK", "approxSizeM": "7.93 x 14.82"},
+  {"name": "garage", "role": "GARAGE", "where": "attached to the left of the main body; front wall set back 1.40 m behind the main front, rear wall 4.92 m short of the main rear", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "6.04 x 8.50"},
+  {"name": "rear terrace canopy", "role": "PORCH", "where": "projecting from the rear gable wall on the house-right half (left half as seen from the garden): flat slab over the terrace that carries the rear attic balcony, on two slim dark posts", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 5.2 x 2.3, scaled from plan"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "FRONT_TO_BACK", "pitchDeg": 38, "notes": "Simple symmetrical gable, ridge front-to-back, no eaves overhang (modern barn); both gable ends are framed by a projecting white render band that follows the roof line and returns down the side walls. Garage has a flat roof with parapet. No dormers, no cross gables."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "LEFT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["GARAGE_DOOR", "WINDOW", "ENTRANCE_DOOR", "WINDOW"]},
+   {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "LARGE_GLAZING"]}
+  ]},
+  "REAR": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["LARGE_GLAZING", "WINDOW", "WINDOW", "DOOR"]},
+   {"storey": 1, "count": 2, "leftToRight": ["LARGE_GLAZING", "WINDOW"]}
+  ]},
+  "LEFT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 1, "leftToRight": ["WINDOW"]},
+   {"storey": 1, "count": 0, "leftToRight": []}
+  ]},
+  "RIGHT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW"]},
+   {"storey": 1, "count": 0, "leftToRight": []}
+  ]}
+ },
+ "largeGlazing": [
+  {"facade": "FRONT", "position": "RIGHT", "what": "attic gable glazing of the front bedroom: balcony door + fixed glazing following the roof slope, about 2.8 m wide, behind a glass balustrade"},
+  {"facade": "REAR", "position": "LEFT", "what": "ground-floor dining sliding glazing, two panes, about 2.9 m wide, turning the corner into the right side wall (corner glazing)"},
+  {"facade": "REAR", "position": "LEFT", "what": "attic gable glazing of the rear bedroom: balcony door + glazing following the roof slope, about 2.7-2.8 m wide, onto the canopy balcony"}
+ ],
+ "features": [
+  {"kind": "BALCONY", "count": 2, "where": "front: recessed inside the gable frame over the entrance (right 2/3 of the gable), glass balustrade; rear: on top of the terrace canopy slab, glass balustrade"},
+  {"kind": "CANOPY", "count": 1, "where": "rear: flat slab over the terrace (carries the rear balcony)"},
+  {"kind": "POSTS", "count": 2, "where": "two slim dark steel posts under the rear canopy"},
+  {"kind": "CHIMNEY", "count": 2, "where": "two dark-clad chimneys on the left roof plane (garage side), near mid-length, standing on the slope with their tops below ridge height (they overlap into one on the front and rear elevations)"},
+  {"kind": "ROOFLIGHT", "count": 3, "where": "2 on the left roof plane (next to the chimneys), 1 on the right roof plane"},
+  {"kind": "TERRACE", "count": 1, "where": "rear, partly under the canopy; raised entrance landing with steps at the front"},
+  {"kind": "OTHER", "count": 2, "where": "projecting white gable frame on the front and rear gable ends; vertical timber slat panels between the glazing on both gables and along the right side wall"},
+  {"kind": "DORMER", "count": 0, "where": "none"}
+ ],
+ "palette": {"walls": "white / cream render with warm vertical timber slat cladding; dark graphite panels at the corners, around the glazing and on the garage rear wall; graphite garage door and window frames", "roof": "dark graphite / navy standing-seam metal; flat garage roof with dark parapet capping"},
+ "uncertain": [
+  "Entrance position: the door leaf centre is at ~0.66 of the full front width and the door + glazed sidelight centre at ~0.68, i.e. exactly on the CENTRE/RIGHT boundary (the entrance is central within the gabled main body, which occupies the right 57% of the facade). Given as CENTRE.",
+  "Entrance is 'recessed' in the sense that the ground-floor front wall stands back under the projecting gable frame / balcony slab; there is no separate porch roof.",
+  "FRONT storey 0, left to right: one double-width (~5 m) garage door; tall narrow cloakroom window (~0.8 m) with horizontal louvres; entrance door with glazed sidelight (one opening); floor-to-ceiling study window (~1.6-1.7 m). FRONT storey 1: trapezoidal bathroom glazing (~1.9-2.0 m, counted WINDOW) and the bedroom door+glazing (~2.8 m, LARGE_GLAZING).",
+  "REAR storey 0, seen from the garden left to right: dining sliding glazing (~2.9 m), three-part living-room glazing (~2.0 m, floor-to-ceiling; counted WINDOW because it is under ~2.5 m), then on the set-back garage rear wall a tall narrow utility-room window and a solid service door. REAR storey 1: bedroom door+glazing (~2.7-2.8 m) and a trapezoidal bedroom window (~2.0 m).",
+  "LEFT storey 0: one tall living-room window (~1.2 m) with a timber slat panel next to it, at the rear end (LEFT third as seen from outside); the garage side wall is blank.",
+  "RIGHT storey 0, front to rear: tall study side window, tall narrow pantry window, horizontal kitchen strip window set in timber cladding, floor-to-ceiling dining side glazing (~1.95 m, part of the corner glazing).",
+  "Canopy size is scaled from the dashed outline on the plan; treat as approximate."
+ ],
+ "confidence": "HIGH - four clear elevation drawings, dimensioned plans, a dimensioned site plan and several renders all agree."
+}

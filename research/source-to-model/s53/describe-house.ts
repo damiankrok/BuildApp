@@ -133,6 +133,8 @@ async function main(): Promise<void> {
     const j = toJpeg(d.raster, kind === 'EXTERIOR_VIEW' ? 1100 : 1568, 88)
     return { number: i + 1, n: d.n, assetId: d.asset.id, byteHash: d.byteHash, ...j }
   })
+  // the exact bytes the reader is sent, kept beside the run (private: publisher pictures never go to Git)
+  for (const x of sent) writeFileSync(join(out, `sent-${String(x.number).padStart(2, '0')}.jpg`), x.bytes)
   const prompt = buildHouseDescriptionPrompt({ images: sent.map((s) => ({ number: s.number, widthPx: s.width, heightPx: s.height })), published, ...(flag('title') && pkg.project?.title ? { pageTitle: pkg.project.title } : {}) })
   let description: unknown
   try {

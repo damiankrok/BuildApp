@@ -1,0 +1,67 @@
+{
+ "slug": "lipinscy-pl-1",
+ "imagesUsed": [
+  {"n": 31, "what": "front (street / garage side) elevation drawing of the whole semi-detached pair (small copy: 016)"},
+  {"n": 32, "what": "rear (garden) elevation drawing of the whole pair (small copy: 017)"},
+  {"n": 30, "what": "left side elevation drawing (small copy: 014)"},
+  {"n": 29, "what": "right side elevation drawing (small copy: 015)"},
+  {"n": 23, "what": "ground floor plan of both units with dimensions 696 + 696, 964, 835 (copies: 009, 024)"},
+  {"n": 26, "what": "upper floor plan of both units (copies: 020, 025)"},
+  {"n": 27, "what": "site / roof plan with overall dimensions (copies: 001, 028)"},
+  {"n": 22, "what": "cross-section with printed levels (copies: 018, 021)"},
+  {"n": 4, "what": "exterior render from the front-right (small copy: 005)"},
+  {"n": 8, "what": "exterior render, rear of the left-hand unit as seen from the garden (small copy: 013)"},
+  {"n": 10, "what": "exterior render, rear from the garden-left corner (small copy: 006)"}
+ ],
+ "mirrorOrOtherProjectWarning": "SEMI-DETACHED PAIR: every drawing and render shows TWO mirrored units joined at a party wall; this reference describes the WHOLE pair as drawn (one unit = one half, 6.96 m wide; halve the symmetric counts for a single unit). FRAME WARNING: the two entrance doors do NOT face the street - each sits in the side wall of the link between the main body and the projecting garage block (left unit's door faces LEFT, right unit's door faces RIGHT). FRONT here = the street side with the two garage doors, which the publisher labels as the front elevation (image 031) and where the plan's entry arrows point. No pictures of other projects.",
+ "overall": {"widthM": 14.0, "depthM": 18.0, "heightM": 8.91, "basis": "7,0 + 7,0 m and 18,0 m printed on the site plan (floor plan prints 696 + 696 cm, 964 + 835 cm); ridge level +8,91 printed on the section, measured from floor level 0,00 (terrain is at -0,45, i.e. ~9.36 m above ground)"},
+ "storeys": {"fullStoreysAboveGround": 2, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "rear part of the footprint, full width; two mirrored units side by side", "storeys": 2, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "13.92 x 9.64 (each unit 6.96 x 9.64)"},
+  {"name": "garage block", "role": "GARAGE", "where": "centred on the party wall, projecting 8.35 m in front of the main body (the first ~1.9 m is the entrance link / vestibule of each unit, the rest two single garages); main-body front wall is exposed ~3 m on each side of it", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 7.9 x 8.35 (two halves of ~3.9 m), width scaled from plan"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "pitchDeg": 30, "notes": "One symmetrical gable roof over both units, ridge along the front, plain gable ends on left and right with no overhang; eaves with box gutters front and rear. A narrow raised strip (fire-wall upstand) crosses the roof at the party wall. The projecting garage block has a flat roof used as two roof terraces. No dormers."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "CENTRE", "doorCount": 2},
+ "entrance": {"facade": "LEFT (left unit) and RIGHT (right unit) - side-facing doors in the link between main body and garage block, approached from the FRONT/street side", "position": "CENTRE (of each side facade, at the junction of main body and garage block; seen from the street the two entries are in the LEFT and RIGHT thirds)", "recessedOrPorch": false},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "GARAGE_DOOR", "GARAGE_DOOR", "WINDOW"]},
+   {"storey": 1, "count": 4, "leftToRight": ["WINDOW", "GLAZED_DOOR", "GLAZED_DOOR", "WINDOW"]}
+  ]},
+  "REAR": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR"]},
+   {"storey": 1, "count": 4, "leftToRight": ["WINDOW", "GLAZED_DOOR", "GLAZED_DOOR", "WINDOW"]}
+  ]},
+  "LEFT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 5, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]},
+   {"storey": 1, "count": 1, "leftToRight": ["WINDOW"]}
+  ]},
+  "RIGHT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 5, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]},
+   {"storey": 1, "count": 1, "leftToRight": ["WINDOW"]}
+  ]}
+ },
+ "largeGlazing": [],
+ "features": [
+  {"kind": "TERRACE", "count": 2, "where": "roof terraces on the flat garage block, one per unit, reached from the first-floor front bedroom; plus a ground-level garden terrace behind each unit"},
+  {"kind": "RAILING", "count": 1, "where": "glass balustrade around the edge of the garage-block roof terraces"},
+  {"kind": "BALCONY", "count": 2, "where": "rear, first floor: one French (Juliet) balcony with a framed glass balustrade in front of the inner glazed door of each unit"},
+  {"kind": "CHIMNEY", "count": 4, "where": "two grey rendered chimneys side by side at the party wall near the ridge, plus one slim stack near each outer gable end (side elevations show them as two, one each side of the ridge)"},
+  {"kind": "OTHER", "count": 5, "where": "timber-slat privacy screens: one on each roof terrace next to the main body (2), one at the rear party line between the garden terraces (1), and a slatted screen / fence at each rear outer corner seen on the side elevations (2)"},
+  {"kind": "DORMER", "count": 0, "where": "none"},
+  {"kind": "ROOFLIGHT", "count": 0, "where": "none drawn on any elevation"}
+ ],
+ "palette": {"walls": "white render with natural light-brown vertical timber slat cladding on the whole garage block and as infill panels between the first-floor and ground-floor windows; grey window frames, grey garage and entrance doors", "roof": "grey standing-seam metal, grey gutters and flashings, grey rendered chimneys"},
+ "uncertain": [
+  "The schema's entrance fields cannot express this house with one enum value: there are two entrance doors, facing opposite side directions. If a single value is required use facade FRONT-approach / position LEFT for the left unit and RIGHT for the right unit. Because of this, FRONT (street side) shows NO entrance door; the doors are counted on LEFT and RIGHT.",
+  "If a consumer instead defines FRONT strictly as the wall plane containing the entrance door, then for a single unit the front would be that unit's outer side elevation (images 030 / 029) - the opposite reading to the publisher's labels.",
+  "FRONT storey 0: one ground-floor room window on the exposed main-body wall at each end, two single garage doors in the central timber-clad block. FRONT storey 1 (main body, above/behind the roof terrace): at each end a small narrow window, then a three-part glazed door set (~2.1-2.3 m wide, under the ~2.5 m threshold) opening onto the roof terrace.",
+  "REAR storey 0: four floor-to-ceiling glazed terrace doors (outer ones three-part ~1.9 m, inner ones two-part ~1.4 m). REAR storey 1: outer two-sash windows, inner glazed doors with French balconies.",
+  "LEFT facade, seen from outside left (rear) to right (front): two ground-floor windows on the white gable wall joined by a timber panel (two-sash dining window + narrow kitchen window; counted as 2), entrance door with a narrow glazed side strip in the timber-clad link, two horizontal strip windows in the garage side wall. LEFT storey 1: one narrow window in the gable wall. RIGHT is the exact mirror (listed front to rear as seen from outside: 2 garage strip windows, entrance door, narrow window, two-sash window).",
+  "Entrance doors stand in the re-entrant corner between main body and garage block with open steps in front; no canopy is visible in the render or elevations, so recessedOrPorch is given as false. The plan shows a dashed outline over the landing that might be a small overhang.",
+  "Per single unit (half): width 6.96 m; FRONT 0: WINDOW + GARAGE_DOOR, FRONT 1: WINDOW + GLAZED_DOOR; REAR 0: 2 GLAZED_DOOR, REAR 1: WINDOW + GLAZED_DOOR; outer side: storey 0 = 5 (2 windows, entrance door, 2 garage windows), storey 1 = 1; the other side is the party wall with no openings.",
+  "The site/roof plan shows a two-part rectangle on the rear roof plane of each unit (possibly solar collectors or roof hatches); nothing corresponding is drawn on the rear elevation, so no rooflights are counted.",
+  "Roof pitch 30 deg is the published value; height 8.91 m is read from the section (above floor level, not above terrain)."
+ ],
+ "confidence": "MEDIUM - geometry and counts are well documented (four elevations, plans, section, site plan, renders), but the building is a mirrored semi-detached pair with side-facing entrances, so the FRONT frame and 'the house' (pair vs. one unit) are open to interpretation."
+}

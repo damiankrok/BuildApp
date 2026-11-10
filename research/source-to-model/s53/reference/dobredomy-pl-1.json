@@ -1,0 +1,68 @@
+{
+ "slug": "dobredomy-pl-1",
+ "imagesUsed": [
+  {"n": 16, "what": "front elevation drawing"},
+  {"n": 17, "what": "rear elevation drawing"},
+  {"n": 14, "what": "right side elevation drawing (garage-wing gable)"},
+  {"n": 15, "what": "left side elevation drawing (eaves side with 3 rooflights)"},
+  {"n": 19, "what": "ground floor plan"},
+  {"n": 20, "what": "attic floor plan"},
+  {"n": 18, "what": "roof / site plan with printed overall dimensions"},
+  {"n": 12, "what": "exterior render, front"},
+  {"n": 21, "what": "exterior render, front-right (same picture as 004)"},
+  {"n": 10, "what": "exterior render, rear"},
+  {"n": 11, "what": "exterior render, rear-right corner"}
+ ],
+ "mirrorOrOtherProjectWarning": "Images 000, 002, 003 and 022 are pictures of OTHER projects (teasers); 001 and 005 are stock photos; 006-009 and 013 are interiors. No mirrored variant of this house is shown.",
+ "overall": {"widthM": 12.92, "depthM": 11.72, "heightM": 8.4, "basis": "width 1292 cm and depth 1172 cm printed on the site/roof plan (image 018); height 8,40 m published on page"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "left ~70% of the front facade; full depth of the house", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "FRONT_TO_BACK", "approxSizeM": "9.0 x 11.7 (scaled from plan)"},
+  {"name": "garage wing", "role": "GARAGE", "where": "attached to the right of the main body; set back about 1.8 m from the front wall and about 1.4 m from the rear wall; garage + utility room, storage attic above", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "3.9 x 8.4 (scaled from plan)"},
+  {"name": "entrance recess", "role": "PORCH", "where": "front-right corner of the main body, recessed under the front gable / balcony, one white column at the corner", "storeys": 1, "enclosed": false, "roofKind": "NONE", "ridge": "NA", "approxSizeM": null},
+  {"name": "covered terrace recess", "role": "PORCH", "where": "rear-right corner of the main body, recessed under the rear gable / balcony, one white column at the corner", "storeys": 1, "enclosed": false, "roofKind": "NONE", "ridge": "NA", "approxSizeM": null}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "FRONT_TO_BACK", "pitchDeg": 40, "notes": "Main gable with ridge front-to-back (large gables facing front and rear, wide eaves overhang). A lower cross gable with ridge along the front covers the garage wing on the right and ends in a gable facing right; two valleys where it meets the main roof. Gables have white barge boards and boxed soffits."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 6, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "GARAGE_DOOR"]},
+   {"storey": 1, "count": 2, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR"]}
+  ]},
+  "REAR": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "GLAZED_DOOR", "LARGE_GLAZING"]},
+   {"storey": 1, "count": 2, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR"]}
+  ]},
+  "LEFT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 2, "leftToRight": ["GLAZED_DOOR", "WINDOW"]},
+   {"storey": 1, "count": 0, "leftToRight": []}
+  ]},
+  "RIGHT": {"shown": true, "byStorey": [
+   {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "DOOR"]},
+   {"storey": 1, "count": 1, "leftToRight": ["WINDOW"]}
+  ]}
+ },
+ "largeGlazing": [
+  {"facade": "REAR", "position": "RIGHT", "what": "two-pane living-room terrace glazing, about 2.9 m wide on the rear elevation, floor to ceiling"}
+ ],
+ "features": [
+  {"kind": "BALCONY", "count": 2, "where": "one in the front gable and one in the rear gable (attic level), each a cantilevered slab with glass balustrade on steel posts"},
+  {"kind": "ROOFLIGHT", "count": 6, "where": "3 on the left roof plane of the main roof; 2 side by side on the front plane of the garage-wing roof; 1 on the right plane of the main roof near the front"},
+  {"kind": "CHIMNEY", "count": 2, "where": "two white rendered chimneys on the main roof: one on the left plane near the ridge (fireplace), one on the right plane towards the rear; plus small vent pipes at the ridge"},
+  {"kind": "POSTS", "count": 2, "where": "one white square column at the entrance recess (front), one at the covered terrace recess (rear)"},
+  {"kind": "TERRACE", "count": 1, "where": "timber deck along the rear and wrapping to the left side; timber steps at the entrance"},
+  {"kind": "DORMER", "count": 0, "where": "none"}
+ ],
+ "palette": {"walls": "white render on the gables / upper part, olive-beige (khaki) render on the ground floor, warm oak-coloured timber window frames, infill panels and garage door", "roof": "dark graphite flat concrete tiles; white barge boards and soffits"},
+ "uncertain": [
+  "FRONT storey 0, left to right: kitchen corner window (two sashes, timber panel at the corner), two small high windows (pantry and bathroom) joined by a timber panel into one visual band - counted as 2 WINDOWs because the plan shows two separate openings in two rooms; entrance door with a narrow glazed sidelight on its left (one opening); a separate tall narrow window of the utility closet to the right of a timber panel; garage door.",
+  "FRONT and REAR storey 1: in each gable two separate glazed balcony doors (two rooms) with a timber infill panel between them; they read as one ~2.9 m wide composition but are 2 openings on the plan.",
+  "REAR storey 0, seen from outside left to right: two small high utility-room windows joined by a timber panel (counted as 2), two-leaf glazed door of the ground-floor room (~1.7 m) in the covered recess, then the living-room glazing (~2.9 m). The plan additionally shows a single door leaf at the right end of the living-room glazing / on the short return wall facing the covered terrace; it is not separately readable on the rear elevation and is not counted.",
+  "LEFT storey 0: the centre opening is a two-leaf floor-to-ceiling glazed unit about 2.3-2.5 m wide (borderline with LARGE_GLAZING); the right one is the kitchen corner window (also counted once on FRONT).",
+  "RIGHT storey 0, left (front) to right (rear): two small garage windows joined by a timber panel (counted as 2), a solid timber side door to the utility room near the rear end. RIGHT storey 1: one two-sash window in the garage-wing gable (storage attic).",
+  "The kitchen window is a corner window: one part faces FRONT, one part faces LEFT; each is counted on its own facade.",
+  "Garage-wing and main-body sizes are scaled from the plan using the printed 1292 x 1172 cm outline; treat as +/- 0.3 m."
+ ],
+ "confidence": "HIGH - four elevation drawings, both floor plans, a dimensioned roof plan and renders are mutually consistent; remaining doubt is only how to count paired small windows joined by timber panels."
+}
