@@ -88,6 +88,31 @@ describe('described house → BuildingV2', () => {
     expect(reconstructFromHouseDescription({ ...d, bodies: [main, { ...d.bodies[1], roof: { ...d.bodies[1].roof, kind: 'SHED', highSide: 'REAR', pitchDeg: 12 } }] }, 'shed').ok).toBe(true)
   })
 
+  it('a hip keeps its ridge along the longer side: a ridge stated across the shorter side is turned, by name — a gable and a near-square hip keep what was read', () => {
+    const d = fixture()
+    const main = d.bodies[0]
+    const w = main.x1 - main.x0
+    const dep = main.z1 - main.z0
+    const across = w > dep ? 'ALONG_Z' : 'ALONG_X'
+    const longer = w > dep ? 'X' : 'Z'
+    expect(Math.abs(w - dep)).toBeGreaterThan(1)
+    const only = (roof: Partial<typeof main.roof>, rect: Partial<typeof main> = {}) => buildingFromHouseDescription({ ...d, bodies: [{ ...main, ...rect, roof: { ...main.roof, ...roof } }], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [] })
+    const hip = only({ kind: 'HIP', ridge: across })
+    expect(hip.building.planeRoofs?.[0]?.ridgeAxis).toBe(longer)
+    expect(hip.adjustments.map((a) => a.code)).toContain('HIP_RIDGE_ALONG_LONGER_SIDE')
+    expect(reconstructFromHouseDescription({ ...d, bodies: [{ ...main, roof: { ...main.roof, kind: 'HIP', ridge: across } }], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [] }, 'hip').ok).toBe(true)
+    // stated along the longer side already: nothing to say
+    expect(only({ kind: 'HIP', ridge: w > dep ? 'ALONG_X' : 'ALONG_Z' }).adjustments.map((a) => a.code)).not.toContain('HIP_RIDGE_ALONG_LONGER_SIDE')
+    // a gable may run either way
+    const gable = only({ kind: 'GABLE', ridge: across })
+    expect(gable.building.planeRoofs?.[0]?.ridgeAxis).toBe(longer === 'X' ? 'Z' : 'X')
+    expect(gable.adjustments.map((a) => a.code)).not.toContain('HIP_RIDGE_ALONG_LONGER_SIDE')
+    // within a metre of square the reading stands
+    const square = only({ kind: 'HIP', ridge: 'ALONG_Z' }, { x0: 0, x1: 8.4, z0: 0, z1: 8 })
+    expect(square.building.planeRoofs?.[0]?.ridgeAxis).toBe('Z')
+    expect(square.adjustments.map((a) => a.code)).not.toContain('HIP_RIDGE_ALONG_LONGER_SIDE')
+  })
+
   it('does not cut an opening where another body stands against the wall, nor two in one place', () => {
     const d = fixture()
     // the garage stands against the main body's right wall over z 1..6.5: a ground-floor window there has no outside

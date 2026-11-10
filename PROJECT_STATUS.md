@@ -35,7 +35,8 @@
   has no reader; no APK was built (next is ≥ 1328).
 - **Spend:** 2.7281 of the cumulative 5 USD since E12 (CLI token estimates, billing UNCONFIRMED). H2 and the private
   benchmark sealed and unsent.
-- **Still wrong, named:** ridge direction of attached roofs and near-pyramidal hips (3 of 12 pages); dormers, rooflights
+- **Still wrong, named:** ridge direction of attached gable roofs on square plans (a hip's ridge now follows the longer
+  side by geometry, builder 0.2.0, verified by replaying the recorded descriptions — a DEV fix after the control); dormers, rooflights
   and second chimneys under-read; no two-tone facades, porch roofs are flat plates; the joint audit's 3–7 findings per
   described model are unexamined. Twelve pages of six publishers are not "any link".
 - **NEXT (one action):** with a host and a key — deploy the service with the reader on, run one paid job through the SDK

@@ -181,5 +181,27 @@
   "The joint audit reports 3-7 exterior findings on every described model; they were not examined. One builder defect surfaced (hip end eaves) and was fixed after scoring.",
   "Decision taken on this evidence: where the host has a reader, a drawings model with neither a verified scale nor a measured height gives way to the description (analyseLink, DRAWINGS_MODEL_UNANCHORED); the drawings model is kept beside it.",
   "Twelve pages of six publishers in two sets. Not 'any link': publishers that refuse the client are still out of reach, and no page of an unknown publisher was in either set."
- ]
+ ],
+ "afterScoring": {
+  "note": "DEV fixes made after the scored run; the scored verdicts above are unchanged and stay the control's result. The six pages are DEV from here on.",
+  "builder": "0.2.0",
+  "fixes": [
+   "a hip roof takes its eaves overhang on all four sides or on none (removes the control's one compile error)",
+   "a hip of one pitch keeps its ridge along the longer side of its body: a ridge stated across the shorter side is turned and named HIP_RIDGE_ALONG_LONGER_SIDE (a body within a metre of square keeps what was read; a gable is never turned)",
+   "a side drawn blank is no longer reported as shown-but-empty"
+  ],
+  "replayOfRecordedDescriptions": {
+   "calls": 0,
+   "descriptions": 10,
+   "models": 10,
+   "compileErrors": 0,
+   "changedByHipRule": [
+    "dobredomy-pl-2 main: ridge now along the front, as its reference has it; rooflights built 3 of 5 (the two stated on a hip end are dropped by name)"
+   ],
+   "stillWrong": [
+    "dobredomy-pl-2 garage (6.35 x 6.10 hip, ridge direction; within a metre of square)",
+    "domoweklimaty-pl-2 garage (6.75 x 6.75 gable, ridge stated front-to-back, the reference has it along the front)"
+   ]
+  }
+ }
 }

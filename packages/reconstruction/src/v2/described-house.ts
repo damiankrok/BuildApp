@@ -27,7 +27,7 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.1.0'
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.2.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
@@ -39,6 +39,7 @@ export type DescribedAdjustmentCode =
   | 'EAVES_HEIGHT_CLAMPED'
   | 'ROOF_KIND_STOOD_IN'
   | 'ROOF_PITCH_ASSUMED'
+  | 'HIP_RIDGE_ALONG_LONGER_SIDE'
   | 'OPENING_MOVED_TO_WALL'
   | 'OPENING_NARROWED'
   | 'OPENING_LOWERED'
@@ -58,6 +59,7 @@ const cosDeg = (d: number): number => Math.cos((d * Math.PI) / 180)
 const ROOF_THICKNESS_M = 0.28
 const WALL_T = 0.3
 const SNAP_M = 0.15
+const HIP_RIDGE_MARGIN_M = 1
 
 /** Cluster nearly equal coordinates onto one value, so bodies that touch share an exact line. */
 function snapper(values: number[]): (v: number) => number {
@@ -252,7 +254,14 @@ export function buildingFromHouseDescription(input: HouseDescription, options: {
     }
     const w = b.rect.x1 - b.rect.x0
     const dep = b.rect.z1 - b.rect.z0
-    const ridgeAxis: 'X' | 'Z' = src.roof.ridge === 'ALONG_X' ? 'X' : src.roof.ridge === 'ALONG_Z' ? 'Z' : w >= dep ? 'X' : 'Z'
+    let ridgeAxis: 'X' | 'Z' = src.roof.ridge === 'ALONG_X' ? 'X' : src.roof.ridge === 'ALONG_Z' ? 'Z' : w >= dep ? 'X' : 'Z'
+    // A hip of one pitch over a rectangle has its ridge along the longer side — geometry, not a reading: across the
+    // shorter side the two hip ends would meet before any ridge. A ridge stated that way is turned, by name. A body
+    // within a metre of square keeps what was read: its ridge is shorter than that metre either way.
+    if (kind === 'HIP' && Math.abs(w - dep) >= HIP_RIDGE_MARGIN_M && ridgeAxis !== (w > dep ? 'X' : 'Z')) {
+      ridgeAxis = w > dep ? 'X' : 'Z'
+      adj('HIP_RIDGE_ALONG_LONGER_SIDE', src.id, `a hip roof stated with its ridge across the shorter side of a ${w.toFixed(1)} × ${dep.toFixed(1)} m body: at one pitch the ridge runs along the longer side`)
+    }
     const ends: { min: RoofEnd; max: RoofEnd } = kind === 'HIP' || kind === 'PYRAMID' ? { min: 'HIP', max: 'HIP' } : { min: 'GABLE', max: 'GABLE' }
     // the eaves stand out past the walls where nothing stands against them; the plane passes through the wall's top edge
     const eaveSides: Facade[] = ridgeAxis === 'X' ? ['FRONT', 'REAR'] : ['WEST', 'EAST']

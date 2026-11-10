@@ -8,7 +8,7 @@ Zlecenie OWNER-a v3.53.0 (2026-11-10). Gałąź `claude/new-session-3kzcgh`, pun
 | **SLICE S53** (ścieżka „model z opisu źródeł": czytnik całego domu → opis w zamkniętym słowniku → deterministyczna budowa → istniejący emiter, walidator, kompilator; podłączona w `analysis-service` i w serwisie HTTP) | **PASS w zadeklarowanym zakresie**: na 6 stronach odłożonych przed rozwojem model powstaje w 6/6, rozpoznawalny kandydat wg zamrożonej reguły w 5/6 (kaskada 1327: 2/6 „modeli", oba bez kotwicy metrycznej). **Nie jest to akceptacja OWNER-a** — plansze wysłane, ocena „to ten dom" należy do OWNER-a. |
 | **CAMPAIGN** | **WORK_IN_PROGRESS** |
 | **VERIFICATION** | host: testy pakietów dotkniętych zmianą (§6), 12 stron sześciu wydawców przez produktową funkcję `runDescribedAnalysis`, zadanie przez prawdziwe gniazdo HTTP serwisu z odtwarzanym czytnikiem. **Adapter SDK do płatnego API: NOT_VERIFIED na żywo** (brak bezpiecznie skonfigurowanego klucza). **Serwis: niewdrożony.** **Android UI: NOT_VERIFIED.** APK nie zbudowano — zachowanie telefonu bez serwisu się nie zmienia. |
-| **NEXT** (jedna czynność) | Po decyzji OWNER-a o hostingu i kluczu (§7): wdrożyć `apps/analyzer-api` z `ANALYZER_HOUSE_READER=live`, wykonać jedno płatne zadanie przez SDK na stronie DEV i porównać z zapisanym wynikiem CLI; dopiero wtedy APK ≥ 1328 z adresem serwisu. Bez tej decyzji: kierunek kalenicy dachów dobudówek (§5, błąd 3 z 12 stron). |
+| **NEXT** (jedna czynność) | Po decyzji OWNER-a o hostingu i kluczu (§7): wdrożyć `apps/analyzer-api` z `ANALYZER_HOUSE_READER=live`, wykonać jedno płatne zadanie przez SDK na stronie DEV i porównać z zapisanym wynikiem CLI; dopiero wtedy APK ≥ 1328 z adresem serwisu. Bez tej decyzji: kalenica dachu dwuspadowego dobudówki z obserwowalnego szczytu (§5 pkt 1), na zamrożonym podziale DEV/CONTROL. |
 
 ## 1. Diagnoza, od której zaczęto
 
@@ -95,9 +95,15 @@ czytnika opisu nie mierzono (budżet).
 
 ## 5. Pierwsze błędne decyzje, które zostają
 
-1. **Kierunek kalenicy dachu dobudówki / prawie piramidalnego dachu kopertowego** — błąd czytnika na 3 z 12 stron; jedyny
-   powtarzalny powód utraty rozpoznawalności. Hipoteza: pytać o obserwowalne („na której elewacji tej bryły widać
-   trójkąt szczytu") zamiast o kierunek i wyprowadzać kalenicę deterministycznie.
+1. **Kierunek kalenicy dachu dobudówki** — błąd czytnika; jedyny powtarzalny powód utraty rozpoznawalności.
+   Część rozstrzygnięta bez czytnika (budowniczy 0.2.0, po ocenie E3): dach kopertowy o jednym spadku ma kalenicę wzdłuż
+   dłuższego boku — to geometria, nie odczyt; kalenica podana w poprzek jest obracana i nazwana
+   (`HIP_RIDGE_ALONG_LONGER_SIDE`; bryła bliska kwadratu i dach dwuspadowy zostają jak odczytane). Odtworzenie 10
+   zapisanych opisów bez nowych wywołań: 10 modeli, 0 błędów kompilacji, zmienia się tylko dom z E3 oceniony jako
+   nierozpoznawalny — jego dach główny jest teraz zgodny z referencją (to poprawka DEV, nie wynik kontroli).
+   Zostają dwa garaże na rzucie kwadratowym (kopertowy 6,35 × 6,10 i dwuspadowy 6,75 × 6,75), gdzie proporcje nic nie
+   mówią. Hipoteza: pytać o obserwowalne („na której elewacji tej bryły widać trójkąt szczytu") i wyprowadzać kalenicę
+   deterministycznie — wymaga płatnych przebiegów i świeżej kontroli.
 2. Cechy dachu: lukarny, okna połaciowe, drugie kominy — niedoliczone.
 3. Słownik budowniczego: elewacje dwutonowe i okładziny nie powstają; dachy ganków to płaskie płyty.
 4. Uwagi audytu styków na modelach z opisu — niezbadane.
