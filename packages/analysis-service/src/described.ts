@@ -11,7 +11,7 @@
  * `ASSUMED`/`VISUAL_SEMANTIC` status on every object, provisional scale and heights, and nothing it could not check
  * counted as checked. It is a recognisable candidate of the exterior — not a survey, and never USER_CONFIRMED.
  */
-import { sha256Hex, stableJson } from '@buildapp/source-common'
+import { sha256Bytes, sha256Hex, stableJson } from '@buildapp/source-common'
 import type { SourcePackage, SourceByteCache } from '@buildapp/source-package'
 import { decodeImage, encodeJpeg, startDecoders } from '@buildapp/source-package'
 import { resampleRaster } from '@buildapp/source-cv'
@@ -31,7 +31,7 @@ import {
 } from '@buildapp/source-vision'
 import type { HouseDescription, HouseDescriptionIssue, PictureKind, PublishedFigure, StructuredVision, StructuredVisionUsage, TriagedPicture } from '@buildapp/source-vision'
 import { DESCRIBED_HOUSE_BUILDER_VERSION, DESCRIBED_HOUSE_LABEL, reconstructFromHouseDescription, sealCandidate } from '@buildapp/reconstruction'
-import type { DescribedAdjustment, ReconstructionCandidate } from '@buildapp/reconstruction'
+import type { DescribedAdjustment, DescribedAnchors, ReconstructionCandidate } from '@buildapp/reconstruction'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import { buildMobileSceneBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
 import { parseModel, serializeModel } from '@buildapp/model'
@@ -43,9 +43,29 @@ import type { ModelAssessment } from './assessment/types.js'
 import { MODEL_ASSESSMENT_SCHEMA_VERSION } from './assessment/types.js'
 import type { AnalysisStage } from './stages.js'
 
-export const DESCRIBED_PATH_VERSION = '0.1.0'
+export const DESCRIBED_PATH_VERSION = '0.2.0'
 
-export type DescribedPicture = { number: number; assetId: string; byteHash: string | null; kind: PictureKind; widthPx: number; heightPx: number }
+/**
+ * One picture the description was asked over. Two things, kept apart: the ORIGINAL the page published (its address,
+ * the hash of its bytes, its size) and what was SENT to the reader — a JPEG re-encoded smaller, with its own hash and
+ * size. `byteHash`, `widthPx` and `heightPx` are the original's hash and the sent picture's size, as before.
+ */
+export type DescribedPicture = { number: number; assetId: string; byteHash: string | null; kind: PictureKind; widthPx: number; heightPx: number; sourceUrl: string | null; originalWidthPx: number; originalHeightPx: number; sentSha256: string; sentBytes: number; sentMediaType: 'image/jpeg' }
+
+/**
+ * v3.53.1: what the described path is doing, for whoever watches a job — the phase, why it started, and the pictures
+ * actually being interpreted. No mark, line or box is ever stated: the reader returns a description of the house, not
+ * positions on a picture, and a client must not draw any.
+ */
+export type DescribingEvent = {
+  phase: 'SORTING_PICTURES' | 'DESCRIBING_HOUSE' | 'BUILDING_MODEL'
+  after: { code: string; reasonCode: string | null } | null
+  /** How many of the page's pictures decoded and were sorted. */
+  picturesOnPage: number
+  /** The pictures the description is asked over; empty until they are chosen. */
+  pictures: DescribedPicture[]
+  provider: { id: string; model: string; triageModel: string }
+}
 
 export type HouseReading = {
   description: HouseDescription
@@ -91,7 +111,7 @@ export async function readHouse(pkg: SourcePackage, cache: SourceByteCache, read
   if (!reader.available()) throw new DescribedRefusal('READER_UNAVAILABLE', 'no house reader is available on this host')
   await startDecoders()
   hooks.onStep?.('DECODING', `${pkg.assets.length} pictures`)
-  const decoded: Array<{ number: number; assetId: string; byteHash: string | null; raster: Raster }> = []
+  const decoded: Array<{ number: number; assetId: string; byteHash: string | null; sourceUrl: string; raster: Raster }> = []
   for (const asset of pkg.assets) {
     const v = asset.variants.find((x) => x.id === asset.selectedVariantId) ?? asset.variants[0]
     const hit = v ? await cache.get(v.url) : null
@@ -99,7 +119,7 @@ export async function readHouse(pkg: SourcePackage, cache: SourceByteCache, read
     try {
       const raster = decodeImage(hit.bytes)
       if (Math.min(raster.width, raster.height) < 120) continue
-      decoded.push({ number: decoded.length + 1, assetId: asset.id, byteHash: v.byteHash ?? null, raster })
+      decoded.push({ number: decoded.length + 1, assetId: asset.id, byteHash: v.byteHash ?? null, sourceUrl: v.url, raster })
     } catch {
       // a picture that does not decode is not shown to the reader; the drawings' path names such assets in its own result
     }
@@ -132,7 +152,7 @@ export async function readHouse(pkg: SourcePackage, cache: SourceByteCache, read
   const sent = chosen.map((c, i) => {
     const d = byNumber.get(c.number) as (typeof decoded)[number]
     const j = jpegOf(d.raster, c.kind === 'EXTERIOR_VIEW' ? 1100 : 1568, 88)
-    return { number: i + 1, assetId: d.assetId, byteHash: d.byteHash, kind: c.kind, widthPx: j.width, heightPx: j.height, bytes: j.bytes }
+    return { number: i + 1, assetId: d.assetId, byteHash: d.byteHash, kind: c.kind, widthPx: j.width, heightPx: j.height, sourceUrl: d.sourceUrl, originalWidthPx: d.raster.width, originalHeightPx: d.raster.height, sentSha256: sha256Bytes(j.bytes), sentBytes: j.bytes.byteLength, sentMediaType: 'image/jpeg' as const, bytes: j.bytes }
   })
   hooks.onPictures?.(sent)
   hooks.onStep?.('DESCRIBING', `${sent.length} pictures`)
@@ -160,10 +180,10 @@ export type DescribedRun = {
 const WARN = (code: string, severity: AnalysisWarning['severity'], message: string): AnalysisWarning => ({ code, severity, message })
 
 /** The result of a described house, in the drawings path's contract. */
-export function describedResult(input: { pkg: SourcePackage; identity: AnalysisIdentity; sourceUrl: string; jobId: string | null; reading: HouseReading; after: DescribedRun['after']; startedAt: string; now: () => Date }): Omit<DescribedRun, 'timings'> {
+export function describedResult(input: { pkg: SourcePackage; identity: AnalysisIdentity; sourceUrl: string; jobId: string | null; reading: HouseReading; after: DescribedRun['after']; anchors?: DescribedAnchors; startedAt: string; now: () => Date }): Omit<DescribedRun, 'timings'> {
   const { pkg, identity, reading } = input
   const published = publishedFiguresOf(pkg)
-  const built = reconstructFromHouseDescription(reading.description, identity.modelId, { published })
+  const built = reconstructFromHouseDescription(reading.description, identity.modelId, { published, ...(input.anchors ? { anchors: input.anchors } : {}) })
   if (!built.ok) throw new DescribedRefusal('MODEL_REFUSED', built.reason)
   const descriptionHash = sha256Hex(stableJson(reading.description))
   const figuresHash = sha256Hex(stableJson(published))
@@ -211,6 +231,8 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
   const compileErrors = scene.diagnostics.filter((x) => x.severity === 'ERROR')
   const exteriorErrors = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
   const b = built.building
+  const scaleFromDrawings = built.adjustments.find((a) => a.code === 'SCALED_TO_DRAWINGS_MEASURE')
+  const heightFromDrawings = built.adjustments.find((a) => a.code === 'HEIGHT_FROM_DRAWINGS_MEASURE')
   const printed = d.overall.basis === 'PRINTED_ON_DRAWING'
   const scaled = built.adjustments.find((a) => a.code === 'SCALED_TO_PUBLISHED_FIGURE' || a.code === 'BODIES_RESCALED_TO_OVERALL')
   const dropped = built.adjustments.filter((a) => a.code === 'OPENING_DROPPED' || a.code === 'FEATURE_DROPPED' || a.code === 'BODY_DROPPED')
@@ -218,7 +240,7 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
   const checkIssues = reading.issues.filter((i) => i.severity === 'WARN')
   const warningDetails: AnalysisWarning[] = [
     WARN('MODEL_FROM_SOURCE_DESCRIPTION', 'LIMITING', `This model was built from a description of the page's pictures read as a whole (${reading.pictures.length} pictures, by ${reading.provider.id} ${reading.provider.model}), not measured on its drawings${input.after ? `: the drawings could not be read (${input.after.reasonCode ?? input.after.code})` : ''}. It shows the building's bodies, roofs and openings as the sources show them; its dimensions are approximate.`),
-    WARN(printed ? 'DESCRIBED_SCALE_PRINTED_UNVERIFIED' : 'DESCRIBED_SCALE_APPROXIMATE', 'LIMITING', printed ? `The overall size is the one the reader read printed on a drawing (${d.overall.printedWidthLabel} × ${d.overall.printedDepthLabel}); no deterministic reader confirmed it.` : `The overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')}${scaled ? `; ${scaled.why}` : ''}.`),
+    ...(scaleFromDrawings ? [WARN('DESCRIBED_SCALE_FROM_DRAWINGS', 'INFO', `The overall size is the one the drawings' own dimensions verify: ${scaleFromDrawings.why}. The bodies, roofs and openings are still the description's.`)] : [WARN(printed ? 'DESCRIBED_SCALE_PRINTED_UNVERIFIED' : 'DESCRIBED_SCALE_APPROXIMATE', 'LIMITING', printed ? `The overall size is the one the reader read printed on a drawing (${d.overall.printedWidthLabel} × ${d.overall.printedDepthLabel}); no deterministic reader confirmed it.` : `The overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')}${scaled ? `; ${scaled.why}` : ''}.`)]),
     WARN('DESCRIBED_HEIGHTS_APPROXIMATE', 'INFO', 'Storey, eaves and opening heights are the reader’s reading of the sources or a convention; none is a printed level confirmed on a section.'),
     ...d.hypotheticalSides.map((s) => WARN('DESCRIBED_SIDE_HYPOTHETICAL', 'LIMITING', `No picture shows the ${s.toLowerCase()} side: what stands there is a hypothesis.`)),
     ...checkIssues.map((i) => WARN(`DESCRIPTION_${i.code}`, i.code.startsWith('SIDE_') || i.code.includes('DISAGREES') ? 'LIMITING' : 'INFO', i.detail)),
@@ -303,8 +325,8 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
       outcome: built.refused.length > 0 ? 'PARTIAL_3D_PREVIEW' : 'COMPLETE',
       built: { wallRings: model.wallRings.length, walls: model.walls.length, slabs: model.slabs.length, roofs: model.roofs.length, roofPlanes: model.roofPlanes.length, openings: model.openings.length, rooms: model.rooms.length, stairs: model.stairs.length },
       provisional: [
-        { code: 'SCALE_NOT_VERIFIED', what: `the overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')}; no printed dimension was confirmed on a drawing by a deterministic reader` },
-        { code: 'HEIGHT_ASSUMED_FOR_PREVIEW', what: 'storey and eaves heights are described from the sources or conventional, for viewing' },
+        ...(scaleFromDrawings ? [] : [{ code: 'SCALE_NOT_VERIFIED', what: `the overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')}; no printed dimension was confirmed on a drawing by a deterministic reader` }]),
+        { code: 'HEIGHT_ASSUMED_FOR_PREVIEW', what: heightFromDrawings ? 'the storey height is the one the drawings measure; eaves and opening heights are described from the sources, for viewing' : 'storey and eaves heights are described from the sources or conventional, for viewing' },
       ],
       partial: null,
     } as unknown as LinkAnalysisResult['preview'],
@@ -322,19 +344,42 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
   return { basis: 'DESCRIPTION', result, sceneText, pkg, reading, adjustments: built.adjustments, refused: built.refused, after: input.after }
 }
 
-export type DescribedProgress = { stage: AnalysisStage; detail: string }
+/** `fraction`: how far through the described path, 0..1 — the path's own share of a run, not the run's progress. */
+export type DescribedProgress = { stage: AnalysisStage; fraction: number; detail: string }
+
 
 /** A sealed package to a described result: read, admit, build, compile, seal. */
-export async function runDescribedAnalysis(input: { pkg: SourcePackage; cache: SourceByteCache; reader: StructuredVision; identity: AnalysisIdentity; sourceUrl?: string; jobId?: string | null; after?: DescribedRun['after']; now?: () => Date; clock?: () => number; signal?: AbortSignal; onProgress?: (p: DescribedProgress) => void; onPictures?: ReadHooks['onPictures'] }): Promise<DescribedRun> {
+export async function runDescribedAnalysis(input: { pkg: SourcePackage; cache: SourceByteCache; reader: StructuredVision; identity: AnalysisIdentity; sourceUrl?: string; jobId?: string | null; after?: DescribedRun['after']; anchors?: DescribedAnchors; now?: () => Date; clock?: () => number; signal?: AbortSignal; onProgress?: (p: DescribedProgress) => void; onPictures?: ReadHooks['onPictures']; onDescribing?: (event: DescribingEvent) => void }): Promise<DescribedRun> {
   const now = input.now ?? (() => new Date())
   const clock = input.clock ?? (() => performance.now())
   const startedAt = now().toISOString()
   const t0 = clock()
   const stageOf = { DECODING: 'CLASSIFYING_SOURCES', SORTING: 'CLASSIFYING_SOURCES', DESCRIBING: 'EXTRACTING_OBSERVATIONS', ADMITTING: 'SOLVING_TOPOLOGY' } as const
-  const reading = await readHouse(input.pkg, input.cache, input.reader, { ...(input.signal ? { signal: input.signal } : {}), onStep: (step, detail) => input.onProgress?.({ stage: stageOf[step], detail: `${step.toLowerCase()}: ${detail}` }), ...(input.onPictures ? { onPictures: input.onPictures } : {}) })
+  // the description is one long request with nothing to count inside it: its share is stated, not animated
+  const fractionOf = { DECODING: 0.02, SORTING: 0.06, DESCRIBING: 0.25, ADMITTING: 0.9 } as const
+  const provider = { id: input.reader.provider.id, model: input.reader.provider.model, triageModel: input.reader.provider.triageModel }
+  let onPage = 0
+  let chosen: DescribedPicture[] = []
+  const tell = (phase: DescribingEvent['phase']): void => input.onDescribing?.({ phase, after: input.after ?? null, picturesOnPage: onPage, pictures: chosen, provider })
+  const reading = await readHouse(input.pkg, input.cache, input.reader, {
+    ...(input.signal ? { signal: input.signal } : {}),
+    onStep: (step, detail) => {
+      if (step === 'SORTING') {
+        onPage = Number.parseInt(detail, 10) || 0
+        tell('SORTING_PICTURES')
+      }
+      input.onProgress?.({ stage: stageOf[step], fraction: fractionOf[step], detail: `${step.toLowerCase()}: ${detail}` })
+    },
+    onPictures: (sent) => {
+      chosen = sent.map(({ bytes: _bytes, ...p }) => p)
+      tell('DESCRIBING_HOUSE')
+      input.onPictures?.(sent)
+    },
+  })
   const t1 = clock()
-  input.onProgress?.({ stage: 'BUILDING_MODEL', detail: 'building the described house' })
-  const out = describedResult({ pkg: input.pkg, identity: input.identity, sourceUrl: input.sourceUrl ?? input.pkg.canonicalUrl, jobId: input.jobId ?? null, reading, after: input.after ?? null, startedAt, now })
+  tell('BUILDING_MODEL')
+  input.onProgress?.({ stage: 'BUILDING_MODEL', fraction: 0.95, detail: 'building the described house' })
+  const out = describedResult({ pkg: input.pkg, identity: input.identity, sourceUrl: input.sourceUrl ?? input.pkg.canonicalUrl, jobId: input.jobId ?? null, reading, after: input.after ?? null, ...(input.anchors ? { anchors: input.anchors } : {}), startedAt, now })
   const t2 = clock()
   return { ...out, timings: { readMs: Math.round(t1 - t0), buildMs: Math.round(t2 - t1), totalMs: Math.round(t2 - t0) } }
 }

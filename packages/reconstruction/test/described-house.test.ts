@@ -180,3 +180,47 @@ describe('described house — scale', () => {
     expect(same.adjustments.map((a) => a.code)).not.toContain('SCALED_TO_PUBLISHED_FIGURE')
   })
 })
+
+describe('described house — measures the drawings give (v3.53.1)', () => {
+  const span = (d: HouseDescription) => ({ w: Math.max(...d.bodies.map((b) => b.x1)) - Math.min(...d.bodies.map((b) => b.x0)), dep: Math.max(...d.bodies.map((b) => b.z1)) - Math.min(...d.bodies.map((b) => b.z0)) })
+  const built = (b: ReturnType<typeof buildingFromHouseDescription>) => ({ w: Math.max(...b.building.masses.map((m) => m.x1)), dep: Math.max(...b.building.masses.map((m) => m.z1)) })
+
+  it('a footprint measured on the drawings sets the size by one factor, whichever way round the two paths took the front, and outranks a printed label', () => {
+    const d = fixture()
+    const { w, dep } = span(d)
+    const printed = { ...d, overall: { ...d.overall, basis: 'PRINTED_ON_DRAWING' as const, printedWidthLabel: '1240', printedDepthLabel: '900' } }
+    for (const anchor of [{ widthM: w * 1.15, depthM: dep * 1.15 }, { widthM: dep * 1.15, depthM: w * 1.15 }]) {
+      const out = buildingFromHouseDescription(printed, { anchors: { footprint: { ...anchor, why: 'the drawings verify it' } } })
+      expect(out.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_MEASURE')
+      expect(built(out).w).toBeCloseTo(w * 1.15, 1)
+      expect(built(out).dep).toBeCloseTo(dep * 1.15, 1)
+    }
+  })
+
+  it('a measured footprint of another proportion is not forced on the description: refused by name, the description keeps its size', () => {
+    const d = fixture()
+    const { w, dep } = span(d)
+    const out = buildingFromHouseDescription(d, { anchors: { footprint: { widthM: w * 1.6, depthM: dep * 0.9, why: 'the drawings verify it' } } })
+    const codes = out.adjustments.map((a) => a.code)
+    expect(codes).toContain('DRAWINGS_MEASURE_NOT_APPLIED')
+    expect(codes).not.toContain('SCALED_TO_DRAWINGS_MEASURE')
+    expect(built(out).w).toBeCloseTo(w, 1)
+  })
+
+  it('a measured storey height replaces the described one, by name; the bodies, roofs and openings stay the description\'s', () => {
+    const d = fixture()
+    const plain = buildingFromHouseDescription(d)
+    const out = buildingFromHouseDescription(d, { anchors: { storeyHeightM: { value: 3.12, why: 'the section measures it' } } })
+    expect(out.building.levels[0].height).toBe(3.12)
+    expect(out.adjustments.map((a) => a.code)).toContain('HEIGHT_FROM_DRAWINGS_MEASURE')
+    expect(out.building.masses.map((m) => [m.id, m.x0, m.x1, m.z0, m.z1])).toEqual(plain.building.masses.map((m) => [m.id, m.x0, m.x1, m.z0, m.z1]))
+    expect(out.building.openings.length).toBe(plain.building.openings.length)
+    expect(out.building.planeRoofs?.map((r) => [r.massId, r.ridgeAxis])).toEqual(plain.building.planeRoofs?.map((r) => [r.massId, r.ridgeAxis]))
+    expect(reconstructFromHouseDescription(d, 'anchored', { anchors: { storeyHeightM: { value: 3.12, why: 'x' } } }).ok).toBe(true)
+  })
+
+  it('without anchors nothing changes: the same building, byte for byte', () => {
+    const d = fixture()
+    expect(JSON.stringify(buildingFromHouseDescription(d, { anchors: {} }))).toBe(JSON.stringify(buildingFromHouseDescription(d)))
+  })
+})

@@ -13,30 +13,34 @@
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
 import { AnalysisError, analyseLink, analysisFilesOf, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisProgress, AnalysisTelemetry, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import type { AnalysisProgress, AnalysisTelemetry, DescribingEvent, LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import type { StructuredVision, VisionReasoner } from '@buildapp/source-vision'
 import type { ResultFiles } from './store.js'
 
-export type JobInput = { jobId: string; url: string; workDir: string }
+/** `describe`: this submission carried the pilot's access token, so the host's paid house reader may be used for it. */
+export type JobInput = { jobId: string; url: string; workDir: string; describe?: boolean }
+
+export type JobControl = { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void; onDescribing?: (event: DescribingEvent) => void }
 
 export type JobOutput = ResultFiles & { parsed: LinkAnalysisSummary }
 
 export interface JobExecutor {
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput>
+  execute(input: JobInput, control: JobControl): Promise<JobOutput>
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
 export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
-export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: { signal?: AbortSignal; onProgress?: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
+export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: Partial<JobControl>): Promise<JobOutput> {
   const run = await analyseLink(
     { kind: 'URL', url: input.url },
     {
       adapters: wiring.adapters,
-      ...(wiring.houseReader ? { houseReader: wiring.houseReader } : {}),
+      // the paid reader only for a submission that was allowed it; every other job is the drawings' path alone
+      ...(wiring.houseReader && input.describe === true ? { houseReader: wiring.houseReader, ...(control.onDescribing ? { onDescribing: control.onDescribing } : {}) } : {}),
       deps: wiring.deps,
       policy: wiring.policy,
       vision: wiring.vision,
@@ -59,11 +63,12 @@ export class InProcessExecutor implements JobExecutor {
    * or timed-out job is released at once and the run behind it stops at its
    * next checkpoint. Production uses the worker, which is terminated instead.
    */
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
+  execute(input: JobInput, control: JobControl): Promise<JobOutput> {
     const run = executeJob(input, this.wiring(), {
       signal: control.signal,
       onProgress: (e) => (control.signal.aborted ? undefined : control.onProgress(e)),
       onTelemetry: (e) => (control.signal.aborted ? undefined : control.onTelemetry?.(e)),
+      onDescribing: (e) => (control.signal.aborted ? undefined : control.onDescribing?.(e)),
     })
     const stopped = new Promise<never>((_, reject) => {
       const fail = (): void => reject(toAnalysisError(control.signal.reason, control.signal))
@@ -77,7 +82,7 @@ export class InProcessExecutor implements JobExecutor {
 }
 
 /** Messages a job's worker sends back. */
-export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'telemetry'; event: AnalysisTelemetry } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string; detail?: AnalysisError['detail'] }
+export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'telemetry'; event: AnalysisTelemetry } | { type: 'describing'; event: DescribingEvent } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string; detail?: AnalysisError['detail'] }
 
 export class WorkerExecutor implements JobExecutor {
   constructor(
@@ -85,7 +90,7 @@ export class WorkerExecutor implements JobExecutor {
     private readonly options: { memoryMb: number; env?: Record<string, string | undefined> },
   ) {}
 
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
+  execute(input: JobInput, control: JobControl): Promise<JobOutput> {
     return new Promise<JobOutput>((resolve, reject) => {
       if (control.signal.aborted) {
         reject(toAnalysisError(control.signal.reason, control.signal))
@@ -115,6 +120,8 @@ export class WorkerExecutor implements JobExecutor {
           if (!settled) control.onProgress(message.event)
         } else if (message.type === 'telemetry') {
           if (!settled) control.onTelemetry?.(message.event)
+        } else if (message.type === 'describing') {
+          if (!settled) control.onDescribing?.(message.event)
         } else if (message.type === 'done') {
           settle(() => resolve(message.output))
         } else {

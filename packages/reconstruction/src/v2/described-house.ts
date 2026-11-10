@@ -27,13 +27,16 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.2.0'
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.3.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
   | 'FRAME_SHIFTED'
   | 'BODIES_RESCALED_TO_OVERALL'
   | 'SCALED_TO_PUBLISHED_FIGURE'
+  | 'SCALED_TO_DRAWINGS_MEASURE'
+  | 'DRAWINGS_MEASURE_NOT_APPLIED'
+  | 'HEIGHT_FROM_DRAWINGS_MEASURE'
   | 'BODY_CLIPPED'
   | 'BODY_DROPPED'
   | 'EAVES_HEIGHT_CLAMPED'
@@ -127,7 +130,17 @@ function wallTopAt(mass: MassV2, facade: Facade, at: number, roof: PlaneRoofV2 |
  * The described house as `BuildingV2`. Total: a description `checkHouseDescription` admitted always yields a building
  * with at least its main body; everything it could not place as stated is in `adjustments`.
  */
-export function buildingFromHouseDescription(input: HouseDescription, options: { published?: PublishedFigure[] } = {}): DescribedBuilding {
+/**
+ * v3.53.1: what the drawings' path measured, where it measured anything. A measure outranks a published figure and the
+ * reader's own reading of size — and only of size: the anchors say nothing about which bodies, roofs or openings
+ * there are. `footprint` is the extent of the walls the drawings' path placed at a scale its own dimensions verify;
+ * `storeyHeightM` is a storey height it measured. Each is applied by name or, where it cannot be, refused by name.
+ */
+export type DescribedAnchors = { footprint?: { widthM: number; depthM: number; why: string }; storeyHeightM?: { value: number; why: string } }
+
+export type DescribedBuildOptions = { published?: PublishedFigure[]; anchors?: DescribedAnchors }
+
+export function buildingFromHouseDescription(input: HouseDescription, options: DescribedBuildOptions = {}): DescribedBuilding {
   const adjustments: DescribedAdjustment[] = []
   const adj = (code: DescribedAdjustmentCode, subject: string, why: string): void => void adjustments.push({ code, subject, why })
   const d = input
@@ -152,7 +165,21 @@ export function buildingFromHouseDescription(input: HouseDescription, options: {
   // proportion, else the published footprint area. One factor for every position: the shape is the reader's, the size
   // the page's. Named, and approximate — a published figure is not a dimension confirmed on the drawing.
   let kp = 1
-  if (d.overall.basis !== 'PRINTED_ON_DRAWING' && !rescale) {
+  // A footprint the drawings' path measured sets the size, whatever the description says of its own basis: the walls'
+  // extent as described is held against it both ways round (the two paths need not agree on which side is the front)
+  // and scaled by ONE factor where the two axes ask for the same one. Proportions that disagree are not forced.
+  let anchored = false
+  const anchor = options.anchors?.footprint
+  if (anchor && spanX > 0 && spanZ > 0) {
+    const ways = ([[anchor.widthM, anchor.depthM], [anchor.depthM, anchor.widthM]] as const).map(([w, l]) => ({ ax: w / spanX, az: l / spanZ })).filter((c) => Math.abs(c.ax / c.az - 1) < 0.1).map((c) => (c.ax + c.az) / 2)
+    const k = ways.sort((a, b) => Math.abs(a - 1) - Math.abs(b - 1))[0]
+    if (k !== undefined && k > 0.5 && k < 2) {
+      anchored = true
+      kp = k
+      adj('SCALED_TO_DRAWINGS_MEASURE', 'frame', `${anchor.why}: the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, every position scaled by ${k.toFixed(3)}`)
+    } else adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${anchor.why}, but the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m — another proportion: the description keeps its own size`)
+  }
+  if (!anchored && d.overall.basis !== 'PRINTED_ON_DRAWING' && !rescale) {
     const fig = (key: string): number | undefined => options.published?.find((f) => f.key === key)?.value
     const pw = fig('building_width')
     const pl = fig('building_length')
@@ -171,10 +198,10 @@ export function buildingFromHouseDescription(input: HouseDescription, options: {
       adj('SCALED_TO_PUBLISHED_FIGURE', 'frame', `the overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')} (${d.overall.widthM} × ${d.overall.depthM} m) and ${c.why}: every position scaled by ${c.k.toFixed(3)} — approximate, a published figure is not a dimension confirmed on a drawing`)
     }
   }
-  const kx = rescale ? (fx + fz) / 2 : kp
+  const kx = anchored ? kp : rescale ? (fx + fz) / 2 : kp
   const kz = kx
   if (Math.abs(minX) > 1e-6 || Math.abs(minZ) > 1e-6) adj('FRAME_SHIFTED', 'frame', `the bodies started at x ${minX.toFixed(2)}, z ${minZ.toFixed(2)}: moved to the origin`)
-  if (rescale) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: every position scaled by ${kx.toFixed(3)}`)
+  if (rescale && !anchored) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: every position scaled by ${kx.toFixed(3)}`)
   const X = (x: number): number => (x - minX) * kx
   const Z = (z: number): number => (z - minZ) * kz
   const snapX = snapper(d.bodies.flatMap((b) => [X(b.x0), X(b.x1)]))
@@ -207,7 +234,9 @@ export function buildingFromHouseDescription(input: HouseDescription, options: {
   const mainMassId = 'main'
 
   // --- levels ------------------------------------------------------------------------------------------------------
-  const H = round6(clamp(d.overall.storeyHeightM, 2.5, 3.6))
+  const measuredH = options.anchors?.storeyHeightM
+  const H = round6(measuredH ? clamp(measuredH.value, 2.2, 4.5) : clamp(d.overall.storeyHeightM, 2.5, 3.6))
+  if (measuredH) adj('HEIGHT_FROM_DRAWINGS_MEASURE', 'levels', `${measuredH.why}: storeys built ${H.toFixed(2)} m high (described as ${d.overall.storeyHeightM} m)`)
   const levelsOf = (b: DescribedBody): number => b.storeys + (b.habitableAttic && b.roof.kind !== 'FLAT' ? 1 : 0)
   const nLevels = Math.max(...bodies.map((b) => levelsOf(b.src)))
   const levels: LevelV2[] = Array.from({ length: nLevels }, (_, i) => ({ index: i, id: `lvl-${i}`, elevation: round6(i * H), height: H, wallTop: round6((i + 1) * H), featureId: `described-level-${i}` }))
@@ -620,7 +649,7 @@ export type DescribedModel =
  * A description to a model: build, emit, fit — an object the model's validator refuses is taken out and named
  * (`refused`), as the drawings' preview does — and run through the model's own validator.
  */
-export function reconstructFromHouseDescription(description: HouseDescription, modelId: string, options: { published?: PublishedFigure[] } = {}): DescribedModel {
+export function reconstructFromHouseDescription(description: HouseDescription, modelId: string, options: DescribedBuildOptions = {}): DescribedModel {
   const { building, adjustments, mainMassId } = buildingFromHouseDescription(description, options)
   const emitted = emitBuilding(building, DESCRIBED_HOUSE_LABEL)
   const preview = fitPreviewProgram(emitted.program, { label: DESCRIBED_HOUSE_LABEL, modelId, mainMassId, toleranceM: 0.05 })

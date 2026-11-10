@@ -8,7 +8,7 @@
  */
 import { randomBytes } from 'node:crypto'
 import { ANALYSIS_STAGES, STAGE_LABELS, isTerminal } from '@buildapp/analysis-service'
-import type { AnalysisProgress, AnalysisStage, AnalysisStatus, AnalysisTelemetry, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import type { AnalysisProgress, AnalysisStage, AnalysisStatus, AnalysisTelemetry, DescribingEvent, LinkAnalysisSummary } from '@buildapp/analysis-service'
 
 export type StageState = 'PENDING' | 'RUNNING' | 'DONE' | 'FAILED' | 'CANCELLED'
 
@@ -65,6 +65,23 @@ export type JobRecord = {
    * arrived; dropped when the job ends.
    */
   activity?: JobActivityRecord
+  /**
+   * v3.53.1: present from the moment the house is being read as a whole from the page's pictures — the phase, why it
+   * started, and the pictures actually being interpreted: for each, the original the page published (address, hash,
+   * size) and what was sent to the reader (a smaller JPEG: its own hash, size and byte count). It stays on the
+   * finished record. There are no marks on these pictures: the reader returns a description, not positions.
+   */
+  describing?: JobDescribingRecord
+}
+
+export type JobDescribingRecord = {
+  phase: DescribingEvent['phase']
+  startedAt: string
+  updatedAt: string
+  after: DescribingEvent['after']
+  provider: DescribingEvent['provider']
+  picturesOnPage: number
+  pictures: Array<{ number: number; kind: string; assetId: string; original: { url: string | null; sha256: string | null; widthPx: number; heightPx: number }; sent: { sha256: string; mediaType: string; widthPx: number; heightPx: number; bytes: number } }>
 }
 
 export type JobActivityRecord = Omit<AnalysisTelemetry, 'kind' | 'stage' | 'stageIndex' | 'stageCount' | 'timestamp' | 'overall'> & { heartbeatAt: string }
@@ -116,6 +133,24 @@ export function applyTelemetry(job: JobRecord, event: AnalysisTelemetry, now: st
   if (isTerminal(job.status)) return job
   const { kind: _kind, stage: _stage, stageIndex: _index, stageCount: _count, timestamp: _timestamp, overall: _overall, ...activity } = event
   return { ...job, activity: { ...activity, heartbeatAt: now }, updatedAt: now }
+}
+
+/** Record what the described path is doing and which pictures it reads. A finished job never changes. */
+export function applyDescribing(job: JobRecord, event: DescribingEvent, now: string): JobRecord {
+  if (isTerminal(job.status)) return job
+  return {
+    ...job,
+    describing: {
+      phase: event.phase,
+      startedAt: job.describing?.startedAt ?? now,
+      updatedAt: now,
+      after: event.after,
+      provider: event.provider,
+      picturesOnPage: event.picturesOnPage,
+      pictures: event.pictures.map((p) => ({ number: p.number, kind: p.kind, assetId: p.assetId, original: { url: p.sourceUrl, sha256: p.byteHash, widthPx: p.originalWidthPx, heightPx: p.originalHeightPx }, sent: { sha256: p.sentSha256, mediaType: p.sentMediaType, widthPx: p.widthPx, heightPx: p.heightPx, bytes: p.sentBytes } })),
+    },
+    updatedAt: now,
+  }
 }
 
 const withoutActivity = (job: JobRecord): JobRecord => {

@@ -19,7 +19,7 @@ import type { SyntheticPublisher } from '@buildapp/synthetic-drawings'
 import { ANALYSIS_STAGES } from '@buildapp/analysis-service'
 import { HOST, PAGE, unknownPublisher } from '../../../packages/analysis-service/test/support/unknown-publisher.js'
 import { InProcessExecutor } from '../src/executor.js'
-import { cappedStructuredVision, readHouseReaderUsage } from '../src/house-reader-budget.js'
+import { DEFAULT_SPEND_LIMITS, openSpendLedger, spendGuardedStructuredVision } from '../src/house-reader-spend.js'
 import { call, pollJob, startApi } from './support/harness.js'
 import type { Api, Json } from './support/harness.js'
 import { dictionaryViolations } from './support/contract-shape.js'
@@ -28,24 +28,33 @@ const sha256 = (bytes: Buffer | string): string => createHash('sha256').update(b
 const description = JSON.parse(readFileSync(new URL('../../../packages/reconstruction/test/fixtures/described-house-a.json', import.meta.url), 'utf8')) as Record<string, unknown>
 
 const SECRET = 'sk-ant-test-0123456789-not-a-real-key'
+const TOKEN = 'pilot-token-for-tests-0123456789abcdef'
+const PILOT = { authorization: `Bearer ${TOKEN}` }
 
 function reader(answer: unknown): StructuredVision & { asked: string[] } {
   const asked: string[] = []
   return {
     asked,
-    provider: { id: 'house-reader.test', model: 'none', triageModel: 'none', version: 'test' },
+    provider: { id: 'house-reader.test', model: 'm', triageModel: 't', version: 'test', maxOutputTokens: { HOUSE_TRIAGE: 1000, HOUSE_DESCRIPTION: 4000 } },
     available: () => true,
     ask: async (request) => {
       asked.push(request.purpose)
-      return { output: request.purpose === 'HOUSE_TRIAGE' ? { pictures: request.pictures.map((p) => ({ picture: p.number, kind: 'EXTERIOR_VIEW', duplicateOf: 0 })) } : answer, usage: { latencyMs: 0, model: 'none' } }
+      return { output: request.purpose === 'HOUSE_TRIAGE' ? { pictures: request.pictures.map((p) => ({ picture: p.number, kind: 'EXTERIOR_VIEW', duplicateOf: 0 })) } : answer, usage: { inputTokens: 2000, outputTokens: 800, latencyMs: 0, model: 'none' } }
     },
   }
 }
 
-async function apiWith(houseReader: StructuredVision | undefined): Promise<Api> {
+async function apiWith(houseReader: StructuredVision | undefined, token = TOKEN): Promise<Api> {
   const site = unknownPublisher({ drawings: false })
   const wiring = () => ({ adapters: [genericProjectPageAdapter], deps: site.deps, ...(houseReader ? { houseReader } : {}) })
-  return startApi({ adapter: genericProjectPageAdapter, deps: site.deps } as unknown as SyntheticPublisher, {}, { executor: new InProcessExecutor(wiring) })
+  return startApi({ adapter: genericProjectPageAdapter, deps: site.deps } as unknown as SyntheticPublisher, { houseReaderToken: token }, { executor: new InProcessExecutor(wiring) })
+}
+
+const run = async (api: Api, headers: Record<string, string> = {}): Promise<{ jobId: string; polls: Json[]; final: Json }> => {
+  const r = await call(api, 'POST', '/v1/analyses', { url: PAGE }, headers)
+  expect(r.status).toBe(202)
+  const polls = await pollJob(api, r.json.jobId)
+  return { jobId: r.json.jobId as string, polls, final: polls[polls.length - 1] }
 }
 
 describe('a page with pictures and no drawings, through the service', () => {
@@ -63,36 +72,80 @@ describe('a page with pictures and no drawings, through the service', () => {
   it('without a house reader on the host the job fails with the drawings path\'s own refusal', async () => {
     const api = await apiWith(undefined)
     try {
-      const r = await call(api, 'POST', '/v1/analyses', { url: PAGE })
-      expect(r.status).toBe(202)
-      const polls = await pollJob(api, r.json.jobId)
-      const final = polls[polls.length - 1]
+      const { final } = await run(api, PILOT)
       expect(final.status).toBe('FAILED')
       expect(final.error.code).toBe('NO_DRAWINGS')
+      expect(final.describing).toBeUndefined()
     } finally {
       await api.close()
     }
   })
 
-  it('with a house reader the job completes with a model that says what it was built from', async () => {
+  it('a submission without the pilot\'s token never reaches the paid reader, whatever the host has', async () => {
     const r0 = reader(description)
     const api = await apiWith(r0)
     try {
-      const r = await call(api, 'POST', '/v1/analyses', { url: PAGE })
-      expect(r.status).toBe(202)
-      const jobId = r.json.jobId as string
-      const polls = await pollJob(api, jobId)
+      const { final } = await run(api)
+      expect(final.status).toBe('FAILED')
+      expect(final.error.code).toBe('NO_DRAWINGS')
+      expect(r0.asked).toEqual([])
+      // a wrong token is named, not silently served the free path
+      const wrong = await call(api, 'POST', '/v1/analyses', { url: PAGE }, { authorization: 'Bearer not-the-token' })
+      expect(wrong.status).toBe(401)
+      expect(wrong.json.error?.code ?? wrong.json.code).toBe('PILOT_TOKEN_INVALID')
+      expect(r0.asked).toEqual([])
+    } finally {
+      await api.close()
+    }
+    // and with no token configured on the host nobody is granted it
+    const closed = await apiWith(r0, '')
+    try {
+      expect((await call(closed, 'POST', '/v1/analyses', { url: PAGE }, PILOT)).status).toBe(401)
+      expect(r0.asked).toEqual([])
+    } finally {
+      await closed.close()
+    }
+  })
+
+  it('with the token the job completes with a model that says what it was built from, and shows what it read', async () => {
+    const r0 = reader(description)
+    const api = await apiWith(r0)
+    try {
+      const { jobId, polls, final } = await run(api, PILOT)
       bodies.push(...polls.map((p) => JSON.stringify(p)))
-      const final = polls[polls.length - 1]
       expect(final.status).toBe('COMPLETED')
       expect(final.error).toBeNull()
       expect(final.progress).toBe(1)
-      // the second path never takes the phone's progress back, and no stage is left running or failed
-      for (let i = 1; i < polls.length; i++) expect(polls[i].progress).toBeGreaterThanOrEqual(polls[i - 1].progress)
+      // neither the progress nor the stage ever moves back when the second path starts, and no stage is left open
+      const order = ['QUEUED', ...ANALYSIS_STAGES, 'COMPLETED']
+      for (let i = 1; i < polls.length; i++) {
+        expect(polls[i].progress).toBeGreaterThanOrEqual(polls[i - 1].progress)
+        expect(order.indexOf(polls[i].status)).toBeGreaterThanOrEqual(order.indexOf(polls[i - 1].status))
+      }
       expect(final.stages.map((s: Json) => s.id)).toEqual([...ANALYSIS_STAGES])
       expect(final.stages.filter((s: Json) => s.state === 'FAILED' || s.state === 'RUNNING')).toEqual([])
       expect(r0.asked[0]).toBe('HOUSE_TRIAGE')
       expect(r0.asked[r0.asked.length - 1]).toBe('HOUSE_DESCRIPTION')
+
+      // what was being read, on the record: the phase, the reason, and each picture twice — the original the page
+      // published and the smaller JPEG that was sent, each with its own hash. No marks on either.
+      const d = final.describing
+      expect(d.phase).toBe('BUILDING_MODEL')
+      expect(d.after.code).toBe('NO_DRAWINGS')
+      expect(d.provider).toEqual({ id: 'house-reader.test', model: 'm', triageModel: 't' })
+      expect(d.pictures.length).toBeGreaterThan(0)
+      expect(d.picturesOnPage).toBeGreaterThanOrEqual(d.pictures.length)
+      for (const p of d.pictures as Json[]) {
+        expect(p.original.url).toMatch(new RegExp(`^https://${HOST}/media/`))
+        expect(p.original.sha256).toMatch(/^[0-9a-f]{64}$/)
+        expect(p.sent.sha256).toMatch(/^[0-9a-f]{64}$/)
+        expect(p.sent.sha256).not.toBe(p.original.sha256)
+        expect(p.sent.mediaType).toBe('image/jpeg')
+        expect(p.sent.bytes).toBeGreaterThan(0)
+        expect(Object.keys(p).sort()).toEqual(['assetId', 'kind', 'number', 'original', 'sent'])
+      }
+      const seenPhases = new Set(polls.map((p) => p.describing?.phase).filter(Boolean))
+      expect(seenPhases.has('BUILDING_MODEL')).toBe(true)
 
       const result = await call(api, 'GET', `/v1/analyses/${jobId}/result`)
       bodies.push(result.text)
@@ -121,52 +174,58 @@ describe('a page with pictures and no drawings, through the service', () => {
   it('a description that cannot be built is the drawings path\'s refusal, never a half-made model', async () => {
     const api = await apiWith(reader({ ...description, bodies: [] }))
     try {
-      const r = await call(api, 'POST', '/v1/analyses', { url: PAGE })
-      const polls = await pollJob(api, r.json.jobId)
-      const final = polls[polls.length - 1]
+      const { jobId, final } = await run(api, PILOT)
       bodies.push(JSON.stringify(final))
       expect(final.status).toBe('FAILED')
       expect(final.error.code).toBe('NO_DRAWINGS')
-      expect((await call(api, 'GET', `/v1/analyses/${r.json.jobId}/scene`)).status).not.toBe(200)
+      expect((await call(api, 'GET', `/v1/analyses/${jobId}/scene`)).status).not.toBe(200)
     } finally {
       await api.close()
     }
   })
 
-  it('the host\'s daily ceiling: the description past it is not asked for, and the job keeps the drawings path\'s answer', async () => {
-    const dir = mkdtempSync(join(tmpdir(), 'house-reader-usage-'))
-    const file = join(dir, 'usage.json')
-    let today = new Date('2026-03-01T10:00:00Z')
+  it('the host\'s spend books bound the jobs: past the ceiling nothing is asked and the job keeps the drawings path\'s answer', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'house-reader-spend-api-'))
+    const prices = { m: { inputUsdPerMTok: 2, outputUsdPerMTok: 10 }, t: { inputUsdPerMTok: 0.1, outputUsdPerMTok: 0.5 } }
     const inner = reader(description)
-    const api = await apiWith(cappedStructuredVision(inner, { file, maxDescriptionsPerDay: 1, now: () => today }))
     try {
-      const status = async (): Promise<Json> => {
-        const r = await call(api, 'POST', '/v1/analyses', { url: PAGE })
-        const polls = await pollJob(api, r.json.jobId)
-        return polls[polls.length - 1]
+      // room for one job's two reservations (the sorting and the description), not for a second description
+      const limits = { ...DEFAULT_SPEND_LIMITS, maxUsd: 0.12 }
+      const ledger = openSpendLedger({ dir, limits })
+      const api = await apiWith(spendGuardedStructuredVision(inner, ledger, { limits, prices }))
+      try {
+        expect((await run(api, PILOT)).final.status).toBe('COMPLETED')
+        const booked = ledger.read()
+        expect(booked.requests).toBe(2)
+        expect(booked.descriptions).toBe(1)
+        // settled to the usage the answers stated: (2000 in, 800 out) on each model
+        expect(booked.cumulativeUsd).toBeCloseTo((2000 * 0.1 + 800 * 0.5) / 1e6 + (2000 * 2 + 800 * 10) / 1e6, 6)
+      } finally {
+        await api.close()
       }
-      expect((await status()).status).toBe('COMPLETED')
-      expect(readHouseReaderUsage(file, today)).toEqual({ day: '2026-03-01', descriptions: 1 })
-      const asked = inner.asked.length
-      const second = await status()
-      expect(second.status).toBe('FAILED')
-      expect(second.error.code).toBe('NO_DRAWINGS')
-      // nothing at all was asked of the provider for the second job: not the description, not the sorting before it
-      expect(inner.asked.length).toBe(asked)
-      // the next day starts at zero
-      today = new Date('2026-03-02T00:00:01Z')
-      expect((await status()).status).toBe('COMPLETED')
-      expect(readHouseReaderUsage(file, today)).toEqual({ day: '2026-03-02', descriptions: 1 })
+      // a restart of the service on the same books, with a ceiling the next description does not fit under
+      const tight = { ...limits, maxUsd: 0.05 }
+      const again = await apiWith(spendGuardedStructuredVision(inner, openSpendLedger({ dir, limits: tight }), { limits: tight, prices }))
+      try {
+        const asked = inner.asked.length
+        const second = (await run(again, PILOT)).final
+        expect(second.status).toBe('FAILED')
+        expect(second.error.code).toBe('NO_DRAWINGS')
+        // the sorting was still affordable and was asked; the description was not sent
+        expect(inner.asked.slice(asked)).toEqual(['HOUSE_TRIAGE'])
+        expect(openSpendLedger({ dir, limits: tight }).read().descriptions).toBe(1)
+      } finally {
+        await again.close()
+      }
     } finally {
-      await api.close()
       rmSync(dir, { recursive: true, force: true })
     }
   })
 
-  it('no body this suite received names the key, a server path or the publisher\'s host beyond the job\'s own URL', () => {
+  it('no body this suite received names the key, the pilot\'s token or a server path', () => {
     const all = bodies.join('\n')
     expect(all).not.toContain(SECRET)
+    expect(all).not.toContain(TOKEN)
     expect(all).not.toMatch(/\/tmp\/|\/home\//)
-    expect(all.split(HOST).length - 1).toBeLessThanOrEqual(bodies.length * 6)
   })
 })

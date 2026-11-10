@@ -13,8 +13,8 @@
  *   are evicted beyond `maxStoredJobs`.
  */
 import { AnalysisError, isTerminal, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisProgress, AnalysisTelemetry } from '@buildapp/analysis-service'
-import { applyProgress, applyTelemetry, completeJob, failJob, newJob, newJobId } from './job.js'
+import type { AnalysisProgress, AnalysisTelemetry, DescribingEvent } from '@buildapp/analysis-service'
+import { applyDescribing, applyProgress, applyTelemetry, completeJob, failJob, newJob, newJobId } from './job.js'
 import type { JobRecord } from './job.js'
 import type { AnalysisJobStore } from './store.js'
 import type { JobExecutor } from './executor.js'
@@ -33,6 +33,8 @@ export type RunnerEvents = { onJobEnd?: (job: JobRecord, error?: unknown) => voi
 export class JobRunner {
   private readonly queue: string[] = []
   private readonly urls = new Map<string, string>()
+  /** Jobs whose submission was allowed the paid house reader. In memory only: the permission is never stored. */
+  private readonly paid = new Set<string>()
   private readonly running = new Map<string, AbortController>()
   private readonly done = new Set<Promise<void>>()
   private closed = false
@@ -50,13 +52,14 @@ export class JobRunner {
   }
 
   /** Accept a validated URL. Throws `QueueFull` when there is no room. */
-  async submit(url: string): Promise<JobRecord> {
+  async submit(url: string, options: { describe?: boolean } = {}): Promise<JobRecord> {
     if (this.closed) throw new QueueFull()
     // room for `concurrency` running jobs and `maxQueued` waiting behind them
     if (this.running.size + this.queue.length >= this.limits.concurrency + this.limits.maxQueued) throw new QueueFull()
     const job = newJob(newJobId(), url, this.now().toISOString())
     await this.store.create(job)
     this.urls.set(job.jobId, url)
+    if (options.describe === true) this.paid.add(job.jobId)
     this.queue.push(job.jobId)
     this.pump()
     return job
@@ -70,6 +73,7 @@ export class JobRunner {
     if (queued >= 0) {
       this.queue.splice(queued, 1)
       this.urls.delete(jobId)
+      this.paid.delete(jobId)
       await this.store.update(jobId, (j) => failJob(j, { code: 'CANCELLED', message: 'the analysis was cancelled' }, this.now().toISOString()))
       return 'CANCELLED'
     }
@@ -95,9 +99,10 @@ export class JobRunner {
       const jobId = this.queue.shift()!
       const url = this.urls.get(jobId)!
       this.urls.delete(jobId)
+      const describe = this.paid.delete(jobId)
       const controller = new AbortController()
       this.running.set(jobId, controller)
-      const task = this.run(jobId, url, controller).finally(() => {
+      const task = this.run(jobId, url, controller, describe).finally(() => {
         this.running.delete(jobId)
         this.done.delete(task)
         this.pump()
@@ -106,7 +111,7 @@ export class JobRunner {
     }
   }
 
-  private async run(jobId: string, url: string, controller: AbortController): Promise<void> {
+  private async run(jobId: string, url: string, controller: AbortController, describe = false): Promise<void> {
     const stamp = (): string => this.now().toISOString()
     const timer = setTimeout(() => controller.abort(new DOMException('job time limit', 'TimeoutError')), this.limits.jobTimeoutMs)
     let pending: Promise<unknown> = Promise.resolve()
@@ -121,10 +126,13 @@ export class JobRunner {
       lastActivityWrite = at
       pending = this.store.update(jobId, (j) => applyTelemetry(j, event, stamp()))
     }
+    const onDescribing = (event: DescribingEvent): void => {
+      pending = this.store.update(jobId, (j) => applyDescribing(j, event, stamp()))
+    }
     let failure: unknown
     try {
       const workDir = await this.store.workspace(jobId)
-      const output = await this.executor.execute({ jobId, url, workDir }, { signal: controller.signal, onProgress, onTelemetry })
+      const output = await this.executor.execute({ jobId, url, workDir, ...(describe ? { describe: true } : {}) }, { signal: controller.signal, onProgress, onTelemetry, onDescribing })
       if (controller.signal.aborted) throw toAnalysisError(controller.signal.reason, controller.signal)
       await pending
       await this.store.saveResult(jobId, output)

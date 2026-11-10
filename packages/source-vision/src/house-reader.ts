@@ -11,7 +11,7 @@
 import { sha256Bytes, sha256Hex } from '@buildapp/source-common'
 import type { JsonSchemaNode } from './house-description.js'
 
-export const HOUSE_READER_VERSION = '0.1.0'
+export const HOUSE_READER_VERSION = '0.2.0'
 
 export type ReaderPicture = { number: number; bytes: Uint8Array; mediaType: string }
 
@@ -26,15 +26,21 @@ export type StructuredVisionRequest = {
 
 export type StructuredVisionUsage = { inputTokens?: number; outputTokens?: number; estimatedCostUsd?: number; latencyMs: number; model: string }
 
+export type StructuredVisionPurpose = StructuredVisionRequest['purpose']
+
 export interface StructuredVision {
-  readonly provider: { id: string; model: string; triageModel: string; version: string }
+  /**
+   * `maxOutputTokens`: the most one answer of each purpose may cost in output — what a spend guard reserves against.
+   * `requestTimeoutMs`: after how long a request is given up. A provider that does not state them cannot be guarded.
+   */
+  readonly provider: { id: string; model: string; triageModel: string; version: string; maxOutputTokens?: Record<StructuredVisionPurpose, number>; requestTimeoutMs?: number }
   available(): boolean
   ask(request: StructuredVisionRequest): Promise<{ output: unknown; usage: StructuredVisionUsage }>
 }
 
 export class HouseReaderUnavailable extends Error {
   constructor(
-    readonly reason: 'NO_PROVIDER' | 'NO_CREDENTIALS' | 'TRANSPORT' | 'NO_ANSWER' | 'FIXTURE_MISS',
+    readonly reason: 'NO_PROVIDER' | 'NO_CREDENTIALS' | 'TRANSPORT' | 'NO_ANSWER' | 'FIXTURE_MISS' | 'BUDGET' | 'REQUEST_TOO_LARGE',
     message: string,
   ) {
     super(message)
@@ -97,8 +103,15 @@ export function selectHousePictures(triaged: TriagedPicture[], areaPx: (number: 
 
 // --- providers -------------------------------------------------------------------------------------------------------
 
-/** What a recorded answer is keyed by: the question's purpose and the exact bytes of every picture, in order. */
-export const structuredVisionKey = (request: Pick<StructuredVisionRequest, 'purpose' | 'pictures'>): string => sha256Hex(`${request.purpose}\n${request.pictures.map((p) => sha256Bytes(p.bytes)).join('\n')}`)
+/**
+ * What a recorded answer is keyed by: everything the answer depends on — the purpose, this reader's version, the
+ * instructions, the question (which carries the page's published figures and the pictures' sizes), the schema of the
+ * answer, and the exact bytes, type and number of every picture, in order. A changed question, schema or context is
+ * another key: it can never be handed the answer to the old one. Rebuilding a model from one recorded description is a
+ * different test (the builder's) and needs no key at all.
+ */
+export const structuredVisionKey = (request: Pick<StructuredVisionRequest, 'purpose' | 'system' | 'text' | 'schema' | 'pictures'>): string =>
+  sha256Hex(JSON.stringify({ v: HOUSE_READER_VERSION, purpose: request.purpose, system: request.system, text: request.text, schema: request.schema, pictures: request.pictures.map((p) => [p.number, p.mediaType, sha256Bytes(p.bytes)]) }))
 
 /**
  * Replays recorded answers against the bytes they were given for. A question about other bytes is a miss, loudly —
@@ -128,23 +141,26 @@ const toBase64 = (bytes: Uint8Array): string => (typeof Buffer !== 'undefined' ?
  * `tool_choice`). The key is read from the host's environment and is never logged. NOT run live in this repository's
  * checks — there is no key here; `fixtureStructuredVision` replays what a live provider answered.
  */
-export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; createClient?: (apiKey: string) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
+export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; triageMaxTokens?: number; timeoutMs?: number; createClient?: (apiKey: string, limits: { timeoutMs: number }) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
   const apiKey = options.apiKey ?? process.env.ANTHROPIC_API_KEY ?? ''
   const model = options.model ?? 'claude-sonnet-5-5'
   const triageModel = options.triageModel ?? 'claude-haiku-5-5'
   const createClient =
     options.createClient ??
-    (async (key: string): Promise<AnthropicMessagesLike> => {
-      const mod = (await import('@anthropic-ai/sdk')) as unknown as { default: new (o: { apiKey: string }) => AnthropicMessagesLike }
-      return new mod.default({ apiKey: key })
+    // No retry inside the SDK: one `ask` is at most one billed request, and whoever owns the budget owns the retry.
+    (async (key: string, limits: { timeoutMs: number }): Promise<AnthropicMessagesLike> => {
+      const mod = (await import('@anthropic-ai/sdk')) as unknown as { default: new (o: { apiKey: string; maxRetries: number; timeout: number }) => AnthropicMessagesLike }
+      return new mod.default({ apiKey: key, maxRetries: 0, timeout: limits.timeoutMs })
     })
+  const maxOutputTokens = { HOUSE_TRIAGE: options.triageMaxTokens ?? 4096, HOUSE_DESCRIPTION: options.maxTokens ?? 16000 }
+  const timeoutMs = options.timeoutMs ?? 240_000
   let client: Promise<AnthropicMessagesLike> | undefined
   return {
-    provider: { id: 'house-reader.anthropic', model, triageModel, version: HOUSE_READER_VERSION },
+    provider: { id: 'house-reader.anthropic', model, triageModel, version: HOUSE_READER_VERSION, maxOutputTokens, requestTimeoutMs: timeoutMs },
     available: () => apiKey.length > 0,
     ask: async (request) => {
       if (apiKey.length === 0) throw new HouseReaderUnavailable('NO_CREDENTIALS', 'ANTHROPIC_API_KEY is not set on this host, so no house description can be asked for')
-      client ??= createClient(apiKey)
+      client ??= createClient(apiKey, { timeoutMs })
       const use = request.purpose === 'HOUSE_TRIAGE' ? triageModel : model
       const content: unknown[] = []
       for (const p of request.pictures) content.push({ type: 'text', text: `Picture ${p.number}:` }, { type: 'image', source: { type: 'base64', media_type: p.mediaType, data: toBase64(p.bytes) } })
@@ -153,7 +169,7 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
       let response: Awaited<ReturnType<AnthropicMessagesLike['messages']['create']>>
       try {
         response = await (await client).messages.create(
-          { model: use, max_tokens: options.maxTokens ?? 16000, system: request.system, messages: [{ role: 'user', content }], output_config: { format: { type: 'json_schema', schema: request.schema }, ...(request.purpose === 'HOUSE_DESCRIPTION' ? { effort: 'medium' } : {}) } },
+          { model: use, max_tokens: maxOutputTokens[request.purpose], system: request.system, messages: [{ role: 'user', content }], output_config: { format: { type: 'json_schema', schema: request.schema }, ...(request.purpose === 'HOUSE_DESCRIPTION' ? { effort: 'medium' } : {}) } },
           request.signal ? { signal: request.signal } : undefined,
         )
       } catch (e) {

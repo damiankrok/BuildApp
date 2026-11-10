@@ -28,6 +28,12 @@ export type ApiConfig = {
   workerMemoryMb: number
   /** `deterministic` (default) or `live`: a server-side vision provider, whose key never leaves the server. */
   vision: 'deterministic' | 'live'
+  /**
+   * v3.53.1: the pilot's access token. A submission that carries it (`Authorization: Bearer …`) may use the host's paid
+   * house reader; one without it gets the drawings' path alone. Empty: nobody may, whatever else is configured.
+   * Compared in constant time, never logged, never returned.
+   */
+  houseReaderToken: string
   log: boolean
 }
 
@@ -59,6 +65,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     maxBodyBytes: 4096,
     workerMemoryMb: int(env.ANALYZER_WORKER_MEMORY_MB, 2048, 256, 16_384),
     vision: env.ANALYZER_VISION === 'live' ? 'live' : 'deterministic',
+    houseReaderToken: env.ANALYZER_HOUSE_READER === 'live' ? (env.ANALYZER_HOUSE_READER_TOKEN?.trim() ?? '') : '',
     log: env.ANALYZER_LOG !== '0',
   }
 }

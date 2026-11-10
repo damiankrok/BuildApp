@@ -6,6 +6,7 @@
  * here from a code and a sentence this module or the analysis service wrote;
  * no exception's own text, no path and no stack ever reaches a client.
  */
+import { createHash, timingSafeEqual } from 'node:crypto'
 import { createServer } from 'node:http'
 import type { IncomingMessage, Server, ServerResponse } from 'node:http'
 import { ANALYSIS_SERVICE_VERSION, AnalysisError, validateAnalysisUrl } from '@buildapp/analysis-service'
@@ -43,6 +44,19 @@ class HttpError extends Error {
 const URL_STATUS: Record<string, number> = { INVALID_URL: 400, SOURCE_UNSAFE: 400, UNSUPPORTED_PUBLISHER: 422 }
 
 const ROUTE = /^\/v1\/analyses\/([^/]+)(?:\/(result|scene|model|candidate))?\/?$/
+
+/**
+ * Whether a submission may use the paid house reader: it must present the host's token, compared in constant time.
+ * No token configured on the host: nobody may. The token is never logged, stored on a job or returned.
+ */
+export function pilotAccess(header: string | undefined, token: string): 'NONE' | 'GRANTED' | 'WRONG' {
+  const presented = /^Bearer\s+(.+)$/i.exec(header ?? '')?.[1]?.trim()
+  if (presented === undefined) return 'NONE'
+  if (token.length === 0) return 'WRONG'
+  const a = createHash('sha256').update(presented).digest()
+  const b = createHash('sha256').update(token).digest()
+  return timingSafeEqual(a, b) ? 'GRANTED' : 'WRONG'
+}
 
 /** `GET /v1/analyses/:id` for a record: the record without its schema tag, plus links. */
 export const statusBodyOf = (job: JobRecord, nowMs: number = Date.now()): Record<string, unknown> => {
@@ -85,7 +99,7 @@ export function createApiServer(deps: ApiDeps): Server {
       'access-control-allow-origin': any ? '*' : origin!,
       ...(any ? {} : { vary: 'Origin' }),
       'access-control-allow-methods': 'GET, POST, DELETE, OPTIONS',
-      'access-control-allow-headers': 'content-type',
+      'access-control-allow-headers': 'content-type, authorization',
       'access-control-expose-headers': 'location, retry-after, etag, x-content-sha256',
       'access-control-max-age': '600',
     }
@@ -202,11 +216,16 @@ export function createApiServer(deps: ApiDeps): Server {
         if (e instanceof AnalysisError) throw new HttpError(URL_STATUS[e.code] ?? 400, e.code, e.message)
         throw e
       }
+      // v3.53.1: the paid house reader is not for whoever finds the address. A submission that presents the pilot's
+      // token may use it; one that presents a wrong token is told so (never silently downgraded); one that presents
+      // none gets the drawings' path, as before.
+      const describe = pilotAccess(req.headers.authorization, config.houseReaderToken)
+      if (describe === 'WRONG') throw new HttpError(401, 'PILOT_TOKEN_INVALID', 'the access token for the house reader is not valid')
       const submitted = submitLimit.take(client, now())
       if (!submitted.ok) throw new HttpError(429, 'RATE_LIMITED', 'this client has started too many analyses recently; try again later', { 'retry-after': String(submitted.retryAfterS) })
       let job: JobRecord
       try {
-        job = await runner.submit(url.toString())
+        job = await runner.submit(url.toString(), { describe: describe === 'GRANTED' })
       } catch (e) {
         if (e instanceof QueueFull) throw new HttpError(503, 'QUEUE_FULL', 'the analyzer is busy; try again in a few minutes', { 'retry-after': '120' })
         throw e

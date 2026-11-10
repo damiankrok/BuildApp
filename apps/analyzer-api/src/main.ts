@@ -12,7 +12,7 @@ import type { JobExecutor } from './executor.js'
 import { createApiServer } from './http.js'
 import { JobRunner } from './runner.js'
 import { FileJobStore } from './store.js'
-import { productionAdapters, productionWiring } from './wiring.js'
+import { houseReaderPlan, productionAdapters, productionWiring } from './wiring.js'
 
 async function main(): Promise<void> {
   const config = loadConfig()
@@ -29,6 +29,9 @@ async function main(): Promise<void> {
   const server = createApiServer({ config, store, runner, adapters: productionAdapters(), log })
   const sweeper = setInterval(() => void runner.sweep().catch(() => undefined), 10 * 60_000)
   sweeper.unref()
+  // why the paid reader is on or off, in the operator's log — the plan only: no token, no key
+  const reader = houseReaderPlan()
+  log({ t: new Date().toISOString(), msg: 'house reader', on: reader.on, why: reader.why, model: reader.model, triageModel: reader.triageModel })
   server.listen(config.port, config.host, () => {
     log({ t: new Date().toISOString(), msg: 'listening', port: config.port, executor: useWorker ? 'worker' : 'inprocess', concurrency: config.concurrency, restoredJobs: restored.loaded, interruptedJobs: restored.interrupted })
   })
