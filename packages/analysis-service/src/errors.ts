@@ -72,6 +72,8 @@ export class AnalysisError extends Error {
     metrics?: import('@buildapp/source-metrics').MetricEvidenceSet
     /** v3.46: the content check's verdict on each picture, reached before the failure (what was seen, kept). */
     content?: import('@buildapp/source-analyzer').ContentVerdict[]
+    /** v3.53: why the described path did not stand in for this refusal, when a house reader was asked. */
+    described?: { code: string; message: string }
     /** v3.51 ANY-LINK-4: the plan sheets that have another admissible reading size than the one this run read them at. */
     rereadable?: Array<{ assetId: string; readAt: { width: number; height: number }; otherwiseAt: { width: number; height: number } }>
     /** The raw error an unexpected failure mapped from. Server-side only: it may carry a path or a line of source and never crosses to a client. */

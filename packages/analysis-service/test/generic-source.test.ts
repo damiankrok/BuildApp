@@ -18,7 +18,9 @@ import { LARCHFIELD, renderSheets, syntheticPublisher } from '@buildapp/syntheti
 import { genericProjectPageAdapter, memoryByteCache } from '@buildapp/source-package'
 import type { FetchDeps } from '@buildapp/source-package'
 import { compileBuilding } from '@buildapp/geometry'
-import { AnalysisError, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
+import { readFileSync } from 'node:fs'
+import type { StructuredVision } from '@buildapp/source-vision'
+import { AnalysisError, analyseLink, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
 
 const HOST = 'domy.nieznany-wydawca.test'
 const PAGE = `https://${HOST}/oferta/dom-larchfield`
@@ -179,4 +181,75 @@ describe('the honest answers for an unknown site', () => {
     const run = await runAnalysis({ kind: 'URL', url: specialist.pageUrl('larchfield-lf01') }, { adapters: [specialist.adapter, genericProjectPageAdapter], deps: specialist.deps, cache: memoryByteCache() })
     expect(run.pkg.adapter.id).toBe('synthetic-publisher')
   }, 240_000)
+})
+
+/**
+ * v3.53: a page the drawings' path refuses, read as a whole. The reader here is a stand-in that answers the two
+ * questions the path asks (sort the pictures; describe the house) with a hand-written description of a synthetic
+ * house — it tests the path, not a provider.
+ */
+describe('a refused page is described from its pictures when the host has a house reader (v3.53)', () => {
+  const description = JSON.parse(readFileSync(new URL('../../reconstruction/test/fixtures/described-house-a.json', import.meta.url), 'utf8')) as Record<string, unknown>
+  const reader = (answer: unknown = description): StructuredVision & { asked: string[] } => {
+    const asked: string[] = []
+    return {
+      asked,
+      provider: { id: 'house-reader.test', model: 'none', triageModel: 'none', version: 'test' },
+      available: () => true,
+      ask: async (request) => {
+        asked.push(`${request.purpose}:${request.pictures.length}`)
+        // nothing but numbered pictures, the instructions and the published figures reaches a reader
+        expect(request.text).not.toContain(HOST)
+        const output = request.purpose === 'HOUSE_TRIAGE' ? { pictures: request.pictures.map((p) => ({ picture: p.number, kind: 'EXTERIOR_VIEW', duplicateOf: 0 })) } : answer
+        return { output, usage: { latencyMs: 0, model: 'none' } }
+      },
+    }
+  }
+  const options = (site: ReturnType<typeof unknownPublisher>) => ({ adapters: [genericProjectPageAdapter], deps: site.deps, cache: memoryByteCache(), now: () => new Date('2026-01-01T00:00:00Z') })
+
+  it('without a reader the answer is the drawings path\'s own refusal', async () => {
+    const e = await analyseLink({ kind: 'URL', url: PAGE }, options(unknownPublisher({ drawings: false }))).catch((x: unknown) => x)
+    expect(e).toBeInstanceOf(AnalysisError)
+    expect((e as AnalysisError).code).toBe('NO_DRAWINGS')
+  })
+
+  it('with a reader the page yields a described model that says what it is, in the drawings path\'s contract', async () => {
+    const r = reader()
+    const progress: number[] = []
+    const run = await analyseLink({ kind: 'URL', url: PAGE }, { ...options(unknownPublisher({ drawings: false })), houseReader: r, progress: (p) => progress.push(p.progress) })
+    expect(run.basis).toBe('DESCRIPTION')
+    if (run.basis !== 'DESCRIPTION') return
+    expect(run.after?.code).toBe('NO_DRAWINGS')
+    expect(r.asked[0]).toMatch(/^HOUSE_TRIAGE:/)
+    expect(r.asked[r.asked.length - 1]).toMatch(/^HOUSE_DESCRIPTION:/)
+    const codes = run.result.warningDetails.map((w) => w.code)
+    expect(codes).toContain('MODEL_FROM_SOURCE_DESCRIPTION')
+    expect(run.result.warningDetails.find((w) => w.code === 'MODEL_FROM_SOURCE_DESCRIPTION')?.severity).toBe('LIMITING')
+    expect(run.result.vision.mode).toBe('LIVE_PROVIDER')
+    expect(run.result.quality.levels.L1 + run.result.quality.levels.L2).toBe(0)
+    expect(run.result.assessment.sourceFidelity.status).toBe('UNCHECKED')
+    expect(run.result.preview.provisional.map((p) => p.code)).toContain('SCALE_NOT_VERIFIED')
+    expect(run.result.counts.masses).toBe(2)
+    expect(run.result.counts.openings).toBe(8)
+    expect(run.result.sceneSha256).toMatch(/^[0-9a-f]{64}$/)
+    expect(compileBuilding(run.result.model).diagnostics.filter((d) => d.severity === 'ERROR')).toEqual([])
+    // the overall progress never moves back when the second path starts
+    expect(progress.every((v, i) => i === 0 || v >= progress[i - 1])).toBe(true)
+    // the same sources and the same answer give the same model, byte for byte
+    const again = await analyseLink({ kind: 'URL', url: PAGE }, { ...options(unknownPublisher({ drawings: false })), houseReader: reader() })
+    expect(again.basis === 'DESCRIPTION' && again.result.modelSha256).toBe(run.result.modelSha256)
+  })
+
+  it('a description that cannot be built leaves the drawings path\'s refusal standing, with the reason attached', async () => {
+    const e = await analyseLink({ kind: 'URL', url: PAGE }, { ...options(unknownPublisher({ drawings: false })), houseReader: reader({ ...description, bodies: [] }) }).catch((x: unknown) => x)
+    expect((e as AnalysisError).code).toBe('NO_DRAWINGS')
+    expect((e as AnalysisError).attachments?.described?.code).toBe('DESCRIPTION_REFUSED')
+  })
+
+  it('a page that is not a project is never described', async () => {
+    const r = reader()
+    const e = await analyseLink({ kind: 'URL', url: PAGE }, { ...options(unknownPublisher({ project: false })), houseReader: r }).catch((x: unknown) => x)
+    expect((e as AnalysisError).code).toBe('SOURCE_NOT_PROJECT')
+    expect(r.asked).toEqual([])
+  })
 })

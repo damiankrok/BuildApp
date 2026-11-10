@@ -12,11 +12,11 @@
  */
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
-import { AnalysisError, analysisFilesOf, runAnalysis, toAnalysisError } from '@buildapp/analysis-service'
+import { AnalysisError, analyseLink, analysisFilesOf, toAnalysisError } from '@buildapp/analysis-service'
 import type { AnalysisProgress, AnalysisTelemetry, LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
-import type { VisionReasoner } from '@buildapp/source-vision'
+import type { StructuredVision, VisionReasoner } from '@buildapp/source-vision'
 import type { ResultFiles } from './store.js'
 
 export type JobInput = { jobId: string; url: string; workDir: string }
@@ -28,14 +28,15 @@ export interface JobExecutor {
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
-export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner }
+export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
 export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: { signal?: AbortSignal; onProgress?: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
-  const run = await runAnalysis(
+  const run = await analyseLink(
     { kind: 'URL', url: input.url },
     {
       adapters: wiring.adapters,
+      ...(wiring.houseReader ? { houseReader: wiring.houseReader } : {}),
       deps: wiring.deps,
       policy: wiring.policy,
       vision: wiring.vision,

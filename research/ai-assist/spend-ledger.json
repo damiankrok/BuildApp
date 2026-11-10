@@ -1268,6 +1268,90 @@
     "cacheCreationTokens": 845
    },
    "latencyMs": 12239
+  },
+  {
+   "at": "2026-11-10T14:02:00.785Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "describe claude-sonnet-5-5 /home/user/rd/s53/pilot/sonnet-v2/extradom-pl-1",
+   "modelRequested": "claude-sonnet-5-5",
+   "modelsReturned": [
+    "claude-sonnet-5-5"
+   ],
+   "sessionId": "63674d0d-8407-4814-a5e2-2c4a36ee33f6",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.1135577,
+   "countedUsd": 0.113558,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 5985,
+    "cacheReadTokens": 5997,
+    "cacheCreationTokens": 13276
+   },
+   "latencyMs": 40510
+  },
+  {
+   "at": "2026-11-10T14:02:21.031Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 1/2 /home/user/rd/s53/pilot/sonnet-v2/houseplans-com-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "804e5997-5ae2-4bb4-9dd1-dc597ed6ca4b",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.0017353400000000001,
+   "countedUsd": 0.001735,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 3017,
+    "cacheReadTokens": 5724,
+    "cacheCreationTokens": 847
+   },
+   "latencyMs": 12279
+  },
+  {
+   "at": "2026-11-10T14:02:24.357Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "triage 2/2 /home/user/rd/s53/pilot/sonnet-v2/houseplans-com-1",
+   "modelRequested": "claude-haiku-5-5",
+   "modelsReturned": [
+    "claude-haiku-5-5"
+   ],
+   "sessionId": "0e0470f9-7be9-4ed3-ba24-f5dfb493b6dc",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.00039998000000000003,
+   "countedUsd": 0.0004,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 424,
+    "cacheReadTokens": 1798,
+    "cacheCreationTokens": 849
+   },
+   "latencyMs": 3227
+  },
+  {
+   "at": "2026-11-10T14:02:56.898Z",
+   "stage": "S53-E1 whole-house description",
+   "what": "describe claude-sonnet-5-5 /home/user/rd/s53/pilot/sonnet-v2/houseplans-com-1",
+   "modelRequested": "claude-sonnet-5-5",
+   "modelsReturned": [
+    "claude-sonnet-5-5"
+   ],
+   "sessionId": "a5025034-b7f6-4f3e-9656-404933702e0a",
+   "authCategory": "none",
+   "status": "OK",
+   "estimatedCostUsd": 0.09692970000000001,
+   "countedUsd": 0.09693,
+   "usage": {
+    "inputTokens": 2,
+    "outputTokens": 4675,
+    "cacheReadTokens": 5997,
+    "cacheCreationTokens": 12394
+   },
+   "latencyMs": 31594
   }
  ]
 }

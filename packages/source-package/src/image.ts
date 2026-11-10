@@ -355,3 +355,20 @@ export async function decoderSelfCheck(): Promise<{ webp: boolean; svg: boolean;
   const svg = attempt(new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1000"><rect width="2000" height="1000" fill="#000"/></svg>'), 2000, 1000)
   return { webp, svg, ...(details.length > 0 ? { detail: details.join('; ') } : {}) }
 }
+
+/**
+ * v3.53: a raster as JPEG bytes, transparency flattened onto white — what a picture is handed to a reader as. Used
+ * only to SHOW a picture to a reader; nothing is measured on the result.
+ */
+export function encodeJpeg(raster: Raster, quality = 88): Uint8Array {
+  const n = raster.width * raster.height
+  const data = new Uint8Array(n * 4)
+  for (let i = 0; i < n; i += 1) {
+    const a = raster.data[i * 4 + 3] / 255
+    data[i * 4] = Math.round(raster.data[i * 4] * a + 255 * (1 - a))
+    data[i * 4 + 1] = Math.round(raster.data[i * 4 + 1] * a + 255 * (1 - a))
+    data[i * 4 + 2] = Math.round(raster.data[i * 4 + 2] * a + 255 * (1 - a))
+    data[i * 4 + 3] = 255
+  }
+  return new Uint8Array(jpeg.encode({ data, width: raster.width, height: raster.height }, quality).data)
+}
