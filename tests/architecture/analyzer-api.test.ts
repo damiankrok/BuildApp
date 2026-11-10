@@ -128,8 +128,13 @@ describe('the service source itself', () => {
     for (const step of ['acquireSourcePackage(', 'analyzeSourcePackage(', 'extractMetricEvidence(', 'reconstructV2(', 'compileBuilding(', 'buildMobileSceneBundle(']) {
       expect(cli.includes(step), `the CLI calls ${step} itself`).toBe(false)
     }
+    // v3.53: the API's one entry is the service's `analyseLink`, which runs `runAnalysis` first and, where the host has
+    // a house reader, the described path after a refusal. Still one pipeline, still none of its own in the API.
     const executor = readFileSync(join(API, 'src/executor.ts'), 'utf8')
-    expect(executor).toMatch(/runAnalysis\(/)
+    expect(executor).toMatch(/analyseLink\(/)
+    const link = readFileSync(join(SERVICE, 'src/analyse-link.ts'), 'utf8')
+    expect(link).toMatch(/runAnalysis\(/)
+    for (const step of ['acquireSourcePackage(', 'analyzeSourcePackage(', 'extractMetricEvidence(', 'reconstructV2(']) expect(link.includes(step), `analyseLink calls ${step} itself`).toBe(false)
     for (const step of ['acquireSourcePackage(', 'analyzeSourcePackage(', 'reconstructV2(']) expect(executor.includes(step), `the API calls ${step} itself`).toBe(false)
   })
 })

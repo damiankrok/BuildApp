@@ -26,7 +26,7 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
   adapters: productionAdapters(),
   ...(env.ANALYZER_VISION === 'live' ? { vision: anthropicVisionReasoner({}) } : {}),
   // v3.53: `ANALYZER_HOUSE_READER=live` lets a page the drawings' path refuses be read as a whole (analysis-service
-  // `analyseLink`). The key stays in this server's environment (ANTHROPIC_API_KEY): no endpoint returns it and no client
+  // `analyseLink`). The provider reads its key from this server's environment: no endpoint returns it and no client
   // holds it. Each such analysis is a paid call — two requests, about 0.1–0.2 USD at the default models. Off by default.
   // A host-wide ceiling on paid descriptions per day (ANALYZER_HOUSE_READER_MAX_PER_DAY, default 20; 0 turns the
   // reader off), counted in the data directory so that it holds across restarts and worker threads.
