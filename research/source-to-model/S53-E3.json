@@ -1,0 +1,21 @@
+{
+ "schema": "buildapp.source-to-model.experiment/1",
+ "id": "S53-E3",
+ "frozenAt": "2026-11-10, at code revision 9069ec7, before any held-back page was opened by the described path or by its author",
+ "question": "Does the described path, as integrated in the product (analysis-service runDescribedAnalysis: triage, one description, deterministic admission, the described-house builder, emitter, validator, compiler), hold on pages it was not developed on?",
+ "set": {
+  "rule": "the second page of each of the six publishers in CONTROL-2 (slug suffix -2), held back by S53-E1 before anything ran",
+  "slugs": ["architecturaldesigns-com-2", "dobredomy-pl-2", "domoweklimaty-pl-2", "extradom-pl-2", "houseplans-com-2", "lipinscy-pl-2"],
+  "armA": {"architecturaldesigns-com-2": "NO_MODEL", "dobredomy-pl-2": "MODEL", "domoweklimaty-pl-2": "NO_MODEL", "extradom-pl-2": "NO_MODEL", "houseplans-com-2": "NO_MODEL", "lipinscy-pl-2": "MODEL"},
+  "limits": "the same six publishers as the pilot (another page of a known publisher, not an unknown publisher); six pages; the cascade ran on them blind once (1327) and nobody diagnosed them"
+ },
+ "frozen": {
+  "code": "9069ec7 (description 0.2.0, builder 0.1.0, described path 0.1.0)",
+  "reader": "claude-sonnet-5-5 at effort medium for the description, claude-haiku-5-5 for the triage, through the session CLI behind the product's StructuredVision seam",
+  "runs": "one run per page; a refusal is counted as a refusal; nothing is re-run after a look at its output",
+  "reference": "checklists written by an annotator that sees no candidate output, committed before the run",
+  "checklist": "the thirteen items and the RECOGNISABLE_CANDIDATE rule of S53-E1, unchanged; for a single slope MAIN_RIDGE is its high side"
+ },
+ "reportedBeside": "compile errors, objects the validator refused, the description's own issues, seconds and estimated cost per page; the 1327 cascade's recorded outcome on the same package",
+ "notClaimed": "twelve pages of six publishers are not 'any link'; agreement with a checklist written by the same model family is not the OWNER's judgement"
+}
