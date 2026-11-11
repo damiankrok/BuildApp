@@ -12,35 +12,39 @@
 
 ## Current summary (read first)
 
-- **Active brief:** OWNER v3.53.0 (2026-11-10) with its continuation v3.53.1 (same day): a working analyzer in the app
-  and a correct whole exterior. Campaign on `claude/new-session-3kzcgh`, commits/push with `[skip ci]`, no merge/PR.
-  Reference `1370a1d` (APK 1327 from code `0fe410a`). Checkpoint code: `a2e2f45`.
-  Reports: `stage-reports/SOURCE_TO_MODEL_V3531.md` (current), `SOURCE_TO_MODEL_V353.md`, `SOURCE_TO_MODEL.md`.
+- **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
+  working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
+  key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Reports: `stage-reports/SOURCE_TO_MODEL_V3532.md`
+  (current), `SOURCE_TO_MODEL_V3531.md`, `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
-  (the house reader as a private pilot).
+  (the house reader as a private pilot; PowerShell instructions for the owner's key).
 - **What exists:** the described path (a vision reader describes the whole house once in a closed vocabulary; a
-  deterministic check and builder; the existing emitter, validator, compiler). Held-back control S53-E3: a model on
-  6/6 pages, a recognisable candidate by the frozen narrow rule on 5/6 — not the OWNER's acceptance; the boards are
-  with the OWNER.
-- **v3.53.1, done without a paid call:**
-  spend is reserved before a request leaves, in one locked critical section, against a cumulative ceiling (failed and
-  uncertain requests keep their reservation; a damaged state never restarts at zero; the paid path needs a pilot token);
-  the joint audit's findings on the ten recorded descriptions went 50 → 5 with a verdict per class (builder 0.5.0);
-  routing asks the reader after a refusal or a drawings model weak by its own account, on the drawings' measures, and
-  not after a complete anchored model; a job shows what is being read (original and sent picture, hashed apart);
-  a recorded answer is keyed by its whole question.
-- **Blocked, exactly:** one paid reading through the SDK adapter — this session cannot hold the OWNER's API key safely
-  (its secret form refuses the provider's own host); the dry run reaches the API and is refused with 401, nothing
-  booked. The command for the OWNER's own terminal is in the report §6. No host exists; a proposal with prices is in
-  `docs/ANALYZER_API.md`. The Android client does not yet send the pilot token or show the reading phase.
+  deterministic check and builder 0.7.0; the existing emitter, validator, compiler), behind spend books with a
+  cumulative ceiling and a pilot token. Held-back control S53-E3: a model on 6/6, a recognisable candidate by the
+  frozen narrow rule on 5/6 — not the OWNER's acceptance; scored record unchanged.
+- **v3.53.2, done without a paid call:** anchors carry scope and premise (a verified scale does not make an outline
+  complete; whole vs local measure; counter-case and real-plan consumer tested); the Android client sends a run-time
+  pilot token on the submission only, shows the reading phase and hash-verified pictures, names a wrong token, heads a
+  described result as limited, cancels — tested on the JVM against responses captured from the real server with a
+  stand-in reader; the builder cuts corner and in-face recesses (`PocketV2`) and places rooflights on hip end planes
+  and cross gables (ten recorded descriptions: 8 byte-identical, rooflights 9/13 → 13/13, canopies 13/15 → 14/15,
+  audit findings 5 → 5); the SDK trial saves model/program/scene/diagnostics, exits 2 on no model, continues one set
+  of books from the campaign ledger and checks byte determinism.
+- **APK 1328** (same signature `6e48fac4…`) is a REPLAY/CONTRACT test build: no service with a reader exists, so the
+  token field and reading panel only matter against a service the OWNER runs. Android UI NOT_VERIFIED.
+- **Blocked, exactly:** one paid reading through the SDK adapter needs the OWNER's key in their own terminal (this
+  session cannot hold it; its secret form refuses the provider's host). Dry run: 401, exit 2, nothing booked. No host;
+  a proposal (VM price only, disk separate, no reliance on a waiver) is in `docs/ANALYZER_API.md`.
 - **Spend:** unchanged, 2.72807938 of the cumulative 5 USD since E12 (92 entries, CLI token estimates, billing
-  UNCONFIRMED). H2 and the private benchmark sealed and unsent.
+  UNCONFIRMED). The provider's own stop is a workspace's monthly limit; the campaign's cumulative limit is the books'.
 - **Still wrong in houses, named:** ridge of an attached gable on a square plan; roof features the reader does not
-  state (dormers, second chimneys, rooflights); a balcony through an eave; a corner recess; rooflights on end planes
-  and cross gables; two-tone facades; porch roofs as flat plates. Twelve pages of six publishers are not "any link".
-- **Not measured:** the anchors on a real house; anything on a device.
-- **NEXT (one action):** the OWNER runs the one command of report §6 (about 0.10 USD) or decides on the pilot's host;
-  with a working service — the pilot token and the reading phase in the Android client, then APK ≥ 1328.
+  state; a balcony through an eave; two-tone facades; porch roofs as flat plates; recesses above the ground storey.
+- **Not measured:** the anchors on a real house with a live reader; anything on a device.
+- **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
+  bundled scenes (files unchanged since `5ad2dd5`).
+- **NEXT (one action):** the OWNER runs the one trial command (`docs/ANALYZER_API.md`) on a DEV page and returns
+  `trial.json` (no publisher pictures).
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
   D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
@@ -49,6 +53,14 @@
   builds on the drawings' measures; a complete anchored model is the answer and is free.
   D53.1-4 a canopy stated inside a body is a recess (walls stand back under the roof), a projection (under a metre) or
   named and not built — never a plate through walls.
+  D53.2-1 a measure is a measure OF something: a whole-house anchor needs overall dimension lines or a complete
+  outline; a local measure constrains its body only; partial models are not banned as anchor sources.
+  D53.2-2 the app may send one credential, typed by a person at run time, on the submission only; never a provider
+  key or a build-time credential.
+  D53.2-3 a deep porch inside a body over part of a face or at a corner is the model's pocket on the ground storey,
+  under what the body carries; refused forms are named, never a plate through walls.
+  D53.2-4 a trial has one set of books that opens at the campaign ledger and never below it; a paid reading without a
+  model is a failure exit.
 - **CAMPAIGN:** WORK_IN_PROGRESS. **Android UI:** NOT_VERIFIED.
 
 ## Completed stages
