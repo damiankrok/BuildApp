@@ -49,7 +49,7 @@ import { classifyBodies } from './boundary-bodies.js'
 import { completeBoundary } from './boundary-completion.js'
 import { COMPOUND_BOUNDS, compoundSpanOf } from './compound-facade.js'
 import type { CompoundContext, CompoundFacadeSpan, FacadeInterval, IntervalRole, ParentGap } from './compound-facade.js'
-import type { CompletionPart, ExtentConflict, ExtentSideStatement } from './boundary-completion.js'
+import type { CompletionPart, ExtentConflict, ExtentSideStatement, OwnOpening } from './boundary-completion.js'
 import type { AttachedBody } from './boundary-bodies.js'
 
 /**
@@ -420,9 +420,15 @@ export type PlanDecompositionOptions = {
    * product never asks. Every reading records the rule's conditions on each WEAK gap either way.
    */
   drawnGapRule?: 'OFF' | 'ON'
+  /**
+   * v3.53.3: openings the boundary found in the own wall of a room the box's reading walked into
+   * (`CompletionPart.reread`): shut in every reading, on the grid line that carries them, wherever the other lines
+   * fall. Set only by `decomposePlan`, for its second reading; a caller never states one.
+   */
+  shutOpenings?: ReadonlyArray<{ axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number }>
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule' | 'shutOpenings'>>
 
 /** The least distance between two grid lines (`PlanDecompositionOptions.minCellM`), metres. */
 export const DEFAULT_MIN_CELL_M = 0.45
@@ -2024,14 +2030,75 @@ export function decomposePlan(
   extent: PixelRect,
   options: PlanDecompositionOptions = {},
 ): PlanDecomposition {
-  const incumbent = decomposeCore(mask, chains, bands, registration, extent, options)
+  const first = decomposeCore(mask, chains, bands, registration, extent, options)
   // A plan with no scale of its own (a unit placeholder) can state no opening width: its boundary is not read.
-  if (options.openingAware === false || registration.confidence <= 0 || incumbent.linesX.length < 2 || incumbent.linesY.length < 2) return incumbent
-  const extension = boundaryExtension(mask, bands, registration, extent, incumbent, options, chains)
+  if (options.openingAware === false || registration.confidence <= 0 || first.linesX.length < 2 || first.linesY.length < 2) return first
+  const firstExtension = boundaryExtension(mask, bands, registration, extent, first, options, chains)
+  const reread = options.shutOpenings === undefined ? rereadEnclosedRooms(mask, chains, bands, registration, extent, options, first, firstExtension) : undefined
+  const incumbent = reread?.incumbent ?? first
+  const extension = reread?.extension ?? firstExtension
+  if (reread?.options) options = reread.options
   if (!extension.override) return { ...incumbent, boundary: extension.record }
   const outlined = decomposeCore(mask, chains, bands, registration, extent, options, extension.override)
   const box = incumbent.compoundFacades ? { compoundFacadesBoxReading: { spans: incumbent.compoundFacades, wideOpenings: incumbent.wideOpenings, cells: incumbent.cells } } : {}
   return { ...outlined, boundary: extension.record, outlineReading: true, ...box }
+}
+
+/**
+ * v3.53.3 — the second reading of a plan whose box reading walked into a room through the room's own opening.
+ *
+ * The flood shuts a door only between two pieces of wall inside ONE cell edge (`closureOf`). A grid line struck at a
+ * door's jamb — by a partition of another room, by the door's own frame — leaves each edge one piece, the door reads as
+ * the wall's end, the flood walks through, and a bedroom behind its balcony door is ground: the house loses a corner,
+ * its body is cut in two, and the part beside the lost room is roofed as an annexe. The boundary reads the same wall
+ * pixel by pixel and does see the opening; where it names an ENCLOSED ROOM (`boundary-completion.ts`), the plan is
+ * read once more with that room's own openings shut, so the room is built by the box's own reading and the bodies are
+ * cut with it — never completed against bodies cut without it.
+ *
+ * The second reading is taken only when it builds at least half of such a room and loses nothing the first built;
+ * otherwise the first stands, the part stays a QUESTION, and the record says the room was not built.
+ */
+function rereadEnclosedRooms(
+  mask: Mask,
+  chains: readonly DimensionChain[],
+  bands: readonly Band[],
+  registration: CoordinateRegistration,
+  extent: PixelRect,
+  options: PlanDecompositionOptions,
+  first: PlanDecomposition,
+  firstExtension: ReturnType<typeof boundaryExtension>,
+): { incumbent: PlanDecomposition; extension: ReturnType<typeof boundaryExtension>; options: PlanDecompositionOptions } | undefined {
+  const rooms = firstExtension.record.completions.filter((p) => p.reread !== undefined && p.reread.length > 0)
+  if (rooms.length === 0) return undefined
+  const shutOpenings = rooms.flatMap((p) => p.reread ?? []).map((o) => ({ axis: o.axis, linePx: o.linePx, fromPx: o.fromPx, toPx: o.toPx }))
+  const shut = { ...options, shutOpenings }
+  const again = decomposeCore(mask, chains, bands, registration, extent, shut)
+  const m2 = registration.metresPerPixelX * registration.metresPerPixelY
+  const builtIn = (d: PlanDecomposition, r: PixelRect): number =>
+    d.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + Math.max(0, Math.min(c.rect.x1, r.x1) - Math.max(c.rect.x0, r.x0)) * Math.max(0, Math.min(c.rect.y1, r.y1) - Math.max(c.rect.y0, r.y0)) * m2, 0)
+  const lost = first.cells.filter((c) => c.classification === 'BUILT' && builtIn(again, c.rect) < 0.99 * (c.rect.x1 - c.rect.x0) * (c.rect.y1 - c.rect.y0) * m2).length
+  const judged = rooms.map((p) => ({ part: p, gainedM2: builtIn(again, p.rect) - builtIn(first, p.rect) }))
+  const built = judged.filter((j) => j.gainedM2 >= 0.5 * j.part.areaM2)
+  const record = (j: (typeof judged)[number], taken: boolean): EnclosedRoomReread => ({
+    rect: j.part.rect,
+    areaM2: j.part.areaM2,
+    openings: j.part.reread ?? [],
+    built: taken && built.includes(j),
+    why: !taken
+      ? lost > 0
+        ? `read again with its own opening${(j.part.reread ?? []).length === 1 ? '' : 's'} shut, the plan lost ${lost} cell${lost === 1 ? '' : 's'} the first reading built: the first reading stands and the room is not built`
+        : `read again with its own opening${(j.part.reread ?? []).length === 1 ? '' : 's'} shut, the box's reading still does not build it: the first reading stands`
+      : built.includes(j)
+        ? `the box's reading walked into it through its own opening; read again with ${(j.part.reread ?? []).length === 1 ? 'that opening' : 'those openings'} shut, it builds ${j.gainedM2.toFixed(1)} m² of the room`
+        : `its own openings are shut in this reading, and the box's reading still does not build it`,
+  })
+  if (built.length === 0 || lost > 0) {
+    firstExtension.record.enclosedRooms = judged.map((j) => record(j, false))
+    return undefined
+  }
+  const extension = boundaryExtension(mask, bands, registration, extent, again, shut, chains)
+  extension.record.enclosedRooms = judged.map((j) => record(j, true))
+  return { incumbent: again, extension, options: shut }
 }
 
 /** The grid, the outline and its border edges a decomposition is re-cut on when the boundary is accepted. */
@@ -2162,12 +2229,14 @@ function decomposeCore(
   const bottomY = linesY[ny].px
   const leftX = linesX[0].px
   const rightX = linesX[nx].px
+  // v3.53.3: openings of an enclosed room's own wall, shut in every reading (`rereadEnclosedRooms`)
+  const shutOn = (axis: 'X' | 'Y', px: number): Array<[number, number]> => (options.shutOpenings ?? []).filter((o) => o.axis === axis && Math.abs(o.linePx - px) <= 0.5).map((o) => [o.fromPx, o.toPx] as [number, number])
   const edgesFor = (withEvidence: boolean, evidence: Map<string, Array<[number, number]>> = evidencedOn): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
     const vEdge: EdgeClosure[][] = []
     for (let ix = 0; ix <= nx; ix += 1) {
       const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance, mask)
       const drawn = lineIntervals(mask, 'X', linesX[ix], topY, bottomY, lineTolerance, opt.minLinePx)
-      const extra = withEvidence ? (evidence.get(`X:${linesX[ix].px}`) ?? []) : []
+      const extra = [...shutOn('X', linesX[ix].px), ...(withEvidence ? (evidence.get(`X:${linesX[ix].px}`) ?? []) : [])]
       const column: EdgeClosure[] = []
       for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px, maxOpeningPx, minJambPx, extra))
       vEdge.push(column)
@@ -2176,7 +2245,7 @@ function decomposeCore(
     for (let iy = 0; iy <= ny; iy += 1) {
       const walls = wallIntervals(inside, 'Y', linesY[iy], leftX, rightX, tolerance, mask)
       const drawn = lineIntervals(mask, 'Y', linesY[iy], leftX, rightX, lineTolerance, opt.minLinePx)
-      const extra = withEvidence ? (evidence.get(`Y:${linesY[iy].px}`) ?? []) : []
+      const extra = [...shutOn('Y', linesY[iy].px), ...(withEvidence ? (evidence.get(`Y:${linesY[iy].px}`) ?? []) : [])]
       const row: EdgeClosure[] = []
       for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px, maxOpeningPx, minJambPx, extra))
       hEdge.push(row)
@@ -3804,6 +3873,13 @@ export type BoundaryExtension = {
   why: string
 }
 
+/**
+ * v3.53.3: a room inside the box that the box's reading left as ground because its flood walked in through the room's
+ * own opening (`boundary-completion.ts`, ENCLOSED ROOM), the openings that were shut for the second reading, and
+ * whether that reading built it. `built: false` leaves the first reading standing and the part a QUESTION.
+ */
+export type EnclosedRoomReread = { rect: PixelRect; areaM2: number; openings: OwnOpening[]; built: boolean; why: string }
+
 /** What the opening-aware boundary found on a plan (`decomposition.boundary`). */
 export type BoundaryRecord = {
   version: string
@@ -3833,6 +3909,8 @@ export type BoundaryRecord = {
   /** 005F: the extent's stated sides the box stops materially inside, and the parts judged as completions. */
   extentConflicts: ExtentConflict[]
   completions: CompletionPart[]
+  /** v3.53.3: rooms the box's first reading walked into through their own opening, and what the second reading did. */
+  enclosedRooms?: EnclosedRoomReread[]
   /** 005F: enclosed parts the completion cap left unjudged (B5F-1), and the long-band box the sides were weighed against. */
   completionsUnjudged: number
   box: PixelRect | null
@@ -4245,7 +4323,7 @@ export function boundaryExtension(
   const exclusionM2 = round6(areaOf(reading.final))
   const disagree = policiesDisagree({ adopted: strictAdopted.any, areaM2: strictM2 }, { adopted: reading.any, areaM2: exclusionM2 })
   // 005K: the reading's open questions, as source-addressable records (observational: nothing below reads them)
-  const decompositionId = decompositionIdOf({ extent, mppX: round6(mppX), mppY: round6(mppY), wallPx: round6(wallPx), linesX: linesX.map((l) => l.px), linesY: linesY.map((l) => l.px), shutPocketMouths: options.shutPocketMouths === true })
+  const decompositionId = decompositionIdOf({ extent, mppX: round6(mppX), mppY: round6(mppY), wallPx: round6(wallPx), linesX: linesX.map((l) => l.px), linesY: linesY.map((l) => l.px), shutPocketMouths: options.shutPocketMouths === true, shutOpenings: options.shutOpenings })
   const evidence = gapEvidenceRecords({ mask, wallsX: outlineWalls.x, wallsY: outlineWalls.y, mppX, mppY, wallPx, decompositionId, outline, drawnGapRule })
   const record: BoundaryRecord = {
     version: BOUNDARY_EVIDENCE_VERSION,

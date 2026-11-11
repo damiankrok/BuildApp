@@ -72,8 +72,10 @@ export type GapEvidenceRecord = {
 }
 
 /** A decomposition's identity: the frame geometry and scale it was read at (and whether pocket mouths were shut). */
-export function decompositionIdOf(input: { extent: PixelRect; mppX: number; mppY: number; wallPx: number; linesX: readonly number[]; linesY: readonly number[]; shutPocketMouths: boolean }): string {
-  return `dec-${sha256Hex(stableJson({ extent: input.extent, mppX: input.mppX, mppY: input.mppY, wallPx: input.wallPx, linesX: input.linesX, linesY: input.linesY, shutPocketMouths: input.shutPocketMouths }, 0)).slice(0, 16)}`
+export function decompositionIdOf(input: { extent: PixelRect; mppX: number; mppY: number; wallPx: number; linesX: readonly number[]; linesY: readonly number[]; shutPocketMouths: boolean; shutOpenings?: ReadonlyArray<{ axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number }> }): string {
+  // v3.53.3: a second reading with openings shut is another reading of the same grid; a reading with none hashes as before
+  const shut = input.shutOpenings && input.shutOpenings.length > 0 ? { shutOpenings: input.shutOpenings.map((o) => ({ axis: o.axis, linePx: o.linePx, fromPx: o.fromPx, toPx: o.toPx })) } : {}
+  return `dec-${sha256Hex(stableJson({ extent: input.extent, mppX: input.mppX, mppY: input.mppY, wallPx: input.wallPx, linesX: input.linesX, linesY: input.linesY, shutPocketMouths: input.shutPocketMouths, ...shut }, 0)).slice(0, 16)}`
 }
 
 /** The crop around a gap, clipped to the frame: at least 1.5 m and four walls past the gap on every side. */

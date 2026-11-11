@@ -233,7 +233,9 @@ export type PlanDiagnostics = {
     shutGarageMouths: number
     /** 005F: the extent's stated sides the box stops materially inside, and the completions judged (only when there are any). */
     extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; stretchesOmitted?: number; decision: string; why: string }>
-    completions?: Array<{ kind: string; decision: string; reason: string; rectBefore: Rect; areaBeforeM2: number; rect: Rect; areaM2: number; junction: { lengthM: number; openM: number; doorM: number }; sides: { lengthM: number; wallShare: number; postShare: number }; evidence: { glazing: number; chains: number; vehicleDoors: number; returns: number; strictEncloses: boolean }; weakGaps: Array<{ widthM: number; signature: string; jambs: string[]; vehicleDoor: boolean }>; side?: string }>
+    completions?: Array<{ kind: string; decision: string; reason: string; rectBefore: Rect; areaBeforeM2: number; rect: Rect; areaM2: number; junction: { lengthM: number; openM: number; doorM: number }; sides: { lengthM: number; wallShare: number; postShare: number }; evidence: { glazing: number; chains: number; vehicleDoors: number; returns: number; strictEncloses: boolean; labelled?: number }; weakGaps: Array<{ widthM: number; signature: string; jambs: string[]; vehicleDoor: boolean }>; side?: string; reread?: Array<{ gapId: string; axis: string; linePx: number; fromPx: number; toPx: number; widthM: number; signature: string; calloutCm?: number }> }>
+    /** v3.53.3: rooms the box's first reading walked into through their own opening, and whether the second reading built them. */
+    enclosedRooms?: Array<{ rect: Rect; areaM2: number; openings: Array<{ gapId: string; axis: string; linePx: number; fromPx: number; toPx: number; widthM: number; signature: string; calloutCm?: number }>; built: boolean; why: string }>
     /** 005F: parts the completion cap left unjudged, and the long-band box (only with conflicts or completions). */
     completionsUnjudged?: number
     box?: Rect

@@ -220,7 +220,7 @@ describe('005K §8–§9 the boundary record carries one source-addressable reco
   it('records name the decomposition, the coordinates, the crop and its ink hash, and the decisions', () => {
     const { d } = run(house(), X, Y)
     const b = d.boundary
-    expect(b?.version).toBe('1.2.0')
+    expect(b?.version).toBe('1.3.0')
     expect(b?.decompositionId).toMatch(/^dec-[0-9a-f]{16}$/)
     expect(b?.drawnGapRule).toBe('OFF')
     const rec = b?.gapEvidence.find((g) => g.axis === 'Y' && g.fromPx >= 178 && g.toPx <= 202)

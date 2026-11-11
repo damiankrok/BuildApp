@@ -25,6 +25,14 @@
  *
  *   BOX_COMPLETION  inside the box, when nothing beyond the box was adopted: it continues built cells across open edge
  *                   of at least max(0.7 m, half the shared length) — a room's end, not a yard behind a wall;
+ *   ENCLOSED ROOM   (v3.53.3) a box completion that does NOT continue the rooms — the house has only a door into it —
+ *                   yet has, as an attached room must, a way in from the house, its own perimeter at least half wall
+ *                   and under a tenth posts, and an opening OF ITS OWN between wall jambs that the drawing supports
+ *                   STRONGLY: glazing, or a leaf the sheet names with a printed callout. A yard behind a wall has a
+ *                   door into it and no window out of it; a bedroom behind its balcony door has both — the box's
+ *                   reading walked into it through that door. It is not completed here against bodies cut without it:
+ *                   it is a QUESTION carrying those openings (`reread`), and the plan is read again with them shut
+ *                   (`decomposePlan`), so the room is built by the box's own reading or not at all;
  *   ATTACHED_ROOM   beyond the box, in a STRONG conflict's stretch and reaching its stated side, when all hold: a way in
  *                   from the house (open edge plus door-like bridged gaps ≥ 0.7 m — glazing is no way in, a post is no
  *                   jamb); its own perimeter at least half wall and under a tenth posts; room evidence (glazing between
@@ -94,12 +102,17 @@ export type CompletionPart = {
   junction: { lengthM: number; openM: number; doorM: number }
   /** Its own perimeter: length, wall and post shares. */
   sides: { lengthM: number; wallShare: number; postShare: number }
-  evidence: { glazing: number; chains: number; vehicleDoors: number; returns: number; strictEncloses: boolean }
+  evidence: { glazing: number; chains: number; vehicleDoors: number; returns: number; strictEncloses: boolean; labelled?: number }
   /** The gaps its own perimeter leaves to the WEAK bridges: the closures the two readings may disagree on. */
   weakGaps: Array<{ widthM: number; signature: BoundaryGap['signature']; jambs: BoundaryGap['jambs']; vehicleDoor: boolean }>
   /** The conflict side it reaches, for an attached room. */
   side?: ExtentSide
+  /** v3.53.3: an enclosed room's own STRONG openings — the plan is read again with these shut (`decomposePlan`). */
+  reread?: OwnOpening[]
 }
+
+/** An opening in a part's own wall, as the wall line that carries it reads it. */
+export type OwnOpening = { gapId: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; signature: BoundaryGap['signature']; calloutCm?: number }
 
 export type ExtentConflict = {
   side: ExtentSide
@@ -429,16 +442,25 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     }
     // Glazing of its own: a STRONG glazed gap between wall jambs on a line within the part's span — the same half wall
     // either side, whichever way up the plan is drawn (C5F-1) — and not on the edge it shares with the house.
+    // v3.53.3 — and an opening of its own the sheet NAMES: a STRONG leaf between wall jambs carrying a printed callout,
+    // in the same place. `own` lists every such opening as each face of its wall reads it; `labelled` counts openings.
     let glazing = 0
+    let labelled = 0
+    const own: OwnOpening[] = []
     for (const line of [...wallsX, ...wallsY]) {
       for (const g of line.gaps) {
-        if (g.signature !== 'GLAZING' || g.boundary !== 'STRONG' || g.jambs.includes('POST')) continue
+        if (g.boundary !== 'STRONG' || g.jambs.includes('POST')) continue
+        const named = g.signature !== 'GLAZING' && g.cls === 'OPENING_SUPPORTED' && g.callout !== undefined && g.jambs[0] === 'WALL' && g.jambs[1] === 'WALL'
+        if (g.signature !== 'GLAZING' && !named) continue
         const within =
           g.axis === 'X'
             ? g.linePx >= rect.x0 - 0.5 * W && g.linePx <= rect.x1 + 0.5 * W && g.fromPx >= rect.y0 - W && g.toPx <= rect.y1 + W
             : g.linePx >= rect.y0 - 0.5 * W && g.linePx <= rect.y1 + 0.5 * W && g.fromPx >= rect.x0 - W && g.toPx <= rect.x1 + W
         const onJunction = junctionLines.some((j) => j.axis === g.axis && Math.abs(j.at - g.linePx) <= W && Math.min(j.b, g.toPx) - Math.max(j.a, g.fromPx) > 0)
-        if (within && !onJunction) glazing += 1
+        if (!within || onJunction) continue
+        if (g.signature === 'GLAZING') glazing += 1
+        else if (!own.some((q) => q.signature !== 'GLAZING' && q.axis === g.axis && Math.abs(q.linePx - g.linePx) <= 4 * W && Math.min(q.toPx, g.toPx) - Math.max(q.fromPx, g.fromPx) > 0)) labelled += 1
+        if (g.jambs[0] === 'WALL' && g.jambs[1] === 'WALL') own.push({ gapId: g.id, axis: g.axis, linePx: g.linePx, fromPx: g.fromPx, toPx: g.toPx, widthM: round6(g.widthM), signature: g.signature, ...(g.callout ? { calloutCm: g.callout.widthCm } : {}) })
       }
     }
     // A chain measuring it (C5F-3): drawn across the part, with ticks within a wall of both of its ends along the chain.
@@ -548,6 +570,11 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     // never makes a room by itself (C5F-5)
     const roomDoors = vehicleDoors.filter((g) => g.signature !== 'DASHED')
     const room = open + doorway >= B.doorM && wallShare >= B.sideWallShare && postShare < B.postShare && (glazing > 0 || chains > 0 || roomDoors.length > 0)
+    // v3.53.3 — inside the box a part the house only has a door into is a yard behind a wall, or a room the flood walked
+    // into through its own window or balcony door. What tells them apart is drawn: the room has an opening of its own.
+    const enclosedRoom = kind === 'BOX_COMPLETION' && !continues && open + doorway >= B.doorM && wallShare >= B.sideWallShare && postShare < B.postShare && (glazing > 0 || labelled > 0) && own.length > 0
+    // as every completion: inside the extent, no larger than half of what the box builds, and closed in both readings
+    const readAgain = enclosedRoom && inExtent && areaM2 <= B.partShare * builtM2 && addedM2 + areaM2 <= B.partShare * builtM2 && policiesAgree
     let decision: CompletionDecision = 'ACCEPTED'
     let reason: string
     if (core.length === 0) {
@@ -559,6 +586,9 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     } else if (shared === 0) {
       decision = 'REJECTED'
       reason = 'SEPARATE: it shares no edge with the house'
+    } else if (readAgain) {
+      decision = 'QUESTION'
+      reason = `ENCLOSED_ROOM: ${(open + doorway).toFixed(2)} m way in from the built rooms, ${Math.round(wallShare * 100)}% walled, ${labelled > 0 ? `${labelled} opening${labelled === 1 ? '' : 's'} of its own named by a callout` : 'glazed'} — a room behind its own opening, not a yard behind a wall: to be read again with that opening shut`
     } else if (kind === 'BOX_COMPLETION' && !continues) {
       decision = 'REJECTED'
       reason = `NO_CONTINUATION: ${enclosedOpen.toFixed(2)} m of open edge with the built rooms of ${enclosedShared.toFixed(2)} m shared — walled off from them, not their end`
@@ -601,9 +631,10 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       areaM2: round6(areaM2),
       junction: { lengthM: round6(shared), openM: round6(open), doorM: round6(doorway) },
       sides: { lengthM: round6(side), wallShare: round6(wallShare), postShare: round6(postShare) },
-      evidence: { glazing, chains, vehicleDoors: vehicleDoors.length, returns, strictEncloses },
+      evidence: { glazing, chains, vehicleDoors: vehicleDoors.length, returns, strictEncloses, ...(labelled > 0 ? { labelled } : {}) },
       weakGaps: [...sideGaps.values()].filter((g) => g.boundary === 'WEAK').map((g) => ({ widthM: round6(g.widthM), signature: g.signature, jambs: g.jambs, vehicleDoor: vehicleDoors.includes(g) })),
       ...(reaches ? { side: reaches.side } : {}),
+      ...(decision === 'QUESTION' && readAgain ? { reread: own } : {}),
     })
     // what lies beside it behind a wall is recorded on its own, never carried in with it (C5F-2)
     if (walledOff.length > 0 && coreSet.size > 0 && parts.length < B.maxParts) {

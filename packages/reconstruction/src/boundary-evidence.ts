@@ -56,8 +56,14 @@ import type { Mask } from '@buildapp/source-cv'
  * at the jambs and in the wall band, the reason codes) and the boundary record carries one source-addressable record per
  * gap the classification left WEAK (`gap-evidence.ts`). Nothing a decision reads changed; the drawn-gap rule is OFF
  * unless asked for.
+ *
+ * 1.3.0 (v3.53.3): a callout agrees with a gap between two walls that measures narrower than printed by no more than
+ * the ink a leaf and a frame put at the jambs (`CALLOUT_JAMB_INK_WALLS`), is given to the opening on each line that
+ * reads it, and decides when it is its first reading read surely (`assignCallouts`); a part inside the box that the
+ * house has only a door into and that has a STRONG opening of its own is an ENCLOSED ROOM, and the plan is read again
+ * with that opening shut (`boundary-completion.ts`, `rereadEnclosedRooms`). The record gains `enclosedRooms`.
  */
-export const BOUNDARY_EVIDENCE_VERSION = '1.2.0'
+export const BOUNDARY_EVIDENCE_VERSION = '1.3.0'
 
 /** One connected piece of wall-thick ink. */
 export type SolidPart = { id: number; bounds: PixelRect; pixels: number; kind: 'WALL' | 'POST' }
@@ -655,11 +661,33 @@ function classifyGap(mask: Mask, solid: SolidLayer, axis: 'X' | 'Y', linePx: num
 }
 
 /**
+ * How much narrower than its printed width a gap between two walls may MEASURE (v3.53.3). The measure is of clear wall
+ * ink: a leaf drawn open at right angles to the wall, its frame and the reveal lines stand at the jambs and read as
+ * wall, so a 150 cm door measured 105..135 cm on one plan and no callout agreed with its own gap. Ink inside an
+ * opening can only narrow it, never widen it: at most a wall's thickness of it at each jamb.
+ */
+export const CALLOUT_JAMB_INK_WALLS = 2
+
+/** A callout's width is certain when it is its only reading, or its first reading and read this surely (the recogniser's). */
+export const CALLOUT_SURE_CONFIDENCE = 0.9
+
+/**
  * The callouts that agree with a gap, each given to the one gap it agrees
  * with and lies nearest: within max(10 cm, 3 %) of its width (measured gaps
- * sit within 4 cm of their printed widths), within four walls or 1.5 m across
- * the line, and printed over the gap along it. A callout two gaps agree with
- * about equally goes to neither.
+ * sit within 4 cm of their printed widths) — or, between two walls, printed
+ * wider than measured by no more than the ink a door's leaves and frame put
+ * at the jambs (`CALLOUT_JAMB_INK_WALLS`) — within four walls or 1.5 m across
+ * the line, and printed over the gap along it. An exact agreement outranks
+ * one that needs the jamb allowance. A callout two gaps agree with about
+ * equally goes to neither.
+ *
+ * `confidence` says whether the width decides (above 0.5) or only
+ * corroborates: it decides when the agreeing width is the callout's only
+ * reading, or its first reading and read surely (`CALLOUT_SURE_CONFIDENCE`) —
+ * a recogniser's reading beside which the lattice's weaker candidates are
+ * still listed is one reading, not a doubt, and is taken before a weaker
+ * candidate that happens to fit the gap as measured. Any other reading with
+ * alternatives states a width it is not sure of.
  */
 export function assignCallouts(
   lines: readonly WallLine[],
@@ -669,30 +697,49 @@ export function assignCallouts(
   wallPx: number,
 ): Map<string, GapCallout> {
   const out = new Map<string, GapCallout>()
-  void mppAlong
+  type Agreeing = { gapId: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; distance: number; exact: boolean; callout: GapCallout }
+  // One opening in one wall is read once on each grid line struck along that wall — its two faces, a line a
+  // neighbouring room adds: the same gap, twice. A callout is that opening's, on whichever of the lines it is read.
+  const sameOpening = (p: Agreeing, q: Agreeing): boolean =>
+    p.axis === q.axis && Math.abs(p.linePx - q.linePx) <= 2 * wallPx && Math.min(p.toPx, q.toPx) - Math.max(p.fromPx, q.fromPx) >= 0.8 * Math.min(p.toPx - p.fromPx, q.toPx - q.fromPx)
   for (const c of [...callouts].sort((p, q) => (p.id < q.id ? -1 : p.id > q.id ? 1 : 0))) {
-    const agreeing: Array<{ gapId: string; distance: number; callout: GapCallout }> = []
+    const agreeing: Agreeing[] = []
     for (const line of lines) {
       const across = line.axis === 'X' ? c.at.x : c.at.y
       const along = line.axis === 'X' ? c.at.y : c.at.x
       const off = Math.abs(across - line.px)
       if (off > Math.max(wallPx * 4, 1.5 / mppAcross(line.axis))) continue
+      const jambInkCm = CALLOUT_JAMB_INK_WALLS * wallPx * mppAlong(line.axis) * 100
       for (const g of line.gaps) {
         // printed over the gap itself, never beside it (005C post-review: a neighbouring window's callout is not this gap's)
         if (along < g.fromPx || along > g.toPx) continue
         const widthCm = g.widthM * 100
-        const agree = c.widthsCm.filter((w) => Math.abs(w.value - widthCm) <= Math.max(10, widthCm * 0.03)).sort((p, q) => q.confidence - p.confidence)[0]
+        const tolerance = Math.max(10, widthCm * 0.03)
+        const walls = g.jambs[0] === 'WALL' && g.jambs[1] === 'WALL'
+        const fits = (w: number): 'EXACT' | 'JAMB_INK' | null => (Math.abs(w - widthCm) <= tolerance ? 'EXACT' : walls && w > widthCm && w - widthCm <= tolerance + jambInkCm ? 'JAMB_INK' : null)
+        // a callout read with alternatives states a width it is not sure of: it corroborates, it does not decide —
+        // unless the agreeing width is its first reading and that reading is a sure one. What the callout states
+        // comes before a weaker candidate that happens to fit the gap as measured.
+        const stated = (w: { first: boolean; confidence: number }): boolean => c.widthsCm.length === 1 || (w.first && w.confidence >= CALLOUT_SURE_CONFIDENCE)
+        const agree = c.widthsCm
+          .map((w, k) => ({ ...w, first: k === 0, fit: fits(w.value) }))
+          .filter((w) => w.fit !== null)
+          .sort((p, q) => Number(stated(q)) - Number(stated(p)) || Number(q.fit === 'EXACT') - Number(p.fit === 'EXACT') || q.confidence - p.confidence)[0]
         if (!agree) continue
         const mid = (g.fromPx + g.toPx) / 2
-        // a callout read with alternatives states a width it is not sure of: it corroborates, it does not decide
-        const sure = c.widthsCm.length === 1
-        agreeing.push({ gapId: g.id, distance: Math.hypot(off, Math.abs(along - mid)), callout: { id: c.id, widthCm: agree.value, confidence: round6(sure ? agree.confidence : Math.min(agree.confidence, 0.5)) } })
+        const sure = stated(agree)
+        agreeing.push({ gapId: g.id, axis: line.axis, linePx: line.px, fromPx: g.fromPx, toPx: g.toPx, distance: Math.hypot(off, Math.abs(along - mid)), exact: agree.fit === 'EXACT', callout: { id: c.id, widthCm: agree.value, confidence: round6(sure ? agree.confidence : Math.min(agree.confidence, 0.5)) } })
       }
     }
-    agreeing.sort((p, q) => p.distance - q.distance)
-    // two gaps the callout agrees with equally: it belongs to neither
-    if (agreeing.length === 0 || (agreeing.length > 1 && agreeing[1].distance - agreeing[0].distance <= wallPx)) continue
-    if (!out.has(agreeing[0].gapId)) out.set(agreeing[0].gapId, agreeing[0].callout)
+    // a gap the width fits as measured outranks every gap it fits only with the jamb allowance
+    const ranked = (agreeing.some((x) => x.exact) ? agreeing.filter((x) => x.exact) : agreeing).sort((p, q) => p.distance - q.distance || (p.gapId < q.gapId ? -1 : 1))
+    if (ranked.length === 0) continue
+    const nearest = ranked[0]
+    const same = ranked.filter((x) => sameOpening(nearest, x))
+    // two openings the callout agrees with equally: it belongs to neither
+    const rival = ranked.find((x) => !same.includes(x))
+    if (rival && rival.distance - nearest.distance <= wallPx) continue
+    for (const x of same) if (!out.has(x.gapId)) out.set(x.gapId, x.callout)
   }
   return out
 }
