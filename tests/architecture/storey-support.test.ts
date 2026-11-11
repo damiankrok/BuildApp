@@ -37,6 +37,7 @@ const numbersIn = (code: string): string[] => [...new Set([...withoutStrings(cod
 const LAYOUT = 'packages/reconstruction/src/layout.ts'
 /** N7-COUNCIL-FIX-02: the exterior wall the layout gates bodies with, read off the plan's bands (and `minBodySpanM`, moved there). */
 const EXTERIOR_WALLS = 'packages/reconstruction/src/exterior-walls.ts'
+const EAVE_OUTLINE = 'packages/reconstruction/src/eave-outline.ts'
 /** The source a registration function lives in: the layout, or the exterior-wall reader. */
 const sourceOf = (name: string): string => codeOf(read(name === 'minBodySpanM' ? EXTERIOR_WALLS : LAYOUT))
 /** The functions that register a plan onto another and decide what each of its walled regions stands on. */
@@ -55,11 +56,15 @@ const HOUSES = /gozdzik|cyklamen|marcowk|rarytas|kosac|jarzab|arkadi|azali|helik
 describe('005L §14 registration and support read the drawings only', () => {
   it('the layout pass imports pixel types, the common helpers, the metric shapes and its own reconstruction modules — nothing published', () => {
     const imports = [...new Set(importsOf(read(LAYOUT)))].sort()
-    expect(imports).toEqual(['./boundary-completion.js', './exterior-walls.js', './plan-decomposition.js', './plan-extent.js', './structural-layout.js', '@buildapp/source-common', '@buildapp/source-cv', '@buildapp/source-metrics', '@buildapp/source-observations'])
+    expect(imports).toEqual(['./boundary-completion.js', './eave-outline.js', './exterior-walls.js', './plan-decomposition.js', './plan-extent.js', './structural-layout.js', '@buildapp/source-common', '@buildapp/source-cv', '@buildapp/source-metrics', '@buildapp/source-observations'])
     // N7-COUNCIL-FIX-02: the exterior-wall reader the layout gates bodies with reads bands and pixels only
     expect([...new Set(importsOf(read(EXTERIOR_WALLS)))].sort()).toEqual(['@buildapp/source-common', '@buildapp/source-cv'])
     expect(withoutStrings(codeOf(read(EXTERIOR_WALLS))).match(FORBIDDEN)).toBeNull()
     expect(codeOf(read(EXTERIOR_WALLS)).match(HOUSES)).toBeNull()
+    // v3.53.4: the eaves-line reader the layout cuts the bodies of a single-storey plan with reads pixels only
+    expect([...new Set(importsOf(read(EAVE_OUTLINE)))].sort()).toEqual(['@buildapp/source-common', '@buildapp/source-cv'])
+    expect(withoutStrings(codeOf(read(EAVE_OUTLINE))).match(FORBIDDEN)).toBeNull()
+    expect(codeOf(read(EAVE_OUTLINE)).match(HOUSES)).toBeNull()
   })
 
   it('no registration or support code names a published figure, a room list, a storey count, a verdict or a house (M4)', () => {
