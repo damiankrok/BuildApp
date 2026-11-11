@@ -39,18 +39,33 @@
   signature. Verified off-device (bundle from the APK, Node 18.20.4 + no-ICU simulation, live Bakopy page → hello,
   done, scene loads); NOT run in the app: no emulator here (no KVM), no device. Report
   `stage-reports/LOCAL_ANALYZER_1328_CHECK.md`.
+- **v3.53.3 (2026-11-11), LOCAL geometry:** Bakopy's roof on 1329 matches its sources (the attached-gable ridge fault
+  is the described path's only). The family fixed: a room the box reading walked into through its own balcony door,
+  which cut a one-rectangle house into a body and a flat-roofed annexe beside a lost corner. Now a printed opening
+  callout agrees with a gap that jamb ink narrowed, a part the house has only a door into is a room when it has a
+  STRONG opening of its own, and the plan is read a second time with that opening shut (`rereadEnclosedRooms`; taken
+  only if it builds the room and loses nothing). Solver 2.35.0, boundary evidence 1.3.0, code `d090cf1` + `c5849fd`.
+  Corpus (33, same sealed inputs): 31 identical, Skalnice (DEV) one body 16.00 × 9.90 m under one gable as its
+  sources say, Willa Julia 17 NO_MODEL → MODEL. Independent trial, 9 new public houses from the URL: 8 models, 1
+  refusal, all 9 identical before/after — the fix disturbs nothing and its cause was not met again. **APK 1330**
+  (same signature): signature, version and manifest 12/12 verified; bundle from the APK under Node 18.20.4 + no-ICU,
+  live pages: Bakopy scene byte-identical to 1329's, Skalnice to a saved scene. Android UI NOT_VERIFIED (no emulator,
+  no device). Report `stage-reports/SOURCE_TO_MODEL_V3533.md`.
 - **Blocked, exactly:** one paid reading through the SDK adapter needs the OWNER's key in their own terminal (this
   session cannot hold it; its secret form refuses the provider's host). Dry run: 401, exit 2, nothing booked. No host;
   a proposal (VM price only, disk separate, no reliance on a waiver) is in `docs/ANALYZER_API.md`.
 - **Spend:** unchanged, 2.72807938 of the cumulative 5 USD since E12 (92 entries, CLI token estimates, billing
   UNCONFIRMED). The provider's own stop is a workspace's monthly limit; the campaign's cumulative limit is the books'.
-- **Still wrong in houses, named:** ridge of an attached gable on a square plan; roof features the reader does not
+- **Still wrong in houses, named:** an attached body under the common roof built as a flat-roofed annexe (LOCAL);
+  ridge of an attached gable on a square plan (described path); roof features the reader does not
   state; a balcony through an eave; two-tone facades; porch roofs as flat plates; recesses above the ground storey.
 - **Not measured:** the anchors on a real house with a live reader; anything on a device.
 - **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
   bundled scenes (files unchanged since `5ad2dd5`).
-- **NEXT (one action):** the OWNER installs APK 1329 on the Galaxy and runs LOCAL on the Bakopy link to the scene (commands in LOCAL_ANALYZER_1328_CHECK.md §5); then the trial command (`docs/ANALYZER_API.md`) on a DEV page and returns
-  `trial.json` (no publisher pictures).
+- **NEXT (one action):** the OWNER installs APK 1330 and runs LOCAL on the Skalnice link (one house under one gable,
+  provenance "solver 2.35.0"). Next code stage: the roof of an attached body from the dashed roof outline and the
+  overall chain — a part of the house under the common roof is still built as a flat-roofed annexe (3 of 8 models in
+  the independent trial, about 10 of 33 in the corpus; Litodory as DEV). The paid SDK trial stays a separate track.
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
   D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
