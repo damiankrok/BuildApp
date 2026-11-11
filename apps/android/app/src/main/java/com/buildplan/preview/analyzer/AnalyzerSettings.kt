@@ -9,8 +9,10 @@ data class ActiveJob(val jobId: String, val baseUrl: String, val sourceUrl: Stri
 /**
  * The little the Analyzer remembers between launches, in the app's private
  * SharedPreferences: a service address the owner typed (for a build that has
- * none), the running job, and the last link. No secret is stored — the API
- * has none.
+ * none), the running job, the last link and — when the owner typed one — the
+ * pilot's access token (`PilotAccess.kt`): app-private, never backed up (the
+ * manifest turns backup off), never part of the APK. The provider's key is not
+ * here and never is: the service holds it.
  */
 class AnalyzerSettings(context: Context) {
     private val prefs: SharedPreferences = context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE)
@@ -19,6 +21,14 @@ class AnalyzerSettings(context: Context) {
     var serviceAddress: String
         get() = prefs.getString(KEY_SERVICE, "").orEmpty()
         set(value) = prefs.edit().putString(KEY_SERVICE, value.trim()).apply()
+
+    /** The pilot's access token as typed on this phone; empty when none. Only a well-formed token is ever stored. */
+    var pilotToken: String
+        get() = PilotTokens.normalize(prefs.getString(KEY_PILOT_TOKEN, "")).orEmpty()
+        set(value) {
+            val token = PilotTokens.normalize(value)
+            if (token == null) prefs.edit().remove(KEY_PILOT_TOKEN).apply() else prefs.edit().putString(KEY_PILOT_TOKEN, token).apply()
+        }
 
     var lastLink: String
         get() = prefs.getString(KEY_LAST_LINK, "").orEmpty()
@@ -49,6 +59,7 @@ class AnalyzerSettings(context: Context) {
         const val FILE = "analyzer"
         const val KEY_SERVICE = "service_address"
         const val KEY_LAST_LINK = "last_link"
+        const val KEY_PILOT_TOKEN = "pilot_access_token"
         const val KEY_JOB_ID = "active_job_id"
         const val KEY_JOB_BASE = "active_job_base_url"
         const val KEY_JOB_SOURCE = "active_job_source_url"

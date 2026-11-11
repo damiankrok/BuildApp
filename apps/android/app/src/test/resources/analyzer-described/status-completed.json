@@ -1,0 +1,154 @@
+{
+  "jobId": "dddddddddddddddddddddddddddddddd",
+  "status": "COMPLETED",
+  "progress": 1,
+  "stage": null,
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "sourceUrl": "https://domy.nieznany-wydawca.test/oferta/dom-larchfield",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "error": null,
+  "result": {
+    "title": "Dom Larchfield",
+    "label": "Dom Larchfield (model z opisu źródeł)",
+    "candidateHash": "9dc23a572dda3208e34125267296f557ebf789a9518c4ae5213a49efe5fc814c",
+    "modelHash": "c0d3a252530d7fddb76029519d91cc3e76470cff0e99e85d8db524e44f48dd01",
+    "sceneSha256": "103f992324dc66c365ff94edf11fb67af4a5ed23c3386c06b1cd79015651eb5c",
+    "sceneContentHash": "597af1b9a51cab3612b1cc2721cded854b5c35c79f9fe8325ec7e611f084b8b0",
+    "sceneBytes": 203307,
+    "quality": {
+      "L0": 10,
+      "L1": 0,
+      "L2": 0
+    },
+    "unresolved": 2,
+    "warnings": 4,
+    "vision": "LIVE_PROVIDER"
+  },
+  "describing": {
+    "phase": "BUILDING_MODEL",
+    "startedAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "after": {
+      "code": "NO_DRAWINGS",
+      "reasonCode": "PLAN_NOT_FOUND"
+    },
+    "provider": {
+      "id": "house-reader.stand-in",
+      "model": "stand-in-description",
+      "triageModel": "stand-in-sorting"
+    },
+    "picturesOnPage": 2,
+    "pictures": [
+      {
+        "number": 1,
+        "kind": "EXTERIOR_VIEW",
+        "assetId": "asset-dom-larchfield-widok-od-ogrodu-94490f7c57",
+        "original": {
+          "url": "https://domy.nieznany-wydawca.test/media/render-2.png",
+          "sha256": "b7129f5c0a2a9e9f24b6654729fff223dba9d88cf5d97013d2e1c90c5b9f2dd1",
+          "widthPx": 605,
+          "heightPx": 514
+        },
+        "sent": {
+          "sha256": "13d097b27999cf7f02cb0c1a642a2dbde5f9af45adfef54682d830b777b3655a",
+          "mediaType": "image/jpeg",
+          "widthPx": 605,
+          "heightPx": 514,
+          "bytes": 20074
+        }
+      },
+      {
+        "number": 2,
+        "kind": "EXTERIOR_VIEW",
+        "assetId": "asset-dom-larchfield-wizualizacja-1-cae2dad1b4",
+        "original": {
+          "url": "https://domy.nieznany-wydawca.test/media/render-1.png",
+          "sha256": "ca0e9bb7987f6e1ad8c050c6d0f293c4cd356e9565574f1c16aa0569e88c939b",
+          "widthPx": 605,
+          "heightPx": 514
+        },
+        "sent": {
+          "sha256": "73626b9d53b177bdda5ea876cf3b22234759b4593cd3e2a5af551e31fafcee9a",
+          "mediaType": "image/jpeg",
+          "widthPx": 605,
+          "heightPx": 514,
+          "bytes": 20083
+        }
+      }
+    ]
+  },
+  "links": {
+    "self": "/v1/analyses/dddddddddddddddddddddddddddddddd",
+    "result": "/v1/analyses/dddddddddddddddddddddddddddddddd/result",
+    "scene": "/v1/analyses/dddddddddddddddddddddddddddddddd/scene",
+    "model": "/v1/analyses/dddddddddddddddddddddddddddddddd/model",
+    "candidate": "/v1/analyses/dddddddddddddddddddddddddddddddd/candidate"
+  }
+}

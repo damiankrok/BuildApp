@@ -16,7 +16,7 @@ import java.nio.file.Files
  * recorded, so a test can assert that something was NOT asked for.
  */
 class FakeTransport : HttpTransport {
-    data class Request(val method: String, val url: String, val body: String?, val contentType: String?, val maxBytes: Long)
+    data class Request(val method: String, val url: String, val body: String?, val contentType: String?, val maxBytes: Long, val authorization: String? = null)
 
     val requests = mutableListOf<Request>()
     private val routes = mutableMapOf<String, ArrayDeque<() -> HttpResponse>>()
@@ -29,13 +29,13 @@ class FakeTransport : HttpTransport {
 
     override fun get(url: String, maxBytes: Long) = dispatch("GET", url, null, null, maxBytes)
 
-    override fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long) =
-        dispatch("POST", url, body.decodeToString(), contentType, maxBytes)
+    override fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long, authorization: String?) =
+        dispatch("POST", url, body.decodeToString(), contentType, maxBytes, authorization)
 
     override fun delete(url: String, maxBytes: Long) = dispatch("DELETE", url, null, null, maxBytes)
 
-    private fun dispatch(method: String, url: String, body: String?, contentType: String?, maxBytes: Long): HttpResponse {
-        requests += Request(method, url, body, contentType, maxBytes)
+    private fun dispatch(method: String, url: String, body: String?, contentType: String?, maxBytes: Long, authorization: String? = null): HttpResponse {
+        requests += Request(method, url, body, contentType, maxBytes, authorization)
         val queue = routes["$method $url"] ?: error("unexpected request $method $url")
         val answer = if (queue.size > 1) queue.removeFirst() else queue.first()
         val response = answer()

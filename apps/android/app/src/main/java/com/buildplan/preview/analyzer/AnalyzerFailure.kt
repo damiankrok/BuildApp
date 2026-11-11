@@ -103,6 +103,12 @@ sealed interface AnalyzerFailure {
     data class LocalRuntime(val code: String, val message: String) : AnalyzerFailure
 
     /**
+     * `401 PILOT_TOKEN_INVALID`: the service did not accept the access token this phone sent with the submission.
+     * Nothing was started and nothing was paid for. Not transient: the owner has to correct or remove the token.
+     */
+    data object PilotTokenRefused : AnalyzerFailure
+
+    /**
      * Whether trying the same request again later can succeed without anyone
      * changing anything: a lost connection, a busy or restarting service.
      */
@@ -182,6 +188,8 @@ object AnalyzerMessages {
             "Ta wersja aplikacji nie ma skonfigurowanej usługi analizy."
         is AnalyzerFailure.LocalRuntime ->
             "Analiza na tym telefonie zatrzymała się. Nic z niej nie zapisano; możesz przeanalizować link ponownie. Szczegóły są poniżej."
+        is AnalyzerFailure.PilotTokenRefused ->
+            "Usługa nie przyjęła kodu dostępu pilota zapisanego w tym telefonie, więc analizy nie rozpoczęto. Popraw kod w ustawieniach analizy albo go usuń — bez kodu link przejdzie zwykłą ścieżką z rysunków."
         is AnalyzerFailure.Http -> when (failure.status) {
             404, 410 -> "Usługa nie ma już tej analizy (mogła wygasnąć). Przeanalizuj link ponownie."
             else -> "Usługa analizy odmówiła (${failure.code ?: "HTTP ${failure.status}"}). Spróbuj ponownie później."
@@ -206,6 +214,7 @@ object AnalyzerMessages {
         is AnalyzerFailure.HashMismatch, is AnalyzerFailure.TooLarge, is AnalyzerFailure.InvalidScene,
         is AnalyzerFailure.BadResponse, is AnalyzerFailure.StorageFailed -> "Modelu nie zapisano"
         is AnalyzerFailure.NotConfigured -> "Brak usługi analizy"
+        is AnalyzerFailure.PilotTokenRefused -> "Kod dostępu pilota nie został przyjęty"
     }
 
     /** "45 s", "2 min": Polish, and never a plural form that needs declension. */

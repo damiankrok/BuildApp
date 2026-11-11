@@ -94,12 +94,19 @@ object ProjectLinks {
 /**
  * The analyzer HTTP API, `buildapp.analyzer-api` v1.
  *
- * Holds an address and nothing else: no key, no token, no cookie. Every call
+ * Holds an address and, when the owner typed one, the pilot's access token —
+ * sent on a submission and nowhere else. No provider key, no cookie. Every call
  * returns an [Outcome]; nothing here throws for a network or HTTP problem.
  * A job id is checked against [JobIds] before it goes anywhere near a path,
  * so a malformed id never becomes a request.
  */
-class AnalyzerClient(baseUrl: String, private val transport: HttpTransport) {
+class AnalyzerClient(baseUrl: String, private val transport: HttpTransport, pilotToken: String? = null) {
+
+    /** The header of a submission that may use the service's paid house reader; null when this phone has no token. */
+    private val authorization: String? = PilotTokens.authorization(pilotToken)
+
+    /** Whether a submission from this client carries the pilot's token. */
+    val hasPilotToken: Boolean get() = authorization != null
 
     /** The validated base URL, or null when this client is not configured. */
     val baseUrl: String? = AnalyzerAddress.normalize(baseUrl)
@@ -108,7 +115,7 @@ class AnalyzerClient(baseUrl: String, private val transport: HttpTransport) {
         val base = baseUrl ?: return Outcome.Err(AnalyzerFailure.NotConfigured)
         ProjectLinks.problem(url)?.let { return Outcome.Err(AnalyzerFailure.InvalidUrl(it.trimEnd('.'))) }
         val body = buildJsonObject { put("url", JsonPrimitive(url.trim())) }.toString().encodeToByteArray()
-        return call(setOf(200, 201, 202), { transport.post("$base/v1/analyses", body, "application/json", JSON_LIMIT) }) { response ->
+        return call(setOf(200, 201, 202), { transport.post("$base/v1/analyses", body, "application/json", JSON_LIMIT, authorization) }) { response ->
             val decoded = AnalyzerJson.decodeFromString(SubmitResponse.serializer(), response.bodyText())
             if (!JobIds.isValid(decoded.jobId)) throw BadAnswer("the service returned a malformed job id")
             decoded
@@ -212,6 +219,7 @@ class AnalyzerClient(baseUrl: String, private val transport: HttpTransport) {
                 code == "UNSUPPORTED_PUBLISHER" -> AnalyzerFailure.UnsupportedPublisher(message ?: "")
                 code == "RATE_LIMITED" || (code == null && response.status == 429) -> AnalyzerFailure.RateLimited(retryAfter)
                 code == "QUEUE_FULL" -> AnalyzerFailure.QueueFull(retryAfter)
+                code == "PILOT_TOKEN_INVALID" -> AnalyzerFailure.PilotTokenRefused
                 else -> AnalyzerFailure.Http(response.status, code, message)
             }
         }

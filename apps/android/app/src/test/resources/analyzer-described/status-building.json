@@ -1,0 +1,132 @@
+{
+  "jobId": "dddddddddddddddddddddddddddddddd",
+  "status": "SOLVING_TOPOLOGY",
+  "progress": 0.961,
+  "stage": {
+    "id": "SOLVING_TOPOLOGY",
+    "label": "Solving bodies, roof, recesses, stair and rooms",
+    "index": 4,
+    "count": 9,
+    "fraction": 0.9,
+    "detail": "described: admitting: checking the description against itself and the published figures"
+  },
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "RUNNING",
+      "startedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "PENDING"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "PENDING"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "PENDING"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "PENDING"
+    }
+  ],
+  "sourceUrl": "https://domy.nieznany-wydawca.test/oferta/dom-larchfield",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": null,
+  "error": null,
+  "result": null,
+  "describing": {
+    "phase": "BUILDING_MODEL",
+    "startedAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "after": {
+      "code": "NO_DRAWINGS",
+      "reasonCode": "PLAN_NOT_FOUND"
+    },
+    "provider": {
+      "id": "house-reader.stand-in",
+      "model": "stand-in-description",
+      "triageModel": "stand-in-sorting"
+    },
+    "picturesOnPage": 2,
+    "pictures": [
+      {
+        "number": 1,
+        "kind": "EXTERIOR_VIEW",
+        "assetId": "asset-dom-larchfield-widok-od-ogrodu-94490f7c57",
+        "original": {
+          "url": "https://domy.nieznany-wydawca.test/media/render-2.png",
+          "sha256": "b7129f5c0a2a9e9f24b6654729fff223dba9d88cf5d97013d2e1c90c5b9f2dd1",
+          "widthPx": 605,
+          "heightPx": 514
+        },
+        "sent": {
+          "sha256": "13d097b27999cf7f02cb0c1a642a2dbde5f9af45adfef54682d830b777b3655a",
+          "mediaType": "image/jpeg",
+          "widthPx": 605,
+          "heightPx": 514,
+          "bytes": 20074
+        }
+      },
+      {
+        "number": 2,
+        "kind": "EXTERIOR_VIEW",
+        "assetId": "asset-dom-larchfield-wizualizacja-1-cae2dad1b4",
+        "original": {
+          "url": "https://domy.nieznany-wydawca.test/media/render-1.png",
+          "sha256": "ca0e9bb7987f6e1ad8c050c6d0f293c4cd356e9565574f1c16aa0569e88c939b",
+          "widthPx": 605,
+          "heightPx": 514
+        },
+        "sent": {
+          "sha256": "73626b9d53b177bdda5ea876cf3b22234759b4593cd3e2a5af551e31fafcee9a",
+          "mediaType": "image/jpeg",
+          "widthPx": 605,
+          "heightPx": 514,
+          "bytes": 20083
+        }
+      }
+    ]
+  },
+  "links": {
+    "self": "/v1/analyses/dddddddddddddddddddddddddddddddd"
+  }
+}

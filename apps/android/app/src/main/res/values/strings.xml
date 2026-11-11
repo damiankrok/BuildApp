@@ -318,6 +318,25 @@
     <string name="analyzer_use_service">Użyj usługi analizy</string>
     <string name="analyzer_use_local">Analizuj na tym telefonie</string>
     <string name="analyzer_close">Zamknij</string>
+    <!-- v3.53.2: the pilot's access token and the phase in which a service reads the house from the page's pictures -->
+    <string name="pilot_token_none">Kod dostępu pilota: brak. Linki idą zwykłą ścieżką z rysunków.</string>
+    <string name="pilot_token_saved">Kod dostępu pilota: zapisany (%1$s). Z nim usługa może przeczytać dom z obrazów strony, gdy rysunki nie wystarczą.</string>
+    <string name="pilot_token_enter">Wpisz kod pilota</string>
+    <string name="pilot_token_change">Zmień kod pilota</string>
+    <string name="pilot_token_label">Kod dostępu pilota</string>
+    <string name="pilot_token_hint">Kod dostajesz od właściciela usługi. Zostaje tylko w tym telefonie i jest wysyłany wyłącznie przy rozpoczęciu analizy.</string>
+    <string name="pilot_token_save">Zapisz kod</string>
+    <string name="pilot_token_remove">Usuń kod z telefonu</string>
+    <string name="describing_title">Czytanie domu z obrazów strony</string>
+    <string name="describing_pictures_note">Pokazuję oryginały ze strony — tylko te, których suma kontrolna zgadza się z podaną przez usługę. Do odczytu wysłano ich pomniejszone kopie JPEG. Na obrazach nic nie jest zaznaczane: odczyt opisuje dom, nie wskazuje miejsc.</string>
+    <string name="describing_picture_caption">Obraz %1$d · %2$s</string>
+    <string name="describing_picture_sent">wysłano %1$d × %2$d px</string>
+    <string name="describing_picture_loading">Pobieram…</string>
+    <string name="describing_picture_mismatch">To nie ten plik, który czytała usługa — nie pokazuję.</string>
+    <string name="describing_picture_unverifiable">Brak sumy kontrolnej — nie pokazuję.</string>
+    <string name="describing_picture_unavailable">Obrazu nie udało się pobrać.</string>
+    <string name="describing_picture_unreadable">Nie umiem wyświetlić tego formatu.</string>
+    <string name="analyzer_result_described_body">Ten model powstał z opisu obrazów strony, nie z pomiaru rysunków: pokazuje bryły, dachy i otwory tak, jak widać je w źródłach. Wymiary są przybliżone.</string>
     <string name="analyzer_change">Zmień</string>
     <string name="analyzer_builtin_address">Użyj adresu wbudowanego w aplikację</string>
     <string name="analyzer_address">Adres usługi</string>

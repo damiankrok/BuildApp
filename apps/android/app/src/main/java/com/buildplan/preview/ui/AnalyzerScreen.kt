@@ -53,6 +53,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -68,6 +69,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.PRODUCT_LOCALE
 import com.buildplan.preview.R
+import com.buildplan.preview.analyzer.DescribedPictureLoader
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalysisSummary
@@ -163,6 +165,7 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
             ) {
                 ModeRow(model)
                 if (model.mode == AnalyzerMode.SERVICE && model.isConfigured) ServiceRow(model)
+                if (model.mode == AnalyzerMode.SERVICE && model.isConfigured) PilotTokenRow(model)
                 if (model.localRuns.isNotEmpty()) LocalRuns(model.localRuns)
                 if (model.localAvailability.available) OcrSelfTestRow(model)
             }
@@ -257,6 +260,50 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
     InkButton(stringResource(R.string.analyzer_save_address), onClick = { save() })
 }
 
+/**
+ * v3.53.2: the pilot's access token, typed here by the owner. Shown only as "saved, ends in ….": the field starts empty
+ * every time, and the token itself is never put back on the screen.
+ */
+@Composable
+private fun PilotTokenRow(model: AnalyzerViewModel) {
+    var editing by rememberSaveable { mutableStateOf(false) }
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+        val mask = model.pilotTokenMask
+        Body(if (mask != null) stringResource(R.string.pilot_token_saved, mask) else stringResource(R.string.pilot_token_none))
+        TextButton(onClick = { editing = !editing }, enabled = !model.isRunning, modifier = Modifier.heightIn(min = Sizes.touch)) {
+            Text(stringResource(if (editing) R.string.analyzer_close else if (mask != null) R.string.pilot_token_change else R.string.pilot_token_enter), color = Palette.Ink)
+        }
+        if (editing && !model.isRunning) {
+            // not saveable on purpose: a token typed and not saved does not survive in a saved-state bundle
+            var text by remember { mutableStateOf("") }
+            var problem by remember { mutableStateOf<String?>(null) }
+            val save = {
+                problem = model.savePilotToken(text)
+                if (problem == null) { text = ""; editing = false }
+            }
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it; problem = null },
+                label = { Text(stringResource(R.string.pilot_token_label)) },
+                singleLine = true,
+                isError = problem != null,
+                supportingText = { Text(problem ?: stringResource(R.string.pilot_token_hint)) },
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done, autoCorrectEnabled = false),
+                keyboardActions = KeyboardActions(onDone = { save() }),
+                colors = fieldColors(),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            InkButton(stringResource(R.string.pilot_token_save), onClick = { save() })
+            if (mask != null) {
+                TextButton(onClick = { model.clearPilotToken(); editing = false }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.pilot_token_remove), color = Palette.Ink)
+                }
+            }
+        }
+    }
+}
+
 // ---------------------------------------------------------------------------
 // The link and the job
 // ---------------------------------------------------------------------------
@@ -321,6 +368,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit, 
             status = state.status,
             live = state.live,
             showLive = model.mode == AnalyzerMode.LOCAL,
+            pictureLoader = model.pictureLoader,
             headline = null,
             note = if (model.mode == AnalyzerMode.LOCAL) stringResource(R.string.analyzer_running_note_local) else null,
             connectionLost = state.connectionLost,
@@ -332,6 +380,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit, 
             status = state.status,
             live = state.live,
             showLive = state.local != null,
+            pictureLoader = model.pictureLoader,
             headline = stringResource(if (state.local != null) R.string.analyzer_finishing_local else R.string.analyzer_finishing_service),
             note = null,
             connectionLost = state.connectionLost,
@@ -375,6 +424,7 @@ private fun JobProgress(
     status: JobStatus?,
     live: LiveView?,
     showLive: Boolean,
+    pictureLoader: DescribedPictureLoader? = null,
     headline: String?,
     note: String?,
     connectionLost: Boolean,
@@ -390,6 +440,8 @@ private fun JobProgress(
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         // SHAPE-LIVE-01: the source's place, from the start of a run on this phone
         if (showLive) LiveSourcePanel(live, status?.activity?.elapsedMs)
+        // v3.53.2: a service reading the house as a whole says what it reads; a run on this phone never does that
+        if (!showLive) status?.describing?.let { DescribingPanel(it, pictureLoader) }
         Text(
             headline ?: when {
                 status == null -> stringResource(R.string.analyzer_asking)
@@ -658,6 +710,8 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
                 pluralStringResource(R.plurals.count_rooms, c.rooms, c.rooms),
             ),
         )
+        // v3.53.2: a model built from a description of the page's pictures says so before anything else about it
+        if (summary.isFromDescription) Body(stringResource(R.string.analyzer_result_described_body))
         if (limited) {
             Body(
                 listOfNotNull(

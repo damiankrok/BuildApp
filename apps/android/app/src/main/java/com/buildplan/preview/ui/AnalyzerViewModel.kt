@@ -18,6 +18,8 @@ import com.buildplan.preview.analyzer.AppBuild
 import com.buildplan.preview.analyzer.CancelOutcome
 import com.buildplan.preview.analyzer.HttpTransport
 import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
+import com.buildplan.preview.analyzer.DescribedPictureLoader
+import com.buildplan.preview.analyzer.PilotTokens
 import com.buildplan.preview.analyzer.ProjectLinks
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.LocalRunReport
@@ -89,6 +91,13 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     var serviceAddress by mutableStateOf(settings.serviceAddress)
         private set
+
+    /** v3.53.2: whether this phone holds a pilot access token, and what may be shown of it. Never the token itself. */
+    var pilotTokenMask by mutableStateOf(settings.pilotToken.takeIf { it.isNotEmpty() }?.let(PilotTokens::masked))
+        private set
+
+    /** Fetches and verifies the originals of the pictures a service says it is reading. */
+    val pictureLoader: DescribedPictureLoader by lazy { DescribedPictureLoader(transport) }
 
     var link by mutableStateOf(settings.lastLink)
         private set
@@ -326,6 +335,19 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    /** Save the pilot's access token typed on the phone. Returns the problem with it, or null when saved. */
+    fun savePilotToken(raw: String): String? {
+        PilotTokens.problem(raw)?.let { return it }
+        settings.pilotToken = raw
+        pilotTokenMask = PilotTokens.masked(settings.pilotToken)
+        return null
+    }
+
+    fun clearPilotToken() {
+        settings.pilotToken = ""
+        pilotTokenMask = null
+    }
+
     fun analyze() {
         if (isRunning) return
         if (mode == AnalyzerMode.LOCAL) {
@@ -443,7 +465,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         startLoop(job.baseUrl, AnalysisState.Polling(job.jobId, job.sourceUrl))
     }
 
-    private fun trackerFor(base: String) = AnalysisTracker(AnalyzerClient(base, transport), store)
+    // the token rides only on the submission; a tracker that polls or cancels is built the same way and never sends it
+    private fun trackerFor(base: String) = AnalysisTracker(AnalyzerClient(base, transport, settings.pilotToken), store)
 
     private fun startSubmit(base: String, url: String) {
         loop?.cancel()

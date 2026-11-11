@@ -33,7 +33,8 @@ class ResponseTooLargeException(val limitBytes: Long) : IOException("response bo
  */
 interface HttpTransport {
     fun get(url: String, maxBytes: Long): HttpResponse
-    fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long): HttpResponse
+    /** `authorization`: an `Authorization` header value for this one request, or null for none. */
+    fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long, authorization: String? = null): HttpResponse
     fun delete(url: String, maxBytes: Long): HttpResponse
 }
 
@@ -43,7 +44,8 @@ interface HttpTransport {
  * HTTPS only, no redirects followed (the API never redirects, and a redirect
  * is not a place this client agreed to talk to), no cache, and no cookies:
  * this app never installs a `CookieHandler`, so the connection neither sends
- * nor stores one. Nothing here carries a credential; the API has none.
+ * nor stores one. The one credential it may carry is the pilot's access token,
+ * handed in by the caller for the one request that starts an analysis.
  */
 class HttpUrlConnectionTransport(
     private val connectTimeoutMs: Int = CONNECT_TIMEOUT_MS,
@@ -52,12 +54,12 @@ class HttpUrlConnectionTransport(
 
     override fun get(url: String, maxBytes: Long): HttpResponse = execute("GET", url, null, null, maxBytes)
 
-    override fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long): HttpResponse =
-        execute("POST", url, body, contentType, maxBytes)
+    override fun post(url: String, body: ByteArray, contentType: String, maxBytes: Long, authorization: String?): HttpResponse =
+        execute("POST", url, body, contentType, maxBytes, authorization)
 
     override fun delete(url: String, maxBytes: Long): HttpResponse = execute("DELETE", url, null, null, maxBytes)
 
-    private fun execute(method: String, url: String, body: ByteArray?, contentType: String?, maxBytes: Long): HttpResponse {
+    private fun execute(method: String, url: String, body: ByteArray?, contentType: String?, maxBytes: Long, authorization: String? = null): HttpResponse {
         val target = URL(url)
         require(target.protocol.equals("https", ignoreCase = true)) { "the analyzer is only reached over https" }
         val connection = target.openConnection() as HttpURLConnection
@@ -68,6 +70,8 @@ class HttpUrlConnectionTransport(
             connection.instanceFollowRedirects = false
             connection.useCaches = false
             connection.setRequestProperty("Accept", "application/json")
+            // the pilot's access token, on a submission only: never on a redirect (none is followed), never logged
+            if (authorization != null) connection.setRequestProperty("Authorization", authorization)
             if (body != null) {
                 connection.doOutput = true
                 connection.setRequestProperty("Content-Type", contentType ?: "application/json")

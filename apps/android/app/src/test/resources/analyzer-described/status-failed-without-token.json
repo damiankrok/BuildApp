@@ -1,0 +1,78 @@
+{
+  "jobId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "status": "FAILED",
+  "progress": 0.1,
+  "stage": null,
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "FAILED",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "PENDING"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "PENDING"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "PENDING"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "PENDING"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "PENDING"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "PENDING"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "PENDING"
+    }
+  ],
+  "sourceUrl": "https://domy.nieznany-wydawca.test/oferta/dom-larchfield",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "error": {
+    "code": "NO_DRAWINGS",
+    "message": "the page exposes no plan, elevation or section this analyzer reads",
+    "reasonCode": "PLAN_NOT_FOUND",
+    "stage": "CLASSIFYING_SOURCES",
+    "substage": "ROLES",
+    "title": "No drawings to read",
+    "diagnostics": {
+      "drawings": 2,
+      "PERSPECTIVE_RENDER": 2
+    }
+  },
+  "result": null,
+  "links": {
+    "self": "/v1/analyses/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

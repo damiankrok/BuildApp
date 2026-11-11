@@ -1,0 +1,257 @@
+{
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "jobId": "dddddddddddddddddddddddddddddddd",
+  "sourceUrl": "https://domy.nieznany-wydawca.test/oferta/dom-larchfield",
+  "canonicalUrl": "https://domy.nieznany-wydawca.test/oferta/dom-larchfield",
+  "title": "Dom Larchfield",
+  "label": "Dom Larchfield (model z opisu źródeł)",
+  "modelId": "m-analysis-u40a4f098b46c",
+  "publisher": "domy.nieznany-wydawca.test",
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "sourcePackageId": "src-domy-nieznany-wydawca-test-24d3acb71e",
+  "sourcePackageHash": "209bb607f277592bf00cda7f195b1cd0ab93eab9b7912b091b065dfc13769796",
+  "observationGraphHash": "982a9e16c70ec7ee98c00b44f86cbe5de0312e0739a289f150bbf25b2f764425",
+  "metricEvidenceHash": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidateHash": "9dc23a572dda3208e34125267296f557ebf789a9518c4ae5213a49efe5fc814c",
+  "modelHash": "c0d3a252530d7fddb76029519d91cc3e76470cff0e99e85d8db524e44f48dd01",
+  "modelSha256": "c0d3a252530d7fddb76029519d91cc3e76470cff0e99e85d8db524e44f48dd01",
+  "sceneContentHash": "597af1b9a51cab3612b1cc2721cded854b5c35c79f9fe8325ec7e611f084b8b0",
+  "sceneSha256": "103f992324dc66c365ff94edf11fb67af4a5ed23c3386c06b1cd79015651eb5c",
+  "sceneBytes": 203307,
+  "counts": {
+    "assets": 2,
+    "assetsByDocument": {
+      "PERSPECTIVE_RENDER": 2
+    },
+    "observations": 17,
+    "frames": 2,
+    "metricEvidence": 0,
+    "callouts": 0,
+    "commands": 83,
+    "masses": 2,
+    "openings": 8,
+    "rooms": 0,
+    "balconies": 1,
+    "terraces": 1,
+    "railings": 1,
+    "chimneys": 1,
+    "rooflights": 1,
+    "meshes": 76,
+    "triangles": 2076
+  },
+  "quality": {
+    "levels": {
+      "L0": 10,
+      "L1": 0,
+      "L2": 0
+    },
+    "byFamily": {}
+  },
+  "unresolved": [
+    {
+      "what": "the right side is not shown",
+      "reason": "the sources do not let the reader tell",
+      "status": "MISSING"
+    },
+    {
+      "what": "the right side",
+      "reason": "no picture of the page shows this side: what stands there is a hypothesis",
+      "status": "NOT_ATTEMPTED"
+    }
+  ],
+  "warnings": [
+    "This model was built from a description of the page's pictures read as a whole (2 pictures, by house-reader.stand-in stand-in-description), not measured on its drawings: the drawings could not be read (PLAN_NOT_FOUND). It shows the building's bodies, roofs and openings as the sources show them; its dimensions are approximate.",
+    "The overall size is the one the reader read printed on a drawing (1550 × 1000); no deterministic reader confirmed it.",
+    "Storey, eaves and opening heights are the reader’s reading of the sources or a convention; none is a printed level confirmed on a section.",
+    "No picture shows the right side: what stands there is a hypothesis."
+  ],
+  "warningDetails": [
+    {
+      "code": "MODEL_FROM_SOURCE_DESCRIPTION",
+      "severity": "LIMITING",
+      "message": "This model was built from a description of the page's pictures read as a whole (2 pictures, by house-reader.stand-in stand-in-description), not measured on its drawings: the drawings could not be read (PLAN_NOT_FOUND). It shows the building's bodies, roofs and openings as the sources show them; its dimensions are approximate."
+    },
+    {
+      "code": "DESCRIBED_SCALE_PRINTED_UNVERIFIED",
+      "severity": "LIMITING",
+      "message": "The overall size is the one the reader read printed on a drawing (1550 × 1000); no deterministic reader confirmed it."
+    },
+    {
+      "code": "DESCRIBED_HEIGHTS_APPROXIMATE",
+      "severity": "INFO",
+      "message": "Storey, eaves and opening heights are the reader’s reading of the sources or a convention; none is a printed level confirmed on a section."
+    },
+    {
+      "code": "DESCRIBED_SIDE_HYPOTHETICAL",
+      "severity": "LIMITING",
+      "message": "No picture shows the right side: what stands there is a hypothesis."
+    }
+  ],
+  "preview": {
+    "outcome": "COMPLETE",
+    "built": {
+      "wallRings": 3,
+      "walls": 14,
+      "slabs": 3,
+      "roofs": 2,
+      "roofPlanes": 5,
+      "openings": 10,
+      "rooms": 0,
+      "stairs": 0
+    },
+    "provisional": [
+      {
+        "code": "SCALE_NOT_VERIFIED",
+        "what": "the overall size is printed on drawing; no printed dimension was confirmed on a drawing by a deterministic reader"
+      },
+      {
+        "code": "HEIGHT_ASSUMED_FOR_PREVIEW",
+        "what": "storey and eaves heights are described from the sources or conventional, for viewing"
+      }
+    ],
+    "partial": null
+  },
+  "sourceBasis": null,
+  "vision": {
+    "mode": "LIVE_PROVIDER",
+    "provider": "house-reader.stand-in:stand-in-description",
+    "attempted": 2,
+    "accepted": 1
+  },
+  "verification": {
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0,
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 0
+    }
+  },
+  "assessment": {
+    "schema": "buildapp.model-assessment",
+    "schemaVersion": "1.2.0",
+    "technicalValidity": {
+      "status": "VALID",
+      "errors": 0,
+      "warnings": 0,
+      "checks": [
+        {
+          "check": "PROGRAM_REFUSALS",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        },
+        {
+          "check": "COMPILER",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        },
+        {
+          "check": "CLOSURE",
+          "errors": 0,
+          "warnings": 0,
+          "findings": []
+        }
+      ],
+      "note": "technical validity of the described model: what the validator, the compiler and the joint audit say of it — not its agreement with the sources"
+    },
+    "decompositionCompleteness": {
+      "verdict": "NOT_ASSESSED",
+      "basis": "ACCEPTED_DECOMPOSITION",
+      "meaning": "no plan decomposition was accepted: the model is built from a description of the sources, whose own counts per side are in the warnings"
+    },
+    "sourceFidelity": {
+      "status": "UNCHECKED",
+      "relations": [],
+      "counts": {
+        "PASS": 0,
+        "CONFLICT": 0,
+        "UNCHECKED": 2
+      },
+      "conflicts": [],
+      "meaning": "nothing was compared deterministically: the description is the only link between the sources and this model"
+    },
+    "sourceUnchecked": {
+      "items": [
+        {
+          "kind": "PERSPECTIVE",
+          "extent": "NONE",
+          "what": "picture 1 (exterior view), asset asset-dom-larchfield-widok-od-ogrodu-94490f7c57",
+          "why": "the model was described from this picture by a reader; no deterministic comparison of the model with it was made",
+          "couldCheck": "a registration of this picture against the model, or a person looking"
+        },
+        {
+          "kind": "PERSPECTIVE",
+          "extent": "NONE",
+          "what": "picture 2 (exterior view), asset asset-dom-larchfield-wizualizacja-1-cae2dad1b4",
+          "why": "the model was described from this picture by a reader; no deterministic comparison of the model with it was made",
+          "couldCheck": "a registration of this picture against the model, or a person looking"
+        }
+      ],
+      "counts": {
+        "total": 2,
+        "byKind": {
+          "PERSPECTIVE": 2
+        },
+        "none": 2,
+        "partial": 0
+      }
+    },
+    "previewAvailable": true,
+    "elevationRegistration": {
+      "views": [],
+      "counts": {
+        "before": {
+          "FULL": 0,
+          "ALONG_ONLY": 0,
+          "VERTICAL_ONLY": 0,
+          "UNREGISTERED": 0
+        },
+        "after": {
+          "FULL": 0,
+          "ALONG_ONLY": 0,
+          "VERTICAL_ONLY": 0,
+          "UNREGISTERED": 0
+        }
+      },
+      "slots": {
+        "before": 0,
+        "after": 0
+      },
+      "lost": [],
+      "datums": {
+        "ridgeY": null,
+        "terrainY": null
+      },
+      "scorecard": {
+        "views": [],
+        "totals": {
+          "potential": 0,
+          "executed": 0,
+          "independent": 0,
+          "rawObserved": 0
+        }
+      }
+    },
+    "summary": "Described from 2 pictures; 0 technical error(s); no source relation was checked deterministically."
+  },
+  "analyzer": {
+    "service": "described-0.2.0",
+    "solver": "described-house-0.6.0+description-0.2.0"
+  },
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "links": {
+    "self": "/v1/analyses/dddddddddddddddddddddddddddddddd",
+    "result": "/v1/analyses/dddddddddddddddddddddddddddddddd/result",
+    "scene": "/v1/analyses/dddddddddddddddddddddddddddddddd/scene",
+    "model": "/v1/analyses/dddddddddddddddddddddddddddddddd/model",
+    "candidate": "/v1/analyses/dddddddddddddddddddddddddddddddd/candidate"
+  }
+}

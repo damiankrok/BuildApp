@@ -148,6 +148,8 @@ data class JobStatus(
     val links: Map<String, String> = emptyMap(),
     /** What the analyzer is doing inside the stage (005A); absent from an older service. */
     val activity: JobActivity? = null,
+    /** v3.53.2: present while (and after) the house is read as a whole from the page's pictures; absent otherwise. */
+    val describing: JobDescribing? = null,
 ) {
     val isTerminal: Boolean get() = status in AnalysisStages.TERMINAL
 }
@@ -266,6 +268,10 @@ data class AnalysisSummary(
     val limitingWarnings: List<String>
         get() = if (warningDetails.isEmpty()) warnings else warningDetails.filter { it.severity != AnalysisWarning.INFO }.map { it.message }
 
+    /** v3.53.2: the model was built from a description of the page's pictures read as a whole, not measured on its drawings. */
+    val isFromDescription: Boolean
+        get() = warningDetails.any { it.code == AnalysisWarning.FROM_DESCRIPTION }
+
     companion object {
         const val SCHEMA = "buildapp.link-analysis-result"
     }
@@ -276,6 +282,8 @@ data class AnalysisSummary(
 data class AnalysisWarning(val code: String = "", val severity: String = "", val message: String = "") {
     companion object {
         const val INFO = "INFO"
+        /** The warning a described model always carries (analysis-service `described.ts`). */
+        const val FROM_DESCRIPTION = "MODEL_FROM_SOURCE_DESCRIPTION"
     }
 }
 
