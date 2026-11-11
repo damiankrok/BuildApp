@@ -25,7 +25,7 @@ import type { Facade, OpeningFamily, OpeningV2 } from './openings-v2.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { PlaneRoofKey, PlaneRoofLayout, RoofEnd } from './plane-roof.js'
 import { planeAt, planeRoofLayout } from './plane-roof.js'
-import { emitBuilding } from './emit.js'
+import { emitBuilding, pitchedPlaneIds, planeRoofPlaneId } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
 export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.7.0'
@@ -670,7 +670,44 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const mass = massOf(r.bodyId)
     const roof = mass ? roofOf(mass.id) : undefined
     const key = roof ? planeKeyFor(roof, r.slope) : undefined
-    if (!mass || !roof || !key || key === 'END_MIN' || key === 'END_MAX') return adj('FEATURE_DROPPED', name, `${r.bodyId} has no roof slope facing ${r.slope.toLowerCase()}`)
+    if (!mass || !roof || !key || key === 'END_MIN' || key === 'END_MAX') {
+      // v3.53.2: not one of a plane roof's two long slopes — the end plane of a hip, or a slope of a cross gable. The
+      // plane is the one that falls towards the stated side; the rooflight lies in it or is not built.
+      const cross = mass && !roof ? pitchedAttachedRoofs.find((x) => x.massId === mass.id) : undefined
+      const planes = mass && roof ? roof.layout.planes.map((pl) => ({ id: planeRoofPlaneId(mass.id, pl.key), boundary: pl.boundary, downslope: pl.downslope })) : mass && cross ? cross.layout.planes.map((pl) => ({ id: pitchedPlaneIds(mass.id)[pl.key === 'LOW' ? 0 : 1], boundary: pl.boundary, downslope: pl.downslope })) : []
+      const want = r.slope === 'FRONT' ? { x: 0, z: -1 } : r.slope === 'REAR' ? { x: 0, z: 1 } : r.slope === 'LEFT' ? { x: -1, z: 0 } : { x: 1, z: 0 }
+      const plane = planes.find((pl) => pl.downslope.x * want.x + pl.downslope.z * want.z > 0.9)
+      if (!mass || !plane) return adj('FEATURE_DROPPED', name, `${r.bodyId} has no roof slope facing ${r.slope.toLowerCase()}`)
+      const fallsAlongX = want.x !== 0
+      const xs = plane.boundary.map((q) => q.x)
+      const zs = plane.boundary.map((q) => q.z)
+      // across the fall: where it is stated along that side; up the fall: 0.8 m in plan, begun part-way up from the eave
+      const [e0, e1] = fallsAlongX ? [Math.max(Math.min(...zs), mass.z0), Math.min(Math.max(...zs), mass.z1)] : [Math.max(Math.min(...xs), mass.x0), Math.min(Math.max(...xs), mass.x1)]
+      const [f0, f1] = fallsAlongX ? [Math.max(Math.min(...xs), mass.x0), Math.min(Math.max(...xs), mass.x1)] : [Math.max(Math.min(...zs), mass.z0), Math.min(Math.max(...zs), mass.z1)]
+      const sign = fallsAlongX ? want.x : want.z
+      const stated = fallsAlongX ? snapZ(Z(r.at)) : snapX(X(r.at))
+      const within = (q: { x: number; z: number }): boolean => {
+        let inside = false
+        const b = plane.boundary
+        for (let i = 0, j = b.length - 1; i < b.length; j = i++) if (b[i].z > q.z !== b[j].z > q.z && q.x < ((b[j].x - b[i].x) * (q.z - b[i].z)) / (b[j].z - b[i].z) + b[i].x) inside = !inside
+        return inside
+      }
+      const eave = sign > 0 ? f1 : f0
+      for (const centre of [clamp(stated, e0 + 0.6 + r.widthM / 2, e1 - 0.6 - r.widthM / 2), (e0 + e1) / 2]) {
+        for (const up of [0.4, 0.25, 0.12]) {
+          const a = eave - sign * (f1 - f0) * up
+          const fall: [number, number] = [round6(Math.min(a, a - sign * 0.8)), round6(Math.max(a, a - sign * 0.8))]
+          const across: [number, number] = [round6(centre - r.widthM / 2), round6(centre + r.widthM / 2)]
+          const [bx, bz] = fallsAlongX ? [fall, across] : [across, fall]
+          if (e1 - e0 < r.widthM + 1.2 || ![bx[0] + 0.01, bx[1] - 0.01].every((x) => [bz[0] + 0.01, bz[1] - 0.01].every((z) => within({ x, z })))) continue
+          if (Math.abs(centre - stated) > 0.3) adj('FEATURE_ADJUSTED', name, `stated at ${stated.toFixed(2)} m along the ${r.slope.toLowerCase()} side, where that slope is too narrow for it: placed at ${centre.toFixed(2)} m`)
+          // in plan: x extent as `along`, z extent as `slope`, under a ridge axis of X — the footprint the emitter cuts plumb
+          rooflights.push({ id: `rooflight-${n + 1}`, slope: sign < 0 ? 'LOW' : 'HIGH', alongFrom: bx[0], alongTo: bx[1], slopeFrom: bz[0], slopeTo: bz[1], yFrom: 0, yTo: 0, frameId: 'described-house', confidence: r.confidence, why: `a rooflight on the ${r.slope.toLowerCase()} slope${cross ? ` of ${r.bodyId}'s cross gable` : ', the end plane of the hip'}, as pictures ${r.images.join(', ')} show it; its height up the slope is a convention`, featureId: `described-rooflight-${n + 1}`, provenance: prov, widthM: r.widthM, lengthM: 0.8, planeId: plane.id, ridgeAxis: 'X' })
+          return
+        }
+      }
+      return adj('FEATURE_DROPPED', name, `the slope of ${r.bodyId} facing ${r.slope.toLowerCase()} has no room for it`)
+    }
     const alongX = roof.ridgeAxis === 'X'
     const at = alongX ? snapX(X(r.at)) : snapZ(Z(r.at))
     const [m0, m1] = alongX ? [mass.x0, mass.x1] : [mass.z0, mass.z1]

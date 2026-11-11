@@ -158,6 +158,60 @@ describe('described house — a cross gable', () => {
   })
 })
 
+describe('described house — a rooflight lies in the slope that falls towards the stated side (v3.53.2)', () => {
+  const base = (): HouseDescription => {
+    const d = fixture()
+    return { ...d, openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [], sides: d.sides.map((x) => ({ ...x, openingsByStorey: [] })) }
+  }
+  const light = (over: Partial<HouseDescription['rooflights'][number]>): HouseDescription['rooflights'][number] => ({ bodyId: 'main', slope: 'FRONT', at: 5, widthM: 0.8, images: [1], confidence: 0.7, ...over })
+  const cuts = (d: HouseDescription): Array<{ id: string; roofId: string; footprint: { minX: number; maxX: number; minZ: number; maxZ: number } }> => {
+    const model = reconstructFromHouseDescription(d, 'rooflights')
+    if (!model.ok) throw new Error(model.reason)
+    expect(model.refused).toEqual([])
+    return (model.program as Array<{ type: string; kind?: string; id: string; roofId: string; footprint: { minX: number; maxX: number; minZ: number; maxZ: number } }>).filter((c) => c.type === 'cutRoofOpening' && c.kind === 'ROOFLIGHT')
+  }
+
+  it('on a cross gable: the wing’s own slope facing the front, not dropped for want of a plane roof', () => {
+    const d = base()
+    const main = { ...d.bodies[0], x0: 0, x1: 9, z0: 0, z1: 11, roof: { ...d.bodies[0].roof, ridge: 'ALONG_Z' as const, overhangM: 0 } }
+    const wing = { ...d.bodies[1], x0: 9, x1: 13, z0: 2, z1: 9, eavesHeightM: 2.7, roof: { ...d.bodies[0].roof, ridge: 'ALONG_X' as const, overhangM: 0 } }
+    const house: HouseDescription = { ...d, overall: { ...d.overall, widthM: 13, depthM: 11 }, bodies: [main, wing], rooflights: [light({ bodyId: 'garage', slope: 'FRONT', at: 11 }), light({ bodyId: 'garage', slope: 'REAR', at: 11 }), light({ bodyId: 'garage', slope: 'RIGHT', at: 5 })] }
+    const b = buildingFromHouseDescription(house)
+    expect(b.building.pitchedAttachedRoofs.map((r) => r.massId)).toEqual(['body-garage'])
+    expect(b.building.rooflights.map((r) => [r.id, r.planeId])).toEqual([['rooflight-1', 'roof-body-garage-plane-low'], ['rooflight-2', 'roof-body-garage-plane-high']])
+    // a gable has no slope towards its own gable end
+    expect(b.adjustments.filter((x) => x.code === 'FEATURE_DROPPED').map((x) => `${x.subject}: ${x.why}`)).toEqual(['rooflight 3: garage has no roof slope facing right'])
+    const [front, rear] = cuts(house)
+    // in the wing, over its front half and its rear half, around the stated position along the front
+    expect(front.footprint.minX).toBeCloseTo(10.6, 6)
+    expect(front.footprint.maxX).toBeCloseTo(11.4, 6)
+    expect(front.footprint.minZ).toBeGreaterThan(2)
+    expect(front.footprint.maxZ).toBeLessThan(5.5)
+    expect(rear.footprint.minZ).toBeGreaterThan(5.5)
+    expect(rear.footprint.maxZ).toBeLessThan(9)
+  })
+
+  it('on the end plane of a hip: inside its triangle, moved to its middle when the stated place is too far up a narrowing slope; a long slope is placed exactly as before', () => {
+    const d = base()
+    const hip: HouseDescription = { ...d, bodies: [{ ...d.bodies[0], x0: 0, x1: 14, z0: 0, z1: 9, roof: { ...d.bodies[0].roof, kind: 'HIP', ridge: 'ALONG_X', overhangM: 0 } }], overall: { ...d.overall, widthM: 14, depthM: 9 } }
+    const withLights: HouseDescription = { ...hip, rooflights: [light({ slope: 'RIGHT', at: 4.5 }), light({ slope: 'LEFT', at: 1.2 }), light({ slope: 'FRONT', at: 7 })] }
+    const b = buildingFromHouseDescription(withLights)
+    expect(b.building.rooflights.map((r) => r.planeId)).toEqual(['roof-main-plane-end-max', 'roof-main-plane-end-min', 'roof-main-plane-low'])
+    expect(b.adjustments.filter((x) => x.code === 'FEATURE_DROPPED')).toEqual([])
+    expect(b.adjustments.filter((x) => x.subject === 'rooflight 2').map((x) => x.code)).toEqual(['FEATURE_ADJUSTED'])
+    const [right, left, front] = cuts(withLights)
+    expect(right.roofId).toBe('roof-main-plane-end-max')
+    expect(right.footprint.minX).toBeGreaterThan(9.5)
+    expect((right.footprint.minZ + right.footprint.maxZ) / 2).toBeCloseTo(4.5, 6)
+    expect(left.footprint.maxX).toBeLessThan(4.5)
+    expect((left.footprint.minZ + left.footprint.maxZ) / 2).toBeCloseTo(4.5, 6)
+    // the long slope is the path that existed: the same rooflight as without the two on the ends
+    const alone = buildingFromHouseDescription({ ...hip, rooflights: [light({ slope: 'FRONT', at: 7 })] })
+    expect({ ...b.building.rooflights[2], id: '', featureId: '', why: '' }).toEqual({ ...alone.building.rooflights[0], id: '', featureId: '', why: '' })
+    expect(front.roofId).toBe('roof-main-plane-low')
+  })
+})
+
 describe('described house — scale', () => {
   const load = (): HouseDescription => fixture()
   const fig = (key: string, value: number) => ({ key, label: key, raw: String(value), value, unit: 'm' })
