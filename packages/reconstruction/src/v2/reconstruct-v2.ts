@@ -253,7 +253,10 @@ import type { ApproximateRidge } from './roof-datum.js'
 // as an opened ring counts as the main body when a refused object is cut out of the preview; a reading that stands on
 // a scale nothing on the drawing confirmed, with the published building's proportions at another size, gives way to
 // the scale the page's two published dimensions set (`extentContradiction`), or is kept with the contradiction named
-export const SOLVER_V2_VERSION = '2.34.0' as const
+// 2.35.0 (v3.53.3): a room inside the box that the box's reading walked into through the room's own named opening is
+// built by a second reading with that opening shut (`rereadEnclosedRooms`, boundary evidence 1.3.0), so a house is not
+// cut into a body and an annexe beside a lost corner; a printed opening callout agrees with a gap that jamb ink narrowed
+export const SOLVER_V2_VERSION = '2.35.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
