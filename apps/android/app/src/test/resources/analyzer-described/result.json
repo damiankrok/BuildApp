@@ -16,7 +16,7 @@
   "sourcePackageHash": "209bb607f277592bf00cda7f195b1cd0ab93eab9b7912b091b065dfc13769796",
   "observationGraphHash": "982a9e16c70ec7ee98c00b44f86cbe5de0312e0739a289f150bbf25b2f764425",
   "metricEvidenceHash": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
-  "candidateHash": "9dc23a572dda3208e34125267296f557ebf789a9518c4ae5213a49efe5fc814c",
+  "candidateHash": "2dddde8f91e6cb016b35a9251b07151f283c174b38368ee62081c22f5e4a8137",
   "modelHash": "c0d3a252530d7fddb76029519d91cc3e76470cff0e99e85d8db524e44f48dd01",
   "modelSha256": "c0d3a252530d7fddb76029519d91cc3e76470cff0e99e85d8db524e44f48dd01",
   "sceneContentHash": "597af1b9a51cab3612b1cc2721cded854b5c35c79f9fe8325ec7e611f084b8b0",
@@ -243,7 +243,7 @@
   },
   "analyzer": {
     "service": "described-0.2.0",
-    "solver": "described-house-0.6.0+description-0.2.0"
+    "solver": "described-house-0.7.0+description-0.2.0"
   },
   "startedAt": "2026-01-01T00:00:00.000Z",
   "completedAt": "2026-01-01T00:00:00.000Z",
