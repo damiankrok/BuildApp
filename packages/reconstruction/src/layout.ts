@@ -305,9 +305,9 @@ export const EAVES_GRID_SNAP_M = 0.35
  * The built regions of a plan re-cut on its eaves line. Returns the regions to build from (the given ones when the cut
  * is not taken) and the record. Pixels of the plan's own grid only.
  */
-export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegion[], raster: Raster, mppX: number, mppY: number, toWorld: (rect: PixelRect) => { x0: number; z0: number; x1: number; z1: number }): { regions: PlanRegion[]; extent: RoofExtent; reading: EaveOutlineReading } {
+export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegion[], raster: Raster, mppX: number, mppY: number, toWorld: (rect: PixelRect) => { x0: number; z0: number; x1: number; z1: number }): { regions: PlanRegion[]; extent: RoofExtent; reading: EaveOutlineReading; pockets: BayPocket[] } {
   const reading = readEaveOutline(raster, built.map((r) => r.rect), mppX, mppY)
-  const stands = (why: string): { regions: PlanRegion[]; extent: RoofExtent; reading: EaveOutlineReading } => ({ regions: [...built], reading, extent: { frameId: base.frame.id, state: reading.state, ...(reading.overhangM !== undefined ? { overhangM: reading.overhangM } : {}), bodies: [], taken: false, why } })
+  const stands = (why: string): { regions: PlanRegion[]; extent: RoofExtent; reading: EaveOutlineReading; pockets: BayPocket[] } => ({ regions: [...built], reading, pockets: [], extent: { frameId: base.frame.id, state: reading.state, ...(reading.overhangM !== undefined ? { overhangM: reading.overhangM } : {}), bodies: [], taken: false, why } })
   if (reading.state !== 'CLOSED' || !reading.roofedRects || !base.registration) return stands(reading.why)
   const d = base.decomposition
   const lx = d.linesX.map((l) => l.px)
@@ -442,9 +442,38 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
     const v1 = (rect.y1 - reg.originPx.y) * reg.metresPerPixelY
     return { x0: round6(Math.min(u0, u1)), z0: round6(Math.min(v0, v1)), x1: round6(Math.max(u0, u1)), z1: round6(Math.max(v0, v1)) }
   }
+  // What the walls' own reading left unbuilt inside the main rectangle, on one face of it and clear of its corners, is
+  // a recess in that face — an entrance set back under the roof. The body keeps its rectangle and the recess is cut out
+  // of it, as it is out of a body whose front reaches the walls' face in strips (`pocketRecesses`). Unbuilt at a corner,
+  // it is a covered corner, which the corner reader builds.
+  const mainRect = bodies[0].rect
+  const recessCells = new Set<string>()
+  const pocketRects: Array<{ side: PlanSide; rect: PixelRect }> = []
+  {
+    const open = d.cells.filter((c) => cellCentreIn(c, mainRect) && c.classification !== 'BUILT')
+    const seen = new Set<string>()
+    for (const start of open) {
+      if (seen.has(`${start.ix}:${start.iy}`)) continue
+      const group = [start]
+      seen.add(`${start.ix}:${start.iy}`)
+      for (let i = 0; i < group.length; i += 1) {
+        for (const n of open) {
+          if (seen.has(`${n.ix}:${n.iy}`) || Math.abs(n.ix - group[i].ix) + Math.abs(n.iy - group[i].iy) !== 1) continue
+          seen.add(`${n.ix}:${n.iy}`)
+          group.push(n)
+        }
+      }
+      const rect = { x0: Math.min(...group.map((c) => c.rect.x0)), y0: Math.min(...group.map((c) => c.rect.y0)), x1: Math.max(...group.map((c) => c.rect.x1)), y1: Math.max(...group.map((c) => c.rect.y1)) }
+      if (Math.abs(group.reduce((a, c) => a + area(c.rect), 0) - area(rect)) > 0.01 * area(rect)) continue
+      const sides: PlanSide[] = [...(Math.abs(rect.y0 - mainRect.y0) <= 1 ? ['MIN_Z' as const] : []), ...(Math.abs(rect.y1 - mainRect.y1) <= 1 ? ['MAX_Z' as const] : []), ...(Math.abs(rect.x0 - mainRect.x0) <= 1 ? ['MIN_X' as const] : []), ...(Math.abs(rect.x1 - mainRect.x1) <= 1 ? ['MAX_X' as const] : [])]
+      if (sides.length !== 1) continue
+      pocketRects.push({ side: sides[0], rect })
+      for (const c of group) recessCells.add(`${c.ix}:${c.iy}`)
+    }
+  }
   const usedIds = new Set<string>()
   const regions: PlanRegion[] = bodies.map((b) => {
-    const cells = d.cells.filter((c) => cellCentreIn(c, b.rect)).map((c) => ({ ix: c.ix, iy: c.iy })).sort((p, q) => p.iy - q.iy || p.ix - q.ix)
+    const cells = d.cells.filter((c) => cellCentreIn(c, b.rect) && !(b.role === 'MAIN' && recessCells.has(`${c.ix}:${c.iy}`))).map((c) => ({ ix: c.ix, iy: c.iy })).sort((p, q) => p.iy - q.iy || p.ix - q.ix)
     // the id of the walled region it mostly is, so a body keeps its name where the cut only grows it
     const parent = [...built].sort((p, q) => overlap(q.rect, b.rect) - overlap(p.rect, b.rect) || p.id.localeCompare(q.id))[0]
     const id = parent && overlap(parent.rect, b.rect) > 0 && !usedIds.has(parent.id) ? parent.id : `region-built-${cells[0]?.ix ?? 0}-${cells[0]?.iy ?? 0}-eaves`
@@ -463,6 +492,7 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
   return {
     regions,
     reading,
+    pockets: pocketRects.map((q) => ({ bodyRegionId: regions[0].id, side: q.side, rect: q.rect, why: `a part of the main body's rectangle under the eaves that its walls leave unbuilt, ${(((q.side === 'MIN_X' || q.side === 'MAX_X' ? q.rect.x1 - q.rect.x0 : q.rect.y1 - q.rect.y0) * (q.side === 'MIN_X' || q.side === 'MAX_X' ? mppX : mppY))).toFixed(2)} m deep, on one face and clear of its corners: a recess in that face, under the roof` })),
     extent: {
       frameId: base.frame.id,
       state: 'CLOSED',
@@ -2392,6 +2422,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // v3.53.4: a single storey stands under the roof whose eaves its plan draws: where that line closes around the
   // building, the bodies are what the roof covers, not what a wall divides (`bodiesUnderTheEaves`)
   let roofExtent: RoofExtent | undefined
+  let eavesPockets: BayPocket[] = []
   let built = walledCut
   const baseRaster = plans.length === 1 && !walledFirst ? options.raster(base.frame) : undefined
   if (baseRaster) {
@@ -2400,6 +2431,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     if (eaves.extent.taken) {
       built = eaves.regions
       roofExtent = eaves.extent
+      eavesPockets = eaves.pockets
     }
   }
   if (walledFirst && walledFirst.demoted.length > 0) {
@@ -2825,7 +2857,7 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     const mass = masses.find((m) => m.id === plane.massId)
     if (mass) mass.facadePlaneIds.push(plane.id)
   }
-  for (const found of [...recessesOf(base, frame, masses, baseStorey, options.metrics), ...pocketRecesses(strips.pockets, base, frame, masses, baseStorey, options.metrics)]) {
+  for (const found of [...recessesOf(base, frame, masses, baseStorey, options.metrics), ...pocketRecesses([...strips.pockets, ...eavesPockets], base, frame, masses, baseStorey, options.metrics)]) {
     footprintRegions.push(found.region)
     baseStorey.footprintRegionIds.push(found.region.id)
     recesses.push(found.recess)

@@ -191,6 +191,23 @@ describe('bodies under one roof (v3.53.4)', () => {
     expect(d.masses.length).toBe(2)
   })
 
+  it('an entrance set back in the front of the body, under the eaves, stays a recess in that face — the body is not cut on its back wall', () => {
+    // a house 20 × 12 m whose front is set back 2.4 m over 10 m in the middle: two returns and a back wall
+    const r = sheet(560, 420)
+    ring(r, 60, 60, 459, 299)
+    clear(r, 160, 288, 359, 299)
+    wall(r, 160, 252, 359, 263)
+    wall(r, 160, 252, 171, 299)
+    wall(r, 348, 252, 359, 299)
+    outline(r, [[60 - OVERHANG, 60 - OVERHANG], [459 + OVERHANG, 60 - OVERHANG], [459 + OVERHANG, 299 + OVERHANG], [60 - OVERHANG, 299 + OVERHANG]])
+    const d = layoutOf(r, [60, 160, 360, 460], [60, 252, 300])
+    expect(d.masses.length).toBe(1)
+    expect(sizes(d)).toEqual([[20, 12]])
+    expect(d.recesses).toHaveLength(1)
+    expect(d.recesses[0].massId).toBe(d.masses[0].id)
+    expect(d.recesses[0].depthM.value).toBeCloseTo(2.4, 1)
+  })
+
   it('the same plan gives the same bodies twice', () => {
     const a = layoutOf(houseWithWing(true), [60, 200, 280, 460], [60, 260, 340])
     const b = layoutOf(houseWithWing(true), [60, 200, 280, 460], [60, 260, 340])
