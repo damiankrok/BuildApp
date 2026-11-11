@@ -278,12 +278,83 @@ describe('described house — roofs over open areas, terraces and flat roofs mee
     expect(reconstructFromHouseDescription(alone([canopy({ kind: 'COVERED_TERRACE', x0: 0, x1: w, z0: z0 + dep - 3, z1: z0 + dep, posts: 2 })]), 'porch').ok).toBe(true)
   })
 
-  it('a deep recess over part of a face is not a form this builder cuts: it is said and not built — never a plate through the walls', () => {
+  // v3.53.2: until now such a porch was said and not built. It is the model's own pocket: a passage through the body's
+  // wall over the mouth, a wall behind it, a post at an open corner — never a plate through the walls.
+  const opening = (over: Partial<HouseDescription['openings'][number]>): HouseDescription['openings'][number] => ({ ...fixture().openings[0], bodyId: 'main', side: 'FRONT', storey: 0, kind: 'WINDOW', at: 2, widthM: 1.2, sillM: 0.9, heightM: 1.4, panes: 1, ...over })
+
+  it('a deep porch stated in a corner of a body is a recess cut out of that corner: both faces open under a head, a post at the corner, and the door stated there stands in the wall behind', () => {
     const d = alone([])
-    const z0 = d.bodies[0].z0
-    const b = buildingFromHouseDescription(alone([canopy({ x0: 6, x1: d.bodies[0].x1, z0, z1: z0 + 1.8, posts: 1 })]))
+    const { x1, z0 } = d.bodies[0]
+    const described: HouseDescription = {
+      ...alone([canopy({ x0: 6, x1, z0, z1: z0 + 1.8, undersideM: 2.5, posts: 1 })]),
+      openings: [opening({ kind: 'ENTRANCE_DOOR', at: 8.6, widthM: 1.1, sillM: 0, heightM: 2.1 }), opening({ at: 2.5, widthM: 1.8 }), opening({ side: 'RIGHT', at: z0 + 0.9, widthM: 0.8 })],
+    }
+    const b = buildingFromHouseDescription(described)
     expect(b.building.canopies ?? []).toEqual([])
-    expect(codes(b, 'canopy 1')[0]).toMatch(/^FEATURE_DROPPED: .*recessed porch/)
+    expect(codes(b, 'canopy 1')).toHaveLength(1)
+    expect(codes(b, 'canopy 1')[0]).toMatch(/^FEATURE_ADJUSTED: .*front-east corner: built as a recess cut out of that corner.*post at the corner/)
+    const pockets = b.building.pockets ?? []
+    expect(pockets.map((q) => [q.facade, q.from, q.to, q.mouthAt, q.backAt, q.openEnd, q.headY, q.storeyIndex])).toEqual([
+      ['FRONT', 6, x1, 0, 1.8, 'HIGH', 2.5, 0],
+      ['EAST', 0, 1.8, x1, 6, 'LOW', 2.5, 0],
+    ])
+    expect(pockets.map((q) => q.walls.map((w) => w.role))).toEqual([['BACK'], ['BACK']])
+    // one post, at the corner the two faces shared, inside the body's outline
+    expect(pockets.map((q) => q.post ?? null)).toEqual([{ x0: x1 - 0.3, x1, z0: 0, z1: 0.3 }, null])
+    // the door stated on the front at 8.6 m stands in the wall behind the recess; the window beside it stays in the face
+    expect(pockets[0].backOpenings.map((o) => [o.family, o.planeAt, o.interval])).toEqual([['DOOR', 1.8, [8.05, 9.15]]])
+    expect(pockets[1].backOpenings.map((o) => [o.family, o.planeAt])).toEqual([['WINDOW', 6]])
+    expect(b.building.openings.map((o) => [o.facade, o.storeyIndex, o.planeAt])).toEqual([['FRONT', 0, 0]])
+    expect(b.adjustments.filter((x) => x.code === 'OPENING_MOVED_TO_WALL').map((x) => x.subject)).toEqual(['opening 1 (entrance_door on front, storey 0)', 'opening 3 (window on right, storey 0)'])
+    expect(b.adjustments.filter((x) => x.code === 'OPENING_DROPPED')).toEqual([])
+    // the body is whole: same outline, same roof as the house without the porch
+    expect(b.building.masses).toEqual(buildingFromHouseDescription(d).building.masses)
+    // and the model takes it whole: nothing refused, a passage in each face, the post, the door in the back wall
+    const model = reconstructFromHouseDescription(described, 'corner-porch')
+    expect(model.ok).toBe(true)
+    if (!model.ok) return
+    expect(model.refused).toEqual([])
+    const program = model.program as Array<{ type: string; id?: string; kind?: string; wallId?: string; openEnd?: string; role?: string }>
+    expect(program.filter((c) => c.type === 'cutOpening' && c.kind === 'PASSAGE').map((c) => [c.id, Boolean(c.openEnd)])).toEqual([['pocket-main-0-0-mouth', true], ['pocket-main-0-1-mouth', true]])
+    expect(program.filter((c) => c.type === 'createColumn' && c.role === 'POST').map((c) => c.id)).toEqual(['pocket-main-0-0-post'])
+    expect(program.find((c) => c.type === 'cutOpening' && c.id === 'opening-front-0-1')?.wallId).toBe('pocket-main-0-0-back')
+  })
+
+  it('a deep porch stated inside one face is a recess between two returns; a window stated where its mouth is does not float in the passage', () => {
+    const d = alone([])
+    const { z0 } = d.bodies[0]
+    const described: HouseDescription = { ...alone([canopy({ x0: 3, x1: 6, z0, z1: z0 + 1.5, undersideM: 2.4 })]), openings: [opening({ kind: 'ENTRANCE_DOOR', at: 4.5, widthM: 1, sillM: 0, heightM: 2.1 }), opening({ at: 1.5, widthM: 1.2 })] }
+    const b = buildingFromHouseDescription(described)
+    const pockets = b.building.pockets ?? []
+    expect(pockets).toHaveLength(1)
+    expect(pockets[0]).toMatchObject({ facade: 'FRONT', from: 3, to: 6, mouthAt: 0, backAt: 1.5, headY: 2.4 })
+    expect(pockets[0].openEnd).toBeUndefined()
+    expect(pockets[0].post).toBeUndefined()
+    expect(pockets[0].walls.map((w) => w.role)).toEqual(['RETURN', 'RETURN', 'BACK'])
+    expect(pockets[0].backOpenings.map((o) => o.family)).toEqual(['DOOR'])
+    expect(b.building.openings.map((o) => o.interval)).toEqual([[0.9, 2.1]])
+    expect(codes(b, 'canopy 1')[0]).toMatch(/^FEATURE_ADJUSTED: .*over part of its front face: built as a recess cut into that face/)
+    const model = reconstructFromHouseDescription(described, 'face-porch')
+    expect(model.ok && model.refused).toEqual([])
+  })
+
+  it('what cannot be cut is still said and not built: a corner another body stands against, a recess that would leave no house, a porch hard against a corner without reaching it', () => {
+    // the fixture's garage stands against the main body's east face from the front: that corner is not open on two faces
+    const two = fixture()
+    const main = two.bodies[0]
+    const against = buildingFromHouseDescription({ ...two, openings: [], terraces: [], balconies: [], canopies: [canopy({ x0: 7.5, x1: main.x1, z0: main.z0, z1: main.z0 + 1.8, posts: 1 })] })
+    expect(against.building.pockets ?? []).toEqual([])
+    expect(codes(against, 'canopy 1')[0]).toMatch(/^FEATURE_DROPPED: .*corner of main where another body stands against it/)
+
+    const d = alone([])
+    const { x1, z0, z1 } = d.bodies[0]
+    const noHouse = buildingFromHouseDescription(alone([canopy({ x0: 2, x1, z0, z1: z1 - 2 })]))
+    expect(noHouse.building.pockets ?? []).toEqual([])
+    expect(codes(noHouse, 'canopy 1')[0]).toMatch(/^FEATURE_DROPPED/)
+
+    const hard = buildingFromHouseDescription(alone([canopy({ x0: 0.3, x1: 3, z0, z1: z0 + 1.5 })]))
+    expect(hard.building.pockets ?? []).toEqual([])
+    expect(codes(hard, 'canopy 1')[0]).toMatch(/^FEATURE_DROPPED: .*over part of a face/)
   })
 
   it('under a roof\'s eaves the plate begins at the roof\'s edge; its posts still stand along the long outer edge, as many as were stated', () => {

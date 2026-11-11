@@ -17,7 +17,8 @@
 import { round6 } from '@buildapp/source-common'
 import { serializeModel } from '@buildapp/model'
 import type { DescribedBody, DescribedOpening, HouseDescription, HouseSide, PublishedFigure } from '@buildapp/source-vision'
-import type { BuildingV2, CanopyV2, DormerV2, LevelV2, MassV2, PlaneRoofV2, AttachedRoofV2, BalconyV2, RailingV2, TerraceV2, PitchedAttachedRoofV2 } from './building.js'
+import type { BuildingV2, CanopyV2, DormerV2, LevelV2, MassV2, PlaneRoofV2, AttachedRoofV2, BalconyV2, RailingV2, TerraceV2, PitchedAttachedRoofV2, PocketV2 } from './building.js'
+import { cornerPocketSpecs } from './corner-pockets.js'
 import { attachedGableLayout } from './attached-roof-form.js'
 import type { MainRoofForJoin } from './attached-roof-form.js'
 import type { Facade, OpeningFamily, OpeningV2 } from './openings-v2.js'
@@ -27,7 +28,7 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.6.0'
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.7.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
@@ -287,9 +288,12 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   //  - shallow (under a metre): a canopy over a door that the reader kept inside the frame — it projects from that face;
   //  - across the whole face and deeper: a porch or terrace under the body's own roof — the walls stand back by its
   //    depth, the roof keeps its outline, its posts stand where the face was;
-  //  - anything else (part of a face, a corner): a recess this builder does not cut yet — said, and not built.
+  //  - over part of a face, or at a corner, a metre deep or more: a recess cut into the body on the ground storey — a
+  //    passage through the body's own wall over its mouth, the wall behind it with the openings stated on that side,
+  //    a post at an open corner — under whatever the body carries above it (v3.53.2);
+  //  - anything else: said, and not built.
   const canopyRect = (c: HouseDescription['canopies'][number]): Rect => ({ x0: round6(Math.min(X(c.x0), X(c.x1))), x1: round6(Math.max(X(c.x0), X(c.x1))), z0: round6(Math.min(Z(c.z0), Z(c.z1))), z1: round6(Math.max(Z(c.z0), Z(c.z1))) })
-  type CanopyPlan = { kind: 'OPEN' } | { kind: 'PROJECTS'; rect: Rect; from: string } | { kind: 'RECESS'; body: Body; facade: Facade; rect: Rect } | { kind: 'UNBUILT'; why: string }
+  type CanopyPlan = { kind: 'OPEN' } | { kind: 'PROJECTS'; rect: Rect; from: string } | { kind: 'RECESS'; body: Body; facade: Facade; rect: Rect } | { kind: 'POCKET'; body: Body; facade: Facade; rect: Rect; corner?: { xSide: 'WEST' | 'EAST'; zSide: 'FRONT' | 'REAR' } } | { kind: 'UNBUILT'; why: string }
   const canopyPlans: CanopyPlan[] = d.canopies.map((c) => {
     const r = canopyRect(c)
     const host = bodies.find((b) => r.x0 >= b.rect.x0 - 0.05 && r.x1 <= b.rect.x1 + 0.05 && r.z0 >= b.rect.z0 - 0.05 && r.z1 <= b.rect.z1 + 0.05)
@@ -313,12 +317,33 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const across = alongX ? acrossX : acrossZ
     const left = alongX ? h.z1 - h.z0 - depth : h.x1 - h.x0 - depth
     if (across && host.src.roof.kind !== 'FLAT' && depth >= RECESS_MIN_DEPTH_M && left >= 3) return { kind: 'RECESS', body: host, facade: face, rect: r }
+    // a recess cut into the body: at a corner (against two faces that meet) or inside one face
+    const inside: Rect = { x0: Math.max(r.x0, h.x0), z0: Math.max(r.z0, h.z0), x1: Math.min(r.x1, h.x1), z1: Math.min(r.z1, h.z1) }
+    const [w, dz] = [inside.x1 - inside.x0, inside.z1 - inside.z0]
+    const zSide = on.find((f): f is 'FRONT' | 'REAR' => f === 'FRONT' || f === 'REAR')
+    const xSide = on.find((f): f is 'WEST' | 'EAST' => f === 'WEST' || f === 'EAST')
+    const others = bodies.filter((b) => b !== host).map((b) => b.rect)
+    const free = (f: Facade, from: number, to: number): boolean => coveredSpans(h, f, others).every(([a, b]) => Math.min(b, to) - Math.max(a, from) <= 0.05)
+    const roomLeft = h.x1 - h.x0 - w >= 3 && h.z1 - h.z0 - dz >= 3
+    if (!across && Math.min(w, dz) >= RECESS_MIN_DEPTH_M && roomLeft && on.length === 2 && zSide && xSide && !acrossX && !acrossZ) {
+      if (free(zSide, inside.x0, inside.x1) && free(xSide, inside.z0, inside.z1)) return { kind: 'POCKET', body: host, facade: zSide, rect: inside, corner: { xSide, zSide } }
+      return { kind: 'UNBUILT', why: `it is stated in a corner of ${host.src.id} where another body stands against it: a recess of a form this builder does not cut` }
+    }
+    if (!across && on.length === 1 && depth >= RECESS_MIN_DEPTH_M && left >= 3) {
+      const [m0, m1] = alongX ? [inside.x0 - h.x0, h.x1 - inside.x1] : [inside.z0 - h.z0, h.z1 - inside.z1]
+      const span: [number, number] = alongX ? [inside.x0, inside.x1] : [inside.z0, inside.z1]
+      if (Math.min(m0, m1) >= WALL_T + 0.3 && span[1] - span[0] >= 1 && free(face, span[0], span[1])) return { kind: 'POCKET', body: host, facade: face, rect: inside }
+    }
     return { kind: 'UNBUILT', why: `it is stated within ${host.src.id}'s walls${across ? '' : ', over part of a face'} — a recessed porch of a form this builder does not cut into a body yet` }
   })
   canopyPlans.forEach((plan, n) => {
     if (plan.kind !== 'RECESS') return
     const b = plan.body
     if (b.roofRect) return void (canopyPlans[n] = { kind: 'UNBUILT', why: `${b.src.id} already stands back under its roof on another side` })
+    // a body whose walls move cannot also be cut where they stood
+    canopyPlans.forEach((other, k) => {
+      if (other.kind === 'POCKET' && other.body === b) canopyPlans[k] = { kind: 'UNBUILT', why: `${b.src.id} stands back under its roof on another side: a recess cut into the face it had is not built as well` }
+    })
     b.roofRect = { ...b.rect }
     const r = plan.rect
     if (plan.facade === 'FRONT') b.rect = { ...b.rect, z0: r.z1 }
@@ -444,6 +469,86 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   const roofOf = (massId: string): PlaneRoofV2 | undefined => planeRoofs.find((r) => r.massId === massId)
   const flatOf = (massId: string): AttachedRoofV2 | undefined => attachedRoofs.find((r) => r.massId === massId)
 
+  // --- recesses cut into a body (v3.53.2) --------------------------------------------------------------------------------
+  // The model's own pocket: the body's ring wall keeps running over the mouth above a passage; a wall of its own stands
+  // behind it. At a corner the two faces each open through the corner block and a post stands where they met.
+  const pockets: PocketV2[] = []
+  type PocketSeat = { pocket: PocketV2; from: number; to: number; faceAt: number }
+  const seats: PocketSeat[] = []
+  canopyPlans.forEach((plan, n) => {
+    if (plan.kind !== 'POCKET') return
+    const c = d.canopies[n]
+    const mass = masses[bodies.indexOf(plan.body)]
+    const body: Rect = { x0: mass.x0, z0: mass.z0, x1: mass.x1, z1: mass.z1 }
+    const r = plan.rect
+    // the head of the passage: the underside the reader states, under the storey's ceiling
+    const headY = round6(clamp(c.undersideM, 2.05, H - 0.3))
+    const featureId = `described-canopy-${n + 1}`
+    const name = `canopy ${n + 1}`
+    const told = `a ${c.kind.toLowerCase().replace(/_/g, ' ')} stated within ${plan.body.src.id}'s walls, as pictures ${c.images.join(', ')} show it`
+    const add = (pocket: PocketV2, seat: { from: number; to: number; faceAt: number }): void => {
+      pockets.push(pocket)
+      seats.push({ pocket, ...seat })
+    }
+    if (plan.corner) {
+      const { xSide, zSide } = plan.corner
+      const cx = xSide === 'WEST' ? body.x0 : body.x1
+      const cz = zSide === 'FRONT' ? body.z0 : body.z1
+      const P = 0.3
+      const post: Rect = { x0: round6(xSide === 'WEST' ? cx : cx - P), x1: round6(xSide === 'WEST' ? cx + P : cx), z0: round6(zSide === 'FRONT' ? cz : cz - P), z1: round6(zSide === 'FRONT' ? cz + P : cz) }
+      const why = `${told}: a recess ${(r.x1 - r.x0).toFixed(2)} × ${(r.z1 - r.z0).toFixed(2)} m cut out of its ${zSide.toLowerCase()}-${xSide.toLowerCase()} corner on the ground storey, open on both faces under a head at ${headY.toFixed(2)} m`
+      for (const spec of cornerPocketSpecs({ xSide, zSide, rect: r, backShares: [1, 1], ...(c.posts > 0 ? { post } : {}), why }, body, WALL_T)) {
+        const id = `pocket-${mass.id}-0-${pockets.length}`
+        add({ id, massId: mass.id, facade: spec.facade, storeyIndex: 0, from: spec.from, to: spec.to, mouthAt: spec.mouthAt, backAt: spec.backAt, headY, headProvenance: prov, walls: [{ id: `${id}-back`, role: 'BACK', start: spec.back.start, end: spec.back.end, thicknessM: WALL_T }], backOpenings: [], openEnd: spec.openEnd, ...(spec.carriesPost && c.posts > 0 ? { post } : {}), featureId, why }, { from: spec.back.from, to: spec.back.to, faceAt: spec.back.faceAt })
+      }
+      adj('FEATURE_ADJUSTED', name, `it is stated within ${plan.body.src.id}'s walls at its ${zSide.toLowerCase()}-${xSide.toLowerCase()} corner: built as a recess cut out of that corner under what the body carries above it${c.posts > 0 ? ', with a post at the corner' : ''}, not as a roof of its own`)
+      return
+    }
+    const facade = plan.facade
+    const alongX = facade === 'FRONT' || facade === 'REAR'
+    const inward = facade === 'FRONT' || facade === 'WEST' ? 1 : -1
+    const mouthAt = facade === 'FRONT' ? body.z0 : facade === 'REAR' ? body.z1 : facade === 'WEST' ? body.x0 : body.x1
+    const backFace = facade === 'FRONT' ? r.z1 : facade === 'REAR' ? r.z0 : facade === 'WEST' ? r.x1 : r.x0
+    const [lowFace, highFace] = alongX ? [r.x0, r.x1] : [r.z0, r.z1]
+    const ring0 = mouthAt + inward * WALL_T
+    const back1 = backFace + inward * WALL_T
+    const at = (u: number, v: number): { x: number; z: number } => (alongX ? { x: round6(u), z: round6(v) } : { x: round6(v), z: round6(u) })
+    // a wall is given by its face towards the recess, its material to the left of its run
+    const faced = (a: { x: number; z: number }, b: { x: number; z: number }, material: { x: number; z: number }): { start: { x: number; z: number }; end: { x: number; z: number } } => {
+      const dir = { x: b.x - a.x, z: b.z - a.z }
+      return -dir.z * material.x + dir.x * material.z > 0 ? { start: a, end: b } : { start: b, end: a }
+    }
+    const lowDir = alongX ? { x: -1, z: 0 } : { x: 0, z: -1 }
+    const highDir = alongX ? { x: 1, z: 0 } : { x: 0, z: 1 }
+    const deepDir = alongX ? { x: 0, z: inward } : { x: inward, z: 0 }
+    const id = `pocket-${mass.id}-0-${pockets.length}`
+    const why = `${told}: a recess ${(highFace - lowFace).toFixed(2)} m wide and ${Math.abs(backFace - mouthAt).toFixed(2)} m deep in its ${facade.toLowerCase()} face on the ground storey, under a head at ${headY.toFixed(2)} m`
+    add(
+      {
+        id,
+        massId: mass.id,
+        facade,
+        storeyIndex: 0,
+        from: round6(lowFace),
+        to: round6(highFace),
+        mouthAt: round6(mouthAt),
+        backAt: round6(backFace),
+        headY,
+        headProvenance: prov,
+        walls: [
+          { id: `${id}-return-low`, role: 'RETURN', ...faced(at(lowFace, ring0), at(lowFace, back1), lowDir), thicknessM: WALL_T },
+          { id: `${id}-return-high`, role: 'RETURN', ...faced(at(highFace, ring0), at(highFace, back1), highDir), thicknessM: WALL_T },
+          { id: `${id}-back`, role: 'BACK', ...faced(at(lowFace, backFace), at(highFace, backFace), deepDir), thicknessM: WALL_T },
+        ],
+        backOpenings: [],
+        featureId,
+        why,
+      },
+      { from: round6(lowFace), to: round6(highFace), faceAt: round6(backFace) },
+    )
+    adj('FEATURE_ADJUSTED', name, `it is stated within ${plan.body.src.id}'s walls over part of its ${facade.toLowerCase()} face: built as a recess cut into that face under what the body carries above it, not as a roof of its own`)
+  })
+
   // --- openings --------------------------------------------------------------------------------------------------------
   const openings: OpeningV2[] = []
   const FAMILY: Record<DescribedOpening['kind'], OpeningFamily> = { WINDOW: 'WINDOW', LARGE_GLAZING: 'MULTI_PANEL_GLAZING', ENTRANCE_DOOR: 'DOOR', DOOR: 'DOOR', GLAZED_DOOR: 'GLAZED_DOOR', GARAGE_DOOR: 'GARAGE_DOOR' }
@@ -461,12 +566,17 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     if (!mass) return adj('OPENING_DROPPED', name, `no body has a wall on that side at ${at.toFixed(2)} m on storey ${o.storey}`)
     if (mass !== named) adj('OPENING_MOVED_TO_WALL', name, `${o.bodyId} has no wall there on that storey: placed in ${mass.id}'s wall, which stands at that position`)
     const rect: Rect = { x0: mass.x0, z0: mass.z0, x1: mass.x1, z1: mass.z1 }
-    const [w0, w1] = alongX ? [mass.x0, mass.x1] : [mass.z0, mass.z1]
+    // where the face is cut back into a recess on this storey, what is stated there stands in the wall behind it
+    const seat = seats.find((q) => q.pocket.massId === mass.id && q.pocket.facade === facade && q.pocket.storeyIndex === o.storey && at > q.pocket.from && at < q.pocket.to)
+    const key = seat ? `pocket:${seat.pocket.id}` : `${mass.id}:${facade}:${o.storey}`
+    const [w0, w1] = seat ? [seat.from - WALL_T, seat.to + WALL_T] : alongX ? [mass.x0, mass.x1] : [mass.z0, mass.z1]
     let lo = at - (o.widthM * kx) / 2
     let hi = at + (o.widthM * kx) / 2
     // not where another body stands against this wall on this storey
-    const against = coveredSpans(rect, facade, masses.filter((x) => x !== mass && x.storeys.includes(o.storey)).map((x) => ({ x0: x.x0, z0: x.z0, x1: x.x1, z1: x.z1 })))
-    const blocked = [...against, ...(taken.get(`${mass.id}:${facade}:${o.storey}`) ?? [])]
+    const against = seat ? [] : coveredSpans(rect, facade, masses.filter((x) => x !== mass && x.storeys.includes(o.storey)).map((x) => ({ x0: x.x0, z0: x.z0, x1: x.x1, z1: x.z1 })))
+    // nor in the mouth of a recess: that part of the face is a passage
+    const mouths = seat ? [] : seats.filter((q) => q.pocket.massId === mass.id && q.pocket.facade === facade && q.pocket.storeyIndex === o.storey).map((q): [number, number] => [q.pocket.from, q.pocket.to])
+    const blocked = [...against, ...mouths, ...(taken.get(key) ?? [])]
     const limLo = Math.max(w0 + WALL_T + 0.1, ...blocked.filter(([, b]) => b <= at + 1e-6).map(([, b]) => b + 0.12))
     const limHi = Math.min(w1 - WALL_T - 0.1, ...blocked.filter(([a]) => a >= at - 1e-6).map(([a]) => a - 0.12))
     if (blocked.some(([a, b]) => at > a && at < b)) return adj('OPENING_DROPPED', name, `at ${at.toFixed(2)} m another body or an opening already placed stands in that wall`)
@@ -492,17 +602,17 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
       if (head - ceiling > 0.08) adj('OPENING_LOWERED', name, `head stated at ${(head - floor).toFixed(2)} m above the floor, the wall under the roof there reaches ${(ceiling - floor).toFixed(2)} m`)
       head = round6(ceiling)
     }
-    const key = `${mass.id}:${facade}:${o.storey}`
     taken.set(key, [...(taken.get(key) ?? []), [lo, hi]])
+    if (seat) adj('OPENING_MOVED_TO_WALL', name, `the ${facade.toLowerCase()} face is cut back into a recess there: it stands in the wall behind the recess`)
     const status: ProvenanceStatus = o.basis === 'HYPOTHETICAL' ? 'ASSUMED_FOR_RENDERING' : prov
     const width = round6(hi - lo)
     const panes = Math.min(o.panes, Math.max(1, Math.floor(width / 0.45)))
-    openings.push({
+    ;(seat ? seat.pocket.backOpenings : openings).push({
       id: `opening-${facade.toLowerCase()}-${o.storey}-${n + 1}`,
       storeyIndex: o.storey,
       massId: mass.id,
       facade,
-      planeAt: facade === 'FRONT' ? mass.z0 : facade === 'REAR' ? mass.z1 : facade === 'WEST' ? mass.x0 : mass.x1,
+      planeAt: seat ? seat.faceAt : facade === 'FRONT' ? mass.z0 : facade === 'REAR' ? mass.z1 : facade === 'WEST' ? mass.x0 : mass.x1,
       interval: [round6(lo), round6(hi)],
       widthM: width,
       sillY: sill,
@@ -681,6 +791,8 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     const name = `canopy ${n + 1}`
     const plan = canopyPlans[n]
     if (plan.kind === 'UNBUILT') return adj('FEATURE_DROPPED', name, plan.why)
+    // built above as a recess cut into the body: what covers it is the body itself
+    if (plan.kind === 'POCKET') return
     if (plan.kind === 'RECESS') {
       // under the body's own roof: no plate, the posts stand where the face was and carry the roof's edge
       const rect = plan.rect
@@ -817,6 +929,7 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
     planeRoofs,
     recesses: [],
     returns: [],
+    ...(pockets.length > 0 ? { pockets } : {}),
     balconies,
     railings,
     portalHeads: [],
