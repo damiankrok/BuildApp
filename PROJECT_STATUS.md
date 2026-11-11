@@ -51,21 +51,40 @@
   (same signature): signature, version and manifest 12/12 verified; bundle from the APK under Node 18.20.4 + no-ICU,
   live pages: Bakopy scene byte-identical to 1329's, Skalnice to a saved scene. Android UI NOT_VERIFIED (no emulator,
   no device). Report `stage-reports/SOURCE_TO_MODEL_V3533.md`.
+- **v3.53.4 (2026-11-11), LOCAL roofs:** what one roof covers is read apart from where the walls divide the plan.
+  A single-storey plan's closed eaves line (`eave-outline.ts`: thin dashed lines an eaves' distance outside the walls)
+  cuts its bodies — the largest rectangle under it the main body, what it encloses past that a wing under the same
+  roof, an unwalled end of a wing a porch on the post the plan draws, an unbuilt part in a face a recess; a wing
+  carries the roof of the eaves' rectangle through the main body (hip planes meeting in valleys, or a valley-joined
+  gable); a view down the main ridge showing one level top over the main body and a body each side of it is a roof
+  crossing the main one (`readTopWithMain`), built as one roof; a stated hip yields only to every view reading a
+  gable. Solver 2.36.0, code `35eef39` + `3ea0b18` (+ guard `3a8fe09`). DEV 3/3 match their sources in roof extent,
+  number of roofs, ridge directions and joins (Litodory one hip over 15.5 × 12.0; Przebiśniegi 27 an L of two hips
+  with valleys, living room built, porch open; Bakopy 5 a cross roof). Corpus 33/33 identical on sealed inputs; the
+  1330 independent nine: 5 identical, 4 changed as the sources say (the three DEV, Kruszczyki 14 hip for gable).
+  Fresh trial frozen before judging: ten new-family houses 10/10 identical (the rule changed none — kept); extension
+  of eight single-storey houses: 7 identical, Lipienniki 6 changed as its source says after a lost-entrance regression
+  found there was fixed. **APK 1331** (same signature): signature, version, manifest 12/12 verified; bundle from the
+  APK under Node 18.20.4 + no-ICU on three changed houses, hello to a saved and loaded scene, models equal to the
+  replays. Android UI NOT_VERIFIED (no emulator, no device). Report `stage-reports/SOURCE_TO_MODEL_V3534.md`.
 - **Blocked, exactly:** one paid reading through the SDK adapter needs the OWNER's key in their own terminal (this
   session cannot hold it; its secret form refuses the provider's host). Dry run: 401, exit 2, nothing booked. No host;
   a proposal (VM price only, disk separate, no reliance on a waiver) is in `docs/ANALYZER_API.md`.
 - **Spend:** unchanged, 2.72807938 of the cumulative 5 USD since E12 (92 entries, CLI token estimates, billing
   UNCONFIRMED). The provider's own stop is a workspace's monthly limit; the campaign's cumulative limit is the books'.
-- **Still wrong in houses, named:** an attached body under the common roof built as a flat-roofed annexe (LOCAL);
+- **Still wrong in houses, named:** a part of the house under the common roof built flat where a body with a roof
+  of its own stands outside the eaves line, or the house has more than one storey (LOCAL; V3534 §12); opening heights
+  where an elevation does not register (chimney above the ridge) or a callout is misread; eaves built 0.6 m where
+  plan and section say about 0.9;
   ridge of an attached gable on a square plan (described path); roof features the reader does not
   state; a balcony through an eave; two-tone facades; porch roofs as flat plates; recesses above the ground storey.
 - **Not measured:** the anchors on a real house with a live reader; anything on a device.
 - **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
   bundled scenes (files unchanged since `5ad2dd5`).
-- **NEXT (one action):** the OWNER installs APK 1330 and runs LOCAL on the Skalnice link (one house under one gable,
-  provenance "solver 2.35.0"). Next code stage: the roof of an attached body from the dashed roof outline and the
-  overall chain — a part of the house under the common roof is still built as a flat-roofed annexe (3 of 8 models in
-  the independent trial, about 10 of 33 in the corpus; Litodory as DEV). The paid SDK trial stays a separate track.
+- **NEXT (one action):** the OWNER installs APK 1331 and runs LOCAL on the Przebiśniegi 27 link (an L under one hip
+  roof with valleys, the entrance porch open on its post; provenance "solver 2.36.0"). Next code stage: bodies with a
+  roof of their own outside a closed eaves line keep the walls' cut while the rest is cut on the eaves, and roof
+  extent on houses with more than one storey (V3534 §12). The paid SDK trial stays a separate track.
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
   D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
