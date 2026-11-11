@@ -65,7 +65,8 @@ import { FRENCH_WINDOW_NOTE, calloutOwners, passageHead, stepOutDoors } from './
 import type { CalloutOwnerGap } from './opening-reading.js'
 import { decideRidgeAxis } from './ridge-axis.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
-import { planeRoofLayout, rooflightPlaneKey } from './plane-roof.js'
+import { planeAt as roofPlaneAt, planeRoofLayout, rooflightPlaneKey } from './plane-roof.js'
+import type { AttachedRoofForm } from './attached-roof-form.js'
 import type { PlaneRoofKey, RoofEnd } from './plane-roof.js'
 import { hostRoofTopAt, readAttachedRoof, readEavesOverhang, readChimneys, readPlanRooflights, readRooflights, registerSection, registerSectionByTwoAnchors, sectionStackOver, withRecognisedHalves } from './roof-details.js'
 import type { PlanRooflightReading, RooflightReading, SectionFrame } from './roof-details.js'
@@ -95,7 +96,7 @@ import type { BodyArea, BodyCompleteness, ModelCompleteness } from './body-compl
 import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
-import type { BandWallV2, PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
+import type { BandWallV2, CanopyV2, PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
@@ -256,7 +257,16 @@ import type { ApproximateRidge } from './roof-datum.js'
 // 2.35.0 (v3.53.3): a room inside the box that the box's reading walked into through the room's own named opening is
 // built by a second reading with that opening shut (`rereadEnclosedRooms`, boundary evidence 1.3.0), so a house is not
 // cut into a body and an annexe beside a lost corner; a printed opening callout agrees with a gap that jamb ink narrowed
-export const SOLVER_V2_VERSION = '2.35.0' as const
+// 2.36.0 (v3.53.4): what one roof covers is read apart from where the walls divide the plan. A single-storey plan's
+// closed eaves line (`eave-outline.ts` 1.1.0) cuts its bodies (`bodiesUnderTheEaves`): the largest rectangle under it is
+// the main body, what it encloses past that a wing under the same eaves, with the roof of the rectangle the eaves
+// enclose through the main body (hipped beside a hipped main roof, a valley-joined gable beside a gabled one) and any
+// unwalled end of it a porch under that roof on the post the plan draws. A view down the main ridge that shows one
+// level top over the main body and over a body each side of it reads a roof crossing the main one (`readTopWithMain`),
+// built as one roof over both. A hip the publisher states is overturned only by every view that reads its ends
+/** v3.53.4: a roof crossing the main one is as wide as the main roof's span; the bodies it stands on span that, within this (m). */
+export const CROSS_ROOF_SPAN_SLACK_M = 0.35
+export const SOLVER_V2_VERSION = '2.36.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1305,10 +1315,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         endVotes.push({ side: v.view.side, min: lo.kind, max: hi.kind, at: `${lo.at} | ${hi.at}` })
       }
     }
-    // A hipped roof the page states is hipped unless an elevation draws a gable at that end; any other roof is hipped
+    // A hipped roof the page states is hipped unless the elevations draw a gable at that end; any other roof is hipped
     // at an end only where every eaves-side view draws a hip there.
+    // v3.53.4: "the elevations" is every eaves-side view that was read, as it is for the other roofs. One view's outline
+    // level over an end is also a tree standing behind the roof (the outline is the topmost neutral ink in a column),
+    // and it overturned a published statement on its own: a hip stated on the page and seen as one by the other view
+    // was built as a gable.
     const statedHip = support.kind === 'HIP'
-    const endOf = (key: 'min' | 'max'): RoofEnd => (statedHip ? (endVotes.some((e) => e[key] === 'GABLE') ? 'GABLE' : 'HIP') : endVotes.length > 0 && endVotes.every((e) => e[key] === 'HIP') ? 'HIP' : 'GABLE')
+    const endOf = (key: 'min' | 'max'): RoofEnd => (statedHip ? (endVotes.length > 0 && endVotes.every((e) => e[key] === 'GABLE') ? 'GABLE' : 'HIP') : endVotes.length > 0 && endVotes.every((e) => e[key] === 'HIP') ? 'HIP' : 'GABLE')
     const ends = { min: endOf('min'), max: endOf('max') }
     if (statedHip && (ends.min === 'GABLE' || ends.max === 'GABLE')) gap({ what: 'the hipped ends of the main roof', reason: `the roof is stated as hipped, but an eaves-side elevation draws a gable at the ${ends.min === 'GABLE' ? 'lower' : 'upper'} end (${endVotes.map((e) => `${e.side.toLowerCase()} ${e.at}`).join('; ')}); that end is built as a gable`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     options.debug?.(`roof ends: ${JSON.stringify(endVotes)}`)
@@ -2243,7 +2257,63 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
   }
   const pitchedAttachedRoofs: BuildingV2['pitchedAttachedRoofs'] = []
+  // v3.53.4: wings under the eaves line the main body's roof is drawn with (`RoofExtent`): each with the rectangle its
+  // roof stands on — the wing and the strip of the main body behind it, through to that body's far face
+  const eavesWings: Array<{ mass: (typeof masses)[number]; over: { x0: number; z0: number; x1: number; z1: number }; ridgeAxis: 'X' | 'Z'; why: string; open: Array<{ rect: { x0: number; z0: number; x1: number; z1: number }; posts: Array<{ x0: number; z0: number; x1: number; z1: number }>; why: string }>; ends?: { min: RoofEnd; max: RoofEnd }; covers?: string[] }> = []
+  const canopies: CanopyV2[] = []
+  const roofExtent = draft.roofExtent?.taken ? draft.roofExtent : undefined
+  // v3.53.4 — a roof crossing the main one. Where a view that looks down the main ridge shows, instead of the main
+  // roof's gable, one level top line over the main body and over a body on EACH side of it across the ridge
+  // (`readTopWithMain`), a second roof runs through the main one at its height, its ridge across the main ridge, over
+  // both bodies and the strip of the main body between them. At the same eaves, pitch and ridge its span is the main
+  // roof's own, so its rectangle is that span wide, on the two bodies. An end of the main roof that lies on its eaves
+  // line is inside it (hipped into its slope, the two planes one); its own ends, standing free, are gables.
+  const crossMembers = new Set<string>()
+  if (mainRoof && !mainRoof.ends && mainRoof.authority !== 'CONVENTION' && views.length > 0) {
+    const crossAxis: 'X' | 'Z' = mainRoof.ridgeAxis === 'X' ? 'Z' : 'X'
+    const f = mainRoof.footprint
+    const mainWallTop = levelOf(topStorey)?.wallTop
+    const buildUp = mainWallTop !== undefined ? round6(Math.max(0, mainRoof.eaveY - mainWallTop)) : 0
+    const found: Array<{ m: (typeof masses)[number]; why: string }> = []
+    for (const whole of masses.filter((x) => x.role === 'ATTACHED' && Math.max(...x.storeys) === topStorey)) {
+      const sup = layout.roofSupports.find((r) => r.massId === whole.sourceMassId)
+      const l = levelOf(topStorey)
+      if ((sup && sup.kind !== 'FLAT' && sup.kind !== 'UNKNOWN') || !l) continue
+      const m = { ...whole, ...rectAt(whole, topStorey) }
+      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: mainRoof.pitchDeg, occluders: [...masses.filter((x) => x.id !== m.id), mainRoof.footprint], ceilingY: mainRoof.ridgeY + 1.5, mainRoof, masks: skyMasks })
+      if ((form.kind === 'GABLE' || form.kind === 'UNREAD') && form.crossMainTop?.ridgeAxis === crossAxis) found.push({ m, why: form.crossMainTop.why })
+    }
+    // along the crossing ridge: the main body's two long faces; across it: the main ridge's run
+    const [lo, hi] = crossAxis === 'Z' ? [f.z0, f.z1] : [f.x0, f.x1]
+    const [r0, r1] = crossAxis === 'Z' ? [f.x0, f.x1] : [f.z0, f.z1]
+    const alongOf = (m: { x0: number; z0: number; x1: number; z1: number }): [number, number] => (crossAxis === 'Z' ? [m.z0, m.z1] : [m.x0, m.x1])
+    const acrossOf = (m: { x0: number; z0: number; x1: number; z1: number }): [number, number] => (crossAxis === 'Z' ? [m.x0, m.x1] : [m.z0, m.z1])
+    const before = found.filter((q) => Math.abs(alongOf(q.m)[1] - lo) <= 0.06)
+    const after = found.filter((q) => Math.abs(alongOf(q.m)[0] - hi) <= 0.06)
+    if (before.length === 1 && after.length === 1) {
+      const span = hi - lo
+      const [u0, u1] = [Math.min(acrossOf(before[0].m)[0], acrossOf(after[0].m)[0]), Math.max(acrossOf(before[0].m)[1], acrossOf(after[0].m)[1])]
+      const what = `the roof over ${before[0].m.id} and ${after[0].m.id}`
+      if (Math.abs(u1 - u0 - span) > CROSS_ROOF_SPAN_SLACK_M) {
+        gap({ what, reason: `${before[0].why}: a roof crossing the main one at its height runs over both; at the main roof's eaves and ${mainRoof.pitchDeg}° it is ${span.toFixed(2)} m wide, and the two bodies together span ${(u1 - u0).toFixed(2)} m across it: where it stands on them is not stated, and the roofs here are the convention`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      } else {
+        // the span, set on the face the bodies share with an end of the main roof when they share one
+        const a0 = Math.abs(u0 - r0) <= 0.06 ? u0 : Math.abs(u1 - r1) <= 0.06 ? u1 - span : round6((u0 + u1 - span) / 2)
+        const a1 = round6(a0 + span)
+        const [t0, t1] = [alongOf(before[0].m)[0], alongOf(after[0].m)[1]]
+        const over = crossAxis === 'Z' ? { x0: a0, x1: a1, z0: t0, z1: t1 } : { x0: t0, x1: t1, z0: a0, z1: a1 }
+        const mainEnds = { min: Math.abs(a0 - r0) <= 0.06 ? ('HIP' as const) : ('GABLE' as const), max: Math.abs(a1 - r1) <= 0.06 ? ('HIP' as const) : ('GABLE' as const) }
+        const why = `${before[0].why}; so over ${after[0].m.id} (${after[0].why}): one roof runs through the main one at its height, its ridge along ${crossAxis.toLowerCase()}, ${span.toFixed(2)} m wide as the main roof is (the same eaves, ${mainRoof.pitchDeg}° and ridge), from the far end of one body to the far end of the other, a gable at each`
+        mainRoof.ends = { ...mainEnds, why: `a second roof crosses the main one at its height (${what}); ${mainEnds.min === 'HIP' || mainEnds.max === 'HIP' ? `the ${mainEnds.min === 'HIP' ? 'lower' : 'upper'} end of the main ridge lies on that roof's eaves line and is inside it, its slope the other roof's` : 'both ends of the main ridge stand clear of it, gables'}` }
+        eavesWings.push({ mass: before[0].m, over, ridgeAxis: crossAxis, why, open: [], ends: { min: 'GABLE', max: 'GABLE' }, covers: [after[0].m.id] })
+        crossMembers.add(before[0].m.id)
+        crossMembers.add(after[0].m.id)
+        options.debug?.(`cross roof: ${why}`)
+      }
+    }
+  }
   for (const whole of masses.filter((x) => x.role === 'ATTACHED')) {
+    if (crossMembers.has(whole.id)) continue
     const sup = layout.roofSupports.find((r) => r.massId === whole.sourceMassId)
     if (sup && sup.kind !== 'FLAT' && sup.kind !== 'UNKNOWN') continue
     const l = levelOf(Math.max(...whole.storeys))
@@ -2256,6 +2326,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     // v3.46: what the views saw when they could not settle the form (a pitched top whose height they cannot confirm):
     // kept on the roof built by convention, as an unresolved observation, not dropped.
     let unsettledForm: string | undefined
+    let formKind: AttachedRoofForm['kind'] | undefined
     if (views.length > 0) {
       const mainWallTop = levelOf(topStorey)?.wallTop
       const stated = mainRoof && mainRoof.authority !== 'CONVENTION' ? mainRoof.pitchDeg : undefined
@@ -2266,6 +2337,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const verticalRefused = new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f)))
       const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, verticalRefused, debug: options.debug, ...(sharesTop ? { topStoreyFloorY: l.elevation } : {}) })
       options.debug?.(`attached roof form ${m.id} (${m.x0},${m.z0}..${m.x1},${m.z1}): ${form.kind}: ${form.why}`)
+      formKind = form.kind
       step({ stage: 'roof-details', what: `the form of the roof over ${m.id}, read on the elevations`, method: 'DISCRETE_SELECTION', detail: `${form.kind}: ${form.why}${form.readings.length > 0 ? ` [${form.readings.map((r) => `${r.side.toLowerCase()} ${r.profile.toLowerCase()} ${r.riseM.toFixed(2)} m over ${r.samples} columns`).join('; ')}]` : ''}`, inputs: views.length, outputs: form.readings.length })
       // EXTERIOR-COMPLETE (Bakopy): the main roof runs on over the body: its footprint is carried over it, and the body
       // has no roof of its own (its walls die into the main roof's planes as the main body's do)
@@ -2290,6 +2362,42 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         pitchedAttachedRoofs.push({ massId: m.id, kind: 'GABLE', ridgeAxis: form.ridgeAxis, pitchDeg: form.pitchDeg, pitchSource: form.pitchSource, eaveY, ridgeY: layoutOfRoof.ridgeY, thicknessM: mainRoof?.thicknessM ?? CONVENTIONS.roofThickness, footprint: { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, layout: layoutOfRoof, form, featureId, provenance: 'IMAGE_METRIC_REGISTERED' })
         continue
       }
+    }
+    // v3.53.4 — a wing the plan draws under the main roof's own eaves line carries a pitched roof at those eaves, not a
+    // slab. The elevations say first (a flat top they read stands, with the eaves line against it on record); where
+    // they cannot see the body — it stands in front of the main roof, not beside it — the eaves line says: the wing's
+    // roof stands on the rectangle the eaves enclose with it through the main body, its ridge along that rectangle's
+    // longer side when that is the way the wing projects. Longer the other way, the ridge is not stated and the
+    // convention stands, named.
+    const regionIds = layout.masses.find((x) => x.id === whole.sourceMassId)?.footprintRegionIds ?? []
+    const wing = roofExtent?.bodies.find((w) => w.role === 'WING' && regionIds.some((id) => id.endsWith(`-${w.regionId}`)))
+    if (wing && roofExtent && mainRoof && formKind !== 'FLAT' && m.storeys.includes(topStorey)) {
+      const mainRect = rectAt(main, topStorey)
+      const alongZ = m.z1 <= mainRect.z0 + 0.06 || m.z0 >= mainRect.z1 - 0.06
+      // the wing's roof stands on all the eaves enclose past the main body: the walled body and any open end of it
+      const planFrame = planByStorey.get(topStorey)?.frame
+      const worldOf = (r: { x0: number; y0: number; x1: number; y1: number }): { x0: number; z0: number; x1: number; z1: number } | undefined => {
+        if (!planFrame) return undefined
+        const p = planFrame.toWorld(r.x0, r.y0)
+        const q = planFrame.toWorld(r.x1, r.y1)
+        return { x0: round6(Math.min(p.x, q.x)), x1: round6(Math.max(p.x, q.x)), z0: round6(Math.min(p.z, q.z)), z1: round6(Math.max(p.z, q.z)) }
+      }
+      const openEnds = (wing.open ?? []).flatMap((o) => {
+        const rect = worldOf(o.rectPx)
+        return rect ? [{ rect, posts: o.postsPx.map(worldOf).filter((q): q is NonNullable<typeof q> => !!q), why: o.why }] : []
+      })
+      const roofed = openEnds.reduce((a, o) => ({ x0: Math.min(a.x0, o.rect.x0), x1: Math.max(a.x1, o.rect.x1), z0: Math.min(a.z0, o.rect.z0), z1: Math.max(a.z1, o.rect.z1) }), { x0: m.x0, x1: m.x1, z0: m.z0, z1: m.z1 })
+      const over = alongZ ? { x0: roofed.x0, x1: roofed.x1, z0: Math.min(roofed.z0, mainRect.z0), z1: Math.max(roofed.z1, mainRect.z1) } : { x0: Math.min(roofed.x0, mainRect.x0), x1: Math.max(roofed.x1, mainRect.x1), z0: roofed.z0, z1: roofed.z1 }
+      const projects = alongZ ? over.z1 - over.z0 : over.x1 - over.x0
+      const across = alongZ ? over.x1 - over.x0 : over.z1 - over.z0
+      if (projects >= across) {
+        eavesWings.push({ mass: m, over, open: openEnds, ridgeAxis: alongZ ? 'Z' : 'X', why: `${m.id} stands under the eaves line the plan draws around the building (${roofExtent.why}); its roof stands on the ${across.toFixed(2)} × ${projects.toFixed(2)} m rectangle those eaves enclose with it through the main body, its ridge along ${alongZ ? 'z' : 'x'}, the longer side and the way the wing projects` })
+        continue
+      }
+      unsettledForm = `the plan draws ${m.id} under the main roof's own eaves line, so its roof is pitched; but the ${across.toFixed(2)} × ${projects.toFixed(2)} m rectangle those eaves enclose with it is longer across the wing than along it, and which way its ridge runs is not stated; the flat roof here is the convention, not what the plan shows`
+      gap({ what: `the form of the roof over ${m.id}`, reason: unsettledForm, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    } else if (wing && formKind === 'FLAT') {
+      gap({ what: `the form of the roof over ${m.id}`, reason: `the plan draws it under the main roof's eaves line, and the elevations read a flat top over it: the elevations stand`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
     }
     let reading: ReturnType<typeof readAttachedRoof>
     if (sectionReg && sectionFrame) {
@@ -2871,6 +2979,26 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   let planeRoofs: PlaneRoofV2[] | undefined
   let builtMainRoof = mainRoof
   const mainSupportKind = layout.roofSupports.find((s) => s.massId === main.sourceMassId)?.kind
+  // v3.53.4: beside a main roof that is not hipped, a wing under its eaves is a gable valley-joined into it (the join
+  // the elevations' gables use); beside a hipped one it is laid out with it below, as planes
+  if (mainRoof && !mainRoof.ends) {
+    for (const w of eavesWings) {
+      const m = w.mass
+      const l = levelOf(Math.max(...m.storeys))
+      if (!l) continue
+      const eaveY = mainRoof.eaveY
+      const layoutOfRoof = attachedGableLayout(m, w.ridgeAxis, mainRoof.pitchDeg, eaveY, mainRoof)
+      const form: Extract<AttachedRoofForm, { kind: 'GABLE' }> = { kind: 'GABLE', ridgeAxis: w.ridgeAxis, pitchDeg: mainRoof.pitchDeg, pitchSource: 'STATED', measuredRiseM: round6(layoutOfRoof.ridgeY - eaveY), expectedRiseM: round6(layoutOfRoof.ridgeY - eaveY), readings: [], confidence: 0.6, why: w.why }
+      const sids = planByStorey.get(Math.max(...m.storeys)) ? [sighting((planByStorey.get(Math.max(...m.storeys)) as NonNullable<ReturnType<typeof planByStorey.get>>).plan.frame, `the eaves line around ${m.id}`, 0.7)] : []
+      const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { pitchDeg: { value: mainRoof.pitchDeg, low: mainRoof.pitchDeg - 1, high: mainRoof.pitchDeg + 1, unit: 'deg' }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, ridgeY: { value: layoutOfRoof.ridgeY, low: layoutOfRoof.ridgeY - 0.15, high: layoutOfRoof.ridgeY + 0.15 } }, sids, 'SOURCE_DERIVED', `${w.why}; ${layoutOfRoof.join.why}`, { hostId: m.featureId, uncertaintyM: 0.15, confidence: 0.6, unresolvedProperties: ['endForm'], parameterProvenance: { pitchDeg: 'SOURCE_DERIVED', eaveY: 'SOURCE_DERIVED', ridgeY: 'SOURCE_DERIVED' } })
+      relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
+      if (layoutOfRoof.join.kind === 'VALLEY') relate('MEETS_HOST', featureId, mainRoof.featureId, layoutOfRoof.join.why)
+      pitchedAttachedRoofs.push({ massId: m.id, kind: 'GABLE', ridgeAxis: w.ridgeAxis, pitchDeg: mainRoof.pitchDeg, pitchSource: 'STATED', eaveY, ridgeY: layoutOfRoof.ridgeY, thicknessM: mainRoof.thicknessM, footprint: { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, layout: layoutOfRoof, form, featureId, provenance: 'SOURCE_DERIVED' })
+      gap({ what: `the far end of the roof over ${m.id}`, reason: 'the eaves line gives the roof its rectangle and its ridge, not what stands at the ridge\'s outer end: built as a gable, by convention', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      step({ stage: 'roof-details', what: `the roof over ${m.id}, from the eaves line of the plan`, method: 'DIRECT', detail: `${w.why}; ${layoutOfRoof.join.why}`, inputs: 1, outputs: 1 })
+    }
+    eavesWings.length = 0
+  }
   if (mainRoof?.ends) {
     const r = mainRoof
     const ends = mainRoof.ends
@@ -2896,8 +3024,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     }
     // 005Y-N1: a chimney no longer holds the roof as a gable: its penetration is cut plumb in the plane it stands in (emit).
     const bound = [...(unhomed.length > 0 ? ['rooflights'] : []), ...(verges.length > 0 ? ['verge boards'] : []), ...(pitchedAttachedRoofs.length > 0 ? ['attached pitched roofs'] : [])]
-    if (bound.length > 0) gap({ what: 'the hipped ends of the main roof', reason: `${mainRoof.ends.why}, but ${bound.join(', ')} are bound to it as a gable; the gable is kept`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
-    else {
+    if (bound.length > 0) {
+      gap({ what: 'the hipped ends of the main roof', reason: `${mainRoof.ends.why}, but ${bound.join(', ')} are bound to it as a gable; the gable is kept`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+      // v3.53.4: a wing under the eaves beside a main roof kept as a gable after all has no join laid out for it here:
+      // it is left without a roof of its own rather than given a slab the plan contradicts, and named
+      for (const w of eavesWings) gap({ what: `the roof over ${w.mass.id}`, reason: `${w.why}; but the main roof it meets is kept as a gable (${bound.join(', ')}), and the wing's planes are not laid out against it: not built`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+    } else {
       for (const q of rooflights) {
         if (q.planeId) continue
         const key = homeOf(q)
@@ -2905,6 +3037,40 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       }
       planeRoofs = [{ massId: r.massId, ridgeAxis: r.ridgeAxis, pitchDeg: r.pitchDeg, eaveY, ridgeY: layout.ridgeY, ends: { min: r.ends!.min, max: r.ends!.max }, thicknessM: r.thicknessM, layout, featureId: r.featureId, provenance: r.provenance, why: `${r.pitchDeg}° roof on the authority of ${r.authority.toLowerCase().replace(/_/g, ' ')}; ${r.ends!.why}${r.eaves ? `; eaves ${oh.toFixed(2)} m past the walls on every side: ${r.eaves.why}` : ''}` }]
       builtMainRoof = undefined
+      // v3.53.4: a wing under the same eaves: the hipped roof of the rectangle the eaves enclose with it, at the same
+      // eaves and pitch. Two hipped roofs of one pitch over two rectangles of one eaves line meet in valleys where
+      // their planes cross; each is laid out whole, and what one hides of the other is inside the roof.
+      for (const w of eavesWings) {
+        const wingBody = { x0: w.over.x0 - oh, x1: w.over.x1 + oh, z0: w.over.z0 - oh, z1: w.over.z1 + oh }
+        const wingEnds = w.ends ?? { min: 'HIP' as const, max: 'HIP' as const }
+        const wingLayout = planeRoofLayout(wingBody, w.ridgeAxis, r.pitchDeg, eaveY, wingEnds)
+        const entry = planByStorey.get(Math.max(...w.mass.storeys))
+        const sids = entry ? [sighting(entry.plan.frame, `the eaves line around ${w.mass.id}`, 0.7)] : []
+        const why = w.ends ? `${w.why}; at the main roof's eaves and its ${r.pitchDeg}°, meeting it in valleys` : `${w.why}; hipped as the main roof is, at its eaves and its ${r.pitchDeg}°, meeting it in valleys`
+        const featureId = feature('ATTACHED_ROOF', `roof-${w.mass.id}`, { pitchDeg: { value: r.pitchDeg, low: r.pitchDeg - 1, high: r.pitchDeg + 1, unit: 'deg' }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, ridgeY: { value: wingLayout.ridgeY, low: wingLayout.ridgeY - 0.15, high: wingLayout.ridgeY + 0.15 } }, sids, 'SOURCE_DERIVED', why, { hostId: w.mass.featureId, uncertaintyM: 0.15, confidence: 0.65, parameterProvenance: { pitchDeg: 'SOURCE_DERIVED', eaveY: 'SOURCE_DERIVED', ridgeY: 'SOURCE_DERIVED' } })
+        relate('SUPPORTS', w.mass.featureId, featureId, 'the body carries its roof')
+        relate('MEETS_HOST', featureId, r.featureId, w.ends ? 'the roof crosses the main one at its height and meets it in valleys' : 'the wing\'s hipped roof meets the main one in valleys, under one eaves line')
+        for (const id of w.covers ?? []) {
+          const covered = masses.find((x) => x.id === id)
+          if (covered) relate('SUPPORTS', covered.featureId, featureId, 'the body stands under this roof')
+        }
+        planeRoofs.push({ massId: w.mass.id, ...(w.covers ? { coversMassIds: w.covers } : {}), ridgeAxis: w.ridgeAxis, pitchDeg: r.pitchDeg, eaveY, ridgeY: wingLayout.ridgeY, ends: wingEnds, thicknessM: r.thicknessM, layout: wingLayout, featureId, provenance: w.ends ? 'IMAGE_METRIC_REGISTERED' : 'SOURCE_DERIVED', why })
+        // the eaves line gives the wing's roof its rectangle; that its outer end falls as a hip is the main roof's form
+        // carried over, not something the plan draws: an approximation, and named as one
+        if (!w.ends) gap({ what: `the far end of the roof over ${w.mass.id}`, reason: 'the eaves line gives the roof its rectangle and its ridge, not what stands at the ridge\'s outer end: built hipped, as the main roof is stated, by convention', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+        // an open end of the wing: under this roof, outside the walls; the posts the plan draws there carry the roof's edge
+        w.open.forEach((o, i) => {
+          const posts = o.posts.map((q) => ({ x: round6((q.x0 + q.x1) / 2), z: round6((q.z0 + q.z1) / 2), widthM: round6(q.x1 - q.x0), depthM: round6(q.z1 - q.z0) }))
+          const at = posts[0] ?? { x: (o.rect.x0 + o.rect.x1) / 2, z: (o.rect.z0 + o.rect.z1) / 2 }
+          const key = roofPlaneAt(wingLayout, at)?.key ?? 'LOW'
+          const id = `porch-${w.mass.id}-${i}`
+          const porchFeature = feature('RECESS', id, { width: { value: o.rect.x1 - o.rect.x0, low: o.rect.x1 - o.rect.x0 - 0.05, high: o.rect.x1 - o.rect.x0 + 0.05 }, depth: { value: o.rect.z1 - o.rect.z0, low: o.rect.z1 - o.rect.z0 - 0.05, high: o.rect.z1 - o.rect.z0 + 0.05 } }, sids, 'SOURCE_DERIVED', o.why, { hostId: w.mass.featureId, uncertaintyM: 0.05 })
+          relate('HOSTED_BY', porchFeature, featureId, 'the open end stands under the wing\'s roof')
+          canopies.push({ id, kind: 'PORCH_ROOF', rect: o.rect, undersideY: round6(eaveY - r.thicknessM / Math.cos((r.pitchDeg * Math.PI) / 180)), thicknessM: 0, posts, plate: false, hostId: planeRoofPlaneId(w.mass.id, key), featureId: porchFeature, provenance: 'SOURCE_DERIVED', why: o.why })
+          step({ stage: 'roof-details', what: `the open end of ${w.mass.id} under its roof`, method: 'DIRECT', detail: `${o.why}; ${posts.length} post${posts.length === 1 ? '' : 's'}`, inputs: 1, outputs: 1 })
+        })
+        step({ stage: 'roof-details', what: `the roof over ${w.mass.id}, from the eaves line of the plan`, method: 'DIRECT', detail: why, inputs: 1, outputs: 1 })
+      }
     }
   }
   // N8-03C: a doorway in a shared wall the main slope over it was too low for, against the roof as it will be built:
@@ -3045,7 +3211,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (facadeAlignment.corrections.length > 0) openings.splice(0, openings.length, ...applyOpeningCorrections(openings, facadeAlignment.corrections))
   step({ stage: 'verification', what: 'N7-P2: the openings each elevation draws against the plan’s', method: 'DIRECT', detail: `${facadeViews.length} view${facadeViews.length === 1 ? '' : 's'} read (${facadeViews.map((v) => `${v.facade.toLowerCase()} ${v.registration.toLowerCase().replace(/_/g, ' ')}${v.heights ? '' : ', positions only'}`).join('; ') || 'none'}); ${facadeAlignment.readings.length} openings read, ${facadeAlignment.rejected.length} rectangles rejected; ${Object.entries(facadeAlignment.counts).filter(([, n]) => n > 0).map(([k, n]) => `${k.toLowerCase()} ${n}`).join(', ')}; ${facadeAlignment.corrections.length} height${facadeAlignment.corrections.length === 1 ? '' : 's'} corrected`, inputs: openings.length, outputs: facadeAlignment.corrections.length })
   for (const c of facadeAlignment.corrections) ctx.traces.push({ objectId: c.openingId, kind: 'repair', hypothesisId: `hyp-${c.openingId}`, evidenceIds: [], observationIds: facadeAlignment.readings.find((r) => r.id === c.readingId)?.observationIds ?? [], rejected: [], why: c.why })
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, slabThicknessBasis: clearHeight.accepted ? 'SECTION_CLEAR_HEIGHT' : 'ASSUMED', levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}) }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, slabThicknessBasis: clearHeight.accepted ? 'SECTION_CLEAR_HEIGHT' : 'ASSUMED', levels: levelsV2, masses, mainRoof: builtMainRoof, ...(planeRoofs ? { planeRoofs } : {}), attachedRoofs, pitchedAttachedRoofs, recesses, ...(pockets.length > 0 ? { pockets } : {}), ...(pergolas.length > 0 ? { pergolas } : {}), returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain, ...(slabVoids.length > 0 ? { slabVoids } : {}), ...(bandWalls.length > 0 ? { bandWalls } : {}), ...(partyWalls.length > 0 ? { partyWalls } : {}), ...(canopies.length > 0 ? { canopies } : {}) }
   const residualsBefore = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views, openingHeightsRefused: new Set([...openingHeightRefused].filter((f) => !openingViewOverrides.has(f))) })

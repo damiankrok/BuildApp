@@ -51,8 +51,17 @@ export type BodyTopReading = {
   /** A peaked top's slope (rise per metre along), when it has one. */
   slope?: number
   residualM: number
+  /**
+   * v3.53.4: read on a view that looks down the main ridge and shows no gable of the main roof: the top over this body
+   * stands on the same level line as the top over the main body. `riseM` is then the main ridge above the wall head,
+   * by that identity and not by the view's metres.
+   */
+  atMainTop?: true
   why: string
 }
+
+/** v3.53.4: what `atMainTop` readings say of a body: a roof whose ridge crosses the main one at its height runs over it. */
+export type CrossMainTop = { ridgeAxis: 'X' | 'Z'; frameIds: string[]; why: string }
 
 export type AttachedRoofForm =
   | {
@@ -70,6 +79,7 @@ export type AttachedRoofForm =
        * whose roof reaches the main ridge over an attic storey): the eaves' world y.
        */
       eaveY?: number
+      crossMainTop?: CrossMainTop
     }
   | { kind: 'FLAT'; readings: BodyTopReading[]; why: string }
   /**
@@ -78,7 +88,7 @@ export type AttachedRoofForm =
    * footprint carried over the body (the main roof's width across the ridge, out to the body's far end along it).
    */
   | { kind: 'UNDER_MAIN'; footprint: PlanBox; measuredRiseM: number; readings: BodyTopReading[]; why: string }
-  | { kind: 'UNREAD'; readings: BodyTopReading[]; why: string }
+  | { kind: 'UNREAD'; readings: BodyTopReading[]; why: string; crossMainTop?: CrossMainTop }
 
 export type AttachedRoofFormInput = {
   views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>
@@ -129,6 +139,11 @@ const BACKGROUND_RUN = 3
 
 const isGreen = (r: number, g: number, b: number): boolean => g - Math.max(r, b) >= 8
 
+/** v3.53.4: two top lines are one when their median rows differ by no more than this many metres (and two pixels). */
+export const SAME_TOP_LINE_M = 0.15
+/** … and each is level when at least this share of its columns stands on its line. */
+export const SAME_TOP_LINE_SHARE = 0.75
+
 /** The top of the body along one view, column by column, or undefined when the view cannot see it against the sky. */
 export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: ElevationFrameV2, raster: Raster): BodyTopReading | undefined {
   const alongAxis: 'X' | 'Z' = view.side === 'FRONT' || view.side === 'REAR' ? 'X' : 'Z'
@@ -159,7 +174,11 @@ export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: E
     const found = topOffset(view, raster, clipped, sky)
     if (found) {
       // A view that disagrees with the main roof by more than a storey's slab is not registered well enough to read.
-      if (Math.abs(found.offsetM) > 1.0) return undefined
+      if (Math.abs(found.offsetM) > 1.0) {
+        // v3.53.4: … unless the view looks down the main ridge and what it shows instead of the main gable is one level
+        // line over the main body and over this one: a roof crossing the main one, read in the picture's own rows
+        return alongAxis !== input.mainRoof.ridgeAxis ? readTopWithMain(input, view, raster, sky, found.offsetM) : undefined
+      }
       offset = found.offsetM
       anchored = `, heights re-anchored by ${(-offset).toFixed(2)} m on the main roof's own line (${found.support} of ${found.samples} columns)`
     }
@@ -241,6 +260,79 @@ export function readBodyTop(input: Omit<AttachedRoofFormInput, 'views'>, view: E
   return { ...base, profile: 'IRREGULAR', riseM: round6(median), residualM: round6(Math.min(levelResidual, tentResidual)), why: `on the ${side} view the body's top is neither level nor a gable (median ${median.toFixed(2)} m above the wall head, residual ${Math.min(levelResidual, tentResidual).toFixed(2)} m): not read` }
 }
 
+/**
+ * v3.53.4 — the top over a body on a view that looks down the main ridge and does not show the main roof's gable where
+ * the registration puts it. Such a view measures nothing in metres against the main roof; but it can still say, in its
+ * own rows, that the top over this body and the top over the main body are one level line. That is a ridge running
+ * along the view — across the main ridge — at the height of whatever tops the main body: a roof crossing the main one.
+ * The columns are walked down from the top of the picture to the first rows that are not sky or trees; nothing is
+ * taken from the vertical registration but the scale that turns the tolerance into rows.
+ */
+function readTopWithMain(input: Omit<AttachedRoofFormInput, 'views'>, view: ElevationFrameV2, raster: Raster, sky: Mask, mainOffsetM: number): BodyTopReading | undefined {
+  const main = input.mainRoof
+  if (!main) return undefined
+  const alongAxis: 'X' | 'Z' = view.side === 'FRONT' || view.side === 'REAR' ? 'X' : 'Z'
+  const [a0, a1] = alongAxis === 'X' ? [input.body.x0, input.body.x1] : [input.body.z0, input.body.z1]
+  const [m0, m1] = alongAxis === 'X' ? [main.footprint.x0, main.footprint.x1] : [main.footprint.z0, main.footprint.z1]
+  const behind = elevationBackground(raster, sky)
+  const background = (x: number, y: number): boolean => {
+    const i = y * raster.width + x
+    if (behind.data[i] === 1) return true
+    const o = i * 4
+    return isGreen(raster.data[o], raster.data[o + 1], raster.data[o + 2])
+  }
+  const rowM = Math.abs(view.yOf(0) - view.yOf(1))
+  if (!(rowM > 0)) return undefined
+  const N = 41
+  // as `readBodyTop` walks: up each column from inside the wall to the first run of sky or trees
+  const start = Math.round(view.pyOf(input.wallTopY - 0.3))
+  if (start <= 0 || start >= raster.height) return undefined
+  const tops = (from: number, to: number): number[] => {
+    const out: number[] = []
+    const margin = Math.max(0.15, (to - from) * 0.04)
+    for (let k = 0; k < N; k += 1) {
+      const px = Math.round(view.pxOf(from + margin + ((to - from - 2 * margin) * k) / (N - 1)))
+      if (px < 0 || px >= raster.width || background(px, start)) continue
+      let run = 0
+      for (let y = start - 1; y >= 0; y -= 1) {
+        if (background(px, y)) {
+          run += 1
+          if (run >= BACKGROUND_RUN) {
+            out.push(y + BACKGROUND_RUN)
+            break
+          }
+        } else run = 0
+      }
+    }
+    return out
+  }
+  const median = (xs: number[]): number => [...xs].sort((p, q) => p - q)[Math.floor(xs.length / 2)]
+  const body = tops(a0, a1)
+  const over = tops(m0, m1)
+  const side = view.side.toLowerCase()
+  if (body.length < MIN_SAMPLES || body.length / N < MIN_COVERAGE || over.length < MIN_SAMPLES || over.length / N < MIN_COVERAGE) return undefined
+  const [bm, om] = [median(body), median(over)]
+  const tol = Math.max(2, SAME_TOP_LINE_M / rowM)
+  // level, each: three columns in four on its own line (a chimney or a tree's crown crosses the rest; a gable seen
+  // end on keeps one column in ten within the tolerance of any one row)
+  const onLine = (xs: number[], m: number): number => xs.filter((y) => Math.abs(y - m) <= tol).length / xs.length
+  input.debug?.(`top with the main body on the ${side} view (${view.registration.frameId}): over the body row ${bm} (${Math.round(onLine(body, bm) * 100)}% of ${body.length} columns on it), over the main body row ${om} (${Math.round(onLine(over, om) * 100)}% of ${over.length}), ${rowM.toFixed(4)} m a row`)
+  if (onLine(body, bm) < SAME_TOP_LINE_SHARE || onLine(over, om) < SAME_TOP_LINE_SHARE || Math.abs(bm - om) > tol) return undefined
+  const residualM = round6(Math.sqrt(body.reduce((acc, y) => acc + ((Math.min(Math.abs(y - bm), tol)) * rowM) ** 2, 0) / body.length))
+  return {
+    frameId: view.registration.frameId,
+    side: view.side,
+    alongAxis,
+    profile: 'LEVEL',
+    samples: body.length,
+    coverage: round6(body.length / N),
+    riseM: round6(main.ridgeY - input.wallTopY),
+    residualM,
+    atMainTop: true,
+    why: `the ${side} view looks down the main ridge and does not show the main roof's gable where it would stand (its line is ${Math.abs(mainOffsetM).toFixed(2)} m off); over the main body and over this one it shows one level top line (rows ${om} and ${bm}, ${body.length} columns): a ridge along the view, across the main one, at the height of what tops the main body`,
+  }
+}
+
 /** A body further than this outside the main roof's width, or this far from an end of its ridge, is not under it (m). */
 export const UNDER_MAIN_REACH_M = 0.3
 
@@ -280,6 +372,8 @@ export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoof
   const axes = [...new Set(pitched.map(axisOf))]
   if (axes.length > 1) return { kind: 'UNREAD', readings, why: 'the views read two ridge directions over the body: left open' }
   const ridgeAxis = axes[0]
+  const crossing = pitched.filter((r) => r.atMainTop)
+  const crossMainTop: CrossMainTop | undefined = crossing.length > 0 ? { ridgeAxis, frameIds: crossing.map((r) => r.frameId), why: crossing.map((r) => r.why).join('; ') } : undefined
   const halfSpan = (ridgeAxis === 'Z' ? input.body.x1 - input.body.x0 : input.body.z1 - input.body.z0) / 2
   const rises = pitched.map((r) => r.riseM).sort((p, q) => p - q)
   const measuredRiseM = rises[Math.floor(rises.length / 2)]
@@ -289,7 +383,7 @@ export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoof
     const expectedRiseM = input.eaveBuildUpM + halfSpan * Math.tan((input.statedPitchDeg * Math.PI) / 180)
     const tolerance = Math.max(0.35, 0.2 * expectedRiseM)
     if (Math.abs(measuredRiseM - expectedRiseM) <= tolerance) {
-      return { kind: 'GABLE', ridgeAxis, pitchDeg: input.statedPitchDeg, pitchSource: 'STATED', measuredRiseM: round6(measuredRiseM), expectedRiseM: round6(expectedRiseM), readings, confidence: round6(Math.min(0.85, 0.55 + 0.1 * pitched.length + (peaked.length > 0 ? 0.1 : 0))), why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top ${measuredRiseM.toFixed(2)} m above its wall head, which a gable at the stated ${input.statedPitchDeg}° over its ${(2 * halfSpan).toFixed(2)} m span puts at ${expectedRiseM.toFixed(2)} m (within ${tolerance.toFixed(2)} m): a gable with its ridge along ${ridgeAxis}` }
+      return { kind: 'GABLE', ...(crossMainTop ? { crossMainTop } : {}), ridgeAxis, pitchDeg: input.statedPitchDeg, pitchSource: 'STATED', measuredRiseM: round6(measuredRiseM), expectedRiseM: round6(expectedRiseM), readings, confidence: round6(Math.min(0.85, 0.55 + 0.1 * pitched.length + (peaked.length > 0 ? 0.1 : 0))), why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top ${measuredRiseM.toFixed(2)} m above its wall head, which a gable at the stated ${input.statedPitchDeg}° over its ${(2 * halfSpan).toFixed(2)} m span puts at ${expectedRiseM.toFixed(2)} m (within ${tolerance.toFixed(2)} m): a gable with its ridge along ${ridgeAxis}` }
     }
     // N8-01: a level top at the main ridge over a body that reaches the main top storey is a gable of its own reaching
     // that ridge, its eaves where the stated pitch from the ridge meets its walls — derived as the main roof's are —
@@ -304,6 +398,7 @@ export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoof
       if (atRidge && eaveY >= input.topStoreyFloorY + ATTIC_EAVE_MIN_M && eaveY <= input.wallTopY + input.eaveBuildUpM + 0.05) {
         return {
           kind: 'GABLE',
+          ...(crossMainTop ? { crossMainTop } : {}),
           ridgeAxis,
           pitchDeg: input.statedPitchDeg,
           pitchSource: 'STATED',
@@ -321,17 +416,17 @@ export function readAttachedRoofForm(input: AttachedRoofFormInput): AttachedRoof
     // the body and whatever stands open beside it under that width (a covered approach), not a roof of the body's own
     const under = peaked.length === 0 ? underMainRoof(input, ridgeAxis, measuredRiseM, tolerance) : undefined
     if (under) return { kind: 'UNDER_MAIN', footprint: under.footprint, measuredRiseM: round6(measuredRiseM), readings, why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top level at ${(input.wallTopY + measuredRiseM).toFixed(2)} m, the main ridge (${input.mainRoof?.ridgeY.toFixed(2)} m, within ${tolerance.toFixed(2)} m), running along it, and ${under.why}: the main roof runs on over the body` }
-    if (peaked.length === 0) return { kind: 'UNREAD', readings, why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top a level ${measuredRiseM.toFixed(2)} m above its wall head, which a gable at the stated ${input.statedPitchDeg}° would put at ${expectedRiseM.toFixed(2)} m: neither a flat roof nor that gable, left open` }
+    if (peaked.length === 0) return { kind: 'UNREAD', ...(crossMainTop ? { crossMainTop } : {}), readings, why: `the ${views} view${pitched.length === 1 ? '' : 's'} show the body's top a level ${measuredRiseM.toFixed(2)} m above its wall head, which a gable at the stated ${input.statedPitchDeg}° would put at ${expectedRiseM.toFixed(2)} m: neither a flat roof nor that gable, left open` }
   }
   if (peaked.length > 0) {
     const slopes = peaked.map((r) => r.slope ?? 0).sort((p, q) => p - q)
     const pitchDeg = Math.round(((Math.atan(slopes[Math.floor(slopes.length / 2)]) * 180) / Math.PI) * 2) / 2
     if (pitchDeg >= 15 && pitchDeg <= 60) {
       const expectedRiseM = input.eaveBuildUpM + halfSpan * Math.tan((pitchDeg * Math.PI) / 180)
-      return { kind: 'GABLE', ridgeAxis, pitchDeg, pitchSource: 'MEASURED', measuredRiseM: round6(measuredRiseM), expectedRiseM: round6(expectedRiseM), readings, confidence: round6(Math.min(0.75, 0.5 + 0.1 * peaked.length)), why: `the ${peaked.map((r) => r.side.toLowerCase()).join(', ')} view${peaked.length === 1 ? '' : 's'} show a gable end over the body, ${pitchDeg}° each side, its apex ${measuredRiseM.toFixed(2)} m above the wall head: a gable with its ridge along ${ridgeAxis}, pitched as drawn` }
+      return { kind: 'GABLE', ...(crossMainTop ? { crossMainTop } : {}), ridgeAxis, pitchDeg, pitchSource: 'MEASURED', measuredRiseM: round6(measuredRiseM), expectedRiseM: round6(expectedRiseM), readings, confidence: round6(Math.min(0.75, 0.5 + 0.1 * peaked.length)), why: `the ${peaked.map((r) => r.side.toLowerCase()).join(', ')} view${peaked.length === 1 ? '' : 's'} show a gable end over the body, ${pitchDeg}° each side, its apex ${measuredRiseM.toFixed(2)} m above the wall head: a gable with its ridge along ${ridgeAxis}, pitched as drawn` }
     }
   }
-  return { kind: 'UNREAD', readings, why: `the top over the body stands ${measuredRiseM.toFixed(2)} m above its wall head without a pitch that explains it: left open` }
+  return { kind: 'UNREAD', ...(crossMainTop ? { crossMainTop } : {}), readings, why: `the top over the body stands ${measuredRiseM.toFixed(2)} m above its wall head without a pitch that explains it: left open` }
 }
 
 // ---------------------------------------------------------------------------

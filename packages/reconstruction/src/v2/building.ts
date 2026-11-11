@@ -88,6 +88,8 @@ export type MainRoofV2 = {
  */
 export type PlaneRoofV2 = {
   massId: string
+  /** v3.53.4: other bodies that stand under this roof and have none of their own; their walls die into its planes too. */
+  coversMassIds?: string[]
   ridgeAxis: 'X' | 'Z'
   pitchDeg: number
   eaveY: number
@@ -380,7 +382,8 @@ export type CanopyV2 = {
   rect: { x0: number; z0: number; x1: number; z1: number }
   undersideY: number
   thicknessM: number
-  posts: Array<{ x: number; z: number }>
+  /** `widthM`/`depthM`: the post's own section where the plan draws it (a masonry pier); absent, a slender member. */
+  posts: Array<{ x: number; z: number; widthM?: number; depthM?: number }>
   /** `false`: no plate of its own — the area lies under a body's roof (`hostId`: the roof plane over the posts), which the posts carry. */
   plate?: false
   hostId?: string

@@ -343,7 +343,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const isTop = storey === Math.max(...m.storeys)
       const attached = b.attachedRoofs.find((r) => r.massId === m.id)
       const pitched = isTop ? b.pitchedAttachedRoofs.find((r) => r.massId === m.id) : undefined
-      const planeRoof = isTop ? b.planeRoofs?.find((r) => r.massId === m.id) : undefined
+      const planeRoof = isTop ? b.planeRoofs?.find((r) => r.massId === m.id || r.coversMassIds?.includes(m.id)) : undefined
       const holes = b.stair && b.stair.toLevel === storey && m.id === b.masses.find((x) => x.role === 'MAIN')?.id ? [[{ x: b.stair.slabHole.x0, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z1 }, { x: b.stair.slabHole.x0, z: b.stair.slabHole.z1 }]] : undefined
       // A floor slab over a storey of this body spans between the inner faces
       // of the walls that carry it: the walls run from the ground to the
@@ -491,7 +491,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(p.storeyIndex)
     if (!mass || !l) continue
     const isTop = p.storeyIndex === Math.max(...mass.storeys)
-    const planeRoof = isTop ? (b.planeRoofs ?? []).find((r) => r.massId === mass.id) : undefined
+    const planeRoof = isTop ? (b.planeRoofs ?? []).find((r) => r.massId === mass.id || r.coversMassIds?.includes(mass.id)) : undefined
     for (const w of p.walls) {
       // under the storey above, a wall stops at that floor's slab, as a partition does
       push({ type: 'createWall', id: w.id, levelId: l.id, start: w.start, end: w.end, thickness: w.thicknessM, height: isTop ? round6(l.height) : round6(l.height - b.slabThicknessM), baseOffset: 0, kind: 'EXTERIOR', ...(planeRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: planeRoof.layout.planes.map((pl) => planeRoofPlaneId(planeRoof.massId, pl.key)) } } : {}), materialId: MATERIALS_V2.wall }, p.featureId, 'walls')
@@ -610,9 +610,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const end = run.axis === 'X' ? { x: round6(run.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.to) }
       // 005Y: a partition on the top storey of a body under a plane roof dies into its planes, as the ring does.
       const under = (b.planeRoofs ?? []).find((r) => {
-        const m = b.masses.find((x) => x.id === r.massId)
         const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
-        return !!m && storey.storeyIndex === Math.max(...m.storeys) && mid.x >= m.x0 - 1e-6 && mid.x <= m.x1 + 1e-6 && mid.z >= m.z0 - 1e-6 && mid.z <= m.z1 + 1e-6
+        // v3.53.4: … and so does one in a body that stands under another body's roof (`coversMassIds`)
+        return [r.massId, ...(r.coversMassIds ?? [])].some((id) => {
+          const m = b.masses.find((x) => x.id === id)
+          return !!m && storey.storeyIndex === Math.max(...m.storeys) && mid.x >= m.x0 - 1e-6 && mid.x <= m.x1 + 1e-6 && mid.z >= m.z0 - 1e-6 && mid.z <= m.z1 + 1e-6
+        })
       })
       const topProfile = under ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: under.layout.planes.map((pl) => planeRoofPlaneId(under.massId, pl.key)) } } : {}
       push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', ...topProfile, materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
@@ -800,7 +803,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(0)
     if (!l) continue
     if (c.plate !== false) push({ type: 'createRoof', id: c.id, levelId: l.id, kind: 'FLAT', footprint: { minX: c.rect.x0, maxX: c.rect.x1, minZ: c.rect.z0, maxZ: c.rect.z1 }, eaveOffset: round6(c.undersideY + c.thicknessM - l.elevation), overhang: 0, thickness: c.thicknessM, materialId: MATERIALS_V2.roof }, c.featureId, 'roofs')
-    c.posts.forEach((p, i) => push({ type: 'createColumn', id: `${c.id}-post-${i}`, levelId: l.id, role: 'POST', base: { x: round6(p.x), z: round6(p.z) }, baseOffset: 0, height: round6(c.undersideY - l.elevation), width: 0.2, depth: 0.2, hostId: c.plate === false && c.hostId ? c.hostId : c.id, materialId: MATERIALS_V2.member }, c.featureId, 'linearSolids'))
+    c.posts.forEach((p, i) => push({ type: 'createColumn', id: `${c.id}-post-${i}`, levelId: l.id, role: 'POST', base: { x: round6(p.x), z: round6(p.z) }, baseOffset: 0, height: round6(c.undersideY - l.elevation), width: round6(p.widthM ?? 0.2), depth: round6(p.depthM ?? 0.2), hostId: c.plate === false && c.hostId ? c.hostId : c.id, materialId: p.widthM !== undefined ? MATERIALS_V2.wall : MATERIALS_V2.member }, c.featureId, 'linearSolids'))
     if (c.plate !== false) evidence(c.id, c.provenance, c.why)
     else c.posts.forEach((_p, i) => evidence(`${c.id}-post-${i}`, c.provenance, c.why))
   }
