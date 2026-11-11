@@ -127,7 +127,8 @@ export type LocalAnalyzerEvent =
   | { type: 'cancelled'; metrics: RunMetrics; diagnostics?: DiagnosticsFiles }
 
 
-export const EXIT = { DONE: 0, FAILED: 1, CANCELLED: 2, BAD_ARGUMENTS: 3 } as const
+/** LOAD_FAILED: written by `runtime/main.mjs` alone, when the bundle cannot be imported (the program never ran). */
+export const EXIT = { DONE: 0, FAILED: 1, CANCELLED: 2, BAD_ARGUMENTS: 3, LOAD_FAILED: 4 } as const
 
 const JOB_ID = /^[0-9a-f]{32}$/
 
