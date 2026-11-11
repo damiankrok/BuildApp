@@ -33,6 +33,12 @@
   of books from the campaign ledger and checks byte determinism.
 - **APK 1328** (same signature `6e48fac4…`) is a REPLAY/CONTRACT test build: no service with a reader exists, so the
   token field and reading panel only matter against a service the OWNER runs. Android UI NOT_VERIFIED.
+- **LOCAL analysis on Android (2026-11-11):** APK 1324..1328 stopped at once (RUNTIME_STOPPED, no hello): resvg-wasm
+  makes a strict `TextDecoder` at load, which Node 18 without ICU refuses (ERR_NO_ICU), and the failed import ended the
+  `:analyzer` process. Fixed in `f8cbb1c` (strict UTF-8 decoder adapter, launcher exits 4 instead); **APK 1329**, same
+  signature. Verified off-device (bundle from the APK, Node 18.20.4 + no-ICU simulation, live Bakopy page → hello,
+  done, scene loads); NOT run in the app: no emulator here (no KVM), no device. Report
+  `stage-reports/LOCAL_ANALYZER_1328_CHECK.md`.
 - **Blocked, exactly:** one paid reading through the SDK adapter needs the OWNER's key in their own terminal (this
   session cannot hold it; its secret form refuses the provider's host). Dry run: 401, exit 2, nothing booked. No host;
   a proposal (VM price only, disk separate, no reliance on a waiver) is in `docs/ANALYZER_API.md`.
@@ -43,7 +49,7 @@
 - **Not measured:** the anchors on a real house with a live reader; anything on a device.
 - **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
   bundled scenes (files unchanged since `5ad2dd5`).
-- **NEXT (one action):** the OWNER runs the one trial command (`docs/ANALYZER_API.md`) on a DEV page and returns
+- **NEXT (one action):** the OWNER installs APK 1329 on the Galaxy and runs LOCAL on the Bakopy link to the scene (commands in LOCAL_ANALYZER_1328_CHECK.md §5); then the trial command (`docs/ANALYZER_API.md`) on a DEV page and returns
   `trial.json` (no publisher pictures).
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
