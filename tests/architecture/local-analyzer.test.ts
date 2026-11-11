@@ -96,7 +96,7 @@ describe('1. the analyzer the APK ships is the production pipeline', () => {
     }
   })
 
-  it('carries no module of its own beyond the thin entry, program, wiring and the text adapter', () => {
+  it('carries no module of its own beyond the thin entry, program, wiring and the two platform adapters (text, UTF-8 decoder)', () => {
     const own = inputs.filter((p) => p.startsWith('apps/local-analyzer/')).sort()
     expect(own).toEqual([
       'apps/local-analyzer/src/analyzer.ts',
@@ -106,12 +106,30 @@ describe('1. the analyzer the APK ships is the production pipeline', () => {
       'apps/local-analyzer/src/program.ts',
       'apps/local-analyzer/src/text-tables.ts',
       'apps/local-analyzer/src/text.ts',
+      'apps/local-analyzer/src/utf8-decoder.ts',
       'apps/local-analyzer/src/wiring.ts',
     ])
     // and that code is small: the analyzer is everything else (text-tables.ts is generated data, held to ICU by test/text.test.ts)
     const ownBytes = own.filter((p) => !p.endsWith('text-tables.ts')).reduce((a, p) => a + (bytesByInput[p] ?? 0), 0)
     const total = Object.values(bytesByInput).reduce((a, b) => a + b, 0)
     expect(ownBytes / total).toBeLessThan(0.02)
+  })
+
+  // v3.53.2 (APK 1324..1328 never started on a phone): the strict UTF-8 decoder a runtime without ICU is given must be
+  // in place before any library's module is evaluated — resvg's glue makes a strict decoder when it is
+  it('installs the UTF-8 decoder adapter before any library module is evaluated', () => {
+    const lines = bundled.split('\n')
+    const at = (re: RegExp): number => lines.findIndex((l) => re.test(l))
+    const adapter = at(/^\/\/ .*local-analyzer\/src\/utf8-decoder\.ts$/)
+    const install = at(/^var UTF8_DECODER = installStrictUtf8Decoder\(\);?$/)
+    const resvg = at(/^\/\/ .*@resvg\/resvg-wasm\/index\.mjs$/)
+    expect(adapter).toBeGreaterThan(-1)
+    expect(install).toBeGreaterThan(adapter)
+    expect(resvg).toBeGreaterThan(install)
+    // everything ahead of it is a CommonJS module esbuild wraps lazily: nothing of it runs when the bundle is loaded
+    const ahead = lines.slice(0, adapter).flatMap((l, k) => (/^\/\/ .*\.(c?js|mjs|ts)$/.test(l) ? [lines[k + 1] ?? ''] : []))
+    expect(ahead.length).toBeGreaterThan(0)
+    expect(ahead.filter((next) => !/^var require_\w+ = __commonJS\(\{$/.test(next))).toEqual([])
   })
 
   it('registers the production publishers and no vision provider', () => {
