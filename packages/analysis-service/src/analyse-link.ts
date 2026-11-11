@@ -70,18 +70,38 @@ export function drawingsWeaknesses(result: Pick<LinkAnalysisSummary, 'preview' |
 }
 
 /**
- * What a drawings run measured, as anchors for a description of the same page: the extent of the walls it placed,
- * where its scale is verified by the drawing's own dimensions, and its storey height, where a level was measured.
- * A provisional value is never an anchor.
+ * What a drawings run measured, as anchors for a description of the same page — each with what it measures and what
+ * it rests on (v3.53.2). Nothing metric is exported where the plan's scale is not verified by its own dimensions.
+ *
+ *  - The WHOLE outline: the selected plan's extent where its overall dimension lines frame it on both axes — a fact
+ *    of the house, whether or not the model built all of it; else, only for a model that is the whole reading, the
+ *    extent of the walls it placed. A partial model's built extent is never the whole: a verified scale says the
+ *    part is that big, not that the part is the house.
+ *  - Each BODY it placed, as a measure of that body alone.
+ *  - A storey height, where a level was measured.
  */
-export function anchorsOfDrawings(run: Pick<AnalysisRun, 'result' | 'reconstruction'>): DescribedAnchors {
+export function anchorsOfDrawings(run: Pick<AnalysisRun, 'result' | 'reconstruction' | 'planDiagnostics'>): DescribedAnchors {
   const codes = new Set(run.result.preview.provisional.map((p) => p.code))
+  const weak = drawingsWeaknesses(run.result)
+  const partial = weak.includes('PARTIAL_MODEL') || weak.includes('BODY_MISSING')
   const out: DescribedAnchors = {}
   const masses = run.reconstruction.building.masses
-  if (!codes.has('SCALE_NOT_VERIFIED') && masses.length > 0) {
-    const w = Math.max(...masses.map((m) => m.x1)) - Math.min(...masses.map((m) => m.x0))
-    const d = Math.max(...masses.map((m) => m.z1)) - Math.min(...masses.map((m) => m.z0))
-    if (w > 2 && d > 2) out.footprint = { widthM: Number(w.toFixed(3)), depthM: Number(d.toFixed(3)), why: `the drawings' own dimensions verify a footprint of ${w.toFixed(2)} × ${d.toFixed(2)} m` }
+  if (!codes.has('SCALE_NOT_VERIFIED')) {
+    const plan = run.planDiagnostics?.plans.find((p) => p.frameId === run.planDiagnostics.selectedPlanFrameId)
+    const framed = !!plan && !!plan.scale && !plan.extentWeak && plan.extentProvenance?.x === 'DIMENSION_CHAIN_EXTENT' && plan.extentProvenance?.y === 'DIMENSION_CHAIN_EXTENT'
+    if (plan && plan.scale && framed) {
+      const w = (plan.extent.x1 - plan.extent.x0) * plan.scale.mppX
+      const d = (plan.extent.y1 - plan.extent.y0) * plan.scale.mppY
+      if (w > 2 && d > 2) out.overall = { widthM: Number(w.toFixed(3)), depthM: Number(d.toFixed(3)), premise: 'OVERALL_DIMENSION_LINES', why: `the plan's overall dimension lines give the building ${w.toFixed(2)} × ${d.toFixed(2)} m` }
+    }
+    if (!out.overall && !partial && masses.length > 0) {
+      const w = Math.max(...masses.map((m) => m.x1)) - Math.min(...masses.map((m) => m.x0))
+      const d = Math.max(...masses.map((m) => m.z1)) - Math.min(...masses.map((m) => m.z0))
+      if (w > 2 && d > 2) out.overall = { widthM: Number(w.toFixed(3)), depthM: Number(d.toFixed(3)), premise: 'COMPLETE_OUTLINE', why: `the walls the drawings place at a verified scale span ${w.toFixed(2)} × ${d.toFixed(2)} m` }
+    }
+    const bodies = masses.filter((m) => m.x1 - m.x0 > 1.5 && m.z1 - m.z0 > 1.5).map((m) => ({ role: m.role, widthM: Number((m.x1 - m.x0).toFixed(3)), depthM: Number((m.z1 - m.z0).toFixed(3)), why: `the drawings place ${m.role === 'MAIN' ? 'the main body' : 'an attached body'} at a verified scale as ${(m.x1 - m.x0).toFixed(2)} × ${(m.z1 - m.z0).toFixed(2)} m` }))
+    if (bodies.length > 0) out.bodies = bodies
+    if (partial) out.partial = true
   }
   const ground = run.reconstruction.building.levels[0]
   if (!codes.has('HEIGHT_ASSUMED_FOR_PREVIEW') && ground && ground.height > 2) out.storeyHeightM = { value: ground.height, why: `the drawings measure a ground storey ${ground.height.toFixed(2)} m high` }
@@ -95,7 +115,7 @@ export const DESCRIBABLE_AFTER: ReadonlySet<string> = new Set(['RECONSTRUCTION_F
  * What follows a drawings model: nothing (null) where it has no weakness of its own account, else the description —
  * with the reason it is asked for and the measures of the drawings it must keep.
  */
-export function describedFollowUp(run: Pick<AnalysisRun, 'result' | 'reconstruction'>): { after: { code: string; reasonCode: string }; weaknesses: DrawingsWeakness[]; anchors: DescribedAnchors } | null {
+export function describedFollowUp(run: Pick<AnalysisRun, 'result' | 'reconstruction' | 'planDiagnostics'>): { after: { code: string; reasonCode: string }; weaknesses: DrawingsWeakness[]; anchors: DescribedAnchors } | null {
   const weaknesses = drawingsWeaknesses(run.result)
   if (weaknesses.length === 0) return null
   return { after: { code: weaknesses.includes('NO_METRIC_ANCHOR') ? 'DRAWINGS_MODEL_UNANCHORED' : 'DRAWINGS_MODEL_WEAK', reasonCode: weaknesses.join('+') }, weaknesses, anchors: anchorsOfDrawings(run) }
@@ -144,7 +164,7 @@ export async function analyseLink(input: AnalysisInput, options: LinkAnalysisOpt
       sourceUrl: input.kind === 'URL' ? input.url : pkg.canonicalUrl,
       jobId: options.jobId ?? null,
       after,
-      ...(anchors && (anchors.footprint || anchors.storeyHeightM) ? { anchors } : {}),
+      ...(anchors && (anchors.overall || anchors.bodies || anchors.storeyHeightM) ? { anchors } : {}),
       ...(options.now ? { now: options.now } : {}),
       ...(options.clock ? { clock: options.clock } : {}),
       ...(options.signal ? { signal: options.signal } : {}),

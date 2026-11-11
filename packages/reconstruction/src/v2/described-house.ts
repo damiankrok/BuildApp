@@ -27,7 +27,7 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.5.0'
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.6.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
@@ -36,6 +36,9 @@ export type DescribedAdjustmentCode =
   | 'SCALED_TO_PUBLISHED_FIGURE'
   | 'SCALED_TO_DRAWINGS_MEASURE'
   | 'DRAWINGS_MEASURE_NOT_APPLIED'
+  | 'SCALED_TO_DRAWINGS_LOCAL_MEASURE'
+  | 'DRAWINGS_LOCAL_MEASURE_AGREES'
+  | 'DRAWINGS_LOCAL_MEASURE_DISAGREES'
   | 'HEIGHT_FROM_DRAWINGS_MEASURE'
   | 'BODY_CLIPPED'
   | 'BODY_DROPPED'
@@ -134,12 +137,27 @@ function wallTopAt(mass: MassV2, facade: Facade, at: number, roof: PlaneRoofV2 |
  * with at least its main body; everything it could not place as stated is in `adjustments`.
  */
 /**
- * v3.53.1: what the drawings' path measured, where it measured anything. A measure outranks a published figure and the
- * reader's own reading of size — and only of size: the anchors say nothing about which bodies, roofs or openings
- * there are. `footprint` is the extent of the walls the drawings' path placed at a scale its own dimensions verify;
- * `storeyHeightM` is a storey height it measured. Each is applied by name or, where it cannot be, refused by name.
+ * What the drawings' path measured, where it measured anything — each measure with what it is a measure OF and what it
+ * rests on (v3.53.2). A verified scale proves the size of what was measured; it does not prove that what was measured
+ * is the whole house.
+ *
+ *  - `overall`: the whole building's outline in plan. Its premise is either the plan's own overall dimension lines
+ *    (`OVERALL_DIMENSION_LINES`: the outline framed by its dimension chains on both axes — true of the house whether or
+ *    not the model built all of it) or a model that is the whole reading (`COMPLETE_OUTLINE`: the extent of the walls
+ *    it placed). A partial model's built extent is never an `overall`.
+ *  - `bodies`: bodies the drawings' path placed at a verified scale. Each measures that body and nothing else.
+ *  - `partial`: the drawings' model is not the whole house by its own account (a partial model, a body missing).
+ *  - `storeyHeightM`: a storey height it measured.
+ *
+ * A measure outranks a published figure and the reader's own reading of size — of size only: none of this says which
+ * bodies, roofs or openings there are. Each is applied by name or, where it cannot be, refused by name.
  */
-export type DescribedAnchors = { footprint?: { widthM: number; depthM: number; why: string }; storeyHeightM?: { value: number; why: string } }
+export type DescribedAnchors = {
+  overall?: { widthM: number; depthM: number; premise: 'OVERALL_DIMENSION_LINES' | 'COMPLETE_OUTLINE'; why: string }
+  bodies?: Array<{ role: 'MAIN' | 'ATTACHED'; widthM: number; depthM: number; why: string }>
+  partial?: boolean
+  storeyHeightM?: { value: number; why: string }
+}
 
 export type DescribedBuildOptions = { published?: PublishedFigure[]; anchors?: DescribedAnchors }
 
@@ -168,19 +186,48 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   // proportion, else the published footprint area. One factor for every position: the shape is the reader's, the size
   // the page's. Named, and approximate — a published figure is not a dimension confirmed on the drawing.
   let kp = 1
-  // A footprint the drawings' path measured sets the size, whatever the description says of its own basis: the walls'
-  // extent as described is held against it both ways round (the two paths need not agree on which side is the front)
-  // and scaled by ONE factor where the two axes ask for the same one. Proportions that disagree are not forced.
+  // What the drawings measured sets the size — within what each measure is a measure of.
   let anchored = false
-  const anchor = options.anchors?.footprint
-  if (anchor && spanX > 0 && spanZ > 0) {
-    const ways = ([[anchor.widthM, anchor.depthM], [anchor.depthM, anchor.widthM]] as const).map(([w, l]) => ({ ax: w / spanX, az: l / spanZ })).filter((c) => Math.abs(c.ax / c.az - 1) < 0.1).map((c) => (c.ax + c.az) / 2)
-    const k = ways.sort((a, b) => Math.abs(a - 1) - Math.abs(b - 1))[0]
-    if (k !== undefined && k > 0.5 && k < 2) {
+  const sameShape = (aw: number, ad: number, w: number, dep: number): number | undefined => {
+    // held both ways round (the two paths need not agree on which side is the front); one factor where both axes ask for the same one
+    const ways = ([[aw, ad], [ad, aw]] as const).map(([p, q]) => ({ ax: p / w, az: q / dep })).filter((c) => Math.abs(c.ax / c.az - 1) < 0.1).map((c) => (c.ax + c.az) / 2)
+    const k = ways.sort((p, q) => Math.abs(p - 1) - Math.abs(q - 1))[0]
+    return k !== undefined && k > 0.5 && k < 2 ? k : undefined
+  }
+  const whole = options.anchors?.overall
+  const local = options.anchors?.bodies ?? []
+  if (whole && spanX > 0 && spanZ > 0) {
+    // The whole outline, measured: the walls' extent as described is held against it. Proportions that disagree are not forced.
+    const k = sameShape(whole.widthM, whole.depthM, spanX, spanZ)
+    if (k !== undefined) {
       anchored = true
       kp = k
-      adj('SCALED_TO_DRAWINGS_MEASURE', 'frame', `${anchor.why}: the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, every position scaled by ${k.toFixed(3)}`)
-    } else adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${anchor.why}, but the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m — another proportion: the description keeps its own size`)
+      adj('SCALED_TO_DRAWINGS_MEASURE', 'frame', `${whole.why}: the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, every position scaled by ${k.toFixed(3)}`)
+    } else adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${whole.why}, but the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m — another proportion: the description keeps its own size`)
+  } else if (local.length > 0) {
+    // A measured BODY constrains the body it is, where that body can be told: one of the same role and the same shape.
+    // Where the drawings built only part of the house, a description of ONE body cannot be told to be that part — the
+    // part's size is not the house's. And a size the description read printed on a drawing is not overruled by a part:
+    // the two are held against one another and the outcome is said.
+    const main = local.find((b) => b.role === 'MAIN') ?? local[0]
+    const candidates = d.bodies.filter((b) => (main.role === 'MAIN') === (b.role === 'MAIN')).map((b) => ({ b, k: sameShape(main.widthM, main.depthM, Math.abs(b.x1 - b.x0), Math.abs(b.z1 - b.z0)) })).filter((c): c is { b: DescribedBody; k: number } => c.k !== undefined)
+    const partOfMore = options.anchors?.partial === true && d.bodies.length < 2
+    if (partOfMore) adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${main.why}; the drawings built only part of the house, and that part's size is not the size of the one body described`)
+    else if (candidates.length !== 1) adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${main.why}; ${candidates.length === 0 ? 'no described body of that role has its shape' : 'more than one described body has its shape'}: it cannot be told which body it measures`)
+    else {
+      const { b, k } = candidates[0]
+      if (d.overall.basis === 'PRINTED_ON_DRAWING') {
+        if (Math.abs(k - 1) <= 0.06) adj('DRAWINGS_LOCAL_MEASURE_AGREES', b.id, `${main.why}: ${b.id} as described is ${Math.abs(b.x1 - b.x0).toFixed(2)} × ${Math.abs(b.z1 - b.z0).toFixed(2)} m — the size read printed on the drawing stands`)
+        else adj('DRAWINGS_LOCAL_MEASURE_DISAGREES', b.id, `${main.why}, but ${b.id} as described is ${Math.abs(b.x1 - b.x0).toFixed(2)} × ${Math.abs(b.z1 - b.z0).toFixed(2)} m: a measured body does not overrule a size read printed for the whole — neither is confirmed`)
+      } else if (Math.abs(k - 1) > 0.02) {
+        anchored = true
+        kp = k
+        adj('SCALED_TO_DRAWINGS_LOCAL_MEASURE', b.id, `${main.why}: ${b.id} as described is ${Math.abs(b.x1 - b.x0).toFixed(2)} × ${Math.abs(b.z1 - b.z0).toFixed(2)} m, every position scaled by ${k.toFixed(3)} — the other bodies keep the proportions they were described in`)
+      } else {
+        anchored = true
+        adj('DRAWINGS_LOCAL_MEASURE_AGREES', b.id, `${main.why}: ${b.id} as described has that size`)
+      }
+    }
   }
   if (!anchored && d.overall.basis !== 'PRINTED_ON_DRAWING' && !rescale) {
     const fig = (key: string): number | undefined => options.published?.find((f) => f.key === key)?.value

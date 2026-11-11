@@ -19,7 +19,8 @@ import { genericProjectPageAdapter, memoryByteCache } from '@buildapp/source-pac
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import { parseModel } from '@buildapp/model'
 import { checkHouseDescription } from '@buildapp/source-vision'
-import { reconstructFromHouseDescription } from '@buildapp/reconstruction'
+import type { HouseDescription } from '@buildapp/source-vision'
+import { buildingFromHouseDescription, reconstructFromHouseDescription } from '@buildapp/reconstruction'
 import { readFileSync } from 'node:fs'
 import type { StructuredVision } from '@buildapp/source-vision'
 import { AnalysisError, analyseLink, identityOf, anchorsOfDrawings, describedFollowUp, drawingsModelUnanchored, drawingsWeaknesses, runDescribedAnalysis, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
@@ -251,7 +252,11 @@ describe('after a drawings model: the description only where the model is weak b
 
     // the same run, had it built no roof: its scale and its storey height are still measured, and they are kept
     const anchors = anchorsOfDrawings(run)
-    expect(anchors.footprint?.widthM).toBeGreaterThan(5)
+    expect(anchors.overall?.widthM).toBeGreaterThan(5)
+    // the synthetic plan's outline is framed by its own overall dimension lines; the model is whole, so nothing is partial
+    expect(anchors.overall?.premise).toBe('OVERALL_DIMENSION_LINES')
+    expect(anchors.partial).toBeUndefined()
+    expect(anchors.bodies?.[0]?.role).toBe('MAIN')
     expect(anchors.storeyHeightM?.value).toBeGreaterThan(2.2)
     const roofless = { ...run, result: { ...run.result, preview: { ...run.result.preview, built: { ...run.result.preview.built, roofs: 0, roofPlanes: 0 } } } }
     const next = describedFollowUp(roofless)
@@ -287,5 +292,66 @@ describe('a described house\'s parts meet: the joint audit on the synthetic fixt
     expect(scene.diagnostics.filter((d) => d.severity === 'ERROR')).toEqual([])
     const exterior = geometryClosureAudit(model, scene).findings.filter((f) => f.scope === 'EXTERIOR').map((f) => `${f.code} ${f.objects.join(' / ')}`)
     expect(exterior).toEqual([])
+  })
+})
+
+describe('what a drawings run measured, and of what: anchors on the measures of a real plan (v3.53.2)', () => {
+  // Numbers the drawings' path read off one real plan of the DEV corpus (no picture, no name), and a description of
+  // the same two bodies WRITTEN BY HAND for this test — not a reading by any model.
+  const real = JSON.parse(readFileSync(new URL('./fixtures/real-plan-measures-a.json', import.meta.url), 'utf8')) as { plan: { extentPx: { x0: number; y0: number; x1: number; y1: number }; scale: { mppX: number; mppY: number; anchors: number; rmsM: number }; extentWeak: boolean; extentProvenance: { x: string; y: string } }; overallM: { width: number; depth: number }; bodiesM: Array<{ id: string; role: 'MAIN' | 'ATTACHED'; x0: number; x1: number; z0: number; z1: number }> }
+  const handMade = (): HouseDescription => {
+    const c = checkHouseDescription(JSON.parse(readFileSync(new URL('./fixtures/described-real-plan-a.hand-made.json', import.meta.url), 'utf8')))
+    if (!c.ok) throw new Error(JSON.stringify(c.issues))
+    return c.description
+  }
+  const grown = (k: number): HouseDescription => {
+    const d = handMade()
+    return { ...d, overall: { ...d.overall, widthM: d.overall.widthM * k, depthM: d.overall.depthM * k }, bodies: d.bodies.map((b) => ({ ...b, x0: b.x0 * k, x1: b.x1 * k, z0: b.z0 * k, z1: b.z1 * k })) }
+  }
+  /** A drawings run as far as `anchorsOfDrawings` reads it: which bodies it built, whether it is whole, what frames the plan. */
+  const run = (o: { built: string[]; partial: boolean; framed: boolean; scaleVerified?: boolean }) =>
+    ({
+      result: { preview: { outcome: o.partial ? 'PARTIAL_3D_PREVIEW' : 'COMPLETE', built: { walls: 12, roofs: 1, roofPlanes: 0 }, provisional: [...(o.scaleVerified === false ? [{ code: 'SCALE_NOT_VERIFIED', what: '' }] : []), { code: 'HEIGHT_ASSUMED_FOR_PREVIEW', what: '' }] }, warningDetails: o.partial ? [{ code: 'BODY_MISSING_FROM_MODEL', severity: 'LIMITING', message: '' }] : [] },
+      reconstruction: { building: { masses: real.bodiesM.filter((b) => o.built.includes(b.id)).map((b) => ({ ...b, storeys: [0], featureId: b.id })), levels: [{ index: 0, id: 'lvl-0', elevation: 0, height: 2.8, wallTop: 2.8, featureId: 'l0' }] } },
+      planDiagnostics: { selectedPlanFrameId: 'plan-0', plans: [{ frameId: 'plan-0', extent: real.plan.extentPx, scale: real.plan.scale, extentWeak: !o.framed, extentProvenance: o.framed ? real.plan.extentProvenance : { x: 'WALL_GEOMETRY_EXTENT', y: 'WALL_GEOMETRY_EXTENT' } }] },
+    }) as never
+  const span = (b: ReturnType<typeof buildingFromHouseDescription>) => ({ w: Math.max(...b.building.masses.map((m) => m.x1)) - Math.min(...b.building.masses.map((m) => m.x0)), dep: Math.max(...b.building.masses.map((m) => m.z1)) - Math.min(...b.building.masses.map((m) => m.z0)) })
+
+  it('the plan\'s overall dimension lines are the whole house even where the model lost a body; the built part is only a body', () => {
+    const anchors = anchorsOfDrawings(run({ built: ['main'], partial: true, framed: true }))
+    expect(anchors.overall).toMatchObject({ premise: 'OVERALL_DIMENSION_LINES' })
+    expect(anchors.overall?.widthM).toBeCloseTo(real.overallM.width, 1)
+    expect(anchors.overall?.depthM).toBeCloseTo(real.overallM.depth, 1)
+    expect(anchors.partial).toBe(true)
+    expect(anchors.bodies).toHaveLength(1)
+    expect(anchors.bodies?.[0]).toMatchObject({ role: 'MAIN', widthM: 17.21, depthM: 8.59 })
+    // a description 12 % too large comes to the measured outline: 17.21 × 14.71, both bodies in it
+    const out = buildingFromHouseDescription(grown(1.12), { anchors })
+    expect(span(out).w).toBeCloseTo(17.21, 1)
+    expect(span(out).dep).toBeCloseTo(14.71, 1)
+    expect(out.building.masses).toHaveLength(2)
+  })
+
+  it('a partial model with no overall dimension lines exports NO whole outline: the house is not shrunk to the body that was built', () => {
+    const anchors = anchorsOfDrawings(run({ built: ['main'], partial: true, framed: false }))
+    expect(anchors.overall).toBeUndefined()
+    expect(anchors.partial).toBe(true)
+    // the house as described (correct: 17.21 × 14.71) keeps its depth — the built body is 8.59 deep, the house 14.71
+    const right = buildingFromHouseDescription(handMade(), { anchors })
+    expect(span(right).dep).toBeCloseTo(14.71, 1)
+    expect(right.adjustments.map((a) => a.code)).toContain('DRAWINGS_LOCAL_MEASURE_AGREES')
+    // and the one 12 % too large takes its scale from the main body it shares with the drawings: main 17.21 × 8.59 again, the wing with it
+    const out = buildingFromHouseDescription(grown(1.12), { anchors })
+    expect(out.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_LOCAL_MEASURE')
+    expect(span(out).w).toBeCloseTo(17.21, 1)
+    expect(span(out).dep).toBeCloseTo(14.71, 1)
+  })
+
+  it('a whole model with no dimension-framed outline gives its built extent as the whole; an unverified scale gives nothing metric at all', () => {
+    const whole = anchorsOfDrawings(run({ built: ['main', 'attached-0'], partial: false, framed: false }))
+    expect(whole.overall).toMatchObject({ premise: 'COMPLETE_OUTLINE', widthM: 17.21, depthM: 14.71 })
+    expect(whole.partial).toBeUndefined()
+    const unverified = anchorsOfDrawings(run({ built: ['main', 'attached-0'], partial: false, framed: true, scaleVerified: false }))
+    expect(unverified).toEqual({})
   })
 })

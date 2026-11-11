@@ -1,0 +1,15 @@
+{
+ "what": "Measures the drawings' path read off ONE real ground-floor plan of the DEV corpus (the full run of the 33-project corpus on the v3.51 tree): numbers only — no picture, no name, no address. The plan's outline is framed by its own overall dimension lines on both axes; its scale is confirmed by three independent printed dimensions.",
+ "plan": {
+  "extentPx": { "x0": 106.5, "y0": 167.5, "x1": 730.5, "y1": 702 },
+  "scale": { "mppX": 0.027579, "mppY": 0.02752, "anchors": 10, "rmsM": 0.019447 },
+  "extentWeak": false,
+  "extentProvenance": { "x": "DIMENSION_CHAIN_EXTENT", "y": "DIMENSION_CHAIN_EXTENT" },
+  "metric": { "confidence": "STRONG", "relation": "CONFIRMED", "independentWitnesses": 3 }
+ },
+ "overallM": { "width": 17.21, "depth": 14.71 },
+ "bodiesM": [
+  { "id": "main", "role": "MAIN", "x0": 0, "x1": 17.21, "z0": 0, "z1": 8.59 },
+  { "id": "attached-0", "role": "ATTACHED", "x0": 1.9, "x1": 8.65, "z0": 8.59, "z1": 14.71 }
+ ]
+}

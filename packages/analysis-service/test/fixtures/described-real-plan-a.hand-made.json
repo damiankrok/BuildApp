@@ -1,0 +1,158 @@
+{
+ "images": [
+  {
+   "image": 1,
+   "kind": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "shows": "NA",
+   "thisHouse": true,
+   "mirrored": false,
+   "note": ""
+  },
+  {
+   "image": 2,
+   "kind": "ELEVATION",
+   "storey": "NA",
+   "shows": "FRONT",
+   "thisHouse": true,
+   "mirrored": false,
+   "note": ""
+  },
+  {
+   "image": 3,
+   "kind": "EXTERIOR_VIEW",
+   "storey": "NA",
+   "shows": "REAR_LEFT",
+   "thisHouse": true,
+   "mirrored": false,
+   "note": ""
+  }
+ ],
+ "frame": {
+  "planImage": 1,
+  "frontIsPlanEdge": "BOTTOM",
+  "how": "entrance at the bottom edge"
+ },
+ "overall": {
+  "widthM": 17.21,
+  "depthM": 14.71,
+  "basis": "SCALED_FROM_DRAWING",
+  "printedWidthLabel": "",
+  "printedDepthLabel": "",
+  "ridgeHeightM": 6.0,
+  "ridgeHeightBasis": "PUBLISHED_ON_PAGE",
+  "storeyHeightM": 2.8
+ },
+ "bodies": [
+  {
+   "id": "main",
+   "role": "MAIN",
+   "x0": 0,
+   "x1": 17.21,
+   "z0": 0,
+   "z1": 8.59,
+   "storeys": 1,
+   "habitableAttic": false,
+   "eavesHeightM": 2.9,
+   "heightBasis": "SCALED_FROM_DRAWING",
+   "roof": {
+    "kind": "GABLE",
+    "ridge": "ALONG_X",
+    "highSide": "NA",
+    "pitchDeg": 30,
+    "pitchBasis": "PUBLISHED_ON_PAGE",
+    "overhangM": 0.4
+   },
+   "wallColour": "#f2efe8",
+   "images": [
+    1,
+    2
+   ],
+   "confidence": 0.9
+  },
+  {
+   "id": "wing",
+   "role": "WING",
+   "x0": 1.9,
+   "x1": 8.65,
+   "z0": 8.59,
+   "z1": 14.71,
+   "storeys": 1,
+   "habitableAttic": false,
+   "eavesHeightM": 2.9,
+   "heightBasis": "SCALED_FROM_DRAWING",
+   "roof": {
+    "kind": "GABLE",
+    "ridge": "ALONG_Z",
+    "highSide": "NA",
+    "pitchDeg": 30,
+    "pitchBasis": "PUBLISHED_ON_PAGE",
+    "overhangM": 0.4
+   },
+   "wallColour": "#f2efe8",
+   "images": [
+    1,
+    2
+   ],
+   "confidence": 0.9
+  }
+ ],
+ "sides": [
+  {
+   "side": "FRONT",
+   "pictures": [
+    2
+   ],
+   "openingsByStorey": [
+    0
+   ]
+  },
+  {
+   "side": "REAR",
+   "pictures": [
+    3
+   ],
+   "openingsByStorey": [
+    0
+   ]
+  },
+  {
+   "side": "LEFT",
+   "pictures": [
+    3
+   ],
+   "openingsByStorey": [
+    0,
+    0
+   ]
+  },
+  {
+   "side": "RIGHT",
+   "pictures": [],
+   "openingsByStorey": [
+    0,
+    0
+   ]
+  }
+ ],
+ "openings": [],
+ "dormers": [],
+ "rooflights": [],
+ "chimneys": [],
+ "balconies": [],
+ "terraces": [],
+ "canopies": [],
+ "palette": {
+  "roof": "#3b3d42",
+  "joinery": "#2e2e30",
+  "garageDoor": "#3a3a3c",
+  "accent": "#9a6b3f",
+  "accentWhere": "timber cladding beside the entrance"
+ },
+ "hypotheticalSides": [
+  "RIGHT"
+ ],
+ "unknowns": [
+  "HAND-MADE DEV FIXTURE: two bodies written by hand from the measured rectangles of real-plan-measures-a.json. It is not a reading by any model and states nothing but the bodies."
+ ]
+}

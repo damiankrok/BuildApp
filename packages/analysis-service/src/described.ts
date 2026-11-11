@@ -232,6 +232,7 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
   const exteriorErrors = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
   const b = built.building
   const scaleFromDrawings = built.adjustments.find((a) => a.code === 'SCALED_TO_DRAWINGS_MEASURE')
+  const scaleFromBody = built.adjustments.find((a) => a.code === 'SCALED_TO_DRAWINGS_LOCAL_MEASURE' || a.code === 'DRAWINGS_LOCAL_MEASURE_AGREES' || a.code === 'DRAWINGS_LOCAL_MEASURE_DISAGREES')
   const heightFromDrawings = built.adjustments.find((a) => a.code === 'HEIGHT_FROM_DRAWINGS_MEASURE')
   const printed = d.overall.basis === 'PRINTED_ON_DRAWING'
   const scaled = built.adjustments.find((a) => a.code === 'SCALED_TO_PUBLISHED_FIGURE' || a.code === 'BODIES_RESCALED_TO_OVERALL')
@@ -240,6 +241,7 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
   const checkIssues = reading.issues.filter((i) => i.severity === 'WARN')
   const warningDetails: AnalysisWarning[] = [
     WARN('MODEL_FROM_SOURCE_DESCRIPTION', 'LIMITING', `This model was built from a description of the page's pictures read as a whole (${reading.pictures.length} pictures, by ${reading.provider.id} ${reading.provider.model}), not measured on its drawings${input.after ? `: the drawings could not be read (${input.after.reasonCode ?? input.after.code})` : ''}. It shows the building's bodies, roofs and openings as the sources show them; its dimensions are approximate.`),
+    ...(scaleFromBody ? [WARN(scaleFromBody.code === 'DRAWINGS_LOCAL_MEASURE_DISAGREES' ? 'DESCRIBED_SIZE_DISAGREES_WITH_MEASURED_BODY' : 'DESCRIBED_SCALE_HELD_AGAINST_MEASURED_BODY', scaleFromBody.code === 'DRAWINGS_LOCAL_MEASURE_DISAGREES' ? 'LIMITING' : 'INFO', `One body of this house was measured on the drawings, not the whole of it: ${scaleFromBody.why}. The overall size is still not verified.`)] : []),
     ...(scaleFromDrawings ? [WARN('DESCRIBED_SCALE_FROM_DRAWINGS', 'INFO', `The overall size is the one the drawings' own dimensions verify: ${scaleFromDrawings.why}. The bodies, roofs and openings are still the description's.`)] : [WARN(printed ? 'DESCRIBED_SCALE_PRINTED_UNVERIFIED' : 'DESCRIBED_SCALE_APPROXIMATE', 'LIMITING', printed ? `The overall size is the one the reader read printed on a drawing (${d.overall.printedWidthLabel} × ${d.overall.printedDepthLabel}); no deterministic reader confirmed it.` : `The overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')}${scaled ? `; ${scaled.why}` : ''}.`)]),
     WARN('DESCRIBED_HEIGHTS_APPROXIMATE', 'INFO', 'Storey, eaves and opening heights are the reader’s reading of the sources or a convention; none is a printed level confirmed on a section.'),
     ...d.hypotheticalSides.map((s) => WARN('DESCRIBED_SIDE_HYPOTHETICAL', 'LIMITING', `No picture shows the ${s.toLowerCase()} side: what stands there is a hypothesis.`)),

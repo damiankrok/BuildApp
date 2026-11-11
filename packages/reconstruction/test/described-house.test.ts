@@ -190,7 +190,7 @@ describe('described house — measures the drawings give (v3.53.1)', () => {
     const { w, dep } = span(d)
     const printed = { ...d, overall: { ...d.overall, basis: 'PRINTED_ON_DRAWING' as const, printedWidthLabel: '1240', printedDepthLabel: '900' } }
     for (const anchor of [{ widthM: w * 1.15, depthM: dep * 1.15 }, { widthM: dep * 1.15, depthM: w * 1.15 }]) {
-      const out = buildingFromHouseDescription(printed, { anchors: { footprint: { ...anchor, why: 'the drawings verify it' } } })
+      const out = buildingFromHouseDescription(printed, { anchors: { overall: { ...anchor, premise: 'OVERALL_DIMENSION_LINES', why: 'the plan\'s overall dimension lines give it' } } })
       expect(out.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_MEASURE')
       expect(built(out).w).toBeCloseTo(w * 1.15, 1)
       expect(built(out).dep).toBeCloseTo(dep * 1.15, 1)
@@ -200,7 +200,7 @@ describe('described house — measures the drawings give (v3.53.1)', () => {
   it('a measured footprint of another proportion is not forced on the description: refused by name, the description keeps its size', () => {
     const d = fixture()
     const { w, dep } = span(d)
-    const out = buildingFromHouseDescription(d, { anchors: { footprint: { widthM: w * 1.6, depthM: dep * 0.9, why: 'the drawings verify it' } } })
+    const out = buildingFromHouseDescription(d, { anchors: { overall: { widthM: w * 1.6, depthM: dep * 0.9, premise: 'COMPLETE_OUTLINE', why: 'the drawings verify it' } } })
     const codes = out.adjustments.map((a) => a.code)
     expect(codes).toContain('DRAWINGS_MEASURE_NOT_APPLIED')
     expect(codes).not.toContain('SCALED_TO_DRAWINGS_MEASURE')
@@ -305,5 +305,81 @@ describe('described house — roofs over open areas, terraces and flat roofs mee
     const [a, b] = two.building.canopies ?? []
     expect(a && b && (b.rect.x0 >= a.rect.x1 || b.rect.z1 <= a.rect.z0 || b.rect.z0 >= a.rect.z1)).toBe(true)
     for (const c of two.building.canopies ?? []) for (const q of c.posts) for (const m of two.building.masses) expect(q.x > m.x0 - 0.15 && q.x < m.x1 + 0.15 && q.z > m.z0 - 0.15 && q.z < m.z1 + 0.15).toBe(false)
+  })
+})
+
+describe('described house — a measure is a measure OF something (v3.53.2)', () => {
+  // one body, read printed as 10 × 15 m
+  const one = (basis: HouseDescription['overall']['basis'], w = 10, dep = 15): HouseDescription => {
+    const d = fixture()
+    return { ...d, overall: { ...d.overall, widthM: w, depthM: dep, basis, printedWidthLabel: basis === 'PRINTED_ON_DRAWING' ? '1000' : '', printedDepthLabel: basis === 'PRINTED_ON_DRAWING' ? '1500' : '' }, bodies: [{ ...d.bodies[0], x0: 0, x1: w, z0: 0, z1: dep }], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [] }
+  }
+  const size = (b: ReturnType<typeof buildingFromHouseDescription>) => ({ w: Math.max(...b.building.masses.map((m) => m.x1)), dep: Math.max(...b.building.masses.map((m) => m.z1)) })
+  const part = { role: 'MAIN' as const, widthM: 8, depthM: 12, why: 'the drawings place the main body at a verified scale as 8.00 × 12.00 m' }
+
+  it('COUNTER-CASE: a partial drawings model whose remaining body is 8 × 12 m does not shrink a correct 10 × 15 m house, though the proportions match', () => {
+    const out = buildingFromHouseDescription(one('PRINTED_ON_DRAWING'), { anchors: { bodies: [part], partial: true } })
+    expect(size(out)).toEqual({ w: 10, dep: 15 })
+    const codes = out.adjustments.map((a) => a.code)
+    expect(codes).not.toContain('SCALED_TO_DRAWINGS_MEASURE')
+    expect(codes).not.toContain('SCALED_TO_DRAWINGS_LOCAL_MEASURE')
+    expect(out.adjustments.find((a) => a.code === 'DRAWINGS_MEASURE_NOT_APPLIED')?.why).toMatch(/only part of the house/)
+    // the same holds whatever the description's own basis: a part's size is not the size of the one body described
+    expect(size(buildingFromHouseDescription(one('SCALED_FROM_DRAWING'), { anchors: { bodies: [part], partial: true } }))).toEqual({ w: 10, dep: 15 })
+  })
+
+  it('a WHOLE outline from the plan\'s overall dimension lines is valid for a partial model too, and outranks a size read printed', () => {
+    const overall = { widthM: 10, depthM: 15, premise: 'OVERALL_DIMENSION_LINES' as const, why: 'the plan\'s overall dimension lines give the building 10.00 × 15.00 m' }
+    // a description 12 % too large, scaled from a drawing: brought to the measured outline, not to the 8 × 12 part
+    const scaled = buildingFromHouseDescription(one('SCALED_FROM_DRAWING', 11.2, 16.8), { anchors: { overall, bodies: [part], partial: true } })
+    expect(size(scaled).w).toBeCloseTo(10, 1)
+    expect(size(scaled).dep).toBeCloseTo(15, 1)
+    expect(scaled.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_MEASURE')
+    // a label misread as 1120 × 1680: the measured outline stands
+    const misread = buildingFromHouseDescription(one('PRINTED_ON_DRAWING', 11.2, 16.8), { anchors: { overall, bodies: [part], partial: true } })
+    expect(size(misread).w).toBeCloseTo(10, 1)
+    // and a correct one is confirmed, unchanged
+    const right = buildingFromHouseDescription(one('PRINTED_ON_DRAWING'), { anchors: { overall, bodies: [part], partial: true } })
+    expect(size(right)).toEqual({ w: 10, dep: 15 })
+    expect(right.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_MEASURE')
+  })
+
+  it('a LOCAL measure constrains the body it is: with the bodies told apart, a description scaled from a drawing takes its scale from the measured main body', () => {
+    const d = fixture() // main 10.5 × 9 and a garage 5 × 6.5
+    const main = d.bodies[0]
+    const mw = main.x1 - main.x0
+    const md = main.z1 - main.z0
+    const scaled = { ...d, overall: { ...d.overall, basis: 'SCALED_FROM_DRAWING' as const, printedWidthLabel: '', printedDepthLabel: '' } }
+    const plain = buildingFromHouseDescription(scaled)
+    const local = { role: 'MAIN' as const, widthM: mw * 0.9, depthM: md * 0.9, why: 'the drawings place the main body at a verified scale' }
+    const out = buildingFromHouseDescription(scaled, { anchors: { bodies: [local], partial: true } })
+    expect(out.adjustments.map((a) => a.code)).toContain('SCALED_TO_DRAWINGS_LOCAL_MEASURE')
+    const m = (b: ReturnType<typeof buildingFromHouseDescription>, id: string) => b.building.masses.find((x) => x.id === id)
+    expect((m(out, 'main')?.x1 ?? 0) - (m(out, 'main')?.x0 ?? 0)).toBeCloseTo(mw * 0.9, 1)
+    // the garage, which nothing measured, keeps its proportion to the main body
+    const ratio = (b: ReturnType<typeof buildingFromHouseDescription>) => ((m(b, 'body-garage')?.x1 ?? 0) - (m(b, 'body-garage')?.x0 ?? 0)) / ((m(b, 'main')?.x1 ?? 0) - (m(b, 'main')?.x0 ?? 0))
+    expect(ratio(out)).toBeCloseTo(ratio(plain), 1)
+  })
+
+  it('a local measure does not overrule a size read printed for the whole: agreement and disagreement are both said, neither rescales', () => {
+    const d = fixture() // printed 1550 × 1000
+    const main = d.bodies[0]
+    const mw = main.x1 - main.x0
+    const md = main.z1 - main.z0
+    const plain = buildingFromHouseDescription(d)
+    const agrees = buildingFromHouseDescription(d, { anchors: { bodies: [{ role: 'MAIN', widthM: mw * 1.02, depthM: md * 1.02, why: 'measured' }], partial: true } })
+    expect(agrees.adjustments.map((a) => a.code)).toContain('DRAWINGS_LOCAL_MEASURE_AGREES')
+    expect(JSON.stringify(agrees.building.masses)).toBe(JSON.stringify(plain.building.masses))
+    const disagrees = buildingFromHouseDescription(d, { anchors: { bodies: [{ role: 'MAIN', widthM: mw * 0.8, depthM: md * 0.8, why: 'measured' }], partial: true } })
+    expect(disagrees.adjustments.map((a) => a.code)).toContain('DRAWINGS_LOCAL_MEASURE_DISAGREES')
+    expect(JSON.stringify(disagrees.building.masses)).toBe(JSON.stringify(plain.building.masses))
+  })
+
+  it('a measured body whose described counterpart cannot be told (no body, or two, of its shape) is not applied', () => {
+    const d = fixture()
+    const scaled = { ...d, overall: { ...d.overall, basis: 'SCALED_FROM_DRAWING' as const, printedWidthLabel: '', printedDepthLabel: '' } }
+    const none = buildingFromHouseDescription(scaled, { anchors: { bodies: [{ role: 'MAIN', widthM: 20, depthM: 5, why: 'measured' }] } })
+    expect(none.adjustments.find((a) => a.code === 'DRAWINGS_MEASURE_NOT_APPLIED')?.why).toMatch(/no described body of that role has its shape/)
+    expect(none.adjustments.map((a) => a.code)).not.toContain('SCALED_TO_DRAWINGS_LOCAL_MEASURE')
   })
 })
