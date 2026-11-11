@@ -261,7 +261,7 @@ wynik jest identyczny co do skrótu modelu.
 |---|---|
 | `tsc --noEmit` (całe repozytorium) | czysto |
 | `packages/reconstruction` | 132 pliki testów, wszystkie przechodzą (19 nowych testów etapu) |
-| macierz: `packages/reconstruction`, `packages/analysis-service`, `apps/local-analyzer`, `tests/architecture` z `LOCAL_ANALYZER_NODE18` (Node 18.20.4) | 2164 testy: **2142 przechodzą, 9 pominiętych, 13 nie — te same 13 co w bazie, po nazwach** (skróty scen Larchfield, NFD bez ICU, „frozen set" elewacji złożonych, testy referencyjne 4 i 7, cztery strażniki izolacji badań, cztery testy wall-strip); **0 nowych** |
+| macierz: `packages/reconstruction`, `packages/analysis-service`, `apps/local-analyzer`, `tests/architecture` z `LOCAL_ANALYZER_NODE18` (Node 18.20.4) | 184 pliki, 2164 testy, przebieg na `fe47630`: **2151 przechodzi, 13 nie — te same 13 co w bazie, po nazwach** (skróty scen Larchfield, NFD bez ICU, „frozen set" elewacji złożonych, testy referencyjne 4 i 7, cztery strażniki izolacji badań, cztery testy wall-strip); **0 nowych** |
 | strażnik importów warstwy układu (`storey-support.test.ts`) | pierwszy przebieg macierzy pokazał go jako 14. błąd: lista dozwolonych importów `layout.ts` nie znała `./eave-outline.js`. Strażnik został **rozszerzony, nie osłabiony** (`3a8fe09`): nowy czytnik jest na liście i podlega tym samym warunkom co czytnik ścian zewnętrznych — importuje tylko typy pikseli i wspólne pomocniki, nie nazywa żadnej opublikowanej liczby ani domu |
 | test przyczyny na kodzie 1330 | 3 z 18 ówczesnych testów etapu zawodzą na `c5849fd` (§6) |
 
