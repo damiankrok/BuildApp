@@ -29,7 +29,7 @@ describe('the Android fixtures of the described path', () => {
     expect(pictures.length).toBeGreaterThan(0)
     for (const p of pictures) expect(p.sent.sha256).not.toBe(p.original.sha256)
     // the original the phone downloads IS the bytes the status hashes
-    expect(createHash('sha256').update(files['picture-original.bin'] as Uint8Array).digest('hex')).toBe(pictures[0].original.sha256)
+    expect(createHash('sha256').update(files['picture-original.png'] as Uint8Array).digest('hex')).toBe(pictures[0].original.sha256)
     expect(json('refusal-wrong-token.json').error.code).toBe('PILOT_TOKEN_INVALID')
     expect(json('status-failed-without-token.json')).toMatchObject({ status: 'FAILED', error: { code: 'NO_DRAWINGS' } })
     expect(json('status-failed-without-token.json').describing).toBeUndefined()

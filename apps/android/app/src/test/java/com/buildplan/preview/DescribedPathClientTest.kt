@@ -200,7 +200,7 @@ class DescribedPathClientTest {
     fun `an original is shown only when the bytes the phone downloads are the ones the service hashed`() {
         val first = status("status-completed.json").describing!!.pictures.first()
         assertEquals(meta("sha256"), first.original.sha256)
-        val original = resource("picture-original.bin")
+        val original = resource("picture-original.png")
         val url = first.original.url!!
 
         val right = FakeTransport().apply { on("GET", url, bytes(200, original)) }

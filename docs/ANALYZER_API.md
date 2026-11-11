@@ -254,9 +254,41 @@ keeps the reservation in full; a request the provider refused before running a m
 it back. The SDK does not retry on its own: one question is at most one billed request. The books live in the data
 volume (`house-reader-spend.json`, its `.bak` and an append-only `.journal.jsonl` of amounts, token counts and model
 names). A state that does not parse, or has gone missing beside its journal, keeps the reader OFF until a person has
-looked — the books are never restarted at zero. What this cannot survive is the loss of the whole volume: **set a spend
-limit on the key itself in the provider's console** as the backstop. Measured through the session's CLI: 0.09–0.18 USD
-and 43–113 s a house; a reservation is about 0.3–0.4 USD.
+looked — the books are never restarted at zero. What this cannot survive is the loss of the whole volume, so there is
+a second stop outside the host: **the provider's spend limit, which is documented per WORKSPACE and per calendar
+month** — put the pilot's key in a workspace of its own and set that workspace's monthly limit in the provider's
+console. It is a monthly ceiling on a workspace, not a cumulative one on a key: whether the account offers anything
+finer has to be checked in the account, and nothing here relies on it. The cumulative ceiling of the campaign is
+enforced by these books alone. Measured through the session's CLI on the control's pages: 0.09–0.18 USD and 43–113 s a
+house. A reservation — the upper bound held before a request — came to about 0.3–0.4 USD for those example inputs; it
+is an estimate for them, not a price: a page with more or larger pictures reserves and may cost more, and no figure
+here is a guaranteed cost of an arbitrary link.
+
+**One reading by hand, before any host** (`research/source-to-model/s53/sdk-live.ts`, the command line of
+`apps/analyzer-api/scripts/house-reader-trial.ts`). The owner runs it in their own terminal with their own key; the
+key is typed into the terminal's environment and never into a chat, a file of the repository or an argument.
+Windows PowerShell 7, from the repository root after `npm ci`:
+
+```powershell
+$env:ANTHROPIC_API_KEY = Read-Host -MaskInput "API key"
+Remove-Item Env:ANTHROPIC_BASE_URL -ErrorAction SilentlyContinue
+npx vite-node research/source-to-model/s53/sdk-live.ts -- --url "<a DEV project page>" `
+  --cache "$HOME\buildplan-private\cache" --out "$HOME\buildplan-private\trial-1"
+"exit code: $LASTEXITCODE"
+Remove-Item Env:ANTHROPIC_API_KEY
+```
+
+(Windows PowerShell 5.1: `$s = Read-Host -AsSecureString "API key"; $env:ANTHROPIC_API_KEY = [System.Net.NetworkCredential]::new('', $s).Password`.
+bash: `read -rs ANTHROPIC_API_KEY && export ANTHROPIC_API_KEY`, the same command with `\` line ends, `unset` after.)
+Exit code 0: a model was built; 2: the reader was asked or refused and no model came of it (a paid reading without a
+model is a failure, and still on the books); 3: nothing was asked (books, ledger or arguments). `--out` then holds
+`trial.json` (outcome, the models that served, usage, what the books held before and after), and for a model
+`description.json`, `model.json`, `program.json`, `scene.json`, `result.json` and `diagnostics.json`. There is ONE set
+of books: `--books` defaults to `.buildplan/house-reader-books` in the home directory, opens at the total of the
+campaign's ledger (`research/ai-assist/spend-ledger.json`) and is refused if it holds less; what a run booked is
+appended to that ledger as one entry, to be committed. One description a day. Without a key the same command is a dry
+run: the API answers 401, nothing is booked. A new reading is compared with the sources (the page's published figures,
+the sides its pictures show); the build is checked byte for byte by rebuilding the same description.
 
 **What a client sees.** While the house is being read the job record carries `describing`: the `phase`
 (`SORTING_PICTURES`, `DESCRIBING_HOUSE`, `BUILDING_MODEL`), `after` (why: the refusal or the weaknesses), the provider
@@ -267,16 +299,23 @@ back; with a reader at hand the drawings' path uses 0.7 of the scale and the rea
 
 **What is not verified.** The SDK adapter has reached the live API from this repository only with a placeholder key
 (refused with 401, nothing booked); no reading has been paid for through it. Nothing has been deployed. The phone's
-embedded analyzer has no reader, and the app does not yet send the pilot token or show `describing`.
+embedded analyzer has no reader. The Android client sends the pilot token (typed in at run time, kept in the app's
+settings, never in the APK), reads `describing` and shows the pictures whose bytes match the recorded hash — verified
+on the JVM against responses captured from this server with a stand-in reader, not on a device and not against a live
+service.
 
 **A host for the pilot (a proposal; nothing is ordered).** The repository already carries `apps/analyzer-api/fly.toml`
 (app `buildapp-analyzer`, region `waw`, 2 shared CPUs, 2 GB, a 3 GB volume at `/data`, machines stopped when idle and
 started on a request) and a CI job that deploys when the repository has a `FLY_API_TOKEN` secret. No account or token
-exists for it. Fly.io's published prices (docs.fly.io/about/pricing, read 2026-11-10, quoted for its cheapest regions;
-`waw` may differ): a started `shared-cpu-2x` with 2 GB 13.39 USD a month if it never stops; a stopped machine pays only
-its root file system (0.15 USD/GB/month); the volume 0.15 USD/GB/month (0.45 USD for 3 GB); no monthly fee, a monthly
-bill under 5 USD is waived for a personal organisation; a card is required. A pilot that analyses a few links a day
-runs minutes to an hour a day: about 1–2 USD a month, likely under the waiver. One job at a time
+exists for it, and none is needed for the client or the contract tests. Fly.io's published prices
+(docs.fly.io/about/pricing, read 2026-11-10): 13.39 USD a month is the VIRTUAL MACHINE ALONE — a `shared-cpu-2x` with
+2 GB that never stops — in its cheapest regions; Warsaw (`waw`) is not necessarily one of them. Everything else is
+billed beside it: a stopped machine still pays for its root file system (0.15 USD/GB/month), the volume 0.15
+USD/GB/month (0.45 USD for 3 GB), and whatever outbound traffic or addresses the plan charges. A pilot that analyses a
+few links a day runs minutes to an hour a day; 1–2 USD a month is an ORIENTATION for that use, not a ceiling — a
+machine left running costs the whole month. The page also says small monthly bills of a personal organisation are
+waived; that is the provider's practice, not a term to plan on, and this proposal does not depend on it. A card is
+required. One job at a time
 (`ANALYZER_CONCURRENCY=1`), 15 minutes a job. Secrets go in with `fly secrets set ANTHROPIC_API_KEY=… ANALYZER_HOUSE_READER_TOKEN=…`
 typed by the owner in their own terminal, the rest as `[env]` or `fly secrets`. Any other container host works the
 same way (the image needs Node 22, a volume and TLS in front).

@@ -100,7 +100,7 @@ export async function captureDescribedContract(): Promise<Record<string, string 
     const first = (final.describing as { pictures: Array<{ number: number; original: { url: string; sha256: string } }> }).pictures[0]
     const original = await site.deps.fetchImpl?.(first.original.url)
     if (!original || !original.ok) throw new Error('the first described picture could not be fetched from the fixture site')
-    out['picture-original.bin'] = new Uint8Array(await original.arrayBuffer())
+    out['picture-original.png'] = new Uint8Array(await original.arrayBuffer())
 
     // --- a wrong token: refused, nothing started ---------------------------------------------------------------------
     const wrong = await call(api, 'POST', '/v1/analyses', { url: PAGE }, { authorization: 'Bearer not-the-token-of-this-host-0000' })

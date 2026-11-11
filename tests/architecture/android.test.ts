@@ -273,7 +273,21 @@ describe('the Android viewer is a viewer, not a second compiler', () => {
     const fields = [...gradle.matchAll(/buildConfigField\(\s*"[^"]+"\s*,\s*"([^"]+)"/g)].map((m) => m[1])
     expect(fields).toEqual(['ANALYZER_API_BASE_URL'])
     expect(gradle).not.toMatch(/ANTHROPIC|API_KEY|apiKey|SECRET|TOKEN|Authorization|Bearer/)
-    for (const file of kotlinMain) expect(/Authorization|Bearer|x-api-key|ANTHROPIC/i.test(readFileSync(file, 'utf8')), `${file.replace(ROOT, '')} handles a credential`).toBe(false)
+    // v3.53.2 (OWNER): the app may SEND one credential — the pilot's access token, typed in by a person at run time.
+    // What stays forbidden: a provider key anywhere, and any credential that exists at build time. So the header is
+    // named in exactly two files — the transport that sets it and the one place its value is formed from a run-time
+    // string — and nowhere is there a literal after `Bearer`.
+    const mayNameTheHeader = ['analyzer/HttpTransport.kt', 'analyzer/PilotAccess.kt']
+    for (const file of kotlinMain) {
+      const text = readFileSync(file, 'utf8')
+      const name = file.replace(`${KOTLIN_MAIN}/`, '')
+      expect(/x-api-key|ANTHROPIC|sk-ant-/i.test(text), `${file.replace(ROOT, '')} names a provider key`).toBe(false)
+      if (!mayNameTheHeader.includes(name)) expect(/Authorization|Bearer/.test(text), `${file.replace(ROOT, '')} handles a credential`).toBe(false)
+      expect(/"Bearer [A-Za-z0-9_\-.]{4,}/.test(text), `${file.replace(ROOT, '')} carries a literal token`).toBe(false)
+    }
+    expect(readFileSync(resolve(KOTLIN_MAIN, 'analyzer/PilotAccess.kt'), 'utf8')).toContain('"Bearer $it"')
+    // nothing shipped beside the code carries one either: resources and bundled assets
+    for (const file of filesUnder(resolve(APP_MAIN, 'res'), /\.(xml|json|txt)$/)) expect(/Bearer |sk-ant-|ANTHROPIC/.test(readFileSync(file, 'utf8')), `${file.replace(ROOT, '')} carries a credential`).toBe(false)
   })
 
   it('is not a WebView wrapper around the React app', () => {

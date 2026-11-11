@@ -1,57 +1,71 @@
 /**
- * v3.53.1: ONE paid reading of ONE DEV page through the product's real adapter (`anthropicStructuredVision`, the
- * official SDK) behind the product's spend books (`house-reader-spend`), on a sealed source package.
+ * ONE reading of ONE DEV page through the product's real adapter (`anthropicStructuredVision`, the official SDK)
+ * behind the product's spend books, on a sealed source package. The trial itself — what is saved, the one set of
+ * books, the exit codes — is `apps/analyzer-api/scripts/house-reader-trial.ts`; this file is its command line and the
+ * only place the SDK's client is made.
  *
- * The key is read by the SDK from ANTHROPIC_API_KEY in the environment of whoever runs this — the owner, in their own
- * terminal or as a secret of the pilot's host. It is never an argument, never printed, stored or logged. Without one
- * the request carries a placeholder and the API refuses it with 401 (nothing is billed, nothing is booked): that is
- * the dry run. The cloud session this was written in cannot hold the owner's key at all (its secure form does not
- * accept a credential for the provider's own host), so the paid run is the owner's to start.
- * The books are opened at what the campaign's ledger already holds, under the campaign's ceiling, so the reservation
- * is refused if it would pass it.
+ * THE KEY is read by the SDK from the ANTHROPIC_API_KEY variable of the terminal that runs this — the owner's own.
+ * It is never an argument, never printed, stored or logged, and it must not be pasted into a chat. Without one the
+ * request carries a placeholder and the API refuses it with 401: nothing is billed and nothing is booked — the dry run.
  *
- * From the repository root, with Node 22 and `npm ci` done:
- *   ANTHROPIC_API_KEY=… npx vite-node research/source-to-model/s53/sdk-live.ts -- --url <a DEV project page> \
- *     --cache <a private dir> --books <a private dir> --opening 2.72807938 --max 5 --out <a private dir>
- * (`--package <source-package.json>` instead of `--url` reads a package sealed earlier; `--recorded <dir>` compares the
- * new description with one recorded through the CLI.) ANTHROPIC_BASE_URL must be unset: the adapter talks to the API's
- * own host. The private dirs hold a publisher's pictures and must stay outside the repository.
+ * From the repository root, with Node 22 and `npm ci` done.
+ *
+ * Windows PowerShell (the variable lives in this window only; close the window and it is gone):
+ *   $env:ANTHROPIC_API_KEY = Read-Host -MaskInput "API key"      # PowerShell 7.1+; typed, not echoed, not in history
+ *   Remove-Item Env:ANTHROPIC_BASE_URL -ErrorAction SilentlyContinue
+ *   npx vite-node research/source-to-model/s53/sdk-live.ts -- --url "<a DEV project page>" `
+ *     --cache "$HOME\buildplan-private\cache" --out "$HOME\buildplan-private\trial-1"
+ *   "exit code: $LASTEXITCODE"                                    # 0 model, 2 no model, 3 nothing was asked
+ *   Remove-Item Env:ANTHROPIC_API_KEY
+ * (Windows PowerShell 5.1 has no -MaskInput: use
+ *   $s = Read-Host -AsSecureString "API key"; $env:ANTHROPIC_API_KEY = [System.Net.NetworkCredential]::new('', $s).Password )
+ *
+ * bash / zsh:
+ *   read -rs ANTHROPIC_API_KEY && export ANTHROPIC_API_KEY
+ *   npx vite-node research/source-to-model/s53/sdk-live.ts -- --url '<a DEV project page>' \
+ *     --cache ~/buildplan-private/cache --out ~/buildplan-private/trial-1; echo "exit code: $?"
+ *   unset ANTHROPIC_API_KEY
+ *
+ * Arguments: `--url <page>` or `--package <source-package.json>` (a package sealed earlier); `--cache <dir>`,
+ * `--out <dir>` (private, outside the repository); `--books <dir>` (default: `.buildplan/house-reader-books` in the
+ * home directory — ONE directory, continued by every run; it opens at the campaign ledger's total and is refused if it
+ * holds less); `--ledger <file>` (default: the campaign's `research/ai-assist/spend-ledger.json`, to which a run's
+ * cost is appended — commit that change); `--max <USD>` (default and upper bound: the ledger's own limit);
+ * `--recorded <dir>` (a description recorded earlier, for its shape beside the new one).
+ * ANTHROPIC_BASE_URL must be unset: the adapter talks to the API's own host.
+ *
+ * What a reading costs is not a fixed price: the books reserve an upper bound for the pictures actually sent and the
+ * answer ceiling, and settle to the usage the API reports. The provider-side stop is the WORKSPACE's monthly spend
+ * limit in the provider's console, for the workspace the key belongs to; these books are what enforces the campaign's
+ * cumulative limit.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { readFileSync } from 'node:fs'
+import { homedir } from 'node:os'
+import { join, resolve } from 'node:path'
 import { acquireSourcePackage, archonAdapter, fileByteCache, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
-import { DescribedRefusal, identityOf, runDescribedAnalysis } from '@buildapp/analysis-service'
 import { anthropicStructuredVision } from '@buildapp/source-vision'
 import type { AnthropicMessagesLike, HouseDescription } from '@buildapp/source-vision'
-import { DEFAULT_SPEND_LIMITS, openSpendLedger, spendGuardedStructuredVision } from '../../../apps/analyzer-api/src/house-reader-spend.js'
+import { TRIAL_EXIT, runHouseReaderTrial } from '../../../apps/analyzer-api/scripts/house-reader-trial.js'
+import type { TrialCall } from '../../../apps/analyzer-api/scripts/house-reader-trial.js'
 
+const repoRoot = resolve(import.meta.dirname, '../../..')
 const arg = (name: string, fallback?: string): string => {
   const i = process.argv.indexOf(`--${name}`)
-  if (i < 0) {
+  if (i < 0 || process.argv[i + 1] === undefined) {
     if (fallback !== undefined) return fallback
     throw new Error(`--${name} is required`)
   }
   return process.argv[i + 1]
 }
 
-const shape = (d: HouseDescription) => ({
-  overall: `${d.overall.widthM} x ${d.overall.depthM} (${d.overall.basis})`,
-  bodies: d.bodies.map((b) => `${b.role} ${Math.abs(b.x1 - b.x0).toFixed(1)}x${Math.abs(b.z1 - b.z0).toFixed(1)} storeys ${b.storeys}${b.habitableAttic ? '+attic' : ''} ${b.roof.kind} ${b.roof.ridge} ${b.roof.pitchDeg}`),
-  openingsBySide: Object.fromEntries(['FRONT', 'REAR', 'LEFT', 'RIGHT'].map((s) => [s, d.openings.filter((o) => o.side === s).length])),
-  features: { dormers: d.dormers.length, rooflights: d.rooflights.length, chimneys: d.chimneys.length, balconies: d.balconies.length, terraces: d.terraces.length, canopies: d.canopies.length },
-})
-
-async function main(): Promise<void> {
-  if (process.env.ANTHROPIC_BASE_URL) throw new Error('unset ANTHROPIC_BASE_URL: this run must reach the API by its own host, on the key the owner configured, not through the session’s gateway')
-  const out = arg('out')
-  mkdirSync(out, { recursive: true })
-  const cache = fileByteCache(arg('cache'))
+async function main(): Promise<number> {
+  if (process.env.ANTHROPIC_BASE_URL) throw new Error('unset ANTHROPIC_BASE_URL: this run must reach the API by its own host, on the key the owner configured, not through a gateway')
+  const out = resolve(arg('out'))
+  const cache = fileByteCache(resolve(arg('cache')))
   const url = arg('url', '')
   const pkg = url ? await acquireSourcePackage(url, [archonAdapter, genericProjectPageAdapter], { cache }) : (JSON.parse(readFileSync(arg('package'), 'utf8')) as SourcePackage)
-  const limits = { ...DEFAULT_SPEND_LIMITS, maxUsd: Number(arg('max')), maxDescriptionsPerDay: 1, maxRequestsPerDay: 3 }
-  const ledger = openSpendLedger({ dir: arg('books'), limits, openingUsd: Number(arg('opening')) })
-  const calls: Array<Record<string, unknown>> = []
+  const calls: TrialCall[] = []
   // the SDK, as the adapter builds it — with one addition for the record: what the API answered beside the content
   const adapter = anthropicStructuredVision({
     apiKey: process.env.ANTHROPIC_API_KEY || 'sk-ant-api03-placeholder-no-key-in-this-environment',
@@ -76,32 +90,30 @@ async function main(): Promise<void> {
       }
     },
   })
-  const reader = spendGuardedStructuredVision(adapter, ledger, { limits })
-  const before = (() => {
-    try {
-      return ledger.read().cumulativeUsd
-    } catch {
-      return Number(arg('opening'))
-    }
-  })()
-  const record: Record<string, unknown> = { url: pkg.canonicalUrl, keyPresent: Boolean(process.env.ANTHROPIC_API_KEY), provider: adapter.provider, booksBeforeUsd: before, ceilingUsd: limits.maxUsd }
-  try {
-    const run = await runDescribedAnalysis({ pkg, cache, reader, identity: identityOf(pkg) })
-    writeFileSync(join(out, 'description.json'), JSON.stringify(run.reading.description, null, 1))
-    writeFileSync(join(out, 'result-warnings.json'), JSON.stringify(run.result.warningDetails, null, 1))
-    Object.assign(record, { outcome: 'MODEL', usage: run.reading.usage, timings: run.timings, pictures: run.reading.pictures.map((p) => ({ number: p.number, kind: p.kind, original: p.byteHash, sent: p.sentSha256, sentBytes: p.sentBytes })), issues: run.reading.issues, adjustments: run.adjustments.map((a) => a.code), technical: { compileErrors: run.result.warningDetails.filter((w) => w.code === 'COMPILER_ERRORS').length, exterior: run.result.verification.closure }, shape: shape(run.reading.description) })
-    const recorded = arg('recorded', '')
-    if (recorded) Object.assign(record, { recordedCliShape: shape(JSON.parse(readFileSync(join(recorded, 'description.json'), 'utf8')) as HouseDescription) })
-  } catch (e) {
-    Object.assign(record, { outcome: 'NO_MODEL', code: e instanceof DescribedRefusal ? e.code : 'ERROR', message: String((e as Error).message).slice(0, 400) })
-  }
-  const after = ledger.read()
-  Object.assign(record, { calls, booksAfterUsd: after.cumulativeUsd, bookedUsd: Number((after.cumulativeUsd - before).toFixed(6)), requests: after.requests })
-  writeFileSync(join(out, 'sdk-live.json'), JSON.stringify(record, null, 1))
-  console.log(JSON.stringify({ outcome: record.outcome, code: record.code ?? null, message: record.message ?? null, calls, bookedUsd: record.bookedUsd, booksAfterUsd: record.booksAfterUsd }, null, 1))
+  const recordedDir = arg('recorded', '')
+  const record = await runHouseReaderTrial({
+    pkg,
+    cache,
+    adapter,
+    calls,
+    keyPresent: Boolean(process.env.ANTHROPIC_API_KEY),
+    books: resolve(arg('books', join(homedir(), '.buildplan', 'house-reader-books'))),
+    campaignLedger: resolve(arg('ledger', join(repoRoot, 'research/ai-assist/spend-ledger.json'))),
+    maxUsd: Number(arg('max', '5')),
+    out,
+    repoRoot,
+    ...(recordedDir ? { recorded: JSON.parse(readFileSync(join(recordedDir, 'description.json'), 'utf8')) as HouseDescription } : {}),
+  })
+  // one line a script can parse; the whole record is trial.json
+  console.log(JSON.stringify({ outcome: record.outcome, exitCode: record.exitCode, code: record.code, message: record.message ?? null, bookedUsd: record.bookedUsd ?? 0, booksAfterUsd: record.booksAfterUsd ?? null, determinism: (record.determinism as { sameBytes?: boolean } | undefined)?.sameBytes ?? null, out }))
+  if (record.outcome !== 'MODEL') console.error(`NO MODEL (${record.code}): ${String(record.message ?? '').slice(0, 300)}`)
+  return record.exitCode
 }
 
-main().catch((e: unknown) => {
-  console.error(String((e as Error).message ?? e).slice(0, 400))
-  process.exit(1)
-})
+main().then(
+  (code) => process.exit(code),
+  (e: unknown) => {
+    console.error(String((e as Error).message ?? e).slice(0, 400))
+    process.exit(e instanceof Error && /is required|unset ANTHROPIC_BASE_URL/.test(e.message) ? TRIAL_EXIT.NOT_STARTED : 1)
+  },
+)

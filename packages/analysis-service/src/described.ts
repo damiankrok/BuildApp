@@ -168,6 +168,9 @@ export type DescribedRun = {
   basis: 'DESCRIPTION'
   result: LinkAnalysisResult
   sceneText: string
+  /** The accepted model, serialised, and the command program it was built by — what a trial keeps beside the scene. */
+  modelText: string
+  program: unknown[]
   pkg: SourcePackage
   reading: HouseReading
   adjustments: DescribedAdjustment[]
@@ -343,7 +346,7 @@ export function describedResult(input: { pkg: SourcePackage; identity: AnalysisI
     model,
     scene: bundle,
   }
-  return { basis: 'DESCRIPTION', result, sceneText, pkg, reading, adjustments: built.adjustments, refused: built.refused, after: input.after }
+  return { basis: 'DESCRIPTION', result, sceneText, modelText, program: built.program, pkg, reading, adjustments: built.adjustments, refused: built.refused, after: input.after }
 }
 
 /** `fraction`: how far through the described path, 0..1 — the path's own share of a run, not the run's progress. */
