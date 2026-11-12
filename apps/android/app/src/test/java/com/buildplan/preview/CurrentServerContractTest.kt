@@ -62,7 +62,8 @@ class CurrentServerContractTest {
         assertEquals(sceneHeader, completed.entry.sceneSha256)
 
         val summary = completed.summary
-        assertEquals("1.5.0", summary.analyzer.service)
+        // the service that wrote the current snapshot (`analyzer-contract-current`, recaptured at v3.53.8)
+        assertEquals("1.11.0", summary.analyzer.service)
         // the older members are all still read
         assertTrue(summary.warningDetails.isNotEmpty())
         assertNotNull(summary.preview.completeness)
