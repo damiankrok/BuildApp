@@ -1006,6 +1006,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     if (!mass || !other || !l) continue
     // N8-02B: a doorway in the one wall the plan draws between the bodies is cut in that wall alone
     const party = hostWallAt(mass, d.storeyIndex, d.facade, d.interval)
+    if (party?.party && d.passage) {
+      // v3.53.5: the wall not standing over this stretch: open to the ceiling, nothing in it
+      push({ type: 'cutOpening', id: d.id, wallId: party.wallId, kind: 'PASSAGE', offset: Math.max(0, party.offset), sill: 0, width: d.widthM, height: round6(d.headY - l.elevation) }, d.id, 'openings')
+      evidence(d.id, 'SOURCE_DERIVED', d.why, { height: 'ASSUMED_FOR_RENDERING' })
+      continue
+    }
     if (party?.party) {
       push({ type: 'cutOpening', id: d.id, wallId: party.wallId, kind: 'DOOR', offset: Math.max(0, party.offset), sill: 0, width: d.widthM, height: round6(d.headY - d.sillY) }, d.id, 'openings')
       push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, ...frameWithinWall('DOOR', party.t), materialId: MATERIALS_V2.timber }, d.id, 'doors')

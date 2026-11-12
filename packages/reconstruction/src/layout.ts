@@ -251,7 +251,7 @@ export type StructuralLayoutDraft = {
   wallThickness?: { house: WallThicknessReading; bodies: Record<string, WallThicknessReading> }
   /** N7-COUNCIL-FIX-03 (C-1): bodies cut on the wall the storeys above stop at (`splitAtUpperSeams`). */
   seamSplits?: SeamSplit[]
-  /** v3.53.4: the eaves line of the base plan and the bodies cut on it, when it changed how the plan is cut. */
+  /** v3.53.4: the eaves line of the base plan and the bodies cut on it, when it changed how the plan is cut (`taken`) — or, v3.53.5, when it left the walls' cut and says a body stands beside the roof it outlines (`beyond`). */
   roofExtent?: RoofExtent
 }
 
@@ -263,6 +263,10 @@ export type StructuralLayoutDraft = {
  * rectangles: the largest is the main body, and what another reaches past it — along that body's whole width, on one
  * side — is a wing under the same eaves. A part of a rectangle no wall encloses (a porch cut out of a corner) is
  * inside its body: the roof is over it, and the corner reader (`corner-recess.ts`) builds it open.
+ *
+ * v3.53.5 — the eaves may outline part of the house. A walled body wholly beyond the roofed footprint (`beyond`: a
+ * block beside the house under a roof of its own, a pier in the eaves' projection) is left exactly as the walls cut it
+ * and takes no part in the cut of the bodies under the roof; it used to unread the outline for all of them.
  */
 export type RoofExtent = {
   frameId: string
@@ -285,6 +289,12 @@ export type RoofExtent = {
     /** A wing: the ends of that rectangle no wall stands on (a porch under the roof), each with the posts the plan draws at its outer corners. */
     open?: Array<{ rectPx: PixelRect; postsPx: PixelRect[]; why: string }>
   }>
+  /**
+   * v3.53.5: the walled bodies that lie wholly beyond the roofed footprint — beside this roof, not under it. Each keeps
+   * the walls' own cut; `eavesDrawnThrough` says the plan draws this roof's eaves line across the body, which puts the
+   * body's own roof below those eaves. What roof it has is for the readers of its roof to say.
+   */
+  beyond?: Array<{ regionId: string; rectPx: PixelRect; eavesDrawnThrough: boolean }>
   /** Why the eaves cut was taken, or why the walls' cut stands. */
   taken: boolean
   why: string
@@ -309,6 +319,10 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
   const reading = readEaveOutline(raster, built.map((r) => r.rect), mppX, mppY)
   const stands = (why: string): { regions: PlanRegion[]; extent: RoofExtent; reading: EaveOutlineReading; pockets: BayPocket[] } => ({ regions: [...built], reading, pockets: [], extent: { frameId: base.frame.id, state: reading.state, ...(reading.overhangM !== undefined ? { overhangM: reading.overhangM } : {}), bodies: [], taken: false, why } })
   if (reading.state !== 'CLOSED' || !reading.roofedRects || !base.registration) return stands(reading.why)
+  // v3.53.5: the bodies beyond the roofed footprint keep the walls' cut; the eaves cut is made of the others
+  const beyondOf = new Map((reading.beyond ?? []).map((b) => [built[b.body].id, b]))
+  const beside = built.filter((r) => beyondOf.has(r.id))
+  const under = built.filter((r) => !beyondOf.has(r.id))
   const d = base.decomposition
   const lx = d.linesX.map((l) => l.px)
   const ly = d.linesY.map((l) => l.px)
@@ -426,9 +440,15 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
   // the cut is the plan's own when it is the walls' cut already
   const same = (a: PixelRect, b: PixelRect): boolean => Math.abs(a.x0 - b.x0) <= 1 && Math.abs(a.x1 - b.x1) <= 1 && Math.abs(a.y0 - b.y0) <= 1 && Math.abs(a.y1 - b.y1) <= 1
   // (one body, and nothing to say of its roof; with wings the cut is the same and the record still says what their roofs cover)
-  if (bodies.length === 1 && built.length === 1 && same(built[0].rect, bodies[0].rect)) return stands(`${reading.why}; the walls' cut is the eaves' cut already`)
-  // every cell the walls' cut built lies under the eaves, and each body cut on them is mostly walled
-  const builtCells = d.cells.filter((c) => built.some((r) => r.cells.some((x) => x.ix === c.ix && x.iy === c.iy)))
+  // (v3.53.5: the bodies beside the eaves are the walls' cut either way, and what the plan says of them is kept)
+  if (bodies.length === 1 && under.length === 1 && same(under[0].rect, bodies[0].rect)) {
+    const kept = stands(`${reading.why}; the walls' cut is the eaves' cut already`)
+    return beside.length > 0 ? { ...kept, extent: { ...kept.extent, beyond: beside.map((r) => ({ regionId: r.id, rectPx: r.rect, eavesDrawnThrough: beyondOf.get(r.id)?.eavesDrawnThrough === true })) } } : kept
+  }
+  // a rectangle cut on the eaves does not reach into a body that stands beside them
+  for (const b of bodies) for (const r of beside) if (overlap(b.roofed ?? b.rect, r.rect) > 0.02 * area(r.rect)) return stands(`${reading.why}; a rectangle of the roofed footprint reaches into a body that lies beyond it: the walls' cut stands`)
+  // every cell the walls' cut built under the eaves lies under them, and each body cut on them is mostly walled
+  const builtCells = d.cells.filter((c) => under.some((r) => r.cells.some((x) => x.ix === c.ix && x.iy === c.iy)))
   if (builtCells.some((c) => !bodies.some((b) => cellCentreIn(c, b.roofed ?? b.rect)))) return stands(`${reading.why}; a walled cell of the plan lies outside the roofed footprint's rectangles: the walls' cut stands`)
   for (const b of bodies) {
     const share = builtCells.filter((c) => cellCentreIn(c, b.rect)).reduce((a, c) => a + area(c.rect), 0) / Math.max(1, area(b.rect))
@@ -471,14 +491,15 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
       for (const c of group) recessCells.add(`${c.ix}:${c.iy}`)
     }
   }
-  const usedIds = new Set<string>()
-  const regions: PlanRegion[] = bodies.map((b) => {
-    const cells = d.cells.filter((c) => cellCentreIn(c, b.rect) && !(b.role === 'MAIN' && recessCells.has(`${c.ix}:${c.iy}`))).map((c) => ({ ix: c.ix, iy: c.iy })).sort((p, q) => p.iy - q.iy || p.ix - q.ix)
+  const usedIds = new Set<string>(beside.map((r) => r.id))
+  const besideCells = new Set(beside.flatMap((r) => r.cells.map((x) => `${x.ix}:${x.iy}`)))
+  const cut: PlanRegion[] = bodies.map((b) => {
+    const cells = d.cells.filter((c) => cellCentreIn(c, b.rect) && !besideCells.has(`${c.ix}:${c.iy}`) && !(b.role === 'MAIN' && recessCells.has(`${c.ix}:${c.iy}`))).map((c) => ({ ix: c.ix, iy: c.iy })).sort((p, q) => p.iy - q.iy || p.ix - q.ix)
     // the id of the walled region it mostly is, so a body keeps its name where the cut only grows it
-    const parent = [...built].sort((p, q) => overlap(q.rect, b.rect) - overlap(p.rect, b.rect) || p.id.localeCompare(q.id))[0]
+    const parent = [...under].sort((p, q) => overlap(q.rect, b.rect) - overlap(p.rect, b.rect) || p.id.localeCompare(q.id))[0]
     const id = parent && overlap(parent.rect, b.rect) > 0 && !usedIds.has(parent.id) ? parent.id : `region-built-${cells[0]?.ix ?? 0}-${cells[0]?.iy ?? 0}-eaves`
     usedIds.add(id)
-    const walled = built.filter((o) => overlap(o.rect, b.rect) > 0)
+    const walled = under.filter((o) => overlap(o.rect, b.rect) > 0)
     return {
       id,
       classification: 'BUILT' as const,
@@ -489,6 +510,7 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
       why: b.role === 'MAIN' ? `the largest rectangle under the eaves line the plan draws (${walled.length} walled region${walled.length === 1 ? '' : 's'} of it): one roof, one body` : `what the eaves line encloses past the main body's ${b.against === 'Z0' || b.against === 'Z1' ? 'face across z' : 'face across x'}: a wing under the same eaves`,
     }
   })
+  const regions: PlanRegion[] = [...cut, ...beside]
   return {
     regions,
     reading,
@@ -498,8 +520,9 @@ export function bodiesUnderTheEaves(base: PlanReading, built: readonly PlanRegio
       state: 'CLOSED',
       overhangM: reading.overhangM as number,
       bodies: bodies.map((b, i) => ({ role: b.role, regionId: regions[i].id, ...toWorld(b.rect), ...(b.against ? { against: b.against } : {}), rectPx: b.rect, ...(b.roofed ? { roofedPx: b.roofed } : {}), ...(b.open ? { open: b.open } : {}) })),
+      ...(beside.length > 0 ? { beyond: beside.map((r) => ({ regionId: r.id, rectPx: r.rect, eavesDrawnThrough: beyondOf.get(r.id)?.eavesDrawnThrough === true })) } : {}),
       taken: true,
-      why: `${reading.why}: the plan is cut on it into ${bodies.length === 1 ? 'one body' : `a main body and ${bodies.length - 1} wing${bodies.length === 2 ? '' : 's'}`} where its walls cut it into ${built.length}${bodies.some((b) => b.open) ? `; ${bodies.reduce((a, b) => a + (b.open?.length ?? 0), 0)} end of a wing is open under the roof` : ''}`,
+      why: `${reading.why}: the plan is cut on it into ${bodies.length === 1 ? 'one body' : `a main body and ${bodies.length - 1} wing${bodies.length === 2 ? '' : 's'}`} where its walls cut ${beside.length > 0 ? 'that part of it' : 'it'} into ${under.length}${bodies.some((b) => b.open) ? `; ${bodies.reduce((a, b) => a + (b.open?.length ?? 0), 0)} end of a wing is open under the roof` : ''}${beside.length > 0 ? `; ${beside.length} bod${beside.length === 1 ? 'y stands' : 'ies stand'} beside it as the walls cut ${beside.length === 1 ? 'it' : 'them'}` : ''}`,
     },
   }
 }
@@ -2428,11 +2451,12 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   if (baseRaster) {
     const eaves = bodiesUnderTheEaves(base, walledCut, baseRaster, frame.metresPerPixelX, frame.metresPerPixelY, (rect) => { const b = ringBoundsOf(ringOfRect(rect, frame)); return { x0: round6(b.x0), z0: round6(b.z0), x1: round6(b.x1), z1: round6(b.z1) } })
     options.debug?.(`eaves line ${base.frame.id}: ${eaves.extent.state}${eaves.extent.taken ? ' TAKEN' : ''}: ${eaves.extent.why}`)
+    options.debug?.(`eaves line ${base.frame.id}: walled bodies ${walledCut.map((r, i) => `${i}:${r.id}[${r.rect.x0},${r.rect.y0},${r.rect.x1},${r.rect.y1}]${eaves.reading.beyond?.some((b) => b.body === i) ? ' BEYOND' : ''}`).join(' ')}; lines ${eaves.reading.lines.map((l) => `${l.axis}@${l.atPx}:${l.fromPx}..${l.toPx}${l.through ? ` through ${l.through.join(',')}` : ''}`).join(' ')}; roofed ${(eaves.reading.roofedRects ?? []).map((r) => `[${r.x0},${r.y0},${r.x1},${r.y1}]`).join(' ')}`)
     if (eaves.extent.taken) {
       built = eaves.regions
       roofExtent = eaves.extent
       eavesPockets = eaves.pockets
-    }
+    } else if (eaves.extent.beyond) roofExtent = eaves.extent
   }
   if (walledFirst && walledFirst.demoted.length > 0) {
     const cellsAt = new Map(base.decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))

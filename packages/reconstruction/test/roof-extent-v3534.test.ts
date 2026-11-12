@@ -187,7 +187,12 @@ describe('bodies under one roof (v3.53.4)', () => {
     ring(r, 388, 140, 559, 299)
     outline(r, [[46, 46], [413, 46], [413, 313], [46, 313]])
     const d = layoutOf(r, [60, 400, 560], [60, 140, 300])
-    expect(d.roofExtent).toBeUndefined()
+    // v3.53.5: the cut is still the walls' — and the record now says what the plan shows: the house's eaves are drawn
+    // through the garage, which stands beside that roof (v3.53.4 read nothing here and kept no record)
+    expect(d.roofExtent?.taken).toBe(false)
+    expect(d.roofExtent?.bodies).toEqual([])
+    expect(d.roofExtent?.beyond).toHaveLength(1)
+    expect(d.roofExtent?.beyond?.[0].eavesDrawnThrough).toBe(true)
     expect(d.masses.length).toBe(2)
   })
 

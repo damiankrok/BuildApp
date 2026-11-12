@@ -333,7 +333,11 @@ export type BuildingV2 = {
   rooflights: Array<RooflightReading & { featureId: string; provenance: ProvenanceStatus; widthM: number; lengthM: number; planeId?: string; ridgeAxis?: 'X' | 'Z' }>
   openings: OpeningV2[]
   /** Openings that pass through two coincident walls of two bodies. */
-  sharedDoors: Array<OpeningV2 & { otherMassId: string }>
+  /**
+   * `passage` (v3.53.5): a stretch of the one wall between two bodies that the plan does not draw, wider than any door
+   * and with no leaf in it — the wall not standing there, open to the ceiling, with nothing in it.
+   */
+  sharedDoors: Array<OpeningV2 & { otherMassId: string; passage?: true }>
   interior: InteriorReading[]
   /** N8-03D1: voids in the floors of upper storeys, as their plans fill them: holes in that storey's slab beside the stair's. */
   slabVoids?: SlabVoid[]

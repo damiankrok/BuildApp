@@ -61,7 +61,7 @@ import type { InteriorReading, LabelToken } from './interior.js'
 import { assembleStair, findTreadLadders, poolLadders } from './stair-topology.js'
 import { CALLOUT_REACH_M, FIRM_CALLOUT_CONFIDENCE, GARAGE_LABEL, commonHeadReading, cornerAssemblies, openCornerBand, elevationExtent, garageMouth, gapOwnerKey, nearbyCallouts, planGaps, readWallOpenings, viewGroundRefusals, wallAppearanceExtent } from './openings-v2.js'
 import { lumaOf } from './openings-v2.js'
-import { FRENCH_WINDOW_NOTE, calloutOwners, passageHead, stepOutDoors } from './opening-reading.js'
+import { DOOR_MAX_WIDTH_M, FRENCH_WINDOW_NOTE, calloutOwners, passageHead, stepOutDoors } from './opening-reading.js'
 import type { CalloutOwnerGap } from './opening-reading.js'
 import { decideRidgeAxis } from './ridge-axis.js'
 import type { OpeningV2, WallHost } from './openings-v2.js'
@@ -264,9 +264,22 @@ import type { ApproximateRidge } from './roof-datum.js'
 // unwalled end of it a porch under that roof on the post the plan draws. A view down the main ridge that shows one
 // level top over the main body and over a body each side of it reads a roof crossing the main one (`readTopWithMain`),
 // built as one roof over both. A hip the publisher states is overturned only by every view that reads its ends
+// 2.37.0 (v3.53.5): a common roof beside a roof of its own. The eaves line (`eave-outline.ts` 1.2.0) may outline PART
+// of the house: a body wholly beyond the roofed footprint keeps the walls' cut and whatever its own roof evidence says
+// (`RoofExtent.beyond`; where the eaves are drawn through it, its roof lies below them), instead of unreading the
+// outline for the bodies it does enclose. The reader no longer drops a long eaves line for clutter beside it, takes a
+// pergola's rafters for none of it, follows the eaves through a lower body, and takes the footprint in to walls, not to
+// a pier's face. A line cut for a roof is not a wall: between two bodies under one read roof, too little wall drawn is
+// no wall (`party-wall.ts`), and a stretch of a shared wall the plan does not draw, wider than two door leaves and
+// without a leaf, is open to the ceiling instead of a door under a lintel (`PARTY_GAP_NOT_A_DOOR_M`).
 /** v3.53.4: a roof crossing the main one is as wide as the main roof's span; the bodies it stands on span that, within this (m). */
 export const CROSS_ROOF_SPAN_SLACK_M = 0.35
-export const SOLVER_V2_VERSION = '2.36.0' as const
+/**
+ * v3.53.5: a gap in the one wall between two bodies wider than this, with no door leaf drawn in it, is the wall not
+ * standing there rather than a doorway: two leaves of the widest door a plan draws (`DOOR_MAX_WIDTH_M`).
+ */
+export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
+export const SOLVER_V2_VERSION = '2.37.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1699,7 +1712,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const off = Math.max(0, ...l.anchors.filter((a) => a.disposition === 'PINNED' && (Math.abs(a.fromPx - px) < 0.5 || Math.abs(a.toPx - px) < 0.5)).map((a) => a.offPx))
     return round6(off * mpp)
   }
-  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T, contactSlackM })
+  // v3.53.5: the bodies the base plan's eaves line puts under one roof (`RoofExtent`, the cut taken): the line between
+  // two of them was cut for that roof, so too little wall drawn on it is no wall (`party-wall.ts`)
+  const underEaves = (m: MassV2): boolean => {
+    if (!draft.roofExtent?.taken) return false
+    const regionIds = layout.masses.find((x) => x.id === m.sourceMassId)?.footprintRegionIds ?? []
+    return draft.roofExtent.bodies.some((w) => regionIds.some((id) => id.endsWith(`-${w.regionId}`)))
+  }
+  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T, contactSlackM, underOneRoof: (a, b) => underEaves(a) && underEaves(b) })
   const partyWalls: PartyWallV2[] = partyRecords.flatMap((r) => (r.wall ? [r.wall] : []))
   for (const r of partyRecords) {
     step({ stage: 'massing', what: `N8-02B: the contact of ${r.massIds.join(' and ')} on storey ${r.storeyIndex}`, method: r.decision === 'UNDECIDED' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${r.decision}: ${r.why}`, inputs: r.reading.samples, outputs: r.decision === 'ONE_WALL' ? 1 : r.decision === 'TWO_WALLS' ? 2 : 0 })
@@ -2023,6 +2043,16 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           // under the main roof's slope the one wall stands as high as the roof's underside over its far face
           const top = host.eaveTopY !== undefined && mainRoof ? round6(host.eaveTopY + Math.abs(host.planeAt - partyFarFace(p)) * Math.tan((mainRoof.pitchDeg * Math.PI) / 180)) : undefined
           for (const o of doors) {
+            // v3.53.5: a stretch of that band the plan does not draw, wider than two door leaves and with no leaf drawn
+            // in it, is not a doorway under a lintel: the wall does not stand there. It was built as a 2.1 m "door"
+            // several metres wide, a wall hanging across a room the plan draws running through.
+            if (!o.leaf && !o.leaves && o.widthM > PARTY_GAP_NOT_A_DOOR_M) {
+              // its head as a recess's mouth takes it where nothing reads it: under the floor above, or a hand under the eaves
+              const eavesTop = index === topStorey && mainRoof ? round6(mainRoof.eaveY - mainRoof.thicknessM / Math.cos((mainRoof.pitchDeg * Math.PI) / 180)) : round6(l.elevation + l.height)
+              const ceilingY = round6(Math.min(l.elevation + l.height - slabT, eavesTop - 0.2, top ?? Number.POSITIVE_INFINITY))
+              sharedDoors.push({ ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR' as const, headY: ceilingY, provenance: { ...o.provenance, head: 'ASSUMED_FOR_RENDERING' }, otherMassId: p.otherMassId, passage: true, why: `the plan draws no wall over ${o.widthM.toFixed(2)} m of the line between ${m.id} and ${p.otherMassId} (${o.interval[0].toFixed(2)}..${o.interval[1].toFixed(2)}), and no door leaf in it — wider than two leaves (${PARTY_GAP_NOT_A_DOOR_M.toFixed(1)} m): the ${p.thicknessM.toFixed(2)} m wall the plan draws beside it does not stand there, and the stretch is open up to the eaves' level (whether a beam hangs below that the plan does not say)` })
+              continue
+            }
             const door = { ...o, id: `shared-${o.id.replace(/^opening-/, 'party-')}`, family: 'DOOR' as const, headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: p.otherMassId, why: `${o.why.replace(/ in the \w+ wall of \S+/, ` in the ${p.thicknessM.toFixed(2)} m wall ${m.id} shares with ${p.otherMassId}`)}; read on the one band the plan draws between the bodies, so the gap is a doorway between them` }
             if (top !== undefined && o.sillY + CONVENTIONS.doorHeight > top - 0.05) {
               // N8-03C: the main slope is not the last word over this wall: a roof attached to the other body may run
@@ -2434,7 +2464,19 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const footprint = { x0: m.x0, x1: m.x1, z0: projects && zoneInFront ? zoneInFront.mouthAt : m.z0, z1: m.z1 }
     const sids = sectionFrame && reading ? [sighting(sectionFrame, `flat roof slab over ${m.id}`, reading.confidence)] : []
     if (projects && topPlan) sids.push(sighting(topPlan.plan.frame, `roof outline of ${m.id} reaching the zone`, 0.7))
-    const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sids, reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', `${reading ? reading.why : 'no section draws this roof; its slab is taken at the storey top'}${unsettledForm ? `; ${unsettledForm}` : ''}`, { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: [...(reading ? [] : ['slabTopY']), ...(unsettledForm ? ['form'] : [])], printed: !!reading })
+    // v3.53.5: what the base plan's eaves line says of a body it leaves outside the roof it outlines. Lying beyond that
+    // roof decides nothing about the body's own; the eaves drawn THROUGH it put its roof below them — a low roof of its
+    // own, which a flat one is — and that is kept beside whatever the section or the convention gave.
+    const besideEaves = (() => {
+      const regionIds = layout.masses.find((x) => x.id === whole.sourceMassId)?.footprintRegionIds ?? []
+      const beyond = draft.roofExtent?.beyond?.find((b) => regionIds.some((id) => id.endsWith(`-${b.regionId}`)))
+      if (!beyond) return undefined
+      return beyond.eavesDrawnThrough
+        ? 'the plan draws the main roof\'s eaves line across this body: it stands beside that roof, not under it, and its own roof lies below those eaves — a low roof, as built here'
+        : 'the plan\'s eaves line outlines the main roof without this body: it stands beside that roof, which says nothing of what its own roof is'
+    })()
+    if (besideEaves) step({ stage: 'roof-details', what: `v3.53.5: ${m.id} and the eaves line of the base plan`, method: 'DISCRETE_SELECTION', detail: besideEaves, inputs: 1, outputs: 1 })
+    const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { slabTopY: { value: slabTopY, low: slabTopY - 0.05, high: slabTopY + 0.05 }, ...(reading?.parapetTopY !== undefined ? { parapetTopY: { value: reading.parapetTopY, low: reading.parapetTopY - 0.05, high: reading.parapetTopY + 0.05 } } : {}) }, sids, reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', `${reading ? reading.why : 'no section draws this roof; its slab is taken at the storey top'}${unsettledForm ? `; ${unsettledForm}` : ''}${besideEaves ? `; ${besideEaves}` : ''}`, { hostId: m.featureId, uncertaintyM: 0.04, unresolvedProperties: [...(reading ? [] : ['slabTopY']), ...(unsettledForm ? ['form'] : [])], printed: !!reading })
     relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
     attachedRoofs.push({ massId: m.id, reading, slabTopY, slabSoffitY, parapetTopY: reading?.parapetTopY, footprint, projectsOverZone: projects, featureId, provenance: reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
     if (reading) for (const e of levels.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'a level datum', authority: 'HIGH', disposition: 'USED_IN_MODEL', reason: 'the section scale the attached roof was read at', stage: 'METRIC_SOLVE' })

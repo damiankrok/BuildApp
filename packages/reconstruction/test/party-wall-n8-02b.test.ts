@@ -277,3 +277,31 @@ describe('N8-02B: a door at the end of a partition, only where its swing is draw
     expect(swingDrawn(plan([], [{ ...arc, r: 0.4 }]), frame, 'Z', 3, [2.5, 3.35])).toBe(false)
   })
 })
+
+describe('v3.53.5: a stretch of the one wall the plan does not draw, wider than any door, is no doorway', () => {
+  const wall = read([house, garage], shared())[0].wall as PartyWallV2
+  const gap = { id: 'shared-party-0-east-0-0', storeyIndex: 0, massId: 'main', otherMassId: 'attached-0', facade: 'EAST' as const, interval: [3, 6.4] as [number, number], widthM: 3.4, sillY: 0, family: 'DOOR' as const, why: 'test', provenance: { head: 'ASSUMED_FOR_RENDERING' } }
+  const emit = (door: Record<string, unknown>) => {
+    const program = emitBuilding(building([house, garage], [wall], { sharedDoors: [door as unknown as BuildingV2['sharedDoors'][number]] }), 'v3535').program
+    return { program, applied: applyCommands(createEmptyModel('m', 'v3535'), program) }
+  }
+
+  it('as a door it was a 2.1 m opening with a leaf and a wall hanging over it across the room', () => {
+    const { program } = emit({ ...gap, headY: 2.1 })
+    const cut = program.find((c) => c.type === 'cutOpening' && c.id === gap.id)
+    expect(cut).toMatchObject({ kind: 'DOOR', height: 2.1, width: 3.4 })
+    expect(program.some((c) => c.type === 'placeDoor' && c.openingId === gap.id)).toBe(true)
+  })
+
+  it('as a passage it is cut in that wall from the floor to the head given, with nothing in it, and the model still validates', () => {
+    const { program, applied } = emit({ ...gap, headY: 2.6, passage: true })
+    const cut = program.find((c) => c.type === 'cutOpening' && c.id === gap.id)
+    expect(cut).toMatchObject({ kind: 'PASSAGE', wallId: wall.id, sill: 0, height: 2.6, width: 3.4 })
+    expect(program.some((c) => c.type === 'placeDoor' && c.openingId === gap.id)).toBe(false)
+    expect(applied.failedAt === undefined ? [] : applied.results[applied.failedAt]).toEqual([])
+    expect(validateModel(applied.model).issues.filter((i) => i.severity === 'ERROR')).toEqual([])
+    // the wall itself still stands either side of the stretch
+    expect(applied.model.walls.some((w) => w.id === wall.id)).toBe(true)
+  })
+})
+

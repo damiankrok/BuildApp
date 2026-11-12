@@ -240,3 +240,40 @@ describe('N8-03A: an overhead door’s tracks are drawn in grey line ink', () =>
     expect(overheadDoorTracks(plan(wall), frame, host, [1, 6], T)).toBeUndefined()
   })
 })
+
+describe('v3.53.5: a line cut for a roof is not a wall', () => {
+  const stub = lShape([{ x0: 7.6, z0: 4, x1: 8, z1: 5.2 }])
+  const readUnder = (oneRoof: boolean, raster: Raster) => readPartyWalls({ masses: [house, garage], plans: new Map([[0, { raster, frame }]]), wallOf: () => T, underOneRoof: () => oneRoof })[0]
+
+  it('the cause: too little wall drawn along the contact of two bodies used to mean two full walls, whatever cut the bodies apart', () => {
+    const r = readUnder(false, stub)
+    expect(r.decision).toBe('UNDECIDED')
+    expect(r.wall).toBeUndefined()
+  })
+
+  it('between two bodies under one roof by the plan’s eaves line, too little wall drawn is no wall: OPEN, and the record says why', () => {
+    const r = readUnder(true, stub)
+    expect(r.reading.solid).toBeGreaterThan(0)
+    expect(r.decision).toBe('OPEN')
+    expect(r.wall?.open).toBe(true)
+    expect(r.wall?.thicknessM).toBe(0)
+    expect(r.why).toMatch(/under one roof/)
+  })
+
+  it('counter-case: a wall the plan does draw between them is still read and built, one roof or not', () => {
+    // one 0.2 m band along the whole contact, on the house's side
+    const drawn = lShape([{ x0: 7.8, z0: 1.4, x1: 8, z1: 8.6 }])
+    for (const oneRoof of [false, true]) {
+      const r = readUnder(oneRoof, drawn)
+      expect(r.decision).toBe('ONE_WALL')
+      expect(r.wall?.open).toBeUndefined()
+      expect(r.wall?.thicknessM).toBeCloseTo(0.2, 2)
+    }
+  })
+
+  it('counter-case: two bodies NOT under one roof keep their walls where too little is drawn (a body beside the roof is not opened into the house)', () => {
+    const r = readPartyWalls({ masses: [house, garage], plans: new Map([[0, { raster: stub, frame }]]), wallOf: () => T, underOneRoof: (a, b) => a.id === 'main' && b.id === 'nothing' })[0]
+    expect(r.decision).toBe('UNDECIDED')
+  })
+})
+

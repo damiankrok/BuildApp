@@ -9,30 +9,42 @@
  * eaves' projection. It is read here, and only as that:
  *
  *   a dashed line        a thin run of short dashes and short gaps, at least `minLineM` long — never a hatch, a
- *                        slatted table or a row of paving (those are the same run on many neighbouring rows);
+ *                        slatted table or a row of paving (those are the same run on many neighbouring rows, over
+ *                        most of its own length), and never one of a family of equal parallel lines at even centres
+ *                        (`slats`: a pergola's rafters, a deck's boards);
  *   an eaves line        a dashed line that runs PARALLEL to an outer face of a walled body, outside it, between
  *                        `minOffsetM` and `maxOffsetM` away, over at least `minAlongM` — a pergola's beams, a terrace's
  *                        edge, the outline of a void or of a storey above are dashed too, and run elsewhere: across a
  *                        room, at right angles to the wall, metres from any face. Of two parallel candidates along the
- *                        same face the nearer is the eaves; the farther is a terrace or a gutter and is dropped;
+ *                        same face the nearer is the eaves; the farther is a terrace or a gutter and is dropped.
+ *                        The roof's edge is dashed wherever it runs above the plane the plan is cut at — over a lower
+ *                        body beside the house it is drawn THROUGH that body's rooms: a piece inside a body is the
+ *                        eaves only as the continuation of a line read in the open along a face (v3.53.5);
  *   the outline          the eaves lines closed into a rectilinear loop: collinear pieces of one line join across what
  *                        hides them (a callout ring, a tree) when the gap is short or the line is seen leaving BOTH of
  *                        its corners; an end joins the perpendicular line it stops short of only where that line's own
- *                        end is at the same corner. The loop must enclose every walled body;
+ *                        end is at the same corner. The loop encloses the largest walled body; every other body is
+ *                        either inside it too or wholly BEYOND the roofed footprint (v3.53.5: a house may carry one
+ *                        roof over most of itself and another beside it) — a body the footprint's edge runs across
+ *                        is neither, and then nothing is read;
  *   the roofed footprint the outline taken in by the projection, side by side, to the faces of the bodies it runs
  *                        along (where a side runs along no body — a porch — by the median projection), cut into its
- *                        maximal rectangles.
+ *                        maximal rectangles;
+ *   the bodies beyond    the bodies no point of which lies under the footprint (`beyond`), each with whether the eaves
+ *                        are drawn through it. Such a body is not under this roof. What roof it has — flat, pitched
+ *                        of its own, or undecided — this reader does not say: lying outside the outline decides none
+ *                        of that, and the eaves drawn through it say only that its roof lies below them.
  *
  * Nothing here says what KIND of roof stands on the footprint, how high it is, or that a wall stands under any of it:
  * an overall dimension, an eaves line and a paved terrace all end somewhere near the same place, and only the dashed
- * line parallel to the walls is the roof's edge. Where the line is not found, not closed or not around the bodies the
+ * line parallel to the walls is the roof's edge. Where the line is not found, not closed, or runs across a body, the
  * reading says so and nothing follows from it. Pixels and metres only; no sheet, publisher or project is known here.
  */
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
 
-export const EAVE_OUTLINE_VERSION = '1.1.0'
+export const EAVE_OUTLINE_VERSION = '1.2.0'
 
 export const EAVE_BOUNDS = {
   /** Ink of a dash: darker than this (a watermark, a tint and JPEG noise on white are lighter). */
@@ -58,10 +70,31 @@ export const EAVE_BOUNDS = {
   cornerEndM: 1.2,
   /** Lines within this many pixels are one line. */
   samePx: 3,
+  /**
+   * Slats: at least this many parallel dashed lines whose ends agree within `combEndM`, at centres no farther apart
+   * than `combMaxSpacingM` and even within `combSpacingShare` of their median — rafters and boards are set out at one
+   * spacing, well under the 1.5 m a purlin spans; an eaves line, its gutter and a terrace edge are three lines of three
+   * different lengths at three different distances.
+   */
+  combMinMembers: 3,
+  combEndM: 0.3,
+  combMaxSpacingM: 1.5,
+  combSpacingShare: 0.25,
+  /** A body lies under the roofed footprint, or beyond it, when all — or none — of this lattice of its points do. */
+  bodyLattice: 5,
 } as const
 
 /** `axis` as the wall lines': X a vertical line (x fixed, running along y), Y a horizontal one. */
-export type EaveLine = { axis: 'X' | 'Y'; atPx: number; fromPx: number; toPx: number; offsetM: number; body: number }
+export type EaveLine = {
+  axis: 'X' | 'Y'
+  atPx: number
+  fromPx: number
+  toPx: number
+  offsetM: number
+  body: number
+  /** v3.53.5: the bodies (indices) a piece of this line is drawn THROUGH — the eaves of one roof seen over a body that is not under it. */
+  through?: number[]
+}
 
 export type EaveOutlineState = 'CLOSED' | 'NO_EAVES_LINE' | 'NOT_CLOSED' | 'NOT_AROUND_THE_BODIES'
 
@@ -76,6 +109,12 @@ export type EaveOutlineReading = {
   overhangM?: number
   outlineRects?: PixelRect[]
   roofedRects?: PixelRect[]
+  /**
+   * CLOSED only (v3.53.5): the bodies (indices into the given ones) that lie wholly BEYOND the roofed footprint — not
+   * under this roof — each with whether the eaves line is drawn through it. Nothing here says what roof such a body
+   * has: only that this one ends before it.
+   */
+  beyond?: Array<{ body: number; eavesDrawnThrough: boolean }>
   why: string
 }
 
@@ -124,7 +163,10 @@ function thinLines(runs: Run[], minLenPx: number): Run[] {
   const long = runs.filter((r) => r.to - r.from >= minLenPx)
   const byAt = new Map<number, Run[]>()
   for (const r of long) byAt.set(r.at, [...(byAt.get(r.at) ?? []), r])
-  const same = (a: Run, b: Run): boolean => Math.min(a.to, b.to) - Math.max(a.from, b.from) > 0.5 * Math.min(a.to - a.from, b.to - b.from)
+  // A hatch repeats the run on its neighbouring rows over most of the run's OWN length. Measured against the shorter of
+  // the two (v3.53.4), a few dashes of clutter beside a long line — the corner of a table, a row of stippling — counted
+  // as the line's own thickness and a 7 m eaves line was dropped as a hatch (v3.53.5).
+  const same = (a: Run, b: Run): boolean => Math.min(a.to, b.to) - Math.max(a.from, b.from) > 0.5 * (a.to - a.from)
   const kept = long.filter((r) => {
     let rows = 0
     for (let d = -2 * B.maxThickPx; d <= 2 * B.maxThickPx; d += 1) if ((byAt.get(r.at + d) ?? []).some((o) => same(r, o))) rows += 1
@@ -140,6 +182,46 @@ function thinLines(runs: Run[], minLenPx: number): Run[] {
     } else merged.push({ ...r })
   }
   return merged
+}
+
+/**
+ * Slats (v3.53.5): three or more parallel dashed lines of the SAME span, at even centres no farther apart than
+ * `combMaxSpacingM` — the rafters of a pergola, the boards of a deck, the treads of a stair above. An eaves line is one
+ * line (two with its gutter); a family of equal members is never the edge of a roof, however near a wall one of them
+ * runs. Returns the members.
+ */
+function slats(lines: readonly Run[], mppAcross: number, mppAlong: number): Set<Run> {
+  const B = EAVE_BOUNDS
+  const out = new Set<Run>()
+  const endPx = B.combEndM / mppAlong
+  for (const seed of lines) {
+    if (out.has(seed)) continue
+    const family = lines.filter((o) => Math.abs(o.from - seed.from) <= endPx && Math.abs(o.to - seed.to) <= endPx).sort((a, b) => a.at - b.at)
+    // members: lines a stroke's width apart are the two edges of one member
+    const members: number[] = []
+    for (const l of family) if (members.length === 0 || l.at - members[members.length - 1] > B.samePx) members.push(l.at)
+    if (members.length < B.combMinMembers) continue
+    const gaps = members.slice(1).map((m, i) => m - members[i]).sort((a, b) => a - b)
+    const median = gaps[Math.floor(gaps.length / 2)]
+    if (median * mppAcross > B.combMaxSpacingM) continue
+    // even centres: a run of at least `combMinMembers` members whose gaps agree with the median
+    const even = (g: number): boolean => Math.abs(g - median) <= Math.max(B.samePx, B.combSpacingShare * median)
+    let run: number[] = [members[0]]
+    const regular = new Set<number>()
+    const flush = (): void => {
+      if (run.length >= B.combMinMembers) for (const m of run) regular.add(m)
+    }
+    for (let i = 1; i < members.length; i += 1) {
+      if (even(members[i] - members[i - 1])) run.push(members[i])
+      else {
+        flush()
+        run = [members[i]]
+      }
+    }
+    flush()
+    for (const l of family) if ([...regular].some((m) => Math.abs(l.at - m) <= B.samePx)) out.add(l)
+  }
+  return out
 }
 
 /** The maximal rectangles of a set of grid cells, largest first, as index boxes. */
@@ -188,11 +270,25 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
   for (let y = wy0; y <= wy1; y += 1) for (const r of dashedRuns((i) => luma(wx0 + i, y), wx1 - wx0 + 1)) rowRuns.push({ at: y, from: wx0 + r.from, to: wx0 + r.to })
   const colRuns: Run[] = []
   for (let x = wx0; x <= wx1; x += 1) for (const r of dashedRuns((i) => luma(x, wy0 + i), wy1 - wy0 + 1)) colRuns.push({ at: x, from: wy0 + r.from, to: wy0 + r.to })
-  const horizontal = thinLines(rowRuns, B.minLineM / mppX)
-  const vertical = thinLines(colRuns, B.minLineM / mppY)
+  const dashedH = thinLines(rowRuns, B.minLineM / mppX)
+  const dashedV = thinLines(colRuns, B.minLineM / mppY)
+  const slatsH = slats(dashedH, mppY, mppX)
+  const slatsV = slats(dashedV, mppX, mppY)
+  const horizontal = dashedH.filter((r) => !slatsH.has(r))
+  const vertical = dashedV.filter((r) => !slatsV.has(r))
 
   // --- which dashed lines are eaves: parallel to an outer face of a body, outside every body, at an eaves' distance ---
   const insideABody = (x: number, y: number): boolean => bodies.some((b) => x > b.x0 + 3 && x < b.x1 - 3 && y > b.y0 + 3 && y < b.y1 - 3)
+  /** The stretches of a line at `at`, between `from` and `to`, that run INSIDE a body: per body, [from, to]. */
+  const insideStretches = (axis: 'X' | 'Y', at: number, from: number, to: number): Array<{ body: number; from: number; to: number }> =>
+    bodies.flatMap((b, body) => {
+      const [a0, a1, f0, f1] = axis === 'Y' ? [b.x0, b.x1, b.y0, b.y1] : [b.y0, b.y1, b.x0, b.x1]
+      if (!(at > f0 + 3 && at < f1 - 3)) return []
+      const [lo, hi] = [Math.max(from, a0 + 3), Math.min(to, a1 - 3)]
+      return hi > lo ? [{ body, from: lo, to: hi }] : []
+    })
+  /** v3.53.5: the bodies a dashed line is drawn THROUGH over at least `minAlongM` — the eaves of one roof seen over a body that is not under it. */
+  const drawnThrough = (axis: 'X' | 'Y', r: Run, except: number): number[] => insideStretches(axis, r.at, r.from, r.to).filter((q) => q.body !== except && (q.to - q.from) * (axis === 'Y' ? mppX : mppY) >= B.minAlongM).map((q) => q.body)
   const candidates: EaveLine[] = []
   const judge = (axis: 'X' | 'Y', r: Run): void => {
     const mppAcross = axis === 'Y' ? mppY : mppX
@@ -208,11 +304,24 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
         const offsetM = offsetPx * mppAcross
         if (offsetM < B.minOffsetM || offsetM > B.maxOffsetM) continue
         const mid = (lo + hi) / 2
-        if (axis === 'Y' ? insideABody(mid, r.at) : insideABody(r.at, mid)) continue
+        if (axis === 'Y' ? insideABody(mid, r.at) : insideABody(r.at, mid)) {
+          // v3.53.5: the line's middle along this face is inside another body — the eaves drawn through a lower body
+          // beside the house. It is still read against this face where it runs FREE along it over `minAlongM`.
+          const inside = insideStretches(axis, r.at, lo, hi).sort((p, q) => p.from - q.from)
+          let covered = 0
+          let reach = lo
+          for (const q of inside) {
+            covered += Math.max(0, q.to - Math.max(reach, q.from))
+            reach = Math.max(reach, q.to)
+          }
+          if ((hi - lo - covered) * mppAlong < B.minAlongM) continue
+        }
         if (!best || offsetM < best.offsetM) best = { offsetM, body: index }
       }
     })
-    if (best) candidates.push({ axis, atPx: r.at, fromPx: r.from, toPx: r.to, offsetM: round6(best.offsetM), body: best.body })
+    if (!best) return
+    const through = drawnThrough(axis, r, best.body)
+    candidates.push({ axis, atPx: r.at, fromPx: r.from, toPx: r.to, offsetM: round6(best.offsetM), body: best.body, ...(through.length > 0 ? { through } : {}) })
   }
   for (const r of horizontal) judge('Y', r)
   for (const r of vertical) judge('X', r)
@@ -230,9 +339,15 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
     for (const r of runs) {
       if (taken.has(`${axis}:${r.at}:${r.from}`)) continue
       const along = eaves.find((l) => l.axis === axis && Math.abs(l.atPx - r.at) <= 2)
+      if (!along) continue
+      // v3.53.5: … and so is a piece of that line drawn THROUGH another body. A roof's edge above the plane the plan is
+      // cut at is dashed wherever it runs, and over a lower body beside the house it runs across that body's rooms. It
+      // is read as the eaves only as the continuation of a line already seen outside along a face — a dashed line
+      // inside a room on its own is a beam, a cupboard or a void.
+      const through = drawnThrough(axis, r, along.body)
       const mid = (r.from + r.to) / 2
-      if (!along || (axis === 'Y' ? insideABody(mid, r.at) : insideABody(r.at, mid))) continue
-      eaves.push({ axis, atPx: along.atPx, fromPx: r.from, toPx: r.to, offsetM: along.offsetM, body: along.body })
+      if (through.length === 0 && (axis === 'Y' ? insideABody(mid, r.at) : insideABody(r.at, mid))) continue
+      eaves.push({ axis, atPx: along.atPx, fromPx: r.from, toPx: r.to, offsetM: along.offsetM, body: along.body, ...(through.length > 0 ? { through } : {}) })
     }
   }
   // The eaves leave the walls to go round what is roofed and unwalled — a porch on a post — and no face is near them
@@ -256,7 +371,7 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
       }
     }
   }
-  const other = horizontal.length + vertical.length - eaves.length
+  const other = dashedH.length + dashedV.length - eaves.length
   const H = eaves.filter((l) => l.axis === 'Y').map((l) => ({ ...l }))
   const V = eaves.filter((l) => l.axis === 'X').map((l) => ({ ...l }))
   if (H.length < 2 || V.length < 2) return none('NO_EAVES_LINE', `${eaves.length} dashed line${eaves.length === 1 ? ' runs' : 's run'} parallel to an outer face at an eaves' distance (${H.length} along x, ${V.length} along y): no eaves line is drawn around the building on this plan`, eaves, other)
@@ -268,8 +383,12 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
     for (const l of sorted) {
       const last = [...out].reverse().find((o) => Math.abs(o.atPx - l.atPx) <= B.samePx && l.fromPx >= o.fromPx)
       const cornered = (line: EaveLine, end: number): boolean => crossing.some((c) => Math.abs(c.atPx - end) <= B.cornerEndM / mppAlong + B.samePx && line.atPx >= c.fromPx - B.cornerEndM / mppAlong && line.atPx <= c.toPx + B.cornerEndM / mppAlong)
+      const carry = (): void => {
+        if (last && l.through) last.through = [...new Set([...(last.through ?? []), ...l.through])].sort((a, b) => a - b)
+      }
       if (last && l.fromPx <= last.toPx) {
         last.toPx = Math.max(last.toPx, l.toPx)
+        carry()
         continue
       }
       if (last) {
@@ -278,6 +397,7 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
         if (gapM <= B.bridgeM || (cornered(last, last.fromPx) && cornered(l, l.toPx))) {
           last.toPx = l.toPx
           last.offsetM = Math.min(last.offsetM, l.offsetM)
+          carry()
           continue
         }
       }
@@ -338,23 +458,53 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
     const j = ys.findIndex((v, k) => k < ny && y >= v && y <= ys[k + 1])
     return i >= 0 && j >= 0 && inside.has(`${i}:${j}`)
   }
-  const around = bodies.every((b) => within(b.x0 + 4, b.y0 + 4) && within(b.x1 - 4, b.y0 + 4) && within(b.x0 + 4, b.y1 - 4) && within(b.x1 - 4, b.y1 - 4) && within((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2))
-  if (!around) return none('NOT_AROUND_THE_BODIES', 'the dashed lines parallel to the walls close around part of the plan only: not every walled body lies inside them, so they are not read as the eaves of the building', joined, other)
+  const enclosed = (b: PixelRect): boolean => within(b.x0 + 4, b.y0 + 4) && within(b.x1 - 4, b.y0 + 4) && within(b.x0 + 4, b.y1 - 4) && within(b.x1 - 4, b.y1 - 4) && within((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2)
+  const notEnclosed = bodies.map((b, index) => ({ b, index })).filter(({ b }) => !enclosed(b))
 
   // --- the roofed footprint: each side taken in to the faces of the bodies it runs along ---
   const offsets = joined.map((l) => l.offsetM).sort((a, b) => a - b)
   const overhangM = offsets[Math.floor(offsets.length / 2)]
-  const faceFor = (axis: 'X' | 'Y', at: number, inward: 1 | -1): number => {
-    // the nearest body face inward of the line, within an eaves' distance; else the median projection
+  const faceFor = (axis: 'X' | 'Y', at: number, inward: 1 | -1, from: number, to: number): number => {
+    // the nearest body face inward of the line, within an eaves' distance; else the median projection. v3.53.5: the
+    // face of a body that runs ALONG this side of the rectangle (over `minAlongM`, as an eaves line is read against a
+    // face) — a pier or a chimney breast the walls cut as a body of its own has faces too, a few decimetres long, and
+    // the roof's edge was taken in to one of them instead of to the wall behind it.
     const mpp = axis === 'X' ? mppX : mppY
-    const faces = bodies.flatMap((b) => (axis === 'X' ? [b.x0, b.x1] : [b.y0, b.y1]))
+    const mppAlong = axis === 'X' ? mppY : mppX
+    const faces = bodies.flatMap((b) => {
+      const [a0, a1] = axis === 'X' ? [b.y0, b.y1] : [b.x0, b.x1]
+      return (Math.min(a1, to) - Math.max(a0, from)) * mppAlong >= B.minAlongM ? (axis === 'X' ? [b.x0, b.x1] : [b.y0, b.y1]) : []
+    })
     const near = faces.map((f) => ({ f, d: (f - at) * inward * mpp })).filter((c) => c.d >= B.minOffsetM - 1e-9 && c.d <= B.maxOffsetM + 1e-9).sort((p, q) => p.d - q.d)[0]
     return near ? near.f : at + (inward * overhangM) / mpp
   }
   const boxes = maximalRectangles(inside, nx, ny, (i0, j0, i1, j1) => (xs[i1 + 1] - xs[i0]) * (ys[j1 + 1] - ys[j0]))
   const outlineRects = boxes.map(([i0, j0, i1, j1]) => ({ x0: xs[i0], y0: ys[j0], x1: xs[i1 + 1], y1: ys[j1 + 1] }))
-  const roofedRects = outlineRects.map((r) => ({ x0: round6(faceFor('X', r.x0, 1)), y0: round6(faceFor('Y', r.y0, 1)), x1: round6(faceFor('X', r.x1, -1)), y1: round6(faceFor('Y', r.y1, -1)) }))
+  const roofedRects = outlineRects.map((r) => ({ x0: round6(faceFor('X', r.x0, 1, r.y0, r.y1)), y0: round6(faceFor('Y', r.y0, 1, r.x0, r.x1)), x1: round6(faceFor('X', r.x1, -1, r.y0, r.y1)), y1: round6(faceFor('Y', r.y1, -1, r.x0, r.x1)) }))
   if (roofedRects.some((r) => r.x1 - r.x0 <= 0 || r.y1 - r.y0 <= 0)) return none('NOT_CLOSED', 'the eaves lines close around less than their own projection: not an outline', joined, other)
+  // v3.53.5: a body the outline does not enclose is not, by that alone, a reason to disbelieve the outline — a house
+  // may carry one roof over most of itself and another beside it. The outline stands for the bodies under it when
+  // every other body lies wholly BEYOND the roofed footprint (no point of it under the roof: it touches the footprint
+  // at most — a body beside the house, or a pier standing in the eaves' projection) and the largest body is enclosed.
+  // A body the outline's edge runs across is neither, and then the lines are not read as the eaves at all.
+  const beyond: Array<{ body: number; eavesDrawnThrough: boolean }> = []
+  {
+    const refuse = (why: string): EaveOutlineReading => none('NOT_AROUND_THE_BODIES', why, joined, other)
+    const size = (b: PixelRect): number => (b.x1 - b.x0) * (b.y1 - b.y0)
+    const largest = bodies.reduce((best, b, index) => (size(b) > size(bodies[best]) ? index : best), 0)
+    if (notEnclosed.some(({ index }) => index === largest)) return refuse('the dashed lines parallel to the walls close around part of the plan only, and the largest walled body is not inside them: they are not read as the eaves of the building')
+    const underRoof = (x: number, y: number): boolean => roofedRects.some((r) => x > r.x0 && x < r.x1 && y > r.y0 && y < r.y1)
+    const drawnThrough = new Set(joined.flatMap((l) => l.through ?? []))
+    const n = B.bodyLattice
+    bodies.forEach((b, index) => {
+      let under = 0
+      for (let i = 0; i < n; i += 1) for (let j = 0; j < n; j += 1) if (underRoof(b.x0 + 4 + ((b.x1 - b.x0 - 8) * i) / (n - 1), b.y0 + 4 + ((b.y1 - b.y0 - 8) * j) / (n - 1))) under += 1
+      if (under === 0) beyond.push({ body: index, eavesDrawnThrough: drawnThrough.has(index) })
+    })
+    const straddles = notEnclosed.filter(({ index }) => !beyond.some((o) => o.body === index))
+    if (straddles.length > 0) return refuse(`the dashed lines parallel to the walls close around part of the plan only, and the edge of what they enclose runs across ${straddles.length === 1 ? 'a walled body' : `${straddles.length} walled bodies`}: neither under that roof nor beside it, so they are not read as the eaves of the building`)
+  }
+  const through = beyond.filter((b) => b.eavesDrawnThrough).length
   return {
     version: EAVE_OUTLINE_VERSION,
     state: 'CLOSED',
@@ -363,7 +513,8 @@ export function readEaveOutline(raster: Raster, bodies: readonly PixelRect[], mp
     overhangM: round6(overhangM),
     outlineRects,
     roofedRects,
-    why: `a dashed line runs outside the outer walls, ${overhangM.toFixed(2)} m from them (median over ${joined.length} sides), and closes around every walled body: the eaves, enclosing ${roofedRects.length === 1 ? 'one rectangle' : `${roofedRects.length} rectangles that overlap`}${other > 0 ? `; ${other} other dashed line${other === 1 ? '' : 's'} near the walls run${other === 1 ? 's' : ''} elsewhere and ${other === 1 ? 'is' : 'are'} not read as eaves` : ''}`,
+    ...(beyond.length > 0 ? { beyond } : {}),
+    why: `a dashed line runs outside the outer walls, ${overhangM.toFixed(2)} m from them (median over ${joined.length} sides), and closes around ${beyond.length === 0 ? 'every walled body' : `${bodies.length - beyond.length} of the ${bodies.length} walled bodies, the largest among them`}: the eaves, enclosing ${roofedRects.length === 1 ? 'one rectangle' : `${roofedRects.length} rectangles that overlap`}${beyond.length > 0 ? `; ${beyond.length} bod${beyond.length === 1 ? 'y lies' : 'ies lie'} wholly beyond what it covers${through > 0 ? ` (the line is drawn through ${through === beyond.length ? (through === 1 ? 'it' : 'them') : `${through} of them`}: that roof ends over ${through === 1 ? 'it' : 'them'})` : ''} and ${beyond.length === 1 ? 'is' : 'are'} not under this roof` : ''}${other > 0 ? `; ${other} other dashed line${other === 1 ? '' : 's'} near the walls run${other === 1 ? 's' : ''} elsewhere and ${other === 1 ? 'is' : 'are'} not read as eaves` : ''}`,
   }
 }
 
