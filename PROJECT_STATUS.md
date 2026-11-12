@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage: v3.53.7 (audit, no code change; report `stage-reports/SOURCE_TO_MODEL_V3537_AUDIT.md`). Latest code stage: v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, service 1.11.0, APK 1334; report `stage-reports/SOURCE_TO_MODEL_V3538.md`). Before it: v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -143,7 +143,27 @@
   variant frozen beforehand moves none of the three. Recommendation: keep N1a; a conditional face correction only as its
   own stage under five stated conditions. The Master Plan v3.53.6 is not in the repository or the environment. Report
   `stage-reports/SOURCE_TO_MODEL_V3537_AUDIT.md`.
-- **NEXT (one action):** the OWNER decides, on the v3.53.7 audit (§c, §d): 005Q — keep N1a, or order the conditional
+- **v3.53.8 (2026-11-12), closed parts of the house recovered:** base `9824e17`. Azolle 7 (DEV): the front door
+  between a wall end and a 0.9 m pier too short for a band left its cell edge open (`closureOf` sees only band pieces
+  inside an edge), so the fill took the vestibule and kitchen for garden. A door between jambs read from the ink now
+  shuts the edge for the fill only — one jamb a wall the band reader found, a callout of the door's width at it, and
+  not both jambs walls turning in (a recess mouth stays open). With a near-tie tiling that prefers walled seams and a
+  seam through one enclosed space read as OPEN (a ≤ 1.2 m lining strip behind which the wall stands does not count),
+  Azolle covers 180.8 of 181.41 m², rooms 1, 13, 14 recovered (MISSING 4 → 0, garage +54.8 % → −2.2 %), compile errors
+  4 → 1; still PARTIAL (pantry partition unread, day zone MERGED). The nine refusals have other causes (wide mouths,
+  extent at an inner face) and stay refusals. A partition is cut wherever the roof over it changes (flat slab soffit,
+  own cross gable, own plane roof): WALL_NOT_UNDER_ROOF 8 → 1 over 80 runs (Bratki, Dzwonki 3, Wasabi, Bakopy, Bakopy 5
+  fixed; Pod Miłorzębem is a ring wall). The result carries `measurement` (run COMPLETED apart from coverage, scale and
+  quantities, each limit with its consequence). 80 runs: 0 outcome changes, 0 room-match losses, 48 identical, 18
+  refusals in both; frozen room table 87/169 → 87/169 (Azolle +3 OK, its day zone OPEN_OK → MERGED). Fresh trial of 10
+  frozen houses: 9 identical, Sadzcach improved, Mekintoszach refused in both (scale). Biggest remaining: refusals where
+  the wall envelope ends before the house (8 of 9 DEV refusals) and covered corners enclosed by the ring (3 fresh houses,
+  as in 1333). APK 1334, same signature; Android UI NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V3538.md`.
+- **NEXT (one action):** the OWNER installs APK 1334 and runs LOCAL on the Azolle 7 link (the whole house, garage door
+  2.75 m, the "Pomiar" section). Next code candidates, by measured size: the wall envelope that ends before the house
+  (wide mouths, extent at an inner face — 18/80 refusals); covered corners enclosed by the ring; unread pantry/wardrobe
+  partitions. Still open from v3.53.7: 005Q — keep N1a, or the conditional face correction as its own stage.
+- **(superseded by v3.53.8) NEXT:** the OWNER decides, on the v3.53.7 audit (§c, §d): 005Q — keep N1a, or order the conditional
   face correction as its own stage; and the next production slice — recommended: outline completeness (a grid cell the
   outside flood reaches is not discarded whole), with the partition-above-the-roof regression fixed alongside. Still
   open from 1333: the OWNER installs APK 1333 and runs LOCAL on the Macierzanki 4 G2 link (bedrooms 7 and 8 as
