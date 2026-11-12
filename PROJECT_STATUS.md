@@ -15,8 +15,9 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Reports: `stage-reports/SOURCE_TO_MODEL_V3532.md`
-  (current), `SOURCE_TO_MODEL_V3531.md`, `SOURCE_TO_MODEL_V353.md`.
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage: v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
+  `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
   (the house reader as a private pilot; PowerShell instructions for the owner's key).
 - **What exists:** the described path (a vision reader describes the whole house once in a closed vocabulary; a
@@ -77,7 +78,9 @@
   where an elevation does not register (chimney above the ridge) or a callout is misread; eaves built 0.6 m where
   plan and section say about 0.9;
   ridge of an attached gable on a square plan (described path); roof features the reader does not
-  state; a balcony through an eave; two-tone facades; porch roofs as flat plates; recesses above the ground storey.
+  state; a balcony through an eave; two-tone facades; porch roofs as flat plates; recesses above the ground storey;
+  rooms: parts of a house with no room polygon, rooms opened without a drawn swing merged with their neighbour, a
+  body cut on its wall's inner face, room numbers mostly unread (V3536 §11).
 - **Not measured:** the anchors on a real house with a live reader; anything on a device.
 - **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
   bundled scenes (files unchanged since `5ad2dd5`).
@@ -103,11 +106,35 @@
   roof BESIDE a separate roof is shown in DEV only and on one publisher's sheets. **APK 1332** (same signature):
   SHA-256 `92aaf06f…f45bee`, manifest 12/12; host runs from its bundle under Node 18.20.4 + no-ICU — see the report.
   Android UI NOT_VERIFIED (no emulator, no device). Report `stage-reports/SOURCE_TO_MODEL_V3535.md`.
-- **NEXT (one action):** the OWNER installs APK 1332 and runs LOCAL on the Macierzanki 4 G2 link (one L-shaped hip
-  over the house and its rear wing, the garage block flat beside it; provenance "solver 2.37.0"). Next code stage:
-  the multi-storey roof extent (Telimy 4 as its base), and on the way the two downstream decisions Karmazyny 2 G2
-  exposes (main ridge axis against the eaves' rectangle; `UNDER_MAIN` yielding to a wing the eaves outline), plus an
-  eaves side hidden under another drawn line (V3535 §11). The paid SDK trial stays a separate track.
+- **v3.53.6 (2026-11-12), LOCAL rooms and outline — rooms are the storey's, not the roof bodies':** first wrong
+  decision, measured on Macierzanki 4 G2: the interior was read under each roof body apart (`readInterior` per body,
+  then a join), so a partition, a jamb or a room on the technical line between two bodies was lost and the fragments
+  chained into one 104 m² region; the garage's 5.17 m "door" stood on a line the grid cut through one walled room.
+  Now bodies with no wall drawn between them are one zone read once (`storey-zones.ts`, `readInterior` with `domain`);
+  ink crossing a contact is no wall on it; a wall shared along part of a side moves the floor there only; two
+  rectangles of one walled room are one body (`joinOpenSeams`); a corner recess under the roof is no room's floor;
+  three door rules (between two corners, against the wall across, between jamb nibs) read a door only from a drawn
+  swing (`swingArcInDoorway`: four fifths of the quarter arc a line darker than the sheet on both sides, a leaf beside
+  it that closes the doorway, the doorway clear). Solver 2.38.0, code `9824e17`. Rooms identified by hand-set seed
+  points, never by the analyzer's own number reading; declared area a check, no polygon scaled. DEV (four houses, 57
+  ground-floor rooms): rooms matching sheet and list within ±10 % 27 → 43, none lost; Macierzanki rooms 7/8 = 12.84 /
+  14.43 m² against 13.04 / 14.55 listed (the board's 14.1 / 15.7 are the printed clear spans' products), garage one
+  35.35 m² room, no shared "door". Frozen trial (12 houses of 12 families, 169 rooms, both codes on the same sealed
+  bytes): 72 → 87 rooms, 5 houses improved, 2 unchanged, 5 identical, 0 worse, 7 refusals unchanged. Regression, 80
+  sealed runs: 18 identical, 44 changed, 18 refusals on both sides; indicative room match up 25, same 19, down 0; new
+  compile errors 0; roofs changed only in Macierzanki (two garage roofs → one). **Scope stated in the report:** one
+  publisher, ground floors; 82 of the trial's 169 rooms are still merged, missing or off, and in five trial houses
+  no rule acted. A first version that moved every body cut on a wall's inner face onto the drawn face broke 40 pinned
+  005Q wall-strip tests; the move is kept for seam-joined bodies only and the conflict is recorded (Muraje's rear wall
+  stays 0.55 m inside its drawn face). Tests on the delivery tree: 2221, 13 failing, the same 13 names as the base.
+  **APK 1333** (same signature): SHA-256 `8dcdf40c…1002f3`, manifest 12/12; host runs from its bundle under Node
+  18.20.4 + no-ICU on three live pages, models equal to the replays, scenes saved and loaded. Android UI NOT_VERIFIED
+  (no emulator, no device). Report `stage-reports/SOURCE_TO_MODEL_V3536.md`.
+- **NEXT (one action):** the OWNER installs APK 1333 and runs LOCAL on the Macierzanki 4 G2 link (bedrooms 7 and 8 as
+  two rooms, the garage one room without an inner wall; provenance "solver 2.38.0"). Next code candidates, by measured
+  size: bodies and floors that are not built at all (19 trial rooms have no polygon); the body cut on a drawn wall's
+  inner face (needs the OWNER's word on 005Q's "name it, do not move it"); rooms opened without a swing (sliding
+  doors, wardrobes, pantries). Multi-storey roof extent (Telimy 4, Karmazyny 2 G2) stays open, unchanged by this stage.
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
   D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
