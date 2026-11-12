@@ -15,13 +15,13 @@
   "sourcePackageId": "src-larchfield-lf01-26525596d2",
   "sourcePackageHash": "4e40736479d51c0e42b2ac5b766c070d28204701cc2fb0850134ff974f7cfe8b",
   "observationGraphHash": "5f377e03bdfa9c88f3e147564d8f990615ffb0880ffac4d388c0d3687bd245c4",
-  "metricEvidenceHash": "6e1fb29833e729f6a2d26540825e43c3799f587e1b2bb77e72cd58dfd550d870",
-  "candidateHash": "39b1a85d428ab4597106e245090f7147a2d2b32110a725dcb9d35a10fd994dbb",
-  "modelHash": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec",
-  "modelSha256": "18cb69860785d3b5dc6b9bda0933f051f9b2b99a7318bad430f30cce163f47ec",
-  "sceneContentHash": "2319e7524ef40eb5bdecc732ee46d87286efa9a97fb48376034a3571c13400cc",
-  "sceneSha256": "ac79ef364151e73fb9c5935e624d5c0363a4fedc74c15e30a3447bd32cd9d2e3",
-  "sceneBytes": 121022,
+  "metricEvidenceHash": "6f704ffe3436d340df8b0c396349de968ff964ce411296fabb03327d99de17c2",
+  "candidateHash": "8718f2b2b751704d7438fff8c8eb5e3699ede0305dc34f3efe6eeee73197ef47",
+  "modelHash": "5fc0c701f19d92ff5e596aa7e70b90faf86fefa09c946d6ad1d0a4735738cfcd",
+  "modelSha256": "5fc0c701f19d92ff5e596aa7e70b90faf86fefa09c946d6ad1d0a4735738cfcd",
+  "sceneContentHash": "eec34e54a43b41c95ff480f42db4dafd709680c132aff29a176020f6e1519687",
+  "sceneSha256": "5c59b69d9804237f53091860204598d167b1a1291b22112a0a268690db463237",
+  "sceneBytes": 87820,
   "counts": {
     "assets": 7,
     "assetsByDocument": {
@@ -33,7 +33,7 @@
     "frames": 7,
     "metricEvidence": 20,
     "callouts": 0,
-    "commands": 63,
+    "commands": 49,
     "masses": 1,
     "openings": 7,
     "rooms": 2,
@@ -42,27 +42,22 @@
     "railings": 0,
     "chimneys": 0,
     "rooflights": 0,
-    "meshes": 50,
-    "triangles": 1132
+    "meshes": 37,
+    "triangles": 832
   },
   "quality": {
     "levels": {
       "L0": 0,
-      "L1": 18,
-      "L2": 4
+      "L1": 10,
+      "L2": 3
     },
     "byFamily": {
       "LEVEL": {
-        "L2": 2
+        "L1": 1,
+        "L2": 1
       },
       "MASS": {
         "L2": 1
-      },
-      "INTERIOR_DOOR": {
-        "L1": 2
-      },
-      "INTERIOR_WALL": {
-        "L1": 7
       },
       "ROOM": {
         "L1": 2
@@ -102,11 +97,6 @@
       "status": "MISSING"
     },
     {
-      "what": "a 2.71 m thin band at z 0.35",
-      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
-      "status": "AMBIGUOUS"
-    },
-    {
       "what": "the eaves projection of the main roof",
       "reason": "the section does not draw both eaves past the walls along a slope of the stated pitch, in agreement: the roof ends at the walls",
       "status": "AMBIGUOUS"
@@ -132,11 +122,11 @@
     "outcome": "COMPLETE",
     "built": {
       "wallRings": 2,
-      "walls": 13,
+      "walls": 8,
       "slabs": 2,
       "roofs": 1,
       "roofPlanes": 0,
-      "openings": 9,
+      "openings": 7,
       "rooms": 2,
       "stairs": 0
     },
@@ -164,6 +154,31 @@
       "modelRefusals": 0,
       "why": "the accepted decomposition is 100% represented (its own built regions only); nothing unresolved, unexplained or in conflict"
     }
+  },
+  "measurement": {
+    "schemaVersion": "1.0.0",
+    "run": "COMPLETED",
+    "coverage": {
+      "status": "NOT_ASSESSED",
+      "builtM2": 69.12,
+      "publishedM2": null,
+      "share": null
+    },
+    "scale": {
+      "status": "MEASURED",
+      "builtCmPerPx": 2.6363,
+      "measuredCmPerPx": 2.636106,
+      "ratio": 1.000074,
+      "confidence": "STRONG"
+    },
+    "completeness": "COMPLETE",
+    "quantities": "LIMITED",
+    "reasons": [
+      {
+        "code": "COVERAGE_NOT_ASSESSED",
+        "consequence": "the publisher prints no footprint to hold the model against: its coverage is not checked"
+      }
+    ]
   },
   "sourceBasis": {
     "assetId": "asset-rzut-parteru-4353f1c5bb",
@@ -209,7 +224,7 @@
     "closure": {
       "exteriorErrors": 0,
       "exteriorFindings": 0,
-      "interiorFindings": 19
+      "interiorFindings": 0
     }
   },
   "assessment": {
@@ -218,7 +233,7 @@
     "technicalValidity": {
       "status": "VALID",
       "errors": 0,
-      "warnings": 19,
+      "warnings": 0,
       "checks": [
         {
           "check": "PROGRAM_REFUSALS",
@@ -241,94 +256,9 @@
         {
           "check": "CLOSURE",
           "errors": 0,
-          "warnings": 19,
-          "findings": [
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-x-2 + ring-main-0-w1",
-              "message": "main-iwall-1-x-2 and ring-main-0-w1 stand 0.077 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-x-2 + ring-main-1-w1",
-              "message": "main-iwall-1-x-2 and ring-main-1-w1 stand 0.077 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-z-0 + ring-main-0-w0",
-              "message": "main-iwall-1-z-0 and ring-main-0-w0 stand 0.075 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-z-0 + ring-main-1-w0",
-              "message": "main-iwall-1-z-0 and ring-main-1-w0 stand 0.075 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-x-0 + ring-main-0-w3",
-              "message": "main-iwall-1-x-0 and ring-main-0-w3 stand 0.023 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-x-0 + ring-main-1-w3",
-              "message": "main-iwall-1-x-0 and ring-main-1-w3 stand 0.023 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-z-0 + ring-main-0-w2",
-              "message": "main-iwall-1-z-0 and ring-main-0-w2 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-z-0 + ring-main-1-w2",
-              "message": "main-iwall-1-z-0 and ring-main-1-w2 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-1-x-2 + main-iwall-1-z-0",
-              "message": "main-iwall-1-x-2 and main-iwall-1-z-0 stand 0.021 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-0-x-0 + ring-main-0-w0",
-              "message": "main-iwall-0-x-0 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-0-x-0 + ring-main-0-w3",
-              "message": "main-iwall-0-x-0 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            },
-            {
-              "code": "INTERIOR_GAP",
-              "severity": "WARNING",
-              "auditSeverity": "ERROR",
-              "objectId": "main-iwall-0-x-2 + ring-main-0-w0",
-              "message": "main-iwall-0-x-2 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack"
-            }
-          ],
-          "note": "exterior ERROR findings are technical errors; 19 interior findings the audit marks ERROR are counted as warnings (inside the envelope, not seen from outside), with the audit’s severity kept on each"
+          "warnings": 0,
+          "findings": [],
+          "note": "exterior ERROR findings are technical errors; 0 interior findings the audit marks ERROR are counted as warnings (inside the envelope, not seen from outside), with the audit’s severity kept on each"
         },
         {
           "check": "REPLAY",
@@ -405,9 +335,7 @@
                 "ring-main-0-w0",
                 "ring-main-0-w1",
                 "ring-main-0-w2",
-                "ring-main-0-w3",
-                "main-iwall-0-x-2",
-                "main-iwall-0-x-0"
+                "ring-main-0-w3"
               ],
               "source": {
                 "frameId": "frame-asset-rzut-parteru-4353f1c5bb-1f9ef5604d",
@@ -416,18 +344,18 @@
                 "storeyIndex": 0
               },
               "measured": {
-                "walls": 6,
+                "walls": 4,
                 "exteriorSupport": 1,
                 "drawnGapsNotModelled": 0
               },
               "tolerance": {
-                "positionM": 0.158244
+                "positionM": 0.158202
               },
               "coverage": {
-                "stations": 271
+                "stations": 235
               },
               "code": "WALLS_ON_INK",
-              "why": "storey 0: 6 walls run on the drawn wall",
+              "why": "storey 0: 4 walls run on the drawn wall",
               "evidence": [
                 "the plan raster of this storey, read with the plan reader’s own ink definition",
                 "the walls were read from this sheet: R3 checks what the model built against what is drawn, not an independent survey"
@@ -439,10 +367,7 @@
                 "ring-main-1-w0",
                 "ring-main-1-w1",
                 "ring-main-1-w2",
-                "ring-main-1-w3",
-                "main-iwall-1-z-0",
-                "main-iwall-1-x-2",
-                "main-iwall-1-x-0"
+                "ring-main-1-w3"
               ],
               "source": {
                 "frameId": "frame-asset-rzut-pietra-bef2823d80-703253c830",
@@ -451,18 +376,18 @@
                 "storeyIndex": 1
               },
               "measured": {
-                "walls": 7,
+                "walls": 4,
                 "exteriorSupport": 1,
                 "drawnGapsNotModelled": 0
               },
               "tolerance": {
-                "positionM": 0.158244
+                "positionM": 0.158202
               },
               "coverage": {
-                "stations": 378
+                "stations": 289
               },
               "code": "WALLS_ON_INK",
-              "why": "storey 1: 7 walls run on the drawn wall",
+              "why": "storey 1: 4 walls run on the drawn wall",
               "evidence": [
                 "the plan raster of this storey, read with the plan reader’s own ink definition",
                 "the walls were read from this sheet: R3 checks what the model built against what is drawn, not an independent survey"
@@ -503,12 +428,12 @@
                 "maxDrawnOutsideM": 0,
                 "modelOutlineSupport": 1,
                 "modelExteriorWalls": 4,
-                "modelFootprintM2": 69.283267
+                "modelFootprintM2": 69.275066
               },
               "tolerance": {
-                "positionM": 0.316488,
-                "pieceDistanceM": 0.949464,
-                "pieceBandLengthM": 1.265952,
+                "positionM": 0.316404,
+                "pieceDistanceM": 0.949212,
+                "pieceBandLengthM": 1.265616,
                 "bandThicknessPx": 24,
                 "source": "one exterior wall thickness of the model; band thickness measured on the sheet by the plan reader"
               },
@@ -517,7 +442,7 @@
                 "sheet": "605×514 px"
               },
               "code": "OUTLINE_WITHIN_TOLERANCE",
-              "why": "storey 0: 100 % of the drawn wall ink lies within 0.316488 m of the modelled storey; nothing drawn stands clear of it",
+              "why": "storey 0: 100 % of the drawn wall ink lies within 0.316404 m of the modelled storey; nothing drawn stands clear of it",
               "evidence": [
                 "thick ink of the plan raster connected to the modelled storey",
                 "drawn walls the reading left out are what R4 sees; it does not see a wall the sheet does not draw thick"
@@ -543,9 +468,9 @@
                 "modelFootprintM2": 69.120926
               },
               "tolerance": {
-                "positionM": 0.316488,
-                "pieceDistanceM": 0.949464,
-                "pieceBandLengthM": 1.265952,
+                "positionM": 0.316404,
+                "pieceDistanceM": 0.949212,
+                "pieceBandLengthM": 1.265616,
                 "bandThicknessPx": 24,
                 "source": "one exterior wall thickness of the model; band thickness measured on the sheet by the plan reader"
               },
@@ -554,7 +479,7 @@
                 "sheet": "605×514 px"
               },
               "code": "OUTLINE_WITHIN_TOLERANCE",
-              "why": "storey 1: 100 % of the drawn wall ink lies within 0.316488 m of the modelled storey; nothing drawn stands clear of it",
+              "why": "storey 1: 100 % of the drawn wall ink lies within 0.316404 m of the modelled storey; nothing drawn stands clear of it",
               "evidence": [
                 "thick ink of the plan raster connected to the modelled storey",
                 "drawn walls the reading left out are what R4 sees; it does not see a wall the sheet does not draw thick"
@@ -1715,9 +1640,746 @@
     },
     "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; elevations: 0 full, 2 along only, 0 vertical only, 2 unregistered; elevation comparisons: 6 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case"
   },
+  "sources": {
+    "classifier": null,
+    "sheets": [
+      {
+        "assetId": "asset-elewacja-frontowa-ce68d57053",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/elewacja-frontowa.png",
+        "width": 605,
+        "height": 541,
+        "byteHash": "8c4d42c40efc38278c2196fbce81a4e102dee94256b065d06074e9c4d29aab2c",
+        "claimed": {
+          "document": "ELEVATION",
+          "storey": "NOT_APPLICABLE",
+          "view": "FRONT",
+          "annotation": "UNKNOWN",
+          "projection": "ORTHOGRAPHIC_ELEVATION",
+          "basis": "the synthetic publisher's sheet name elewacja-frontowa"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "facade",
+        "side": "FRONT",
+        "sideBasis": "LABELLED",
+        "why": "registered: 403 px across is the 9.60 m width of the envelope, so 0.023821 m/px; the apex at row 120 is the ridge datum 7.92 and the silhouette's bottom then lands at 0.75 m",
+        "readings": []
+      },
+      {
+        "assetId": "asset-elewacja-lewa-edc4129d06",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/elewacja-lewa.png",
+        "width": 514,
+        "height": 541,
+        "byteHash": "fa1c49590334462f5e30893a8ccd8014d282f3ca5801a998c2a61eb7fe24175f",
+        "claimed": {
+          "document": "ELEVATION",
+          "storey": "NOT_APPLICABLE",
+          "view": "SIDE_UNSPECIFIED",
+          "annotation": "UNKNOWN",
+          "projection": "ORTHOGRAPHIC_ELEVATION",
+          "basis": "the synthetic publisher's sheet name elewacja-lewa"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "facade",
+        "side": "LEFT",
+        "sideBasis": "FIRST_READING",
+        "why": "not registered: its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+        "readings": []
+      },
+      {
+        "assetId": "asset-elewacja-prawa-7bcce1b6da",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/elewacja-prawa.png",
+        "width": 514,
+        "height": 541,
+        "byteHash": "d0a5997704e590d995108e551bffe179020617c24ea8d56aa3c3ece07f5bed9d",
+        "claimed": {
+          "document": "ELEVATION",
+          "storey": "NOT_APPLICABLE",
+          "view": "SIDE_UNSPECIFIED",
+          "annotation": "UNKNOWN",
+          "projection": "ORTHOGRAPHIC_ELEVATION",
+          "basis": "the synthetic publisher's sheet name elewacja-prawa"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "facade",
+        "side": "RIGHT",
+        "sideBasis": "FIRST_READING",
+        "why": "not registered: its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+        "readings": []
+      },
+      {
+        "assetId": "asset-elewacja-tylna-99385ddca6",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/elewacja-tylna.png",
+        "width": 605,
+        "height": 541,
+        "byteHash": "796f59619211393a5119776aec37d4ab4d762cb78ab6f513185e7b1122162a08",
+        "claimed": {
+          "document": "ELEVATION",
+          "storey": "NOT_APPLICABLE",
+          "view": "REAR",
+          "annotation": "UNKNOWN",
+          "projection": "ORTHOGRAPHIC_ELEVATION",
+          "basis": "the synthetic publisher's sheet name elewacja-tylna"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "facade",
+        "side": "REAR",
+        "sideBasis": "LABELLED",
+        "why": "registered: 403 px across is the 9.60 m width of the envelope, so 0.023821 m/px; the apex at row 120 is the ridge datum 7.92 and the silhouette's bottom then lands at 0.75 m",
+        "readings": []
+      },
+      {
+        "assetId": "asset-przekroj-944b93a5fb",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/przekroj.png",
+        "width": 754,
+        "height": 541,
+        "byteHash": "8bfb40281022aa43bae3ed6b8072ba60abe29d64c459fd6dcc11e819ea27f8bb",
+        "claimed": {
+          "document": "SECTION",
+          "storey": "NOT_APPLICABLE",
+          "view": "NOT_APPLICABLE",
+          "annotation": "UNKNOWN",
+          "projection": "ORTHOGRAPHIC_SECTION",
+          "basis": "the synthetic publisher's sheet name przekroj"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "section",
+        "why": "read by the section reader",
+        "readings": [
+          {
+            "id": "metric-level-887edad3c6",
+            "measure": "LEVEL",
+            "rawText": "±0,00",
+            "value": 0,
+            "unit": "m",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 114,
+              "y0": 391,
+              "x1": 181,
+              "y1": 413
+            },
+            "line": {
+              "x0": 108,
+              "y0": 420,
+              "x1": 300,
+              "y1": 420
+            },
+            "reader": "NUMERIC_OCR",
+            "readerDetail": "a plus-or-minus sign marks the drawing zero",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-level-0",
+            "elementIds": [
+              "lvl-0"
+            ],
+            "why": "the storey levels and the ridge"
+          },
+          {
+            "id": "metric-level-9fba1112c8",
+            "measure": "LEVEL",
+            "rawText": "+7,92",
+            "value": 7.92,
+            "unit": "m",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 114,
+              "y0": 90,
+              "x1": 181,
+              "y1": 112
+            },
+            "line": {
+              "x0": 108,
+              "y0": 119,
+              "x1": 423,
+              "y1": 119
+            },
+            "reader": "NUMERIC_OCR",
+            "readerDetail": "a signed decimal is a level against the drawing zero, in metres",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-level-0",
+            "elementIds": [
+              "lvl-0"
+            ],
+            "why": "the storey levels and the ridge"
+          },
+          {
+            "id": "metric-level-be8e97743e",
+            "measure": "LEVEL",
+            "rawText": "+2,80",
+            "value": 2.8,
+            "unit": "m",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 114,
+              "y0": 285,
+              "x1": 181,
+              "y1": 306
+            },
+            "line": {
+              "x0": 108,
+              "y0": 315,
+              "x1": 574,
+              "y1": 315
+            },
+            "reader": "NUMERIC_OCR",
+            "readerDetail": "a signed decimal is a level against the drawing zero, in metres",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-level-0",
+            "elementIds": [
+              "lvl-0"
+            ],
+            "why": "the storey levels and the ridge"
+          },
+          {
+            "id": "metric-level-e4bcdffb55",
+            "measure": "LEVEL",
+            "rawText": "+5,40",
+            "value": 5.4,
+            "unit": "m",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 114,
+              "y0": 186,
+              "x1": 181,
+              "y1": 207
+            },
+            "line": {
+              "x0": 108,
+              "y0": 215,
+              "x1": 575,
+              "y1": 215
+            },
+            "reader": "NUMERIC_OCR",
+            "readerDetail": "a signed decimal is a level against the drawing zero, in metres",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-level-0",
+            "elementIds": [
+              "lvl-0"
+            ],
+            "why": "the storey levels and the ridge"
+          }
+        ]
+      },
+      {
+        "assetId": "asset-rzut-parteru-4353f1c5bb",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/rzut-parteru.png",
+        "width": 605,
+        "height": 514,
+        "byteHash": "ca0e9bb7987f6e1ad8c050c6d0f293c4cd356e9565574f1c16aa0569e88c939b",
+        "claimed": {
+          "document": "FLOOR_PLAN",
+          "storey": "GROUND",
+          "view": "NOT_APPLICABLE",
+          "annotation": "DIMENSIONED",
+          "projection": "ORTHOGRAPHIC_PLAN",
+          "basis": "the synthetic publisher's sheet name rzut-parteru"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "plan",
+        "why": "registered as a plan of the model",
+        "readings": [
+          {
+            "id": "metric-dimension-0501a73f5b",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "240",
+            "value": 240,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 152,
+              "y0": 64,
+              "x1": 181,
+              "y1": 79
+            },
+            "line": {
+              "x0": 120.5,
+              "y0": 86,
+              "x1": 211,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 90.5 px apart on the horizontal chain at 86, missing the chain's own scale by 0.54338 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-24a1d56028",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "240",
+            "value": 240,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 425,
+              "y0": 64,
+              "x1": 455,
+              "y1": 79
+            },
+            "line": {
+              "x0": 394,
+              "y0": 86,
+              "x1": 484.5,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 90.5 px apart on the horizontal chain at 86, missing the chain's own scale by 0.54338 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-2ef54adf7b",
+            "measure": "OVERALL",
+            "rawText": "720",
+            "value": 720,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 24,
+              "y0": 245,
+              "x1": 39,
+              "y1": 272
+            },
+            "line": {
+              "x0": 46,
+              "y0": 120.5,
+              "x1": 46,
+              "y1": 393.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 273 px apart on the vertical chain at 46, missing the chain's own scale by 0.000273 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-916f8e1bcd",
+            "measure": "OVERALL",
+            "rawText": "960",
+            "value": 960,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 290,
+              "y0": 24,
+              "x1": 318,
+              "y1": 39
+            },
+            "line": {
+              "x0": 120.5,
+              "y0": 46,
+              "x1": 484.5,
+              "y1": 46
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 364 px apart on the horizontal chain at 46, missing the chain's own scale by 0.17352 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-ad1acd119d",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "480",
+            "value": 480,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 290,
+              "y0": 64,
+              "x1": 318,
+              "y1": 79
+            },
+            "line": {
+              "x0": 211,
+              "y0": 86,
+              "x1": 394,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 183 px apart on the horizontal chain at 86, missing the chain's own scale by 0.91324 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-c5c5ca1d35",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "180",
+            "value": 180,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 347,
+              "x1": 79,
+              "y1": 373
+            },
+            "line": {
+              "x0": 86,
+              "y0": 325,
+              "x1": 86,
+              "y1": 393.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 68.5 px apart on the vertical chain at 86, missing the chain's own scale by 0.249932 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-e75221b5d2",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "180",
+            "value": 180,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 142,
+              "x1": 79,
+              "y1": 168
+            },
+            "line": {
+              "x0": 86,
+              "y0": 120.5,
+              "x1": 86,
+              "y1": 188.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 68 px apart on the vertical chain at 86, missing the chain's own scale by 0.250068 px",
+            "use": "USED_IN_MODEL",
+            "featureId": "feat-main",
+            "elementIds": [
+              "ring-main-0",
+              "ring-main-1",
+              "slab-main-0",
+              "slab-main-1"
+            ],
+            "why": "the body’s span"
+          },
+          {
+            "id": "metric-dimension-ee51ba22a4",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "360",
+            "value": 360,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 245,
+              "x1": 79,
+              "y1": 272
+            },
+            "line": {
+              "x0": 86,
+              "y0": 188.5,
+              "x1": 86,
+              "y1": 325
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 136.5 px apart on the vertical chain at 86, missing the chain's own scale by 0.000137 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          }
+        ]
+      },
+      {
+        "assetId": "asset-rzut-pietra-bef2823d80",
+        "url": "https://drawings.synthetic-publisher.test/sheets/larchfield-lf01/rzut-pietra.png",
+        "width": 605,
+        "height": 514,
+        "byteHash": "b7129f5c0a2a9e9f24b6654729fff223dba9d88cf5d97013d2e1c90c5b9f2dd1",
+        "claimed": {
+          "document": "FLOOR_PLAN",
+          "storey": "UPPER",
+          "view": "NOT_APPLICABLE",
+          "annotation": "DIMENSIONED",
+          "projection": "ORTHOGRAPHIC_PLAN",
+          "basis": "the synthetic publisher's sheet name rzut-pietra"
+        },
+        "content": null,
+        "outcome": "READ",
+        "reader": "plan",
+        "why": "registered as a plan of the model",
+        "readings": [
+          {
+            "id": "metric-dimension-04c307a3e0",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "240",
+            "value": 240,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 425,
+              "y0": 64,
+              "x1": 455,
+              "y1": 79
+            },
+            "line": {
+              "x0": 394,
+              "y0": 86,
+              "x1": 484.5,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 90.5 px apart on the horizontal chain at 86, missing the chain's own scale by 0.54338 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-0cc4326a73",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "180",
+            "value": 180,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 347,
+              "x1": 79,
+              "y1": 373
+            },
+            "line": {
+              "x0": 86,
+              "y0": 325,
+              "x1": 86,
+              "y1": 393.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 68.5 px apart on the vertical chain at 86, missing the chain's own scale by 0.249932 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-0dc091d765",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "240",
+            "value": 240,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 152,
+              "y0": 64,
+              "x1": 181,
+              "y1": 79
+            },
+            "line": {
+              "x0": 120.5,
+              "y0": 86,
+              "x1": 211,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 90.5 px apart on the horizontal chain at 86, missing the chain's own scale by 0.54338 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-29196ad69c",
+            "measure": "OVERALL",
+            "rawText": "960",
+            "value": 960,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 290,
+              "y0": 24,
+              "x1": 318,
+              "y1": 39
+            },
+            "line": {
+              "x0": 120.5,
+              "y0": 46,
+              "x1": 484.5,
+              "y1": 46
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 364 px apart on the horizontal chain at 46, missing the chain's own scale by 0.17352 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-29392886dd",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "360",
+            "value": 360,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 245,
+              "x1": 79,
+              "y1": 272
+            },
+            "line": {
+              "x0": 86,
+              "y0": 188.5,
+              "x1": 86,
+              "y1": 325
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 136.5 px apart on the vertical chain at 86, missing the chain's own scale by 0.000137 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-4bbaeb37d0",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "180",
+            "value": 180,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 64,
+              "y0": 142,
+              "x1": 79,
+              "y1": 168
+            },
+            "line": {
+              "x0": 86,
+              "y0": 120.5,
+              "x1": 86,
+              "y1": 188.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 68 px apart on the vertical chain at 86, missing the chain's own scale by 0.250068 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-759c983573",
+            "measure": "CHAIN_SEGMENT",
+            "rawText": "480",
+            "value": 480,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 290,
+              "y0": 64,
+              "x1": 318,
+              "y1": 79
+            },
+            "line": {
+              "x0": 211,
+              "y0": 86,
+              "x1": 394,
+              "y1": 86
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 183 px apart on the horizontal chain at 86, missing the chain's own scale by 0.91324 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          },
+          {
+            "id": "metric-dimension-a4beeec49d",
+            "measure": "OVERALL",
+            "rawText": "720",
+            "value": 720,
+            "unit": "cm",
+            "printed": true,
+            "origin": "READ",
+            "box": {
+              "x0": 24,
+              "y0": 245,
+              "x1": 39,
+              "y1": 272
+            },
+            "line": {
+              "x0": 46,
+              "y0": 120.5,
+              "x1": 46,
+              "y1": 393.5
+            },
+            "reader": "CHAIN_SOLVER",
+            "readerDetail": "printed between the tick marks 273 px apart on the vertical chain at 46, missing the chain's own scale by 0.000273 px",
+            "use": "USED_AS_CORROBORATION",
+            "elementIds": [],
+            "why": "a printed figure on a registered drawing that corroborates the frame it was read through"
+          }
+        ]
+      }
+    ],
+    "counts": {
+      "sheets": 7,
+      "read": 7,
+      "refusedByContent": 0,
+      "readings": 20,
+      "printedUsed": 20,
+      "derived": 0,
+      "openings": {
+        "plan": 7,
+        "elevationReadings": 0,
+        "model": 7
+      }
+    }
+  },
   "analyzer": {
-    "service": "1.5.0",
-    "solver": "2.17.0"
+    "service": "1.11.0",
+    "solver": "2.39.0"
   },
   "startedAt": "2026-01-01T00:00:00.000Z",
   "completedAt": "2026-01-01T00:00:00.000Z",

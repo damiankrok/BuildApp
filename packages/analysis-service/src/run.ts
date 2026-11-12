@@ -53,11 +53,12 @@ import { anySignal } from './signals.js'
 import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result.js'
+import { measurementOfReconstruction } from './measurement.js'
 import { warningsOf } from './warnings.js'
 import { previewOf, sourceBasisOf } from './preview.js'
 import type { ReadingMeasure } from '@buildapp/source-cv'
 
-export const ANALYSIS_SERVICE_VERSION = '1.10.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.11.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }
@@ -657,6 +658,13 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
     // completeness unchanged, and the model held against the drawings — with what no relation compared.
     checkpoint.tick({ subphase: { id: 'ASSESSMENT', label: 'holding the model against the drawings' } })
     const assessment = assessModel({ model, scene, closure, reconstruction, frames: graph.coordinateFrames, raster, observations: graph.observations, datums: printedDatumsOf(metrics, graph.coordinateFrames) })
+    // v3.53.8: what the model may be measured for, apart from the run's outcome; a scale the printed dimensions do not
+    // measure is said as a limiting warning too, where every consumer already reads the result's limits
+    const measurement = measurementOfReconstruction(reconstruction, pkg.publishedFacts, assessment.decompositionCompleteness.verdict)
+    if (measurement.scale.status === 'DEPARTS') {
+      const reason = measurement.reasons.find((x) => x.code === 'SCALE_DEPARTS')
+      warningDetails.push({ code: 'SCALE_DEPARTS_FROM_MEASURED', severity: 'LIMITING', message: `the model's scale is not the one the plan's printed dimensions measure: ${reason?.consequence ?? ''}; its lengths and areas are not for quantities` })
+    }
     trace.record('VERIFYING', 'ASSESSMENT', 'PASSED', { technicalErrors: assessment.technicalValidity.errors, conflicts: assessment.sourceFidelity.conflicts.length, unchecked: assessment.sourceUnchecked.counts.total })
     const sourceBasis = sourceBasisOf(pkg, reconstruction.planDiagnostics)
     const preview = previewOf({ model, ...(reconstruction.partialPreview ? { partial: reconstruction.partialPreview } : {}), heights: reconstruction.heights, source: sourceBasis, ...(reconstruction.roofDatum ? { approximateRoofDatum: reconstruction.roofDatum } : {}), completeness: reconstruction.modelCompleteness })
@@ -707,6 +715,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       warnings: warningDetails.map((w) => w.message),
       warningDetails,
       preview,
+      measurement,
       sourceBasis,
       vision: { mode: visionMode, provider: visionProvider, attempted: visionAttempted, accepted: visionAccepted },
       ...(recogniser ? { recogniser } : {}),

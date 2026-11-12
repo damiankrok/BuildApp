@@ -253,6 +253,8 @@ data class AnalysisSummary(
     val verification: VerificationInfo = VerificationInfo(),
     /** N9-01: technical validity, reading completeness and fidelity to the drawings, kept apart; absent from an older analyzer. */
     val assessment: ModelAssessment? = null,
+    /** v3.53.8: coverage, scale and what follows for quantities, apart from the run's outcome; absent from an analyzer older than service 1.11.0. */
+    val measurement: MeasurementAssessment? = null,
     /** SOURCE-01: every published picture and each number read off it; absent from an analyzer older than service 1.6.0. */
     val sources: SourceInspection? = null,
     val analyzer: AnalyzerVersions = AnalyzerVersions(),

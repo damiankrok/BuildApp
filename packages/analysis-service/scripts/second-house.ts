@@ -52,7 +52,7 @@ import { PLAN_OVERLAY_LAYERS, isReconstructionFailure, levelsFrom, reconstructV2
 import type { PlanDiagnosticsReport, SolverTraceEvent } from '@buildapp/reconstruction'
 import { frameRasters } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
-import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, identityOf, runAnalysis, sourceSummaryOf, summaryOf, toAnalysisError } from '../src/index.js'
+import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, identityOf, measurementOfReconstruction, runAnalysis, sourceSummaryOf, summaryOf, toAnalysisError } from '../src/index.js'
 import type { AnalysisTelemetry, AnalysisTrace, PhaseStats } from '../src/index.js'
 import { renderSceneSheet } from '../../mobile-scene/scripts/scene-sheet.js'
 import { PNG } from 'pngjs'
@@ -152,7 +152,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(process.env.BUILDAPP_FEATURE_TRACE ? { featureTrace: (r: Record<string, unknown>) => features.push(r) } : {}), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(process.env.BUILDAPP_SOLVER_DEBUG ? { debug: (s: string) => { if (s.includes(process.env.BUILDAPP_SOLVER_DEBUG as string)) process.stderr.write(`debug: ${s}\n`) } } : {}) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
-      write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id) })
+      write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id), measurement: measurementOfReconstruction(r, publishedAreas, r.modelCompleteness.verdict) })
       writeFileSync(join(out, 'model.json'), serializeModel(r.model))
       write('program.json', r.candidate.program)
       if (features.length > 0) write('feature-trace.json', features)

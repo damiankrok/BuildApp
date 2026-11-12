@@ -92,9 +92,9 @@ import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
 import { bodyCompleteness, modelCompleteness } from './body-completeness.js'
 import type { SeamSplit } from '../layout.js'
-import type { GateBay } from '../plan-decomposition.js'
+import type { GateBay, PlanCell, PlanDecomposition } from '../plan-decomposition.js'
 import type { BodyArea, BodyCompleteness, ModelCompleteness } from './body-completeness.js'
-import type { Checkpoint } from '@buildapp/source-common'
+import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
 import type { BandWallV2, CanopyV2, PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
@@ -285,6 +285,13 @@ import type { ApproximateRidge } from './roof-datum.js'
 // line over four fifths of its length, a leaf beside it that closes the doorway, the doorway clear): between two
 // corners, against the wall across a partition's line, between two jamb nibs; a wall the floor's edge cuts short is
 // read by its drawn length.
+// 2.39.0 (v3.53.8): a door between the end of a wall stopping on a cell's edge and a pier too short for a band shuts
+// that edge for the fill, when a wall the band reader found is one jamb and a callout of the door's width stands at it
+// (`doorwayBetweenJambs`), so a vestibule behind its front door is no longer ground. Among BUILT tilings nearly as large
+// as the largest, the one whose seams carry more drawn wall is taken (`TILE_NEAR_TIE`). A line between two bodies cut
+// through one enclosed space — built on both sides, no wall drawn on most of it — is no wall (`seamOpenShare`, as under
+// one roof). On the top storey a partition running into an attached body under a roof of its own is cut at that body's
+// face: under a flat slab it rises to the soffit, under the body's pitched roof it dies into those planes.
 /** v3.53.4: a roof crossing the main one is as wide as the main roof's span; the bodies it stands on span that, within this (m). */
 export const CROSS_ROOF_SPAN_SLACK_M = 0.35
 /**
@@ -292,7 +299,7 @@ export const CROSS_ROOF_SPAN_SLACK_M = 0.35
  * standing there rather than a doorway: two leaves of the widest door a plan draws (`DOOR_MAX_WIDTH_M`).
  */
 export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
-export const SOLVER_V2_VERSION = '2.38.0' as const
+export const SOLVER_V2_VERSION = '2.39.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1732,7 +1739,21 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const regionIds = layout.masses.find((x) => x.id === m.sourceMassId)?.footprintRegionIds ?? []
     return draft.roofExtent.bodies.some((w) => regionIds.some((id) => id.endsWith(`-${w.regionId}`)))
   }
-  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T, contactSlackM, underOneRoof: (a, b) => underEaves(a) && underEaves(b) })
+  // v3.53.8: two bodies cut from one enclosed space of the base plan — built cells on both sides of the line between
+  // them, and the plan's fill crossing most of it with no wall (`cutThroughOneSpace`): the line tiles an L, it is not
+  // drawn. A wall stands on it only where the plan draws one (`party-wall.ts`, as under one roof).
+  const cutThroughOneSpace = (a: MassV2, b: MassV2, storey: number): string | undefined => {
+    const base = draft.base
+    if (!base || planByStorey.get(storey)?.frame.frameId !== base.frame.id) return undefined
+    const rectsOf = (m: MassV2): PixelRect[] => {
+      const ids = layout.masses.find((x) => x.id === m.sourceMassId)?.footprintRegionIds ?? []
+      return layout.footprintRegions.filter((r) => ids.includes(r.id) && r.kind === 'BUILT' && r.pixelRect).map((r) => r.pixelRect as PixelRect)
+    }
+    const share = seamOpenShare(base.decomposition, rectsOf(a), rectsOf(b))
+    if (!share || share.builtShare < SEAM_MIN_BUILT || share.openShare < SEAM_MIN_OPEN) return undefined
+    return `the line between them was cut through one enclosed space of the plan — built on both sides over ${Math.round(share.builtShare * 100)} % of it, and no wall drawn on ${Math.round(share.openShare * 100)} % of that — to tile the storey into rectangles, and a wall stands on it only where the plan draws one`
+  }
+  const partyRecords = readPartyWalls({ masses, plans: new Map([...planByStorey].map(([index, entry]) => [index, { raster: entry.raster, frame: entry.frame }])), wallOf: (m) => m.wallThicknessM ?? T, contactSlackM, underOneRoof: (a, b) => underEaves(a) && underEaves(b), cutThroughOneSpace })
   const partyWalls: PartyWallV2[] = partyRecords.flatMap((r) => (r.wall ? [r.wall] : []))
   for (const r of partyRecords) {
     step({ stage: 'massing', what: `N8-02B: the contact of ${r.massIds.join(' and ')} on storey ${r.storeyIndex}`, method: r.decision === 'UNDECIDED' ? 'REFUSED' : 'DISCRETE_SELECTION', detail: `${r.decision}: ${r.why}`, inputs: r.reading.samples, outputs: r.decision === 'ONE_WALL' ? 1 : r.decision === 'TWO_WALLS' ? 2 : 0 })
@@ -3637,4 +3658,51 @@ const CLEAR_HEIGHT_REJECTION_WHY: Partial<Record<ClearHeightRejection, { disposi
   BAND_NOT_PHYSICAL: { disposition: 'REJECTED_WITH_REASON', reason: 'it stands on the ground floor, but the band it leaves to the printed floor above is no slab and floor: another ceiling, not this storey\'s' },
   NO_PRINTED_FLOOR_ABOVE: { disposition: 'IGNORED_WITH_REASON', reason: 'a clear height with no printed floor above it: no slab band follows (a single storey, or the top storey under the roof)' },
   CONFLICTS_WITH_ANOTHER_READING: { disposition: 'CONFLICTED', reason: "another reading of the ground storey's clear height disagrees with it; neither is applied" },
+}
+
+/** v3.53.8: the shares of a seam between two bodies' pixel rectangles that have built cells on both sides, and of those, that the fill crossed. */
+export const SEAM_MIN_BUILT = 0.5
+export const SEAM_MIN_OPEN = 0.5
+/** v3.53.8: an edge with less than this share of wall (ink or a door between wall pieces) carries no wall. */
+export const SEAM_WALL_SHARE = 0.5
+/**
+ * v3.53.8: a row of cells along the seam no deeper than this (m), walled on its far edge, is a lining of the space across
+ * the seam — a garage's built-in cupboards, a niche — and the wall that parts the two spaces is the one behind it.
+ */
+export const SEAM_STRIP_MAX_M = 1.2
+export function seamOpenShare(decomposition: PlanDecomposition, ra: readonly PixelRect[], rb: readonly PixelRect[]): { builtShare: number; openShare: number } | null {
+  const cells = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const centre = (r: PixelRect): [number, number] => [(r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2]
+  const inAny = (rs: readonly PixelRect[], c: PlanCell): boolean => {
+    const [x, y] = centre(c.rect)
+    return rs.some((r) => x >= r.x0 && x <= r.x1 && y >= r.y0 && y <= r.y1)
+  }
+  let span = 0
+  let built = 0
+  let open = 0
+  const mpp = decomposition.wallThickness.px > 0 ? decomposition.wallThickness.m / decomposition.wallThickness.px : 0
+  const stripPx = mpp > 0 ? SEAM_STRIP_MAX_M / mpp : 0
+  const walled = (e: PlanCell['edges'][number]): boolean => e.wall + e.opening >= SEAM_WALL_SHARE
+  /** A cell no deeper than a lining away from the seam, its far edge (`far`) walled. */
+  const liningStrip = (cell: PlanCell, far: number): boolean => {
+    const depth = far === 0 || far === 2 ? cell.rect.y1 - cell.rect.y0 : cell.rect.x1 - cell.rect.x0
+    return depth <= stripPx && walled(cell.edges[far])
+  }
+  for (const c of decomposition.cells) {
+    if (!inAny(ra, c)) continue
+    const sides: Array<[number, number, number]> = [[c.ix, c.iy - 1, 0], [c.ix + 1, c.iy, 1], [c.ix, c.iy + 1, 2], [c.ix - 1, c.iy, 3]]
+    for (const [jx, jy, side] of sides) {
+      const n = cells.get(`${jx}:${jy}`)
+      if (!n || !inAny(rb, n)) continue
+      const length = side === 0 || side === 2 ? c.rect.x1 - c.rect.x0 : c.rect.y1 - c.rect.y0
+      span += length
+      if (c.classification !== 'BUILT' || n.classification !== 'BUILT') continue
+      built += length
+      // no wall stands on it: neither wall ink nor a door between pieces of wall (line work alone is no wall) — and none
+      // stands a lining's depth behind it on either side, closing a strip off as part of the space across
+      if (!walled(c.edges[side]) && !liningStrip(c, (side + 2) % 4) && !liningStrip(n, side)) open += length
+    }
+  }
+  if (span <= 0) return null
+  return { builtShare: round6(built / span), openShare: built > 0 ? round6(open / built) : 0 }
 }

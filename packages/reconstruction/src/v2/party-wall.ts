@@ -158,6 +158,7 @@ export const PARTY_OPEN_MAX_SOLID = 0.02
 export const PARTY_ALONG_MIN_M = 0.5
 /** N8-03A: the fewest positions sampled along a contact read as open. */
 export const PARTY_OPEN_MIN_SAMPLES = 40
+const UNDER_ONE_ROOF = 'the two bodies stand under one roof, by the eaves line the plan draws around both: the line between them was cut for that roof, and a wall stands on it only where the plan draws one'
 /** N8-03A: half the side of the square window about each end of the shared stretch where the walls across are looked for. */
 export const PARTY_CORNER_WINDOW_M = 0.6
 /** N8-03A: the share of that window holding wall ink for the corner to count as drawn. */
@@ -302,6 +303,13 @@ export type PartyWallInput = {
    * was cut for the roof. Too little wall drawn on it is then no wall, not two.
    */
   underOneRoof?: (a: MassV2, b: MassV2) => boolean
+  /**
+   * v3.53.8: the line between the two bodies on this storey was cut through one enclosed space — the plan's own fill
+   * found built cells on both sides of it and no wall on most of it (`cutThroughOneSpace` in reconstruct-v2): the
+   * rectangles were made to tile an L, not drawn. Too little wall drawn on it is then no wall, not two, as under one
+   * roof. The reason, or undefined.
+   */
+  cutThroughOneSpace?: (a: MassV2, b: MassV2, storey: number) => string | undefined
 }
 
 /**
@@ -381,7 +389,8 @@ export function readPartyWalls(input: PartyWallInput): PartyWallRecord[] {
           const record: PartyWallRecord = { storeyIndex: storey, frameId: plan.frame.frameId, massIds: [a.id, b.id], facade: side, contactAt: round6(contact), span, wallsM: [round6(ta), round6(tb)], reading: kept, decision: 'UNDECIDED', why: '' }
           const slack = input.contactSlackM?.(side === 'EAST' || side === 'WEST' ? 'X' : 'Z', contact) ?? 0
           if (slack > 0) record.contactSlackM = round6(slack)
-          decide(record, a, b, ra, rb, out, input.underOneRoof?.(a, b) === true)
+          const technical = input.underOneRoof?.(a, b) === true ? UNDER_ONE_ROOF : input.cutThroughOneSpace?.(a, b, storey)
+          decide(record, a, b, ra, rb, out, technical)
           out.push(record)
         }
       }
@@ -390,7 +399,7 @@ export function readPartyWalls(input: PartyWallInput): PartyWallRecord[] {
   return out
 }
 
-function decide(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rect, earlier: readonly PartyWallRecord[], oneRoof: boolean): void {
+function decide(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rect, earlier: readonly PartyWallRecord[], technical: string | undefined): void {
   const r = record.reading
   const [ta, tb] = record.wallsM
   const where = `${a.id}|${b.id} on storey ${record.storeyIndex}, ${(r.windowM[0]).toFixed(2)}..${(r.windowM[1]).toFixed(2)} across over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
@@ -400,8 +409,8 @@ function decide(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rec
     return
   }
   if (r.samples === 0 || r.solid < PARTY_MIN_SOLID * r.samples) {
-    if (oneRoof && r.samples >= PARTY_OPEN_MIN_SAMPLES) {
-      open(record, a, b, ra, rb, where, counts, earlier, 'the two bodies stand under one roof, by the eaves line the plan draws around both: the line between them was cut for that roof, and a wall stands on it only where the plan draws one')
+    if (technical && r.samples >= PARTY_OPEN_MIN_SAMPLES) {
+      open(record, a, b, ra, rb, where, counts, earlier, technical)
       return
     }
     record.why = `${where}: the plan draws wall at ${counts}${r.cornersInk ? `, and the walls across are drawn at ${r.cornersInk.map((x) => `${(x * 100).toFixed(0)} %`).join(' and ')} of the corners' windows (${(PARTY_CORNER_MIN_INK * 100).toFixed(0)} % needed at both)` : ''}; too little to say what stands between the bodies, so each keeps its wall`
@@ -517,7 +526,7 @@ function open(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rect,
   record.why = oneRoof
     ? `${where}: ${counts}: too little wall is drawn along the contact to be a wall between the bodies, and ${oneRoof}; neither builds a wall over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
     : `${where}: ${counts}: the plan draws no wall between the bodies, and the walls across are drawn at both ends (${corners} of the corners' windows${(record.reading.flushFacade ?? []).some((x) => x !== undefined) ? `; where the two bodies' faces are flush the one facade is drawn through the end, as wall or window, at ${(record.reading.flushFacade ?? []).map((x) => (x === undefined ? '—' : `${(x * 100).toFixed(0)} %`)).join(' and ')} of its positions` : ''}): one space runs from ${host.id} into ${other.id}; neither builds a wall over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
-  record.wall = { id: `open-${host.id}-${record.storeyIndex}-${other.id}`, storeyIndex: record.storeyIndex, hostMassId: host.id, otherMassId: other.id, hostFacade, contactAt: c, band: [c, c], thicknessM: 0, span: record.span, ends: [e0.kind, e1.kind], provenance: 'SOURCE_DERIVED', why: oneRoof ? `the plan draws too little wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} to be one (${counts}), and they stand under one roof by its eaves line: the line between them is the roof's, not a wall's` : `the plan draws no wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} (${counts}); the walls across are drawn at both ends`, open: true }
+  record.wall = { id: `open-${host.id}-${record.storeyIndex}-${other.id}`, storeyIndex: record.storeyIndex, hostMassId: host.id, otherMassId: other.id, hostFacade, contactAt: c, band: [c, c], thicknessM: 0, span: record.span, ends: [e0.kind, e1.kind], provenance: 'SOURCE_DERIVED', why: oneRoof === UNDER_ONE_ROOF ? `the plan draws too little wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} to be one (${counts}), and they stand under one roof by its eaves line: the line between them is the roof's, not a wall's` : oneRoof ? `the plan draws too little wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} to be one (${counts}): ${oneRoof}` : `the plan draws no wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} (${counts}); the walls across are drawn at both ends`, open: true }
 }
 
 const SIDE_INDEX: Record<PartySide, number> = { FRONT: 0, EAST: 1, REAR: 2, WEST: 3 }

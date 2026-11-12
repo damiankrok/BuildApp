@@ -277,3 +277,38 @@ describe('v3.53.5: a line cut for a roof is not a wall', () => {
   })
 })
 
+
+describe('v3.53.8: a line cut through one enclosed space is not a wall', () => {
+  const stub = lShape([{ x0: 7.6, z0: 4, x1: 8, z1: 5.2 }])
+  const reason = 'the plan’s fill found built cells on both sides of the line and a wall on 12 % of it'
+  const readCut = (cut: string | undefined, raster: Raster, more: { underOneRoof?: () => boolean } = {}) =>
+    readPartyWalls({ masses: [house, garage], plans: new Map([[0, { raster, frame }]]), wallOf: () => T, cutThroughOneSpace: () => cut, ...more })[0]
+
+  it('too little wall drawn on a line the rectangles were cut on to tile one enclosed space: OPEN, with the seam’s own reason', () => {
+    const r = readCut(reason, stub)
+    expect(r.decision).toBe('OPEN')
+    expect(r.wall?.open).toBe(true)
+    expect(r.wall?.thicknessM).toBe(0)
+    expect(r.why).toContain(reason)
+    expect(r.wall?.why).toContain(reason)
+    expect(r.why).not.toMatch(/under one roof/)
+  })
+
+  it('under one roof the eaves reason is kept word for word, whatever the seam says', () => {
+    const r = readCut(reason, stub, { underOneRoof: () => true })
+    expect(r.decision).toBe('OPEN')
+    expect(r.why).toMatch(/under one roof/)
+    expect(r.wall?.why).toMatch(/the line between them is the roof's, not a wall's/)
+  })
+
+  it('counter-case: no seam reason — the bodies keep their walls where too little is drawn, as before', () => {
+    expect(readCut(undefined, stub).decision).toBe('UNDECIDED')
+  })
+
+  it('counter-case: a wall the plan does draw on the seam is read and built, seam or not', () => {
+    const drawn = lShape([{ x0: 7.8, z0: 1.4, x1: 8, z1: 8.6 }])
+    const r = readCut(reason, drawn)
+    expect(r.decision).toBe('ONE_WALL')
+    expect(r.wall?.open).toBeUndefined()
+  })
+})

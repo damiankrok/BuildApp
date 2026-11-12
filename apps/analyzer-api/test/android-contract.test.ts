@@ -44,4 +44,14 @@ describe('the Android contract fixtures', () => {
     expect(result.assessment.decompositionCompleteness.verdict).toBe(result.preview.completeness?.verdict ?? 'NOT_ASSESSED')
     expect(result.links.scene).toBeTruthy()
   })
+
+  it('v3.53.8: the result says apart from the run whether the model may be measured, each limit with its consequence', async () => {
+    const result = JSON.parse((await fresh)['result.json']) as Record<string, any>
+    expect(Object.keys(result.measurement).sort()).toEqual(['completeness', 'coverage', 'quantities', 'reasons', 'run', 'scale', 'schemaVersion'])
+    expect(result.measurement.run).toBe('COMPLETED')
+    // the synthetic page prints no footprint: coverage is not assessed and the quantities are limited by that, with its reason
+    expect(result.measurement.coverage.status).toBe('NOT_ASSESSED')
+    expect(result.measurement.quantities).toBe('LIMITED')
+    for (const r of result.measurement.reasons) expect(r.consequence.length).toBeGreaterThan(20)
+  })
 })

@@ -15,6 +15,7 @@ import type { MobileSceneBundle } from '@buildapp/mobile-scene'
 import type { ReconstructionCandidate } from '@buildapp/reconstruction'
 import type { AnalysisWarning } from './warnings.js'
 import type { PreviewSummary, SourceBasis } from './preview.js'
+import type { MeasurementAssessment } from './measurement.js'
 import type { ModelAssessment } from './assessment/types.js'
 
 /** Whether a vision provider contributed, stated rather than implied. */
@@ -122,6 +123,12 @@ export type LinkAnalysisSummary = {
    * item no relation compared. A conflict never withdraws the model.
    */
   assessment: ModelAssessment
+  /**
+   * v3.53.8: what the model may be measured for, apart from the run's outcome (`measurement.ts`): its coverage of the
+   * published footprint, whether it is built at the scale the printed dimensions measure, and what follows for areas
+   * and lengths taken off it. Absent from a result that predates it.
+   */
+  measurement?: MeasurementAssessment
   /**
    * SOURCE-01: every published picture — the publisher's claim, what its pixels show, what was done with it and why,
    * and each number read off it with its crop, its line, printed or derived, and its use in the model. Read-only.

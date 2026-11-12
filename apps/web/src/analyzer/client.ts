@@ -68,6 +68,15 @@ export type AnalysisSummary = {
   verification: { replay: string; residuals: number; residualsOutsideTolerance: number }
   /** N9-01: technical validity, reading completeness and fidelity to the drawings, apart; absent from an older service. */
   assessment?: AssessmentView
+  /** v3.53.8: coverage, scale and what follows for quantities, apart from the run's outcome (service 1.11.0). */
+  measurement?: {
+    run: 'COMPLETED'
+    coverage: { status: string; builtM2: number; publishedM2: number | null; share: number | null }
+    scale: { status: string; builtCmPerPx: number | null; measuredCmPerPx: number | null; ratio: number | null; confidence: string | null }
+    completeness: string
+    quantities: string
+    reasons: Array<{ code: string; consequence: string }>
+  }
   /** SOURCE-01: every published picture, what was done with it, and each number read off it; absent before service 1.6.0. */
   sources?: SourceInspectionView
   completedAt: string

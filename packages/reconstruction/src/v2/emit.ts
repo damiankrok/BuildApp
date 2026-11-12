@@ -604,35 +604,105 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     topology.decisions.push(...plan.decisions.map((d) => ({ storeyIndex: storey.storeyIndex, ...d })))
     for (const d of plan.dropped) dropped.push({ featureId: d.pieceId, why: d.why })
     for (const run of plan.runs) onDebug?.(`storey ${storey.storeyIndex} run ${run.id} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM} doors ${run.doors.map((d) => `${d.from}..${d.to}`).join(',')}`)
+    // v3.53.8: on the top storey a partition takes the height of the body it stands in. A run that enters an attached
+    // body under a roof of its own is cut at that body's face: the part under a flat slab rises to the slab's soffit and
+    // follows no roof, the part under the body's own pitched roof dies into that roof's planes; neither is capped by the
+    // main roof, so no stretch of partition stands above a roof it is not under (WALL_NOT_UNDER_ROOF). Elsewhere the run
+    // is emitted as before.
+    const ownRoofBodies = isTop
+      ? b.masses.filter((m) => m.storeys.includes(storey.storeyIndex) && storey.storeyIndex === Math.max(...m.storeys) && (b.attachedRoofs.some((r) => r.massId === m.id) || b.pitchedAttachedRoofs.some((r) => r.massId === m.id)) && !(b.planeRoofs ?? []).some((r) => r.massId === m.id || r.coversMassIds?.includes(m.id)))
+      : []
+    const flatBodies = ownRoofBodies
+    /** A stretch in a body under its own roof: a flat slab (no profile, the slab's soffit) or its own pitched planes. */
+    type Piece = { id: string; from: number; to: number; height: number; flatMassId?: string; profile?: [string, string] }
+    // the wall a model keeps beside an opening at a wall's end
+    const DOOR_END_M = 0.05
+    const piecesOf = (run: (typeof plan.runs)[number]): Piece[] => {
+      const inside = (m: (typeof flatBodies)[number], u: number): boolean => {
+        const r = rectAt(m, storey.storeyIndex)
+        const [lo, hi, a0, a1] = run.axis === 'X' ? [r.x0, r.x1, r.z0, r.z1] : [r.z0, r.z1, r.x0, r.x1]
+        return run.at > a0 + 1e-6 && run.at < a1 - 1e-6 && u > lo + 1e-6 && u < hi - 1e-6
+      }
+      const cuts = new Set<number>([run.from, run.to])
+      for (const m of flatBodies) {
+        const r = rectAt(m, storey.storeyIndex)
+        for (const u of run.axis === 'X' ? [r.x0, r.x1] : [r.z0, r.z1]) if (u > run.from + 1e-6 && u < run.to - 1e-6) cuts.add(round6(u))
+      }
+      const ordered = [...cuts].sort((p, q) => p - q)
+      const segments: Piece[] = []
+      for (let k = 0; k + 1 < ordered.length; k += 1) {
+        const mid = (ordered[k] + ordered[k + 1]) / 2
+        const flat = flatBodies.find((m) => inside(m, mid))
+        const pitchedRoof = flat ? b.pitchedAttachedRoofs.find((r) => r.massId === flat.id) : undefined
+        const roof = flat && !pitchedRoof ? b.attachedRoofs.find((r) => r.massId === flat.id) : undefined
+        const piece: Piece = {
+          id: run.id,
+          from: ordered[k],
+          to: ordered[k + 1],
+          height,
+          ...(flat && pitchedRoof ? { flatMassId: flat.id, height: round6(pitchedRoof.ridgeY - l.elevation + 0.5), profile: pitchedPlaneIds(flat.id) } : {}),
+          ...(flat && roof ? { flatMassId: flat.id, height: round6(Math.min(height, roof.slabSoffitY - l.elevation)) } : {}),
+        }
+        const last = segments[segments.length - 1]
+        if (last && last.flatMassId === piece.flatMassId) last.to = piece.to
+        else segments.push(piece)
+      }
+      if (segments.length <= 1) return [{ id: run.id, from: run.from, to: run.to, height: segments[0]?.height ?? height, ...(segments[0]?.flatMassId ? { flatMassId: segments[0].flatMassId } : {}), ...(segments[0]?.profile ? { profile: segments[0].profile } : {}) }]
+      // a door in a stretch under the slab that starts (or ends) at the cut keeps its width: the cut moves the 5 cm a wall
+      // keeps beside an opening into the neighbouring stretch, which only lowers 5 cm of partition there
+      for (let k = 0; k + 1 < segments.length; k += 1) {
+        const [lo, hi] = [segments[k], segments[k + 1]]
+        if (!!lo.flatMassId === !!hi.flatMassId) continue
+        const cut = lo.to
+        for (const d of run.doors) {
+          if (hi.flatMassId && d.from >= cut - 1e-6 && d.from < cut + DOOR_END_M) lo.to = hi.from = round6(Math.min(lo.to, d.from - DOOR_END_M))
+          if (lo.flatMassId && d.to <= cut + 1e-6 && d.to > cut - DOOR_END_M) lo.to = hi.from = round6(Math.max(lo.to, d.to + DOOR_END_M))
+        }
+      }
+      // the first stretch outside every flat body keeps the run's id; the others are named for where they stand
+      const keeper = segments.find((x) => !x.flatMassId) ?? segments[0]
+      return segments.map((x, k) => (x === keeper ? x : { ...x, id: `${run.id}-${x.flatMassId ? `under-${x.flatMassId}` : `part-${k}`}` }))
+    }
     for (const run of plan.runs) {
       const half = run.thicknessM / 2
-      const start = run.axis === 'X' ? { x: round6(run.from), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.from) }
-      const end = run.axis === 'X' ? { x: round6(run.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.to) }
-      // 005Y: a partition on the top storey of a body under a plane roof dies into its planes, as the ring does.
-      const under = (b.planeRoofs ?? []).find((r) => {
-        const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
-        // v3.53.4: … and so does one in a body that stands under another body's roof (`coversMassIds`)
-        return [r.massId, ...(r.coversMassIds ?? [])].some((id) => {
-          const m = b.masses.find((x) => x.id === id)
-          return !!m && storey.storeyIndex === Math.max(...m.storeys) && mid.x >= m.x0 - 1e-6 && mid.x <= m.x1 + 1e-6 && mid.z >= m.z0 - 1e-6 && mid.z <= m.z1 + 1e-6
+      const pieces = piecesOf(run)
+      for (const piece of pieces) {
+        const start = run.axis === 'X' ? { x: round6(piece.from), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(piece.from) }
+        const end = run.axis === 'X' ? { x: round6(piece.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(piece.to) }
+        // 005Y: a partition on the top storey of a body under a plane roof dies into its planes, as the ring does.
+        const under = (b.planeRoofs ?? []).find((r) => {
+          const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
+          // v3.53.4: … and so does one in a body that stands under another body's roof (`coversMassIds`)
+          return [r.massId, ...(r.coversMassIds ?? [])].some((id) => {
+            const m = b.masses.find((x) => x.id === id)
+            return !!m && storey.storeyIndex === Math.max(...m.storeys) && mid.x >= m.x0 - 1e-6 && mid.x <= m.x1 + 1e-6 && mid.z >= m.z0 - 1e-6 && mid.z <= m.z1 + 1e-6
+          })
         })
-      })
-      const topProfile = under ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: under.layout.planes.map((pl) => planeRoofPlaneId(under.massId, pl.key)) } } : {}
-      push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', ...topProfile, materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
-      emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), run.id])
-      for (const piece of run.pieces) if (piece !== run.id) bindings.push({ featureId: piece, objectId: run.id, objectKind: 'walls', commandIndex: program.length - 1 })
-      // v3.51 C1b: under the storey above, a partition's height is the storey less the slab band, as derived as that band is
-      evidence(run.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: isTop || b.slabThicknessBasis === 'SECTION_CLEAR_HEIGHT' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING' })
-      for (const d of run.doors) {
-        // A door needs wall on both sides of it: a gap at a trimmed end (a block jamb) is narrowed to leave a stub.
-        const runLength = round6(run.to - run.from)
-        const offset = round6(Math.max(0.06, d.from - run.from))
-        const width = round6(Math.min(d.widthM, runLength - 0.06 - offset))
-        if (width < 0.5 || offset + width > runLength - 0.05) continue
-        const source = doorById.get(d.id)
-        push({ type: 'cutOpening', id: d.id, wallId: run.id, kind: 'DOOR', offset, sill: 0, width, height: Math.min(CONVENTIONS.doorHeight, round6(height - 0.1)) }, d.id, 'openings')
-        push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, frameDepth: round6(Math.min(0.1, run.thicknessM * 0.6)), frameInset: 0.01, leafThickness: round6(Math.min(0.045, run.thicknessM * 0.3)), materialId: MATERIALS_V2.timber }, d.id, 'doors')
-        evidence(d.id, 'SOURCE_DERIVED', source?.why ?? 'a door gap in the partition ink', { height: 'ASSUMED_FOR_RENDERING' })
+        const topProfile = piece.profile ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: piece.profile } } : under && !piece.flatMassId ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: under.layout.planes.map((pl) => planeRoofPlaneId(under.massId, pl.key)) } } : {}
+        push({ type: 'createWall', id: piece.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height: piece.height, baseOffset: 0, kind: 'INTERIOR', ...topProfile, materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
+        // a stretch under a flat slab is not one the main roof caps
+        if (!piece.flatMassId) emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), piece.id])
+        if (piece.id === run.id) for (const p of run.pieces) if (p !== run.id) bindings.push({ featureId: p, objectId: run.id, objectKind: 'walls', commandIndex: program.length - 1 })
+        // v3.51 C1b: under the storey above, a partition's height is the storey less the slab band, as derived as that band is
+        evidence(piece.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: isTop || b.slabThicknessBasis === 'SECTION_CLEAR_HEIGHT' ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING' })
+        // v3.53.8: a door belongs to the stretch that holds most of it; a stub is left only at the run's own ends — a cut
+        // between two stretches is wall on both sides, and a door across it is moved into its stretch, its width kept
+        const share = (x: (typeof run.doors)[number], q: Piece): number => Math.min(x.to, q.to) - Math.max(x.from, q.from)
+        const ownDoors = pieces.length === 1 ? run.doors : run.doors.filter((x) => pieces.every((q) => share(x, q) <= share(x, piece) + 1e-9) && pieces.find((q) => share(x, q) >= share(x, piece) - 1e-9) === piece)
+        for (const d of ownDoors) {
+          // A door needs wall on both sides of it: a gap at a trimmed end (a block jamb) is narrowed to leave a stub.
+          const runLength = round6(piece.to - piece.from)
+          const stubFrom = piece.from <= run.from + 1e-9 ? 0.06 : DOOR_END_M
+          const stubTo = piece.to >= run.to - 1e-9 ? 0.06 : DOOR_END_M
+          const inside = pieces.length === 1 ? d.from - piece.from : Math.min(Math.max(d.from - piece.from, 0), runLength - stubTo - d.widthM)
+          const offset = round6(Math.max(stubFrom, inside))
+          const width = round6(Math.min(d.widthM, runLength - stubTo - offset))
+          if (width < 0.5 || offset + width > runLength - Math.min(0.05, stubTo) + 1e-9) continue
+          const source = doorById.get(d.id)
+          push({ type: 'cutOpening', id: d.id, wallId: piece.id, kind: 'DOOR', offset, sill: 0, width, height: Math.min(CONVENTIONS.doorHeight, round6(piece.height - 0.1)) }, d.id, 'openings')
+          push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, frameDepth: round6(Math.min(0.1, run.thicknessM * 0.6)), frameInset: 0.01, leafThickness: round6(Math.min(0.045, run.thicknessM * 0.3)), materialId: MATERIALS_V2.timber }, d.id, 'doors')
+          evidence(d.id, 'SOURCE_DERIVED', source?.why ?? 'a door gap in the partition ink', { height: 'ASSUMED_FOR_RENDERING' })
+        }
       }
     }
     for (const room of storey.rooms) {

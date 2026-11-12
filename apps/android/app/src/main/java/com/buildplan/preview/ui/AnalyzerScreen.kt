@@ -86,6 +86,7 @@ import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.PreviewOutcome
 import com.buildplan.preview.scene.ModelCompleteness
 import com.buildplan.preview.analyzer.LiveView
+import com.buildplan.preview.analyzer.MeasurementAssessment
 import com.buildplan.preview.analyzer.ModelAssessment
 import com.buildplan.preview.analyzer.StageState
 import com.buildplan.preview.analyzer.LivenessTracker
@@ -724,6 +725,8 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         if (headline == ResultHeadline.OPEN_QUESTIONS) Body(stringResource(R.string.analyzer_result_open_questions_body))
         // N9-01: the three axes, apart, before anything else about the model; none of them withholds the 3D view
         summary.assessment?.let { AssessmentDetails(it) }
+        // v3.53.8: whether the model may be measured, said apart from the run having finished
+        summary.measurement?.let { MeasurementDetails(it) }
         // SOURCE-01: which pictures were read, which refused by their pixels, and each number read off them
         summary.sources?.let { SourceSheetsDetails(it, onShowElement = onOpenElement) }
         // N7-FIX-04 follow-up: the completeness verdict is shown with every result that carries one, not only a partial one
@@ -919,6 +922,36 @@ internal fun AssessmentDetails(a: ModelAssessment) {
         a.elevationRegistration?.scorecard?.totals?.let { t -> StatusText(stringResource(R.string.assessment_comparisons, t.potential, t.executed, t.independent)) }
         StatusText(stringResource(R.string.assessment_preview_kept))
     }
+}
+
+/**
+ * v3.53.8: the run finished; whether the model covers the house and is drawn at the plan's printed scale are two other
+ * answers, and what follows for areas and lengths is said with each reason and its consequence.
+ */
+@Composable
+internal fun MeasurementDetails(m: MeasurementAssessment) {
+    Section(stringResource(R.string.measurement_title)) {
+        Text(stringResource(R.string.measurement_run), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        Text(stringResource(R.string.measurement_coverage, measurementStatusText(m.coverage.status), m.coverage.share?.let { "${Math.round(it * 100)} %" } ?: "—"), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        Text(stringResource(R.string.measurement_scale, measurementStatusText(m.scale.status)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        Text(stringResource(R.string.measurement_quantities, measurementStatusText(m.quantities)), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        for (r in m.reasons) StatusText("${r.code}: ${r.consequence}")
+    }
+}
+
+@Composable
+private fun measurementStatusText(status: String): String = when (status) {
+    "MATCHES" -> stringResource(R.string.measurement_status_matches)
+    "NEAR" -> stringResource(R.string.measurement_status_near)
+    "SHORT" -> stringResource(R.string.measurement_status_short)
+    "OVER" -> stringResource(R.string.measurement_status_over)
+    "MEASURED" -> stringResource(R.string.measurement_status_measured)
+    "DEPARTS" -> stringResource(R.string.measurement_status_departs)
+    "UNVERIFIED" -> stringResource(R.string.measurement_status_unverified)
+    MeasurementAssessment.USABLE_IN_SCOPE -> stringResource(R.string.measurement_status_usable)
+    MeasurementAssessment.LIMITED -> stringResource(R.string.measurement_status_limited)
+    MeasurementAssessment.NOT_USABLE -> stringResource(R.string.measurement_status_not_usable)
+    else -> stringResource(R.string.measurement_status_not_assessed)
 }
 
 @Composable

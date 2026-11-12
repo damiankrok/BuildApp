@@ -314,6 +314,12 @@ export type PlanDecomposition = {
   /** 005N: true when this decomposition was cut on the boundary's outline grid (an override), not the box reading. */
   outlineReading?: true
   /**
+   * v3.53.8: grid edges the fill was stopped at by a door between two wall-thick jambs read from the ink — a pier too
+   * short to be a band, or the end of a wall that stops at the edge's end — with a printed opening callout of the same
+   * width at it (`doorwaysBetweenJambs`). Absent when there are none.
+   */
+  doorways?: DoorwayClosure[]
+  /**
    * N7-COUNCIL-FIX-03 (Council C-2, §3): every pocket walled on three sides whose fourth is a gate wider than a door, and
    * what was decided: GATE_SHUT (built, a garage behind its gate) or LEFT_OPEN (with what evidence was missing).
    */
@@ -883,6 +889,110 @@ function closureOf(
     opening: round6(Math.min(1, unionLength([...holes]) / span)),
     closure: round6(Math.min(1, unionLength([...w, ...l, ...holes]) / span)),
   }
+}
+
+/**
+ * v3.53.8: a door in a wall whose jambs the band reader does not see, closed for the fill.
+ *
+ * `closureOf` makes a hole of a gap only between two pieces of BAND lying inside the edge. A door whose one jamb is a
+ * pier shorter than any band (an entrance between a 0.9 m pier and the corner of the hall) and whose other jamb is the
+ * end of a wall stopping exactly at the edge's end has no such pieces: the edge reads open, and the fill walks in
+ * through the front door and takes the vestibule and the kitchen behind it for garden.
+ *
+ * Here the jambs are read from the ink: along the edge, widened by a wall's thickness at each end, every stretch where
+ * the ink across the line is wall-thick (at least `DOORWAY_JAMB_THICKNESS` of a wall: a pier on the line, or a wall
+ * crossing it) for at least `minJambPx` is a jamb. A gap between two jambs no wider than a lintel spans, lying mostly on
+ * the edge, is a door ONLY when (a) one of its jambs is a wall the band reader found (along the line or crossing it), not
+ * ink of unknown role — a planter or a bollard is no jamb on its own (posts in line with a facade wall do join its band,
+ * so at the mouth of a porch between such posts it is (b) that decides) — and (b) a printed opening callout stands at it
+ * that is this door's: nearer this line than any grid line across it (a window's callout beside a corner belongs to the
+ * other wall), and stating a width within `DOORWAY_CALLOUT_SHARE` of the gap's. The mouth of a porch or a loggia is
+ * also a gap between two wall ends, and nothing of its width is printed at it. Without both, the edge stays as it was
+ * read. The closure is for the fill alone: the cells' own edges, and everything that weighs them, keep the closures
+ * `closureOf` gave.
+ */
+export const DOORWAY_JAMB_THICKNESS = 0.7
+export const DOORWAY_CALLOUT_SHARE = 0.12
+export type DoorwayClosure = { id: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; calloutId: string; calloutWidthCm: number; why: string }
+
+export function doorwayBetweenJambs(
+  mask: Mask,
+  axis: 'X' | 'Y',
+  line: GridLine,
+  from: number,
+  to: number,
+  wallPx: number,
+  tolerance: number,
+  maxOpeningPx: number,
+  minJambPx: number,
+  callouts: readonly PlanCallout[],
+  mppAlong: number,
+  bands: readonly Band[],
+  across: readonly GridLine[],
+): { hole: [number, number]; widthM: number; callout: NonNullable<OpeningEvidence['callout']> } | null {
+  if (callouts.length === 0) return null
+  const probes = [...new Set([line.px, ...line.probesPx].map((p) => Math.round(p)))]
+  const reach = Math.ceil(wallPx + tolerance)
+  const thickAt = (t: number): boolean => {
+    for (const p of probes) {
+      // the longest run of ink across the line, through a pixel within the tolerance of this face
+      let run = 0
+      let best = 0
+      let touches = false
+      let runTouches = false
+      for (let u = p - reach; u <= p + reach; u += 1) {
+        const ink = axis === 'X' ? at(mask, u, t) : at(mask, t, u)
+        if (ink === 1) {
+          run += 1
+          if (Math.abs(u - p) <= tolerance) runTouches = true
+        } else {
+          if (runTouches && run > best) { best = run; touches = true }
+          run = 0
+          runTouches = false
+        }
+      }
+      if (runTouches && run > best) { best = run; touches = true }
+      if (touches && best >= DOORWAY_JAMB_THICKNESS * wallPx) return true
+    }
+    return false
+  }
+  const lo = Math.floor(from - wallPx)
+  const hi = Math.ceil(to + wallPx)
+  const jambs: Array<[number, number]> = []
+  let start = -1
+  for (let t = lo; t <= hi + 1; t += 1) {
+    const thick = t <= hi && thickAt(t)
+    if (thick && start < 0) start = t
+    if (!thick && start >= 0) {
+      if (t - start >= minJambPx) jambs.push([start, t])
+      start = -1
+    }
+  }
+  let found: { hole: [number, number]; widthM: number; callout: NonNullable<OpeningEvidence['callout']> } | null = null
+  for (let i = 0; i + 1 < jambs.length; i += 1) {
+    const a = jambs[i][1]
+    const b = jambs[i + 1][0]
+    const width = b - a
+    if (width <= minJambPx || width > maxOpeningPx) continue
+    const onEdge = Math.min(b, to) - Math.max(a, from)
+    if (onEdge < 0.5 * width) continue
+    const widthM = width * mppAlong
+    // one jamb at least is a wall the band reader found — along the line or crossing it — not ink of unknown role
+    const walls = wallIntervals(bands, axis, line, a - wallPx, b + wallPx, tolerance)
+    const onJamb = (j: [number, number]): boolean => walls.some(([p, q]) => Math.min(q, j[1]) - Math.max(p, j[0]) > 0)
+    if (!onJamb(jambs[i]) && !onJamb(jambs[i + 1])) continue
+    // the callout is this door's: its width agrees within `DOORWAY_CALLOUT_SHARE`, and it stands nearer this line than
+    // any line across it (a window's callout beside the corner belongs to the other wall)
+    const near = callouts.filter((c) => {
+      const off = Math.abs((axis === 'X' ? c.at.x : c.at.y) - line.px)
+      const along = axis === 'X' ? c.at.y : c.at.x
+      return across.every((l) => Math.abs(l.px - along) >= off)
+    })
+    const callout = calloutAt(near, axis === 'X' ? 'Y' : 'X', line.px, a, b, [widthM * 100], Math.max(wallPx * 4, 1.5 / mppAlong), 1 / mppAlong)
+    if (!callout || Math.abs(callout.widthCm - widthM * 100) > DOORWAY_CALLOUT_SHARE * widthM * 100) continue
+    if (!found || widthM > found.widthM) found = { hole: [a, b], widthM: round6(widthM), callout }
+  }
+  return found
 }
 
 /**
@@ -2297,6 +2407,34 @@ function decomposeCore(
   const index = (ix: number, iy: number): number => iy * nx + ix
   const open = (c: EdgeClosure): boolean => c.closure < opt.closureThreshold
   const shutBays = bays.filter((b) => b.mouth.decision === 'OPENING_IN_WALL')
+  // v3.53.8: a door between two jambs the ink shows and a callout prints shuts its edge for the fill
+  // (`doorwayBetweenJambs`); read once per edge, and only for an edge the fill would otherwise cross
+  const doorwayCache = new Map<string, DoorwayClosure | null>()
+  const doorwayOn = (axis: 'X' | 'Y', i: number, j: number): DoorwayClosure | null => {
+    const key = `${axis}:${i}:${j}`
+    if (doorwayCache.has(key)) return doorwayCache.get(key) ?? null
+    const line = axis === 'X' ? linesX[i] : linesY[i]
+    const [from, to] = axis === 'X' ? [linesY[j].px, linesY[j + 1].px] : [linesX[j].px, linesX[j + 1].px]
+    const mppAlong = axis === 'X' ? mppY : mppX
+    const found = doorwayBetweenJambs(mask, axis, line, from, to, wallPx, tolerance, maxOpeningPx, minJambPx, opt.callouts, mppAlong, inside, axis === 'X' ? linesY : linesX)
+    const closure: DoorwayClosure | null = found
+      ? {
+          id: `doorway-${axis}-${round6(line.px)}-${round6(found.hole[0])}-${round6(found.hole[1])}`,
+          axis,
+          linePx: round6(line.px),
+          fromPx: round6(found.hole[0]),
+          toPx: round6(found.hole[1]),
+          widthM: found.widthM,
+          calloutId: found.callout.id,
+          calloutWidthCm: found.callout.widthCm,
+          why: `a ${found.widthM.toFixed(2)} m gap between two wall-thick jambs read from the ink, with a callout of ${found.callout.widthCm} cm printed at it: a door in the wall, shut for the fill`,
+        }
+      : null
+    doorwayCache.set(key, closure)
+    return closure
+  }
+  const passV = (vEdge: EdgeClosure[][], ix: number, iy: number): boolean => open(vEdge[ix][iy]) && doorwayOn('X', ix, iy) === null
+  const passH = (hEdge: EdgeClosure[][], iy: number, ix: number): boolean => open(hEdge[iy][ix]) && doorwayOn('Y', iy, ix) === null
   const flood = (vEdge: EdgeClosure[][], hEdge: EdgeClosure[][], withBays: boolean): Uint8Array => {
     const reached = new Uint8Array(nx * ny)
     const queue: Array<[number, number]> = []
@@ -2325,19 +2463,19 @@ function decomposeCore(
       }
     }
     for (let iy = 0; iy < ny; iy += 1) {
-      if (open(vEdge[0][iy])) push(0, iy)
-      if (open(vEdge[nx][iy])) push(nx - 1, iy)
+      if (passV(vEdge, 0, iy)) push(0, iy)
+      if (passV(vEdge, nx, iy)) push(nx - 1, iy)
     }
     for (let ix = 0; ix < nx; ix += 1) {
-      if (open(hEdge[0][ix])) push(ix, 0)
-      if (open(hEdge[ny][ix])) push(ix, ny - 1)
+      if (passH(hEdge, 0, ix)) push(ix, 0)
+      if (passH(hEdge, ny, ix)) push(ix, ny - 1)
     }
     while (queue.length > 0) {
       const [ix, iy] = queue.pop() as [number, number]
-      if (open(vEdge[ix][iy])) push(ix - 1, iy)
-      if (open(vEdge[ix + 1][iy])) push(ix + 1, iy)
-      if (open(hEdge[iy][ix])) push(ix, iy - 1)
-      if (open(hEdge[iy + 1][ix])) push(ix, iy + 1)
+      if (passV(vEdge, ix, iy)) push(ix - 1, iy)
+      if (passV(vEdge, ix + 1, iy)) push(ix + 1, iy)
+      if (passH(hEdge, iy, ix)) push(ix, iy - 1)
+      if (passH(hEdge, iy + 1, ix)) push(ix, iy + 1)
     }
     return reached
   }
@@ -2605,7 +2743,16 @@ function decomposeCore(
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
     unresolved.push({ what: 'any built mass on this plan', reason: 'the flood fill reached every cell of the structural grid: no part of the plan is enclosed' })
   }
-  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}), ...(lineStrips.length > 0 ? { lineWorkStrips: lineStrips } : {}) }
+  // v3.53.8: the doors that stood between the outside and a cell the chosen fill left enclosed
+  const doorways: DoorwayClosure[] = []
+  for (const [key, d] of doorwayCache) {
+    if (!d) continue
+    const [axis, i, j] = [key.split(':')[0], Number(key.split(':')[1]), Number(key.split(':')[2])]
+    const [c1, c2] = axis === 'X' ? [[i - 1, j], [i, j]] : [[j, i - 1], [j, i]]
+    const r = (c: number[]): number => (c[0] < 0 || c[1] < 0 || c[0] >= nx || c[1] >= ny ? 1 : reached[index(c[0], c[1])])
+    if (r(c1) !== r(c2) && !doorways.some((x) => x.id === d.id)) doorways.push(d)
+  }
+  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(doorways.length > 0 ? { doorways } : {}), ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}), ...(lineStrips.length > 0 ? { lineWorkStrips: lineStrips } : {}) }
 }
 
 /** N8-01: the share of the rectangles' area in wall bands or solid ink, sampled on a grid of 32 steps a side. */
@@ -3114,6 +3261,10 @@ export function shutGateBays(input: {
  * them — puts the masses down before the offcuts. Ties are broken by position
  * so the answer is the same twice.
  */
+/** v3.53.8: two largest built rectangles within this share of each other's area are a near tie (`mergeRegions`). */
+export const TILE_NEAR_TIE = 0.02
+/** v3.53.8: … and the one whose seam carries this much more closure (of 1) is taken. */
+export const TILE_SEAM_MARGIN = 0.1
 function mergeRegions(
   cells: readonly PlanCell[],
   linesX: readonly GridLine[],
@@ -3148,8 +3299,28 @@ function mergeRegions(
   const facade = facadeSeams(cells, nx, ny, { x: minSpanM / registration.metresPerPixelX, y: minSpanM / registration.metresPerPixelY }, thickness, wallM / Math.max(registration.metresPerPixelX, registration.metresPerPixelY))
   const seams = barriers ? { v: new Set([...facade.v, ...barriers.v]), h: new Set([...facade.h, ...barriers.h]) } : facade
 
+  // v3.53.8: the closure the plan draws on the edges between a rectangle and the cells of its class it leaves behind
+  const seamClosure = (r: { ix: number; iy: number; w: number; h: number; klass: CellClass }): number | null => {
+    let length = 0
+    let shut = 0
+    const inside = (x: number, y: number): boolean => x >= r.ix && x < r.ix + r.w && y >= r.iy && y < r.iy + r.h
+    for (let y = r.iy; y < r.iy + r.h; y += 1) {
+      for (let x = r.ix; x < r.ix + r.w; x += 1) {
+        const cell = byIndex.get(`${x}:${y}`)
+        if (!cell) continue
+        const sides: Array<[number, number, number, number]> = [[x, y - 1, 0, widthPx(x)], [x + 1, y, 1, heightPx(y)], [x, y + 1, 2, widthPx(x)], [x - 1, y, 3, heightPx(y)]]
+        for (const [jx, jy, side, len] of sides) {
+          if (inside(jx, jy) || !free(jx, jy, r.klass)) continue
+          length += len
+          shut += len * cell.edges[side].closure
+        }
+      }
+    }
+    return length > 0 ? shut / length : null
+  }
   for (;;) {
     let best: { ix: number; iy: number; w: number; h: number; area: number; klass: CellClass } | null = null
+    const near: Array<{ ix: number; iy: number; w: number; h: number; area: number; klass: CellClass }> = []
     for (let iy = 0; iy < ny; iy += 1) {
       for (let ix = 0; ix < nx; ix += 1) {
         const seed = byIndex.get(`${ix}:${iy}`)
@@ -3170,10 +3341,25 @@ function mergeRegions(
           for (let k = 0; k < reach; k += 1) spanX += widthPx(ix + k)
           const area = spanX * spanY
           if (!best || area > best.area + 1e-9) best = { ix, iy, w: reach, h, area, klass }
+          if (klass === 'BUILT') near.push({ ix, iy, w: reach, h, area, klass })
         }
       }
     }
     if (!best) break
+    // v3.53.8: two built rectangles about as large (`TILE_NEAR_TIE`) are two ways of cutting one L; the cut the plan
+    // draws as wall is the one taken — the rectangle whose seam with the cells it leaves carries more closure. The first
+    // found keeps a tie, as before.
+    if (best.klass === 'BUILT') {
+      const top = best
+      const rivals = near.filter((c) => c.area >= (1 - TILE_NEAR_TIE) * top.area && (c.ix !== top.ix || c.iy !== top.iy || c.w !== top.w || c.h !== top.h))
+      if (rivals.length > 0) {
+        const own = seamClosure(top)
+        for (const c of rivals) {
+          const theirs = seamClosure(c)
+          if (own !== null && theirs !== null && theirs > (seamClosure(best) ?? own) + TILE_SEAM_MARGIN) best = c
+        }
+      }
+    }
     const members: Array<{ ix: number; iy: number }> = []
     for (let dy = 0; dy < best.h; dy += 1) {
       for (let dx = 0; dx < best.w; dx += 1) {

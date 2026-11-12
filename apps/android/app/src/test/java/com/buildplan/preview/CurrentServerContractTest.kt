@@ -5,6 +5,7 @@ import com.buildplan.preview.FakeTransport.Companion.json
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalysisTracker
 import com.buildplan.preview.analyzer.AnalyzerClient
+import com.buildplan.preview.analyzer.MeasurementAssessment
 import com.buildplan.preview.analyzer.ModelAssessment
 import com.buildplan.preview.analyzer.Step
 import com.buildplan.preview.scene.BundledScenes
@@ -85,6 +86,12 @@ class CurrentServerContractTest {
         assertTrue(t.executed <= t.rawObserved && t.independent <= t.executed)
         // what no relation compared is not agreement: the headline does not say "ready" on an UNCHECKED fidelity
         if (a.sourceFidelity.status != ModelAssessment.PASS) assertTrue(resultHeadline(summary) != ResultHeadline.READY)
+        // v3.53.8: whether the model may be measured, apart from the run: every limit carries its consequence
+        val m = requireNotNull(summary.measurement) { "the current server sends the measurement record" }
+        assertEquals("COMPLETED", m.run)
+        assertEquals(MeasurementAssessment.NOT_ASSESSED, m.coverage.status)
+        assertEquals(MeasurementAssessment.LIMITED, m.quantities)
+        assertTrue(m.reasons.isNotEmpty() && m.reasons.all { it.consequence.isNotBlank() })
 
         // and the model is stored and opens, whatever the assessment says
         val repository = SceneRepository(BundledScenes { TestScenes.text(it) }, store)
