@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage: v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage: v3.53.7 (audit, no code change; report `stage-reports/SOURCE_TO_MODEL_V3537_AUDIT.md`). Latest code stage: v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -130,7 +130,23 @@
   **APK 1333** (same signature): SHA-256 `8dcdf40c…1002f3`, manifest 12/12; host runs from its bundle under Node
   18.20.4 + no-ICU on three live pages, models equal to the replays, scenes saved and loaded. Android UI NOT_VERIFIED
   (no emulator, no device). Report `stage-reports/SOURCE_TO_MODEL_V3536.md`.
-- **NEXT (one action):** the OWNER installs APK 1333 and runs LOCAL on the Macierzanki 4 G2 link (bedrooms 7 and 8 as
+- **v3.53.7 (2026-11-12), audit of the LINK analyzer after APK 1333 — no production change, no APK:** base `9824e17`
+  reproduced on a clean tree (three houses, model and program hashes equal to the delivery). Of 18 refusals in 80 runs,
+  17 state the same shortfall against the published footprint and 9 have a full extent with the house's area in grid
+  cells classed as outside — the pattern confirmed on the sheet for Azolle 7 (`plan-decomposition.ts:2495`); Nigelle 4
+  and Torenie 3 lose their wings at the plan extent (wall-ink fallback taking in the publisher's logo; a tick hidden by
+  it), and in Torenie the published-footprint arbiter then accepts a false scale (model 27.6 % too large). One of the 19
+  MISSING rows is a reference-point artefact (18 real). The four WALL_NOT_UNDER_ROOF warnings are partitions standing
+  up to 7.25 m above an attached flat roof — a visible scene regression of 1333. 005Q: lifting the restriction moves
+  the face in 3 of 62 models, each supported by the sheet (chains and opening callouts), but in tests it overlaps a thin
+  attached body (9 tests: outright refusal instead of the partial preview) and loses named platforms; the conditional
+  variant frozen beforehand moves none of the three. Recommendation: keep N1a; a conditional face correction only as its
+  own stage under five stated conditions. The Master Plan v3.53.6 is not in the repository or the environment. Report
+  `stage-reports/SOURCE_TO_MODEL_V3537_AUDIT.md`.
+- **NEXT (one action):** the OWNER decides, on the v3.53.7 audit (§c, §d): 005Q — keep N1a, or order the conditional
+  face correction as its own stage; and the next production slice — recommended: outline completeness (a grid cell the
+  outside flood reaches is not discarded whole), with the partition-above-the-roof regression fixed alongside. Still
+  open from 1333: the OWNER installs APK 1333 and runs LOCAL on the Macierzanki 4 G2 link (bedrooms 7 and 8 as
   two rooms, the garage one room without an inner wall; provenance "solver 2.38.0"). Next code candidates, by measured
   size: bodies and floors that are not built at all (19 trial rooms have no polygon); the body cut on a drawn wall's
   inner face (needs the OWNER's word on 005Q's "name it, do not move it"); rooms opened without a swing (sliding
