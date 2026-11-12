@@ -81,10 +81,33 @@
 - **Not measured:** the anchors on a real house with a live reader; anything on a device.
 - **Verification baseline:** 15 historical vitest failures (listed in V3532 §7) and 4 Android JVM failures on the 005T
   bundled scenes (files unchanged since `5ad2dd5`).
-- **NEXT (one action):** the OWNER installs APK 1331 and runs LOCAL on the Przebiśniegi 27 link (an L under one hip
-  roof with valleys, the entrance porch open on its post; provenance "solver 2.36.0"). Next code stage: bodies with a
-  roof of their own outside a closed eaves line keep the walls' cut while the rest is cut on the eaves, and roof
-  extent on houses with more than one storey (V3534 §12). The paid SDK trial stays a separate track.
+- **v3.53.5 (2026-11-12), LOCAL roofs — a common roof beside a roof of its own:** the eaves line may outline PART of
+  the house. First wrong decisions on the DEV sheet (Macierzanki 4 G2), each measured: a 7.6 m eaves line dropped as a
+  hatch for clutter beside it; a pergola rafter taken for the eaves; the eaves drawn through the lower garage block
+  dropped as "inside a body"; and only then the body outside the outline unreading it. Reader `eave-outline` 1.2.0:
+  thickness against the run's own length, families of equal dashed lines are none of them eaves, an eaves line seen in
+  the open is followed through a body, the footprint is taken in to faces that run along the side, and a body wholly
+  beyond the roofed footprint keeps the walls' cut (`RoofExtent.beyond`; its own roof is for its own evidence). A line
+  cut for a roof is not a wall: between bodies under one read roof too little wall drawn is no wall, and an undrawn
+  stretch of a shared wall wider than two door leaves is open, not a door under a lintel. Solver 2.37.0, code
+  `6ee8dee`. DEV after compile: Macierzanki one L-shaped hip over the main body and the wing with a valley, the garage
+  block flat beside it, exterior openings 16 → 16, the double wall through two bedrooms gone. Cause test fails 10/16 on
+  the 1331 code. Corpus 33/33 identical; the 27 houses of the 1331 trials: 23 identical, 4 changed as their sources say
+  (Macierzanki; Przebiśniegi 27 and Bakopy 5 — a passage for a 3.7 m / 2.9 m "door" across a room; Lipienniki 18 E —
+  refusal → one gable over 15 × 10). Fresh trial frozen before judging, 20 houses of 20 new families, both codes on
+  the same sealed bytes: 19 identical, 1 improved (Bengali G2E: a wing recovered under the common hip, by the reader
+  fix), 0 worse, 7 refusals unchanged; the partial-outline rule fired on one fresh house (Karmazyny 2 G2), read the
+  bodies as the sheets show them, and left the scene identical — and wrong in roof shape, for two decisions downstream
+  (main ridge axis; `UNDER_MAIN` before the eaves wing). Twelve sealed packages of five other publishers: identical,
+  no eaves line found on any — stability only. **Scope stated in the report:** the scene-level recovery of a common
+  roof BESIDE a separate roof is shown in DEV only and on one publisher's sheets. **APK 1332** (same signature):
+  SHA-256 `92aaf06f…f45bee`, manifest 12/12; host runs from its bundle under Node 18.20.4 + no-ICU — see the report.
+  Android UI NOT_VERIFIED (no emulator, no device). Report `stage-reports/SOURCE_TO_MODEL_V3535.md`.
+- **NEXT (one action):** the OWNER installs APK 1332 and runs LOCAL on the Macierzanki 4 G2 link (one L-shaped hip
+  over the house and its rear wing, the garage block flat beside it; provenance "solver 2.37.0"). Next code stage:
+  the multi-storey roof extent (Telimy 4 as its base), and on the way the two downstream decisions Karmazyny 2 G2
+  exposes (main ridge axis against the eaves' rectangle; `UNDER_MAIN` yielding to a wing the eaves outline), plus an
+  eaves side hidden under another drawn line (V3535 §11). The paid SDK trial stays a separate track.
 - **Decision register:** D53-1 a description is a candidate for recognition, never a measurement. D53-2 paid requests
   only on a host, on the host's key. D53-3 an invalid optional item is dropped and named. D53-4 only uniform rescaling.
   D53.1-1 spend is a reservation under a cumulative ceiling; what is not known to be free is counted; never a reset.
