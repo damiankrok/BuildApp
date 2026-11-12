@@ -1,7 +1,7 @@
 # BuildPlan v3.53.8 — odzyskanie zamkniętych części domu
 
 Baza: kod `9824e17` (APK 1333, solver 2.38.0), audyt `b1c67ad`. Wynik: solver **2.39.0**, usługa **1.11.0**, kod
-`638a925` + `084411a` (+ commit raportu), APK **1334**. Bez płatnych wywołań (księga 2,72807938 USD, 92 wpisy — bez
+`638a925` + `084411a` + `f4a4221`, APK **1334** (z `f4a4221`). Bez płatnych wywołań (księga 2,72807938 USD, 92 wpisy — bez
 zmian), bez H2 i prywatnego benchmarku, ForgeShape tylko do odczytu. Źródła wydawcy, plansze i pliki pomiarowe
 z obrazami zostają prywatnie poza Gitem. Projekty diagnozy oznaczone **DEV**: Azolle 7 i dziewięć odmów z polecenia.
 Interfejs Android: **NOT_VERIFIED** (brak urządzenia i `/dev/kvm`).
@@ -205,11 +205,43 @@ kontraktu TS sprawdzają pole; JSON w obie strony bez zmian (test jednostkowy).
 
 ## 9. Testy, typy, kontrakt
 
-W toku: macierz pakietów dotkniętych zmianą na końcowym commicie (uzupełniane w następnym commicie).
+* Typy: `npx tsc --noEmit -p tsconfig.json` — czysto na każdym commicie etapu.
+* Macierz pakietów dotkniętych zmianą (`packages/reconstruction`, `packages/analysis-service`, `apps/local-analyzer`
+  z Node 18.20.4, `apps/analyzer-api`, `tests/architecture`) na kodzie końcowym: **2348 testów, 2335 zielonych,
+  13 czerwonych — dokładnie 13 znanych z bazy** (lista z 3.53.5: program Larchfield, NFD bez ICU, M10, reference 4 i 7,
+  research-isolation ×4, wall-strip 005Q ×4), żadnego nowego. W pierwszym przebiegu macierzy (pod obciążeniem
+  regresji) dwa testy wątków `analyzer-api/worker` przekroczyły czas — w izolacji zielone.
+* Nowe testy: reguła drzwi z kontrpróbami (bez opisu, zły opis, słupki ganku wolne i w linii ściany, wylot między
+  dwoma zawrotami, opis bliżej linii poprzecznej, dziura szersza niż nadproże), udział szwu i strażnik okładziny,
+  kontakt technicznego szwu (OPEN, pod jednym dachem bez zmian, brak powodu, ściana narysowana), ścianka pod
+  stropodachem, pod własnym dachem krzyżowym, pod osobnym dachem połaciowym, w domu piętrowym przy parterowym skrzydle,
+  drzwi zachowane, bieg w całości w bryle głównej jak dotąd, samo ostrzeżenie `WALL_NOT_UNDER_ROOF` nadal działa;
+  rekord pomiaru (wszystkie statusy, progi, JSON w obie strony, powód częściowości). Test kontraktu TS i JVM sprawdza
+  pole `measurement`.
+* Android JVM (`testDebugUnitTest`): 459 testów, 453 zielone, 2 pominięte, **4 czerwone — te same co w 3.53.2**
+  (`AutoCandidateRenderingTest` ×2, `DownloadedScenesTest` ×2: dwie sceny 005T w `assets/scenes`, pliki i testy
+  niezmienione od N8-03D2). Test kontraktu bieżącego oczekiwał wersji usługi 1.5.0 migawki sprzed wielu etapów —
+  migawka odtworzona z bajtów serwera, oczekiwanie 1.11.0.
+* Naprawiony u przyczyny test `/health` (literał 2.5.0 → `SOLVER_V2_VERSION`; czerwony już na 1333).
 
 ## 10. APK 1334 i przebieg z paczki
 
-W toku: APK 1334 budowany po macierzy (uzupełniane w następnym commicie).
+* Zbudowany z czystego drzewa `f4a4221` (`./gradlew --offline -PpreviewVersionCode=1334 previewApks`), ten sam podpis.
+* `BuildPlan-Model-Preview-1334-arm64-v8a-debug.apk`: 50 703 032 B, SHA-256
+  `0a40618233160742b8b61380c1de8e14d918b6daa630769080bc1fb9a6f3c3aa`; `aapt`: `com.buildplan.preview`, versionCode
+  1334, versionName `0.1334.0-owner`, minSdk 26, targetSdk 35; `apksigner`: certyfikat SHA-256 `6e48fac4…ca0da` —
+  równy 1333.
+* Paczka analizatora z APK: manifest 12/12 plików zgodnych ze skrótami, w niej solver 2.39.0 i usługa 1.11.0.
+* **Host z paczki** — produkcyjny `main.mjs` z APK, Node 18.20.4 z symulacją braku ICU, żywe strony wydawcy:
+
+| Strona | wynik | czas | szczyt RSS | model hosta = powtórka | scena zapisana i wczytana |
+|---|---|---|---|---|---|
+| Azolle 7 (zmiana obrysu) | hello → COMPLETED, pomiar MATCHES/MEASURED/LIMITED (READING_PARTIAL) | 400 s | 909 MB | `475cf459d1e6` = `475cf459d1e6` | tak (`loadBundle`, 130 siatek) |
+| Dzwonki 3 (ścianki) | hello → COMPLETED, pomiar MATCHES/MEASURED/USABLE_IN_SCOPE, bez `WALL_NOT_UNDER_ROOF` | 384 s | 943 MB | `5963146e1c64` = `5963146e1c64` | tak (130 siatek) |
+
+* Urządzenie / emulator: brak (`/dev/kvm` niedostępne) — interfejs Androida i przebieg LOCAL na telefonie
+  **NOT_VERIFIED**. Wyniki hosta i aplikacji podane osobno: aplikacja nie była uruchomiona.
+* APK i plansze dowodowe przekazane prywatnie (poza Gitem).
 
 ## 11. Największa pozostała rozbieżność
 
