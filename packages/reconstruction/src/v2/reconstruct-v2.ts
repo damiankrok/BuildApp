@@ -54,7 +54,8 @@ import { elevationFrameFromV2, flipZ, outerWallFaces, planFrameByOuterFaces, pla
 import type { ElevationFrameV2, ElevationRegistrationV2, PlanFrameV2, WorldFrameV2 } from './frame.js'
 import { scanZoneForReturns } from './recesses.js'
 import type { RecessTopology, ZoneSide } from './recesses.js'
-import { joinRooms, labelTokensOf, readInterior, roomEdgeOn } from './interior.js'
+import { labelTokensOf, pointInPolygon, readInterior } from './interior.js'
+import { storeyZones } from './storey-zones.js'
 import { OPPOSITE_SIDE, partyFarFace, partyNearFace, partyStretch, readPartyWalls } from './party-wall.js'
 import type { PartyWallRecord, PartyWallV2 } from './party-wall.js'
 import type { InteriorReading, LabelToken } from './interior.js'
@@ -272,6 +273,18 @@ import type { ApproximateRidge } from './roof-datum.js'
 // a pier's face. A line cut for a roof is not a wall: between two bodies under one read roof, too little wall drawn is
 // no wall (`party-wall.ts`), and a stretch of a shared wall the plan does not draw, wider than two door leaves and
 // without a leaf, is open to the ceiling instead of a door under a lintel (`PARTY_GAP_NOT_A_DOOR_M`).
+// 2.38.0 (v3.53.6): rooms are the storey's, not the roof bodies'. Bodies the plan draws no wall between, or only a wall
+// with a stretch left out, are one zone (`storey-zones.ts`), read once on one floor (`readInterior`, `domain`), so a
+// partition, a door or a room crossing the line the roof was cut on is read whole; a wall shared along part of a side
+// moves the floor's edge along that part only; a corner recess (a porch, a covered terrace) is no room's floor. Two
+// rectangles with no wall drawn between them that differ by less than a body is wide are one walled room
+// (`joinOpenSeams`), and the side of such a joined body that stops short of its drawn wall is taken to that wall's
+// outer face (`toDrawnWall`; a body the grid cut on a wall's inner face stays where 005Q's wall strip names it). A
+// wall crossing a contact is no wall on it, and a flush facade drawn through a contact's end, as wall or window, is
+// the wall across (`party-wall.ts`). Doors read only where the plan draws their swing (`swingArcInDoorway`: the arc a
+// line over four fifths of its length, a leaf beside it that closes the doorway, the doorway clear): between two
+// corners, against the wall across a partition's line, between two jamb nibs; a wall the floor's edge cuts short is
+// read by its drawn length.
 /** v3.53.4: a roof crossing the main one is as wide as the main roof's span; the bodies it stands on span that, within this (m). */
 export const CROSS_ROOF_SPAN_SLACK_M = 0.35
 /**
@@ -279,7 +292,7 @@ export const CROSS_ROOF_SPAN_SLACK_M = 0.35
  * standing there rather than a doorway: two leaves of the widest door a plan draws (`DOOR_MAX_WIDTH_M`).
  */
 export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
-export const SOLVER_V2_VERSION = '2.37.0' as const
+export const SOLVER_V2_VERSION = '2.38.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -1754,66 +1767,21 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   /** N8-03A: a room joined across an open contact, and the bodies it stands in. */
   const roomMasses = new Map<string, string[]>()
   /**
-   * N8-03A: where the plan draws no wall between two bodies (an OPEN contact), a room of one body that meets the contact
-   * and a room of the other that meets it over the same stretch are one room: joined (`joinRooms`), with the strips
-   * between the two readings' faces (where each body's reading put the wall that is not there) as floor. The joined
-   * room keeps the first part's id and lives in its body's reading; its label is checked again on the joined area.
+   * v3.53.6: the stretches of the one wall two bodies share that the plan leaves undrawn with no door leaf in them,
+   * wider than two leaves (`PARTY_GAP_NOT_A_DOOR_M`): where the wall does not stand (built as passages below). Read
+   * here, before the interiors, with the reader the doorways in that wall are read with.
    */
-  const joinAcrossOpenContacts = (index: number, readings: Array<{ m: MassV2; reading: InteriorReading }>, published: ReadonlyArray<{ number: string; label: string; areaM2: number }>): void => {
-    const parent = new Map<string, string>()
-    const find = (id: string): string => {
-      let r = id
-      while (parent.has(r) && parent.get(r) !== r) r = parent.get(r) as string
-      return r
-    }
-    const strips = new Map<string, Array<{ x0: number; z0: number; x1: number; z1: number }>>()
-    const pairs: string[] = []
-    for (const p of partyWalls.filter((x) => x.storeyIndex === index && x.open)) {
-      const host = readings.find((r) => r.m.id === p.hostMassId)
-      const other = readings.find((r) => r.m.id === p.otherMassId)
-      if (!host || !other) continue
-      const axis: 'X' | 'Z' = p.hostFacade === 'FRONT' || p.hostFacade === 'REAR' ? 'X' : 'Z'
-      const inward = p.hostFacade === 'FRONT' || p.hostFacade === 'WEST' ? 1 : -1
-      const hostFace = round6(p.contactAt + inward * (host.m.wallThicknessM ?? T))
-      const otherFace = round6(p.contactAt - inward * (other.m.wallThicknessM ?? T))
-      const [a0, a1] = [Math.min(hostFace, otherFace), Math.max(hostFace, otherFace)]
-      for (const hr of host.reading.rooms) {
-        const he = roomEdgeOn(hr, axis, hostFace, 0.08)
-        for (const or of other.reading.rooms) {
-          const oe = roomEdgeOn(or, axis, otherFace, 0.08)
-          const overlaps = he.flatMap((x) => oe.map((y) => [Math.max(x[0], y[0], p.span[0]), Math.min(x[1], y[1], p.span[1])] as [number, number])).filter(([u, v]) => v - u >= OPEN_JOIN_MIN_M)
-          if (overlaps.length === 0) continue
-          parent.set(find(or.id), find(hr.id))
-          if (!parent.has(hr.id)) parent.set(hr.id, hr.id)
-          const list = strips.get(hr.id) ?? []
-          for (const [u, v] of overlaps) list.push(axis === 'X' ? { x0: round6(u), z0: a0, x1: round6(v), z1: a1 } : { x0: a0, z0: round6(u), x1: a1, z1: round6(v) })
-          strips.set(hr.id, list)
-          pairs.push(`${hr.id} + ${or.id} over ${overlaps.map(([u, v]) => `${u.toFixed(2)}..${v.toFixed(2)}`).join(', ')}`)
-        }
-      }
-    }
-    if (pairs.length === 0) return
-    const all = readings.flatMap((r) => r.reading.rooms.map((room) => ({ room, owner: r })))
-    const groups = new Map<string, typeof all>()
-    for (const x of all) {
-      if (!parent.has(x.room.id)) continue
-      const root = find(x.room.id)
-      groups.set(root, [...(groups.get(root) ?? []), x])
-    }
-    for (const [root, members] of groups) {
-      if (members.length < 2) continue
-      const first = members.find((x) => x.room.id === root) ?? members[0]
-      const ids = new Set(members.map((x) => x.room.id))
-      const taken = new Set(all.filter((x) => !ids.has(x.room.id) && x.room.number).map((x) => x.room.number as string))
-      const joined = joinRooms(first.room.id, members.map((x) => x.room), members.flatMap((x) => strips.get(x.room.id) ?? []), published, taken)
-      for (const r of readings) {
-        r.reading.rooms = r.reading.rooms.flatMap((room) => (room.id === first.room.id ? [joined.room] : ids.has(room.id) ? [] : [room]))
-        r.reading.unresolved = r.reading.unresolved.filter((u) => !(u.roomId && ids.has(u.roomId)))
-      }
-      first.owner.reading.unresolved.push(...joined.unresolved)
-      roomMasses.set(first.room.id, [...new Set(members.map((x) => x.owner.m.id))])
-    }
-    step({ stage: 'interior', what: `N8-03A: rooms joined across the open contacts of storey ${index}`, method: 'DISCRETE_SELECTION', detail: pairs.join('; '), inputs: pairs.length, outputs: [...groups.values()].filter((g) => g.length > 1).length })
+  const partyPassages = (p: PartyWallV2, index: number): Array<[number, number]> => {
+    const entry = planByStorey.get(index)
+    const host = masses.find((x) => x.id === p.hostMassId)
+    const other = masses.find((x) => x.id === p.otherMassId)
+    const l = levelOf(index)
+    if (p.open || !entry || !host || !other || !l) return []
+    const [from, to] = partyStretch(p, host.wallThicknessM ?? T, other.wallThicknessM ?? T)
+    const band: WallHost = { massId: host.id, facade: p.hostFacade, planeAt: partyFarFace(p), from, to, centreAt: round6((p.band[0] + p.band[1]) / 2), storeyIndex: index, floorY: l.elevation, storeyHeightM: l.height, endsAtFaces: true }
+    const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === entry.plan.frame.id)
+    const gaps = readWallOpenings({ plan: entry.frame, planRaster: entry.raster, host: band, wallThicknessM: p.thicknessM, callouts, views: [], attachedSingleStorey: false, onRefused: () => undefined, index: 0 })
+    return gaps.filter((o) => !o.leaf && !o.leaves && o.widthM > PARTY_GAP_NOT_A_DOOR_M).map((o) => [o.interval[0], o.interval[1]] as [number, number])
   }
   // N8-03D1: a void in the floor of an upper storey, as its plan fills it (`slab-void.ts`)
   const slabVoids: SlabVoid[] = []
@@ -1872,18 +1840,61 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const stairHole = h ? [[{ x: h.x0, z: h.z0 }, { x: h.x1, z: h.z0 }, { x: h.x1, z: h.z1 }, { x: h.x0, z: h.z1 }].map((p) => ({ x: clamp(p.x, edge.x0, edge.x1), z: clamp(p.z, edge.z0, edge.z1) }))] : []
       return [...stairHole, ...slabVoids.filter((v) => v.storeyIndex === index).map((v) => voidOnSlab(v.polygon, edge)).filter((p): p is Array<{ x: number; z: number }> => !!p)]
     }
+    // v3.53.6: the storey's zones (`storey-zones.ts`): bodies the plan draws no wall between, or only a wall with a
+    // stretch left out, are read once, on one floor — the roof's cut changes neither the rooms' number nor their outlines
+    const here = masses.filter((x) => x.storeys.includes(index))
+    const zoned = storeyZones({ masses, storeyIndex: index, partyWalls, rectOf: (m) => rectAt(m, index), wallOf: (m) => m.wallThicknessM ?? T, passagesOf: (p) => partyPassages(p, index), minJoinM: OPEN_JOIN_MIN_M })
+    const insideOf = (m: MassV2): { x0: number; z0: number; x1: number; z1: number } => zoned.floorOf(m).base
+    if (zoned.links.length > 0) step({ stage: 'interior', what: `v3.53.6: the zones of storey ${index}`, method: 'DISCRETE_SELECTION', detail: `${zoned.links.join('; ')}: read as ${zoned.zones.filter((z) => z.members.length > 1).map((z) => z.members.map((m) => m.id).join('+')).join(', ')}`, inputs: here.length, outputs: zoned.zones.length })
+    const readZones = (outside: ReadonlyArray<{ x0: number; z0: number; x1: number; z1: number }>): Array<{ m: MassV2; reading: InteriorReading }> => {
     const readings: Array<{ m: MassV2; reading: InteriorReading }> = []
-    for (const m of masses.filter((x) => x.storeys.includes(index))) {
-      const slabOpenings = openingsOn(m)
-      const reading = readInterior(entry.raster, entry.frame, interiorRect(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: barriers, slabOpenings, labelArea, drawnWallM: drawnT, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
+    for (const { members, first: m, domain, shut } of zoned.zones) {
+      const zone = domain !== undefined
+      const slabOpenings = zone ? members.flatMap((x) => openingsOn(x)) : openingsOn(m)
+      const reading = readInterior(entry.raster, entry.frame, interiorRect(m, index), m.wallThicknessM ?? T, index, tokens, rooms, { extraBarriers: [...barriers, ...outside, ...shut], slabOpenings, labelArea, drawnWallM: drawnT, ...(domain ? { domain } : {}), onNote: options.debug ? (note) => options.debug?.(`interior ${m.id} storey ${index}: ${note}`) : undefined, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
       reading.walls = reading.walls.map((w) => ({ ...w, id: `${m.id}-${w.id}` }))
       reading.doors = reading.doors.map((d) => ({ ...d, id: `${m.id}-${d.id}`, betweenIds: [d.betweenIds[0].includes(':') ? d.betweenIds[0] : `${m.id}-${d.betweenIds[0]}`, d.betweenIds[1].includes(':') ? d.betweenIds[1] : `${m.id}-${d.betweenIds[1]}`] as [string, string] }))
       reading.rooms = reading.rooms.map((r) => ({ ...r, id: `${m.id}-${r.id}`, doorIds: r.doorIds.map((d) => `${m.id}-${d}`) }))
       reading.blocks = reading.blocks.map((b) => ({ ...b, id: `${m.id}-${b.id}` }))
       reading.unresolved = reading.unresolved.map((u) => (u.roomId ? { ...u, roomId: `${m.id}-${u.roomId}` } : u))
+      // a room of a zone stands in each body whose floor it lies on
+      if (zone) {
+        for (const room of reading.rooms) {
+          const inBodies = members.filter((x) => {
+            const r = insideOf(x)
+            for (let z = Math.max(r.z0, room.bounds.z0) + 0.1; z < Math.min(r.z1, room.bounds.z1); z += 0.2) for (let x2 = Math.max(r.x0, room.bounds.x0) + 0.1; x2 < Math.min(r.x1, room.bounds.x1); x2 += 0.2) if (pointInPolygon({ x: x2, z }, room.polygon)) return true
+            return false
+          })
+          roomMasses.set(room.id, (inBodies.length > 0 ? inBodies : [m]).map((x) => x.id))
+        }
+      }
       readings.push({ m, reading })
     }
-    joinAcrossOpenContacts(index, readings, rooms)
+    return readings
+    }
+    // v3.53.6: a covered terrace or a porch cut out of a body's corner (`readCornerNotch`, built as a recess below) is
+    // outside: under the roof, open to the air, and no room's floor — a room behind it ends at the recess's back wall.
+    // The notches are read as they are read below (a corner holding a labelled room is no notch), which asks for the
+    // rooms: so the storey is read once to know its rooms, the corners are read, and where one is a recess the storey
+    // is read again with the recess and its back walls shut out.
+    const first = readZones([])
+    const firstRooms = first[0]?.reading.rooms ?? []
+    const roomInside = (r: { x0: number; z0: number; x1: number; z1: number }): boolean => firstRooms.some((room) => room.label !== undefined && (room.bounds.x0 + room.bounds.x1) / 2 > r.x0 && (room.bounds.x0 + room.bounds.x1) / 2 < r.x1 && (room.bounds.z0 + room.bounds.z1) / 2 > r.z0 && (room.bounds.z0 + room.bounds.z1) / 2 < r.z1)
+    const cornerRecesses: Array<{ x0: number; z0: number; x1: number; z1: number }> = []
+    for (const host of here.filter((m) => !m.pieceOf)) {
+      const t = host.wallThicknessM ?? T
+      for (const zSide of ['FRONT', 'REAR'] as const) {
+        for (const xSide of ['WEST', 'EAST'] as const) {
+          const notch = readCornerNotch(entry.raster, entry.frame, rectAt(host, index), T, xSide, zSide, roomInside)
+          if (!notch) continue
+          // with its two back walls: the room behind starts at their inner faces
+          cornerRecesses.push({ x0: round6(notch.rect.x0 - (xSide === 'EAST' ? t : 0)), z0: round6(notch.rect.z0 - (zSide === 'REAR' ? t : 0)), x1: round6(notch.rect.x1 + (xSide === 'WEST' ? t : 0)), z1: round6(notch.rect.z1 + (zSide === 'FRONT' ? t : 0)) })
+        }
+      }
+    }
+    const readings = cornerRecesses.length > 0 ? readZones(cornerRecesses) : first
+    if (cornerRecesses.length > 0) step({ stage: 'interior', what: `v3.53.6: the corner recesses of storey ${index} are no room's floor`, method: 'DISCRETE_SELECTION', detail: cornerRecesses.map((r) => `${(r.x1 - r.x0).toFixed(2)} × ${(r.z1 - r.z0).toFixed(2)} m at ${r.x0.toFixed(2)}, ${r.z0.toFixed(2)} (with its back walls)`).join('; '), inputs: first.reduce((a, r) => a + r.reading.rooms.length, 0), outputs: readings.reduce((a, r) => a + r.reading.rooms.length, 0) })
+    if (options.debug) for (const { m, reading } of readings) options.debug(`interior ${m.id} storey ${index} as read: ${reading.rooms.map((r) => `${r.id}${r.number ? `#${r.number}` : ''} ${r.areaM2.toFixed(2)} m² [${r.bounds.x0.toFixed(2)},${r.bounds.z0.toFixed(2)},${r.bounds.x1.toFixed(2)},${r.bounds.z1.toFixed(2)}]${r.openPlan ? ' OPEN' : ''}`).join('; ') || 'no room'}; doors ${reading.doors.map((d) => `${d.id} ${d.wallAxis}@${d.at.toFixed(2)}:${d.from.toFixed(2)}..${d.to.toFixed(2)}`).join(', ') || 'none'}`)
     for (const { m, reading } of readings) {
       interior.push(reading)
       const sid = sighting(entry.plan.frame, `interior ink of ${m.id} on storey ${index}`, 0.7)

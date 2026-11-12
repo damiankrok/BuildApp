@@ -102,6 +102,11 @@ export type PartyBandReading = {
   samples: number
   /** Samples with wall ink in the window. */
   solid: number
+  /**
+   * v3.53.6: of `solid`, the samples in stretches of ink at least {@link PARTY_ALONG_MIN_M} long along the contact: ink
+   * that runs along the line. A shorter stretch is a wall crossing the line (a partition's thickness), not a wall on it.
+   */
+  along?: number
   /** Samples whose ink nearest the contact is one band no thicker than both walls together. */
   one: number
   /** Samples with two bands a joint apart. */
@@ -113,6 +118,12 @@ export type PartyBandReading = {
   widthM?: number
   /** The window read across the contact, in world metres. */
   windowM: [number, number]
+  /**
+   * v3.53.6: at each end of the shared stretch where the two bodies' outer faces are flush (one facade runs through
+   * the end, with no corner to it), the share of positions along that facade about the end that carry drawing in the
+   * wall's place — wall ink or a window's lines. Absent at an end the bodies make a corner at.
+   */
+  flushFacade?: [number | undefined, number | undefined]
   /** N8-03A: at each end of the shared stretch, the share of the corner's window that holds wall ink. */
   cornersInk?: [number, number]
 }
@@ -139,12 +150,23 @@ export const PARTY_MIN_RUN_M = 0.08
 export const PARTY_EXPOSED_SLACK_M = 0.1
 /** N8-03A: positions with wall ink, as a share of all sampled, at or below which the plan draws no wall there (OPEN). */
 export const PARTY_OPEN_MAX_SOLID = 0.02
+/**
+ * v3.53.6: the least stretch of ink along a contact, metres, that is a wall ON the line: the thickest wall that crosses
+ * it (an outer wall's 0.5 m) is shorter along it. A contact whose only ink is such crossings draws no wall between the
+ * bodies — the partitions of the rooms that run across it.
+ */
+export const PARTY_ALONG_MIN_M = 0.5
 /** N8-03A: the fewest positions sampled along a contact read as open. */
 export const PARTY_OPEN_MIN_SAMPLES = 40
 /** N8-03A: half the side of the square window about each end of the shared stretch where the walls across are looked for. */
 export const PARTY_CORNER_WINDOW_M = 0.6
 /** N8-03A: the share of that window holding wall ink for the corner to count as drawn. */
 export const PARTY_CORNER_MIN_INK = 0.15
+/**
+ * v3.53.6: the share of positions along a flush facade, about the end of a contact, that must carry drawing in the
+ * wall's place for the wall across to be drawn there as a window is: a window's lines run its whole width.
+ */
+export const PARTY_FLUSH_FACADE_MIN = 0.9
 
 /**
  * Wall ink across the contact: dark neutral ink, or a flat neutral fill darker than `WALL_FILL_LUMA` — a wall drawn in
@@ -183,8 +205,10 @@ export function readPartyBand(raster: Raster, plan: PlanFrameV2, input: { axis: 
   let solid = 0
   let two = 0
   const ones: Array<[number, number]> = []
+  const inked: boolean[] = []
   for (let l = Math.ceil(l0); l <= Math.floor(l1); l += 1) {
     samples += 1
+    inked.push(false)
     const runs: Array<[number, number]> = []
     let start: number | undefined
     for (let c = Math.floor(c0); c <= Math.ceil(c1) + 1; c += 1) {
@@ -197,6 +221,7 @@ export function readPartyBand(raster: Raster, plan: PlanFrameV2, input: { axis: 
     }
     if (runs.length === 0) continue
     solid += 1
+    inked[inked.length - 1] = true
     const distance = (r: [number, number]): number => (contactPx < r[0] ? r[0] - contactPx : contactPx > r[1] ? contactPx - r[1] : 0)
     const nearest = [...runs].sort((p, q) => distance(p) - distance(q) || p[0] - q[0])[0]
     const partner = runs.some((r) => r !== nearest && (r[0] > nearest[1] ? r[0] - nearest[1] - 1 : nearest[0] - r[1] - 1) <= jointMax)
@@ -206,7 +231,20 @@ export function readPartyBand(raster: Raster, plan: PlanFrameV2, input: { axis: 
     }
     if (nearest[1] - nearest[0] + 1 <= cap) ones.push(nearest)
   }
-  const reading: PartyBandReading & { bandPx?: [number, number] } = { samples, solid, one: ones.length, two, consistent: 0, windowM: input.windowM }
+  // v3.53.6: the ink that runs along the line: stretches of consecutive inked positions at least PARTY_ALONG_MIN_M long
+  const minAlong = PARTY_ALONG_MIN_M / mppAlong
+  let along = 0
+  for (let i = 0; i < inked.length; ) {
+    if (!inked[i]) {
+      i += 1
+      continue
+    }
+    let j = i
+    while (j + 1 < inked.length && inked[j + 1]) j += 1
+    if (j - i + 1 >= minAlong) along += j - i + 1
+    i = j + 1
+  }
+  const reading: PartyBandReading & { bandPx?: [number, number] } = { samples, solid, ...(along !== solid ? { along } : {}), one: ones.length, two, consistent: 0, windowM: input.windowM }
   if (ones.length === 0) return reading
   const median = (xs: number[]): number => {
     const s = [...xs].sort((p, q) => p - q)
@@ -221,7 +259,6 @@ export function readPartyBand(raster: Raster, plan: PlanFrameV2, input: { axis: 
   reading.bandPx = [e0, e1]
   reading.bandM = [round6(Math.min(w0, w1)), round6(Math.max(w0, w1))]
   reading.widthM = round6((e1 - e0 + 1) * mppAcross)
-  void mppAlong
   return reading
 }
 
@@ -300,9 +337,46 @@ export function readPartyWalls(input: PartyWallInput): PartyWallRecord[] {
           const { bandPx: _bandPx, ...kept } = reading
           void _bandPx
           // N8-03A: a contact with no wall ink is open only where the walls across are drawn at its ends
-          if (kept.samples >= PARTY_OPEN_MIN_SAMPLES && kept.solid <= PARTY_OPEN_MAX_SOLID * kept.samples) {
+          // v3.53.6: … counting the ink that runs along the contact: a partition crossing it is no wall on it. Only
+          // between two bodies each deep enough to hold a room across the contact (two walls and a little): a strip a
+          // wall thick is a step in a face, and no room runs into it
+          const depthOf = (r: Rect): number => (side === 'EAST' || side === 'WEST' ? r.x1 - r.x0 : r.z1 - r.z0)
+          const roomy = Math.min(depthOf(ra), depthOf(rb)) >= ta + tb + 0.2
+          if (kept.samples >= PARTY_OPEN_MIN_SAMPLES && (roomy ? kept.along ?? kept.solid : kept.solid) <= PARTY_OPEN_MAX_SOLID * kept.samples) {
             const point = (along: number): { x: number; z: number } => (side === 'EAST' || side === 'WEST' ? { x: contact, z: along } : { x: along, z: contact })
             kept.cornersInk = [cornerInk(plan.raster, plan.frame, point(span[0]), PARTY_CORNER_WINDOW_M), cornerInk(plan.raster, plan.frame, point(span[1]), PARTY_CORNER_WINDOW_M)]
+            // v3.53.6: an end where the two bodies' faces are flush has no corner: one facade runs through it, and a
+            // window in that facade right there leaves the corner's window nearly empty of wall ink. The facade is
+            // drawn there all the same — as the window's lines
+            const [alo, ahi] = alongOf(ra, side)
+            const [blo, bhi] = alongOf(rb, OPPOSITE_SIDE[side])
+            const flush: [boolean, boolean] = [Math.abs(alo - blo) <= 0.05, Math.abs(ahi - bhi) <= 0.05]
+            if (roomy && (flush[0] || flush[1])) {
+              const t = Math.max(ta, tb)
+              const drawn = (end: number, low: boolean): number => {
+                // the facade runs across the contact's axis; its wall lies from the bodies' face to a wall inside it
+                const [f0, f1] = low ? [end, end + t] : [end - t, end]
+                let n = 0
+                let hit = 0
+                for (let d = -PARTY_CORNER_WINDOW_M; d <= PARTY_CORNER_WINDOW_M + 1e-9; d += Math.max(0.01, Math.min(plan.frame.mppX, plan.frame.mppY))) {
+                  n += 1
+                  const a0 = side === 'EAST' || side === 'WEST' ? plan.frame.toPixel(contact + d, f0) : plan.frame.toPixel(f0, contact + d)
+                  const a1 = side === 'EAST' || side === 'WEST' ? plan.frame.toPixel(contact + d, f1) : plan.frame.toPixel(f1, contact + d)
+                  let found = false
+                  const steps = Math.max(1, Math.ceil(Math.hypot(a1.x - a0.x, a1.y - a0.y)))
+                  for (let k = 0; k <= steps && !found; k += 1) {
+                    const x = Math.round(a0.x + ((a1.x - a0.x) * k) / steps)
+                    const y = Math.round(a0.y + ((a1.y - a0.y) * k) / steps)
+                    if (x < 0 || y < 0 || x >= plan.raster.width || y >= plan.raster.height || lumaAt(plan.raster, x, y) >= 200) continue
+                    const [red, green, blue] = rgbAt(plan.raster, x, y)
+                    if (Math.max(red, green, blue) - Math.min(red, green, blue) < NEUTRAL_INK_CHROMA) found = true
+                  }
+                  if (found) hit += 1
+                }
+                return n === 0 ? 0 : round6(hit / n)
+              }
+              kept.flushFacade = [flush[0] ? drawn(span[0], true) : undefined, flush[1] ? drawn(span[1], false) : undefined]
+            }
           }
           const record: PartyWallRecord = { storeyIndex: storey, frameId: plan.frame.frameId, massIds: [a.id, b.id], facade: side, contactAt: round6(contact), span, wallsM: [round6(ta), round6(tb)], reading: kept, decision: 'UNDECIDED', why: '' }
           const slack = input.contactSlackM?.(side === 'EAST' || side === 'WEST' ? 'X' : 'Z', contact) ?? 0
@@ -320,8 +394,8 @@ function decide(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rec
   const r = record.reading
   const [ta, tb] = record.wallsM
   const where = `${a.id}|${b.id} on storey ${record.storeyIndex}, ${(r.windowM[0]).toFixed(2)}..${(r.windowM[1]).toFixed(2)} across over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
-  const counts = `${r.solid} of ${r.samples} positions drawn, ${r.one} one band, ${r.two} two`
-  if (r.cornersInk && r.cornersInk.every((x) => x >= PARTY_CORNER_MIN_INK)) {
+  const counts = `${r.solid} of ${r.samples} positions drawn${r.along !== undefined ? ` (${r.along} of them in stretches along the line, the rest walls crossing it)` : ''}, ${r.one} one band, ${r.two} two`
+  if (r.cornersInk && r.cornersInk.every((x, i) => x >= PARTY_CORNER_MIN_INK || (r.flushFacade?.[i] ?? 0) >= PARTY_FLUSH_FACADE_MIN)) {
     open(record, a, b, ra, rb, where, counts, earlier)
     return
   }
@@ -442,7 +516,7 @@ function open(record: PartyWallRecord, a: MassV2, b: MassV2, ra: Rect, rb: Rect,
   record.decision = 'OPEN'
   record.why = oneRoof
     ? `${where}: ${counts}: too little wall is drawn along the contact to be a wall between the bodies, and ${oneRoof}; neither builds a wall over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
-    : `${where}: ${counts}: the plan draws no wall between the bodies, and the walls across are drawn at both ends (${corners} of the corners' windows): one space runs from ${host.id} into ${other.id}; neither builds a wall over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
+    : `${where}: ${counts}: the plan draws no wall between the bodies, and the walls across are drawn at both ends (${corners} of the corners' windows${(record.reading.flushFacade ?? []).some((x) => x !== undefined) ? `; where the two bodies' faces are flush the one facade is drawn through the end, as wall or window, at ${(record.reading.flushFacade ?? []).map((x) => (x === undefined ? '—' : `${(x * 100).toFixed(0)} %`)).join(' and ')} of its positions` : ''}): one space runs from ${host.id} into ${other.id}; neither builds a wall over ${record.span[0].toFixed(2)}..${record.span[1].toFixed(2)}`
   record.wall = { id: `open-${host.id}-${record.storeyIndex}-${other.id}`, storeyIndex: record.storeyIndex, hostMassId: host.id, otherMassId: other.id, hostFacade, contactAt: c, band: [c, c], thicknessM: 0, span: record.span, ends: [e0.kind, e1.kind], provenance: 'SOURCE_DERIVED', why: oneRoof ? `the plan draws too little wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} to be one (${counts}), and they stand under one roof by its eaves line: the line between them is the roof's, not a wall's` : `the plan draws no wall between ${host.id} and ${other.id} on storey ${record.storeyIndex} (${counts}); the walls across are drawn at both ends`, open: true }
 }
 

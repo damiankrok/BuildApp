@@ -160,6 +160,18 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       if (process.env.BUILDAPP_FEATURE_TRACE) write('body-recovery.json', r.bodyRecovery)
       // v3.51: the solved feature graph (per-parameter provenance, the accepted decisions) of this very model, for the C1/C2 measures
       if (process.env.BUILDAPP_FEATURE_TRACE) write('feature-graph.json', r.featureGraph)
+      // v3.53.6: the storey as read — bodies, shared walls, partitions, doors and rooms in world metres — and each plan
+      // frame's map from world to sheet pixels (sampled: the map may be piecewise), for source–model overlays
+      if (process.env.BUILDAPP_FEATURE_TRACE) {
+        const samples = Array.from({ length: 281 }, (_, i) => -20 + i * 0.25)
+        write('floor-plan.json', {
+          masses: r.building.masses,
+          partyWalls: r.partyWalls,
+          interior: r.building.interior,
+          sharedDoors: r.building.sharedDoors,
+          frames: r.registrations.plans.map((f) => ({ frameId: f.frameId, assetId: f.assetId, storeyIndex: f.storeyIndex, mppX: f.mppX, mppY: f.mppY, x: samples.map((v) => [v, f.toPixel(v, 0).x]), z: samples.map((v) => [v, f.toPixel(0, v).y]) })),
+        })
+      }
       writeOverlays(out, r.planDiagnostics, rasterOf)
       // EXTERIOR-COMPLETE: the same four cameras as a full run, on the scene the production compiler makes of the model
       if (argv.includes('--views')) {

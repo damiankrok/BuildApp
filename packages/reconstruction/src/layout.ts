@@ -43,7 +43,7 @@ import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/so
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bodyWallThickness, houseWallThickness, minBodySpanM } from './exterior-walls.js'
 import type { WallThicknessReading } from './exterior-walls.js'
-import { DEFAULT_MIN_CELL_M, bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
+import { DEFAULT_MIN_CELL_M, bandWallThickness, decomposePlan, joinOpenSeams, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
 import type { EndSpanDecision, ExtentProvenance, ExtentRefutation, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
 import { readCornerPost, readEaveOutline } from './eave-outline.js'
@@ -2361,6 +2361,67 @@ function recoverFaces(region: PlanRegion, bodies: readonly PlanRegion[], plan: P
   return { ...region, rect, why: `${region.why}; set-back face recovered: ${moved.join('; ')}` }
 }
 
+/** v3.53.6: the share of a body's side a wall band must run along for the side to be taken to that wall's outer face. */
+export const DRAWN_WALL_SIDE_SHARE = 0.5
+
+/**
+ * v3.53.6: a body's side that stops short of its own wall is taken to that wall's outer face.
+ *
+ * A body is cut on the grid's lines; a wall between two lines has its faces on neither, and the body's side then lies
+ * a few pixels inside the wall's inner face with nothing drawn on it — the wall the body is built with stands on that
+ * side, inside the room, and the drawn wall is left outside the model. For each side no other body shares: when no
+ * wall band has its outer face on the side, and wall bands whose inner face lies from the side to a wall's thickness
+ * outside it run along at least {@link DRAWN_WALL_SIDE_SHARE} of the side on one outer face, the side moves to that
+ * face. A side another body stands against is left to both (a strip thinner than a body is no body), and a wall with
+ * a body at least as large just behind it is that body's: the smaller body's side stays where it was cut. A side with its wall on it, a side with no wall beside it and a side whose nearest wall is further than a
+ * wall's thickness away are left where they are: nothing is moved by a convention.
+ */
+function toDrawnWall(region: PlanRegion, original: PlanRegion, bodies: readonly PlanRegion[], plan: PlanReading, isBody: (r: PlanRegion) => boolean): PlanRegion {
+  const rect = { ...region.rect }
+  const moved: string[] = []
+  for (const key of ['x0', 'x1', 'y0', 'y1'] as const) {
+    const vertical = key === 'x0' || key === 'x1'
+    const out = key === 'x1' || key === 'y1' ? 1 : -1
+    const at = region.rect[key]
+    // a side another body stands against is that body's too; a strip too thin to be a body (a wall's own cells, cut
+    // off beside the side) is not another body
+    const shared = bodies.some((o) => {
+      if (o === original || o.rect === original.rect || !isBody(o)) return false
+      const opposite = key === 'x0' ? o.rect.x1 : key === 'x1' ? o.rect.x0 : key === 'y0' ? o.rect.y1 : o.rect.y0
+      const overlap = vertical ? Math.min(original.rect.y1, o.rect.y1) - Math.max(original.rect.y0, o.rect.y0) : Math.min(original.rect.x1, o.rect.x1) - Math.max(original.rect.x0, o.rect.x0)
+      return Math.abs(opposite - original.rect[key]) < 0.5 && overlap > 0
+    })
+    if (shared) continue
+    const [s0, s1] = vertical ? [region.rect.y0, region.rect.y1] : [region.rect.x0, region.rect.x1]
+    const along = plan.bands.filter((b) => (b.axis === 'VERTICAL') === vertical).map((b) => {
+      const [near, far] = vertical ? (out > 0 ? [b.bounds.x0, b.bounds.x1 + 1] : [b.bounds.x1 + 1, b.bounds.x0]) : out > 0 ? [b.bounds.y0, b.bounds.y1 + 1] : [b.bounds.y1 + 1, b.bounds.y0]
+      const [a0, a1] = vertical ? [b.bounds.y0, b.bounds.y1 + 1] : [b.bounds.x0, b.bounds.x1 + 1]
+      return { near, far, thickness: b.thickness, covered: Math.max(0, Math.min(a1, s1) - Math.max(a0, s0)) }
+    }).filter((b) => b.covered > 0)
+    // its wall is on it already: a band's outer face on the side (as `recoverFaces` weighs it)
+    if (along.some((b) => Math.abs(b.far - at) <= Math.max(2, 0.35 * b.thickness))) continue
+    const beside = along.filter((b) => (b.near - at) * out >= -2 && (b.near - at) * out <= plan.wallPx && (b.far - at) * out > 2)
+    const faces = [...new Set(beside.map((b) => Math.round(b.far)))]
+    const best = faces.map((f) => ({ f, covered: beside.filter((b) => Math.abs(b.far - f) <= 2).reduce((a, b) => a + b.covered, 0), far: Math.max(...beside.filter((b) => Math.abs(b.far - f) <= 2).map((b) => b.far * out)) * out })).sort((a, b) => b.covered - a.covered || a.f - b.f)[0]
+    if (!best || best.covered < DRAWN_WALL_SIDE_SHARE * (s1 - s0)) continue
+    // the wall is the larger body's: where a body at least as large stands just behind it, it is that body's wall (it
+    // closes that body's room), and this side stays where it was cut
+    const areaOf = (r: PlanRegion): number => (r.rect.x1 - r.rect.x0) * (r.rect.y1 - r.rect.y0)
+    const behind = bodies.some((o) => {
+      if (o === original || o.rect === original.rect || !isBody(o) || areaOf(o) < areaOf(original)) return false
+      const [o0, o1] = vertical ? [o.rect.x0, o.rect.x1] : [o.rect.y0, o.rect.y1]
+      const [w0, w1] = out > 0 ? [best.far, best.far + 2 * plan.wallPx] : [best.far - 2 * plan.wallPx, best.far]
+      const overlap = vertical ? Math.min(original.rect.y1, o.rect.y1) - Math.max(original.rect.y0, o.rect.y0) : Math.min(original.rect.x1, o.rect.x1) - Math.max(original.rect.x0, o.rect.x0)
+      return Math.min(o1, w1) - Math.max(o0, w0) > 0 && overlap > 0
+    })
+    if (behind) continue
+    rect[key] = best.far
+    moved.push(`${key === 'x0' ? 'min x' : key === 'x1' ? 'max x' : key === 'y0' ? 'min z' : 'max z'} side from ${at.toFixed(1)} px, where nothing is drawn, to the outer face at ${best.far.toFixed(1)} px of the wall drawn beside it (${best.covered.toFixed(0)} px of wall band along its ${(s1 - s0).toFixed(0)} px)`)
+  }
+  if (moved.length === 0) return region
+  return { ...region, rect, why: `${region.why}; taken to its drawn wall: ${moved.join('; ')}` }
+}
+
 /** Which side of a region a given cell edge is, as a plan side. */
 const SIDE_OF_EDGE: PlanSide[] = ['MIN_Z', 'MAX_X', 'MAX_Z', 'MIN_X']
 export const oppositeSide = (side: PlanSide): PlanSide => (side === 'MIN_X' ? 'MAX_X' : side === 'MAX_X' ? 'MIN_X' : side === 'MIN_Z' ? 'MAX_Z' : 'MIN_Z')
@@ -2439,9 +2500,17 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
     : planBodies(base.decomposition)
   // 005C: on a plan cut on its opening-aware outline, a strip the largest-first cut left is joined to the part of the
   // neighbour it lies along. The long-band box's plans are cut as they always were.
-  const walledCut = base.decomposition.envelope?.outline
+  const recut = base.decomposition.envelope?.outline
     ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(exteriorM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION, 2 * wallM)
     : bodies
+  // v3.53.6: two rectangles with no wall drawn between them that differ by less than a body is wide are one walled
+  // room the grid cut in two (`joinOpenSeams`)
+  const seams = joinOpenSeams(recut, base.decomposition, base.bands, base.wallPx, base.registration, minBodySpanM(exteriorM))
+  for (const j of seams.joined) options.debug?.(`open seam: ${j}`)
+  for (const j of seams.refused) options.debug?.(`open seam refused: ${j}`)
+  const walledCut = seams.regions
+  // the bodies the join made: the regions that were not among the cut's (a joined body is a new region)
+  const joinedBodies = new Set(walledCut.filter((r) => !recut.includes(r)).map((r) => r.id))
   // v3.53.4: a single storey stands under the roof whose eaves its plan draws: where that line closes around the
   // building, the bodies are what the roof covers, not what a wall divides (`bodiesUnderTheEaves`)
   let roofExtent: RoofExtent | undefined
@@ -2521,7 +2590,12 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // front reaching its outer face; the pockets left between such strips are recesses in it (`bayStripsOf`).
   // A body outside the envelope the chains measure (an attached garage, a wing) has no chain stating where its walls
   // end; a side of it marked by a wall band alone is that wall's centre line, and the body reaches its outer face.
-  const regionOf = (found: (typeof built)[number]) => recoverFaces((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found, built, base, baseChains, minCellPxOf(base))
+  // v3.53.6: only a body an open seam joined is moved onto its drawn wall (`toDrawnWall`): its side is this stage's own
+  // product. A body the grid cut on a wall's inner face stays where 005Q's wall strip names it (N1a: named, never moved)
+  const regionOf = (found: (typeof built)[number]) => {
+    const faced = recoverFaces((options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id) || reachesBeyond(found.rect, envelope.rect) ? toOuterFaces(found, built, base) : found, built, base, baseChains, minCellPxOf(base))
+    return joinedBodies.has(found.id) ? toDrawnWall(faced, found, built, base, (r) => Math.min((r.rect.x1 - r.rect.x0) * frame.metresPerPixelX, (r.rect.y1 - r.rect.y0) * frame.metresPerPixelY) >= minBodySpanM(exteriorM)) : faced
+  }
   const strips = bayStripsOf(built.map(regionOf), base.decomposition, frame, minBodySpanM(exteriorM))
   for (const t of strips.traces) options.debug?.(t)
   for (const found of strips.regions) {

@@ -139,6 +139,18 @@ export type InteriorOptions = {
    * barriers, every grid cell they touch; and where a room surrounds one, a hole in the room.
    */
   slabOpenings?: ReadonlyArray<ReadonlyArray<{ x: number; z: number }>>
+  /**
+   * v3.53.6: the floor this reading is taken on, when it is more than one body's: the rectangles inside the walls of
+   * every body of one zone of the storey — bodies the plan draws no wall between, or only a wall with a stretch left
+   * out — and the strips between their inner faces where no wall stands (`strip`). The roof may cut a storey into
+   * bodies where the plan draws one room; partitions, doors and rooms are the storey's, so they are read on the
+   * zone: the window is the rectangles' bounds, and nothing outside them is ink, floor or a wall's end. `body` and
+   * `wallThicknessM` then only name the zone (labels, the outer wall's thickness on the sheet). Absent: the one body,
+   * inset by its wall, as before.
+   */
+  domain?: ReadonlyArray<{ x0: number; z0: number; x1: number; z1: number; strip?: boolean }>
+  /** v3.53.6: a line of diagnostics per doorway weighed by the rules that need a drawn swing (accepted or not). */
+  onNote?: (note: string) => void
   /** Diagnostics hook. */
   onDebug?: (info: { axis: 'X' | 'Z'; centrePx: number; thick: number; runsPx: Array<{ from: number; to: number }> }) => void
 }
@@ -150,7 +162,7 @@ export type InteriorOptions = {
  */
 export const UNWALLED_SIDE_COVER = 0.05
 
-const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'extraBarriers' | 'labelArea' | 'drawnWallM' | 'slabOpenings'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
+const DEFAULTS: Required<Omit<InteriorOptions, 'onDebug' | 'onNote' | 'extraBarriers' | 'labelArea' | 'drawnWallM' | 'slabOpenings' | 'domain'>> = { minPartitionFraction: 0.2, maxPartitionFraction: 1.0, thinPartitionFraction: 0.72, minPieceM: 0.55, doorMinM: 0.6, doorMaxM: 1.35, cellM: 0.05 }
 
 /** Neutral dark ink: a wall, not a coloured annotation. */
 const wallInk = (r: Raster, x: number, y: number): boolean => {
@@ -222,8 +234,13 @@ export function readInterior(
   const thinThick = Math.max(minThick + 1, Math.round(wallPx * opt.thinPartitionFraction))
   const minPiecePx = opt.minPieceM / mpp
 
-  // The interior in pixels: the body inset by its external wall.
-  const inner = { x0: body.x0 + wallThicknessM, z0: body.z0 + wallThicknessM, x1: body.x1 - wallThicknessM, z1: body.z1 - wallThicknessM }
+  // The interior in pixels: the body inset by its external wall — or, read on a zone, the bounds of its floor.
+  const zone = options.domain && options.domain.length > 0 ? options.domain : undefined
+  const inner = zone
+    ? { x0: Math.min(...zone.map((r) => r.x0)), z0: Math.min(...zone.map((r) => r.z0)), x1: Math.max(...zone.map((r) => r.x1)), z1: Math.max(...zone.map((r) => r.z1)) }
+    : { x0: body.x0 + wallThicknessM, z0: body.z0 + wallThicknessM, x1: body.x1 - wallThicknessM, z1: body.z1 - wallThicknessM }
+  /** v3.53.6: whether a world point lies on the zone's floor (always, inside the window, for one body). */
+  const onFloor = (x: number, z: number): boolean => !zone || zone.some((r) => x >= r.x0 - 1e-9 && x <= r.x1 + 1e-9 && z >= r.z0 - 1e-9 && z <= r.z1 + 1e-9)
   const pa = plan.toPixel(inner.x0, inner.z1)
   const pb = plan.toPixel(inner.x1, inner.z0)
   const px0 = Math.ceil(Math.min(pa.x, pb.x))
@@ -234,8 +251,23 @@ export function readInterior(
 
   const W = px1 - px0 + 1
   const H = py1 - py0 + 1
+  // v3.53.6: the zone's floor on the window's pixels, each rectangle cut to whole pixels inside its faces as the one
+  // body's window is; `dom[k]` is 1 + the rectangle's index, 0 off the floor
+  const dom = zone ? new Uint16Array(W * H) : undefined
+  if (zone && dom) {
+    zone.forEach((r, k) => {
+      const a = plan.toPixel(r.x0, r.z1)
+      const b = plan.toPixel(r.x1, r.z0)
+      const rx0 = Math.max(0, Math.ceil(Math.min(a.x, b.x)) - px0)
+      const rx1 = Math.min(W - 1, Math.floor(Math.max(a.x, b.x)) - px0)
+      const ry0 = Math.max(0, Math.ceil(Math.min(a.y, b.y)) - py0)
+      const ry1 = Math.min(H - 1, Math.floor(Math.max(a.y, b.y)) - py0)
+      for (let y = ry0; y <= ry1; y += 1) for (let x = rx0; x <= rx1; x += 1) if (dom[y * W + x] === 0 || !r.strip) dom[y * W + x] = k + 1
+    })
+  }
+  const inDom = (x: number, y: number): boolean => x >= 0 && y >= 0 && x < W && y < H && (!dom || dom[y * W + x] > 0)
   const ink = new Uint8Array(W * H)
-  for (let y = 0; y < H; y += 1) for (let x = 0; x < W; x += 1) ink[y * W + x] = wallInk(raster, px0 + x, py0 + y) ? 1 : 0
+  for (let y = 0; y < H; y += 1) for (let x = 0; x < W; x += 1) ink[y * W + x] = (!dom || dom[y * W + x] > 0) && wallInk(raster, px0 + x, py0 + y) ? 1 : 0
   const at = (x: number, y: number): number => (x < 0 || y < 0 || x >= W || y >= H ? 0 : ink[y * W + x])
 
   // Horizontal run length through each pixel (across a vertical wall) and vertical run length (across a horizontal wall).
@@ -293,15 +325,72 @@ export function readInterior(
     }
     return walled / length
   }
-  const unwalled = (['west', 'east', 'top', 'bottom'] as const).filter((_, k) => sideCover(k < 2, k % 2 === 1) < UNWALLED_SIDE_COVER)
+  // v3.53.6: on a zone each body's rectangle is weighed by itself, along the part of each side where the floor does not
+  // run on (where it does, the plan draws no wall and none is expected); a strip between two bodies takes theirs
+  const zoneThick: boolean[] = []
+  const zoneUnwalled: string[] = []
+  if (zone && dom) {
+    zone.forEach((r, k) => {
+      if (r.strip) return
+      const a = plan.toPixel(r.x0, r.z1)
+      const b = plan.toPixel(r.x1, r.z0)
+      const rx0 = Math.ceil(Math.min(a.x, b.x)) - px0
+      const rx1 = Math.floor(Math.max(a.x, b.x)) - px0
+      const ry0 = Math.ceil(Math.min(a.y, b.y)) - py0
+      const ry1 = Math.floor(Math.max(a.y, b.y)) - py0
+      const reach = Math.ceil(wallPx * 2)
+      const inside = Math.ceil(wallPx * 1.5)
+      const bad: string[] = []
+      ;(['west', 'east', 'top', 'bottom'] as const).forEach((name, s) => {
+        const vertical = s < 2
+        const high = s % 2 === 1
+        const edge = vertical ? (high ? rx1 : rx0) : high ? ry1 : ry0
+        const [from, to] = high ? [edge - inside, edge + reach] : [edge - reach, edge + inside]
+        const [lo, hi] = vertical ? [ry0, ry1] : [rx0, rx1]
+        let judged = 0
+        let walled = 0
+        for (let along = lo; along <= hi; along += 1) {
+          // where the floor runs on past this side, no wall is expected
+          const beyond = high ? edge + Math.ceil(wallPx * 0.5) + 1 : edge - Math.ceil(wallPx * 0.5) - 1
+          if (vertical ? inDom(beyond, along) : inDom(along, beyond)) continue
+          judged += 1
+          let len = 0
+          for (let c = from; c <= to; c += 1) {
+            const dark = vertical ? wallInk(raster, px0 + c, py0 + along) : wallInk(raster, px0 + along, py0 + c)
+            len = dark ? len + 1 : 0
+            if (len >= minThick) {
+              walled += 1
+              break
+            }
+          }
+        }
+        if (judged * mpp >= opt.minPieceM && walled / judged < UNWALLED_SIDE_COVER) bad.push(name)
+      })
+      zoneThick[k] = bad.length === 0
+      if (bad.length > 0) zoneUnwalled.push(...bad)
+    })
+    zone.forEach((r, k) => {
+      if (r.strip) zoneThick[k] = zone.every((o, j) => o.strip || zoneThick[j])
+    })
+  }
+  const unwalled = zone ? [...new Set(zoneUnwalled)] : (['west', 'east', 'top', 'bottom'] as const).filter((_, k) => sideCover(k < 2, k % 2 === 1) < UNWALLED_SIDE_COVER)
   const thickAdmitted = unwalled.length === 0
   if (!thickAdmitted && maxThick > thinThick) {
-    unresolved.push({ what: `wall-thick partitions on storey ${storeyIndex}`, reason: `the body stands on no drawn wall along its ${unwalled.join(', ')} side${unwalled.length > 1 ? 's' : ''} on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read` })
+    unresolved.push({ what: `wall-thick partitions on storey ${storeyIndex}`, reason: `${zone ? 'a body of the zone' : 'the body'} stands on no drawn wall along its ${unwalled.join(', ')} side${unwalled.length > 1 ? 's' : ''} on this sheet: its registration is uncertain there, and ink as thick as the outer wall inside it may be the outer wall itself, so only partitions thinner than the outer wall are read${zone ? ' in it' : ''}` })
   }
   // 005U-N3: a wall as thick as the outer wall is a partition only standing clear of the outer wall. Within one
   // outer-wall thickness of the interior's edge, ink that thick is the outer wall's own — drawn thicker than it was
   // read, which the inset by the read thickness left inside — so there the thin-partition bound stays.
-  const capAcross = (vertical: boolean, across: number): number => {
+  const capAcross = (vertical: boolean, across: number, along?: number): number => {
+    if (dom && along !== undefined) {
+      // v3.53.6: on a zone, the edge is the floor's: within an outer wall of where it ends across the piece
+      const [x, y] = vertical ? [Math.round(across), Math.round(along)] : [Math.round(along), Math.round(across)]
+      const k = x >= 0 && y >= 0 && x < W && y < H ? dom[y * W + x] : 0
+      const reach = Math.ceil(wallPx)
+      const edge = vertical ? !inDom(x - reach, y) || !inDom(x + reach, y) : !inDom(x, y - reach) || !inDom(x, y + reach)
+      return k === 0 || !zoneThick[k - 1] || edge ? Math.min(maxThick, thinThick) : maxThick
+    }
+    if (dom) return maxThick
     const extent = vertical ? W : H
     return !thickAdmitted || across < wallPx || across > extent - 1 - wallPx ? Math.min(maxThick, thinThick) : maxThick
   }
@@ -309,11 +398,11 @@ export function readInterior(
   // partition-thick and its vertical run is long; and symmetrically.
   const isVerticalWallPixel = (x: number, y: number): boolean => {
     const h = hRun[y * W + x]
-    return h >= minThick && h <= capAcross(true, x) && vRun[y * W + x] >= minPiecePx * 0.6
+    return h >= minThick && h <= capAcross(true, x, y) && vRun[y * W + x] >= minPiecePx * 0.6
   }
   const isHorizontalWallPixel = (x: number, y: number): boolean => {
     const v = vRun[y * W + x]
-    return v >= minThick && v <= capAcross(false, y) && hRun[y * W + x] >= minPiecePx * 0.6
+    return v >= minThick && v <= capAcross(false, y, x) && hRun[y * W + x] >= minPiecePx * 0.6
   }
 
   type Axis = { centre: number; thick: number; runs: Array<{ from: number; to: number }> }
@@ -386,13 +475,30 @@ export function readInterior(
             }
             const pieceThick = medianOf(pieceCounts)
             const centre = medianOf(centres)
-            if (pieceThick < minThick - 1 || pieceThick > capAcross(vertical, centre)) continue
+            if (pieceThick < minThick - 1 || pieceThick > capAcross(vertical, centre, dom ? (run.from + run.to) / 2 : undefined)) continue
             // LINK-F1B: a piece flush against the window's edge whose ink runs on across that edge into the outer wall
             // beyond it (dark just outside the window along most of the piece) is that wall's own ink — drawn thicker
             // than the model's wall, or the body cut on a line beside its face — not a partition beside it. A partition
             // standing in the room has paper between it and the wall.
-            const lowEdge = i <= 1
-            const highEdge = j >= n - 2
+            if (dom) {
+              // v3.53.6: on a zone the edge is wherever the floor ends beside the piece: off the floor within two
+              // pixels of the band along most of the piece, and dark there
+              let flush = false
+              for (const low of [true, false]) {
+                let off = 0
+                let joined = 0
+                for (let t = run.from; t <= run.to; t += 1) {
+                  const k = [1, 2].map((d) => (low ? i - d : j + d)).find((c) => !(vertical ? inDom(c, t) : inDom(t, c)))
+                  if (k === undefined) continue
+                  off += 1
+                  if (lumaAt(raster, vertical ? px0 + k : px0 + t, vertical ? py0 + t : py0 + k) < 200) joined += 1
+                }
+                if (off >= 0.8 * (run.to - run.from + 1) && joined >= 0.8 * (run.to - run.from + 1)) flush = true
+              }
+              if (flush) continue
+            }
+            const lowEdge = !dom && i <= 1
+            const highEdge = !dom && j >= n - 2
             if (lowEdge || highEdge) {
               let joined = 0
               for (let t = run.from; t <= run.to; t += 1) {
@@ -414,6 +520,47 @@ export function readInterior(
 
   const verticalAxes = axesAlong(true)
   const horizontalAxes = axesAlong(false)
+  // v3.53.6: a wall the floor's edge cuts short. On a zone the line between two bodies runs across walls that stand
+  // square to it: a garage's side wall carries on into the house as the wall beside its door, and the part of it past
+  // the bodies' line is a stub a hand long — too short to be read as a piece, though the wall is metres long. A stub
+  // is a piece when its ink runs on off the floor, in the outer wall's place, far enough that the whole is a piece's
+  // length (`minPieceM`), it stands at least three pixels onto the floor, and it is a partition's thickness across.
+  if (zone && dom) {
+    for (const vertical of [true, false]) {
+      const n = vertical ? W : H
+      const m = vertical ? H : W
+      const inkAt = (c: number, t: number): boolean => (vertical ? at(c, t) === 1 : at(t, c) === 1)
+      const onDom = (c: number, t: number): boolean => (vertical ? inDom(c, t) : inDom(t, c))
+      const rawInk = (c: number, t: number): boolean => (vertical ? wallInk(raster, px0 + c, py0 + t) : wallInk(raster, px0 + t, py0 + c))
+      for (const dir of [1, -1] as const) {
+        for (let t = 0; t < m; t += 1) {
+          let c = 0
+          while (c < n) {
+            // a run across, on the floor's last row before it ends in the direction `dir` along
+            if (!(inkAt(c, t) && !onDom(c, t + dir))) {
+              c += 1
+              continue
+            }
+            let e = c
+            while (e + 1 < n && inkAt(e + 1, t) && !onDom(e + 1, t + dir)) e += 1
+            const width = e - c + 1
+            const mid = Math.round((c + e) / 2)
+            let inDepth = 0
+            while (inkAt(mid, t - dir * inDepth) && onDom(mid, t - dir * inDepth)) inDepth += 1
+            let outDepth = 0
+            while (outDepth < 4 * minPiecePx && !onDom(mid, t + dir * (1 + outDepth)) && rawInk(mid, t + dir * (1 + outDepth))) outDepth += 1
+            const from = dir > 0 ? t - inDepth + 1 : t
+            const to = dir > 0 ? t : t + inDepth - 1
+            const known = (vertical ? verticalAxes : horizontalAxes).some((a) => Math.abs(a.centre - (c + e) / 2) <= Math.max(a.thick, width) / 2 + 1 && a.runs.some((r) => r.from <= to + 1 && r.to >= from - 1))
+            if (!known && width >= minThick && width <= capAcross(vertical, (c + e) / 2, t - dir * Math.min(inDepth - 1, 1)) && inDepth >= 3 && inDepth < minPiecePx * 0.35 && outDepth >= wallPx * 0.8 && inDepth + outDepth >= minPiecePx) {
+              ;(vertical ? verticalAxes : horizontalAxes).push({ centre: (c + e) / 2, thick: width, runs: [{ from, to }] })
+            }
+            c = e + 1
+          }
+        }
+      }
+    }
+  }
 
   // World conversion of interior pixel coordinates.
   const worldX = (x: number): number => plan.toWorld(px0 + x, py0).x
@@ -450,12 +597,30 @@ export function readInterior(
   index = 0
   for (const axis of horizontalAxes) for (const run of axis.runs) walls.push(pieceOf(false, axis, run, index++))
 
+  /** v3.53.6: how far the zone's floor runs from `pos` along a line (`axis` the line runs along, at `at` across), `dir` ±1. */
+  const floorReach = (axis: 'X' | 'Z', at: number, pos: number, dir: 1 | -1): number => {
+    let p = pos
+    for (let guard = 0; zone && guard <= zone.length; guard += 1) {
+      const probe = p + dir * 1e-4
+      const on = zone.filter((r) => (axis === 'Z' ? at >= r.x0 - 1e-9 && at <= r.x1 + 1e-9 && probe >= r.z0 && probe <= r.z1 : at >= r.z0 - 1e-9 && at <= r.z1 + 1e-9 && probe >= r.x0 && probe <= r.x1))
+      if (on.length === 0) break
+      const next = dir > 0 ? Math.max(...on.map((r) => (axis === 'Z' ? r.z1 : r.x1))) : Math.min(...on.map((r) => (axis === 'Z' ? r.z0 : r.x0)))
+      if (Math.abs(next - p) < 1e-9) break
+      p = next
+    }
+    return p
+  }
   // Junctions: an end within a wall thickness of the body's inner face or of a perpendicular piece.
   const near = (v: number, target: number, tol: number): boolean => Math.abs(v - target) <= tol
   const tol = drawnM * 0.9
   for (const w of walls) {
     const perpendicular = walls.filter((o) => o.axis !== w.axis)
     const touches = (end: number): boolean => {
+      if (zone) {
+        // v3.53.6: on a zone a wall's end meets the outer wall where the floor ends along its own line within reach
+        for (let d = -tol; d <= tol + 1e-9; d += Math.max(mpp / 2, 0.01)) if (w.axis === 'Z' ? !onFloor(w.at, end + d) : !onFloor(end + d, w.at)) return true
+        return perpendicular.some((o) => near(o.at, end, tol) && o.from - tol <= w.at && o.to + tol >= w.at)
+      }
       if (w.axis === 'Z') {
         if (near(end, inner.z0, tol) || near(end, inner.z1, tol)) return true
         return perpendicular.some((o) => near(o.at, end, tol) && o.from - tol <= w.at && o.to + tol >= w.at)
@@ -465,6 +630,74 @@ export function readInterior(
     }
     w.ends = { start: touches(w.from) ? 'JUNCTION' : 'FREE', end: touches(w.to) ? 'JUNCTION' : 'FREE' }
     w.confidence = round6(w.ends.start === 'JUNCTION' && w.ends.end === 'JUNCTION' ? 0.8 : w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' ? 0.65 : 0.35)
+  }
+
+  // v3.53.6: a door's jambs drawn as nibs. A door set between two walls that run on past it — at the end of a
+  // corridor, into an alcove — hangs between two short returns, one on each wall's face, a hand or two long: too short
+  // to be read as pieces (`minPieceM`), so the doorway had no jamb and the room behind it ran into the corridor. A nib
+  // is a run of ink standing {@link NIB_MIN_PX} pixels to {@link NIB_MAX_M} off the face of a piece, a partition's
+  // thickness along that face, with the face bare either side of it. It is a jamb, never a wall of its own: it is kept
+  // only when a door is read at its end, and a door with a nib for a jamb is read only where the plan draws its swing.
+  const nibIds = new Set<string>()
+  const nibs: InteriorWallPiece[] = []
+  {
+    const maxNib = Math.max(NIB_MIN_PX + 1, Math.round(NIB_MAX_M / mpp))
+    const found: InteriorWallPiece[] = []
+    for (const host of walls) {
+      const vertical = host.axis === 'Z'
+      const r = host.pixelRect
+      const centre = (vertical ? (r.x0 + r.x1) / 2 - px0 : (r.y0 + r.y1) / 2 - py0)
+      const half = (vertical ? r.x1 - r.x0 : r.y1 - r.y0) / 2
+      const [t0, t1] = vertical ? [r.y0 - py0, r.y1 - py0] : [r.x0 - px0, r.x1 - px0]
+      const inkAt = (c: number, t: number): boolean => (vertical ? at(c, t) === 1 : at(t, c) === 1)
+      for (const side of [1, -1] as const) {
+        const reach = (t: number): number => {
+          // how far the ink stands off the piece's face at this position along it; Infinity where it runs on (a wall)
+          const c0 = Math.round(centre)
+          if (!inkAt(c0, t)) return 0
+          let c = c0
+          while (Math.abs(c + side - c0) <= half + maxNib + 2 && inkAt(c + side, t)) c += side
+          const off = Math.abs(c - c0) - half
+          return off > maxNib ? Number.POSITIVE_INFINITY : off
+        }
+        let t = Math.round(t0)
+        while (t <= t1) {
+          if (!(reach(t) >= NIB_MIN_PX && Number.isFinite(reach(t)))) {
+            t += 1
+            continue
+          }
+          let e = t
+          while (e + 1 <= t1 && reach(e + 1) >= NIB_MIN_PX && Number.isFinite(reach(e + 1))) e += 1
+          const thick = e - t + 1
+          const bare = (q: number): boolean => q < t0 || q > t1 || reach(q) < NIB_MIN_PX
+          const offs: number[] = []
+          for (let q = t; q <= e; q += 1) offs.push(reach(q))
+          const off = medianOf(offs)
+          if (thick >= minThick - 1 && thick <= thinThick && bare(t - 1) && bare(e + 1)) {
+            const face = centre + side * half
+            const tip = face + side * off
+            const across = (t + e + 1) / 2
+            const [u0, u1] = vertical ? [worldX(Math.min(face, tip) + 0.5), worldX(Math.max(face, tip) + 0.5)] : [worldZ(Math.max(face, tip) + 0.5), worldZ(Math.min(face, tip) + 0.5)]
+            const line = vertical ? worldZ(across) : worldX(across)
+            const from = round6(Math.min(u0, u1))
+            const to = round6(Math.max(u0, u1))
+            const axis: 'X' | 'Z' = vertical ? 'X' : 'Z'
+            const taken = [...walls, ...found].some((o) => o.axis === axis && Math.abs(o.at - line) <= drawnM * 0.5 && o.from < to + 0.02 && o.to > from - 0.02)
+            if (!taken) {
+              // its end on the host's face is a junction; the other is where the door hangs
+              const atHostLow = Math.abs(from - host.at) < Math.abs(to - host.at)
+              const id = `nib-${storeyIndex}-${found.length}`
+              found.push({ id, storeyIndex, axis, at: round6(line), from, to, thicknessM: round6(thick * mpp), ends: atHostLow ? { start: 'JUNCTION', end: 'FREE' } : { start: 'FREE', end: 'JUNCTION' }, pixelRect: vertical ? { x0: round6(px0 + Math.min(face, tip)), y0: py0 + t, x1: round6(px0 + Math.max(face, tip)), y1: py0 + e } : { x0: px0 + t, y0: round6(py0 + Math.min(face, tip)), x1: px0 + e, y1: round6(py0 + Math.max(face, tip)) }, confidence: 0.5, why: `a ${(to - from).toFixed(2)} m nib standing off the face of ${host.id}: a door's jamb` })
+            }
+          }
+          t = e + 1
+        }
+      }
+    }
+    for (const n of found) {
+      nibs.push(n)
+      nibIds.add(n.id)
+    }
   }
 
   // Solid blocks: neutral ink thicker than a thin partition in both directions (a chimney, a column).
@@ -543,6 +776,7 @@ export function readInterior(
     })
 
   // Door gaps: between two collinear pieces on one axis, 0.6..1.35 m apart, where at least one piece is anchored.
+  const cornerGaps: Array<{ a: InteriorWallPiece; b: InteriorWallPiece }> = []
   const byAxis = new Map<string, InteriorWallPiece[]>()
   // A solid block standing on a partition's line is a jamb for a door beside it.
   const pseudo: InteriorWallPiece[] = []
@@ -556,7 +790,10 @@ export function readInterior(
         // thickening where it meets the outer wall — is no jamb beside a gap: as one it would stand between the piece
         // and the piece across a door, and hide the door
         const [from, to] = axis === 'Z' ? [b.z0, b.z1] : [b.x0, b.x1]
-        const againstFace = Math.min(Math.abs(from - (axis === 'Z' ? inner.z0 : inner.x0)), Math.abs(to - (axis === 'Z' ? inner.z1 : inner.x1))) <= 0.02
+        const midAcross = axis === 'Z' ? (b.x0 + b.x1) / 2 : (b.z0 + b.z1) / 2
+        const againstFace = zone
+          ? [from - 0.021, to + 0.021].some((v) => (axis === 'Z' ? !onFloor(midAcross, v) : !onFloor(v, midAcross)))
+          : Math.min(Math.abs(from - (axis === 'Z' ? inner.z0 : inner.x0)), Math.abs(to - (axis === 'Z' ? inner.z1 : inner.x1))) <= 0.02
         if (againstFace && w.from <= from + 0.02 && w.to >= to - 0.02) break
         pseudo.push({ ...w, id: `${b.id}:${axis}`, from: axis === 'Z' ? b.z0 : b.x0, to: axis === 'Z' ? b.z1 : b.x1, ends: { start: 'JUNCTION', end: 'JUNCTION' }, confidence: 0.5, why: `the edge of ${b.id}` })
         break
@@ -609,6 +846,8 @@ export function readInterior(
       // of its jambs; and no gap is a door where a wall piece runs through it.
       const bothBlocks = a.id.includes(':') && b.id.includes(':')
       const walled = walls.some((w) => w !== a && w !== b && w.axis === a.axis && Math.abs(w.at - a.at) <= drawnM * 0.5 && w.from < b.from - 0.05 && w.to > a.to + 0.05)
+      // v3.53.6: a gap between two corners that is otherwise a door's is weighed again below, on the swing the plan draws
+      if (gap >= opt.doorMinM && gap <= opt.doorMaxM && jamb(a) && jamb(b) && !crossed && passage && !bothBlocks && !walled) cornerGaps.push({ a, b })
       if (gap >= opt.doorMinM && gap <= opt.doorMaxM && jamb(a) && jamb(b) && !crossed && !passage && !bothBlocks && !walled) {
         doors.push({
           id: `idoor-${storeyIndex}-${doors.length}`,
@@ -682,8 +921,8 @@ export function readInterior(
   for (const w of walls) {
     for (const atStart of [true, false]) {
       if ((atStart ? w.ends.start : w.ends.end) === 'JUNCTION') continue
-      const lo = w.axis === 'Z' ? inner.z0 : inner.x0
-      const hi = w.axis === 'Z' ? inner.z1 : inner.x1
+      const lo = zone ? floorReach(w.axis, w.at, w.from, -1) : w.axis === 'Z' ? inner.z0 : inner.x0
+      const hi = zone ? floorReach(w.axis, w.at, w.to, 1) : w.axis === 'Z' ? inner.z1 : inner.x1
       const gap: [number, number] = atStart ? [lo, w.from] : [w.to, hi]
       const width = gap[1] - gap[0]
       if (width < opt.doorMinM || width > opt.doorMaxM) continue
@@ -779,12 +1018,100 @@ export function readInterior(
     }
   }
 
+  // v3.53.6: the doors the rules above leave unread, each only where the plan draws the door's swing, and none where a
+  // door is read already or where the storey has no floor (a stair's flight). They are read last, so the doors read
+  // before keep their order (and their ids).
+  const offFloor = (axis: 'X' | 'Z', line: number, gap: [number, number]): boolean => {
+    const mid = (gap[0] + gap[1]) / 2
+    const [x, z] = axis === 'X' ? [mid, line] : [line, mid]
+    return (options.extraBarriers ?? []).some((r) => x >= r.x0 - 0.1 && x <= r.x1 + 0.1 && z >= r.z0 - 0.1 && z <= r.z1 + 0.1)
+  }
+  const noteSwing = (rule: string, axis: 'X' | 'Z', line: number, gap: [number, number], probe: { traced: number; at?: string }, found: boolean): void => options.onNote?.(`doorway ${rule} ${axis}@${line.toFixed(2)}:${gap[0].toFixed(2)}..${gap[1].toFixed(2)}: at most ${Math.round(probe.traced * 100)} % of a quarter arc is a drawn line${probe.at ? ` (${probe.at})` : ''}: ${found ? 'a door' : 'no door'}`)
+  const tracedShare = (leaf: { traced?: number }): string => `${Math.round((leaf.traced ?? 0) * 100)} % of its arc a drawn line`
+  const doorAt = (axis: 'X' | 'Z', line: number, gap: [number, number]): boolean => doors.some((d) => d.wallAxis === axis && Math.abs(d.at - line) <= drawnM * 0.5 && d.from < gap[1] - 0.05 && d.to > gap[0] + 0.05)
+  // a door hung between two corners: the last stretch of a wall before the wall across it, its other jamb the corner of
+  // the next room. Without a drawn swing it is the width of a room or a corridor, as before
+  for (const { a, b } of cornerGaps) {
+    const gap: [number, number] = [a.to, b.from]
+    const line = round6((a.at + b.at) / 2)
+    if (doorAt(a.axis, line, gap) || offFloor(a.axis, line, gap)) continue
+    const probe: { traced: number; at?: string } = { traced: 0 }
+    const leaf = swingArcInDoorway(raster, plan, a.axis, line, gap, probe)
+    noteSwing('between two corners', a.axis, line, gap, probe, !!leaf)
+    if (!leaf) continue
+    doors.push({ id: `idoor-${storeyIndex}-${doors.length}`, storeyIndex, wallAxis: a.axis, at: line, from: round6(gap[0]), to: round6(gap[1]), widthM: round6(gap[1] - gap[0]), betweenIds: [a.id, b.id], confidence: round6(Math.min(a.confidence, b.confidence) * 0.9), why: `a ${(gap[1] - gap[0]).toFixed(2)} m break between two pieces of the same partition, each at a corner with a wall across, its swing drawn (${tracedShare(leaf)}, a ${leaf.radius.toFixed(2)} m leaf): a door hung between two corners` })
+  }
+  // v3.53.6: a door between a partition's free end and the wall ACROSS its line. A piece that stops a door's width
+  // short of a perpendicular piece running through its line (a T, where N8-02B reads the L: the wall across ending at
+  // the line) leaves a doorway between its end and that wall's face: a door there when the plan draws its swing in it.
+  // Without a drawn swing the gap stays what it was. The wall across is the door's far jamb.
+  for (const w of walls) {
+    for (const atStart of [true, false]) {
+      if ((atStart ? w.ends.start : w.ends.end) === 'JUNCTION') continue
+      const end = atStart ? w.from : w.to
+      const across = walls
+        .filter((o) => o.axis !== w.axis && o.from - 0.05 <= w.at && o.to + 0.05 >= w.at && (atStart ? o.at < end : o.at > end) && (o.ends.start === 'JUNCTION' || o.ends.end === 'JUNCTION' || o.to - o.from >= 0.45))
+        .sort((a, b) => Math.abs(a.at - end) - Math.abs(b.at - end))[0]
+      if (!across) continue
+      const face = atStart ? across.at + across.thicknessM / 2 : across.at - across.thicknessM / 2
+      const gap: [number, number] = atStart ? [round6(face), w.from] : [w.to, round6(face)]
+      const width = gap[1] - gap[0]
+      if (width < opt.doorMinM || width > opt.doorMaxM) continue
+      if (walls.some((x) => x !== w && x.axis === w.axis && Math.abs(x.at - w.at) <= drawnM * 0.5 && x.from < gap[1] - 0.05 && x.to > gap[0] + 0.05)) continue
+      if (doorAt(w.axis, w.at, gap) || offFloor(w.axis, w.at, gap)) continue
+      const probe: { traced: number; at?: string } = { traced: 0 }
+      const leaf = [w.at, w.at - w.thicknessM / 2, w.at + w.thicknessM / 2].map((line) => swingArcInDoorway(raster, plan, w.axis, line, gap, probe)).find((x) => !!x)
+      noteSwing('against the wall across', w.axis, w.at, gap, probe, !!leaf)
+      if (!leaf) continue
+      doors.push({
+        id: `idoor-${storeyIndex}-${doors.length}`,
+        storeyIndex,
+        wallAxis: w.axis,
+        at: w.at,
+        from: gap[0],
+        to: gap[1],
+        widthM: round6(width),
+        betweenIds: atStart ? [`${across.id}:across`, w.id] : [w.id, `${across.id}:across`],
+        confidence: round6(Math.min(w.confidence, 0.6) * 0.95),
+        why: `a ${width.toFixed(2)} m gap between the end of a partition and the face of the wall across its line, its swing drawn (${tracedShare(leaf)}, a ${leaf.radius.toFixed(2)} m leaf): a door, the wall across its far jamb`,
+      })
+      jambIds.add(w.id)
+    }
+  }
+
+  // a door between two nibs, or between a nib and the end of a piece on its line: the jambs the plan draws for a door set
+  // between two walls that run on past it. The nibs become its wall.
+  for (const n of nibs) {
+    const tip = n.ends.start === 'FREE' ? n.from : n.to
+    const dir = n.ends.start === 'FREE' ? -1 : 1
+    const facing = [...nibs, ...walls]
+      .filter((o) => o !== n && o.axis === n.axis && Math.abs(o.at - n.at) <= Math.max(drawnM * 0.5, (o.thicknessM + n.thicknessM) / 2))
+      .map((o) => ({ o, end: dir > 0 ? o.from : o.to }))
+      .filter(({ o, end }) => (end - tip) * dir >= opt.doorMinM && (end - tip) * dir <= opt.doorMaxM && (!nibIds.has(o.id) || (dir > 0 ? o.ends.start : o.ends.end) === 'FREE'))
+      .sort((p, q) => Math.abs(p.end - tip) - Math.abs(q.end - tip))[0]
+    if (!facing) continue
+    const gap: [number, number] = dir > 0 ? [tip, facing.end] : [facing.end, tip]
+    const line = round6((n.at + facing.o.at) / 2)
+    if (doorAt(n.axis, line, gap) || offFloor(n.axis, line, gap)) continue
+    if (walls.some((x) => x !== facing.o && x.axis === n.axis && Math.abs(x.at - line) <= drawnM * 0.5 && x.from < gap[1] - 0.05 && x.to > gap[0] + 0.05)) continue
+    if (walls.some((x) => x.axis !== n.axis && x.at > gap[0] + 0.05 && x.at < gap[1] - 0.05 && x.from < line - 0.1 && x.to > line + 0.1)) continue
+    const probe: { traced: number; at?: string } = { traced: 0 }
+    const leaf = swingArcInDoorway(raster, plan, n.axis, line, gap, probe)
+    noteSwing('between nibs', n.axis, line, gap, probe, !!leaf)
+    if (!leaf) continue
+    for (const piece of [n, facing.o]) if (nibIds.has(piece.id) && !walls.includes(piece)) walls.push(piece)
+    const [first, second] = dir > 0 ? [n, facing.o] : [facing.o, n]
+    doors.push({ id: `idoor-${storeyIndex}-${doors.length}`, storeyIndex, wallAxis: n.axis, at: line, from: round6(gap[0]), to: round6(gap[1]), widthM: round6(gap[1] - gap[0]), betweenIds: [first.id, second.id], confidence: 0.5, why: `a ${(gap[1] - gap[0]).toFixed(2)} m doorway between ${nibIds.has(facing.o.id) ? 'two nibs standing off the walls either side' : 'a nib standing off a wall and the end of the partition on its line'}, its swing drawn (${tracedShare(leaf)}, a ${leaf.radius.toFixed(2)} m leaf): a door set between two walls that run on past it` })
+    jambIds.add(n.id)
+    if (nibIds.has(facing.o.id)) jambIds.add(facing.o.id)
+  }
+
   // A free-standing piece with no junction at either end is a cupboard or a
   // worktop, not a wall — unless a door gap anchors it to a piece that is.
   const anchoredByDoor = new Set([...doors.flatMap((d) => d.betweenIds), ...jambIds])
-  const kept = walls.filter((w) => w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION' || anchoredByDoor.has(w.id))
+  const kept = walls.filter((w) => (!nibIds.has(w.id) && (w.ends.start === 'JUNCTION' || w.ends.end === 'JUNCTION')) || anchoredByDoor.has(w.id))
   const dropped = walls.filter((w) => !kept.includes(w))
-  for (const d of dropped) unresolved.push({ what: `a ${(d.to - d.from).toFixed(2)} m thin band at ${d.axis === 'Z' ? 'x' : 'z'} ${d.at.toFixed(2)}`, reason: 'meets no wall at either end: fitted furniture or a line, not a partition' })
+  for (const d of dropped.filter((w) => !nibIds.has(w.id))) unresolved.push({ what: `a ${(d.to - d.from).toFixed(2)} m thin band at ${d.axis === 'Z' ? 'x' : 'z'} ${d.at.toFixed(2)}`, reason: 'meets no wall at either end: fitted furniture or a line, not a partition' })
   const keptIds = new Set(kept.map((w) => w.id))
   const isPseudo = (id: string): boolean => id.includes(':')
   const keptDoors = doors.filter((d) => (keptIds.has(d.betweenIds[0]) || isPseudo(d.betweenIds[0])) && (keptIds.has(d.betweenIds[1]) || isPseudo(d.betweenIds[1])))
@@ -817,6 +1144,8 @@ export function readInterior(
   }
   for (const b of blocks) mark(b.x0, b.z0, b.x1, b.z1)
   for (const b of options.extraBarriers ?? []) mark(b.x0, b.z0, b.x1, b.z1)
+  // v3.53.6: on a zone, what lies between its rectangles is the outer walls and the open air: no floor
+  if (zone) for (let j = 0; j < gz; j += 1) for (let i = 0; i < gx; i += 1) if (!onFloor(inner.x0 + (i + 0.5) * cell, inner.z0 + (j + 0.5) * cell)) barrier[j * gx + i] = 1
   // N8-03D2: a slab opening bars every cell it touches (a cell's centre or a corner inside it), so no room's cells lie on it
   const opening = new Uint8Array(gx * gz)
   for (const poly of options.slabOpenings ?? []) {
@@ -1070,6 +1399,20 @@ export function gapOnGrid(plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [
  * and up to {@link HINGE_ACROSS_M} either side of the wall's line (the hinge sits on the frame, not on the face or the
  * centre line the gap is measured to).
  */
+/** v3.53.6: the least a door's nib stands off the face of the wall it is on, in sheet pixels. */
+export const NIB_MIN_PX = 2
+/** v3.53.6: the most a nib stands off its wall, metres: past it the ink is a wall piece (read as one, or not a jamb). */
+export const NIB_MAX_M = 0.35
+/**
+ * v3.53.6: the share of a door's quarter arc that must be drawn as a line for the doors read where the plan's walls
+ * alone do not make a doorway (between two corners, against the wall across, between nibs): four fifths, the rest left
+ * to what crosses an arc on a sheet — a dimension line, a room's number, the leaf's end.
+ */
+export const TRACED_ARC_MIN = 0.8
+/** v3.53.6: how much darker than the sheet either side of it (three pixels off, 0..255) a pixel of a drawn arc is. */
+export const ARC_LINE_CONTRAST = 25
+/** v3.53.6: how far along the wall's line from the hinge, in pixels, the open leaf may be drawn (its bar's width, the frame). */
+export const LEAF_REACH_PX = 3
 export const SHORT_LEAF_MIN_FRACTION = 0.7
 export const SHORT_LEAF_MIN_M = 0.55
 export const HINGE_SLACK_M = 0.15
@@ -1180,6 +1523,146 @@ export function doorSwingInGap(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z
     }
   }
   return best ? { hinge: best.hinge, radius: best.radius, side: best.side, short: true } : undefined
+}
+
+/**
+ * v3.53.6: the swing of a door in a doorway the plan's walls alone do not make one — between two corners, between the
+ * end of a partition and the wall across its line, between two nibs. There the drawn swing is the whole evidence, and
+ * what stands in such places besides doors is line work that crosses a circle here and there without following it
+ * (stair treads, the cross of a wardrobe, a shower screen, a basin, a hatch) and the sheet's tone (a watermark's
+ * edges). So the swing is read by its arc alone, and strictly:
+ *  - the quarter arc, sampled about a pixel apart from 10° to 80°, lies on a LINE over {@link TRACED_ARC_MIN} of its
+ *    length: within a pixel of the radius a neutral pixel darker by {@link ARC_LINE_CONTRAST} than the sheet three
+ *    pixels inside AND three pixels outside it (an edge of tone is darker on one side only; an area is on neither);
+ *  - the leaf closes the doorway: its hinge within {@link HINGE_SLACK_M} of one jamb (as for every leaf) and the far
+ *    end of its arc within the same of the other;
+ *  - the doorway is clear: no line (read as the arc is) runs along the wall's line from the hinge for the leaf's length. A leaf drawn there
+ *    stands open INTO this gap — the same quarter arc belongs to the door of the wall square to this one.
+ *  - the leaf is drawn open beside the arc (N8-03D2: an arc with no leaf is not a door): from the hinge, square to the
+ *    wall's line, for the radius, three quarters of its samples on a line within {@link LEAF_REACH_PX}: ink at most
+ *    `LEAF_MAX_PX` wide with paper either side (`doorSwingInGap`'s leaf, which stands a pixel off the wall it is opened
+ *    against), or a line read as the arc is — on the smaller sheets a leaf is a grey bar as wide as a partition, and
+ *    its outline is such a line where its width is not. The wall a leaf is opened against is never the leaf.
+ */
+export function swingArcInDoorway(raster: Raster, plan: PlanFrameV2, axis: 'X' | 'Z', at: number, gap: [number, number], probe?: { traced: number; at?: string }): { hinge: number; radius: number; side: -1 | 1; traced: number } | undefined {
+  const neutral = (x: number, y: number): boolean => {
+    const [r, g, b] = rgbAt(raster, x, y)
+    return Math.max(r, g, b) - Math.min(r, g, b) < NEUTRAL_INK_CHROMA
+  }
+  const g = gapOnGrid(plan, axis, at, gap)
+  const slackPx = Math.round(HINGE_SLACK_M / g.mppAlong)
+  const acrossPx = Math.round(HINGE_ACROSS_M / g.mppAlong)
+  // the doorway's band: every row (column) the wall's line may be drawn on, and two pixels more
+  const reachAcross = acrossPx + JAMB_PHASE_PX + 2
+  let best: { hinge: number; radius: number; side: -1 | 1; traced: number } | undefined
+  for (const [jamb, other, dir] of [[g.a0, g.a1, g.dir], [g.a1, g.a0, -g.dir]] as const) {
+    for (let slack = -JAMB_PHASE_PX; slack <= slackPx + JAMB_PHASE_PX; slack += 1) {
+      const hingeA = Math.round(jamb) + dir * slack
+      const reach = Math.abs(other - hingeA)
+      for (let radius = Math.ceil(reach - slackPx - JAMB_PHASE_PX); radius <= Math.floor(reach + JAMB_PHASE_PX); radius += 1) {
+        if (radius * g.mppAlong < SHORT_LEAF_MIN_M) continue
+        const steps = Math.max(12, Math.round(radius * 1.2))
+        for (let off = -(acrossPx + JAMB_PHASE_PX); off <= acrossPx + JAMB_PHASE_PX; off += 1) {
+          const line = g.line + off
+          for (const side of [-1, 1] as const) {
+            let hit = 0
+            for (let k = 0; k <= steps; k += 1) {
+              const t = ((10 + (70 * k) / steps) * Math.PI) / 180
+              const on = (r: number): { x: number; y: number } => {
+                const p = g.pixel(hingeA + dir * r * Math.cos(t), line + side * g.across * r * Math.sin(t))
+                return { x: Math.round(p.x), y: Math.round(p.y) }
+              }
+              for (const dr of [0, -1, 1]) {
+                const p = on(radius + dr)
+                if (!neutral(p.x, p.y)) continue
+                const here = lumaAt(raster, p.x, p.y)
+                const inner = on(radius + dr - 3)
+                const outer = on(radius + dr + 3)
+                if (lumaAt(raster, inner.x, inner.y) - here >= ARC_LINE_CONTRAST && lumaAt(raster, outer.x, outer.y) - here >= ARC_LINE_CONTRAST) {
+                  hit += 1
+                  break
+                }
+              }
+            }
+            const share = hit / (steps + 1)
+            if (probe && share > probe.traced) {
+              probe.traced = share
+              const h = g.pixel(hingeA, line)
+              const e = g.pixel(hingeA + dir * radius, line + side * g.across * radius)
+              probe.at = `hinge px ${h.x},${h.y} radius ${radius} px towards ${e.x},${e.y}`
+            }
+            if (share < TRACED_ARC_MIN || (best && share <= best.traced)) continue
+            // the doorway clear of a leaf drawn in it
+            let inDoorway = 0
+            let m = 0
+            for (let f = 0.15; f <= 0.95 + 1e-9; f += 0.1) {
+              m += 1
+              let ink = false
+              for (let d = -reachAcross; d <= reachAcross && !ink; d += 1) {
+                // a line along the wall's line, as the arc is a line: darker than the sheet three pixels either side of it
+                const at = (c: number): { x: number; y: number } => {
+                  const p = g.pixel(hingeA + dir * radius * f, g.line + c)
+                  return { x: Math.round(p.x), y: Math.round(p.y) }
+                }
+                const p = at(d)
+                if (!neutral(p.x, p.y)) continue
+                const here = lumaAt(raster, p.x, p.y)
+                const a = at(d - 3)
+                const b = at(d + 3)
+                ink = lumaAt(raster, a.x, a.y) - here >= ARC_LINE_CONTRAST && lumaAt(raster, b.x, b.y) - here >= ARC_LINE_CONTRAST
+              }
+              if (ink) inDoorway += 1
+            }
+            if (inDoorway >= 0.75 * m) {
+              if (probe && !(probe.at ?? '').includes('a leaf drawn in the doorway')) probe.at = `${probe.at ?? ''}; a leaf drawn in the doorway`
+              continue
+            }
+            // the leaf, drawn open: from the hinge, square to the wall's line, for the radius — a line, a bar, or the
+            // face of the wall it is opened against
+            let leaf = 0
+            for (let f = 0.15; f <= 0.95 + 1e-9; f += 0.1) {
+              let drawn = false
+              for (let d = -LEAF_REACH_PX; d <= LEAF_REACH_PX && !drawn; d += 1) {
+                const at = (a: number): { x: number; y: number } => {
+                  const p = g.pixel(hingeA + a, line + side * g.across * radius * f)
+                  return { x: Math.round(p.x), y: Math.round(p.y) }
+                }
+                const p = at(d)
+                if (!neutral(p.x, p.y)) continue
+                const here = lumaAt(raster, p.x, p.y)
+                const a = at(d - 3)
+                const b = at(d + 3)
+                if (lumaAt(raster, a.x, a.y) - here >= ARC_LINE_CONTRAST && lumaAt(raster, b.x, b.y) - here >= ARC_LINE_CONTRAST) drawn = true
+                else if (here < 200) {
+                  // a thin line a pixel off the face of the wall it is opened against (`doorSwingInGap`'s leaf): ink at
+                  // most LEAF_MAX_PX wide along the wall's line, paper either side of it
+                  let run = 1
+                  for (let k = 1; k <= LEAF_MAX_PX + 1; k += 1) {
+                    const q = at(d - k)
+                    if (!(lumaAt(raster, q.x, q.y) < 200 && neutral(q.x, q.y))) break
+                    run += 1
+                  }
+                  for (let k = 1; k <= LEAF_MAX_PX + 1; k += 1) {
+                    const q = at(d + k)
+                    if (!(lumaAt(raster, q.x, q.y) < 200 && neutral(q.x, q.y))) break
+                    run += 1
+                  }
+                  drawn = run <= LEAF_MAX_PX
+                }
+              }
+              if (drawn) leaf += 1
+            }
+            if (leaf < 0.75 * m) {
+              if (probe && !(probe.at ?? '').includes('no leaf drawn')) probe.at = `${probe.at ?? ''}; no leaf drawn beside it`
+              continue
+            }
+            best = { hinge: round6(g.alongM(hingeA)), radius: round6(radius * g.mppAlong), side, traced: round6(share) }
+          }
+        }
+      }
+    }
+  }
+  return best
 }
 
 /**
@@ -1375,7 +1858,7 @@ function tracePolygon(cells: ReadonlyArray<[number, number]>, gx: number, gz: nu
   return out
 }
 
-function pointInPolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: number; z: number }>): boolean {
+export function pointInPolygon(p: { x: number; z: number }, poly: ReadonlyArray<{ x: number; z: number }>): boolean {
   let inside = false
   for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
     const a = poly[i]

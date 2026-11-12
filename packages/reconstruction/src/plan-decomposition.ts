@@ -3553,6 +3553,165 @@ export function recutSlivers(regions: readonly PlanRegion[], decomposition: Plan
   return out.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
 }
 
+/** v3.53.6: the share of a seam between two bodies wall bands may cover and the seam still be undrawn. */
+export const OPEN_SEAM_MAX_WALL = 0.1
+/** v3.53.6: the least length of a seam, metres, for two bodies to be judged one room across it. */
+export const OPEN_SEAM_MIN_M = 1
+/** v3.53.6: the share of a cell wall bands must cover for the cell to be a wall's own thickness, not ground. */
+export const WALL_CELL_SHARE = 0.5
+
+/**
+ * v3.53.6: two bodies that are one walled room.
+ *
+ * The cells are cut on the grid's lines and the bodies are rectangles of built cells. Where a wall stands between two
+ * lines of the grid — its faces on neither — the cells of its own thickness come out built beside a door and unbuilt
+ * beside the solid wall, the room's edge is jagged by less than a wall, and the largest-first cut makes two rectangles
+ * of one room: a garage cut across its floor where its side door is, each part a body with walls of its own on a line
+ * where the plan draws nothing. So two built rectangles are one body when
+ *  - they meet along a seam at least {@link OPEN_SEAM_MIN_M} long on which no wall band is drawn (at most
+ *    {@link OPEN_SEAM_MAX_WALL} of it under bands that run its way within a wall of its line; the side walls that
+ *    cross its ends are the room's own, not walls between the two);
+ *  - their sides across the seam differ by less than a body can be wide (`minSpanM`): a step a wall thick, not a wing;
+ *  - what the rectangle around both adds is no open ground: cells of strips too thin to be bodies (taken in), or cells
+ *    that are a wall's own thickness ({@link WALL_CELL_SHARE} of them under wall bands, or no wider than a wall).
+ * A strip the rectangle takes part of keeps the rest, when the rest is still a rectangle; otherwise nothing is joined.
+ * Bodies with a wall between them, an L (a wing wider than a wall beside the seam) and open ground in the corner all
+ * stay as they were.
+ */
+export function joinOpenSeams(regions: readonly PlanRegion[], decomposition: PlanDecomposition, bands: readonly Band[], wallPx: number, registration: CoordinateRegistration, minSpanM: number): { regions: PlanRegion[]; joined: string[]; refused: string[] } {
+  const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const refused: string[] = []
+  type Box = { ix0: number; iy0: number; ix1: number; iy1: number }
+  const boxOf = (cells: ReadonlyArray<{ ix: number; iy: number }>): Box | undefined => {
+    if (cells.length === 0) return undefined
+    const b = { ix0: Math.min(...cells.map((c) => c.ix)), iy0: Math.min(...cells.map((c) => c.iy)), ix1: Math.max(...cells.map((c) => c.ix)), iy1: Math.max(...cells.map((c) => c.iy)) }
+    return cells.length === (b.ix1 - b.ix0 + 1) * (b.iy1 - b.iy0 + 1) ? b : undefined
+  }
+  const rectOf = (b: Box): PixelRect | undefined => {
+    const a = cellAt.get(`${b.ix0}:${b.iy0}`)
+    const z = cellAt.get(`${b.ix1}:${b.iy1}`)
+    return a && z ? { x0: a.rect.x0, y0: a.rect.y0, x1: z.rect.x1, y1: z.rect.y1 } : undefined
+  }
+  const spanOk = (r: PixelRect): boolean => (r.x1 - r.x0) * registration.metresPerPixelX >= minSpanM && (r.y1 - r.y0) * registration.metresPerPixelY >= minSpanM
+  const made = (b: Box, why: string, confidence: number): PlanRegion | undefined => {
+    const rect = rectOf(b)
+    if (!rect) return undefined
+    const cells: Array<{ ix: number; iy: number }> = []
+    for (let iy = b.iy0; iy <= b.iy1; iy += 1) for (let ix = b.ix0; ix <= b.ix1; ix += 1) cells.push({ ix, iy })
+    const u0 = (rect.x0 - registration.originPx.x) * registration.metresPerPixelX
+    const u1 = (rect.x1 - registration.originPx.x) * registration.metresPerPixelX
+    const v0 = (rect.y0 - registration.originPx.y) * registration.metresPerPixelY
+    const v1 = (rect.y1 - registration.originPx.y) * registration.metresPerPixelY
+    return { id: `region-built-${b.ix0}-${b.iy0}`, classification: 'BUILT', rect, metric: { x0: round6(Math.min(u0, u1)), z0: round6(Math.min(v0, v1)), x1: round6(Math.max(u0, u1)), z1: round6(Math.max(v0, v1)) }, cells, confidence, why }
+  }
+  const wallCell = (rect: PixelRect): boolean => {
+    const area = Math.max(1e-9, (rect.x1 - rect.x0) * (rect.y1 - rect.y0))
+    let covered = 0
+    for (const b of bands) covered += Math.max(0, Math.min(rect.x1, b.bounds.x1 + 1) - Math.max(rect.x0, b.bounds.x0)) * Math.max(0, Math.min(rect.y1, b.bounds.y1 + 1) - Math.max(rect.y0, b.bounds.y0))
+    return covered / area >= WALL_CELL_SHARE
+  }
+  let out = [...regions]
+  const joined: string[] = []
+  for (let guard = 0; guard < regions.length * 2; guard += 1) {
+    let changed = false
+    search: for (const a of out) {
+      if (a.classification !== 'BUILT' || !spanOk(a.rect)) continue
+      const ba = boxOf(a.cells)
+      if (!ba) continue
+      for (const b of out) {
+        if (b === a || b.classification !== 'BUILT' || !spanOk(b.rect)) continue
+        const bb = boxOf(b.cells)
+        if (!bb) continue
+        // a under b (in cell rows) or beside it: the seam, and A's edge on it (top, right, bottom, left = 0..3)
+        const stacked = ba.iy1 + 1 === bb.iy0
+        const beside = ba.ix1 + 1 === bb.ix0
+        if (!stacked && !beside) continue
+        const [lo, hi] = stacked ? [Math.max(ba.ix0, bb.ix0), Math.min(ba.ix1, bb.ix1)] : [Math.max(ba.iy0, bb.iy0), Math.min(ba.iy1, bb.iy1)]
+        if (hi < lo) continue
+        // the wall drawn ALONG the seam: bands running its way within a wall of its line. The walls that cross it at its
+        // ends (the room's own side walls) are not walls between the two
+        const first = stacked ? cellAt.get(`${lo}:${ba.iy1}`) : cellAt.get(`${ba.ix1}:${lo}`)
+        const last = stacked ? cellAt.get(`${hi}:${ba.iy1}`) : cellAt.get(`${ba.ix1}:${hi}`)
+        if (!first || !last) continue
+        const line = stacked ? first.rect.y1 : first.rect.x1
+        const [s0, s1] = stacked ? [first.rect.x0, last.rect.x1] : [first.rect.y0, last.rect.y1]
+        const length = s1 - s0
+        const runs: Array<[number, number]> = []
+        for (const band of bands) {
+          if ((band.axis === 'HORIZONTAL') !== stacked) continue
+          const [c0, c1] = stacked ? [band.bounds.y0, band.bounds.y1 + 1] : [band.bounds.x0, band.bounds.x1 + 1]
+          if (c1 < line - wallPx || c0 > line + wallPx) continue
+          const [a0, a1] = stacked ? [band.bounds.x0, band.bounds.x1 + 1] : [band.bounds.y0, band.bounds.y1 + 1]
+          if (Math.min(a1, s1) > Math.max(a0, s0)) runs.push([Math.max(a0, s0), Math.min(a1, s1)])
+        }
+        const walled = unionLength(runs.sort((p, q) => p[0] - q[0]))
+        const seamM = length * (stacked ? registration.metresPerPixelX : registration.metresPerPixelY)
+        if (seamM < OPEN_SEAM_MIN_M) continue
+        const pair = `${a.id} | ${b.id}`
+        if (walled > OPEN_SEAM_MAX_WALL * length) {
+          refused.push(`${pair}: ${Math.round((walled / length) * 100)} % of the ${seamM.toFixed(2)} m seam is wall`)
+          continue
+        }
+        // their sides across the seam differ by less than a body is wide
+        const mpp = stacked ? registration.metresPerPixelX : registration.metresPerPixelY
+        const steps = stacked ? [Math.abs(a.rect.x0 - b.rect.x0), Math.abs(a.rect.x1 - b.rect.x1)] : [Math.abs(a.rect.y0 - b.rect.y0), Math.abs(a.rect.y1 - b.rect.y1)]
+        if (steps.some((d) => d * mpp >= minSpanM)) {
+          refused.push(`${pair}: their sides differ by ${(Math.max(...steps) * mpp).toFixed(2)} m, as much as a body is wide`)
+          continue
+        }
+        const union: Box = { ix0: Math.min(ba.ix0, bb.ix0), iy0: Math.min(ba.iy0, bb.iy0), ix1: Math.max(ba.ix1, bb.ix1), iy1: Math.max(ba.iy1, bb.iy1) }
+        const inBox = (box: Box, ix: number, iy: number): boolean => ix >= box.ix0 && ix <= box.ix1 && iy >= box.iy0 && iy <= box.iy1
+        const taken = new Map<PlanRegion, Array<{ ix: number; iy: number }>>()
+        let ground = false
+        for (let iy = union.iy0; iy <= union.iy1 && !ground; iy += 1) {
+          for (let ix = union.ix0; ix <= union.ix1; ix += 1) {
+            if (inBox(ba, ix, iy) || inBox(bb, ix, iy)) continue
+            const owner = out.find((r) => r !== a && r !== b && r.classification === 'BUILT' && r.cells.some((c) => c.ix === ix && c.iy === iy))
+            const cell = cellAt.get(`${ix}:${iy}`)
+            if (owner && !spanOk(owner.rect)) taken.set(owner, [...(taken.get(owner) ?? []), { ix, iy }])
+            // a wall's own thickness: under wall bands, or a sliver no wider than a wall (the corner of two walls, a jamb)
+            else if (!owner && cell && (wallCell(cell.rect) || Math.min(cell.rect.x1 - cell.rect.x0, cell.rect.y1 - cell.rect.y0) <= wallPx)) continue
+            else {
+              ground = true
+              break
+            }
+          }
+        }
+        if (ground) {
+          refused.push(`${pair}: the rectangle around both takes in open ground or a body`)
+          continue
+        }
+        // a strip the rectangle takes part of keeps the rest, when the rest is a rectangle
+        const rests = new Map<PlanRegion, PlanRegion | undefined>()
+        let broken = false
+        for (const [strip, cells] of taken) {
+          const rest = strip.cells.filter((c) => !cells.some((t) => t.ix === c.ix && t.iy === c.iy))
+          if (rest.length === 0) rests.set(strip, undefined)
+          else {
+            const box = boxOf(rest)
+            const region = box ? made(box, `${strip.why}; less the cells taken into the body beside it`, strip.confidence) : undefined
+            if (!region) broken = true
+            else rests.set(strip, region)
+          }
+        }
+        if (broken) {
+          refused.push(`${pair}: a strip beside them would be left in pieces`)
+          continue
+        }
+        const stepM = Math.max(...steps) * mpp
+        const one = made(union, `one walled room: ${a.id} and ${b.id} meet along ${seamM.toFixed(2)} m with no wall drawn between them (${Math.round((walled / Math.max(1e-9, length)) * 100)} % of the line under wall bands) and their sides differ by ${stepM.toFixed(2)} m, less than a body is wide — the grid cut one room in two beside a wall that stands between its lines`, round6(Math.min(a.confidence, b.confidence)))
+        if (!one) continue
+        out = [...out.filter((r) => r !== a && r !== b && !rests.has(r)), one, ...[...rests.values()].filter((r): r is PlanRegion => r !== undefined)]
+        joined.push(`${a.id} + ${b.id} → ${one.id} [${one.rect.x0},${one.rect.y0},${one.rect.x1},${one.rect.y1}] (seam ${seamM.toFixed(2)} m, step ${stepM.toFixed(2)} m${taken.size > 0 ? `, ${taken.size} strip${taken.size === 1 ? '' : 's'} taken in` : ''})`)
+        changed = true
+        break search
+      }
+    }
+    if (!changed) break
+  }
+  return { refused: [...new Set(refused)], regions: joined.length === 0 ? [...regions] : out.sort((x, y) => (y.rect.x1 - y.rect.x0) * (y.rect.y1 - y.rect.y0) - (x.rect.x1 - x.rect.x0) * (x.rect.y1 - x.rect.y0) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0)), joined }
+}
+
 export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): PlanRegion[] {
   const built = decomposition.regions.filter((r) => r.classification === 'BUILT')
   if (built.length < 2) return built
