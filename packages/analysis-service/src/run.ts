@@ -660,7 +660,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
     const assessment = assessModel({ model, scene, closure, reconstruction, frames: graph.coordinateFrames, raster, observations: graph.observations, datums: printedDatumsOf(metrics, graph.coordinateFrames) })
     // v3.53.8: what the model may be measured for, apart from the run's outcome; a scale the printed dimensions do not
     // measure is said as a limiting warning too, where every consumer already reads the result's limits
-    const measurement = measurementOfReconstruction(reconstruction, pkg.publishedFacts, assessment.decompositionCompleteness.verdict)
+    const measurement = measurementOfReconstruction(reconstruction, pkg.publishedFacts, assessment.decompositionCompleteness.verdict, reconstruction.modelCompleteness.why)
     if (measurement.scale.status === 'DEPARTS') {
       const reason = measurement.reasons.find((x) => x.code === 'SCALE_DEPARTS')
       warningDetails.push({ code: 'SCALE_DEPARTS_FROM_MEASURED', severity: 'LIMITING', message: `the model's scale is not the one the plan's printed dimensions measure: ${reason?.consequence ?? ''}; its lengths and areas are not for quantities` })

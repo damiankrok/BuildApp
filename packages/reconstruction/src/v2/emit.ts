@@ -604,17 +604,20 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     topology.decisions.push(...plan.decisions.map((d) => ({ storeyIndex: storey.storeyIndex, ...d })))
     for (const d of plan.dropped) dropped.push({ featureId: d.pieceId, why: d.why })
     for (const run of plan.runs) onDebug?.(`storey ${storey.storeyIndex} run ${run.id} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM} doors ${run.doors.map((d) => `${d.from}..${d.to}`).join(',')}`)
-    // v3.53.8: on the top storey a partition takes the height of the body it stands in. A run that enters an attached
+    // v3.53.8: a partition takes the height of the body it stands in. A run that enters an attached
     // body under a roof of its own is cut at that body's face: the part under a flat slab rises to the slab's soffit and
     // follows no roof, the part under the body's own pitched roof dies into that roof's planes; neither is capped by the
     // main roof, so no stretch of partition stands above a roof it is not under (WALL_NOT_UNDER_ROOF). Elsewhere the run
     // is emitted as before.
-    const ownRoofBodies = isTop
-      ? b.masses.filter((m) => m.storeys.includes(storey.storeyIndex) && storey.storeyIndex === Math.max(...m.storeys) && (b.attachedRoofs.some((r) => r.massId === m.id) || b.pitchedAttachedRoofs.some((r) => r.massId === m.id)) && !(b.planeRoofs ?? []).some((r) => r.massId === m.id || r.coversMassIds?.includes(m.id)))
-      : []
+    // (on any storey that is the attached body's own top storey: a single-storey wing beside a two-storey house too)
+    const ownRoofBodies = b.masses.filter((m) => m.storeys.includes(storey.storeyIndex) && storey.storeyIndex === Math.max(...m.storeys) && (b.attachedRoofs.some((r) => r.massId === m.id) || b.pitchedAttachedRoofs.some((r) => r.massId === m.id)) && !(b.planeRoofs ?? []).some((r) => r.massId === m.id || r.coversMassIds?.includes(m.id)))
     const flatBodies = ownRoofBodies
+    // … and a run crossing from one plane roof's bodies into another's (a wing under a roof of its own beside the house's)
+    // is cut where the roof changes, each stretch dying into the planes it stands under (005Y, below)
+    const planeRoofOf = (m: MassV2): string | undefined => (b.planeRoofs ?? []).find((r) => r.massId === m.id || r.coversMassIds?.includes(m.id))?.massId
+    const planeBodies = b.masses.filter((m) => m.storeys.includes(storey.storeyIndex) && storey.storeyIndex === Math.max(...m.storeys) && planeRoofOf(m) !== undefined && !flatBodies.includes(m))
     /** A stretch in a body under its own roof: a flat slab (no profile, the slab's soffit) or its own pitched planes. */
-    type Piece = { id: string; from: number; to: number; height: number; flatMassId?: string; profile?: [string, string] }
+    type Piece = { id: string; from: number; to: number; height: number; flatMassId?: string; profile?: [string, string]; roofKey?: string; planeMassId?: string }
     // the wall a model keeps beside an opening at a wall's end
     const DOOR_END_M = 0.05
     const piecesOf = (run: (typeof plan.runs)[number]): Piece[] => {
@@ -624,7 +627,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         return run.at > a0 + 1e-6 && run.at < a1 - 1e-6 && u > lo + 1e-6 && u < hi - 1e-6
       }
       const cuts = new Set<number>([run.from, run.to])
-      for (const m of flatBodies) {
+      for (const m of [...flatBodies, ...planeBodies]) {
         const r = rectAt(m, storey.storeyIndex)
         for (const u of run.axis === 'X' ? [r.x0, r.x1] : [r.z0, r.z1]) if (u > run.from + 1e-6 && u < run.to - 1e-6) cuts.add(round6(u))
       }
@@ -633,6 +636,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       for (let k = 0; k + 1 < ordered.length; k += 1) {
         const mid = (ordered[k] + ordered[k + 1]) / 2
         const flat = flatBodies.find((m) => inside(m, mid))
+        const plane = flat ? undefined : planeBodies.find((m) => inside(m, mid))
+        const planeMassId = plane ? planeRoofOf(plane) : undefined
         const pitchedRoof = flat ? b.pitchedAttachedRoofs.find((r) => r.massId === flat.id) : undefined
         const roof = flat && !pitchedRoof ? b.attachedRoofs.find((r) => r.massId === flat.id) : undefined
         const piece: Piece = {
@@ -642,11 +647,18 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
           height,
           ...(flat && pitchedRoof ? { flatMassId: flat.id, height: round6(pitchedRoof.ridgeY - l.elevation + 0.5), profile: pitchedPlaneIds(flat.id) } : {}),
           ...(flat && roof ? { flatMassId: flat.id, height: round6(Math.min(height, roof.slabSoffitY - l.elevation)) } : {}),
+          ...(planeMassId ? { planeMassId } : {}),
+          // outside every body (a run's end reaching past a face): it belongs with the stretch beside it
+          roofKey: flat ? `own:${flat.id}` : planeMassId ? `plane:${planeMassId}` : b.masses.some((m) => m.storeys.includes(storey.storeyIndex) && inside(m, mid)) ? '' : 'outside',
         }
         const last = segments[segments.length - 1]
-        if (last && last.flatMassId === piece.flatMassId) last.to = piece.to
+        // a body with no roof of its own beside a plane-roofed one stays with that roof's stretch, as it always was
+        const isPlane = (k?: string): boolean => !!k && k.startsWith('plane:')
+        if (last && (last.roofKey === piece.roofKey || piece.roofKey === 'outside' || (piece.roofKey === '' && isPlane(last.roofKey)))) last.to = piece.to
+        else if (last && (last.roofKey === 'outside' || (last.roofKey === '' && isPlane(piece.roofKey)))) segments[segments.length - 1] = { ...piece, from: last.from }
         else segments.push(piece)
       }
+      // one roof over the whole run: emitted as before (a plane roof is found by the run's middle, below)
       if (segments.length <= 1) return [{ id: run.id, from: run.from, to: run.to, height: segments[0]?.height ?? height, ...(segments[0]?.flatMassId ? { flatMassId: segments[0].flatMassId } : {}), ...(segments[0]?.profile ? { profile: segments[0].profile } : {}) }]
       // a door in a stretch under the slab that starts (or ends) at the cut keeps its width: the cut moves the 5 cm a wall
       // keeps beside an opening into the neighbouring stretch, which only lowers 5 cm of partition there
@@ -659,9 +671,18 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
           if (lo.flatMassId && d.to <= cut + 1e-6 && d.to > cut - DOOR_END_M) lo.to = hi.from = round6(Math.max(lo.to, d.to + DOOR_END_M))
         }
       }
-      // the first stretch outside every flat body keeps the run's id; the others are named for where they stand
-      const keeper = segments.find((x) => !x.flatMassId) ?? segments[0]
-      return segments.map((x, k) => (x === keeper ? x : { ...x, id: `${run.id}-${x.flatMassId ? `under-${x.flatMassId}` : `part-${k}`}` }))
+      // the longest stretch outside every flat body keeps the run's id; the others are named for where they stand
+      const keeper = segments.filter((x) => !x.flatMassId).sort((p, q) => q.to - q.from - (p.to - p.from))[0] ?? segments[0]
+      // named for the roof they stand under; a second stretch under the same roof (the run passes another between) is numbered
+      const used = new Set<string>([run.id])
+      return segments.map((x, k) => {
+        if (x === keeper) return x
+        const base = `${run.id}-${x.flatMassId ? `under-${x.flatMassId}` : x.planeMassId ? `under-${x.planeMassId}` : `part-${k}`}`
+        let id = base
+        for (let n = 2; used.has(id); n += 1) id = `${base}-${n}`
+        used.add(id)
+        return { ...x, id }
+      })
     }
     for (const run of plan.runs) {
       const half = run.thicknessM / 2
@@ -670,7 +691,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         const start = run.axis === 'X' ? { x: round6(piece.from), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(piece.from) }
         const end = run.axis === 'X' ? { x: round6(piece.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(piece.to) }
         // 005Y: a partition on the top storey of a body under a plane roof dies into its planes, as the ring does.
-        const under = (b.planeRoofs ?? []).find((r) => {
+        const under = piece.planeMassId && pieces.length > 1 ? (b.planeRoofs ?? []).find((r) => r.massId === piece.planeMassId) : (b.planeRoofs ?? []).find((r) => {
           const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
           // v3.53.4: … and so does one in a body that stands under another body's roof (`coversMassIds`)
           return [r.massId, ...(r.coversMassIds ?? [])].some((id) => {

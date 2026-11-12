@@ -100,6 +100,37 @@ describe('v3.53.8: a partition under two roofs', () => {
     expect(partitions[0].topProfile?.kind).toBe('FOLLOW_ROOF_PLANES')
   })
 
+  it('on the ground floor of a two-storey house beside a single-storey wing: the stretch in the wing rises to the wing’s own slab', () => {
+    const raw = JSON.parse(readFileSync(new URL('./fixtures/described-house-a.json', import.meta.url), 'utf8'))
+    raw.bodies[0] = { ...raw.bodies[0], storeys: 2, habitableAttic: false, eavesHeightM: 6.0, z0: 0, z1: 9 }
+    raw.bodies[1] = { ...raw.bodies[1], z0: 1, z1: 7 }
+    const checked = checkHouseDescription(raw)
+    if (!checked.ok) throw new Error(JSON.stringify(checked.issues))
+    const b = buildingFromHouseDescription(checked.description).building
+    expect(b.masses.find((m) => m.id === 'main')?.storeys).toEqual([0, 1])
+    const soffit = b.attachedRoofs.find((r) => r.massId === 'body-garage')?.slabSoffitY
+    const { partitions, warnings } = build(b, crossing)
+    expect(warnings).toEqual([])
+    expect(partitions.find((w) => w.id === 'p-a-under-body-garage')?.height).toBe(soffit)
+    // the stretch in the house keeps the storey's own height under the floor above
+    expect(partitions.find((w) => w.id === 'p-a')?.topProfile).toBeUndefined()
+  })
+
+  it('a wing under a plane roof of its own (not a cross gable): the stretch in the wing dies into the wing’s planes', () => {
+    const raw = JSON.parse(readFileSync(new URL('./fixtures/described-house-a.json', import.meta.url), 'utf8'))
+    raw.bodies[0] = { ...raw.bodies[0], habitableAttic: false, eavesHeightM: 3.0, z0: 0, z1: 9 }
+    // the wing's ridge runs the same way as the house's: no valley joins them, each keeps a plane roof of its own
+    raw.bodies[1] = { ...raw.bodies[1], z0: 1, z1: 7, eavesHeightM: 2.6, roof: { ...raw.bodies[1].roof, kind: 'GABLE', ridge: 'ALONG_X', pitchDeg: 30, pitchBasis: 'PUBLISHED_ON_PAGE' } }
+    const checked = checkHouseDescription(raw)
+    if (!checked.ok) throw new Error(JSON.stringify(checked.issues))
+    const b = buildingFromHouseDescription(checked.description).building
+    expect((b.planeRoofs ?? []).map((r) => r.massId).sort()).toEqual(['body-garage', 'main'])
+    const { partitions, warnings } = build(b, crossing)
+    expect(warnings).toEqual([])
+    expect(partitions.find((w) => w.id === 'p-a')?.topProfile).toEqual({ kind: 'FOLLOW_ROOF_PLANES', planeIds: ['roof-main-plane-low', 'roof-main-plane-high'] })
+    expect(partitions.find((w) => w.id === 'p-a-under-body-garage')?.topProfile).toEqual({ kind: 'FOLLOW_ROOF_PLANES', planeIds: ['roof-body-garage-plane-low', 'roof-body-garage-plane-high'] })
+  })
+
   it('counter-case: the warning itself stands — a body with no roof of its own is not cut, and a wall above every roof is still named', () => {
     const b = house('FLAT')
     const { warnings } = build({ ...b, attachedRoofs: [] }, crossing)

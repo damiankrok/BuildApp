@@ -50,6 +50,8 @@ export type MeasurementInputs = {
   /** The base plan's independent metric solution. */
   metric?: { cmPerPixelX: number; confidence: string }
   completeness: string
+  /** The solver's own sentence for that verdict: what is left out, said in the reason. */
+  completenessWhy?: string
 }
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
@@ -81,7 +83,7 @@ export function measurementOf(input: MeasurementInputs): MeasurementAssessment {
       reasons.push({ code: 'SCALE_UNVERIFIED', consequence: `the plan's scale is ${input.metric.confidence.toLowerCase()}: no printed dimension confirms it independently, so lengths and areas are not verified` })
     }
   }
-  if (input.completeness === 'PARTIAL') reasons.push({ code: 'READING_PARTIAL', consequence: 'the reading the model is built from is partial by its own account: a body, an object or a blocking question is left out' })
+  if (input.completeness === 'PARTIAL') reasons.push({ code: 'READING_PARTIAL', consequence: `the reading the model is built from is partial by its own account: ${input.completenessWhy ?? 'a body, an object or a blocking question is left out'}` })
   const quantities: QuantitiesStatus =
     scale === 'DEPARTS'
       ? 'NOT_USABLE'
@@ -112,6 +114,7 @@ export function measurementOfReconstruction(
   },
   publishedAreas: ReadonlyArray<{ key: string; unit: string; value: number }> | undefined,
   completeness: string,
+  completenessWhy?: string,
 ): MeasurementAssessment {
   const lowest = Math.min(...r.building.masses.flatMap((m) => m.storeys))
   let builtM2 = 0
@@ -128,5 +131,6 @@ export function measurementOfReconstruction(
     ...(plan?.scale?.mppX ? { builtMetresPerPixel: plan.scale.mppX } : {}),
     ...(plan?.metric?.cmPerPixelX !== undefined ? { metric: { cmPerPixelX: plan.metric.cmPerPixelX, confidence: plan.metric.confidence } } : {}),
     completeness,
+    ...(completenessWhy ? { completenessWhy } : {}),
   })
 }

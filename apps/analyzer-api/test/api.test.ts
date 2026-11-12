@@ -12,6 +12,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { HOLLOWAY, LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
 import { hashesOf, runAnalysis, ANALYSIS_STAGES } from '@buildapp/analysis-service'
 import { memoryByteCache } from '@buildapp/source-package'
+import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import { loadBundle } from '@buildapp/mobile-scene'
 import { call, gate, pollJob, startApi } from './support/harness.js'
 import type { Api, Json } from './support/harness.js'
@@ -55,7 +56,8 @@ describe('GET /health', () => {
     const r = record(await call(api, 'GET', '/health'))
     expect(r.status).toBe(200)
     expect(r.json).toMatchObject({ status: 'ok', service: 'buildapp-analyzer-api', publishers: ['synthetic-publisher'], vision: 'DETERMINISTIC_ONLY', queue: { running: 0, queued: 0, concurrency: 1 } })
-    expect(r.json.analyzer.solver).toBe('2.5.0')
+    // the solver the service runs, not a frozen literal (pinned at 2.5.0, it failed on every later solver)
+    expect(r.json.analyzer.solver).toBe(SOLVER_V2_VERSION)
     expect(r.text).not.toContain(api.dataDir)
     expect(r.headers.get('x-content-type-options')).toBe('nosniff')
   })

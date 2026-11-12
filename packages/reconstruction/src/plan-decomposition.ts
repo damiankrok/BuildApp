@@ -907,8 +907,10 @@ function closureOf(
  * so at the mouth of a porch between such posts it is (b) that decides) — and (b) a printed opening callout stands at it
  * that is this door's: nearer this line than any grid line across it (a window's callout beside a corner belongs to the
  * other wall), and stating a width within `DOORWAY_CALLOUT_SHARE` of the gap's. The mouth of a porch or a loggia is
- * also a gap between two wall ends, and nothing of its width is printed at it. Without both, the edge stays as it was
- * read. The closure is for the fill alone: the cells' own edges, and everything that weighs them, keep the closures
+ * also a gap between two wall ends, and nothing of its width is printed at it. And (c) not both jambs are RETURNS —
+ * walls that, over most of the jamb, run on across the line deeper than a wall's thickness: a gap between two walls
+ * turning in is the mouth of a recess or a bay, which a callout printed near it does not make a door. Without all
+ * three, the edge stays as it was read. The closure is for the fill alone: the cells' own edges, and everything that weighs them, keep the closures
  * `closureOf` gave.
  */
 export const DOORWAY_JAMB_THICKNESS = 0.7
@@ -933,7 +935,7 @@ export function doorwayBetweenJambs(
   if (callouts.length === 0) return null
   const probes = [...new Set([line.px, ...line.probesPx].map((p) => Math.round(p)))]
   const reach = Math.ceil(wallPx + tolerance)
-  const thickAt = (t: number): boolean => {
+  const thickAt = (t: number): number => {
     for (const p of probes) {
       // the longest run of ink across the line, through a pixel within the tolerance of this face
       let run = 0
@@ -952,19 +954,24 @@ export function doorwayBetweenJambs(
         }
       }
       if (runTouches && run > best) { best = run; touches = true }
-      if (touches && best >= DOORWAY_JAMB_THICKNESS * wallPx) return true
+      if (touches && best >= DOORWAY_JAMB_THICKNESS * wallPx) return best
     }
-    return false
+    return 0
   }
   const lo = Math.floor(from - wallPx)
   const hi = Math.ceil(to + wallPx)
   const jambs: Array<[number, number]> = []
+  // a jamb is a RETURN where, over most of it, the ink runs on across the line deeper than a wall: a wall turning in
+  const returns: boolean[] = []
   let start = -1
+  let deep = 0
   for (let t = lo; t <= hi + 1; t += 1) {
-    const thick = t <= hi && thickAt(t)
-    if (thick && start < 0) start = t
+    const run = t <= hi ? thickAt(t) : 0
+    const thick = run > 0
+    if (thick && start < 0) { start = t; deep = 0 }
+    if (thick && run > wallPx + tolerance) deep += 1
     if (!thick && start >= 0) {
-      if (t - start >= minJambPx) jambs.push([start, t])
+      if (t - start >= minJambPx) { jambs.push([start, t]); returns.push(deep * 2 > t - start) }
       start = -1
     }
   }
@@ -974,6 +981,8 @@ export function doorwayBetweenJambs(
     const b = jambs[i + 1][0]
     const width = b - a
     if (width <= minJambPx || width > maxOpeningPx) continue
+    // a gap between two walls turning in is the mouth of a recess, a porch or a bay, whatever is printed beside it
+    if (returns[i] && returns[i + 1]) continue
     const onEdge = Math.min(b, to) - Math.max(a, from)
     if (onEdge < 0.5 * width) continue
     const widthM = width * mppAlong

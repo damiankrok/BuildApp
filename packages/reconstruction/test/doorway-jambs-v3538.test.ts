@@ -28,7 +28,7 @@ const facade = (px = 150): GridLine => ({ axis: 'Y', px, probesPx: [px] }) as un
 const across = (xs: number[]): GridLine[] => xs.map((px) => ({ axis: 'X', px, probesPx: [px] }) as unknown as GridLine)
 const callout = (x: number, y: number, cm: number): PlanCallout => ({ id: `c-${x}-${cm}`, at: { x, y }, widthsCm: [{ value: cm, confidence: 0.95 }] })
 
-type Drawing = { crossingWall?: boolean; pier?: boolean; westPier?: boolean; farWall?: boolean }
+type Drawing = { crossingWall?: boolean; pier?: boolean; westPier?: boolean; farWall?: boolean; eastReturn?: boolean }
 /**
  * The facade y 139..150: on the west a wall crossing the facade (x 100..111) that ends on it, then the door
  * x 112..144 (1.65 m), then a pier x 145..162 (0.90 m, shorter than any band), then open ground, then a wall again
@@ -42,6 +42,7 @@ function draw(d: Drawing = {}) {
   }
   if (d.westPier) fillRect(r, 94, 139, 111, 150, BLACK)
   if (d.pier ?? true) fillRect(r, 145, 139, 162, 150, BLACK)
+  if (d.eastReturn) fillRect(r, 145, 60, 156, 150, BLACK) // a wall turning in from the facade, the far side of a recess
   if (d.farWall ?? true) fillRect(r, 230, 139, 300, 150, BLACK)
   const m = mask(r)
   const bands = runLengthBands(m, { minThickness: 6, maxThickness: 30, minLength: 24 })
@@ -79,6 +80,12 @@ describe('v3.53.8: a door between a wall end and a short pier, shut for the floo
     expect(read({ crossingWall: false, westPier: true }, [])).toBeNull()
     // a porch's width is not printed at its mouth; a callout of another width beside it is another opening's
     expect(read({ crossingWall: false, westPier: true }, [callout(128, 136, 240)])).toBeNull()
+  })
+
+  it('counter-case: a gap between two walls turning in is the mouth of a recess, whatever callout of its width stands at it', () => {
+    expect(read({ pier: false, eastReturn: true }, [callout(128, 136, 165)])).toBeNull()
+    // the same gap with a pier on the facade for its far jamb is the door
+    expect(read({}, [callout(128, 136, 165)])?.widthM).toBeCloseTo(1.65, 6)
   })
 
   it('counter-case: a callout nearer a line across the facade than the facade belongs to that other wall', () => {

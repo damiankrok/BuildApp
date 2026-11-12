@@ -27,6 +27,9 @@ describe('v3.53.8: the measurement record', () => {
     expect(m.quantities).toBe('LIMITED')
     expect(m.reasons.map((r) => r.code)).toEqual(['COVERAGE_SHORT', 'READING_PARTIAL'])
     expect(m.reasons[0].consequence).toMatch(/cover only the part that was read/)
+    // the solver's own sentence for its verdict is said in the reason when it is given
+    const said = measurementOf({ builtM2: 175.35, publishedFootprintM2: 255.91, completeness: 'PARTIAL', completenessWhy: '1 object refused by the model' })
+    expect(said.reasons.find((r) => r.code === 'READING_PARTIAL')?.consequence).toMatch(/partial by its own account: 1 object refused by the model$/)
   })
 
   it('a scale that departs from the printed dimensions makes quantities NOT_USABLE, whatever the coverage, and names the error', () => {
