@@ -1026,9 +1026,9 @@ export function doorwayBetweenJambs(
  * frame reaching out to a north arrow or a scale bar. Where no chain read
  * anything at all, nothing is returned and the caller has to say so.
  */
-export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect | null {
-  const x = dimensionedAxis(chains, 'HORIZONTAL')
-  const y = dimensionedAxis(chains, 'VERTICAL')
+export function dimensionedExtent(chains: readonly DimensionChain[], walls?: EndSpanWalls): PixelRect | null {
+  const x = dimensionedAxis(chains, 'HORIZONTAL', walls)
+  const y = dimensionedAxis(chains, 'VERTICAL', walls)
   if (!x || !y) return null
   return { x0: round6(x.lo), y0: round6(y.lo), x1: round6(x.hi), y1: round6(y.hi) }
 }
@@ -1039,10 +1039,17 @@ export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect 
  * — so it is a span of the building, however short. TRIMMED_STUB: nothing states it; it is a witness line struck past
  * the last segment, and the frame stops before it. Every decision is on the record; none is silent.
  */
-export type EndSpanDecision = { chainId: string; end: 'LO' | 'HI'; fromPx: number; toPx: number; pixelLength: number; decision: 'KEPT_SUPPORTED' | 'TRIMMED_STUB'; why: string }
+export type EndSpanDecision = { chainId: string; end: 'LO' | 'HI'; fromPx: number; toPx: number; pixelLength: number; decision: 'KEPT_SUPPORTED' | 'KEPT_WALL_FACE' | 'TRIMMED_STUB'; why: string }
+
+/**
+ * v3.53.10: the plan's walls, for one question only — whether a short unread end segment is the thickness of the
+ * wall the chain's end tick stands on (`endSpanWall`). The frame's evidence area is a separate decision from where a
+ * verified dimension lies and from the face of any wall built; this answers only the second.
+ */
+export type EndSpanWalls = { bands: readonly Band[]; wallPx: number }
 
 /** The widest read chain's stretch on one axis, trimmed of unread stubs at its ends (see `dimensionedExtent`). */
-export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null {
+export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZONTAL' | 'VERTICAL', walls?: EndSpanWalls): { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null {
   const pick = (axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null => {
     let best: { lo: number; hi: number; chainId: string; endSpans: EndSpanDecision[] } | null = null
     for (const chain of chains) {
@@ -1066,8 +1073,9 @@ export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZO
       const decide = (k: number, end: 'LO' | 'HI', outer: boolean): boolean => {
         const seg = segments[k]
         const support = endSpanSupport(chain, seg, end, outer)
-        endSpans.push({ chainId: chain.id, end, fromPx: seg.fromPx, toPx: seg.toPx, pixelLength: seg.pixelLength, decision: support ? 'KEPT_SUPPORTED' : 'TRIMMED_STUB', why: support ?? `unread, ${round6(seg.pixelLength)} px against half the shortest read segment (${round6(floor)} px), and nothing in the drawing states it` })
-        return support !== null
+        const wall = support === null && walls ? endSpanWall(chain, seg, end, outer, walls) : null
+        endSpans.push({ chainId: chain.id, end, fromPx: seg.fromPx, toPx: seg.toPx, pixelLength: seg.pixelLength, decision: support ? 'KEPT_SUPPORTED' : wall ? 'KEPT_WALL_FACE' : 'TRIMMED_STUB', why: support ?? wall ?? `unread, ${round6(seg.pixelLength)} px against half the shortest read segment (${round6(floor)} px), and nothing in the drawing states it` })
+        return support !== null || wall !== null
       }
       let first = 0
       let last = segments.length - 1
@@ -1103,6 +1111,60 @@ function endSpanSupport(chain: DimensionChain, seg: DimensionChain['segments'][n
   const segEnd = end === 'LO' ? seg.fromPx : seg.toPx
   const aligned = outer && chainEnd !== undefined && Math.abs(chainEnd - segEnd) < 0.5 && chain.topology?.alignedEnds[end === 'LO' ? 0 : 1] === true
   if (aligned) return `it ends at the chain's end tick, where a neighbouring parallel line ends too (${chain.topology?.groupId ?? ''})`
+  return null
+}
+
+/**
+ * v3.53.10: whether a short unread end segment is the thickness of the wall its chain's end tick stands on, and why —
+ * or null. The end tick is where the drawing puts the building's outer face; a mark just inside it, where the wall's
+ * inner face (or a witness line crossing it) falls, cuts the wall off as a "stub" and the frame then stops on the
+ * inner face, so the whole wall on that side drops out of the reading. All of this must hold, on that side alone:
+ *  - the segment's outer mark is a tick and is the chain's own end tick (a questionable mark ends nothing);
+ *  - a long wall band runs along that side with its outer face at the end tick, within a quarter of its thickness, and
+ *    its inner face inside the segment, the segment no longer than the wall's thickness and half a wall: the segment
+ *    is that wall (a terrace, a step, a lean-to or a strip of planting past the wall is not this);
+ *  - the band meets a long wall of the other orientation at a corner (its end within a wall of the band's inner face,
+ *    across the band's run): ink beside the plan — a logo, a title strip, a planter — meets no wall of the house.
+ * Nothing is inferred where this fails: the stub stays trimmed, as before.
+ */
+function endSpanWall(chain: DimensionChain, seg: DimensionChain['segments'][number], end: 'LO' | 'HI', outer: boolean, walls: EndSpanWalls): string | null {
+  if (!outer) return null
+  const classOf = (i: number): string => (chain.marks?.length === chain.ticksPx.length ? chain.marks[i].class : 'TICK')
+  const ticks = chain.ticksPx.filter((_, i) => classOf(i) === 'TICK')
+  const endTick = end === 'LO' ? ticks[0] : ticks[ticks.length - 1]
+  const outerPx = end === 'LO' ? seg.fromPx : seg.toPx
+  const innerPx = end === 'LO' ? seg.toPx : seg.fromPx
+  if (endTick === undefined || Math.abs(endTick - outerPx) >= 0.5) return null
+  const long = longBands(walls.bands, walls.wallPx)
+  // the side's wall runs across the chain's axis: a horizontal chain measures x, so its end stands on a vertical wall
+  const sideAxis = chain.axis === 'HORIZONTAL' ? 'VERTICAL' : 'HORIZONTAL'
+  const across = (b: Band): [number, number] => (sideAxis === 'VERTICAL' ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1])
+  const along = (b: Band): [number, number] => (sideAxis === 'VERTICAL' ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+  const candidates = long.filter((b) => {
+    if (b.axis !== sideAxis) return false
+    const [p, q] = across(b)
+    const [bandOuter, bandInner] = end === 'LO' ? [p, q] : [q, p]
+    const tol = Math.max(1, b.thickness / 4)
+    if (Math.abs(bandOuter - outerPx) > tol) return false
+    // the segment is the wall's thickness: no more than half a wall beyond it
+    if (seg.pixelLength > b.thickness + Math.max(walls.wallPx, b.thickness) / 2) return false
+    return end === 'LO' ? bandInner <= innerPx + tol : bandInner >= innerPx - tol
+  })
+  for (const b of [...candidates].sort((m, n) => n.length - m.length || m.axisPx - n.axisPx)) {
+    const [p, q] = across(b)
+    const inner = end === 'LO' ? q : p
+    const [r0, r1] = along(b)
+    const corners = long.filter((o) => {
+      if (o.axis === sideAxis) return false
+      const [o0, o1] = across(o) // along the chain's axis for a band of the other orientation
+      const [s0, s1] = along(o)
+      const reaches = end === 'LO' ? Math.abs(o0 - inner) <= walls.wallPx : Math.abs(o1 - inner) <= walls.wallPx
+      const onRun = s1 >= r0 - walls.wallPx && s0 <= r1 + walls.wallPx
+      return reaches && onRun
+    })
+    if (corners.length === 0) continue
+    return `its outer mark is the chain's end tick, on the outer face of the ${round6(b.thickness)} px wall band ${round6(p)}..${round6(q)} (${round6(b.length)} px long) that ${corners.length} wall${corners.length === 1 ? '' : 's'} of the other orientation meet${corners.length === 1 ? 's' : ''} at a corner: the segment is that wall's thickness, and the side is its outer face`
+  }
   return null
 }
 
@@ -1205,10 +1267,10 @@ export const EXTENT_REFUTATION_BOUNDS = { pastWalls: 2, walls: 2 } as const
  */
 export function planExtent(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null, observations?: readonly DimensionObservation[]): PlanExtent | null {
   const extent = planExtentByWalls(chainsIn, bands, wallPx, witness)
-  const stated = observations ? outspannedByOuterTotal(extent, chainsIn, observations, wallPx) : extent
+  const stated = observations ? outspannedByOuterTotal(extent, chainsIn, observations, wallPx, bands) : extent
   if (!stated) return stated
   // 005I: the end spans the framing chains kept or trimmed, on the record whichever frame stood.
-  const endSpans = (['HORIZONTAL', 'VERTICAL'] as const).flatMap((a) => dimensionedAxis(chainsIn, a)?.endSpans ?? [])
+  const endSpans = (['HORIZONTAL', 'VERTICAL'] as const).flatMap((a) => dimensionedAxis(chainsIn, a, { bands, wallPx })?.endSpans ?? [])
   const recorded = endSpans.length > 0 ? { ...stated, endSpans } : stated
   return witness ? refuteByWalls(recorded, chainsIn, witness, wallPx) : recorded
 }
@@ -1278,7 +1340,7 @@ export function refuteByWalls(extent: PlanExtent, chains: readonly DimensionChai
  * chain must cross wall-thick ink (a wall face among its marks): a read line beside the building is
  * never outspanned this way. As for every refusal, the frame only ever widens.
  */
-function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly DimensionChain[], observations: readonly DimensionObservation[], wallPx: number): PlanExtent | null {
+function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly DimensionChain[], observations: readonly DimensionObservation[], wallPx: number, bands: readonly Band[]): PlanExtent | null {
   if (!extent) return extent
   const totals = outerTotalSpans(chains, observations)
   if (totals.length === 0) return extent
@@ -1287,7 +1349,7 @@ function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly Dime
   const refused: string[] = [...(extent.refused ?? [])]
   const reasons: string[] = []
   for (const a of ['HORIZONTAL', 'VERTICAL'] as const) {
-    const framed = dimensionedAxis(chains, a)
+    const framed = dimensionedAxis(chains, a, { bands, wallPx })
     if (!framed) continue
     const chain = chains.find((c) => c.id === framed.chainId)
     if (!chain?.marks?.some((m) => m.class !== 'REJECTED' && m.reasons.includes('WEDGE_NOT_STROKE'))) continue
@@ -1309,6 +1371,7 @@ function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly Dime
 }
 
 function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
+  const endWalls: EndSpanWalls = { bands, wallPx }
   const legacy = planExtentOf(chainsIn, bands, wallPx)
   if (witness === undefined) return legacy
   const framing = framingChains(chainsIn, witness, wallPx)
@@ -1316,14 +1379,14 @@ function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly 
   const chains = framing.allowed
   const legacyProvenance: PlanExtent['provenance'] = legacy?.weak ? { x: 'WALL_GEOMETRY_EXTENT', y: 'WALL_GEOMETRY_EXTENT' } : { x: 'DIMENSION_CHAIN_EXTENT', y: 'DIMENSION_CHAIN_EXTENT' }
   const annotate = (e: PlanExtent | null, refused: string[], provenance: PlanExtent['provenance']): PlanExtent | null => (e ? { ...e, roles: framing.roles, refused, provenance } : e)
-  const framedX = dimensionedAxis(chainsIn, 'HORIZONTAL')?.chainId
-  const framedY = dimensionedAxis(chainsIn, 'VERTICAL')?.chainId
+  const framedX = dimensionedAxis(chainsIn, 'HORIZONTAL', endWalls)?.chainId
+  const framedY = dimensionedAxis(chainsIn, 'VERTICAL', endWalls)?.chainId
   // 005C: a read chain that frames an axis over less than half of the walls' span there, while an exterior chain
   // drawn beside the building covers all of them, states a detail and not the building: it is outspanned, and the
   // axis is taken from what the drawing states widest, as for a refused chain. Being read is not being the extent.
   const outspanned = (a: 'HORIZONTAL' | 'VERTICAL', framed: string | undefined): boolean => {
     if (!witness || framed === undefined || refusedAll.has(framed)) return false
-    const own = dimensionedAxis(chainsIn.filter((c) => c.id === framed), a)
+    const own = dimensionedAxis(chainsIn.filter((c) => c.id === framed), a, endWalls)
     const [w0, w1] = a === 'HORIZONTAL' ? [witness.rect.x0, witness.rect.x1] : [witness.rect.y0, witness.rect.y1]
     if (!own || own.hi - own.lo >= (w1 - w0) / 2) return false
     const ticks = exteriorSpan(chainsIn, framing.roles, a, witness)
@@ -1338,12 +1401,12 @@ function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly 
   const displaced = [...(shortX && framedX !== undefined ? [framedX] : []), ...(shortY && framedY !== undefined ? [framedY] : [])]
   displaced.push(...(['HORIZONTAL', 'VERTICAL'] as const)
     .flatMap((a) => {
-      const kept = dimensionedAxis(chains, a)
+      const kept = dimensionedAxis(chains, a, endWalls)
       const keptSpan = kept ? kept.hi - kept.lo : -1
       return chainsIn
         .filter((c) => c.axis === a && refusedAll.has(c.id))
         .filter((c) => {
-          const own = dimensionedAxis([c], a)
+          const own = dimensionedAxis([c], a, endWalls)
           return own !== null && own.hi - own.lo > keptSpan
         })
         .map((c) => c.id)
@@ -1353,7 +1416,7 @@ function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly 
   const widest = (a: 'HORIZONTAL' | 'VERTICAL'): Span => {
     // What the drawing states: another read chain, an exterior chain's ticks — the widest of them.
     const statements: Span[] = []
-    const read = dimensionedAxis(chains.filter((c) => !displaced.includes(c.id)), a)
+    const read = dimensionedAxis(chains.filter((c) => !displaced.includes(c.id)), a, endWalls)
     if (read) statements.push({ lo: read.lo, hi: read.hi, provenance: 'DIMENSION_CHAIN_EXTENT' })
     const ticks = exteriorSpan(chainsIn, framing.roles, a, witness)
     if (ticks) statements.push({ lo: ticks.lo, hi: ticks.hi, provenance: 'EXTERIOR_CHAIN_TICKS' })
@@ -1384,7 +1447,7 @@ function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly 
 
 function planExtentOf(chains: readonly DimensionChain[], bands: readonly Band[], wallPx: number): { rect: PixelRect; weak: boolean; why: string } | null {
   const long = longBands(bands, wallPx)
-  const chainRect = dimensionedExtent(chains)
+  const chainRect = dimensionedExtent(chains, { bands, wallPx })
   const fromBands = axisBox(long, wallPx)
   if (!chainRect) {
     if (!fromBands) return null

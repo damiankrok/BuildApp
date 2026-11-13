@@ -303,7 +303,11 @@ export const CROSS_ROOF_SPAN_SLACK_M = 0.35
  * standing there rather than a doorway: two leaves of the widest door a plan draws (`DOOR_MAX_WIDTH_M`).
  */
 export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
-export const SOLVER_V2_VERSION = '2.40.0' as const
+// 2.41.0 (v3.53.10): an overall dimension line's last segment that is exactly the thickness of the wall its end tick stands
+// on — the tick on the wall's outer face, a witness line across its inner face — is kept (KEPT_WALL_FACE), on that side's
+// own evidence (a long wall band with its outer face at the tick, meeting a wall of the other orientation at a corner).
+// Before, it was trimmed as an unread stub and the frame stopped on the inner face, losing the whole wall on that side.
+export const SOLVER_V2_VERSION = '2.41.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
