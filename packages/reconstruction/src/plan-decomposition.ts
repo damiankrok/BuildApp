@@ -261,6 +261,12 @@ export type PlanBay = {
   /** The axes of its two side walls. */
   wallAxesPx: [number, number]
   mouth: WideOpeningDecision
+  /**
+   * v3.53.9: how its side walls were found. BAND: each is one band starting at the envelope edge (the rule before
+   * v3.53.9). CHAIN: at least one is a chain of collinear bands joined across openings, or runs through the edge from
+   * inside the box (`baysOf`).
+   */
+  sideWalls?: 'BAND' | 'CHAIN'
 }
 
 /** One reading of the plan's enclosure, with what it concluded. */
@@ -324,6 +330,8 @@ export type PlanDecomposition = {
    * what was decided: GATE_SHUT (built, a garage behind its gate) or LEFT_OPEN (with what evidence was missing).
    */
   gateBays?: GateBay[]
+  /** v3.53.9: bays with chained side walls whose mouth the drawing shuts, found but not applied by this reading. */
+  chainedBaysPending?: number
   /**
    * N8-01: enclosed strips outside the walls the decomposition put back on the ground (`lineWorkStrips`): too narrow
    * for a body, shut on the outside only by line work. Absent when none.
@@ -382,6 +390,11 @@ export type PlanDecompositionOptions = {
   maxOpeningM?: number
   /** The widest hole that can still be a hole in a wall when the drawing says so, in metres. */
   maxWideOpeningM?: number
+  /**
+   * v3.53.9: read bay side walls as chains of collinear bands (`baysOf`). Asked for by `decomposePlan` only, and only
+   * for a plan whose long-band box stands with nothing the outline reading adds (`chainedReading`).
+   */
+  chainedSideWalls?: boolean
   /** Continuous thin line needed across a wide gap, as a fraction of it, to count as drawn infill. */
   minInfill?: number
   /** The plan's printed opening callouts. */
@@ -434,7 +447,7 @@ export type PlanDecompositionOptions = {
   shutOpenings?: ReadonlyArray<{ axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number }>
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule' | 'shutOpenings'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule' | 'shutOpenings' | 'chainedSideWalls'>>
 
 /** The least distance between two grid lines (`PlanDecompositionOptions.minCellM`), metres. */
 export const DEFAULT_MIN_CELL_M = 0.45
@@ -1748,6 +1761,8 @@ function alongWallPieces(bands: readonly Band[], axis: 'X' | 'Y', line: GridLine
 }
 
 type WideOpeningContext = {
+  /** v3.53.9: side walls may be chains of collinear bands (`baysOf`). */
+  chained?: boolean
   mask: Mask
   bands: readonly Band[]
   linesX: readonly GridLine[]
@@ -1992,7 +2007,7 @@ function structuralEvidence(spans: readonly CompoundFacadeSpan[], linesX: readon
  * Walls reaching out with nothing drawn between their ends — a carport, a
  * covered passage, a porch — leave the mouth open, and the bay stays ground.
  */
-function baysOf(ctx: WideOpeningContext): PlanBay[] {
+function baysOf(ctx: WideOpeningContext, decided: readonly CollinearGap[] = []): PlanBay[] {
   const env = ctx.envelope
   if (!env) return []
   const out: PlanBay[] = []
@@ -2008,20 +2023,58 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
     const acrossLo = vertical ? env.rect.x0 : env.rect.y0
     const acrossHi = vertical ? env.rect.x1 : env.rect.y1
     const runOf = (b: Band): [number, number] => (vertical ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
-    const leaving = ctx.bands
-      .filter((b) => b.axis === s.bandAxis && b.thickness >= ctx.wallPx * 0.6 && b.axisPx >= acrossLo - ctx.wallPx && b.axisPx <= acrossHi + ctx.wallPx)
-      .map((b) => {
-        const [r0, r1] = runOf(b)
-        // where the band starts relative to the envelope edge, and how far out it reaches
+    // v3.53.9: a side wall is the chain of collinear bands one wall line carries, joined across the holes a wall may
+    // have on its width alone (a door, a window: no wider than a lintel spans) — the convention every wall is read by.
+    // It leaves the box when it reaches out past the edge from the edge itself OR from inside the box: a wall drawn
+    // through the box's edge (a room's wall that runs on into the wing), or broken by a window that straddles the edge,
+    // is still one wall leaving the box.
+    const candidates = ctx.bands.filter((b) => b.axis === s.bandAxis && b.thickness >= ctx.wallPx * 0.6 && b.axisPx >= acrossLo - ctx.wallPx && b.axisPx <= acrossHi + ctx.wallPx).sort((p, q) => p.axisPx - q.axisPx || runOf(p)[0] - runOf(q)[0])
+    // the rule before v3.53.9: one band, starting at the envelope edge, reaching out
+    const singly = (b: Band): boolean => {
+      const [r0, r1] = runOf(b)
+      return Math.abs((s.dir > 0 ? r0 : r1) - s.edge) <= ctx.wallPx * 2.5 && (s.dir > 0 ? r1 - s.edge : s.edge - r0) >= minOut
+    }
+    const chains: Array<{ b: Band; r0: number; r1: number; single: boolean; members: number }> = []
+    for (const b of candidates) {
+      const [r0, r1] = runOf(b)
+      // a hole wider than a lintel joins the chain only where the wide-gap reader has already decided, on the drawing's
+      // own evidence, that it is an opening in this very wall (glazing drawn across it, a callout of its width)
+      const opening = (a: number, z: number): boolean => z - a <= ctx.maxOpeningPx || decided.some((g) => g.decision.decision === 'OPENING_IN_WALL' && g.axis === (vertical ? 'X' : 'Y') && Math.abs(g.line.px - b.axisPx) <= ctx.wallPx && g.decision.fromPx <= a + ctx.wallPx && g.decision.toPx >= z - ctx.wallPx)
+      // one wall line: axes within a wall's thickness (a corner block widens the band at a wall's end and moves its axis)
+      const on = chains.filter((c) => Math.abs(c.b.axisPx - b.axisPx) <= ctx.wallPx && (r0 >= c.r1 ? opening(c.r1, r0) : r1 <= c.r0 ? opening(r1, c.r0) : true))
+      if (on.length === 0) {
+        chains.push({ b, r0, r1, single: singly(b), members: 1 })
+        continue
+      }
+      const keep = on[0]
+      keep.r0 = Math.min(keep.r0, r0, ...on.map((c) => c.r0))
+      keep.r1 = Math.max(keep.r1, r1, ...on.map((c) => c.r1))
+      if (b.thickness > keep.b.thickness || runOf(b)[1] - runOf(b)[0] > runOf(keep.b)[1] - runOf(keep.b)[0]) keep.b = { ...b, bounds: vertical ? { ...b.bounds, y0: keep.r0, y1: keep.r1 } : { ...b.bounds, x0: keep.r0, x1: keep.r1 } }
+      keep.members += 1 + on.slice(1).reduce((a, c) => a + c.members, 0)
+      keep.single = false
+      for (const c of on.slice(1)) chains.splice(chains.indexOf(c), 1)
+    }
+    const leaving = chains
+      .map(({ b, r0, r1, single }) => {
+        // where the chain starts relative to the envelope edge (at it, or inside the box), and how far out it reaches
         const start = s.dir > 0 ? r0 : r1
         const reach = s.dir > 0 ? r1 - s.edge : s.edge - r0
-        return { b, start, reach }
+        return { b: { ...b, bounds: vertical ? { ...b.bounds, y0: r0, y1: r1 } : { ...b.bounds, x0: r0, x1: r1 } }, start, reach, single }
       })
-      .filter((x) => Math.abs(x.start - s.edge) <= ctx.wallPx * 2.5 && x.reach >= minOut)
+      .filter((x) => (s.dir > 0 ? x.start <= s.edge + ctx.wallPx * 2.5 : x.start >= s.edge - ctx.wallPx * 2.5) && x.reach >= minOut)
       .sort((p, q) => p.b.axisPx - q.b.axisPx)
-    for (let i = 0; i + 1 < leaving.length; i += 1) {
-      const a = leaving[i]
-      const c = leaving[i + 1]
+    // before v3.53.9, and in every reading but the chained one: each band on its own, starting at the edge
+    const banded = candidates
+      .filter(singly)
+      .map((b) => {
+        const [r0, r1] = runOf(b)
+        return { b, start: s.dir > 0 ? r0 : r1, reach: s.dir > 0 ? r1 - s.edge : s.edge - r0, single: true }
+      })
+      .sort((p, q) => p.b.axisPx - q.b.axisPx)
+    const sideWalls = ctx.chained === true ? leaving : banded
+    for (let i = 0; i + 1 < sideWalls.length; i += 1) {
+      const a = sideWalls[i]
+      const c = sideWalls[i + 1]
       const separationM = (c.b.axisPx - a.b.axisPx) * s.acrossMpp
       if (separationM < 2) continue
       // Two walls standing at the side's own ends are the building's own sides running on, and a "bay" between them
@@ -2102,7 +2155,8 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const evidenced = corners && (drawn || !!callout) && (gapPx <= ctx.maxWidePx || (drawn && !!callout))
       // The other reading of an undrawn mouth both side walls reach: a garage door or a glazed
       // wall rather than a carport or a loggia. Asked for by the resolver only.
-      const byHypothesis = !evidenced && ctx.shutMouths && corners && gapPx <= ctx.maxWidePx
+      // v3.53.9: a bay whose side walls are chains is shut only on the drawing's own evidence — never by that reading
+      const byHypothesis = !evidenced && ctx.shutMouths && corners && gapPx <= ctx.maxWidePx && a.single && c.single
       const opening = evidenced || byHypothesis
       const signals = [corners ? 'both side walls reach it' : 'a side wall stops short of it', drawn ? `${Math.round(infill * 100)}% of the gap is one drawn line` : `only ${Math.round(infill * 100)}% of the gap is drawn across`, callout ? `a callout of ${callout.widthCm} cm is printed at it` : 'no callout states its width']
       const mouth: WideOpeningDecision = {
@@ -2124,7 +2178,7 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const rect: PixelRect = vertical
         ? { x0: outer0, x1: outer1, y0: Math.min(s.edge, far.px), y1: Math.max(s.edge, far.px) }
         : { y0: outer0, y1: outer1, x0: Math.min(s.edge, far.px), x1: Math.max(s.edge, far.px) }
-      out.push({ side: s.side, rect, wallAxesPx: [a.b.axisPx, c.b.axisPx], mouth })
+      out.push({ side: s.side, rect, wallAxesPx: [a.b.axisPx, c.b.axisPx], mouth, sideWalls: a.single && c.single ? 'BAND' : 'CHAIN' })
     }
   }
   return out
@@ -2157,10 +2211,40 @@ export function decomposePlan(
   const incumbent = reread?.incumbent ?? first
   const extension = reread?.extension ?? firstExtension
   if (reread?.options) options = reread.options
-  if (!extension.override) return { ...incumbent, boundary: extension.record }
+  if (!extension.override) return chainedReading(mask, chains, bands, registration, extent, options, incumbent, extension.record)
   const outlined = decomposeCore(mask, chains, bands, registration, extent, options, extension.override)
   const box = incumbent.compoundFacades ? { compoundFacadesBoxReading: { spans: incumbent.compoundFacades, wideOpenings: incumbent.wideOpenings, cells: incumbent.cells } } : {}
   return { ...outlined, boundary: extension.record, outlineReading: true, ...box }
+}
+
+/**
+ * v3.53.9 — the reading with chained bay side walls, for a plan whose long-band box stands with nothing the outline adds.
+ *
+ * The box stops at the last long wall; a part of the house beyond it whose front is piers and wide openings comes back
+ * through the outline reading (005C) or as a bay. Where neither brought it back and the box reading found a bay whose
+ * side walls are chains of collinear bands — a house wall running through the box's edge, or broken there by an
+ * opening the drawing shuts — with its mouth shut by the drawing (`baysOf`), the plan is read once more with those
+ * bays. Where the outline already continues the box, its reading stands as before: the chained bays never compete with
+ * it. The reading is taken only when it builds more than the box did, and the outline is not read again over it.
+ */
+function chainedReading(
+  mask: Mask,
+  chains: readonly DimensionChain[],
+  bands: readonly Band[],
+  registration: CoordinateRegistration,
+  extent: PixelRect,
+  options: PlanDecompositionOptions,
+  incumbent: PlanDecomposition,
+  record: BoundaryRecord,
+): PlanDecomposition {
+  const plain = { ...incumbent, boundary: record }
+  if ((incumbent.chainedBaysPending ?? 0) === 0 || options.chainedSideWalls !== undefined) return plain
+  const chained = decomposeCore(mask, chains, bands, registration, extent, { ...options, chainedSideWalls: true })
+  const builtArea = (d: PlanDecomposition): number => d.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + (c.rect.x1 - c.rect.x0) * (c.rect.y1 - c.rect.y0), 0)
+  if (!chained.bays.some((b) => b.sideWalls === 'CHAIN' && b.mouth.decision === 'OPENING_IN_WALL') || builtArea(chained) <= builtArea(incumbent)) return plain
+  // the box reading with the bays, and the boundary as it was weighed against the box: the outline is not read again
+  // over the bays (it would re-cut what they add on wall lines the box never weighed)
+  return { ...chained, boundary: record }
 }
 
 /**
@@ -2292,7 +2376,7 @@ function decomposeCore(
   const minJambPx = Math.max(2, wallPx * 0.5)
 
   const maxWidePx = opt.maxWideOpeningM / Math.max(mppX, mppY)
-  const ctxOf = (): WideOpeningContext => ({ mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance })
+  const ctxOf = (): WideOpeningContext => ({ mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance, chained: options.chainedSideWalls === true })
   // 005N: a wide gap on a facade is read for its own topology first (`compound-facade.ts`). A plan with no scale of its
   // own (a unit placeholder) states no return length, recess depth or interval width, as it states no opening width to
   // the boundary (`decomposePlan`): its gaps are read as before.
@@ -2327,7 +2411,10 @@ function decomposeCore(
   // Wide gaps the drawing says are openings (H1's extra closures), per line.
   const collinear = wide.gaps
   const spans = wide.spans
-  const bays = baysOf(ctx)
+  const bays = baysOf(ctx, collinear)
+  // v3.53.9: what the chained reading would add, counted here so that `decomposePlan` reads the plan again only when
+  // there is something to add
+  const chainedBaysPending = ctx.chained === true || override ? 0 : baysOf({ ...ctx, chained: true }, collinear).filter((b) => b.sideWalls === 'CHAIN' && b.mouth.decision === 'OPENING_IN_WALL').length
   // 005N: what a compound span's topology shuts whatever its mouths are: its separators (wall ink) and the set-back
   // wall of each recess interval (wall, and door-sized holes between wall jambs), on the grid line at that wall.
   const structural = structuralEvidence(spans, linesX, linesY, minCellPx)
@@ -2350,7 +2437,7 @@ function decomposeCore(
   const rightX = linesX[nx].px
   // v3.53.3: openings of an enclosed room's own wall, shut in every reading (`rereadEnclosedRooms`)
   const shutOn = (axis: 'X' | 'Y', px: number): Array<[number, number]> => (options.shutOpenings ?? []).filter((o) => o.axis === axis && Math.abs(o.linePx - px) <= 0.5).map((o) => [o.fromPx, o.toPx] as [number, number])
-  const edgesFor = (withEvidence: boolean, evidence: Map<string, Array<[number, number]>> = evidencedOn): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
+  const edgesFor = (withEvidence: boolean, evidence: Map<string, Array<[number, number]>> = evidencedOn, bayList: readonly PlanBay[] = bays): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
     const vEdge: EdgeClosure[][] = []
     for (let ix = 0; ix <= nx; ix += 1) {
       const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance, mask)
@@ -2385,7 +2472,7 @@ function decomposeCore(
       // A shut bay mouth shuts every edge of its far line between its two
       // side walls' axes: the piers, the corner blocks and the opening
       // between them are one front wall.
-      for (const bay of bays) {
+      for (const bay of bayList) {
         if (bay.mouth.decision !== 'OPENING_IN_WALL') continue
         const [a0, a1] = bay.wallAxesPx
         if (bay.mouth.axis === 'Y') {
@@ -2444,7 +2531,7 @@ function decomposeCore(
   }
   const passV = (vEdge: EdgeClosure[][], ix: number, iy: number): boolean => open(vEdge[ix][iy]) && doorwayOn('X', ix, iy) === null
   const passH = (hEdge: EdgeClosure[][], iy: number, ix: number): boolean => open(hEdge[iy][ix]) && doorwayOn('Y', iy, ix) === null
-  const flood = (vEdge: EdgeClosure[][], hEdge: EdgeClosure[][], withBays: boolean): Uint8Array => {
+  const flood = (vEdge: EdgeClosure[][], hEdge: EdgeClosure[][], withBays: boolean, seeded: readonly PlanBay[] = shutBays): Uint8Array => {
     const reached = new Uint8Array(nx * ny)
     const queue: Array<[number, number]> = []
     const push = (ix: number, iy: number): void => {
@@ -2466,7 +2553,7 @@ function decomposeCore(
           const cx = (linesX[ix].px + linesX[ix + 1].px) / 2
           const cy = (linesY[iy].px + linesY[iy + 1].px) / 2
           const inEnvelope = cx >= envelope.rect.x0 && cx <= envelope.rect.x1 && cy >= envelope.rect.y0 && cy <= envelope.rect.y1
-          const inBay = withBays && shutBays.some((b) => cx >= b.rect.x0 && cx <= b.rect.x1 && cy >= b.rect.y0 && cy <= b.rect.y1)
+          const inBay = withBays && seeded.some((b) => cx >= b.rect.x0 && cx <= b.rect.x1 && cy >= b.rect.y0 && cy <= b.rect.y1)
           if (!inEnvelope && !inBay) push(ix, iy)
         }
       }
@@ -2730,6 +2817,34 @@ function decomposeCore(
   // outline over a back door — lies outside the walls, not inside them (`lineWorkStrips`).
   const lineStrips = lineWorkStrips(cells, nx, ny, { x: Math.max(1, 2 * wallM + 0.2) / mppX, y: Math.max(1, 2 * wallM + 0.2) / mppY }, inside, mask)
   const gateBays = override ? [] : shutGateBays({ mask, cells, byKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains, rings: opt.calloutRings ?? [] })
+  // v3.53.9: the gate rule keeps a garage it recognises. A bay found only through chained side walls (`baysOf`) may
+  // be a garage the gate rule would have shut from its own evidence — three walls, jambs, a car's room and the gate's
+  // printed width, leaf or door — with the barriers that keep largest-first tiling out of it (`gateBayBarriers`). The
+  // fill is read once more without those bays, and the gate rule is asked about the cells only they enclose; what it
+  // shuts there is recorded as its own, and keeps its barriers.
+  const chainBays = override ? [] : shutBays.filter((b) => b.sideWalls === 'CHAIN')
+  if (chainBays.length > 0) {
+    const bandBays = bays.filter((b) => !chainBays.includes(b))
+    const bandShut = shutBays.filter((b) => !chainBays.includes(b))
+    const withoutEdges = differs ? edgesFor(true, evidencedOn, bandBays) : strict
+    const without = flood(withoutEdges.vEdge, withoutEdges.hEdge, differs, bandShut)
+    const inChainBay = (c: PlanCell): boolean => {
+      const cx = (c.rect.x0 + c.rect.x1) / 2
+      const cy = (c.rect.y0 + c.rect.y1) / 2
+      return chainBays.some((b) => cx >= b.rect.x0 && cx <= b.rect.x1 && cy >= b.rect.y0 && cy <= b.rect.y1)
+    }
+    const probe: PlanCell[] = cells.map((c) => {
+      const edges: PlanCell['edges'] = [withoutEdges.hEdge[c.iy][c.ix], withoutEdges.vEdge[c.ix + 1][c.iy], withoutEdges.hEdge[c.iy + 1][c.ix], withoutEdges.vEdge[c.ix][c.iy]]
+      const open = inChainBay(c) && without[index(c.ix, c.iy)] === 1
+      return { ...c, edges, ...(open ? { classification: 'OUTSIDE' as const, why: 'outside, read without the chained bays' } : {}) }
+    })
+    const probeKey = new Map(probe.map((c) => [`${c.ix}:${c.iy}`, c]))
+    for (const g of shutGateBays({ mask, cells: probe, byKey: probeKey, linesX, linesY, inside, tolerance, minJambPx, maxOpeningPx, maxWidePx, mppX, mppY, wallM, wallPx, chains, rings: opt.calloutRings ?? [] })) {
+      if (g.decision !== 'GATE_SHUT') continue
+      if (!g.cells.every((k) => { const c = byKey.get(`${k.ix}:${k.iy}`); return c !== undefined && c.classification === 'BUILT' && inChainBay(c) })) continue
+      gateBays.push({ ...g, why: `${g.why} (the gate rule's own reading of a bay also found through chained side walls)` })
+    }
+  }
   // the drawn thickness of the wall band along each edge, for the seams (`facadeSeams`)
   const edgeThickness = (axis: 'X' | 'Y', line: number, k: number): number => {
     const l = axis === 'X' ? linesX[line] : linesY[line]
@@ -2761,7 +2876,7 @@ function decomposeCore(
     const r = (c: number[]): number => (c[0] < 0 || c[1] < 0 || c[0] >= nx || c[1] >= ny ? 1 : reached[index(c[0], c[1])])
     if (r(c1) !== r(c2) && !doorways.some((x) => x.id === d.id)) doorways.push(d)
   }
-  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(doorways.length > 0 ? { doorways } : {}), ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}), ...(lineStrips.length > 0 ? { lineWorkStrips: lineStrips } : {}) }
+  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis, ...(doorways.length > 0 ? { doorways } : {}), ...(spans.length > 0 ? { compoundFacades: spans } : {}), ...(gateBays.length > 0 ? { gateBays } : {}), ...(lineStrips.length > 0 ? { lineWorkStrips: lineStrips } : {}), ...(chainedBaysPending > 0 ? { chainedBaysPending } : {}) }
 }
 
 /** N8-01: the share of the rectangles' area in wall bands or solid ink, sampled on a grid of 32 steps a side. */

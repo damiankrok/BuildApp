@@ -292,6 +292,10 @@ import type { ApproximateRidge } from './roof-datum.js'
 // through one enclosed space — built on both sides, no wall drawn on most of it — is no wall (`seamOpenShare`, as under
 // one roof). On the top storey a partition running into an attached body under a roof of its own is cut at that body's
 // face: under a flat slab it rises to the soffit, under the body's pitched roof it dies into those planes.
+// 2.40.0 (v3.53.9): a part of the house beyond the long-band box whose front is piers and wide openings comes back as a
+// bay when its side walls are chains of collinear bands — a house wall running through the box's edge, or broken
+// there by an opening the drawing itself shuts — and the drawing shuts its mouth (`baysOf`, `chainedReading`); only
+// where the box stands with nothing the outline reading adds, and a garage the gate rule recognises keeps its barriers.
 /** v3.53.4: a roof crossing the main one is as wide as the main roof's span; the bodies it stands on span that, within this (m). */
 export const CROSS_ROOF_SPAN_SLACK_M = 0.35
 /**
@@ -299,7 +303,7 @@ export const CROSS_ROOF_SPAN_SLACK_M = 0.35
  * standing there rather than a doorway: two leaves of the widest door a plan draws (`DOOR_MAX_WIDTH_M`).
  */
 export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
-export const SOLVER_V2_VERSION = '2.39.0' as const
+export const SOLVER_V2_VERSION = '2.40.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
