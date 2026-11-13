@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.9 (outline at wide glazings and gates: a wing beyond the long-band box returns as a bay whose side walls are chains of collinear bands; solver 2.40.0, service 1.11.0, APK 1335; report `stage-reports/SOURCE_TO_MODEL_V3539.md`). Before it: v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.10 (plan extent at the wall face: an overall line's last segment that is the thickness of the wall its end tick stands on is kept; solver 2.41.0, service 1.11.0, APK 1336; report `stage-reports/SOURCE_TO_MODEL_V35310.md`). Before it: v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -177,7 +177,30 @@
   a 2.85 m gate, false 3.85 m window gone) — transfer shown for the gate case; glazing on a wing's side wall only on DEV.
   Ofelia 2, Stellarie (extent at the inner face), Lulo 3, Renklody 15 (scale), Layla 2 remain refusals. APK 1335,
   same signature; Android UI NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V3539.md`.
-- **NEXT (one action):** the OWNER installs APK 1335 and runs LOCAL on the Jaskrzyny link (the whole house with the
+- **v3.53.10 (2026-11-13), plan extent at the wall face:** base `961fb1f` (APK 1335). First wrong decision in Stellarie
+  and Skalnice 3 (DEV): the overall dimension line ends with a tick on an exterior wall's outer face, a witness line
+  crosses it at the wall's inner face, and the 005I end-span rule trimmed the wall-thick unread last segment as a stub —
+  the frame stopped on the inner face and the whole wall on that side fell out. Now kept (`KEPT_WALL_FACE`) on that
+  side's own evidence only: the end tick on the outer face of a long wall band whose inner face lies inside the segment
+  (no longer than its thickness plus half a wall), the band meeting a wall of the other orientation at a corner. Scale
+  and built faces (005Q/N1a) untouched. Stellarie refusal → model 188.68/188.41 m² MATCHES, scale MEASURED, 0 compile
+  errors — but its 5.14 m gate (dashed, callout unread) comes out as a 0.53 m-tall window, plus a merged 6.14 m north
+  glazing and a spurious 3.48 m garage opening, while `measurement` says USABLE_IN_SCOPE; Skalnice 3 refusal → model
+  168.37/167.15 m², scale UNVERIFIED (LIMITED). 104 runs (80 + 10 of 1334 + 14 of 1335): 102 byte-identical, corpus
+  models 64/80 → 66/80 (both DEV), no other model changed, room table 87/169 unchanged. Fresh frozen trial (16 new
+  families, pages 13–15, expectations sealed): 16/16 identical, no activation — transfer NOT shown, scope limited to the
+  DEV family; Wrotycze (moved to DEV) loses both sides through an interior chain framing the axis — another mechanism.
+  Nigelle 4: the publisher logo joins the wall witness and becomes two masses, the thin-walled left wing is a detached
+  group; Torenie 3: 3.98 cm/px from a resolution hypothesis against the strong 3.128 (SCALE_DEPARTS, NOT_USABLE) — first
+  losses recorded, no code change. APK 1336, same signature; Android UI NOT_VERIFIED. Report
+  `stage-reports/SOURCE_TO_MODEL_V35310.md`.
+- **NEXT (one action):** the OWNER installs APK 1336 and runs LOCAL on the Stellarie link (the whole house with the east
+  wing and the garage; the gate is still a wrong window — known). Next code candidates, by measured size: the frame from
+  an interior chain or the wall witness (Wrotycze, Nigelle 4 with the logo, Supertunie 2; 9/16 refusals in the fresh
+  trial); the scale chosen by a hypothesis against a strong metric (Torenie 3); openings on recovered walls (Stellarie
+  gate/glazing, Malwina garage) and an opening defect reaching `measurement`; Anodach's rear-wall height. Still open:
+  005Q — keep N1a, or the conditional face correction as its own stage.
+- **(superseded by v3.53.10) NEXT:** the OWNER installs APK 1335 and runs LOCAL on the Jaskrzyny link (the whole house with the
   garage, west window 3.30 m, gate 5.00 m, "Pomiar" MATCHES). Next code candidates, by measured size: extent at an
   inner face (Stellarie, Skalnice family); a garage refused by the walled-perimeter rule when its callouts are
   unreadable (Malwina); wide mouths with no infill and no read callout (Ofelia 2, Layla 2, Lulo 3); covered corners
