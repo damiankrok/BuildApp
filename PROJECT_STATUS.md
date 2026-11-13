@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, service 1.11.0, APK 1334; report `stage-reports/SOURCE_TO_MODEL_V3538.md`). Before it: v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.9 (outline at wide glazings and gates: a wing beyond the long-band box returns as a bay whose side walls are chains of collinear bands; solver 2.40.0, service 1.11.0, APK 1335; report `stage-reports/SOURCE_TO_MODEL_V3539.md`). Before it: v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -159,7 +159,31 @@
   frozen houses: 9 identical, Sadzcach improved, Mekintoszach refused in both (scale). Biggest remaining: refusals where
   the wall envelope ends before the house (8 of 9 DEV refusals) and covered corners enclosed by the ring (3 fresh houses,
   as in 1333). APK 1334, same signature; Android UI NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V3538.md`.
-- **NEXT (one action):** the OWNER installs APK 1334 and runs LOCAL on the Azolle 7 link (the whole house, garage door
+- **v3.53.9 (2026-11-13), outline at wide glazings and gates:** base `f4a4221` (APK 1334). First wrong decision in
+  the DEV refusals, on the sheets: the walled envelope (box of the long bands' axes) ends at an inner wall when a facade
+  is piers and wide openings, and the bay rule took a side wall only as ONE band STARTING at the box's edge — a house
+  wall running through the edge from inside, or broken at the edge by a glazing wider than a lintel, was not a side
+  wall. Now a side wall is the chain of collinear bands of one wall line, joined across holes no wider than a lintel or
+  across a hole the wide-gap reader already decided is an opening in that wall; what shuts the mouth is unchanged
+  (both side walls reach the far line plus a drawn infill or a matching callout; the split hypothesis does not apply to
+  chained bays). The chained reading is taken only when the outline (005C) adds nothing and it builds more; the gate
+  rule keeps its tiling barriers. Only the flood/cell boundary changes — walls, windows, doors and gates are still
+  emitted by `openings-v2`. Jaskrzyny (DEV) refusal → model 161.39/161.96 m² MATCHES, scale MEASURED, 0 compile errors,
+  west window 3.30 m, gate 5.00 m; Malwina 44.4 → 121.0 m² (still refused: garage). 80 runs: 62 identical, 0 changed
+  models, refusals 18 → 16 (Jaskrzyny, Anodach — Anodach with 3 existing OPENING_ABOVE_WALL_TOP errors in its rear
+  wall); 10 fresh 1334 packages 9 identical + 1 refused in both; every control identical (Azolle, Bakopy, Gaurach
+  portico, Kalandrynie recess, Tiliach/Kocimiętki/Przegorzany corners); frozen room table 12/12 identical. Fresh
+  frozen trial (14 new families, expectations sealed before replay): 13 identical, Liredy NEAR → MATCHES (garage behind
+  a 2.85 m gate, false 3.85 m window gone) — transfer shown for the gate case; glazing on a wing's side wall only on DEV.
+  Ofelia 2, Stellarie (extent at the inner face), Lulo 3, Renklody 15 (scale), Layla 2 remain refusals. APK 1335,
+  same signature; Android UI NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V3539.md`.
+- **NEXT (one action):** the OWNER installs APK 1335 and runs LOCAL on the Jaskrzyny link (the whole house with the
+  garage, west window 3.30 m, gate 5.00 m, "Pomiar" MATCHES). Next code candidates, by measured size: extent at an
+  inner face (Stellarie, Skalnice family); a garage refused by the walled-perimeter rule when its callouts are
+  unreadable (Malwina); wide mouths with no infill and no read callout (Ofelia 2, Layla 2, Lulo 3); covered corners
+  enclosed by the ring; Anodach's rear-wall height under the flat roof. Still open from v3.53.7: 005Q — keep N1a, or
+  the conditional face correction as its own stage.
+- **(superseded by v3.53.9) NEXT:** the OWNER installs APK 1334 and runs LOCAL on the Azolle 7 link (the whole house, garage door
   2.75 m, the "Pomiar" section). Next code candidates, by measured size: the wall envelope that ends before the house
   (wide mouths, extent at an inner face — 18/80 refusals); covered corners enclosed by the ring; unread pantry/wardrobe
   partitions. Still open from v3.53.7: 005Q — keep N1a, or the conditional face correction as its own stage.
