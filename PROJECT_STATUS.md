@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.11 (the frame a fully read overall dimension states where the wall witness runs on past it — logo and driveway ink beyond the line is no building; solver 2.42.0, service 1.11.0, APK 1337; report `stage-reports/SOURCE_TO_MODEL_V35311.md`). Before it: v3.53.10 (plan extent at the wall face; solver 2.41.0, APK 1336; `SOURCE_TO_MODEL_V35310.md`), v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.12 (a dimension line hidden over long stretches by drawings laid over it is one line when it ends in a tick at both ends — dimension topology 1.5.0, solver 2.42.0, service 1.11.0, APK 1338; report `stage-reports/SOURCE_TO_MODEL_V35312.md`). Before it: v3.53.11 (the frame a fully read overall dimension states where the wall witness runs on past it — logo and driveway ink beyond the line is no building; solver 2.42.0, service 1.11.0, APK 1337; report `stage-reports/SOURCE_TO_MODEL_V35311.md`). Before it: v3.53.10 (plan extent at the wall face; solver 2.41.0, APK 1336; `SOURCE_TO_MODEL_V35310.md`), v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -211,7 +211,31 @@
   no activation — transfer NOT shown. API trial (B original + questions, C + crop/mask) prepared and NOT measured: no
   secret, billing not agreed (ledger 2.72807938 USD / 5 unchanged); D unavailable. APK 1337, same signature; Android UI
   NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V35311.md`.
-- **NEXT (one action):** the OWNER installs APK 1337 and runs LOCAL on the Nigelle 4 link (the whole house with the west
+- **v3.53.12 (2026-11-14), dimension lines, meaning and scale:** base `681f6cf` (APK 1337). Wrotycze E (DEV, priority):
+  the first loss was detection — the overall `1620` line, cut by two trees, broke into three runs none holding two
+  ticks. Dimension topology 1.5.0 (`joinCoveredRuns`): collinear runs join when every gap is ≥ 80 % covered by ink,
+  the facing ends are no marks, no piece holds more than one tick of its own, no gap exceeds ¼ of the span, and both
+  ends of the joined line are TICK. Wrotycze: refusal → model 150.11/159.28 m² (MATCHES), scale MEASURED 2.409 from two
+  independent readings on two axes (independent anchor `980`: 2.411), outline on the exterior faces, 0 compile errors,
+  20 openings, `PARTIAL_3D_PREVIEW`/`LIMITED`; room 12's north strip (≈ 5 m²) stays open. Supertunie 2 E (lattice
+  misreads 1350→1150 and 690→640, `SCALE_RANKED` selection, a label `TEXT_INK` mark splitting the 690 chain) and
+  Torenie 3 (3.9815 vs 3.128 cm/px, still SCALE_DEPARTS/NOT_USABLE) are other mechanisms — traced, unchanged, not
+  worse; research variant S (external reading leads over a SUPPORTED lattice) kept separate, same refusal. Same bytes,
+  both revisions: line screen on 150 houses (57 with lines added, 1 replaced, none lost), full production on the 69
+  with any change: 68 identical, 1 change (Wrotycze), 0 new refusals or errors; corpus 66/80 and room table 96/169
+  unchanged. Fresh frozen trial (12 new families): lines added in 6, activation in the model 0 — transfer NOT shown,
+  12/12 stable. Named risk: a tick wholly hidden under a drawing joins a segment row into one overall line (Stellarie;
+  the bound `1010` was refused by the sheet scale, no effect) — a binding guard belongs to the next stage. API: no paid
+  call (no secret, billing not agreed), B/C unmeasured, ledger unchanged. Matrix: no red test from the change (13 known
+  + 5 environmental, each re-run). APK 1338, same signature, bundle 12/12; LOCAL from its bundle: Wrotycze
+  `3ca6e769ee60`, Gaury 5 `d4817e71600c` (= 1337). Android UI NOT_VERIFIED.
+- **NEXT (one action):** the OWNER installs APK 1338 and runs LOCAL on the Wrotycze E link (a model instead of the
+  refusal; known: room 12's north strip open, interior partly read). Next code candidates, by measured size: reading
+  and scale arbitration when the lattice misreads (Supertunie 2: reader, ensemble policy, the label mark that splits a
+  chain) and Torenie 3's scale arbitration — one stage with its own regression, carrying the binding guard for lines
+  joined across cover; lowest storey under-covered in fresh-trial refusals; openings on recovered walls. Still open:
+  005Q — keep N1a, or the conditional face correction as its own stage.
+- **(superseded by v3.53.12) NEXT:** the OWNER installs APK 1337 and runs LOCAL on the Nigelle 4 link (the whole house with the west
   wing, no logo masses; known: garage and WC areas, vestibule merged). For the API trial the OWNER decides on billing and
   enters the key in the secure form or runs the one host command (README in `research/source-to-model/s5311/
   evidence-questions/`). Next code candidates, by measured size: overall line not detected / interior chain frames the
