@@ -29,7 +29,8 @@ export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
 /** 1.1.0 (005I): a mark that is only label ink beside the line is `TEXT_INK` (`markLabelInk`); 1.2.0: a stroke reaching the line between labels is not (post-review A2), and only text running along the line is label ink. */
 /** 1.3.0 (EXTERIOR-COMPLETE): collinear runs a drawing covers (a logo over the line) are joined (`joinOccludedLines`). */
 /** 1.4.0 (EXTERIOR-COMPLETE, Zefiranty): an outline drawn across a line — a stroke that runs on past a tick on both sides and slants — is no mark on it (`CROSSING_OUTLINE`, REJECTED), nor is its twin. */
-export const DIMENSION_TOPOLOGY_VERSION = '1.4.0' as const
+/** 1.5.0 (v3.53.12): a line hidden over long stretches by drawings laid over it (planting, a logo) — every visible piece holding fewer than two ticks of its own, its runs ending inside the cover rather than at a mark — is one line when it ends in a TICK at both ends (`joinCoveredRuns`). */
+export const DIMENSION_TOPOLOGY_VERSION = '1.5.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -182,7 +183,7 @@ function crosses(mask: Mask, axis: DimensionLineAxis, along: number, baseline: n
 export function findDimensionLines(mask: Mask, options: DimensionLineOptions = {}): DimensionLine[] {
   // A chain needs at least two marks: one mark measures nothing, and a run
   // with none is a level line, a leader, a wall edge or a sheet border.
-  return joinOccludedLines(findStraightRuns(mask, options), options.raster).filter((l) => l.ticksPx.length >= 2 && l.fill > 0.9)
+  return joinCoveredRuns(joinOccludedLines(findStraightRuns(mask, options), options.raster), options.raster, mask, options).filter((l) => l.ticksPx.length >= 2 && l.fill > 0.9)
 }
 
 /** EXTERIOR-COMPLETE: the widest gap a block drawn over a line may leave in it, and the paper's luma. */
@@ -242,6 +243,138 @@ export function joinOccludedLines(lines: readonly DimensionLine[], raster: Raste
 }
 
 /**
+ * v3.53.12: the bounds of a line joined across drawings laid over it. `endPx`: how close to a run's end a mark has to be
+ * for that end to be the mark's (a run that ends at its own tick or arrow ends there). `cover`: the share of each gap's
+ * pixels on the baseline that must be drawn (darker than paper). `ownShare`: the share of the joined length the line's
+ * own runs must draw. `gapShare`: the most of the joined length any one gap may hide.
+ */
+export const COVERED_RUN_BOUNDS = { endPx: 2, cover: 0.8, ownShare: 0.6, gapShare: 0.25 } as const
+
+/**
+ * v3.53.12: one line under drawings laid over it at several places. Planting, a logo or a hatch printed across an overall
+ * dimension line can hide stretches of it wider than `joinOccludedLines` bridges, and where the cover is a filled shape
+ * the run-finder ends the line at its edge without any mark — the pieces then hold one tick each (or none), and every
+ * piece is dropped as a run with fewer than two marks: the line that states the building's whole width is gone before
+ * any chain is formed.
+ *
+ * Only such a lost line is joined: every piece holds at most one tick of its own, so pieces that are dimension lines in
+ * their own right are never merged into one chain (the ticks between them would be lost).
+ * Collinear runs (same axis, baseline within a pixel, thickness within a pixel) are one line when every gap between them
+ * is covered by drawn pixels on the baseline, the ends facing each gap carry no mark (the line runs INTO the cover, it
+ * does not end at a tick there — a tick at a gap keeps the lines apart), the joined line begins and ends in a TICK, the
+ * line's own runs draw most of its length and no gap hides more than a quarter of it. Otherwise the runs are left as they
+ * were. A gap of bare paper is never bridged. Nothing about what lies over the line is assumed beyond its being drawn.
+ */
+export function joinCoveredRuns(lines: readonly DimensionLine[], raster: Raster | undefined, mask: Mask, options: DimensionLineOptions = {}): DimensionLine[] {
+  if (!raster) return [...lines]
+  const opt = { ...DEFAULTS, ...options }
+  const grey = options.grey ?? inkChannelOf(raster)
+  const B = COVERED_RUN_BOUNDS
+  const luma = (x: number, y: number): number => {
+    const xi = Math.min(raster.width - 1, Math.max(0, Math.round(x)))
+    const yi = Math.min(raster.height - 1, Math.max(0, Math.round(y)))
+    const o = (yi * raster.width + xi) * 4
+    return 0.299 * raster.data[o] + 0.587 * raster.data[o + 1] + 0.114 * raster.data[o + 2]
+  }
+  const edgePx = opt.markReachPx + B.endPx
+  // a run ends at a gap on its own mark when a tick lies at its end, or a mark classed TICK lies within the cover's edge band
+  const markNear = (l: DimensionLine, at: number): boolean =>
+    l.ticksPx.some((t) => Math.abs(t - at) <= B.endPx) || (l.marks ?? []).some((m) => Math.abs(m.atPx - at) <= edgePx && m.class === 'TICK')
+  const coveredOf = (axis: DimensionLineAxis, baseline: number, from: number, to: number): { covered: number; n: number } => {
+    let covered = 0
+    let n = 0
+    for (let a = Math.ceil(from) + 1; a < Math.floor(to); a += 1) {
+      n += 1
+      if ((axis === 'HORIZONTAL' ? luma(a, baseline) : luma(baseline, a)) < PAPER_LUMA) covered += 1
+    }
+    return { covered, n }
+  }
+  const sorted = [...lines].sort((a, b) => a.axis.localeCompare(b.axis) || a.baselinePx - b.baselinePx || a.fromPx - b.fromPx)
+  const used = new Set<number>()
+  const joined: DimensionLine[] = []
+  for (let i = 0; i < sorted.length; i += 1) {
+    if (used.has(i)) continue
+    const group = [i]
+    const gaps: Array<{ covered: number; n: number }> = []
+    for (let j = i + 1; j < sorted.length; j += 1) {
+      if (used.has(j)) continue
+      const last = sorted[group[group.length - 1]]
+      const c = sorted[j]
+      if (c.axis !== last.axis || Math.abs(c.baselinePx - last.baselinePx) > 1 || Math.abs(c.thicknessPx - last.thicknessPx) > 1 || c.fromPx <= last.toPx) continue
+      if (markNear(last, last.toPx) || markNear(c, c.fromPx)) break
+      const g = coveredOf(c.axis, (c.baselinePx + last.baselinePx) / 2, last.toPx, c.fromPx)
+      if (g.n === 0 || g.covered / g.n < B.cover) break
+      group.push(j)
+      gaps.push(g)
+    }
+    if (group.length < 2) continue
+    const parts = group.map((k) => sorted[k])
+    // only a line LOST to the cover is joined: every piece holds at most one tick of its own (hits in the edge band of an
+    // end that faces a gap are the cover's, not the line's). Pieces that are dimension lines in their own right are left
+    // as they are — joining them would merge two chains and drop the ticks between them.
+    const ownTicks = (l: DimensionLine, k: number): number =>
+      l.ticksPx.filter((t) => !((k > 0 && Math.abs(t - l.fromPx) <= edgePx) || (k < parts.length - 1 && Math.abs(t - l.toPx) <= edgePx))).length
+    if (parts.some((l, k) => ownTicks(l, k) > 1)) continue
+    const first = parts[0]
+    const last = parts[parts.length - 1]
+    const span = last.toPx - first.fromPx + 1
+    const own = parts.reduce((t, l) => t + (l.toPx - l.fromPx + 1), 0)
+    if (own / span < B.ownShare || gaps.some((g) => g.n / span > B.gapShare)) continue
+    const ink = parts.reduce((t, l) => t + l.fill * (l.toPx - l.fromPx + 1), 0) + gaps.reduce((t, g) => t + g.covered, 0)
+    const longest = parts.reduce((a, b) => (b.toPx - b.fromPx > a.toPx - a.fromPx ? b : a))
+    // the marks of the joined line, measured against it over the stretches its own runs draw (never inside the cover)
+    const found = crossingMarksOf(mask, longest.axis, longest.baselinePx, longest.thicknessPx, parts.map((l) => [Math.round(l.fromPx), Math.round(l.toPx)] as const), opt)
+    // the cover's own edges are not marks of the line (as `joinOccludedLines` drops a block's edges): hits within the edge
+    // band of an end that faces a gap are dropped before the marks are classified
+    const facing = parts.flatMap((l, k) => [...(k > 0 ? [l.fromPx] : []), ...(k < parts.length - 1 ? [l.toPx] : [])])
+    const keepHit = (h: readonly [number, number]): boolean => !facing.some((e) => Math.min(Math.abs(h[0] - e), Math.abs(h[1] - e)) <= edgePx)
+    const hitRuns = found.hitRuns.filter(keepHit)
+    const ticks = found.ticks.filter((_, k) => keepHit(found.hitRuns[k]))
+    if (ticks.length < 2) continue
+    const line: DimensionLine = { axis: first.axis, baselinePx: longest.baselinePx, fromPx: first.fromPx, toPx: last.toPx, thicknessPx: longest.thicknessPx, ticksPx: ticks, fill: round6(Math.min(1, ink / span)) }
+    const classified = classifyMarks(line, hitRuns, mask, grey, raster, opt.markReachPx)
+    const markAt = (at: number) => classified.marks.find((m) => Math.abs(m.atPx - at) < 0.5)
+    if (![markAt(ticks[0]), markAt(ticks[ticks.length - 1])].every((m) => m?.class === 'TICK')) continue
+    for (const k of group) used.add(k)
+    joined.push({ ...line, marks: classified.marks, reference: classified.reference })
+  }
+  if (joined.length === 0) return [...lines]
+  return [...sorted.filter((_, k) => !used.has(k)), ...joined].sort((a, b) => a.axis.localeCompare(b.axis) || a.baselinePx - b.baselinePx || a.fromPx - b.fromPx)
+}
+
+/**
+ * Crossing marks: positions where the ink sticks out further than the line is thick. Consecutive such positions are one
+ * mark. Looked for only over the given stretches of the line (all of it, or — v3.53.12 — the stretches its own runs draw).
+ */
+function crossingMarksOf(mask: Mask, axis: DimensionLineAxis, baseline: number, thickness: number, stretches: ReadonlyArray<readonly [number, number]>, opt: { markReachPx: number; markExcessPx: number }): { ticks: number[]; hitRuns: Array<[number, number]> } {
+  const excess = thickness + opt.markExcessPx
+  const hits: number[] = []
+  for (const [from, to] of stretches) {
+    for (let a = from; a <= to; a += 1) {
+      if (crossThickness(mask, axis, a, baseline, opt.markReachPx) < excess) continue
+      if (!crosses(mask, axis, a, baseline, opt.markReachPx, thickness)) continue
+      hits.push(a)
+    }
+  }
+  const ticks: number[] = []
+  const hitRuns: Array<[number, number]> = []
+  let run: number[] = []
+  const flush = (): void => {
+    if (run.length > 0) {
+      ticks.push(round6(run.reduce((x, y) => x + y, 0) / run.length))
+      hitRuns.push([run[0], run[run.length - 1]])
+    }
+    run = []
+  }
+  for (const h of hits) {
+    if (run.length > 0 && h - run[run.length - 1] > 2) flush()
+    run.push(h)
+  }
+  flush()
+  return { ticks, hitRuns }
+}
+
+/**
  * Every long, thin, straight run of ink, with whatever crosses it.
  *
  * Dimension lines are a subset of these — the ones with tick marks — and level
@@ -294,30 +427,7 @@ export function findStraightRuns(mask: Mask, options: DimensionLineOptions = {})
       const baseline = group.reduce((a, c) => a + c.baseline, 0) / group.length
       const thickness = group.length
 
-      // Crossing marks: positions where the ink sticks out further than the
-      // line is thick. Consecutive such positions are one mark.
-      const excess = thickness + opt.markExcessPx
-      const hits: number[] = []
-      for (let a = Math.round(best.from); a <= Math.round(best.to); a += 1) {
-        if (crossThickness(mask, axis, a, baseline, opt.markReachPx) < excess) continue
-        if (!crosses(mask, axis, a, baseline, opt.markReachPx, thickness)) continue
-        hits.push(a)
-      }
-      const ticks: number[] = []
-      const hitRuns: Array<[number, number]> = []
-      let run: number[] = []
-      const flush = (): void => {
-        if (run.length > 0) {
-          ticks.push(round6(run.reduce((x, y) => x + y, 0) / run.length))
-          hitRuns.push([run[0], run[run.length - 1]])
-        }
-        run = []
-      }
-      for (const h of hits) {
-        if (run.length > 0 && h - run[run.length - 1] > 2) flush()
-        run.push(h)
-      }
-      flush()
+      const { ticks, hitRuns } = crossingMarksOf(mask, axis, baseline, thickness, [[Math.round(best.from), Math.round(best.to)]], opt)
 
       let ink = 0
       for (let a = Math.round(best.from); a <= Math.round(best.to); a += 1) {
