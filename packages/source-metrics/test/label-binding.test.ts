@@ -223,7 +223,11 @@ describe('post-review (005D D P1-2): the rules a test must fail without', () => 
     const { solution, metric, legacy } = solve(chains, tokens)
     expect(legacy.pooledScale).toBeCloseTo(2.5, 1)
     const ink = metric.observations.find((o) => o.rawText === '1601' && o.binding?.role === 'PRIMARY')
-    expect(solution.topology?.neutralObservationIds).toContain(ink?.id)
+    // v3.53.13: the vote has no reading of its own and solved this span from this ink, so the ink is not neutralised by
+    // it — it is named as contested with its own other reading, and still replaces nothing (metric solver 1.8.0)
+    expect(ink).toBeDefined()
+    expect(solution.topology?.neutralObservationIds ?? []).not.toContain(ink?.id)
+    expect(solution.why).toMatch(/two readings of the same ink/)
     expect(solution.relation).not.toBe('REPLACED')
     expect(solution.confidence).toBe('INCONCLUSIVE')
   })

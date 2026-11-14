@@ -1169,9 +1169,14 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   const voteSolvedFromInk = (w: Obs): boolean =>
     legacyStats.independentGroups === 0 &&
     (legacy.solved[w.chain]?.segments ?? []).some((g) => (g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED') && g.token !== undefined && regionOf.get(g.token)?.id === w.region && Math.abs(g.fromPx - w.record.fromPx) <= 1 && Math.abs(g.toPx - w.record.toPx) <= 1)
+  // the inks kept from neutralisation that way: their contest with the vote is the ink against its own other reading
+  const kept = new Set<Obs>()
   const deciding = selectedDeciding.filter((w) => {
     if (!voteStands || !fitsAt(w, atVote(w), widestOf(voteMembers))) return true
-    if (voteSolvedFromInk(w)) return true
+    if (voteSolvedFromInk(w)) {
+      kept.add(w)
+      return true
+    }
     neutral.add(w.record.id)
     return false
   })
@@ -1269,10 +1274,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const pairs: Array<[Obs, Obs]> = deciding.flatMap((u) => others.map((v): [Obs, Obs] => [u, v]))
     return agreements(pairs, selected.cmPerPixel).length > 0
   })()
-  // v3.53.13: when every ink deciding the selection is one the vote was solved from, the contest is between two readings
-  // of the same inks — the vote holds the other — and no other counted reading decides it: neither side replaces the
-  // other (too weak a witness on either side), and the record names the contest.
-  const selfContested = legacyStats.independentGroups === 0 && deciding.length > 0 && deciding.every(voteSolvedFromInk)
+  // v3.53.13: when every ink deciding the selection is one kept from neutralisation above — an ink whose other reading
+  // fits the vote the vote was solved from — the contest is between two readings of the same inks and no other counted
+  // reading decides it: neither side replaces the other (too weak a witness on either side), and the record names the
+  // contest. An ink that disagrees with the vote outright is a witness against it as before, whatever the vote made of
+  // its span: a vote corrects every span it does not read, so "solved from the ink" alone says nothing.
+  const selfContested = deciding.length > 0 && deciding.every((w) => kept.has(w))
   const beatsLegacy = (): boolean => {
     if (decidingEvidence.independentGroups === 0 || selfContested) return false
     const [a, b] = [evidenceTuple(decidingEvidence), evidenceTuple(legacyEvidence)]

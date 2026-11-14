@@ -86,6 +86,17 @@ describe('v3.53.13 an ink is not neutralised by a vote solved from the ink itsel
     expect(solution.cmPerPixelY).toBeCloseTo(2.2425, 3)
   })
 
+  it('counter-test: inks that disagree with the vote outright still replace it, though the vote corrected their spans', () => {
+    // the overall height printed and read clean (no half-seen glyph): nothing of it fits 1.91; with the width it states
+    // 2.24 on two axes, and no contest of an ink with itself is named — the regression found this on real plans (§5)
+    const chains = [vChain(60, [100, 702]), hChain(300, [200, 260]), vChain(400, [120, 200]), hChain(500, [300, 390]), ...read690.chains]
+    const tokens = [vLabel('1350', 60, 100, 702), hLabel('174', 300, 200, 260, { 1: [{ char: '1', ratio: 0.7 }] }), vLabel('193', 400, 120, 200, { 1: [{ char: '5', ratio: 0.7 }] }), hLabel('112', 500, 300, 390, { 1: [{ char: '7', ratio: 0.7 }] }), ...read690.tokens]
+    const { solution } = solve(chains, tokens)
+    expect(['REPLACED', 'CONFIRMED']).toContain(solution.relation)
+    expect(solution.why).not.toMatch(/two readings of the same ink/)
+    expect(solution.cmPerPixelY).toBeCloseTo(2.2425, 3)
+  })
+
   it('counter-test: the overall ink alone — its two readings, one of them the vote — replaces nothing; the record names the contest', () => {
     const { solution } = selfVote()
     expect(solution.relation).toBe('LEGACY_UNCONFIRMED')
