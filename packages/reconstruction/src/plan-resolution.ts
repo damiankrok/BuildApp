@@ -87,7 +87,8 @@ import { STATEMENT_CONTEST_VERSION, latticeKey, statementContests } from './stat
 import type { StatementContest } from './statement-contest.js'
 import { worldFrameFrom } from './v2/frame.js'
 
-export const PLAN_RESOLVER_VERSION = '1.5.0' as const
+/** 1.6.0 (v3.53.13): a metric scale chosen STRONG from independent readings is not traded for a rival with under half its independent support (`metricScales`). */
+export const PLAN_RESOLVER_VERSION = '1.6.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -316,8 +317,15 @@ export function latticeScales(metrics: MetricEvidenceSet, frameId: string, regis
  */
 export function metricScales(solution: FrameMetricSolution, registration: CoordinateRegistration): Array<Extract<ScaleChoice, { kind: 'METRIC_HYPOTHESIS' }>> {
   const registered = ((registration.metresPerPixelX + registration.metresPerPixelY) / 2) * 100
+  // v3.53.13 (V-TOR): a scale the metric layer chose STRONG from its independent readings is not traded for a rival it
+  // weighed against them and found far weaker. The resolver may try a rival with at least half the selection's
+  // independent support — a contest the metric layer itself could not settle — never one it outweighs twice over, which
+  // only a published figure could then choose (and a figure never chooses a scale).
+  const chosen = solution.hypotheses.find((h) => h.id === solution.selectedHypothesisId)
+  const verified = solution.confidence === 'STRONG' && (solution.relation === 'REPLACED' || solution.relation === 'CONFIRMED' || solution.relation === 'ADDED') && chosen !== undefined && Math.abs(chosen.cmPerPixel / registered - 1) <= 0.03
+  const contends = (h: FrameMetricSolution['hypotheses'][number]): boolean => !verified || h.independentWeight >= 0.5 * (chosen?.independentWeight ?? 0)
   return solution.hypotheses
-    .filter((h) => h.plausible && h.independentGroups >= 1 && Math.abs(h.cmPerPixel / registered - 1) > 0.03)
+    .filter((h) => h.plausible && h.independentGroups >= 1 && Math.abs(h.cmPerPixel / registered - 1) > 0.03 && contends(h))
     .sort((a, b) => compareEvidence(a, b) || a.cmPerPixel - b.cmPerPixel)
     .slice(0, 2)
     .map((h) => ({

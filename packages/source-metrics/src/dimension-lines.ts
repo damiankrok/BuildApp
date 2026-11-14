@@ -30,7 +30,8 @@ export const DIMENSION_TOPOLOGY_NAME = 'metrics.dimension-topology' as const
 /** 1.3.0 (EXTERIOR-COMPLETE): collinear runs a drawing covers (a logo over the line) are joined (`joinOccludedLines`). */
 /** 1.4.0 (EXTERIOR-COMPLETE, Zefiranty): an outline drawn across a line — a stroke that runs on past a tick on both sides and slants — is no mark on it (`CROSSING_OUTLINE`, REJECTED), nor is its twin. */
 /** 1.5.0 (v3.53.12): a line hidden over long stretches by drawings laid over it (planting, a logo) — every visible piece holding fewer than two ticks of its own, its runs ending inside the cover rather than at a mark — is one line when it ends in a TICK at both ends (`joinCoveredRuns`). */
-export const DIMENSION_TOPOLOGY_VERSION = '1.5.0' as const
+/** 1.6.0 (v3.53.13): a line joined across a cover keeps the stretches under it (`coveredPx`) — the provenance of the join, which binding weighs (`hiddenSplitExplains`); marks and ticks unchanged. */
+export const DIMENSION_TOPOLOGY_VERSION = '1.6.0' as const
 
 export type DimensionLineAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -53,6 +54,12 @@ export type DimensionLine = {
   marks?: DimensionMark[]
   /** 005D: the line's own ink against its paper, which every mark is measured against; null when it cannot be told. */
   reference?: { paper: number; line: number; contrast: number } | null
+  /**
+   * v3.53.13: where a line joined across drawings laid over it (`joinCoveredRuns`) runs under the cover, along its own
+   * axis: the stretches no mark of it could be seen on. A tick hidden there would split the line, so a label the line
+   * carries is weighed against that possibility (`hiddenSplitExplains`).
+   */
+  coveredPx?: Array<[number, number]>
 }
 
 /**
@@ -336,7 +343,7 @@ export function joinCoveredRuns(lines: readonly DimensionLine[], raster: Raster 
     const markAt = (at: number) => classified.marks.find((m) => Math.abs(m.atPx - at) < 0.5)
     if (![markAt(ticks[0]), markAt(ticks[ticks.length - 1])].every((m) => m?.class === 'TICK')) continue
     for (const k of group) used.add(k)
-    joined.push({ ...line, marks: classified.marks, reference: classified.reference })
+    joined.push({ ...line, marks: classified.marks, reference: classified.reference, coveredPx: parts.slice(1).map((l, k): [number, number] => [parts[k].toPx, l.fromPx]) })
   }
   if (joined.length === 0) return [...lines]
   return [...sorted.filter((_, k) => !used.has(k)), ...joined].sort((a, b) => a.axis.localeCompare(b.axis) || a.baselinePx - b.baselinePx || a.fromPx - b.fromPx)

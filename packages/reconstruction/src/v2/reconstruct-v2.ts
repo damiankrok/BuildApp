@@ -312,7 +312,8 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // beyond is not this building: the witness is cut back to the stated span, the other axis's chains are judged again,
 // and the frame is the read chain on its axis and an exterior chain's ticks on the other, each side snapped outward to
 // the outer face of a long wall band its tick falls in (`statedFrameOverWitness`).
-export const SOLVER_V2_VERSION = '2.42.0' as const
+// 2.43.0 (v3.53.13): the plan resolver keeps a STRONG metric scale against a far weaker rival hypothesis (resolver 1.6.0).
+export const SOLVER_V2_VERSION = '2.43.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1

@@ -46,6 +46,8 @@ export type RawChain = {
   ticks: ChainTick[]
   /** The observations in the sealed graph that lie on this chain, for traceability. */
   observationIds: string[]
+  /** v3.53.13: the stretches of a line joined across a cover that run under it (`DimensionLine.coveredPx`). */
+  coveredPx?: Array<[number, number]>
 }
 
 /**
@@ -67,6 +69,7 @@ export function chainsFromLines(lines: readonly DimensionLine[], observations: r
         .filter((o) => observationTouchesLine(o, line))
         .map((o) => o.id)
         .sort(),
+      ...(line.coveredPx && line.coveredPx.length > 0 ? { coveredPx: line.coveredPx.map((g): [number, number] => [g[0], g[1]]) } : {}),
     }))
 }
 

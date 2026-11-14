@@ -60,7 +60,8 @@ export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
 /** 1.5.0 (EXTERIOR-COMPLETE): a vertical chain nothing decided takes the sheet's way up, through the other axis's scale (rule vii). */
 /** 1.6.0 (EXTERIOR-COMPLETE, Zefiranty): two tokens one pass read apart are two inks; no third token joins their text regions. */
 /** 1.7.0 (v3.45): of the readings of one span on twin lines the best-read counts, then the heaviest. */
-export const METRIC_SOLVER_VERSION = '1.7.0' as const
+/** 1.8.0 (v3.53.13): an ink is not neutralised by a vote with no reading of its own that solved the ink's span from the ink itself; on a line joined across a cover, a label a hidden tick would make a part's number is AMBIGUOUS (`hiddenSplitExplains`). */
+export const METRIC_SOLVER_VERSION = '1.8.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -332,6 +333,36 @@ export function bindingsFor(chain: RawChain, entries: readonly ChainToken[], idx
 }
 
 /**
+ * v3.53.13: whether a label centred on a span of a line joined across drawings laid over it (`RawChain.coveredPx`)
+ * could as well be the number of a PART of that span, split by a tick the cover hides. A tick under the cover is not
+ * seen, so the line may be a row of parts printed one number each; a label is that part's number when it is centred on
+ * a stretch that ends at the span's end ticks or anywhere under the cover (at least one end under it), as `centred` as
+ * the binding asks. Then the label measures nothing decisively: AMBIGUOUS — a candidate, never a whole-span anchor.
+ * A label centred on the whole span and on no such part keeps its binding: a line drawn whole under a planting is
+ * still read (an overall dimension's number is printed at its middle, and a part's middle is the middle of the whole
+ * only for a part that is the whole).
+ */
+export function hiddenSplitExplains(chain: RawChain, at: number, span: SpanBinding, minLength: number): boolean {
+  const covered = chain.coveredPx
+  if (!covered || covered.length === 0) return false
+  const [t0, t1] = [chain.ticks[span.from].atPx, chain.ticks[span.to].atPx]
+  // every whole pixel under the cover inside the span, with the cover stretch it lies under
+  const under: Array<{ p: number; gap: number }> = []
+  covered.forEach(([a, b], gap) => {
+    for (let p = Math.ceil(Math.max(a, t0 + 1)); p <= Math.floor(Math.min(b, t1 - 1)); p += 1) under.push({ p, gap })
+  })
+  if (under.length === 0) return false
+  // as well centred as the whole span, by the binding's own ambiguity margin: a part that would only be the label's
+  // second-best span does not take it from the whole (`primaryBinding`)
+  const limit = Math.min(BINDING_BOUNDS.centred, span.offsetShare + BINDING_BOUNDS.ambiguity)
+  const centredOn = (l: number, r: number): boolean => r - l >= minLength && Math.abs(at - (l + r) / 2) <= limit * (r - l)
+  for (const { p } of under) if (centredOn(t0, p) || centredOn(p, t1)) return true
+  // a part between two hidden ticks shows some of the line: never two ticks under one cover stretch
+  for (const u of under) for (const v of under) if (v.p > u.p && v.gap !== u.gap && centredOn(u.p, v.p)) return true
+  return false
+}
+
+/**
  * The span a label measures (B2–B4; post-review A P0-1, B P1-3). Centring decides: among the candidates
  * centred within `centred`, the best-centred one, then the one across fewer ticks. A questionable end
  * may only pick a LONGER span that encloses the best-centred one and is centred within `ambiguity` of
@@ -527,7 +558,10 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
       // across up to two ticks or questionable marks and any rejected ones — and measures ONE of
       // them: the primary binding. Only that one may decide a scale; the others are recorded.
       const bindings = bindingsFor(chain, entries, idx, minLength, METRIC_BOUNDS.skippedTicks)
-      const { primary, ambiguous } = primaryBinding(bindings)
+      const bound = primaryBinding(bindings)
+      const primary = bound.primary
+      // v3.53.13: on a line joined across a cover, a label a hidden tick would make a part's number states no whole span.
+      const ambiguous = bound.ambiguous || (primary !== undefined && hiddenSplitExplains(chain, entry.atPx, primary, minLength))
       for (const binding of bindings) {
         const { from, to, px } = binding
         const role: NonNullable<DimensionObservation['binding']>['role'] = !primary ? 'UNCENTRED' : binding === primary ? (ambiguous ? 'AMBIGUOUS' : 'PRIMARY') : 'ALTERNATIVE'
@@ -1128,8 +1162,16 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   })()
   let own: MetricConfidence = undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : selected ? confidenceOf(awareEvidence(selected), rival ? awareEvidence(rival) : undefined) : 'INCONCLUSIVE'
   const selectedDeciding = selected ? decidingOf(selected) : []
+  // v3.53.13: an ink is not neutralised by a vote that solved its span from the ink itself. A vote with no independent
+  // reading of its own gave this span a value read or corrected from THIS ink's own token (another of its readings, the
+  // rest of the vote fitted to it): the ink's other reading fitting the vote is the ink agreeing with itself, not a
+  // second witness. Between the ink's readings the other counted inks decide, as for any contest.
+  const voteSolvedFromInk = (w: Obs): boolean =>
+    legacyStats.independentGroups === 0 &&
+    (legacy.solved[w.chain]?.segments ?? []).some((g) => (g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED') && g.token !== undefined && regionOf.get(g.token)?.id === w.region && Math.abs(g.fromPx - w.record.fromPx) <= 1 && Math.abs(g.toPx - w.record.toPx) <= 1)
   const deciding = selectedDeciding.filter((w) => {
     if (!voteStands || !fitsAt(w, atVote(w), widestOf(voteMembers))) return true
+    if (voteSolvedFromInk(w)) return true
     neutral.add(w.record.id)
     return false
   })
@@ -1227,8 +1269,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const pairs: Array<[Obs, Obs]> = deciding.flatMap((u) => others.map((v): [Obs, Obs] => [u, v]))
     return agreements(pairs, selected.cmPerPixel).length > 0
   })()
+  // v3.53.13: when every ink deciding the selection is one the vote was solved from, the contest is between two readings
+  // of the same inks — the vote holds the other — and no other counted reading decides it: neither side replaces the
+  // other (too weak a witness on either side), and the record names the contest.
+  const selfContested = legacyStats.independentGroups === 0 && deciding.length > 0 && deciding.every(voteSolvedFromInk)
   const beatsLegacy = (): boolean => {
-    if (decidingEvidence.independentGroups === 0) return false
+    if (decidingEvidence.independentGroups === 0 || selfContested) return false
     const [a, b] = [evidenceTuple(decidingEvidence), evidenceTuple(legacyEvidence)]
     const outright = a[0] > b[0] || (a[0] === b[0] && (a[1] > b[1] || (a[1] === b[1] && a[3] > b[3])))
     if (legacyStats.independentGroups === 0) {
@@ -1498,7 +1544,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     rereadChainIds: reread.sort(),
     counts: { textRegions: regions.length, observations: dedupedObservations.length, hypotheses: hypotheses.length },
     topology: topologyOf(),
-    why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : ''),
+    why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : '') + (selfContested && relation === 'LEGACY_UNCONFIRMED' ? `; the readings that would replace it (${deciding.map((w) => `${w.record.rawText}/${w.px} px`).join(', ')}) are inks whose own other reading the vote was solved from — two readings of the same ink, and no other counted reading decides between them` : ''),
   }
   const chainOrientation = chains.map((_, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' }))
 
