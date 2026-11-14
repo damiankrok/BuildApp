@@ -211,7 +211,24 @@ Znaczenie `measurement` bez zmian (schemat 1.0.0, usługa 1.11.0). Nigelle 4: NE
 
 ## 10. APK 1337 i przebieg z paczki
 
-_(uzupełniane po budowie)_
+* Zbudowany z drzewa `681f6cf` (kod `0b93b88` + migawka kontraktu; `./gradlew --offline -PpreviewVersionCode=1337
+  previewApks`, pełna przebudowa — katalog budowy usunięty przy sprzątaniu), ten sam podpis.
+* `BuildPlan-Model-Preview-1337-arm64-v8a-debug.apk`: 50 705 632 B, SHA-256
+  `f2b4b78ef26c67b801c1f9653fa741243050deed943702f763eb572baf6ba75d`; `aapt`: `com.buildplan.preview`, versionCode
+  1337, versionName `0.1337.0-owner`, minSdk 26, targetSdk 35; `apksigner`: certyfikat SHA-256 `6e48fac4…ca0da` —
+  równy 1336.
+* Paczka analizatora z APK: manifest 12/12 plików zgodnych ze skrótami, w niej solver 2.42.0 (z regułą ramki
+  podanej odczytanym wymiarem) i usługa 1.11.0.
+* **Host z paczki** — produkcyjny `main.mjs` z APK, Node 18.20.4 z symulacją braku ICU, żywe strony wydawcy:
+
+| Strona | wynik | czas | szczyt RSS | model hosta = powtórka | scena zapisana i wczytana |
+|---|---|---|---|---|---|
+| Nigelle 4 G2 (poprawiony, DEV) | hello → done COMPLETE, pomiar NEAR 237,58/255,91, MEASURED 1,02298, LIMITED (`COVERAGE_NEAR`) | 330 s | 994 MB | `06e8d1ff0582` = `06e8d1ff0582` | tak (`loadBundle`, 170 siatek) |
+| Gaury 5 (kontrpróba: portyk otwarty) | hello → done COMPLETE, pomiar MATCHES 172,71/176,25, MEASURED, USABLE_IN_SCOPE | 201 s | 799 MB | `d4817e71600c` = `d4817e71600c` (= 1336) | tak (133 siatki) |
+
+* Urządzenie / emulator: brak (`/dev/kvm` niedostępne) — interfejs Androida i przebieg LOCAL na telefonie
+  **NOT_VERIFIED**. Wyniki hosta i aplikacji podane osobno: aplikacja nie była uruchomiona.
+* APK przekazany prywatnie (poza Gitem).
 
 ## 11. Zakres uogólnienia i pozostałe rozbieżności
 
