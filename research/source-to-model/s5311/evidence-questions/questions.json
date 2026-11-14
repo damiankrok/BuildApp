@@ -1,0 +1,94 @@
+{
+ "schema": "buildapp.evidence-questions",
+ "version": 1,
+ "frozenAt": "2026-11-14",
+ "purpose": "Narrow evidence questions about published house plans, asked of a vision model as B (the original picture only) and C (the original plus one picture derived from it that points at the region). The reference of each question is what the drawing shows, written by a person from the sheet before any answer was scored. A model's answer is an OBSERVATION, never a fact.",
+ "coordinates": "Every region is in pixels of the ORIGINAL published picture named by its sheet (origin top-left, x right, y down). That picture is sent unchanged as picture 1, so its transform is the identity.",
+ "corrections": [
+  "The brief placed the originals at the 550x550 GIF copies and the regions in an 853-px analysis frame (to be scaled by 550/853). Looking at the packages: each plan is ALSO published as an 853x853 GIF (the floor fragment's dimensioned copy, asset-rzut-*), which IS the analysis frame. The 550-px copies are a downscale of it WITHOUT the opening callouts (no 360/230 beside the Nigelle west window, no 500/225 at the Stellarie garage). The questions therefore use the 853-px published GIF as the original: no transform, and the callouts the references cite are on the picture sent. The 550-px copy is recorded per sheet (smallCopy) with its transform (original px x 550/853).",
+  "Q1: the jambs are the solid wall pieces ending at y=287 and starting at y=395 (wall x 234-246); the region is x 228-252, y 287-395.",
+  "Q2: the logo spans x ~497-797, y ~772-830; the region is x 495-800, y 770-833. The garage front wall above it is at y ~700, with the entrance strip between.",
+  "Q3: the 1400 line is at y ~791 and its upper partner (474 | 926) at y ~757-760. The outer faces are x 234 (west wall) and x 651 (east wall).",
+  "Q4: the Stellarie garage front opening runs between jambs at x 531 and x 724 (wall band y 657-673); its callout stands at ~(623, 693). Region x 526-730, y 650-706.",
+  "Q5: the Wrotycze overall line is at y ~62, end ticks at x ~68 and ~742.",
+  "Q6: the Supertunie 2 overall line is at y ~20, end ticks at x ~157 and ~464, on the outer faces of the two long walls. The reference for its ends was added after looking at the sheet; the brief gave only the literal."
+ ],
+ "sheets": {
+  "nigelle": {"packageId": "src-ma7d265be828f4-d6a159977e", "packageContentHash": "75fdd7ce223c7f52c9b3a42c83307c5a05c6287a0e69e53baa29def9670dd763", "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4", "assetId": "asset-rzut-59c6dbf7e8", "variantId": "var-projekt-dom-w-nigellach-4-g2-70f70602ac30cc9af13-24d9011623", "byteHash": "a81adecca3bf4cb6e148cea6a0ff953225436a0923e683342dffb85e9e38dc97", "mediaType": "image/gif", "byteLength": 114500, "width": 853, "height": 853, "storey": "GROUND", "smallCopy": {"assetId": "asset-gotowy-projekt-dom-w-nigellach-4-g2-rzut-parteru-5e6edfe48a", "byteHash": "4986fb3e70590c9cd1a1beb7dbad09c761ebc9dd54c1291d53ce42c8c2f166a9", "width": 550, "height": 550, "fromOriginal": 0.644783}},
+  "stellarie": {"packageId": "src-mdcc2945946327-36cfaf5253", "packageContentHash": "1e6ffd7469745499871d42611ef2a7e1b734ee59f27515d75b573f05ea61cdb3", "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-stellariach-g2e-mdcc2945946327", "assetId": "asset-rzut-3d2af106a7", "variantId": "var-projekt-dom-w-stellariach-g2e-828b756fe649b77523-ffaf128904", "byteHash": "79d485d0dc29f01256118de7858f90bdfd9b90d06396b18625c45ecdae81d79e", "mediaType": "image/gif", "byteLength": 110695, "width": 853, "height": 853, "storey": "GROUND", "smallCopy": {"assetId": "asset-gotowy-projekt-dom-w-stellariach-g2e-rzut-parter-bd982009f1", "byteHash": "2955d15e4d4ce07c789fcefe51202f88b13ff7c9672eff811f44fb67a105d8e0", "width": 550, "height": 550, "fromOriginal": 0.644783}},
+  "wrotycze": {"packageId": "src-maf0290e8738a8-1916dd2c82", "packageContentHash": "f2bb36e0a6278901d2668b1d47ed31eaf249dc71f7a8d2898d4e4d782ead4440", "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-we-wrotyczach-e-maf0290e8738a8", "assetId": "asset-rzut-f75cc57a73", "variantId": "var-projekt-dom-we-wrotyczach-e-df1a4f7f35f06440d642-e5e748bd3d", "byteHash": "d1d0af46ae747735d26f3e403d8b92ac91ab3c7b0ea35706e5273845aadb5099", "mediaType": "image/gif", "byteLength": 115945, "width": 853, "height": 853, "storey": "GROUND", "smallCopy": {"assetId": "asset-gotowy-projekt-dom-we-wrotyczach-e-rzut-parteru-d89c2c3606", "byteHash": "0ff941ede49a2617c1c2084a0be75a92e6f1e8cf7ff19015d7c3beef9a8be497", "width": 550, "height": 550, "fromOriginal": 0.644783}},
+  "supertunie2": {"packageId": "src-m9022920a5fcb6-b8831428af", "packageContentHash": "60af2897181860072e91d079a117ab88ed336455d6196ab60daf24b7a88772a6", "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-supertuniach-2-e-m9022920a5fcb6", "assetId": "asset-rzut-ea6aafdc10", "variantId": "var-projekt-dom-w-supertuniach-2-e-c54a96ed84f9761c5-28bc4ef241", "byteHash": "537d84f8bfba971c847ebc151eb0d94dabb21567f1b586a3e3534e77cc44c114", "mediaType": "image/gif", "byteLength": 73713, "width": 853, "height": 853, "storey": "GROUND", "smallCopy": {"assetId": "asset-gotowy-projekt-dom-w-supertuniach-2-e-rzut-parte-5c29c83219", "byteHash": "95ec3bcbd63ec7e827328c6232902f0ea46fd3d30c0b8df80e378645cee6e57b", "width": 550, "height": 550, "fromOriginal": 0.644783}}
+ },
+ "questions": [
+  {
+   "id": "Q1", "sheet": "nigelle", "kind": "CLASS", "pointer": "CROP",
+   "region": {"x0": 228, "y0": 287, "x1": 252, "y1": 395},
+   "classes": ["WALL", "GLAZING", "GATE", "OPEN_GAP", "UNKNOWN"],
+   "extraFields": [],
+   "prompt": "The region is a short stretch of the building's outer wall line on the left side of the plan, between two solid wall pieces (jambs). What fills that stretch? WALL: solid wall drawn like the jambs. GLAZING: a window or glazed wall (thin parallel lines in the wall line). GATE: a garage door. OPEN_GAP: no element drawn at all. UNKNOWN: the drawing does not let you tell. If an opening callout (two numbers stacked in a small circle) stands next to the stretch, copy it into printedText as top/bottom, e.g. 120/140; else UNKNOWN.",
+   "scoredFields": ["answerClass"],
+   "reference": {"answerClass": "GLAZING", "printedText": "360/230", "unit": "UNKNOWN", "note": "Thin glazing lines between the jambs; the callout 360/230 stands just left of the stretch at ~(212, 340). printedText is recorded but not scored."},
+   "verification": {"method": "NONE"}
+  },
+  {
+   "id": "Q2", "sheet": "nigelle", "kind": "CLASS", "pointer": "MASK",
+   "region": {"x0": 495, "y0": 770, "x1": 800, "y1": 833},
+   "classes": ["BUILDING_OR_WALL", "LOGO_OR_WATERMARK", "UNKNOWN"],
+   "extraFields": ["relation"],
+   "prompt": "The region is at the bottom of the sheet. Is what it holds part of the drawn building (BUILDING_OR_WALL), a logo or watermark printed on the sheet (LOGO_OR_WATERMARK), or UNKNOWN? relation: does it touch the garage wall drawn above it (TOUCHING), stand apart from it (SEPARATE), or UNKNOWN? Copy any letters printed in the region into printedText, else UNKNOWN.",
+   "scoredFields": ["answerClass", "relation"],
+   "reference": {"answerClass": "LOGO_OR_WATERMARK", "relation": "SEPARATE", "printedText": "archon", "unit": "UNKNOWN", "note": "The publisher's logo; the garage front wall is at y ~700 with the entrance strip and two dimension lines between them. printedText is recorded but not scored."},
+   "verification": {"method": "NONE"}
+  },
+  {
+   "id": "Q3", "sheet": "nigelle", "kind": "DIMENSION", "pointer": "CROP", "axis": "HORIZONTAL",
+   "region": {"x0": 226, "y0": 776, "x1": 660, "y1": 800},
+   "classes": ["DIMENSION_LINE", "OTHER", "UNKNOWN"],
+   "extraFields": ["spanFrom", "spanTo"],
+   "prompt": "The region holds the lowest horizontal line below the plan. If it is a dimension line, copy the number printed on it into printedText exactly as printed (digits only, no unit added). unit: the unit if one is printed or stated on the sheet, else UNKNOWN. spanFrom / spanTo: what the line's two end marks stand on, left end first (LEFT_OUTER_FACE / RIGHT_OUTER_FACE / TOP_OUTER_FACE / BOTTOM_OUTER_FACE = the outer face of the building's wall on that side of the sheet; INNER_FACE; OTHER; UNKNOWN). evidenceBox: the line from end mark to end mark.",
+   "scoredFields": ["answerClass", "printedText", "spanFrom", "spanTo"],
+   "reference": {"answerClass": "DIMENSION_LINE", "printedText": "1400", "unit": "cm", "spanFrom": "LEFT_OUTER_FACE", "spanTo": "RIGHT_OUTER_FACE", "note": "From the west outer face (x 234) to the east outer face (x 651). The sheet prints no unit; ARCHON dimensions are in cm. unit is recorded, not scored."},
+   "verification": {"method": "CHAIN_SPAN"}
+  },
+  {
+   "id": "Q3B", "sheet": "nigelle", "kind": "DIMENSION", "pointer": "CROP", "axis": "HORIZONTAL",
+   "region": {"x0": 226, "y0": 744, "x1": 660, "y1": 768},
+   "classes": ["DIMENSION_LINE", "OTHER", "UNKNOWN"],
+   "extraFields": ["spanFrom", "spanTo"],
+   "prompt": "The region holds the second-lowest horizontal line below the plan. If it is a dimension line, copy every number printed on it into printedText, left to right, separated by one space (digits only, no unit added). unit: the unit if one is printed or stated on the sheet, else UNKNOWN. spanFrom / spanTo: what the line's outermost end marks stand on, left end first (LEFT_OUTER_FACE / RIGHT_OUTER_FACE / TOP_OUTER_FACE / BOTTOM_OUTER_FACE = the outer face of the building's wall on that side of the sheet; INNER_FACE; OTHER; UNKNOWN). evidenceBox: the line from end mark to end mark.",
+   "scoredFields": ["answerClass", "printedText"],
+   "reference": {"answerClass": "DIMENSION_LINE", "printedText": "474 926", "unit": "cm", "spanFrom": "LEFT_OUTER_FACE", "spanTo": "RIGHT_OUTER_FACE", "note": "474 from the west outer face to the garage's west face, 926 from there to the east outer face. Ends recorded, not scored."},
+   "verification": {"method": "CHAIN_SPAN"}
+  },
+  {
+   "id": "Q4", "sheet": "stellarie", "kind": "CLASS", "pointer": "CROP",
+   "region": {"x0": 526, "y0": 650, "x1": 730, "y1": 706},
+   "classes": ["GATE", "WINDOW", "DOOR", "OPEN_GAP", "UNKNOWN"],
+   "extraFields": [],
+   "prompt": "The region holds the front (lower) wall of the garage at the bottom right of the plan and the opening in it between two solid wall pieces. What is the opening? GATE: a garage door. WINDOW. DOOR: a door for people. OPEN_GAP: no element drawn. UNKNOWN: the drawing does not let you tell. Copy the opening callout (two numbers stacked in a small circle) into printedText as top/bottom, e.g. 120/140; else UNKNOWN.",
+   "scoredFields": ["answerClass", "printedText"],
+   "reference": {"answerClass": "GATE", "printedText": "500/225", "unit": "UNKNOWN", "note": "Garage gate between jambs x 531-724; callout 500/225 at ~(623, 693)."},
+   "verification": {"method": "CALLOUT_READING"}
+  },
+  {
+   "id": "Q5", "sheet": "wrotycze", "kind": "DIMENSION", "pointer": "CROP", "axis": "HORIZONTAL",
+   "region": {"x0": 60, "y0": 36, "x1": 752, "y1": 72},
+   "classes": ["DIMENSION_LINE", "OTHER", "UNKNOWN"],
+   "extraFields": ["spanFrom", "spanTo"],
+   "prompt": "The region holds the topmost horizontal line above the plan. If it is a dimension line, copy the number printed on it into printedText exactly as printed (digits only, no unit added). unit: the unit if one is printed or stated on the sheet, else UNKNOWN. spanFrom / spanTo: what the line's two end marks stand on, left end first (LEFT_OUTER_FACE / RIGHT_OUTER_FACE / TOP_OUTER_FACE / BOTTOM_OUTER_FACE = the outer face of the building's wall on that side of the sheet; INNER_FACE; OTHER; UNKNOWN). evidenceBox: the line from end mark to end mark.",
+   "scoredFields": ["answerClass", "printedText", "spanFrom", "spanTo"],
+   "reference": {"answerClass": "DIMENSION_LINE", "printedText": "1620", "unit": "cm", "spanFrom": "LEFT_OUTER_FACE", "spanTo": "RIGHT_OUTER_FACE", "note": "Ends at the west and east outer faces (ticks x ~68 and ~742)."},
+   "verification": {"method": "CHAIN_SPAN"}
+  },
+  {
+   "id": "Q6", "sheet": "supertunie2", "kind": "DIMENSION", "pointer": "CROP", "axis": "HORIZONTAL",
+   "region": {"x0": 148, "y0": 2, "x1": 472, "y1": 30},
+   "classes": ["DIMENSION_LINE", "OTHER", "UNKNOWN"],
+   "extraFields": ["spanFrom", "spanTo"],
+   "prompt": "The region holds the topmost horizontal line above the plan. If it is a dimension line, copy the number printed on it into printedText exactly as printed (digits only, no unit added). unit: the unit if one is printed or stated on the sheet, else UNKNOWN. spanFrom / spanTo: what the line's two end marks stand on, left end first (LEFT_OUTER_FACE / RIGHT_OUTER_FACE / TOP_OUTER_FACE / BOTTOM_OUTER_FACE = the outer face of the building's wall on that side of the sheet; INNER_FACE; OTHER; UNKNOWN). evidenceBox: the line from end mark to end mark.",
+   "scoredFields": ["answerClass", "printedText"],
+   "reference": {"answerClass": "DIMENSION_LINE", "printedText": "690", "unit": "cm", "spanFrom": "LEFT_OUTER_FACE", "spanTo": "RIGHT_OUTER_FACE", "note": "Ticks x ~157 and ~464 on the outer faces of the two long walls. Ends recorded, not scored (the brief gave only the literal)."},
+   "verification": {"method": "CHAIN_SPAN"}
+  }
+ ]
+}

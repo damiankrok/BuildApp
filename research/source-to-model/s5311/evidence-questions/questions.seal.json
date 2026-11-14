@@ -1,0 +1,7 @@
+{
+ "schema": "buildapp.evidence-questions-seal",
+ "file": "questions.json",
+ "sha256": "0794ae9ef55d5bb47f5cd6923dd95f736352f5519d53c1d835c358b79def6bc3",
+ "sealedAt": "2026-11-14T02:18:42Z",
+ "note": "Sealed before any payload was prepared and before any answer (fixture or live) was scored. prepare.ts and run.ts refuse a questions.json whose sha256 differs from this one. A changed question is a new set with a new seal, never an edit of this one."
+}

@@ -1,0 +1,270 @@
+{
+ "schema": "buildapp.evidence-questions-fixture",
+ "kind": "all-unknown",
+ "synthetic": true,
+ "note": "SYNTHETIC answers written from the frozen references to exercise the replay path; never a model answer and never evidence of what a model reads.",
+ "questionsSha256": "0794ae9ef55d5bb47f5cd6923dd95f736352f5519d53c1d835c358b79def6bc3",
+ "recordedFrom": {
+  "model": "claude-sonnet-5-5",
+  "triageModel": "claude-sonnet-5-5"
+ },
+ "hints": {},
+ "answers": {
+  "67d51655a4f84dbb00a2e7b606b01674a29e5146232d4d90580d9fd5229c7341": {
+   "questionId": "Q1",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer"
+  },
+  "7204df750ccbefc0614b4a74d220d95426f9f10128af731a6f0de64c4981d2e8": {
+   "questionId": "Q1",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer"
+  },
+  "02017470440366c90738f1afe31e0dd08ac46af6da8062cbfc38381f2814c5a6": {
+   "questionId": "Q2",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "relation": "UNKNOWN"
+  },
+  "baa22bc0c60e1064e2a419c0779037a83342adc4c9d124f27b13f1a41fe80248": {
+   "questionId": "Q2",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "relation": "UNKNOWN"
+  },
+  "85e26de4cf41a70b83d65bc4cfcc1e9339aa92c0ada67300dd4af8e10de0dc25": {
+   "questionId": "Q3",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "71496f0eb4936f7f92bc78c6cb273571b6781ddb1e655b233814b5d5a65e47cf": {
+   "questionId": "Q3",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "bb3f9d3124bbb7238aa42b05806479524fff8a3f61927a746430f01d7c94e86a": {
+   "questionId": "Q3B",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "5d96635ea3d3bb96196dc2b6bb2cb7366e454b746da5a8b9d60bfc5a562acd62": {
+   "questionId": "Q3B",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "f6db5f83813be232b9c40626cbab387bc9ed0e28f006825cab8b77560b3c979d": {
+   "questionId": "Q4",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer"
+  },
+  "ed6da7f46e7e12cee91d9732cee4d66004c61379f744ca98da22e37dec6ff8db": {
+   "questionId": "Q4",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer"
+  },
+  "6368288371057af7dead6253159e70622383602673f06224b1b8da5248098849": {
+   "questionId": "Q5",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "ed210ea050fbe77b98bd54f5990887d40cdc49e523ce5fdf7afa9d68b7c0bc71": {
+   "questionId": "Q5",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "d4e154120900bf28032d8804df811f0621b8bb0dc6630b895c53e34dbf55d552": {
+   "questionId": "Q6",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  },
+  "596e7776c51a3cf14d208c141f0571fb379634dec33de38118e37312ee282001": {
+   "questionId": "Q6",
+   "answerClass": "UNKNOWN",
+   "alternatives": [],
+   "printedText": "UNKNOWN",
+   "unit": "UNKNOWN",
+   "evidencePicture": 1,
+   "evidenceBox": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 853,
+    "y1": 853
+   },
+   "view": "PLAN",
+   "confidence": "LOW",
+   "note": "SYNTHETIC FIXTURE: not a model answer",
+   "spanFrom": "UNKNOWN",
+   "spanTo": "UNKNOWN"
+  }
+ }
+}
