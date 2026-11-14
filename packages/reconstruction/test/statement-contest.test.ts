@@ -373,7 +373,7 @@ describe('a withdrawn accusation is named, with the readers it turned on', () =>
       { reader: 'EXTERNAL', valueCm: 2000 },
     ])
     const record = withdrawnRecord(r)
-    expect(record).toMatchObject({ resolverVersion: '1.5.0', statementContest: '1.0.0', withdrawnTriggers: 'AS_READ_REFUTATION,OUTER_TOTALS', withdrawnEvidenceCount: 2, doubtedCount: 2, stillStanding: '' })
+    expect(record).toMatchObject({ resolverVersion: '1.6.0', statementContest: '1.0.0', withdrawnTriggers: 'AS_READ_REFUTATION,OUTER_TOTALS', withdrawnEvidenceCount: 2, doubtedCount: 2, stillStanding: '' })
     expect(String(record.doubted)).toBe('ev-0=AS_PRINTED 1800|LATTICE 1800|EXTERNAL 2000; ev-1=AS_PRINTED 1350|EXTERNAL 1500')
   })
 
