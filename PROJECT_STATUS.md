@@ -15,7 +15,7 @@
 - **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
-  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.10 (plan extent at the wall face: an overall line's last segment that is the thickness of the wall its end tick stands on is kept; solver 2.41.0, service 1.11.0, APK 1336; report `stage-reports/SOURCE_TO_MODEL_V35310.md`). Before it: v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
+  merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage and latest code stage: v3.53.11 (the frame a fully read overall dimension states where the wall witness runs on past it — logo and driveway ink beyond the line is no building; solver 2.42.0, service 1.11.0, APK 1337; report `stage-reports/SOURCE_TO_MODEL_V35311.md`). Before it: v3.53.10 (plan extent at the wall face; solver 2.41.0, APK 1336; `SOURCE_TO_MODEL_V35310.md`), v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and
   outline), code `9824e17`, report `stage-reports/SOURCE_TO_MODEL_V3536.md`. Earlier: `SOURCE_TO_MODEL_V3535.md` …
   `SOURCE_TO_MODEL_V353.md`.
 - **Rules:** `CLAUDE.md`, `AGENT_PROTOCOL.md`, `APP_SPEC.md`, `docs/ANALYZER_CONTRACT.md` (§6.1), `docs/ANALYZER_API.md`
@@ -194,7 +194,31 @@
   group; Torenie 3: 3.98 cm/px from a resolution hypothesis against the strong 3.128 (SCALE_DEPARTS, NOT_USABLE) — first
   losses recorded, no code change. APK 1336, same signature; Android UI NOT_VERIFIED. Report
   `stage-reports/SOURCE_TO_MODEL_V35310.md`.
-- **NEXT (one action):** the OWNER installs APK 1336 and runs LOCAL on the Stellarie link (the whole house with the east
+- **v3.53.11 (2026-11-14), the whole outline against sheet graphics:** base `6a899f1` (APK 1336). Nigelle 4 (DEV): the
+  wall witness took in the publisher's logo letters under the plan and the low driveway walls past the garage gate;
+  against it the unread overall lines under the plan (474 + 926 = 1400) were judged interior, the frame came from the
+  witness: the logo became two masses, a planter strip a third, the thin-walled west wing (living room 5, kitchen 3)
+  fell out. Now, where the read frame rests on the wall geometry and a fully read overall chain (each segment read,
+  beside the building, spanning ≥ 75 % of the witness) says the building ends before the witness, the ink beyond its
+  ticks is cut from the witness, the other axis is judged against the cut witness (only when its exterior line is drawn
+  beyond the stated end), and sides snap outward only, to a long wall's outer face (`statedFrameOverWitness`). Scale,
+  005I, N1a untouched. Nigelle SHORT 175.35 → NEAR 237.58/255.91 m², scale MEASURED, 0 compile errors, west wing built,
+  logo and planter masses gone, driveway and terraces open; room table for the house MISSING 8 → 0; remaining: garage
+  −11 %, WC −37 %, room 9 −10.5 %, vestibule merged with the boiler room, assumed window heights. Wrotycze (the 1620 line
+  is not detected as a chain) and Supertunie 2 (scale: 1350 read as 1150) are other mechanisms, not fixed. 120 runs
+  (80 + 10 + 14 + 16): 119 byte-identical, corpus 66/80 models, 14 refusals (unchanged), room table 87/169 → 96/169;
+  other publishers 18/18 and a fresh frozen trial (12 new families, pages 16–18, expectations sealed) 12/12 identical,
+  no activation — transfer NOT shown. API trial (B original + questions, C + crop/mask) prepared and NOT measured: no
+  secret, billing not agreed (ledger 2.72807938 USD / 5 unchanged); D unavailable. APK 1337, same signature; Android UI
+  NOT_VERIFIED. Report `stage-reports/SOURCE_TO_MODEL_V35311.md`.
+- **NEXT (one action):** the OWNER installs APK 1337 and runs LOCAL on the Nigelle 4 link (the whole house with the west
+  wing, no logo masses; known: garage and WC areas, vestibule merged). For the API trial the OWNER decides on billing and
+  enters the key in the secure form or runs the one host command (README in `research/source-to-model/s5311/
+  evidence-questions/`). Next code candidates, by measured size: overall line not detected / interior chain frames the
+  axis (Wrotycze); scale read against an independent metric (Supertunie 2, Torenie 3, Nad Rzeczką 2); lowest storey
+  2–59 % covered in four fresh-trial refusals (not yet diagnosed); openings on recovered walls (Stellarie) and an opening
+  defect reaching `measurement`. Still open: 005Q — keep N1a, or the conditional face correction as its own stage.
+- **(superseded by v3.53.11) NEXT:** the OWNER installs APK 1336 and runs LOCAL on the Stellarie link (the whole house with the east
   wing and the garage; the gate is still a wrong window — known). Next code candidates, by measured size: the frame from
   an interior chain or the wall witness (Wrotycze, Nigelle 4 with the logo, Supertunie 2; 9/16 refusals in the fresh
   trial); the scale chosen by a hypothesis against a strong metric (Torenie 3); openings on recovered walls (Stellarie
