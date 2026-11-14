@@ -307,7 +307,12 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // on — the tick on the wall's outer face, a witness line across its inner face — is kept (KEPT_WALL_FACE), on that side's
 // own evidence (a long wall band with its outer face at the tick, meeting a wall of the other orientation at a corner).
 // Before, it was trimmed as an unread stub and the frame stopped on the inner face, losing the whole wall on that side.
-export const SOLVER_V2_VERSION = '2.41.0' as const
+// 2.42.0 (v3.53.11): where a fully read exterior overall chain spans most of the wall witness and the witness runs on
+// past one of its end ticks by more than two walls (a logo under the plan, driveway walls past a garage gate), the ink
+// beyond is not this building: the witness is cut back to the stated span, the other axis's chains are judged again,
+// and the frame is the read chain on its axis and an exterior chain's ticks on the other, each side snapped outward to
+// the outer face of a long wall band its tick falls in (`statedFrameOverWitness`).
+export const SOLVER_V2_VERSION = '2.42.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1

@@ -37,7 +37,7 @@ import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import { connectedComponents, dilate, dominantBandThickness, erode } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain, DimensionObservation } from '@buildapp/source-metrics'
-import { exteriorSpan, framingChains, outerTotalSpans } from './plan-extent.js'
+import { chainRole, exteriorSpan, framingChains, outerTotalSpans } from './plan-extent.js'
 import type { ChainRoleRecord, WallWitness } from './plan-extent.js'
 import { BOUNDARY_EVIDENCE_VERSION, assignCallouts, because, cornerLegs, readWallLine, solidLayer, withCallout } from './boundary-evidence.js'
 import { decompositionIdOf, gapEvidenceRecords } from './gap-evidence.js'
@@ -1370,7 +1370,105 @@ function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly Dime
   return { ...extent, rect, weak: true, why: `${extent.why}; ${reasons.join('; ')}`, refused: [...new Set(refused)].sort(), provenance }
 }
 
+/**
+ * v3.53.11: the frame a fully read overall dimension states, where the wall witness runs on past it.
+ *
+ * The witness is the largest group of wall-thick ink joined within two walls — and ink beside a building joins it: the
+ * letters of a logo printed under the plan, the low walls of a driveway running on past a garage gate. Measured against
+ * that witness, the overall lines drawn under the plan meet "walls" on both sides and are taken for lines across a room;
+ * the frame then comes from the witness alone, with the logo in it and a wing of the house drawn in thinner walls left
+ * out. A chain whose every segment was READ (or chain-corrected), drawn beside the building (exterior against the
+ * witness) and spanning most of it is the drawing's own statement of where the building stands on its axis. Where the
+ * witness runs on past one of its end ticks by more than two walls, the ink beyond that tick is not this building: the
+ * witness is cut back to the stated span (bands beyond it dropped, bands across its end clipped, nothing moved) and the
+ * chains of the other axis are judged again against the cut witness. If an exterior chain there spans at least half of
+ * it, its ticks frame that axis and the read chain frames its own: the frame is stated by the drawing on both axes,
+ * weak, and on the record. Nothing is inferred where this fails: the frame is read as before. Used only where the
+ * frame would otherwise rest on the witness (`planExtentByWalls`).
+ */
+function statedFrameOverWitness(chains: readonly DimensionChain[], witness: WallWitness, wallPx: number, bands: readonly Band[]): PlanExtent | null {
+  const span = (r: PixelRect, a: 'HORIZONTAL' | 'VERTICAL'): [number, number] => (a === 'HORIZONTAL' ? [r.x0, r.x1] : [r.y0, r.y1])
+  const fullyRead = (c: DimensionChain): boolean => c.segments.length > 0 && c.segments.every((s) => s.origin === 'READ' || s.origin === 'CHAIN_CORRECTED')
+  for (const a of ['VERTICAL', 'HORIZONTAL'] as const) {
+    const b = a === 'VERTICAL' ? ('HORIZONTAL' as const) : ('VERTICAL' as const)
+    const [w0, w1] = span(witness.rect, a)
+    const stated = chains
+      .filter((c) => c.axis === a && c.ticksPx.length >= 2 && fullyRead(c) && chainRole(c, witness, wallPx).role === 'EXTERIOR')
+      .map((c) => ({ c, lo: c.ticksPx[0], hi: c.ticksPx[c.ticksPx.length - 1] }))
+      .filter((r) => r.hi - r.lo >= 0.75 * (w1 - w0))
+      .sort((p, q) => q.hi - q.lo - (p.hi - p.lo) || (p.c.id < q.c.id ? -1 : p.c.id > q.c.id ? 1 : 0))
+    for (const r of stated) {
+      const over = Math.max(r.lo - w0, w1 - r.hi)
+      if (over <= 2 * wallPx) continue
+      const lo = r.lo - wallPx
+      const hi = r.hi + wallPx
+      const kept = witness.bands
+        .filter((band) => {
+          const [p, q] = span(band.bounds, a)
+          return q >= lo && p <= hi
+        })
+        .map((band) => ({ ...band, bounds: a === 'HORIZONTAL' ? { ...band.bounds, x0: Math.max(band.bounds.x0, lo), x1: Math.min(band.bounds.x1, hi) } : { ...band.bounds, y0: Math.max(band.bounds.y0, lo), y1: Math.min(band.bounds.y1, hi) } }))
+      if (kept.length === 0) continue
+      const cut: WallWitness = {
+        ...witness,
+        bands: kept,
+        rect: { x0: Math.min(...kept.map((k) => k.bounds.x0)), y0: Math.min(...kept.map((k) => k.bounds.y0)), x1: Math.max(...kept.map((k) => k.bounds.x1)), y1: Math.max(...kept.map((k) => k.bounds.y1)) },
+      }
+      const roles = chains.map((c) => chainRole(c, cut, wallPx))
+      const ticks = exteriorSpan(chains, roles, b, cut)
+      if (!ticks) continue
+      // The contradiction this answers, and only it: the other axis's line is drawn BEYOND the stated end (a line under
+      // the plan), yet against the whole witness it was not exterior — the ink past the stated end is what put "walls"
+      // on its far side. Where the line stands within the stated span, the ink beyond may be a wing the read chain does
+      // not measure, and nothing is cut.
+      const line = chains.find((c) => c.id === ticks.chainId)
+      if (!line || (line.baselinePx >= r.lo - wallPx && line.baselinePx <= r.hi + wallPx)) continue
+      if (chainRole(line, witness, wallPx).role === 'EXTERIOR') continue
+      const [x, y] = a === 'HORIZONTAL' ? [[r.lo, r.hi], [ticks.lo, ticks.hi]] : [[ticks.lo, ticks.hi], [r.lo, r.hi]]
+      // A tick that falls inside a long wall band running along that side marks that wall: the side is the band's outer
+      // face (outward only — a tick never pulls a side in).
+      const long = longBands(bands, wallPx)
+      const face = (side: 'x0' | 'x1' | 'y0' | 'y1', at: number, across: [number, number]): number => {
+        const vertical = side === 'x0' || side === 'x1'
+        const walls = long.filter((w) => w.axis === (vertical ? 'VERTICAL' : 'HORIZONTAL')).filter((w) => {
+          const [p, q] = vertical ? [w.bounds.x0, w.bounds.x1] : [w.bounds.y0, w.bounds.y1]
+          const [s0, s1] = vertical ? [w.bounds.y0, w.bounds.y1] : [w.bounds.x0, w.bounds.x1]
+          return at >= p - 1 && at <= q + 1 && Math.min(s1, across[1]) - Math.max(s0, across[0]) > 0
+        })
+        if (walls.length === 0) return at
+        const faces = walls.map((w) => (side === 'x0' ? w.bounds.x0 : side === 'x1' ? w.bounds.x1 : side === 'y0' ? w.bounds.y0 : w.bounds.y1))
+        return side === 'x0' || side === 'y0' ? Math.min(at, ...faces) : Math.max(at, ...faces)
+      }
+      x[0] = face('x0', x[0], [y[0], y[1]])
+      x[1] = face('x1', x[1], [y[0], y[1]])
+      y[0] = face('y0', y[0], [x[0], x[1]])
+      y[1] = face('y1', y[1], [x[0], x[1]])
+      return {
+        rect: { x0: round6(x[0]), y0: round6(y[0]), x1: round6(x[1]), y1: round6(y[1]) },
+        weak: true,
+        why: `the read overall chain ${r.c.id} states the building's ${a === 'HORIZONTAL' ? 'width' : 'depth'} (${round6(r.lo)}..${round6(r.hi)} px) and the wall witness runs on ${Math.round(over)} px past it: the ink beyond is not this building, and against the witness cut back to it the exterior chain ${ticks.chainId} frames the ${b === 'HORIZONTAL' ? 'width' : 'depth'} by its ticks`,
+        roles,
+        refused: [],
+        provenance: a === 'HORIZONTAL' ? { x: 'DIMENSION_CHAIN_EXTENT', y: 'EXTERIOR_CHAIN_TICKS' } : { x: 'EXTERIOR_CHAIN_TICKS', y: 'DIMENSION_CHAIN_EXTENT' },
+      }
+    }
+  }
+  return null
+}
+
+/**
+ * v3.53.11: a drawn statement replaces the frame only where the frame would otherwise rest on the wall witness — on an
+ * axis framed by WALL_GEOMETRY_EXTENT, or where no frame stood. A frame the dimension chains state is never overruled.
+ */
 function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
+  const read = planExtentByWallsRead(chainsIn, bands, wallPx, witness)
+  if (!witness) return read
+  const onWalls = !read || read.provenance?.x === 'WALL_GEOMETRY_EXTENT' || read.provenance?.y === 'WALL_GEOMETRY_EXTENT'
+  if (!onWalls) return read
+  return statedFrameOverWitness(chainsIn, witness, wallPx, bands) ?? read
+}
+
+function planExtentByWallsRead(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
   const endWalls: EndSpanWalls = { bands, wallPx }
   const legacy = planExtentOf(chainsIn, bands, wallPx)
   if (witness === undefined) return legacy
