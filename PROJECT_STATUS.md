@@ -12,7 +12,32 @@
 
 ## Current summary (read first)
 
-- **Active brief:** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
+- **v3.54 (2026-11-15) — whole analyzer, generalisation and strategy comparison (OWNER brief v3.54, Master Plan v3.54):
+  CHECKPOINT, no production change, no APK 1340; APK 1339 stays current.** Report `stage-reports/SOURCE_TO_MODEL_V354.md`,
+  module map `stage-reports/artifacts/v354/MODULE_MAP.md`. Set: 30 projects, 8 publishers (archon.pl, architecturaldesigns.com,
+  dobredomy.pl, domoweklimaty.pl, extradom.pl, houseplans.com, lipinscy.pl, studioatrium.pl), DEV 13 / HELD 10 (seen, untuned) /
+  FRESH 7 (4 never-analysed ARCHON families + studioatrium.pl wholly held out); protocol and references sealed before the runs
+  (private). Findings: LOCAL (A) builds 14/30 models (7 usable by the narrow proxy), 16 refusals; outside ARCHON every refusal
+  (11/21) stops on the metric (dimension lines not found, ft-in labels refused by the digit-only decoder, plans printing no
+  dimensions) and, with a scale from published figures, the outline fails next (NO_OUTLINE / SIDES_DISAGREE /
+  WALL_THICKNESS_IMPLAUSIBLE). In the 1338/1339 corpus the walled envelope is 3 of 56 refusals; 30 are readings refused in
+  arbitration/layout. Diagnostic I3 (accept-best, never committed): the resolver holds readings at the printed overall size to
+  the centimetre (Goldstary 2, Surfinie 2, Santany) and cannot confirm them independently. AI gate: every non-ARCHON local
+  model reaches the reader; no ARCHON model does, even with 15 % of the outline missing (Torenie 3) — confirmed on saved
+  results with the product's own `drawingsWeaknesses`; nothing from the reader can enter the local path. Strategy B (recorded
+  S53 descriptions replayed through builder 0.7.0, no call) on the same 12 pages: 10 models / 5 usable vs A 3 / 1; B's sizes
+  are off 12–30 % on 4 of 10. C, D and B live: NOT MEASURED (no API key in the environment, ledger billing UNCONFIRMED; no API
+  or CLI call made). Variant V1 (plan resolver 1.7.0, `PRINTED_OVERALL`: a wall-witnessed reading at the overall size another
+  copy of the plan prints): cause test red on 226c9ac / green, counters green, regression 38 corpus houses where the resolver runs: 36 identical, 2 changed, 0 new refusals, activations
+  Goldstary 2 and Santany (refusal → model at printed size), correct non-activation on FRESH Saponarie (pergola counted in the
+  best reading) — **rejected by the frozen criterion (0 HELD/FRESH activations)**, code reverted, patch kept in
+  `stage-reports/artifacts/v354/`. Chosen direction: LOCAL where its readers work, the described reader where LOCAL refuses or
+  has no anchor, AI observations into the local path only with an independent witness from the drawing. NEXT: unblock a live
+  B measurement on ARCHON/FRESH (key + reconciled ledger); a fresh sample for any next variant (FRESH is now seen); ridge
+  direction (5 models, 4 publishers) and base-storey choice; metric + outline outside ARCHON measured together. Private
+  package `BuildPlan-V354-Private.zip` (outside Git, 124 694 220 B, sha256
+  `3e9d097be2dfda77ce6ebd810901019a568cd2cc9b649e402d8a6ed107c352d6`, 1610 files, MANIFEST checked after unzip).
+- **Previous brief (v3.53.x, superseded by v3.54 on 2026-11-15):** OWNER v3.53.0 (2026-11-10), continuation v3.53.1, coordinator update v3.53.2 (2026-11-11): a
   working analyzer in the app and a correct whole exterior, without new hosting, a raised 5 USD limit, the disclosed
   key, H2/the private benchmark or ForgeShape changes. Campaign on `claude/new-session-3kzcgh`, `[skip ci]`, no
   merge/PR. Checkpoint code: `80a866e` (matrix on `b1159af`). Latest stage: v3.53.14 (independent scale evidence and outline boundaries — diagnosis, NO code change and no new APK: Supertunie 2 E fails on the outline, not the scale — with a manually confirmed metric (diagnostic) the refusal is the same PLAN_NO_WALLED_ENVELOPE (the glazed top facade gives no wall band, the right side wall merges with the terrace screen), and even with a hand-set envelope the layout is refused at 66.4/93.56 m², so admitting the 690 reading would not change the scene and the outline slice is deferred with that cause; the v3.53.9 wide-glazing closure has no case there (no wall piece on the facade line); Calandivy: the copy 1339 improved is the room-area copy, the scene is unchanged; Nolany 2 garage −0.5 m is a decomposition decision (the right garage wall strip is left outside), not dimension assignment, left for later; the 8 metric-evidence records lost in 1339 rebuilt on both codes with full hashes (byte-identical to the two surviving originals); APK 1339 stays current; corpus 67/80, 13 refusals, room table 99/169 unchanged; report `stage-reports/SOURCE_TO_MODEL_V35314.md`). Latest code stage: v3.53.13 (dimension binding and scale resolution — an ink is not neutralised by a page vote solved from the ink itself; a label a hidden tick under a cover would make a part's number stays a candidate; a STRONG metric scale is not traded for a rival with under half its independent support — metric solver 1.8.0, dimension topology 1.6.0 (cover provenance only), plan resolver 1.6.0, solver 2.43.0, code `5240d7e`, contract `459cc2d`, APK 1339; regression on the same bytes: 162 houses, lines 0 changes, metric evidence 134/161 identical, production 22/27 changed houses identical, 0 new refusals, Nolany 2 refusal → model, Torenie 3 at its measured scale; corpus 67/80 models, 13 refusals; room table 99/169; the wide-mark placement variant was rejected (6 879 marks moved in 161 houses); report `stage-reports/SOURCE_TO_MODEL_V35313.md`). Before it: v3.53.12 (a dimension line hidden over long stretches by drawings laid over it is one line when it ends in a tick at both ends — dimension topology 1.5.0, solver 2.42.0, service 1.11.0, APK 1338; report `stage-reports/SOURCE_TO_MODEL_V35312.md`). Before it: v3.53.11 (the frame a fully read overall dimension states where the wall witness runs on past it — logo and driveway ink beyond the line is no building; solver 2.42.0, service 1.11.0, APK 1337; report `stage-reports/SOURCE_TO_MODEL_V35311.md`). Before it: v3.53.10 (plan extent at the wall face; solver 2.41.0, APK 1336; `SOURCE_TO_MODEL_V35310.md`), v3.53.9 (outline at wide glazings and gates; solver 2.40.0, APK 1335; `SOURCE_TO_MODEL_V3539.md`), v3.53.8 (closed parts of the house recovered, partitions under their own roofs, measurement apart from the run; solver 2.39.0, APK 1334; `SOURCE_TO_MODEL_V3538.md`), v3.53.7 (audit, no code change; `SOURCE_TO_MODEL_V3537_AUDIT.md`) and v3.53.6 (OWNER brief of 2026-11-12, rooms and

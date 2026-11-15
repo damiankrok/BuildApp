@@ -1,0 +1,320 @@
+diff --git a/apps/android/app/src/test/resources/analyzer-contract-current/result.json b/apps/android/app/src/test/resources/analyzer-contract-current/result.json
+index 53eef73..0867cc3 100644
+--- a/apps/android/app/src/test/resources/analyzer-contract-current/result.json
++++ b/apps/android/app/src/test/resources/analyzer-contract-current/result.json
+@@ -16,7 +16,7 @@
+   "sourcePackageHash": "4e40736479d51c0e42b2ac5b766c070d28204701cc2fb0850134ff974f7cfe8b",
+   "observationGraphHash": "5f377e03bdfa9c88f3e147564d8f990615ffb0880ffac4d388c0d3687bd245c4",
+   "metricEvidenceHash": "bff61231a44f6972e35524d2784dfd09e085c064977efba99c59ee48583430b0",
+-  "candidateHash": "e083120225d44ec2d9323d32061ee53f2b31b8b065ee683e06d0745758c7b7cf",
++  "candidateHash": "921f5547831f29fe8354e2d7c378175aed3f751f450a94fe9114365cec0c5899",
+   "modelHash": "5fc0c701f19d92ff5e596aa7e70b90faf86fefa09c946d6ad1d0a4735738cfcd",
+   "modelSha256": "5fc0c701f19d92ff5e596aa7e70b90faf86fefa09c946d6ad1d0a4735738cfcd",
+   "sceneContentHash": "eec34e54a43b41c95ff480f42db4dafd709680c132aff29a176020f6e1519687",
+@@ -2379,7 +2379,7 @@
+   },
+   "analyzer": {
+     "service": "1.11.0",
+-    "solver": "2.43.0"
++    "solver": "2.44.0"
+   },
+   "startedAt": "2026-01-01T00:00:00.000Z",
+   "completedAt": "2026-01-01T00:00:00.000Z",
+diff --git a/apps/android/app/src/test/resources/analyzer-contract-current/status-completed.json b/apps/android/app/src/test/resources/analyzer-contract-current/status-completed.json
+index 4e6901d..bf6e4bd 100644
+--- a/apps/android/app/src/test/resources/analyzer-contract-current/status-completed.json
++++ b/apps/android/app/src/test/resources/analyzer-contract-current/status-completed.json
+@@ -77,7 +77,7 @@
+   "result": {
+     "title": "Larchfield",
+     "label": "Larchfield (analysis)",
+-    "candidateHash": "e083120225d44ec2d9323d32061ee53f2b31b8b065ee683e06d0745758c7b7cf",
++    "candidateHash": "921f5547831f29fe8354e2d7c378175aed3f751f450a94fe9114365cec0c5899",
+     "modelHash": "5fc0c701f19d92ff5e596aa7e70b90faf86fefa09c946d6ad1d0a4735738cfcd",
+     "sceneSha256": "5c59b69d9804237f53091860204598d167b1a1291b22112a0a268690db463237",
+     "sceneContentHash": "eec34e54a43b41c95ff480f42db4dafd709680c132aff29a176020f6e1519687",
+diff --git a/packages/reconstruction/src/plan-resolution.ts b/packages/reconstruction/src/plan-resolution.ts
+index d47ae69..2533416 100644
+--- a/packages/reconstruction/src/plan-resolution.ts
++++ b/packages/reconstruction/src/plan-resolution.ts
+@@ -88,7 +88,44 @@ import type { StatementContest } from './statement-contest.js'
+ import { worldFrameFrom } from './v2/frame.js'
+ 
+ /** 1.6.0 (v3.53.13): a metric scale chosen STRONG from independent readings is not traded for a rival with under half its independent support (`metricScales`). */
+-export const PLAN_RESOLVER_VERSION = '1.6.0' as const
++/**
++ * 1.7.0 (v3.54): a reading whose extent the walls witness (theirs, or the dimension lines' ticks where the walls run to
++ * them) and whose built width and depth
++ * are the longest dimensions ANOTHER copy of the same storey's plan prints on each axis, read as printed, is corroborated
++ * by that print (`PRINTED_OVERALL`): two drawings of one sheet agreeing on the building's size, neither of them the
++ * published figure. Before, such a reading — found on the corpus at the printed size to the centimetre — could only be
++ * confirmed by the other copy's own DECOMPOSITION (`CROSS_COPY`), and stayed unbuilt whenever that copy read badly.
++ */
++export const PLAN_RESOLVER_VERSION = '1.7.0' as const
++
++/** v3.54: how close a reading's built size must be to a printed overall dimension to be that dimension: 1.5 % or 5 cm. */
++export const PRINTED_OVERALL_TOLERANCE = { share: 0.015, cm: 5 } as const
++
++/** What one plan copy prints as its longest dimension on each axis, in centimetres, read as printed (never corrected or derived). */
++export type PrintedOverall = { X?: number; Y?: number }
++
++/**
++ * The longest dimension each listed frame prints on a horizontal and on a vertical dimension chain, read as printed
++ * (`origin: READ`): the overall a sheet states, as that copy's own recognition read it.
++ */
++export function printedOverallOf(metrics: MetricEvidenceSet, frameIds: ReadonlySet<string>): Map<string, PrintedOverall> {
++  const axisOf = new Map(metrics.chains.map((c) => [c.id, c.axis]))
++  const out = new Map<string, PrintedOverall>()
++  for (const e of metrics.evidence) {
++    if (e.kind !== 'LINEAR_DIMENSION' || e.origin !== 'READ' || e.unit !== 'cm' || !frameIds.has(e.frameId) || !(e.value > 0)) continue
++    const axis = e.chainId !== undefined ? axisOf.get(e.chainId) : undefined
++    if (axis !== 'HORIZONTAL' && axis !== 'VERTICAL') continue
++    const key = axis === 'HORIZONTAL' ? 'X' : 'Y'
++    const current = out.get(e.frameId) ?? {}
++    if ((current[key] ?? 0) < e.value) current[key] = e.value
++    out.set(e.frameId, current)
++  }
++  return out
++}
++
++/** Is a length in metres the printed dimension `cm`, within PRINTED_OVERALL_TOLERANCE? */
++export const isPrintedLength = (metres: number, cm: number | undefined): boolean =>
++  cm !== undefined && cm > 0 && Math.abs(metres * 100 - cm) <= Math.max(PRINTED_OVERALL_TOLERANCE.cm, PRINTED_OVERALL_TOLERANCE.share * cm)
+ 
+ /** Counts, never time: a slower device must reach the same answer. */
+ export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
+@@ -98,7 +135,7 @@ export const FOOTPRINT_BUCKETS = ['AGREES', 'UNKNOWN', 'NEAR', 'WRONG'] as const
+ export type FootprintBucket = (typeof FOOTPRINT_BUCKETS)[number]
+ 
+ /** A witness to a reading that is neither the published figure nor the pixels the reading was made from. */
+-export type Corroboration = 'ISOTROPY' | 'CROSS_COPY'
++export type Corroboration = 'ISOTROPY' | 'CROSS_COPY' | 'PRINTED_OVERALL'
+ 
+ /** What the published footprint did in a resolution: scored the readings, was spent refusing the first one, or was not published. */
+ /**
+@@ -425,7 +462,7 @@ export function wallCoverageOf(sheet: PlanSheet, within: PixelRect | null | unde
+ /** Everything about one reading that the ranking and the acceptance rule ask. */
+ function scoreReading(
+   draft: StructuralLayoutDraft,
+-  context: { published?: number; spent?: boolean; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[] },
++  context: { published?: number; spent?: boolean; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[]; printedElsewhere?: readonly PrintedOverall[]; extentFromWalls?: boolean },
+ ): HypothesisScore {
+   const hard: string[] = []
+   const base = draft.base
+@@ -467,6 +504,9 @@ function scoreReading(
+     const widthM = Math.max(...all.map((b) => b.x1)) - Math.min(...all.map((b) => b.x0))
+     const depthM = Math.max(...all.map((b) => b.z1)) - Math.min(...all.map((b) => b.z0))
+     if (context.otherCopies.some((o) => Math.abs(o.widthM / widthM - 1) <= 0.05 && Math.abs(o.depthM / depthM - 1) <= 0.05)) corroborations.push('CROSS_COPY')
++    // 1.7.0: an extent the walls witness at the size another copy prints as its overall, on both axes. The dimension lines'
++    // ticks where the walls do not run to them measure, at their own labels' scale, what those labels say by construction.
++    if (context.extentFromWalls && (context.printedElsewhere ?? []).some((p) => isPrintedLength(widthM, p.X) && isPrintedLength(depthM, p.Y))) corroborations.push('PRINTED_OVERALL')
+   }
+ 
+   const outlineKey = built
+@@ -598,7 +638,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
+     })
+     .slice(0, RESOLVER_BUDGET.copies)
+ 
+-  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; mouths: PlanReadingChoice['mouths']; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }> }
++  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; mouths: PlanReadingChoice['mouths']; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; printedElsewhere: PrintedOverall[]; extentFromWalls: boolean }
+   const decompositions: Decomposition[] = []
+   const sheets = new Map<string, { sheet: PlanSheet; cluster: PixelRect | null }>()
+   for (const frame of copies) {
+@@ -612,6 +652,8 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
+     const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === frameId && r.plane === 'PLAN_XZ')
+     if (cluster && registration) copyExtents.set(frameId, { widthM: (cluster.x1 - cluster.x0) * registration.metresPerPixelX, depthM: (cluster.y1 - cluster.y0) * registration.metresPerPixelY })
+   }
++  // 1.7.0: what each copy prints as its overall, as its own recognition read it
++  const printed = printedOverallOf(options.metrics, new Set(copies.map((c) => c.id)))
+   for (const frame of copies) {
+     const got = sheets.get(frame.id)
+     const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === frame.id && r.plane === 'PLAN_XZ')
+@@ -632,16 +674,19 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
+     // 1.3.0: the metric layer's own hypotheses; the first-reading lattice only for evidence that has none.
+     const lattices: Array<Extract<ScaleChoice, { kind: 'LATTICE' | 'METRIC_HYPOTHESIS' }>> = solution ? metricScales(solution, registration) : judge ? latticeScales(options.metrics, frame.id, registration, judge, tolerancePx) : []
+     const otherCopies = [...copyExtents.entries()].filter(([id]) => id !== frame.id).map(([, e]) => e)
++    const printedElsewhere = [...printed.entries()].filter(([id]) => id !== frame.id).map(([, p]) => p)
+     const statements = statementsOn(options.metrics, frame.id)
+     const bothAxes = (cmX: number, cmY: number): boolean =>
+       (['X', 'Y'] as const).every((axis) => statements.some((s) => s.axis === axis && judge !== null && s.pixelLength >= 0.15 * (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0) && zeroSubstitution(s).some((cm) => agrees(cm, s.pixelLength, axis === 'X' ? cmX : cmY, tolerancePx))))
++    // 1.7.0: an extent the walls witness — the walls' own, or the dimension lines' ticks where the walls run to them
++    const fromWalls = (extent: PlanReadingChoice['extent']): boolean => extent !== 'CHAIN_RECT' || (cluster !== null && chainRect !== null && !differs(cluster, chainRect))
+     for (const extent of extents) {
+       // The registration was fitted on these same statements: agreeing with them on both axes is not a second
+       // witness — unless the metric layer chose or confirmed it from independent readings on both axes (1.3.0).
+-      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies })
++      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies, printedElsewhere, extentFromWalls: fromWalls(extent) })
+       for (const lattice of lattices) {
+         const at = metricsAtScale(options.metrics, frame.id, lattice.cmPerPx, tolerancePx)
+-        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: lattice.kind === 'METRIC_HYPOTHESIS' ? lattice.axesMeasured : bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies })
++        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: lattice.kind === 'METRIC_HYPOTHESIS' ? lattice.axesMeasured : bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies, printedElsewhere, extentFromWalls: fromWalls(extent) })
+       }
+     }
+   }
+@@ -700,7 +745,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
+         const choice = choiceOf(hypothesis, d)
+         const draft = inferStructuralLayout({ ...shared, metrics: d.metrics, plan: choice })
+         pocketed ||= mouthsLeftOpen(draft)
+-        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [] }) })
++        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [], printedElsewhere: d.printedElsewhere, extentFromWalls: d.extentFromWalls }) })
+       }
+     }
+     if (pocketed && d.mouths === 'AS_DECIDED' && bounded.length + withShutMouths.length < RESOLVER_BUDGET.decompositions) {
+@@ -723,7 +768,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
+     const result = composeStructuralLayout({ ...shared, metrics: r.decomposition.metrics, plan: choiceOf(r.hypothesis, r.decomposition) })
+     const refusals = result.layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).map((g) => g.code).sort()
+     const d = r.decomposition
+-    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals }) })
++    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals, printedElsewhere: d.printedElsewhere, extentFromWalls: d.extentFromWalls }) })
+   })
+   counts.compositions = composed.length
+ 
+diff --git a/packages/reconstruction/src/v2/reconstruct-v2.ts b/packages/reconstruction/src/v2/reconstruct-v2.ts
+index 51aee55..94aa96f 100644
+--- a/packages/reconstruction/src/v2/reconstruct-v2.ts
++++ b/packages/reconstruction/src/v2/reconstruct-v2.ts
+@@ -313,7 +313,9 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
+ // and the frame is the read chain on its axis and an exterior chain's ticks on the other, each side snapped outward to
+ // the outer face of a long wall band its tick falls in (`statedFrameOverWitness`).
+ // 2.43.0 (v3.53.13): the plan resolver keeps a STRONG metric scale against a far weaker rival hypothesis (resolver 1.6.0).
+-export const SOLVER_V2_VERSION = '2.43.0' as const
++// 2.44.0 (v3.54): a reading on the walls' own extent at the overall size another copy of the plan prints is corroborated by
++// that print (resolver 1.7.0, PRINTED_OVERALL).
++export const SOLVER_V2_VERSION = '2.44.0' as const
+ 
+ /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
+ const PIECES_MEET_M = 1
+diff --git a/packages/reconstruction/test/plan-resolution-printed.test.ts b/packages/reconstruction/test/plan-resolution-printed.test.ts
+new file mode 100644
+index 0000000..6169520
+--- /dev/null
++++ b/packages/reconstruction/test/plan-resolution-printed.test.ts
+@@ -0,0 +1,115 @@
++/**
++ * Plan resolver 1.7.0 (v3.54): a reading the walls witness, at the overall size ANOTHER copy of the same storey's plan
++ * prints, is corroborated by that print (`PRINTED_OVERALL`).
++ *
++ * The failure it answers was measured on real sheets: the first reading of a plan stops, the published footprint that
++ * refused it is spent, and the reading of the building at exactly its printed overall size stays unbuilt because the
++ * other copy of the plan reads its walls badly, so `CROSS_COPY` cannot confirm it. Synthetic plans at 5 cm/px
++ * (`plan.ts`); nothing here names a real project or carries its figures.
++ */
++import { describe, expect, it } from 'vitest'
++import type { MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
++import { ReconstructionFailure, isPrintedLength, printedOverallOf, reconstructV2 } from '../src/index.js'
++import type { SolverTraceEvent } from '../src/index.js'
++import { chain, graphOf, metricsOf, planFrame, registration, sheet, walls } from './plan.js'
++import { BLACK, drawLine } from '../../source-cv/test/draw.js'
++
++const FRAME = 'frame-plan'
++const COPY = 'frame-plan-copy'
++const frame = planFrame(FRAME, 'GROUND', { width: 460, height: 480 })
++// the same storey's other copy: the area-table print of the same sheet, ranked after the dimensioned one
++const copy = { ...planFrame(COPY, 'GROUND', { width: 460, height: 480 }), roles: { ...planFrame(COPY, 'GROUND', { width: 460, height: 480 }).roles, annotation: 'AREA_TABLE' as const } }
++
++/** An 18 × 6 m house, a 4 × 6 m walled room on its north side and a 6 × 6 m terrace closed by kerb lines (132 m² closed). */
++function houseWithTerrace(): ReturnType<typeof sheet> {
++  const r = sheet(460, 480)
++  walls(r, 40, 160, 400, 280, [{ side: 'S', from: 200, to: 247 }])
++  walls(r, 120, 40, 200, 171)
++  drawLine(r, 200, 42, 320, 42, BLACK)
++  drawLine(r, 320, 42, 320, 160, BLACK)
++  return r
++}
++
++/** The other copy's walls read badly: only the small room comes through, so its own decomposition cannot confirm anything. */
++function badCopy(): ReturnType<typeof sheet> {
++  const r = sheet(460, 480)
++  walls(r, 120, 40, 200, 171)
++  return r
++}
++
++/** A printed length on the copy, as its recognition read it. */
++function printedOn(frameId: string, chainId: string, cm: number, origin: MetricEvidence['origin'] = 'READ'): MetricEvidence {
++  return { id: `ev-${chainId}-${cm}-${origin}`, kind: 'LINEAR_DIMENSION', value: cm, unit: 'cm', origin, rawText: String(cm), confidence: 0.5, frameId, assetId: `asset-${frameId}`, chainId, tokenIds: [], alternatives: [] } as never
++}
++
++/** The dimensioned copy's scale was measured on both axes from independent readings (ISOTROPY). */
++const solution = { frameId: FRAME, assetId: `asset-${FRAME}`, cmPerPixelX: 5, cmPerPixelY: 5, anisotropy: 1, isotropy: 'MEASURED', relation: 'CONFIRMED', confidence: 'STRONG', independentWitnesses: 3, hypotheses: [], conflictingObservationIds: [], supportingObservationIds: [], rereadChainIds: [], orientationDecisions: [], counts: {}, legacy: {}, topology: {}, why: 'fixture' } as never
++
++function run(printed: MetricEvidence[]): { result?: ReturnType<typeof reconstructV2>; failure?: ReconstructionFailure; trace: SolverTraceEvent[] } {
++  const trace: SolverTraceEvent[] = []
++  const chains = [
++    { ...chain('cx', 'HORIZONTAL', [40, 120, 200, 320, 400], { baselinePx: 20 }), frameId: FRAME },
++    { ...chain('cy', 'VERTICAL', [40, 160, 280], { baselinePx: 20 }), frameId: FRAME },
++    // the copy's own overall lines, where its labels are read; their ticks are not this test's subject
++    { ...chain('kx', 'HORIZONTAL', [40, 400], { baselinePx: 20 }), frameId: COPY },
++    { ...chain('ky', 'VERTICAL', [40, 280], { baselinePx: 20 }), frameId: COPY },
++  ]
++  const metrics: MetricEvidenceSet = { ...metricsOf(chains, [registration(FRAME), registration(COPY)]), evidence: printed, metricSolutions: [solution] } as never
++  try {
++    const result = reconstructV2({
++      label: 'fixture',
++      slug: 'fixture',
++      sourcePackageId: 'src-test',
++      sourcePackageHash: 'd'.repeat(64),
++      graph: graphOf([frame, copy]),
++      metrics,
++      raster: (f) => (f.id === COPY ? badCopy() : houseWithTerrace()),
++      publishedAreas: [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: 132 }],
++      trace: (e) => trace.push(e),
++    })
++    return { result, trace }
++  } catch (error) {
++    if (error instanceof ReconstructionFailure) return { failure: error, trace }
++    throw error
++  }
++}
++
++const groundArea = (r: ReturnType<typeof reconstructV2>): number => {
++  const ground = r.building.levels[0]
++  return r.building.masses.filter((m) => m.levelId === undefined || m.levelId === ground?.id).reduce((a, m) => a + (m.x1 - m.x0) * (m.z1 - m.z0), 0)
++}
++
++describe('a reading at the overall size the other copy prints (plan resolver 1.7.0)', () => {
++  it('the longest dimension each copy prints on each axis, read as printed — never a corrected or derived value, never another frame', () => {
++    const evidence = [printedOn(COPY, 'kx', 1800), printedOn(COPY, 'kx', 640), printedOn(COPY, 'ky', 1200), printedOn(COPY, 'kx', 2400, 'CHAIN_CORRECTED'), printedOn(FRAME, 'cx', 2000)]
++    const metrics = { ...metricsOf([{ ...chain('kx', 'HORIZONTAL', [0, 1]), frameId: COPY }, { ...chain('ky', 'VERTICAL', [0, 1]), frameId: COPY }, { ...chain('cx', 'HORIZONTAL', [0, 1]), frameId: FRAME }], []), evidence } as never
++    expect(printedOverallOf(metrics, new Set([COPY]))).toEqual(new Map([[COPY, { X: 1800, Y: 1200 }]]))
++    expect(isPrintedLength(18.04, 1800)).toBe(true)
++    expect(isPrintedLength(18.3, 1800)).toBe(false)
++    expect(isPrintedLength(18, undefined)).toBe(false)
++  })
++
++  it('CAUSE: the first reading takes the terrace; the spent figure cannot choose; the house at the size the other copy prints is built', () => {
++    const { result, failure } = run([printedOn(COPY, 'kx', 1800), printedOn(COPY, 'ky', 1200)])
++    expect(failure?.message).toBeUndefined()
++    expect(result).toBeDefined()
++    if (!result) return
++    expect(groundArea(result)).toBeCloseTo(132, 0)
++  })
++
++  it('COUNTER: the other copy prints another size — nothing confirms the house, and it is named, not built', () => {
++    const { result, failure } = run([printedOn(COPY, 'kx', 1500), printedOn(COPY, 'ky', 1200)])
++    expect(result).toBeUndefined()
++    expect(failure).toBeDefined()
++  })
++
++  it('COUNTER: one axis printed is not the size of the building', () => {
++    const { result } = run([printedOn(COPY, 'kx', 1800)])
++    expect(result).toBeUndefined()
++  })
++
++  it('COUNTER: a value the chain corrected is not a print', () => {
++    const { result } = run([printedOn(COPY, 'kx', 1800, 'CHAIN_CORRECTED'), printedOn(COPY, 'ky', 1200, 'CHAIN_CORRECTED')])
++    expect(result).toBeUndefined()
++  })
++})
+diff --git a/packages/reconstruction/test/statement-contest.test.ts b/packages/reconstruction/test/statement-contest.test.ts
+index 7cfef6e..08a370f 100644
+--- a/packages/reconstruction/test/statement-contest.test.ts
++++ b/packages/reconstruction/test/statement-contest.test.ts
+@@ -373,7 +373,7 @@ describe('a withdrawn accusation is named, with the readers it turned on', () =>
+       { reader: 'EXTERNAL', valueCm: 2000 },
+     ])
+     const record = withdrawnRecord(r)
+-    expect(record).toMatchObject({ resolverVersion: '1.6.0', statementContest: '1.0.0', withdrawnTriggers: 'AS_READ_REFUTATION,OUTER_TOTALS', withdrawnEvidenceCount: 2, doubtedCount: 2, stillStanding: '' })
++    expect(record).toMatchObject({ resolverVersion: '1.7.0', statementContest: '1.0.0', withdrawnTriggers: 'AS_READ_REFUTATION,OUTER_TOTALS', withdrawnEvidenceCount: 2, doubtedCount: 2, stillStanding: '' })
+     expect(String(record.doubted)).toBe('ev-0=AS_PRINTED 1800|LATTICE 1800|EXTERNAL 2000; ev-1=AS_PRINTED 1350|EXTERNAL 1500')
+   })
+ 
