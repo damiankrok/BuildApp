@@ -88,44 +88,7 @@ import type { StatementContest } from './statement-contest.js'
 import { worldFrameFrom } from './v2/frame.js'
 
 /** 1.6.0 (v3.53.13): a metric scale chosen STRONG from independent readings is not traded for a rival with under half its independent support (`metricScales`). */
-/**
- * 1.7.0 (v3.54): a reading whose extent the walls witness (theirs, or the dimension lines' ticks where the walls run to
- * them) and whose built width and depth
- * are the longest dimensions ANOTHER copy of the same storey's plan prints on each axis, read as printed, is corroborated
- * by that print (`PRINTED_OVERALL`): two drawings of one sheet agreeing on the building's size, neither of them the
- * published figure. Before, such a reading — found on the corpus at the printed size to the centimetre — could only be
- * confirmed by the other copy's own DECOMPOSITION (`CROSS_COPY`), and stayed unbuilt whenever that copy read badly.
- */
-export const PLAN_RESOLVER_VERSION = '1.7.0' as const
-
-/** v3.54: how close a reading's built size must be to a printed overall dimension to be that dimension: 1.5 % or 5 cm. */
-export const PRINTED_OVERALL_TOLERANCE = { share: 0.015, cm: 5 } as const
-
-/** What one plan copy prints as its longest dimension on each axis, in centimetres, read as printed (never corrected or derived). */
-export type PrintedOverall = { X?: number; Y?: number }
-
-/**
- * The longest dimension each listed frame prints on a horizontal and on a vertical dimension chain, read as printed
- * (`origin: READ`): the overall a sheet states, as that copy's own recognition read it.
- */
-export function printedOverallOf(metrics: MetricEvidenceSet, frameIds: ReadonlySet<string>): Map<string, PrintedOverall> {
-  const axisOf = new Map(metrics.chains.map((c) => [c.id, c.axis]))
-  const out = new Map<string, PrintedOverall>()
-  for (const e of metrics.evidence) {
-    if (e.kind !== 'LINEAR_DIMENSION' || e.origin !== 'READ' || e.unit !== 'cm' || !frameIds.has(e.frameId) || !(e.value > 0)) continue
-    const axis = e.chainId !== undefined ? axisOf.get(e.chainId) : undefined
-    if (axis !== 'HORIZONTAL' && axis !== 'VERTICAL') continue
-    const key = axis === 'HORIZONTAL' ? 'X' : 'Y'
-    const current = out.get(e.frameId) ?? {}
-    if ((current[key] ?? 0) < e.value) current[key] = e.value
-    out.set(e.frameId, current)
-  }
-  return out
-}
-
-/** Is a length in metres the printed dimension `cm`, within PRINTED_OVERALL_TOLERANCE? */
-export const isPrintedLength = (metres: number, cm: number | undefined): boolean =>
-  cm !== undefined && cm > 0 && Math.abs(metres * 100 - cm) <= Math.max(PRINTED_OVERALL_TOLERANCE.cm, PRINTED_OVERALL_TOLERANCE.share * cm)
+export const PLAN_RESOLVER_VERSION = '1.6.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -135,7 +98,7 @@ export const FOOTPRINT_BUCKETS = ['AGREES', 'UNKNOWN', 'NEAR', 'WRONG'] as const
 export type FootprintBucket = (typeof FOOTPRINT_BUCKETS)[number]
 
 /** A witness to a reading that is neither the published figure nor the pixels the reading was made from. */
-export type Corroboration = 'ISOTROPY' | 'CROSS_COPY' | 'PRINTED_OVERALL'
+export type Corroboration = 'ISOTROPY' | 'CROSS_COPY'
 
 /** What the published footprint did in a resolution: scored the readings, was spent refusing the first one, or was not published. */
 /**
@@ -462,7 +425,7 @@ export function wallCoverageOf(sheet: PlanSheet, within: PixelRect | null | unde
 /** Everything about one reading that the ranking and the acceptance rule ask. */
 function scoreReading(
   draft: StructuralLayoutDraft,
-  context: { published?: number; spent?: boolean; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[]; printedElsewhere?: readonly PrintedOverall[]; extentFromWalls?: boolean },
+  context: { published?: number; spent?: boolean; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[] },
 ): HypothesisScore {
   const hard: string[] = []
   const base = draft.base
@@ -504,9 +467,6 @@ function scoreReading(
     const widthM = Math.max(...all.map((b) => b.x1)) - Math.min(...all.map((b) => b.x0))
     const depthM = Math.max(...all.map((b) => b.z1)) - Math.min(...all.map((b) => b.z0))
     if (context.otherCopies.some((o) => Math.abs(o.widthM / widthM - 1) <= 0.05 && Math.abs(o.depthM / depthM - 1) <= 0.05)) corroborations.push('CROSS_COPY')
-    // 1.7.0: an extent the walls witness at the size another copy prints as its overall, on both axes. The dimension lines'
-    // ticks where the walls do not run to them measure, at their own labels' scale, what those labels say by construction.
-    if (context.extentFromWalls && (context.printedElsewhere ?? []).some((p) => isPrintedLength(widthM, p.X) && isPrintedLength(depthM, p.Y))) corroborations.push('PRINTED_OVERALL')
   }
 
   const outlineKey = built
@@ -638,7 +598,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     })
     .slice(0, RESOLVER_BUDGET.copies)
 
-  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; mouths: PlanReadingChoice['mouths']; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; printedElsewhere: PrintedOverall[]; extentFromWalls: boolean }
+  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; mouths: PlanReadingChoice['mouths']; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }> }
   const decompositions: Decomposition[] = []
   const sheets = new Map<string, { sheet: PlanSheet; cluster: PixelRect | null }>()
   for (const frame of copies) {
@@ -652,8 +612,6 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === frameId && r.plane === 'PLAN_XZ')
     if (cluster && registration) copyExtents.set(frameId, { widthM: (cluster.x1 - cluster.x0) * registration.metresPerPixelX, depthM: (cluster.y1 - cluster.y0) * registration.metresPerPixelY })
   }
-  // 1.7.0: what each copy prints as its overall, as its own recognition read it
-  const printed = printedOverallOf(options.metrics, new Set(copies.map((c) => c.id)))
   for (const frame of copies) {
     const got = sheets.get(frame.id)
     const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === frame.id && r.plane === 'PLAN_XZ')
@@ -674,19 +632,16 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     // 1.3.0: the metric layer's own hypotheses; the first-reading lattice only for evidence that has none.
     const lattices: Array<Extract<ScaleChoice, { kind: 'LATTICE' | 'METRIC_HYPOTHESIS' }>> = solution ? metricScales(solution, registration) : judge ? latticeScales(options.metrics, frame.id, registration, judge, tolerancePx) : []
     const otherCopies = [...copyExtents.entries()].filter(([id]) => id !== frame.id).map(([, e]) => e)
-    const printedElsewhere = [...printed.entries()].filter(([id]) => id !== frame.id).map(([, p]) => p)
     const statements = statementsOn(options.metrics, frame.id)
     const bothAxes = (cmX: number, cmY: number): boolean =>
       (['X', 'Y'] as const).every((axis) => statements.some((s) => s.axis === axis && judge !== null && s.pixelLength >= 0.15 * (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0) && zeroSubstitution(s).some((cm) => agrees(cm, s.pixelLength, axis === 'X' ? cmX : cmY, tolerancePx))))
-    // 1.7.0: an extent the walls witness — the walls' own, or the dimension lines' ticks where the walls run to them
-    const fromWalls = (extent: PlanReadingChoice['extent']): boolean => extent !== 'CHAIN_RECT' || (cluster !== null && chainRect !== null && !differs(cluster, chainRect))
     for (const extent of extents) {
       // The registration was fitted on these same statements: agreeing with them on both axes is not a second
       // witness — unless the metric layer chose or confirmed it from independent readings on both axes (1.3.0).
-      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies, printedElsewhere, extentFromWalls: fromWalls(extent) })
+      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies })
       for (const lattice of lattices) {
         const at = metricsAtScale(options.metrics, frame.id, lattice.cmPerPx, tolerancePx)
-        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: lattice.kind === 'METRIC_HYPOTHESIS' ? lattice.axesMeasured : bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies, printedElsewhere, extentFromWalls: fromWalls(extent) })
+        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: lattice.kind === 'METRIC_HYPOTHESIS' ? lattice.axesMeasured : bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies })
       }
     }
   }
@@ -745,7 +700,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
         const choice = choiceOf(hypothesis, d)
         const draft = inferStructuralLayout({ ...shared, metrics: d.metrics, plan: choice })
         pocketed ||= mouthsLeftOpen(draft)
-        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [], printedElsewhere: d.printedElsewhere, extentFromWalls: d.extentFromWalls }) })
+        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [] }) })
       }
     }
     if (pocketed && d.mouths === 'AS_DECIDED' && bounded.length + withShutMouths.length < RESOLVER_BUDGET.decompositions) {
@@ -768,7 +723,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     const result = composeStructuralLayout({ ...shared, metrics: r.decomposition.metrics, plan: choiceOf(r.hypothesis, r.decomposition) })
     const refusals = result.layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).map((g) => g.code).sort()
     const d = r.decomposition
-    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals, printedElsewhere: d.printedElsewhere, extentFromWalls: d.extentFromWalls }) })
+    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals }) })
   })
   counts.compositions = composed.length
 

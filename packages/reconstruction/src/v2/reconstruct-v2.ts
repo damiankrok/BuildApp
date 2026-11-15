@@ -313,9 +313,7 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // and the frame is the read chain on its axis and an exterior chain's ticks on the other, each side snapped outward to
 // the outer face of a long wall band its tick falls in (`statedFrameOverWitness`).
 // 2.43.0 (v3.53.13): the plan resolver keeps a STRONG metric scale against a far weaker rival hypothesis (resolver 1.6.0).
-// 2.44.0 (v3.54): a reading on the walls' own extent at the overall size another copy of the plan prints is corroborated by
-// that print (resolver 1.7.0, PRINTED_OVERALL).
-export const SOLVER_V2_VERSION = '2.44.0' as const
+export const SOLVER_V2_VERSION = '2.43.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
