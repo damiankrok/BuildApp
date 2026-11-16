@@ -121,3 +121,21 @@ describe('the live adapter says whether a failure can have been billed (v3.53.1)
     for (const error of [Object.assign(new Error('overloaded'), { status: 529 }), Object.assign(new Error('internal'), { status: 500 }), new Error('Request timed out.')]) expect(((await failing(error).ask(base).catch((e: unknown) => e)) as HouseReaderUnavailable).reason).toBe('TRANSPORT')
   })
 })
+
+describe('the live adapter keeps what the books and the trace need (v3.54.1)', () => {
+  const base = { purpose: 'HOUSE_DESCRIPTION' as const, system: 's', text: 't', pictures: [{ number: 1, bytes: new Uint8Array([1, 2, 3]), mediaType: 'image/png' }], schema: { type: 'object' } as never }
+  it('the request id, the stop reason, the cache counts and the raw answer beside the parsed one', async () => {
+    const adapter = anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async () => ({ messages: { create: async () => ({ content: [{ type: 'text', text: '{"ok":true}' }], stop_reason: 'end_turn', usage: { input_tokens: 10, output_tokens: 5, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }, _request_id: 'req_test_1' }) } }) })
+    const out = await adapter.ask(base)
+    expect(out.raw).toBe('{"ok":true}')
+    expect(out.usage).toMatchObject({ requestId: 'req_test_1', stopReason: 'end_turn', cacheReadInputTokens: 0, cacheCreationInputTokens: 0 })
+  })
+  it('an answer outside the schema is refused by name and keeps its text and usage — never an empty result', async () => {
+    const adapter = anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async () => ({ messages: { create: async () => ({ content: [{ type: 'text', text: '{"cut": ' }], stop_reason: 'max_tokens', usage: { input_tokens: 10, output_tokens: 16000 } }) } }) })
+    const err = await adapter.ask(base).catch((e: unknown) => e)
+    expect(err).toBeInstanceOf(HouseReaderUnavailable)
+    expect((err as HouseReaderUnavailable).reason).toBe('NO_ANSWER')
+    expect((err as HouseReaderUnavailable).message).toContain('max_tokens')
+    expect((err as HouseReaderUnavailable).raw).toMatchObject({ text: '{"cut": ', usage: { inputTokens: 10, outputTokens: 16000 } })
+  })
+})

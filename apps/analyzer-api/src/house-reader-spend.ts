@@ -319,6 +319,8 @@ export function spendGuardedStructuredVision(reader: StructuredVision, ledger: S
         // back. Anything else — a timeout, a dropped connection, a server error, a cancellation — may have been billed,
         // and the reservation stands in full.
         if (e instanceof HouseReaderUnavailable && (e.reason === 'NO_CREDENTIALS' || e.reason === 'REJECTED_UNBILLED')) ledger.settle(reservation, 'NOT_SENT', e.reason)
+        // v3.54.1: an answer that came but could not be used (refused, cut, outside the schema) has a known cost: settled to it
+        else if (e instanceof HouseReaderUnavailable && typeof e.raw?.usage?.inputTokens === 'number' && typeof e.raw.usage.outputTokens === 'number') ledger.settle(reservation, { usd: costUsd(price, e.raw.usage.inputTokens, e.raw.usage.outputTokens), inputTokens: e.raw.usage.inputTokens, outputTokens: e.raw.usage.outputTokens }, e.reason)
         throw e
       }
       const { inputTokens, outputTokens } = answer.usage
@@ -326,7 +328,7 @@ export function spendGuardedStructuredVision(reader: StructuredVision, ledger: S
       if (typeof inputTokens === 'number' && typeof outputTokens === 'number') {
         const usd = costUsd(price, inputTokens, outputTokens)
         ledger.settle(reservation, { usd, inputTokens, outputTokens })
-        return { output: answer.output, usage: { ...answer.usage, estimatedCostUsd: usd } }
+        return { output: answer.output, usage: { ...answer.usage, estimatedCostUsd: usd }, ...(answer.raw !== undefined ? { raw: answer.raw } : {}) }
       }
       return answer
     },

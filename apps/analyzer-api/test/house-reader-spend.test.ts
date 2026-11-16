@@ -162,6 +162,27 @@ describe('what is not known to be free is counted', () => {
   })
 })
 
+describe('an answer that came but could not be used is booked at its usage (v3.54.1)', () => {
+  it('a refused or cut answer with its usage settles to that usage; the raw answer passes through on success', async () => {
+    const dir = fresh()
+    const ledger = openSpendLedger({ dir, limits: limits() })
+    const reader: StructuredVision = {
+      provider: { id: 'stand-in', model: 'm', triageModel: 't', version: 'test', maxOutputTokens: { HOUSE_TRIAGE: 1000, HOUSE_DESCRIPTION: 4000 }, requestTimeoutMs: 1000 },
+      available: () => true,
+      ask: async (r) => {
+        if (r.text === 'cut') throw new HouseReaderUnavailable('NO_ANSWER', 'cut at max_tokens', { text: '{"a":', usage: { inputTokens: 2000, outputTokens: 4000, latencyMs: 1, model: 'm' } })
+        return { output: { a: 1 }, usage: { inputTokens: 2000, outputTokens: 100, latencyMs: 1, model: 'm' }, raw: '{"a":1}' }
+      },
+    }
+    const guarded = spendGuardedStructuredVision(reader, ledger, { limits: limits(), prices: PRICES })
+    await guarded.ask({ ...request('HOUSE_DESCRIPTION'), text: 'cut' }).catch(() => undefined)
+    expect(ledger.read().cumulativeUsd).toBeCloseTo(costUsd(PRICES.m, 2000, 4000), 6)
+    const ok = await guarded.ask(request('HOUSE_DESCRIPTION'))
+    expect(ok.raw).toBe('{"a":1}')
+    expect(ledger.read().cumulativeUsd).toBeCloseTo(costUsd(PRICES.m, 2000, 4000) + costUsd(PRICES.m, 2000, 100), 6)
+  })
+})
+
 describe('the input is bounded before anything is reserved', () => {
   it('too many pictures, a picture too large, too many bytes or too long a question are refused unsent and unbooked', async () => {
     const dir = fresh()

@@ -24,7 +24,19 @@ export type StructuredVisionRequest = {
   signal?: AbortSignal
 }
 
-export type StructuredVisionUsage = { inputTokens?: number; outputTokens?: number; estimatedCostUsd?: number; latencyMs: number; model: string }
+export type StructuredVisionUsage = {
+  inputTokens?: number
+  outputTokens?: number
+  /** v3.54.1: prompt-cache reads and writes, which the provider prices apart from fresh input. */
+  cacheReadInputTokens?: number
+  cacheCreationInputTokens?: number
+  estimatedCostUsd?: number
+  latencyMs: number
+  model: string
+  /** v3.54.1: the provider's id of the request, for the books; never a secret. */
+  requestId?: string
+  stopReason?: string
+}
 
 export type StructuredVisionPurpose = StructuredVisionRequest['purpose']
 
@@ -35,7 +47,8 @@ export interface StructuredVision {
    */
   readonly provider: { id: string; model: string; triageModel: string; version: string; maxOutputTokens?: Record<StructuredVisionPurpose, number>; requestTimeoutMs?: number }
   available(): boolean
-  ask(request: StructuredVisionRequest): Promise<{ output: unknown; usage: StructuredVisionUsage }>
+  /** `raw`: the provider's answer exactly as it came, kept beside the parsed `output` (v3.54.1). */
+  ask(request: StructuredVisionRequest): Promise<{ output: unknown; usage: StructuredVisionUsage; raw?: string }>
 }
 
 export class HouseReaderUnavailable extends Error {
@@ -43,6 +56,8 @@ export class HouseReaderUnavailable extends Error {
     /** `REJECTED_UNBILLED`: the provider refused the request before running a model (bad key, bad request, rate limit) — nothing was billed. `TRANSPORT`: anything else that went wrong on the way, where it is not known. */
     readonly reason: 'NO_PROVIDER' | 'NO_CREDENTIALS' | 'TRANSPORT' | 'REJECTED_UNBILLED' | 'NO_ANSWER' | 'FIXTURE_MISS' | 'BUDGET' | 'REQUEST_TOO_LARGE',
     message: string,
+    /** v3.54.1: what the provider did answer, when it answered something that could not be used — never dropped silently. */
+    readonly raw?: { text?: string; usage?: StructuredVisionUsage },
   ) {
     super(message)
     this.name = 'HouseReaderUnavailable'
@@ -131,7 +146,7 @@ export function fixtureStructuredVision(answers: Record<string, unknown>, record
 }
 
 export type AnthropicMessagesLike = {
-  messages: { create(body: Record<string, unknown>, options?: { signal?: AbortSignal }): Promise<{ content: Array<{ type: string; text?: string }>; stop_reason?: string | null; usage?: { input_tokens?: number; output_tokens?: number } }> }
+  messages: { create(body: Record<string, unknown>, options?: { signal?: AbortSignal }): Promise<{ content: Array<{ type: string; text?: string }>; stop_reason?: string | null; usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number | null; cache_creation_input_tokens?: number | null }; _request_id?: string | null }> }
 }
 
 const toBase64 = (bytes: Uint8Array): string => (typeof Buffer !== 'undefined' ? Buffer.from(bytes).toString('base64') : btoa(String.fromCharCode(...bytes)))
@@ -142,7 +157,7 @@ const toBase64 = (bytes: Uint8Array): string => (typeof Buffer !== 'undefined' ?
  * `tool_choice`). The key is read from the host's environment and is never logged. NOT run live in this repository's
  * checks — there is no key here; `fixtureStructuredVision` replays what a live provider answered.
  */
-export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; triageMaxTokens?: number; timeoutMs?: number; createClient?: (apiKey: string, limits: { timeoutMs: number }) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
+export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; triageMaxTokens?: number; timeoutMs?: number; baseURL?: string; createClient?: (apiKey: string, limits: { timeoutMs: number }) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
   const apiKey = options.apiKey ?? process.env.ANTHROPIC_API_KEY ?? ''
   const model = options.model ?? 'claude-sonnet-5-5'
   const triageModel = options.triageModel ?? 'claude-haiku-5-5'
@@ -150,8 +165,9 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
     options.createClient ??
     // No retry inside the SDK: one `ask` is at most one billed request, and whoever owns the budget owns the retry.
     (async (key: string, limits: { timeoutMs: number }): Promise<AnthropicMessagesLike> => {
-      const mod = (await import('@anthropic-ai/sdk')) as unknown as { default: new (o: { apiKey: string; maxRetries: number; timeout: number }) => AnthropicMessagesLike }
-      return new mod.default({ apiKey: key, maxRetries: 0, timeout: limits.timeoutMs })
+      const mod = (await import('@anthropic-ai/sdk')) as unknown as { default: new (o: { apiKey: string; maxRetries: number; timeout: number; baseURL?: string }) => AnthropicMessagesLike }
+      // v3.54.1: a stated host wins over whatever ANTHROPIC_BASE_URL the environment carries
+      return new mod.default({ apiKey: key, maxRetries: 0, timeout: limits.timeoutMs, ...(options.baseURL ? { baseURL: options.baseURL } : {}) })
     })
   const maxOutputTokens = { HOUSE_TRIAGE: options.triageMaxTokens ?? 4096, HOUSE_DESCRIPTION: options.maxTokens ?? 16000 }
   const timeoutMs = options.timeoutMs ?? 240_000
@@ -181,14 +197,24 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
         throw new HouseReaderUnavailable(unbilled ? 'REJECTED_UNBILLED' : 'TRANSPORT', `${typeof status === 'number' ? `HTTP ${status}: ` : ''}${(e as Error).message.slice(0, 300)}`)
       }
       const text = response.content.find((b) => b.type === 'text' && typeof b.text === 'string')?.text
-      if (response.stop_reason === 'refusal' || !text) throw new HouseReaderUnavailable('NO_ANSWER', `the provider returned no structured answer (${response.stop_reason ?? 'no text'})`)
+      const usage: StructuredVisionUsage = {
+        inputTokens: response.usage?.input_tokens,
+        outputTokens: response.usage?.output_tokens,
+        ...(typeof response.usage?.cache_read_input_tokens === 'number' ? { cacheReadInputTokens: response.usage.cache_read_input_tokens } : {}),
+        ...(typeof response.usage?.cache_creation_input_tokens === 'number' ? { cacheCreationInputTokens: response.usage.cache_creation_input_tokens } : {}),
+        latencyMs: Date.now() - started,
+        model: use,
+        ...(response._request_id ? { requestId: response._request_id } : {}),
+        ...(response.stop_reason ? { stopReason: response.stop_reason } : {}),
+      }
+      if (response.stop_reason === 'refusal' || !text) throw new HouseReaderUnavailable('NO_ANSWER', `the provider returned no structured answer (${response.stop_reason ?? 'no text'})`, { ...(text ? { text } : {}), usage })
       let output: unknown
       try {
         output = JSON.parse(text)
       } catch {
-        throw new HouseReaderUnavailable('NO_ANSWER', 'the provider answered outside the schema (not JSON)')
+        throw new HouseReaderUnavailable('NO_ANSWER', `the provider answered outside the schema (not JSON${response.stop_reason === 'max_tokens' ? ', cut at max_tokens' : ''})`, { text, usage })
       }
-      return { output, usage: { inputTokens: response.usage?.input_tokens, outputTokens: response.usage?.output_tokens, latencyMs: Date.now() - started, model: use } }
+      return { output, usage, raw: text }
     },
   }
 }
