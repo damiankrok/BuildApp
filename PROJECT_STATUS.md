@@ -12,6 +12,25 @@
 
 ## Current summary (read first)
 
+- **v3.54.1 (2026-11-16) — Claude API reader measured live, hybrid H1, product path (OWNER brief v3.54.1, Master Plan
+  v3.54.1 at `docs/MASTER_PLAN.md`): CHECKPOINT, target partly met; no APK (no app change; APK 1339 stays current).**
+  Report `stage-reports/SOURCE_TO_MODEL_V3541.md`, AI map `stage-reports/artifacts/v3541/AI_MAP.md`, protocol sealed
+  before any call (`stage-reports/artifacts/v3541/PROTOCOL_V3541.md`). Found and fixed in production: the live house
+  reader could never return a description (the API refuses the description schema as a strict output format —
+  "compiled grammar is too large"); it now asks through one non-strict answer tool (reader 0.3.0) and admission drops a
+  colour not stated / a malformed inventory entry by name instead of refusing the house (description 0.2.1); a storey
+  height from the drawings is floor to floor only (one-floor models passed their ridge height, 5.72–7.34 m); builder
+  0.8.0 holds a measured complete outline axis by axis; `analyseLink` `readEveryModel` behind the host switch
+  `ANALYZER_HOUSE_READER_EVERY_MODEL=on` (off by default). Measured: live B on 30 projects (S30, 8 publishers) 29/30
+  models vs LOCAL 14/30, but 4 critical regressions vs LOCAL; C (crops) not adopted (within B's run-to-run spread);
+  H1 vs the pre-stage product path: +1 (Torenie 3 E), 0 regressions on S30. FINAL 12 (archon, domywstylu, monsterhouseplans,
+  houseplans; drawn by seed, references sealed first): models 5 → 12, size OK/NEAR 2 → 8, mean IoU 0.68 → 0.86, 9 improved
+  houses at all 4 publishers, **2 critical regressions** (Kukliki: a correct unanchored LOCAL model replaced by the
+  gate; Madera ridge) — the gain is the repaired reader in the v3.53 gate; H1's own mechanisms had 0 FINAL activations.
+  Cost 4.11036 USD usage-priced (132 requests; ≈ 0.06 USD and ~20 s per house), ledger
+  `research/ai-assist/spend-ledger-v3541.json`. NEXT: make the description's bodies agree with its own printed overall,
+  and keep an unanchored LOCAL model whose extent agrees with that print (Kukliki, plan5-737, lipinscy-pl-1). The OWNER's
+  key was pasted in chat: kept outside Git, recommend revoking it. Android NOT_VERIFIED.
 - **v3.54 (2026-11-15) — whole analyzer, generalisation and strategy comparison (OWNER brief v3.54, Master Plan v3.54):
   CHECKPOINT, no production change, no APK 1340; APK 1339 stays current.** Report `stage-reports/SOURCE_TO_MODEL_V354.md`,
   module map `stage-reports/artifacts/v354/MODULE_MAP.md`. Set: 30 projects, 8 publishers (archon.pl, architecturaldesigns.com,

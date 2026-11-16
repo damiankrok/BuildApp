@@ -50,3 +50,11 @@ everything outside Git (/home/user/rd) is gone. This folder holds what is needed
   unit; the reference outlines the pair). Executor spot-check on ≥ 6 houses (protocol §6) still to do, before FINAL 12 opens.
 - Findings so far: monsterhouseplans.com gives the product's acquisition no picture on most pages (15 of 18 drawn);
   z500.pl refuses automated access (403).
+
+## 3. Final state (2026-11-16, end of v3.54.1)
+- The key WAS used in this session (OWNER's decision); it lived in /root/.config/buildplan/campaign-key (outside Git).
+  A new session needs it again as BUILDPLAN_ANTHROPIC_API_KEY; the OWNER was advised to revoke the pasted one.
+- Spent 4.11036 USD usage-priced (ledger in research/ai-assist/spend-ledger-v3541.json); books in /home/user/rd/v3541/books.
+- Done: pilot, B live on S30 and FINAL 12, C on C12, B repeat (variance), H0, H1 (S30 + FINAL), P1 (FINAL), A (FINAL),
+  report stage-reports/SOURCE_TO_MODEL_V3541.md, private ZIP /home/user/BuildPlan-V3541-Private.zip (not in Git).
+- FINAL 12 is now OPENED: any change tuned on its errors makes those houses DEV; a next candidate needs a new held-out draw.
