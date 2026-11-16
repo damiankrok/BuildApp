@@ -220,8 +220,22 @@
    "costUsd": 0.000563,
    "latencyMs": 3491,
    "booksCumulativeUsd": 0.191459
+  },
+  {
+   "at": "2026-11-16T07:08:14.201Z",
+   "phase": "pilot",
+   "house": "domoweklimaty-pl-1",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6BkHLhaiWbVQsnC5R8n",
+   "status": "ANSWERED",
+   "inputTokens": 15650,
+   "outputTokens": 1834,
+   "costUsd": 0.04964,
+   "latencyMs": 10244,
+   "booksCumulativeUsd": 0.241099
   }
  ],
- "totalUsd": 0.191459,
- "requests": 15
+ "totalUsd": 0.241099,
+ "requests": 16
 }
