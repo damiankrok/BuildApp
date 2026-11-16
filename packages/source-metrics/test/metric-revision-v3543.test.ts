@@ -55,7 +55,7 @@ const settled = (): { chains: RawChain[]; tokens: TextToken[] } => {
 }
 function solve(f: { chains: RawChain[]; tokens: TextToken[] }, external?: { cmPerPixelX?: number; cmPerPixelY?: number; why: string }) {
   const legacy = solveFrameChains(f.chains, f.tokens, { tolerancePx: TOL })
-  return { legacy, metric: solveFrameMetric({ frameId: FRAME, assetId: 'asset', chains: f.chains, chainIds: ids(f.chains), raw: f.tokens, legacyTokens: f.tokens, legacy, tolerancePx: TOL, ...(external ? { external } : {}) }) }
+  return { legacy, metric: solveFrameMetric({ frameId: FRAME, assetId: 'asset', chains: f.chains, chainIds: ids(f.chains), raw: f.tokens, legacyTokens: f.tokens, legacy, tolerancePx: TOL, ...(external ? { consultedScale: external } : {}) }) }
 }
 /** The solved chains as a sealed set would hold them, for the property check. */
 const asSet = (f: { chains: RawChain[] }, m: ReturnType<typeof solve>['metric']): Pick<MetricEvidenceSet, 'metricSolutions' | 'chains' | 'coordinateRegistrations'> => ({

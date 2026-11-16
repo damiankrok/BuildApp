@@ -109,8 +109,8 @@ try {
     const after = booksOf()
     // before the first request the host has no books file yet: its opening balance is the --spent-usd it was started with
     const spent = after ? Math.round((after.cumulativeUsd - (before ? before.cumulativeUsd : Number(value('spent-usd')))) * 1e6) / 1e6 : 0
-    log(`${name}: ${status.status}${status.failure ? ` ${status.failure.code}/${status.failure.reasonCode ?? ''}` : ''} in ${Math.round((Date.now() - t0) / 1000)} s; books +${spent} USD, +${(after?.requests ?? 0) - (before?.requests ?? 0)} requests`)
-    const record = { name, url, withToken, jobId: id, status: status.status, failure: status.failure ?? null, seconds: Math.round((Date.now() - t0) / 1000), booksDeltaUsd: spent, booksDeltaRequests: (after?.requests ?? 0) - (before?.requests ?? 0) }
+    log(`${name}: ${status.status}${status.error ? ` ${status.error.code}` : ''} in ${Math.round((Date.now() - t0) / 1000)} s; books +${spent} USD, +${(after?.requests ?? 0) - (before?.requests ?? 0)} requests`)
+    const record = { name, url, withToken, jobId: id, status: status.status, error: status.error ? { code: status.error.code, message: String(status.error.message ?? '').slice(0, 400) } : null, seconds: Math.round((Date.now() - t0) / 1000), booksDeltaUsd: spent, booksDeltaRequests: (after?.requests ?? 0) - (before?.requests ?? 0) }
     if (status.status === 'COMPLETED') {
       const result = await call(`/v1/analyses/${id}/result`)
       const scene = await call(`/v1/analyses/${id}/scene`)
@@ -149,7 +149,8 @@ try {
   const journal = join(dataDir, 'house-reader-spend.journal.jsonl')
   if (existsSync(journal)) {
     const lines = readFileSync(journal, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-    const purposes = [...new Set(lines.map((l) => l.purpose))]
+    // the OPENED line is the books' own first line and has no purpose: only requests are counted
+    const purposes = [...new Set(lines.filter((l) => l.event !== 'OPENED').map((l) => l.purpose))]
     check(purposes.every((p) => p === 'CONSULTATION'), `the host's books hold CONSULTATION requests only (${purposes.join(', ') || 'none'}): the house reader was never asked`)
     writeFileSync(join(out, 'host-books-journal.jsonl'), `${lines.map((l) => scrub(JSON.stringify(l))).join('\n')}\n`)
     writeFileSync(join(out, 'host-books.json'), `${JSON.stringify(booksOf(), null, 1)}\n`)

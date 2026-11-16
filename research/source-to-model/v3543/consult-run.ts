@@ -16,7 +16,7 @@
  * second-house --consulted). Every billed request is reserved in the cumulative books before it is sent and gets one
  * line in research/ai-assist/spend-ledger-v3542.json.
  */
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { appendFileSync, closeSync, existsSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { createHash } from 'node:crypto'
@@ -40,7 +40,25 @@ const arg = (name: string): string | undefined => {
 
 type LedgerEntry = { at: string; phase: string; house: string; variant: string; note: string; model: string; requestId: string | null; inputTokens: number | null; outputTokens: number | null; costUsd: number | null; latencyMs: number | null; booksCumulativeUsd: number }
 
+/** One entry, under a lock file: two runner processes may book into the same ledger (the books themselves lock too). */
 function appendLedger(entry: LedgerEntry): void {
+  const lock = `${LEDGER}.lock`
+  for (let i = 0; ; i += 1) {
+    try {
+      closeSync(openSync(lock, 'wx'))
+      break
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code !== 'EEXIST' || i > 2000) throw e
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10)
+    }
+  }
+  try {
+    appendLedgerLocked(entry)
+  } finally {
+    unlinkSync(lock)
+  }
+}
+function appendLedgerLocked(entry: LedgerEntry): void {
   const ledger = existsSync(LEDGER)
     ? (JSON.parse(readFileSync(LEDGER, 'utf8')) as { entries: LedgerEntry[] })
     : { schema: 'buildapp.ai-spend-ledger.v3543', currency: 'USD', costBasis: 'USAGE_PRICED', billing: 'NOT_RECONCILED_WITH_INVOICE', priceSource: PRICE_SOURCE, openingUsd: 6.243534, openingNote: 'the books as v3.54.2 left them: 4.11036 (v3.54.1, 132 requests) + 1.987078 (v3.54.2, 50 requests) + 0.146096 (one reservation of unknown cost, kept); this ledger lists the v3.54.3 requests only', entries: [] as LedgerEntry[] }

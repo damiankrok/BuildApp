@@ -130,7 +130,7 @@ export type FrameMetricInput = {
    * before any chain is read at the end: every chain is read again from its raw labels at it (§7), so no corrected or
    * derived value of the result was made at the scale it replaced.
    */
-  external?: { cmPerPixelX?: number; cmPerPixelY?: number; why: string }
+  consultedScale?: { cmPerPixelX?: number; cmPerPixelY?: number; why: string }
 }
 
 export type FrameMetricOutput = {
@@ -149,7 +149,7 @@ export type FrameMetricOutput = {
   assignment: LabelAssignmentDecision[]
   /** 005I: the side convention that assignment read from the sheet. */
   assignmentConventions: SideConventions
-  /** v3.54.3: what became of `input.external`, and the frame's own verdict it was weighed against. */
+  /** v3.54.3: what became of `input.consultedScale`, and the frame's own verdict it was weighed against. */
   external?: { applied: boolean; localRelation: FrameMetricSolution['relation']; localConfidence: MetricConfidence; localCmPerPixel?: number; localWhy: string }
 }
 
@@ -1352,7 +1352,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   // the chains are read at the end, so that they are read at it and not at the scale it replaces.
   const localRelation = relation
   const localConfidence = confidence
-  const ext = input.external && (input.external.cmPerPixelX ?? input.external.cmPerPixelY) !== undefined ? input.external : undefined
+  const ext = input.consultedScale && (input.consultedScale.cmPerPixelX ?? input.consultedScale.cmPerPixelY) !== undefined ? input.consultedScale : undefined
   const externalApplied = ext !== undefined && RANK[confidence] < RANK.SUPPORTED
   if (externalApplied) {
     relation = L !== undefined ? 'REPLACED' : 'ADDED'
@@ -1627,7 +1627,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     chainOrientation,
     assignment: finalAssignment.decisions,
     assignmentConventions: finalAssignment.conventions,
-    ...(input.external ? { external: { applied: externalApplied, localRelation, localConfidence, ...(localRelation === 'LEGACY_UNCONFIRMED' || localRelation === 'NO_SCALE' ? (L !== undefined ? { localCmPerPixel: round6(L) } : {}) : selected ? { localCmPerPixel: round6(selected.cmPerPixel) } : L !== undefined ? { localCmPerPixel: round6(L) } : {}), localWhy: whyOf(localRelation, localConfidence, selected, L, legacyStats.independentGroups, contest) } } : {}),
+    ...(input.consultedScale ? { external: { applied: externalApplied, localRelation, localConfidence, ...(localRelation === 'LEGACY_UNCONFIRMED' || localRelation === 'NO_SCALE' ? (L !== undefined ? { localCmPerPixel: round6(L) } : {}) : selected ? { localCmPerPixel: round6(selected.cmPerPixel) } : L !== undefined ? { localCmPerPixel: round6(L) } : {}), localWhy: whyOf(localRelation, localConfidence, selected, L, legacyStats.independentGroups, contest) } } : {}),
   }
 }
 

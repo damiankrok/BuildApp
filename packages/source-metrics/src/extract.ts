@@ -582,7 +582,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       }
       const admitted = mySpans.length > 0 ? admitSpans(snapped, plausibility ? (cm) => plausibility(cm).plausible : undefined) : undefined
       const external = admitted?.scale ? { ...(admitted.scale.cmPerPixelX !== undefined ? { cmPerPixelX: admitted.scale.cmPerPixelX } : {}), ...(admitted.scale.cmPerPixelY !== undefined ? { cmPerPixelY: admitted.scale.cmPerPixelY } : {}), why: `consulted dimensions (${CONSULTED_SPANS_NAME} ${CONSULTED_SPANS_VERSION}): ${admitted.why}, measured on the plan's own strokes` } : undefined
-      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices, ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}), ...(external ? { external } : {}) })
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices, ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}), ...(external ? { consultedScale: external } : {}) })
       solvedChains = metric.solved
       finalAssignment = metric.assignment
       finalConventions = metric.assignmentConventions

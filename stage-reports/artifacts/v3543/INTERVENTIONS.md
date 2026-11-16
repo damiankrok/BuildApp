@@ -28,3 +28,27 @@ confirmation set. No confirmation house was run before the freeze.
    refuses a wall-flush dormer front (`WALLS_OVERLAP` with the attic's own wall, then with a partition meeting the
    facade). Changes made: a flush front stands directly behind the storey's own wall (said in the feature's record), and
    a dormer's front wall is a host the partitions of its storey are trimmed to, as they are to any exterior wall.
+5. **Aksamitki, third run (C1c, live, 0.107044 USD) — the first complete pass.** Look 1: the dormer proposed, bound to
+   `dormer-front-c50` (35–65 %, eaves 30 %, top 71 %), built, ACCEPT. Look 2, of exactly the rebuilt revision
+   `281fad0e8527`: `ACCEPTABLE_APPROXIMATION`, kept. No code change followed for the roof loop.
+6. **DEV batch 2 (C3, seven houses, live looks, replayed metric rounds).** Changes made after reading it, all in what the
+   RESULT SAYS, none in what is built or accepted (every recorded run replays to the same model hash — see the report):
+   - **Madera.** The metric round read the plan's printed 15,98 × 18,71 m (scale 4.59 / 4.62 cm/px, SUPPORTED); the
+     analyzer could not compose the plan at that scale (`PLAN_LAYOUT_REJECTED`) and the transaction kept the LOCAL model,
+     drawn at 5.27 cm/px. The result then presented that model with scale "UNVERIFIED". Now: `scaleContradiction` in the
+     source check, scale axis `CONTRADICTED`, quantities `NOT_USABLE`, known defect
+     `SCALE_CONTRADICTED_BY_PRINTED_DIMENSIONS` with the dimensions read — the readings are kept, the model is a preview.
+   - **Supertunie.** The run's outline status said MATCHES on X where the outline's ends lie 11 and 9.5 px inside the
+     printed 6.9 m's ticks (inside the one-wall tolerance, 20 px): about half a metre the scorer rightly calls NEAR.
+     Now a difference inside the wall tolerance but beyond the raster's 3 px an end is stated in metres
+     (`OUTLINE_WITHIN_A_WALL_OF_PRINTED_DIMENSION`, axis `MATCHES_WITHIN_A_WALL`, quantities LIMITED). The decision rule
+     (MATCHES / SHORT accepted, BEYOND blocked, one wall) is unchanged.
+   - **An inadmissible proposal's finding stays open.** A proposal rejected for a stale revision or the wrong kind of
+     picture still reported a difference; the roof / openings axis now says `DIFFERENCE_OPEN` for it (found by the
+     HTTP-level test, not on a house).
+7. **Host E2E, first run (2026-11-16 19:45–20:01, 15 requests, 0.748428 USD).** All three jobs and the no-token job
+   behaved as intended (26 checks passed). One check FAILED through a defect of the checking script itself: it counted
+   the books' `OPENED` journal line (which has no purpose) as a request that was not a CONSULTATION. The script now
+   counts requests only; the saved journal re-checked: 15 RESERVED + 15 SETTLED, all CONSULTATION, `descriptions: 0`.
+   The script's first-job spend line also printed the opening balance as spend (8.60 instead of 0.40); fixed.
+   The host's requests were added to the campaign books and ledger as phase `host-e2e` (`import-host.ts`).

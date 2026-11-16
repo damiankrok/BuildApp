@@ -158,7 +158,7 @@ export type SourceCheckSummary = {
   axes: {
     run: 'COMPLETED'
     scale: { status: string; confidence: string | null; settledBy: 'CONSULTED_DIMENSIONS' | 'OWN_READINGS' | 'UNSETTLED' | 'CONTRADICTED' }
-    outline: 'MATCHES' | 'SHORT' | 'BEYOND' | 'NOT_COMPARED'
+    outline: 'MATCHES' | 'MATCHES_WITHIN_A_WALL' | 'SHORT' | 'BEYOND' | 'NOT_COMPARED'
     roof: 'NO_DIFFERENCE_REPORTED' | 'CORRECTED_APPROXIMATE' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
     openings: 'NO_DIFFERENCE_REPORTED' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
     interior: 'NOT_CHECKED'
@@ -258,7 +258,11 @@ export function outlineOf(l: Local): RunState['outline'] | undefined {
     const base = { envelopePx: env, spanPx: [from, to] as [number, number], spanM: Math.round(whole.valueCm as number) / 100 }
     if (past > 0) return { status: 'BEYOND', ...base, offM: Math.round((past + tol) * cmPerPx) / 100, why: `the built outline runs ${env[0]}..${env[1]} px where the printed ${(whole.valueCm as number) / 100} m is drawn ${from}..${to} px: it holds about ${(((past + tol) * cmPerPx) / 100).toFixed(2)} m the dimension does not measure` }
     if (inside > 0) return { status: 'SHORT', ...base, offM: Math.round((inside + tol) * cmPerPx) / 100, why: `the built outline runs ${env[0]}..${env[1]} px where the printed ${(whole.valueCm as number) / 100} m is drawn ${from}..${to} px: about ${(((inside + tol) * cmPerPx) / 100).toFixed(2)} m of what the dimension measures is not built` }
-    return { status: 'MATCHES', ...base, why: `the built outline ends where the printed ${(whole.valueCm as number) / 100} m does, within a wall (${tol} px)` }
+    // inside the wall tolerance but off the ticks by more than the raster's own 3 px an end: the decision is the same
+    // (which face a dimension is drawn to is uncertain), but the difference is real length and is said, not absorbed
+    const slack = Math.max(0, Math.abs(env[0] - from) - 3) + Math.max(0, Math.abs(to - env[1]) - 3)
+    if (slack > 0) return { status: 'MATCHES', ...base, offM: Math.round(slack * cmPerPx) / 100, why: `the built outline (${env[0]}..${env[1]} px) ends within a wall (${tol} px) of where the printed ${(whole.valueCm as number) / 100} m is drawn (${from}..${to} px), but not at its ticks: about ${((slack * cmPerPx) / 100).toFixed(2)} m of difference lies inside that tolerance` }
+    return { status: 'MATCHES', ...base, why: `the built outline ends where the printed ${(whole.valueCm as number) / 100} m does, within the raster's 3 px` }
   }
   return { x: axis('X'), y: axis('Y') }
 }
@@ -678,7 +682,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     // an outline that stops inside, or runs past, the printed dimension that frames it limits what may be measured off
     // the model: the measurement says so in its own terms, where every consumer already reads the result's limits
     const m = good.run.result.measurement
-    if (m && (sourceCheck.axes.outline === 'SHORT' || sourceCheck.axes.outline === 'BEYOND')) {
+    if (m && (sourceCheck.axes.outline === 'SHORT' || sourceCheck.axes.outline === 'BEYOND' || sourceCheck.axes.outline === 'MATCHES_WITHIN_A_WALL')) {
       for (const d of sourceCheck.knownDefects.filter((k) => k.code.startsWith('OUTLINE_'))) if (!m.reasons.some((r) => r.code === d.code)) m.reasons.push({ code: d.code, consequence: `${d.what}; areas and lengths taken off the model are not the whole house's` })
       if (m.quantities === 'USABLE_IN_SCOPE') m.quantities = 'LIMITED'
     }
@@ -734,6 +738,7 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
   }
   const knownDefects: SourceCheckSummary['knownDefects'] = []
   for (const a of state.outline ? [state.outline.x, state.outline.y] : []) if (a.status === 'SHORT' || a.status === 'BEYOND') knownDefects.push({ code: a.status === 'SHORT' ? 'OUTLINE_SHORT_OF_PRINTED_DIMENSION' : 'OUTLINE_BEYOND_PRINTED_DIMENSION', what: a.why })
+  for (const a of state.outline ? [state.outline.x, state.outline.y] : []) if (a.status === 'MATCHES' && (a.offM ?? 0) > 0) knownDefects.push({ code: 'OUTLINE_WITHIN_A_WALL_OF_PRINTED_DIMENSION', what: a.why })
   // a finding of the last look that no applied correction answers is open; the app shows it beside the model
   const lastLook = [...looked].reverse()[0]
   if (lastLook && lastLook.status === 'ISSUE_FOUND') for (const c of corrections.filter((c) => c.state !== 'APPLIED' && geometry.some((g) => g === lastLook && g.verdicts.some((v) => v.proposalId === c.proposalId)))) knownDefects.push({ code: `SOURCE_DIFFERENCE_${c.state}`, what: `${c.operation} ${c.targetId}: ${c.why}`.slice(0, 400) })
@@ -746,7 +751,8 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
   // be used. Only a repeat of something already answered leaves nothing open.
   const ANSWERED = new Set(['ALREADY_PRESENT', 'DUPLICATE_PROPOSAL_ID'])
   const open = (ops: string[]): boolean => corrections.some((c) => ops.includes(c.operation) && c.state !== 'APPLIED' && !(c.state === 'REJECTED' && ANSWERED.has(c.code ?? '')))
-  const worst = state.outline ? ([state.outline.x.status, state.outline.y.status].includes('BEYOND') ? 'BEYOND' : [state.outline.x.status, state.outline.y.status].includes('SHORT') ? 'SHORT' : [state.outline.x.status, state.outline.y.status].includes('MATCHES') ? 'MATCHES' : 'NOT_COMPARED') : 'NOT_COMPARED'
+  const sts = state.outline ? [state.outline.x, state.outline.y] : []
+  const worst: SourceCheckSummary['axes']['outline'] = sts.some((a) => a.status === 'BEYOND') ? 'BEYOND' : sts.some((a) => a.status === 'SHORT') ? 'SHORT' : sts.some((a) => a.status === 'MATCHES' && (a.offM ?? 0) > 0) ? 'MATCHES_WITHIN_A_WALL' : sts.some((a) => a.status === 'MATCHES') ? 'MATCHES' : 'NOT_COMPARED'
   const m = good.run?.result.measurement
   const consultedScale = (good.metrics?.consultedSpans ?? []).some((o) => o.frameId === state.frameId && o.status === 'ADMITTED')
   const settled = (CONF_RANK[state.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2
@@ -757,7 +763,7 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
     roof: looked.length === 0 ? 'NOT_CHECKED' : open(['ROOF_FEATURE', 'ROOF_FORM']) ? 'DIFFERENCE_OPEN' : features.length > 0 ? 'CORRECTED_APPROXIMATE' : 'NO_DIFFERENCE_REPORTED',
     openings: looked.length === 0 ? 'NOT_CHECKED' : open(['OPENING', 'MISSING_ELEMENT', 'ASSIGN_VIEW']) ? 'DIFFERENCE_OPEN' : 'NO_DIFFERENCE_REPORTED',
     interior: 'NOT_CHECKED',
-    quantities: contradiction ? 'NOT_USABLE' : worst === 'SHORT' || worst === 'BEYOND' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
+    quantities: contradiction ? 'NOT_USABLE' : worst === 'SHORT' || worst === 'BEYOND' || worst === 'MATCHES_WITHIN_A_WALL' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
     sourceCheck: status,
   }
   return {

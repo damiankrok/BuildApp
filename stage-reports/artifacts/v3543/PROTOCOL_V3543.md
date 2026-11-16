@@ -46,7 +46,9 @@ Every number below has one meaning and one place of use. "Frozen" is the date af
 |---|---|---|---|---|
 | Size class | OK ≤ 3 %, NEAR ≤ 10 %, WRONG above, worse axis | model bounding box vs printed overall dimension | scorers | v3.54.1 (unchanged) |
 | Dormer match | same side, interval IoU ≥ 0.3 | a model dormer answers a reference dormer | `roof_features.py` | 2026-11-16, before C1 |
-| Outline tolerance | max(3 px, one wall thickness in px) | drawing resolution: a wall face and a dimension tick may differ by a wall | `outlineOf` (runtime) | 2026-11-16, Package B |
+| Outline tolerance (decision) | max(3 px, one wall thickness in px) per end | which face of a wall a dimension is drawn to is uncertain: inside it an end is that end (MATCHES); further in is SHORT, further out is BEYOND | `outlineOf` (runtime) | 2026-11-16, Package B |
+| Outline raster slack (statement) | 3 px per end | the raster's own uncertainty: a MATCHES whose ends are further than this from the ticks states the difference in metres and limits quantities; the decision is not changed | `outlineOf` (runtime) | 2026-11-16, after DEV batch 2 (INTERVENTIONS #6), before CONFIRM8 |
+| Scale contradiction | 3 % | a kept model whose unsettled scale differs by more than this from a scale the printed dimensions settle is a preview, quantities NOT_USABLE | `scaleContradictionOf` (runtime) | 2026-11-16, after DEV batch 2 (INTERVENTIONS #6), before CONFIRM8 |
 | Framing share | span ≥ 0.8 of the frame side | a consulted dimension that frames the plan (an overall, not a room) | `outlineOf` (runtime) | v3.54.2 (unchanged use) |
 | Coherence | 3 px | a chain segment's printed value × active scale vs its own tick distance | `metricCoherence` | 2026-11-16, Package A |
 | Feature bounds | width ≥ 0.8 m; own eaves ≤ 60 % of the rise; 0.3 m from a gable end; 0.15 m under the ridge; pitch 12–70° | what the dormer primitive can build without invention | `ROOF_FEATURE_BOUNDS` (runtime) | 2026-11-16, before C1 |

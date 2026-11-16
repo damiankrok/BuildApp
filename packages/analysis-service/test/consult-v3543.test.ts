@@ -120,6 +120,14 @@ describe('v3.54.3 outline against the dimension that frames it: the same object,
     expect(outlineTolerancePx(10)).toBe(10)
     expect(outlineTolerancePx(1)).toBe(3)
   })
+  it('inside the wall tolerance but off the ticks: still MATCHES for the decision, and the difference is stated in metres', () => {
+    // half a wall in at each end (an outline on wall axes under a dimension to the outer faces)
+    const o = outlineOf(local({ x0: 37, y0: 168, x1: 868, y1: 743 }, [{ axis: 'X', fromPx: 32, toPx: 873, valueCm: 1402 }]))
+    expect(o?.x.status).toBe('MATCHES')
+    expect(o?.x.offM).toBeCloseTo(((2 + 2) * 1402) / 841 / 100, 2)
+    // at the ticks (within the raster's 3 px) nothing is stated
+    expect(outlineOf(local({ x0: 34, y0: 168, x1: 871, y1: 743 }, [{ axis: 'X', fromPx: 32, toPx: 873, valueCm: 1402 }]))?.x.offM).toBeUndefined()
+  })
   it('BEYOND: the outline holds what the overall dimension does not measure (a stoop taken in)', () => {
     const o = outlineOf(local({ x0: 32, y0: 168, x1: 873, y1: 837 }, [{ axis: 'Y', fromPx: 168, toPx: 743, valueCm: 957.58 }]))
     expect(o?.y.status).toBe('BEYOND')
