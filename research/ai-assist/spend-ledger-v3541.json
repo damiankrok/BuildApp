@@ -178,8 +178,50 @@
    "costUsd": 0.061954,
    "latencyMs": 15336,
    "booksCumulativeUsd": 0.12735
+  },
+  {
+   "at": "2026-11-16T07:07:43.522Z",
+   "phase": "pilot",
+   "house": "houseplans-com-2",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6Bi26NrAwhuK8xW4Fyz",
+   "status": "ANSWERED",
+   "inputTokens": 3609,
+   "outputTokens": 1487,
+   "costUsd": 0.001104,
+   "latencyMs": 6337,
+   "booksCumulativeUsd": 0.128454
+  },
+  {
+   "at": "2026-11-16T07:07:50.242Z",
+   "phase": "pilot",
+   "house": "houseplans-com-2",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6BiWqWciVtTcTm4mJzY",
+   "status": "ANSWERED",
+   "inputTokens": 12711,
+   "outputTokens": 3702,
+   "costUsd": 0.062442,
+   "latencyMs": 18629,
+   "booksCumulativeUsd": 0.190896
+  },
+  {
+   "at": "2026-11-16T07:08:09.962Z",
+   "phase": "pilot",
+   "house": "domoweklimaty-pl-1",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6Bjy4cHoMWwy7Vpwxdx",
+   "status": "ANSWERED",
+   "inputTokens": 1967,
+   "outputTokens": 733,
+   "costUsd": 0.000563,
+   "latencyMs": 3491,
+   "booksCumulativeUsd": 0.191459
   }
  ],
- "totalUsd": 0.12735,
- "requests": 12
+ "totalUsd": 0.191459,
+ "requests": 15
 }
