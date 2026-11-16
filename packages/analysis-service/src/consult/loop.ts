@@ -308,7 +308,7 @@ export function validateProposals(problem: LabelProblem, baseRevision: string, p
       v('REJECTED', `UNIT_MISMATCH: "${literal}" with unit ${p.proposed.unit}`)
       continue
     }
-    if (p.evidence.some((e) => e.sourceId !== problem.frameId && e.sourceId !== problem.assetId && !/^(picture|L)\d+$/i.test(e.sourceId) && e.sourceId !== 'overview')) {
+    if (p.evidence.some((e) => e.sourceId !== problem.frameId && e.sourceId !== problem.assetId && !/^(picture|pic|image|label|L)[ _#-]?\d+$/i.test(e.sourceId.trim()) && !/^(overview|plan|picture 1)$/i.test(e.sourceId.trim()))) {
       v('REJECTED', 'FOREIGN_EVIDENCE: a cited source is not a picture of this problem')
       continue
     }
