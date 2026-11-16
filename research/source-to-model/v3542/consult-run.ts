@@ -65,7 +65,9 @@ function replayModel(dir: string, model: string): ConsultantModel {
     .map((e) => ({ content: e.content as ModelTurn['content'], usage: {}, model: String(e.model), latencyMs: 0, ...(e.requestId ? { requestId: `replay:${String(e.requestId)}` } : {}) }))
   let i = 0
   return {
-    id: 'replay',
+    // the recorded transport's id: a consulted reading names its engine, and the engine is part of the evidence the
+    // next round's revision is hashed from — a replay must not change it (consult.json says replayOf)
+    id: 'anthropic-messages',
     model,
     maxOutputTokens: 8000,
     send: async () => {
