@@ -188,3 +188,43 @@ describe('the live adapter keeps what the books and the trace need (v3.54.1)', (
     expect((err as HouseReaderUnavailable).raw).toMatchObject({ text: '{"cut": ', usage: { inputTokens: 10, outputTokens: 16000 } })
   })
 })
+
+describe('admission without a strict grammar: an item’s loss is named, never the house’s (v3.54.1)', () => {
+  type Raw = Record<string, unknown> & { palette: Record<string, unknown>; images: Array<Record<string, unknown>> }
+  const d = (): Raw => raw() as Raw
+  it('a colour not stated ("none", "", missing) is admitted as not stated, named, and the emitter’s default stands', () => {
+    for (const v of ['none', '', null, 'N/A']) {
+      const x = d()
+      const r = checkHouseDescription({ ...x, palette: { ...x.palette, garageDoor: v } })
+      expect(r.ok).toBe(true)
+      expect(r.issues.map((i) => i.code)).toEqual(['PALETTE_COLOUR_NOT_STATED'])
+      expect(r.ok && r.description.palette.garageDoor).toBeUndefined()
+    }
+    const x = d()
+    const { garageDoor: _g, ...noDoor } = x.palette
+    const missing = checkHouseDescription({ ...x, palette: noDoor })
+    expect(missing.ok && missing.issues.map((i) => i.code)).toEqual(['PALETTE_COLOUR_NOT_STATED'])
+  })
+  it('a colour that is not a hex colour is dropped by name; the others are kept as stated', () => {
+    const x = d()
+    const r = checkHouseDescription({ ...x, palette: { ...x.palette, roof: 'dark grey' } })
+    expect(r.ok && r.issues.map((i) => i.code)).toEqual(['PALETTE_COLOUR_INVALID_DROPPED'])
+    expect(r.ok && r.description.palette.joinery).toBe(x.palette.joinery)
+  })
+  it('a malformed picture-inventory entry is dropped by name; the other entries stand', () => {
+    const x = d()
+    const images = x.images.map((im, i) => (i === 0 ? { ...im, storey_: '' } : im))
+    const r = checkHouseDescription({ ...x, images })
+    expect(r.ok).toBe(true)
+    expect(r.issues.some((i) => i.code === 'IMAGE_ENTRY_INVALID_DROPPED')).toBe(true)
+    expect(r.ok && r.description.images).toHaveLength(x.images.length - 1)
+  })
+  it('what cannot be built as stated is still refused whole, and the question is unchanged', () => {
+    const x = d() as Raw & { bodies: Array<Record<string, unknown>> }
+    expect(checkHouseDescription({ ...x, bodies: [x.bodies[0], { ...x.bodies[0], id: 'twin', role: 'WING' }] }).ok).toBe(false)
+    expect(checkHouseDescription({ ...x, unexpected: true }).ok).toBe(false)
+    const schema = houseDescriptionJsonSchema() as { properties: { palette: { required: string[] } } }
+    expect(schema.properties.palette.required.sort()).toEqual(['accent', 'accentWhere', 'garageDoor', 'joinery', 'roof'])
+  })
+})
+

@@ -15,7 +15,9 @@
  */
 import { z } from 'zod'
 
-export const HOUSE_DESCRIPTION_VERSION = '0.2.0'
+// 0.2.1 (v3.54.1): admission only — the question's schema is unchanged (recorded answers replay); a colour not stated as
+// a hex and a malformed picture-inventory entry are each that item's loss, named, never the house's (see the checker)
+export const HOUSE_DESCRIPTION_VERSION = '0.2.1'
 
 export const HouseSideSchema = z.enum(['FRONT', 'REAR', 'LEFT', 'RIGHT'])
 export type HouseSide = z.infer<typeof HouseSideSchema>
@@ -192,7 +194,16 @@ export const HouseDescriptionSchema = z
     unknowns: z.array(z.string().max(240)).max(12).describe('What the sources do not let you tell, or where they contradict each other.'),
   })
   .strict()
-export type HouseDescription = z.infer<typeof HouseDescriptionSchema>
+/**
+ * v3.54.1 — what is ADMITTED beside what is ASKED. The schema above is the question (and the key of a recorded answer)
+ * and stays as it is. Without a strict grammar (the description is answered through a non-strict tool), a reader that
+ * sees no separate garage door answers its colour "none" or "": that is a colour not stated, not a house that cannot be
+ * built. Admission takes each broad colour as optional — the emitter keeps its own default for a colour not stated, as
+ * it does for every house of the drawings' path — and names each one it did not take (`checkHouseDescription`).
+ */
+const PaletteAdmissionSchema = z.object({ roof: hex.optional(), joinery: hex.optional(), garageDoor: hex.optional(), accent: hex.optional(), accentWhere: z.string().max(120) }).strict()
+export const HouseDescriptionAdmissionSchema = HouseDescriptionSchema.extend({ palette: PaletteAdmissionSchema })
+export type HouseDescription = z.infer<typeof HouseDescriptionAdmissionSchema>
 
 /** A JSON Schema of the subset of Zod used above — what a provider is constrained to. */
 export type JsonSchemaNode = { [k: string]: unknown }
@@ -264,6 +275,8 @@ export function buildHouseDescriptionPrompt(input: { images: HouseDescriptionIma
 }
 
 /** The lists whose entries stand or fall one by one. Bodies and the overall size are the house itself: they do not. */
+const PALETTE_SLOTS = ['roof', 'joinery', 'garageDoor', 'accent'] as const
+
 const ITEM_SCHEMAS = { openings: DescribedOpeningSchema, dormers: DescribedDormerSchema, rooflights: DescribedRooflightSchema, chimneys: DescribedChimneySchema, balconies: DescribedBalconySchema, terraces: DescribedTerraceSchema, canopies: DescribedCanopySchema } as const
 
 export type HouseDescriptionIssue = { code: string; severity: 'REJECT' | 'WARN'; detail: string }
@@ -281,6 +294,26 @@ export function checkHouseDescription(raw: unknown, published: PublishedFigure[]
   let candidate = raw
   if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
     const copy: Record<string, unknown> = { ...(raw as Record<string, unknown>) }
+    // v3.54.1: a broad colour that is not a hex colour is not stated: dropped and named; the emitter's default stands
+    const palette = copy.palette
+    if (palette && typeof palette === 'object' && !Array.isArray(palette)) {
+      const kept: Record<string, unknown> = { ...(palette as Record<string, unknown>) }
+      for (const slot of PALETTE_SLOTS) {
+        const v = kept[slot]
+        if (typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v)) continue
+        delete kept[slot]
+        const blank = v === null || v === undefined || (typeof v === 'string' && /^(|none|n\/a|na|null|-)$/i.test(v.trim()))
+        issues.push({ code: blank ? 'PALETTE_COLOUR_NOT_STATED' : 'PALETTE_COLOUR_INVALID_DROPPED', severity: 'WARN', detail: `palette.${slot} ${v === undefined ? "missing" : JSON.stringify(v).slice(0, 24)}: the default colour stands` })
+      }
+      copy.palette = kept
+    }
+    // v3.54.1: one picture's inventory entry outside the vocabulary is that entry's loss (it lists what a picture is), named
+    if (Array.isArray(copy.images))
+      copy.images = (copy.images as unknown[]).filter((entry, i) => {
+        const r = ImageReadSchema.safeParse(entry)
+        if (!r.success) issues.push({ code: 'IMAGE_ENTRY_INVALID_DROPPED', severity: 'WARN', detail: `images[${i}] ${r.error.issues[0]?.path.join('.') ?? ''}: ${r.error.issues[0]?.message ?? 'invalid'}` })
+        return r.success
+      })
     for (const [key, item] of Object.entries(ITEM_SCHEMAS)) {
       const list = copy[key]
       if (!Array.isArray(list)) continue
@@ -292,7 +325,7 @@ export function checkHouseDescription(raw: unknown, published: PublishedFigure[]
     }
     candidate = copy
   }
-  const parsed = HouseDescriptionSchema.safeParse(candidate)
+  const parsed = HouseDescriptionAdmissionSchema.safeParse(candidate)
   if (!parsed.success) return { ok: false, issues: [...issues, ...parsed.error.issues.slice(0, 12).map((i) => ({ code: 'SCHEMA_INVALID', severity: 'REJECT' as const, detail: `${i.path.join('.')}: ${i.message}` }))] }
   const d = parsed.data
   const reject = (code: string, detail: string): void => void issues.push({ code, severity: 'REJECT', detail })
