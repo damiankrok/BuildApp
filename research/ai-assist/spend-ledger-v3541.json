@@ -486,8 +486,50 @@
    "costUsd": 0.00015,
    "latencyMs": 1429,
    "booksCumulativeUsd": 0.71433
+  },
+  {
+   "at": "2026-11-16T07:13:01.510Z",
+   "phase": "development",
+   "house": "houseplans-com-1",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6C7TisxNP7GiYZPcJSy",
+   "status": "ANSWERED",
+   "inputTokens": 17003,
+   "outputTokens": 2801,
+   "costUsd": 0.062016,
+   "latencyMs": 15113,
+   "booksCumulativeUsd": 0.776346
+  },
+  {
+   "at": "2026-11-16T07:13:18.955Z",
+   "phase": "development",
+   "house": "lipinscy-pl-1",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6C8kDayVamvjpUJBFZ6",
+   "status": "ANSWERED",
+   "inputTokens": 2694,
+   "outputTokens": 1237,
+   "costUsd": 0.000888,
+   "latencyMs": 5196,
+   "booksCumulativeUsd": 0.777234
+  },
+  {
+   "at": "2026-11-16T07:13:24.982Z",
+   "phase": "development",
+   "house": "lipinscy-pl-1",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6C9C4behobJAQY7isA9",
+   "status": "ANSWERED",
+   "inputTokens": 15637,
+   "outputTokens": 2101,
+   "costUsd": 0.052284,
+   "latencyMs": 13378,
+   "booksCumulativeUsd": 0.829518
   }
  ],
- "totalUsd": 0.71433,
- "requests": 34
+ "totalUsd": 0.829518,
+ "requests": 37
 }
