@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { bindRoofFeature, compareGeometry, reviewOutcome, roofFeatureId } from '../src/consult/geometry.js'
 import type { CheckPicture, GeometryState } from '../src/consult/geometry.js'
-import { compareRuns, outlineOf, outlineTolerancePx } from '../src/consult/consult-analysis.js'
-import type { RunState } from '../src/consult/consult-analysis.js'
+import { compareRuns, outlineOf, outlineTolerancePx, scaleContradictionOf } from '../src/consult/consult-analysis.js'
+import type { RoundRecord, RunState } from '../src/consult/consult-analysis.js'
 import type { ProposedCorrection } from '../src/consult/contract.js'
 
 // v3.54.3: the decisions of the correction loop, on hand-made inputs (no project's data, no network, no model).
@@ -196,5 +196,24 @@ describe('v3.54.3 CLASSIFY_BOUNDARY: only a sure glazed wall on a named side clo
     expect(validateBoundary([B({ uncertainty: 'HIGH' })], 'rev1', pic, new Set())).toMatchObject({ sides: [], verdicts: [{ status: 'HELD' }] })
     expect(validateBoundary([B({ operation: 'OUTLINE_REGION' })], 'rev1', pic, new Set()).verdicts[0].status).toBe('CAPABILITY_MISSING')
     expect(validateBoundary([B({ boundary: undefined })], 'rev1', pic, new Set()).verdicts[0].code).toBe('NO_BOUNDARY')
+  })
+})
+
+describe('v3.54.3 a kept model the drawing contradicts is a preview, and the result says so', () => {
+  const kept: RunState = { outcome: 'COMPLETED', modelHash: 'm', metric: { relation: 'LEGACY_UNCONFIRMED', confidence: 'INCONCLUSIVE', cmPerPixelX: 5.268, cmPerPixelY: 5.268 } } as RunState
+  const refusedAt = (x: number, confidence: string): RunState => ({ outcome: 'FAILED', code: 'RECONSTRUCTION_FAILED', reasonCode: 'PLAN_LAYOUT_REJECTED', metric: { relation: 'REPLACED', confidence, cmPerPixelX: x, cmPerPixelY: x } }) as RunState
+  const round = (after: RunState, decision: RoundRecord['decision'] = 'ROLLBACK'): RoundRecord => ({ round: 1, decision, why: '', after, spans: [{ proposalId: 'p', frameId: 'f', literal: '15,98', unit: 'm', from: { x: 0, y: 0 }, to: { x: 1, y: 0 } }] }) as unknown as RoundRecord
+
+  it('a rolled-back round whose readings settle another scale: the kept model is named contradicted, with the dimensions', () => {
+    const c = scaleContradictionOf([round(refusedAt(4.6, 'SUPPORTED'))], kept)
+    expect(c).toMatchObject({ modelCmPerPixel: 5.268, consultedCmPerPixelX: 4.6, refusal: 'RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED', dimensions: [{ literal: '15,98', unit: 'm' }] })
+    expect(c?.ratio).toBeCloseTo(1.145, 3)
+  })
+  it('counter-trials: readings that settle nothing, the same scale within 3 %, a model whose own scale is settled, an accepted round', () => {
+    expect(scaleContradictionOf([round(refusedAt(4.6, 'INCONCLUSIVE'))], kept)).toBeUndefined()
+    expect(scaleContradictionOf([round(refusedAt(5.2, 'SUPPORTED'))], kept)).toBeUndefined()
+    expect(scaleContradictionOf([round(refusedAt(4.6, 'SUPPORTED'))], { ...kept, metric: { ...kept.metric, confidence: 'STRONG' } } as RunState)).toBeUndefined()
+    expect(scaleContradictionOf([round(refusedAt(4.6, 'SUPPORTED'), 'PARTIAL')], kept)).toBeUndefined()
+    expect(scaleContradictionOf([], kept)).toBeUndefined()
   })
 })

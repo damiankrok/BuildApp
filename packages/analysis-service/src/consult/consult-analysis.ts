@@ -142,6 +142,12 @@ export type SourceCheckSummary = {
   checked: string[]
   notChecked: string[]
   outline?: RunState['outline']
+  /**
+   * Set when dimensions read with the consultant settle a scale the delivered model is NOT at, because the analyzer
+   * could not compose the plan at that scale and the transaction kept the model before. The readings are right and
+   * stay on the record; the model is an unreliable preview (its lengths are off by `ratio`), never a second truth.
+   */
+  scaleContradiction?: { modelCmPerPixel: number; consultedCmPerPixelX: number | null; consultedCmPerPixelY: number | null; ratio: number; refusal: string; dimensions: Array<{ literal: string; unit: string }> }
   /** Defects known and not corrected, each by code: what an app must show beside the model. */
   knownDefects: Array<{ code: string; what: string }>
   /**
@@ -151,7 +157,7 @@ export type SourceCheckSummary = {
    */
   axes: {
     run: 'COMPLETED'
-    scale: { status: string; confidence: string | null; settledBy: 'CONSULTED_DIMENSIONS' | 'OWN_READINGS' | 'UNSETTLED' }
+    scale: { status: string; confidence: string | null; settledBy: 'CONSULTED_DIMENSIONS' | 'OWN_READINGS' | 'UNSETTLED' | 'CONTRADICTED' }
     outline: 'MATCHES' | 'SHORT' | 'BEYOND' | 'NOT_COMPARED'
     roof: 'NO_DIFFERENCE_REPORTED' | 'CORRECTED_APPROXIMATE' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
     openings: 'NO_DIFFERENCE_REPORTED' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
@@ -665,7 +671,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     }
   }
   const finalState = stateOf(good)
-  const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision) : undefined
+  const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision, rounds) : undefined
   // the result an app consumes says what was checked, what was corrected and what is known wrong — not only the trace
   if (good.run && sourceCheck) {
     ;(good.run.result as { sourceCheck?: SourceCheckSummary }).sourceCheck = sourceCheck
@@ -676,6 +682,12 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       for (const d of sourceCheck.knownDefects.filter((k) => k.code.startsWith('OUTLINE_'))) if (!m.reasons.some((r) => r.code === d.code)) m.reasons.push({ code: d.code, consequence: `${d.what}; areas and lengths taken off the model are not the whole house's` })
       if (m.quantities === 'USABLE_IN_SCOPE') m.quantities = 'LIMITED'
     }
+    // a model the drawing's own dimensions contradict is a preview: nothing may be measured off it
+    const sc = sourceCheck.knownDefects.find((k) => k.code === 'SCALE_CONTRADICTED_BY_PRINTED_DIMENSIONS')
+    if (m && sc) {
+      if (!m.reasons.some((r) => r.code === sc.code)) m.reasons.push({ code: sc.code, consequence: sc.what })
+      m.quantities = 'NOT_USABLE'
+    }
   }
   const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id) }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
@@ -684,7 +696,29 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */
-export function sourceCheckOf(good: Local, state: RunState, geometry: readonly GeometryRound[], features: readonly RoofFeatureCorrection[], last: ModelCheckResult | undefined, checkedRevision: string | null): SourceCheckSummary {
+/**
+ * A settled scale the analyzer could not build on. A metric round that was rolled back because its candidate refused
+ * still read the drawing's dimensions; when those settle a scale more than 3 % from the one the kept model is drawn at
+ * — and that model's own scale was never settled — the model is contradicted by the drawing, and the result says so.
+ */
+export function scaleContradictionOf(rounds: readonly RoundRecord[], delivered: RunState): SourceCheckSummary['scaleContradiction'] {
+  if (delivered.outcome !== 'COMPLETED' || (CONF_RANK[delivered.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2) return undefined
+  const mine = delivered.metric?.cmPerPixelX ?? delivered.metric?.cmPerPixelY
+  if (!mine || !(mine > 0)) return undefined
+  for (const r of [...rounds].reverse()) {
+    const after = r.after
+    if (r.decision !== 'ROLLBACK' || !after || after.outcome === 'COMPLETED' || (CONF_RANK[after.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) < 2) continue
+    const xs = [after.metric?.cmPerPixelX, after.metric?.cmPerPixelY].filter((v): v is number => typeof v === 'number' && v > 0)
+    if (xs.length === 0) continue
+    const consulted = xs.reduce((a, b) => a + b, 0) / xs.length
+    const ratio = mine / consulted
+    if (Math.abs(Math.log(ratio)) <= 0.03) continue
+    return { modelCmPerPixel: mine, consultedCmPerPixelX: after.metric?.cmPerPixelX ?? null, consultedCmPerPixelY: after.metric?.cmPerPixelY ?? null, ratio: Math.round(ratio * 1000) / 1000, refusal: `${after.code ?? ''}/${after.reasonCode ?? ''}`, dimensions: (r.spans ?? []).map((sp) => ({ literal: sp.literal, unit: sp.unit })) }
+  }
+  return undefined
+}
+
+export function sourceCheckOf(good: Local, state: RunState, geometry: readonly GeometryRound[], features: readonly RoofFeatureCorrection[], last: ModelCheckResult | undefined, checkedRevision: string | null, rounds: readonly RoundRecord[] = []): SourceCheckSummary {
   const delivered = good.run?.reconstruction.candidate.modelHash.slice(0, 12) ?? null
   const looked = geometry.filter((g) => g.status !== null)
   const corrections: SourceCheckSummary['corrections'] = []
@@ -703,6 +737,8 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
   // a finding of the last look that no applied correction answers is open; the app shows it beside the model
   const lastLook = [...looked].reverse()[0]
   if (lastLook && lastLook.status === 'ISSUE_FOUND') for (const c of corrections.filter((c) => c.state !== 'APPLIED' && geometry.some((g) => g === lastLook && g.verdicts.some((v) => v.proposalId === c.proposalId)))) knownDefects.push({ code: `SOURCE_DIFFERENCE_${c.state}`, what: `${c.operation} ${c.targetId}: ${c.why}`.slice(0, 400) })
+  const contradiction = scaleContradictionOf(rounds, state)
+  if (contradiction) knownDefects.push({ code: 'SCALE_CONTRADICTED_BY_PRINTED_DIMENSIONS', what: `this model is drawn at ${contradiction.modelCmPerPixel} cm/px, but the drawing's printed dimensions (${contradiction.dimensions.map((d) => `${d.literal} ${d.unit}`).join(', ') || 'read with the consultant'}) settle ${[contradiction.consultedCmPerPixelX, contradiction.consultedCmPerPixelY].filter((v) => v !== null).join(' / ')} cm/px: its lengths are ${Math.round(Math.abs(contradiction.ratio - 1) * 100)} % ${contradiction.ratio > 1 ? 'too long' : 'too short'}. The analyzer could not compose the plan at the printed scale (${contradiction.refusal}), so this is the earlier model kept as an unreliable preview; no quantity may be taken from it` })
   for (const f of features) knownDefects.push({ code: 'ROOF_FEATURE_APPROXIMATE', what: `${f.id} is placed from shares of an elevation picture: a visual approximation, not a measurement; no quantity may be taken from it` })
   const status: SourceCheckSummary['status'] = looked.length === 0 ? 'NOT_CHECKED' : checkedRevision !== null && checkedRevision === delivered ? 'CHECKED' : 'PARTLY_CHECKED'
   // a difference the consultant reported and no applied correction answers stays open — also when its proposal was
@@ -716,12 +752,12 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
   const settled = (CONF_RANK[state.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2
   const axes: SourceCheckSummary['axes'] = {
     run: 'COMPLETED',
-    scale: { status: m?.scale.status ?? 'NOT_ASSESSED', confidence: state.metric?.confidence ?? null, settledBy: !settled ? 'UNSETTLED' : consultedScale ? 'CONSULTED_DIMENSIONS' : 'OWN_READINGS' },
+    scale: { status: contradiction ? 'CONTRADICTED' : (m?.scale.status ?? 'NOT_ASSESSED'), confidence: state.metric?.confidence ?? null, settledBy: contradiction ? 'CONTRADICTED' : !settled ? 'UNSETTLED' : consultedScale ? 'CONSULTED_DIMENSIONS' : 'OWN_READINGS' },
     outline: worst,
     roof: looked.length === 0 ? 'NOT_CHECKED' : open(['ROOF_FEATURE', 'ROOF_FORM']) ? 'DIFFERENCE_OPEN' : features.length > 0 ? 'CORRECTED_APPROXIMATE' : 'NO_DIFFERENCE_REPORTED',
     openings: looked.length === 0 ? 'NOT_CHECKED' : open(['OPENING', 'MISSING_ELEMENT', 'ASSIGN_VIEW']) ? 'DIFFERENCE_OPEN' : 'NO_DIFFERENCE_REPORTED',
     interior: 'NOT_CHECKED',
-    quantities: worst === 'SHORT' || worst === 'BEYOND' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
+    quantities: contradiction ? 'NOT_USABLE' : worst === 'SHORT' || worst === 'BEYOND' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
     sourceCheck: status,
   }
   return {
@@ -736,6 +772,7 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
     checked: last?.review?.checked ?? [],
     notChecked: last?.review?.notChecked ?? [],
     ...(state.outline ? { outline: state.outline } : {}),
+    ...(contradiction ? { scaleContradiction: contradiction } : {}),
     knownDefects,
     axes,
   }

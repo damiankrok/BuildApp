@@ -107,7 +107,8 @@ try {
     }
     writeFileSync(join(dir, 'status.json'), `${scrub(JSON.stringify(status, null, 1))}\n`)
     const after = booksOf()
-    const spent = after && before ? Math.round((after.cumulativeUsd - before.cumulativeUsd) * 1e6) / 1e6 : after ? after.cumulativeUsd : 0
+    // before the first request the host has no books file yet: its opening balance is the --spent-usd it was started with
+    const spent = after ? Math.round((after.cumulativeUsd - (before ? before.cumulativeUsd : Number(value('spent-usd')))) * 1e6) / 1e6 : 0
     log(`${name}: ${status.status}${status.failure ? ` ${status.failure.code}/${status.failure.reasonCode ?? ''}` : ''} in ${Math.round((Date.now() - t0) / 1000)} s; books +${spent} USD, +${(after?.requests ?? 0) - (before?.requests ?? 0)} requests`)
     const record = { name, url, withToken, jobId: id, status: status.status, failure: status.failure ?? null, seconds: Math.round((Date.now() - t0) / 1000), booksDeltaUsd: spent, booksDeltaRequests: (after?.requests ?? 0) - (before?.requests ?? 0) }
     if (status.status === 'COMPLETED') {
