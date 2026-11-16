@@ -12,6 +12,35 @@
 
 ## Current summary (read first)
 
+- **v3.54.3 (2026-11-16): the full correction loop, source → analyzer → model** (OWNER brief v3.54.3, Master Plan v3.54.3 at
+  `docs/MASTER_PLAN.md`; IMPLEMENTATION_COMPLETE, HOST_INTEGRATION_VERIFIED locally, QUALITY_GAIN on DEV, TRANSFER of quality
+  NOT_CONFIRMED, ANDROID NOT_VERIFIED; no APK). Report `stage-reports/SOURCE_TO_MODEL_V3543.md`, OWNER summary
+  `stage-reports/README_V3543.md`, protocol sealed at the freeze (`stage-reports/artifacts/v3543/PROTOCOL_V3543.md`),
+  `CAPABILITY_GAPS.md`, `INTERVENTIONS.md`. Frozen candidate `aabc044` (solver 2.44.0). Behind the same flags; default path
+  unchanged (A1 = A0 on 10 DEV houses).
+  - **One metric revision.** A consulted scale is the scale every chain is read at (`solveFrameMetric` `consultedScale`);
+    consulted dimensions become frame chains; `metricCoherence` is the property check (Aksamitki: 19 of 19 dependents stale
+    before, 0 after).
+  - **Acceptance by the corrected property.** No scale gain required for a geometry correction; the outline is compared with
+    the printed dimension that frames it (MATCHES / SHORT / BEYOND, one wall), not a share of the house.
+  - **Model check that changes the model.** The consultant is shown the built revision beside the drawings; a `ROOF_FEATURE`
+    in an elevation's pixels is bound to shares of the host wall and built by `applyRoofFeatures` (a dormer, stable id), the
+    rebuilt revision is looked at again, a rejected feature is taken out. Second family: `CLASSIFY_BOUNDARY` → glazed-end
+    closure. The consumed result carries `sourceCheck` (per-axis statuses, corrections, known defects) and `consultation`.
+
+  Measured live (Sonnet 5.5, 77 requests, 3.72 USD; books 9.96 USD cumulative):
+  - DEV (10): Aksamitki refusal → model with the dormer over the entrance built and reviewed (bay still missing, named);
+    sp318422 refusal → model exactly 46'-0" × 31'-5"; Supertunie refusal → model (depth exact, width −0.58 m, named);
+    Kukliki and Torenie protected; Madera kept and marked as contradicted by its printed dimensions (quantities off).
+  - CONFIRM8 (8 new families, 4 publishers, first frozen result): dormers detected 5 of 5, built 3, matched by the scorer 1;
+    0 houses corrected by the sealed criterion; no feature on 3 negatives; one refusal → model without its garage whose
+    outline status wrongly read MATCHES. Two dormers stand right on their body in a model that is mirrored or lacks a wing.
+  - Host: three jobs and a no-token job through `POST /v1/analyses` on the frozen build, 27 checks passed.
+
+  Next (the report's three decisions): order the loop so no feature is built while an identity / handedness / body / scale
+  finding is open, and compare the BUILT footprint in the outline status; elevation registration as its own step, then
+  openings and roof forms; plan composition at the true scale and missing bodies.
+
 - **v3.54.2 (2026-11-16): the API as a consultant and controller of the analyzer** (OWNER brief v3.54.2, Master Plan
   v3.54.2 at `docs/MASTER_PLAN.md`; PILOT_EXECUTED, INTEGRATION_VERIFIED in the service path, QUALITY_GAIN no, TRANSFER_EVIDENCE
   partial, ANDROID NOT_VERIFIED; no APK). Report `stage-reports/SOURCE_TO_MODEL_V3542.md`, OWNER summary

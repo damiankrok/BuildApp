@@ -1,0 +1,933 @@
+[
+ {
+  "house": "confirm-archon-dom-w-majeranku-2-g2",
+  "publisher": "archon",
+  "category": [
+   "R",
+   "B"
+  ],
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "9d2fd1e410a6",
+   "confidence": "WEAK",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "ac14a14bd7d5",
+   "confidence": "WEAK",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-archon-dom-w-majeranku-2-g2",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "ACCEPT[ISSUE_FOUND]",
+     "REVIEW_ONLY[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "APPLIED": 1,
+     "REFUSED_BY_ANALYZER": 1,
+     "NO_CONSUMER": 1
+    },
+    "features": [
+     "dormer-front-c50"
+    ],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.26432
+   },
+   "outcome": "MODEL",
+   "widthM": 19.51,
+   "depthM": 8.57,
+   "refWidthM": 19.5,
+   "refDepthM": 9.58,
+   "errWidth": 0.001,
+   "errDepth": 0.105,
+   "size": "WRONG",
+   "dormers": {
+    "status": "MISMATCH",
+    "refDormers": 2,
+    "modelDormers": 1,
+    "matched": [],
+    "missing": [
+     {
+      "kind": "WALL_DORMER_GABLE",
+      "side": "FRONT",
+      "alongShare": [
+       0.24,
+       0.44
+      ]
+     },
+     {
+      "kind": "WALL_DORMER_GABLE",
+      "side": "REAR",
+      "alongShare": [
+       0.58,
+       0.71
+      ]
+     }
+    ],
+    "false": [
+     {
+      "id": "dormer-front-c50",
+      "type": "GABLE",
+      "side": "FRONT",
+      "alongShare": [
+       0.625,
+       0.794
+      ]
+     }
+    ],
+    "kindAgreed": 0,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "ROLLBACK"
+   ],
+   "boundary": null,
+   "looks": [
+    "ACCEPT[ISSUE_FOUND]",
+    "REVIEW_ONLY[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT",
+     "featureId": "dormer-front-c50",
+     "state": "APPLIED",
+     "code": null,
+     "review": "ACCEPTABLE_APPROXIMATION"
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "REAR",
+     "featureId": "dormer-rear-c55",
+     "state": "REFUSED_BY_ANALYZER",
+     "code": null,
+     "review": null
+    },
+    {
+     "operation": "OUTLINE_REGION",
+     "targetId": "FRONT",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [
+    "dormer-front-c50"
+   ],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "UNVERIFIED",
+     "confidence": "WEAK",
+     "settledBy": "UNSETTLED"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "ROOF_FEATURE_APPROXIMATE"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.26432,
+   "liveCalls": 4,
+   "replayed": 0,
+   "seconds": 662
+  }
+ },
+ {
+  "house": "confirm-architecturaldesigns-39035st",
+  "publisher": "architecturaldesigns",
+  "category": [
+   "R"
+  ],
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "C": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-architecturaldesigns-39035st",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [],
+    "corrections": {},
+    "features": [],
+    "boundary": [],
+    "sourceCheck": null,
+    "usd": 0.050367999999999996
+   },
+   "outcome": "NO_MODEL",
+   "dormers": {
+    "status": "NO_MODEL",
+    "refDormers": 1
+   },
+   "size": null
+  },
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": null,
+   "usd": 0.050367999999999996,
+   "liveCalls": 2,
+   "replayed": 0,
+   "seconds": 363
+  }
+ },
+ {
+  "house": "confirm-dobredomy-gracja-i-mala-ii",
+  "publisher": "dobredomy",
+  "category": [
+   "R",
+   "B"
+  ],
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "4d674d44b4cc",
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "e717e916c60a",
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "ACCEPT[ISSUE_FOUND]",
+     "REVIEW_ONLY[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "APPLIED": 2,
+     "NO_CONSUMER": 1
+    },
+    "features": [
+     "dormer-front-c45",
+     "dormer-rear-c55"
+    ],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.212678
+   },
+   "outcome": "MODEL",
+   "widthM": 12.063,
+   "depthM": 13.427,
+   "refWidthM": 16.82,
+   "refDepthM": 10.12,
+   "errWidth": 0.283,
+   "errDepth": 0.327,
+   "size": "WRONG",
+   "dormers": {
+    "status": "PARTIAL",
+    "refDormers": 2,
+    "modelDormers": 2,
+    "matched": [
+     {
+      "id": "dormer-front-c45",
+      "refKind": "WALL_DORMER_GABLE",
+      "modelType": "GABLE",
+      "side": "FRONT",
+      "overlap": 0.304,
+      "kindAgrees": true,
+      "centreOffShare": 0.14,
+      "widthRatio": 1.753
+     }
+    ],
+    "missing": [
+     {
+      "kind": "WALL_DORMER_GABLE",
+      "side": "REAR",
+      "alongShare": [
+       0.57,
+       0.77
+      ]
+     }
+    ],
+    "false": [
+     {
+      "id": "dormer-rear-c55",
+      "type": "GABLE",
+      "side": "REAR",
+      "alongShare": [
+       0.387,
+       0.669
+      ]
+     }
+    ],
+    "kindAgreed": 1,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "ROLLBACK"
+   ],
+   "boundary": null,
+   "looks": [
+    "ACCEPT[ISSUE_FOUND]",
+    "REVIEW_ONLY[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT central gable wall dormer",
+     "featureId": "dormer-front-c45",
+     "state": "APPLIED",
+     "code": null,
+     "review": "ACCEPTABLE_APPROXIMATION"
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "REAR central gable wall dormer",
+     "featureId": "dormer-rear-c55",
+     "state": "APPLIED",
+     "code": null,
+     "review": "ACCEPTABLE_APPROXIMATION"
+    },
+    {
+     "operation": "MISSING_ELEMENT",
+     "targetId": "Garage wing, right-front",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [
+    "dormer-front-c45",
+    "dormer-rear-c55"
+   ],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "CONTRADICTED",
+     "confidence": "INCONCLUSIVE",
+     "settledBy": "CONTRADICTED"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "CORRECTED_APPROXIMATE",
+    "openings": "DIFFERENCE_OPEN",
+    "interior": "NOT_CHECKED",
+    "quantities": "NOT_USABLE",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SCALE_CONTRADICTED_BY_PRINTED_DIMENSIONS",
+    "ROOF_FEATURE_APPROXIMATE",
+    "ROOF_FEATURE_APPROXIMATE"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.212678,
+   "liveCalls": 4,
+   "replayed": 0,
+   "seconds": 374
+  }
+ },
+ {
+  "house": "confirm-lipinscy-lille",
+  "publisher": "lipinscy",
+  "category": [
+   "B",
+   "N2"
+  ],
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "9fb6e30b1f32",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "9fb6e30b1f32",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-lipinscy-lille",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "NO_CHANGE[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "NO_CONSUMER": 2
+    },
+    "features": [],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.166382
+   },
+   "outcome": "MODEL",
+   "widthM": 16.222,
+   "depthM": 8.888,
+   "refWidthM": 16.45,
+   "refDepthM": 11.45,
+   "errWidth": 0.014,
+   "errDepth": 0.224,
+   "size": "WRONG",
+   "dormers": {
+    "status": "NO_DORMER_EITHER",
+    "refDormers": 0,
+    "modelDormers": 0,
+    "matched": [],
+    "missing": [],
+    "false": [],
+    "kindAgreed": 0,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT entrance porch gable",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "KIND_WITHOUT_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "REAR terrace gable",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "KIND_WITHOUT_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "MEASURED",
+     "confidence": "STRONG",
+     "settledBy": "OWN_READINGS"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "USABLE_IN_SCOPE",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.166382,
+   "liveCalls": 3,
+   "replayed": 0,
+   "seconds": 342
+  }
+ },
+ {
+  "house": "confirm-architecturaldesigns-22192sl",
+  "publisher": "architecturaldesigns",
+  "category": [
+   "B",
+   "R"
+  ],
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "12bacb7675b0",
+   "confidence": "SUPPORTED",
+   "relation": "ADDED",
+   "outline": {
+    "x": "MATCHES",
+    "y": "MATCHES"
+   }
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-architecturaldesigns-22192sl",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "NO_CHANGE[ISSUE_FOUND]",
+     "NO_CHANGE[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "NO_CONSUMER": 3,
+     "REFUSED_BY_ANALYZER": 2
+    },
+    "features": [],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.376636
+   },
+   "outcome": "MODEL",
+   "widthM": 13.251,
+   "depthM": 13.646,
+   "refWidthM": 19.9136,
+   "refDepthM": 15.1384,
+   "errWidth": 0.335,
+   "errDepth": 0.099,
+   "size": "WRONG",
+   "dormers": {
+    "status": "MISMATCH",
+    "refDormers": 3,
+    "modelDormers": 0,
+    "matched": [],
+    "missing": [
+     {
+      "kind": "SHED_DORMER",
+      "side": "REAR",
+      "alongShare": [
+       0.05,
+       0.51
+      ]
+     },
+     {
+      "kind": "GABLE_DORMER",
+      "side": "FRONT",
+      "alongShare": [
+       0.55,
+       0.65
+      ]
+     },
+     {
+      "kind": "GABLE_DORMER",
+      "side": "FRONT",
+      "alongShare": [
+       0.79,
+       0.88
+      ]
+     }
+    ],
+    "false": [],
+    "kindAgreed": 0,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "ACCEPT",
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]",
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "main roof (two-storey body)",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "garage wing roof",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "REAR main roof slope",
+     "featureId": "dormer-rear-c50",
+     "state": "REFUSED_BY_ANALYZER",
+     "code": null,
+     "review": null
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "REAR",
+     "featureId": "dormer-rear-c50",
+     "state": "REFUSED_BY_ANALYZER",
+     "code": null,
+     "review": null
+    },
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "garage wing",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "UNVERIFIED",
+     "confidence": "SUPPORTED",
+     "settledBy": "CONSULTED_DIMENSIONS"
+    },
+    "outline": "MATCHES",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_REFUSED_BY_ANALYZER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.376636,
+   "liveCalls": 8,
+   "replayed": 0,
+   "seconds": 571
+  }
+ },
+ {
+  "house": "confirm-archon-dom-w-zaglikach-g",
+  "publisher": "archon",
+  "category": [
+   "B",
+   "N2"
+  ],
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "6f48cca3ab86",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "6f48cca3ab86",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-archon-dom-w-zaglikach-g",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "NO_CHANGE[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "NO_CONSUMER": 1
+    },
+    "features": [],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.18033
+   },
+   "outcome": "MODEL",
+   "widthM": 14.747,
+   "depthM": 14.45,
+   "refWidthM": 14.75,
+   "refDepthM": 14.45,
+   "errWidth": 0.0,
+   "errDepth": 0.0,
+   "size": "OK",
+   "dormers": {
+    "status": "NO_DORMER_EITHER",
+    "refDormers": 0,
+    "modelDormers": 0,
+    "matched": [],
+    "missing": [],
+    "false": [],
+    "kindAgreed": 0,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "LEFT",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "MEASURED",
+     "confidence": "STRONG",
+     "settledBy": "OWN_READINGS"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.18033,
+   "liveCalls": 3,
+   "replayed": 0,
+   "seconds": 509
+  }
+ },
+ {
+  "house": "confirm-dobredomy-delta",
+  "publisher": "dobredomy",
+  "category": [
+   "N1"
+  ],
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-dobredomy-delta",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [],
+    "corrections": {},
+    "features": [],
+    "boundary": [],
+    "sourceCheck": null,
+    "usd": 0.102524
+   },
+   "outcome": "NO_MODEL",
+   "dormers": {
+    "status": "NO_MODEL",
+    "refDormers": 0
+   },
+   "size": null
+  },
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": null,
+   "usd": 0.102524,
+   "liveCalls": 3,
+   "replayed": 0,
+   "seconds": 214
+  }
+ },
+ {
+  "house": "confirm-lipinscy-haga",
+  "publisher": "lipinscy",
+  "category": [
+   "N2",
+   "N1",
+   "B"
+  ],
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "80fe78dd5ff8",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "80fe78dd5ff8",
+   "confidence": "STRONG",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "score": {
+   "scorer": "3543.1",
+   "house": "confirm-lipinscy-haga",
+   "loop": {
+    "local": null,
+    "final": null,
+    "looks": [
+     "NO_CHANGE[ISSUE_FOUND]"
+    ],
+    "corrections": {
+     "NO_CONSUMER": 3
+    },
+    "features": [],
+    "boundary": [],
+    "sourceCheck": "CHECKED",
+    "usd": 0.16253
+   },
+   "outcome": "MODEL",
+   "widthM": 13.68,
+   "depthM": 9.38,
+   "refWidthM": 13.68,
+   "refDepthM": 12.68,
+   "errWidth": 0.0,
+   "errDepth": 0.26,
+   "size": "WRONG",
+   "dormers": {
+    "status": "NO_DORMER_EITHER",
+    "refDormers": 0,
+    "modelDormers": 0,
+    "matched": [],
+    "missing": [],
+    "false": [],
+    "kindAgreed": 0,
+    "ownRoofWings": []
+   }
+  },
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "main roof",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "OPENING",
+     "targetId": "FRONT centre opening",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "OPENING",
+     "targetId": "RIGHT side opening",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "MEASURED",
+     "confidence": "STRONG",
+     "settledBy": "OWN_READINGS"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "DIFFERENCE_OPEN",
+    "interior": "NOT_CHECKED",
+    "quantities": "USABLE_IN_SCOPE",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.16253,
+   "liveCalls": 3,
+   "replayed": 0,
+   "seconds": 447
+  }
+ }
+]

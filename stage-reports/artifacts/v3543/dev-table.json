@@ -1,0 +1,942 @@
+[
+ {
+  "house": "projekt-dom-w-supertuniach-2-e-m9022920a5fcb6",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/PLAN_NO_WALLED_ENVELOPE",
+   "dir": "/home/user/rd/v3542/A/projekt-dom-w-supertuniach-2-e-m9022920a5fcb6"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "b0f293801b12",
+   "confidence": "STRONG",
+   "relation": "REPLACED",
+   "outline": {
+    "x": "MATCHES",
+    "y": "MATCHES"
+   }
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/PLAN_NO_WALLED_ENVELOPE"
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 6.321,
+   "depthM": 13.5,
+   "errWidth": 0.084,
+   "errDepth": 0.0,
+   "size": "NEAR",
+   "errWorst": 0.084,
+   "iou": 0.897,
+   "missingPct": 10.3,
+   "excessPct": 0.0,
+   "refM2": 94.17,
+   "modelM2": 84.47,
+   "mirrorIoU": 0.897,
+   "iouBestRotation": 0.897,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "FOOTPRINT_ROOF",
+   "ridgeOk": true
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "PARTIAL",
+    "NO_CHANGE"
+   ],
+   "boundary": {
+    "decision": "ACCEPT",
+    "why": "a refusal (METRIC_RESOLUTION_INCONCLUSIVE) became a model on a scale its readings settle (STRONG)",
+    "sides": [
+     "TOP"
+    ]
+   },
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "OPENING",
+     "targetId": "REAR",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "OPENING",
+     "targetId": "LEFT",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "MEASURED",
+     "confidence": "STRONG",
+     "settledBy": "OWN_READINGS"
+    },
+    "outline": "MATCHES",
+    "roof": "NO_DIFFERENCE_REPORTED",
+    "openings": "DIFFERENCE_OPEN",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.118164,
+   "liveCalls": 4,
+   "replayed": 6,
+   "seconds": 423
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 0,
+   "modelDormers": 0,
+   "matched": [],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 0,
+   "status": "NO_DORMER_EITHER",
+   "modelRooflights": 0,
+   "modelChimneys": 0,
+   "ownRoofWings": []
+  }
+ },
+ {
+  "house": "projekt-dom-w-toreniach-3-e-me822857280738",
+  "A0": {
+   "outcome": "COMPLETED",
+   "modelHash": "4ab60f281626",
+   "dir": "/home/user/rd/v3542/A/projekt-dom-w-toreniach-3-e-me822857280738"
+  },
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "4ab60f281626",
+   "confidence": "STRONG",
+   "relation": "REPLACED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "4ab60f281626",
+   "confidence": "STRONG",
+   "relation": "REPLACED",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "MODEL",
+   "widthM": 7.387,
+   "depthM": 12.5,
+   "errWidth": 0.065,
+   "errDepth": 0.0,
+   "size": "NEAR",
+   "errWorst": 0.065,
+   "iou": 0.846,
+   "missingPct": 15.4,
+   "excessPct": 0.0,
+   "refM2": 97.34,
+   "modelM2": 82.34,
+   "mirrorIoU": 0.81,
+   "iouBestRotation": 0.846,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "FOOTPRINT_ROOF",
+   "ridgeOk": true
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 7.387,
+   "depthM": 12.5,
+   "errWidth": 0.065,
+   "errDepth": 0.0,
+   "size": "NEAR",
+   "errWorst": 0.065,
+   "iou": 0.846,
+   "missingPct": 15.4,
+   "excessPct": 0.0,
+   "refM2": 97.34,
+   "modelM2": 82.34,
+   "mirrorIoU": 0.81,
+   "iouBestRotation": 0.846,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "FOOTPRINT_ROOF",
+   "ridgeOk": true
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "ROLLBACK"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ASSIGN_VIEW",
+     "targetId": "model orientation / terrace body",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "MEASURED",
+     "confidence": "STRONG",
+     "settledBy": "OWN_READINGS"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "NO_DIFFERENCE_REPORTED",
+    "openings": "DIFFERENCE_OPEN",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.066012,
+   "liveCalls": 1,
+   "replayed": 3,
+   "seconds": 408
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 0,
+   "modelDormers": 0,
+   "matched": [],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 0,
+   "status": "NO_DORMER_EITHER",
+   "modelRooflights": 0,
+   "modelChimneys": 0,
+   "ownRoofWings": []
+  }
+ },
+ {
+  "house": "final-archon-dom-w-kuklikach",
+  "A0": {
+   "outcome": "COMPLETED",
+   "modelHash": "2d6e919f3dbc",
+   "dir": "/home/user/rd/v3542/A/final-archon-dom-w-kuklikach"
+  },
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "2d6e919f3dbc",
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "2d6e919f3dbc",
+   "confidence": "SUPPORTED",
+   "relation": "REPLACED",
+   "outline": {
+    "x": "MATCHES",
+    "y": "MATCHES"
+   }
+  },
+  "A0score": {
+   "outcome": "MODEL",
+   "widthM": 7.56,
+   "depthM": 8.76,
+   "errWidth": 0.0,
+   "errDepth": 0.0,
+   "size": "OK",
+   "errWorst": 0.0,
+   "iou": 1.0,
+   "missingPct": 0.0,
+   "excessPct": 0.0,
+   "refM2": 66.88,
+   "modelM2": 66.88,
+   "mirrorIoU": 1.0,
+   "iouBestRotation": 1.0,
+   "mirrorSuspect": false,
+   "roofKind": "HIP",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "RIDGE_EDGE",
+   "ridgeOk": true
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 7.56,
+   "depthM": 8.76,
+   "errWidth": 0.0,
+   "errDepth": 0.0,
+   "size": "OK",
+   "errWorst": 0.0,
+   "iou": 1.0,
+   "missingPct": 0.0,
+   "excessPct": 0.0,
+   "refM2": 66.88,
+   "modelM2": 66.88,
+   "mirrorIoU": 1.0,
+   "iouBestRotation": 1.0,
+   "mirrorSuspect": false,
+   "roofKind": "HIP",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "RIDGE_EDGE",
+   "ridgeOk": true
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "ACCEPT",
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[VERIFIED_IN_SCOPE]"
+   ],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": "CHECKED",
+   "usd": 0.131686,
+   "liveCalls": 3,
+   "replayed": 3,
+   "seconds": 316
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 0,
+   "modelDormers": 0,
+   "matched": [],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 0,
+   "status": "NO_DORMER_EITHER",
+   "modelRooflights": 0,
+   "modelChimneys": 0,
+   "ownRoofWings": []
+  }
+ },
+ {
+  "house": "final-domywstylu-madera",
+  "A0": {
+   "outcome": "COMPLETED",
+   "modelHash": "12c9ace7da67",
+   "dir": "/home/user/rd/v3542/A/final-domywstylu-madera"
+  },
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "12c9ace7da67",
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "12c9ace7da67",
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "MODEL",
+   "widthM": 11.093,
+   "depthM": 18.151,
+   "errWidth": 0.306,
+   "errDepth": 0.03,
+   "size": "WRONG",
+   "errWorst": 0.306,
+   "iou": 0.382,
+   "missingPct": 45.0,
+   "excessPct": 44.0,
+   "refM2": 204.04,
+   "modelM2": 202.02,
+   "mirrorIoU": 0.382,
+   "iouBestRotation": 0.483,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "FOOTPRINT_ROOF",
+   "ridgeOk": true
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 11.093,
+   "depthM": 18.151,
+   "errWidth": 0.306,
+   "errDepth": 0.03,
+   "size": "WRONG",
+   "errWorst": 0.306,
+   "iou": 0.382,
+   "missingPct": 45.0,
+   "excessPct": 44.0,
+   "refM2": 204.04,
+   "modelM2": 202.02,
+   "mirrorIoU": 0.382,
+   "iouBestRotation": 0.483,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "ridgeBasis": "FOOTPRINT_ROOF",
+   "ridgeOk": true
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "ROLLBACK"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "main roof",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "NO_CONSUMER",
+     "review": null
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT cross gable over entrance/garage",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": "KIND_WITHOUT_CONSUMER",
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "UNVERIFIED",
+     "confidence": "INCONCLUSIVE",
+     "settledBy": "UNSETTLED"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "DIFFERENCE_OPEN",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "LIMITED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.057789999999999994,
+   "liveCalls": 2,
+   "replayed": 3,
+   "seconds": 60
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 0,
+   "modelDormers": 0,
+   "matched": [],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 0,
+   "status": "NO_DORMER_EITHER",
+   "modelRooflights": 0,
+   "modelChimneys": 0,
+   "ownRoofWings": []
+  }
+ },
+ {
+  "house": "final-monsterhouseplans-plan23-504",
+  "A0": {
+   "outcome": "COMPLETED",
+   "modelHash": "ad95fc778eb7",
+   "dir": "/home/user/rd/v3542/A/final-monsterhouseplans-plan23-504"
+  },
+  "A1": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "ad95fc778eb7",
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "ad95fc778eb7",
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "MODEL",
+   "widthM": 17.969,
+   "depthM": 11.944,
+   "errWidth": 0.006,
+   "errDepth": 0.028,
+   "size": "OK",
+   "errWorst": 0.028,
+   "iou": 0.647,
+   "missingPct": 21.0,
+   "excessPct": 22.0,
+   "refM2": 175.1,
+   "modelM2": 176.78,
+   "mirrorIoU": 0.719,
+   "iouBestRotation": 0.668,
+   "mirrorSuspect": false,
+   "roofKind": null,
+   "ridge": "NA",
+   "ridgeBasis": "NO_ROOF",
+   "ridgeOk": null
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 17.969,
+   "depthM": 11.944,
+   "errWidth": 0.006,
+   "errDepth": 0.028,
+   "size": "OK",
+   "errWorst": 0.028,
+   "iou": 0.647,
+   "missingPct": 21.0,
+   "excessPct": 22.0,
+   "refM2": 175.1,
+   "modelM2": 176.78,
+   "mirrorIoU": 0.719,
+   "iouBestRotation": 0.668,
+   "mirrorSuspect": false,
+   "roofKind": null,
+   "ridge": "NA",
+   "ridgeBasis": "NO_ROOF",
+   "ridgeOk": null
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [],
+   "features": [],
+   "axes": {
+    "run": "COMPLETED",
+    "scale": {
+     "status": "NOT_ASSESSED",
+     "confidence": "INCONCLUSIVE",
+     "settledBy": "UNSETTLED"
+    },
+    "outline": "NOT_COMPARED",
+    "roof": "NO_DIFFERENCE_REPORTED",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "interior": "NOT_CHECKED",
+    "quantities": "NOT_ASSESSED",
+    "sourceCheck": "CHECKED"
+   },
+   "knownDefects": [],
+   "sourceCheck": "CHECKED",
+   "usd": 0.043506,
+   "liveCalls": 1,
+   "replayed": 2,
+   "seconds": 90
+  }
+ },
+ {
+  "house": "final-monsterhouseplans-plan5-737",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME",
+   "dir": "/home/user/rd/v3542/A/final-monsterhouseplans-plan5-737"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME"
+  },
+  "Cscore": {
+   "outcome": "NO_MODEL",
+   "why": null
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": null,
+   "usd": 0,
+   "liveCalls": 0,
+   "replayed": 3,
+   "seconds": 128
+  }
+ },
+ {
+  "house": "final-archon-dom-w-aksamitkach",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE",
+   "dir": "/home/user/rd/v3542/A-confirm/final-archon-dom-w-aksamitkach"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "281fad0e8527",
+   "confidence": "SUPPORTED",
+   "relation": "REPLACED",
+   "outline": {
+    "x": "SHORT",
+    "y": "MATCHES"
+   }
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE"
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 12.32,
+   "depthM": 8.82,
+   "errWidth": 0.068,
+   "errDepth": 0.0,
+   "size": "NEAR",
+   "errWorst": 0.068,
+   "iou": 0.881,
+   "missingPct": 7.2,
+   "excessPct": 5.4,
+   "refM2": 111.3,
+   "modelM2": 109.3,
+   "mirrorIoU": 0.881,
+   "iouBestRotation": 0.881,
+   "mirrorSuspect": false,
+   "roofKind": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "ridgeBasis": "RIDGE_EDGE",
+   "ridgeOk": true
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "ACCEPT",
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "ACCEPT[ISSUE_FOUND]",
+    "REVIEW_ONLY[VERIFIED_IN_SCOPE]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT",
+     "featureId": "dormer-front-c50",
+     "state": "APPLIED",
+     "code": null,
+     "review": "ACCEPTABLE_APPROXIMATION"
+    }
+   ],
+   "features": [
+    "dormer-front-c50"
+   ],
+   "axes": null,
+   "knownDefects": [
+    "OUTLINE_SHORT_OF_PRINTED_DIMENSION",
+    "ROOF_FEATURE_APPROXIMATE"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.107044,
+   "liveCalls": 2,
+   "replayed": 6,
+   "seconds": 414
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 1,
+   "modelDormers": 1,
+   "matched": [
+    {
+     "id": "dormer-front-c50",
+     "refKind": "WALL_DORMER_GABLE",
+     "modelType": "GABLE",
+     "side": "FRONT",
+     "overlap": 0.993,
+     "kindAgrees": true,
+     "centreOffShare": 0.001,
+     "widthRatio": 1.007
+    }
+   ],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 1,
+   "status": "MATCH",
+   "modelRooflights": 2,
+   "modelChimneys": 3,
+   "ownRoofWings": []
+  }
+ },
+ {
+  "house": "final-domywstylu-puszek",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/None",
+   "dir": "/home/user/rd/v3542/A-confirm/final-domywstylu-puszek"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "PLAN_NO_DIMENSION_FRAME",
+   "modelHash": null,
+   "confidence": "WEAK",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "FAILED",
+   "reason": "PLAN_NO_DIMENSION_FRAME",
+   "modelHash": null,
+   "confidence": "WEAK",
+   "relation": "CONFIRMED",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/None"
+  },
+  "Cscore": {
+   "outcome": "NO_MODEL",
+   "why": null
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": null,
+   "usd": 0,
+   "liveCalls": 0,
+   "replayed": 3,
+   "seconds": 61
+  }
+ },
+ {
+  "house": "final-monsterhouseplans-plan63-411",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME",
+   "dir": "/home/user/rd/v3542/A-confirm/final-monsterhouseplans-plan63-411"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "C": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "NO_SCALE",
+   "outline": null
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME"
+  },
+  "Cscore": {
+   "outcome": "NO_MODEL",
+   "why": null
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [],
+   "corrections": [],
+   "features": [],
+   "axes": null,
+   "knownDefects": [],
+   "sourceCheck": null,
+   "usd": 0,
+   "liveCalls": 0,
+   "replayed": 2,
+   "seconds": 74
+  }
+ },
+ {
+  "house": "final-houseplans-sp318422",
+  "A0": {
+   "outcome": "FAILED",
+   "reason": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME",
+   "dir": "/home/user/rd/v3542/A-confirm/final-houseplans-sp318422"
+  },
+  "A1": {
+   "outcome": "FAILED",
+   "reason": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "modelHash": null,
+   "confidence": "INCONCLUSIVE",
+   "relation": "LEGACY_UNCONFIRMED",
+   "outline": null
+  },
+  "C": {
+   "outcome": "COMPLETED",
+   "reason": null,
+   "modelHash": "beafb5aecc15",
+   "confidence": "SUPPORTED",
+   "relation": "REPLACED",
+   "outline": {
+    "x": "MATCHES",
+    "y": "MATCHES"
+   }
+  },
+  "A0score": {
+   "outcome": "NO_MODEL",
+   "why": "RECONSTRUCTION_FAILED/PLAN_NO_DIMENSION_FRAME"
+  },
+  "Cscore": {
+   "outcome": "MODEL",
+   "widthM": 14.021,
+   "depthM": 9.576,
+   "errWidth": 0.0,
+   "errDepth": 0.0,
+   "size": "OK",
+   "errWorst": 0.0,
+   "iou": 0.879,
+   "missingPct": 12.1,
+   "excessPct": 0.0,
+   "refM2": 121.04,
+   "modelM2": 106.37,
+   "mirrorIoU": 0.685,
+   "iouBestRotation": 0.879,
+   "mirrorSuspect": false,
+   "roofKind": null,
+   "ridge": "NA",
+   "ridgeBasis": "NO_ROOF",
+   "ridgeOk": null
+  },
+  "A1equalsA0": true,
+  "loop": {
+   "metricRounds": [
+    "ACCEPT",
+    "NO_CHANGE"
+   ],
+   "boundary": null,
+   "looks": [
+    "NO_CHANGE[ISSUE_FOUND]"
+   ],
+   "corrections": [
+    {
+     "operation": "ROOF_FORM",
+     "targetId": "main roof (all blocks)",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": null,
+     "review": null
+    },
+    {
+     "operation": "ROOF_FEATURE",
+     "targetId": "FRONT cross gable",
+     "featureId": null,
+     "state": "NO_CONSUMER",
+     "code": null,
+     "review": null
+    }
+   ],
+   "features": [],
+   "axes": null,
+   "knownDefects": [
+    "SOURCE_DIFFERENCE_NO_CONSUMER",
+    "SOURCE_DIFFERENCE_NO_CONSUMER"
+   ],
+   "sourceCheck": "CHECKED",
+   "usd": 0.044138,
+   "liveCalls": 1,
+   "replayed": 4,
+   "seconds": 264
+  },
+  "roof": {
+   "scorer": "3543.1",
+   "refDormers": 0,
+   "modelDormers": 0,
+   "matched": [],
+   "missing": [],
+   "false": [],
+   "kindAgreed": 0,
+   "status": "NO_DORMER_EITHER",
+   "modelRooflights": 0,
+   "modelChimneys": 0,
+   "ownRoofWings": []
+  }
+ }
+]

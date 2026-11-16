@@ -52,3 +52,12 @@ confirmation set. No confirmation house was run before the freeze.
    counts requests only; the saved journal re-checked: 15 RESERVED + 15 SETTLED, all CONSULTATION, `descriptions: 0`.
    The script's first-job spend line also printed the opening balance as spend (8.60 instead of 0.40); fixed.
    The host's requests were added to the campaign books and ledger as phase `host-e2e` (`import-host.ts`).
+8. **Freeze (`aabc044`) and after.** Before the freeze: the solver's input field was renamed (`consultedScale`) so the
+   recogniser's architecture guard stays exact, and the Android contract snapshot was recaptured for solver 2.44.0 (scene
+   bytes unchanged). The ten DEV runs replayed on the frozen commit give the same model hashes (10 of 10).
+   **CONFIRM8 was run once, live, in two processes (four houses each); the first result is kept and nothing was tuned on
+   it.** No house was re-run. After reading it, the operator looked into three houses (Majeranek, Gracja, 22192sl) to
+   explain the scorer's rows; the explanations are in the report (§10.3) and no code, prompt, threshold or scorer was
+   changed. The eight houses are DEV from now on.
+9. **Host E2E, second run (on the frozen build, 16 requests, 0.785486 USD).** 27 checks, all passed. Its requests were
+   added to the campaign books and ledger as phase `host-e2e-frozen`.
