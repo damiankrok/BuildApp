@@ -136,8 +136,50 @@
    "costUsd": 0.001089,
    "latencyMs": 7119,
    "booksCumulativeUsd": 0.004473
+  },
+  {
+   "at": "2026-11-16T07:07:04.307Z",
+   "phase": "pilot",
+   "house": "projekt-dom-w-toreniach-3-e-me822857280738",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6Bf8fvZ4doZXCLaBHTL",
+   "status": "ANSWERED",
+   "inputTokens": 15687,
+   "outputTokens": 2881,
+   "costUsd": 0.060184,
+   "latencyMs": 14923,
+   "booksCumulativeUsd": 0.064657
+  },
+  {
+   "at": "2026-11-16T07:07:20.979Z",
+   "phase": "pilot",
+   "house": "lipinscy-pl-2",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6BgMfJNFm4S414oN4d3",
+   "status": "ANSWERED",
+   "inputTokens": 2276,
+   "outputTokens": 1022,
+   "costUsd": 0.000739,
+   "latencyMs": 4705,
+   "booksCumulativeUsd": 0.065396
+  },
+  {
+   "at": "2026-11-16T07:07:26.528Z",
+   "phase": "pilot",
+   "house": "lipinscy-pl-2",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6BgmewQ3V9We9vuipo4",
+   "status": "ANSWERED",
+   "inputTokens": 16767,
+   "outputTokens": 2842,
+   "costUsd": 0.061954,
+   "latencyMs": 15336,
+   "booksCumulativeUsd": 0.12735
   }
  ],
- "totalUsd": 0.004473,
- "requests": 9
+ "totalUsd": 0.12735,
+ "requests": 12
 }
