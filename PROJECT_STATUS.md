@@ -12,6 +12,29 @@
 
 ## Current summary (read first)
 
+- **v3.54.2 (2026-11-16): the API as a consultant and controller of the analyzer** (OWNER brief v3.54.2, Master Plan
+  v3.54.2 at `docs/MASTER_PLAN.md`; PILOT_EXECUTED, INTEGRATION_VERIFIED in the service path, QUALITY_GAIN no, TRANSFER_EVIDENCE
+  partial, ANDROID NOT_VERIFIED; no APK). Report `stage-reports/SOURCE_TO_MODEL_V3542.md`, OWNER summary
+  `stage-reports/README_V3542.md`, protocol sealed before any call (`stage-reports/artifacts/v3542/PROTOCOL_V3542.md`),
+  `CAPABILITY_GAPS.md`, `INTERVENTIONS.md`. Built behind flags (default path byte-identical):
+  - `consultAnalysis` (analysis-service `consult/`): LOCAL → problem from the analyzer's own evidence → API (literal reading,
+    then local context; `get_source_region`) → validator → consulted label readings (`source-metrics/consulted.ts`) and
+    consulted whole dimensions snapped to the plan's strokes (`consulted-spans.ts`, ft-in parser, two-line agreement,
+    never over a settled scale) → full re-run → `compareRuns` ACCEPT/ROLLBACK; post-build check (4B) read-only.
+  - Host: `ANALYZER_CONSULTANT=pilot` replaces the house reader (global description never on this path).
+
+  Measured live (Sonnet 5.5, 50 requests, 1.99 USD; books 6.24 USD cumulative):
+  - every reading checked against the source was correct;
+  - plan scale settled where LOCAL had none on 5 houses;
+  - 0 houses improved in scored geometry: with the true scale, plan composition refuses (Supertunie, Aksamitki, Madera 49 %
+    coverage), so the transaction rolls back or the refusal stands;
+  - 1 false acceptance on confirmation (sp318422: refusal → model, depth +67 %; the acceptance rule checks the scale, not
+    the extent);
+  - Kukliki scale verified with the model unchanged;
+  - 4B found real defects on 5 of 6 models (garage, terrace closed as a box, swapped elevations) with no false alarm on
+    the control.
+
+  Next: extent check in `compareRuns`; plan composition at a verified scale (report §14).
 - **v3.54.1 (2026-11-16) — Claude API reader measured live, hybrid H1, product path (OWNER brief v3.54.1, Master Plan
   v3.54.1 at `docs/MASTER_PLAN.md`): CHECKPOINT, target partly met; no APK (no app change; APK 1339 stays current).**
   Report `stage-reports/SOURCE_TO_MODEL_V3541.md`, AI map `stage-reports/artifacts/v3541/AI_MAP.md`, protocol sealed

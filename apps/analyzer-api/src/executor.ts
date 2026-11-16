@@ -12,7 +12,8 @@
  */
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
-import { AnalysisError, analyseLink, analysisFilesOf, toAnalysisError } from '@buildapp/analysis-service'
+import { AnalysisError, analyseLink, analysisFilesOf, consultAnalysis, toAnalysisError } from '@buildapp/analysis-service'
+import type { ConsultantWiring } from '@buildapp/analysis-service'
 import type { AnalysisProgress, AnalysisTelemetry, DescribingEvent, LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
@@ -31,10 +32,21 @@ export interface JobExecutor {
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
-export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision; /** v3.54.1: read a complete drawings model as well (`analyseLink` readEveryModel); only with a reader, only for an allowed submission. */ readEveryModel?: boolean }
+export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision; /** v3.54.1: read a complete drawings model as well (`analyseLink` readEveryModel); only with a reader, only for an allowed submission. */ readEveryModel?: boolean; /** v3.54.2 pilot: the consultant (`consultAnalysis`); when present it REPLACES the house reader for an allowed submission — the global description branch is never entered on this path. */ consultant?: ConsultantWiring }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
 export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: Partial<JobControl>): Promise<JobOutput> {
+  // v3.54.2 pilot: an allowed submission on a host with the consultant switched on goes through the consultation loop —
+  // LOCAL builds, the consultant reads what LOCAL could not settle, the analyzer re-runs; no house description is asked
+  if (wiring.consultant && input.describe === true) {
+    const consulted = await consultAnalysis(
+      { kind: 'URL', url: input.url },
+      { adapters: wiring.adapters, deps: wiring.deps, policy: wiring.policy, cache: fileByteCache(join(input.workDir, 'bytes')), jobId: input.jobId, signal: control.signal, progress: control.onProgress, telemetry: control.onTelemetry },
+      wiring.consultant,
+    )
+    if (consulted.run) return analysisFilesOf(consulted.run)
+    throw consulted.error ?? new AnalysisError('ANALYSIS_FAILED', 'the consultation ended with neither a model nor a refusal')
+  }
   const run = await analyseLink(
     { kind: 'URL', url: input.url },
     {

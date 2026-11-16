@@ -8,6 +8,7 @@ import { anthropicStructuredVision, anthropicVisionReasoner } from '@buildapp/so
 import { join } from 'node:path'
 import type { AnalysisWiring } from './executor.js'
 import { DEFAULT_SPEND_LIMITS, HOUSE_READER_PRICES, openSpendLedger, spendGuardedStructuredVision } from './house-reader-spend.js'
+import { anthropicConsultant } from '@buildapp/analysis-service'
 import type { SpendLimits } from './house-reader-spend.js'
 
 const count = (value: string | undefined, fallback: number, max: number): number => {
@@ -54,6 +55,16 @@ export const legacyVisionOn = (env: Record<string, string | undefined> = process
  * key is read from the server's environment by the provider and is never
  * returned by any endpoint. Anything else: the deterministic analyzer alone.
  */
+/**
+ * v3.54.2 pilot: `ANALYZER_CONSULTANT=pilot` (with the same ceiling, books and access token as the house reader) gives an
+ * allowed job the consultant instead of the house reader. Off by default; the two are never on together.
+ */
+export function consultantPlan(env: Record<string, string | undefined> = process.env): { on: boolean; why: string } {
+  if (env.ANALYZER_CONSULTANT !== 'pilot') return { on: false, why: 'ANALYZER_CONSULTANT is not "pilot"' }
+  const reader = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })
+  return reader.on ? { on: true, why: 'consultant pilot on' } : { on: false, why: reader.why }
+}
+
 export const productionWiring = (env: Record<string, string | undefined> = process.env): AnalysisWiring => ({
   adapters: productionAdapters(),
   ...(legacyVisionOn(env) ? { vision: anthropicVisionReasoner({}) } : {}),
@@ -62,6 +73,27 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
   // holds it. Every request is reserved in the host's spend books before it is sent (`house-reader-spend.ts`), and a
   // job reaches the reader only when its submission carried the pilot's access token (`executeJob`).
   ...(() => {
+    // v3.54.2: the consultant pilot, when switched on, takes the place of the house reader
+    if (consultantPlan(env).on) {
+      const plan = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })
+      const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })
+      const model = anthropicConsultant({ model: plan.model })
+      const price = HOUSE_READER_PRICES[plan.model]
+      return {
+        consultant: {
+          model,
+          price,
+          variant: 'C' as const,
+          spend: {
+            reserve: (m: string, usd: number) => {
+              const r = ledger.reserve('CONSULTATION', m, usd)
+              return { id: r.id, usd: r.reservedUsd }
+            },
+            settle: (r: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string) => ledger.settle({ id: r.id, purpose: 'CONSULTATION', model: plan.model, reservedUsd: r.usd }, actual, note),
+          },
+        },
+      }
+    }
     const plan = houseReaderPlan(env)
     if (!plan.on) return {}
     const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })

@@ -64,7 +64,9 @@ def refusal(run, h):
 
 
 def band(label, note, h=70):
-    im = Image.new('RGB', (W, h), (235, 238, 245))
+    probe = ImageDraw.Draw(Image.new('RGB', (W, 10)))
+    need = words(probe, (16, 42), note, small, W - 32) + 8 if note else h
+    im = Image.new('RGB', (W, max(h, need)), (235, 238, 245))
     d = ImageDraw.Draw(im)
     d.text((16, 8), label, font=title, fill=(20, 30, 60))
     if note:
@@ -106,7 +108,7 @@ def run_plan(run, h):
 H = 620
 src = Image.new('RGB', (W, H), 'white')
 if plans:
-    best = sorted(plans, key=lambda p: -p['origPx'][0] * p['origPx'][1])[:2]
+    best = sorted(plans, key=lambda p: -p['origPx'][0] * p['origPx'][1])[:1]
     for i, p in enumerate(best):
         src.paste(fit(Image.open(os.path.join(a.pics, p['file'])).convert('RGB'), W // len(best) - 8, H), (i * (W // len(best)), 0))
 consult_note = ''
@@ -128,11 +130,12 @@ parts.append(after_plan or (refusal(a.after, 260) if a.after != '-' else band(''
 stack(parts).save(a.out + '-plan.png')
 
 # --- board 2: elevations and model views -----------------------------------------------------------------------
-H2 = 560
-src2 = Image.new('RGB', (W, H2), 'white')
 show = elev[:4] if elev else persp[:2]
-for i, p in enumerate(show):
-    src2.paste(fit(Image.open(os.path.join(a.pics, p['file'])).convert('RGB'), W // max(1, len(show)) - 8, H2), (i * (W // max(1, len(show))), 0))
+fitted = [fit(Image.open(os.path.join(a.pics, p['file'])).convert('RGB'), W // max(1, len(show)) - 8, 560) for p in show]
+H2 = max([f.height for f in fitted] + [60])
+src2 = Image.new('RGB', (W, H2), 'white')
+for i, f in enumerate(fitted):
+    src2.paste(f, (i * (W // max(1, len(show))), 0))
 srcnote = 'ŹRÓDŁO: elewacje wydawcy, jak opublikowane' + ('' if elev else ' — brak elewacji ortogonalnych: wizualizacja perspektywiczna (nie ortografia)')
 
 
