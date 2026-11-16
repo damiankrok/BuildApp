@@ -1565,6 +1565,11 @@ export function axisLadder(
   mpp: number,
   originPx: number,
   tolerancePx: number,
+  /**
+   * v3.54.2 pilot: present when the sheet's scale was measured on something other than these chains (a registration on
+   * the drawing's own overall dimensions, CONSULTANT_VALIDATED): the share of a span that scale may be off by.
+   */
+  independentScale?: { shareUncertainty: number },
 ): AxisLadder {
   const alongAxis = chains.filter((c) => (c.axis === 'HORIZONTAL') === (axis === 'X'))
   const byId = new Map(evidence.map((e) => [e.id, e]))
@@ -1722,6 +1727,11 @@ export function axisLadder(
     // The first (longest) statement sets the scale, as it always has: nothing is fixed yet for it to disagree with, and
     // the sheet's fitted scale is a fit over these same chains (a misread overall is the registration's outlier).
     if (pi !== undefined && pj !== undefined && Math.abs(residualPx) > allowedPx) { record('REJECTED_RESIDUAL'); continue }
+    // v3.54.2 pilot: that holds only where the scale WAS fitted on these chains. A registration measured independently of
+    // them fixes the scale before any of them speaks, so the first statement must agree with it as every later one must
+    // agree with what is fixed — within its own pixel uncertainty and the registration's. A chain whose values were solved
+    // at the page vote's scale the registration replaced then pins nothing, and the axis keeps the registration's scale.
+    if ((pi === undefined || pj === undefined) && independentScale && Math.abs(residualPx) > allowedPx + claim.length * independentScale.shareUncertainty) { record('REJECTED_RESIDUAL'); continue }
     record('PINNED')
     if (!fixed[claim.i] && !fixed[claim.j]) {
       metric[claim.i] = round6(pi ?? metric[claim.i])
@@ -2472,8 +2482,11 @@ export function inferStructuralLayout(given: StructuralLayoutOptions): Structura
   // LINK-F1: the sheet's scale, one for both axes unless the anchors prove the sheet was stretched
   const sheet = sheetScale(base.registration)
   options.debug?.(`sheet scale: ${sheet.why}`)
-  const ladderX = axisLadder(base.decomposition.linesX, baseChains, options.metrics.evidence, 'X', sheet.mppX, envelope.rect.x0, tolerancePx)
-  const ladderZ = axisLadder(base.decomposition.linesY, baseChains, options.metrics.evidence, 'Y', sheet.mppY, envelope.rect.y0, tolerancePx)
+  // v3.54.2 pilot: a scale measured on the drawing's overall dimensions, not fitted on the chains, checks their first statement too
+  const longestAnchorPx = Math.max(0, ...base.registration.anchors.map((a) => a.pixelSpan))
+  const independentScale = base.registration.provenance.extractor === 'CONSULTANT_VALIDATED' && longestAnchorPx > 0 ? { shareUncertainty: (2 * LADDER_TICK_PX) / longestAnchorPx } : undefined
+  const ladderX = axisLadder(base.decomposition.linesX, baseChains, options.metrics.evidence, 'X', sheet.mppX, envelope.rect.x0, tolerancePx, independentScale)
+  const ladderZ = axisLadder(base.decomposition.linesY, baseChains, options.metrics.evidence, 'Y', sheet.mppY, envelope.rect.y0, tolerancePx, independentScale)
   const frame: WorldFrame = {
     metresPerPixelX: sheet.mppX,
     metresPerPixelY: sheet.mppY,
