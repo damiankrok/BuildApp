@@ -9,7 +9,7 @@
  * and records, and never re-runs; C consumes. A failure of the consultant (transport, budget, no answer) leaves the
  * LOCAL result exactly as it was. No global house description is ever asked for on this path.
  */
-import type { ConsultedReading, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { PlanDiagnosticsReport } from '@buildapp/reconstruction'
 import { decodeImage, startDecoders } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
@@ -21,7 +21,7 @@ import type { AnalysisInput, AnalysisOptions, AnalysisRun } from '../run.js'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION } from './contract.js'
 import type { ConsultantReview } from './contract.js'
 import { cropOf } from './tools.js'
-import { DEFAULT_CONSULT_LIMITS, checkModel, consultLabels, validateProposals } from './loop.js'
+import { DEFAULT_CONSULT_LIMITS, checkModel, consultLabels, overviewScale, validateProposals } from './loop.js'
 import type { ConsultEvent, ConsultLimits, ConsultOutcome, ConsultSpend, ConsultantModel, Price, ProposalVerdict } from './loop.js'
 import { labelProblemOf } from './problems.js'
 import type { LabelProblem } from './problems.js'
@@ -57,6 +57,7 @@ export type RoundRecord = {
   consultation?: ConsultOutcome
   verdicts: ProposalVerdict[]
   readings: ConsultedReading[]
+  spans?: ConsultedSpan[]
   before: RunState
   after?: RunState
   decision: 'ACCEPT' | 'ROLLBACK' | 'PARTIAL' | 'NO_CHANGE' | 'NOT_RUN' | 'CONSULTANT_FAILED'
@@ -74,6 +75,7 @@ export type ConsultedAnalysis = {
   final: RunState
   rounds: RoundRecord[]
   readings: ConsultedReading[]
+  spans: ConsultedSpan[]
   usd: number
   /** The post-build check of the final model (4B), read-only: its proposals have no consumer in this pilot. */
   modelCheck?: { review?: ConsultantReview; refused?: string; usd: number; verdicts: ProposalVerdict[]; revision: string }
@@ -153,13 +155,14 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const limits = wiring.limits ?? DEFAULT_CONSULT_LIMITS
   const maxRounds = wiring.maxRounds ?? 2
   record({ at: now().toISOString(), kind: 'PATH', path: 'CONSULTANT', variant: wiring.variant, globalDescription: 'DISABLED', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, model: wiring.model.model })
-  const local = await attempt(input, { ...options, consulted: undefined, crossAxisWitness: undefined })
+  const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined })
   const localState = stateOf(local)
   record({ at: now().toISOString(), kind: 'LOCAL', state: localState })
   let good: Local = local
   let goodState = localState
   const rounds: RoundRecord[] = []
   const readings: ConsultedReading[] = []
+  const spans: ConsultedSpan[] = []
   const seen = new Set<string>()
   let usd = 0
   let basis: Local = local
@@ -199,26 +202,28 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why })
       break
     }
-    const { readings: valid, verdicts } = validateProposals(problem, baseRevision, final.proposedCorrections, seen, { engine: `consultant.${wiring.model.id}`, model: wiring.model.model })
+    const { readings: valid, spans: validSpans, verdicts } = validateProposals(problem, baseRevision, final.proposedCorrections, seen, { engine: `consultant.${wiring.model.id}`, model: wiring.model.model }, overviewScale({ raster: fr.raster }))
     rec.verdicts = verdicts
     record({ at: now().toISOString(), kind: 'VALIDATION', round, verdicts })
     // a later round's reading of a label replaces an earlier one only through its own lattice id; earlier ones stay
     const merged = [...readings.filter((r) => !valid.some((v) => v.latticeId === r.latticeId)), ...valid]
+    const mergedSpans = [...spans, ...validSpans]
     rec.readings = valid
+    rec.spans = validSpans
     if (wiring.variant === 'R') {
       rec.decision = 'NOT_RUN'
       rec.why = 'variant R: the proposals are recorded and never consumed'
       record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why })
       break
     }
-    if (valid.length === 0) {
+    if (valid.length === 0 && validSpans.length === 0) {
       rec.decision = 'NO_CHANGE'
       rec.why = 'no proposal passed validation: nothing to hand the analyzer'
       record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why })
       break
     }
     // the candidate: the same frozen package and graph, the consulted readings, the solver's cross-axis rule
-    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, crossAxisWitness: true })
+    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, crossAxisWitness: true })
     const after = stateOf(candidate)
     rec.after = after
     const verdict = compareRuns(goodState, after)
@@ -229,6 +234,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       good = candidate
       goodState = after
       readings.splice(0, readings.length, ...merged)
+      spans.splice(0, spans.length, ...mergedSpans)
       basis = candidate
       // a model whose scale is now settled has no label problem left to ask about; the loop ends by itself
       continue
@@ -236,6 +242,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     if (verdict.decision === 'PARTIAL') {
       // still refused, but further along: the readings stand for the next round's candidate; the result is LOCAL's
       readings.splice(0, readings.length, ...merged)
+      spans.splice(0, spans.length, ...mergedSpans)
       basis = candidate
       continue
     }
@@ -269,5 +276,5 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   }
   const finalState = stateOf(good)
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, usd, ...(modelCheck ? { modelCheck } : {}), globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(modelCheck ? { modelCheck } : {}), globalDescription: 'DISABLED' }
 }

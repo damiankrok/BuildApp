@@ -47,7 +47,7 @@ import { serializeModel } from '@buildapp/model'
 import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache, genericProjectPageAdapter, startDecoders } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
-import type { ConsultedReading, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { PLAN_OVERLAY_LAYERS, isReconstructionFailure, levelsFrom, reconstructV2, renderPlanOverlay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, SolverTraceEvent } from '@buildapp/reconstruction'
 import { frameRasters } from '@buildapp/source-cv'
@@ -249,6 +249,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}),
       // v3.54.2 pilot, research only: `--consulted <readings.json>` hands the run a consultant's label readings
       ...(argv.includes('--cross-axis') ? { crossAxisWitness: true } : {}),
+      ...(value(argv, 'consulted-spans') ? { consultedSpans: JSON.parse(readFileSync(value(argv, 'consulted-spans') as string, 'utf8')) as ConsultedSpan[] } : {}),
       ...(value(argv, 'consulted') ? { consulted: JSON.parse(readFileSync(value(argv, 'consulted') as string, 'utf8')) as ConsultedReading[] } : {}),
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these

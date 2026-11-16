@@ -271,7 +271,7 @@ export const MetricProvenanceSchema = z
   .object({
     /** E13: VISION_VALIDATED — a vision model's reading admitted only by a deterministic check on the same drawing (`external-levels.ts`). */
     /** v3.45: RECOGNISER_VALIDATED — the shipped numeric recogniser's reading of a level mark, admitted only by the same drawing (`level-marks.ts`). */
-    extractor: z.enum(['NUMERIC_OCR', 'CHAIN_SOLVER', 'REGISTRATION', 'PACKAGE_METADATA', 'DERIVED', 'VISION_VALIDATED', 'RECOGNISER_VALIDATED']),
+    extractor: z.enum(['NUMERIC_OCR', 'CHAIN_SOLVER', 'REGISTRATION', 'PACKAGE_METADATA', 'DERIVED', 'VISION_VALIDATED', 'RECOGNISER_VALIDATED', 'CONSULTANT_VALIDATED']),
     name: z.string().min(1),
     detail: z.string(),
   })
@@ -1140,6 +1140,22 @@ export const MetricEvidenceSetSchema = z
             why: z.string().min(1),
             valueCm: z.number().positive().optional(),
             prior: z.string().optional(),
+          })
+          .strict(),
+      )
+      .optional(),
+    /** v3.54.2 pilot: every consulted whole dimension, what the plan's strokes measured and what it settled (`consulted-spans.ts`). */
+    consultedSpans: z
+      .array(
+        z
+          .object({
+            proposalId: z.string().min(1),
+            frameId: z.string().min(1),
+            status: z.enum(['ADMITTED', 'AGREES_ONLY', 'REFUSED']),
+            why: z.string().min(1),
+            valueCm: z.number().positive().optional(),
+            lengthPx: z.number().positive().optional(),
+            cmPerPx: z.number().positive().optional(),
           })
           .strict(),
       )

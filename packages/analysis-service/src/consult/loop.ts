@@ -10,7 +10,8 @@
  * The proposals of step 2 are validated (`validateProposals`); the valid ones become `ConsultedReading`s, the analyzer
  * runs again with them, and `compareRuns` keeps the new result or rolls back to the one before.
  */
-import type { ConsultedReading, MetricEvidenceSet } from '@buildapp/source-metrics'
+import { lengthCmOf } from '@buildapp/source-metrics'
+import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { Raster } from '@buildapp/source-cv'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, CORRECTION_OPERATIONS, REVIEW_SCHEMA, REVIEW_TOOL_NAME, parseReview } from './contract.js'
 import type { ConsultantReview, ProposedCorrection, ReadingDirection, Region } from './contract.js'
@@ -66,6 +67,7 @@ What you do:
 - Read each asked label LITERALLY, as printed: its digits and its decimal separator exactly as they appear (for example 1350, 690, 15,98, 4.50). Do not convert units, do not round, do not complete a number you cannot see. Say which way the text reads on the sheet (LEFT_TO_RIGHT, BOTTOM_TO_TOP, TOP_TO_BOTTOM, UPSIDE_DOWN).
 - If a crop is not enough, call get_source_region with a region of the plan (pixel coordinates of the plan overview) to see it larger. At most ${DEFAULT_CONSULT_LIMITS.evidenceRequestsPerRound} such requests.
 - Answer only with submit_review. For each label you can read, add one proposedCorrection with operation READ_LABEL, targetId the label id (L1, L2, ...), proposed.literal the printed text, proposed.unit the unit the drawing uses for it if you can tell (cm for whole centimetres, m when a decimal comma or point is printed, ft-in for feet and inches, otherwise unknown), proposed.direction, the evidence region you read it from, alternatives you could not exclude, and uncertainty (LOW only when every glyph is legible).
+- Whole dimensions (READ_DIMENSION): also report the plan's OVERALL dimensions (the outermost dimension lines along the building's width and depth) and, when the asked labels cannot establish a scale, up to two other long printed dimensions — at most 4 in all, whether or not they were asked about. For each: operation READ_DIMENSION, targetId a short name (for example "overall width, top"), proposed.literal exactly as printed (feet and inches such as 47'-1" with unit ft-in are allowed), proposed.unit, and span: the two ends of that dimension line in pixels of picture 1, where its extension lines or end ticks cross it (x0,y0 = one end, x1,y1 = the other). Point at the ends of the dimension line, not at the building's walls. Never compute a value; report only a printed one.
 - A label you cannot read: no proposal; add an observation saying what you see and set uncertainty accordingly. Never guess a digit to make numbers agree. A sum of other labels is not a reading of this label; say so separately in an observation if you use it.
 - Status: ISSUE_FOUND when you propose readings, NEED_EVIDENCE when you cannot answer without more of the picture, UNKNOWN when you cannot help, VERIFIED_IN_SCOPE only if the analyzer's readings you were shown are all correct.
 - List in checked the labels you read and in notChecked those you could not.
@@ -118,7 +120,7 @@ export async function consultLabels(input: ConsultInput): Promise<ConsultOutcome
   const intro: unknown[] = [
     {
       type: 'text',
-      text: `Contract ${CONSULTANT_CONTRACT_VERSION}, prompt ${CONSULTANT_PROMPT_VERSION}. Problem ${problem.problemId}, base revision ${input.baseRevision}.\nThe analyzer could not establish the scale of this floor plan from its printed dimensions: the labels outlined in red below are ones it could not read or could not settle. Read each one literally.\nPicture 1 is the whole plan (${overview.width}x${overview.height} px; label boxes are in these pixels${overview.transform.scale !== 1 ? `, which are the plan's pixels times ${overview.transform.scale}` : ''}).`,
+      text: `Contract ${CONSULTANT_CONTRACT_VERSION}, prompt ${CONSULTANT_PROMPT_VERSION}. Problem ${problem.problemId}, base revision ${input.baseRevision}.\nThe analyzer could not establish the scale of this floor plan from its printed dimensions. ${problem.labels.length > 0 ? 'The labels outlined in red below are ones it could not read or could not settle. Read each one literally, and report the overall dimensions with READ_DIMENSION.' : 'It found no dimension label it could ask about: report the overall dimensions with READ_DIMENSION.'}\nPicture 1 is the whole plan (${overview.width}x${overview.height} px; label boxes are in these pixels${overview.transform.scale !== 1 ? `, which are the plan's pixels times ${overview.transform.scale}` : ''}).`,
     },
     imageBlock(overview),
   ]
@@ -127,7 +129,7 @@ export async function consultLabels(input: ConsultInput): Promise<ConsultOutcome
     intro.push({ type: 'text', text: `Picture ${i + 2}: label ${label.labelId}, box x ${Math.round(label.box.x0 * s)}-${Math.round(label.box.x1 * s)}, y ${Math.round(label.box.y0 * s)}-${Math.round(label.box.y1 * s)} of picture 1, shown ${img.transform.scale}x larger.` })
     intro.push(imageBlock(img))
   })
-  intro.push({ type: 'text', text: `Labels asked: ${problem.labels.map((l) => l.labelId).join(', ')}. Read them, then call ${REVIEW_TOOL_NAME}.` })
+  intro.push({ type: 'text', text: `${problem.labels.length > 0 ? `Labels asked: ${problem.labels.map((l) => l.labelId).join(', ')}. Read them and the overall dimensions` : 'Read the overall dimensions'}, then call ${REVIEW_TOOL_NAME}.` })
   messages.push({ role: 'user', content: intro })
   input.record({ at: now().toISOString(), kind: 'SENT_PROBLEM', step: 1, problemId: problem.problemId, baseRevision: input.baseRevision, pictures: [{ n: 1, what: 'overview', frameId: problem.frameId, width: overview.width, height: overview.height, transform: overview.transform }, ...crops.map(({ label, img }, i) => ({ n: i + 2, what: `label ${label.labelId}`, frameId: label.frameId, box: label.box, width: img.width, height: img.height, transform: img.transform }))] })
   const literal = await step(input, messages, 1, limits)
@@ -213,7 +215,7 @@ async function stepWith(input: ConsultInput, messages: unknown[], n: number, lim
   return { refused: `no ${REVIEW_TOOL_NAME} within ${limits.maxTurnsPerStep} turns`, evidenceRequests, turns: limits.maxTurnsPerStep, usd }
 }
 
-const overviewScale = (input: ConsultInput): number => {
+export const overviewScale = (input: { raster: { width: number; height: number } }): number => {
   const side = Math.max(input.raster.width, input.raster.height)
   return side <= 1400 ? 1 : 1 / Math.ceil(side / 1400)
 }
@@ -266,8 +268,9 @@ const LITERAL = /^[0-9]{1,5}([.,][0-9]{1,3})?$/
  * agrees with the model as it stands (a correction exists to change it). A HIGH-uncertainty reading is HELD: on the
  * record as a hypothesis, never applied.
  */
-export function validateProposals(problem: LabelProblem, baseRevision: string, proposals: readonly ProposedCorrection[], seen: Set<string>, consultant: ConsultedReading['consultant']): { readings: ConsultedReading[]; verdicts: ProposalVerdict[] } {
+export function validateProposals(problem: LabelProblem, baseRevision: string, proposals: readonly ProposedCorrection[], seen: Set<string>, consultant: ConsultedReading['consultant'], overviewScaleOf?: number): { readings: ConsultedReading[]; spans: ConsultedSpan[]; verdicts: ProposalVerdict[] } {
   const readings: ConsultedReading[] = []
+  const spans: ConsultedSpan[] = []
   const verdicts: ProposalVerdict[] = []
   const targets = new Set<string>()
   for (const p of proposals) {
@@ -285,6 +288,35 @@ export function validateProposals(problem: LabelProblem, baseRevision: string, p
       v('REJECTED', `STALE_REVISION: names ${p.baseRevision}, the analyzer is at ${baseRevision}`)
       continue
     }
+    if (p.operation === 'READ_DIMENSION') {
+      const sp = p.span
+      const literal = p.proposed.literal.trim()
+      const unit = p.proposed.unit
+      if (!sp || ![sp.x0, sp.y0, sp.x1, sp.y1].every((v) => typeof v === 'number' && Number.isFinite(v))) {
+        v('REJECTED', 'NO_SPAN: a whole dimension needs the two ends of its line')
+        continue
+      }
+      if (unit === 'unknown') {
+        v('REJECTED', 'UNIT_UNKNOWN: a whole dimension states its unit (cm, m, mm or ft-in)')
+        continue
+      }
+      if (lengthCmOf(literal, unit) === undefined) {
+        v('REJECTED', `UNPARSEABLE: "${literal}" is not a length in ${unit} by the analyzer's parser`)
+        continue
+      }
+      if (p.uncertainty === 'HIGH') {
+        v('HELD', 'HIGH uncertainty: kept as a hypothesis, not applied')
+        continue
+      }
+      if (spans.filter((x) => x.frameId === problem.frameId).length >= 4) {
+        v('REJECTED', 'LIMIT: at most 4 whole dimensions per plan')
+        continue
+      }
+      const k = 1 / (overviewScaleOf ?? 1)
+      spans.push({ proposalId: p.proposalId, frameId: problem.frameId, literal, unit, from: { x: sp.x0 * k, y: sp.y0 * k }, to: { x: sp.x1 * k, y: sp.y1 * k }, consultant })
+      v('ACCEPTED', 'valid: handed to the metric layer as a consulted whole dimension (its ends are snapped to the plan, its value parsed by the analyzer)')
+      continue
+    }
     const label = problem.labels.find((l) => l.labelId === p.targetId)
     if (!label) {
       v('REJECTED', `UNKNOWN_TARGET: ${p.targetId} is not a label of ${problem.problemId}`)
@@ -296,7 +328,7 @@ export function validateProposals(problem: LabelProblem, baseRevision: string, p
     }
     const literal = p.proposed.literal.trim()
     if (p.proposed.unit === 'ft-in' || /['"′″]/.test(literal)) {
-      v('CAPABILITY_MISSING', 'a feet-inch reading has no consumer in the metric layer (its parser reads cm and decimal metres only)')
+      v('CAPABILITY_MISSING', 'a feet-inch reading of a single label has no consumer (the lattice and its chain read cm and decimal metres only); a whole dimension in feet-inches goes through READ_DIMENSION')
       continue
     }
     if (!LITERAL.test(literal)) {
@@ -326,7 +358,7 @@ export function validateProposals(problem: LabelProblem, baseRevision: string, p
     readings.push({ proposalId: p.proposalId, frameId: problem.frameId, latticeId: lattice.latticeId, literal, consultant })
     v('ACCEPTED', 'valid: handed to the metric layer as a consulted reading', lattice.latticeId)
   }
-  return { readings, verdicts }
+  return { readings, spans, verdicts }
 }
 
 // ---------------------------------------------------------------------------------------------------------------

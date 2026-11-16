@@ -137,6 +137,7 @@ async function main(): Promise<void> {
       const { run, error, ...rest } = r
       writeFileSync(join(out, 'consult.json'), scrub(`${JSON.stringify({ house, phase, variant, model, replayOf: replayRoot ?? null, ms: Date.now() - t0, ...rest, finalError: error ? error.failure() : null, finalModelHash: run?.reconstruction.candidate.modelHash ?? null, packageHash: createHash('sha256').update(readFileSync(pkgPath)).digest('hex') }, null, 1)}\n`))
       writeFileSync(join(out, 'readings.json'), `${JSON.stringify(r.readings, null, 1)}\n`)
+      writeFileSync(join(out, 'spans.json'), `${JSON.stringify(r.spans, null, 1)}\n`)
       process.stdout.write(`${house}: ${r.local.outcome}${r.local.reasonCode ? `/${r.local.reasonCode}` : ''} -> ${r.final.outcome}${r.final.reasonCode ? `/${r.final.reasonCode}` : ''}; rounds ${r.rounds.map((x) => x.decision).join(',')}; ${r.usd.toFixed(4)} USD\n`)
     } catch (e) {
       writeFileSync(join(out, 'failure.json'), scrub(`${JSON.stringify({ house, error: (e as Error).message.slice(0, 500) }, null, 1)}\n`))

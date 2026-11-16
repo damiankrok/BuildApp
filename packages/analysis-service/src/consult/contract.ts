@@ -8,13 +8,13 @@
  * the accepted ones to the analyzer's own consumer and keeps or rolls back the analyzer's result.
  */
 export const CONSULTANT_CONTRACT_VERSION = '0.1.0' as const
-export const CONSULTANT_PROMPT_VERSION = '0.1.0' as const
+export const CONSULTANT_PROMPT_VERSION = '0.2.0' as const
 
 export const REVIEW_STATUSES = ['VERIFIED_IN_SCOPE', 'ISSUE_FOUND', 'NEED_EVIDENCE', 'UNKNOWN'] as const
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number]
 
 /** The correction families with a consumer in the analyzer. Anything else is answered CAPABILITY_MISSING. */
-export const CORRECTION_OPERATIONS = ['READ_LABEL'] as const
+export const CORRECTION_OPERATIONS = ['READ_LABEL', 'READ_DIMENSION'] as const
 export type CorrectionOperation = (typeof CORRECTION_OPERATIONS)[number]
 
 /** What the reading direction of a printed label is, as the consultant sees it on the sheet. */
@@ -35,6 +35,8 @@ export type ProposedCorrection = {
   /** What the consultant understood the analyzer to hold now (a precondition, checked by the validator). */
   current?: string
   proposed: { literal: string; unit: 'cm' | 'm' | 'mm' | 'ft-in' | 'unknown'; direction?: ReadingDirection }
+  /** READ_DIMENSION: the two ends of the dimension line (where its extension lines or ticks cross it), in overview pixels. */
+  span?: Region
   evidence: Array<{ sourceId: string; region?: Region }>
   justification: string
   alternatives: Array<{ literal: string; why: string }>
@@ -87,6 +89,7 @@ export const REVIEW_SCHEMA = {
             required: ['literal', 'unit'],
             additionalProperties: false,
           },
+          span: REGION_SCHEMA,
           evidence: { type: 'array', items: { type: 'object', properties: { sourceId: { type: 'string' }, region: REGION_SCHEMA }, required: ['sourceId'], additionalProperties: false } },
           justification: { type: 'string' },
           alternatives: { type: 'array', items: { type: 'object', properties: { literal: { type: 'string' }, why: { type: 'string' } }, required: ['literal', 'why'], additionalProperties: false } },

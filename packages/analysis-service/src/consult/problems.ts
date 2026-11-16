@@ -42,9 +42,11 @@ const overlap = (a: Region, b: Region): number => {
 /** The label problem of one plan frame, or none when its scale is settled (STRONG or SUPPORTED) and every primary ink is CLEAR. */
 export function labelProblemOf(metrics: MetricEvidenceSet, frameId: string, assetId: string): LabelProblem | undefined {
   const solution = (metrics.metricSolutions ?? []).find((s) => s.frameId === frameId)
-  const lattices = (metrics.numericLattices ?? []).filter((l) => l.frameId === frameId)
-  if (lattices.length === 0) return undefined
+  // a label already given a consulted reading is not asked about again (v3.54.2 stage B: round 2 re-asked 327 and 104)
+  const lattices = (metrics.numericLattices ?? []).filter((l) => l.frameId === frameId && l.ensemble?.decision !== 'CONSULTED')
   const settled = solution && (solution.confidence === 'STRONG' || solution.confidence === 'SUPPORTED')
+  // an unsettled plan with no label to ask about is still a problem: its printed dimensions may be read whole (READ_DIMENSION)
+  if (lattices.length === 0) return settled ? undefined : { problemId: `scale:${frameId}`, kind: 'SCALE_UNSETTLED', frameId, assetId, labels: [], analyzerWhy: solution?.why ?? 'no metric solution was written for this frame' }
   const named = new Set<string>([...(solution?.conflictingObservationIds ?? []), ...(solution?.supportingObservationIds ?? []), ...(solution?.hypotheses ?? []).flatMap((h) => h.witnessIds)])
   const observations = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === frameId)
   // one ink = lattices whose boxes overlap by half of the smaller
@@ -77,7 +79,7 @@ export function labelProblemOf(metrics: MetricEvidenceSet, frameId: string, asse
       rank: (isNamed ? 1e6 : 0) + (primary ? primary.spanPx : -1),
     })
   }
-  if (items.length === 0) return undefined
+  if (items.length === 0) return settled ? undefined : { problemId: `scale:${frameId}`, kind: 'SCALE_UNSETTLED', frameId, assetId, labels: [], analyzerWhy: solution?.why ?? '' }
   const chosen = items.sort((a, b) => b.rank - a.rank || a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0).slice(0, MAX_LABELS)
   chosen.forEach((it, i) => (it.labelId = `L${i + 1}`))
   return {

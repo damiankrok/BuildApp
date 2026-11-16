@@ -120,3 +120,17 @@ describe('v3.54.2 transport counter-trials (consultLabels with a scripted model)
     expect(out.literal.refused).toMatch(/no submit_review/)
   })
 })
+
+describe('v3.54.2 validator: whole dimensions (READ_DIMENSION)', () => {
+  const D = (over: Partial<ProposedCorrection>): ProposedCorrection => ({ ...P({ operation: 'READ_DIMENSION', targetId: 'overall width, top' }), proposed: { literal: "47'-1\"", unit: 'ft-in' }, span: { x0: 100, y0: 20, x1: 700, y1: 20 }, ...over })
+  it('accepts a whole dimension with its unit and the two ends of its line, in plan pixels', () => {
+    const r = validateProposals(problem, 'rev', [D({ proposalId: 'd1' })], new Set(), consultant, 0.5)
+    expect(r.verdicts[0].status).toBe('ACCEPTED')
+    expect(r.spans[0]).toMatchObject({ literal: "47'-1\"", unit: 'ft-in', from: { x: 200, y: 40 }, to: { x: 1400, y: 40 } })
+  })
+  it('refuses one with no span, no unit, or a literal the analyzer cannot parse; holds a HIGH-uncertainty one', () => {
+    const r = validateProposals(problem, 'rev', [D({ proposalId: 'n1', span: undefined }), D({ proposalId: 'n2', proposed: { literal: '690', unit: 'unknown' } }), D({ proposalId: 'n3', proposed: { literal: 'about 47 ft', unit: 'ft-in' } }), D({ proposalId: 'n4', uncertainty: 'HIGH' })], new Set(), consultant)
+    expect(r.verdicts.map((v) => v.why.split(':')[0])).toEqual(['NO_SPAN', 'UNIT_UNKNOWN', 'UNPARSEABLE', 'HIGH uncertainty'])
+    expect(r.spans).toEqual([])
+  })
+})

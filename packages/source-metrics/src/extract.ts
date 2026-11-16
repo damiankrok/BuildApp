@@ -41,6 +41,8 @@ import type { LatticeCache } from './numeric-lattice.js'
 import { OCR_ENSEMBLE_NAME, OCR_ENSEMBLE_VERSION, ensembleOf } from './ensemble.js'
 import { CONSULTED_READING_NAME, CONSULTED_READING_VERSION, applyConsultedReadings } from './consulted.js'
 import type { ConsultedOutcome, ConsultedReading } from './consulted.js'
+import { CONSULTED_SPANS_NAME, CONSULTED_SPANS_VERSION, admitSpans, snapSpan } from './consulted-spans.js'
+import type { ConsultedSpan, SnappedSpan, SpanOutcome } from './consulted-spans.js'
 import type { EnsembledLattice as LabelLattice } from './ensemble.js'
 import { labelCrop } from './recogniser.js'
 import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.js'
@@ -115,6 +117,8 @@ export type ExtractOptions = {
   consulted?: readonly ConsultedReading[]
   /** v3.54.2 pilot: the metric solver's cross-axis witness rule (`FrameMetricInput.crossAxisWitness`). Absent: off. */
   crossAxisWitness?: boolean
+  /** v3.54.2 pilot: a consultant's whole printed dimensions (`consulted-spans.ts`), measured on the plan's own strokes. Absent: off. */
+  consultedSpans?: readonly ConsultedSpan[]
 }
 
 /** Orthographic sheets carry printed measurements; renders and site plans do not, and reading numbers off them invents scale. */
@@ -408,6 +412,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   let levelMarksAdmitted = 0
   let roomNumbersHeard = 0
   const consultedOutcomes: ConsultedOutcome[] = []
+  const spanOutcomes: Array<SpanOutcome & { frameId: string }> = []
+  const consultedScales = new Map<string, { cmPerPixelX: number; cmPerPixelY: number; members: SnappedSpan[]; why: string; added: boolean }>()
   // v3.45: how many section pitch labels the recogniser read along their slope and the slope admitted.
   let anglesAdmitted = 0
   let sectionHeightsAdmitted = 0
@@ -565,6 +571,35 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
       reread = new Set(ids.map((id, i) => (metric.solution.rereadChainIds.includes(id) || !scaleStands ? i : -1)).filter((i) => i >= 0))
       metricSolutions.push(metric.solution)
+      // v3.54.2 pilot: a consultant's whole dimensions on this plan, each measured on the plan's own strokes; a scale
+      // only where two on different lines agree, and never over a scale the analyzer's own readings settle
+      const mySpans = (options.consultedSpans ?? []).filter((s) => s.frameId === frame.id)
+      if (mySpans.length > 0) {
+        const gray = toGray(raster)
+        const snapped: SnappedSpan[] = []
+        for (const sp of mySpans) {
+          const r = snapSpan(gray, sp)
+          if ('refused' in r) spanOutcomes.push({ proposalId: sp.proposalId, frameId: frame.id, status: 'REFUSED', why: r.refused })
+          else snapped.push(r.snapped)
+        }
+        const admitted = admitSpans(snapped, plausibility ? (cm) => plausibility(cm).plausible : undefined)
+        const settled = metric.solution.confidence === 'STRONG' || metric.solution.confidence === 'SUPPORTED'
+        const local = metric.solution.cmPerPixelX ?? metric.solution.cmPerPixelY
+        for (const sn of snapped) {
+          const member = admitted.scale?.members.includes(sn)
+          const agreesLocal = settled && local !== undefined && Math.abs(Math.log(sn.cmPerPx / local)) < 0.03
+          spanOutcomes.push({ proposalId: sn.proposalId, frameId: frame.id, status: !member ? 'REFUSED' : settled ? (agreesLocal ? 'AGREES_ONLY' : 'REFUSED') : 'ADMITTED', why: !member ? admitted.why : settled ? (agreesLocal ? `confirms the scale the analyzer's own readings settle (${local} cm/px); nothing changes` : `CONTRADICTS_SETTLED: the analyzer's own readings settle ${local} cm/px (${metric.solution.confidence}); a consulted dimension does not overrule them`) : admitted.why, valueCm: sn.valueCm, lengthPx: sn.lengthPx, cmPerPx: sn.cmPerPx })
+        }
+        if (admitted.scale && !settled) {
+          const x = admitted.scale.cmPerPixelX ?? (admitted.scale.cmPerPixelY as number)
+          const y = admitted.scale.cmPerPixelY ?? x
+          const both = admitted.scale.cmPerPixelX !== undefined && admitted.scale.cmPerPixelY !== undefined
+          const i = metricSolutions.length - 1
+          const before = metricSolutions[i]
+          metricSolutions[i] = { ...before, relation: before.relation === 'NO_SCALE' ? 'ADDED' : 'REPLACED', confidence: 'SUPPORTED', cmPerPixelX: x, cmPerPixelY: y, anisotropy: Math.round((Math.max(x, y) / Math.min(x, y)) * 1e6) / 1e6, isotropy: both ? 'MEASURED' : 'ASSUMED', why: `consulted dimensions (${CONSULTED_SPANS_NAME} ${CONSULTED_SPANS_VERSION}): ${admitted.why}, measured on the plan's own strokes; before: ${before.why}` }
+          consultedScales.set(frame.id, { cmPerPixelX: x, cmPerPixelY: y, members: admitted.scale.members, why: admitted.why, added: before.relation === 'NO_SCALE' })
+        }
+      }
       dimensionObservations.push(...metric.observations)
       chainRelations.push(...metric.relations)
     }
@@ -1296,6 +1331,38 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     }
   }
 
+  // --- v3.54.2 pilot: the registration a consulted scale stands for (replacing the frame's own, or the first it has) ---
+  for (const [frameId, c] of consultedScales) {
+    const frame = graph.coordinateFrames.find((f) => f.id === frameId)
+    if (!frame) continue
+    const i = registrations.findIndex((r) => r.frameId === frameId && r.plane === 'PLAN_XZ')
+    const xs = c.members.filter((m) => m.axis === 'X')
+    const ys = c.members.filter((m) => m.axis === 'Y')
+    const origin = i >= 0 ? registrations[i].originPx : { x: Math.min(...(xs.length ? xs.map((m) => m.fromPx) : ys.map((m) => m.atPx))), y: Math.min(...(ys.length ? ys.map((m) => m.fromPx) : xs.map((m) => m.atPx))) }
+    const reg = {
+      id: stableId('registration', 'consulted', { frameId }),
+      frameId,
+      assetId: frame.assetId,
+      variantByteHash: frame.variantByteHash,
+      plane: 'PLAN_XZ' as const,
+      metresPerPixelX: c.cmPerPixelX / 100,
+      metresPerPixelY: c.cmPerPixelY / 100,
+      anisotropy: Math.round((Math.max(c.cmPerPixelX, c.cmPerPixelY) / Math.min(c.cmPerPixelX, c.cmPerPixelY)) * 1e6) / 1e6,
+      originPx: origin,
+      flipX: false,
+      flipY: true,
+      anchors: c.members.map((m) => ({ id: stableId('anchor', 'consulted', { p: m.proposalId }), kind: 'PRINTED_DIMENSION' as const, evidenceIds: [m.proposalId], axis: m.axis, pixelSpan: m.lengthPx, metricSpan: m.valueCm / 100, residualM: Math.round((m.valueCm / 100 - (m.lengthPx * (m.axis === 'X' ? c.cmPerPixelX : c.cmPerPixelY)) / 100) * 1e6) / 1e6, weight: 1 })),
+      rejected: [],
+      residual: { rmsM: 0, maxM: 0, rmsPx: 0 },
+      confidence: 0.6,
+      provenance: { extractor: 'CONSULTANT_VALIDATED' as const, name: CONSULTED_SPANS_NAME, detail: c.why },
+      note: 'v3.54.2 pilot: a consultant read these printed dimensions; the analyzer measured their spans on the plan and admitted the scale only because two on different lines agree',
+    }
+    if (i >= 0) registrations[i] = reg
+    else registrations.push(reg)
+    for (let u = unresolved.length - 1; u >= 0; u -= 1) if (unresolved[u].frameId === frameId && unresolved[u].id === stableId('gap', 'registration', { frameId })) unresolved.splice(u, 1)
+  }
+
   // --- what the publisher wrote down, as against what it drew ---
   if (frames.length > 0) frameDone(frames[frames.length - 1])
   const spec = options.specifications && options.specifications.length > 0 && options.specificationHash ? readSpecifications(options.specifications, options.specificationHash) : undefined
@@ -1349,6 +1416,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ...(sectionHeightsAdmitted > 0 ? [{ name: SECTION_HEIGHTS_NAME, version: SECTION_HEIGHTS_VERSION }] : []),
       ...(options.consulted && options.consulted.length > 0 ? [{ name: CONSULTED_READING_NAME, version: CONSULTED_READING_VERSION }] : []),
       ...(options.crossAxisWitness ? [{ name: 'metrics.cross-axis-witness', version: CONSULTED_READING_VERSION }] : []),
+      ...(options.consultedSpans && options.consultedSpans.length > 0 ? [{ name: CONSULTED_SPANS_NAME, version: CONSULTED_SPANS_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -1363,6 +1431,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
     ...(calloutRings.length > 0 ? { calloutRings: calloutRings.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) } : {}),
     ...(options.consulted && options.consulted.length > 0 ? { consultedReadings: withUnheard(consultedOutcomes, options.consulted) } : {}),
+    ...(options.consultedSpans && options.consultedSpans.length > 0 ? { consultedSpans: [...spanOutcomes, ...options.consultedSpans.filter((s) => !spanOutcomes.some((o) => o.proposalId === s.proposalId)).map((s) => ({ proposalId: s.proposalId, frameId: s.frameId, status: 'REFUSED' as const, why: 'STALE_TARGET: this run solved no plan scale on that frame' }))].sort((a, b) => (a.proposalId < b.proposalId ? -1 : 1)) } : {}),
     ...(recogniser && (heard > 0 || calloutRings.length > 0) ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
     dimensionTopology: dimensionTopology.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
   }
