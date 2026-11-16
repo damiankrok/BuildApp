@@ -122,8 +122,22 @@
    "costUsd": null,
    "latencyMs": null,
    "booksCumulativeUsd": 0.003384
+  },
+  {
+   "at": "2026-11-16T07:06:56.509Z",
+   "phase": "pilot",
+   "house": "projekt-dom-w-toreniach-3-e-me822857280738",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6BeZTu7MVmRQRnsHcb4",
+   "status": "ANSWERED",
+   "inputTokens": 2961,
+   "outputTokens": 1585,
+   "costUsd": 0.001089,
+   "latencyMs": 7119,
+   "booksCumulativeUsd": 0.004473
   }
  ],
- "totalUsd": 0.003384,
- "requests": 8
+ "totalUsd": 0.004473,
+ "requests": 9
 }
