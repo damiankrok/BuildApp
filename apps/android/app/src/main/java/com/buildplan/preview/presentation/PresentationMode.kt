@@ -2,19 +2,28 @@ package com.buildplan.preview.presentation
 
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.render.SurfaceAppearance
+import com.buildplan.preview.scene.BundleMaterial
+import com.buildplan.preview.scene.BundleStyling
 import com.buildplan.preview.scene.GeometryPart
 import com.buildplan.preview.scene.ScenePart
 import com.buildplan.preview.scene.SemanticGroup
 
 /**
- * The three presentations the owner compares on one model.
+ * What a look is for, which is how the Wygląd pane groups them: the house as
+ * a home, a study of its mass, or a technical reading.
+ */
+enum class LookFamily { HOME, STUDY, TECHNICAL }
+
+/**
+ * The presentations (looks) the owner compares on one model.
  *
  * A mode is how the same uploaded building is drawn: material parameters,
  * light, post-processing, and which DERIVED overlays (feature edges, the roof
- * covering) are in the Filament scene. It never changes, hides or re-uploads
- * the compiled geometry, never changes which semantic objects are visible, and
- * never touches the model or the bundle. Switching it is a set of parameter
- * writes and entity adds/removes over buffers uploaded once per model.
+ * covering, the ground sheet) are in the Filament scene. It never changes,
+ * hides or re-uploads the compiled geometry, never changes which semantic
+ * objects are visible, and never touches the model or the bundle. Switching
+ * it is a set of parameter writes, material bindings and entity adds/removes
+ * over buffers uploaded once per model.
  *
  * - [MODEL] is the presentation BuildApp had before this stage, unchanged,
  *   with its own Style menu (Construction, Clay, Architectural).
@@ -23,33 +32,83 @@ import com.buildplan.preview.scene.SemanticGroup
  *   structural feature edges, and the roof covering.
  * - [LINE] is the line study: near-uniform surfaces under a soft light, no
  *   shadows, and every feature edge carrying the form.
+ * - [COZY] is the house as a home: warm plaster, terracotta, timber, a soft
+ *   warm sun and sky fill, gentle occlusion, the roof tiles, a warm ground.
+ * - [DUSK] is the same home palette at dusk: a low warm sun under a cool sky,
+ *   long shadows, and glazing that gives off a warm light.
+ * - [SUNLIGHT] is for a phone read in daylight on the plot: a strong value
+ *   ladder, black contours on every edge, saturated glazing.
+ * - [TECHNICAL] is the dark technical view: graphite ground, cool restrained
+ *   values, light contours on every edge, openings that read as openings.
+ * - [XRAY] is the see-through shell: every surface translucent, every edge
+ *   inked, so interior walls, rooms, stairs and storeys read through it and
+ *   the presentation grid under the house stays in view.
+ * - [BLUEPRINT] is the drawing on the sheet: light lines on navy, surfaces
+ *   nearly the colour of the paper so that only the lines carry the form.
+ *
+ * Looks live in `HouseLooks.kt` (`HouseLooks` for light and ground,
+ * `LookPalette` for the surfaces); MODEL, CLAY and LINE keep theirs here.
  */
-enum class PresentationMode(val label: String, val description: String) {
-    MODEL("MODEL", "Current BuildApp presentation; the Style menu applies"),
-    CLAY("CLAY", "Clay study: neutral values, shadows, structural edges, roof tiles"),
-    LINE("LINE", "Line study: flat surfaces, every architectural edge, no shadows"),
+enum class PresentationMode(val label: String, val description: String, val family: LookFamily) {
+    MODEL("MODEL", "Current BuildApp presentation; the Style menu applies", LookFamily.HOME),
+    CLAY("CLAY", "Clay study: neutral values, shadows, structural edges, roof tiles", LookFamily.STUDY),
+    LINE("LINE", "Line study: flat surfaces, every architectural edge, no shadows", LookFamily.STUDY),
+    COZY("COZY", "Home: warm plaster, terracotta and timber in a soft warm light", LookFamily.HOME),
+    DUSK("DUSK", "The home palette at dusk: low warm sun, cool sky, lit windows", LookFamily.HOME),
+    SUNLIGHT("SUNLIGHT", "Daylight on site: strong value ladder, black contours", LookFamily.STUDY),
+    TECHNICAL("TECHNICAL", "Dark technical view: cool values, light contours, legible openings", LookFamily.TECHNICAL),
+    XRAY("XRAY", "See-through shell: every edge, rooms and storeys read through", LookFamily.TECHNICAL),
+    BLUEPRINT("BLUEPRINT", "Blueprint: light lines on navy, surfaces nearly vanish", LookFamily.TECHNICAL),
     ;
 
     /** The edge tiers this mode inks. */
     val edgeTiers: Set<EdgeTier>
         get() = when (this) {
-            MODEL -> emptySet()
-            CLAY -> setOf(EdgeTier.STRUCTURAL)
-            LINE -> setOf(EdgeTier.STRUCTURAL, EdgeTier.DETAIL)
+            MODEL, DUSK -> emptySet()
+            CLAY, COZY -> setOf(EdgeTier.STRUCTURAL)
+            LINE, SUNLIGHT, TECHNICAL, XRAY, BLUEPRINT -> setOf(EdgeTier.STRUCTURAL, EdgeTier.DETAIL)
         }
 
-    /** Whether the roof covering is drawn. The line study keeps its surfaces plain. */
-    val showsRoofCover: Boolean get() = this == CLAY
+    /** Whether the roof covering is drawn. Only the looks with a lit, opaque roof lay tiles. */
+    val showsRoofCover: Boolean get() = this == CLAY || this == COZY || this == DUSK
 
     /** Whether the Style menu (MODEL's palettes) applies. */
     val usesStyle: Boolean get() = this == MODEL
+
+    /**
+     * Whether every surface is drawn on the translucent path. Only the X-ray
+     * look: its opaque parts are bound to a translucent material instance
+     * over the same buffers; every other look keeps the binding the part was
+     * uploaded with.
+     */
+    val seeThrough: Boolean get() = this == XRAY
 
     /** The look of this mode for a given MODEL style. */
     fun look(style: RenderStyle): PresentationLook = when (this) {
         MODEL -> PresentationLook.model(style)
         CLAY -> PresentationLook.CLAY
         LINE -> PresentationLook.LINE
+        COZY -> HouseLooks.COZY
+        DUSK -> HouseLooks.DUSK
+        SUNLIGHT -> HouseLooks.SUNLIGHT
+        TECHNICAL -> HouseLooks.TECHNICAL
+        XRAY -> HouseLooks.XRAY
+        BLUEPRINT -> HouseLooks.BLUEPRINT
     }
+
+    /**
+     * The appearance of one uploaded primitive in this mode: MODEL reads the
+     * style, the studies read [StudyPalette], the looks read [LookPalette].
+     * The one dispatch the renderer, the evidence raster and the tests share.
+     */
+    fun appearanceOf(style: RenderStyle, part: ScenePart, modelMaterial: BundleMaterial?, styling: BundleStyling?): SurfaceAppearance = when (this) {
+        MODEL -> style.appearanceOf(part, modelMaterial, styling)
+        CLAY, LINE -> StudyPalette.appearanceOf(this, part)
+        else -> LookPalette.appearanceOf(this, part)
+    }
+
+    /** The roof covering's appearance in this mode (drawn only where [showsRoofCover]). */
+    fun coverAppearance(): SurfaceAppearance = if (this == COZY || this == DUSK) LookPalette.coverAppearance(this) else StudyPalette.coverAppearance()
 }
 
 /** Screen-space ambient occlusion settings; `null` on a look means off. */
@@ -91,8 +150,48 @@ class PresentationLook(
     val surfaceDepthOffset: Float,
     /** Whether glazing casts and receives shadows. MODEL keeps what it always did. */
     val glassShadows: Boolean,
+    /** The sun's colour, linear RGB. Every look before the house looks keeps the viewer's original warm white. */
+    val sunColor: FloatArray = SUN_COLOR,
+    /** The sun's direction of travel (towards the ground), not normalised. */
+    val sunDirection: FloatArray = SUN_DIRECTION,
+    /**
+     * A per-channel tint of the sky fill (the spherical-harmonic ambient):
+     * warm for a home in the afternoon, cool for dusk. Neutral leaves the
+     * harmonics exactly as the viewer always had them.
+     */
+    val ambientTint: FloatArray = NEUTRAL_TINT,
+    /**
+     * The colour of the ground sheet under the house, linear RGB, or null for
+     * no sheet. The sheet is presentation, like the grid: it is derived from
+     * the model's bounds, has no object id, answers no pick and catches the
+     * sun's shadow so the house stands on something.
+     */
+    val ground: FloatArray? = null,
 ) {
+    /**
+     * The ambient light's nine RGB spherical-harmonic coefficients, as
+     * `IndirectLight.Builder.irradiance(3, ...)` takes them: the viewer's calm
+     * sky (a constant and a brighter-from-above vertical term), tinted.
+     */
+    fun harmonics(): FloatArray {
+        val sh = FloatArray(27)
+        for (c in 0 until 3) {
+            sh[c] = BASE_SKY[c] * ambientTint[c]
+            sh[3 + c] = BASE_SKY_FROM_ABOVE[c] * ambientTint[c]
+        }
+        return sh
+    }
+
     companion object {
+        /** The sun every look had before the house looks: a warm white from the front left. */
+        val SUN_COLOR = floatArrayOf(1.0f, 0.96f, 0.90f)
+        val SUN_DIRECTION = floatArrayOf(0.45f, -0.82f, -0.35f)
+        val NEUTRAL_TINT = floatArrayOf(1f, 1f, 1f)
+
+        /** The sky fill's constant term, slightly cool, and its vertical term: brighter from above. */
+        private val BASE_SKY = floatArrayOf(0.55f, 0.58f, 0.64f)
+        private val BASE_SKY_FROM_ABOVE = floatArrayOf(0.20f, 0.21f, 0.24f)
+
         /** The ground and backdrop of MODEL, exactly the values the viewer had before modes existed. */
         val MODEL_BACKGROUND = floatArrayOf(
             RenderStyle.srgbToLinear(0x12 / 255f),

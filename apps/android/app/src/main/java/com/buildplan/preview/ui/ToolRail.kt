@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
 import com.buildplan.preview.camera.ViewPreset
+import com.buildplan.preview.presentation.LookFamily
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.ModelScene
@@ -146,7 +147,7 @@ fun ToolRail(
             ) {
                 RailButton(
                     icon = ShellIcons.look,
-                    label = if (state.presentation == PresentationMode.MODEL) stringResource(R.string.tool_look) else stringResource(state.presentation.labelRes()),
+                    label = stringResource(state.presentation.railLabelRes()),
                     state = stringResource(R.string.tool_state_look, stringResource(state.presentation.labelRes())),
                     pressed = open == Tool.LOOK,
                     onClick = { onOpen(if (open == Tool.LOOK) null else Tool.LOOK) },
@@ -222,15 +223,23 @@ private fun RailButton(icon: ImageVector, label: String, state: String?, pressed
     }
 }
 
+/**
+ * The looks, under the three things a look is for (the house as a home, a
+ * study of its mass, a technical reading), each a mark, its name and one line
+ * on what it shows. MODEL's own lighting styles follow when MODEL is chosen.
+ */
 @Composable
 private fun LookPane(state: ViewerState, onPresentation: (PresentationMode) -> Unit, onStyle: (RenderStyle) -> Unit) {
-    for (mode in PresentationMode.entries) {
-        PanelOption(
-            label = stringResource(mode.labelRes()),
-            supporting = stringResource(mode.descriptionRes()),
-            selected = mode == state.presentation,
-            onClick = { onPresentation(mode) },
-        )
+    for (family in LookFamily.entries) {
+        PanelGroupLabel(stringResource(family.labelRes()))
+        for (mode in PresentationMode.entries.filter { it.family == family }) {
+            PanelOption(
+                label = stringResource(mode.labelRes()),
+                supporting = stringResource(mode.descriptionRes()),
+                selected = mode == state.presentation,
+                onClick = { onPresentation(mode) },
+            )
+        }
     }
     if (state.presentation.usesStyle) {
         PanelRule()

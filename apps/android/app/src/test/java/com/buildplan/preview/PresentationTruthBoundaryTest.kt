@@ -2,7 +2,6 @@ package com.buildplan.preview
 
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.presentation.ScenePresentation
-import com.buildplan.preview.presentation.StudyPalette
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.BundleParser
 import com.buildplan.preview.scene.BundleResult
@@ -61,7 +60,7 @@ class PresentationTruthBoundaryTest {
                 val visible = state.visibleObjectIds(scene)
                 presentation.edges.drawn(visible, mode.edgeTiers, state.selectedObjectId)
                 for (o in scene.objects) for (p in o.parts) {
-                    if (mode.usesStyle) style.appearanceOf(p, p.materialId?.let { scene.materials[it] }, scene.styling) else StudyPalette.appearanceOf(mode, p)
+                    mode.appearanceOf(style, p, p.materialId?.let { scene.materials[it] }, scene.styling)
                 }
             }
 

@@ -3,6 +3,7 @@ package com.buildplan.preview.ui
 import androidx.annotation.StringRes
 import com.buildplan.preview.R
 import com.buildplan.preview.camera.ViewPreset
+import com.buildplan.preview.presentation.LookFamily
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.progress.ConstructionStageKey
 import com.buildplan.preview.render.RenderStyle
@@ -54,6 +55,12 @@ fun PresentationMode.labelRes(): Int = when (this) {
     PresentationMode.MODEL -> R.string.look_model
     PresentationMode.CLAY -> R.string.look_clay
     PresentationMode.LINE -> R.string.look_line
+    PresentationMode.COZY -> R.string.look_cozy
+    PresentationMode.DUSK -> R.string.look_dusk
+    PresentationMode.SUNLIGHT -> R.string.look_sunlight
+    PresentationMode.TECHNICAL -> R.string.look_technical
+    PresentationMode.XRAY -> R.string.look_xray
+    PresentationMode.BLUEPRINT -> R.string.look_blueprint
 }
 
 @StringRes
@@ -61,6 +68,37 @@ fun PresentationMode.descriptionRes(): Int = when (this) {
     PresentationMode.MODEL -> R.string.look_model_description
     PresentationMode.CLAY -> R.string.look_clay_description
     PresentationMode.LINE -> R.string.look_line_description
+    PresentationMode.COZY -> R.string.look_cozy_description
+    PresentationMode.DUSK -> R.string.look_dusk_description
+    PresentationMode.SUNLIGHT -> R.string.look_sunlight_description
+    PresentationMode.TECHNICAL -> R.string.look_technical_description
+    PresentationMode.XRAY -> R.string.look_xray_description
+    PresentationMode.BLUEPRINT -> R.string.look_blueprint_description
+}
+
+/**
+ * The look in the one word that fits the rail's 64 dp button at font scale
+ * 1.3; MODEL, the default, leaves the button its own name. The full name is
+ * read in the pane and spoken in the button's state.
+ */
+@StringRes
+fun PresentationMode.railLabelRes(): Int = when (this) {
+    PresentationMode.MODEL -> R.string.tool_look
+    PresentationMode.CLAY -> R.string.look_clay
+    PresentationMode.LINE -> R.string.look_line
+    PresentationMode.COZY -> R.string.look_rail_cozy
+    PresentationMode.DUSK -> R.string.look_dusk
+    PresentationMode.SUNLIGHT -> R.string.look_rail_sunlight
+    PresentationMode.TECHNICAL -> R.string.look_rail_technical
+    PresentationMode.XRAY -> R.string.look_rail_xray
+    PresentationMode.BLUEPRINT -> R.string.look_rail_blueprint
+}
+
+@StringRes
+fun LookFamily.labelRes(): Int = when (this) {
+    LookFamily.HOME -> R.string.look_group_home
+    LookFamily.STUDY -> R.string.look_group_study
+    LookFamily.TECHNICAL -> R.string.look_group_technical
 }
 
 @StringRes

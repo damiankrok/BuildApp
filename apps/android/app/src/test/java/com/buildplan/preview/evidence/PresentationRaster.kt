@@ -4,13 +4,15 @@ import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.Projection
 import com.buildplan.preview.math.Vec3
+import com.buildplan.preview.presentation.GroundFootprint
+import com.buildplan.preview.presentation.PresentationLook
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.presentation.ScenePresentation
-import com.buildplan.preview.presentation.StudyPalette
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.render.SurfaceAppearance
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.TangentFrames
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.floor
 import kotlin.math.max
@@ -22,15 +24,21 @@ import kotlin.math.tan
 /**
  * A small software rasteriser for EVIDENCE ONLY: it draws the exact buffers
  * the Filament renderer uploads — the compiled surfaces, the derived feature
- * edges, the derived roof covering — with the same camera arithmetic
- * (`OrbitCamera`), the same visibility and edge rules, and the same material
- * values per mode, so a reviewer without a GPU can see what each mode adds.
+ * edges, the derived roof covering, the ground sheet — with the same camera
+ * arithmetic (`OrbitCamera`), the same visibility and edge rules, and the same
+ * material values per mode (`PresentationMode.appearanceOf`), so a reviewer
+ * without a GPU can see what each mode adds.
  *
- * It is NOT Filament: plain Lambert light, no shadows, no ambient occlusion,
- * no tone mapping curve, no MSAA/FXAA (4× supersampling instead). What it can
- * show is geometry: which lines are inked, where tiles are laid and dropped,
- * that glass is a sheet and not a slab. Light and material quality can only
- * be judged on the device.
+ * It is NOT Filament. Light is the look's own numbers through the viewer's
+ * fixed exposure — Lambert sun (strength, colour, direction) plus the tinted
+ * sky fill's constant and vertical terms — then a filmic curve standing in
+ * for Filament's default tone mapper; no shadows, no ambient occlusion, no
+ * specular, no MSAA/FXAA (supersampling instead). Draw order follows
+ * Filament's passes: opaque surfaces, then translucent surfaces far to near,
+ * then feature edges, then the grid. What it shows reliably is geometry and
+ * the palettes' relations: which lines are inked, where tiles are laid, that
+ * glass is a sheet, how values and hues sit against each other. Light and
+ * material quality can only be judged on the device.
  */
 class PresentationRaster(private val width: Int, private val height: Int, private val supersample: Int = 3) {
 
@@ -39,15 +47,21 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
     private val color = FloatArray(w * h * 3)
     private val depth = FloatArray(w * h)
 
-    /** Lambert terms per mode: ambient and sun, in display units. */
-    private fun lightOf(mode: PresentationMode): Pair<Float, Float> = when (mode) {
-        PresentationMode.MODEL -> 0.42f to 0.62f
-        PresentationMode.CLAY -> 0.48f to 0.62f
-        PresentationMode.LINE -> 0.86f to 0.18f
-    }
+    /** A look's light in display units: the sky fill's two terms and the sun, per channel. */
+    private class Light(val skyConstant: FloatArray, val skyFromAbove: FloatArray, val sun: FloatArray, val towardsSun: Vec3)
 
-    /** The key light's direction of travel, as the renderer's sun. */
-    private val sunDirection = Vec3(0.45, -0.82, -0.35).normalized()
+    private fun lightOf(look: PresentationLook): Light {
+        val sh = look.harmonics()
+        val sky = look.ambientIntensity * EXPOSURE
+        val sun = look.sunLux * EXPOSURE / PI.toFloat()
+        val d = look.sunDirection
+        return Light(
+            skyConstant = FloatArray(3) { sh[it] * sky },
+            skyFromAbove = FloatArray(3) { sh[3 + it] * sky },
+            sun = FloatArray(3) { look.sunColor[it] * sun },
+            towardsSun = Vec3(-d[0].toDouble(), -d[1].toDouble(), -d[2].toDouble()).normalized(),
+        )
+    }
 
     fun render(
         scene: ModelScene,
@@ -65,24 +79,25 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
             depth[i] = Float.POSITIVE_INFINITY
         }
         val view = ViewTransform(camera, pose, w.toDouble(), h.toDouble())
-        val (ambient, sun) = lightOf(mode)
+        val light = lightOf(look)
+        val footprint = GroundFootprint.of(scene.bounds)
 
-        // Opaque surfaces, then the covering.
+        // The opaque pass: surfaces, the covering, the ground sheet.
         val translucent = ArrayList<Pair<FloatArray, SurfaceAppearance>>()
         for (obj in scene.objects) {
             if (obj.id !in visible) continue
             for (part in obj.parts) {
-                val a = if (mode.usesStyle) style.appearanceOf(part, part.materialId?.let { scene.materials[it] }, scene.styling) else StudyPalette.appearanceOf(mode, part)
+                val a = mode.appearanceOf(style, part, part.materialId?.let { scene.materials[it] }, scene.styling)
                 val tris = obj.positions.copyOfRange(part.first * 3, (part.first + part.count) * 3)
-                if (part.part.isTranslucent) {
+                if (part.part.isTranslucent || mode.seeThrough) {
                     translucent.add(tris to a)
                     continue
                 }
-                for (t in 0 until tris.size / 9) triangle(view, tris, t * 9, a, ambient, sun, blend = false, depthBias = look.surfaceDepthOffset > 0f)
+                for (t in 0 until tris.size / 9) triangle(view, tris, t * 9, a, light, blend = false, depthBias = look.surfaceDepthOffset > 0f)
             }
             if (mode.showsRoofCover) {
                 presentation.coverByObject[obj.id]?.let { cover ->
-                    val a = StudyPalette.coverAppearance()
+                    val a = mode.coverAppearance()
                     val tri = FloatArray(9)
                     for (t in 0 until cover.indices.size / 3) {
                         for (v in 0 until 3) {
@@ -93,16 +108,23 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
                         val i0 = cover.indices[t * 3]
                         val q = floatArrayOf(cover.tangents[i0 * 4], cover.tangents[i0 * 4 + 1], cover.tangents[i0 * 4 + 2], cover.tangents[i0 * 4 + 3])
                         val n = TangentFrames.rotate(q, Vec3(0.0, 0.0, 1.0))
-                        triangle(view, tri, 0, a, ambient, sun, blend = false, depthBias = true, normal = n)
+                        triangle(view, tri, 0, a, light, blend = false, depthBias = true, normal = n)
                     }
                 }
             }
         }
+        look.ground?.let { ground -> drawGround(view, footprint, ground, light) }
 
-        // Grid, depth tested, never writing depth.
-        drawGrid(view, scene, look.grid)
+        // The translucent pass, in Filament's priority order: surfaces far to near, then the
+        // feature edges, then the grid. Nothing translucent writes depth.
+        val glassTris = ArrayList<Triple<Double, FloatArray, SurfaceAppearance>>()
+        for ((tris, a) in translucent) for (t in 0 until tris.size / 9) {
+            val c = Vec3((tris[t * 9] + tris[t * 9 + 3] + tris[t * 9 + 6]) / 3.0, (tris[t * 9 + 1] + tris[t * 9 + 4] + tris[t * 9 + 7]) / 3.0, (tris[t * 9 + 2] + tris[t * 9 + 5] + tris[t * 9 + 8]) / 3.0)
+            glassTris.add(Triple(view.depthOf(c), tris.copyOfRange(t * 9, t * 9 + 9), a))
+        }
+        glassTris.sortByDescending { it.first }
+        for ((_, tri, a) in glassTris) triangle(view, tri, 0, a, light, blend = true, depthBias = false)
 
-        // Lines, as the line material: depth tested against the surfaces, blended, no depth write.
         val tiers = mode.edgeTiers
         if (tiers.isNotEmpty()) {
             val drawn = presentation.edges.drawn(visible, tiers, null)
@@ -110,30 +132,27 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
             for (p in arrays) for (s in 0 until p.size / 6) line(view, p, s * 6, look.edgeInk)
         }
 
-        // Translucent parts last, far to near, blended as Filament's transparent path does.
-        val glassTris = ArrayList<Triple<Double, FloatArray, SurfaceAppearance>>()
-        for ((tris, a) in translucent) for (t in 0 until tris.size / 9) {
-            val c = Vec3((tris[t * 9] + tris[t * 9 + 3] + tris[t * 9 + 6]) / 3.0, (tris[t * 9 + 1] + tris[t * 9 + 4] + tris[t * 9 + 7]) / 3.0, (tris[t * 9 + 2] + tris[t * 9 + 5] + tris[t * 9 + 8]) / 3.0)
-            glassTris.add(Triple(view.depthOf(c), tris.copyOfRange(t * 9, t * 9 + 9), a))
-        }
-        glassTris.sortByDescending { it.first }
-        for ((_, tri, a) in glassTris) triangle(view, tri, 0, a, ambient, sun, blend = true, depthBias = false)
+        drawGrid(view, footprint, look.grid)
 
         return resolve()
     }
 
-    private fun drawGrid(view: ViewTransform, scene: ModelScene, grid: FloatArray) {
-        val b = scene.bounds
-        val pad = max(2.0, b.radius * 0.35)
-        val minX = floor(b.min.x - pad); val maxX = floor(b.max.x + pad) + 1
-        val minZ = floor(b.min.z - pad); val maxZ = floor(b.max.z + pad) + 1
-        val y = (b.min.y - 0.01).toFloat()
+    private fun drawGround(view: ViewTransform, f: GroundFootprint, rgb: FloatArray, light: Light) {
+        val y = f.sheetY.toFloat()
+        val x0 = f.minX.toFloat(); val x1 = f.maxX.toFloat(); val z0 = f.minZ.toFloat(); val z1 = f.maxZ.toFloat()
+        val sheet = SurfaceAppearance(rgb[0], rgb[1], rgb[2], 1f, roughness = 1f, metallic = 0f)
+        // The renderer's two triangles, wound to face up; pushed behind the grid like its polygon offset.
+        triangle(view, floatArrayOf(x0, y, z0, x0, y, z1, x1, y, z0), 0, sheet, light, blend = false, depthBias = true, bias = 1.002f)
+        triangle(view, floatArrayOf(x1, y, z0, x0, y, z1, x1, y, z1), 0, sheet, light, blend = false, depthBias = true, bias = 1.002f)
+    }
+
+    private fun drawGrid(view: ViewTransform, f: GroundFootprint, grid: FloatArray) {
+        val y = f.gridY.toFloat()
         // As the line material receives it: blended source-over, the colour taken as given.
-        val ink = grid
-        var x = minX
-        while (x <= maxX) { line(view, floatArrayOf(x.toFloat(), y, minZ.toFloat(), x.toFloat(), y, maxZ.toFloat()), 0, ink, thin = true); x += 1.0 }
-        var z = minZ
-        while (z <= maxZ) { line(view, floatArrayOf(minX.toFloat(), y, z.toFloat(), maxX.toFloat(), y, z.toFloat()), 0, ink, thin = true); z += 1.0 }
+        var x = f.minX
+        while (x <= f.maxX) { line(view, floatArrayOf(x.toFloat(), y, f.minZ.toFloat(), x.toFloat(), y, f.maxZ.toFloat()), 0, grid, thin = true); x += 1.0 }
+        var z = f.minZ
+        while (z <= f.maxZ) { line(view, floatArrayOf(f.minX.toFloat(), y, z.toFloat(), f.maxX.toFloat(), y, z.toFloat()), 0, grid, thin = true); z += 1.0 }
     }
 
     private fun triangle(
@@ -141,11 +160,11 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
         p: FloatArray,
         o: Int,
         a: SurfaceAppearance,
-        ambient: Float,
-        sun: Float,
+        light: Light,
         blend: Boolean,
         depthBias: Boolean,
         normal: Vec3? = null,
+        bias: Float = 1.0005f,
     ) {
         val va = Vec3(p[o].toDouble(), p[o + 1].toDouble(), p[o + 2].toDouble())
         val vb = Vec3(p[o + 3].toDouble(), p[o + 4].toDouble(), p[o + 5].toDouble())
@@ -155,8 +174,12 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
         val toEye = view.toEye(va)
         if (!blend && (n dot toEye) <= 0.0) return
         val facing = if ((n dot toEye) < 0.0) n * -1.0 else n
-        val diffuse = max(0.0, facing dot (sunDirection * -1.0)).toFloat()
-        val k = ambient + sun * diffuse
+        val diffuse = max(0.0, facing dot light.towardsSun).toFloat()
+        val up = facing.y.toFloat()
+        val k = FloatArray(3) { c -> max(0f, light.skyConstant[c] + light.skyFromAbove[c] * up) + light.sun[c] * diffuse }
+        // Filament adds the emissive after light, scaled by the surface's alpha.
+        val glow = floatArrayOf(a.emissiveRed * a.alpha, a.emissiveGreen * a.alpha, a.emissiveBlue * a.alpha)
+        val src = floatArrayOf(a.red * k[0] + glow[0], a.green * k[1] + glow[1], a.blue * k[2] + glow[2])
         val sa = view.project(va) ?: return
         val sb = view.project(vb) ?: return
         val sc = view.project(vc) ?: return
@@ -166,7 +189,7 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
         val maxY = min(h - 1, floor(max(sa[1], max(sb[1], sc[1]))).toInt() + 1)
         val area = edge(sa, sb, sc[0], sc[1])
         if (abs(area) < 1e-12) return
-        val bias = if (depthBias) 1.0005f else 1f
+        val zBias = if (depthBias) bias else 1f
         for (y in minY..maxY) for (x in minX..maxX) {
             val px = x + 0.5; val py = y + 0.5
             val w0 = edge(sb, sc, px, py) / area
@@ -174,17 +197,17 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
             val w2 = edge(sa, sb, px, py) / area
             if (w0 < 0 || w1 < 0 || w2 < 0) continue
             // Depth is linear in screen space only as its reciprocal under a perspective projection.
-            val z = (if (view.perspective) 1.0 / (w0 / sa[2] + w1 / sb[2] + w2 / sc[2]) else w0 * sa[2] + w1 * sb[2] + w2 * sc[2]).toFloat() * bias
+            val z = (if (view.perspective) 1.0 / (w0 / sa[2] + w1 / sb[2] + w2 / sc[2]) else w0 * sa[2] + w1 * sb[2] + w2 * sc[2]).toFloat() * zBias
             val i = y * w + x
             if (z >= depth[i]) continue
             if (blend) {
                 // Premultiplied source-over: rgb + (1 - alpha) * destination.
-                color[i * 3] = a.red * k + (1 - a.alpha) * color[i * 3]
-                color[i * 3 + 1] = a.green * k + (1 - a.alpha) * color[i * 3 + 1]
-                color[i * 3 + 2] = a.blue * k + (1 - a.alpha) * color[i * 3 + 2]
+                color[i * 3] = src[0] + (1 - a.alpha) * color[i * 3]
+                color[i * 3 + 1] = src[1] + (1 - a.alpha) * color[i * 3 + 1]
+                color[i * 3 + 2] = src[2] + (1 - a.alpha) * color[i * 3 + 2]
             } else {
                 depth[i] = z
-                color[i * 3] = a.red * k; color[i * 3 + 1] = a.green * k; color[i * 3 + 2] = a.blue * k
+                color[i * 3] = src[0]; color[i * 3 + 1] = src[1]; color[i * 3 + 2] = src[2]
             }
         }
     }
@@ -227,8 +250,13 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
         return img
     }
 
+    /**
+     * The filmic curve (Narkowicz's fit of ACES) standing in for Filament's
+     * default tone mapper, then sRGB.
+     */
     private fun toSrgb(linear: Float): Int {
-        val c = linear.coerceIn(0f, 1f)
+        val x = max(0f, linear)
+        val c = ((x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f)).coerceIn(0f, 1f)
         val s = if (c <= 0.0031308f) c * 12.92f else 1.055f * c.toDouble().pow(1.0 / 2.4).toFloat() - 0.055f
         return (s * 255f).roundToInt().coerceIn(0, 255)
     }
@@ -266,6 +294,15 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
 
     init {
         require(width > 0 && height > 0 && supersample > 0)
+    }
+
+    private companion object {
+        /**
+         * The viewer's fixed camera exposure (f/16, 1/125 s, ISO 100) as
+         * Filament applies it to light: 1 / (1.2 * 2^EV100), where
+         * 2^EV100 = N² / t = 16² × 125.
+         */
+        val EXPOSURE: Float = (1.0 / (1.2 * 16.0 * 16.0 * 125.0)).toFloat()
     }
 }
 

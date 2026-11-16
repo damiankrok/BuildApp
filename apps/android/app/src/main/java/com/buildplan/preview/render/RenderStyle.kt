@@ -21,8 +21,19 @@ data class SurfaceAppearance(
     val roughness: Float,
     val metallic: Float,
     val reflectance: Float = 0.35f,
+    /**
+     * Light the surface gives off itself, linear RGB, added after lighting
+     * (Filament scales it by the surface's alpha). Zero for every surface
+     * except a look's lit glazing; the selection highlight is written over
+     * it and gives it back on deselection.
+     */
+    val emissiveRed: Float = 0f,
+    val emissiveGreen: Float = 0f,
+    val emissiveBlue: Float = 0f,
 ) {
     val isTranslucent: Boolean get() = alpha < 0.999f
+
+    val isEmissive: Boolean get() = emissiveRed > 0f || emissiveGreen > 0f || emissiveBlue > 0f
 }
 
 /**

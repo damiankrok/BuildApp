@@ -116,6 +116,49 @@ class PresentationEvidenceTest {
     }
 
     /**
+     * The looks side by side, written only on request (the same variables as
+     * above): for every scene, one sheet with every mode as a column and three
+     * rows (three-quarter, rear three-quarter, three-quarter without the
+     * roof), a large three-quarter per mode, and the X-ray look through the
+     * layers. `looks-README.txt` beside them names rows, columns and files.
+     */
+    @Test
+    fun `write the look previews`() {
+        val dir = outDir
+        assumeTrue("set BUILDAPP_PRESENTATION_EVIDENCE_DIR to write evidence", dir != null)
+        if (dir == null) return
+        dir.mkdirs()
+        val modes = PresentationMode.entries
+        // Three-quarter, rear three-quarter, and the three-quarter without the roof.
+        val rows = listOf(views[0], views[1], layerViews[1])
+        val readme = StringBuilder("Look previews (PresentationRaster: an evidence rasteriser, not Filament — no shadows, no occlusion, no specular).\n\n")
+        readme.append("<scene>-looks.png: rows ${rows.joinToString(" / ") { it.name }}; columns ${modes.joinToString(" | ") { it.label }}\n")
+        readme.append("<scene>-look-<mode>.png: one three-quarter view per mode, 1100x800\n")
+        readme.append("<scene>-xray-layers.png: XRAY in ${layerViews.joinToString(" / ") { it.name }}\n\n")
+        for ((key, scene) in scenes()) {
+            val presentation = ScenePresentation.of(scene)
+            val camera = OrbitCamera(scene.bounds)
+            val cells = rows.map { view ->
+                val visible = Visibility.visibleObjectIds(scene, view.visibility) intersect scene.renderableObjectIds
+                modes.map { mode -> PresentationRaster(TILE_W, TILE_H).render(scene, presentation, mode, visible, camera, view.pose(camera, scene)) }
+            }
+            write(sheet(rows.map { it.name }, modes.map { it.label }, cells), File(dir, "$key-looks.png"))
+            val all = Visibility.visibleObjectIds(scene, VisibilityMode.ALL) intersect scene.renderableObjectIds
+            val pose = views[0].pose(camera, scene)
+            for (mode in modes) {
+                write(PresentationRaster(1100, 800).render(scene, presentation, mode, all, camera, pose), File(dir, "$key-look-${mode.label.lowercase()}.png"))
+            }
+            val xray = listOf(layerViews.map { view ->
+                val visible = Visibility.visibleObjectIds(scene, view.visibility) intersect scene.renderableObjectIds
+                PresentationRaster(TILE_W, TILE_H).render(scene, presentation, PresentationMode.XRAY, visible, camera, view.pose(camera, scene))
+            })
+            write(sheet(listOf("XRAY"), layerViews.map { it.name }, xray), File(dir, "$key-xray-layers.png"))
+            readme.append("$key: ${scene.bundle.contentHash}\n")
+        }
+        File(dir, "looks-README.txt").writeText(readme.toString())
+    }
+
+    /**
      * Cells laid out row by row with a thin gutter; no text (the unit-test
      * classpath has no font rasteriser). The README beside the sheets names
      * the rows and columns.

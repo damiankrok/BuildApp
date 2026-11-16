@@ -1,6 +1,7 @@
 package com.buildplan.preview
 
 import com.buildplan.preview.camera.ViewPreset
+import com.buildplan.preview.presentation.LookFamily
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.VisibilityMode
@@ -10,6 +11,7 @@ import com.buildplan.preview.ui.Task
 import com.buildplan.preview.ui.descriptionRes
 import com.buildplan.preview.ui.evidenceStatusRes
 import com.buildplan.preview.ui.labelRes
+import com.buildplan.preview.ui.railLabelRes
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -84,7 +86,29 @@ class ProductShellTest {
         for (id in ids) assertTrue("resource $id is empty", string(id).isNotBlank())
         // Distinct names: two views called the same would be two buttons nobody can tell apart.
         assertEquals(ViewPreset.entries.size, ViewPreset.entries.map { string(it.labelRes()) }.toSet().size)
-        assertEquals(listOf("Model", "Makieta", "Kreska"), PresentationMode.entries.map { string(it.labelRes()) })
+        // The house looks joined the three presentations (looks proposal): every look has its own name.
+        assertEquals(
+            listOf("Model", "Makieta", "Kreska", "Przytulny", "Wieczór", "W słońcu", "Techniczny", "Prześwietlenie", "Światłokopia"),
+            PresentationMode.entries.map { string(it.labelRes()) },
+        )
+        for (family in LookFamily.entries) assertTrue(string(family.labelRes()).isNotBlank())
+        assertTrue("every look family has a look", LookFamily.entries.all { f -> PresentationMode.entries.any { it.family == f } })
+    }
+
+    @Test
+    fun `the rail names a look in one short word, and the pane in its full name`() {
+        assertEquals("the default look leaves the button its own name", string(R.string.tool_look), string(PresentationMode.MODEL.railLabelRes()))
+        for (mode in PresentationMode.entries) {
+            val rail = string(mode.railLabelRes())
+            // One word of at most eight letters: what fits the 64 dp rail button at font scale 1.3.
+            assertFalse("$mode: '$rail' is more than one word", rail.contains(' '))
+            assertTrue("$mode: '$rail' is too long for the rail", rail.length <= 8)
+        }
+        val full = PresentationMode.entries.map { string(it.labelRes()) }
+        assertEquals("two looks with one name are two rows nobody can tell apart", full.size, full.toSet().size)
+        val rails = PresentationMode.entries.filter { it != PresentationMode.MODEL }.map { string(it.railLabelRes()) }
+        assertEquals(rails.size, rails.toSet().size)
+        for (mode in PresentationMode.entries) assertTrue("$mode: '${string(mode.descriptionRes())}' does not fit two lines of the pane", string(mode.descriptionRes()).length <= 56)
     }
 
     @Test
