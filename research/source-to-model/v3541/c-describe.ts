@@ -71,6 +71,8 @@ async function main(): Promise<number> {
     maxUsd,
     live,
     secret: key,
+    // 16 originals at most, plus at most 2 crops of each plan and elevation among them (PROTOCOL_V3541 §4)
+    descriptionAllowance: { pictures: 40, totalBytes: 16_000_000 },
     variant: (reader, ctx) => withCrops(reader, { cache: ctx.cache, log: (e) => appendFileSync(join(ctx.out, 'crops.jsonl'), `${JSON.stringify(e)}\n`) }),
   })
   return outcomes.some((o) => o.outcome === 'BUDGET_STOP') ? 4 : 0

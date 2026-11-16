@@ -43,13 +43,16 @@ export async function describeHouses(input: {
   live: StructuredVision
   /** Whatever must never appear in a file or a line of output (the key); replaced by "[key]". */
   secret?: string
+  /** C sends crops beside the originals: its own, larger allowance of pictures and bytes per description (stated, not silent). */
+  descriptionAllowance?: { pictures: number; totalBytes: number }
   /** A strategy's change to the request (C: crops), wrapped around the recorder so the recorded answer is the one asked. */
   variant?: (reader: StructuredVision, ctx: { cache: SourceByteCache; out: string }) => { reader: StructuredVision; onPictures?: (sent: Array<{ number: number; assetId: string; kind: string; sourceUrl: string | null; widthPx: number; heightPx: number }>) => void }
   log?: (line: string) => void
 }): Promise<HouseOutcome[]> {
   const scrub = (text: string): string => (input.secret ? text.split(input.secret).join('[key]') : text)
   const log = input.log ?? ((line: string): void => console.log(line))
-  const limits = { ...DEFAULT_SPEND_LIMITS, maxUsd: input.maxUsd, maxRequestsPerDay: 200, maxDescriptionsPerDay: 80 }
+  const allowance = input.descriptionAllowance
+  const limits = { ...DEFAULT_SPEND_LIMITS, maxUsd: input.maxUsd, maxRequestsPerDay: 200, maxDescriptionsPerDay: 80, ...(allowance ? { maxPictures: { ...DEFAULT_SPEND_LIMITS.maxPictures, HOUSE_DESCRIPTION: allowance.pictures }, maxTotalPictureBytes: allowance.totalBytes } : {}) }
   const books = openSpendLedger({ dir: input.booksDir, limits })
   const guarded = spendGuardedStructuredVision(input.live, books, { limits, prices: HOUSE_READER_PRICES })
   const spent = (): number => {
