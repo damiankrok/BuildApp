@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { PNG } from 'pngjs'
 import { fileByteCache } from '@buildapp/source-package'
-import type { SourcePackage } from '@buildapp/source-package'
+import type { SourceByteCache, SourcePackage } from '@buildapp/source-package'
 import type { StructuredVision } from '@buildapp/source-vision'
 import { DescribedRefusal, identityOf, runDescribedAnalysis, summaryOf } from '@buildapp/analysis-service'
 import { serializeModel } from '@buildapp/model'
@@ -43,6 +43,8 @@ export async function describeHouses(input: {
   live: StructuredVision
   /** Whatever must never appear in a file or a line of output (the key); replaced by "[key]". */
   secret?: string
+  /** A strategy's change to the request (C: crops), wrapped around the recorder so the recorded answer is the one asked. */
+  variant?: (reader: StructuredVision, ctx: { cache: SourceByteCache; out: string }) => { reader: StructuredVision; onPictures?: (sent: Array<{ number: number; assetId: string; kind: string; sourceUrl: string | null; widthPx: number; heightPx: number }>) => void }
   log?: (line: string) => void
 }): Promise<HouseOutcome[]> {
   const scrub = (text: string): string => (input.secret ? text.split(input.secret).join('[key]') : text)
@@ -66,10 +68,13 @@ export async function describeHouses(input: {
       continue
     }
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as SourcePackage
-    const reader = recording(guarded, { books, out, phase: input.phase, house, ledgerPath: input.ledgerPath, ...(input.secret ? { secret: input.secret } : {}) })
+    const recorded = recording(guarded, { books, out, phase: input.phase, house, ledgerPath: input.ledgerPath, ...(input.secret ? { secret: input.secret } : {}) })
+    const cache = fileByteCache(cacheDir)
+    const variant = input.variant ? input.variant(recorded, { cache, out }) : null
+    const reader = variant ? variant.reader : recorded
     const t0 = Date.now()
     try {
-      const run = await runDescribedAnalysis({ pkg, cache: fileByteCache(cacheDir), reader, identity: identityOf(pkg), onPictures: (sent) => sent.forEach((p) => writeFileSync(join(out, `sent-${String(p.number).padStart(2, '0')}.jpg`), p.bytes)) })
+      const run = await runDescribedAnalysis({ pkg, cache, reader, identity: identityOf(pkg), onPictures: (sent) => { sent.forEach((p) => writeFileSync(join(out, `sent-${String(p.number).padStart(2, '0')}.jpg`), p.bytes)); variant?.onPictures?.(sent) } })
       writeFileSync(join(out, 'result-summary.json'), JSON.stringify(summaryOf(run.result), null, 1))
       writeFileSync(join(out, 'model.json'), serializeModel(run.result.model))
       writeFileSync(join(out, 'description.json'), JSON.stringify(run.reading.description, null, 1))
