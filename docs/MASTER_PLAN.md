@@ -1,6 +1,6 @@
-# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.1
+# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.2
 
-Data: 16.11.2026. **Po checkpointcie v3.54 aktywny etap v3.54.1 obejmuje żywy pomiar Claude API, integrację obserwacji z geometrią i odbiór finalnych scen wielu wydawców. Bazą produktu pozostaje APK 1339.**
+Data: 16.11.2026. **Po pomiarze v3.54.1 aktywny etap v3.54.2 bada API jako konsultanta i kontrolera analizatora. Analizator buduje dom; API rozstrzyga niepewne odczyty, porównuje źródła z czterema widokami modelu i proponuje ograniczone korekty. Globalne generowanie domu przez API nie jest kierunkiem tego zlecenia. Ostatnie przekazane APK: 1339; nowa pętla i Android wymagają osobnej weryfikacji.**
 
 Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
 
@@ -22,19 +22,23 @@ Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak
 
 ## 2. Aktualny priorytet
 
-**Aktualna decyzja OWNER-a — v3.54.1, 16.11.2026.** Uruchomić płatne porównanie Claude API oraz wdrożyć działającą strategię hybrydową. OWNER udostępnia klucz z limitem 100 EUR do tej próby; obowiązują nowa księga i granice §7. Etap obejmuje kilka powiązanych modułów aż do sceny i rzeczywistej ścieżki aplikacji. Zlecenie v3.54.1 zastępuje wykonane zlecenie v3.54. Nie kończyć na kolejnym harnessie bez konsumenta ani nowej mikropoprawce resolvera.
+**Decyzja OWNER-a — v3.54.2, 16.11.2026.** API nie ma tworzyć całego domu. Ma pomagać analizatorowi sprawdzać niepewne wymiary, ich jednostki i powiązania, korzystać z innych wymiarów oraz porównywać rzut i elewacje źródłowe z modelem. Może poprosić o dodatkowe obrazy/dane i zaproponować ograniczoną zmianę obserwacji lub interpretacji. Analizator waliduje propozycję, ponawia właściwe etapy i tworzy jeden finalny model. Decyzja zastępuje wcześniejszy aktywny kierunek globalnego HouseDescription oraz rekomendację rozwijania całego opisu AI jako następnego generatora. Dawne warianty B/H1 pozostają historią i materiałem porównawczym.
 
-**Co wykazał checkpoint v3.54.** Według odczytanego pełnego raportu: 30 projektów / 8 wydawców; LOCAL 14 modeli, 7 używalnych według wąskiej miary. Poza ARCHON: 10 modeli / 21 projektów, 3 używalne wąsko; 11 odmów zatrzymuje się na metryce, a podanie skali ujawnia kolejne błędy obrysu. Na tych samych 12 źródłach zapisane odpowiedzi AI dają 10 modeli / 5 używalnych wobec LOCAL 3 / 1; 4 z 10 modeli AI mają błędy rozmiaru 12–30%. To odtworzenie historycznych odpowiedzi, nie ślepy pomiar live. B na ARCHON, kadry C i szkice D nie zostały zmierzone. V1 odzyskał dwa domy DEV bez nowych odmów, lecz nie wykazał transferu; wycofany, łata zachowana. Produkcja pozostaje na bazie 1339. [Raport v3.54](https://github.com/damiankrok/BuildApp/blob/cd173a7af9cec75e2be7a7e937a993f0907d1882/stage-reports/SOURCE_TO_MODEL_V354.md)
+**Stan po v3.54.1.** Według raportu i dostarczonej paczki FINAL obejmuje 12 rodzin od czterech wydawców: LOCAL buduje 5 modeli, opis AI 12; rozmiar OK/NEAR rośnie z 2 do 8. Dziewięć popraw per dom nie oznacza dziewięciu w pełni poprawnych scen; Kukliki pogarszają geometrię, Madera kierunek dachu. H1 nie aktywuje scalania na FINAL, zatem poprawa potwierdza głównie działanie naprawionego czytnika opisu, a nie pomoc obserwacji w LOCAL. Wspólne cztery mierzalne obrysy dają według przeliczenia koordynatora IoU około 0,682 → 0,784; średnie 0,68 → 0,86 mają inne mianowniki. Te obliczenia należy odtworzyć przy kontroli scorera. Nie powtórzono tutaj płatnych analiz ani działania Androida.
 
-**Potwierdzona bariera integracji.** Kod `drawingsWeaknesses` i `describedFollowUp` ocenia słabość modelu na podstawie ograniczonej listy własnych flag; błędny model uznany lokalnie za kompletny może ominąć AI. Opis AI zastępuje model jako całość, bez konsumenta obserwacji w lokalnym obrysie i metryce. Telefon wywołuje `runAnalysis`; czytnik AI jest w `analyseLink`. Sam klucz nie zmienia działania LOCAL. Następny etap musi wykazać drogę źródło → obserwacja → rozstrzygnięcie → element → scena → dostępny tryb aplikacji.
+**Co trzeba sprawdzić.** W Kuklikach opis zna poprawne wymiary, ale buduje za małą bryłę; do weryfikacji pozostaje przypisanie elewacji oraz niespójność oceny kalenicy w scorerze. Madera i plan5-737 pokazują przycinanie brył i zwężanie otworów przez builder. API może więc dobrze przeczytać fakt, lecz źle go przypisać, a dalszy kod może go zmienić. Sam akceptowany JSON, dobry odczyt albo brak błędu kompilacji nie potwierdza poprawy sceny.
 
-**Strategie i kolejność.** A: zapisany LOCAL. B: live globalny opis oryginałów i obecny builder. C: te same pytania/model plus kadry i pomocnicze warstwy, bez zastępowania źródła. H: te same zapisane odpowiedzi plus wiarygodne obserwacje lokalne i działający konsument hybrydowy. Rozdzielić wpływ przygotowania obrazu od zmiany buildera. Najpierw mały pilot i działający konsument, potem porównanie na znanych 30 projektach oraz końcowy odbiór na nowych rodzinach i odłożonym wydawcy. Rzadką cechę można ocenić dodatkową próbą ukierunkowaną według źródeł, niezależnie od ogólnej.
+**Cel aktualnego etapu.** Działająca i obserwowalna pętla konsultacji na sześciu znanych domach DEV, z przeglądem braków narzędzi po pierwszych trzech, następnie małe potwierdzenie na czterech dodatkowych rodzinach. W DEV co najmniej trzech wydawców i trzy domy spoza ARCHON; w potwierdzeniu co najmniej dwóch wydawców i dwa domy spoza ARCHON. Dobór i ograniczenia precyzuje prompt. To eksperyment decyzyjny z rzeczywistym konsumentem, nie deklaracja uniwersalnego wydania. Nie wymaga nowego APK dla samego numeru ani publicznego wdrożenia przed wynikiem.
 
-**Priorytety jakości.** Właściwy wariant/rzut/kondygnacja i orientacja; skala z jawnymi jednostkami; zamknięte wnętrze odróżnione od stref otwartych; topologia i osie dachu; następnie otwory i pokoje. Model z samą zgodnością powierzchni lub bez błędów kompilacji nie jest automatycznie wierną sceną. Ocena per właściwość i per wydawca obejmuje także odmowy. AI może być głównym czytnikiem semantycznym, jeśli wynik to uzasadni, a lokalna geometria zachowuje potwierdzone pomiary.
+**Dwie konsultacje.** Przed budową/po odmowie API dostaje źródła, niepewność i potrzebny kontekst wymiarów. Po budowie dostaje odpowiadające sobie źródłowe elewacje i cztery widoki modelu, rzut oraz górę/przekrój, gdy są potrzebne. Przy odmowie analizatora pracuje na danych pośrednich; nie zastępuje braku modelu pełnym opisem domu. Weryfikacja obejmuje także istniejące modele uznane lokalnie za kompletne.
 
-**Dowody i odbiór.** To samo nieskuteczne OCR albo czytnik długich ścian nie może być jedynym weryfikatorem nowego dowodu. Potwierdzenie korzysta z właściwie przypisanej metryki, źródłowych cech lub innego widoku; kopie tego samego druku nie są niezależnymi pomiarami. Bez mocnej metryki wolno utworzyć jawnie przybliżony podgląd, bez dokładnych ilości. Odbiór kampanii wymaga poprawy finalnych scen na nowych rodzinach u więcej niż jednego wydawcy oraz braku nowych krytycznych regresji. Brak aktywacji rzadkiej reguły oznacza brak dowodu transferu, nie automatyczny dowód błędności; ograniczony pilot może zostać zachowany za flagą bez ogłaszania uniwersalności.
+**Wymagany dowód integracji.** Zapis źródło → pytanie → odpowiedź → żądanie dodatkowego dowodu → propozycja → walidacja → konsument → przeliczenie → model → render → ocena/rollback. Raport musi wskazywać pierwsze miejsce utraty poprawnej informacji, również NOT_CONSUMED, OVERRIDDEN, STALE_CACHE i REPRESENTATION_LIMIT. Ręczne interwencje Claude Code są oddzielone od autonomicznego działania programu i API. Koordynator ma dostać obszerny raport narzędzi, skutków i ograniczeń do następnej decyzji.
 
-**Aktualna dokumentacja.** Szczegółowe wykonanie określa `BuildPlan_Prompt_Claude_v3.54.1_Hybryda_API.md`. Wykonawca ma umieścić dostarczony Master Plan pod jednym kanonicznym adresem w repozytorium i poprawić odnośnik protokołu. Nie rekonstruować brakujących paragrafów z pamięci. Ta aktualizacja jest przeglądem dokumentów i wskazanych fragmentów kodu; koordynator nie powtarzał przebiegów ani nie sprawdzał prywatnego ZIP v3.54.
+**Autoryzacja.** Klucz projektu został udostępniony i zgoda na testy obowiązuje. Limit OWNER-a: 100 USD, nie 100 EUR. Aktualny etap ma roboczo do 5 USD pierwszej partii i pułap 20 USD nowych wywołań, mieszczący się w pozostałym limicie projektu. Nie zerować wcześniejszego kosztu ani ponownie wymagać zgody na każdy call. Szczegóły, rezerwacje i brak sekretów w artefaktach określa §7.
+
+**Dokument wykonawczy.** `BuildPlan_Prompt_Claude_v3.54.2_API_Kontroler_Analizatora.md`. Wykonawca umieszcza ten Master Plan pod jednym kanonicznym adresem w repo i aktualizuje odnośnik protokołu. Pracuje na `claude/new-session-3kzcgh`, commit/push z `[skip ci]`, bez merge/PR; ForgeShape tylko do odczytu. H2 i nieujawniony benchmark OWNER-a wyłączone. Koordynator sprawdził materiały v3.54.1 i przygotował zlecenie; eksperyment v3.54.2 nie został jeszcze wykonany.
+
+**Kolejność.** Sprawdzić scorer i bazę → uruchomić minimalną konsultację i konsumenta → po trzech domach uzupełnić potrzebne narzędzia → dokończyć sześć DEV → zamrozić kandydata → cztery potwierdzające → raport i plansze → decyzja o konfiguracji produktu. Można zmieniać kilka zależnych modułów; nie wracać do serii raportów o pojedynczej regule bez sprawdzenia końcowej sceny.
 
 ### Poprzednie zlecenie v3.54 — kontekst zakończonego checkpointu
 
@@ -50,7 +54,7 @@ Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak
 
 ### Stan potwierdzony przed kampanią v3.54
 
-Poniższe wyniki i kolejność v3.53 opisują bazę oraz wcześniejszy backlog. Aktualną kolejność prac określa decyzja v3.54 powyżej.
+Poniższe wyniki i kolejność v3.53 opisują bazę oraz wcześniejszy backlog. To historyczny backlog; aktualną kolejność prac określa decyzja v3.54.2 powyżej.
 
 **Baza produkcyjna.** APK 1339 arm64 z `459cc2d`, kod `5240d7e`. Solver 2.43.0, topologia wymiarów 1.6.0, solver metryczny 1.8.0, resolver planu 1.6.0, usługa 1.11.0. Etap v3.53.14 (`226c9ac`) zamknięto jako diagnozę. Kryterium wydania wymaga zaobserwowanej poprawy normalnej ścieżki aż do sceny, więc obowiązuje 1339. Bilans 67/80 modeli, 13 odmów i 99/169 pomieszczeń pochodzi z v3.53.13. Macierzy, sprawdzania typów, pełnej regresji ani świeżej próby nie powtarzano w v3.53.14. [Raport v3.53.14](https://github.com/damiankrok/BuildApp/blob/226c9ac/stage-reports/SOURCE_TO_MODEL_V35314.md)
 
@@ -203,6 +207,8 @@ Analizator:
 
 Kontrakt kamer do wdrożenia i pomiaru: rozróżniać ORTHOGRAPHIC_TECHNICAL, PERSPECTIVE_PINHOLE, PERSPECTIVE_SHIFTED, PLANAR_DIAGRAM i UNKNOWN. Per widok przechowywać parametry wewnętrzne/zewnętrzne, principal-point shift, kotwice, residual reprojekcji, ocenę sylwetki/krawędzi/widoczności i confidence. Dopuszczać top-K, jeśli źródło nie rozstrzyga. Jedna wspólna hipoteza budynku ma osobną kamerę dla każdego renderu. Po korekcie ponownie dopasować dotknięte kamery i zachować silniejsze źródła. Nie stosować liniowego przeliczenia pikseli perspektywy na metry przed oceną kamery.
 
+**Aktualna rola API (§2 i §7).** API wnosi lokalne obserwacje i propozycje korekt, a analizator tworzy geometrię. Przed budową można skonsultować wymiar lub brakującą granicę; po budowie trzeba porównać źródła z renderami właściwej rewizji. Zmiana wchodzi przed zależną decyzją i unieważnia odpowiednie cache. Globalny opis całego domu nie może zastąpić LOCAL w wariancie konsultacyjnym. Przy odmowie nadal wolno przyjąć popartą źródłem obserwację i ponowić analizę.
+
 Zachowany kierunek source-fusion: adaptery → źródła/obserwacje → graf dowodów i ograniczenia → hipoteza semantyczna → deterministyczny kompilator → weryfikacja/korekta. To granice odpowiedzialności, nie zakaz porównania innej kolejności wnioskowania. Ręcznie zbudowany model referencyjny pozostaje debug/test/eval, bez runtime gold ani automatycznego zaliczania zgodności. Opcjonalny VisualInterpreter może wnosić maski/keypointy i obserwacje, nie zapisywać bezpośrednio kanonicznej prawdy. Przenośną wartością są matematyka kamer, klasyfikacja źródeł, graf, solvery, ocena widoków i schematy; badawczy web UI nie narzuca platformy produktu.
 
 Niewielka sprzeczność nie ma blokować użytecznego 3D, gdy istnieje sensowna podstawa bryły. Brak rzetelnej skali blokuje dokładny obmiar, nie musi blokować jawnie orientacyjnej hipotezy wizualnej. Nieudana rejestracja jednej właściwości nie kasuje innych widocznych cech.
@@ -219,7 +225,7 @@ Topologia pomieszczeń dotyczy kondygnacji i jej rzeczywistych przegród, otwor�
 
 Kształt zaobserwowany na obrazie, strona/identyfikacja, kotwica metryczna i zastosowana geometria są oddzielne. Utrata jednej kotwicy nie dowodzi płaskiego dachu ani braku balkonu. Ograniczenie kompilacji/łączenia nie może po cichu zmieniać rozpoznanej architektury na łatwiejszą. Wczesna hipoteza nie zwalnia z kontroli hostów, podpór, skali i źródeł.
 
-C1a/C1b/C2 pozostają bazą o ograniczonym zakresie, nie dowodem pełnego rozumienia domu. Fable wybiera następny wycinek po pomiarze i może przebudować koordynację czytania źródeł. A=obecna kaskada, C=naprawa przekazania, B=C+wczesne zewnętrze to możliwe ramy porównania, a nie obowiązkowy katalog implementacji. Wolno porównać także strukturalny opis z modelu wizyjnego. Wpływ strategii i zmiany OCR rozdzielić w eksperymencie; cały efekt ocenić na finalnym domu. Konieczne reprezentacje można rozszerzyć, zachowując jeden model, jego tożsamość i kompilację. Nie wymagać nowego ogólnego frameworka.
+C1a/C1b/C2 pozostają bazą o ograniczonym zakresie, nie dowodem pełnego rozumienia domu. Wolno przebudować koordynację czytania źródeł i minimalnie rozszerzyć reprezentację potwierdzonego elementu. Historyczne A/C/B i globalny strukturalny opis domu były wariantami porównawczymi; aktualny zakres API wyznacza §7. Wpływ odczytu, arbitrażu, konsumenta i kompilacji rozdzielać w eksperymencie, a cały efekt oceniać na finalnym domu. Zachować jeden model, jego tożsamość i deterministyczną kompilację; nie wymagać nowego ogólnego frameworka.
 
 ## 5. Co ma być trwałe, co wolno wymienić
 
@@ -258,34 +264,53 @@ UNKNOWN jest dozwolone przy braku podstaw. Odrzucenie wszystkich czytelnych źr�
 
 ## 7. Pomoc AI i kontrola modelu
 
-Udział AI jest wyborem strategii do pomiaru. Wolno zbadać je jako pomoc lub główny czytnik wizyjny, bez z góry przyjętej zależności produktu od płatnej usługi. Jego wynik pozostaje obserwacją/propozycją strukturalnego opisu, nie drugim zaakceptowanym modelem domu. Wykorzystać istniejące sensowne typy i adaptery; można je rozszerzyć dla wykazanego braku. Nie budować osobnego protokołu tam, gdzie wystarczy uzupełnienie.
+**Obowiązujący kontrakt: analizator buduje, API pomaga sprawdzić i poprawić.** API nie generuje pełnego HouseDescription/modelu ani nie podmienia całego wyniku LOCAL. Dotyczy to również przypadku odmowy. Nie usuwać bez audytu historycznej ścieżki opisu, ale oddzielić ją flagą, zachować do odtworzenia i udowodnić, że nie uruchamia się w wariancie konsultacyjnym. Globalny opis z v3.54.1 nie jest domyślnym kierunkiem rozwoju.
 
-Oddzielić:
-- obserwację źródła bez podpowiadania odpowiedzi;
-- review finalnych renderów tej samej rewizji wobec oryginałów;
-- propozycję domenową i jej kontrolowane zastosowanie.
+API może: odczytać niepewny napis, ustalić jednostkę/znaczenie, sprawdzić zależności innych wymiarów, wskazać lokalny element źródła, porównać stronę modelu ze źródłem, wykryć rozbieżność, poprosić o dowód i zaproponować ograniczoną korektę. Analizator wiąże obserwację z domeną i przelicza model. Nie otrzymujemy gwarancji wiernej rekonstrukcji danych, których źródła nie pokazują.
 
-Wiadomość AI zawiera wersję kontraktu, requestId, rewizję, źródłowy hash/kadr/transformację, pytanie i alternatywy. Odpowiedź wskazuje obserwację, dowód, alternatywy, niepewność, status oraz zakres propozycji albo powód odmowy/NEED_MORE_EVIDENCE. To kontrolowana propozycja, nie nieograniczone polecenie dla aplikacji. JSON i przepisany hash nie dowodzą prawdziwości. Tylko druga odpowiedź tego samego AI ani zgoda tego samego błędnego czytnika nie stanowią samodzielnego potwierdzenia.
+### 7.1 Dane, widoki i pytania
 
-Wariant powstaje na kopii tego samego modelu, przechodzi kompilację i ocenę źródłową oraz regresję, po czym jest przyjęty atomowo lub wycofany. NEED_MORE_EVIDENCE wymaga rzeczywistego pobrania dodatkowych danych przez właściciela pętli, nie tylko pola w schemacie. Ograniczone próby automatyczne przed pytaniem użytkownika; pytanie ma konkretne obrazy i wybór.
+Rozdzielić konsultację przed budową od review po budowie. Pierwsza pracuje na źródle i niepewności; druga na źródle i renderach określonej rewizji. Przy odmowie używać nakładek/danych pośrednich, bez renderu nieistniejącego domu. W review cztery źródłowe elewacje zestawiać z odpowiadającymi widokami modelu; brakujące strony pozostają oznaczone. Rzut, przekrój i widok góry uzupełniają rozstrzygnięcie, gdy same elewacje nie wystarczają.
 
-Bez sieci/API zachować użyteczny lokalny odczyt/import lub jasny stan ograniczenia; nie oznacza to gwarancji tej samej jakości offline. Lokalność i zdalność wybierać po pomiarze. Klucz usługowy nie trafia do APK/repo/logów. Backend, tożsamość użytkownika, limity i świadomy wybór zdalnej analizy wymagają projektu integracji przed produkcją. Istniejący autoryzowany serwis można wykorzystać; nowy płatny hosting lub rozszerzenie zgody wymaga konkretnej decyzji. Nie zakładać, że samo podanie klucza uruchamia feature.
+Strony domu nie stają się automatycznie stronami świata. Uzgodnić wariant, lustro, kondygnację, wejście/garaż/taras, ramę i kamery. Nie wyprowadzać metrów liniowo z pikseli perspektywy. Porównanie PRZED/PO zachowuje wspólne kamery, skalę i orientację. Dodatkowy kadr musi mieć oryginał, kontekst i pełną transformację.
 
-**Autoryzacja v3.54.1 z 16.11.2026.** OWNER wskazał dostępny klucz Claude API z limitem 100 EUR i zgodę na test tej kampanii. Zastępuje to dawny limit badawczy 5 USD dla nowych wywołań objętych tym zleceniem. Zgoda obejmuje publiczne projekty wybranej próby wielu wydawców, oryginały i potrzebne kadry, rozwój konsumenta i odbiór. Nie obejmuje H2, nieujawnionego prywatnego benchmarku, nowego płatnego hostingu ani odrębnego płatnego generatora obrazów. Klucz wyłącznie jako bezpieczny sekret środowiska; nie do czatu, repo, ZIP, logów lub APK.
+Odczyt dosłowny, wartość wyliczona z sumy, oszacowanie i wartość przyjęta mają różne pochodzenie. Zgodna suma wymiarów nie dowodzi, że każdy składnik odczytano, a pole ogłoszone nie służy rozciąganiu niepełnego domu. API może wnieść obserwację pominiętą przez lokalny OCR/CV; ten sam nieskuteczny czytnik nie jest jedynym sędzią nowego dowodu. Confidence i powtórzenie tego samego AI nie zastępują kontroli źródłowej.
 
-**Egzekucja kosztu.** Nie traktować limitu jako salda ani celu wydatkowania. Ustalić dostępny budżet i zakres jego współdzielenia na podstawie dostępnych danych. Pierwsza partia do 5 EUR, rozwój i porównanie docelowo do 20 EUR; dalsza uzasadniona praca może postępować bez pytania o każdy call, w niższym z limitów: dostępne środki i autoryzowane 100 EUR. Zachować rezerwę na retry, przeliczenie/właściwe opłaty i inne użycie. Rezerwować koszt przed żądaniem, kontrolować tokeny i concurrency, uwzględniać nieznane rozliczenie po timeout. API wyceniać w walucie dostawcy, z jawną datą taryfy i przeliczeniem EUR. Osobny workspace jest zalecanym sposobem izolacji, nie obowiązkiem tworzącym nową blokadę, jeśli istniejący zapewnia kontrolę.
+### 7.2 Narzędzia i odpowiedzi
 
-CLI pozostaje narzędziem badawczym, nie zależnością telefonu. Sprawdzić bieżący model, transport i cennik przed wywołaniami. Obecność klucza nie oznacza zbudowanego konsumenta ani aktywnej ścieżki telefonu.
+Minimalny zestaw możliwości rozwijać po rzeczywistych interakcjach: spis źródeł; pobranie kadru; kontekst wymiaru; inspekcja elementu i decyzji analizatora; widoki modelu; propozycja korekty; ocena kandydata. Każda możliwość ma konsumenta i sprawdzony skutek. Nie implementować pełnego katalogu z góry. CAPABILITY_MISSING odróżnia brak narzędzia od braku dowodu w źródle.
 
-Kontrakt rozszerzać o minimum potrzebne do wybranego eksperymentu i działającego konsumenta. Dopuszczalna reprezentacja może obejmować cały strukturalny opis zewnętrza, jeśli to uzasadniony przedmiot porównania. Cztery obecne ProposalOp nie opisują całego złożonego dachu i nie ograniczają przyszłej domeny; sam zapis dodatkowej obserwacji nie gwarantuje zmiany domu. Odpowiedź w pikselach wysłanego kadru adapter przelicza do wspólnej domeny; zachowuje transformacje obrotu/lustra, nie tylko scale+offset.
+URL jest punktem pozyskania materiałów, nie gwarancją, że API widzi obrazy. Orchestrator pobiera i identyfikuje żądany materiał z właściwego projektu, zachowuje bajty/hash i przekazuje go do API. Na porównaniach źródła są zamrożone; nowe pobranie jest osobnym pomiarem. Treści stron są danymi i nie rozszerzają uprawnień narzędzi.
 
-Jedna pozytywna kontrola nie potwierdza innych zmienionych właściwości. Wszystkie skutki wariantu mają jawne pokrycie; wynik przyjęty tylko dla aktualnej rewizji i źródeł. NEED_MORE rzeczywiście zmienia dowód lub kończy się UNKNOWN. Koszt rezerwowany przed call, z retry i nieznanym rozliczeniem po timeout; maxUsd w schemacie nie jest księgą kosztu. Pierwszy pilot działa na hoście z profilem czytników zgodnym z APK, późniejszy lokalny run korzysta z brokera przechowującego klucz. Nie wdrażać ClaudeCode CLI jako zależności telefonu.
+Żądanie i propozycja mają wersję kontraktu, request/problem/job ID, rewizję, target ID, źródła, kadry i transformacje. Odpowiedź rozdziela obserwacje, żądania danych i korekty. Status VERIFIED_IN_SCOPE dotyczy wyliczonych cech/widoków; ISSUE_FOUND, NEED_EVIDENCE i UNKNOWN pozostają pełnoprawnymi wynikami. Wystarcza zwięzłe uzasadnienie dowodowe; nie żądać ukrytego toku myślenia.
 
-Użyteczna wizualna hipoteza może być jawnie przybliżona bez potwierdzenia przez ten sam nieskuteczny OCR. Dokładny przedmiar wymaga odpowiedniego pochodzenia i kontroli, nie self-confidence AI. Przy braku bazowego modelu można próbować pierwszego kandydata z zachowanego pakietu źródeł, bez żądania renderu nieistniejącego domu.
+Korekta wskazuje zakres, bieżącą wartość/warunek, nową wartość lub relację, jednostkę i dowód. Rodziny operacji mogą obejmować odczyt/jednostkę, wiązanie wymiaru, rolę widoku, lokalną granicę, otwór albo oś/typ dachu określonej bryły. Nie wolno przemycić globalnego generatora jako zbioru poprawek całego domu. API nie wykonuje kodu i nie zapisuje kanonicznego modelu; konsument robi to przez kontrolowane reguły analizatora.
 
-**Księgi rozdzielone.** S53: 92 wpisy, 2,72807938 USD, `CLI_TOKEN_ESTIMATE`, billing `UNCONFIRMED`, dawny limit 5 USD — zachować jako historię, bez przemianowania na rachunek API. Nowa kampania ma osobny zapis rzeczywistych nowych wywołań i wyceny usage; nierozliczona historia CLI sama nie blokuje nowej zgody. Nie odejmować jej automatycznie od 100 EUR. Dostępny klucz i możliwość egzekucji bieżącego pułapu są warunkami wywołań; brak sekretu blokuje tylko prace od niego zależne. Surowe odpowiedzi zachować i odtwarzać bez ponownego kosztu, kiedy zmienia się sam parser lub builder.
+### 7.3 Zastosowanie i kontrola
 
-Działanie pętli AI w APK wymaga weryfikacji rzeczywistej ścieżki produktu. Stan pilota jest w § 2 i w repozytoryjnym PROJECT_STATUS.md.
+Snapshot → walidacja → kandydat → przeliczenie zależności → kompilacja → kontrola źródłowa → accept/rollback. Wartość sprawdzić w finalnym elemencie oraz scenie; odczyt przyjęty, lecz nadpisany dalej, nie jest sukcesem. Zachować ID, provenance, surowe odpowiedzi i log wszystkich decyzji.
+
+Walidacja obejmuje typ, jednostkę, target, rewizję, dozwolony zakres i źródła; nie potwierdza prawdy samą składnią. Przyjęcie hipotezy i uznanie jej za wymiar do obmiaru są osobnymi decyzjami. Przy konflikcie zachować alternatywy i oznaczyć ograniczenie. Nie dopasowywać geometrii do ogłoszonego pola i nie zwężać otworów po cichu dla poprawnej kompilacji.
+
+Korekta trafia przed właściwy resolver/dekompozycję/kompilację, unieważnia zależny cache i nie niszczy niezależnego potwierdzonego dowodu. Nie wymaga, by poprzedni błędny model zgadzał się z proponowaną poprawą. Sprzeczność z silniejszym dowodem wymaga wyjaśnienia, nie ślepego pierwszeństwa AI lub LOCAL.
+
+Pilot: domyślnie dwie rundy zmieniające model, do czterech dodatkowych żądań dowodu na rundę i jedno ponowienie transportu. Koszt i czas mają ograniczenia. Brak nowego dowodu, powtarzanie propozycji albo niejednoznaczny wynik kończą pętlę z ostatnim dobrym/oznaczonym częściowym wynikiem. Błąd sieci nie kasuje działającego modelu.
+
+### 7.4 Monitoring i niezależna ocena
+
+Claude Code instrumentuje pętlę, rejestruje rzeczywiście wysłane dane i tool calls, identyfikuje konsumenta i miejsce utraty informacji. Nie podpowiada ręcznie wartości z referencji w przebiegu zaliczanym jako automatyczny. Ręczne diagnozy mają osobną etykietę. Referencje oceny nie trafiają do API.
+
+Raport odróżnia błędny odczyt, błędne wiązanie, brak narzędzia, odrzucenie, brak konsumenta, późniejsze nadpisanie, stary cache, ograniczenie reprezentacji i konflikt kompilacji. Wyniki muszą rozstrzygnąć, jakie dane i operacje API rzeczywiście potrzebuje, które są zbędne oraz kiedy warto konsultować. Po trzech domach wolno rozszerzyć narzędzia na DEV; potwierdzenie odbywa się na zamrożonym kandydacie.
+
+### 7.5 Budżet i dostęp
+
+OWNER autoryzował klucz projektu z limitem **100 USD**. Poprzednie określenie 100 EUR było błędne i nie wyznacza aktualnego budżetu. Nowy etap: do 5 USD pierwszej partii i maksymalnie 20 USD nowych wywołań, zawsze w granicach pozostałego autoryzowanego limitu projektu. Nie pytać ponownie o każdy call, dom ani kontynuację w tym zakresie. Nie zwiększać limitów konta i nie uruchamiać nowego płatnego hostingu/generatora obrazów.
+
+Klucz korzysta z istniejącej konfiguracji/środowiska, np. BUILDPLAN_ANTHROPIC_API_KEY; nie wolno go wypisywać ani kopiować do artefaktów, Git czy APK. Nie uzależniać prac od ponownej zgody, osobnego konta lub rotacji jako nowego wymogu tego zlecenia. Faktyczny brak dostępu blokuje wyłącznie live calls; prace offline i integracyjne trwają.
+
+Rezerwować koszt przed żądaniem, uwzględniając obrazy, maksymalne wyjście, narzędzia, cache/retry i nieznane rozliczenie timeout. Sprawdzić dostępny model i bieżącą taryfę w oficjalnym źródle. v3.54.1 raportuje około 4,11036 USD / 132 żądania według usage, nie rachunek końcowy; nie zerować tego kosztu. S53: 92 wpisy i 2,72807938 USD CLI_TOKEN_ESTIMATE, billing UNCONFIRMED, pozostają osobną historią bez automatycznego traktowania jako zapłaconych wywołań API. Limit to nie saldo; uwzględniać dostępne informacje o wykorzystaniu i rezerwach.
+
+Surowe odpowiedzi odtwarzać offline przy zmianach parsera lub konsumenta. Nowe obrazy/model/pytanie wymagają nowego kontekstu, a starej odpowiedzi nie nazywać oceną nowej rewizji. Klucz na serwerze/brokerze, Claude Code wyłącznie narzędziem rozwoju. Brak API zachowuje użyteczny wynik LOCAL z jawnymi ograniczeniami. Test hosta i test Androida mają osobne statusy.
 
 ### Porównanie czytania oryginału i przygotowania obrazów
 
@@ -296,6 +321,10 @@ Porównać na tych samych źródłach bazę lokalną, pytanie z oryginalnym obra
 Najpierw rozstrzygać klasę i relację (np. szklenie między ościeżami, słupy otwartego podcienia, logo poza bryłą, linia całkowita). Dla liczb pytać o dosłowny zapis, jednostkę i odniesienie na rysunku. Wymiary w metrach wynikają z potwierdzonej skali i geometrii, a proporcje oszacowane z wizualizacji są wskazówką wizualną. Mierzyć rozpoznanie prawdy, fałszywe propozycje, UNKNOWN, zmianę sceny, koszt i p50/p95 czasu na wystarczającym zbiorze, z jawnym N. Do APK nie trafiają klucze ani prototyp badawczy. Odtwarzalne próby korzystają z hasha źródła, transformacji, pytania, schematu i modelu API.
 
 ## 8. Kryteria pomiaru i odbioru
+
+**Odbiór pilota v3.54.2.** Porównać A (bez konsultanta), R (konsultant tylko ocenia) i C (konsultant z kontrolowanymi korektami), na tych samych źródłach. Rozdzielić trafność wykrycia, poprawność propozycji, przyjęcie i zmianę finalnej sceny. Osobno DEV i potwierdzenie; odmowy w mianownikach. Aktualny etap kończy się zmierzonym pilotem i raportem decyzyjnym, nie wymaga deklaracji uniwersalnego działania ani obowiązkowego APK. Obowiązują jednak testy rzeczywistego konsumenta, ochrona dobrych danych i jawność braku korzyści.
+
+Sprawdzić mierniki przed oceną: reprezentacje kalenicy roofs/roofPlanes/roofEdges, osie/lustro, jednostki, semantyka obrysu oraz zgodność grup porównania. Korekta błędnej referencji/scorera jest osobnym wynikiem, nie poprawą analizatora. Pełna recenzja czterech stron nie potwierdza niepokazanych wnętrz. Sama liczba otworów, zgodny bbox lub dobry kolor nie zaliczają ich położenia i geometrii. Metryki użyte do przyjęcia poprawki nie mogą być jej jedynym niezależnym testem końcowym.
 
 Najpierw referencje ze źródeł, zakres, niepewność i podział całymi projektami/rodzinami. Transformacje i kopie rozdzielczości nie są niezależnymi domami. Zbiór wykorzystany do strojenia nie pozostaje ślepym testem; pierwszy wynik zachować.
 
@@ -372,13 +401,16 @@ Zachowane dawne ID: **DEC-SOURCE-PROVIDER-AGNOSTIC-001** (§ 3.8), **DEC-SINGLE-
 | D11 | Wspólne dopuszczenie korekty, per-param provenance i jawne capabilities | Wdrożone w ograniczonym zakresieC1/C2; braki dostępu/balkonu i pozostałych rodzin pozostają |
 | D08 | Dokładne L/R, mixed regions, ściany/słupy/balkony/lukarny nadal wymagają miernika | Otwarte |
 | D12 | Utrzymać istniejący kernel; ForgeShape przede wszystkim jako wzorzec stabilnych refs, port dopiero po mierzalnym problemie geometrii | Rekomendacja audytu 3 |
-| D13 | Opis domu z AI jest pilotem hostowym. Kotwice mają zakres całego domu lub lokalnej bryły | Zakres kotwic sprawdzono w v3.53.2. Żywy SDK, wdrożenie i ścieżka usługi na telefonie czekają |
+| D13 | Globalny opis domu AI jest historycznym pilotem hostowym v3.54.1; nie zastępuje LOCAL w aktualnym wariancie konsultacyjnym | Czytnik live naprawiony; kierunek zastąpiony przez D20. Ścieżka Android nadal niepotwierdzona |
 | D14 | Brak skali blokuje dokładny obmiar, lecz nie musi kasować obserwacji topologii; kandydat nie jest drugim modelem prawdy | Doprecyzowanie istniejącego wymagania |
 | D15 | Oddzielne statusy SLICE/CAMPAIGN/VERIFICATION, checkpoint nie kończy kampanii | Ujęte w nowym protokole i promptcie |
 | D16 | Role macroF1, kompletne przypisanie i dokładność/pokrycie liczb mają osobne mianowniki; bez zmiany historycznych wyników | Doprecyzowane w § 8 |
 | D17 | Wektory, OCR/CV i AI to dostępne narzędzia; wybór i kolejność po rozstrzygającym eksperymencie | Swoboda metody w zleceniu v3.53, bez pierwszeństwa konkretnego czytnika |
 | D18 | Powstanie modelu, jakość skali i jakość całego zewnętrza to różne wyniki | Aktywne doprecyzowanie pomiaru ANY-LINK; bez przeliczania starych wyników |
-| D19 | Fable prowadzi kampanię pętlą diagnoza/próba/wdrożenie/kontrola/regresja i wybiera dalszą blokadę | Wynik w domu i aplikacji; checkpoint nie zamyka niespełnionego zlecenia |
+| D19 | Claude Code prowadzi diagnozę, implementację i pomiar zgodnie z aktualnym zleceniem; koordynator otrzymuje raport decyzyjny | v3.54.2: pilot konsultanta i analiza potrzebnych narzędzi, bez wymuszania uniwersalnego rollout |
+| D20 | Analizator tworzy model; API konsultuje odczyty i kontroluje źródło–model, proponując ograniczone korekty | Nowa decyzja OWNER-a v3.54.2, zastępuje globalne generowanie w aktywnym kierunku |
+| D21 | Każda korekta ma rewizję, dowód, konsumenta, przeliczenie i accept/rollback; monitoring ujawnia nadpisanie lub brak efektu | Obowiązkowy dowód integracji, nie tylko poprawnej odpowiedzi API |
+| D22 | Narzędzia rozwijane po pierwszych trzech domach; sześć DEV i cztery potwierdzające, pełny raport interakcji | Pilotaż decyzyjny z rozdzieleniem autonomii i ręcznej diagnozy |
 
 Etapy 1–4 dały plan i prompt; po nich wdrożono ograniczoneC1/C2 i rozszerzano źródła. Ostateczny wybór strategii inference nadal wymaga pomiaru. Przegląd 1327 nie wdraża nowego kodu. Lokalne sprzeczności podczas retencji rozstrzygnięto jawnie: brutto pozostaje zatwierdzone, paleta zastępuje dawny zakaz koloru, aktualne zlecenie zastępuje dawne NEXT i blokady technologii. Szczegóły w rejestrze retencji.
 
@@ -492,3 +524,7 @@ Na polecenie OWNER-a rozszerzono aktywny zakres z lokalnego obrysu do kampanii c
 
 Uzgodniono pełny raport v3.54 i mapę modułów z fragmentami aktualnej bramki AI i wejścia LOCAL. W §2 dodano checkpoint i większy etap integracji hybrydowej, w §7 zastąpiono historyczną blokadę 5 USD nową zgodą OWNER-a na próbę przy limicie 100 EUR, z oddzielnym rozliczeniem. Nie wykonano nowych wywołań ani zmian produkcyjnych. §1, cały §3 (19458 B, 15 IDEA) oraz §4–6 i §8–11 pozostają identyczne bajtowo. Historyczne instrukcje budżetowe w opisach poprzednich etapów są historią; obowiązuje bieżący §7.
 
+
+### Kontrola aktualizacji v3.54.2
+
++Zmieniono aktywny kierunek zgodnie z korektą OWNER-a: API konsultuje analizator i porównuje źródła z modelem, nie tworzy całego domu. Uzgodniono stan v3.54.1, rozdzielono historyczny globalny opis, odczyt i korektę, dodano pilot narzędzi oraz obszerny raport decyzyjny. Poprawiono walutę autoryzowanego limitu na USD. §3 pozostaje identyczny bajtowo z v3.54.1; zachowano katalog produktu, 15 IDEA i historyczne decyzje. Zmieniono §2, odpowiednie fragmenty §4, §7, początek §8 oraz D13/D19 i dodano D20–D22. Nie uruchomiono w ramach aktualizacji dokumentów API, nie zmieniono kodu produkcyjnego ani nie zbudowano APK. Starsze zapisy o 100 EUR i globalnych strategiach w rozdziałach historii opisują wcześniejsze zlecenia; aktualne rozstrzygnięcie określają §2 i §7.
