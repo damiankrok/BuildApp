@@ -17,6 +17,8 @@
 | TRANSFER_EVIDENCE | **CZĘŚCIOWE** | Mechanizm przenosi się na rodziny spoza strojenia: poprawne odczyty i ustalona skala na 2 z 4 domów CONFIRM (Aksamitki, sp318422 — w tym jeden spoza ARCHON); przy Puszku odczyty poprawne, ale skala odrzucona — końce przyciągnięte różnią się o 3,9 %. Zysk jakości się **nie** przenosi, a jedno przyjęcie było **fałszywe** (sp318422: odmowa → model ze złą głębokością) |
 | ANDROID_VERIFIED | **NOT_VERIFIED** | Brak urządzenia; bez APK — aplikacja się nie zmieniła |
 
+Statusy opisują zamrożonego kandydata `d427df8`. Rozwój po potwierdzeniu (kontrola zasięgu, poprawka składania planu, Aksamitki → model) i równoległe wyglądy aplikacji są w **Dodatku** na końcu raportu i tych statusów nie zmieniają.
+
 ## 1. Werdykt
 
 **Co konsultant poprawia.** Ustala skalę rzutu tam, gdzie analizator jej nie ustalił. Dokładnie odczytuje wydrukowane etykiety i wymiary całkowite, łącznie z ft-in i metrami z przecinkiem.
@@ -579,9 +581,100 @@ Odtworzenie zapisanych odpowiedzi przez ten sam kod daje ten sam model (hash) �
 
 API widzi i czyta poprawnie; brakujące elementy są po stronie analizatora.
 
+## Dodatek: rozwój po potwierdzeniu (oznaczony osobno)
+
+**Status tego rozdziału.**
+- Wszystko poniżej powstało **po** obejrzeniu wyniku próby potwierdzającej.
+- Statusy, tabele i werdykt §1–§14 opisują zamrożonego kandydata `d427df8` i się nie zmieniają.
+- Cztery domy CONFIRM_KNOWN są od tej chwili **danymi rozwojowymi**. Zmiany z tego rozdziału nie mają żadnej próby potwierdzającej.
+- Zero nowych wywołań API. Każda liczba pochodzi z powtórki zapisanych odpowiedzi przez bieżący kod (`consult-run.ts --replay`), czyli z tych samych odczytów co §6–§8.
+
+### Kandydat 2: kontrola zasięgu w transakcji (`6bd8870`)
+
+- **Reguła.** ACCEPT staje się ROLLBACK z powodem `EXTENT_CONTRADICTS`, gdy zbudowany zasięg przekracza tolerancję względem konsultowanego wymiaru całkowitego.
+  - Zasięg zbudowany: prostokąt płyty najniższej kondygnacji.
+  - Odniesienie: największy przyjęty (ADMITTED/AGREES_ONLY) wymiar konsultowany na danej osi.
+  - Działa tylko po przebiegu z konsultacją; ścieżka domyślna jest nietknięta.
+- **Tolerancja: 5 %.** Wartość z rekomendacji §13 („≤ 3–5 %”), ustalona przed powtórką.
+- **Wyniki (powtórka D i DEV).**
+  - sp318422: ACCEPT → **ROLLBACK** (16,03 m wobec 9,58 m, 67 %). Fałszywe przyjęcie z §1 znika.
+  - Aksamitki: nadal odmowa.
+  - DEV: 6/6 tych samych rozstrzygnięć; reguła nie zadziałała ani razu.
+- **Testy:** analysis-service `consult-v3542` (17).
+
+### Kandydat 3: poprawka 1 z diagnozy kompozycji planu (`e88686b`)
+
+**Diagnoza** (`stage-reports/artifacts/v3542/PLAN_COMPOSITION.md`, tylko do odczytu, kopie cieniowe poza repo) wskazała pierwszą utraconą decyzję w każdym z czterech domów. Wspólne mechanizmy:
+
+| Mechanizm | Co się dzieje | Domy |
+|---|---|---|
+| **M1** | `axisLadder` przypina pierwsze stwierdzenie łańcucha wymiarowego bez sprawdzenia; jego wartość rozwiązano przy starej skali z głosu strony | sp318422, Aksamitki (rozstrzyga); Madera (6 %, nie rozstrzyga) |
+| **M2** | Rama z osi pasm ścian nie widzi elewacji bez pasma (przeszklony szczyt, niedorysowana brama) | Supertunie, Madera |
+| **M3** | Pomieszczenie obrysowane przeszkleniem zalane jako OUTSIDE | Madera |
+
+**Zmiana.**
+- Przy rejestracji `CONSULTANT_VALIDATED` pierwsze stwierdzenie łańcucha musi zgadzać się z niezależną skalą: tolerancja to `allowedPx` + długość × 2 · tick / najdłuższa kotwica.
+- Bramka na proweniencji: bez pilota żadna rejestracja nie jest `CONSULTANT_VALIDATED`, więc ścieżka domyślna jest bajt w bajt ta sama (diagnoza §6: 16/16 przebiegów bez konsultanta identycznych).
+- Wersji solvera celowo nie podniesiono, żeby nie zmienić bajtów ścieżki domyślnej. Skutek: na ścieżce pilota model zmienia się przy tej samej wersji. Przed włączeniem pilota w hoście z pamięcią podręczną wynik trzeba kluczować także rewizją kandydata (otwarte).
+- Testy reconstruction: 1638 zielonych.
+
+**Wynik (powtórka D).**
+- Aksamitki: kompozycja po raz pierwszy wychodzi, **12,32 × 8,82 m**. Kandydat 2 ją jednak odrzuca (szerokość 7 % poniżej 13,22 przy tolerancji 5 %) → ROLLBACK.
+- sp318422: 13,88 × 11,02 m (głębokość +15 % zamiast +67 %), nadal ROLLBACK.
+
+### Kandydat 4: tolerancja zasięgu 10 % (`505cb7d`), **wybrana po obejrzeniu Aksamitek**
+
+- **Zmiana.** `EXTENT_TOLERANCE` 5 % → 10 %, czyli granica WRONG z klas rozmiaru protokołu (OK ≤ 3 % < NEAR ≤ 10 % < WRONG).
+- **To jest strojenie na widzianym wyniku.** Uzasadnienie (spójność z klasami protokołu) jest prawdziwe, ale liczbę wybrano po zobaczeniu Aksamitek przy 7 %. Ten zysk **nie jest dowodem przenoszenia**.
+
+**Wyniki.**
+
+| Dom | Zamrożony (`d427df8`) | Kandydat 4 |
+|---|---|---|
+| Aksamitki | odmowa (PARTIAL ×2) | **ACCEPT → model 12,32 × 8,82 m**: NEAR (szerokość −6,8 %, głębokość dokładna), IoU 0,881 (stała rama protokołu), kalenica ✓ |
+| sp318422 | ACCEPT fałszywy (13,88 × 16,03 m) | ROLLBACK (11,02 wobec 9,58 m, 15 %) |
+| Puszek, plan63-411 | odmowa | odmowa (bez zmian) |
+| DEV ×6 | 4 modele, 2 odmowy | **bez zmian**: te same rozstrzygnięcia i te same hashe modeli 6/6; reguła zasięgu ani razu nie zadziałała |
+
+- **Odtwarzalność Aksamitek:** pętla i niezależne odtworzenie (`replay-c.sh`) dają ten sam hash modelu `e86a24b88b54b3fe`.
+- **Porównanie z v3.54.1.** Model Aksamitek ma tę samą jakość co wynik B v3.54.1 (NEAR, kalenica ✓). Tym razem jednak zbudował go analizator na skali z dwóch wymiarów odczytanych przez konsultanta (1322 i 882), a nie czytnik opisujący dom.
+- **Inna metryka w diagnozie.** `PLAN_COMPOSITION.md` podaje dla Aksamitek IoU 0,979, bo używa metryki v3.54.1 (najlepszy z 4 obrotów + przesunięcie ±1,5 m). W tym raporcie obowiązuje stała rama protokołu (0,881).
+- **Brakujące 0,9 m szerokości** to wykusz, który pomija już dekompozycja rzutu (diagnoza §2), a nie błąd skali.
+- **Plansze (prywatne):** `boards/final-archon-dom-w-aksamitkach-c4-{plan,views}.png` (źródło | PRZED | PO, te same kamery).
+
+### Poprawki z diagnozy niewdrożone
+
+| Poprawka | Efekt w kopii cieniowej | Dlaczego nie wdrożona |
+|---|---|---|
+| **Fix 3**: przyjęte wymiary konsultowane jako łańcuchy całkowite ramy | sp318422: dokładnie 14,02 × 9,58 m, IoU 0,876 (ganek odpada); Madera: zasięg dobry, nadal odmowa | jedna zmiana dowodu karmi naraz zasięg, role łańcuchów, siatkę, drabinę i resolver; wymaga podniesienia wersji schematu dowodu metrycznego; sprawdzona tylko wstrzyknięciem, nie na Kuklikach ani Toreniach |
+| **Fix 2**: domknięcie w pełni przeszklonego końca na odczytanym ticku wymiaru | Supertunie: odmowa → 6,32 × 13,50 m, IoU 0,897, pokrycie 89 % | czysta łatka za bramką pilota (`diag/fix2-*.patch`) zostawia ścieżkę domyślną bez zmian (16/16), ale reguła wynika z jednego domu i może zamknąć bryłę nad loggią lub podcieniem; bez bramki zmienia diagnostykę etapu A Supertunii |
+| Madera | brak minimalnej poprawki | M2 + M3 razem: niedorysowana brama garażu i przeszklony salon jako OUTSIDE |
+
+Łatka Fix 2 i skrypt wstrzyknięcia Fix 3 leżą w `/home/user/rd/v3542/diag/` (prywatnie, także w paczce ZIP). Nie wdrożyłem ich, bo po potwierdzeniu nie ma już żadnych niewidzianych domów: każda kolejna reguła wyprowadzona z jednego z tych czterech byłaby dopasowaniem do benchmarku. Kolejność, którą rekomenduję: Fix 3 → Fix 2, każda za flagą pilota, z regresją S30 + FINAL na ścieżce domyślnej (bajt w bajt) przed jakimkolwiek przebiegiem na nowych domach. Bez nowej próby potwierdzającej (nowe rodziny, odczyty na żywo) żadna z nich nie może zmienić statusu QUALITY_GAIN.
+
+### Równolegle: wyglądy domu 3D w aplikacji Android (`7f9b566`)
+
+Na prośbę OWNER-a drugi agent pracował równolegle nad wyglądem aplikacji, tylko w `apps/android`. Ze zmianami analizatora się nie przecina.
+
+- **Sześć nowych wyglądów** obok istniejących Modelu, Makiety i Kreski:
+  - Przytulny (ciepłe słońce, tynk, terakota, drewno);
+  - Wieczór (ta sama paleta o zmierzchu, ciepło świecące szyby);
+  - W słońcu (drabina wartości do pracy na działce w pełnym słońcu);
+  - Techniczny (ciemny widok z MASTER_PLAN §3.2);
+  - Prześwietlenie (przezroczysta bryła: pokoje, schody i kondygnacje widać przez powłokę);
+  - Światłokopia (granat i cyjanowe linie jak rysunek z budowy).
+- **Zasada:** wygląd zmienia tylko światło, materiały, alfę, kontury, tło, siatkę i arkusz gruntu. Nigdy nie zmienia geometrii, zbioru obiektów, widoczności ani semantyki. Geometria jest wgrywana raz.
+- **Panel Wygląd** jest pogrupowany: Dom / Studium bryły / Rysunek techniczny. Listwa podaje wygląd jednym słowem; pełna nazwa jest w `stateDescription`.
+- **Propozycje (niewdrożone)** są w `apps/android/LOOKS_PROPOSAL.md`: miniatury, wygląd zapamiętany per dom, podpowiedź „W słońcu”, przejście 180 ms, fokus w Prześwietleniu. Odrzucony: „duch” przyszłych etapów.
+- **Testy.**
+  - `HouseLooksTest` (14): determinizm, przezroczystość, kontrast stykających się grup, szkło w Prześwietleniu, kontrast chromu.
+  - `testDebugUnitTest`: 476 testów, **4 błędy**, niezależne od wyglądów (sprawdzone ponownie). Wszystkie pochodzą z dwóch scen 005T (`jarzmianki-005t-visual`, `gozdzikowce-005t-visual`) dołączonych w `074d6ae`, których `DownloadedScenesTest` (2) i `AutoCandidateRenderingTest` (2) nie przewidują. Żaden plik zmieniony przez `7f9b566` nie leży na ich ścieżce.
+  - `lintDebug`: 1 błąd w nietkniętym `DescribingPanel.kt:88` (zgłoszony przez agenta, niezweryfikowany ponownie).
+- **Status: NOT_VERIFIED na urządzeniu.** Podglądy z rasteryzatora dowodowego (bez cieni, AO i odblasków) leżą poza repo w `/home/user/rd/ui-previews/`. Nowego APK nie ma: zabrakło miejsca na dysku sesji.
+
 ## Paczka prywatna, plansze i ciągłość
 
-- **Plansze** (prywatne, 20 PNG: po 2 na dom): `boards/<dom>-plan.png` (ŹRÓDŁO | PRZED | PO) i `boards/<dom>-views.png` (elewacje | 9 widoków PRZED | PO, te same kamery).
+- **Plansze** (prywatne, 20 PNG: po 2 na dom; plus 2 z Dodatku: `final-archon-dom-w-aksamitkach-c4-{plan,views}.png`): `boards/<dom>-plan.png` (ŹRÓDŁO | PRZED | PO) i `boards/<dom>-views.png` (elewacje | 9 widoków PRZED | PO, te same kamery).
 - **Paczka prywatna `/home/user/BuildPlan-V3542-Private.zip`** (poza Gitem), z `INDEX.md` i `MANIFEST.sha256`; zawiera:
   - raport, tabele, protokół, referencje (hash);
   - zdarzenia (pytania, odpowiedzi, narzędzia, werdykty, decyzje, rewizje; obrazy przez hash i transformację, bez bajtów);

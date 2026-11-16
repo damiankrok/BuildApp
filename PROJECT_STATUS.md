@@ -34,7 +34,22 @@
   - 4B found real defects on 5 of 6 models (garage, terrace closed as a box, swapped elevations) with no false alarm on
     the control.
 
-  Next: extent check in `compareRuns`; plan composition at a verified scale (report §14).
+  Post-confirmation development (labelled separately; the 4 CONFIRM_KNOWN houses are development data now; replays of the
+  recorded answers, no new API calls):
+  - Candidate 2: extent check in `compareRuns`. sp318422's false ACCEPT → ROLLBACK; DEV unchanged.
+  - Candidate 3: `axisLadder` Fix 1 from `stage-reports/artifacts/v3542/PLAN_COMPOSITION.md`, gated on
+    CONSULTANT_VALIDATED, default path byte-identical.
+  - Candidate 4: extent tolerance 10 %, chosen after seeing Aksamitki. Aksamitki goes refusal → model 12.32 × 8.82 m (NEAR,
+    IoU 0.881, ridge ✓, reproducible), which is tuning, not transfer evidence; sp318422 is still rolled back (+15 %).
+  - Fix 2 (glazed end) and Fix 3 (consulted spans as overall chains) are prepared as patches, not applied: they need unseen
+    houses.
+
+  Android (parallel agent, `7f9b566`): six house looks (Przytulny, Wieczór, W słońcu, Techniczny, Prześwietlenie,
+  Światłokopia), appearance only, plus proposals in `apps/android/LOOKS_PROPOSAL.md`. JVM tests green except 4
+  pre-existing scene-list failures (005T scenes from `074d6ae`). On device NOT_VERIFIED; no APK.
+
+  Next: a fresh confirmation set (new families, live readings) for candidates 2–4, then Fix 3 → Fix 2 behind the pilot with
+  S30 + FINAL regression (report addendum).
 - **v3.54.1 (2026-11-16) — Claude API reader measured live, hybrid H1, product path (OWNER brief v3.54.1, Master Plan
   v3.54.1 at `docs/MASTER_PLAN.md`): CHECKPOINT, target partly met; no APK (no app change; APK 1339 stays current).**
   Report `stage-reports/SOURCE_TO_MODEL_V3541.md`, AI map `stage-reports/artifacts/v3541/AI_MAP.md`, protocol sealed

@@ -29,6 +29,19 @@
 
 **Pytanie do OWNER-a.** Gdy prawdziwa skala ujawnia, że analizator nie umie złożyć domu (Madera): pokazywać zły model dopasowany do pola, jak dziś, czy uczciwą odmowę z pytaniem?
 
-**Android:** bez zmian, bez nowego APK (NOT_VERIFIED).
+**Po potwierdzeniu (rozwój, oznaczony osobno; te 4 domy nie są już próbą potwierdzającą)**
+- **Kontrola zasięgu** w przyjęciu: model, którego zasięg nie zgadza się z odczytanym wymiarem całkowitym, jest cofany. Fałszywe przyjęcie sp318422 znika; domy DEV bez zmian.
+- **Poprawka składania planu** (pierwszy wymiar łańcucha musi zgadzać się ze skalą z konsultacji):
+  - Aksamitki po raz pierwszy składają się w model 12,32 × 8,82 m (NEAR, szerokość −6,8 %, IoU 0,881, kalenica ✓) — powtarzalnie, bez nowych wywołań API;
+  - sp318422 ma głębokość +15 % zamiast +67 % i nadal jest cofany.
+- **Tolerancję kontroli zasięgu (10 %) wybrałem po obejrzeniu Aksamitek.** To jest strojenie, nie dowód.
+- Dwie kolejne poprawki (sp318422 dokładnie, Supertunie IoU 0,897) są przygotowane, ale niewdrożone: potrzebują nowych, niewidzianych domów do sprawdzenia.
+
+**Android: nowe wyglądy domu 3D** (drugi agent, równolegle; tylko wygląd, geometria bez zmian):
+- Przytulny, Wieczór, W słońcu, Techniczny, Prześwietlenie (przezroczysta bryła) i Światłokopia;
+- panel Wygląd pogrupowany;
+- propozycje dalszych zmian w `apps/android/LOOKS_PROPOSAL.md`.
+
+Testy wyglądów zielone; 4 starsze błędy testów scen nie mają z nimi związku. Na urządzeniu **NOT_VERIFIED**; nowego APK nie ma (brak miejsca na dysku sesji).
 
 Pełny raport: `stage-reports/SOURCE_TO_MODEL_V3542.md`.

@@ -25,3 +25,10 @@
    (b) the consultant numbers its proposals per conversation (Q1…), so round 2's twelve proposals were all refused as
    DUPLICATE_PROPOSAL_ID — the loop now scopes ids per round (`r<round>:<id>`); a repeated id within one answer is still
    refused (unit test). Supertunie's C2 round 2 therefore consumed nothing (NO_CHANGE) — recorded as is, not re-run.
+4. After the confirmation results were seen, outside the protocol, with no new API calls. Each candidate was re-run as a
+   replay of the recorded answers through the current code (`consult-run.ts --replay`).
+   - **Candidate 2 (`6bd8870`)**: the extent check at 5 %, the value from report §13, fixed before its replay.
+   - **Candidate 3 (`e88686b`)**: diagnosis Fix 1.
+   - **Candidate 4 (`505cb7d`)**: the extent tolerance raised to 10 % **after** seeing Aksamitki rejected at 7 %. This is
+     a tuning decision on a seen house. The resulting Aksamitki model is development evidence, not confirmation.
+   - The four CONFIRM_KNOWN houses are development data from this point on.

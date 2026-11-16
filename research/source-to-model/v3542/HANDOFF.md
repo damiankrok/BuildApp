@@ -52,5 +52,31 @@
    - a label read in a direction the analyzer has no lattice for;
    - room-size notes in ft-in (CAPABILITY_MISSING).
 
+## After confirmation (labelled separately; report addendum)
+
+### Candidates
+- **Candidate 2, `6bd8870`.** Extent check in `compareRuns`, 5 %. sp318422 → ROLLBACK; DEV unchanged.
+- **Candidate 3, `e88686b`.** `layout.ts` `axisLadder` first statement checked against a CONSULTANT_VALIDATED scale. The
+  solver version was not bumped, so default bytes are unchanged.
+- **Candidate 4, `505cb7d`.** `EXTENT_TOLERANCE` 10 %, chosen after seeing Aksamitki. Aksamitki ACCEPT (model
+  `e86a24b88b54b3fe`, NEAR, IoU 0.881); sp318422 ROLLBACK (15 %).
+
+### Replays (private)
+- Run dirs: `/home/user/rd/v3542/{D-c2,D-c3,D-c4,C2-c2,C2-c3,C2-c4}` and `D-c4-art`.
+- Boards: `boards/final-archon-dom-w-aksamitkach-c4-{plan,views}.png`.
+- Command: `consult-run.ts --replay <recorded dir> --max-rounds N --no-model-check`.
+
+### Diagnosis and patches
+- Diagnosis: `stage-reports/artifacts/v3542/PLAN_COMPOSITION.md`.
+- Patches and batches: `/home/user/rd/v3542/diag/`. Fix 2 = `fix2-*.patch`; Fix 3 was tested only by injection
+  (`inject.py`).
+
+### Android (`7f9b566`, parallel agent)
+- Looks in `presentation/HouseLooks.kt`; `HouseLooksTest`.
+- Previews: `/home/user/rd/ui-previews/`.
+- No APK.
+- 4 failing scene tests predate it: the 005T scenes from `074d6ae`.
+
 ## Next step (one)
-OWNER/coordinator decisions in report §14. The cheapest concrete step is the extent check in `compareRuns`, re-evaluated on the recorded D answers with `consult-run.ts --replay /home/user/rd/v3542/D` (no API cost).
+Freeze a fresh confirmation set of new families with live readings (≤ 5 USD), and run candidates 2–4 on it unchanged. Only
+then add Fix 3 and Fix 2 behind the pilot, with an S30 + FINAL byte-identity regression on the default path.
