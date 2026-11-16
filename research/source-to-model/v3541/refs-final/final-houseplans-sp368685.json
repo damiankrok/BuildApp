@@ -1,0 +1,82 @@
+{
+  "slug": "final-houseplans-sp368685",
+  "imagesUsed": [
+    {"n": 27, "what": "ground plan titled 'MAIN LEVEL FLOOR PLAN' (caption says 'Lower Floor'), garage doors at the bottom = front; printed text 'width: 23'-0\"' under the plan and 'depth: 47'-1\"' along the left side (labels without dimension lines); rooms OWNER'S CHOICE FLEX SPACE 22x20, ½ BATH 8x3, DOUBLE GARAGE 22x22 (9'-0\" CEILING), two '9' x 8' GARAGE DOOR'; side entry door with stoop and stair 'UP' on the right"},
+    {"n": 28, "what": "same main-level plan, small copy"},
+    {"n": 29, "what": "same main-level plan, small copy"},
+    {"n": 31, "what": "upper plan titled 'SECOND LEVEL FLOOR PLAN' (caption says 'Main Floor'), same orientation: bedrooms at the rear, vaulted family room/kitchen/breakfast at the front, 'ROOFTOP BALCONY 23x6' in front; '16'-4½\" HT. PEAK', '9' WALL'"},
+    {"n": 30, "what": "same second-level plan, small copy"},
+    {"n": 32, "what": "same second-level plan, small copy"},
+    {"n": 22, "what": "LEFT ELEVATION drawing (full): balcony at the right end = front; lower storey 4 windows, upper storey 4 windows; roof shown as a band (ridge parallel to this side)"},
+    {"n": 21, "what": "same LEFT ELEVATION, small copy"},
+    {"n": 23, "what": "same LEFT ELEVATION, small copy"},
+    {"n": 24, "what": "RIGHT ELEVATION drawing: balcony at the left end = front; lower storey window, twin window, entrance door, window; upper storey twin, small, tall narrow, window"},
+    {"n": 10, "what": "FRONT elevation drawing, cropped: glazed gable (3 upper panes over 2 large windows and a French double door), glass balcony railing, tops of two garage doors"},
+    {"n": 26, "what": "REAR elevation drawing, cropped: gable with one upper window, tops of two lower windows; rake slope measurable"},
+    {"n": 9, "what": "front render: two dark garage doors, rooftop balcony with glass railing, timber-clad glazed gable recessed in a white gable frame"},
+    {"n": 5, "what": "front-right render (largest): front gable + right side with entrance door; same as 6, 7, 8, 13"},
+    {"n": 19, "what": "left-side render (also 17, 18): window layout matches drawing 22; upper storey cream here"},
+    {"n": 20, "what": "right-side render: window/door layout matches drawing 24"},
+    {"n": 25, "what": "rear-left render: rear gable (1 upper, 2 lower windows) and left side"}
+  ],
+  "mirrorOrOtherProjectWarning": "Pictures of this plan (#932-1329): renders 5-9, 13, 17-20, 25, thumbnail 35; drawings 10 (front, cropped), 21-23 (left), 24 (right), 26 (rear, cropped); plans 27-29 (main level) and 30-32 (second level). Captions mislabel the levels: 27-29 'Lower Floor' are titled 'MAIN LEVEL FLOOR PLAN', 30-32 'Main Floor' are titled 'SECOND LEVEL FLOOR PLAN'. Other projects: 1-3 (carousel 453-56, 892-47, 938-119), 4 ('Builder Advantage Home' banner), 11, 12, 14, 15, 16 (#932-179, #932-1250, #932-913, #932-488, #932-622), 33 (farmhouse photo), 34 (photo of #932-216); 36-38 are generic 'Zonda House Plans' detail sheets. No mirrored copy: left/right elevations, renders and both plans agree (entrance door on the right side toward the rear, balcony at the front). Renders use two colour schemes for the upper storey (white in 5-9/13, cream in 17-20/25).",
+  "overall": {"widthM": 7.01, "depthM": 14.351, "heightM": 8.407, "basis": "Front = the garage-door gable end (source captions 'Front Elevation' for renders 5-9 and drawing 10; bottom of both plans); the entrance door is on the RIGHT side. Width 23'-0\" = 7.0104 m and depth 47'-1\" = 14.351 m are printed as text labels on plan 27 (no dimension lines or ticks); they match the drawn main-level rectangle to 0.1% (669 x 1369 px), so they denote the outer faces of the ground storey, which is a plain rectangle including the integral double garage. Framing vs finish face not indicated. The upper storey is shorter (~13.1 m incl. side wing walls, TRACED) with the rooftop balcony over the front ~1.2 m of the ground storey. Published page facts Width 23', Depth 47'1\" agree; Height 27'7\" = 8.407 m is published (left elevation 22 scaled by 47'-1\" gives ~8.46 m grade to ridge, TRACED)."},
+  "storeys": {"fullStoreysAboveGround": 2, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "two-storey block over the full 23' width: ground storey = double garage (front) + flex space, half bath, stair (rear); upper storey = vaulted family room/kitchen/breakfast at the front behind a recessed glazed gable, two bedrooms, bath, utility, pantry at the rear; gable roof front-to-back", "storeys": 2, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "7.01 x 14.35 ground; upper ~7.01 x 13.12 incl. wing walls (TRACED), glazed front wall ~1.73 m behind the ground-storey front (TRACED)"},
+    {"name": "balcony base", "role": "OTHER", "where": "front strip of the ground storey (over the garage front) projecting beyond the upper storey; flat roof carrying the rooftop balcony with glass railing", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "7.01 x ~1.2 to the wing walls / ~1.73 to the glazed wall (TRACED; balcony label 23x6)"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 33.7, "notes": "Symmetric gable over the upper storey, ridge running front-to-back, gables to the front (glazed, timber-clad, set inside a thick white gable frame formed by the side wing walls and roof) and to the rear (plain, one window); black standing-seam metal, tight eaves. Pitch TRACED from the rake lines of front/rear elevation crops 10 and 26 (rise/run ~35/52-53 px, i.e. about 8:12) - not printed. Ridge ~8.46 m above grade and eave ~6.1 m scaled from elevation 22 (TRACED). Flat roof/balcony deck over the front ground-storey strip. No chimney."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "CENTER", "doorCount": 2},
+  "entrance": {"facade": "RIGHT", "position": "RIGHT", "recessedOrPorch": false},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["GARAGE_DOOR", "GARAGE_DOOR"]},
+      {"storey": 1, "count": 6, "leftToRight": ["LARGE_GLAZING", "DOOR", "LARGE_GLAZING", "WINDOW", "WINDOW", "WINDOW"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 1, "leftToRight": ["WINDOW"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW"]},
+      {"storey": 1, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "FRONT", "position": "CENTER", "what": "upper-storey glazed gable behind the balcony: two large windows (~1.53 m wide, TRACED) flanking a French double door to the balcony, with three gable panes above (trapezoid-rectangle-trapezoid in drawing 10; triangle-pentagon-triangle in render 9); timber cladding between"}
+  ],
+  "features": [
+    {"kind": "BALCONY", "count": 1, "where": "rooftop balcony across the full front over the garage front strip, black-framed glass railing, between the side wing walls; printed 'ROOFTOP BALCONY 23x6'"},
+    {"kind": "OTHER", "count": 1, "where": "recessed glazed front gable with natural timber horizontal cladding, framed by a thick white gable frame (signature feature)"},
+    {"kind": "OTHER", "count": 1, "where": "two-material walls: white board-and-batten ground storey with a white band at the floor line, smooth rendered upper storey"},
+    {"kind": "OTHER", "count": 1, "where": "black standing-seam metal roof"}
+  ],
+  "palette": {"walls": "ground storey white vertical board-and-batten with white trim band; upper storey smooth render, white in renders 5-9/13 but cream/beige in 17-20/25; front gable infill natural timber horizontal boards inside a white frame; black window frames; charcoal garage doors with a column of four small lites; dark entrance door with four lites; black glass-panel balcony railing; black wall lanterns", "roof": "black standing-seam metal"},
+  "uncertain": [
+    "Printed width/depth are text labels ('width: 23'-0\"', 'depth: 47'-1\"') without dimension lines; interpreted as outer faces because the drawn main-level rectangle matches them to 0.1%.",
+    "Picture captions swap the level names (27-29 'Lower Floor' = drawn 'MAIN LEVEL'; 30-32 'Main Floor' = drawn 'SECOND LEVEL'); ground storey = main level.",
+    "Upper-storey setback: glazed front wall ~1.73 m behind the ground-storey front in plan 31; side wing walls and roof end ~1.12 m (plan) / ~1.22 m (elevation 22) behind it; balcony label 23x6 is nominal (traced ~5'-8\" to the glazed wall).",
+    "Pitch 33.7 deg and ridge/eave heights are TRACED from drawings (consistent with 8:12), not printed; published height 8.407 m vs traced ~8.46 m.",
+    "Front and rear elevation drawings exist only as crops (10, 26); lower front and rear openings counted from renders 9/25 and plan 27.",
+    "FRONT storey 1 lists the lower row of the glazed gable (large window, French double door, large window) then the three gable panes above, all in the one vaulted storey (no attic floor).",
+    "Front gable pane shapes differ between drawing 10 (trapezoids/rectangle) and render 9 (triangles/pentagon).",
+    "Front-most lower window on the right side is a two-pane horizontal unit in drawing 24 but looks like a twin casement in render 5; count unaffected.",
+    "Labels FLEX SPACE 22x20 / DOUBLE GARAGE 22x22 are nominal interior sizes (flex traced ~24' deep including the stair zone).",
+    "Entrance door is ~70% of the way from front to rear on the right side; the stoop outside it is uncovered."
+  ],
+  "confidence": "HIGH - printed overall width/depth on the ground plan agree with the drawing and published facts; both plans, full left/right elevations, cropped front/rear elevations and many renders agree; only pitch/heights and the upper setback are traced.",
+  "groundOutline": {"shape": "RECTANGLE", "corners": 4, "polygonM": [[0, 0], [7.01, 0], [7.01, 14.351], [0, 14.351]], "closedAreaM2": 100.61, "basis": "origin = front-left outer corner of the ground storey (garage front); x along the front, y to the rear. 23'-0\" = 7.0104 m and 47'-1\" = 14.351 m printed; no jogs drawn on the main-level plan. Integral double garage included; side-entry stoop, driveway and walkway excluded. Shoelace area 7.0104 x 14.351 = 100.61 m2."},
+  "openZones": [
+    {"kind": "BALCONY", "roofed": false, "where": "upper level, full front width over the garage front strip, glass railing, French doors from the family room/breakfast area", "approxSizeM": "7.01 x ~1.2-1.73 (TRACED; label 23x6)"},
+    {"kind": "STOOP", "roofed": false, "where": "landing outside the right-side entrance door (rectangle in plan 27, small step in render 5)", "approxSizeM": "about 1.18 x 1.2 (TRACED)"},
+    {"kind": "DRIVEWAY", "roofed": false, "where": "in front of both garage doors, flaring out toward the street (light-grey outline in plan 27, renders 5, 9)", "approxSizeM": "UNKNOWN"},
+    {"kind": "WALKWAY", "roofed": false, "where": "along the right side from the driveway to the entrance stoop (light-grey lines in plan 27, render 5)", "approxSizeM": "about 0.9 wide (TRACED), length ~9 m"}
+  ],
+  "printedOverall": {"widthCm": 701.04, "depthCm": 1435.1, "where": "picture 27 (also 28, 29): text 'width: 23'-0\"' centred under the plan above the title, and 'depth: 47'-1\"' rotated along the left side; no dimension lines. Same values published on the page."},
+  "groundRooms": 3
+}

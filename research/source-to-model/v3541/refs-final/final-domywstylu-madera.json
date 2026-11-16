@@ -1,0 +1,256 @@
+{
+ "slug": "final-domywstylu-madera",
+ "imagesUsed": [
+  {
+   "n": 6,
+   "what": "ground floor plan, entrance door and garage door at the bottom; printed outer chains '15,98' (top) and '18,71' (left) only; 16 labelled spaces incl. garage 26.24; terrace with lounge and dining sets in the rear-left inner corner, entrance landing with steps beside the garage"
+  },
+  {
+   "n": 5,
+   "what": "elevation sheet: contains ONLY the front (entrance) elevation - kitchen ribbon window left, yellow panel with house number, entrance door, brick garage with sectional door right; thick white flat-roof band; front-facing gable over the right (bedroom/garage) wing and an eaves-side gable roof over the left part; two stacks"
+  },
+  {
+   "n": 4,
+   "what": "render captioned 'wizualizacja frontowa' but showing the garden (rear/north) side: brick wing with a narrow bathroom window under a louvred gable, bedroom 13.88 corner glazing, living-room glazing, terrace and pool, left (west) gable of the cross roof, one chimney"
+  },
+  {
+   "n": 2,
+   "what": "400x300 thumbnail of render 4"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "Picture 1 is the '1:500 add-on' icon and picture 3 (role SITE_PLAN) is the 'koszty budowy' cost-calculator icon - neither is a drawing. Picture 2 is a thumbnail of render 4. The URL has no variant suffix and all captions say 'Madera'. Render 4's caption says 'wizualizacja frontowa' but it shows the garden side (no entrance or garage door; the bedroom corner glazing and living-room glazing of the plan's top edge seen from behind, east wing on the left, west gable on the right) - consistent with the plan, not mirrored. Front-elevation positions (window ~0.8-4.3 m, solid panel ~4.3-8.1 m, door ~8.1-9.5 m, garage ~9.8-16.0 m from the left) match the plan's bottom edge, so no mirror. No other project.",
+ "overall": {
+  "widthM": 15.98,
+  "depthM": 18.71,
+  "heightM": 6.69,
+  "basis": "Front = entrance facade (bottom of plan 6: entrance door and garage door; the only elevation drawn; render 4's 'frontowa' caption ignored because it shows the rear). Width 15.98 printed (top chain from the kitchen's left wall face to the right face of the bedroom/garage wing); depth 18.71 printed (left chain from the rear face of the bathroom block to the garage front). These are the bounding box of the closed stepped body including the integrated garage, which projects ~4.2 m ahead of the kitchen/entrance face; the rear-left terrace lies inside the box and is excluded, the double-line band behind the terrace lies beyond the 18.71 chain. Published built-up 202.66 m2 and garage 26.24 m2 (= garage label). Height 6.69 published (elevation ridge scales ~6.6 m, consistent)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 1,
+  "habitableAttic": false,
+  "basement": false
+ },
+ "bodies": [
+  {
+   "name": "east wing",
+   "role": "MAIN",
+   "where": "right side, full depth: integrated garage at the front-right projecting ~4.2 m ahead of the rest, then hall/WC/boiler room, two bedrooms, bedroom 13.88 and the bathroom block at the rear (bathroom block ~1.1 m further back); gable roof with the gable facing the front (and a louvred gable to the rear in the render)",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "approxSizeM": "~8.7 wide (x 7.25-15.98) for the bedroom part; garage part 6.13 wide (x 9.85-15.98) reaching the front line; total depth 18.71"
+  },
+  {
+   "name": "west wing (kitchen strip + living room)",
+   "role": "WING",
+   "where": "left part: front strip with kitchen/dining 19.85, vestibule 5.65 and hall 8.66, set back ~4.2 m behind the garage front; living room 25.40 behind it, glazed to the left and rear; gable roof with ridge parallel to the front and a gable facing left over the living-room zone; the kitchen's left ~2.3 m shows only the white flat-roof band",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "approxSizeM": "front strip ~9.85 x ~5.2 (x 0-9.85, y 4.2-9.4); living room ~4.8 x ~3.6 (x 2.5-7.25, y 9.4-13.0)"
+  }
+ ],
+ "mainRoof": {
+  "kind": "GABLE",
+  "ridge": "ACROSS_FRONT",
+  "highSideIfShed": null,
+  "pitchDeg": 30,
+  "notes": "Cross-gable composition rising from a thick white flat-roof frame: (1) gable roof over the east (bedroom/garage) wing, ridge front-to-back, gable facing the front (base ~8.2 m wide on the front elevation, scales ~32 deg) and a louvred gable to the rear (render); (2) gable roof over the living-room zone with ridge parallel to the front, gable facing left at ~2.3 m from the left corner, its ridge running into the east-wing roof and drawn slightly higher than the east-wing apex. Light grey standing-seam metal; gables clad with dark grey horizontal louvres/slats. Pitch 30 published. No roof plan or side elevation, so ridge lengths and the front/rear gable positions are UNKNOWN."
+ },
+ "garage": {
+  "present": true,
+  "doorFacade": "FRONT",
+  "doorPosition": "RIGHT",
+  "doorCount": 1
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "CENTER",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": true,
+   "byStorey": [
+    {
+     "storey": 0,
+     "count": 3,
+     "leftToRight": [
+      "WINDOW",
+      "ENTRANCE_DOOR",
+      "GARAGE_DOOR"
+     ]
+    }
+   ]
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [
+  {
+   "facade": "REAR",
+   "position": "CENTER",
+   "what": "bedroom 13.88 corner glazing: ~3.3 m on the rear face plus ~2.2 m returning on the left face, under the white frame overhang (plan + render; no elevation)"
+  },
+  {
+   "facade": "REAR",
+   "position": "RIGHT",
+   "what": "living room 25.40 glazed rear wall ~4.1 m between corner piers, sliding glazing with external blinds (plan + render; no elevation)"
+  },
+  {
+   "facade": "LEFT",
+   "position": "RIGHT",
+   "what": "kitchen 19.85: left wall glazed ~3.0 m plus ~1.9 m on its rear face around the corner pier (plan; render shows glass doors)"
+  },
+  {
+   "facade": "LEFT",
+   "position": "CENTER",
+   "what": "living room 25.40 left wall glazing ~2.1 m (plan only)"
+  }
+ ],
+ "features": [
+  {
+   "kind": "GARAGE",
+   "count": 1,
+   "where": "integrated single garage at the front-right, projecting ~4.2 m ahead of the kitchen/entrance face, red-brown brick front, one sectional door (label 26.24 = published garage area)"
+  },
+  {
+   "kind": "TERRACE",
+   "count": 1,
+   "where": "rear-left inner corner wrapping the living room's left and rear glazing, lounge and dining furniture drawn (plan); render shows a raised deck/paving with steps"
+  },
+  {
+   "kind": "CHIMNEY",
+   "count": 2,
+   "where": "front elevation: a slim stack at ~7.9 m and a square chimney at ~12.0 m from the left corner, near ridge level; render shows one chimney on the rear slope of the living-zone roof"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "thick white flat-roof frame/fascia band running round the house under the pitched roofs and projecting over the glazed corners (signature feature; elevation + render)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 2,
+   "where": "gables clad with dark grey horizontal louvres/slats (front gable grey in the elevation; rear and left gables in the render)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "bedroom 13.88 corner glazing at the rear-left of the east wing (plan + render)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "yellow-ochre accent panel with house number between the kitchen window and the entrance door (front elevation)"
+  }
+ ],
+ "palette": {
+  "walls": "white render (frame band and plain walls), red-brown clinker brick on the east wing and garage front, warm horizontal timber cladding on the rear facades, yellow-ochre accent panel at the entrance, anthracite window/door frames and external blinds, grey sectional garage door",
+  "roof": "light grey standing-seam metal; dark grey louvred gable cladding"
+ },
+ "uncertain": [
+  "Only the front elevation is drawn, so REAR/LEFT/RIGHT openings are marked not shown. From the plan: RIGHT 2 windows (bedrooms 11.20, 11.79); REAR (stepped) 4 openings - bathroom 5.19 narrow window, bedroom 13.88 corner glazing, living-room glazed wall, kitchen rear glazing; LEFT (stepped) 3 - bedroom 13.88 corner return, living-room glazing, kitchen glazing. The render confirms the rear ones.",
+  "Render 4 (and thumbnail 2) is captioned 'wizualizacja frontowa' but shows the rear/garden side; front was taken from the entrance facade of the drawings.",
+  "Only two overall chains are printed; every inner vertex (kitchen front line 4.20, garage left face 9.85, kitchen rear 9.38, living-room left face 2.48 and rear 12.98, bedroom left face 7.25 and rear 17.60, bathroom block left face 11.16) is TRACED at ~21.7 px/m (one pixel ~4.6 cm), estimated +-0.1 m.",
+  "Glazed walls (living room rear, bedroom corner, kitchen corner) were taken at the outer faces of their corner piers.",
+  "An L-shaped double-line band (~0.7 m wide) runs along the rear edge of the terrace zone (~18.7-19.4 m from the front, beyond the 18.71 chain) from the bathroom block to ~2.6 m from the left and then down to the terrace's rear line at ~17.2 m; its meaning is not identifiable (canopy fascia edge, low wall or planter). The render shows no roof over the lounge area, so the terrace is recorded as unroofed, with doubt.",
+  "Entrance landing between the kitchen front and the garage (~3.8 x 3.5 m incl. steps): whether it is roofed (e.g. by an overhang of the east-wing roof, whose front gable spans from ~7.7 m) is not shown.",
+  "No roof plan, side or rear elevation: ridge lengths, the position of the east-wing front gable relative to the garage front, and the extent of the living-zone roof are UNKNOWN.",
+  "Chimney count differs: 2 stacks in the elevation, 1 chimney in the render.",
+  "The grey diagonal shape across the yellow panel and left wall in the front elevation reads as the cast shadow of the projecting garage, not a building element.",
+  "Kitchen front window: one ~3.5 m opening on the plan, two panes with a mullion in the elevation - counted as one window. The entrance door appears to have a narrow side light - counted as one ENTRANCE_DOOR.",
+  "Pool, deck steps and paving appear only in the render. The render also shows panels (solar or glazing?) on the east-wing roof's left slope - not identifiable.",
+  "Traced outline area 202.8 m2 vs published built-up 202.66 m2 (check only, not used to fit).",
+  "groundRooms = 16 labelled spaces including the garage 26.24 (15 without)."
+ ],
+ "confidence": "MEDIUM - overall width/depth printed and legible and the traced 12-corner outline agrees with the published built-up area within 0.1%, but every inner vertex is traced from a 540 px plan, only the front elevation exists, the full render shows the rear, and the cross-gable roof extents and the rear double-line band are uncertain.",
+ "groundOutline": {
+  "shape": "OTHER",
+  "corners": 12,
+  "polygonM": [
+   [
+    0,
+    4.2
+   ],
+   [
+    9.85,
+    4.2
+   ],
+   [
+    9.85,
+    0
+   ],
+   [
+    15.98,
+    0
+   ],
+   [
+    15.98,
+    18.71
+   ],
+   [
+    11.16,
+    18.71
+   ],
+   [
+    11.16,
+    17.6
+   ],
+   [
+    7.25,
+    17.6
+   ],
+   [
+    7.25,
+    12.98
+   ],
+   [
+    2.48,
+    12.98
+   ],
+   [
+    2.48,
+    9.38
+   ],
+   [
+    0,
+    9.38
+   ]
+  ],
+  "closedAreaM2": 202.81,
+  "basis": "Stepped outline: garage projecting at the front-right, rear-left corner cut back in two steps (living room, bedroom 13.88), bathroom block projecting at the rear-right. Origin = front-left corner of the bounding box (x = kitchen's left wall face, y = garage front line); the kitchen's front-left corner is (0, 4.20). Printed: 15.98 (x of the right face) and 18.71 (y of the bathroom block's rear face). TRACED: 4.20, 9.85, 9.38, 2.48, 12.98, 7.25, 17.60, 11.16 (scaled with the printed chains, ~21.7 px/m). Terrace, entrance landing and the rear double-line band excluded. Published built-up 202.66 m2."
+ },
+ "openZones": [
+  {
+   "kind": "TERRACE",
+   "roofed": false,
+   "where": "rear-left inner corner: along the living room's left side (x 0-2.5 m, y 9.4-17.2 m) and behind the living room and bedroom 13.88 up to the double-line band (~18.7 m), lounge and dining sets drawn",
+   "approxSizeM": "L-shape ~2.5 x 7.8 + ~4.8 x 5.7 + ~3.9 x 1.1 behind the bedroom (traced)"
+  },
+  {
+   "kind": "PORCH",
+   "roofed": null,
+   "where": "entrance landing in front of the entrance door, between the kitchen front and the garage's left wall, steps along its front edge (x ~7.0-9.85 m)",
+   "approxSizeM": "~3.8 x ~3.5 incl. steps (traced)"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": 1598,
+  "depthCm": 1871,
+  "where": "picture 6: top outer chain '15,98' (from the kitchen's left wall face to the east wing's right face) and left outer chain '18,71' (from the bathroom block's rear face to the garage front); no intermediate chains printed"
+ },
+ "groundRooms": 16
+}

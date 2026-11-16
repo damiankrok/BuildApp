@@ -1,0 +1,362 @@
+{
+ "slug": "final-monsterhouseplans-plan63-411",
+ "imagesUsed": [
+  {
+   "n": 1,
+   "what": "front exterior render (photo-realistic), nearly frontal: one-storey hipped wing at left, balustraded veranda and tall chimney in front of the two-storey left part, two-storey arched entry portico on columns at centre, arched window with wrought-iron balcony above at right, receding walls and a low hipped wing at far right; red tile hip roofs; no garage door visible"
+  },
+  {
+   "n": 2,
+   "what": "main floor plan, front at the bottom (PORCH 21' CLG, FOYER, VERANDA 8' x 15'); room sizes in whole feet only (MSTR SUITE 16' x 18', 2-CAR GARAGE 20' x 21', SHOP 7' x 9', FAMILY 18' x 20', LIVING 12' x 15', DINING 12' x 13', kitchen 12' x 14', BKFST 8' x 10', SITTING 5' x 10'); garage doors drawn in the plan's top (rear) wall; no overall dimension printed"
+  },
+  {
+   "n": 3,
+   "what": "upper floor plan, same orientation: BEDRM 2 11' x 12', BEDRM 3 13' x 14', BEDRM 4 11' x 12', GAME 13' x 15', BONUS 11' x 12' VLT CLG over the garage, LOGGIA, BALCONY at the rear over the patio, front porch '21' CLG'; one-storey roofs drawn dashed"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "None: the render agrees with the plan (one-storey master wing at left with one front window; chimney flanked by two windows in front of the living room behind the veranda; entry portico at centre; dining window with balcony above at right; no garage door from the front, consistent with garage doors in the plan's rear wall). The render looks photo-realistic/AI-styled and its receding right-hand walls do not match the plan window-for-window.",
+ "overall": {
+  "widthM": 22.93,
+  "depthM": 18.33,
+  "heightM": 8.53,
+  "basis": "No overall dimension is printed. W x D TRACED from the main-floor outline (723 x 578 px) at 9.61 px/ft, the scale from printed whole-foot room labels (MSTR SUITE 16' x 18', 2-CAR GARAGE 20' x 21', DINING 12' x 13', LIVING 12' x 15' give 9.56-9.67 px/ft; +/-2 %). Closed body = conditioned main floor + enclosed garage/shop: master-wing left wall to shop right wall; foyer front wall to garage rear wall. Entry porch, veranda, rear patio and the living-room chimney excluded. Front = bottom of the plans (entry porch/foyer), matching the render captioned 'front exterior'. Published Width 74' 10\" (22.81 m) is within 0.5 % of the traced 22.93; published Depth 63' 10\" (19.46 m) equals, at this scale, the depth from the garage rear wall to the face of the entry-porch columns (19.46 m), i.e. the published depth includes the entry porch; the closed body is 18.33. heightM = published Height 28' 0\" (no elevation)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 2,
+  "habitableAttic": false,
+  "basement": false
+ },
+ "bodies": [
+  {
+   "name": "main two-storey core",
+   "role": "MAIN",
+   "where": "centre: living, foyer (20' clg, spiral stair), dining, family (vaulted), kitchen/bkfst, powder, pantry, butlery; upper floor with bedrooms 2-4, game room, loggia; the upper floor also extends over the rear stair/util zone and, as the BONUS room (11' x 12' VLT CLG) with bath B4, over part of the garage",
+   "storeys": 2,
+   "enclosed": true,
+   "roofKind": "HIP",
+   "ridge": "ALONG_FRONT",
+   "approxSizeM": "11.6 x 11.7 (TRACED, living/dining front to family rear wall)"
+  },
+  {
+   "name": "master wing",
+   "role": "OTHER",
+   "where": "left, one storey: master suite, bath, wardrobe; front wall 1.55 m ahead of the living front; semicircular sitting bay (5' x 10') on its rear wall; render shows a hipped roof with one arched front window",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "HIP",
+   "ridge": "UNKNOWN",
+   "approxSizeM": "5.23 x 12.33 + 3.3 x 1.5 bay (TRACED)"
+  },
+  {
+   "name": "garage block",
+   "role": "GARAGE",
+   "where": "rear-right: 2-car garage 20' x 21' and shop 7' x 9' with two overhead doors in the rear wall (~16 ft and ~6 ft), side windows in its right walls; reached from the util/rear stair hall; not visible in the render",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "UNKNOWN",
+   "ridge": "UNKNOWN",
+   "approxSizeM": "8.6 x 6.8 (TRACED)"
+  },
+  {
+   "name": "entry portico",
+   "role": "PORCH",
+   "where": "front centre: two-storey ('21' CLG') porch on four round columns with an arched opening and curved steps",
+   "storeys": 2,
+   "enclosed": false,
+   "roofKind": "OTHER",
+   "ridge": "NA",
+   "approxSizeM": "3.45 x 1.1 to the column face + ~0.9 curved steps (TRACED)"
+  },
+  {
+   "name": "veranda",
+   "role": "OTHER",
+   "where": "front-left, between the master wing and the foyer, in front of the living room and chimney; render shows an open terrace with a white balustrade",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "NA",
+   "ridge": "NA",
+   "approxSizeM": "printed 8' x 15' (2.44 x 4.57); drawn outline ~4.4 x 3.0"
+  },
+  {
+   "name": "rear patio",
+   "role": "OTHER",
+   "where": "rear, in the corner between the breakfast room and the garage, corner post; under the upper-floor BALCONY",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "NA",
+   "ridge": "NA",
+   "approxSizeM": "3.65 x 1.9 (TRACED)"
+  }
+ ],
+ "mainRoof": {
+  "kind": "HIP",
+  "ridge": "ALONG_FRONT",
+  "highSideIfShed": null,
+  "pitchDeg": null,
+  "notes": "From the front render only: red clay barrel-tile hip roofs throughout, wide plain eaves. Main two-storey roof hipped with its ridge parallel to the front (complex, with cross hips to the right); separate lower hip over the one-storey master wing at left and a low hipped roof at the far right (util/garage side); the entry portico has its own roof projecting forward (exact form not clear); one tall stucco chimney with cap rises above the front. Rear and garage roofs not seen; the upper plan draws the one-storey and garage roof outlines dashed only. Pitch not shown."
+ },
+ "garage": {
+  "present": true,
+  "doorFacade": "REAR",
+  "doorPosition": "LEFT",
+  "doorCount": 2
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "CENTER",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": true,
+   "byStorey": [
+    {
+     "storey": 0,
+     "count": 5,
+     "leftToRight": [
+      "WINDOW",
+      "WINDOW",
+      "WINDOW",
+      "ENTRANCE_DOOR",
+      "WINDOW"
+     ]
+    },
+    {
+     "storey": 1,
+     "count": 4,
+     "leftToRight": [
+      "WINDOW",
+      "WINDOW",
+      "WINDOW",
+      "WINDOW"
+     ]
+    }
+   ]
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [],
+ "features": [
+  {
+   "kind": "CHIMNEY",
+   "count": 1,
+   "where": "tall stucco chimney with cap on the front of the two-storey left part, between the two living-room windows (render; masonry fireplace on the living front wall in the plan). The plan also shows an angled corner fireplace in the family room whose chimney is not visible in the render"
+  },
+  {
+   "kind": "PORCH",
+   "count": 1,
+   "where": "two-storey entry portico at front centre: four round columns, arched opening, arched window above the door, curved steps"
+  },
+  {
+   "kind": "TERRACE",
+   "count": 1,
+   "where": "veranda 8' x 15' at front-left with a white balustrade (render)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 2,
+   "where": "balconies: front balcony with wrought-iron railing on a corbel above the dining window (render; curved outline at Bedrm 4 on the upper plan) and a rear balcony off the game room over the patio (upper plan)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "semicircular sitting bay 5' x 10' on the rear wall of the master suite"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "spiral staircase in the two-storey foyer; barrel-vaulted gallery (BRL VLT) between living and family"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "rear-loading garage: two overhead doors (~16 ft and ~6 ft shop door) in the rear wall"
+  }
+ ],
+ "palette": {
+  "walls": "cream/ivory smooth stucco with cast-stone-look trim (arch surround, column capitals, string course, window surrounds), white balustrade, white-framed arched windows, dark-stained wood front door with oval glass, black wrought-iron balcony railing",
+  "roof": "terracotta-red clay barrel (S) tiles"
+ },
+ "uncertain": [
+  "No printed overall dimensions: all outline values TRACED at 9.61 px/ft from whole-foot room labels (+/-2 %); the scale reproduces the published width within 0.5 % and the published depth exactly to the porch-column face.",
+  "Garage doors read from the plan's rear wall: openings 154 px (~16.0 ft) and 58 px (~6.0 ft); the smaller may be a shop/golf-cart door. doorPosition LEFT is as seen from outside the rear facade (the garage is at the plan's right end).",
+  "The plan image's top edge is at the garage rear wall (wall rows 0-5 px) and its left edge at the master-wing left wall (x 1-6 px); both walls show full thickness, but the outer faces could lie up to ~1 px beyond the picture.",
+  "Sitting bay approximated by 9 vertices of the drawn arc (corners count includes them).",
+  "Chimney bump-out (about 1.6 m wide, 0.3-1.0 m deep into the veranda) excluded from the polygon; the small stair bump (8.88-9.64, 1.24-1.84) kept.",
+  "FRONT openings counted from the render on the front-facing planes only and checked against the plan; upper storey 2nd window (right of the chimney) is partly hidden; the balcony opening is recorded as WINDOW. The render's receding right-hand walls (three narrow arched ground windows, two to three upper windows) do not match the plan's right-side windows (dining 2, butlery 1), so RIGHT is not recorded.",
+  "Main ridge ALONG_FRONT read from one render; the roof is a complex multi-hip and the ridge direction over the rear is not visible.",
+  "Veranda recorded as unroofed (render shows no roof over it); the plan draws a round post/planter at its outer front corner.",
+  "Basement false: no lower-level plan and no stair down on the main plan (the spiral stair and the rear stair both go up; storage under the rear stair).",
+  "groundRooms counts 15 labelled main-floor spaces (MSTR SUITE incl. sitting bay, MSTR BATH, WARDROBE, FAMILY, BKFST, kitchen, LIVING, FOYER, DINING, PW, PANTRY, BUTLERY, UTIL, 2-CAR GARAGE, SHOP); linen, storage, bar, built-in and porches excluded."
+ ],
+ "confidence": "MEDIUM - clean plans plus one frontal render that agrees with them; footprint traced without printed overall dimensions but with a scale that reproduces both published figures; rear and side facades, rear roof, garage roof and pitch unknown.",
+ "groundOutline": {
+  "shape": "IRREGULAR",
+  "corners": 31,
+  "polygonM": [
+   [
+    0.0,
+    0.29
+   ],
+   [
+    5.23,
+    0.29
+   ],
+   [
+    5.23,
+    1.84
+   ],
+   [
+    8.88,
+    1.84
+   ],
+   [
+    8.88,
+    1.24
+   ],
+   [
+    9.64,
+    1.24
+   ],
+   [
+    9.64,
+    0.0
+   ],
+   [
+    13.1,
+    0.0
+   ],
+   [
+    13.1,
+    0.92
+   ],
+   [
+    16.81,
+    0.92
+   ],
+   [
+    16.81,
+    8.56
+   ],
+   [
+    20.17,
+    8.56
+   ],
+   [
+    20.17,
+    11.58
+   ],
+   [
+    20.77,
+    11.58
+   ],
+   [
+    20.77,
+    15.26
+   ],
+   [
+    22.93,
+    15.26
+   ],
+   [
+    22.93,
+    18.33
+   ],
+   [
+    14.34,
+    18.33
+   ],
+   [
+    14.34,
+    12.91
+   ],
+   [
+    12.05,
+    12.91
+   ],
+   [
+    12.05,
+    12.62
+   ],
+   [
+    4.28,
+    12.62
+   ],
+   [
+    4.09,
+    13.26
+   ],
+   [
+    3.71,
+    13.77
+   ],
+   [
+    3.14,
+    14.08
+   ],
+   [
+    2.63,
+    14.15
+   ],
+   [
+    2.06,
+    14.05
+   ],
+   [
+    1.55,
+    13.77
+   ],
+   [
+    1.17,
+    13.32
+   ],
+   [
+    0.95,
+    12.62
+   ],
+   [
+    0.0,
+    12.62
+   ]
+  ],
+  "closedAreaM2": 261.7,
+  "basis": "Main floor (no basement). Origin = front-left corner of the closed-body bounding box: x from the master-wing left wall outer face, y from the foyer front wall (front-most enclosed wall) toward the rear. ALL vertices TRACED from outer wall faces at 9.61 px/ft (room-label scale); none printed. Order: master-wing front 0.29, living front wall 1.84, stair bump 1.24, foyer front 0.0 (x 9.64-13.10), dining front 0.92 to its right wall 16.81, util 8.56 to 20.17, garage lower right wall 20.77 from 11.58, shop 15.26 to 22.93, garage rear wall 18.33, garage left wall 14.34 down to the breakfast seat bump 12.91, rear wall 12.62 with the sitting-bay arc (x 0.95-4.28, apex 14.15). Garage/shop included; entry porch, veranda, patio and chimney excluded."
+ },
+ "openZones": [
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "front centre entry portico, two-storey (21' clg), four round columns, curved steps",
+   "approxSizeM": "3.45 x 1.1 to the column face (+ ~0.9 curved steps) (TRACED)"
+  },
+  {
+   "kind": "TERRACE",
+   "roofed": false,
+   "where": "VERANDA at front-left, in front of the living room between the master wing and the foyer, balustrade (render), chimney projecting into it",
+   "approxSizeM": "printed 8' x 15' (2.44 x 4.57); drawn outline ~4.4 x 3.0"
+  },
+  {
+   "kind": "PATIO",
+   "roofed": true,
+   "where": "rear, between the breakfast room and the garage left wall, corner post, under the upper-floor balcony; doors from the breakfast room and the garage",
+   "approxSizeM": "3.65 x 1.9 (TRACED)"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": null,
+  "depthCm": null,
+  "where": "none printed on pictures 2-3; only whole-foot room sizes (MSTR SUITE 16' x 18', 2-CAR GARAGE 20' x 21', SHOP 7' x 9', FAMILY 18' x 20', LIVING 12' x 15', DINING 12' x 13', kitchen 12' x 14', BKFST 8' x 10', SITTING 5' x 10', VERANDA 8' x 15'). Page facts, not printed on the drawings: Width 74' 10\" = 2280.92 cm, Depth 63' 10\" = 1945.64 cm, Height 28' 0\" = 853.44 cm."
+ },
+ "groundRooms": 15
+}

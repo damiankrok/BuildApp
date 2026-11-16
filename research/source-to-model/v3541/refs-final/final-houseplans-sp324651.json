@@ -1,0 +1,63 @@
+{
+  "slug": "final-houseplans-sp324651",
+  "imagesUsed": [
+    {"n": 16, "what": "main floor plan (largest copy), garage door at the bottom; NO overall dimensions printed; room labels 'BEDRM. 10/8 X 10/4 (8' CLG.)', 'LIVING/ DINING 10/0X 20/0 (8' CLG.)', 'GARAGE 21/0 X 22/6', 'T.W.H.', 'W D', 'REF', 'P'"},
+    {"n": 15, "what": "same plan, medium copy (cross-check only)"},
+    {"n": 17, "what": "same plan, small copy (cross-check only)"},
+    {"n": 6, "what": "render from front-right: garage gable with one wide carriage door and two barn lights; right side with small garage window, half-glass garage service door, bracketed shed canopy over a full-glass entry door and a twin window, patio slab"},
+    {"n": 3, "what": "same render as 6, small copy"},
+    {"n": 4, "what": "same render as 6, medium copy"},
+    {"n": 5, "what": "same render as 6, medium copy"},
+    {"n": 12, "what": "same render as 6 (captioned 'Front Elevation')"},
+    {"n": 13, "what": "render 'Other Elevation', closer front-right view of the garage gable and right side; walkway from driveway to the entry"},
+    {"n": 14, "what": "render 'Rear Elevation' from rear-left: rear gable with two twin windows, left side with three narrow windows"},
+    {"n": 19, "what": "thumbnail 'Plan 48-1132', same render as 6"}
+  ],
+  "mirrorOrOtherProjectWarning": "Pictures of this plan (#48-1132): renders 3-6, 12, 13, 14, thumbnail 19 and the plan 15-17. There are NO orthographic elevations. 1 and 2 are other projects (carousel 20-2346, 'Builder Advantage Home' banner); 7-11 are other projects (#48-992, #48-1039, #48-645, #48-1032, #48-1051); 18 is a photo of another farmhouse; 20 is captioned 'Storybook tudor cottage floor plan' but is a photo of a different stone cottage; 21-23 are generic 'Zonda House Plans' detail sheets. No mirrored copy: renders and plan agree (entry canopy and garage service door on the right side, bath window and two garage windows on the left).",
+  "overall": {"widthM": null, "depthM": null, "heightM": 5.207, "basis": "No overall (or any exterior) dimension is printed on any plan picture, so width/depth are null. Front = the garage-door gable end (bottom of the plan): the source captions the renders showing it 'Front Elevation', and the published Width 22' / Depth 46' put the narrow end at the front; the entrance door itself is on the RIGHT side. Published page facts: Width 22' = 6.706 m, Depth 46' = 14.021 m, Height 17'1\" = 5.207 m (height used here is published only). Cross-check only (TRACED, not a printed value): scaling plan 16 by the garage label 21/0 x 22/6 (interior, ~100.4 px/m, bedroom 10/8 and living 10/0 widths agree) gives an enclosed rectangle of about 6.73 x 14.06 m including the enclosed garage; canopy, patio and stoops excluded."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single rectangular block under one continuous gable roof; living part (bedroom, bath, hall, laundry closet, living/dining with kitchen along the partition) at the rear; no interior door through the partition to the garage", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "about 6.73 x 6.95 (TRACED)"},
+    {"name": "garage", "role": "GARAGE", "where": "front half of the same block, one wide overhead door in the front gable, service door and window on the right side, two windows on the left side", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "about 6.73 x 7.10 (TRACED; interior label 21/0 x 22/6)"},
+    {"name": "entry canopy", "role": "PORCH", "where": "right side, centre-rear: shallow shed canopy on four knee brackets over the entry door and twin window, patio slab below", "storeys": 1, "enclosed": false, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "about 0.9 x 3.6 (TRACED from dashed beams)"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "One plain gable over house and garage, ridge running front-to-back along the long axis, gables to the front (garage) and rear; boxed eaves with small gable returns; decorative king-post bracket and frieze in both gables; dark architectural shingles. Pitch not printed and no orthographic elevation to measure."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "CENTER", "doorCount": 1},
+  "entrance": {"facade": "RIGHT", "position": "CENTER", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["GARAGE_DOOR"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "DOOR", "ENTRANCE_DOOR", "WINDOW"]}]}
+  },
+  "largeGlazing": [],
+  "features": [
+    {"kind": "PORCH", "count": 1, "where": "bracketed shed canopy (4 white knee brackets) over the entry door and twin window on the right side"},
+    {"kind": "TERRACE", "count": 1, "where": "concrete patio slab under and beyond the canopy, right side"},
+    {"kind": "OTHER", "count": 2, "where": "decorative king-post bracket with frieze board in the front and rear gables"},
+    {"kind": "OTHER", "count": 2, "where": "gooseneck barn lights over the garage door"}
+  ],
+  "palette": {"walls": "medium grey horizontal lap siding, white corner boards, window trim, fascia and gable trim; white carriage-style garage door with a row of glazed lites; charcoal half-glass service door and charcoal full-glass entry door; white windows", "roof": "dark grey-brown architectural asphalt shingles"},
+  "uncertain": [
+    "No printed overall dimensions: widthM/depthM and polygonM are null. The ~6.73 x 14.06 m rectangle is TRACED from room labels and must not be read as printed; published 22' x 46' is a separate page fact.",
+    "No orthographic elevations: all facade evidence is perspective renders (3-6, 12, 13, 14) cross-checked against wall openings in plan 16.",
+    "Twin windows (bedroom and living on the rear, living under the canopy) are drawn in plan as two sashes separated by a narrow mullion stub; each pair is counted as one window.",
+    "RIGHT side order (front to rear): garage window, garage service door, entry door, twin living window. Garage window looks squarer in render 6 and narrower in render 13.",
+    "LIVING/DINING label 10/0 X 20/0: the drawn space from rear wall to the garage partition traces ~6.7 m (22'), so the 20'-0\" apparently excludes the kitchen counter strip along the partition (or is nominal).",
+    "Patio slab drawn in plan as ~0.91 x 3.21 m (TRACED) under the canopy; the renders show a larger slab extending toward the rear.",
+    "Garage door width not labelled; traces ~5.5 m.",
+    "Front choice: captions call the front-right renders 'Front Elevation' without saying which face is front; garage gable end taken as front (plan orientation, published width 22').",
+    "Roof pitch and ridge height not determinable; height 5.207 m published only."
+  ],
+  "confidence": "MEDIUM-LOW - clear plan and consistent renders of all four sides, but no printed exterior dimension and no orthographic elevation; size known only from the published facts and traced room labels.",
+  "groundOutline": {"shape": "RECTANGLE", "corners": 4, "polygonM": null, "closedAreaM2": null, "basis": "No usable printed outline dimension on any plan picture, so polygonM is null. Plan 16 shows a plain rectangle (no jogs) of 676 x 1411 px; TRACED by the garage label 21/0 x 22/6 it would be about 6.73 x 14.06 m (~94.7 m2), enclosed garage included, canopy/patio/stoops excluded. Origin convention would be the front-left corner of the garage gable."},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "right side, centre-rear: patio under the bracketed shed canopy at the entry door and twin window", "approxSizeM": "about 0.9 x 3.2 slab in plan (TRACED); canopy beams ~3.6 long"},
+    {"kind": "TERRACE", "roofed": false, "where": "continuation of the concrete patio beyond the canopy toward the rear (renders 6, 12 only)", "approxSizeM": "UNKNOWN"},
+    {"kind": "STOOP", "roofed": false, "where": "landing outside the garage service door on the right side (plan rectangle)", "approxSizeM": "about 0.9 x 1.1 (TRACED)"},
+    {"kind": "DRIVEWAY", "roofed": false, "where": "paved driveway in front of the garage door (renders)", "approxSizeM": "UNKNOWN"},
+    {"kind": "WALKWAY", "roofed": false, "where": "path from the driveway along the right side to the entry patio (renders 6, 13)", "approxSizeM": "UNKNOWN"}
+  ],
+  "printedOverall": {"widthCm": null, "depthCm": null, "where": "none: pictures 15, 16 and 17 print only room labels (BEDRM. 10/8 X 10/4, LIVING/DINING 10/0X 20/0, GARAGE 21/0 X 22/6, ceiling heights 8' CLG.); no overall or wall dimension. Published (page, not drawing): Width 22', Depth 46', Height 17'1\""},
+  "groundRooms": 5
+}

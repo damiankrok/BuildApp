@@ -1,0 +1,61 @@
+{
+  "slug": "final-archon-dom-w-kuklikach",
+  "imagesUsed": [
+    {"n": 10, "what": "ground floor plan (dimensioned), entrance at the bottom; printed outer chains '756' (top) and '876' (left); interior 668, 336, 257, 200, 160, 337, 314, 402, 362; openings 240/140 (rear), 120/130 and 80/130 (left), 160/220 x2 (right), 100/210 (front door)"},
+    {"n": 9, "what": "same plan with room names/areas (Kuchnia 6,97, Salon 17,85, Lazienka 4,77, hol 2,63, Wiatrolap 5,19, Pokoj 11,1)"},
+    {"n": 6, "what": "smaller copy of the dimensioned plan, same values"},
+    {"n": 3, "what": "front elevation (elewacja frontowa): hip end, only the entrance door (clinker surround), low terrace wall visible at the right"},
+    {"n": 4, "what": "rear elevation (elewacja ogrodowa): one wide window 240/140 centred, terrace at the viewer's left"},
+    {"n": 1, "what": "side elevation = LEFT facade (rear at the viewer's left): wide kitchen window and narrow bathroom window"},
+    {"n": 2, "what": "side elevation = RIGHT facade (front at the viewer's left): two full-height glazed terrace doors with a timber panel between, terrace in front"},
+    {"n": 5, "what": "section: ridge +5,53, eaves +2,56, ground -0,32, room height 289; unused roof space over a ceiling slab; two chimneys"},
+    {"n": 7, "what": "site plan: house 756 x 876 with 400 margins (plot 1556 x 1676); hip roof with a short front-to-back ridge; terrace on the right, entrance path at the bottom"},
+    {"n": 11, "what": "render front-right: entrance on the front, terrace on the right side, two chimneys"},
+    {"n": 12, "what": "render rear-right: terrace doors and timber panel on the right facade, rear window"},
+    {"n": 8, "what": "small thumbnail of render 11"}
+  ],
+  "mirrorOrOtherProjectWarning": "None found. Plan (6/9/10), site plan (7), all four elevations (1-4), section (5) and renders (8/11/12) agree: entrance door slightly left of centre on the front, terrace along the right side. Page is 'ver 2' of the project; no other version, mirrored copy or other project among the pictures. 8 is a thumbnail of 11.",
+  "overall": {"widthM": 7.56, "depthM": 8.76, "heightM": 5.85, "basis": "Front = facade labelled 'elewacja frontowa' (picture 3) = entrance facade = bottom of the plan. Closed body measured over outer wall faces: width 7.56 (printed outer chain '756', matches the wall-to-wall pixel span) and depth 8.76 (printed outer chain '876'); excluded: the unroofed terrace on the right and the unroofed entrance landing at the front. Height 5.85 = ridge +5,53 minus ground -0,32 printed in section 5, equal to the published 'Wysokosc budynku 5,85 m'. Published built-up area 66,88 m2 is a separate fact (7.56 x 8.76 = 66.23)."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single rectangular single-storey block, hip roof over the whole body", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "7.56 x 8.76"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "Four-slope hip roof over the 7.56 x 8.76 rectangle; the front and rear elevations show the hip end as a triangle (apex), the side elevations a near-triangle with a very short flat top, and the site plan shows a short ridge running front-to-back (about 1.2-1.7 m, TRACED; 8.76 - 7.56 = 1.20 for equal pitches), so the house reads almost as a pyramid. Eaves overhang about 0.8 m all round (dashed roof outline on the plan, TRACED). Pitch is not printed anywhere; traced about 30 deg from the section and about 31 deg from the elevations (TRACED, not a source value). Two chimneys, red-brown ceramic tiles."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "CENTER", "recessedOrPorch": false},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["ENTRANCE_DOOR"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["LARGE_GLAZING", "LARGE_GLAZING"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "RIGHT", "position": "LEFT", "what": "bedroom (Pokoj 6) two-leaf full-height glazed terrace door 160/220, front half of the right facade (viewer's left in elevation 2)"},
+    {"facade": "RIGHT", "position": "RIGHT", "what": "living room (Salon 5) two-leaf full-height glazed terrace door 160/220, rear half of the right facade; a timber-clad wall panel sits between the two doors"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "near the ridge at about mid-depth: a wider stack about 2.2 m and a narrow stack about 4.9 m from the left wall (TRACED from front and rear elevations); both also drawn in the section"},
+    {"kind": "TERRACE", "count": 1, "where": "unroofed paved terrace along the right side, reached by both terrace doors, planters at both ends, steps and a curved step on its outer edge"},
+    {"kind": "OTHER", "count": 1, "where": "unroofed entrance landing with steps in front of the front door"},
+    {"kind": "OTHER", "count": 1, "where": "beige clinker-brick accents: plinth band all round, vertical strips above/below the side and rear windows, full panel framing the front door"},
+    {"kind": "OTHER", "count": 1, "where": "timber cladding panel between the two terrace doors on the right facade"}
+  ],
+  "palette": {"walls": "white/cream render; beige clinker-brick plinth, window strips and front-door panel; natural timber cladding panel on the right facade; golden-oak window and door frames; brown fascia, soffit, gutters and downpipes; chimneys in beige brick with brown caps", "roof": "red-brown (terracotta) ceramic tiles, brown gutters"},
+  "uncertain": [
+    "Published built-up area 66,88 m2 differs from the printed outer dimensions 7.56 x 8.76 = 66.23 m2 by 0.65 m2; the drawing gives no explanation (possibly rounding or a projection counted by the publisher).",
+    "Roof pitch is not printed; the ~30 deg in the notes is traced only.",
+    "Ridge length is not printed: about 1.2-1.7 m traced (side elevations ~1.3 m, site plan ~1.7 m).",
+    "Terrace (~3.1 x 7.6 m) and entrance landing (~3.7 x 1.5 m) sizes are scaled from the plan at about 63.9 px/m (from the 756/876 chains), not printed.",
+    "Convention: the two 160/220 two-leaf full-height glazed terrace doors are recorded as LARGE_GLAZING; they could equally be counted as DOOR.",
+    "Entrance door centre is at about 3.1 m of 7.56 (slightly left of centre), recorded as CENTER.",
+    "Roof space over the ceiling slab has no stair and no windows (section 5); recorded as non-habitable attic."
+  ],
+  "confidence": "HIGH - dimensioned plan, four labelled elevations, section, site plan and renders agree; only pitch, ridge length and open-zone sizes are traced.",
+  "groundOutline": {"shape": "RECTANGLE", "corners": 4, "polygonM": [[0, 0], [7.56, 0], [7.56, 8.76], [0, 8.76]], "closedAreaM2": 66.23, "basis": "Origin = front-left outer wall corner, x along the front, y toward the rear. All four vertices from the printed outer chains 756 and 876 (wall faces checked against the drawing: 483 x 560 px, ratio equal to 756/876). Terrace and entrance landing excluded. Published built-up area 66,88 m2 (not equal to 66.23)."},
+  "openZones": [
+    {"kind": "TERRACE", "roofed": false, "where": "right side, paved, full length of the right facade between the planters, accessed from living room and bedroom; only the eave overhang (~0.8 m) lies over its inner edge", "approxSizeM": "about 3.1 x 7.6 (TRACED)"},
+    {"kind": "PORCH", "roofed": false, "where": "unroofed entrance landing with steps in front of the front door (no porch roof, only the eave overhang)", "approxSizeM": "about 3.7 x 1.5 (TRACED)"}
+  ],
+  "printedOverall": {"widthCm": 756, "depthCm": 876, "where": "pictures 10/9/6: top outer chain '756' (wall to wall), left outer chain '876'; site plan 7 repeats 756 x 876 with 400 cm margins"},
+  "groundRooms": 6
+}

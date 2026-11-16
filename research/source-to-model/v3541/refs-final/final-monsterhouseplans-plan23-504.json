@@ -1,0 +1,228 @@
+{
+ "slug": "final-monsterhouseplans-plan23-504",
+ "imagesUsed": [
+  {
+   "n": 1,
+   "what": "lower floor plan = partial unfinished basement ('10\" POURED FND. WALL', Future Bath, stair up), unexcavated zones under the rear covered porch, the front porch and the garage; two window wells on the left wall; no dimensions printed"
+  },
+  {
+   "n": 2,
+   "what": "main floor plan, front at the bottom (front porch with foyer door, kitchen window, 16 ft garage door); room sizes only (Great Room - Dining Room 26'-7\" x 17'-5\", Parlor/Study 10'-3\" x 14'-0\", Kitchen 15'-10\" x 11'-0\" Irr., Storage 8'-1\" x 12'-3\", Garage 22'-1\" x 21'-11\", Covered Porch 18'-0\" x 12'-0\"); no overall dimension printed"
+  },
+  {
+   "n": 3,
+   "what": "upper floor plan, same orientation: Master Bedroom 12'-6\" x 17'-9\" (9' clg at centre), Bedrooms 11'-0\" x 12'-0\", 11'-0\" x 10'-8\", 10'-3\" x 10'-8\" (8' clg), Mstr Bath, Bath; lower roofs (garage, parlor, front porch, rear covered porch) drawn around it; roof of the two-storey block not drawn"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "None found. All three pictures are plans of this project and register on each other (stair, fireplace chase on the left wall, storage/laundry zone, garage). No render or elevation, so mirroring cannot be checked against a view.",
+ "overall": {
+  "widthM": 17.86,
+  "depthM": 12.29,
+  "heightM": 8.84,
+  "basis": "No overall dimension is printed on any plan. W x D TRACED from the main-floor outline (outer wall faces, 703 x 484 px) at 12.0 px/ft, the scale given by the printed room labels (Great Room 26'-7\" and 17'-5\", Garage 22'-1\" and 21'-11\", Parlor depth 14'-0\", Covered Porch 18'-0\" x 12'-0\" give 11.9-12.1 px/ft; +/-1.5 %). Closed body = conditioned main floor + enclosed garage: left wall of great room/parlor to garage right wall, garage front to great-room rear wall. Front porch, rear covered porch and the gas-fireplace bump-out on the left wall excluded. Front = bottom of the plans (porch with the foyer entrance and the garage door). Published page figures Width 58' 0\" (17.68 m), Depth 39' 10\" (12.14 m): their ratio equals the traced bounding box, so they describe the same extent (garage included, rear covered porch excluded), about 1 % smaller than the room-label scale gives. heightM = published Height 29' 0\" (no elevation)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 2,
+  "habitableAttic": false,
+  "basement": true
+ },
+ "bodies": [
+  {
+   "name": "main two-storey block",
+   "role": "MAIN",
+   "where": "rear/middle across the full width: great room-dining, stair, kitchen, powder, laundry, pantry, storage on the main floor; master suite, 3 bedrooms and 2 baths above. The upper floor covers the main floor behind the front wall line and, at the right, only the storage/laundry zone behind the garage; its front-left bedroom wall plots ~0.7 m forward of the main-floor front wall (over the porch) - TRACED across two differently scaled pictures",
+   "storeys": 2,
+   "enclosed": true,
+   "roofKind": "UNKNOWN",
+   "ridge": "UNKNOWN",
+   "approxSizeM": "17.9 x 8.1 (left/middle), 6.8 x 4.0 over the storage zone at right (TRACED)"
+  },
+  {
+   "name": "garage",
+   "role": "GARAGE",
+   "where": "front-right, projects 4.2 m forward of the porch front wall; one ~16 ft door in its front wall, one window in its right wall; its rear part holds storage, laundry and WIC under the upper floor; front part one storey with its own roof (upper plan: a single ridge line front-to-back ending at a straight front edge)",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "approxSizeM": "7.3 x 11.0 incl. storage zone; parking 22'-1\" x 21'-11\" printed"
+  },
+  {
+   "name": "parlor/study wing",
+   "role": "OTHER",
+   "where": "front-left, one storey, projects 2.2 m forward of the front wall; printed '10'-7\" CLG. HGT. @ CENTER' with SLOPE arrows from both side walls (vaulted ceiling); its roof is drawn on the upper plan but not readable as a kind",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "UNKNOWN",
+   "ridge": "UNKNOWN",
+   "approxSizeM": "3.56 x 4.6 (TRACED)"
+  },
+  {
+   "name": "front porch",
+   "role": "PORCH",
+   "where": "front, recessed between the parlor wing and the garage; foyer door and kitchen window open onto it; piers/columns along its front edge",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "UNKNOWN",
+   "ridge": "NA",
+   "approxSizeM": "7.0 x 1.9 (TRACED)"
+  },
+  {
+   "name": "rear covered porch",
+   "role": "PORCH",
+   "where": "rear, behind the great room (left of centre), door from the great room; posts at the two outer corners; upper plan draws its roof with one centre line running away from the house and a straight rear edge",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "approxSizeM": "5.49 x 3.66 (printed 18'-0\" x 12'-0\")"
+  }
+ ],
+ "mainRoof": {
+  "kind": "UNKNOWN",
+  "ridge": "UNKNOWN",
+  "highSideIfShed": null,
+  "pitchDeg": null,
+  "notes": "No elevation or render. The upper-floor plan draws only the lower roofs: garage = single ridge line front-to-back ending at a straight front edge (front gable); rear covered porch = centre ridge line with straight rear edge (gable); parlor and front-porch roofs only partly drawn. The roof over the two-storey block is not drawn at all. Published height 29' 0\"."
+ },
+ "garage": {
+  "present": true,
+  "doorFacade": "FRONT",
+  "doorPosition": "RIGHT",
+  "doorCount": 1
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "LEFT",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [],
+ "features": [
+  {
+   "kind": "PORCH",
+   "count": 1,
+   "where": "front porch recessed between the one-storey parlor wing and the projecting garage, entrance (foyer) door under it"
+  },
+  {
+   "kind": "PORCH",
+   "count": 1,
+   "where": "rear covered porch 18'-0\" x 12'-0\" behind the great room, corner posts"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "gas fireplace bump-out on the left wall of the great room (thin-line box ~0.45 x 1.6 m), continuing as a chase beside the master bedroom on the upper plan; no chimney above the roof is shown"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "one-storey parlor/study wing at the front-left with a vaulted ceiling (10'-7\" at centre)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 2,
+   "where": "basement window wells on the left wall (lower floor plan)"
+  }
+ ],
+ "palette": {
+  "walls": "UNKNOWN (no render or elevation)",
+  "roof": "UNKNOWN"
+ },
+ "uncertain": [
+  "No printed overall dimensions: every metric value of the outline is TRACED at 12.0 px/ft from room labels; individual labels give 11.6-12.2 px/ft (Parlor width 10'-3\" measures ~9.9 ft, Storage 12'-3\" ~11.8 ft at the common scale).",
+  "Published 58'-0\" x 39'-10\" (17.68 x 12.14 m) is 1.0 % / 1.3 % smaller than the traced 17.86 x 12.29 m; the shape (ratio) matches exactly, so the difference is scale, not extent.",
+  "Roof of the two-storey block UNKNOWN; garage and rear-porch roof kinds read from upper-plan roof lines only (two diagonals where the garage roof meets the house are not explained).",
+  "Facade openings not recorded (no elevation or render). The plans do show window and door breaks on all four sides (e.g. main-floor front: parlor window, foyer door, kitchen window over the sink, garage door; garage right wall one window; basement window wells on the left).",
+  "Upper-floor picture is drawn at ~11.55 px/ft vs 12.0 px/ft on the main floor; relative positions between floors (upper front bedroom ~0.7 m over the porch) are approximate.",
+  "Note '8 1/2\" WALL THICKNESS' printed near the great-room left wall - which wall it refers to is not clear; drawn exterior walls measure ~11 px (~0.9 ft).",
+  "Fireplace bump-out excluded from the polygon.",
+  "groundRooms counts the 11 labelled main-floor spaces (Great Room - Dining Room, Parlor/Study, Foyer, Kitchen, Pantry, Hall, Pwdr., Laun., WIC, Storage, Garage); porches and stair excluded."
+ ],
+ "confidence": "MEDIUM - clean, unambiguous main-floor outline whose room-label scale agrees with the published W x D within ~1 %, but nothing is dimensioned overall and there is no elevation or render: main roof, facade openings, palette unknown; height published only.",
+ "groundOutline": {
+  "shape": "IRREGULAR",
+  "corners": 10,
+  "polygonM": [
+   [
+    0.0,
+    2.06
+   ],
+   [
+    3.56,
+    2.06
+   ],
+   [
+    3.56,
+    4.22
+   ],
+   [
+    10.59,
+    4.22
+   ],
+   [
+    10.59,
+    0.0
+   ],
+   [
+    17.86,
+    0.0
+   ],
+   [
+    17.86,
+    11.0
+   ],
+   [
+    11.05,
+    11.0
+   ],
+   [
+    11.05,
+    12.29
+   ],
+   [
+    0.0,
+    12.29
+   ]
+  ],
+  "closedAreaM2": 173.7,
+  "basis": "Main floor (the lower level is a partial basement, so the main floor is the ground storey). Origin = front-left corner of the closed-body bounding box: x from the left-wall outer face, y from the garage front face toward the rear. ALL vertices TRACED from outer wall faces at 12.0 px/ft (room-label scale); none is printed. Vertices: parlor front wall 2.06, parlor right wall 3.56, porch/foyer front wall 4.22, garage left wall 10.59, garage right wall 17.86, step behind the storage 11.00 / 11.05, great-room rear wall 12.29. Garage included; front porch, rear covered porch and fireplace bump-out excluded. Published 58'-0\" x 39'-10\" not used as a vertex."
+ },
+ "openZones": [
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "front, between the parlor wing and the garage; foyer door and kitchen window open onto it; piers along the front edge",
+   "approxSizeM": "7.0 x 1.9 (TRACED)"
+  },
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "rear 'Covered Porch' behind the great room, left of centre, door from the great room, corner posts; foundation shown unexcavated on the lower plan",
+   "approxSizeM": "5.49 x 3.66 (printed 18'-0\" x 12'-0\")"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": null,
+  "depthCm": null,
+  "where": "none printed on pictures 1-3; only room sizes (Great Room - Dining Room 26'-7\" x 17'-5\", Parlor/Study 10'-3\" x 14'-0\", Kitchen 15'-10\" x 11'-0\" Irr., Storage 8'-1\" x 12'-3\", Garage 22'-1\" x 21'-11\", Covered Porch 18'-0\" x 12'-0\", upper bedrooms). Page facts, not printed on the drawings: Width 58' 0\" = 1767.84 cm, Depth 39' 10\" = 1214.12 cm, Height 29' 0\" = 883.92 cm."
+ },
+ "groundRooms": 11
+}

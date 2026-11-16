@@ -1,0 +1,245 @@
+{
+ "slug": "final-monsterhouseplans-plan5-737",
+ "imagesUsed": [
+  {
+   "n": 2,
+   "what": "main floor plan, front at the bottom (front porch, entrance door with two sidelights, single garage door); printed overall '28'-0\" / 8,4 m' at the bottom and '40'-0\" / 12,0 m' at the left, both as arrow markers without extension lines; room sizes in ft-in and metres (14'-0\" x 9'-4\" dining, 11'-8\" x 10'-4\" kitchen, 12'-0\" x 15'-4\" family, 12'-0\" x 19'-0\" garage); wrap-around covered porch with posts on the front, left side and rear-left"
+  },
+  {
+   "n": 4,
+   "what": "upper floor plan, same orientation: bedrooms 10'-10\" x 15'-4\" and 10'-0\" x 11'-0\", bath, stair; three windows in the front wall; small balcony off the rear bedroom; hip lines of the porch roof and the garage roof drawn around it"
+  },
+  {
+   "n": 3,
+   "what": "perspective render from front-left: two-storey lap-sided body with a gable roof (left gable end visible) and a centred front cross gable with timber truss; one-storey garage at right with its own front gable and one carriage-style door; covered porch across the front wrapping to the left on slim square posts"
+  },
+  {
+   "n": 1,
+   "what": "ALTERNATE upper-floor layout (3 bedrooms 11'-0\" x 12'-0\", 8'-8\" x 9'-0\", 10'-0\" x 11'-0\") inside the same outer walls - an option, not used for geometry"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "Picture 1 is an alternate (optional) upper-floor layout of this plan, not the base design. No other project and no mirrored copy: the render agrees with the plans (garage at right, porch wrapping to the left, entrance with sidelights, three upper front windows).",
+ "overall": {
+  "widthM": 8.534,
+  "depthM": 12.192,
+  "heightM": 8.382,
+  "basis": "Printed '28'-0\"' (8.534 m; metric print '8,4 m') and '40'-0\"' (12.192 m; metric print '12,0 m'). The labels are arrow markers without extension lines, so their extent is fixed from the drawing: 28'-0\" = 365 px = main-body left wall to garage right wall, 40'-0\" = 521 px = garage front to family-room rear wall (13.04 and 13.03 px/ft agree; garage 12'-0\", family 12'-0\" x 15'-4\" and dining 14'-0\" labels confirm). Closed body = main body + enclosed garage + family room; the wrap-around covered porch excluded. Front = bottom of the plans (porch, entrance, garage door), confirmed by the render. Published Width 28' 0\" and Depth 40' 0\" equal the printed labels. heightM = published Height 27' 6\" (no elevation)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 2,
+  "habitableAttic": false,
+  "basement": null
+ },
+ "bodies": [
+  {
+   "name": "main two-storey body",
+   "role": "MAIN",
+   "where": "left part: dining, kitchen, half bath/laundry, entry on the main floor; upper floor (2 bedrooms, bath) about 6.4-6.8 x 8.3-8.7 m (TRACED) reaching beyond the main body over the stair/garage-rear/family zone; gable roof with eaves along the front and a centred front cross gable over a slightly projecting centre bay",
+   "storeys": 2,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "approxSizeM": "4.47 x 8.56 main-floor part (Y 1.85-10.41); upper floor ~6.6 x 8.5 (TRACED)"
+  },
+  {
+   "name": "garage",
+   "role": "GARAGE",
+   "where": "front-right, one storey at the front, front face flush with the porch posts and 1.85 m ahead of the main front wall; one carriage door in the front wall, side door in the right wall; own front-facing gable with timber truss (render)",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ACROSS_FRONT",
+   "approxSizeM": "4.07 x 6.1 (interior 12'-0\" x 19'-0\" printed incl. stair zone)"
+  },
+  {
+   "name": "family room",
+   "role": "OTHER",
+   "where": "rear-right behind the garage/stair, 12'-0\" x 15'-4\"; projects 1.78 m behind the dining rear wall to the 40'-0\" line; not seen in the render",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "UNKNOWN",
+   "ridge": "UNKNOWN",
+   "approxSizeM": "4.07 x 4.8 (TRACED)"
+  },
+  {
+   "name": "wrap-around covered porch",
+   "role": "PORCH",
+   "where": "across the front of the main body, down the left side, widening to a covered outdoor-dining area at the rear-left and continuing behind the dining room to the family room; posts on the plan, slim square columns and a low roof in the render",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "HIP",
+   "ridge": "NA",
+   "approxSizeM": "8.75 x 12.19 overall extent incl. the house it wraps (TRACED)"
+  }
+ ],
+ "mainRoof": {
+  "kind": "GABLE",
+  "ridge": "ALONG_FRONT",
+  "highSideIfShed": null,
+  "pitchDeg": null,
+  "notes": "From the render: steep charcoal-shingle gable roof over the two-storey body, eaves along the front, a gable end with white rake board above the left side wall; centred front cross gable with an exposed timber king-post truss over the centre bay; one-storey garage with its own front-facing gable and timber truss; the porch has a low separate roof (the upper plan draws hip lines at its corners). The right end and the rear are hidden (behind the garage gable), so a hipped right end cannot be excluded. Published height 27' 6\"."
+ },
+ "garage": {
+  "present": true,
+  "doorFacade": "FRONT",
+  "doorPosition": "RIGHT",
+  "doorCount": 1
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "LEFT",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": true,
+   "byStorey": [
+    {
+     "storey": 0,
+     "count": 2,
+     "leftToRight": [
+      "ENTRANCE_DOOR",
+      "GARAGE_DOOR"
+     ]
+    },
+    {
+     "storey": 1,
+     "count": 3,
+     "leftToRight": [
+      "WINDOW",
+      "WINDOW",
+      "WINDOW"
+     ]
+    }
+   ]
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [],
+ "features": [
+  {
+   "kind": "PORCH",
+   "count": 1,
+   "where": "wrap-around covered porch: front, left side, covered outdoor-dining area at the rear-left, strip behind the dining room"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "centred front cross gable with timber king-post truss over a slightly projecting centre bay; wood shutters on its window"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "garage front gable with timber truss, carriage-style wood door with a row of small lights"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "small balcony off the rear bedroom over the rear porch strip (upper plan)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "entrance door with two full-height sidelights and a wall lantern"
+  }
+ ],
+ "palette": {
+  "walls": "white / very light grey horizontal lap siding with white trim, corner boards, fascias and porch posts; black-framed windows; natural cedar-tone front door, garage door, shutters and gable trusses",
+  "roof": "charcoal / dark grey asphalt shingles"
+ },
+ "uncertain": [
+  "Printed overall dimensions are arrow markers without extension lines; their extent is inferred from the drawing (both directions give the same 13.03-13.04 px/ft and the room labels agree). Metric prints '8,4 m' and '12,0 m' are rounded; exact 8.534 / 12.192 m used.",
+  "Inner vertices TRACED at the printed-overall scale: main-body width 4.47 m (left wall to the garage/family left wall line), main front wall 1.85 m behind the garage front, dining rear wall 10.41 m (the family room projects 1.78 m behind it).",
+  "The main-floor picture is cropped exactly at the garage/family right wall and the family-room rear wall; both walls show full thickness, so their outer faces sit on the picture edge.",
+  "Basement UNKNOWN: under the main stair a second flight behind a door is drawn with a break line, as a stair down usually is, but no lower-level plan is published.",
+  "Upper floor extent and position TRACED across two pictures whose room labels give different scales (13.5-14.1 px/ft upstairs vs 13.03 on the main floor).",
+  "Main ridge ALONG_FRONT from one render; right end hidden behind the garage gable.",
+  "LEFT facade partly visible in the render (upper storey two narrow windows, matching the upper plan; two narrow ground windows near the front; rear part hidden by the porch roof) - not recorded as a facade.",
+  "Entrance position LEFT: door centre at 9.1 ft of the 28 ft closed front (32 %), right of centre on the main body itself.",
+  "groundRooms counts 6 spaces (dining area, kitchen, family room, half bath/laundry, entry, garage); dining and kitchen are one open space with two printed sizes; closets excluded."
+ ],
+ "confidence": "MEDIUM-HIGH - printed overall dimensions agree with the drawing in both directions and the render matches the plans; inner outline vertices traced; roof form and front openings from a single front-left render; rear and right facades unknown.",
+ "groundOutline": {
+  "shape": "T",
+  "corners": 8,
+  "polygonM": [
+   [
+    0.0,
+    1.85
+   ],
+   [
+    4.47,
+    1.85
+   ],
+   [
+    4.47,
+    0.0
+   ],
+   [
+    8.53,
+    0.0
+   ],
+   [
+    8.53,
+    12.19
+   ],
+   [
+    4.47,
+    12.19
+   ],
+   [
+    4.47,
+    10.41
+   ],
+   [
+    0.0,
+    10.41
+   ]
+  ],
+  "closedAreaM2": 87.8,
+  "basis": "Main floor. Origin = front-left corner of the closed-body bounding box (main-body left wall outer face line, garage front face); x along the front, y to the rear. 8.534 (28'-0\") and 12.192 (40'-0\") printed; 4.47, 1.85 and 10.41 TRACED at the printed-overall scale (13.03 px/ft). Garage and family room included; the wrap-around porch excluded."
+ },
+ "openZones": [
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "front, across the main body from the garage to 1.68 m beyond the left corner; entrance under it; posts at the corners and middle",
+   "approxSizeM": "6.15 x 1.82 (TRACED)"
+  },
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "left side, along the main-body left wall from the front porch to the rear-left area; no door onto it; kitchen and half-bath windows face it",
+   "approxSizeM": "1.68 x 6.13 (TRACED)"
+  },
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "rear-left covered outdoor-dining area beside the dining room, rear edge flush with the family-room rear wall; posts at its corners; dining-room door opens onto it",
+   "approxSizeM": "4.28 x 4.21 (TRACED)"
+  },
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "rear strip behind the dining/kitchen between the rear-left area and the family room; posts on its rear line; partly under the upper balcony",
+   "approxSizeM": "4.47 x 1.78 (TRACED)"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": 853.44,
+  "depthCm": 1219.2,
+  "where": "picture 2: bottom '28'-0\"' over '8,4 m' between arrow markers (28'-0\" = 853.44 cm); left side '40'-0\"' over '12,0 m' between arrow markers (40'-0\" = 1219.2 cm); no extension lines"
+ },
+ "groundRooms": 6
+}

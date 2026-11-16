@@ -43,5 +43,10 @@ everything outside Git (/home/user/rd) is gone. This folder holds what is needed
   (235x157, 328x202, 656x404 sizes); and ONE drawing — architecturaldesigns-com-2 "850063PKE-F2-Bonus-Second-Floor.gif"
   (995x800 GIF, 106833 → 106841 bytes, re-encoded by the CDN). Those 3 houses do not run on the sealed bytes unless the
   changed pictures are restored with `--allow-changed`, and must then be reported as such.
+- FINAL 12 references written 2026-11-16 by four source-only readers (no analyzer output), hashes in
+  refs-final/refs-final.sha256. 11 of 12 have a ground polygon; houseplans sp324651 prints no overall dimension (W×D and
+  polygon null). Outlines of monster plan23-504 and plan63-411 are TRACED at a scale from room labels (no overall printed):
+  scored at the ±5 % reference error of the protocol. domywstylu miodowy is a semi-detached PAIR (published figures are one
+  unit; the reference outlines the pair). Executor spot-check on ≥ 6 houses (protocol §6) still to do, before FINAL 12 opens.
 - Findings so far: monsterhouseplans.com gives the product's acquisition no picture on most pages (15 of 18 drawn);
   z500.pl refuses automated access (403).

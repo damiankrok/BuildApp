@@ -1,0 +1,65 @@
+{
+  "slug": "final-houseplans-sp318422",
+  "imagesUsed": [
+    {"n": 17, "what": "main floor plan (largest copy), entrance/garage door at the bottom = front; printed top '46'-0\"' with metric '(14,02)', right side '31'-5\"' with metric '(9,58)'; room labels 10'-6\"x10'-0\" (3,20x3,05) kitchen, 12'-2\"x13'-4\" (3,71x4,06) living, 10'-0\"x9'-0\" (3,05x2,74) dining, 10'-0\"x9'-2\" (3,05x2,79) rear bedroom, 12'-8\"x12'-0\" (3,86x3,66) front bedroom, 11'-0\"x22'-6\" (3,35x6,86) garage"},
+    {"n": 16, "what": "same main floor plan, small copy (cross-check only)"},
+    {"n": 18, "what": "same main floor plan, small copy (cross-check only)"},
+    {"n": 7, "what": "front render (largest copy): garage left, timber-truss entry porch gable, front cross gable over bedroom, set-back right section; lower-level windows at grade"},
+    {"n": 5, "what": "same front render, small copy"},
+    {"n": 6, "what": "same front render, medium copy"},
+    {"n": 8, "what": "same front render, medium copy"},
+    {"n": 14, "what": "same front render (captioned 'Front Elevation' instead of 'Front Elevation 2')"},
+    {"n": 20, "what": "thumbnail 'Plan 25-4950', same front render"}
+  ],
+  "mirrorOrOtherProjectWarning": "Only the front render (5, 6, 7, 8, 14, thumbnail 20) and one main-floor plan (16, 17, 18) belong to this plan (#25-4950); there are NO orthographic elevations and no lower-floor plan. 1-4 are other projects (carousel 430-422, 44-274, 515-56 and a 'Builder Advantage Home' banner); 9, 10, 11, 12, 13, 15 are other projects (#25-4286, #25-4881, #25-4324, #25-4892, #25-4520, #25-4930); 19 is a photo of another (farmhouse) project; 21-23 are generic 'Zonda House Plans' construction/mechanical detail sheets. No mirrored/reverse copy: plan and render agree (garage left, entry right of it, bath set back at the right).",
+  "overall": {"widthM": 14.021, "depthM": 9.576, "heightM": 7.671, "basis": "Front = garage-door/entrance facade (bottom of plan 17; render shows it as the street side; no facade is labelled on the drawing). Width 46'-0\" = 14.0208 m printed (metric 14,02 also printed), from the outer face of the garage's left wall to the outer face of the right wall; garage is enclosed and included. Depth 31'-5\" = 9.5758 m printed (metric 9,58 also printed), from the rear wall to the front face of the foyer/garage; the entry stoop under the porch gable (~1.53 m deep, TRACED) is excluded. The extension lines sit ~3 px (~5 cm) inside the drawn outer wall faces on both axes, consistent with dimensioning to the outside of framing, but the drawing does not state it. Published page facts Width 46', Depth 31'5\" agree with the printed labels. Height 25'2\" = 7.671 m is published only (no elevation drawing, nothing printed)."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": true},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "right/rear body: raised main floor (split-entry), rooms around an open kitchen/dining/living; front edge stepped: foyer flush with the garage front, front bedroom set back 0.68 m, bath set back 1.29 m (TRACED); front cross gable over the front bedroom", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "10.38 x 9.58 (x 3.64-14.02), front edge stepped"},
+    {"name": "garage", "role": "GARAGE", "where": "front-left, single garage, front flush with the foyer, rear wall 2.12 m short of the main rear wall (TRACED); door to foyer and a rear service door", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "UNKNOWN", "approxSizeM": "3.64 x 7.45 (TRACED; interior label 11'-0\" x 22'-6\")"},
+    {"name": "entry porch", "role": "PORCH", "where": "in front of the foyer, right of the garage: stoop with two front posts on stone pedestals under a timber-truss front gable", "storeys": 1, "enclosed": false, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "3.49 x 1.53 (TRACED)"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "From the render only (no elevation drawing): main ridge parallel to the front; right end reads as a gable end; left end appears to hip down onto a lower roof over the garage, which is itself hipped at its left end; a taller-looking front cross gable over the front bedroom (with a small shuttered attic window) and a smaller timber-truss gable over the entry porch. White fascia, charcoal shingles. Pitch not printed and not measurable."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "LEFT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTER", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["GARAGE_DOOR", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]},
+      {"storey": -1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 1, "leftToRight": ["WINDOW"]}
+    ]},
+    "REAR": {"shown": false, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "LARGE_GLAZING", "WINDOW", "DOOR"]}]},
+    "LEFT": {"shown": false, "byStorey": [{"storey": 0, "count": 0, "leftToRight": []}]},
+    "RIGHT": {"shown": false, "byStorey": [{"storey": 0, "count": 0, "leftToRight": []}]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "CENTER", "what": "living-room sliding patio door (two overlapping sliding panels drawn in plan 17), opening ~2.4 m (TRACED); no deck or steps drawn outside it"}
+  ],
+  "features": [
+    {"kind": "PORCH", "count": 1, "where": "entry porch: timber king-post/truss gable on two cedar posts with stone pedestals, in front of the foyer right of the garage"},
+    {"kind": "OTHER", "count": 1, "where": "front cross gable over the front bedroom with a small shuttered attic window"},
+    {"kind": "OTHER", "count": 3, "where": "black louvered shutters on the bedroom window, bath window and attic gable window (render)"},
+    {"kind": "OTHER", "count": 2, "where": "lower-level (basement) windows at grade under the bedroom and bath windows (render), consistent with the split-entry stair in the foyer"}
+  ],
+  "palette": {"walls": "white horizontal lap siding with white trim; grey-painted inside corner at the set-back right section; stone veneer on porch pedestals and garage base; natural timber porch posts and truss; black window frames and black shutters; black garage door with a row of glazed lites; black front door with decorative glass and sidelights", "roof": "charcoal/dark brown asphalt shingles, white fascia"},
+  "uncertain": [
+    "No orthographic elevations exist for this plan; roof form, front opening count and lower-level windows come from one perspective render. REAR/LEFT/RIGHT counts are read from wall openings in plan 17 only (shown=false).",
+    "Basement: implied by the split-entry stair in the foyer (one flight with a solid 'up' arrow, a second with a hollow arrow) and the lower row of windows in the render; no lower-floor plan is published, extent and finish UNKNOWN. Storey -1 used for those front windows.",
+    "Main roof left end: hipped onto the garage roof as read from the render; garage roof ridge direction UNKNOWN.",
+    "Front attic gable window seen only in the render; no attic plan, so habitableAttic=false.",
+    "All intermediate outline vertices (garage width 3.642, garage depth 7.452, foyer right edge 7.151, bedroom setback 0.680 to x 10.992, bath setback 1.294) are TRACED at ~60.3 px/m from the 46'-0\"/31'-5\" spans; garage interior traced ~3.44 x 6.95 m vs label 3.35 x 6.86 (~9 cm larger each way, within tracing tolerance).",
+    "Entrance door centre is ~5.4 m from the left of 14.02 m: middle third but left of centre, directly right of the garage.",
+    "The '10'-6\"x10'-0\"' label printed outside the walls at top-left is the kitchen size (leader arrow points into the kitchen), not an exterior deck.",
+    "Rear living-room opening drawn as a sliding door with no deck, although the main floor is raised; deck/steps UNKNOWN.",
+    "groundRooms counts kitchen, dining and living separately (each has its own printed label) plus two bedrooms, bathroom, foyer and garage; closets/laundry niche not counted."
+  ],
+  "confidence": "MEDIUM - dimensioned plan with printed overall width/depth that match the published facts; but no elevation drawings, a single front render, no lower-floor plan, and all jogs traced.",
+  "groundOutline": {"shape": "IRREGULAR", "corners": 10, "polygonM": [[0, 0], [7.151, 0], [7.151, 0.68], [10.992, 0.68], [10.992, 1.294], [14.021, 1.294], [14.021, 9.576], [3.642, 9.576], [3.642, 7.452], [0, 7.452]], "closedAreaM2": 120.0, "basis": "origin = front-left outer corner of the garage; x along the front, y to the rear. 14.021 (46'-0\") and 9.576 (31'-5\") printed; all other coordinates TRACED from plan 17 (garage notch at the rear-left; foyer flush with the garage front; front bedroom and bath set back). Enclosed garage included; entry stoop/porch excluded. Shoelace area 120.0 m2 (main body ~92.9 m2 + garage ~27.1 m2; published 994 sq ft = 92.3 m2 living area is only a cross-check)."},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front entry stoop in front of the foyer, between garage and front bedroom, under the timber-truss gable; two posts at the front corners, a lower front step", "approxSizeM": "3.49 x 1.53 (TRACED)"},
+    {"kind": "DRIVEWAY", "roofed": false, "where": "asphalt driveway in front of the garage (render only)", "approxSizeM": "UNKNOWN"},
+    {"kind": "WALKWAY", "roofed": false, "where": "paver walkway from the driveway to the porch steps (render only)", "approxSizeM": "UNKNOWN"}
+  ],
+  "printedOverall": {"widthCm": 1402.08, "depthCm": 957.58, "where": "picture 17 (also 16, 18): top dimension line '46'-0\"' with '(14,02)' below it, from the garage's left face to the right wall; right vertical dimension line '31'-5\"' with '(9,58)', from the rear wall to the foyer/garage front (stoop excluded)"},
+  "groundRooms": 8
+}

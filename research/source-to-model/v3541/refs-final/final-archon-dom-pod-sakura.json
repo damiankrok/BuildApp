@@ -1,0 +1,71 @@
+{
+  "slug": "final-archon-dom-pod-sakura",
+  "imagesUsed": [
+    {"n": 22, "what": "ground floor plan (dimensioned), entrance at the bottom; printed outer chains top '485' + '1275' = '1760', bottom '732' + '1028' (= 1760), left '200' + '1030' = '1230', right '990' + '240' (= 1230); interior 460, 660, 280, 387 x3, 329, 197/198, 230, 350, 330, 261, 181, 200, 423, 301, 156, 149, 161, 168, 182, 110; openings 300/140, 105/210, 70/230 x2, 180/230 (front), 180/230 x3 and 360/230 (rear), 180/230 x2 (left)"},
+    {"n": 21, "what": "same plan with room names/areas (16 rooms incl. Salon + Jadalnia 32,69, Kuchnia 13,52, Kotlownia z pralnia 8,09)"},
+    {"n": 14, "what": "smaller copy of plan 22, same chains (19 = smaller still)"},
+    {"n": 11, "what": "front elevation (elewacja frontowa): L-shaped hip roof with the front-left wing hip and a valley to the main slope, kitchen window on the wing, entrance door, porch pier, two narrow full-height windows, wide window right; two chimneys"},
+    {"n": 12, "what": "rear elevation (elewacja ogrodowa): plain hip roof, three bedroom terrace doors with timber panels between, the recessed 360/230 glazing behind the open roofed terrace at the viewer's right with its corner post"},
+    {"n": 9, "what": "side elevation = LEFT facade (rear at the viewer's left): two full-height windows of the living room toward the front, open roofed terrace with recessed timber wall and corner post at the rear end"},
+    {"n": 10, "what": "side elevation = RIGHT facade (front at the viewer's left): blank bedroom-wing wall, front wing's timber-clad side and porch pier at the left, two overlapping hip silhouettes"},
+    {"n": 13, "what": "section: ridge +6,68, eaves +3,04, ground -0,32, room height 272, roof pitch '30 deg' printed; unused roof space with trusses"},
+    {"n": 15, "what": "site plan: house 1760 x 1230 with 400/400/300 margins (plot 2460 x 2030); L-shaped hip roof, main ridge parallel to the front, front-left cross hip, two chimneys, paved path from the entrance"},
+    {"n": 5, "what": "render front (white-render colour scheme), same massing"},
+    {"n": 7, "what": "render front (graphite colour scheme, as elevations)"},
+    {"n": 3, "what": "render rear (white scheme): roofed rear-left terrace with post, three bedroom doors"},
+    {"n": 4, "what": "render rear (graphite scheme)"},
+    {"n": 1, "what": "render rear-left close-up of the roofed terrace (graphite); 2 = same view white scheme"},
+    {"n": 18, "what": "render front (graphite, large); 17 and 23 = other front copies, 20 and 24 = rear copies (graphite), 8 = rear (white scheme), 16 = thumbnail"}
+  ],
+  "mirrorOrOtherProjectWarning": "No mirrored copy or other project: plan, site plan, all four elevations and every render show the day wing projecting at the front-left and the open roofed terrace at the rear-left. The page variant is '(E)'. Renders 02, 03, 05, 06, 08 show an alternative white-render colour scheme of the same massing (elevations and renders 01, 04, 07, 16-18, 20, 23, 24 are graphite). Renders add a swimming pool behind the rear terrace and a parked car / paving at the front right that the plan does not show.",
+  "overall": {"widthM": 17.6, "depthM": 12.3, "heightM": 7.0, "basis": "Front = facade labelled 'elewacja frontowa' (picture 11) = entrance facade = bottom of the plan. Width 17.60 printed ('1760' top, '732' + '1028' bottom), left wall of the day wing to right wall of the bedroom wing. Depth 12.30 printed ('200' + '1030' left, '990' + '240' right): the closed body reaches the front line only over the day wing (0-7.32) and the rear line only over the bedroom wing (4.85-17.60); the 4.85 x 2.00 rear-left corner inside the 12.30 is an open roofed terrace and the 10.28 x 2.40 front-right corner is open (entrance porch in part), both excluded from the closed outline. Height 7.00 = ridge +6,68 minus ground -0,32 (section 13), equal to the published 7,0 m. Published built-up area 198,6 m2 is a separate fact (closed polygon 182.11; it plus the roofed terrace 9.70 and roofed porch ~6.0 is ~197.8)."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main block", "role": "MAIN", "where": "full-width block from the bedroom-wing front wall to the rear (night zone and the rear of the day zone); its rear-left 4.85 x 2.00 corner is the open roofed terrace", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "17.60 x 9.90 minus 4.85 x 2.00"},
+    {"name": "front-left day wing", "role": "WING", "where": "living/dining/kitchen wing projecting 2.40 in front of the main block at the left; its hipped cross roof (short ridge front-to-back) also covers the entrance porch", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "7.32 wide, projecting 2.40 (wing 7.32 x 10.30 overall)"},
+    {"name": "entrance porch", "role": "PORCH", "where": "inner corner between the day wing and the bedroom wing front wall, one corner post, under the cross-hip roof", "storeys": 1, "enclosed": false, "roofKind": "HIP", "ridge": "NA", "approxSizeM": "about 2.5 x 2.4 (TRACED width, 2.40 printed depth)"},
+    {"name": "rear-left roofed terrace", "role": "TERRACE", "where": "rear-left corner under the main roof, open to the rear and the left, one corner post, big 360/230 glazing of the living room on its inner side", "storeys": 1, "enclosed": false, "roofKind": "HIP", "ridge": "NA", "approxSizeM": "4.85 x 2.00 (printed)"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "L-shaped hip roof, pitch 30 deg printed in section 13; eaves +3,04, ridge +6,68. Main ridge runs left-right parallel to the front over the bedroom block (~7.7 m long, TRACED from front/rear elevations); over the front-left day wing plus porch a hipped cross wing with a short front-to-back ridge (~2.5 m, TRACED) joins it in a T, with a valley down to the porch corner (front elevation and site plan). Eaves overhang about 0.85 m (dashed roof outline, TRACED). The roof also covers the rear-left terrace and the entrance porch. Two chimneys near the ridge. Graphite flat tiles."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "CENTER", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 5, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW", "LARGE_GLAZING"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["LARGE_GLAZING", "LARGE_GLAZING", "LARGE_GLAZING", "LARGE_GLAZING"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["LARGE_GLAZING", "LARGE_GLAZING"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 0, "leftToRight": []}]}
+  },
+  "largeGlazing": [
+    {"facade": "FRONT", "position": "RIGHT", "what": "bedroom 12 full-height window 180/230 near the right end of the front"},
+    {"facade": "REAR", "position": "LEFT", "what": "three bedroom terrace doors 180/230 (rooms 9, 8, 7 from the viewer's left), full height, timber panels between"},
+    {"facade": "REAR", "position": "RIGHT", "what": "living room glazing 360/230 set back 2.00 m behind the open roofed terrace at the rear-left corner (viewer's right)"},
+    {"facade": "LEFT", "position": "RIGHT", "what": "two living/dining full-height windows 180/230 in the front half of the left facade"}
+  ],
+  "features": [
+    {"kind": "TERRACE", "count": 1, "where": "open roofed terrace at the rear-left corner under the main roof, corner post, 4.85 x 2.00 printed"},
+    {"kind": "PORCH", "count": 1, "where": "roofed entrance porch in the front inner corner beside the projecting day wing, one dark corner post"},
+    {"kind": "TERRACE", "count": 1, "where": "unroofed paved terrace strip along the whole rear with a row of planters, widened into a lounge area behind the roofed terrace at the rear-left"},
+    {"kind": "CHIMNEY", "count": 2, "where": "near the main ridge, about 5.7 m and 9.2 m from the left wall (TRACED from front and rear elevations)"},
+    {"kind": "OTHER", "count": 1, "where": "vertical natural-timber cladding panels between the openings on the front and rear and on the projecting wing's side wall"},
+    {"kind": "OTHER", "count": 1, "where": "front-left day wing projecting 2.40 with its own hipped cross roof"}
+  ],
+  "palette": {"walls": "dark graphite/anthracite render with vertical natural-timber cladding panels, light grey plinth, anthracite window and door frames, black slatted entrance door (alternative white-render scheme in renders 02/03/05/06/08)", "roof": "graphite flat tiles, dark fascia/soffit and gutters"},
+  "uncertain": [
+    "Published built-up area 198,6 m2 exceeds the closed polygon 182.11 m2; the difference (~16.5) matches the roofed rear terrace (9.70) plus the roofed porch (~6.0), so the published figure appears to include roofed open areas. Published 'Powierzchnia calkowita' 182,71 is close to the closed polygon.",
+    "Porch width is traced: corner post at about 9.3-9.8 m from the left wall, porch roof edge (dashed) at about 10.8 m; porch depth 2.40 = printed front offset.",
+    "Main ridge (~7.7 m), cross-hip ridge (~2.5 m) and eaves overhang (~0.85 m) are traced, not printed.",
+    "Rear terrace strip (~17.6 x 1.5) and lounge area (~5.4 x 2.2) are scaled from the plan at ~38.9 px/m, not printed.",
+    "A round spiral-drawn symbol on the rear terrace is not identifiable and does not appear on the elevations.",
+    "Convention: all full-height glazings of 180 or 360 width recorded as LARGE_GLAZING (the bedroom ones open as doors); the two 70/230 narrow full-height units (boiler room, bathroom 13) recorded as WINDOW.",
+    "Renders show a pool and front parking not drawn on the plan; colour schemes differ between renders (see warning)."
+  ],
+  "confidence": "HIGH - every outline vertex is printed (paired outer chains on all four sides), pitch printed, four labelled elevations, section, site plan and renders agree.",
+  "groundOutline": {"shape": "OTHER", "corners": 8, "polygonM": [[0, 0], [7.32, 0], [7.32, 2.4], [17.6, 2.4], [17.6, 12.3], [4.85, 12.3], [4.85, 10.3], [0, 10.3]], "closedAreaM2": 182.11, "basis": "Rectangle 17.60 x 12.30 with two diagonally opposite corner notches (front-right 10.28 x 2.40 open/porch, rear-left 4.85 x 2.00 open roofed terrace). Origin = front-left outer corner of the day wing, x along the front, y toward the rear. All vertices printed or derived from printed chains: 7.32 ('732'), 2.40 ('240'), 17.60 ('1760'), 12.30 ('990' + '240' / '200' + '1030'), 4.85 ('485' = 17.60 - '1275'), 10.30 ('1030'); checked against the wall faces on the drawing. Published built-up 198,6 m2 (includes roofed open areas)."},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front inner corner right of the day wing, in front of the entrance door, one corner post, paving continuing as a path to the front", "approxSizeM": "about 2.5 x 2.4"},
+    {"kind": "TERRACE", "roofed": true, "where": "rear-left corner under the main roof, corner post, living-room glazing 360/230 on its inner side", "approxSizeM": "4.85 x 2.00"},
+    {"kind": "TERRACE", "roofed": false, "where": "paved strip along the whole rear with planters on its outer edge, bedroom terrace doors open onto it; widens into a lounge area behind the roofed terrace at the rear-left", "approxSizeM": "about 17.6 x 1.5 plus about 5.4 x 2.2 (TRACED)"}
+  ],
+  "printedOverall": {"widthCm": 1760, "depthCm": 1230, "where": "picture 22 (also 14/19/21): top chain '485' + '1275' and overall '1760', bottom '732' + '1028'; left chain '200' + '1030' and overall '1230', right '990' + '240'; site plan 15 repeats 1760 x 1230"},
+  "groundRooms": 16
+}

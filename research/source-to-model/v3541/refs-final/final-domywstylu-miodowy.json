@@ -1,0 +1,300 @@
+{
+ "slug": "final-domywstylu-miodowy",
+ "imagesUsed": [
+  {
+   "n": 5,
+   "what": "ground floor plan of the semi-detached pair (two mirror-image segments), entrances at the bottom; printed outer chains '16,10' (top, over both segments) and '13,62' (left, from the rear face of the central part to the front of the bedroom block); per segment 8 labelled spaces, front bedroom block projecting ~1.5 m, recessed entrance with a free column, rear niche with double doors, rear terrace with a privacy strip between the segments"
+  },
+  {
+   "n": 6,
+   "what": "upper floor plan captioned 'rzut poddasza' but a full storey under a flat roof; no chains; per segment 3 bedrooms, bathroom, hall, stair; front balcony outline on the roof of the bedroom block, rear-outer loggia with a balustrade line"
+  },
+  {
+   "n": 4,
+   "what": "elevation sheet: contains ONLY the front elevation of the pair - two full storeys, flat roof with a slightly raised central part, timber-slat panels framing the main windows, single-storey front blocks with glass balcony railings above, recessed entrances (house numbers 2 and 4), narrow tall windows with Juliet balconies"
+  },
+  {
+   "n": 3,
+   "what": "render captioned 'wizualizacja frontowa' - front of the pair from the front-right, matching the elevation"
+  },
+  {
+   "n": 2,
+   "what": "400x300 thumbnail of render 3"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "Picture 1 is the '1:500 add-on' icon, not a plan; picture 2 is a thumbnail of render 3. The URL suffix '_2' is the project name 'Miodowy 2' (all captions), not a mirror marker; plan, elevation and render agree (no mirrored picture). The building is a semi-detached pair: plans and elevation show TWO mirror-image segments (house numbers 2 and 4) - intended symmetry, not a mirrored copy. The published facts are for ONE segment (usable 143.82 = exact sum of one segment's 14 labelled rooms on both floors; built-up 99.82 ~ half of the pair's closed footprint), whereas the printed chains 16.10 x 13.62 cover both segments. The upper plan is captioned 'rzut poddasza' (attic) although it is a full storey under a flat (2 deg) roof.",
+ "overall": {
+  "widthM": 16.1,
+  "depthM": 13.62,
+  "heightM": 7.37,
+  "basis": "Front = entrance facade (bottom of plan 5; the only elevation drawn; render 3 captioned 'wizualizacja frontowa' shows it). Whole semi-detached pair: width 16.10 printed (top chain over both segments' side walls), depth 13.62 printed (left chain from the rear face of the central part to the front of the single-storey bedroom block); each segment is 8.05 m wide (half, derived; the party wall is drawn as two walls with a joint). Closed body only: front porches, rear terraces, rear niches, balconies and loggias excluded. Published facts are per segment: built-up 99.82 m2, usable 143.82 m2. Height 7.37 published (elevation scales ~7.1-7.4 m)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 2,
+  "habitableAttic": false,
+  "basement": false
+ },
+ "bodies": [
+  {
+   "name": "twin main block",
+   "role": "MAIN",
+   "where": "two-storey block of two mirror-image segments sharing a party wall in the middle; upper floor straight across the front, ~12.6 m deep along the central part (traced)",
+   "storeys": 2,
+   "enclosed": true,
+   "roofKind": "FLAT",
+   "ridge": "NA",
+   "approxSizeM": "16.10 x ~12.1-12.6 (two segments of 8.05)"
+  },
+  {
+   "name": "front bedroom blocks",
+   "role": "OTHER",
+   "where": "single-storey blocks at both outer front corners (bedroom 10.83 each) projecting ~1.47 m ahead of the hall/kitchen face; thick white frame whose slab also covers the recessed entrance and rests on a free column; balcony with glass railing on top",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "FLAT",
+   "ridge": "NA",
+   "approxSizeM": "each ~4.06 x 1.47 projection (slab ~5.6 wide incl. porch)"
+  },
+  {
+   "name": "raised central roof part",
+   "role": "OTHER",
+   "where": "central part of the upper floor (~3.5-12.5 m from the left on the front elevation, i.e. between the rear loggias) with its flat roof ~0.3 m higher than the outer upper parts (elevation, render)",
+   "storeys": 2,
+   "enclosed": true,
+   "roofKind": "FLAT",
+   "ridge": "NA",
+   "approxSizeM": "~9.0 wide (scaled from the elevation)"
+  }
+ ],
+ "mainRoof": {
+  "kind": "FLAT",
+  "ridge": "NA",
+  "highSideIfShed": null,
+  "pitchDeg": 2,
+  "notes": "Flat roofs behind white parapets at two levels: the central part (~3.5-12.5 m from the left on the front elevation) about 0.3 m higher than the outer upper parts; the single-storey front blocks have their own flat roofs used as balconies. Four small roof elements (vents/flue caps) drawn just above the parapet line in the elevation. Pitch 2 published."
+ },
+ "garage": {
+  "present": false,
+  "doorFacade": null,
+  "doorPosition": null,
+  "doorCount": 0
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "CENTER",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": true,
+   "byStorey": [
+    {
+     "storey": 0,
+     "count": 6,
+     "leftToRight": [
+      "WINDOW",
+      "ENTRANCE_DOOR",
+      "WINDOW",
+      "WINDOW",
+      "ENTRANCE_DOOR",
+      "WINDOW"
+     ]
+    },
+    {
+     "storey": 1,
+     "count": 4,
+     "leftToRight": [
+      "DOOR",
+      "WINDOW",
+      "WINDOW",
+      "DOOR"
+     ]
+    }
+   ]
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [
+  {
+   "facade": "REAR",
+   "position": "CENTER",
+   "what": "one per segment (two in total, either side of the party wall): living room 28.52 terrace door with a fixed glazed panel, ~2.75 m wide, in the central rear wall (plan only; no rear elevation)"
+  }
+ ],
+ "features": [
+  {
+   "kind": "BALCONY",
+   "count": 2,
+   "where": "front, upper floor, on the roofs of the single-storey bedroom blocks at both outer corners, glass railings, reached by a glazed balcony door from bedroom 17.01"
+  },
+  {
+   "kind": "OTHER",
+   "count": 2,
+   "where": "glass Juliet balconies at the two narrow tall upper windows near the centre (front elevation); the upper plan also draws a railing line outside the rear door of each bedroom 19.41"
+  },
+  {
+   "kind": "PORCH",
+   "count": 2,
+   "where": "recessed entrances on the inner side of the front blocks, covered by the blocks' white frame slab, each with a free column at the outer corner"
+  },
+  {
+   "kind": "TERRACE",
+   "count": 2,
+   "where": "rear terraces (~6.6 x 2.5 m each) with a double privacy strip/screen on the party-wall line (plan only)"
+  },
+  {
+   "kind": "LOGGIA",
+   "count": 2,
+   "where": "upper floor rear outer corners: recessed loggia ~2.9 x 1.8 m with balustrade (plan only); below each, a ground-floor niche ~2.7 x 1.0 m with double doors to the dining area"
+  },
+  {
+   "kind": "OTHER",
+   "count": 4,
+   "where": "horizontal timber-slat cladding panels framing the ground-floor bedroom windows and the upper balcony doors of both segments (signature feature)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 4,
+   "where": "small roof elements (vents/flue caps) visible just above the parapet in the front elevation"
+  }
+ ],
+ "palette": {
+  "walls": "white render, horizontal light-brown timber-slat cladding panels, anthracite window and door frames, glass balustrades, light grey parapet copings",
+  "roof": "flat roof, covering not visible (grey parapet caps)"
+ },
+ "uncertain": [
+  "Only the front elevation is drawn, so REAR/LEFT/RIGHT openings are marked not shown. From the ground plan: REAR per segment 2 openings (niche double door to the dining area, living-room terrace door + fixed panel) = 4; LEFT 1 window (bathroom 6.78), RIGHT 1 window (mirror). From the upper plan: REAR per segment 2 (loggia double door of bedroom 18.05, door + window of bedroom 19.41 with a railing line) = 4; the upper side walls show no windows.",
+  "All inner vertices are TRACED at ~26.5 px/m (one pixel ~3.8 cm): front block side faces 4.06/12.04, hall/kitchen face 1.47, rear niches x 0.60-3.31 and 12.79-15.50 at depth 12.42, and the outer side-wall ends at 13.43 (they stop ~0.17 m short of the central rear face - a 4-5 px step drawn in both segments); right-segment vertices are mirrored from the left and agree with tracing within 1 px.",
+  "The upper plan prints no chains and cannot be registered exactly against the ground plan: it traces ~12.6 m deep along the central part vs ~12.1 m for the ground central part, so the upper floor overhangs either the entrance side or the rear by ~0.5 m (the render suggests the upper front is flush with the kitchen face, which would put the overhang at the rear, but the ground plan draws no outline there).",
+  "Front balcony on the bedroom block: upper plan outline ~1.6 m deep vs ~1.47 m ground projection - consistent only within the registration uncertainty.",
+  "Ground rear niches recorded as roofed because the ground plan draws the outline of the upper loggia's balustrade beyond them; whether the upper loggias themselves are covered by the roof is not shown.",
+  "Upper front balcony doors (in the timber panels) counted as DOOR: the plan shows double leaves opening inward; the elevation shows them as two-pane French windows.",
+  "Rear terraces and privacy strips come from plan outlines only; depth ~2.5 m traced.",
+  "Grey diagonal shapes around the right segment's door and narrow window in the elevation are cast shadows.",
+  "Two entrance doors, one per segment, at ~4.1-5.2 m and ~10.9-12.0 m from the left; 'CENTER' refers to the pair.",
+  "groundRooms = 16 labelled spaces for the pair (8 per segment: 28.52, 6.78, 1.07, 5.62, 9.14, 10.83, 1.96, 6.80).",
+  "Traced outline area 200.8 m2 for the pair = 100.4 m2 per segment vs published built-up 99.82 m2 (check only, not used to fit)."
+ ],
+ "confidence": "HIGH - both overall chains printed and legible, plan, elevation and render agree, and the room labels reproduce the published usable area exactly; inner vertices are traced (+-0.1 m), only the front elevation exists, and the upper floor's registration is uncertain by ~0.5 m.",
+ "groundOutline": {
+  "shape": "OTHER",
+  "corners": 16,
+  "polygonM": [
+   [
+    0,
+    0
+   ],
+   [
+    4.06,
+    0
+   ],
+   [
+    4.06,
+    1.47
+   ],
+   [
+    12.04,
+    1.47
+   ],
+   [
+    12.04,
+    0
+   ],
+   [
+    16.1,
+    0
+   ],
+   [
+    16.1,
+    13.43
+   ],
+   [
+    15.5,
+    13.43
+   ],
+   [
+    15.5,
+    12.42
+   ],
+   [
+    12.79,
+    12.42
+   ],
+   [
+    12.79,
+    13.62
+   ],
+   [
+    3.31,
+    13.62
+   ],
+   [
+    3.31,
+    12.42
+   ],
+   [
+    0.6,
+    12.42
+   ],
+   [
+    0.6,
+    13.43
+   ],
+   [
+    0,
+    13.43
+   ]
+  ],
+  "closedAreaM2": 200.82,
+  "basis": "Both segments: rectangle with a front notch between the two bedroom blocks (porches + hall/kitchen faces) and two rear-outer niches. Origin = front-left outer corner of the left segment's bedroom block. Printed: 16.10 (x of the right face), 13.62 (y of the central rear face). TRACED: 4.06, 1.47, 12.04, 12.42, 0.60, 3.31, 12.79, 15.50, 13.43; right segment mirrored. Porches, terraces and niches excluded. Published built-up 99.82 m2 is per segment."
+ },
+ "openZones": [
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "front, two recessed entrances on the inner side of the front bedroom blocks, covered by the blocks' white frame slab (elevation), free column at the outer corner",
+   "approxSizeM": "each ~1.6 x 1.47 (traced)"
+  },
+  {
+   "kind": "TERRACE",
+   "roofed": false,
+   "where": "rear, one per segment, along the central rear wall and in front of the niche, separated on the party-wall line by a double privacy strip (~0.6 m each, ~2.5 m long)",
+   "approxSizeM": "each ~6.6 x 2.5 (traced)"
+  },
+  {
+   "kind": "LOGGIA",
+   "roofed": true,
+   "where": "rear outer corners, ground floor: niche between the side-wall end and the central part, double doors to the dining area; the upper loggia lies above it",
+   "approxSizeM": "each ~2.7 x 1.0 (traced)"
+  },
+  {
+   "kind": "BALCONY",
+   "roofed": false,
+   "where": "front, upper floor, on the roof of each single-storey bedroom block, glass railing (elevation + upper plan)",
+   "approxSizeM": "each ~5.7 x ~1.5 (traced)"
+  },
+  {
+   "kind": "LOGGIA",
+   "roofed": null,
+   "where": "rear outer corners, upper floor: recessed loggia of bedroom 18.05 with a balustrade line slightly beyond the side-wall end (upper plan only)",
+   "approxSizeM": "each ~2.9 x ~1.8 (traced)"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": 1610,
+  "depthCm": 1362,
+  "where": "picture 5: top outer chain '16,10' (over the rear terraces, arrows on both segments' outer side walls) and left outer chain '13,62' (rear face of the central part to the front of the bedroom block); no other chains printed; upper plan has none"
+ },
+ "groundRooms": 16
+}

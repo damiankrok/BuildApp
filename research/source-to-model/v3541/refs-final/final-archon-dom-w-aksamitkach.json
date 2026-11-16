@@ -1,0 +1,76 @@
+{
+  "slug": "final-archon-dom-w-aksamitkach",
+  "imagesUsed": [
+    {"n": 30, "what": "ground floor plan (dimensioned), entrance and garage door at the bottom; printed bottom outer chains '90' (bay projection) + '1232' (wall to wall) and overall '1322'; left outer chain '882'; interior 230, 310, 565, 320, 792, 460, 476, 276, 305, 187, 156, 103, 190, 585, 335; openings 150/120 x2 (rear), 90/170 x3 (bay), 180/230 (left terrace door), 180/170 (front salon window), 100/210 (front door), 240/245 (garage door), 90/90 x2 (right)"},
+    {"n": 29, "what": "same ground plan with room names/areas (9 rooms incl. Garaz 18,36 and Kotlownia 9,28)"},
+    {"n": 27, "what": "attic plan (dimensioned), same orientation; knee-wall lines 140/220; balcony doors 140/210 x2 to the front balcony, 150/220 x2 to the left balcony, windows 90/150 x2 on the right gable, roof windows 78/140 x2 on the rear slope"},
+    {"n": 28, "what": "attic plan with room names/areas (6 rooms)"},
+    {"n": 6, "what": "smaller copy of ground plan 30 (and 11 smaller still)"},
+    {"n": 7, "what": "smaller copy of attic plan 27 (and 10 smaller still)"},
+    {"n": 3, "what": "front elevation (elewacja frontowa): gable roof ridge parallel to the front, central gable dormer with two balcony doors over an arched two-column entrance porch, salon window left, garage door right, stone-clad bay edge with its front diagonal window at the far left"},
+    {"n": 4, "what": "rear elevation (elewacja ogrodowa): two ground windows, two roof windows, chimneys on the rear slope, bay rear diagonal window at the far right"},
+    {"n": 2, "what": "side elevation = LEFT facade (rear at the viewer's left, porch post at the right): stone-clad bay with three windows, terrace door 180/230, attic balcony across with two balcony doors, half-timber gable"},
+    {"n": 1, "what": "side elevation = RIGHT facade (front at the viewer's left): two garage windows, two attic windows, half-timber gable, dormer roof and porch seen at the left"},
+    {"n": 5, "what": "section: ridge +8,37, eaves +3,15, attic floor +3,06, ground -0,47 (front) and -0,15 (rear), storey height 272, knee wall 110, attic height 285"},
+    {"n": 8, "what": "site plan: house 1322 x 882 with 400 margins (plot 2122 x 1682); ridge parallel to the front, gable dormer at the front centre, 4 chimneys, 2 roof windows on the rear slope, polygonal terrace on the left"},
+    {"n": 31, "what": "render front-left (traditional version): left balcony over the stone bay, porch with arch, dormer balcony, garage right"},
+    {"n": 32, "what": "render rear-left: two rear windows, two roof windows, four chimneys, bay and terrace door under the left balcony"},
+    {"n": 12, "what": "small copy of render 31 (13 = small copy of 32, 20 and 9 = other copies of the front-left render)"},
+    {"n": 19, "what": "render rear-left of a DIFFERENT variant (modern finish) - not used"},
+    {"n": 23, "what": "render front-left of a DIFFERENT variant (modern finish) - not used"}
+  ],
+  "mirrorOrOtherProjectWarning": "Pictures 19 and 23 show a different (modern-finish) variant, not the drawn house: rectangular timber-clad box bay instead of the half-octagonal stone bay, glass balustrades instead of wrought iron, square porch pillars without the arch, and a single long horizontal rear window instead of two windows; they were not used. Not mirrored (garage still at the front right). All other exterior pictures (1-4 elevations, 5 section, 8 site plan, 9/12/13/20/31/32 renders) agree with plans 27/30. 14-18, 21, 22, 24-26 are interiors (14-16 carry a ROMIQ interior-design logo) and give no geometry.",
+  "overall": {"widthM": 13.22, "depthM": 8.82, "heightM": 8.84, "basis": "Front = facade labelled 'elewacja frontowa' (picture 3) = entrance and garage facade = bottom of the plan. Width 13.22 = printed overall '1322' = main rectangle wall to wall '1232' + enclosed half-octagonal dining bay projecting '90' on the left (the bay is enclosed living space, so it is included); main rectangle alone is 12.32. Depth 8.82 printed ('882'), front and rear walls straight. Garage (front right) is inside the main rectangle and included. Excluded: entrance porch, left terrace, driveway, balconies. Height 8.84 = ridge +8,37 minus front ground -0,47 (section 5), equal to the published 'Wysokosc budynku 8,84 m'. Published built-up area 111,76 m2 is a separate fact (polygon below 110.67)."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "rectangular block, ground floor plus habitable attic, gable roof with the gables on the left and right sides", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "12.32 x 8.82"},
+    {"name": "garage", "role": "GARAGE", "where": "front-right part of the main rectangle under the main roof (not a separate wing), single bay, door on the front", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "about 3.35 x 5.85 inside (printed interior 335 / 585)"},
+    {"name": "front gable dormer", "role": "OTHER", "where": "centred over the entrance on the front roof slope, two balcony doors, half-timber gable, own small gable roof ridge front-to-back", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "about 3.7 wide (TRACED)"},
+    {"name": "dining bay", "role": "OTHER", "where": "half-octagonal bay on the left wall, rear half of the left side, stone-clad, three windows; topped by the attic balcony", "storeys": 1, "enclosed": true, "roofKind": "OTHER", "ridge": "NA", "approxSizeM": "0.90 deep (printed) x about 3.0 at the wall (TRACED)"},
+    {"name": "entrance porch", "role": "PORCH", "where": "in front of the entrance, two columns with an arch, roofed by the front balcony slab", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 4.4 x 1.6 (TRACED)"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "Symmetrical gable roof over the 12.32 x 8.82 block, ridge left-right parallel to the front, gable walls on the left and right sides with decorative half-timber boarding; eaves +3,15, ridge +8,37, knee wall 110 cm. A central front gable dormer (wystawka) breaks the front slope above the porch; two roof windows on the rear slope. Pitch is not printed; traced about 42 deg from the side elevations and section (TRACED only). Four chimneys (site plan, rear and side elevations, render 32). Graphite tiles."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTER", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]}, {"storey": 1, "count": 2, "leftToRight": ["DOOR", "DOOR"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}, {"storey": 1, "count": 2, "leftToRight": ["ROOF_WINDOW", "ROOF_WINDOW"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "LARGE_GLAZING"]}, {"storey": 1, "count": 2, "leftToRight": ["DOOR", "DOOR"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}, {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "RIGHT", "what": "salon two-leaf full-height glazed terrace door 180/230 in the front half of the left facade (viewer's right in elevation 2), opening onto the left terrace under the attic balcony"}
+  ],
+  "features": [
+    {"kind": "OTHER", "count": 1, "where": "half-octagonal stone-clad dining bay on the left side, 0.90 projection, three 90/170 windows"},
+    {"kind": "OTHER", "count": 1, "where": "central front gable dormer with half-timber gable and two balcony doors"},
+    {"kind": "BALCONY", "count": 2, "where": "front balcony on top of the porch in front of the dormer (~4.0 x 1.3, TRACED) and a long left-gable balcony with chamfered ends over the bay and terrace door (~6.9 x 1.0, TRACED); wrought-iron railings with flower boxes"},
+    {"kind": "PORCH", "count": 1, "where": "entrance porch at the front centre, two columns and an arch, roofed by the front balcony, steps"},
+    {"kind": "TERRACE", "count": 1, "where": "polygonal stepped terrace along the whole left side with chamfered corners"},
+    {"kind": "CHIMNEY", "count": 4, "where": "one just behind the ridge ~4.8 m from the left, one just in front of the ridge ~8.6-8.9 m from the left, two lower stacks on the rear slope ~6.2 m and ~8.9 m from the left (TRACED)"},
+    {"kind": "ROOF_WINDOW", "count": 2, "where": "rear slope over the attic hall/dressing room and staircase (78/140)"},
+    {"kind": "OTHER", "count": 1, "where": "decorative half-timber boarding in both main gables and in the dormer gable; stone surrounds around windows; stone plinth"}
+  ],
+  "palette": {"walls": "white render; beige sandstone-look stone cladding on the plinth, the bay, porch columns/arch, corner of the left gable and window surrounds; brown timber half-timber boarding in the gables; golden-oak/brown window frames; golden-oak sectional garage door and timber entrance door; black wrought-iron balcony railings; beige stone chimneys", "roof": "graphite/anthracite tiles, graphite gutters and downpipes, brown timber soffits and verges"},
+  "uncertain": [
+    "Bay outline is TRACED except the printed 0.90 projection: span at the wall ~2.97 m (y 4.51-7.48 from the front) and outer face ~1.49 m (y 5.23-6.72), scaled at ~48.5 px/m; the stone panel in elevation 2 spans ~3.3 m, so the span may be up to ~0.3 m larger.",
+    "Polygon area 110.67 m2 vs published built-up area 111,76 m2 (1.1 m2 difference, possibly the larger bay span or columns counted).",
+    "widthM 13.22 includes the 0.90 enclosed bay; the main rectangle is 12.32.",
+    "Roof pitch is not printed; ~42 deg in notes is traced only.",
+    "Chimney count 4 combines the rear elevation, both side elevations, site plan and render 32; the front elevation shows only two.",
+    "The bay's two diagonal windows appear foreshortened in the FRONT and REAR elevations as well as in the LEFT elevation; per-facade counts therefore include them twice (only 3 distinct bay windows).",
+    "Convention: salon terrace door 180/230 recorded as LARGE_GLAZING; attic balcony doors 140/210 (front) and 150/220 (left) recorded as DOOR.",
+    "Porch (~4.4 x 1.6), terrace (~3.9 x 8.8), driveway (~3.0 wide), balcony and dormer sizes are scaled from the drawings, not printed.",
+    "Section prints two ground levels (-0,47 front, -0,15 rear); the published 8,84 m height uses -0,47.",
+    "Pictures 19 and 23 belong to a different variant (see warning)."
+  ],
+  "confidence": "HIGH - dimensioned plans of both storeys, four labelled elevations, section, site plan and matching renders; only the bay span, pitch and open-zone sizes are traced, and two renders of another variant were excluded.",
+  "groundOutline": {"shape": "RECTANGLE_WITH_BAY", "corners": 8, "polygonM": [[0, 0], [12.32, 0], [12.32, 8.82], [0, 8.82], [0, 7.48], [-0.9, 6.72], [-0.9, 5.23], [0, 4.51]], "closedAreaM2": 110.67, "basis": "Origin = front-left outer corner of the main wall, x along the front, y toward the rear; the bay projects to negative x. 12.32, 8.82 and the 0.90 bay projection are printed ('1232', '882', '90', overall '1322'); the four bay y-values (4.51, 5.23, 6.72, 7.48) are TRACED from the plan. Porch, terrace, driveway excluded. Published built-up 111,76 m2."},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front centre in front of the entrance door, two columns, roofed by the front balcony slab, steps down to the front", "approxSizeM": "about 4.4 x 1.6 (TRACED)"},
+    {"kind": "TERRACE", "roofed": false, "where": "left side along the whole gable, polygonal with chamfered corners around the bay, three step lines; only its inner ~1 m lies under the attic balcony", "approxSizeM": "about 3.9 x 8.8 (TRACED)"},
+    {"kind": "DRIVEWAY", "roofed": false, "where": "paved apron in front of the garage door at the front right, continuing beyond the drawing edge", "approxSizeM": "about 3.0 wide x at least 3.9 (TRACED)"}
+  ],
+  "printedOverall": {"widthCm": 1322, "depthCm": 882, "where": "picture 30 (also 6/11/29): bottom outer chains '90' + '1232' and overall '1322' (1232 = main walls, 90 = bay); left outer chain '882'; site plan 8 repeats 1322 x 882 with 400 cm margins"},
+  "groundRooms": 9
+}

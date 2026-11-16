@@ -1,0 +1,206 @@
+{
+ "slug": "final-domywstylu-puszek",
+ "imagesUsed": [
+  {
+   "n": 5,
+   "what": "ground floor plan (rzut parteru), entrance at the bottom; printed outer chains '11,52' (top, drawn over the rear deck, arrows on the outer wall faces) and '8,52' (left, outer wall faces, porch excluded); full-width front porch with railings and centre steps at the bottom, rear deck with railing at the top; 8 labelled rooms"
+  },
+  {
+   "n": 6,
+   "what": "attic plan (rzut poddasza), same orientation and scale, no chains; outer walls drawn on the same 11.52 x 8.52 outline (knee walls); 6 labelled spaces with full floor areas in brackets; dashed roof-window outlines in the front-right room 16.17 and the rear-right room 10.36"
+  },
+  {
+   "n": 4,
+   "what": "elevation sheet: contains ONLY the front (porch) elevation - gable roof seen from the eaves side, two gable dormers with triangular glazing, one roof window between them, porch on four timber posts with knee braces and X-pattern railings; ground storey: window, entrance door, window"
+  },
+  {
+   "n": 3,
+   "what": "render captioned 'wizualizacja frontowa' (front-right view): porch side and the right gable with 3 ground + 2 attic windows, timber-boarded gable apex with brackets, metal flue pipe on the roof near the right gable"
+  },
+  {
+   "n": 2,
+   "what": "400x300 thumbnail of the same front render (no new information)"
+  }
+ ],
+ "mirrorOrOtherProjectWarning": "Picture 1 is the site's '1:500 add-on' icon (40x33 px), not a plan; picture 2 is a thumbnail of render 3. The URL suffix '_2_dr-t' is part of the project name 'Puszek 2 dr-T' used in every caption (render caption 'projekt domu drewnianego' = timber-frame version), not a mirror marker. The pictures are of that variant and mutually consistent, not mirrored: front-elevation openings (bedroom window left at ~0.12-0.27 of the width, entrance door at ~0.41-0.59, kitchen window right at ~0.73-0.88) match the plan's bottom wall, and the render's right gable shows the 3 ground windows of the plan's right wall (living room x2, kitchen) and the 2 attic windows of the right attic rooms. No other project's pictures.",
+ "overall": {
+  "widthM": 11.52,
+  "depthM": 8.52,
+  "heightM": 8.05,
+  "basis": "Front = entrance/porch facade (bottom of plan 5; the only elevation drawn; render 3 captioned 'wizualizacja frontowa' shows this side). Width 11.52 and depth 8.52 are printed outer chains on plan 5 spanning the outer wall faces of the closed rectangular body. Excluded: full-width front porch (~3.0 m deep, traced) and rear deck (~1.8 m deep, traced). Published built-up area 98.31 m2 (printed rectangle gives 98.15 m2). Height 8.05 m is the published figure (not printed; the elevation scales to ~8.1-8.2 m, consistent)."
+ },
+ "storeys": {
+  "fullStoreysAboveGround": 1,
+  "habitableAttic": true,
+  "basement": false
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "where": "single rectangular block, long side to the front, gables to the left and right, habitable attic over the whole body (knee walls on the outer outline)",
+   "storeys": 1,
+   "enclosed": true,
+   "roofKind": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "approxSizeM": "11.52 x 8.52"
+  },
+  {
+   "name": "front porch",
+   "role": "PORCH",
+   "where": "full width of the front facade: timber deck, four timber posts with knee braces, X-pattern railings left and right of the centre steps; roofed by the front roof slope carried down past the main eave line",
+   "storeys": 1,
+   "enclosed": false,
+   "roofKind": "MONO_PITCH",
+   "ridge": "NA",
+   "approxSizeM": "11.52 x ~3.0"
+  }
+ ],
+ "mainRoof": {
+  "kind": "GABLE",
+  "ridge": "ALONG_FRONT",
+  "highSideIfShed": null,
+  "pitchDeg": 40,
+  "notes": "Symmetrical gable over the 11.52 x 8.52 body, ridge parallel to the front, gables at the left and right ends (right gable apex timber-boarded with brackets and a timber verge soffit in the render; left gable not shown). The front slope continues down over the full-width porch with a slight kink at the main eave line (elevation). Two gable dormers with triangular glazing and one roof window on the front slope; the attic plan shows a second roof window (dashed outline) on the rear slope over room 10.36. Metal flue pipe on the roof near the right gable. Graphite tiles, grey gutters. Pitch 40 published, not printed."
+ },
+ "garage": {
+  "present": false,
+  "doorFacade": null,
+  "doorPosition": null,
+  "doorCount": 0
+ },
+ "entrance": {
+  "facade": "FRONT",
+  "position": "CENTER",
+  "recessedOrPorch": true
+ },
+ "openings": {
+  "FRONT": {
+   "shown": true,
+   "byStorey": [
+    {
+     "storey": 0,
+     "count": 3,
+     "leftToRight": [
+      "WINDOW",
+      "ENTRANCE_DOOR",
+      "WINDOW"
+     ]
+    },
+    {
+     "storey": 1,
+     "count": 3,
+     "leftToRight": [
+      "WINDOW",
+      "ROOF_WINDOW",
+      "WINDOW"
+     ]
+    }
+   ]
+  },
+  "REAR": {
+   "shown": false,
+   "byStorey": []
+  },
+  "LEFT": {
+   "shown": false,
+   "byStorey": []
+  },
+  "RIGHT": {
+   "shown": false,
+   "byStorey": []
+  }
+ },
+ "largeGlazing": [],
+ "features": [
+  {
+   "kind": "PORCH",
+   "count": 1,
+   "where": "full-width front porch: timber deck, 4 posts with knee braces, X-pattern balustrade left and right of the centre steps"
+  },
+  {
+   "kind": "DORMER",
+   "count": 2,
+   "where": "front slope, gable dormers with triangular windows and vertical timber boarding, over the front attic rooms left (13.40) and right (16.17)"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "count": 2,
+   "where": "1 on the front slope between the dormers (elevation; dashed outline in room 16.17); 1 on the rear slope over room 10.36 (attic plan dashed outline only)"
+  },
+  {
+   "kind": "TERRACE",
+   "count": 1,
+   "where": "rear deck with railing along almost the whole rear wall (plan only), reached by the living-room terrace door"
+  },
+  {
+   "kind": "CHIMNEY",
+   "count": 1,
+   "where": "metal flue pipe on the roof near the right gable (elevation + render)"
+  },
+  {
+   "kind": "OTHER",
+   "count": 1,
+   "where": "decorative timber-boarded gable apex with brackets and timber verge soffit on the right gable (render only; left gable not shown)"
+  }
+ ],
+ "palette": {
+  "walls": "white/cream render (warm beige under the porch); natural golden timber for porch posts, braces, railings, window frames, dormer and gable boarding; grey sills",
+  "roof": "graphite/anthracite tiles; grey metal gutters, downpipes and flashings"
+ },
+ "uncertain": [
+  "The elevation sheet (picture 4) contains only the front elevation, so REAR/LEFT/RIGHT openings are marked not shown. From the plans: ground rear 1 (terrace door with a glazed side panel, living room, ~8.4-10.2 m from the plan's left), ground left 3 windows (boiler room 7.35, bathroom 6.89, bedroom 13.12), ground right 3 windows (living room x2, kitchen); attic rear 1 window ~2 m wide over the stair (whether it sits in a rear dormer is UNKNOWN) + 1 roof window (dashed), attic left 2 windows (bathroom 8.11, room 13.40), attic right 2 windows (rooms 10.36, 16.17). Render 3 confirms 3 + 2 on the right gable.",
+  "Porch depth ~3.0 m, step width ~3.5 m (about 4.1-7.6 m from the left) and rear deck ~11.1 x 1.8 m are traced at ~31.2 px/m, not printed.",
+  "Whether the rear deck is roofed is not shown (no rear elevation, no roof plan).",
+  "Two small dark caps drawn at the ridge line of the front elevation (near the left end and at about two-thirds of the width) are not identifiable at 310 px (chimney or vent tops?); the render shows only the metal flue near the right gable.",
+  "Published built-up area 98.31 m2 vs 98.15 m2 for the printed 11.52 x 8.52 rectangle (0.16 m2 unexplained).",
+  "Attic plan: unlabeled enclosed space at the top-left (above the 7.35 room), purpose unknown; two dots on the right wall of room 16.17, unidentified symbol.",
+  "Front attic windows sit in gable dormers; dormer widths and heights are not printed (attic plan window openings ~2.0 m wide, traced).",
+  "No heights or roof pitch printed; 8.05 m and 40 deg are published figures."
+ ],
+ "confidence": "HIGH - both overall chains printed and legible, the closed body is a plain rectangle, and the front elevation and render agree with the plan; lower for rear/left/right openings (no elevations, plan-only) and for porch/deck sizes (traced).",
+ "groundOutline": {
+  "shape": "RECTANGLE",
+  "corners": 4,
+  "polygonM": [
+   [
+    0,
+    0
+   ],
+   [
+    11.52,
+    0
+   ],
+   [
+    11.52,
+    8.52
+   ],
+   [
+    0,
+    8.52
+   ]
+  ],
+  "closedAreaM2": 98.15,
+  "basis": "origin = front-left outer corner (bottom-left of plan 5), x along the front, y to the rear; both values printed (11.52, 8.52). Porch and rear deck excluded. Published built-up 98.31 m2."
+ },
+ "openZones": [
+  {
+   "kind": "PORCH",
+   "roofed": true,
+   "where": "front, full width, entrance door in its rear wall, steps at the centre (~4.1-7.6 m from the left), roofed by the extended front slope (elevation)",
+   "approxSizeM": "11.52 x ~3.0 (depth traced)"
+  },
+  {
+   "kind": "TERRACE",
+   "roofed": null,
+   "where": "rear deck with railing, ~0.3 m in from each side wall, living-room terrace door near its right end as drawn on the plan",
+   "approxSizeM": "~11.1 x ~1.8 (traced)"
+  }
+ ],
+ "printedOverall": {
+  "widthCm": 1152,
+  "depthCm": 852,
+  "where": "picture 5: top outer chain '11,52' (drawn above the rear deck, arrows on the outer wall faces) and left outer chain '8,52' (outer wall faces, porch excluded); no other chains printed"
+ },
+ "groundRooms": 8
+}
