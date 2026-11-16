@@ -10,7 +10,7 @@ import { join, resolve } from 'node:path'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { acquireSourcePackage, fileByteCache, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { SourceByteCache, SourcePackage } from '@buildapp/source-package'
-import { anthropicStructuredVision } from '@buildapp/source-vision'
+import { ANSWER_TOOL_NAME, anthropicStructuredVision } from '@buildapp/source-vision'
 import { PAGE, unknownPublisher } from '../../../packages/analysis-service/test/support/unknown-publisher.js'
 import { TRIAL_EXIT, campaignSpentUsd, runHouseReaderTrial } from '../scripts/house-reader-trial.js'
 import type { TrialCall, TrialRecord } from '../scripts/house-reader-trial.js'
@@ -48,8 +48,11 @@ function standIn(answer: Answer): { adapter: ReturnType<typeof anthropicStructur
           const pictures = (body.messages as Array<{ content: Array<{ type: string }> }>)[0].content.filter((c) => c.type === 'image').length
           const output = triage ? { pictures: Array.from({ length: pictures }, (_, i) => ({ picture: i + 1, kind: 'EXTERIOR_VIEW', duplicateOf: 0 })) } : answer.description
           const usage = { input_tokens: triage ? 3000 : 9000, output_tokens: triage ? 400 : 5000 }
-          calls.push({ requested: body.model, served: body.model, stop: 'end_turn', usage })
-          return { content: [{ type: 'text', text: JSON.stringify(output) }], stop_reason: 'end_turn', usage }
+          // v3.54.1: a description is asked for through the adapter's answer tool and answered as its one call
+          const viaTool = Array.isArray(body.tools)
+          const stop = viaTool ? 'tool_use' : 'end_turn'
+          calls.push({ requested: body.model, served: body.model, stop, usage })
+          return viaTool ? { content: [{ type: 'tool_use', name: ANSWER_TOOL_NAME, input: output }], stop_reason: stop, usage } : { content: [{ type: 'text', text: JSON.stringify(output) }], stop_reason: stop, usage }
         },
       },
     }),

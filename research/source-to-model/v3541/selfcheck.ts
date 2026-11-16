@@ -33,8 +33,12 @@ function standIn(mode: Mode, calls: Array<Record<string, unknown>>): () => Promi
         if (mode === 'TRANSPORT_WITH_KEY') throw Object.assign(new Error(`socket hang up (Authorization: Bearer ${SECRET})`), { status: undefined })
         const content = (body.messages as Array<{ content: Array<{ type: string; text?: string }> }>)[0].content
         const numbers = content.filter((c) => c.type === 'text' && /^Picture \d+:$/.test(c.text ?? '')).map((c) => Number(/\d+/.exec(c.text as string)?.[0]))
-        const text = mode === 'NOT_JSON' && !triage ? 'I cannot describe this house as JSON' : triage ? JSON.stringify({ pictures: numbers.map((n) => ({ picture: n, kind: 'FLOOR_PLAN', duplicateOf: 0 })) }) : description
-        return { content: [{ type: 'thinking' }, { type: 'text', text }], stop_reason: 'end_turn', usage: { input_tokens: 12_000, output_tokens: 3_000, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }, _request_id: `req_selfcheck_${calls.length}` }
+        const usage = { input_tokens: 12_000, output_tokens: 3_000, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }
+        const _request_id = `req_selfcheck_${calls.length}`
+        if (triage) return { content: [{ type: 'thinking' }, { type: 'text', text: JSON.stringify({ pictures: numbers.map((n) => ({ picture: n, kind: 'FLOOR_PLAN', duplicateOf: 0 })) }) }], stop_reason: 'end_turn', usage, _request_id }
+        // v3.54.1: the description is answered through the answer tool; NOT_JSON = an answer in prose, no tool call
+        if (mode === 'NOT_JSON') return { content: [{ type: 'thinking' }, { type: 'text', text: 'I cannot describe this house as JSON' }], stop_reason: 'end_turn', usage, _request_id }
+        return { content: [{ type: 'thinking' }, { type: 'tool_use', name: 'record_answer', input: JSON.parse(description) }], stop_reason: 'tool_use', usage, _request_id }
       },
     },
   })
@@ -61,7 +65,7 @@ async function main(): Promise<number> {
   const triageUsd = (12_000 * 0.1 + 3_000 * 0.5) / 1e6
   const describeUsd = (12_000 * 2 + 3_000 * 10) / 1e6
   check('two requests sent (triage, description), each to its model', calls1.length === 2 && calls1[0].model === CAMPAIGN_MODELS.triage && calls1[1].model === CAMPAIGN_MODELS.description, calls1.map((c) => c.model))
-  check('structured output requested, effort only on the description', !!(calls1[1].output_config as { format?: unknown }).format && (calls1[1].output_config as { effort?: string }).effort === 'medium' && (calls1[0].output_config as { effort?: string }).effort === undefined)
+  check('triage under a strict format; the description through the answer tool, effort only on it', !!(calls1[0].output_config as { format?: unknown }).format && Array.isArray(calls1[1].tools) && (calls1[1].output_config as { format?: unknown; effort?: string }).format === undefined && (calls1[1].output_config as { effort?: string }).effort === 'medium' && (calls1[0].output_config as { effort?: string }).effort === undefined)
   check('two answers recorded in the fixture format', Object.keys(answers).length === 2)
   check('raw trace keeps request id, usage and the raw text', raw1.length === 2 && raw1.every((r) => r.status === 'ANSWERED' && typeof r.raw === 'string' && (r.usage as { requestId?: string }).requestId?.startsWith('req_selfcheck_') === true))
   check('ledger: USD at list prices, request ids, price date', l1.entries.length === 2 && Math.abs((l1.entries[0].costUsd as number) - triageUsd) < 1e-9 && Math.abs((l1.entries[1].costUsd as number) - describeUsd) < 1e-9 && l1.costBasis === 'USAGE_PRICED' && l1.priceSource.readOn === '2026-11-16' && l1.entries.every((e) => typeof e.requestId === 'string'), l1.entries.map((e) => e.costUsd))

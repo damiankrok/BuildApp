@@ -11,7 +11,10 @@
 import { sha256Bytes, sha256Hex } from '@buildapp/source-common'
 import type { JsonSchemaNode } from './house-description.js'
 
-export const HOUSE_READER_VERSION = '0.2.0'
+// 0.3.0 (v3.54.1): the description is asked for through one non-strict answer tool instead of a strict output format
+// (see `AnswerMode`); the question text is unchanged, the request around it is not, so recorded answers of 0.2.0 do not
+// replay as 0.3.0 ones.
+export const HOUSE_READER_VERSION = '0.3.0'
 
 export type ReaderPicture = { number: number; bytes: Uint8Array; mediaType: string }
 
@@ -145,8 +148,22 @@ export function fixtureStructuredVision(answers: Record<string, unknown>, record
   }
 }
 
+/**
+ * How the provider is held to the answer's schema (v3.54.1).
+ *  - `STRICT_FORMAT`: `output_config.format` json_schema — the answer is decoded under a grammar compiled from the
+ *    schema. Exact, but the API compiles only small schemas: the whole-house description (114 properties, 24 enums,
+ *    11.5 kB) is refused before any model runs ("The compiled grammar is too large").
+ *  - `ANSWER_TOOL`: one non-strict tool whose input schema is the answer's schema, offered with `tool_choice: auto`
+ *    (thinking models refuse a forced tool choice); the answer is the tool call's input. Not decoded under a grammar:
+ *    the checker that admits a description (`checkHouseDescription`) is what holds it to the schema, as it always was.
+ */
+export type AnswerMode = 'STRICT_FORMAT' | 'ANSWER_TOOL'
+export const DEFAULT_ANSWER_MODES: Record<StructuredVisionPurpose, AnswerMode> = { HOUSE_TRIAGE: 'STRICT_FORMAT', HOUSE_DESCRIPTION: 'ANSWER_TOOL' }
+export const ANSWER_TOOL_NAME = 'record_answer'
+const ANSWER_TOOL_INSTRUCTION = `Give your whole answer as exactly one call of the ${ANSWER_TOOL_NAME} tool: its input is the complete answer object, in the tool's schema. Write nothing else.`
+
 export type AnthropicMessagesLike = {
-  messages: { create(body: Record<string, unknown>, options?: { signal?: AbortSignal }): Promise<{ content: Array<{ type: string; text?: string }>; stop_reason?: string | null; usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number | null; cache_creation_input_tokens?: number | null }; _request_id?: string | null }> }
+  messages: { create(body: Record<string, unknown>, options?: { signal?: AbortSignal }): Promise<{ content: Array<{ type: string; text?: string; name?: string; input?: unknown }>; stop_reason?: string | null; usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number | null; cache_creation_input_tokens?: number | null }; _request_id?: string | null }> }
 }
 
 const toBase64 = (bytes: Uint8Array): string => (typeof Buffer !== 'undefined' ? Buffer.from(bytes).toString('base64') : btoa(String.fromCharCode(...bytes)))
@@ -157,7 +174,8 @@ const toBase64 = (bytes: Uint8Array): string => (typeof Buffer !== 'undefined' ?
  * `tool_choice`). The key is read from the host's environment and is never logged. NOT run live in this repository's
  * checks — there is no key here; `fixtureStructuredVision` replays what a live provider answered.
  */
-export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; triageMaxTokens?: number; timeoutMs?: number; baseURL?: string; createClient?: (apiKey: string, limits: { timeoutMs: number }) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
+export function anthropicStructuredVision(options: { apiKey?: string; model?: string; triageModel?: string; maxTokens?: number; triageMaxTokens?: number; timeoutMs?: number; baseURL?: string; answerModes?: Partial<Record<StructuredVisionPurpose, AnswerMode>>; createClient?: (apiKey: string, limits: { timeoutMs: number }) => Promise<AnthropicMessagesLike> } = {}): StructuredVision {
+  const answerModes: Record<StructuredVisionPurpose, AnswerMode> = { ...DEFAULT_ANSWER_MODES, ...(options.answerModes ?? {}) }
   const apiKey = options.apiKey ?? process.env.ANTHROPIC_API_KEY ?? ''
   const model = options.model ?? 'claude-sonnet-5-5'
   const triageModel = options.triageModel ?? 'claude-haiku-5-5'
@@ -179,16 +197,27 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
       if (apiKey.length === 0) throw new HouseReaderUnavailable('NO_CREDENTIALS', 'ANTHROPIC_API_KEY is not set on this host, so no house description can be asked for')
       client ??= createClient(apiKey, { timeoutMs })
       const use = request.purpose === 'HOUSE_TRIAGE' ? triageModel : model
+      const mode = answerModes[request.purpose]
       const content: unknown[] = []
       for (const p of request.pictures) content.push({ type: 'text', text: `Picture ${p.number}:` }, { type: 'image', source: { type: 'base64', media_type: p.mediaType, data: toBase64(p.bytes) } })
       content.push({ type: 'text', text: request.text })
       const started = Date.now()
       let response: Awaited<ReturnType<AnthropicMessagesLike['messages']['create']>>
       try {
-        response = await (await client).messages.create(
-          { model: use, max_tokens: maxOutputTokens[request.purpose], system: request.system, messages: [{ role: 'user', content }], output_config: { format: { type: 'json_schema', schema: request.schema }, ...(request.purpose === 'HOUSE_DESCRIPTION' ? { effort: 'medium' } : {}) } },
-          request.signal ? { signal: request.signal } : undefined,
-        )
+        const effort = request.purpose === 'HOUSE_DESCRIPTION' ? { effort: 'medium' } : {}
+        const body =
+          mode === 'STRICT_FORMAT'
+            ? { model: use, max_tokens: maxOutputTokens[request.purpose], system: request.system, messages: [{ role: 'user', content }], output_config: { format: { type: 'json_schema', schema: request.schema }, ...effort } }
+            : {
+                model: use,
+                max_tokens: maxOutputTokens[request.purpose],
+                system: `${request.system}\n\n${ANSWER_TOOL_INSTRUCTION}`,
+                messages: [{ role: 'user', content }],
+                tools: [{ name: ANSWER_TOOL_NAME, description: 'Records the answer. Its input is the complete answer object.', input_schema: request.schema }],
+                tool_choice: { type: 'auto' },
+                ...(Object.keys(effort).length > 0 ? { output_config: effort } : {}),
+              }
+        response = await (await client).messages.create(body, request.signal ? { signal: request.signal } : undefined)
       } catch (e) {
         // 400 invalid request, 401/403 key or permission, 404 model, 413 too large, 429 rate limit: refused before any
         // model ran, so nothing is billed. A timeout, a dropped connection or a 5xx may have been.
@@ -206,6 +235,16 @@ export function anthropicStructuredVision(options: { apiKey?: string; model?: st
         model: use,
         ...(response._request_id ? { requestId: response._request_id } : {}),
         ...(response.stop_reason ? { stopReason: response.stop_reason } : {}),
+      }
+      if (mode === 'ANSWER_TOOL') {
+        const calls = response.content.filter((b) => b.type === 'tool_use' && b.name === ANSWER_TOOL_NAME)
+        const raw = calls.length === 1 ? JSON.stringify(calls[0].input ?? null) : text
+        // an answer cut at max_tokens may carry a truncated tool input: it is not an answer, whatever it parses to
+        if (response.stop_reason === 'max_tokens') throw new HouseReaderUnavailable('NO_ANSWER', 'the provider\'s answer was cut at max_tokens', { ...(raw ? { text: raw } : {}), usage })
+        if (response.stop_reason === 'refusal') throw new HouseReaderUnavailable('NO_ANSWER', 'the provider refused to answer (refusal)', { ...(raw ? { text: raw } : {}), usage })
+        if (calls.length > 1) throw new HouseReaderUnavailable('NO_ANSWER', `the provider called ${ANSWER_TOOL_NAME} ${calls.length} times: one answer is asked for`, { ...(raw ? { text: raw } : {}), usage })
+        if (calls.length === 0 || typeof calls[0].input !== 'object' || calls[0].input === null) throw new HouseReaderUnavailable('NO_ANSWER', `the provider did not answer through ${ANSWER_TOOL_NAME} (${response.stop_reason ?? 'no stop reason'})`, { ...(text ? { text } : {}), usage })
+        return { output: calls[0].input, usage, raw: raw as string }
       }
       if (response.stop_reason === 'refusal' || !text) throw new HouseReaderUnavailable('NO_ANSWER', `the provider returned no structured answer (${response.stop_reason ?? 'no text'})`, { ...(text ? { text } : {}), usage })
       let output: unknown

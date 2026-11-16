@@ -1,7 +1,8 @@
 /** v3.53: the whole-house description — its schema as a provider sees it, its prompt, and its deterministic admission. */
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { HouseDescriptionSchema, buildHouseDescriptionPrompt, checkHouseDescription, houseDescriptionJsonSchema, HouseReaderUnavailable, anthropicStructuredVision, fixtureStructuredVision, structuredVisionKey } from '../src/index.js'
+import { ANSWER_TOOL_NAME, DEFAULT_ANSWER_MODES, HouseDescriptionSchema, buildHouseDescriptionPrompt, checkHouseDescription, houseDescriptionJsonSchema, HouseReaderUnavailable, anthropicStructuredVision, fixtureStructuredVision, structuredVisionKey } from '../src/index.js'
+import type { AnthropicMessagesLike } from '../src/index.js'
 
 const raw = (): Record<string, unknown> => JSON.parse(readFileSync(new URL('../../reconstruction/test/fixtures/described-house-a.json', import.meta.url), 'utf8')) as Record<string, unknown>
 
@@ -99,17 +100,18 @@ describe('what a recorded answer is keyed by (v3.53.1)', () => {
   it('the live adapter states what a guard needs — its answer ceilings and its time limit — and never retries on its own', async () => {
     const seen: Array<{ timeoutMs: number }> = []
     const bodies: Array<Record<string, unknown>> = []
-    const adapter = anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async (_key, limits) => { seen.push(limits); return { messages: { create: async (body) => { bodies.push(body); return { content: [{ type: 'text', text: '{"ok":true}' }], stop_reason: 'end_turn', usage: { input_tokens: 10, output_tokens: 5 } } } } } } })
+    const adapter = anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async (_key, limits) => { seen.push(limits); return { messages: { create: async (body) => { bodies.push(body); return body.tools ? { content: [{ type: 'thinking' }, { type: 'tool_use', name: 'record_answer', input: { ok: true } }], stop_reason: 'tool_use', usage: { input_tokens: 10, output_tokens: 5 } } : { content: [{ type: 'text', text: '{"ok":true}' }], stop_reason: 'end_turn', usage: { input_tokens: 10, output_tokens: 5 } } } } } } })
     expect(adapter.provider.maxOutputTokens).toEqual({ HOUSE_TRIAGE: 4096, HOUSE_DESCRIPTION: 16000 })
     const out = await adapter.ask(base)
     expect(out.output).toEqual({ ok: true })
     expect(out.usage).toMatchObject({ inputTokens: 10, outputTokens: 5, model: 'claude-sonnet-5-5' })
     expect(seen).toEqual([{ timeoutMs: adapter.provider.requestTimeoutMs }])
     expect(bodies[0].max_tokens).toBe(16000)
-    expect(bodies[0].tool_choice).toBeUndefined()
-    expect((bodies[0].output_config as { format: { type: string } }).format.type).toBe('json_schema')
     await adapter.ask({ ...base, purpose: 'HOUSE_TRIAGE' })
     expect(bodies[1]).toMatchObject({ model: 'claude-haiku-5-5', max_tokens: 4096 })
+    // the sorting's small schema is decoded under its grammar; never a forced tool choice
+    expect(bodies[1].tool_choice).toBeUndefined()
+    expect((bodies[1].output_config as { format: { type: string } }).format.type).toBe('json_schema')
   })
 })
 
@@ -122,8 +124,55 @@ describe('the live adapter says whether a failure can have been billed (v3.53.1)
   })
 })
 
+describe('a description too large for a strict grammar is asked for through one answer tool (v3.54.1)', () => {
+  // the API refuses the description's schema as a strict output format before any model runs ("The compiled grammar is
+  // too large"): it is offered as a non-strict tool, never forced (thinking models refuse a forced tool choice)
+  const base = { purpose: 'HOUSE_DESCRIPTION' as const, system: 's', text: 't', pictures: [{ number: 1, bytes: new Uint8Array([1, 2, 3]), mediaType: 'image/png' }], schema: houseDescriptionJsonSchema() }
+  type Reply = Awaited<ReturnType<AnthropicMessagesLike['messages']['create']>>
+  const adapterAnswering = (reply: Reply, bodies: Array<Record<string, unknown>> = []) => anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async () => ({ messages: { create: async (body) => { bodies.push(body); return reply } } }) })
+  const usage = { input_tokens: 10, output_tokens: 5 }
+  it('the request carries the schema as the input of one tool, the question unchanged, no strict format', async () => {
+    const bodies: Array<Record<string, unknown>> = []
+    await adapterAnswering({ content: [{ type: 'tool_use', name: ANSWER_TOOL_NAME, input: { a: 1 } }], stop_reason: 'tool_use', usage }, bodies).ask(base)
+    const body = bodies[0] as { tools: Array<{ name: string; input_schema: unknown; strict?: boolean }>; tool_choice: unknown; output_config?: { format?: unknown; effort?: string }; system: string; messages: Array<{ content: Array<{ type: string; text?: string }> }> }
+    expect(body.tools).toHaveLength(1)
+    expect(body.tools[0]).toMatchObject({ name: ANSWER_TOOL_NAME, input_schema: base.schema })
+    expect(body.tools[0].strict).toBeUndefined()
+    expect(body.tool_choice).toEqual({ type: 'auto' })
+    expect(body.output_config?.format).toBeUndefined()
+    expect(body.output_config?.effort).toBe('medium')
+    expect(body.system.startsWith('s')).toBe(true)
+    expect(body.messages[0].content.at(-1)).toEqual({ type: 'text', text: 't' })
+  })
+  it('the answer is the one call’s input; its raw form is kept beside it', async () => {
+    const out = await adapterAnswering({ content: [{ type: 'thinking' }, { type: 'text', text: 'Here it is.' }, { type: 'tool_use', name: ANSWER_TOOL_NAME, input: { a: 1 } }], stop_reason: 'tool_use', usage, _request_id: 'req_t' }).ask(base)
+    expect(out.output).toEqual({ a: 1 })
+    expect(out.raw).toBe('{"a":1}')
+    expect(out.usage).toMatchObject({ requestId: 'req_t', stopReason: 'tool_use' })
+  })
+  it('no call, two calls, a refusal or a cut answer is NO_ANSWER by name, with what came and its usage', async () => {
+    const cases: Array<[Reply, string]> = [
+      [{ content: [{ type: 'text', text: '{"a":1}' }], stop_reason: 'end_turn', usage }, 'did not answer through'],
+      [{ content: [{ type: 'tool_use', name: ANSWER_TOOL_NAME, input: { a: 1 } }, { type: 'tool_use', name: ANSWER_TOOL_NAME, input: { a: 2 } }], stop_reason: 'tool_use', usage }, '2 times'],
+      [{ content: [{ type: 'text', text: 'no' }], stop_reason: 'refusal', usage }, 'refused'],
+      [{ content: [{ type: 'tool_use', name: ANSWER_TOOL_NAME, input: { a: 1 } }], stop_reason: 'max_tokens', usage: { input_tokens: 10, output_tokens: 16000 } }, 'max_tokens'],
+      [{ content: [{ type: 'tool_use', name: 'other_tool', input: { a: 1 } }], stop_reason: 'tool_use', usage }, 'did not answer through'],
+    ]
+    for (const [reply, why] of cases) {
+      const err = await adapterAnswering(reply).ask(base).catch((e: unknown) => e)
+      expect(err).toBeInstanceOf(HouseReaderUnavailable)
+      expect((err as HouseReaderUnavailable).reason).toBe('NO_ANSWER')
+      expect((err as HouseReaderUnavailable).message).toContain(why)
+      expect((err as HouseReaderUnavailable).raw?.usage?.inputTokens).toBe(10)
+    }
+  })
+  it('the mode is the adapter’s, stated per purpose; the sorting stays strict', () => {
+    expect(DEFAULT_ANSWER_MODES).toEqual({ HOUSE_TRIAGE: 'STRICT_FORMAT', HOUSE_DESCRIPTION: 'ANSWER_TOOL' })
+  })
+})
+
 describe('the live adapter keeps what the books and the trace need (v3.54.1)', () => {
-  const base = { purpose: 'HOUSE_DESCRIPTION' as const, system: 's', text: 't', pictures: [{ number: 1, bytes: new Uint8Array([1, 2, 3]), mediaType: 'image/png' }], schema: { type: 'object' } as never }
+  const base = { purpose: 'HOUSE_TRIAGE' as const, system: 's', text: 't', pictures: [{ number: 1, bytes: new Uint8Array([1, 2, 3]), mediaType: 'image/png' }], schema: { type: 'object' } as never }
   it('the request id, the stop reason, the cache counts and the raw answer beside the parsed one', async () => {
     const adapter = anthropicStructuredVision({ apiKey: 'test-key-not-real', createClient: async () => ({ messages: { create: async () => ({ content: [{ type: 'text', text: '{"ok":true}' }], stop_reason: 'end_turn', usage: { input_tokens: 10, output_tokens: 5, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }, _request_id: 'req_test_1' }) } }) })
     const out = await adapter.ask(base)
