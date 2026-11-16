@@ -120,13 +120,15 @@ export class SpendLedgerError extends Error {
   }
 }
 
-export type Reservation = { id: string; purpose: StructuredVisionPurpose; model: string; reservedUsd: number }
+/** v3.54.2: the consultant pilot books its requests in the same cumulative books, under its own purpose. */
+export type SpendPurpose = StructuredVisionPurpose | 'CONSULTATION'
+export type Reservation = { id: string; purpose: SpendPurpose; model: string; reservedUsd: number }
 
 export type SpendLedger = {
   /** The books as they stand; throws `SpendLedgerError` where they cannot be trusted. Never creates or repairs them. */
   read(): SpendState
   /** Take `usd` out of what is left, or throw `HouseReaderUnavailable('BUDGET')`. One critical section. */
-  reserve(purpose: StructuredVisionPurpose, model: string, usd: number): Reservation
+  reserve(purpose: SpendPurpose, model: string, usd: number): Reservation
   /** Replace a reservation by what the request is known to have cost. Omitted: the reservation stands in full. */
   settle(reservation: Reservation, actual: { usd: number; inputTokens?: number; outputTokens?: number } | 'NOT_SENT', note?: string): void
   remainingUsd(): number

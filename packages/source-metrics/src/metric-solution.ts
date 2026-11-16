@@ -117,6 +117,12 @@ export type FrameMetricInput = {
    * whether it may count. Without one (a caller that read no lattice), the 005D reading and one-glyph alternatives.
    */
   lattices?: ReadonlyMap<TextToken, { id: string; lattice: LabelLattice }>
+  /**
+   * v3.54.2 pilot (`crossAxisWitness`): a counted reading on the other axis that states a counted scale within
+   * `DISTINCT_RATIO` but misses it by more than the pixel tolerance is that scale's witness on its own axis. Absent or
+   * false — the default — the hypotheses are formed exactly as before.
+   */
+  crossAxisWitness?: boolean
 }
 
 export type FrameMetricOutput = {
@@ -1033,7 +1039,32 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const members = gather(bounded, cl.cm, tol)
     return { cm: cl.cm, members, weight: round6(members.reduce((a, m) => a + m.weight, 0)) }
   }
-  const countedClusters = clustersOf(counted, tol).map(attach)
+  // v3.54.2 pilot (`crossAxisWitness`): a counted reading on the axis a counted scale has no counted member on, stating
+  // that scale within DISTINCT_RATIO (below which two scales are one) but missing it by more than the pixel tolerance —
+  // a raster resampled a fraction unevenly along one axis — is that scale's witness on its own axis. Without the rule it
+  // falls between two: too close to stand as a scale of its own (`clustersOf` keeps the heavier one) and too far to be
+  // gathered by it, so a correct reading on the other axis vanishes from every hypothesis.
+  const crossAxis = (cl: Cluster, taken: ReadonlySet<string>): Cluster => {
+    const axes = new Set(cl.members.filter((m) => m.record.independence === 'INDEPENDENT' && m.decisive).map((m) => m.record.axis))
+    if (axes.size !== 1) return cl
+    const regions = new Set(cl.members.map((m) => m.region))
+    const best = new Map<string, Obs>()
+    for (const w of counted) {
+      if (axes.has(w.record.axis) || regions.has(w.region) || taken.has(w.record.id)) continue
+      const miss = Math.abs(Math.log(w.cm / w.px / cl.cm))
+      if (miss >= DISTINCT_RATIO) continue
+      const held = best.get(w.region)
+      if (!held || miss < Math.abs(Math.log(held.cm / held.px / cl.cm))) best.set(w.region, w)
+    }
+    if (best.size === 0) return cl
+    const members = [...cl.members, ...best.values()].sort((a, b) => (a.record.id < b.record.id ? -1 : 1))
+    return { cm: cl.cm, members, weight: round6(members.reduce((a, m) => a + m.weight, 0)) }
+  }
+  const countedClusters = ((cls: Cluster[]): Cluster[] => {
+    if (!input.crossAxisWitness) return cls
+    const taken = new Set(cls.flatMap((c) => c.members.map((m) => m.record.id)))
+    return cls.map((c) => crossAxis(c, taken))
+  })(clustersOf(counted, tol).map(attach))
   const all = [...countedClusters, ...clustersOf(bounded, tol).filter((c) => !countedClusters.some((k) => Math.abs(Math.log(c.cm / k.cm)) < DISTINCT_RATIO))]
   const hypotheses: ScaleHypothesis[] = all
     .map(describe)

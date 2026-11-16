@@ -35,7 +35,7 @@ import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { nullVisionReasoner } from '@buildapp/source-vision'
 import type { VisionReasoner } from '@buildapp/source-vision'
 import { extractMetricEvidenceAsync } from '@buildapp/source-metrics'
-import type { LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedReading, LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
@@ -99,6 +99,14 @@ export type AnalysisOptions = {
    * product ever runs — the boundary reads exactly as before; the research harness asks for ON to measure the rule.
    */
   drawnGapRule?: 'OFF' | 'ON'
+  /**
+   * v3.54.2 pilot: a consultant's literal readings of named dimension labels (`@buildapp/source-metrics` consulted.ts),
+   * each a third witness heard before a frame's scale is solved. Absent — the default and all the product runs — the
+   * run is byte for byte what it was. Only the consultation loop (`consult.ts`) passes it.
+   */
+  consulted?: readonly ConsultedReading[]
+  /** v3.54.2 pilot: the metric solver's cross-axis witness rule (`@buildapp/source-metrics`). Absent: off, as before. */
+  crossAxisWitness?: boolean
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -483,6 +491,8 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
         raster,
         specifications: pkg.publishedSpecifications,
         specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications),
+        ...(options.consulted && options.consulted.length > 0 ? { consulted: options.consulted } : {}),
+        ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}),
         recogniser: timed,
         signal,
         onRecognise: (e) => checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } }),

@@ -58,7 +58,7 @@ export const DimensionMarkReasonSchema = z.enum(['LIGHTER_THAN_LINE', 'FAINT_SID
 export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])
 
 /** 005H: the P2 ensemble's decisions (`ensemble.ts`). */
-export const EnsembleDecisionSchema = z.enum(['NO_VALUE', 'NOT_COMPARABLE', 'NOT_CORROBORATING', 'AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS'])
+export const EnsembleDecisionSchema = z.enum(['NO_VALUE', 'NOT_COMPARABLE', 'NOT_CORROBORATING', 'AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS', 'CONSULTED'])
 
 const Sha256Schema = z.string().regex(/^[0-9a-f]{64}$/)
 const ProbabilitySchema = z.number().min(0).max(1)
@@ -86,6 +86,19 @@ export const LabelEnsembleRecordSchema = z
     asReadValueCm: z.number().positive().optional(),
     ocrClass: OcrClassSchema,
     rival: z.object({ text: z.string().min(1), valueCm: z.number().positive(), witness: z.enum(['EXTERNAL', 'LATTICE']) }).strict().optional(),
+    /** v3.54.2 pilot: a consultant's literal reading (`consulted.ts`); absent unless a consultation was given. */
+    consulted: z
+      .object({
+        proposalId: z.string().min(1),
+        literal: z.string().min(1),
+        valueCm: z.number().positive(),
+        engine: z.string().min(1),
+        model: z.string().min(1),
+        requestId: z.string().min(1).optional(),
+        prior: z.object({ asRead: z.string(), ocrClass: OcrClassSchema, decision: EnsembleDecisionSchema }).strict(),
+      })
+      .strict()
+      .optional(),
     why: z.string().min(1),
   })
   .strict()
@@ -1115,6 +1128,22 @@ export const MetricEvidenceSetSchema = z
     dimensionTopology: z.array(DimensionTopologyRecordSchema).optional(),
     /** 1.9.0: each callout ring the recogniser read (005Y-N1); absent when it read none. */
     calloutRings: z.array(CalloutRingRecordSchema).optional(),
+    /** v3.54.2 pilot: every consulted reading this run was given, and what became of it (`consulted.ts`); absent when none. */
+    consultedReadings: z
+      .array(
+        z
+          .object({
+            proposalId: z.string().min(1),
+            frameId: z.string().min(1),
+            latticeId: z.string().min(1),
+            status: z.enum(['APPLIED', 'REFUSED']),
+            why: z.string().min(1),
+            valueCm: z.number().positive().optional(),
+            prior: z.string().optional(),
+          })
+          .strict(),
+      )
+      .optional(),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })
   .strict()

@@ -39,6 +39,8 @@ import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, labelHeightOf, solveFrameMet
 import { NUMERIC_LATTICE_ENSEMBLE_VERSION, NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
 import type { LatticeCache } from './numeric-lattice.js'
 import { OCR_ENSEMBLE_NAME, OCR_ENSEMBLE_VERSION, ensembleOf } from './ensemble.js'
+import { CONSULTED_READING_NAME, CONSULTED_READING_VERSION, applyConsultedReadings } from './consulted.js'
+import type { ConsultedOutcome, ConsultedReading } from './consulted.js'
 import type { EnsembledLattice as LabelLattice } from './ensemble.js'
 import { labelCrop } from './recogniser.js'
 import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.js'
@@ -106,6 +108,13 @@ export type ExtractOptions = {
   specifications?: readonly PublishedSpecificationInput[]
   /** Sha-256 of the specification text as published (`publishedSpecificationsHash`). Required to read one. */
   specificationHash?: string
+  /**
+   * v3.54.2 pilot: a consultant's literal readings of named labels (`consulted.ts`), each a third witness that changes
+   * what one ink is read as before the frame's scale is solved. Absent — the default — the reading is unchanged.
+   */
+  consulted?: readonly ConsultedReading[]
+  /** v3.54.2 pilot: the metric solver's cross-axis witness rule (`FrameMetricInput.crossAxisWitness`). Absent: off. */
+  crossAxisWitness?: boolean
 }
 
 /** Orthographic sheets carry printed measurements; renders and site plans do not, and reading numbers off them invents scale. */
@@ -398,6 +407,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
   // v3.45: how many section level marks the recogniser's readings put on an admitted ladder.
   let levelMarksAdmitted = 0
   let roomNumbersHeard = 0
+  const consultedOutcomes: ConsultedOutcome[] = []
   // v3.45: how many section pitch labels the recogniser read along their slope and the slope admitted.
   let anglesAdmitted = 0
   let sectionHeightsAdmitted = 0
@@ -520,6 +530,15 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
           heard += 1
         }
       }
+      // v3.54.2 pilot: a consultant's literal reading of a named label, applied before the frame's scale is solved
+      if (options.consulted && options.consulted.length > 0) {
+        const { updated, outcomes } = applyConsultedReadings(frame.id, [...lattices.values()], options.consulted)
+        for (const [token, held] of lattices) {
+          const next = updated.get(held.id)
+          if (next) lattices.set(token, { id: held.id, lattice: next })
+        }
+        consultedOutcomes.push(...outcomes)
+      }
       // v3.45: the room numbers — upright one- or two-digit tokens, either side of the page vote — read again by the
       // recogniser from their widened ink (`room-numbers.ts`). A heard reading joins the frame's tokens as a kept upright
       // token that supersedes the template's readings of the same ink; which room it numbers, if any, the plan's interior
@@ -538,7 +557,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         }
       }
       for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
-      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices, ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}) })
       solvedChains = metric.solved
       finalAssignment = metric.assignment
       finalConventions = metric.assignmentConventions
@@ -1328,6 +1347,8 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       ...(roomNumbersHeard > 0 ? [{ name: ROOM_NUMBERS_NAME, version: ROOM_NUMBERS_VERSION }] : []),
       ...(anglesAdmitted > 0 ? [{ name: SECTION_ANGLES_NAME, version: SECTION_ANGLES_VERSION }] : []),
       ...(sectionHeightsAdmitted > 0 ? [{ name: SECTION_HEIGHTS_NAME, version: SECTION_HEIGHTS_VERSION }] : []),
+      ...(options.consulted && options.consulted.length > 0 ? [{ name: CONSULTED_READING_NAME, version: CONSULTED_READING_VERSION }] : []),
+      ...(options.crossAxisWitness ? [{ name: 'metrics.cross-axis-witness', version: CONSULTED_READING_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -1341,6 +1362,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     chainRelations,
     numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
     ...(calloutRings.length > 0 ? { calloutRings: calloutRings.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) } : {}),
+    ...(options.consulted && options.consulted.length > 0 ? { consultedReadings: withUnheard(consultedOutcomes, options.consulted) } : {}),
     ...(recogniser && (heard > 0 || calloutRings.length > 0) ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
     dimensionTopology: dimensionTopology.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
   }
@@ -1668,6 +1690,13 @@ function latticeRecord(id: string, frameId: string, token: TextToken, l: LabelLa
     ...(l.external ? { external: externalRecord(l.external) } : {}),
     ...(l.ensemble ? { ensemble: l.ensemble } : {}),
   }
+}
+
+/** v3.54.2 pilot: a consulted reading for a frame this run never read a label on is answered too — never silently dropped. */
+const withUnheard = (outcomes: readonly ConsultedOutcome[], readings: readonly ConsultedReading[]): ConsultedOutcome[] => {
+  const answered = new Set(outcomes.map((o) => o.proposalId))
+  const unheard = readings.filter((r) => !answered.has(r.proposalId)).map((r): ConsultedOutcome => ({ proposalId: r.proposalId, frameId: r.frameId, latticeId: r.latticeId, status: 'REFUSED', why: 'STALE_TARGET: this run read no dimension label on that frame' }))
+  return [...outcomes, ...unheard].sort((a, b) => (a.proposalId < b.proposalId ? -1 : a.proposalId > b.proposalId ? 1 : 0))
 }
 
 /** 005H: the external reading as recorded — its key is the lattice's id, so it is not repeated. */

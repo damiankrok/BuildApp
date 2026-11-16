@@ -58,7 +58,7 @@ export const OCR_ENSEMBLE_VERSION = '1.0.0' as const
 /** When an external reading is confident (005G's "confident", fixed before any confident-wrong figure existed). */
 export const OCR_ENSEMBLE_BOUNDS = { posterior: 0.9, meanP: 0.9 } as const
 
-export type EnsembleDecision = 'NO_VALUE' | 'NOT_COMPARABLE' | 'NOT_CORROBORATING' | 'AGREES' | 'CONTESTS' | 'CONTESTS_COUNT' | 'LEADS'
+export type EnsembleDecision = 'NO_VALUE' | 'NOT_COMPARABLE' | 'NOT_CORROBORATING' | 'AGREES' | 'CONTESTS' | 'CONTESTS_COUNT' | 'LEADS' | 'CONSULTED'
 
 export type LabelEnsemble = {
   decision: EnsembleDecision
@@ -72,6 +72,8 @@ export type LabelEnsemble = {
   ocrClass: OcrClass
   /** The other witness's value when the two disagree with the same digit count: a candidate at full strength. */
   rival?: { text: string; valueCm: number; witness: 'EXTERNAL' | 'LATTICE' }
+  /** v3.54.2 pilot (`consulted.ts`): a consultant's literal reading of the label, and what the ink was read as before it. */
+  consulted?: { proposalId: string; literal: string; valueCm: number; engine: string; model: string; requestId?: string; prior: { asRead: string; ocrClass: OcrClass; decision: EnsembleDecision } }
   why: string
 }
 
