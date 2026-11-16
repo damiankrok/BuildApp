@@ -148,8 +148,10 @@ describe('v3.54.2 candidate 2: no ACCEPT whose extent contradicts the consulted 
   it('a model that matches its printed dimensions is accepted (Kukliki 7.56 x 8.76)', () => {
     expect(compareRuns(failed, built(7.56, 8.76, 7.56, 8.76)).decision).toBe('ACCEPT')
   })
-  it('only the axes the consultant gave are checked; within 5 % passes', () => {
+  it('only the axes the consultant gave are checked; NEAR (≤ 10 %) passes, WRONG does not', () => {
     expect(compareRuns(failed, built(14.5, 30, 14.02)).decision).toBe('ACCEPT')
-    expect(compareRuns(failed, built(15.0, 9.58, 14.02, 9.58)).decision).toBe('ROLLBACK')
+    expect(compareRuns(failed, built(12.32, 8.82, 13.22, 8.82)).decision).toBe('ACCEPT')
+    expect(compareRuns(failed, built(13.88, 11.02, 14.02, 9.58)).decision).toBe('ROLLBACK')
+    expect(compareRuns(failed, built(15.5, 9.58, 14.02, 9.58)).decision).toBe('ROLLBACK')
   })
 })

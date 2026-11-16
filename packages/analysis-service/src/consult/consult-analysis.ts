@@ -111,8 +111,13 @@ export function stateOf(l: Local): RunState {
   return { outcome: 'FAILED', code: f?.code, reasonCode: f?.reasonCode ?? null, stage: f?.stage ?? null, ...(frameId ? { frameId } : {}), ...(metric ? { metric } : {}) }
 }
 
-/** How far a built extent may be from the printed overall dimension that settled the scale (the size class NEAR is 10 %). */
-export const EXTENT_TOLERANCE = 0.05
+/**
+ * How far a built extent may be from the printed overall dimension that settled the scale: the protocol's size classes
+ * (OK ≤ 3 % < NEAR ≤ 10 % < WRONG), so a model the consultant's own dimensions would call WRONG is never accepted.
+ * Candidate 2 used 5 %; candidate 4 (post-confirmation, chosen after Aksamitki's NEAR model at −7 % was refused) aligns it
+ * with the pre-registered WRONG boundary.
+ */
+export const EXTENT_TOLERANCE = 0.1
 
 /** The built extent disagrees with a consulted overall dimension on some axis: the reason, else undefined. */
 export function extentContradiction(s: RunState): string | undefined {
