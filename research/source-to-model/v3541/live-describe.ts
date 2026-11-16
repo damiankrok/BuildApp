@@ -5,7 +5,7 @@
  * passed: B measures what the reading alone builds. The hybrid H replays these same answers.
  *
  *   npx vite-node research/source-to-model/v3541/live-describe.ts -- --list <file> --out <dir> --books <dir> \
- *     --phase pilot|development|acceptance [--max-usd <cumulative USD, never above the phase ceiling>]
+ *     --phase pilot|development|acceptance [--max-usd <cumulative USD, never above the phase ceiling>] [--label <ledger label>]
  *   list lines: "<house> <source-package.json> <byte cache dir>"
  *
  * THE KEY comes only from BUILDPLAN_ANTHROPIC_API_KEY (see campaign.ts); it is passed to the SDK explicitly with the
@@ -40,7 +40,7 @@ async function main(): Promise<number> {
     return 3
   }
   const live = anthropicStructuredVision({ apiKey: key, baseURL: CAMPAIGN_API_HOST, model: CAMPAIGN_MODELS.description, triageModel: CAMPAIGN_MODELS.triage })
-  const outcomes = await describeHouses({ houses: parseHouseList(readFileSync(list, 'utf8')), outRoot, booksDir, ledgerPath: CAMPAIGN_LEDGER, phase, maxUsd, live, secret: key })
+  const outcomes = await describeHouses({ houses: parseHouseList(readFileSync(list, 'utf8')), outRoot, booksDir, ledgerPath: CAMPAIGN_LEDGER, phase: arg('label') ? `${phase}:${arg('label')}` : phase, maxUsd, live, secret: key })
   return outcomes.some((o) => o.outcome === 'BUDGET_STOP') ? 4 : 0
 }
 
