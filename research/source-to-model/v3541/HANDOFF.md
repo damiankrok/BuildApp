@@ -38,5 +38,10 @@ everything outside Git (/home/user/rd) is gone. This folder holds what is needed
 - No billed call made; campaign ledger not yet created; books not opened.
 - FINAL 12 sealed and NOT opened: no analyzer, reader or strategy has run on it. Keep it closed until H is frozen.
 - Order (protocol §3): pilot B → B on S30 → C on C12 → H development on S30 → freeze H → FINAL 12 (A, B, C if kept, H).
+- Restore check on 2026-11-16 (all 42): 1402 pictures byte-identical, 9 republished, 0 gone. Changed: a shop badge GIF
+  on the 3 architecturaldesigns pages (not a drawing); extradom thumbnails of one design on extradom-pl / extradom-pl-2
+  (235x157, 328x202, 656x404 sizes); and ONE drawing — architecturaldesigns-com-2 "850063PKE-F2-Bonus-Second-Floor.gif"
+  (995x800 GIF, 106833 → 106841 bytes, re-encoded by the CDN). Those 3 houses do not run on the sealed bytes unless the
+  changed pictures are restored with `--allow-changed`, and must then be reported as such.
 - Findings so far: monsterhouseplans.com gives the product's acquisition no picture on most pages (15 of 18 drawn);
   z500.pl refuses automated access (403).
