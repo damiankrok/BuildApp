@@ -444,8 +444,50 @@
    "costUsd": 0.001311,
    "latencyMs": 7324,
    "booksCumulativeUsd": 0.641467
+  },
+  {
+   "at": "2026-11-16T07:12:24.733Z",
+   "phase": "development",
+   "house": "extradom-pl-1",
+   "purpose": "HOUSE_DESCRIPTION",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch6C4kYLAvPyUynVUA2rY",
+   "status": "ANSWERED",
+   "inputTokens": 17882,
+   "outputTokens": 3517,
+   "costUsd": 0.070934,
+   "latencyMs": 18499,
+   "booksCumulativeUsd": 0.712401
+  },
+  {
+   "at": "2026-11-16T07:12:49.284Z",
+   "phase": "development",
+   "house": "houseplans-com-1",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6C6ZW7g8K3An39UNZvc",
+   "status": "ANSWERED",
+   "inputTokens": 4977,
+   "outputTokens": 2563,
+   "costUsd": 0.001779,
+   "latencyMs": 9708,
+   "booksCumulativeUsd": 0.71418
+  },
+  {
+   "at": "2026-11-16T07:12:59.111Z",
+   "phase": "development",
+   "house": "houseplans-com-1",
+   "purpose": "HOUSE_TRIAGE",
+   "model": "claude-haiku-5-5",
+   "requestId": "req_011Ch6C7HH5NTRkBjfY5RiNj",
+   "status": "ANSWERED",
+   "inputTokens": 1051,
+   "outputTokens": 89,
+   "costUsd": 0.00015,
+   "latencyMs": 1429,
+   "booksCumulativeUsd": 0.71433
   }
  ],
- "totalUsd": 0.641467,
- "requests": 31
+ "totalUsd": 0.71433,
+ "requests": 34
 }
