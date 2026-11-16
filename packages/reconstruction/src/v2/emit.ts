@@ -146,6 +146,9 @@ export function wallOffset(mass: Pick<MassV2, 'x0' | 'z0' | 'x1' | 'z1'>, facade
 /** The ids of the two planes of a pitched attached roof, low side first. */
 export const pitchedPlaneIds = (massId: string): [string, string] => [`roof-${massId}-plane-low`, `roof-${massId}-plane-high`]
 /** 005X-N1: the id of one plane of a body's plane roof. */
+/** The thickness `createDormer` gives a dormer's front wall when none is stated (the command's default). */
+export const DORMER_FRONT_WALL_M = 0.2
+
 export const planeRoofPlaneId = (massId: string, key: PlaneRoofKey): string => `roof-${massId}-plane-${key.toLowerCase().replace('_', '-')}`
 
 export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: string) => void): EmitResult {
@@ -588,6 +591,17 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const half = r.thicknessM / 2
       const inward = r.side === 'FRONT' ? 1 : r.side === 'REAR' ? -1 : r.side === 'WEST' ? 1 : -1
       hosts.push(alongX ? { id: r.id, axis: 'X', at: round6(r.start.z + inward * half), thicknessM: r.thicknessM, from: Math.min(r.start.x, r.end.x), to: Math.max(r.start.x, r.end.x) } : { id: r.id, axis: 'Z', at: round6(r.start.x + inward * half), thicknessM: r.thicknessM, from: Math.min(r.start.z, r.end.z), to: Math.max(r.start.z, r.end.z) })
+    }
+    // v3.54.3: a dormer's front wall stands on its host body's top storey; a partition of that storey stops at its inner
+    // face as it stops at any exterior wall's (the model keeps two walls out of one place)
+    for (const d of b.dormers ?? []) {
+      const body = b.masses.find((x) => x.id === d.massId)
+      const plane = (b.planeRoofs ?? []).find((r) => r.massId === d.massId)?.layout.planes.find((pl) => pl.key === d.planeKey)
+      if (!body || !plane || Math.max(...body.storeys) !== storey.storeyIndex) continue
+      const alongX = Math.abs(d.front.end.x - d.front.start.x) >= Math.abs(d.front.end.z - d.front.start.z)
+      const t = DORMER_FRONT_WALL_M
+      // stated on its outer face; its material lies up the slope from it
+      hosts.push(alongX ? { id: `${d.id}-front`, axis: 'X', at: round6(d.front.start.z - plane.downslope.z * (t / 2)), thicknessM: t, from: Math.min(d.front.start.x, d.front.end.x), to: Math.max(d.front.start.x, d.front.end.x) } : { id: `${d.id}-front`, axis: 'Z', at: round6(d.front.start.x - plane.downslope.x * (t / 2)), thicknessM: t, from: Math.min(d.front.start.z, d.front.end.z), to: Math.max(d.front.start.z, d.front.end.z) })
     }
     const doorById = new Map(storey.doors.map((d) => [d.id, d]))
     for (const run of runs) onDebug?.(`storey ${storey.storeyIndex} raw ${run.featureId} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM}`)

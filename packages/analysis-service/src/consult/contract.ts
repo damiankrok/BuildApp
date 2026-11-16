@@ -7,15 +7,49 @@
  * evaluation references, never runs code and never writes a model: the loop (`loop.ts`) validates each proposal, hands
  * the accepted ones to the analyzer's own consumer and keeps or rolls back the analyzer's result.
  */
-export const CONSULTANT_CONTRACT_VERSION = '0.1.0' as const
-export const CONSULTANT_PROMPT_VERSION = '0.2.0' as const
+// 0.2.0 (v3.54.3): geometry corrections after the build (ROOF_FEATURE with a `feature`, bound by the analyzer), the review
+// of applied corrections (`appliedReview`), and a problem id on every proposal's record.
+export const CONSULTANT_CONTRACT_VERSION = '0.2.0' as const
+export const CONSULTANT_PROMPT_VERSION = '0.3.0' as const
 
 export const REVIEW_STATUSES = ['VERIFIED_IN_SCOPE', 'ISSUE_FOUND', 'NEED_EVIDENCE', 'UNKNOWN'] as const
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number]
 
-/** The correction families with a consumer in the analyzer. Anything else is answered CAPABILITY_MISSING. */
+/** The correction families with a consumer in the analyzer's metric layer. Anything else there is answered CAPABILITY_MISSING. */
 export const CORRECTION_OPERATIONS = ['READ_LABEL', 'READ_DIMENSION'] as const
 export type CorrectionOperation = (typeof CORRECTION_OPERATIONS)[number]
+/** v3.54.3: the geometry families with a consumer after the build (`geometry.ts`). */
+export const GEOMETRY_OPERATIONS = ['ROOF_FEATURE'] as const
+export type GeometryOperation = (typeof GEOMETRY_OPERATIONS)[number]
+/** What the post-build check may name; those outside GEOMETRY_OPERATIONS are recorded CAPABILITY_MISSING, by name. */
+export const CHECK_OPERATIONS = ['ROOF_FEATURE', 'ASSIGN_VIEW', 'ROOF_FORM', 'OUTLINE_REGION', 'OPENING', 'MISSING_ELEMENT'] as const
+
+export const FEATURE_KINDS = ['GABLE_DORMER', 'SHED_DORMER', 'FLAT_DORMER', 'CROSS_GABLE', 'CANOPY', 'OTHER'] as const
+export type FeatureKind = (typeof FEATURE_KINDS)[number]
+export const MODEL_SIDES = ['FRONT', 'RIGHT', 'REAR', 'LEFT'] as const
+export type ModelSideName = (typeof MODEL_SIDES)[number]
+
+/**
+ * v3.54.3: where a roof feature is, in the terms one elevation drawing gives — pixels of that picture, nothing else.
+ * The analyzer turns them into shares of the side and of the roof's rise and binds them to its own building.
+ */
+export type ProposedFeature = {
+  kind: FeatureKind
+  /** The model side it is on, as the model's views name it. */
+  modelSide: ModelSideName
+  /** The number of the source picture (an elevation drawing) it is read from. */
+  picture: number
+  /** In that picture: the outer edges of the building's walls on this side, the main roof's eaves line and its ridge line. */
+  facade: { leftX: number; rightX: number; eavesY: number; ridgeY: number }
+  /** In that picture: the feature's two sides (x0 < x1), the top of its own roof (y0) and its own eaves (y1), y down. */
+  box: Region
+  front: 'FLUSH_WITH_FACADE' | 'SET_BACK_ON_SLOPE' | 'UNKNOWN'
+  glazed: boolean
+  /** True when that picture shows the side left-to-right reversed against the model's view of it. */
+  mirrored: boolean
+}
+
+export type AppliedReview = { id: string; verdict: 'MATCHES' | 'ACCEPTABLE_APPROXIMATION' | 'WRONG_PLACE' | 'WRONG_SIZE' | 'WRONG_KIND' | 'SHOULD_NOT_EXIST' | 'NOT_VISIBLE'; note: string }
 
 /** What the reading direction of a printed label is, as the consultant sees it on the sheet. */
 export const READING_DIRECTIONS = ['LEFT_TO_RIGHT', 'BOTTOM_TO_TOP', 'TOP_TO_BOTTOM', 'UPSIDE_DOWN'] as const
@@ -37,6 +71,8 @@ export type ProposedCorrection = {
   proposed: { literal: string; unit: 'cm' | 'm' | 'mm' | 'ft-in' | 'unknown'; direction?: ReadingDirection }
   /** READ_DIMENSION: the two ends of the dimension line (where its extension lines or ticks cross it), in overview pixels. */
   span?: Region
+  /** ROOF_FEATURE (v3.54.3): where the feature is, in one elevation picture's pixels. */
+  feature?: ProposedFeature
   evidence: Array<{ sourceId: string; region?: Region }>
   justification: string
   alternatives: Array<{ literal: string; why: string }>
@@ -51,6 +87,8 @@ export type ConsultantReview = {
   proposedCorrections: ProposedCorrection[]
   checked: string[]
   notChecked: string[]
+  /** v3.54.3: the consultant's verdict on each correction the analyzer applied since its last look. */
+  appliedReview?: AppliedReview[]
 }
 
 /** The answer tool's input schema: the whole review in one call. Kept small (no unions beyond enums). */
@@ -90,6 +128,21 @@ export const REVIEW_SCHEMA = {
             additionalProperties: false,
           },
           span: REGION_SCHEMA,
+          feature: {
+            type: 'object',
+            properties: {
+              kind: { type: 'string', enum: [...FEATURE_KINDS] },
+              modelSide: { type: 'string', enum: [...MODEL_SIDES] },
+              picture: { type: 'integer' },
+              facade: { type: 'object', properties: { leftX: { type: 'number' }, rightX: { type: 'number' }, eavesY: { type: 'number' }, ridgeY: { type: 'number' } }, required: ['leftX', 'rightX', 'eavesY', 'ridgeY'], additionalProperties: false },
+              box: REGION_SCHEMA,
+              front: { type: 'string', enum: ['FLUSH_WITH_FACADE', 'SET_BACK_ON_SLOPE', 'UNKNOWN'] },
+              glazed: { type: 'boolean' },
+              mirrored: { type: 'boolean' },
+            },
+            required: ['kind', 'modelSide', 'picture', 'facade', 'box', 'front', 'glazed', 'mirrored'],
+            additionalProperties: false,
+          },
           evidence: { type: 'array', items: { type: 'object', properties: { sourceId: { type: 'string' }, region: REGION_SCHEMA }, required: ['sourceId'], additionalProperties: false } },
           justification: { type: 'string' },
           alternatives: { type: 'array', items: { type: 'object', properties: { literal: { type: 'string' }, why: { type: 'string' } }, required: ['literal', 'why'], additionalProperties: false } },
@@ -102,6 +155,10 @@ export const REVIEW_SCHEMA = {
     },
     checked: { type: 'array', items: { type: 'string' } },
     notChecked: { type: 'array', items: { type: 'string' } },
+    appliedReview: {
+      type: 'array',
+      items: { type: 'object', properties: { id: { type: 'string' }, verdict: { type: 'string', enum: ['MATCHES', 'ACCEPTABLE_APPROXIMATION', 'WRONG_PLACE', 'WRONG_SIZE', 'WRONG_KIND', 'SHOULD_NOT_EXIST', 'NOT_VISIBLE'] }, note: { type: 'string' } }, required: ['id', 'verdict', 'note'], additionalProperties: false },
+    },
   },
   required: ['status', 'observations', 'requestedEvidence', 'proposedCorrections', 'checked', 'notChecked'],
   additionalProperties: false,

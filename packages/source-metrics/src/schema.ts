@@ -427,6 +427,13 @@ export const DimensionChainSchema = z
       .object({ groupId: z.string().min(1), roles: z.array(z.enum(['OVERALL', 'SUBDIVISION', 'PARTIAL', 'INDEPENDENT'])).min(1), alignedEnds: z.tuple([z.boolean(), z.boolean()]) })
       .strict()
       .optional(),
+    /**
+     * v3.54.3 (pilot only): this chain is one whole printed dimension a consultant read (`consulted-spans.ts`): its two
+     * ticks are the ends the analyzer snapped to the plan's own strokes, its value the analyzer's parse of the literal.
+     * What it is to the building (an exterior overall, a part, an interior span) is decided downstream from geometry, as
+     * for any chain — never from the consultant's name for it.
+     */
+    consulted: z.object({ proposalId: z.string().min(1), literal: z.string().min(1), unit: z.enum(['cm', 'm', 'mm', 'ft-in']) }).strict().optional(),
   })
   .strict()
 export type DimensionChain = z.infer<typeof DimensionChainSchema>
@@ -1156,6 +1163,11 @@ export const MetricEvidenceSetSchema = z
             valueCm: z.number().positive().optional(),
             lengthPx: z.number().positive().optional(),
             cmPerPx: z.number().positive().optional(),
+            /** v3.54.3: where the analyzer measured it on the plan (its two snapped ends and its line), for like-with-like comparison. */
+            axis: z.enum(['X', 'Y']).optional(),
+            fromPx: z.number().optional(),
+            toPx: z.number().optional(),
+            atPx: z.number().optional(),
           })
           .strict(),
       )

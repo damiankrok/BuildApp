@@ -496,6 +496,7 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
     // 005I: neighbouring parallel lines, and each chain's place among them (from marks and label heights only).
     const labelHeightPx = labelHeightOf(measured, read.raw ?? read.tokens)
     const axisGroups = dimensionAxisGroups(frame.id, measured, ids, labelHeightPx)
+    const mySpansById = new Map((options.consultedSpans ?? []).filter((sp) => sp.frameId === frame.id).map((sp) => [sp.proposalId, sp]))
     let finalAssignment: LabelAssignmentDecision[] | undefined
     let finalConventions: SideConventions | undefined
     if (isPlan && read.raw) {
@@ -563,7 +564,25 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
         }
       }
       for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
-      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices, ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}) })
+      // v3.54.3 (one metric revision): a consultant's whole dimensions on this plan are measured on the plan's own strokes
+      // BEFORE the frame's scale is solved. Two on different lines that agree are handed to the solver as an external
+      // scale; where the frame's own readings settle none, the solver takes it and reads every chain again at it — so the
+      // chains, their corrected and derived values, the registration and the solution are one revision. It never
+      // overrules a scale the analyzer's own readings settle.
+      const mySpans = (options.consultedSpans ?? []).filter((s) => s.frameId === frame.id)
+      const snapped: SnappedSpan[] = []
+      const snapRefusals: Array<SpanOutcome & { frameId: string }> = []
+      if (mySpans.length > 0) {
+        const gray = toGray(raster)
+        for (const sp of mySpans) {
+          const r = snapSpan(gray, sp)
+          if ('refused' in r) snapRefusals.push({ proposalId: sp.proposalId, frameId: frame.id, status: 'REFUSED', why: r.refused })
+          else snapped.push(r.snapped)
+        }
+      }
+      const admitted = mySpans.length > 0 ? admitSpans(snapped, plausibility ? (cm) => plausibility(cm).plausible : undefined) : undefined
+      const external = admitted?.scale ? { ...(admitted.scale.cmPerPixelX !== undefined ? { cmPerPixelX: admitted.scale.cmPerPixelX } : {}), ...(admitted.scale.cmPerPixelY !== undefined ? { cmPerPixelY: admitted.scale.cmPerPixelY } : {}), why: `consulted dimensions (${CONSULTED_SPANS_NAME} ${CONSULTED_SPANS_VERSION}): ${admitted.why}, measured on the plan's own strokes` } : undefined
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: measured, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices, ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}), ...(external ? { external } : {}) })
       solvedChains = metric.solved
       finalAssignment = metric.assignment
       finalConventions = metric.assignmentConventions
@@ -571,33 +590,21 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
       reread = new Set(ids.map((id, i) => (metric.solution.rereadChainIds.includes(id) || !scaleStands ? i : -1)).filter((i) => i >= 0))
       metricSolutions.push(metric.solution)
-      // v3.54.2 pilot: a consultant's whole dimensions on this plan, each measured on the plan's own strokes; a scale
-      // only where two on different lines agree, and never over a scale the analyzer's own readings settle
-      const mySpans = (options.consultedSpans ?? []).filter((s) => s.frameId === frame.id)
-      if (mySpans.length > 0) {
-        const gray = toGray(raster)
-        const snapped: SnappedSpan[] = []
-        for (const sp of mySpans) {
-          const r = snapSpan(gray, sp)
-          if ('refused' in r) spanOutcomes.push({ proposalId: sp.proposalId, frameId: frame.id, status: 'REFUSED', why: r.refused })
-          else snapped.push(r.snapped)
-        }
-        const admitted = admitSpans(snapped, plausibility ? (cm) => plausibility(cm).plausible : undefined)
-        const settled = metric.solution.confidence === 'STRONG' || metric.solution.confidence === 'SUPPORTED'
-        const local = metric.solution.cmPerPixelX ?? metric.solution.cmPerPixelY
+      if (mySpans.length > 0 && admitted) {
+        spanOutcomes.push(...snapRefusals)
+        // the frame's own verdict, as it stood before any consulted dimension was weighed
+        const localConfidence = metric.external?.localConfidence ?? metric.solution.confidence
+        const settled = localConfidence === 'STRONG' || localConfidence === 'SUPPORTED'
+        const local = metric.external ? metric.external.localCmPerPixel : (metric.solution.cmPerPixelX ?? metric.solution.cmPerPixelY)
         for (const sn of snapped) {
           const member = admitted.scale?.members.includes(sn)
           const agreesLocal = settled && local !== undefined && Math.abs(Math.log(sn.cmPerPx / local)) < 0.03
-          spanOutcomes.push({ proposalId: sn.proposalId, frameId: frame.id, status: !member ? 'REFUSED' : settled ? (agreesLocal ? 'AGREES_ONLY' : 'REFUSED') : 'ADMITTED', why: !member ? admitted.why : settled ? (agreesLocal ? `confirms the scale the analyzer's own readings settle (${local} cm/px); nothing changes` : `CONTRADICTS_SETTLED: the analyzer's own readings settle ${local} cm/px (${metric.solution.confidence}); a consulted dimension does not overrule them`) : admitted.why, valueCm: sn.valueCm, lengthPx: sn.lengthPx, cmPerPx: sn.cmPerPx })
+          spanOutcomes.push({ proposalId: sn.proposalId, frameId: frame.id, status: !member ? 'REFUSED' : settled ? (agreesLocal ? 'AGREES_ONLY' : 'REFUSED') : 'ADMITTED', why: !member ? admitted.why : settled ? (agreesLocal ? `confirms the scale the analyzer's own readings settle (${local} cm/px); nothing changes` : `CONTRADICTS_SETTLED: the analyzer's own readings settle ${local} cm/px (${localConfidence}); a consulted dimension does not overrule them`) : admitted.why, valueCm: sn.valueCm, lengthPx: sn.lengthPx, cmPerPx: sn.cmPerPx, axis: sn.axis, fromPx: sn.fromPx, toPx: sn.toPx, atPx: sn.atPx })
         }
-        if (admitted.scale && !settled) {
-          const x = admitted.scale.cmPerPixelX ?? (admitted.scale.cmPerPixelY as number)
-          const y = admitted.scale.cmPerPixelY ?? x
-          const both = admitted.scale.cmPerPixelX !== undefined && admitted.scale.cmPerPixelY !== undefined
-          const i = metricSolutions.length - 1
-          const before = metricSolutions[i]
-          metricSolutions[i] = { ...before, relation: before.relation === 'NO_SCALE' ? 'ADDED' : 'REPLACED', confidence: 'SUPPORTED', cmPerPixelX: x, cmPerPixelY: y, anisotropy: Math.round((Math.max(x, y) / Math.min(x, y)) * 1e6) / 1e6, isotropy: both ? 'MEASURED' : 'ASSUMED', why: `consulted dimensions (${CONSULTED_SPANS_NAME} ${CONSULTED_SPANS_VERSION}): ${admitted.why}, measured on the plan's own strokes; before: ${before.why}` }
-          consultedScales.set(frame.id, { cmPerPixelX: x, cmPerPixelY: y, members: admitted.scale.members, why: admitted.why, added: before.relation === 'NO_SCALE' })
+        if (admitted.scale && metric.external?.applied) {
+          const x = metric.solution.cmPerPixelX as number
+          const y = metric.solution.cmPerPixelY as number
+          consultedScales.set(frame.id, { cmPerPixelX: x, cmPerPixelY: y, members: admitted.scale.members, why: admitted.why, added: metric.external.localRelation === 'NO_SCALE' })
         }
       }
       dimensionObservations.push(...metric.observations)
@@ -618,6 +625,40 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
       const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable, axisGroups.perChain[index])
       if (record) chains.push(record)
     })
+    // v3.54.3 (BIND_DIMENSION): where the consulted dimensions set this frame's scale, each of them is also a statement
+    // of the frame — a chain of two ticks at the ends the analyzer snapped, read once — unless a chain of the frame
+    // already states the same span with the same value. Its role (exterior overall, part, interior) is the reconstruction's
+    // to decide from the walls, as for any chain.
+    {
+      const c = consultedScales.get(frame.id)
+      for (const m of c?.members ?? []) {
+        const axis = m.axis === 'X' ? ('HORIZONTAL' as const) : ('VERTICAL' as const)
+        const same = chains.some((ch) => ch.frameId === frame.id && ch.axis === axis && Math.abs(ch.baselinePx - m.atPx) <= 4 && ch.segments.some((g) => g.origin === 'READ' && Math.abs(g.fromPx - m.fromPx) <= 2 && Math.abs(g.toPx - m.toPx) <= 2 && g.valueCm !== undefined && Math.abs(g.valueCm - m.valueCm) < 1))
+        if (same) continue
+        const span = mySpansById.get(m.proposalId)
+        const scale = m.axis === 'X' ? c!.cmPerPixelX : c!.cmPerPixelY
+        chains.push({
+          id: stableId('chain', 'consulted', { frameId: frame.id, axis, from: m.fromPx, to: m.toPx, at: m.atPx }),
+          frameId: frame.id,
+          assetId: frame.assetId,
+          axis,
+          baselinePx: m.atPx,
+          ticksPx: [m.fromPx, m.toPx],
+          marks: [
+            { atPx: m.fromPx, class: 'TICK', reasons: [] },
+            { atPx: m.toPx, class: 'TICK', reasons: [] },
+          ],
+          segments: [{ index: 0, fromPx: m.fromPx, toPx: m.toPx, pixelLength: m.lengthPx, valueCm: m.valueCm, origin: 'READ', confidence: 0.9, residualCm: round6(m.valueCm - m.lengthPx * scale), labelled: true }],
+          derivedTotalCm: m.valueCm,
+          scale: { cmPerPixel: m.cmPerPx, residualRatio: 0, readSegments: 1 },
+          closes: true,
+          observationIds: [],
+          ocrTokenIds: [],
+          note: `v3.54.3: one whole printed dimension a consultant read ("${span?.literal ?? ''}"), its ends snapped to the plan's own strokes`,
+          ...(span ? { consulted: { proposalId: m.proposalId, literal: span.literal, unit: span.unit } } : {}),
+        })
+      }
+    }
     if (isPlan) {
       const assignmentRecord = (list: readonly LabelAssignmentDecision[]): LabelAssignmentRecord[] =>
         list

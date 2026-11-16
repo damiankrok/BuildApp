@@ -14,7 +14,7 @@ import type { Gray } from '@buildapp/source-cv'
 import { dimensionValueOf } from './numeric-lattice.js'
 
 export const CONSULTED_SPANS_NAME = 'metrics.consulted-spans' as const
-export const CONSULTED_SPANS_VERSION = '0.1.0' as const
+export const CONSULTED_SPANS_VERSION = '0.2.0' as const
 /** Two scales within this log ratio are one scale (the metric solver's DISTINCT_RATIO). */
 export const DISTINCT_RATIO_SPANS = 0.03
 /** How far (px) from the consultant's end a stroke is looked for, and how long a stroke must be. */
@@ -33,7 +33,8 @@ export type ConsultedSpan = {
   consultant: { engine: string; model: string; requestId?: string }
 }
 export type SnappedSpan = { proposalId: string; axis: 'X' | 'Y'; valueCm: number; fromPx: number; toPx: number; atPx: number; lengthPx: number; cmPerPx: number }
-export type SpanOutcome = { proposalId: string; status: 'ADMITTED' | 'AGREES_ONLY' | 'REFUSED'; why: string; valueCm?: number; lengthPx?: number; cmPerPx?: number }
+/** `axis`, `fromPx`, `toPx`, `atPx` (v3.54.3): where the analyzer measured the dimension on the plan — the two snapped ends and its line — so a consumer compares like with like. */
+export type SpanOutcome = { proposalId: string; status: 'ADMITTED' | 'AGREES_ONLY' | 'REFUSED'; why: string; valueCm?: number; lengthPx?: number; cmPerPx?: number; axis?: 'X' | 'Y'; fromPx?: number; toPx?: number; atPx?: number }
 
 const FT_IN = /^(\d{1,3})\s*['′]\s*-?\s*(?:(\d{1,2}(?:\.\d+)?|\d{1,2}\s+\d\/\d)\s*(?:["″]|''))?$/
 

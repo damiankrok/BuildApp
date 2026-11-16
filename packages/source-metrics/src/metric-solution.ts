@@ -123,6 +123,14 @@ export type FrameMetricInput = {
    * false — the default — the hypotheses are formed exactly as before.
    */
   crossAxisWitness?: boolean
+  /**
+   * v3.54.3 (one metric revision): a scale measured outside this solver on the plan's own strokes — two consulted whole
+   * dimensions on different lines that agree (`consulted-spans.ts`). It never overrules a scale this frame's own readings
+   * settle (STRONG / SUPPORTED): there the output says it was not applied. Where it is applied, it IS the frame's scale
+   * before any chain is read at the end: every chain is read again from its raw labels at it (§7), so no corrected or
+   * derived value of the result was made at the scale it replaced.
+   */
+  external?: { cmPerPixelX?: number; cmPerPixelY?: number; why: string }
 }
 
 export type FrameMetricOutput = {
@@ -141,6 +149,8 @@ export type FrameMetricOutput = {
   assignment: LabelAssignmentDecision[]
   /** 005I: the side convention that assignment read from the sheet. */
   assignmentConventions: SideConventions
+  /** v3.54.3: what became of `input.external`, and the frame's own verdict it was weighed against. */
+  external?: { applied: boolean; localRelation: FrameMetricSolution['relation']; localConfidence: MetricConfidence; localCmPerPixel?: number; localWhy: string }
 }
 
 // ---------------------------------------------------------------------------
@@ -1338,6 +1348,17 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     confidence = 'INCONCLUSIVE'
   }
 
+  // v3.54.3: an externally measured scale stands where the frame's own readings settle none. It is decided here, before
+  // the chains are read at the end, so that they are read at it and not at the scale it replaces.
+  const localRelation = relation
+  const localConfidence = confidence
+  const ext = input.external && (input.external.cmPerPixelX ?? input.external.cmPerPixelY) !== undefined ? input.external : undefined
+  const externalApplied = ext !== undefined && RANK[confidence] < RANK.SUPPORTED
+  if (externalApplied) {
+    relation = L !== undefined ? 'REPLACED' : 'ADDED'
+    confidence = 'SUPPORTED'
+  }
+
   // --- 7. the scale each axis is read at, and the chains read at it -----------
   const replaced = relation === 'REPLACED' || relation === 'ADDED'
   // A chain is read again the right way up at the vote's scale only when independent readings confirmed that
@@ -1346,7 +1367,11 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   let pooled = L
   let scaleX = legacy.scaleX
   let scaleY = legacy.scaleY
-  if (replaced && selected) {
+  if (externalApplied && ext) {
+    scaleX = round6((ext.cmPerPixelX ?? ext.cmPerPixelY) as number)
+    scaleY = round6((ext.cmPerPixelY ?? ext.cmPerPixelX) as number)
+    pooled = round6((scaleX + scaleY) / 2)
+  } else if (replaced && selected) {
     pooled = selected.cmPerPixel
     // Each axis refit on its own independent witnesses, never further than the pooled tolerance.
     const axisScale = (axis: 'X' | 'Y'): number => {
@@ -1504,11 +1529,15 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     })
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
   const dedupedObservations = observations.filter((o, i) => i === 0 || o.id !== observations[i - 1].id)
-  const supporting = selected && relation !== 'LEGACY_UNCONFIRMED' && relation !== 'NO_SCALE' ? selected.witnessIds : [...legacyRegions.values()].map((w) => w.record.id)
+  // v3.54.3: under an external scale the supporting readings are the frame's own independent ones that fit it, not the
+  // witnesses of the hypothesis it set aside
+  const supporting = externalApplied
+    ? bounded.filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive && Math.abs(w.cm / ((finalScale(w.record.axis) ?? pooled) as number) - w.px) <= tol).map((w) => w.record.id)
+    : selected && relation !== 'LEGACY_UNCONFIRMED' && relation !== 'NO_SCALE' ? selected.witnessIds : [...legacyRegions.values()].map((w) => w.record.id)
   const final = relation === 'LEGACY_UNCONFIRMED' || relation === 'NO_SCALE' ? L : pooled
   const conflicting = final === undefined ? [] : bounded.filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive && Math.abs(w.cm / ((finalScale(w.record.axis) ?? final) as number) - w.px) > tol).map((w) => w.record.id)
   // Isotropy is MEASURED only on the same test the ranking uses: substantial readings on both axes and a major one.
-  const measuredBoth = relation === 'LEGACY_UNCONFIRMED' ? legacyStats.axesMeasured : (selected?.axesMeasured ?? false)
+  const measuredBoth = externalApplied ? ext?.cmPerPixelX !== undefined && ext?.cmPerPixelY !== undefined : relation === 'LEGACY_UNCONFIRMED' ? legacyStats.axesMeasured : (selected?.axesMeasured ?? false)
   const x = finalScale('X')
   const y = finalScale('Y')
   const relations = dimensionHierarchy(input.frameId, chains, chainIds, solved, observationsAsRead, labelHeight)
@@ -1566,7 +1595,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     ...(y !== undefined ? { cmPerPixelY: round6(y) } : {}),
     ...(x !== undefined && y !== undefined ? { anisotropy: round6(Math.max(x, y) / Math.min(x, y)) } : {}),
     isotropy: final === undefined ? 'NONE' : measuredBoth ? 'MEASURED' : 'ASSUMED',
-    ...(selected ? { selectedHypothesisId: selected.id } : {}),
+    ...(selected && !externalApplied ? { selectedHypothesisId: selected.id } : {}),
     hypotheses,
     legacy: {
       ...(L !== undefined ? { cmPerPixel: round6(L) } : {}),
@@ -1575,14 +1604,14 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       correctedAnchors: legacyAnchors.filter((g) => g.origin === 'CHAIN_CORRECTED').length,
       readAnchors: legacyAnchors.filter((g) => g.origin === 'READ').length,
     },
-    independentWitnesses: relation === 'LEGACY_UNCONFIRMED' ? legacyStats.independentGroups : (selected?.independentGroups ?? 0),
+    independentWitnesses: externalApplied ? new Set(supporting).size : relation === 'LEGACY_UNCONFIRMED' ? legacyStats.independentGroups : (selected?.independentGroups ?? 0),
     supportingObservationIds: [...supporting].sort(),
     conflictingObservationIds: [...new Set(conflicting)].sort(),
     orientationDecisions: decisions,
     rereadChainIds: reread.sort(),
     counts: { textRegions: regions.length, observations: dedupedObservations.length, hypotheses: hypotheses.length },
     topology: topologyOf(),
-    why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : '') + (selfContested && relation === 'LEGACY_UNCONFIRMED' ? `; the readings that would replace it (${deciding.map((w) => `${w.record.rawText}/${w.px} px`).join(', ')}) are inks whose own other reading the vote was solved from — two readings of the same ink, and no other counted reading decides between them` : ''),
+    why: (externalApplied && ext ? `${ext.why}; before: ` : '') + whyOf(localRelation, localConfidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : '') + (selfContested && relation === 'LEGACY_UNCONFIRMED' ? `; the readings that would replace it (${deciding.map((w) => `${w.record.rawText}/${w.px} px`).join(', ')}) are inks whose own other reading the vote was solved from — two readings of the same ink, and no other counted reading decides between them` : ''),
   }
   const chainOrientation = chains.map((_, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' }))
 
@@ -1598,6 +1627,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     chainOrientation,
     assignment: finalAssignment.decisions,
     assignmentConventions: finalAssignment.conventions,
+    ...(input.external ? { external: { applied: externalApplied, localRelation, localConfidence, ...(localRelation === 'LEGACY_UNCONFIRMED' || localRelation === 'NO_SCALE' ? (L !== undefined ? { localCmPerPixel: round6(L) } : {}) : selected ? { localCmPerPixel: round6(selected.cmPerPixel) } : L !== undefined ? { localCmPerPixel: round6(L) } : {}), localWhy: whyOf(localRelation, localConfidence, selected, L, legacyStats.independentGroups, contest) } } : {}),
   }
 }
 

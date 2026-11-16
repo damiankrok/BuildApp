@@ -149,9 +149,11 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const entries: AnalysisTrace['entries'] = []
     try {
       const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(process.env.BUILDAPP_FEATURE_TRACE ? { featureTrace: (r: Record<string, unknown>) => features.push(r) } : {}), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(process.env.BUILDAPP_SOLVER_DEBUG ? { debug: (s: string) => { if (s.includes(process.env.BUILDAPP_SOLVER_DEBUG as string)) process.stderr.write(`debug: ${s}\n`) } } : {}) })
+      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(process.env.BUILDAPP_FEATURE_TRACE ? { featureTrace: (r: Record<string, unknown>) => features.push(r) } : {}), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(value(argv, 'roof-features') ? { roofFeatures: JSON.parse(readFileSync(value(argv, 'roof-features') as string, 'utf8')) } : {}), ...(process.env.BUILDAPP_SOLVER_DEBUG ? { debug: (s: string) => { if (s.includes(process.env.BUILDAPP_SOLVER_DEBUG as string)) process.stderr.write(`debug: ${s}\n`) } } : {}) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
+      if (r.roofFeatures) write('roof-features.json', r.roofFeatures)
+      if (r.partialPreview) write('partial-preview.json', r.partialPreview)
       write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id), measurement: measurementOfReconstruction(r, publishedAreas, r.modelCompleteness.verdict, r.modelCompleteness.why) })
       writeFileSync(join(out, 'model.json'), serializeModel(r.model))
       write('program.json', r.candidate.program)
@@ -251,6 +253,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       ...(argv.includes('--cross-axis') ? { crossAxisWitness: true } : {}),
       ...(value(argv, 'consulted-spans') ? { consultedSpans: JSON.parse(readFileSync(value(argv, 'consulted-spans') as string, 'utf8')) as ConsultedSpan[] } : {}),
       ...(value(argv, 'consulted') ? { consulted: JSON.parse(readFileSync(value(argv, 'consulted') as string, 'utf8')) as ConsultedReading[] } : {}),
+      ...(value(argv, 'roof-features') ? { roofFeatures: JSON.parse(readFileSync(value(argv, 'roof-features') as string, 'utf8')) } : {}),
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these
       progress: process.env.PROGRESS ? (e) => process.stderr.write(`  ${(e.progress * 100).toFixed(0).padStart(3)}% ${e.stage}${e.detail ? ` — ${e.detail}` : ''}\n`) : undefined,

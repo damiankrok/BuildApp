@@ -37,7 +37,7 @@ import type { VisionReasoner } from '@buildapp/source-vision'
 import { extractMetricEvidenceAsync } from '@buildapp/source-metrics'
 import type { ConsultedReading, ConsultedSpan, LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
-import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result } from '@buildapp/reconstruction'
+import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result, RoofFeatureCorrection } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import type { ClosureReport } from '@buildapp/geometry'
@@ -109,6 +109,19 @@ export type AnalysisOptions = {
   crossAxisWitness?: boolean
   /** v3.54.2 pilot: a consultant's whole printed dimensions (`consulted-spans.ts`). Absent: off, as before. */
   consultedSpans?: readonly ConsultedSpan[]
+  /**
+   * v3.54.3: secondary roof features a validated correction names (`@buildapp/reconstruction` roof-feature.ts), built
+   * into the building before it is emitted, each applied or refused with a typed reason (`AnalysisRun.reconstruction
+   * .roofFeatures`). Absent — the default — the run is what it was. Only the consultation loop passes it.
+   */
+  roofFeatures?: readonly RoofFeatureCorrection[]
+  /**
+   * v3.54.3: the metric evidence of an earlier run of THIS package and graph with THESE consulted readings, to be used
+   * instead of reading the printed dimensions again — for a candidate that differs from that run only after the metric
+   * layer (a geometry correction). It must name this package (`sourcePackageHash`), or the run refuses to start: a
+   * candidate never borrows another source's metric revision.
+   */
+  reuseMetrics?: MetricEvidenceSet
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -483,8 +496,9 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       },
     }
     let metrics: MetricEvidenceSet
+    if (options.reuseMetrics && options.reuseMetrics.sourcePackageHash !== pkg.contentHash) throw new Error('reuseMetrics: the metric evidence handed in is of another source package')
     try {
-      metrics = await extractMetricEvidenceAsync({
+      metrics = options.reuseMetrics ?? await extractMetricEvidenceAsync({
         checkpoint: metricCheckpoint,
         sourcePackageId: pkg.id,
         sourcePackageHash: pkg.contentHash,
@@ -561,6 +575,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       },
       trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
       ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}),
+      ...(options.roofFeatures && options.roofFeatures.length > 0 ? { roofFeatures: options.roofFeatures } : {}),
     })
     throwIfAborted(signal)
     const model = reconstruction.model

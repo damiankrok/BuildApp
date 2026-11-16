@@ -97,6 +97,8 @@ import type { BodyArea, BodyCompleteness, ModelCompleteness } from './body-compl
 import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import { rectAt } from './building.js'
+import { applyRoofFeatures } from './roof-feature.js'
+import type { RoofFeatureCorrection, RoofFeatureOutcome } from './roof-feature.js'
 import type { BandWallV2, CanopyV2, PlaneRoofV2, BuildingV2, EndCondition, MassToneV2, MassV2, PocketV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
@@ -313,7 +315,12 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // and the frame is the read chain on its axis and an exterior chain's ticks on the other, each side snapped outward to
 // the outer face of a long wall band its tick falls in (`statedFrameOverWitness`).
 // 2.43.0 (v3.53.13): the plan resolver keeps a STRONG metric scale against a far weaker rival hypothesis (resolver 1.6.0).
-export const SOLVER_V2_VERSION = '2.43.0' as const
+// 2.44.0 (v3.54.3): two changes that reach a result only on the consultant's path, named here so a result says which
+// solver made it: (a) under a CONSULTANT_VALIDATED registration the world-frame ladder's first chain statement must agree
+// with that independent scale (`layout.ts` `axisLadder`, since v3.54.2 candidate 3, then unversioned); (b) roof features a
+// validated correction names are built into the building (`roof-feature.ts`). Without consulted evidence and without
+// corrections the geometry is the 2.43.0 geometry; the model hash is compared apart from this version (the candidate's).
+export const SOLVER_V2_VERSION = '2.44.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -347,6 +354,12 @@ export type ReconstructionV2Options = {
   featureTrace?: (record: Record<string, unknown>) => void
   /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
   modelId?: string
+  /**
+   * v3.54.3: secondary roof features a validated correction names (`roof-feature.ts`), added to the building this run
+   * reads before it is emitted. Each is built by the model's own dormer rule or refused with a typed reason
+   * (`ReconstructionV2Result.roofFeatures`). Absent or empty: the run is exactly the run without it.
+   */
+  roofFeatures?: readonly RoofFeatureCorrection[]
   /**
    * Told when the solver enters each of its phases, for a caller reporting
    * progress. The solver is synchronous; this is a notification, and nothing
@@ -383,6 +396,8 @@ export type ReconstructionV2Phase = 'REGISTRATION' | 'TOPOLOGY' | 'METRICS' | 'M
 export type ReconstructionV2Result = {
   layout: StructuralLayoutHypothesisSet
   building: BuildingV2
+  /** v3.54.3: what became of each roof-feature correction handed in (`ReconstructionV2Options.roofFeatures`). */
+  roofFeatures?: RoofFeatureOutcome[]
   candidate: ReconstructionCandidate
   model: CanonicalBuildingModel
   hypotheses: PrimitiveHypothesisSet
@@ -3309,6 +3324,23 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   step({ stage: 'verification', what: 'the model projected into the registered views', method: 'DIRECT', detail: `${residuals.length} residuals, ${residuals.filter((r) => !r.withinTolerance).length} outside tolerance after ${repair.iterations.length} repair round${repair.iterations.length === 1 ? '' : 's'} (${repair.iterations.reduce((a, i) => a + i.applied.length, 0)} applied, ${repair.iterations.reduce((a, i) => a + i.refused.length, 0)} refused)`, inputs: residualsBefore.length, outputs: residuals.length })
   for (const it of repair.iterations) for (const op of it.applied) ctx.traces.push({ objectId: op.featureId, kind: 'repair', hypothesisId: `hyp-${op.featureId}`, evidenceIds: [], observationIds: [], rejected: [], why: op.why })
 
+  // v3.54.3: roof features a validated correction names, built into the building by the model's own dormer rule
+  let roofFeatureOutcomes: RoofFeatureOutcome[] | undefined
+  if (options.roofFeatures && options.roofFeatures.length > 0) {
+    const featured = applyRoofFeatures(building, options.roofFeatures)
+    roofFeatureOutcomes = featured.outcomes
+    if (featured.building !== building) {
+      const restated = building.mainRoof !== undefined && featured.building.mainRoof === undefined
+      Object.assign(building, featured.building)
+      if (restated) delete building.mainRoof
+    }
+    for (const o of featured.outcomes) {
+      step({ stage: 'roof-details', what: `the roof feature ${o.id} a correction names`, method: o.status === 'APPLIED' ? 'DIRECT' : 'REFUSED', detail: o.why, inputs: 1, outputs: o.status === 'APPLIED' ? 1 : 0 })
+      if (o.status === 'REFUSED') gap({ what: `the roof feature ${o.id}`, reason: `${o.code}: ${o.why}`, status: 'REFUSED', observationIds: [], evidenceIds: [] })
+    }
+    trace({ phase: 'MODEL', substage: 'ROOF_FEATURES', status: featured.outcomes.every((o) => o.status === 'APPLIED') ? 'PASSED' : 'DEGRADED', counts: { asked: featured.outcomes.length, applied: featured.outcomes.filter((o) => o.status === 'APPLIED').length } })
+  }
+
   // N7-COUNCIL-FIX-02 (D-2/C-4/B-3): every rectangle the emitter is about to build a ring on, measured against the walls
   // it will be built with, at the place the emitter reads it (`rectAt`): the main body, storey rectangles and pieces
   // too. What cannot hold its walls is named here; the thin-body pass already named the attached bodies it read.
@@ -3604,7 +3636,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, partyWalls: partyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: heightsSummary(levelBases, levelsV2) }
+  return { layout, building, ...(roofFeatureOutcomes ? { roofFeatures: roofFeatureOutcomes } : {}), candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits, ...(wallReconciliation ? { wallReconciliation } : {}), crossViewResiduals: crossView, ...(roofDatum ? { roofDatum } : {}), ...(partialPreview ? { partialPreview } : {}), ...(completeness ? { bodyCompleteness: completeness } : {}), modelCompleteness: completenessOfModel, bodyRecovery: { seamSplits: draft.seamSplits ?? [], gateBays: draft.base?.decomposition.gateBays ?? [] }, facadeAlignment, thinBodies: thinBodyRecords, partyWalls: partyRecords, zoneBodies, wallThickness: { houseM: T, house: houseWall, bodies: bodyWalls }, preEmitRings: preEmitRings.filter((c) => c.verdict !== 'HOLDS_TWO_WALLS'), openingCounts: { plan: openings.length + sharedDoors.length, elevationIndependent: [...facadeRead.values()].reduce((a, r) => a + r.scanned.length, 0), model: model.openings.length, skippedByPartialPreview: (partialPreview?.skipped ?? []).filter((x) => x.type === 'cutOpening').length }, viewAudit: viewAudit({ horizontalOnly: new Map(cornerRegistrations.map((r) => [r.frameId, r])), frames: graph.coordinateFrames.filter((f) => (keep ? keep(f) : true)), first: legacy, firstRefused: legacyRefused, refusals: viewRefusals, registered: elevations, openingsOnly: bandRegistrations, sameSheet: new Set(openingViewOverrides.keys()), heightsRefused: openingHeightRefused, cameras }), heights: heightsSummary(levelBases, levelsV2) }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */
