@@ -117,3 +117,18 @@ are the evidence, spot-checked by the executor on ≥ 6 houses; corrections are 
   domywstylu: puszek (_2_dr-t), madera, miodowy (_2);
   monsterhouseplans: plan23-504, plan63-411, plan5-737;
   houseplans: sp318422, sp324651, sp368685.
+
+## Addendum 2 (2026-11-16T10:20:05Z) — candidate frozen before FINAL 12 is opened
+- Frozen code: 0c11cd03273c016d38502f3332a4089e4dc67048 (branch claude/new-session-3kzcgh). Candidate H1 = analyseLink with readEveryModel (host switch
+  ANALYZER_HOUSE_READER_EVERY_MODEL=on), floor-to-floor storey height, per-axis hold of a measured complete outline
+  (builder 0.8.0), reader 0.3.0 (description through one non-strict answer tool), admission 0.2.1. P1 = the same code
+  with readEveryModel off (the host default).
+- Not adopted: C (crops). On C12 its differences from B fall within B's own run-to-run spread, measured by repeating B
+  on 4 houses (IoU 0.94 vs 0.79 on one house, size band NEAR vs WRONG on another, a model vs a refusal on a third).
+- DEV result (S30, read before this freeze): H1 vs the production path before this stage (P0): 1 improved
+  (Torenie 3 E: size NEAR→OK, IoU +0.13), 0 critical regressions; H1 vs A: 17 improved, 4 critical regressions (all on
+  LOCAL models without a verified scale, which P0 already describes).
+- FINAL 12 now: references were sealed before (refs-final.sha256); B live once per house (development ceiling,
+  cumulative 20 USD); A = LOCAL alone; P1 and H1 replay B's recorded answers through analyseLink. Thresholds of §6
+  unchanged. The baseline for "improvement" is A: before this stage the live reader refused every description
+  (compiled grammar too large), so the product's scene was LOCAL's.
