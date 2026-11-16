@@ -43,7 +43,9 @@ const overlap = (a: Region, b: Region): number => {
 export function labelProblemOf(metrics: MetricEvidenceSet, frameId: string, assetId: string): LabelProblem | undefined {
   const solution = (metrics.metricSolutions ?? []).find((s) => s.frameId === frameId)
   // a label already given a consulted reading is not asked about again (v3.54.2 stage B: round 2 re-asked 327 and 104)
-  const lattices = (metrics.numericLattices ?? []).filter((l) => l.frameId === frameId && l.ensemble?.decision !== 'CONSULTED')
+  // (an ink is one printed number however many ways up it was read: every lattice overlapping a consulted one is out too)
+  const consultedBoxes = (metrics.numericLattices ?? []).filter((l) => l.frameId === frameId && l.ensemble?.decision === 'CONSULTED').map((l) => l.box)
+  const lattices = (metrics.numericLattices ?? []).filter((l) => l.frameId === frameId && l.ensemble?.decision !== 'CONSULTED' && !consultedBoxes.some((b) => overlap(b, l.box) >= 0.5))
   const settled = solution && (solution.confidence === 'STRONG' || solution.confidence === 'SUPPORTED')
   // an unsettled plan with no label to ask about is still a problem: its printed dimensions may be read whole (READ_DIMENSION)
   if (lattices.length === 0) return settled ? undefined : { problemId: `scale:${frameId}`, kind: 'SCALE_UNSETTLED', frameId, assetId, labels: [], analyzerWhy: solution?.why ?? 'no metric solution was written for this frame' }

@@ -224,3 +224,22 @@ Brief items without a consumer in the pilot are recorded as not testable:
 
 ---
 Addenda (after sealing): none yet.
+
+## Addendum 1: candidate frozen before stage D (2026-11-16, after stage C)
+
+The changes made during development on DEV (stages B and C) are logged in INTERVENTIONS.md and CAPABILITY_GAPS.md. The frozen candidate is the commit that carries this addendum:
+
+| Component | Frozen version |
+|---|---|
+| Contract | 0.1.0 |
+| Prompt | 0.2.0 (READ_LABEL + READ_DIMENSION) |
+| Model | `claude-sonnet-5-5` |
+| Consumers | `metrics.consulted-reading` 0.1.0; `metrics.consulted-spans` 0.1.0, with snap ink < 200, the line-end fallback (line ink < 235), search ±12 px and the two-line agreement within 3 %; the cross-axis rule (candidate runs only) |
+| Transaction | `compareRuns` gains one rule: the same model whose scale becomes settled is ACCEPT, verified rather than changed |
+| Loop | problem selection drops inks already consulted; proposal ids scoped per round |
+| Limits | 2 model-changing rounds; 4 evidence requests per round; 1 transport retry; 6 turns per step |
+| Budget | ceiling 24.11036 USD cumulative (books at 5.608742 when frozen) |
+
+The DEV results of this candidate come from the recorded stage-C answers, consumed by the frozen code. That is round 1 only (`consult-run.ts --replay C2 --max-rounds 1`): round 1's question is identical under both codes, so no answer is applied to a question it was not given.
+
+Stage D runs once, live, with this candidate, on CONFIRM_KNOWN (Aksamitki, Puszek, plan63-411, sp318422). Nothing is changed after its result is seen.

@@ -18,3 +18,10 @@
   (the only FINAL houses with a LOCAL model and a reference polygon). Same four, v3.54.2 fixed frame (front-left corner
   alignment, no rotation/translation search): 0.615 -> 0.708 (medians 0.539 -> 0.702). v3.54.1's "0.68 (n=4) -> 0.86
   (n=11)" mixed denominators; the comparable figure is the N=4 one.
+3. 2026-11-16 ~15:40 — stage C run C2 stopped by the operator after Supertunie (its record kept as the C2 result of that
+   house) and before Torenie sent any request (Torenie's partial directory removed; no request was in flight). Two loop
+   defects seen on Supertunie were fixed before the remaining five houses: (a) round 2 re-asked inks already consulted,
+   through their other-way-up lattices — the problem selection now drops every lattice overlapping a consulted one;
+   (b) the consultant numbers its proposals per conversation (Q1…), so round 2's twelve proposals were all refused as
+   DUPLICATE_PROPOSAL_ID — the loop now scopes ids per round (`r<round>:<id>`); a repeated id within one answer is still
+   refused (unit test). Supertunie's C2 round 2 therefore consumed nothing (NO_CHANGE) — recorded as is, not re-run.

@@ -18,7 +18,9 @@ export const CONSULTED_SPANS_VERSION = '0.1.0' as const
 /** Two scales within this log ratio are one scale (the metric solver's DISTINCT_RATIO). */
 export const DISTINCT_RATIO_SPANS = 0.03
 /** How far (px) from the consultant's end a stroke is looked for, and how long a stroke must be. */
-export const SNAP = { searchPx: 12, halfHeightPx: 12, minStrokePx: 9, ink: 140, minSpanPx: 60 } as const
+// v3.54.2 stage C: ink < 200 — dimension ticks and extension lines are printed light grey on ARCHON sheets (first value 140 missed them)
+// lineInk: a thin anti-aliased line at a low reading size is grey down to ~235; its continuity (not its ends) is read so
+export const SNAP = { searchPx: 12, halfHeightPx: 12, minStrokePx: 9, ink: 200, lineInk: 235, minSpanPx: 60 } as const
 
 export type Point = { x: number; y: number }
 export type ConsultedSpan = {
@@ -72,7 +74,34 @@ function strokeNear(gray: Gray, axis: 'X' | 'Y', at: number, line: number): { po
   return best
 }
 
-/** One consulted dimension measured on the plan: parsed, axis-aligned, both ends on strokes. */
+/**
+ * Where the dimension line itself ends near `at` (fallback when its ends carry dots or arrows but no stroke across):
+ * the outermost ink pixel on the line (±1 px) within the search window whose inward neighbourhood is line ink. `inward`
+ * is +1 for the first end (the line runs on towards larger coordinates) and −1 for the second.
+ */
+function lineEndNear(gray: Gray, axis: 'X' | 'Y', at: number, line: number, inward: 1 | -1): number | undefined {
+  const inkAt = (p: number): boolean => {
+    for (let o = -1; o <= 1; o += 1) {
+      const q = Math.round(line + o)
+      const [x, y] = axis === 'X' ? [p, q] : [q, p]
+      if (x >= 0 && y >= 0 && x < gray.width && y < gray.height && gray.data[y * gray.width + x] < SNAP.lineInk) return true
+    }
+    return false
+  }
+  let best: number | undefined
+  for (let d = -SNAP.searchPx; d <= SNAP.searchPx; d += 1) {
+    const p = Math.round(at + d)
+    if (!inkAt(p)) continue
+    let inward8 = 0
+    for (let k = 1; k <= 8; k += 1) if (inkAt(p + inward * k)) inward8 += 1
+    let outward3 = 0
+    for (let k = 1; k <= 3; k += 1) if (inkAt(p - inward * k)) outward3 += 1
+    if (inward8 >= 7 && outward3 === 0 && (best === undefined || Math.abs(p - at) < Math.abs(best - at))) best = p
+  }
+  return best
+}
+
+/** One consulted dimension measured on the plan: parsed, axis-aligned, both ends on strokes (or, failing that, on the line's own ends). */
 export function snapSpan(gray: Gray, span: ConsultedSpan): { snapped: SnappedSpan } | { refused: string } {
   const valueCm = lengthCmOf(span.literal, span.unit)
   if (valueCm === undefined || !(valueCm > 0)) return { refused: `UNPARSEABLE: "${span.literal}" in ${span.unit}` }
@@ -83,9 +112,11 @@ export function snapSpan(gray: Gray, span: ConsultedSpan): { snapped: SnappedSpa
   const [a, b] = axis === 'X' ? [Math.min(span.from.x, span.to.x), Math.max(span.from.x, span.to.x)] : [Math.min(span.from.y, span.to.y), Math.max(span.from.y, span.to.y)]
   const line = axis === 'X' ? (span.from.y + span.to.y) / 2 : (span.from.x + span.to.x) / 2
   if (b - a < SNAP.minSpanPx) return { refused: `TOO_SHORT: ${Math.round(b - a)} px; a span shorter than ${SNAP.minSpanPx} px states no scale worth checking` }
-  const s0 = strokeNear(gray, axis, a, line)
-  const s1 = strokeNear(gray, axis, b, line)
-  if (!s0 || !s1) return { refused: `SNAP_FAILED: no ink stroke across the line within ${SNAP.searchPx} px of the ${!s0 ? 'first' : 'second'} end` }
+  const e0 = strokeNear(gray, axis, a, line)?.pos ?? lineEndNear(gray, axis, a, line, 1)
+  const e1 = strokeNear(gray, axis, b, line)?.pos ?? lineEndNear(gray, axis, b, line, -1)
+  if (e0 === undefined || e1 === undefined) return { refused: `SNAP_FAILED: no ink stroke across the line, and no end of a line, within ${SNAP.searchPx} px of the ${e0 === undefined ? 'first' : 'second'} end` }
+  const s0 = { pos: e0 }
+  const s1 = { pos: e1 }
   const lengthPx = s1.pos - s0.pos
   if (lengthPx < SNAP.minSpanPx) return { refused: 'SNAP_FAILED: the snapped ends collapse onto one stroke' }
   return { snapped: { proposalId: span.proposalId, axis, valueCm, fromPx: s0.pos, toPx: s1.pos, atPx: Math.round(line), lengthPx, cmPerPx: Math.round((valueCm / lengthPx) * 1e6) / 1e6 } }

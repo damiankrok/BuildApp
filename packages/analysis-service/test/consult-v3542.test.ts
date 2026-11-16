@@ -78,6 +78,8 @@ describe('v3.54.2 transaction rules (compareRuns)', () => {
   it('a settled scale that a consulted reading moves by more than 3 % is ROLLBACK; the same model is NO_CHANGE', () => {
     expect(compareRuns(model('STRONG', 'a', 2), model('STRONG', 'b', 2.2)).decision).toBe('ROLLBACK')
     expect(compareRuns(model('STRONG', 'a'), model('STRONG', 'a')).decision).toBe('NO_CHANGE')
+    // the same model whose scale becomes settled is kept and verified
+    expect(compareRuns(model('INCONCLUSIVE', 'a'), model('SUPPORTED', 'a')).decision).toBe('ACCEPT')
   })
   it('an unsettled model whose scale becomes settled is ACCEPT; still refused but settled is PARTIAL', () => {
     expect(compareRuns(model('INCONCLUSIVE', 'a', 7), model('SUPPORTED', 'b', 5)).decision).toBe('ACCEPT')

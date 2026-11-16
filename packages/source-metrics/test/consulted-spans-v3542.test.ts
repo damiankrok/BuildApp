@@ -55,3 +55,15 @@ describe('v3.54.2 consulted whole dimensions (consulted-spans.ts)', () => {
     expect(admitSpans([x.snapped, y.snapped], () => false).why).toMatch(/^IMPLAUSIBLE/)
   })
 })
+
+describe('v3.54.2 consulted dimensions: a line that ends in dots (no stroke across)', () => {
+  it('snaps to where the line itself ends; an end in empty paper is still refused', () => {
+    const data = new Uint8ClampedArray(W * H).fill(255)
+    for (let x = 60; x <= 340; x += 1) data[100 * W + x] = 0
+    for (const x of [59, 60, 61, 339, 340, 341]) data[99 * W + x] = data[101 * W + x] = 0
+    const g = { width: W, height: H, data }
+    const r = snapSpan(g, span('e', '700', 'cm', [64, 100], [333, 100]))
+    expect('snapped' in r && r.snapped).toMatchObject({ fromPx: 59, toPx: 341, lengthPx: 282 })
+    expect('refused' in snapSpan(g, span('f', '700', 'cm', [20, 150], [300, 150]))).toBe(true)
+  })
+})

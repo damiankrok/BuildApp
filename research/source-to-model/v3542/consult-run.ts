@@ -133,7 +133,7 @@ async function main(): Promise<void> {
     const content = workerImageEmbedder({ workerUrl: pathToFileURL(roleWorker), paths: workspaceImageRolePaths() })
     const t0 = Date.now()
     try {
-      const r = await consultAnalysis({ kind: 'PACKAGE', pkg }, { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(cachePath), offline: true, recogniser, content }, { model: ledgered, price, ...(spend ? { spend } : {}), variant, record, maxRounds: 2, ...(process.argv.includes('--no-model-check') ? {} : { views: viewsOf }) })
+      const r = await consultAnalysis({ kind: 'PACKAGE', pkg }, { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(cachePath), offline: true, recogniser, content }, { model: ledgered, price, ...(spend ? { spend } : {}), variant, record, maxRounds: Number(arg('max-rounds') ?? '2'), ...(process.argv.includes('--no-model-check') ? {} : { views: viewsOf }) })
       const { run, error, ...rest } = r
       writeFileSync(join(out, 'consult.json'), scrub(`${JSON.stringify({ house, phase, variant, model, replayOf: replayRoot ?? null, ms: Date.now() - t0, ...rest, finalError: error ? error.failure() : null, finalModelHash: run?.reconstruction.candidate.modelHash ?? null, packageHash: createHash('sha256').update(readFileSync(pkgPath)).digest('hex') }, null, 1)}\n`))
       writeFileSync(join(out, 'readings.json'), `${JSON.stringify(r.readings, null, 1)}\n`)

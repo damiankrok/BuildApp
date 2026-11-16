@@ -119,7 +119,8 @@ export function compareRuns(before: RunState, after: RunState): { decision: Roun
     return { decision: 'NO_CHANGE', why: `still refused (${after.reasonCode}), the scale ${after.metric?.confidence ?? 'none'} as before` }
   }
   // both models
-  if (before.modelHash === after.modelHash) return { decision: 'NO_CHANGE', why: 'the same model, byte for byte' }
+  // the same model, now on a scale its readings settle: the model is kept and its scale is verified (a measurement gain)
+  if (before.modelHash === after.modelHash) return ra > rb && verified(after) ? { decision: 'ACCEPT', why: `the same model, byte for byte, now on a scale its readings settle (${before.metric?.confidence ?? 'none'} → ${after.metric?.confidence}): verified, not changed` } : { decision: 'NO_CHANGE', why: 'the same model, byte for byte' }
   if (ra > rb && verified(after)) return { decision: 'ACCEPT', why: `the model is now built on a scale its readings settle (${before.metric?.confidence ?? 'none'} → ${after.metric?.confidence})` }
   if (verified(before) && verified(after)) {
     const x0 = before.metric?.cmPerPixelX ?? 0
@@ -202,7 +203,9 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why })
       break
     }
-    const { readings: valid, spans: validSpans, verdicts } = validateProposals(problem, baseRevision, final.proposedCorrections, seen, { engine: `consultant.${wiring.model.id}`, model: wiring.model.model }, overviewScale({ raster: fr.raster }))
+    // a proposal id is the consultant's within one conversation; each round is a new conversation, so the loop scopes it
+    const scoped = final.proposedCorrections.map((p) => ({ ...p, proposalId: `r${round}:${p.proposalId}` }))
+    const { readings: valid, spans: validSpans, verdicts } = validateProposals(problem, baseRevision, scoped, seen, { engine: `consultant.${wiring.model.id}`, model: wiring.model.model }, overviewScale({ raster: fr.raster }))
     rec.verdicts = verdicts
     record({ at: now().toISOString(), kind: 'VALIDATION', round, verdicts })
     // a later round's reading of a label replaces an earlier one only through its own lattice id; earlier ones stay
@@ -229,7 +232,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const verdict = compareRuns(goodState, after)
     rec.decision = verdict.decision
     rec.why = verdict.why
-    record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why, before: goodState, after, applied: candidate.metrics?.consultedReadings ?? [] })
+    record({ at: now().toISOString(), kind: 'ROUND', round, decision: rec.decision, why: rec.why, before: goodState, after, applied: candidate.metrics?.consultedReadings ?? [], spans: candidate.metrics?.consultedSpans ?? [] })
     if (verdict.decision === 'ACCEPT') {
       good = candidate
       goodState = after
