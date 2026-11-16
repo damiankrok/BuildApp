@@ -36,7 +36,7 @@ export type RoofFeatureCorrection = {
   proposalId: string
   kind: RoofFeatureKind
   side: ModelSide
-  /** Its two sides, left to right as that side is seen, as shares (0..1) of the building's wall extent on that side. */
+  /** Its two sides, left to right as that side is seen, as shares (0..1) of the HOST BODY's wall on that side (the wall under the roof's eaves). */
   fromShare: number
   toShare: number
   /** Its eaves and its ridge as shares of the host roof's rise: 0 at the host's eaves, 1 at its ridge. */
@@ -85,14 +85,17 @@ export const ROOF_FEATURE_BOUNDS = {
 
 const OUTWARD: Record<ModelSide, { x: number; z: number }> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, RIGHT: { x: 1, z: 0 }, LEFT: { x: -1, z: 0 } }
 
-/** The building's ground-storey wall extent along a side, in the direction that side is seen left to right. */
-export function sideExtent(building: Pick<BuildingV2, 'masses'>, side: ModelSide): { from: number; to: number } | undefined {
-  const lowest = Math.min(...building.masses.flatMap((m) => m.storeys))
-  const ms = building.masses.filter((m) => m.storeys.includes(lowest) && !m.pieceOf)
-  if (ms.length === 0) return undefined
+/**
+ * The wall under a roof's eaves on a side — the host body's own wall there, not a bay, a porch or a wing beside it — in
+ * the direction that side is seen left to right. Like with like: a picture's "ends of the wall under the main roof" are
+ * this body's ends.
+ */
+export function sideExtent(building: Pick<BuildingV2, 'masses'>, side: ModelSide, hostMassId?: string): { from: number; to: number } | undefined {
+  const host = building.masses.find((m) => m.id === hostMassId) ?? building.masses.find((m) => m.role === 'MAIN') ?? building.masses[0]
+  if (!host) return undefined
   const alongX = side === 'FRONT' || side === 'REAR'
-  const lo = Math.min(...ms.map((m) => (alongX ? m.x0 : m.z0)))
-  const hi = Math.max(...ms.map((m) => (alongX ? m.x1 : m.z1)))
+  const lo = alongX ? host.x0 : host.z0
+  const hi = alongX ? host.x1 : host.z1
   // FRONT and RIGHT are seen with the coordinate growing to the right; REAR and LEFT with it falling
   return side === 'FRONT' || side === 'RIGHT' ? { from: lo, to: hi } : { from: hi, to: lo }
 }
@@ -170,7 +173,7 @@ export function applyRoofFeatures(input: BuildingV2, corrections: readonly RoofF
       refuse('GABLE_END_SIDE', `the ${c.side.toLowerCase()} side is a gable end of the roof (no slope runs down to it): what stands there is the gable itself, not a feature on a slope`)
       continue
     }
-    const ext = sideExtent(candidate, c.side)
+    const ext = sideExtent(candidate, c.side, roof.massId)
     if (!ext) {
       refuse('NO_PITCHED_HOST', 'the building has no ground storey walls to place the feature against')
       continue

@@ -1,0 +1,1860 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-mf69209b89ec53-8b5d110d7a",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+  "pageHash": "62a12a1fce9dc4a7e80282bad7308e0c5f62b8443fb9871047631672fafd1ca8",
+  "project": {
+    "externalId": "mf69209b89ec53",
+    "name": "Projekt domu Dom w majeranku 2 (G2) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-boc-390d55ba93",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-59c74edc08e9b690970-cabb2c4d10",
+          "url": "https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-59c74edc08e9b690970643d1d57bf8bf__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 424077,
+          "byteHash": "faf2411cbdafe7e51cd64d96cbcd67464b648ab86cfef0a85a878a6c7846502b",
+          "decoded": {
+            "width": 1280,
+            "height": 619
+          },
+          "declaredMismatch": false,
+          "aspect": 2.067851
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-majeranku-2-g2-18f-f59f23fb8f",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-boczna-projekt-dom-w-majeranku-2-g2-18f8237eb8ddbe757802eb4d3bfb52cf__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 76337,
+          "byteHash": "fc2673ba4c4726bf838fd58f9b522b66e719e72dc3773bb2daf29237d9690614",
+          "decoded": {
+            "width": 550,
+            "height": 266
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.067669
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-59c74edc08e9b690970-cabb2c4d10",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x619 over 550x266"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-boc-a7af89c210",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-7a15a02422549a620a6-4aab79056b",
+          "url": "https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7a15a02422549a620a6c986d66e79b05__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 422070,
+          "byteHash": "c0a0ffd650555d7bd037f5a7e186ae4744d6ee0b7632d2e2de6b5f48335d6f1d",
+          "decoded": {
+            "width": 1280,
+            "height": 619
+          },
+          "declaredMismatch": false,
+          "aspect": 2.067851
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-majeranku-2-g2-5ed-569e18f78c",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-boczna-projekt-dom-w-majeranku-2-g2-5ed0d1ef0cdc4a16afd8f265e51a7299__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 75913,
+          "byteHash": "8e6f8d746357fcfa65eda48ded32a6f1fafc5e726d5c5ae731f8ffebe92cc850",
+          "decoded": {
+            "width": 550,
+            "height": 266
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.067669
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-7a15a02422549a620a6-4aab79056b",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x619 over 550x266"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-fro-7add94f677",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-7612ad8fb9f7b89fb8b-f71abd1097",
+          "url": "https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7612ad8fb9f7b89fb8b60b8840db2588__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 360218,
+          "byteHash": "356c467f5b2afed6b4c6870e43e58744a16495256ab413c2d31bc7e06bc6761d",
+          "decoded": {
+            "width": 1280,
+            "height": 619
+          },
+          "declaredMismatch": false,
+          "aspect": 2.067851
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-majeranku-2-g2-f-7fbc39bf88",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-frontowa-projekt-dom-w-majeranku-2-g2-f5806f7e1437c5c78a0ede74348582ed__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 64426,
+          "byteHash": "28d109f1c96ae1b52f42011b469495133847547d5b6dedfa4095f25648c40c24",
+          "decoded": {
+            "width": 550,
+            "height": 266
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.067669
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-7612ad8fb9f7b89fb8b-f71abd1097",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x619 over 550x266"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-ogr-dd7394d641",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w majeranku 2 (g2) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-9ef8e83c54eb77b79a4-77155f59a9",
+          "url": "https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-9ef8e83c54eb77b79a45b90c958029bc__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 343198,
+          "byteHash": "20d628d16c1ce3294df12691e454d720e884c05f2daabb818357f53e525539ed",
+          "decoded": {
+            "width": 1280,
+            "height": 619
+          },
+          "declaredMismatch": false,
+          "aspect": 2.067851
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-majeranku-2-g2-8-3b8ae5219b",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-ogrodowa-projekt-dom-w-majeranku-2-g2-876eccd12fea6b73039df79ad6817914__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 61137,
+          "byteHash": "e5affa1a9eb657d91d72341cd0cab9d9fb330f8f262d4af1e7a29b0b5da72a49",
+          "decoded": {
+            "width": 550,
+            "height": 266
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.067669
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-9ef8e83c54eb77b79a4-77155f59a9",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x619 over 550x266"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-przekroj-bud-d6eda5407c",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w majeranku 2 (g2) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w majeranku 2 (g2) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-majeranku-2-g2-b1-1c02c92bca",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/przekroj-budynku-projekt-dom-w-majeranku-2-g2-b1386af624ffc6a9eada27a8d5ef8a76__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 22092,
+          "byteHash": "95dbe74a2b7c3badb159a3719b4877bd75396a80b97418b0863db5e5ede3ace9",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-majeranku-2-g2-b1-1c02c92bca",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-rzut-parteru-62331391ac",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-majeranku-2-g2-00516e-135aa3e36d",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-parteru-projekt-dom-w-majeranku-2-g2-00516edf288ffa295259876495623cc9__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 34652,
+          "byteHash": "8aafed7df383783074dee517078174f15e9273d7b7d8bba080c5f09d42c251e7",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-majeranku-2-g2-00516e-135aa3e36d",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-rzut-poddasz-65ee344121",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) rzut poddasza",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-majeranku-2-g2-913dd-d9607979e7",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-poddasza-projekt-dom-w-majeranku-2-g2-913ddc2a12ff3ab9946e7c019c00b510__707.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 34520,
+          "byteHash": "d19a71820d17bc74b26739cb8758d79959068cd158d8fa4f96884dac4ec60ff7",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-majeranku-2-g2-913dd-d9607979e7",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-sytuacja-e7e59cfd90",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w majeranku 2 (g2) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e7-83f9aecd55",
+          "url": "https://www.archon.pl/images/products/mf69209b89ec53/sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e764551ced5fb8013fd8a8e6__255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 76898,
+          "byteHash": "693bbb6e9196e6e194f18ead9ff95eef2f7bcc0f3aa6c7dd0cce80c4f6544b42",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e7-83f9aecd55",
+      "selectionReason": "only variant (344x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-majeranku-2-g2-widok-1-749f59e098",
+      "caption": "gotowy projekt Dom w majeranku 2 (G2) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w majeranku 2 (g2) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-majeranku-2-g2-0e01d59ac28-a5e649034e",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-1-projekt-dom-w-majeranku-2-g2-0e01d59ac283465d295a559cfdaac85f__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 11147,
+          "byteHash": "c14730bf1c8f299dca8c5da79d425568187ab97ad9d753318aeb2a4790047d93",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-majeranku-2-g2-0e01d59ac28-a5e649034e",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-majeranku-2-g2-1bd146214e",
+      "caption": "projekt Dom w majeranku 2 (G2)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-majeranku-2-g2-d5622-10578d3836",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-poddasza-projekt-dom-w-majeranku-2-g2-d5622adc35fefb330196fea7fecc6d61__270.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 21920,
+          "byteHash": "bb7cc8921cab009161823cc4f0e2b51f9b43d418f3ffe835219ca46381bc4899",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-majeranku-2-g2-d5622-10578d3836",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-majeranku-2-g2-7eada6fbf9",
+      "caption": "projekt Dom w majeranku 2 (G2)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-majeranku-2-g2-6021ee72a0f-8b6cfe8781",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-2-projekt-dom-w-majeranku-2-g2-6021ee72a0fa841757838a36ed056b90__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 39807,
+          "byteHash": "66b5513bca663382f7c7bb948542c779fe71b003efd320001656641af8e9095e",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-majeranku-2-g2-6021ee72a0f-8b6cfe8781",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-majeranku-2-g2-90bd161c5d",
+      "caption": "projekt Dom w majeranku 2 (G2)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-majeranku-2-g2-e3aa18-22af5bb844",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-parteru-projekt-dom-w-majeranku-2-g2-e3aa1802a10f9ba696ef8e9c26fc59e6__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 22800,
+          "byteHash": "c2fa1192f0ee9e4958b782a602053666c0420b2af24b9c3204748160aab232de",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-majeranku-2-g2-e3aa18-22af5bb844",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-majeranku-2-g2-f105180737",
+      "caption": "projekt Dom w majeranku 2 (G2)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-7ef3e55cb58bbabbb82-cedf8169fb",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7ef3e55cb58bbabbb824ebe6127d5ce8__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf69209b89ec53/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 40125,
+          "byteHash": "2bfe0e5d569e35c9b1e611d736be4e4654d0b6a727cecb738e98a4cf892729b5",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-7ef3e55cb58bbabbb82-cedf8169fb",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-majeranku-2-g2-ff60db462551623093b-9a81b7ee7b",
+      "caption": "Projekt dom w majeranku 2 g2 ff60db462551623093b33ee7fa4500a6  46976",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-ff60db462551623093b-db4c16c318",
+          "url": "https://cdn1.archon.pl/images/products/mf69209b89ec53/i/projekt-dom-w-majeranku-2-g2-ff60db462551623093b33ee7fa4500a6__46976.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/mf69209b89ec53/image/46976?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 456563,
+          "byteHash": "4a7da241c0670d834c60147c755ff88a5adb14a114ee8164a0c4a28b19cdfb11",
+          "decoded": {
+            "width": 1280,
+            "height": 960
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-ff60db462551623093b-db4c16c318",
+      "selectionReason": "only variant (1280x960, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-2c79273bfe",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-d37bd546a2cc2d61433-a0aaaa7973",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-d37bd546a2cc2d6143348ab6c46f8fb1__11817.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/gif",
+          "byteLength": 64316,
+          "byteHash": "961d5a9e15e3113eaf4249f9f059466e5f39a00543aec03d59e852bf7b7eb909",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-d37bd546a2cc2d61433-a0aaaa7973",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-31b92d412c",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-maj-737adc87a6",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-poddasza-z-powierzchniami-projekt-dom-w-majeranku-2-g2-317474f3f9df8a0a8e35defbd1fc0c34__11917.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/gif",
+          "byteLength": 65176,
+          "byteHash": "62f4a0eeed29ae8bea64ef04e399a6a312031f618006cdb4b7880a05bc5686de",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-maj-737adc87a6",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-a9376967ea",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-maje-975b4e252a",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-parteru-z-powierzchniami-projekt-dom-w-majeranku-2-g2-4c20cb3e7c75ba3431159dc7c7015937__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/gif",
+          "byteLength": 64881,
+          "byteHash": "dd937830978b64e40abedd00b3b09e0f70fac31e5f41c00d266a7cab90bc4f69",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-maje-975b4e252a",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-b9dc9017cd",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf69209b89ec53/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w majeranku 2 (g2) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-majeranku-2-g2-fd729bd2b68504436fc-1f8a6cdf2d",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-fd729bd2b68504436fc27a258ea65e84__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/gif",
+          "byteLength": 69271,
+          "byteHash": "49a90082a9f8c00ccb15bda2428d71fd48321661dd290866594715f38e7da442",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-majeranku-2-g2-fd729bd2b68504436fc-1f8a6cdf2d",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-majeranku-2-g2-ba509438af",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w majeranku 2 (g2) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-majeranku-2-g2-6df93a25cd5-f9af5dd430",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-1-projekt-dom-w-majeranku-2-g2-6df93a25cd5ca2bd1accdf0bf2250749__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 216889,
+          "byteHash": "57589433b8fcc7afd52e58585ff65a6d7efc8a16cc06ac6510b05be583837749",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-majeranku-2-g2-6df93a25cd5-f9af5dd430",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-majeranku-2-g2-6e03a73f5f",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-majeranku-2-g2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w majeranku 2 (g2) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-majeranku-2-g2-4fc67647bd0-1df6beb700",
+          "url": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-2-projekt-dom-w-majeranku-2-g2-4fc67647bd0cfa34e59377add3de9a26__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+          "mediaType": "image/jpeg",
+          "byteLength": 217700,
+          "byteHash": "57f780672d252bd7f6be5305475cdfd71d06b3b63998b8bf79c2525ca281ab16",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-majeranku-2-g2-4fc67647bd0-1df6beb700",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 5.93,
+      "unit": "m2",
+      "raw": "5,93 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.52,
+      "unit": "m",
+      "raw": "8,52 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 239.02,
+      "unit": "m2",
+      "raw": "239,02 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 161.95,
+      "unit": "m2",
+      "raw": "161,95 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 36.84,
+      "unit": "m2",
+      "raw": "36,84 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu, strychu",
+      "value": 155.01,
+      "unit": "m2",
+      "raw": "155,01 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 284.5,
+      "unit": "m2",
+      "raw": "284,5 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 312.14,
+      "unit": "m2",
+      "raw": "312,14 m&sup2;"
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "value": 201.34,
+      "unit": "m2",
+      "raw": "201,34 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 1003.89,
+      "unit": "none",
+      "raw": "1003,89 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "To interesujący projekt domu z poddaszem użytkowym o tradycyjnym wykończeniu zewnętrznym i wygodnym układzie funkcjonalnym. Projekt polecany jest na wąskie działki, a także działki z wejściem od południa. Efektownie zakomponowana strefa frontowa zwraca uwagę centralnie umieszczonym wykuszem oraz praktycznym podcieniem wejściowym. Aranżacja elewacji opiera się na połączeniu jasnego tynku ze stolarką w kolorze drewna, a podzielone szprosami okna ozdabiają opaski, podkreślające tradycyjny styl budynku. Przestronna strefa dzienna posiada liczne przeszklenia, zapewniają doskonale doświetlenie wnętrza. Do rodzinnego wypoczynku w salonie zachęca duża narożna sofa, a wielkość jadalni umożliwia zorganizowanie przyjęcia w większym gronie. Przytulny nastrój w części dziennej wprowadza kominek. Przestrzeń kuchni powiększa wykusz, w jej programie użytkowym przewidziano obszerne blaty robocze oraz dodatkowe miejsce do spożywania posiłków, znajdująca się pod schodami spiżarnia uzupełnia powierzchnię do przechowywania. Na parterze mieszkańcy mają do dyspozycji pokój, w którym można urządzić wygodny gabinet do pracy. Dopełnieniem układu funkcjonalnego jest jasna łazienka z prysznicem. W skład zaplecza gospodarczego wchodzi dwustanowiskowy garaż, przez który dostępna jest kotłownia na paliwo stałe. Naturalnie doświetlone schody prowadzą na poddasze, gdzie mieści się komfortowa strefa nocna domu. Zaprojektowano tutaj trzy sypialnie, a wśród nich pokój rodziców z dużą garderobą i wyjściem na balkon. Z holu dostępna jest druga, wspólna dla wszystkich domowników garderoba. Obszerna łazienka z pełnym programem użytkowym zapewnia maksimum wygody, po drugiej stronie holu znajduje się pojemna pralnia z miejscem do suszenia i prasowania ubrań oraz praktycznymi szafami. Nad garażem przewidziano strych, którego przeznaczenie można dostosować do potrzeb domowników. Zaprezentowany projekt należy do kategorii: projekty domów na wąską działkę , projekty domów z wejściem od południa , projekty domów z dwustanowiskowym garażem, projekty domów tradycyjnych ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "115 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "na paliwo stałe + alternatywnie gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano w następujących pomieszczeniach: PARTER: Wiatrołap (1), Kuchnia (4), Łazienka (7); PODDASZE: Pralnia (3), Łazienka (6)"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "podcień"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 42 st. , więźba drewniana, dachówka ceramiczna CREATON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 155.01 m² + 36.84 m² + 8.76 m² + 5.93 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż, strych"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "ATTIC",
+      "index": 1,
+      "label": "Schody",
+      "area": 5.2,
+      "raw": "1. Schody | 5,20 | (5,20)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 2,
+      "label": "Hol",
+      "area": 9.87,
+      "raw": "2. Hol | 9,87 | (9,87)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 3,
+      "label": "Pralnia",
+      "area": 7.83,
+      "raw": "3. Pralnia | 7,83 | (10,95)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 4,
+      "label": "Pokój",
+      "area": 12.79,
+      "raw": "4. Pokój | 12,79 | (21,87)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 5,
+      "label": "Strych ocieplony",
+      "area": 8.76,
+      "raw": "5. Strych ocieplony | 8,76 | (16,59)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 8.52,
+      "raw": "6. Łazienka | 8,52 | (10,75)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 7,
+      "label": "Pokój",
+      "area": 15.53,
+      "raw": "7. Pokój | 15,53 | (17,01)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 8,
+      "label": "Pokój",
+      "area": 14.94,
+      "raw": "8. Pokój | 14,94 | (17,40)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 9,
+      "label": "Garderoba",
+      "area": 5.59,
+      "raw": "9. Garderoba | 5,59 | (7,75)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 10,
+      "label": "Garderoba",
+      "area": 4.16,
+      "raw": "10. Garderoba | 4,16 | (5,78)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 5.95,
+      "raw": "1. Wiatrołap | 5,95 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 6.94,
+      "raw": "2. Hol | 6,94 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Gabinet",
+      "area": 8.39,
+      "raw": "3. Gabinet | 8,39 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 11.94,
+      "raw": "4. Kuchnia | 11,94 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "area": 33.15,
+      "raw": "5. Salon + Jadalnia | 33,15 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Spiżarnia",
+      "area": 0.75,
+      "raw": "6. Spiżarnia | 0,75 | (3,25)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Łazienka",
+      "area": 3.46,
+      "raw": "7. Łazienka | 3,46 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Kotłownia",
+      "area": 5.93,
+      "raw": "8. Kotłownia | 5,93 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Garaż",
+      "area": 36.84,
+      "raw": "9. Garaż | 36,84 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7ef3e55cb58bbabbb824ebe6127d5ce8__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/przekroj-budynku-projekt-dom-w-majeranku-2-g2-b1386af624ffc6a9eada27a8d5ef8a76__11256.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SECTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-parteru-projekt-dom-w-majeranku-2-g2-00516edf288ffa295259876495623cc9__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-parteru-projekt-dom-w-majeranku-2-g2-e3aa1802a10f9ba696ef8e9c26fc59e6__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-poddasza-projekt-dom-w-majeranku-2-g2-913ddc2a12ff3ab9946e7c019c00b510__11707.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/rzut-poddasza-projekt-dom-w-majeranku-2-g2-d5622adc35fefb330196fea7fecc6d61__11270.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e764551ced5fb8013fd8a8e6__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-1-projekt-dom-w-majeranku-2-g2-0e01d59ac283465d295a559cfdaac85f__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-1-projekt-dom-w-majeranku-2-g2-6df93a25cd5ca2bd1accdf0bf2250749__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-2-projekt-dom-w-majeranku-2-g2-4fc67647bd0cfa34e59377add3de9a26__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/widok-2-projekt-dom-w-majeranku-2-g2-6021ee72a0fa841757838a36ed056b90__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.archon.pl/images/products/mf69209b89ec53/sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e764551ced5fb8013fd8a8e6__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-boczna-projekt-dom-w-majeranku-2-g2-18f8237eb8ddbe757802eb4d3bfb52cf__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-59c74edc08e9b690970643d1d57bf8bf__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-boczna-projekt-dom-w-majeranku-2-g2-5ed0d1ef0cdc4a16afd8f265e51a7299__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7a15a02422549a620a6c986d66e79b05__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-frontowa-projekt-dom-w-majeranku-2-g2-f5806f7e1437c5c78a0ede74348582ed__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-7612ad8fb9f7b89fb8b60b8840db2588__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/elewacja-ogrodowa-projekt-dom-w-majeranku-2-g2-876eccd12fea6b73039df79ad6817914__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf69209b89ec53/projekt-dom-w-majeranku-2-g2-9ef8e83c54eb77b79a45b90c958029bc__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf69209b89ec53/sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e764551ced5fb8013fd8a8e6__255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf69209b89ec53/sytuacja-projekt-dom-w-majeranku-2-g2-43c090f9e764551ced5fb8013fd8a8e6__255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "a8d05c19206294f92bdcd8e1047052045d8add4c2c6114801c3a5f6095492ceb"
+}

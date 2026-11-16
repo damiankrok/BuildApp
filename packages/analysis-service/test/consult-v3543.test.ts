@@ -159,3 +159,42 @@ describe('v3.54.3 the metric transaction: outline in place of a share of the hou
     expect(compareRuns(built('MATCHES', 'BEYOND', 'a'), moved).decision).toBe('ROLLBACK')
   })
 })
+
+describe('v3.54.3 CLASSIFY_BOUNDARY: only a sure glazed wall on a named side closes anything', () => {
+  const B = (over: Partial<ProposedCorrection> = {}, boundary: Partial<NonNullable<ProposedCorrection['boundary']>> = {}): ProposedCorrection => ({
+    proposalId: 'b1',
+    baseRevision: 'rev1',
+    operation: 'CLASSIFY_BOUNDARY',
+    targetId: 'TOP',
+    proposed: { literal: 'GLAZED_WALL', unit: 'unknown' },
+    boundary: { side: 'TOP', class: 'GLAZED_WALL', region: { x0: 100, y0: 40, x1: 400, y1: 60 }, ...boundary },
+    evidence: [{ sourceId: 'picture 1' }],
+    justification: 'thin triple lines between posts across the whole gable, no thick wall',
+    alternatives: [],
+    uncertainty: 'LOW',
+    expectedEffect: 'the outline closes on the top side',
+    ...over,
+  })
+  const pic = { width: 600, height: 800 }
+  it('accepts a glazed side; an OPEN side, a solid wall or an unsure one closes nothing (a covered terrace is not a room)', async () => {
+    const { validateBoundary } = await import('../src/consult/loop.js')
+    expect(validateBoundary([B()], 'rev1', pic, new Set())).toMatchObject({ sides: ['TOP'], verdicts: [{ status: 'ACCEPTED' }] })
+    for (const cls of ['OPEN', 'SOLID_WALL', 'NOT_BUILDING', 'UNSURE'] as const) {
+      const r = validateBoundary([B({}, { class: cls })], 'rev1', pic, new Set())
+      expect(r.sides).toEqual([])
+      expect(r.verdicts[0]).toMatchObject({ status: 'REJECTED', code: 'NOT_A_CLOSURE' })
+    }
+  })
+  it('counter-trials: stale revision, a repeated id, a side given twice, a region off the sheet, HIGH uncertainty, another operation', async () => {
+    const { validateBoundary } = await import('../src/consult/loop.js')
+    expect(validateBoundary([B({ baseRevision: 'rev0' })], 'rev1', pic, new Set()).verdicts[0].code).toBe('STALE_REVISION')
+    const seen = new Set<string>()
+    validateBoundary([B()], 'rev1', pic, seen)
+    expect(validateBoundary([B()], 'rev1', pic, seen).verdicts[0].code).toBe('DUPLICATE_PROPOSAL_ID')
+    expect(validateBoundary([B(), B({ proposalId: 'b2' })], 'rev1', pic, new Set()).verdicts.map((v) => v.code)).toEqual([undefined, 'DUPLICATE_TARGET'])
+    expect(validateBoundary([B({}, { region: { x0: 100, y0: 40, x1: 900, y1: 60 } })], 'rev1', pic, new Set()).verdicts[0].code).toBe('OUT_OF_PICTURE')
+    expect(validateBoundary([B({ uncertainty: 'HIGH' })], 'rev1', pic, new Set())).toMatchObject({ sides: [], verdicts: [{ status: 'HELD' }] })
+    expect(validateBoundary([B({ operation: 'OUTLINE_REGION' })], 'rev1', pic, new Set()).verdicts[0].status).toBe('CAPABILITY_MISSING')
+    expect(validateBoundary([B({ boundary: undefined })], 'rev1', pic, new Set()).verdicts[0].code).toBe('NO_BOUNDARY')
+  })
+})

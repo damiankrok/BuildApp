@@ -20,6 +20,14 @@ export const CORRECTION_OPERATIONS = ['READ_LABEL', 'READ_DIMENSION'] as const
 export type CorrectionOperation = (typeof CORRECTION_OPERATIONS)[number]
 /** v3.54.3: the geometry families with a consumer after the build (`geometry.ts`). */
 export const GEOMETRY_OPERATIONS = ['ROOF_FEATURE'] as const
+/** v3.54.3: what the plan-outline consultation may propose (`consultBoundary`): a side of the building closed by glazing. */
+export const BOUNDARY_OPERATIONS = ['CLASSIFY_BOUNDARY'] as const
+export const SHEET_SIDES = ['TOP', 'BOTTOM', 'LEFT', 'RIGHT'] as const
+export type SheetSide = (typeof SHEET_SIDES)[number]
+export const BOUNDARY_CLASSES = ['GLAZED_WALL', 'SOLID_WALL', 'OPEN', 'NOT_BUILDING', 'UNSURE'] as const
+export type BoundaryClass = (typeof BOUNDARY_CLASSES)[number]
+/** What closes the building on one side of the plan sheet, and where on the sheet that boundary is drawn. */
+export type ProposedBoundary = { side: SheetSide; class: BoundaryClass; region: Region }
 export type GeometryOperation = (typeof GEOMETRY_OPERATIONS)[number]
 /** What the post-build check may name; those outside GEOMETRY_OPERATIONS are recorded CAPABILITY_MISSING, by name. */
 export const CHECK_OPERATIONS = ['ROOF_FEATURE', 'ASSIGN_VIEW', 'ROOF_FORM', 'OUTLINE_REGION', 'OPENING', 'MISSING_ELEMENT'] as const
@@ -73,6 +81,8 @@ export type ProposedCorrection = {
   span?: Region
   /** ROOF_FEATURE (v3.54.3): where the feature is, in one elevation picture's pixels. */
   feature?: ProposedFeature
+  /** CLASSIFY_BOUNDARY (v3.54.3): what closes the building on one side of the plan sheet. */
+  boundary?: ProposedBoundary
   evidence: Array<{ sourceId: string; region?: Region }>
   justification: string
   alternatives: Array<{ literal: string; why: string }>
@@ -143,6 +153,7 @@ export const REVIEW_SCHEMA = {
             required: ['kind', 'modelSide', 'picture', 'facade', 'box', 'front', 'glazed', 'mirrored'],
             additionalProperties: false,
           },
+          boundary: { type: 'object', properties: { side: { type: 'string', enum: [...SHEET_SIDES] }, class: { type: 'string', enum: [...BOUNDARY_CLASSES] }, region: REGION_SCHEMA }, required: ['side', 'class', 'region'], additionalProperties: false },
           evidence: { type: 'array', items: { type: 'object', properties: { sourceId: { type: 'string' }, region: REGION_SCHEMA }, required: ['sourceId'], additionalProperties: false } },
           justification: { type: 'string' },
           alternatives: { type: 'array', items: { type: 'object', properties: { literal: { type: 'string' }, why: { type: 'string' } }, required: ['literal', 'why'], additionalProperties: false } },

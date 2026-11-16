@@ -178,6 +178,8 @@ export type StructuralLayoutOptions = {
   checkpoint?: Checkpoint
   /** 005K, experimental: the boundary's drawn-gap rule (`PlanDecompositionOptions.drawnGapRule`). OFF unless asked for. */
   drawnGapRule?: 'OFF' | 'ON'
+  /** v3.54.3: sides of a plan sheet a validated correction classified as closed by glazing (`PlanDecompositionOptions.closeGlazedEnds`), per plan frame. */
+  glazedEnds?: ReadonlyArray<{ frameId: string; side: 'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT' }>
   /** 005Y-N2: diagnostics only — told about each region the base plan is weighed in. Write-only. */
   debug?: (line: string) => void
 }
@@ -211,7 +213,7 @@ export type PlanReadingChoice = {
  * handed the publisher's figures to CHECK the layout against; the layout itself never sees them, whatever a caller
  * spreads into its options: every key it may read is named here.
  */
-export const LAYOUT_OPTION_KEYS = ['slug', 'sourcePackageId', 'sourcePackageHash', 'graph', 'metrics', 'raster', 'frameFilter', 'bands', 'plan', 'sheetCache', 'checkpoint', 'drawnGapRule', 'debug'] as const satisfies ReadonlyArray<keyof StructuralLayoutOptions>
+export const LAYOUT_OPTION_KEYS = ['slug', 'sourcePackageId', 'sourcePackageHash', 'graph', 'metrics', 'raster', 'frameFilter', 'bands', 'plan', 'sheetCache', 'checkpoint', 'drawnGapRule', 'glazedEnds', 'debug'] as const satisfies ReadonlyArray<keyof StructuralLayoutOptions>
 export function layoutOptionsOnly(options: StructuralLayoutOptions): StructuralLayoutOptions {
   const out: Record<string, unknown> = {}
   for (const key of LAYOUT_OPTION_KEYS) if (options[key] !== undefined) out[key] = options[key]
@@ -718,8 +720,9 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // The decomposition is a function of the pixels, the extent and the scale; the
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
-      const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), calloutRings: planCalloutRings(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}) })
+      const glazed = (options.glazedEnds ?? []).filter((g) => g.frameId === frame.id).map((g) => g.side)
+      const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}${glazed.length > 0 ? `|glazed-${[...glazed].sort().join('-')}` : ''}`
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), calloutRings: planCalloutRings(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}), ...(glazed.length > 0 ? { closeGlazedEnds: glazed } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,

@@ -1,0 +1,175 @@
+{
+ "house": "confirm-archon-dom-w-majeranku-2-g2",
+ "set": "CONFIRM8",
+ "publisher": "archon",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-majeranku-2-g2-mf69209b89ec53",
+ "packageContentHash": "a8d05c19206294f92bdcd8e1047052045d8add4c2c6114801c3a5f6095492ceb",
+ "category": [
+  "R",
+  "B"
+ ],
+ "primaryCategory": "R",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlanDimensioned": "asset-rzut-b9dc9017cd",
+  "atticPlanDimensioned": "asset-rzut-2c79273bfe",
+  "elevationFront": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-fro-7add94f677",
+  "elevationRear": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-ogr-dd7394d641",
+  "elevationSidePlanRight": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-boc-390d55ba93",
+  "elevationSidePlanLeft": "asset-gotowy-projekt-dom-w-majeranku-2-g2-elewacja-boc-a7af89c210",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 19.5,
+   "printedAs": "1950",
+   "unit": "cm",
+   "alongSheet": "X",
+   "where": "single overall line above the plan"
+  },
+  "overallDepthM": {
+   "value": 9.58,
+   "printedAs": "958",
+   "unit": "cm",
+   "alongSheet": "Y",
+   "where": "outer line right of the plan; inner chain 704 + 158 + 96"
+  },
+  "whatTheOverallIncludes": "width 1950 = outer walls from the left wall of the living room to the right wall of the attached two-car garage (garage INCLUDED; the quarter-circle terrace on the left excluded). depth 958 = 704 (the main body and garage, rear wall to front wall) + 158 (the kitchen block that projects forward of the front wall) + 96 (the angled bay window on the front of that block): the overall depth INCLUDES the projecting kitchen block and its bay window; the walls-only depth of the main body is 704. Entrance step/porch post and terraces are not in either figure.",
+  "publishedFootprintM2": 161.95,
+  "usableAreaM2": 201.34,
+  "usableAreaNote": "\"Powierzchnia użytkowa (bez schodów)\"; total_area 312.14, garage 36.84, building height 8.52 m"
+ },
+ "estimated": {
+  "storeys": "ground + attic (usable attic also over the garage)",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "the garage wing on the right carries a second, lower gable roof with its ridge in the same direction"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached on the plan RIGHT, same front line as the house, two cars, door on the FRONT"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "WALL_DORMER_GABLE",
+   "side": "FRONT",
+   "alongShare": [
+    0.24,
+    0.44
+   ],
+   "gableRoofShare": [
+    0.21,
+    0.47
+   ],
+   "sideCertainty": "front elevation matched to the plan bottom: terrace door, kitchen bay, entrance door and garage door appear in the same left-to-right order",
+   "note": "gabled dormer with a balcony door, standing over the projecting kitchen bay; its front wall rises in/near the facade plane and interrupts the eaves, the balcony sits on the bay roof. Could also be labelled GABLE_DORMER. Attic plan shows the door 180/230 with splayed reveals at the same place."
+  },
+  {
+   "kind": "WALL_DORMER_GABLE",
+   "side": "REAR",
+   "alongShare": [
+    0.58,
+    0.71
+   ],
+   "gableRoofShare": [
+    0.54,
+    0.74
+   ],
+   "sideCertainty": "rear elevation is the mirror of the plan top: garage wing on the left, service door 100/246 and the staircase window 120/190 where the plan puts them",
+   "note": "narrow stone-clad wall dormer over the staircase; the stone strip runs from the ground to the gable, so the dormer wall continues the facade"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "FRONT",
+   "count": 5,
+   "groups": [
+    [
+     0.1,
+     0.15
+    ],
+    [
+     0.53,
+     0.63
+    ],
+    [
+     0.73,
+     0.83
+    ]
+   ],
+   "alongShare": [
+    0.1,
+    0.83
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "one single left of the dormer, one double right of it on the main roof, one double on the garage roof"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "REAR",
+   "count": 5,
+   "groups": [
+    [
+     0.17,
+     0.27
+    ],
+    [
+     0.48,
+     0.53
+    ],
+    [
+     0.75,
+     0.8
+    ],
+    [
+     0.86,
+     0.91
+    ]
+   ],
+   "alongShare": [
+    0.17,
+    0.91
+   ],
+   "sideCertainty": "as rear elevation",
+   "note": "one double on the garage roof, three singles on the main roof (the one next to the dormer is partly under the watermark)"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.58,
+    0.68
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "small entrance porch: one round post carries a canopy between the house and the garage (post drawn on the plan)"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.0,
+    0.19
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "front-left corner of the living room is recessed under the main roof, corner carried by one post (corner arcade to the terrace); not a separate roof"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 2,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "both elevations",
+   "note": "two stone-clad chimneys near the ridge"
+  }
+ ],
+ "negativeTraps": null,
+ "uncertain": [
+  "whether the front dormer wall is exactly flush with the ground-floor facade or set back by the roof of the bay (pictures are rendered elevations, not line drawings)",
+  "the side elevations show a decorative king-post truss in the plan-LEFT gable apex; it is a gable-end ornament, not a roof element",
+  "exact count of the small rear roof windows under the watermark (3 read)"
+ ]
+}

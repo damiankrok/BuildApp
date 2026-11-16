@@ -22,9 +22,9 @@ import type { AnalysisInput, AnalysisOptions, AnalysisRun } from '../run.js'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION } from './contract.js'
 import type { ConsultantReview } from './contract.js'
 import type { RoofFeatureCorrection, RoofFeatureOutcome } from '@buildapp/reconstruction'
-import { cropOf } from './tools.js'
-import { DEFAULT_CONSULT_LIMITS, checkModel, consultLabels, overviewScale, validateProposals } from './loop.js'
-import type { CheckSource, ConsultEvent, ConsultLimits, ConsultOutcome, ConsultSpend, ConsultantModel, ModelCheckResult, Price, ProposalVerdict } from './loop.js'
+import { overviewOf } from './tools.js'
+import { DEFAULT_CONSULT_LIMITS, checkModel, consultBoundary, consultLabels, overviewScale, validateBoundary, validateProposals } from './loop.js'
+import type { BoundaryVerdict, CheckSource, ConsultEvent, ConsultLimits, ConsultOutcome, ConsultSpend, ConsultantModel, ModelCheckResult, Price, ProposalVerdict } from './loop.js'
 import { bindRoofFeature, compareGeometry, geometryStateOf, reviewOutcome } from './geometry.js'
 import type { CheckPicture, GeometryDecision, GeometryVerdict } from './geometry.js'
 import { renderModelViews } from './model-views.js'
@@ -93,6 +93,22 @@ export type RoundRecord = {
   why: string
 }
 
+/** v3.54.3: the consultation of a plan whose scale is settled and whose walls close no box (CLASSIFY_BOUNDARY). */
+export type BoundaryRound = {
+  revision: string
+  frameId: string
+  status: string | null
+  refused?: string
+  observations: ReviewObservation[]
+  verdicts: BoundaryVerdict[]
+  sides: Array<'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT'>
+  before: RunState
+  after?: RunState
+  decision: RoundRecord['decision']
+  why: string
+  usd: number
+}
+
 /** v3.54.3: one look at a built model, what it proposed, what the analyzer did with it, and the decision. */
 export type GeometryRound = {
   round: number
@@ -122,12 +138,45 @@ export type SourceCheckSummary = {
   reviewStatus: string | null
   looks: number
   findings: ReviewObservation[]
-  corrections: Array<{ proposalId: string; operation: string; targetId: string; featureId?: string; state: 'APPLIED' | 'REFUSED_BY_ANALYZER' | 'HELD' | 'NO_CONSUMER' | 'REJECTED' | 'ROLLED_BACK' | 'NOT_APPLIED'; review?: string; why: string }>
+  corrections: Array<{ proposalId: string; operation: string; targetId: string; featureId?: string; state: 'APPLIED' | 'REFUSED_BY_ANALYZER' | 'HELD' | 'NO_CONSUMER' | 'REJECTED' | 'ROLLED_BACK' | 'NOT_APPLIED'; code?: string; review?: string; why: string }>
   checked: string[]
   notChecked: string[]
   outline?: RunState['outline']
   /** Defects known and not corrected, each by code: what an app must show beside the model. */
   knownDefects: Array<{ code: string; what: string }>
+  /**
+   * The model's quality, one axis at a time (never one grade): what ran, how the scale was settled, the outline against
+   * the printed dimensions, the roof and the openings as the look found them, the interior (which no look certifies),
+   * what may be measured, and how complete the look itself was.
+   */
+  axes: {
+    run: 'COMPLETED'
+    scale: { status: string; confidence: string | null; settledBy: 'CONSULTED_DIMENSIONS' | 'OWN_READINGS' | 'UNSETTLED' }
+    outline: 'MATCHES' | 'SHORT' | 'BEYOND' | 'NOT_COMPARED'
+    roof: 'NO_DIFFERENCE_REPORTED' | 'CORRECTED_APPROXIMATE' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
+    openings: 'NO_DIFFERENCE_REPORTED' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
+    interior: 'NOT_CHECKED'
+    quantities: string
+    sourceCheck: SourceCheckSummary['status']
+  }
+}
+
+/** v3.54.3: the consultation as the consumed result carries it: what was decided, round by round, without the pictures or the answers. */
+export type ConsultationSummary = {
+  schemaVersion: '1.0.0'
+  contract: string
+  prompt: string
+  variant: 'R' | 'C'
+  model: string
+  usd: number
+  /** The global house-description reader was never asked on this path. */
+  globalDescription: 'DISABLED'
+  local: { outcome: string; reasonCode: string | null; modelHash: string | null }
+  metricRounds: Array<{ round: number; decision: string; why: string }>
+  /** The outline consultation (CLASSIFY_BOUNDARY), when the plan closed no box at a settled scale. */
+  boundary: { decision: string; why: string; sides: string[] } | null
+  looks: Array<{ round: number; revision: string; status: string | null; decision: string; why: string }>
+  roofFeatures: string[]
 }
 
 export type ConsultedAnalysis = {
@@ -143,11 +192,14 @@ export type ConsultedAnalysis = {
   readings: ConsultedReading[]
   spans: ConsultedSpan[]
   usd: number
+  /** v3.54.3: the outline consultation, when the plan closed no box at a settled scale. */
+  boundary?: BoundaryRound
   /** v3.54.3: the looks at the built model and what each changed. */
   geometry: GeometryRound[]
   /** The roof features the delivered model holds from corrections. */
   roofFeatures: RoofFeatureCorrection[]
   sourceCheck?: SourceCheckSummary
+  consultation?: ConsultationSummary
   /** Proof for the brief: the global house-description branch was never entered on this path. */
   globalDescription: 'DISABLED'
 }
@@ -291,12 +343,13 @@ async function frameRaster(pkg: SourcePackage, graph: SourceObservationGraph, fr
 async function checkSources(l: Local, options: AnalysisOptions): Promise<CheckSource[]> {
   const out: CheckSource[] = []
   if (!l.pkg || !l.graph) return out
-  const whole = (r: { width: number; height: number }): { x0: number; y0: number; x1: number; y1: number } => ({ x0: 0, y0: 0, x1: r.width, y1: r.height })
   const add = async (frameId: string, what: CheckSource['what'], label: string): Promise<void> => {
     const f = l.graph?.coordinateFrames.find((x) => x.id === frameId)
     const fr = f ? await frameRaster(l.pkg as SourcePackage, l.graph as SourceObservationGraph, frameId, options) : undefined
     if (!f || !fr?.raster) return
-    out.push({ img: cropOf(fr.raster, frameId, whole(fr.raster), { minSide: 1, maxScale: 1 }), raster: fr.raster, what, frameId, projection: f.roles.projection, label })
+    // the whole picture, downscaled by a whole factor only when it is larger than the provider would keep: the pixels
+    // the consultant reports are then the pixels it was sent, and the transform back to the frame is stated
+    out.push({ img: overviewOf(fr.raster, frameId, []), raster: fr.raster, what, frameId, projection: f.roles.projection, label })
   }
   const base = l.plans?.selectedPlanFrameId ?? undefined
   if (base) await add(base, 'PLAN', 'the floor plan the model was built from (its lowest storey); the house FRONT is at the bottom of this sheet')
@@ -322,7 +375,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const limits = wiring.limits ?? DEFAULT_CONSULT_LIMITS
   const maxRounds = wiring.maxRounds ?? 2
   record({ at: now().toISOString(), kind: 'PATH', path: 'CONSULTANT', variant: wiring.variant, globalDescription: 'DISABLED', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, model: wiring.model.model })
-  const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined })
+  const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
   const localState = stateOf(local)
   record({ at: now().toISOString(), kind: 'LOCAL', state: localState })
   let good: Local = local
@@ -392,7 +445,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       break
     }
     // the candidate: the same frozen package and graph, the consulted readings, the solver's cross-axis rule
-    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined })
+    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
     const after = stateOf(candidate)
     rec.after = after
     const verdict = compareRuns(goodState, after)
@@ -418,10 +471,73 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     break
   }
 
+  // --- outline: a plan at a settled scale whose walls close no box; what closes the building there? -----------------
+  let boundary: BoundaryRound | undefined
+  let glazedEnds: Array<{ frameId: string; side: 'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT' }> = []
+  const consultedOn = (): boolean => readings.length + spans.length > 0
+  {
+    const at = basis
+    const st = stateOf(at)
+    const frameId = at.plans?.selectedPlanFrameId ?? undefined
+    const plan = at.plans?.plans.find((p) => p.frameId === frameId) as { envelope?: unknown; extent?: { x0: number; y0: number; x1: number; y1: number } | null } | undefined
+    const settled = (CONF_RANK[st.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2
+    if (!good.run && at.error && at.pkg && at.graph && at.metrics && frameId && plan && plan.envelope === null && plan.extent && settled && (wiring.check ?? 'ON') === 'ON') {
+      const fr = await frameRaster(at.pkg, at.graph, frameId, options)
+      if (fr?.raster) {
+        const revision = at.metrics.contentHash.slice(0, 12)
+        const rec: BoundaryRound = { revision, frameId, status: null, observations: [], verdicts: [], sides: [], before: st, decision: 'NOT_RUN', why: '', usd: 0 }
+        boundary = rec
+        record({ at: now().toISOString(), kind: 'BOUNDARY_PROBLEM', frameId, revision, extent: plan.extent, why: at.error.message.slice(0, 300) })
+        try {
+          const res = await consultBoundary({ frameId, lookedAt: plan.extent, analyzerWhy: at.error.message, raster: fr.raster, baseRevision: revision, model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: 'boundary' }), ...(options.signal ? { signal: options.signal } : {}), now })
+          usd += res.usd
+          rec.usd = res.usd
+          if (!res.review) {
+            rec.decision = 'CONSULTANT_FAILED'
+            rec.refused = res.refused ?? 'no review'
+            rec.why = `no usable review (${rec.refused}) — the refusal stands`
+          } else {
+            rec.status = res.review.status
+            rec.observations = res.review.observations
+            // the consultant's pixels are the overview's; a region is only checked to lie on the sheet
+            const v = validateBoundary(res.review.proposedCorrections.map((p) => ({ ...p, proposalId: `b:${p.proposalId}` })), revision, res.overview, seen)
+            rec.verdicts = v.verdicts
+            rec.sides = v.sides
+            record({ at: now().toISOString(), kind: 'BOUNDARY_VALIDATION', revision, status: res.review.status, verdicts: v.verdicts, observations: rec.observations })
+            if (wiring.variant === 'R') {
+              rec.decision = 'NOT_RUN'
+              rec.why = 'variant R: the classification is recorded and never consumed'
+            } else if (v.sides.length === 0) {
+              rec.decision = 'NO_CHANGE'
+              rec.why = 'no side is classified as closed by glazing: the refusal stands, the classification stays on the record'
+            } else {
+              const ends = v.sides.map((side) => ({ frameId, side }))
+              const candidate = await attempt({ kind: 'PACKAGE', pkg: at.pkg, graph: at.graph }, { ...options, ...(consultedOn() ? { consulted: readings, consultedSpans: spans, crossAxisWitness: true } : {}), reuseMetrics: at.metrics, glazedEnds: ends, roofFeatures: undefined })
+              const after = stateOf(candidate)
+              rec.after = after
+              const verdict = compareRuns(goodState, after)
+              rec.decision = verdict.decision
+              rec.why = verdict.why
+              if (verdict.decision === 'ACCEPT') {
+                good = candidate
+                goodState = after
+                glazedEnds = ends
+              }
+            }
+          }
+        } catch (e) {
+          rec.decision = 'CONSULTANT_FAILED'
+          rec.why = `${(e as Error).name}: ${(e as Error).message.slice(0, 300)} — the refusal stands`
+        }
+        record({ at: now().toISOString(), kind: 'BOUNDARY_ROUND', decision: rec.decision, why: rec.why, sides: rec.sides, before: rec.before, after: rec.after ?? null })
+      }
+    }
+  }
+
   // --- geometry: the model that stands against the source's plans and elevations; each look may change it ------------
   const geometry: GeometryRound[] = []
   const features: RoofFeatureCorrection[] = []
-  const metricOn = good !== local
+  const metricOn = consultedOn()
   const maxGeometry = wiring.maxGeometryRounds ?? 2
   const viewsOf = wiring.views ?? ((run: AnalysisRun): ModelViewPicture[] => renderModelViews(run.result.scene))
   let lastApplied: Array<{ id: string; what: string }> = []
@@ -473,7 +589,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
           let back: Local | undefined
           if (kept.length === previous.features.length) back = previous.good
           else {
-            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: kept })
+            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: kept, ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
             back = again.run ? again : previous.good
           }
           good = back
@@ -522,7 +638,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       rec.corrections = corrections
       // the candidate: the same package, graph and metric revision; the analyzer rebuilds with the features so far and these
       const beforeG = geometryStateOf(run, features.map((f) => f.id))
-      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: [...features, ...corrections] })
+      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: [...features, ...corrections], ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
       const outcomes = candidate.run?.reconstruction.roofFeatures ?? []
       rec.outcomes = outcomes.filter((o) => corrections.some((c) => c.id === o.id))
       const afterG = candidate.run ? geometryStateOf(candidate.run, [...features, ...corrections].map((f) => f.id)) : undefined
@@ -532,7 +648,12 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       rec.afterRevision = candidate.run?.reconstruction.candidate.modelHash.slice(0, 12)
       record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why, revision, afterRevision: rec.afterRevision, corrections, outcomes: rec.outcomes, before: beforeG, after: afterG ?? null })
       lastRefused = [...decision.refused.map((r) => ({ targetId: r.id, why: `${r.code ?? ''} ${r.why}`.trim() })), ...rec.verdicts.filter((x) => x.status === 'REJECTED' || x.status === 'HELD').map((x) => ({ targetId: x.targetId, why: `${x.code ?? x.status}: ${x.why}` }))]
-      if (decision.decision !== 'ACCEPT') break
+      if (decision.decision !== 'ACCEPT') {
+        // a correction the analyzer refused with a reason is new evidence for the consultant: one more look, told why,
+        // while rounds remain; anything else (a rollback, nothing built and nothing said) ends the looks
+        if (decision.decision === 'NO_CHANGE' && decision.refused.length > 0 && g < maxGeometry) continue
+        break
+      }
       previous = { good, state: goodState, features: [...features] }
       good = candidate
       goodState = stateOf(candidate)
@@ -546,9 +667,20 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const finalState = stateOf(good)
   const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision) : undefined
   // the result an app consumes says what was checked, what was corrected and what is known wrong — not only the trace
-  if (good.run && sourceCheck) (good.run.result as { sourceCheck?: SourceCheckSummary }).sourceCheck = sourceCheck
+  if (good.run && sourceCheck) {
+    ;(good.run.result as { sourceCheck?: SourceCheckSummary }).sourceCheck = sourceCheck
+    // an outline that stops inside, or runs past, the printed dimension that frames it limits what may be measured off
+    // the model: the measurement says so in its own terms, where every consumer already reads the result's limits
+    const m = good.run.result.measurement
+    if (m && (sourceCheck.axes.outline === 'SHORT' || sourceCheck.axes.outline === 'BEYOND')) {
+      for (const d of sourceCheck.knownDefects.filter((k) => k.code.startsWith('OUTLINE_'))) if (!m.reasons.some((r) => r.code === d.code)) m.reasons.push({ code: d.code, consequence: `${d.what}; areas and lengths taken off the model are not the whole house's` })
+      if (m.quantities === 'USABLE_IN_SCOPE') m.quantities = 'LIMITED'
+    }
+  }
+  const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id) }
+  if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */
@@ -563,7 +695,7 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
       const review = geometry.flatMap((x) => x.reviewed).find((r) => r.id === v.featureId)
       const state: SourceCheckSummary['corrections'][number]['state'] =
         v.status === 'CAPABILITY_MISSING' ? 'NO_CONSUMER' : v.status === 'HELD' ? 'HELD' : v.status === 'REJECTED' ? 'REJECTED' : kept ? 'APPLIED' : outcome?.status === 'REFUSED' ? 'REFUSED_BY_ANALYZER' : outcome?.status === 'APPLIED' ? 'ROLLED_BACK' : 'NOT_APPLIED'
-      corrections.push({ proposalId: v.proposalId, operation: v.operation, targetId: v.targetId, ...(v.featureId ? { featureId: v.featureId } : {}), state, ...(review && kept ? { review: review.verdict } : {}), why: state === 'REFUSED_BY_ANALYZER' ? `${outcome?.code ?? ''}: ${outcome?.why ?? ''}` : v.why })
+      corrections.push({ proposalId: v.proposalId, operation: v.operation, targetId: v.targetId, ...(v.featureId ? { featureId: v.featureId } : {}), state, ...(v.code ? { code: v.code } : {}), ...(review && kept ? { review: review.verdict } : {}), why: state === 'REFUSED_BY_ANALYZER' ? `${outcome?.code ?? ''}: ${outcome?.why ?? ''}` : v.why })
     }
   }
   const knownDefects: SourceCheckSummary['knownDefects'] = []
@@ -572,9 +704,29 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
   const lastLook = [...looked].reverse()[0]
   if (lastLook && lastLook.status === 'ISSUE_FOUND') for (const c of corrections.filter((c) => c.state !== 'APPLIED' && geometry.some((g) => g === lastLook && g.verdicts.some((v) => v.proposalId === c.proposalId)))) knownDefects.push({ code: `SOURCE_DIFFERENCE_${c.state}`, what: `${c.operation} ${c.targetId}: ${c.why}`.slice(0, 400) })
   for (const f of features) knownDefects.push({ code: 'ROOF_FEATURE_APPROXIMATE', what: `${f.id} is placed from shares of an elevation picture: a visual approximation, not a measurement; no quantity may be taken from it` })
+  const status: SourceCheckSummary['status'] = looked.length === 0 ? 'NOT_CHECKED' : checkedRevision !== null && checkedRevision === delivered ? 'CHECKED' : 'PARTLY_CHECKED'
+  // a difference the consultant reported and no applied correction answers stays open — also when its proposal was
+  // inadmissible (a stale revision, the wrong kind of picture): the finding may be right though the proposal could not
+  // be used. Only a repeat of something already answered leaves nothing open.
+  const ANSWERED = new Set(['ALREADY_PRESENT', 'DUPLICATE_PROPOSAL_ID'])
+  const open = (ops: string[]): boolean => corrections.some((c) => ops.includes(c.operation) && c.state !== 'APPLIED' && !(c.state === 'REJECTED' && ANSWERED.has(c.code ?? '')))
+  const worst = state.outline ? ([state.outline.x.status, state.outline.y.status].includes('BEYOND') ? 'BEYOND' : [state.outline.x.status, state.outline.y.status].includes('SHORT') ? 'SHORT' : [state.outline.x.status, state.outline.y.status].includes('MATCHES') ? 'MATCHES' : 'NOT_COMPARED') : 'NOT_COMPARED'
+  const m = good.run?.result.measurement
+  const consultedScale = (good.metrics?.consultedSpans ?? []).some((o) => o.frameId === state.frameId && o.status === 'ADMITTED')
+  const settled = (CONF_RANK[state.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2
+  const axes: SourceCheckSummary['axes'] = {
+    run: 'COMPLETED',
+    scale: { status: m?.scale.status ?? 'NOT_ASSESSED', confidence: state.metric?.confidence ?? null, settledBy: !settled ? 'UNSETTLED' : consultedScale ? 'CONSULTED_DIMENSIONS' : 'OWN_READINGS' },
+    outline: worst,
+    roof: looked.length === 0 ? 'NOT_CHECKED' : open(['ROOF_FEATURE', 'ROOF_FORM']) ? 'DIFFERENCE_OPEN' : features.length > 0 ? 'CORRECTED_APPROXIMATE' : 'NO_DIFFERENCE_REPORTED',
+    openings: looked.length === 0 ? 'NOT_CHECKED' : open(['OPENING', 'MISSING_ELEMENT', 'ASSIGN_VIEW']) ? 'DIFFERENCE_OPEN' : 'NO_DIFFERENCE_REPORTED',
+    interior: 'NOT_CHECKED',
+    quantities: worst === 'SHORT' || worst === 'BEYOND' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
+    sourceCheck: status,
+  }
   return {
     schemaVersion: '1.0.0',
-    status: looked.length === 0 ? 'NOT_CHECKED' : checkedRevision !== null && checkedRevision === delivered ? 'CHECKED' : 'PARTLY_CHECKED',
+    status,
     checkedRevision,
     deliveredRevision: delivered,
     reviewStatus: last?.review?.status ?? null,
@@ -585,5 +737,6 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
     notChecked: last?.review?.notChecked ?? [],
     ...(state.outline ? { outline: state.outline } : {}),
     knownDefects,
+    axes,
   }
 }

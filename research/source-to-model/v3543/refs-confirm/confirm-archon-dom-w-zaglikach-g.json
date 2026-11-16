@@ -1,0 +1,96 @@
+{
+ "house": "confirm-archon-dom-w-zaglikach-g",
+ "set": "CONFIRM8",
+ "publisher": "archon",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+ "packageContentHash": "011e14c1abd6cc0668b9580dd1c5e1544d7cd143fa3605f7cbc8f033b55b625d",
+ "category": [
+  "B",
+  "N2"
+ ],
+ "primaryCategory": "B",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlanDimensioned": "asset-rzut-59ad0b2e65",
+  "elevationFront": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-fronto-e4ac3c0166",
+  "elevationRear": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-ogrodo-e56064f967",
+  "elevationSidePlanRight": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-boczna-53ea408671",
+  "elevationSidePlanLeft": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-boczna-5a01e1730a",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 14.75,
+   "printedAs": "1475",
+   "unit": "cm",
+   "alongSheet": "X",
+   "where": "outer line below the plan; inner chain 460 + 1015"
+  },
+  "overallDepthM": {
+   "value": 14.45,
+   "printedAs": "1445",
+   "unit": "cm",
+   "alongSheet": "Y",
+   "where": "outer line right of the plan; inner chain 1070 + 375"
+  },
+  "whatTheOverallIncludes": "width 1475 = full outer-wall width (460 = the garage block on the plan left + 1015 = the rest of the front wall). depth 1445 = 1070 (the main body under the hip roof, rear wall to front wall) + 375 (the attached garage block that projects FORWARD of the front wall): the overall depth INCLUDES the garage projection; the walls-only depth of the main body is 1070. The rear terrace with its pergola, the entrance canopy and the driveway are outside both figures.",
+  "publishedFootprintM2": 175.66,
+  "usableAreaM2": 138.39,
+  "usableAreaNote": "garage 21.27 m2; building height 7.37 m"
+ },
+ "estimated": {
+  "storeys": "ground only (no usable attic drawn)",
+  "mainRoof": {
+   "form": "HIP",
+   "ridgeAlong": "the front facade",
+   "note": "short ridge (about a quarter of the width); the projecting garage block and the entrance canopy have a FLAT roof below the main eaves"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached at the plan front-LEFT corner, projects 375 cm forward, door on the FRONT, flat roof"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "REAR",
+   "alongShare": [
+    0.43,
+    0.94
+   ],
+   "sideCertainty": "rear elevation is the mirror of the plan top: the pergola is over the terrace at the plan top-LEFT, the large sliding door 480/230 behind it",
+   "note": "open steel pergola frame on posts over the rear terrace (dashed on the plan; thin frame in both side elevations), no walls, slatted - not a solid roof"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.25,
+    0.48
+   ],
+   "sideCertainty": "front elevation matched to the plan bottom: garage door on the left, entrance right of it",
+   "note": "flat canopy slab over the entrance, continuous with the flat garage roof, far corner on one post (post drawn on the plan)"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 3,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "front and rear elevations",
+   "note": "three dark chimneys rising from the hip roof"
+  }
+ ],
+ "negativeTraps": [
+  "no dormer and no roof window on any of the four elevations",
+  "three tall chimneys on a hip roof (one stands on the front slope right below the ridge)",
+  "flat-roofed garage block and flat entrance canopy in front of the hipped body: a second roof form, but a body in the plan, not a roof element of the main roof",
+  "the rear pergola is an open frame on posts, not a roofed room"
+ ],
+ "uncertain": [
+  "which chimney stands on which slope (read from rendered elevations)",
+  "the plan sheet draws a dashed rectangle outside the walls: read as the roof outline, not as a wall"
+ ]
+}

@@ -1,0 +1,1541 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-lmb47-286b2bece5",
+  "canonicalUrl": "https://lipinscy.pl/projekt/haga",
+  "requestedUrl": "https://lipinscy.pl/projekt/haga/",
+  "fetchedUrl": "https://lipinscy.pl/projekt/haga/",
+  "pageHash": "8a2a731730457de51d10c85a05175762934f020bac12ae0933c3da9912683ffb",
+  "project": {
+    "externalId": "LMB47",
+    "name": "Projekt Haga - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-domu-aspen-ed9e337914",
+      "caption": "Gotowy projekt domu Aspen",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-6867-projects-thumb-jpeg-6cfee99857",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/07/thumb_6867_projects_thumb.jpeg",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 45658,
+          "byteHash": "132a994ceaed672fcbd8213821dcc1f4875fce33a2443a576da1bd794a989bb3",
+          "decoded": {
+            "width": 340,
+            "height": 227
+          },
+          "declared": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": true,
+          "aspect": 1.497797
+        }
+      ],
+      "selectedVariantId": "var-thumb-6867-projects-thumb-jpeg-6cfee99857",
+      "selectionReason": "only variant (340x227, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-0fe7ce72f0",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"strych\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"strych\" in \"Strych (przykładowa aranżacja) 44,90 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-r2-pdf-8805b4753f",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/31734/lmb047_r2-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 21268,
+          "byteHash": "8cedb5313ea0aa690b6b869872bcf3af8c58a878f364664315e155d6656ae0bb",
+          "decoded": {
+            "width": 972,
+            "height": 917
+          },
+          "declaredMismatch": false,
+          "aspect": 1.059978
+        },
+        {
+          "id": "var-thumb-31734-floorplanpdf-thumb-png-d1df515935",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31734_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 93147,
+          "byteHash": "3d347bd96908e98a62e1682c7e259cadfa959d5c76d2f7aa6de0ab9c8d91b99b",
+          "decoded": {
+            "width": 340,
+            "height": 321
+          },
+          "declared": {
+            "width": 972,
+            "height": 917
+          },
+          "declaredMismatch": true,
+          "aspect": 1.05919
+        }
+      ],
+      "selectedVariantId": "var-lmb047-r2-pdf-8805b4753f",
+      "selectionReason": "largest decoded raster of 2 variants: 972x917 over 340x321"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-12cd919fb9",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5516-projects-thumb-gallery-small-jpeg-982fd99693",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5516_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 3334,
+          "byteHash": "6e504c502bbb6736f331f12dadbb89d64709578650afedcec5b15f62c579d3c2",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5516-projects-thumb-gallery-small-jpeg-982fd99693",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-137c593825",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5508-projects-thumb-gallery-small-jpeg-215db01712",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5508_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 3292,
+          "byteHash": "daf48923a63c4508233799d0629d83b0745d134f6ecb01fba827d94781991e1d",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5508-projects-thumb-gallery-small-jpeg-215db01712",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-1c86b047fe",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5514-projects-thumb-gallery-small-jpeg-c1beb47176",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5514_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 3238,
+          "byteHash": "2531fa0327c43576eb49af2da90c3ec7b3af22ffda4836d82ee5fec7c0f8f1cc",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5514-projects-thumb-gallery-small-jpeg-c1beb47176",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-26e79a8395",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-wn02-lm-7cfbd3ff1a",
+          "url": "https://lipinscy.pl/upload/media/projects/5518/lmb047_wn02_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 81168,
+          "byteHash": "6292e0f2c605d5eecb0cb59271ee0a12ba1e98d2a68bf22b39fa365eb3dd2085",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-lmb047-wn02-lm-7cfbd3ff1a",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-291239d6a0",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-og2-lm-53a693a4b5",
+          "url": "https://lipinscy.pl/upload/media/projects/5514/lmb047_og2_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 166696,
+          "byteHash": "1a6ab08b611df81146cab4b2fa4c3780f18b6489a150ad326dd56b8e41bc7a45",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb047-og2-lm-53a693a4b5",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-2fd2a36cb3",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-fr1-lm-2477fffec8",
+          "url": "https://lipinscy.pl/upload/media/projects/5510/lmb047_fr1_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 200443,
+          "byteHash": "a110bea30442bb68ea5eb5d8f91716c9ed08c608ea487697f1fe00e4de72bf6a",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb047-fr1-lm-2477fffec8",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-4edda0dd1c",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Haga przekrój\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-px-pdf-6029aedece",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/24402/lmb047_px-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 10757,
+          "byteHash": "4383d1bf468d7f5d063d8b11ef7a1323632e09a9f8e03a7fae4f2a7b595501f6",
+          "decoded": {
+            "width": 770,
+            "height": 437
+          },
+          "declaredMismatch": false,
+          "aspect": 1.762014
+        },
+        {
+          "id": "var-thumb-24402-crossviewpdf-thumb-png-13dc445b9e",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24402_crossviewpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 41977,
+          "byteHash": "7f2d2d658370ad47b050e6a4828dd10e0aa53922bbb25f7b3cf5608e1244cf56",
+          "decoded": {
+            "width": 340,
+            "height": 193
+          },
+          "declared": {
+            "width": 770,
+            "height": 437
+          },
+          "declaredMismatch": true,
+          "aspect": 1.761658
+        }
+      ],
+      "selectedVariantId": "var-lmb047-px-pdf-6029aedece",
+      "selectionReason": "largest decoded raster of 2 variants: 770x437 over 340x193"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-54598faba6",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-wn01-lm-59b5ef1f98",
+          "url": "https://lipinscy.pl/upload/media/projects/5516/lmb047_wn01_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 136489,
+          "byteHash": "f5dfbc7261b22e3ea6cfdccdf96f0ccb0a7a8d92724278cc6c0501c96f7be7c8",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-lmb047-wn01-lm-59b5ef1f98",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-5578cf43e3",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5510-projects-thumb-gallery-small-jpeg-4baff61b78",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5510_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 3322,
+          "byteHash": "4e498632222a3ec47abeb9ebc52ce26faeb82e453ca0479149bcdc8d75ea08e7",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5510-projects-thumb-gallery-small-jpeg-4baff61b78",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-8d417be46c",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5512-projects-thumb-gallery-small-jpeg-844609992d",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5512_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 3109,
+          "byteHash": "a6fa1300bb8605ba510f291214e92a6e0cf8143c9a175cf92b9d8a9cf8842bfa",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5512-projects-thumb-gallery-small-jpeg-844609992d",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-b1d064888e",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-og1-lm-8acfaaa13f",
+          "url": "https://lipinscy.pl/upload/media/projects/5512/lmb047_og1_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 160337,
+          "byteHash": "faacb0090746e7361ae77c88802f26616400c4ea8958503174cb5a37a4e22b49",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb047-og1-lm-8acfaaa13f",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-bac5982173",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5518-projects-thumb-gallery-small-jpeg-427a787882",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5518_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 2634,
+          "byteHash": "94f246724c09fb7deb2d02cec0f2d9b5c5a383e58632a3abc1bba29c6c452444",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5518-projects-thumb-gallery-small-jpeg-427a787882",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-ccced35a7d",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 99,81 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-r1-pdf-683e9e6429",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/31275/lmb047_r1-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 51891,
+          "byteHash": "512e1c96d9911f2e398d9244e95fc50e3a5f3837185f0ff414f7157c279f8f8a",
+          "decoded": {
+            "width": 1106,
+            "height": 1000
+          },
+          "declaredMismatch": false,
+          "aspect": 1.106
+        },
+        {
+          "id": "var-thumb-31275-floorplanpdf-thumb-png-a91ab8a646",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31275_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 111131,
+          "byteHash": "79cbeae73b36593ecf60083aef99aaa848764667b04e9645dc30fde0846f67d3",
+          "decoded": {
+            "width": 340,
+            "height": 307
+          },
+          "declared": {
+            "width": 1106,
+            "height": 1000
+          },
+          "declaredMismatch": true,
+          "aspect": 1.107492
+        }
+      ],
+      "selectedVariantId": "var-lmb047-r1-pdf-683e9e6429",
+      "selectionReason": "largest decoded raster of 2 variants: 1106x1000 over 340x307"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-cea608e6e0",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Haga wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Haga wymiary działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "confidence": 0.62
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-rd-500-pdf-e75be02666",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26151/lmb047_rd_500-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 8869,
+          "byteHash": "bfbd443c989eaa111c8d1565b819d3db1b9716fe2cdcc7e3ed5bf3d4bb568c45",
+          "decoded": {
+            "width": 770,
+            "height": 645
+          },
+          "declaredMismatch": false,
+          "aspect": 1.193798
+        },
+        {
+          "id": "var-thumb-26151-plotpdf-thumb-png-6ce0bf3c40",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26151_plotpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 54673,
+          "byteHash": "2a8536ec9f20a83a1d3431733442b8eab048da50f6668281dbee969aa9ea33b4",
+          "decoded": {
+            "width": 340,
+            "height": 285
+          },
+          "declared": {
+            "width": 770,
+            "height": 645
+          },
+          "declaredMismatch": true,
+          "aspect": 1.192982
+        }
+      ],
+      "selectedVariantId": "var-lmb047-rd-500-pdf-e75be02666",
+      "selectionReason": "largest decoded raster of 2 variants: 770x645 over 340x285"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-dd4f4b6f33",
+      "caption": "Gotowy projekt domu Haga",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb047-detal-lm-860c12576b",
+          "url": "https://lipinscy.pl/upload/media/projects/5508/lmb047_detal_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 157668,
+          "byteHash": "50f205af9b84ac7a6c545af9baac720758f51ec55379c680dc993020d73adabe",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb047-detal-lm-860c12576b",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-elewacja-lewa-f2104db54e",
+      "caption": "Gotowy projekt domu Haga elewacja lewa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18433 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Haga elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-18433-facades-thumb-gallery-small-jpeg-3823c81980",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18433_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 2168,
+          "byteHash": "b4da49eb3ba1526a381bcfdce0d2ed1363569f78894a4ca09c538e4df0eaf386",
+          "decoded": {
+            "width": 120,
+            "height": 68
+          },
+          "declaredMismatch": false,
+          "aspect": 1.764706
+        }
+      ],
+      "selectedVariantId": "var-thumb-18433-facades-thumb-gallery-small-jpeg-3823c81980",
+      "selectionReason": "only variant (120x68, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-elewacja-prawa-2e4f9530a0",
+      "caption": "Gotowy projekt domu Haga elewacja prawa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20222 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Haga elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-20222-facades-thumb-gallery-small-jpeg-97fe4389ac",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20222_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 2191,
+          "byteHash": "5ef75d6443332ba5cd20427df23744c450e21d55e7d3ce5ddd2813219fb731b7",
+          "decoded": {
+            "width": 120,
+            "height": 68
+          },
+          "declaredMismatch": false,
+          "aspect": 1.764706
+        }
+      ],
+      "selectedVariantId": "var-thumb-20222-facades-thumb-gallery-small-jpeg-97fe4389ac",
+      "selectionReason": "only variant (120x68, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-elewacja-przod-ddb44c16e0",
+      "caption": "Gotowy projekt domu Haga elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 17537 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Haga elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-17537-facades-thumb-gallery-small-jpeg-1ac833b142",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17537_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 2286,
+          "byteHash": "56db887b5b1eb2c429e638ac7c40e5876543df8c30f7d2a156bec1773606fc27",
+          "decoded": {
+            "width": 120,
+            "height": 61
+          },
+          "declaredMismatch": false,
+          "aspect": 1.967213
+        }
+      ],
+      "selectedVariantId": "var-thumb-17537-facades-thumb-gallery-small-jpeg-1ac833b142",
+      "selectionReason": "only variant (120x61, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-elewacja-ty-a01ed769f3",
+      "caption": "Gotowy projekt domu Haga elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19328 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Haga elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-19328-facades-thumb-gallery-small-jpeg-9dcf80efdb",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19328_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 2266,
+          "byteHash": "37039abd30ff15b112fa1780f1043f2276f39fb0db9d2105813088ada54bd344",
+          "decoded": {
+            "width": 120,
+            "height": 61
+          },
+          "declaredMismatch": false,
+          "aspect": 1.967213
+        }
+      ],
+      "selectedVariantId": "var-thumb-19328-facades-thumb-gallery-small-jpeg-9dcf80efdb",
+      "selectionReason": "only variant (120x61, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-przekroj-2e1cc5b0d8",
+      "caption": "Gotowy projekt domu Haga przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Haga przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24402-crossviewpdf-thumb-gallery-big-v2-pn-b8c6c16ce3",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24402_crossviewpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 1233079,
+          "byteHash": "92979cd6444e059cfa083c81c914672a0dd754f3cb15c747e16c64a333fa2ace",
+          "decoded": {
+            "width": 736,
+            "height": 418
+          },
+          "declaredMismatch": false,
+          "aspect": 1.760766
+        }
+      ],
+      "selectedVariantId": "var-thumb-24402-crossviewpdf-thumb-gallery-big-v2-pn-b8c6c16ce3",
+      "selectionReason": "only variant (736x418, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-przekroj-509194d3e2",
+      "caption": "Gotowy projekt domu Haga przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Haga przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24402-crossviewpdf-thumb-gallery-small-png-75eeed8e7a",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24402_crossviewpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 5829,
+          "byteHash": "cf33f178c59ddc36171d27b9503d45a93ac8b54c4dede971fe5ca24d43fd7981",
+          "decoded": {
+            "width": 120,
+            "height": 68
+          },
+          "declaredMismatch": false,
+          "aspect": 1.764706
+        }
+      ],
+      "selectedVariantId": "var-thumb-24402-crossviewpdf-thumb-gallery-small-png-75eeed8e7a",
+      "selectionReason": "only variant (120x68, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-rzut-parter-0758138c34",
+      "caption": "Gotowy projekt domu Haga rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31275-floorplanpdf-thumb-gallery-small-png-2564b3a4f7",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31275_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 16724,
+          "byteHash": "c3063f52e0c252ce2f36d4b0f36d963c136160438e7101be8e5ef6dcd85e8a0c",
+          "decoded": {
+            "width": 119,
+            "height": 108
+          },
+          "declaredMismatch": false,
+          "aspect": 1.101852
+        }
+      ],
+      "selectedVariantId": "var-thumb-31275-floorplanpdf-thumb-gallery-small-png-2564b3a4f7",
+      "selectionReason": "only variant (119x108, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-rzut-parter-3822a56b7f",
+      "caption": "Gotowy projekt domu Haga rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Haga rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31275-floorplanpdf-thumb-gallery-big-v2-pn-7a3927f095",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31275_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 1959000,
+          "byteHash": "1d0ceed5468e642454ecb8f8b470b0d3ace58f995b2367c0fd65f38d492e54db",
+          "decoded": {
+            "width": 735,
+            "height": 665
+          },
+          "declaredMismatch": false,
+          "aspect": 1.105263
+        }
+      ],
+      "selectedVariantId": "var-thumb-31275-floorplanpdf-thumb-gallery-big-v2-pn-7a3927f095",
+      "selectionReason": "only variant (735x665, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-rzut-strych-przyk-adowa-586e95b889",
+      "caption": "Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"strych\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31734-floorplanpdf-thumb-gallery-big-v2-pn-d751c288a8",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31734_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 2047212,
+          "byteHash": "0fcea15abe0de9dcc0d5dff941dca940f1eee617a98cb8432f1e0e3a96e2fdb6",
+          "decoded": {
+            "width": 736,
+            "height": 694
+          },
+          "declaredMismatch": false,
+          "aspect": 1.060519
+        }
+      ],
+      "selectedVariantId": "var-thumb-31734-floorplanpdf-thumb-gallery-big-v2-pn-d751c288a8",
+      "selectionReason": "only variant (736x694, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-rzut-strych-przyk-adowa-7467ac0339",
+      "caption": "Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"strych\" in \"Gotowy projekt domu Haga rzut Strych (przykładowa aranżacja)\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31734-floorplanpdf-thumb-gallery-small-png-d35d8eb740",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31734_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 11789,
+          "byteHash": "263505de2954bd037132629a64f561703784f43a366a1abc48770bd5601ff71f",
+          "decoded": {
+            "width": 120,
+            "height": 113
+          },
+          "declaredMismatch": false,
+          "aspect": 1.061947
+        }
+      ],
+      "selectedVariantId": "var-thumb-31734-floorplanpdf-thumb-gallery-small-png-d35d8eb740",
+      "selectionReason": "only variant (120x113, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-wymiary-dzia-ki-8fdac39fcc",
+      "caption": "Gotowy projekt domu Haga wymiary działki ",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Haga wymiary działki \")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Haga wymiary działki \")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26151-plotpdf-thumb-gallery-small-png-d36361c2e5",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26151_plotpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 7207,
+          "byteHash": "6dfcb252050b20047370d7f07c3baf1305061205b94bdfa3a82219d39198570b",
+          "decoded": {
+            "width": 120,
+            "height": 101
+          },
+          "declaredMismatch": false,
+          "aspect": 1.188119
+        }
+      ],
+      "selectedVariantId": "var-thumb-26151-plotpdf-thumb-gallery-small-png-d36361c2e5",
+      "selectionReason": "only variant (120x101, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-haga-wymiary-dzia-ki-ff1db27a71",
+      "caption": "Gotowy projekt domu Haga wymiary działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Haga wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Haga wymiary działki\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26151-plotpdf-thumb-gallery-big-v2-png-2590389b6f",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26151_plotpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/png",
+          "byteLength": 1820076,
+          "byteHash": "4e608883adda617a057db24bc6d05c983bcd77d086bc8652a86dc73d21d70dec",
+          "decoded": {
+            "width": 736,
+            "height": 617
+          },
+          "declaredMismatch": false,
+          "aspect": 1.192869
+        }
+      ],
+      "selectedVariantId": "var-thumb-26151-plotpdf-thumb-gallery-big-v2-png-2590389b6f",
+      "selectionReason": "only variant (736x617, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-haga-0bde5b9a26",
+      "caption": "Projekt domu Haga",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Haga elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-e1-lm-0ae7f2a4ea",
+          "url": "https://lipinscy.pl/upload/media/facades/17537/lmb047_e1_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 30387,
+          "byteHash": "dc5e7bdcbf956e86ba1bef040980abee7b7b45e00a6e9230e81bda7c2dc2512a",
+          "decoded": {
+            "width": 791,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.9775
+        },
+        {
+          "id": "var-thumb-17537-admin-jpeg-5edaa6af7d",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17537_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 8365,
+          "byteHash": "de8a54b690717a7a379fa507f4b0cb60248965ca5f749c9ab0a93253acc7aeed",
+          "decoded": {
+            "width": 200,
+            "height": 101
+          },
+          "declared": {
+            "width": 791,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.980198
+        }
+      ],
+      "selectedVariantId": "var-lmb047-e1-lm-0ae7f2a4ea",
+      "selectionReason": "largest decoded raster of 2 variants: 791x400 over 200x101"
+    },
+    {
+      "id": "asset-projekt-domu-haga-576b3debcc",
+      "caption": "Projekt domu Haga",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Haga elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-e2-lm-4922de7e00",
+          "url": "https://lipinscy.pl/upload/media/facades/18433/lmb047_e2_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 19328,
+          "byteHash": "e1680b850ec867d08dfc03557874c89a63a7bdebacd72f6fff8878989fdc9612",
+          "decoded": {
+            "width": 705,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.7625
+        },
+        {
+          "id": "var-thumb-18433-admin-jpeg-b97143dd36",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18433_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 6812,
+          "byteHash": "3b514cf19f6dcc6460358895dd614e0baad88cd260b5f2f52503d441b93332e1",
+          "decoded": {
+            "width": 199,
+            "height": 113
+          },
+          "declared": {
+            "width": 705,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.761062
+        }
+      ],
+      "selectedVariantId": "var-lmb047-e2-lm-4922de7e00",
+      "selectionReason": "largest decoded raster of 2 variants: 705x400 over 199x113"
+    },
+    {
+      "id": "asset-projekt-domu-haga-917a29ec4b",
+      "caption": "Projekt domu Haga",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Haga elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-e4-lm-8df38e59c2",
+          "url": "https://lipinscy.pl/upload/media/facades/20222/lmb047_e4_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 19065,
+          "byteHash": "76e0a178d734b18f61bc89c4cd4369a33aaef690a3b3f8c5ea7e54af54149558",
+          "decoded": {
+            "width": 705,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.7625
+        },
+        {
+          "id": "var-thumb-20222-admin-jpeg-0c04cd5d82",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20222_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 6750,
+          "byteHash": "c86b279cfd907434c5576496ca831dc47ad8c7320fdd73f85dda48b1145bc2ff",
+          "decoded": {
+            "width": 199,
+            "height": 113
+          },
+          "declared": {
+            "width": 705,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.761062
+        }
+      ],
+      "selectedVariantId": "var-lmb047-e4-lm-8df38e59c2",
+      "selectionReason": "largest decoded raster of 2 variants: 705x400 over 199x113"
+    },
+    {
+      "id": "asset-projekt-domu-haga-ec771e2b45",
+      "caption": "Projekt domu Haga",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Haga elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Haga elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb047-e3-lm-a9675152a5",
+          "url": "https://lipinscy.pl/upload/media/facades/19328/lmb047_e3_lm",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 30769,
+          "byteHash": "8ba1b7fc83076184066e5e215b0d5d08714b61b058529fb5aed749dcc12b1c22",
+          "decoded": {
+            "width": 791,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.9775
+        },
+        {
+          "id": "var-thumb-19328-admin-jpeg-7e22dca659",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19328_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/haga",
+          "mediaType": "image/jpeg",
+          "byteLength": 8352,
+          "byteHash": "e7852867fa70bb3824fe6e5485599580db276868d2f1169b559465d33e2ec50c",
+          "decoded": {
+            "width": 200,
+            "height": 101
+          },
+          "declared": {
+            "width": 791,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.980198
+        }
+      ],
+      "selectedVariantId": "var-lmb047-e3-lm-a9675152a5",
+      "selectionReason": "largest decoded raster of 2 variants: 791x400 over 200x101"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 123.97,
+      "unit": "m2",
+      "raw": "123,97m²"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "value": 99.81,
+      "unit": "m2",
+      "raw": "99,81m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 199.7,
+      "unit": "m2",
+      "raw": "199,70m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 35,
+      "unit": "deg",
+      "raw": "35°"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 99.81,
+      "unit": "m2",
+      "raw": "99,81m²"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "W odpowiedzi na komentarz użytkownika technik budowlany z dnia 2014-12-27 15:19:51: \"witam.realizowalem budowy domu wg.projektu haga bez garazu dwukrotnie na terenie dolnego slaska.powiem tak, dom jest super pod kazdym wzgledem,od funkcjonalnosci po wyglad koncowy, wg mnie ten dom w niezmienionym stanie to jest dokladnie to czego w dzisiejszych czasach potrzeba kazdej rodzinie.Haga w budowie jest nie droga przy uzyciu powszechnych materialow budowlanych.Zainteresowanym moge powiedziec kilka slow o kosztorysie,bez bajerowania. W fazie budowy dopiero przekonujemy sie o tym jak przestrzenny jest budynek. Posiadam duzo foto i porad technicznych ale mam zawsze malo czasu.zainteresowanych prosze tylko o podawanie email pod tym postemna ktore w miare mozliwosci bede pisal\" Bardzo proszę o kosztorys i parę fotek. Z góry dziękuję. Mój mail: remigiusz.chruscielski@gmail.com"
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "35°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Klasyczny dom parterowy, z trzema sypialniami, dużą kotłownią, strychem do adaptacji"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/haga/Jest to parterowy dom o prostym kształcie. Akcentami elewacji są dwuspadowe zadaszenia wsparte na masywnych prostokątnych słupach. Taras wejściowy i spory wiatrołap z miejscem na pojemne szafy prowadzą do wnętrza domu. Trzy sypialnie i wygodna łazienka po lewej stronie wejścia to strefa nocna. Pokój dzienny łączy się z dużą kuchnią w jedną przestrzeń. Jest tu miejsce na kąt wypoczynkowy przy kominku, stół jadalny, kręcone schody na ewentualne poddasze. W projekcie przewidziano ogrzewanie kotłem na gaz. Możliwa jest zmiana ogrzewania na pompę ciepła."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/06/2226da8f1d5bf9a1840bba404029935d7a7827a8.jpeg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/5510/lmb047_fr1_lm: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "83dc5a195297b9ca43c852a073552e723c48a54e9e0f602de1c5d84981e6f1c0"
+}

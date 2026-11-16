@@ -103,15 +103,6 @@ async function main(): Promise<void> {
     const events = join(out, 'events.jsonl')
     writeFileSync(events, '')
     const record = (e: ConsultEvent): void => appendFileSync(events, `${scrub(JSON.stringify(e))}\n`)
-    const spend: ConsultSpend | undefined = books
-      ? {
-          reserve: (m, usd, note) => {
-            const r = books.reserve('CONSULTATION', m, usd)
-            return { id: r.id, usd: r.reservedUsd, note }
-          },
-          settle: (r, actual, note) => books.settle({ id: r.id, purpose: 'CONSULTATION', model, reservedUsd: r.usd }, actual, note),
-        }
-      : undefined
     const api = replayRoot ? undefined : anthropicConsultant({ model, maxOutputTokens: 8000 })
     const recorded = replayRoot ? replayModel(join(replayRoot, house), model) : replayMetric && existsSync(join(replayMetric, house, 'events.jsonl')) ? replayModel(join(replayMetric, house), model, true) : undefined
     let replayed = 0
@@ -125,13 +116,25 @@ async function main(): Promise<void> {
         if (recorded && (replayRoot || (req.system === CONSULTANT_SYSTEM && recorded.left() > 0))) {
           replayed += 1
           record({ at: new Date().toISOString(), kind: 'REPLAYED_ANSWER', from: replayRoot ?? replayMetric })
-          return recorded.send(req)
+          return { ...(await recorded.send(req)), usage: { inputTokens: 0, outputTokens: 0 } }
         }
         if (!api) throw new Error('REPLAY_EXHAUSTED: offline, and the recording has no further answer')
         liveCalls += 1
         return api.send(req)
       },
     }
+    const spend: ConsultSpend | undefined = books
+      ? {
+          // an answer that will come from the recording is not a request: nothing is reserved for it (a metric-round
+          // request is "step 1/2", a look at the model "step 3"; the recording holds metric-round answers only)
+          reserve: (m, usd, note) => {
+            if (recorded && recorded.left() > 0 && !note.startsWith('step 3')) return { id: 'replayed', usd: 0, note }
+            const r = books.reserve('CONSULTATION', m, usd)
+            return { id: r.id, usd: r.reservedUsd, note }
+          },
+          settle: (r, actual, note) => (r.id === 'replayed' ? undefined : books.settle({ id: r.id, purpose: 'CONSULTATION', model, reservedUsd: r.usd }, actual, note)),
+        }
+      : undefined
     // every response is booked in the campaign ledger as it arrives
     const ledgered: ConsultantModel = {
       ...live,

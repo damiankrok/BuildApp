@@ -1,0 +1,1104 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0",
+  "id": "src-www-dobredomy-pl-27b91bfe8d",
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/gracjaImalaII",
+  "requestedUrl": "https://www.dobredomy.pl/projekt/gracjaImalaII/",
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/gracjaImalaII/",
+  "pageHash": "e0b0d18eb1011710506b759d420bb09c468288c6b1c7f6ea00787e6e58c9a2fb",
+  "project": {
+    "name": "Projekt domu Gracja Mała II",
+    "publisher": "dobredomy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gracja-ma-a-ii-elewacja-boczna-005be5e789",
+      "caption": "Gracja Mała II · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gracja Mała II · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Gracja Mała II · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-e3-jpg-c785096fa0",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_e3.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 62282,
+          "byteHash": "bee3645e7b849822dab388aa1153afe9c6221b57cc88c6dc64ea86920fe4482a",
+          "decoded": {
+            "width": 700,
+            "height": 305
+          },
+          "declaredMismatch": false,
+          "aspect": 2.295082
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-e3-jpg-c785096fa0",
+      "selectionReason": "only variant (700x305, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-elewacja-boczna-a1f9778cd6",
+      "caption": "Gracja Mała II · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gracja Mała II · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Gracja Mała II · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-e2-jpg-d6f323ed9e",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_e2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 68075,
+          "byteHash": "cc5d20ec86b97f267323fb60f1ec6a6f9aa2aa78c9f7f96c3d604468f6204788",
+          "decoded": {
+            "width": 700,
+            "height": 305
+          },
+          "declaredMismatch": false,
+          "aspect": 2.295082
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-e2-jpg-d6f323ed9e",
+      "selectionReason": "only variant (700x305, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-elewacja-przod-d9a66fad12",
+      "caption": "Gracja Mała II · Elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gracja Mała II · Elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gracja Mała II · Elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-e1-jpg-e4abc2bfb9",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_e1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 95677,
+          "byteHash": "97dc3ad55844c17e16f06a248dfc8435a52ce4b85bf3433ac118017200279eb7",
+          "decoded": {
+            "width": 700,
+            "height": 305
+          },
+          "declaredMismatch": false,
+          "aspect": 2.295082
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-e1-jpg-e4abc2bfb9",
+      "selectionReason": "only variant (700x305, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-elewacja-ty-f95eb1d662",
+      "caption": "Gracja Mała II · Elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gracja Mała II · Elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gracja Mała II · Elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-e4-jpg-a68b2e1b92",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_e4.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 99563,
+          "byteHash": "59b237cff7e95ebd1bcb5a29150ebf5e91de9a432d29980d0a0f9b22c3a7395f",
+          "decoded": {
+            "width": 700,
+            "height": 305
+          },
+          "declaredMismatch": false,
+          "aspect": 2.295082
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-e4-jpg-a68b2e1b92",
+      "selectionReason": "only variant (700x305, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-przekroje-1003c2e842",
+      "caption": "Gracja Mała II · Przekroje",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Gracja Mała II · Przekroje\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-p1-jpg-95171d4acc",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_p1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 131787,
+          "byteHash": "454c5541743d530718f8e344ef533445035438c08cba5b0f9d3cf5569c1ea4c1",
+          "decoded": {
+            "width": 2047,
+            "height": 1075
+          },
+          "declaredMismatch": false,
+          "aspect": 1.904186
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-p1-jpg-95171d4acc",
+      "selectionReason": "only variant (2047x1075, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-rzut-dzia-ki-5d891a7356",
+      "caption": "Gracja Mała II · Rzut działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gracja Mała II · Rzut działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-s-jpg-3e16a11799",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_s.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 55765,
+          "byteHash": "bd23c554112d984f9347107886393095023ab1daab790e6167273a6455492fbb",
+          "decoded": {
+            "width": 1189,
+            "height": 929
+          },
+          "declaredMismatch": false,
+          "aspect": 1.279871
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-s-jpg-3e16a11799",
+      "selectionReason": "only variant (1189x929, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-rzut-parter-35ca2fb86f",
+      "caption": "Gracja Mała II · Rzut parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gracja Mała II · Rzut parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gracja Mała II · Rzut parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-r1-jpg-016250766f",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_r1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 245303,
+          "byteHash": "f2945f5f7142ee0b5b23224d7e0e12202b1ab4d58ede6495b1f30b4596b51cbb",
+          "decoded": {
+            "width": 1882,
+            "height": 1600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.17625
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-r1-jpg-016250766f",
+      "selectionReason": "only variant (1882x1600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracja-ma-a-ii-rzut-poddasze-473128f22f",
+      "caption": "Gracja Mała II · Rzut poddasze",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gracja Mała II · Rzut poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Gracja Mała II · Rzut poddasze\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-r2-jpg-96369d81ad",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_r2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 220998,
+          "byteHash": "254b2c66eb8d652c0ecb01d290174bffbb4f664802b35592bc84e655399a4e63",
+          "decoded": {
+            "width": 1882,
+            "height": 1600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.17625
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-r2-jpg-96369d81ad",
+      "selectionReason": "only variant (1882x1600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gracjaimalaii-w1-jpg-0db41e5984",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w1-jpg-a5bdcce98a",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/gracjaImalaII_w1.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 705611,
+          "byteHash": "4d6d2dffae637647e2f57f0807ddf5ccffcccd3567e6a5877b493b4454d20f54",
+          "decoded": {
+            "width": 1865,
+            "height": 1200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.554167
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w1-jpg-a5bdcce98a",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)"
+    },
+    {
+      "id": "asset-newsletter-115423e4f1",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/png",
+          "byteLength": 61287,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/webp",
+          "byteLength": 23380,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-2122c17c71",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-jpg-b3083b8576",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 66219,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        },
+        {
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/webp",
+          "byteLength": 14602,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        }
+      ],
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-598a2abb68",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/png",
+          "byteLength": 55569,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/webp",
+          "byteLength": 18930,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-prezentacja-e019163552",
+      "caption": "Prezentacja",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 71506,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "decoded": {
+            "width": 417,
+            "height": 565
+          },
+          "declaredMismatch": false,
+          "aspect": 0.738053
+        }
+      ],
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-e25becc350",
+      "caption": "Projekt domu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/png",
+          "byteLength": 160714,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "decoded": {
+            "width": 315,
+            "height": 203
+          },
+          "declaredMismatch": false,
+          "aspect": 1.551724
+        }
+      ],
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-0a51e6d280",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w7-jpg-p-prslide-16a5878323",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w7.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 75911,
+          "byteHash": "dcb3f6ea04c712a0653d7f7719a119dbb18eb2c06de0cf392d82f96558f99a8e",
+          "decoded": {
+            "width": 782,
+            "height": 441
+          },
+          "declaredMismatch": false,
+          "aspect": 1.773243
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w7-jpg-p-prslide-16a5878323",
+      "selectionReason": "only variant (782x441, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-2e9ac175f2",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w8-jpg-p-prslide-dd87b687d3",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w8.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 99985,
+          "byteHash": "b4d1d3315a8992564bcdd3a3cfd1cad1454e34645798e92a9740b32af6b70f94",
+          "decoded": {
+            "width": 782,
+            "height": 441
+          },
+          "declaredMismatch": false,
+          "aspect": 1.773243
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w8-jpg-p-prslide-dd87b687d3",
+      "selectionReason": "only variant (782x441, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-32d5514a0c",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w9-jpg-p-prslide-4d3ca077a3",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w9.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 91666,
+          "byteHash": "259d5552599a40ac19f48aa06695211479a3507784ef2ba41d39874974c81576",
+          "decoded": {
+            "width": 782,
+            "height": 441
+          },
+          "declaredMismatch": false,
+          "aspect": 1.773243
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w9-jpg-p-prslide-4d3ca077a3",
+      "selectionReason": "only variant (782x441, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-3a9b541bd1",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w4-jpg-p-prslide-4e7fd7da85",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w4.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 133442,
+          "byteHash": "331516c8405e073aee82bc793899a4f33274c049285b758e8ed180badbf668a9",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w4-jpg-p-prslide-4e7fd7da85",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-4cc988f023",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w6-jpg-p-prslide-2381001eca",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w6.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 94706,
+          "byteHash": "86a4ce70cf594417004ce4bfb1b6d2571f91b5b8ebb2bace0dcb6cb15ab90fd8",
+          "decoded": {
+            "width": 782,
+            "height": 441
+          },
+          "declaredMismatch": false,
+          "aspect": 1.773243
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w6-jpg-p-prslide-2381001eca",
+      "selectionReason": "only variant (782x441, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-5e5782a7f1",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w2-jpg-p-prslide-88421c79bb",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w2.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 136466,
+          "byteHash": "3195f18076ba0042a58089bb20d2b2197ef83c0f9b587c928fcb2461031eb050",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w2-jpg-p-prslide-88421c79bb",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-97ff110fb7",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w3-jpg-p-prslide-144a85039c",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w3.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 148343,
+          "byteHash": "992cded3fdc2862a394c028480f456509f5c05f310532da7ae6919fb55c28c4b",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w3-jpg-p-prslide-144a85039c",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-dwustanowisko-fd6c01c086",
+      "caption": "Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracja Mała II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem dwustanowiskowym, z dachem dwuspadowym Gracj\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-gracjaimalaii-w1-jpg-p-prslide-fa53cef5da",
+          "url": "https://www.dobredomy.pl/img/projekty/gracjaImalaII/gracjaImalaII_w1.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 135704,
+          "byteHash": "90fea256f5daacb76ecc5491df2d57ee6e5149ac55a6909e27488536e4546109",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-gracjaimalaii-w1-jpg-p-prslide-fa53cef5da",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-wycena-fb105e7612",
+      "caption": "Wycena",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/gracjaImalaII",
+          "mediaType": "image/jpeg",
+          "byteLength": 53872,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "value": 2,
+      "unit": "count",
+      "raw": "2"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.6,
+      "unit": "m",
+      "raw": "8,60 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 144.5,
+      "unit": "m2",
+      "raw": "144,50 m²"
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "value": 35.8,
+      "unit": "m2",
+      "raw": "35,80 m²"
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "value": 18.12,
+      "unit": "m",
+      "raw": "18,12 m"
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "value": 23.82,
+      "unit": "m",
+      "raw": "23,82 m"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "value": 40,
+      "unit": "deg",
+      "raw": "40°"
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "value": 4,
+      "unit": "count",
+      "raw": "4"
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "value": 250.2,
+      "unit": "m2",
+      "raw": "250,20 m²"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 127.2,
+      "unit": "m2",
+      "raw": "127,20 m²"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "value": 555.4,
+      "unit": "none",
+      "raw": "555,40 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Gracja Mała II to idealny projekt domu dla 4-6-osobowej rodziny. Na parterze zaplanowano otwartą strefę dzienną, z przestronnym salonem, wygodną jadalnią oraz kuchnią, przy której znajduje się bardzo poręczna spiżarnia. W hallu znajduje się również niewielka toaleta. Dopełnieniem strefy dziennej jest gabinet, mogący służyć jako pokój gościnny. Z wiatrołapu, w którym jest miejsce na sporą szafę, przechodzi się do pomieszczenia gospodarczego, a dalej do garażu. Na poddaszu zaprojektowano trzy przestronne pokoje, każdy z własnym balkonem, ogólnodostępna łazienkę oraz strych, który po adaptacji może stać się dodatkowym pokojem. Projekt można wykorzystać do zabudowy bliźniaczej. Projekt dostępny w wersji z garażem jednostanowiskowym - Gracja Mała oraz bez garażu - Gracja Mała III, a także w wersji o większej powierzchni użytkowej: z garażem jednostanowiskowym - Gracja, z garażem dwustanowiskowym - Gracja II oraz bez garażu - Gracja III."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "40°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Gracja Mała II to idealny projekt domu dla 4-6-osobowej rodziny. Na parterze zaplanowano otwartą strefę dzienną, z przestronnym salonem, wygodną jadalnią oraz kuchnią, przy której znajduje się bardzo poręczna spiżarnia. W hallu znajduje się również niewielka toaleta. Dopełnieniem strefy dziennej jest gabinet, mogący służyć jako pokój gościnny. Z wiatrołapu, w którym jest miejsce na sporą szafę, przechodzi się do pomieszczenia gospodarczego, a dalej do garażu. Na poddaszu zaprojektowano trzy przestronne pokoje, każdy z własnym balkonem, ogólnodostępna łazienkę oraz strych, który po adaptacji może stać się dodatkowym pokojem. Projekt można wykorzystać do zabudowy bliźniaczej. Projekt dostępny w wersji z garażem jednostanowiskowym - Gracja Mała oraz bez garażu - Gracja Mała III, a także w wersji o większej powierzchni użytkowej: z garażem jednostanowiskowym - Gracja, z garażem dwustanowiskowym - Gracja II oraz bez garażu - Gracja III."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [],
+  "documents": [
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/Pliki%20do%20pobrania/gracjaImalaII_ch.pdf",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "variant": "UNKNOWN",
+      "caption": "Charakterystyka energetyczna",
+      "status": "NOT_FETCHED",
+      "code": "NOT_A_DRAWING"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/Pliki%20do%20pobrania/gracjaImalaII_pk.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "BASE",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "mediaType": "application/pdf",
+      "byteLength": 63347,
+      "byteHash": "1a01c0ad23cb779e20f646094fcce6cefbe9a0ea8b046a5ae0870c324ae3c540",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/Pliki%20do%20pobrania/gracjaImalaII_pkdwg.dwg",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "variant": "UNKNOWN",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "mediaType": "image/vnd.dwg",
+      "byteLength": 613696,
+      "byteHash": "42cc1b6a7eb0e068d29534a083d8b05fbc72ff4d4e007574c94e4201d4e7522a",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/gracjaImalaII/Pliki%20do%20pobrania/gracjaImalaII_pkl.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "MIRRORED",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "mediaType": "application/pdf",
+      "byteLength": 64722,
+      "byteHash": "ead6cd21dd2c23a70164f500c7b0d3cead58c45000e5fd03d95a396067f21ace",
+      "status": "FETCHED"
+    }
+  ],
+  "contentHash": "8ab439011270534fd4ac1b691da5dd82d5ab9ede324d1bb011f6b392eebfd34e"
+}

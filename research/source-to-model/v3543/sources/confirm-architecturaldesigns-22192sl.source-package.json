@@ -1,0 +1,875 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-22192sl-bae10cee1d",
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+  "pageHash": "fdd56a8a621bb4a16b5a2ce3d52eb9fb28f8c5f2b1e1e0cc7e79a07017c43697",
+  "project": {
+    "externalId": "22192SL",
+    "name": "Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft",
+    "publisher": "architecturaldesigns.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-22192sl-left-elevation-1742486164-jpg-ffe44151be",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl left elevation 1742486164\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"22192sl left elevation 1742486164\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-left-elevation-1742486164-jpg-ba2c4b19af",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_Left-Elevation_1742486164.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 53683,
+          "byteHash": "0308789dfee5e00da3114ac5defd42e14c91e386a219c1e763ea49a77f69d9f2",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-left-elevation-1742486164-jpg-ba2c4b19af",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-22192sl-rear-elevation-1742486164-jpg-62d6673911",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl rear elevation 1742486164\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"22192sl rear elevation 1742486164\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-rear-elevation-1742486164-jpg-b131f82799",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_Rear-Elevation_1742486164.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 65650,
+          "byteHash": "961c5b8338571efb5d7e8d2ff4781286962004c66e1523f27a32577c984acfd8",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-rear-elevation-1742486164-jpg-b131f82799",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-22192sl-render-1742486164-jpg-2356ee6234",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"22192sl render 1742486164\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"22192sl render 1742486164\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"22192sl render 1742486164\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-render-1742486164-jpg-90efa8aaed",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_Render_1742486164.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 170803,
+          "byteHash": "1c351e18625df92479cfb2b595f111b724abc939bdd3337bf693149a2ffc5669",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-render-1742486164-jpg-90efa8aaed",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-22192sl-right-elevation-1742486165-jpg-09fd98d54f",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl right elevation 1742486165\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"22192sl right elevation 1742486165\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-right-elevation-1742486165-jpg-1e723eba30",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_Right-Elevation_1742486165.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 60518,
+          "byteHash": "6343439840eb5015c680483c4fb61491e50ea95fd2159fe741a5cdeb24ed5a82",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-right-elevation-1742486165-jpg-1e723eba30",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-house-plan-exterior-with-two-stories-features-in-85aa2e3f60",
+      "caption": "House plan exterior with two stories. Features include a gabled roof, stone chimney, and dormers. Garage is side-facing.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"22192sl render 1742486164\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"side\" in \"House plan exterior with two stories. Features include a gabled roof, stone chim\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-render-1742486164-jpg-8f15d7ffee",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_Render_1742486164.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 137461,
+          "byteHash": "d5d8a533b6448e3bdcece15ef13c50873feb6a818b3286943fbe1a7bba633513",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-render-1742486164-jpg-8f15d7ffee",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-left-elevation-house-plan-showing-a-gabled-roof-d03cb2f52b",
+      "caption": "Left elevation house plan showing a gabled roof, stone chimney, siding, and a covered porch.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl left elevation 1742486164\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Left elevation house plan showing a gabled roof, stone chimney, siding, and a co\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"22192sl left elevation 1742486164\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"Left elevation house plan showing a gabled roof, stone chimney, siding, and a co\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-left-elevation-1742486164-jpg-8b52062ad4",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_Left-Elevation_1742486164.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 38373,
+          "byteHash": "d98b5c3ae126fd0a659a30e665d6ca9ba11d73193b3190d5f580953a91cbaf28",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-left-elevation-1742486164-jpg-8b52062ad4",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-22192sl-traditional-cape-style-cottage-with-3eccce036d",
+      "caption": "Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft - Floor Plan - 2nd Floor - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"loft\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd floor\" in \"2nd Floor\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-f2-1742486423-gif-7257c7791d",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/373006823/original/22192SL_F2_1742486423.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 57618,
+          "byteHash": "443b13453b824503fc89f042f45e73ac003d9cc53311bfd1e58dcfdf56ebdab6",
+          "decoded": {
+            "width": 800,
+            "height": 624
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.282051
+        }
+      ],
+      "selectedVariantId": "var-22192sl-f2-1742486423-gif-7257c7791d",
+      "selectionReason": "only variant (800x624, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-22192sl-traditional-cape-style-cottage-with-438da69efa",
+      "caption": "Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft - Floor Plan - Main Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-f1-1742486422-gif-a7a02655ce",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_F1_1742486422.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/gif",
+          "byteLength": 84349,
+          "byteHash": "27f7e1d51c53e4fe46c160d8119b1e6b5a1dc27ceb6030d57670c2d61abd49d6",
+          "decoded": {
+            "width": 1025,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.28125
+        }
+      ],
+      "selectedVariantId": "var-22192sl-f1-1742486422-gif-a7a02655ce",
+      "selectionReason": "only variant (1025x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-22192sl-traditional-cape-style-cottage-with-6814b48fa5",
+      "caption": "Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft - Floor Plan - 2nd Floor - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"loft\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"loft\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-f2-1742486423-gif-c4e0356252",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_F2_1742486423.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/gif",
+          "byteLength": 100087,
+          "byteHash": "68388bb4a3776c5334fedcea24d245941363fe647dc18a7c1bc080ea6713876c",
+          "decoded": {
+            "width": 1025,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.28125
+        }
+      ],
+      "selectedVariantId": "var-22192sl-f2-1742486423-gif-c4e0356252",
+      "selectionReason": "only variant (1025x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-22192sl-traditional-cape-style-cottage-with-d8e50880dd",
+      "caption": "Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft - Floor Plan - Main Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 22192SL: Traditional Cape-Style Cottage with Loft Above Garage - 1864 Sq Ft\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-f1-1742486422-gif-49cf58ee4d",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/373006823/original/22192SL_F1_1742486422.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 52690,
+          "byteHash": "b7c7ec1cbb6b51f6e7b1a68aee233fdfebd8cae4d22fdea50aa4f3b284c4c851",
+          "decoded": {
+            "width": 800,
+            "height": 624
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.282051
+        }
+      ],
+      "selectedVariantId": "var-22192sl-f1-1742486422-gif-49cf58ee4d",
+      "selectionReason": "only variant (800x624, decoded from bytes)"
+    },
+    {
+      "id": "asset-rear-elevation-drawing-of-a-house-plan-showing-a-d1233ccedc",
+      "caption": "Rear elevation drawing of a house plan, showing a two-story main section with dormer and a single-story section with gabled roof and chimney.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl rear elevation 1742486164\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"section\" in \"Rear elevation drawing of a house plan, showing a two-story main section with do\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"22192sl rear elevation 1742486164\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Rear elevation drawing of a house plan, showing a two-story main section with do\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-rear-elevation-1742486164-jpg-00c4e7b559",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_Rear-Elevation_1742486164.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 50448,
+          "byteHash": "070913e83179d067071cb28325484dfbe525d3d2979c3f51eb9480d5c90bdf5b",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-rear-elevation-1742486164-jpg-00c4e7b559",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-right-elevation-house-plan-with-a-gabled-roof-st-25afa02a47",
+      "caption": "Right elevation house plan with a gabled roof, stone chimney, and covered porch.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"22192sl right elevation 1742486165\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Right elevation house plan with a gabled roof, stone chimney, and covered porch.\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"22192sl right elevation 1742486165\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"Right elevation house plan with a gabled roof, stone chimney, and covered porch.\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-22192sl-right-elevation-1742486165-jpg-8074ec8fc7",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_Right-Elevation_1742486165.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+          "mediaType": "image/jpeg",
+          "byteLength": 45224,
+          "byteHash": "6baaed4819249d25854d50c867cf7d7b686db7864c8d4b3be61582c19e223554",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-22192sl-right-elevation-1742486165-jpg-8074ec8fc7",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 15.138,
+      "unit": "m",
+      "raw": "49' 8\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 19.914,
+      "unit": "m",
+      "raw": "65' 4\""
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Basement"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This Traditional Cape-style Cottage house plan offers you 1,864 square feet of heated living space with 3 beds, 2.5 baths and a 616 square foot 2-car garage.Architectural Designs' primary focus is to make the process of finding and buying house plans more convenient for those interested in constructing new homes - single family and multi-family ones - as well as garages, pool houses and even sheds and backyard offices. Our website offers a vast collection of home designs, encompassing various architectural styles, sizes, and features, which can be customized to meet specific needs and preferencesWe curate and add to our design portfolio every day as we work with hundreds of residential building designers and architects to bring you the most diverse and best house plans available.We can modify any house plan you see on our site. Learn more about modifications.Related Plans: Eliminate the garage with house plan 22151SL (1,654 sq. ft.) and get a smaller version with house plan 2262SL (1,339 sq. ft.)."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_F1_1742486422.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_F2_1742486423.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_Left-Elevation_1742486164.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_Rear-Elevation_1742486164.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_Render_1742486164.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/373006823/original/22192SL_Right-Elevation_1742486165.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F1_1742486422.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_F1_1742486422.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F2_1742486423.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/373006823/original/22192SL_F2_1742486423.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F1_1742486422.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F1_1742486422.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F2_1742486423.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/373006823/original/22192SL_F2_1742486423.gif: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "7bf16f92de5bea7712e82364b6eaef5b9378cb24ecfa1b5b33b7762111b3a684"
+}

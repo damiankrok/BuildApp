@@ -440,6 +440,14 @@ export type PlanDecompositionOptions = {
    */
   drawnGapRule?: 'OFF' | 'ON'
   /**
+   * v3.54.3 (CLASSIFY_BOUNDARY): sides of the sheet on which a validated correction says the building is closed by a
+   * glazed wall the plan draws as thin lines — a facade that leaves no wall band. Where the long walls span only one line
+   * across an axis, the walled box may close ON SUCH A SIDE at the far end tick of a READ dimension chain both side
+   * walls run along (`glazedEndClosure`): the correction says what the boundary is, the drawing's own strokes say where
+   * it is, and both are needed. Absent or empty — the default — nothing is closed and the envelope is refused as before.
+   */
+  closeGlazedEnds?: ReadonlyArray<'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT'>
+  /**
    * v3.53.3: openings the boundary found in the own wall of a room the box's reading walked into
    * (`CompletionPart.reread`): shut in every reading, on the grid line that carries them, wherever the other lines
    * fall. Set only by `decomposePlan`, for its second reading; a caller never states one.
@@ -447,7 +455,7 @@ export type PlanDecompositionOptions = {
   shutOpenings?: ReadonlyArray<{ axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number }>
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule' | 'shutOpenings' | 'chainedSideWalls'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides' | 'drawnGapRule' | 'shutOpenings' | 'chainedSideWalls' | 'closeGlazedEnds'>>
 
 /** The least distance between two grid lines (`PlanDecompositionOptions.minCellM`), metres. */
 export const DEFAULT_MIN_CELL_M = 0.45
@@ -1696,6 +1704,58 @@ function cornerJoined(frame: readonly Band[], long: readonly Band[], wallPx: num
 }
 
 /**
+ * v3.54.3 (first measured as a research patch in v3.54.2): a facade drawn all glazing — a fully glazed gable, a shopfront — leaves no wall band, and the box the long
+ * walls' axes span then has no thickness on that axis: one wall across, and nothing to close it. What closes it is what the
+ * drawing states: a READ dimension chain whose one end tick lies at that lone cross wall and whose other end lies at least
+ * four walls away, along which the two outermost side walls of the box both run — each over three quarters of the stated
+ * span, reaching within a wall and a half of its far tick. The far tick is then the facade's line. Nothing is closed where
+ * either side wall stops short (a loggia's returns, a terrace edge) or no chain states the span: the box stays degenerate
+ * and the envelope is refused as before.
+ */
+export function glazedEndClosure(long: readonly Band[], chains: readonly DimensionChain[], box: PixelRect, wallPx: number, glazedSides: ReadonlyArray<'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT'>): PixelRect {
+  const half = wallPx / 2
+  let out = { ...box }
+  for (const cross of ['HORIZONTAL', 'VERTICAL'] as const) {
+    const sidesVertical = cross === 'HORIZONTAL'
+    const [c0, c1] = sidesVertical ? [out.y0, out.y1] : [out.x0, out.x1]
+    if (c1 - c0 >= wallPx * 4) continue
+    const sides = long.filter((b) => b.axis === (sidesVertical ? 'VERTICAL' : 'HORIZONTAL'))
+    const [s0, s1] = sidesVertical ? [out.x0 + half, out.x1 - half] : [out.y0 + half, out.y1 - half]
+    if (s1 - s0 < wallPx * 4) continue
+    const sideA = sides.filter((b) => Math.abs(b.axisPx - s0) <= wallPx)
+    const sideB = sides.filter((b) => Math.abs(b.axisPx - s1) <= wallPx)
+    if (sideA.length === 0 || sideB.length === 0) continue
+    const crossAxis = (c0 + c1) / 2
+    const run = (b: Band): [number, number] => (sidesVertical ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+    const stating = chains
+      .filter((c) => c.axis === (sidesVertical ? 'VERTICAL' : 'HORIZONTAL') && c.segments.some((g) => g.origin === 'READ'))
+      .sort((p, q) => q.ticksPx[q.ticksPx.length - 1] - q.ticksPx[0] - (p.ticksPx[p.ticksPx.length - 1] - p.ticksPx[0]) || (p.id < q.id ? -1 : p.id > q.id ? 1 : 0))
+    for (const chain of stating) {
+      const lo = chain.ticksPx[0]
+      const hi = chain.ticksPx[chain.ticksPx.length - 1]
+      const atLo = Math.abs(lo - c0) <= wallPx || Math.abs(lo - c1) <= wallPx
+      const atHi = Math.abs(hi - c0) <= wallPx || Math.abs(hi - c1) <= wallPx
+      if (atLo === atHi) continue
+      const far = atLo ? hi : lo
+      if (Math.abs(far - crossAxis) < wallPx * 4) continue
+      // only on a side a correction classified as glazed: an open porch or a terrace beside the same walls is not closed
+      const side = sidesVertical ? (far < crossAxis ? 'TOP' : 'BOTTOM') : far < crossAxis ? 'LEFT' : 'RIGHT'
+      if (!glazedSides.includes(side)) continue
+      const [f0, f1] = [Math.min(far, crossAxis), Math.max(far, crossAxis)]
+      const runsAlong = (list: readonly Band[]): boolean =>
+        list.some((b) => {
+          const [r0, r1] = run(b)
+          return Math.min(r1, f1) - Math.max(r0, f0) >= 0.75 * (f1 - f0) && (atLo ? r1 >= far - 1.5 * wallPx : r0 <= far + 1.5 * wallPx)
+        })
+      if (!runsAlong(sideA) || !runsAlong(sideB)) continue
+      out = sidesVertical ? { ...out, y0: round6(Math.min(out.y0, far)), y1: round6(Math.max(out.y1, far)) } : { ...out, x0: round6(Math.min(out.x0, far)), x1: round6(Math.max(out.x1, far)) }
+      break
+    }
+  }
+  return out
+}
+
+/**
  * The box the wall bands occupy, snapped to the structural grid.
  *
  * Taken from the bands' AXES rather than their bounding boxes, because a band
@@ -1712,13 +1772,15 @@ function walledEnvelope(
   linesY: readonly GridLine[],
   wallPx: number,
   registration: CoordinateRegistration,
+  glazedEnds?: { chains: readonly DimensionChain[]; sides: ReadonlyArray<'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT'> },
 ): WalledEnvelope | null {
   // Short bands are not walls. A bush, a step, a kerb and a pier are all drawn
   // in heavy ink and all of them sit outside the building, so an envelope
   // taken from every band there is reaches out to whichever of them is drawn
   // furthest away. A wall runs.
   const long = longBands(bands, wallPx)
-  const axes = axisBox(long, wallPx)
+  const found = axisBox(long, wallPx)
+  const axes = found && glazedEnds && glazedEnds.sides.length > 0 ? glazedEndClosure(long, glazedEnds.chains, found, wallPx, glazedEnds.sides) : found
   if (!axes) return null
   const box = sideWallReach(long, bands, axes, wallPx)
   const vertical = long.filter((b) => b.axis === 'VERTICAL')
@@ -2516,7 +2578,7 @@ function decomposeCore(
   const all = override ? undefined : gridLines(chains, inside, extent, options)
   let linesX = override ? override.linesX : thinLines(all?.linesX ?? [], minCellPx, wallPx)
   let linesY = override ? override.linesY : thinLines(all?.linesY ?? [], minCellPx, wallPx)
-  const envelope = override ? outlineEnvelope(override, inside, wallPx, registration) : walledEnvelope(inside, linesX, linesY, wallPx, registration)
+  const envelope = override ? outlineEnvelope(override, inside, wallPx, registration) : walledEnvelope(inside, linesX, linesY, wallPx, registration, options.closeGlazedEnds && options.closeGlazedEnds.length > 0 ? { chains, sides: options.closeGlazedEnds } : undefined)
   if (envelope === null) {
     unresolved.push({
       what: 'the extent of this building\u2019s walls',

@@ -1,0 +1,161 @@
+{
+ "house": "confirm-dobredomy-gracja-i-mala-ii",
+ "set": "CONFIRM8",
+ "publisher": "dobredomy",
+ "url": "https://www.dobredomy.pl/projekt/gracjaImalaII",
+ "packageContentHash": "8ab439011270534fd4ac1b691da5dd82d5ab9ede324d1bb011f6b392eebfd34e",
+ "category": [
+  "R",
+  "B"
+ ],
+ "primaryCategory": "R",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-gracja-ma-a-ii-rzut-parter-35ca2fb86f",
+  "atticPlan": "asset-gracja-ma-a-ii-rzut-poddasze-473128f22f",
+  "elevationFront": "asset-gracja-ma-a-ii-elewacja-przod-d9a66fad12",
+  "elevationRear": "asset-gracja-ma-a-ii-elewacja-ty-f95eb1d662",
+  "elevationSidePlanRight": "asset-gracja-ma-a-ii-elewacja-boczna-a1f9778cd6",
+  "elevationSidePlanLeft": "asset-gracja-ma-a-ii-elewacja-boczna-005be5e789",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 16.82,
+   "printedAs": "16,82",
+   "unit": "m",
+   "alongSheet": "X",
+   "where": "single overall line above the plan"
+  },
+  "overallDepthM": {
+   "value": 10.12,
+   "printedAs": "10,12",
+   "unit": "m",
+   "alongSheet": "Y",
+   "where": "single overall line left of the plan"
+  },
+  "whatTheOverallIncludes": "width 16,82 = from the outer face of the angled BAY WINDOW on the plan left to the right wall of the attached two-car garage: bay window and garage both INCLUDED. depth 10,12 = rear wall of the living room to the front wall of the kitchen (the main body); the garage is shallower and lies inside it; the curved terraces, entrance steps and the driveway are excluded.",
+  "publishedFootprintM2": 144.5,
+  "usableAreaM2": 127.2,
+  "usableAreaNote": "garage 35.8 m2 listed separately; roof pitch 40 deg; building height 8.6 m; page also states the minimum plot 23.82 x 18.12 m (= 16.82 + 7 and 10.12 + 8)"
+ },
+ "estimated": {
+  "storeys": "ground + attic (storage attic \"strych\" over the garage)",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "the garage wing on the right has a lower gable roof with the ridge in the same direction"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached on the plan RIGHT, two cars, door on the FRONT, front wall slightly behind the house front"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "WALL_DORMER_GABLE",
+   "side": "FRONT",
+   "alongShare": [
+    0.24,
+    0.43
+   ],
+   "gableRoofShare": [
+    0.2,
+    0.47
+   ],
+   "sideCertainty": "page labels the picture \"Elewacja przód\"; it matches the plan bottom (garage door on the right, entrance left of it, bay window at the far left)",
+   "note": "gabled dormer with an arched balcony door and a wrought-iron balcony; its wall rises from the facade and interrupts the eaves; attic plan shows the balcony door of the 15,5 m2 room there"
+  },
+  {
+   "kind": "WALL_DORMER_GABLE",
+   "side": "REAR",
+   "alongShare": [
+    0.57,
+    0.77
+   ],
+   "gableRoofShare": [
+    0.53,
+    0.8
+   ],
+   "sideCertainty": "page labels the picture \"Elewacja tył\"; mirror of the plan top (garage wing on the left of the picture, bay window at the far right)",
+   "note": "matching gabled dormer with balcony on the garden side (balcony door of the 17,5 m2 room)"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "FRONT",
+   "count": 4,
+   "groups": [
+    [
+     0.12,
+     0.17
+    ],
+    [
+     0.51,
+     0.55
+    ],
+    [
+     0.77,
+     0.86
+    ]
+   ],
+   "alongShare": [
+    0.12,
+    0.86
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "two singles on the main roof either side of the dormer, one double on the garage roof"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "REAR",
+   "count": 4,
+   "groups": [
+    [
+     0.15,
+     0.24
+    ],
+    [
+     0.42,
+     0.46
+    ],
+    [
+     0.83,
+     0.88
+    ]
+   ],
+   "alongShare": [
+    0.15,
+    0.88
+   ],
+   "sideCertainty": "as rear elevation",
+   "note": "one double on the garage roof, two singles on the main roof either side of the dormer"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.44,
+    0.66
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "recessed entrance under an arch with one column, covered by the main roof (not a separate roof)"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 2,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "front elevation",
+   "note": "two chimneys near the ridge of the main roof"
+  }
+ ],
+ "negativeTraps": null,
+ "uncertain": [
+  "decorative timber trusses sit in both gable apexes (side elevations): gable-end ornament, not roof elements",
+  "the plan-RIGHT side elevation shows the lower garage gable in front of the main gable; the dormer balconies show in profile on both side elevations",
+  "the elevations are rendered pictures, 700 px wide: shares are coarser than on the other houses"
+ ]
+}

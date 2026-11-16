@@ -1,0 +1,1148 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-lmb68-dbfed493dd",
+  "canonicalUrl": "https://lipinscy.pl/projekt/lille",
+  "requestedUrl": "https://lipinscy.pl/projekt/lille/",
+  "fetchedUrl": "https://lipinscy.pl/projekt/lille/",
+  "pageHash": "331859ebcb2d4a29b8cf0adf98ce4b5e8835b46502b6bb824b0c080d2c6456e1",
+  "project": {
+    "externalId": "LMB68",
+    "name": "Projekt Lille - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-domu-asti-ii-9b49e9949c",
+      "caption": "Gotowy projekt domu Asti II",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-7891-projects-thumb-jpeg-59fc532ca4",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/08/thumb_7891_projects_thumb.jpeg",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 40097,
+          "byteHash": "688531a0f2181d22bf4488d898c636bc507911fdc9851d6b8dc51d33ea0fafb1",
+          "decoded": {
+            "width": 340,
+            "height": 227
+          },
+          "declared": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": true,
+          "aspect": 1.497797
+        }
+      ],
+      "selectedVariantId": "var-thumb-7891-projects-thumb-jpeg-59fc532ca4",
+      "selectionReason": "only variant (340x227, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-009b4eab8a",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb068-fr1-gt-e7ca9232a3",
+          "url": "https://lipinscy.pl/upload/media/projects/6957/lmb068_fr1_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 174245,
+          "byteHash": "9b2491536209b79f9c10c6721f539db8aca811aa3f88c4f4579d617e35b2d389",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb068-fr1-gt-e7ca9232a3",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-1371ecabdc",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-6959-projects-thumb-gallery-small-jpeg-64cd60c41e",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/07/thumb_6959_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 3130,
+          "byteHash": "9ea9d7cbe798c5df0abce655a34cdd40a5d667cb860b8a13fb8186cf5a494c28",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-6959-projects-thumb-gallery-small-jpeg-64cd60c41e",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-7a9ab6d07d",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 118,89 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-r1-pdf-70d64170af",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/32056/lmb068_r1-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 59218,
+          "byteHash": "42cf3640ef13f00e51864e799a5dad472b5f5c8a5b4f3b1db03c536214ba466c",
+          "decoded": {
+            "width": 1098,
+            "height": 1000
+          },
+          "declaredMismatch": false,
+          "aspect": 1.098
+        },
+        {
+          "id": "var-thumb-32056-floorplanpdf-thumb-png-f311535685",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32056_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 112955,
+          "byteHash": "ec068444caa5e6d85dceb34a9e3ce3780dabeef10e787198dd289863fd41e979",
+          "decoded": {
+            "width": 340,
+            "height": 310
+          },
+          "declared": {
+            "width": 1098,
+            "height": 1000
+          },
+          "declaredMismatch": true,
+          "aspect": 1.096774
+        }
+      ],
+      "selectedVariantId": "var-lmb068-r1-pdf-70d64170af",
+      "selectionReason": "largest decoded raster of 2 variants: 1098x1000 over 340x310"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-98cf1d9c0e",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lille wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lille wymiary działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "confidence": 0.62
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-rd-500-pdf-9b405e196c",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26564/lmb068_rd_500-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 9449,
+          "byteHash": "721309eae74a5598425e3f61ad0a1488f2b14c185df144bc9a994800c13208f5",
+          "decoded": {
+            "width": 770,
+            "height": 619
+          },
+          "declaredMismatch": false,
+          "aspect": 1.243942
+        },
+        {
+          "id": "var-thumb-26564-plotpdf-thumb-png-4514c13c4b",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26564_plotpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 53100,
+          "byteHash": "ffc137dc43d1e5e35618c47ccab7338d0051900e22d9b1b2a4b1de208ae69878",
+          "decoded": {
+            "width": 340,
+            "height": 273
+          },
+          "declared": {
+            "width": 770,
+            "height": 619
+          },
+          "declaredMismatch": true,
+          "aspect": 1.245421
+        }
+      ],
+      "selectedVariantId": "var-lmb068-rd-500-pdf-9b405e196c",
+      "selectionReason": "largest decoded raster of 2 variants: 770x619 over 340x273"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-a765d5eb04",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmb068-og1-gt-198c0dc910",
+          "url": "https://lipinscy.pl/upload/media/projects/6959/lmb068_og1_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 188800,
+          "byteHash": "892166fd75dbed46bd9ea59e8f761f7be7fae9b76306e13fc697634a1a025088",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmb068-og1-gt-198c0dc910",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-bda2e09209",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lille przekrój\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-px-pdf-e8da08ec36",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/24806/lmb068_px-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 7357,
+          "byteHash": "d59812789d7bc3650fc0330a48b76472e1acb5f0a02a1cf06fff60e65db20262",
+          "decoded": {
+            "width": 770,
+            "height": 353
+          },
+          "declaredMismatch": false,
+          "aspect": 2.181303
+        },
+        {
+          "id": "var-thumb-24806-crossviewpdf-thumb-png-b80e1b10c0",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24806_crossviewpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 31017,
+          "byteHash": "c5d5f96c190d730f6a52a639d1ba2de6b686f4cce773d244cb2e193e8dfee7f4",
+          "decoded": {
+            "width": 340,
+            "height": 156
+          },
+          "declared": {
+            "width": 770,
+            "height": 353
+          },
+          "declaredMismatch": true,
+          "aspect": 2.179487
+        }
+      ],
+      "selectedVariantId": "var-lmb068-px-pdf-e8da08ec36",
+      "selectionReason": "largest decoded raster of 2 variants: 770x353 over 340x156"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-c5c1ad83e2",
+      "caption": "Gotowy projekt domu Lille",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-6957-projects-thumb-gallery-small-jpeg-de1db59086",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/07/thumb_6957_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 3086,
+          "byteHash": "d4d6de1073c56b6412e30a738d32f9401cad36dafd2b3d075e32dfce9bb597c6",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-6957-projects-thumb-gallery-small-jpeg-de1db59086",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-elewacja-lewa-a0d6be6f89",
+      "caption": "Gotowy projekt domu Lille elewacja lewa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18825 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Lille elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-18825-facades-thumb-gallery-small-jpeg-18a44bf406",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18825_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 2070,
+          "byteHash": "32c6c161ff8afbe59c74fe418f9a44dfbb96de6d14078c5fc6bfcba4db6907c5",
+          "decoded": {
+            "width": 120,
+            "height": 52
+          },
+          "declaredMismatch": false,
+          "aspect": 2.307692
+        }
+      ],
+      "selectedVariantId": "var-thumb-18825-facades-thumb-gallery-small-jpeg-18a44bf406",
+      "selectionReason": "only variant (120x52, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-elewacja-prawa-820d160b6b",
+      "caption": "Gotowy projekt domu Lille elewacja prawa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20614 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Lille elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-20614-facades-thumb-gallery-small-jpeg-82d1326975",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20614_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 2172,
+          "byteHash": "15400d20b1da6c1016f6f5967f0189dcaf975368b846674bb54f26d29c48b484",
+          "decoded": {
+            "width": 120,
+            "height": 50
+          },
+          "declaredMismatch": false,
+          "aspect": 2.4
+        }
+      ],
+      "selectedVariantId": "var-thumb-20614-facades-thumb-gallery-small-jpeg-82d1326975",
+      "selectionReason": "only variant (120x50, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-elewacja-przod-82a0427561",
+      "caption": "Gotowy projekt domu Lille elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 17930 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Lille elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-17930-facades-thumb-gallery-small-jpeg-2f909d6f38",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17930_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 2101,
+          "byteHash": "411d4968f623f1e4404549d1e675c468dea2c64d3be3b6334e6cb2bc84b31322",
+          "decoded": {
+            "width": 120,
+            "height": 44
+          },
+          "declaredMismatch": false,
+          "aspect": 2.727273
+        }
+      ],
+      "selectedVariantId": "var-thumb-17930-facades-thumb-gallery-small-jpeg-2f909d6f38",
+      "selectionReason": "only variant (120x44, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-elewacja-ty-635819f048",
+      "caption": "Gotowy projekt domu Lille elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19719 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Lille elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-19719-facades-thumb-gallery-small-jpeg-a68d20a444",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19719_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 2104,
+          "byteHash": "5179910593e8d4f056e055e0b3fe9d23a3434605fb441910f9d1c493ffc7d1fd",
+          "decoded": {
+            "width": 120,
+            "height": 44
+          },
+          "declaredMismatch": false,
+          "aspect": 2.727273
+        }
+      ],
+      "selectedVariantId": "var-thumb-19719-facades-thumb-gallery-small-jpeg-a68d20a444",
+      "selectionReason": "only variant (120x44, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-przekroj-7b0c7f91bd",
+      "caption": "Gotowy projekt domu Lille przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lille przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24806-crossviewpdf-thumb-gallery-big-v2-pn-800c444a30",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24806_crossviewpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 992803,
+          "byteHash": "19994d248e7431665d65356dc19dec70ab722b4475c4859397b64ef3511472c3",
+          "decoded": {
+            "width": 735,
+            "height": 337
+          },
+          "declaredMismatch": false,
+          "aspect": 2.181009
+        }
+      ],
+      "selectedVariantId": "var-thumb-24806-crossviewpdf-thumb-gallery-big-v2-pn-800c444a30",
+      "selectionReason": "only variant (735x337, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-przekroj-b469e3acb1",
+      "caption": "Gotowy projekt domu Lille przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lille przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24806-crossviewpdf-thumb-gallery-small-png-6bba30c80f",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24806_crossviewpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 4107,
+          "byteHash": "d79d8cfa80e0b89fdc493c1f846f61b98b43e295ded08106553b68c637e3e030",
+          "decoded": {
+            "width": 120,
+            "height": 55
+          },
+          "declaredMismatch": false,
+          "aspect": 2.181818
+        }
+      ],
+      "selectedVariantId": "var-thumb-24806-crossviewpdf-thumb-gallery-small-png-6bba30c80f",
+      "selectionReason": "only variant (120x55, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-rzut-parter-43a8279709",
+      "caption": "Gotowy projekt domu Lille rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32056-floorplanpdf-thumb-gallery-small-png-94b8fc0800",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32056_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 16194,
+          "byteHash": "98690a4691401c26cd076872c0ec79dea4fc2c976c6ff6874c88a8e209fd4bf1",
+          "decoded": {
+            "width": 120,
+            "height": 109
+          },
+          "declaredMismatch": false,
+          "aspect": 1.100917
+        }
+      ],
+      "selectedVariantId": "var-thumb-32056-floorplanpdf-thumb-gallery-small-png-94b8fc0800",
+      "selectionReason": "only variant (120x109, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-rzut-parter-f78e8e8f39",
+      "caption": "Gotowy projekt domu Lille rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lille rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32056-floorplanpdf-thumb-gallery-big-v2-pn-eb28cb9e90",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32056_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 1976414,
+          "byteHash": "5b4f96090827fd26efae0b428bab1483fd7bebf204b0c1fe4aad433835b951b0",
+          "decoded": {
+            "width": 736,
+            "height": 670
+          },
+          "declaredMismatch": false,
+          "aspect": 1.098507
+        }
+      ],
+      "selectedVariantId": "var-thumb-32056-floorplanpdf-thumb-gallery-big-v2-pn-eb28cb9e90",
+      "selectionReason": "only variant (736x670, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-wymiary-dzia-ki-266698e5df",
+      "caption": "Gotowy projekt domu Lille wymiary działki ",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lille wymiary działki \")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lille wymiary działki \")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26564-plotpdf-thumb-gallery-small-png-e470c4498d",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26564_plotpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 7161,
+          "byteHash": "e0a6146ec46ac8344734fa0282f7c70c45ba9ce9515157fad2bc8ac3970f999c",
+          "decoded": {
+            "width": 119,
+            "height": 96
+          },
+          "declaredMismatch": false,
+          "aspect": 1.239583
+        }
+      ],
+      "selectedVariantId": "var-thumb-26564-plotpdf-thumb-gallery-small-png-e470c4498d",
+      "selectionReason": "only variant (119x96, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-lille-wymiary-dzia-ki-39f159405a",
+      "caption": "Gotowy projekt domu Lille wymiary działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lille wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lille wymiary działki\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26564-plotpdf-thumb-gallery-big-v2-png-39eb0e7b00",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26564_plotpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/png",
+          "byteLength": 1746333,
+          "byteHash": "ff4876eef3e6bf48a0c53cb45458082c0613e9e9894e3e25c01d79575adc3072",
+          "decoded": {
+            "width": 736,
+            "height": 592
+          },
+          "declaredMismatch": false,
+          "aspect": 1.243243
+        }
+      ],
+      "selectedVariantId": "var-thumb-26564-plotpdf-thumb-gallery-big-v2-png-39eb0e7b00",
+      "selectionReason": "only variant (736x592, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-lille-1b24af3452",
+      "caption": "Projekt domu Lille",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Lille elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-e4-gt-dc2bb715a2",
+          "url": "https://lipinscy.pl/upload/media/facades/20614/lmb068_e4_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 33154,
+          "byteHash": "4030db5dba021860a7f1db89e2b1c7f2167bca6b579029b49f42fa49d3d6963b",
+          "decoded": {
+            "width": 963,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 2.4075
+        },
+        {
+          "id": "var-thumb-20614-admin-jpeg-c300942dfc",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20614_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 6774,
+          "byteHash": "975346a5348201f6ed29f056a45822acf7a29a4d63ec8d40abe4d970b2761fa3",
+          "decoded": {
+            "width": 200,
+            "height": 83
+          },
+          "declared": {
+            "width": 963,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 2.409639
+        }
+      ],
+      "selectedVariantId": "var-lmb068-e4-gt-dc2bb715a2",
+      "selectionReason": "largest decoded raster of 2 variants: 963x400 over 200x83"
+    },
+    {
+      "id": "asset-projekt-domu-lille-6b7c82a393",
+      "caption": "Projekt domu Lille",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Lille elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-e1-gt-ca438f18b0",
+          "url": "https://lipinscy.pl/upload/media/facades/17930/lmb068_e1_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 64148,
+          "byteHash": "24df7a3609f944c569a3f4321a4d9f4471eb65de34be2c52b7d7fc398ef970df",
+          "decoded": {
+            "width": 1087,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 2.7175
+        },
+        {
+          "id": "var-thumb-17930-admin-jpeg-1e54d943c9",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17930_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 7770,
+          "byteHash": "ef8fbf6731446f5e50f9191922afe10351d8056ccb5ef76dae5ea78e3fc350f9",
+          "decoded": {
+            "width": 200,
+            "height": 74
+          },
+          "declared": {
+            "width": 1087,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 2.702703
+        }
+      ],
+      "selectedVariantId": "var-lmb068-e1-gt-ca438f18b0",
+      "selectionReason": "largest decoded raster of 2 variants: 1087x400 over 200x74"
+    },
+    {
+      "id": "asset-projekt-domu-lille-7715cee78f",
+      "caption": "Projekt domu Lille",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Lille elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-e3-gt-ceb8b78cdd",
+          "url": "https://lipinscy.pl/upload/media/facades/19719/lmb068_e3_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 61421,
+          "byteHash": "ed6bb34717e6a14d21da1daa453ea8272f63964ebbc0c9a1e479fe27ed82893d",
+          "decoded": {
+            "width": 1087,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 2.7175
+        },
+        {
+          "id": "var-thumb-19719-admin-jpeg-d17ae15db7",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19719_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 7792,
+          "byteHash": "41af0a24754236ff8708c386712d0e2997ed72580e407ff10c7d0c7451b21c56",
+          "decoded": {
+            "width": 200,
+            "height": 74
+          },
+          "declared": {
+            "width": 1087,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 2.702703
+        }
+      ],
+      "selectedVariantId": "var-lmb068-e3-gt-ceb8b78cdd",
+      "selectionReason": "largest decoded raster of 2 variants: 1087x400 over 200x74"
+    },
+    {
+      "id": "asset-projekt-domu-lille-b9372c00d9",
+      "caption": "Projekt domu Lille",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lille elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Lille elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmb068-e2-gt-9257063410",
+          "url": "https://lipinscy.pl/upload/media/facades/18825/lmb068_e2_gt",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 29768,
+          "byteHash": "ed911e5e3bc99e9f547c6b873bd1f72bf518674f9c402d28fcc453cf925bb164",
+          "decoded": {
+            "width": 932,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 2.33
+        },
+        {
+          "id": "var-thumb-18825-admin-jpeg-63fd0418cf",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18825_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lille",
+          "mediaType": "image/jpeg",
+          "byteLength": 6252,
+          "byteHash": "fafb2ff3f73c5b4c2c54b92acc05f98797222874ed194d4a87636026a9cb3632",
+          "decoded": {
+            "width": 200,
+            "height": 86
+          },
+          "declared": {
+            "width": 932,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 2.325581
+        }
+      ],
+      "selectedVariantId": "var-lmb068-e2-gt-9257063410",
+      "selectionReason": "largest decoded raster of 2 variants: 932x400 over 200x86"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 148.38,
+      "unit": "m2",
+      "raw": "148,38m²"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "value": 118.89,
+      "unit": "m2",
+      "raw": "118,89m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 221.2,
+      "unit": "m2",
+      "raw": "221,20m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 28,
+      "unit": "deg",
+      "raw": "28°"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 96.13,
+      "unit": "m2",
+      "raw": "96,13m²"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Wygodny dom parterowy, przeznaczony dla trzy, czteroosobowej rodziny. Zadaszone wejście prowadzi do wiatrołapu, gdzie jest miejsce na szafę, która pomieści wierzchnie okrycia. Duży salon z kominkiem i obszerna kuchnia stanowią część wspólną dla domowników. Jest tu także wc. Trzy ustawne sypialnie i duża łazienka to strefa prywatna. Z domu można przejść do garażu, za którym zlokalizowano kotłownię z niezależnym wyjściem na zewnątrz. Ozdobą domu jest duży, zadaszony taras."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "28°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Tradycyjny, wygodny dom parterowy, przekryty dwuspadowym dachem: pokój dzienny z kominkiem, wydzielona kuchnia z jadalnią, trzy sypialnie, dwie łazienki, przejście do garażu z pomieszczeniem gospodarczym."
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/lille/Wygodny dom parterowy, przeznaczony dla trzy, czteroosobowej rodziny. Zadaszone wejście prowadzi do wiatrołapu, gdzie jest miejsce na szafę, która pomieści wierzchnie okrycia. Duży salon z kominkiem i obszerna kuchnia stanowią część wspólną dla domowników. Jest tu także wc. Trzy ustawne sypialnie i duża łazienka to strefa prywatna. Z domu można przejść do garażu, za którym zlokalizowano kotłownię z niezależnym wyjściem na zewnątrz. Ozdobą domu jest duży, zadaszony taras."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/07/fc31da036b0a95f36d6647e5002cf0bce10ce011.jpeg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/6957/lmb068_fr1_gt: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "6d745b920f6675dd94d47f106ce35b0ce5054a7517c0c482bd5561d3c127d315"
+}

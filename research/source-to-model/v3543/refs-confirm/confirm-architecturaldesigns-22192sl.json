@@ -1,0 +1,163 @@
+{
+ "house": "confirm-architecturaldesigns-22192sl",
+ "set": "CONFIRM8",
+ "publisher": "architecturaldesigns",
+ "url": "https://www.architecturaldesigns.com/house-plans/traditional-cape-style-cottage-with-loft-above-garage-1864-sq-ft-22192sl",
+ "packageContentHash": "7bf16f92de5bea7712e82364b6eaef5b9378cb24ecfa1b5b33b7762111b3a684",
+ "category": [
+  "B",
+  "R"
+ ],
+ "primaryCategory": "B",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-plan-22192sl-traditional-cape-style-cottage-with-438da69efa",
+  "upperPlan": "asset-plan-22192sl-traditional-cape-style-cottage-with-6814b48fa5",
+  "elevationRear": "asset-22192sl-rear-elevation-1742486164-jpg-62d6673911",
+  "elevationLeft": "asset-22192sl-left-elevation-1742486164-jpg-ffe44151be",
+  "elevationRight": "asset-22192sl-right-elevation-1742486165-jpg-09fd98d54f",
+  "frontRenderOnly": "asset-22192sl-render-1742486164-jpg-2356ee6234",
+  "publishedText": "package.publishedFacts (Width / Depth in the page specification)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 19.9136,
+   "printedAs": "65'-4\"",
+   "unit": "ft-in",
+   "alongSheet": "X",
+   "where": "overall dimension line above the plan"
+  },
+  "overallDepthM": {
+   "value": 15.1384,
+   "printedAs": "49'-8\"",
+   "unit": "ft-in",
+   "alongSheet": "Y",
+   "where": "overall dimension line left of the plan"
+  },
+  "whatTheOverallIncludes": "width 65'-4\" = from the left wall of the attached garage to the right wall of the master bath/closet wing (garage INCLUDED). depth 49'-8\" = from the rear wall of the garage (top of the sheet) to the FRONT EDGE of the open front covered porch (bottom of the sheet): the overall depth INCLUDES the 7'-4\" deep open porch on posts, and the garage, which stands further back than the house. The walls-only depth of the main body is much smaller.",
+  "pageStatedWidth": {
+   "value": 19.914,
+   "printedAs": "65' 4\"",
+   "where": "page specification text; agrees with the drawing"
+  },
+  "pageStatedDepth": {
+   "value": 15.138,
+   "printedAs": "49' 8\"",
+   "where": "page specification text; agrees with the drawing"
+  },
+  "publishedFootprintM2": null,
+  "usableAreaM2": null,
+  "usableAreaNote": "page text: 1,864 sq ft heated, 616 sq ft two-car garage"
+ },
+ "estimated": {
+  "storeys": "ground + upper level inside the roof (1.5-storey Cape) + loft over the garage; basement foundation",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "side-gabled main body; the garage has its own gable roof with the ridge front-to-back; a small side gable covers the master bath wing on the plan right"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached at the plan LEFT-REAR through a laundry link, door on the FRONT, loft above"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "SHED_DORMER",
+   "side": "REAR",
+   "alongShare": [
+    0.05,
+    0.51
+   ],
+   "sideCertainty": "publisher labels the drawing REAR ELEVATION; it is the mirror of the plan top (garage gable on the right of the drawing, main body on the left)",
+   "note": "full-length shed dormer on the rear slope of the main roof with three window groups (Br 2, bath, Br 3 in the upper plan); its wall stands on the rear wall line (wall-flush shed dormer)"
+  },
+  {
+   "kind": "GABLE_DORMER",
+   "side": "FRONT",
+   "alongShare": [
+    0.55,
+    0.65
+   ],
+   "sideCertainty": "NO front elevation drawing is published; read from the near-frontal perspective render and from the two alcoves in the upper plan; a dormer profile also shows on the front slope in the left elevation",
+   "note": "left one of two small gabled dormers on the front slope above the porch (render evidence, not an orthographic drawing)"
+  },
+  {
+   "kind": "GABLE_DORMER",
+   "side": "FRONT",
+   "alongShare": [
+    0.79,
+    0.88
+   ],
+   "sideCertainty": "as above (render + upper plan)",
+   "note": "right one of the two front gabled dormers"
+  },
+  {
+   "kind": "CROSS_GABLE_WING",
+   "side": "FRONT",
+   "alongShare": [
+    0.0,
+    0.34
+   ],
+   "sideCertainty": "plan + render",
+   "note": "the garage: a body in the plan with a front-facing gable and a gable window; NOT a dormer"
+  },
+  {
+   "kind": "CROSS_GABLE_WING",
+   "side": "REAR",
+   "alongShare": [
+    0.66,
+    1.0
+   ],
+   "sideCertainty": "rear elevation",
+   "note": "the same garage, rear gable face with a loft window"
+  },
+  {
+   "kind": "CROSS_GABLE_WING",
+   "side": "RIGHT",
+   "alongShare": [
+    0.35,
+    0.78
+   ],
+   "sideCertainty": "publisher labels the drawing RIGHT ELEVATION; front porch post on the left of the drawing",
+   "note": "small side gable over the master bath/closet wing that projects on the plan right; a body in the plan"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.475,
+    0.96
+   ],
+   "sideCertainty": "plan (Covered Porch 32-0x7-4, four posts) + render + both side elevations",
+   "note": "open front porch on posts across the main body, roofed by the main front slope"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "REAR",
+   "alongShare": [
+    0.43,
+    0.66
+   ],
+   "sideCertainty": "plan (Covered Porch 15-0x6-0) + rear elevation",
+   "note": "open rear porch on posts between the kitchen and the garage, under a low lean-to roof"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 1,
+   "side": "LEFT",
+   "alongShare": null,
+   "sideCertainty": "left and rear elevations, render",
+   "note": "one stone chimney on the outside of the main body's left gable wall (family-room fireplace)"
+  }
+ ],
+ "negativeTraps": null,
+ "uncertain": [
+  "the front has no orthographic elevation: the two front dormers and their positions come from a perspective render and the upper plan",
+  "the plan also labels a small recessed \"Cov Porch 9-0x4-4\" between the garage and the family room on the front side",
+  "the rear elevation shows a stepped lean-to at its far left (master bath wing): read as part of the side wing, not as a dormer"
+ ]
+}

@@ -60,6 +60,9 @@ describe('v3.54.3 roof feature: a dormer the model\'s own rule lays out, from sh
   it('reads shares left to right AS THE SIDE IS SEEN: the rear runs against x, the right along z', () => {
     expect(sideExtent(house(), 'FRONT')).toEqual({ from: 0, to: 12 })
     expect(sideExtent(house(), 'REAR')).toEqual({ from: 12, to: 0 })
+    // the wall under the roof's eaves is the host body's: a bay or a garage beside it does not stretch the side
+    const withBay = house({ masses: [...house().masses, { id: 'bay', role: 'ATTACHED', x0: -0.9, z0: 2, x1: 0, z1: 5, storeys: [0], featureId: 'body-bay', sourceMassId: 'm1' }] })
+    expect(sideExtent(withBay, 'FRONT', 'main')).toEqual({ from: 0, to: 12 })
     const r = applyRoofFeatures(house(), [dormer({ id: 'dormer-rear-c20', side: 'REAR', fromShare: 0.1, toShare: 0.3 })])
     const d = r.building.dormers?.[0]
     expect(d?.planeKey).toBe('HIGH')

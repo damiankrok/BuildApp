@@ -1,0 +1,103 @@
+{
+ "house": "confirm-lipinscy-lille",
+ "set": "CONFIRM8",
+ "publisher": "lipinscy",
+ "url": "https://lipinscy.pl/projekt/lille",
+ "packageContentHash": "6d745b920f6675dd94d47f106ce35b0ce5054a7517c0c482bd5561d3c127d315",
+ "category": [
+  "B",
+  "N2"
+ ],
+ "primaryCategory": "B",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-gotowy-projekt-domu-lille-7a9ab6d07d",
+  "elevationFront": "asset-projekt-domu-lille-6b7c82a393",
+  "elevationRear": "asset-projekt-domu-lille-7715cee78f",
+  "elevationLeft": "asset-projekt-domu-lille-b9372c00d9",
+  "elevationRight": "asset-projekt-domu-lille-1b24af3452",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 16.45,
+   "printedAs": "1645",
+   "unit": "cm",
+   "alongSheet": "X",
+   "where": "outer line above the plan; inner chain 1305 + 340"
+  },
+  "overallDepthM": {
+   "value": 11.45,
+   "printedAs": "1145",
+   "unit": "cm",
+   "alongSheet": "Y",
+   "where": "outer line right of the plan; inner chain 105 + 100 + 835 + 105"
+  },
+  "whatTheOverallIncludes": "width 1645 = 1305 (the main body) + 340 (the attached garage/boiler wing on the plan right): garage INCLUDED; the small side stoop 1.14 is outside. depth 1145 = 105 (rear open porch, to its posts) + 100 (the main body stands 100 further back than the garage wing) + 835 (the garage wing, rear wall to the common front wall) + 105 (front open entrance porch, to its posts): the overall depth INCLUDES BOTH OPEN PORCHES on posts; the walls-only depth is 935 for the main body and 835 for the garage wing. Read from where the dimension ticks fall against the walls and the post rows.",
+  "publishedFootprintM2": 148.38,
+  "usableAreaM2": 96.13,
+  "usableAreaNote": "net area 118.89 m2; roof pitch 28 deg; walls-only rectangle 13.05 x 9.35 + 3.40 x 8.35 = 150.4 m2, about 1.3 % above the published footprint"
+ },
+ "estimated": {
+  "storeys": "ground only (no attic rooms, no roof windows)",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "the garage wing continues the same roof with a slightly lower ridge (step visible on the front and right elevations)"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached on the plan RIGHT, one car, door on the FRONT, rear wall 100 cm short of the house rear wall"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.22,
+    0.43
+   ],
+   "gableRoofShare": [
+    0.18,
+    0.47
+   ],
+   "sideCertainty": "page labels the picture \"elewacja przód\"; matches the plan bottom (entrance porch 1.13 left of centre, garage door at the far right)",
+   "note": "open entrance porch on two stone-clad posts under its own small gable roof that runs into the main slope; arched soffit, no walls, no window in the gable"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "REAR",
+   "alongShare": [
+    0.57,
+    0.82
+   ],
+   "gableRoofShare": [
+    0.53,
+    0.86
+   ],
+   "sideCertainty": "page labels the picture \"elewacja tył\"; mirror of the plan top (terrace 1.15 with two posts on the plan left shows on the right of the picture)",
+   "note": "open terrace porch on two posts under a matching gable roof"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 2,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "all four elevations",
+   "note": "two chimneys near the ridge"
+  }
+ ],
+ "negativeTraps": [
+  "NO dormer and NO roof window: single-storey house",
+  "the two porch gables stand on the eaves sides exactly where a wall dormer or a cross wing would: they are open roofs on posts over a porch, with nothing behind the gable face",
+  "the lower garage roof makes a second ridge line on the front elevation"
+ ],
+ "uncertain": [
+  "the assignment of the two 105 links to the porches (rather than to steps or eaves) is by alignment with the post rows on the plan",
+  "the dashed outline around the plan is the roof edge, not a wall"
+ ]
+}

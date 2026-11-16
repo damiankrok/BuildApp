@@ -116,6 +116,11 @@ export type AnalysisOptions = {
    */
   roofFeatures?: readonly RoofFeatureCorrection[]
   /**
+   * v3.54.3: sides of a plan sheet a validated correction classified as closed by a glazed wall (CLASSIFY_BOUNDARY;
+   * `@buildapp/reconstruction` `glazedEndClosure`). Absent — the default — the run is what it was.
+   */
+  glazedEnds?: ReadonlyArray<{ frameId: string; side: 'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT' }>
+  /**
    * v3.54.3: the metric evidence of an earlier run of THIS package and graph with THESE consulted readings, to be used
    * instead of reading the printed dimensions again — for a candidate that differs from that run only after the metric
    * layer (a geometry correction). It must name this package (`sourcePackageHash`), or the run refuses to start: a
@@ -576,6 +581,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
       ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}),
       ...(options.roofFeatures && options.roofFeatures.length > 0 ? { roofFeatures: options.roofFeatures } : {}),
+      ...(options.glazedEnds && options.glazedEnds.length > 0 ? { glazedEnds: options.glazedEnds } : {}),
     })
     throwIfAborted(signal)
     const model = reconstruction.model

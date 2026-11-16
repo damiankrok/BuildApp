@@ -1,0 +1,882 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0",
+  "id": "src-www-dobredomy-pl-fbd6f349eb",
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/delta",
+  "requestedUrl": "https://www.dobredomy.pl/projekt/delta/",
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/delta/",
+  "pageHash": "e4631edd2b1191c70bff8ccc72f247a8f035920fdefa80719325ebc2a36d79f1",
+  "project": {
+    "name": "Projekt domu Delta",
+    "publisher": "dobredomy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-delta-elewacja-boczna-0af2fb9cad",
+      "caption": "Delta · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Delta · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Delta · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-e3-jpg-9ca311bead",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_e3.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 25837,
+          "byteHash": "39c9992252a98a635f9cdb0ea201c65a66363c03d3699fa5ad541afbaa226c5f",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-delta-e3-jpg-9ca311bead",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-elewacja-boczna-40b8f1712c",
+      "caption": "Delta · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Delta · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Delta · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-e2-jpg-29caf84477",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_e2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 26305,
+          "byteHash": "09a3224d4d583b92c55c9505ec244344f05d7138427093783a3512b3a8aa9a1d",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-delta-e2-jpg-29caf84477",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-elewacja-przod-195b01fd1c",
+      "caption": "Delta · Elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Delta · Elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Delta · Elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-e1-jpg-dcc62d1809",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_e1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 38263,
+          "byteHash": "688a8b8fa241a7e63b33508dc0016615695eb08f9241381953ea6e4428789c25",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-delta-e1-jpg-dcc62d1809",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-elewacja-ty-feb02f78ab",
+      "caption": "Delta · Elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Delta · Elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Delta · Elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-e4-jpg-bc514704b5",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_e4.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 38742,
+          "byteHash": "23a7fd6a729a9d71b5e742b653ac9dec3bf8e94f586de317703e5ae1b83f629d",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-delta-e4-jpg-bc514704b5",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-przekroje-441bf5d5d6",
+      "caption": "Delta · Przekroje",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Delta · Przekroje\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-p1-jpg-3c6df6bc4b",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_p1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 85412,
+          "byteHash": "3d0ed02e5d5be38e954a039ac370e1a4187b3aebb0619cf7f306986de8339cf6",
+          "decoded": {
+            "width": 1786,
+            "height": 802
+          },
+          "declaredMismatch": false,
+          "aspect": 2.226933
+        }
+      ],
+      "selectedVariantId": "var-delta-p1-jpg-3c6df6bc4b",
+      "selectionReason": "only variant (1786x802, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-rzut-dzia-ki-f637a57e1e",
+      "caption": "Delta · Rzut działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Delta · Rzut działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-s-jpg-05d9612a8c",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_s.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 58176,
+          "byteHash": "f24c1378b1581766d1c320c442a09aa1cf4c25dcd14bf6df3b6c5b7eaa1d3c0c",
+          "decoded": {
+            "width": 802,
+            "height": 884
+          },
+          "declaredMismatch": false,
+          "aspect": 0.90724
+        }
+      ],
+      "selectedVariantId": "var-delta-s-jpg-05d9612a8c",
+      "selectionReason": "only variant (802x884, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-rzut-parter-d3660cee17",
+      "caption": "Delta · Rzut parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Delta · Rzut parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Delta · Rzut parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-r1-jpg-01df6e47cf",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_r1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 212833,
+          "byteHash": "e37a361a36bc88df2eadcf518f89e824785a127f29c30e3362b8c0d36af045e1",
+          "decoded": {
+            "width": 1226,
+            "height": 2378
+          },
+          "declaredMismatch": false,
+          "aspect": 0.515559
+        }
+      ],
+      "selectedVariantId": "var-delta-r1-jpg-01df6e47cf",
+      "selectionReason": "only variant (1226x2378, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-rzut-poddasze-635e97e4be",
+      "caption": "Delta · Rzut poddasze",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Delta · Rzut poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Delta · Rzut poddasze\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-r2-jpg-f8488f84da",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_r2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 212913,
+          "byteHash": "3789ea4286aa91001d906063ba6bb32c1ba93d1b6142be938efec4ff9f6807f9",
+          "decoded": {
+            "width": 1226,
+            "height": 2378
+          },
+          "declaredMismatch": false,
+          "aspect": 0.515559
+        }
+      ],
+      "selectedVariantId": "var-delta-r2-jpg-f8488f84da",
+      "selectionReason": "only variant (1226x2378, decoded from bytes)"
+    },
+    {
+      "id": "asset-delta-w1-jpg-4e086a8d52",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-w1-jpg-14f1cf070a",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/delta_w1.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 686386,
+          "byteHash": "fd3cfb1ff6676e0740c0a94ef0299e293c039a33ab56499835127159e195aec9",
+          "decoded": {
+            "width": 1865,
+            "height": 1200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.554167
+        }
+      ],
+      "selectedVariantId": "var-delta-w1-jpg-14f1cf070a",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)"
+    },
+    {
+      "id": "asset-newsletter-115423e4f1",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/png",
+          "byteLength": 61287,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/webp",
+          "byteLength": 23380,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-2122c17c71",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-jpg-b3083b8576",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 66219,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        },
+        {
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/webp",
+          "byteLength": 14602,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        }
+      ],
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-598a2abb68",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/png",
+          "byteLength": 55569,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/webp",
+          "byteLength": 18930,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-prezentacja-e019163552",
+      "caption": "Prezentacja",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 71506,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "decoded": {
+            "width": 417,
+            "height": 565
+          },
+          "declaredMismatch": false,
+          "aspect": 0.738053
+        }
+      ],
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-e25becc350",
+      "caption": "Projekt domu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/png",
+          "byteLength": 160714,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "decoded": {
+            "width": 315,
+            "height": 203
+          },
+          "declaredMismatch": false,
+          "aspect": 1.551724
+        }
+      ],
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-357318e66f",
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Delta",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Del\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-w1-jpg-p-prslide-e542eb0271",
+          "url": "https://www.dobredomy.pl/img/projekty/delta/delta_w1.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 162678,
+          "byteHash": "f2007c999b2c02275eeb9d233bd38edd19c25da28523c72f0fcdd962514683aa",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-delta-w1-jpg-p-prslide-e542eb0271",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-548fa76d5b",
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Delta",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Del\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-delta-w2-jpg-p-prslide-0387276010",
+          "url": "https://www.dobredomy.pl/img/projekty/delta/delta_w2.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 150827,
+          "byteHash": "5dd11ea781c7e5c531ee120a5f1fb4260b1a873fdc4702cb9b9b155f396a2286",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-delta-w2-jpg-p-prslide-0387276010",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-wycena-fb105e7612",
+      "caption": "Wycena",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/delta",
+          "mediaType": "image/jpeg",
+          "byteLength": 53872,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "value": 2,
+      "unit": "count",
+      "raw": "2"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7.6,
+      "unit": "m",
+      "raw": "7,60 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 141.8,
+      "unit": "m2",
+      "raw": "141,80 m²"
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "value": 20.4,
+      "unit": "m2",
+      "raw": "20,40 m²"
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "value": 21.5,
+      "unit": "m",
+      "raw": "21,50 m"
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "value": 19.7,
+      "unit": "m",
+      "raw": "19,70 m"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "value": 35,
+      "unit": "deg",
+      "raw": "35°"
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "value": 4,
+      "unit": "count",
+      "raw": "4"
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "value": 219.2,
+      "unit": "m2",
+      "raw": "219,20 m²"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 133.2,
+      "unit": "m2",
+      "raw": "133,20 m²"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "value": 503.1,
+      "unit": "none",
+      "raw": "503,10 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "35°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Projekt domu Delta posiada użytkowe poddasze i został zaprojektowany dla 4-6-osobowej rodziny. Projekt Delta to dom dla osób poszukujących prostej formy w architekturze. Na parterze znajduje się pokój dzienny z bezpośrednim wyjściem do ogrodu, przestrzennie połączony z jadalnią i kuchnią, łazienka oraz pokój gościnny/gabinet. Garaż jednostanowiskowy jest dostępny poprzez pomieszczenie gospodarcze. Na poddaszu znajdują się trzy pokoje oraz przestronna łazienka. Centralnie usytuowany kominek pozwala na wykonanie ogrzewania kominkowego."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [],
+  "documents": [
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/Pliki%20do%20pobrania/delta_ch.pdf",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "variant": "UNKNOWN",
+      "caption": "Charakterystyka energetyczna",
+      "status": "NOT_FETCHED",
+      "code": "NOT_A_DRAWING"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/Pliki%20do%20pobrania/delta_pk.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "BASE",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "mediaType": "application/pdf",
+      "byteLength": 79111,
+      "byteHash": "8cbb50c1654896d757c8f6b5a39782a0e007af8de3856b3fc18bbe108f489c96",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/Pliki%20do%20pobrania/delta_pkdwg.dwg",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "variant": "UNKNOWN",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "mediaType": "image/vnd.dwg",
+      "byteLength": 97728,
+      "byteHash": "904ea75af4c2bb8004a737183eba8c542862258f474a2d510be1c3734d3125dd",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/delta/Pliki%20do%20pobrania/delta_pkl.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "MIRRORED",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "mediaType": "application/pdf",
+      "byteLength": 80185,
+      "byteHash": "6eb1b5f507e3c8a4d5e831fb857303e40986e2ec95b4d0bcf8b6042589bb4b28",
+      "status": "FETCHED"
+    }
+  ],
+  "contentHash": "ba3c2bc3ce4f41c49e9fcf82cf9babf76021ba11c4b8a377a04d3acc61ff4aac"
+}

@@ -47,7 +47,7 @@ export type RecogniserSummary = {
 }
 
 import type { SourceInspection } from './sources.js'
-import type { SourceCheckSummary } from './consult/consult-analysis.js'
+import type { ConsultationSummary, SourceCheckSummary } from './consult/consult-analysis.js'
 
 export type LinkAnalysisSummary = {
   schema: 'buildapp.link-analysis-result'
@@ -136,6 +136,8 @@ export type LinkAnalysisSummary = {
    * only on the consultant's path; absent, the model was not checked against its source this way (NOT_CHECKED).
    */
   sourceCheck?: SourceCheckSummary
+  /** v3.54.3: the consultation's decisions, round by round, where the result came through the consultant's path. */
+  consultation?: ConsultationSummary
   /**
    * SOURCE-01: every published picture — the publisher's claim, what its pixels show, what was done with it and why,
    * and each number read off it with its crop, its line, printed or derived, and its use in the model. Read-only.

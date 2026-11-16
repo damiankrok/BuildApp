@@ -1,0 +1,104 @@
+{
+ "house": "confirm-architecturaldesigns-39035st",
+ "set": "CONFIRM8",
+ "publisher": "architecturaldesigns",
+ "url": "https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+ "packageContentHash": "43e26c455db849ab5fe2a5a6d982084da20dc1ce605604121e51ab41b495f36c",
+ "category": [
+  "R"
+ ],
+ "primaryCategory": "R",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-316bd37ffe",
+  "upperPlan": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-61dd0b350a",
+  "elevationFront": "asset-front-elevation-drawing-of-a-two-story-house-pla-4ccde3c5f8",
+  "elevationRear": "asset-rear-elevation-house-plan-drawing-with-a-bay-win-2eb6020abe",
+  "elevationLeft": "asset-left-elevation-drawing-of-a-house-plan-showing-s-bf51d978a1",
+  "elevationRight": "asset-right-elevation-drawing-of-a-two-story-house-pla-4a3541ae5e",
+  "publishedText": "package.publishedFacts (Width / Depth in the page specification)"
+ },
+ "metricCertain": {
+  "overallWidthM": null,
+  "overallDepthM": null,
+  "whatTheOverallIncludes": "NOT PRINTED: the ground-floor plan carries room sizes only (e.g. Garage 20' x 21', Porch 34'-4\" x 6'), no overall dimension line. The page text states Width 55' 0\" (16.764 m) and Depth 38' 0\" (11.582 m) without saying what they include; by the room sizes the width must include the attached garage, and whether the depth includes the 6' front porch is not stated.",
+  "pageStatedWidth": {
+   "value": 16.764,
+   "printedAs": "55' 0\"",
+   "where": "page specification text, not the drawing"
+  },
+  "pageStatedDepth": {
+   "value": 11.582,
+   "printedAs": "38' 0\"",
+   "where": "page specification text, not the drawing"
+  },
+  "publishedFootprintM2": null,
+  "usableAreaM2": null,
+  "usableAreaNote": "page title: 1760 sq ft heated"
+ },
+ "estimated": {
+  "storeys": "ground + upper level inside the roof (1.5-storey Cape); a lower-level/basement plan is also published",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "side-gabled main body; the garage wing has its own gable roof with the ridge front-to-back"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached on the plan LEFT, pushed forward of the house front, door on the FRONT"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "SHED_DORMER",
+   "side": "FRONT",
+   "alongShare": [
+    0.5,
+    0.87
+   ],
+   "shareOfMainBodyWall": [
+    0.19,
+    0.79
+   ],
+   "sideCertainty": "publisher labels the drawing FRONT ELEVATION; it matches the plan bottom (porch across the house, garage on the left)",
+   "note": "one long shed dormer with four windows on the front slope of the main roof, above the porch roof; in the right elevation and the upper plan its wall stands slightly behind the ground-floor facade. This is the feature the house was selected for."
+  },
+  {
+   "kind": "CROSS_GABLE_WING",
+   "side": "FRONT",
+   "alongShare": [
+    0.0,
+    0.38
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "the garage: a body in the plan with a front-facing gable and a small gable window; NOT a dormer"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.38,
+    1.0
+   ],
+   "sideCertainty": "as front elevation; plan labels it Porch 34'-4\" x 6'",
+   "note": "open front porch on four posts with railings; roofed by a lower-pitched continuation of the main front slope"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 0,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "all four elevation drawings",
+   "note": "a fireplace is drawn in the living room but no chimney is drawn on any elevation"
+  }
+ ],
+ "negativeTraps": null,
+ "uncertain": [
+  "overall width/depth are page text only; what they include is not stated",
+  "rear elevation shows a hip-roofed box bay (living-room bump-out) at about [0.20,0.40] of the rear side: a ground-floor bay, not a roof element",
+  "no rear dormer: the rear main slope is plain on the rear elevation"
+ ]
+}

@@ -361,6 +361,12 @@ export type ReconstructionV2Options = {
    */
   roofFeatures?: readonly RoofFeatureCorrection[]
   /**
+   * v3.54.3: sides of a plan sheet a validated correction classified as closed by a glazed wall (CLASSIFY_BOUNDARY).
+   * The plan's envelope may close there where the drawing's own dimension ticks and side walls also say so
+   * (`plan-decomposition.ts` `glazedEndClosure`). Absent or empty: the run is exactly the run without it.
+   */
+  glazedEnds?: ReadonlyArray<{ frameId: string; side: 'TOP' | 'BOTTOM' | 'LEFT' | 'RIGHT' }>
+  /**
    * Told when the solver enters each of its phases, for a caller reporting
    * progress. The solver is synchronous; this is a notification, and nothing
    * it does can reach the result.
@@ -547,7 +553,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     gap({ what: 'the ridge datum of the section', reason: `the highest datum read, ${levels.topRefused.value.toFixed(2)} m, is not the ridge: ${levels.topRefused.why}; the ridge's own label was not read`, status: 'MISSING', observationIds: [], evidenceIds: levels.evidenceIds })
     step({ stage: 'levels', what: 'the highest datum read refused as the ridge', method: 'DIRECT', detail: levels.topRefused.why, inputs: levels.evidenceIds.length, outputs: 0 })
   }
-  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}), ...(options.debug ? { debug: options.debug } : {}) }
+  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}), ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}), ...(options.glazedEnds && options.glazedEnds.length > 0 ? { glazedEnds: options.glazedEnds } : {}), ...(options.debug ? { debug: options.debug } : {}) }
   const incumbent = composeStructuralLayout(structuralOptions)
   let { draft, layout } = incumbent
   let planDiagnostics: PlanDiagnosticsReport = planDiagnosticsOf(draft, graph, metrics, layout)

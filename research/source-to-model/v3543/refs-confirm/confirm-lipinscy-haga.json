@@ -1,0 +1,150 @@
+{
+ "house": "confirm-lipinscy-haga",
+ "set": "CONFIRM8",
+ "publisher": "lipinscy",
+ "url": "https://lipinscy.pl/projekt/haga",
+ "packageContentHash": "83dc5a195297b9ca43c852a073552e723c48a54e9e0f602de1c5d84981e6f1c0",
+ "category": [
+  "N2",
+  "N1",
+  "B"
+ ],
+ "primaryCategory": "N2",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-gotowy-projekt-domu-haga-ccced35a7d",
+  "atticPlanNotRead": "asset-gotowy-projekt-domu-haga-0fe7ce72f0",
+  "elevationFront": "asset-projekt-domu-haga-0bde5b9a26",
+  "elevationRear": "asset-projekt-domu-haga-ec771e2b45",
+  "elevationLeft": "asset-projekt-domu-haga-576b3debcc",
+  "elevationRight": "asset-projekt-domu-haga-917a29ec4b",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": {
+   "value": 13.68,
+   "printedAs": "1368",
+   "unit": "cm",
+   "alongSheet": "X",
+   "where": "single overall line above the plan"
+  },
+  "overallDepthM": {
+   "value": 12.68,
+   "printedAs": "1268",
+   "unit": "cm",
+   "alongSheet": "Y",
+   "where": "outer line right of the plan; inner chain 165 + 938 + 165"
+  },
+  "whatTheOverallIncludes": "width 1368 = outer walls, left to right (the side stoop 1.11 on the right is outside). depth 1268 = 165 (rear open porch 1.12, to its posts) + 938 (the walls, rear to front) + 165 (front open entrance porch 1.10, to its posts): the overall depth INCLUDES BOTH OPEN PORCHES; the walls-only depth is 938.",
+  "publishedFootprintM2": 123.97,
+  "usableAreaM2": 99.81,
+  "usableAreaNote": "net area 99.81 m2; roof pitch 35 deg; the walls-only rectangle 13.68 x 9.38 = 128.3 m2 is about 3.5 % ABOVE the published footprint - unexplained"
+ },
+ "estimated": {
+  "storeys": "ground + attic (the page calls the attic plan \"Strych (przykładowa aranżacja)\": an optional fit-out; it is lit by roof windows and one gable window)",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "plain two-slope roof with a porch gable on each eaves side"
+  },
+  "garage": {
+   "present": false,
+   "where": null
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "FRONT",
+   "alongShare": [
+    0.37,
+    0.63
+   ],
+   "gableRoofShare": [
+    0.33,
+    0.68
+   ],
+   "sideCertainty": "page labels the picture \"elewacja przód\"; matches the plan bottom (entrance porch 1.10 with two posts, slightly left of centre)",
+   "note": "open entrance porch on two stone-clad posts under its own gable roof that runs into the main front slope; the gable face is closed with siding and has NO window"
+  },
+  {
+   "kind": "PORCH_CANOPY_OPEN",
+   "side": "REAR",
+   "alongShare": [
+    0.24,
+    0.5
+   ],
+   "gableRoofShare": [
+    0.2,
+    0.55
+   ],
+   "sideCertainty": "page labels the picture \"elewacja tył\"; mirror of the plan top (porch 1.12 right of centre on the plan shows left of centre on the picture)",
+   "note": "matching open terrace porch on two posts under a gable roof"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "FRONT",
+   "count": 2,
+   "groups": [
+    [
+     0.26,
+     0.32
+    ],
+    [
+     0.7,
+     0.75
+    ]
+   ],
+   "alongShare": [
+    0.26,
+    0.75
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "two single roof windows on the front slope"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "REAR",
+   "count": 3,
+   "groups": [
+    [
+     0.08,
+     0.2
+    ],
+    [
+     0.57,
+     0.63
+    ]
+   ],
+   "alongShare": [
+    0.08,
+    0.63
+   ],
+   "sideCertainty": "as rear elevation",
+   "note": "one double and one single roof window on the rear slope"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 2,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "front and left elevations",
+   "note": "one large stone chimney at the ridge and one smaller on the front slope; several thin vent pipes besides"
+  }
+ ],
+ "negativeTraps": [
+  "NO dormer on any elevation",
+  "the porch gables sit on both eaves sides and look like wall dormers or cross-gable wings in a frontal view: they are open roofs on posts over a porch, no wall, no room and no window behind the gable face, and no body in the ground plan",
+  "roof windows on both slopes (2 front, 3 panes rear) are flat in the slope",
+  "a large stone chimney, a second chimney and vent pipes break the roof silhouette",
+  "the only attic wall window is in the plan-LEFT gable end (gable-end window, not a dormer)"
+ ],
+ "uncertain": [
+  "the published footprint is smaller than the rectangle of the printed wall dimensions",
+  "the attic plan was not read for this reference",
+  "assignment of the 165 links to the porches is by alignment of the dimension ticks with the post rows"
+ ]
+}

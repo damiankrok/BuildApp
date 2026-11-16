@@ -109,14 +109,16 @@ export type GeometryState = {
 
 const digest = (x: unknown): string => createHash('sha256').update(JSON.stringify(x)).digest('hex').slice(0, 16)
 
-type ModelParts = { levels?: unknown[]; slabs?: unknown[]; walls?: Array<{ id: string; kind?: string; start: unknown; end: unknown; thickness: number; height: number; levelId: string }>; openings?: Array<{ id: string; wallId: string }>; rooms?: unknown[]; windows?: unknown[]; doors?: unknown[]; assemblies?: Array<{ id: string; kind?: string }> }
+type ModelParts = { levels?: unknown[]; slabs?: unknown[]; walls?: Array<{ id: string; kind?: string; start: unknown; end: unknown; thickness: number; height: number; baseOffset?: number; levelId: string; topProfile?: unknown }>; openings?: Array<{ id: string; wallId: string }>; rooms?: unknown[]; windows?: unknown[]; doors?: unknown[]; assemblies?: Array<{ id: string; kind?: string }> }
 
 /** The parts of a run's model a roof correction must not move, each as a digest, and the roof features it holds. */
 export function geometryStateOf(run: AnalysisRun, featureIds: readonly string[] = []): GeometryState {
   const m = run.reconstruction.model as unknown as ModelParts
   const own = (id: string): boolean => featureIds.some((f) => id === f || id.startsWith(`${f}-`))
-  // an exterior wall's nominal box; its top profile names roof planes, which a roof correction restates
-  const ext = (m.walls ?? []).filter((w) => w.kind === 'EXTERIOR' && !own(w.id)).map((w) => ({ id: w.id, start: w.start, end: w.end, thickness: w.thickness, height: w.height, levelId: w.levelId }))
+  // An exterior wall's place: its line, thickness, storey and base. Its height is protected where the wall has a top of
+  // its own; a wall whose top FOLLOWS the roof ends where the roof is — its nominal height is only how far it may reach,
+  // and a roof correction restates the roof it names (the same surfaces, as planes), so that number is not the wall's.
+  const ext = (m.walls ?? []).filter((w) => w.kind === 'EXTERIOR' && !own(w.id)).map((w) => ({ id: w.id, start: w.start, end: w.end, thickness: w.thickness, levelId: w.levelId, baseOffset: w.baseOffset ?? 0, ...(w.topProfile === undefined ? { height: w.height } : { top: 'FOLLOWS_ROOF' }) }))
   const openings = (m.openings ?? []).filter((o) => !own(o.id) && !own(o.wallId))
   return {
     modelHash: run.reconstruction.candidate.modelHash,

@@ -1,0 +1,1445 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m86627e14d8189-f2f33de6af",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+  "pageHash": "7610bea2f528deeaf99bf23eb60c610c8b45eec70676858fe9a1577d49b0dfdc",
+  "project": {
+    "externalId": "m86627e14d8189",
+    "name": "Projekt domu Dom w żaglikach (G) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-dodatkowa-wizua-5e7eb158d3",
+      "caption": "gotowy projekt Dom w żaglikach (G) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zaglikach (g) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-1ed45bf80b00cfecc4daeb-a8e819bc62",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/fm/projekt-dom-w-zaglikach-g-1ed45bf80b00cfecc4daebd074d00449__54884.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m86627e14d8189/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 388117,
+          "byteHash": "4b3b0bb92c9fe26f19b61a0dc6a9c08c90c1b1a2b107af994a2b3732a63b0001",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-1ed45bf80b00cfecc4daeb-a8e819bc62",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-boczna-53ea408671",
+      "caption": "gotowy projekt Dom w żaglikach (G) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-537ee7403c0a1f28cca504-be189758fa",
+          "url": "https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-537ee7403c0a1f28cca5048d1ecbeb31__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 550706,
+          "byteHash": "750a38286235d873eb4ecba1f5ec4e71ef4aad903d20de1d4db06dad1f0d26f1",
+          "decoded": {
+            "width": 1280,
+            "height": 528
+          },
+          "declaredMismatch": false,
+          "aspect": 2.424242
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-zaglikach-g-bc558c-4dc6e2b229",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-boczna-projekt-dom-w-zaglikach-g-bc558cf99bfd0ed530c5da9e8efd5238__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 113136,
+          "byteHash": "23acc46e56fb87ae1f463ce6294fbd0a680e65108b4af86b880c6460f34c9e9b",
+          "decoded": {
+            "width": 550,
+            "height": 229
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.401747
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-537ee7403c0a1f28cca504-be189758fa",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x528 over 550x229"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-boczna-5a01e1730a",
+      "caption": "gotowy projekt Dom w żaglikach (G) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zaglikach (g) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-7d3ef01af98f9f58370049-c8c4115eaa",
+          "url": "https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-7d3ef01af98f9f583700493961b6350b__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 539168,
+          "byteHash": "413e9b543d6c7a0645d253708632d31f1a86679ea598cf3204f2f060822dede7",
+          "decoded": {
+            "width": 1280,
+            "height": 529
+          },
+          "declaredMismatch": false,
+          "aspect": 2.41966
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-zaglikach-g-ed4d5a-36ba46516f",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-boczna-projekt-dom-w-zaglikach-g-ed4d5a87703bb823de2eec4920fffd3e__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 111627,
+          "byteHash": "9a18a4b208f10a05cd61ba240b796c7f6c6740d5f6c22f6d1b928ca97150140f",
+          "decoded": {
+            "width": 550,
+            "height": 228
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.412281
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-7d3ef01af98f9f58370049-c8c4115eaa",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x529 over 550x228"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-fronto-e4ac3c0166",
+      "caption": "gotowy projekt Dom w żaglikach (G) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w zaglikach (g) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w zaglikach (g) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-dc69d885292cab010e0207-bf10299462",
+          "url": "https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-dc69d885292cab010e0207cfc7c81d40__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 528630,
+          "byteHash": "386437a6e8b5205381d14a483fdbf9665653ecce5398659aea329fbb4298e160",
+          "decoded": {
+            "width": 1280,
+            "height": 528
+          },
+          "declaredMismatch": false,
+          "aspect": 2.424242
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-zaglikach-g-ba46-0f3e2151b9",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-frontowa-projekt-dom-w-zaglikach-g-ba4689b86e5c2d9ed9379069ec82e372__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 110325,
+          "byteHash": "1fcf80448e460d74e9491659d2880a829a592c442381fb845c83975bb171e84a",
+          "decoded": {
+            "width": 550,
+            "height": 227
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.422907
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-dc69d885292cab010e0207-bf10299462",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x528 over 550x227"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-elewacja-ogrodo-e56064f967",
+      "caption": "gotowy projekt Dom w żaglikach (G) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zaglikach (g) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w zaglikach (g) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w zaglikach (g) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-5e61826aedcfe088f81ab0-6765bbd667",
+          "url": "https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-5e61826aedcfe088f81ab0a33f128b2f__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 568269,
+          "byteHash": "65157dca39e60274b0dc78cd18c2d71899985fcd371d2bb442bb59e60a80d6d0",
+          "decoded": {
+            "width": 1280,
+            "height": 529
+          },
+          "declaredMismatch": false,
+          "aspect": 2.41966
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-zaglikach-g-dd82-c08444a7f9",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-ogrodowa-projekt-dom-w-zaglikach-g-dd82cd8584a129502f74f2a26fbf4a22__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 118427,
+          "byteHash": "79b92f4ddc09e0da74e2edd4ac769edd9cb1f25483ad4198db129bfe56560225",
+          "decoded": {
+            "width": 550,
+            "height": 228
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.412281
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-5e61826aedcfe088f81ab0-6765bbd667",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x529 over 550x228"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-przekroj-budynk-dc36d509ce",
+      "caption": "gotowy projekt Dom w żaglikach (G) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zaglikach (g) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zaglikach (g) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zaglikach (g) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-zaglikach-g-be584-e856f87d6a",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/przekroj-budynku-projekt-dom-w-zaglikach-g-be5849ad19a5d8fe049c1de717512391__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m86627e14d8189/przekroj-budynku-projekt-dom-w-zaglikach-g-be5849ad19a5d8fe049c1de717512391__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 64072,
+          "byteHash": "3d296d79885f3d77cc1d6e3eaad00bb2965b3cafc6f64b6fd462cd9c93f34571",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-zaglikach-g-be584-49dd849915",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/przekroj-budynku-projekt-dom-w-zaglikach-g-be5849ad19a5d8fe049c1de717512391__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 16286,
+          "byteHash": "2a3c408ddceb0a99914d3ec5d8b1cd9ca705917ec52dd2c03461d4d827e6320b",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-zaglikach-g-be584-e856f87d6a",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-rzut-parteru-f6e30c1465",
+      "caption": "gotowy projekt Dom w żaglikach (G) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-zaglikach-g-849f24990-f1b3cf78e1",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/rzut-parteru-projekt-dom-w-zaglikach-g-849f24990d91fd4c6b91e26f60a87018__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m86627e14d8189/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 41996,
+          "byteHash": "6c32f5401b126ff0c3f5ace414a8a29cf084f600ba23d8ce2d9075bfa26660b0",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-zaglikach-g-849f24990-f1b3cf78e1",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-sytuacja-65efef44bf",
+      "caption": "gotowy projekt Dom w żaglikach (G) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w zaglikach (g) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w zaglikach (g) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-d8f8a2ace241c4bfe6df44-2ef294d877",
+          "url": "https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-d8f8a2ace241c4bfe6df443ddd9bd96f__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 220705,
+          "byteHash": "4ef5d6cb97fa4fa1f47617e20cb6abb740e1695dd82f522383938ceb307f58c7",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-w-zaglikach-g-745805ce4777c-6a732bf87b",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/sytuacja-projekt-dom-w-zaglikach-g-745805ce4777c7847581716cbfee994c__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 48315,
+          "byteHash": "3431cf3af4edc6b4c3287b7b15241c9a32065f233a3c6be611616e4ae8829a64",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-d8f8a2ace241c4bfe6df44-2ef294d877",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-zaglikach-g-widok-1-3557692eec",
+      "caption": "gotowy projekt Dom w żaglikach (G) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zaglikach (g) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-zaglikach-g-17fa62f7789d9f-cdf3b1015a",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/widok-1-projekt-dom-w-zaglikach-g-17fa62f7789d9feb92891b43d5ecc418__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 9100,
+          "byteHash": "a187e470193bc306a9dc0a180fdf46d4a0ecb8960628fda43b3d7c503642c16a",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-zaglikach-g-17fa62f7789d9f-cdf3b1015a",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-zaglikach-g-00c5b65953",
+      "caption": "projekt Dom w żaglikach (G)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-f20449678df4c5f2feac94-9a23851a98",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-f20449678df4c5f2feac9415ed894551__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m86627e14d8189/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 30097,
+          "byteHash": "fc6d49d865ddae0cb4a270ff6bb809ab798ec8667621cef1e8eeb94699c41254",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-f20449678df4c5f2feac94-9a23851a98",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-zaglikach-g-62ca836497",
+      "caption": "projekt Dom w żaglikach (G)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-zaglikach-g-47cb93046-bd66f52e9e",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/rzut-parteru-projekt-dom-w-zaglikach-g-47cb93046cfb825ac323ebea0e8bd6fe__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m86627e14d8189/related?scope=similar",
+          "mediaType": "image/gif",
+          "byteLength": 27491,
+          "byteHash": "4645e6037de68a064187ec320d419bee73261538df68c5404f370a7bedf07b84",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-zaglikach-g-47cb93046-bd66f52e9e",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-zaglikach-g-8f7e0c768d0321b2386449-8e75ad4347",
+      "caption": "Projekt dom w zaglikach g 8f7e0c768d0321b23864490f9599a4bd  49733",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-8f7e0c768d0321b2386449-297257162d",
+          "url": "https://cdn1.archon.pl/images/products/m86627e14d8189/i/projekt-dom-w-zaglikach-g-8f7e0c768d0321b23864490f9599a4bd__49733.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m86627e14d8189/image/49733?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 585669,
+          "byteHash": "ab2a7d990b98f621f815d72b6562285771d25a68ad39db28b1c5f9ee01c6f52b",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-8f7e0c768d0321b2386449-297257162d",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-zaglikach-g-c10a1c32e2",
+      "caption": "projekt Dom w żaglikach (G)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-zaglikach-g-47f3ba4da54091-297cd2e0a6",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/widok-2-projekt-dom-w-zaglikach-g-47f3ba4da54091c265cdc239be848a2f__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m86627e14d8189/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 29239,
+          "byteHash": "cbc13107e67f0d2f1f629b8e6530bbc32db22973be5cbaa253a9653ef8f2561d",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-zaglikach-g-47f3ba4da54091-297cd2e0a6",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-59ad0b2e65",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m86627e14d8189/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m86627e14d8189/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-zaglikach-g-3f2be1134c46f939c0cc16-52ada95609",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-3f2be1134c46f939c0cc164accaf4b2d__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/gif",
+          "byteLength": 82381,
+          "byteHash": "d232123ddce4997caee898fb7ec8cb693df0149d1c4e3c6f9617fcfd503c293e",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-zaglikach-g-3f2be1134c46f939c0cc16-52ada95609",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-89ead5336e",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m86627e14d8189/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m86627e14d8189/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zaglikach (g) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-zagl-a907a931a8",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/rzut-parteru-z-powierzchniami-projekt-dom-w-zaglikach-g-c4f89cc888e4d861602714b021615282__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/gif",
+          "byteLength": 88936,
+          "byteHash": "450bfdc6e14a6bd0257666814e4ef15ec33eac3f75a063f64a82c95ab1c7eb28",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-zagl-a907a931a8",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-zaglikach-g-44f8d162f4",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zaglikach (g) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-zaglikach-g-ad50ce557f4599-10b0d3d481",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/widok-1-projekt-dom-w-zaglikach-g-ad50ce557f4599c6a588b0f65051ff2f__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 364552,
+          "byteHash": "421b32b578e2ea6ead1b91890863797bbd9dcf54428da701ce86417760a5f73f",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-zaglikach-g-ad50ce557f4599-10b0d3d481",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-zaglikach-g-bf4724ee76",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zaglikach-g\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zaglikach (g) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-zaglikach-g-901faa3eddb81a-8102c22e8f",
+          "url": "https://assets.archon.pl/images/products/m86627e14d8189/widok-2-projekt-dom-w-zaglikach-g-901faa3eddb81ad887531684c299d4f9__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zaglikach-g-m86627e14d8189",
+          "mediaType": "image/jpeg",
+          "byteLength": 355779,
+          "byteHash": "c75477246efadc192b9777a3ed26b9da275faad8acb68497e574c61a775e51f5",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-zaglikach-g-901faa3eddb81a-8102c22e8f",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 3.74,
+      "unit": "m2",
+      "raw": "3,74 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7.37,
+      "unit": "m",
+      "raw": "7,37 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 138.39,
+      "unit": "m2",
+      "raw": "138,39 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 175.66,
+      "unit": "m2",
+      "raw": "175,66 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 21.27,
+      "unit": "m2",
+      "raw": "21,27 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "value": 113.38,
+      "unit": "m2",
+      "raw": "113,38 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 238.88,
+      "unit": "m2",
+      "raw": "238,88 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 175.66,
+      "unit": "m2",
+      "raw": "175,66 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 138.39,
+      "unit": "m2",
+      "raw": "138,39 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 918.71,
+      "unit": "none",
+      "raw": "918,71 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu „Dom w żaglikach (G)” to wyjątkowa propozycja dla osób szukających nowoczesnych i funkcjonalnych rozwiązań. Ten parterowy dom jednorodzinny zachwyca współczesnym stylem, który podkreśla czterospadowy dach oraz wysunięty przed elewację frontową garaż jednostanowiskowy. Przestronny salon o powierzchni powyżej 30 m² stanowi idealne miejsce do odpoczynku, a otwarta, duża kuchnia z wyspą, o powierzchni co najmniej 12 m², z przylegającą spiżarnią, zadowoli nawet najbardziej wymagających użytkowników. Taras osłonięty pergolą to doskonała przestrzeń na relaks na świeżym powietrzu. Projekt domu przewiduje 4 pokoje oraz jedną łazienkę, co czyni go idealnym dla rodzin szukających komfortu na jednym poziomie. Dodatkowo w domu znajduje się pralnia zlokalizowana w kotłowni oraz kominek, który wprowadza przytulną atmosferę do wnętrza. Projekty domów w tym stylu łączą nowoczesność z funkcjonalnością, oferując przestrzeń, która spełni oczekiwania współczesnych rodzin."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 113.38 m² + 21.27 m² + 3.74 m² , 4 pokoje, kuchnia, łazienka, spiżarka, toaleta, kotłownia, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 6.3,
+      "raw": "1. Wiatrołap | 6,30 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 4.48,
+      "raw": "2. Hol | 4,48 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Toaleta",
+      "area": 2.47,
+      "raw": "3. Toaleta | 2,47 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Korytarz",
+      "area": 6.08,
+      "raw": "4. Korytarz | 6,08 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Pokój",
+      "area": 11.36,
+      "raw": "5. Pokój | 11,36 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Pokój",
+      "area": 12.05,
+      "raw": "6. Pokój | 12,05 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Łazienka",
+      "area": 6.66,
+      "raw": "7. Łazienka | 6,66 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Pokój",
+      "area": 15.03,
+      "raw": "8. Pokój | 15,03 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Salon + Jadalnia",
+      "area": 32.91,
+      "raw": "9. Salon + Jadalnia | 32,91 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "Kuchnia",
+      "area": 13.08,
+      "raw": "10. Kuchnia | 13,08 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "Spiżarnia",
+      "area": 2.96,
+      "raw": "11. Spiżarnia | 2,96 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "Kotłownia z pralnią",
+      "area": 3.74,
+      "raw": "12. Kotłownia z pralnią | 3,74 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 13,
+      "label": "Garaż",
+      "area": 21.27,
+      "raw": "13. Garaż | 21,27 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-f20449678df4c5f2feac9415ed894551__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/rzut-parteru-projekt-dom-w-zaglikach-g-47cb93046cfb825ac323ebea0e8bd6fe__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/rzut-parteru-projekt-dom-w-zaglikach-g-849f24990d91fd4c6b91e26f60a87018__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/widok-1-projekt-dom-w-zaglikach-g-17fa62f7789d9feb92891b43d5ecc418__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/widok-1-projekt-dom-w-zaglikach-g-ad50ce557f4599c6a588b0f65051ff2f__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/widok-2-projekt-dom-w-zaglikach-g-47f3ba4da54091c265cdc239be848a2f__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/widok-2-projekt-dom-w-zaglikach-g-901faa3eddb81ad887531684c299d4f9__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-boczna-projekt-dom-w-zaglikach-g-bc558cf99bfd0ed530c5da9e8efd5238__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-537ee7403c0a1f28cca5048d1ecbeb31__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-boczna-projekt-dom-w-zaglikach-g-ed4d5a87703bb823de2eec4920fffd3e__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-7d3ef01af98f9f583700493961b6350b__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-frontowa-projekt-dom-w-zaglikach-g-ba4689b86e5c2d9ed9379069ec82e372__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-dc69d885292cab010e0207cfc7c81d40__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/elewacja-ogrodowa-projekt-dom-w-zaglikach-g-dd82cd8584a129502f74f2a26fbf4a22__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-5e61826aedcfe088f81ab0a33f128b2f__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m86627e14d8189/sytuacja-projekt-dom-w-zaglikach-g-745805ce4777c7847581716cbfee994c__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m86627e14d8189/projekt-dom-w-zaglikach-g-d8f8a2ace241c4bfe6df443ddd9bd96f__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "011e14c1abd6cc0668b9580dd1c5e1544d7cd143fa3605f7cbc8f033b55b625d"
+}

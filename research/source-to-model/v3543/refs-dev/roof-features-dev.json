@@ -1,0 +1,51 @@
+{
+ "note": "v3.54.3 DEV references for secondary roof features (roof_features.py). Read from the publishers' elevation drawings by the operator; shares are of the side's wall width, left to right as seen from outside. Houses with no dormer are listed with an empty list: a false dormer there is an error. Written 2026-11-16 during development (these houses are DEV; nothing here was held out).",
+ "houses": {
+  "final-archon-dom-w-aksamitkach": {
+   "roofFeatures": [
+    {
+     "kind": "WALL_DORMER_GABLE",
+     "side": "FRONT",
+     "alongShare": [
+      0.35,
+      0.65
+     ],
+     "note": "gable wall dormer over the entrance, two balcony doors, balcony on the entrance portico; measured on the front elevation: walls 590..825 px of the main wall 322..1092 px, own eaves 31 % and apex 71 % of the roof's rise"
+    },
+    {
+     "kind": "ROOF_WINDOW",
+     "side": "REAR",
+     "count": 2
+    }
+   ]
+  },
+  "final-archon-dom-w-kuklikach": {
+   "roofFeatures": [],
+   "note": "hip roof, two chimneys, no dormer (v3.54.1 reference)"
+  },
+  "projekt-dom-w-toreniach-3-e-me822857280738": {
+   "roofFeatures": []
+  },
+  "final-houseplans-sp318422": {
+   "roofFeatures": [
+    {
+     "kind": "CROSS_GABLE_WING",
+     "side": "FRONT",
+     "note": "v3.54.1 reference, from the render only (the page has no elevation drawing): a front cross gable over the front bedroom and a smaller timber-truss gable over the entry porch; neither is a dormer"
+    }
+   ]
+  },
+  "final-domywstylu-madera": {
+   "roofFeatures": [
+    {
+     "kind": "CROSS_GABLE_WING",
+     "side": "FRONT",
+     "note": "a cross gable the v3.54.2 check reported; not a dormer"
+    }
+   ]
+  },
+  "projekt-dom-w-supertuniach-2-e-m9022920a5fcb6": {
+   "roofFeatures": []
+  }
+ }
+}

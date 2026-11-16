@@ -1,0 +1,117 @@
+{
+ "house": "confirm-dobredomy-delta",
+ "set": "CONFIRM8",
+ "publisher": "dobredomy",
+ "url": "https://www.dobredomy.pl/projekt/delta",
+ "packageContentHash": "ba3c2bc3ce4f41c49e9fcf82cf9babf76021ba11c4b8a377a04d3acc61ff4aac",
+ "category": [
+  "N1"
+ ],
+ "primaryCategory": "N1",
+ "reader": "source-only reader (publisher pictures + page text as sealed in the source package); no analyzer, solver or model output was run or seen for this house",
+ "readOn": "2026-11-16",
+ "sideConvention": "FRONT = the side at the BOTTOM of the ground-floor plan sheet as published; LEFT/RIGHT = the plan sheet's left/right; REAR = top of the sheet",
+ "alongShareBasis": "alongShare = [from,to] as shares 0..1 of the FULL outer-wall extent of the building on that side (attached garage wing included; open porches, terraces and roof overhangs excluded), measured left to right AS SEEN FROM OUTSIDE looking at that side; read by eye from the elevation picture and cross-checked against the plan where possible; expect +/-0.04",
+ "readFrom": {
+  "groundPlan": "asset-delta-rzut-parter-d3660cee17",
+  "atticPlan": "asset-delta-rzut-poddasze-635e97e4be",
+  "elevationFront": "asset-delta-elewacja-przod-195b01fd1c",
+  "elevationRear": "asset-delta-elewacja-ty-feb02f78ab",
+  "elevationSidePlanLeft": "asset-delta-elewacja-boczna-40b8f1712c",
+  "elevationSidePlanRight": "asset-delta-elewacja-boczna-0af2fb9cad",
+  "publishedText": "package.publishedFacts (page table)"
+ },
+ "metricCertain": {
+  "overallWidthM": null,
+  "overallDepthM": null,
+  "whatTheOverallIncludes": "NOT PRINTED: the plan pictures carry room names and areas only, no dimension line at all. The page gives no building width/depth either (only the minimum plot 19.7 x 21.5 m).",
+  "publishedFootprintM2": 141.8,
+  "usableAreaM2": 133.2,
+  "usableAreaNote": "garage 20.4 m2 listed separately; roof pitch 35 deg; building height 7.6 m"
+ },
+ "estimated": {
+  "storeys": "ground + attic",
+  "mainRoof": {
+   "form": "GABLE",
+   "ridgeAlong": "the front facade",
+   "note": "plain two-slope roof; the garage that projects forward on the right is covered by a front-facing cross gable"
+  },
+  "garage": {
+   "present": true,
+   "where": "attached at the plan front-RIGHT, projects forward of the entrance wall, door on the FRONT"
+  }
+ },
+ "roofFeatures": [
+  {
+   "kind": "CROSS_GABLE_WING",
+   "side": "FRONT",
+   "alongShare": [
+    0.55,
+    1.0
+   ],
+   "wallShare": [
+    0.6,
+    0.99
+   ],
+   "sideCertainty": "page labels the picture \"Elewacja przód\"; matches the plan bottom (entrance door left of centre, garage door on the right)",
+   "note": "front-facing gable over the projecting garage - a body in the plan; its gable field is filled with a decorative timber lattice and has NO window. Not a dormer."
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "FRONT",
+   "count": 1,
+   "groups": [
+    [
+     0.24,
+     0.3
+    ]
+   ],
+   "alongShare": [
+    0.24,
+    0.3
+   ],
+   "sideCertainty": "as front elevation",
+   "note": "one roof window on the front slope"
+  },
+  {
+   "kind": "ROOF_WINDOW",
+   "side": "REAR",
+   "count": 2,
+   "groups": [
+    [
+     0.18,
+     0.24
+    ],
+    [
+     0.71,
+     0.77
+    ]
+   ],
+   "alongShare": [
+    0.18,
+    0.77
+   ],
+   "sideCertainty": "page labels the picture \"Elewacja tył\"; mirror of the plan top (outdoor fireplace wall at the plan top-right shows at the left of the picture)",
+   "note": "two roof windows on the rear slope"
+  },
+  {
+   "kind": "CHIMNEY_COUNT",
+   "count": 2,
+   "side": null,
+   "alongShare": null,
+   "sideCertainty": "front and rear elevations",
+   "note": "two chimneys on the ridge; a third, free-standing chimney belongs to the outdoor barbecue on the rear terrace and is not on the roof"
+  }
+ ],
+ "negativeTraps": [
+  "NO dormer on any elevation: both long slopes are plain apart from roof windows",
+  "roof windows (1 front, 2 rear) are flat in the slope, not dormers; the attic plan shows them as small rectangles across the knee wall",
+  "decorative timber lattice trusses fill the apex of BOTH plain gable ends and of the garage gable; the gable ends are timber-clad and carry windows with French balconies - these are gable-END windows, not dormers",
+  "the garage cross gable faces the front and looks like a large dormer in a frontal view, but its walls go to the ground and it is a body in the ground plan",
+  "a free-standing barbecue chimney stands on the terrace next to the house"
+ ],
+ "uncertain": [
+  "no dimension is printed anywhere; the reference has no metric ground truth for this house",
+  "whether the rear terrace is partly under the main roof eave (read: open, unroofed, bounded by low walls)"
+ ]
+}

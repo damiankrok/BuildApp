@@ -1,0 +1,1069 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-39035st-e1b17ecac1",
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+  "pageHash": "6b6ab3c65c39ff6ff41c463eb286c591c3f5f1049927c878ce2ba1215de49ee4",
+  "project": {
+    "externalId": "39035ST",
+    "name": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms",
+    "publisher": "architecturaldesigns.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-39035st-front-1665539253-jpg-103e5a09b9",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"39035st front 1665539253\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-front-1665539253-jpg-5e8575919c",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_Front_1665539253.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 119792,
+          "byteHash": "8dd85fa6a3f573932fc5f6f2c742a39857f8f716f4184370c2b8b888eef40bcb",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-front-1665539253-jpg-5e8575919c",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-39035st-left-1665539253-jpg-1e93e38e63",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"39035st left 1665539253\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-left-1665539253-jpg-212938cb6d",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_Left_1665539253.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 70346,
+          "byteHash": "2d6722375b1dc40b97cb3a457d73c55ee717bd35a21596fcca328d0c5fec7785",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-left-1665539253-jpg-212938cb6d",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-39035st-rear-1665539253-jpg-fb840ec9b4",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"39035st rear 1665539253\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-rear-1665539253-jpg-741f3d7d65",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_Rear_1665539253.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 109509,
+          "byteHash": "8589cf03174af39fd8ed20dd259000060b66d4582b566c29ce472af6bc804884",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-rear-1665539253-jpg-741f3d7d65",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-39035st-render-1665539233-jpg-906c9f4a6a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"39035st render 1665539233\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"39035st render 1665539233\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"39035st render 1665539233\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-render-1665539233-jpg-b9cf34a2b0",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_Render_1665539233.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 265077,
+          "byteHash": "d739661312577ba95124ad6228b5c1c25c2d1daa00448014c4c446c6953cdcef",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-render-1665539233-jpg-b9cf34a2b0",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-39035st-right-1665539253-jpg-4d05bea311",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"39035st right 1665539253\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-right-1665539253-jpg-f8d1e62455",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_Right_1665539253.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 82950,
+          "byteHash": "0a515ddbed3c212c41eb6d99de87abaa6f0f627c03c0602d6063e6694b4716d1",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-right-1665539253-jpg-f8d1e62455",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-front-elevation-drawing-of-a-two-story-house-pla-4ccde3c5f8",
+      "caption": "Front elevation drawing of a two-story house plan with a side-entry garage, dormers, and a covered front porch with X-bracing.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Front elevation drawing of a two-story house plan with a side-entry garage, dorm\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"39035st front 1665539253\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Front elevation drawing of a two-story house plan with a side-entry garage, dorm\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-front-1665539253-jpg-991cc742b2",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_Front_1665539253.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 70192,
+          "byteHash": "52a45127b230b8ff3197d077114e9b471bd5e9a80fb4853676489a5b89a68fe4",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-front-1665539253-jpg-991cc742b2",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-house-plan-exterior-two-story-colonial-with-a-fr-a186fc76a2",
+      "caption": "House plan exterior. Two-story Colonial with a front porch, gabled roof, and attached garage. Includes dormers and symmetrical window placement.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"39035st render 1665539233\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"House plan exterior. Two-story Colonial with a front porch, gabled roof, and att\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-render-1665539233-jpg-1896df952f",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_Render_1665539233.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 147327,
+          "byteHash": "654a7845b14037010939a77887314783d2746ba3c6cdcec8dafb73d4353af1d8",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-render-1665539233-jpg-1896df952f",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-left-elevation-drawing-of-a-house-plan-showing-s-bf51d978a1",
+      "caption": "Left elevation drawing of a house plan showing siding, a gable roof, and a dormer window.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Left elevation drawing of a house plan showing siding, a gable roof, and a dorme\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"39035st left 1665539253\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"Left elevation drawing of a house plan showing siding, a gable roof, and a dorme\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-left-1665539253-jpg-62d7df6ab6",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_Left_1665539253.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 42196,
+          "byteHash": "f712b2ca774d05e86d033b9a4881978ac651d1a1ae124e3fee2f7c760f385f2b",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-left-1665539253-jpg-62d7df6ab6",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-04d82404ed",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Main Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-f1-1665539238-gif-94e92de72c",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/343280041/original/39035ST_F1_1665539238.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 52942,
+          "byteHash": "53bf8f1b337513afcb76249a1f5dbed8716b7451090ef2ce837d445252c39f00",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-39035st-f1-1665539238-gif-94e92de72c",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-316bd37ffe",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Main Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Ma\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-f1-1665539238-gif-5399f19e00",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_F1_1665539238.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/gif",
+          "byteLength": 122305,
+          "byteHash": "5c839d296e7f48e1b2ff193cad602b3ec7d15d99c6d8bcfd74c1e431166e3daf",
+          "decoded": {
+            "width": 1000,
+            "height": 667
+          },
+          "declaredMismatch": false,
+          "aspect": 1.49925
+        }
+      ],
+      "selectedVariantId": "var-39035st-f1-1665539238-gif-5399f19e00",
+      "selectionReason": "only variant (1000x667, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-42e9a9bc64",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2nd Floor - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd floor\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd floor\" in \"2nd Floor\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-f2-1665539240-gif-73c83339fe",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/343280041/original/39035ST_F2_1665539240.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 55195,
+          "byteHash": "6fa1fe9c7b0d8e033e0b99929b3fe983e26dfc7268e2662a87365611dcc31b49",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-39035st-f2-1665539240-gif-73c83339fe",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-4fca1efd41",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lower Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"lower level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"lower level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-ll-1665539243-gif-b5a7f6bd3d",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_LL_1665539243.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/gif",
+          "byteLength": 68072,
+          "byteHash": "c12b8ffe9c8253f24155784241e2ef3fdcc7c361c9ad239982310c13e75cbf0b",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-ll-1665539243-gif-b5a7f6bd3d",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-5e4774a188",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lower Level - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"lower level\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - Lo\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"lower level\" in \"Lower Level\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-ll-1665539243-gif-d5636f8be0",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/343280041/original/39035ST_LL_1665539243.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 22894,
+          "byteHash": "a7a3363838d7108d6855c5f3126fd075753b9614e2e66f7ccda13eec47a85c09",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-39035st-ll-1665539243-gif-d5636f8be0",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-39035st-1760-cape-cod-cottage-house-plan-wi-61dd0b350a",
+      "caption": "Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2nd Floor - Cape Cod, Cottage, Country, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd floor\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd floor\" in \"Plan 39035ST: 1760 Cape Cod Cottage House Plan with 3 Bedrooms - Floor Plan - 2n\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-f2-1665539240-gif-2fddbcb437",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_F2_1665539240.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/gif",
+          "byteLength": 159077,
+          "byteHash": "a1e2c3c2a56c80060ce79fdfe332e3c025a85b2cf61bba18a0d5eba8a8601a09",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-f2-1665539240-gif-2fddbcb437",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-rear-elevation-house-plan-drawing-with-a-bay-win-2eb6020abe",
+      "caption": "Rear elevation house plan drawing with a bay window, French doors, and multi-pane windows.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Rear elevation house plan drawing with a bay window, French doors, and multi-pan\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"39035st rear 1665539253\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Rear elevation house plan drawing with a bay window, French doors, and multi-pan\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-rear-1665539253-jpg-d3f1c3197c",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_Rear_1665539253.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 65392,
+          "byteHash": "1176de3b364aed0aa46ac0b83b68f994bd1e94a9ff3da47c777dd3efc1e08edb",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-rear-1665539253-jpg-d3f1c3197c",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-right-elevation-drawing-of-a-two-story-house-pla-4a3541ae5e",
+      "caption": "Right elevation drawing of a two-story house plan with gabled roof, dormer, and covered porch with cross bracing.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Right elevation drawing of a two-story house plan with gabled roof, dormer, and \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"39035st right 1665539253\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"Right elevation drawing of a two-story house plan with gabled roof, dormer, and \")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-39035st-right-1665539253-jpg-a2cf772484",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_Right_1665539253.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/1760-cape-cod-cottage-house-plan-with-3-bedrooms-39035st",
+          "mediaType": "image/jpeg",
+          "byteLength": 49318,
+          "byteHash": "f5747b923093e8aacab4e1af42f03c57ca5c134c2969e6a2a6c08766999c408a",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-39035st-right-1665539253-jpg-a2cf772484",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 11.582,
+      "unit": "m",
+      "raw": "38' 0\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 16.764,
+      "unit": "m",
+      "raw": "55' 0\""
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "This Cape Cod style home plan offers a warm and welcoming 6'-deep front porch, a large gable and 2-car front entry garage. The siding exterior provides the opportunity for a wide selection of color schemes.&nbsp; The living room, dining and kitchen all enjoy large windows with a rear yard view. &nbsp;&nbsp; The first floor master bedroom features a walk-in closet and double bowl vanity. Two additional bedrooms and a loft on the upper level make this a perfect home for your growing family or the empty nester who enjoys frequent out-of- town guests.&nbsp; A full basement offers storage or additional living space if desired."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Basement"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This Cape Cod style home plan offers a warm and welcoming 6'-deep front porch, a large gable and 2-car front entry garage. The siding exterior provides the opportunity for a wide selection of color schemes.&nbsp;The living room, dining and kitchen all enjoy large windows with a rear yard view.&nbsp;&nbsp;The first floor master bedroom features a walk-in closet and double bowl vanity. Two additional bedrooms and a loft on the upper level make this a perfect home for your growing family or the empty nester who enjoys frequent out-of- town guests.&nbsp;A full basement offers storage or additional living space if desired."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_F1_1665539238.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_F2_1665539240.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_Front_1665539253.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_Left_1665539253.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_LL_1665539243.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_Rear_1665539253.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_Render_1665539233.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/343280041/original/39035ST_Right_1665539253.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F1_1665539238.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_F1_1665539238.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F2_1665539240.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_F2_1665539240.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_LL_1665539243.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/343280041/original/39035ST_LL_1665539243.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F1_1665539238.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F1_1665539238.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F2_1665539240.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_F2_1665539240.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_LL_1665539243.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/343280041/original/39035ST_LL_1665539243.gif: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "43e26c455db849ab5fe2a5a6d982084da20dc1ce605604121e51ab41b495f36c"
+}
