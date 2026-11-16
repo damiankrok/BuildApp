@@ -1,0 +1,1362 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Braas",
+      "id": "asset-braas-47125a8832",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Poddasze 84,90 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-xg-png-26fc1826b0",
+      "selectionReason": "only variant (1x1, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "aa93ff38086e8dab9cbcae5b9c24990c8c8fcda11c5c9f1613de60a0019b145b",
+          "byteLength": 923,
+          "declared": {
+            "height": 1,
+            "width": 1
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1,
+            "width": 1
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-xg-png-26fc1826b0",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/xg.png"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja boczna domu Agawa",
+      "id": "asset-elewacja-boczna-domu-agawa-6d6765cef6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956128e76b24\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Agawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-elewacja-5956128e76b24-jpg-da508820de",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "c9e74572bfd02fe327c97d232b9f228149380969b233e6ed280b869dcfb4212d",
+          "byteLength": 23552,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-elewacja-5956128e76b24-jpg-da508820de",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/elewacja-5956128e76b24.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja boczna domu Agawa",
+      "id": "asset-elewacja-boczna-domu-agawa-e52ddca6d0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956128eb887b\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Agawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-elewacja-5956128eb887b-jpg-f0bfedceb8",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "f99b1b941d27ff70388e534a6c5bbf61dee33f76754d3174048b067416e65059",
+          "byteLength": 28247,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-elewacja-5956128eb887b-jpg-f0bfedceb8",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/elewacja-5956128eb887b.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja frontowa domu Agawa",
+      "id": "asset-elewacja-frontowa-domu-agawa-12e114126c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956128e5560f\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja frontowa domu Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"elewacja frontowa domu Agawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-elewacja-5956128e5560f-jpg-45829aa063",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "3b2342b9a6a7872c73fc189746d6451b727dc3dc2592d25e21563bd16b414528",
+          "byteLength": 29614,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-elewacja-5956128e5560f-jpg-45829aa063",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/elewacja-5956128e5560f.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja ogrodow tylna domu Agawa",
+      "id": "asset-elewacja-ogrodow-tylna-domu-agawa-f84b419272",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956128e93f39\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja ogrodow tylna domu Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"ogrodow\" in \"elewacja ogrodow tylna domu Agawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-elewacja-5956128e93f39-jpg-3c9b49266d",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "405149361b9e3a884865fe52ed232af70961b5a0498242cce36ed7de3f7ecaa5",
+          "byteLength": 29791,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-elewacja-5956128e93f39-jpg-3c9b49266d",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/elewacja-5956128e93f39.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Generowanie pliku",
+      "id": "asset-generowanie-pliku-7541ac17b9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-loader-gif-22db5820a5",
+      "selectionReason": "only variant (16x16, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9db486efc49e6d43525a174416f8a1d4999627d7e8728c4c323228f1aa568967",
+          "byteLength": 673,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 16,
+            "width": 16
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-loader-gif-22db5820a5",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/loader.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut parteru - Agawa",
+      "id": "asset-rzut-parteru-agawa-da24cf18d7",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607c43315b\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut parteru - Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Rzut parteru - Agawa\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Dom z poddaszem użytkowym i 4 sypialniami, przestronnym półokrągłym tarasem, z g\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-595607c43315b-png-c175c789f2",
+      "selectionReason": "only variant (1487x1450, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.025517,
+          "byteHash": "f108ae1a4374da4aaacb2dcb652a82db6142ad9765cd1bcc3738742bd5c8e9c3",
+          "byteLength": 150894,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1450,
+            "width": 1487
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-rzut-595607c43315b-png-c175c789f2",
+          "mediaType": "image/png",
+          "url": "https://media.studioatrium.pl/project/713/rzut-595607c43315b.png"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut poddasza - Agawa",
+      "id": "asset-rzut-poddasza-agawa-aabb41b9b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607c57bb09\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut poddasza - Agawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Rzut poddasza - Agawa\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 80,95 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-595607c57bb09-png-ac1e2689fc",
+      "selectionReason": "only variant (1107x972, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.138889,
+          "byteHash": "32804c116b07eb35ecac9ab411aac9a94863da5a31b9ef686871d14e9ad4b204",
+          "byteLength": 102653,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 972,
+            "width": 1107
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-rzut-595607c57bb09-png-ac1e2689fc",
+          "mediaType": "image/png",
+          "url": "https://media.studioatrium.pl/project/713/rzut-595607c57bb09.png"
+        }
+      ]
+    },
+    {
+      "id": "asset-waiter-blue-gif-57c8c7de8f",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój domu\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-waiter-blue-gif-8b0babfa97",
+      "selectionReason": "only variant (32x32, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "98b3c8d8db7281e3772cdae94ad6e3f7c25495314a1e2170fac6b9417ff32f5e",
+          "byteLength": 3208,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 32,
+            "width": 32
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-waiter-blue-gif-8b0babfa97",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/waiter-blue.gif"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Agawa - jednostanowiskowy garaż z boku domu",
+      "id": "asset-wizualizacja-projektu-domu-agawa-jednostanowisko-bd089a3c76",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 5954e67302419\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - jednostanowiskowy garaż z boku domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - jednostanowiskowy garaż z boku domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-agawa-wizualizacja-5954e67302419-jpg-1a0389fb0b",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "eff738e79e71354c1b32fa79f72b7d8ffda4bdad57887877cc1bbdb692c0013e",
+          "byteLength": 478015,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-agawa-wizualizacja-5954e67302419-jpg-1a0389fb0b",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/agawa-wizualizacja-5954e67302419.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "6a6ad05d24d761d4b6b367a8c7828044f07542d84c5784f18b5825fc708bcc8a",
+          "byteLength": 8391,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-dummy-jpg-723026fe84",
+          "mediaType": "image/jpeg",
+          "url": "https://www.studioatrium.pl/img/dummy.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Agawa - półokrągłe wejście do domu osłonięte nieco balkonem",
+      "id": "asset-wizualizacja-projektu-domu-agawa-po-okrag-e-wejs-5495fc48bf",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 1350 5954e66dc4d19\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 1350 5954e66dc4d19\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 1350 5954e66dc4d19\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 5954e66dc4d19\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem AGAWA - wizualizacja 1 wizualizacja pr\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem AGAWA - wizualizacja 1 wizualizacja pr\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - półokrągłe wejście do domu osłonięte nieco ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - półokrągłe wejście do domu osłonięte nieco ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem AGAWA - wizualizacja 1 wizualizacja pr\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem AGAWA - wizualizacja 1 wizualizacja pr\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-agawa-wizualizacja-5954e66dc4d19-jpg-060001169c",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "a7361fe9d98905adcc8a9f77c283c920f166a06acf28ec6be11250e677770552",
+          "byteLength": 497512,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-agawa-wizualizacja-5954e66dc4d19-jpg-060001169c",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/agawa-wizualizacja-5954e66dc4d19.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "0ad35fb11958a22ff747bfcf222b8b2c957293867678fad2cb068cb0b712fe33",
+          "byteLength": 237628,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-agawa-wizualizacja-1350-5954e66dc4d19-jpg-398861ef85",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/agawa-wizualizacja-1350-5954e66dc4d19.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Agawa - przeszklony ryzalit z zadaszonym balkonem",
+      "id": "asset-wizualizacja-projektu-domu-agawa-przeszklony-ryz-fe868632e0",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 1350 5954e6706ab3c\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"agawa wizualizacja 5954e6706ab3c\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - przeszklony ryzalit z zadaszonym balkonem\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Agawa - przeszklony ryzalit z zadaszonym balkonem\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-agawa-wizualizacja-5954e6706ab3c-jpg-0447f4c7b4",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "349bdd7d92f65a9489a96bcfe6341cb556e58fd39bc91086b29b66e8576a3590",
+          "byteLength": 504752,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-agawa-wizualizacja-5954e6706ab3c-jpg-0447f4c7b4",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/agawa-wizualizacja-5954e6706ab3c.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "759ff689cecc09bfc726c408935d7587ceac5e807a8ff6c0a02868a97cbedfa0",
+          "byteLength": 238685,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-agawa-wizualizacja-1350-5954e6706ab3c-jpg-b2fe00eb69",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/agawa-wizualizacja-1350-5954e6706ab3c.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: łazienka z wanną dostępna z sypialni",
+      "id": "asset-wnetrze-domu-agawa-azienka-z-wanna-dostepna-z-sy-f0a7988384",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-59563064a7f9d-jpg-284c67c448",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "17ba4559ebeeec83338e4d3ef1018a70867d27b867ead9a97eda5b404d569b21",
+          "byteLength": 124472,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-59563064a7f9d-jpg-284c67c448",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-59563064a7f9d.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: duża, ustawna kuchnia z nowoczesnym narożnym oknem",
+      "id": "asset-wnetrze-domu-agawa-duza-ustawna-kuchnia-z-nowocz-4830d1e6d1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-5956306190680-jpg-b1347ab5d7",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "40a988a40b3665a870cb94a7d3efd8520c097641bcc97a69cf0f24505030044a",
+          "byteLength": 131634,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-5956306190680-jpg-b1347ab5d7",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-5956306190680.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: duża, ustawna sypialnia rodziców na poddaszu",
+      "id": "asset-wnetrze-domu-agawa-duza-ustawna-sypialnia-rodzic-6c32c98ce3",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszu\" in \"wnętrze domu Agawa: duża, ustawna sypialnia rodziców na poddaszu\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-5956306410127-jpg-43e24b803a",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8b6bfea5b7a761a684ac4eadedeb76b78c0cc358281134915533028adda61be2",
+          "byteLength": 155136,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-5956306410127-jpg-43e24b803a",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-5956306410127.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: duży pokój na poddaszu",
+      "id": "asset-wnetrze-domu-agawa-duzy-pokoj-na-poddaszu-5c9d5689f9",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszu\" in \"wnętrze domu Agawa: duży pokój na poddaszu\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-59563062ca201-jpg-1051fdc785",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "c1d2b5458c73c96bde2569e08a6f267e3345857936c31feea685a0dd89246286",
+          "byteLength": 123476,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-59563062ca201-jpg-1051fdc785",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-59563062ca201.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: jadalnia w dużym, przeszklonym ryzalicie",
+      "id": "asset-wnetrze-domu-agawa-jadalnia-w-duzym-przeszklonym-9141ab9039",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-5956305ec0ef1-jpg-02f038b8b8",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "7b426bc68e612348edb861533a476c42a62595f39687bf0a966609fa452adfd1",
+          "byteLength": 272526,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-5956305ec0ef1-jpg-02f038b8b8",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-5956305ec0ef1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: master bedroom na poddaszu z własną łazienką i garderobą",
+      "id": "asset-wnetrze-domu-agawa-master-bedroom-na-poddaszu-z-73e932bc4a",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszu\" in \"wnętrze domu Agawa: master bedroom na poddaszu z własną łazienką i garderobą\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-595630636cd46-jpg-8ae37915ac",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "82473d92ba476aea4e0b387d51f9577ce3df699e0cf07e02707010e57e6001ab",
+          "byteLength": 158200,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-595630636cd46-jpg-8ae37915ac",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-595630636cd46.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: pokój dzienny",
+      "id": "asset-wnetrze-domu-agawa-pokoj-dzienny-50ae93ce93",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-5956305d7a1c6-jpg-f8c4f6804d",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "4f45ae79d0775410036d398d22ada4486ee0c6dc979f1b10fb2f3c46dbebdb47",
+          "byteLength": 228308,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-5956305d7a1c6-jpg-f8c4f6804d",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-5956305d7a1c6.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: pokój dzienny z miejscem na kominek",
+      "id": "asset-wnetrze-domu-agawa-pokoj-dzienny-z-miejscem-na-k-72b5973ade",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-5956305aa1932-jpg-ed91516660",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "47a9c23eff5d5f67eb2efaf011698798cbca36f55608786d317f6f233a915039",
+          "byteLength": 155454,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-5956305aa1932-jpg-ed91516660",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-5956305aa1932.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: praktyczna garderoba przynależąca do pokoju typu master bedroom na poddaszu",
+      "id": "asset-wnetrze-domu-agawa-praktyczna-garderoba-przynale-aa20e2de8e",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszu\" in \"wnętrze domu Agawa: praktyczna garderoba przynależąca do pokoju typu master bedr\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-595630654a6b0-jpg-911b8bef2b",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6153015b7fc05f5b3695eece4ec10fda496c5485d89ebfd909bc35f88fb09141",
+          "byteLength": 137968,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-595630654a6b0-jpg-911b8bef2b",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-595630654a6b0.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: praktyczna kuchnia z dostępem do niewielkiej przydatnej spiżarki",
+      "id": "asset-wnetrze-domu-agawa-praktyczna-kuchnia-z-dostepem-449962249a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-59563062351b7-jpg-812d0c04fc",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "3b728bb0fc9e4de20d3a0c1769ce6e4a58131041e8e7c2d6f580668a848beefb",
+          "byteLength": 114069,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-59563062351b7-jpg-812d0c04fc",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-59563062351b7.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: przeszklony salon połączony z jadalnią usytuowaną w ryzalicie",
+      "id": "asset-wnetrze-domu-agawa-przeszklony-salon-po-aczony-z-5ca8121fb6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-5956305e283a1-jpg-0d67b57f77",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "943d83ac4e4f2492b6530b292d93a5970395cec4bee6ed1c3a647447a5035679",
+          "byteLength": 134700,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-5956305e283a1-jpg-0d67b57f77",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-5956305e283a1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: sporo miejsca na duży, rodzinny stół jadalniany w ryzalicie",
+      "id": "asset-wnetrze-domu-agawa-sporo-miejsca-na-duzy-rodzinn-c144650028",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-1350-59563060ed8dd-jpg-8f31ae49cc",
+      "selectionReason": "only variant (1350x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "f8d19a69df1fd29f78b9024ef6f7298ee4f7d706636afc75c2f79a1fd19132d0",
+          "byteLength": 145518,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-1350-59563060ed8dd-jpg-8f31ae49cc",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-1350-59563060ed8dd.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wnętrze domu Agawa: ustawny i spory salon",
+      "id": "asset-wnetrze-domu-agawa-ustawny-i-spory-salon-dbe8d17926",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wnetrze-5956305b4801b-jpg-49bbf71624",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2b11c09dac13c5a15f5426a8fe7a57d3465eaea22d0084f6d758df7624219b0f",
+          "byteLength": 327666,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-wnetrze-5956305b4801b-jpg-49bbf71624",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/713/interior/wnetrze-5956305b4801b.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zobacz galerię projektu Agawa",
+      "id": "asset-zobacz-galerie-projektu-agawa-ae98ecd3ad",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-finger-png-4c3ec8d5a5",
+      "selectionReason": "only variant (90x100, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.9,
+          "byteHash": "280b256ffccbf48c8b2e8acab725410940ad9bf1d1cfa2bb849bea8799384366",
+          "byteLength": 5050,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 100,
+            "width": 90
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+          "id": "var-finger-png-4c3ec8d5a5",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/finger.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.studioatrium.pl/projekty-domow/Agawa,713.html",
+  "contentHash": "3c16a00903f952eeb5180ad393d707310a5a32d50c9e13648384463d98354850",
+  "failures": [
+    {
+      "claim": {
+        "channel": "IMG_SRC",
+        "document": "SECTION"
+      },
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "stage": "ASSET_FETCH",
+      "target": "https://www.studioatrium.pl/img/kdr.webp"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRC",
+        "document": "SECTION"
+      },
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "stage": "ASSET_FETCH",
+      "target": "https://www.studioatrium.pl/img/medals.webp"
+    }
+  ],
+  "id": "src-www-studioatrium-pl-a60b478c36",
+  "pageHash": "5b31efae78456709b25b9c3a5fa1055004c3fb705ac4abe3d8717ac265523e7d",
+  "project": {
+    "name": "Projekt domu Agawa",
+    "publisher": "studioatrium.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "wysokość budynku",
+      "raw": "8,70 m",
+      "unit": "m",
+      "value": 8.7
+    },
+    {
+      "key": "building_length",
+      "label": "długość budynku",
+      "raw": "11,10 m",
+      "unit": "m",
+      "value": 11.1
+    },
+    {
+      "key": "building_width",
+      "label": "szerokość budynku",
+      "raw": "15,45 m",
+      "unit": "m",
+      "value": 15.45
+    },
+    {
+      "key": "footprint_area",
+      "label": "pow. zabudowy",
+      "raw": "149,45 m²",
+      "unit": "m2",
+      "value": 149.45
+    },
+    {
+      "key": "garage_area",
+      "label": "garaż",
+      "raw": "21,10 m²",
+      "unit": "m2",
+      "value": 21.1
+    },
+    {
+      "key": "roof_area",
+      "label": "pow. dachu",
+      "raw": "238,70 m²",
+      "unit": "m2",
+      "value": 238.7
+    },
+    {
+      "key": "roof_pitch",
+      "label": "kąt nachylenia dachu",
+      "raw": "42 °",
+      "unit": "deg",
+      "value": 42
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "165,85 m²",
+      "unit": "m2",
+      "value": 165.85
+    },
+    {
+      "key": "volume",
+      "label": "kubatura brutto",
+      "raw": "904,80 m³",
+      "unit": "none",
+      "value": 904.8
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 8.25,
+      "index": 1,
+      "label": "hall z komunikacją",
+      "raw": "1 hall z komunikacją | 8,25",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 14.2,
+      "index": 2,
+      "label": "pokój",
+      "raw": "2 pokój | 14,20",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 18.95,
+      "index": 3,
+      "label": "pokój",
+      "raw": "3 pokój | 18,95",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.6,
+      "index": 4,
+      "label": "pokój",
+      "raw": "4 pokój | 11,60",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.95,
+      "index": 5,
+      "label": "łazienka",
+      "raw": "5 łazienka | 8,95",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 16.55,
+      "index": 6,
+      "label": "pokój",
+      "raw": "6 pokój | 16,55",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 2.95,
+      "index": 7,
+      "label": "garderoba",
+      "raw": "7 garderoba | 2,95",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 3.45,
+      "index": 8,
+      "label": "łazienka",
+      "raw": "8 łazienka | 3,45",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.6,
+      "index": 1,
+      "label": "przedsionek",
+      "raw": "1 przedsionek | 4,60",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.7,
+      "index": 2,
+      "label": "hall z komunikacją",
+      "raw": "2 hall z komunikacją | 6,70",
+      "storey": "GROUND"
+    },
+    {
+      "area": 27.55,
+      "index": 3,
+      "label": "pokój dzienny",
+      "raw": "3 pokój dzienny | 27,55",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.4,
+      "index": 4,
+      "label": "jadalnia",
+      "raw": "4 jadalnia | 10,40",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12,
+      "index": 5,
+      "label": "kuchnia",
+      "raw": "5 kuchnia | 12,00",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.05,
+      "index": 6,
+      "label": "spiżarka",
+      "raw": "6 spiżarka | 1,05",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.35,
+      "index": 7,
+      "label": "pokój",
+      "raw": "7 pokój | 8,35",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.2,
+      "index": 8,
+      "label": "łazienka",
+      "raw": "8 łazienka | 5,20",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.1,
+      "index": 9,
+      "label": "kotłownia",
+      "raw": "9 kotłownia | 5,10",
+      "storey": "GROUND"
+    },
+    {
+      "area": 21.1,
+      "index": 10,
+      "label": "garaż",
+      "raw": "10 garaż | 21,10",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom, w którym wiele się dzieje. Niebanalna konstrukcja, rogowe okna w kuchni i garażu, czy duża przeszklona witryna w salonie sprawiają, że w efekcie jest to dom wizualnie bardzo ciekawy, co jest ważne dla ceniących sobie nowoczesny styl i najnowsze rozwiązania. Zaproponowany program użytkowy domu gwarantuje komfort użytkowania pięcioosobowej rodzinie i to, że każdy z domowników znajdzie w nim swój własny przysłowiowy kąt. Funkcjonalny układ pomieszczeń spełni oczekiwania najbardziej wymagających. Strefa dzienna na parterze to przede wszystkim otwarte przestrzenie: duża otwarta kuchnia wzbogacona o spiżarkę na przetwory i zapasy, komfortowa jadalnia, sporych rozmiarów salon z kominkiem i wyjściem na pokaźny taras, co z kolei zagwarantuje komfort wspólnie spędzanego czasu. Dodatkowy gabinet na parterze ułatwi natomiast codzienne obowiązki, ale świetnie posłuży także jako pokój gościnny. Jednostanowiskowy garaż umiejscowiony w bryle budynku, a obok niego kotłownia i łazienka zamykają listę niezbędnych do komfortowego życia codziennego pomieszczeń na parterze. Część nocna na poddaszu to aż cztery duże, ustawne pokoje, z czego jeden znajdujący się nad garażem to master bedroom posiadający swoją odrębną łazienkę oraz praktyczną garderobę. Pozostałe sypialnie posiadają także wyjście na balkon, a każdy z pokoi wyposażony został we wnęki, które umożliwią dyskretne umiejscowienie szaf. Oprócz tego na poddaszu znajduje się sporych rozmiarów łazienka, która również posiada wyjście na balkon. Poddasze zostało zaprojektowane tak, aby jak najlepiej służyło wypoczynkowi i relaksowi. Projekt domu Agawa to zatem idealne rozwiązanie dla zwolenników zarówno praktycznych rozwiązań, jak i elegancji i nowoczesnego stylu."
+    },
+    {
+      "key": "roof",
+      "label": "kąt nachylenia dachu",
+      "text": "42 °"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu Agawa o powierzchni użytkowej 165,85 m2. Dom z poddaszem użytkowym i 4 sypialniami, przestronnym półokrągłym tarasem, z garażem"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Dom z poddaszem użytkowym i 4 sypialniami, przestronnym półokrągłym tarasem, z garażem"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

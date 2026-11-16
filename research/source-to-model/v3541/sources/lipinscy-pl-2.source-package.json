@@ -1,0 +1,1293 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Gotowy projekt domu Praia II elewacja lewa - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-elewacja-lewa-proje-410656da60",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19230 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja lewa - projekt Ludwika Juchniewicz-Lipińsk\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Praia II elewacja lewa - projekt Ludwika Juchniewicz-Lipińsk\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-thumb-19230-facades-thumb-gallery-small-jpeg-a50fe83969",
+      "selectionReason": "only variant (120x55, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.181818,
+          "byteHash": "ed13481b7b07f919b79244785c4abd67e168c8d4ba977cba43f6422d6d0a5d66",
+          "byteLength": 1553,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 55,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-19230-facades-thumb-gallery-small-jpeg-a50fe83969",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19230_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II elewacja prawa - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-elewacja-prawa-proj-b3f6d0cd3d",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 21019 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja prawa - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Praia II elewacja prawa - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-thumb-21019-facades-thumb-gallery-small-jpeg-69699e4acc",
+      "selectionReason": "only variant (120x55, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.181818,
+          "byteHash": "30b01c720657488a3cf0466169f18558c1a108773675641a9b2b3b1d17eee10f",
+          "byteLength": 1561,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 55,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-21019-facades-thumb-gallery-small-jpeg-69699e4acc",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/22/thumb_21019_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II elewacja przód - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-elewacja-przod-proj-a6f5cac118",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18335 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja przód - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Praia II elewacja przód - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-thumb-18335-facades-thumb-gallery-small-jpeg-70e2450b22",
+      "selectionReason": "only variant (120x41, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.926829,
+          "byteHash": "4f6e001c41a81591f1978c040972d501b41f783ab15623e71e5e71356c895517",
+          "byteLength": 1947,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 41,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-18335-facades-thumb-gallery-small-jpeg-70e2450b22",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18335_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II elewacja tył - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-elewacja-ty-projekt-5471e47fd5",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20124 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja tył - projekt Ludwika Juchniewicz-Lipińska\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Praia II elewacja tył - projekt Ludwika Juchniewicz-Lipińska\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-thumb-20124-facades-thumb-gallery-small-jpeg-2abd561922",
+      "selectionReason": "only variant (119x40, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.975,
+          "byteHash": "0c5f46d27716b97dfb28a13cd35a147479efc145044594656413dc593642f4e6",
+          "byteLength": 2043,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 40,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-20124-facades-thumb-gallery-small-jpeg-2abd561922",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20124_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-0b2d3671d8",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-9965-projects-thumb-gallery-small-jpeg-dfc46d8f92",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "74a192f6ef3de7cc312f94466f35f4e111fad7e81c3863b0d6c0780fb39b6aaf",
+          "byteLength": 2958,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-9965-projects-thumb-gallery-small-jpeg-dfc46d8f92",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9965_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-0c57a108c2",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb134a-detal-gk2-04216faf73",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "13ace11b44f036b37b07f9119d3f4834950d7fdfd41d629414899e63bdceb073",
+          "byteLength": 156437,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-detal-gk2-04216faf73",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/9962/dcb134a_detal_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-2d0afe5c4b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb134a-fr1-gk-3b121d55b6",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "970729f3182dbe9d6f4db12518283e1dfbca1eaf20212a016a5c11af32b7dc16",
+          "byteLength": 138078,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-fr1-gk-3b121d55b6",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/9964/dcb134a_fr1_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-2de7f4724c",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Praia II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Praia II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb134a-rd-500-pdf-05a2d1cbe1",
+      "selectionReason": "largest decoded raster of 2 variants: 770x988 over 340x436",
+      "variants": [
+        {
+          "aspect": 0.779352,
+          "byteHash": "4615cbb362118332339e5d847a0a9ed113e9cdfc1364d35cb792a1a812d02d60",
+          "byteLength": 10214,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 988,
+            "width": 770
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-rd-500-pdf-05a2d1cbe1",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26970/dcb134a_rd_500-pdf"
+        },
+        {
+          "aspect": 0.779817,
+          "byteHash": "7c6b26ed5308c9e896d5ee2a455b2466e355d1ae6b377557f373a04b4bd62bfb",
+          "byteLength": 78016,
+          "declared": {
+            "height": 988,
+            "width": 770
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 436,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-26970-plotpdf-thumb-png-7dfd5cdf98",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26970_plotpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-45edaa6c45",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb134a-fr1-gk2-77a3f71f3b",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "9a6d26d047dc7378a8414cd2d678a1ffc2d086d4332eebf19c0cd18516062552",
+          "byteLength": 128938,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-fr1-gk2-77a3f71f3b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/9965/dcb134a_fr1_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-5bf8965edd",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-9964-projects-thumb-gallery-small-jpeg-6be8dcde51",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "559504190d8ccb31f4f03196402281962694e58053b555b1d974663e4548d025",
+          "byteLength": 2953,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-9964-projects-thumb-gallery-small-jpeg-6be8dcde51",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9964_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-5dcd4d2ebe",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Praia II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb134a-px-pdf-3b233915ff",
+      "selectionReason": "largest decoded raster of 2 variants: 770x484 over 340x214",
+      "variants": [
+        {
+          "aspect": 1.590909,
+          "byteHash": "7370de720f48cb6ef50bb1ecf14fdedff9aec7a51a064e08c108f951dcf82a26",
+          "byteLength": 8886,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 484,
+            "width": 770
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-px-pdf-3b233915ff",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/25212/dcb134a_px-pdf"
+        },
+        {
+          "aspect": 1.588785,
+          "byteHash": "d81030d554f99f199df9ee0569ea1c12c01a6121f52a8017357db8c39e461352",
+          "byteLength": 42276,
+          "declared": {
+            "height": 484,
+            "width": 770
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 214,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-25212-crossviewpdf-thumb-png-01b7bfc41c",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25212_crossviewpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-7e5bb6787e",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb134a-og1-gk-8ad829bec7",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "ab1308defd28beffd8426b80c40de699dd7fef0a6fc58b019a8363e698dc60a3",
+          "byteLength": 159898,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-og1-gk-8ad829bec7",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/9968/dcb134a_og1_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-ab5238ae56",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-9962-projects-thumb-gallery-small-jpeg-fba3ac4e72",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "d3c1c8d5f79585a060893bf6217ccbe821ddcac47f08472544f8aee630e53363",
+          "byteLength": 3269,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-9962-projects-thumb-gallery-small-jpeg-fba3ac4e72",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9962_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-c0d931344f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Praia II rzut Parter - projekt Ludwika Juchniewicz-Lipińska,\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Praia II rzut Parter - projekt Ludwika Juchniewicz-Lipińska,\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 65,32 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb134a-r1-pdf-5bcafd3fad",
+      "selectionReason": "largest decoded raster of 2 variants: 683x1000 over 340x498",
+      "variants": [
+        {
+          "aspect": 0.683,
+          "byteHash": "3a13f2f443f80ea2f9959906aff27fdcfa59f98e284ef0cf85df360576d4e17f",
+          "byteLength": 32519,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1000,
+            "width": 683
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-r1-pdf-5bcafd3fad",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/33204/dcb134a_r1-pdf"
+        },
+        {
+          "aspect": 0.682731,
+          "byteHash": "02ba38a873546ddffe0547b29771b5545a30860e576605987a763c37aa38b328",
+          "byteLength": 157087,
+          "declared": {
+            "height": 1000,
+            "width": 683
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 498,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-33204-floorplanpdf-thumb-png-e24c2733d3",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33204_floorplanpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-f37cb0c207",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-9969-projects-thumb-gallery-small-jpeg-4a0c6aafe9",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "de872babbe0982dcd33be54d229febe4ccef1d3ee03611474ce39901213113a2",
+          "byteLength": 3041,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-9969-projects-thumb-gallery-small-jpeg-4a0c6aafe9",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9969_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-f7ce6ac1d5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb134a-og1-gk2-9d3544f9ee",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "a7cf0b50e66f0fa1bee743edae9b065bb54f91409a563921e1be6c14932727b8",
+          "byteLength": 152443,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-og1-gk2-9d3544f9ee",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/9969/dcb134a_og1_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-projekt-ludwika-juc-fe1c40441d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-9968-projects-thumb-gallery-small-jpeg-f25c44f0af",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "f724d983e2059097063e7f242e562b5a688f01018fbb969fd9422ee5be272527",
+          "byteLength": 3015,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-9968-projects-thumb-gallery-small-jpeg-f25c44f0af",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9968_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II przekrój",
+      "id": "asset-gotowy-projekt-domu-praia-ii-przekroj-c830476942",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Praia II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-25212-crossviewpdf-thumb-gallery-big-v2-pn-4599b0b735",
+      "selectionReason": "only variant (736x463, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.589633,
+          "byteHash": "c986493121660b89c37eace8b7d7119ceacc1b0b093ccbf13c315ec0400f1080",
+          "byteLength": 1365816,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 463,
+            "width": 736
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-25212-crossviewpdf-thumb-gallery-big-v2-pn-4599b0b735",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25212_crossviewpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II przekrój - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-przekroj-projekt-lu-1c933f6273",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Praia II przekrój - projekt Ludwika Juchniewicz-Lipińska, Mi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-25212-crossviewpdf-thumb-gallery-small-png-c1400edc00",
+      "selectionReason": "only variant (119x75, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.586667,
+          "byteHash": "cf90368dfa0da02cdb25b017b68149df07cd1faa0980f2705f8d23116a83450b",
+          "byteLength": 5692,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 75,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-25212-crossviewpdf-thumb-gallery-small-png-c1400edc00",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25212_crossviewpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II rzut Parter",
+      "id": "asset-gotowy-projekt-domu-praia-ii-rzut-parter-1e60b680db",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Praia II rzut Parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Praia II rzut Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-33204-floorplanpdf-thumb-gallery-small-png-da52e17143",
+      "selectionReason": "only variant (120x176, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.681818,
+          "byteHash": "b5bb27d21490509215b6d119b9a2cc8534c1574a26d5cbc4a6708f6d5d7db85f",
+          "byteLength": 22906,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 176,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-33204-floorplanpdf-thumb-gallery-small-png-da52e17143",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33204_floorplanpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II rzut Parter - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-rzut-parter-projekt-5bca74e213",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Praia II rzut Parter - projekt Ludwika Juchniewicz-Lipińska,\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Praia II rzut Parter - projekt Ludwika Juchniewicz-Lipińska,\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-33204-floorplanpdf-thumb-gallery-big-v2-pn-67414fab3c",
+      "selectionReason": "only variant (683x1000, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.683,
+          "byteHash": "4c78b290b64199048773b1c5005dfda92a7f2927b0885ea26d176516770a6c65",
+          "byteLength": 2737500,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1000,
+            "width": 683
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-33204-floorplanpdf-thumb-gallery-big-v2-pn-67414fab3c",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33204_floorplanpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II wymiary działki",
+      "id": "asset-gotowy-projekt-domu-praia-ii-wymiary-dzia-ki-dc58dc2dca",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Praia II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Praia II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-26970-plotpdf-thumb-gallery-big-v2-png-253ea1dc6d",
+      "selectionReason": "only variant (736x944, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.779661,
+          "byteHash": "d7c108097423788f3d956dff7606baba24a8895ba14520afcc4129118bfc3cd8",
+          "byteLength": 2784652,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 944,
+            "width": 736
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-26970-plotpdf-thumb-gallery-big-v2-png-253ea1dc6d",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26970_plotpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Praia II wymiary działki  - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-praia-ii-wymiary-dzia-ki-pro-b67f35f320",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Praia II wymiary działki  - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Praia II wymiary działki  - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-26970-plotpdf-thumb-gallery-small-png-f26a22107b",
+      "selectionReason": "only variant (120x154, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.779221,
+          "byteHash": "4da8c72ee747f4e4aed7cd0401244bb92379a0048cf808f7786e887149032f9b",
+          "byteLength": 9063,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 154,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-26970-plotpdf-thumb-gallery-small-png-f26a22107b",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26970_plotpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Praia II",
+      "id": "asset-projekt-domu-praia-ii-2f1437ab34",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja lewa - projekt Ludwika Juchniewicz-Lipińsk\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Praia II elewacja lewa - projekt Ludwika Juchniewicz-Lipińsk\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-dcb134a-e2-gk2-bebae9d209",
+      "selectionReason": "largest decoded raster of 2 variants: 879x400 over 200x91",
+      "variants": [
+        {
+          "aspect": 2.1975,
+          "byteHash": "222d7dc7da1b64eb31879df47c110840b9c0f38b218af39e06f9bb35874f5947",
+          "byteLength": 12337,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 879
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-e2-gk2-bebae9d209",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/19230/dcb134a_e2_gk2"
+        },
+        {
+          "aspect": 2.197802,
+          "byteHash": "1de22cecbb39bdb1718d7ad431a0476bc71a9e288c8275bef661d051c1ffdc24",
+          "byteLength": 4037,
+          "declared": {
+            "height": 400,
+            "width": 879
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 91,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-19230-admin-jpeg-328fc97bef",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19230_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Praia II",
+      "id": "asset-projekt-domu-praia-ii-33d347d94e",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja tył - projekt Ludwika Juchniewicz-Lipińska\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Praia II elewacja tył - projekt Ludwika Juchniewicz-Lipińska\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-dcb134a-e3-gk2-2a2884905b",
+      "selectionReason": "largest decoded raster of 2 variants: 1192x400 over 200x67",
+      "variants": [
+        {
+          "aspect": 2.98,
+          "byteHash": "e30c9c31cadb69427878c8b547239899e4a5abcac881ee25411f5f81d5fc6ce8",
+          "byteLength": 30049,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1192
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-e3-gk2-2a2884905b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/20124/dcb134a_e3_gk2"
+        },
+        {
+          "aspect": 2.985075,
+          "byteHash": "078ba0c0ae3129f1e0f682950d507e467e82043fe7d6e0f177b738248dabaa71",
+          "byteLength": 5846,
+          "declared": {
+            "height": 400,
+            "width": 1192
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 67,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-20124-admin-jpeg-f358953810",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20124_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Praia II",
+      "id": "asset-projekt-domu-praia-ii-60bc0dae80",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja prawa - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Praia II elewacja prawa - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-dcb134a-e4-gk2-1a0284ed9b",
+      "selectionReason": "largest decoded raster of 2 variants: 879x400 over 200x91",
+      "variants": [
+        {
+          "aspect": 2.1975,
+          "byteHash": "9ce25000927715c6f064bf395ceea9c5148f845ae01d4be4636a5d3e965e73af",
+          "byteLength": 12242,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 879
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-e4-gk2-1a0284ed9b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/21019/dcb134a_e4_gk2"
+        },
+        {
+          "aspect": 2.197802,
+          "byteHash": "b2e210fa02aa985561041913150ddc295c88716740e64d3aca2bdf2c07205fad",
+          "byteLength": 4018,
+          "declared": {
+            "height": 400,
+            "width": 879
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 91,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-21019-admin-jpeg-bd6402d4a8",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/22/thumb_21019_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Praia II",
+      "id": "asset-projekt-domu-praia-ii-6f14bc470b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Praia II elewacja przód - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Praia II elewacja przód - projekt Ludwika Juchniewicz-Lipińs\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-dcb134a-e1-gk2-51346a944c",
+      "selectionReason": "largest decoded raster of 2 variants: 1175x400 over 200x68",
+      "variants": [
+        {
+          "aspect": 2.9375,
+          "byteHash": "3d3faca5bd0a4618b6c69e06e0a7f8d9cb89bfbabe90899029e9d233733a055e",
+          "byteLength": 26708,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1175
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-dcb134a-e1-gk2-51346a944c",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/18335/dcb134a_e1_gk2"
+        },
+        {
+          "aspect": 2.941176,
+          "byteHash": "313ff291cc4990368128686d83fe5cf6be9b88c3ea40e1d5296718325866e7e2",
+          "byteLength": 5665,
+          "declared": {
+            "height": 400,
+            "width": 1175
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 68,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/praia-ii",
+          "id": "var-thumb-18335-admin-jpeg-6efa2bad87",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18335_admin.jpeg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://lipinscy.pl/projekt/praia-ii",
+  "contentHash": "8829431e417cb19792d3efbd11d96389ce9c4869242e5da7478924ed5c20ed4b",
+  "failures": [
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/9965/dcb134a_fr1_gk2: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/10/da9c28db2b386659d1467d368ee4c29abcbd1eef.jpeg"
+    }
+  ],
+  "fetchedUrl": "https://lipinscy.pl/projekt/praia-ii/",
+  "id": "src-lipinscy-pl-614e6cb15b",
+  "pageHash": "cba446c30423bb43585490fda709254014f8a65a0f4845281023ba6fdf29972a",
+  "project": {
+    "name": "Projekt Praia II - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "86,16m²",
+      "unit": "m2",
+      "value": 86.16
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "raw": "65,32m²",
+      "unit": "m2",
+      "value": 65.32
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "99,24m²",
+      "unit": "m2",
+      "value": 99.24
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "30°",
+      "unit": "deg",
+      "value": 30
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "65,32m²",
+      "unit": "m2",
+      "value": 65.32
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Niewielki, nowoczesny dom parterowy z dwuspadowym dachem, o zwartej bryle, przewidziany w standardzie energooszczędnym, dzięki czemu nie jest drogi w eksploatacji, a przy tym wygodny i funkcjonalny. Dzięki niewielkiej szerokości może być zlokalizowany nawet na bardzo wąskiej działce. Idealnie nadaje się dla pary lub niewielkiej rodziny. W domu zaplanowano wygodną sypialnię małżeńską, przytulny salon, doświetlony dużym oknem, aneks kuchenny z częścią jadalnianą, łazienkę oraz dodatkowy pokój, doskonale sprawdzający się jako gabinet lub pokój gościnny. Projekt zapewne zwróci uwagę Inwestorów, którzy szukają niewielkiego, wygodnego i nowoczesnego domu, który można wybudować na działce, gdzie płaski dach nie jest dopuszczony. W projekcie przewidziano ogrzewanie kotłem na gaz. Możliwa jest zmiana ogrzewania na pompę ciepła."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "30°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Mały dom parterowym z dachem dwuspadowym, z jasnym salonem doświetlonym oknami z dwóch stron, z dwiema sypialniami, odpowiedni na wąskie działki"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/praia-ii/Niewielki, nowoczesny dom parterowy z dwuspadowym dachem, o zwartej bryle, przewidziany w standardzie energooszczędnym, dzięki czemu nie jest drogi w eksploatacji, a przy tym wygodny i funkcjonalny. Dzięki niewielkiej szerokości może być zlokalizowany nawet na bardzo wąskiej działce. Idealnie nadaje się dla pary lub niewielkiej rodziny. W domu zaplanowano wygodną sypialnię małżeńską, przytulny salon, doświetlony dużym oknem, aneks kuchenny z częścią jadalnianą, łazienkę oraz dodatkowy pokój, doskonale sprawdzający się jako gabinet lub pokój gościnny. Projekt zapewne zwróci uwagę Inwestorów, którzy szukają niewielkiego, wygodnego i nowoczesnego domu, który można wybudować na działce, gdzie płaski dach nie jest dopuszczony. W projekcie przewidziano ogrzewanie kotłem na gaz. Możliwa jest zmiana ogrzewania na pompę ciepła."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

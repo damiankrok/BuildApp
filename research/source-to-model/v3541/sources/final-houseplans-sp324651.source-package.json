@@ -1,0 +1,1274 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-48-1132-a2419f0da9",
+  "canonicalUrl": "https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+  "pageHash": "847afb2e28cf3f748772d1838367dec25235bccbd90a711a442556539ee01440",
+  "project": {
+    "externalId": "48-1132",
+    "name": "Traditional Style House Plan - 1 Beds 1 Baths 506 Sq/Ft Plan #48-1132",
+    "publisher": "houseplans.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-20-2346-07ac8c6ebe",
+      "caption": "20-2346",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-10-441aa49f91",
+          "url": "https://cdn.houseplansservices.com/product/6dvrhpc2dcpm1vut8kgv5us25h/w560x373.jpg?v=10",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 59782,
+          "byteHash": "3b21209167e7199547f40a27838d9239b61d387e786f95ac2d4e2c086461055d",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-10-441aa49f91",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "caption": "Builder Advantage Home",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 215913,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "decoded": {
+            "width": 890,
+            "height": 614
+          },
+          "declaredMismatch": false,
+          "aspect": 1.449511
+        }
+      ],
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-traditional-house-0bf1196e4b",
+      "caption": "Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w600-jpg-v-3-cc8ff5f47c",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w600.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 58867,
+          "byteHash": "c42d3c935d6fe0723b0596ea2ee98cdb7a70b2e13c168a98ca7578c906bfc6b8",
+          "decoded": {
+            "width": 600,
+            "height": 375
+          },
+          "declaredMismatch": false,
+          "aspect": 1.6
+        }
+      ],
+      "selectedVariantId": "var-w600-jpg-v-3-cc8ff5f47c",
+      "selectionReason": "only variant (600x375, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-traditional-house-76048393a3",
+      "caption": "Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-3-1184079e92",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w800x533.jpg?v=3",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 114513,
+          "byteHash": "839738e1705e39b1c8dc94e2bc2f10129ac26ea866a44dd71bacf2902e8c786d",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-3-f4d8446845",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w620x413.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 67763,
+          "byteHash": "8410da2f08c331623433d78dc5c6c20b1a419769d91e2d10bdea0669bb5dd58a",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-3-1184079e92",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-traditional-house-967f9ad6aa",
+      "caption": "Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w1024-jpg-v-3-b36cd89108",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w1024.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 186166,
+          "byteHash": "1aff7f3d072a4559fbf89baad357c3ba669148a21198053e0bbc504320715782",
+          "decoded": {
+            "width": 1024,
+            "height": 640
+          },
+          "declaredMismatch": false,
+          "aspect": 1.6
+        }
+      ],
+      "selectedVariantId": "var-w1024-jpg-v-3-b36cd89108",
+      "selectionReason": "only variant (1024x640, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-traditional-house-ae4d4be3a3",
+      "caption": "Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-jpg-v-3-c267c76a7d",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/original.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 2905278,
+          "byteHash": "9f8e8c9007e0ba16174fdb44da7829f5c8841ba54fd20d6bc58803d9ba2bdb39",
+          "decoded": {
+            "width": 2000,
+            "height": 1250
+          },
+          "declaredMismatch": false,
+          "aspect": 1.6
+        }
+      ],
+      "selectedVariantId": "var-original-jpg-v-3-c267c76a7d",
+      "selectionReason": "only variant (2000x1250, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-barndominium-house-d070edc03e",
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #48-992 - 3 bed, 2.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #48-992 - 3 bed, 2.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #48-992 - 3 bed, 2.5 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-10-e452c87987",
+          "url": "https://cdn.houseplansservices.com/product/vbscddu1si0bervmp0763hab18/w300x200.jpg?v=10",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 18802,
+          "byteHash": "d621857fd967b3896ccef3998775a84aedf83ae1820d862b426c2bb189e7faa2",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-10-e452c87987",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-9434a21657",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #48-1039 - 3 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #48-1039 - 3 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #48-1039 - 3 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-6-9698d2703d",
+          "url": "https://cdn.houseplansservices.com/product/ai7g93gu934dfnhakasechur6t/w300x200.jpg?v=6",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 19368,
+          "byteHash": "dcebba44f556c2230965615de7784791e9fd08ac5beb19fb8f6e06ec57b98b7e",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-6-9698d2703d",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-cottage-house-plan-61ca0d3eaf",
+      "caption": "Exterior - Front Elevation for Cottage House Plan #48-645 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Cottage House Plan #48-645 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Cottage House Plan #48-645 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-21-d7536cbc01",
+          "url": "https://cdn.houseplansservices.com/product/que55iqfrpdjjhkiuj1va24idq/w300x200.jpg?v=21",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 24703,
+          "byteHash": "1d0e2c74118b5a6144b2519e81f933560cef4184219940f7109d44e9aa9dfbde",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-21-d7536cbc01",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-farmhouse-house-pla-4c40fe035d",
+      "caption": "Exterior - Front Elevation for Farmhouse House Plan #48-1032 - 3 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Farmhouse House Plan #48-1032 - 3 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Farmhouse House Plan #48-1032 - 3 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-10-eee833ed03",
+          "url": "https://cdn.houseplansservices.com/product/reg8pq9b4v9aqd7j5fft8qk66f/w300x200.jpg?v=10",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 21143,
+          "byteHash": "9f99ae3f09a7119fc88dc03237ab7a18cbf260a80f3137cb1277b3083f4a444f",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-10-eee833ed03",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-farmhouse-house-pla-e731d88775",
+      "caption": "Exterior - Front Elevation for Farmhouse House Plan #48-1051 - 4 bed, 4.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Farmhouse House Plan #48-1051 - 4 bed, 4.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Farmhouse House Plan #48-1051 - 4 bed, 4.5 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-1583397025",
+          "url": "https://cdn.houseplansservices.com/product/88e9rl09qou0ln2s7pnnj09r25/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 19089,
+          "byteHash": "a6def82a5bb72826df0f731441754ac63dd82fde91180ab8c48b32b1ed2c506c",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-1583397025",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-traditional-house-p-5851b75908",
+      "caption": "Exterior - Front Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-3-866b4fbd3d",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 54823,
+          "byteHash": "31e01a89dc7330ab670cbc6fddc59d2304db5d14ad6a9b34715ff0c8a1ed420f",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350,
+            "height": 233
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-3-866b4fbd3d",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-for-traditional-house-p-91882c8de5",
+      "caption": "Exterior - Other Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-3-5951c2f738",
+          "url": "https://cdn.houseplansservices.com/product/cqh9dh15gjk5g915me6pu5flcr/w800x533.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 113219,
+          "byteHash": "21269c430d2f031f1b13651037503a2373c6232248adf39ccb9d9210e3dce708",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-3-566e2771eb",
+          "url": "https://cdn.houseplansservices.com/product/cqh9dh15gjk5g915me6pu5flcr/w620x413.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 67175,
+          "byteHash": "e9c43884e0a5bd10399d6a93acd2a6383294fa87a69ccb9b730f8f6d0726c78b",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-3-e0a56430e8",
+          "url": "https://cdn.houseplansservices.com/product/cqh9dh15gjk5g915me6pu5flcr/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 54820,
+          "byteHash": "a72b91d85b169a2fa0b5e9fa0bc9da3dca7cf1deb19cdb1e3ba22eec9188665f",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-3-5951c2f738",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-rear-elevation-for-traditional-house-pl-4430f91aae",
+      "caption": "Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-3-994fd79a22",
+          "url": "https://cdn.houseplansservices.com/product/g16m9064bg2lh4g4bjvka9n7mq/w800x533.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 116694,
+          "byteHash": "491d80316ecfac7f6ffcb97bcb4e719fc400fa34ecaba811736bd3d313775331",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-3-ac96dd0706",
+          "url": "https://cdn.houseplansservices.com/product/g16m9064bg2lh4g4bjvka9n7mq/w620x413.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 69075,
+          "byteHash": "630df9bf59f75091a080fb7b2b9536a5372450114cc182f63014a792b9fbbe25",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-3-28e9552db7",
+          "url": "https://cdn.houseplansservices.com/product/g16m9064bg2lh4g4bjvka9n7mq/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 55877,
+          "byteHash": "72cf6282307bf05adf72943e4dfca2462481f823b0138d978d600a3ac4d13456",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-3-994fd79a22",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-traditional-house-plan-457820c36a",
+      "caption": "Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-png-v-3-79512a203f",
+          "url": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/w800x533.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 45860,
+          "byteHash": "1383474e9cd65a3e6d09c46253610b38579e60088d114ce06a56331312bfd113",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-w800x533-png-v-3-79512a203f",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-traditional-house-plan-7884295131",
+      "caption": "Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-png-v-3-1fd9f1ed2d",
+          "url": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/original.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 334731,
+          "byteHash": "b4aad69c229d9eaf75c70faede0b5bedb99df3b0c18ff306ee4ce4eca1119f7e",
+          "decoded": {
+            "width": 2438,
+            "height": 3639
+          },
+          "declaredMismatch": false,
+          "aspect": 0.669964
+        },
+        {
+          "id": "var-w1024-png-v-3-f30e9900e8",
+          "url": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/w1024.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 161892,
+          "byteHash": "3ba1505dcca97a2a9da83769af2e0c7f6511500b4e46f7d2b545109ae1125f7f",
+          "decoded": {
+            "width": 1024,
+            "height": 1528
+          },
+          "declaredMismatch": false,
+          "aspect": 0.670157
+        }
+      ],
+      "selectedVariantId": "var-original-png-v-3-1fd9f1ed2d",
+      "selectionReason": "largest decoded raster of 2 variants: 2438x3639 over 1024x1528"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-traditional-house-plan-7aeac0d13c",
+      "caption": "Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Traditional House Plan #48-1132 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-png-v-3-390605d4a5",
+          "url": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/w560x373.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 28087,
+          "byteHash": "09759d203a74d6178073c8662a3d32fff9a91124b1f086294237a9f185486011",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-png-v-3-390605d4a5",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-839ab8c26b-3e60b98840",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 97045,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "decoded": {
+            "width": 364,
+            "height": 499
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.729459
+        }
+      ],
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-839ab8c26b-af801857ef",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 67440,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "decoded": {
+            "width": 263,
+            "height": 400
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.6575
+        }
+      ],
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-48-1132-255a82e24c",
+      "caption": "Plan 48-1132",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-d1c695d2ca",
+          "url": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 16042,
+          "byteHash": "223eb942b3069d3a7ae40574034f6acd40d3a4815aa32a19e2c16d77af51230d",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-d1c695d2ca",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-storybook-tudor-cottage-floor-plan-ec49b9bd64",
+      "caption": "Storybook tudor cottage floor plan",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Storybook tudor cottage floor plan\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-26-6145ccd5cf",
+          "url": "https://cdn.houseplansservices.com/product/e46jlld26f96aoudc97k8dm5vb/w300x200.jpg?v=26",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/jpeg",
+          "byteLength": 24529,
+          "byteHash": "f55dda5d231f3d7ea57519960d897676959553aea49fd05a8b23362fb5dc3a34",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-26-6145ccd5cf",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-465700b897",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 87450,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "decoded": {
+            "width": 600,
+            "height": 448
+          },
+          "declaredMismatch": false,
+          "aspect": 1.339286
+        }
+      ],
+      "selectedVariantId": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-8a0596b514",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 73202,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-c039d29147",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/506-square-feet-1-bedroom-1-bathroom-2-garage-traditional-sp324651",
+          "mediaType": "image/png",
+          "byteLength": 95997,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "value": 5.207,
+      "unit": "m",
+      "raw": "17' 1\""
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 14.021,
+      "unit": "m",
+      "raw": "46'"
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 6.706,
+      "unit": "m",
+      "raw": "22'"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "In some regions, there is a second step you will need to take to ensure your house plans are in compliance with local codes. Some areas of North America have very strict engineering requirements. Examples of this would be, but not limited to, earthquake-prone areas of California and the Pacific Coast, hurricane risk areas of the Florida, Gulf &amp; Carolina Coasts. New York, New Jersey, Nevada, and parts of Illinois require review by a local professional as well. If you are building in these areas, it is most likely you will need to hire a state licensed structural engineer to analyze the design and provide additional drawings and calculations required by your building department. If you aren’t sure, building departments typically have a handout they will give you listing all of the items they require to submit for and obtain a building permit."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This traditional design floor plan is 506 sq ft and has 1 bedrooms and 1 bathrooms."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/w560x373.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 0.669964: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/dbuojpl5gh59oinfm7svokd4o3/w800x533.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 0.669964: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/original.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.6 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w1024.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.6 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/u5fja215fclidtqv83peetcmqo/w600.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.6 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    }
+  ],
+  "contentHash": "367d07f12e26fb8c4cde0a59818681a5a039ae8f45cff5f1c5a48767e86f38f7"
+}

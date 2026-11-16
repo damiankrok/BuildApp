@@ -1,0 +1,766 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-parter-7-webp-58c5eb9946",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"parter 7\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-parter-7-webp-0d8bed3c4b",
+      "selectionReason": "only variant (1130x1920, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.588542,
+          "byteHash": "6709a892d7a36a783077c52657a24934790bb24ce164cc2e9fd9240f453ff829",
+          "byteLength": 90410,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1920,
+            "width": 1130
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-parter-7-webp-0d8bed3c4b",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/parter-7.webp"
+        }
+      ]
+    },
+    {
+      "id": "asset-podasze-webp-97547996ce",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-podasze-webp-b43af6fad2",
+      "selectionReason": "only variant (1130x1920, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.588542,
+          "byteHash": "7b01ae37d77cf2ad657f92c187ba522a8d8d2c0ce9ce045d2bd6f4c1c5ef34ed",
+          "byteLength": 79766,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1920,
+            "width": 1130
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-podasze-webp-b43af6fad2",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/podasze.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – widok główny",
+      "id": "asset-projekt-akord-10-widok-g-owny-a8c4454d64",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"widok\" in \"Projekt Akord 10 – widok główny\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis1-webp-73f48af739",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "716e1b6bf82c8fef9c8220b4c4dc09b4c988088fe6ebf38915fb6913b97aed27",
+          "byteLength": 162954,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis1-webp-73f48af739",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis1.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "597ee650332086d04e867864025d8d9041e04db06030044a39870f8a06d0a58d",
+          "byteLength": 22072,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis1-thumbnail-262-webp-021cd2ebc2",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis1_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-008870cf8f",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis7-webp-9d8d62f442",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "4023cd63d138f2dd65ae68fdf12431a4b21a9ef253dcbb56f232ecb2c517114c",
+          "byteLength": 86534,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis7-webp-9d8d62f442",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis7.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "679c065fa22e60bad58fb51f961509e3e7f4104dcb924d6379f563da32b1dc75",
+          "byteLength": 16676,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis7-thumbnail-262-webp-4f6e298a1f",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis7_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-2e8bdc576c",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis6-webp-db47470d01",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "2bdb5464a830aec36971117d2b55fd02acb398e28e0828f79accb72c20c6a577",
+          "byteLength": 55244,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis6-webp-db47470d01",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis6.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "a1a21c621951b1964047dc94d9d6e5072daf5b9872c1cb402a7c387cf22aafa4",
+          "byteLength": 14216,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis6-thumbnail-262-webp-6610c3233b",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis6_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-313bb274a6",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis3-webp-8603655b56",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c491f89815ef8ab65c969af31708598759ea5501d98dd9217e7713403d5f4fad",
+          "byteLength": 73644,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis3-webp-8603655b56",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis3.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "8230c0e7a333ddb8442bb1a461482e9fa9db007c2e26770f45f905e8f0fbf83d",
+          "byteLength": 16612,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis3-thumbnail-262-webp-63f2e719be",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis3_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-8b6b02d6ed",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis8-webp-88b157c241",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c1bd336f5081eb8ea0b29f26daf46efb8c30d1fcad7311b78981813db2e5ea86",
+          "byteLength": 66200,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis8-webp-88b157c241",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis8.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "83ec1dc786d92988b58e432d73cc236f13c0b085d33fb7c56a5106ab089fed3b",
+          "byteLength": 14958,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis8-thumbnail-262-webp-ecd1803a9b",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis8_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-ba319eddab",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis2-webp-9bf4bfd995",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "f5e8009ab70f4e0248d86033ab8b063ddc301a994efc6a22fff997ebf264b033",
+          "byteLength": 187570,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis2-webp-9bf4bfd995",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis2.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "2d9f96e74f10130117a6dce04c0de68ae8b61f56b19e80ab6e838b27d5facd2f",
+          "byteLength": 23470,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis2-thumbnail-262-webp-dbda35dfcb",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis2_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-d9ce035cde",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis5-webp-b8e1640a2a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "96ee20325108fc0c260c68a905ab7ce16a3eaa03b3281db78092f97c98e3afea",
+          "byteLength": 73650,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis5-webp-b8e1640a2a",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis5.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "998770ed27e685c78a5e62e1018186a28c76d9e986d0345ee6732ee0e248b06d",
+          "byteLength": 16682,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis5-thumbnail-262-webp-0c407ddaaf",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis5_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-e53cd454f4",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis4-webp-e30565ca87",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "e5e3328620611df7e7a87852d1b85986e08e442c1d650e97d4734a23c6f80313",
+          "byteLength": 83212,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis4-webp-e30565ca87",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis4.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "fd460b99fbc78dcf06cec7c0b84d38528b53b60914167e62afc529acd29380e1",
+          "byteLength": 16918,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis4-thumbnail-262-webp-40ab108a4e",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis4_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord 10 – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-10-wizualizacja-bry-y-budynku-f6004cf432",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord 10 – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-el-webp-d44980fdd1",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x720 over 262x147",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "4162f74ac3c3303825474e1be0bd8147911a631cabdc8f1a53aee7978f5841cf",
+          "byteLength": 24664,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-el-webp-d44980fdd1",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_el.webp"
+        },
+        {
+          "aspect": 1.782313,
+          "byteHash": "85ecb353e25edab98d529eeae10bd5be99750ca77987706a1eeca0233d8212cf",
+          "byteLength": 7546,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 147,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-el-thumbnail-262-webp-dae2b23f64",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_el_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Akord 10",
+      "id": "asset-projekt-domu-akord-10-7f19a12823",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-akord-10-vis1-thumbnail-740-webp-937ac0c63a",
+      "selectionReason": "largest decoded raster of 2 variants: 740x416 over 366x205",
+      "variants": [
+        {
+          "aspect": 1.778846,
+          "byteHash": "e017bc102219287e3fe77f8f79922939150159e182de08e362014420df66af75",
+          "byteLength": 135082,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 416,
+            "width": 740
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis1-thumbnail-740-webp-937ac0c63a",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis1_thumbnail_740.webp"
+        },
+        {
+          "aspect": 1.785366,
+          "byteHash": "586d7708ae96b9a74e5905275cab55d57a25a21e0b11123ab264c19b1e52fbfa",
+          "byteLength": 38470,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 205,
+            "width": 366
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-akord-10-vis1-thumbnail-366-webp-f9f8126f69",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/akord-10_vis1_thumbnail_366.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord 10",
+      "id": "asset-rzut-sytuacyjny-na-dzia-ce-minimalne-wymiary-dla-90b49d277d",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord 10\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialka\" in \"dzialka 703 thumbnail 120\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialka\" in \"dzialka 703\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord 10\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dzialka-703-webp-bccc2a2c82",
+      "selectionReason": "largest decoded raster of 2 variants: 832x1080 over 120x155",
+      "variants": [
+        {
+          "aspect": 0.77037,
+          "byteHash": "d7bc0b1067f01413ce8926d0231b1ff169d3cbf07245eaca893e831919762e29",
+          "byteLength": 38098,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1080,
+            "width": 832
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-dzialka-703-webp-bccc2a2c82",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/dzialka-703.webp"
+        },
+        {
+          "aspect": 0.774194,
+          "byteHash": "e37be915c19c909a8aaf939e940cbb9cc1a12034f2d52a211d3e850ae2346ef2",
+          "byteLength": 7156,
+          "declared": {
+            "height": 200,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 155,
+            "width": 120
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+          "id": "var-dzialka-703-thumbnail-120-webp-851f9cd228",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord-10/dzialka-703_thumbnail_120.webp"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10",
+  "contentHash": "dd796fe87eea2ce49655f4f13b2ffcb1f21af8e0705756ef964fa4837d7207e7",
+  "failures": [],
+  "fetchedUrl": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord-10/",
+  "id": "src-projekt-domu-akord-10-af6801969b",
+  "pageHash": "bb8d950d59f658a115703c21b5e32b114242e55fbb2520f285d7c5080ec6ff4b",
+  "project": {
+    "externalId": "projekt-domu-akord-10",
+    "name": "Akord 10 - Domowe Klimaty",
+    "publisher": "domoweklimaty.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_width",
+      "label": "Szerokość budynku",
+      "raw": "17,55 m",
+      "unit": "m",
+      "value": 17.55
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "163,08 m²",
+      "unit": "m2",
+      "value": 163.08
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Minimalna szerokość działki",
+      "raw": "25,75 m",
+      "unit": "m",
+      "value": 25.75
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "42 °",
+      "unit": "deg",
+      "value": 42
+    },
+    {
+      "key": "usable_area",
+      "label": "Pow. użytkowa",
+      "raw": "144.7m²",
+      "unit": "m2",
+      "value": 144.7
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Podejmujemy starania, aby zawartość naszej strony internetowej jak najlepiej odzwierciedlała cechy oferowanych projektów. Z uwagi jednak na stały rozwój i konieczność aktualizacji, prezentowane materiały mogą odbiegać od szczegółowych rozwiązań zawartych w dokumentacji."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "42 °"
+    },
+    {
+      "key": "roof",
+      "label": "Typ dachu",
+      "text": "Dwuspadowy"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu z użytkowym poddaszem i dwustanowiskowym garażem. Warto zwrócić uwagę na dużą kuchnię ze spiżarnią, obszerny salon z zadaszonym tarasem; wymaga stosunkowo płytkiej działki."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

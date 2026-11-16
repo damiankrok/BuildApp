@@ -1,0 +1,1446 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-dodatkow-4b95e2878d",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-630f819a3f21a54-9b53cfc04e",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "2b4035886f6330f93c1da1714768a5db7f588c24b9997fcf5ada5f1ca3fcd034",
+          "byteLength": 1064084,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md662742367561/carousel_images",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-630f819a3f21a54-9b53cfc04e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/f/projekt-dom-w-nolanach-2-g2e-oze-630f819a3f21a5435ef02df3874711be__47194.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-elewacja-5501da2eba",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-81bb352063547ed-cbeec7b028",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "9e8e9ab2ae6a419818bd30eac004bb3704379300c4132ac5f0ec10e6a5ddfb1b",
+          "byteLength": 646629,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-81bb352063547ed-cbeec7b028",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-81bb352063547ed6ba0b01f6790e3ced__11265.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "591e5a5473a39a11b575a2e6b8a4cd963e903e7aba7f967c0ea046e1f93cce37",
+          "byteLength": 148647,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-df5bcae260",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-240bad5038d0223048a86417998fb0ab__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-elewacja-82ccbff751",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-dbac30007c0baeb-a9ee177402",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "e17c6efda76e328b5c8876b4cad3835532e6f72be738983f2a43f7759520f722",
+          "byteLength": 644555,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-dbac30007c0baeb-a9ee177402",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-dbac30007c0baebbcce131aff9e74eca__11266.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "7ca31aa19dceb04f0f6e161bb16284f306848627e996156b3c7a2077d53da71e",
+          "byteLength": 148112,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-b7d7f10604",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-e5f9944ec3ca98b01bce58b5412d1777__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-elewacja-bff4e87944",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-bd31dde8552b6a2-c272c9f39a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "23c5553bf58275114eb85eca9226c8fdf62f57a2797ac547520d5f3a0a642cf2",
+          "byteLength": 535621,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-bd31dde8552b6a2-c272c9f39a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-bd31dde8552b6a2fcf2c578cfebeefc9__11267.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "c849042391d07adfeeb3ce40de5a7466afe30704c62f006e6c9cb28ff4f3bcb5",
+          "byteLength": 122416,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-nolanach-2-g2e-o-fa8266f7a7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/elewacja-ogrodowa-projekt-dom-w-nolanach-2-g2e-oze-212b831ac6455cce2813b71b7641b656__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-elewacja-cc11918dd0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w nolanach 2 (g2e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-15e187abeffc817-474f31d241",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "ba64ca313e61d91f049c04493eebd425cb077478580395647f4080de953a59e7",
+          "byteLength": 478888,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-15e187abeffc817-474f31d241",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-15e187abeffc817687a212f47cb929a2__11264.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "df7e41dadab6d06955c3fb31fdcdaec123571ba9494f79647aebe3049b5db568",
+          "byteLength": 111359,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-elewacja-frontowa-projekt-dom-w-nolanach-2-g2e-o-5e3648d111",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/elewacja-frontowa-projekt-dom-w-nolanach-2-g2e-oze-92e773790cf2b5c1997596ba044f3be6__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-przekroj-dfcfd6aaad",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nolanach 2 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nolanach 2 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nolanach 2 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oz-9c6ec616b4",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "89744338743b0ea18174518b49a6509b54920f0c0503e01ee2b8cfac45000574",
+          "byteLength": 64041,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/md662742367561/przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze-720df5cabb2342c151dc5e74f8c49275__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oz-9c6ec616b4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze-720df5cabb2342c151dc5e74f8c49275__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "80efdd9b03b46055034dae36a998e90d9a6c4c50070855e718b868412293e888",
+          "byteLength": 16320,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oz-88f6276139",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/przekroj-budynku-projekt-dom-w-nolanach-2-g2e-oze-720df5cabb2342c151dc5e74f8c49275__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-rzut-par-001e7c0323",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-67-40ab511306",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4997e3369b9dd1999fe54ae30cac9de5cc8e232b12791549ff4e7fcc8360cf2d",
+          "byteLength": 57832,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md662742367561/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-67-40ab511306",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md662742367561/rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-67c07d04a649ae8ac308db92c8df1173__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-sytuacja-43afcdff62",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w nolanach 2 (g2e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w nolanach 2 (g2e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-f6cb3b05152490a-f207547b8c",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "c6791757b4ce570e4d13b8d85678bb8f2f476d3cf44f4c4b395d2d010ab27f05",
+          "byteLength": 242997,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-f6cb3b05152490a-f207547b8c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-f6cb3b05152490a1da9b2a507da19aca__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "5463a066235a1e6b3f5696c760f19f8760660cd28adcfaf2e87f475e6102b57c",
+          "byteLength": 50051,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-sytuacja-projekt-dom-w-nolanach-2-g2e-oze-2682e0-0de71d37ba",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/sytuacja-projekt-dom-w-nolanach-2-g2e-oze-2682e02a88922167632583b3cfb29abe__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nolanach 2 (G2E) OZE widok 1",
+      "id": "asset-gotowy-projekt-dom-w-nolanach-2-g2e-oze-widok-1-3e67cc23fc",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-nolanach-2-g2e-oze-5cfd0ce-32377ce12f",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "6d26eed19a3031fa668387ff503242d133c822774800fbb8e3e03bcd8898cb5b",
+          "byteLength": 7979,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-widok-1-projekt-dom-w-nolanach-2-g2e-oze-5cfd0ce-32377ce12f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/widok-1-projekt-dom-w-nolanach-2-g2e-oze-5cfd0ce5f2201f5eca9dc8207ab8eedf__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nolanach 2 (G2E) OZE",
+      "id": "asset-projekt-dom-w-nolanach-2-g2e-oze-1b4f2bec4d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-08-4d1d17d361",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "5dda1995c0c0f28667fed68e16374e091a9a2eda204bcdb310986b9e5342422a",
+          "byteLength": 36838,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md662742367561/related?scope=similar",
+          "id": "var-rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-08-4d1d17d361",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md662742367561/rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-08e9b465208fd0ac66622683671185c0__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nolanach 2 (G2E) OZE",
+      "id": "asset-projekt-dom-w-nolanach-2-g2e-oze-3e321c2efd",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-nolanach-2-g2e-oze-c5e8716-6e021748cf",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "aa425ff9e23a1f4e23fb74de9cd1e79e7a060cf45963221e38dc542751a4f8ef",
+          "byteLength": 25791,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md662742367561/related?scope=similar",
+          "id": "var-widok-2-projekt-dom-w-nolanach-2-g2e-oze-c5e8716-6e021748cf",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/widok-2-projekt-dom-w-nolanach-2-g2e-oze-c5e8716fd0af075fcae2c64d42210210__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w nolanach 2 g2e oze 835710f2fb1f426d8835e5c16a99bee5  47192",
+      "id": "asset-projekt-dom-w-nolanach-2-g2e-oze-835710f2fb1f426-f017f1d65b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-835710f2fb1f426-db3f033ea7",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "0af4b2b2e88e00f32d229b6e9704c3d795188b1835fa8b52ed7c069cfce778b1",
+          "byteLength": 530523,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/md662742367561/image/47192?showHotspots=false",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-835710f2fb1f426-db3f033ea7",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/md662742367561/i/projekt-dom-w-nolanach-2-g2e-oze-835710f2fb1f426d8835e5c16a99bee5__47192.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nolanach 2 (G2E) OZE",
+      "id": "asset-projekt-dom-w-nolanach-2-g2e-oze-d760a818f7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-50cf2b129d64151-2d508c73fd",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "79ecf0ea83f18c9d4c766827ef4c8419fe59e9e944b1f03493d138eecf9837f2",
+          "byteLength": 27021,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md662742367561/related?scope=similar",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-50cf2b129d64151-2d508c73fd",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-50cf2b129d64151f934bee478c44724d__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-a8b71ce1da",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md662742367561/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md662742367561/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-nola-f878562ab2",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f96bb2db910537e35ddf8ed2c3d4a8732e37605500e4fd18b23caf922948d085",
+          "byteLength": 114230,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-nola-f878562ab2",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md662742367561/rzut-parteru-z-powierzchniami-projekt-dom-w-nolanach-2-g2e-oze-851eb42918fac0334034491a11339ca9__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-b22c5501f6",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md662742367561/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md662742367561/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nolanach 2 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nolanach-2-g2e-oze-932942e09d86a49-8d07572f6d",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c12412f5ec507a0946658b9bb031fa7fcb29a2274f79bde56f6a93c13181aa37",
+          "byteLength": 116816,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-projekt-dom-w-nolanach-2-g2e-oze-932942e09d86a49-8d07572f6d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-932942e09d86a492c19b086926f3af6f__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-nolanach-2-g2e-oze-bafa037bc0",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-nolanach-2-g2e-oze-724d35b-2b14d56fc3",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "8568cbbeb2bc4a7598ac3296d8de6214a64de6a6e35f218dae765eb87147f2af",
+          "byteLength": 328596,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-widok-1-projekt-dom-w-nolanach-2-g2e-oze-724d35b-2b14d56fc3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/widok-1-projekt-dom-w-nolanach-2-g2e-oze-724d35b87d9be6a3f17202b6d7cf8dad__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-nolanach-2-g2e-oze-8b2d339229",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nolanach-2-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nolanach 2 (g2e) oze widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-nolanach-2-g2e-oze-96c3d8a-967359e1b1",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "fff693355c39742ffa40734616f0423a86f9d3e23e6fdbb08e0f5edcf783686f",
+          "byteLength": 312638,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+          "id": "var-widok-2-projekt-dom-w-nolanach-2-g2e-oze-96c3d8a-967359e1b1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md662742367561/widok-2-projekt-dom-w-nolanach-2-g2e-oze-96c3d8ae460562ba07fc30428efa4909__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+  "contentHash": "317d8efa5ced64e5f54018bb7aab0e503b07db93bf07ada579a902eb54359147",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-50cf2b129d64151f934bee478c44724d__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-08e9b465208fd0ac66622683671185c0__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/rzut-parteru-projekt-dom-w-nolanach-2-g2e-oze-67c07d04a649ae8ac308db92c8df1173__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/widok-1-projekt-dom-w-nolanach-2-g2e-oze-5cfd0ce5f2201f5eca9dc8207ab8eedf__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/widok-1-projekt-dom-w-nolanach-2-g2e-oze-724d35b87d9be6a3f17202b6d7cf8dad__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/widok-2-projekt-dom-w-nolanach-2-g2e-oze-96c3d8ae460562ba07fc30428efa4909__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md662742367561/widok-2-projekt-dom-w-nolanach-2-g2e-oze-c5e8716fd0af075fcae2c64d42210210__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-81bb352063547ed6ba0b01f6790e3ced__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md662742367561/elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-240bad5038d0223048a86417998fb0ab__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-dbac30007c0baebbcce131aff9e74eca__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md662742367561/elewacja-boczna-projekt-dom-w-nolanach-2-g2e-oze-e5f9944ec3ca98b01bce58b5412d1777__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-15e187abeffc817687a212f47cb929a2__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md662742367561/elewacja-frontowa-projekt-dom-w-nolanach-2-g2e-oze-92e773790cf2b5c1997596ba044f3be6__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-bd31dde8552b6a2fcf2c578cfebeefc9__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md662742367561/elewacja-ogrodowa-projekt-dom-w-nolanach-2-g2e-oze-212b831ac6455cce2813b71b7641b656__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md662742367561/projekt-dom-w-nolanach-2-g2e-oze-f6cb3b05152490a1da9b2a507da19aca__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md662742367561/sytuacja-projekt-dom-w-nolanach-2-g2e-oze-2682e02a88922167632583b3cfb29abe__11255.jpg"
+    }
+  ],
+  "id": "src-md662742367561-d8c232e031",
+  "pageHash": "38e67fc5b5e6908c3d2c17dd5e97492d2a1206ab5ddf1be84e89f5456711b8e8",
+  "project": {
+    "externalId": "md662742367561",
+    "name": "Projekt domu Dom w nolanach 2 (G2E) OZE Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "7,15 m",
+      "unit": "m",
+      "value": 7.15
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "161,2 m&sup2;",
+      "unit": "m2",
+      "value": 161.2
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "215,56 m&sup2;",
+      "unit": "m2",
+      "value": 215.56
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "37,51 m&sup2;",
+      "unit": "m2",
+      "value": 37.51
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez garażu",
+      "raw": "123,69 m&sup2;",
+      "unit": "m2",
+      "value": 123.69
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "259,9 m&sup2;",
+      "unit": "m2",
+      "value": 259.9
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "204,41 m&sup2;",
+      "unit": "m2",
+      "value": 204.41
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "161,2 m&sup2;",
+      "unit": "m2",
+      "value": 161.2
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1151,54 m&sup3;",
+      "unit": "none",
+      "value": 1151.54
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 6.55,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 6,55 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 33.19,
+      "index": 2,
+      "label": "Salon + Jadalnia",
+      "raw": "2. Salon + Jadalnia | 33,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.95,
+      "index": 3,
+      "label": "Kuchnia",
+      "raw": "3. Kuchnia | 11,95 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.6,
+      "index": 4,
+      "label": "Spiżarnia",
+      "raw": "4. Spiżarnia | 1,60 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.5,
+      "index": 5,
+      "label": "Korytarz",
+      "raw": "5. Korytarz | 9,50 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.51,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 3,51 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.21,
+      "index": 7,
+      "label": "Pralnia",
+      "raw": "7. Pralnia | 5,21 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.41,
+      "index": 8,
+      "label": "Łazienka",
+      "raw": "8. Łazienka | 6,41 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.29,
+      "index": 9,
+      "label": "Gabinet",
+      "raw": "9. Gabinet | 8,29 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.78,
+      "index": 10,
+      "label": "Garderoba",
+      "raw": "10. Garderoba | 2,78 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.18,
+      "index": 11,
+      "label": "Pokój",
+      "raw": "11. Pokój | 12,18 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.26,
+      "index": 12,
+      "label": "Pokój",
+      "raw": "12. Pokój | 11,26 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.26,
+      "index": 13,
+      "label": "Pokój",
+      "raw": "13. Pokój | 11,26 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 37.51,
+      "index": 14,
+      "label": "Garaż",
+      "raw": "14. Garaż | 37,51 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt \"Dom w Nolanach 2 (G2E) OZE\" to nowoczesny i funkcjonalny dom jednorodzinny, który spełnia wszystkie wymagania współczesnego mieszkania. Jego parterowa konstrukcja z dwustanowiskowym garażem, umieszczonym z przodu budynku, nadaje mu wyjątkowy charakter. Dach dwuspadowy, z płaskim fragmentem nad garażem, tworzy prostą, ale elegancką bryłę. Wnętrze domu oferuje otwartą strefę dzienną, która łączy przestronny salon o powierzchni ponad 30 m² z nowoczesną kuchnią z wyspą i funkcjonalną spiżarnią. To idealne miejsce dla miłośników gotowania i spotkań rodzinnych. Dodatkowo, dom posiada cztery komfortowe pokoje, w tym jeden z garderobą, zapewniając przestrzeń i prywatność dla każdego domownika. Dwie łazienki oraz pralnia zwiększają komfort użytkowania. Dom w Nolanach 2 to także synonim nowoczesnych rozwiązań technologicznych. Wykorzystanie pompy ciepła do ogrzewania oraz systemu rekuperacji z odzyskiem ciepła to gwarancja efektywności energetycznej i dbałości o środowisko. Kominek w salonie dodaje uroku i ciepła wnętrzom, tworząc idealne miejsce na zimowe wieczory. Kolorystyka domu, łącząca ciemny tynk z jasnymi elementami i drewnianymi akcentami, tworzy harmonijny i nowoczesny wygląd. Przestronny wiatrołap i wejście do domu z podcienia zapewniają komfortowe i funkcjonalne rozwiązania, podkreślając jednocześnie estetykę projektu. Projekt Dom w Nolanach 2 (G2E) OZE to idealna propozycja dla osób ceniących sobie współczesny design, funkcjonalność oraz ekologiczne rozwiązania w swoim domu."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "pompa ciepła Dodatkowo do projektu dołączamy GRATIS projekt instalacji fotowoltaicznej jako alternatywne opracowanie!"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "podcień"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 123.69 m² + 37.51 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

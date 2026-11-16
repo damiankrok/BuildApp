@@ -1,0 +1,1377 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-1820845274-termonium-baner-750x100-jpg-b8d37166a1",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-1820845274-termonium-baner-750x100-jpg-dca7e629a1",
+      "selectionReason": "only variant (750x100, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 7.5,
+          "byteHash": "f1607566577f55fa0c90dfd7812db70d3da10118eb1385e5530f5277a8aac5ec",
+          "byteLength": 64357,
+          "declared": {
+            "height": 100,
+            "width": 750
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 100,
+            "width": 750
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-1820845274-termonium-baner-750x100-jpg-dca7e629a1",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/banner/1820845274-termonium_baner_750x100.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aluprof",
+      "id": "asset-aluprof-0a2341ba9a",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-aluprof-png-944ec4c91b",
+      "selectionReason": "only variant (410x88, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.659091,
+          "byteHash": "9f13a5b8e9e57a74ada73e184d9f4169b5207fb6190f829c54865f6b69632fe2",
+          "byteLength": 14495,
+          "declared": {
+            "height": 88,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 88,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-aluprof-png-944ec4c91b",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/aluprof.png"
+        }
+      ]
+    },
+    {
+      "caption": "Braas",
+      "id": "asset-braas-47125a8832",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Poddasze 81,00 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-xg-png-26fc1826b0",
+      "selectionReason": "only variant (1x1, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "aa93ff38086e8dab9cbcae5b9c24990c8c8fcda11c5c9f1613de60a0019b145b",
+          "byteLength": 923,
+          "declared": {
+            "height": 1,
+            "width": 1
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1,
+            "width": 1
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-xg-png-26fc1826b0",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/xg.png"
+        }
+      ]
+    },
+    {
+      "caption": "Braas",
+      "id": "asset-braas-c7431c979f",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-braas-png-07124a1614",
+      "selectionReason": "only variant (410x88, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.659091,
+          "byteHash": "5a21362889b0d3b3989c6903da0196fbfe1d00a4e7f19537331dfc8d9b6d7b54",
+          "byteLength": 2548,
+          "declared": {
+            "height": 88,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 88,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-braas-png-07124a1614",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/braas.png"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja boczna domu Awans II",
+      "id": "asset-elewacja-boczna-domu-awans-ii-25a0d2aa75",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595613fe96fe3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Awans II\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-elewacja-595613fe96fe3-jpg-08e369fd5f",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "5182ab03ba24215a600781fb22b78b69768f5f7c38347fa130ce9fecc3474f74",
+          "byteLength": 70016,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-elewacja-595613fe96fe3-jpg-08e369fd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/elewacja-595613fe96fe3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja boczna domu Awans II",
+      "id": "asset-elewacja-boczna-domu-awans-ii-fd87dd43f3",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595613fee9cf0\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Awans II\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-elewacja-595613fee9cf0-jpg-12ecc2b06f",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "e40e67191ecc5089a58657b9125b3ffbb12b35b4f47ce0f2f45d5caa2440d3b3",
+          "byteLength": 79732,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-elewacja-595613fee9cf0-jpg-12ecc2b06f",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/elewacja-595613fee9cf0.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja frontowa domu Awans II",
+      "id": "asset-elewacja-frontowa-domu-awans-ii-f12d524b01",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595613fe6c029\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja frontowa domu Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"elewacja frontowa domu Awans II\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-elewacja-595613fe6c029-jpg-dc4bf916fe",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "15a977165ca4cd5010055b90bb1613ae742cf69c21421225013601a6c9c7a6e5",
+          "byteLength": 44425,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-elewacja-595613fe6c029-jpg-dc4bf916fe",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/elewacja-595613fe6c029.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja tylna domu Awans II",
+      "id": "asset-elewacja-tylna-domu-awans-ii-a87e4b3650",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595613fec7e5d\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja tylna domu Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylna\" in \"elewacja tylna domu Awans II\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-elewacja-595613fec7e5d-jpg-19e4d92072",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "dff33541d02de81007ef2822f22e355a19583b0a4dd0fb98a7259282a5c1264a",
+          "byteLength": 44725,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-elewacja-595613fec7e5d-jpg-19e4d92072",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/elewacja-595613fec7e5d.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Fakro - okna dachowe",
+      "id": "asset-fakro-okna-dachowe-7d7eedb956",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-fakro-png-62f57d3f20",
+      "selectionReason": "only variant (410x88, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.659091,
+          "byteHash": "4b2c8c4f4103e38f73828cf90fa11c027689e009541811eb3188815072db8fdc",
+          "byteLength": 8109,
+          "declared": {
+            "height": 88,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 88,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-fakro-png-62f57d3f20",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/fakro.png"
+        }
+      ]
+    },
+    {
+      "caption": "Generowanie pliku",
+      "id": "asset-generowanie-pliku-7541ac17b9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-loader-gif-22db5820a5",
+      "selectionReason": "only variant (16x16, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9db486efc49e6d43525a174416f8a1d4999627d7e8728c4c323228f1aa568967",
+          "byteLength": 673,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 16,
+            "width": 16
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-loader-gif-22db5820a5",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/loader.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Hörmann - drzwi i bramy",
+      "id": "asset-hormann-drzwi-i-bramy-8e1af44912",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-hormann-png-6840ef970d",
+      "selectionReason": "only variant (410x88, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.659091,
+          "byteHash": "d3b7ee3bb1845ccc2d991040499ce9e27c89744189ab38b773589d2c3f62b7d8",
+          "byteLength": 10429,
+          "declared": {
+            "height": 88,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 88,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-hormann-png-6840ef970d",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/hormann.png"
+        }
+      ]
+    },
+    {
+      "caption": "Rekuperatory.pl",
+      "id": "asset-rekuperatory-pl-b88b7d3c75",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rekuperatory-png-4ec5cd770b",
+      "selectionReason": "only variant (411x101, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.069307,
+          "byteHash": "34e4b64e4c2707983149c7533336364cbb0a1fa39403f7444093d18b75707aa4",
+          "byteLength": 14117,
+          "declared": {
+            "height": 101,
+            "width": 411
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 101,
+            "width": 411
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-rekuperatory-png-4ec5cd770b",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/rekuperatory.png"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut parteru - Awans II",
+      "id": "asset-rzut-parteru-awans-ii-0012e095aa",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 59560afe3199e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut parteru - Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Rzut parteru - Awans II\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-59560afe3199e-png-150b3b44eb",
+      "selectionReason": "only variant (1093x1205, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.907054,
+          "byteHash": "fc71a4b319288bf959163b14fcd53f1c290e4389add5a494f583c979bdb932ef",
+          "byteLength": 85547,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1205,
+            "width": 1093
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-rzut-59560afe3199e-png-150b3b44eb",
+          "mediaType": "image/png",
+          "url": "https://media.studioatrium.pl/project/1301/rzut-59560afe3199e.png"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut poddasza - Awans II",
+      "id": "asset-rzut-poddasza-awans-ii-fe08fb9110",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 59560afee574b\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut poddasza - Awans II\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Rzut poddasza - Awans II\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 90,00 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-59560afee574b-png-59b9e55483",
+      "selectionReason": "only variant (791x1100, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.719091,
+          "byteHash": "0548ac64dbd238891b082e60cf8ef689ed1f2a18853cd8bf1354b6480df126fa",
+          "byteLength": 67736,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1100,
+            "width": 791
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-rzut-59560afee574b-png-59b9e55483",
+          "mediaType": "image/png",
+          "url": "https://media.studioatrium.pl/project/1301/rzut-59560afee574b.png"
+        }
+      ]
+    },
+    {
+      "caption": "Szukasz innego projektu domu? Znajdziemy go dla Ciebie!",
+      "id": "asset-szukasz-innego-projektu-domu-znajdziemy-go-dla-c-f12a84ee0a",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-znajdziemy-png-6430efc8e5",
+      "selectionReason": "only variant (410x64, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 6.40625,
+          "byteHash": "c2e853df18411a47a96dc8429f3aca3d18b5718b2d49e53389663ab6c2637dcb",
+          "byteLength": 10975,
+          "declared": {
+            "height": 64,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 64,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-znajdziemy-png-6430efc8e5",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/znajdziemy.png"
+        }
+      ]
+    },
+    {
+      "caption": "Termoorganika - Myśl: ciepło",
+      "id": "asset-termoorganika-mysl-ciep-o-c93b179a21",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-termoorganika-png-347d525d5f",
+      "selectionReason": "only variant (410x88, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.659091,
+          "byteHash": "0864c622505c25862210216d11786f49aeaaedb3592090d6dbf90ea640cc5d4a",
+          "byteLength": 21468,
+          "declared": {
+            "height": 88,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 88,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-termoorganika-png-347d525d5f",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/termoorganika.png"
+        }
+      ]
+    },
+    {
+      "id": "asset-waiter-blue-gif-57c8c7de8f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-waiter-blue-gif-8b0babfa97",
+      "selectionReason": "only variant (32x32, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "98b3c8d8db7281e3772cdae94ad6e3f7c25495314a1e2170fac6b9417ff32f5e",
+          "byteLength": 3208,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 32,
+            "width": 32
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-waiter-blue-gif-8b0babfa97",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/waiter-blue.gif"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Awans II - ciekawa wnęka z tyłu domu",
+      "id": "asset-wizualizacja-projektu-domu-awans-ii-ciekawa-wnek-c192a33c1b",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 5954fafe59d1d\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - ciekawa wnęka z tyłu domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylu\" in \"wizualizacja projektu domu Awans II - ciekawa wnęka z tyłu domu\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-awans-ii-wizualizacja-5954fafe59d1d-jpg-7b303aa876",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6514df8203f565bc0f2afe3ff5a4b78cada73d76a4cf6c148c16b7048885c053",
+          "byteLength": 444644,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-5954fafe59d1d-jpg-7b303aa876",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-5954fafe59d1d.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Awans II - taras rozciągnięty na całą szerokość domu",
+      "id": "asset-wizualizacja-projektu-domu-awans-ii-taras-rozcia-2eb6e5dc94",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 1350 5954faf699653\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 1350 5954faf699653\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 1350 5954faf699653\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 5954faf699653\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem AWANS II - wizualizacja 1 wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem AWANS II - wizualizacja 1 wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - taras rozciągnięty na całą szerokość domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - taras rozciągnięty na całą szerokość domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem AWANS II - wizualizacja 1 wizualizacja\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem AWANS II - wizualizacja 1 wizualizacja\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-awans-ii-wizualizacja-5954faf699653-jpg-d6f5dfb49f",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "e06da155d2e8fb9fa617dd0a2cb985ffdb7277479606b8ae5de5503a362eb722",
+          "byteLength": 524147,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-5954faf699653-jpg-d6f5dfb49f",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-5954faf699653.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "d83fb26b2c624891ae87940d5683f303f237756df119b491827d023347adbe8c",
+          "byteLength": 252156,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-1350-5954faf699653-jpg-31231caa81",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-1350-5954faf699653.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Awans II - taras wypoczynkowy z charakterystyczną wnęką",
+      "id": "asset-wizualizacja-projektu-domu-awans-ii-taras-wypocz-b4b663946f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 1350 5954faf93bc35\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 5954faf93bc35\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - taras wypoczynkowy z charakterystyczną wnę\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - taras wypoczynkowy z charakterystyczną wnę\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-awans-ii-wizualizacja-5954faf93bc35-jpg-110cea4cff",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "03ccfa7aeca0af273f1f131ea1a7e204b4f36247c8b008c9d734e746befc91a6",
+          "byteLength": 493774,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-5954faf93bc35-jpg-110cea4cff",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-5954faf93bc35.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "9837cd469cac787a41e6ac4ced01c870d52027b297058880d39b9e27618dad01",
+          "byteLength": 235104,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-1350-5954faf93bc35-jpg-5c87b52c17",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-1350-5954faf93bc35.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Awans II - zadaszone wejście do domu",
+      "id": "asset-wizualizacja-projektu-domu-awans-ii-zadaszone-we-92af3e3d89",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"awans ii wizualizacja 5954fafbc11af\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - zadaszone wejście do domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Awans II - zadaszone wejście do domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-awans-ii-wizualizacja-5954fafbc11af-jpg-fe2b060faf",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2d317065d7db8872960fc25266a37631c40ea6a55d622ecb1c7653b4abd55eb5",
+          "byteLength": 508843,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-awans-ii-wizualizacja-5954fafbc11af-jpg-fe2b060faf",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1301/awans-ii-wizualizacja-5954fafbc11af.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "6a6ad05d24d761d4b6b367a8c7828044f07542d84c5784f18b5825fc708bcc8a",
+          "byteLength": 8391,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-dummy-jpg-723026fe84",
+          "mediaType": "image/jpeg",
+          "url": "https://www.studioatrium.pl/img/dummy.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zobacz dodatki i gratisy do projektu",
+      "id": "asset-zobacz-dodatki-i-gratisy-do-projektu-3c721aa05a",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dodatki-png-2b3c921a32",
+      "selectionReason": "only variant (410x64, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 6.40625,
+          "byteHash": "36d80b5422398a75a445a31b6173a066dee6393b39b69d6e62215ac4b9a58c6a",
+          "byteLength": 10347,
+          "declared": {
+            "height": 64,
+            "width": 410
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 64,
+            "width": 410
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-dodatki-png-2b3c921a32",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/dodatki.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zobacz galerię projektu Awans II",
+      "id": "asset-zobacz-galerie-projektu-awans-ii-ae98ecd3ad",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-finger-png-4c3ec8d5a5",
+      "selectionReason": "only variant (90x100, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.9,
+          "byteHash": "280b256ffccbf48c8b2e8acab725410940ad9bf1d1cfa2bb849bea8799384366",
+          "byteLength": 5050,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 100,
+            "width": 90
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+          "id": "var-finger-png-4c3ec8d5a5",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/finger.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.studioatrium.pl/projekty-domow/Awans-ii,1301.html",
+  "contentHash": "cf81758b597d58322435146a33bec324e3dd8fd4745cf83b2b1e6b166e3898ae",
+  "failures": [
+    {
+      "claim": {
+        "channel": "IMG_SRC",
+        "document": "SITE_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "stage": "ASSET_FETCH",
+      "target": "https://www.studioatrium.pl/img/wykonawcy.webp"
+    }
+  ],
+  "id": "src-www-studioatrium-pl-a8f895846a",
+  "pageHash": "99d497cc3fe812e080d81513e8641fd97b680942df93ab76de8202c985bf7edc",
+  "project": {
+    "name": "Projekt domu Awans II",
+    "publisher": "studioatrium.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "wysokość budynku",
+      "raw": "8,21 m",
+      "unit": "m",
+      "value": 8.21
+    },
+    {
+      "key": "building_length",
+      "label": "długość budynku",
+      "raw": "13,90 m",
+      "unit": "m",
+      "value": 13.9
+    },
+    {
+      "key": "building_width",
+      "label": "szerokość budynku",
+      "raw": "10,15 m",
+      "unit": "m",
+      "value": 10.15
+    },
+    {
+      "key": "footprint_area",
+      "label": "pow. zabudowy",
+      "raw": "141,10 m²",
+      "unit": "m2",
+      "value": 141.1
+    },
+    {
+      "key": "roof_area",
+      "label": "pow. dachu",
+      "raw": "211,00 m²",
+      "unit": "m2",
+      "value": 211
+    },
+    {
+      "key": "roof_pitch",
+      "label": "kąt nachylenia dachu",
+      "raw": "35 °",
+      "unit": "deg",
+      "value": 35
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "171,00 m²",
+      "unit": "m2",
+      "value": 171
+    },
+    {
+      "key": "volume",
+      "label": "kubatura brutto",
+      "raw": "873,55 m³",
+      "unit": "none",
+      "value": 873.55
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 11,
+      "index": 1,
+      "label": "hall z komunikacją",
+      "raw": "1 hall z komunikacją | 11,00",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 21.7,
+      "index": 2,
+      "label": "pokój z garderobą",
+      "raw": "2 pokój z garderobą | 21,70",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.45,
+      "index": 3,
+      "label": "garderoba",
+      "raw": "3 garderoba | 7,45",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.9,
+      "index": 4,
+      "label": "łazienka",
+      "raw": "4 łazienka | 8,90",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.15,
+      "index": 5,
+      "label": "łazienka",
+      "raw": "5 łazienka | 7,15",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.4,
+      "index": 6,
+      "label": "pokój",
+      "raw": "6 pokój | 12,40",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.4,
+      "index": 7,
+      "label": "pokój",
+      "raw": "7 pokój | 12,40",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 10.25,
+      "index": 1,
+      "label": "przedsionek",
+      "raw": "1 przedsionek | 10,25",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.7,
+      "index": 2,
+      "label": "hall z komunikacją i schowkiem",
+      "raw": "2 hall z komunikacją i schowkiem | 6,70",
+      "storey": "GROUND"
+    },
+    {
+      "area": 23.1,
+      "index": 3,
+      "label": "pokój dzienny",
+      "raw": "3 pokój dzienny | 23,10",
+      "storey": "GROUND"
+    },
+    {
+      "area": 23.7,
+      "index": 4,
+      "label": "kuchnia z jadalnią",
+      "raw": "4 kuchnia z jadalnią | 23,70",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.9,
+      "index": 5,
+      "label": "spiżarka",
+      "raw": "5 spiżarka | 5,90",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.8,
+      "index": 6,
+      "label": "kotłownia",
+      "raw": "6 kotłownia | 4,80",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.15,
+      "index": 7,
+      "label": "pokój",
+      "raw": "7 pokój | 11,15",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.4,
+      "index": 8,
+      "label": "łazienka",
+      "raw": "8 łazienka | 4,40",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Nowoczesny dom z użytkowym poddaszem zaprojektowany z myślą o potrzebach cztero- lub pięcioosobowej rodziny. Minimalistyczna architektura budynku podkreślona zauważalnym ale oszczędnym detalem z pewnością zainteresuje Inwestorów zainteresowanych nowymi trendami w budownictwie. W przestrzeni parteru wzrok przykuwa centralnie usytuowana kuchnia z wyspą, otwarta na jadalnię i salon. Dodatkowy pokój zlokalizowany obok łazienki i wyraźnie oddzielony od strefy typowo dziennej, może stanowić przestrzeń sypialną dla starszej osoby lub gabinet do pracy. Uzupełnieniem programu parteru jest dostępna z kuchni spiżarnia oraz kotłownia. Na poddaszu zaprojektowano dużą sypialnię małżeńską z własną garderobą i łazienką oraz dwie dodatkowe sypialnie i ogólnodostępną łazienkę. Ze względu na zlokalizowany we frontowej części pokój dzienny dom jest rekomendowany przede wszystkim na działki z wjazdem od południa lub zachodu."
+    },
+    {
+      "key": "roof",
+      "label": "kąt nachylenia dachu",
+      "text": "35 °"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu Awans II o powierzchni użytkowej 171 m2. Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z wjazdem od południa i zachodu"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Nowoczesny dom z poddaszem użytkowym, dwuspadowym dachem, optymalny na działki z wjazdem od południa i zachodu"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

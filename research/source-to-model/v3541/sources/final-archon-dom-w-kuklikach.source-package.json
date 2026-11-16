@@ -1,0 +1,1116 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m5fa2048aa2671-c96d9c414b",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+  "pageHash": "7109be10225a8a23075678c836c06df4759fe74c8e95de08f8eca4c0da9557e5",
+  "project": {
+    "externalId": "m5fa2048aa2671",
+    "name": "Projekt domu Dom w kuklikach Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-boczna-03e7e3ea0c",
+      "caption": "gotowy projekt Dom w kuklikach elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kuklikach elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kuklikach elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-kuklikach-ver-2-3f3367130100548b5f-913f338814",
+          "url": "https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-3f3367130100548b5f31c367338af3db__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 301388,
+          "byteHash": "887bb70a41f23f3069e92bd7ac926f4605847ac225d922f4781e485866131dc6",
+          "decoded": {
+            "width": 1280,
+            "height": 733
+          },
+          "declaredMismatch": false,
+          "aspect": 1.746248
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-kuklikach-ver-2-07-210eeb523d",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-boczna-projekt-dom-w-kuklikach-ver-2-07509a074bd7d6735585da07319c2ed2__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 58768,
+          "byteHash": "624845d82f821c4704a8194a91eafaf61bc7c3ab48ee126facfb48efb95f250d",
+          "decoded": {
+            "width": 550,
+            "height": 315
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.746032
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-kuklikach-ver-2-3f3367130100548b5f-913f338814",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x733 over 550x315"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-boczna-5a87425991",
+      "caption": "gotowy projekt Dom w kuklikach elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kuklikach elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kuklikach elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-kuklikach-ver-2-97836a064053b04f52-0b8e94c38b",
+          "url": "https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-97836a064053b04f52a3cffe157f6cd4__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 320924,
+          "byteHash": "5ad04e33d9d199058bf523c8bd48a0ca5c1b74eb018b262146279a1bd9b8800d",
+          "decoded": {
+            "width": 1280,
+            "height": 733
+          },
+          "declaredMismatch": false,
+          "aspect": 1.746248
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-kuklikach-ver-2-08-0fa2f6f711",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-boczna-projekt-dom-w-kuklikach-ver-2-081b584b231dcccd16a8f4057de01d35__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 62684,
+          "byteHash": "9aaad6885a356fa875b511647dfb1cc5f7a9169dae19f11b42295d614df3a71f",
+          "decoded": {
+            "width": 550,
+            "height": 315
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.746032
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-kuklikach-ver-2-97836a064053b04f52-0b8e94c38b",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x733 over 550x315"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-frontowa-505a1e6c06",
+      "caption": "gotowy projekt Dom w kuklikach elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w kuklikach elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w kuklikach elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-kuklikach-ver-2-f846707083b75e4cdb-260f706efa",
+          "url": "https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-f846707083b75e4cdbc81a30b84d6d82__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 318644,
+          "byteHash": "282c1d17852dae2ad235d2f78f46fee1c0c901a2292427cff226c37c23a261e2",
+          "decoded": {
+            "width": 1280,
+            "height": 733
+          },
+          "declaredMismatch": false,
+          "aspect": 1.746248
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-kuklikach-ver-2-04834d7715",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-frontowa-projekt-dom-w-kuklikach-ver-2-07658e93b101e640a5ae76447d61c125__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 61240,
+          "byteHash": "5cf47d872da2b217d4f49feb6d45664143d07d8e347c508d1a1619f9d4371b41",
+          "decoded": {
+            "width": 550,
+            "height": 315
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.746032
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-kuklikach-ver-2-f846707083b75e4cdb-260f706efa",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x733 over 550x315"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-ogrodowa-3e356b016c",
+      "caption": "gotowy projekt Dom w kuklikach elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kuklikach elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w kuklikach elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w kuklikach elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-kuklikach-ver-2-ded090a28bf4e1b3fc-5672f08e7b",
+          "url": "https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-ded090a28bf4e1b3fcd081ea09374ccc__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 320538,
+          "byteHash": "f3223e150d3284d4f9b877631f425ace984ec19557d878b119930db6563f0358",
+          "decoded": {
+            "width": 1280,
+            "height": 733
+          },
+          "declaredMismatch": false,
+          "aspect": 1.746248
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-kuklikach-ver-2-9725a0e95b",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-ogrodowa-projekt-dom-w-kuklikach-ver-2-0448f40c333d3952388626ad69f59a14__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 61583,
+          "byteHash": "4d0b4ff8c19c00c66a880f3c41a2309b7ad5545ade2f9677275d1eee60c072e2",
+          "decoded": {
+            "width": 550,
+            "height": 315
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.746032
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-kuklikach-ver-2-ded090a28bf4e1b3fc-5672f08e7b",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x733 over 550x315"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-przekroj-budynku-6060939d13",
+      "caption": "gotowy projekt Dom w kuklikach przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w kuklikach przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w kuklikach przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-kuklikach-ver-2-4-444d5f33fc",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/przekroj-budynku-projekt-dom-w-kuklikach-ver-2-411c3f215c0fe69190871b1803f450cc__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 18601,
+          "byteHash": "bce8c3f92474ca8caafddad35d533832843a464d954360866896e755b9d78d6e",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-kuklikach-ver-2-4-444d5f33fc",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-rzut-parteru-18492db711",
+      "caption": "gotowy projekt Dom w kuklikach rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-kuklikach-ver-2-277a3-7d4f61cd2e",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/rzut-parteru-projekt-dom-w-kuklikach-ver-2-277a309ee07556c11b8142460cc0b6e7__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m5fa2048aa2671/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 47765,
+          "byteHash": "6f5c6fe1772d7b17f219faf27153720a6723f1d9cb5832294ef777c09ec3c68c",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-kuklikach-ver-2-277a3-7d4f61cd2e",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-sytuacja-3656497557",
+      "caption": "gotowy projekt Dom w kuklikach sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w kuklikach sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa-ca54de0b1a",
+          "url": "https://www.archon.pl/images/products/m5fa2048aa2671/sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa47633d01f28d7ae5250b4c5__255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 63223,
+          "byteHash": "d351c99c37df754db67ada4f15dd61f66ce0949f70ce7ef707eb6eb61e834c08",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa-ca54de0b1a",
+      "selectionReason": "only variant (344x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-kuklikach-widok-1-377128356c",
+      "caption": "gotowy projekt Dom w kuklikach widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kuklikach widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-kuklikach-ver-2-f8ec47ab76-ab277ae947",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-1-projekt-dom-w-kuklikach-ver-2-f8ec47ab76612746af233b4b0e790675__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 10919,
+          "byteHash": "d3d9bde5a48584c010fee4f9eb1e008325f6442e50760194c3ff391ab292e499",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-kuklikach-ver-2-f8ec47ab76-ab277ae947",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-628200d834",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m5fa2048aa2671/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m5fa2048aa2671/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-kukl-3e6d6fd065",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/rzut-parteru-z-powierzchniami-projekt-dom-w-kuklikach-ver-2-890fd1712e26a7166117b4d0d1a6ade9__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/gif",
+          "byteLength": 88592,
+          "byteHash": "6bf36d2f9a05b26bf7d0f9d9b53b5eb7950982f230bc4f90b645d0a91ce7e863",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-kukl-3e6d6fd065",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-8981d5fd1f",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m5fa2048aa2671/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m5fa2048aa2671/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kuklikach rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-kuklikach-ver-2-16e240c8068faaa250-2d383f7a00",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-16e240c8068faaa250dc28d4ed489644__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/gif",
+          "byteLength": 89166,
+          "byteHash": "dd9ffa5fa1f41f91b8f0cb64a89650fa186fb594fb99f865370345db29fd684c",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-kuklikach-ver-2-16e240c8068faaa250-2d383f7a00",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-kuklikach-ver-2-8dc293a137",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kuklikach widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-kuklikach-ver-2-c1e818230b-1fc6ef4798",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-1-projekt-dom-w-kuklikach-ver-2-c1e818230ba9789d1dd1524b54c8babd__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 223927,
+          "byteHash": "bd41180e503eda431c3b8975793f52872b331e4962d10351d46b317a49f46cd2",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-kuklikach-ver-2-c1e818230b-1fc6ef4798",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-kuklikach-ver-2-cdbffda70c",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kuklikach-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kuklikach widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-kuklikach-ver-2-2a653a4d01-f8f785b87c",
+          "url": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-2-projekt-dom-w-kuklikach-ver-2-2a653a4d01109e88fa72a27a9d9f1c1d__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+          "mediaType": "image/jpeg",
+          "byteLength": 198415,
+          "byteHash": "1a773812b7afb9890420c31349bef854842550991f05158047c90532d214b3ef",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-kuklikach-ver-2-2a653a4d01-f8f785b87c",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 5.85,
+      "unit": "m",
+      "raw": "5,85 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 48.51,
+      "unit": "m2",
+      "raw": "48,51 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 66.88,
+      "unit": "m2",
+      "raw": "66,88 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 110.5,
+      "unit": "m2",
+      "raw": "110,5 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 66.88,
+      "unit": "m2",
+      "raw": "66,88 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 48.51,
+      "unit": "m2",
+      "raw": "48,51 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 294.47,
+      "unit": "none",
+      "raw": "294,47 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Mały, pełen uroku dom mogący służyć zarówno jako gościnny domek letniskowy, jak i całoroczny dom np. dla seniorów. Zaprojektowany w formie parterowej posiada salonik otwarty na kuchenny aneks i oddzielony od niego miejscem do spożywania posiłków. W centrum umieszczono kominek, a za nim miejsce na telewizor. Przestrzeń doświetlono dużym oknem i przeszklonymi drzwiami na taras. Obok zaprojektowano wygodną, mieszczącą duże szafy sypialnię. Z tego pokoju również możemy bezpośrednio wyjść do ogrodu. Program funkcjonalny uzupełnia ustawna, jasna łazienka i pełniący jednocześnie rolę garderoby wiatrołap. Prosty, tani w budowie dom zaprojektowany został z bloczków ocieplonych styropianem z przekryciem z dachówki ceramicznej. Zaproponowana technologia zapewni trwałość i niskie koszty eksploatacji."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano w następujących pomieszczeniach: PARTER: Wiatrołap (1), Łazienka (3), Kuchnia (4)"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 66.88 m² + 48.51 m² , 2 pokoje, kuchnia, łazienka, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego YTONG 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 5.19,
+      "raw": "1. Wiatrołap | 5,19 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 2.63,
+      "raw": "2. Hol | 2,63 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Łazienka",
+      "area": 4.77,
+      "raw": "3. Łazienka | 4,77 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 6.97,
+      "raw": "4. Kuchnia | 6,97 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Salon",
+      "area": 17.85,
+      "raw": "5. Salon | 17,85 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Pokój",
+      "area": 11.1,
+      "raw": "6. Pokój | 11,10 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/przekroj-budynku-projekt-dom-w-kuklikach-ver-2-411c3f215c0fe69190871b1803f450cc__11256.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SECTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/rzut-parteru-projekt-dom-w-kuklikach-ver-2-277a309ee07556c11b8142460cc0b6e7__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa47633d01f28d7ae5250b4c5__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-1-projekt-dom-w-kuklikach-ver-2-c1e818230ba9789d1dd1524b54c8babd__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-1-projekt-dom-w-kuklikach-ver-2-f8ec47ab76612746af233b4b0e790675__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/widok-2-projekt-dom-w-kuklikach-ver-2-2a653a4d01109e88fa72a27a9d9f1c1d__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.archon.pl/images/products/m5fa2048aa2671/sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa47633d01f28d7ae5250b4c5__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-boczna-projekt-dom-w-kuklikach-ver-2-07509a074bd7d6735585da07319c2ed2__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-3f3367130100548b5f31c367338af3db__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-boczna-projekt-dom-w-kuklikach-ver-2-081b584b231dcccd16a8f4057de01d35__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-97836a064053b04f52a3cffe157f6cd4__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-frontowa-projekt-dom-w-kuklikach-ver-2-07658e93b101e640a5ae76447d61c125__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-f846707083b75e4cdbc81a30b84d6d82__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/elewacja-ogrodowa-projekt-dom-w-kuklikach-ver-2-0448f40c333d3952388626ad69f59a14__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m5fa2048aa2671/projekt-dom-w-kuklikach-ver-2-ded090a28bf4e1b3fcd081ea09374ccc__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m5fa2048aa2671/sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa47633d01f28d7ae5250b4c5__255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m5fa2048aa2671/sytuacja-projekt-dom-w-kuklikach-ver-2-a98cd87aa47633d01f28d7ae5250b4c5__255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "724ca37a2975225e4bb52bf4b5edce5e0c2855e7edef73b63f72bc77e1ffc744"
+}

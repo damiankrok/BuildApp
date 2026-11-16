@@ -1,0 +1,52 @@
+{
+  "slug": "houseplans-com",
+  "imagesUsed": [
+    {"n": 18, "what": "main floor plan (largest copy, room sizes only, no overall dims; front = bottom); 17 and 19 are smaller copies"},
+    {"n": 5, "what": "front elevation render (06, 07, 08, 10, 21 are copies)"},
+    {"n": 16, "what": "rear elevation line drawing (orthographic, lap siding, footings dashed)"}
+  ],
+  "mirrorOrOtherProjectWarning": "01-04 are other plans (892-47, 938-119, 938-126, Builder Advantage), 09 is cabin #112-296, 11 is #112-176, 12-15 craftsman #112-299/240/210/234, 20 another farmhouse, 22-24 generic Zonda construction-detail sheets. No side elevations or section exist. No mirroring: plan, front render and rear drawing agree (garage right, dining door at rear-left).",
+  "overall": {"widthM": 14.63, "depthM": 13.11, "heightM": 6.045, "basis": "page publishes Width 48', Depth 43', Height 19'10\"; plan scaled from room labels (15.08 px/ft) gives 48.0' x 43.0'; rear elevation scales to ~19.8' ridge"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "full-width block behind the garage front line", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "14.63 x 11.58"},
+    {"name": "bedroom wing", "role": "WING", "where": "front-left, projects 1.54 m (5') ahead of garage front; brown-sided front wall under a front-facing mono-pitch roof rising toward the centre, white stucco fin on its right", "storeys": 1, "enclosed": true, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "3.96 x 1.54 projection"},
+    {"name": "garage", "role": "GARAGE", "where": "right end inside the main block, stone veneer front, front-facing mono-pitch roof element rising toward the centre", "storeys": 1, "enclosed": true, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "6.1 x 6.5 outer (19' x 20'6\" inside)"},
+    {"name": "entry porch", "role": "PORCH", "where": "front, recessed between wing and garage, under a low roof with white fascia beam, stone pier on its left", "storeys": 1, "enclosed": false, "roofKind": "OTHER", "ridge": "NA", "approxSizeM": "3.81 x 1.83"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "Rear orthographic elevation shows a rectangular roof outline with vertical ends (gable, ~1' verge overhang); perspective render makes the ends look hipped. Two front cross elements are mono-pitch planes sloping outward (high at centre), brown siding beneath. Asphalt shingles. Pitch not printed (~27 deg if ridge centred - estimate only)."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "GARAGE_DOOR"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "LARGE_GLAZING", "GLAZED_DOOR"]}]},
+    "LEFT": {"shown": false, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+    "RIGHT": {"shown": false, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "CENTRE", "what": "great-room triple window, 3 x 4' units (~3.9 m), with sill"}
+  ],
+  "features": [
+    {"kind": "OTHER", "count": 2, "where": "front-facing mono-pitch cross roofs over wing and garage, wood-tone siding walls"},
+    {"kind": "OTHER", "count": 1, "where": "white stucco fin between wing and porch rising to the high end of the left mono-pitch"},
+    {"kind": "OTHER", "count": 2, "where": "grey stacked-stone veneer: garage front and porch pier"},
+    {"kind": "TERRACE", "count": 1, "where": "rear patio 9' x 6' at the dining sliding door"}
+  ],
+  "palette": {"walls": "wood-tone horizontal lap siding, white/light grey stucco, grey stacked stone; white fascias and trim; black windows and door; cream garage door with gridded top lites", "roof": "dark grey asphalt shingles"},
+  "groundOutline": {"shape": "OTHER", "corners": 10, "polygonM": [[0, 0], [3.96, 0], [3.96, 1.54], [4.73, 1.54], [4.73, 3.35], [8.55, 3.35], [8.55, 1.54], [14.63, 1.54], [14.63, 13.11], [0, 13.11]], "closedAreaM2": 168.5, "basis": "plan 18 scaled from room labels (master 14' x 12'6\", garage 19' x 20'6\"): rectangle 48' x 43' minus the 10.67 x 1.54 strip right of the wing and the 12'6\" x 6' recessed porch; includes garage"},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front centre, recessed entry patio 12'6\" x 6'", "approxSizeM": "3.81 x 1.83"},
+    {"kind": "TERRACE", "roofed": false, "where": "rear-left (behind dining), patio 9' x 6'", "approxSizeM": "2.74 x 1.83"}
+  ],
+  "printedOverall": {"widthCm": null, "depthCm": null, "printedText": null, "where": "no overall dimension printed on any plan copy; page publishes 48' / 43'"},
+  "groundRooms": 13,
+  "uncertain": [
+    "groundRooms 13 = Dining, Kit., Great Room (one open space, 3 labels), Master Bedroom, 2 Bedrooms, Garage + unlabelled master bath, master walk-in closet, hall bath, laundry, tiled mudroom, utility (water heater); closets, hall, patios excluded.",
+    "Outline offsets are scaled, not printed; porch 12'6\" x 6' label matches the recess.",
+    "LEFT/RIGHT not shown in any elevation: counts from plan wall breaks (left: kitchen + bedroom windows; right: small master-bath window).",
+    "Plan shows a ~1' opening symbol left of the entry door that the render does not show; front counted from render (4).",
+    "Rear triple window is LARGE_GLAZING only by width; it has a sill. Rear door: 2-leaf glazed with transom ~1.9 m.",
+    "Roof kind: GABLE from rear drawing; render ends look hipped; pitch and depth of the front mono-pitch elements not shown."
+  ],
+  "confidence": "MEDIUM - clear plan and two facades, but no side elevations, section or roof plan."
+}

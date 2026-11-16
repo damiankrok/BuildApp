@@ -1,0 +1,1396 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-elewacja-bocz-22f17c2841",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-db9b344f56ee2882cbfd-3c524d2d64",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x516 over 550x222",
+      "variants": [
+        {
+          "aspect": 2.48062,
+          "byteHash": "cff70e4a2f996b7482726ebea6cdbe76a048b17da8e480149753ac0b319bd14f",
+          "byteLength": 191694,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 516,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-db9b344f56ee2882cbfd-3c524d2d64",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-db9b344f56ee2882cbfdfc64d703c7a6__11265.jpg"
+        },
+        {
+          "aspect": 2.477477,
+          "byteHash": "09b8bef4bc4636eafaafb8a7e54d24b9a790d441be1bd920ff5006b88f9d9338",
+          "byteLength": 46272,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 222,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-elewacja-boczna-projekt-dom-nad-rzeczka-2-e-39a3-3e49a2e41b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-boczna-projekt-dom-nad-rzeczka-2-e-39a3cb0752dfd838e26479c7c16b6ebf__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-elewacja-bocz-a3f267ea13",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-0876af693c4031c9df97-ab11040f30",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x516 over 550x222",
+      "variants": [
+        {
+          "aspect": 2.48062,
+          "byteHash": "f318d30e08ca24e9bc3518161e361c68e0bd979e5aa15f1143b336656d180152",
+          "byteLength": 188914,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 516,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-0876af693c4031c9df97-ab11040f30",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0876af693c4031c9df97ccb373fbc016__11266.jpg"
+        },
+        {
+          "aspect": 2.477477,
+          "byteHash": "1c5748844e1604da8047db39d6e281f95832d3cbf70e816679e59cf97c89296a",
+          "byteLength": 45617,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 222,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-elewacja-boczna-projekt-dom-nad-rzeczka-2-e-dc36-88e1b91558",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-boczna-projekt-dom-nad-rzeczka-2-e-dc36b93a214b79a1bcd27e291b3891fb__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-elewacja-fron-ca503e3af5",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-6ec83c38e82a4ec3f589-6c078e196a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x516 over 550x222",
+      "variants": [
+        {
+          "aspect": 2.48062,
+          "byteHash": "4ca70426cd8c43f32dd0e756cee4fc58b328eb15373c48ab880ddbe505d4d15f",
+          "byteLength": 177518,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 516,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-6ec83c38e82a4ec3f589-6c078e196a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-6ec83c38e82a4ec3f5896cf0b8a9906e__11264.jpg"
+        },
+        {
+          "aspect": 2.477477,
+          "byteHash": "f05076b543f8e9bea88958e61802abc6235c165ad6b95ea6f31744b88d3ebb3a",
+          "byteLength": 44845,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 222,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-elewacja-frontowa-projekt-dom-nad-rzeczka-2-e-92-fa0e7aa86a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-frontowa-projekt-dom-nad-rzeczka-2-e-9287afdda9bbe9529087ce243d848fab__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-elewacja-ogro-c615363c06",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom nad rzeczka 2 (e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-0d53b6cbf17de2daac59-6d6c817897",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x516 over 550x222",
+      "variants": [
+        {
+          "aspect": 2.48062,
+          "byteHash": "3fe2c2b350492ef744eb7e97d9ca368259c6fd33640ee1c9c12460f91241e887",
+          "byteLength": 177148,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 516,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-0d53b6cbf17de2daac59-6d6c817897",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0d53b6cbf17de2daac592f5ccd1355c5__11267.jpg"
+        },
+        {
+          "aspect": 2.477477,
+          "byteHash": "87c5648bfc4055a50bf674d25cdf997f4a491298a56a21040e2818974a9ec7d5",
+          "byteLength": 44890,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 222,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-elewacja-ogrodowa-projekt-dom-nad-rzeczka-2-e-44-5d6bef4d42",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-ogrodowa-projekt-dom-nad-rzeczka-2-e-442499f3acd92fb0d4b0fd5ef5cf650f__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-przekroj-budy-61963a1026",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom nad rzeczka 2 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom nad rzeczka 2 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom nad rzeczka 2 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa0-feb54af14a",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "5764153f3bbf69f69fa2a5ddf7e096632cd1cb779a8bc3e33e7a482b100a237e",
+          "byteLength": 64354,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/md8b26d14c247f/przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa02d06405a6992196e906ffe622ca45__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa0-feb54af14a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa02d06405a6992196e906ffe622ca45__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "30601bcc0f5961c84d3eb88cbcc8c7abb52d11a960f261a87923c5f9c9c8ef60",
+          "byteLength": 16702,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa0-a7559a7125",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/przekroj-budynku-projekt-dom-nad-rzeczka-2-e-aa02d06405a6992196e906ffe622ca45__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-rzut-parteru-5bb307c055",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-nad-rzeczka-2-e-079deff-4a188702ae",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "aaa3099462e1f2daee8f709661e2c92ed9da7d1452550ae4b66aec7d6ee24259",
+          "byteLength": 40157,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md8b26d14c247f/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-nad-rzeczka-2-e-079deff-4a188702ae",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/rzut-parteru-projekt-dom-nad-rzeczka-2-e-079deff6b8911d4d7a46addbf11b5e96__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) sytuacja",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-sytuacja-16d1faceae",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom nad rzeczka 2 (e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom nad rzeczka 2 (e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-0860da881a31d5813243-37219aa034",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "70254a98504ab47165909fe409d0c2c01a01238f7fb13a79e48979615c871c1f",
+          "byteLength": 220734,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-0860da881a31d5813243-37219aa034",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0860da881a31d5813243221fb6e44f6b__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "6d88979968edba1f1bddb8934ec4b43e9ee5ef92ebe430bdc8814404ea99f837",
+          "byteLength": 48092,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-sytuacja-projekt-dom-nad-rzeczka-2-e-8ded8764703-8f4e9be200",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/sytuacja-projekt-dom-nad-rzeczka-2-e-8ded876470302bc458d2743176300831__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom nad rzeczką 2 (E) widok 1",
+      "id": "asset-gotowy-projekt-dom-nad-rzeczka-2-e-widok-1-7e116c0d51",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom nad rzeczka 2 (e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-nad-rzeczka-2-e-93bdb1c0a895-f48ddaf38c",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "62068e424e415fbd1c88e6621d67d306b6d7efa79001a9592fd9570707303a4b",
+          "byteLength": 10017,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-widok-1-projekt-dom-nad-rzeczka-2-e-93bdb1c0a895-f48ddaf38c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-1-projekt-dom-nad-rzeczka-2-e-93bdb1c0a8955931bd0580736c4c3193__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom nad rzeczką 2 (E)",
+      "id": "asset-projekt-dom-nad-rzeczka-2-e-b349df5157",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-1b459b6db5868a73a965-3f7683613b",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b4dbe031cba4ab20201fde7aca50a2c35b660714ad33706d8849550f1a855cb8",
+          "byteLength": 32091,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md8b26d14c247f/related?scope=family",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-1b459b6db5868a73a965-3f7683613b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-1b459b6db5868a73a965f4d84b788a0b__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom nad rzeczka 2 e dc6ff00ca0e03378e1ebd217df79f255  44182",
+      "id": "asset-projekt-dom-nad-rzeczka-2-e-dc6ff00ca0e03378e1eb-e2f3af2b56",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-dc6ff00ca0e03378e1eb-f8cc4803f3",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "921ca916a49911c30ced2be62d675ffff0d4884ede0174878c46f1cf4eee8b7f",
+          "byteLength": 466734,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/md8b26d14c247f/image/44182?showHotspots=false",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-dc6ff00ca0e03378e1eb-f8cc4803f3",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/md8b26d14c247f/i/projekt-dom-nad-rzeczka-2-e-dc6ff00ca0e03378e1ebd217df79f255__44182.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom nad rzeczką 2 (E)",
+      "id": "asset-projekt-dom-nad-rzeczka-2-e-eff0bc90c7",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-nad-rzeczka-2-e-d0de5f4-a35b2d03ca",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "1976390633034d2f968230691338827d2bdd54cef911c3efa0a9db1df0b156e7",
+          "byteLength": 27695,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md8b26d14c247f/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-nad-rzeczka-2-e-d0de5f4-a35b2d03ca",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/rzut-parteru-projekt-dom-nad-rzeczka-2-e-d0de5f43add22d7c8746f8403e6eccf4__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom nad rzeczką 2 (E)",
+      "id": "asset-projekt-dom-nad-rzeczka-2-e-f0e3157ac4",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-nad-rzeczka-2-e-b6426756a7ec-cd1f20afc7",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "d51bae914154c8b594a56fc62f44be322d5e877cc7e4d02e1481b3e88f6892be",
+          "byteLength": 32728,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md8b26d14c247f/related?scope=family",
+          "id": "var-widok-2-projekt-dom-nad-rzeczka-2-e-b6426756a7ec-cd1f20afc7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-2-projekt-dom-nad-rzeczka-2-e-b6426756a7ec5c2314512b49461c7a10__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2c532c2895",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md8b26d14c247f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md8b26d14c247f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-nad-rz-32c36efce1",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "68c90d33562d1bc0823ffae9d068945333d328b25f2ee3ebf79d9cf495580042",
+          "byteLength": 81374,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-nad-rz-32c36efce1",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/rzut-parteru-z-powierzchniami-projekt-dom-nad-rzeczka-2-e-c09eb7de278254a8153e560eaca4227b__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-af847e8667",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md8b26d14c247f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md8b26d14c247f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom nad rzeczka 2 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-nad-rzeczka-2-e-d3ea06d099727511d920-2b81c0d25e",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7131961e27789f53b46b91be352e42acfcf0cc10e66e7e2f6c292e0e66304d7e",
+          "byteLength": 80582,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-projekt-dom-nad-rzeczka-2-e-d3ea06d099727511d920-2b81c0d25e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-d3ea06d099727511d9209db5ddf9e505__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-nad-rzeczka-2-e-99f4362350",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom nad rzeczka 2 (e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-nad-rzeczka-2-e-6c96f9d9e230-b084928d95",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "938d1a335780bc83ff602574aa95cd92520d9dd6af8b079b212ba161a1cf7ab1",
+          "byteLength": 172541,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-widok-1-projekt-dom-nad-rzeczka-2-e-6c96f9d9e230-b084928d95",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-1-projekt-dom-nad-rzeczka-2-e-6c96f9d9e23033c1ac00ff42797fa1c6__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-nad-rzeczka-2-e-e4b4086ddf",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-nad-rzeczka-2-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom nad rzeczka 2 (e) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-nad-rzeczka-2-e-74805ad2da67-cf748f8b5c",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "95bc55c47f87a30e7e44f242d147a17816436f669c4ed8ffd4c0af995ce7961f",
+          "byteLength": 176796,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+          "id": "var-widok-2-projekt-dom-nad-rzeczka-2-e-74805ad2da67-cf748f8b5c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-2-projekt-dom-nad-rzeczka-2-e-74805ad2da673b99114ab73ef2bbbe41__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+  "contentHash": "0a7de63dd353e5243f724d994d490b378497ba5cf1005653761e310d4ff9e227",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-1b459b6db5868a73a965f4d84b788a0b__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/rzut-parteru-projekt-dom-nad-rzeczka-2-e-079deff6b8911d4d7a46addbf11b5e96__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/rzut-parteru-projekt-dom-nad-rzeczka-2-e-d0de5f43add22d7c8746f8403e6eccf4__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-1-projekt-dom-nad-rzeczka-2-e-6c96f9d9e23033c1ac00ff42797fa1c6__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-1-projekt-dom-nad-rzeczka-2-e-93bdb1c0a8955931bd0580736c4c3193__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-2-projekt-dom-nad-rzeczka-2-e-74805ad2da673b99114ab73ef2bbbe41__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/widok-2-projekt-dom-nad-rzeczka-2-e-b6426756a7ec5c2314512b49461c7a10__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-db9b344f56ee2882cbfdfc64d703c7a6__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-boczna-projekt-dom-nad-rzeczka-2-e-39a3cb0752dfd838e26479c7c16b6ebf__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0876af693c4031c9df97ccb373fbc016__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-boczna-projekt-dom-nad-rzeczka-2-e-dc36b93a214b79a1bcd27e291b3891fb__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-6ec83c38e82a4ec3f5896cf0b8a9906e__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-frontowa-projekt-dom-nad-rzeczka-2-e-9287afdda9bbe9529087ce243d848fab__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0d53b6cbf17de2daac592f5ccd1355c5__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/elewacja-ogrodowa-projekt-dom-nad-rzeczka-2-e-442499f3acd92fb0d4b0fd5ef5cf650f__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md8b26d14c247f/projekt-dom-nad-rzeczka-2-e-0860da881a31d5813243221fb6e44f6b__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md8b26d14c247f/sytuacja-projekt-dom-nad-rzeczka-2-e-8ded876470302bc458d2743176300831__11255.jpg"
+    }
+  ],
+  "id": "src-md8b26d14c247f-e0fc3d7a33",
+  "pageHash": "d98cdb4dae4bb5335fa7c1ffc549524fc96ef556c2e10d05b27066a3a0b73a5a",
+  "project": {
+    "externalId": "md8b26d14c247f",
+    "name": "Projekt domu Dom nad rzeczką 2 (E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "2,92 m&sup2;",
+      "unit": "m2",
+      "value": 2.92
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "5,83 m",
+      "unit": "m",
+      "value": 5.83
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "85,98 m&sup2;",
+      "unit": "m2",
+      "value": 85.98
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "126,46 m&sup2;",
+      "unit": "m2",
+      "value": 126.46
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "83,06 m&sup2;",
+      "unit": "m2",
+      "value": 83.06
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "141,41 m&sup2;",
+      "unit": "m2",
+      "value": 141.41
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "114,29 m&sup2;",
+      "unit": "m2",
+      "value": 114.29
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "85,98 m&sup2;",
+      "unit": "m2",
+      "value": 85.98
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "589,94 m&sup3;",
+      "unit": "none",
+      "value": 589.94
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 4,00 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.92,
+      "index": 2,
+      "label": "Kotłownia z pralnią",
+      "raw": "2. Kotłownia z pralnią | 2,92 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.44,
+      "index": 3,
+      "label": "Korytarz",
+      "raw": "3. Korytarz | 2,44 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.75,
+      "index": 4,
+      "label": "Łazienka",
+      "raw": "4. Łazienka | 3,75 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.29,
+      "index": 5,
+      "label": "Pokój",
+      "raw": "5. Pokój | 11,29 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 35.63,
+      "index": 6,
+      "label": "Salon z aneksem kuchennym",
+      "raw": "6. Salon z aneksem kuchennym | 35,63 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.14,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 10,14 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.14,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 10,14 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.75,
+      "index": 9,
+      "label": "Garderoba",
+      "raw": "9. Garderoba | 2,75 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.92,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 2,92 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Atrakcyjny projekt domu o jednokondygnacyjnej, prostej bryle, zwieńczonej bezokapowym dachem dwuspadowym w kolorze antracytu. Projekt posiada wentylację mechaniczną w standardzie oraz szerokie przeszklenia, które doskonale doświetlają wnętrze domu, a tym samym dodają lekkości wizualnej bryle. Na elewacji zastosowano piękną kompozycję tynków i drewnianej okładziny, co podkreśla nowoczesny design projektu. Główne wejście znajduje się w praktycznym podcieniu, który ochroni tę część przed zmienną pogodą. Walory wizualne podnosi duże przeszklenie na elewacji frontowej, a od strony ogrodu znajduje się atrakcyjna strefa tarasowa z ażurową pergolą. W tym miejscu domownicy mogą wypoczywać na świeżym powietrzu i zaaranżować letnią jadalnię. Funkcjonalne wnętrze dostępne jest przez wiatrołap z miejscem na pojemną szafę i siedzisko. Dalej przez korytarz można wejść do strefy dziennej, gdzie nad całą przestrzenią został otwarty strop do połaci dachowej. Dzięki takiemu rozwiązaniu wnętrze zyskało na przestronności. Salon oferuje miejsce na narożną kanapę i szerokie, przesuwne wyjście na przytulny taras. W aneksie kuchennym można zaaranżować wygodną zabudowę. Jadalnia posiada miejsce na duży stół dla całej rodziny i zachwyca widokiem na strefę przed domem. Efektowny kominek rozświetla przestrzeń i pozwala mieszkańcom spędzić czas przy ciepłym blasku. W ramach strefy nocnej zaprojektowano sypialnię rodziców z wyjściem na taras, w jej pobliżu mieści się łazienka. Po przeciwnej stronie znajduje się strefa dzieci, obejmująca dwie sypialnie, z których dostępna jest wspólna garderoba i łazienka. Projekt „Dom nad rzeczką 2 (E)” dołącza do kolekcji: projekty domów nowoczesnych , projekty domów z wentylacją mechaniczną , projekty małych domów , projekty domów parterowych , projekty domów bez garażu ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy bez okapów, nachylenie 27 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 83.06 m² + 2.92 m² , 4 pokoje, 2 łazienki, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

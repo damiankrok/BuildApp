@@ -1,0 +1,1231 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "892-47",
+      "id": "asset-892-47-22897c87f3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-21-0c83406a81",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "b5f7003b85a8cc9f375e8b4a672f2b67becdbfa18a1421e8c794dddb1a4b13d2",
+          "byteLength": 30820,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-21-0c83406a81",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/9df8q3cnjg2ibul78vrc4o4b8s/w560x373.jpg?v=21"
+        }
+      ]
+    },
+    {
+      "caption": "938-119",
+      "id": "asset-938-119-497587024b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-08e4c1465d",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "7d807e05c569156374d0494190424b63ea6241345a95a9fc99c488fc97529b4a",
+          "byteLength": 79549,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-3-08e4c1465d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/8kpr4or6l44mpllhgfnkdcjpa7/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "938-126",
+      "id": "asset-938-126-bb4d75a15a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-52bcc08d7a",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "c9f6f9d3b1e047a12c9143a194440eaafaaa4677a6faa05a4694b73507b302cd",
+          "byteLength": 65719,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-3-52bcc08d7a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/pk8ecmlmjnbibk8r5fr01oje77/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Builder Advantage Home",
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.449511,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "byteLength": 215913,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 614,
+            "width": 890
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-15ae745939",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-original-jpg-v-3-5101d3362e",
+      "selectionReason": "only variant (3840x2160, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "f1f144f783618a64abe8d4bdf79f98b954d21b89b5d9db1361beef481dd0ab6d",
+          "byteLength": 5308168,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 2160,
+            "width": 3840
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-original-jpg-v-3-5101d3362e",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/original.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-25781a6e69",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-3-4990e58b3e",
+      "selectionReason": "only variant (1024x576, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "41f3b018e4b587a69a537dbba5d8fae96f7a8a3dd9059285f11f3600c985fb67",
+          "byteLength": 99835,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 576,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w1024-jpg-v-3-4990e58b3e",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w1024.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-a85ad5f65f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w600-jpg-v-3-c67eb95806",
+      "selectionReason": "only variant (600x338, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.775148,
+          "byteHash": "4d9d93ff2daa11f8395398e9cd6afc0f2e6b5eaf50ee3a022034d0c96e996ffa",
+          "byteLength": 39100,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 338,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w600-jpg-v-3-c67eb95806",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w600.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-f8017ce06c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #112-236 - 3 bed, 2 bat\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-3-0cc54b0aae",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "b28996eb2ffb63cd55e2bf8cb40f066d3cc179683682dae986057e0dc9c73469",
+          "byteLength": 72641,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w800x533-jpg-v-3-0cc54b0aae",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w800x533.jpg?v=3"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "870b70a390db061a22bda9986a3f4de41238946f8c9b650283eb3aa80e58a0d6",
+          "byteLength": 46780,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w620x413-jpg-v-3-6aabcb2a3d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w620x413.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Cabin House Plan #112-296 - 2 bed, 1 bath",
+      "id": "asset-exterior-front-elevation-for-cabin-house-plan-11-1e532607c6",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Cabin House Plan #112-296 - 2 bed, 1 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Cabin House Plan #112-296 - 2 bed, 1 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-d58be7ef67",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "ab9bcd9f7f46eb989046b7fcd1344ff13edfc2aa1751aaa357f5d2421c279b3b",
+          "byteLength": 18225,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-d58be7ef67",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/uc94fe1t2s41h98fufpm4737c6/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-contemporary-house-02b796db1f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-be11cac3db",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "9509c49456960d29774b7ca3ce500aff5964a6254e178e9d5808078bd414d16a",
+          "byteLength": 39483,
+          "declared": {
+            "height": 233,
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-3-be11cac3db",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #112-176 - 2 bed, 3 bath",
+      "id": "asset-exterior-front-elevation-for-contemporary-house-71cd8a2b78",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #112-176 - 2 bed, 3 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #112-176 - 2 bed, 3 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-b863365889",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "d63675604ec0e5aa2c30c3c823a0a6d85e611bb45987c98465365ba8cee9f7dc",
+          "byteLength": 14406,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-b863365889",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/49jr56bjclo1ptvqid5lv9alan/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Craftsman House Plan #112-299 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-craftsman-house-pla-53d9ebb500",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Craftsman House Plan #112-299 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Craftsman House Plan #112-299 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-32b5185080",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "fa037b705ae85c8d428931394d5d1adf38cb14584df77019d0bf4c700b8421e2",
+          "byteLength": 16710,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-32b5185080",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/lg03lv5hki9ip4t1kndn94hjjj/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Craftsman House Plan #112-240 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-craftsman-house-pla-57b7d43582",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Craftsman House Plan #112-240 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Craftsman House Plan #112-240 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-1398c40160",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "bfb3d5d711b13902a59f93636f9cdd5cf74e607468eb46a3b97c9fda2d4b7081",
+          "byteLength": 14740,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-1398c40160",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/gievbbee3hkm62v8v80a7ku5j1/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Craftsman House Plan #112-210 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-for-craftsman-house-pla-9d114571b5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Craftsman House Plan #112-210 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Craftsman House Plan #112-210 - 3 bed, 2.5 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-0d46ad4594",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "0bbe15334b4ea5f48bb0d71c8b4dce31acb65a9f13edcab9d227156b9021a510",
+          "byteLength": 14154,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-0d46ad4594",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/88munm6208ethep5nb8h3e7b6i/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Craftsman House Plan #112-234 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-craftsman-house-pla-d7f1432785",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Craftsman House Plan #112-234 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Craftsman House Plan #112-234 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-40f6a5d65b",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "d9f787cf6158bcaa2f2c54a290093c6293f0938f3f344d5d2c52a5bca889f170",
+          "byteLength": 15784,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-40f6a5d65b",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/cec69je85t6ifgp0b5f26mkt2u/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-for-contemporary-house-p-032946d475",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-3-44095128d2",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "56545bb791b3ba6dcfd32c3fece5aaca04343fefc059753071e6296fb0a5aaf8",
+          "byteLength": 60724,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w800x533-jpg-v-3-44095128d2",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/uvb29fqrv0qrap792vhupggter/w800x533.jpg?v=3"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "d7b10360df32fe63109b81606b86c4b0e6f21ccbc6f128914ee2d3e9d39dc9fc",
+          "byteLength": 37315,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w620x413-jpg-v-3-1fc9a8fff6",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/uvb29fqrv0qrap792vhupggter/w620x413.jpg?v=3"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "e05a0048ddb16b10a64bada8882e0907a7074e366a8b44417859543dc7836026",
+          "byteLength": 30955,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-3-906020b92b",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/uvb29fqrv0qrap792vhupggter/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-4568552d1f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w620x413-jpg-v-3-b37969e9b1",
+      "selectionReason": "only variant (620x413, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.501211,
+          "byteHash": "1d3d95f88d2887afb44c1ddac9b746ce515d5ce8062756c9e128491282e73111",
+          "byteLength": 32669,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w620x413-jpg-v-3-b37969e9b1",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/bhbg82ec000susgu5bh0nu6hic/w620x413.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-92549fd8df",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-3-c004234595",
+      "selectionReason": "only variant (1024x819, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.250305,
+          "byteHash": "fde4dd3f3a185162eb0a8894526571f9b281279a135008353059ab4227663b06",
+          "byteLength": 90496,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 819,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w1024-jpg-v-3-c004234595",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/bhbg82ec000susgu5bh0nu6hic/w1024.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-9a25532505",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #112-236 - 3 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-12d768e331",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "af5ce44c192c7dc206d142d53fa4eec20b405ad20d6af9f7f0c0fac37c3e75d5",
+          "byteLength": 28510,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w560x373-jpg-v-3-12d768e331",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/bhbg82ec000susgu5bh0nu6hic/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-6247e063ea-23834605e3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.729459,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "byteLength": 97045,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 499,
+            "width": 364
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-6247e063ea-b501cfeb71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.6575,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "byteLength": 67440,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 263
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 112-236",
+      "id": "asset-plan-112-236-90d5b5ec27",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-007b7be226",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "a176e3bae46c82b4ca0354cb18ea6e2b518c92251da1c27de031d5e375c4eebb",
+          "byteLength": 13734,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-w300x200-jpg-v-3-007b7be226",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-0452f0dc62",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "byteLength": 95997,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-271ada044c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.339286,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "byteLength": 87450,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 448,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-7ca11282d6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "byteLength": 73202,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+          "id": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=6247e063ea"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.houseplans.com/plan/1377-square-feet-3-bedroom-2-bathroom-2-garage-contemporary-beach-modern-sp365069",
+  "contentHash": "9a0c0af1382a7480710368b9f9a78ddd85ee2c1fa74b1884517276beb15248fa",
+  "failures": [
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.250305: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/bhbg82ec000susgu5bh0nu6hic/w560x373.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 1.250305: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/bhbg82ec000susgu5bh0nu6hic/w620x413.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.777778 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/original.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.777778 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w1024.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.775148 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/q5su8pgm4ei21sii5ga6k6khsd/w600.jpg?v=3"
+    }
+  ],
+  "id": "src-112-236-a0ed04633c",
+  "pageHash": "615dcc90d59b241105138e6949c54e124893a3aa0791cf3fef95fcb91346203a",
+  "project": {
+    "externalId": "112-236",
+    "name": "Contemporary Style House Plan - 3 Beds 2 Baths 1377 Sq/Ft Plan #112-236",
+    "publisher": "houseplans.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "raw": "19' 10\"",
+      "unit": "m",
+      "value": 6.045
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "43'",
+      "unit": "m",
+      "value": 13.106
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "48'",
+      "unit": "m",
+      "value": 14.63
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "In some regions, there is a second step you will need to take to ensure your house plans are in compliance with local codes. Some areas of North America have very strict engineering requirements. Examples of this would be, but not limited to, earthquake-prone areas of California and the Pacific Coast, hurricane risk areas of the Florida, Gulf &amp; Carolina Coasts. New York, New Jersey, Nevada, and parts of Illinois require review by a local professional as well. If you are building in these areas, it is most likely you will need to hire a state licensed structural engineer to analyze the design and provide additional drawings and calculations required by your building department. If you aren’t sure, building departments typically have a handout they will give you listing all of the items they require to submit for and obtain a building permit."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This contemporary design floor plan is 1377 sq ft and has 3 bedrooms and 2 bathrooms."
+    },
+    {
+      "key": "walls",
+      "label": "Wall Section(s)",
+      "text": "Scale 1/2\" = 1'-0\". Materials and construction notes. Framing details. Roof truss detail at wall. Foundation wall details. Insulation requirements."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

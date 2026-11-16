@@ -1,0 +1,56 @@
+{
+  "slug": "fresh-sa-amber-xi",
+  "imagesUsed": [
+    {"n": 5, "what": "ground floor plan, entrance at the bottom; printed 11.55 = 3.00 + 8.55 (top) and 11.55 = 3.00 + 8.55 (left); roof outline dashed"},
+    {"n": 3, "what": "front elevation (eaves side, extended roof over the entrance)"},
+    {"n": 4, "what": "rear elevation (rear-wing gable, recessed living glazing at the corner terrace)"},
+    {"n": 2, "what": "left elevation (main left gable with living glazing)"},
+    {"n": 1, "what": "right elevation (main right gable, wing slope behind)"},
+    {"n": 6, "what": "render front-right"},
+    {"n": 7, "what": "render rear-left, corner terrace"},
+    {"n": 8, "what": "render front-left"}
+  ],
+  "mirrorOrOtherProjectWarning": "No other project, advert or mirrored copy: all 8 pictures show this house and agree (corner terrace rear-left, kitchen front-left, entrance right of centre). No attic plan or section is offered.",
+  "overall": {"widthM": 11.55, "depthM": 11.55, "heightM": 6.25, "basis": "both overall dimensions printed on plan 5 and published; closed L-shaped outline fills that square minus the 3.00 x 3.00 rear-left terrace notch. Height published."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "front block across the full width, gables at left and right ends", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "11.55 x 8.55"},
+    {"name": "rear wing", "role": "WING", "where": "rear-right, bedrooms 6 and 7, cross gable facing the rear, ridge at main-ridge height", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "8.55 x 3.00"},
+    {"name": "entrance roof", "role": "PORCH", "where": "front slope of the main roof extended lower over the entrance deck, from about x 3.4 m to the right end", "storeys": 1, "enclosed": false, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "about 8.9 x 1.5"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "L-shaped cross-gabled roof: main ridge left-right with gables at both ends, rear cross gable over the rear-right wing at the same ridge height, valley at the inner corner. Eaves ~0.75 m; front slope extended to ~1.5 m over the entrance deck. Timber soffits with exposed rafter ends, snow guards. Pitch published."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 5, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "CENTRE", "what": "living-room glazing in the left gable wall, two panes about 2.85 m, floor to ceiling, plus a single tall 1.3 m pane (dining) beside a timber panel"},
+    {"facade": "REAR", "position": "RIGHT", "what": "living-room glazing about 2.7 m on the recessed rear face of the terrace notch, meeting the left glazing at a corner post (as seen from the rear)"}
+  ],
+  "features": [
+    {"kind": "TERRACE", "count": 1, "where": "timber deck in the rear-left corner notch with stepped edges, extending beyond the left and rear walls"},
+    {"kind": "PORCH", "count": 1, "where": "front entrance deck under the extended roof slope, steps from front and left, concrete planter on the right"},
+    {"kind": "CHIMNEY", "count": 2, "where": "grey rendered stacks on the front slope near the ridge, left of centre and towards the right; plus a small vent on the rear slope near the right gable"},
+    {"kind": "ROOF_WINDOW", "count": 1, "where": "front slope near the ridge, centre (no habitable attic)"},
+    {"kind": "OTHER", "count": 1, "where": "warm timber cladding panels on the entrance wall and between windows on rear and side walls"}
+  ],
+  "palette": {"walls": "white render with warm horizontal timber cladding panels; graphite window frames; light timber soffits and verges with exposed rafter ends; timber decks", "roof": "graphite flat tiles, grey rendered chimneys, graphite gutters"},
+  "uncertain": [
+    "Rooflight on the front slope lights roof space (no attic plan; usable area equals the ground rooms) - kept out of byStorey.",
+    "No posts visible under the extended entrance roof; support not shown.",
+    "Bedroom 6 two-pane glazing facing the terrace (left, recessed 3 m) read as GLAZED_DOOR; could be floor-length window.",
+    "Front narrow windows of laundry and boiler room sit slightly differently in elevation and plan."
+  ],
+  "confidence": "HIGH - dimensioned plan, four elevations and three renders agree; closed area matches published 124.40 m2.",
+  "groundOutline": {"shape": "L", "corners": 6, "polygonM": [[0, 0], [11.55, 0], [11.55, 11.55], [3.0, 11.55], [3.0, 8.55], [0, 8.55]], "closedAreaM2": 124.4, "basis": "all coordinates from printed 11.55 / 3.00 / 8.55 chains; origin front-left outer corner; equals published built-up area 124.40."},
+  "openZones": [
+    {"kind": "TERRACE", "roofed": false, "where": "rear-left corner notch plus apron outside the left and rear walls (only eave overhang above)", "approxSizeM": "notch 3.0 x 3.0; deck bounding about 6.5 x 11 incl. arm along the left wall"},
+    {"kind": "PORCH", "roofed": true, "where": "front, entrance deck under the extended roof slope", "approxSizeM": "about 4.4 x 1.5 deck (roof ~8.9 x 1.5)"}
+  ],
+  "printedOverall": {"widthCm": 1155, "depthCm": 1155, "where": "picture 5: top outer chain '11.55', left outer chain '11.55'"},
+  "groundRooms": 12
+}

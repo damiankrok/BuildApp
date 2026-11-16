@@ -1,0 +1,57 @@
+{
+ "slug": "projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+ "imagesUsed": [
+  {"n": 14, "what": "ground floor plan with dimension chains: 430 + 970 = 1400 along the front, 100 + 730 + 70 = 900 deep; entrance at the bottom; 13 is the same plan with room names, 6 and 11 smaller copies"},
+  {"n": 3, "what": "front elevation (long side, eaves to the front)"},
+  {"n": 4, "what": "rear (garden) elevation"},
+  {"n": 1, "what": "right gable elevation (front at left, pergola at right)"},
+  {"n": 2, "what": "left gable elevation (pergola at left)"},
+  {"n": 5, "what": "section through living room: 27 deg, eaves +3.22, ridge +5.51, terrain -0.32, room 270, living open to 427"},
+  {"n": 7, "what": "site plan 1400 x 900"},
+  {"n": 9, "what": "render front"},
+  {"n": 12, "what": "render rear-right with pergola"}
+ ],
+ "mirrorOrOtherProjectWarning": "None. Plan copies 6/11/13/14 agree; renders agree with plan (bedroom window left, glazed recess and entrance right of centre on the front; pergola over the rear recess).",
+ "overall": {"widthM": 14.0, "depthM": 9.0, "heightM": 5.83, "basis": "1400 and 900 printed on plan and site plan (roof covers the full 14.0 x 9.0 rectangle incl. recesses); height = ridge +5.51 over terrain -0.32 = published 5.83"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "one rectangular gable roof over a body with two wings (left 4.3 m wide full depth, right ~4.3 m) and a recessed central living room; glazed walls set back 0.7 m at the front and 1.0 m at the rear under the eaves", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "14.0 x 9.0 roof, closed ~113.8 m2"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 27, "notes": "Symmetrical 27 deg gable, ridge along the 14 m front, flush gables, dark grey flat-tile covering, eaves running unbroken across the front and rear recesses; no dormers. Living room open to the roof."},
+ "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+ "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "LARGE_GLAZING", "ENTRANCE_DOOR", "GLAZED_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "WINDOW"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]}
+ },
+ "largeGlazing": [
+  {"facade": "FRONT", "position": "CENTRE", "what": "living room glazing 460 x 230, three panes, in the 0.7 m roofed recess, timber jamb at left"},
+  {"facade": "REAR", "position": "CENTRE", "what": "living room glazing 460 x 230 in a dark frame, recessed 1.0 m, timber jambs"}
+ ],
+ "features": [
+  {"kind": "CHIMNEY", "count": 2, "where": "front slope just below the ridge, one near each end (about 4.3 m and 13.4 m from the left)"},
+  {"kind": "PERGOLA", "count": 1, "where": "rear, posts and open beams in front of the rear recess"},
+  {"kind": "OTHER", "count": 1, "where": "right outer wall continues 0.7 m forward as a light concrete-clad fin to the front line"},
+  {"kind": "OTHER", "count": 4, "where": "vertical timber panels between door and windows in the front recess, timber jambs at both glazings"},
+  {"kind": "TERRACE", "count": 1, "where": "rear terrace across the width with planters at its outer edge"}
+ ],
+ "palette": {"walls": "white render, vertical timber boards in the recesses, light grey concrete-look panels on the gables and fin, anthracite frames, grey plinth", "roof": "dark grey flat tiles, anthracite fascia, two rendered grey chimneys"},
+ "groundOutline": {"shape": "OTHER", "corners": 10, "polygonM": [[0, 0], [4.3, 0], [4.3, 0.7], [14.0, 0.7], [14.0, 9.0], [9.7, 9.0], [9.7, 8.0], [4.3, 8.0], [4.3, 9.0], [0, 9.0]], "closedAreaM2": 113.8, "basis": "1400 = 430 + 970 and 900 = 100 + 730 + 70 printed on plan 14; left wing 430 full depth; front of living and right wing (vestibule, boiler) set back 70; rear living glazing set back 100 between wings; right wing width ~4.3 estimated from plan pixels and rear elevation. U open to the rear plus a front step. The 0.7 m wall fin at the front-right corner is excluded (adding it gives ~114.2 m2)."},
+ "openZones": [
+  {"kind": "PORCH", "roofed": true, "where": "front recess under the eaves from the left wing to the right fin: living glazing, entrance door, boiler-room door", "approxSizeM": "about 9.1 x 0.7"},
+  {"kind": "LOGGIA", "roofed": true, "where": "rear recess in front of the living glazing between the wings", "approxSizeM": "about 5.4 x 1.0"},
+  {"kind": "PERGOLA", "roofed": false, "where": "rear, beyond the recess, open beams on four posts", "approxSizeM": "about 5.6 x 2.3"},
+  {"kind": "TERRACE", "roofed": false, "where": "rear terrace along the garden side", "approxSizeM": "about 14 x 3"}
+ ],
+ "printedOverall": {"widthCm": 1400, "depthCm": 900, "where": "plan 14/13: 1400 below the plan (430 + 970), 900 on the left (100 + 730 + 70); site plan 7 repeats 1400 x 900"},
+ "groundRooms": 10,
+ "uncertain": [
+  "Right wing width (~4.3 m) and rear recess width (~5.4 m) are not printed; estimated from plan pixels and rear elevation. The 430 tick sits a little inside the living room jamb.",
+  "Front right: the vestibule/boiler front wall is on the 70 setback line while the right wall runs on to the front line as a fin; counted outside the closed outline.",
+  "Boiler room has its own external glazed door 80/230 on the front (counted as GLAZED_DOOR).",
+  "Pergola size scaled from plan (posts at about 2.3 m from the rear wall line)."
+ ],
+ "confidence": "HIGH for overall size, roof and openings; MEDIUM for the exact recess widths."
+}

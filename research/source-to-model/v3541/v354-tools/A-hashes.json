@@ -1,0 +1,169 @@
+{
+ "tree": "v3.54 production 226c9ac (A runs of 2026-11-15)",
+ "runs": [
+  {
+   "house": "architecturaldesigns-com-1",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "architecturaldesigns-com-2",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "architecturaldesigns-com",
+   "outcome": "MODEL",
+   "modelSha256": "81b6c632442206766c25aff2cc99627dab46fdaabd062d30037e60ed27aa6e2f",
+   "sceneSha256": "1ecd1494f38fb7ffd80ff17f2997611f98a147349cf43230009ee9c2ae599bb1"
+  },
+  {
+   "house": "dobredomy-pl-1",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "dobredomy-pl-2",
+   "outcome": "MODEL",
+   "modelSha256": "8e428bee93673741056086d1f9d4d403120257ea517529e21d784fc406ea42ef",
+   "sceneSha256": "b656b63f97652d2cd30c47cb86051c565e0e5f35c153a17d4c9ba621086e9aa1"
+  },
+  {
+   "house": "dobredomy-pl",
+   "outcome": "MODEL",
+   "modelSha256": "e838fd99e8c994d27c30d7dc531cfee450bcf8720deda62241810129e9da9b89",
+   "sceneSha256": "c3c35a3a02a8e2346b893787bccfcdc92abeeed1ff81f25493a23357e4fc79c4"
+  },
+  {
+   "house": "domoweklimaty-pl-1",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "domoweklimaty-pl-2",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "domoweklimaty-pl",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "extradom-pl-1",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "extradom-pl-2",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "extradom-pl",
+   "outcome": "MODEL",
+   "modelSha256": "174f9a437cb0e3d0e7fa100f2466fab157dcab834324b291e2ab06956678fb21",
+   "sceneSha256": "9c55088fccbc7322611f478327ece33cafc015d4423d1c2ca890efa9bf4e45e5"
+  },
+  {
+   "house": "fresh-aralie",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "fresh-bluszcz-3",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "fresh-piwonie-3-g",
+   "outcome": "MODEL",
+   "modelSha256": "92205431d627b2caac50264c906813ad756c14eb68f998e12c9af7e3c3af3d4f",
+   "sceneSha256": "b8bbadd95af4fc2ddcaaf9c5f3fa0990c7bf005e09a38751607a1725e0e28e2b"
+  },
+  {
+   "house": "fresh-sa-agawa",
+   "outcome": "MODEL",
+   "modelSha256": "b57dfa419b0d782b4a3ba83becbb051a4d17f276565fce8039bb839f0828d6aa",
+   "sceneSha256": "01c540fce35b0d3549f0ec66712a804e52bfa502a613dee58621fc8fbbfd1b21"
+  },
+  {
+   "house": "fresh-sa-amber-xi",
+   "outcome": "MODEL",
+   "modelSha256": "9e50f3f0f25409a463b91c7462ec6eb48d26f7a5519c0ff165faa1ce1a2972b9",
+   "sceneSha256": "4012b2c704b6c90b8d9c6e157549bae89531c670a1a8d4a8ce36005ec5a7bd10"
+  },
+  {
+   "house": "fresh-sa-awans-ii",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "fresh-saponarie-g2e",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "houseplans-com-1",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "houseplans-com-2",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "houseplans-com",
+   "outcome": "MODEL",
+   "modelSha256": "d9c8bc48b6aa7ae1901202e144800c605ba69cf9e44d96cf8be78cc1b8e0731b",
+   "sceneSha256": "d86454976a3e2374f721a4076755934026f2fbe57058db32b1a0e2f8377add1f"
+  },
+  {
+   "house": "lipinscy-pl-1",
+   "outcome": "MODEL",
+   "modelSha256": "0032b02e4daa8ac773e13283d46b23803cd14515226a9c1d1e2d6a62b3532abe",
+   "sceneSha256": "6bd53ef00f61cc94f8e88a472aec6496ee55e62a7634762731af0cfb3bd956e1"
+  },
+  {
+   "house": "lipinscy-pl-2",
+   "outcome": "MODEL",
+   "modelSha256": "bc269b8200e9aeabeb86617055f8c0f96adeb36126373ec2de18ee0279f48d72",
+   "sceneSha256": "f93cfaea410549730c7aa1b52a0dd0b19e3f1f3e39767a3e52274b3260ccada2"
+  },
+  {
+   "house": "lipinscy-pl",
+   "outcome": "MODEL",
+   "modelSha256": "dc56a1b89c0f0092f098d9720e4808562f1d7cb5f48ebb3b3f0f79b83e8019f6",
+   "sceneSha256": "3c18a95ea5af8b89af7cd8ed0c909b30deae1ab4e672ae7b091e8f33c227435c"
+  },
+  {
+   "house": "projekt-dom-nad-rzeczka-2-e-md8b26d14c247f",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+   "outcome": "MODEL",
+   "modelSha256": "06e8d1ff05826ea171695877be7f49e903be4f4a8b9ddad510ecdf7beefdbe77",
+   "sceneSha256": "7efe2ef8ba48b3a0664a378a8552aadb30d270ce8edcd65233b1bf3445c9a2eb"
+  },
+  {
+   "house": "projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+   "outcome": "MODEL",
+   "modelSha256": "a29117882c82b066c4fd37412454880a229fcf1a6b0e0388f23406df01847dc6",
+   "sceneSha256": "dba2ab2ff5410d28dfbb036c0d67370ec53a369b5ed113239a51bbfc228a9731"
+  },
+  {
+   "house": "projekt-dom-w-supertuniach-2-e-m9022920a5fcb6",
+   "outcome": "NO_MODEL",
+   "code": "RECONSTRUCTION_FAILED"
+  },
+  {
+   "house": "projekt-dom-w-toreniach-3-e-me822857280738",
+   "outcome": "MODEL",
+   "modelSha256": "4ab60f281626b257c209e86f0533cc83c752fef3f9d92f5880fd52783b1a85a6",
+   "sceneSha256": "3acd071cdfda424161b3e9bc36fd2a277f746a55408aa0a8a5a15d7e11b97f8e"
+  }
+ ]
+}

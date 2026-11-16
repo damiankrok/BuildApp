@@ -1,0 +1,788 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Braas",
+      "id": "asset-braas-47125a8832",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 95,30 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-xg-png-26fc1826b0",
+      "selectionReason": "only variant (1x1, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "aa93ff38086e8dab9cbcae5b9c24990c8c8fcda11c5c9f1613de60a0019b145b",
+          "byteLength": 923,
+          "declared": {
+            "height": 1,
+            "width": 1
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1,
+            "width": 1
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-xg-png-26fc1826b0",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/xg.png"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja bcozna domu Amber XI",
+      "id": "asset-elewacja-bcozna-domu-amber-xi-c02140ec29",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595614090fb15\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja bcozna domu Amber XI\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-elewacja-595614090fb15-jpg-47bd0b85bd",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "2931c26476874b8a9625ef57d6c446cc604f32f6276d6123006aacf8192fa7d3",
+          "byteLength": 57826,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-elewacja-595614090fb15-jpg-47bd0b85bd",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/elewacja-595614090fb15.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja boczna domu Amber XI",
+      "id": "asset-elewacja-boczna-domu-amber-xi-1c3f030837",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 595614095d477\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Amber XI\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Amber XI\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-elewacja-595614095d477-jpg-06d34fc34c",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "8fbeb2cb0c1714e3a33ae763420706f4dace4ec5dfc39d037ea8a75264e55c78",
+          "byteLength": 64435,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-elewacja-595614095d477-jpg-06d34fc34c",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/elewacja-595614095d477.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja frontowa domu Amber XI",
+      "id": "asset-elewacja-frontowa-domu-amber-xi-595bcac7e6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 59561408dd779\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja frontowa domu Amber XI\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"elewacja frontowa domu Amber XI\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-elewacja-59561408dd779-jpg-a34438857e",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "76fd25a82bff5626d74b8efd02c53067a69004ec2c406661cf14241281b40590",
+          "byteLength": 70263,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-elewacja-59561408dd779-jpg-a34438857e",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/elewacja-59561408dd779.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "elewacja tylna domu Amber XI",
+      "id": "asset-elewacja-tylna-domu-amber-xi-5ad835b894",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956140937f76\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja tylna domu Amber XI\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylna\" in \"elewacja tylna domu Amber XI\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-elewacja-5956140937f76-jpg-74c01f630f",
+      "selectionReason": "only variant (1024x683, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "f786f252ab00d14e0728a2ead52700631d00d52c6267c59997e117930a7bb7aa",
+          "byteLength": 64391,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-elewacja-5956140937f76-jpg-74c01f630f",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/elewacja-5956140937f76.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Generowanie pliku",
+      "id": "asset-generowanie-pliku-7541ac17b9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-loader-gif-22db5820a5",
+      "selectionReason": "only variant (16x16, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9db486efc49e6d43525a174416f8a1d4999627d7e8728c4c323228f1aa568967",
+          "byteLength": 673,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 16,
+            "width": 16
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-loader-gif-22db5820a5",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/loader.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut parteru - Amber XI",
+      "id": "asset-rzut-parteru-amber-xi-3128eb7111",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 59560b140a162\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut parteru - Amber XI\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Rzut parteru - Amber XI\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-59560b140a162-png-7eb56c4783",
+      "selectionReason": "only variant (1152x1262, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.912837,
+          "byteHash": "a2b218e9259f2cdf721645500dd7ba5ca2d09265ba357edadac63b3c12794c0d",
+          "byteLength": 102400,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1262,
+            "width": 1152
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-rzut-59560b140a162-png-7eb56c4783",
+          "mediaType": "image/png",
+          "url": "https://media.studioatrium.pl/project/1318/rzut-59560b140a162.png"
+        }
+      ]
+    },
+    {
+      "id": "asset-waiter-blue-gif-57c8c7de8f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-waiter-blue-gif-8b0babfa97",
+      "selectionReason": "only variant (32x32, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "98b3c8d8db7281e3772cdae94ad6e3f7c25495314a1e2170fac6b9417ff32f5e",
+          "byteLength": 3208,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 32,
+            "width": 32
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-waiter-blue-gif-8b0babfa97",
+          "mediaType": "image/gif",
+          "url": "https://www.studioatrium.pl/img/waiter-blue.gif"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Amber XI - ciekawe pionowe wąskie okna z kotłowni i pralni",
+      "id": "asset-wizualizacja-projektu-domu-amber-xi-ciekawe-pion-0d1fc30fd3",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 5954f73188407\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - ciekawe pionowe wąskie okna z kotłowni i p\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - ciekawe pionowe wąskie okna z kotłowni i p\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-amber-xi-wizualizacja-5954f73188407-jpg-4e46ca5252",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "962c9902e1458d65a078eb7fda4da8ffc3c030b1d617ab1ecd4b029cc896e98e",
+          "byteLength": 433715,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-amber-xi-wizualizacja-5954f73188407-jpg-4e46ca5252",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/amber-xi-wizualizacja-5954f73188407.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "6a6ad05d24d761d4b6b367a8c7828044f07542d84c5784f18b5825fc708bcc8a",
+          "byteLength": 8391,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-dummy-jpg-723026fe84",
+          "mediaType": "image/jpeg",
+          "url": "https://www.studioatrium.pl/img/dummy.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Amber XI - narożny taras wypoczynkowy",
+      "id": "asset-wizualizacja-projektu-domu-amber-xi-narozny-tara-3f4e8b107a",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 1350 5954f72f04d70\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 5954f72f04d70\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - narożny taras wypoczynkowy\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - narożny taras wypoczynkowy\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-amber-xi-wizualizacja-5954f72f04d70-jpg-c611beee7e",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "0882b2f58c74f683e06398943283d95923237bb088fc53fc721d80c659a3612a",
+          "byteLength": 450268,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-amber-xi-wizualizacja-5954f72f04d70-jpg-c611beee7e",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/amber-xi-wizualizacja-5954f72f04d70.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "d6ff85552d7c6584f716e9ab20486c2ac1715595941776fe2060d8c6818df7a6",
+          "byteLength": 222904,
+          "declared": {
+            "height": 900,
+            "width": 1350
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-amber-xi-wizualizacja-1350-5954f72f04d70-jpg-0162cf0015",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/amber-xi-wizualizacja-1350-5954f72f04d70.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "wizualizacja projektu domu Amber XI - przedłużony dach nad wejściem do domu",
+      "id": "asset-wizualizacja-projektu-domu-amber-xi-przed-uzony-aa576757c8",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 1350 5954f72c5c103\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 1350 5954f72c5c103\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 1350 5954f72c5c103\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"amber xi wizualizacja 5954f72c5c103\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu parterowego AMBER XI - wizualizacja 1 wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu parterowego AMBER XI - wizualizacja 1 wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - przedłużony dach nad wejściem do domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Amber XI - przedłużony dach nad wejściem do domu\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-amber-xi-wizualizacja-5954f72c5c103-jpg-b79b822b63",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "66a8f9fae1ce7420dec3ba182419c0727a948077907e0b6e227f5048b4a48944",
+          "byteLength": 555399,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-amber-xi-wizualizacja-5954f72c5c103-jpg-b79b822b63",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/amber-xi-wizualizacja-5954f72c5c103.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "f52cc558bb4c324bfc97db2b144a73bb060cbc96ee3132d3483d46dcd9cfc97d",
+          "byteLength": 275533,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1350
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-amber-xi-wizualizacja-1350-5954f72c5c103-jpg-76f799939c",
+          "mediaType": "image/jpeg",
+          "url": "https://media.studioatrium.pl/project/1318/amber-xi-wizualizacja-1350-5954f72c5c103.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zobacz galerię projektu Amber XI",
+      "id": "asset-zobacz-galerie-projektu-amber-xi-ae98ecd3ad",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-finger-png-4c3ec8d5a5",
+      "selectionReason": "only variant (90x100, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.9,
+          "byteHash": "280b256ffccbf48c8b2e8acab725410940ad9bf1d1cfa2bb849bea8799384366",
+          "byteLength": 5050,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 100,
+            "width": 90
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+          "id": "var-finger-png-4c3ec8d5a5",
+          "mediaType": "image/png",
+          "url": "https://www.studioatrium.pl/img/finger.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.studioatrium.pl/projekty-domow/Amber-xi,1318.html",
+  "contentHash": "240ab0257b9428d0624f6da0b9cc3391c0ccca1c60f4f46259d884f66e59b119",
+  "failures": [],
+  "id": "src-www-studioatrium-pl-07051ababa",
+  "pageHash": "307bb64d64d64f0fb12ffc2bc9dd421946b8655e0a7786d089e149894b219443",
+  "project": {
+    "name": "Projekt domu Amber XI",
+    "publisher": "studioatrium.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "wysokość budynku",
+      "raw": "6,25 m",
+      "unit": "m",
+      "value": 6.25
+    },
+    {
+      "key": "building_length",
+      "label": "długość budynku",
+      "raw": "11,55 m",
+      "unit": "m",
+      "value": 11.55
+    },
+    {
+      "key": "building_width",
+      "label": "szerokość budynku",
+      "raw": "11,55 m",
+      "unit": "m",
+      "value": 11.55
+    },
+    {
+      "key": "footprint_area",
+      "label": "pow. zabudowy",
+      "raw": "124,40 m²",
+      "unit": "m2",
+      "value": 124.4
+    },
+    {
+      "key": "roof_area",
+      "label": "pow. dachu",
+      "raw": "197,00 m²",
+      "unit": "m2",
+      "value": 197
+    },
+    {
+      "key": "roof_pitch",
+      "label": "kąt nachylenia dachu",
+      "raw": "30 °",
+      "unit": "deg",
+      "value": 30
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "95,30 m²",
+      "unit": "m2",
+      "value": 95.3
+    },
+    {
+      "key": "volume",
+      "label": "kubatura brutto",
+      "raw": "601,90 m³",
+      "unit": "none",
+      "value": 601.9
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 3.75,
+      "index": 1,
+      "label": "przedsionek",
+      "raw": "1 przedsionek | 3,75",
+      "storey": "GROUND"
+    },
+    {
+      "area": 15.1,
+      "index": 2,
+      "label": "hall",
+      "raw": "2 hall | 15,10",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.15,
+      "index": 3,
+      "label": "spiżarka",
+      "raw": "3 spiżarka | 2,15",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.8,
+      "index": 4,
+      "label": "kuchnia",
+      "raw": "4 kuchnia | 8,80",
+      "storey": "GROUND"
+    },
+    {
+      "area": 21.85,
+      "index": 5,
+      "label": "pokój dzienny z jadalnią",
+      "raw": "5 pokój dzienny z jadalnią | 21,85",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.85,
+      "index": 6,
+      "label": "pokój",
+      "raw": "6 pokój | 10,85",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.45,
+      "index": 7,
+      "label": "pokój",
+      "raw": "7 pokój | 9,45",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.6,
+      "index": 8,
+      "label": "łazienka",
+      "raw": "8 łazienka | 4,60",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.15,
+      "index": 9,
+      "label": "pokój",
+      "raw": "9 pokój | 10,15",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.7,
+      "index": 10,
+      "label": "kotłownia",
+      "raw": "10 kotłownia | 4,70",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.3,
+      "index": 11,
+      "label": "pralnia",
+      "raw": "11 pralnia | 2,30",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.6,
+      "index": 12,
+      "label": "w.c.",
+      "raw": "12 w.c. | 1,60",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Kolejna odsłona popularnego projektu z nieco zmodyfikowanym programem użytkowym. W strefie dziennej zaprojektowano kuchnię z funkcjonalną spiżarnią oraz pokój dzienny z kominkiem. Duża powierzchnia przeszklona pięknie doświetla pomieszczenia oraz otwiera je na ogród. W ciepłe dni do relaksu na świeżym powietrzu zachęca przestronny, narożny taras. W części nocnej zaprojektowano trzy sypialnie i dużą łazienkę. Do dyspozycji jest również w.c., kotłownia oraz pralnia. Tak pomyślany układ funkcjonalny gwarantuje komfort użytkowania czteroosobowej rodzinie. Stonowana architektura, przyjazna kolorystyka i dbałość o detal sprawią, że dom dobrze wpisze się w większość działek."
+    },
+    {
+      "key": "roof",
+      "label": "kąt nachylenia dachu",
+      "text": "30 °"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu Amber XI o powierzchni użytkowej 95,3 m2. Dom parterowy, przykryty przenikającymi się dachami dwuspadowymi, z narożnym tarasem"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Dom parterowy, przykryty przenikającymi się dachami dwuspadowymi, z narożnym tarasem"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

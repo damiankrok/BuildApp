@@ -1,0 +1,1455 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "44-274",
+      "id": "asset-44-274-2697f42023",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-png-v-3-b89f81f90a",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "0833e0cd560d8ad2e8f9f91dbbef3373611217f36f8b000b943823e9f14de377",
+          "byteLength": 393872,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-png-v-3-b89f81f90a",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/fqpmtvut4rcujoltr33v6h2ktr/w560x373.png?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "892-47",
+      "id": "asset-892-47-22897c87f3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-21-0c83406a81",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "b5f7003b85a8cc9f375e8b4a672f2b67becdbfa18a1421e8c794dddb1a4b13d2",
+          "byteLength": 30820,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-21-0c83406a81",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/9df8q3cnjg2ibul78vrc4o4b8s/w560x373.jpg?v=21"
+        }
+      ]
+    },
+    {
+      "caption": "938-119",
+      "id": "asset-938-119-497587024b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-08e4c1465d",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "7d807e05c569156374d0494190424b63ea6241345a95a9fc99c488fc97529b4a",
+          "byteLength": 79549,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-3-08e4c1465d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/8kpr4or6l44mpllhgfnkdcjpa7/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Builder Advantage Home",
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.449511,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "byteLength": 215913,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 614,
+            "width": 890
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-5dd7361c5e",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-3-0f7bd1f4da",
+      "selectionReason": "only variant (1024x614, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.667752,
+          "byteHash": "c96f4e5956fbb2e95875ffb6725fa22ee12d8a8d8a10498ba3b33da00db776c0",
+          "byteLength": 187342,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 614,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w1024-jpg-v-3-0f7bd1f4da",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w1024.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-a21c712347",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w600-jpg-v-3-e82efdae4d",
+      "selectionReason": "only variant (600x360, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.666667,
+          "byteHash": "a88ffa949b3b431ec5ceb2a80ca37aa76c3c94996023d3b59819f31ac23576c4",
+          "byteLength": 66041,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 360,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w600-jpg-v-3-e82efdae4d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w600.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-aa80f465af",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-3-c401cc0177",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "85f1bf3cd0edfd96e59ed34076d2f65edde1afd657160db99a251d83f6fd5c45",
+          "byteLength": 128534,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w800x533-jpg-v-3-c401cc0177",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w800x533.jpg?v=3"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "809327887ca71e52da84e4283e7f8e3d65e33c803be8ae3487b90403292a60a2",
+          "byteLength": 79746,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w620x413-jpg-v-3-c2211cf42c",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w620x413.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-fc6f51cc2f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-original-jpg-v-3-d846f70678",
+      "selectionReason": "only variant (1280x768, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.666667,
+          "byteHash": "cf2106d1eaab996d1814c9c5de8ba046b6d605a73b1f3e75f1e64be692325d87",
+          "byteLength": 245685,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 768,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-original-jpg-v-3-d846f70678",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/original.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1070-207 - 2 bed, 1 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-7a8ecf50f9",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-207 - 2 bed, 1 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-207 - 2 bed, 1 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-10-855b5ac3bb",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "5128a41bca705bc640d2bbd125f63d4861c1fdb4970ad90e887a485494cce18f",
+          "byteLength": 18234,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-10-855b5ac3bb",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/vib58g69lelhodghrjladeqdh7/w300x200.JPG?v=10"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1070-121 - 1 bed, 1 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-c1e806174e",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-121 - 1 bed, 1 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-121 - 1 bed, 1 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-8-9e360701de",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "695c02bbc0e7f4d032c5fdfd244f1ffb909f02ff3d860a079376d0043445afe9",
+          "byteLength": 15274,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-8-9e360701de",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/eu2spht9hkn2o3n4nscsn2kqno/w300x200.jpg?v=8"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1070-243 - 1 bed, 1 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-e57f42f6ea",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-243 - 1 bed, 1 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1070-243 - 1 bed, 1 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-8-7db8dd7388",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "e7cb946eb5282cc73dbb02159af7bf229c554cad745863bcaacc56e8459a8cb0",
+          "byteLength": 12186,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-8-7db8dd7388",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/8oqvnoencn6j5hdojttkg8hr0g/w300x200.JPG?v=8"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-for-contemporary-house-22a53e1411",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-f0d8ecab68",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "9fe5337f7ba2efa208f483363c5685fd53ed447687039b22433f30c0df859a18",
+          "byteLength": 63151,
+          "declared": {
+            "height": 233,
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-3-f0d8ecab68",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Craftsman House Plan #1070-65 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-front-elevation-for-craftsman-house-pla-0464eb0e72",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Craftsman House Plan #1070-65 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Craftsman House Plan #1070-65 - 3 bed, 2.5 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-10-90736acdba",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2677aa5a8d3c34ce710a218d9a9d33f558e31e8e002bd886278a31c419485eb4",
+          "byteLength": 12545,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-10-90736acdba",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/s24jhrqt8vo3jjl2dvphj1neo0/w300x200.jpg?v=10"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 1 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-1-for-contemporary-hous-8056cc72c8",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-6-c2ee71f04a",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "7ef6ee8b1239daa18dd5467a90c9edcb80ae824a5370154c2a605903f3047335",
+          "byteLength": 46199,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w800x533-jpg-v-6-c2ee71f04a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/djcml62v3g01f4ckcsc4rej9se/w800x533.jpg?v=6"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "3d3b0fd59ca38f96c3a387ddbacbcdb928213e86562a5135b52fedba1bcfa432",
+          "byteLength": 29049,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w620x413-jpg-v-6-a91aef2bed",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/djcml62v3g01f4ckcsc4rej9se/w620x413.jpg?v=6"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "1976ca45e1deae3d3444bb42e1bd4ee8da12e2018e22a4eba7bae71bbdb296a7",
+          "byteLength": 23223,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-6-bc36be715e",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/djcml62v3g01f4ckcsc4rej9se/w560x373.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-2-for-contemporary-hous-7f8e4b8600",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-6-bffd3fefcb",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "e666453ebc6dac84eb3748828a97332997267e9abbd6b11b24babb294f6577b9",
+          "byteLength": 23108,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-6-bffd3fefcb",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/w560x373.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-2-for-contemporary-hous-811d762ef6",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-original-jpg-v-6-b6873e5ae1",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x777 over 1024x622",
+      "variants": [
+        {
+          "aspect": 1.647362,
+          "byteHash": "f239c11a01e31bec243611c2f12353a659eb7037bfc4bf9dac2a398bb5ad359e",
+          "byteLength": 102767,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 777,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-original-jpg-v-6-b6873e5ae1",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/original.jpg?v=6"
+        },
+        {
+          "aspect": 1.646302,
+          "byteHash": "f38e8833b61cb0a2de6ddc9914c147d144cc290af9b16499f0cf947bd6e05d81",
+          "byteLength": 52133,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 622,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w1024-jpg-v-6-9df53fa214",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/w1024.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-2-for-contemporary-hous-c2eb50ce88",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-6-34b496b3e2",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "a4c2bcec17b040b623c6db5453d2eee4895e392b649c973af049150a514fda42",
+          "byteLength": 41409,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w800x533-jpg-v-6-34b496b3e2",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/w800x533.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 3 for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-3-for-contemporary-hous-5704a65c36",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #1070-240 - 3 bed, 2.5 \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-8c21b0aaba",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "9651c3594adc99359fa8dde2f6979304d3e3363a991ce0640163f23c3a74d5f7",
+          "byteLength": 44211,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w800x533-jpg-v-5-8c21b0aaba",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/il9rkonqkkoilld1qjr5btiibs/w800x533.jpg?v=5"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "a3e8c110e99f509a1ed9fba0061ee6ad0dda8ebccfbdc43f54c175203fc141d7",
+          "byteLength": 28244,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w620x413-jpg-v-5-e433b3117e",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/il9rkonqkkoilld1qjr5btiibs/w620x413.jpg?v=5"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "6b8267409f0e636ea6acc786efeb67a04820df4545739061b6c54a2f11722bb8",
+          "byteLength": 22208,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-5-98a9baf100",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/il9rkonqkkoilld1qjr5btiibs/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-exterior-other-elevation-for-contemporary-house-af07f565b1",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #1070-240 - 3 bed, 2.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-4-b4dc942485",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "53d16e76a14256f3a57c74629f4ea997b3f191a7620d5cab43870055ac751306",
+          "byteLength": 123794,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w800x533-jpg-v-4-b4dc942485",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5sef6d25i5kf7rk9t43stec9su/w800x533.jpg?v=4"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "3a4ae011a3f999b6bc2b26f178ed9a452ee2fcccbc9335e55284d4fc30dfe6c2",
+          "byteLength": 77524,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w620x413-jpg-v-4-76c73603c6",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5sef6d25i5kf7rk9t43stec9su/w620x413.jpg?v=4"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "e71a2c774bcd9d3d0610636ddd801a47e1937713fcbda2f3cb0690951ffeba28",
+          "byteLength": 61247,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-4-2732abcdde",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5sef6d25i5kf7rk9t43stec9su/w560x373.jpg?v=4"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath",
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-f16e43eda9",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #1070-240 - 3 bed, 2.5 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-3-1caebc07cd",
+      "selectionReason": "largest decoded raster of 3 variants: 1024x683 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.499268,
+          "byteHash": "96dc57354905615059601c1c2b7c93a934c5849f14bee763cbb6d527b9607fa1",
+          "byteLength": 82368,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 683,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w1024-jpg-v-3-1caebc07cd",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/ll9vpo5f2rt7ceuvdue5j04fvc/w1024.jpg?v=3"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "8d243603d3ecb4f4ac4f691292053eeb0fc198b2a1127791b1bf7b12bbe61a57",
+          "byteLength": 38571,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w620x413-jpg-v-3-f351bb7713",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/ll9vpo5f2rt7ceuvdue5j04fvc/w620x413.jpg?v=3"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "be489f5e967a2122f09b2f195cb30bd15471ef5093298f71c71cb1278f67388d",
+          "byteLength": 33105,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w560x373-jpg-v-3-c4ff57712a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/ll9vpo5f2rt7ceuvdue5j04fvc/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-6247e063ea-23834605e3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.729459,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "byteLength": 97045,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 499,
+            "width": 364
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-6247e063ea-b501cfeb71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.6575,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "byteLength": 67440,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 263
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Photo for Barndominium House Plan #1070-120 - 1 bed, 1 bath",
+      "id": "asset-photo-for-barndominium-house-plan-1070-120-1-bed-75a84a21d9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-24-18da0be9bf",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2da837bf31e45b2d6b75583eaf2919bcec6d5457ea6d40e53a7f77c5cf6c9e68",
+          "byteLength": 15349,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-24-18da0be9bf",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/s8g8i7o9eu5sof0i76m0d8smmi/w300x200.jpg?v=24"
+        }
+      ]
+    },
+    {
+      "caption": "Photo for Contemporary House Plan #1070-161 - 4 bed, 2.5 bath",
+      "id": "asset-photo-for-contemporary-house-plan-1070-161-4-bed-f381fdc4bc",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-11-5c80ce57fe",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "5d5845ca98421402d00ba9731bde1b0eb6fc544929e11d0fd70261bc888a6279",
+          "byteLength": 18456,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-11-5c80ce57fe",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/3uctfie1r9had6i8g2nchaflpf/w300x200.jpg?v=11"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 1070-240",
+      "id": "asset-plan-1070-240-1d40042a48",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-3-9b4611dee9",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8c1090606ed854c8112cdb1a7b04dc7d302ecada8362eefee037681c042cb27b",
+          "byteLength": 19488,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-w300x200-jpg-v-3-9b4611dee9",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w300x200.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-0452f0dc62",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "byteLength": 95997,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-271ada044c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.339286,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "byteLength": 87450,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 448,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-7ca11282d6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "byteLength": 73202,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+          "id": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=6247e063ea"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.houseplans.com/plan/1668-square-feet-3-bedroom-2-5-bathroom-2-garage-contemporary-modern-ranch-barndominium-sp364600",
+  "contentHash": "a3cfa2a581df71630aeadd01ff5d57ca712a76c3fa5a11f95d674150c80b5bff",
+  "failures": [
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.666667 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/original.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.667752 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w1024.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.666667 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/c640f5qof306d34pkqthm1v8ja/w600.jpg?v=3"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.647362: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/w560x373.jpg?v=6"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 1.647362: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/fqjbblgobdta6h8el14bi4qsnr/w800x533.jpg?v=6"
+    }
+  ],
+  "id": "src-1070-240-bfcf05f67d",
+  "pageHash": "c7b3aa4c21bf4d2e38c3ff21842ddbafa1321584c132daf74affd0461791b59e",
+  "project": {
+    "externalId": "1070-240",
+    "name": "Contemporary Style House Plan - 3 Beds 2.5 Baths 1668 Sq/Ft Plan #1070-240",
+    "publisher": "houseplans.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "raw": "31' 4\"",
+      "unit": "m",
+      "value": 9.55
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "53'",
+      "unit": "m",
+      "value": 16.154
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "80' 4\"",
+      "unit": "m",
+      "value": 24.486
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "construction",
+      "label": "Construction Notes / Detail(s)",
+      "text": "Shows basic parts and assemblies recommended for the home so the builder can see how things come together."
+    },
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Please note: This designer includes the bonus square feet to the total heated living square feet, unless otherwise noted. Foundation Plan(s): This page shows all necessary notations and dimensions including footings, support columns, walls, and excavated/unexcavated areas. Floor Plan(s): Detailed plans are typically drawn to 1/4\" scale for each level showing room dimensions, wall partitions, windows, etc. Exterior Elevations: A blueprint picture of all four sides showing exterior materials and measurements. Overhead Roof Plan(s): A view of the home from above showing roof pitch, peaks, valleys, and other details. Cross Section(s): A slice of the home from roof to foundation, showing relationships between floors, roof, and foundation. Construction Notes / Detail(s): Shows basic parts and assemblies recommended for the home so the builder can see how things come together."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Plan(s)",
+      "text": "This page shows all necessary notations and dimensions including footings, support columns, walls, and excavated/unexcavated areas."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This contemporary design floor plan is 1668 sq ft and has 3 bedrooms and 2.5 bathrooms."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

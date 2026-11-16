@@ -1,0 +1,60 @@
+{
+ "slug": "projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+ "imagesUsed": [
+  {"n": 20, "what": "ground floor plan with chains 474 + 926 = 1400 (bottom) and 417 + 1125 + 638 = 2180 (left); front with garage door at the bottom; 21 is the same plan with names, 7 and 17 smaller copies"},
+  {"n": 4, "what": "front elevation: kitchen block left, projecting hipped garage wing right"},
+  {"n": 5, "what": "rear elevation: bedroom wing projecting (seen left), recessed living glazing right"},
+  {"n": 2, "what": "right side elevation (front at left), six windows"},
+  {"n": 3, "what": "left side elevation (rear at left), terrace, living glazing, kitchen window, entrance porch"},
+  {"n": 6, "what": "section along depth: 30 deg, eaves +3.20, ridge +7.34, terrain -0.34, room 292"},
+  {"n": 8, "what": "site plan 1400 x 2180 with roof outline, rear-left deck and pergola"},
+  {"n": 22, "what": "render front"},
+  {"n": 23, "what": "render left/rear with pool and roofed terrace"}
+ ],
+ "mirrorOrOtherProjectWarning": "None. Plan copies agree; renders show the garage on the right of the front and the terrace at the rear-left as on the plan. 11, 13, 15, 16, 18, 19 are interiors.",
+ "overall": {"widthM": 14.0, "depthM": 21.8, "heightM": 7.68, "basis": "1400 and 2180 printed on plan and site plan (wall faces); height = ridge +7.34 over terrain -0.34 = published 7.68"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "full-width body 14.0 x 11.25 (living, kitchen, hall, bedrooms)", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "14.0 x 11.25"},
+  {"name": "garage wing", "role": "GARAGE", "where": "front right, projects 6.38 m forward; its roof also covers the entrance porch on its left", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "6.86 x 6.38"},
+  {"name": "bedroom wing", "role": "WING", "where": "rear right, projects 4.17 m beyond the living room rear wall", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "9.26 x 4.17"}
+ ],
+ "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Cross-hipped 30 deg roof: highest short ridge (+7.34) along the front over the main body; lower hipped projections over the garage wing (front) and bedroom wing (rear) with a long front-to-back ridge on the right-hand side. Overhang about 0.7-0.9 m; dark flat tiles; no dormers or rooflights."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["CORNER_WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 5, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "CORNER_WINDOW", "DOOR", "DOOR"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 6, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW", "WINDOW", "WINDOW"]}]}
+ },
+ "largeGlazing": [
+  {"facade": "REAR", "position": "RIGHT", "what": "living room glazing 420 x 230 in the rear wall recessed 4.17 m behind the bedroom wing, under the pergola"},
+  {"facade": "LEFT", "position": "CENTRE", "what": "living room glazing 360 x 230 to the side terrace"},
+  {"facade": "FRONT", "position": "LEFT", "what": "kitchen corner window, front part 300 x 140 with sill (large only by the >2.5 m width rule)"}
+ ],
+ "features": [
+  {"kind": "CHIMNEY", "count": 4, "where": "3-4 stacks in the middle of the roof (site plan shows 4 squares; elevations show 3 clearly)"},
+  {"kind": "PERGOLA", "count": 1, "where": "rear-left corner between living rear wall and bedroom wing, flat white-fascia frame on a corner post"},
+  {"kind": "TERRACE", "count": 1, "where": "deck along the left side and rear-left, pool beyond"},
+  {"kind": "OTHER", "count": 1, "where": "kitchen corner window 300 front + 150 left, 140 high, in a slightly projecting frame"},
+  {"kind": "OTHER", "count": 1, "where": "horizontal timber cladding on the left wall of the living room; dark grey render around entrance and garage"}
+ ],
+ "palette": {"walls": "white render with light grey render panels, dark grey entrance/garage zone, horizontal timber boards, anthracite frames", "roof": "dark grey flat tiles, anthracite fascia and gutters"},
+ "groundOutline": {"shape": "T", "corners": 8, "polygonM": [[0, 6.38], [7.14, 6.38], [7.14, 0], [14.0, 0], [14.0, 21.8], [4.74, 21.8], [4.74, 17.63], [0, 17.63]], "closedAreaM2": 239.9, "basis": "1400, 474/926, 2180, 417/1125/638 printed on plan 20; garage width 6.86 = 596 interior + walls, i.e. its left face at 7.14 (scaled, the 926 includes the 2.4 m porch). Right-hand strip runs the full 21.8 m; living/kitchen block sticks out left between garage and bedroom wing."},
+ "openZones": [
+  {"kind": "PORCH", "roofed": true, "where": "entrance passage left of the garage, from the front line back to the entrance door, under the garage-wing roof, short wall pier at its front-left", "approxSizeM": "about 2.4 x 6.4"},
+  {"kind": "PERGOLA", "roofed": true, "where": "rear-left recess in front of the 420 living glazing, between bedroom wing and the left line", "approxSizeM": "4.74 x 4.17"},
+  {"kind": "TERRACE", "roofed": false, "where": "deck along the left facade and rear-left beyond the pergola", "approxSizeM": "about 3 x 12 plus rear part"}
+ ],
+ "printedOverall": {"widthCm": 1400, "depthCm": 2180, "where": "plan 20/21: 1400 below (474 + 926), 2180 at far left (417 + 1125 + 638); site plan 8 repeats 1400 x 2180"},
+ "groundRooms": 17,
+ "uncertain": [
+  "Pergola: render shows a solid-looking white flat fascia, site plan draws slats; whether it is fully roofed is UNKNOWN.",
+  "LEFT openings include items set back from the left wall line: bedroom 250/230 glazed door (back 4.74 m, in the pergola) and two 80/210 doors from the porch into the garage (back 7.14 m).",
+  "Chimney count 3 or 4 (elevations disagree with the site plan).",
+  "Garage left face (7.14) is scaled, not printed directly.",
+  "Kitchen corner window front part 300 x 140 counts as large glazing only by the width rule; kept as CORNER_WINDOW in the opening lists."
+ ],
+ "confidence": "HIGH - dimensioned plan, 4 elevations, section, site plan and renders agree; area of the polygon (239.9) matches published total area 240.47."
+}

@@ -1,0 +1,979 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-miodowy-2-ce-29fbbe367e",
+  "canonicalUrl": "https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+  "pageHash": "c6a7847055a5e1414131efa1ea6acf748e9287083365f426fabea4a8d4d2a03f",
+  "project": {
+    "externalId": "miodowy_2_CE",
+    "name": "Miodowy 2 - projekt domu w zabudowie bliźniaczej – DOMY w Stylu",
+    "publisher": "domywstylu.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-close-1fec23e45f",
+      "caption": "close",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-close-png-09e55432c1",
+          "url": "https://www.domywstylu.pl/theme/javascript/highslide/graphics/close.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 1910,
+          "byteHash": "b271f0f1080ed8ed4c8e884d846bf9d94a41d7c86f13145c66769f6b5a16adbb",
+          "decoded": {
+            "width": 30,
+            "height": 30
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-close-png-09e55432c1",
+      "selectionReason": "only variant (30x30, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-bioz-2bc6099531",
+      "caption": "dodatek BIOZ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-bioz-png-3e41e235ec",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/bioz.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 336,
+          "byteHash": "ab3601f777f1bc01ad15a66258938cd3b6bf52de7c663853bc90aa513e9fada9",
+          "decoded": {
+            "width": 35,
+            "height": 28
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-bioz-png-3e41e235ec",
+      "selectionReason": "only variant (35x28, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-charakterystyka-energetyczna-da7cbb76d1",
+      "caption": "dodatek Charakterystyka energetyczna",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-charakterystyka-energetyczna-png-d59f044836",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/charakterystyka_energetyczna.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 496,
+          "byteHash": "9c957ff78a3bd059b1fc64667caab6ff6cd4cc9b9bf46dca66977f90239b03c2",
+          "decoded": {
+            "width": 30,
+            "height": 29
+          },
+          "declaredMismatch": false,
+          "aspect": 1.034483
+        }
+      ],
+      "selectedVariantId": "var-charakterystyka-energetyczna-png-d59f044836",
+      "selectionReason": "only variant (30x29, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-dodatkowy-egzemplarz-projektu-9c937e73d2",
+      "caption": "dodatek Dodatkowy egzemplarz projektu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dodatkowy-egzemplarz-projektu-png-470ebd6e62",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/dodatkowy_egzemplarz_projektu.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 410,
+          "byteHash": "b624a166e08a6113e0328781927ba2297bccfe905b720487875e061462aeb9dc",
+          "decoded": {
+            "width": 40,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-dodatkowy-egzemplarz-projektu-png-470ebd6e62",
+      "selectionReason": "only variant (40x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-dziennik-budowy-6fabc562f8",
+      "caption": "dodatek Dziennik budowy",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dziennik-budowy-png-5209e4ab26",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/dziennik_budowy.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 446,
+          "byteHash": "4fac2def00691d416f9a08d37d42dfcadc8a5f3877a6f2a132258672585659e2",
+          "decoded": {
+            "width": 37,
+            "height": 28
+          },
+          "declaredMismatch": false,
+          "aspect": 1.321429
+        }
+      ],
+      "selectedVariantId": "var-dziennik-budowy-png-5209e4ab26",
+      "selectionReason": "only variant (37x28, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-elektroniczna-wersja-projektu-8e24233928",
+      "caption": "dodatek Elektroniczna wersja projektu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-elektroniczna-wersja-projektu-png-22ba46b2b2",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/elektroniczna_wersja_projektu.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 482,
+          "byteHash": "aa6d6db590a583a60de6ad95d6da174a9664d59d0b7424bcda9ac17e9d078fb1",
+          "decoded": {
+            "width": 40,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-elektroniczna-wersja-projektu-png-22ba46b2b2",
+      "selectionReason": "only variant (40x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-kosztorys-budowlany-47aca3d358",
+      "caption": "dodatek Kosztorys budowlany",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-kosztorys-png-f2d1603bc9",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/kosztorys.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 484,
+          "byteHash": "d8caddd5decc8ac27ff374db65bcc5b9a3916909084c91027eb74408a79e0c25",
+          "decoded": {
+            "width": 26,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 0.8125
+        }
+      ],
+      "selectedVariantId": "var-kosztorys-png-f2d1603bc9",
+      "selectionReason": "only variant (26x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-pompa-ciep-a-ea9bd09520",
+      "caption": "dodatek Pompa ciepła",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-pompa-ciepla-png-00b732953b",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/pompa_ciepla.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 375,
+          "byteHash": "ba62de76a0fe66444eb96744cf15925b1d9ea9fd82dd1876ba6ad567a9ba363f",
+          "decoded": {
+            "width": 45,
+            "height": 30
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-pompa-ciepla-png-00b732953b",
+      "selectionReason": "only variant (45x30, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-rzut-w-skali-1-500-1b13b9ef15",
+      "caption": "dodatek Rzut w skali 1:500",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 1 500\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"dodatek Rzut w skali 1:500\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-1-500-png-39c0bb0873",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/rzut_1_500.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 521,
+          "byteHash": "1dea03aa29c8e3be5202b6815a56930a376b875fa46051731a5bbff98f943aec",
+          "decoded": {
+            "width": 40,
+            "height": 33
+          },
+          "declaredMismatch": false,
+          "aspect": 1.212121
+        }
+      ],
+      "selectedVariantId": "var-rzut-1-500-png-39c0bb0873",
+      "selectionReason": "only variant (40x33, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-schemat-rekuperacji-7ece1724ba",
+      "caption": "dodatek Schemat rekuperacji",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rekuperacja-gratis-png-3fd8386d95",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/rekuperacja_gratis.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 519,
+          "byteHash": "cbd0e84a913f4744eb1c6814654f170a6463ce74a1dde7cb65574bdbfdf442b8",
+          "decoded": {
+            "width": 40,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-rekuperacja-gratis-png-3fd8386d95",
+      "selectionReason": "only variant (40x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-schemat-szamba-184639ebf2",
+      "caption": "dodatek Schemat szamba",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-szambo-png-4b28051014",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/szambo.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 470,
+          "byteHash": "3e6c9c91b7bd649f9a796ab8fd0d00970e273f3f6be8699878f1c5530e8c37f7",
+          "decoded": {
+            "width": 44,
+            "height": 30
+          },
+          "declaredMismatch": false,
+          "aspect": 1.466667
+        }
+      ],
+      "selectedVariantId": "var-szambo-png-4b28051014",
+      "selectionReason": "only variant (44x30, decoded from bytes)"
+    },
+    {
+      "id": "asset-dodatek-zgoda-na-zmiany-a1ddd94fff",
+      "caption": "dodatek Zgoda na zmiany",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-zgoda-na-zmiany-png-1af5a05c13",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu-2023/zgoda_na_zmiany.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 444,
+          "byteHash": "a043461ef162e3eb01c58e74cbca9e4b399df65c481d67f28dfcdc081fb7b940",
+          "decoded": {
+            "width": 40,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-zgoda-na-zmiany-png-1af5a05c13",
+      "selectionReason": "only variant (40x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-domek-342e962746",
+      "caption": "domek",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-domek-png-a8c232a65c",
+          "url": "https://www.domywstylu.pl/theme/images/footer/domek.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 1096,
+          "byteHash": "118a79e9b3cd3b2a7f99624d794951a0a8f4a058a6f4a685961da2c9eff6258d",
+          "decoded": {
+            "width": 38,
+            "height": 35
+          },
+          "declaredMismatch": false,
+          "aspect": 1.085714
+        }
+      ],
+      "selectedVariantId": "var-domek-png-a8c232a65c",
+      "selectionReason": "only variant (38x35, decoded from bytes)"
+    },
+    {
+      "id": "asset-grafika-mitek-be8b0cdd2e",
+      "caption": "grafika Mitek",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wiezba-dachowa-jpg-1ac14987c1",
+          "url": "https://www.domywstylu.pl/theme/images/zapytaj/wiezba-dachowa.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 26871,
+          "byteHash": "a1c4018d71243e9e56ba152db25f4b974dbe212e648f4706bde1420e67a9ba92",
+          "decoded": {
+            "width": 171,
+            "height": 171
+          },
+          "declared": {
+            "width": 171,
+            "height": 171
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-wiezba-dachowa-jpg-1ac14987c1",
+      "selectionReason": "only variant (171x171, decoded from bytes)"
+    },
+    {
+      "id": "asset-grafika-mtmstyl-34519e7316",
+      "caption": "grafika Mtmstyl",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-zmiany-w-projekcie-jpg-4466695915",
+          "url": "https://www.domywstylu.pl/theme/images/zapytaj/zmiany-w-projekcie.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 31820,
+          "byteHash": "1be2348dd6c00f66ef761e68d694e6d0c31ed1c22c26fb0adf590df661b5fc29",
+          "decoded": {
+            "width": 171,
+            "height": 171
+          },
+          "declared": {
+            "width": 171,
+            "height": 171
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-zmiany-w-projekcie-jpg-4466695915",
+      "selectionReason": "only variant (171x171, decoded from bytes)"
+    },
+    {
+      "id": "asset-grafika-viessmann-ff3a12a87f",
+      "caption": "grafika Viessmann",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-system-grzewczy-jpg-6ffe272f08",
+          "url": "https://www.domywstylu.pl/theme/images/zapytaj/system-grzewczy.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 16416,
+          "byteHash": "a65c5dbca314b1f03d1ecd14c5f608b17d68e5222247898e53aad61bffcfb087",
+          "decoded": {
+            "width": 171,
+            "height": 171
+          },
+          "declared": {
+            "width": 171,
+            "height": 171
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-system-grzewczy-jpg-6ffe272f08",
+      "selectionReason": "only variant (171x171, decoded from bytes)"
+    },
+    {
+      "id": "asset-image-php-r-400x300-file-miodowy-2-w1-jpg-4f7e7e293c",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-image-php-r-400x300-file-miodowy-2-w1-jpg-71f9567979",
+          "url": "https://www.domywstylu.pl/image.php?r=400x300&file=miodowy_2_w1.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 26930,
+          "byteHash": "aee653cc3aa467efc90e0c01e1e9ceacb85d0103ce276c78f500c35e58901094",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-image-php-r-400x300-file-miodowy-2-w1-jpg-71f9567979",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-nowoczesny-projekt-domu-miodowy-2-wizualizacja-f-5443ecfc9c",
+      "caption": "Nowoczesny projekt domu Miodowy 2 - wizualizacja frontowa",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"projekt domu miodowy 2 wizualizacja frontowa webp?1716804902\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Nowoczesny projekt domu Miodowy 2 - wizualizacja frontowa\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"projekt domu miodowy 2 wizualizacja frontowa webp?1716804902\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"Nowoczesny projekt domu Miodowy 2 - wizualizacja frontowa\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-domu-miodowy-2-wizualizacja-frontowa-web-2f53989a9b",
+          "url": "https://www.domywstylu.pl/images/projekt-domu-miodowy_2-wizualizacja-frontowa.webp?1716804902",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/webp",
+          "byteLength": 164156,
+          "byteHash": "2ba314e227e39fbe16fe6d7ec16ef4130e690b7f9d110f3d94fb5b3ae4ffa3ad",
+          "decoded": {
+            "width": 1024,
+            "height": 768
+          },
+          "declared": {
+            "width": 1024,
+            "height": 768
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-domu-miodowy-2-wizualizacja-frontowa-web-2f53989a9b",
+      "selectionReason": "only variant (1024x768, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-miodowy-2-elewacje-d4e1d811e0",
+      "caption": "Projekt domu Miodowy 2 - elewacje",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Projekt domu Miodowy 2 - elewacje\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-miodowy-2-ek1-jpg-b6a3e25873",
+          "url": "https://www.domywstylu.pl/projects/elewacje/miodowy_2_ek1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 11965,
+          "byteHash": "77327330b3fbd210a289145f5cb0d21ef2402c5924608dc33d5ab490e487b673",
+          "decoded": {
+            "width": 310,
+            "height": 233
+          },
+          "declared": {
+            "width": 100,
+            "height": 75
+          },
+          "declaredMismatch": true,
+          "aspect": 1.330472
+        }
+      ],
+      "selectedVariantId": "var-miodowy-2-ek1-jpg-b6a3e25873",
+      "selectionReason": "only variant (310x233, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-miodowy-2-miniaturka-1-e1f5c052a0",
+      "caption": "Projekt domu Miodowy 2 - miniaturka 1",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-image-php-r-100x75-flip-file-miodowy-2-w2-jpg-abef2061fa",
+          "url": "https://www.domywstylu.pl/image.php?r=100x75&flip=&file=miodowy_2_w2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 7510,
+          "byteHash": "3f15176aa9423a953c3bb2b831f1c3f1abec6a05949a649e684f7b35a6fc0c41",
+          "decoded": {
+            "width": 100,
+            "height": 75
+          },
+          "declared": {
+            "width": 100,
+            "height": 75
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-image-php-r-100x75-flip-file-miodowy-2-w2-jpg-abef2061fa",
+      "selectionReason": "only variant (100x75, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-miodowy-2-rzut-parteru-ed5aa7b426",
+      "caption": "Projekt domu Miodowy 2 - rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"projekt domu miodowy 2 rzut parteru?v=1651232113\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Projekt domu Miodowy 2 - rzut parteru\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"projekt domu miodowy 2 rzut parteru?v=1651232113\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Projekt domu Miodowy 2 - rzut parteru\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-domu-miodowy-2-rzut-parteru-v-1651232113-9e4fea1006",
+          "url": "https://www.domywstylu.pl/images/projekt-domu-miodowy_2-rzut-parteru?v=1651232113",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 54473,
+          "byteHash": "26bdf83dd40d443065844833a3659f48517100289248dae5d167e47c8c4fb738",
+          "decoded": {
+            "width": 537,
+            "height": 450
+          },
+          "declared": {
+            "width": 537,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 1.193333
+        }
+      ],
+      "selectedVariantId": "var-projekt-domu-miodowy-2-rzut-parteru-v-1651232113-9e4fea1006",
+      "selectionReason": "only variant (537x450, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-miodowy-2-rzut-poddasza-e47a720a68",
+      "caption": "Projekt domu Miodowy 2 - rzut poddasza",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"projekt domu miodowy 2 rzut poddasza?v=1651232118\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Projekt domu Miodowy 2 - rzut poddasza\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"projekt domu miodowy 2 rzut poddasza?v=1651232118\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Projekt domu Miodowy 2 - rzut poddasza\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-domu-miodowy-2-rzut-poddasza-v-165123211-dbef4a6074",
+          "url": "https://www.domywstylu.pl/images/projekt-domu-miodowy_2-rzut-poddasza?v=1651232118",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/jpeg",
+          "byteLength": 47609,
+          "byteHash": "ab7183cdfc2c3214163f360768f7239ae9cb3ee16706e9a7d9b502706869a657",
+          "decoded": {
+            "width": 537,
+            "height": 450
+          },
+          "declared": {
+            "width": 537,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 1.193333
+        }
+      ],
+      "selectedVariantId": "var-projekt-domu-miodowy-2-rzut-poddasza-v-165123211-dbef4a6074",
+      "selectionReason": "only variant (537x450, decoded from bytes)"
+    },
+    {
+      "id": "asset-radaptacja-projektu-ikona-d9fd957290",
+      "caption": "radaptacja projektu ikona",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dodatkowy-egzemplarz-projektu-png-65e2ac9117",
+          "url": "https://www.domywstylu.pl/theme/images/icons/dodatki-do-projektu/dodatkowy-egzemplarz-projektu.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 2131,
+          "byteHash": "01c5ac508f3dfc7202df12288d64596de61259efc7917495b2dc856a907efec5",
+          "decoded": {
+            "width": 142,
+            "height": 113
+          },
+          "declaredMismatch": false,
+          "aspect": 1.256637
+        }
+      ],
+      "selectedVariantId": "var-dodatkowy-egzemplarz-projektu-png-65e2ac9117",
+      "selectionReason": "only variant (142x113, decoded from bytes)"
+    },
+    {
+      "id": "asset-rysunki-szczego-owe-ikona-3684a77ddf",
+      "caption": "rysunki szczegółowe ikona",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rysunki-szczegolowe-png-b2feebe5b6",
+          "url": "https://www.domywstylu.pl/theme/images/icons/rysunki-szczegolowe.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.domywstylu.pl/projekt-domu-miodowy_2.php",
+          "mediaType": "image/png",
+          "byteLength": 1740,
+          "byteHash": "379f7f70d7c864f5117d1f52a40d1b76902ce5ba598d6ea93bad9c0d8ad0ea27",
+          "decoded": {
+            "width": 110,
+            "height": 70
+          },
+          "declaredMismatch": false,
+          "aspect": 1.571429
+        }
+      ],
+      "selectedVariantId": "var-rysunki-szczegolowe-png-b2feebe5b6",
+      "selectionReason": "only variant (110x70, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek i WC",
+      "value": 2,
+      "unit": "count",
+      "raw": "2"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7.37,
+      "unit": "m",
+      "raw": "7,37 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 99.82,
+      "unit": "m2",
+      "raw": "99,82 m²"
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Minimalna długość działki",
+      "value": 24.1,
+      "unit": "m",
+      "raw": "24,1 m"
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Minimalna szerokość działki",
+      "value": 22.26,
+      "unit": "m",
+      "raw": "22,26 m"
+    },
+    {
+      "key": "roof_area",
+      "label": "powierzchnia dachu",
+      "value": 77.6,
+      "unit": "m2",
+      "raw": "77.60 m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 2,
+      "unit": "deg",
+      "raw": "2 °"
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "value": 5,
+      "unit": "count",
+      "raw": "5"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 143.82,
+      "unit": "m2",
+      "raw": "143,82 m²"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 658.78,
+      "unit": "none",
+      "raw": "658,78 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom w zabudowie bliźniaczej to same plusy Zabudowa bliźniacza to złoty środek pomiędzy budową domu jednorodzinnego, a kupnem mieszkania w zabudowie szeregowej. Budowa bliźniaka to również większe oszczędności niż budowa domu jednorodzinnego. Możemy mieszkać wspólnie z rodziną, a jednocześnie posiadać swój własny ogród i przestrzeń dla siebie. Mieszkając w bliźniaku możemy korzystać niemal ze wszystkich walorów domu jednorodzinnego przy mniejszym koszcie budowy i utrzymania. Dużą zaletą jest również to, że pomimo identycznego wyglądu obu segmentów z zewnątrz, mieszkania w bliźniaku nie muszą wyglądać już tak samo. Nie jesteśmy w żaden sposób niczym ograniczeni co do wyglądu i wystroju wnętrza, w którym będziemy na co dzień mieszkać."
+    },
+    {
+      "key": "floor_structure",
+      "label": "stropy:",
+      "text": "żelbetowe, wylewane"
+    },
+    {
+      "key": "roof",
+      "label": "dach:",
+      "text": "papa - dach płaski, kąt nachylenia 2°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "MIODOWY 2 to projekt domu w zabudowie bliźniaczej posiadający dwa pełne piętra. Minimalistyczna bryła utrzymana została w nowoczesnym stylu. Na elewacji pojawił się biały..."
+    },
+    {
+      "key": "walls",
+      "label": "ściany:",
+      "text": "2-warstwowe - pustak ceramiczny + styropian"
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [],
+  "contentHash": "92599d93c0ccd076b8411ad29e75d20a449fa8d8be1d5c98a12ebcf5babb64a6"
+}

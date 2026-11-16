@@ -1,0 +1,1561 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-elewacja-bocz-9f1a281f61",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-025fa56da4b80f39a7c2-8f040fb5da",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "8f36b944f5168d6e3fe2b8ad48b5dbe7b13bf23eb905ba42ab54fe5302f2e460",
+          "byteLength": 185785,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-025fa56da4b80f39a7c2-8f040fb5da",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-025fa56da4b80f39a7c2756d22a6975a__11266.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "34db62ebfb8f4a53a5cb8ac6e1f3aaed87133ae5d7355887bf45d45283f4a741",
+          "byteLength": 42349,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-elewacja-boczna-projekt-dom-w-piwoniach-3-g-d9a3-866e1c5e96",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-boczna-projekt-dom-w-piwoniach-3-g-d9a3403438a1b1d3b2a128e8643dc594__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-elewacja-bocz-f0440cd0bc",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-cc5a2bb3637aba05071e-ec1c4a01db",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "7b181eda5b8b96af849da37ac91a445caa59fbd2503a5d477f283f9050157222",
+          "byteLength": 177557,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-cc5a2bb3637aba05071e-ec1c4a01db",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-cc5a2bb3637aba05071e959949f20074__11265.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "5550e0451c28f5c1337198dbf26167940e10fae76ec7e4064171431c259be8ee",
+          "byteLength": 41025,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-elewacja-boczna-projekt-dom-w-piwoniach-3-g-1351-ae0f9d7c29",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-boczna-projekt-dom-w-piwoniach-3-g-135130ca91c6837419dfe6eb8f09e301__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-elewacja-fron-19393a778b",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-66bd28c6213027a6e038-b8f04da81d",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "65be14b7f9e4a1f07b80f3cbf36081c70032f82c4d4cd72bdb6f58989ea44d07",
+          "byteLength": 173108,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-66bd28c6213027a6e038-b8f04da81d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-66bd28c6213027a6e038384ea9680ea1__11264.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "caee64c4e92a48c77c3200735d9268e18a8ffff1f3050811ea90ba5adc8ba9b3",
+          "byteLength": 40280,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-elewacja-frontowa-projekt-dom-w-piwoniach-3-g-e8-dfe27f134c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-frontowa-projekt-dom-w-piwoniach-3-g-e8553a262860f01971af128bfb36c745__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-elewacja-ogro-b4529c7237",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w piwoniach 3 (g) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-70da88e695af3b7fb93d-3c982baffb",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "835fa0c70f7cd74839c7a184b9793c14f584b26ad1293422ba854640b32dee03",
+          "byteLength": 173095,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-70da88e695af3b7fb93d-3c982baffb",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-70da88e695af3b7fb93d799747dd6e96__11267.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "6d7fa3b28a266509bd069234c14c4c98269cb5d665956efb244b39c8be06e17b",
+          "byteLength": 40261,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-piwoniach-3-g-a9-514c3c515f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-ogrodowa-projekt-dom-w-piwoniach-3-g-a9e4ab5157ed7096f284e11e941558ef__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-przekroj-budy-3330253f70",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w piwoniach 3 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w piwoniach 3 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w piwoniach 3 (g) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-piwoniach-3-g-716-4a1b141e11",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 402x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "656abb35865dfb6eb720b920c8a44ad9048e3bc1bace2e4765091b9a1aceb402",
+          "byteLength": 64723,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mb3e2657e02dc2/przekroj-budynku-projekt-dom-w-piwoniach-3-g-716ac0c329f10c21b5710ed23da51525__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-piwoniach-3-g-716-4a1b141e11",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/przekroj-budynku-projekt-dom-w-piwoniach-3-g-716ac0c329f10c21b5710ed23da51525__11256.jpg"
+        },
+        {
+          "aspect": 1.34,
+          "byteHash": "07fd66c934806e2476e28b6878b184c9eb2314dfd13f890d00f3490439136e23",
+          "byteLength": 18638,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 300,
+            "width": 402
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-przekroj-budynku-projekt-dom-w-piwoniach-3-g-716-57a2b6e48e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/przekroj-budynku-projekt-dom-w-piwoniach-3-g-716ac0c329f10c21b5710ed23da51525__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-rzut-parteru-aee68c243f",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-piwoniach-3-g-48085c3-4aefbad494",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "d990a0acd85fa10268b0e916a00a4e92a91be0c32483f5d02db21467230529ad",
+          "byteLength": 50467,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb3e2657e02dc2/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-piwoniach-3-g-48085c3-4aefbad494",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/rzut-parteru-projekt-dom-w-piwoniach-3-g-48085c376fabdbf46bb14a810be7c5ca__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-sytuacja-2f5f576029",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w piwoniach 3 (g) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w piwoniach 3 (g) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-4ab90803ea9713bf3d91-ec9a8dab19",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "2edbedcc7b4ec9eac894c8244778da387d989fa650a224a201490e25bb433903",
+          "byteLength": 211186,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-4ab90803ea9713bf3d91-ec9a8dab19",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-4ab90803ea9713bf3d91e5d447eb0af6__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "a1f868eaae3c5f9f2c048d40fd47f579ba2aaa082f9524b4f464acb464336c92",
+          "byteLength": 44828,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-sytuacja-projekt-dom-w-piwoniach-3-g-686d123970b-aa560a5c05",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/sytuacja-projekt-dom-w-piwoniach-3-g-686d123970b3be9ce93e295c23af9d2a__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w piwoniach 3 (G) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-piwoniach-3-g-widok-1-ab3fc9ffb5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w piwoniach 3 (g) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-piwoniach-3-g-bf8357a18f96-3a6c5772e1",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "92badec8d6ec9d26f2ff6777df13c2b225913b11b3fec04cc813c56d889e9bc9",
+          "byteLength": 8867,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-widok-1-projekt-dom-w-piwoniach-3-g-bf8357a18f96-3a6c5772e1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-1-projekt-dom-w-piwoniach-3-g-bf8357a18f96b24185d4107a4ec0c437__259.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-piwoniach-3-g-326fcc8e3f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-19cd914622b097b3dbf8-0f48664464",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c9e50eff5c3ff23a5791b1d96d89e2d01063f122e4b293e5346efebea3141d1d",
+          "byteLength": 490532,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-19cd914622b097b3dbf8-0f48664464",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/s/projekt-dom-w-piwoniach-3-g-19cd914622b097b3dbf8b8ea32426314__46623.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-piwoniach-3-g-52b8175cea",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-8eb807a09637fcb39227-021a337de5",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "bd577ffacb4cdc4c43ae3f5a677ee53255341eb2c968a39f922ce84a50a7b973",
+          "byteLength": 416058,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-8eb807a09637fcb39227-021a337de5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/s/projekt-dom-w-piwoniach-3-g-8eb807a09637fcb39227ddd516c6a508__46624.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w piwoniach 3 (G)",
+      "id": "asset-projekt-dom-w-piwoniach-3-g-5a0df13227",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-540987c52e603542209f-152c3adb66",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "cfba30ff4a59c5f8ad7f88a37038441ac3fb33af989ab739df4cec8fc1ce40d9",
+          "byteLength": 30530,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb3e2657e02dc2/related?scope=family",
+          "id": "var-projekt-dom-w-piwoniach-3-g-540987c52e603542209f-152c3adb66",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-540987c52e603542209fb63bc757c0f9__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w piwoniach 3 g 5bb280dcad13a63a18dc75c0b4b34e94  42008",
+      "id": "asset-projekt-dom-w-piwoniach-3-g-5bb280dcad13a63a18dc-309f27a06d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-5bb280dcad13a63a18dc-5d898705f7",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "5ebf7b38419d89eb997140cf2d5b07f352344e1bb660c15bae6daf3264819df9",
+          "byteLength": 649800,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/mb3e2657e02dc2/image/42008?showHotspots=false",
+          "id": "var-projekt-dom-w-piwoniach-3-g-5bb280dcad13a63a18dc-5d898705f7",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/mb3e2657e02dc2/i/projekt-dom-w-piwoniach-3-g-5bb280dcad13a63a18dc75c0b4b34e94__42008.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w piwoniach 3 (G)",
+      "id": "asset-projekt-dom-w-piwoniach-3-g-a166f4b812",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-piwoniach-3-g-31ceb3f-9535d3c9c1",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f0dcfed9b2522a4b0a5e7476abebc782f25af0434f87d97f68ba888d0834db0f",
+          "byteLength": 34549,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb3e2657e02dc2/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-piwoniach-3-g-31ceb3f-9535d3c9c1",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/rzut-parteru-projekt-dom-w-piwoniach-3-g-31ceb3ffca84c437478f069fbb7622cf__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-piwoniach-3-g-ddf05989e5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-bf838b43c7c279ce2816-0373185427",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "a34174bf534a67eea35bf0845d54296902be471689754f7f56d11cdf154256d9",
+          "byteLength": 434404,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-bf838b43c7c279ce2816-0373185427",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/s/projekt-dom-w-piwoniach-3-g-bf838b43c7c279ce28169678f102395a__46622.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w piwoniach 3 (G)",
+      "id": "asset-projekt-dom-w-piwoniach-3-g-e1b9a1ca2d",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-piwoniach-3-g-bfced04b0cf0-c875ee0578",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2eaaca6abf460743eb6e85caf7d7534ab73b44ebc83ba8befbe9d45bb5e590b4",
+          "byteLength": 30847,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb3e2657e02dc2/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-piwoniach-3-g-bfced04b0cf0-c875ee0578",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-2-projekt-dom-w-piwoniach-3-g-bfced04b0cf09649bbbcf80bf0b3cf4d__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-4d0e24a288",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb3e2657e02dc2/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb3e2657e02dc2/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-piwoniach-3-g-801c1c8a1b43b35d364a-9379d4f3bb",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7bb7446a70b69d7826c94c22342f759be3ec75b0b1ceafd63377f1240eb8a5df",
+          "byteLength": 92685,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-projekt-dom-w-piwoniach-3-g-801c1c8a1b43b35d364a-9379d4f3bb",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-801c1c8a1b43b35d364ad6145df20c96__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-5c38fee66f",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb3e2657e02dc2/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb3e2657e02dc2/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w piwoniach 3 (g) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-piwo-d26876e2ec",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "31415e159428f4e0f0959e3bdc1a149de1cd69f033bc6a0719c483a91260c441",
+          "byteLength": 89980,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-piwo-d26876e2ec",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/rzut-parteru-z-powierzchniami-projekt-dom-w-piwoniach-3-g-44ce3bdcc0d332331b2aebc27f9788e9__11915.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-piwoniach-3-g-860a09541f",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w piwoniach 3 (g) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-piwoniach-3-g-0c49b5ef800f-8ca9263ec7",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2d724fd5aac96be5b7dd4c1e910480cc461db8df818e83f084c8b2141c92d87b",
+          "byteLength": 397692,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-widok-1-projekt-dom-w-piwoniach-3-g-0c49b5ef800f-8ca9263ec7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-1-projekt-dom-w-piwoniach-3-g-0c49b5ef800f3311061845a5d9f77efa__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-piwoniach-3-g-2afee133ba",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-piwoniach-3-g\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w piwoniach 3 (g) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-piwoniach-3-g-eb31e6b368bc-e6a02e8038",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "4a06a4cef24b14d4f985ba64208cf483d09be2516f90b98c12fd51360c191163",
+          "byteLength": 402463,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+          "id": "var-widok-2-projekt-dom-w-piwoniach-3-g-eb31e6b368bc-e6a02e8038",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-2-projekt-dom-w-piwoniach-3-g-eb31e6b368bca42fc5af28a954aee96d__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-piwoniach-3-g-mb3e2657e02dc2",
+  "contentHash": "cb2215059fe39eb7e9f34b13c6545ca9b639b112443bba971f2321c52c0281bc",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-540987c52e603542209fb63bc757c0f9__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/rzut-parteru-projekt-dom-w-piwoniach-3-g-31ceb3ffca84c437478f069fbb7622cf__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/rzut-parteru-projekt-dom-w-piwoniach-3-g-48085c376fabdbf46bb14a810be7c5ca__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-1-projekt-dom-w-piwoniach-3-g-0c49b5ef800f3311061845a5d9f77efa__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-1-projekt-dom-w-piwoniach-3-g-bf8357a18f96b24185d4107a4ec0c437__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-2-projekt-dom-w-piwoniach-3-g-bfced04b0cf09649bbbcf80bf0b3cf4d__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/widok-2-projekt-dom-w-piwoniach-3-g-eb31e6b368bca42fc5af28a954aee96d__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-cc5a2bb3637aba05071e959949f20074__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-boczna-projekt-dom-w-piwoniach-3-g-135130ca91c6837419dfe6eb8f09e301__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-025fa56da4b80f39a7c2756d22a6975a__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-boczna-projekt-dom-w-piwoniach-3-g-d9a3403438a1b1d3b2a128e8643dc594__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-66bd28c6213027a6e038384ea9680ea1__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-frontowa-projekt-dom-w-piwoniach-3-g-e8553a262860f01971af128bfb36c745__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-70da88e695af3b7fb93d799747dd6e96__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/elewacja-ogrodowa-projekt-dom-w-piwoniach-3-g-a9e4ab5157ed7096f284e11e941558ef__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb3e2657e02dc2/projekt-dom-w-piwoniach-3-g-4ab90803ea9713bf3d91e5d447eb0af6__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb3e2657e02dc2/sytuacja-projekt-dom-w-piwoniach-3-g-686d123970b3be9ce93e295c23af9d2a__11255.jpg"
+    }
+  ],
+  "id": "src-mb3e2657e02dc2-5289c5615b",
+  "pageHash": "3cd64db2101abbaae36dd199a3261343c016ce84f71e7fc54cad1a0402726462",
+  "project": {
+    "externalId": "mb3e2657e02dc2",
+    "name": "Projekt domu Dom w piwoniach 3 (G) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "5,59 m&sup2;",
+      "unit": "m2",
+      "value": 5.59
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,56 m",
+      "unit": "m",
+      "value": 6.56
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "158,82 m&sup2;",
+      "unit": "m2",
+      "value": 158.82
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "205,28 m&sup2;",
+      "unit": "m2",
+      "value": 205.28
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "21,4 m&sup2;",
+      "unit": "m2",
+      "value": 21.4
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "131,83 m&sup2;",
+      "unit": "m2",
+      "value": 131.83
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "308,81 m&sup2;",
+      "unit": "m2",
+      "value": 308.81
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "201,37 m&sup2;",
+      "unit": "m2",
+      "value": 201.37
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "158,82 m&sup2;",
+      "unit": "m2",
+      "value": 158.82
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1051,63 m&sup3;",
+      "unit": "none",
+      "value": 1051.63
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 7.38,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 7,38 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.62,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 6,62 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.69,
+      "index": 3,
+      "label": "Spiżarnia",
+      "raw": "3. Spiżarnia | 1,69 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.3,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 11,30 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 31.7,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 31,70 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.58,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 3,58 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.08,
+      "index": 7,
+      "label": "Korytarz",
+      "raw": "7. Korytarz | 9,08 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.09,
+      "index": 8,
+      "label": "Garderoba",
+      "raw": "8. Garderoba | 4,09 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.25,
+      "index": 9,
+      "label": "Pokój",
+      "raw": "9. Pokój | 10,25 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.06,
+      "index": 10,
+      "label": "Pokój",
+      "raw": "10. Pokój | 12,06 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.78,
+      "index": 11,
+      "label": "Garderoba",
+      "raw": "11. Garderoba | 5,78 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.42,
+      "index": 12,
+      "label": "Pokój",
+      "raw": "12. Pokój | 10,42 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.42,
+      "index": 13,
+      "label": "Pokój",
+      "raw": "13. Pokój | 10,42 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.46,
+      "index": 14,
+      "label": "Łazienka",
+      "raw": "14. Łazienka | 7,46 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.59,
+      "index": 15,
+      "label": "Kotłownia z pralnią",
+      "raw": "15. Kotłownia z pralnią | 5,59 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 21.4,
+      "index": 16,
+      "label": "Garaż",
+      "raw": "16. Garaż | 21,40 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Piękna parterówka z garażem jednostanowiskowym. Nowoczesny charakter i urodę domu podkreślają duże przeszklenia, będące detalem zwracającym uwagę Inwestorów, szukających domu zaprojektowanego w nurcie nowoczesnego designu. Estetyczna elewacja łączy jasne i grafitowe tynki, z którymi idealnie współgra stolarka i kolor dachówki. Strefa ogrodowa została wzbogacona o atrakcyjny taras z pergolą, gdzie domownicy mogą zaaranżować letnią jadalnię lub inną formę do spędzania czasu na świeżym powietrzu. Przez wiatrołap mieszczący pojemne szafy można przejść do holu, łączącego strefy użytkowe domu. W salonie zaplanowano narożną kanapę z widokiem na klimatyczny kominek, który wprowadzi wieczorami przytulny klimat oraz przesuwne wyjście na taras. Otwarta jadalnia posiada wiele miejsca na duży stół dla całej rodziny i gości, jej urodę podkreśla nowoczesne, narożne przeszklenie. Kuchnia posiada odpowiednią ilość naturalnego światła, w jej centrum znajduje się wyspa z dodatkowym miejscem do jedzenia, a przyległa spiżarnia ułatwia organizację pracy i przechowywanie. Na osi holu znajduje się komfortowa łazienka, kotłownia pełni jednocześnie funkcję pralni, a garaż dostępny jest przez wiatrołap. Korytarz prowadzi do pomieszczeń nocnej strefy domu, gdzie zaprojektowano sypialnię rodziców z garderobą, dwa pokoje dla dzieci oraz gabinet, mogący pełnić funkcję gościnnej sypialni lub biblioteczki. Sypialnia główna oraz gabinet posiadają bezpośrednie połączenie z tarasem i ogrodem. Układ funkcjonalny tej części domu dopełnia łazienka z wanną i prysznicem oraz dodatkowa garderoba do wspólnego użytku. „Dom w piwoniach 3 (G)” uatrakcyjnia zbiór projektów w kategorii: projekty domów nowoczesnych , projekty domów parterowych , projekty domów z garażem jednostanowiskowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna CREATON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 131.83 m² + 21.4 m² + 5.59 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

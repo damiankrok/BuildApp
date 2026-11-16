@@ -1,0 +1,56 @@
+{
+ "slug": "projekt-dom-w-toreniach-3-e-me822857280738",
+ "imagesUsed": [
+  {"n": 18, "what": "ground floor plan with chains 520 + 270 = 790 (bottom) and 1160 + 90 = 1250 (right); entrance at the bottom right; 17 same plan with names, 6 and 14 smaller copies"},
+  {"n": 3, "what": "front elevation: timber-clad gable, kitchen window, recessed entrance niche right, slatted pergola left"},
+  {"n": 4, "what": "rear elevation: gable with one window"},
+  {"n": 1, "what": "right side elevation (front at left), three small windows"},
+  {"n": 2, "what": "left side elevation (rear at left), bedroom window and living glazing under the pergola"},
+  {"n": 5, "what": "section: 30 deg, eaves +3.44, ridge +5.72, terrain -0.32, room 275, pergola beside"},
+  {"n": 7, "what": "site plan 790 x 1250 with pergola on the left"},
+  {"n": 8, "what": "render front"},
+  {"n": 9, "what": "render left side with pergola and pool"}
+ ],
+ "mirrorOrOtherProjectWarning": "None. All plan copies agree; renders show the entrance niche on the right of the front and the pergola on the left as on the plan. 11, 13, 15, 16 are interiors.",
+ "overall": {"widthM": 7.9, "depthM": 12.5, "heightM": 6.04, "basis": "790 and 1250 printed on plan and site plan; height = ridge +5.72 over terrain -0.32 = published 6.04"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "single rectangle with gable to the front and rear; entrance niche cut into the front-right corner", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "7.90 x 12.50"},
+  {"name": "pergola", "role": "PERGOLA", "where": "along the left side, flat anthracite frame with vertical timber slats on its front face", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 2.7 x 8.0"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Symmetrical 30 deg gable, ridge front-to-rear, flush gables with a white frame around timber-clad gable faces, dark grey flat tiles, no dormers. Living room partly vaulted (section)."},
+ "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+ "entrance": {"facade": "FRONT", "position": "RIGHT", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["LARGE_GLAZING", "ENTRANCE_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "LARGE_GLAZING"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}]}
+ },
+ "largeGlazing": [
+  {"facade": "LEFT", "position": "RIGHT", "what": "living room sliding glazing 330 x 230 under the pergola, front half of the left side"},
+  {"facade": "FRONT", "position": "LEFT", "what": "kitchen window 270 x 140 with sill, two panes (large only by the width rule)"}
+ ],
+ "features": [
+  {"kind": "CHIMNEY", "count": 1, "where": "right slope next to the ridge, about 4.5-5 m from the front"},
+  {"kind": "PERGOLA", "count": 1, "where": "left side, open frame with timber slat screen at its front"},
+  {"kind": "OTHER", "count": 1, "where": "recessed entrance niche 0.9 m deep, dark grey lining, door with sidelight"},
+  {"kind": "OTHER", "count": 2, "where": "concrete-look panels between the right-side windows; vertical timber panels on the left facade"},
+  {"kind": "TERRACE", "count": 1, "where": "paved terrace under and around the pergola, wrapping to a strip along the front"}
+ ],
+ "palette": {"walls": "white render with vertical timber boarding filling both gable faces inside a white frame, concrete-look panels, dark grey entrance niche, anthracite frames", "roof": "dark grey flat tiles, anthracite chimney and pergola frame"},
+ "groundOutline": {"shape": "L", "corners": 6, "polygonM": [[0, 0], [5.2, 0], [5.2, 0.9], [7.9, 0.9], [7.9, 12.5], [0, 12.5]], "closedAreaM2": 96.3, "basis": "790 = 520 + 270 and 1250 = 1160 + 90 printed on plan 18: kitchen block 520 wide reaches the front line, the 270 part (vestibule) is set back 90. The right outer wall runs on as a ~0.5 m fin to the front line beside the niche; excluded here (with it ~96.8 m2, close to published total 96.73)."},
+ "openZones": [
+  {"kind": "PORCH", "roofed": true, "where": "entrance niche at the front-right corner, under the building", "approxSizeM": "about 2.2 x 0.9"},
+  {"kind": "PERGOLA", "roofed": false, "where": "left side, from about 0.6 m to 8.6 m behind the front line, in front of the living glazing", "approxSizeM": "about 2.7 x 8.0"},
+  {"kind": "TERRACE", "roofed": false, "where": "paved terrace left of the house (under the pergola) continuing as a strip along the front", "approxSizeM": "about 3.4 x 9.7 plus front strip"}
+ ],
+ "printedOverall": {"widthCm": 790, "depthCm": 1250, "where": "plan 18/17: 790 below (520 + 270), 1250 at right (1160 + 90); site plan 7 repeats 790 x 1250"},
+ "groundRooms": 7,
+ "uncertain": [
+  "Pergola top: section shows only beam ends and the site plan a pale grey fill; whether it carries a glass/solid roof is UNKNOWN (taken as open).",
+  "Fin width at the front-right corner (~0.5 m) scaled from plan, not printed.",
+  "Kitchen front window 270 x 140 counts as LARGE_GLAZING only by the >2.5 m width rule."
+ ],
+ "confidence": "HIGH - dimensioned plan, four elevations, section, site plan and renders agree."
+}

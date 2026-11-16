@@ -1,0 +1,58 @@
+{
+  "slug": "fresh-aralie",
+  "imagesUsed": [
+    {"n": 12, "what": "ground plan, dimensioned: top 155 + 890 + 50 = 1095, left 73 + 808 + 1304 = 2185; garage end at the bottom; 08 and 11 are copies"},
+    {"n": 5, "what": "front elevation ('frontowa') = garage gable end, with the porch on the left"},
+    {"n": 6, "what": "rear elevation ('ogrodowa') = rear gable"},
+    {"n": 3, "what": "long side with the covered porch, front on the right = LEFT facade"},
+    {"n": 4, "what": "long side with bedroom windows, front on the left = RIGHT facade"},
+    {"n": 7, "what": "section: ridge +6.60, eaves +3.14, room 265, ground -0.32, flat ceiling under an unused roof void"},
+    {"n": 9, "what": "site plan 1095 x 2185, rear decks"},
+    {"n": 14, "what": "front render (garage, porch at left)"},
+    {"n": 13, "what": "rear-left render"}
+  ],
+  "mirrorOrOtherProjectWarning": "None seen; plan, elevations and renders agree (porch and entrance left of the garage end, bedrooms along the right).",
+  "overall": {"widthM": 10.95, "depthM": 21.85, "heightM": 6.92, "basis": "printed 1095 x 2185 on plan 12 and site plan 09; width includes the closed vestibule projecting 1.55 m left (the open porch strip lies in the same band); height = ridge +6.60 over ground -0.32 = published 6.92"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "long single-storey block, gable ends to front and rear; garage at front-left, living room at the rear", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "8.90 x 21.12"},
+    {"name": "vestibule", "role": "WING", "where": "left side, about 10-13 m back from the front: closed vestibule projecting 1.55 m left; entrance door in its front face", "storeys": 1, "enclosed": true, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "1.55 x 3.0"},
+    {"name": "side porch", "role": "PORCH", "where": "open strip along the left wall of boiler room and garage, under the extended left roof slope, one post at its front corner", "storeys": 1, "enclosed": false, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "1.55 x 7.6"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Long gable, ridge front-to-rear; left slope carried down over the side porch; small eave step over the 0.5 m right projection. Pitch not printed: about 30 deg measured on section 7."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "LEFT_OF_CENTRE", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "LEFT", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["ENTRANCE_DOOR", "GARAGE_DOOR", "LARGE_GLAZING"]}, {"storey": 1, "count": 1, "leftToRight": ["LARGE_GLAZING"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["LARGE_GLAZING", "LARGE_GLAZING", "WINDOW"]}, {"storey": 1, "count": 1, "leftToRight": ["LARGE_GLAZING"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 5, "leftToRight": ["LARGE_GLAZING", "WINDOW", "WINDOW", "WINDOW", "WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 7, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW", "WINDOW", "WINDOW", "WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "LEFT", "what": "360/230 two-pane glazing of the living room in the 0.73 m rear projection, timber surround, flat canopy band above"},
+    {"facade": "REAR", "position": "RIGHT", "what": "dining corner glazing wrapping the rear-left corner: 150/230 rear + 240/230 left"},
+    {"facade": "FRONT", "position": "CENTRE", "what": "trapezoid gable-apex glazing about 4.5 m wide (same on rear gable), above the flat ceiling"},
+    {"facade": "FRONT", "position": "RIGHT", "what": "330/60 horizontal strip window (large only by width)"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 3, "where": "near the ridge (two chimneys and one smaller vent stack)"},
+    {"kind": "PORCH", "count": 1, "where": "covered strip along the left facade leading to the entrance, post at front corner"},
+    {"kind": "TERRACE", "count": 1, "where": "timber deck along the rear, two parts following the 0.73 m living-room projection"},
+    {"kind": "OTHER", "count": 1, "where": "middle of the right facade projects 0.5 m (bedroom wing, grey panels)"}
+  ],
+  "palette": {"walls": "white render, grey concrete-look panels (gables, right projection), warm vertical timber (porch, living-room surround), graphite frames", "roof": "graphite / blue-grey flat roof tiles, grey chimneys"},
+  "groundOutline": {"shape": "OTHER", "corners": 14, "polygonM": [[0, 0], [8.9, 0], [8.9, 3.9], [9.4, 3.9], [9.4, 16.0], [8.9, 16.0], [8.9, 21.85], [3.9, 21.85], [3.9, 21.12], [0, 21.12], [0, 13.04], [-1.55, 13.04], [-1.55, 10.06], [0, 10.06]], "closedAreaM2": 202.3, "basis": "chains 155/890/50 and 73/808/1304 on plan 12; other jogs scaled; origin = garage front-left corner, vestibule at negative x; matches published footprint 202.05"},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "left side, from vestibule towards the front, outside garage/boiler-room wall", "approxSizeM": "1.55 x 7.6"},
+    {"kind": "TERRACE", "roofed": false, "where": "rear, full width of main body", "approxSizeM": "about 8.7 x 3.0"}
+  ],
+  "printedOverall": {"widthCm": 1095, "depthCm": 2185, "where": "plan 12 top chain (155+890+50) and left chain (73+808+1304); site plan 09"},
+  "groundRooms": 13,
+  "uncertain": [
+    "Entrance door faces the front but sits about 10 m back at the end of the side porch; recorded FRONT/LEFT.",
+    "Gable-apex glazing lights the roof void above a flat ceiling (section 7); recorded as storey 1.",
+    "REAR right-most WINDOW is the 60/230 in the rear face of the vestibule projection.",
+    "Front strip window 330/60 tagged LARGE_GLAZING only by width; garage/bedroom-11 fronts assumed flush; pitch measured, not printed."
+  ],
+  "confidence": "HIGH - dimensioned plan, section, four elevations, site plan and renders agree; small jog positions scaled."
+}

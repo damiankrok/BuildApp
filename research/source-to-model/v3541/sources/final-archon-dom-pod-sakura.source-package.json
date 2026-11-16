@@ -1,0 +1,1741 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m92728cdae273a-d16291761e",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+  "pageHash": "6670ba02231c651bbcb924fcdf07e9dd7cc7a7344fe4a7cc3d78aa86c4e53f48",
+  "project": {
+    "externalId": "m92728cdae273a",
+    "name": "Projekt domu Dom pod sakurą (E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-2055f8af0a",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-f36b8777289caac3693528b-38abaa3ace",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-f36b8777289caac3693528bad2e8aabc__62203.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 624700,
+          "byteHash": "f26297201959b0edceaebf6dbfe28343dfde3e294026d4cfaec7532d5364d9b7",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-f36b8777289caac3693528b-38abaa3ace",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-2bd6382404",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-784ae228c99506bd4f2b344-21eefdaa39",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-784ae228c99506bd4f2b344055055ec5__62206.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 655523,
+          "byteHash": "53411cea3062500d194101d4d5c2f8ab6b1398b0af0b5044c1dc16d8dbd00731",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-784ae228c99506bd4f2b344-21eefdaa39",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-3571adfae8",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-3ef540943cb76bf26f19575-fd15bc71ac",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-3ef540943cb76bf26f19575f55ac8d65__62210.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 573724,
+          "byteHash": "cadc20aa3836480b8be070eae82d24caf8510b5e54b0591b03653a5c793a908e",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-3ef540943cb76bf26f19575-fd15bc71ac",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-95ea88bba5",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-4b6c5bdb63fb8b8f6ef4529-ef3040a340",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-4b6c5bdb63fb8b8f6ef45296f2940264__62208.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 590360,
+          "byteHash": "e9a96255799ae88714d4e7ed067f1d670923ff5ba7a546abdef6269a4d8ca2a7",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-4b6c5bdb63fb8b8f6ef4529-ef3040a340",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-b1786f648a",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-5fedd229367aac4ec344d24-0912a3a262",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-5fedd229367aac4ec344d24d2e519093__62204.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 506405,
+          "byteHash": "8549048025f548bcf03b806b88c3b1d61f88598cbda32008415e226193f90eac",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-5fedd229367aac4ec344d24-0912a3a262",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-b31c9c7e7a",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-7b1ef2684d73ca57475bdfd-ccf9693028",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-7b1ef2684d73ca57475bdfd8a11b4066__62209.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 643878,
+          "byteHash": "6f34c24d56aeadf162226955649eff0eea54278abc4b735c6e3f3c2c58157380",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-7b1ef2684d73ca57475bdfd-ccf9693028",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-c312c86edd",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-8580d769d15283314cdfdd3-330561fa3e",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-8580d769d15283314cdfdd3eec29470a__62207.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 661795,
+          "byteHash": "2260805c5969a1924497e390fb57beb362d1fd0a8751c7a4ea1961b418349d0e",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-8580d769d15283314cdfdd3-330561fa3e",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-dodatkowa-wizual-db5e6b071e",
+      "caption": "gotowy projekt Dom pod sakurą (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-f739ea4e874db51fde83e52-aa762204aa",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/fm/projekt-dom-pod-sakura-e-f739ea4e874db51fde83e52b6a8d428f__62205.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 493414,
+          "byteHash": "cfbaf4eb3352c62dea718801f999c68afcecbed2282001c732c4cf71992086a7",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-f739ea4e874db51fde83e52-aa762204aa",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-elewacja-boczna-c85071cc96",
+      "caption": "gotowy projekt Dom pod sakurą (E) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod sakura (e) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod sakura (e) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-aa7cb9ddf4953ba98079704-c6d0e41ed6",
+          "url": "https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-aa7cb9ddf4953ba9807970413875f43b__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 441646,
+          "byteHash": "4cb00abea05d1db2b5273aab86976bfe443b93ed6027e4d5a7c13751667f9ef2",
+          "decoded": {
+            "width": 1280,
+            "height": 577
+          },
+          "declaredMismatch": false,
+          "aspect": 2.218371
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-pod-sakura-e-7627bab-b21e089573",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-boczna-projekt-dom-pod-sakura-e-7627babbd81c84eff10f6e79f5db8593__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 95963,
+          "byteHash": "af977b2bdc3f56e728844a3e25bef16d4ac1a5b2ce66f1df3089a40311d2a4e4",
+          "decoded": {
+            "width": 550,
+            "height": 249
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.208835
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-aa7cb9ddf4953ba98079704-c6d0e41ed6",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x577 over 550x249"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-elewacja-boczna-f1a250f948",
+      "caption": "gotowy projekt Dom pod sakurą (E) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod sakura (e) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod sakura (e) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-9ea19a7cac2059b42da553c-2e0517d797",
+          "url": "https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-9ea19a7cac2059b42da553c67c85cc6b__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 421178,
+          "byteHash": "0a6fa934c93aeba51652b73e71f79c163b574f89acc428dd9e3dc99c15146aa7",
+          "decoded": {
+            "width": 1280,
+            "height": 578
+          },
+          "declaredMismatch": false,
+          "aspect": 2.214533
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-pod-sakura-e-a62c9ec-7cd7c8f2c4",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-boczna-projekt-dom-pod-sakura-e-a62c9ecbc7f29471de10158c00ffa0ea__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 90930,
+          "byteHash": "f26aa722068d5227081de0a89882c9bcb9f39c32e309452498b4cab09a116169",
+          "decoded": {
+            "width": 550,
+            "height": 249
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.208835
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-9ea19a7cac2059b42da553c-2e0517d797",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x578 over 550x249"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-elewacja-frontow-5b421c777d",
+      "caption": "gotowy projekt Dom pod sakurą (E) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod sakura (e) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod sakura (e) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-20f9c227c587a85557596ab-a8fc8042d6",
+          "url": "https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-20f9c227c587a85557596ab29cf2e85f__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 439804,
+          "byteHash": "73a83850cd186c25d2f1c6d6a7a5d54976470abe7035c18423d5df01238dbfed",
+          "decoded": {
+            "width": 1280,
+            "height": 577
+          },
+          "declaredMismatch": false,
+          "aspect": 2.218371
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-pod-sakura-e-21dd3-a8c2bcd197",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-frontowa-projekt-dom-pod-sakura-e-21dd3dfbeea93bd8769475eaec8db7cd__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 95192,
+          "byteHash": "923b8d9b31c46f5f5f3c37a11b8d7674c2b6a62a8008f185ca3b38178f711acb",
+          "decoded": {
+            "width": 550,
+            "height": 248
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.217742
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-20f9c227c587a85557596ab-a8fc8042d6",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x577 over 550x248"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-elewacja-ogrodow-df6027db98",
+      "caption": "gotowy projekt Dom pod sakurą (E) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod sakura (e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod sakura (e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod sakura (e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-b2423c7b3a1177a07c29ff5-0c8d33a1e3",
+          "url": "https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-b2423c7b3a1177a07c29ff544a9fa0eb__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 438997,
+          "byteHash": "e6485b9f4f6669637140380d9f9dcf4ad15cc3015e05e81b856199e072db1d7e",
+          "decoded": {
+            "width": 1280,
+            "height": 577
+          },
+          "declaredMismatch": false,
+          "aspect": 2.218371
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-pod-sakura-e-43b58-ccdabb2825",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-ogrodowa-projekt-dom-pod-sakura-e-43b585ddc413960fdf72ddd306453904__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 95332,
+          "byteHash": "6c0d4a2d84cbb39e265fa1b685916391904750b30f8298dce5110e531f89a5a8",
+          "decoded": {
+            "width": 550,
+            "height": 248
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.217742
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-b2423c7b3a1177a07c29ff5-0c8d33a1e3",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x577 over 550x248"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-przekroj-budynku-3030f2ca50",
+      "caption": "gotowy projekt Dom pod sakurą (E) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod sakura (e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod sakura (e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod sakura (e) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b-84454e6da8",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b65189d028f090b0adfb65a5fd7__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m92728cdae273a/przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b65189d028f090b0adfb65a5fd7__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 70498,
+          "byteHash": "e8d82a2a883f48b9ce705fa029fed3fdec21cc471e640cdb931edf6923b561e7",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b-1d0dd7adaa",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b65189d028f090b0adfb65a5fd7__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 19442,
+          "byteHash": "7064fa49d78260aa25b0a304752e85f3de3d59d80191afb5f0fc47dc5897a6ec",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-pod-sakura-e-ccec9b-84454e6da8",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-rzut-parteru-0080b25ab6",
+      "caption": "gotowy projekt Dom pod sakurą (E) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-pod-sakura-e-8933ec0490-0a9bd60b87",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/rzut-parteru-projekt-dom-pod-sakura-e-8933ec04901d8c3503d8087020aafd96__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 53768,
+          "byteHash": "d95312caac979d7583f1c9365808038b276b935073b9036ae745abd9b1b1a20c",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-sakura-e-8933ec0490-0a9bd60b87",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-sytuacja-0760fe38a3",
+      "caption": "gotowy projekt Dom pod sakurą (E) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod sakura (e) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod sakura (e) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-62985a6c3bfe59dcda4f71e-426af3e353",
+          "url": "https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-62985a6c3bfe59dcda4f71e3f7cc3f33__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 141542,
+          "byteHash": "d3396af7a9a387152446c30d9aebb56956dee9d8b8ca2bbbd3b3fb9cf6c49621",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-pod-sakura-e-b81c97538e5ef4-02fa0f596e",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/sytuacja-projekt-dom-pod-sakura-e-b81c97538e5ef46dfa0f60684a93e6e0__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 34298,
+          "byteHash": "652b7e28e9526d395d653cbc3844edaa4cca23ac95347af1f50295a83022df87",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-62985a6c3bfe59dcda4f71e-426af3e353",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-pod-sakura-e-widok-1-312f6ebe89",
+      "caption": "gotowy projekt Dom pod sakurą (E) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-pod-sakura-e-84e022432314371-7ccbe3fbda",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/widok-1-projekt-dom-pod-sakura-e-84e02243231437119ed595a5f9c650ff__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 8813,
+          "byteHash": "86d60a37594b47a559fb59501c66773a775ade57f15526f005b75f75ef2a2f4c",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-sakura-e-84e022432314371-7ccbe3fbda",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-pod-sakura-e-69a70d6d8a",
+      "caption": "projekt Dom pod sakurą (E)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-99e24c7efd84727ce022078-ee135a792c",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-99e24c7efd84727ce022078b1b37af9e__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 29886,
+          "byteHash": "023f2af7fca8a55a88092514ecaf81fcbc87954e9976ae888b821d13b97191b8",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-99e24c7efd84727ce022078-ee135a792c",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-pod-sakura-e-8f6abf68c2bb0e7f6c5e91b-34fdaef832",
+      "caption": "Projekt dom pod sakura e 8f6abf68c2bb0e7f6c5e91b8f2da32d1  62197",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-8f6abf68c2bb0e7f6c5e91b-f9a5712a8d",
+          "url": "https://cdn1.archon.pl/images/products/m92728cdae273a/i/projekt-dom-pod-sakura-e-8f6abf68c2bb0e7f6c5e91b8f2da32d1__62197.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m92728cdae273a/image/62197?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 487102,
+          "byteHash": "1f460cc59b23482608197679545caa968797a9f31304e95e40b851136668c87c",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-8f6abf68c2bb0e7f6c5e91b-f9a5712a8d",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-pod-sakura-e-c24d99bb20",
+      "caption": "projekt Dom pod sakurą (E)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-pod-sakura-e-c104ee0780-0556957a12",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/rzut-parteru-projekt-dom-pod-sakura-e-c104ee078078fadd7f78dc5f7bb68040__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/related?scope=similar",
+          "mediaType": "image/gif",
+          "byteLength": 35965,
+          "byteHash": "b1dc7ceb1911c7fb31fef85c62d0637eaf0dfa6991592244afe0ea68e9e9610d",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-sakura-e-c104ee0780-0556957a12",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-pod-sakura-e-de7858e0e8",
+      "caption": "projekt Dom pod sakurą (E)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-pod-sakura-e-8671f37983cb206-72a173000e",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/widok-2-projekt-dom-pod-sakura-e-8671f37983cb2069ebdeea92a363731e__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m92728cdae273a/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 28544,
+          "byteHash": "ac852c7a30f250e8123b7a4b1ddb4eb562aa65d3daa2bc9cef3bdb67f43a3440",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-sakura-e-8671f37983cb206-72a173000e",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-2f1342fee1",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m92728cdae273a/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m92728cdae273a/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-sa-92cc7a2c04",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/rzut-parteru-z-powierzchniami-projekt-dom-pod-sakura-e-2a826be2577da3e31a070d0c508ebd35__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/gif",
+          "byteLength": 107054,
+          "byteHash": "9c4e6b36df6903828d46534e7256f0afe93a6c7d503a655e2b330c125d9cfbda",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-sa-92cc7a2c04",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-517a301bc4",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m92728cdae273a/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m92728cdae273a/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod sakura (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-pod-sakura-e-c078264e09f3bea76207f71-de99c53369",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-c078264e09f3bea76207f7106b6c7f84__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/gif",
+          "byteLength": 101355,
+          "byteHash": "5a155c280257435e91293da6d7570b4e612c14b661331c50b939aff646bec2d1",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-pod-sakura-e-c078264e09f3bea76207f71-de99c53369",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-pod-sakura-e-0dd07f1b1a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-pod-sakura-e-792bb0b86086c5b-9a56d80ecc",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/widok-1-projekt-dom-pod-sakura-e-792bb0b86086c5bf52054983d7c1a472__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 499782,
+          "byteHash": "cf5d838da830c84f511321f6ac10c2511324f6e974acb6931a326d32ad833012",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-sakura-e-792bb0b86086c5b-9a56d80ecc",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-pod-sakura-e-996fc1b58a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-sakura-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod sakura (e) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-pod-sakura-e-1162dadd893983c-ae450e05d2",
+          "url": "https://assets.archon.pl/images/products/m92728cdae273a/widok-2-projekt-dom-pod-sakura-e-1162dadd893983c2e9c5613693f39a41__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-sakura-e-m92728cdae273a",
+          "mediaType": "image/jpeg",
+          "byteLength": 474487,
+          "byteHash": "160498296d4c57def380af2235f76b2c328659e67349b18e523259b3215dda35",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-sakura-e-1162dadd893983c-ae450e05d2",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 8.09,
+      "unit": "m2",
+      "raw": "8,09 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7,
+      "unit": "m",
+      "raw": "7,0 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 144.03,
+      "unit": "m2",
+      "raw": "144,03 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 198.6,
+      "unit": "m2",
+      "raw": "198,6 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "value": 135.94,
+      "unit": "m2",
+      "raw": "135,94 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 286.83,
+      "unit": "m2",
+      "raw": "286,83 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 182.71,
+      "unit": "m2",
+      "raw": "182,71 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 144.03,
+      "unit": "m2",
+      "raw": "144,03 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 1057.76,
+      "unit": "none",
+      "raw": "1057,76 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu Dom pod sakurą (E) to propozycja dla osób ceniących nowoczesny styl, przestrzeń i funkcjonalność w jednym eleganckim wydaniu. Ten parterowy dom jednorodzinny o harmonijnej bryle i czterospadowym dachu zachwyca połączeniem nowoczesnej formy z klasyczną proporcją. Wnętrze zostało zaplanowane tak, aby codzienne życie domowników było wygodne i intuicyjne. Centralnym punktem projektu jest przestronny salon o powierzchni powyżej 30 m², otwarty na taras w podcieniu, który stanowi naturalne przedłużenie strefy dziennej. Duża kuchnia z wyspą, o powierzchni ponad 12 m², połączona ze spiżarnią, pozwala na komfortowe przygotowywanie posiłków i utrzymanie porządku w przestrzeni roboczej. Dom pod sakurą (E) oferuje pięć funkcjonalnych pokoi, w tym apartament z prywatną łazienką i garderobą, co czyni go idealnym rozwiązaniem dla większej rodziny. Dodatkowo przewidziano dwie łazienki oraz osobną toaletę, co zapewnia swobodę użytkowania wszystkim domownikom. Praktycznym udogodnieniem jest pralnia zlokalizowana w kotłowni, co pozwala na dyskretne zorganizowanie strefy gospodarczej. W salonie znalazło się miejsce na kominek, który wprowadza przytulny klimat w chłodniejsze dni. Projekt domu uwzględnia nowoczesne rozwiązania technologiczne, takie jak wentylacja mechaniczna z odzyskiem ciepła, gwarantująca świeże powietrze i energooszczędność. Dom pod sakurą (E) to przykład, jak współczesne projekty domów mogą łączyć estetykę, funkcjonalność i komfort codziennego życia w przestrzeni dopasowanej do potrzeb nowoczesnej rodziny."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "podcień"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 135.94 m² + 8.09 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, toaleta, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 4.53,
+      "raw": "1. Wiatrołap | 4,53 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Garderoba",
+      "area": 2.08,
+      "raw": "2. Garderoba | 2,08 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Hol",
+      "area": 3.89,
+      "raw": "3. Hol | 3,89 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Spiżarnia",
+      "area": 2.69,
+      "raw": "4. Spiżarnia | 2,69 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Kuchnia",
+      "area": 13.52,
+      "raw": "5. Kuchnia | 13,52 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Salon + Jadalnia",
+      "area": 32.69,
+      "raw": "6. Salon + Jadalnia | 32,69 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Pokój",
+      "area": 12.45,
+      "raw": "7. Pokój | 12,45 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Pokój",
+      "area": 12.45,
+      "raw": "8. Pokój | 12,45 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Pokój",
+      "area": 12.45,
+      "raw": "9. Pokój | 12,45 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "Korytarz",
+      "area": 11.43,
+      "raw": "10. Korytarz | 11,43 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "Garderoba",
+      "area": 3.74,
+      "raw": "11. Garderoba | 3,74 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "Pokój",
+      "area": 12.11,
+      "raw": "12. Pokój | 12,11 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 13,
+      "label": "Łazienka",
+      "area": 4.14,
+      "raw": "13. Łazienka | 4,14 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 14,
+      "label": "Łazienka",
+      "area": 6.16,
+      "raw": "14. Łazienka | 6,16 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 15,
+      "label": "Kotłownia z pralnią",
+      "area": 8.09,
+      "raw": "15. Kotłownia z pralnią | 8,09 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 16,
+      "label": "Toaleta",
+      "area": 1.61,
+      "raw": "16. Toaleta | 1,61 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-99e24c7efd84727ce022078b1b37af9e__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/rzut-parteru-projekt-dom-pod-sakura-e-8933ec04901d8c3503d8087020aafd96__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/rzut-parteru-projekt-dom-pod-sakura-e-c104ee078078fadd7f78dc5f7bb68040__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/widok-1-projekt-dom-pod-sakura-e-792bb0b86086c5bf52054983d7c1a472__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/widok-1-projekt-dom-pod-sakura-e-84e02243231437119ed595a5f9c650ff__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/widok-2-projekt-dom-pod-sakura-e-1162dadd893983c2e9c5613693f39a41__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/widok-2-projekt-dom-pod-sakura-e-8671f37983cb2069ebdeea92a363731e__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-boczna-projekt-dom-pod-sakura-e-7627babbd81c84eff10f6e79f5db8593__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-aa7cb9ddf4953ba9807970413875f43b__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-boczna-projekt-dom-pod-sakura-e-a62c9ecbc7f29471de10158c00ffa0ea__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-9ea19a7cac2059b42da553c67c85cc6b__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-frontowa-projekt-dom-pod-sakura-e-21dd3dfbeea93bd8769475eaec8db7cd__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-20f9c227c587a85557596ab29cf2e85f__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/elewacja-ogrodowa-projekt-dom-pod-sakura-e-43b585ddc413960fdf72ddd306453904__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-b2423c7b3a1177a07c29ff544a9fa0eb__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m92728cdae273a/sytuacja-projekt-dom-pod-sakura-e-b81c97538e5ef46dfa0f60684a93e6e0__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m92728cdae273a/projekt-dom-pod-sakura-e-62985a6c3bfe59dcda4f71e3f7cc3f33__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "1738911080d0e695ce74f3df1ab4bf928836e603b3b77bc73ec6e3f47a8ce2fc"
+}

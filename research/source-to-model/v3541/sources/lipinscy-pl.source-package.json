@@ -1,0 +1,1587 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Gotowy projekt domu Lancaster II elewacja lewa - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-elewacja-lewa-p-678f06d1bf",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19001 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja lewa - projekt Ludwika Juchniewicz-Lip\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Lancaster II elewacja lewa - projekt Ludwika Juchniewicz-Lip\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-thumb-19001-facades-thumb-gallery-small-jpeg-0f96a011c6",
+      "selectionReason": "only variant (119x42, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.833333,
+          "byteHash": "6ea9bc0b1dd9f35d3e80a6cc3ad53be2081da5fb6cfdce6823fe8251cb8712ab",
+          "byteLength": 1816,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 42,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-19001-facades-thumb-gallery-small-jpeg-0f96a011c6",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19001_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II elewacja prawa - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-elewacja-prawa-d15a6e5dec",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20790 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja prawa - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Lancaster II elewacja prawa - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-thumb-20790-facades-thumb-gallery-small-jpeg-91eee94a55",
+      "selectionReason": "only variant (119x42, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.833333,
+          "byteHash": "83a6c305ebb7610ddf0163fe1001d4ba04c38e95d4a518fee5d17c7b3ef560a3",
+          "byteLength": 1706,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 42,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-20790-facades-thumb-gallery-small-jpeg-91eee94a55",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20790_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II elewacja przód - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-elewacja-przod-a62718c7df",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18106 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja przód - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Lancaster II elewacja przód - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-thumb-18106-facades-thumb-gallery-small-jpeg-de2c219105",
+      "selectionReason": "only variant (119x29, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.103448,
+          "byteHash": "4c80ddc28f3194ee6e23c241226cd09e3733020842e6c1cd4065b717e6b89203",
+          "byteLength": 1763,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 29,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-18106-facades-thumb-gallery-small-jpeg-de2c219105",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18106_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II elewacja tył - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-elewacja-ty-pro-7f162e422a",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19895 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja tył - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Lancaster II elewacja tył - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-thumb-19895-facades-thumb-gallery-small-jpeg-40ea074bed",
+      "selectionReason": "only variant (119x29, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 4.103448,
+          "byteHash": "53d005d7d50357e9dc121642ca47e73abc3b1795944f23b293ae260639546b0f",
+          "byteLength": 1560,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 29,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-19895-facades-thumb-gallery-small-jpeg-40ea074bed",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19895_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-1983aa108c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-og1-gk-d3a0859a52",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "d80da36d5e87ffdc13b0d434a8144de6e835d1585e1916e85ac9639c98c3c5b4",
+          "byteLength": 120274,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-og1-gk-d3a0859a52",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8019/dcb104a_og1_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-1e8a852e87",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-og2-gk-c99515a570",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "3b18bf973c3248de0b002e03b1365f2116103b81ae789208f602574ccefaad49",
+          "byteLength": 92620,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-og2-gk-c99515a570",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8023/dcb104a_og2_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-3786d247c2",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lancaster II rzut Parter - projekt Ludwika Juchniewicz-Lipiń\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lancaster II rzut Parter - projekt Ludwika Juchniewicz-Lipiń\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 108,79 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb104a-r1-pdf-fb4f296d8b",
+      "selectionReason": "largest decoded raster of 2 variants: 1500x981 over 339x222",
+      "variants": [
+        {
+          "aspect": 1.529052,
+          "byteHash": "31c6b25ef795961869f16d4a9636f238a58a1f903b5c2f69b5bea0a840b762a6",
+          "byteLength": 73040,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 981,
+            "width": 1500
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-r1-pdf-fb4f296d8b",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/32567/dcb104a_r1-pdf"
+        },
+        {
+          "aspect": 1.527027,
+          "byteHash": "98da44b03c687cbae32696fe287f8f9e095d310b4b4521975ba2d193adb5d88c",
+          "byteLength": 78169,
+          "declared": {
+            "height": 981,
+            "width": 1500
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 222,
+            "width": 339
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-32567-floorplanpdf-thumb-png-5d89781627",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32567_floorplanpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-3aca1e0c56",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-fr1-gk2-e144758445",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "e4b954b26a685746ce854280fefbeb04e6979f72a11bb2c1f69bc15396b7a09b",
+          "byteLength": 116275,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-fr1-gk2-e144758445",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8012/dcb104a_fr1_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-576d09156d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-og2-gk2-d968294fb2",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "23ef7c9d36adfcf2f412b6e81253728a91abedca976423c5b5bb825a3eb8c175",
+          "byteLength": 68711,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-og2-gk2-d968294fb2",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8024/dcb104a_og2_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-5799176494",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8020-projects-thumb-gallery-small-jpeg-034b065d5f",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6cdd0147928fbc1c19b5bd235c6d76bdae7959d08cbe0618b37f7eb53e751b25",
+          "byteLength": 3111,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8020-projects-thumb-gallery-small-jpeg-034b065d5f",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8020_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-5ed58fae60",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-og1-gk2-9d4aafe457",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "77d4aab12ddcb47918b835dad6c010635b9a65ae809a3e9a6fb2f90f86753b41",
+          "byteLength": 100595,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-og1-gk2-9d4aafe457",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8020/dcb104a_og1_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-60419a24b5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8027-projects-thumb-gallery-small-jpeg-1dd9f5f542",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "53a5001a89fe25854cf62b9315fd0358d3ad096cb9f16ba4553fffa161f077da",
+          "byteLength": 2382,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8027-projects-thumb-gallery-small-jpeg-1dd9f5f542",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8027_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-762a3cfb14",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8011-projects-thumb-gallery-small-jpeg-d05ad6227f",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8c9bf9dd106a19c43f808db2c81a8eeaf0dfcf129275466a3a45cc9784b02603",
+          "byteLength": 3074,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8011-projects-thumb-gallery-small-jpeg-d05ad6227f",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8011_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-85e4d55624",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-fr1-gk-5af5094829",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "b8f78789f55e8202b4cfae47e3e6cb11a53aaf577eeefb69c874bc871fc3db2f",
+          "byteLength": 136739,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-fr1-gk-5af5094829",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8011/dcb104a_fr1_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-86e76ee1f7",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lancaster II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lancaster II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb104a-rd-500-pdf-5f3d84e924",
+      "selectionReason": "largest decoded raster of 2 variants: 770x590 over 340x261",
+      "variants": [
+        {
+          "aspect": 1.305085,
+          "byteHash": "f8952eec1d7c3c147132b098f1e13de9dea14d13043a1893922d32a500fb26e8",
+          "byteLength": 7264,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 590,
+            "width": 770
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-rd-500-pdf-5f3d84e924",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26741/dcb104a_rd_500-pdf"
+        },
+        {
+          "aspect": 1.302682,
+          "byteHash": "a6a16c2c50945cd2a51f6ace3ef758e2c8abaab209ab51d5e9e9cc08a00e3f4f",
+          "byteLength": 45400,
+          "declared": {
+            "height": 590,
+            "width": 770
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 261,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-26741-plotpdf-thumb-png-ccd9ce768c",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26741_plotpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-926c957c18",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-fr2-gk2-8b302b9f20",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "949d0996249ea127015cc8b27abbf5613d79e25cd6ef9d08fa715b95f763a873",
+          "byteLength": 77040,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-fr2-gk2-8b302b9f20",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8016/dcb104a_fr2_gk2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-92f8e14d43",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8019-projects-thumb-gallery-small-jpeg-dea431c086",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2d64be12e848ad8f5465c85090d56ed1db3d7fb503e123e16751b22171d4db4d",
+          "byteLength": 3201,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8019-projects-thumb-gallery-small-jpeg-dea431c086",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8019_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-93cbf29567",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8015-projects-thumb-gallery-small-jpeg-7074d5983c",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "f44b119ecc37f7ce3fbda3f42f9247fdee02ff68e7ccd5476777b9138a8a3545",
+          "byteLength": 2643,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8015-projects-thumb-gallery-small-jpeg-7074d5983c",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8015_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-9ed0cfa1bd",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lancaster II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dcb104a-px-pdf-0cf9587c40",
+      "selectionReason": "largest decoded raster of 2 variants: 770x216 over 339x95",
+      "variants": [
+        {
+          "aspect": 3.564815,
+          "byteHash": "db22eaea77ad5faf10246a6638c71293c9357f1a3901e250daf7701c9b6f9d0c",
+          "byteLength": 3945,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 216,
+            "width": 770
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-px-pdf-0cf9587c40",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/24982/dcb104a_px-pdf"
+        },
+        {
+          "aspect": 3.568421,
+          "byteHash": "6fb0b214a38a941b257a12c0cd70dd1d67cd7e649ecfd0005a50141bb5d5b35b",
+          "byteLength": 19641,
+          "declared": {
+            "height": 216,
+            "width": 770
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 95,
+            "width": 339
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-24982-crossviewpdf-thumb-png-3c26b78337",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24982_crossviewpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-a02a8e0904",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-fr2-gk-ded9f7aebb",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "15720fa4fc58f22bdad14288d7196b33027c1242257d896a1e6948a6b759eb1e",
+          "byteLength": 101859,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-fr2-gk-ded9f7aebb",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8015/dcb104a_fr2_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-af0c4a37f4",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8016-projects-thumb-gallery-small-jpeg-398390e2e6",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2d5e75bfcf78e72fcf8d5a2ed884cdc3102436f39872927b5b30c461102f4b2a",
+          "byteLength": 2364,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8016-projects-thumb-gallery-small-jpeg-398390e2e6",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8016_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-ba21445a73",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8023-projects-thumb-gallery-small-jpeg-b32f27dcd3",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "9ed95b1ab2de8bc7c3edf33334cdeb47b28cec02cd286c6a126c45b598e5c802",
+          "byteLength": 2855,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8023-projects-thumb-gallery-small-jpeg-b32f27dcd3",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8023_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-c0e816f08b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dcb104a-og3-gk-39e49ccbbc",
+      "selectionReason": "only variant (1280x854, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.498829,
+          "byteHash": "0a1b57bd41741af9d1d1e006e3c7bad35a229a3c73bbec8297853fbe12e710d9",
+          "byteLength": 79063,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-og3-gk-39e49ccbbc",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/8027/dcb104a_og3_gk"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-dbbb9baf73",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8012-projects-thumb-gallery-small-jpeg-a9de7e944f",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "5fc88f845b1a5d8803e9902b8c8de894f3d9fc91eb3698eff4498d0adb890998",
+          "byteLength": 2922,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8012-projects-thumb-gallery-small-jpeg-a9de7e944f",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8012_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-projekt-ludwika-ff5b9fd2ec",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-8024-projects-thumb-gallery-small-jpeg-eec286b04b",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "30e01d97caacc80a9a46b76569d7ecd4e01b0e0a7d61cac2ab2d5a0e30914121",
+          "byteLength": 2357,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-8024-projects-thumb-gallery-small-jpeg-eec286b04b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8024_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II przekrój",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-przekroj-63f8b95379",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lancaster II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-24982-crossviewpdf-thumb-gallery-big-v2-pn-5cf4e52ea6",
+      "selectionReason": "only variant (734x206, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 3.563107,
+          "byteHash": "0cdac74ec21143da739596a2ebbda3f0b78dab54cef81b3e64671ae0ec9a45f3",
+          "byteLength": 606072,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 206,
+            "width": 734
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-24982-crossviewpdf-thumb-gallery-big-v2-pn-5cf4e52ea6",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24982_crossviewpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II przekrój - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-przekroj-projek-25ab5f7a68",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Lancaster II przekrój - projekt Ludwika Juchniewicz-Lipińska\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-24982-crossviewpdf-thumb-gallery-small-png-27b9a01267",
+      "selectionReason": "only variant (120x34, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 3.529412,
+          "byteHash": "b4cbdf8ff0e07da553fdc2f1d52ca47ac735551f8760453b4f10a4dd34c92a1d",
+          "byteLength": 2656,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 34,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-24982-crossviewpdf-thumb-gallery-small-png-27b9a01267",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24982_crossviewpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II rzut Parter",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-rzut-parter-47cb0ddabe",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lancaster II rzut Parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lancaster II rzut Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-32567-floorplanpdf-thumb-gallery-small-png-d931e8f72f",
+      "selectionReason": "only variant (119x78, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.525641,
+          "byteHash": "9b763b4320837c392f772380b88b57af97526977ea2bb4602d3afc6c48890529",
+          "byteLength": 12015,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 78,
+            "width": 119
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-32567-floorplanpdf-thumb-gallery-small-png-d931e8f72f",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32567_floorplanpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II rzut Parter - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-rzut-parter-pro-1163381441",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Lancaster II rzut Parter - projekt Ludwika Juchniewicz-Lipiń\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Lancaster II rzut Parter - projekt Ludwika Juchniewicz-Lipiń\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-32567-floorplanpdf-thumb-gallery-big-v2-pn-f27692aec2",
+      "selectionReason": "only variant (735x481, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.528067,
+          "byteHash": "b4b31d4d9014dc8573d915a81fc027807320aa527f838ea6d74f372888baec3f",
+          "byteLength": 1416984,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 481,
+            "width": 735
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-32567-floorplanpdf-thumb-gallery-big-v2-pn-f27692aec2",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32567_floorplanpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II wymiary działki  - projekt Ludwika Juchniewicz-Lipińska, Miłosz Lipiński",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-wymiary-dzia-ki-7ab6a7caaf",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lancaster II wymiary działki  - projekt Ludwika Juchniewicz-\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lancaster II wymiary działki  - projekt Ludwika Juchniewicz-\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-26741-plotpdf-thumb-gallery-small-png-6dc5352841",
+      "selectionReason": "only variant (120x92, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.304348,
+          "byteHash": "a02e0120bffa082e12ec3529d6a32e4c853d47747b72f30894844db38d91945f",
+          "byteLength": 5894,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 92,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-26741-plotpdf-thumb-gallery-small-png-6dc5352841",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26741_plotpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Lancaster II wymiary działki",
+      "id": "asset-gotowy-projekt-domu-lancaster-ii-wymiary-dzia-ki-c3da77e682",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Lancaster II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Lancaster II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-26741-plotpdf-thumb-gallery-big-v2-png-de9c1a1484",
+      "selectionReason": "only variant (736x564, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.304965,
+          "byteHash": "ac126ae6636ac04480bbad08731b3191ac707e314aff2d06bba9b4a93ee998ab",
+          "byteLength": 1663738,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 564,
+            "width": 736
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-26741-plotpdf-thumb-gallery-big-v2-png-de9c1a1484",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26741_plotpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Nokia",
+      "id": "asset-gotowy-projekt-domu-nokia-3ce861fe5b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-7409-projects-thumb-jpeg-f14c93717a",
+      "selectionReason": "2 variants tie at 340x227; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.497797,
+          "byteHash": "e364ee072a45d44423e91852e176a75258126ffe4fc4b81a97e8b52028b0b404",
+          "byteLength": 32465,
+          "declared": {
+            "height": 854,
+            "width": 1280
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 227,
+            "width": 340
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-7409-projects-thumb-jpeg-f14c93717a",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/08/thumb_7409_projects_thumb.jpeg"
+        },
+        {
+          "aspect": 1.497797,
+          "byteHash": "17dfd0ba3443a31e1f827156b8bfb48a32d47cbf61b275480675f1bc4d62bfa4",
+          "byteLength": 31231,
+          "declared": {
+            "height": 854,
+            "width": 1280
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 227,
+            "width": 340
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-9955-projects-thumb-jpeg-99f4473227",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/10/thumb_9955_projects_thumb.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Lancaster II",
+      "id": "asset-projekt-domu-lancaster-ii-5da6f1524c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja lewa - projekt Ludwika Juchniewicz-Lip\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Lancaster II elewacja lewa - projekt Ludwika Juchniewicz-Lip\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-dcb104a-e2-gk-550c2414a0",
+      "selectionReason": "largest decoded raster of 2 variants: 1137x400 over 199x70",
+      "variants": [
+        {
+          "aspect": 2.8425,
+          "byteHash": "3766f0d289f31d05df1174f7bab4eb88cab3fac4aa0c85d354da827bf76eb1b9",
+          "byteLength": 22881,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1137
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-e2-gk-550c2414a0",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/19001/dcb104a_e2_gk"
+        },
+        {
+          "aspect": 2.842857,
+          "byteHash": "c7e915df3b071de6d010fe9406218a77b509361f5ef2c7500d5eaa9b7b74e996",
+          "byteLength": 4842,
+          "declared": {
+            "height": 400,
+            "width": 1137
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 70,
+            "width": 199
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-19001-admin-jpeg-7ecf8581cc",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19001_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Lancaster II",
+      "id": "asset-projekt-domu-lancaster-ii-7b19a17fe3",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja prawa - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Lancaster II elewacja prawa - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-dcb104a-e4-gk-0d3c0626c8",
+      "selectionReason": "largest decoded raster of 2 variants: 1134x400 over 200x71",
+      "variants": [
+        {
+          "aspect": 2.835,
+          "byteHash": "70dd9287af118ffb3ebb0da8d256c6064eb25b9e3669771e1f085eb030ad2301",
+          "byteLength": 26513,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1134
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-e4-gk-0d3c0626c8",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/20790/dcb104a_e4_gk"
+        },
+        {
+          "aspect": 2.816901,
+          "byteHash": "326dd45c94b39dee94ee4b24893508cb04994c2c040b564254e5e6b46498d021",
+          "byteLength": 4264,
+          "declared": {
+            "height": 400,
+            "width": 1134
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 71,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-20790-admin-jpeg-66682d5585",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20790_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Lancaster II",
+      "id": "asset-projekt-domu-lancaster-ii-e30573a05b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja tył - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Lancaster II elewacja tył - projekt Ludwika Juchniewicz-Lipi\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-dcb104a-e3-gk-c1597c0484",
+      "selectionReason": "largest decoded raster of 2 variants: 1641x400 over 200x49",
+      "variants": [
+        {
+          "aspect": 4.1025,
+          "byteHash": "d60cf0b8a67254ac09a6338f61475aae90f213a8447c925749d9b90b6a690b33",
+          "byteLength": 49868,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1641
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-e3-gk-c1597c0484",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/19895/dcb104a_e3_gk"
+        },
+        {
+          "aspect": 4.081633,
+          "byteHash": "be5bd7a5c3bd9f8c4a60483e176504e2b3d65c9eb1dc42667889d2efa6c3214b",
+          "byteLength": 4085,
+          "declared": {
+            "height": 400,
+            "width": 1641
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 49,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-19895-admin-jpeg-87313a787d",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19895_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Lancaster II",
+      "id": "asset-projekt-domu-lancaster-ii-ee0fdbd8bb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Lancaster II elewacja przód - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Lancaster II elewacja przód - projekt Ludwika Juchniewicz-Li\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-dcb104a-e1-gk-4beaec9ac4",
+      "selectionReason": "largest decoded raster of 2 variants: 1640x400 over 200x49",
+      "variants": [
+        {
+          "aspect": 4.1,
+          "byteHash": "cdadd3da0e514e8bd62c2e951c009c75c7c12e1ccb13c8333162e5ba4cb91492",
+          "byteLength": 45582,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 1640
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-dcb104a-e1-gk-4beaec9ac4",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/18106/dcb104a_e1_gk"
+        },
+        {
+          "aspect": 4.081633,
+          "byteHash": "90ab95006571c17c58453c2a6b4d5764d10388f00146e98d096fe477d33f0cc1",
+          "byteLength": 4426,
+          "declared": {
+            "height": 400,
+            "width": 1640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 49,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/lancaster-ii",
+          "id": "var-thumb-18106-admin-jpeg-180c6b1990",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18106_admin.jpeg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://lipinscy.pl/projekt/lancaster-ii",
+  "contentHash": "18d5d16c20e8461f4608722aba521dc6e3ce83eb71022db0df033f36d79f38ea",
+  "failures": [
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/8019/dcb104a_og1_gk: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/09/b48fe0ac5108e7e6105834f44ea62e0a290a32c2.jpeg"
+    }
+  ],
+  "fetchedUrl": "https://lipinscy.pl/projekt/lancaster-ii/",
+  "id": "src-dcb104a-aaaeff492d",
+  "pageHash": "40de1a4122810f7f9a00369d4250c05814700c14fdbdcf14fe7a66bdb90fb283",
+  "project": {
+    "externalId": "DCB104a",
+    "name": "Projekt Lancaster II - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "140,47m²",
+      "unit": "m2",
+      "value": 140.47
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "raw": "108,79m²",
+      "unit": "m2",
+      "value": 108.79
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "142,57m²",
+      "unit": "m2",
+      "value": 142.57
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "1°",
+      "unit": "deg",
+      "value": 1
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "84,33m²",
+      "unit": "m2",
+      "value": 84.33
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt jest super, fantastyczny. Jeżeli ktoś ma już jakieś doświadczenie, troszkę potrafi zrobić sam, to ten dom można zamknąć w stanie do zamieszkania 200-220 tys. cena jest tez uzależniona jakie chcemy mieć wyposażenie w środku, ja biorę w tej cenie już płytki włoskie i hiszpańskie takie jak Porcelanosa czy Cedir w cenie 180-200 zł,panele w klasie K33 w cenie ok 150 zł za m2. Najbardziej mnie denerwują te świstki, bo adaptacja sama ok 4-5 tys.. pytam się za co ze klepnie gość pieczątkę za to? przecież projektanci maja wykształcenie większe niż ci co tylko przystawiają pieczątkę!!! Absurd nad absurdami!!! Pozdrawiam fanów tego projektu, no i gratulacje dla wszystkich członków Lipińscy Domy za projekt."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "1°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Nowoczesny dom jednorodzinny, parterowy z płaskim dachem, z garażem: przestrzeń dzienna z kominkiem, duży zadaszony taras, kuchnia ze spiżarką, dwie sypialnie, łazienka, garaż z pom.gosp. z c.o."
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/lancaster-ii/Prosty, parterowy mały dom z płaskim dachem, dla niedużych rodzin, posiadających ograniczone możliwości finansowe a chcących zamieszkać w wygodnym domu o nowoczesnym wyglądzie. Przestronna strefa dzienna jest tu powiększona poprzez zadaszony taras i ponadstandardowe przeszklenia, umożliwiające otworzenie się na otaczającą przestrzeń ogrodu. Wygodnie rozplanowany dom mieści w sobie przestronny pokój dzienny, z kuchnią, jadalnia i spiżarką, łazienkę i dwa pokoje, przy czym sypialnia większa ma niepowtarzalny charakter, dzięki dużym przeszkleniom. Dostępna jest również wersja tego projektu z większym garażem i z trzema sypialniami."
+    }
+  ],
+  "requestedUrl": "https://lipinscy.pl/projekt/lancaster-ii/",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

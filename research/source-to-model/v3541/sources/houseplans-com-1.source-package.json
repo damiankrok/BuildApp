@@ -1,0 +1,2230 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "1108-9",
+      "id": "asset-1108-9-465c9b68ce",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-png-v-3-95f9c76b7b",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "7879c73b1f534d7dd8f8827428ca2c2611954c65d750be42878b8b1464729a9a",
+          "byteLength": 419028,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-png-v-3-95f9c76b7b",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/rgl7d6o57f2gko4pa0d9nmaf5q/w560x373.png?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "892-47",
+      "id": "asset-892-47-22897c87f3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-21-0c83406a81",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "b5f7003b85a8cc9f375e8b4a672f2b67becdbfa18a1421e8c794dddb1a4b13d2",
+          "byteLength": 30820,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-21-0c83406a81",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/9df8q3cnjg2ibul78vrc4o4b8s/w560x373.jpg?v=21"
+        }
+      ]
+    },
+    {
+      "caption": "938-119",
+      "id": "asset-938-119-497587024b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-3-08e4c1465d",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "7d807e05c569156374d0494190424b63ea6241345a95a9fc99c488fc97529b4a",
+          "byteLength": 79549,
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-3-08e4c1465d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/8kpr4or6l44mpllhgfnkdcjpa7/w560x373.jpg?v=3"
+        }
+      ]
+    },
+    {
+      "caption": "Builder Advantage Home",
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.449511,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "byteLength": 215913,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 614,
+            "width": 890
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Covered Porch for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-covered-porch-for-modern-house-plan-106-60df057944",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-63a755643d",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "c862c238fbad0e56f1e728e9e981f32a6afa98a8ff3ba98c6ee2fa114597ffe9",
+          "byteLength": 105778,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-63a755643d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/449d2eljk11pggk9b3qdhdajqs/w800x533.jpg?v=5"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "e2f8146f352b4c168ff4de0a48f6c9d20304b4de7de4f13ccee91bbbe6d83bd1",
+          "byteLength": 66516,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-5-07599a2baa",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/449d2eljk11pggk9b3qdhdajqs/w620x413.jpg?v=5"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "00fadb0a74be77815d5eb575d989a4e81369feb658039a6fa5b21a10963a6e9f",
+          "byteLength": 55212,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-d7fa70cd43",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/449d2eljk11pggk9b3qdhdajqs/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1064-255 - 5 bed, 4.5 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-117d250d0c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-255 - 5 bed, 4.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-255 - 5 bed, 4.5 ba\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-png-v-4-3bfdaef691",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "823f879099456ba9b3a1e69e34cb686e91084b111cbf34dc087afa600aebe074",
+          "byteLength": 15976,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-png-v-4-3bfdaef691",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/7ip1puebii2smug5kirjh67i6h/w300x200.png?v=4"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1064-227 - 3 bed, 3.5 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-49e75f4093",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-227 - 3 bed, 3.5 ba\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-227 - 3 bed, 3.5 ba\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-2-a31c8f9116",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "0c5bbbffeea9d574d9eb738a20da089b5006b6adaa20cc97f0a5afaa1b93b346",
+          "byteLength": 14780,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-jpg-v-2-a31c8f9116",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/g1o205u7ah0d683j4c0b5e8iil/w300x200.jpg?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1064-148 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-4ea6aaa46f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-148 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-148 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-png-v-2-b0a21a53f3",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "722ff159910764f29adca7307c937cd97f118a56a5f66aaf8780ee21239df634",
+          "byteLength": 112011,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-png-v-2-b0a21a53f3",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/eg2s73pe6hicghlgjniugesvq/w300x200.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Barndominium House Plan #1064-302 - 3 bed, 3 bath",
+      "id": "asset-exterior-front-elevation-for-barndominium-house-5b45c3be1d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-302 - 3 bed, 3 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Barndominium House Plan #1064-302 - 3 bed, 3 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-2-3156331633",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "1fd856b383cdf2a0d4f6972d0a118ae2a02c508f28b483a2122159631b122b2e",
+          "byteLength": 17142,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-jpg-v-2-3156331633",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5f90mvmps38uvgku1bv6id6rqk/w300x200.jpg?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-modern-house-plan-1-89b7224f08",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-4-7489f38148",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "ecb1e0f708c954faed331c6243e9db3677d92af4f996415529b1f37add3431c8",
+          "byteLength": 102134,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-4-7489f38148",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/lvrvd1grgmsgcsotrfb05pi41e/w800x533.jpg?v=4"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "5ccee301168ad0d78a2efe606ee1b00319b31ee3d49c4a9a78a8db9f968a31d0",
+          "byteLength": 63948,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-4-e62f229527",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/lvrvd1grgmsgcsotrfb05pi41e/w620x413.jpg?v=4"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "98f23d977cf265fff3ae5be37e466b9fab2c86b4f229ae5b13502019ded69676",
+          "byteLength": 52769,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-4-10f1934d87",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/lvrvd1grgmsgcsotrfb05pi41e/w560x373.jpg?v=4"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Front Elevation for Ranch House Plan #1064-191 - 3 bed, 2 bath",
+      "id": "asset-exterior-front-elevation-for-ranch-house-plan-10-66cb6e3590",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Ranch House Plan #1064-191 - 3 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Ranch House Plan #1064-191 - 3 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-18-23a0a05c1c",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "ae82e9b2e1cf019065a7031a15fe0e0626fb7f0edafddf61a7a813caf8a59845",
+          "byteLength": 22444,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-jpg-v-18-23a0a05c1c",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/9hqfgb09aqfmjldgov3v50han6/w300x200.jpg?v=18"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 1 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-other-elevation-1-for-modern-house-plan-53e58ad869",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-24ab91cd74",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "6271b4eb4487d1e0355d3f9ce00a258614d6c788d261551ae3408d1e4617d54f",
+          "byteLength": 96773,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-24ab91cd74",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/7s2osl6elllkop1588gei9vd7b/w800x533.jpg?v=5"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "635d61dc36d52d8d7e893aaad381e221d3fb404bf2ac784d73e9a5d29ff473f3",
+          "byteLength": 60152,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-5-ff07a04027",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/7s2osl6elllkop1588gei9vd7b/w620x413.jpg?v=5"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "fd77ff0d4333175e43c26b161bd2048ed92603a4e41d20427aabbc607fab5094",
+          "byteLength": 49523,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-b30c24ce2a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/7s2osl6elllkop1588gei9vd7b/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-other-elevation-2-for-modern-house-plan-0154579cce",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-5-ebc22e5117",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "b35b60a86157504419377063fe0bf89a1173678ad8aed81277fb685fc9b03e9f",
+          "byteLength": 65754,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-ebc22e5117",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-other-elevation-2-for-modern-house-plan-46f18309b5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-original-jpg-v-5-495ee25176",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1080 over 1024x576",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "8b3e7609398e64ec5953d9428d144d8001b46ae4631bfe05b4039029e110eadc",
+          "byteLength": 2005724,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1080,
+            "width": 1920
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-original-jpg-v-5-495ee25176",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/original.jpg?v=5"
+        },
+        {
+          "aspect": 1.777778,
+          "byteHash": "5a3993ea6ad7fe2603d98ebcd6c6963d1a3e95d882dcb1481731ef8f0f84ea5e",
+          "byteLength": 181048,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 576,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-5-db00486cd3",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/w1024.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-other-elevation-2-for-modern-house-plan-8e8226da95",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-4627a1316b",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "bf5112a3c7ccb42622525907a93bfc61cc833afbfa395ea8ada35e58c7f42a66",
+          "byteLength": 129751,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-4627a1316b",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/w800x533.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Other Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-other-elevation-for-modern-house-plan-1-124dd2b3ec",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-236fba528c",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "9165e6af9bc6df709c332edeab348b165ff896925b39783b8670e4a60171def7",
+          "byteLength": 95780,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-236fba528c",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5c2eo8j8ipmkotvlk138nqk1nh/w800x533.jpg?v=5"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "b07de6b1bc1e59c205f2cad80439e816963e2db51d054ab60dbc182235a13c05",
+          "byteLength": 59624,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-5-3c9d7cfe29",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5c2eo8j8ipmkotvlk138nqk1nh/w620x413.jpg?v=5"
+        },
+        {
+          "aspect": 1.50134,
+          "byteHash": "c6ddc9d7129e82f9b4d3e2a06f1de01fddcee8584146e6a3982fd371d04327cb",
+          "byteLength": 49768,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-c2b78ae47d",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/5c2eo8j8ipmkotvlk138nqk1nh/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-2-for-modern-house-plan-1cf9ea3806",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w1024-png-v-2-3cc78e77d3",
+      "selectionReason": "only variant (1024x585, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.750427,
+          "byteHash": "81adfe4fcb5404eef57f7695ff9a0d9c0de9f8c3699763e0ddc7e82b4a02ddfd",
+          "byteLength": 1021829,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 585,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-png-v-2-3cc78e77d3",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w1024.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-2-for-modern-house-plan-780f120f31",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w800x533-png-v-2-e5e28fe224",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "d20d7caf68f444981ce90d1b7d89de4228b67ea3b71ab7cb4244e57a834568f2",
+          "byteLength": 714871,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-png-v-2-e5e28fe224",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w800x533.png?v=2"
+        },
+        {
+          "aspect": 1.501211,
+          "byteHash": "45b1016b11d0607e67f96da6b9565ab411e0a2b49483e7b349be45fe943a9a7e",
+          "byteLength": 432550,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-png-v-2-954671a91e",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w620x413.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-2-for-modern-house-plan-bfb6f05f7c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-original-png-v-2-e8c0767d5b",
+      "selectionReason": "only variant (1344x768, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.75,
+          "byteHash": "002f474b5b093d2f32825bf61df80fef9a9b1b4bc4fb97cbc31a6e0922489c6f",
+          "byteLength": 2422928,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 768,
+            "width": 1344
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-original-png-v-2-e8c0767d5b",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/original.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-2-for-modern-house-plan-ffbb1b10eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 2 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w600-png-v-2-b088ea9d69",
+      "selectionReason": "only variant (600x343, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.749271,
+          "byteHash": "9f1c743b7aeda5f07180431650a49c2ca4ca823acaa96ed2449b4fde709fde20",
+          "byteLength": 357436,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 343,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w600-png-v-2-b088ea9d69",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w600.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-3-for-modern-house-plan-3028143b7b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-5-c60b8fcbb9",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "ff0ab2ea78733acafe53bc1dc103eeaabd4f4ff05f226416329c16ff683eae23",
+          "byteLength": 53626,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-c60b8fcbb9",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-3-for-modern-house-plan-d6f3a04e54",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-9a788d9716",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "ca41e7f19708c2886fe4979b8dde789b2ac49747204081437b0afd9713979fcf",
+          "byteLength": 101937,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-9a788d9716",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/w800x533.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-3-for-modern-house-plan-ecd6c9df03",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation 3 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-original-jpg-v-5-f02aa6cbab",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1080 over 1024x576",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "fc1d711940a27bbb63d54e81d291f603a89fb13d881c35128fa1bd66d5fd2a41",
+          "byteLength": 1605313,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1080,
+            "width": 1920
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-original-jpg-v-5-f02aa6cbab",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/original.jpg?v=5"
+        },
+        {
+          "aspect": 1.777778,
+          "byteHash": "943f36f96f827ba040564940b66efe9ce6be31e8c6cff135ea87eaebc032fb52",
+          "byteLength": 137215,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 576,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-5-a21c1f9e7f",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/w1024.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation for Modern House Plan #1064-280 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-for-modern-house-plan-10-540830c324",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Modern House Plan #1064-280 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Modern House Plan #1064-280 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w300x200-jpg-v-2-ea2ba46f13",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "9c532400f196f0b343025f9990925620f98e0f5ce2002ba2fdd4acd55d6ed4ba",
+          "byteLength": 18944,
+          "declared": {
+            "height": 200,
+            "width": 300
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-jpg-v-2-ea2ba46f13",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/lqbtkqofl69erkhjgmdbrivqaa/w300x200.jpg?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Exterior - Rear Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-exterior-rear-elevation-for-modern-house-plan-10-8babc19aa5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-w560x373-png-v-2-419cb1ec74",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "91a8f62c613a8a01c2818b88872d70c55fa3bb1e2fe6fd759a83beddd205dadb",
+          "byteLength": 354181,
+          "declared": {
+            "height": 233,
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-png-v-2-419cb1ec74",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w560x373.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-lower-floor-for-modern-house-plan-106-483838f84d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-5-7ab96494a8",
+      "selectionReason": "only variant (1024x957, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.07001,
+          "byteHash": "ebb2d60ed1f645f86cf2df73cb81355c3e9a0b6b622eac0c58da7840cd6fb86d",
+          "byteLength": 84612,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 957,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-5-7ab96494a8",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/adp320gdsrdk8tkllefa7uv3i2/w1024.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-lower-floor-for-modern-house-plan-106-5245cbee94",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-5-9a3f13f03f",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "fed2704cecb4fb4ee407e6a40c9ff8cabe518d18e05bcf44eb46221cb4c3b518",
+          "byteLength": 19353,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-9a3f13f03f",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/adp320gdsrdk8tkllefa7uv3i2/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-lower-floor-for-modern-house-plan-106-d3b20ddf00",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w620x413-jpg-v-5-11751e9e6f",
+      "selectionReason": "only variant (620x413, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.501211,
+          "byteHash": "d4811dca33d518197b715bb236c874e4a9c0c5c8d97ab89ef93d20965638e89b",
+          "byteLength": 23493,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-5-11751e9e6f",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/adp320gdsrdk8tkllefa7uv3i2/w620x413.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-1-for-modern-house-plan-10-2a4a71cd74",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-original-jpg-v-5-abd615e70b",
+      "selectionReason": "largest decoded raster of 2 variants: 3216x3680 over 1024x1172",
+      "variants": [
+        {
+          "aspect": 0.873913,
+          "byteHash": "7729f59ad0c1d23b1290c0f664c1c61dead951cc1cc464099bb2db8f77aa063d",
+          "byteLength": 461031,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 3680,
+            "width": 3216
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-original-jpg-v-5-abd615e70b",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/original.jpg?v=5"
+        },
+        {
+          "aspect": 0.87372,
+          "byteHash": "8fb42e2d60e149efb7231a508d29383b0a1cd529c9c006bffd8dc42d5b18762b",
+          "byteLength": 111507,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1172,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-5-c7af98c6e4",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/w1024.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-1-for-modern-house-plan-10-a211b20c02",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-5-c5c63c5c8f",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "effb0d68c0b2fcc802fc82963e175f6bea9592b34f951e78569045ebe7284c3f",
+          "byteLength": 19661,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-c5c63c5c8f",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-1-for-modern-house-plan-10-d75573bd9d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor 1 for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w800x533-jpg-v-5-ebbb32a376",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "a4cb8ee2af6c9931119929e912fd38bb61c51368de271d4545520cf1caaa92b2",
+          "byteLength": 36030,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w800x533-jpg-v-5-ebbb32a376",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/w800x533.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-modern-house-plan-1064-289d902dc4",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-5-35a80fde99",
+      "selectionReason": "only variant (1024x1034, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.990329,
+          "byteHash": "7073d2f3bfa4911d20a573b663c4a0d56f0a77c3cd20e7695771c995c60b3e9b",
+          "byteLength": 104736,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1034,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-5-35a80fde99",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/6cp5asodo0pjro67de7tf2jne9/w1024.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-modern-house-plan-1064-b0793fefd4",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w620x413-jpg-v-5-86f13e5248",
+      "selectionReason": "only variant (620x413, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.501211,
+          "byteHash": "8e9f3b613b07a0b402765db74837776b4a2bfacd0c7367565cb397c73255025f",
+          "byteLength": 25950,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-5-86f13e5248",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/6cp5asodo0pjro67de7tf2jne9/w620x413.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-main-floor-for-modern-house-plan-1064-db29505171",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-5-4573d1f5bd",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "f68b8c7c45ac550f46bcf6825de379eb97ce2690612a6d911c83258183d3add2",
+          "byteLength": 21833,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-5-4573d1f5bd",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/6cp5asodo0pjro67de7tf2jne9/w560x373.jpg?v=5"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-other-floor-for-modern-house-plan-106-41489abd2f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w1024-jpg-v-6-f860ffc574",
+      "selectionReason": "only variant (1024x731, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.400821,
+          "byteHash": "36168a5c635f943b3cf2c3ce9637b9ff7743cc4ddec8264609f871041934c0ad",
+          "byteLength": 63103,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 731,
+            "width": 1024
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w1024-jpg-v-6-f860ffc574",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/o22ce7g4sbro6b6dbf6g18obh8/w1024.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-other-floor-for-modern-house-plan-106-82ebb1ffc6",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w560x373-jpg-v-6-d09c1bcff5",
+      "selectionReason": "only variant (560x373, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.50134,
+          "byteHash": "e19117bb128fe8a4c537d69d6c06e2934ef68cb857bff0d03cbb844c974b33e5",
+          "byteLength": 22280,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 560
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w560x373-jpg-v-6-d09c1bcff5",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/o22ce7g4sbro6b6dbf6g18obh8/w560x373.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath",
+      "id": "asset-floor-plan-other-floor-for-modern-house-plan-106-e2e7444668",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Other Floor for Modern House Plan #1064-319 - 2 bed, 2 bath\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-w620x413-jpg-v-6-5b64ed21a8",
+      "selectionReason": "only variant (620x413, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.501211,
+          "byteHash": "64e29c92c0a4a5d2b80e728f7188013c80ce13c1bc3bd79d17e35859053ad484",
+          "byteLength": 25727,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 413,
+            "width": 620
+          },
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w620x413-jpg-v-6-5b64ed21a8",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn.houseplansservices.com/product/o22ce7g4sbro6b6dbf6g18obh8/w620x413.jpg?v=6"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-6247e063ea-23834605e3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.729459,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "byteLength": 97045,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 499,
+            "width": 364
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-nav-blog-home-exterior-jpg-v-6247e063ea-3bb33cf883",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-6247e063ea-b501cfeb71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.6575,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "byteLength": 67440,
+          "declared": {
+            "height": 400,
+            "width": 252
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 263
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-nav-styles-vert-exterior-jpg-v-6247e063ea-2e862e62be",
+          "mediaType": "image/jpeg",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 1064-319",
+      "id": "asset-plan-1064-319-fd37ae8f6c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-w300x200-png-v-2-c98c8ef8d1",
+      "selectionReason": "only variant (300x200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "3d657906a5e07acdbdbd30105f25cefd3601800a3caa7f55b98c57028c43011b",
+          "byteLength": 105312,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 300
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-w300x200-png-v-2-c98c8ef8d1",
+          "mediaType": "image/png",
+          "url": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w300x200.png?v=2"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-0452f0dc62",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "byteLength": 95997,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-rcg-mechanical-png-v-6247e063ea-bc036f3a41",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-271ada044c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.339286,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "byteLength": 87450,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 448,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-rcg-construction-png-v-6247e063ea-c6bddf680d",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=6247e063ea"
+        }
+      ]
+    },
+    {
+      "caption": "Thumbnail",
+      "id": "asset-thumbnail-7ca11282d6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "byteLength": 73202,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+          "id": "var-rcg-plumbing-png-v-6247e063ea-473eaeec3e",
+          "mediaType": "image/png",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=6247e063ea"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.houseplans.com/plan/1160-square-feet-2-bedroom-2-bathroom-0-garage-modern-contemporary-sp350881",
+  "contentHash": "ba342707ecf3547554676d26a4293328bbcc0bd6c55cf2680b7984b61f16de99",
+  "failures": [
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 0.990329: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/6cp5asodo0pjro67de7tf2jne9/w560x373.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 0.990329: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/6cp5asodo0pjro67de7tf2jne9/w620x413.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.07001: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/adp320gdsrdk8tkllefa7uv3i2/w560x373.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 1.07001: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/adp320gdsrdk8tkllefa7uv3i2/w620x413.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.75 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/original.png?v=2"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.750427 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w1024.png?v=2"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.749271 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/ne3i0toe1lbckt62dvj3epi6r1/w600.png?v=2"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.400821: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/o22ce7g4sbro6b6dbf6g18obh8/w560x373.jpg?v=6"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 1.400821: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/o22ce7g4sbro6b6dbf6g18obh8/w620x413.jpg?v=6"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.777778: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/w560x373.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 1.777778: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/omrjopdgpgdiafo1tpogeljpu7/w800x533.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 0.873913: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/w560x373.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 0.873913: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/r92ag24rje8nkoh4dki8dnaunc/w800x533.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.777778: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/w560x373.jpg?v=5"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 1.777778: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/vmal213dij9ivln2kt4lnve8ee/w800x533.jpg?v=5"
+    }
+  ],
+  "id": "src-1064-319-b35f95f551",
+  "pageHash": "0661ee2e5cef76930f59d4c1fc32ea5dd24e087149039bd8b09ac557a6e9a657",
+  "project": {
+    "externalId": "1064-319",
+    "name": "Modern Style House Plan - 2 Beds 2 Baths 1160 Sq/Ft Plan #1064-319",
+    "publisher": "houseplans.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "raw": "21' 3\"",
+      "unit": "m",
+      "value": 6.477
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "43'",
+      "unit": "m",
+      "value": 13.106
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "40'",
+      "unit": "m",
+      "value": 12.192
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "construction",
+      "label": "Construction Notes and Detail(s)",
+      "text": "Shows basic parts and assemblies recommended for the home so the builder can see how things come together."
+    },
+    {
+      "key": "description",
+      "label": "description",
+      "text": "In some regions, there is a second step you will need to take to ensure your house plans are in compliance with local codes. Some areas of North America have very strict engineering requirements. Examples of this would be, but not limited to, earthquake-prone areas of California and the Pacific Coast, hurricane risk areas of the Florida, Gulf &amp; Carolina Coasts. New York, New Jersey, Nevada, and parts of Illinois require review by a local professional as well. If you are building in these areas, it is most likely you will need to hire a state licensed structural engineer to analyze the design and provide additional drawings and calculations required by your building department. If you aren’t sure, building departments typically have a handout they will give you listing all of the items they require to submit for and obtain a building permit."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Plan(s)",
+      "text": "This page shows all necessary notations and dimensions including footings, support columns, walls, and excavated/unexcavated areas."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This modern design floor plan is 1160 sq ft and has 2 bedrooms and 2 bathrooms."
+    },
+    {
+      "key": "walls",
+      "label": "Wall Section(s)",
+      "text": "Wall Sections for Porches, Main Structure, Garage, and Foundations (as Per Plan)"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

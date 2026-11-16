@@ -1,0 +1,62 @@
+{
+  "slug": "fresh-sa-agawa",
+  "imagesUsed": [
+    {"n": 5, "what": "ground plan, entrance at bottom, garage right; printed 1.20+8.70+5.55=15.45 and 2.65+7.30+1.15=11.10 (+ outer 1.20)"},
+    {"n": 6, "what": "attic plan, same scale; balconies front, rear, left"},
+    {"n": 3, "what": "front elevation"},
+    {"n": 4, "what": "rear elevation"},
+    {"n": 2, "what": "left elevation"},
+    {"n": 1, "what": "right elevation (garage gable)"},
+    {"n": 8, "what": "render front-right"},
+    {"n": 9, "what": "render front-left"},
+    {"n": 10, "what": "render rear-left"}
+  ],
+  "mirrorOrOtherProjectWarning": "07 is a 32 px loading spinner, not a section; 11-23 are interiors. No other project or mirrored copy: plan, elevations and renders agree (garage right, glazed dining bay left).",
+  "overall": {"widthM": 15.45, "depthM": 11.1, "heightM": 8.7, "basis": "15.45 x 11.10 printed (plan 5) and published; 15.45 includes the closed glazed dining bay (1.20); outer 1.20 beyond 11.10 marks the open entrance platform/front balcony, excluded. Height published; no section."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "left block, gables front and rear, cross gable left; attic rooms", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "8.70 x 11.10"},
+    {"name": "dining bay", "role": "BAY", "where": "left side mid-depth, glazed, balcony on top under the left cross gable", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "1.20 x 3.95"},
+    {"name": "garage wing", "role": "GARAGE", "where": "right, front set back 1.15; garage, boiler room, bathroom; attic bedroom above", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "5.55 x 7.30"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 42, "notes": "Cross-gabled: main ridge front-to-back, timber-framed gables (collar beam) front and rear; lower cross gable facing left over the dining bay; garage-wing gable roof, ridge along the front, plain right gable. Deep timber verges. Pitch published."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "LEFT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 6, "leftToRight": ["WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW", "GARAGE_DOOR"]}, {"storey": 1, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "ROOF_WINDOW", "ROOF_WINDOW"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING", "GLAZED_DOOR"]}, {"storey": 1, "count": 4, "leftToRight": ["ROOF_WINDOW", "ROOF_WINDOW", "GLAZED_DOOR", "GLAZED_DOOR"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "WINDOW"]}, {"storey": 1, "count": 2, "leftToRight": ["GLAZED_DOOR", "ROOF_WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}, {"storey": 1, "count": 3, "leftToRight": ["ROOF_WINDOW", "WINDOW", "ROOF_WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "CENTRE", "what": "glazed dining bay: left face floor-to-ceiling about 3.9 m, plus glazed rear face with door to the covered terrace"},
+    {"facade": "REAR", "position": "CENTRE", "what": "living-room glazing about 3.0 m wide, floor level, under the rear balcony"}
+  ],
+  "features": [
+    {"kind": "BALCONY", "count": 3, "where": "front gable over entrance (on wall + round column), rear gable cantilever, left gable on top of the dining bay"},
+    {"kind": "COLUMN", "count": 2, "where": "round column at the front entrance platform; round column at the outer corner of the rear-left covered terrace"},
+    {"kind": "CHIMNEY", "count": 2, "where": "one at the main ridge, one taller stone-clad stack on the garage-wing roof near the junction; plus a small vent cap"},
+    {"kind": "ROOF_WINDOW", "count": 7, "where": "2 on each garage-wing slope, 1 on main left slope, 2 on main right slope (from elevations)"},
+    {"kind": "OTHER", "count": 1, "where": "kitchen corner window at the front-left corner of the main block"}
+  ],
+  "palette": {"walls": "white/light grey textured render, mid-grey render accents, grey stone cladding on plinth and terrace parapets; light timber verges, soffits and gable collar beams; golden-oak window frames; graphite railings; timber garage door", "roof": "graphite flat tiles"},
+  "uncertain": [
+    "Tall narrow rear boiler-room opening (0.6 m) read as WINDOW; could be a door.",
+    "Rooflight count from elevations only.",
+    "Garage door ~0.4 m behind the garage front face.",
+    "Published built-up 149.45 m2 > closed outline ~134.8 (covered terrace/entrance platform presumably included).",
+    "Cross-gabled roof: ACROSS_FRONT is the main block only."
+  ],
+  "confidence": "HIGH - dimensioned ground plan, attic plan, four elevations and three renders agree.",
+  "groundOutline": {"shape": "OTHER", "corners": 12, "polygonM": [[1.2, 0], [9.9, 0], [9.9, 1.15], [15.45, 1.15], [15.45, 8.45], [9.9, 8.45], [9.9, 11.1], [3.65, 11.1], [3.65, 8.25], [0, 8.25], [0, 4.3], [1.2, 4.3]], "closedAreaM2": 134.8, "basis": "origin = bounding-box front-left (dining bay left face, main front line). Printed chains give 1.20/8.70/5.55 and 2.65/7.30/1.15; bay depth (3.95) and covered-terrace inset (2.45 x 2.85, excluded) scaled at ~71 px/m."},
+  "openZones": [
+    {"kind": "TERRACE", "roofed": false, "where": "rear-left, round terrace with curved steps wrapping the dining bay and covered terrace", "approxSizeM": "about 8.5 across"},
+    {"kind": "TERRACE", "roofed": true, "where": "rear-left corner recessed under attic room 3, round column at the outer corner", "approxSizeM": "2.45 x 2.85"},
+    {"kind": "PORCH", "roofed": true, "where": "front, raised semicircular entrance platform with stone parapet and steps; door zone under the front balcony", "approxSizeM": "about 7.7 x 3.2; roofed part ~4.2 x 1.2"},
+    {"kind": "BALCONY", "roofed": false, "where": "front gable, attic", "approxSizeM": "4.2 x 1.3"},
+    {"kind": "BALCONY", "roofed": false, "where": "rear gable, attic, partly under the verge overhang", "approxSizeM": "4.2 x 1.3"},
+    {"kind": "BALCONY", "roofed": true, "where": "left cross gable, on top of the dining bay", "approxSizeM": "1.3 x 3.95"}
+  ],
+  "printedOverall": {"widthCm": 1545, "depthCm": 1110, "where": "picture 5: bottom outer chain '15.45', right outer chain '11.10'"},
+  "groundRooms": 10
+}

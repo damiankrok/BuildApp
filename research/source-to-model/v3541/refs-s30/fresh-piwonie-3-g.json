@@ -1,0 +1,65 @@
+{
+  "slug": "fresh-piwonie-3-g",
+  "imagesUsed": [
+    {"n": 16, "what": "ground plan, dimensioned: top 510+860+380=1750, left 700+860=1560; front at the bottom; 06 and 13 copies"},
+    {"n": 3, "what": "front elevation ('frontowa')"},
+    {"n": 4, "what": "rear elevation ('ogrodowa')"},
+    {"n": 1, "what": "side with terrace/pergola at the left, front on the right = LEFT facade"},
+    {"n": 2, "what": "side with garage at the left = RIGHT facade"},
+    {"n": 5, "what": "section: ridge +6.24 (lower ridge over garage side), eaves +2.90, 30 deg, room 274, ground -0.32"},
+    {"n": 7, "what": "site plan 1750 x 1560, cross-hip roof, rear-left deck with slatted pergola"},
+    {"n": 9, "what": "front-left render (10 front, 12/18 front variants)"},
+    {"n": 19, "what": "render of the left side with timber pergola (14 similar)"}
+  ],
+  "mirrorOrOtherProjectWarning": "Not mirrored. Renders 12, 18 and 19 show a colour variant with a timber entrance door and timber pergola; the elevations match the grey/white renders 09/10. Geometry is the same in all.",
+  "overall": {"widthM": 17.5, "depthM": 15.6, "heightM": 6.56, "basis": "printed 1750 x 1560 on plan 16 and site plan 07 (closed walls; rear-left terrace lies within the 510 x 700 corner); height = +6.24 over ground -0.32 = published 6.56"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "front block", "role": "MAIN", "where": "living/kitchen left, entrance and boiler room centre, single garage right (garage and centre set back 0.85 m)", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "17.50 x 8.60"},
+    {"name": "bedroom wing", "role": "WING", "where": "centre, projecting 7.0 m behind the living wing and garage", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "8.60 x 7.00 beyond the front block"},
+    {"name": "rear-left pergola", "role": "PERGOLA", "where": "behind the living room, against the bedroom wing's left face, slatted top", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 4.7 x 3.9"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Cross-hip roof. Top ridge along the front (about 5 m) over the living/centre part turns into a front-to-back ridge (about 7 m) over the bedroom wing; lower along-front ridge over the garage."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 5, "leftToRight": ["LARGE_GLAZING", "WINDOW", "DOOR", "ENTRANCE_DOOR", "GARAGE_DOOR"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "FRONT", "position": "LEFT", "what": "330/230 glazing at the front-left corner of the living room (100/230 window beside it on the left wall)"},
+    {"facade": "REAR", "position": "RIGHT", "what": "400/230 slider of the living room under the pergola"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 3, "where": "two near the top ridge left of centre, one on the lower garage-side roof"},
+    {"kind": "PERGOLA", "count": 1, "where": "rear-left terrace"},
+    {"kind": "TERRACE", "count": 1, "where": "deck in the rear-left corner, 510 x 700, partly under the pergola"},
+    {"kind": "OTHER", "count": 1, "where": "entrance and boiler-room door recessed 0.85 m behind the living front under the eaves, closed on the right by a white wing wall"}
+  ],
+  "palette": {"walls": "white render with graphite-grey render panels (living front, entrance zone, left facade), light grey cladding in the entry recess; variant renders add timber door/pergola", "roof": "graphite flat roof tiles, graphite chimneys"},
+  "groundOutline": {"shape": "T", "corners": 10, "polygonM": [[0, 0], [8.8, 0], [8.8, 0.85], [17.5, 0.85], [17.5, 7.77], [13.7, 7.77], [13.7, 15.6], [5.1, 15.6], [5.1, 8.6], [0, 8.6]], "closedAreaM2": 200.2, "basis": "x from chain 510/860/380, z from 700/860 on plan 16; 0.85 m set-back of centre/garage, garage rear 7.77 and step at 8.8 scaled; published footprint 205.28"},
+  "openZones": [
+    {"kind": "PERGOLA", "roofed": false, "where": "rear-left, behind living room", "approxSizeM": "4.7 x 3.9"},
+    {"kind": "TERRACE", "roofed": false, "where": "rear-left corner beside bedroom wing, rest of the deck", "approxSizeM": "about 6.0 x 3.1"},
+    {"kind": "PORCH", "roofed": true, "where": "front entrance recess under the eaves", "approxSizeM": "about 4.3 x 1.6"}
+  ],
+  "printedOverall": {"widthCm": 1750, "depthCm": 1560, "where": "plan 16 top and left chains; site plan 07"},
+  "groundRooms": 16,
+  "uncertain": [
+    "Garage front drawn about 0.85 m behind the living front (scaled, not dimensioned).",
+    "FRONT third opening is the glazed 100/210 boiler-room door in the entry recess.",
+    "Roof ridges run both ways; ALONG_FRONT chosen for the 17.5 m front block.",
+    "Pergola top slatted in site plan and renders; roofed=false."
+  ],
+  "confidence": "HIGH - dimensioned plan, section, four elevations, site plan and renders agree; only colour differs between render sets."
+}

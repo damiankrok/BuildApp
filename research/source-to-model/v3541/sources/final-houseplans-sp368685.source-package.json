@@ -1,0 +1,2150 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-932-1329-808f69a041",
+  "canonicalUrl": "https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+  "pageHash": "28f819d66cc6c7ca772ab1ca1a86ef683568a37231f48116e9cf808f6189bf7e",
+  "project": {
+    "externalId": "932-1329",
+    "name": "Contemporary Style House Plan - 2 Beds 1.5 Baths 1515 Sq/Ft Plan #932-1329",
+    "publisher": "houseplans.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-453-56-048faa47c5",
+      "caption": "453-56",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-22-8554021bfc",
+          "url": "https://cdn.houseplansservices.com/product/4151i0m2pbno9cnd08kba68317/w560x373.jpg?v=22",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 72097,
+          "byteHash": "d7c0c4a4a5fe05e346e0cf299bb0476464be6d31e64cb5d150669d6f85c743c8",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-22-8554021bfc",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-892-47-22897c87f3",
+      "caption": "892-47",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-21-0c83406a81",
+          "url": "https://cdn.houseplansservices.com/product/9df8q3cnjg2ibul78vrc4o4b8s/w560x373.jpg?v=21",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 30820,
+          "byteHash": "b5f7003b85a8cc9f375e8b4a672f2b67becdbfa18a1421e8c794dddb1a4b13d2",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-21-0c83406a81",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-938-119-497587024b",
+      "caption": "938-119",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-3-08e4c1465d",
+          "url": "https://cdn.houseplansservices.com/product/8kpr4or6l44mpllhgfnkdcjpa7/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 79549,
+          "byteHash": "7d807e05c569156374d0494190424b63ea6241345a95a9fc99c488fc97529b4a",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-3-08e4c1465d",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "caption": "Builder Advantage Home",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/png",
+          "byteLength": 215913,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "decoded": {
+            "width": 890,
+            "height": 614
+          },
+          "declaredMismatch": false,
+          "aspect": 1.449511
+        }
+      ],
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-1ed1321d84",
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-jpg-v-3-e3f10cd452",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/original.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 6230639,
+          "byteHash": "49e30ab435b399532590783d4b917a302cd1f1ceba3467e01645e0192f65e5b3",
+          "decoded": {
+            "width": 5792,
+            "height": 4316
+          },
+          "declaredMismatch": false,
+          "aspect": 1.341983
+        }
+      ],
+      "selectedVariantId": "var-original-jpg-v-3-e3f10cd452",
+      "selectionReason": "only variant (5792x4316, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-60056d154d",
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-3-32e9ac6f56",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w800x533.jpg?v=3",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 108194,
+          "byteHash": "29d20479f7d435392171ebcb8e07599c7523e755861f3f8b69d155f28396ce57",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-3-b1851f956b",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w620x413.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 65343,
+          "byteHash": "f0c81318e163a499b27b34b0c33a1f4a6d7e32e745399075c4c877abbc72445e",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-3-32e9ac6f56",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-bdce0a5313",
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w600-jpg-v-3-d6e99ec16f",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w600.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 66932,
+          "byteHash": "84371623da3f2475aade7a2961d843e24169624c35b8775b3f219c9d77c9e8e3",
+          "decoded": {
+            "width": 600,
+            "height": 447
+          },
+          "declaredMismatch": false,
+          "aspect": 1.342282
+        }
+      ],
+      "selectedVariantId": "var-w600-jpg-v-3-d6e99ec16f",
+      "selectionReason": "only variant (600x447, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-contemporary-hous-bfa57688a8",
+      "caption": "Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w1024-jpg-v-3-4ec23ac0a6",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w1024.jpg?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 191399,
+          "byteHash": "a7d013c1c43381e2cdb13d76945ae4bfba510002ee43cee6ab70218a15c467ca",
+          "decoded": {
+            "width": 1024,
+            "height": 763
+          },
+          "declaredMismatch": false,
+          "aspect": 1.342071
+        }
+      ],
+      "selectedVariantId": "var-w1024-jpg-v-3-4ec23ac0a6",
+      "selectionReason": "only variant (1024x763, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-3-for-contemporary-hous-0bddc57235",
+      "caption": "Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-4-edbef5baf1",
+          "url": "https://cdn.houseplansservices.com/product/9ehukf6f7d3e4nem80okfk6qra/w800x533.JPG?v=4",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 117752,
+          "byteHash": "94b4d92f8f9511d89baa6124548657202ada4637bd929bd5fef11d087762f6fd",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-4-d7102a80e0",
+          "url": "https://cdn.houseplansservices.com/product/9ehukf6f7d3e4nem80okfk6qra/w620x413.JPG?v=4",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 72423,
+          "byteHash": "5bbe4f10986d1fb86bad6a13cfbba9977b08cb4081f4fe35e499fbed47f4e6e0",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-4-db4c7c8fca",
+          "url": "https://cdn.houseplansservices.com/product/9ehukf6f7d3e4nem80okfk6qra/w560x373.JPG?v=4",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 57553,
+          "byteHash": "010456d0160f993f303686b12df93e648c9b5bdbccaa05239e3e0808b68f344b",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-4-edbef5baf1",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-front-elevation-4-for-contemporary-hous-e77b6f4ecf",
+      "caption": "Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-7-308cca1503",
+          "url": "https://cdn.houseplansservices.com/product/o6aqkps31b6b1lu0qmhi5c2erl/w800x533.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 44901,
+          "byteHash": "234357519747b83f8566dfe0050f72e3191fa13c7c4db236be511313525d32dc",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-7-b18d825690",
+          "url": "https://cdn.houseplansservices.com/product/o6aqkps31b6b1lu0qmhi5c2erl/w620x413.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 29372,
+          "byteHash": "159d56bdfcdae851a20f572e7b69b720e3e447a146714bb0d57fb09053fedcc4",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-7-62aa1ade97",
+          "url": "https://cdn.houseplansservices.com/product/o6aqkps31b6b1lu0qmhi5c2erl/w560x373.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 24469,
+          "byteHash": "43aaec662f193a3b451aeaa1792d36e7da3e2c6a8c8914724975fd1df743e153",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-7-308cca1503",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-2fee6441cc",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #932-179 - 3 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #932-179 - 3 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #932-179 - 3 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-12-a66aa9abd3",
+          "url": "https://cdn.houseplansservices.com/product/qttg24orb00f7ob0dfc0sjkc5l/w300x200.jpg?v=12",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 18139,
+          "byteHash": "6115cb710005ce50a73373456e8744eec2a693c42cb620cda12386fd7e334993",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-12-a66aa9abd3",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-534599efb9",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #932-1250 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #932-1250 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #932-1250 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-c653ac6745",
+          "url": "https://cdn.houseplansservices.com/product/virrmbmgbh7kmn1q2vhmtvhmem/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 18270,
+          "byteHash": "56968e4f68fb52f18f3a72a0a8c2ab3d0c71774b866815d07684ffc04fc458f5",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-c653ac6745",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-8e88cbe4c3",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-3-fb653611f9",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 54035,
+          "byteHash": "555c306f72dbc832d9583bf1c537afe0d3f8aae9f27c3249e755f6480ee16516",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350,
+            "height": 233
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-3-fb653611f9",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-ee9aa2bbe5",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #932-913 - 2 bed, 2.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #932-913 - 2 bed, 2.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #932-913 - 2 bed, 2.5 bat\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-f4b8428dbf",
+          "url": "https://cdn.houseplansservices.com/product/irvdp9d7eo90t2ped54jcgvh01/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 12794,
+          "byteHash": "aaf150be561a1a3cddb80384a493e2140eeb471f2904219335fb578de858fdb4",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-f4b8428dbf",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-traditional-house-p-06537e0843",
+      "caption": "Exterior - Front Elevation for Traditional House Plan #932-488 - 2 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Traditional House Plan #932-488 - 2 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Traditional House Plan #932-488 - 2 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-5-c366856f21",
+          "url": "https://cdn.houseplansservices.com/product/ats9if1adqu7buj9ec98frcks4/w300x200.jpg?v=5",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 17257,
+          "byteHash": "c94e589d2c5669be7b14ef4c2b3cd73dada838b31c5a05f2ab18e8ba78c6acdb",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-5-c366856f21",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-traditional-house-p-dbbe75c8a2",
+      "caption": "Exterior - Front Elevation for Traditional House Plan #932-622 - 2 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Traditional House Plan #932-622 - 2 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Traditional House Plan #932-622 - 2 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-8da73fb3b9",
+          "url": "https://cdn.houseplansservices.com/product/csro4oveq9r0ef9kg921bmgrqg/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 14810,
+          "byteHash": "2b48e4bad7cbc3d994acc6ca23a52be6ae841e730a0c05ab4c350dfa5f35db41",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-8da73fb3b9",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-1-for-contemporary-hous-1b282979e6",
+      "caption": "Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-5-6946a56ef2",
+          "url": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/w560x373.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 43354,
+          "byteHash": "fa83b6cf1c97573b1f34a4a1fa895983d2dd0243fd40db70f178a99e619275c4",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-5-6946a56ef2",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-1-for-contemporary-hous-99c3d6726d",
+      "caption": "Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-5-4e063070e7",
+          "url": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/w800x533.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 89175,
+          "byteHash": "f4b343d57747e66c3c6365252620ff42161dd46a2cbdb5f2973b541275881d35",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-5-4e063070e7",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-1-for-contemporary-hous-a121573ed9",
+      "caption": "Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 1 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-jpg-v-5-22ddcb5f73",
+          "url": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/original.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 295636,
+          "byteHash": "fa85169a0ef9f9840ff8fe00edc56b60ee80f383359b2686ae4e2a5e2f2a0e66",
+          "decoded": {
+            "width": 1702,
+            "height": 972
+          },
+          "declaredMismatch": false,
+          "aspect": 1.751029
+        },
+        {
+          "id": "var-w1024-jpg-v-5-cf6b279d53",
+          "url": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/w1024.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 136304,
+          "byteHash": "63461affd37c9d3a11fc84abf07e3401e6fe3d23cf29fc9070a335d847b5fded",
+          "decoded": {
+            "width": 1024,
+            "height": 585
+          },
+          "declaredMismatch": false,
+          "aspect": 1.750427
+        }
+      ],
+      "selectedVariantId": "var-original-jpg-v-5-22ddcb5f73",
+      "selectionReason": "largest decoded raster of 2 variants: 1702x972 over 1024x585"
+    },
+    {
+      "id": "asset-exterior-other-elevation-2-for-contemporary-hous-cf7a57e008",
+      "caption": "Exterior - Other Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 2 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-5-3afb19769d",
+          "url": "https://cdn.houseplansservices.com/product/4glno02i7jurg26564d8v9pkfm/w800x533.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 79256,
+          "byteHash": "8d044ef2295242626595f1bc078bba3e5ec012e905ff488bc0068e46415a32f2",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-5-9a2bd2e0d9",
+          "url": "https://cdn.houseplansservices.com/product/4glno02i7jurg26564d8v9pkfm/w620x413.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 46656,
+          "byteHash": "e563bcfc0f88cd5dc7af895d33efb0e89093295f7f04eb957789cd1170a29198",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-5-6565ae1f2a",
+          "url": "https://cdn.houseplansservices.com/product/4glno02i7jurg26564d8v9pkfm/w560x373.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 38262,
+          "byteHash": "c705f1397e8e2c5e2cddb2831bc400d881bbeec17509de5ccea88fe2107cd839",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-5-3afb19769d",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-other-elevation-3-for-contemporary-hous-410849ab21",
+      "caption": "Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-7-aba0ba8153",
+          "url": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/w800x533.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 32112,
+          "byteHash": "14128d2231694cef5e913aebc6a58673164fbccce72f7d345d383c4be990bf45",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-7-aba0ba8153",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-3-for-contemporary-hous-48ef237777",
+      "caption": "Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-jpg-v-7-a294d27171",
+          "url": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/original.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 188966,
+          "byteHash": "db0836a686c911bda2a2cfb701c86ff8fc2396db66543cd858fca1643b836f16",
+          "decoded": {
+            "width": 2850,
+            "height": 1827
+          },
+          "declaredMismatch": false,
+          "aspect": 1.559934
+        },
+        {
+          "id": "var-w1024-jpg-v-7-619778a7b7",
+          "url": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/w1024.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 46202,
+          "byteHash": "a7e50129648c12e58ea3b302721568ec387f3390a91b89cdbde93902c0fdf189",
+          "decoded": {
+            "width": 1024,
+            "height": 656
+          },
+          "declaredMismatch": false,
+          "aspect": 1.560976
+        }
+      ],
+      "selectedVariantId": "var-original-jpg-v-7-a294d27171",
+      "selectionReason": "largest decoded raster of 2 variants: 2850x1827 over 1024x656"
+    },
+    {
+      "id": "asset-exterior-other-elevation-3-for-contemporary-hous-9400c81291",
+      "caption": "Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 3 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-7-d8d8f5dba3",
+          "url": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/w560x373.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 20038,
+          "byteHash": "2d1332250f8da8ba774f2c87356f78fdb18282a30ac84e55c006ef40d7251063",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-7-d8d8f5dba3",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-other-elevation-4-for-contemporary-hous-8e3bfe8844",
+      "caption": "Exterior - Other Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation 4 for Contemporary House Plan #932-1329 - 2 bed, 1.5 \")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-7-c4a6ae957a",
+          "url": "https://cdn.houseplansservices.com/product/pi3lr0u29v642rq85ersjfi4u6/w800x533.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 32842,
+          "byteHash": "bb7d84da001106ea252fa52d10a713c9eb4722c9b1abf08c1f6a2cccc51a276c",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-7-28e630e13b",
+          "url": "https://cdn.houseplansservices.com/product/pi3lr0u29v642rq85ersjfi4u6/w620x413.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 22585,
+          "byteHash": "58fcecc36ca7ae0919d0c34c62731b902e4e3a362225cd4b839d1392e77376cf",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-7-42af4ecd05",
+          "url": "https://cdn.houseplansservices.com/product/pi3lr0u29v642rq85ersjfi4u6/w560x373.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 19922,
+          "byteHash": "d044277d0d3b0dff592088c4aa45dbb79d131ced316181a9d2d0478712d64862",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-7-c4a6ae957a",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-other-elevation-for-contemporary-house-5ab23d208c",
+      "caption": "Exterior - Other Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Other Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 ba\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-5-d34416250a",
+          "url": "https://cdn.houseplansservices.com/product/m0rqvpmldmlubttpcnspbhu76m/w800x533.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 107678,
+          "byteHash": "6bb7a0d944f0ffe051b311450c2a13857c28b7e661b367d9b8b53ed19396985b",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-5-3c09bbd374",
+          "url": "https://cdn.houseplansservices.com/product/m0rqvpmldmlubttpcnspbhu76m/w620x413.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 63019,
+          "byteHash": "68be4bffbbffd89ef6e8eb07ae46a6d4f1095d0dfa714c284c48154c283b66b0",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-5-e4e71a4769",
+          "url": "https://cdn.houseplansservices.com/product/m0rqvpmldmlubttpcnspbhu76m/w560x373.JPG?v=5",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 51121,
+          "byteHash": "183af9b37df77e2be3295b17d9291e9f9a64f7d14d8618e4119865cfbc9c80db",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-5-d34416250a",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-rear-elevation-for-contemporary-house-p-a8ec176ce3",
+      "caption": "Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"Exterior - Rear Elevation for Contemporary House Plan #932-1329 - 2 bed, 1.5 bat\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-7-b19a1c2642",
+          "url": "https://cdn.houseplansservices.com/product/aouc927mf9h5hfietmqfp3u8ho/w800x533.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 19256,
+          "byteHash": "d2d15d7530ea889955d4d18540d93130017fcbc356e39b174cd1bd2a4456d9dd",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-jpg-v-7-3c34450b0c",
+          "url": "https://cdn.houseplansservices.com/product/aouc927mf9h5hfietmqfp3u8ho/w620x413.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 12296,
+          "byteHash": "2dce8221e7c9c31469afdf75054d75046a222e85a53064a4daa53f0ed5b5528d",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        },
+        {
+          "id": "var-w560x373-jpg-v-7-044459bb13",
+          "url": "https://cdn.houseplansservices.com/product/aouc927mf9h5hfietmqfp3u8ho/w560x373.jpg?v=7",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 10620,
+          "byteHash": "65b12d3c506079011ae0372c01a82aae481e6b0fe77a95a3629d0139b1887070",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-7-b19a1c2642",
+      "selectionReason": "largest decoded raster of 3 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-floor-plan-lower-floor-for-contemporary-house-pl-994c2c10b5",
+      "caption": "Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w1024-jpg-v-8-fdf50b34d9",
+          "url": "https://cdn.houseplansservices.com/product/u2ksork2d0n57pniijjbb62d8m/w1024.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 113821,
+          "byteHash": "c6ba67eeaea9ac29bad2cd0c7c779e6b8670cbbcb53fbfbbebd562380cbd0811",
+          "decoded": {
+            "width": 1024,
+            "height": 1787
+          },
+          "declaredMismatch": false,
+          "aspect": 0.573027
+        }
+      ],
+      "selectedVariantId": "var-w1024-jpg-v-8-fdf50b34d9",
+      "selectionReason": "only variant (1024x1787, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-lower-floor-for-contemporary-house-pl-b57540911b",
+      "caption": "Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w620x413-jpg-v-8-bec75421c3",
+          "url": "https://cdn.houseplansservices.com/product/u2ksork2d0n57pniijjbb62d8m/w620x413.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 15128,
+          "byteHash": "510aa7592f34cbacb72bfdbbe1f742a661cccf1466d1cc2c2ea9b1534cdde546",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        }
+      ],
+      "selectedVariantId": "var-w620x413-jpg-v-8-bec75421c3",
+      "selectionReason": "only variant (620x413, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-lower-floor-for-contemporary-house-pl-fe63435472",
+      "caption": "Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Lower Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-8-c07aaa7a5a",
+          "url": "https://cdn.houseplansservices.com/product/u2ksork2d0n57pniijjbb62d8m/w560x373.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 12643,
+          "byteHash": "e0e68c96d01cb26ed1328ea54a4d4699e3a482f4f7603b7fad5acc366aa43ae5",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-8-c07aaa7a5a",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-76ab37f045",
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-8-e03af6d4ad",
+          "url": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/w560x373.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 17842,
+          "byteHash": "2912fd4e6ae40f30de19fd8761287564295d3f21d52aec9f11bafe5f744401fd",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-8-e03af6d4ad",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-b159ef2bcd",
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-jpg-v-8-f3fc2a3729",
+          "url": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/original.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 297665,
+          "byteHash": "f9ca55ebead1cd8d7e34387dd13c6d0d7183fdc0f2d0e08633c42de9164b697a",
+          "decoded": {
+            "width": 1373,
+            "height": 2850
+          },
+          "declaredMismatch": false,
+          "aspect": 0.481754
+        },
+        {
+          "id": "var-w1024-jpg-v-8-e49d91a165",
+          "url": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/w1024.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 215936,
+          "byteHash": "11c3d37843b5e4fe4b103f740310f4108a9801612830c7e5fde993386d9304da",
+          "decoded": {
+            "width": 1024,
+            "height": 2126
+          },
+          "declaredMismatch": false,
+          "aspect": 0.481656
+        }
+      ],
+      "selectedVariantId": "var-original-jpg-v-8-f3fc2a3729",
+      "selectionReason": "largest decoded raster of 2 variants: 1373x2850 over 1024x2126"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-contemporary-house-pla-df6df73a00",
+      "caption": "Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Contemporary House Plan #932-1329 - 2 bed, 1.5 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-jpg-v-8-f7fed0b47e",
+          "url": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/w800x533.jpg?v=8",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 29697,
+          "byteHash": "d5d564aae5ecfffd7971d9f4601ad58047bdd98ccef8121b029c996e63989d39",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-w800x533-jpg-v-8-f7fed0b47e",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-839ab8c26b-3e60b98840",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 97045,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "decoded": {
+            "width": 364,
+            "height": 499
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.729459
+        }
+      ],
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-839ab8c26b-af801857ef",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 67440,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "decoded": {
+            "width": 263,
+            "height": 400
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.6575
+        }
+      ],
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-photo-for-contemporary-house-plan-932-216-1-bed-673798c35b",
+      "caption": "Photo for Contemporary House Plan #932-216 - 1 bed, 2 bath",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-8-8beca6202b",
+          "url": "https://cdn.houseplansservices.com/product/84nku9lta6bgd3m7828bkihgjc/w300x200.jpg?v=8",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 20639,
+          "byteHash": "1b3d7eee86fa0e316b87e24998daefb8ef916047ccb8db0db06c05325b1f968a",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-8-8beca6202b",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-932-1329-f1d63b89c5",
+      "caption": "Plan 932-1329",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w300x200-jpg-v-3-43585d1f55",
+          "url": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w300x200.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/jpeg",
+          "byteLength": 18092,
+          "byteHash": "9ce270859eed5ddc9ce8b4140dcc90ecc51197ef62c40425f6be9afd20095831",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-jpg-v-3-43585d1f55",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-465700b897",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/png",
+          "byteLength": 87450,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "decoded": {
+            "width": 600,
+            "height": 448
+          },
+          "declaredMismatch": false,
+          "aspect": 1.339286
+        }
+      ],
+      "selectedVariantId": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-8a0596b514",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/png",
+          "byteLength": 73202,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-c039d29147",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/1515-square-feet-2-bedroom-1-5-bathroom-2-garage-contemporary-modern-european-sp368685",
+          "mediaType": "image/png",
+          "byteLength": 95997,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "value": 8.407,
+      "unit": "m",
+      "raw": "27' 7\""
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 14.351,
+      "unit": "m",
+      "raw": "47' 1\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 7.01,
+      "unit": "m",
+      "raw": "23'"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "construction",
+      "label": "Construction Notes / Detail(s)",
+      "text": "Shows basic parts and assemblies recommended for the home so the builder can see how things come together."
+    },
+    {
+      "key": "description",
+      "label": "description",
+      "text": "In some regions, there is a second step you will need to take to ensure your house plans are in compliance with local codes. Some areas of North America have very strict engineering requirements. Examples of this would be, but not limited to, earthquake-prone areas of California and the Pacific Coast, hurricane risk areas of the Florida, Gulf &amp; Carolina Coasts. New York, New Jersey, Nevada, and parts of Illinois require review by a local professional as well. If you are building in these areas, it is most likely you will need to hire a state licensed structural engineer to analyze the design and provide additional drawings and calculations required by your building department. If you aren’t sure, building departments typically have a handout they will give you listing all of the items they require to submit for and obtain a building permit."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Plan(s)",
+      "text": "This page shows all necessary notations and dimensions including support columns, walls, and excavated/unexcavated areas."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This contemporary design floor plan is 1515 sq ft and has 2 bedrooms and 1.5 bathrooms."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/original.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.341983 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w1024.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.342071 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/6v94c3vm64npttcneo5713qi9c/w600.jpg?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.342282 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/w560x373.jpg?v=8",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 0.481754: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/c2k5iq7hg2oou2bkh959899nhs/w800x533.jpg?v=8",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 0.481754: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/w560x373.JPG?v=5",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.751029: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/gkgkrkcflj1uuh45jg1c3v9h85/w800x533.JPG?v=5",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 1.751029: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/w560x373.jpg?v=7",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.559934: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/t62erc0fv8qlvgod2utpu57rmb/w800x533.jpg?v=7",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.500938 against the reference copy's 1.559934: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/u2ksork2d0n57pniijjbb62d8m/w560x373.jpg?v=8",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 0.573027: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/u2ksork2d0n57pniijjbb62d8m/w620x413.jpg?v=8",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 0.573027: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    }
+  ],
+  "contentHash": "513d791d177fefba679ed994297de16635676cb2d3425302d2dd412464ea916b"
+}

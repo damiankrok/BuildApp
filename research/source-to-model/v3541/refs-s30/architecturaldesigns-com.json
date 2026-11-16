@@ -1,0 +1,68 @@
+{
+  "slug": "architecturaldesigns-com",
+  "imagesUsed": [
+    {"n": 52, "what": "main-floor plan with room sizes in feet (no overall dimensions); front porch at the bottom; 36 is a smaller copy"},
+    {"n": 1, "what": "front render, straight on (40 duplicates)"},
+    {"n": 2, "what": "front-right render"},
+    {"n": 11, "what": "front-left render: garage front gable and side-entry doors"},
+    {"n": 10, "what": "left side: two garage doors"},
+    {"n": 4, "what": "right side: hipped bedroom wing, one window"},
+    {"n": 7, "what": "rear render, straight on"},
+    {"n": 9, "what": "rear-left render: primary wing and garage rear gable"}
+  ],
+  "mirrorOrOtherProjectWarning": "No other project. 34-67 re-serve the same renders (40=1, 49=2, 50=3, 55=4, 57=5, 34=6, 60=7, 47=8, 37=9, 66=10, 42=11, 45=12; rest interiors); 13-32 are interiors; 33 is a 'ShopperApproved 6271 Reviews' badge; 36 is a smaller copy of plan 52. Renders match the plan; not mirrored. No elevations, section or upper plan exist.",
+  "overall": {"widthM": 24.82, "depthM": 19.99, "heightM": null, "basis": "page facts Width 81' 5\" and Depth 65' 7\"; plan 52 outer extent 969 x 779 px gives the same 39.0 px/m on both axes; printed garage 21'6\" x 33' (6.55 x 10.06 m) checks"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "living core", "role": "MAIN", "where": "centre: foyer, office, kitchen, living, dining under the tallest hip roof", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "~10 x 15.6"},
+    {"name": "garage wing", "role": "GARAGE", "where": "front-left, 2.2 m ahead of the main front; gable to front and rear; doors in its left wall", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "7.0 x 10.5"},
+    {"name": "primary wing", "role": "WING", "where": "rear-left, 2.2 m behind the dining wall, hipped", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "4.8 x 9.5"},
+    {"name": "bedroom wing", "role": "WING", "where": "right: front gable over the 13'6\" bedroom, hipped end to the right", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "~8 x 11"},
+    {"name": "entry portico", "role": "PORCH", "where": "front, timber king-post gable on two brick-clad columns over the recessed foyer", "storeys": 1, "enclosed": false, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "~3.5 x 1.6"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": null, "notes": "Hip-and-gable combination: hipped core and rear/right wings; front gables on garage and front-right bedroom (board-and-batten, timber brackets) plus the portico gable; garage wing gabled front and rear; covered patio under an extension of the core hip; charcoal shingles; no chimney or dormer visible; pitch not shown."},
+  "garage": {"present": true, "doorFacade": "LEFT", "doorPosition": "single door toward the rear, double door toward the front", "doorCount": 2},
+  "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 6, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 1, "leftToRight": ["GABLE_WINDOW"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 8, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW", "GLAZED_DOOR", "WINDOW", "LARGE_GLAZING", "WINDOW"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "GARAGE_DOOR", "GARAGE_DOOR"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "RIGHT", "what": "primary-suite window, three sashes, ~2.7 m wide (large only by the width rule)"}
+  ],
+  "features": [
+    {"kind": "CANOPY", "count": 1, "where": "entry portico: exposed timber truss gable on brick-clad columns"},
+    {"kind": "PORCH", "count": 1, "where": "covered front porch with 4 posts on brick pedestals"},
+    {"kind": "TERRACE", "count": 1, "where": "covered rear patio, timber deck, one timber corner post"},
+    {"kind": "OTHER", "count": 1, "where": "small window high in the garage front gable"},
+    {"kind": "OTHER", "count": 1, "where": "brick wainscot all round"}
+  ],
+  "palette": {"walls": "white vertical board-and-batten over white painted brick wainscot; brick-clad portico columns; stained timber truss, posts, brackets; black window frames; wood-tone garage doors", "roof": "charcoal/black asphalt shingles"},
+  "groundOutline": {"shape": "OTHER", "corners": 22, "polygonM": [[0,10.51], [6.64,10.51], [6.64,19.97], [11.46,19.97], [11.46,17.77], [15.44,17.77], [15.44,13.9], [21.18,13.9], [21.18,13.08], [24.85,13.08], [24.85,3.0], [21.26,3.0], [21.26,2.15], [16.82,2.15], [16.82,3.21], [15.15,3.21], [15.15,2.15], [11.05,2.15], [11.05,2.97], [7.03,2.97], [7.03,0], [0,0]], "closedAreaM2": 318, "basis": "outer wall faces from plan 52 at 39.0 px/m; origin = garage front-left corner; includes garage (~74 m2 outer); excludes covered porch and patio"},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front, before office, recessed foyer and front bedroom; portico at the entry", "approxSizeM": "printed 32' x 5'4\" = 9.75 x 1.63 (+1.05 m in the foyer recess)"},
+    {"kind": "TERRACE", "roofed": true, "where": "rear, right of the dining, before the living room, under the core roof", "approxSizeM": "printed 19'5\" x 11'6\" = 5.92 x 3.51"}
+  ],
+  "printedOverall": {"widthCm": null, "depthCm": null, "printedText": null, "where": "no overall dimension on plans 52/36 (room sizes only); page facts Width 81' 5\" (2482 cm), Depth 65' 7\" (1999 cm)"},
+  "groundRooms": 17,
+  "uncertain": [
+    "No elevation or section: height, pitch and plate heights unknown.",
+    "Roof is a hip/gable mix; HIP describes the core only.",
+    "Garage front gable has a small lit window high up; no stair or upper plan, so treated as an attic/gable window (FRONT storey 1).",
+    "REAR GLAZED_DOOR is the dining-to-patio door in the dining side wall, facing right inside the patio recess.",
+    "Windows facing the porch and patio are hidden in blue fill on the plan; read from renders 1, 6, 7.",
+    "Polygon read from pixels, about +/-0.15 m."
+  ],
+  "confidence": "MEDIUM-HIGH - plan and twelve exterior renders agree; overall size from page facts consistent with plan proportions; no elevations or section."
+}

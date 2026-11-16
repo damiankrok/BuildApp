@@ -1,0 +1,2293 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m7121f7814591c-e2d9f1c4d4",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+  "pageHash": "2d126f000b6432c71758d64f6eab8e98029e8740f294cc70fe4b6635613e4729",
+  "project": {
+    "externalId": "m7121f7814591c",
+    "name": "Projekt domu Dom w aksamitkach 2 Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-elewacja-bocz-68d72b65b0",
+      "caption": "gotowy projekt Dom w aksamitkach 2 elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-1b97f23b4e423a-019ec4a8c6",
+          "url": "https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-1b97f23b4e423a8ae025c75806699127__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 286732,
+          "byteHash": "b4fcd696295067f90bb56072e81642530528f58315993f1c65f3aa21065ae8d4",
+          "decoded": {
+            "width": 1280,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 1.662338
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-fef559d5d4",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2-fb648c2d0f4a88546d5f6734d9d8571d__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 54663,
+          "byteHash": "85cd1824dcef3e8dd3667dba0be27e63821dbcfced1142bf0cc9b55a36132b8a",
+          "decoded": {
+            "width": 550,
+            "height": 331
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.661631
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-1b97f23b4e423a-019ec4a8c6",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x770 over 550x331"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-elewacja-bocz-a7222d26a3",
+      "caption": "gotowy projekt Dom w aksamitkach 2 elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w aksamitkach 2 elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-b5d9c054c49576-6a47cffc5f",
+          "url": "https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-b5d9c054c495763d98350dd279acb9ca__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 345934,
+          "byteHash": "3bae76a515b9090125281c0cd4811e3a8a5e435078d44441ab2efd543338099c",
+          "decoded": {
+            "width": 1280,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 1.662338
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-7aa22aab9c",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2-9793eff8e1f726c501434d090490901f__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 64543,
+          "byteHash": "1f8d3f222a5b7afb0d5a66d0b34a67c5e8a738859f1b510d553e82ce19dfd7ce",
+          "decoded": {
+            "width": 550,
+            "height": 331
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.661631
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-b5d9c054c49576-6a47cffc5f",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x770 over 550x331"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-elewacja-fron-fbfc47a1e3",
+      "caption": "gotowy projekt Dom w aksamitkach 2 elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w aksamitkach 2 elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w aksamitkach 2 elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-353659b27e4439-cf203418ba",
+          "url": "https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-353659b27e44396283b72fd58ff55e0f__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 283499,
+          "byteHash": "a92383605c84a30a5cac675daf94d2b83ea7d4485cbabe7051cbf6942fca8686",
+          "decoded": {
+            "width": 1280,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 1.662338
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-aksamitkach-2-ve-45bb5625be",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-frontowa-projekt-dom-w-aksamitkach-2-ver-2-ab9d160b7de1d4c61dd12a31ad9573c8__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 54341,
+          "byteHash": "c94bffbc57b7a9aecc4d98cea117609c2747a4af5b5135782dff5140c9780f5d",
+          "decoded": {
+            "width": 550,
+            "height": 331
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.661631
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-353659b27e4439-cf203418ba",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x770 over 550x331"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-elewacja-ogro-24a37ca49b",
+      "caption": "gotowy projekt Dom w aksamitkach 2 elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w aksamitkach 2 elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w aksamitkach 2 elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w aksamitkach 2 elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-b096e3e8c226fc-dc8ad51e8f",
+          "url": "https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-b096e3e8c226fcd2aba29ba4847bdb0c__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 287003,
+          "byteHash": "ad40320d3b35bb792ddceeee25e3744befcdc3713840c7f28ff6b0570a6c0dbe",
+          "decoded": {
+            "width": 1280,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 1.662338
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-aksamitkach-2-ve-78470a4696",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-ogrodowa-projekt-dom-w-aksamitkach-2-ver-2-35e63d26622acebdb376f91273725992__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 52610,
+          "byteHash": "4deab709de73c0d790d80c5ef6934be51f9f60150bfde773e65bc51a6fd4dcfb",
+          "decoded": {
+            "width": 550,
+            "height": 331
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.661631
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-b096e3e8c226fc-dc8ad51e8f",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x770 over 550x331"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-przekroj-budy-861d447fd9",
+      "caption": "gotowy projekt Dom w aksamitkach 2 przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w aksamitkach 2 przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w aksamitkach 2 przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-3c8532971e",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-2-178137258af154dd7c4c2ab66975f462__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 22078,
+          "byteHash": "994ea84a84957210e3b26666e89a3f4ee7a4c5a659d53665994f298c9caabb55",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-3c8532971e",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-rzut-parteru-7f9d0d0f9e",
+      "caption": "gotowy projekt Dom w aksamitkach 2 rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-5-517ac0d9ad",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-53e412a1c2d07309e126169e7a99ffc4__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 46865,
+          "byteHash": "695b4fcc45189848a025175b0a999247b67af49156d55b2028f213a8e46919ac",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-5-517ac0d9ad",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-rzut-poddasza-5f669eb1cc",
+      "caption": "gotowy projekt Dom w aksamitkach 2 rzut poddasza",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-69ec5f6e71",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-418679511f07d0d00d3098d4002f166f__707.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 40978,
+          "byteHash": "3c8e8ca01bb2cdfdc1260468c3dd24149a6b8955b6a089e194c7c77ce1dea322",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-69ec5f6e71",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-sytuacja-1bdab0dbd6",
+      "caption": "gotowy projekt Dom w aksamitkach 2 sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w aksamitkach 2 sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420b-86ad02943c",
+          "url": "https://www.archon.pl/images/products/m7121f7814591c/sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420bbb3f02ad09d5fbc8d1804fa4a03__255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 50806,
+          "byteHash": "14249dbe2bd7883449b03e858f07a707819c2a058ae2b16289341cc37cc459c6",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420b-86ad02943c",
+      "selectionReason": "only variant (344x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-aksamitkach-2-widok-1-a0ad6cfc7b",
+      "caption": "gotowy projekt Dom w aksamitkach 2 widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-aksamitkach-2-ver-2-19e4e7-cd00287deb",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/widok-1-projekt-dom-w-aksamitkach-2-ver-2-19e4e7f191d977a288489e42b847222b__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 10494,
+          "byteHash": "2175f15421810b38ecd2972490c7f93e8f36bc5918f414dc478ac01c417cdc4c",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-aksamitkach-2-ver-2-19e4e7-cd00287deb",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-0e6a4fca5b",
+      "caption": "projekt Dom w aksamitkach 2",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-9aec0756b6",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-050743693f18c878fd3d9959407d32eb__270.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 25696,
+          "byteHash": "c535882dae5bc39524d90233be82f18240ee5aec289c37bf3b7624f4f776e93d",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-9aec0756b6",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-2151c3c068",
+      "caption": "projekt Dom w aksamitkach 2",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-d-839eb1e5b4",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-d43c32b248882430f21a96e4133e0f3d__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 29002,
+          "byteHash": "468f2dca91246da373c76e3675bef5b903ae7ce0ba1bc57a2a105848675d8f1b",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-d-839eb1e5b4",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-44cc53efa4",
+      "caption": "projekt Dom w aksamitkach 2",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-3f16e511123f05-addf9304f1",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-3f16e511123f05b5b49c740a9d63a969__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 37087,
+          "byteHash": "9ff2fa50674b72631f08d7d0bf8f909a7cb3311c8f44a83ecc95a39803f10352",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-3f16e511123f05-addf9304f1",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-6203da265f",
+      "caption": "projekt Dom w aksamitkach 2",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-aksamitkach-2-ver-2-e8dafe-4cc5f62cab",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/widok-2-projekt-dom-w-aksamitkach-2-ver-2-e8dafe954e2f37b6a17fe096f41c74f0__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m7121f7814591c/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 34043,
+          "byteHash": "1653f9720f4086db3e69e1092d3cc348ec3f683da50b85b3b8ab243d2c087a4c",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-aksamitkach-2-ver-2-e8dafe-4cc5f62cab",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-11d18cbc65",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 aranzacja kuchni 1 widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-428d094a766378-3782914bc7",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/k1/projekt-dom-w-aksamitkach-2-ver-2-428d094a76637864305b8a8d36309684__11544.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 93820,
+          "byteHash": "800c8754382956a9be33d4851e30143388670b8fcf2b92c28404b52d4a5b30f5",
+          "decoded": {
+            "width": 800,
+            "height": 534
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498127
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-428d094a766378-3782914bc7",
+      "selectionReason": "only variant (800x534, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-26f3c1f8e9",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 aranzacja kuchni 1 widok 3\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-ceaf1192044455-1b089e6c7a",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/k1/projekt-dom-w-aksamitkach-2-ver-2-ceaf1192044455f5be58c1f93b44ca20__11545.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 132842,
+          "byteHash": "c1aa2142f7f9830654a8ffb089608d72a8b830df046d2a3275edf342c0a6a74d",
+          "decoded": {
+            "width": 800,
+            "height": 534
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498127
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-ceaf1192044455-1b089e6c7a",
+      "selectionReason": "only variant (800x534, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-6c200db80f",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 aranzacja kuchni 1 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-5d5e601755feec-155fd40b5b",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/k1/projekt-dom-w-aksamitkach-2-ver-2-5d5e601755feec5ea1bfd84744955132__11543.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 155693,
+          "byteHash": "ca1da7e5c0ab998f2745271c9ad026628f0855925e9509435246bff27debc42a",
+          "decoded": {
+            "width": 800,
+            "height": 534
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498127
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-5d5e601755feec-155fd40b5b",
+      "selectionReason": "only variant (800x534, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-6d49eeba03",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 wizualizacja kuchni 1 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-a877032553873a-053fa292b4",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/k3/projekt-dom-w-aksamitkach-2-ver-2-a877032553873af1eb62a4ae90545325__3123.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 127654,
+          "byteHash": "9c6d7b4b0e20693950810d9ed9378298a2e0416693ff28286852906dfffb07e7",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-a877032553873a-053fa292b4",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-7f923c48fb",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 strefa nocna (wizualizacja 1 widok 2)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-a935f8e55d845c-d2a6091f72",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/s1/projekt-dom-w-aksamitkach-2-ver-2-a935f8e55d845c917f0f4b0c2801f658__3126.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 107167,
+          "byteHash": "e68793749705db2261c2a33eef40f3ab2bb2dd76b097419c6d9f316b830585ab",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-a935f8e55d845c-d2a6091f72",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-8c016dbcb1",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-b50275c540660f-80815226c3",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/s/projekt-dom-w-aksamitkach-2-ver-2-b50275c540660fa982eb2b7a671e5da1__3128.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 254200,
+          "byteHash": "5963bb0f1c5762cf9e07f61f9abd010b3c08ab6e4393bc1af2d3d1ef701107a4",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-b50275c540660f-80815226c3",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-a1e315d46f92ad-d926a64673",
+      "caption": "Projekt dom w aksamitkach 2 ver 2 a1e315d46f92ad6fcf3fd116f13bfd4d  37498",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-a1e315d46f92ad-9bf5ea7ffe",
+          "url": "https://cdn1.archon.pl/images/products/m7121f7814591c/i/projekt-dom-w-aksamitkach-2-ver-2-a1e315d46f92ad6fcf3fd116f13bfd4d__37498.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m7121f7814591c/image/37498?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 410049,
+          "byteHash": "7e98a25ba9a2c84d458d2a1834611bbb68db2dab3296572ba0b7ead569dad96e",
+          "decoded": {
+            "width": 1280,
+            "height": 960
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-a1e315d46f92ad-9bf5ea7ffe",
+      "selectionReason": "only variant (1280x960, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-ae1d606218",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 strefa dzienna (wizualizacja 1 widok 1)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-d5dc83adf8b31b-942bd94f5f",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/w1/projekt-dom-w-aksamitkach-2-ver-2-d5dc83adf8b31b5d670b30ff7346334b__3120.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 198711,
+          "byteHash": "9fb72918cee75b32e2db7d461d350ded4f2d8f2ccd0ad30507eb572b1eaeeab4",
+          "decoded": {
+            "width": 1516,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777257
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-d5dc83adf8b31b-942bd94f5f",
+      "selectionReason": "only variant (1516x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-b1a5de04a8",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 strefa dzienna (wizualizacja 2 widok 2)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-4518d7d9b4a627-b6ce380d9c",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/w2/projekt-dom-w-aksamitkach-2-ver-2-4518d7d9b4a627b77ebf6fc9bb58fc48__3122.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 206941,
+          "byteHash": "8f8cc80f960a338b55b9255da446cde2a54b0a659f0be8dfe17227d94014b697",
+          "decoded": {
+            "width": 1137,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332943
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-4518d7d9b4a627-b6ce380d9c",
+      "selectionReason": "only variant (1137x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-bc878e0349",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-fb5839ab689624-267fa007b3",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/s/projekt-dom-w-aksamitkach-2-ver-2-fb5839ab689624669b9f0255f06a71e1__3127.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 247993,
+          "byteHash": "5fad6b1013d585c27c7996947115f7ad4a7532cec8e7e0e8b2cfe1d97aa0b226",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-fb5839ab689624-267fa007b3",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-c8f4980e69",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 wizualizacja łazienki (wizualizacja 3 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-39e3a8894b5e83-b9735a6a13",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/l3/projekt-dom-w-aksamitkach-2-ver-2-39e3a8894b5e8313c8049c06ed10764f__3124.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 108250,
+          "byteHash": "ab099f71d1c06e9e343483ca7c67887c2cad60e59d8fdc98929a37ded77ad637",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-39e3a8894b5e83-b9735a6a13",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-e679b55bf6",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 strefa nocna (wizualizacja 1 widok 1)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-c4e949f3448507-ac232e4664",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/s1/projekt-dom-w-aksamitkach-2-ver-2-c4e949f3448507162f1b939716d4627a__3125.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 139472,
+          "byteHash": "69d07dffd25c5f72b6af690abb556f68619783106257539704e16cbee811052e",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-c4e949f3448507-ac232e4664",
+      "selectionReason": "only variant (800x533, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-aksamitkach-2-ver-2-f4e5d866a9",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 strefa dzienna (wizualizacja 2 widok 1)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-e9c6ffdd5b6edb-5c523d1ecc",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/w2/projekt-dom-w-aksamitkach-2-ver-2-e9c6ffdd5b6edb38e571d14dfc280a9d__3121.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 228452,
+          "byteHash": "9cf223d3530597a7b4d4ece8f6b2d41bf25cba61becf88093743337690df7dc8",
+          "decoded": {
+            "width": 1516,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777257
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-e9c6ffdd5b6edb-5c523d1ecc",
+      "selectionReason": "only variant (1516x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-5a0bd29466",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-d1cf0733ca68de-e4164b4aaa",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-d1cf0733ca68de39f5b0d7cba3fb37b2__11817.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/gif",
+          "byteLength": 77862,
+          "byteHash": "eca69d70a05dadc6e5d52e598c1e6ac4bf2020ff49290455ac6b0ead5f5ea891",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-d1cf0733ca68de-e4164b4aaa",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-c45dda62c8",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w aksamitkach 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-aks-d2aa58231a",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-poddasza-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2-c96685df90a9209570adef5d29ff81a3__11917.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/gif",
+          "byteLength": 79845,
+          "byteHash": "a1bbe3ee618983f879817f27150b54ee905cdce5f5fa3805bdbd68d7743de242",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-aks-d2aa58231a",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-d5f809ce89",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-aksa-ad18fba06c",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-parteru-z-powierzchniami-projekt-dom-w-aksamitkach-2-ver-2-9329209a508297f42ec93a48a144ba2b__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/gif",
+          "byteLength": 88696,
+          "byteHash": "ce450da3a83bb37edc7008dcbfc9511e6f0c7dc6a3512df9737454aec77b67fa",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-aksa-ad18fba06c",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-e791b8b84c",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m7121f7814591c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w aksamitkach 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-aksamitkach-2-ver-2-d4c6a45ba6dac0-8bdc277ded",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-d4c6a45ba6dac03196cd7e31f259ef51__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/gif",
+          "byteLength": 92576,
+          "byteHash": "7cb34ef42a4dbf18d605d9f7d132e0fe4182ab92703d95d4d7f26b104d8edd11",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-aksamitkach-2-ver-2-d4c6a45ba6dac0-8bdc277ded",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-aksamitkach-2-ver-2-142add9363",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-aksamitkach-2-ver-2-aad306-7de7116ea1",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/widok-1-projekt-dom-w-aksamitkach-2-ver-2-aad306121c2b33fbca3e2549804ae7ec__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 197105,
+          "byteHash": "ad10125cf56279fd8cd634bce47c7bedda05628622e418dc541a4a45aee0c799",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-aksamitkach-2-ver-2-aad306-7de7116ea1",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-aksamitkach-2-ver-2-1442461fdd",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-aksamitkach-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w aksamitkach 2 widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-aksamitkach-2-ver-2-b728f2-ff9119027b",
+          "url": "https://assets.archon.pl/images/products/m7121f7814591c/widok-2-projekt-dom-w-aksamitkach-2-ver-2-b728f2d2b00ae5e848d03e65d0cb4727__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-aksamitkach-2-ver-2-m7121f7814591c",
+          "mediaType": "image/jpeg",
+          "byteLength": 181123,
+          "byteHash": "e630d05afb4e38bfe7ea999e199f9c9cd398ef9d643e83d8ce91837f64e7d7be",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-aksamitkach-2-ver-2-b728f2-ff9119027b",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 9.28,
+      "unit": "m2",
+      "raw": "9,28 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.84,
+      "unit": "m",
+      "raw": "8,84 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 167.95,
+      "unit": "m2",
+      "raw": "167,95 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 111.76,
+      "unit": "m2",
+      "raw": "111,76 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 18.36,
+      "unit": "m2",
+      "raw": "18,36 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "value": 125.58,
+      "unit": "m2",
+      "raw": "125,58 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 196.5,
+      "unit": "m2",
+      "raw": "196,5 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 221.27,
+      "unit": "m2",
+      "raw": "221,27 m&sup2;"
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "value": 148.64,
+      "unit": "m2",
+      "raw": "148,64 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 774.76,
+      "unit": "none",
+      "raw": "774,76 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu, który wyróżnia się uroczo zaprojektowanymi elewacjami. Klasyczna bryła wzbogacona zgrabną lukarną od frontu tworzy charakterystyczny wejściowy podcień podparty filarkami. Projekt domu na parterze posiada ciekawie zaaranżowaną strefę dzienną obejmującą przestronny salon, jadalnię w wykuszu oraz kuchnię, którą w zależności od potrzeb domowników można wymknąć. Program parteru uzupełnia dostępna z holu toaleta, jednostanowiskowy garaż oraz duża kotłownia na paliwo stałe. Projekt domu na poddaszu posiada cztery ładnie doświetlone pokoje, z których jeden może pełnić funkcję gabinetu lub pokoju gościnnego. Dopełnieniem poddasza jest ogólnodostępna garderoba oraz bardzo duża łazienka. Projekty domów, w których salon jest zlokalizowany z przodu domu idealnie wpisują się na działki z wjazdem od południa, dzięki czemu strefa dzienna jest optymalnie doświetlona."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "gęstożebrowy"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "110 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano w następujących pomieszczeniach: PARTER: Wiatrołap (1), Kuchnia (4); PODDASZE: Łazienka (6)"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 42 st. , więźba drewniana, dachówka ceramiczna CREATON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop gęstożebrowy Teriva , 125.58 m² + 18.36 m² + 9.28 m² , 4 pokoje, kuchnia, łazienka, jadalnia, toaleta, kotłownia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "ATTIC",
+      "index": 1,
+      "label": "Hol",
+      "area": 4.78,
+      "raw": "1. Hol | 4,78 | (4,78)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 2,
+      "label": "Garderoba",
+      "area": 2.35,
+      "raw": "2. Garderoba | 2,35 | (3,77)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 3,
+      "label": "Pokój",
+      "area": 11.56,
+      "raw": "3. Pokój | 11,56 | (14,28)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 4,
+      "label": "Pokój",
+      "area": 19.28,
+      "raw": "4. Pokój | 19,28 | (22,21)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 5,
+      "label": "Pokój",
+      "area": 18.99,
+      "raw": "5. Pokój | 18,99 | (22,07)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 10.05,
+      "raw": "6. Łazienka | 10,05 | (12,71)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 2.78,
+      "raw": "1. Wiatrołap | 2,78 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 9.29,
+      "raw": "2. Hol | 9,29 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Schody",
+      "area": 4.58,
+      "raw": "3. Schody | 4,58 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 9.54,
+      "raw": "4. Kuchnia | 9,54 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Jadalnia",
+      "area": 9.88,
+      "raw": "5. Jadalnia | 9,88 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Salon",
+      "area": 20.64,
+      "raw": "6. Salon | 20,64 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Toaleta",
+      "area": 1.86,
+      "raw": "7. Toaleta | 1,86 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Garaż",
+      "area": 18.36,
+      "raw": "8. Garaż | 18,36 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Kotłownia z pralnią",
+      "area": 9.28,
+      "raw": "9. Kotłownia z pralnią | 9,28 | (11,20)"
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/k3/projekt-dom-w-aksamitkach-2-ver-2-a877032553873af1eb62a4ae90545325__14123.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/l3/projekt-dom-w-aksamitkach-2-ver-2-39e3a8894b5e8313c8049c06ed10764f__14124.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-3f16e511123f05b5b49c740a9d63a969__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/przekroj-budynku-projekt-dom-w-aksamitkach-2-ver-2-178137258af154dd7c4c2ab66975f462__11256.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SECTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-53e412a1c2d07309e126169e7a99ffc4__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-parteru-projekt-dom-w-aksamitkach-2-ver-2-d43c32b248882430f21a96e4133e0f3d__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-050743693f18c878fd3d9959407d32eb__11270.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/rzut-poddasza-projekt-dom-w-aksamitkach-2-ver-2-418679511f07d0d00d3098d4002f166f__11707.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/s/projekt-dom-w-aksamitkach-2-ver-2-b50275c540660fa982eb2b7a671e5da1__14128.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/s/projekt-dom-w-aksamitkach-2-ver-2-fb5839ab689624669b9f0255f06a71e1__14127.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/s1/projekt-dom-w-aksamitkach-2-ver-2-a935f8e55d845c917f0f4b0c2801f658__14126.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/s1/projekt-dom-w-aksamitkach-2-ver-2-c4e949f3448507162f1b939716d4627a__14125.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420bbb3f02ad09d5fbc8d1804fa4a03__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/w1/projekt-dom-w-aksamitkach-2-ver-2-d5dc83adf8b31b5d670b30ff7346334b__14120.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/w2/projekt-dom-w-aksamitkach-2-ver-2-4518d7d9b4a627b77ebf6fc9bb58fc48__14122.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/w2/projekt-dom-w-aksamitkach-2-ver-2-e9c6ffdd5b6edb38e571d14dfc280a9d__14121.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/widok-1-projekt-dom-w-aksamitkach-2-ver-2-19e4e7f191d977a288489e42b847222b__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/widok-1-projekt-dom-w-aksamitkach-2-ver-2-aad306121c2b33fbca3e2549804ae7ec__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/widok-2-projekt-dom-w-aksamitkach-2-ver-2-b728f2d2b00ae5e848d03e65d0cb4727__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/widok-2-projekt-dom-w-aksamitkach-2-ver-2-e8dafe954e2f37b6a17fe096f41c74f0__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.archon.pl/images/products/m7121f7814591c/sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420bbb3f02ad09d5fbc8d1804fa4a03__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2-9793eff8e1f726c501434d090490901f__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-b5d9c054c495763d98350dd279acb9ca__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-boczna-projekt-dom-w-aksamitkach-2-ver-2-fb648c2d0f4a88546d5f6734d9d8571d__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-1b97f23b4e423a8ae025c75806699127__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-frontowa-projekt-dom-w-aksamitkach-2-ver-2-ab9d160b7de1d4c61dd12a31ad9573c8__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-353659b27e44396283b72fd58ff55e0f__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/elewacja-ogrodowa-projekt-dom-w-aksamitkach-2-ver-2-35e63d26622acebdb376f91273725992__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m7121f7814591c/projekt-dom-w-aksamitkach-2-ver-2-b096e3e8c226fcd2aba29ba4847bdb0c__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m7121f7814591c/sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420bbb3f02ad09d5fbc8d1804fa4a03__255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m7121f7814591c/sytuacja-projekt-dom-w-aksamitkach-2-ver-2-2420bbb3f02ad09d5fbc8d1804fa4a03__255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "19dafbefc347b5afd77cf7f8ef1515abfded36467a523697372c800bed3fccce"
+}

@@ -1,0 +1,71 @@
+{
+  "slug": "fresh-bluszcz-3",
+  "imagesUsed": [
+    {"n": 17, "what": "ground floor plan, dimensioned: 1100 wide (bottom), 860 deep (left), rear terrace 350; entrance at the bottom; 06 and 10 are smaller copies"},
+    {"n": 18, "what": "attic plan, dimensioned (knee walls 140/220 lines, two gable windows per side); 07 and 14 smaller copies"},
+    {"n": 3, "what": "front elevation ('frontowa')"},
+    {"n": 4, "what": "rear elevation ('ogrodowa')"},
+    {"n": 1, "what": "side elevation with entrance canopy on the right = LEFT facade"},
+    {"n": 2, "what": "side elevation with entrance canopy on the left = RIGHT facade"},
+    {"n": 5, "what": "section: ridge +8.52, eaves +3.55, 42 deg, knee wall 133, storey 274/265, ground -0.32, small sunken pantry -0.57"},
+    {"n": 8, "what": "site plan 1100 x 860, rear terrace with slatted pergola at rear-left"},
+    {"n": 12, "what": "front-left render (same as 11 / 19)"},
+    {"n": 20, "what": "rear render"}
+  ],
+  "mirrorOrOtherProjectWarning": "None seen: plans, elevations and renders agree (kitchen window left of entrance, pergola behind the living room at rear-left).",
+  "overall": {"widthM": 11.0, "depthM": 8.6, "heightM": 8.84, "basis": "width/depth printed on plan 17 and site plan 08 (walled block only; rear terrace 350 is extra); height = section ridge +8.52 over ground -0.32, equals published 8.84"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single rectangular block", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "11.00 x 8.60"},
+    {"name": "rear pergola", "role": "PERGOLA", "where": "rear-left, behind living room: white flat frame on one corner post and one middle post, slatted top", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 5.1 x 3.5"},
+    {"name": "entrance canopy", "role": "PORCH", "where": "front, right of centre: grey flat slab with a grey side wall on its right, over a landing", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 4.8 x 1.1"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 42, "notes": "Symmetrical gable, ridge parallel to the 11.0 m front, small eaves overhang with gutters; one rooflight on the front slope; no dormers."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["LARGE_GLAZING", "ENTRANCE_DOOR", "DOOR"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 1, "leftToRight": ["LARGE_GLAZING"]},
+      {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 1, "leftToRight": ["WINDOW"]},
+      {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "RIGHT", "what": "360/240 two-pane slider from living room onto the pergola terrace"},
+    {"facade": "LEFT", "position": "CENTRE", "what": "250/240 fixed floor-to-ceiling pane at the dining area, framed by grey panels"},
+    {"facade": "FRONT", "position": "LEFT", "what": "300/150 kitchen window with sill (large only by width)"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 3, "where": "two on the front slope near the ridge, one on the rear slope near the ridge (site plan 08)"},
+    {"kind": "ROOFLIGHT", "count": 1, "where": "front slope, centre"},
+    {"kind": "CANOPY", "count": 1, "where": "front entrance canopy with side wall, timber-clad door niche"},
+    {"kind": "PERGOLA", "count": 1, "where": "rear-left over terrace"},
+    {"kind": "TERRACE", "count": 1, "where": "full-width rear terrace 11.0 x 3.5 with planters; left part under the pergola"}
+  ],
+  "palette": {"walls": "white render with a thin horizontal band at first-floor level, vertical warm timber boarding (entrance niche, rear ground wall, side panels), grey concrete-look panels (canopy, around side glazing), graphite frames", "roof": "graphite flat roof tiles, graphite chimneys"},
+  "groundOutline": {"shape": "RECT", "corners": 4, "polygonM": [[0, 0], [11.0, 0], [11.0, 8.6], [0, 8.6]], "closedAreaM2": 94.6, "basis": "printed 1100 x 860 on plan 17 and site plan 08; walls straight on all four sides (published footprint 94.99 incl. small extras)"},
+  "openZones": [
+    {"kind": "PERGOLA", "roofed": false, "where": "rear-left behind living room", "approxSizeM": "5.1 x 3.5"},
+    {"kind": "TERRACE", "roofed": false, "where": "rear-right, open part of the rear terrace", "approxSizeM": "5.9 x 3.5"},
+    {"kind": "PORCH", "roofed": true, "where": "front entrance landing under flat canopy", "approxSizeM": "4.8 x 1.1"}
+  ],
+  "printedOverall": {"widthCm": 1100, "depthCm": 860, "where": "plan 17 bottom and left dimension lines; site plan 08"},
+  "groundRooms": 8,
+  "uncertain": [
+    "Rear frame: site plan and rear render show slats/beams (pergola); elevation 4 draws it as a solid flat band - roofed status uncertain.",
+    "FRONT third opening is the 90/210 glazed door into the boiler room/laundry, under the same canopy as the 150/210 entrance door.",
+    "Attic windows 150/220 are tall (about 2.2 m); counted as WINDOW.",
+    "LEFT 250/240 counted LARGE_GLAZING (floor-to-ceiling, exactly 2.5 m wide).",
+    "Pantry under stairs is sunk to -0.57; not a basement."
+  ],
+  "confidence": "HIGH - dimensioned plans, section, four elevations, site plan and renders agree."
+}

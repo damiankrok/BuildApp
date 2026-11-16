@@ -1,0 +1,59 @@
+{
+  "slug": "fresh-sa-awans-ii",
+  "imagesUsed": [
+    {"n": 11, "what": "ground floor plan, entrance at the bottom (front gable); printed 6.90 + 2.75 and 1.00 + 9.15 (bottom), 9.90 + 4.00 = 13.90 (right)"},
+    {"n": 12, "what": "attic plan, same orientation; attic covers the whole 9.15 x 13.90 body including over the porch"},
+    {"n": 6, "what": "front elevation (gable, recessed entrance at right)"},
+    {"n": 7, "what": "rear elevation (gable)"},
+    {"n": 5, "what": "left elevation: full-length niche with two large glazings, 5 rooflights"},
+    {"n": 4, "what": "right elevation: blank wall, open porch at the front end, 2 rooflights"},
+    {"n": 18, "what": "render front"},
+    {"n": 16, "what": "render front-left (niche + deck)"},
+    {"n": 15, "what": "render left side niche close-up"},
+    {"n": 17, "what": "render rear-left"}
+  ],
+  "mirrorOrOtherProjectWarning": "1-3, 8-10, 13, 14, 19 are advert/logo banners, not plans. No other project or mirrored copy: plan, elevations and renders agree (niche left, porch front-right).",
+  "overall": {"widthM": 9.15, "depthM": 13.9, "heightM": 8.21, "basis": "closed body width 9.15 printed; published/printed 10.15 = 9.15 + 1.00 open niche between projecting end walls (excluded). Depth 13.90 printed and published (front-right corner is an open recessed porch). Height published."},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single long block, gables to front and rear, attic over the whole body", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "9.15 x 13.90 minus porch corner"},
+    {"name": "left niche frame", "role": "OTHER", "where": "left side: end walls project 1.00 m, white lintel band between them under the eaves", "storeys": 1, "enclosed": false, "roofKind": "OTHER", "ridge": "NA", "approxSizeM": "1.00 x ~12.5"},
+    {"name": "entrance porch", "role": "PORCH", "where": "front-right corner cut into the body under attic room 7, corner pier", "storeys": 1, "enclosed": false, "roofKind": "OTHER", "ridge": "NA", "approxSizeM": "2.25 x 4.00"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 35, "notes": "Plain symmetrical gable over the 9.15 body, ridge front-to-back along 13.90; about 1 m eave overhang each long side (on the left it covers the niche), timber soffits and verges with exposed purlin ends; ridge snow guards; 3 chimneys on the ridge. Pitch published."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "RIGHT", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "ENTRANCE_DOOR"]}, {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}, {"storey": 1, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["LARGE_GLAZING", "LARGE_GLAZING"]}, {"storey": 1, "count": 5, "leftToRight": ["ROOF_WINDOW", "ROOF_WINDOW", "ROOF_WINDOW", "ROOF_WINDOW", "ROOF_WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 0, "leftToRight": []}, {"storey": 1, "count": 2, "leftToRight": ["ROOF_WINDOW", "ROOF_WINDOW"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "LEFT", "position": "LEFT", "what": "kitchen-dining glazing in the niche, two panes about 3.0 m wide, floor to lintel (rear half as seen from the left)"},
+    {"facade": "LEFT", "position": "RIGHT", "what": "living-room glazing in the niche, two panes about 3.0 m wide (front half)"}
+  ],
+  "features": [
+    {"kind": "OTHER", "count": 1, "where": "full-length 1 m deep niche on the left side framed by projecting end walls and a white lintel band (the signature feature)"},
+    {"kind": "TERRACE", "count": 1, "where": "timber deck along the whole left side, partly inside the niche"},
+    {"kind": "PORCH", "count": 1, "where": "recessed entrance at front-right corner, open to front and right, corner pier, step"},
+    {"kind": "CHIMNEY", "count": 3, "where": "on the ridge: one larger stack toward the rear, two small stacks mid and front"},
+    {"kind": "ROOF_WINDOW", "count": 7, "where": "5 on the left slope (row of 4 + 1 higher), 2 on the right slope"}
+  ],
+  "palette": {"walls": "white render on the ground storey, dark grey render in the gables above a light cornice band, black band under the long eaves; light timber soffits/verges; golden-oak window frames with grey sills; timber deck", "roof": "graphite tiles, graphite gutters"},
+  "uncertain": [
+    "Printed bottom chain is inconsistent: 6.90 + 2.75 = 9.65 but the overall reads 9.15; at the drawing scale the right segment measures about 2.25, so 2.75 looks misprinted. 6.90/9.15 used.",
+    "Porch width 2.25 derived (9.15 - 6.90); porch depth 4.00 printed.",
+    "Niche length (~12.5) scaled between the end-wall stubs.",
+    "Rooflight count from elevations; renders show only the left slope."
+  ],
+  "confidence": "HIGH - dimensioned plans, four elevations and four renders agree; only the one chain misprint.",
+  "groundOutline": {"shape": "L", "corners": 6, "polygonM": [[0, 0], [6.9, 0], [6.9, 4.0], [9.15, 4.0], [9.15, 13.9], [0, 13.9]], "closedAreaM2": 118.2, "basis": "origin = front-left outer corner of the left wall (niche excluded); 6.90, 9.15, 9.90, 4.00, 13.90 printed. Published built-up 141.10 = 10.15 x 13.90 (full rectangle incl. niche and porch)."},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front-right corner under the attic, entrance door on its rear wall", "approxSizeM": "2.25 x 4.00"},
+    {"kind": "LOGGIA", "roofed": true, "where": "left side, full-length niche between projecting end walls", "approxSizeM": "1.00 x ~12.5"},
+    {"kind": "TERRACE", "roofed": false, "where": "left side timber deck outside the niche, full length", "approxSizeM": "about 2.0 x 14.4"}
+  ],
+  "printedOverall": {"widthCm": 915, "depthCm": 1390, "where": "picture 11: bottom outer chain '9.15' (closed body) preceded by a separate '1.00' niche segment, no single 10.15 printed (10.15 is the published width); right outer chain '13.90'"},
+  "groundRooms": 8
+}

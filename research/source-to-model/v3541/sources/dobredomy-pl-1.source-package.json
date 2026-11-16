@@ -1,0 +1,1112 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-115423e4f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "byteLength": 61287,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "byteLength": 23380,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-2122c17c71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.715818,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "byteLength": 66219,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-jpg-b3083b8576",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg"
+        },
+        {
+          "aspect": 1.715818,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "byteLength": 14602,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-598a2abb68",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "byteLength": 55569,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "byteLength": 18930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Prezentacja",
+      "id": "asset-prezentacja-e019163552",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.738053,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "byteLength": 71506,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 417
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-4c775f3cb5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w1-jpg-w-286-8f5b503488",
+      "selectionReason": "largest decoded raster of 2 variants: 1865x1200 over 784x504",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "ddcdaa17c2af1c51d67ec338e2405a80b490f9911c31847efc1634480b79f1e5",
+          "byteLength": 647912,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w1-jpg-w-286-8f5b503488",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w1.jpg?w=286)"
+        },
+        {
+          "aspect": 1.555556,
+          "byteHash": "21a5d88ece4d8eecaf53a14a82303c09a6f3da185dfb6b2b702b6bc4eb42451c",
+          "byteLength": 135164,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w1-jpg-p-prslide-5763355443",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w1.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-e25becc350",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551724,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "byteLength": 160714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 203,
+            "width": 315
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-0858a3cfe1",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w8-jpg-p-prslide-cabd4c436a",
+      "selectionReason": "only variant (783x522, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "e5ccbe48b3aa3dc426943815143f271f0fdd9c3b5ee32bd5c283703d66b17646",
+          "byteLength": 101465,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 522,
+            "width": 783
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w8-jpg-p-prslide-cabd4c436a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w8.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-19f509aa42",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w5-jpg-p-prslide-bf942c6422",
+      "selectionReason": "only variant (783x522, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "49ccc598d6b5f004025ff9e787b0d1a69e1316cef15528ba1097435ba4f26642",
+          "byteLength": 102392,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 522,
+            "width": 783
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w5-jpg-p-prslide-bf942c6422",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w5.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-226d0e4227",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w6-jpg-p-prslide-597bbba610",
+      "selectionReason": "only variant (783x522, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "766bc968ca0e46ece6fcc10f3847313b55545b0720c1d6437189262649da1a00",
+          "byteLength": 125308,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 522,
+            "width": 783
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w6-jpg-p-prslide-597bbba610",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w6.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-46e75852eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w7-jpg-p-prslide-4ba532ed5c",
+      "selectionReason": "only variant (783x522, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "68fe2e7ea28cb08e5566930d2e5ca0832179da5ec22341349a7f272c4606797d",
+          "byteLength": 107044,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 522,
+            "width": 783
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w7-jpg-p-prslide-4ba532ed5c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w7.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-986f480b77",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w4-jpg-p-prslide-5df557d90f",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "d669f0004bad39a2dff1883f3195c6b9f48e4fc19194c40e4b00631f394eb4bc",
+          "byteLength": 125360,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w4-jpg-p-prslide-5df557d90f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w4.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-af436b9818",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w2-jpg-p-prslide-1fc08a3f64",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "cbab6625e66ab1785f7536521916f2d128f4f3171f52e1603766c70eedd7863c",
+          "byteLength": 123656,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w2-jpg-p-prslide-1fc08a3f64",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w2.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-be344dbd81",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w3-jpg-p-prslide-f929e6bb8c",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "ecba0bb1608054e2ef043509aac8748704208f41ee3dad1bfc0fdfe3f85d0740",
+          "byteLength": 109834,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w3-jpg-p-prslide-f929e6bb8c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w3.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tulio",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-d1548fc6d8",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Tul\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w9-jpg-p-prslide-e48d384ecc",
+      "selectionReason": "only variant (783x522, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "b69106b44a86ca8a53bed28c0dd41244685b810c73f6157919f7187944a7108a",
+          "byteLength": 113131,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 522,
+            "width": 783
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w9-jpg-p-prslide-e48d384ecc",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/tulio/tulio_w9.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Elewacja boczna",
+      "id": "asset-tulio-elewacja-boczna-6c337fd13f",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Tulio · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Tulio · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-tulio-e2-jpg-6498be4148",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "361d4a6de59a2df34357216f0446712c602cffee0f143feec2f2e00fd24b1015",
+          "byteLength": 54341,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-e2-jpg-6498be4148",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_e2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Elewacja boczna",
+      "id": "asset-tulio-elewacja-boczna-73f1203615",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Tulio · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Tulio · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-tulio-e3-jpg-50a5210242",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "32b3dea4c6c0c6d5f19aa07d251879083e7601c51507a643977fc06408267878",
+          "byteLength": 51848,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-e3-jpg-50a5210242",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_e3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Elewacja przód",
+      "id": "asset-tulio-elewacja-przod-9458ef2a1d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Tulio · Elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Tulio · Elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-tulio-e1-jpg-b697fa581b",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "fcd9aa64dd4ac6ccd56a7f784f840cd7f098132fa32e8142d99600cbccee9d5e",
+          "byteLength": 51542,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-e1-jpg-b697fa581b",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_e1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Elewacja tył",
+      "id": "asset-tulio-elewacja-ty-132d1f179c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Tulio · Elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Tulio · Elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-tulio-e4-jpg-862f7689cd",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "08a9ab40368137c4c2c0a2fea0b29e3807b51981be1c8ca95ee7d5f1e83cda2d",
+          "byteLength": 54418,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-e4-jpg-862f7689cd",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_e4.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Rzut działki",
+      "id": "asset-tulio-rzut-dzia-ki-1e6470b213",
+      "roleEvidence": [
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Tulio · Rzut działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-tulio-s-jpg-308cb433eb",
+      "selectionReason": "only variant (1707x2132, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.800657,
+          "byteHash": "25bcae1b14729bf8e00b92d70c784898ea1e1fa19393238e1e60f74db5228573",
+          "byteLength": 106623,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 2132,
+            "width": 1707
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-s-jpg-308cb433eb",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_s.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Rzut parter",
+      "id": "asset-tulio-rzut-parter-5bb6bf633d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Tulio · Rzut parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Tulio · Rzut parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-tulio-r1-jpg-28dbee4c56",
+      "selectionReason": "only variant (1707x2132, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.800657,
+          "byteHash": "a8907b19c77b75eb8bdbfa5541c91d3f6e8728cf5b443643544fcd62c0b553b9",
+          "byteLength": 319220,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 2132,
+            "width": 1707
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-r1-jpg-28dbee4c56",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_r1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Tulio · Rzut poddasze",
+      "id": "asset-tulio-rzut-poddasze-87281c781a",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Tulio · Rzut poddasze\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Tulio · Rzut poddasze\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-tulio-r2-jpg-6a06c8293e",
+      "selectionReason": "only variant (1707x2132, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.800657,
+          "byteHash": "223d8b03eba96ee3490c59e7a01a8c3c143858d8f99f68d467707c5ea98c6f27",
+          "byteLength": 308911,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 2132,
+            "width": 1707
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-r2-jpg-6a06c8293e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_r2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-tulio-w1-jpg-8603d227f1",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-tulio-w1-jpg-8801b22b24",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "4a77b862aa36d7de6226cf004fd76f874a63b2aad947ecb93da94cab3e73a15f",
+          "byteLength": 417165,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-tulio-w1-jpg-8801b22b24",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/tulio_w1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Wycena",
+      "id": "asset-wycena-fb105e7612",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "byteLength": 53872,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/tulio",
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/tulio",
+  "contentHash": "d8b8c268d690a5cfd5744d491635bbff2b133cee468623bd361fd6e7d9c6d0fb",
+  "documents": [
+    {
+      "caption": "Charakterystyka energetyczna",
+      "code": "NOT_A_DRAWING",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "status": "NOT_FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/Pliki%20do%20pobrania/tulio_ch.pdf",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "138c25cd3e7cc3551d618ea708a454a542e1ac084236a953718755a0d5b88e9a",
+      "byteLength": 62881,
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/Pliki%20do%20pobrania/tulio_pk.pdf",
+      "variant": "BASE"
+    },
+    {
+      "byteHash": "9474eec140bb31d9e8c98bfb6ec81cffcaf1c92d6e528c6e886f9539d52d201c",
+      "byteLength": 94304,
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "mediaType": "image/vnd.dwg",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/Pliki%20do%20pobrania/tulio_pkdwg.dwg",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "874daabfc150fceb148e47153cd6222433231913436852f28ef093e2e6042250",
+      "byteLength": 63787,
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/tulio/Pliki%20do%20pobrania/tulio_pkl.pdf",
+      "variant": "MIRRORED"
+    }
+  ],
+  "failures": [],
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/tulio/",
+  "id": "src-www-dobredomy-pl-3ea217f1b3",
+  "pageHash": "3824f6a0a339a52d0f729a11b3eaabda5e0420ba2744896cbe157de983e82783",
+  "project": {
+    "name": "Projekt domu Tulio",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "raw": "2",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,40 m",
+      "unit": "m",
+      "value": 8.4
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "139,90 m²",
+      "unit": "m2",
+      "value": 139.9
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "raw": "18,50 m²",
+      "unit": "m2",
+      "value": 18.5
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "raw": "19,72 m",
+      "unit": "m",
+      "value": 19.72
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "raw": "20,92 m",
+      "unit": "m",
+      "value": 20.92
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "raw": "40°",
+      "unit": "deg",
+      "value": 40
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "raw": "4",
+      "unit": "count",
+      "value": 4
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "raw": "236,20 m²",
+      "unit": "m2",
+      "value": 236.2
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "133,70 m²",
+      "unit": "m2",
+      "value": 133.7
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "raw": "544,70 m³",
+      "unit": "none",
+      "value": 544.7
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "40°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Projekt domu jednorodzinnego w klasycznym stylu. Parter to otwarta strefa dzienna, w której salon płynnie łączy się z jadalnią i kuchnią. Niewielka spiżarnia przypadnie do gustu Pani domu. Całość funkcji parteru uzupełniona jest o łazienkę i dodatkowy pokój z bezpośrednim wyjściem na taras. Niewielkie pomieszczenie gospodarcze stanowi łącznik między wiatrołapem a garażem, skąd dalej przechodzi się do kotłowni. Na użytkowym poddaszu zaplanowano trzy pokoje (jeden z własną garderobą), pralnię, łazienkę oraz strych. Projekt dostępny w wersji z garażem dwustanowiskowym - Tulio II."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0"
+}
+

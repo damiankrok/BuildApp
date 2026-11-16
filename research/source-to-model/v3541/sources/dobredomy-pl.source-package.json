@@ -1,0 +1,1038 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Dunkan · Elewacja boczna",
+      "id": "asset-dunkan-elewacja-boczna-1b15a8be42",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Dunkan · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Dunkan · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-dunkan-e3-jpg-c90f70c8c5",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "f6642d969e7e958c704529b33fa76368ef0da9c6bc1c76a2ae6b7ce175b508f2",
+          "byteLength": 18020,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-e3-jpg-c90f70c8c5",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_e3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Dunkan · Elewacja boczna",
+      "id": "asset-dunkan-elewacja-boczna-366871fe36",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Dunkan · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Dunkan · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-dunkan-e2-jpg-bfebf04b4b",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "cd0676722fb623c30c4cbde439ae1573bec8f7aa3755e0e69f89b45e8f17cafd",
+          "byteLength": 20760,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-e2-jpg-bfebf04b4b",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_e2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Dunkan · Elewacja przód",
+      "id": "asset-dunkan-elewacja-przod-6f64510333",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Dunkan · Elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Dunkan · Elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-dunkan-e1-jpg-e74e7d33a6",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "02a0099734a24eb0a1af43ef795da63f012fb533c40af244db2aa7809e016137",
+          "byteLength": 18484,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-e1-jpg-e74e7d33a6",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_e1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Dunkan · Elewacja tył",
+      "id": "asset-dunkan-elewacja-ty-db8254e0c9",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Dunkan · Elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Dunkan · Elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-dunkan-e4-jpg-8b1177fbc8",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "e9402dc59fa01886a6d4c29af3e5479c6b1e48a0f813fb3314f96e9f1b14c941",
+          "byteLength": 18766,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-e4-jpg-8b1177fbc8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_e4.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Dunkan · Rzut działki",
+      "id": "asset-dunkan-rzut-dzia-ki-8e8bb86460",
+      "roleEvidence": [
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Dunkan · Rzut działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dunkan-s-jpg-6c638be45d",
+      "selectionReason": "only variant (704x744, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.946237,
+          "byteHash": "72d4e9eaafe3ba5d1955000b1f8647b1d2a4f867effd2cdd54b00a47aaabe3ea",
+          "byteLength": 43452,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 744,
+            "width": 704
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-s-jpg-6c638be45d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_s.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Dunkan · Rzut parter",
+      "id": "asset-dunkan-rzut-parter-2cf53cf89d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Dunkan · Rzut parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Dunkan · Rzut parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-dunkan-r1-jpg-ed6fcf2249",
+      "selectionReason": "only variant (1025x1280, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.800781,
+          "byteHash": "21d1cdb04ab19bea02f1e6632aa5402512244bc20a5bdf731b931f3935c5ab8e",
+          "byteLength": 208025,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1025
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-r1-jpg-ed6fcf2249",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_r1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-dunkan-w1-jpg-517f0fb65d",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w1-jpg-af309c4751",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "ead635a7fc1c8b4d3fdd52d246837bad803251de38db22c6b9cab22952d84fca",
+          "byteLength": 475080,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w1-jpg-af309c4751",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/dunkan_w1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-115423e4f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "byteLength": 61287,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "byteLength": 23380,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-2122c17c71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.715818,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "byteLength": 66219,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-jpg-b3083b8576",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg"
+        },
+        {
+          "aspect": 1.715818,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "byteLength": 14602,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-598a2abb68",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "byteLength": 55569,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "byteLength": 18930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Prezentacja",
+      "id": "asset-prezentacja-e019163552",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.738053,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "byteLength": 71506,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 417
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-0702d5c9f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w1-jpg-w-286-a96dbb9939",
+      "selectionReason": "largest decoded raster of 2 variants: 1865x1200 over 784x504",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "6c1c819133de77264dfad570992a6713d832f00df6d772edb00fff760e5299f1",
+          "byteLength": 724320,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w1-jpg-w-286-a96dbb9939",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w1.jpg?w=286)"
+        },
+        {
+          "aspect": 1.555556,
+          "byteHash": "1c79a158e3a89a4cd86e44e6d14d1a292d810e6c52e26728e401315b3f1f4ee2",
+          "byteLength": 130067,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w1-jpg-p-prslide-8067875690",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w1.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-e25becc350",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551724,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "byteLength": 160714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 203,
+            "width": 315
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-07742f95b3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w7-jpg-p-prslide-be531b72c0",
+      "selectionReason": "only variant (784x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499044,
+          "byteHash": "ae7a60f2f55d46b36bf5cf406eee75d6e3624d4066ab5433a124e7b16b119bb5",
+          "byteLength": 113938,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w7-jpg-p-prslide-be531b72c0",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w7.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-2a4345ef5c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w5-jpg-p-prslide-ef150ff5b9",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "000cf4ef20263e43367bd88e8dd539850d844b024c7ef1ce490401051b0f3306",
+          "byteLength": 106606,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w5-jpg-p-prslide-ef150ff5b9",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w5.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-4e9d950730",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w2-jpg-p-prslide-7c149158c4",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "2dce30c7f49b4437ccd943ba04206a6d202897c6949a1082dd129d53cb056071",
+          "byteLength": 129337,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w2-jpg-p-prslide-7c149158c4",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w2.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-8d224d9aa7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w8-jpg-p-prslide-ce2509459e",
+      "selectionReason": "only variant (784x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499044,
+          "byteHash": "82f3038b50b499a5a8dedf6df5202a62e874eade8e56a5eccb2e6f269824c05e",
+          "byteLength": 99869,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w8-jpg-p-prslide-ce2509459e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w8.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-95edbef962",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w3-jpg-p-prslide-ed0e942e4f",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "8acb27c5c41a5f1d68bf936b593561114d503259fb39cec6baabb566a6959776",
+          "byteLength": 132840,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w3-jpg-p-prslide-ed0e942e4f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w3.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-d41b518d93",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w9-jpg-p-prslide-09c8d60a3b",
+      "selectionReason": "only variant (784x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499044,
+          "byteHash": "7b4e3af93e012f9ea0bdf5c8ad05d5becf9abaedd9fe579d61c46714bf13d418",
+          "byteLength": 103967,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w9-jpg-p-prslide-09c8d60a3b",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w9.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-d522c2e9d6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w6-jpg-p-prslide-bc61be8da9",
+      "selectionReason": "only variant (784x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499044,
+          "byteHash": "a81358ff407c10429aa3e6963d41447b816db0fb70009443dca330fd4d838e33",
+          "byteLength": 99450,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w6-jpg-p-prslide-bc61be8da9",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w6.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-e4a94784f8",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w10-jpg-p-prslide-f944480f23",
+      "selectionReason": "only variant (784x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.499044,
+          "byteHash": "77bb4f51be2cc8d412a641244a5e23d81d9c459d49f4c000c358d34b6ef5a565",
+          "byteLength": 89982,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w10-jpg-p-prslide-f944480f23",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w10.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu parterowego, z wysokim salonem, z garażem dwustanowiskowym Dunkan",
+      "id": "asset-projekt-domu-parterowego-z-wysokim-salonem-z-gar-f15eda8807",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-dunkan-w4-jpg-p-prslide-aae72cedbd",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "376a201290210c20ab8e2f6343ec0d3533974912c4aa6ab589f41bd87eafc085",
+          "byteLength": 132672,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-dunkan-w4-jpg-p-prslide-aae72cedbd",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/dunkan/dunkan_w4.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Wycena",
+      "id": "asset-wycena-fb105e7612",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "byteLength": 53872,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/dunkan",
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/dunkan",
+  "contentHash": "5faba1406b3817b8794f733edc8615cd15e274886fb081ba489434d72a4f462b",
+  "documents": [
+    {
+      "caption": "Charakterystyka energetyczna",
+      "code": "NOT_A_DRAWING",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "status": "NOT_FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/Pliki%20do%20pobrania/dunkan_ch.pdf",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "ecd279fc995162a3db1122ff011dd44614cd5bb9978defe59ab02e0784b431cf",
+      "byteLength": 63508,
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/Pliki%20do%20pobrania/dunkan_pk.pdf",
+      "variant": "BASE"
+    },
+    {
+      "byteHash": "b66ab5b3321388b53a39bbb79379ad57e3a38882a773534063708b556864bacb",
+      "byteLength": 611296,
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "mediaType": "image/vnd.dwg",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/Pliki%20do%20pobrania/dunkan_pkdwg.dwg",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "e19a8c988a12878616df512ee4114046c22188834fccb13384db18d407f8d3eb",
+      "byteLength": 64441,
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/dunkan/Pliki%20do%20pobrania/dunkan_pkl.pdf",
+      "variant": "MIRRORED"
+    }
+  ],
+  "failures": [],
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/dunkan/",
+  "id": "src-www-dobredomy-pl-1d3a43fdbe",
+  "pageHash": "4965ee9c6001d9ae9a64eef8a7d412bdb9d360a8f0ab591ed2c016e6e063204a",
+  "project": {
+    "name": "Projekt domu Dunkan",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "raw": "3",
+      "unit": "count",
+      "value": 3
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "5,50 m",
+      "unit": "m",
+      "value": 5.5
+    },
+    {
+      "key": "flat_roof_area",
+      "label": "Powierzchnia dachu płaskiego",
+      "raw": "17,40 m²",
+      "unit": "m2",
+      "value": 17.4
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "215,90 m²",
+      "unit": "m2",
+      "value": 215.9
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "raw": "35,60 m²",
+      "unit": "m2",
+      "value": 35.6
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "raw": "25,64 m",
+      "unit": "m",
+      "value": 25.64
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "raw": "28,84 m",
+      "unit": "m",
+      "value": 28.84
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "raw": "25°",
+      "unit": "deg",
+      "value": 25
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "raw": "3",
+      "unit": "count",
+      "value": 3
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "raw": "270,40 m²",
+      "unit": "m2",
+      "value": 270.4
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "134,80 m²",
+      "unit": "m2",
+      "value": 134.8
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "raw": "629,90 m³",
+      "unit": "none",
+      "value": 629.9
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "25°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "PROJEKT DOSTĘPNY TYLKO U NAS</p><p></p>Dunkan to intrygujący, niebanalny dom parterowy, wyróżniający się chłodną, stonowaną kolorystyką oraz dość nietypowym układem bryły. Budynek składa się z dwóch segmentów połączonych strefą wejściową. Część dzienna domu to jedna przestrzeń z dużą kuchnią, jadalnią i salonem, rozświetlona poprzez duże przeszklenia od strony ogrodu. Ten niezwykły widok jest pięknie pokazany na wizualizacji wnętrz. Na uwagę zasługuje również wysoki sufit nad całą strefą dzienną. W drugim segmencie zaprojektowano strefę prywatną domowników. Dwa pokoje, ogólnodostępna łazienka i apartament dla Rodziców (z osobną garderobą i łazienką) powinny zadowolić 4-5-osobową rodzinę. W hallu łączącym część dzienną z częścią prywatną zaprojektowano niewielką toaletę i spiżarnię. Całość uzupełnia strefa gospodarcza z garażem i kotłownią. Projekt dostępny w wersji z innym układem strefy dziennej - Dunkan II oraz w wersji o większej pow. użytkowej - Dunkan III, Dunkan IV i Dunkan V."
+    }
+  ],
+  "requestedUrl": "https://www.dobredomy.pl/projekt/dunkan/",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0"
+}
+

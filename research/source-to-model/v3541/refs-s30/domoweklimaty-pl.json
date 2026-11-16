@@ -1,0 +1,66 @@
+{
+  "slug": "domoweklimaty-pl",
+  "imagesUsed": [
+    {"n": 1, "what": "ground-floor plan, room areas only, no dimension text; front (entrance, garage door) at the bottom; outer wall faces located from window symbols (black flattened background)"},
+    {"n": 2, "what": "attic plan: 4 bedrooms, hall, wardrobe, bathroom; garage flat roof drawn in front"},
+    {"n": 6, "what": "site plan: roof outline, dashed ground walls, entrance arrow; dimension text lost (black on flattened black)"},
+    {"n": 4, "what": "four rendered elevations: front (top-left), left with dormer (top-right), rear (bottom-left), right (bottom-right)"},
+    {"n": 3, "what": "exterior render, front-left corner (5 is a smaller copy)"}
+  ],
+  "mirrorOrOtherProjectWarning": "All 6 pictures show this house; 5 duplicates 3. All views agree (garage front-right, dormer left); not mirrored.",
+  "overall": {"widthM": 10.1, "depthM": 15.55, "heightM": 8.1, "basis": "width = published 10,1 m, matching plan 1 outer extent (kitchen bump to right wall, 930 px); depth scaled from plan 1 at that scale (rear wall to garage front); height SCALED from front and rear elevations (ridge above ground), not printed"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": true, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "ground floor + habitable attic, ridge front-to-back; upper storey projects ~1.5 m over the ground front wall (porch) and over the salon rear wall (loggia)", "storeys": "1+attic", "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "9.1 wide; ground walls 11.5 deep, attic ~13.0 deep"},
+    {"name": "kitchen bump", "role": "EXTENSION", "where": "front-left, 1.0 m proud of the left wall, under a catslide extension of the left roof slope", "storeys": 1, "enclosed": true, "roofKind": "MONO_PITCH", "ridge": "NA", "approxSizeM": "1.0 x 3.9"},
+    {"name": "garage", "role": "GARAGE", "where": "front-right, projects 4.1 m ahead of the ground front wall; front ~2 m has its own flat roof", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "4.1 x 6.5"},
+    {"name": "wall dormer", "role": "DORMER", "where": "left slope, mid-depth, gabled, French door with glass balcony", "storeys": "attic", "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "~2.5 wide"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 42, "notes": "Pitch from page facts only. Gables face front and rear with timber king-post ornaments; timber-lined eaves; left slope carried lower over kitchen bump and porch; one gabled wall dormer on the left; no rooflights; dark ceramic tiles."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]},
+      {"storey": 1, "count": 2, "leftToRight": ["GLAZED_DOOR", "WINDOW"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "LARGE_GLAZING"]},
+      {"storey": 1, "count": 2, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 1, "leftToRight": ["GLAZED_DOOR"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]},
+      {"storey": 1, "count": 0, "leftToRight": []}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "RIGHT", "what": "salon 3-panel floor-length glazing ~2.7 m wide, set in the recessed loggia"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "one at the ridge near the rear (salon fireplace), one on the right slope mid-depth (boiler room)"},
+    {"kind": "DORMER", "count": 1, "where": "gabled wall dormer on the left slope"},
+    {"kind": "BALCONY", "count": 4, "where": "small glass-balustrade balconies at attic French doors: front left, rear x2, dormer"},
+    {"kind": "PORCH", "count": 1, "where": "front, under the overhanging upper storey, white corner pillar at the front-left, lit soffit"},
+    {"kind": "OTHER", "count": 2, "where": "timber gable ornaments"}
+  ],
+  "palette": {"walls": "cream/ivory render, brown timber soffits and gable ornaments, brown window frames, wood-look garage door, glass balustrades", "roof": "graphite ceramic tile; grey chimneys"},
+  "groundOutline": {"shape": "OTHER", "corners": 10, "polygonM": [[0,4.07], [5.96,4.07], [5.96,0], [10.1,0], [10.1,15.55], [5.35,15.55], [5.35,13.89], [1.0,13.89], [1.0,7.95], [0,7.95]], "closedAreaM2": 118.0, "basis": "L-like (garage 4.1 m ahead at front-right) with kitchen bump front-left and a rear-left notch (loggia); plan 1 at 92.1 px/m, origin = bbox front-left (garage front line); site-plan dashed walls agree; 118.0 m2 vs published 118,5 m2 zabudowy"},
+  "openZones": [
+    {"kind": "PORCH", "roofed": true, "where": "front, before kitchen window and entrance, between the left corner pillar and the garage, under the projecting upper storey", "approxSizeM": "6.0 x 1.5 (roof edge ~2.0)"},
+    {"kind": "LOGGIA", "roofed": true, "where": "rear-left behind the salon, under the upper storey, between the rear bedroom block and a corner pier", "approxSizeM": "~4.3 x 1.7 (niche 3.6 m wide in rear elevation)"}
+  ],
+  "printedOverall": {"widthCm": null, "depthCm": null, "printedText": null, "where": "no readable dimension on any picture (site-plan text lost); width 10,1 m is a page fact"},
+  "groundRooms": 10,
+  "uncertain": [
+    "Scale rests on the published width; depth may be short by up to 0.2 m because the garage front wall sits on the bottom edge of picture 1.",
+    "Height 8.1 m scaled from elevations, not printed; no section.",
+    "Left elevation shows a grey door-sized panel near the rear-left corner (light recessed panel in render 3); plan 1 has no opening there, so it is not counted.",
+    "Salon left window and rear bedroom window reach nearly to the floor in elevations; counted as WINDOW.",
+    "Basement: none shown."
+  ],
+  "confidence": "MEDIUM - plans, elevations and renders agree, but no dimension is legible; sizes are scaled from the published width and check against the published building area."
+}

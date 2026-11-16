@@ -1,0 +1,1519 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-bocz-23b73c0b96",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-715284d2252d6792ec38-2524cb6d13",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x565 over 550x243",
+      "variants": [
+        {
+          "aspect": 2.265487,
+          "byteHash": "5d7f7a36ca65b47943b28086b6d510e74786b51b79f4c314f3423bffbea846d6",
+          "byteLength": 453367,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-715284d2252d6792ec38-2524cb6d13",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-715284d2252d6792ec388581958b6f57__11265.jpg"
+        },
+        {
+          "aspect": 2.263374,
+          "byteHash": "7bac56b03760d241c7a773a34edb50a1fa5b0addc08d0fcaf20bf8fe06f4df6f",
+          "byteLength": 97497,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 243,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-elewacja-boczna-projekt-dom-w-toreniach-3-e-aef3-510327b2b7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/elewacja-boczna-projekt-dom-w-toreniach-3-e-aef316b3507f17798916a95b21dc8708__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-bocz-4908c6b207",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w toreniach 3 (e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-d0ce0e7654d2a6f779ad-a5b12df058",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x566 over 550x242",
+      "variants": [
+        {
+          "aspect": 2.261484,
+          "byteHash": "71cfef1fcd06ca22b7618ba841f6db4deb6e2604885a525208ac4b291c1f52ee",
+          "byteLength": 538592,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 566,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-d0ce0e7654d2a6f779ad-a5b12df058",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-d0ce0e7654d2a6f779add330387d2db1__11266.jpg"
+        },
+        {
+          "aspect": 2.272727,
+          "byteHash": "77b17708a7ff56454b577808cf54cc1e89e6095452fee690d406cf6abbe48f5e",
+          "byteLength": 115796,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 242,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-elewacja-boczna-projekt-dom-w-toreniach-3-e-7b54-25fc3fd7d0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/elewacja-boczna-projekt-dom-w-toreniach-3-e-7b54ff77f3ba2e77ac3c629d24dee331__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-fron-002968d780",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w toreniach 3 (e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w toreniach 3 (e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-59b6b0e2b2f2b50d1df2-9db99246ff",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x565 over 550x244",
+      "variants": [
+        {
+          "aspect": 2.265487,
+          "byteHash": "6f63d7e0fcd016d256dce301dcdef05f9ab881b691ed294133d8ec38e14b1203",
+          "byteLength": 691247,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-59b6b0e2b2f2b50d1df2-9db99246ff",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-59b6b0e2b2f2b50d1df293481ea0f728__11264.jpg"
+        },
+        {
+          "aspect": 2.254098,
+          "byteHash": "4e4c37640e7072f20eb9e2704997e084e0751e4348631aa9525dc1f036f7bc8b",
+          "byteLength": 141048,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 244,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-elewacja-frontowa-projekt-dom-w-toreniach-3-e-6a-b5626cf7c7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/elewacja-frontowa-projekt-dom-w-toreniach-3-e-6a8b567983f581effd0e47c17a50868c__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-ogro-552e52b6ce",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w toreniach 3 (e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w toreniach 3 (e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w toreniach 3 (e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-d388d853731030a049eb-5e61bf0193",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x566 over 550x243",
+      "variants": [
+        {
+          "aspect": 2.261484,
+          "byteHash": "94be6b40615ad6d8ba8a087a94f7e9b3e14242f0501a8e264f3ff70f03795858",
+          "byteLength": 684440,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 566,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-d388d853731030a049eb-5e61bf0193",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-d388d853731030a049ebb86273288d82__11267.jpg"
+        },
+        {
+          "aspect": 2.263374,
+          "byteHash": "6f928d6b1fcf7cc7c8cb99d7e5ce52b3bc2aa80dc82e70909c95d9aa9c910a1a",
+          "byteLength": 137273,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 243,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-toreniach-3-e-f6-291dcade51",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/elewacja-ogrodowa-projekt-dom-w-toreniach-3-e-f69963789e7fccc70dfb62fe880bb8fa__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-przekroj-budy-7de2d78b31",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w toreniach 3 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w toreniach 3 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w toreniach 3 (e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-toreniach-3-e-e23-b59ab263d5",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "88e3b66c0ca605e60e92feb3cca55726459745ec1da5332c7224e9e3ed27c7f3",
+          "byteLength": 67857,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/me822857280738/przekroj-budynku-projekt-dom-w-toreniach-3-e-e235bb56b1addd9dbf13d0fce5748f1b__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-toreniach-3-e-e23-b59ab263d5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/przekroj-budynku-projekt-dom-w-toreniach-3-e-e235bb56b1addd9dbf13d0fce5748f1b__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "ef757be8ece4c199763be5072dd3cacedd1ae8b491546126dc78c997c647cfcd",
+          "byteLength": 18795,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-przekroj-budynku-projekt-dom-w-toreniach-3-e-e23-a36bc12cfb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/przekroj-budynku-projekt-dom-w-toreniach-3-e-e235bb56b1addd9dbf13d0fce5748f1b__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-rzut-parteru-1b1997035d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-toreniach-3-e-51386a5-58fd611507",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4c9fb34d49fdba4f404a4d64fbdbe32f0be03da944c316edc05b82010fc760a3",
+          "byteLength": 52658,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me822857280738/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-toreniach-3-e-51386a5-58fd611507",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/me822857280738/rzut-parteru-projekt-dom-w-toreniach-3-e-51386a54d392b6d990c2b6df274af627__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-sytuacja-59ed9ef8f8",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w toreniach 3 (e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w toreniach 3 (e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-27de529eb0495ec8c0a3-81d25b485a",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "3d889161de66a9772fef2ce794fcf17f2f9c90d9ef81068101f0ce36e24d2bfd",
+          "byteLength": 225894,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-27de529eb0495ec8c0a3-81d25b485a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-27de529eb0495ec8c0a392e48817284c__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "cf7341cb802f7d352d8ad5da9b257f9783a76288fb6166345cd8cad947fa1e47",
+          "byteLength": 51032,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-sytuacja-projekt-dom-w-toreniach-3-e-e5cafc4c1f6-5f1dca90e7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/sytuacja-projekt-dom-w-toreniach-3-e-e5cafc4c1f68060251751dad87c2327a__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w toreniach 3 (E) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-toreniach-3-e-widok-1-a8044e55eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-toreniach-3-e-36f114ccb0d4-286ab2d85b",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "c0d7b6e7a29cadcaadd369b80dbf0eb6bdef99d77c9514a369c400447d007693",
+          "byteLength": 9670,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-widok-1-projekt-dom-w-toreniach-3-e-36f114ccb0d4-286ab2d85b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/widok-1-projekt-dom-w-toreniach-3-e-36f114ccb0d4938c83d264cbf7ebfdd6__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w toreniach 3 (E)",
+      "id": "asset-projekt-dom-w-toreniach-3-e-012d3628c5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-toreniach-3-e-10c385d38409-890cd9ae06",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "0b3f08b97e0dd62cd648028597f660a63167f7be5953e189660c95ac179bfad7",
+          "byteLength": 29379,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me822857280738/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-toreniach-3-e-10c385d38409-890cd9ae06",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/widok-2-projekt-dom-w-toreniach-3-e-10c385d384093067bf65b9db30c3ea4c__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w toreniach 3 (E)",
+      "id": "asset-projekt-dom-w-toreniach-3-e-0a3a62892b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-535c18424e37e2fad1eb-4e182e19f9",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "9728e7a92ef934bb1feccc74d41aa227fea64d23bb1fbbcccf021e1ce0060216",
+          "byteLength": 32155,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me822857280738/related?scope=family",
+          "id": "var-projekt-dom-w-toreniach-3-e-535c18424e37e2fad1eb-4e182e19f9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-535c18424e37e2fad1eb4443e5611bde__252.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-toreniach-3-e-5680e86647",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-e15862e563d0a3bf2865-930dfc2f9d",
+      "selectionReason": "only variant (1292x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.514654,
+          "byteHash": "af88e1808b5357706967a400a683e8e54f881d0e478226db257afb1cbea37910",
+          "byteLength": 287356,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1292
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-e15862e563d0a3bf2865-930dfc2f9d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/w1/projekt-dom-w-toreniach-3-e-e15862e563d0a3bf2865e977a68a0d26__61852.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w toreniach 3 e 5e20b43c7e4b183c6ab2b061efc28853  50797",
+      "id": "asset-projekt-dom-w-toreniach-3-e-5e20b43c7e4b183c6ab2-90f7c09b0f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-5e20b43c7e4b183c6ab2-015e5bc1e9",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "79f6f37b169e331c3bd6038f4623b3c6bab1de55a13273051c8645ef530bec55",
+          "byteLength": 610745,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/me822857280738/image/50797?showHotspots=false",
+          "id": "var-projekt-dom-w-toreniach-3-e-5e20b43c7e4b183c6ab2-015e5bc1e9",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/me822857280738/i/projekt-dom-w-toreniach-3-e-5e20b43c7e4b183c6ab2b061efc28853__50797.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-toreniach-3-e-89cdcf7317",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-8251f3e30a82e4f7904f-fcea4b344c",
+      "selectionReason": "only variant (1292x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.514654,
+          "byteHash": "4b601d28c651d1f41c4435f19b2c4ff7efe3d61f094a707182f9bc1fb48af467",
+          "byteLength": 316165,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1292
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-8251f3e30a82e4f7904f-fcea4b344c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/w1/projekt-dom-w-toreniach-3-e-8251f3e30a82e4f7904faae04d4278bf__61851.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w toreniach 3 (E)",
+      "id": "asset-projekt-dom-w-toreniach-3-e-b25938bca2",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-toreniach-3-e-6ad3a14-d412083c7d",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "5842c79a0aebbd4b108548c1d0ea9593c92571b362ff3fb2b656679ea00076b4",
+          "byteLength": 34077,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me822857280738/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-toreniach-3-e-6ad3a14-d412083c7d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/me822857280738/rzut-parteru-projekt-dom-w-toreniach-3-e-6ad3a1402e2df4f8f9227d70c9537b01__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-toreniach-3-e-b85c725564",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-ef4508662ce0ca196f72-3f946c1380",
+      "selectionReason": "only variant (1292x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.514654,
+          "byteHash": "89f2533052290a28f6dbbf59c1dd2a8f52be32d9894414a2f2ec0a63c9d9d478",
+          "byteLength": 299249,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1292
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-ef4508662ce0ca196f72-3f946c1380",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/w1/projekt-dom-w-toreniach-3-e-ef4508662ce0ca196f72997f1e314993__61850.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-toreniach-3-e-dfa37e0bad",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-e0cc0e293b040e6f8251-94742692b4",
+      "selectionReason": "only variant (1292x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.514654,
+          "byteHash": "28ab94314442130fcf0b0f853005f21f082bd9cb650ffdbda97876f61b534a4b",
+          "byteLength": 265763,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1292
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-e0cc0e293b040e6f8251-94742692b4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/w1/projekt-dom-w-toreniach-3-e-e0cc0e293b040e6f825156e44dbe7ab1__61849.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-173d6c8bab",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me822857280738/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me822857280738/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-tore-2769e8c31b",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b919795566c9779c0ca29f8999092c1bd50a3740533882543680b24677af5880",
+          "byteLength": 105769,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-tore-2769e8c31b",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/me822857280738/rzut-parteru-z-powierzchniami-projekt-dom-w-toreniach-3-e-4a2cdee3784617b725c9e5befae741c2__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-a682f4c723",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me822857280738/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me822857280738/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w toreniach 3 (e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-toreniach-3-e-2fd1fa68a518878892d2-9afbb8b94e",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "400c6f15496d09a00f60749821c99464683597cc57bcdcba971c92ea20aad521",
+          "byteLength": 108481,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-projekt-dom-w-toreniach-3-e-2fd1fa68a518878892d2-9afbb8b94e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-2fd1fa68a518878892d2d1954f2b2e4c__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-toreniach-3-e-90cb5e6b2b",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-toreniach-3-e-0c6bdee1677e-27b82731c6",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "64aa62708f827add5fd0af235db8327637745f52a0611fdf636d25d4f8c43621",
+          "byteLength": 385171,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-widok-1-projekt-dom-w-toreniach-3-e-0c6bdee1677e-27b82731c6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/widok-1-projekt-dom-w-toreniach-3-e-0c6bdee1677e6c972fbcb9b3c388a21c__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-toreniach-3-e-5f92ce84a4",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-toreniach-3-e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w toreniach 3 (e) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-toreniach-3-e-2719a8fa1437-560e0f72f8",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1b7e60bca22369c4a601ab84c6f3d840ebbb9e7276ebdaa89447a207a49f0416",
+          "byteLength": 363563,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+          "id": "var-widok-2-projekt-dom-w-toreniach-3-e-2719a8fa1437-560e0f72f8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/me822857280738/widok-2-projekt-dom-w-toreniach-3-e-2719a8fa1437ac10ee2eb7203b61477f__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-toreniach-3-e-me822857280738",
+  "contentHash": "3cece31fc5d34d22e2a1b45a1ba01ee0d151ee5b875925a36ebcb6ceb0551ae6",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-535c18424e37e2fad1eb4443e5611bde__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/rzut-parteru-projekt-dom-w-toreniach-3-e-51386a54d392b6d990c2b6df274af627__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/rzut-parteru-projekt-dom-w-toreniach-3-e-6ad3a1402e2df4f8f9227d70c9537b01__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/widok-1-projekt-dom-w-toreniach-3-e-0c6bdee1677e6c972fbcb9b3c388a21c__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/widok-1-projekt-dom-w-toreniach-3-e-36f114ccb0d4938c83d264cbf7ebfdd6__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/widok-2-projekt-dom-w-toreniach-3-e-10c385d384093067bf65b9db30c3ea4c__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/me822857280738/widok-2-projekt-dom-w-toreniach-3-e-2719a8fa1437ac10ee2eb7203b61477f__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-d0ce0e7654d2a6f779add330387d2db1__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me822857280738/elewacja-boczna-projekt-dom-w-toreniach-3-e-7b54ff77f3ba2e77ac3c629d24dee331__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-715284d2252d6792ec388581958b6f57__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me822857280738/elewacja-boczna-projekt-dom-w-toreniach-3-e-aef316b3507f17798916a95b21dc8708__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-59b6b0e2b2f2b50d1df293481ea0f728__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me822857280738/elewacja-frontowa-projekt-dom-w-toreniach-3-e-6a8b567983f581effd0e47c17a50868c__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-d388d853731030a049ebb86273288d82__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me822857280738/elewacja-ogrodowa-projekt-dom-w-toreniach-3-e-f69963789e7fccc70dfb62fe880bb8fa__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me822857280738/projekt-dom-w-toreniach-3-e-27de529eb0495ec8c0a392e48817284c__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me822857280738/sytuacja-projekt-dom-w-toreniach-3-e-e5cafc4c1f68060251751dad87c2327a__11255.jpg"
+    }
+  ],
+  "id": "src-me822857280738-14303fad62",
+  "pageHash": "4af4a9df2629ba2198dc004de3178530a9a506765a142c53ea5c05f4281af79c",
+  "project": {
+    "externalId": "me822857280738",
+    "name": "Projekt domu Dom w toreniach 3 (E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "3,53 m&sup2;",
+      "unit": "m2",
+      "value": 3.53
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,04 m",
+      "unit": "m",
+      "value": 6.04
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "73,5 m&sup2;",
+      "unit": "m2",
+      "value": 73.5
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "99,16 m&sup2;",
+      "unit": "m2",
+      "value": 99.16
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "69,97 m&sup2;",
+      "unit": "m2",
+      "value": 69.97
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "114,03 m&sup2;",
+      "unit": "m2",
+      "value": 114.03
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "96,73 m&sup2;",
+      "unit": "m2",
+      "value": 96.73
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "73,5 m&sup2;",
+      "unit": "m2",
+      "value": 73.5
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "484,01 m&sup3;",
+      "unit": "none",
+      "value": 484.01
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.47,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 4,47 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.73,
+      "index": 2,
+      "label": "Kuchnia",
+      "raw": "2. Kuchnia | 9,73 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 25.87,
+      "index": 3,
+      "label": "Salon + Jadalnia",
+      "raw": "3. Salon + Jadalnia | 25,87 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.09,
+      "index": 4,
+      "label": "Pokój",
+      "raw": "4. Pokój | 11,09 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.74,
+      "index": 5,
+      "label": "Pokój",
+      "raw": "5. Pokój | 12,74 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.07,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 6,07 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.53,
+      "index": 7,
+      "label": "Kotłownia z pralnią",
+      "raw": "7. Kotłownia z pralnią | 3,53 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu jednorodzinnego \"Dom w toreniach 3 (E)\" to nowoczesny dom parterowy, który łączy funkcjonalność z elegancją. Jego prosty, ale efektowny design oparty jest na dwuspadowym dachu bez okapów, co nadaje mu minimalistycznego charakteru. Nowoczesne elewacje pokryte białym tynkiem z szarymi akcentami, oraz drewniana okładzina na elewacjach szczytowych nadają mu wyjątkowego charakteru. Serce domu stanowi przestronna dwukondygnacyjna strefa dzienna, w której znajduje się kuchnia z dużym półwyspem – idealna do wspólnego gotowania i spędzania czasu jadalnia oraz salon. Pośrodku tej przestrzeni znajduje się kominek , który rozświetli tę strefę przytulnym blaskiem. Z salonu wychodzi się na taras osłonięty pergolą, tworzący wspaniałe miejsce do odpoczynku na świeżym powietrzu. Zaprojektowano tu dwa pokoje, sypialnię rodziców oraz wygodny dwuosobowy pokój dla dzieci. Przestronna łazienka, a także pralnia zlokalizowaną w kotłowni, zapewniają wygodę codziennego użytkowania. Dom wyposażono w wentylację mechaniczną z odzyskiem ciepła (rekuperację), co zapewnia komfortowy mikroklimat przez cały rok. Projekt \"Dom w toreniach 3 (E)\", to doskonały wybór dla osób ceniących nowoczesne rozwiązania, estetykę oraz komfort."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "drewniany"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy bez okapów, nachylenie 30 st. , więźba drewniana, blachodachówka / dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop drewniany , 69.97 m² + 3.53 m² , 3 pokoje, kuchnia, łazienka, kotłownia, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

@@ -1,0 +1,64 @@
+{
+  "slug": "fresh-saponarie-g2e",
+  "imagesUsed": [
+    {"n": 21, "what": "ground plan, dimensioned: top 810+840=1650, bottom 300+375+285+690=1650, left 474+840+70+376=1760; front at the bottom; 13 and 17 copies"},
+    {"n": 10, "what": "front elevation ('frontowa')"},
+    {"n": 11, "what": "rear elevation ('ogrodowa')"},
+    {"n": 8, "what": "side with pergola terrace at the left, front on the right = LEFT facade"},
+    {"n": 9, "what": "side with garage at the left = RIGHT facade"},
+    {"n": 12, "what": "section: ridge +6.11, eaves +2.96, 30 deg, room 275, ground -0.32, unused roof void"},
+    {"n": 14, "what": "site plan 1650 x 1760, cross-hip roof, slatted pergola at rear-left"},
+    {"n": 22, "what": "front render"},
+    {"n": 23, "what": "rear render with pergola terrace (05 close-up)"}
+  ],
+  "mirrorOrOtherProjectWarning": "None seen; plan, elevations, site plan and renders agree (living left, double garage front-right, bedrooms along the right).",
+  "overall": {"widthM": 16.5, "depthM": 17.6, "heightM": 6.43, "basis": "printed 1650 x 1760 on plan 21 and site plan 14; depth is the closed bedroom wing (the 474 rear-left pergola lies within it); height = +6.11 over ground -0.32 = published 6.43"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "bedroom and garage wing", "role": "MAIN", "where": "right side, full depth: double garage at the front, bedrooms behind", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ACROSS_FRONT", "approxSizeM": "8.40 x 17.60"},
+    {"name": "living wing", "role": "WING", "where": "left, attached mid-depth: living/dining/kitchen, kitchen bay projecting 0.70 m at the front", "storeys": 1, "enclosed": true, "roofKind": "HIP", "ridge": "ALONG_FRONT", "approxSizeM": "8.10 x 8.40"},
+    {"name": "rear pergola", "role": "PERGOLA", "where": "rear-left, behind the living wing, beside the bedroom wing: white flat frame, corner post, slats", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "8.10 x 4.74"}
+  ],
+  "mainRoof": {"kind": "HIP", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Cross-hip roof: top ridge about 8 m along the front over the living wing, meeting a front-to-back ridge over the bedroom wing; lower hip ends over the garage and the kitchen bay at the front."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["LARGE_GLAZING", "WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "GLAZED_DOOR", "LARGE_GLAZING"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "RIGHT", "what": "400/230 slider of the living room under the pergola"},
+    {"facade": "FRONT", "position": "LEFT", "what": "280/230 glazing at the front-left corner of the living room (130/230 windows on the left wall)"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "one on the living-wing roof left of centre, one on the bedroom-wing roof near the junction"},
+    {"kind": "PERGOLA", "count": 1, "where": "rear-left terrace"},
+    {"kind": "OTHER", "count": 1, "where": "entrance recessed between kitchen bay and garage under the roof overhang, timber panel beside the door"},
+    {"kind": "OTHER", "count": 1, "where": "kitchen bay projecting 0.70 m with its own small front hip"}
+  ],
+  "palette": {"walls": "white upper band under the eaves, graphite render, light grey concrete-look panels (garage surround, right facade), warm vertical timber (entrance, pergola, rear), dark frames", "roof": "graphite flat roof tiles"},
+  "groundOutline": {"shape": "T", "corners": 12, "polygonM": [[0, 4.46], [3.0, 4.46], [3.0, 3.76], [6.75, 3.76], [6.75, 5.0], [9.6, 5.0], [9.6, 0], [16.5, 0], [16.5, 17.6], [8.1, 17.6], [8.1, 12.86], [0, 12.86]], "closedAreaM2": 210.3, "basis": "x from chains 300/375/285/690 and 810/840, z from 474/840/70/376 on plan 21; entrance face z about 5.0 scaled; origin = left face x and garage front z; published footprint 212.51"},
+  "openZones": [
+    {"kind": "PERGOLA", "roofed": false, "where": "rear-left terrace between living-wing rear and bedroom-wing left face", "approxSizeM": "8.1 x 4.74"},
+    {"kind": "PORCH", "roofed": true, "where": "front entrance recess under the roof overhang", "approxSizeM": "about 2.85 x 1.5"}
+  ],
+  "printedOverall": {"widthCm": 1650, "depthCm": 1760, "where": "plan 21 top/bottom and left chains; site plan 14"},
+  "groundRooms": 14,
+  "uncertain": [
+    "Pergola reads as slatted (site plan, render 05) but rear render 23 could be read as a solid flat roof.",
+    "LEFT openings sit on two planes: 200/230 and the 90/230 bathroom door on the bedroom-wing face facing the pergola; two 130/230 windows on the living-wing face.",
+    "REAR middle opening is the 90/230 boiler-room door under the pergola.",
+    "Roof has two ridge directions; ALONG_FRONT chosen as the longest top ridge."
+  ],
+  "confidence": "HIGH - fully dimensioned plan, section, four elevations, site plan and many renders agree."
+}

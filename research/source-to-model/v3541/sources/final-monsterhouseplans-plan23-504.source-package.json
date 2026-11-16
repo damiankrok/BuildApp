@@ -1,0 +1,331 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-23-504-e851727fa5",
+  "canonicalUrl": "https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504",
+  "requestedUrl": "https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504/",
+  "fetchedUrl": "https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504/",
+  "pageHash": "f03832d12f3a18e237d85f3b52907d6b4339125f9e066990973b051e56e428ef",
+  "project": {
+    "externalId": "23-504",
+    "name": "4 Bedroom, 2 Bath Craftsman House Plan #23-504",
+    "publisher": "monsterhouseplans.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-craftsman-house-plans-23-504-lower-floor-plan-2-8f26b6d60d",
+      "caption": "Craftsman house plans 23-504 - lower floor plan, 2,303 sq ft, 4 bed, 2 bath house plans | Monster House Plans",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Craftsman house plans 23-504 - lower floor plan, 2,303 sq ft, 4 bed, 2 bath hous\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-23-504l-gif-60dfce19a2",
+          "url": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504l.gif",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504",
+          "mediaType": "image/gif",
+          "byteLength": 14055,
+          "byteHash": "8f041a34b8e399e77f34957fd77a1c0a3ba6ef1ea52e5a5b4766fa5580b59f08",
+          "decoded": {
+            "width": 725,
+            "height": 633
+          },
+          "declaredMismatch": false,
+          "aspect": 1.14534
+        }
+      ],
+      "selectedVariantId": "var-23-504l-gif-60dfce19a2",
+      "selectionReason": "only variant (725x633, decoded from bytes)"
+    },
+    {
+      "id": "asset-craftsman-house-plans-23-504-main-floor-plan-2-3-0416216439",
+      "caption": "Craftsman house plans 23-504 - main floor plan, 2,303 sq ft, 4 bed, 2 bath house plans | Monster House Plans",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Craftsman house plans 23-504 - main floor plan, 2,303 sq ft, 4 bed, 2 bath house\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Craftsman house plans 23-504 - main floor plan, 2,303 sq ft, 4 bed, 2 bath house\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Main Floor\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-23-504m-gif-c3b14a0c75",
+          "url": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504m.gif",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504",
+          "mediaType": "image/gif",
+          "byteLength": 27921,
+          "byteHash": "2a02db0baf368d4b68e9844246da2c442ceb4a2ddb509f2681bff1c404ad7629",
+          "decoded": {
+            "width": 725,
+            "height": 632
+          },
+          "declaredMismatch": false,
+          "aspect": 1.147152
+        }
+      ],
+      "selectedVariantId": "var-23-504m-gif-c3b14a0c75",
+      "selectionReason": "only variant (725x632, decoded from bytes)"
+    },
+    {
+      "id": "asset-craftsman-house-plans-23-504-upper-floor-plan-2-dac3603441",
+      "caption": "Craftsman house plans 23-504 - upper floor plan, 2,303 sq ft, 4 bed, 2 bath house plans | Monster House Plans",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Craftsman house plans 23-504 - upper floor plan, 2,303 sq ft, 4 bed, 2 bath hous\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"upper\" in \"Craftsman house plans 23-504 - upper floor plan, 2,303 sq ft, 4 bed, 2 bath hous\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"upper\" in \"Upper/Second Floor\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-23-504u-gif-5d9078bc76",
+          "url": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504u.gif",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504",
+          "mediaType": "image/gif",
+          "byteLength": 25946,
+          "byteHash": "f8e9a44cfcfe9834b8467a955a9624d387a883f0e965b56e0f46c6fd89edf19a",
+          "decoded": {
+            "width": 725,
+            "height": 656
+          },
+          "declaredMismatch": false,
+          "aspect": 1.105183
+        }
+      ],
+      "selectedVariantId": "var-23-504u-gif-5d9078bc76",
+      "selectionReason": "only variant (725x656, decoded from bytes)"
+    },
+    {
+      "id": "asset-house-plans-positivessl-secured-website-seal-mon-13c5a37bd7",
+      "caption": "House plans - PositiveSSL secured website seal | Monster House Plans",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-footer-mono-jpg-4d0df93bae",
+          "url": "https://www.monsterhouseplans.com/assets/front/images/footer-mono.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.monsterhouseplans.com/house-plans/craftsman-style/2303-sq-ft-home-2-story-4-bedroom-2-bath-house-plans-plan23-504",
+          "mediaType": "image/jpeg",
+          "byteLength": 4573,
+          "byteHash": "900864485f69b620bfc8a7405adc71f237926aac8728620765d8b03076eba5c5",
+          "decoded": {
+            "width": 96,
+            "height": 96
+          },
+          "declared": {
+            "width": 96,
+            "height": 96
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-footer-mono-jpg-4d0df93bae",
+      "selectionReason": "only variant (96x96, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "value": 8.839,
+      "unit": "m",
+      "raw": "29' 0\""
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 12.141,
+      "unit": "m",
+      "raw": "39' 10\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 17.678,
+      "unit": "m",
+      "raw": "58' 0\""
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Building from one of our blueprints is more cost-effective than buying a home and renovating it, which is already a huge plus. But Monster House Plans go beyond that. Our services are unlike any other option because we offer unique, brand-specific ideas that you can't find elsewhere."
+    },
+    {
+      "key": "stairs",
+      "label": "Stairway details",
+      "text": "Drawings showing the actual plumbing pipe sizes and locations"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Find your dream Craftsman style house plan such as Plan 23-504 which is a 2303 sq ft, 4 bed, 2 bath home with 2 garage stalls from Monster House Plans."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-102/23-102e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-220/23-220e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "STRUCTURED_DATA_IMAGE"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_SRC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-504/23-504r.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-534/23-534e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-580/23-580e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-582/23-582e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_plans/23/23-598/23-598e.webp",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type application/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://s3-us-west-2.amazonaws.com/prod.monsterhouseplans.com/uploads/images_sliders/mh4p4mo7n2.jpg",
+      "code": "MEDIA_TYPE_NOT_ALLOWED",
+      "message": "media type binary/octet-stream is not allowed",
+      "claim": {
+        "channel": "IMG_LAZY_ATTR",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "DECODE",
+      "target": "https://www.facebook.com/tr?id=26141308575496091&ev=PageView&noscript=1",
+      "code": "UNSUPPORTED_FORMAT",
+      "message": "0 bytes served as text/plain are not an image this layer can measure"
+    }
+  ],
+  "contentHash": "53db889dbfaaaa11d62225947459422862eb116066519dfffa5c72ba593328db"
+}

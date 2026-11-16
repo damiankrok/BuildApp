@@ -1,0 +1,843 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-421057hfc-001-exterior-render-jpg-b4a011d41c",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"421057hfc 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"421057hfc 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"421057hfc 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-421057hfc-001-exterior-render-jpg-48de121700",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "b3dd125f418f12fd88359b2b0b4c72f66aa0fd0dffe766251c1b86fafee14e75",
+          "byteLength": 332469,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-001-exterior-render-jpg-48de121700",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167047-478171809593168-0019-3181/421057HFC-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-421057hfc-elevation-front-jpg-b672716b0f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation front\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"421057hfc elevation front\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-front-jpg-fdffc50e3d",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "3b0d51e8d19163efcd730cc7642a46d9bb5bc77bb3a047ad174c27d9cd1a0b67",
+          "byteLength": 84630,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-front-jpg-fdffc50e3d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167047-652174772100722-0020-5992/421057HFC-Elevation-Front.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-421057hfc-elevation-left-jpg-425e4f7fdf",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation left\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"421057hfc elevation left\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-left-jpg-bd2bb5ef90",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "e4f7f8af78ef427d7359d7ccdfdbe21c4d8aff4e7bdd761e955f808646760574",
+          "byteLength": 65625,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-left-jpg-bd2bb5ef90",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167047-525172699668331-0007-6156/421057HFC-Elevation-Left.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-421057hfc-elevation-rear-jpg-357543fc65",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation rear\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"421057hfc elevation rear\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-rear-jpg-7ef5c99c59",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "ab3341412afebbfc2ed76cbff8262029aaa38930a7d527568b8be9db1b95b8b6",
+          "byteLength": 84413,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-rear-jpg-7ef5c99c59",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167047-942034985832180-0006-5722/421057HFC-Elevation-Rear.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-421057hfc-elevation-right-jpg-cd855eaf7a",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation right\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"421057hfc elevation right\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-right-jpg-fea30c6c01",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "c39e88b1389788d6ab69baf200b64af65fc174ed46b5f5af4888441b0ead47a0",
+          "byteLength": 66534,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-right-jpg-fea30c6c01",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167048-310802419267958-0008-3891/421057HFC-Elevation-Right.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Customer Reviews",
+      "id": "asset-customer-reviews-2b596515a7",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan Collections\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-1198-sa-seal-gif-20974717de",
+      "selectionReason": "only variant (166x56, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.964286,
+          "byteHash": "f4a4457e75026ea157684fdfef0eed4984a0a947a4d9eb1677f4e940bfb4db38",
+          "byteLength": 6149,
+          "declared": {
+            "height": 56,
+            "width": 166
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 56,
+            "width": 166
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-1198-sa-seal-gif-20974717de",
+          "mediaType": "image/gif",
+          "url": "https://www.shopperapproved.com/seal/37222/1198-sa-seal.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Image #1 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-001c98cc2d",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"421057hfc 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-421057hfc-001-exterior-render-jpg-3ad098d824",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "fea58373f0755c65779c9cec99831a9b8be3ab64d0c2bd62339da833981ed82a",
+          "byteLength": 168023,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-001-exterior-render-jpg-3ad098d824",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167047-478171809593168-0019-3181/421057HFC-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Floor Plan - Image #6 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-24d13e27b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Floor\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Floor\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"421057hfc f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"421057hfc f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-421057hfc-f1-main-floor-gif-2657109693",
+      "selectionReason": "only variant (1068x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.335,
+          "byteHash": "0a36cd4ca51ccfcaf6d4d3dbb1cb9a9808dbb63cf8cc84123345dece2ece0106",
+          "byteLength": 102804,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1068
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-f1-main-floor-gif-2657109693",
+          "mediaType": "image/gif",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Image #3 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-3b2bd5e92c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation left\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"421057hfc elevation left\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-left-jpg-723edc55d4",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "bdb6fb634100659aa1f4b6c362cdbbbc2f69cb1ea77b724ebddc07d1c5a87ae0",
+          "byteLength": 18819,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-left-jpg-723edc55d4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167047-525172699668331-0007-6156/421057HFC-Elevation-Left.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Floor Plan -  - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-454d86112b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Floor\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"421057hfc f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-421057hfc-f1-main-floor-gif-adc70a0578",
+      "selectionReason": "only variant (800x599, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.335559,
+          "byteHash": "8275b4f3bbb68e8da6d65f1558f6ad6005b625fe5113fb11fc26216e0165e197",
+          "byteLength": 50997,
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 599,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-f1-main-floor-gif-adc70a0578",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Image #2 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-64744db8d7",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation front\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"421057hfc elevation front\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-front-jpg-71016b2eb4",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6a52b4315da23876bc7521b8aaa395dfd4f2d49d129959be5da1a41d6d79bf42",
+          "byteLength": 31811,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-front-jpg-71016b2eb4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167047-652174772100722-0020-5992/421057HFC-Elevation-Front.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Image #5 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-8fb32d3daa",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation rear\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"421057hfc elevation rear\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-rear-jpg-287a660d5e",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "0ca5c324c4a55e0cb1c11fd598bf6c1e5fc8b566c38e81e9f10a80785208fe82",
+          "byteLength": 30803,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-rear-jpg-287a660d5e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167047-942034985832180-0006-5722/421057HFC-Elevation-Rear.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan - Image #4 - Cottage, Modern Farmhouse",
+      "id": "asset-plan-421057hfc-charming-two-bedroom-modern-farmh-8fcf4c66a1",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"421057hfc elevation right\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"421057hfc elevation right\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-421057hfc-elevation-right-jpg-ffdc3776e6",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "1dde76c3546109e02df012bc2589f0e30579eb4d7e78fb803ae37dadc2c29546",
+          "byteLength": 19684,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+          "id": "var-421057hfc-elevation-right-jpg-ffdc3776e6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167048-310802419267958-0008-3891/421057HFC-Elevation-Right.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/charming-two-bedroom-modern-farmhouse-cottage-house-plan-421057hfc",
+  "contentHash": "e224d1f36891a86be89623db82aa7e3978d4872b799551ea98d431ad5582f157",
+  "failures": [
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167047-478171809593168-0019-3181/421057HFC-001-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167047-525172699668331-0007-6156/421057HFC-Elevation-Left.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167047-652174772100722-0020-5992/421057HFC-Elevation-Front.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167047-942034985832180-0006-5722/421057HFC-Elevation-Rear.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395289561/original/1792167048-310802419267958-0008-3891/421057HFC-Elevation-Right.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395289561/original/1792167040-956227346428477-0005-7000/421057HFC-F1-Main-Floor.gif"
+    }
+  ],
+  "id": "src-421057hfc-daf970bbde",
+  "pageHash": "4f11f66bc19c30d6315fcab1c5b277465bb58790023de21b33f757bec2eb2d29",
+  "project": {
+    "externalId": "421057HFC",
+    "name": "Plan 421057HFC: Charming Two Bedroom Modern Farmhouse Cottage House Plan",
+    "publisher": "architecturaldesigns.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "40' 0\"",
+      "unit": "m",
+      "value": 12.192
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "57' 6\"",
+      "unit": "m",
+      "value": 17.526
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Monolithic Slab, Slab, Crawl"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This compact 992 square foot cottage features a modern farmhouse aesthetic, two bedrooms, one full bathroom, and a two-car 473 square foot garage.The home greets guests with a deep covered front porch that provides a perfect transition from the street to the welcoming interior.The open-concept layout maximizes every square inch, creating a bright and airy atmosphere that connects the living and kitchen areas seamlessly.A well-appointed kitchen includes a walk-in pantry, while the primary suite and a secondary bedroom are thoughtfully clustered for easy access to the shared full bath.Convenient main-level laundry facilities are tucked away to maintain the clean lines and efficiency of the floor plan.The striking exterior is defined by a metal roof, dark siding, and warm wood accents on the porch pillars and garage doors, offering immense curb appeal.DELIVERY NOTE: Please allow 3 to 5 business days for delivery."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

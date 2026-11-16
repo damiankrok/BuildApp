@@ -1,0 +1,913 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-115423e4f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "byteLength": 61287,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "byteLength": 23380,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-2122c17c71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.715818,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "byteLength": 66219,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-jpg-b3083b8576",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg"
+        },
+        {
+          "aspect": 1.715818,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "byteLength": 14602,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-598a2abb68",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "byteLength": 55569,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "byteLength": 18930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Elewacja boczna",
+      "id": "asset-piwonia-elewacja-boczna-0910b1ea58",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Piwonia · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Piwonia · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-piwonia-e2-jpg-311747c87e",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "21fc1c4f1382fb399c567c00c7c73515a99a2200d16122e534b6bac534bb75fd",
+          "byteLength": 48465,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-e2-jpg-311747c87e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_e2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Elewacja boczna",
+      "id": "asset-piwonia-elewacja-boczna-50613fc3dd",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Piwonia · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Piwonia · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-piwonia-e3-jpg-4394e58cd0",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "6d179f65c475b6669e3b0dccd1aa952ad33cf4011b6893b99827797436d2678b",
+          "byteLength": 52760,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-e3-jpg-4394e58cd0",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_e3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Elewacja przód",
+      "id": "asset-piwonia-elewacja-przod-a6321288cb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Piwonia · Elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Piwonia · Elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-piwonia-e1-jpg-c598d9605f",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "d9be192e0281fde37573237e1e6237703b67a40bcd30e35bf93aa407963a9977",
+          "byteLength": 46643,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-e1-jpg-c598d9605f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_e1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Elewacja tył",
+      "id": "asset-piwonia-elewacja-ty-e2a54ada90",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Piwonia · Elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Piwonia · Elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-piwonia-e4-jpg-602ce07fe9",
+      "selectionReason": "only variant (709x305, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.32459,
+          "byteHash": "4c96941ddeaf64e7c088f88d5e11118a066d672df67713231b5e4eb354d371d2",
+          "byteLength": 88993,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 305,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-e4-jpg-602ce07fe9",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_e4.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Rzut działki",
+      "id": "asset-piwonia-rzut-dzia-ki-321397750f",
+      "roleEvidence": [
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Piwonia · Rzut działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-piwonia-s-jpg-58ddc42b3f",
+      "selectionReason": "only variant (882x1054, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.836812,
+          "byteHash": "9d2e720a933d8032250cabbb49f2608017cf565ff38f2d7c8fc29f2df2c40f24",
+          "byteLength": 94312,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1054,
+            "width": 882
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-s-jpg-58ddc42b3f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_s.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Rzut parter",
+      "id": "asset-piwonia-rzut-parter-1020f18e3c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Piwonia · Rzut parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Piwonia · Rzut parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-piwonia-r1-jpg-11b93b2b42",
+      "selectionReason": "only variant (1362x1892, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.719873,
+          "byteHash": "49b6ad48653d7129ff2e3d5a3cf6a730340e7551783c4f1d97121e8928fbb522",
+          "byteLength": 393672,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1892,
+            "width": 1362
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-r1-jpg-11b93b2b42",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_r1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Piwonia · Rzut poddasza",
+      "id": "asset-piwonia-rzut-poddasza-3530faead4",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Piwonia · Rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Piwonia · Rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-piwonia-r2-jpg-f28a60a41e",
+      "selectionReason": "only variant (1362x1892, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.719873,
+          "byteHash": "1d81a2e2f2699f986e6c5a0a03b33647d583f76be9f2dbca5b5a68564f111cc5",
+          "byteLength": 273417,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1892,
+            "width": 1362
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-r2-jpg-f28a60a41e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_r2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-piwonia-w1-jpg-1c6a994d71",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-piwonia-w1-jpg-1efa64fb60",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "6bd46a170041c245cb604f016a9cd7209a9b61c965049fea9d950078d8f65c91",
+          "byteLength": 504870,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-w1-jpg-1efa64fb60",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/piwonia_w1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Prezentacja",
+      "id": "asset-prezentacja-e019163552",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.738053,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "byteLength": 71506,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 417
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-e25becc350",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551724,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "byteLength": 160714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 203,
+            "width": 315
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysokim salonem, z garażem dwustanowiskowym Piwonia",
+      "id": "asset-projekt-ma-ego-domu-parterowego-z-poddaszem-do-a-2a093d3f9c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysoki\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-piwonia-w2-jpg-p-prslide-b9431c1acb",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "14ad06b4f6699503c73a1f288958ad1a711d873b8938a5aad279c91d9b187cbd",
+          "byteLength": 153729,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-w2-jpg-p-prslide-b9431c1acb",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/piwonia/piwonia_w2.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysokim salonem, z garażem dwustanowiskowym Piwonia",
+      "id": "asset-projekt-ma-ego-domu-parterowego-z-poddaszem-do-a-3215ed2a51",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysoki\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-piwonia-w1-jpg-p-prslide-613ce1dcda",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "9167f6844f7a4b423395b5f76973e204db036430635091a42d469e726c542cce",
+          "byteLength": 165410,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-w1-jpg-p-prslide-613ce1dcda",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/piwonia/piwonia_w1.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysokim salonem, z garażem dwustanowiskowym Piwonia",
+      "id": "asset-projekt-ma-ego-domu-parterowego-z-poddaszem-do-a-676a05f600",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysoki\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-piwonia-w3-jpg-p-prslide-2a800d87bc",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "f59fe4119aa654a6479b756d03bc4b0a6459826db5e82141219d8e66f8d2ac8f",
+          "byteLength": 134573,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-w3-jpg-p-prslide-2a800d87bc",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/piwonia/piwonia_w3.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysokim salonem, z garażem dwustanowiskowym Piwonia",
+      "id": "asset-projekt-ma-ego-domu-parterowego-z-poddaszem-do-a-c58ff4cb1b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt małego domu parterowego, z poddaszem do adaptacji, z antresolą, z wysoki\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-piwonia-w4-jpg-p-prslide-9896a356a8",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "ced4dc946f6d63930cd9ac2b772f429c09f506bbafc9e0a191c6484232073e61",
+          "byteLength": 143027,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-piwonia-w4-jpg-p-prslide-9896a356a8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/piwonia/piwonia_w4.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Wycena",
+      "id": "asset-wycena-fb105e7612",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "byteLength": 53872,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/piwonia",
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/piwonia",
+  "contentHash": "c635fc62a6cdfd55a9bac484e1bb09c098bc5a1d548a75a136d0f7457fd64272",
+  "documents": [
+    {
+      "caption": "Charakterystyka energetyczna",
+      "code": "NOT_A_DRAWING",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "status": "NOT_FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/Pliki%20do%20pobrania/piwonia_ch.pdf",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "58a11046bc57c84177903e91318b1a28dc82f3177f4c185e46d580bf620307ae",
+      "byteLength": 83660,
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/Pliki%20do%20pobrania/piwonia_pk.pdf",
+      "variant": "BASE"
+    },
+    {
+      "byteHash": "e3e2aca12be8af4cc4245300ea44c4261541a7d31250672635e28ea225165f72",
+      "byteLength": 88160,
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "mediaType": "image/vnd.dwg",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/Pliki%20do%20pobrania/piwonia_pkdwg.dwg",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "c85fd84397c3ca23d128744bb42ca57dcec27fcc93037817471284c920c7de71",
+      "byteLength": 85587,
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/piwonia/Pliki%20do%20pobrania/piwonia_pkl.pdf",
+      "variant": "MIRRORED"
+    }
+  ],
+  "failures": [],
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/piwonia/",
+  "id": "src-www-dobredomy-pl-aa5b653107",
+  "pageHash": "12253e25158877db6f070684b33e9779fa0e978f8d7e32cd3fc644801597fef2",
+  "project": {
+    "name": "Projekt domu Piwonia",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "raw": "2",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "7,20 m",
+      "unit": "m",
+      "value": 7.2
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "213,90 m²",
+      "unit": "m2",
+      "value": 213.9
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "raw": "32,30 m²",
+      "unit": "m2",
+      "value": 32.3
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "raw": "27,24 m",
+      "unit": "m",
+      "value": 27.24
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "raw": "22,20 m",
+      "unit": "m",
+      "value": 22.2
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "raw": "30°",
+      "unit": "deg",
+      "value": 30
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "raw": "3",
+      "unit": "count",
+      "value": 3
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "raw": "326,90 m²",
+      "unit": "m2",
+      "value": 326.9
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "119,50 m²",
+      "unit": "m2",
+      "value": 119.5
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "raw": "608,20 m³",
+      "unit": "none",
+      "value": 608.2
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "30°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "PROJEKT DOSTĘPNY TYLKO U NAS</p><p></p>Piwonia to uroczy dom jednorodzinny o idealnie wyważonej powierzchni użytkowej. Jest to dom parterowy z nieużytkowym poddaszem, które w ramach adaptacji można przekształcić w dodatkowe pomieszczenia mieszkalne. Jest to doskonałe rozwiązanie dla osób planujących rozszerzenie funkcji mieszkalnych w przyszłości. Na parterze zaprojektowano wszystko, co jest niezbędne do wygodnego życia dla 4-osobowej rodziny. Trzy sypialnie i duża łazienka to strefa prywatna domowników. Pokoje są bardzo ustawne i jasne. W strefie dziennej salon przenika się przestrzennie z jadalnią i otwartą kuchnią. Uzupełnieniem są spiżarnia, mała łazienka oraz kotłownia z przejściem do garażu. Warto zwrócić uwagę na pustkę nad salonem. Nieużytkowy strych można przekształcić w piękną antresolę i dodatkową sypialnię."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0"
+}
+

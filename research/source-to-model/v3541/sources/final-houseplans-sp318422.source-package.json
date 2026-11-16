@@ -1,0 +1,1128 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-25-4950-6db26aa909",
+  "canonicalUrl": "https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+  "pageHash": "87d7b6da3f23dad6f4c8b5d0cde2b038d295f042b1cc6f8a0605b1aa333e929b",
+  "project": {
+    "externalId": "25-4950",
+    "name": "Farmhouse Style House Plan - 2 Beds 1 Baths 994 Sq/Ft Plan #25-4950",
+    "publisher": "houseplans.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-430-422-2a68ac463f",
+      "caption": "430-422",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-3-8344a57921",
+          "url": "https://cdn.houseplansservices.com/product/v7bn9dkgn6jvvgpqh1o5j9qr1r/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/jpeg",
+          "byteLength": 68984,
+          "byteHash": "479019811acdba92e09b56a7d8e7f842fba37351401ce034b113475a0054fd74",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-3-8344a57921",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-44-274-2697f42023",
+      "caption": "44-274",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-png-v-3-b89f81f90a",
+          "url": "https://cdn.houseplansservices.com/product/fqpmtvut4rcujoltr33v6h2ktr/w560x373.png?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 393872,
+          "byteHash": "0833e0cd560d8ad2e8f9f91dbbef3373611217f36f8b000b943823e9f14de377",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-png-v-3-b89f81f90a",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-515-56-962d39d08b",
+      "caption": "515-56",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w560x373-jpg-v-3-478747db5d",
+          "url": "https://cdn.houseplansservices.com/product/mtujo8s0o8a0278554qubf16a6/w560x373.jpg?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/jpeg",
+          "byteLength": 94795,
+          "byteHash": "7edb64dee9da88f9964047300e8283421407d24d9962887b5372124fb72992c9",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-jpg-v-3-478747db5d",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-builder-advantage-home-c4b89d4585",
+      "caption": "Builder Advantage Home",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-builder-curved-rt-png-ea5d0f15af",
+          "url": "https://www.houseplans.com/public/hp2/images/builder/builder-curved-rt.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 215913,
+          "byteHash": "3e64b194590c02f3028bcf1657e76517c7cbb26ba7e124599933c61fca1ea935",
+          "decoded": {
+            "width": 890,
+            "height": 614
+          },
+          "declaredMismatch": false,
+          "aspect": 1.449511
+        }
+      ],
+      "selectedVariantId": "var-builder-curved-rt-png-ea5d0f15af",
+      "selectionReason": "only variant (890x614, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-farmhouse-house-p-7d8559527c",
+      "caption": "Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w600-png-v-3-db03e64c99",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w600.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 541664,
+          "byteHash": "537f62e9539fb78c50a5cb708bfea12dd085b45d027dbb4d4da3d9d2907b91d3",
+          "decoded": {
+            "width": 600,
+            "height": 480
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-w600-png-v-3-db03e64c99",
+      "selectionReason": "only variant (600x480, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-farmhouse-house-p-b284f92097",
+      "caption": "Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w1024-png-v-3-95ac632d20",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w1024.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 1514140,
+          "byteHash": "4b01e5f9072d5eca27ad7d5006bc34527e89896c10768eecb28561e5ccc1e674",
+          "decoded": {
+            "width": 1024,
+            "height": 819
+          },
+          "declaredMismatch": false,
+          "aspect": 1.250305
+        }
+      ],
+      "selectedVariantId": "var-w1024-png-v-3-95ac632d20",
+      "selectionReason": "only variant (1024x819, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-farmhouse-house-p-bdb1e97b5b",
+      "caption": "Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-original-png-v-3-832cb366fd",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/original.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 4840483,
+          "byteHash": "a1ef27b96b4b75bdc3d726c49dcb27bc00b82b50ba735d8576f1714bda671e08",
+          "decoded": {
+            "width": 1920,
+            "height": 1536
+          },
+          "declaredMismatch": false,
+          "aspect": 1.25
+        }
+      ],
+      "selectedVariantId": "var-original-png-v-3-832cb366fd",
+      "selectionReason": "only variant (1920x1536, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-2-for-farmhouse-house-p-c63725712a",
+      "caption": "Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation 2 for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w800x533-png-v-3-d8b05f1147",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w800x533.png?v=3",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 772327,
+          "byteHash": "99fbc6b258129d77c679acdb98ffa5c278dee7198a0170ab53df42cd31096e1b",
+          "decoded": {
+            "width": 800,
+            "height": 533
+          },
+          "declaredMismatch": false,
+          "aspect": 1.500938
+        },
+        {
+          "id": "var-w620x413-png-v-3-336ef4f086",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w620x413.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 472540,
+          "byteHash": "0c65cfa2590c1b85c317e157a589c506f4d892778f2ce874d87b5583f9dcd7d4",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        }
+      ],
+      "selectedVariantId": "var-w800x533-png-v-3-d8b05f1147",
+      "selectionReason": "largest decoded raster of 2 variants: 800x533 over 620x413"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-cabin-house-plan-25-3b09ea1099",
+      "caption": "Exterior - Front Elevation for Cabin House Plan #25-4286 - 1 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Cabin House Plan #25-4286 - 1 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Cabin House Plan #25-4286 - 1 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-18-c78750c832",
+          "url": "https://cdn.houseplansservices.com/product/h14mh9t5pdgk4hmbn8fivulcii/w300x200.png?v=18",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 140926,
+          "byteHash": "6111d18004f15c541a65b0ffe009c10abaceca99dfcec5604d42a60fd98aa3af",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-18-c78750c832",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-07bdf37999",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #25-4881 - 3 bed, 1.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4881 - 3 bed, 1.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4881 - 3 bed, 1.5 bat\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-10-b00bbc12fc",
+          "url": "https://cdn.houseplansservices.com/product/29hdu46rvnrf1i8g2o38p2q40l/w300x200.png?v=10",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 116016,
+          "byteHash": "d3ca1490a5c4acb4e5ced219fdea686014c7d24e330d1cef11627716b168ea6d",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-10-b00bbc12fc",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-256b902bc9",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #25-4324 - 3 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4324 - 3 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4324 - 3 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-18-4f8bc4bb69",
+          "url": "https://cdn.houseplansservices.com/product/2985opv2tdk36k44cinvqfmh0d/w300x200.png?v=18",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 120037,
+          "byteHash": "9b5f8e34beb2a25c2b53277cbf4d58d0f4829f7d5db0e6c944a6022eeefc9cad",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-18-4f8bc4bb69",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-5c16842753",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #25-4892 - 3 bed, 2.5 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4892 - 3 bed, 2.5 bat\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4892 - 3 bed, 2.5 bat\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-10-73b989f81b",
+          "url": "https://cdn.houseplansservices.com/product/5i6ch7vvun2q1uvoac7e084l45/w300x200.png?v=10",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 118744,
+          "byteHash": "dc23508049464d5593a066469ead06ded417a2465e71fd9302748a076fe550d1",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-10-73b989f81b",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-contemporary-house-9ad18dceff",
+      "caption": "Exterior - Front Elevation for Contemporary House Plan #25-4520 - 5 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4520 - 5 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Contemporary House Plan #25-4520 - 5 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-17-f8f3d54618",
+          "url": "https://cdn.houseplansservices.com/product/41ah5m7faher444gvp0365l3mj/w300x200.png?v=17",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 116843,
+          "byteHash": "6bce5ae16595ef7d35187139477c4f5d602e4d6f4dd16ef7a6454a0d1e635f4c",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-17-f8f3d54618",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-farmhouse-house-pla-5e570f73c5",
+      "caption": "Exterior - Front Elevation for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-png-v-3-0bee21caa4",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w560x373.png?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 388543,
+          "byteHash": "82695d52e915a331ad7e2dbd62ae6a62ff2aa7b988f87df686fe67aa203f64d0",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declared": {
+            "width": 350,
+            "height": 233
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-png-v-3-0bee21caa4",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-exterior-front-elevation-for-modern-house-plan-2-0d77c500b7",
+      "caption": "Exterior - Front Elevation for Modern House Plan #25-4930 - 3 bed, 2 bath",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Exterior - Front Elevation for Modern House Plan #25-4930 - 3 bed, 2 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Exterior - Front Elevation for Modern House Plan #25-4930 - 3 bed, 2 bath\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-9-e8f2126e09",
+          "url": "https://cdn.houseplansservices.com/product/c34qe8n3ldgmrpe8fdpvkvh2rf/w300x200.png?v=9",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 114731,
+          "byteHash": "a540489cfe85bddd7915c832a04ba9c124e189049ad1f42ac99eee0ee196bda3",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declared": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-9-e8f2126e09",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-farmhouse-house-plan-2-741a2fe022",
+      "caption": "Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w560x373-png-v-3-8f4375511f",
+          "url": "https://cdn.houseplansservices.com/product/m6f75qlrquthb091hgs5cvbaln/w560x373.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 154386,
+          "byteHash": "f42004d6709789ada863769e9e5d6b00b9b128f71c648cc5944bd7f8dfdf940d",
+          "decoded": {
+            "width": 560,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50134
+        }
+      ],
+      "selectedVariantId": "var-w560x373-png-v-3-8f4375511f",
+      "selectionReason": "only variant (560x373, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-farmhouse-house-plan-2-96ed73a94a",
+      "caption": "Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w1024-png-v-3-943c15ca5a",
+          "url": "https://cdn.houseplansservices.com/product/m6f75qlrquthb091hgs5cvbaln/w1024.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 742185,
+          "byteHash": "7e4fa9352ddd8a487d88c609e3e793489ab5d78dcb41a09a5d7b766d64d25537",
+          "decoded": {
+            "width": 1024,
+            "height": 878
+          },
+          "declaredMismatch": false,
+          "aspect": 1.166287
+        }
+      ],
+      "selectedVariantId": "var-w1024-png-v-3-943c15ca5a",
+      "selectionReason": "only variant (1024x878, decoded from bytes)"
+    },
+    {
+      "id": "asset-floor-plan-main-floor-for-farmhouse-house-plan-2-fb1d6598b6",
+      "caption": "Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"Floor Plan - Main Floor for Farmhouse House Plan #25-4950 - 2 bed, 1 bath\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-w620x413-png-v-3-c2469050be",
+          "url": "https://cdn.houseplansservices.com/product/m6f75qlrquthb091hgs5cvbaln/w620x413.png?v=3",
+          "discoveredVia": "IMG_SRCSET:img[srcset]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 186486,
+          "byteHash": "6d57c5cd3235d288efd69c02b5f9db4279a338ae52404c3afc141b1c33eb6c60",
+          "decoded": {
+            "width": 620,
+            "height": 413
+          },
+          "declaredMismatch": false,
+          "aspect": 1.501211
+        }
+      ],
+      "selectedVariantId": "var-w620x413-png-v-3-c2469050be",
+      "selectionReason": "only variant (620x413, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-blog-home-exterior-jpg-v-839ab8c26b-3e60b98840",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+          "url": "https://www.houseplans.com/public/hp2/nav-blog-home-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/jpeg",
+          "byteLength": 97045,
+          "byteHash": "40e56805ea0e8757c84ad6e7dd0bce7bfd68bef016788d6bc39d88962851f267",
+          "decoded": {
+            "width": 364,
+            "height": 499
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.729459
+        }
+      ],
+      "selectedVariantId": "var-nav-blog-home-exterior-jpg-v-839ab8c26b-3bb33cf883",
+      "selectionReason": "only variant (364x499, decoded from bytes)"
+    },
+    {
+      "id": "asset-nav-styles-vert-exterior-jpg-v-839ab8c26b-af801857ef",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+          "url": "https://www.houseplans.com/public/hp2/images/header_nav/nav-styles-vert-exterior.jpg?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/jpeg",
+          "byteLength": 67440,
+          "byteHash": "5c546ffa33ea9bae549e043e53e39c694c175cefdc10ea9690da72fcd86ec40e",
+          "decoded": {
+            "width": 263,
+            "height": 400
+          },
+          "declared": {
+            "width": 252,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 0.6575
+        }
+      ],
+      "selectedVariantId": "var-nav-styles-vert-exterior-jpg-v-839ab8c26b-2e862e62be",
+      "selectionReason": "only variant (263x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-25-4950-62e722030a",
+      "caption": "Plan 25-4950",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-w300x200-png-v-3-a7ae2233cb",
+          "url": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w300x200.png?v=3",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 117591,
+          "byteHash": "bbf88b4bc6c1c31ca62ae5fd2cbcf054c7be788d89190f02a78d4b110d75c7cc",
+          "decoded": {
+            "width": 300,
+            "height": 200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-w300x200-png-v-3-a7ae2233cb",
+      "selectionReason": "only variant (300x200, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-465700b897",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-construction.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 87450,
+          "byteHash": "ca100f78dc48c027ac4e59c9440d913f19bb386b98f5e118d17f1c5b15c495e2",
+          "decoded": {
+            "width": 600,
+            "height": 448
+          },
+          "declaredMismatch": false,
+          "aspect": 1.339286
+        }
+      ],
+      "selectedVariantId": "var-rcg-construction-png-v-839ab8c26b-c6bddf680d",
+      "selectionReason": "only variant (600x448, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-8a0596b514",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-plumbing.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 73202,
+          "byteHash": "8968e3d50c2e9bd026ee31143a74ef7f42fd31b44b85cd5ecbef5d38100b75c3",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-plumbing-png-v-839ab8c26b-473eaeec3e",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-thumbnail-c039d29147",
+      "caption": "Thumbnail",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+          "url": "https://www.houseplans.com/common/static/lib/common/images/rcg/rcg-mechanical.png?v=839ab8c26b",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.houseplans.com/plan/994-square-feet-2-bedroom-1-bathroom-1-garage-farmhouse-sp318422",
+          "mediaType": "image/png",
+          "byteLength": 95997,
+          "byteHash": "2f9403dcecf02108f0fa91ddd4cc9b9081ca5aaadaabd1a213dfbb3599aaf2b7",
+          "decoded": {
+            "width": 600,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-rcg-mechanical-png-v-839ab8c26b-bc036f3a41",
+      "selectionReason": "only variant (600x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Height",
+      "value": 7.671,
+      "unit": "m",
+      "raw": "25' 2\""
+    },
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 9.576,
+      "unit": "m",
+      "raw": "31' 5\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 14.021,
+      "unit": "m",
+      "raw": "46'"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "construction",
+      "label": "Construction Notes and Detail(s)",
+      "text": "Shows basic parts and assemblies recommended for the home so the builder can see how things come together."
+    },
+    {
+      "key": "description",
+      "label": "description",
+      "text": "In some regions, there is a second step you will need to take to ensure your house plans are in compliance with local codes. Some areas of North America have very strict engineering requirements. Examples of this would be, but not limited to, earthquake-prone areas of California and the Pacific Coast, hurricane risk areas of the Florida, Gulf &amp; Carolina Coasts. New York, New Jersey, Nevada, and parts of Illinois require review by a local professional as well. If you are building in these areas, it is most likely you will need to hire a state licensed structural engineer to analyze the design and provide additional drawings and calculations required by your building department. If you aren’t sure, building departments typically have a handout they will give you listing all of the items they require to submit for and obtain a building permit."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Plan(s)",
+      "text": "This page shows all necessary notations and dimensions including footings, support columns, walls, and excavated/unexcavated areas."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This farmhouse design floor plan is 994 sq ft and has 2 bedrooms and 1 bathrooms."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/original.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.25 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w1024.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.250305 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/aru2v2io0fdmhdv3sb421m1jmh/w600.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.25 against the reference copy's 1.500938: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/m6f75qlrquthb091hgs5cvbaln/w560x373.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.50134 against the reference copy's 1.166287: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://cdn.houseplansservices.com/product/m6f75qlrquthb091hgs5cvbaln/w620x413.png?v=3",
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.501211 against the reference copy's 1.166287: a different crop, not a larger copy of the same drawing; kept as its own asset"
+    }
+  ],
+  "contentHash": "a1bf9d6b29be2ce5ac84e841203f408685ed5f7a872eed4532053ba39bd1a80c"
+}

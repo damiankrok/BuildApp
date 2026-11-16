@@ -1,0 +1,3144 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-25458tf-001-exterior-render-jpg-67be0a4204",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-001-exterior-render-jpg-e580a722eb",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "f9839372c20be749ae16c29aaa8bb178da2c78c25a1b40da364aeebabb902458",
+          "byteLength": 148535,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-001-exterior-render-jpg-e580a722eb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905868-789359948912771-0039-5036/25458TF-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-002-exterior-render-jpg-e187a65006",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 002 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-002-exterior-render-jpg-316f49bae9",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "f3c16d22ef1820dbd48734d47d41677af84b70676b724afeafa6182b7aa6c4d6",
+          "byteLength": 135048,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-002-exterior-render-jpg-316f49bae9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905868-759485431617755-0039-8005/25458TF-002-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-003-exterior-render-jpg-42fc4932ef",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 003 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-003-exterior-render-jpg-90c5195d07",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c2e149285f78b28f03e5a12e23c94e716a0d0619ca88164f9537bbb298085544",
+          "byteLength": 143746,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-003-exterior-render-jpg-90c5195d07",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-445404435228944-0040-4737/25458TF-003-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-004-exterior-render-jpg-617e8291e8",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 004 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-004-exterior-render-jpg-4edb7e6c01",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "e89c07edf0eb8a2df08ea4344949e7ce0ccc47a1101072bf27c7cf2316c50c21",
+          "byteLength": 97667,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-004-exterior-render-jpg-4edb7e6c01",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905868-36928677652791-0052-4640/25458TF-004-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-005-exterior-render-jpg-d177bad92f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 005 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-005-exterior-render-jpg-ebc3f3d118",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "1b6f44cb166d1bc56f06dd94cf47cf1fd8d8460226dc4ccf933ec1e2a6602f6c",
+          "byteLength": 100698,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-005-exterior-render-jpg-ebc3f3d118",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905868-484640904917776-0040-7054/25458TF-005-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-006-exterior-render-jpg-35ba378fec",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 006 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-006-exterior-render-jpg-d1a429d3e5",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "4a26906a56cbaa06769c3941551c5b145138a035277aa946e5388fd162a44d1b",
+          "byteLength": 120237,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-006-exterior-render-jpg-d1a429d3e5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-487060825931210-0053-6304/25458TF-006-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-007-exterior-render-jpg-8f5fc9a0cf",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 007 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-007-exterior-render-jpg-2c3c3b8412",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "8591e13891b5342b68ab219bd75f2405dca17120f2a5b857736d6aa9a69da588",
+          "byteLength": 124862,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-007-exterior-render-jpg-2c3c3b8412",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-289152969942946-0043-6210/25458TF-007-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-008-exterior-render-jpg-8b1e92bcbf",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 008 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-008-exterior-render-jpg-06012a03cd",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "696b0242374c3163061ea3f50fd71663cdfb6c886066f4fd516f6ba4f424b4be",
+          "byteLength": 155088,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-008-exterior-render-jpg-06012a03cd",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-269148955769919-0041-9229/25458TF-008-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-009-exterior-render-jpg-02409b29ae",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 009 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-009-exterior-render-jpg-fe6180913d",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "4645bf54a31cb4d0a004bb98bbc88bb4b1a3864e51779035f14116d89cafd0ed",
+          "byteLength": 108902,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-009-exterior-render-jpg-fe6180913d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-712524936422718-0044-2542/25458TF-009-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-010-exterior-render-jpg-31641e8b71",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 010 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-010-exterior-render-jpg-3b4b627fd5",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "5054363710b80cf018ce870242f416912c5f5c1acb1395f00c8e188d4969e913",
+          "byteLength": 102714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-010-exterior-render-jpg-3b4b627fd5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905869-827057855533121-0041-4944/25458TF-010-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-011-exterior-render-jpg-e01d809386",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 011 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-011-exterior-render-jpg-cb55d6952f",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c7fc0b3e432d160f9caf9a20589217160c1262f1c8d836d7639825631e046004",
+          "byteLength": 117780,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-011-exterior-render-jpg-cb55d6952f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-944519629299713-0042-7166/25458TF-011-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-012-exterior-render-jpg-eb4a1f5214",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 012 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-012-exterior-render-jpg-6d8845ed57",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "1d943026bdb27424fd278d8624ad78d3c51ddbcd97935a2272ff640237a4a76b",
+          "byteLength": 140755,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-012-exterior-render-jpg-6d8845ed57",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-721755130240354-0054-3029/25458TF-012-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-013-interior-render-jpg-8158b543e5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 013 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-013-interior-render-jpg-f9e154dcf7",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "68e0d44e8fc128526548011463bc0fd2900022b59fba9c8a40939be9371d1989",
+          "byteLength": 48315,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-013-interior-render-jpg-f9e154dcf7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-212726712484017-0043-7409/25458TF-013-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-014-interior-render-jpg-ec63f19546",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 014 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-014-interior-render-jpg-e419182937",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "b9a809384e26c01ae8f1c4185013c181cd4b96261befb2c1286c50cc5cef6605",
+          "byteLength": 100076,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-014-interior-render-jpg-e419182937",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-634661945994223-0042-0288/25458TF-014-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-015-interior-render-jpg-5c8313890d",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 015 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-015-interior-render-jpg-07e5ebe932",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "13b1a4d239bc1dab38a380edae0aef44e528787035522babe14a121ae81334e2",
+          "byteLength": 86448,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-015-interior-render-jpg-07e5ebe932",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-494834836500246-0045-1717/25458TF-015-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-016-interior-render-jpg-c10f71bb0f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 016 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-016-interior-render-jpg-624c17baa9",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "30f96d824c9c8a970168b783db3c290e84972b7001c56bb0ad4245ade91c9d53",
+          "byteLength": 79171,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-016-interior-render-jpg-624c17baa9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-592020336625185-0043-6434/25458TF-016-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-017-interior-render-jpg-25b3df5497",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 017 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-017-interior-render-jpg-c8e34bd9df",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c946a0aa5bf375fd0fe20b8f970daba7e32abd7e39880d08f030bc433121520b",
+          "byteLength": 81524,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-017-interior-render-jpg-c8e34bd9df",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905870-323892163131410-0046-2446/25458TF-017-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-018-interior-render-jpg-33a4d129ee",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 018 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-018-interior-render-jpg-7e0d10a843",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "9629190401e810c5156d465ffb5d5b6dee5f7f87ee7be6a2399e63af048c9214",
+          "byteLength": 89324,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-018-interior-render-jpg-7e0d10a843",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905871-129845631873312-0047-8750/25458TF-018-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-019-interior-render-jpg-b518145197",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 019 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-019-interior-render-jpg-1e422d23d1",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "2961e7e93ef6f9ca83fd3e189acb9e7cdedf682b1577a4834813a9f980046156",
+          "byteLength": 98061,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-019-interior-render-jpg-1e422d23d1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905873-444089538139235-0055-8494/25458TF-019-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-020-interior-render-jpg-b3dbc49ddb",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 020 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-020-interior-render-jpg-877a66bed4",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "5bd20436cd99afa583196e911aa8e416fd16377d9dd06abef5efe84b04a471d1",
+          "byteLength": 95971,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-020-interior-render-jpg-877a66bed4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905878-331776238474310-0044-2348/25458TF-020-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-021-interior-render-jpg-30579af33c",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 021 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-021-interior-render-jpg-5e9b16c00b",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "91f3ab4689e3ed4f745649e4115f003267670694ce2db0b2c8fdb1e946b2c510",
+          "byteLength": 93298,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-021-interior-render-jpg-5e9b16c00b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905878-812058118528602-0048-2353/25458TF-021-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-022-interior-render-jpg-5dfd9917d0",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 022 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-022-interior-render-jpg-8e94b2aa73",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "e8ed5a644bca5ca068ebc4f0785186a38a752a52ffce1a9a8d4ff856f7cf0b6f",
+          "byteLength": 70545,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-022-interior-render-jpg-8e94b2aa73",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-63018094237815-0049-9398/25458TF-022-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-023-interior-render-jpg-96dd954c46",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 023 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-023-interior-render-jpg-52a414b7c1",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "dd3a05c0f3c18ec63745617ee78015c7cc32c745e02408d15c6d2bd47e49f097",
+          "byteLength": 70507,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-023-interior-render-jpg-52a414b7c1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-458760249751032-0044-8548/25458TF-023-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-024-interior-render-jpg-1aa7e72153",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 024 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-024-interior-render-jpg-d46bb95983",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "7c8211bd6635637a3a2456a9fd8d4944b57dd3dca30faf50a0d4986dabd6e174",
+          "byteLength": 81395,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-024-interior-render-jpg-d46bb95983",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-539194931376325-0057-7621/25458TF-024-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-025-interior-render-jpg-43c71ec983",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 025 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-025-interior-render-jpg-724a83644e",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "61b533cb6fa650b5e96b40c051761134f039476b66ac8a11136a97d23fa188c3",
+          "byteLength": 65899,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-025-interior-render-jpg-724a83644e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-830802844606220-0058-2752/25458TF-025-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-026-interior-render-jpg-e8674fe847",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 026 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-026-interior-render-jpg-4e2e0d28c0",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "009a774a4637d85b895e0d2fb5b447a3989f7c489445e1fc980a3cc1799aaa15",
+          "byteLength": 69769,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-026-interior-render-jpg-4e2e0d28c0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-69057099123559-0059-4984/25458TF-026-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-027-interior-render-jpg-f3493a4b26",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 027 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-027-interior-render-jpg-121589c750",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "bbf6d6ce7bdc173cb4999b0356be18f173d896db637f11ab6c7b5eea2fc1fb61",
+          "byteLength": 77196,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-027-interior-render-jpg-121589c750",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-459588822912123-0060-3000/25458TF-027-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-028-interior-render-jpg-9ce25c99d5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 028 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-028-interior-render-jpg-e3dbefbba9",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "6a43388073a4a9e99d6cf9c39adfd12d1bcd43cbb96fe91e382057a653b55643",
+          "byteLength": 97481,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-028-interior-render-jpg-e3dbefbba9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-3527337652042-0046-1363/25458TF-028-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-029-interior-render-jpg-8b89cd8c87",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 029 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-029-interior-render-jpg-e09fc33ac1",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "ca6ff706921333b888013b69666e12885a10feb8c64267db8524112035105140",
+          "byteLength": 86574,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-029-interior-render-jpg-e09fc33ac1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-242516461015000-0045-8511/25458TF-029-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-030-interior-render-jpg-81de0077ef",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 030 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-030-interior-render-jpg-1501aa2c3b",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "41c44e7deace0fbc9f49ab90d8ea053adef9f6c4fb5233b98e61aa2cf31aa5f8",
+          "byteLength": 81267,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-030-interior-render-jpg-1501aa2c3b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905879-798168660098530-0045-3934/25458TF-030-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-031-interior-render-jpg-4d486e7e10",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 031 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-031-interior-render-jpg-b942f40bbc",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "5550aa5a3cd2810ecda0b706d517a88f6fadba4e0bceddc97e172dd07cf977f1",
+          "byteLength": 80174,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-031-interior-render-jpg-b942f40bbc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905880-815643866814191-0046-9476/25458TF-031-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-25458tf-032-interior-render-jpg-114f3585b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 032 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-032-interior-render-jpg-c90c5648f2",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "42c1a0ef98af1b237b3ebe20dcb088b2fcfcb47432c6f382082922d47a8e486b",
+          "byteLength": 88443,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-032-interior-render-jpg-c90c5648f2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905880-262537273909264-0047-4962/25458TF-032-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Customer Reviews",
+      "id": "asset-customer-reviews-2b596515a7",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan Collections\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-1198-sa-seal-gif-20974717de",
+      "selectionReason": "only variant (166x56, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.964286,
+          "byteHash": "f4a4457e75026ea157684fdfef0eed4984a0a947a4d9eb1677f4e940bfb4db38",
+          "byteLength": 6149,
+          "declared": {
+            "height": 56,
+            "width": 166
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 56,
+            "width": 166
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-1198-sa-seal-gif-20974717de",
+          "mediaType": "image/gif",
+          "url": "https://www.shopperapproved.com/seal/37222/1198-sa-seal.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #6 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-0f9d1af803",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 006 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-006-exterior-render-jpg-1dd25aede4",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c12f61bf079f2bb47255e59d010f13e42113bf8a8c20f192339a163298b46073",
+          "byteLength": 100327,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-006-exterior-render-jpg-1dd25aede4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-487060825931210-0053-6304/25458TF-006-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #19 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-14489a67c3",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 018 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-018-interior-render-jpg-c189057201",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "4b499e722fd32eba7b61dc75678f5435d66a913eddbe9de39b0048c222c14b78",
+          "byteLength": 77012,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-018-interior-render-jpg-c189057201",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905871-129845631873312-0047-8750/25458TF-018-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Floor Plan -  - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-1a93f275ff",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"25458tf f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-25458tf-f1-main-floor-gif-504e6bb98c",
+      "selectionReason": "only variant (800x647, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.236476,
+          "byteHash": "18ee108644760ee35da78ca3017e62612d4e26eb18e1af7b5f6a1b0b0a1be5fa",
+          "byteLength": 77326,
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 647,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-f1-main-floor-gif-504e6bb98c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #10 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-1dd5f0e416",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 009 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-009-exterior-render-jpg-888782d2e4",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "705557808c531b604828e4c839b6db8ac3e1da4d5181d6e57ce07ca86da3730f",
+          "byteLength": 88780,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-009-exterior-render-jpg-888782d2e4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-712524936422718-0044-2542/25458TF-009-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #18 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-29ba26dcc5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 017 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-017-interior-render-jpg-69622b1ce8",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "704ee76b37d3702853f81cbbbee4f257ecb4725630012f697f68299348e2caf3",
+          "byteLength": 69839,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-017-interior-render-jpg-69622b1ce8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-323892163131410-0046-2446/25458TF-017-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #24 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-2d0bd9b6d9",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 023 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-023-interior-render-jpg-c842793d1c",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "775b1643b56329b6c01466b04d5e062cad8b6d5b5c21c3f8f95f448cd9c45992",
+          "byteLength": 62688,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-023-interior-render-jpg-c842793d1c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-458760249751032-0044-8548/25458TF-023-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Virtual Tour Cover Image - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-313cf44498",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-001-exterior-render-jpg-27d71bbc65",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6ce151b8108202772b96788dcbfdc6772bab85fda9c13a48041b0063eee86b3c",
+          "byteLength": 119104,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-001-exterior-render-jpg-27d71bbc65",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905868-789359948912771-0039-5036/25458TF-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #33 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-4166804c81",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 032 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-032-interior-render-jpg-8255c5cef9",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "0cefdb8cf7bba37d876140b2b1ec6e48db19727f68ec6e86b4c3d344f5ce3caa",
+          "byteLength": 76820,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-032-interior-render-jpg-8255c5cef9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905880-262537273909264-0047-4962/25458TF-032-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #12 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-479bcbae55",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 011 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-011-exterior-render-jpg-1dd8d6a489",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "0da08b82e9791b83c74690b11a874d4653b12b01aa1bf9b52710dacb7532584b",
+          "byteLength": 94397,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-011-exterior-render-jpg-1dd8d6a489",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-944519629299713-0042-7166/25458TF-011-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #16 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-4a7a50bcf6",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 015 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-015-interior-render-jpg-b2a55ec783",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "78168a8932d9419f1432f571741c5e6e6683423e711724fa69a86b2311e8b02d",
+          "byteLength": 74136,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-015-interior-render-jpg-b2a55ec783",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-494834836500246-0045-1717/25458TF-015-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #22 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-4db64b889f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 020 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-020-interior-render-jpg-398bc921ff",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "5a3283eede2bde96323fef8cbfefc3f5f42fc9d37e465ac8543267e39eaf8673",
+          "byteLength": 82314,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-020-interior-render-jpg-398bc921ff",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905878-331776238474310-0044-2348/25458TF-020-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #13 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-5bacee660e",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 012 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-012-exterior-render-jpg-ab034c03ae",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "6a34583d669cf71b4d1505f0bcd33280c151608a27ba7670eb7e742282eb913b",
+          "byteLength": 113498,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-012-exterior-render-jpg-ab034c03ae",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-721755130240354-0054-3029/25458TF-012-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #21 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-5cd4db987f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 021 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-021-interior-render-jpg-ad86e8e127",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "3383a413c3fdc2dc97547094e26a26c5276231ca99cc1e20e1ba6398bf94c51b",
+          "byteLength": 81582,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-021-interior-render-jpg-ad86e8e127",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905878-812058118528602-0048-2353/25458TF-021-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #9 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-66c8fac075",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 008 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-008-exterior-render-jpg-29b750a702",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "376fa10b619ed799ecd4722d3bd4b120da3d4f716a0772d11acfebec0144754f",
+          "byteLength": 126171,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-008-exterior-render-jpg-29b750a702",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-269148955769919-0041-9229/25458TF-008-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #27 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-727ffdd945",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 026 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-026-interior-render-jpg-3e90c77b8c",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "b8f6171fc64673c6b5a48685bc335230b8315a37937db19da4dff134c2c3b3df",
+          "byteLength": 60678,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-026-interior-render-jpg-3e90c77b8c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-69057099123559-0059-4984/25458TF-026-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #3 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-741a350343",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 002 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-002-exterior-render-jpg-bcd966714b",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "dbda2d144c92d2df3419978d660aaab0906b85e1f203c5bbc97fed4853774aa7",
+          "byteLength": 107584,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-002-exterior-render-jpg-bcd966714b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905868-759485431617755-0039-8005/25458TF-002-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #8 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-853a198396",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 003 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-003-exterior-render-jpg-015d7935db",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "f339f4d013256209d6f17c1f8d2f3eb4742107e988237bbd4fcb82fbb6a66466",
+          "byteLength": 114290,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-003-exterior-render-jpg-015d7935db",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-445404435228944-0040-4737/25458TF-003-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #15 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-85a2c5351f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 013 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-013-interior-render-jpg-5d27234a1a",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "38813f4a086eaf5473f706f95d35be318cf36c4712192dc8d9b7aa5f36b80cdb",
+          "byteLength": 42569,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-013-interior-render-jpg-5d27234a1a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-212726712484017-0043-7409/25458TF-013-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Floor Plan - Image #34 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-90e5001a6d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"25458tf f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"25458tf f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-25458tf-f1-main-floor-gif-fbad71a0ca",
+      "selectionReason": "only variant (989x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.23625,
+          "byteHash": "236a54a5a2968a13282ff22532b622c07e3d77ae9e790963754dc1927813f98d",
+          "byteLength": 179045,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 989
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-f1-main-floor-gif-fbad71a0ca",
+          "mediaType": "image/gif",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #25 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-927fa10f08",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 024 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-024-interior-render-jpg-2f4fe1822a",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "aea810bb9345a895a5d6f02abf9a701eafb41f58722976b5b35e9ec0174abb4c",
+          "byteLength": 72778,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-024-interior-render-jpg-2f4fe1822a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-539194931376325-0057-7621/25458TF-024-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #23 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-934c4a09fa",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 022 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-022-interior-render-jpg-fef44fa454",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "8a59c94f36022a55c32cf0250db9f27c5bae3b48f69d47fb03579f829d92a3c2",
+          "byteLength": 62710,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-022-interior-render-jpg-fef44fa454",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-63018094237815-0049-9398/25458TF-022-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #4 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-a31ccfebba",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 004 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-004-exterior-render-jpg-0a2bb9c00b",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "886f3a4f500997c660712b9ac9c8ae83f964c374aad9da2cb0225ba9a055d14c",
+          "byteLength": 81254,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-004-exterior-render-jpg-0a2bb9c00b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905868-36928677652791-0052-4640/25458TF-004-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #30 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-a491f9bb46",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 028 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-028-interior-render-jpg-992e108788",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "1324a4bc9b7be46f6623da7435b8d85f9656d8c8bd70d484ca8d5b88741a96c0",
+          "byteLength": 82820,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-028-interior-render-jpg-992e108788",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-3527337652042-0046-1363/25458TF-028-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #5 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-aaedd92b5b",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 005 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-005-exterior-render-jpg-4607e62a62",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "bb87a634253e54f3e1a3696572fdc658008795eaa3b98373f7ce9b5b130eba10",
+          "byteLength": 83250,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-005-exterior-render-jpg-4607e62a62",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905868-484640904917776-0040-7054/25458TF-005-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #14 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-b33eff30cb",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 014 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-014-interior-render-jpg-dc405005a9",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "ec9980c02f46b4b899f902e6e48450c9e6599f7566fc03ffac6b910dca2b2405",
+          "byteLength": 85183,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-014-interior-render-jpg-dc405005a9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-634661945994223-0042-0288/25458TF-014-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #32 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-bd462c4439",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 031 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-031-interior-render-jpg-828990bb03",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "9143c9e388427c7b2a56b5e219ece486ea2af5540265b7fe4ed5be7f678dc83d",
+          "byteLength": 70007,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-031-interior-render-jpg-828990bb03",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905880-815643866814191-0046-9476/25458TF-031-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #7 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-d8cb1fa5ef",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 007 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-007-exterior-render-jpg-569a4367fe",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "60996e1b171fb8a62e424d64e67fbe3cd210ccfe1c16aea1a6ea40c36674d695",
+          "byteLength": 100729,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-007-exterior-render-jpg-569a4367fe",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-289152969942946-0043-6210/25458TF-007-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #31 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-dd91c02b2b",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 030 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-030-interior-render-jpg-db311c8362",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "6ea7bbae0b7792d3cf4cdc3d9a5afe7bd00df2bbdb5ee9f4e0e08dca180eedb7",
+          "byteLength": 71194,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-030-interior-render-jpg-db311c8362",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-798168660098530-0045-3934/25458TF-030-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #17 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-e2d2704e4b",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 016 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-016-interior-render-jpg-d46b126330",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "e5408a8929bfc008486312dfec071676f44df7be1957a201b20c738303801cdd",
+          "byteLength": 67422,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-016-interior-render-jpg-d46b126330",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905870-592020336625185-0043-6434/25458TF-016-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #29 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-f479ad2be5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 029 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-029-interior-render-jpg-a336df5a4e",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "8191f97155f7d8ff56968a7e49f82d2f61c06f0da3a3437ad7479e86bbb27066",
+          "byteLength": 72924,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-029-interior-render-jpg-a336df5a4e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-242516461015000-0045-8511/25458TF-029-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #26 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-f4ad2422c6",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 025 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-025-interior-render-jpg-7ad1b653aa",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "16b065115254b124dd2dcb86500236deb99c3db2986b0eb2ec6f099453d4f002",
+          "byteLength": 56408,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-025-interior-render-jpg-7ad1b653aa",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-830802844606220-0058-2752/25458TF-025-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #28 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-f9dd3936db",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 027 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-027-interior-render-jpg-3146281eec",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "3f6bf17b03cff5bbb0c8853cbd60c0d8f690f2ebcedc53bfb82cf3e0d9b0caf7",
+          "byteLength": 66148,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-027-interior-render-jpg-3146281eec",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905879-459588822912123-0060-3000/25458TF-027-Interior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #11 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-fbfff91581",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 010 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-010-exterior-render-jpg-6d2b592af2",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "ea64357a309d90ac04d95420437cf81f0390777f384726492d55e70f98cc4610",
+          "byteLength": 83236,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-010-exterior-render-jpg-6d2b592af2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905869-827057855533121-0041-4944/25458TF-010-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage - Image #20 - Craftsman, Modern Farmhouse, New American",
+      "id": "asset-plan-25458tf-new-american-farmhouse-house-plan-w-fe8582f6c0",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"25458tf 019 interior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-25458tf-019-interior-render-jpg-e6a38d9bab",
+      "selectionReason": "only variant (1200x675, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "fb87e2edbf93e564e9a04a0b11c56e4f6976c9d274d8d94808329e7da882f507",
+          "byteLength": 83320,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 675,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+          "id": "var-25458tf-019-interior-render-jpg-e6a38d9bab",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905873-444089538139235-0055-8494/25458TF-019-Interior-Render.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/new-american-farmhouse-house-plan-with-four-bedrooms-and-three-car-garage-25458tf",
+  "contentHash": "4f2f3b81a10a5cd2e43d8ba84c473a709c6149841d6d7a94db198fbd0b921d8e",
+  "failures": [
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905868-36928677652791-0052-4640/25458TF-004-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905868-484640904917776-0040-7054/25458TF-005-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905868-759485431617755-0039-8005/25458TF-002-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905868-789359948912771-0039-5036/25458TF-001-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-269148955769919-0041-9229/25458TF-008-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-289152969942946-0043-6210/25458TF-007-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-445404435228944-0040-4737/25458TF-003-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-487060825931210-0053-6304/25458TF-006-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-712524936422718-0044-2542/25458TF-009-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905869-827057855533121-0041-4944/25458TF-010-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-212726712484017-0043-7409/25458TF-013-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-323892163131410-0046-2446/25458TF-017-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-494834836500246-0045-1717/25458TF-015-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-592020336625185-0043-6434/25458TF-016-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-634661945994223-0042-0288/25458TF-014-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-721755130240354-0054-3029/25458TF-012-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905870-944519629299713-0042-7166/25458TF-011-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905871-129845631873312-0047-8750/25458TF-018-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905873-444089538139235-0055-8494/25458TF-019-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905878-331776238474310-0044-2348/25458TF-020-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905878-812058118528602-0048-2353/25458TF-021-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-242516461015000-0045-8511/25458TF-029-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-3527337652042-0046-1363/25458TF-028-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-458760249751032-0044-8548/25458TF-023-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-459588822912123-0060-3000/25458TF-027-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-539194931376325-0057-7621/25458TF-024-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-63018094237815-0049-9398/25458TF-022-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-69057099123559-0059-4984/25458TF-026-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-798168660098530-0045-3934/25458TF-030-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905879-830802844606220-0058-2752/25458TF-025-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905880-262537273909264-0047-4962/25458TF-032-Interior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395233635/original/1791905880-815643866814191-0046-9476/25458TF-031-Interior-Render.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395233635/original/1791905807-963728436471551-0051-8963/25458TF-F1-Main-Floor.gif"
+    }
+  ],
+  "id": "src-25458tf-2a190d7332",
+  "pageHash": "a5b9340ab81e059aa9c2f82f9e8fdaa9019ef24600726fc07adb512f4d7c27b5",
+  "project": {
+    "externalId": "25458TF",
+    "name": "Plan 25458TF: New American Farmhouse House Plan with Four Bedrooms and Three-Car Garage",
+    "publisher": "architecturaldesigns.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "65' 7\"",
+      "unit": "m",
+      "value": 19.99
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "81' 5\"",
+      "unit": "m",
+      "value": 24.816
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Slab, Crawl"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This stunning New American farmhouse offers 2,668 square feet of living space, four bedrooms, two bathrooms, and a spacious three-car side-entry garage.The welcoming front porch leads into an elegant foyer featuring an eleven-foot tray ceiling that sets a sophisticated tone for the home.The heart of the residence is an open-concept living area where vaulted ceilings crown both the kitchen and living room, creating a bright and airy atmosphere for daily life.A split-bedroom layout ensures maximum privacy, positioning the primary suite away from the three secondary bedrooms to create a peaceful personal retreat.Dedicated spaces including a formal dining room and a private library or study provide flexible options for remote work or hosting special occasions.Spacious front and rear porches offer a seamless transition between indoor and outdoor living, perfect for enjoying quiet mornings or evening relaxation.Thoughtful functional design includes a large walk-in pantry and a dedicated mudroom to keep the household organized and efficient."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

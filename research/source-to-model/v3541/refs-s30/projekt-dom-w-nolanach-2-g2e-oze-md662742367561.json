@@ -1,0 +1,61 @@
+{
+ "slug": "projekt-dom-w-nolanach-2-g2e-oze-md662742367561",
+ "imagesUsed": [
+  {"n": 15, "what": "ground floor plan with chains 720 + 270 + 700 + 130 = 1820 (bottom) and 100 + 900 + 470 = 1470 (left); garage door and entrance at the bottom; 14 same plan with names, 7 and 10 smaller copies"},
+  {"n": 5, "what": "front elevation: long gable roof, flat-roofed garage block right of centre"},
+  {"n": 4, "what": "rear elevation: three bedroom French doors and living glazing with timber panels"},
+  {"n": 2, "what": "right side elevation (front at left): garage block, office glazed door, tall narrow window"},
+  {"n": 3, "what": "left side elevation (rear at left): living glazing 320/230, garage block"},
+  {"n": 6, "what": "section through main body: 30 deg, eaves +3.16, ridge +6.83, terrain -0.32, room 274"},
+  {"n": 8, "what": "site plan 1820 x 1470: gable roof over main body, separate flat garage roof, rear deck"},
+  {"n": 9, "what": "render front"},
+  {"n": 11, "what": "render rear-right with deck and PV panels"},
+  {"n": 1, "what": "render rear-left"}
+ ],
+ "mirrorOrOtherProjectWarning": "None. Plan copies agree; renders show the flat-roofed garage right of centre on the front and the living glazing at the rear-left as on the plan. Renders 11/17 show PV panels on the rear slope that the elevations do not draw.",
+ "overall": {"widthM": 18.2, "depthM": 14.7, "heightM": 7.15, "basis": "1820 and 1470 printed on plan and site plan; depth includes the 4.70 garage projection (main body 10.0 deep); height = ridge +6.83 over terrain -0.32 = published 7.15"},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "18.2 x 10.0 body under one gable roof; living glazing set back 1.0 at the rear-left, porch notch at the front between vestibule and garage", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "18.2 x 10.0"},
+  {"name": "garage", "role": "GARAGE", "where": "front, x 9.9-16.9 m, projects 4.70 m forward of the main front wall, dark grey block", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "7.0 x 6.2"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Symmetrical 30 deg gable over the main body, ridge along the 18.2 m front, small overhangs, dark grey flat tiles; garage has its own flat roof below the eaves. No dormers; PV panels on the rear slope only in renders."},
+ "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "RIGHT", "doorCount": 1},
+ "entrance": {"facade": "FRONT", "position": "LEFT_OF_CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["LARGE_GLAZING", "WINDOW", "ENTRANCE_DOOR", "GARAGE_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["GLAZED_DOOR", "GLAZED_DOOR", "GLAZED_DOOR", "LARGE_GLAZING"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["LARGE_GLAZING", "DOOR"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["DOOR", "GLAZED_DOOR", "WINDOW"]}]}
+ },
+ "largeGlazing": [
+  {"facade": "REAR", "position": "RIGHT", "what": "living glazing 450 x 230 (two panes), recessed 1.0 m under the roof (seen from behind at the right)"},
+  {"facade": "LEFT", "position": "CENTRE", "what": "living/dining glazing 320 x 230 in the left gable"},
+  {"facade": "FRONT", "position": "LEFT", "what": "kitchen window 280 x 140 with sill (large only by the width rule)"}
+ ],
+ "features": [
+  {"kind": "CHIMNEY", "count": 2, "where": "front slope just below the ridge, about 4.0 m and 11.1 m from the left"},
+  {"kind": "OTHER", "count": 1, "where": "flat-roofed dark grey garage block projecting from the gable body"},
+  {"kind": "OTHER", "count": 1, "where": "full-height vestibule glazing 160/230 beside a timber-clad porch recess with house number"},
+  {"kind": "OTHER", "count": 5, "where": "vertical timber panels between the rear French doors and around the living glazing"},
+  {"kind": "TERRACE", "count": 2, "where": "deck along the whole rear; narrow side terrace on the right between planters"}
+ ],
+ "palette": {"walls": "white render with graphite render panels (garage, lower gable zones), vertical timber boards, anthracite frames, grey plinth", "roof": "dark grey flat tiles, anthracite chimneys; garage roof flat"},
+ "groundOutline": {"shape": "OTHER", "corners": 12, "polygonM": [[0, 4.7], [7.2, 4.7], [7.2, 6.2], [9.9, 6.2], [9.9, 0], [16.9, 0], [16.9, 4.7], [18.2, 4.7], [18.2, 14.7], [7.2, 14.7], [7.2, 13.7], [0, 13.7]], "closedAreaM2": 203.7, "basis": "Chains 720/270/700/130 and 100/900/470 on plan 15. Living block 720 wide, front at the 470 line, rear glazing set back 100; porch notch = the 270 span, its back wall (bath/laundry) about 1.5 m behind the front line (scaled); garage 700 wide reaches z=0; 130 strip right of the garage fronts at the 470 line. Left wall stub running on to the rear line beside the recess is excluded."},
+ "openZones": [
+  {"kind": "PORCH", "roofed": true, "where": "front notch between vestibule and garage under the main eaves; entrance door in the vestibule side wall and a 100/210 door into the garage open onto it", "approxSizeM": "about 2.7 x 1.5"},
+  {"kind": "LOGGIA", "roofed": true, "where": "rear recess in front of the 450 living glazing, between the left wall stub and the bedroom wing", "approxSizeM": "about 6.4 x 1.0"},
+  {"kind": "TERRACE", "roofed": false, "where": "timber deck along the whole rear", "approxSizeM": "about 18 x 3.2"},
+  {"kind": "TERRACE", "roofed": false, "where": "right side, outside office and bedroom 11, between planters", "approxSizeM": "about 1.5 x 6.0"}
+ ],
+ "printedOverall": {"widthCm": 1820, "depthCm": 1470, "where": "plan 15/14: 1820 below (720 + 270 + 700 + 130), 1470 at left (100 + 900 + 470); site plan 8 repeats 1820 x 1470"},
+ "groundRooms": 14,
+ "uncertain": [
+  "Entrance door 110/230 sits in the vestibule's right-hand wall facing the porch notch (not visible on the front elevation); the front wall of the vestibule is a fixed 160/230 glazing (listed as WINDOW).",
+  "Porch notch depth (~1.5 m) scaled, not printed.",
+  "LEFT/RIGHT DOORs are garage side doors (90/210) set back on the garage walls.",
+  "Bedroom 11 side opening 90/230 is full height; whether it opens as a door is UNKNOWN (listed as WINDOW).",
+  "PV panels appear on the rear slope in renders 11/17 only."
+ ],
+ "confidence": "HIGH - dimensioned plan, four elevations, section, site plan and renders agree; polygon area 203.7 vs published total 204.41."
+}

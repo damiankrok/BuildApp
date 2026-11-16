@@ -1,0 +1,58 @@
+{
+  "slug": "extradom-pl",
+  "imagesUsed": [
+    {"n": 12, "what": "front elevation (rendered): entrance portal centre, timber-clad right half"},
+    {"n": 8, "what": "rear elevation (rendered)"},
+    {"n": 28, "what": "left gable elevation: one floor-level square picture window"},
+    {"n": 4, "what": "right gable elevation: service door"},
+    {"n": 20, "what": "cross-section: 35 deg, 674 overall from ground, 321 to eave, 266 room height, ground -0.49"},
+    {"n": 25, "what": "site plan: building 1190 x 865 (dashed wall line), roof outline, terrace, landings, chimneys"},
+    {"n": 2, "what": "render front (night)"},
+    {"n": 7, "what": "render front-left corner"},
+    {"n": 9, "what": "render rear-right corner (gable door)"},
+    {"n": 3, "what": "render rear-left (terrace, left gable window)"}
+  ],
+  "mirrorOrOtherProjectWarning": "NO FLOOR PLAN: the classifier's FLOOR_PLAN asset failed to load, no picture shows a plan. 29-36 are other variants of the series (Mirabelka 2/3/4 bis/country, one hipped) and 63-74 other projects (carousel); 37-62 duplicate this project's renders/interiors; 01, 05, 23, 24 (and 38-40, 45, 51, 57, 59, 61) are interiors. No mirroring: elevations, site plan (vent/chimney positions) and renders agree.",
+  "overall": {"widthM": 11.9, "depthM": 8.65, "heightM": 6.73, "basis": "wall outline 1190 x 865 printed on site plan; page publishes 11.90 / 8.65 / 6.73 m; section prints 674"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "main", "role": "MAIN", "where": "single rectangular block", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "11.90 x 8.65"},
+    {"name": "entrance portal", "role": "PORCH", "where": "front centre: dark grey frame with flat canopy and a vertical timber slat screen on its left, projecting about 0.8-0.9 m (visible beyond the front wall on both gable elevations)", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 3 x 0.85"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ALONG_FRONT", "highSideIfShed": null, "pitchDeg": 35, "notes": "Symmetric gable, 35 deg printed and published, roof area 162 m2. Overhangs: roof outline on site plan scales to about 13.2 x 10.1 m (eaves ~0.7 m, verges ~0.6 m). Timber soffits/bargeboards and a timber collar tie visible in each gable apex. No dormers or rooflights; attic is an unused truss space (flat ceiling at +3.02)."},
+  "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+  "entrance": {"facade": "FRONT", "position": "CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "ENTRANCE_DOOR", "WINDOW", "WINDOW"]}]},
+    "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 3, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING"]}]},
+    "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["WINDOW"]}]},
+    "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["DOOR"]}]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "LEFT", "what": "two-leaf glazed terrace door about 2.8 m wide x 2.25 m (scaled), at the rear-left corner as seen from the front, opening onto the terrace"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "one at the ridge on the rear slope left of centre, one on the front slope just below the ridge near the right end"},
+    {"kind": "CANOPY", "count": 1, "where": "entrance portal: flat dark canopy + slat screen over the door and landing"},
+    {"kind": "TERRACE", "count": 1, "where": "rear-left, raised slab with steps, about 5.5 m wide"},
+    {"kind": "OTHER", "count": 3, "where": "roof vent pipes on the front slope (two at the left end, one right of centre)"},
+    {"kind": "OTHER", "count": 1, "where": "steps/landing at the right gable door"}
+  ],
+  "palette": {"walls": "white render; natural vertical timber boarding on the front right of the portal and a panel between the rear windows; dark grey portal frame; grey stone-look plinth; anthracite windows and doors", "roof": "graphite flat roof tiles, grey rendered chimneys, timber soffits"},
+  "groundOutline": {"shape": "RECT", "corners": 4, "polygonM": [[0, 0], [11.9, 0], [11.9, 8.65], [0, 8.65]], "closedAreaM2": 102.94, "basis": "site plan dashed wall line 1190 x 865 (scales 11.90 x 8.67); published building area 102.94 = 11.90 x 8.65 exactly; no floor plan to confirm recesses"},
+  "openZones": [
+    {"kind": "TERRACE", "roofed": false, "where": "rear, left end (as seen from front), at the glazed terrace door", "approxSizeM": "about 5.5 x 3.0 from the wall (outer ~0.7 m under the eaves)"},
+    {"kind": "PORCH", "roofed": true, "where": "front centre, entrance portal with landing and steps", "approxSizeM": "canopy ~3 x 0.85; landing ~4.3 x 2.1 incl. steps"}
+  ],
+  "printedOverall": {"widthCm": 1190, "depthCm": 865, "printedText": "1190 / 865", "where": "picture 25 (site plan), bottom and right building dimension lines"},
+  "groundRooms": null,
+  "uncertain": [
+    "No floor plan available: groundRooms unknown (page lists 2 rooms = bedrooms); interior layout not recorded.",
+    "Height: published 6.73 m vs 674 printed on the section.",
+    "LEFT window: floor-level single pane about 2.37 x 2.24 m (scaled from elevation) - below the 2.5 m width rule, labelled WINDOW.",
+    "REAR right-end opening is a 2-leaf terrace door ~2.8 m wide: LARGE_GLAZING only by the width rule.",
+    "Portal projection inferred from gable elevations (~0.8-0.9 m); whether the door wall is also recessed cannot be checked without a plan.",
+    "Front left window ~2.4 m wide two-pane; right two windows ~1.2 m in the timber zone."
+  ],
+  "confidence": "MEDIUM - four elevations, section and site plan agree, but there is no floor plan."
+}

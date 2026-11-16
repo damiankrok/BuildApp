@@ -1,0 +1,58 @@
+{
+ "slug": "projekt-dom-w-supertuniach-2-e-m9022920a5fcb6",
+ "imagesUsed": [
+  {"n": 30, "what": "ground floor plan with dimension chains, overall 690 x 1350 cm, entrance at the bottom; 29 is the same plan with room names, 14 and 22 are smaller identical copies"},
+  {"n": 11, "what": "front elevation (gable end, entrance portal, corner window)"},
+  {"n": 12, "what": "rear (garden) elevation - fully glazed gable in a deep frame"},
+  {"n": 9, "what": "left side elevation (rear at left)"},
+  {"n": 10, "what": "right side elevation (front at left)"},
+  {"n": 13, "what": "cross-section: 30 deg, eaves +2.98, ridge +4.97, terrain -0.32, room height 262"},
+  {"n": 15, "what": "site plan 690 x 1350 with rear deck and entrance path"},
+  {"n": 1, "what": "render front-left"},
+  {"n": 2, "what": "render rear-left with deck and pool"},
+  {"n": 3, "what": "render rear-right"}
+ ],
+ "mirrorOrOtherProjectWarning": "None. Plans 14, 22, 29, 30 are identical; renders agree with the plan (corner window front-left, entrance right of centre, four small windows with timber panels on the right side). 17-27 are mostly interiors; 31/32 duplicate exterior renders.",
+ "overall": {"widthM": 6.9, "depthM": 13.5, "heightM": 5.29, "basis": "690 x 1350 printed on plan and site plan (closed body); height = ridge +4.97 over terrain -0.32 on section = published 5.29. Roof and side walls run on about 1.5-1.7 m beyond the 1350 rear line over a niche (not included)."},
+ "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+ "bodies": [
+  {"name": "main", "role": "MAIN", "where": "single long rectangle, gable to the front and to the garden", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "6.90 x 13.50"},
+  {"name": "rear niche", "role": "LOGGIA", "where": "rear: roof and side walls continue past the glazed gable; side walls there are timber-slatted screens ending in solid posts", "storeys": 1, "enclosed": false, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "about 6.0 x 1.7 (plan)"},
+  {"name": "entrance portal", "role": "PORCH", "where": "front, right of centre: flat canopy with timber-clad jambs over the door, slatted screen on its left", "storeys": 1, "enclosed": false, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "about 2.6 x 0.8"}
+ ],
+ "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 30, "notes": "Symmetrical 30 deg gable, ridge running front-to-garden, flush gables without overhang, thick dark verge frame; no dormers or rooflights. Living room open to the roof (dashed X on plan, interior renders)."},
+ "garage": {"present": false, "doorFacade": null, "doorPosition": null, "doorCount": 0},
+ "entrance": {"facade": "FRONT", "position": "RIGHT_OF_CENTRE", "recessedOrPorch": true},
+ "openings": {
+  "FRONT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["CORNER_WINDOW", "ENTRANCE_DOOR"]}]},
+  "REAR": {"shown": true, "byStorey": [{"storey": 0, "count": 1, "leftToRight": ["LARGE_GLAZING"]}]},
+  "LEFT": {"shown": true, "byStorey": [{"storey": 0, "count": 2, "leftToRight": ["WINDOW", "CORNER_WINDOW"]}]},
+  "RIGHT": {"shown": true, "byStorey": [{"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "WINDOW", "WINDOW"]}]}
+ },
+ "largeGlazing": [
+  {"facade": "REAR", "position": "CENTRE", "what": "whole gable glazed 530 x 405 into the apex (3 columns, transom, slanted top panes) with a door, recessed in the roofed niche"}
+ ],
+ "features": [
+  {"kind": "CHIMNEY", "count": 2, "where": "two stacks near the ridge about mid-length, one each side of the ridge"},
+  {"kind": "CANOPY", "count": 1, "where": "flat canopy over the entrance, timber-clad jamb panels"},
+  {"kind": "OTHER", "count": 1, "where": "front-left corner window (200 front + 120 left, 140 high) wrapping the corner"},
+  {"kind": "OTHER", "count": 4, "where": "vertical timber-board panels between the right-side windows and beside the left 180 window; slatted timber screens in the niche side walls"},
+  {"kind": "TERRACE", "count": 1, "where": "timber deck in the rear niche and beyond it"}
+ ],
+ "palette": {"walls": "graphite/dark grey render, warm vertical timber boards and slats, anthracite frames, light concrete plinth", "roof": "dark grey flat tiles/shingles (elevations), dark grey verges and chimneys"},
+ "groundOutline": {"shape": "RECT", "corners": 4, "polygonM": [[0, 0], [6.9, 0], [6.9, 13.5], [0, 13.5]], "closedAreaM2": 93.15, "basis": "690 (top chain) x 1350 (left chain) on plan 30; right interior chain 520+201+104+235+152 plus walls closes to 1350 at the rear glazing line; the corner window lies in the wall planes"},
+ "openZones": [
+  {"kind": "LOGGIA", "roofed": true, "where": "rear, beyond the glazed gable, between slatted side walls under the main roof", "approxSizeM": "about 6.0 x 1.7"},
+  {"kind": "TERRACE", "roofed": false, "where": "rear deck continuing beyond the niche", "approxSizeM": "about 6.9 x 1.4"},
+  {"kind": "PORCH", "roofed": true, "where": "front entrance landing with canopy and two steps, right of centre", "approxSizeM": "landing about 2.6 x 1.5, canopy about 0.8 deep"}
+ ],
+ "printedOverall": {"widthCm": 690, "depthCm": 1350, "where": "plan 30/29: 690 above the rear edge, 1350 along the left side; repeated on site plan 15"},
+ "groundRooms": 10,
+ "uncertain": [
+  "Rear niche depth: plan shows end posts about 1.7 m beyond the 1350 line and side elevations imply about 1.3-1.7 m; the site plan draws the roof only about 1350 long with an uncovered deck of about 1.2 m beyond it.",
+  "Right-side windows are 80/130 x3 and 120/130 (kitchen, rearmost); left side 180/140 and 120/140.",
+  "Section shows a flat ceiling at 262 in the cut rooms while the living room is vaulted to the ridge.",
+  "Roof covering: elevations show small flat tiles on both slopes; the site plan draws one slope with seam stripes."
+ ],
+ "confidence": "HIGH - dimensioned plan, four elevations, section and renders agree."
+}

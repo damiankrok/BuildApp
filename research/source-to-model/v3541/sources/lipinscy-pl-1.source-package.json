@@ -1,0 +1,1503 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-clock-color-small-png-1afc4d8bc3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-clock-color-small-png-77886ad36b",
+      "selectionReason": "only variant (25x24, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.041667,
+          "byteHash": "18c308d47784ff9ffbe3d3a8308e500460c535a632cb84c376302514b22cebfc",
+          "byteLength": 1454,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 24,
+            "width": 25
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-clock-color-small-png-77886ad36b",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/img/ikony/clock-color-small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-0cd91cae42",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Norwich II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Norwich II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-lmbl041a-rd-500-pdf-daa4e2b645",
+      "selectionReason": "largest decoded raster of 2 variants: 663x770 over 340x395",
+      "variants": [
+        {
+          "aspect": 0.861039,
+          "byteHash": "bb10af70024d8b1902e32714c40da64feda0f55a7d0c0dc39bfd0b53ae0562ae",
+          "byteLength": 35175,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 770,
+            "width": 663
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-rd-500-pdf-daa4e2b645",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/35842/lmbl041a_rd_500-pdf"
+        },
+        {
+          "aspect": 0.860759,
+          "byteHash": "a27b7ec54e9281c52d3c9ac26faea4b64e16faf02c8d1c62a236903d7d55eaf7",
+          "byteLength": 64573,
+          "declared": {
+            "height": 770,
+            "width": 663
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 395,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35842-plotpdf-thumb-png-270a7ec605",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/36/thumb_35842_plotpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-1da669e3f9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35830-projects-thumb-gallery-small-jpeg-7a6aadba2b",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "04bf2cdbeefea8083b506adec5b3b1d03b5561ccdf4618774113d3c89d66d418",
+          "byteLength": 3086,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35830-projects-thumb-gallery-small-jpeg-7a6aadba2b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35830_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-28a977364b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35829-projects-thumb-gallery-small-jpeg-098184c407",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "4af4c77da5ee3074489ce7f1fa60621bbfd0d26e7c764de0f3e8ad446f3fd713",
+          "byteLength": 2710,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35829-projects-thumb-gallery-small-jpeg-098184c407",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35829_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-38e3049a5a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-fr1-6bc6bcbc9a",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "9894d4f2ba70552367c3265df30c2b67f809d2f2b360f33dec7a89b0e2584d2e",
+          "byteLength": 116264,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-fr1-6bc6bcbc9a",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35825/lmbl041a_fr1"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-3d4c33f97e",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35825-projects-thumb-gallery-small-jpeg-5c09a6da18",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "4586706a09f08b60698ae4066d734a5adee37bab87b4045d7efceb88b5ee85d3",
+          "byteLength": 2732,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35825-projects-thumb-gallery-small-jpeg-5c09a6da18",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35825_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-4988f6f82d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35826-projects-thumb-gallery-small-jpeg-2d7b10e357",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "d19cbda9a0311512cf89335fb483a21ea42913a0095bbdca21ee0e43dce7f32a",
+          "byteLength": 2952,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35826-projects-thumb-gallery-small-jpeg-2d7b10e357",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35826_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-6c71b3bb83",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35828-projects-thumb-gallery-small-jpeg-40a7240ed6",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "1b84a9efb1aa03ba56876ed63204bfac56ec619f283c0e7805d7d6d7112b987b",
+          "byteLength": 2769,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35828-projects-thumb-gallery-small-jpeg-40a7240ed6",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35828_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-82d590259a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-detal1-38da23c592",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "43c450253b3213eb88c670c26d9fbad691ae47e50fd5d2cb113f07684a2d9792",
+          "byteLength": 115941,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-detal1-38da23c592",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35827/lmbl041a_detal1"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-93e2d81d29",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 73,98 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-lmbl041a-r1-pdf-ee3983791d",
+      "selectionReason": "largest decoded raster of 2 variants: 534x800 over 340x509",
+      "variants": [
+        {
+          "aspect": 0.6675,
+          "byteHash": "2bdf7f55a9fcfa0ee49804a1bb65007ab80d96b76a3571e4c1fe3ef860178293",
+          "byteLength": 116854,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 534
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-r1-pdf-ee3983791d",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/35836/lmbl041a_r1-pdf"
+        },
+        {
+          "aspect": 0.667976,
+          "byteHash": "238ca0be7ceac63a00be7fcd85b0c932143d366e793728a369ceafeacb610a41",
+          "byteLength": 175284,
+          "declared": {
+            "height": 800,
+            "width": 534
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 509,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35836-floorplanpdf-thumb-png-afcbabf2c1",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35836_floorplanpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-ba5bd1dd82",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-og1-9cfa1d24de",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "2aa26dae870e16b9e10936325fe548f7c1bd0b5cd8edd8dff54edfc46a7ce8c2",
+          "byteLength": 118248,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-og1-9cfa1d24de",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35826/lmbl041a_og1"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-e1c5e657a7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-wn1-8853f34057",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "77acf4198309fcd6a7a1c10b0a2e772e333c0df8bbbfa4535bd9d309a92ae9b6",
+          "byteLength": 93885,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-wn1-8853f34057",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35828/lmbl041a_wn1"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-e9e3807dc2",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-wn3-351f0852eb",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "236dbeb2d55eddf8b0dcb13f5a293a01b4e441c662082feed1f3e792b27e47c3",
+          "byteLength": 96314,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-wn3-351f0852eb",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35830/lmbl041a_wn3"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-ebe9fa860a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-thumb-35827-projects-thumb-gallery-small-jpeg-97c0ec2afb",
+      "selectionReason": "only variant (120x80, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "29ca4cb1d74b88534469a7ad82d75d05d010c99911841754902115ed0d74c26a",
+          "byteLength": 3063,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 80,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35827-projects-thumb-gallery-small-jpeg-97c0ec2afb",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/36/thumb_35827_projects_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II elewacja lewa",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-elewacja-lewa-16f9a7ca9e",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 35832 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja lewa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Norwich II elewacja lewa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-thumb-35832-facades-thumb-gallery-small-jpeg-c015256f10",
+      "selectionReason": "only variant (120x49, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.44898,
+          "byteHash": "14696984ddf3229c1a5d58802955b2ec416b277763e4f2da176859d7803f0e13",
+          "byteLength": 1619,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 49,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35832-facades-thumb-gallery-small-jpeg-c015256f10",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35832_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II elewacja prawa",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-elewacja-prawa-2ecf034353",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 35834 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja prawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Norwich II elewacja prawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-thumb-35834-facades-thumb-gallery-small-jpeg-17a5eed1d0",
+      "selectionReason": "only variant (120x49, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.44898,
+          "byteHash": "18b32b078a9d30dd8c708e47be21666b4e43a8dccccd58437679e2aee408b4fc",
+          "byteLength": 1641,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 49,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35834-facades-thumb-gallery-small-jpeg-17a5eed1d0",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35834_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II elewacja przód",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-elewacja-przod-e6b9a7f040",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 35831 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Norwich II elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-thumb-35831-facades-thumb-gallery-small-jpeg-c82305a2c0",
+      "selectionReason": "only variant (120x84, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.428571,
+          "byteHash": "66b3faf66f766990b0f060e6b20c2888a198267be5637c3bfa193352d28abfaa",
+          "byteLength": 2734,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 84,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35831-facades-thumb-gallery-small-jpeg-c82305a2c0",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35831_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II elewacja tył",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-elewacja-ty-fe8160efe2",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 35833 facades thumb gallery small\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Norwich II elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-thumb-35833-facades-thumb-gallery-small-jpeg-49b0a3502b",
+      "selectionReason": "only variant (120x84, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.428571,
+          "byteHash": "01373f2ff3981d80176b4fdfa6a9e79475479feb142624109d66945018da8cfc",
+          "byteLength": 2880,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 84,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35833-facades-thumb-gallery-small-jpeg-49b0a3502b",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35833_facades_thumb_gallery_small.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-f10fdc594d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Norwich II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-lmbl041a-px-pdf-7c76e93042",
+      "selectionReason": "largest decoded raster of 2 variants: 770x350 over 340x155",
+      "variants": [
+        {
+          "aspect": 2.2,
+          "byteHash": "798e334ddc1ca27117bbba23101b85a2d029caa20ba71239265f5a3b293755bb",
+          "byteLength": 34500,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 350,
+            "width": 770
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-px-pdf-7c76e93042",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/35844/lmbl041a_px-pdf"
+        },
+        {
+          "aspect": 2.193548,
+          "byteHash": "06232c7bc0ea3b4b4d48ff666c4417583ca696b55efc00b0398c19d7cd6f21a3",
+          "byteLength": 32053,
+          "declared": {
+            "height": 350,
+            "width": 770
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 155,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35844-crossviewpdf-thumb-png-095c417e79",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/36/thumb_35844_crossviewpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-f269cec91e",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-lmbl041a-wn2-afc0be4f52",
+      "selectionReason": "only variant (1280x849, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.507656,
+          "byteHash": "a301072068896eb191ea6c514774e1e7ffafe61dbc252b3e15c7fc243061f937",
+          "byteLength": 78422,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 849,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-wn2-afc0be4f52",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/projects/35829/lmbl041a_wn2"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-fbeb81a140",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "storey",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Piętro 76,33 m²\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-lmbl041a-r2-pdf-a569c42f70",
+      "selectionReason": "largest decoded raster of 2 variants: 534x800 over 340x509",
+      "variants": [
+        {
+          "aspect": 0.6675,
+          "byteHash": "3a3ccde01cf03358d548c712b20e30f20599a9003681e7959af615d02656fb88",
+          "byteLength": 104894,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 534
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-r2-pdf-a569c42f70",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/35839/lmbl041a_r2-pdf"
+        },
+        {
+          "aspect": 0.667976,
+          "byteHash": "df9de9c5a2ea0d7ccef77136b089e62ce4bf0951fcfbd4bd1745b36fe62c005f",
+          "byteLength": 157541,
+          "declared": {
+            "height": 800,
+            "width": 534
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 509,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35839-floorplanpdf-thumb-png-c89fea6132",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35839_floorplanpdf_thumb.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II przekrój",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-przekroj-0941e369a9",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Norwich II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35844-crossviewpdf-thumb-gallery-small-png-d23635fd04",
+      "selectionReason": "only variant (120x55, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.181818,
+          "byteHash": "f2fe3b8e6c4843508e74d86066b35253386a9820bad5846c12231e8856a4c36b",
+          "byteLength": 4613,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 55,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35844-crossviewpdf-thumb-gallery-small-png-d23635fd04",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/36/thumb_35844_crossviewpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II przekrój",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-przekroj-fa11193018",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Norwich II przekrój\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35844-crossviewpdf-thumb-gallery-big-v2-pn-dfe1e40c12",
+      "selectionReason": "only variant (736x335, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.197015,
+          "byteHash": "5be97e7feebe15d5c7b819b38436250e4d89d76018728c875107d16ea3d24b1b",
+          "byteLength": 988249,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 335,
+            "width": 736
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35844-crossviewpdf-thumb-gallery-big-v2-pn-dfe1e40c12",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/36/thumb_35844_crossviewpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II rzut Parter",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-rzut-parter-465c17e73d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35836-floorplanpdf-thumb-gallery-big-v2-pn-7c88e3f552",
+      "selectionReason": "only variant (534x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.6675,
+          "byteHash": "7a29901b9c08506f1be96f9f6b80caaf205e8306bfc6ea1d72498a7a50ef460e",
+          "byteLength": 1712440,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 534
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35836-floorplanpdf-thumb-gallery-big-v2-pn-7c88e3f552",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35836_floorplanpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II rzut Parter",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-rzut-parter-48c38b1134",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Norwich II rzut Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35836-floorplanpdf-thumb-gallery-small-png-ae7e61ae66",
+      "selectionReason": "only variant (120x180, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666667,
+          "byteHash": "42abea82523a2e62fa096df2056198797b0bfe56461b5b61dccd421c2655e69d",
+          "byteLength": 26252,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 180,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35836-floorplanpdf-thumb-gallery-small-png-ae7e61ae66",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35836_floorplanpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II rzut Piętro",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-rzut-pietro-85b93f8221",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35839-floorplanpdf-thumb-gallery-small-png-d9b89ab480",
+      "selectionReason": "only variant (120x180, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666667,
+          "byteHash": "748405d74deccf0db12bbfdb14272c982be788d4932df26468a867a432cead1d",
+          "byteLength": 21728,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 180,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35839-floorplanpdf-thumb-gallery-small-png-d9b89ab480",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35839_floorplanpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II rzut Piętro",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-rzut-pietro-ad2ef11bbc",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Norwich II rzut Piętro\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35839-floorplanpdf-thumb-gallery-big-v2-pn-3ef04dfa38",
+      "selectionReason": "only variant (534x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.6675,
+          "byteHash": "4d4397afdf8f4dd1e0d3d8f9238d6777a71056a7836f768ab8c52fe0bc85d1f1",
+          "byteLength": 1712440,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 534
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35839-floorplanpdf-thumb-gallery-big-v2-pn-3ef04dfa38",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/36/thumb_35839_floorplanpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II wymiary działki",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-wymiary-dzia-ki-3b13469be6",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Norwich II wymiary działki\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Norwich II wymiary działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35842-plotpdf-thumb-gallery-big-v2-png-25987f2f53",
+      "selectionReason": "only variant (663x770, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.861039,
+          "byteHash": "661e44782ca4631b4fa085f3d1bc7d64dfaa21c973ce9779201444a2645bfaed",
+          "byteLength": 2046192,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 770,
+            "width": 663
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35842-plotpdf-thumb-gallery-big-v2-png-25987f2f53",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/36/thumb_35842_plotpdf_thumb_gallery_big_v2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Gotowy projekt domu Norwich II wymiary działki ",
+      "id": "asset-gotowy-projekt-domu-norwich-ii-wymiary-dzia-ki-859fa9289e",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Norwich II wymiary działki \")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Norwich II wymiary działki \")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-thumb-35842-plotpdf-thumb-gallery-small-png-917b7c870d",
+      "selectionReason": "only variant (120x139, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.863309,
+          "byteHash": "45ab4e6516ec8c5a488b5e65b375a817006b612999f56fad1eee130495104646",
+          "byteLength": 10860,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 139,
+            "width": 120
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35842-plotpdf-thumb-gallery-small-png-917b7c870d",
+          "mediaType": "image/png",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/36/thumb_35842_plotpdf_thumb_gallery_small.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Norwich II",
+      "id": "asset-projekt-domu-norwich-ii-06bb83a23b",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja prawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Norwich II elewacja prawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-lmbl041a-e4-e1e7048129",
+      "selectionReason": "largest decoded raster of 2 variants: 1231x500 over 199x81",
+      "variants": [
+        {
+          "aspect": 2.462,
+          "byteHash": "ba3181911a2e531d5a01e936360e92d3484f11108a2c998316f82697bae127c7",
+          "byteLength": 32610,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 500,
+            "width": 1231
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-e4-e1e7048129",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/35834/lmbl041a_e4"
+        },
+        {
+          "aspect": 2.45679,
+          "byteHash": "48896508c4a27bd6ed2cd68fe1f5dddf5243e9edb2a87549dd4de4a8dcdfcde8",
+          "byteLength": 4431,
+          "declared": {
+            "height": 500,
+            "width": 1231
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 81,
+            "width": 199
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35834-admin-jpeg-2eaf2f3887",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35834_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Norwich II",
+      "id": "asset-projekt-domu-norwich-ii-3a01bef546",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja lewa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Norwich II elewacja lewa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-lmbl041a-e2-adea538b5d",
+      "selectionReason": "largest decoded raster of 2 variants: 1234x500 over 200x81",
+      "variants": [
+        {
+          "aspect": 2.468,
+          "byteHash": "eb49e6f53d7920c1936a28fa847b0b7f729c35162084b7d14337aa9b10380589",
+          "byteLength": 30600,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 500,
+            "width": 1234
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-e2-adea538b5d",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/35832/lmbl041a_e2"
+        },
+        {
+          "aspect": 2.469136,
+          "byteHash": "00388555b37273fc9f7e82f93b0ec6106b448f43ad328fe7dd6b254fc40021b4",
+          "byteLength": 4230,
+          "declared": {
+            "height": 500,
+            "width": 1234
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 81,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35832-admin-jpeg-925246cbec",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35832_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Norwich II",
+      "id": "asset-projekt-domu-norwich-ii-5af6e4b8b2",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Norwich II elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-lmbl041a-e1-42ca0cdef9",
+      "selectionReason": "largest decoded raster of 2 variants: 716x500 over 200x140",
+      "variants": [
+        {
+          "aspect": 1.432,
+          "byteHash": "cad500a69b2253df0cafaeb7911f6e563fbdcd6a20a57906653a28d924c2325f",
+          "byteLength": 33770,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 500,
+            "width": 716
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-e1-42ca0cdef9",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/35831/lmbl041a_e1"
+        },
+        {
+          "aspect": 1.428571,
+          "byteHash": "9d1fe31bd27bd04b389a048054716d7073804a63493572f4979132f9ee725372",
+          "byteLength": 9867,
+          "declared": {
+            "height": 500,
+            "width": 716
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 140,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35831-admin-jpeg-2bf1d0eab3",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35831_admin.jpeg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Norwich II",
+      "id": "asset-projekt-domu-norwich-ii-89a71d5749",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Norwich II elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Norwich II elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-lmbl041a-e3-1d21490e20",
+      "selectionReason": "largest decoded raster of 2 variants: 712x500 over 199x140",
+      "variants": [
+        {
+          "aspect": 1.424,
+          "byteHash": "2253ffa66ffd20b98dc8db77d59e67be37180fdb12319695af0e17b96898efb8",
+          "byteLength": 31807,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 500,
+            "width": 712
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-lmbl041a-e3-1d21490e20",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/35833/lmbl041a_e3"
+        },
+        {
+          "aspect": 1.421429,
+          "byteHash": "6227c23d4168ca736db3ac5aada2321c023deed5c45eeceb5905a2ea48478a8c",
+          "byteLength": 9683,
+          "declared": {
+            "height": 500,
+            "width": 712
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 140,
+            "width": 199
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/norwich-ii",
+          "id": "var-thumb-35833-admin-jpeg-110d466dee",
+          "mediaType": "image/jpeg",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/36/thumb_35833_admin.jpeg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://lipinscy.pl/projekt/norwich-ii",
+  "contentHash": "6b7abb701036edecebc1075d24066dd3493b5f38e53b15b0c2c8a6691a6871e0",
+  "failures": [
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/35825/lmbl041a_fr1: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/36/8d38ed92a2194714ef227946e4a68b81d879f257.jpeg"
+    }
+  ],
+  "fetchedUrl": "https://lipinscy.pl/projekt/norwich-ii/",
+  "id": "src-lmbl41a-e9dbd7a81a",
+  "pageHash": "6fbb31e91bacdda34854b41046e4efa255f21a917698241ad92765ffe4f2f448",
+  "project": {
+    "externalId": "LMBL41A",
+    "name": "Projekt Norwich II - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "30°",
+      "unit": "deg",
+      "value": 30
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu Norwich II to nowoczesny dom dwukondygnacyjny w zabudowie bliźniaczej z dwuspadowym dachem. Wysunięty do przodu garaż umożliwi usytuowanie domu na wąskiej działce. Wejście do domu jest osłonięte i wygodnie schowane pod dachem, i łączy się w wiatrołapie z wejściem do garażu. Wnętrze domu jest przestronne i oferuje ponad 30-sto metrową przestrzeń dzienną, dodatkowy pokój na parterze oraz 3 sypialnie, w tym jedną z garderobą i łazienkę na poddaszu. W projekcie przewidziano ogrzewanie kotłem na gaz. Możliwa jest zmiana ogrzewania na pompę ciepła."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "30°"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/norwich-ii/Projekt domu Norwich II to nowoczesny dom dwukondygnacyjny w zabudowie bliźniaczej z dwuspadowym dachem. Wysunięty do przodu garaż umożliwi usytuowanie domu na wąskiej działce. Wejście do domu jest osłonięte i wygodnie schowane pod dachem, i łączy się w wiatrołapie z wejściem do garażu. Wnętrze domu jest przestronne i oferuje ponad 30-sto metrową przestrzeń dzienną, dodatkowy pokój na parterze oraz 3 sypialnie, w tym jedną z garderobą i łazienkę na poddaszu. W projekcie przewidziano ogrzewanie kotłem na gaz. Możliwa jest zmiana ogrzewania na pompę ciepła."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

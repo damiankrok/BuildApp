@@ -1,0 +1,377 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-parter-6-webp-51a7da3c0d",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"parter 6\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-parter-6-webp-ec2d7989ab",
+      "selectionReason": "only variant (1135x1920, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.591146,
+          "byteHash": "1ddb4109b0b574da7cf6d9beb8ed35301c39d920baf944dca29a1f46f697f427",
+          "byteLength": 113052,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1920,
+            "width": 1135
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-parter-6-webp-ec2d7989ab",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord/parter-6.webp"
+        }
+      ]
+    },
+    {
+      "id": "asset-poddasze-1-webp-359399fb41",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"poddasze 1\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-poddasze-1-webp-3d5a50ad40",
+      "selectionReason": "only variant (1302x1920, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.678125,
+          "byteHash": "285cd994d6caa0b4c6fc49ed355f20adcddf37df3ba67eebf261485ebcd7558f",
+          "byteLength": 72928,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1920,
+            "width": 1302
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-poddasze-1-webp-3d5a50ad40",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/produkty/projekt-domu-akord/poddasze-1.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord – widok główny",
+      "id": "asset-projekt-akord-widok-g-owny-f1dfa086be",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"widok\" in \"Projekt Akord – widok główny\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-608a8a566199e66f55b00873ef47-webp-005c7ae91b",
+      "selectionReason": "largest decoded raster of 2 variants: 3000x1930 over 262x168",
+      "variants": [
+        {
+          "aspect": 1.554404,
+          "byteHash": "672e3dab911f05d69f2bf9aaeb72d724fd9607e141c54495bdfdfa0e19cc57da",
+          "byteLength": 454664,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1930,
+            "width": 3000
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-608a8a566199e66f55b00873ef47-webp-005c7ae91b",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/9d/20/608a8a566199e66f55b00873ef47.webp"
+        },
+        {
+          "aspect": 1.559524,
+          "byteHash": "a9b008ee2be63328c877a1d768e71ce6d30cb11d58378d1cbc993308b9ebd9da",
+          "byteLength": 24864,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 168,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-608a8a566199e66f55b00873ef47-thumbnail-262-webp-5b18709f3e",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/9d/20/608a8a566199e66f55b00873ef47_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt Akord – wizualizacja bryły budynku",
+      "id": "asset-projekt-akord-wizualizacja-bry-y-budynku-93f769262f",
+      "roleEvidence": [
+        {
+          "confidence": 0.82,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekt Akord – wizualizacja bryły budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-9aec9b746d6c0cf12d6917176723-webp-16ebbb9e60",
+      "selectionReason": "largest decoded raster of 2 variants: 1050x682 over 262x170",
+      "variants": [
+        {
+          "aspect": 1.539589,
+          "byteHash": "ca698c62d7921e7f468aecdcd833caed7214b1de71a2dbc9dabe3bd0c0c1edf4",
+          "byteLength": 34024,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 682,
+            "width": 1050
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-9aec9b746d6c0cf12d6917176723-webp-16ebbb9e60",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/65/10/9aec9b746d6c0cf12d6917176723.webp"
+        },
+        {
+          "aspect": 1.541176,
+          "byteHash": "904d0cf632fa0b32f74da138c3f64cef98b93b1985b4403a41551ece2f3feb62",
+          "byteLength": 13552,
+          "declared": {
+            "height": 100,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 170,
+            "width": 262
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-9aec9b746d6c0cf12d6917176723-thumbnail-262-webp-41ca8cfeae",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/65/10/9aec9b746d6c0cf12d6917176723_thumbnail_262.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Akord",
+      "id": "asset-projekt-domu-akord-33efe048d7",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-608a8a566199e66f55b00873ef47-thumbnail-740-webp-4fe86c5bfb",
+      "selectionReason": "largest decoded raster of 2 variants: 740x476 over 366x235",
+      "variants": [
+        {
+          "aspect": 1.554622,
+          "byteHash": "a39c886220976f117ffd9789defa6b4feea52f555fd1c05efd1695be639a1f57",
+          "byteLength": 149432,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 476,
+            "width": 740
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-608a8a566199e66f55b00873ef47-thumbnail-740-webp-4fe86c5bfb",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/9d/20/608a8a566199e66f55b00873ef47_thumbnail_740.webp"
+        },
+        {
+          "aspect": 1.557447,
+          "byteHash": "1544367b408629ef835839064279c3791f0e73ba1eb834f4c6490cc165a05ac3",
+          "byteLength": 44126,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 235,
+            "width": 366
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-608a8a566199e66f55b00873ef47-thumbnail-366-webp-1e7481ae1b",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/9d/20/608a8a566199e66f55b00873ef47_thumbnail_366.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord",
+      "id": "asset-rzut-sytuacyjny-na-dzia-ce-minimalne-wymiary-dla-2a4e518cf9",
+      "roleEvidence": [
+        {
+          "confidence": 0.76,
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut sytuacyjny na działce – minimalne wymiary dla projektu Akord\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-a16ebe6e1fc36dfe32384eea26ce-webp-4df3218d47",
+      "selectionReason": "largest decoded raster of 2 variants: 751x1080 over 120x172",
+      "variants": [
+        {
+          "aspect": 0.69537,
+          "byteHash": "455f3620ba6eda60383341bee34602708e0817147d8be821ac53622f6dbca1e4",
+          "byteLength": 25756,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1080,
+            "width": 751
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-a16ebe6e1fc36dfe32384eea26ce-webp-4df3218d47",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/51/2d/a16ebe6e1fc36dfe32384eea26ce.webp"
+        },
+        {
+          "aspect": 0.697674,
+          "byteHash": "4bbf060b6a8287eb2311e97bf729b1fc29b51bbbb736c566fa2d1d3da2c958a7",
+          "byteLength": 6922,
+          "declared": {
+            "height": 200,
+            "width": 100
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 172,
+            "width": 120
+          },
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+          "id": "var-a16ebe6e1fc36dfe32384eea26ce-thumbnail-120-webp-f6ad0d41b4",
+          "mediaType": "image/webp",
+          "url": "https://www.domoweklimaty.pl/media/image/51/2d/a16ebe6e1fc36dfe32384eea26ce_thumbnail_120.webp"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord",
+  "contentHash": "758bd7c009cd217365d00259a14d9bcee21616061984080454d41b29ee6c844b",
+  "failures": [],
+  "fetchedUrl": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord/",
+  "id": "src-projekt-domu-akord-dd0876984a",
+  "pageHash": "a5d4330a0c42325f0bd971a2ca6d29278b76566ed97ee11601e907d8ffc64cdb",
+  "project": {
+    "externalId": "projekt-domu-akord",
+    "name": "Akord - Domowe Klimaty",
+    "publisher": "domoweklimaty.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_width",
+      "label": "Szerokość budynku",
+      "raw": "10,1 m",
+      "unit": "m",
+      "value": 10.1
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "118,5 m²",
+      "unit": "m2",
+      "value": 118.5
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Minimalna szerokość działki",
+      "raw": "15,84 m",
+      "unit": "m",
+      "value": 15.84
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "42 °",
+      "unit": "deg",
+      "value": 42
+    },
+    {
+      "key": "usable_area",
+      "label": "Pow. użytkowa",
+      "raw": "131.15m²",
+      "unit": "m2",
+      "value": 131.15
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Podejmujemy starania, aby zawartość naszej strony internetowej jak najlepiej odzwierciedlała cechy oferowanych projektów. Z uwagi jednak na stały rozwój i konieczność aktualizacji, prezentowane materiały mogą odbiegać od szczegółowych rozwiązań zawartych w dokumentacji."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "42 °"
+    },
+    {
+      "key": "roof",
+      "label": "Typ dachu",
+      "text": "Dwuspadowy"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu na wąską działkę od 14,84 m, powierzchnia 130 m², 5 sypialni, spiżarnia, garaż jednostanowiskowy, dach dwuspadowy"
+    }
+  ],
+  "requestedUrl": "https://www.domoweklimaty.pl/projekt/projekt-domu-akord/",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

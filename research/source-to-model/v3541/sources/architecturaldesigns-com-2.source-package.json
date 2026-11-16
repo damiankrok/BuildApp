@@ -1,0 +1,1630 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-850063pke-001-exterior-render-jpg-920292fc8a",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-001-exterior-render-jpg-f7e1cbb441",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "9aa9357ec0b1639c88e21c03a814b45f86711b5579f387f70139b7edfe57c8fc",
+          "byteLength": 149991,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-001-exterior-render-jpg-f7e1cbb441",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508883-698051641786291-0033-9499/850063PKE-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-002-exterior-render-jpg-ee2fd9e7f5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 002 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-002-exterior-render-jpg-4b4909743a",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "8802abc121de02816676eb9e3adad37f2888fecdb410dbfd229ce5649b5c860a",
+          "byteLength": 174716,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-002-exterior-render-jpg-4b4909743a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508882-606274819545047-0032-5844/850063PKE-002-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-003-exterior-render-jpg-504a023b3e",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 003 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-003-exterior-render-jpg-461c4314e6",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "5c8edda1b6a05264706cc8a345945099d017898b407979b36b54c8e7dbebda7d",
+          "byteLength": 150959,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-003-exterior-render-jpg-461c4314e6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508884-796507988144104-0103-1002/850063PKE-003-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-004-exterior-render-jpg-3e843aabd2",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 004 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-004-exterior-render-jpg-158a30af43",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "33093378a8b047b13aec8e33f7106fad6464001eed3c16e954945faa40b3b7da",
+          "byteLength": 163143,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-004-exterior-render-jpg-158a30af43",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508883-483179093440366-0034-6417/850063PKE-004-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-005-interior-render-kitchen-jpg-461a9e1266",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 005 interior render kitchen\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-005-interior-render-kitchen-jpg-b32af03802",
+      "selectionReason": "only variant (1200x902, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.330377,
+          "byteHash": "6796727c8bb97a8f4ec035eac2ced165d14d1ce9430c0692a34cd2be9738e22c",
+          "byteLength": 136345,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 902,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-005-interior-render-kitchen-jpg-b32af03802",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508883-706828240489071-0102-6116/850063PKE-005-Interior-Render-KITCHEN.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-006-interior-render-lounge-ii-jpg-c0e9db9ad1",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 006 interior render lounge ii\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-006-interior-render-lounge-ii-jpg-59465e0503",
+      "selectionReason": "only variant (1200x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "290811851db2af66e18ff934fa5d4ac6e211b0b55d8666b8480bde4df991a3de",
+          "byteLength": 99149,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-006-interior-render-lounge-ii-jpg-59465e0503",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508883-273282682010629-0034-3375/850063PKE-006-Interior-Render-LOUNGE-II.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-007-interior-render-lounge-jpg-89527d9637",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 007 interior render lounge\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-007-interior-render-lounge-jpg-76f6aa679a",
+      "selectionReason": "only variant (1200x901, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.331853,
+          "byteHash": "7e9729355fc178c81da0866f1b2622afa3411eb5c3f078fc9da144d0e88f77a6",
+          "byteLength": 151093,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 901,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-007-interior-render-lounge-jpg-76f6aa679a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508885-693246671603840-0065-4907/850063PKE-007-Interior-Render-LOUNGE.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-008-interior-render-bedroom-jpg-c37b3bf6bf",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 008 interior render bedroom\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-008-interior-render-bedroom-jpg-a13dc0bd22",
+      "selectionReason": "only variant (1200x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "37ff716250c158674f966cdfabb6d3750c618eb06f5f666dac9fc2f654b4fd92",
+          "byteLength": 110671,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-008-interior-render-bedroom-jpg-a13dc0bd22",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792508884-894826244569734-0035-4583/850063PKE-008-Interior-Render-BEDROOM.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-elevation-front-jpg-374b14b6df",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation front\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"850063pke elevation front\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-front-jpg-4262ae78e6",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "628a8c6e28d72cd33be85647f44290bc274f0c90fb5e650ccc898f62a87c947f",
+          "byteLength": 52902,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-front-jpg-4262ae78e6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792510995-134086291117589-0041-9066/850063PKE-Elevation-Front.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-elevation-left-jpg-f35d296b3f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation left\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"850063pke elevation left\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-left-jpg-43d0c3d885",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "623a236f5dd1a4ebc840e6b85bd5acc123bc949592d3a448246f2f87cfd1ccaf",
+          "byteLength": 40384,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-left-jpg-43d0c3d885",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792510995-531811355853007-0039-1641/850063PKE-Elevation-Left.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-elevation-rear-jpg-b469672839",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation rear\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"850063pke elevation rear\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-850063pke-elevation-rear-jpg-e85cf6c71b",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "6c5e500fa1925d02d234ada136907716704c9dd7adb51058326f32ad91801222",
+          "byteLength": 48646,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-rear-jpg-e85cf6c71b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792510995-177118061296183-0107-4004/850063PKE-Elevation-Rear.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-850063pke-elevation-right-jpg-3df4d957c2",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation right\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"850063pke elevation right\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-right-jpg-24970eb6b2",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "af95ca87d095a20bb38ac02638408cefebc88ed87ebf956b3d768be56786e519",
+          "byteLength": 44819,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-right-jpg-24970eb6b2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792510995-697013916602955-0108-7531/850063PKE-Elevation-Right.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Customer Reviews",
+      "id": "asset-customer-reviews-2b596515a7",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan Collections\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-1198-sa-seal-gif-20974717de",
+      "selectionReason": "only variant (166x56, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.964286,
+          "byteHash": "f4a4457e75026ea157684fdfef0eed4984a0a947a4d9eb1677f4e940bfb4db38",
+          "byteLength": 6149,
+          "declared": {
+            "height": 56,
+            "width": 166
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 56,
+            "width": 166
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-1198-sa-seal-gif-20974717de",
+          "mediaType": "image/gif",
+          "url": "https://www.shopperapproved.com/seal/37222/1198-sa-seal.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Floor Plan 2",
+      "id": "asset-floor-plan-2-260292a1f8",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"second floor\" in \"850063pke f2 bonus second floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-850063pke-f2-bonus-second-floor-gif-00cc58817f",
+      "selectionReason": "only variant (995x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.24375,
+          "byteHash": "702362521a686b8a75b86bfcefa2d23fce8d4d1b12fbe1eca65f9514565aa74f",
+          "byteLength": 106833,
+          "declared": {
+            "height": 450,
+            "width": 750
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 995
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-f2-bonus-second-floor-gif-00cc58817f",
+          "mediaType": "image/gif",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #4 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-092cc577b5",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 004 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-004-exterior-render-jpg-fdbb14a2b7",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "c63efb9a09f3ef09ac659f08681cb836bebbf3139d8a93074023bc5fb5204b69",
+          "byteLength": 138270,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-004-exterior-render-jpg-fdbb14a2b7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508883-483179093440366-0034-6417/850063PKE-004-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #9 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-13acf7a818",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation front\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"850063pke elevation front\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-front-jpg-a40b7a0a5e",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "40c18f72c41c162bf89fd4eaad6417d0e6ccf6b20de8bf72de58337cd6580c5f",
+          "byteLength": 40545,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-front-jpg-a40b7a0a5e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792510995-134086291117589-0041-9066/850063PKE-Elevation-Front.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Floor Plan -  - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-2cfa3c63c0",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"850063pke f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-850063pke-f1-main-floor-gif-071d25478b",
+      "selectionReason": "only variant (800x643, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.244168,
+          "byteHash": "225d91ba08e005d8e00ab81b518b9049bac400bb919d8fb64ef97f2ef669e9e3",
+          "byteLength": 63228,
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 643,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-f1-main-floor-gif-071d25478b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #1 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-2d8ae2504f",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 001 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-001-exterior-render-jpg-8c2b880dc8",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "10f3df1084fcdfb81314e0e54e95f1666250ed5e783e2f30194debe9601bc4d5",
+          "byteLength": 129346,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-001-exterior-render-jpg-8c2b880dc8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508883-698051641786291-0033-9499/850063PKE-001-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Floor Plan -  - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-43e2d2e0bf",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"second floor\" in \"850063pke f2 bonus second floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-850063pke-f2-bonus-second-floor-gif-005e08f33e",
+      "selectionReason": "only variant (800x643, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.244168,
+          "byteHash": "9f7c87d1a816e21b45b1b1002867859bf494e802bb4035e1a5eeffd759394263",
+          "byteLength": 35800,
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 643,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-f2-bonus-second-floor-gif-005e08f33e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Floor Plan - Image #13 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-5be19762f5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"850063pke f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main floor\" in \"850063pke f1 main floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-850063pke-f1-main-floor-gif-5897362601",
+      "selectionReason": "only variant (995x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.24375,
+          "byteHash": "b6d7f09a43436ab24f4923e623efd3fa0ca44fd708ed6145fb8a0786df9dbcbc",
+          "byteLength": 113748,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 995
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-f1-main-floor-gif-5897362601",
+          "mediaType": "image/gif",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #10 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-7983ceb75f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation rear\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"850063pke elevation rear\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-850063pke-elevation-rear-jpg-56deb9569e",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "5df28a2e2ce039db9da08fac4602a3b8e4afdf11f4be1414fdb055b7324c999a",
+          "byteLength": 37959,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-rear-jpg-56deb9569e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792510995-177118061296183-0107-4004/850063PKE-Elevation-Rear.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Floor Plan - Image #14 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-8d7387b398",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bo\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"second floor\" in \"850063pke f2 bonus second floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"second floor\" in \"850063pke f2 bonus second floor\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-850063pke-f2-bonus-second-floor-gif-6bf732db01",
+      "selectionReason": "only variant (995x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.24375,
+          "byteHash": "c28a1df547d60fb7060fb505565515f828d1cf4689e2499edc9956d7c2410d82",
+          "byteLength": 106841,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 995
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-f2-bonus-second-floor-gif-6bf732db01",
+          "mediaType": "image/gif",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #11 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-9de976c40f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation right\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"850063pke elevation right\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-right-jpg-64c27c7a9a",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "c43c4c0298e36fe3444156dca7be13aaab2de9497c811b343a4001d07e3082cf",
+          "byteLength": 33593,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-right-jpg-64c27c7a9a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792510995-697013916602955-0108-7531/850063PKE-Elevation-Right.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #3 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-b0502839ad",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 003 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-003-exterior-render-jpg-e2ac209c45",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "be2084b7ce14aa3bbf78bd88ec30fbd3dd9b443b37c2472d8b21b3ffa89b7e71",
+          "byteLength": 127964,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-003-exterior-render-jpg-e2ac209c45",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508884-796507988144104-0103-1002/850063PKE-003-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #12 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-b5522cd5f9",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"850063pke elevation left\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"850063pke elevation left\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-850063pke-elevation-left-jpg-9f12339ef3",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "d0577b5e019936c79d729a47a5937e1b7ec8b7c33a31130d4589ef9bf1434999",
+          "byteLength": 30534,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-elevation-left-jpg-9f12339ef3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792510995-531811355853007-0039-1641/850063PKE-Elevation-Left.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #6 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-bea8a616fb",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 006 interior render lounge ii\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-006-interior-render-lounge-ii-jpg-bcde9c303d",
+      "selectionReason": "only variant (1200x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "5c5058475cbf6b4508c804c5fe57e40bf478bb37540f3191e7bc395a3ab0c004",
+          "byteLength": 98764,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 900,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-006-interior-render-lounge-ii-jpg-bcde9c303d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508883-273282682010629-0034-3375/850063PKE-006-Interior-Render-LOUNGE-II.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #5 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-c16cb7a967",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 005 interior render kitchen\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-005-interior-render-kitchen-jpg-bf4e4987f2",
+      "selectionReason": "only variant (1200x902, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.330377,
+          "byteHash": "dbb206c57c113e9df1a43ac94f3aadd18918bba93e80639cf6345fce92798aa7",
+          "byteLength": 134525,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 902,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-005-interior-render-kitchen-jpg-bf4e4987f2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508883-706828240489071-0102-6116/850063PKE-005-Interior-Render-KITCHEN.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #7 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-c908b27cc2",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 008 interior render bedroom\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-008-interior-render-bedroom-jpg-ef09775707",
+      "selectionReason": "only variant (1200x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "261c775e7d1282330548cc278fa856efe300de0d3a182429d97bbb7d8d04ffc8",
+          "byteLength": 109458,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 900,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-008-interior-render-bedroom-jpg-ef09775707",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508884-894826244569734-0035-4583/850063PKE-008-Interior-Render-BEDROOM.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #2 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-e17f47946e",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 002 exterior render\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-002-exterior-render-jpg-8b6d7bb232",
+      "selectionReason": "only variant (1200x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "39789cbf9c909d49f5aaf71578f370e3b6f8f616cd34d268d47017e30823911e",
+          "byteLength": 149108,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 800,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-002-exterior-render-jpg-8b6d7bb232",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508882-606274819545047-0032-5844/850063PKE-002-Exterior-Render.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room - Image #8 - Country, Farmhouse, New American",
+      "id": "asset-plan-850063pke-charming-country-farmhouse-house-e619703f69",
+      "roleEvidence": [
+        {
+          "confidence": 0.86,
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"850063pke 007 interior render lounge\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-850063pke-007-interior-render-lounge-jpg-2b12a786ca",
+      "selectionReason": "only variant (1200x901, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.331853,
+          "byteHash": "183f8bff47dedfe8275b341a1cc17d514bbf20a1af8d5752a477deef0b1c5940",
+          "byteLength": 148056,
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 901,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+          "id": "var-850063pke-007-interior-render-lounge-jpg-2b12a786ca",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792508885-693246671603840-0065-4907/850063PKE-007-Interior-Render-LOUNGE.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/charming-country-farmhouse-house-plan-with-three-bedrooms-and-bonus-room-850063pke",
+  "contentHash": "5d6dc5df071fa7121686d4723068c3d239fa4651e9d7fdace0a28c8c08279689",
+  "failures": [
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508882-606274819545047-0032-5844/850063PKE-002-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508883-273282682010629-0034-3375/850063PKE-006-Interior-Render-LOUNGE-II.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508883-483179093440366-0034-6417/850063PKE-004-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508883-698051641786291-0033-9499/850063PKE-001-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508883-706828240489071-0102-6116/850063PKE-005-Interior-Render-KITCHEN.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508884-796507988144104-0103-1002/850063PKE-003-Exterior-Render.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508884-894826244569734-0035-4583/850063PKE-008-Interior-Render-BEDROOM.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792508885-693246671603840-0065-4907/850063PKE-007-Interior-Render-LOUNGE.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792510995-134086291117589-0041-9066/850063PKE-Elevation-Front.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792510995-177118061296183-0107-4004/850063PKE-Elevation-Rear.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792510995-531811355853007-0039-1641/850063PKE-Elevation-Left.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792510995-697013916602955-0108-7531/850063PKE-Elevation-Right.jpg"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif"
+    },
+    {
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511009-84823187594655-0070-9057/850063PKE-F1-Main-Floor.gif"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/395515530/original/1792511011-476130330318865-0111-6546/850063PKE-F2-Bonus-Second-Floor.gif"
+    }
+  ],
+  "id": "src-850063pke-58a4ed76a6",
+  "pageHash": "2087d8e20138d353f1bbf095d38a0827b3a569d1681d351226dda6da7a745708",
+  "project": {
+    "externalId": "850063PKE",
+    "name": "Plan 850063PKE: Charming Country Farmhouse House Plan with Three Bedrooms and Bonus Room",
+    "publisher": "architecturaldesigns.com"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "raw": "58' 7\"",
+      "unit": "m",
+      "value": 17.856
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "raw": "73' 0\"",
+      "unit": "m",
+      "value": 22.25
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Monolithic Slab, Crawl"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This New American country farmhouse offers 2,849 square feet of heated living space with three bedrooms, two-and-a-half baths, and a spacious two-car garage.The welcoming front porch spans 351 square feet, leading into a thoughtfully designed interior featuring ten-foot ceilings on the main level.The open-concept layout centers on a light-filled living area that flows seamlessly into a kitchen equipped with a convenient walk-in pantry.A private primary suite occupies the main floor, providing a tranquil retreat, while two additional bedrooms are positioned to offer comfort and accessibility.The second floor hosts a versatile finished bonus room that serves perfectly as a playroom, dedicated home office, or quiet escape.Outdoor living is enhanced by a generous 499-square-foot covered patio, ideal for relaxing or hosting gatherings in the fresh air."
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

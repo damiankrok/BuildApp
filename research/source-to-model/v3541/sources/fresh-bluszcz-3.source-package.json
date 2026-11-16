@@ -1,0 +1,1754 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-elewacja-boczna-9baaa287fd",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-bluszczu-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-3603199a43ad9419afb1da2-9cfd64eb4f",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "818cbe62471f8787337e38c226738222eadbe0ba4a69dd08f95e18d44b920047",
+          "byteLength": 514616,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-3603199a43ad9419afb1da2-9cfd64eb4f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-3603199a43ad9419afb1da2c45c0f6f2__11266.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "476c143d7be26c3f980efd6e0ac13d94ac2bcb4c1ceb1d601e6f57e43a251dba",
+          "byteLength": 121852,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-elewacja-boczna-projekt-dom-w-bluszczu-3-17cbead-f404479564",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-boczna-projekt-dom-w-bluszczu-3-17cbead24ca6b2114bbf75c72b33bf05__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-elewacja-boczna-ee290c509f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-bluszczu-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w bluszczu 3 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-1ffc54b65d07538bf9cb41f-acef297522",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "d5c682eb9e7399ca32b64a6ce1283d74b76abc2d2b46cdba43da98f8372fcbd6",
+          "byteLength": 513499,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-1ffc54b65d07538bf9cb41f-acef297522",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-1ffc54b65d07538bf9cb41fdba7a50a8__11265.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "d3c8a3ba713a1c22acfdd0cdfcaa0695b8bd113e340b191b459c7b5a94347af3",
+          "byteLength": 121736,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-elewacja-boczna-projekt-dom-w-bluszczu-3-af3f2c4-e06c821ae7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-boczna-projekt-dom-w-bluszczu-3-af3f2c4f7fb40981693f988467f8a231__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-elewacja-frontow-c6e621e71d",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-bluszczu-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w bluszczu 3 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w bluszczu 3 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-37608536f88520eaa8c68dd-4557c1ed74",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "3287001438f6a8d29283fb8434842bea4e121bbbac1088b2e140260b955f63d5",
+          "byteLength": 539371,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-37608536f88520eaa8c68dd-4557c1ed74",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-37608536f88520eaa8c68dd38977be84__11264.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "1e5d14f23ba5c068cb11f0d109129a210ac69fb9bbbf6258bc43e2b5f9263aff",
+          "byteLength": 119778,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-elewacja-frontowa-projekt-dom-w-bluszczu-3-ecd7f-e1d4487939",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-frontowa-projekt-dom-w-bluszczu-3-ecd7f9e777dca187429d719257f779eb__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-elewacja-ogrodow-1cf48e8c3e",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w bluszczu 3 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-bluszczu-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w bluszczu 3 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w bluszczu 3 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-db8669b1d154283b012e9b0-6cc300d8d7",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x628 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.038217,
+          "byteHash": "e67416bddcceea6bce44fe533b8a25781b622baa93fa64e656250ceef5918dc1",
+          "byteLength": 567204,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 628,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-db8669b1d154283b012e9b0-6cc300d8d7",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-db8669b1d154283b012e9b0f56c7e620__11267.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "7789a2681d93c56474eae7a3ee23d85b3da057661ab65e6431f26bf7755c16ef",
+          "byteLength": 126327,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-bluszczu-3-e4a90-60453da357",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-ogrodowa-projekt-dom-w-bluszczu-3-e4a90a42e007b433409e6d371223cb80__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-przekroj-budynku-afe4e41537",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w bluszczu 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w bluszczu 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w bluszczu 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-bluszczu-3-ad1420-1b6a05a5fc",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "48828d5659bb73e930999a72e80db9bcd047208cdcf0c4b6326fc6dff81d0d41",
+          "byteLength": 76811,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m19f26ae60071c/przekroj-budynku-projekt-dom-w-bluszczu-3-ad14200378393d2ec111305458e5023c__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-bluszczu-3-ad1420-1b6a05a5fc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/przekroj-budynku-projekt-dom-w-bluszczu-3-ad14200378393d2ec111305458e5023c__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "e33ca131fd4891c33ff346c6918c18f5e13e96d0837ceb1fad5c1d694ffa2aef",
+          "byteLength": 19764,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-przekroj-budynku-projekt-dom-w-bluszczu-3-ad1420-a508da8540",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/przekroj-budynku-projekt-dom-w-bluszczu-3-ad14200378393d2ec111305458e5023c__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-rzut-parteru-0ca865709c",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-bluszczu-3-e95b02ecbd-b0bb426e84",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "30f5aa98c784bfd937a1dfd7346b06bc4539e534f40edd21c01a7c4e438d1b22",
+          "byteLength": 48701,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-bluszczu-3-e95b02ecbd-b0bb426e84",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-parteru-projekt-dom-w-bluszczu-3-e95b02ecbdc019e70480c8d33fe2a58e__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-rzut-poddasza-3662b0d63b",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-bluszczu-3-db7f7447c-fa8ccdd888",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "890cf3ba7fdf7a922267f3cd2a92df615d7ea79a00fc9d1454d1319647b841d5",
+          "byteLength": 36706,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-bluszczu-3-db7f7447c-fa8ccdd888",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-poddasza-projekt-dom-w-bluszczu-3-db7f7447cdcc619ac91bd74a96bb6b46__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-sytuacja-1973e366a5",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w bluszczu 3 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w bluszczu 3 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-2fb333d9764be108fcf352a-8f0db6c0c6",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "25d6d3af7cbcedde41581c664017bf2b976c362e7c241a56e19dd070ee8c5bb5",
+          "byteLength": 273117,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-2fb333d9764be108fcf352a-8f0db6c0c6",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-2fb333d9764be108fcf352ac377e4fb5__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "b30e877e2dfbb5d4feb274ff8379df9f96b2e4fc82556fc2a2dabd6f0e2e4b78",
+          "byteLength": 61036,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-sytuacja-projekt-dom-w-bluszczu-3-77ed5b4f389d2e-f7065838c4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/sytuacja-projekt-dom-w-bluszczu-3-77ed5b4f389d2ec25c54486d26687067__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w bluszczu 3 widok 1",
+      "id": "asset-gotowy-projekt-dom-w-bluszczu-3-widok-1-3eb1114ba0",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w bluszczu 3 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-bluszczu-3-4661c54f85127db-50411583dc",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "7d84017970eef9789972da2338a3c6508186c3652d17151ca08dae8890f38dd3",
+          "byteLength": 9435,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-widok-1-projekt-dom-w-bluszczu-3-4661c54f85127db-50411583dc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-1-projekt-dom-w-bluszczu-3-4661c54f85127db1effa719c7d27a29b__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w bluszczu 3",
+      "id": "asset-projekt-dom-w-bluszczu-3-010f73f9e5",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-bluszczu-3-d9c6feecc4-ab622c0f4d",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "74ff14815c9bdf497381a51d89711523d78bc551e943a9bdb915d7f1cc5094e7",
+          "byteLength": 32277,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/related?scope=similar",
+          "id": "var-rzut-parteru-projekt-dom-w-bluszczu-3-d9c6feecc4-ab622c0f4d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-parteru-projekt-dom-w-bluszczu-3-d9c6feecc4eed5da41dcbb9c3584d96d__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w bluszczu 3",
+      "id": "asset-projekt-dom-w-bluszczu-3-30ed25a830",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-c159f7e7bdca184c42bf325-2e9df42bf8",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "8b2143c78c4c218c36f78d6884714521d4629a885920e35b4448b92786d258e2",
+          "byteLength": 33125,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/related?scope=similar",
+          "id": "var-projekt-dom-w-bluszczu-3-c159f7e7bdca184c42bf325-2e9df42bf8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-c159f7e7bdca184c42bf325adf759f38__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w bluszczu 3 7da515803fa53b8517b826b7cf291f7d  44291",
+      "id": "asset-projekt-dom-w-bluszczu-3-7da515803fa53b8517b826b-a778bf8fe6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-7da515803fa53b8517b826b-bc20ab497c",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "f3182d1a0b0b02604e19e8cd53cfc8cb1e0ed2d70ed825371713a6b58e5c07be",
+          "byteLength": 604915,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m19f26ae60071c/image/44291?showHotspots=false",
+          "id": "var-projekt-dom-w-bluszczu-3-7da515803fa53b8517b826b-bc20ab497c",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/m19f26ae60071c/i/projekt-dom-w-bluszczu-3-7da515803fa53b8517b826b7cf291f7d__44291.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w bluszczu 3",
+      "id": "asset-projekt-dom-w-bluszczu-3-9b2da9d3c2",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-bluszczu-3-4c1cbba5a2200f1-53b2fb4644",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "92ec0bd18c119d4fd90b7781cae31400bb5f20357ddb862f61f2a9fc89cc8ec0",
+          "byteLength": 29841,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/related?scope=similar",
+          "id": "var-widok-2-projekt-dom-w-bluszczu-3-4c1cbba5a2200f1-53b2fb4644",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-2-projekt-dom-w-bluszczu-3-4c1cbba5a2200f16e9f543e5d800b42f__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w bluszczu 3",
+      "id": "asset-projekt-dom-w-bluszczu-3-f2a1290bc7",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-bluszczu-3-89673d75a-87b83372ad",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "a06267673d6a2e21d75eb4c693357bbb4747f6ef46a36fb2223dec4e4828f061",
+          "byteLength": 23832,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m19f26ae60071c/related?scope=similar",
+          "id": "var-rzut-poddasza-projekt-dom-w-bluszczu-3-89673d75a-87b83372ad",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-poddasza-projekt-dom-w-bluszczu-3-89673d75a2d885244b6772378ab9cc9b__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-1f5bf0df5b",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-blus-23fc2f9f42",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "603ad2a312d83e224c7f27f94e5f602db8c20eca272ca331f89aa0f450c9a15c",
+          "byteLength": 100694,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-blus-23fc2f9f42",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-parteru-z-powierzchniami-projekt-dom-w-bluszczu-3-3975d4c6cfc89707c1b271ccc0ca73d1__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-68a43f3145",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-blu-f9da27f958",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "12e192e790bb2a995fd0ee3460bd865dec6c17354be0d8b6aa5149c94460d20b",
+          "byteLength": 68027,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-blu-f9da27f958",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-poddasza-z-powierzchniami-projekt-dom-w-bluszczu-3-9e676fc3c152b50ec567db00a93a9755__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-74684a2c53",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w bluszczu 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-fc71f9c92fc8fe181b7ed58-d4a91ad4fe",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4e02df3c5dcb69482c4b13868dd32d262eb33abb61d4b1fe268f203a13faffc7",
+          "byteLength": 95859,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-fc71f9c92fc8fe181b7ed58-d4a91ad4fe",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-fc71f9c92fc8fe181b7ed58234c83233__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-a526589019",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m19f26ae60071c/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w bluszczu 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-bluszczu-3-82a1bc40c97c69837215e31-aa14015a5c",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "27a3b6e3a511ad6337ddd9f33562e65acb23e682ebc3d5ddca417da32ec6b21f",
+          "byteLength": 69775,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-projekt-dom-w-bluszczu-3-82a1bc40c97c69837215e31-aa14015a5c",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-82a1bc40c97c69837215e311914be8f3__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-bluszczu-3-d31330e586",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w bluszczu 3 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-bluszczu-3-c42b7817ef71c6e-e812f64066",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b2ebce352a72a50e5948c6d59e344db8ff9f18bd471c82f2e541987716b95a96",
+          "byteLength": 383234,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-widok-1-projekt-dom-w-bluszczu-3-c42b7817ef71c6e-e812f64066",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-1-projekt-dom-w-bluszczu-3-c42b7817ef71c6e5dcc768a966617135__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-bluszczu-3-856987f02a",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-bluszczu-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w bluszczu 3 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-bluszczu-3-217f1b9ea8b2348-b04d5860b0",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2d39c7ad03ac61f4a5e323760dedd9a4c73b79d281bef0fe33ab7a059058bb3a",
+          "byteLength": 344093,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+          "id": "var-widok-2-projekt-dom-w-bluszczu-3-217f1b9ea8b2348-b04d5860b0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-2-projekt-dom-w-bluszczu-3-217f1b9ea8b2348cae605efd10ba0981__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-bluszczu-3-m19f26ae60071c",
+  "contentHash": "f44716fda48ca2cefb0448b7a3b931669afb6172850c11d9bd2d4c8eaf427c3c",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-c159f7e7bdca184c42bf325adf759f38__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-parteru-projekt-dom-w-bluszczu-3-d9c6feecc4eed5da41dcbb9c3584d96d__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-parteru-projekt-dom-w-bluszczu-3-e95b02ecbdc019e70480c8d33fe2a58e__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-poddasza-projekt-dom-w-bluszczu-3-89673d75a2d885244b6772378ab9cc9b__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/rzut-poddasza-projekt-dom-w-bluszczu-3-db7f7447cdcc619ac91bd74a96bb6b46__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-1-projekt-dom-w-bluszczu-3-4661c54f85127db1effa719c7d27a29b__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-1-projekt-dom-w-bluszczu-3-c42b7817ef71c6e5dcc768a966617135__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-2-projekt-dom-w-bluszczu-3-217f1b9ea8b2348cae605efd10ba0981__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/widok-2-projekt-dom-w-bluszczu-3-4c1cbba5a2200f16e9f543e5d800b42f__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-3603199a43ad9419afb1da2c45c0f6f2__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-boczna-projekt-dom-w-bluszczu-3-17cbead24ca6b2114bbf75c72b33bf05__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-1ffc54b65d07538bf9cb41fdba7a50a8__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-boczna-projekt-dom-w-bluszczu-3-af3f2c4f7fb40981693f988467f8a231__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-37608536f88520eaa8c68dd38977be84__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-frontowa-projekt-dom-w-bluszczu-3-ecd7f9e777dca187429d719257f779eb__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-db8669b1d154283b012e9b0f56c7e620__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/elewacja-ogrodowa-projekt-dom-w-bluszczu-3-e4a90a42e007b433409e6d371223cb80__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m19f26ae60071c/projekt-dom-w-bluszczu-3-2fb333d9764be108fcf352ac377e4fb5__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m19f26ae60071c/sytuacja-projekt-dom-w-bluszczu-3-77ed5b4f389d2ec25c54486d26687067__11255.jpg"
+    }
+  ],
+  "id": "src-m19f26ae60071c-f9f72f7c22",
+  "pageHash": "4d4075b20713297e87a3ed113934a889e5b14f9c6cec13892d5caaedcdc4540c",
+  "project": {
+    "externalId": "m19f26ae60071c",
+    "name": "Projekt domu Dom w bluszczu 3 Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "6,71 m&sup2;",
+      "unit": "m2",
+      "value": 6.71
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,84 m",
+      "unit": "m",
+      "value": 8.84
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "144,31 m&sup2;",
+      "unit": "m2",
+      "value": 144.31
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "94,99 m&sup2;",
+      "unit": "m2",
+      "value": 94.99
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "126,2 m&sup2;",
+      "unit": "m2",
+      "value": 126.2
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "167,45 m&sup2;",
+      "unit": "m2",
+      "value": 167.45
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "189,98 m&sup2;",
+      "unit": "m2",
+      "value": 189.98
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "127,15 m&sup2;",
+      "unit": "m2",
+      "value": 127.15
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "653,12 m&sup3;",
+      "unit": "none",
+      "value": 653.12
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 5.76,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 5,76 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.45,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 4,45 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 10.74,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 10,74 | (12,36)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.85,
+      "index": 4,
+      "label": "Pokój",
+      "raw": "4. Pokój | 9,85 | (11,41)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 6.09,
+      "index": 5,
+      "label": "Łazienka",
+      "raw": "5. Łazienka | 6,09 | (7,60)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.59,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 12,59 | (14,35)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 14.09,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 14,09 | (16,28)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.66,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,66 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.79,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 5,79 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.51,
+      "index": 3,
+      "label": "Kuchnia",
+      "raw": "3. Kuchnia | 11,51 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 22.19,
+      "index": 4,
+      "label": "Salon + Jadalnia",
+      "raw": "4. Salon + Jadalnia | 22,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.4,
+      "index": 5,
+      "label": "Spiżarnia",
+      "raw": "5. Spiżarnia | 3,40 | (6,16)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.3,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 10,30 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.78,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 3,78 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.71,
+      "index": 8,
+      "label": "Kotłownia z pralnią",
+      "raw": "8. Kotłownia z pralnią | 6,71 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Atrakcyjny „Dom w bluszczu 3” to kolejna propozycja projektu domu z poddaszem użytkowym i efektownymi przeszkleniami. Na elewacji znajduje się modna kompozycja materiałów wykończeniowych. W oprawie białych tynków pięknie prezentuje się drewniana okładzina, zaakcentowana na frontowej i ogrodowej ścianie budynku. Nad głównym wejściem znajduje się praktyczna rama, która osłania tę strefę przed zmienną pogodą. Od strony ogrodu zaplanowano komfortowy taras z nowoczesną pergolą. Ta przytulna przestrzeń idealnie nada się na rodzinne przyjęcia i odpoczynek na świeżym powietrzu. Wiatrołap oferuje miejsce na pojemne szafy oraz płynnie wprowadza nas do otwartej i słonecznej strefy dziennej. Komfortowa przestrzeń obejmuje salon z narożną kanapą i przesuwnym wyjściem na taras, jadalnię z widokiem na ogród oraz pojemną kuchnię z wyspą i spiżarnią w programie użytkowym. Wzbogaceniem przestrzeni jest efektowny kominek, który umila zimowe wieczory całej rodzinie. Dodatkowy pokój to ustawny gabinet z dostępem do tarasu, domownicy mogą w nim także zaaranżować gościnną sypialnię, w której pobliżu mieści się łazienka. Kotłownia z funkcją pralni dostępna jest przez wiatrołap. Przechodząc do prywatnej części domu na poddaszu, rodzina może wypocząć w zaciszu czterech sypialni, wśród nich znajduje się pokój rodziców z garderobą. Wszystkie sypialnie są pięknie doświetlone, a w pełni wyposażona łazienka dopełnia układ poddasza. Projekt „Dom w bluszczu 3” to propozycja wzbogacająca kolekcje: projekty domów nowoczesnych , projekty domów z gabinetem na parterze , projekty domów bez garażu ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "133 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 42 st. , więźba drewniana, blachodachówka / dachówka ceramiczna, okno dachowe VELUX"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 126.2 m² + 6.71 m² , 6 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

@@ -1,0 +1,68 @@
+{
+  "slug": "dobredomy-pl",
+  "imagesUsed": [
+    {"n": 6, "what": "ground-floor plan, room areas only, no dimension text; front (garage door, entrance) at the bottom"},
+    {"n": 5, "what": "site plan with printed chains: bottom 400|2084|34|366 = 2884, right 400|1764|400 = 2564"},
+    {"n": 3, "what": "front elevation"},
+    {"n": 4, "what": "rear elevation"},
+    {"n": 1, "what": "left side elevation (bedroom/garage wing long side)"},
+    {"n": 2, "what": "right side elevation (glazed living gable with chimney in front of the long wing)"},
+    {"n": 7, "what": "front-right render (10 duplicates)"},
+    {"n": 14, "what": "rear render (courtyard, pool)"},
+    {"n": 20, "what": "rear-left render"}
+  ],
+  "mirrorOrOtherProjectWarning": "08 newsletter advert, 09 a DIFFERENT two-storey house, 11 stock photo, 10 = 07, 12/15/17/18/19 interiors; 13/16 more exteriors. Not mirrored: plan, site plan, elevations and renders agree.",
+  "overall": {"widthM": 20.84, "depthM": 17.64, "heightM": 5.5, "basis": "width and depth printed on site plan 5 (2084, 1764; outer wall faces, chimney adds 34 cm on the right); height = page fact 5,50 m, not printed on pictures"},
+  "storeys": {"fullStoreysAboveGround": 1, "habitableAttic": false, "basement": false},
+  "bodies": [
+    {"name": "bedroom/garage wing", "role": "MAIN", "where": "left, full depth: garage at the front, 3 bedrooms and bathrooms behind; gables to front (garage door) and rear (2 glazed doors)", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ACROSS_FRONT", "approxSizeM": "7.3 x 17.6"},
+    {"name": "living wing", "role": "WING", "where": "right, kitchen/dining/tall living room; front wall 5.1 m behind the garage front; glazed right gable", "storeys": 1, "enclosed": true, "roofKind": "GABLE", "ridge": "ALONG_FRONT", "approxSizeM": "9.3 x 7.5"},
+    {"name": "link", "role": "CONNECTOR", "where": "between the wings: hall, vestibule, WC, pantry; entrance in front wall, glazed rear wall", "storeys": 1, "enclosed": true, "roofKind": "FLAT", "ridge": "NA", "approxSizeM": "3.9 x 4.3"},
+    {"name": "bay", "role": "BAY", "where": "left wall, timber-clad 0.31 m projection with bedroom window", "storeys": 1, "enclosed": true, "roofKind": "NA", "ridge": "NA", "approxSizeM": "0.31 x 4.4"}
+  ],
+  "mainRoof": {"kind": "GABLE", "ridge": "ACROSS_FRONT", "highSideIfShed": null, "pitchDeg": 25, "notes": "Pitch from page facts. Two gabled wings at right angles (left wing ridge perpendicular to front, living wing ridge parallel to front) joined by a flat-roofed link (page: flat roof 17,40 m2); standing-seam metal; deep timber-lined gable overhangs; no dormers or rooflights."},
+  "garage": {"present": true, "doorFacade": "FRONT", "doorPosition": "LEFT", "doorCount": 1},
+  "entrance": {"facade": "FRONT", "position": "LEFT_OF_CENTRE", "recessedOrPorch": true},
+  "openings": {
+    "FRONT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["GARAGE_DOOR", "ENTRANCE_DOOR", "WINDOW", "LARGE_GLAZING"]}
+    ]},
+    "REAR": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 5, "leftToRight": ["GLAZED_DOOR", "LARGE_GLAZING", "LARGE_GLAZING", "GLAZED_DOOR", "GLAZED_DOOR"]}
+    ]},
+    "LEFT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 2, "leftToRight": ["WINDOW", "WINDOW"]}
+    ]},
+    "RIGHT": {"shown": true, "byStorey": [
+      {"storey": 0, "count": 4, "leftToRight": ["WINDOW", "WINDOW", "LARGE_GLAZING", "WINDOW"]}
+    ]}
+  },
+  "largeGlazing": [
+    {"facade": "REAR", "position": "LEFT", "what": "living wing: ~4.0 m sliding glazing plus ~1.9 m glazed door, floor to ceiling"},
+    {"facade": "REAR", "position": "CENTRE", "what": "link hall: ~2.6 m glazed sliding wall into the rear courtyard"},
+    {"facade": "RIGHT", "position": "CENTRE", "what": "living gable glazed floor-to-apex, ~2.6 m wide, beside the external chimney"},
+    {"facade": "FRONT", "position": "RIGHT", "what": "kitchen horizontal band ~3.05 x 0.75 m (large only by width)"}
+  ],
+  "features": [
+    {"kind": "CHIMNEY", "count": 2, "where": "external brick stack on the living-wing right gable; one on the left wing's right slope near the ridge above the utility room"},
+    {"kind": "TERRACE", "count": 1, "where": "unroofed paved terrace behind the bedroom gable, through the rear courtyard and round the living gable, with steps"},
+    {"kind": "OTHER", "count": 1, "where": "renders only: small pool and timber decks in the rear courtyard"}
+  ],
+  "palette": {"walls": "graphite brick, smooth grey render in gable triangles, vertical natural timber cladding, light timber soffits, anthracite frames and garage door", "roof": "graphite standing-seam metal"},
+  "groundOutline": {"shape": "OTHER", "corners": 16, "polygonM": [[0.31,17.64], [7.64,17.64], [7.64,10.27], [11.58,10.27], [11.58,12.62], [20.84,12.62], [20.84,5.11], [11.58,5.11], [11.58,5.98], [7.64,5.98], [7.64,0], [0.31,0], [0.31,8.1], [0,8.1], [0,12.48], [0.31,12.48]], "closedAreaM2": 217.1, "basis": "T-like: long left wing + right living wing joined by a narrower link; plan 6 pixels scaled to the printed 2084 x 1764; origin = bbox front-left; includes garage; 217.1 vs published 215,9 m2 zabudowy"},
+  "openZones": [
+    {"kind": "TERRACE", "roofed": false, "where": "rear, wrapping bedroom gable, courtyard, living-wing rear and right gable", "approxSizeM": "strip 10.2 x 2.0 behind bedrooms + courtyard + ~1.6 m strip round the living wing"},
+    {"kind": "PORCH", "roofed": false, "where": "front recess between garage wing and living wing: entrance landing with steps, no canopy", "approxSizeM": "~3.9 x 2.8"}
+  ],
+  "printedOverall": {"widthCm": 2084, "depthCm": 1764, "printedText": "2084 / 1764", "where": "picture 5: bottom chain 400|2084|34|366, right chain 400|1764|400"},
+  "groundRooms": 14,
+  "uncertain": [
+    "Plan 6 has no dimension text; x and y scales differ by 1.4% when fitted to 2084/1764.",
+    "Reading of the 34 cm segment as chimney projection beyond the right wall rests on drawn positions.",
+    "Link rear wall between the sliding glazing and the living wing has no wall line; treated as closed.",
+    "Courtyard/recess-facing openings are listed under the side they face: RIGHT = garage-wing windows in the front recess, living gable, bedroom 12.6 window (bathroom 3.3 courtyard window hidden); LEFT omits the dining's ~1.9 m west glazing on the courtyard.",
+    "Left-wing ridge scales to ~5.1 m above ground in elevation 3 vs published 5,50 m.",
+    "Pool appears only in renders."
+  ],
+  "confidence": "HIGH - overall dimensions printed; plan, site plan, four elevations and renders agree."
+}

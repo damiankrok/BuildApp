@@ -1,0 +1,3875 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-7124fbddd0",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-346ef0ee8f",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "0ce5adaa77d674fa1c01f59ec9d2dcbe48dc4ad4ec09b037e9173571ba2a57b5",
+          "byteLength": 60266,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-346ef0ee8f",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-5902c3f875",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-8582d20851",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "1a3e0fc8f177f0d7c9e3fab8ca7b326f8c9975d71551777e00aa5f194bdfeeb2",
+          "byteLength": 72176,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-8582d20851",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364e-26b034f0bc",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364e-03b1552152",
+      "selectionReason": "largest decoded raster of 3 variants: 1200x695 over 345x200",
+      "variants": [
+        {
+          "aspect": 1.726619,
+          "byteHash": "8a0f60d31b2e59b003c0de9983426fd2b337b028bb313a6f0f189db304cbaf52",
+          "byteLength": 40021,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 695,
+            "width": 1200
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364e-03b1552152",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x1200/wpcdn.pl/extradom/designs/77047/667779/5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364eab97e84fab757d1c.jpg"
+        },
+        {
+          "aspect": 1.725,
+          "byteHash": "fecc6716958736319e02243643f8e204a2f57bdcc671ab1f7c1e3296f06dde99",
+          "byteLength": 6071,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 345
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364e-5af6e57f25",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x200/wpcdn.pl/extradom/designs/77047/667779/5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364eab97e84fab757d1c.jpg"
+        },
+        {
+          "aspect": 1.726667,
+          "byteHash": "eb0ce6029bde503d49a147731a41831775c50738d9158cf513e8454d94cf9bb3",
+          "byteLength": 3948,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 259
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364e-1c9abb0591",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667779/5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364eab97e84fab757d1c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-021adc2144",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-c0b99e75e7",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "c5ce58ba1bd670f1ee981b05ed74d7e582ada7b97d85d68e29dc02930d08f46a",
+          "byteLength": 54798,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-c0b99e75e7",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-9dbed8bdbc",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-34875242b1",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "8751f344850a249c124a580d643a79d85441ef03a91704bcd0b3ef034cc7e5ad",
+          "byteLength": 52122,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-34875242b1",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-8e6f97927a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-0df78e3501",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "9f66c05d193fe8689110f870a9bec56f4f9718558aeae31221049c470268a8ab",
+          "byteLength": 92048,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-0df78e3501",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-688a288798",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-687f461be0",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "b8654430be6f10f83cd21a4fb9e578c4d7cfb0f03eb874ef9740367147fade8e",
+          "byteLength": 91033,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-687f461be0",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Działka",
+      "id": "asset-dzia-ka-6fef7ca54c",
+      "roleEvidence": [
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialka\" in \"Działka\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialka\" in \"Działka\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialka\" in \"Działka\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d421-5bfdcefa50",
+      "selectionReason": "largest decoded raster of 3 variants: 1200x933 over 450x350",
+      "variants": [
+        {
+          "aspect": 1.286174,
+          "byteHash": "ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d4215f38c5ed48164eae",
+          "byteLength": 100192,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 933,
+            "width": 1200
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d421-5bfdcefa50",
+          "mediaType": "image/jpeg",
+          "url": "https://wpcdn.pl/extradom/designs/77047/667774/ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d4215f38c5ed48164eae.jpg"
+        },
+        {
+          "aspect": 1.285714,
+          "byteHash": "cc4ea41805d624d26237d7756a924947492cd73a4cfb37b0e757700d4d487d95",
+          "byteLength": 9736,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 350,
+            "width": 450
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d421-49ef710c54",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/450x/wpcdn.pl/extradom/designs/77047/667774/ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d4215f38c5ed48164eae.jpg"
+        },
+        {
+          "aspect": 1.286567,
+          "byteHash": "b9cb54023204bf39f7587d0501bf90fb40ce8dd2426e105f4e722881cfa91ea5",
+          "byteLength": 9166,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 335,
+            "width": 431
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d421-28bdd31386",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x335/wpcdn.pl/extradom/designs/77047/667774/ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d4215f38c5ed48164eae.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-ddfa3ac539",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-ba732d679d",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "014f395741e851e86575217340f6eb7a5118c887470c4ced1c3c922351beda08",
+          "byteLength": 102371,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-ba732d679d",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-7a5c3e0acd",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-30c66d4315",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "3eb04fcbf86d8c71d1e4549cbd2e346b064fafc3445f614dee6de29805e85f0a",
+          "byteLength": 103273,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-30c66d4315",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-8c4742e92c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-1e9336e14f",
+      "selectionReason": "only variant (736x425, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.731765,
+          "byteHash": "2d48388fa0d336867b163b8dc103215b1289e919bc5ec21b6d872b6ece7600ad",
+          "byteLength": 70267,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 425,
+            "width": 736
+          },
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-1e9336e14f",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/736x425/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Gwarancja najniższej ceny",
+      "id": "asset-gwarancja-najnizszej-ceny-1916a119e4",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-gwaranacja-png-06e8cd5224",
+      "selectionReason": "only variant (343x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.8575,
+          "byteHash": "cb14f761f62fdeb3aec02b35b47af5b6c65e17fb434ae37d46fd743e5d179bf0",
+          "byteLength": 16963,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 343
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-gwaranacja-png-06e8cd5224",
+          "mediaType": "image/png",
+          "url": "https://extradom.wpcdn.pl/assets/b67ab8b/images/benefits/gwaranacja.png"
+        }
+      ]
+    },
+    {
+      "caption": "Parter",
+      "id": "asset-parter-a22a5df5f3",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-093c900440",
+      "selectionReason": "only variant (1200x846, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.41844,
+          "byteHash": "b75aeb751cc4ef39fb58bd8f08e389d253bb0534c53dc11b1c8993bbd4210488",
+          "byteLength": 65336,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 846,
+            "width": 1200
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-093c900440",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/4000x/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia mini",
+      "id": "asset-projekt-domu-armonia-mini-390f38c8a0",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-4a49bcf088",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "ad98d6925b00f05d84cbc436193bbabfbad48027fbe3789d4d35c3fc87c76d4d",
+          "byteLength": 85804,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-4a49bcf088",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/i.wpimg.pl/c/327x218/wpcdn.pl/extradom/designs/77429/669959/de4605d60e0e9e01b941b1baa396358786983a9c164f768c402455e043bd8560.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia mini",
+      "id": "asset-projekt-domu-armonia-mini-8e854d413f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-441f9df578",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "f1b27c49234abf8f4aa0da3312ea87381735ad05e20040f27a7fc5b811af008b",
+          "byteLength": 23935,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-441f9df578",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/i.wpimg.pl/c/327x218/wpcdn.pl/extradom/designs/77429/669959/de4605d60e0e9e01b941b1baa396358786983a9c164f768c402455e043bd8560.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia mini",
+      "id": "asset-projekt-domu-armonia-mini-ce4b47d047",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-842bd0743d",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "88b9fba53077049358d135e497962ad60cc2c0e932ec2b8889ba62c597fa1f5c",
+          "byteLength": 13912,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-de4605d60e0e9e01b941b1baa396358786983a9c164f768c-842bd0743d",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/i.wpimg.pl/c/327x218/wpcdn.pl/extradom/designs/77429/669959/de4605d60e0e9e01b941b1baa396358786983a9c164f768c402455e043bd8560.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 5",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-0574687e2c",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-f78cf22752",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "3b799a53b49f1d614bc55456e72cc5b052713bc2f2e1eaa19f70ad149388622a",
+          "byteLength": 155082,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-f78cf22752",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 4",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-0b079941f6",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-2df161948e",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "3170eb4603d10d638948cf68ff199851ce0422da4c2704dc7e7d4e14ce9c3398",
+          "byteLength": 289550,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-2df161948e",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 9",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-2bad144cb4",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-fcfa662d28",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "29177751936c0384a51ee96e51eb437fe59a3845d63f569887b3b9b4664548b7",
+          "byteLength": 420676,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-fcfa662d28",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "fc4eb969597602d6851434fbebe1f864ff9bd5aa33aa5960946e6833b6fb1cac",
+          "byteLength": 74625,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-32c6da6e3c",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "f66dd6076a8053a0769f45e0c0d3d537785cedbedae4cb8a2697fdda5e510c6e",
+          "byteLength": 21774,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-225938aa3c",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 2",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-36a180c779",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-c7e8e9b0fd",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "5791c035dc7bcc42b5d0cdf57ceca30725f8144b6ef4edd05486febf419d0fe8",
+          "byteLength": 250790,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-c7e8e9b0fd",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 3",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-3c9ee0faa6",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-778c3efdfe",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "3053afaedb7290c6630559f08b40a839c9b60caecf944c13cf61df49890790e0",
+          "byteLength": 252730,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-778c3efdfe",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 5",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-3eb5dd8c75",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-02401c3d77",
+      "selectionReason": "largest decoded raster of 3 variants: 1920x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.5,
+          "byteHash": "56923243cf996b2f5dd7996423f8f023e3dec755fc6125ef61b0c3b6f11c89d5",
+          "byteLength": 341593,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1920
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-02401c3d77",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "e2aa2d4b1f94fde33470754140ef38e5c6f36d4a1fa09b6f33af4a1264f9d421",
+          "byteLength": 62171,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-a85f935d11",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "841c051d8aa9119117e8a4da01fc4410278df41363d01abe9c12eed4c940982d",
+          "byteLength": 19057,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b6-2261e1fbe8",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 8",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-50f21a796e",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-464a06f449",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "6425cb844befa9d920f310992a83617b5d9d35b9de7098258a0170e9d2a770eb",
+          "byteLength": 195704,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-464a06f449",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 8",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-68758ec702",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-0ab0e91ca2",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "2e38322b63e8e70541c09f7d9981801387158da5259a66bf1b1b2a72698639f3",
+          "byteLength": 434255,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-0ab0e91ca2",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "dbe3f840e75d96a7b031a2899e850d1c6043d761d29d646a52ce4f787286f29f",
+          "byteLength": 75910,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-75b8f3943b",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "1eb01368ca414b0b92a09b6379bb169ead64a58abab2d74637a1d3b6cba999f6",
+          "byteLength": 22062,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2c-136a62be52",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 9",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-692b622250",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-0a76eca7e3",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "e8ffeead0d0d4ca1132b91d08728e46ec3ee41bffcd7c06da3f8471ab8369c18",
+          "byteLength": 188692,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122-0a76eca7e3",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 2",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-8a9ba0928b",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-c659f0b72e",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "5cbcc1181428ae93c42950e7834a624df24b617d42d4a871e2bcd95f9f4189b7",
+          "byteLength": 565950,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-c659f0b72e",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "ddf49393f1815a5bbc766fdbd6788b66e27d60838fdd693d46d5976c3848f2d0",
+          "byteLength": 98953,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-9f3167cfac",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "032c38b94d0ccdac7c92489694dbd204a062a38fdb690204d9971f2566e52f74",
+          "byteLength": 26346,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ac68e308734ea7c409b6e1746e1c62576fb331dce506df80-34db5064b9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 3",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-8cba6a99a2",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-c2a2776c2f",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "dea91d92ce1608fbe8c4e2f0d481243ee409f462951436783c3b5d79ee2613f9",
+          "byteLength": 576130,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-c2a2776c2f",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "b004ccf15a3354e411b403f8ee735f5356272fd4b5e9ab25ba39ac2e4a71f941",
+          "byteLength": 98668,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-c89745dca4",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "5eb9a70f0bef16ca5fcc513bd1618e31964ac2e2007c6d606bec4bd677b16413",
+          "byteLength": 26372,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff16-536c684ac9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 4",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-a53124512c",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-f7a4dea4bf",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "a8c637690c8040ca271a7c4db2d750a64649d1294a5e74df989c66bd25e26f58",
+          "byteLength": 666536,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-f7a4dea4bf",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "8853c1c1eb5eab69775600b9c7fd14dd187a02ea326dc4d8087cb1d9920b73f8",
+          "byteLength": 111391,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-61d405d752",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "0e9b51eeb5f7bbea166fc8ebf41b9376c34110ba5821a369b1f7a0cf8fdb02a2",
+          "byteLength": 28725,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51cc-6bec03717b",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 7",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-bb7ee984c7",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-0034c67ebf",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "9b3970fa364bc0e6724c2a695346af4069fe493fe69c59995be0bbd7136b52ec",
+          "byteLength": 141399,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-0034c67ebf",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, koszt budowy 256 000 zł - ujęcie frontu",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-c3276f2b7a",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontu\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontu\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-aa86b4e029",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "d780d59765b13d560d40e61839887b1d3e39e964ee755a08413a18b85d779bf7",
+          "byteLength": 641076,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-aa86b4e029",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "d35e9c35ef123eecd095f320d433857c325591bb270bb9786159bcb9812aec7f",
+          "byteLength": 109510,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-260e90648b",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "d4286bd5e2ab7963d92a85129bfee2fdfdb338c8867df71e6e25ad5d7b3c2e2d",
+          "byteLength": 27968,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-93a41b8de8",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, koszt budowy 256 000 zł - ujęcie frontu",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-c66ba98458",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontu\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy, ko\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-76ddb12308",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "f0342aaefab8a53f951ccfed308282fe71b8ba7ee81b4b5384977a2b0eaa039b",
+          "byteLength": 286172,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2-76ddb12308",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 7",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-ce5189252b",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-a9f368ab19",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "54695120d83394533c8caeb588593362439a5335d4c78e57889db89d6a2de6bf",
+          "byteLength": 326518,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-a9f368ab19",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "5b9140efb040c2afe23404e22919009f9708373e398460c90fdfb6e1d0baac05",
+          "byteLength": 54065,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-72db8607d9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "54ab901a5dad905288b91de875f2f13213886292640fa4d49270ae5e2b8b4fa5",
+          "byteLength": 15987,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd-883ce92359",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 6",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-d799bb1491",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-1550f91c69",
+      "selectionReason": "largest decoded raster of 3 variants: 1908x1280 over 720x480",
+      "variants": [
+        {
+          "aspect": 1.490625,
+          "byteHash": "5144b2a23c691716a2808b6fbfd0c43b89f6978ffa272c73ba4ff196c0b381b1",
+          "byteLength": 315242,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1280,
+            "width": 1908
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-1550f91c69",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/2048x1280/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "77672e835dfd8fe29dbaff4085906a2fb4893b3bf26034170af40b15b1fd94e8",
+          "byteLength": 56596,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 480,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-ad0a2f6979",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/720x480/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+        },
+        {
+          "aspect": 1.5,
+          "byteHash": "19886de1fbf68a5ad139bf24c4ec9af616a14e28888408f11acfc5cb4d7bbe69",
+          "byteLength": 16930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 240,
+            "width": 360
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-3359e26ba0",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - ujęcie 6",
+      "id": "asset-projekt-domu-armonia-parterowy-dom-o-powierzchni-f8226467c3",
+      "roleEvidence": [
+        {
+          "confidence": 0.81,
+          "detail": "\"z powierzchniami\" / \"areas\" is the copy carrying the room areas (matched \"powierzchni\" in \"Projekt domu Armonia - parterowy dom o powierzchni 76,14 m², dach dwuspadowy - u\")",
+          "dimension": "annotation",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-53a0fd56a4",
+      "selectionReason": "only variant (1272x715, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.779021,
+          "byteHash": "0b1a3f9f0a7ab2d83182fb39fa2a1d0462784bfce1798e81a599e25fafbea8e5",
+          "byteLength": 146635,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 715,
+            "width": 1272
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca30-53a0fd56a4",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc",
+      "id": "asset-projekt-domu-armonia-rzut-parteru-dom-liczy-2-po-0a2e63f107",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-e4a97d3ebe",
+      "selectionReason": "only variant (287x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.420792,
+          "byteHash": "8cf66e0a76b6457c4063414a637fe7134bac7186b1e1411527bb7f6239d0f96e",
+          "byteLength": 7077,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 287
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-e4a97d3ebe",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/360x202/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc",
+      "id": "asset-projekt-domu-armonia-rzut-parteru-dom-liczy-2-po-33f53755cf",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-24a10bc234",
+      "selectionReason": "only variant (720x508, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.417323,
+          "byteHash": "ca24f2eb1c21c4e59202337b2a7e5e6be55e8703b00135d38d7b1ea9e25106d8",
+          "byteLength": 30922,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 508,
+            "width": 720
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-24a10bc234",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/720x540/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc",
+      "id": "asset-projekt-domu-armonia-rzut-parteru-dom-liczy-2-po-6a43c2fd11",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Projekt domu Armonia - rzut parteru, dom liczy 2 pokoje, 1 łazienki i wc\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-08184aba97",
+      "selectionReason": "only variant (677x477, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.419287,
+          "byteHash": "250a2674a165c67d8f6e96ba2a4dc073add2df94c8a438e3667fd98b48693e73",
+          "byteLength": 28298,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 477,
+            "width": 677
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab75-08184aba97",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/848x477/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia (WOF1270) - elewacja frontowa",
+      "id": "asset-projekt-domu-armonia-wof1270-elewacja-frontowa-74ad130bfd",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"Projekt domu Armonia (WOF1270) - elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"Projekt domu Armonia (WOF1270) - elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90-d8070b5f75",
+      "selectionReason": "largest decoded raster of 3 variants: 800x341 over 469x200",
+      "variants": [
+        {
+          "aspect": 2.346041,
+          "byteHash": "a2e124e85494824c01019938e2fdc7b6be2c60a91875291551f9d95ae770fb35",
+          "byteLength": 48146,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 341,
+            "width": 800
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90-d8070b5f75",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x1200/wpcdn.pl/extradom/designs/77047/667775/ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90b70eac2b58ab147b.jpg"
+        },
+        {
+          "aspect": 2.345,
+          "byteHash": "d96cd26be8add8b32b4358c159bcb7ffd9ed63f5f84214365ccdb82f1571f9f4",
+          "byteLength": 19468,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 469
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90-a5130ba0f7",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x200/wpcdn.pl/extradom/designs/77047/667775/ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90b70eac2b58ab147b.jpg"
+        },
+        {
+          "aspect": 2.346667,
+          "byteHash": "9c0bed5a2433a2a308661b4f0b65eeecbfeee2c791097d12261bede648530784",
+          "byteLength": 11669,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 352
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90-5241c23612",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667775/ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90b70eac2b58ab147b.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia (WOF1270) - elewacja lewa",
+      "id": "asset-projekt-domu-armonia-wof1270-elewacja-lewa-49ced7280d",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja lewa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja lewa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Projekt domu Armonia (WOF1270) - elewacja lewa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Projekt domu Armonia (WOF1270) - elewacja lewa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_LEFT"
+      },
+      "selectedVariantId": "var-9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e-a7e5758d5c",
+      "selectionReason": "largest decoded raster of 3 variants: 800x495 over 323x200",
+      "variants": [
+        {
+          "aspect": 1.616162,
+          "byteHash": "f2950759b866ebd907d8d11fb0a26b7b1c51511a2ce9e0b54b19e0f2b7154451",
+          "byteLength": 87812,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 495,
+            "width": 800
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e-a7e5758d5c",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x1200/wpcdn.pl/extradom/designs/77047/667776/9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e492ffdeeacbeb491.jpg"
+        },
+        {
+          "aspect": 1.615,
+          "byteHash": "8dee9f5428f4147775111d670e25bab2b097967a3290bc10d6b13ae7ee2587ba",
+          "byteLength": 17529,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 323
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e-eb0a9cd3e7",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x200/wpcdn.pl/extradom/designs/77047/667776/9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e492ffdeeacbeb491.jpg"
+        },
+        {
+          "aspect": 1.613333,
+          "byteHash": "5b697c1391c891fbdb24edeac986d57c7f07153bd9479b8b1d8eb64f34da42c4",
+          "byteLength": 10553,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 242
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e-7f1a10decc",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667776/9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e492ffdeeacbeb491.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia (WOF1270) - elewacja prawa",
+      "id": "asset-projekt-domu-armonia-wof1270-elewacja-prawa-e76a8683a1",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja prawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja prawa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Projekt domu Armonia (WOF1270) - elewacja prawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.81,
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Projekt domu Armonia (WOF1270) - elewacja prawa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_RIGHT"
+      },
+      "selectedVariantId": "var-d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a-323ac50c88",
+      "selectionReason": "largest decoded raster of 3 variants: 800x471 over 340x200",
+      "variants": [
+        {
+          "aspect": 1.698514,
+          "byteHash": "4616bb07a30adacf9f92a478a77f66e5f0f55c7a909c5f83a6ae9f9db47e7cc3",
+          "byteLength": 76189,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 471,
+            "width": 800
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a-323ac50c88",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x1200/wpcdn.pl/extradom/designs/77047/667777/d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a276b679450ba66b2.jpg"
+        },
+        {
+          "aspect": 1.7,
+          "byteHash": "f40965a17b91d44a8515d76d20073f2407fce8a7bdef5b0b72aae14655b0a269",
+          "byteLength": 15135,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 340
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a-96d88d14e0",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x200/wpcdn.pl/extradom/designs/77047/667777/d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a276b679450ba66b2.jpg"
+        },
+        {
+          "aspect": 1.7,
+          "byteHash": "4e7bb8b59855757adb373c557ff2dc9e2dcca84608fe656ce8e2ec5f969e66a7",
+          "byteLength": 8916,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 255
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a-3fe4f2c112",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667777/d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a276b679450ba66b2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu Armonia (WOF1270) - elewacja tylna",
+      "id": "asset-projekt-domu-armonia-wof1270-elewacja-tylna-10b42b2d85",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja tylna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Projekt domu Armonia (WOF1270) - elewacja tylna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylna\" in \"Projekt domu Armonia (WOF1270) - elewacja tylna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylna\" in \"Projekt domu Armonia (WOF1270) - elewacja tylna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-c7941f3add5b159b2c051185488b59a712768676a0bf5319-15f3420641",
+      "selectionReason": "largest decoded raster of 3 variants: 800x356 over 449x200",
+      "variants": [
+        {
+          "aspect": 2.247191,
+          "byteHash": "6195498f33a8ece1464ae1b46195a15c40f2f354b2d52344477491b8d3cd2874",
+          "byteLength": 52078,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 356,
+            "width": 800
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c7941f3add5b159b2c051185488b59a712768676a0bf5319-15f3420641",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x1200/wpcdn.pl/extradom/designs/77047/667778/c7941f3add5b159b2c051185488b59a712768676a0bf5319f77ada65f2ae25a5.jpg"
+        },
+        {
+          "aspect": 2.245,
+          "byteHash": "45cddff6551ed2080e1d722abb5c58dce7c2e4e9d68c69da6f4f02c79ae95595",
+          "byteLength": 18347,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 200,
+            "width": 449
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c7941f3add5b159b2c051185488b59a712768676a0bf5319-228f46da4f",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x200/wpcdn.pl/extradom/designs/77047/667778/c7941f3add5b159b2c051185488b59a712768676a0bf5319f77ada65f2ae25a5.jpg"
+        },
+        {
+          "aspect": 2.246667,
+          "byteHash": "177219aa0fa29ff5d358bbd1e5167ea585f9019c89f6d954d31e751889afd2fe",
+          "byteLength": 11012,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 337
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-c7941f3add5b159b2c051185488b59a712768676a0bf5319-d56ea3a227",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667778/c7941f3add5b159b2c051185488b59a712768676a0bf5319f77ada65f2ae25a5.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Bergen 70 HUS1004",
+      "id": "asset-zdjecie-1-projektu-bergen-70-hus1004-296ffd0a3f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7354c88c26b78440041fe94f95e75b000610a6c6411e7709-301354fff5",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "86e8d35e036f4bac0820a0af0a195dfd867396c9b67dd0efbf85a7b574509304",
+          "byteLength": 97117,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7354c88c26b78440041fe94f95e75b000610a6c6411e7709-301354fff5",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/77626/672951/7354c88c26b78440041fe94f95e75b000610a6c6411e770994e69217c535d467.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom keramzytowy Fiore 76 HRK1003",
+      "id": "asset-zdjecie-1-projektu-dom-keramzytowy-fiore-76-hrk1-96f1fbd76f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e088-6c63964d99",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "a314cfc96aa0c18c91a5f1e5bc029d0c6ae71dfd5d1d3fd04466a89976343ec6",
+          "byteLength": 11601,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e088-6c63964d99",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76246/655589/d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e08832331caa28522a38.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom prefabrykowany DEX76 HDX1000",
+      "id": "asset-zdjecie-1-projektu-dom-prefabrykowany-dex76-hdx1-c897e50028",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71-ba015e06a7",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "6e0da143d92a34ead8637ec74663cddfbf59a83ea416bf3f615883f839549950",
+          "byteLength": 98852,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71-ba015e06a7",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76601/665513/51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71b45c4ba43572f5a6.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom prefabrykowany DH70-3 HDH1003",
+      "id": "asset-zdjecie-1-projektu-dom-prefabrykowany-dh70-3-hdh-0a7a962360",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f-7328f6a792",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "3ba3ae813107182abda7991ed866370f3a3a8443b24ac4086519735d4a405e85",
+          "byteLength": 9636,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f-7328f6a792",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/75886/649132/ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f38692e3846c04d5e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom prefabrykowany Parterowy 80A HFX1041",
+      "id": "asset-zdjecie-1-projektu-dom-prefabrykowany-parterowy-a0f127c080",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485-30d92f46d8",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "8ae028bdee66fba72409a2fa115a938cfe52c88ccb03dd39bc4ca7ee15bcb788",
+          "byteLength": 11667,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485-30d92f46d8",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79437/676700/88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485592dc04dda04ae7a.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom szkieletowy One Step Smart 90 HHT1019",
+      "id": "asset-zdjecie-1-projektu-dom-szkieletowy-one-step-smar-0d52025d92",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-052202f376519b080e21c6f3393863487428562e61b98faf-548ba6436a",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "d92bc3e556e8fff39ce1303adf0fc151df623fe3d182db7b37f362ee7ac037e4",
+          "byteLength": 8745,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-052202f376519b080e21c6f3393863487428562e61b98faf-548ba6436a",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76135/653566/052202f376519b080e21c6f3393863487428562e61b98fafe884c5787875969e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom szkieletowy Solo Smart 100 HHT1034",
+      "id": "asset-zdjecie-1-projektu-dom-szkieletowy-solo-smart-10-897e13b0c9",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7bf52ebe23f74136a790d3263b825132d21397623ed4e5b6-0baf4967ba",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "3125054fffd0f61d90dba0f15c10e8e940c6f7c2ffc74711f716d24eb24b14f6",
+          "byteLength": 99578,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7bf52ebe23f74136a790d3263b825132d21397623ed4e5b6-0baf4967ba",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/77508/671031/7bf52ebe23f74136a790d3263b825132d21397623ed4e5b62253b76fe8daf17e.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom szkieletowy Solo Smart 100 HHT1034",
+      "id": "asset-zdjecie-1-projektu-dom-szkieletowy-solo-smart-10-c8cc15965c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7bf52ebe23f74136a790d3263b825132d21397623ed4e5b6-634a305021",
+      "selectionReason": "16 variants tie at 656x404; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "fdd29c0204b2f838e4c3c668b1017a4302018ea1d08864f4f1c80995419bef19",
+          "byteLength": 697665,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7bf52ebe23f74136a790d3263b825132d21397623ed4e5b6-634a305021",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/77508/671031/7bf52ebe23f74136a790d3263b825132d21397623ed4e5b62253b76fe8daf17e.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "2499e2ad53a576bd05d2b0a1475b450036f17ae6bcb94c36a32cceaaaeefc224",
+          "byteLength": 650461,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71-c994ea3127",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/76601/665513/51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71b45c4ba43572f5a6.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "679a74b644daed3458dcff5fadfb58f449cd33ff5036b2d578e3bc102f56b00e",
+          "byteLength": 640698,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7354c88c26b78440041fe94f95e75b000610a6c6411e7709-1ce39d3ff9",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/77626/672951/7354c88c26b78440041fe94f95e75b000610a6c6411e770994e69217c535d467.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "e549bc95d280e88f586b43ca26a33a73728a98092ef6fac27102efb3033a1dc9",
+          "byteLength": 76296,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485-1aec2e9d43",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/79437/676700/88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485592dc04dda04ae7a.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "b0a5a762593572d018364612876feb05f5b560dbf5ed81b911fcece965ed78bd",
+          "byteLength": 73217,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e088-8fae4d6ded",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/76246/655589/d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e08832331caa28522a38.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "5e6496b32e0265cef0cfffd8237a97ecf6c1dc1e021ed8c0b578814c6680bed8",
+          "byteLength": 63119,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611-5654c76b9f",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/76137/653569/4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611174e46198be30936.jpg"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "5408a806dfe88dbedb6fa52568f7438d217d5ab30ed37afa9a50c1ded74aa5fc",
+          "byteLength": 54627,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f-bfd77be164",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/75886/649132/ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f38692e3846c04d5e.jpg"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "1ff3f8b8b505451fdd3d6c5485e4786e51bcaf04996d35665f48790cec425455",
+          "byteLength": 53667,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-052202f376519b080e21c6f3393863487428562e61b98faf-401479286b",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/76135/653566/052202f376519b080e21c6f3393863487428562e61b98fafe884c5787875969e.jpg"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "68770af07cf3c2649c9d7d82305331ffcbc97101c10acc09833788b2db332b11",
+          "byteLength": 177089,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7bf52ebe23f74136a790d3263b825132d21397623ed4e5b6-3050b56553",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/77508/671031/7bf52ebe23f74136a790d3263b825132d21397623ed4e5b62253b76fe8daf17e.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "f4dd18a950de42275fa3d529132e4f9842a3f58b99f880171a23f3b1c8b46ad9",
+          "byteLength": 170793,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71-95d63686f6",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/76601/665513/51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71b45c4ba43572f5a6.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "7e4addf48264521cdf8491e58d6b7c263705b7d553bc9dbecbfeb80b9a740249",
+          "byteLength": 170289,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7354c88c26b78440041fe94f95e75b000610a6c6411e7709-f5e3388a65",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/77626/672951/7354c88c26b78440041fe94f95e75b000610a6c6411e770994e69217c535d467.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "f4b99bcc8af30a21fb3e868c8381a840308d1d9b119ae86aa985f8e115abb851",
+          "byteLength": 20114,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485-b9cbf9bda4",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/79437/676700/88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485592dc04dda04ae7a.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "7a92f4f1e782f10a52fbad5ee6ca2355112d2825ccc65f7ad957a2370e5d10f6",
+          "byteLength": 20044,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e088-ac8bd212d3",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/76246/655589/d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e08832331caa28522a38.png"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "d2546c4f75361a3492ab3fe46c6b18807599ac1c3821253b5b578bb504682358",
+          "byteLength": 16249,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611-1cf599efc4",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/76137/653569/4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611174e46198be30936.jpg"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "d65db6faf881b22863e3b1be5ac831384be37fbff6f8bb764321f1860987f6d6",
+          "byteLength": 15596,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f-39c4d586d1",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/75886/649132/ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f38692e3846c04d5e.jpg"
+        },
+        {
+          "aspect": 1.623762,
+          "byteHash": "3b5b9195e3f0a186c5dc1aec9bdbe3672233ec48c9d1b5e66d3add6c6aea2323",
+          "byteLength": 14857,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-052202f376519b080e21c6f3393863487428562e61b98faf-34ba5657dc",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/76135/653566/052202f376519b080e21c6f3393863487428562e61b98fafe884c5787875969e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Dom szkieletowy Space Smart 90 HHT1021",
+      "id": "asset-zdjecie-1-projektu-dom-szkieletowy-space-smart-9-f2a2ce8f2a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611-e9c5f30db5",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "bb6810efd952376eb9d30ffcdc926da8164a59a803055ad068da178bf9304a13",
+          "byteLength": 9154,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611-e9c5f30db5",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76137/653569/4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611174e46198be30936.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 B WAH2170",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-b-wah2170-de031c4bcd",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-8978f0e109",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "fb259f1a46e7d54612b7119d5cf8dcde57679c59903c99e66a00107f22317060",
+          "byteLength": 67323,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-8978f0e109",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/79259/674507/7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04120d1268daa59fc7.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 B WAH2170",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-b-wah2170-f37f1146f6",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-98d53dcbc9",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "ad9ed816e476a121defd7299430c74bf2ee9fa7d36c7bafd47b4f888eeb6b5af",
+          "byteLength": 10764,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-98d53dcbc9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79259/674507/7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04120d1268daa59fc7.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 B WAH2170",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-b-wah2170-fdbba6a6e5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-6e845488f8",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "8f867eaf94a11347aef769096b935a62bb87910943e5fed8838234eaa4cca11c",
+          "byteLength": 18360,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04-6e845488f8",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/79259/674507/7c9c301f2720e84640e98f62baca284e8f9e38b1aa52ba04120d1268daa59fc7.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 WAH2169",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-wah2169-3d2239b8c0",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-73a2efb99a",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "3c14310641e762a352f141f5ee5fc1b6ab5891aaad460aaab06a1b2a28c93d27",
+          "byteLength": 14517,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-73a2efb99a",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/79258/674493/ef647669ad46f02aac066125dacc4e2d26397745c0bf95e47a5d841de3eca394.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 WAH2169",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-wah2169-42c11628a2",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-75c8df6bbd",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "e3dc7c6c3adf04a7b13848d47ac6d3eb71592041b18a6b99f0fb50703e9d8544",
+          "byteLength": 8990,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-75c8df6bbd",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79258/674493/ef647669ad46f02aac066125dacc4e2d26397745c0bf95e47a5d841de3eca394.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu MG 2 wariant 15 WAH2169",
+      "id": "asset-zdjecie-1-projektu-mg-2-wariant-15-wah2169-fef977adfa",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-60017175e3",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "4aab2518e860fd0efa3b3032224953c24a55522c082c7f5ba65c73e49ac432e8",
+          "byteLength": 47323,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-ef647669ad46f02aac066125dacc4e2d26397745c0bf95e4-60017175e3",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/79258/674493/ef647669ad46f02aac066125dacc4e2d26397745c0bf95e47a5d841de3eca394.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis 2 WOF1299",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-2-wof1299-09e2539a3c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-369d1cfc19",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "6a8b8114590d1976ce28be4ee5817f1a3c9558691e68eae0065025ec46ab93ee",
+          "byteLength": 87353,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-369d1cfc19",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/80238/689853/24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff188aed4899869e7a.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis 2 WOF1299",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-2-wof1299-4ba9f09d1e",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-1aa9517cf0",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "83eaad18307fcdad31a4b23c5d2e86e6ca885119e9baa6b780bff9c8e931a3e7",
+          "byteLength": 22791,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-1aa9517cf0",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/80238/689853/24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff188aed4899869e7a.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis 2 WOF1299",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-2-wof1299-ce4f9108bc",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-be3c73672b",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "7fa5a7b159a264721f9743dd5119f90f1cc76a850e3aff29f022e6f37f0246c3",
+          "byteLength": 13106,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff-be3c73672b",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/80238/689853/24cec7095bb98d1e07ab6ec9c3adf61e02a70417ec71acff188aed4899869e7a.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis WOF1264",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-wof1264-2dcaaa1c8f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-0fafac4ee9",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "02b2152cc0dd55a11fbf8469a89d4928eedfa70f6f80880ae20d9fc6f28a3d09",
+          "byteLength": 88491,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-0fafac4ee9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/76802/665376/bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb6622a518f0c54792.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis WOF1264",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-wof1264-73557825dd",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-c5df027197",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "1adb15468b683f5b88c9b687a0a41948c5eb69743bf01352a4d678c2763a8174",
+          "byteLength": 12725,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-c5df027197",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76802/665376/bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb6622a518f0c54792.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 bis WOF1264",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-bis-wof1264-f876d15509",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-a62cf9fe11",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "a75792d11be9e79ce76b0acbc85b0c322b78623a24783075088c3511fae5fceb",
+          "byteLength": 22531,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb-a62cf9fe11",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/76802/665376/bffe6e777f63929d8110cc0cb4ea82ee326c4a1f4ecf2bcb6622a518f0c54792.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 country WOF1302",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-country-wof1302-0127fae04f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-77e78d7473",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "d6d777e33ce56438c70eb3050e9e8975dd7894b73805612ccc735dd7064d7176",
+          "byteLength": 96675,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-77e78d7473",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/80293/691128/7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb60d81e6a61d0910a8.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 country WOF1302",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-country-wof1302-0c0e0b413b",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-4427f380b9",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "d993ece563ad8d3a8277c7bb2a233136f2b12f84ce245570c51b4d5a0f94e63e",
+          "byteLength": 14299,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-4427f380b9",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/80293/691128/7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb60d81e6a61d0910a8.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 country WOF1302",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-country-wof1302-a6908a0abe",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-cfe988c023",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "0ffe63df2bf6553723db8f243883af212bc6e2e201174e3faa4157e5f67882a8",
+          "byteLength": 25514,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb6-cfe988c023",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/80293/691128/7094f73c8bd1c04224f60ae52d4eb835fdd5f3d6ea8eabb60d81e6a61d0910a8.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 WOF1229",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-wof1229-0983fe646f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-c2270b84dc",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "6c432279a80d73fac277ed36ce533f058656d3431025f392cae1d2db796a6f48",
+          "byteLength": 14365,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-c2270b84dc",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/75284/690400/74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4258af346f68d1e1e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 WOF1229",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-wof1229-9dfe948f0f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-fb2132d289",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "4b866278c60d20b4f269e162a2b57fa04443c55864caabc25e51eb7dbc3e8513",
+          "byteLength": 24686,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-fb2132d289",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/75284/690400/74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4258af346f68d1e1e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Mirabelka 4 WOF1229",
+      "id": "asset-zdjecie-1-projektu-mirabelka-4-wof1229-cd14ee09fc",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-6ef5952b11",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "469d1e12df81c66adbc399bfe8d293cf062e1ec7026d2495b120e9847a241066",
+          "byteLength": 92812,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4-6ef5952b11",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/75284/690400/74a1fe26f8d6f1bc1c200e4e0e7408556a0467afaa08e1c4258af346f68d1e1e.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Trufla mini WOF1285",
+      "id": "asset-zdjecie-1-projektu-trufla-mini-wof1285-b594ed1037",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-77ee08d12a",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "cfa35f8b28ec2d24fb7d262b2c9f3b40fb6a24692f1d9f34253e1357df9e5f48",
+          "byteLength": 21337,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-77ee08d12a",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/79329/675431/8616a0d277ae26171dbc17786325a88d61a9477c70060baf934ee57a7a2e8603.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Trufla mini WOF1285",
+      "id": "asset-zdjecie-1-projektu-trufla-mini-wof1285-b9d3eb8d63",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-b1ef82349c",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "d5f850bac1188e570b9b372e9b42b8b62cc7ebf7f61037977e0d16d32fff3e97",
+          "byteLength": 80691,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-b1ef82349c",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/79329/675431/8616a0d277ae26171dbc17786325a88d61a9477c70060baf934ee57a7a2e8603.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Trufla mini WOF1285",
+      "id": "asset-zdjecie-1-projektu-trufla-mini-wof1285-c4fdb74272",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-5883b9d8e8",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "48004914a2b47e8dad5a3f829e0fa1422f315f6da5ce48c2046fd4bfd6e566ca",
+          "byteLength": 12418,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-8616a0d277ae26171dbc17786325a88d61a9477c70060baf-5883b9d8e8",
+          "mediaType": "image/jpeg",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79329/675431/8616a0d277ae26171dbc17786325a88d61a9477c70060baf934ee57a7a2e8603.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Uroczy Klasyczny 82 DZW1001",
+      "id": "asset-zdjecie-1-projektu-uroczy-klasyczny-82-dzw1001-05157242f5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-6895fd1d8d",
+      "selectionReason": "only variant (328x202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "28a3838f57ca0bc1b4789e1f96adb05e4a64b0c5a92c362d8e98348681ddc1d9",
+          "byteLength": 158001,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 202,
+            "width": 328
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-6895fd1d8d",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/328x202/wpcdn.pl/extradom/designs/79362/682261/e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd7bbd66d11b2a00a2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Uroczy Klasyczny 82 DZW1001",
+      "id": "asset-zdjecie-1-projektu-uroczy-klasyczny-82-dzw1001-2ebb5f09ea",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-791e95109d",
+      "selectionReason": "only variant (656x404, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.623762,
+          "byteHash": "fa93a55a2836acedb2a132004f564ed756dc31bb0b52b260c068f68a000b2cee",
+          "byteLength": 583475,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 404,
+            "width": 656
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-791e95109d",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/656x404/wpcdn.pl/extradom/designs/79362/682261/e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd7bbd66d11b2a00a2.png"
+        }
+      ]
+    },
+    {
+      "caption": "Zdjęcie 1 projektu Uroczy Klasyczny 82 DZW1001",
+      "id": "asset-zdjecie-1-projektu-uroczy-klasyczny-82-dzw1001-daaa1cc9a5",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-4d3fa645df",
+      "selectionReason": "only variant (235x157, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.496815,
+          "byteHash": "cef0fcd227738cc1eeff056aa265f004d13397b067b0c778f71f0b26f598f3d9",
+          "byteLength": 90299,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 157,
+            "width": 235
+          },
+          "discoveredVia": "IMG_SRCSET:img[data-srcset]@https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+          "id": "var-e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd-4d3fa645df",
+          "mediaType": "image/png",
+          "url": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79362/682261/e3ca0716d623bf5c8409180004bcdf7d166e816935e580cd7bbd66d11b2a00a2.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.extradom.pl/projekt-domu-armonia-WOF1270",
+  "contentHash": "8893125deb0dbd5cb844b782cec012503f2fb03ed3cd15324973efaded5c997c",
+  "failures": [
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/assistant-phone.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/dok-charakterystyka-energetyczna.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/dok-projekt-a-b.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/dok-projekt-techniczny.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/dok-zgoda-na-zmiany.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://extradom.wpcdn.pl/assets/b67ab8b/images/img/paka.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/Alnor_obrazek_500x500_px_32b277676e.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/aluprof_bg_58953e2afc.webp"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/dom_rabek_willa_Kielce_polecany_producent_002_PP_Blachy_50c48bdef4.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/fakro_desktop_14ec96a500.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/Grafika_Hormann_500x500px_d8c40f7b7a.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/termoorganika_bg_2d368d51ae.webp"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/Warstwa_0_002_0e56e31ebd.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/112x80/wpcdn.pl/extradom-cms/wiazar_polska_bg_9e79c7586f.webp"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/118x88/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom-cms/1696x948_004_fasady_2990ac1830.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom-cms/EXTRADOM_desktop_1696x948px_1_002_c93138a860.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/141x83/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/174x116/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/360x240/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/81x52/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/124x50/wpcdn.pl/extradom-cms/stiebel_e986a1b7f4.JPG"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/141x83/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/360x240/wpcdn.pl/extradom-cms/1_EXTRADOM_mobile_750x524px_4cf06fea4c.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/360x240/wpcdn.pl/extradom-cms/750x542_fasady_a1052de9e6.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/360x262/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/848x477/wpcdn.pl/extradom-cms/1696x948_004_fasady_2990ac1830.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667775/ff4892ffabf12c980247748cfa7a178dbf32ece32d9dca90b70eac2b58ab147b.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667776/9f8cdaf6c25146ffc09f97a37759d5545b0954d9f418a84e492ffdeeacbeb491.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667777/d6776e6d25bb2af9d3750ba4af6b4bb4ab5f056df6e1ba8a276b679450ba66b2.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667778/c7941f3add5b159b2c051185488b59a712768676a0bf5319f77ada65f2ae25a5.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x150/wpcdn.pl/extradom/designs/77047/667779/5d0a34d29bf7b1231bb66775ed884d148b83bb5bd18b364eab97e84fab757d1c.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x335/wpcdn.pl/extradom/designs/77047/667774/ef3780f35ab5a1acb3777d4a42fa21628d4e08dd7987d4215f38c5ed48164eae.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://i.wpimg.pl/c/x600/wpcdn.pl/extradom/designs/77047/667773/e0aa3c572246ac09cc2b325e9cdbef7dfe6bef2cfe28ab7566ca6b19b0baff0e.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/1_000_zl_obi_736d4b7301.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/10_rabatu_w_castoramie_e754bee7b4.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/15_rabatu_12b116d926.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/16_na_zakupy_w_Selsey_e0f547faef.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/akademia_baner_56a28bbcd9.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/architektura_ogrodowa_5bc9a0cd9c.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/BUDMAT_002_1b5bcb030f.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/DZIENNIK_BUDOWY_GRATIS_do_kazdego_projektu_domu_ed88739376.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/ED_500zl_1200x1200_modal_007604a111.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/ED_500zl_800x96_strapi_b28ebde76b.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/ED_500zl_848x120_CTA_0ad2c5339d.jpg"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/jak_budowac_dom_ca591b6417.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/jak_urzadzic_ogrod_c703f5c51b.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/ogrod_cf07b7b365.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/pakiet_formalnosci_dfd7304469.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_LAZY_ATTR candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/Polecany_Producent_2026_002_830ee00161.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/voucher_na_garaze_19a60fa03a.png"
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "message": "beyond the 120 asset budget; IMG_SRC candidates are fetched in trust order",
+      "stage": "ASSET_FETCH",
+      "target": "https://wpcdn.pl/extradom-cms/wizualizacje_f2ae5aa7a7.png"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667780/e7b9c0cf5defae6fd05dfdffc8c1b5cba15b15155c3e00a2f80d95c94f6b670e.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667781/ac68e308734ea7c409b6e1746e1c62576fb331dce506df802859c89b88f75033.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667782/c67a20fea0bde9ddf9711c5dcc0226b375ec52b4cab1ff1624108adf42e2d9c1.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667783/e91a303ac938cdf71553d2ab13b55747a582c7fe8bfb51ccc3352c37fb5fecf9.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.5: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667784/1a65a1960aa90827ba8c7f0dbf53a3685a2b581fab7562b64088ecbbb1344c44.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667785/67622e46e55fa8b34cb859c27a7f6c7e21db5d539dfbca304dcdba051c2fa4e5.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667786/8c6eb9569d5154047d890a50bee950eaf08d16eebc5f0fcd319d4c75dea3742d.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667787/4051220fe3a31b5f3a762f15a5423e3007c6e99de338ed2cd1469aa89dc9b8a1.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.779021 against the reference copy's 1.490625: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/1272x715/wpcdn.pl/extradom/designs/77047/667788/fdc9cb9cb76a5ad9961e2ad368cc4c4da4a4020327b94122f4df573df0f3f022.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/75886/649132/ae3405c9e91a2cb39e1e8d7be11eccc8d9fc37344838eb0f38692e3846c04d5e.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76135/653566/052202f376519b080e21c6f3393863487428562e61b98fafe884c5787875969e.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76137/653569/4a38b5b9a38a584d8f71bdad238ffb7ed0c56993c01e7611174e46198be30936.jpg"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76246/655589/d129a4cea1e41eaab176f916c3cef74370ec5ffef4a6e08832331caa28522a38.png"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/76601/665513/51f5106ed9fbbf84c0aabdf10a6136b4b7e93ac405639c71b45c4ba43572f5a6.png"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/77508/671031/7bf52ebe23f74136a790d3263b825132d21397623ed4e5b62253b76fe8daf17e.png"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/77626/672951/7354c88c26b78440041fe94f95e75b000610a6c6411e770994e69217c535d467.png"
+    },
+    {
+      "code": "DIFFERENT_CROP",
+      "message": "aspect 1.496815 against the reference copy's 1.623762: a different crop, not a larger copy of the same drawing; kept as its own asset",
+      "stage": "ROLE",
+      "target": "https://i.wpimg.pl/235x157/wpcdn.pl/extradom/designs/79437/676700/88a7e779838fe9d3f028ddca1a53bd0aaaef22d0647fc485592dc04dda04ae7a.png"
+    }
+  ],
+  "id": "src-wof1270-22067440aa",
+  "pageHash": "b957664939b4fb70b9bc44bf9786b873385d7f9e28a8f8ad0a1454277bd92e1e",
+  "project": {
+    "externalId": "WOF1270",
+    "name": "Projekt domu Armonia",
+    "publisher": "extradom.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,48 m",
+      "unit": "m",
+      "value": 6.48
+    },
+    {
+      "key": "building_length",
+      "label": "Długość elewacji",
+      "raw": "8,35 m",
+      "unit": "m",
+      "value": 8.35
+    },
+    {
+      "key": "building_width",
+      "label": "Szerokość elewacji",
+      "raw": "14,10 m",
+      "unit": "m",
+      "value": 14.1
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "109,03 m²",
+      "unit": "m2",
+      "value": 109.03
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. długość działki",
+      "raw": "16,35 m",
+      "unit": "m",
+      "value": 16.35
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. szerokość działki",
+      "raw": "21,40 m",
+      "unit": "m",
+      "value": 21.4
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "144 m²",
+      "unit": "m2",
+      "value": 144
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "raw": "35 stopni",
+      "unit": "deg",
+      "value": 35
+    },
+    {
+      "key": "room_count",
+      "label": "Pokoje",
+      "raw": "2",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "76.14 m²",
+      "unit": "m2",
+      "value": 76.14
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura brutto",
+      "raw": "588,24 m³",
+      "unit": "none",
+      "value": 588.24
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "construction",
+      "label": "Technologia",
+      "text": "Murowana"
+    },
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Extradom.pl Spółka z ograniczoną odpowiedzialnością z siedzibą przy ul. Jaworskiej 13, 53-612 Wrocław, wpisana do rejestru przedsiębiorców Krajowego Rejestru Sądowego przez Sąd Rejonowy dla Wrocławia-Fabrycznej we Wrocławiu, VI Wydział Gospodarczy Krajowego Rejestru Sądowego do pod numerem KRS 0000648746, numer NIP 895-17-18-333, o kapitale zakładowym 708 150,00 zł uprzejmie informuje, iż poprzez serwis Extradom.pl umożliwia m.in. zapoznanie się przez konsumentów z ofertą handlową Partnerów Extradom.pl, którzy stosują metody budowy domów przy wykorzystaniu różnego rodzaju technologie prefabrykacji bądź modułowe (tzw. „Gotowe domy”)."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "35 stopni"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu parterowego Armonia o pow. 76,14 m2 z dachem dwuspadowym, z tarasem, sprawdź!"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

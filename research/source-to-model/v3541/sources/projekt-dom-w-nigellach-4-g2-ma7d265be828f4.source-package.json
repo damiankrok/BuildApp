@@ -1,0 +1,1714 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-dodatkowa-wi-5247ba8a07",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-06dfadfa7ba1990fb70-d235d393ab",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b755abe2d0a494a66401d5ed5af53012bffa954872524cc10704a58a5ffc76dd",
+          "byteLength": 378334,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma7d265be828f4/carousel_images",
+          "id": "var-projekt-dom-w-nigellach-4-g2-06dfadfa7ba1990fb70-d235d393ab",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/fm/projekt-dom-w-nigellach-4-g2-06dfadfa7ba1990fb702c6336747cb40__55245.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-elewacja-boc-6cee64133c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-769441df79328693026-5f7d296db9",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x601 over 550x258",
+      "variants": [
+        {
+          "aspect": 2.129784,
+          "byteHash": "fefc2bee1a8f45d01b9be823de1cb5efa6724bede2977b70d6761c2deba4281e",
+          "byteLength": 173955,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 601,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-769441df79328693026-5f7d296db9",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-769441df7932869302636ba714840010__11265.jpg"
+        },
+        {
+          "aspect": 2.131783,
+          "byteHash": "78a54a7552b90e3899504b64d366faa1d39da776034a9cfff0b5c036beb81442",
+          "byteLength": 38375,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 258,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-elewacja-boczna-projekt-dom-w-nigellach-4-g2-cc0-d0a310aba8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-boczna-projekt-dom-w-nigellach-4-g2-cc05c8ce0a37a3fdb0cf5d85ba13a174__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-elewacja-boc-7e6f74b2d4",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-74dfa5935ce7ef9324c-873937d161",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x601 over 550x258",
+      "variants": [
+        {
+          "aspect": 2.129784,
+          "byteHash": "6443ad3949457622bdd7296f0705e413b35ab3bdb67aca2f4ee4e43a4372d920",
+          "byteLength": 178482,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 601,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-74dfa5935ce7ef9324c-873937d161",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-74dfa5935ce7ef9324cd6c4492125442__11266.jpg"
+        },
+        {
+          "aspect": 2.131783,
+          "byteHash": "38b68006af36ad7c4723673a9abea6c00dad52c60dc76eab99fb0ade90f93f95",
+          "byteLength": 39758,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 258,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-elewacja-boczna-projekt-dom-w-nigellach-4-g2-d0a-e4a01da5da",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-boczna-projekt-dom-w-nigellach-4-g2-d0ab324d29a77c1c5dc12dea677a0f05__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-elewacja-fro-d6560677cd",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-0032e527b8766c9f4e2-e15ec484d7",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x601 over 550x258",
+      "variants": [
+        {
+          "aspect": 2.129784,
+          "byteHash": "a87fb724552b3df94db746af4d606699b6be9697b6bda8853844b4c999ffd987",
+          "byteLength": 200098,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 601,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-0032e527b8766c9f4e2-e15ec484d7",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-0032e527b8766c9f4e2123c1260371ce__11264.jpg"
+        },
+        {
+          "aspect": 2.131783,
+          "byteHash": "fe12c3388dbb6cd1540bed46982639729d19fdb06a184500894cb9fbef775ec2",
+          "byteLength": 44865,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 258,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-elewacja-frontowa-projekt-dom-w-nigellach-4-g2-9-073dd39375",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-frontowa-projekt-dom-w-nigellach-4-g2-9d5e96b44e3578fe0fa42540201ee9d1__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-elewacja-ogr-f3beb1afe5",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w nigellach 4 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-dee0c139e79623cf706-f5e5ccc3c7",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x601 over 550x258",
+      "variants": [
+        {
+          "aspect": 2.129784,
+          "byteHash": "c6b5e5eb9817de6048eeba596b7889621281ff243804cf826ac653dbd33623a6",
+          "byteLength": 207410,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 601,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-dee0c139e79623cf706-f5e5ccc3c7",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-dee0c139e79623cf7067de2f2ad64833__11267.jpg"
+        },
+        {
+          "aspect": 2.131783,
+          "byteHash": "db451c95fded2e4227c2ba28f186781d1e47f845ef9472d9dd47b4cbf103e2a1",
+          "byteLength": 45532,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 258,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-nigellach-4-g2-4-276d4159a5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-ogrodowa-projekt-dom-w-nigellach-4-g2-460786d05756dad940816e756e978348__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-przekroj-bud-199229564a",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nigellach 4 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nigellach 4 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w nigellach 4 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-nigellach-4-g2-33-9a9f2640e4",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "8a37e8f92f6b60adf0d5b8befa6da87ea17fcf37f7ba26dcf0ab6010447ddb1b",
+          "byteLength": 63383,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/ma7d265be828f4/przekroj-budynku-projekt-dom-w-nigellach-4-g2-3359a54e88ac378384ab461346c13aa1__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-nigellach-4-g2-33-9a9f2640e4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/przekroj-budynku-projekt-dom-w-nigellach-4-g2-3359a54e88ac378384ab461346c13aa1__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "02676934ccc6c1c3549eb9570eba41019ea22686971c44fd29a671d064cb1125",
+          "byteLength": 16252,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-przekroj-budynku-projekt-dom-w-nigellach-4-g2-33-755d89adfe",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/przekroj-budynku-projekt-dom-w-nigellach-4-g2-3359a54e88ac378384ab461346c13aa1__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-rzut-parteru-5e6edfe48a",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-nigellach-4-g2-c94000-7183558a4c",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4986fb3e70590c9cd1a1beb7dbad09c761ebc9dd54c1291d53ce42c8c2f166a9",
+          "byteLength": 48558,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma7d265be828f4/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-nigellach-4-g2-c94000-7183558a4c",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/rzut-parteru-projekt-dom-w-nigellach-4-g2-c94000c173eb498e8f0c8fda52492c8c__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-sytuacja-5642f62c90",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w nigellach 4 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w nigellach 4 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-6d606017dc0b6d94170-8e9ca32eeb",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "445fb906c54d44047c29a18719b2686ac9274340bbd00a8a1fa49213624e2886",
+          "byteLength": 113360,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-6d606017dc0b6d94170-8e9ca32eeb",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-6d606017dc0b6d941703557dfbc2d39e__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "8acf7d6762a8ff3d4d349262b01ff38c426edd7196a2431845567b7a9e204519",
+          "byteLength": 34084,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-sytuacja-projekt-dom-w-nigellach-4-g2-5c5148137c-6f75618fec",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/sytuacja-projekt-dom-w-nigellach-4-g2-5c5148137c5f7f5592da0b8173265fb7__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w nigellach 4 (G2) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-nigellach-4-g2-widok-1-536de942f1",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-nigellach-4-g2-0cc464aae1b-943746bd78",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "d4c389f184263135b5de84586b9181277b4a27bdf8c21dbaff46af9b2cf66ae8",
+          "byteLength": 9293,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-widok-1-projekt-dom-w-nigellach-4-g2-0cc464aae1b-943746bd78",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-1-projekt-dom-w-nigellach-4-g2-0cc464aae1ba8dea0cad5fc4080b337d__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nigellach 4 (G2)",
+      "id": "asset-projekt-dom-w-nigellach-4-g2-4b8dc65614",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-nigellach-4-g2-762d8e6cf43-914db28e3e",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "5ba577f1e1ae007503caefe9ffac4f53050d8f4dbcacd6c0cb051322031e6f41",
+          "byteLength": 32673,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma7d265be828f4/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-nigellach-4-g2-762d8e6cf43-914db28e3e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-2-projekt-dom-w-nigellach-4-g2-762d8e6cf43896063a189d7d757a0250__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-56e0c2a7b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-4f81bb70219c5495b2a-5022921739",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "8cb279b5c11c4daa310dc2a90b2808e54f5cbdcc6df3112ace0b4c0d1bdaef55",
+          "byteLength": 315116,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-4f81bb70219c5495b2a-5022921739",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/w1/projekt-dom-w-nigellach-4-g2-4f81bb70219c5495b2af3d2dac5a36d3__42261.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w nigellach 4 g2 5cc6c1b17b6f469402ef5cc1b92e8944  42201",
+      "id": "asset-projekt-dom-w-nigellach-4-g2-5cc6c1b17b6f469402e-19eab696b7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-5cc6c1b17b6f469402e-568d4c22a9",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "bb8cd6cb6c2f6f2b1e6a537e04bde601b7e7744addd77fcf7ba6833fa8a5614a",
+          "byteLength": 422705,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/ma7d265be828f4/image/42201?showHotspots=false",
+          "id": "var-projekt-dom-w-nigellach-4-g2-5cc6c1b17b6f469402e-568d4c22a9",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/ma7d265be828f4/i/projekt-dom-w-nigellach-4-g2-5cc6c1b17b6f469402ef5cc1b92e8944__42201.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-6ead474828",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) wizualizacja łazienki (wizualizacja 3 wido\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-1dbfd098934f362198c-ffbc4f43dd",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "a32db54234157dfac3c7c790d7fb2c1bc36cc7fb30d5db2d9bd485d60f7b193d",
+          "byteLength": 851174,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-1dbfd098934f362198c-ffbc4f43dd",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/l3/projekt-dom-w-nigellach-4-g2-1dbfd098934f362198cc1a019d0d5b61__42262.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nigellach 4 (G2)",
+      "id": "asset-projekt-dom-w-nigellach-4-g2-7a01495448",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-755e11c2cb26ad4367b-e817a023c3",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "52fa4fad6b5bb5160daef0a2161459dc76de42718d037ed8f95cae9ce34334c0",
+          "byteLength": 27692,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma7d265be828f4/related?scope=family",
+          "id": "var-projekt-dom-w-nigellach-4-g2-755e11c2cb26ad4367b-e817a023c3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-755e11c2cb26ad4367bf86b47c18dd26__252.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-7d71d513ac",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) wizualizacja łazienki (wizualizacja 3 wido\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-d18aa720e63d6c962e7-ba2b5c686c",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "aeb8c30efc8c9661d32783142a54f114072e7d08b4427a4f913fc128875d31c1",
+          "byteLength": 853465,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-d18aa720e63d6c962e7-ba2b5c686c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/l3/projekt-dom-w-nigellach-4-g2-d18aa720e63d6c962e7f42f511be9aae__42263.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-921b6ff8f0",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-a9fb29accc91279d7df-43f1baba70",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "6552cd7297b52d37972e0565f09e86adb92ba8b4db2d4ceab7b98a646ff0c5f2",
+          "byteLength": 322561,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-a9fb29accc91279d7df-43f1baba70",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/w1/projekt-dom-w-nigellach-4-g2-a9fb29accc91279d7df13755d1525be3__42260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w nigellach 4 (G2)",
+      "id": "asset-projekt-dom-w-nigellach-4-g2-cb40f10b37",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-nigellach-4-g2-b0eda6-8205f7e72e",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2ef98f8e439613a0c5c92057abd8e88c69b7e56d532eb05dc2a39cec5a1467d5",
+          "byteLength": 31127,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma7d265be828f4/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-nigellach-4-g2-b0eda6-8205f7e72e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/rzut-parteru-projekt-dom-w-nigellach-4-g2-b0eda61a6bc938bf5eb21bab524cdf9d__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-cb47bba36b",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) wizualizacja łazienki (wizualizacja 3 wido\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-5bb095a7bf2eccd9448-5fe1235101",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "07e1dd94d97d8fc1f643b6969b620270a7f6c096c7b427b395941f6946404e59",
+          "byteLength": 882269,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-5bb095a7bf2eccd9448-5fe1235101",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/l3/projekt-dom-w-nigellach-4-g2-5bb095a7bf2eccd9448d43cbcf4f8b62__42265.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-nigellach-4-g2-de8d93f6be",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) wizualizacja łazienki (wizualizacja 3 wido\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-212915b31af7bf2680e-e8beac5608",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "511cbcad3416db28b9f7fb80bc65782fbd2201c142dad05595d458c97a501078",
+          "byteLength": 985110,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-212915b31af7bf2680e-e8beac5608",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/l3/projekt-dom-w-nigellach-4-g2-212915b31af7bf2680e4282f1286a37c__42264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-59c6dbf7e8",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma7d265be828f4/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma7d265be828f4/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-nigellach-4-g2-70f70602ac30cc9af13-24d9011623",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "a81adecca3bf4cb6e148cea6a0ff953225436a0923e683342dffb85e9e38dc97",
+          "byteLength": 114500,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-projekt-dom-w-nigellach-4-g2-70f70602ac30cc9af13-24d9011623",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-70f70602ac30cc9af1331ada4e37a37a__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-6213340c76",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma7d265be828f4/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma7d265be828f4/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w nigellach 4 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-nige-03f84a3a93",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c6e6ff7b9af00eeadfe78d3d5b7ad64b70cb330a242534fc43deb613cac93216",
+          "byteLength": 113782,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-nige-03f84a3a93",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/rzut-parteru-z-powierzchniami-projekt-dom-w-nigellach-4-g2-a10b46b68f28d1db9d84105422996853__11915.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-nigellach-4-g2-1cc26b9749",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-nigellach-4-g2-ff936ffa195-d1244d74ec",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "a087b399b2e1a7007ba8321a0e6f6847eb03a927305e1dff97ece41c03076edd",
+          "byteLength": 125414,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-widok-1-projekt-dom-w-nigellach-4-g2-ff936ffa195-d1244d74ec",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-1-projekt-dom-w-nigellach-4-g2-ff936ffa19541246af59495873dca60d__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-nigellach-4-g2-c0ea65f79f",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-nigellach-4-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w nigellach 4 (g2) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-nigellach-4-g2-090b8dfa3db-2275500514",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "28a23567af3a1259c89f90e5bb6f205b3c451c7cc5db3b8dddcaf18715a7029c",
+          "byteLength": 151018,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+          "id": "var-widok-2-projekt-dom-w-nigellach-4-g2-090b8dfa3db-2275500514",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-2-projekt-dom-w-nigellach-4-g2-090b8dfa3db2a33e855e43204b740771__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-nigellach-4-g2-ma7d265be828f4",
+  "contentHash": "75fdd7ce223c7f52c9b3a42c83307c5a05c6287a0e69e53baa29def9670dd763",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-755e11c2cb26ad4367bf86b47c18dd26__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/rzut-parteru-projekt-dom-w-nigellach-4-g2-b0eda61a6bc938bf5eb21bab524cdf9d__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/rzut-parteru-projekt-dom-w-nigellach-4-g2-c94000c173eb498e8f0c8fda52492c8c__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-1-projekt-dom-w-nigellach-4-g2-0cc464aae1ba8dea0cad5fc4080b337d__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-1-projekt-dom-w-nigellach-4-g2-ff936ffa19541246af59495873dca60d__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-2-projekt-dom-w-nigellach-4-g2-090b8dfa3db2a33e855e43204b740771__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/widok-2-projekt-dom-w-nigellach-4-g2-762d8e6cf43896063a189d7d757a0250__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-769441df7932869302636ba714840010__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-boczna-projekt-dom-w-nigellach-4-g2-cc05c8ce0a37a3fdb0cf5d85ba13a174__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-74dfa5935ce7ef9324cd6c4492125442__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-boczna-projekt-dom-w-nigellach-4-g2-d0ab324d29a77c1c5dc12dea677a0f05__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-0032e527b8766c9f4e2123c1260371ce__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-frontowa-projekt-dom-w-nigellach-4-g2-9d5e96b44e3578fe0fa42540201ee9d1__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-dee0c139e79623cf7067de2f2ad64833__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/elewacja-ogrodowa-projekt-dom-w-nigellach-4-g2-460786d05756dad940816e756e978348__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma7d265be828f4/projekt-dom-w-nigellach-4-g2-6d606017dc0b6d941703557dfbc2d39e__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma7d265be828f4/sytuacja-projekt-dom-w-nigellach-4-g2-5c5148137c5f7f5592da0b8173265fb7__11255.jpg"
+    }
+  ],
+  "id": "src-ma7d265be828f4-d6a159977e",
+  "pageHash": "7ebadeb4388d1ec50cd3fc62881664c75e065ed173adaab246737663bc7609b4",
+  "project": {
+    "externalId": "ma7d265be828f4",
+    "name": "Projekt domu Dom w nigellach 4 (G2) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "7,89 m&sup2;",
+      "unit": "m2",
+      "value": 7.89
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "7,68 m",
+      "unit": "m",
+      "value": 7.68
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "191,88 m&sup2;",
+      "unit": "m2",
+      "value": 191.88
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "255,91 m&sup2;",
+      "unit": "m2",
+      "value": 255.91
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "36,11 m&sup2;",
+      "unit": "m2",
+      "value": 36.11
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "147,88 m&sup2;",
+      "unit": "m2",
+      "value": 147.88
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "372,82 m&sup2;",
+      "unit": "m2",
+      "value": 372.82
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "240,47 m&sup2;",
+      "unit": "m2",
+      "value": 240.47
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "191,88 m&sup2;",
+      "unit": "m2",
+      "value": 191.88
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1449,67 m&sup3;",
+      "unit": "none",
+      "value": 1449.67
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 11.5,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 11,50 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.89,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 4,89 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 14.13,
+      "index": 3,
+      "label": "Kuchnia",
+      "raw": "3. Kuchnia | 14,13 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.88,
+      "index": 4,
+      "label": "Spiżarnia",
+      "raw": "4. Spiżarnia | 1,88 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 39.31,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 39,31 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.04,
+      "index": 6,
+      "label": "Toaleta",
+      "raw": "6. Toaleta | 2,04 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.02,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 4,02 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.84,
+      "index": 8,
+      "label": "Garderoba",
+      "raw": "8. Garderoba | 4,84 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 14.01,
+      "index": 9,
+      "label": "Pokój",
+      "raw": "9. Pokój | 14,01 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.71,
+      "index": 10,
+      "label": "Pokój",
+      "raw": "10. Pokój | 10,71 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.43,
+      "index": 11,
+      "label": "Pokój",
+      "raw": "11. Pokój | 10,43 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.64,
+      "index": 12,
+      "label": "Łazienka",
+      "raw": "12. Łazienka | 7,64 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.73,
+      "index": 13,
+      "label": "Pokój",
+      "raw": "13. Pokój | 8,73 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.12,
+      "index": 14,
+      "label": "Pom. gospodarcze",
+      "raw": "14. Pom. gospodarcze | 4,12 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.63,
+      "index": 15,
+      "label": "Korytarz",
+      "raw": "15. Korytarz | 9,63 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.89,
+      "index": 16,
+      "label": "Kotłownia",
+      "raw": "16. Kotłownia | 7,89 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 36.11,
+      "index": 17,
+      "label": "Garaż",
+      "raw": "17. Garaż | 36,11 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Prezentujemy projekt nowoczesnej parterówki z funkcjonalnym układem pomieszczeń i komfortowym wnętrzem. Bryła wzbogacona została o garaż dwustanowiskowy zaprojektowany na frontowej linii elewacji oraz atrakcyjny taras z pergolą od strony ogrodu. Kompozycja elewacji to biało – szare tynki oraz drewniana okładzina, która dodaje naturalnego wyrazu i idealnie kontrastuje z antracytowym kolorem dachówki. Główne wejście zostało praktycznie osłonięte i zaprasza nas do wnętrza, w którym strefa dzienna jest wyraźnie oddzielona od nocnej. Obszerny wiatrołap z pojemną szafą oraz siedziskiem prowadzi do holu, skąd otwiera się widok na przestronny salon i reprezentacyjną jadalnię. Wygodna narożna kanapa umożliwia odpoczynek z widokiem na klimatyczny kominek, natomiast duży stół pozwoli całej rodzinie komfortowo zasiąść przy wspólnym posiłku. Jasna kuchnia w swoim programie obejmuje spiżarnię oraz praktyczną wyspę z siedziskami. Dzięki optymalnie rozmieszczonym przeszkleniom strefa dzienna oferuje wiele światła naturalnego przez długie godziny. Przedłużeniem strefy wypoczynku jest taras, na którym z łatwością znajdziemy miejsce na letnią jadalnię i zestaw ogrodowy. Z holu dostępny jest gabinet, który może posłużyć jako sypialnia gościnna lub biblioteczka oraz toalet i pomieszczenie gospodarcze. Do kotłowni i garażu można przejść przez wiatrołap. Prywatna część domowników mieści apartament z wyjściem na taras, dwa ustawne pokoje dla dzieci oraz łazienkę. Atrakcyjny projekt „Dom w nigellach 4 (G2)” dołącza do kategorii: projekty domów parterowych , projekty domów nowoczesnych ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 30 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 147.88 m² + 36.11 m² + 7.89 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, toaleta, kotłownia, garderoba, pomieszczenie gospodarcze, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+
