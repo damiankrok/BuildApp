@@ -136,3 +136,20 @@ describe('v3.54.2 validator: whole dimensions (READ_DIMENSION)', () => {
     expect(r.spans).toEqual([])
   })
 })
+
+describe('v3.54.2 candidate 2: no ACCEPT whose extent contradicts the consulted overall dimensions', () => {
+  const failed: RunState = { outcome: 'FAILED', code: 'RECONSTRUCTION_FAILED', reasonCode: 'X', metric: { relation: 'R', confidence: 'INCONCLUSIVE' } }
+  const built = (x: number, z: number, px?: number, py?: number, hash = 'm'): RunState => ({ outcome: 'COMPLETED', modelHash: hash, metric: { relation: 'R', confidence: 'SUPPORTED', cmPerPixelX: 1.6 }, extent: { modelX: x, modelZ: z, ...(px ? { printedX: px } : {}), ...(py ? { printedY: py } : {}) } })
+  it('a refusal that becomes a model 67 % deeper than the printed depth is rolled back (sp318422)', () => {
+    const v = compareRuns(failed, built(13.88, 16.03, 14.02, 9.58))
+    expect(v.decision).toBe('ROLLBACK')
+    expect(v.why).toMatch(/^EXTENT_CONTRADICTS/)
+  })
+  it('a model that matches its printed dimensions is accepted (Kukliki 7.56 x 8.76)', () => {
+    expect(compareRuns(failed, built(7.56, 8.76, 7.56, 8.76)).decision).toBe('ACCEPT')
+  })
+  it('only the axes the consultant gave are checked; within 5 % passes', () => {
+    expect(compareRuns(failed, built(14.5, 30, 14.02)).decision).toBe('ACCEPT')
+    expect(compareRuns(failed, built(15.0, 9.58, 14.02, 9.58)).decision).toBe('ROLLBACK')
+  })
+})

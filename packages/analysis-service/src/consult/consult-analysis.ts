@@ -49,6 +49,11 @@ export type RunState = {
   metric?: { relation: string; confidence: string; cmPerPixelX?: number; cmPerPixelY?: number }
   modelHash?: string
   masses?: number
+  /**
+   * v3.54.2 candidate 2: the built ground extent (m, model X along the sheet, Z down it) against the largest consulted
+   * whole dimension the metric layer admitted or found agreeing, per axis. Absent where nothing was consulted.
+   */
+  extent?: { modelX: number; modelZ: number; printedX?: number; printedY?: number }
 }
 
 export type RoundRecord = {
@@ -106,8 +111,33 @@ export function stateOf(l: Local): RunState {
   return { outcome: 'FAILED', code: f?.code, reasonCode: f?.reasonCode ?? null, stage: f?.stage ?? null, ...(frameId ? { frameId } : {}), ...(metric ? { metric } : {}) }
 }
 
-/** ACCEPT / ROLLBACK / PARTIAL of a candidate against the last good state; the rules are the protocol's (PROTOCOL_V3542 §4). */
+/** How far a built extent may be from the printed overall dimension that settled the scale (the size class NEAR is 10 %). */
+export const EXTENT_TOLERANCE = 0.05
+
+/** The built extent disagrees with a consulted overall dimension on some axis: the reason, else undefined. */
+export function extentContradiction(s: RunState): string | undefined {
+  const e = s.extent
+  if (!e) return undefined
+  const off = (built: number, printed?: number): number | undefined => (printed && printed > 0 ? Math.abs(built - printed) / printed : undefined)
+  const dx = off(e.modelX, e.printedX)
+  const dz = off(e.modelZ, e.printedY)
+  if (dx !== undefined && dx > EXTENT_TOLERANCE) return `EXTENT_CONTRADICTS: the model is ${e.modelX.toFixed(2)} m along the sheet where the consulted overall dimension says ${(e.printedX as number).toFixed(2)} m (${Math.round(dx * 100)} %)`
+  if (dz !== undefined && dz > EXTENT_TOLERANCE) return `EXTENT_CONTRADICTS: the model is ${e.modelZ.toFixed(2)} m down the sheet where the consulted overall dimension says ${(e.printedY as number).toFixed(2)} m (${Math.round(dz * 100)} %)`
+  return undefined
+}
+
+/**
+ * ACCEPT / ROLLBACK / PARTIAL of a candidate against the last good state (PROTOCOL_V3542 §4), and (candidate 2, after
+ * the confirmation) no ACCEPT whose built extent contradicts the consulted overall dimensions that settled its scale.
+ */
 export function compareRuns(before: RunState, after: RunState): { decision: RoundRecord['decision']; why: string } {
+  const v = compareRunsScale(before, after)
+  if (v.decision !== 'ACCEPT') return v
+  const why = extentContradiction(after)
+  return why ? { decision: 'ROLLBACK', why: `${why}: the scale is right but the plan the analyzer composed on it is not the drawing's — kept the state before` } : v
+}
+
+function compareRunsScale(before: RunState, after: RunState): { decision: RoundRecord['decision']; why: string } {
   const rb = CONF_RANK[before.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0
   const ra = CONF_RANK[after.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0
   const verified = (s: RunState): boolean => (CONF_RANK[s.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2
@@ -129,6 +159,30 @@ export function compareRuns(before: RunState, after: RunState): { decision: Roun
   }
   if (ra < rb) return { decision: 'ROLLBACK', why: `the scale is less settled than before (${before.metric?.confidence} → ${after.metric?.confidence})` }
   return { decision: 'ROLLBACK', why: 'a different model with no better-settled scale: kept the one before' }
+}
+
+/** The lowest storey's slab extent (m) of a model: X along the sheet, Z down it. */
+function groundExtent(run: AnalysisRun): { x: number; z: number } | undefined {
+  const model = run.reconstruction.model as unknown as { levels?: Array<{ id: string; index: number }>; slabs?: Array<{ levelId?: string; polygon?: Array<{ x: number; z: number }> }> }
+  const lowest = [...(model.levels ?? [])].sort((a, b) => a.index - b.index)[0]
+  const pts = (model.slabs ?? []).filter((s) => s.levelId === lowest?.id).flatMap((s) => s.polygon ?? [])
+  if (pts.length === 0) return undefined
+  const xs = pts.map((p) => p.x)
+  const zs = pts.map((p) => p.z)
+  return { x: Math.max(...xs) - Math.min(...xs), z: Math.max(...zs) - Math.min(...zs) }
+}
+
+/** The largest consulted whole dimension per sheet axis that the metric layer admitted or found agreeing (m). */
+function consultedOverall(metrics: MetricEvidenceSet | undefined, spans: readonly ConsultedSpan[]): { x?: number; y?: number } {
+  const out: { x?: number; y?: number } = {}
+  for (const o of metrics?.consultedSpans ?? []) {
+    if ((o.status !== 'ADMITTED' && o.status !== 'AGREES_ONLY') || o.valueCm === undefined) continue
+    const sp = spans.find((s) => s.proposalId === o.proposalId)
+    if (!sp) continue
+    const axis = Math.abs(sp.to.x - sp.from.x) >= Math.abs(sp.to.y - sp.from.y) ? 'x' : 'y'
+    out[axis] = Math.max(out[axis] ?? 0, o.valueCm / 100)
+  }
+  return out
 }
 
 async function frameRaster(pkg: SourcePackage, graph: SourceObservationGraph, frameId: string, options: AnalysisOptions) {
@@ -228,6 +282,11 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     // the candidate: the same frozen package and graph, the consulted readings, the solver's cross-axis rule
     const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, crossAxisWitness: true })
     const after = stateOf(candidate)
+    if (candidate.run) {
+      const g = groundExtent(candidate.run)
+      const printed = consultedOverall(candidate.metrics, mergedSpans)
+      if (g && (printed.x !== undefined || printed.y !== undefined)) after.extent = { modelX: g.x, modelZ: g.z, ...(printed.x !== undefined ? { printedX: printed.x } : {}), ...(printed.y !== undefined ? { printedY: printed.y } : {}) }
+    }
     rec.after = after
     const verdict = compareRuns(goodState, after)
     rec.decision = verdict.decision
