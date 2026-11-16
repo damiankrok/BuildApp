@@ -31,7 +31,7 @@ export interface JobExecutor {
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
-export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision }
+export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision; /** v3.54.1: read a complete drawings model as well (`analyseLink` readEveryModel); only with a reader, only for an allowed submission. */ readEveryModel?: boolean }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
 export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: Partial<JobControl>): Promise<JobOutput> {
@@ -40,7 +40,7 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
     {
       adapters: wiring.adapters,
       // the paid reader only for a submission that was allowed it; every other job is the drawings' path alone
-      ...(wiring.houseReader && input.describe === true ? { houseReader: wiring.houseReader, ...(control.onDescribing ? { onDescribing: control.onDescribing } : {}) } : {}),
+      ...(wiring.houseReader && input.describe === true ? { houseReader: wiring.houseReader, ...(wiring.readEveryModel === true ? { readEveryModel: true } : {}), ...(control.onDescribing ? { onDescribing: control.onDescribing } : {}) } : {}),
       deps: wiring.deps,
       policy: wiring.policy,
       vision: wiring.vision,

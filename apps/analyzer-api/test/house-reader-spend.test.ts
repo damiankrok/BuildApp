@@ -355,6 +355,20 @@ describe('who may reach the paid reader, and when it is on at all', () => {
     expect(legacyVisionOn({ ANALYZER_VISION: 'live', ANALYZER_VISION_UNBOUNDED_SPEND: 'accept' })).toBe(true)
     expect(loadConfig({ ANALYZER_VISION: 'live', ANALYZER_VISION_UNBOUNDED_SPEND: 'accept' }).vision).toBe('live')
   })
+  it('reading every model as well is a separate switch, and only ever with the reader on (v3.54.1)', () => {
+    const dataDir = mkdtempSync(join(tmpdir(), 'wiring-every-'))
+    try {
+      expect(productionWiring({ ...on, ANALYZER_DATA_DIR: dataDir }).readEveryModel).toBeUndefined()
+      expect(productionWiring({ ...on, ANALYZER_DATA_DIR: dataDir, ANALYZER_HOUSE_READER_EVERY_MODEL: 'on' }).readEveryModel).toBe(true)
+      expect(productionWiring({ ...on, ANALYZER_DATA_DIR: dataDir, ANALYZER_HOUSE_READER_EVERY_MODEL: 'yes' }).readEveryModel).toBeUndefined()
+      // without the reader the switch does nothing: no reader, nothing read
+      const off = productionWiring({ ANALYZER_HOUSE_READER_EVERY_MODEL: 'on' })
+      expect(off.houseReader).toBeUndefined()
+      expect(off.readEveryModel).toBeUndefined()
+    } finally {
+      rmSync(dataDir, { recursive: true, force: true })
+    }
+  })
   it('with nothing configured the production wiring holds no reader of any kind', () => {
     const w = productionWiring({})
     expect(w.houseReader).toBeUndefined()

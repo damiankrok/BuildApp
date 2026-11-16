@@ -65,6 +65,8 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
     const plan = houseReaderPlan(env)
     if (!plan.on) return {}
     const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })
-    return { houseReader: spendGuardedStructuredVision(anthropicStructuredVision({ model: plan.model, triageModel: plan.triageModel }), ledger, { limits: plan.limits }) }
+    // v3.54.1: `ANALYZER_HOUSE_READER_EVERY_MODEL=on` also reads a complete drawings model (one reading per allowed job)
+    // and prefers the description only where it shows that model short of the house; off, as before
+    return { houseReader: spendGuardedStructuredVision(anthropicStructuredVision({ model: plan.model, triageModel: plan.triageModel }), ledger, { limits: plan.limits }), ...(env.ANALYZER_HOUSE_READER_EVERY_MODEL === 'on' ? { readEveryModel: true } : {}) }
   })(),
 })
