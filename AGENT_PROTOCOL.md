@@ -10,7 +10,8 @@ mode (bounded slice or campaign), acceptance scope and actual runtime capabiliti
 If HEAD changed since the brief, reconcile the affected diff; do not reset work
 or repeat the entire audit. Preserve unrelated working-tree changes.
 
-Product requirements live in `APP_SPEC.md` and the OWNER's current Master Plan;
+Product requirements live in `APP_SPEC.md` and the OWNER's current Master Plan, kept at one canonical
+address: `docs/MASTER_PLAN.md` (replaced whole when the OWNER issues a new version, never rebuilt from memory);
 analyzer semantics in `docs/ANALYZER_CONTRACT.md`; execution facts and the current
 NEXT in `PROJECT_STATUS.md`. A report is evidence at its revision, not a new
 instruction. Update only facts the work changed, without copying full history.
