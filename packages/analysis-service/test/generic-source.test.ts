@@ -23,7 +23,7 @@ import type { HouseDescription } from '@buildapp/source-vision'
 import { buildingFromHouseDescription, reconstructFromHouseDescription } from '@buildapp/reconstruction'
 import { readFileSync } from 'node:fs'
 import type { StructuredVision } from '@buildapp/source-vision'
-import { AnalysisError, analyseLink, identityOf, anchorsOfDrawings, describedFollowUp, drawingsModelUnanchored, drawingsWeaknesses, runDescribedAnalysis, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
+import { AnalysisError, analyseLink, identityOf, anchorsOfDrawings, descriptionExceedsDrawings, describedFollowUp, drawingsModelUnanchored, drawingsWeaknesses, runDescribedAnalysis, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
 
 import { HOST, PAGE, unknownPublisher } from './support/unknown-publisher.js'
 
@@ -258,6 +258,11 @@ describe('after a drawings model: the description only where the model is weak b
     expect(anchors.partial).toBeUndefined()
     expect(anchors.bodies?.[0]?.role).toBe('MAIN')
     expect(anchors.storeyHeightM?.value).toBeGreaterThan(2.2)
+    // v3.54.1: a storey height is floor to floor; the only level of a one-floor model is not one, and is not passed
+    const levels = run.reconstruction.building.levels
+    if (levels.length >= 2) expect(anchors.storeyHeightM?.value).toBeCloseTo(levels[1].elevation - levels[0].elevation, 3)
+    const oneFloor = { ...run, reconstruction: { ...run.reconstruction, building: { ...run.reconstruction.building, levels: [{ ...levels[0], height: 7.34 }] } } }
+    expect(anchorsOfDrawings(oneFloor).storeyHeightM).toBeUndefined()
     const roofless = { ...run, result: { ...run.result, preview: { ...run.result.preview, built: { ...run.result.preview.built, roofs: 0, roofPlanes: 0 } } } }
     const next = describedFollowUp(roofless)
     expect(next?.after).toEqual({ code: 'DRAWINGS_MODEL_WEAK', reasonCode: 'NO_ROOF_BUILT' })
@@ -355,3 +360,45 @@ describe('what a drawings run measured, and of what: anchors on the measures of 
     expect(unverified).toEqual({})
   })
 })
+
+describe('a complete drawings model read as well, and kept unless the reading shows it short (v3.54.1)', () => {
+  const measured = { widthM: 7.39, depthM: 12.5, premise: 'COMPLETE_OUTLINE' as const, why: 'the walls the drawings place at a verified scale span 7.39 × 12.50 m' }
+  const read = (widthM: number, depthM: number, basis: 'PRINTED_ON_DRAWING' | 'SCALED_FROM_DRAWING' | 'PUBLISHED_ON_PAGE' = 'PRINTED_ON_DRAWING') => ({ overall: { widthM, depthM, basis, printedWidthLabel: '', printedDepthLabel: '', ridgeHeightM: 6, ridgeHeightBasis: 'ESTIMATED' as const, storeyHeightM: 2.8 } }) as never
+  it('a printed size beyond the drawings\' outline on one axis shows the model short; the same sizes agreeing do not', () => {
+    expect(descriptionExceedsDrawings({ overall: measured }, read(7.9, 11.6))).toMatchObject({ exceeds: true })
+    expect(descriptionExceedsDrawings({ overall: measured }, read(7.9, 11.6)).why).toMatch(/7\.9 m is printed where the drawings' outline reaches 7\.39 m/)
+    expect(descriptionExceedsDrawings({ overall: measured }, read(7.45, 12.4)).exceeds).toBe(false)
+    // the axes swapped round by the reader: paired by fit, not by name
+    expect(descriptionExceedsDrawings({ overall: measured }, read(12.4, 8.2)).exceeds).toBe(true)
+  })
+  it('a size scaled, estimated or published is no evidence; nor is a printed size SHORTER than the outline; nor an unpaired one', () => {
+    expect(descriptionExceedsDrawings({ overall: measured }, read(7.9, 13, 'SCALED_FROM_DRAWING')).exceeds).toBe(false)
+    expect(descriptionExceedsDrawings({ overall: measured }, read(7.9, 13, 'PUBLISHED_ON_PAGE')).exceeds).toBe(false)
+    expect(descriptionExceedsDrawings({ overall: measured }, read(6.9, 11.6)).exceeds).toBe(false)
+    expect(descriptionExceedsDrawings({ overall: { ...measured, widthM: 10, depthM: 11 } }, read(10.9, 9.2)).exceeds).toBe(false)
+    expect(descriptionExceedsDrawings({}, read(7.9, 11.6)).exceeds).toBe(false)
+  })
+  it('through analyseLink: with readEveryModel the reader is asked after a complete model, and the decision is stated either way', async () => {
+    const asked: string[] = []
+    const reader: StructuredVision = {
+      provider: { id: 'house-reader.test', model: 'none', triageModel: 'none', version: 'test' },
+      available: () => true,
+      ask: async (request) => {
+        asked.push(request.purpose)
+        return { output: request.purpose === 'HOUSE_TRIAGE' ? { pictures: request.pictures.map((p) => ({ picture: p.number, kind: 'ELEVATION', duplicateOf: 0 })) } : JSON.parse(readFileSync(new URL('../../reconstruction/test/fixtures/described-house-a.json', import.meta.url), 'utf8')), usage: { latencyMs: 0, model: 'none' } }
+      },
+    }
+    const site = unknownPublisher()
+    const base = { adapters: [genericProjectPageAdapter], deps: site.deps, cache: memoryByteCache(), now: () => new Date('2026-01-01T00:00:00Z') }
+    const plain = await analyseLink({ kind: 'URL', url: PAGE }, { ...base, houseReader: reader })
+    expect(plain.basis).toBe('DRAWINGS')
+    expect(asked).toEqual([])
+    const checked = await analyseLink({ kind: 'URL', url: PAGE }, { ...base, cache: memoryByteCache(), houseReader: reader, readEveryModel: true })
+    expect(asked).toContain('HOUSE_DESCRIPTION')
+    expect(checked.descriptionCheck?.decision).toBeDefined()
+    expect(checked.basis === 'DESCRIPTION').toBe(checked.descriptionCheck?.decision === 'DESCRIPTION_PREFERRED')
+    // kept: the drawings' model is byte for byte the one built without the reading
+    if (checked.basis === 'DRAWINGS' && plain.basis === 'DRAWINGS') expect(checked.result.modelSha256).toBe(plain.result.modelSha256)
+  })
+})
+

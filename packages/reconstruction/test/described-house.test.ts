@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { checkHouseDescription } from '@buildapp/source-vision'
 import type { HouseDescription } from '@buildapp/source-vision'
-import { buildingFromHouseDescription, reconstructFromHouseDescription } from '../src/index.js'
+import { buildingFromHouseDescription, perAxisFromWalls, reconstructFromHouseDescription } from '../src/index.js'
 
 const fixture = (): HouseDescription => {
   const checked = checkHouseDescription(JSON.parse(readFileSync(new URL('./fixtures/described-house-a.json', import.meta.url), 'utf8')))
@@ -506,5 +506,38 @@ describe('described house — a measure is a measure OF something (v3.53.2)', ()
     const none = buildingFromHouseDescription(scaled, { anchors: { bodies: [{ role: 'MAIN', widthM: 20, depthM: 5, why: 'measured' }] } })
     expect(none.adjustments.find((a) => a.code === 'DRAWINGS_MEASURE_NOT_APPLIED')?.why).toMatch(/no described body of that role has its shape/)
     expect(none.adjustments.map((a) => a.code)).not.toContain('SCALED_TO_DRAWINGS_LOCAL_MEASURE')
+  })
+})
+
+describe('a measured complete outline held axis by axis (v3.54.1)', () => {
+  // one body, w × dep, read printed (a reader may take a chain's segment for its total)
+  const one = (w: number, dep: number): HouseDescription => {
+    const d = fixture()
+    return { ...d, overall: { ...d.overall, widthM: w, depthM: dep, basis: 'PRINTED_ON_DRAWING', printedWidthLabel: String(w * 100), printedDepthLabel: String(dep * 100) }, bodies: [{ ...d.bodies[0], x0: 0, x1: w, z0: 0, z1: dep }], openings: [], dormers: [], rooflights: [], chimneys: [], balconies: [], terraces: [], canopies: [] }
+  }
+  const size = (b: ReturnType<typeof buildingFromHouseDescription>) => ({ w: Math.max(...b.building.masses.map((m) => m.x1)), dep: Math.max(...b.building.masses.map((m) => m.z1)) })
+  const walls = (w: number, dep: number) => ({ widthM: w, depthM: dep, premise: 'COMPLETE_OUTLINE' as const, why: `the walls the drawings place at a verified scale span ${w} × ${dep} m` })
+
+  it('walls placed beyond the described depth refute it: that axis takes the walls; a described width the walls do not reach is kept', () => {
+    // described 7.9 × 11.6 (the depth a chain's segment), walls 7.39 × 12.5 (one part of the front not built)
+    const out = buildingFromHouseDescription(one(7.9, 11.6), { anchors: { overall: walls(7.39, 12.5) } })
+    expect(size(out).w).toBeCloseTo(7.9, 2)
+    expect(size(out).dep).toBeCloseTo(12.5, 2)
+    const a = out.adjustments.find((x) => x.code === 'SCALED_TO_DRAWINGS_MEASURE_PER_AXIS')
+    expect(a?.why).toMatch(/along the depth the walls placed span 12\.50 m/)
+    expect(a?.why).toMatch(/along the front the 7\.90 m described is kept/)
+    expect(out.adjustments.map((x) => x.code)).not.toContain('DRAWINGS_MEASURE_NOT_APPLIED')
+  })
+
+  it('two readings of print that disagree (overall dimension lines against a printed size) are named, not settled', () => {
+    const out = buildingFromHouseDescription(one(7.9, 11.6), { anchors: { overall: { ...walls(7.39, 12.5), premise: 'OVERALL_DIMENSION_LINES' } } })
+    expect(size(out)).toEqual({ w: 7.9, dep: 11.6 })
+    expect(out.adjustments.map((x) => x.code)).toContain('DRAWINGS_MEASURE_NOT_APPLIED')
+  })
+
+  it('an axis pairing that is not plain applies nothing: a near-square house cannot say which measure is its front', () => {
+    expect(perAxisFromWalls(walls(10, 11), 10.9, 9.2)).toBeUndefined()
+    // and two axes that agree within the tolerance are not "held": nothing to change
+    expect(perAxisFromWalls(walls(7.5, 12.4), 7.6, 12.2)).toBeUndefined()
   })
 })

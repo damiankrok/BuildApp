@@ -28,7 +28,8 @@ import { planeAt, planeRoofLayout } from './plane-roof.js'
 import { emitBuilding, pitchedPlaneIds, planeRoofPlaneId } from './emit.js'
 import { buildCandidateModel, fitPreviewProgram } from '../candidate.js'
 
-export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.7.0'
+// 0.8.0 (v3.54.1): a measured COMPLETE outline is held axis by axis where its proportion disagrees (perAxisFromWalls)
+export const DESCRIBED_HOUSE_BUILDER_VERSION = '0.8.0'
 export const DESCRIBED_HOUSE_LABEL = 'MODEL Z OPISU ŹRÓDEŁ'
 
 export type DescribedAdjustmentCode =
@@ -36,6 +37,7 @@ export type DescribedAdjustmentCode =
   | 'BODIES_RESCALED_TO_OVERALL'
   | 'SCALED_TO_PUBLISHED_FIGURE'
   | 'SCALED_TO_DRAWINGS_MEASURE'
+  | 'SCALED_TO_DRAWINGS_MEASURE_PER_AXIS'
   | 'DRAWINGS_MEASURE_NOT_APPLIED'
   | 'SCALED_TO_DRAWINGS_LOCAL_MEASURE'
   | 'DRAWINGS_LOCAL_MEASURE_AGREES'
@@ -162,6 +164,36 @@ export type DescribedAnchors = {
 
 export type DescribedBuildOptions = { published?: PublishedFigure[]; anchors?: DescribedAnchors }
 
+/** How far two lengths of one axis may differ and still be the same measure (outer faces against axes, rounding). */
+export const AXIS_AGREEMENT = 0.05
+/**
+ * v3.54.1 — the whole outline measured, held axis by axis where the proportion as a whole disagrees.
+ *
+ * Only a COMPLETE_OUTLINE measure is held this way: walls the drawings PLACE at a verified scale. Walls that stand
+ * beyond the span the description gives on an axis refute that span — whatever was read printed — so that axis takes
+ * the walls' extent. A described span LONGER than the walls is kept: the drawings' outline may be short of the house
+ * on that axis (a part it did not build), and nothing placed contradicts the description there. An extent framed by
+ * overall dimension lines is a reading of print, as the description's is; where two readings of print disagree the
+ * disagreement is named, not settled (the caller's DRAWINGS_MEASURE_NOT_APPLIED). Which measured axis is which
+ * described axis must be plain: one pairing within 15 % on both axes and the other beyond 25 % on one; else nothing.
+ */
+export function perAxisFromWalls(whole: NonNullable<DescribedAnchors['overall']>, spanX: number, spanZ: number): { kx: number; kz: number; why: string } | undefined {
+  if (whole.premise !== 'COMPLETE_OUTLINE' || !(spanX > 0) || !(spanZ > 0)) return undefined
+  const off = (a: number, b: number): number => Math.abs(a / b - 1)
+  const direct = Math.max(off(whole.widthM, spanX), off(whole.depthM, spanZ))
+  const swapped = Math.max(off(whole.depthM, spanX), off(whole.widthM, spanZ))
+  const pairing = direct <= 0.15 && swapped > 0.25 ? { x: whole.widthM, z: whole.depthM } : swapped <= 0.15 && direct > 0.25 ? { x: whole.depthM, z: whole.widthM } : undefined
+  if (!pairing) return undefined
+  const axis = (walls: number, span: number, name: string): { k: number; said: string } =>
+    span < walls * (1 - AXIS_AGREEMENT)
+      ? { k: walls / span, said: `along ${name} the walls placed span ${walls.toFixed(2)} m, beyond the ${span.toFixed(2)} m described: scaled by ${(walls / span).toFixed(3)}` }
+      : { k: 1, said: span > walls * (1 + AXIS_AGREEMENT) ? `along ${name} the ${span.toFixed(2)} m described is kept: the walls placed (${walls.toFixed(2)} m) do not reach it, and nothing placed contradicts it` : `along ${name} the two agree` }
+  const ax = axis(pairing.x, spanX, 'the front')
+  const az = axis(pairing.z, spanZ, 'the depth')
+  if (ax.k === 1 && az.k === 1) return undefined
+  return { kx: ax.k, kz: az.k, why: `${ax.said}; ${az.said}` }
+}
+
 export function buildingFromHouseDescription(input: HouseDescription, options: DescribedBuildOptions = {}): DescribedBuilding {
   const adjustments: DescribedAdjustment[] = []
   const adj = (code: DescribedAdjustmentCode, subject: string, why: string): void => void adjustments.push({ code, subject, why })
@@ -189,6 +221,7 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   let kp = 1
   // What the drawings measured sets the size — within what each measure is a measure of.
   let anchored = false
+  let perAxis: { kx: number; kz: number; why: string } | undefined
   const sameShape = (aw: number, ad: number, w: number, dep: number): number | undefined => {
     // held both ways round (the two paths need not agree on which side is the front); one factor where both axes ask for the same one
     const ways = ([[aw, ad], [ad, aw]] as const).map(([p, q]) => ({ ax: p / w, az: q / dep })).filter((c) => Math.abs(c.ax / c.az - 1) < 0.1).map((c) => (c.ax + c.az) / 2)
@@ -200,10 +233,15 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
   if (whole && spanX > 0 && spanZ > 0) {
     // The whole outline, measured: the walls' extent as described is held against it. Proportions that disagree are not forced.
     const k = sameShape(whole.widthM, whole.depthM, spanX, spanZ)
+    const axes = k === undefined ? perAxisFromWalls(whole, spanX, spanZ) : undefined
     if (k !== undefined) {
       anchored = true
       kp = k
       adj('SCALED_TO_DRAWINGS_MEASURE', 'frame', `${whole.why}: the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, every position scaled by ${k.toFixed(3)}`)
+    } else if (axes) {
+      anchored = true
+      perAxis = axes
+      adj('SCALED_TO_DRAWINGS_MEASURE_PER_AXIS', 'frame', `${whole.why}, and the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m: ${axes.why}`)
     } else adj('DRAWINGS_MEASURE_NOT_APPLIED', 'frame', `${whole.why}, but the walls as described span ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m — another proportion: the description keeps its own size`)
   } else if (local.length > 0) {
     // A measured BODY constrains the body it is, where that body can be told: one of the same role and the same shape.
@@ -249,8 +287,8 @@ export function buildingFromHouseDescription(input: HouseDescription, options: D
       adj('SCALED_TO_PUBLISHED_FIGURE', 'frame', `the overall size is ${d.overall.basis.toLowerCase().replace(/_/g, ' ')} (${d.overall.widthM} × ${d.overall.depthM} m) and ${c.why}: every position scaled by ${c.k.toFixed(3)} — approximate, a published figure is not a dimension confirmed on a drawing`)
     }
   }
-  const kx = anchored ? kp : rescale ? (fx + fz) / 2 : kp
-  const kz = kx
+  const kx = perAxis ? perAxis.kx : anchored ? kp : rescale ? (fx + fz) / 2 : kp
+  const kz = perAxis ? perAxis.kz : kx
   if (Math.abs(minX) > 1e-6 || Math.abs(minZ) > 1e-6) adj('FRAME_SHIFTED', 'frame', `the bodies started at x ${minX.toFixed(2)}, z ${minZ.toFixed(2)}: moved to the origin`)
   if (rescale && !anchored) adj('BODIES_RESCALED_TO_OVERALL', 'frame', `the bodies spanned ${spanX.toFixed(2)} × ${spanZ.toFixed(2)} m, the overall size is stated as ${d.overall.widthM} × ${d.overall.depthM} m: every position scaled by ${kx.toFixed(3)}`)
   const X = (x: number): number => (x - minX) * kx

@@ -20,11 +20,12 @@
  * Cost, stated: the described path starts only after the whole drawings' path has run. Its weaknesses cannot be known
  * sooner without reading every house twice.
  */
-import type { StructuredVision } from '@buildapp/source-vision'
+import type { HouseDescription, StructuredVision } from '@buildapp/source-vision'
 import { AnalysisError } from './errors.js'
 import { identityOf } from './identity.js'
 import { DescribedRefusal, runDescribedAnalysis } from './described.js'
 import type { DescribedProgress, DescribedRun, DescribingEvent, ReadHooks } from './described.js'
+import { AXIS_AGREEMENT } from '@buildapp/reconstruction'
 import type { DescribedAnchors } from '@buildapp/reconstruction'
 import { runAnalysis } from './run.js'
 import type { AnalysisInput, AnalysisOptions, AnalysisRun } from './run.js'
@@ -33,8 +34,10 @@ import type { SourcePackage } from '@buildapp/source-package'
 import type { LinkAnalysisSummary } from './result.js'
 import type { AnalysisProgress } from './stages.js'
 
-export type DrawingsRun = AnalysisRun & { basis: 'DRAWINGS' }
-export type LinkAnalysis = DrawingsRun | (DescribedRun & { /** The drawings' own model, where it built one the description was preferred to. */ alternative?: AnalysisRun })
+/** v3.54.1: where a complete drawings model was read as well (`readEveryModel`), what the reading decided and why. */
+export type DescriptionCheck = { decision: 'DRAWINGS_KEPT' | 'DESCRIPTION_PREFERRED' | 'DESCRIPTION_REFUSED'; why: string }
+export type DrawingsRun = AnalysisRun & { basis: 'DRAWINGS'; descriptionCheck?: DescriptionCheck }
+export type LinkAnalysis = DrawingsRun | (DescribedRun & { /** The drawings' own model, where it built one the description was preferred to. */ alternative?: AnalysisRun; descriptionCheck?: DescriptionCheck })
 
 /**
  * A drawings model in which nothing metric rests on a printed dimension: its scale is not verified by the drawing's
@@ -78,7 +81,7 @@ export function drawingsWeaknesses(result: Pick<LinkAnalysisSummary, 'preview' |
  *    extent of the walls it placed. A partial model's built extent is never the whole: a verified scale says the
  *    part is that big, not that the part is the house.
  *  - Each BODY it placed, as a measure of that body alone.
- *  - A storey height, where a level was measured.
+ *  - A storey height, where the drawings placed two floors (floor to floor; v3.54.1).
  */
 export function anchorsOfDrawings(run: Pick<AnalysisRun, 'result' | 'reconstruction' | 'planDiagnostics'>): DescribedAnchors {
   const codes = new Set(run.result.preview.provisional.map((p) => p.code))
@@ -103,9 +106,36 @@ export function anchorsOfDrawings(run: Pick<AnalysisRun, 'result' | 'reconstruct
     if (bodies.length > 0) out.bodies = bodies
     if (partial) out.partial = true
   }
-  const ground = run.reconstruction.building.levels[0]
-  if (!codes.has('HEIGHT_ASSUMED_FOR_PREVIEW') && ground && ground.height > 2) out.storeyHeightM = { value: ground.height, why: `the drawings measure a ground storey ${ground.height.toFixed(2)} m high` }
+  // v3.54.1: a storey height is a floor-to-floor measure — between two floors the drawings placed. The only level of a
+  // one-storey model is as tall as its section reads it (to the eaves, or to the ridge of a vaulted room): that is not
+  // the height of a storey, and a description built on it would be stretched to it.
+  const [ground, above] = [...run.reconstruction.building.levels].sort((a, b) => a.index - b.index)
+  const floorToFloor = ground && above ? above.elevation - ground.elevation : undefined
+  if (!codes.has('HEIGHT_ASSUMED_FOR_PREVIEW') && floorToFloor !== undefined && floorToFloor > 2) out.storeyHeightM = { value: Number(floorToFloor.toFixed(3)), why: `the drawings place the next floor ${floorToFloor.toFixed(2)} m above the ground floor` }
   return out
+}
+
+/**
+ * v3.54.1 — does the description show a drawings model that is complete by its own account to be SHORT of the house?
+ * Per axis: the reader read the overall size printed on a drawing, and that size exceeds the whole outline the
+ * drawings measured by more than `AXIS_AGREEMENT` — the drawings' walls do not reach a length printed for the house.
+ * A size the reader scaled, estimated or took from the page's figures is no such evidence; neither is a printed size
+ * shorter than the drawings' outline (that one is refuted by the walls, `perAxisFromWalls`). Which measured axis is
+ * which described axis must be plain (one pairing within 15 % on both axes, the other beyond 25 % on one).
+ */
+export function descriptionExceedsDrawings(anchors: DescribedAnchors, description: Pick<HouseDescription, 'overall'>): { exceeds: boolean; why: string } {
+  const whole = anchors.overall
+  const o = description.overall
+  if (!whole) return { exceeds: false, why: 'the drawings measured no whole outline to hold the description against' }
+  if (o.basis !== 'PRINTED_ON_DRAWING') return { exceeds: false, why: `the description's overall size is ${o.basis.toLowerCase().replace(/_/g, ' ')}, not read printed on a drawing` }
+  const off = (a: number, b: number): number => Math.abs(a / b - 1)
+  const direct = Math.max(off(o.widthM, whole.widthM), off(o.depthM, whole.depthM))
+  const swapped = Math.max(off(o.widthM, whole.depthM), off(o.depthM, whole.widthM))
+  const pairs = direct <= 0.15 && swapped > 0.25 ? [[o.widthM, whole.widthM], [o.depthM, whole.depthM]] : swapped <= 0.15 && direct > 0.25 ? [[o.widthM, whole.depthM], [o.depthM, whole.widthM]] : undefined
+  if (!pairs) return { exceeds: false, why: `${o.widthM} × ${o.depthM} m printed and ${whole.widthM} × ${whole.depthM} m measured cannot be paired axis by axis` }
+  const over = pairs.filter(([printed, measured]) => printed > measured * (1 + AXIS_AGREEMENT))
+  if (over.length === 0) return { exceeds: false, why: `the printed ${o.widthM} × ${o.depthM} m does not exceed the measured ${whole.widthM} × ${whole.depthM} m` }
+  return { exceeds: true, why: over.map(([printed, measured]) => `${printed} m is printed where the drawings' outline reaches ${measured.toFixed(2)} m`).join('; ') }
 }
 
 /** The drawings-path refusals after which the page's pictures are still worth reading as a whole. */
@@ -128,6 +158,12 @@ export type LinkAnalysisOptions = AnalysisOptions & {
   onDescribing?: (event: DescribingEvent) => void
   /** The pictures sent to the reader, with their bytes: for a host that keeps them beside the job. */
   onPictures?: ReadHooks['onPictures']
+  /**
+   * v3.54.1: read the page as a whole after a drawings model that is complete by its own account as well, and prefer
+   * the description only where it shows that model short of the house (`descriptionExceedsDrawings`). Costs one
+   * reading on every link a reader is allowed on; off, a complete drawings model is the answer unread, as before.
+   */
+  readEveryModel?: boolean
 }
 
 /**
@@ -175,6 +211,20 @@ export async function analyseLink(input: AnalysisInput, options: LinkAnalysisOpt
   try {
     const run = await runAnalysis(input, { ...options, ...(options.progress ? { progress: fromDrawings } : {}) })
     const next = describedFollowUp(run)
+    if (reader && reader.available() && !next && options.readEveryModel && !options.signal?.aborted) {
+      // complete by its own account: read all the same, and the drawings' model stays the answer unless the reading
+      // shows it short of the house — on the drawings' measures, axis by axis
+      const anchors = anchorsOfDrawings(run)
+      try {
+        const described = await describe(run.pkg, { code: 'DRAWINGS_MODEL_CHECKED', reasonCode: 'READ_EVERY_MODEL' }, anchors)
+        const check = descriptionExceedsDrawings(anchors, described.reading.description)
+        if (check.exceeds) return { ...described, alternative: run, descriptionCheck: { decision: 'DESCRIPTION_PREFERRED', why: check.why } }
+        return { basis: 'DRAWINGS', ...run, descriptionCheck: { decision: 'DRAWINGS_KEPT', why: check.why } }
+      } catch (e) {
+        if (options.signal?.aborted) throw e
+        return { basis: 'DRAWINGS', ...run, descriptionCheck: { decision: 'DESCRIPTION_REFUSED', why: e instanceof DescribedRefusal ? `${e.code}: ${e.message.slice(0, 200)}` : String((e as Error)?.message ?? e).slice(0, 200) } }
+      }
+    }
     if (reader && reader.available() && next && !options.signal?.aborted) {
       // weak by its own account: the page read as a whole is asked for, on the measures the drawings do give, and the
       // drawings' model is kept beside it; if the description is refused, the drawings' model is the answer
