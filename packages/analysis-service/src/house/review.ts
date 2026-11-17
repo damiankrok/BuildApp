@@ -57,7 +57,7 @@ export const REVIEW_TOOL = {
             rightX: { type: 'number' },
             eavesY: { type: ['number', 'null'] },
             ridgeY: { type: ['number', 'null'] },
-            id: { type: 'string', description: 'The id of the opening or feature to remove or replace (as listed), or a new id for a new feature.' },
+            id: { type: 'string', description: 'REMOVE_*: the id to remove, as listed. ADD_OPENING: omit for a NEW opening; give the id of a listed opening to CORRECT that opening (move it, resize it, change its kind) — never add a second opening where one is listed. SET_FEATURE: the listed id to correct it, or a new id.' },
             kind: { type: 'string', description: 'For ADD_OPENING: WINDOW, DOOR, GLAZED_DOOR, GARAGE_DOOR. For SET_FEATURE: WALL_DORMER_GABLE, ROOF_DORMER_GABLE, ROOF_DORMER_SHED, BALCONY, CANOPY.' },
             box: box,
             level: { type: 'integer', minimum: 0, maximum: 3 },
@@ -123,6 +123,13 @@ export function applyCorrection(doc: unknown, c: ReviewCorrection, sent: SentPic
     case 'ADD_OPENING': {
       if (!el) return needEl() as { code: string; why: string }
       if (!c.box || !c.kind || !OPENING_KINDS.includes(c.kind)) return { code: 'PARSE_REJECTED', why: 'an opening needs a kind and a box' }
+      // with the id of an opening that was read: that opening corrected (moved, resized, another kind), not a second one
+      const at = c.id ? el.openings.findIndex((x) => x.id === c.id) : -1
+      if (at >= 0) {
+        const old = el.openings[at]
+        el.openings[at] = { id: old.id, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : old.bodyId ? { bodyId: old.bodyId } : {}), ...(typeof c.level === 'number' ? { level: c.level } : typeof old.level === 'number' ? { level: old.level } : {}), ...(old.inFeature ? { inFeature: old.inFeature } : {}) }
+        return { doc: next, subject: `${el.id}/${String(old.id)} (corrected)` }
+      }
       let n = el.openings.length + 1
       while (el.openings.some((x) => x.id === `o${n}`)) n += 1
       el.openings.push({ id: `o${n}`, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : {}), ...(typeof c.level === 'number' ? { level: c.level } : {}) })
@@ -167,9 +174,14 @@ const score = (h: CompiledHouse): { failing: Set<string>; trouble: number; built
 export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op: string): { ok: true; effect: string } | { ok: false; code: string; why: string } {
   if (after.rejected) return { ok: false, code: 'PARSE_REJECTED', why: after.rejected.slice(0, 2).join('; ') }
   if (!after.bundle) return { ok: false, code: 'HELD_BY_DEPENDENCY', why: 'the corrected observations no longer resolve to a geometry' }
-  if (after.modelHash === before.modelHash) return { ok: false, code: 'NOT_CONSUMED', why: 'the built model is the same with it: the correction reached no geometry' }
   const a = score(before)
   const b = score(after)
+  if (after.modelHash === before.modelHash) {
+    // nothing was built of it: say what stopped it, when the builder said
+    const known = new Set(before.document.verification.held.map((h) => `${h.ref}|${h.code}`))
+    const stopped = after.document.verification.held.filter((h) => !known.has(`${h.ref}|${h.code}`))[0]
+    return stopped ? { ok: false, code: stopped.code, why: `not built: ${stopped.ref}: ${stopped.why.slice(0, 200)}` } : { ok: false, code: 'NOT_CONSUMED', why: 'the built model is the same with it: the correction reached no geometry' }
+  }
   const newFailures = [...b.failing].filter((id) => !a.failing.has(id))
   if (newFailures.length > 0) return { ok: false, code: 'CONFLICT_OPEN', why: `with it a source check fails that passed before: ${newFailures.join(', ')}` }
   const removes = op === 'REMOVE_OPENING' || op === 'REMOVE_FEATURE'

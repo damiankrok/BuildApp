@@ -243,8 +243,8 @@ export const READING_TOOLS = {
                   required: ['id', 'kind', 'box', 'bodyId', 'note'],
                   properties: {
                     id: bodyId,
-                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'CHIMNEY', 'BAY', 'OTHER'], description: 'WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves. ROOF_DORMER_*: a dormer standing on the slope, set back from the wall. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing.' },
-                    box: { ...box, description: 'For a dormer: its own WALLS left to right and from its apex down to the eaves of the main roof. For a balcony: its slab and railing.' },
+                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'CHIMNEY', 'BAY', 'OTHER'], description: 'WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves (often with a balcony door). ROOF_DORMER_*: a dormer standing on the slope, set back from the wall, its foot above the eaves. CROSS_GABLE: a front-facing gable as wide as a wing, rising from the facade. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing. Give eavesY and apexY for every dormer and cross gable.' },
+                    box: { ...box, description: 'For a dormer: x0..x1 are the outer faces of its own two side WALLS (not the wider overhang of its roof), y0 its apex, y1 the foot of its front wall. For a balcony: its slab and railing. For a canopy: the roof plate. For a chimney: the stack above the roof.' },
                     bodyId: bodyId,
                     eavesY: { type: ['number', 'null'], description: 'Dormers only: the row where the dormer\'s own roof meets the top of its SIDE WALLS (not the lower tip of its overhanging roof).' },
                     apexY: { type: ['number', 'null'], description: 'Dormers only: the row of its apex or top.' },
@@ -329,6 +329,17 @@ export type ReadingContext = {
   replayOnly?: boolean
   record: (r: ReadingRecord) => void
   signal?: AbortSignal
+}
+
+/** The tool with every `bodyId` field limited to the bodies the plan defined: a facade is bound to a body of the plan or to none. */
+export function withBodyIds<T extends { name: string; description: string; input_schema: unknown }>(tool: T, ids: readonly string[]): { name: string; description: string; input_schema: unknown } {
+  const walk = (node: unknown, key?: string): unknown => {
+    if (Array.isArray(node)) return node.map((x) => walk(x))
+    if (node === null || typeof node !== 'object') return node
+    if (key === 'bodyId' && (node as { type?: unknown }).type === 'string') return { type: 'string', enum: [...ids] }
+    return Object.fromEntries(Object.entries(node as Record<string, unknown>).map(([k, v]) => [k, walk(v, k)]))
+  }
+  return ids.length > 0 ? { name: tool.name, description: tool.description, input_schema: walk(tool.input_schema) } : tool
 }
 
 /**
@@ -464,5 +475,5 @@ Call describe_facades:
 - roofs: the roof of each body;
 - elevations: one entry per elevation picture. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box, and the roof features (dormers, balconies, canopies, chimneys).
 A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.`
-  return { answer: await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, READING_TOOLS.FACADES), sent }
+  return { answer: await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))), sent }
 }
