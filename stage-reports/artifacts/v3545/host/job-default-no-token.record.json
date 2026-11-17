@@ -1,0 +1,46 @@
+{
+ "name": "job-default-no-token",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-kuklikach-ver-2-m5fa2048aa2671",
+ "withToken": false,
+ "jobId": "642a9caf29c654e55177860a85a04732",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 85,
+ "booksDeltaUsd": 0,
+ "booksDeltaRequests": 0,
+ "commit": "627e4f1",
+ "modelHash": "99a3d762fd5dbd299ccf00e39546e0f70d5bd7f3552e400f20d0fb8ab2dd2c67",
+ "modelSha256": "99a3d762fd5dbd299ccf00e39546e0f70d5bd7f3552e400f20d0fb8ab2dd2c67",
+ "sceneSha256": "7c9f531d019a013a621a39f9d6c07fe728e5001a90df3962badfcffaf26969be",
+ "sceneContentHash": "f6d3d24c2482dbe03df9a4758ea2795be2d67a0054a5e948a2570ecb739b2880",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "724ca37a2975225e4bb52bf4b5edce5e0c2855e7edef73b63f72bc77e1ffc744",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "MATCHES",
+   "builtM2": 66.2256,
+   "publishedM2": 66.88,
+   "share": 0.990215
+  },
+  "scale": {
+   "status": "UNVERIFIED",
+   "builtCmPerPx": 1.562,
+   "measuredCmPerPx": 1.563409,
+   "ratio": null,
+   "confidence": "INCONCLUSIVE"
+  },
+  "completeness": "COMPLETE",
+  "quantities": "LIMITED",
+  "reasons": [
+   {
+    "code": "SCALE_UNVERIFIED",
+    "consequence": "the plan's scale is inconclusive: no printed dimension confirms it independently, so lengths and areas are not verified"
+   }
+  ]
+ }
+}

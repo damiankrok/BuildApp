@@ -1,0 +1,120 @@
+{
+ "name": "job-3",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+ "withToken": true,
+ "jobId": "764d3b43c6630e8c342a5b00a390cd5f",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 295,
+ "booksDeltaUsd": 0.193868,
+ "booksDeltaRequests": 4,
+ "decisionCode": "LOCAL_MEETS_SOURCE",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "READ_COMPLETE",
+   "build": "NOT_BUILT"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "READ_COMPLETE",
+   "build": "NOT_BUILT"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_COMPLETE",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "FRONT: read, BUILT_PARTIAL: 6 of 8 built (not built: el-p7/front_canopy (SOURCE_UNKNOWN), opening-front-2 (not cut))",
+   "RIGHT: read, NOT_BUILT: 0 of 5 built (not built: el-p5/o1 (HELD_BY_DEPENDENCY), el-p5/garage_block_right (HELD_BY_DEPENDENCY), el-p5/chimney_a (HELD_BY_DEPENDENCY), el-p5/chimney_b (HELD_BY_DEPENDENCY), el-p5/pergola_rear (HELD_BY_DEPENDENCY))",
+   "REAR: read, BUILT_PARTIAL: 4 of 7 built (not built: canopy-rear-1 (not built))",
+   "LEFT: read, NOT_BUILT: 0 of 9 built (not built: el-p6/o1 (HELD_BY_DEPENDENCY), el-p6/o2 (HELD_BY_DEPENDENCY), el-p6/o3 (HELD_BY_DEPENDENCY), el-p6/o4 (HELD_BY_DEPENDENCY), el-p6/o5 (HELD_BY_DEPENDENCY), el-p6/front_block_left (HELD_BY_DEPENDENCY))"
+  ]
+ },
+ "openingFits": {
+  "APPROXIMATED": 1,
+  "NOT_BUILT": 1,
+  "EXACT": 7
+ },
+ "houseSha256": "161b17fa84928fe79b47551959393b1cf833ed73912ed7a4e610e53060cb9ad8",
+ "stood": "ACCEPTED_LOCAL",
+ "why": "LOCAL_MEETS_SOURCE: LOCAL meets every source fact the description meets: a correct base is kept",
+ "checks": {
+  "pass": 12,
+  "fail": 2
+ },
+ "held": 18,
+ "counts": {
+  "assets": 25,
+  "assetsByDocument": {
+   "PERSPECTIVE_RENDER": 13,
+   "ELEVATION": 4,
+   "SECTION": 1,
+   "FLOOR_PLAN": 4,
+   "SITE_PLAN": 1,
+   "UNKNOWN": 2
+  },
+  "observations": 349,
+  "frames": 23,
+  "metricEvidence": 79,
+  "callouts": 45,
+  "commands": 175,
+  "masses": 2,
+  "openings": 14,
+  "rooms": 10,
+  "balconies": 0,
+  "terraces": 2,
+  "railings": 0,
+  "chimneys": 0,
+  "rooflights": 0,
+  "meshes": 130,
+  "triangles": 3304
+ },
+ "commit": "627e4f1",
+ "modelHash": "21c96fe198dd433be389f79eaa3849276f46a76a0ec366afbc46308f892109cc",
+ "modelSha256": "21c96fe198dd433be389f79eaa3849276f46a76a0ec366afbc46308f892109cc",
+ "sceneSha256": "de202416c5a6ec75c03fff6d68370c4c90b350d8a491437114c15fb8412b5ee6",
+ "sceneContentHash": "f0431f696abba2b94c60e6d654a257b4008ff4114a5c9d9c9aef6a0f7420ccd4",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "ec638c2d140f2b9769b565fb946a762c57c8afd8f44322f6b090193444c2ef50",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "MATCHES",
+   "builtM2": 214.068216,
+   "publishedM2": 214.77,
+   "share": 0.996732
+  },
+  "scale": {
+   "status": "UNVERIFIED",
+   "builtCmPerPx": 2.9016,
+   "measuredCmPerPx": 2.90162,
+   "ratio": null,
+   "confidence": "WEAK"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "LIMITED",
+  "reasons": [
+   {
+    "code": "SCALE_UNVERIFIED",
+    "consequence": "the plan's scale is weak: no printed dimension confirms it independently, so lengths and areas are not verified"
+   }
+  ]
+ }
+}

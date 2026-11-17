@@ -12,6 +12,24 @@
 
 ## Current summary (read first)
 
+- **v3.54.5 (2026-11-17): complete facades, exact openings, source-based choice of model** (OWNER brief v3.54.5, Master Plan
+  v3.54.5 at `docs/MASTER_PLAN.md`; frozen candidate `627e4f1`, seal `ce16267`). IMPLEMENTATION_COMPLETE; HOST_INTEGRATION_VERIFIED
+  on a build of the final revision (Oslo and Wena described, Frizea LOCAL kept, a job without the token at 0 USD);
+  FACADE_COVERAGE, OPENING_GEOMETRY and SELECTION verified on DEV, partly on new houses; **TRANSFER_EVIDENCE: no** — the
+  frozen confirmation on 8 new families (6 publishers) improved the delivered house on 2 of 8 (Anodach, Alaska) with one
+  critical regression (Pliszka, roof); ANDROID NOT_VERIFIED (no APK). Report `stage-reports/SOURCE_TO_MODEL_V3545.md`,
+  OWNER index `stage-reports/README_V3545.md`, hand-off `research/source-to-model/v3545/HANDOFF.md`.
+  What exists now: house document 0.2.0 with a register of the four sides (from the source picture to the built wall,
+  `NO_SOURCE … READ_COMPLETE`, build state) and five separate statuses; the reader asks for every sent and undescribed (or
+  hollow) elevation alone, with a one-elevation tool and a smaller tool when the provider refuses a grammar; openings fitted
+  by `fitOpening` (EXACT / ADJUSTED / APPROXIMATED / not cut; a printed width is never trimmed; refit against the kernel's
+  clear stretch), panels of one opening merged, ±0,00 from the middle of the picture's anchors; the scene measure of every
+  hole and a post-compile check; review corrections as transactions; the LOCAL/H choice holds both against the section's
+  supported ridge mark and printed floor levels, with decision codes, partial previews and the superseded LOCAL kept beside
+  a replaced exterior (`/v1/analyses/:id/superseded`); a versioned per-opening scorer (`v3545-detail/1`).
+  Known gaps: the choice does not hold LOCAL against registered elevations (roof form, openings); unlabelled elevations cut
+  by the picture limit are reported as NO_SOURCE instead of NOT_SENT; the new reading adds false openings on new houses.
+  Spend 4.822834 USD (113 requests); books 19.27633 of 24.11036 USD.
 - **v3.54.4 (2026-11-17): the whole-house description** (OWNER brief v3.54.4, Master Plan v3.54.4 at `docs/MASTER_PLAN.md`,
   ADR `docs/adr/ADR-V3544-WHOLE-HOUSE-DESCRIPTION.md`; IMPLEMENTATION_COMPLETE, BUILDER_VERIFIED_IN_SCOPE,
   HOST_INTEGRATION_VERIFIED locally, QUALITY_GAIN on DEV, TRANSFER_EVIDENCE confirmed by the frozen criterion — improved

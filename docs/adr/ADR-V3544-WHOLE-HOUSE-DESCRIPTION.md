@@ -50,3 +50,15 @@ exterior on 5 of 8 new houses with no critical regression; a faithful exterior o
 (`stage-reports/SOURCE_TO_MODEL_V3544.md`). The kernel build loop lives in the analysis service: the reconstruction
 package still only emits commands.
 
+## v3.54.5 amendment (2026-11-17)
+
+The decision stands; three parts of it changed. (1) The house document (0.2.0) accounts for every side: a register of
+views, and five separate statuses — a reading that is complete is not a house that is built, and an accepted candidate is
+not a faithful house. (2) An opening is never narrowed silently: the builder fits it within the reading's uncertainty
+(ADJUSTED, with its delta), approximates it within a bound (said), or does not cut it (said); a printed width is never
+trimmed. (3) The choice between LOCAL and the described house holds both against the same source facts, including the
+section's ridge mark (above ±0,00, kept apart from the height above the terrain) when something besides the mark supports
+it, and printed floor levels; when both contradict the source, the one shown is a partial preview with its contradictions
+named. A replaced LOCAL model with an interior is kept beside the result. The first frozen confirmation of these changes
+did not meet its transfer criterion (2 of 8 improved, 1 critical regression); the pilot stays off by default.
+

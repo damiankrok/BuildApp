@@ -1,0 +1,95 @@
+{
+ "name": "job-2",
+ "url": "https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+ "withToken": true,
+ "jobId": "6fc1dfb9c331313d946ecee4103d866f",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 170,
+ "booksDeltaUsd": 0.180802,
+ "booksDeltaRequests": 4,
+ "superseded": true,
+ "decisionCode": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "PARTIAL",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "PARTIAL",
+   "build": "BUILT_PARTIAL"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_PARTIAL",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "RIGHT: PARTIAL — the reader stated a part of this side is hidden on the picture",
+   "LEFT: PARTIAL — the reader stated a part of this side is hidden on the picture",
+   "FRONT: read, BUILT_PARTIAL: 2 of 4 built (not built: opening-front-2 (not cut), opening-front-3 (not cut))",
+   "REAR: read, BUILT_PARTIAL: 5 of 8 built (not built: el-p5/box (CAPABILITY_MISSING), opening-rear-2 (not cut), opening-rear-3 (not cut))"
+  ]
+ },
+ "openingFits": {
+  "EXACT": 9,
+  "NOT_BUILT": 5,
+  "ADJUSTED": 1
+ },
+ "houseSha256": "089eb41c0420fbedfacec6275e314bd88f2123483cf8cc86648066cf275051ea",
+ "stood": "ACCEPTED_DESCRIBED",
+ "why": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS: LOCAL contradicts the source where the description meets it: overall width 6.49 m against printed \"8.80\" = 8.8 m; overall depth 15.20 m against printed \"11.20\" = 11.2 m; building height above the terrain no roof built against published 8.46 m; where the wall",
+ "checks": {
+  "pass": 14,
+  "fail": 0
+ },
+ "held": 18,
+ "counts": {
+  "assets": 17,
+  "assetsByDocument": {
+   "ELEVATION": 4,
+   "UNKNOWN": 8,
+   "FLOOR_PLAN": 2,
+   "PERSPECTIVE_RENDER": 3
+  },
+  "observations": 43,
+  "frames": 8,
+  "metricEvidence": 6,
+  "callouts": 0,
+  "commands": 56,
+  "masses": 1,
+  "openings": 14,
+  "rooms": 0,
+  "balconies": 2,
+  "terraces": 0,
+  "railings": 2,
+  "chimneys": 1,
+  "rooflights": 0,
+  "meshes": 54,
+  "triangles": 2576
+ },
+ "commit": "627e4f1",
+ "modelHash": "ea65ffc86e5e0534c2bae39ca13443639838590922c4df3046b79925c91e19d5",
+ "modelSha256": "ea65ffc86e5e0534c2bae39ca13443639838590922c4df3046b79925c91e19d5",
+ "sceneSha256": "4848cfa88a8eb99a6a921c064c6697cc33009d173c5f54b237e36d47135de675",
+ "sceneContentHash": "9415a8b181d3b4eb6625bc58e2679aa7f3818e6d834617b788aeb0d56bc01a28",
+ "analyzer": {
+  "service": "house-0.2.0",
+  "solver": "house-document-0.2.0+builder-0.1.0+reading-0.2.0"
+ },
+ "sourcePackageHash": "c11dcec0d011f30315affd691c84909b61157412b0aad4dfd063ce1020cc6bb4",
+ "measurement": null
+}

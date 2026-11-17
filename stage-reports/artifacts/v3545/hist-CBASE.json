@@ -1,0 +1,513 @@
+{
+ "scorer": "v3544/score.ts",
+ "tolerances": {
+  "extentM": 0.35,
+  "extentShare": 0.04,
+  "heightM": 0.6,
+  "ridgeM": 0.5,
+  "garageOverlap": 0.5,
+  "openingsAbs": 2,
+  "openingsShare": 0.25,
+  "garageDoorMinWidthM": 2.2,
+  "entranceMaxWidthM": 1.6,
+  "defaultTerrainDepthM": 0.3
+ },
+ "rows": [
+  {
+   "house": "c5-archon-malaxisach-2-e",
+   "publisher": "www.archon.pl",
+   "localBuilt": false,
+   "accepted": "NONE",
+   "why": "the description fails its own source checks: the outline's width against the printed 1660 (17.03 m); the outline's depth against the printed 1200 (12.42 m)",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 17.03 / 16.60; depth 12.42 / 12.00",
+     "HEIGHT": "top 6.15 above the terrain / 6.15",
+     "ROOF": "GABLE ALONG_FRONT / GABLE FRONT_TO_BACK",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 5/5 Fu 0/0 Rg 4/4 Ru 0/0 Lg 0/2 Lu 0/0 Rg 0/1 Ru 0/0: off by 3 of 12",
+     "DORMERS": "2 / 0"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 0,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-archon-anodach-3-g2e",
+   "publisher": "www.archon.pl",
+   "localBuilt": false,
+   "accepted": "DESCRIBED",
+   "why": "the description passes its source checks and there is no LOCAL model",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 14.00 / 14.00; depth 19.25 / 19.25",
+     "HEIGHT": "top 7.29 above the terrain / 7.29",
+     "ROOF": "HIP NA / HIP FRONT_TO_BACK",
+     "GARAGE": "no garage door / FRONT 0.58–0.93",
+     "OPENINGS": "Fg 0/3 Fu 0/0 Rg 2/2 Ru 0/0 Lg 0/4 Lu 0/0 Rg 0/4 Ru 0/0: off by 11 of 13",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 4,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-dobredomy-kardamon",
+   "publisher": "www.dobredomy.pl",
+   "localBuilt": false,
+   "accepted": "NONE",
+   "why": "the description fails its own source checks: ridge − terrain against the total height printed on the section (8.30 m)",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 19.40 / 18.02; depth 19.07 / 17.80",
+     "HEIGHT": "top 8.30 above the terrain / 7.90",
+     "ROOF": "HIP NA / GABLE FRONT_TO_BACK",
+     "GARAGE": "FRONT 0.07–0.33 / FRONT 0.07–0.34",
+     "OPENINGS": "Fg 3/7 Fu 0/2 Rg 5/7 Ru 0/2 Lg 0/4 Lu 0/0 Rg 0/1 Ru 0/0: off by 15 of 23",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 3,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 0,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-lipinscy-alaska",
+   "publisher": "lipinscy.pl",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "the description fails its own source checks: no elevation registers to the plan: which side is which is not verified (2 wall ends, worst 0.00 m, 1.278 cm/px; the ridge row gives +5.20 m at the along scale; the section prints +5.98 m)",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 7.20 / 17.24; depth 17.24 / 7.64",
+     "HEIGHT": "top 16.13 above the terrain / 6.13",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 1/6 Fu 0/0 Rg 0/4 Ru 0/0 Lg 4/1 Lu 0/0 Rg 7/0 Ru 0/0: off by 19 of 11",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 3,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 17.24 / 17.24; depth 7.64 / 7.64",
+     "HEIGHT": "top 6.13 above the terrain / 6.13",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 0/6 Fu 0/0 Rg 0/4 Ru 0/0 Lg 0/1 Lu 0/0 Rg 0/0 Ru 0/0: off by 11 of 11",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 5,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 3,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-studioatrium-pliszka-v-plus",
+   "publisher": "www.studioatrium.pl",
+   "localBuilt": true,
+   "accepted": "DESCRIBED",
+   "why": "LOCAL contradicts the source where the description meets it: walled ground outline 194.6 m² against traced outline verified against the printed dimensions: 171.5 m²; where the walled outline lies 81 % of the two outlines coincide, each set against its own front-left corner against traced outline verified against the printed dimensions",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 11.32 / 11.45; depth 18.42 / 18.95",
+     "HEIGHT": "top 6.57 above the terrain / 6.71",
+     "ROOF": "FLAT NA / GABLE FRONT_TO_BACK",
+     "GARAGE": "no garage door / FRONT 0.49–0.92",
+     "OPENINGS": "Fg 10/3 Fu 0/0 Rg 4/2 Ru 0/0 Lg 8/2 Lu 0/0 Rg 9/4 Ru 0/0: off by 20 of 11",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 3,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 11.45 / 11.45; depth 18.95 / 18.95",
+     "HEIGHT": "top 6.58 above the terrain / 6.71",
+     "ROOF": "GABLE FRONT_TO_BACK / GABLE FRONT_TO_BACK",
+     "GARAGE": "no garage door / FRONT 0.49–0.92",
+     "OPENINGS": "Fg 0/3 Fu 0/0 Rg 2/2 Ru 0/0 Lg 0/2 Lu 0/0 Rg 0/4 Ru 0/0: off by 9 of 11",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 4,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-extradom-tracja-2",
+   "publisher": "www.extradom.pl",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "LOCAL meets every source fact the description meets: a correct base is kept",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 13.95 / 13.84; depth 9.26 / 9.34",
+     "HEIGHT": "top 5.97 above the terrain / 6.40",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 5/5 Fu 0/0 Rg 4/4 Ru 0/0 Lg 1/1 Lu 0/0 Rg 0/0 Ru 0/0: off by 0 of 10",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 6,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 13.84 / 13.84; depth 9.34 / 9.34",
+     "HEIGHT": "top 6.50 above the terrain / 6.40",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 5/5 Fu 0/0 Rg 4/4 Ru 0/0 Lg 1/1 Lu 0/0 Rg 0/0 Ru 0/0: off by 0 of 10",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 6,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 6,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": false,
+   "faithful": true,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-extradom-mirabelka-4",
+   "publisher": "www.extradom.pl",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "LOCAL meets every source fact the description meets: a correct base is kept",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 11.90 / 11.90; depth 8.60 / 8.65",
+     "HEIGHT": "top 6.30 above the terrain / 6.73",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 4/4 Fu 0/0 Rg 3/3 Ru 0/0 Lg 2/1 Lu 0/0 Rg 1/1 Ru 0/0: off by 1 of 9",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 6,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 11.90 / 11.90; depth 8.65 / 8.65",
+     "HEIGHT": "top 6.92 above the terrain / 6.73",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 0/4 Fu 0/0 Rg 0/3 Ru 0/0 Lg 0/1 Lu 0/0 Rg 0/1 Ru 0/0: off by 9 of 9",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 5,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 6,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": false,
+   "faithful": true,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c5-architecturaldesigns-550029lan",
+   "publisher": "www.architecturaldesigns.com",
+   "localBuilt": false,
+   "accepted": "NONE",
+   "why": "the description did not resolve to a geometry: a metric for the plan",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 0,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  }
+ ]
+}

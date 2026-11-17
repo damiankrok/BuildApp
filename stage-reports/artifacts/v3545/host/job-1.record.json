@@ -1,0 +1,95 @@
+{
+ "name": "job-1",
+ "url": "https://lipinscy.pl/projekt/oslo",
+ "withToken": true,
+ "jobId": "b7085d59cee150a35a8c15aff317265a",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 195,
+ "booksDeltaUsd": 0.170986,
+ "booksDeltaRequests": 4,
+ "superseded": true,
+ "decisionCode": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_COMPLETE",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "FRONT: read, BUILT_PARTIAL: 4 of 5 built (not built: canopy-front-1 (not built))",
+   "RIGHT: read, BUILT_PARTIAL: 2 of 4 built (not built: el-p8/chimney (SOURCE_UNKNOWN), el-p8/porch_canopy (SOURCE_UNKNOWN))",
+   "REAR: read, BUILT_PARTIAL: 2 of 4 built (not built: opening-rear-2 (not cut), dormer-rear-1 (not built))",
+   "LEFT: read, BUILT_PARTIAL: 1 of 3 built (not built: el-p7/chimney (SOURCE_UNKNOWN), el-p7/porch_canopy (SOURCE_UNKNOWN))"
+  ]
+ },
+ "openingFits": {
+  "EXACT": 8,
+  "NOT_BUILT": 1
+ },
+ "houseSha256": "b4e520fdda3abc493ee0e5cd6af02b98cdffc5959c7f11f8c46e197e7a583034",
+ "stood": "ACCEPTED_DESCRIBED",
+ "why": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS: LOCAL contradicts the source where the description meets it: top of the roof above ±0,00 16.79 m against section mark \"+6,79\" = 6.79 m (printed on 2 pictures; 4 registered elevation(s) show the ridge at that height at the plan's scale; the printed pitch over",
+ "checks": {
+  "pass": 13,
+  "fail": 0
+ },
+ "held": 8,
+ "counts": {
+  "assets": 32,
+  "assetsByDocument": {
+   "UNKNOWN": 12,
+   "FLOOR_PLAN": 6,
+   "SITE_PLAN": 3,
+   "ELEVATION": 8,
+   "SECTION": 3
+  },
+  "observations": 40,
+  "frames": 11,
+  "metricEvidence": 16,
+  "callouts": 0,
+  "commands": 40,
+  "masses": 1,
+  "openings": 9,
+  "rooms": 0,
+  "balconies": 0,
+  "terraces": 0,
+  "railings": 0,
+  "chimneys": 1,
+  "rooflights": 0,
+  "meshes": 38,
+  "triangles": 1100
+ },
+ "commit": "627e4f1",
+ "modelHash": "5cf5aee968c6de09cb8c921928efcdc17863498adcd072f74248cd69490ed6f3",
+ "modelSha256": "5cf5aee968c6de09cb8c921928efcdc17863498adcd072f74248cd69490ed6f3",
+ "sceneSha256": "7a7283bf3616372ab5deefcf654bdecbb0612f5b9269d331c470acd1318504f0",
+ "sceneContentHash": "854d940b8b905397874fbca83ec7f85a6e78d01f56daf45c15458f55e2f26797",
+ "analyzer": {
+  "service": "house-0.2.0",
+  "solver": "house-document-0.2.0+builder-0.1.0+reading-0.2.0"
+ },
+ "sourcePackageHash": "b48e904afb93fef07478c3d42b7bbf445e77fb255145464a0a61ad19464a6b5f",
+ "measurement": null
+}
