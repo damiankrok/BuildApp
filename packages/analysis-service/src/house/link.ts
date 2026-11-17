@@ -40,7 +40,7 @@ import { reviewHouse } from './review.js'
 import type { DefectRecord, ReviewPair, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.2.0'
+export const HOUSE_PATH_VERSION = '0.3.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
   review?: boolean
   /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */
