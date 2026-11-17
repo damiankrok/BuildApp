@@ -12,6 +12,27 @@
 
 ## Current summary (read first)
 
+- **v3.54.6 (2026-11-17): debug from the source to the delivered model, repeatability on Marcówki GE** (OWNER brief
+  v3.54.6, Master Plan v3.54.6 at `docs/MASTER_PLAN.md`; revisions `54d31f6` fixes, `f9cb3ef` accepted revisions — host
+  built from it). Report `stage-reports/SOURCE_TO_MODEL_V3546.md`, OWNER index `stage-reports/README_V3546.md`, hand-off
+  `research/source-to-model/v3546/HANDOFF.md`. Diagnosis on the saved v3.54.5 answers, first loss named per defect:
+  Pliszka's "printed" 6,71 m was the page's building height echoed on the plan (no section exists) — one height
+  definition now (`heightAgainstFigure`: the figure is the top above the terrain; without a terrain mark, a 0–1.2 m band);
+  elevations register on the visible part of a body or on their outer ends at the set's scale (inner misses named,
+  `ELEVATION_INNER_ENDS_OFF`); a gable glazing is one opening with its transom and a head lowered under the wall's top
+  within the opening rule; when the 24-picture limit chooses, renditions of one picture are one and unlabelled drawings
+  go before renders (Mirabelka: 0/9 → 9/9 openings on a fresh read); review statuses name the first loss
+  (`HELD_BY_DEPENDENCY`, `CAPABILITY_MISSING`, `NO_CHANGE`); the LOCAL/described choice holds both compiled models against
+  the same registered elevations (openings per side), with one height rule, an unverified metric as a partial preview and a
+  re-measure of the delivered revision (D38). On the same saved answers Pliszka is 4/4 sides, 10/11 openings, 0 false
+  (v3.54.5 delivered LOCAL with 17 false); no house lost an OK opening in the regression (8 confirmation × 2 answer sets,
+  6 DEV). Marcówki GE: three fresh readings of identical bytes → three models (first difference at the first answer);
+  each replayed twice → identical; LOCAL (11/11) kept in all three. **Accepted revisions (D39)**: the answers of the
+  reading whose house was delivered are kept under a binding (variant, pictures and roles, versions, settings) in the
+  host's private store and replayed by the next allowed job — host E2E: second job 0 requests, same model. Books 20.655864
+  of 24.11036 USD (this stage 1.379534, 26 requests). Named limits: Alaska's wall columns read with the terrace frame
+  (4 false openings), outline steps narrower than two walls (Marcówki portal), plan body division by eye; ANDROID
+  NOT_VERIFIED (only the contract snapshot resource recaptured).
 - **v3.54.5 (2026-11-17): complete facades, exact openings, source-based choice of model** (OWNER brief v3.54.5, Master Plan
   v3.54.5 at `docs/MASTER_PLAN.md`; frozen candidate `627e4f1`, seal `ce16267`). IMPLEMENTATION_COMPLETE; HOST_INTEGRATION_VERIFIED
   on a build of the final revision (Oslo and Wena described, Frizea LOCAL kept, a job without the token at 0 USD);

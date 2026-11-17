@@ -1,0 +1,2669 @@
+{
+ "schema": "buildapp.v3546-marcowki-compare/1",
+ "runs": {
+  "LOCAL": {
+   "stages": {},
+   "hashes": {
+    "model": "2bf773280194a369",
+    "scene": null,
+    "observations": null,
+    "geometry": null,
+    "decision": "2dac76d521b05be9"
+   },
+   "built": {
+    "front": null,
+    "bodies": [],
+    "garage": false,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.601,
+     "widthM": 12.05,
+     "depthM": 14.601
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "FRONT",
+      "kind": "WINDOW",
+      "alongM": 1.405,
+      "widthM": 1.1,
+      "bottomY": 0.035,
+      "topY": 2.335,
+      "id": "opening-0-front-0-0"
+     },
+     {
+      "side": "FRONT",
+      "kind": "WINDOW",
+      "alongM": 3.925,
+      "widthM": 2.7,
+      "bottomY": 3.06,
+      "topY": 6.26,
+      "id": "opening-1-front-4-0"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 4.18,
+      "widthM": 1.05,
+      "bottomY": 0,
+      "topY": 2.1,
+      "id": "opening-0-front-0-1"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 8.56,
+      "widthM": 2.75,
+      "bottomY": 0,
+      "topY": 2.2,
+      "id": "opening-0-front-8-0"
+     },
+     {
+      "side": "LEFT",
+      "kind": "WINDOW",
+      "alongM": 4.674,
+      "widthM": 0.9,
+      "bottomY": 0,
+      "topY": 2.3,
+      "id": "opening-0-west-3-0"
+     },
+     {
+      "side": "LEFT",
+      "kind": "WINDOW",
+      "alongM": 6.393,
+      "widthM": 1.4,
+      "bottomY": 0.8,
+      "topY": 2.2,
+      "id": "opening-0-west-3-1"
+     },
+     {
+      "side": "LEFT",
+      "kind": "DOOR",
+      "alongM": 11.477,
+      "widthM": 0.901,
+      "bottomY": 0,
+      "topY": 2.1,
+      "id": "shared-party-0-east-1-0"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 1.11,
+      "widthM": 1,
+      "bottomY": 0,
+      "topY": 2.1,
+      "id": "opening-0-rear-10-0"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.084,
+      "widthM": 4.7,
+      "bottomY": 0,
+      "topY": 2.3,
+      "id": "opening-0-rear-2-0"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.132,
+      "widthM": 2.34,
+      "bottomY": 3.06,
+      "topY": 6.09,
+      "id": "opening-1-rear-6-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 8.754,
+      "widthM": 2.34,
+      "bottomY": 3.06,
+      "topY": 6.1,
+      "id": "opening-1-rear-6-0"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "WINDOW",
+      "alongM": 9.691,
+      "widthM": 3,
+      "bottomY": 0,
+      "topY": 2.3,
+      "id": "opening-0-east-1-0"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": null,
+    "code": null,
+    "partial": null
+   },
+   "cost": {
+    "requests": null,
+    "usd": null,
+    "seconds": null
+   }
+  },
+  "M1": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "55c3a7609bc5b8d3",
+     "pictures": 19,
+     "inputTokens": 6993,
+     "outputTokens": 2089,
+     "requestId": "req_011Ch8YuF7i5JDaC5tVNgadr"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "8d81332a66169b39",
+     "pictures": 3,
+     "inputTokens": 7385,
+     "outputTokens": 4217,
+     "requestId": "req_011Ch8YvN4T9asx9AbpKzafi"
+    },
+    "FACADES": {
+     "payload": "34df36e04f94c506",
+     "answer": "ea326eab8d9af410",
+     "pictures": 8,
+     "inputTokens": 12309,
+     "outputTokens": 4967,
+     "requestId": "req_011Ch8YxgJNfgbgy4EFS4dnj"
+    },
+    "REVIEW-1": {
+     "payload": "b229df5e4d530dc7",
+     "answer": "b49be3a94ab2c8bb",
+     "pictures": 4,
+     "inputTokens": 10328,
+     "outputTokens": 3378,
+     "requestId": "req_011Ch8Z1LJg9VajrvGn9DBJw"
+    }
+   },
+   "hashes": {
+    "model": "ed17123f4f3faa03",
+    "scene": "519685faa3a51748",
+    "observations": "5a6b569635ca4dd4",
+    "geometry": "386e07c4322c70f5",
+    "decision": "7870088061e065c7"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.493
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.407
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.035,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.493,
+     "widthM": 12.05,
+     "depthM": 14.493
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 1.471,
+      "widthM": 0.98,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-1"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 4.226,
+      "widthM": 0.625,
+      "bottomY": 0,
+      "topY": 2.018,
+      "id": "opening-front-3"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 8.501,
+      "widthM": 2.381,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-4"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 1.191,
+      "widthM": 0.947,
+      "bottomY": 0,
+      "topY": 2.029,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.238,
+      "widthM": 4.582,
+      "bottomY": 0,
+      "topY": 2.113,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.721,
+      "widthM": 1.64,
+      "bottomY": 3.922,
+      "topY": 5.581,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.654,
+      "widthM": 2.905,
+      "bottomY": 0,
+      "topY": 2.208,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 4,
+    "usd": 0.22054,
+    "seconds": 115
+   }
+  },
+  "M2": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "adbb923918830b42",
+     "pictures": 19,
+     "inputTokens": 6993,
+     "outputTokens": 1959,
+     "requestId": "req_011Ch8Z4twYsoHrDgbM7CCgp"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "65b7c0273812d08e",
+     "pictures": 3,
+     "inputTokens": 7385,
+     "outputTokens": 3885,
+     "requestId": "req_011Ch8Z5wmjXyYq8ymDZRURS"
+    },
+    "FACADES": {
+     "payload": "b515c06f7b66ac30",
+     "answer": "a725b5a8d5be90f9",
+     "pictures": 8,
+     "inputTokens": 12332,
+     "outputTokens": 4818,
+     "requestId": "req_011Ch8Z8BcEbnvWQVSKBLdg4"
+    },
+    "REVIEW-1": {
+     "payload": "fa5cda2b2859bf8e",
+     "answer": "6a43dfa279aa5f3d",
+     "pictures": 4,
+     "inputTokens": 10449,
+     "outputTokens": 5002,
+     "requestId": "req_011Ch8ZAb7AVda29apB3wqPL"
+    }
+   },
+   "hashes": {
+    "model": "c34b9216a2545575",
+    "scene": "e796d15c2635d3d7",
+    "observations": "a4de4d799c8c5ea9",
+    "geometry": "9d6d9c31d81198dc",
+    "decision": "f706147f58fa134f"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       8.527
+      ],
+      "z": [
+       0,
+       14.409
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.331
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.026,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.409,
+     "widthM": 12.05,
+     "depthM": 14.409
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.164,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.039,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.587,
+      "bottomY": 0,
+      "topY": 2.395,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 2.189,
+      "bottomY": 3.924,
+      "topY": 5.411,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.589,
+      "widthM": 2.853,
+      "bottomY": 0,
+      "topY": 2.186,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 5,
+    "usd": 0.303464,
+    "seconds": 166
+   }
+  },
+  "M3": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "a934eb1bc401ce32",
+     "pictures": 19,
+     "inputTokens": 6993,
+     "outputTokens": 1747,
+     "requestId": "req_011Ch8ZHRa8Q1RPvQscBKjp4"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "08dacf9d888cbaaa",
+     "pictures": 3,
+     "inputTokens": 7385,
+     "outputTokens": 4375,
+     "requestId": "req_011Ch8ZJMqg2QsJNFKCU6DT7"
+    },
+    "FACADES": {
+     "payload": "396aa73910c055ab",
+     "answer": "1fe4474ba152c996",
+     "pictures": 8,
+     "inputTokens": 12333,
+     "outputTokens": 5463,
+     "requestId": "req_011Ch8ZLrnm9Mr8XPmKevNqr"
+    },
+    "REVIEW-1": {
+     "payload": "8bf089760f87871f",
+     "answer": "a256ab84e00eb5ef",
+     "pictures": 4,
+     "inputTokens": 10398,
+     "outputTokens": 7159,
+     "requestId": "req_011Ch8ZPhgR66KhASMuFqx2w"
+    }
+   },
+   "hashes": {
+    "model": "582b9266d9ec7643",
+    "scene": "b8e310f11c5eb7aa",
+    "observations": "1b22936d85a4976e",
+    "geometry": "675020ee0046f4dc",
+    "decision": "99f68aefbd0e9948"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.437
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       1.026,
+       8.402
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 2.979,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.437,
+     "widthM": 12.05,
+     "depthM": 14.437
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.178,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.037,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.618,
+      "bottomY": 0,
+      "topY": 2.404,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.592,
+      "widthM": 1.783,
+      "bottomY": 3.933,
+      "topY": 5.473,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.723,
+      "widthM": 2.78,
+      "bottomY": 0,
+      "topY": 2.121,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 5,
+    "usd": 0.340136,
+    "seconds": 198
+   }
+  },
+  "R1a": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "55c3a7609bc5b8d3",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YuF7i5JDaC5tVNgadr"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "8d81332a66169b39",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YvN4T9asx9AbpKzafi"
+    },
+    "FACADES": {
+     "payload": "34df36e04f94c506",
+     "answer": "ea326eab8d9af410",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YxgJNfgbgy4EFS4dnj"
+    },
+    "REVIEW-1": {
+     "payload": "b229df5e4d530dc7",
+     "answer": "b49be3a94ab2c8bb",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z1LJg9VajrvGn9DBJw"
+    }
+   },
+   "hashes": {
+    "model": "ed17123f4f3faa03",
+    "scene": "519685faa3a51748",
+    "observations": "5a6b569635ca4dd4",
+    "geometry": "386e07c4322c70f5",
+    "decision": "7870088061e065c7"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.493
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.407
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.035,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.493,
+     "widthM": 12.05,
+     "depthM": 14.493
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 1.471,
+      "widthM": 0.98,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-1"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 4.226,
+      "widthM": 0.625,
+      "bottomY": 0,
+      "topY": 2.018,
+      "id": "opening-front-3"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 8.501,
+      "widthM": 2.381,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-4"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 1.191,
+      "widthM": 0.947,
+      "bottomY": 0,
+      "topY": 2.029,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.238,
+      "widthM": 4.582,
+      "bottomY": 0,
+      "topY": 2.113,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.721,
+      "widthM": 1.64,
+      "bottomY": 3.922,
+      "topY": 5.581,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.654,
+      "widthM": 2.905,
+      "bottomY": 0,
+      "topY": 2.208,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 5
+   }
+  },
+  "R1b": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "55c3a7609bc5b8d3",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YuF7i5JDaC5tVNgadr"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "8d81332a66169b39",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YvN4T9asx9AbpKzafi"
+    },
+    "FACADES": {
+     "payload": "34df36e04f94c506",
+     "answer": "ea326eab8d9af410",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8YxgJNfgbgy4EFS4dnj"
+    },
+    "REVIEW-1": {
+     "payload": "b229df5e4d530dc7",
+     "answer": "b49be3a94ab2c8bb",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z1LJg9VajrvGn9DBJw"
+    }
+   },
+   "hashes": {
+    "model": "ed17123f4f3faa03",
+    "scene": "519685faa3a51748",
+    "observations": "5a6b569635ca4dd4",
+    "geometry": "386e07c4322c70f5",
+    "decision": "7870088061e065c7"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.493
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.407
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.035,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.493,
+     "widthM": 12.05,
+     "depthM": 14.493
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 1.471,
+      "widthM": 0.98,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-1"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 4.226,
+      "widthM": 0.625,
+      "bottomY": 0,
+      "topY": 2.018,
+      "id": "opening-front-3"
+     },
+     {
+      "side": "FRONT",
+      "kind": "DOOR",
+      "alongM": 8.501,
+      "widthM": 2.381,
+      "bottomY": 0,
+      "topY": 2.221,
+      "id": "opening-front-4"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 1.191,
+      "widthM": 0.947,
+      "bottomY": 0,
+      "topY": 2.029,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.238,
+      "widthM": 4.582,
+      "bottomY": 0,
+      "topY": 2.113,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.721,
+      "widthM": 1.64,
+      "bottomY": 3.922,
+      "topY": 5.581,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.654,
+      "widthM": 2.905,
+      "bottomY": 0,
+      "topY": 2.208,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 4
+   }
+  },
+  "R2a": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "adbb923918830b42",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z4twYsoHrDgbM7CCgp"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "65b7c0273812d08e",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z5wmjXyYq8ymDZRURS"
+    },
+    "FACADES": {
+     "payload": "b515c06f7b66ac30",
+     "answer": "a725b5a8d5be90f9",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z8BcEbnvWQVSKBLdg4"
+    },
+    "REVIEW-1": {
+     "payload": "fa5cda2b2859bf8e",
+     "answer": "6a43dfa279aa5f3d",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZAb7AVda29apB3wqPL"
+    }
+   },
+   "hashes": {
+    "model": "c34b9216a2545575",
+    "scene": "e796d15c2635d3d7",
+    "observations": "a4de4d799c8c5ea9",
+    "geometry": "9d6d9c31d81198dc",
+    "decision": "f706147f58fa134f"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       8.527
+      ],
+      "z": [
+       0,
+       14.409
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.331
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.026,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.409,
+     "widthM": 12.05,
+     "depthM": 14.409
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.164,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.039,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.587,
+      "bottomY": 0,
+      "topY": 2.395,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 2.189,
+      "bottomY": 3.924,
+      "topY": 5.411,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.589,
+      "widthM": 2.853,
+      "bottomY": 0,
+      "topY": 2.186,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 5
+   }
+  },
+  "R2b": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "adbb923918830b42",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z4twYsoHrDgbM7CCgp"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "65b7c0273812d08e",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z5wmjXyYq8ymDZRURS"
+    },
+    "FACADES": {
+     "payload": "b515c06f7b66ac30",
+     "answer": "a725b5a8d5be90f9",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8Z8BcEbnvWQVSKBLdg4"
+    },
+    "REVIEW-1": {
+     "payload": "fa5cda2b2859bf8e",
+     "answer": "6a43dfa279aa5f3d",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZAb7AVda29apB3wqPL"
+    }
+   },
+   "hashes": {
+    "model": "c34b9216a2545575",
+    "scene": "e796d15c2635d3d7",
+    "observations": "a4de4d799c8c5ea9",
+    "geometry": "9d6d9c31d81198dc",
+    "decision": "f706147f58fa134f"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       8.527
+      ],
+      "z": [
+       0,
+       14.409
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       0,
+       8.331
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 3.026,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.409,
+     "widthM": 12.05,
+     "depthM": 14.409
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.164,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.039,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.587,
+      "bottomY": 0,
+      "topY": 2.395,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 2.189,
+      "bottomY": 3.924,
+      "topY": 5.411,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.589,
+      "widthM": 2.853,
+      "bottomY": 0,
+      "topY": 2.186,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 5
+   }
+  },
+  "R3a": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "a934eb1bc401ce32",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZHRa8Q1RPvQscBKjp4"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "08dacf9d888cbaaa",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZJMqg2QsJNFKCU6DT7"
+    },
+    "FACADES": {
+     "payload": "396aa73910c055ab",
+     "answer": "1fe4474ba152c996",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZLrnm9Mr8XPmKevNqr"
+    },
+    "REVIEW-1": {
+     "payload": "8bf089760f87871f",
+     "answer": "a256ab84e00eb5ef",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZPhgR66KhASMuFqx2w"
+    }
+   },
+   "hashes": {
+    "model": "582b9266d9ec7643",
+    "scene": "b8e310f11c5eb7aa",
+    "observations": "1b22936d85a4976e",
+    "geometry": "675020ee0046f4dc",
+    "decision": "99f68aefbd0e9948"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.437
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       1.026,
+       8.402
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 2.979,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.437,
+     "widthM": 12.05,
+     "depthM": 14.437
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.178,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.037,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.618,
+      "bottomY": 0,
+      "topY": 2.404,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.592,
+      "widthM": 1.783,
+      "bottomY": 3.933,
+      "topY": 5.473,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.723,
+      "widthM": 2.78,
+      "bottomY": 0,
+      "topY": 2.121,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 5
+   }
+  },
+  "R3b": {
+   "stages": {
+    "INVENTORY": {
+     "payload": "5b555d0b9f0b6b0f",
+     "answer": "a934eb1bc401ce32",
+     "pictures": 19,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZHRa8Q1RPvQscBKjp4"
+    },
+    "PLAN": {
+     "payload": "86c88c7e98537cb8",
+     "answer": "08dacf9d888cbaaa",
+     "pictures": 3,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZJMqg2QsJNFKCU6DT7"
+    },
+    "FACADES": {
+     "payload": "396aa73910c055ab",
+     "answer": "1fe4474ba152c996",
+     "pictures": 8,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZLrnm9Mr8XPmKevNqr"
+    },
+    "REVIEW-1": {
+     "payload": "8bf089760f87871f",
+     "answer": "a256ab84e00eb5ef",
+     "pictures": 4,
+     "inputTokens": 0,
+     "outputTokens": 0,
+     "requestId": "req_011Ch8ZPhgR66KhASMuFqx2w"
+    }
+   },
+   "hashes": {
+    "model": "582b9266d9ec7643",
+    "scene": "b8e310f11c5eb7aa",
+    "observations": "1b22936d85a4976e",
+    "geometry": "675020ee0046f4dc",
+    "decision": "99f68aefbd0e9948"
+   },
+   "built": {
+    "front": "BOTTOM",
+    "bodies": [
+     {
+      "id": "main",
+      "role": "MAIN",
+      "storeys": [
+       0,
+       1
+      ],
+      "x": [
+       0,
+       7.908
+      ],
+      "z": [
+       0,
+       14.437
+      ],
+      "roof": "GABLE",
+      "ridgeAxis": "Z",
+      "pitchDeg": 40,
+      "ridgeY": 7.95,
+      "eavesY": null
+     },
+     {
+      "id": "garage",
+      "role": "GARAGE",
+      "storeys": [
+       0
+      ],
+      "x": [
+       7.908,
+       12.05
+      ],
+      "z": [
+       1.026,
+       8.402
+      ],
+      "roof": "FLAT",
+      "ridgeAxis": null,
+      "pitchDeg": 0,
+      "ridgeY": 2.979,
+      "eavesY": null
+     }
+    ],
+    "garage": true,
+    "extent": {
+     "x0": 0,
+     "x1": 12.05,
+     "z0": 0,
+     "z1": 14.437,
+     "widthM": 12.05,
+     "depthM": 14.437
+    },
+    "roofTopY": 7.95,
+    "openings": [
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 1.178,
+      "widthM": 0.934,
+      "bottomY": 0,
+      "topY": 2.037,
+      "id": "opening-rear-1"
+     },
+     {
+      "side": "REAR",
+      "kind": "DOOR",
+      "alongM": 5.209,
+      "widthM": 4.618,
+      "bottomY": 0,
+      "topY": 2.404,
+      "id": "opening-rear-2"
+     },
+     {
+      "side": "REAR",
+      "kind": "WINDOW",
+      "alongM": 5.592,
+      "widthM": 1.783,
+      "bottomY": 3.933,
+      "topY": 5.473,
+      "id": "opening-rear-3"
+     },
+     {
+      "side": "RIGHT",
+      "kind": "DOOR",
+      "alongM": 9.723,
+      "widthM": 2.78,
+      "bottomY": 0,
+      "topY": 2.121,
+      "id": "opening-right-1"
+     }
+    ]
+   },
+   "decision": {
+    "accepted": "LOCAL",
+    "code": "BOTH_CONTRADICT",
+    "partial": true
+   },
+   "cost": {
+    "requests": 0,
+    "usd": 0,
+    "seconds": 5
+   }
+  }
+ },
+ "replays": {
+  "M1~R1a": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  },
+  "M1~R1b": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  },
+  "M2~R2a": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  },
+  "M2~R2b": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  },
+  "M3~R3a": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  },
+  "M3~R3b": {
+   "answersSame": true,
+   "hashesSame": {
+    "model": true,
+    "scene": true,
+    "observations": true,
+    "geometry": true,
+    "decision": true
+   },
+   "first": "none: identical"
+  }
+ },
+ "between": {
+  "M1~M2": {
+   "first": "INVENTORY: same request, different answer",
+   "openingsPaired": 4,
+   "onlyM1": 3,
+   "onlyM2": 0,
+   "kindChanged": 2,
+   "maxCentreMm": 238,
+   "rows": [
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 1.471
+    },
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 4.226
+    },
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 8.501
+    },
+    {
+     "side": "RIGHT",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": -91,
+     "dWidthMm": -52,
+     "dBottomMm": 0,
+     "dTopMm": -22
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "WINDOW",
+     "dCentreMm": -34,
+     "dWidthMm": -13,
+     "dBottomMm": 0,
+     "dTopMm": 10
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": -27,
+     "dWidthMm": 5,
+     "dBottomMm": 0,
+     "dTopMm": 282
+    },
+    {
+     "side": "REAR",
+     "kindA": "WINDOW",
+     "kindB": "DOOR",
+     "dCentreMm": -238,
+     "dWidthMm": 549,
+     "dBottomMm": 2,
+     "dTopMm": -170
+    }
+   ]
+  },
+  "M1~M3": {
+   "first": "INVENTORY: same request, different answer",
+   "openingsPaired": 4,
+   "onlyM1": 3,
+   "onlyM3": 0,
+   "kindChanged": 1,
+   "maxCentreMm": 58,
+   "rows": [
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 1.471
+    },
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 4.226
+    },
+    {
+     "side": "FRONT",
+     "only": "A",
+     "kind": "DOOR",
+     "alongM": 8.501
+    },
+    {
+     "side": "RIGHT",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": 7,
+     "dWidthMm": -125,
+     "dBottomMm": 0,
+     "dTopMm": -87
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "WINDOW",
+     "dCentreMm": -20,
+     "dWidthMm": -13,
+     "dBottomMm": 0,
+     "dTopMm": 8
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": -11,
+     "dWidthMm": 36,
+     "dBottomMm": 0,
+     "dTopMm": 291
+    },
+    {
+     "side": "REAR",
+     "kindA": "WINDOW",
+     "kindB": "WINDOW",
+     "dCentreMm": -58,
+     "dWidthMm": 143,
+     "dBottomMm": 11,
+     "dTopMm": -108
+    }
+   ]
+  },
+  "M2~M3": {
+   "first": "INVENTORY: same request, different answer",
+   "openingsPaired": 4,
+   "onlyM2": 0,
+   "onlyM3": 0,
+   "kindChanged": 1,
+   "maxCentreMm": 180,
+   "rows": [
+    {
+     "side": "RIGHT",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": 98,
+     "dWidthMm": -73,
+     "dBottomMm": 0,
+     "dTopMm": -65
+    },
+    {
+     "side": "REAR",
+     "kindA": "WINDOW",
+     "kindB": "WINDOW",
+     "dCentreMm": 14,
+     "dWidthMm": 0,
+     "dBottomMm": 0,
+     "dTopMm": -2
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "DOOR",
+     "dCentreMm": 16,
+     "dWidthMm": 31,
+     "dBottomMm": 0,
+     "dTopMm": 9
+    },
+    {
+     "side": "REAR",
+     "kindA": "DOOR",
+     "kindB": "WINDOW",
+     "dCentreMm": 180,
+     "dWidthMm": -406,
+     "dBottomMm": 9,
+     "dTopMm": 62
+    }
+   ]
+  }
+ },
+ "truth": {
+  "LOCAL": {
+   "reference": 11,
+   "matched": 11,
+   "ok": 11,
+   "false": 1,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.005,
+     "dWidth": 0.0,
+     "dBottom": 0.035,
+     "dTop": 0.035
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.0,
+     "dWidth": -0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.01,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": -0.05
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": -0.025,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.016,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.006,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.01
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.032,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "OK",
+     "dCentre": 0.043,
+     "dWidth": -0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "OK",
+     "dCentre": -0.008,
+     "dWidth": 0.0,
+     "dBottom": -0.1,
+     "dTop": -0.1
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.009,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.04,
+     "dWidth": 0.0,
+     "dBottom": 0.0,
+     "dTop": 0.0
+    }
+   ],
+   "falseHoles": [
+    {
+     "side": "LEFT",
+     "kind": "DOOR",
+     "alongM": 11.477
+    }
+   ]
+  },
+  "M1": {
+   "reference": 11,
+   "matched": 7,
+   "ok": 4,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.011,
+     "dWidth": -0.12,
+     "dBottom": 0.0,
+     "dTop": -0.079
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.167,
+     "dWidth": -0.425,
+     "dBottom": 0.0,
+     "dTop": -0.082
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.234,
+     "dWidth": -0.369,
+     "dBottom": 0.0,
+     "dTop": -0.029
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.079,
+     "dWidth": -0.118,
+     "dBottom": 0.0,
+     "dTop": -0.187
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.271,
+     "dWidth": -0.7,
+     "dBottom": 0.862,
+     "dTop": -0.509
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.093,
+     "dWidth": -0.095,
+     "dBottom": 0.0,
+     "dTop": -0.092
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.014,
+     "dWidth": -0.053,
+     "dBottom": 0.0,
+     "dTop": -0.071
+    }
+   ],
+   "falseHoles": []
+  },
+  "M2": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.052,
+     "dWidth": -0.113,
+     "dBottom": 0.0,
+     "dTop": 0.095
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.033,
+     "dWidth": -0.151,
+     "dBottom": 0.864,
+     "dTop": -0.679
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.184,
+     "dWidth": -0.147,
+     "dBottom": 0.0,
+     "dTop": -0.114
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.019,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.061
+    }
+   ],
+   "falseHoles": []
+  },
+  "M3": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.068,
+     "dWidth": -0.082,
+     "dBottom": 0.0,
+     "dTop": 0.104
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.213,
+     "dWidth": -0.557,
+     "dBottom": 0.873,
+     "dTop": -0.617
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.087,
+     "dWidth": -0.22,
+     "dBottom": 0.0,
+     "dTop": -0.179
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.005,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.063
+    }
+   ],
+   "falseHoles": []
+  },
+  "R1a": {
+   "reference": 11,
+   "matched": 7,
+   "ok": 4,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.011,
+     "dWidth": -0.12,
+     "dBottom": 0.0,
+     "dTop": -0.079
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.167,
+     "dWidth": -0.425,
+     "dBottom": 0.0,
+     "dTop": -0.082
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.234,
+     "dWidth": -0.369,
+     "dBottom": 0.0,
+     "dTop": -0.029
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.079,
+     "dWidth": -0.118,
+     "dBottom": 0.0,
+     "dTop": -0.187
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.271,
+     "dWidth": -0.7,
+     "dBottom": 0.862,
+     "dTop": -0.509
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.093,
+     "dWidth": -0.095,
+     "dBottom": 0.0,
+     "dTop": -0.092
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.014,
+     "dWidth": -0.053,
+     "dBottom": 0.0,
+     "dTop": -0.071
+    }
+   ],
+   "falseHoles": []
+  },
+  "R1b": {
+   "reference": 11,
+   "matched": 7,
+   "ok": 4,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "OK",
+     "dCentre": 0.011,
+     "dWidth": -0.12,
+     "dBottom": 0.0,
+     "dTop": -0.079
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.167,
+     "dWidth": -0.425,
+     "dBottom": 0.0,
+     "dTop": -0.082
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "OFF",
+     "dCentre": -0.234,
+     "dWidth": -0.369,
+     "dBottom": 0.0,
+     "dTop": -0.029
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.079,
+     "dWidth": -0.118,
+     "dBottom": 0.0,
+     "dTop": -0.187
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.271,
+     "dWidth": -0.7,
+     "dBottom": 0.862,
+     "dTop": -0.509
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.093,
+     "dWidth": -0.095,
+     "dBottom": 0.0,
+     "dTop": -0.092
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.014,
+     "dWidth": -0.053,
+     "dBottom": 0.0,
+     "dTop": -0.071
+    }
+   ],
+   "falseHoles": []
+  },
+  "R2a": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.052,
+     "dWidth": -0.113,
+     "dBottom": 0.0,
+     "dTop": 0.095
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.033,
+     "dWidth": -0.151,
+     "dBottom": 0.864,
+     "dTop": -0.679
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.184,
+     "dWidth": -0.147,
+     "dBottom": 0.0,
+     "dTop": -0.114
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.019,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.061
+    }
+   ],
+   "falseHoles": []
+  },
+  "R2b": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.052,
+     "dWidth": -0.113,
+     "dBottom": 0.0,
+     "dTop": 0.095
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.033,
+     "dWidth": -0.151,
+     "dBottom": 0.864,
+     "dTop": -0.679
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.184,
+     "dWidth": -0.147,
+     "dBottom": 0.0,
+     "dTop": -0.114
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.019,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.061
+    }
+   ],
+   "falseHoles": []
+  },
+  "R3a": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.068,
+     "dWidth": -0.082,
+     "dBottom": 0.0,
+     "dTop": 0.104
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.213,
+     "dWidth": -0.557,
+     "dBottom": 0.873,
+     "dTop": -0.617
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.087,
+     "dWidth": -0.22,
+     "dBottom": 0.0,
+     "dTop": -0.179
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.005,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.063
+    }
+   ],
+   "falseHoles": []
+  },
+  "R3b": {
+   "reference": 11,
+   "matched": 4,
+   "ok": 3,
+   "false": 0,
+   "rows": [
+    {
+     "truth": "T2-OPEN-FRONT-ROOM",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-ENTRANCE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-DOOR",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-FRONT-GABLE",
+     "side": "FRONT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GLAZING",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": 0.068,
+     "dWidth": -0.082,
+     "dBottom": 0.0,
+     "dTop": 0.104
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-W",
+     "side": "REAR",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-REAR-GABLE-E",
+     "side": "REAR",
+     "result": "OFF",
+     "dCentre": 0.213,
+     "dWidth": -0.557,
+     "dBottom": 0.873,
+     "dTop": -0.617
+    },
+    {
+     "truth": "T2-OPEN-WEST-LIVING",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-WEST-KITCHEN",
+     "side": "LEFT",
+     "result": "MISSING"
+    },
+    {
+     "truth": "T2-OPEN-EAST-LIVING",
+     "side": "RIGHT",
+     "result": "OK",
+     "dCentre": -0.087,
+     "dWidth": -0.22,
+     "dBottom": 0.0,
+     "dTop": -0.179
+    },
+    {
+     "truth": "T2-OPEN-GARAGE-SIDE",
+     "side": "REAR",
+     "result": "OK",
+     "dCentre": -0.005,
+     "dWidth": -0.066,
+     "dBottom": 0.0,
+     "dTop": -0.063
+    }
+   ],
+   "falseHoles": []
+  }
+ }
+}

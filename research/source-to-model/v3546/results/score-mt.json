@@ -1,0 +1,1590 @@
+{
+ "scorer": "v3545-detail/1",
+ "tolerances": {
+  "extentM": 0.35,
+  "extentShare": 0.04,
+  "ridgeM": 0.45,
+  "posFloorM": 0.3,
+  "sizeFloorM": 0.25,
+  "sizeShare": 0.15,
+  "uncertaintyFactor": 2.0,
+  "gateM": 0.8,
+  "gateShare": 0.6,
+  "levelSlackM": 0.6,
+  "sideHalf": 0.5
+ },
+ "houses": {
+  "c5-extradom-tracja-2": {
+   "OLD_CNEW": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 13.84,
+     "depthM": 9.34,
+     "refWidthM": 13.84,
+     "refDepthM": 9.34
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 5.927,
+     "refRidgeM": 5.9
+    },
+    "openings": {
+     "reference": 10,
+     "matched": 10,
+     "ok": 10,
+     "missing": 0,
+     "false": 0,
+     "built": 10,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 5,
+      "matched": 5,
+      "ok": 5,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "RIGHT": {
+      "reference": 0,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": true,
+      "metric": true,
+      "built": true
+     },
+     "REAR": {
+      "reference": 4,
+      "matched": 4,
+      "ok": 4,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     }
+    },
+    "sidesBuilt": 4,
+    "errors": {
+     "dAlong": {
+      "n": 10,
+      "median": 0.013,
+      "p90": 0.026,
+      "max": 0.026
+     },
+     "dCentreY": {
+      "n": 10,
+      "median": 0.025,
+      "p90": 0.242,
+      "max": 0.242
+     },
+     "dWidth": {
+      "n": 10,
+      "median": 0.013,
+      "p90": 0.064,
+      "max": 0.064
+     },
+     "dHeight": {
+      "n": 10,
+      "median": 0.053,
+      "p90": 0.076,
+      "max": 0.076
+     },
+     "dBottom": {
+      "n": 10,
+      "median": 0.049,
+      "p90": 0.278,
+      "max": 0.278
+     }
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-1",
+      "dAlong": -0.003,
+      "dCentreY": 0.015,
+      "dWidth": -0.002,
+      "dHeight": -0.036,
+      "dBottom": 0.033,
+      "refWidthM": 1.67,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-2",
+      "dAlong": -0.014,
+      "dCentreY": 0.032,
+      "dWidth": -0.018,
+      "dHeight": -0.07,
+      "dBottom": 0.067,
+      "refWidthM": 0.79,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-front-3",
+      "dAlong": -0.009,
+      "dCentreY": 0.024,
+      "dWidth": -0.002,
+      "dHeight": 0.015,
+      "dBottom": 0.017,
+      "refWidthM": 1.09,
+      "refHeightM": 2.27,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-4",
+      "dAlong": -0.002,
+      "dCentreY": 0.032,
+      "dWidth": 0.016,
+      "dHeight": -0.07,
+      "dBottom": 0.067,
+      "refWidthM": 0.77,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F5",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-5",
+      "dAlong": -0.014,
+      "dCentreY": 0.015,
+      "dWidth": -0.037,
+      "dHeight": -0.036,
+      "dBottom": 0.033,
+      "refWidthM": 1.71,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-rear-1",
+      "dAlong": 0.017,
+      "dCentreY": 0.003,
+      "dWidth": 0.011,
+      "dHeight": -0.028,
+      "dBottom": 0.017,
+      "refWidthM": 1.1,
+      "refHeightM": 2.28,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-2",
+      "dAlong": 0.006,
+      "dCentreY": 0.026,
+      "dWidth": 0.01,
+      "dHeight": -0.076,
+      "dBottom": 0.064,
+      "refWidthM": 1.41,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-3",
+      "dAlong": -0.017,
+      "dCentreY": 0.026,
+      "dWidth": -0.007,
+      "dHeight": -0.076,
+      "dBottom": 0.064,
+      "refWidthM": 1.37,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B4",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-rear-4",
+      "dAlong": -0.012,
+      "dCentreY": 0.003,
+      "dWidth": -0.064,
+      "dHeight": -0.028,
+      "dBottom": 0.017,
+      "refWidthM": 2.68,
+      "refHeightM": 2.28,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-left-1",
+      "dAlong": -0.026,
+      "dCentreY": 0.242,
+      "dWidth": -0.037,
+      "dHeight": -0.071,
+      "dBottom": 0.278,
+      "refWidthM": 1.71,
+      "refHeightM": 1.5,
+      "kindAgrees": true,
+      "result": "OK"
+     }
+    ],
+    "register": {
+     "FRONT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_COMPLETE"
+     },
+     "RIGHT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "NOT_BUILT"
+     },
+     "REAR": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     },
+     "LEFT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     }
+    },
+    "sidesAccounted": 4,
+    "fits": {
+     "EXACT": 10
+    }
+   },
+   "FRESH_NEW": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 13.84,
+     "depthM": 9.34,
+     "refWidthM": 13.84,
+     "refDepthM": 9.34
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 5.888,
+     "refRidgeM": 5.9
+    },
+    "openings": {
+     "reference": 10,
+     "matched": 10,
+     "ok": 10,
+     "missing": 0,
+     "false": 0,
+     "built": 10,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 5,
+      "matched": 5,
+      "ok": 5,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "RIGHT": {
+      "reference": 0,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": true,
+      "metric": true,
+      "built": true
+     },
+     "REAR": {
+      "reference": 4,
+      "matched": 4,
+      "ok": 4,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     }
+    },
+    "sidesBuilt": 4,
+    "errors": {
+     "dAlong": {
+      "n": 10,
+      "median": 0.002,
+      "p90": 0.026,
+      "max": 0.026
+     },
+     "dCentreY": {
+      "n": 10,
+      "median": 0.027,
+      "p90": 0.162,
+      "max": 0.162
+     },
+     "dWidth": {
+      "n": 10,
+      "median": 0.015,
+      "p90": 0.061,
+      "max": 0.061
+     },
+     "dHeight": {
+      "n": 10,
+      "median": 0.03,
+      "p90": 0.074,
+      "max": 0.074
+     },
+     "dBottom": {
+      "n": 10,
+      "median": 0.041,
+      "p90": 0.198,
+      "max": 0.198
+     }
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-1",
+      "dAlong": 0.0,
+      "dCentreY": 0.026,
+      "dWidth": -0.0,
+      "dHeight": 0.018,
+      "dBottom": 0.017,
+      "refWidthM": 1.67,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-2",
+      "dAlong": -0.0,
+      "dCentreY": 0.051,
+      "dWidth": 0.0,
+      "dHeight": -0.034,
+      "dBottom": 0.068,
+      "refWidthM": 0.79,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-front-3",
+      "dAlong": 0.0,
+      "dCentreY": 0.026,
+      "dWidth": 0.0,
+      "dHeight": 0.018,
+      "dBottom": 0.017,
+      "refWidthM": 1.09,
+      "refHeightM": 2.27,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-4",
+      "dAlong": 0.008,
+      "dCentreY": 0.051,
+      "dWidth": 0.017,
+      "dHeight": -0.034,
+      "dBottom": 0.068,
+      "refWidthM": 0.77,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F5",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-5",
+      "dAlong": -0.0,
+      "dCentreY": 0.026,
+      "dWidth": -0.035,
+      "dHeight": 0.018,
+      "dBottom": 0.017,
+      "refWidthM": 1.71,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-rear-1",
+      "dAlong": 0.019,
+      "dCentreY": 0.004,
+      "dWidth": 0.013,
+      "dHeight": -0.026,
+      "dBottom": 0.017,
+      "refWidthM": 1.1,
+      "refHeightM": 2.28,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-2",
+      "dAlong": 0.002,
+      "dCentreY": 0.028,
+      "dWidth": -0.039,
+      "dHeight": -0.074,
+      "dBottom": 0.065,
+      "refWidthM": 1.41,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-3",
+      "dAlong": -0.008,
+      "dCentreY": 0.028,
+      "dWidth": -0.005,
+      "dHeight": -0.074,
+      "dBottom": 0.065,
+      "refWidthM": 1.37,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B4",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-rear-4",
+      "dAlong": 0.002,
+      "dCentreY": 0.004,
+      "dWidth": -0.061,
+      "dHeight": -0.026,
+      "dBottom": 0.017,
+      "refWidthM": 2.68,
+      "refHeightM": 2.28,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-left-1",
+      "dAlong": -0.026,
+      "dCentreY": 0.162,
+      "dWidth": -0.037,
+      "dHeight": -0.071,
+      "dBottom": 0.198,
+      "refWidthM": 1.71,
+      "refHeightM": 1.5,
+      "kindAgrees": true,
+      "result": "OK"
+     }
+    ],
+    "register": {
+     "FRONT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_COMPLETE"
+     },
+     "RIGHT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "NOT_BUILT"
+     },
+     "REAR": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     },
+     "LEFT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     }
+    },
+    "sidesAccounted": 4,
+    "fits": {
+     "EXACT": 10
+    }
+   },
+   "LOCAL": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 13.953,
+     "depthM": 9.264,
+     "refWidthM": 13.84,
+     "refDepthM": 9.34
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 5.474,
+     "refRidgeM": 5.9
+    },
+    "openings": {
+     "reference": 10,
+     "matched": 10,
+     "ok": 8,
+     "missing": 0,
+     "false": 0,
+     "built": 10,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 5,
+      "matched": 5,
+      "ok": 4,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "RIGHT": {
+      "reference": 0,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": true,
+      "metric": true,
+      "built": true
+     },
+     "REAR": {
+      "reference": 4,
+      "matched": 4,
+      "ok": 3,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     }
+    },
+    "sidesBuilt": 4,
+    "errors": {
+     "dAlong": {
+      "n": 10,
+      "median": 0.113,
+      "p90": 0.256,
+      "max": 0.256
+     },
+     "dCentreY": {
+      "n": 10,
+      "median": 0.029,
+      "p90": 0.427,
+      "max": 0.427
+     },
+     "dWidth": {
+      "n": 10,
+      "median": 0.23,
+      "p90": 0.258,
+      "max": 0.258
+     },
+     "dHeight": {
+      "n": 10,
+      "median": 0.173,
+      "p90": 0.981,
+      "max": 0.981
+     },
+     "dBottom": {
+      "n": 10,
+      "median": 0.114,
+      "p90": 0.917,
+      "max": 0.917
+     }
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-front-0-0",
+      "dAlong": -0.145,
+      "dCentreY": 0.029,
+      "dWidth": 0.258,
+      "dHeight": -0.169,
+      "dBottom": 0.114,
+      "refWidthM": 1.67,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OFF",
+      "off": [
+       "dWidth"
+      ]
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-front-0-1",
+      "dAlong": -0.047,
+      "dCentreY": 0.029,
+      "dWidth": 0.231,
+      "dHeight": -0.169,
+      "dBottom": 0.114,
+      "refWidthM": 0.79,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-0-front-0-2",
+      "dAlong": 0.05,
+      "dCentreY": -0.069,
+      "dWidth": 0.05,
+      "dHeight": -0.172,
+      "dBottom": 0.017,
+      "refWidthM": 1.09,
+      "refHeightM": 2.27,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-front-0-3",
+      "dAlong": 0.139,
+      "dCentreY": 0.029,
+      "dWidth": 0.248,
+      "dHeight": -0.169,
+      "dBottom": 0.114,
+      "refWidthM": 0.77,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F5",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-front-0-4",
+      "dAlong": 0.256,
+      "dCentreY": 0.029,
+      "dWidth": 0.197,
+      "dHeight": -0.169,
+      "dBottom": 0.114,
+      "refWidthM": 1.71,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-0-rear-2-3",
+      "dAlong": -0.169,
+      "dCentreY": -0.073,
+      "dWidth": 0.046,
+      "dHeight": -0.181,
+      "dBottom": 0.017,
+      "refWidthM": 1.1,
+      "refHeightM": 2.28,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-rear-2-2",
+      "dAlong": -0.087,
+      "dCentreY": 0.024,
+      "dWidth": 0.195,
+      "dHeight": -0.175,
+      "dBottom": 0.111,
+      "refWidthM": 1.41,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-rear-2-1",
+      "dAlong": 0.039,
+      "dCentreY": 0.024,
+      "dWidth": 0.229,
+      "dHeight": -0.175,
+      "dBottom": 0.111,
+      "refWidthM": 1.37,
+      "refHeightM": 1.47,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B4",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-0-rear-2-0",
+      "dAlong": 0.202,
+      "dCentreY": 0.427,
+      "dWidth": 0.248,
+      "dHeight": -0.981,
+      "dBottom": 0.917,
+      "refWidthM": 2.68,
+      "refHeightM": 2.28,
+      "kindAgrees": false,
+      "result": "OFF",
+      "off": [
+       "dCentreY",
+       "dHeight",
+       "dBottom"
+      ]
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-west-3-0",
+      "dAlong": -0.032,
+      "dCentreY": 0.064,
+      "dWidth": 0.25,
+      "dHeight": -0.203,
+      "dBottom": 0.166,
+      "refWidthM": 1.71,
+      "refHeightM": 1.5,
+      "kindAgrees": true,
+      "result": "OK"
+     }
+    ]
+   }
+  },
+  "c5-extradom-mirabelka-4": {
+   "OLD_CNEW": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 11.9,
+     "depthM": 8.65,
+     "refWidthM": 11.9,
+     "refDepthM": 8.65
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 6.43,
+     "refRidgeM": 6.25
+    },
+    "openings": {
+     "reference": 9,
+     "matched": 0,
+     "ok": 0,
+     "missing": 9,
+     "false": 0,
+     "built": 0,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 4,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": false
+     },
+     "RIGHT": {
+      "reference": 1,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": false
+     },
+     "REAR": {
+      "reference": 3,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": false
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 0,
+      "ok": 0,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": false
+     }
+    },
+    "sidesBuilt": 0,
+    "errors": {
+     "dAlong": null,
+     "dCentreY": null,
+     "dWidth": null,
+     "dHeight": null,
+     "dBottom": null
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "RIGHT",
+      "ref": "R1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": null,
+      "result": "MISSING"
+     }
+    ],
+    "register": {
+     "FRONT": {
+      "state": "NO_SOURCE",
+      "registered": false,
+      "build": "NOT_BUILT"
+     },
+     "RIGHT": {
+      "state": "NO_SOURCE",
+      "registered": false,
+      "build": "NOT_BUILT"
+     },
+     "REAR": {
+      "state": "NO_SOURCE",
+      "registered": false,
+      "build": "NOT_BUILT"
+     },
+     "LEFT": {
+      "state": "NO_SOURCE",
+      "registered": false,
+      "build": "NOT_BUILT"
+     }
+    },
+    "sidesAccounted": 0,
+    "fits": {}
+   },
+   "FRESH_NEW": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 11.9,
+     "depthM": 8.65,
+     "refWidthM": 11.9,
+     "refDepthM": 8.65
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 6.097,
+     "refRidgeM": 6.25
+    },
+    "openings": {
+     "reference": 9,
+     "matched": 9,
+     "ok": 9,
+     "missing": 0,
+     "false": 0,
+     "built": 9,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 4,
+      "matched": 4,
+      "ok": 4,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "RIGHT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "REAR": {
+      "reference": 3,
+      "matched": 3,
+      "ok": 3,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     }
+    },
+    "sidesBuilt": 4,
+    "errors": {
+     "dAlong": {
+      "n": 9,
+      "median": 0.016,
+      "p90": 0.11,
+      "max": 0.11
+     },
+     "dCentreY": {
+      "n": 9,
+      "median": 0.025,
+      "p90": 0.092,
+      "max": 0.092
+     },
+     "dWidth": {
+      "n": 9,
+      "median": 0.011,
+      "p90": 0.035,
+      "max": 0.035
+     },
+     "dHeight": {
+      "n": 9,
+      "median": 0.037,
+      "p90": 0.096,
+      "max": 0.096
+     },
+     "dBottom": {
+      "n": 9,
+      "median": 0.037,
+      "p90": 0.11,
+      "max": 0.11
+     }
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-1",
+      "dAlong": -0.005,
+      "dCentreY": 0.018,
+      "dWidth": 0.007,
+      "dHeight": 0.028,
+      "dBottom": 0.004,
+      "refWidthM": 2.38,
+      "refHeightM": 1.5,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-front-2",
+      "dAlong": -0.016,
+      "dCentreY": 0.033,
+      "dWidth": 0.001,
+      "dHeight": -0.008,
+      "dBottom": 0.037,
+      "refWidthM": 1.01,
+      "refHeightM": 2.09,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-3",
+      "dAlong": -0.027,
+      "dCentreY": 0.025,
+      "dWidth": -0.024,
+      "dHeight": 0.017,
+      "dBottom": 0.016,
+      "refWidthM": 1.21,
+      "refHeightM": 0.88,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-front-4",
+      "dAlong": -0.025,
+      "dCentreY": 0.025,
+      "dWidth": -0.006,
+      "dHeight": 0.017,
+      "dBottom": 0.016,
+      "refWidthM": 1.19,
+      "refHeightM": 0.88,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "RIGHT",
+      "ref": "R1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "opening-right-1",
+      "dAlong": -0.11,
+      "dCentreY": 0.066,
+      "dWidth": 0.001,
+      "dHeight": 0.096,
+      "dBottom": 0.018,
+      "refWidthM": 1.0,
+      "refHeightM": 1.98,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-1",
+      "dAlong": -0.001,
+      "dCentreY": 0.017,
+      "dWidth": -0.011,
+      "dHeight": -0.048,
+      "dBottom": 0.042,
+      "refWidthM": 1.49,
+      "refHeightM": 1.53,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-rear-2",
+      "dAlong": -0.015,
+      "dCentreY": 0.017,
+      "dWidth": -0.03,
+      "dHeight": -0.048,
+      "dBottom": 0.042,
+      "refWidthM": 1.51,
+      "refHeightM": 1.53,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-rear-3",
+      "dAlong": -0.022,
+      "dCentreY": 0.024,
+      "dWidth": -0.035,
+      "dHeight": -0.062,
+      "dBottom": 0.055,
+      "refWidthM": 2.8,
+      "refHeightM": 2.34,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-left-1",
+      "dAlong": 0.009,
+      "dCentreY": 0.092,
+      "dWidth": -0.027,
+      "dHeight": -0.037,
+      "dBottom": 0.11,
+      "refWidthM": 2.39,
+      "refHeightM": 2.34,
+      "kindAgrees": false,
+      "result": "OK"
+     }
+    ],
+    "register": {
+     "FRONT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     },
+     "RIGHT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     },
+     "REAR": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_COMPLETE"
+     },
+     "LEFT": {
+      "state": "READ_COMPLETE",
+      "registered": true,
+      "build": "BUILT_PARTIAL"
+     }
+    },
+    "sidesAccounted": 4,
+    "fits": {
+     "EXACT": 9
+    }
+   },
+   "LOCAL": {
+    "scorer": "v3545-detail/1",
+    "model": true,
+    "sidesPublished": 4,
+    "extents": {
+     "ok": true,
+     "widthM": 11.901,
+     "depthM": 8.601,
+     "refWidthM": 11.9,
+     "refDepthM": 8.65
+    },
+    "height": {
+     "ok": true,
+     "roofTopM": 5.811,
+     "refRidgeM": 6.25
+    },
+    "openings": {
+     "reference": 9,
+     "matched": 7,
+     "ok": 3,
+     "missing": 2,
+     "false": 5,
+     "built": 12,
+     "presenceOnly": 0
+    },
+    "sides": {
+     "FRONT": {
+      "reference": 4,
+      "matched": 2,
+      "ok": 1,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "RIGHT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 0,
+      "false": 2,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "REAR": {
+      "reference": 3,
+      "matched": 3,
+      "ok": 2,
+      "false": 3,
+      "blind": false,
+      "metric": true,
+      "built": true
+     },
+     "LEFT": {
+      "reference": 1,
+      "matched": 1,
+      "ok": 0,
+      "false": 0,
+      "blind": false,
+      "metric": true,
+      "built": true
+     }
+    },
+    "sidesBuilt": 4,
+    "errors": {
+     "dAlong": {
+      "n": 7,
+      "median": 0.102,
+      "p90": 0.314,
+      "max": 0.314
+     },
+     "dCentreY": {
+      "n": 7,
+      "median": 0.155,
+      "p90": 0.705,
+      "max": 0.705
+     },
+     "dWidth": {
+      "n": 7,
+      "median": 0.173,
+      "p90": 5.826,
+      "max": 5.826
+     },
+     "dHeight": {
+      "n": 7,
+      "median": 0.273,
+      "p90": 1.378,
+      "max": 1.378
+     },
+     "dBottom": {
+      "n": 7,
+      "median": 0.144,
+      "p90": 1.394,
+      "max": 1.394
+     }
+    },
+    "rows": [
+     {
+      "side": "FRONT",
+      "ref": "F1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-front-0-0",
+      "dAlong": -0.102,
+      "dCentreY": 0.028,
+      "dWidth": 0.173,
+      "dHeight": -0.204,
+      "dBottom": 0.13,
+      "refWidthM": 2.38,
+      "refHeightM": 1.5,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F2",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "FRONT",
+      "ref": "F3",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "pocket-main-0-0-mouth",
+      "dAlong": 0.132,
+      "dCentreY": -0.705,
+      "dWidth": 5.826,
+      "dHeight": 1.378,
+      "dBottom": -1.394,
+      "refWidthM": 1.21,
+      "refHeightM": 0.88,
+      "kindAgrees": true,
+      "result": "OFF",
+      "off": [
+       "dCentreY",
+       "dWidth",
+       "dHeight",
+       "dBottom"
+      ]
+     },
+     {
+      "side": "FRONT",
+      "ref": "F4",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": null,
+      "result": "MISSING"
+     },
+     {
+      "side": "RIGHT",
+      "ref": "R1",
+      "level": 0,
+      "kind": "DOOR",
+      "scene": "pocket-main-0-1-mouth",
+      "dAlong": -0.314,
+      "dCentreY": 0.155,
+      "dWidth": 2.028,
+      "dHeight": 0.273,
+      "dBottom": 0.018,
+      "refWidthM": 1.0,
+      "refHeightM": 1.98,
+      "kindAgrees": true,
+      "result": "OFF",
+      "off": [
+       "dAlong",
+       "dWidth"
+      ]
+     },
+     {
+      "side": "RIGHT",
+      "ref": null,
+      "scene": "pocket-main-0-1-opening-0-east-5-0",
+      "result": "FALSE",
+      "alongM": 3.23,
+      "widthM": 0.704,
+      "bottomY": 0
+     },
+     {
+      "side": "RIGHT",
+      "ref": null,
+      "scene": "opening-0-east-1-0",
+      "result": "FALSE",
+      "alongM": 4.3,
+      "widthM": 3.771,
+      "bottomY": 0.9
+     },
+     {
+      "side": "REAR",
+      "ref": "B1",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-rear-2-2",
+      "dAlong": -0.293,
+      "dCentreY": 0.028,
+      "dWidth": 0.175,
+      "dHeight": -0.231,
+      "dBottom": 0.144,
+      "refWidthM": 1.49,
+      "refHeightM": 1.53,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B2",
+      "level": 0,
+      "kind": "WINDOW",
+      "scene": "opening-0-rear-2-1",
+      "dAlong": -0.088,
+      "dCentreY": 0.028,
+      "dWidth": 0.094,
+      "dHeight": -0.231,
+      "dBottom": 0.144,
+      "refWidthM": 1.51,
+      "refHeightM": 1.53,
+      "kindAgrees": true,
+      "result": "OK"
+     },
+     {
+      "side": "REAR",
+      "ref": "B3",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-0-rear-2-0",
+      "dAlong": 0.054,
+      "dCentreY": 0.434,
+      "dWidth": 0.148,
+      "dHeight": -1.043,
+      "dBottom": 0.955,
+      "refWidthM": 2.8,
+      "refHeightM": 2.34,
+      "kindAgrees": false,
+      "result": "OFF",
+      "off": [
+       "dCentreY",
+       "dHeight",
+       "dBottom"
+      ]
+     },
+     {
+      "side": "REAR",
+      "ref": null,
+      "scene": "pocket-main-0-0-opening-0-front-4-2",
+      "result": "FALSE",
+      "alongM": 0.52,
+      "widthM": 1.614,
+      "bottomY": 0.9
+     },
+     {
+      "side": "REAR",
+      "ref": null,
+      "scene": "pocket-main-0-0-opening-0-front-4-1",
+      "result": "FALSE",
+      "alongM": 2.16,
+      "widthM": 2.582,
+      "bottomY": 0.9
+     },
+     {
+      "side": "REAR",
+      "ref": null,
+      "scene": "pocket-main-0-0-opening-0-front-4-0",
+      "result": "FALSE",
+      "alongM": 4.77,
+      "widthM": 2.213,
+      "bottomY": 0.9
+     },
+     {
+      "side": "LEFT",
+      "ref": "L1",
+      "level": 0,
+      "kind": "GLAZED_DOOR",
+      "scene": "opening-0-west-3-0",
+      "dAlong": -0.016,
+      "dCentreY": 0.492,
+      "dWidth": 0.11,
+      "dHeight": -1.037,
+      "dBottom": 1.01,
+      "refWidthM": 2.39,
+      "refHeightM": 2.34,
+      "kindAgrees": false,
+      "result": "OFF",
+      "off": [
+       "dCentreY",
+       "dHeight",
+       "dBottom"
+      ]
+     }
+    ]
+   }
+  }
+ }
+}
