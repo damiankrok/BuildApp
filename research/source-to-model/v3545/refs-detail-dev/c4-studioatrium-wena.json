@@ -1,0 +1,589 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-studioatrium-wena",
+ "packageContentHash": "c11dcec0d011f30315affd691c84909b61157412b0aad4dfd063ce1020cc6bb4",
+ "reader": "independent source reader B: publisher's four elevation pictures, ground and attic plan and page facts only, read against a pixel grid; no analyzer, solver, API reading or model output seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door of room 1 opens through the bottom wall of the ground plan into the recessed corner porch (entry arrows and steps at the bottom-right corner); the elevation with the entrance door is the 8.80 m gable (picture 1).",
+ "overall": {
+  "widthM": 8.8,
+  "depthM": 11.2,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "8.80 = front/rear gable wall, 11.20 = walled house depth. The plan's 15.20 (and the page's building length 15.2) adds the 4.00 m open rear terrace with its stone screen wall. The upper floor has a timber box projecting 1.30 beyond the left wall (10.10 printed on the attic plan); the box is not in the 8.80."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 8.16,
+  "ridgeBasis": "PAGE_HEIGHT_MINUS_TERRAIN",
+  "terrainBelowZeroM": 0.3,
+  "upperFloorLevelsM": [
+   2.9
+  ],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-domu-wena-1-13bbc4faeb",
+   "file": "00_ELEVATION_NOT_APPLICABLE_UNKNOWN.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 381,
+   "wallRightPx": 661,
+   "sideLengthM": 8.8,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 478,
+   "zeroRowHow": "floor line: bottom of the entrance door / top of the entrance steps; ground line is at row 488",
+   "ridgeRowPx": 217,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 414,
+      "y0": 430,
+      "x1": 508,
+      "y1": 449
+     },
+     "panels": 4,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "kitchen slot window, about 2.96 m x 0.6 m; pane count read as 4, could be 3"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 611,
+      "y0": 405,
+      "x1": 641,
+      "y1": 478
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "entrance door set back in the corner porch recess (recess opening x 604..647, corner column x 647..661); upper part and left edge of the door are in the recess shadow, so the leaf edges are less certain than the recess edges"
+    },
+    {
+     "id": "F3",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 464,
+      "y0": 313,
+      "x1": 507,
+      "y1": 386
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "French balcony door of attic room 4 in the gable; a railing stands in front of its lower half"
+    },
+    {
+     "id": "F4",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 562,
+      "y0": 313,
+      "x1": 581,
+      "y1": 386
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "narrow French balcony door of attic room 3 (about 0.6 m wide), railing in front of its lower half"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 515,
+      "y0": 200,
+      "x1": 546,
+      "y1": 228
+     },
+     "note": "chimney at the ridge"
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 604,
+      "y0": 402,
+      "x1": 661,
+      "y1": 478
+     },
+     "note": "corner entrance recess under the upper floor with one corner column (x 647..661); not a separate roof"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 458,
+      "y0": 357,
+      "x1": 514,
+      "y1": 393
+     },
+     "note": "French-balcony railing in front of F3, no slab on the attic plan"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 556,
+      "y0": 357,
+      "x1": 588,
+      "y1": 393
+     },
+     "note": "French-balcony railing in front of F4, no slab on the attic plan"
+    }
+   ]
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-domu-wena-2-de444dfdfc",
+   "file": "01_ELEVATION_NOT_APPLICABLE_UNKNOWN.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 287,
+   "wallRightPx": 641,
+   "sideLengthM": 11.2,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 478,
+   "zeroRowHow": "floor line: top of the entrance steps at the left end; ground line at row 489",
+   "ridgeRowPx": 228,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 308,
+      "y0": 407,
+      "x1": 318,
+      "y1": 424
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": true,
+     "note": "small window of room 4 that faces right INSIDE the entrance porch recess, about 1.3 m behind the right wall face; seen through the dark recess slot (x 301..318, y 402..478) between the corner column and the wall. Only two bright panes are visible; the slot itself is not a door"
+    },
+    {
+     "id": "R2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 338,
+      "y0": 406,
+      "x1": 365,
+      "y1": 440
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window of room 1 (hall)"
+    },
+    {
+     "id": "R3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 564,
+      "y0": 406,
+      "x1": 626,
+      "y1": 440
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window of room 7"
+    },
+    {
+     "id": "R4",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 409,
+      "y0": 302,
+      "x1": 432,
+      "y1": 331
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window over the bathroom"
+    },
+    {
+     "id": "R5",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 496,
+      "y0": 302,
+      "x1": 519,
+      "y1": 331
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window over the stairs"
+    },
+    {
+     "id": "R6",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 496,
+      "y0": 238,
+      "x1": 519,
+      "y1": 252
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "small unit just below the ridge beside the chimney-sweep steps: most likely a roof-access hatch, not a room window"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 348,
+      "y0": 200,
+      "x1": 370,
+      "y1": 248
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 531,
+      "y0": 205,
+      "x1": 548,
+      "y1": 232
+     },
+     "note": ""
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 287,
+      "y0": 402,
+      "x1": 318,
+      "y1": 478
+     },
+     "note": "side of the corner entrance recess: column x 287..301, open slot x 301..318"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 281,
+      "y0": 356,
+      "x1": 287,
+      "y1": 384
+     },
+     "note": "front French-balcony railings seen edge-on"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 641,
+      "y0": 356,
+      "x1": 647,
+      "y1": 384
+     },
+     "note": "rear French-balcony railings seen edge-on"
+    }
+   ]
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-domu-wena-3-e40b52f5a1",
+   "file": "02_ELEVATION_NOT_APPLICABLE_UNKNOWN.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 361,
+   "wallRightPx": 641,
+   "sideLengthM": 8.8,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 478,
+   "zeroRowHow": "floor line: bottom of the living-room glazed door at the terrace deck; ground line at row 489",
+   "ridgeRowPx": 216,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 377,
+      "y0": 406,
+      "x1": 439,
+      "y1": 440
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window of room 7"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 531,
+      "y0": 406,
+      "x1": 625,
+      "y1": 478
+     },
+     "panels": 3,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "living-room glazed unit with a door leaf to the terrace; terrace furniture stands in front of its lower right part"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 427,
+      "y0": 313,
+      "x1": 470,
+      "y1": 386
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "French balcony door of attic room 7, railing in front of its lower half"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 531,
+      "y0": 313,
+      "x1": 575,
+      "y1": 386
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "French balcony door of attic room 6, railing in front of its lower half"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 478,
+      "y0": 200,
+      "x1": 510,
+      "y1": 228
+     },
+     "note": ""
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 423,
+      "y0": 357,
+      "x1": 479,
+      "y1": 393
+     },
+     "note": "French-balcony railing in front of B3"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 526,
+      "y0": 357,
+      "x1": 582,
+      "y1": 393
+     },
+     "note": "French-balcony railing in front of B4"
+    }
+   ]
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-domu-wena-4-a6d0b7581d",
+   "file": "03_ELEVATION_NOT_APPLICABLE_UNKNOWN.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 382,
+   "wallRightPx": 737,
+   "sideLengthM": 11.2,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 478,
+   "zeroRowHow": "floor line: bottom of the ground-floor glazing where the lawn/terrace begins",
+   "ridgeRowPx": 228,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 398,
+      "y0": 406,
+      "x1": 461,
+      "y1": 478
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "living-room glazing near the rear; reaches the floor on the elevation but the plan draws it as a window without a door leaf"
+    },
+    {
+     "id": "L2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 495,
+      "y0": 407,
+      "x1": 627,
+      "y1": 478
+     },
+     "panels": 3,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "large terrace glazing of the living/dining room under the timber box (about 4.15 m wide), door leaves at both ends on the plan; a rendered tree is drawn over the glass"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 660,
+      "y0": 407,
+      "x1": 690,
+      "y1": 478
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "kitchen glazing, floor-to-head on the elevation, about 0.95 m wide; plan draws a window without a door leaf"
+    },
+    {
+     "id": "L4",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 507,
+      "y0": 314,
+      "x1": 614,
+      "y1": 358
+     },
+     "panels": 3,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window of attic room 5 in the projecting timber box"
+    }
+   ],
+   "dormers": [
+    {
+     "id": "LD1",
+     "kind": "BOX",
+     "boxPx": {
+      "x0": 489,
+      "y0": 273,
+      "x1": 631,
+      "y1": 406
+     }
+    }
+   ],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 475,
+      "y0": 205,
+      "x1": 492,
+      "y1": 228
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 654,
+      "y0": 200,
+      "x1": 677,
+      "y1": 228
+     },
+     "note": ""
+    },
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 427,
+      "y0": 399,
+      "x1": 461,
+      "y1": 407
+     },
+     "note": "small flat canopy/blind box over the right half of L1"
+    }
+   ]
+  }
+ },
+ "uncertain": [
+  "The four elevation pictures are captioned only 'Elewacja domu Wena - 1..4'; sides were assigned from the plans: 1 = FRONT (gable with entrance recess at the right and kitchen slot window), 2 = RIGHT (long side, porch recess at its left end, roof windows), 3 = REAR (gable with the living-room glazing), 4 = LEFT (long side with the timber box).",
+  "wallLeftPx/wallRightPx and sideLengthM are the GROUND-FLOOR wall faces (8.80 / 11.20). The upper-floor timber box projects 1.30 m further on the plan-left side (FRONT x 342..381, REAR x 641..681); with the box the upper floor is 10.10 m wide.",
+  "No section is published. ridgeAboveZeroM 8.16 = page building height 8.46 minus about 0.30 m of terrain read off the elevations (zero row 478, ground row 488, 31.8 px/m); neither the terrain offset nor the upper floor level (2.9, read from the bottom of the gable French doors) is printed.",
+  "On the long sides the roofing ridge line is at row 227-228; the gable verges are raised parapets whose top is at row 216, which is also the apex row seen on the gable elevations.",
+  "RIGHT R1 is a small window in a wall that faces right but stands inside the porch recess, not in the right outer wall; on the elevation it shows as two bright panes inside a dark slot. Counting it or not is a matter of definition.",
+  "RIGHT R6 is probably a roof-access hatch.",
+  "LEFT L1 and L3 reach the floor on the elevation but have no door leaf on the plan: WINDOW chosen; GLAZED_DOOR is the other reading.",
+  "FRONT F2: the door leaf is partly in the recess shadow; its top and left edge are read from the darker brown area, the recess opening is x 604..647.",
+  "The stone-clad block beside the house on pictures 2 (x 644..767) and 4 (x 257..380) is the terrace screen wall, not house wall."
+ ]
+}

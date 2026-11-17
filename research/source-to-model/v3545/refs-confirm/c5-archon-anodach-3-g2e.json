@@ -1,0 +1,78 @@
+{
+ "house": "c5-archon-anodach-3-g2e",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+ "packageContentHash": "ebbbce8a8a57c97d1d04e3a9183bf188a08b6e5a7f0b93c9d1ee70721ba4e9c4",
+ "reader": "independent source reader (Claude), from the published elevation renders, the dimensioned ground plan and the section of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 14.0,
+  "depthM": 19.25,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 7.29,
+  "ridgeAboveGroundFloorM": 6.97,
+  "terrainBelowGroundFloorM": 0.32
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "HIP",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  },
+  {
+   "name": "garage",
+   "role": "GARAGE",
+   "roof": "HIP",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "FRONT",
+  "alongShare": [
+   0.576,
+   0.931
+  ]
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 3,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 2,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 2
+}

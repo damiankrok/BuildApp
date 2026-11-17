@@ -1,0 +1,68 @@
+{
+ "house": "c5-extradom-tracja-2",
+ "publisher": "www.extradom.pl",
+ "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+ "packageContentHash": "53811d4340d450c60524090382ebd8b2c16fc1f931da7ffbf135d98feb68d610",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations, vector ground plan, site sketch, perspective renders for cross-checking only) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 13.84,
+  "depthM": 9.34,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 6.4,
+  "ridgeAboveGroundFloorM": 5.9,
+  "terrainBelowGroundFloorM": 0.5
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "NONE",
+  "alongShare": null
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 5,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 0,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 3
+}

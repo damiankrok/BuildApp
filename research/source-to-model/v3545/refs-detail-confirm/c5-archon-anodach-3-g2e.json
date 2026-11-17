@@ -1,0 +1,494 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-archon-anodach-3-g2e",
+ "packageContentHash": "ebbbce8a8a57c97d1d04e3a9183bf188a08b6e5a7f0b93c9d1ee70721ba4e9c4",
+ "reader": "independent source reader (Claude), from the published elevation renders, the dimensioned ground plan and the section of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "entrance door (105/210, vestibule) and the garage door (500/225) are in the bottom walls of the plan; the picture captioned front elevation shows both",
+ "overall": {
+  "widthM": 14.0,
+  "depthM": 19.25,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces of the whole single-storey house with the built-in garage (1400 = 450+950 = 430+280+690 across; 1925 = 565+1000+360 deep)"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 6.97,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.32,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": 6.0,
+  "garageRidgeBasis": "MEASURED_ON_ELEVATION, not printed: garage roof apex at row 161-167 on the front and left pictures at about 54.8 px/m, +-0.15 m"
+ },
+ "heights": {
+  "buildingHeightM": 7.29,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "T",
+ "outlineNote": "Right wall straight over the full 19.25 m; rear part 9.50 m wide and 5.65 m deep (rear-left corner is a roofed terrace), middle part full 14.00 m wide and 10.00 m deep, garage 6.90 m wide projecting 3.60 m at the front right: a T lying on its side (stem to the left), could also be called STEPPED.",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "whole house behind the garage projection: 14.00 m wide, 15.65 m deep, the rear-left 4.50 x 5.65 m corner is a terrace under the same roof",
+   "levels": 1,
+   "roof": "HIP",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": false
+  },
+  {
+   "name": "garage",
+   "role": "GARAGE",
+   "sideOfMain": "FRONT",
+   "position": "front right: 6.90 m wide, projects 3.60 m in front of the main front wall, flush with the right wall; the garage room continues about 3 m into the main rectangle",
+   "levels": 1,
+   "roof": "HIP",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": true
+  }
+ ],
+ "chimneys": 2,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-fron-d3303df0a7",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 246,
+   "wallRightPx": 1015,
+   "sideLengthM": 14.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 493,
+   "zeroRowHow": "floor line: bottom of the doors and floor-reaching glazings, bottom of the plaster / top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 107,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 308,
+      "y0": 368,
+      "x1": 432,
+      "y1": 443
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "230/140 kitchen, narrow + wide pane"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 574,
+      "y0": 377,
+      "x1": 632,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "105/210 entrance door with a vertical glass strip, in a dark recess (x 516-637) beside dark timber slats; recessed 3.6 m behind the garage front"
+    },
+    {
+     "id": "F3",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 689,
+      "y0": 369,
+      "x1": 962,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "500/225 sectional door; upper 20 px are in the shadow of the lintel"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 485,
+      "y0": 320,
+      "x1": 637,
+      "y1": 493
+     },
+     "note": "entrance recess under the main roof between the kitchen wall and the garage; grey pier x 485-515 stands in the garage front plane"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 524,
+      "y0": 95,
+      "x1": 558,
+      "y1": 150
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 801,
+      "y0": 128,
+      "x1": 837,
+      "y1": 200
+     },
+     "note": ""
+    }
+   ],
+   "note": "Garage front wall is x 636-1015 (690 on plan); the kitchen wall x 246-485 lies 3.60 m further back. Garage roof apex at about (745,167)."
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-bocz-d15bcf7624",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 113,
+   "wallRightPx": 1168,
+   "sideLengthM": 19.25,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 494,
+   "zeroRowHow": "floor line: bottom of the doors and floor-reaching glazings, bottom of the plaster / top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 108,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 242,
+      "y0": 378,
+      "x1": 288,
+      "y1": 494
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "90/210 on plan (garage); drawn fully glazed with a sill at floor level, could be read as a tall window"
+    },
+    {
+     "id": "R2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 493,
+      "y0": 378,
+      "x1": 540,
+      "y1": 494
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "90/210 boiler-room door (door swing on plan); drawn fully glazed"
+    },
+    {
+     "id": "R3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 672,
+      "y0": 364,
+      "x1": 793,
+      "y1": 441
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "220/140"
+    },
+    {
+     "id": "R4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 872,
+      "y0": 364,
+      "x1": 992,
+      "y1": 441
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "220/140"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 480,
+      "y0": 128,
+      "x1": 535,
+      "y1": 200
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 642,
+      "y0": 96,
+      "x1": 678,
+      "y1": 128
+     },
+     "note": ""
+    }
+   ],
+   "note": "Picture-left is the front. The grey plaster panel between R3 and R4 (x 793-872) is not an opening. Main ridge x 700-790; garage ridge x about 385-580 at row 162."
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-ogro-aba4470be6",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 299,
+   "wallRightPx": 1065,
+   "sideLengthM": 14.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 493,
+   "zeroRowHow": "floor line: bottom of the doors and floor-reaching glazings, bottom of the plaster / top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 108,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 549,
+      "y0": 368,
+      "x1": 601,
+      "y1": 493
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "100/230 fixed-looking glazing reaching the floor, with a sill"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 822,
+      "y0": 368,
+      "x1": 1010,
+      "y1": 492
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "350/230 living-room terrace glazing in the wall set back 5.65 m behind the roofed terrace; dark frame merges with the shadowed surround (dark area x 820-1035)"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 820,
+      "y0": 320,
+      "x1": 1065,
+      "y1": 493
+     },
+     "note": "roofed corner terrace; masonry corner post x 1037-1065"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 476,
+      "y0": 128,
+      "x1": 512,
+      "y1": 200
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 752,
+      "y0": 95,
+      "x1": 788,
+      "y1": 150
+     },
+     "note": ""
+    }
+   ],
+   "note": "Picture-left is the plan right. The rear wall proper (950 on plan) is x 299-820; x 820-1065 is the terrace with the living-room wall behind it."
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-bocz-381d5d7a2f",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 108,
+   "wallRightPx": 1162,
+   "sideLengthM": 19.25,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 493,
+   "zeroRowHow": "floor line: bottom of the doors and floor-reaching glazings, bottom of the plaster / top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 109,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 160,
+      "y0": 369,
+      "x1": 290,
+      "y1": 493
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "240/230 terrace door of the rear room (door swing on plan), in the wall set back 4.50 m behind the roofed terrace"
+    },
+    {
+     "id": "L2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 368,
+      "y0": 369,
+      "x1": 417,
+      "y1": 493
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "90/230 terrace door of the laundry, same set-back wall"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 628,
+      "y0": 369,
+      "x1": 793,
+      "y1": 494
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "300/230 living/dining glazing reaching the floor, wide + narrow pane, with a sill; no door swing on plan"
+    },
+    {
+     "id": "L4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 990,
+      "y0": 378,
+      "x1": 1036,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "90/210 side door of the garage (service door with a full-height glass pane), in the garage side wall set back 7.10 m, beside the entrance recess"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 108,
+      "y0": 320,
+      "x1": 420,
+      "y1": 493
+     },
+     "note": "roofed corner terrace; masonry corner post x 108-140"
+    },
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 966,
+      "y0": 320,
+      "x1": 1162,
+      "y1": 493
+     },
+     "note": "entrance recess seen from the side; pier x 1127-1162"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 598,
+      "y0": 96,
+      "x1": 638,
+      "y1": 150
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 742,
+      "y0": 128,
+      "x1": 800,
+      "y1": 162
+     },
+     "note": ""
+    }
+   ],
+   "note": "Picture-left is the rear. Living/kitchen wall (1000 on plan) is x 417-966; x 108-417 is the terrace with the bedroom-part wall behind; x 966-1162 is the garage side wall behind the entrance porch. Main ridge x 490-595; garage ridge x 745-900 at row 161."
+  }
+ },
+ "uncertain": [
+  "Kinds of the three 90/210 openings (R1, R2, L4): the plan dimension is a door size, the pictures draw them fully glazed (R1, R2 with a sill like tall windows). Given as GLAZED_DOOR; DOOR or WINDOW are defensible.",
+  "L3 (300/230) and B1 (100/230) reach the floor but show a sill and no door swing: given as WINDOW; L1, L2, B2 have a terrace in front (L1, L2 with door swings) and are GLAZED_DOOR.",
+  "B2 box: the dark frame cannot be separated from the shadowed dark wall around it; edges from the plan position (gap 3.50 m) and the glass panes (x 832-1005), +-8 px.",
+  "F2 door top: the dark recess reaches row 368, the leaf itself is read at 377 from the printed 210 cm height.",
+  "Outline T versus STEPPED; garage ridge height is measured, not printed.",
+  "Chimney boxes are approximate (not zoomed)."
+ ]
+}

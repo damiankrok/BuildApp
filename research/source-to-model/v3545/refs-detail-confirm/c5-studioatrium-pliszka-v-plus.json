@@ -1,0 +1,469 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-studioatrium-pliszka-v-plus",
+ "packageContentHash": "20ab7aaa8b6646a50ddfa55bc9c42c438d787a16057336157b575a97f1630587",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations, ground plan) and the page facts in the export log only; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.studioatrium.pl",
+ "url": "https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "the double garage door (room 12) and the driveway are on the bottom edge of the plan, the entrance walk leads from the bottom to the door of hall 1; the picture captioned 'elewacja frontowa' shows exactly this garage door and entrance",
+ "overall": {
+  "widthM": 11.45,
+  "depthM": 18.95,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces: 11.45 across the front (printed 4.75 + 6.70 at the bottom, 5.20 + 6.25 at the top), 18.95 front to back along the right side (printed 5.00 + 10.10 + 3.85 on the left dimension chain: garage wing 5.00, main part 10.10, rear bedroom wing / covered terrace 3.85). Same numbers as the page facts (szerokosc 11.45, dlugosc 18.95)"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 6.2,
+  "ridgeBasis": "PAGE_HEIGHT_MINUS_TERRAIN",
+  "terrainBelowZeroM": 0.5,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": 5.3,
+  "note": "no section and no printed levels are published. Page: building height 6.71 m. Terrain offset read from the elevations (ground line 17-18 px below the door sills = about 0.5 m, not printed), so 6.71 - 0.5 = about 6.2. Measured on the pictures the main ridge is 6.0-6.2 m above the sills and 6.5-6.6 m above the ground line; the garage-wing ridge is about 0.9 m lower (picture measurement, +-0.2 m)"
+ },
+ "heights": {
+  "buildingHeightM": 6.71,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Z-shaped walled outline inside an 11.45 x 18.95 rectangle: the right strip (6.25-6.70 m wide) runs the full 18.95 m, the left strip (4.75-5.20 m wide) is only the middle 10.10 m; the front-left notch holds the entrance walk, the rear-left notch a roofed open terrace (5.20 x 3.85).",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "rear 13.95 m of the plot of the house, full 11.45 m width under one gable roof (includes the rear-right bedroom wing and the roofed terrace in the rear-left corner)",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": false
+  },
+  {
+   "name": "garage wing",
+   "role": "GARAGE",
+   "sideOfMain": "FRONT",
+   "position": "front right, 6.70 m wide and 5.00 m deep, double garage; its gable roof also covers the entrance recess to its left",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": true
+  }
+ ],
+ "chimneys": 3,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-frontowa-domu-pliszka-v-plus-1b53c2a637",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 314,
+   "wallRightPx": 720,
+   "sideLengthM": 11.45,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 512,
+   "zeroRowHow": "finished floor = bottom edge of the garage door, entrance door and floor-reaching windows (row 511-512); the drawn ground line is at row 529; no ±0,00 mark is printed",
+   "ridgeRowPx": 298,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 320,
+      "y0": 435,
+      "x1": 397,
+      "y1": 470
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "kitchen strip window that wraps the front-left corner; its wall is 5 m behind the garage front"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 446,
+      "y0": 438,
+      "x1": 480,
+      "y1": 512
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "entrance door in the recess between the roof post and the garage wing, wooden leaf with a narrow glazed strip; top edge in shadow"
+    },
+    {
+     "id": "F3",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 515,
+      "y0": 436,
+      "x1": 689,
+      "y1": 512
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "double garage door"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 423,
+      "y0": 326,
+      "x1": 483,
+      "y1": 512
+     },
+     "note": "entrance recess under the garage-wing gable roof; front gable frame legs at x 423 and 720, apex (572, 326)"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 432,
+      "y0": 272,
+      "x1": 447,
+      "y1": 342
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 508,
+      "y0": 262,
+      "x1": 524,
+      "y1": 298
+     },
+     "note": "on the ridge"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 571,
+      "y0": 265,
+      "x1": 588,
+      "y1": 330
+     },
+     "note": ""
+    }
+   ]
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-boczna-domu-pliszka-v-plus-414048f5d1",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 174,
+   "wallRightPx": 841,
+   "sideLengthM": 18.95,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 512,
+   "zeroRowHow": "finished floor = bottom edge of the garage door, entrance door and floor-reaching windows (row 511-512); the drawn ground line is at row 529; no ±0,00 mark is printed",
+   "ridgeRowPx": 295,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 294,
+      "y0": 437,
+      "x1": 340,
+      "y1": 458
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "garage strip window"
+    },
+    {
+     "id": "R2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 476,
+      "y0": 437,
+      "x1": 509,
+      "y1": 512
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "floor-reaching French window of room 9 with a low railing in front (plan draws a door leaf)"
+    },
+    {
+     "id": "R3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 579,
+      "y0": 437,
+      "x1": 611,
+      "y1": 512
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "floor-reaching French window of room 8 with a low railing"
+    },
+    {
+     "id": "R4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 662,
+      "y0": 437,
+      "x1": 710,
+      "y1": 458
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bathroom strip window"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 398,
+      "y0": 283,
+      "x1": 450,
+      "y1": 335
+     },
+     "note": "wide chimney on the slope"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 633,
+      "y0": 272,
+      "x1": 663,
+      "y1": 295
+     },
+     "note": ""
+    }
+   ],
+   "note": "left of the picture = front (lower garage roof at x 165-342, ridge row 327); main roof x 342-850"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-tylna-domu-pliszka-v-plus-29e308184a",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 302,
+   "wallRightPx": 707,
+   "sideLengthM": 11.45,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 511,
+   "zeroRowHow": "finished floor = bottom edge of the garage door, entrance door and floor-reaching windows (row 511-512); the drawn ground line is at row 529; no ±0,00 mark is printed",
+   "ridgeRowPx": 298,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 423,
+      "y0": 438,
+      "x1": 489,
+      "y1": 511
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "bedroom 6 terrace door, two leaves, in the rear wall of the bedroom wing"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 590,
+      "y0": 438,
+      "x1": 688,
+      "y1": 511
+     },
+     "panels": 2,
+     "uncertainPx": 14,
+     "occluded": true,
+     "note": "living-room glazing in the wall set back 3.85 m under the terrace roof, seen through the open terrace behind a post and furniture; edges uncertain, panel count not readable"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 525,
+      "y0": 300,
+      "x1": 707,
+      "y1": 511
+     },
+     "note": "roofed open terrace in the right half of the gable (plan rear-left corner)"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 435,
+      "y0": 275,
+      "x1": 451,
+      "y1": 335
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 498,
+      "y0": 270,
+      "x1": 516,
+      "y1": 298
+     },
+     "note": "on the ridge"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 577,
+      "y0": 282,
+      "x1": 592,
+      "y1": 340
+     },
+     "note": ""
+    }
+   ],
+   "note": "left of the picture = the right side of the house (bedroom-6 wing, 6.25 m); the right 5.20 m is the open roofed terrace"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-elewacja-boczna-domu-pliszka-v-plus-f2c5b8d8aa",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1024,
+   "pictureHeightPx": 683,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 187,
+   "wallRightPx": 853,
+   "sideLengthM": 18.95,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 512,
+   "zeroRowHow": "finished floor = bottom edge of the garage door, entrance door and floor-reaching windows (row 511-512); the drawn ground line is at row 529; no ±0,00 mark is printed",
+   "ridgeRowPx": 295,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 340,
+      "y0": 437,
+      "x1": 478,
+      "y1": 512
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "living-room floor-to-lintel glazing, two panes; bottom hidden by planting"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 620,
+      "y0": 437,
+      "x1": 674,
+      "y1": 468
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "left arm of the kitchen corner window"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 187,
+      "y0": 415,
+      "x1": 322,
+      "y1": 512
+     },
+     "note": "open roofed terrace at the rear corner; the lit timber wall seen inside is the side wall of the bedroom wing (no opening seen in it)"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 366,
+      "y0": 272,
+      "x1": 398,
+      "y1": 300
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 578,
+      "y0": 283,
+      "x1": 630,
+      "y1": 345
+     },
+     "note": "wide chimney on the slope"
+    }
+   ],
+   "note": "left of the picture = rear. Wall faces from the left: terrace corner 187, living-room wall 325-677 (10.10 m part), then the side wall of the garage wing, 4.75 m further back, timber clad with two lamps, x 683-845, no opening; garage roof (ridge row 327) x 687-865"
+  }
+ },
+ "uncertain": [
+  "No section and no printed level marks are published: zero row is taken at the door sills, terrain offset (about 0.5 m) and garage ridge are picture measurements.",
+  "Ridge check: measured main ridge is 6.0 m above the sills / 6.5-6.6 m above the ground line at 35.2-35.5 px/m, the page says 6.71 m building height: 0.15-0.2 m short, unresolved (the page height may include the ridge capping or a lower terrain point).",
+  "REAR B2 (living-room glazing behind the roofed terrace) is seen only through the terrace: position from the plan agrees (0.5-3.3 m from the left house side), edges and panels are uncertain.",
+  "R2/R3 are floor-reaching windows with railings; they are given as GLAZED_DOOR because they reach the floor and the plan draws door leaves, they could be read as tall WINDOWs.",
+  "F1 and L2 are the two arms of one corner window (kitchen); each arm is listed on its own side.",
+  "The left wall of the bedroom wing (facing the roofed terrace) shows no opening on the left elevation; the plan was not legible enough there to exclude a narrow door."
+ ]
+}

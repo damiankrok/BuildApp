@@ -1,0 +1,654 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-archon-lubczyku-2",
+ "packageContentHash": "ba7b1db361dc700985894ab167d1bd01a566581f696598cbe108deea29de78b3",
+ "reader": "independent source reader: publisher pictures (plans, section, elevations) and page facts only; no analyzer, solver, API reading or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "Entrance door 160/210 (into Wiatrolap) and garage door 260/229 are both in the bottom wall of the ground-plan sheet; the captioned front elevation shows the same door and garage gate.",
+ "overall": {
+  "widthM": 15.92,
+  "depthM": 10.02,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width 1592 = 100 (bay window on the left wall) + 1152 (main body) + 340 (garage). Depth 1002 = 922 (main body) + 80 (living-room part stepping forward). Terraces and steps not included; the garage is shallower and lies inside the depth."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 8.4,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.47,
+  "upperFloorLevelsM": [
+   3.06
+  ],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-frontow-833dc6c6f0",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 657,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 201,
+   "wallRightPx": 1133,
+   "sideLengthM": 15.92,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 596,
+   "zeroRowHow": "top of the brick plinth / terrace and door thresholds; the plinth is about 27 px high, which is the printed terrain offset -0,47",
+   "ridgeRowPx": 97,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 315,
+      "y0": 460,
+      "x1": 419,
+      "y1": 548
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "window 180/150 left of the living-room projection"
+    },
+    {
+     "id": "F2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 520,
+      "y0": 463,
+      "x1": 676,
+      "y1": 588
+     },
+     "panels": 3,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "living-room glazing 270/210 in the projecting gabled part; bottom edge read at the frame, threshold band below"
+    },
+    {
+     "id": "F3",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 780,
+      "y0": 472,
+      "x1": 873,
+      "y1": 595
+     },
+     "panels": 3,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "entrance door 160/210 with two sidelights in one frame, recessed under the arched porch"
+    },
+    {
+     "id": "F4",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 951,
+      "y0": 471,
+      "x1": 1100,
+      "y1": 600
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "garage door 260/229"
+    },
+    {
+     "id": "F5",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 503,
+      "y0": 287,
+      "x1": 589,
+      "y1": 417
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "balcony door 150/220, left of two in the front gable; lower part behind the open balustrade"
+    },
+    {
+     "id": "F6",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 606,
+      "y0": 287,
+      "x1": 692,
+      "y1": 417
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "balcony door 150/220, right of two; a pier with a timber post stands between the two frames"
+    },
+    {
+     "id": "F7",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 1050,
+      "y0": 303,
+      "x1": 1096,
+      "y1": 358
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window 78/140 of the room over the garage"
+    }
+   ],
+   "dormers": [
+    {
+     "id": "FD1",
+     "kind": "WALL_GABLE",
+     "boxPx": {
+      "x0": 456,
+      "y0": 148,
+      "x1": 739,
+      "y1": 400
+     }
+    }
+   ],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 473,
+      "y0": 362,
+      "x1": 723,
+      "y1": 440
+     },
+     "note": "balcony with timber cross balustrade in front of the two gable doors"
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 747,
+      "y0": 440,
+      "x1": 933,
+      "y1": 596
+     },
+     "note": "arched entrance recess with one round column at x 907-930"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 597,
+      "y0": 73,
+      "x1": 643,
+      "y1": 137
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 880,
+      "y0": 73,
+      "x1": 922,
+      "y1": 137
+     },
+     "note": ""
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 201,
+      "y0": 350,
+      "x1": 216,
+      "y1": 400
+     },
+     "note": "end of the left-side balcony seen edge-on"
+    }
+   ]
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-boczna-37c7f1bf89",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 657,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 372,
+   "wallRightPx": 958,
+   "sideLengthM": 10.02,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 596,
+   "zeroRowHow": "top of the brick plinth / terrace and door thresholds; the plinth is about 27 px high, which is the printed terrain offset -0,47",
+   "ridgeRowPx": 99,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 643,
+      "y0": 470,
+      "x1": 729,
+      "y1": 539
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "garage window 150/120"
+    },
+    {
+     "id": "R2",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 643,
+      "y0": 308,
+      "x1": 730,
+      "y1": 440
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "balcony door 150/220 of the room over the garage, with a railing only (no slab); its floor is lower than +3,06"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 315,
+      "y0": 360,
+      "x1": 372,
+      "y1": 440
+     },
+     "note": "front-gable balcony seen from its end"
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 372,
+      "y0": 440,
+      "x1": 466,
+      "y1": 596
+     },
+     "note": "entrance recess with column seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 646,
+      "y0": 73,
+      "x1": 725,
+      "y1": 128
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 793,
+      "y0": 131,
+      "x1": 847,
+      "y1": 228
+     },
+     "note": ""
+    }
+   ],
+   "note": "wallLeftPx is the front face of the living-room projection (seen behind the entrance column) and wallRightPx the rear face of the main body; the garage gable wall itself spans x 465-905 (about 7.5 m), its ridge is at about row 187"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-ogrodow-3dd75adabe",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 657,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 160,
+   "wallRightPx": 1094,
+   "sideLengthM": 15.92,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 596,
+   "zeroRowHow": "top of the brick plinth / terrace and door thresholds; the plinth is about 27 px high, which is the printed terrain offset -0,47",
+   "ridgeRowPx": 96,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 469,
+      "y0": 464,
+      "x1": 555,
+      "y1": 547
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room window 150/140 (ground-floor room next to the garage)"
+    },
+    {
+     "id": "B2",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 681,
+      "y0": 346,
+      "x1": 769,
+      "y1": 464
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "stair window 150/210 in the rear gable dormer, with a cross balustrade in its lower half; its sill is below the +3,06 floor"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 876,
+      "y0": 464,
+      "x1": 961,
+      "y1": 548
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "kitchen window 150/140"
+    },
+    {
+     "id": "B4",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 486,
+      "y0": 277,
+      "x1": 538,
+      "y1": 333
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "roof window 94/140"
+    },
+    {
+     "id": "B5",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 892,
+      "y0": 277,
+      "x1": 945,
+      "y1": 333
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "roof window 94/140"
+    }
+   ],
+   "dormers": [
+    {
+     "id": "BD1",
+     "kind": "WALL_GABLE",
+     "boxPx": {
+      "x0": 640,
+      "y0": 233,
+      "x1": 810,
+      "y1": 400
+     }
+    }
+   ],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 373,
+      "y0": 73,
+      "x1": 416,
+      "y1": 134
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 651,
+      "y0": 73,
+      "x1": 699,
+      "y1": 114
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 782,
+      "y0": 131,
+      "x1": 825,
+      "y1": 242
+     },
+     "note": ""
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 1085,
+      "y0": 350,
+      "x1": 1096,
+      "y1": 400
+     },
+     "note": "end of the left-side balcony seen edge-on"
+    }
+   ]
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-boczna-df730eae7f",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 657,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 351,
+   "wallRightPx": 936,
+   "sideLengthM": 10.02,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 596,
+   "zeroRowHow": "top of the brick plinth / terrace and door thresholds; the plinth is about 27 px high, which is the printed terrain offset -0,47",
+   "ridgeRowPx": 100,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 416,
+      "y0": 466,
+      "x1": 441,
+      "y1": 553
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "rear 45-degree face of the bay window, 90/170, seen foreshortened (true width 0.90 m); the same pane is visible obliquely at the right end of the rear elevation"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 471,
+      "y0": 463,
+      "x1": 539,
+      "y1": 557
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "middle face of the bay window, 120/170"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 568,
+      "y0": 466,
+      "x1": 594,
+      "y1": 553
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "front 45-degree face of the bay window, 90/170, seen foreshortened; the same pane is visible obliquely at the left end of the front elevation"
+    },
+    {
+     "id": "L4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 669,
+      "y0": 462,
+      "x1": 828,
+      "y1": 595
+     },
+     "panels": 3,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "terrace door 270/230 of the living room"
+    },
+    {
+     "id": "L5",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 500,
+      "y0": 276,
+      "x1": 586,
+      "y1": 406
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "balcony door 150/220 in the gable, lower part behind the open balustrade"
+    },
+    {
+     "id": "L6",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 652,
+      "y0": 276,
+      "x1": 739,
+      "y1": 406
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "balcony door 150/220 in the gable, lower part behind the open balustrade"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 393,
+      "y0": 352,
+      "x1": 846,
+      "y1": 440
+     },
+     "note": "long balcony over the bay window and terrace door"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 936,
+      "y0": 362,
+      "x1": 993,
+      "y1": 440
+     },
+     "note": "front-gable balcony seen from its end"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 457,
+      "y0": 131,
+      "x1": 514,
+      "y1": 228
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 582,
+      "y0": 73,
+      "x1": 660,
+      "y1": 123
+     },
+     "note": ""
+    }
+   ]
+  }
+ },
+ "uncertain": [
+  "Both side elevations are captioned only 'elewacja boczna'; assigned from the plan: the one with the three-pane bay, terrace door 270/230 and long balcony is LEFT, the one with the garage gable (window 150/120, balcony door above) is RIGHT. Neither is mirrored.",
+  "The two 45-degree panes of the bay window are listed only on LEFT. They are also visible, foreshortened, on FRONT (about x 227-256, y 462-555) and on REAR (about x 1041-1065, y 466-553) and are deliberately not listed there.",
+  "FRONT and REAR wall ends include the bay window (its outer face) on one end and the garage on the other, i.e. the printed 1592. The main body alone spans x 260-934 on FRONT and x 361-1033 on REAR.",
+  "LEFT and RIGHT wall ends span the printed 1002 (main body 922 plus the 80 projection, whose side wall is visible behind). On LEFT the main gable wall alone is x 351-887; on RIGHT the garage gable wall alone is x 465-905.",
+  "The ridge row is the top of the ridge tiles; it computes to about 8.5 m above the zero row on all four elevations against the printed +8,40 (about 0.1 m, 6 px).",
+  "The front gabled part is a wall projecting 80 forward with its own gable (recorded as WALL_GABLE; CROSS_GABLE would also be defensible). The rear stair dormer is flush with the rear wall.",
+  "Bottom edges of the upper balcony doors are behind open balustrades; they were set at the balcony floor line (row 417 on FRONT, row 406 on LEFT).",
+  "The page prints no garage ridge level; on the front elevation the garage ridge is at about row 180 (about 7.1 m above zero by scale)."
+ ]
+}

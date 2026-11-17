@@ -1,0 +1,99 @@
+{
+  "schema": "buildapp.v3545.detail-reference", "version": 1,
+  "house": "projekt-dom-w-toreniach-3-e-me822857280738",
+  "packageContentHash": "3cece31fc5d34d22e2a1b45a1ba01ee0d151ee5b875925a36ebcb6ceb0551ae6",
+  "reader": "independent source reader B: publisher's four elevation renders (1280 px), dimensioned ground plan, section and page facts only, read against a pixel grid; no analyzer, solver, API reading or model output seen",
+  "readOn": "2026-11-17",
+  "frontPlanEdge": "BOTTOM",
+  "frontHow": "The entrance door (labelled 150/210) opens through the bottom edge of the dimensioned ground plan, in the recessed corner of room 1; the page captions the gable picture with that door 'elewacja frontowa'.",
+  "overall": { "widthM": 7.90, "depthM": 12.50, "basis": "PRINTED_ON_PLAN",
+    "includes": "7.90 = gable wall (printed 790 = 520 + 270). 12.50 = rear wall to the kitchen front wall (printed 1250 = 1160 + 90). The right 2.70 m of the front is the entrance recess, set back 0.90 under the main roof. The pergola terrace on the plan left is not included." },
+  "levels": {
+    "ridgeAboveZeroM": 5.72, "ridgeBasis": "PRINTED_ON_SECTION",
+    "terrainBelowZeroM": 0.32, "upperFloorLevelsM": [], "garageRidgeAboveZeroM": null
+  },
+  "sides": {
+    "FRONT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-fron-002968d780", "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 565,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 400, "wallRightPx": 1025,
+      "sideLengthM": 7.90, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 539, "zeroRowHow": "floor line: bottom of the entrance door unit and of the wall cladding above the plinth; terrain (-0,32) would be at about row 564, at the picture's bottom edge",
+      "ridgeRowPx": 87,
+      "blind": false,
+      "openings": [
+        { "id": "F1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 506, "y0": 358, "x1": 719, "y1": 468 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "kitchen window, plan label 270/140; narrow left sash and wide right pane" },
+        { "id": "F2", "kind": "DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 819, "y0": 375, "x1": 936, "y1": 539 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "entrance door with a glazed sidelight in one frame, plan label 150/210; stands in the wall set back 0.90 m in the roofed entrance recess (recess x 811..1025)" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "PORTICO", "boxPx": { "x0": 811, "y0": 358, "x1": 1025, "y1": 539 }, "note": "entrance recess 2.70 m wide and 0.90 m deep under the main roof, no posts" },
+        { "kind": "TERRACE_ROOF", "boxPx": { "x0": 169, "y0": 315, "x1": 392, "y1": 540 }, "note": "open pergola frame with timber slats over the side terrace (plan left); not a wall, not a roof" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 772, "y0": 64, "x1": 848, "y1": 150 }, "note": "" }
+      ]
+    },
+    "RIGHT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-bocz-23b73c0b96", "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 565,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 166, "wallRightPx": 1157,
+      "sideLengthM": 12.50, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 540, "zeroRowHow": "floor line: bottom of the rendered wall at the top of the plinth band",
+      "ridgeRowPx": 87,
+      "blind": false,
+      "openings": [
+        { "id": "R1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 448, "y0": 358, "x1": 519, "y1": 468 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "boiler room window, plan label 90/140" },
+        { "id": "R2", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 653, "y0": 358, "x1": 723, "y1": 468 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "bathroom window, plan label 90/140" },
+        { "id": "R3", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 982, "y0": 358, "x1": 1052, "y1": 468 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "window of room 5, plan label 90/140" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "CHIMNEY", "boxPx": { "x0": 530, "y0": 62, "x1": 582, "y1": 165 }, "note": "" }
+      ]
+    },
+    "REAR": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-ogro-552e52b6ce", "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 566,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 229, "wallRightPx": 855,
+      "sideLengthM": 7.90, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 540, "zeroRowHow": "floor line: bottom of the wall cladding at the top of the plinth band",
+      "ridgeRowPx": 88,
+      "blind": false,
+      "openings": [
+        { "id": "B1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 314, "y0": 359, "x1": 455, "y1": 468 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "window of room 5, plan label 180/140" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "TERRACE_ROOF", "boxPx": { "x0": 859, "y0": 315, "x1": 1083, "y1": 540 }, "note": "open pergola frame of the side terrace; not a wall, not a roof" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 406, "y0": 64, "x1": 482, "y1": 150 }, "note": "position read from the overview only" }
+      ]
+    },
+    "LEFT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-toreniach-3-e-elewacja-bocz-4908c6b207", "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 566,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 142, "wallRightPx": 1129,
+      "sideLengthM": 12.50, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 540, "zeroRowHow": "floor line: bottom of the sliding door at the terrace paving",
+      "ridgeRowPx": 87,
+      "blind": false,
+      "openings": [
+        { "id": "L1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 224, "y0": 360, "x1": 397, "y1": 468 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "window of room 4, plan label 220/140; a concrete-look panel fills the wall below it" },
+        { "id": "L2", "kind": "GLAZED_DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 570, "y0": 360, "x1": 827, "y1": 540 }, "panels": 2, "uncertainPx": 4, "occluded": false, "note": "living-room sliding terrace door, plan label 330/230, under the pergola (pergola posts stand left and right of it, not in front)" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "TERRACE_ROOF", "boxPx": { "x0": 474, "y0": 320, "x1": 1082, "y1": 540 }, "note": "open pergola over the side terrace: posts at x 474..486, 912..925 and 1070..1082, beam at rows 320..340; not a roof" }
+      ]
+    }
+  },
+  "uncertain": [
+    "The page names the pictures frontowa / ogrodowa / boczna / boczna. By the plan the 'ogrodowa' picture (one 180/140 window, pergola at the right) is the gable opposite the front, i.e. REAR; the terrace with the large sliding door is on the LEFT long side, which the page calls only 'boczna'.",
+    "All four pictures have the same scale (about 79.2 px/m); the ridge row computed from the printed +5,72 is 87 and the apex is read at 87-88.",
+    "FRONT: the entrance door wall is 0.90 m behind the kitchen front; wallRightPx 1025 is the right outer wall, which continues forward as the side of the recess.",
+    "Window boxes are the dark frames; the thin projecting sills below them (about 4 px) are excluded.",
+    "The REAR chimney box was not zoomed; its x range is approximate (+/-10 px)."
+  ]
+}

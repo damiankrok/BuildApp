@@ -195,14 +195,14 @@ export const READING_TOOLS = {
           items: {
             type: 'object',
             additionalProperties: false,
-            required: ['picture', 'side', 'sideHow', 'alternatives', 'mirrored', 'groundY', 'blind', 'limits', 'bodies', 'openings', 'features'],
+            required: ['picture', 'side', 'sideHow', 'mirrored', 'groundY', 'floorY', 'blind', 'limits', 'bodies', 'openings', 'features'],
             properties: {
               picture: { type: 'integer', minimum: 1 },
               side: { ...side, description: 'The side of the house it shows, named by the PLAN (FRONT = the plan edge named as the front). A LEFT elevation is what you see standing left of the house, looking at its left wall.' },
               sideHow: { type: 'string', maxLength: 240, description: 'What on the plan it matches: the order of bodies left to right, the doors, the garage, a bay.' },
-              alternatives: { type: 'array', maxItems: 3, items: side, description: 'Other sides it could be, when the match is not certain.' },
               mirrored: { type: 'boolean', description: 'True when the picture shows the house left-right mirrored against the plan.' },
               groundY: { type: 'number', description: 'The row of the terrain line at the building.' },
+              floorY: { type: ['number', 'null'], description: 'The row of the finished GROUND FLOOR (±0,00) when the picture lets you tell it from the terrain: the threshold of the entrance door or of a terrace door, or a drawn floor line. Null when you cannot tell.' },
               blind: { type: 'boolean', description: 'True ONLY when you looked at this whole elevation and it shows no window, door or gate at all. An empty "openings" list with blind false means you did not list them.' },
               limits: { type: 'string', enum: ['NONE', 'PARTLY_HIDDEN', 'TOO_SMALL'], description: 'What limits your reading of this picture: PARTLY_HIDDEN when a part of the wall is covered (a tree, a porch, another body) and may hold openings you cannot see; TOO_SMALL when it cannot be read.' },
               bodies: {
@@ -265,6 +265,28 @@ export const READING_TOOLS = {
   },
 } as const
 
+/**
+ * v3.54.5 — the tool of a targeted follow-up: ONE elevation, the same fields as an entry of `describe_facades` without
+ * the picture number. Small on purpose: the whole facade tool with the fields this version added no longer compiled
+ * as a strict grammar ("The compiled grammar is too large"), and a question about one picture needs one entry.
+ */
+const ELEVATION_ENTRY = READING_TOOLS.FACADES.input_schema.properties.elevations.items
+export const ELEVATION_TOOL = {
+  name: 'describe_elevation',
+  description: 'What ONE elevation picture (picture 2) shows. Coordinates are pixels of picture 2.',
+  input_schema: { type: 'object', additionalProperties: false, required: ELEVATION_ENTRY.required.filter((k) => k !== 'picture'), properties: Object.fromEntries(Object.entries(ELEVATION_ENTRY.properties).filter(([k]) => k !== 'picture')) },
+} as const
+/** The facade tool without the fields a reading can do without, for a provider that refuses the full grammar. */
+export function slimFacadesTool(tool: { name: string; description: string; input_schema: unknown }): { name: string; description: string; input_schema: unknown } {
+  const c = JSON.parse(JSON.stringify(tool)) as { name: string; description: string; input_schema: { properties: { elevations: { items: { required: string[]; properties: Record<string, unknown> } } } } }
+  const item = c.input_schema.properties.elevations.items
+  for (const k of ['floorY', 'limits', 'sideHow']) {
+    delete item.properties[k]
+    item.required = item.required.filter((r) => r !== k)
+  }
+  return c
+}
+
 export type InventoryAnswer = { pictures: Array<{ n: number; kind: string; storey: string; side: string; thisHouse: boolean; note: string }>; houseNote: string }
 type Px = { x: number; y: number }
 export type PlanAnswer = {
@@ -283,9 +305,11 @@ export type FacadesAnswer = {
     picture: number
     side: 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'
     sideHow: string
-    alternatives: Array<'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'>
+    /** Only in readings recorded before v3.54.5: the reader no longer names alternatives — the program tries the other sides itself. */
+    alternatives?: Array<'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'>
     mirrored: boolean
     groundY: number
+    floorY?: number | null
     blind?: boolean
     limits?: string
     bodies: Array<{ bodyId: string; leftX: number; rightX: number; eavesY: number | null; ridgeY: number | null }>
@@ -370,7 +394,8 @@ export function strictTool<T extends { name: string; description: string; input_
 }
 
 /** One step: at most one billed request (and one transport retry), the answer checked to be the tool call asked for. */
-export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: number, text: string, pictures: SentPicture[], tool: { name: string; description: string; input_schema: unknown }, extra: Array<{ label: string; mediaType: string; base64: string; width: number; height: number }> = [], strict = true): Promise<T> {
+export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: number, text: string, pictures: SentPicture[], firstTool: { name: string; description: string; input_schema: unknown }, extra: Array<{ label: string; mediaType: string; base64: string; width: number; height: number }> = [], strict = true, /** A smaller tool of the same name, sent once if the provider refuses the first one's grammar (an unbilled refusal). */ fallback?: { name: string; description: string; input_schema: unknown }): Promise<T> {
+  let tool = firstTool
   const recorded = ctx.replay?.(step, round)
   if (recorded) {
     // a recorded answer speaks of the pictures of ITS request, by number: it is not an answer about other pictures
@@ -402,6 +427,12 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
     } catch (e) {
       lastError = e as Error
       const reason = (e as { reason?: string }).reason
+      // a schema the provider's grammar cannot hold is refused before billing: the smaller tool is sent instead, once
+      if (fallback && tool !== fallback && /grammar is too large|too complex/i.test(String((e as Error).message))) {
+        tool = fallback
+        attempt -= 1
+        continue
+      }
       if (reason !== 'TRANSPORT' && reason !== 'TIMEOUT') break
     }
   }
@@ -485,7 +516,7 @@ Call describe_facades:
 A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.
 For each elevation say whether it is blind (no opening at all) and what limits your reading of it.`
   const tool = withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))
-  const answer = await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, tool)
+  const answer = await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, tool, [], true, slimFacadesTool(tool))
   // v3.54.5 — the program, not the prompt, accounts for the elevations. What was sent is compared with what the answer
   // describes (an entry counts for the picture it names, once); every picture left over is asked for alone, with the
   // plan, in one targeted request — a grouped follow-up came back with one picture of three described, the same way the
@@ -497,22 +528,40 @@ For each elevation say whether it is blind (no opening at all) and what limits y
   for (const e of answer.elevations) if (e.picture >= first && e.picture < first + nE && !describedIn.has(e.picture)) describedIn.set(e.picture, 'FACADES')
   const coverage: FacadeCoverage[] = selection.elevations.map((p, i) => ({ pictureId: p.id, asked: 1, answer: describedIn.has(first + i) ? ('DESCRIBED' as const) : ('ASKED_NOT_ANSWERED' as const), ...(describedIn.has(first + i) ? { readIn: 'FACADES' } : { why: 'the first reading returned no entry for this picture' }) }))
   let round = 0
-  for (let i = 0; i < nE && round < HOUSE_READING_LIMITS.facadeFollowUps; i += 1) {
+  let retried = false
+  // An entry with nothing on it — no opening, no feature, and not SAID to be blind — is a partial answer, not a wall
+  // without windows: it is asked for again like an undescribed picture, and replaced only by an answer that says more.
+  const empty = (e: FacadesAnswer['elevations'][number]): boolean => (e.openings ?? []).length === 0 && (e.features ?? []).length === 0 && e.blind !== true && e.limits !== 'TOO_SMALL'
+  const hollow = new Set(answer.elevations.filter((e) => describedIn.has(e.picture) && typeof e.blind === 'boolean' && empty(e)).map((e) => e.picture))
+  for (let i = 0; i < nE && round < HOUSE_READING_LIMITS.facadeFollowUps + (retried ? 1 : 0); i += 1) {
     const n = first + i
-    if (describedIn.has(n)) continue
+    if (describedIn.has(n) && !hollow.has(n)) continue
     round += 1
     const c = coverage[i]
     const again = [sent[0], sent[n - 1]]
-    const done = answer.elevations.filter((e) => describedIn.has(e.picture)).map((e) => e.side)
-    const more = `Picture 1: the ground-floor plan (for reference; its front facade lies along its ${plan.front.planEdge} edge). Picture 2: ONE elevation of the same house. It was sent before and no description of it came back${done.length ? ` (sides already described from other pictures: ${done.join(', ')})` : ''}.
+    const done = answer.elevations.filter((e) => describedIn.has(e.picture) && !hollow.has(e.picture)).map((e) => e.side)
+    const more = `Picture 1: the ground-floor plan (for reference; its front facade lies along its ${plan.front.planEdge} edge). Picture 2: ONE elevation of the same house. It was sent before and ${hollow.has(n) ? 'its description came back with no window, door or feature on it, and without saying that the side is blind' : 'no description of it came back'}${done.length ? ` (sides already described from other pictures: ${done.join(', ')})` : ''}.
 The bodies read on the plan (use these ids): ${plan.bodies.map((b) => `${b.id} (${b.role}, levels ${b.storeys.join('+')})`).join('; ')}.
 ${bodiesInMetres}
-Call describe_facades with exactly ONE entry in "elevations", for picture 2: the side it shows (match it to the plan), the columns of each visible body's two WALL ends, the rows of its eaves and ridge, every opening as a box, the roof features. If it shows no opening at all set blind true; if it cannot be read set limits TOO_SMALL and leave the lists empty. Leave "levels" and "roofs" empty.`
+Call describe_elevation for picture 2: the side it shows (match it to the plan), the columns of each visible body's two WALL ends, the rows of its eaves and ridge, every opening as a box, the roof features. If it shows no opening at all set blind true; if it cannot be read set limits TOO_SMALL and leave the lists empty.`
     try {
-      const extra = await ask<FacadesAnswer>(ctx, 'FACADES', round, more, again, tool)
-      const e = (extra.elevations ?? []).find((x) => x.picture === 2) ?? (extra.elevations ?? [])[0]
+      const one = await ask<FacadesAnswer['elevations'][number] | FacadesAnswer>(ctx, 'FACADES', round, more, again, withBodyIds(ELEVATION_TOOL, plan.bodies.map((b) => b.id)))
+      // a reading recorded with the whole facade tool answers with a list; the one-elevation tool with the entry itself
+      const listed = (one as FacadesAnswer).elevations
+      const e = Array.isArray(listed) ? (listed.find((x) => x.picture === 2) ?? listed[0]) : typeof (one as { side?: unknown }).side === 'string' && Array.isArray((one as { bodies?: unknown }).bodies) ? (one as FacadesAnswer['elevations'][number]) : undefined
       c.asked += 1
-      if (e) {
+      if (e && hollow.has(n)) {
+        if (!Array.isArray(e.openings)) e.openings = []
+        if (!Array.isArray(e.features)) e.features = []
+        // the first entry stands unless this one says more: openings, features, or that the side is blind
+        if (!empty(e)) {
+          const at = answer.elevations.findIndex((x) => x.picture === n)
+          answer.elevations[at] = { ...e, picture: n }
+          c.readIn = `FACADES-${round}`
+        } else c.why = 'described with nothing on it and not stated blind, twice'
+      } else if (e) {
+        if (!Array.isArray(e.openings)) e.openings = []
+        if (!Array.isArray(e.features)) e.features = []
         describedIn.set(n, `FACADES-${round}`)
         answer.elevations.push({ ...e, picture: n })
         c.answer = 'DESCRIBED'
@@ -521,8 +570,15 @@ Call describe_facades with exactly ONE entry in "elevations", for picture 2: the
       } else c.why = 'asked for alone as well; no entry came back'
     } catch (e) {
       if (!(e instanceof ReadingFailed)) throw e
+      // an answer that came and could not be parsed is not "no answer": the same picture is asked once more, once per house
+      if (e.code === 'PARSE_REJECTED' && !ctx.replayOnly && !retried && round < HOUSE_READING_LIMITS.facadeFollowUps + 1) {
+        retried = true
+        c.asked += 1
+        i -= 1
+        continue
+      }
       // a recorded reading holds the answers it holds: no follow-up is invented for it, and the picture stays undescribed
-      if (ctx.replayOnly || ctx.replay) {
+      if (ctx.replayOnly) {
         c.answer = 'REPLAY_WITHOUT_FOLLOW_UP'
         c.why = 'the recorded reading holds no targeted answer for this picture'
       } else {

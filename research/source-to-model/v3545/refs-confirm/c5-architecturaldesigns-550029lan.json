@@ -1,0 +1,99 @@
+{
+ "house": "c5-architecturaldesigns-550029lan",
+ "publisher": "www.architecturaldesigns.com",
+ "url": "https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+ "packageContentHash": "5a28fc1476febee23a04fae29bac675e2ffad9581e2427dfb651979c9ec4b235",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 line-drawn elevations, floor plans of the main, 2nd, 3rd and tower level) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 13.868,
+  "depthM": 14.021,
+  "basis": "PAGE_TEXT"
+ },
+ "heights": {
+  "buildingHeightM": null,
+  "ridgeAboveGroundFloorM": null,
+  "terrainBelowGroundFloorM": null
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "HIP",
+   "ridge": "NA",
+   "levels": 2
+  },
+  {
+   "name": "right wing",
+   "role": "WING",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 3
+  },
+  {
+   "name": "tower",
+   "role": "OTHER",
+   "roof": "HIP",
+   "ridge": "NA",
+   "levels": 4
+  },
+  {
+   "name": "rear bay",
+   "role": "BAY",
+   "roof": "HIP",
+   "ridge": "NA",
+   "levels": 2
+  },
+  {
+   "name": "screened porch",
+   "role": "OTHER",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "FRONT",
+  "alongShare": [
+   0.044,
+   0.23
+  ]
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 8,
+   "dormers": [],
+   "balconies": 1,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 6,
+   "openingsUpper": 7,
+   "dormers": [],
+   "balconies": 2,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 6,
+   "openingsUpper": 4,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 5,
+   "openingsUpper": 7,
+   "dormers": [],
+   "balconies": 2,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 0
+}

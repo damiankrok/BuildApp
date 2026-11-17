@@ -1,0 +1,1130 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-architecturaldesigns-550029lan",
+ "packageContentHash": "5a28fc1476febee23a04fae29bac675e2ffad9581e2427dfb651979c9ec4b235",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 line-drawn elevations, floor plans of the main, 2nd, 3rd and tower level) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.architecturaldesigns.com",
+ "url": "https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+ "units": "source is imperial; metres = feet x 0.3048",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "the 2-car garage doors and the 'First Floor Front Porch' with the entry steps are on the bottom edge of the main-level plan; the drawing titled FRONT ELEVATION shows the two garage doors on the left and the entry porch on the right, as on the plan",
+ "overall": {
+  "widthM": 13.868,
+  "depthM": 14.021,
+  "basis": "PAGE_TEXT",
+  "includes": "page text Width 45'-6\" and Depth 46'-0\". The plans print room sizes only; the rear porch label 45'-6\" x 10'-0\" runs the full house width, and on the plan pixels (14.05 px/ft from that width) the depth from the garage front wall to the face of the rear bay is 46.1 ft. So width = side wall to side wall, depth = garage front wall to rear bay face; the 10 ft rear porch/decks and the spiral stair are outside these numbers"
+ },
+ "levels": {
+  "ridgeAboveZeroM": null,
+  "ridgeBasis": "NOT_GIVEN",
+  "terrainBelowZeroM": null,
+  "upperFloorLevelsM": [
+   3.1,
+   6.5
+  ],
+  "garageRidgeAboveZeroM": null,
+  "note": "no height is printed anywhere (no section, no level marks, no page height). Picture measurements only, +-0.3 m: 2nd-level floor about 3.1 m and 3rd-level floor about 6.5 m above the main-level floor; tower-level floor not readable (tower window sills about 10.8 m); roof peak of the main two-storey block about 9.8 m, gable ridge of the three-storey right wing about 11.1 m, tower roof peak about 13.6 m; grade about 0.3-0.5 m below the main-level floor"
+ },
+ "heights": {
+  "buildingHeightM": null,
+  "buildingHeightBasis": "NOT_GIVEN"
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Near-square 45'-6\" x 46'-0\" footprint: the right 22'-9\" of the front wall is set back 4'-6\" behind the entry porch, and a canted bay (about 2.6 ft deep, 17 ft wide) projects from the middle of the rear wall; a 10 ft deep porch with decks above runs along the whole rear.",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "left and centre, two storeys: garage, bedroom 4 and rec room on the main level, kitchen / dining / great room on the 2nd level; an unfinished attic store under its roof",
+   "levels": 2,
+   "roof": "HIP",
+   "ridge": "NA",
+   "lowerThanMain": false
+  },
+  {
+   "name": "right wing",
+   "role": "WING",
+   "sideOfMain": "RIGHT",
+   "position": "right strip about 12 ft wide, full depth behind the entry porch: guest suite / storage, office / bedroom 2, master suite on the 3rd level",
+   "levels": 3,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": false
+  },
+  {
+   "name": "tower",
+   "role": "OTHER",
+   "sideOfMain": "NA",
+   "position": "stair / foyer shaft between the main block and the right wing, at the front behind the entry porch; rises one storey above the 3rd level as a lookout room",
+   "levels": 4,
+   "roof": "HIP",
+   "ridge": "NA",
+   "lowerThanMain": false
+  },
+  {
+   "name": "rear bay",
+   "role": "BAY",
+   "sideOfMain": "REAR",
+   "position": "canted bay in the middle of the rear wall, two storeys (rec room, great room) under its own small hip roof",
+   "levels": 2,
+   "roof": "HIP",
+   "ridge": "NA",
+   "lowerThanMain": true
+  },
+  {
+   "name": "screened porch",
+   "role": "OTHER",
+   "sideOfMain": "REAR",
+   "position": "rear-left corner at the 2nd level, 12'-4\" x 10'-0\", on posts over the open main-level rear porch",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": true
+  }
+ ],
+ "chimneys": 0,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-550029lan-front-elevation-jpg-fea73cc2b3",
+   "file": "00_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1201,
+   "pictureHeightPx": 800,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 274,
+   "wallRightPx": 952,
+   "sideLengthM": 13.868,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 690,
+   "zeroRowHow": "floor line of the main (ground) level taken at the porch deck / top of the brick base (row about 690); nothing is printed; the grade line is at row 711-713",
+   "ridgeRowPx": 20,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 304,
+      "y0": 593,
+      "x1": 430,
+      "y1": 712
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "left garage door (integral 2-car garage), band of five lights at the top"
+    },
+    {
+     "id": "F2",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 455,
+      "y0": 593,
+      "x1": 581,
+      "y1": 712
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "right garage door"
+    },
+    {
+     "id": "F3",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 638,
+      "y0": 575,
+      "x1": 690,
+      "y1": 682
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "entry door into the foyer (tower shaft), glazed leaf, under the entry porch"
+    },
+    {
+     "id": "F4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 807,
+      "y0": 577,
+      "x1": 911,
+      "y1": 652
+     },
+     "panels": 3,
+     "uncertainPx": 8,
+     "occluded": true,
+     "note": "three mulled double-hung units (storage room); sill hidden behind the porch railing"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 310,
+      "y0": 397,
+      "x1": 377,
+      "y1": 501
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "two mulled units with transoms (butler's pantry) in the wall set back about 7 ft behind the roofed dining patio; lower part behind the patio railing"
+    },
+    {
+     "id": "F6",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 441,
+      "y0": 397,
+      "x1": 590,
+      "y1": 501
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "three mulled units with transoms (dining room); the panels drawn below are trim, not glass"
+    },
+    {
+     "id": "F7",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 638,
+      "y0": 402,
+      "x1": 690,
+      "y1": 527
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "glazed door from the foyer to the 2nd-floor front porch, lower part behind the railing"
+    },
+    {
+     "id": "F8",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 786,
+      "y0": 397,
+      "x1": 933,
+      "y1": 527
+     },
+     "panels": 4,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "bedroom 2: window + pair of French doors + window in one trimmed group with transoms (windows x 786-818 and 902-933, sill row 500; doors x 822-896 to row 527); lower part behind the porch railing"
+    },
+    {
+     "id": "F9",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 647,
+      "y0": 233,
+      "x1": 681,
+      "y1": 302
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "two small square lights stacked in one frame (loft)"
+    },
+    {
+     "id": "F10",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 807,
+      "y0": 251,
+      "x1": 912,
+      "y1": 308
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "three mulled units in the gable (master bath)"
+    },
+    {
+     "id": "F11",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 842,
+      "y0": 221,
+      "x1": 876,
+      "y1": 246
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "small square window sitting on the head trim of F10 in the gable; may be read as its transom"
+    },
+    {
+     "id": "F12",
+     "kind": "WINDOW",
+     "level": 3,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 632,
+      "y0": 106,
+      "x1": 750,
+      "y1": 161
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "tower lookout, three mulled units"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 610,
+      "y0": 548,
+      "x1": 952,
+      "y1": 713
+     },
+     "note": "main-level entry porch 22'-9\" x 4'-6\" on posts in front of the set-back right part"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 610,
+      "y0": 390,
+      "x1": 952,
+      "y1": 548
+     },
+     "note": "2nd-floor front porch above the entry porch, roofed, with railing"
+    },
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 277,
+      "y0": 385,
+      "x1": 420,
+      "y1": 548
+     },
+     "note": "roofed dining patio recessed in the front-left corner at the 2nd level (9'-4\" x 7'-1\"), railing rows 490-535"
+    },
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 277,
+      "y0": 548,
+      "x1": 607,
+      "y1": 580
+     },
+     "note": "bracketed trellis / eyebrow over the garage doors"
+    }
+   ],
+   "note": "ridgeRowPx is the peak of the tower roof (highest point, seen on all four elevations) at (691, 20); gable peak of the right wing at (858, 148), eaves of the main hip roof about row 385, hip top about row 212. Walls: main block x 274-609, tower shaft x 609-770, right wing x 770-952. Sheets 04-07 of the export repeat these four elevations"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-550029lan-right-elevation-jpg-4621fa0ff4",
+   "file": "03_ELEVATION_NOT_APPLICABLE_SIDE_RIGHT.jpg",
+   "pictureWidthPx": 1201,
+   "pictureHeightPx": 800,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 268,
+   "wallRightPx": 900,
+   "sideLengthM": 12.65,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 700,
+   "zeroRowHow": "floor line of the main (ground) level = sills of the ground-level French doors on the rear porch (row 700); nothing is printed; grade at row 712-723",
+   "ridgeRowPx": 21,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 394,
+      "y0": 591,
+      "x1": 435,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "R2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 552,
+      "y0": 591,
+      "x1": 594,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "R3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 662,
+      "y0": 591,
+      "x1": 703,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "R4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 802,
+      "y0": 591,
+      "x1": 843,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "guest suite"
+    },
+    {
+     "id": "R5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 867,
+      "y0": 591,
+      "x1": 896,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "canted side of the rear bay seen foreshortened beyond the rear corner (x 864), partly behind the spiral stair"
+    },
+    {
+     "id": "R6",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 298,
+      "y0": 417,
+      "x1": 341,
+      "y1": 495
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bedroom 2"
+    },
+    {
+     "id": "R7",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 561,
+      "y0": 417,
+      "x1": 595,
+      "y1": 496
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "narrower unit (bath 2)"
+    },
+    {
+     "id": "R8",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 800,
+      "y0": 417,
+      "x1": 845,
+      "y1": 496
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "office"
+    },
+    {
+     "id": "R9",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 868,
+      "y0": 390,
+      "x1": 896,
+      "y1": 503
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "canted side of the rear bay, sash with transom, foreshortened"
+    },
+    {
+     "id": "R10",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 329,
+      "y0": 257,
+      "x1": 391,
+      "y1": 275
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "low horizontal window (master bath)"
+    },
+    {
+     "id": "R11",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 654,
+      "y0": 258,
+      "x1": 698,
+      "y1": 336
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "master bedroom"
+    },
+    {
+     "id": "R12",
+     "kind": "WINDOW",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 800,
+      "y0": 258,
+      "x1": 845,
+      "y1": 336
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "master bedroom"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 195,
+      "y0": 548,
+      "x1": 268,
+      "y1": 713
+     },
+     "note": "entry porch seen from the side (columns x 195-208)"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 195,
+      "y0": 385,
+      "x1": 268,
+      "y1": 548
+     },
+     "note": "2nd-floor front porch"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 866,
+      "y0": 300,
+      "x1": 1035,
+      "y1": 560
+     },
+     "note": "rear decks: 2nd-floor deck and third-floor deck (railing rows 330-372) with the spiral stair at x 890-1005"
+    }
+   ],
+   "note": "left of the picture = front. ridgeRowPx is the peak of the tower roof (highest point, seen on all four elevations); the tower shows no window on this side. The eave-side of the wing's gable roof fills rows 150-235. Wall ends: wing front wall 268 (4'-6\" behind the porch columns), rear bay face 900 (main rear corner 864). This sheet and the rear sheet are drawn about 3 % larger than the front and left sheets"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-550029lan-rear-elevation-jpg-38858f438b",
+   "file": "02_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1201,
+   "pictureHeightPx": 800,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 238,
+   "wallRightPx": 934,
+   "sideLengthM": 13.868,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 700,
+   "zeroRowHow": "floor line of the main (ground) level = sills of the ground-level French doors on the rear porch (row 700); nothing is printed; grade at row 712-723",
+   "ridgeRowPx": 21,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 270,
+      "y0": 591,
+      "x1": 310,
+      "y1": 668
+     },
+     "panels": 1,
+     "uncertainPx": 8,
+     "occluded": true,
+     "note": "guest-suite window almost fully hidden behind the spiral stair; position agrees with the plan"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 333,
+      "y0": 592,
+      "x1": 408,
+      "y1": 700
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "guest-suite pair of French doors, left leaf partly behind the spiral stair"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 461,
+      "y0": 592,
+      "x1": 490,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "canted side of the bay, foreshortened"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 512,
+      "y0": 592,
+      "x1": 671,
+      "y1": 700
+     },
+     "panels": 4,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "rec room: two pairs of French doors in the bay face with a 6 px post between them (x 588-595); may be read as two openings"
+    },
+    {
+     "id": "B5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 694,
+      "y0": 592,
+      "x1": 722,
+      "y1": 667
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "canted side of the bay, foreshortened"
+    },
+    {
+     "id": "B6",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 789,
+      "y0": 592,
+      "x1": 888,
+      "y1": 668
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "bedroom 4, two mulled units"
+    },
+    {
+     "id": "B7",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 258,
+      "y0": 400,
+      "x1": 413,
+      "y1": 543
+     },
+     "panels": 4,
+     "uncertainPx": 7,
+     "occluded": true,
+     "note": "office: window + pair of French doors + window in one trimmed group with transoms (windows x 258-290 and 381-413, doors x 297-372); lower part behind the deck railing and stair"
+    },
+    {
+     "id": "B8",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 461,
+      "y0": 347,
+      "x1": 490,
+      "y1": 506
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "canted side of the bay: sash with transom and an upper light stacked"
+    },
+    {
+     "id": "B9",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 512,
+      "y0": 347,
+      "x1": 671,
+      "y1": 543
+     },
+     "panels": 4,
+     "uncertainPx": 7,
+     "occluded": true,
+     "note": "great room: two pairs of French doors with transoms and upper lights filling the bay face; lower part behind the deck railing"
+    },
+    {
+     "id": "B10",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 694,
+      "y0": 347,
+      "x1": 722,
+      "y1": 507
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "canted side of the bay"
+    },
+    {
+     "id": "B11",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 762,
+      "y0": 400,
+      "x1": 915,
+      "y1": 543
+     },
+     "panels": 4,
+     "uncertainPx": 8,
+     "occluded": true,
+     "note": "breakfast room: window + pair of French doors + window with transoms, seen through the screened porch (screen hatch) and its railing"
+    },
+    {
+     "id": "B12",
+     "kind": "GLAZED_DOOR",
+     "level": 2,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 259,
+      "y0": 259,
+      "x1": 413,
+      "y1": 365
+     },
+     "panels": 4,
+     "uncertainPx": 7,
+     "occluded": true,
+     "note": "master bedroom: window + pair of French doors + window to the third-floor deck; lower part behind the railing (rows 330-372)"
+    },
+    {
+     "id": "B13",
+     "kind": "WINDOW",
+     "level": 3,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 443,
+      "y0": 108,
+      "x1": 569,
+      "y1": 163
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "tower lookout, three mulled units"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 249,
+      "y0": 330,
+      "x1": 423,
+      "y1": 372
+     },
+     "note": "third-floor deck 12'-8\" x 5'-6\""
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 238,
+      "y0": 500,
+      "x1": 760,
+      "y1": 548
+     },
+     "note": "2nd-floor rear deck 35'-6\" x 10'-0\" over the main-level rear porch"
+    },
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 720,
+      "y0": 318,
+      "x1": 955,
+      "y1": 548
+     },
+     "note": "screened-in porch at the 2nd level under its own gable (peak about (835, 318))"
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 238,
+      "y0": 548,
+      "x1": 934,
+      "y1": 712
+     },
+     "note": "main-level rear porch 45'-6\" x 10'-0\" under the decks; spiral stair at x 250-365"
+    }
+   ],
+   "note": "left of the picture = the right side of the house. ridgeRowPx is the peak of the tower roof (highest point, seen on all four elevations); gable peak of the right wing about (335, 150); bay hip roof peak about (588, 252). Wall ends are the heavy corner lines 238 and 934 (corner boards 238-246 and 922-934); tower walls about x 430-588"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-550029lan-left-elevation-jpg-61c3e15ed3",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_LEFT.jpg",
+   "pictureWidthPx": 1201,
+   "pictureHeightPx": 800,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 285,
+   "wallRightPx": 968,
+   "sideLengthM": 14.021,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 690,
+   "zeroRowHow": "floor line of the main (ground) level taken at the porch deck / top of the brick base (row about 690); nothing is printed; the grade line is at row 711-713",
+   "ridgeRowPx": 20,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "BAY",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 291,
+      "y0": 578,
+      "x1": 319,
+      "y1": 652
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "canted side of the rear bay seen foreshortened beyond the rear corner (x 323-330)"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 347,
+      "y0": 578,
+      "x1": 387,
+      "y1": 653
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bedroom 4"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 508,
+      "y0": 578,
+      "x1": 548,
+      "y1": 653
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "L4",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 628,
+      "y0": 609,
+      "x1": 670,
+      "y1": 711
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "half-glazed side door of the garage, sill at grade"
+    },
+    {
+     "id": "L5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 707,
+      "y0": 578,
+      "x1": 748,
+      "y1": 653
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "garage"
+    },
+    {
+     "id": "L6",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 833,
+      "y0": 578,
+      "x1": 873,
+      "y1": 653
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "garage"
+    },
+    {
+     "id": "L7",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 385,
+      "y0": 407,
+      "x1": 487,
+      "y1": 498
+     },
+     "panels": 3,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "three mulled units (breakfast)"
+    },
+    {
+     "id": "L8",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 603,
+      "y0": 407,
+      "x1": 663,
+      "y1": 476
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "two mulled units over the kitchen sink"
+    },
+    {
+     "id": "L9",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 884,
+      "y0": 410,
+      "x1": 948,
+      "y1": 527
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "pair of French doors of the dining room, in the wall set back 9'-4\" behind the roofed dining patio; lower part behind the patio railing"
+    },
+    {
+     "id": "L10",
+     "kind": "WINDOW",
+     "level": 3,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 716,
+      "y0": 107,
+      "x1": 832,
+      "y1": 160
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "tower lookout, three mulled units"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 857,
+      "y0": 385,
+      "x1": 968,
+      "y1": 545
+     },
+     "note": "roofed dining patio recessed in the front-left corner at the 2nd level, railing rows 490-530"
+    },
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 178,
+      "y0": 385,
+      "x1": 323,
+      "y1": 545
+     },
+     "note": "screened-in porch at the 2nd level behind the rear wall, on posts; open porch and the far spiral stair below"
+    },
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 155,
+      "y0": 300,
+      "x1": 300,
+      "y1": 385
+     },
+     "note": "gable roof of the screened porch seen from its eave side"
+    }
+   ],
+   "note": "left of the picture = rear. ridgeRowPx is the peak of the tower roof (highest point, seen on all four elevations) (flat top x 728-812, row 20; tower walls x 657-890); peak of the main hip roof at (656, 213). Wall ends: rear bay face 285 (main rear corner 323-330), garage front corner 968"
+  }
+ },
+ "uncertain": [
+  "Imperial source: printed literals are Width 45'-6\" and Depth 46'-0\" (page text), porch 22'-9\" x 4'-6\", rear porch 45'-6\" x 10'-0\". No overall dimension is printed on the plans themselves, so every sideLengthM is DERIVED: front and rear 45'-6\" = 13.868 m (the rear-porch label spans the full width), left 46'-0\" = 14.021 m (garage front to rear bay face, 46.1 ft on plan pixels), right 46'-0\" minus the 4'-6\" porch set-back = 41'-6\" = 12.65 m (plan pixels give 41.4 ft).",
+  "No ridge or building height is published, so the ridge sanity check cannot be made; ridgeRowPx is the tower roof peak. The front and left sheets are drawn at about 48.8 px/m, the rear and right sheets at about 50 px/m; this is consistent with the wall ends chosen (rear walls at the heavy corner lines 238/934 rather than the lighter lines 246/922).",
+  "Zero row: no level mark. Front/left use the porch-deck / brick-base row 690, rear/right the French-door sill row 700; each may be off by about 10 px (0.2 m). Ground-level window heads then come out 2.15-2.30 m and sills 0.66-0.76 m above the floor.",
+  "Window + French doors + window groups (F8, B7, B11, B12) and the double pairs of French doors in the bay (B4, B9) are given as ONE opening each because the units stand in one trimmed surround with posts of only 0.1-0.2 m between them; they could be split into three (or two) openings.",
+  "F5, F7, F8, B7, B9, B11, B12, L9 are partly hidden by railings, B1/B2/R5 by the spiral stair: boxes are the full frames as far as they can be followed.",
+  "F11 (small gable window) touches the head trim of F10 and may be its transom.",
+  "Bay side windows (L1, R5, R9, B3, B5, B8, B10) are in canted walls and are drawn foreshortened; each physical canted window therefore appears on two elevations (rear and one side).",
+  "The integral 2-car garage is part of the main block (no separate garage body); garage openings carry body MAIN.",
+  "No chimney is drawn on any elevation although the 2nd- and 3rd-level plans show fireplaces; chimneys = 0 follows the elevations.",
+  "The tower shows windows on the front, left and rear faces; its right face shows shingles only (partly hidden by the wing roof), so no opening is listed there."
+ ]
+}

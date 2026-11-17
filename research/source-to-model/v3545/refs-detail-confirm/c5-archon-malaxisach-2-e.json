@@ -1,0 +1,476 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-archon-malaxisach-2-e",
+ "packageContentHash": "a11b3f0db7865c566118b2b0917c719e446f12af6a5b4d7a4b4202d2d6234b51",
+ "reader": "independent source reader (Claude), from the published elevation renders, the dimensioned ground plan and the section of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "entrance door (140/230, vestibule \"Wiatrolap\") is in the bottom wall of the plan; the picture captioned front elevation shows that door and the kitchen gable",
+ "overall": {
+  "widthM": 16.6,
+  "depthM": 12.0,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces of the whole single-storey house (1660 = 780+880 across; 1200 = 235+880+85 deep); not the 0.5 m wing-wall fins, not the covered rear terrace on posts"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 5.83,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.32,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null
+ },
+ "heights": {
+  "buildingHeightM": 6.15,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "T",
+ "outlineNote": "Right body 8.80 m wide x 12.00 m deep; left body 7.80 m wide x 8.80 m deep joined to its left side, set back 0.85 m from the front face and 2.35 m from the rear face of the right body (a T lying on its side, close to an L).",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "right part of the plan: living room, kitchen, vestibule, rear room; 8.80 m wide, full 12.00 m depth",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": false
+  },
+  {
+   "name": "bedroom wing",
+   "role": "WING",
+   "sideOfMain": "LEFT",
+   "position": "left part of the plan: three rooms, bathroom, boiler room; 7.80 m wide, 8.80 m deep",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "lowerThanMain": false
+  }
+ ],
+ "chimneys": 2,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-fro-e0669faf25",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 119,
+   "wallRightPx": 1198,
+   "sideLengthM": 16.6,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 492,
+   "zeroRowHow": "floor line: bottom of the floor-reaching openings and of the cladding, top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 113,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 273,
+      "y0": 342,
+      "x1": 331,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "90/230 on plan, reaches the floor, no door swing drawn"
+    },
+    {
+     "id": "F2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 417,
+      "y0": 342,
+      "x1": 475,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "90/230 bathroom, reaches the floor"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 573,
+      "y0": 342,
+      "x1": 622,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "80/230 boiler room, reaches the floor; right edge touches the porch column"
+    },
+    {
+     "id": "F4",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 725,
+      "y0": 342,
+      "x1": 817,
+      "y1": 492
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "140/230 entrance door with glazed sidelight on the left, one frame; recessed under the gable roof"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 921,
+      "y0": 342,
+      "x1": 1116,
+      "y1": 490
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "300/230 kitchen glazing reaching the floor, wide pane + narrow pane"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 625,
+      "y0": 150,
+      "x1": 880,
+      "y1": 492
+     },
+     "note": "recessed entrance under the front gable roof; grey column at x 625-660"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 673,
+      "y0": 95,
+      "x1": 712,
+      "y1": 148
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 860,
+      "y0": 95,
+      "x1": 900,
+      "y1": 120
+     },
+     "note": ""
+    }
+   ],
+   "note": "wallLeftPx is the left outer face of the left gable wall that the printed 1660 is measured to; it is not a visible line: the front wall continues as a grey wing wall (fin) to x=86, 0.5 m further left. wallRightPx 1198 is the outer face of the right wall (fin of the gable frame, x 1162-1198). Kitchen bay (492 on plan) starts at x=878."
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-boc-3c33826354",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 155,
+   "wallRightPx": 935,
+   "sideLengthM": 12.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 492,
+   "zeroRowHow": "floor line: bottom of the floor-reaching openings and of the cladding, top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 112,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 421,
+      "y0": 342,
+      "x1": 576,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "240/230 dining glazing, single pane reaching the floor"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 936,
+      "y0": 280,
+      "x1": 1068,
+      "y1": 492
+     },
+     "note": "covered rear terrace: timber slat screen x 936-1035 and corner post x 1035-1068"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 422,
+      "y0": 95,
+      "x1": 462,
+      "y1": 115
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 617,
+      "y0": 95,
+      "x1": 662,
+      "y1": 115
+     },
+     "note": ""
+    }
+   ],
+   "note": "wallLeftPx 155 is the kitchen front wall face that the printed 1200 is measured to (computed from the rear face at 935 and checked against the window); the right wall itself runs on as a fin to x=122, 0.5 m in front of it."
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-ogr-48db18d875",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 88,
+   "wallRightPx": 1167,
+   "sideLengthM": 16.6,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 492,
+   "zeroRowHow": "floor line: bottom of the floor-reaching openings and of the cladding, top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 113,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 148,
+      "y0": 180,
+      "x1": 371,
+      "y1": 490
+     },
+     "panels": 5,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "352/483 gable glazing of the living room: three door-high panes below, two panes above whose top follows the roof slope (box = bounding box; left edge only about 190 px tall, apex at the right edge)"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 477,
+      "y0": 342,
+      "x1": 593,
+      "y1": 492
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "180/230 terrace door of the rear room"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 755,
+      "y0": 342,
+      "x1": 873,
+      "y1": 492
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "180/230 terrace door"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 961,
+      "y0": 342,
+      "x1": 1018,
+      "y1": 492
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "90/230 terrace door"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 78,
+      "y0": 115,
+      "x1": 670,
+      "y1": 492
+     },
+     "note": "rear gable roof carried over the terrace on a frame; glazing and wall are recessed behind it"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 392,
+      "y0": 95,
+      "x1": 436,
+      "y1": 150
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 582,
+      "y0": 95,
+      "x1": 618,
+      "y1": 115
+     },
+     "note": ""
+    }
+   ],
+   "note": "wallRightPx 1167 is the outer face of the left gable wall (computed from the 1660 and the scale; the downpipe stands at x 1157-1163); the rear wall continues as a fin to about x=1203. Main body ends at the grey corner x about 665."
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-boc-b86e58b4b7",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 354,
+   "wallRightPx": 1134,
+   "sideLengthM": 12.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 492,
+   "zeroRowHow": "floor line: bottom of the floor-reaching openings and of the cladding, top of the concrete plinth; the section prints terrain -0,32 below it",
+   "ridgeRowPx": 112,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 615,
+      "y0": 343,
+      "x1": 738,
+      "y1": 436
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "190/140"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 848,
+      "y0": 343,
+      "x1": 972,
+      "y1": 436
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "190/140"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 226,
+      "y0": 280,
+      "x1": 355,
+      "y1": 492
+     },
+     "note": "covered rear terrace: post x 226-245, slat screen x 260-355"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 630,
+      "y0": 95,
+      "x1": 672,
+      "y1": 145
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 830,
+      "y0": 95,
+      "x1": 868,
+      "y1": 150
+     },
+     "note": ""
+    }
+   ],
+   "note": "The gable wall of the bedroom wing (880 on plan) spans x 507-1080 including the edge-on fins; wallLeftPx 354 is the rear face of the main body seen behind (left of it only terrace), wallRightPx 1134 the kitchen front face (computed, 0.85 m in front of the gable; the picture shows shadowed wall and the right-wall fin up to x about 1165). The grey band between L1 and L2 is a cladding panel, not an opening."
+  }
+ },
+ "uncertain": [
+  "Which of the two equal-height gabled bodies is MAIN: the right one (larger, 8.80 x 12.00, ridge front-to-back) was taken as MAIN and the left bedroom part as WING; the opposite naming is defensible.",
+  "Outline: T lying on its side versus L (front offset only 0.85 m).",
+  "Wall ends: the house has 0.5 m wing-wall fins (left gable both ends, right wall at the front). wallLeftPx/wallRightPx are the faces the printed dimensions refer to, not the fin ends (FRONT fin to x=86, REAR fin to x about 1203, RIGHT fin to x=122).",
+  "Kinds of the 230 cm high floor-reaching glazings: those with a door swing on the plan (rear) are GLAZED_DOOR, those without (front 90/230, 80/230, kitchen 300/230, right 240/230) are WINDOW; they could be read as glazed doors.",
+  "LEFT picture, x 1083-1130, y 340-490: a dark rectangle beside the porch; the plan shows solid wall there, read as shadowed cladding, not an opening.",
+  "B1 is one frame per the plan label 352/483 although a transom separates lower and upper glazing; someone could count two openings."
+ ]
+}

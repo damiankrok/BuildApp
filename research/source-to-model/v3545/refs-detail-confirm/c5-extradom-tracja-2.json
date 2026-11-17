@@ -1,0 +1,410 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-extradom-tracja-2",
+ "packageContentHash": "53811d4340d450c60524090382ebd8b2c16fc1f931da7ffbf135d98feb68d610",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations, vector ground plan, site sketch, perspective renders for cross-checking only) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.extradom.pl",
+ "url": "https://www.extradom.pl/projekt-domu-tracja-2-WOE1114",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "entrance arrow and the entrance door 110/234 into vestibule 1 are on the bottom edge of the plan; the picture named 'elewacja frontowa' shows the same order of openings (window, small window, door, small window, window)",
+ "overall": {
+  "widthM": 13.84,
+  "depthM": 9.34,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces of the single rectangular body: 1384 printed under the plan, 934 printed on its left; equal to the page facts (szerokosc elewacji 13.84, dlugosc elewacji 9.34) and to the site sketch"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 5.9,
+  "ridgeBasis": "PAGE_HEIGHT_MINUS_TERRAIN",
+  "terrainBelowZeroM": 0.5,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null,
+  "note": "no section is published and no level is printed. Page: building height 6.40 m. The elevations give the ridge 5.9 m above the floor line (58.5 px/m), which leaves about 0.5 m for the terrain (three entrance steps are drawn); both numbers are picture measurements, +-0.15 m"
+ },
+ "heights": {
+  "buildingHeightM": 6.4,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "RECTANGLE",
+ "outlineNote": "One plain rectangle 13.84 x 9.34 m; the entrance has only a shallow canopy and steps, the rear an unroofed terrace.",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "the whole house, single storey with an unused attic (no stair on the plan)",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "lowerThanMain": false
+  }
+ ],
+ "chimneys": 3,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-tracja-2-woe1114-elewacja-frontowa-368b9bd9c8",
+   "file": "00_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 950,
+   "pictureHeightPx": 399,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 73,
+   "wallRightPx": 883,
+   "sideLengthM": 13.84,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 371,
+   "zeroRowHow": "floor line = bottom edge of the doors / top of the grey plinth band (row 369-372); no ±0,00 mark is printed, the ground is below the picture edge or hidden by steps",
+   "ridgeRowPx": 27,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 150,
+      "y0": 239,
+      "x1": 248,
+      "y1": 325
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "kitchen, plan label 180/150; outer edge of the dark frame surround drawn around the glass"
+    },
+    {
+     "id": "F2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 319,
+      "y0": 239,
+      "x1": 365,
+      "y1": 325
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "plan label 90/150"
+    },
+    {
+     "id": "F3",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 430,
+      "y0": 239,
+      "x1": 494,
+      "y1": 372
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "entrance door 110/234, plain timber leaf with a long handle; the top is in the canopy shadow"
+    },
+    {
+     "id": "F4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 560,
+      "y0": 239,
+      "x1": 605,
+      "y1": 325
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bathroom, plan label 90/150"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 696,
+      "y0": 239,
+      "x1": 796,
+      "y1": 325
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bedroom 9, plan label 180/150"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 358,
+      "y0": 205,
+      "x1": 562,
+      "y1": 238
+     },
+     "note": "shallow entrance canopy over the stone-clad entrance bay (x 365-560), carried on a thin post at x 378"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 287,
+      "y0": 20,
+      "x1": 302,
+      "y1": 70
+     },
+     "note": "on the front slope"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 399,
+      "y0": 2,
+      "x1": 419,
+      "y1": 26
+     },
+     "note": "top seen over the ridge, stands on the rear slope"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 837,
+      "y0": 2,
+      "x1": 857,
+      "y1": 26
+     },
+     "note": "top seen over the ridge, stands on the rear slope"
+    }
+   ],
+   "note": "timber cladding panels between the windows at x 248-319 and 605-696 are wall, not openings"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-tracja-2-woe1114-elewacja-prawa-be3fdc4c61",
+   "file": "02_ELEVATION_NOT_APPLICABLE_SIDE_RIGHT.jpg",
+   "pictureWidthPx": 932,
+   "pictureHeightPx": 399,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 172,
+   "wallRightPx": 718,
+   "sideLengthM": 9.34,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 368,
+   "zeroRowHow": "floor line = bottom edge of the doors / top of the grey plinth band (row 369-372); no ±0,00 mark is printed, the ground is below the picture edge or hidden by steps",
+   "ridgeRowPx": 28,
+   "blind": true,
+   "openings": [],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 345,
+      "y0": 22,
+      "x1": 377,
+      "y1": 85
+     },
+     "note": "front-slope chimney"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 468,
+      "y0": 3,
+      "x1": 527,
+      "y1": 75
+     },
+     "note": "the two rear-slope chimneys, overlapping"
+    }
+   ],
+   "note": "blind gable wall (the plan shows no opening in the right wall either); left of the picture = front; ridge apex at x 443"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-tracja-2-woe1114-elewacja-tylna-8f8fa09b7c",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 934,
+   "pictureHeightPx": 399,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 74,
+   "wallRightPx": 881,
+   "sideLengthM": 13.84,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 371,
+   "zeroRowHow": "floor line = bottom edge of the doors / top of the grey plinth band (row 369-372); no ±0,00 mark is printed, the ground is below the picture edge or hidden by steps",
+   "ridgeRowPx": 25,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 143,
+      "y0": 239,
+      "x1": 207,
+      "y1": 372
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "plain timber service door of the boiler room 11"
+    },
+    {
+     "id": "B2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 267,
+      "y0": 239,
+      "x1": 349,
+      "y1": 325
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room 8, plan label 150/150; outer edge of the dark frame surround drawn around the glass"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 440,
+      "y0": 239,
+      "x1": 520,
+      "y1": 325
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room 7, plan label 150/150"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 637,
+      "y0": 239,
+      "x1": 793,
+      "y1": 372
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "living-room sliding terrace door, plan label 280/234"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 96,
+      "y0": 2,
+      "x1": 116,
+      "y1": 60
+     },
+     "note": "on the rear slope"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 536,
+      "y0": 2,
+      "x1": 556,
+      "y1": 60
+     },
+     "note": "on the rear slope"
+    }
+   ],
+   "note": "left of the picture = the right side of the house; timber cladding x 349-440 and a stone-clad pier x 594-637 are wall"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-tracja-2-woe1114-elewacja-lewa-44d44fafd5",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_LEFT.jpg",
+   "pictureWidthPx": 944,
+   "pictureHeightPx": 399,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 221,
+   "wallRightPx": 768,
+   "sideLengthM": 9.34,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 369,
+   "zeroRowHow": "floor line = bottom edge of the doors / top of the grey plinth band (row 369-372); no ±0,00 mark is printed, the ground is below the picture edge or hidden by steps",
+   "ridgeRowPx": 27,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 446,
+      "y0": 238,
+      "x1": 546,
+      "y1": 326
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "dining window, plan label 180/150, in a timber and stone clad panel (x 388-604)"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 412,
+      "y0": 4,
+      "x1": 470,
+      "y1": 80
+     },
+     "note": "the two rear-slope chimneys, overlapping"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 562,
+      "y0": 25,
+      "x1": 592,
+      "y1": 85
+     },
+     "note": "front-slope chimney"
+    }
+   ],
+   "note": "left of the picture = rear (rear-slope chimneys left of the apex at x 493); the window is almost central so the orientation rests on the chimneys"
+  }
+ },
+ "uncertain": [
+  "No section and no printed levels: zero row is the door-sill / plinth-top row; ridge 5.9 m above it measured on the pictures against the page height 6.40 m above terrain (difference 0.5 m read as terrain, not printed).",
+  "Window boxes are the outer edge of the dark frame surround of the render; they come out 5-10 % narrower than the plan labels (1.68-1.71 m for '180', 1.40 m for '150', 0.79 m for '90'), i.e. the labels are probably structural openings. Glass alone is about 8 px smaller on each side.",
+  "B1 (boiler-room door) is drawn as a flat timber panel 1.10 m wide; the plan door is narrower (about 0.9 m), so the panel may include a frame or cladding strip.",
+  "Elevation 01 (left) is nearly symmetric; rear-at-left is decided from the chimney positions only."
+ ]
+}

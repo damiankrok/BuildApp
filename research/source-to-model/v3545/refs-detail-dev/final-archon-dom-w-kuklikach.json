@@ -1,0 +1,97 @@
+{
+  "schema": "buildapp.v3545.detail-reference", "version": 1,
+  "house": "final-archon-dom-w-kuklikach",
+  "packageContentHash": "724ca37a2975225e4bb52bf4b5edce5e0c2855e7edef73b63f72bc77e1ffc744",
+  "reader": "independent source reader B: publisher's four elevation renders (1280x733), dimensioned ground plan, section (400x300) and page facts only, read against a pixel grid; no analyzer, solver, API reading or model output seen",
+  "readOn": "2026-11-17",
+  "frontPlanEdge": "BOTTOM",
+  "frontHow": "The entrance door (labelled 100/210) of room 1 opens through the bottom edge of the dimensioned ground plan onto the entrance landing; the page captions the picture with that door 'elewacja frontowa'.",
+  "overall": { "widthM": 7.56, "depthM": 8.76, "basis": "PRINTED_ON_PLAN",
+    "includes": "756 x 876 printed on the plan = the walled rectangle of the house; the terrace on the plan right, the entrance landing and the roof overhang (dashed) are excluded." },
+  "levels": {
+    "ridgeAboveZeroM": 5.53, "ridgeBasis": "PRINTED_ON_SECTION",
+    "terrainBelowZeroM": 0.32, "upperFloorLevelsM": [], "garageRidgeAboveZeroM": null
+  },
+  "sides": {
+    "FRONT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-frontowa-505a1e6c06", "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 733,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 199, "wallRightPx": 927,
+      "sideLengthM": 7.56, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 661, "zeroRowHow": "floor line: bottom of the entrance door at its threshold; the picture ends in a black band from row 693, which is where the terrain (-0,32) would be",
+      "ridgeRowPx": 109,
+      "blind": false,
+      "openings": [
+        { "id": "F1", "kind": "DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 448, "y0": 458, "x1": 544, "y1": 661 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "entrance door with a tall glazed strip, plan label 100/210; a light trim band (x 432..560, from row 440) is drawn around it and is not part of the hole; the top of the leaf is in the eaves shadow" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "CHIMNEY", "boxPx": { "x0": 365, "y0": 80, "x1": 450, "y1": 215 }, "note": "wide chimney behind the hip, left of the apex" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 643, "y0": 80, "x1": 689, "y1": 173 }, "note": "narrow chimney right of the apex" }
+      ]
+    },
+    "RIGHT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-boczna-5a87425991", "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 733,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 289, "wallRightPx": 1122,
+      "sideLengthM": 8.76, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 660, "zeroRowHow": "floor line: bottom of the two terrace doors at the terrace paving",
+      "ridgeRowPx": 111,
+      "blind": false,
+      "openings": [
+        { "id": "R1", "kind": "GLAZED_DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 445, "y0": 447, "x1": 600, "y1": 659 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "terrace door of room 6 (bedroom), plan label 160/220" },
+        { "id": "R2", "kind": "GLAZED_DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 810, "y0": 447, "x1": 965, "y1": 659 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "terrace door of room 5 (living room), plan label 160/220" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "CHIMNEY", "boxPx": { "x0": 679, "y0": 80, "x1": 759, "y1": 190 }, "note": "the two chimneys overlap on this view" }
+      ]
+    },
+    "REAR": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-ogrodowa-3e356b016c", "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 733,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 430, "wallRightPx": 1158,
+      "sideLengthM": 7.56, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 661, "zeroRowHow": "not drawn on this side (no door): same row as on the front and right pictures, which share scale and framing; the plinth band top is at row 647",
+      "ridgeRowPx": 110,
+      "blind": false,
+      "openings": [
+        { "id": "B1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 677, "y0": 446, "x1": 911, "y1": 578 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "kitchen/dining window, plan label 240/140" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "CHIMNEY", "boxPx": { "x0": 667, "y0": 80, "x1": 712, "y1": 170 }, "note": "narrow chimney left of the apex" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 908, "y0": 80, "x1": 995, "y1": 215 }, "note": "wide chimney right of the apex; right edge approximate" }
+      ]
+    },
+    "LEFT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gotowy-projekt-dom-w-kuklikach-elewacja-boczna-03e7e3ea0c", "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 1280, "pictureHeightPx": 733,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 233, "wallRightPx": 1070,
+      "sideLengthM": 8.76, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 661, "zeroRowHow": "not drawn on this side (no door): same row as on the front and right pictures, which share scale and framing; the plinth band top is at row 647",
+      "ridgeRowPx": 111,
+      "blind": false,
+      "openings": [
+        { "id": "L1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 323, "y0": 447, "x1": 440, "y1": 573 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "kitchen window, plan label 120/130" },
+        { "id": "L2", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 771, "y0": 447, "x1": 849, "y1": 573 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "bathroom window, plan label 80/130" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "CHIMNEY", "boxPx": { "x0": 597, "y0": 79, "x1": 678, "y1": 220 }, "note": "the two chimneys overlap on this view" }
+      ]
+    }
+  },
+  "uncertain": [
+    "Ridge check: with 96.3 px/m (wall 199..927 = 7.56 m, confirmed by the door and window sizes printed on the plan) the apex row 109 is 5.74 m above the floor row 661, while the section prints +5,53. The floor row is fixed by the 2.20 m terrace doors and the 2.10 m entrance door, so the render draws the roof top about 0.2 m higher than the section's number (ridge tiles and roof build-up, or a render inaccuracy); the row is given as seen.",
+    "The page names the pictures frontowa / ogrodowa / boczna / boczna. By the plan 'ogrodowa' (one 240/140 window) is the side opposite the entrance, i.e. REAR; the terrace with the two 160/220 doors is on the RIGHT side, which the page calls only 'boczna'.",
+    "Hip roof: on LEFT and RIGHT the short ridge runs x 590..710 (LEFT) and x 645..767 (RIGHT); on FRONT and REAR only the hip apex is seen.",
+    "RIGHT: the timber-clad panel between the two terrace doors (x 600..809) is wall cladding, not an opening.",
+    "Window boxes are the frames; brick-slip panels above and below the windows and the trim around the door are decoration.",
+    "The section is published only as a 400x300 picture; the level figures +5,53, +2,56, -0,32 and the room height 289 are legible on it."
+  ]
+}

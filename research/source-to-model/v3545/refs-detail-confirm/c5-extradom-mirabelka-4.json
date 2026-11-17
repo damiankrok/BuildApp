@@ -1,0 +1,341 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-extradom-mirabelka-4",
+ "packageContentHash": "12bf48381fe6a97cab1e1b07336ecedc975f440c16e7dc8aa5060e641a6f5e57",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations and 1 section, all exported with role UNKNOWN; vector ground plan) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.extradom.pl",
+ "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "entrance arrow and the entrance door into room 1 are on the bottom edge of the plan; picture 13 shows the same sequence left to right (wide window, door, two small windows)",
+ "overall": {
+  "widthM": 11.9,
+  "depthM": 8.65,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces of the single rectangular body: 1190 printed under the plan, 865 printed on its left; equal to the page facts (szerokosc elewacji 11.9, dlugosc elewacji 8.65)"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 6.25,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.49,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null,
+  "note": "section (picture 21, asset asset-c03bc91a15b43a0afc218b54faab0aa5814404df63577ad6-93353aed0c) prints 674 from the terrain at -0,49 to the ridge, i.e. ridge +6,25; it also prints +3,02 (top of the ceiling over the ground floor, attic not habitable, no stair on the plan), an eave height of 321 and a 35 degree pitch. Page building height 6.73 = the printed 674 within rounding"
+ },
+ "heights": {
+  "buildingHeightM": 6.73,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "RECTANGLE",
+ "outlineNote": "One plain rectangle 11.90 x 8.65 m with a shallow entrance canopy at the front and an unroofed terrace at the rear.",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "the whole house, single storey under one gable roof",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "lowerThanMain": false
+  }
+ ],
+ "chimneys": 2,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-9bbec4f8e79b6e18a140fe585cb8e1ba6ca4426ef8d5f877-be27583eae",
+   "file": "13_UNKNOWN_UNKNOWN_UNKNOWN.jpg",
+   "pictureWidthPx": 800,
+   "pictureHeightPx": 430,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 60,
+   "wallRightPx": 709,
+   "sideLengthM": 11.9,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 390,
+   "zeroRowHow": "floor line = door sill / top of the plinth band; the section prints the terrain at -0,49 below it (no ±0,00 mark on the elevation itself)",
+   "ridgeRowPx": 50,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 117,
+      "y0": 266,
+      "x1": 247,
+      "y1": 348
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "wide two-pane window, drawn 2.4 m wide on the plan"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 366,
+      "y0": 278,
+      "x1": 421,
+      "y1": 392
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "entrance door with a narrow vertical glazed strip"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 477,
+      "y0": 266,
+      "x1": 543,
+      "y1": 314
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "plan label 120/90"
+    },
+    {
+     "id": "F4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 588,
+      "y0": 266,
+      "x1": 653,
+      "y1": 314
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "plan label 120/90"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 305,
+      "y0": 264,
+      "x1": 475,
+      "y1": 272
+     },
+     "note": "thin flat canopy over the entrance; timber cladding on the wall x 305-652"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 320,
+      "y0": 8,
+      "x1": 351,
+      "y1": 50
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 658,
+      "y0": 8,
+      "x1": 690,
+      "y1": 80
+     },
+     "note": ""
+    }
+   ]
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-3c6bb8bc020fe576936e13fcccc79fd47a3d07b9b50983e2-a5112bf917",
+   "file": "06_UNKNOWN_UNKNOWN_UNKNOWN.jpg",
+   "pictureWidthPx": 800,
+   "pictureHeightPx": 432,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 133,
+   "wallRightPx": 608,
+   "sideLengthM": 8.65,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 389,
+   "zeroRowHow": "floor line = door sill / top of the plinth band; the section prints the terrain at -0,49 below it (no ±0,00 mark on the elevation itself)",
+   "ridgeRowPx": 50,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 232,
+      "y0": 281,
+      "x1": 287,
+      "y1": 390
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "service door of the utility room 7 (plan right wall)"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "gable wall, apex at x 372; left of the picture = front (entrance canopy seen at the left)"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-891f77de3953bf4059a414b389094d995198269e511b275e-99171b30c3",
+   "file": "09_UNKNOWN_UNKNOWN_UNKNOWN.jpg",
+   "pictureWidthPx": 800,
+   "pictureHeightPx": 431,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 88,
+   "wallRightPx": 733,
+   "sideLengthM": 11.9,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 390,
+   "zeroRowHow": "floor line = door sill / top of the plinth band; the section prints the terrain at -0,49 below it (no ±0,00 mark on the elevation itself)",
+   "ridgeRowPx": 52,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 164,
+      "y0": 266,
+      "x1": 245,
+      "y1": 349
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "plan label 150/150"
+    },
+    {
+     "id": "B2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 354,
+      "y0": 266,
+      "x1": 436,
+      "y1": 349
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "plan label 150/150"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 512,
+      "y0": 266,
+      "x1": 664,
+      "y1": 393
+     },
+     "panels": 2,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "living-room sliding terrace door, plan label 280/233"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 107,
+      "y0": 8,
+      "x1": 137,
+      "y1": 80
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 445,
+      "y0": 8,
+      "x1": 475,
+      "y1": 52
+     },
+     "note": ""
+    }
+   ],
+   "note": "left of the picture = the right side of the house"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-f1965e7662fa5650c45995bffe3f337dc129fdde15f560c3-e98a387068",
+   "file": "28_UNKNOWN_UNKNOWN_UNKNOWN.jpg",
+   "pictureWidthPx": 800,
+   "pictureHeightPx": 433,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 187,
+   "wallRightPx": 657,
+   "sideLengthM": 8.65,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 391,
+   "zeroRowHow": "floor line = door sill / top of the plinth band; the section prints the terrain at -0,49 below it (no ±0,00 mark on the elevation itself)",
+   "ridgeRowPx": 57,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 357,
+      "y0": 270,
+      "x1": 487,
+      "y1": 397
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "one large floor-to-lintel pane in the living-room side wall (plan label 180/233, drawn about 2.4 m wide on plan and elevation); may be fixed glazing rather than a door"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "gable wall, apex at x 423; right of the picture = front"
+  }
+ },
+ "uncertain": [
+  "The four elevations and the section are exported with role UNKNOWN; sides were assigned by matching openings with the plan (front: wide window + door + two small windows; rear: two windows + sliding door; right: one door; left: one large glazing).",
+  "LEFT L1: plan label reads 180/233 but both plan and elevation draw it about 2.4 m wide; it reaches the floor and is listed as GLAZED_DOOR although it may be a fixed pane. Its bottom edge was read 6 px below the floor row (plinth shadow), so the lower edge is uncertain.",
+  "FRONT F1: plan label reads 270/150 but the opening is drawn 2.4 m wide on both plan and elevation; the box follows the elevation.",
+  "Ridge row on the left elevation was read 7 px lower than on the other three (6.15 m instead of 6.24 m above zero): ridge capping not clearly visible there."
+ ]
+}

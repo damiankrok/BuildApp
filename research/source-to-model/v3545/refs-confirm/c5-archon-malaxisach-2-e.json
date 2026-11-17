@@ -1,0 +1,75 @@
+{
+ "house": "c5-archon-malaxisach-2-e",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+ "packageContentHash": "a11b3f0db7865c566118b2b0917c719e446f12af6a5b4d7a4b4202d2d6234b51",
+ "reader": "independent source reader (Claude), from the published elevation renders, the dimensioned ground plan and the section of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 16.6,
+  "depthM": 12.0,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 6.15,
+  "ridgeAboveGroundFloorM": 5.83,
+  "terrainBelowGroundFloorM": 0.32
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  },
+  {
+   "name": "bedroom wing",
+   "role": "WING",
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "NONE",
+  "alongShare": null
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 5,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 2,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 2
+}

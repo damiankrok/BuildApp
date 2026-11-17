@@ -26,7 +26,7 @@ import type { LinkAnalysisResult } from '../result.js'
 import type { AnalysisWarning } from '../warnings.js'
 import { MODEL_ASSESSMENT_SCHEMA_VERSION } from '../assessment/types.js'
 import type { ModelAssessment } from '../assessment/types.js'
-import { arbitrate, compileHouse, documentFromReading } from './describe.js'
+import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } from './describe.js'
 import type { Arbitration, CompiledHouse, LocalMeasure } from './describe.js'
 import { measureScene } from './measure.js'
 import { housePictures } from './pictures.js'
@@ -252,7 +252,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10), skipped: notSent }
     if (selection.elevations.length + selection.sections.length > 0) {
       const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, identity.modelId)
-      const bodiesInMetres = planOnly.document.geometry ? `On the plan, in metres (x from the building's left end seen from the front, z from the front back): ${planOnly.document.geometry.bodies.map((b) => `${b.id}: x ${Math.min(...b.outline.map((p) => p.x)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.x)).toFixed(1)}, z ${Math.min(...b.outline.map((p) => p.z)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.z)).toFixed(1)}`).join('; ')}.` : ''
+      const bodiesInMetres = planOnly.document.geometry ? planFactsForFacades(planOnly.document.geometry) : ''
       const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
       const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
       compiled = compileHouse(JSON.parse(JSON.stringify(converted.document)), identity.modelId)

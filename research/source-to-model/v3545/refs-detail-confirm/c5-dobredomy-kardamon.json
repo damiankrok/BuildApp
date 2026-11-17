@@ -1,0 +1,786 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-dobredomy-kardamon",
+ "packageContentHash": "673abfae5e6dde34dde03df97f88c7a1d677a3b4fef0fe56eeea55354eafb874",
+ "reader": "independent source reader (Claude), from the published elevation renders, the two room plans (no dimensions printed) and the dimensioned plot plan of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "www.dobredomy.pl",
+ "url": "https://www.dobredomy.pl/projekt/kardamon",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "garage door and the entrance door (wiatrolap) are in the bottom walls of the ground plan; the plot plan marks the entrance with an arrow from below; the picture captioned front elevation shows both",
+ "overall": {
+  "widthM": 18.02,
+  "depthM": 17.8,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "printed on the plot plan (1802 x 1780), not on the room plans: outer wall faces of the whole house, the depth being the left wing including its 1.3 m end frames (fins) at both gables; confirmed by the plan scale from the printed garage area (about 42.5 px/m)"
+ },
+ "levels": {
+  "ridgeAboveZeroM": null,
+  "ridgeBasis": "NOT_GIVEN",
+  "terrainBelowZeroM": null,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null,
+  "measuredOnElevation": "not printed anywhere; on the front picture the main ridge is about 7.5 m above the floor line and the lawn about 0.3 m below it (sum 7.8 m against the stated building height 7.90 m); ridge of the living wing about 6.0 m, ridge of the connector about 6.1 m"
+ },
+ "heights": {
+  "buildingHeightM": 7.9,
+  "buildingHeightBasis": "PAGE_TEXT"
+ },
+ "outlineShape": "OTHER",
+ "outlineNote": "H-like: a long left wing (about 7.25 x 17.80 m) and a shorter right block (about 6.9 x 11.15 m), both with front-to-back ridges, joined by a narrower connector (about 3.85 m wide, about 4.4 m deep) that is set back about 6.2 m from the garage front; covered terraces fill the notches.",
+ "bodies": [
+  {
+   "name": "main (left wing)",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "left: about 7.25 m wide, full 17.80 m deep; ground floor holds the two-car garage at the front (no separate garage body), stairs, a bedroom at the rear; attic rooms above",
+   "levels": 2,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": false
+  },
+  {
+   "name": "living block",
+   "role": "WING",
+   "sideOfMain": "RIGHT",
+   "position": "right: about 6.9 m wide, about 11.15 m deep, living room + dining + kitchen, open to the roof (void over the living room)",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "lowerThanMain": true
+  },
+  {
+   "name": "connector",
+   "role": "OTHER",
+   "sideOfMain": "RIGHT",
+   "position": "between the two: hall, vestibule, pantry; mezzanine (antresola) above",
+   "levels": 2,
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "lowerThanMain": true
+  }
+ ],
+ "chimneys": 2,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-kardamon-elewacja-przod-784b4d2db5",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1200,
+   "pictureHeightPx": 523,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 180,
+   "wallRightPx": 1021,
+   "sideLengthM": 18.02,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 497,
+   "zeroRowHow": "floor line: bottom of the entrance door / floor-reaching glazings (top of the white terrace step); no level mark is printed on any picture",
+   "ridgeRowPx": 146,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 242,
+      "y0": 390,
+      "x1": 462,
+      "y1": 503
+     },
+     "panels": 1,
+     "uncertainPx": 10,
+     "occluded": false,
+     "note": "two-car sectional door in the dark recess under the balcony; the top section (rows 390-413) is in shadow, lit panels start at 413; the room plan draws the opening narrower (about 4.1 m) than the picture (about 4.7 m)"
+    },
+    {
+     "id": "F2",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 208,
+      "y0": 183,
+      "x1": 340,
+      "y1": 355
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; left half of the front gable glazing of the attic (left of the dark centre post at x 340-360), behind the glass balustrade of the balcony"
+    },
+    {
+     "id": "F3",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 360,
+      "y0": 183,
+      "x1": 492,
+      "y1": 355
+     },
+     "panels": 3,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; right half of the gable glazing, with a balcony door (lighter leaf x 362-400)"
+    },
+    {
+     "id": "F4",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 523,
+      "y0": 388,
+      "x1": 591,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "entrance door with a glass strip plus a narrow sidelight (x 580-590) in one frame, in the dark-clad connector wall set back about 6.2 m behind the garage front"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 654,
+      "y0": 391,
+      "x1": 681,
+      "y1": 490
+     },
+     "panels": 1,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "tall narrow pantry window; its bottom is hidden by a bench and planting"
+    },
+    {
+     "id": "F6",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 570,
+      "y0": 256,
+      "x1": 602,
+      "y1": 293
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "connector roof, lights the mezzanine"
+    },
+    {
+     "id": "F7",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 611,
+      "y0": 256,
+      "x1": 645,
+      "y1": 293
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "connector roof, lights the mezzanine"
+    },
+    {
+     "id": "F8",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 728,
+      "y0": 385,
+      "x1": 847,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "kitchen/dining glazing left of the centre pier (x 847-870); lower part behind planting"
+    },
+    {
+     "id": "F9",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 870,
+      "y0": 385,
+      "x1": 1014,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": true,
+     "note": "dining glazing right of the centre pier; lower part behind planting"
+    },
+    {
+     "id": "F10",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 728,
+      "y0": 255,
+      "x1": 847,
+      "y1": 365
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; gable glazing above the grey beam (rows 365-385), left of the centre pier; it stands at attic height but lights the double-height living block (no upper room), so level 0 by the format"
+    },
+    {
+     "id": "F11",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 870,
+      "y0": 255,
+      "x1": 1014,
+      "y1": 365
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; gable glazing right of the centre pier; same remark on the level"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 208,
+      "y0": 300,
+      "x1": 492,
+      "y1": 378
+     },
+     "note": "recessed balcony in the front gable of the left wing: glass balustrade rows 305-355, slab edge with bolts rows 355-378"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 305,
+      "y0": 112,
+      "x1": 340,
+      "y1": 190
+     },
+     "note": "white masonry chimney on the main ridge"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 846,
+      "y0": 185,
+      "x1": 858,
+      "y1": 215
+     },
+     "note": "steel flue of the fireplace at the ridge of the living block"
+    }
+   ],
+   "note": "The pictures are renders with a slight perspective: planes further back are drawn about 1-3 % smaller. Left wing gable frame x 180-520 (apex 348,146); connector x 520-706; living block gable frame x 706-1021 (apex 858,218). All gable glazings are recessed about 1.2 m behind the white gable frames."
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-kardamon-elewacja-boczna-f0c12fe9d3",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1200,
+   "pictureHeightPx": 523,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 195,
+   "wallRightPx": 1012,
+   "sideLengthM": 17.8,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 497,
+   "zeroRowHow": "floor line: bottom of the entrance door / floor-reaching glazings (top of the white terrace step); no level mark is printed on any picture",
+   "ridgeRowPx": 147,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 478,
+      "y0": 385,
+      "x1": 686,
+      "y1": 497
+     },
+     "panels": 3,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "large sliding glazing of the dining area in the end wall of the living block (about 4.4 m wide); the number of panes is not clear (one mullion at x 613-620 is certain)"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 528,
+      "y0": 112,
+      "x1": 571,
+      "y1": 148
+     },
+     "note": "white masonry chimney of the left wing on the ridge"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 895,
+      "y0": 178,
+      "x1": 907,
+      "y1": 212
+     },
+     "note": "steel flue of the fireplace"
+    }
+   ],
+   "note": "Picture-left is the front. wallLeftPx/wallRightPx are the two ends of the left wing seen in the background (17.80 m, drawn at about 45.9 px/m); the near wall of the living block spans x 412-938 (about 11.15 m at about 47.2 px/m). The dark stone wall x 198-410 is the garage side wall, the strip x 940-966 the bedroom side wall: both without openings. A roof window of the left wing that the plot plan shows on this slope is hidden behind the roof of the living block."
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-kardamon-elewacja-ty-eca21b6d75",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1200,
+   "pictureHeightPx": 523,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 179,
+   "wallRightPx": 1016,
+   "sideLengthM": 18.02,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 497,
+   "zeroRowHow": "floor line: bottom of the entrance door / floor-reaching glazings (top of the white terrace step); no level mark is printed on any picture",
+   "ridgeRowPx": 147,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 205,
+      "y0": 388,
+      "x1": 298,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "living-room glazing left of the fireplace chimney block"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 378,
+      "y0": 388,
+      "x1": 468,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "living-room glazing right of the chimney block"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 205,
+      "y0": 256,
+      "x1": 328,
+      "y1": 365
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; rear gable glazing of the living block left of the centre post (x 328-346); at attic height but lights the double-height room, level 0 by the format"
+    },
+    {
+     "id": "B4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "WING",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 346,
+      "y0": 256,
+      "x1": 470,
+      "y1": 365
+     },
+     "panels": 2,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; right of the centre post; same remark on the level"
+    },
+    {
+     "id": "B5",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 500,
+      "y0": 385,
+      "x1": 680,
+      "y1": 497
+     },
+     "panels": 3,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "hall glazing to the covered terrace, three panes; terrace furniture stands in front of it"
+    },
+    {
+     "id": "B6",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 556,
+      "y0": 257,
+      "x1": 592,
+      "y1": 293
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "connector roof, lights the mezzanine"
+    },
+    {
+     "id": "B7",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "OTHER",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 597,
+      "y0": 257,
+      "x1": 633,
+      "y1": 293
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "connector roof, lights the mezzanine"
+    },
+    {
+     "id": "B8",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 712,
+      "y0": 388,
+      "x1": 824,
+      "y1": 497
+     },
+     "panels": 2,
+     "uncertainPx": 6,
+     "occluded": false,
+     "note": "ground-floor bedroom glazing, two panes"
+    },
+    {
+     "id": "B9",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 905,
+      "y0": 388,
+      "x1": 943,
+      "y1": 495
+     },
+     "panels": 1,
+     "uncertainPx": 8,
+     "occluded": true,
+     "note": "glazed door of the ground-floor bathroom to the terrace (door swing on the plan); bottom behind deck chairs"
+    },
+    {
+     "id": "B10",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 708,
+      "y0": 183,
+      "x1": 838,
+      "y1": 355
+     },
+     "panels": 3,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; left half of the rear gable glazing of the attic (one room each side of the dark centre post x 838-860), behind the glass balustrade"
+    },
+    {
+     "id": "B11",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 860,
+      "y0": 183,
+      "x1": 1010,
+      "y1": 355
+     },
+     "panels": 3,
+     "uncertainPx": 8,
+     "occluded": false,
+     "note": "bounding box of a glazing whose top follows the roof slope; right half of the rear gable glazing"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 708,
+      "y0": 300,
+      "x1": 1010,
+      "y1": 378
+     },
+     "note": "recessed balcony in the rear gable of the left wing"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 302,
+      "y0": 368,
+      "x1": 376,
+      "y1": 500
+     },
+     "note": "white fireplace chimney block standing outside the rear wall of the living block, ground level only"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 332,
+      "y0": 183,
+      "x1": 344,
+      "y1": 215
+     },
+     "note": "steel flue of the fireplace"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 846,
+      "y0": 112,
+      "x1": 886,
+      "y1": 190
+     },
+     "note": "white masonry chimney on the main ridge"
+    },
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 497,
+      "y0": 378,
+      "x1": 708,
+      "y1": 500
+     },
+     "note": "covered terrace in the notch between the two wings in front of the hall glazing"
+    }
+   ],
+   "note": "Picture-left is the plan right. Living block gable frame x 179-497 (apex 338,218); connector x 497-708; left wing gable frame x 700-1016 (apex 850,147)."
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-kardamon-elewacja-boczna-b92bff783b",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1200,
+   "pictureHeightPx": 523,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 176,
+   "wallRightPx": 1012,
+   "sideLengthM": 17.8,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 498,
+   "zeroRowHow": "no door on this side: taken as the row that keeps the ridge at the same height as on the front picture (plinth line is at about row 500, lawn at 512)",
+   "ridgeRowPx": 147,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 384,
+      "y0": 237,
+      "x1": 417,
+      "y1": 283
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "L2",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 598,
+      "y0": 237,
+      "x1": 632,
+      "y1": 283
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "L3",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 746,
+      "y0": 237,
+      "x1": 780,
+      "y1": 283
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "L4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 499,
+      "y0": 388,
+      "x1": 545,
+      "y1": 419
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "high window of the staircase"
+    },
+    {
+     "id": "L5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 598,
+      "y0": 388,
+      "x1": 644,
+      "y1": 419
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "high window of the utility room"
+    },
+    {
+     "id": "L6",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 697,
+      "y0": 388,
+      "x1": 743,
+      "y1": 419
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "high window of the garage"
+    },
+    {
+     "id": "L7",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 795,
+      "y0": 388,
+      "x1": 842,
+      "y1": 419
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "high window of the garage"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 630,
+      "y0": 112,
+      "x1": 675,
+      "y1": 185
+     },
+     "note": "white masonry chimney"
+    }
+   ],
+   "note": "Picture-left is the rear. White wall rows 362-500; rows 298-362 are a sheet-metal clad band (upper wall / roof skirt), roof above to the ridge at row 147. The wall includes the gable end frames at both ends."
+  }
+ },
+ "uncertain": [
+  "No dimension is printed on the room plans and no section is published: side lengths come from the plot plan (1802 x 1780) and were checked against the plan scale derived from the printed garage area; ridge and floor levels are not printed.",
+  "The elevations are renders with a slight perspective (the left wing measures 836 px on the LEFT picture and 817 px in the background of the RIGHT picture); positions of things in far planes can be 1-3 % off.",
+  "Gable glazings: each gable has one glazed field divided by a centre post/pier (a real pier on the ground floor of the living block per the plan, the party wall of two rooms in the attic of the left wing). They are given as two openings per level; reading each gable field as ONE opening (or the living-block gable + ground glazing as one two-storey glazing) is defensible.",
+  "Level of F10, F11, B3, B4: at attic height but lighting the double-height living block (the attic plan says void above the living room): level 0 by the format rule, level 1 by height.",
+  "Kinds: floor-reaching glazings on terraces/balconies are GLAZED_DOOR although only some leaves open; F8/F9/R1 could be called WINDOW.",
+  "F1 garage door: width differs between the picture (about 4.7 m) and the room plan (about 4.1 m); its top edge is in deep shadow (+-10 px).",
+  "A glazing of the living room faces the inner courtyard to the left (plan) and a roof window of the left wing faces right (plot plan): neither can be seen on any elevation, so they are not listed.",
+  "Chimney count 2 = one masonry chimney + one steel fireplace flue; someone may count only the masonry one.",
+  "Which body is MAIN: the taller two-storey left wing was taken; the living block is WING."
+ ]
+}

@@ -22,7 +22,7 @@ import { renderModelViews } from '../../../packages/analysis-service/src/consult
 import { housePictures } from '../../../packages/analysis-service/src/house/pictures.js'
 import { HOUSE_READING_LIMITS, ReadingFailed, readFacades, readInventory, readPlan } from '../../../packages/analysis-service/src/house/read.js'
 import type { ReadingContext, ReadingRecord, ReadingStep } from '../../../packages/analysis-service/src/house/read.js'
-import { arbitrate, compileHouse, documentFromReading } from '../../../packages/analysis-service/src/house/describe.js'
+import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } from '../../../packages/analysis-service/src/house/describe.js'
 import type { CompiledHouse, LocalMeasure } from '../../../packages/analysis-service/src/house/describe.js'
 import { reviewHouse } from '../../../packages/analysis-service/src/house/review.js'
 import { measureScene } from '../../../packages/analysis-service/src/house/measure.js'
@@ -147,9 +147,7 @@ async function main(): Promise<void> {
       const base = { id: `h-${house}`.slice(0, 80), project: pkg.project?.name, sourcePackageHash: pkg.contentHash, model, selection, planSent: plan.sent, published, at: arg('date') ?? new Date().toISOString().slice(0, 10), skipped: skipped.map((x) => ({ ...x, ...(roleOf.get(x.assetId) ? { role: roleOf.get(x.assetId) as string } : {}) })) }
       // the plan alone, resolved: the bodies in metres, so that the facades are bound to bodies the plan defines
       const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, `plan-${house}`)
-      const bodiesInMetres = planOnly.document.geometry
-        ? `On the plan, in metres (x from the building's left end seen from the front, z from the front back): ${planOnly.document.geometry.bodies.map((b) => { const xs = b.outline.map((p) => p.x); const zs = b.outline.map((p) => p.z); return `${b.id}: x ${Math.min(...xs).toFixed(1)}–${Math.max(...xs).toFixed(1)}, z ${Math.min(...zs).toFixed(1)}–${Math.max(...zs).toFixed(1)}` }).join('; ')}.`
-        : ''
+      const bodiesInMetres = planOnly.document.geometry ? planFactsForFacades(planOnly.document.geometry) : ''
       let compiled: CompiledHouse
       let notes: ReturnType<typeof documentFromReading>['notes'] = []
       let observationsDocument: unknown

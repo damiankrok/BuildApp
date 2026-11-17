@@ -1,0 +1,68 @@
+{
+ "house": "c5-extradom-mirabelka-4",
+ "publisher": "www.extradom.pl",
+ "url": "https://www.extradom.pl/projekt-domu-mirabelka-4-WOF1229",
+ "packageContentHash": "12bf48381fe6a97cab1e1b07336ecedc975f440c16e7dc8aa5060e641a6f5e57",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations and 1 section, all exported with role UNKNOWN; vector ground plan) and the page facts in the export log; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 11.9,
+  "depthM": 8.65,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 6.73,
+  "ridgeAboveGroundFloorM": 6.25,
+  "terrainBelowGroundFloorM": 0.49
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "NONE",
+  "alongShare": null
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 3,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 2
+}

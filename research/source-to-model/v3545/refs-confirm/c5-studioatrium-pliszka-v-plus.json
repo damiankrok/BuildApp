@@ -1,0 +1,78 @@
+{
+ "house": "c5-studioatrium-pliszka-v-plus",
+ "publisher": "www.studioatrium.pl",
+ "url": "https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+ "packageContentHash": "20ab7aaa8b6646a50ddfa55bc9c42c438d787a16057336157b575a97f1630587",
+ "reader": "independent source reader D (Claude), from the publisher's exported pictures (4 rendered elevations, ground plan) and the page facts in the export log only; no analyzer, solver or model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 11.45,
+  "depthM": 18.95,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 6.71,
+  "ridgeAboveGroundFloorM": 6.2,
+  "terrainBelowGroundFloorM": 0.5
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  },
+  {
+   "name": "garage wing",
+   "role": "GARAGE",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "FRONT",
+  "alongShare": [
+   0.495,
+   0.924
+  ]
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 3,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 2,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 2,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 3
+}

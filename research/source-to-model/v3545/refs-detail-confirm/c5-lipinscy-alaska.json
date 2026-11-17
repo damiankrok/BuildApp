@@ -1,0 +1,368 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1.1,
+ "house": "c5-lipinscy-alaska",
+ "packageContentHash": "2e83281dcd9decfecf6e6721c2b44d315fbcad0c4905e8d7f3fbfcf51052e172",
+ "reader": "independent source reader (Claude), from the published elevation renders, the ground plan (overall dimensions printed), the section and the plot plan of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "publisher": "lipinscy.pl",
+ "url": "https://lipinscy.pl/projekt/alaska",
+ "frontPlanEdge": "RIGHT",
+ "frontHow": "the entrance door (vestibule 1.1 with porch 1.13 and the entrance arrow) is in the right long wall of the plan; the publisher captions the picture of that wall \"elewacja przod\"",
+ "overall": {
+  "widthM": 17.24,
+  "depthM": 7.64,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "outer wall faces of the house: 17.24 m along the front (the plan prints it as the vertical 1724), 7.64 m front to back (printed 764); the covered terrace adds 2.00 m (printed 200) at the left end and is not included; the plot plan rounds to 17,3 x 7,7 m"
+ },
+ "levels": {
+  "ridgeAboveZeroM": 5.98,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.15,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null
+ },
+ "heights": {
+  "buildingHeightM": 6.13,
+  "buildingHeightBasis": "SECTION",
+  "buildingHeightNote": "not stated in the page text; the section prints ridge +5,98 and terrain -0,15"
+ },
+ "outlineShape": "RECTANGLE",
+ "outlineNote": "Plain rectangle 17.24 x 7.64 m; a 2.00 m deep covered terrace under the same roof continues it at the left gable end; a small entrance porch slab on the front.",
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "sideOfMain": "NA",
+   "position": "the whole house, single storey with a high living room at the left end",
+   "levels": 1,
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "lowerThanMain": false
+  }
+ ],
+ "chimneys": 0,
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-alaska-73a7d48df1",
+   "file": "01_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1571,
+   "pictureHeightPx": 450,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 362,
+   "wallRightPx": 1567,
+   "sideLengthM": 17.24,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 417,
+   "zeroRowHow": "floor line: bottom of the door and of the floor-reaching glazings, top of the dark plinth band; the section prints terrain -0,15 below it",
+   "ridgeRowPx": 0,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 457,
+      "y0": 257,
+      "x1": 597,
+      "y1": 348
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "kitchen window, wide + narrow sash, in the brick-clad part"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 712,
+      "y0": 257,
+      "x1": 808,
+      "y1": 415
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "entrance door with a glazed sidelight on the left in one frame, under a small canopy"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 899,
+      "y0": 257,
+      "x1": 938,
+      "y1": 348
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "narrow window (room 1.12)"
+    },
+    {
+     "id": "F4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 1104,
+      "y0": 257,
+      "x1": 1143,
+      "y1": 348
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "narrow window (bathroom 1.11)"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 1224,
+      "y0": 257,
+      "x1": 1264,
+      "y1": 348
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "narrow window (bathroom 1.10)"
+    },
+    {
+     "id": "F6",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 1345,
+      "y0": 257,
+      "x1": 1440,
+      "y1": 416
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "floor-reaching bedroom glazing (1.9), wide + narrow leaf; the plan draws it about 0.45 m nearer to the right end"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 222,
+      "y0": 215,
+      "x1": 362,
+      "y1": 418
+     },
+     "note": "covered terrace at the left gable end under the main roof; corner post x 222-250"
+    },
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 708,
+      "y0": 237,
+      "x1": 818,
+      "y1": 250
+     },
+     "note": "small flat canopy over the entrance"
+    }
+   ],
+   "note": "Picture-left is the terrace end (plan bottom). Brick cladding x 362-708 is wall, not an opening. The roof carries solar panels (x 292-1485). the ridge lies at or just above the top edge of the picture (the roof is cut at row 0); expected about row -1 from the printed +5,98"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-alaska-c16d8ca7cf",
+   "file": "03_ELEVATION_NOT_APPLICABLE_SIDE_RIGHT.jpg",
+   "pictureWidthPx": 741,
+   "pictureHeightPx": 450,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 195,
+   "wallRightPx": 730,
+   "sideLengthM": 7.64,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 418,
+   "zeroRowHow": "top of the dark plinth band, same row as on the other pictures",
+   "ridgeRowPx": 3,
+   "blind": true,
+   "openings": [],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "Blank gable wall (plan top), no opening; the publisher captions it \"elewacja prawa\"."
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-alaska-aede6cda06",
+   "file": "02_ELEVATION_NOT_APPLICABLE_SIDE_LEFT.jpg",
+   "pictureWidthPx": 1581,
+   "pictureHeightPx": 450,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 2,
+   "wallRightPx": 1200,
+   "sideLengthM": 17.24,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 417,
+   "zeroRowHow": "floor line: bottom of the door and of the floor-reaching glazings, top of the dark plinth band; the section prints terrain -0,15 below it",
+   "ridgeRowPx": 0,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 128,
+      "y0": 257,
+      "x1": 225,
+      "y1": 417
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "floor-reaching bedroom glazing (1.8), wide + narrow leaf"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 355,
+      "y0": 257,
+      "x1": 452,
+      "y1": 417
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bedroom 1.7"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 582,
+      "y0": 257,
+      "x1": 679,
+      "y1": 417
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bedroom 1.6"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 845,
+      "y0": 257,
+      "x1": 1041,
+      "y1": 417
+     },
+     "panels": 4,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "living-room glazing in the brick-clad part, four panes"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 1200,
+      "y0": 215,
+      "x1": 1345,
+      "y1": 418
+     },
+     "note": "covered terrace at the gable end; corner post x 1310-1345"
+    }
+   ],
+   "note": "Picture-left is the blank gable end (plan top), picture-right the terrace. The publisher captions this picture \"elewacja lewa\"; geometrically it is the side opposite the entrance side. The left wall end sits 2 px from the picture edge behind a downpipe. Brick cladding x 679-845 and 1041-1200 is wall. the ridge lies at or just above the top edge of the picture (the roof is cut at row 0); expected about row -1 from the printed +5,98"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-alaska-0d6383f8fe",
+   "file": "00_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 726,
+   "pictureHeightPx": 450,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 13,
+   "wallRightPx": 548,
+   "sideLengthM": 7.64,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 418,
+   "zeroRowHow": "terrace floor line = bottom of the glazing; the section prints terrain -0,15 below it",
+   "ridgeRowPx": 3,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 183,
+      "y0": 65,
+      "x1": 383,
+      "y1": 417
+     },
+     "panels": 6,
+     "uncertainPx": 8,
+     "occluded": true,
+     "note": "one tall gable glazing of the high living room: four door-high panes below a transom (rows 248-258) and a two-pane fixed glazing above whose top follows the roof slope (vertical sides up to row 138, apex at x 280); box = bounding box; the lower part is partly behind terrace furniture; it stands 2 m behind the terrace front"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 13,
+      "y0": 3,
+      "x1": 548,
+      "y1": 418
+     },
+     "note": "the gable frame in the picture plane is the covered terrace; the house wall with the glazing is 2.00 m behind it"
+    }
+   ],
+   "note": "Terrace gable (plan bottom); the publisher captions it \"elewacja tyl\". Picture-left is the rear side, picture-right the front (entrance) side. Brick cladding x 45-180 and 385-520 is wall."
+  }
+ },
+ "uncertain": [
+  "Side names: the publisher calls the entrance long side \"przod\", the opposite long side \"lewa\", the terrace gable \"tyl\" and the blank gable \"prawa\", which cannot all hold geometrically. Here FRONT = entrance side, REAR = the opposite long side, LEFT = terrace gable (left hand of someone looking at the front), RIGHT = blank gable. If instead the terrace gable were taken as rear, every name would turn.",
+  "The plot plan puts the access arrow at the terrace (plan bottom) end with a path to the door on the long side; the front was still taken as the wall that holds the entrance door.",
+  "L1 is given as one opening (one frame with a transom); it could be counted as a door-high glazing plus a separate gable glazing above it.",
+  "F6 position differs between plan and elevation by about 0.45 m; the elevation was followed.",
+  "Long elevations are cut at the top edge (ridge row 0 is the picture edge) and closely cropped at the blank gable end (wall end +-4 px).",
+  "No chimney is drawn on any picture (heat pump per page text); chimneys = 0."
+ ]
+}

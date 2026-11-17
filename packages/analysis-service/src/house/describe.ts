@@ -137,7 +137,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
       })
       const openings = (e.openings ?? []).map((x, j) => ({ id: `o${j + 1}`, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.level === 'number' ? { level: x.level } : {}), ...(x.inFeature && featureIds.has(x.inFeature.toLowerCase()) ? { inFeature: x.inFeature.toLowerCase() } : {}) }))
       const cov = input.coverage?.find((c) => c.pictureId === sent.picture.id)
-      elevations.push({ id: `el-${sent.picture.id}`, picture: sent.picture.id, side: e.side, sideHow: e.sideHow ?? '', alternatives: (e.alternatives ?? []).filter((s) => s !== e.side), mirrored: e.mirrored === true, groundY: r1(e.groundY * k), bodies, openings, features, origin: 'API', ...(typeof e.blind === 'boolean' ? { blind: e.blind } : {}), ...(e.limits === 'NONE' || e.limits === 'PARTLY_HIDDEN' || e.limits === 'TOO_SMALL' ? { limits: e.limits } : {}), ...(cov?.readIn ? { readIn: cov.readIn } : {}) })
+      elevations.push({ id: `el-${sent.picture.id}`, picture: sent.picture.id, side: e.side, sideHow: e.sideHow ?? '', alternatives: (e.alternatives ?? []).filter((s) => s !== e.side), mirrored: e.mirrored === true, groundY: r1(e.groundY * k), bodies, openings, features, origin: 'API', ...(typeof e.floorY === 'number' ? { floorY: r1(e.floorY * k) } : {}), ...(typeof e.blind === 'boolean' ? { blind: e.blind } : {}), ...(e.limits === 'NONE' || e.limits === 'PARTLY_HIDDEN' || e.limits === 'TOO_SMALL' ? { limits: e.limits } : {}), ...(cov?.readIn ? { readIn: cov.readIn } : {}) })
     })
   }
   const published = input.published.filter((p) => ['building_height', 'footprint_area', 'roof_pitch', 'building_width', 'building_depth'].includes(p.key)).map((p) => ({ key: p.key, value: p.value, unit: p.unit, ...(p.raw ? { raw: p.raw } : {}) }))
@@ -167,6 +167,52 @@ export function documentFromReading(input: { id: string; project?: string; sourc
     observations: { front: { planEdge: plan.front?.planEdge, how: plan.front?.how ?? '', origin: 'API' }, dimensions, levels, outlines, elevations, roofs, published, unknowns: [...(plan.unknowns ?? []), ...(f?.unknowns ?? [])].slice(0, 16) },
   }
   return { document, notes }
+}
+
+/**
+ * What the plan says the facades must show, as text for the facade reading (v3.54.5): each body's box in metres, and
+ * for each side of the house the bodies a viewer outside has in front, in the order and at the places they are seen.
+ * It is the plan's own geometry, given so that an elevation is matched to its side by what stands on it — two gable
+ * ends of one house differ only by that.
+ */
+export function planFactsForFacades(g: NonNullable<HouseDocument['geometry']>): string {
+  const xs = g.bodies.flatMap((b) => b.outline.map((p) => p.x))
+  const zs = g.bodies.flatMap((b) => b.outline.map((p) => p.z))
+  const X0 = Math.min(...xs)
+  const X1 = Math.max(...xs)
+  const Z0 = Math.min(...zs)
+  const Z1 = Math.max(...zs)
+  const boxes = g.bodies.map((b) => `${b.id}: x ${Math.min(...b.outline.map((p) => p.x)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.x)).toFixed(1)}, z ${Math.min(...b.outline.map((p) => p.z)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.z)).toFixed(1)}`).join('; ')
+  const sideText = (side: 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'): string => {
+    const span = side === 'FRONT' || side === 'REAR' ? X1 - X0 : Z1 - Z0
+    const along = (p: { x: number; z: number }): number => (side === 'FRONT' ? p.x - X0 : side === 'REAR' ? X1 - p.x : side === 'LEFT' ? Z1 - p.z : p.z - Z0)
+    const depth = (p: { x: number; z: number }): number => (side === 'FRONT' ? p.z - Z0 : side === 'REAR' ? Z1 - p.z : side === 'LEFT' ? p.x - X0 : X1 - p.x)
+    const N = 60
+    const runs: Array<{ id: string; from: number; to: number; back: number }> = []
+    for (let k = 0; k < N; k += 1) {
+      const a = ((k + 0.5) / N) * span
+      let pick: { id: string; d: number } | undefined
+      for (const b of g.bodies) {
+        for (let j = 0; j < b.outline.length; j += 1) {
+          const p = b.outline[j]
+          const q = b.outline[(j + 1) % b.outline.length]
+          const ap = along(p)
+          const aq = along(q)
+          if (Math.min(ap, aq) > a || Math.max(ap, aq) < a || Math.abs(ap - aq) < 1e-9) continue
+          const t = (a - ap) / (aq - ap)
+          const d = depth({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t })
+          if (!pick || d < pick.d - 1e-6) pick = { id: b.id, d }
+        }
+      }
+      if (!pick) continue
+      const last = runs[runs.length - 1]
+      if (last && last.id === pick.id && Math.abs(last.back - pick.d) < 0.3) last.to = a + span / (2 * N)
+      else runs.push({ id: pick.id, from: a - span / (2 * N), to: a + span / (2 * N), back: pick.d })
+    }
+    return runs.filter((r) => r.to - r.from >= 0.4).map((r) => `${r.id} ${r.from.toFixed(1)}–${r.to.toFixed(1)} m${r.back > 0.3 ? ` (set back ${r.back.toFixed(1)} m)` : ''}`).join(', ')
+  }
+  return `On the plan, in metres (x from the building's left end seen from the front, z from the front back): ${boxes}.
+What each side shows, by the plan (the wall nearest the viewer, left to right as that viewer sees it, measured along that side): FRONT: ${sideText('FRONT')}. RIGHT (the front corner is at the picture's left): ${sideText('RIGHT')}. REAR (the plan's right end is at the picture's left): ${sideText('REAR')}. LEFT (the rear corner is at the picture's left): ${sideText('LEFT')}. Name an elevation's side by which of these it shows; a side whose front body is missing from the picture is not that side.`
 }
 
 export type CompiledHouse = {

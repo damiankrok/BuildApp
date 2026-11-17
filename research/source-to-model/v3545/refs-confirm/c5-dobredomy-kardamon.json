@@ -1,0 +1,85 @@
+{
+ "house": "c5-dobredomy-kardamon",
+ "publisher": "www.dobredomy.pl",
+ "url": "https://www.dobredomy.pl/projekt/kardamon",
+ "packageContentHash": "673abfae5e6dde34dde03df97f88c7a1d677a3b4fef0fe56eeea55354eafb874",
+ "reader": "independent source reader (Claude), from the published elevation renders, the two room plans (no dimensions printed) and the dimensioned plot plan of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "BOTTOM",
+ "overall": {
+  "widthM": 18.02,
+  "depthM": 17.8,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 7.9,
+  "ridgeAboveGroundFloorM": null,
+  "terrainBelowGroundFloorM": null
+ },
+ "bodies": [
+  {
+   "name": "main (left wing)",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 2
+  },
+  {
+   "name": "living block",
+   "role": "WING",
+   "roof": "GABLE",
+   "ridge": "FRONT_TO_BACK",
+   "levels": 1
+  },
+  {
+   "name": "connector",
+   "role": "OTHER",
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "levels": 2
+  }
+ ],
+ "garageDoor": {
+  "side": "FRONT",
+  "alongShare": [
+   0.074,
+   0.335
+  ]
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 7,
+   "openingsUpper": 2,
+   "dormers": [],
+   "balconies": 1,
+   "roofWindows": 2
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 7,
+   "openingsUpper": 2,
+   "dormers": [],
+   "balconies": 1,
+   "roofWindows": 2
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 3
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 2
+}

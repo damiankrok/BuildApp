@@ -1,0 +1,352 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-lipinscy-oslo",
+ "packageContentHash": "b48e904afb93fef07478c3d42b7bbf445e77fb255145464a0a61ad19464a6b5f",
+ "reader": "independent source reader: publisher pictures (plans, section, elevations) and page facts only; no analyzer, solver, API reading or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The ground plan marks the entrance with a black arrow at the bottom edge pointing at the door of room 1.1 under the porch 1.6; the front elevation shows that door under a gabled porch between two windows.",
+ "overall": {
+  "widthM": 8.55,
+  "depthM": 7.05,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "The plain rectangular walled outline (855 x 705). A further 105 is printed for the open entrance porch in front; the side terrace 1.7 is not dimensioned. Neither is included."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 6.79,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.3,
+  "upperFloorLevelsM": [
+   2.94
+  ],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-oslo-2b458ce679",
+   "file": "01_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 584,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 27,
+   "wallRightPx": 498,
+   "sideLengthM": 8.55,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 381,
+   "zeroRowHow": "bottom edge of the entrance door / terrace door (row 381); the stone plinth cladding rises above the floor to row 366, the ground is below the picture edge",
+   "ridgeRowPx": 13,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 78,
+      "y0": 255,
+      "x1": 128,
+      "y1": 335
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "bathroom window"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 233,
+      "y0": 255,
+      "x1": 289,
+      "y1": 381
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "entrance door under the gabled porch"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 397,
+      "y0": 255,
+      "x1": 447,
+      "y1": 335
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "kitchen window"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 137,
+      "y0": 103,
+      "x1": 390,
+      "y1": 381
+     },
+     "note": "open gabled entrance porch on two timber posts (posts at about x 166-172 and 352-359); its timber-clad gable has no opening"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 173,
+      "y0": 4,
+      "x1": 200,
+      "y1": 98
+     },
+     "note": ""
+    }
+   ]
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-oslo-db8e432f9b",
+   "file": "03_ELEVATION_NOT_APPLICABLE_SIDE_RIGHT.jpg",
+   "pictureWidthPx": 509,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 93,
+   "wallRightPx": 481,
+   "sideLengthM": 7.05,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 381,
+   "zeroRowHow": "bottom edge of the entrance door / terrace door (row 381); the stone plinth cladding rises above the floor to row 366, the ground is below the picture edge",
+   "ridgeRowPx": 14,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 245,
+      "y0": 256,
+      "x1": 330,
+      "y1": 381
+     },
+     "panels": 2,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "double terrace door of the living room"
+    },
+    {
+     "id": "R2",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 247,
+      "y0": 101,
+      "x1": 328,
+      "y1": 182
+     },
+     "panels": 2,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "gable window of the attic room"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 2,
+      "y0": 107,
+      "x1": 93,
+      "y1": 381
+     },
+     "note": "entrance porch seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 205,
+      "y0": 11,
+      "x1": 254,
+      "y1": 93
+     },
+     "note": ""
+    }
+   ]
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-oslo-7779d887fb",
+   "file": "02_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 584,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 86,
+   "wallRightPx": 557,
+   "sideLengthM": 8.55,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 381,
+   "zeroRowHow": "bottom edge of the entrance door / terrace door (row 381); the stone plinth cladding rises above the floor to row 366, the ground is below the picture edge",
+   "ridgeRowPx": 13,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 153,
+      "y0": 255,
+      "x1": 238,
+      "y1": 335
+     },
+     "panels": 2,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "living-room window"
+    },
+    {
+     "id": "B2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 405,
+      "y0": 255,
+      "x1": 488,
+      "y1": 335
+     },
+     "panels": 2,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "bedroom window"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 261,
+      "y0": 177,
+      "x1": 358,
+      "y1": 206
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "low wide window of the shed dormer over the stair"
+    }
+   ],
+   "dormers": [
+    {
+     "id": "BD1",
+     "kind": "SHED",
+     "boxPx": {
+      "x0": 228,
+      "y0": 67,
+      "x1": 392,
+      "y1": 207
+     }
+    }
+   ],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 383,
+      "y0": 2,
+      "x1": 410,
+      "y1": 14
+     },
+     "note": "only the cowls show above the ridge"
+    }
+   ]
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-oslo-2aea1e79cd",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_LEFT.jpg",
+   "pictureWidthPx": 509,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 29,
+   "wallRightPx": 417,
+   "sideLengthM": 7.05,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 381,
+   "zeroRowHow": "bottom edge of the entrance door / terrace door (row 381); the stone plinth cladding rises above the floor to row 366, the ground is below the picture edge",
+   "ridgeRowPx": 14,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 181,
+      "y0": 101,
+      "x1": 262,
+      "y1": 182
+     },
+     "panels": 2,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "gable window of the attic room; the ground floor of this side has no opening"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 417,
+      "y0": 107,
+      "x1": 507,
+      "y1": 381
+     },
+     "note": "entrance porch seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 255,
+      "y0": 11,
+      "x1": 304,
+      "y1": 93
+     },
+     "note": ""
+    }
+   ]
+  }
+ },
+ "uncertain": [
+  "The elevations are 584 / 509 px wide (55 px per metre); frame edges were located on the pixel values and are good to about 2 px.",
+  "Ridge check: with the door bottom as zero the ridge computes to about 6.67-6.68 m on all four elevations against the printed +6,79 (6 px short). Either the rendered door stands a little above +-0,00 or the render differs slightly from the section; if the ridge is trusted instead, the zero row would be about 387.",
+  "Rear dormer: the section and attic plan put its window in the plane of the rear wall, but on the rear elevation a strip of roof with an unbroken eaves line runs below it; it is recorded as SHED. Its box takes in the visible dormer roof (y 67-171) and its face (x 249-371, y 171-207).",
+  "The page names the side elevations (lewa / prawa) and the plan agrees: no ground-floor opening on the left wall, the terrace door on the right wall. Neither is mirrored.",
+  "The porch gable on FRONT is an open roof on posts, not a dormer."
+ ]
+}

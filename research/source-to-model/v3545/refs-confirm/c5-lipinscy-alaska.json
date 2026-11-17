@@ -1,0 +1,68 @@
+{
+ "house": "c5-lipinscy-alaska",
+ "publisher": "lipinscy.pl",
+ "url": "https://lipinscy.pl/projekt/alaska",
+ "packageContentHash": "2e83281dcd9decfecf6e6721c2b44d315fbcad0c4905e8d7f3fbfcf51052e172",
+ "reader": "independent source reader (Claude), from the published elevation renders, the ground plan (overall dimensions printed), the section and the plot plan of the page only; no analyzer/model output seen",
+ "readOn": "2026-11-17",
+ "derivedFrom": "buildapp.v3545.detail-reference (to-v3544-ref.py)",
+ "frontPlanEdge": "RIGHT",
+ "overall": {
+  "widthM": 17.24,
+  "depthM": 7.64,
+  "basis": "PRINTED_ON_PLAN"
+ },
+ "heights": {
+  "buildingHeightM": 6.13,
+  "ridgeAboveGroundFloorM": 5.98,
+  "terrainBelowGroundFloorM": 0.15
+ },
+ "bodies": [
+  {
+   "name": "main",
+   "role": "MAIN",
+   "roof": "GABLE",
+   "ridge": "ALONG_FRONT",
+   "levels": 1
+  }
+ ],
+ "garageDoor": {
+  "side": "NONE",
+  "alongShare": null
+ },
+ "sides": {
+  "FRONT": {
+   "elevationPublished": true,
+   "openingsGround": 6,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "REAR": {
+   "elevationPublished": true,
+   "openingsGround": 4,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "LEFT": {
+   "elevationPublished": true,
+   "openingsGround": 1,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  },
+  "RIGHT": {
+   "elevationPublished": true,
+   "openingsGround": 0,
+   "openingsUpper": 0,
+   "dormers": [],
+   "balconies": 0,
+   "roofWindows": 0
+  }
+ },
+ "chimneys": 0
+}

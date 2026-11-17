@@ -186,6 +186,8 @@ const ElevationObservation = z
     openings: z.array(ElevationOpening).default([]),
     features: z.array(ElevationFeature).default([]),
     origin: Origin,
+    /** v0.2. The row of the finished ground floor, when the reader could tell it from the terrain line. */
+    floorY: z.number().finite().optional(),
     /** v0.2. `blind`: the reader SAID this side shows no window or door (an empty list alone says nothing). */
     blind: z.boolean().optional(),
     /** What limited the reading of this picture, as the reader stated it. */

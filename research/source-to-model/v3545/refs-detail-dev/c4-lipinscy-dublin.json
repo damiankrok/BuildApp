@@ -1,0 +1,443 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-lipinscy-dublin",
+ "packageContentHash": "df864b7d747fbc4797a60295ffa0747003a82ffb04ce8694d87d6bb895276c66",
+ "reader": "independent source reader: publisher pictures (plans, section, elevations) and page facts only; no analyzer, solver, API reading or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The ground plan marks the entrance with a black arrow at the bottom edge pointing at the recessed door of room 1.1, and the garage door is in the bottom wall of the garage 1.8; the front elevation shows the door and the garage gate.",
+ "overall": {
+  "widthM": 13.0,
+  "depthM": 10.04,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width 1300 takes in the two-storey main body (about 9.4) and the single-storey garage attached on the right (about 3.6). Depth 1004 is the main body; the garage is shorter (about 6.75) and set back about 1.65 at front and rear. Terraces 1.9 and 1.10 are not included."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 8.91,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.3,
+  "upperFloorLevelsM": [
+   3.02
+  ],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-dublin-5b27fd97ab",
+   "file": "00_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 569,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 5,
+   "wallRightPx": 567,
+   "sideLengthM": 13.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 387,
+   "zeroRowHow": "bottom edge of the entrance door and of the floor-reaching glazing (row 387); the grey ground strip starts at row 389",
+   "ridgeRowPx": 5,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 56,
+      "y0": 284,
+      "x1": 148,
+      "y1": 387
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "floor-reaching sliding glazing of the kitchen/dining part, upper two thirds behind a louvre shutter; the timber panel left of it (x 1-55) is cladding, not an opening"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 177,
+      "y0": 296,
+      "x1": 242,
+      "y1": 387
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "entrance door with a narrow side panel, standing about 1 m back in a recess whose dark-framed mouth is x 173-245, y 288-387"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 280,
+      "y0": 328,
+      "x1": 370,
+      "y1": 349
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "low slot window of the utility room"
+    },
+    {
+     "id": "F4",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 429,
+      "y0": 294,
+      "x1": 533,
+      "y1": 389
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "garage door; the garage front wall stands about 1.6 m behind the main front wall"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 56,
+      "y0": 163,
+      "x1": 216,
+      "y1": 224
+     },
+     "panels": 3,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "three-part bedroom window directly under the eaves, partly behind louvre shutters"
+    },
+    {
+     "id": "F6",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 280,
+      "y0": 163,
+      "x1": 371,
+      "y1": 184
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "low slot window of the upper bathroom"
+    },
+    {
+     "id": "F7",
+     "kind": "ROOF_WINDOW",
+     "level": 2,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 173,
+      "y0": 49,
+      "x1": 207,
+      "y1": 74
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "roof window, left of a pair; lights the roof space above the upper storey (no room is drawn there)"
+    },
+    {
+     "id": "F8",
+     "kind": "ROOF_WINDOW",
+     "level": 2,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 212,
+      "y0": 49,
+      "x1": 246,
+      "y1": 74
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "roof window, right of the pair"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "walls are white on a white background: the wall ends are taken from the gable-parapet strips beside the roof (x 5-26 and 393-413), the plinth and the garage wall strip (x 547-567). Main body x 5-413, garage x 414-567; garage roof ridge/top at row 163"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-dublin-f54d47d2b9",
+   "file": "03_ELEVATION_NOT_APPLICABLE_SIDE_RIGHT.jpg",
+   "pictureWidthPx": 676,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 98,
+   "wallRightPx": 533,
+   "sideLengthM": 10.04,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 387,
+   "zeroRowHow": "bottom edge of the entrance door and of the floor-reaching glazing (row 387); the grey ground strip starts at row 389",
+   "ridgeRowPx": 2,
+   "blind": true,
+   "openings": [],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "blank side: only the outlines of the main gable (x 98-533) and of the garage gable in front of it (x 170-461, about 6.7 m, apex at row 159) are drawn"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-dublin-cbb0ae57ed",
+   "file": "02_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 562,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 1,
+   "wallRightPx": 559,
+   "sideLengthM": 13.0,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 387,
+   "zeroRowHow": "bottom edge of the entrance door and of the floor-reaching glazing (row 387); the grey ground strip starts at row 389",
+   "ridgeRowPx": 6,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 41,
+      "y0": 328,
+      "x1": 131,
+      "y1": 349
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "low slot window in the garage rear wall"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 210,
+      "y0": 284,
+      "x1": 253,
+      "y1": 387
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "narrow glazed terrace door of the ground-floor room, upper part behind a louvre shutter; the timber panel right of it (x 255-342) is cladding"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 345,
+      "y0": 285,
+      "x1": 559,
+      "y1": 387
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "living-room sliding glazing, two panels with a mullion at x 437-439, running to the building corner where it turns onto the left wall (see L1)"
+    },
+    {
+     "id": "B4",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 210,
+      "y0": 163,
+      "x1": 317,
+      "y1": 224
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "bedroom window directly under the eaves, partly behind louvre shutters"
+    },
+    {
+     "id": "B5",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 395,
+      "y0": 163,
+      "x1": 502,
+      "y1": 224
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "bedroom window directly under the eaves, partly behind louvre shutters"
+    },
+    {
+     "id": "B6",
+     "kind": "ROOF_WINDOW",
+     "level": 2,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 321,
+      "y0": 49,
+      "x1": 354,
+      "y1": 75
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "roof window, left of a pair; lights the roof space above the upper storey"
+    },
+    {
+     "id": "B7",
+     "kind": "ROOF_WINDOW",
+     "level": 2,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 359,
+      "y0": 49,
+      "x1": 393,
+      "y1": 75
+     },
+     "panels": 1,
+     "uncertainPx": 2,
+     "occluded": false,
+     "note": "roof window, right of the pair"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "garage x 1-153 (its wall face is at the picture edge), main body x 154-559; gable-parapet strips at x 154-174 and 539-559"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-projekt-domu-dublin-5ca4c57934",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_LEFT.jpg",
+   "pictureWidthPx": 682,
+   "pictureHeightPx": 400,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 148,
+   "wallRightPx": 583,
+   "sideLengthM": 10.04,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 387,
+   "zeroRowHow": "bottom edge of the entrance door and of the floor-reaching glazing (row 387); the grey ground strip starts at row 389",
+   "ridgeRowPx": 2,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 148,
+      "y0": 284,
+      "x1": 270,
+      "y1": 387
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "side part of the living-room corner glazing, starting at the rear corner, upper part behind a louvre shutter; the timber panel right of it (x 271-391) is cladding"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 436,
+      "y0": 328,
+      "x1": 527,
+      "y1": 349
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "low slot window of the kitchen"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 218,
+      "y0": 163,
+      "x1": 269,
+      "y1": 224
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "bedroom window"
+    },
+    {
+     "id": "L4",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 340,
+      "y0": 163,
+      "x1": 391,
+      "y1": 224
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "upper wc/bath window"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [],
+   "note": "white gable wall on white background: wall ends taken from the ends of the drawn gable line (x 148 and 583 at row 125) and the downpipes at the corners"
+  }
+ },
+ "uncertain": [
+  "The renders draw white walls on a white background, so no wall edge is directly visible. Wall ends were fixed from the gable-parapet strips beside the roof, the downpipes, the plinth strip and the drawn gable lines, and checked against the plan: with them every opening lands within about 0.1 m of its plan position. Wall-end error may reach 4-5 px (0.1 m).",
+  "The living-room glazing is one corner glazing: B3 on the rear (two panels, counted as one opening because the plan draws one continuous opening with a mullion; two would be possible) and L1 on the left wall.",
+  "F1 reaches the floor and is drawn as a sliding unit on the plan, so it is GLAZED_DOOR; WINDOW would be possible. B2 is a narrow floor-reaching glazed door.",
+  "Roof windows (two on each slope) light the truss space above the full upper storey, where the section shows no room; they are given level 2.",
+  "F2: the box is the door itself; the recess mouth in the wall plane is larger (x 173-245, y 288-387).",
+  "The page prints no garage ridge level; by scale the garage gable apex (RIGHT row 159) is about 5.3 m above zero.",
+  "Timber panels beside F1, B2 and L1 are cladding or parked sliding shutters, not openings. No chimney is drawn on any elevation.",
+  "The page names the side elevations (lewa / prawa) and the plan agrees (corner glazing and kitchen slot window on the left wall, blank garage side on the right). Neither is mirrored."
+ ]
+}

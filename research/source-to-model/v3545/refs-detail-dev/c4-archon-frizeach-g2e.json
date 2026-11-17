@@ -1,0 +1,494 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-archon-frizeach-g2e",
+ "packageContentHash": "ec638c2d140f2b9769b565fb946a762c57c8afd8f44322f6b090193444c2ef50",
+ "reader": "independent source reader: publisher pictures (plans, section, elevations) and page facts only; no analyzer, solver, API reading or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The double garage door 500/225 is in the bottom wall of the plan sheet and the entrance door 160/210 (into Wiatrolap) faces the bottom edge beside the garage; the captioned front elevation shows both.",
+ "overall": {
+  "widthM": 19.5,
+  "depthM": 13.5,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width 1950 = 645 + 690 + 615 is the long main bar. Depth 1350 = 960 (main bar) + 390 (garage block projecting to the front). The rear terrace and pergola are not included."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 6.78,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.32,
+  "upperFloorLevelsM": [],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-fron-93bfea3927",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 123,
+   "wallRightPx": 1159,
+   "sideLengthM": 19.5,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 494,
+   "zeroRowHow": "bottom of the entrance door and of the floor-reaching glazing / top of the plinth; the printed terrain offset -0,32 is about 17 px below",
+   "ridgeRowPx": 134,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 132,
+      "y0": 372,
+      "x1": 260,
+      "y1": 446
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "kitchen window 240/140; it is a corner window that turns onto the left wall (see L3)"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 381,
+      "y0": 382,
+      "x1": 464,
+      "y1": 494
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "entrance door 160/210 with a glazed sidelight in one frame; stands in the front wall of the main bar, 3.90 behind the garage front, under the canopy"
+    },
+    {
+     "id": "F3",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 519,
+      "y0": 375,
+      "x1": 781,
+      "y1": 494
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "double garage door 500/225"
+    },
+    {
+     "id": "F4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 888,
+      "y0": 372,
+      "x1": 940,
+      "y1": 445
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window 100/140 (boiler room)"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 1006,
+      "y0": 372,
+      "x1": 1058,
+      "y1": 445
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window 100/140 (laundry); the grey panel between F4 and F5 is cladding, not an opening"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CANOPY",
+     "boxPx": {
+      "x0": 348,
+      "y0": 327,
+      "x1": 466,
+      "y1": 373
+     },
+     "note": "flat canopy over the entrance, continuous with the white fascia of the garage block (which runs on to x 832)"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 457,
+      "y0": 117,
+      "x1": 494,
+      "y1": 134
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 780,
+      "y0": 108,
+      "x1": 816,
+      "y1": 185
+     },
+     "note": ""
+    }
+   ],
+   "note": "the flat-roofed garage block projecting 3.90 to the front spans x 466-832 (6.90 m)"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-bocz-c912e86df2",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 215,
+   "wallRightPx": 935,
+   "sideLengthM": 13.5,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 494,
+   "zeroRowHow": "bottom of the entrance door and of the floor-reaching glazing / top of the plinth; the printed terrain offset -0,32 is about 17 px below",
+   "ridgeRowPx": 135,
+   "blind": false,
+   "openings": [
+    {
+     "id": "R1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 625,
+      "y0": 372,
+      "x1": 678,
+      "y1": 447
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "bathroom window 100/140; the grey panel to its right (x 678-783) is cladding, not an opening"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 935,
+      "y0": 345,
+      "x1": 1115,
+      "y1": 494
+     },
+     "note": "pergola seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 588,
+      "y0": 108,
+      "x1": 643,
+      "y1": 178
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 701,
+      "y0": 119,
+      "x1": 736,
+      "y1": 157
+     },
+     "note": ""
+    }
+   ],
+   "note": "wallLeftPx is the front face of the garage block (blind on this side, x 215-421, grey-clad below a white band); the main gable wall spans x 421-935 (9.60 m)"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-ogro-3d373451b9",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 132,
+   "wallRightPx": 1167,
+   "sideLengthM": 19.5,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 494,
+   "zeroRowHow": "bottom of the entrance door and of the floor-reaching glazing / top of the plinth; the printed terrain offset -0,32 is about 17 px below",
+   "ridgeRowPx": 134,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 271,
+      "y0": 372,
+      "x1": 366,
+      "y1": 493
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room glazing 180/230"
+    },
+    {
+     "id": "B2",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 475,
+      "y0": 372,
+      "x1": 569,
+      "y1": 493
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room glazing 180/230"
+    },
+    {
+     "id": "B3",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 646,
+      "y0": 372,
+      "x1": 740,
+      "y1": 493
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "room glazing 180/230"
+    },
+    {
+     "id": "B4",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 840,
+      "y0": 372,
+      "x1": 1103,
+      "y1": 493
+     },
+     "panels": 3,
+     "uncertainPx": 5,
+     "occluded": true,
+     "note": "living-room glazing 500/230, seen through the posts of the pergola"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 756,
+      "y0": 345,
+      "x1": 1126,
+      "y1": 494
+     },
+     "note": "open steel pergola over the terrace, on posts"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 473,
+      "y0": 108,
+      "x1": 509,
+      "y1": 134
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 797,
+      "y0": 117,
+      "x1": 832,
+      "y1": 169
+     },
+     "note": ""
+    }
+   ]
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-bocz-cd414789e7",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 1280,
+   "pictureHeightPx": 513,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 331,
+   "wallRightPx": 1048,
+   "sideLengthM": 13.5,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 494,
+   "zeroRowHow": "bottom of the entrance door and of the floor-reaching glazing / top of the plinth; the printed terrain offset -0,32 is about 17 px below",
+   "ridgeRowPx": 135,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 402,
+      "y0": 372,
+      "x1": 540,
+      "y1": 494
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "living-room glazing 260/230"
+    },
+    {
+     "id": "L2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 568,
+      "y0": 372,
+      "x1": 621,
+      "y1": 494
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "glazing 100/230 reaching the floor; separated from L1 by a grey pier (x 540-568); whether it opens as a door is not shown"
+    },
+    {
+     "id": "L3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 768,
+      "y0": 372,
+      "x1": 833,
+      "y1": 447
+     },
+     "panels": 1,
+     "uncertainPx": 5,
+     "occluded": false,
+     "note": "kitchen window 120/140, the side part of the corner window (see F1); the corner itself is at x 842"
+    },
+    {
+     "id": "L4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 861,
+      "y0": 381,
+      "x1": 906,
+      "y1": 493
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "glazing 90/210 in the left wall of the garage block facing the entrance forecourt; drawn as glazing, door or fixed not shown"
+    },
+    {
+     "id": "L5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 926,
+      "y0": 381,
+      "x1": 971,
+      "y1": 493
+     },
+     "panels": 1,
+     "uncertainPx": 4,
+     "occluded": false,
+     "note": "glazing 90/210 in the left wall of the garage block, second of two"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "TERRACE_ROOF",
+     "boxPx": {
+      "x0": 146,
+      "y0": 345,
+      "x1": 331,
+      "y1": 494
+     },
+     "note": "pergola seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 527,
+      "y0": 117,
+      "x1": 562,
+      "y1": 160
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 620,
+      "y0": 108,
+      "x1": 675,
+      "y1": 174
+     },
+     "note": ""
+    }
+   ],
+   "note": "the main gable wall spans x 331-842 (9.60 m); the garage block spans x 842-1048 (3.90 m)"
+  }
+ },
+ "uncertain": [
+  "Both side elevations are captioned only 'elewacja boczna'; assigned from the plan: the one with the living-room glazing 260/230 + 100/230, the kitchen corner window and the two garage-side glazings is LEFT; the one with the single bathroom window is RIGHT. Neither is mirrored.",
+  "The kitchen window is one corner window: 240/140 on the front (F1) and 120/140 on the left wall (L3). It is recorded as one opening on each side.",
+  "L4 and L5 (90/210) and L2 (100/230) reach the floor; the plan draws them as glazing without a door swing, so they are recorded as WINDOW; GLAZED_DOOR is possible.",
+  "The single-storey house has no upper floor; the gable triangles are dark cladding without openings. The section prints +3,23 at the eaves and no level for the flat garage roof (its fascia top is at about row 327, about 3.1-3.2 m above zero by scale).",
+  "The entrance door stands 3.90 behind the garage front under a flat canopy; on the front elevation it is seen between two timber-clad returns."
+ ]
+}

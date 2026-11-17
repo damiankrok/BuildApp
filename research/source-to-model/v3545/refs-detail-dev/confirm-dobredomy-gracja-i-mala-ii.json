@@ -1,0 +1,133 @@
+{
+  "schema": "buildapp.v3545.detail-reference", "version": 1,
+  "house": "confirm-dobredomy-gracja-i-mala-ii",
+  "packageContentHash": "8ab439011270534fd4ac1b691da5dd82d5ab9ede324d1bb011f6b392eebfd34e",
+  "reader": "independent source reader B: publisher's four elevation renders (700x305), ground and attic plan, section and page facts only, read against a pixel grid; no analyzer, solver, API reading or model output seen",
+  "readOn": "2026-11-17",
+  "frontPlanEdge": "BOTTOM",
+  "frontHow": "The entrance door (wiatrolap) and the two-car garage door open through the bottom edge of the ground plan, where the driveway and entrance steps are drawn; the page captions that picture 'Elewacja przod'.",
+  "overall": { "widthM": 16.82, "depthM": 10.12, "basis": "PRINTED_ON_PLAN",
+    "includes": "16.82 = outer face of the angled bay window on the plan left to the right wall of the attached garage (bay and garage both included; the bay projects about 1.0 m beyond the main left wall). 10.12 = rear wall of the main body to the front wall of the kitchen part. The garage is shallower (about 7.07 m) and lies inside the 10.12; terraces, steps and roof overhangs are excluded." },
+  "levels": {
+    "ridgeAboveZeroM": 8.13, "ridgeBasis": "PRINTED_ON_SECTION",
+    "terrainBelowZeroM": 0.45, "upperFloorLevelsM": [3.04], "garageRidgeAboveZeroM": 6.49
+  },
+  "sides": {
+    "FRONT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gracja-ma-a-ii-elewacja-przod-d9a66fad12", "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg", "pictureWidthPx": 700, "pictureHeightPx": 305,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 94, "wallRightPx": 606,
+      "sideLengthM": 16.82, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 292, "zeroRowHow": "floor line: bottom of the entrance door at the top of the entrance steps; the garage door bottom (floor -0,30) is at row 301; the picture is cut at row 305, the terrain is not visible",
+      "ridgeRowPx": 45,
+      "blind": false,
+      "openings": [
+        { "id": "F1", "kind": "WINDOW", "level": 0, "body": "BAY", "inDormer": false, "boxPx": { "x0": 100, "y0": 224, "x1": 118, "y1": 278 }, "panels": 1, "uncertainPx": 4, "occluded": false, "note": "window in the front-facing ANGLED face of the bay, seen foreshortened (about 45 degrees); the same window is LEFT L4" },
+        { "id": "F2", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 150, "y0": 223, "x1": 196, "y1": 264 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "kitchen window, about 1.5 m wide" },
+        { "id": "F3", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 242, "y0": 223, "x1": 260, "y1": 260 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "pantry window" },
+        { "id": "F4", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 270, "y0": 223, "x1": 287, "y1": 260 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "wc window" },
+        { "id": "F5", "kind": "DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 324, "y0": 229, "x1": 354, "y1": 292 }, "panels": 1, "uncertainPx": 4, "occluded": false, "note": "entrance door in the wall set back about 1.5 m under the arched porch" },
+        { "id": "F6", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 374, "y0": 224, "x1": 400, "y1": 259 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "utility-room window under the porch arch, in the set-back wall" },
+        { "id": "F7", "kind": "GARAGE_DOOR", "level": 0, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 440, "y0": 233, "x1": 575, "y1": 301 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "two-car garage door, about 4.45 m wide; garage wall is set back from the kitchen front" },
+        { "id": "F8", "kind": "GLAZED_DOOR", "level": 1, "body": "MAIN", "inDormer": true, "boxPx": { "x0": 242, "y0": 131, "x1": 288, "y1": 199 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "arched balcony door in the gabled wall dormer; balcony railing in front of its lower half" },
+        { "id": "F9", "kind": "ROOF_WINDOW", "level": 1, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 158, "y0": 131, "x1": 179, "y1": 160 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "" },
+        { "id": "F10", "kind": "ROOF_WINDOW", "level": 1, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 353, "y0": 131, "x1": 374, "y1": 160 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "" },
+        { "id": "F11", "kind": "ROOF_WINDOW", "level": 1, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 485, "y0": 149, "x1": 507, "y1": 178 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "left of a coupled pair on the garage roof (attic store over the garage); 3 px bar between the two frames" },
+        { "id": "F12", "kind": "ROOF_WINDOW", "level": 1, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 510, "y0": 149, "x1": 530, "y1": 178 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "right of the coupled pair" }
+      ],
+      "dormers": [ { "id": "FD1", "kind": "WALL_GABLE", "boxPx": { "x0": 195, "y0": 81, "x1": 334, "y1": 200 } } ],
+      "otherFeatures": [
+        { "kind": "BALCONY", "boxPx": { "x0": 222, "y0": 166, "x1": 313, "y1": 208 }, "note": "balcony of the front dormer (railing and slab)" },
+        { "kind": "BALCONY", "boxPx": { "x0": 88, "y0": 165, "x1": 104, "y1": 200 }, "note": "balcony on the bay roof at the left gable, seen from its end" },
+        { "kind": "PORTICO", "boxPx": { "x0": 316, "y0": 213, "x1": 425, "y1": 292 }, "note": "recessed entrance under an arch with one column (x 412..425), covered by the main roof" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 228, "y0": 36, "x1": 253, "y1": 77 }, "note": "" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 388, "y0": 47, "x1": 416, "y1": 93 }, "note": "" }
+      ]
+    },
+    "RIGHT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gracja-ma-a-ii-elewacja-boczna-a1f9778cd6", "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 700, "pictureHeightPx": 305,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 157, "wallRightPx": 464,
+      "sideLengthM": 10.12, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 292, "zeroRowHow": "not visible (planting hides the wall foot): placed from the ridge row and the printed +8,13 at 30.4 px/m, the same row as on the front picture",
+      "ridgeRowPx": 46,
+      "blind": true,
+      "openings": [],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "PORTICO", "boxPx": { "x0": 150, "y0": 213, "x1": 200, "y1": 292 }, "note": "entrance porch seen from its side: corner column x 150..170, open arch x 170..200; not a door" },
+        { "kind": "BALCONY", "boxPx": { "x0": 120, "y0": 166, "x1": 157, "y1": 208 }, "note": "front dormer balcony in profile" },
+        { "kind": "BALCONY", "boxPx": { "x0": 464, "y0": 166, "x1": 500, "y1": 208 }, "note": "rear dormer balcony in profile" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 243, "y0": 37, "x1": 286, "y1": 90 }, "note": "two chimneys overlapping behind the gable" }
+      ]
+    },
+    "REAR": {
+      "status": "PUBLISHED",
+      "asset": "asset-gracja-ma-a-ii-elewacja-ty-f95eb1d662", "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg", "pictureWidthPx": 700, "pictureHeightPx": 305,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 94, "wallRightPx": 606,
+      "sideLengthM": 16.82, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 291, "zeroRowHow": "floor line: bottom of the arched terrace door at the top of its steps; the garage rear door bottom (floor -0,30) is at row 300",
+      "ridgeRowPx": 45,
+      "blind": false,
+      "openings": [
+        { "id": "B1", "kind": "WINDOW", "level": 0, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 156, "y0": 238, "x1": 172, "y1": 264 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "small garage window" },
+        { "id": "B2", "kind": "WINDOW", "level": 0, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 192, "y0": 238, "x1": 208, "y1": 264 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "small garage window" },
+        { "id": "B3", "kind": "DOOR", "level": 0, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 230, "y0": 238, "x1": 257, "y1": 300 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "garage rear service door; planting covers its lower corners" },
+        { "id": "B4", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 313, "y0": 222, "x1": 358, "y1": 267 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "window of the ground-floor room (11,7 m2)" },
+        { "id": "B5", "kind": "GLAZED_DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 412, "y0": 222, "x1": 457, "y1": 291 }, "panels": 2, "uncertainPx": 4, "occluded": true, "note": "living-room double terrace door under the dormer balcony; its lower quarter is hidden by planting, bottom row taken from the floor line" },
+        { "id": "B6", "kind": "GLAZED_DOOR", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 536, "y0": 218, "x1": 562, "y1": 291 }, "panels": 1, "uncertainPx": 4, "occluded": false, "note": "single glazed door of the dining area, in a wall set back about 3.1 m behind the rear wall face (under the roofed corner beside the bay), seen inside an arched opening x 530..563" },
+        { "id": "B7", "kind": "WINDOW", "level": 0, "body": "BAY", "inDormer": false, "boxPx": { "x0": 582, "y0": 222, "x1": 600, "y1": 276 }, "panels": 1, "uncertainPx": 4, "occluded": false, "note": "window in the rear-facing ANGLED face of the bay, seen foreshortened; the same window is LEFT L2" },
+        { "id": "B8", "kind": "GLAZED_DOOR", "level": 1, "body": "MAIN", "inDormer": true, "boxPx": { "x0": 412, "y0": 131, "x1": 457, "y1": 199 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "arched balcony door in the rear gabled wall dormer; railing in front of its lower half" },
+        { "id": "B9", "kind": "ROOF_WINDOW", "level": 1, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 170, "y0": 148, "x1": 191, "y1": 177 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "left of a coupled pair on the garage roof" },
+        { "id": "B10", "kind": "ROOF_WINDOW", "level": 1, "body": "GARAGE", "inDormer": false, "boxPx": { "x0": 194, "y0": 148, "x1": 216, "y1": 177 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "right of the coupled pair" },
+        { "id": "B11", "kind": "ROOF_WINDOW", "level": 1, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 310, "y0": 130, "x1": 331, "y1": 159 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "" },
+        { "id": "B12", "kind": "ROOF_WINDOW", "level": 1, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 520, "y0": 130, "x1": 541, "y1": 159 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "" }
+      ],
+      "dormers": [ { "id": "BD1", "kind": "WALL_GABLE", "boxPx": { "x0": 366, "y0": 80, "x1": 504, "y1": 200 } } ],
+      "otherFeatures": [
+        { "kind": "BALCONY", "boxPx": { "x0": 387, "y0": 164, "x1": 479, "y1": 208 }, "note": "balcony of the rear dormer (railing and slab)" },
+        { "kind": "BALCONY", "boxPx": { "x0": 594, "y0": 165, "x1": 610, "y1": 200 }, "note": "balcony on the bay roof at the plan-left gable, seen from its end" },
+        { "kind": "TERRACE_ROOF", "boxPx": { "x0": 530, "y0": 200, "x1": 606, "y1": 291 }, "note": "corner of the main roof over the open terrace corner beside the bay (corner column on the plan)" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 442, "y0": 35, "x1": 470, "y1": 46 }, "note": "only the cap shows above the ridge" }
+      ]
+    },
+    "LEFT": {
+      "status": "PUBLISHED",
+      "asset": "asset-gracja-ma-a-ii-elewacja-boczna-005be5e789", "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg", "pictureWidthPx": 700, "pictureHeightPx": 305,
+      "mirroredAgainstPlan": false,
+      "wallLeftPx": 243, "wallRightPx": 551,
+      "sideLengthM": 10.12, "sideLengthBasis": "PRINTED_ON_PLAN",
+      "zeroRowPx": 292, "zeroRowHow": "not drawn (no door on this side at floor level): placed from the ridge row and the printed +8,13 at 30.4 px/m, same row as the front picture",
+      "ridgeRowPx": 46,
+      "blind": false,
+      "openings": [
+        { "id": "L1", "kind": "WINDOW", "level": 0, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 274, "y0": 225, "x1": 319, "y1": 269 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "living-room window in the left wall that is set back about 1.5 m under the roofed rear corner (arch x 255..334, corner column x 242..256)" },
+        { "id": "L2", "kind": "WINDOW", "level": 0, "body": "BAY", "inDormer": false, "boxPx": { "x0": 344, "y0": 225, "x1": 361, "y1": 278 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "rear angled face of the bay, foreshortened" },
+        { "id": "L3", "kind": "WINDOW", "level": 0, "body": "BAY", "inDormer": false, "boxPx": { "x0": 374, "y0": 225, "x1": 400, "y1": 278 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "middle face of the bay, parallel to the left wall" },
+        { "id": "L4", "kind": "WINDOW", "level": 0, "body": "BAY", "inDormer": false, "boxPx": { "x0": 413, "y0": 225, "x1": 431, "y1": 278 }, "panels": 1, "uncertainPx": 3, "occluded": false, "note": "front angled face of the bay, foreshortened" },
+        { "id": "L5", "kind": "GLAZED_DOOR", "level": 1, "body": "MAIN", "inDormer": false, "boxPx": { "x0": 364, "y0": 133, "x1": 409, "y1": 200 }, "panels": 2, "uncertainPx": 3, "occluded": false, "note": "arched balcony door in the gable (attic room 13,3 m2) opening onto the bay roof; railing in front of its lower half" }
+      ],
+      "dormers": [],
+      "otherFeatures": [
+        { "kind": "BALCONY", "boxPx": { "x0": 329, "y0": 167, "x1": 445, "y1": 209 }, "note": "balcony on the roof of the bay" },
+        { "kind": "TERRACE_ROOF", "boxPx": { "x0": 242, "y0": 213, "x1": 334, "y1": 292 }, "note": "roofed rear corner: arch on a corner column, the wall with L1 stands behind it" },
+        { "kind": "BALCONY", "boxPx": { "x0": 207, "y0": 166, "x1": 243, "y1": 208 }, "note": "rear dormer balcony in profile" },
+        { "kind": "BALCONY", "boxPx": { "x0": 551, "y0": 166, "x1": 587, "y1": 208 }, "note": "front dormer balcony in profile" },
+        { "kind": "CHIMNEY", "boxPx": { "x0": 422, "y0": 37, "x1": 465, "y1": 86 }, "note": "two chimneys behind the gable" }
+      ]
+    }
+  },
+  "uncertain": [
+    "The elevations are 700 px renders at about 30.4 px/m; one pixel is 3.3 cm. The pictures are cut just below the floor line, so terrain is not visible; -0,45 is printed on the section.",
+    "wallLeftPx/wallRightPx of FRONT and REAR span the printed 16.82 m, i.e. from the outer face of the bay to the garage wall. The main-body left wall itself is at about x 124 on FRONT and x 576 on REAR (bay projection about 1.0 m); the garage/main junction is at about x 416 on FRONT and x 276 on REAR.",
+    "The angled bay windows are listed both on LEFT (L2, L4) and, foreshortened, on FRONT (F1) and REAR (B7): each is one physical window in a 45-degree wall.",
+    "The coupled roof windows on the garage roof (F11/F12, B9/B10) are two frames with a narrow bar between them; counted as two openings, one double unit is the other reading.",
+    "REAR B6 and LEFT L1 stand in walls set back under the roofed rear-left corner, not in the outermost wall plane; FRONT F5 and F6 stand in the set-back porch wall.",
+    "RIGHT: no opening is drawn on the garage gable or on the main gable above it; the dark arch at the left is the open side of the entrance porch.",
+    "On the side pictures the zero row is not marked; it was placed from the printed ridge level (+8,13) and the picture scale. The garage ridge (+6,49 printed) is at row 96 on FRONT/REAR and RIGHT.",
+    "LEFT: the bay reads x 333..440 on the picture, about 0.4 m wider than the plan's bay measured from the rear wall; wall ends were kept at the corner column (243) and the front wall (551)."
+  ]
+}

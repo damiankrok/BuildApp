@@ -335,6 +335,32 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const t = ma - s * mx
     return { s, t, maxRes: Math.max(...pts.map((p) => Math.abs(s * p[0] + t - p[1]))), n: pts.length }
   }
+  /** The bodies a viewer on `side` has nearest in front, each with the share of that side's length it is the nearest over. */
+  const sideShows = (side: HouseSide): Array<{ bodyId: string; share: number }> => {
+    const span = side === 'FRONT' || side === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
+    const depthAt = (p: P2): number => (side === 'FRONT' ? p.z : side === 'REAR' ? -p.z : side === 'LEFT' ? p.x : -p.x)
+    const count = new Map<string, number>()
+    const N = 40
+    for (let k = 0; k < N; k += 1) {
+      const a = ((k + 0.5) / N) * span
+      let pick: { id: string; d: number } | undefined
+      raw.forEach((b, i) => {
+        const poly = bodyPolys[i]
+        for (let j = 0; j < poly.length; j += 1) {
+          const p = poly[j]
+          const q = poly[(j + 1) % poly.length]
+          const ap = alongOfPoint(side, p)
+          const aq = alongOfPoint(side, q)
+          if (Math.min(ap, aq) > a || Math.max(ap, aq) < a || Math.abs(ap - aq) < 1e-9) continue
+          const t = (a - ap) / (aq - ap)
+          const d = depthAt({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t })
+          if (!pick || d < pick.d - 1e-6) pick = { id: b.id, d }
+        }
+      })
+      if (pick) count.set(pick.id, (count.get(pick.id) ?? 0) + 1)
+    }
+    return [...count.entries()].map(([bodyId, n]) => ({ bodyId, share: n / N }))
+  }
   const ridgePrintedMain = ridges.find((r) => r.bodyId === mainId) ?? (ridges.length > 0 ? ridges.slice().sort((p, q) => (q.valueM as number) - (p.valueM as number))[0] : undefined)
   const regs: Reg[] = []
   const notRegistered: Array<{ obs: (typeof o.elevations)[number]; why: string }> = []
@@ -354,6 +380,22 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       const span = side === 'FRONT' || side === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
       if (f.maxRes <= Math.max(RESOLVE.elevationAlongM, RESOLVE.elevationAlongShare * span) && (!best || f.maxRes < best.f.maxRes)) best = { side, f }
     }
+    // A side shows the bodies that stand nearest the viewer there. An elevation read as a side whose nearest body (over
+    // half of that side) it does not name, while it names the bodies of the OPPOSITE side and fits there, is the
+    // opposite side: two gable ends of one house fit a plain plan equally, and only what stands in front tells them apart.
+    if (best && best.side === obs.side) {
+      const opposite: HouseSide = obs.side === 'LEFT' ? 'RIGHT' : obs.side === 'RIGHT' ? 'LEFT' : obs.side === 'FRONT' ? 'REAR' : 'FRONT'
+      const named = new Set(obs.bodies.map((b) => b.bodyId))
+      const misses = (sd: HouseSide): string[] => sideShows(sd).filter((x) => x.share >= 0.5 && !named.has(x.bodyId)).map((x) => x.bodyId)
+      const fo = fit(obs, opposite)
+      const span = opposite === 'FRONT' || opposite === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
+      if (misses(obs.side).length > 0 && misses(opposite).length === 0 && fo && fo.s > 0 && fo.maxRes <= Math.max(RESOLVE.elevationAlongM, RESOLVE.elevationAlongShare * span)) {
+        knownDefects.push({ code: 'SIDE_BY_BODIES', what: `${obs.id}: stated ${obs.side}, but the body that stands in front on that side (${misses(obs.side).join(', ')}) is not on the picture; the bodies it names are those of the ${opposite} side, where it fits as well: taken as ${opposite}` })
+        best = { side: opposite, f: fo }
+      }
+    }
+    // A stated side that does not register is NOT tried on the other sides: a mirrored front elevation fits the rear of
+    // the plan perfectly, and would put a mirrored house's openings there. It is held, and said.
     const f0 = fit(obs, obs.side)
     if (!best) {
       const why = !f0 ? 'no body of the plan is named on it' : f0.s <= 0 ? 'its bodies stand in the opposite order to the plan seen from that side: mirrored, or another side' : `its wall ends land ${f0.maxRes.toFixed(2)} m off the bodies' ends at one scale`
@@ -378,9 +420,10 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     // raised sill on another, a garage door at the garage's lower floor. The datum is the MIDDLE of the anchors the
     // picture offers — the ground line with the terrain mark, the printed ridge, each door threshold.
     const ridgeAnchor = zeroByRidge !== undefined && Math.abs((zeroByTerrain - zeroByRidge) * f.s) <= RESOLVE.datumAgreeM ? [zeroByRidge] : []
-    const anchors = [zeroByTerrain, ...ridgeAnchor, ...thresholds].sort((p, q) => p - q)
+    const floorAnchor = typeof obs.floorY === 'number' && Math.abs((zeroByTerrain - obs.floorY) * f.s) <= RESOLVE.datumAgreeM ? [obs.floorY] : []
+    const anchors = [zeroByTerrain, ...ridgeAnchor, ...floorAnchor, ...thresholds].sort((p, q) => p - q)
     const mid = anchors.length % 2 === 1 ? anchors[(anchors.length - 1) / 2] : (anchors[anchors.length / 2 - 1] + anchors[anchors.length / 2]) / 2
-    const zero = { row: mid, how: anchors.length === 1 ? `the ground line and the terrain ${terrainY.basis === 'PRINTED' ? 'mark' : 'convention'}` : `the middle of ${anchors.length} anchors: the ground line with the terrain${ridgeAnchor.length ? `, the printed ridge ${ridgePrintedMain?.literal ?? ''}` : ''}${thresholds.length ? `, ${thresholds.length} door threshold(s)` : ''}` }
+    const zero = { row: mid, how: anchors.length === 1 ? `the ground line and the terrain ${terrainY.basis === 'PRINTED' ? 'mark' : 'convention'}` : `the middle of ${anchors.length} anchors: the ground line with the terrain${ridgeAnchor.length ? `, the printed ridge ${ridgePrintedMain?.literal ?? ''}` : ''}${floorAnchor.length ? ', the floor row the reader named' : ''}${thresholds.length ? `, ${thresholds.length} door threshold(s)` : ''}` }
     const yOf = (py: number): number => (zero.row - py) * f.s
     // an anchor the fit did not use: the ridge row at the along scale against the house's ridge height
     const mainOn = obs.bodies.find((b) => b.bodyId === mainId && b.ridgeY !== null)

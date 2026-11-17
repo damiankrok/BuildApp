@@ -1,0 +1,683 @@
+{
+ "schema": "buildapp.v3545.detail-reference",
+ "version": 1,
+ "house": "c4-dobredomy-pallas",
+ "packageContentHash": "662ef9739d894fcdc69e65bcb8bb093ee3154b3d4a15ed5f55eab76a8db9024b",
+ "reader": "independent source reader: publisher pictures (plans, section, elevations) and page facts only; no analyzer, solver, API reading or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door of the wiatrolap and the garage door open through the bottom walls of the ground-plan picture; the site-plan picture has its entry arrow at the bottom; the front elevation (przod) shows the porch, door and garage gate.",
+ "overall": {
+  "widthM": 15.52,
+  "depthM": 11.53,
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Printed on the site-plan picture only (the floor plans carry no dimensions). Width 1552 runs from the left gable wall to the right wall of the garage. Depth 1153 runs from the rear wall to the front of the open entrance porch columns, so it is more than the walled outline: scaled on the site plan and on the floor plan against the printed width, the walls span about 9.84 m (rear wall to the front wall of the wiatrolap/bedroom part)."
+ },
+ "levels": {
+  "ridgeAboveZeroM": 7.97,
+  "ridgeBasis": "PRINTED_ON_SECTION",
+  "terrainBelowZeroM": 0.45,
+  "upperFloorLevelsM": [
+   3.04
+  ],
+  "garageRidgeAboveZeroM": null
+ },
+ "sides": {
+  "FRONT": {
+   "status": "PUBLISHED",
+   "asset": "asset-pallas-elewacja-przod-e2a74584d1",
+   "file": "02_ELEVATION_NOT_APPLICABLE_FRONT.jpg",
+   "pictureWidthPx": 709,
+   "pictureHeightPx": 309,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 140,
+   "wallRightPx": 658,
+   "sideLengthM": 15.52,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 291,
+   "zeroRowHow": "threshold of the entrance door (row 291); the ground row (about 305) minus the printed terrain offset -0,45 (15 px) gives 290",
+   "ridgeRowPx": 27,
+   "blind": false,
+   "openings": [
+    {
+     "id": "F1",
+     "kind": "GLAZED_DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 193,
+      "y0": 217,
+      "x1": 252,
+      "y1": 291
+     },
+     "panels": 2,
+     "uncertainPx": 4,
+     "occluded": true,
+     "note": "terrace door of the living room, in the wall set back about 1.8 m under the arcade; its foot is behind the low brick terrace wall"
+    },
+    {
+     "id": "F2",
+     "kind": "DOOR",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 318,
+      "y0": 224,
+      "x1": 363,
+      "y1": 292
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "entrance door with a narrow sidelight in one frame, seen between the two brick porch columns"
+    },
+    {
+     "id": "F3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 437,
+      "y0": 218,
+      "x1": 495,
+      "y1": 265
+     },
+     "panels": 3,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "bedroom window"
+    },
+    {
+     "id": "F4",
+     "kind": "GARAGE_DOOR",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 559,
+      "y0": 228,
+      "x1": 637,
+      "y1": 305
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "garage door; its foot is at ground level, below the ±0,00 row"
+    },
+    {
+     "id": "F5",
+     "kind": "WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 209,
+      "y0": 116,
+      "x1": 237,
+      "y1": 154
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "window of the left gabled dormer"
+    },
+    {
+     "id": "F6",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": true,
+     "boxPx": {
+      "x0": 450,
+      "y0": 117,
+      "x1": 481,
+      "y1": 190
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "arched balcony door of the right gabled dormer; lower half behind a bulging open railing"
+    },
+    {
+     "id": "F7",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 356,
+      "y0": 119,
+      "x1": 382,
+      "y1": 154
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window between the dormers"
+    },
+    {
+     "id": "F8",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 585,
+      "y0": 138,
+      "x1": 611,
+      "y1": 174
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window over the garage (storage attic)"
+    }
+   ],
+   "dormers": [
+    {
+     "id": "FD1",
+     "kind": "ROOF_GABLE",
+     "boxPx": {
+      "x0": 194,
+      "y0": 82,
+      "x1": 252,
+      "y1": 165
+     }
+    },
+    {
+     "id": "FD2",
+     "kind": "WALL_GABLE",
+     "boxPx": {
+      "x0": 430,
+      "y0": 82,
+      "x1": 500,
+      "y1": 192
+     }
+    }
+   ],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 279,
+      "y0": 159,
+      "x1": 401,
+      "y1": 291
+     },
+     "note": "gabled entrance porch on two flared brick columns, with a round ornament in its gable (not an opening)"
+    },
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 140,
+      "y0": 198,
+      "x1": 279,
+      "y1": 291
+     },
+     "note": "covered terrace under the main roof in front of the set-back living-room wall, with a brick corner column"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 432,
+      "y0": 150,
+      "x1": 487,
+      "y1": 195
+     },
+     "note": "small bulging railing on a thin ledge in front of F6"
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 97,
+      "y0": 153,
+      "x1": 131,
+      "y1": 195
+     },
+     "note": "left-gable balcony seen from its end"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 305,
+      "y0": 20,
+      "x1": 332,
+      "y1": 27
+     },
+     "note": "only the cap shows above the ridge"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 505,
+      "y0": 20,
+      "x1": 530,
+      "y1": 27
+     },
+     "note": "only the cap shows above the ridge"
+    }
+   ],
+   "note": "main body spans x 140-538, garage x 538-658 (about 3.6 m); the garage ridge is at row 78"
+  },
+  "RIGHT": {
+   "status": "PUBLISHED",
+   "asset": "asset-pallas-elewacja-boczna-b6a5726f34",
+   "file": "01_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 709,
+   "pictureHeightPx": 309,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 238,
+   "wallRightPx": 567,
+   "sideLengthM": 9.84,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 291,
+   "zeroRowHow": "ground row (about 305) minus the printed terrain offset -0,45 (15 px); the brick plinth top is at row 285",
+   "ridgeRowPx": 28,
+   "blind": true,
+   "openings": [],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 172,
+      "y0": 150,
+      "x1": 238,
+      "y1": 291
+     },
+     "note": "entrance porch seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 439,
+      "y0": 22,
+      "x1": 470,
+      "y1": 82
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 492,
+      "y0": 57,
+      "x1": 518,
+      "y1": 120
+     },
+     "note": ""
+    }
+   ],
+   "note": "blank side: the garage gable wall spans x 281-520 (about 7.1 m, ridge at row 78); the main body's own right wall shows 1.3-1.4 m beyond it at each end"
+  },
+  "REAR": {
+   "status": "PUBLISHED",
+   "asset": "asset-pallas-elewacja-ty-fbe7819104",
+   "file": "03_ELEVATION_NOT_APPLICABLE_REAR.jpg",
+   "pictureWidthPx": 709,
+   "pictureHeightPx": 309,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 48,
+   "wallRightPx": 566,
+   "sideLengthM": 15.52,
+   "sideLengthBasis": "PRINTED_ON_PLAN",
+   "zeroRowPx": 291,
+   "zeroRowHow": "ground row (about 305) minus the printed terrain offset -0,45 (15 px); the brick plinth top is at row 285",
+   "ridgeRowPx": 27,
+   "blind": false,
+   "openings": [
+    {
+     "id": "B1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 79,
+      "y0": 227,
+      "x1": 98,
+      "y1": 256
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "small garage window, left of two"
+    },
+    {
+     "id": "B2",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 118,
+      "y0": 227,
+      "x1": 138,
+      "y1": 256
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "small garage window, right of two"
+    },
+    {
+     "id": "B3",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 206,
+      "y0": 218,
+      "x1": 236,
+      "y1": 257
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "utility-room window; stands side by side with B4, separated by a narrow pier (about 4 px) where the partition meets the wall"
+    },
+    {
+     "id": "B4",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 240,
+      "y0": 218,
+      "x1": 270,
+      "y1": 257
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "bathroom window"
+    },
+    {
+     "id": "B5",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 333,
+      "y0": 217,
+      "x1": 391,
+      "y1": 255
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "kitchen window; the brick panel below it is cladding"
+    },
+    {
+     "id": "B6",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 454,
+      "y0": 217,
+      "x1": 513,
+      "y1": 266
+     },
+     "panels": 3,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "dining-room window"
+    },
+    {
+     "id": "B7",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "GARAGE",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 94,
+      "y0": 137,
+      "x1": 121,
+      "y1": 175
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "roof window over the garage"
+    },
+    {
+     "id": "B8",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 224,
+      "y0": 119,
+      "x1": 251,
+      "y1": 155
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "B9",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 323,
+      "y0": 119,
+      "x1": 350,
+      "y1": 155
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": ""
+    },
+    {
+     "id": "B10",
+     "kind": "ROOF_WINDOW",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 431,
+      "y0": 119,
+      "x1": 457,
+      "y1": 155
+     },
+     "panels": 1,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": ""
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 177,
+      "y0": 27,
+      "x1": 197,
+      "y1": 85
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 283,
+      "y0": 54,
+      "x1": 304,
+      "y1": 127
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 374,
+      "y0": 27,
+      "x1": 400,
+      "y1": 78
+     },
+     "note": ""
+    },
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 570,
+      "y0": 152,
+      "x1": 600,
+      "y1": 200
+     },
+     "note": "left-gable balcony seen from its end"
+    }
+   ],
+   "note": "garage spans x 48-168, main body x 168-566"
+  },
+  "LEFT": {
+   "status": "PUBLISHED",
+   "asset": "asset-pallas-elewacja-boczna-7778967efc",
+   "file": "00_ELEVATION_NOT_APPLICABLE_SIDE_UNSPECIFIED.jpg",
+   "pictureWidthPx": 709,
+   "pictureHeightPx": 309,
+   "mirroredAgainstPlan": false,
+   "wallLeftPx": 144,
+   "wallRightPx": 474,
+   "sideLengthM": 9.84,
+   "sideLengthBasis": "DERIVED_FROM_PLAN",
+   "zeroRowPx": 291,
+   "zeroRowHow": "ground row (about 305) minus the printed terrain offset -0,45 (15 px); the brick plinth top is at row 285",
+   "ridgeRowPx": 28,
+   "blind": false,
+   "openings": [
+    {
+     "id": "L1",
+     "kind": "WINDOW",
+     "level": 0,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 283,
+      "y0": 218,
+      "x1": 333,
+      "y1": 266
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "living-room window in the brick-clad panel under the balcony"
+    },
+    {
+     "id": "L2",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 260,
+      "y0": 123,
+      "x1": 289,
+      "y1": 192
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "balcony door in the gable, lower half behind the open railing"
+    },
+    {
+     "id": "L3",
+     "kind": "GLAZED_DOOR",
+     "level": 1,
+     "body": "MAIN",
+     "inDormer": false,
+     "boxPx": {
+      "x0": 327,
+      "y0": 123,
+      "x1": 356,
+      "y1": 192
+     },
+     "panels": 2,
+     "uncertainPx": 3,
+     "occluded": false,
+     "note": "balcony door in the gable, lower half behind the open railing"
+    }
+   ],
+   "dormers": [],
+   "otherFeatures": [
+    {
+     "kind": "BALCONY",
+     "boxPx": {
+      "x0": 243,
+      "y0": 154,
+      "x1": 387,
+      "y1": 202
+     },
+     "note": "curved balcony with a bulging steel railing"
+    },
+    {
+     "kind": "LOGGIA",
+     "boxPx": {
+      "x0": 411,
+      "y0": 210,
+      "x1": 453,
+      "y1": 291
+     },
+     "note": "side arch of the covered front terrace (open, not a window)"
+    },
+    {
+     "kind": "PORTICO",
+     "boxPx": {
+      "x0": 474,
+      "y0": 150,
+      "x1": 542,
+      "y1": 291
+     },
+     "note": "entrance porch seen from the side"
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 190,
+      "y0": 57,
+      "x1": 217,
+      "y1": 122
+     },
+     "note": ""
+    },
+    {
+     "kind": "CHIMNEY",
+     "boxPx": {
+      "x0": 237,
+      "y0": 22,
+      "x1": 270,
+      "y1": 82
+     },
+     "note": ""
+    }
+   ]
+  }
+ },
+ "uncertain": [
+  "LEFT and RIGHT sideLengthM 9.84 is NOT printed and not a sum of printed parts: it is the walled depth scaled from the dashed wall outline on the dimensioned site plan (and the same on the floor plan, both against the printed 1552); about +-0.1 m. It is filed as DERIVED_FROM_PLAN for want of a better label.",
+  "The elevations are only 709 px wide (about 33 px per metre); box edges are good to about 3 px (0.1 m).",
+  "Zero row: the plinth top is at row 285, the entrance threshold at 291, the ground at about 305; 291 is used on all four sides. With it the ridge computes to 7.9 m against the printed +7,97.",
+  "Side elevations are captioned only 'elewacja boczna'; assigned from the plan: the gable with one window below and two balcony doors with a curved balcony above is LEFT, the blank garage gable is RIGHT. Neither is mirrored.",
+  "On LEFT the wall is solid for about 8.0 m from the rear (x 144-411); the front 1.8 m is the open side arch of the covered terrace with the gable wall continuing above it and a brick corner column (x 453-474).",
+  "B3 and B4 stand side by side with a pier of about 0.14 m between the frames; they could be read as one paired opening.",
+  "Left front dormer read as ROOF_GABLE (roof tiles run below it, the covered terrace is under it), right front dormer as WALL_GABLE (its wall continues down into the bedroom facade).",
+  "The railing in front of F6 stands on a thin ledge; it may be only a French balcony.",
+  "Garage roof windows F8 and B7 light a storage attic (strych) over the garage; level 1 is used.",
+  "The section prints 842 from terrain to ridge; the page text gives a building height of 8.5 m."
+ ]
+}

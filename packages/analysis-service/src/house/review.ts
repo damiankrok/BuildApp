@@ -306,9 +306,13 @@ Compare the model with the elevations, side by side, in this order: which side i
       const ok = transact(t.items, t.group)
       if (!ok && !t.group && (t.items[0].op === 'ADD_OPENING' || t.items[0].op === 'REMOVE_OPENING') && ['COMPILE_CONFLICT', 'CONFLICT_OPEN'].includes(proposals[proposals.length - 1]?.code ?? '')) refusedAlone.push(t.items[0])
     }
-    // opening corrections of one elevation that were each refused alone for a clash: once more, together
+    // An opening correction refused alone for a clash is judged again once the others have been applied (its clash may
+    // have been with the state before a later correction), and those still refused are tried together, per elevation:
+    // a correct pair is not lost because its first step, judged alone, collided with what its second step removes.
+    const still: ReviewCorrection[] = []
+    for (const c of refusedAlone) if (!transact([c], 'retry')) still.push(c)
     const byPicture = new Map<number, ReviewCorrection[]>()
-    for (const c of refusedAlone) if (typeof c.picture === 'number') byPicture.set(c.picture, [...(byPicture.get(c.picture) ?? []), c])
+    for (const c of still) if (typeof c.picture === 'number') byPicture.set(c.picture, [...(byPicture.get(c.picture) ?? []), c])
     for (const [picture, items] of byPicture) if (items.length >= 2) transact(items, `auto-p${picture}`)
     if (answer.verdict === 'MATCHES' || applied === 0) break
   }
