@@ -1,0 +1,1285 @@
+{
+ "schema": "buildapp.v3547-marcowki-features/1",
+ "tolerances": {
+  "posM": 0.3,
+  "depthM": 0.15,
+  "yM": 0.15
+ },
+ "models": {
+  "LOCAL": {
+   "note": "model LOCAL/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 16,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": true,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20137.90 m (1 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.99 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": true,
+     "truth": "4.15\u201312.05 m along",
+     "model": "4.15\u201312.05 m (1 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.01 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": true,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.31\u20137.90 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.79\u201311.40 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.06 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": true,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.32 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.56+2.75 m, head 2.20"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.92\u20136.62 m, head 6.26\u21923.99"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.75\u201311.09 m, head 6.10\u21924.14"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": true,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "5.13\u20137.47 m, head 6.09\u21924.14"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.63+0.90 m",
+     "model": "4.67+0.90 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.40+1.40 m",
+     "model": "6.39+1.40 m"
+    }
+   ]
+  },
+  "H3546_M1": {
+   "note": "model M1/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 2,
+   "of": 14,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 2 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.35\u20136.37 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "2.147 m out, 2 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.82\u201311.40 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": false,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.38 m, head 2.22"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "a level hole 4.23+0.62 m"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "a level hole 5.72+1.64 m"
+    },
+    {
+     "feature": "left living window",
+     "ok": false,
+     "truth": "4.52+0.90 m",
+     "model": "none"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": false,
+     "truth": "6.29+1.40 m",
+     "model": "none"
+    }
+   ]
+  },
+  "H3546_M2": {
+   "note": "model M2/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 2,
+   "of": 14,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "1.495 m out, 2 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.03\u201312.05 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "0.176 m out, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.82\u201311.39 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.03 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.78 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": false,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "none"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "a level hole 5.21+2.19 m"
+    },
+    {
+     "feature": "left living window",
+     "ok": false,
+     "truth": "4.44+0.90 m",
+     "model": "none"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": false,
+     "truth": "6.21+1.40 m",
+     "model": "none"
+    }
+   ]
+  },
+  "H3546_M3": {
+   "note": "model M3/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 1,
+   "of": 12,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia",
+     "ok": false,
+     "truth": "slab in the recess 3.25\u20137.90 m, no supports",
+     "model": "none"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "2.081 m out, 2 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.79\u201311.40 m"
+    },
+    {
+     "feature": "portal head (garage roof edge)",
+     "ok": false,
+     "truth": "top 3.07 m, soffit 2.28 m",
+     "model": "no flat roof reaching the front plane"
+    },
+    {
+     "feature": "garage door",
+     "ok": false,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "none"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "a level hole 5.59+1.78 m"
+    },
+    {
+     "feature": "left living window",
+     "ok": false,
+     "truth": "4.47+0.90 m",
+     "model": "none"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": false,
+     "truth": "6.24+1.40 m",
+     "model": "none"
+    }
+   ]
+  },
+  "H3547_M1": {
+   "note": "model T1/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 7,
+   "of": 14,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.25\u20137.22 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.83\u201311.37 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.79 m, head 2.22"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "a level hole 4.23+0.62 m"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "a level hole 5.72+1.64 m"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.52+0.90 m",
+     "model": "4.65+0.88 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.29+1.40 m",
+     "model": "6.36+1.36 m"
+    }
+   ]
+  },
+  "H3547_M2": {
+   "note": "model T2/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 6,
+   "of": 14,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "1.495 m out, 2 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.03\u201312.05 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.82\u201311.39 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.03 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.78 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.48+2.78 m, head 2.23"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "a level hole 3.96+2.56 m"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.44+0.90 m",
+     "model": "4.64+0.83 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.21+1.40 m",
+     "model": "6.34+1.34 m"
+    }
+   ]
+  },
+  "H3547_M3": {
+   "note": "model T3/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 6,
+   "of": 13,
+   "rows": [
+    {
+     "feature": "front gable frame",
+     "ok": false,
+     "truth": "frame across 0.00\u20137.90 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "rear gable frame",
+     "ok": false,
+     "truth": "frame across 4.15\u201312.05 m along, 1.00 m deep",
+     "model": "none"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.25\u20137.22 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.83\u201311.40 m"
+    },
+    {
+     "feature": "portal head (garage roof edge)",
+     "ok": false,
+     "truth": "top 3.07 m, soffit 2.28 m",
+     "model": "no flat roof reaching the front plane"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.79 m, head 2.24"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": false,
+     "truth": "3.95\u20136.65 m, sill 3.06, head 6.26\u21924.02",
+     "model": "a level hole 4.23+0.62 m"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": false,
+     "truth": "8.76\u201311.10 m, sill 3.06, head 6.09\u21924.13",
+     "model": "none"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, sill 3.06, head 6.09\u21924.13",
+     "model": "a level hole 5.59+1.78 m"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.47+0.90 m",
+     "model": "4.63+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.24+1.40 m",
+     "model": "6.34+1.38 m"
+    }
+   ]
+  },
+  "L1_PRZED": {
+   "note": "compiled from the observations of L1r/marcowki-ge/house-first.json",
+   "modelHash": "0b50f0d7680590745077eafc0ee129b50e972a63f1f817b49df46016a297e53e",
+   "built": true,
+   "met": 13,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": true,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20137.91 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.96 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": true,
+     "truth": "4.15\u201312.05 m along",
+     "model": "4.14\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.00 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.25\u20137.22 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.83\u201311.38 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.81 m, head 2.23"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.97\u20136.54 m, head 6.08\u21924.19"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.84\u201311.05 m, head 5.83\u21924.27"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "5.42\u20137.37 m, head 5.71\u21924.27"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.52+0.90 m",
+     "model": "4.65+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.29+1.40 m",
+     "model": "6.36+1.36 m"
+    }
+   ]
+  },
+  "L1_PO": {
+   "note": "model L1r/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 13,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": true,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20137.91 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.96 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": true,
+     "truth": "4.15\u201312.05 m along",
+     "model": "4.14\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.00 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.25\u20137.22 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.83\u201311.38 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.81 m, head 2.23"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.97\u20136.54 m, head 6.08\u21924.19"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.84\u201311.05 m, head 5.83\u21924.27"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "5.42\u20137.37 m, head 5.71\u21924.27"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.52+0.90 m",
+     "model": "4.65+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.29+1.40 m",
+     "model": "6.36+1.36 m"
+    }
+   ]
+  },
+  "L2_PRZED": {
+   "note": "compiled from the observations of L2r/marcowki-ge/house-first.json",
+   "modelHash": "f5c2cff0908a55cd264ee5b174737597b373d4dc2cff2aa938b38c9e8642197b",
+   "built": true,
+   "met": 10,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": false,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20138.53 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": false,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.30 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": false,
+     "truth": "4.15\u201312.05 m along",
+     "model": "3.52\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.02 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "1.495 m out, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.03\u201312.05 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.81\u201311.38 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.03 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.78 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.54+2.83 m, head 2.21"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.99\u20136.57 m, head 6.08\u21924.18"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.80\u201311.04 m, head 6.31\u21924.27"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": true,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "4.81\u20137.39 m, head 6.22\u21924.27"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.44+0.90 m",
+     "model": "4.62+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.21+1.40 m",
+     "model": "6.33+1.37 m"
+    }
+   ]
+  },
+  "L2_PO": {
+   "note": "model L2r/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 10,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": false,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20138.53 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": false,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.30 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": false,
+     "truth": "4.15\u201312.05 m along",
+     "model": "3.52\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.02 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": false,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "1.495 m out, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.03\u201312.05 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.81\u201311.38 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.03 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.78 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.54+2.83 m, head 2.21"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.99\u20136.57 m, head 6.08\u21924.18"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.80\u201311.04 m, head 6.31\u21924.21"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": true,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "4.81\u20137.39 m, head 6.31\u21924.21"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.44+0.90 m",
+     "model": "4.62+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.21+1.40 m",
+     "model": "6.33+1.37 m"
+    }
+   ]
+  },
+  "HOST1_H": {
+   "note": "model host/job-1/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 13,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": true,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20137.91 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.03 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": true,
+     "truth": "4.15\u201312.05 m along",
+     "model": "4.14\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.99 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.24\u20137.20 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.82\u201311.35 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.51+2.80 m, head 2.23"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.97\u20136.54 m, head 6.08\u21924.19"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.80\u201311.35 m, head 5.82\u21924.19"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": false,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "4.82\u20137.36 m, head 5.75\u21924.19"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.47+0.90 m",
+     "model": "4.63+0.84 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.24+1.40 m",
+     "model": "6.34+1.34 m"
+    }
+   ]
+  },
+  "DIAG_MANUAL": {
+   "note": "model mk/DIAG1/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 14,
+   "of": 16,
+   "rows": [
+    {
+     "feature": "front gable frame extent",
+     "ok": true,
+     "truth": "0.00\u20137.90 m along",
+     "model": "0.00\u20137.91 m (2 piece(s))"
+    },
+    {
+     "feature": "front gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "0.96 m"
+    },
+    {
+     "feature": "rear gable frame extent",
+     "ok": true,
+     "truth": "4.15\u201312.05 m along",
+     "model": "4.14\u201312.05 m (2 piece(s))"
+    },
+    {
+     "feature": "rear gable frame depth",
+     "ok": true,
+     "truth": "1.00 m (returns 0.61 m wide, 1.00 m deep)",
+     "model": "1.00 m"
+    },
+    {
+     "feature": "front loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "front loggia extent",
+     "ok": false,
+     "truth": "3.25\u20137.90 m",
+     "model": "3.25\u20137.22 m"
+    },
+    {
+     "feature": "rear loggia in the recess",
+     "ok": true,
+     "truth": "in the plane of the returns, no free supports",
+     "model": "recessed, 0 post(s)"
+    },
+    {
+     "feature": "rear loggia extent",
+     "ok": true,
+     "truth": "4.76\u201311.44 m",
+     "model": "4.83\u201311.37 m"
+    },
+    {
+     "feature": "portal head (garage roof edge) top",
+     "ok": true,
+     "truth": "3.07 m",
+     "model": "3.04 m"
+    },
+    {
+     "feature": "portal head soffit",
+     "ok": false,
+     "truth": "2.28 m (a band 0.79 m deep)",
+     "model": "2.79 m"
+    },
+    {
+     "feature": "garage door",
+     "ok": true,
+     "truth": "8.55+2.75 m, head 2.25",
+     "model": "8.50+2.79 m, head 2.22"
+    },
+    {
+     "feature": "front-gable raked glazing",
+     "ok": true,
+     "truth": "3.95\u20136.65 m, head 6.26\u21924.02",
+     "model": "3.94\u20136.62 m, head 6.24\u21924.01"
+    },
+    {
+     "feature": "rear-gable-w raked glazing",
+     "ok": true,
+     "truth": "8.76\u201311.10 m, head 6.09\u21924.13",
+     "model": "8.73\u201311.06 m, head 6.07\u21924.12"
+    },
+    {
+     "feature": "rear-gable-e raked glazing",
+     "ok": true,
+     "truth": "5.10\u20137.44 m, head 6.09\u21924.13",
+     "model": "5.08\u20137.41 m, head 6.07\u21924.20"
+    },
+    {
+     "feature": "left living window",
+     "ok": true,
+     "truth": "4.52+0.90 m",
+     "model": "4.65+0.88 m"
+    },
+    {
+     "feature": "left kitchen window",
+     "ok": true,
+     "truth": "6.29+1.40 m",
+     "model": "6.36+1.36 m"
+    }
+   ]
+  }
+ }
+}

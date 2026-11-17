@@ -1,0 +1,102 @@
+{
+ "name": "job-1",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+ "withToken": true,
+ "jobId": "0964f296596a450d237f0edfa79f8574",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 330,
+ "booksDeltaUsd": 0.343466,
+ "booksDeltaRequests": 7,
+ "superseded": true,
+ "quality": {
+  "code": "QUALITY_FEATURES_PARTIAL",
+  "what": "the delivered model (DESCRIBED) keeps 4 review defect(s) open — FRONT: 3 met, open d1 GABLE_FRAME WRONG_SHAPE (KEY, SUPPLEMENT_ASKED); d2 BODY WRONG_SIZE (MAJOR, OPEN) | REAR: 4 met, open d3 LOGGIA_OR_RECESS WRONG_KIND (KEY, SUPPLEMENT_ASKED); d4 GABLE_FRAME WRONG_SHAPE (KEY, SUPPLEMENT_ASKED)"
+ },
+ "revision": {
+  "code": "REVISION_ACCEPTED_NOW",
+  "what": "this reading is the accepted revision df50d38aee4866b8d8d72593be560fc5"
+ },
+ "decisionCode": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "PARTIAL",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_COMPLETE"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_PARTIAL",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "RIGHT: PARTIAL — the reader stated a part of this side is hidden on the picture",
+   "FRONT: read, BUILT_PARTIAL: 5 of 7 built (not built: el-p12/chimney-front (SOURCE_UNKNOWN))",
+   "REAR: read, BUILT_PARTIAL: 5 of 7 built (not built: el-p10/chimney-rear (SOURCE_UNKNOWN))"
+  ]
+ },
+ "openingFits": {
+  "EXACT": 11
+ },
+ "houseSha256": "00238eb95242b6225e85b3edface9afd00e6879f94def437cad77feb227e4bfb",
+ "stood": "ACCEPTED_DESCRIBED",
+ "why": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS: LOCAL contradicts the source where the description meets it: where the walled outline lies 84 % of the two outlines coincide, each set against its own front-left corner against traced outline verified against the printed dimensions",
+ "checks": {
+  "pass": 12,
+  "fail": 0
+ },
+ "held": 7,
+ "counts": {
+  "assets": 20,
+  "assetsByDocument": {
+   "ELEVATION": 4,
+   "SECTION": 1,
+   "FLOOR_PLAN": 8,
+   "SITE_PLAN": 1,
+   "PERSPECTIVE_RENDER": 4,
+   "UNKNOWN": 2
+  },
+  "observations": 52,
+  "frames": 10,
+  "metricEvidence": 18,
+  "callouts": 0,
+  "commands": 67,
+  "masses": 2,
+  "openings": 11,
+  "rooms": 0,
+  "balconies": 2,
+  "terraces": 0,
+  "railings": 2,
+  "chimneys": 0,
+  "rooflights": 3,
+  "meshes": 77,
+  "triangles": 3704
+ },
+ "commit": "c03b7cd",
+ "modelHash": "509b59f104411b73aea1e5dce8e2709222ed3d5e9dd6558556cbf2980c7fb1b6",
+ "modelSha256": "509b59f104411b73aea1e5dce8e2709222ed3d5e9dd6558556cbf2980c7fb1b6",
+ "sceneSha256": "3c81be203f118c87a22a2d730d7574b57a5d640bfb2a2e4321ea47967904a92f",
+ "sceneContentHash": "23f38603dae8e7f4fa0053e5556058bc42231c996974f72296a9610e6376ad2e",
+ "analyzer": {
+  "service": "house-0.3.0",
+  "solver": "house-document-0.4.0+builder-0.3.0+reading-0.3.0"
+ },
+ "sourcePackageHash": "9f8cdc5ac7030f25e5d0d7e4dea8bce148cdbece5cd7dfefc4cafee5dc34046d",
+ "measurement": null
+}

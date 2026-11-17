@@ -1,0 +1,3249 @@
+{
+ "L1_live": {
+  "modelFromDescription": "4c1b1970aaeb73208d27fb4ce55b0b693ea56b42636823a9b108079cb81e1d6c",
+  "accepted": "LOCAL",
+  "decisionCode": "BOTH_CONTRADICT",
+  "partial": true,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0.253748,
+  "review": {
+   "rounds": 2,
+   "proposals": 10,
+   "applied": 1,
+   "verdicts": [
+    "DIFFERS",
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "50a010ea4046cbe61d5a0e23416e3d0a8bf7e2731cefa8ac1782453c6d4c74f5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "d968710fbf89a983a36a2dd800707ab633f6f1907d553c3686c77023018bceb5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "7a4e179b332486e6040ee276ef42ce5a80d156b0cf07287af51daea7b81bbee7",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "40d90df4a665260e7661d6d9568d9866dd33ad5bee60e5ea4bc4f7e27fc5fdd5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "50a010ea4046cbe61d5a0e23416e3d0a8bf7e2731cefa8ac1782453c6d4c74f5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "d968710fbf89a983a36a2dd800707ab633f6f1907d553c3686c77023018bceb5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "7a4e179b332486e6040ee276ef42ce5a80d156b0cf07287af51daea7b81bbee7",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "40d90df4a665260e7661d6d9568d9866dd33ad5bee60e5ea4bc4f7e27fc5fdd5",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "29cdbf12df2b4fbd4c4dcfecaae5dfb4211ff38df6473a4b6481d75182b45829",
+    "renderSha256": "553eaa048e16b24b37760e7d3b9650a4067975c75d6419eba5baa1958dab0806",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "45f1a1d22b81ce08662d9aac50220cfe11fb95337ccdaa269e4e2c666301497a",
+    "renderSha256": "a6470a1294ee880bcc6e467ce2896a399aefa12f12494d566a303d32666f5519",
+    "modelHash": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "REAR",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "OPEN",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3"
+     ],
+     "holes": [
+      "opening-rear-1",
+      "opening-rear-2",
+      "opening-rear-3"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "OPEN",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [],
+     "holes": [
+      "opening-front-1",
+      "opening-front-3",
+      "opening-front-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "REAR",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "OPEN",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3"
+     ],
+     "holes": [
+      "opening-rear-1",
+      "opening-rear-2",
+      "opening-rear-3"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p10/o3 (head) \u2192 HELD_BY_DEPENDENCY"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d4",
+    "side": "FRONT",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "NEEDS_CLOSE_UP",
+    "state": "OPEN",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [],
+     "holes": [
+      "opening-front-1",
+      "opening-front-3",
+      "opening-front-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d5",
+    "side": "LEFT",
+    "feature": "OTHER",
+    "meaning": "MISSING",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": null,
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": [
+      "opening-left-1",
+      "opening-left-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 2,
+    "id": "d1",
+    "side": "FRONT",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 0.03700000000000081,
+     "alongTo": 7.9590000000000005,
+     "yFrom": -0.051000000000000004,
+     "yTo": 7.99
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [],
+     "holes": [
+      "opening-front-1",
+      "opening-front-3"
+     ]
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": [
+     "supplement el-p12 \u2192 NO_IMPROVEMENT"
+    ]
+   },
+   {
+    "round": 2,
+    "id": "d2",
+    "side": "REAR",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "NOT_IMPROVED",
+    "region": {
+     "alongFrom": 4.171000000000001,
+     "alongTo": 12.093000000000002,
+     "yFrom": -0.051000000000000004,
+     "yTo": 7.99
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3"
+     ],
+     "holes": [
+      "opening-rear-2",
+      "opening-rear-3"
+     ]
+    },
+    "after": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": "4c1b1970aaeb73208d27fb4ce55b0b693ea56b42636823a9b108079cb81e1d6c",
+    "addressedBy": [
+     "supplement el-p10 \u2192 APPLIED"
+    ]
+   },
+   {
+    "round": 2,
+    "id": "d3",
+    "side": "FRONT",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 4.032000000000001,
+     "alongTo": 6.6160000000000005,
+     "yFrom": 3.91,
+     "yTo": 6.12
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p12/o4 (head) \u2192 HELD_BY_DEPENDENCY",
+     "supplement el-p12 \u2192 NO_IMPROVEMENT"
+    ]
+   },
+   {
+    "round": 2,
+    "id": "d4",
+    "side": "REAR",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "WRONG_SHAPE",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "IMPROVED",
+    "region": {
+     "alongFrom": 4.851000000000001,
+     "alongTo": 11.430000000000001,
+     "yFrom": 3.06,
+     "yTo": 7.0040000000000004
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3"
+     ],
+     "holes": [
+      "opening-rear-3"
+     ]
+    },
+    "after": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "modelBefore": "44b280752a3ab72895cc3a045529bfe470f3e35a6dd56c955f60560366bb7a43",
+    "modelAfter": "4c1b1970aaeb73208d27fb4ce55b0b693ea56b42636823a9b108079cb81e1d6c",
+    "addressedBy": [
+     "el-p10/o2 (head) [defect-d4] \u2192 COMPILE_CONFLICT",
+     "el-p10/o3 (head) [defect-d4] \u2192 COMPILE_CONFLICT",
+     "supplement el-p10 \u2192 APPLIED"
+    ]
+   }
+  ],
+  "supplements": [
+   {
+    "round": 21,
+    "elevation": "el-p12",
+    "side": "FRONT",
+    "answer": "REJECTED",
+    "code": "NO_IMPROVEMENT",
+    "effect": "the model changed but the region of d1 (UNCHANGED), d3 (UNCHANGED) measures no better"
+   },
+   {
+    "round": 22,
+    "elevation": "el-p10",
+    "side": "REAR",
+    "answer": "APPLIED",
+    "code": null,
+    "effect": "model 44b280752a \u2192 4c1b1970aa; failing checks 0 \u2192 0; held or refused 11 \u2192 9; meshes 70 \u2192 74"
+   }
+  ],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the rear side",
+    "source": "elevation el-p10 reads a gable frame (rear-frame)",
+    "local": "frame of 1 piece(s), 1.01 m deep, 3.85\u20137.95 m",
+    "described": "frame of 2 piece(s), 1.00 m deep, 4.46\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "loggia on the rear side",
+    "source": "elevation el-p10 reads a recessed loggia (rear-loggia)",
+    "local": "1 recessed slab(s) without supports",
+    "described": "1 recessed slab(s) without supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "no supports on the rear side",
+    "source": "elevation el-p10 draws rear-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side",
+    "source": "elevation el-p10 reads 2 glazing(s) whose head follows the roof (o2, o3)",
+    "local": "2 hole(s) with a raked or pointed head",
+    "described": "2 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "gable frame on the front side",
+    "source": "elevation el-p12 reads a gable frame (front-frame)",
+    "local": "frame of 1 piece(s), 0.99 m deep, 3.84\u20137.95 m",
+    "described": "frame of 2 piece(s), 0.96 m deep, 4.46\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "no supports on the front side",
+    "source": "elevation el-p12 draws front-terrace without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side",
+    "source": "elevation el-p12 reads 1 glazing(s) whose head follows the roof (o4)",
+    "local": "1 hole(s) with a raked or pointed head",
+    "described": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 132.6 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "132.6 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "85 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 1
+ },
+ "L1_final_replay": {
+  "modelFromDescription": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b",
+  "accepted": "LOCAL",
+  "decisionCode": "LOCAL_MEETS_SOURCE",
+  "partial": false,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 2,
+   "proposals": 4,
+   "applied": 2,
+   "verdicts": [
+    "DIFFERS",
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+   "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "abb68a9b01fbbf92d63f978bd73aa2a91357772894a65972c0367b6f6f2e2dc7",
+    "modelHash": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "f8ae66ba5ad4b95c8fc778d244953cd3e9b8d5d811dac13e57424cfa84defc05",
+    "modelHash": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "0747b2b2f684a2c3d4b9edd95a8b33712b40067d6c816e19e668e86610f93e78",
+    "modelHash": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "8888ba07bb408358a99ad23f58c4060a137b9a334c2121cfd4b31dfca7af75cf",
+    "modelHash": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0"
+   },
+   {
+    "round": 2,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "4c1d0e9cabc683aacef953104923ff3df561676f510ab41612b5fa53b3a2d1b5",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "e13a2e2bbfea610d39023ac5d3417e1f8023089a19f2f6656217e95206a67627",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   },
+   {
+    "round": 2,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "caf949ca48e1550d80a35cb0035af16fb784f0780795600dc292dfbd16a924dc",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "e3f7d58b8602e0b2dc3300e15742bf5bec3365a4ab92b03122a374eecaa17aa5",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "29cdbf12df2b4fbd4c4dcfecaae5dfb4211ff38df6473a4b6481d75182b45829",
+    "renderSha256": "858c014990fdcb270f740ba2ab7f4b956f0ce30b3d4221014ad4f9f45e686e57",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "45f1a1d22b81ce08662d9aac50220cfe11fb95337ccdaa269e4e2c666301497a",
+    "renderSha256": "83ec452dee577bea4453f3fe66722ef3448640b31b7d10ed5796b50fdae77b99",
+    "modelHash": "b86e9c31bb3da4010476be92603ce8b33b09356796c81f2f549c4edfa7e50b6b"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "REAR",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "MEASURED_PRESENT",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-1",
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "GABLE_FRAME",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "MEASURED_PRESENT",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-1",
+      "opening-front-2",
+      "opening-front-3",
+      "opening-front-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "REAR",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "MEASURED_PRESENT",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-3",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-1",
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d4",
+    "side": "FRONT",
+    "feature": "GLAZING_SHAPE",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "NEEDS_CLOSE_UP",
+    "state": "MEASURED_PRESENT",
+    "region": null,
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-1",
+      "opening-front-2",
+      "opening-front-3",
+      "opening-front-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d5",
+    "side": "LEFT",
+    "feature": "OTHER",
+    "meaning": "MISSING",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": null,
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": [
+      "opening-left-1",
+      "opening-left-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "3d505b22b34fde8f62887366a922db2f83d2e6dde5f6286015ef63cb186461a0",
+    "modelAfter": null,
+    "addressedBy": []
+   }
+  ],
+  "supplements": [],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the rear side",
+    "source": "elevation el-p10 reads a gable frame (rear-frame)",
+    "local": "frame of 1 piece(s), 1.01 m deep, 3.85\u20137.95 m",
+    "described": "frame of 2 piece(s), 1.00 m deep, 4.48\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "loggia on the rear side",
+    "source": "elevation el-p10 reads a recessed loggia (rear-loggia)",
+    "local": "1 recessed slab(s) without supports",
+    "described": "1 recessed slab(s) without supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "no supports on the rear side",
+    "source": "elevation el-p10 draws rear-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side",
+    "source": "elevation el-p10 reads 2 glazing(s) whose head follows the roof (o2, o3)",
+    "local": "2 hole(s) with a raked or pointed head",
+    "described": "2 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "gable frame on the front side",
+    "source": "elevation el-p12 reads a gable frame (front-frame)",
+    "local": "frame of 1 piece(s), 0.99 m deep, 3.84\u20137.95 m",
+    "described": "frame of 2 piece(s), 0.96 m deep, 4.48\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "no supports on the front side",
+    "source": "elevation el-p12 draws front-terrace without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side",
+    "source": "elevation el-p12 reads 1 glazing(s) whose head follows the roof (o4)",
+    "local": "1 hole(s) with a raked or pointed head",
+    "described": "1 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 132.6 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "132.6 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "100 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": true,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 0
+ },
+ "L2_live": {
+  "modelFromDescription": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+  "accepted": "DESCRIBED",
+  "decisionCode": "DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS",
+  "partial": false,
+  "quality": "FEATURES_PARTIAL",
+  "qualityWhy": "the delivered model (DESCRIBED) keeps 5 review defect(s) open",
+  "spentUsd": 0.244508,
+  "review": {
+   "rounds": 1,
+   "proposals": 6,
+   "applied": 0,
+   "verdicts": [
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "468b656eb693116e722b8e9d789e3381fb5c4d653cd13ca54852f38a6c27f07a",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "0f2e8bd99aefd523373412b6edc8376f872096bccbeb1dc526692d4dd33d4174",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "15e660cd34568adfceb44bcc43a8e8a0291ec02eac5d6c03a098e0c2d5a7ef14",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "a44899359e3ebb33dc708a49e839ce78b6580978c2583baad3b82bd256d8fe44",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "FRONT",
+    "feature": "BALCONY",
+    "meaning": "WRONG_SHAPE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 3.2750000000000012,
+     "alongTo": 12.166,
+     "yFrom": 2.7271910000000004,
+     "yTo": 4.172191000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": false,
+       "posts": 0,
+       "projectsM": 1.495
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p12/front-balcony \u2192 COMPILE_CONFLICT",
+     "supplement el-p12 \u2192 NOT_CONSUMED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "OPENING",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "OPEN",
+    "region": {
+     "alongFrom": 1.490000000000001,
+     "alongTo": 2.476,
+     "yFrom": 0.007191000000000032,
+     "yTo": 2.217191
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "FRONT",
+    "feature": "GABLE_FRAME",
+    "meaning": "WRONG_SIZE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 0.011000000000001009,
+     "alongTo": 7.916000000000001,
+     "yFrom": -0.07780899999999998,
+     "yTo": 7.963191000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": false,
+       "posts": 0,
+       "projectsM": 1.495
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-2",
+      "opening-front-3"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p12/front-frame \u2192 NOT_CONSUMED",
+     "supplement el-p12 \u2192 NOT_CONSUMED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d4",
+    "side": "REAR",
+    "feature": "GABLE_FRAME",
+    "meaning": "WRONG_SHAPE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 4.1530000000000005,
+     "alongTo": 12.075000000000001,
+     "yFrom": -0.051000000000000004,
+     "yTo": 7.99
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-2",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p10/rear-frame \u2192 NO_IMPROVEMENT",
+     "supplement el-p10 \u2192 NO_IMPROVEMENT"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d5",
+    "side": "REAR",
+    "feature": "BALCONY",
+    "meaning": "EXTRA",
+    "weight": "MAJOR",
+    "fix": "UNRESOLVED",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": -0.04600000000000026,
+     "alongTo": 3.558,
+     "yFrom": 2.754,
+     "yTo": 4.199000000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "supplement el-p10 \u2192 NO_IMPROVEMENT"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d6",
+    "side": "RIGHT",
+    "feature": "BALCONY",
+    "meaning": "EXTRA",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": {
+     "alongFrom": -1.5359999999999996,
+     "alongTo": 1.048000000000001,
+     "yFrom": 2.8560000000000003,
+     "yTo": 4.216
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d7",
+    "side": "LEFT",
+    "feature": "OTHER",
+    "meaning": "MISSING",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": {
+     "alongFrom": 4.75,
+     "alongTo": 10.989,
+     "yFrom": -0.017,
+     "yTo": 2.2950000000000004
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": [
+      "opening-left-1",
+      "opening-left-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   }
+  ],
+  "supplements": [
+   {
+    "round": 11,
+    "elevation": "el-p12",
+    "side": "FRONT",
+    "answer": "REJECTED",
+    "code": "NOT_CONSUMED",
+    "effect": "the built model is the same with it: the correction reached no geometry"
+   },
+   {
+    "round": 12,
+    "elevation": "el-p10",
+    "side": "REAR",
+    "answer": "REJECTED",
+    "code": "NO_IMPROVEMENT",
+    "effect": "the model changed but the region of d4 (UNCHANGED) measures no better"
+   }
+  ],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the rear side",
+    "source": "elevation el-p10 reads a gable frame (rear-frame)",
+    "local": "frame of 1 piece(s), 1.01 m deep, 3.85\u20137.95 m",
+    "described": "frame of 2 piece(s), 1.02 m deep, 4.20\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "loggia on the rear side",
+    "source": "elevation el-p10 reads a recessed loggia (rear-loggia)",
+    "local": "1 recessed slab(s) without supports",
+    "described": "1 recessed slab(s) without supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "no supports on the rear side",
+    "source": "elevation el-p10 draws rear-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side",
+    "source": "elevation el-p10 reads 2 glazing(s) whose head follows the roof (o2, o3)",
+    "local": "2 hole(s) with a raked or pointed head",
+    "described": "2 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "gable frame on the front side",
+    "source": "elevation el-p12 reads a gable frame (front-frame)",
+    "local": "frame of 1 piece(s), 0.99 m deep, 3.84\u20137.95 m",
+    "described": "frame of 2 piece(s), 0.30 m deep, 4.20\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "no supports on the front side",
+    "source": "elevation el-p12 draws front-balcony without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side",
+    "source": "elevation el-p12 reads 1 glazing(s) whose head follows the roof (o4)",
+    "local": "1 hole(s) with a raked or pointed head",
+    "described": "1 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 130.8 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "130.8 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "84 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 0
+ },
+ "L2_final_replay": {
+  "modelFromDescription": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b",
+  "accepted": "LOCAL",
+  "decisionCode": "BOTH_CONTRADICT",
+  "partial": true,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 1,
+   "proposals": 7,
+   "applied": 2,
+   "verdicts": [
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b",
+   "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "9bf22e6fa1df8aa35dddf573da1db2efacebf2c03b06b630d373c369e38746ec",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "130702b32cccc5a732ced6ca27e00faedc08aa0908cc00e9947d4af644fa2cb5",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "08398c49577a39066545e84423dd286d350c7a065db372bec5bebfc021475a3b",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "9d14f7ca3a495ddb2816b4c20010758642bdfd4983df7b19a8f10f3d95c3c86d",
+    "modelHash": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83"
+   },
+   {
+    "round": 2,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "e94ca8eeca52d54daab118f1ed621725898b2d331980aa37d404b84a9c17b2db",
+    "modelHash": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "d852fa5340d850d1889bcc526b34d897cc227fc8a12f37d6674391b4325186ca",
+    "modelHash": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b"
+   },
+   {
+    "round": 2,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "16912f29c84fe39b68eb2bab17bca4a5cea6a03c3b7dc89a867781b049d04c59",
+    "modelHash": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "5be6b562d438852a02e613810f614c4b56d2eb2be0110d29a9264361dd710197",
+    "modelHash": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "FRONT",
+    "feature": "BALCONY",
+    "meaning": "WRONG_SHAPE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 3.2750000000000012,
+     "alongTo": 12.166,
+     "yFrom": 2.7271910000000004,
+     "yTo": 4.172191000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": false,
+       "posts": 0,
+       "projectsM": 1.495
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p12/front-balcony \u2192 COMPILE_CONFLICT",
+     "supplement el-p12 \u2192 NOT_CONSUMED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "OPENING",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "OPEN",
+    "region": {
+     "alongFrom": 1.490000000000001,
+     "alongTo": 2.476,
+     "yFrom": 0.007191000000000032,
+     "yTo": 2.217191
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "FRONT",
+    "feature": "GABLE_FRAME",
+    "meaning": "WRONG_SIZE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 0.011000000000001009,
+     "alongTo": 7.916000000000001,
+     "yFrom": -0.07780899999999998,
+     "yTo": 7.963191000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-front-2",
+       "recessed": false,
+       "posts": 0,
+       "projectsM": 1.495
+      }
+     ],
+     "shaped": [
+      "opening-front-2"
+     ],
+     "holes": [
+      "opening-front-2",
+      "opening-front-3"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p12/front-frame \u2192 NOT_CONSUMED",
+     "supplement el-p12 \u2192 NOT_CONSUMED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d4",
+    "side": "REAR",
+    "feature": "GABLE_FRAME",
+    "meaning": "WRONG_SHAPE",
+    "weight": "KEY",
+    "fix": "CORRECTION",
+    "state": "NOT_MEASURABLE",
+    "region": {
+     "alongFrom": 4.1530000000000005,
+     "alongTo": 12.075000000000001,
+     "yFrom": -0.051000000000000004,
+     "yTo": 7.99
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-2",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "after": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [
+      {
+       "id": "balcony-rear-1",
+       "recessed": true,
+       "posts": 0,
+       "projectsM": 0
+      }
+     ],
+     "shaped": [
+      "opening-rear-2",
+      "opening-rear-4"
+     ],
+     "holes": [
+      "opening-rear-2",
+      "opening-rear-3",
+      "opening-rear-4"
+     ]
+    },
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b",
+    "addressedBy": [
+     "el-p10/rear-frame \u2192 APPLIED",
+     "supplement el-p10 \u2192 APPLIED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d5",
+    "side": "REAR",
+    "feature": "BALCONY",
+    "meaning": "EXTRA",
+    "weight": "MAJOR",
+    "fix": "UNRESOLVED",
+    "state": "NOT_MEASURABLE",
+    "region": {
+     "alongFrom": -0.04600000000000026,
+     "alongTo": 3.558,
+     "yFrom": 2.754,
+     "yTo": 4.199000000000001
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": "cba15110088e4cd45439bfffeda43fa50102080233ad737835f716664f2f4e5b",
+    "addressedBy": [
+     "supplement el-p10 \u2192 APPLIED"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d6",
+    "side": "RIGHT",
+    "feature": "BALCONY",
+    "meaning": "EXTRA",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": {
+     "alongFrom": -1.5359999999999996,
+     "alongTo": 1.048000000000001,
+     "yFrom": 2.8560000000000003,
+     "yTo": 4.216
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   },
+   {
+    "round": 1,
+    "id": "d7",
+    "side": "LEFT",
+    "feature": "OTHER",
+    "meaning": "MISSING",
+    "weight": "MINOR",
+    "fix": "UNRESOLVED",
+    "state": "UNRESOLVED",
+    "region": {
+     "alongFrom": 4.75,
+     "alongTo": 10.989,
+     "yFrom": -0.017,
+     "yTo": 2.2950000000000004
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": [
+      "opening-left-1",
+      "opening-left-2"
+     ]
+    },
+    "after": null,
+    "modelBefore": "f4eebf97dbcc8e044b308a003ea766847e8f50089eb63fbf197efd7730906e83",
+    "modelAfter": null,
+    "addressedBy": []
+   }
+  ],
+  "supplements": [
+   {
+    "round": 11,
+    "elevation": "el-p12",
+    "side": "FRONT",
+    "answer": "REJECTED",
+    "code": "NOT_CONSUMED",
+    "effect": "the built model is the same with it: the correction reached no geometry"
+   },
+   {
+    "round": 12,
+    "elevation": "el-p10",
+    "side": "REAR",
+    "answer": "APPLIED",
+    "code": null,
+    "effect": "model 5b4b85e70e \u2192 cba1511008; failing checks 0 \u2192 0; held or refused 10 \u2192 10; meshes 75 \u2192 75"
+   }
+  ],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the rear side",
+    "source": "elevation el-p10 reads a gable frame (rear-frame)",
+    "local": "frame of 1 piece(s), 1.01 m deep, 3.85\u20137.95 m",
+    "described": "frame of 2 piece(s), 1.02 m deep, 4.21\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "loggia on the rear side",
+    "source": "elevation el-p10 reads a recessed loggia (rear-loggia)",
+    "local": "1 recessed slab(s) without supports",
+    "described": "1 recessed slab(s) without supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "no supports on the rear side",
+    "source": "elevation el-p10 draws rear-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side",
+    "source": "elevation el-p10 reads 2 glazing(s) whose head follows the roof (o2, o3)",
+    "local": "2 hole(s) with a raked or pointed head",
+    "described": "2 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "gable frame on the front side",
+    "source": "elevation el-p12 reads a gable frame (front-frame)",
+    "local": "frame of 1 piece(s), 0.99 m deep, 3.84\u20137.95 m",
+    "described": "frame of 2 piece(s), 0.30 m deep, 4.20\u20137.95 m",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "no supports on the front side",
+    "source": "elevation el-p12 draws front-balcony without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side",
+    "source": "elevation el-p12 reads 1 glazing(s) whose head follows the roof (o4)",
+    "local": "1 hole(s) with a raked or pointed head",
+    "described": "1 hole(s) with a raked or pointed head",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "loggia on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a recessed loggia on the front side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "balcony balcony-front-2 1.50 m out",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 130.8 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "130.8 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "84 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 0
+ },
+ "ALASKA_live": {
+  "modelFromDescription": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+  "accepted": "DESCRIBED",
+  "decisionCode": "BOTH_CONTRADICT",
+  "partial": true,
+  "quality": "FEATURES_PARTIAL",
+  "qualityWhy": "the delivered model (DESCRIBED) fails 2 characteristic feature(s) the source shows and keeps 3 review defect(s) open",
+  "spentUsd": 0.172492,
+  "review": {
+   "rounds": 1,
+   "proposals": 4,
+   "applied": 0,
+   "verdicts": [
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p3",
+    "registered": true,
+    "sourceSha256": "603cc4417f72a00c03002ee7de5e56c001935504ed3c5907ffe008d3176b3821",
+    "renderSha256": "2fbcd6ae3f333a49635568b3af8ac6ccee4d601d85be4c18a637831407d44047",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p4",
+    "registered": true,
+    "sourceSha256": "08c855725aaeae5dd52c907281b585b6143946eb92b8ca5929feaddf33337a2c",
+    "renderSha256": "59111ef3c7346efe0932e134657bfc440e98c56c680dc0e66d6ebe5dc23cea0f",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p5",
+    "registered": true,
+    "sourceSha256": "1d97c4a77d94fe07998efc076c831fb03203fd6d03039160af98c59ced01fc96",
+    "renderSha256": "99eb51edc6e17eac0e3002ca539af1e0fd3a20f49bb63b809adf9e3a03317907",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p6",
+    "registered": true,
+    "sourceSha256": "3fbfcd607d4dde0f6dba2a3e0017a7b22911420f78a2f9e1cfed7d8c914c576f",
+    "renderSha256": "59714450487b7287f3ce441277ac2c8c8862f682d4de4d9da730e6e4286803b8",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "REAR",
+    "feature": "SUPPORTS",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 16.656964285714285,
+     "alongTo": 18.915535714285713,
+     "yFrom": -0.14115,
+     "yTo": 2.823225
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p3/terrace-roof \u2192 SOURCE_UNKNOWN",
+     "supplement el-p3 \u2192 SOURCE_UNKNOWN"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "SUPPORTS",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": -2.168241071428571,
+     "alongTo": 0.005910714285714214,
+     "yFrom": -0.08405000000000039,
+     "yTo": 2.8615749999999998
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p4/terrace-roof-front \u2192 SOURCE_UNKNOWN",
+     "supplement el-p4 \u2192 SOURCE_UNKNOWN"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "LEFT",
+    "feature": "LOGGIA_OR_RECESS",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "NEEDS_CLOSE_UP",
+    "state": "OPEN",
+    "region": {
+     "alongFrom": -0.003999999999999976,
+     "alongTo": 7.521,
+     "yFrom": -0.084,
+     "yTo": 5.096
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [],
+     "shaped": [],
+     "holes": [
+      "opening-left-1"
+     ]
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": []
+   }
+  ],
+  "supplements": [
+   {
+    "round": 11,
+    "elevation": "el-p3",
+    "side": "REAR",
+    "answer": "REJECTED",
+    "code": "SOURCE_UNKNOWN",
+    "effect": "not built: el-p3/s2: a canopy on an elevation without a roofed open zone traced under it on the plan: how far it projects is not known"
+   },
+   {
+    "round": 12,
+    "elevation": "el-p4",
+    "side": "FRONT",
+    "answer": "REJECTED",
+    "code": "SOURCE_UNKNOWN",
+    "effect": "not built: el-p4/s3: a loggia where the plan shows no recess: how deep it goes into the house is not known, and it is not drawn as a projecting balcony"
+   }
+  ],
+  "findings": [
+   {
+    "fact": "overall depth",
+    "source": "printed \"764\" = 7.64 m",
+    "local": "17.24 m",
+    "described": "7.64 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "overall width",
+    "source": "printed \"1724\" = 17.24 m",
+    "local": "7.20 m",
+    "described": "17.24 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "6 opening(s) on registered elevation el-p4",
+    "local": "0 of 6 there, 1 not on the elevation",
+    "described": "6 of 6 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p3",
+    "local": "0 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "1 opening(s) on registered elevation el-p6",
+    "local": "0 of 1 there, 4 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the left side",
+    "source": "elevation el-p6 reads a gable frame (gable-frame)",
+    "local": "no frame on that gable (plain roof edge)",
+    "described": "frame of 2 piece(s), 0.30 m deep, 2.84\u20135.98 m",
+    "localOk": false,
+    "describedOk": true,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "loggia on the left side",
+    "source": "elevation el-p6 reads a recessed loggia (terrace-loggia)",
+    "local": "no balcony or loggia",
+    "described": "no balcony or loggia",
+    "localOk": false,
+    "describedOk": false,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "no supports on the left side",
+    "source": "elevation el-p6 draws terrace-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "shaped glazing on the left side",
+    "source": "elevation el-p6 reads 1 glazing(s) whose head follows the roof (o1)",
+    "local": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "described": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": false,
+    "describedOk": false,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+5,98\" = 5.98 m (printed on 2 pictures; 4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "15.98 m",
+    "described": "5.98 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 131.7 m\u00b2",
+    "local": "124.1 m\u00b2",
+    "described": "131.7 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "27 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 0
+ },
+ "ALASKA_final_replay": {
+  "modelFromDescription": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+  "accepted": "DESCRIBED",
+  "decisionCode": "BOTH_CONTRADICT",
+  "partial": true,
+  "quality": "FEATURES_PARTIAL",
+  "qualityWhy": "the delivered model (DESCRIBED) fails 1 characteristic feature(s) the source shows and keeps 3 review defect(s) open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 1,
+   "proposals": 4,
+   "applied": 0,
+   "verdicts": [
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p3",
+    "registered": true,
+    "sourceSha256": "603cc4417f72a00c03002ee7de5e56c001935504ed3c5907ffe008d3176b3821",
+    "renderSha256": "2fbcd6ae3f333a49635568b3af8ac6ccee4d601d85be4c18a637831407d44047",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p4",
+    "registered": true,
+    "sourceSha256": "08c855725aaeae5dd52c907281b585b6143946eb92b8ca5929feaddf33337a2c",
+    "renderSha256": "59111ef3c7346efe0932e134657bfc440e98c56c680dc0e66d6ebe5dc23cea0f",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p5",
+    "registered": true,
+    "sourceSha256": "1d97c4a77d94fe07998efc076c831fb03203fd6d03039160af98c59ced01fc96",
+    "renderSha256": "99eb51edc6e17eac0e3002ca539af1e0fd3a20f49bb63b809adf9e3a03317907",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   },
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p6",
+    "registered": true,
+    "sourceSha256": "3fbfcd607d4dde0f6dba2a3e0017a7b22911420f78a2f9e1cfed7d8c914c576f",
+    "renderSha256": "59714450487b7287f3ce441277ac2c8c8862f682d4de4d9da730e6e4286803b8",
+    "modelHash": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19"
+   }
+  ],
+  "defects": [
+   {
+    "round": 1,
+    "id": "d1",
+    "side": "REAR",
+    "feature": "SUPPORTS",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": 16.656964285714285,
+     "alongTo": 18.915535714285713,
+     "yFrom": -0.14115,
+     "yTo": 2.823225
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p3/terrace-roof \u2192 SOURCE_UNKNOWN",
+     "supplement el-p3 \u2192 SOURCE_UNKNOWN"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d2",
+    "side": "FRONT",
+    "feature": "SUPPORTS",
+    "meaning": "MISSING",
+    "weight": "MAJOR",
+    "fix": "CORRECTION",
+    "state": "SUPPLEMENT_ASKED",
+    "region": {
+     "alongFrom": -2.168241071428571,
+     "alongTo": 0.005910714285714214,
+     "yFrom": -0.08405000000000039,
+     "yTo": 2.8615749999999998
+    },
+    "before": {
+     "frame": false,
+     "framePieces": 0,
+     "balconies": [],
+     "shaped": [],
+     "holes": []
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": [
+     "el-p4/terrace-roof-front \u2192 SOURCE_UNKNOWN",
+     "supplement el-p4 \u2192 SOURCE_UNKNOWN"
+    ]
+   },
+   {
+    "round": 1,
+    "id": "d3",
+    "side": "LEFT",
+    "feature": "LOGGIA_OR_RECESS",
+    "meaning": "MISSING",
+    "weight": "KEY",
+    "fix": "NEEDS_CLOSE_UP",
+    "state": "OPEN",
+    "region": {
+     "alongFrom": -0.003999999999999976,
+     "alongTo": 7.521,
+     "yFrom": -0.084,
+     "yTo": 5.096
+    },
+    "before": {
+     "frame": true,
+     "framePieces": 2,
+     "balconies": [],
+     "shaped": [
+      "opening-left-1"
+     ],
+     "holes": [
+      "opening-left-1"
+     ]
+    },
+    "after": null,
+    "modelBefore": "4113550306521d440da527bfb22ae21f26367ea1a551d514dfcc459076640f19",
+    "modelAfter": null,
+    "addressedBy": []
+   }
+  ],
+  "supplements": [
+   {
+    "round": 11,
+    "elevation": "el-p3",
+    "side": "REAR",
+    "answer": "REJECTED",
+    "code": "SOURCE_UNKNOWN",
+    "effect": "not built: el-p3/s2: a canopy on an elevation without a roofed open zone traced under it on the plan: how far it projects is not known"
+   },
+   {
+    "round": 12,
+    "elevation": "el-p4",
+    "side": "FRONT",
+    "answer": "REJECTED",
+    "code": "SOURCE_UNKNOWN",
+    "effect": "not built: el-p4/s3: a loggia where the plan shows no recess: how deep it goes into the house is not known, and it is not drawn as a projecting balcony"
+   }
+  ],
+  "findings": [
+   {
+    "fact": "overall depth",
+    "source": "printed \"764\" = 7.64 m",
+    "local": "17.24 m",
+    "described": "7.64 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "overall width",
+    "source": "printed \"1724\" = 17.24 m",
+    "local": "7.20 m",
+    "described": "17.24 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "6 opening(s) on registered elevation el-p4",
+    "local": "0 of 6 there, 1 not on the elevation",
+    "described": "6 of 6 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p3",
+    "local": "0 of 4 there, 0 not on the elevation",
+    "described": "4 of 4 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "1 opening(s) on registered elevation el-p6",
+    "local": "0 of 1 there, 4 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the left side",
+    "source": "elevation el-p6 reads a gable frame (gable-frame)",
+    "local": "no frame on that gable (plain roof edge)",
+    "described": "frame of 2 piece(s), 0.30 m deep, 2.84\u20135.98 m",
+    "localOk": false,
+    "describedOk": true,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "loggia on the left side",
+    "source": "elevation el-p6 reads a recessed loggia (terrace-loggia)",
+    "local": "no balcony or loggia",
+    "described": "no balcony or loggia",
+    "localOk": false,
+    "describedOk": false,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "no supports on the left side",
+    "source": "elevation el-p6 draws terrace-loggia without supports",
+    "local": "no free supports",
+    "described": "no free supports",
+    "localOk": true,
+    "describedOk": true,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "shaped glazing on the left side",
+    "source": "elevation el-p6 reads 1 glazing(s) whose head follows the roof (o1)",
+    "local": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "described": "1 hole(s) with a raked or pointed head",
+    "localOk": false,
+    "describedOk": true,
+    "featureSide": "LEFT"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+5,98\" = 5.98 m (printed on 2 pictures; 4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "15.98 m",
+    "described": "5.98 m",
+    "localOk": false,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 131.7 m\u00b2",
+    "local": "124.1 m\u00b2",
+    "described": "131.7 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "27 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 0
+ },
+ "M1_answers_final": {
+  "modelFromDescription": "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc",
+  "accepted": "LOCAL",
+  "decisionCode": "LOCAL_MEETS_SOURCE",
+  "partial": false,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 1,
+   "proposals": 0,
+   "applied": 0,
+   "verdicts": [
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "cb59c2454521aca0aecd33ecad121b9d6cd864c11abd67b70338ac72f7134bc7",
+    "modelHash": "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "16e2bcce820dca95491b648fdfc678187d2bffbc63b1cab8f540ad176320fde0",
+    "modelHash": "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "a477ec9b995630bf7a81aabf60f9fde724d10858b7aeae54d42185563a5f473d",
+    "modelHash": "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "6286ad4bbb8003cce45a7ce28535b14171edb6102f59db5eae3f56a122c28590",
+    "modelHash": "d5bc7c1e044a32cf0fabfc1aeac276f3cd9fa752cda34bdbc53fbd04faa58dbc"
+   }
+  ],
+  "defects": [],
+  "supplements": [],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the front side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 1 glazing(s) with a raked or pointed head on the front side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "gable frame on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the rear side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 2 glazing(s) with a raked or pointed head on the rear side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 2 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 132.6 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "132.6 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "100 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": true,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 2
+ },
+ "M2_answers_final": {
+  "modelFromDescription": "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d",
+  "accepted": "LOCAL",
+  "decisionCode": "BOTH_CONTRADICT",
+  "partial": true,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 2,
+   "proposals": 6,
+   "applied": 3,
+   "verdicts": [
+    "DIFFERS",
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "57385c8ee93964a6f3b934f04760949560586f3ea267a25e51dec146e6649c88",
+   "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "8892c808e8d2b887333b9f75bd57f311fc5e243a67b9d017098eeb0d49d89b2f",
+    "modelHash": "57385c8ee93964a6f3b934f04760949560586f3ea267a25e51dec146e6649c88"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "29793ccecd6944b9ec11504845effcc9663756d22c0e81cc8028c35b00932bf6",
+    "modelHash": "57385c8ee93964a6f3b934f04760949560586f3ea267a25e51dec146e6649c88"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "3bd8f78e26edc6d4016b768ee61cfd9923e38e85f3af5b28fc02763b715ba618",
+    "modelHash": "57385c8ee93964a6f3b934f04760949560586f3ea267a25e51dec146e6649c88"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "a5d2552e09c3b104d33b8c7046de4b2948175adc5b56d6e5eed8abb068fdbc76",
+    "modelHash": "57385c8ee93964a6f3b934f04760949560586f3ea267a25e51dec146e6649c88"
+   },
+   {
+    "round": 2,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "8892c808e8d2b887333b9f75bd57f311fc5e243a67b9d017098eeb0d49d89b2f",
+    "modelHash": "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "6234947bafeda9a405acb4577112bb35dcf4e5ce4a716c4972a1aa7b00a90a5e",
+    "modelHash": "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d"
+   },
+   {
+    "round": 2,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "53ce8ba67269e448701a6ac62a15f16b8a7131b51033bae3735f6d64a7459caa",
+    "modelHash": "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "8113b5e53970417fa8ed205c73d68abad25ddc51bfcc08372993368d2a38894e",
+    "modelHash": "580dbcb6325b70dad799f1087abd33f72584612936e6bc71639cc009d7535e4d"
+   }
+  ],
+  "defects": [],
+  "supplements": [],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "2 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": false
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the front side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "loggia on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a recessed loggia on the front side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "balcony balcony-front-2 1.50 m out on 2 post(s)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 1 glazing(s) with a raked or pointed head on the front side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "gable frame on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the rear side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 2 glazing(s) with a raked or pointed head on the rear side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 2 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 130.8 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "130.8 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "84 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": false,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 2
+ },
+ "M3_answers_final": {
+  "modelFromDescription": "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88",
+  "accepted": "LOCAL",
+  "decisionCode": "LOCAL_MEETS_SOURCE",
+  "partial": false,
+  "quality": "FEATURES_CHECKED",
+  "qualityWhy": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open",
+  "spentUsd": 0,
+  "review": {
+   "rounds": 2,
+   "proposals": 7,
+   "applied": 3,
+   "verdicts": [
+    "DIFFERS",
+    "DIFFERS"
+   ]
+  },
+  "sceneUsedInReview": [
+   "4cacc84310987a8efff2e52609340872999187f509f9f915e3fbe559e72f275d",
+   "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88"
+  ],
+  "pairs": [
+   {
+    "round": 1,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "ca06b49acdc1b2a0e46726483355cb1f01b835a133d6b93f8c796207ed62b7f1",
+    "modelHash": "4cacc84310987a8efff2e52609340872999187f509f9f915e3fbe559e72f275d"
+   },
+   {
+    "round": 1,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "4be54d59d4e3ba455af3802044bbe94abf2f56b8b5e47ccc05dac3dc2ec89d2d",
+    "modelHash": "4cacc84310987a8efff2e52609340872999187f509f9f915e3fbe559e72f275d"
+   },
+   {
+    "round": 1,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "7c8d20c14a52e6bb295adbf09d05988617de01b4cae69461febb5d191869317b",
+    "modelHash": "4cacc84310987a8efff2e52609340872999187f509f9f915e3fbe559e72f275d"
+   },
+   {
+    "round": 1,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "c58c18addc1ef408d8ecf5043cfaf729607c0297f0f26038823f22c3e4a4f32b",
+    "modelHash": "4cacc84310987a8efff2e52609340872999187f509f9f915e3fbe559e72f275d"
+   },
+   {
+    "round": 2,
+    "side": "LEFT",
+    "elevation": "el-p9",
+    "registered": true,
+    "sourceSha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "renderSha256": "035c5793d7ecc90b7f2d9e706da1b01cd4e495add42557eeb722f44adcc73968",
+    "modelHash": "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88"
+   },
+   {
+    "round": 2,
+    "side": "REAR",
+    "elevation": "el-p10",
+    "registered": true,
+    "sourceSha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "renderSha256": "4be54d59d4e3ba455af3802044bbe94abf2f56b8b5e47ccc05dac3dc2ec89d2d",
+    "modelHash": "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88"
+   },
+   {
+    "round": 2,
+    "side": "RIGHT",
+    "elevation": "el-p11",
+    "registered": true,
+    "sourceSha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "renderSha256": "3ef2f21c0b22a3fca21f0e2057d74375e62abf8ba7364bb710e9f1b9f717abe2",
+    "modelHash": "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88"
+   },
+   {
+    "round": 2,
+    "side": "FRONT",
+    "elevation": "el-p12",
+    "registered": true,
+    "sourceSha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "renderSha256": "f14b407f504591012597a677088f906625479710436254ffd63780e590756a4c",
+    "modelHash": "87db04c1d7246025d97211d6792e07d509ec2b53c54efb4812d05be944033c88"
+   }
+  ],
+  "defects": [],
+  "supplements": [],
+  "findings": [
+   {
+    "fact": "overall width",
+    "source": "printed \"1205\" = 12.05 m",
+    "local": "12.05 m",
+    "described": "12.05 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "building height above the terrain",
+    "source": "published 8.27 m (one definition for both: top above \u00b10,00 against the figure and the terrain)",
+    "local": "8.27 m above the printed terrain (-0.32)",
+    "described": "8.27 m above the printed terrain (-0.32)",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the front side",
+    "source": "4 opening(s) on registered elevation el-p12",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the right side",
+    "source": "1 opening(s) on registered elevation el-p11",
+    "local": "1 of 1 there, 0 not on the elevation",
+    "described": "1 of 1 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the rear side",
+    "source": "4 opening(s) on registered elevation el-p10",
+    "local": "4 of 4 there, 0 not on the elevation",
+    "described": "3 of 4 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "openings on the left side",
+    "source": "2 opening(s) on registered elevation el-p9",
+    "local": "2 of 2 there, 1 not on the elevation",
+    "described": "2 of 2 there, 0 not on the elevation",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "gable frame on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the front side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "shaped glazing on the front side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 1 glazing(s) with a raked or pointed head on the front side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 1 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "FRONT"
+   },
+   {
+    "fact": "gable frame on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built a gable frame on the rear side; the description's reading says nothing of it",
+    "local": "built by LOCAL",
+    "described": "no frame on that gable (plain roof edge)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "shaped glazing on the rear side (LOCAL's, unconfirmed)",
+    "source": "LOCAL's reading of the source built 2 glazing(s) with a raked or pointed head on the rear side; the description's reading says nothing of them",
+    "local": "built by LOCAL",
+    "described": "0 of 2 hole(s) with a raked or pointed head (the rest level or not cut)",
+    "localOk": true,
+    "describedOk": false,
+    "featureSide": "REAR"
+   },
+   {
+    "fact": "top of the roof above \u00b10,00",
+    "source": "section mark \"+7,95\" = 7.95 m (4 registered elevation(s) show the ridge at that height at the plan's scale)",
+    "local": "7.95 m",
+    "described": "7.95 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "floor level of storey 1 above \u00b10,00",
+    "source": "the floor mark +3,06 = 3.06 m; a plan of that storey is published",
+    "local": "3.06 m",
+    "described": "3.06 m",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "walled ground outline",
+    "source": "traced outline verified against the printed dimensions: 130.5 m\u00b2",
+    "local": "130.7 m\u00b2",
+    "described": "130.5 m\u00b2",
+    "localOk": true,
+    "describedOk": true
+   },
+   {
+    "fact": "where the walled outline lies",
+    "source": "traced outline verified against the printed dimensions",
+    "local": "99 % of the two outlines coincide, each set against its own front-left corner",
+    "described": "the traced outline",
+    "localOk": true,
+    "describedOk": true
+   }
+  ],
+  "kernelRefusals": 0,
+  "compileErrors": 2
+ }
+}

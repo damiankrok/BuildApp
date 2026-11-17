@@ -246,8 +246,80 @@
    "inputTokens": 19041,
    "outputTokens": 2179,
    "costUsd": 0.059872
+  },
+  {
+   "at": "2026-11-17T16:36:06.909Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading INVENTORY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:329cd29136aae165",
+   "inputTokens": 6993,
+   "outputTokens": 2032,
+   "costUsd": 0.034306
+  },
+  {
+   "at": "2026-11-17T16:36:37.830Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading PLAN",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:7021594427c3c9d2",
+   "inputTokens": 7385,
+   "outputTokens": 3938,
+   "costUsd": 0.05415
+  },
+  {
+   "at": "2026-11-17T16:37:17.877Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:3e3cddf7c34712b6",
+   "inputTokens": 13338,
+   "outputTokens": 5693,
+   "costUsd": 0.083606
+  },
+  {
+   "at": "2026-11-17T16:38:24.455Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:a8979b80a3c7715a",
+   "inputTokens": 16642,
+   "outputTokens": 7970,
+   "costUsd": 0.112984
+  },
+  {
+   "at": "2026-11-17T16:38:53.560Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:3280dbd6ac826aa6",
+   "inputTokens": 19095,
+   "outputTokens": 3461,
+   "costUsd": 0.0728
+  },
+  {
+   "at": "2026-11-17T16:39:02.837Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 59d115e): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:62d06e8ae6967f87",
+   "inputTokens": 3770,
+   "outputTokens": 1189,
+   "costUsd": 0.01943
   }
  ],
- "totalUsd": 1.014214,
- "requests": 20
+ "totalUsd": 1.39149,
+ "requests": 26
 }

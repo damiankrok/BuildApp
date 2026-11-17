@@ -12,6 +12,26 @@
 
 ## Current summary (read first)
 
+- **v3.54.7 (2026-11-17): elevation fidelity and a verified repair** (OWNER brief v3.54.7, Master Plan v3.54.7 at
+  `docs/MASTER_PLAN.md`; revisions `c973a6a` model/review/choice, `c03b7cd` house path 0.3.0, `59d115e` LOCAL protection
+  and one outline definition — final host built from it). Report `stage-reports/SOURCE_TO_MODEL_V3547.md`, OWNER index
+  `stage-reports/README_V3547.md`, hand-off `research/source-to-model/v3547/HANDOFF.md`. What exists now: the gable frame
+  as its own element (verge members from the elevation's band, legs, depth from the plan's returns or a 0.30 m display
+  assumption), outline steps narrower than two walls built as returns, shallow jogs straightened (said), a balcony or
+  loggia over a recess = a slab in it without supports, RAKED / POINTED glazing heads (a triangle's corner cut at 0.30 m,
+  a door under a shaped head glazed); reading contract 0.3.0 (frames, loggias, heads); a scene ruler of characteristic
+  features per side for any model; the review as data — source and render of each side in the elevation's registered
+  frame (hashes), close-ups, defects with region/weight/addressee, corrections judged on their region (`NO_IMPROVEMENT`,
+  `HOST_FIRST`, `MEASURED_PRESENT`), a targeted re-reading after an empty `DIFFERS`, depth shading and edges in the side
+  render; the choice holds LOCAL and the description to the same features (D41), protects features LOCAL built, compares
+  walled floor on both sides; every delivered model carries `QUALITY_*` (D40), kept with the accepted revision. Marcówki
+  GE against the sealed truth (16 features): LOCAL 16/16, H v3.54.6 2/14, H v3.54.7 13/16 (live L1), 11/16 (host read);
+  LOCAL delivered (`LOCAL_MEETS_SOURCE`, `FEATURES_CHECKED`). Alaska: pointed gable glazing and frame built (was a
+  rectangle). Regression (14 houses, saved answers): no decision changed; Kardamon and Pallas better; no lost opening.
+  Host E2E on `59d115e`: ALL CHECKS PASSED (reuse at 0 USD with the same model and quality). Named limits: portal band
+  (not in the reading contract), slab under a return starting above it, Pliszka garage division, reading repeatability;
+  full vitest: 16 environment failures as in v3.54.5. Stage 1.39149 USD (26 requests); books 22.047354 of 24.11036 USD.
+  ANDROID NOT_VERIFIED.
 - **v3.54.6 (2026-11-17): debug from the source to the delivered model, repeatability on Marcówki GE** (OWNER brief
   v3.54.6, Master Plan v3.54.6 at `docs/MASTER_PLAN.md`; revisions `54d31f6` fixes, `f9cb3ef` accepted revisions — host
   built from it). Report `stage-reports/SOURCE_TO_MODEL_V3546.md`, OWNER index `stage-reports/README_V3546.md`, hand-off
