@@ -8,6 +8,8 @@
  *   3. FACADES    the section and the elevations (the plan beside them, the bodies named): level marks with their
  *                 meaning, each body's roof, and per elevation the side, the wall ends, eaves and ridge rows of each
  *                 body, the openings and the roof features.
+ *   3b. FACADES-n (v3.54.5) the program compares the elevation pictures it sent with the ones the answer describes and
+ *                 asks for each undescribed one alone, with the plan: one targeted request per picture, counted.
  *   4. REVIEW     the built model's own views beside the sources: differences, and replacement observation records.
  *
  * The reader reports what is on the pictures, in the pixels of the pictures it was sent. It gives no metres of its own
@@ -21,8 +23,8 @@ import type { HousePicture, SentPicture } from './pictures.js'
 import type { ConsultantModel, ModelTurn } from '../consult/loop.js'
 
 export const HOUSE_READING_CONTRACT = 'buildapp.house-reading'
-export const HOUSE_READING_VERSION = '0.1.0'
-export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1 } as const
+export const HOUSE_READING_VERSION = '0.2.0'
+export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1, /** v3.54.5: targeted requests for elevation pictures the first reading left undescribed — one per picture, never two for one. */ facadeFollowUps: 4 } as const
 
 export type ReadingStep = 'INVENTORY' | 'PLAN' | 'FACADES' | 'REVIEW'
 export type ReadingRecord = { step: ReadingStep; round?: number; model: string; requestId?: string; usage: ModelTurn['usage']; latencyMs?: number; pictures: Array<{ id: string; assetId: string; sentWidth: number; sentHeight: number; sha256: string }>; promptSha256: string; answer: unknown; stopReason?: string }
@@ -193,7 +195,7 @@ export const READING_TOOLS = {
           items: {
             type: 'object',
             additionalProperties: false,
-            required: ['picture', 'side', 'sideHow', 'alternatives', 'mirrored', 'groundY', 'bodies', 'openings', 'features'],
+            required: ['picture', 'side', 'sideHow', 'alternatives', 'mirrored', 'groundY', 'blind', 'limits', 'bodies', 'openings', 'features'],
             properties: {
               picture: { type: 'integer', minimum: 1 },
               side: { ...side, description: 'The side of the house it shows, named by the PLAN (FRONT = the plan edge named as the front). A LEFT elevation is what you see standing left of the house, looking at its left wall.' },
@@ -201,6 +203,8 @@ export const READING_TOOLS = {
               alternatives: { type: 'array', maxItems: 3, items: side, description: 'Other sides it could be, when the match is not certain.' },
               mirrored: { type: 'boolean', description: 'True when the picture shows the house left-right mirrored against the plan.' },
               groundY: { type: 'number', description: 'The row of the terrain line at the building.' },
+              blind: { type: 'boolean', description: 'True ONLY when you looked at this whole elevation and it shows no window, door or gate at all. An empty "openings" list with blind false means you did not list them.' },
+              limits: { type: 'string', enum: ['NONE', 'PARTLY_HIDDEN', 'TOO_SMALL'], description: 'What limits your reading of this picture: PARTLY_HIDDEN when a part of the wall is covered (a tree, a porch, another body) and may hold openings you cannot see; TOO_SMALL when it cannot be read.' },
               bodies: {
                 type: 'array',
                 maxItems: 8,
@@ -282,6 +286,8 @@ export type FacadesAnswer = {
     alternatives: Array<'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'>
     mirrored: boolean
     groundY: number
+    blind?: boolean
+    limits?: string
     bodies: Array<{ bodyId: string; leftX: number; rightX: number; eavesY: number | null; ridgeY: number | null }>
     openings: Array<{ kind: string; box: BoxPx; bodyId: string; level: number; inFeature?: string }>
     features: Array<{ id: string; kind: string; box: BoxPx; bodyId: string; eavesY?: number | null; apexY?: number | null; note: string }>
@@ -427,7 +433,9 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
   return fields as T
 }
 
-export type Selection = { ground: HousePicture; upperPlans: HousePicture[]; sections: HousePicture[]; elevations: HousePicture[]; views: HousePicture[]; notThisHouse: HousePicture[] }
+export type Selection = { ground: HousePicture; upperPlans: HousePicture[]; sections: HousePicture[]; elevations: HousePicture[]; views: HousePicture[]; notThisHouse: HousePicture[]; /** Elevation pictures of this house beyond the number one reading takes: seen in the inventory, not sent for measuring. */ unsentElevations?: HousePicture[] }
+/** v3.54.5 — one elevation picture that was sent for measuring: how often it was asked about and what came back. */
+export type FacadeCoverage = { pictureId: string; asked: number; answer: 'DESCRIBED' | 'ASKED_NOT_ANSWERED' | 'REPLAY_WITHOUT_FOLLOW_UP'; readIn?: string; why?: string }
 
 export async function readInventory(ctx: ReadingContext, pictures: HousePicture[], publisherNote: string): Promise<{ answer: InventoryAnswer; selection: Selection | undefined; why?: string }> {
   const sent = pictures.map((p) => sentPicture(p, 'thumb'))
@@ -439,7 +447,7 @@ export async function readInventory(ctx: ReadingContext, pictures: HousePicture[
   const pick = (kind: string, storeys?: string[]): HousePicture[] => mine.filter((e) => e.kind === kind && (!storeys || storeys.includes(e.storey))).map((e) => of(e.n) as HousePicture).sort((p, q) => big(q) - big(p))
   const ground = pick('FLOOR_PLAN', ['GROUND'])[0]
   const selection = ground
-    ? { ground, upperPlans: pick('FLOOR_PLAN', ['UPPER', 'ATTIC']).slice(0, HOUSE_READING_LIMITS.plans - 1), sections: pick('SECTION').slice(0, HOUSE_READING_LIMITS.sections), elevations: pick('ELEVATION').slice(0, HOUSE_READING_LIMITS.elevations), views: pick('EXTERIOR_VIEW').slice(0, HOUSE_READING_LIMITS.views), notThisHouse: (answer.pictures ?? []).filter((e) => !e.thisHouse && of(e.n)).map((e) => of(e.n) as HousePicture) }
+    ? { ground, upperPlans: pick('FLOOR_PLAN', ['UPPER', 'ATTIC']).slice(0, HOUSE_READING_LIMITS.plans - 1), sections: pick('SECTION').slice(0, HOUSE_READING_LIMITS.sections), elevations: pick('ELEVATION').slice(0, HOUSE_READING_LIMITS.elevations), unsentElevations: pick('ELEVATION').slice(HOUSE_READING_LIMITS.elevations), views: pick('EXTERIOR_VIEW').slice(0, HOUSE_READING_LIMITS.views), notThisHouse: (answer.pictures ?? []).filter((e) => !e.thisHouse && of(e.n)).map((e) => of(e.n) as HousePicture) }
     : undefined
   return { answer, selection, ...(selection ? {} : { why: 'no ground-floor plan of this house among the pictures' }) }
 }
@@ -461,7 +469,7 @@ Describe the building on picture 1 by calling describe_plan:
   return { answer: await ask<PlanAnswer>(ctx, 'PLAN', 0, text, sent, READING_TOOLS.PLAN), sent }
 }
 
-export async function readFacades(ctx: ReadingContext, selection: Selection, plan: PlanAnswer, bodiesInMetres: string, published: ReadonlyArray<{ key: string; value: number; unit: string; raw?: string }>): Promise<{ answer: FacadesAnswer; sent: SentPicture[] }> {
+export async function readFacades(ctx: ReadingContext, selection: Selection, plan: PlanAnswer, bodiesInMetres: string, published: ReadonlyArray<{ key: string; value: number; unit: string; raw?: string }>): Promise<{ answer: FacadesAnswer; sent: SentPicture[]; coverage: FacadeCoverage[] }> {
   const sent = [sentPicture(selection.ground, 'context'), ...selection.sections.map((p) => sentPicture(p, 'detail')), ...selection.elevations.map((p) => sentPicture(p, 'detail')), ...selection.views.map((p) => sentPicture(p, 'context'))]
   const nS = selection.sections.length
   const nE = selection.elevations.length
@@ -473,36 +481,55 @@ ${facts(published)}
 Call describe_facades:
 - levels: every level mark and height printed on the section(s), with what it marks;
 - roofs: the roof of each body;
-- elevations: one entry per elevation picture. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box, and the roof features (dormers, balconies, canopies, chimneys).
-A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.`
+- elevations: one entry per elevation picture — EVERY elevation picture listed above gets its own entry. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box, and the roof features (dormers, balconies, canopies, chimneys).
+A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.
+For each elevation say whether it is blind (no opening at all) and what limits your reading of it.`
   const tool = withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))
   const answer = await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, tool)
-  // v3.54.4, after the first confirmation (three of eight houses came back with one of four elevations described): an
-  // elevation picture that was sent and not described is asked for once more, alone with the plan. One extra request at
-  // most; what comes back is added to the first answer under the first request's picture numbers.
+  // v3.54.5 — the program, not the prompt, accounts for the elevations. What was sent is compared with what the answer
+  // describes (an entry counts for the picture it names, once); every picture left over is asked for alone, with the
+  // plan, in one targeted request — a grouped follow-up came back with one picture of three described, the same way the
+  // first reading did. One request per picture and no second one: a picture still undescribed after it is recorded as
+  // sent and not answered, and the side it shows is not called read.
   const first = 2 + nS
-  const described = new Set((answer.elevations ?? []).map((e) => e.picture))
-  const missing = selection.elevations.map((p, i) => ({ p, n: first + i })).filter((x) => !described.has(x.n))
-  if (missing.length > 0 && (answer.elevations ?? []).length > 0) {
-    const again = [sent[0], ...missing.map((x) => sent[x.n - 1])]
-    const sides = (answer.elevations ?? []).map((e) => e.side).join(', ')
-    const more = `Picture 1: the ground-floor plan (for reference; its front facade lies along its ${plan.front.planEdge} edge). Pictures 2–${again.length}: ${missing.length === 1 ? 'an elevation' : 'elevations'} of the same house that ${missing.length === 1 ? 'was' : 'were'} not described yet (already described: ${sides}).
+  if (!Array.isArray(answer.elevations)) answer.elevations = []
+  const describedIn = new Map<number, string>()
+  for (const e of answer.elevations) if (e.picture >= first && e.picture < first + nE && !describedIn.has(e.picture)) describedIn.set(e.picture, 'FACADES')
+  const coverage: FacadeCoverage[] = selection.elevations.map((p, i) => ({ pictureId: p.id, asked: 1, answer: describedIn.has(first + i) ? ('DESCRIBED' as const) : ('ASKED_NOT_ANSWERED' as const), ...(describedIn.has(first + i) ? { readIn: 'FACADES' } : { why: 'the first reading returned no entry for this picture' }) }))
+  let round = 0
+  for (let i = 0; i < nE && round < HOUSE_READING_LIMITS.facadeFollowUps; i += 1) {
+    const n = first + i
+    if (describedIn.has(n)) continue
+    round += 1
+    const c = coverage[i]
+    const again = [sent[0], sent[n - 1]]
+    const done = answer.elevations.filter((e) => describedIn.has(e.picture)).map((e) => e.side)
+    const more = `Picture 1: the ground-floor plan (for reference; its front facade lies along its ${plan.front.planEdge} edge). Picture 2: ONE elevation of the same house. It was sent before and no description of it came back${done.length ? ` (sides already described from other pictures: ${done.join(', ')})` : ''}.
 The bodies read on the plan (use these ids): ${plan.bodies.map((b) => `${b.id} (${b.role}, levels ${b.storeys.join('+')})`).join('; ')}.
 ${bodiesInMetres}
-Call describe_facades with one entry in "elevations" for EACH of pictures 2–${again.length}: the side, the columns of each body's two WALL ends, the rows of its eaves and ridge, every opening as a box, the roof features. Leave "levels" and "roofs" empty.`
+Call describe_facades with exactly ONE entry in "elevations", for picture 2: the side it shows (match it to the plan), the columns of each visible body's two WALL ends, the rows of its eaves and ridge, every opening as a box, the roof features. If it shows no opening at all set blind true; if it cannot be read set limits TOO_SMALL and leave the lists empty. Leave "levels" and "roofs" empty.`
     try {
-      const extra = await ask<FacadesAnswer>(ctx, 'FACADES', 1, more, again, tool)
-      for (const e of extra.elevations ?? []) {
-        const at = missing[e.picture - 2]
-        if (at && !described.has(at.n)) {
-          described.add(at.n)
-          answer.elevations.push({ ...e, picture: at.n })
-        }
-      }
+      const extra = await ask<FacadesAnswer>(ctx, 'FACADES', round, more, again, tool)
+      const e = (extra.elevations ?? []).find((x) => x.picture === 2) ?? (extra.elevations ?? [])[0]
+      c.asked += 1
+      if (e) {
+        describedIn.set(n, `FACADES-${round}`)
+        answer.elevations.push({ ...e, picture: n })
+        c.answer = 'DESCRIBED'
+        c.readIn = `FACADES-${round}`
+        delete c.why
+      } else c.why = 'asked for alone as well; no entry came back'
     } catch (e) {
       if (!(e instanceof ReadingFailed)) throw e
-      // the first answer stands; the missing elevations stay missing and the document says so
+      // a recorded reading holds the answers it holds: no follow-up is invented for it, and the picture stays undescribed
+      if (ctx.replayOnly || ctx.replay) {
+        c.answer = 'REPLAY_WITHOUT_FOLLOW_UP'
+        c.why = 'the recorded reading holds no targeted answer for this picture'
+      } else {
+        c.asked += 1
+        c.why = `asked for alone as well: ${e.message.slice(0, 160)}`
+      }
     }
   }
-  return { answer, sent }
+  return { answer, sent, coverage }
 }

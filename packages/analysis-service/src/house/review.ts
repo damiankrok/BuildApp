@@ -6,6 +6,14 @@
  * wall end, an opening box. It never edits the model. Each correction is applied alone to a copy of the observations,
  * the whole house is resolved and built again, and the correction stands only if the result is not worse by the
  * program's own measures; otherwise it is refused with a code. At most `reviewRounds` rounds.
+ *
+ * v3.54.5 — corrections that belong together are one transaction. The reader may label them with a `group`; and opening
+ * corrections of one elevation that were each refused alone are tried once more together: narrowing one opening and
+ * adding its neighbour is right only as a pair, and the first step judged against the house as it was before the
+ * second is refused for a clash the second removes. A group is applied to a copy, the whole house is validated once
+ * after all of it, and it stands or falls whole (nothing of a refused group remains). Every proposal carries the
+ * revision it was made against; an answer about another revision changes nothing; an opening added where one is
+ * already listed corrects that opening instead of making a second one.
  */
 import { createHash } from 'node:crypto'
 import { renderModelViews } from '../consult/model-views.js'
@@ -46,6 +54,7 @@ export const REVIEW_TOOL = {
           properties: {
             op: { type: 'string', enum: ['SET_ELEVATION_SIDE', 'SET_ROOF', 'SET_BODY_STOREYS', 'SET_ELEVATION_BODY', 'ADD_OPENING', 'REMOVE_OPENING', 'SET_FEATURE', 'REMOVE_FEATURE'] },
             why: { type: 'string', maxLength: 240 },
+            group: { type: 'string', maxLength: 16, description: 'The same short label on corrections that are only right TOGETHER (narrow one opening and add the one beside it; remove a dormer and add the windows it hid). They are applied as one change: all or none.' },
             picture: { type: 'integer', minimum: 1, description: 'The elevation picture (its number in THIS message).' },
             side: side,
             mirrored: { type: 'boolean' },
@@ -69,12 +78,13 @@ export const REVIEW_TOOL = {
   },
 } as const
 
-export type ReviewCorrection = { op: string; why: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null }
+export type ReviewCorrection = { op: string; why: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null }
 export type ReviewAnswer = { revision: string; verdict: 'MATCHES' | 'DIFFERS'; differences: Array<{ scope: string; what: string }>; corrections: ReviewCorrection[] }
-export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string }
+export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string }
 
 type Obs = { observations: { elevations: Array<Record<string, unknown> & { id: string; picture: string; bodies: Array<Record<string, unknown>>; openings: Array<Record<string, unknown>>; features: Array<Record<string, unknown>> }>; roofs: Array<Record<string, unknown>>; outlines: Array<Record<string, unknown>> } }
-const revisionOf = (doc: unknown): string => createHash('sha256').update(JSON.stringify((doc as Obs).observations)).digest('hex').slice(0, 12)
+/** The revision of the observations: what was read, not the bookkeeping of which request read it. */
+const revisionOf = (doc: unknown): string => createHash('sha256').update(JSON.stringify((doc as Obs).observations, (k, v) => (k === 'readIn' ? undefined : v))).digest('hex').slice(0, 12)
 const OPENING_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR']
 const FEATURE_KINDS = ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'BALCONY', 'CANOPY']
 
@@ -130,6 +140,22 @@ export function applyCorrection(doc: unknown, c: ReviewCorrection, sent: SentPic
         el.openings[at] = { id: old.id, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : old.bodyId ? { bodyId: old.bodyId } : {}), ...(typeof c.level === 'number' ? { level: c.level } : typeof old.level === 'number' ? { level: old.level } : {}), ...(old.inFeature ? { inFeature: old.inFeature } : {}) }
         return { doc: next, subject: `${el.id}/${String(old.id)} (corrected)` }
       }
+      // a retry of an addition lands on the opening the first try made: the same place is the same opening, not a second one
+      const nb = B(c.box)
+      const same = el.openings.findIndex((x) => {
+        const q = x.box as { x0: number; y0: number; x1: number; y1: number } | undefined
+        if (!q) return false
+        const iw = Math.min(q.x1, nb.x1) - Math.max(q.x0, nb.x0)
+        const ih = Math.min(q.y1, nb.y1) - Math.max(q.y0, nb.y0)
+        if (iw <= 0 || ih <= 0) return false
+        const inter = iw * ih
+        return inter / ((q.x1 - q.x0) * (q.y1 - q.y0) + (nb.x1 - nb.x0) * (nb.y1 - nb.y0) - inter) > 0.5
+      })
+      if (same >= 0) {
+        const old = el.openings[same]
+        el.openings[same] = { id: old.id, kind: c.kind, box: nb, ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : old.bodyId ? { bodyId: old.bodyId } : {}), ...(typeof c.level === 'number' ? { level: c.level } : typeof old.level === 'number' ? { level: old.level } : {}), ...(old.inFeature ? { inFeature: old.inFeature } : {}) }
+        return { doc: next, subject: `${el.id}/${String(old.id)} (same place: corrected, not added)` }
+      }
       let n = el.openings.length + 1
       while (el.openings.some((x) => x.id === `o${n}`)) n += 1
       el.openings.push({ id: `o${n}`, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : {}), ...(typeof c.level === 'number' ? { level: c.level } : {}) })
@@ -184,7 +210,7 @@ export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op
   }
   const newFailures = [...b.failing].filter((id) => !a.failing.has(id))
   if (newFailures.length > 0) return { ok: false, code: 'CONFLICT_OPEN', why: `with it a source check fails that passed before: ${newFailures.join(', ')}` }
-  const removes = op === 'REMOVE_OPENING' || op === 'REMOVE_FEATURE'
+  const removes = op === 'REMOVE_OPENING' || op === 'REMOVE_FEATURE' || op === 'MIXED'
   if (b.trouble > a.trouble) return { ok: false, code: 'COMPILE_CONFLICT', why: `with it ${b.trouble - a.trouble} more object(s) are held or refused by the builder than before` }
   if (!removes && b.built < a.built) return { ok: false, code: 'COMPILE_CONFLICT', why: `with it the scene has fewer objects (${b.built} against ${a.built})` }
   return { ok: true, effect: `model ${String(before.modelHash).slice(0, 10)} → ${String(after.modelHash).slice(0, 10)}; failing checks ${a.failing.size} → ${b.failing.size}; held or refused ${a.trouble} → ${b.trouble}; meshes ${a.built} → ${b.built}` }
@@ -234,24 +260,56 @@ Compare the model with the elevations, side by side, in this order: which side i
       break
     }
     let applied = 0
-    for (const c of (answer.corrections ?? []).slice(0, REVIEW_MAX_CORRECTIONS)) {
-      const consumer = CONSUMER[c.op] ?? 'none'
-      const r = applyCorrection(doc, c, elevations)
-      if ('code' in r) {
-        proposals.push({ round, op: c.op, subject: c.id ?? c.bodyId ?? `picture ${c.picture ?? '?'}`, why: c.why, state: 'REJECTED', code: r.code, consumer, effect: r.why })
-        continue
+    const corrections = (answer.corrections ?? []).slice(0, REVIEW_MAX_CORRECTIONS)
+    /** One transaction: every correction on a copy, one validation of the whole house after all of them, all or none. */
+    const transact = (items: ReviewCorrection[], group: string | undefined): boolean => {
+      const base = revisionOf(doc)
+      let next = doc
+      const subjects: string[] = []
+      for (const c of items) {
+        const r = applyCorrection(next, c, elevations)
+        if ('code' in r) {
+          for (const x of items) proposals.push({ round, op: x.op, subject: x.id ?? x.bodyId ?? `picture ${x.picture ?? '?'}`, why: x.why, state: 'REJECTED', code: r.code, consumer: CONSUMER[x.op] ?? 'none', effect: x === c ? r.why : `its group was refused whole: ${r.why}`, ...(group ? { group } : {}), baseRevision: base })
+          return false
+        }
+        next = r.doc
+        subjects.push(r.subject)
       }
-      const after = compileHouse(JSON.parse(JSON.stringify(r.doc)), input.modelId)
-      const verdict = acceptCorrection(compiled, after, c.op)
-      if (!verdict.ok) {
-        proposals.push({ round, op: c.op, subject: r.subject, why: c.why, state: 'REJECTED', code: verdict.code, consumer, effect: verdict.why })
-        continue
-      }
-      proposals.push({ round, op: c.op, subject: r.subject, why: c.why, state: 'APPLIED', consumer, effect: verdict.effect })
-      doc = r.doc
+      const after = compileHouse(JSON.parse(JSON.stringify(next)), input.modelId)
+      const removesOnly = items.every((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE')
+      const verdict = acceptCorrection(compiled, after, removesOnly ? 'REMOVE_OPENING' : items.some((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE') ? 'MIXED' : items[0].op)
+      items.forEach((c, i) => proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}) }))
+      if (!verdict.ok) return false
+      doc = next
       compiled = after
-      applied += 1
+      applied += items.length
+      return true
     }
+    const groups = new Map<string, ReviewCorrection[]>()
+    const order: Array<{ group?: string; items: ReviewCorrection[] }> = []
+    for (const c of corrections) {
+      const label = typeof c.group === 'string' && c.group.trim() ? c.group.trim().slice(0, 16) : undefined
+      if (!label) {
+        order.push({ items: [c] })
+        continue
+      }
+      const list = groups.get(label)
+      if (list) list.push(c)
+      else {
+        const items = [c]
+        groups.set(label, items)
+        order.push({ group: label, items })
+      }
+    }
+    const refusedAlone: ReviewCorrection[] = []
+    for (const t of order) {
+      const ok = transact(t.items, t.group)
+      if (!ok && !t.group && (t.items[0].op === 'ADD_OPENING' || t.items[0].op === 'REMOVE_OPENING') && ['COMPILE_CONFLICT', 'CONFLICT_OPEN'].includes(proposals[proposals.length - 1]?.code ?? '')) refusedAlone.push(t.items[0])
+    }
+    // opening corrections of one elevation that were each refused alone for a clash: once more, together
+    const byPicture = new Map<number, ReviewCorrection[]>()
+    for (const c of refusedAlone) if (typeof c.picture === 'number') byPicture.set(c.picture, [...(byPicture.get(c.picture) ?? []), c])
+    for (const [picture, items] of byPicture) if (items.length >= 2) transact(items, `auto-p${picture}`)
     if (answer.verdict === 'MATCHES' || applied === 0) break
   }
   return { compiled, observationsDocument: doc, proposals, rounds, verdicts }

@@ -1,0 +1,1493 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m31c29abad56b2-947611f3c4",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+  "pageHash": "6fe5220199de6b9e0c0c1d9d3d95ac79b43f496013e4886f95809520ea59bf3f",
+  "project": {
+    "externalId": "m31c29abad56b2",
+    "name": "Projekt domu Dom w malaxisach 2 (E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-dodatkowa-wi-2d02c19630",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w malaxisach 2 (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-1d193c6aa17a7c9349a-679e25a31e",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/fm/projekt-dom-w-malaxisach-2-e-1d193c6aa17a7c9349a4391a664da8ad__62685.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 480499,
+          "byteHash": "be3aabfb74bed8994f8482b7e21d6a288cd61fab6bb8f119cdf22768fc76276e",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-1d193c6aa17a7c9349a-679e25a31e",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-dodatkowa-wi-5a9c1e8d54",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w malaxisach 2 (e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-96faf4292551b4a28c0-1c4f54e46e",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/fm/projekt-dom-w-malaxisach-2-e-96faf4292551b4a28c0ec7f0175a4696__62686.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 451326,
+          "byteHash": "521c17468b22f34cc56d478b399e789005f616bc0280123c2846151b1f35eb10",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-96faf4292551b4a28c0-1c4f54e46e",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-boc-3c33826354",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-b5b34121f29fcf6f13c-848f294080",
+          "url": "https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-b5b34121f29fcf6f13c92e6671fc2230__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 738625,
+          "byteHash": "b3dfb002b1f52bec0181a9703fd8cd98d6e06938c6c5b6c8ee6ec6f3584c3c96",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-malaxisach-2-e-dfe-055fe6de8d",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-boczna-projekt-dom-w-malaxisach-2-e-dfedd19f774d3dbeee9845892ce3ce10__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 148075,
+          "byteHash": "7133d486ec196a7cd256cf16a13fc9249888b9991cebea45cab88844fc862e42",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-b5b34121f29fcf6f13c-848f294080",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-boc-b86e58b4b7",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-1768d40ea7cd8638d98-02e896833a",
+          "url": "https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-1768d40ea7cd8638d98499e8ed9065a7__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 800395,
+          "byteHash": "e289fb9c474ebce8e4fbc8e08c4bfffe2ba58569ac29753e96097b9de97566b1",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-malaxisach-2-e-407-216c3b51b5",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-boczna-projekt-dom-w-malaxisach-2-e-40770d7f66c03bb8d6ab7cd0bccab2c3__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 157840,
+          "byteHash": "0a96b0860a6cc5943a46aa84aebe0347967158518baf64cd06a768d1977c35ab",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-1768d40ea7cd8638d98-02e896833a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-fro-e0669faf25",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-6dd5b88a67a104f220b-7d235e0595",
+          "url": "https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-6dd5b88a67a104f220bd6b22b640c479__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 714919,
+          "byteHash": "06c97026b1c32c1410c82388b0be65a314aa3ed5a317e32e06af45e5dd1fbfc8",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-malaxisach-2-e-4-6fa466ece9",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-frontowa-projekt-dom-w-malaxisach-2-e-482432b3cd287ef519ca9e0fa25b2fb3__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 146376,
+          "byteHash": "b4e47e494642fb505b4eab5344f4d703811ec70b299161ee4d019c3833e302dc",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-6dd5b88a67a104f220b-7d235e0595",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-elewacja-ogr-48db18d875",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w malaxisach 2 (e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-30905a7b528dcb1a6c6-8a9a96c67f",
+          "url": "https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-30905a7b528dcb1a6c69e95969727052__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 740594,
+          "byteHash": "2d303bd00ec1a2f6d3105bb37518884c0388dfec65ef887661b19d5326bb7de5",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-malaxisach-2-e-c-236f743aef",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-ogrodowa-projekt-dom-w-malaxisach-2-e-cc52040b6d4a93e2526d13647ea95172__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 149842,
+          "byteHash": "980f55ae1d0009b1ab5eb94cb656abab7e05cb4f45e699c94be7e89a88d9c5b9",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-30905a7b528dcb1a6c6-8a9a96c67f",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-przekroj-bud-5488297a61",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w malaxisach 2 (e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w malaxisach 2 (e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w malaxisach 2 (e) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-malaxisach-2-e-77-7680fc3f86",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/przekroj-budynku-projekt-dom-w-malaxisach-2-e-77776c0fb5631470df6b015f68ff67ee__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m31c29abad56b2/przekroj-budynku-projekt-dom-w-malaxisach-2-e-77776c0fb5631470df6b015f68ff67ee__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 68017,
+          "byteHash": "eb411d04f7615aa4309b54d29726cc75fc6e1ba8bf9c5c1532f2be734a0137d5",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-malaxisach-2-e-77-f288d4334a",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/przekroj-budynku-projekt-dom-w-malaxisach-2-e-77776c0fb5631470df6b015f68ff67ee__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 18428,
+          "byteHash": "428b17ef5e3f9643cf9b7a6fcb49225de3da2b34a9e53aab3d21737a4dfe2b7b",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-malaxisach-2-e-77-7680fc3f86",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-rzut-parteru-a43ec772f9",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-malaxisach-2-e-4c770f-6282431810",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/rzut-parteru-projekt-dom-w-malaxisach-2-e-4c770f63adbc11dda268dfb598300bc1__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 56749,
+          "byteHash": "c59de95649a33470db338775c0e50412eb97f3aaf5dc606cee30360772af2cdd",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-malaxisach-2-e-4c770f-6282431810",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-sytuacja-948e8ca27e",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w malaxisach 2 (e) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w malaxisach 2 (e) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-680a6a1459c8f485f19-2b167cc869",
+          "url": "https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-680a6a1459c8f485f19e3e01b3aa8630__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 189994,
+          "byteHash": "2cd4d2c9fe775865893bc1e9d0862d20995026d21f049f89d74a248d02f6d7e1",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-w-malaxisach-2-e-b3d4d451ea-a5cfc940cb",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/sytuacja-projekt-dom-w-malaxisach-2-e-b3d4d451ea81bdeeaabf891e859bf497__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 42882,
+          "byteHash": "752d286574468431b9fa2df4cb46410fbfc37eb3631a04ef2630a93861625c31",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-680a6a1459c8f485f19-2b167cc869",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-malaxisach-2-e-widok-1-df91125cc8",
+      "caption": "gotowy projekt Dom w malaxisach 2 (E) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w malaxisach 2 (e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-malaxisach-2-e-bd4a844d901-653b79d748",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-1-projekt-dom-w-malaxisach-2-e-bd4a844d901958e32e20b52bba85e962__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 9574,
+          "byteHash": "0ac486ae0e77ac108828b94215d909ab42eefb6e36b659897f867bf09fc7e0ef",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-malaxisach-2-e-bd4a844d901-653b79d748",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-malaxisach-2-e-4117872179",
+      "caption": "projekt Dom w malaxisach 2 (E)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-malaxisach-2-e-c87779-a738e1300f",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/rzut-parteru-projekt-dom-w-malaxisach-2-e-c877793da89fa622c40b45fed210023e__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 36491,
+          "byteHash": "7fae9f3b3c8f63c6aae51084020920e8db409fa6abec23939d9b2c0ef4c1b803",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-malaxisach-2-e-c87779-a738e1300f",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-malaxisach-2-e-92fcbf2888",
+      "caption": "projekt Dom w malaxisach 2 (E)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-malaxisach-2-e-bb9e7995e8a-cad08d6dba",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-2-projekt-dom-w-malaxisach-2-e-bb9e7995e8a0912d841a03dcbe84cbd8__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 28535,
+          "byteHash": "43a51d5180284e1beb7e30880b14a20b0fa11657a6613616f006dc8d8fbd87c9",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-malaxisach-2-e-bb9e7995e8a-cad08d6dba",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-malaxisach-2-e-aa03541f57",
+      "caption": "projekt Dom w malaxisach 2 (E)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-904ce357d7dab8c9492-dfede48f17",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-904ce357d7dab8c9492b180d55b25abe__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m31c29abad56b2/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 31303,
+          "byteHash": "8eb9b16ea09a7fb1a198cf4614de4aee3f36dd88f4506cf3c4572974db5a8400",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-904ce357d7dab8c9492-dfede48f17",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-malaxisach-2-e-b7dd814b595142d6efd-e44edb0ff1",
+      "caption": "Projekt dom w malaxisach 2 e b7dd814b595142d6efd5465b60af6f46  62683",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-b7dd814b595142d6efd-4f171c0003",
+          "url": "https://cdn1.archon.pl/images/products/m31c29abad56b2/i/projekt-dom-w-malaxisach-2-e-b7dd814b595142d6efd5465b60af6f46__62683.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m31c29abad56b2/image/62683?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 429268,
+          "byteHash": "afe69de42a1e0eb01973064c132b6497758ada22b4e2ddbd26b522d9edd755c7",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-b7dd814b595142d6efd-4f171c0003",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-592a5e69e0",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m31c29abad56b2/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m31c29abad56b2/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-mala-f9c64fcc41",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/rzut-parteru-z-powierzchniami-projekt-dom-w-malaxisach-2-e-814eb6c8157fcb3fa5234bb6a31ff647__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/gif",
+          "byteLength": 108451,
+          "byteHash": "bf754ad019d7eb2115f3dbdc189d932223304620bf8fc9d2eb8258aa5cc9c5d5",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-mala-f9c64fcc41",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-87e9f69961",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m31c29abad56b2/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m31c29abad56b2/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w malaxisach 2 (e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-malaxisach-2-e-bba520d6612077eb420-91b6692525",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-bba520d6612077eb420a0445d3a4ac0e__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/gif",
+          "byteLength": 104390,
+          "byteHash": "3c4eeb945eecd6a7290f2174bebd3f78a3e32b938e59630720e4eed45d23ce64",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-malaxisach-2-e-bba520d6612077eb420-91b6692525",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-malaxisach-2-e-ceac2cdc2a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w malaxisach 2 (e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-malaxisach-2-e-444c1a42e23-8189e0a5b9",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-1-projekt-dom-w-malaxisach-2-e-444c1a42e23b9404743527e4ebac6186__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 491348,
+          "byteHash": "5208fbfae03b720f52333c0ae6ee2188e9c4cfbcc18ed3c4365a5100fcf7bd4c",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-malaxisach-2-e-444c1a42e23-8189e0a5b9",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-malaxisach-2-e-e1f4cbbd9f",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-malaxisach-2-e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w malaxisach 2 (e) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-malaxisach-2-e-b211b890edf-d272b7c88f",
+          "url": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-2-projekt-dom-w-malaxisach-2-e-b211b890edf396b2b1eed70cb6288182__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-malaxisach-2-e-m31c29abad56b2",
+          "mediaType": "image/jpeg",
+          "byteLength": 460681,
+          "byteHash": "747fbae546844496598d7755c3d97f92a1a35bb4703a53e6f8968d970b579c85",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-malaxisach-2-e-b211b890edf-d272b7c88f",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 6.25,
+      "unit": "m2",
+      "raw": "6,25 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 6.15,
+      "unit": "m",
+      "raw": "6,15 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 136.06,
+      "unit": "m2",
+      "raw": "136,06 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 171.51,
+      "unit": "m2",
+      "raw": "171,51 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "value": 129.81,
+      "unit": "m2",
+      "raw": "129,81 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 232,
+      "unit": "m2",
+      "raw": "232,0 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 171.51,
+      "unit": "m2",
+      "raw": "171,51 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 136.06,
+      "unit": "m2",
+      "raw": "136,06 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 850.71,
+      "unit": "none",
+      "raw": "850,71 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom w malaxisach 2 (E) to wyjątkowy projekt domu jednorodzinnego, który łączy nowoczesną architekturę, funkcjonalne rozwiązania i przestronne wnętrza. Prosta, elegancka bryła budynku została zwieńczona dwuspadowym dachem bez okapów, co podkreśla minimalistyczny charakter zabudowy. Ten projekt domu parterowego wyróżnia się przemyślanym układem pomieszczeń, który doskonale odpowiada na potrzeby współczesnej rodziny. Szczególną uwagę przyciąga imponująca, dwukondygnacyjna strefa dzienna, nadająca wnętrzu wyjątkową przestronność i reprezentacyjny charakter. Salon o powierzchni przekraczającej 30 m² stanowi serce domu, oferując idealne warunki do rodzinnego wypoczynku, spotkań z bliskimi i wspólnego spędzania czasu. Przytulną atmosferę wnętrza podkreśla kominek, który staje się jednocześnie atrakcyjnym elementem aranżacji. Z salonem harmonijnie współgra duża kuchnia o powierzchni ponad 12 m², wyposażona w praktyczną wyspę, która zapewnia dodatkową przestrzeń roboczą i sprzyja codziennym rozmowom podczas przygotowywania posiłków. Bezpośrednio przy kuchni zaplanowano również spiżarnię, ułatwiającą przechowywanie produktów spożywczych i utrzymanie porządku. Dom w malaxisach 2 (E) oferuje łącznie pięć pokoi, co pozwala na wygodne zorganizowanie przestrzeni dla wszystkich domowników, a także wydzielenie gabinetu lub pokoju gościnnego. Dwie łazienki zwiększają funkcjonalność domu i usprawniają codzienne korzystanie z pomieszczeń. Dodatkowym udogodnieniem jest pralnia zlokalizowana w kotłowni, dzięki czemu obowiązki gospodarcze można zorganizować w jednej, praktycznej strefie. Ważnym atutem projektu jest również taras osłonięty przedłużonym okapem, stanowiący naturalne przedłużenie części wypoczynkowej i doskonałe miejsce na relaks na świeżym powietrzu. Dom w malaxisach 2 (E) uwzględnia także nowoczesne rozwiązania instalacyjne, w tym wentylację mechaniczną z odzyskiem ciepła, czyli rekuperację, która wspiera energooszczędność budynku i zapewnia stałą wymianę powietrza. Wśród dostępnych na rynku projektów domów parterowych propozycja ta wyróżnia się efektowną wysokością strefy dziennej, funkcjonalnym rozplanowaniem wnętrz oraz atrakcyjną, współczesną stylistyką. Dom w malaxisach 2 (E) to doskonały wybór dla inwestorów poszukujących przestronnego, nowoczesnego domu, w którym elegancka architektura idzie w parze z codzienną wygodą i praktycznymi rozwiązaniami."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "przedłużony okap"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy bez okapów, nachylenie 30 st. , więźba drewniana, blachodachówka / dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 129.81 m² + 6.25 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 6.07,
+      "raw": "1. Wiatrołap | 6,07 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 12.09,
+      "raw": "2. Hol | 12,09 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Spiżarnia",
+      "area": 1.5,
+      "raw": "3. Spiżarnia | 1,50 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 15.07,
+      "raw": "4. Kuchnia | 15,07 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "area": 34.05,
+      "raw": "5. Salon + Jadalnia | 34,05 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 3.22,
+      "raw": "6. Łazienka | 3,22 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Pokój",
+      "area": 13.51,
+      "raw": "7. Pokój | 13,51 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Garderoba",
+      "area": 3.8,
+      "raw": "8. Garderoba | 3,80 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Pokój",
+      "area": 8.8,
+      "raw": "9. Pokój | 8,80 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "Pokój",
+      "area": 12.09,
+      "raw": "10. Pokój | 12,09 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "Pokój",
+      "area": 12.11,
+      "raw": "11. Pokój | 12,11 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "Łazienka",
+      "area": 7.5,
+      "raw": "12. Łazienka | 7,50 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 13,
+      "label": "Kotłownia z pralnią",
+      "area": 6.25,
+      "raw": "13. Kotłownia z pralnią | 6,25 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-904ce357d7dab8c9492b180d55b25abe__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/rzut-parteru-projekt-dom-w-malaxisach-2-e-4c770f63adbc11dda268dfb598300bc1__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/rzut-parteru-projekt-dom-w-malaxisach-2-e-c877793da89fa622c40b45fed210023e__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-1-projekt-dom-w-malaxisach-2-e-444c1a42e23b9404743527e4ebac6186__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-1-projekt-dom-w-malaxisach-2-e-bd4a844d901958e32e20b52bba85e962__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-2-projekt-dom-w-malaxisach-2-e-b211b890edf396b2b1eed70cb6288182__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/widok-2-projekt-dom-w-malaxisach-2-e-bb9e7995e8a0912d841a03dcbe84cbd8__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-boczna-projekt-dom-w-malaxisach-2-e-40770d7f66c03bb8d6ab7cd0bccab2c3__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-1768d40ea7cd8638d98499e8ed9065a7__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-boczna-projekt-dom-w-malaxisach-2-e-dfedd19f774d3dbeee9845892ce3ce10__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-b5b34121f29fcf6f13c92e6671fc2230__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-frontowa-projekt-dom-w-malaxisach-2-e-482432b3cd287ef519ca9e0fa25b2fb3__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-6dd5b88a67a104f220bd6b22b640c479__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/elewacja-ogrodowa-projekt-dom-w-malaxisach-2-e-cc52040b6d4a93e2526d13647ea95172__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-30905a7b528dcb1a6c69e95969727052__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m31c29abad56b2/sytuacja-projekt-dom-w-malaxisach-2-e-b3d4d451ea81bdeeaabf891e859bf497__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m31c29abad56b2/projekt-dom-w-malaxisach-2-e-680a6a1459c8f485f19e3e01b3aa8630__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "a11b3f0db7865c566118b2b0917c719e446f12af6a5b4d7a4b4202d2d6234b51"
+}

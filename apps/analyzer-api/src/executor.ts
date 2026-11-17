@@ -45,7 +45,7 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
       { adapters: wiring.adapters, deps: wiring.deps, policy: wiring.policy, cache: fileByteCache(join(input.workDir, 'bytes')), jobId: input.jobId, signal: control.signal, progress: control.onProgress, telemetry: control.onTelemetry },
       wiring.houseDescription,
     )
-    if (outcome.run) return { ...analysisFilesOf(outcome.run), ...(outcome.houseText ? { house: outcome.houseText } : {}) }
+    if (outcome.run) return { ...analysisFilesOf(outcome.run), ...(outcome.houseText ? { house: outcome.houseText } : {}), ...(outcome.supersededLocalText ? { superseded: outcome.supersededLocalText } : {}) }
     throw outcome.error ?? new AnalysisError('ANALYSIS_FAILED', `neither LOCAL nor the whole-house description gave a model: ${outcome.decision.why}`.slice(0, 300))
   }
   // v3.54.2 pilot: an allowed submission on a host with the consultant switched on goes through the consultation loop —

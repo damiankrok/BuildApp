@@ -25,6 +25,8 @@ export type AnalysisFiles = {
   parsed: LinkAnalysisSummary
   /** v3.54.4: the house document of a job that went through the whole-house description (absent otherwise). */
   house?: string
+  /** v3.54.5: LOCAL's model as the superseded revision, when the described exterior replaced a LOCAL model with an interior. */
+  superseded?: string
 }
 
 export function analysisFilesOf(run: Pick<AnalysisRun, 'result' | 'sceneText'>): AnalysisFiles {

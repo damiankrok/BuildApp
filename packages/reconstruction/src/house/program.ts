@@ -27,7 +27,9 @@ export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
 export type HouseRefusal = { path: string; code: Code; why: string }
-export type HouseProgram = { program: BuildingCommand[]; trace: HouseParameterRecord[]; refusals: HouseRefusal[]; planes: Array<{ id: string; bodyId: string; key: string }>; hostWalls: Array<{ id: string; level: number; bodyId: string; lengthM: number; a: P2; b: P2 }> }
+/** How an opening was agreed, for a second fit when the kernel knows its wall's clear stretch better: host coordinates. */
+export type OpeningFitInfo = { u: number; printed: boolean; s0: number; from: number; width: number }
+export type HouseProgram = { fits: Record<string, OpeningFitInfo>; program: BuildingCommand[]; trace: HouseParameterRecord[]; refusals: HouseRefusal[]; /** Openings cut with a larger change than their reading's uncertainty: drawn, and said. */ approximated: Array<{ id: string; what: string }>; planes: Array<{ id: string; bodyId: string; key: string }>; hostWalls: Array<{ id: string; level: number; bodyId: string; lengthM: number; a: P2; b: P2 }> }
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
 const rad = (deg: number): number => (deg * Math.PI) / 180
@@ -35,6 +37,46 @@ const ROOF_RECTANGLE_FILL = 0.8
 const ROOF_T = 0.25
 /** How far a wall under a roof is drawn past the ridge before the planes cut it (m): any positive value gives the same wall. */
 const OVER_RIDGE_M = 0.5
+/**
+ * How an opening is fitted to the wall that holds it (v3.54.5). `adjustFloorM`: the least a reading from a published
+ * raster can be off; an opening's own stated uncertainty replaces it when larger, up to `maxUncertaintyM` (the residual
+ * an elevation may have and still register). `approxShare` / `approxM`: the most a width may be trimmed and still be
+ * drawn, as an approximation that is said. `pierM`: the wall left between two openings.
+ */
+/** The wall thickness drawn for a bay (see `thick`). */
+export const BAY_WALL_M = 0.25
+/**
+ * One opening against the clear stretch lo..hi of its wall (v3.54.5). The edge that is not in conflict is never moved to
+ * make room. A move or a trim within the reading's own uncertainty `u` is ADJUSTED; a larger trim, up to a bounded share,
+ * is APPROXIMATED and said; beyond that the opening is not cut. A printed width is never trimmed.
+ */
+export function fitOpening(q: { from: number; to: number; lo: number; hi: number; u: number; printed: boolean }): { ok: true; from: number; to: number; fit: 'EXACT' | 'ADJUSTED' | 'APPROXIMATED'; note?: string } | { ok: false; why: string } {
+  const stated = q.to - q.from
+  const overLo = Math.max(0, q.lo - q.from)
+  const overHi = Math.max(0, q.to - q.hi)
+  const room = q.hi - q.lo
+  if (overLo <= 1e-6 && overHi <= 1e-6) return { ok: true, from: q.from, to: q.to, fit: 'EXACT' }
+  const over = overLo + overHi
+  const canShift = stated <= room + 1e-6 && !(overLo > 1e-6 && overHi > 1e-6)
+  if (canShift && over <= q.u + 1e-6) {
+    // within what the reading can tell: the whole opening moves, its width stands
+    const from = overLo > 0 ? q.lo : q.hi - stated
+    return { ok: true, from, to: from + stated, fit: 'ADJUSTED', note: `moved ${over.toFixed(2)} m along the wall to stand clear of its corner (the reading is good to ±${q.u.toFixed(2)} m)` }
+  }
+  if (q.printed) {
+    if (!canShift) return { ok: false, why: `a printed width of ${stated.toFixed(2)} m in a wall whose clear length is ${room.toFixed(2)} m: a printed width is not trimmed` }
+    const from = overLo > 0 ? q.lo : q.hi - stated
+    return { ok: true, from, to: from + stated, fit: 'APPROXIMATED', note: `moved ${over.toFixed(2)} m along the wall, more than the reading's ±${q.u.toFixed(2)} m: its printed width stands, its place is approximate` }
+  }
+  // the edge in the corner is trimmed; the other edge stays where it was read
+  const trimmed = Math.min(q.to, q.hi) - Math.max(q.from, q.lo)
+  const cut = stated - trimmed
+  if (trimmed < OPENING_FIT.minWidthM || (cut > q.u + 1e-6 && (cut > OPENING_FIT.approxShare * stated + 1e-6 || cut > OPENING_FIT.approxM + 1e-6)))
+    return { ok: false, why: `${stated.toFixed(2)} m wide at ${q.from.toFixed(2)} m on a wall whose clear stretch is ${q.lo.toFixed(2)}..${q.hi.toFixed(2)} m: it would lose ${cut.toFixed(2)} m, more than the reading's ±${q.u.toFixed(2)} m and more than ${Math.round(OPENING_FIT.approxShare * 100)} % of it — the wall, the side or the place was read wrong, and the opening is not cut narrower to hide that` }
+  const fit = cut <= q.u + 1e-6 ? ('ADJUSTED' as const) : ('APPROXIMATED' as const)
+  return { ok: true, from: Math.max(q.from, q.lo), to: Math.min(q.to, q.hi), fit, note: `${stated.toFixed(2)} m wide as read; trimmed by ${cut.toFixed(2)} m at the corner of its wall${fit === 'ADJUSTED' ? ` (within the reading's ±${q.u.toFixed(2)} m)` : `: more than the reading's ±${q.u.toFixed(2)} m — an approximate opening`}` }
+}
+export const OPENING_FIT = { cornerClearM: 0.02, adjustFloorM: 0.1, maxUncertaintyM: 0.45, approxShare: 0.25, approxM: 0.6, pierM: 0.1, minWidthM: 0.3 } as const
 
 type Plane = { id: string; bodyId: string; key: string; boundary: P2[]; datum: { x: number; y: number; z: number }; pitchDeg: number; downslope: P2; thickness: number; levelId: string }
 const topAt = (p: Plane, q: P2): number => p.datum.y - ((q.x - p.datum.x) * p.downslope.x + (q.z - p.datum.z) * p.downslope.z) * Math.tan(rad(p.pitchDeg))
@@ -46,7 +88,9 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   const refusals: HouseRefusal[] = []
   const planesOut: HouseProgram['planes'] = []
   const hostWalls: HouseProgram['hostWalls'] = []
-  if (!g) return { program, trace, refusals: [{ path: 'geometry', code: 'NOT_CONSUMED', why: 'the document holds observations only: no agreed geometry to build' }], planes: planesOut, hostWalls }
+  const approximated: HouseProgram['approximated'] = []
+  const fits: HouseProgram['fits'] = {}
+  if (!g) return { program, trace, refusals: [{ path: 'geometry', code: 'NOT_CONSUMED', why: 'the document holds observations only: no agreed geometry to build' }], planes: planesOut, hostWalls, approximated, fits }
   const push = (c: Record<string, unknown>): void => void program.push(c as unknown as BuildingCommand)
   const used = (path: string, consumer: string, programIds: string[], n?: Num): void => void trace.push({ path, state: 'ACCEPTED', consumer, programIds, meshIds: [], ...(n && n.value !== null ? { built: n.value } : {}) })
   const refuse = (path: string, code: Code, why: string): void => {
@@ -75,6 +119,9 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   push({ type: 'defineMaterial', id: MATERIALS_V2.gate, name: 'Garage door', color: '#55585c' })
 
   const T = need(g.wallThicknessM, 'geometry.wallThicknessM') ?? 0.4
+  // v3.54.5 — the walls of a bay are the posts between its windows: at the house's (conventional) wall thickness a bay's
+  // side 1.3 m long has 0.5 m of clear wall and the 0.8 m window read in it cannot be cut. A convention, said in the trace.
+  const thick = (role: string): number => (role === 'BAY' ? Math.min(T, BAY_WALL_M) : T)
   const slabT = need(g.slabThicknessM, 'geometry.slabThicknessM') ?? 0.3
 
   // --- levels ---
@@ -234,14 +281,17 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   }
   // one edge of the outline may run along the walls of two bodies in line; what is cut is the wall under the opening
   const wallUnder = (h: Host, from: number, to: number): { w: Phys; s0: number; s1: number } | undefined => {
-    const mid = (from + to) / 2
+    // the wall that holds most of the stretch (v3.54.5: not the one under its middle — a reading a few centimetres off
+    // at a step of the outline has its middle on the short return wall and nearly all of itself on the wall beside it)
+    let best: { w: Phys; s0: number; s1: number; share: number } | undefined
     for (const w of phys) {
       if (!w.body.storeys.includes(h.level) || w.u.x * h.u.x + w.u.z * h.u.z < 0.99) continue
       if (Math.abs((w.a.x - h.a.x) * h.out.x + (w.a.z - h.a.z) * h.out.z) > 0.03) continue
       const s0 = (w.a.x - h.a.x) * h.u.x + (w.a.z - h.a.z) * h.u.z
-      if (mid >= s0 - 1e-6 && mid <= s0 + w.len + 1e-6) return { w, s0, s1: s0 + w.len }
+      const share = Math.min(to, s0 + w.len) - Math.max(from, s0)
+      if (share > 1e-6 && (!best || share > best.share + 1e-9)) best = { w, s0, s1: s0 + w.len, share }
     }
-    return undefined
+    return best
   }
   for (const h of hosts) hostWalls.push({ id: h.id, level: h.level, bodyId: h.body.id, lengthM: r6(h.len), a: h.a, b: h.b })
 
@@ -406,7 +456,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const eHost = !closes && !next ? buttAt.get(`${w.id}/END`) : undefined
       const startJunction = prev ? { kind: 'CORNER' as const, with: { wallId: prev.id, end: 'END' as const }, owner: cornerOwner(prev, w) === w ? ('SELF' as const) : ('OTHER' as const) } : sHost ? { kind: 'BUTT' as const, againstWallId: sHost.id } : undefined
       const endJunction = closes ? { kind: 'CORNER' as const, with: { wallId: mine[0].id, end: 'START' as const }, owner: cornerOwner(w, mine[0]) === w ? ('SELF' as const) : ('OTHER' as const) } : eHost ? { kind: 'BUTT' as const, againstWallId: eHost.id } : undefined
-      push({ type: 'createWall', id: w.id, levelId: base.id, start: w.a, end: w.b, thickness: r6(T), height, baseOffset: 0, kind: 'EXTERIOR', topProfile, materialId: MATERIALS_V2.wall, ...(startJunction ? { startJunction } : {}), ...(endJunction ? { endJunction } : {}) })
+      push({ type: 'createWall', id: w.id, levelId: base.id, start: w.a, end: w.b, thickness: r6(thick(w.body.role)), height, baseOffset: 0, kind: 'EXTERIOR', topProfile, materialId: MATERIALS_V2.wall, ...(startJunction ? { startJunction } : {}), ...(endJunction ? { endJunction } : {}) })
     })
     wallIdsOf.set(b.id, mine.map((w) => w.id))
     used(`geometry.bodies[${b.id}].storeys`, 'houseProgram/walls', mine.map((w) => w.id))
@@ -418,6 +468,14 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   for (const c of roofDormers) push(c)
 
   // --- openings ------------------------------------------------------------------------------------------------------
+  // v3.54.5. An opening is cut where and as wide as it was agreed. What the wall cannot hold is settled in the open:
+  //   - a move or a trim no larger than the reading's own uncertainty is an ADJUSTED fit, with its delta recorded;
+  //   - a larger trim, up to a bounded share, is built as an APPROXIMATED opening and named as a known defect;
+  //   - beyond that the opening is not built and the reason is given. A printed width is never trimmed.
+  // The edge that is not in conflict is never moved to make room: moving a whole opening off a corner used to push it
+  // onto its neighbour, which then removed one of the two.
+  type Placed = { o: (typeof g.openings)[number]; path: string; w: Phys; s0: number; from: number; to: number; y0: number; y1: number; u: number; agreedFrom: number; agreedWidth: number; fit: 'EXACT' | 'ADJUSTED' | 'APPROXIMATED'; notes: string[]; printed: boolean; height: number; sillOnWall: number }
+  const placed: Placed[] = []
   for (const o of g.openings) {
     const path = `geometry.openings[${o.id}]`
     const h = hosts.find((x) => x.id === o.hostWall)
@@ -430,42 +488,101 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const height = need(o.heightM, `${path}.heightM`)
     const sill = need(o.sillM, `${path}.sillM`)
     if (offsetM === undefined || stated === undefined || height === undefined || sill === undefined) continue
-    // a wall's core stops a wall thickness short of each corner: an opening is kept clear of it, and the move is said
     const under = wallUnder(h, offsetM, offsetM + stated)
     if (!under) {
       refuse(path, 'WRONG_BINDING', `no built wall stands under ${offsetM.toFixed(2)}..${(offsetM + stated).toFixed(2)} m of ${h.id}`)
       continue
     }
-    const lo = under.s0 + T + 0.05
-    const hi = under.s1 - T - 0.05
-    let width = stated
-    if (width > hi - lo) {
-      // a window that fills a short wall (the face of a bay): cut as wide as the wall's core allows, and said
-      if (hi - lo >= 0.5 && hi - lo >= 0.5 * width) {
-        width = hi - lo
-        trace.push({ path: `${path}.widthM`, state: 'ACCEPTED', code: 'COMPILE_CONFLICT', why: `${stated.toFixed(2)} m wide as read; ${width.toFixed(2)} m is the clear length of its wall: cut that wide`, consumer: 'houseProgram/cutOpening', programIds: [o.id], meshIds: [o.id] })
-      } else {
-        refuse(path, 'COMPILE_CONFLICT', `${width.toFixed(2)} m wide in a wall whose clear length is ${(hi - lo).toFixed(2)} m`)
-        continue
-      }
-    }
-    const at = Math.min(hi - width, Math.max(lo, offsetM))
     const l = levelAt.get(Math.min(...under.w.body.storeys))
     if (!l) continue
+    // a wall's own material stops a wall thickness short of each corner (the kernel's junction zone)
+    const lo = under.s0 + thick(under.w.body.role) + OPENING_FIT.cornerClearM
+    const hi = under.s1 - thick(under.w.body.role) - OPENING_FIT.cornerClearM
+    const u = Math.min(OPENING_FIT.maxUncertaintyM, Math.max(OPENING_FIT.adjustFloorM, o.offsetM.uncertainty ?? 0, o.widthM.uncertainty ?? 0))
+    const printed = o.widthM.basis === 'PRINTED'
+    const fitted = fitOpening({ from: offsetM, to: offsetM + stated, lo, hi, u, printed })
+    if (!fitted.ok) {
+      refuse(path, 'COMPILE_CONFLICT', fitted.why)
+      continue
+    }
+    const from = fitted.from
+    const to = fitted.to
+    const fit: Placed['fit'] = fitted.fit
+    const notes: string[] = fitted.note ? [fitted.note] : []
     // the opening's sill is above ITS level's floor; the wall it is cut in starts at its body's lowest floor
-    const sillOnWall = r6(sill + ((levelAt.get(o.level)?.elevation ?? l.elevation) - l.elevation))
+    const sillOnWall = Math.max(0, r6(sill + ((levelAt.get(o.level)?.elevation ?? l.elevation) - l.elevation)))
+    fits[o.id] = { u, printed, s0: under.s0, from: offsetM, width: stated }
+    placed.push({ o, path, w: under.w, s0: under.s0, from, to, y0: sillOnWall, y1: sillOnWall + height, u, agreedFrom: offsetM, agreedWidth: stated, fit, notes, printed, height, sillOnWall })
+  }
+  // two openings of one wall that touch or overlap: a pier is left between them when that costs no more than the two
+  // readings can tell; a larger overlap is two readings of one place, and the smaller one is held as an open conflict
+  const dropped = new Set<Placed>()
+  const byWall = new Map<string, Placed[]>()
+  for (const q of placed) byWall.set(q.w.id, [...(byWall.get(q.w.id) ?? []), q])
+  for (const list of byWall.values()) {
+    list.sort((p, q) => p.from - q.from)
+    for (let i = 0; i < list.length; i += 1) {
+      const a = list[i]
+      if (dropped.has(a)) continue
+      for (let j = i + 1; j < list.length; j += 1) {
+        const b = list[j]
+        if (dropped.has(b)) continue
+        if (Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) <= 0.02) continue
+        const lack = OPENING_FIT.pierM - (b.from - a.to)
+        if (lack <= 1e-6) continue
+        const overlap = a.to - b.from
+        const smaller = a.to - a.from <= b.to - b.from ? a : b
+        if (overlap > 0.5 * (smaller.to - smaller.from)) {
+          const other = smaller === a ? b : a
+          dropped.add(smaller)
+          refuse(smaller.path, 'CONFLICT_OPEN', `read over the same stretch of wall ${a.w.id} as ${other.o.id} (${overlap.toFixed(2)} m in common): two readings of one place — ${other.o.id} is cut, this one is kept as an observation`)
+          if (smaller === a) break
+          continue
+        }
+        const give = (q: Placed): number => (q.printed ? 0 : q.u)
+        if (lack <= give(a) + give(b) + 1e-6) {
+          const ta = give(a) + give(b) > 0 ? (lack * give(a)) / (give(a) + give(b)) : 0
+          a.to -= ta
+          b.from += lack - ta
+          for (const [q, t] of [[a, ta], [b, lack - ta]] as const) {
+            if (t <= 1e-6) continue
+            if (q.fit === 'EXACT') q.fit = 'ADJUSTED'
+            q.notes.push(`trimmed by ${t.toFixed(2)} m to leave a ${OPENING_FIT.pierM.toFixed(2)} m pier to ${(q === a ? b : a).o.id} (within the reading's ±${q.u.toFixed(2)} m)`)
+          }
+        } else {
+          const other = smaller === a ? b : a
+          dropped.add(smaller)
+          refuse(smaller.path, 'CONFLICT_OPEN', `overlaps ${other.o.id} on wall ${a.w.id} by ${overlap.toFixed(2)} m, more than the two readings can be off: one of the two was read at the wrong place — ${other.o.id} is cut, this one is kept as an observation`)
+          if (smaller === a) break
+        }
+      }
+    }
+  }
+  for (const q of placed) {
+    if (dropped.has(q)) continue
+    const { o, path } = q
+    const width = q.to - q.from
+    if (width < OPENING_FIT.minWidthM) {
+      refuse(path, 'COMPILE_CONFLICT', `${width.toFixed(2)} m is left of it between its neighbours: not an opening`)
+      continue
+    }
     const door = o.kind !== 'WINDOW'
-    push({ type: 'cutOpening', id: o.id, wallId: under.w.id, kind: door ? 'DOOR' : 'WINDOW', offset: r6(at - under.s0), sill: Math.max(0, sillOnWall), width: r6(width), height: r6(height) })
+    push({ type: 'cutOpening', id: o.id, wallId: q.w.id, kind: door ? 'DOOR' : 'WINDOW', offset: r6(q.from - q.s0), sill: q.sillOnWall, width: r6(width), height: r6(q.height) })
     const frame = { frameDepth: r6(Math.min(0.12, T * 0.4)), frameInset: r6(Math.min(0.1, T * 0.25)) }
-    if (o.kind === 'WINDOW') push({ type: 'placeWindow', id: `${o.id}-window`, openingId: o.id, ...frame, divisions: Math.max(1, o.panes ?? Math.round(width / 0.9)), materialId: MATERIALS_V2.glass })
+    const panes = Math.max(1, o.panes ?? Math.round(width / 0.9))
+    if (o.kind === 'WINDOW') push({ type: 'placeWindow', id: `${o.id}-window`, openingId: o.id, ...frame, divisions: panes, materialId: MATERIALS_V2.glass })
     else if (o.kind === 'GARAGE_DOOR') push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', materialId: MATERIALS_V2.gate })
-    else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, assembly: { panels: Array.from({ length: Math.max(1, o.panes ?? Math.round(width / 0.9)) }, () => ({ kind: 'GLAZED' as const, fraction: 1 / Math.max(1, o.panes ?? Math.round(width / 0.9)) })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
+    else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, assembly: { panels: Array.from({ length: panes }, () => ({ kind: 'GLAZED' as const, fraction: 1 / panes })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
     else push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, materialId: MATERIALS_V2.timber })
     const ids = [o.id, door ? `${o.id}-leaf` : `${o.id}-window`]
-    trace.push({ path: `${path}.offsetM`, state: 'ACCEPTED', consumer: 'houseProgram/cutOpening', programIds: ids, meshIds: [], built: r6(at), ...(Math.abs(at - offsetM) > 1e-6 ? { code: 'OVERRIDDEN' as const, why: `moved ${Math.abs(at - offsetM).toFixed(2)} m along the wall to stand clear of its corner` } : {}) })
-    used(`${path}.widthM`, 'houseProgram/cutOpening', ids, o.widthM)
+    const dFrom = q.from - q.agreedFrom
+    const dWidth = width - q.agreedWidth
+    const why = q.notes.join('; ')
+    trace.push({ path: `${path}.offsetM`, state: 'ACCEPTED', consumer: 'houseProgram/cutOpening', programIds: ids, meshIds: [], built: r6(q.from), fit: q.fit, ...(Math.abs(dFrom) > 1e-6 ? { code: 'OVERRIDDEN' as const, delta: r6(dFrom), why } : {}) })
+    trace.push({ path: `${path}.widthM`, state: 'ACCEPTED', consumer: 'houseProgram/cutOpening', programIds: ids, meshIds: [], built: r6(width), fit: q.fit, ...(Math.abs(dWidth) > 1e-6 ? { code: 'OVERRIDDEN' as const, delta: r6(dWidth), why } : {}) })
     used(`${path}.heightM`, 'houseProgram/cutOpening', ids, o.heightM)
     used(`${path}.sillM`, 'houseProgram/cutOpening', ids, o.sillM)
+    if (q.fit === 'APPROXIMATED') approximated.push({ id: o.id, what: why })
   }
 
   // --- balconies, canopies, chimneys ---------------------------------------------------------------------------------
@@ -560,7 +677,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     used(`${path}.rect`, 'houseProgram/placeChimney', [c.id])
     used(`${path}.topY`, 'houseProgram/placeChimney', [c.id], c.topY)
   }
-  return { program, trace, refusals, planes: planesOut, hostWalls }
+  return { program, trace, refusals, planes: planesOut, hostWalls, approximated, fits }
 }
 
 export type { HouseGeometry, HouseBody }

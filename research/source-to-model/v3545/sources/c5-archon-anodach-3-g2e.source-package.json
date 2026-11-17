@@ -1,0 +1,1678 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-me7729b1dc2787-040ffafaee",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+  "pageHash": "2964996cdcc0d6b7e115fc784786b33a40da55749eede79f283bd67552751d9a",
+  "project": {
+    "externalId": "me7729b1dc2787",
+    "name": "Projekt domu Dom w anodach 3 (G2E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-109495ac3b",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-dfae33ca6420f5b66c9e-fc2bb76763",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-dfae33ca6420f5b66c9eedd7291c7be8__62468.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 526038,
+          "byteHash": "d3eb5b7d6df137fd605da8459fd87873102dcd7c4d6cc6997fd9b1f8d23b7831",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-dfae33ca6420f5b66c9e-fc2bb76763",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-3b24b9a3a2",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-c61fa2acfee53d474d9a-ae9496f9bb",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-c61fa2acfee53d474d9a4b525a676d37__62470.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 534506,
+          "byteHash": "fcc5747ecd3750404b511979b2b757ef400128df58ec62127987909c891f2606",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-c61fa2acfee53d474d9a-ae9496f9bb",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-5b4e6ddd63",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-1b23db75d7485181664e-29c1473648",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-1b23db75d7485181664e55b1a0288078__62472.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 514236,
+          "byteHash": "55b385ae357d90e2796b4f2534e87491c19fdfa035590e342b866467a9a9622c",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-1b23db75d7485181664e-29c1473648",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-6c76a31255",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-fa0b59b909030b6feb43-e178bea50f",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-fa0b59b909030b6feb435f703d4eaf76__62471.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 504563,
+          "byteHash": "d64eed776be817d0666751de23727e92274b3967a0730268e551c40f7f2fa063",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-fa0b59b909030b6feb43-e178bea50f",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-aef5af0524",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-e6c18a7839e8fe874e20-7ace9965b1",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-e6c18a7839e8fe874e20b74cd2ebb261__62467.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 499556,
+          "byteHash": "e5c68109693698643ac653f9d9aa50ae7c3c718033be11ae14140e22c0e05dad",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-e6c18a7839e8fe874e20-7ace9965b1",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-dodatkowa-wiz-c3fbee67a4",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-ed2311f6ed0d52bff19c-55fa6d43f8",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/fm/projekt-dom-w-anodach-3-g2e-ed2311f6ed0d52bff19c02ed1b4e7b27__62469.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 532935,
+          "byteHash": "9ae9e4f97e396daac74144851ccf93cab56e6847263b4115a3723eb279f75fb6",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-ed2311f6ed0d52bff19c-55fa6d43f8",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-bocz-381d5d7a2f",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-57eaf9eb4609b2740231-dc4462e937",
+          "url": "https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-57eaf9eb4609b27402310758db5c4925__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 538660,
+          "byteHash": "508f9757f7531b0943f85108614d1169cdff88ffa0bf873652395523f56f06f2",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-anodach-3-g2e-b06c-c1cd4f219e",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-boczna-projekt-dom-w-anodach-3-g2e-b06cd1626a47561a9c74d1b6b4a1962d__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 121410,
+          "byteHash": "0c487d99f21429af89136d18aff18b6098b4577e5e353cbeb30a18ce7d032885",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-57eaf9eb4609b2740231-dc4462e937",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-bocz-d15bcf7624",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-5a2614ff632fd0aeee69-966f5aaa30",
+          "url": "https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-5a2614ff632fd0aeee69c079823d21ab__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 496422,
+          "byteHash": "114de9e58982ba57e666df8c1745e1cccfbed6ac0c48f42132e241a1eb34ab73",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-anodach-3-g2e-8b7a-c8985f957a",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-boczna-projekt-dom-w-anodach-3-g2e-8b7af95e68975934d424b2e54d7c4ed4__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 112270,
+          "byteHash": "9cef5ccbf574e51d7b41029a1f099275dddadc748b3798faf2586ba4c6cf3e1c",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-5a2614ff632fd0aeee69-966f5aaa30",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-fron-d3303df0a7",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-c493a653a51218de2ef8-6c93b55066",
+          "url": "https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-c493a653a51218de2ef8d1538439a022__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 541251,
+          "byteHash": "d5b3182523ce2f3fd8b6818e5444a4a1274b113299fddc52e5fb1449367df9ea",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-anodach-3-g2e-2a-249ff5c110",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-frontowa-projekt-dom-w-anodach-3-g2e-2a0365ad25c2ce2b24cb2deffd583601__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 125993,
+          "byteHash": "6de8e571e074f1e3c4b77e967a76fec3c6e6ef37067dd2b5c29ac1a4c42dfa18",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-c493a653a51218de2ef8-6c93b55066",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-elewacja-ogro-aba4470be6",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w anodach 3 (g2e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-8a3d211d48e3806134cb-1a880a11c0",
+          "url": "https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-8a3d211d48e3806134cbd624f1303a0c__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 573079,
+          "byteHash": "07eb7800b6b0f361e07f82f9ac00a10ca150cfdaf0d23c034e51e3e73cb8df83",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-anodach-3-g2e-53-e7fba55e5d",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-ogrodowa-projekt-dom-w-anodach-3-g2e-535de82ea2898dd98b4fdb5e78bcfc2a__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 132634,
+          "byteHash": "61ba7eb942fd2c2fd13bc761b7626ac07786ad97c986637bd8834376df35de9d",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-8a3d211d48e3806134cb-1a880a11c0",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-przekroj-budy-7e77ef4e11",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w anodach 3 (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w anodach 3 (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w anodach 3 (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb-b11638a05f",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb2ddb0316c9efe2bb658591b7925e5__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/me7729b1dc2787/przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb2ddb0316c9efe2bb658591b7925e5__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 69882,
+          "byteHash": "984809d1fa4db34d8fd1d76457fc8d83763e3b5103d52d9083756870510fb1c7",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb-41f640a21e",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb2ddb0316c9efe2bb658591b7925e5__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 18446,
+          "byteHash": "4af75d87ea8e93e319293b247a528e8d22fe9b90818b4320bf48ae8cadff6ae2",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-anodach-3-g2e-abb-b11638a05f",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-rzut-parteru-bcb6cdb838",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-anodach-3-g2e-26cc01c-4475cfc2ac",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/rzut-parteru-projekt-dom-w-anodach-3-g2e-26cc01c9b6b3164ae20ff76c40e4f42f__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 52789,
+          "byteHash": "6c2852d75959a04b4a0918b04b5f8acc90da8ed01bcffcd36f76fc86b0414241",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-anodach-3-g2e-26cc01c-4475cfc2ac",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-sytuacja-096a0f75a4",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w anodach 3 (g2e) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w anodach 3 (g2e) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-ca26598cb9c701c77d0c-6224d32168",
+          "url": "https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-ca26598cb9c701c77d0cd2ffabbbc1f7__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 191881,
+          "byteHash": "1f084111f8cf4edb49a09f21c3ab1489aa282458110d12eae5427d9c5aa9ff7d",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-w-anodach-3-g2e-698e4fb03b7-862c291034",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/sytuacja-projekt-dom-w-anodach-3-g2e-698e4fb03b7a25fe60c829823bccaf6e__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 47421,
+          "byteHash": "ad7d0ead42ee15bf2184788e1ed25efd4fdda893822501014958dc61a41cb0ec",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-ca26598cb9c701c77d0c-6224d32168",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-anodach-3-g2e-widok-1-c63ca587e3",
+      "caption": "gotowy projekt Dom w anodach 3 (G2E) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-anodach-3-g2e-bb47ff2e2543-56d419fb4c",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-1-projekt-dom-w-anodach-3-g2e-bb47ff2e25430052544a64000a6e0724__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 9738,
+          "byteHash": "8183bb0131eec14fb35fd0c32b97dde58179bbfca019223fa36b33c316b27251",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-anodach-3-g2e-bb47ff2e2543-56d419fb4c",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-anodach-3-g2e-2e165a788f085838c080-a0aa74609e",
+      "caption": "Projekt dom w anodach 3 g2e 2e165a788f085838c080621e3a9ac213  62463",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-2e165a788f085838c080-082f6f3e9f",
+          "url": "https://cdn1.archon.pl/images/products/me7729b1dc2787/i/projekt-dom-w-anodach-3-g2e-2e165a788f085838c080621e3a9ac213__62463.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/me7729b1dc2787/image/62463?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 506382,
+          "byteHash": "0ff9944b0274f8959b07c625266919462114bed7574f21e9f1e58ba7d8b76d4c",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-2e165a788f085838c080-082f6f3e9f",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-anodach-3-g2e-8706af1bff",
+      "caption": "projekt Dom w anodach 3 (G2E)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-anodach-3-g2e-5cc95e2-4432afcf55",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/rzut-parteru-projekt-dom-w-anodach-3-g2e-5cc95e21d857b5683bb09d490f8b00b5__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 35040,
+          "byteHash": "5842659ec1bdbf689811f3041969b8f43126699f8ecfaf0a9221f623756c2630",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-anodach-3-g2e-5cc95e2-4432afcf55",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-anodach-3-g2e-a355066aad",
+      "caption": "projekt Dom w anodach 3 (G2E)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-e5aa2afca4de179c1e81-85d876a8f2",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-e5aa2afca4de179c1e81f98b158f40f4__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 32504,
+          "byteHash": "787fccf3dd6c2ce76e24e6276147fee4d6c060e7265b3fae09100cc418e915ff",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-e5aa2afca4de179c1e81-85d876a8f2",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-anodach-3-g2e-d9160be554",
+      "caption": "projekt Dom w anodach 3 (G2E)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-anodach-3-g2e-52d69d483401-83811f0a55",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-2-projekt-dom-w-anodach-3-g2e-52d69d48340198f71c1f9a1a14f839e0__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/me7729b1dc2787/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 31385,
+          "byteHash": "69065cb52196833b0cbd15720fc1b1e56252f2dff5e908c663829e1603dbca05",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-anodach-3-g2e-52d69d483401-83811f0a55",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-2a6560256c",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me7729b1dc2787/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me7729b1dc2787/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-anod-20d1cb4860",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/rzut-parteru-z-powierzchniami-projekt-dom-w-anodach-3-g2e-52d78c477d88f45e0cf3c9c15cae6b3e__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/gif",
+          "byteLength": 109921,
+          "byteHash": "d5c679e03adcf4bf9bcfe91a488ad6c33dd4e6ba7a44354cc44012856c193dc0",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-anod-20d1cb4860",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-a33b324180",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me7729b1dc2787/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/me7729b1dc2787/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w anodach 3 (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-anodach-3-g2e-0dadc7bb6f7bd50e8878-308c3a711a",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-0dadc7bb6f7bd50e8878689284a5c2df__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/gif",
+          "byteLength": 100093,
+          "byteHash": "b917df09b1b5f13413f5b9fdc74fa531634d3d3a2da5c11742e9f86775ec8be3",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-anodach-3-g2e-0dadc7bb6f7bd50e8878-308c3a711a",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-anodach-3-g2e-ff629ed79a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-anodach-3-g2e-285b7d5c83ab-1921feb2bb",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-1-projekt-dom-w-anodach-3-g2e-285b7d5c83abfb2dbd2efe62620568d4__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 553236,
+          "byteHash": "68a99256eef13d0968959913c1cea7cb0d257e2e4ec2a34ec693491680b9028a",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-anodach-3-g2e-285b7d5c83ab-1921feb2bb",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-anodach-3-g2e-f3679b47af",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-anodach-3-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w anodach 3 (g2e) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-anodach-3-g2e-94d275b20ebb-3d6711fb28",
+          "url": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-2-projekt-dom-w-anodach-3-g2e-94d275b20ebb1498f6c122edbef6b6a7__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-anodach-3-g2e-me7729b1dc2787",
+          "mediaType": "image/jpeg",
+          "byteLength": 537450,
+          "byteHash": "3150bf5148af46a64b9693fcbf0a7809f919c5c7f5b17d8ae262ce8e5ad752f9",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-anodach-3-g2e-94d275b20ebb-3d6711fb28",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 7.66,
+      "unit": "m2",
+      "raw": "7,66 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7.29,
+      "unit": "m",
+      "raw": "7,29 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 175.87,
+      "unit": "m2",
+      "raw": "175,87 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 254.69,
+      "unit": "m2",
+      "raw": "254,69 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 35.94,
+      "unit": "m2",
+      "raw": "35,94 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "value": 132.27,
+      "unit": "m2",
+      "raw": "132,27 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 333.8,
+      "unit": "m2",
+      "raw": "333,8 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 219.18,
+      "unit": "m2",
+      "raw": "219,18 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 175.87,
+      "unit": "m2",
+      "raw": "175,87 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 1314.16,
+      "unit": "none",
+      "raw": "1314,16 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom w anodach 3 (G2E) to nowoczesny projekt domu parterowego , który wyróżnia się elegancką bryłą, funkcjonalnym układem pomieszczeń oraz efektownymi przeszkleniami. Współczesną architekturę budynku podkreśla czterospadowy dach oraz dwustanowiskowy garaż wysunięty przed elewację frontową, nadający całości interesujące proporcje. Dom w anodach 3 (G2E) został zaprojektowany z myślą o rodzinach poszukujących przestronnego, wygodnego domu, w którym wszystkie pomieszczenia znajdują się na jednym poziomie. Do wnętrza prowadzi komfortowy wiatrołap, z którego można przejść przez dwustanowiskowy garaż do kotłowni z wyjściem bezpośrednio na zewnątrz. Takie rozwiązanie ułatwia codzienne użytkowanie części gospodarczej budynku. Sercem domu jest przestronna, doskonale doświetlona strefa dzienna, obejmująca salon o powierzchni przekraczającej 30 m², jadalnię oraz wygodną kuchnię z wyspą. Duże przeszklenia otwierają wnętrze na ogród, wprowadzając do pomieszczeń mnóstwo naturalnego światła. Kuchnia została wyposażona w praktyczną wyspę, która zwiększa powierzchnię roboczą i stanowi atrakcyjny element aranżacji, a bezpośrednio przylegająca spiżarnia pozwala wygodnie przechowywać produkty spożywcze oraz kuchenne akcesoria. Naturalnym przedłużeniem części wypoczynkowej jest duży, zadaszony taras usytuowany w podcieniu, idealny do organizowania rodzinnych posiłków na świeżym powietrzu i relaksu niezależnie od intensywnego nasłonecznienia. Dom w anodach 3 (G2E) oferuje również komfortową strefę prywatną, w której zaplanowano trzy ustawne sypialnie, w tym główną sypialnię z własną garderobą. Do dyspozycji mieszkańców przewidziano dwie łazienki oraz funkcjonalną pralnię, a ich bliskie położenie usprawnia codzienne obowiązki i organizację domowej przestrzeni. Dodatkowym atutem części dziennej jest kominek, który wprowadza do salonu przytulną atmosferę i tworzy przyjemne miejsce rodzinnego wypoczynku. Projekt domu uwzględnia nowoczesne rozwiązania instalacyjne, takie jak pompa ciepła oraz wentylacja mechaniczna z odzyskiem ciepła, czyli rekuperacja, które sprzyjają energooszczędnej eksploatacji budynku. W części technicznej przewidziano także rozwiązania umożliwiające zastosowanie kotła na pellet. Przemyślany podział na strefę dzienną, nocną i gospodarczą sprawia, że wnętrze jest czytelne, funkcjonalne i dobrze dostosowane do potrzeb czteroosobowej rodziny. Dom w anodach 3 (G2E) to propozycja dla inwestorów, którzy przeglądają projekty domów parterowych i poszukują połączenia nowoczesnej estetyki, przestronnych wnętrz oraz praktycznych rozwiązań. Ten projekt domu przyciąga uwagę efektowną architekturą, dużymi przeszkleniami, wygodnym układem czterech pokoi oraz atrakcyjną przestrzenią tarasową, tworząc doskonałe warunki do codziennego życia."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "na pellet + alternatywnie gazowy"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "podcień"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy z okapami, nachylenie 25 st. , więźba drewniana, dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 132.27 m² + 35.94 m² + 7.66 m² , 4 pokoje, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 5.16,
+      "raw": "1. Wiatrołap | 5,16 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 7.76,
+      "raw": "2. Hol | 7,76 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Salon + Jadalnia",
+      "area": 33.11,
+      "raw": "3. Salon + Jadalnia | 33,11 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 10.09,
+      "raw": "4. Kuchnia | 10,09 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Spiżarnia",
+      "area": 2.21,
+      "raw": "5. Spiżarnia | 2,21 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 3.43,
+      "raw": "6. Łazienka | 3,43 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Korytarz",
+      "area": 7.08,
+      "raw": "7. Korytarz | 7,08 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Łazienka",
+      "area": 6.21,
+      "raw": "8. Łazienka | 6,21 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Pralnia",
+      "area": 6.88,
+      "raw": "9. Pralnia | 6,88 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "Pokój",
+      "area": 15.87,
+      "raw": "10. Pokój | 15,87 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "Garderoba",
+      "area": 7.78,
+      "raw": "11. Garderoba | 7,78 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "Pokój",
+      "area": 13.33,
+      "raw": "12. Pokój | 13,33 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 13,
+      "label": "Pokój",
+      "area": 13.36,
+      "raw": "13. Pokój | 13,36 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 14,
+      "label": "Kotłownia",
+      "area": 7.66,
+      "raw": "14. Kotłownia | 7,66 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 15,
+      "label": "Garaż",
+      "area": 35.94,
+      "raw": "15. Garaż | 35,94 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-e5aa2afca4de179c1e81f98b158f40f4__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/rzut-parteru-projekt-dom-w-anodach-3-g2e-26cc01c9b6b3164ae20ff76c40e4f42f__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/rzut-parteru-projekt-dom-w-anodach-3-g2e-5cc95e21d857b5683bb09d490f8b00b5__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-1-projekt-dom-w-anodach-3-g2e-285b7d5c83abfb2dbd2efe62620568d4__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-1-projekt-dom-w-anodach-3-g2e-bb47ff2e25430052544a64000a6e0724__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-2-projekt-dom-w-anodach-3-g2e-52d69d48340198f71c1f9a1a14f839e0__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/widok-2-projekt-dom-w-anodach-3-g2e-94d275b20ebb1498f6c122edbef6b6a7__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-boczna-projekt-dom-w-anodach-3-g2e-8b7af95e68975934d424b2e54d7c4ed4__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-5a2614ff632fd0aeee69c079823d21ab__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-boczna-projekt-dom-w-anodach-3-g2e-b06cd1626a47561a9c74d1b6b4a1962d__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-57eaf9eb4609b27402310758db5c4925__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-frontowa-projekt-dom-w-anodach-3-g2e-2a0365ad25c2ce2b24cb2deffd583601__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-c493a653a51218de2ef8d1538439a022__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/elewacja-ogrodowa-projekt-dom-w-anodach-3-g2e-535de82ea2898dd98b4fdb5e78bcfc2a__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-8a3d211d48e3806134cbd624f1303a0c__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/me7729b1dc2787/sytuacja-projekt-dom-w-anodach-3-g2e-698e4fb03b7a25fe60c829823bccaf6e__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/me7729b1dc2787/projekt-dom-w-anodach-3-g2e-ca26598cb9c701c77d0cd2ffabbbc1f7__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "ebbbce8a8a57c97d1d04e3a9183bf188a08b6e5a7f0b93c9d1ee70721ba4e9c4"
+}

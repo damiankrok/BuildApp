@@ -1,0 +1,1343 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-550029lan-0f9f8d025e",
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+  "pageHash": "d022cecafca5837a75aa7a7604f0256fe8f0bb731f907a9c58f7f74484fbb0ed",
+  "project": {
+    "externalId": "550029LAN",
+    "name": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower",
+    "publisher": "architecturaldesigns.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-2nd-level-4c423961c2",
+      "caption": "2nd Level",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"2nd Level\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-2nd-level-floor-plan-gif-2f8d64b209",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 77760,
+          "byteHash": "47e464fdef2e85adfe7ba9df333b4272bc9b8252b281a4b5ea1479e4e165dec9",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declared": {
+            "width": 750,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-2nd-level-floor-plan-gif-2f8d64b209",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-3rd-level-a859f5b6d4",
+      "caption": "3rd Level",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 3rd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-3rd-level-floor-plan-gif-19a3e78615",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 76569,
+          "byteHash": "9a2ac2e0a69a48c4538159265bef92c2e0142531580641bf81da3b99c63fb0e7",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declared": {
+            "width": 750,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-3rd-level-floor-plan-gif-19a3e78615",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-001-exterior-images-jpg-40194fe82e",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-001-exterior-images-jpg-da6d34a51d",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842931-321220755296474-0004-2109/550029LAN-001-Exterior-Images.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 165910,
+          "byteHash": "1ac2d0394f7e65570eaf2310677f329b7cf5b19811b1b799d0a20810e2a35d66",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-550029lan-001-exterior-images-jpg-da6d34a51d",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-002-exterior-images-jpg-67763122bc",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-550029lan-002-exterior-images-jpg-e88939ed70",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842932-695598232235296-0002-0618/550029LAN-002-Exterior-Images.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 181166,
+          "byteHash": "43767f8381748141e9c249d854f5394cbdbd7ace18dea9c4136bb0deb74be831",
+          "decoded": {
+            "width": 1200,
+            "height": 896
+          },
+          "declaredMismatch": false,
+          "aspect": 1.339286
+        }
+      ],
+      "selectedVariantId": "var-550029lan-002-exterior-images-jpg-e88939ed70",
+      "selectionReason": "only variant (1200x896, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-front-elevation-jpg-fea73cc2b3",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan front elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"550029lan front elevation\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-front-elevation-jpg-7d496eee34",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842931-347648329368214-0043-8708/550029LAN-Front-Elevation.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 89559,
+          "byteHash": "485abd913396fd7c8985c1475f972c8413d3903b54f23ac98623362273d4bc2f",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-front-elevation-jpg-7d496eee34",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-left-elevation-jpg-61c3e15ed3",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan left elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"550029lan left elevation\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-left-elevation-jpg-fa4fdbbc68",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842932-505817443256866-0005-6028/550029LAN-Left-Elevation.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 92561,
+          "byteHash": "c1ca60223777a567a3d3670d811298af334b24458488f7a29457f7c8cf9f6d07",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-left-elevation-jpg-fa4fdbbc68",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-rear-elevation-jpg-38858f438b",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan rear elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"550029lan rear elevation\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-rear-elevation-jpg-e10293cb20",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842932-779254450607970-0003-9093/550029LAN-Rear-Elevation.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 101764,
+          "byteHash": "cc941d6525cda3514201e38ed04140d94ba79ef7834ffd99c4db3079e4dd0cf8",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-rear-elevation-jpg-e10293cb20",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-550029lan-right-elevation-jpg-4621fa0ff4",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan right elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"550029lan right elevation\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-right-elevation-jpg-0dc2ea7dcc",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842932-114718792225423-0006-0983/550029LAN-Right-Elevation.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 94653,
+          "byteHash": "b877f16f6d94e185eede9e63fced3671f904a01d5f77399a937bf5b0b648171c",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-right-elevation-jpg-0dc2ea7dcc",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-customer-reviews-f194d27ccb",
+      "caption": "Customer Reviews",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan Collections\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-1198-sa-seal-gif-345618da50",
+          "url": "https://www.shopperapproved.com/seal/37222/1198-sa-seal.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 6210,
+          "byteHash": "ea64a3187108df973031a60fb999ea600bea40daf2b198534c231c8a1999a702",
+          "decoded": {
+            "width": 166,
+            "height": 56
+          },
+          "declared": {
+            "width": 166,
+            "height": 56
+          },
+          "declaredMismatch": false,
+          "aspect": 2.964286
+        }
+      ],
+      "selectedVariantId": "var-1198-sa-seal-gif-345618da50",
+      "selectionReason": "only variant (166x56, decoded from bytes)"
+    },
+    {
+      "id": "asset-main-level-97631c258c",
+      "caption": "Main Level",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-main-level-floor-plan-gif-d08e8676cb",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 76485,
+          "byteHash": "9429970507aa6f137c5fb5441a322ba570b2ecab76e39152a9acdabcdecb4211",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declared": {
+            "width": 750,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-main-level-floor-plan-gif-d08e8676cb",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-13f80ea7ab",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #6 - Beach, Coastal",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan right elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"550029lan right elevation\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-right-elevation-jpg-ea8f6f30c8",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842932-114718792225423-0006-0983/550029LAN-Right-Elevation.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 77929,
+          "byteHash": "7728a14c8bbd9dfc67f816274c349b20e047b43d63c3fe0d7880314c8c793f80",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-right-elevation-jpg-ea8f6f30c8",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-2c7bd59191",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Floor Plan - 2nd Level - Beach, Coastal",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"550029lan 2nd level floor plan\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"2nd level\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-2nd-level-floor-plan-gif-5fc2e9c77f",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 77768,
+          "byteHash": "788d05b0b227db096ad6b39d548e8db1210e2279b61dca750dab9d3c7870d04c",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-2nd-level-floor-plan-gif-5fc2e9c77f",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-4c77ef7187",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #3 - Beach, Coastal",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan front elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"550029lan front elevation\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-front-elevation-jpg-361b7e4f44",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842931-347648329368214-0043-8708/550029LAN-Front-Elevation.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 70275,
+          "byteHash": "9c6633f7e1b4190c7c51998b5c9b9169c5f178ca19d0efa394dd86bba6305126",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-front-elevation-jpg-361b7e4f44",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-535d4cc1d0",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Floor Plan - 3rd Level - Beach, Coastal",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 3rd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan 3rd level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-3rd-level-floor-plan-gif-9b5f0aea69",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 76561,
+          "byteHash": "d667021fe1673a6e088a5bf9645fe585bccbe0bee5332ab0f4d8d0863af95b50",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-3rd-level-floor-plan-gif-9b5f0aea69",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-5404e721e6",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #5 - Beach, Coastal",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan rear elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"550029lan rear elevation\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-rear-elevation-jpg-14e1804247",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842932-779254450607970-0003-9093/550029LAN-Rear-Elevation.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 78554,
+          "byteHash": "83cd71a2f8cd79012525f68836720ad9ab8a47aa0cfef1d0465b32c8af0138eb",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-rear-elevation-jpg-14e1804247",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-865d10cdf6",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #2 - Beach, Coastal",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-550029lan-002-exterior-images-jpg-5a35b8fe78",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842932-695598232235296-0002-0618/550029LAN-002-Exterior-Images.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 168326,
+          "byteHash": "3e0abcb5ba6816e8c459fb15e2ba10e0a9949334edc1542183e3c6203b851db9",
+          "decoded": {
+            "width": 1200,
+            "height": 896
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.339286
+        }
+      ],
+      "selectedVariantId": "var-550029lan-002-exterior-images-jpg-5a35b8fe78",
+      "selectionReason": "only variant (1200x896, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-b21c2613d8",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Floor Plan - Tower Level - Beach, Coastal",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan tower level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan tower level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-tower-level-floor-plan-gif-5f87354554",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 64850,
+          "byteHash": "79f4a5740005f23ae569477b7cdcfd00211c1ec0dfb52cfc74ca6a74e6ec91ea",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-tower-level-floor-plan-gif-5f87354554",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-c3a82f0635",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #1 - Beach, Coastal",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-550029lan-001-exterior-images-jpg-8c5e2d1d94",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842931-321220755296474-0004-2109/550029LAN-001-Exterior-Images.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 135647,
+          "byteHash": "a4a680976bd03fd081bea4a841472e95901e22a507b870647691aaaecd7005b2",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-550029lan-001-exterior-images-jpg-8c5e2d1d94",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-d2c2c9c31c",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Image #4 - Beach, Coastal",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"550029lan left elevation\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"550029lan left elevation\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-left-elevation-jpg-e8b1d55863",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842932-505817443256866-0005-6028/550029LAN-Left-Elevation.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/jpeg",
+          "byteLength": 75159,
+          "byteHash": "4a86ff4d8f6ecbe1e664e66a17cbe48c3bc827284affc18aed1076da08453a5b",
+          "decoded": {
+            "width": 1201,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.50125
+        }
+      ],
+      "selectedVariantId": "var-550029lan-left-elevation-jpg-e8b1d55863",
+      "selectionReason": "only variant (1201x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-550029lan-coastal-beach-house-plan-with-fou-f3b7b4639b",
+      "caption": "Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Floor Plan - Main Level - Beach, Coastal",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"550029lan main level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 550029LAN: Coastal Beach House Plan with Four Bedrooms and Watch Tower - Fl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-main-level-floor-plan-gif-fab77457d2",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 76493,
+          "byteHash": "2756d6463401ef738703d05e8effb790ba7992c169099ef9f1c96f8582ea9e3b",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-main-level-floor-plan-gif-fab77457d2",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-tower-level-ef4695aba2",
+      "caption": "Tower Level",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"550029lan tower level floor plan\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-550029lan-tower-level-floor-plan-gif-ec923f6376",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/coastal-beach-house-plan-with-four-bedrooms-and-watch-tower-550029lan",
+          "mediaType": "image/gif",
+          "byteLength": 64842,
+          "byteHash": "00d0ff54a8244f86080ee0d9d3b7603cbdf736fa9675583f8a7610a3ff1e3c17",
+          "decoded": {
+            "width": 671,
+            "height": 800
+          },
+          "declared": {
+            "width": 750,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 0.83875
+        }
+      ],
+      "selectedVariantId": "var-550029lan-tower-level-floor-plan-gif-ec923f6376",
+      "selectionReason": "only variant (671x800, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 14.021,
+      "unit": "m",
+      "raw": "46' 0\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 13.868,
+      "unit": "m",
+      "raw": "45' 6\""
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Crawl, Monolithic Slab, Slab"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This sophisticated coastal beach house plan offers 3,848 square feet of finished living space, four bedrooms, four bathrooms, and a two-car garage spanning 570 square feet.The home greets visitors with an inviting front porch that sets the tone for a relaxed lifestyle, while an integrated elevator provides seamless accessibility across all three levels.The main living level features a spacious, open-concept flow that connects a gourmet kitchen with a large walk-in pantry to a bright breakfast nook and a formal dining area.An expansive primary suite occupies its own level for ultimate privacy, complemented by three well-appointed secondary bedrooms that offer comfort for family and guests alike.A dedicated game room provides a perfect retreat for leisure, while the inclusion of a home office and a convenient main-level laundry room ensures functional efficiency.Multiple levels of outdoor living are highlighted by stacked porches, a screened porch for bug-free relaxation, and a private balcony for enjoying refreshing coastal breezes."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842931-321220755296474-0004-2109/550029LAN-001-Exterior-Images.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842931-347648329368214-0043-8708/550029LAN-Front-Elevation.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842932-114718792225423-0006-0983/550029LAN-Right-Elevation.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842932-505817443256866-0005-6028/550029LAN-Left-Elevation.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842932-695598232235296-0002-0618/550029LAN-002-Exterior-Images.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842932-779254450607970-0003-9093/550029LAN-Rear-Elevation.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794842992-935747926586461-0044-4928/550029LAN-3rd-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843138-593602270242996-0008-1354/550029LAN-Tower-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843218-386128749279871-0046-5329/550029LAN-Main-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/396446509/original/1794843230-664451523950449-0005-6658/550029LAN-2nd-Level-Floor-Plan.gif: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "5a28fc1476febee23a04fae29bac675e2ffad9581e2427dfb651979c9ec4b235"
+}

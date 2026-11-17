@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.1.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.2.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -71,6 +71,11 @@ const PictureSchema = z
     reduction: z.number().positive().optional(),
     thisHouse: z.boolean().default(true),
     note: z.string().optional(),
+    /** v0.2: sha256 of the published bytes, how the reader was sent it, and the side its page caption names. */
+    byteHash: z.string().optional(),
+    sent: z.enum(['DETAIL', 'CONTEXT', 'THUMB_ONLY', 'NOT_SENT']).optional(),
+    notSentWhy: z.string().optional(),
+    captionSide: z.enum(['FRONT', 'RIGHT', 'REAR', 'LEFT']).optional(),
   })
   .strict()
 
@@ -181,6 +186,12 @@ const ElevationObservation = z
     openings: z.array(ElevationOpening).default([]),
     features: z.array(ElevationFeature).default([]),
     origin: Origin,
+    /** v0.2. `blind`: the reader SAID this side shows no window or door (an empty list alone says nothing). */
+    blind: z.boolean().optional(),
+    /** What limited the reading of this picture, as the reader stated it. */
+    limits: z.enum(['NONE', 'PARTLY_HIDDEN', 'TOO_SMALL']).optional(),
+    /** The request that described it: `FACADES` (the first reading) or `FACADES-<n>` (a targeted follow-up). */
+    readIn: z.string().optional(),
   })
   .strict()
 
@@ -342,8 +353,59 @@ const ParameterRecord = z
     programIds: z.array(z.string()).default([]),
     meshIds: z.array(z.string()).default([]),
     built: z.number().finite().nullable().optional(),
+    /** v0.2. How the built value relates to the agreed one: EXACT; ADJUSTED within the reading's uncertainty; APPROXIMATED beyond it (said). */
+    fit: z.enum(['EXACT', 'ADJUSTED', 'APPROXIMATED']).optional(),
+    /** built − agreed, when they differ. */
+    delta: z.number().finite().optional(),
   })
   .strict()
+
+// v0.2 — the register of views: every side of the house from the source picture to the built wall.
+const FourNums = z.object({ offsetM: z.number().finite(), widthM: z.number().finite(), heightM: z.number().finite(), sillM: z.number().finite() }).strict()
+export const VIEW_STATES = ['NO_SOURCE', 'NOT_SENT', 'SENT_NOT_ANSWERED', 'PARTIAL', 'READ_COMPLETE', 'UNREADABLE', 'ASSIGNMENT_UNRESOLVED'] as const
+const ViewRecord = z
+  .object({
+    side: SideSchema,
+    /** What happened to this side's source. READ_COMPLETE says the picture was described; it does not say it was built. */
+    state: z.enum(VIEW_STATES),
+    why: z.string().optional(),
+    picture: Id.optional(),
+    elevation: Id.optional(),
+    /** Other pictures that claimed this side and were not used for it. */
+    alsoClaimedBy: z.array(Id).default([]),
+    registered: z.boolean().default(false),
+    /** picture pixel → metres along the side and above ±0,00; the residual at the wall ends it was fitted on and the anchor it was checked on. */
+    transform: z.object({ mPerPx: z.number().finite(), alongAtPx0: z.number().finite(), groundRowPx: z.number().finite(), /** The row taken as ±0,00 and what it was taken from (door thresholds, the printed ridge, or the ground line and the terrain). */ zeroRowPx: z.number().finite().optional(), zeroHow: z.string().optional(), mirrored: z.boolean(), wallEnds: z.number().int(), residualM: z.number().finite(), checkAnchor: z.string() }).strict().optional(),
+    /** The exterior walls of the outline that face this side (host wall ids), and the bodies named on the picture. */
+    walls: z.array(z.string()).default([]),
+    bodies: z.array(z.string()).default([]),
+    read: z.object({ openings: z.number().int(), features: z.number().int(), blindStated: z.boolean() }).strict().default({ openings: 0, features: 0, blindStated: false }),
+    agreed: z.object({ openings: z.number().int(), features: z.number().int() }).strict().default({ openings: 0, features: 0 }),
+    built: z.object({ openings: z.number().int(), features: z.number().int() }).strict().default({ openings: 0, features: 0 }),
+    notBuilt: z.array(z.string()).default([]),
+    build: z.enum(['BUILT_COMPLETE', 'BUILT_PARTIAL', 'NOT_BUILT', 'NOTHING_TO_BUILD', 'NOT_ASSESSED']).default('NOT_ASSESSED'),
+  })
+  .strict()
+export type HouseViewRecord = z.infer<typeof ViewRecord>
+
+/** v0.2 — one agreed wall opening from its reading to the hole measured in the compiled scene. */
+const OpeningRecord = z
+  .object({
+    id: Id,
+    ref: z.string().optional(),
+    side: SideSchema.optional(),
+    hostWall: z.string(),
+    level: z.number().int(),
+    kind: z.string(),
+    agreed: FourNums,
+    /** What the program cut (its own numbers), and what the compiled scene measures of the hole. Null: not built. */
+    built: FourNums.nullable(),
+    cut: z.object({ widthM: z.number().finite(), heightM: z.number().finite(), bottomY: z.number().finite(), alongSideM: z.number().finite().nullable() }).strict().nullable(),
+    fit: z.enum(['EXACT', 'ADJUSTED', 'APPROXIMATED', 'NOT_BUILT']),
+    why: z.string().optional(),
+  })
+  .strict()
+export type HouseOpeningRecord = z.infer<typeof OpeningRecord>
 
 const CheckRecord = z.object({ id: Id, what: z.string(), expected: z.string(), measured: z.string(), status: z.enum(['PASS', 'FAIL', 'NOT_CHECKED', 'UNKNOWN']), scope: z.enum(['IDENTITY', 'ORIENTATION', 'METRIC', 'BODIES', 'LEVELS', 'ROOFS', 'OPENINGS', 'FEATURES', 'COMPILE']), blocks: z.array(z.string()).default([]) }).strict()
 
@@ -360,13 +422,32 @@ const VerificationSchema = z
     quantities: z.enum(['USABLE_IN_SCOPE', 'LIMITED', 'NOT_USABLE', 'NOT_ASSESSED']).default('NOT_ASSESSED'),
     modelHash: z.string().optional(),
     sceneContentHash: z.string().optional(),
+    /** v0.2. One record per side of the house, and one per agreed opening. */
+    views: z.array(ViewRecord).default([]),
+    openings: z.array(OpeningRecord).default([]),
+    /**
+     * v0.2. Five separate answers, never one: were the computations done; were the available sources accounted for; does
+     * the built geometry agree with what was agreed; is the exterior complete in the assessed scope; may quantities be
+     * taken. READ_COMPLETE is not BUILT_COMPLETE, and an accepted candidate is not a faithful house.
+     */
+    status: z
+      .object({
+        computation: z.enum(['DONE', 'PARTIAL', 'FAILED']),
+        sources: z.enum(['READ_COMPLETE', 'READ_PARTIAL', 'NOT_READ']),
+        geometry: z.enum(['BUILT_COMPLETE', 'BUILT_PARTIAL', 'NOT_BUILT']),
+        exterior: z.enum(['COMPLETE_IN_SCOPE', 'PARTIAL', 'NOT_ASSESSED']),
+        missing: z.array(z.string()).default([]),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
 
 export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
-    schemaVersion: z.literal(HOUSE_DOCUMENT_VERSION),
+    /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
+    schemaVersion: z.enum(['0.1.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),
@@ -377,6 +458,10 @@ export const HouseDocumentSchema = z
         url: z.string().optional(),
         pictures: z.array(PictureSchema).default([]),
         missing: z.array(z.object({ what: z.string(), status: z.enum(['NOT_PUBLISHED', 'NOT_READABLE', 'NOT_SENT']) }).strict()).default([]),
+        /** v0.2. Every picture the page names as an elevation or section: whether it was sent, asked about and answered. */
+        views: z
+          .array(z.object({ picture: Id, role: z.enum(['ELEVATION', 'SECTION']), asked: z.number().int().default(0), answer: z.enum(['DESCRIBED', 'NOT_ASKED', 'ASKED_NOT_ANSWERED', 'NOT_SENT', 'REPLAY_WITHOUT_FOLLOW_UP']), why: z.string().optional() }).strict())
+          .default([]),
       })
       .strict(),
     reader: z.object({ engine: z.string(), model: z.string().optional(), prompt: z.string().optional(), at: z.string().optional() }).strict().optional(),

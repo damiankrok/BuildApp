@@ -1,0 +1,1353 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-dcb144-75a62d78b1",
+  "canonicalUrl": "https://lipinscy.pl/projekt/alaska",
+  "fetchedUrl": "https://lipinscy.pl/projekt/alaska/",
+  "pageHash": "8bcb6ff74eca50dea8610166ac1c66b0d80b4b2fd71f1d7d820525d74eed952e",
+  "project": {
+    "externalId": "DCB144",
+    "name": "Projekt Alaska - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-193f0aca5e",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-fr1-k2-799b812303",
+          "url": "https://lipinscy.pl/upload/media/projects/37629/dcb144_fr1_k2",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 266173,
+          "byteHash": "de8dc0123067d7fc4621bb4f41ccfa2000161e1aeb467b5fc84a08e49aa87415",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-fr1-k2-799b812303",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-1dcfcaa61b",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-33572-projects-thumb-gallery-small-jpeg-6312537f80",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/34/thumb_33572_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 3410,
+          "byteHash": "b9a141c5e7f5fdfc76c280e3870cfa602315296ebe5cdab489e97f5a1d77e7df",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-33572-projects-thumb-gallery-small-jpeg-6312537f80",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-4f72fa5838",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 103,58 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-r1-pdf-424af78fbc",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/33575/dcb144_r1-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 94327,
+          "byteHash": "97d4947aa4641b2f4d512e1d7a8e6aac7b62920fa28f1006829150fee7fbe746",
+          "decoded": {
+            "width": 494,
+            "height": 999
+          },
+          "declaredMismatch": false,
+          "aspect": 0.494494
+        },
+        {
+          "id": "var-thumb-33575-floorplanpdf-thumb-png-eaf2ae4f67",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33575_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 239584,
+          "byteHash": "8059554d763ec3971f880484d5a5b5905234674df308518d7cca09c3c3a85eb2",
+          "decoded": {
+            "width": 340,
+            "height": 688
+          },
+          "declared": {
+            "width": 494,
+            "height": 999
+          },
+          "declaredMismatch": true,
+          "aspect": 0.494186
+        }
+      ],
+      "selectedVariantId": "var-dcb144-r1-pdf-424af78fbc",
+      "selectionReason": "largest decoded raster of 2 variants: 494x999 over 340x688"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-517ac9ea9d",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-37627-projects-thumb-gallery-small-jpeg-0135414fcf",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/38/thumb_37627_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 3481,
+          "byteHash": "449c99e595452d5d312a4116ab7aacc49f3ea6ccfc3257eaf14c71d68117e5ca",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-37627-projects-thumb-gallery-small-jpeg-0135414fcf",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-5214b4ea49",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-fr2-4e17507f66",
+          "url": "https://lipinscy.pl/upload/media/projects/33564/dcb144_fr2",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 129112,
+          "byteHash": "f5edbafbfa2e30f3b93baa9a255f714f3ce9a0a7b960bd61d32f7ba065336386",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-fr2-4e17507f66",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-6182a2e141",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-33568-projects-thumb-gallery-small-jpeg-8585bc2934",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/34/thumb_33568_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 3574,
+          "byteHash": "756f31a989a5d4e3f40c65a6385842e5671407adab8c25e4a45bc01a3fd56968",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-33568-projects-thumb-gallery-small-jpeg-8585bc2934",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-71afb2d2f4",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-33564-projects-thumb-gallery-small-jpeg-62314c4313",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/34/thumb_33564_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 2661,
+          "byteHash": "af859f0c5eb71eab3215075c12f042d44dd8c88c70b037fefcf81771cda47039",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-33564-projects-thumb-gallery-small-jpeg-62314c4313",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-8015c6356d",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-detal1-641dc1394e",
+          "url": "https://lipinscy.pl/upload/media/projects/34467/dcb144_detal1",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 150946,
+          "byteHash": "aba1188fcbd0b05ee99f0b59d70f095cc00d185104044b7698187ef597f7af44",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-detal1-641dc1394e",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-8a5afe2749",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Alaska przekrój\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-px-pdf-6f2bb5a96b",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/33592/dcb144_px-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 41900,
+          "byteHash": "d8cef0941f9c121cde4404138d4611ce8dcbf76016fdf7645da9062df4c9ce8f",
+          "decoded": {
+            "width": 769,
+            "height": 673
+          },
+          "declaredMismatch": false,
+          "aspect": 1.142645
+        },
+        {
+          "id": "var-thumb-33592-crossviewpdf-thumb-png-d150bae932",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/34/thumb_33592_crossviewpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 78348,
+          "byteHash": "ec964ed2cffb384381e0e6b595c3269805f616227dd37b0678fc16292c9b0c46",
+          "decoded": {
+            "width": 340,
+            "height": 298
+          },
+          "declared": {
+            "width": 769,
+            "height": 673
+          },
+          "declaredMismatch": true,
+          "aspect": 1.14094
+        }
+      ],
+      "selectedVariantId": "var-dcb144-px-pdf-6f2bb5a96b",
+      "selectionReason": "largest decoded raster of 2 variants: 769x673 over 340x298"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-926bb6a5e7",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-wn2-6d9526cfb4",
+          "url": "https://lipinscy.pl/upload/media/projects/33572/dcb144_wn2",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 108751,
+          "byteHash": "90ec82ebaa98027582dce066861ec31d57f980f38ffe62ba796c90d7281adfef",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-wn2-6d9526cfb4",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-9856ebab42",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-og1-k2-d8771c19c4",
+          "url": "https://lipinscy.pl/upload/media/projects/37627/dcb144_og1_k2",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 284834,
+          "byteHash": "8a52e8290d183044b79475a36fc6d58b48611d87ac541405485f81b040fe9a62",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-og1-k2-d8771c19c4",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-ab85d61eaa",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcb144-wn1-147dc96453",
+          "url": "https://lipinscy.pl/upload/media/projects/33568/dcb144_wn1",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 119236,
+          "byteHash": "9ce01fb34cb11c0f1aa0e06ea727ce65740ddf55e844320ac9e61370584a6ed2",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcb144-wn1-147dc96453",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-b73695ef35",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-37629-projects-thumb-gallery-small-jpeg-5e2bb25318",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/38/thumb_37629_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 3433,
+          "byteHash": "13a4b25f43d76139d3396147c43f92876deee1ca3bc456da773e58eb093b9c5e",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-37629-projects-thumb-gallery-small-jpeg-5e2bb25318",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-bb4184f733",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Alaska wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Alaska wymiary działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "confidence": 0.62
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-rd-500-pdf-8cf390be20",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/33588/dcb144_rd_500-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 14340,
+          "byteHash": "9e673d7e9cc06fdfe9012ff8edff0958f595a361b699bca0c9b37152904c6a9a",
+          "decoded": {
+            "width": 533,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 0.692208
+        },
+        {
+          "id": "var-thumb-33588-plotpdf-thumb-png-6b8ac2984f",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/34/thumb_33588_plotpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 101915,
+          "byteHash": "8c5b8f5e87de9b648f4bc18f3aef12461c78190dad957580db5b8c9efa2b93e2",
+          "decoded": {
+            "width": 340,
+            "height": 491
+          },
+          "declared": {
+            "width": 533,
+            "height": 770
+          },
+          "declaredMismatch": true,
+          "aspect": 0.692464
+        }
+      ],
+      "selectedVariantId": "var-dcb144-rd-500-pdf-8cf390be20",
+      "selectionReason": "largest decoded raster of 2 variants: 533x770 over 340x491"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-d52230c8ba",
+      "caption": "Gotowy projekt domu Alaska",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-34467-projects-thumb-gallery-small-jpeg-74fd81735a",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/35/thumb_34467_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 3281,
+          "byteHash": "c9bbc5a44599e1e98227a7eb332d78b28815b988e4d3bb2549b059ada9b5539b",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-34467-projects-thumb-gallery-small-jpeg-74fd81735a",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-elewacja-lewa-5b8181a2ab",
+      "caption": "Gotowy projekt domu Alaska elewacja lewa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 33581 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Alaska elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33581-facades-thumb-gallery-small-jpeg-37e75af3fe",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33581_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 1501,
+          "byteHash": "3078c5099b7f20f48ce33af98caffd2f27f8dca897343a23fc909063caf6d839",
+          "decoded": {
+            "width": 119,
+            "height": 34
+          },
+          "declaredMismatch": false,
+          "aspect": 3.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-33581-facades-thumb-gallery-small-jpeg-37e75af3fe",
+      "selectionReason": "only variant (119x34, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-elewacja-prawa-52351ff3d8",
+      "caption": "Gotowy projekt domu Alaska elewacja prawa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 33585 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Alaska elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33585-facades-thumb-gallery-small-jpeg-14c12acb4a",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33585_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 1708,
+          "byteHash": "e98337ca7e83e320457c23feccefacae14ade6c2f4d32aaa15d5a45281f23927",
+          "decoded": {
+            "width": 120,
+            "height": 73
+          },
+          "declaredMismatch": false,
+          "aspect": 1.643836
+        }
+      ],
+      "selectedVariantId": "var-thumb-33585-facades-thumb-gallery-small-jpeg-14c12acb4a",
+      "selectionReason": "only variant (120x73, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-elewacja-przod-9e5c74e980",
+      "caption": "Gotowy projekt domu Alaska elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 33579 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Alaska elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33579-facades-thumb-gallery-small-jpeg-ce6c8e9b17",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33579_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 1708,
+          "byteHash": "dbcea3224d099d30d9dc9e91d9c9e049cb78078a67c9655adf9ee98b72b3bdcc",
+          "decoded": {
+            "width": 119,
+            "height": 34
+          },
+          "declaredMismatch": false,
+          "aspect": 3.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-33579-facades-thumb-gallery-small-jpeg-ce6c8e9b17",
+      "selectionReason": "only variant (119x34, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-elewacja-ty-d2df5d8491",
+      "caption": "Gotowy projekt domu Alaska elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 33583 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Alaska elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33583-facades-thumb-gallery-small-jpeg-c0b0d37c7c",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33583_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 2226,
+          "byteHash": "155a70bb7a5693593409c449d423093b110027752a49ee3700adae9bab9c3535",
+          "decoded": {
+            "width": 119,
+            "height": 74
+          },
+          "declaredMismatch": false,
+          "aspect": 1.608108
+        }
+      ],
+      "selectedVariantId": "var-thumb-33583-facades-thumb-gallery-small-jpeg-c0b0d37c7c",
+      "selectionReason": "only variant (119x74, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-przekroj-1e299df991",
+      "caption": "Gotowy projekt domu Alaska przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Alaska przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33592-crossviewpdf-thumb-gallery-small-png-d051d74f0c",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/34/thumb_33592_crossviewpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 9551,
+          "byteHash": "d840f4f70207dc799e330389e6a7fe69be6bf5bc355393765f9bd77163effb9f",
+          "decoded": {
+            "width": 120,
+            "height": 105
+          },
+          "declaredMismatch": false,
+          "aspect": 1.142857
+        }
+      ],
+      "selectedVariantId": "var-thumb-33592-crossviewpdf-thumb-gallery-small-png-d051d74f0c",
+      "selectionReason": "only variant (120x105, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-przekroj-6375ba50de",
+      "caption": "Gotowy projekt domu Alaska przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Alaska przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33592-crossviewpdf-thumb-gallery-big-v2-pn-11c35609c2",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/34/thumb_33592_crossviewpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 1899721,
+          "byteHash": "02c3a48618f100c345d3d34de202def350f542a128c4691a07b7411fff5f29de",
+          "decoded": {
+            "width": 736,
+            "height": 644
+          },
+          "declaredMismatch": false,
+          "aspect": 1.142857
+        }
+      ],
+      "selectedVariantId": "var-thumb-33592-crossviewpdf-thumb-gallery-big-v2-pn-11c35609c2",
+      "selectionReason": "only variant (736x644, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-rzut-parter-baa18bd39a",
+      "caption": "Gotowy projekt domu Alaska rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33575-floorplanpdf-thumb-gallery-small-png-5239164eca",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33575_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 34801,
+          "byteHash": "8e15b62705c412b1acbced989929c0f052c2f121d669642092abaa726c7af14f",
+          "decoded": {
+            "width": 120,
+            "height": 243
+          },
+          "declaredMismatch": false,
+          "aspect": 0.493827
+        }
+      ],
+      "selectedVariantId": "var-thumb-33575-floorplanpdf-thumb-gallery-small-png-5239164eca",
+      "selectionReason": "only variant (120x243, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-rzut-parter-c15928f44d",
+      "caption": "Gotowy projekt domu Alaska rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Alaska rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33575-floorplanpdf-thumb-gallery-big-v2-pn-d2c439b2c5",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/34/thumb_33575_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 1978299,
+          "byteHash": "18126764a39f14990162a48b89f5cf0c82c4afa7b480277e66dcdfa8fb6ac1ac",
+          "decoded": {
+            "width": 494,
+            "height": 999
+          },
+          "declaredMismatch": false,
+          "aspect": 0.494494
+        }
+      ],
+      "selectedVariantId": "var-thumb-33575-floorplanpdf-thumb-gallery-big-v2-pn-d2c439b2c5",
+      "selectionReason": "only variant (494x999, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-wymiary-dzia-ki-72db7d4c35",
+      "caption": "Gotowy projekt domu Alaska wymiary działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Alaska wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Alaska wymiary działki\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33588-plotpdf-thumb-gallery-big-v2-png-c666a75613",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/34/thumb_33588_plotpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 1645144,
+          "byteHash": "86c2029cf32fd7a9c7099c457a68464badf8fef405a0400c46632db8c945d0d4",
+          "decoded": {
+            "width": 533,
+            "height": 770
+          },
+          "declaredMismatch": false,
+          "aspect": 0.692208
+        }
+      ],
+      "selectedVariantId": "var-thumb-33588-plotpdf-thumb-gallery-big-v2-png-c666a75613",
+      "selectionReason": "only variant (533x770, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-alaska-wymiary-dzia-ki-d736e6d57f",
+      "caption": "Gotowy projekt domu Alaska wymiary działki ",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Alaska wymiary działki \")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Alaska wymiary działki \")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-33588-plotpdf-thumb-gallery-small-png-712a8885c3",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/34/thumb_33588_plotpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/png",
+          "byteLength": 12443,
+          "byteHash": "db89da606bc5bc5e49a8f85ad1a983dc696b3bdfa07fc2c8cd594abae3577a7c",
+          "decoded": {
+            "width": 120,
+            "height": 173
+          },
+          "declaredMismatch": false,
+          "aspect": 0.693642
+        }
+      ],
+      "selectedVariantId": "var-thumb-33588-plotpdf-thumb-gallery-small-png-712a8885c3",
+      "selectionReason": "only variant (120x173, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-alaska-0d6383f8fe",
+      "caption": "Projekt domu Alaska",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Alaska elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-e3-b6f655bec9",
+          "url": "https://lipinscy.pl/upload/media/facades/33583/dcb144_e3",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 20023,
+          "byteHash": "4c2f3060bec6a9b1a03614b07a5010712b2a964bcacb37b1fb02c5d24efebd6f",
+          "decoded": {
+            "width": 726,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 1.613333
+        },
+        {
+          "id": "var-thumb-33583-admin-jpeg-e09c1c5746",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33583_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 7052,
+          "byteHash": "8b4a2447bfd1708c378c9e79e1622e0f7bc6375fdf572d2808b7f87975db31d6",
+          "decoded": {
+            "width": 200,
+            "height": 124
+          },
+          "declared": {
+            "width": 726,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 1.612903
+        }
+      ],
+      "selectedVariantId": "var-dcb144-e3-b6f655bec9",
+      "selectionReason": "largest decoded raster of 2 variants: 726x450 over 200x124"
+    },
+    {
+      "id": "asset-projekt-domu-alaska-73a7d48df1",
+      "caption": "Projekt domu Alaska",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Alaska elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-e1-d2aa56e556",
+          "url": "https://lipinscy.pl/upload/media/facades/33579/dcb144_e1",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 53125,
+          "byteHash": "28205214d176e3a8c0b8ee68da2b6ad51b1da8a51896a3272d7617d00e9ad41c",
+          "decoded": {
+            "width": 1571,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 3.491111
+        },
+        {
+          "id": "var-thumb-33579-admin-jpeg-89c9173d4b",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33579_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 4586,
+          "byteHash": "3dda9020f439f4768e19980dc4d9fb60d8fa901a2d9143d9bdeb9c09f0a5946f",
+          "decoded": {
+            "width": 199,
+            "height": 57
+          },
+          "declared": {
+            "width": 1571,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 3.491228
+        }
+      ],
+      "selectedVariantId": "var-dcb144-e1-d2aa56e556",
+      "selectionReason": "largest decoded raster of 2 variants: 1571x450 over 199x57"
+    },
+    {
+      "id": "asset-projekt-domu-alaska-aede6cda06",
+      "caption": "Projekt domu Alaska",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Alaska elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-e2-e01eaa2242",
+          "url": "https://lipinscy.pl/upload/media/facades/33581/dcb144_e2",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 39053,
+          "byteHash": "b73739fb874ed8bc4d8daf8404731980931433d530315f96bfe2dcf7eb487a07",
+          "decoded": {
+            "width": 1581,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 3.513333
+        },
+        {
+          "id": "var-thumb-33581-admin-jpeg-20813ef3f7",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33581_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 4206,
+          "byteHash": "9e0fbd361f49fe2852fadedb37f158620162ce8e78906b8a2a64a5435871c59a",
+          "decoded": {
+            "width": 200,
+            "height": 57
+          },
+          "declared": {
+            "width": 1581,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 3.508772
+        }
+      ],
+      "selectedVariantId": "var-dcb144-e2-e01eaa2242",
+      "selectionReason": "largest decoded raster of 2 variants: 1581x450 over 200x57"
+    },
+    {
+      "id": "asset-projekt-domu-alaska-c16d8ca7cf",
+      "caption": "Projekt domu Alaska",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Alaska elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Alaska elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcb144-e4-454fcbfade",
+          "url": "https://lipinscy.pl/upload/media/facades/33585/dcb144_e4",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 14665,
+          "byteHash": "a025af4c9ceaec01d0c504f216999ab2b09d2313c15d1f74e3c38469a88965c6",
+          "decoded": {
+            "width": 741,
+            "height": 450
+          },
+          "declaredMismatch": false,
+          "aspect": 1.646667
+        },
+        {
+          "id": "var-thumb-33585-admin-jpeg-0819eb36b5",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/34/thumb_33585_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/alaska",
+          "mediaType": "image/jpeg",
+          "byteLength": 4938,
+          "byteHash": "336bc09a0e7a9d2aad3d324edc6ea19bb66e001613649312532398cd4195da53",
+          "decoded": {
+            "width": 199,
+            "height": 121
+          },
+          "declared": {
+            "width": 741,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 1.644628
+        }
+      ],
+      "selectedVariantId": "var-dcb144-e4-454fcbfade",
+      "selectionReason": "largest decoded raster of 2 variants: 741x450 over 199x121"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 131.03,
+      "unit": "m2",
+      "raw": "131,03m²"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "value": 103.58,
+      "unit": "m2",
+      "raw": "103,58m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 186.5,
+      "unit": "m2",
+      "raw": "186,50m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 38,
+      "unit": "deg",
+      "raw": "38°"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 103.58,
+      "unit": "m2",
+      "raw": "103,58m²"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt parterowego domu Alaska to prosta forma w eleganckim wydaniu. Cztery sypialnie, dwie wygodne łazienki i przestronny salon połączony z kuchnią i jadalnią, czynią z tego projektu idealny dom dla Twojej rodziny. Salon o wysokim wnętrzu i oryginalnych przeszkleniach, posiada zadaszony taras i wygodną przestrzeń dzienną. Kuchnia ze spiżarką wydzielona jest kontuarem. To wnętrze daje niepowtarzalną możliwość nowoczesnej aranżacji. Każda z czterech sypialnia jest ustawna tak, że w tym niewielkim domu wygodnie zamieszka pięć osób. W projekcie przewidziano ogrzewanie pompą ciepła. Alaska to doskonały projekt, nowoczesnego i kompaktowego domu na wąskie działki z wejściem od południa."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "38°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Nowoczesny dom parterowy, kompaktowy, na wąskie działki, z dwuspadowym dachem, z wejściem od południa, z dużymi oknami, z przestronnym salonem o wysokim wnętrzu, cztery sypialnie, dwie łazienki"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/alaska/Projekt parterowego domu Alaska to prosta forma w eleganckim wydaniu. Cztery sypialnie, dwie wygodne łazienki i przestronny salon połączony z kuchnią i jadalnią, czynią z tego projektu idealny dom dla Twojej rodziny. Salon o wysokim wnętrzu i oryginalnych przeszkleniach, posiada zadaszony taras i wygodną przestrzeń dzienną. Kuchnia ze spiżarką wydzielona jest kontuarem. To wnętrze daje niepowtarzalną możliwość nowoczesnej aranżacji. Każda z czterech sypialnia jest ustawna tak, że w tym niewielkim domu wygodnie zamieszka pięć osób. W projekcie przewidziano ogrzewanie pompą ciepła. Alaska to doskonały projekt, nowoczesnego i kompaktowego domu na wąskie działki z wejściem od południa."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/35/d950c0c471ff973b6d90770c54eecad582e7db24.jpeg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/34467/dcb144_detal1: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "2e83281dcd9decfecf6e6721c2b44d315fbcad0c4905e8d7f3fbfcf51052e172"
+}

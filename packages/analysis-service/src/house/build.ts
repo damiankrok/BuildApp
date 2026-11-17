@@ -8,9 +8,9 @@
  */
 import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
-import { createEmptyModel } from '@buildapp/model'
+import { createEmptyModel, physicalCore, resolveWallTopology } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import { HOUSE_BUILDER_LABEL, houseProgram } from '@buildapp/reconstruction'
+import { HOUSE_BUILDER_LABEL, fitOpening, houseProgram } from '@buildapp/reconstruction'
 import type { HouseDocument, HouseProgram } from '@buildapp/reconstruction'
 
 export type KernelRefusal = { id: string | null; type: string; codes: string[]; message: string; dropped: string[] }
@@ -25,6 +25,8 @@ export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
   const kernelRefusals: KernelRefusal[] = []
   let model = createEmptyModel(modelId, HOUSE_BUILDER_LABEL)
   let complete = false
+  const refitted = new Set<string>()
+  const refitWhy = new Map<string, string>()
   for (let n = 0; n <= MAX_CUTS; n += 1) {
     const r = applyCommands(createEmptyModel(modelId, HOUSE_BUILDER_LABEL), current)
     if (r.failedAt === undefined) {
@@ -46,6 +48,32 @@ export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
         kernelRefusals.push({ id, type: 'createWall/junction', codes: junctionCodes.map((e) => e.code), message: junctionCodes.map((e) => e.message).join('; ').slice(0, 400), dropped: [] })
         current = current.map((c, i) => (i === r.failedAt ? (wall as unknown as BuildingCommand) : c))
         continue
+      }
+    }
+    // v3.54.5 — an opening that reaches into the junction zone of its wall is fitted once more against the stretch the
+    // KERNEL leaves clear there (at a splayed corner that is not a wall thickness), under the same rule as before: a
+    // change within the reading's uncertainty is an adjustment, a bounded larger one an approximation that is said,
+    // anything more is not cut. Once per opening.
+    const info = id ? made.fits[id] : undefined
+    if (failed.type === 'cutOpening' && id && info && !refitted.has(id) && failure.errors.some((e) => e.code === 'OPENING_IN_JUNCTION_ZONE')) {
+      refitted.add(id)
+      const cmd = current[r.failedAt] as unknown as { wallId: string; offset: number; width: number }
+      const extent = resolveWallTopology(r.model).extents.get(cmd.wallId)
+      if (extent) {
+        const core = physicalCore(extent)
+        const fitted = fitOpening({ from: info.from - info.s0, to: info.from - info.s0 + info.width, lo: core.a0 + 0.01, hi: core.a1 - 0.01, u: info.u, printed: info.printed })
+        if (fitted.ok) {
+          const width = fitted.to - fitted.from
+          current = current.map((c, i) => (i === r.failedAt ? ({ ...(c as unknown as Record<string, unknown>), offset: Math.round(fitted.from * 1e6) / 1e6, width: Math.round(width * 1e6) / 1e6 } as unknown as BuildingCommand) : c))
+          const note = `${fitted.note ?? ''} — against the stretch the kernel leaves clear of the wall's junctions (${core.a0.toFixed(2)}..${core.a1.toFixed(2)} m)`
+          for (const t of made.trace) {
+            if (t.path === `geometry.openings[${id}].offsetM`) Object.assign(t, { built: Math.round((fitted.from + info.s0) * 1e6) / 1e6, fit: fitted.fit, code: 'OVERRIDDEN', delta: Math.round((fitted.from + info.s0 - info.from) * 1e6) / 1e6, why: note })
+            if (t.path === `geometry.openings[${id}].widthM`) Object.assign(t, { built: Math.round(width * 1e6) / 1e6, fit: fitted.fit, ...(Math.abs(width - info.width) > 1e-6 ? { code: 'OVERRIDDEN', delta: Math.round((width - info.width) * 1e6) / 1e6, why: note } : {}) })
+          }
+          if (fitted.fit === 'APPROXIMATED' && !made.approximated.some((a) => a.id === id)) made.approximated.push({ id, what: note })
+          continue
+        }
+        refitWhy.set(id, fitted.why)
       }
     }
     const dropped: string[] = []
@@ -88,7 +116,7 @@ export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
       }
       next.push(c)
     })
-    kernelRefusals.push({ id, type: failed.type, codes: failure.errors.map((e) => e.code), message: failure.errors.map((e) => e.message).join('; ').slice(0, 400), dropped })
+    kernelRefusals.push({ id, type: failed.type, codes: failure.errors.map((e) => e.code), message: `${id && refitWhy.has(id) ? `${refitWhy.get(id)} | ` : ''}${failure.errors.map((e) => e.message).join('; ')}`.slice(0, 500), dropped })
     model = r.model
     current = next
   }

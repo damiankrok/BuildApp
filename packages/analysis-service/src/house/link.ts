@@ -35,13 +35,15 @@ import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.1.0'
+export const HOUSE_PATH_VERSION = '0.2.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & { review?: boolean }
 export type HouseLinkOutcome = {
   /** The accepted run's result and scene, in the drawings path's contract; absent when neither path gave a model. */
   run?: Pick<AnalysisRun, 'result' | 'sceneText'>
   /** The house document as text, when the reading reached one. */
   houseText?: string
+  /** v3.54.5: LOCAL's model, kept as the superseded revision when the described exterior stands and LOCAL held an interior. */
+  supersededLocalText?: string
   decision: Arbitration
   local: { built: boolean; code?: string }
   described: { status: 'BUILT' | 'NOT_RESOLVED' | 'PARSE_REJECTED' | 'NOT_READ'; why?: string; modelHash?: string }
@@ -59,7 +61,7 @@ function localMeasure(run: AnalysisRun): LocalMeasure | undefined {
   const groundLevel = [...model.levels].sort((p, q) => p.elevation - q.elevation).find((l) => l.elevation >= -0.01)?.id
   const ground = model.slabs.filter((s) => s.levelId === groundLevel)
   const shoelace = (p: ReadonlyArray<{ x: number; z: number }>): number => Math.abs(p.reduce((s, a, i) => s + a.x * p[(i + 1) % p.length].z - p[(i + 1) % p.length].x * a.z, 0)) / 2
-  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))) }
+  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))), levelElevations: model.levels.map((l) => l.elevation), rooms: (model as unknown as { rooms?: unknown[] }).rooms?.length ?? 0, interiorWalls: model.walls.filter((w) => (w as unknown as { kind?: string }).kind === 'INTERIOR').length }
 }
 
 /** The described house in the drawings path's result contract: sealed candidate, model, scene, what is known of it. */
@@ -115,7 +117,9 @@ export function houseResult(input: { pkg: SourcePackage; identity: AnalysisIdent
   const failedChecks = v.checks.filter((c) => c.status === 'FAIL')
   const warningDetails: AnalysisWarning[] = [
     WARN('MODEL_FROM_WHOLE_HOUSE_DESCRIPTION', 'LIMITING', `This exterior was built from a description of the page's drawings read as a whole (${input.records.length} reading step(s), by ${input.readerModel}); the program checked it against the printed dimensions, levels and elevations (${passed} checks passed, ${failedChecks.length} failed) and built only what it could place. The interior is not built.`),
-    WARN('HOUSE_DECISION', 'INFO', `Which model stands: ${input.decision.why}`.slice(0, 600)),
+    WARN('HOUSE_DECISION', input.decision.partial ? 'LIMITING' : 'INFO', `Which model stands (${input.decision.code}${input.decision.partial ? ', a PARTIAL preview' : ''}): ${input.decision.why}`.slice(0, 600)),
+    ...(v.status ? [WARN('HOUSE_STATUS', v.status.exterior === 'COMPLETE_IN_SCOPE' ? 'INFO' : 'LIMITING', `Sources: ${v.status.sources}. Built geometry: ${v.status.geometry}. Exterior: ${v.status.exterior}.${v.status.missing.length ? ` Not accounted for: ${v.status.missing.slice(0, 6).join(' | ')}` : ''}`.slice(0, 700))] : []),
+    WARN('HOUSE_INTERIOR', 'INFO', input.decision.interior.slice(0, 400)),
     ...(failedChecks.length > 0 ? [WARN('HOUSE_CHECKS_FAILED', 'LIMITING', failedChecks.map((c) => `${c.what}: ${c.measured}`).join('; ').slice(0, 600))] : []),
     ...(v.held.length > 0 ? [WARN('HOUSE_ITEMS_NOT_BUILT', 'LIMITING', `${v.held.length} item(s) read on the sources were not built: ${v.held.slice(0, 6).map((h) => `${h.ref} (${h.code})`).join('; ')}${v.held.length > 6 ? '; …' : ''}`)] : []),
     ...v.knownDefects.slice(0, 8).map((d) => WARN(`HOUSE_${d.code}`, 'INFO', d.what.slice(0, 300))),
@@ -231,24 +235,26 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     pkg = e.attachments?.pkg
   }
   const local = { built: !!localRun, ...(localError ? { code: localError.detail.reasonCode ?? localError.code } : {}) }
-  const none = (why: string, status: HouseLinkOutcome['described']['status']): HouseLinkOutcome => ({ ...(localRun ? { run: localRun } : {}), decision: { accepted: localRun ? 'LOCAL' : 'NONE', why, findings: [] }, local, described: { status, why }, records, proposals, ...(localError && !localRun ? { error: localError } : {}) })
+  const none = (why: string, status: HouseLinkOutcome['described']['status']): HouseLinkOutcome => ({ ...(localRun ? { run: localRun } : {}), decision: { accepted: localRun ? 'LOCAL' : 'NONE', why, findings: [], code: localRun ? 'DESCRIBED_REJECTED_LOCAL_KEPT' : 'NO_MODEL', partial: false, contradictions: [], unknown: [], interior: localRun ? 'LOCAL stands with whatever interior it has: nothing is removed' : 'no model stands' }, local, described: { status, why }, records, proposals, ...(localError && !localRun ? { error: localError } : {}) })
   if (!pkg) return none('no source package was sealed: nothing to read', 'NOT_READ')
   const published = (pkg.publishedFacts ?? []).filter((f) => typeof f.value === 'number' && Number.isFinite(f.value)).map((f) => ({ key: f.key, value: f.value as number, unit: String(f.unit ?? ''), ...(f.raw ? { raw: String(f.raw) } : {}) }))
   const ctx: ReadingContext = { modelFor: describer.modelFor, price: describer.price, ...(describer.spend ? { spend: describer.spend } : {}), record: (r) => void records.push(r), ...(options.signal ? { signal: options.signal } : {}) }
   const identity = { ...identityOf(pkg, options.adapters), ...options.identity }
   let compiled: CompiledHouse
   try {
-    const { pictures } = await housePictures(pkg.assets as never, options.cache)
+    const { pictures, skipped } = await housePictures(pkg.assets as never, options.cache)
+    const roleOf = new Map(pkg.assets.map((a) => [a.id, a.roles.document === 'ELEVATION' || a.roles.document === 'SECTION' ? a.roles.document : undefined]))
+    const notSent = skipped.map((x) => ({ ...x, ...(roleOf.get(x.assetId) ? { role: roleOf.get(x.assetId) as string } : {}) }))
     const inventory = await readInventory(ctx, pictures, `publisher: ${pkg.project.publisher}`)
     if (!inventory.selection) return none(inventory.why ?? 'no ground-floor plan among the pictures', 'NOT_READ')
     const selection = inventory.selection
     const plan = await readPlan(ctx, selection, published)
-    const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10) }
+    const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10), skipped: notSent }
     if (selection.elevations.length + selection.sections.length > 0) {
       const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, identity.modelId)
       const bodiesInMetres = planOnly.document.geometry ? `On the plan, in metres (x from the building's left end seen from the front, z from the front back): ${planOnly.document.geometry.bodies.map((b) => `${b.id}: x ${Math.min(...b.outline.map((p) => p.x)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.x)).toFixed(1)}, z ${Math.min(...b.outline.map((p) => p.z)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.z)).toFixed(1)}`).join('; ')}.` : ''
       const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
-      const converted = documentFromReading({ ...base, facadesSent: facades.sent, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
+      const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
       compiled = compileHouse(JSON.parse(JSON.stringify(converted.document)), identity.modelId)
       if (describer.review !== false && compiled.bundle) {
         const reviewed = await reviewHouse({ ctx, selection, facadesSent: facades.sent, observationsDocument: converted.document, compiled, modelId: identity.modelId })
@@ -264,12 +270,18 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   const describedStatus = compiled.rejected ? 'PARSE_REJECTED' : compiled.bundle ? 'BUILT' : 'NOT_RESOLVED'
   // which house stood is part of the document, whichever it was
   const doc = compiled.document
-  if (!compiled.rejected) doc.verification.knownDefects.push({ code: `ACCEPTED_${decision.accepted}`, what: decision.why.slice(0, 400) })
+  if (!compiled.rejected) {
+    doc.verification.knownDefects.push({ code: `ACCEPTED_${decision.accepted}`, what: `${decision.code}${decision.partial ? ' (PARTIAL PREVIEW)' : ''}: ${decision.why}`.slice(0, 500) })
+    if (decision.accepted === 'DESCRIBED') doc.verification.knownDefects.push({ code: 'INTERIOR', what: decision.interior.slice(0, 400) })
+  }
   const houseText = compiled.rejected ? undefined : `${JSON.stringify(doc)}\n`
   const described = { status: describedStatus as HouseLinkOutcome['described']['status'], ...(compiled.modelHash ? { modelHash: compiled.modelHash } : {}), ...(compiled.rejected ? { why: compiled.rejected.slice(0, 3).join('; ') } : {}) }
   if (decision.accepted === 'DESCRIBED') {
     const run = houseResult({ pkg, identity, sourceUrl: input.kind === 'URL' ? input.url : pkg.canonicalUrl, jobId: options.jobId ?? null, compiled, decision, records, readerModel: ctx.modelFor('PLAN').model, startedAt, now })
-    return { run, ...(houseText ? { houseText } : {}), decision, local, described, records, proposals }
+    // LOCAL's rooms and interior walls are not attached to another outline unchecked, and they are not thrown away
+    const lm = localRun ? localMeasure(localRun) : undefined
+    const supersededLocalText = localRun && lm && (lm.rooms ?? 0) + (lm.interiorWalls ?? 0) > 0 ? serializeModel(localRun.result.model) : undefined
+    return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals }
   }
   return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(localError && !localRun ? { error: localError } : {}) }
 }

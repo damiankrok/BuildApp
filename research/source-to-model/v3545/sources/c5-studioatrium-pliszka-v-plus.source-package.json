@@ -1,0 +1,882 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-www-studioatrium-pl-13868a634c",
+  "canonicalUrl": "https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+  "pageHash": "1fefd16028a8386330590d06ab0f4c58cb61c00d30d0ec42871d0f93959ea742",
+  "project": {
+    "name": "Projekt domu Pliszka V Plus",
+    "publisher": "studioatrium.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-elewacja-boczna-domu-pliszka-v-plus-414048f5d1",
+      "caption": "elewacja boczna domu Pliszka V Plus",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 6a145f1827c73\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Pliszka V Plus\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Pliszka V Plus\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-6a145f1827c73-jpg-2b5e1a15bb",
+          "url": "https://media.studioatrium.pl/project/1802/elewacja-6a145f1827c73.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 42899,
+          "byteHash": "09ae5f27aae392b2cac974d1a48556b2a7e3365c6cf28a9cb58ec174b68419b0",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-6a145f1827c73-jpg-2b5e1a15bb",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-boczna-domu-pliszka-v-plus-f2c5b8d8aa",
+      "caption": "elewacja boczna domu Pliszka V Plus",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 6a145fa5ebda8\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja boczna domu Pliszka V Plus\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"elewacja boczna domu Pliszka V Plus\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-6a145fa5ebda8-jpg-86cff55fba",
+          "url": "https://media.studioatrium.pl/project/1802/elewacja-6a145fa5ebda8.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 47031,
+          "byteHash": "c29a2884276fdd235018723e48673f57b3c995a51868136f01e9f5b49fada343",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-6a145fa5ebda8-jpg-86cff55fba",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-frontowa-domu-pliszka-v-plus-1b53c2a637",
+      "caption": "elewacja frontowa domu Pliszka V Plus",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 6a1ec0099f5a5\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja frontowa domu Pliszka V Plus\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"frontowa\" in \"elewacja frontowa domu Pliszka V Plus\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-6a1ec0099f5a5-jpg-8f938b5982",
+          "url": "https://media.studioatrium.pl/project/1802/elewacja-6a1ec0099f5a5.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 33203,
+          "byteHash": "de780446b2c8cb2274ac2c7f731c4a182e2b6e770fdde769bc5ef46b271b1600",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-6a1ec0099f5a5-jpg-8f938b5982",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-tylna-domu-pliszka-v-plus-29e308184a",
+      "caption": "elewacja tylna domu Pliszka V Plus",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 6a145f2a6ca2f\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja tylna domu Pliszka V Plus\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tylna\" in \"elewacja tylna domu Pliszka V Plus\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-6a145f2a6ca2f-jpg-a9d03bcfbb",
+          "url": "https://media.studioatrium.pl/project/1802/elewacja-6a145f2a6ca2f.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 33210,
+          "byteHash": "bbf6708c43acc88978ad87828ae05ff0bc07f34f5ac4477994c55f7c234fb752",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-6a145f2a6ca2f-jpg-a9d03bcfbb",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-generowanie-pliku-7541ac17b9",
+      "caption": "Generowanie pliku",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-loader-gif-22db5820a5",
+          "url": "https://www.studioatrium.pl/img/loader.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/gif",
+          "byteLength": 673,
+          "byteHash": "9db486efc49e6d43525a174416f8a1d4999627d7e8728c4c323228f1aa568967",
+          "decoded": {
+            "width": 16,
+            "height": 16
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-loader-gif-22db5820a5",
+      "selectionReason": "only variant (16x16, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-parteru-pliszka-v-plus-4645bb81b0",
+      "caption": "rzut parteru - Pliszka V Plus",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 6a145d0287c2c\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut parteru - Pliszka V Plus\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"rzut parteru - Pliszka V Plus\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-6a145d0287c2c-png-f7f62d8c80",
+          "url": "https://media.studioatrium.pl/project/1802/rzut-6a145d0287c2c.png",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/png",
+          "byteLength": 138487,
+          "byteHash": "8eaa7e33e8962a1c5f18a5c836810e8569cd7fba81b44c7c3fd9a1cefb26bbbc",
+          "decoded": {
+            "width": 1030,
+            "height": 1961
+          },
+          "declaredMismatch": false,
+          "aspect": 0.525242
+        }
+      ],
+      "selectedVariantId": "var-rzut-6a145d0287c2c-png-f7f62d8c80",
+      "selectionReason": "only variant (1030x1961, decoded from bytes)"
+    },
+    {
+      "id": "asset-waiter-blue-gif-57c8c7de8f",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 103,90 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-waiter-blue-gif-8b0babfa97",
+          "url": "https://www.studioatrium.pl/img/waiter-blue.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/gif",
+          "byteLength": 3208,
+          "byteHash": "98b3c8d8db7281e3772cdae94ad6e3f7c25495314a1e2170fac6b9417ff32f5e",
+          "decoded": {
+            "width": 32,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-waiter-blue-gif-8b0babfa97",
+      "selectionReason": "only variant (32x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-pliszka-v-plus-duze-w-9a1a71525f",
+      "caption": "wizualizacja projektu domu Pliszka V Plus - duże wysokie przeszklenia w salonie, drewniane elementy ozdobne na elewacji",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacji\" in \"Projekty domów - Projekt domu parterowego PLISZKA V PLUS - wizualizacja 1 wizual\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacji\" in \"Projekty domów - Projekt domu parterowego PLISZKA V PLUS - wizualizacja 1 wizual\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacji\" in \"wizualizacja projektu domu Pliszka V Plus - duże wysokie przeszklenia w salonie,\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacji\" in \"wizualizacja projektu domu Pliszka V Plus - duże wysokie przeszklenia w salonie,\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"pliszka v plus wizualizacja 1350 6a17f706ccdfc\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"pliszka v plus wizualizacja 1350 6a17f706ccdfc\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"pliszka v plus wizualizacja 1350 6a17f706ccdfc\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"pliszka v plus wizualizacja 6a17f706ccdfc\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pliszka-v-plus-wizualizacja-6a17f706ccdfc-jpg-2d72f34e1e",
+          "url": "https://media.studioatrium.pl/project/1802/pliszka-v-plus-wizualizacja-6a17f706ccdfc.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 352157,
+          "byteHash": "2be65b3d85e1d9c23da1699998f8332fbf7398c7a6520ae9cbb3a023e317dc59",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-pliszka-v-plus-wizualizacja-1350-6a17f706ccdfc-j-5a0d6a0416",
+          "url": "https://media.studioatrium.pl/project/1802/pliszka-v-plus-wizualizacja-1350-6a17f706ccdfc.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 173626,
+          "byteHash": "3acd73f11a78c1b79792aa6751edf1249b294d9c5a0361990922df9914cebe5a",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-pliszka-v-plus-wizualizacja-6a17f706ccdfc-jpg-2d72f34e1e",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-pliszka-v-plus-duze-w-fc9dc14ef6",
+      "caption": "wizualizacja projektu domu Pliszka V Plus - duże wysokie przeszklenia w salonie, drewniane elementy ozdobne na elewacji",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacji\" in \"wizualizacja projektu domu Pliszka V Plus - duże wysokie przeszklenia w salonie,\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja 6a145b09837a8\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wizualizacja-6a145b09837a8-jpg-9b352e4573",
+          "url": "https://media.studioatrium.pl/project/1802/wizualizacja-6a145b09837a8.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 388939,
+          "byteHash": "d766398f9d2378d65eaa759c374aa3e85474692080d3717d778859ab71c2c60d",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wizualizacja-6a145b09837a8-jpg-9b352e4573",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-pliszka-v-plus-zadasz-5263d4954d",
+      "caption": "wizualizacja projektu domu Pliszka V Plus - zadaszony taras w podcieniu z dużą otwartą przestrzenią powyżej",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"pliszka v plus wizualizacja 6a19546138f46\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Pliszka V Plus - zadaszony taras w podcieniu z dużą o\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Pliszka V Plus - zadaszony taras w podcieniu z dużą o\")",
+          "confidence": 0.82
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pliszka-v-plus-wizualizacja-6a19546138f46-jpg-95bc2f62f4",
+          "url": "https://media.studioatrium.pl/project/1802/pliszka-v-plus-wizualizacja-6a19546138f46.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 352379,
+          "byteHash": "a7df4d9df64e044343a0cb4034684a5ad4fd40070d91c426e51fc22e04880de8",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-dummy-jpg-723026fe84",
+          "url": "https://www.studioatrium.pl/img/dummy.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 8391,
+          "byteHash": "6a6ad05d24d761d4b6b367a8c7828044f07542d84c5784f18b5825fc708bcc8a",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declared": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-pliszka-v-plus-wizualizacja-6a19546138f46-jpg-95bc2f62f4",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-pliszka-v-plus-zadasz-c4ad2f9cea",
+      "caption": "wizualizacja projektu domu Pliszka V Plus - zadaszone wejście do domu przy dwustanowiskowym garażu",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja 1350 6a145ae656626\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja 6a145ae656626\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Pliszka V Plus - zadaszone wejście do domu przy dwust\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Pliszka V Plus - zadaszone wejście do domu przy dwust\")",
+          "confidence": 0.82
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wizualizacja-6a145ae656626-jpg-6a4dc57438",
+          "url": "https://media.studioatrium.pl/project/1802/wizualizacja-6a145ae656626.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 377023,
+          "byteHash": "95a4d832926bb9474dcfbca68b11825c2982df9bed0bbfb7bcac499556071229",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-wizualizacja-1350-6a145ae656626-jpg-df418c117e",
+          "url": "https://media.studioatrium.pl/project/1802/wizualizacja-1350-6a145ae656626.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 192005,
+          "byteHash": "ee6e7896a8ea6959c8712f19f64d127f9421aeb009add765e7de864ac52b54c7",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declared": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wizualizacja-6a145ae656626-jpg-6a4dc57438",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-pliszka-v-plus-zadasz-e25675c066",
+      "caption": "wizualizacja projektu domu Pliszka V Plus - zadaszony taras w podcieniu z dużą otwartą przestrzenią powyżej",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja 6a145aa6266e4\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wizualizacja projektu domu Pliszka V Plus - zadaszony taras w podcieniu z dużą o\")",
+          "confidence": 0.82
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wizualizacja-6a145aa6266e4-jpg-369c517922",
+          "url": "https://media.studioatrium.pl/project/1802/wizualizacja-6a145aa6266e4.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 335704,
+          "byteHash": "3196eb1773afe61990f70af7efa5a82be18b05fc40842d4c7faddc25897601de",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wizualizacja-6a145aa6266e4-jpg-369c517922",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)"
+    },
+    {
+      "id": "asset-wnetrze-projektu-pliszka-v-plus-pokoj-dzienny-z-d710f7917b",
+      "caption": "wnętrze projektu Pliszka V Plus: pokój dzienny z jadalnią i otwartą przestrzenią, z kominkiem i oknem do szczytu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-6a3ba4c4cea61-jpg-ab63e9c455",
+          "url": "https://media.studioatrium.pl/project/1802/interior/wnetrze-6a3ba4c4cea61.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 625833,
+          "byteHash": "a3df44d39e2fe4565a3e095ffedd7eddfa828edeb20b2a0dfdce0dff4815b579",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-6a3ba4c4cea61-jpg-ab63e9c455",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)"
+    },
+    {
+      "id": "asset-zobacz-galerie-projektu-pliszka-v-plus-ae98ecd3ad",
+      "caption": "Zobacz galerię projektu Pliszka V Plus",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-finger-png-4c3ec8d5a5",
+          "url": "https://www.studioatrium.pl/img/finger.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Pliszka-v-plus,1802.html",
+          "mediaType": "image/png",
+          "byteLength": 5050,
+          "byteHash": "280b256ffccbf48c8b2e8acab725410940ad9bf1d1cfa2bb849bea8799384366",
+          "decoded": {
+            "width": 90,
+            "height": 100
+          },
+          "declaredMismatch": false,
+          "aspect": 0.9
+        }
+      ],
+      "selectedVariantId": "var-finger-png-4c3ec8d5a5",
+      "selectionReason": "only variant (90x100, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "wysokość budynku",
+      "value": 6.71,
+      "unit": "m",
+      "raw": "6,71 m"
+    },
+    {
+      "key": "building_length",
+      "label": "długość budynku",
+      "value": 18.95,
+      "unit": "m",
+      "raw": "18,95 m"
+    },
+    {
+      "key": "building_width",
+      "label": "szerokość budynku",
+      "value": 11.45,
+      "unit": "m",
+      "raw": "11,45 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "pow. zabudowy",
+      "value": 201.5,
+      "unit": "m2",
+      "raw": "201,50 m²"
+    },
+    {
+      "key": "garage_area",
+      "label": "garaż",
+      "value": 35.65,
+      "unit": "m2",
+      "raw": "35,65 m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "pow. dachu",
+      "value": 231.6,
+      "unit": "m2",
+      "raw": "231,60 m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "kąt nachylenia dachu",
+      "value": 30,
+      "unit": "deg",
+      "raw": "30 °"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 103.9,
+      "unit": "m2",
+      "raw": "103,90 m²"
+    },
+    {
+      "key": "volume",
+      "label": "kubatura brutto",
+      "value": 937,
+      "unit": "none",
+      "raw": "937,00 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu Pliszka V Plus to propozycja dla osób, które szukają nowoczesnej architektury o ponadczasowym charakterze, ale jednocześnie nie chcą rezygnować z przytulności i domowego ciepła. Bryła inspirowana stylem nowoczesnej stodoły zachwyca prostotą formy, eleganckimi proporcjami oraz wyważonym połączeniem naturalnych materiałów z dużymi przeszkleniami. Już od pierwszego spojrzenia dom przyciąga uwagę minimalistyczną estetyką i harmonijnym wpisaniem w otoczenie. Dwuspadowy dach bez okapów, jasny tynk zestawiony z drewnianą elewacją oraz imponujące przeszklenia tworzą architekturę wyrazistą, ale nienachalną - nowoczesną, a jednocześnie niezwykle ciepłą i ponadczasową. Najbardziej charakterystycznym elementem tej wersji projektu jest efektowne otwarcie przestrzeni salonu aż do połaci dachowej. Widoczna konstrukcja więźby dachowej nadaje wnętrzu wyjątkowego charakteru. Dzięki temu część dzienna zyskuje monumentalny, niemal loftowy klimat, zachowując przy tym przytulność naturalnego drewna. Wysoki sufit sprawia, że światło swobodnie rozlewa się po wnętrzu, a przestrzeń wydaje się jeszcze bardziej otwarta i reprezentacyjna. Dodatkowym atutem jest ogromne, trójkątne przeszklenie poprowadzone aż do szczytu budynku, które staje się prawdziwą ozdobą salonu, ale pełni też praktyczną funkcję, wpuszczając w ciągu dnia do środka imponującą ilość naturalnego światła. Projekt został pomyślany jako dom wygodny i funkcjonalny dla rodziny, która ceni komfort codziennego życia oraz otwarte, jasne wnętrza. Centralnym punktem budynku jest przestronna strefa dzienna łącząca salon, jadalnię i kuchnię. Takie rozwiązanie sprzyja wspólnemu spędzaniu czasu i naturalnie łączy wszystkie najważniejsze funkcje domu. Kuchnia została zaprojektowana tak, aby była wygodna zarówno podczas codziennego użytkowania, jak i większych spotkań z rodziną czy przyjaciółmi. Otwarta na jadalnię i salon pozwala zachować kontakt z domownikami i jednocześnie tworzy nowoczesną, spójną przestrzeń. Ogromnym walorem projektu jest również zadaszony taras, nad którym pozostawiono otwarty sufit eksponujący konstrukcję dachu. Dzięki temu przestrzeń zewnętrzna staje się naturalnym przedłużeniem salonu i nabiera wyjątkowo reprezentacyjnego charakteru. Taras może pełnić funkcję letniego salonu, miejsca relaksu lub przestrzeni do wspólnych posiłków na świeżym powietrzu. Otwarta forma zadaszenia sprawia, że całość wygląda lekko i niezwykle efektownie, a jednocześnie zapewnia komfort użytkowania niezależnie od pogody. Część prywatna domu została zaprojektowana z myślą o wygodzie mieszkańców i wyraźnym oddzieleniu strefy wypoczynku od przestrzeni wspólnej. Trzy komfortowe sypialnie zapewniają domownikom prywatność i spokój, a odpowiednio rozmieszczone pomieszczenia gospodarcze pomagają zachować funkcjonalność i porządek w codziennym użytkowaniu. Dom doskonale odpowiada potrzebom współczesnej rodziny - jest ergonomiczny, wygodny i energooszczędny, a jednocześnie pełen charakteru i architektonicznej wyrazistości. Pliszka V Plus to projekt dla osób, które marzą o domu nowoczesnym, ale nie chłodnym i anonimowym. To architektura oparta na emocjach, świetle i przestrzeni. Połączenie minimalistycznej bryły z naturalnymi materiałami, wysokimi przeszkleniami i otwartą więźbą dachową tworzy miejsce wyjątkowe - eleganckie, przytulne i bliskie naturze. Dom zachwyca zarówno z zewnątrz, jak i wewnątrz, oferując mieszkańcom nie tylko komfort życia, ale również codzienne poczucie przestrzeni, światła i estetyki na najwyższym poziomie."
+    },
+    {
+      "key": "roof",
+      "label": "kąt nachylenia dachu",
+      "text": "30 °"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu Pliszka V Plus o powierzchni użytkowej 103,9 m2. Piękny dom parterowy z nowoczesnym sznytem, zadaszonym tarasem i garażem dwustanowiskowym"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Piękny dom parterowy z nowoczesnym sznytem, zadaszonym tarasem i garażem dwustanowiskowym"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "przedsionek",
+      "area": 5.2,
+      "raw": "1 przedsionek | 5,20"
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "hall",
+      "area": 10.65,
+      "raw": "2 hall | 10,65"
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "kuchnia",
+      "area": 8.3,
+      "raw": "3 kuchnia | 8,30"
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "spiżarka",
+      "area": 0.65,
+      "raw": "4 spiżarka | 0,65"
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "pokój dzienny z jadalnią",
+      "area": 29.65,
+      "raw": "5 pokój dzienny z jadalnią | 29,65"
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "pokój z garderobą",
+      "area": 16.7,
+      "raw": "6 pokój z garderobą | 16,70"
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "łazienka",
+      "area": 5.85,
+      "raw": "7 łazienka | 5,85"
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "pokój",
+      "area": 10,
+      "raw": "8 pokój | 10,00"
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "pokój",
+      "area": 10,
+      "raw": "9 pokój | 10,00"
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "łazienka",
+      "area": 2.6,
+      "raw": "10 łazienka | 2,60"
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "kotłownia",
+      "area": 4.3,
+      "raw": "11 kotłownia | 4,30"
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "garaż",
+      "area": 35.65,
+      "raw": "12 garaż | 35,65"
+    }
+  ],
+  "failures": [],
+  "contentHash": "20ab7aaa8b6646a50ddfa55bc9c42c438d787a16057336157b575a97f1630587"
+}
