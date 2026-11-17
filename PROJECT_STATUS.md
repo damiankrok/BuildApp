@@ -12,6 +12,21 @@
 
 ## Current summary (read first)
 
+- **v3.54.8 (2026-11-17): API parameters to final geometry** (prompt v3.54.8; Master Plan v3.54.8 written into
+  `docs/MASTER_PLAN.md` from the prompt, the plan file was not attached; revisions `86fd69f`, `05faa4e` — final host
+  built from it). Report `stage-reports/SOURCE_TO_MODEL_V3548.md`, OWNER index `stage-reports/README_V3548.md`, ADR
+  `docs/ADR-V3548-API-PARAMETERS-TO-GEOMETRY.md`, hand-off `research/source-to-model/v3548/HANDOFF.md`. What exists now:
+  reading contract 0.4.0 (railing infill and top row, each frame leg's own end row, `PORTAL_BAND`), document 0.4.0,
+  resolver 0.5.0, builder 0.4.0, house path 0.4.0; railing infill typed with READ/NOTE/DEFAULT/UNKNOWN (bars only as a
+  named convention); the gable frame as one `WallPanel` role `GABLE_FRAME` (band along the planes, joined at the ridge,
+  roof stopped behind it), legs ending independently (return → ground, own row, the slab that reaches it — carried
+  under the leg, railing stops at its face — or a lower roof; else held); the portal band only over the open front;
+  eaves flush with a frame when their overhang is a default; the data-boundary check `facade-values-built`; the review
+  judged per corrected property (APPLIED vs IMPROVED, neighbours kept), a round log, unasked close-ups of the frame;
+  the tool variant recorded; a detailed façade metric (27 rows, fault injection) beside the historical 16. Marcówki GE:
+  H from L1 8/27 → 16/27, live read after review 21/27 (15/16), LOCAL 27/27 and delivered. Final host E2E ALL CHECKS
+  PASSED (LOCAL kept, reuse at 0 USD, no-token job, boundary PASS). Books 22.937928 of 24.11036 USD.
+
 - **v3.54.7 (2026-11-17): elevation fidelity and a verified repair** (OWNER brief v3.54.7, Master Plan v3.54.7 at
   `docs/MASTER_PLAN.md`; revisions `c973a6a` model/review/choice, `c03b7cd` house path 0.3.0, `59d115e` LOCAL protection
   and one outline definition — final host built from it). Report `stage-reports/SOURCE_TO_MODEL_V3547.md`, OWNER index

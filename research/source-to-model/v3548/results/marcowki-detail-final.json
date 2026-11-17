@@ -258,7 +258,7 @@
     }
    ]
   },
-  "H-L1@65d8a06": {
+  "H-L1-65d8a06": {
    "note": "model B-L1/marcowki-ge/model.json",
    "modelHash": null,
    "built": true,
@@ -508,8 +508,8 @@
     }
    ]
   },
-  "H-L1@86fd69f": {
-   "note": "model NF-L1/marcowki-ge/model.json",
+  "H-L1-05faa4e": {
+   "note": "model NFa-L1/marcowki-ge/model.json",
    "modelHash": null,
    "built": true,
    "met": 16,
@@ -758,7 +758,7 @@
     }
    ]
   },
-  "H-host2@65d8a06": {
+  "H-host2-65d8a06": {
    "note": "model B-H2/marcowki-ge/model.json",
    "modelHash": null,
    "built": true,
@@ -1008,8 +1008,8 @@
     }
    ]
   },
-  "H-host2@86fd69f": {
-   "note": "model NF-H2/marcowki-ge/model.json",
+  "H-host2-05faa4e": {
+   "note": "model NFa-H2/marcowki-ge/model.json",
    "modelHash": null,
    "built": true,
    "met": 17,
@@ -1260,9 +1260,9 @@
   },
   "H-LIVE1-before-review": {
    "note": "compiled from the observations of LIVE1rc/marcowki-ge/house-first.json",
-   "modelHash": "5018c8ccbb4e9d0897790056a44f6ae8c025328436afaf6123b37a2795da6411",
+   "modelHash": "357de246ae7ffcf0f04d984703291cff9f838c75d0800ca9a40578774a6bff00",
    "built": true,
-   "met": 18,
+   "met": 19,
    "of": 27,
    "unassessable": 2,
    "rows": [
@@ -1437,9 +1437,9 @@
     {
      "feature": "front band continuity (loggia + portal)",
      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
-     "model": "18/33 probes; soffit median 2.27",
+     "model": "31/33 probes; soffit median 2.27",
      "error": null,
-     "ok": false,
+     "ok": true,
      "truth": "T2-FACADE-FRONT-BAND"
     },
     {
@@ -1512,7 +1512,7 @@
    "note": "model LIVE1rc/marcowki-ge/model.json",
    "modelHash": null,
    "built": true,
-   "met": 20,
+   "met": 21,
    "of": 27,
    "unassessable": 2,
    "rows": [
@@ -1687,9 +1687,9 @@
     {
      "feature": "front band continuity (loggia + portal)",
      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
-     "model": "18/33 probes; soffit median 2.27",
+     "model": "31/33 probes; soffit median 2.27",
      "error": null,
-     "ok": false,
+     "ok": true,
      "truth": "T2-FACADE-FRONT-BAND"
     },
     {
@@ -2262,7 +2262,7 @@
    "note": "model diag/D-portal/model.json",
    "modelHash": null,
    "built": true,
-   "met": 16,
+   "met": 17,
    "of": 27,
    "unassessable": 2,
    "rows": [
@@ -2437,9 +2437,9 @@
     {
      "feature": "front band continuity (loggia + portal)",
      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
-     "model": "18/33 probes; soffit median 2.22",
+     "model": "31/33 probes; soffit median 2.22",
      "error": null,
-     "ok": false,
+     "ok": true,
      "truth": "T2-FACADE-FRONT-BAND"
     },
     {
@@ -2762,7 +2762,7 @@
    "note": "model diag/D-all/model.json",
    "modelHash": null,
    "built": true,
-   "met": 22,
+   "met": 23,
    "of": 27,
    "unassessable": 2,
    "rows": [
@@ -2937,9 +2937,9 @@
     {
      "feature": "front band continuity (loggia + portal)",
      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
-     "model": "18/33 probes; soffit median 2.22",
+     "model": "31/33 probes; soffit median 2.22",
      "error": null,
-     "ok": false,
+     "ok": true,
      "truth": "T2-FACADE-FRONT-BAND"
     },
     {

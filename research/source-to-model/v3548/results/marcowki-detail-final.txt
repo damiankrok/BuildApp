@@ -28,7 +28,7 @@ LOCAL                    27/27 (+2 unassessable)
    OK  rear-gable-e head high end                 target 6.09                                           model 6.09
    OK  rear-gable-e head low end                  target 4.13                                           model 4.137
    OK  rear living glazing head                   target 2.3                                            model 2.3
-H-L1@65d8a06             8/27 (+2 unassessable)
+H-L1-65d8a06             8/27 (+2 unassessable)
    NO  front frame pieces                         target 1                                              model 2
    OK  front frame band (vertical)                target 0.82                                           model 0.879
    NO  front frame band (across the slope)        target 0.64                                           model 0.782
@@ -58,7 +58,7 @@ H-L1@65d8a06             8/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.713
    OK  rear-gable-e head low end                  target 4.13                                           model 4.272
    OK  rear living glazing head                   target 2.3                                            model 2.153
-H-L1@86fd69f             16/27 (+2 unassessable)
+H-L1-05faa4e             16/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    NO  front frame band (vertical)                target 0.82                                           model 0.98
    NO  front frame band (across the slope)        target 0.64                                           model 0.751
@@ -88,7 +88,7 @@ H-L1@86fd69f             16/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.713
    OK  rear-gable-e head low end                  target 4.13                                           model 4.272
    OK  rear living glazing head                   target 2.3                                            model 2.153
-H-host2@65d8a06          5/27 (+2 unassessable)
+H-host2-65d8a06          5/27 (+2 unassessable)
    NO  front frame pieces                         target 1                                              model 2
    NO  front frame band (vertical)                target 0.82                                           model 0.676
    NO  front frame band (across the slope)        target 0.64                                           model 0.523
@@ -118,7 +118,7 @@ H-host2@65d8a06          5/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.841
    OK  rear-gable-e head low end                  target 4.13                                           model 4.205
    OK  rear living glazing head                   target 2.3                                            model 2.411
-H-host2@86fd69f          17/27 (+2 unassessable)
+H-host2-05faa4e          17/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    NO  front frame band (vertical)                target 0.82                                           model 0.676
    NO  front frame band (across the slope)        target 0.64                                           model 0.518
@@ -148,7 +148,7 @@ H-host2@86fd69f          17/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.841
    OK  rear-gable-e head low end                  target 4.13                                           model 4.205
    OK  rear living glazing head                   target 2.3                                            model 2.411
-H-LIVE1-before-review    18/27 (+2 unassessable)
+H-LIVE1-before-review    19/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    NO  front frame band (vertical)                target 0.82                                           model 0.927
    OK  front frame band (across the slope)        target 0.64                                           model 0.71
@@ -169,7 +169,7 @@ H-LIVE1-before-review    18/27 (+2 unassessable)
    OK  rear railings over the slab                target 1                                              model 1
    OK  rear railing infill                        target GLASS                                          model GLASS
    ?   rear railing top                           target 3.93                                           model 3.882
-   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.27
+   OK  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 31/33 probes; soffit median 2.27
    OK  front slab full extent                     target 3.25–7.90 m                                    model 3.24–7.91 m
    NO  front-gable head high end                  target 6.26                                           model 6.081
    NO  front-gable head low end                   target 4.02                                           model 4.224
@@ -178,7 +178,7 @@ H-LIVE1-before-review    18/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model None
    NO  rear-gable-e head low end                  target 4.13                                           model None
    OK  rear living glazing head                   target 2.3                                            model 2.373
-H-LIVE1-after-review     20/27 (+2 unassessable)
+H-LIVE1-after-review     21/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    NO  front frame band (vertical)                target 0.82                                           model 0.927
    OK  front frame band (across the slope)        target 0.64                                           model 0.71
@@ -199,7 +199,7 @@ H-LIVE1-after-review     20/27 (+2 unassessable)
    OK  rear railings over the slab                target 1                                              model 1
    OK  rear railing infill                        target GLASS                                          model GLASS
    ?   rear railing top                           target 3.93                                           model 3.882
-   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.27
+   OK  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 31/33 probes; soffit median 2.27
    OK  front slab full extent                     target 3.25–7.90 m                                    model 3.24–7.91 m
    NO  front-gable head high end                  target 6.26                                           model 6.081
    NO  front-gable head low end                   target 4.02                                           model 4.224
@@ -268,7 +268,7 @@ DIAG-band                22/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.713
    OK  rear-gable-e head low end                  target 4.13                                           model 4.272
    OK  rear living glazing head                   target 2.3                                            model 2.153
-DIAG-portal              16/27 (+2 unassessable)
+DIAG-portal              17/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    NO  front frame band (vertical)                target 0.82                                           model 0.98
    NO  front frame band (across the slope)        target 0.64                                           model 0.751
@@ -289,7 +289,7 @@ DIAG-portal              16/27 (+2 unassessable)
    OK  rear railings over the slab                target 1                                              model 1
    OK  rear railing infill                        target GLASS                                          model GLASS
    ?   rear railing top                           target 3.93                                           model 4.16
-   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.22
+   OK  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 31/33 probes; soffit median 2.22
    OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
    NO  front-gable head high end                  target 6.26                                           model 6.084
    NO  front-gable head low end                   target 4.02                                           model 4.187
@@ -328,7 +328,7 @@ DIAG-rail                16/27 (+2 unassessable)
    NO  rear-gable-e head high end                 target 6.09                                           model 5.713
    OK  rear-gable-e head low end                  target 4.13                                           model 4.272
    OK  rear living glazing head                   target 2.3                                            model 2.153
-DIAG-all                 22/27 (+2 unassessable)
+DIAG-all                 23/27 (+2 unassessable)
    OK  front frame pieces                         target 1                                              model 1
    OK  front frame band (vertical)                target 0.82                                           model 0.828
    OK  front frame band (across the slope)        target 0.64                                           model 0.634
@@ -349,7 +349,7 @@ DIAG-all                 22/27 (+2 unassessable)
    OK  rear railings over the slab                target 1                                              model 1
    OK  rear railing infill                        target GLASS                                          model GLASS
    ?   rear railing top                           target 3.93                                           model 3.899
-   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.22
+   OK  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 31/33 probes; soffit median 2.22
    OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
    NO  front-gable head high end                  target 6.26                                           model 6.084
    NO  front-gable head low end                   target 4.02                                           model 4.187

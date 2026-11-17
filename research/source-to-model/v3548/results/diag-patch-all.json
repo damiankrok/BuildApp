@@ -1,0 +1,41 @@
+{
+ "label": "all four substitutions together",
+ "elevations": {
+  "el-p12": {
+   "featureFields": {
+    "front-frame": {
+     "legBottomY": null,
+     "legLeftBottomY": 575,
+     "legRightBottomY": 394.5,
+     "bandPx": 49
+    },
+    "front-terrace": {
+     "railingTopY": 342
+    }
+   },
+   "features": [
+    {
+     "id": "front-portal",
+     "kind": "PORTAL_BAND",
+     "box": {
+      "x0": 567,
+      "y0": 394,
+      "x1": 1086,
+      "y1": 440.5
+     },
+     "bodyId": "main"
+    }
+   ]
+  },
+  "el-p10": {
+   "featureFields": {
+    "rear-frame": {
+     "bandPx": 49
+    },
+    "rear-loggia": {
+     "railingTopY": 342
+    }
+   }
+  }
+ }
+}
