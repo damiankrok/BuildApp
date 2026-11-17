@@ -18,20 +18,20 @@ import type { BuildingCommand } from '@buildapp/commands'
 import { MATERIALS_V2 } from '../v2/emit.js'
 import type { HouseBody, HouseDocument, HouseGeometry, HouseParameterRecord, Num } from './document.js'
 import { TRACE_CODES } from './document.js'
-import { bbox, canonical, clipConvex, clipHalfPlane, contains, edgeOf, isSimple, offset, onBoundary, pt, sharedStretches, signedArea } from './poly.js'
+import { bbox, canonical, clipConvex, clipHalfPlane, contains, edgeOf, isSimple, offset, onBoundary, pt, sharedStretches, signedArea, toSegment } from './poly.js'
 import type { P2 } from './poly.js'
 import { outlineSteps } from './steps.js'
 import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.3.0' as const
+export const HOUSE_BUILDER_VERSION = '0.4.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
 export type HouseRefusal = { path: string; code: Code; why: string }
 /** How an opening was agreed, for a second fit when the kernel knows its wall's clear stretch better: host coordinates. */
 export type OpeningFitInfo = { u: number; printed: boolean; s0: number; from: number; width: number }
-export type HouseProgram = { fits: Record<string, OpeningFitInfo>; program: BuildingCommand[]; trace: HouseParameterRecord[]; refusals: HouseRefusal[]; /** Openings cut with a larger change than their reading's uncertainty: drawn, and said. */ approximated: Array<{ id: string; what: string }>; planes: Array<{ id: string; bodyId: string; key: string }>; hostWalls: Array<{ id: string; level: number; bodyId: string; lengthM: number; a: P2; b: P2 }> }
+export type HouseProgram = { fits: Record<string, OpeningFitInfo>; program: BuildingCommand[]; trace: HouseParameterRecord[]; refusals: HouseRefusal[]; /** Openings cut with a larger change than their reading's uncertainty: drawn, and said. */ approximated: Array<{ id: string; what: string }>; /** v3.54.8: decisions by a relation of the plan, said. */ builderNotes: Array<{ code: string; what: string }>; planes: Array<{ id: string; bodyId: string; key: string }>; hostWalls: Array<{ id: string; level: number; bodyId: string; lengthM: number; a: P2; b: P2 }> }
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
 const rad = (deg: number): number => (deg * Math.PI) / 180
@@ -39,6 +39,8 @@ const ROOF_RECTANGLE_FILL = 0.8
 const ROOF_T = 0.25
 /** How far a wall under a roof is drawn past the ridge before the planes cut it (m): any positive value gives the same wall. */
 const OVER_RIDGE_M = 0.5
+/** v3.54.8: where a roof stops behind a gable frame's plate: this much in front of the plate's back, the plate as much thinner. */
+const FRAME_ROOF_SEAM_M = 0.01
 /**
  * How an opening is fitted to the wall that holds it (v3.54.5). `adjustFloorM`: the least a reading from a published
  * raster can be off; an opening's own stated uncertainty replaces it when larger, up to `maxUncertaintyM` (the residual
@@ -91,8 +93,15 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   const planesOut: HouseProgram['planes'] = []
   const hostWalls: HouseProgram['hostWalls'] = []
   const approximated: HouseProgram['approximated'] = []
+  /** v3.54.8: what the builder decided by a relation of the plan, said (a leg on a slab, a slab carried under a leg). */
+  const builderNotes: HouseProgram['builderNotes'] = []
+  /** v3.54.8: a balcony slab carried on under a frame leg that stands on it. */
+  const balconyRect = new Map<string, { x0: number; z0: number; x1: number; z1: number }>()
+  const balconyRail = new Map<string, { x0: number; z0: number; x1: number; z1: number }>()
+  /** v3.54.8: returns a frame plate stands in (the plate is the leg there): not built as walls. */
+  const framedPiers = new Set<string>()
   const fits: HouseProgram['fits'] = {}
-  if (!g) return { program, trace, refusals: [{ path: 'geometry', code: 'NOT_CONSUMED', why: 'the document holds observations only: no agreed geometry to build' }], planes: planesOut, hostWalls, approximated, fits }
+  if (!g) return { program, trace, refusals: [{ path: 'geometry', code: 'NOT_CONSUMED', why: 'the document holds observations only: no agreed geometry to build' }], planes: planesOut, hostWalls, approximated, builderNotes, fits }
   const push = (c: Record<string, unknown>): void => void program.push(c as unknown as BuildingCommand)
   const used = (path: string, consumer: string, programIds: string[], n?: Num): void => void trace.push({ path, state: 'ACCEPTED', consumer, programIds, meshIds: [], ...(n && n.value !== null ? { built: n.value } : {}) })
   const refuse = (path: string, code: Code, why: string): void => {
@@ -183,11 +192,21 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const dist = roofPoly.map((_, i) => {
       const e = edgeOf(roofPoly, i)
       const s0 = sideOfEdge(e)
-      if (s0 && framedSides.has(s0)) return 0
+      // v3.54.8: a frame standing in the returns IS the roof's edge over its depth: the roof stops behind it (no two
+      // surfaces in one place); a frame in front of a plain gable leaves the roof at the wall's face
+      const fr = s0 && framedSides.has(s0) ? (g.frames ?? []).find((f) => f.bodyId === b.id && f.side === s0) : undefined
+      // (it stops FRAME_ROOF_SEAM_M short of the frame's back, so that the walls behind it stay under it; the plate is as
+      // much thinner: they touch, they do not overlap)
+      if (fr) return fr.depthM.basis === 'DEFAULT' || fr.depthM.value === null ? 0 : -(fr.depthM.value - FRAME_ROOF_SEAM_M)
       const mine = ridgeOf.get(b.id) ?? 0
       const along = bodies.filter((o) => o.id !== b.id && (ridgeOf.get(o.id) ?? 0) >= mine - 1e-6).reduce((s, o) => s + sharedStretches(e.a, e.b, o.poly).reduce((q, [lo, hi]) => q + hi - lo, 0), 0)
-      return along > e.len * 0.5 ? 0 : overhang
+      if (along > e.len * 0.5) return 0
+      // v3.54.8: with a frame on its gable, the frame's outer corner is the roof's lowest outer point on the elevation:
+      // an eaves overhang that was not read (a DEFAULT) would stand out past that corner — the roof stays flush
+      if (framedSides.size > 0 && b.roof.overhangM.basis === 'DEFAULT') return 0
+      return overhang
     })
+    if (framedSides.size > 0 && b.roof.overhangM.basis === 'DEFAULT' && overhang > 0) builderNotes.push({ code: 'EAVES_FLUSH_WITH_FRAME', what: `${b.id}: its eaves overhang is not read (${overhang} m a default); a frame edges its ${[...framedSides].join(' and ').toLowerCase()} gable, so the eaves stop flush with the frame's corner instead of standing out past it` })
     const O = offset(roofPoly, dist)
     const bb = bbox(b.poly)
     const mid = { x: (bb.x0 + bb.x1) / 2, z: (bb.z0 + bb.z1) / 2 }
@@ -446,66 +465,134 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     planesOut.push({ id: p.id, bodyId: p.bodyId, key: p.key })
   }
 
-  // --- v3.54.7: gable frames — a verge board along each rake of a body's gable end, on the roof's edge in its outer plane
+  // --- v3.54.8: gable frames — ONE plate in the gable's face plane (createWallPanel, role GABLE_FRAME): its top is the
+  // roof's top line in that plane (the outer contour), its bottom the band's lower edge (top − the band, measured
+  // vertically as read) between the legs, and each leg's own base under its leg — so the two rakes meet at the ridge in
+  // one solid (no crossing members, no step), and each leg stands where the source puts it. With returns on the plan the
+  // plate stands in them (from the outer plane back over their depth) and replaces them; without, in front of the wall.
   const SIDE_N: Record<string, P2> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, LEFT: { x: -1, z: 0 }, RIGHT: { x: 1, z: 0 } }
   for (const f of g.frames ?? []) {
     const path = `geometry.frames[${f.id}]`
     const band = need(f.bandM, `${path}.bandM`)
     const depth = need(f.depthM, `${path}.depthM`)
     const own = planes.filter((q) => q.bodyId === f.bodyId)
-    const n = SIDE_N[f.side]
+    const body = bodies.find((x) => x.id === f.bodyId)
     if (band === undefined || depth === undefined) continue
-    if (own.length === 0 || !n) {
+    if (own.length === 0 || !body) {
       refuse(path, 'WRONG_BINDING', `body ${f.bodyId} has no roof planes to edge`)
       continue
     }
-    const dotN = (q: P2): number => q.x * n.x + q.z * n.z
-    const edge = Math.max(...own.flatMap((q) => q.boundary.map(dotN)))
-    const ids: string[] = []
-    for (const pl of own) {
-      const on = pl.boundary.filter((q) => dotN(q) >= edge - 0.01)
-      if (on.length < 2) continue
-      // the rake: from its low end (the eaves) to its high end, on the plane's top surface in the outer plane
-      const ends = on.map((q) => ({ q, y: topAt(pl, q) })).sort((p, q) => p.y - q.y)
-      const hi = ends[ends.length - 1]
-      // the frame stands on the body's walls: its low end is where the rake crosses the side wall's outer face, not the
-      // end of the eaves' overhang
-      const bodyBox = bbox(bodies.find((x) => x.id === f.bodyId)?.poly ?? pl.boundary)
-      const across = (q: P2): number => (n.x === 0 ? q.x : q.z)
-      const [c0, c1] = n.x === 0 ? [bodyBox.x0, bodyBox.x1] : [bodyBox.z0, bodyBox.z1]
-      const lo0 = ends[0]
-      const ca = across(lo0.q)
-      const cb = across(hi.q)
-      const target = ca < c0 ? c0 : ca > c1 ? c1 : ca
-      const t = Math.abs(cb - ca) < 1e-9 ? 0 : Math.min(1, Math.max(0, (target - ca) / (cb - ca)))
-      const loQ = { x: lo0.q.x + (hi.q.x - lo0.q.x) * t, z: lo0.q.z + (hi.q.z - lo0.q.z) * t }
-      const lo = { q: loQ, y: topAt(pl, loQ) }
-      if (hi.y - lo.y < 0.3) continue
-      const run = Math.hypot(hi.q.x - lo.q.x, hi.q.z - lo.q.z)
-      const rise = hi.y - lo.y
-      const L = Math.hypot(run, rise)
-      const cos = run / L
-      const width = r6(band * cos)
-      // the band hangs under the roof's top surface: its centreline half its width below the rake, square to it, and half
-      // its depth in from the outer plane
-      const h = { x: (hi.q.x - lo.q.x) / run, z: (hi.q.z - lo.q.z) / run }
-      const down = { h: -(rise / L) * (width / 2), y: -(run / L) * (width / 2) }
-      const inX = -n.x * (depth / 2)
-      const inZ = -n.z * (depth / 2)
-      const P = (e: { q: P2; y: number }) => ({ x: r6(e.q.x + h.x * down.h + inX), y: r6(e.y + down.y), z: r6(e.q.z + h.z * down.h + inZ) })
-      // its square low end stands on the wall: the band's lower outer corner, not its top edge, meets the side wall's face
-      const shift = Math.min(run, 2 * Math.abs(down.h))
-      const start = P({ q: { x: lo.q.x + h.x * shift, z: lo.q.z + h.z * shift }, y: lo.y + (rise / run) * shift })
-      const id = `${f.id}-${pl.key}`
-      push({ type: 'createLinearSolid', id, levelId: pl.levelId, hostId: pl.id, start, end: P(hi), width, depth: r6(depth), role: 'VERGE_BOARD', materialId: MATERIALS_V2.member })
-      ids.push(id)
-    }
-    if (ids.length === 0) {
-      refuse(path, 'REPRESENTATION_LIMIT', `no rake of body ${f.bodyId}'s roof ends on its ${f.side.toLowerCase()} side`)
+    const bb = bbox(body.poly)
+    const side = f.side
+    const L = side === 'FRONT' || side === 'REAR' ? bb.x1 - bb.x0 : bb.z1 - bb.z0
+    // u: along the side from its left end as a viewer outside sees it; P(u, v): v metres in from the outer plane
+    const P = (u: number, v = 0): P2 => (side === 'FRONT' ? pt(bb.x0 + u, bb.z0 + v) : side === 'REAR' ? pt(bb.x1 - u, bb.z1 - v) : side === 'LEFT' ? pt(bb.x0 + v, bb.z1 - u) : pt(bb.x1 - v, bb.z0 + u))
+    const uOf = (q: P2): number => (side === 'FRONT' ? q.x - bb.x0 : side === 'REAR' ? bb.x1 - q.x : side === 'LEFT' ? bb.z1 - q.z : q.z - bb.z0)
+    const vOf = (q: P2): number => (side === 'FRONT' ? q.z - bb.z0 : side === 'REAR' ? bb.z1 - q.z : side === 'LEFT' ? q.x - bb.x0 : bb.x1 - q.x)
+    const piersHere = phys.filter((w) => w.body.id === body.id && w.pierM && Math.abs(vOf(w.a)) < 0.05 && Math.abs(vOf(w.b)) < 0.05)
+    const proud = piersHere.length === 0 && f.depthM.basis === 'DEFAULT'
+    // the roof's top line in the plate's outer plane: the lowest plane over each point (a gable's two slopes), exact at
+    // the ends and where two planes cross
+    const planeTop = (u: number): number => Math.min(...own.map((pl) => topAt(pl, P(u, proud ? -depth : 0))))
+    const lines = own.map((pl) => ({ a: topAt(pl, P(0, proud ? -depth : 0)), b: topAt(pl, P(L, proud ? -depth : 0)) }))
+    const us = new Set<number>([0, L])
+    for (let i = 0; i < lines.length; i += 1)
+      for (let j = i + 1; j < lines.length; j += 1) {
+        const d = lines[i].b - lines[i].a - (lines[j].b - lines[j].a)
+        if (Math.abs(d) < 1e-9) continue
+        const t = (lines[j].a - lines[i].a) / d
+        if (t > 1e-6 && t < 1 - 1e-6) us.add(r6(t * L))
+      }
+    if (Math.max(...[...us].map(planeTop)) - Math.min(planeTop(0), planeTop(L)) < 0.3) {
+      refuse(path, 'REPRESENTATION_LIMIT', `body ${f.bodyId}'s roof does not rise to a gable on its ${side.toLowerCase()} side`)
       continue
     }
-    used(`${path}.bandM`, 'houseProgram/gableFrame', ids, f.bandM)
-    used(`${path}.depthM`, 'houseProgram/gableFrame', ids, f.depthM)
+    // legs: over the returns the plan shows (their width), else as wide as read
+    const legRead = f.legM?.value ?? undefined
+    const leftPier = piersHere.find((w) => Math.min(uOf(w.a), uOf(w.b)) < 0.05)
+    const rightPier = piersHere.find((w) => Math.max(uOf(w.a), uOf(w.b)) > L - 0.05)
+    const wL = leftPier ? Math.max(uOf(leftPier.a), uOf(leftPier.b)) : legRead
+    const wR = rightPier ? L - Math.min(uOf(rightPier.a), uOf(rightPier.b)) : legRead
+    // each leg's base: on the ground where a return stands under it; a base read for that leg alone is taken; a base read
+    // once for both, or none, under a leg with no ground under it (the plan's outline is open there) is decided by what
+    // the leg stands on: a slab that reaches its inner face (the slab is carried on under the leg) or a lower body's roof
+    // a slab the leg can stand on: its near edge within the plate's depth (or touching its back face)
+    const plateFront = proud ? -depth : 0
+    const plateBack = proud ? 0 : depth
+    const balconyHere = g.balconies.filter((b) => {
+      const v0 = Math.min(vOf(pt(b.rect.x0, b.rect.z0)), vOf(pt(b.rect.x1, b.rect.z1)))
+      return v0 > plateFront - 0.05 && v0 < plateBack + 0.1
+    })
+    const legBase = (which: 'LEFT' | 'RIGHT', pier: Phys | undefined, w: number | undefined, read: Num | undefined): { base: number; how: string } | undefined => {
+      if (w === undefined) return undefined
+      if (pier) return { base: 0, how: `on the ground: the plan's return ${pier.id} stands under it` }
+      const own = read && read.value !== null && read.basis !== 'ESTIMATED' && read.basis !== 'DEFAULT' ? read.value : null
+      const u0 = which === 'LEFT' ? 0 : L - w
+      const u1 = which === 'LEFT' ? w : L
+      // a leg read for itself ends where it was read; when that is the top of a slab that reaches it, it stands on that
+      // slab (carried on under it) — the row and the plan agree
+      for (const b of balconyHere) {
+        const a = [uOf(pt(b.rect.x0, b.rect.z0)), uOf(pt(b.rect.x1, b.rect.z1))].sort((p, q) => p - q)
+        const touches = which === 'LEFT' ? Math.abs(a[0] - u1) < 0.25 || (a[0] < u1 && a[1] > u0) : Math.abs(a[1] - u0) < 0.25 || (a[1] > u0 && a[0] < u1)
+        const top = b.topY.value
+        if (!touches || top === null || (own !== null && Math.abs(own - top) > 0.2)) continue
+        // the slab is carried on under the leg, to the outer edge of the frame
+        const ext = which === 'LEFT' ? Math.min(a[0], u0) : Math.max(a[1], u1)
+        const q0 = P(which === 'LEFT' ? ext : a[0], Math.min(vOf(pt(b.rect.x0, b.rect.z0)), vOf(pt(b.rect.x1, b.rect.z1))))
+        const q1 = P(which === 'LEFT' ? a[1] : ext, Math.max(vOf(pt(b.rect.x0, b.rect.z0)), vOf(pt(b.rect.x1, b.rect.z1))))
+        balconyRect.set(b.id, { x0: r6(Math.min(q0.x, q1.x)), z0: r6(Math.min(q0.z, q1.z)), x1: r6(Math.max(q0.x, q1.x)), z1: r6(Math.max(q0.z, q1.z)) })
+        // the railing guards the slab up to the leg's inner face, not through the leg
+        const vr = [vOf(pt(b.rect.x0, b.rect.z0)), vOf(pt(b.rect.x1, b.rect.z1))].sort((p, q) => p - q)
+        const r0 = P(which === 'LEFT' ? Math.max(a[0], u1) : a[0], vr[0])
+        const r1 = P(which === 'LEFT' ? a[1] : Math.min(a[1], u0), vr[1])
+        if ((which === 'LEFT' ? a[1] - Math.max(a[0], u1) : Math.min(a[1], u0) - a[0]) > 0.3) balconyRail.set(b.id, { x0: r6(Math.min(r0.x, r1.x)), z0: r6(Math.min(r0.z, r1.z)), x1: r6(Math.max(r0.x, r1.x)), z1: r6(Math.max(r0.z, r1.z)) })
+        builderNotes.push({ code: 'FRAME_LEG_ON_SLAB', what: `${f.id}: its ${which.toLowerCase()} leg has no ground under it on the plan; it stands on ${b.id} at +${top.toFixed(2)} m${own !== null ? ` (its own row, ${own.toFixed(2)} m, agrees)` : read && read.value !== null ? ` (the one row read for both legs, ${read.value.toFixed(2)} m, is not this leg's)` : ''}, and the slab is carried on under the leg to the frame's outer edge` })
+        return { base: top, how: `on ${b.id}'s slab${own !== null ? ' (its own row read agrees)' : ''}` }
+      }
+      if (own !== null) return { base: own, how: `the row its ${which.toLowerCase()} leg ends at, read` }
+      const c = P((u0 + u1) / 2, depth / 2)
+      const lower = bodies.filter((o) => o.id !== body.id && contains(o.poly, c)).map((o) => ({ o, top: o.roof.ridgeY.value })).filter((x): x is { o: Body; top: number } => x.top !== null)[0]
+      if (lower) {
+        builderNotes.push({ code: 'FRAME_LEG_ON_ROOF', what: `${f.id}: its ${which.toLowerCase()} leg has no ground under it on the plan; it stands on ${lower.o.id}'s roof at +${lower.top.toFixed(2)} m` })
+        return { base: lower.top, how: `on ${lower.o.id}'s roof` }
+      }
+      if (read && read.value !== null && contains(body.poly, c)) return { base: read.value, how: 'the one row read for both legs; the plan has ground under it' }
+      refuse(`${path}.leg${which === 'LEFT' ? 'Left' : 'Right'}BottomY`, 'SOURCE_UNKNOWN', `its ${which.toLowerCase()} leg has no ground under it on the plan and nothing it could stand on: not built`)
+      return undefined
+    }
+    const inner = (u: number): number => planeTop(u) - band
+    // a leg whose base is read at or above the band's inner contour over it is no leg: the row contradicts the band
+    const below = (which: 'LEFT' | 'RIGHT', w: number | undefined, r: { base: number; how: string } | undefined): { base: number; how: string } | undefined => {
+      if (!r || w === undefined) return r
+      const at = inner(which === 'LEFT' ? w : L - w)
+      if (r.base < at - 0.05) return r
+      refuse(`${path}.leg${which === 'LEFT' ? 'Left' : 'Right'}BottomY`, 'WRONG_READ', `its ${which.toLowerCase()} leg is read to end at +${r.base.toFixed(2)} m (${r.how}), at or above the band's inner edge over it (+${at.toFixed(2)} m): no leg below the band is drawn`)
+      return undefined
+    }
+    const left = below('LEFT', wL, legBase('LEFT', leftPier, wL, f.legLeftBottomY))
+    const right = below('RIGHT', wR, legBase('RIGHT', rightPier, wR, f.legRightBottomY))
+    const eps = 1e-4
+    const top: Array<{ u: number; y: number }> = [...us].sort((p, q) => p - q).map((u) => ({ u: r6(u), y: r6(planeTop(u)) }))
+    const bu = new Set<number>([...us])
+    if (left && wL) [wL, wL + eps].forEach((u) => bu.add(u))
+    if (right && wR) [L - wR - eps, L - wR].forEach((u) => bu.add(u))
+    const bottom = [...bu].filter((u) => u >= 0 && u <= L).sort((p, q) => p - q).map((u) => {
+      const inLeft = left && wL !== undefined && u <= wL + eps / 2
+      const inRight = right && wR !== undefined && u >= L - wR - eps / 2
+      const y = inLeft ? Math.min(left.base, inner(u)) : inRight ? Math.min((right as { base: number }).base, inner(u)) : inner(u)
+      return { u: r6(u), y: r6(y) }
+    })
+    const id = `${f.id}-plate`
+    const level = levelAt.get(Math.min(...body.storeys)) ?? [...levelAt.values()][0]
+    // the plate's outer face line, left to right as seen from outside; its material lies behind it, `depth` deep
+    const start = proud ? P(0, -depth) : P(0)
+    const end = proud ? P(L, -depth) : P(L)
+    push({ type: 'createWallPanel', id, levelId: level.id, role: 'GABLE_FRAME', start, end, thickness: r6(proud ? depth : depth - FRAME_ROOF_SEAM_M), bottom, top, materialId: MATERIALS_V2.member })
+    for (const pr of [leftPier, rightPier]) if (pr) framedPiers.add(pr.id)
+    used(`${path}.bandM`, 'houseProgram/gableFrame(createWallPanel)', [id], f.bandM)
+    used(`${path}.depthM`, 'houseProgram/gableFrame(createWallPanel)', [id], f.depthM)
+    if (left) used(`${path}.legLeftBottomY`, `houseProgram/gableFrame(leg: ${left.how})`, [id], { value: left.base, basis: 'DERIVED', how: left.how })
+    if (right) used(`${path}.legRightBottomY`, `houseProgram/gableFrame(leg: ${right.how})`, [id], { value: right.base, basis: 'DERIVED', how: right.how })
   }
 
   // --- per level: the slab; per body: its walls, from the floor of its lowest storey to its roof --------------------------
@@ -565,10 +652,15 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     })
     // the returns: solid, as thick as their step is deep, under the same roof; they meet the ring at its outer face
     for (const w of piers) {
+      // v3.54.8: a return a gable frame's plate stands in is the frame's leg: one solid there, not a wall inside a plate
+      if (framedPiers.has(w.id)) {
+        used(`geometry.bodies[${b.id}].outline`, 'houseProgram/returns(the frame plate is the leg)', [w.id])
+        continue
+      }
       push({ type: 'createWall', id: w.id, levelId: base.id, start: w.a, end: w.b, thickness: w.pierM as number, height, baseOffset: 0, kind: 'EXTERIOR', topProfile, materialId: MATERIALS_V2.wall })
       used(`geometry.bodies[${b.id}].outline`, 'houseProgram/returns', [w.id])
     }
-    wallIdsOf.set(b.id, [...mine, ...piers].map((w) => w.id))
+    wallIdsOf.set(b.id, [...mine, ...piers.filter((w) => !framedPiers.has(w.id))].map((w) => w.id))
     used(`geometry.bodies[${b.id}].storeys`, 'houseProgram/walls', mine.map((w) => w.id))
   }
   used('geometry.wallThicknessM', 'houseProgram/walls', phys.map((w) => w.id), g.wallThicknessM)
@@ -737,7 +829,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const topY = need(b.topY, `${path}.topY`)
     const thickness = need(b.thicknessM, `${path}.thicknessM`)
     if (!l || topY === undefined || thickness === undefined) continue
-    const r = b.rect
+    const r = balconyRect.get(b.id) ?? b.rect
     push({ type: 'createBalcony', id: b.id, levelId: l.id, kind: 'BALCONY', footprint: { minX: r6(Math.min(r.x0, r.x1)), maxX: r6(Math.max(r.x0, r.x1)), minZ: r6(Math.min(r.z0, r.z1)), maxZ: r6(Math.max(r.z0, r.z1)) }, topOffset: r6(topY - l.elevation), thickness: r6(thickness), materialId: MATERIALS_V2.slab })
     const ids = [b.id]
     const terrainUnder = g.terrainY.value ?? 0
@@ -750,24 +842,105 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     if (b.railing) {
       // the railing runs round the edges that do not lie against the house
       const outer = outlineAt.get(b.level) ?? outlineAt.get(0) ?? []
-      const corners = [pt(r.x0, r.z0), pt(r.x1, r.z0), pt(r.x1, r.z1), pt(r.x0, r.z1)]
-      const free = corners.map((c, i) => {
-        const n = corners[(i + 1) % 4]
-        const m = { x: (c.x + n.x) / 2, z: (c.z + n.z) / 2 }
-        return !(contains(outer, m) || onBoundary(outer, m, 0.06) >= 0)
-      })
+      // (v3.54.8: the railing guards the slab as read — a slab carried on under a frame leg is not guarded through the leg)
+      const rr = balconyRail.get(b.id) ?? b.rect
+      const corners = [pt(rr.x0, rr.z0), pt(rr.x1, rr.z0), pt(rr.x1, rr.z1), pt(rr.x0, rr.z1)]
+      const mids = corners.map((c, i) => ({ x: (c.x + corners[(i + 1) % 4].x) / 2, z: (c.z + corners[(i + 1) % 4].z) / 2 }))
+      const free = mids.map((m) => !(contains(outer, m) || onBoundary(outer, m, 0.06) >= 0))
+      if (free.every(Boolean) && outer.length >= 3) {
+        // v3.54.8: no edge lies on the house (the slab was read clear of the wall): the edge nearest the wall is the
+        // house side — a railing all round would be a cage, none at all loses the railing the source shows. Said.
+        const gap = mids.map((m) => Math.min(...outer.map((a, i) => toSegment(m, a, outer[(i + 1) % outer.length]).d)))
+        const near = gap.indexOf(Math.min(...gap))
+        free[near] = false
+        builderNotes.push({ code: 'BALCONY_OFF_THE_WALL', what: `${b.id}: no edge of its slab lies on the house — ${gap[near].toFixed(2)} m from the wall at the nearest; that edge is taken as the house side and the railing runs round the other three` })
+      }
       const start = free.findIndex((f, i) => f && !free[(i + 3) % 4])
       if (start >= 0) {
         const pathPts: P2[] = [corners[start]]
         for (let k = 0; k < 4 && free[(start + k) % 4]; k += 1) pathPts.push(corners[(start + k + 1) % 4])
         if (pathPts.length >= 2) {
-          push({ type: 'createRailing', id: `${b.id}-railing`, levelId: l.id, start: pathPts[0], end: pathPts[pathPts.length - 1], path: pathPts, baseOffset: r6(topY - l.elevation), height: 1.1, infill: 'BARS', hostId: b.id, materialId: MATERIALS_V2.member })
+          // v3.54.8 — the infill the source shows (GLASS stays glass); a SOLID parapet is drawn without infill and said;
+          // not known: the kernel's convention (bars), said, never written back as if read
+          const kind = b.railingInfill?.value ?? null
+          const infill = kind === 'GLASS' ? 'GLASS' : kind === 'BARS' ? 'BARS' : kind === 'NONE' || kind === 'SOLID' ? 'NONE' : 'BARS'
+          if (kind === null) builderNotes.push({ code: 'RAILING_INFILL_ASSUMED', what: `${b.id}: its railing's infill is not read; drawn as bars (a convention, not the source)` })
+          if (kind === 'SOLID') builderNotes.push({ code: 'RAILING_SOLID_AS_OPEN', what: `${b.id}: a solid parapet is read; the kernel's railing has no solid infill — drawn as rails without infill` })
+          const railH = b.railingHeightM?.value ?? 1.1
+          push({ type: 'createRailing', id: `${b.id}-railing`, levelId: l.id, start: pathPts[0], end: pathPts[pathPts.length - 1], path: pathPts, baseOffset: r6(topY - l.elevation), height: r6(railH), infill, hostId: b.id, materialId: infill === 'GLASS' ? MATERIALS_V2.glass : MATERIALS_V2.member })
           ids.push(`${b.id}-railing`)
+          used(`${path}.railingInfill`, `houseProgram/createRailing(infill ${infill})`, [`${b.id}-railing`])
+          if (b.railingHeightM) used(`${path}.railingHeightM`, 'houseProgram/createRailing', [`${b.id}-railing`], b.railingHeightM)
         }
       }
     }
     used(`${path}.rect`, 'houseProgram/createBalcony', ids)
     used(`${path}.topY`, 'houseProgram/createBalcony', ids, b.topY)
+  }
+  // --- v3.54.8: portal bands — one head over an open front, along the outer plane from its soffit to its top and back
+  // over the recess it heads. Where a balcony slab already stands in the band's height the band stops under it (one
+  // solid in one place): the slab's own edge is the band there.
+  for (const pb of g.portals ?? []) {
+    const path = `geometry.portals[${pb.id}]`
+    const top = need(pb.topY, `${path}.topY`)
+    const soffit = need(pb.soffitY, `${path}.soffitY`)
+    const depth = need(pb.depthM, `${path}.depthM`)
+    const l0 = levelAt.get(0)
+    if (top === undefined || soffit === undefined || depth === undefined || !l0) continue
+    const n = SIDE_N[pb.side]
+    const len = Math.hypot(pb.end.x - pb.start.x, pb.end.z - pb.start.z)
+    if (len < 0.3 || !n) {
+      refuse(path, 'PARSE_REJECTED', 'a portal band shorter than 0.3 m')
+      continue
+    }
+    const u = { x: (pb.end.x - pb.start.x) / len, z: (pb.end.z - pb.start.z) / len }
+    const alongOf = (q: P2): number => (q.x - pb.start.x) * u.x + (q.z - pb.start.z) * u.z
+    // stretches under a balcony slab whose underside is inside the band: the band's top there is the slab's underside
+    const cuts: Array<{ a: number; b: number; top: number }> = []
+    for (const b of g.balconies) {
+      const r = balconyRect.get(b.id) ?? b.rect
+      const ty = b.topY.value
+      const th = b.thicknessM.value ?? 0.2
+      if (ty === null || ty - th > top || ty < soffit) continue
+      const a = [alongOf(pt(r.x0, r.z0)), alongOf(pt(r.x1, r.z1)), alongOf(pt(r.x0, r.z1)), alongOf(pt(r.x1, r.z0))]
+      const v = Math.min(...[pt(r.x0, r.z0), pt(r.x1, r.z1)].map((q) => -((q.x - pb.start.x) * n.x + (q.z - pb.start.z) * n.z)))
+      if (v > depth + 0.05) continue
+      cuts.push({ a: Math.max(0, Math.min(...a)), b: Math.min(len, Math.max(...a)), top: ty - th })
+    }
+    // (v3.54.8: likewise under a flat roof whose underside is inside the band — a garage's roof slab edge is the band's
+    // upper part there, not a second surface in the same place)
+    for (const pl of planes) {
+      if (Math.abs(pl.pitchDeg) > 1e-6) continue
+      const under = pl.datum.y - pl.thickness
+      if (under >= top || under <= soffit) continue
+      const vs = pl.boundary.map((q) => -((q.x - pb.start.x) * n.x + (q.z - pb.start.z) * n.z))
+      if (Math.min(...vs) > depth + 0.05 || Math.max(...vs) < -0.05) continue
+      const a = pl.boundary.map(alongOf)
+      cuts.push({ a: Math.max(0, Math.min(...a)), b: Math.min(len, Math.max(...a)), top: under })
+    }
+    const marks = [...new Set([0, len, ...cuts.flatMap((c) => [c.a, c.b])])].filter((x) => x >= 0 && x <= len).sort((p, q) => p - q)
+    const ids: string[] = []
+    for (let i = 0; i + 1 < marks.length; i += 1) {
+      const a = marks[i]
+      const b2 = marks[i + 1]
+      if (b2 - a < 0.05) continue
+      const mid = (a + b2) / 2
+      const under = cuts.filter((c) => mid > c.a && mid < c.b).map((c) => c.top)
+      const t = under.length ? Math.min(top, ...under) : top
+      if (t - soffit < 0.05) continue
+      const yc = (t + soffit) / 2
+      const at = (s0: number): { x: number; y: number; z: number } => ({ x: r6(pb.start.x + u.x * s0 - n.x * (depth / 2)), y: r6(yc), z: r6(pb.start.z + u.z * s0 - n.z * (depth / 2)) })
+      const id = `${pb.id}-${ids.length + 1}`
+      push({ type: 'createLinearSolid', id, levelId: l0.id, start: at(a), end: at(b2), width: r6(t - soffit), depth: r6(depth), role: 'FASCIA', materialId: MATERIALS_V2.member })
+      ids.push(id)
+    }
+    if (ids.length === 0) {
+      refuse(path, 'REPRESENTATION_LIMIT', 'nothing of the band is left outside the slabs that stand in it')
+      continue
+    }
+    used(`${path}.topY`, 'houseProgram/portalBand', ids, pb.topY)
+    used(`${path}.soffitY`, 'houseProgram/portalBand', ids, pb.soffitY)
+    used(`${path}.depthM`, 'houseProgram/portalBand', ids, pb.depthM)
   }
   for (const c of g.canopies) {
     const path = `geometry.canopies[${c.id}]`
@@ -822,7 +995,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     used(`${path}.rect`, 'houseProgram/placeChimney', [c.id])
     used(`${path}.topY`, 'houseProgram/placeChimney', [c.id], c.topY)
   }
-  return { program, trace, refusals, planes: planesOut, hostWalls, approximated, fits }
+  return { program, trace, refusals, planes: planesOut, hostWalls, approximated, builderNotes, fits }
 }
 
 export type { HouseGeometry, HouseBody }

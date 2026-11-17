@@ -37,10 +37,10 @@ import type { AcceptedReuse, AcceptedRevision, AcceptedRevisionStore } from './a
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
 import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
-import type { DefectRecord, ReviewPair, Supplement } from './review.js'
+import type { DefectRecord, ReviewPair, ReviewRound, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.3.0'
+export const HOUSE_PATH_VERSION = '0.4.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
   review?: boolean
   /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */
@@ -238,7 +238,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   const startedAt = now().toISOString()
   const records: ReadingRecord[] = []
   let proposals: Proposal[] = []
-  let reviewOut: { defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[] } = { defects: [], pairs: [], supplements: [] }
+  let reviewOut: { defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[]; roundLog?: ReviewRound[] } = { defects: [], pairs: [], supplements: [] }
   let localRun: AnalysisRun | undefined
   let localError: AnalysisError | undefined
   let pkg: SourcePackage | undefined
@@ -294,7 +294,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
         const reviewed = await reviewHouse({ ctx, selection, facadesSent: facades.sent, observationsDocument: converted.document, compiled, modelId: identity.modelId })
         compiled = reviewed.compiled
         proposals = reviewed.proposals
-        reviewOut = { defects: reviewed.defects, pairs: reviewed.pairs, supplements: reviewed.supplements }
+        reviewOut = { defects: reviewed.defects, pairs: reviewed.pairs, supplements: reviewed.supplements, roundLog: reviewed.roundLog }
       }
     } else compiled = compileHouse(documentFromReading({ ...base, answers: { inventory: inventory.answer, plan: plan.answer } }).document, identity.modelId)
   } catch (e) {

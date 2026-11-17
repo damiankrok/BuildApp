@@ -19,7 +19,7 @@ import type { P2 } from './poly.js'
 import { outlineSteps, straightenJogs } from './steps.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.4.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.5.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
@@ -730,6 +730,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   }
   const rooflights: HouseGeometry['rooflights'] = []
   const frames: HouseGeometry['frames'] = []
+  const portals: HouseGeometry['portals'] = []
   const chimneys: HouseGeometry['chimneys'] = []
   /** The slope of a pitched body that falls toward `side`: plan distance from its ridge for a height, and the plan point for an along-position. */
   const slopeToward = (body: HouseGeometry['bodies'][number], side: HouseSide): { half: number; fromRidge: (y: number) => number; at: (along: number, d: number) => P2; ridgeLine: number } | undefined => {
@@ -859,8 +860,33 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         const cen = k >= 0 ? { x: bodyPolys[k].reduce((q, v) => q + v.x, 0) / bodyPolys[k].length, z: bodyPolys[k].reduce((q, v) => q + v.z, 0) / bodyPolys[k].length } : { x: 0, z: 0 }
         const ret = k >= 0 ? outlineSteps(bodyPolys[k], D.wallThicknessM).steps.filter((st) => Math.abs((st.b.z - st.a.z) * n.x - (st.b.x - st.a.x) * n.z) > 0.99 * Math.hypot(st.b.x - st.a.x, st.b.z - st.a.z) && ((st.a.x + st.b.x) / 2 - cen.x) * n.x + ((st.a.z + st.b.z) / 2 - cen.z) * n.z > 0) : []
         const depthM = ret.length > 0 ? num(r3(Math.min(...ret.map((x) => x.depthM))), 'DERIVED', `the depth of the returns the plan shows on the ${side.toLowerCase()} side`, [ref]) : num(0.3, 'DEFAULT', 'how far the band runs back into the roof is not on the elevation: a display assumption')
-        frames.push({ id: `frame-${body.id}-${side.toLowerCase()}`, bodyId: body.id, side, bandM: num(r3(bandPx * r.s), 'DERIVED', `its band, ${bandPx.toFixed(0)} px on elevation ${obs.id} at its scale`, [ref], r3(Math.max(0.05, 3 * r.s))), depthM, ...(typeof f.legPx === 'number' ? { legM: num(r3(f.legPx * r.s), 'DERIVED', `its legs on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * r.s))) } : {}), basis: 'DERIVED', refs: [ref] })
+        // v3.54.8 — each leg ends where the elevation draws it: two rows when read apart; one row read for both is an
+        // ESTIMATE for each (a leg may stand on the ground and the other on a slab or a lower roof), which a relation of
+        // the plan may overrule (the builder says when it does)
+        const legEnd = (own: number | undefined, other: string): ReturnType<typeof num> | undefined =>
+          typeof own === 'number' ? num(r3(r.yOf(own)), 'DERIVED', `the row its ${other} leg ends at on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * r.s))) : typeof f.legBottomY === 'number' ? num(r3(r.yOf(f.legBottomY)), 'ESTIMATED', `one row read for both legs on elevation ${obs.id}: not this leg's own`, [ref], r3(Math.max(0.05, 3 * r.s))) : undefined
+        const lL = legEnd(f.legLeftBottomY, 'left')
+        const lR = legEnd(f.legRightBottomY, 'right')
+        frames.push({ id: `frame-${body.id}-${side.toLowerCase()}`, bodyId: body.id, side, bandM: num(r3(bandPx * Math.abs(r.s)), 'DERIVED', `its band, ${bandPx.toFixed(0)} px measured vertically on elevation ${obs.id}, × ${Math.abs(r.s).toFixed(4)} m/px`, [ref], r3(Math.max(0.05, 3 * Math.abs(r.s)))), depthM, ...(typeof f.legPx === 'number' ? { legM: num(r3(f.legPx * Math.abs(r.s)), 'DERIVED', `its legs on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * Math.abs(r.s)))) } : {}), bandPx, bandMPerPx: r3(Math.abs(r.s) * 1e4) / 1e4, ...(lL ? { legLeftBottomY: lL } : {}), ...(lR ? { legRightBottomY: lR } : {}), basis: 'DERIVED', refs: [ref] })
         if (depthM.basis === 'DEFAULT') knownDefects.push({ code: 'FRAME_DEPTH_ASSUMED', what: `${ref}: the frame's depth into the roof is not read; ${depthM.value} m is drawn — a display assumption` })
+      } else if (f.kind === 'PORTAL_BAND') {
+        // v3.54.8 — the head of an open front: one band along the side's outer plane, from its soffit (box bottom) to its
+        // top (box top); it stands back as deep as the returns on that side (a recess's mouth), or a displayed 0.30 m
+        const topY = r.yOf(Math.min(f.box.y0, f.box.y1))
+        const soffitY = r.yOf(Math.max(f.box.y0, f.box.y1))
+        if (!(topY - soffitY >= 0.1) || soffitY < 1.8) {
+          held.push({ ref, code: 'PARSE_REJECTED', why: `a portal band ${(topY - soffitY).toFixed(2)} m deep with its soffit at ${soffitY.toFixed(2)} m is not a head over an open front` })
+          continue
+        }
+        const n = SIDE_NORMAL[side]
+        const plane = side === 'FRONT' ? gb.z0 : side === 'REAR' ? gb.z1 : side === 'LEFT' ? gb.x0 : gb.x1
+        const ptAt = (al: number): P2 => (side === 'FRONT' ? { x: gb.x0 + al, z: plane } : side === 'REAR' ? { x: gb.x1 - al, z: plane } : side === 'LEFT' ? { x: plane, z: gb.z1 - al } : { x: plane, z: gb.z0 + al })
+        const deep = raw.flatMap((b, k) => (b.role === 'BAY' ? [] : outlineSteps(bodyPolys[k], D.wallThicknessM).steps)).filter((st) => Math.abs((st.b.z - st.a.z) * n.x - (st.b.x - st.a.x) * n.z) > 0.99 * Math.hypot(st.b.x - st.a.x, st.b.z - st.a.z) && Math.abs(((st.a.x + st.b.x) / 2) * n.x + ((st.a.z + st.b.z) / 2) * n.z - (plane * (n.x + n.z))) < 0.05)
+        const depthM = deep.length > 0 ? num(r3(Math.max(...deep.map((x) => x.depthM))), 'DERIVED', `the depth of the returns on the ${side.toLowerCase()} side (the recess the band heads)`, [ref]) : num(0.3, 'DEFAULT', 'how far the band runs back is not on the elevation: a display assumption')
+        const st0 = ptAt(a[0])
+        const st1 = ptAt(a[1])
+        portals.push({ id: `portal-${side.toLowerCase()}-${portals.length + 1}`, side, start: { x: r3(st0.x), z: r3(st0.z) }, end: { x: r3(st1.x), z: r3(st1.z) }, topY: num(r3(topY), 'DERIVED', `the band's top row on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * Math.abs(r.s)))), soffitY: num(r3(soffitY), 'DERIVED', `the band's soffit row on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * Math.abs(r.s)))), depthM, basis: 'DERIVED', refs: [ref] })
+        if (depthM.basis === 'DEFAULT') knownDefects.push({ code: 'PORTAL_DEPTH_ASSUMED', what: `${ref}: the band's depth is not read; ${depthM.value} m is drawn — a display assumption` })
       } else if (f.kind === 'LOGGIA') {
         // a loggia is IN the house: its depth is the recess the plan shows; with none on the plan, nothing is invented
         const level = levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(f.box.y1) + 0.6).sort((p, q) => q.index - p.index)[0]
@@ -933,6 +959,17 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         chimneys.push({ id: `chimney-${chimneys.length + 1}`, rect, topY: num(r3(r.yOf(Math.min(f.box.y0, f.box.y1))), 'DERIVED', `its top row on elevation ${obs.id}`, [ref], 0.2), basis: 'ESTIMATED', refs: [ref] })
         knownDefects.push({ code: 'CHIMNEY_DEPTH_ASSUMED', what: `${ref}: an elevation shows where along the ridge a chimney stands, not how far from it: it is drawn on the ridge` })
       } else held.push({ ref, code: 'CAPABILITY_MISSING', why: `${f.kind}: seen on the elevation; this resolver places no ${f.kind.toLowerCase()} from one elevation (its depth is not on the picture)` })
+    }
+    // v3.54.8 — the railing of each balcony or loggia read on this elevation: its infill as the source shows it (or not
+    // known), and its height from the railing's top row, or a convention said as one. A kind the source does not give is
+    // never filled with a builder's default here: it stays null and the builder says what it draws.
+    for (const b of balconies) {
+      const f = obs.features.find((x) => b.refs[0] === `${obs.id}/${x.id}`)
+      if (!f || b.railingInfill) continue
+      b.railingInfill = f.railing ? { value: f.railing, basis: f.railingFrom === 'NOTE' ? 'NOTE' : 'READ', how: f.railingFrom === 'NOTE' ? `recognised in the answer's note: "${String(f.railingNote ?? '').slice(0, 80)}"` : `the railing's infill read on elevation ${obs.id}`, refs: b.refs.slice(0, 1) } : { value: null, basis: 'UNKNOWN', how: 'the railing\'s infill is not read' }
+      const top = b.topY.value ?? 0
+      const h = typeof f.railingTopY === 'number' ? r.yOf(f.railingTopY) - top : undefined
+      b.railingHeightM = h !== undefined && h >= 0.6 && h <= 1.6 ? num(r3(h), 'DERIVED', `its top row on elevation ${obs.id} above the slab`, b.refs.slice(0, 1), r3(Math.max(0.05, 3 * Math.abs(r.s)))) : num(1.1, 'DEFAULT', h !== undefined ? `its top row gives ${h.toFixed(2)} m above the slab, outside 0.6–1.6 m: a conventional guard height is drawn` : 'its height is not read: a conventional guard height')
     }
     // panels of one opening (v3.54.5): two boxes of one kind, at one height, with less than a mullion between them, are
     // the sashes of ONE hole in the wall — cut as one, with both readings as its sources. A pier one can build stays a pier.
@@ -1136,6 +1173,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     chimneys,
     rooflights,
     frames,
+    portals,
     interior: { status: 'NOT_BUILT', note: 'this document describes the exterior; the interior is not built from it and is not checked' },
   }
   const coverage: HouseVerification['coverage'] = {

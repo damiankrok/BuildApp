@@ -98,8 +98,10 @@ describe('v3.54.7 the gable frame is its own element built from what the elevati
     expect(h.compileErrors).toEqual([])
     expect(h.document.geometry?.frames).toHaveLength(1)
     expect(h.document.geometry?.frames[0].bandM.basis).toBe('DERIVED')
-    const verge = h.built?.fitted.filter((c) => (c as { role?: string }).role === 'VERGE_BOARD') ?? []
-    expect(verge).toHaveLength(2)
+    // (v3.54.8: one plate in the outer plane — band along both rakes, joined at the ridge, legs down to what they
+    // stand on — replaces the two verge members of v3.54.7, which crossed at the ridge and had no legs)
+    const plate = h.built?.fitted.filter((c) => (c as { role?: string }).role === 'GABLE_FRAME') ?? []
+    expect(plate).toHaveLength(1)
     expect(side(h, 'FRONT')?.frame).not.toBeNull()
     expect(side(h, 'REAR')?.frame).toBeNull()
     // the band stands on the walls, not on the eaves' overhang: it begins at the body's own front face

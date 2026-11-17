@@ -92,13 +92,17 @@ export const REVIEW_TOOL = {
             eavesY: { type: ['number', 'null'] },
             ridgeY: { type: ['number', 'null'] },
             id: { type: 'string', description: 'REMOVE_*: the id to remove, as listed. ADD_OPENING: omit for a NEW opening; give the id of a listed opening to CORRECT that opening (move it, resize it, change its kind) — never add a second opening where one is listed. SET_OPENING_HEAD: the listed opening. SET_FEATURE: the listed id to correct it — the SAME id with another kind REPLACES that reading (a balcony that is really a recessed loggia: its id, kind LOGGIA) — or a new id.' },
-            kind: { type: 'string', description: 'For ADD_OPENING: WINDOW, DOOR, GLAZED_DOOR, GARAGE_DOOR. For SET_FEATURE: WALL_DORMER_GABLE, ROOF_DORMER_GABLE, ROOF_DORMER_SHED, BALCONY, LOGGIA, GABLE_FRAME, CANOPY.' },
+            kind: { type: 'string', description: 'For ADD_OPENING: WINDOW, DOOR, GLAZED_DOOR, GARAGE_DOOR. For SET_FEATURE: WALL_DORMER_GABLE, ROOF_DORMER_GABLE, ROOF_DORMER_SHED, BALCONY, LOGGIA, GABLE_FRAME, PORTAL_BAND, CANOPY.' },
             headLeftY: { type: ['number', 'null'], description: 'SET_OPENING_HEAD: the row of the top edge at the opening\'s LEFT side (a head under a roof slope, in a gable).' },
             headRightY: { type: ['number', 'null'], description: 'SET_OPENING_HEAD: the row of the top edge at its RIGHT side.' },
             apexX: { type: ['number', 'null'], description: 'SET_OPENING_HEAD: for a head rising to a point between its sides, the column of the point (its row is the top of the box).' },
             bandPx: { type: ['number', 'null'], description: 'SET_FEATURE GABLE_FRAME: the band\'s thickness along the rakes, in pixels measured vertically.' },
             legPx: { type: ['number', 'null'], description: 'SET_FEATURE GABLE_FRAME: the width of each leg, in pixels.' },
             posts: { type: ['boolean', 'null'], description: 'SET_FEATURE BALCONY / LOGGIA / CANOPY: true only when the picture SHOWS supports under it.' },
+            legLeftBottomY: { type: ['number', 'null'], description: 'SET_FEATURE GABLE_FRAME: the row where its LEFT leg ends.' },
+            legRightBottomY: { type: ['number', 'null'], description: 'SET_FEATURE GABLE_FRAME: the row where its RIGHT leg ends (the legs may end at different rows).' },
+            railing: { type: 'string', enum: ['GLASS', 'BARS', 'SOLID', 'NONE'], description: 'SET_FEATURE BALCONY / LOGGIA: the railing\'s infill as drawn.' },
+            railingTopY: { type: ['number', 'null'], description: 'SET_FEATURE BALCONY / LOGGIA: the row of the railing\'s top.' },
             box: box,
             level: { type: 'integer', minimum: 0, maximum: 3 },
             apexY: { type: ['number', 'null'] },
@@ -109,16 +113,16 @@ export const REVIEW_TOOL = {
   },
 } as const
 
-export type ReviewCorrection = { op: string; why: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null; bandPx?: number | null; legPx?: number | null; posts?: boolean | null }
+export type ReviewCorrection = { op: string; why: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null; bandPx?: number | null; legPx?: number | null; posts?: boolean | null; legLeftBottomY?: number | null; legRightBottomY?: number | null; railing?: string | null; railingTopY?: number | null }
 export type ReviewDefect = { id: string; side: string; picture?: number; box?: { x0: number; y0: number; x1: number; y1: number }; feature: string; meaning: string; weight: 'KEY' | 'MAJOR' | 'MINOR'; evidence: string; fix: 'CORRECTION' | 'NEEDS_CLOSE_UP' | 'UNRESOLVED'; corrections?: number[] }
 export type ReviewAnswer = { revision: string; verdict: 'MATCHES' | 'DIFFERS'; differences: Array<{ scope: string; what: string }>; corrections: ReviewCorrection[]; defects?: ReviewDefect[]; closeUps?: Array<{ picture: number; box: { x0: number; y0: number; x1: number; y1: number } }> }
-export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string }
+export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string; /** v3.54.8: what the correction set, against the built model: each target property, its error before and after, and whether it moved toward the source. */ properties?: PropertyCheck[]; improved?: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE'; inputModelHash?: string; outputModelHash?: string }
 
 type Obs = { observations: { elevations: Array<Record<string, unknown> & { id: string; picture: string; bodies: Array<Record<string, unknown>>; openings: Array<Record<string, unknown>>; features: Array<Record<string, unknown>> }>; roofs: Array<Record<string, unknown>>; outlines: Array<Record<string, unknown>> } }
 /** The revision of the observations: what was read, not the bookkeeping of which request read it. */
 const revisionOf = (doc: unknown): string => createHash('sha256').update(JSON.stringify((doc as Obs).observations, (k, v) => (k === 'readIn' ? undefined : v))).digest('hex').slice(0, 12)
 const OPENING_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR']
-const FEATURE_KINDS = ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'CANOPY']
+const FEATURE_KINDS = ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'PORTAL_BAND', 'CANOPY']
 
 /** One correction on a copy of the observations; undefined with a code when it names nothing that exists. */
 export function applyCorrection(doc: unknown, c0: ReviewCorrection, sent: SentPicture[]): { doc: unknown; subject: string } | { code: string; why: string } {
@@ -218,7 +222,7 @@ export function applyCorrection(doc: unknown, c0: ReviewCorrection, sent: SentPi
       if (c.kind === 'GABLE_FRAME' && !(typeof c.bandPx === 'number' && c.bandPx > 0)) return { code: 'PARSE_REJECTED', why: 'a gable frame needs the thickness of its band (bandPx)' }
       // v3.54.7: the same id with another kind replaces that reading in one step (a balcony on posts that is a recessed
       // loggia): what depended on the old reading — its posts, its projection — goes with it
-      const entry = { id: c.id, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : {}), ...(typeof c.eavesY === 'number' ? { eavesY: r1(c.eavesY) } : {}), ...(typeof c.apexY === 'number' ? { apexY: r1(c.apexY) } : {}), ...(typeof c.bandPx === 'number' && c.bandPx > 0 ? { bandPx: r1(c.bandPx) } : {}), ...(typeof c.legPx === 'number' && c.legPx > 0 ? { legPx: r1(c.legPx) } : {}), ...(typeof c.posts === 'boolean' ? { posts: c.posts } : c.kind === 'LOGGIA' ? { posts: false } : {}) }
+      const entry = { id: c.id, kind: c.kind, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : {}), ...(typeof c.eavesY === 'number' ? { eavesY: r1(c.eavesY) } : {}), ...(typeof c.apexY === 'number' ? { apexY: r1(c.apexY) } : {}), ...(typeof c.bandPx === 'number' && c.bandPx > 0 ? { bandPx: r1(c.bandPx) } : {}), ...(typeof c.legPx === 'number' && c.legPx > 0 ? { legPx: r1(c.legPx) } : {}), ...(typeof c.posts === 'boolean' ? { posts: c.posts } : c.kind === 'LOGGIA' ? { posts: false } : {}), ...(typeof c.legLeftBottomY === 'number' ? { legLeftBottomY: r1(c.legLeftBottomY) } : {}), ...(typeof c.legRightBottomY === 'number' ? { legRightBottomY: r1(c.legRightBottomY) } : {}), ...(c.railing === 'GLASS' || c.railing === 'BARS' || c.railing === 'SOLID' || c.railing === 'NONE' ? { railing: c.railing, railingFrom: 'READ' } : {}), ...(typeof c.railingTopY === 'number' ? { railingTopY: r1(c.railingTopY) } : {}) }
       const i = el.features.findIndex((x) => x.id === c.id)
       if (i >= 0) el.features[i] = entry
       else el.features.push(entry)
@@ -251,9 +255,12 @@ export function applyCorrection(doc: unknown, c0: ReviewCorrection, sent: SentPi
   }
 }
 
+const partNotRead = (path: string, code: string): boolean => (code === 'SOURCE_UNKNOWN' || code === 'WRONG_READ') && /^geometry\.frames\[[^\]]+\]\.leg(Left|Right)BottomY$/.test(path)
 const score = (h: CompiledHouse): { failing: Set<string>; trouble: number; built: number } => ({
   failing: new Set(h.document.verification.checks.filter((c) => c.status === 'FAIL').map((c) => c.id)),
-  trouble: (h.built?.kernelRefusals.length ?? 0) + (h.built?.refusals.length ?? 0) + h.compileErrors.length + h.document.verification.held.length,
+  // (v3.54.8: a part of a built element the source does not show — a frame leg with nothing read under it — is an
+  // explicit absence, held with its reason, not a conflict: it does not count against the correction that built the element)
+  trouble: (h.built?.kernelRefusals.length ?? 0) + (h.built?.refusals.filter((r) => !partNotRead(r.path, r.code)).length ?? 0) + h.compileErrors.length + h.document.verification.held.filter((x) => !partNotRead(x.ref, x.code)).length,
   built: h.bundle ? h.bundle.scene.meshes.length : 0,
 })
 
@@ -282,7 +289,7 @@ export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op
     return stopped ? { ok: false, code: stopped.code, why: `not built: ${stopped.ref}: ${stopped.why.slice(0, 200)}` } : { ok: false, code: 'NOT_CONSUMED', why: 'the built model is the same with it: the correction reached no geometry' }
   }
   const newFailures = [...b.failing].filter((id) => !a.failing.has(id))
-  if (newFailures.length > 0) return { ok: false, code: 'CONFLICT_OPEN', why: `with it a source check fails that passed before: ${newFailures.join(', ')}` }
+  if (newFailures.length > 0) return { ok: false, code: 'CONFLICT_OPEN', why: `with it a source check fails that passed before: ${newFailures.map((id) => { const c = after.document.verification.checks.find((x) => x.id === id); return c ? `${id} (${c.measured.slice(0, 160)})` : id }).join(', ')}` }
   const removes = op === 'REMOVE_OPENING' || op === 'REMOVE_FEATURE' || op === 'MIXED'
   if (b.trouble > a.trouble) return { ok: false, code: 'COMPILE_CONFLICT', why: `with it ${b.trouble - a.trouble} more object(s) are held or refused by the builder than before` }
   if (!removes && b.built < a.built) return { ok: false, code: 'COMPILE_CONFLICT', why: `with it the scene has fewer objects (${b.built} against ${a.built})` }
@@ -339,9 +346,74 @@ export function judgeDefect(d: Pick<ReviewDefect, 'feature' | 'meaning'>, before
   }
 }
 
+/**
+ * v3.54.8 — a correction checked by the properties it sets, on the built model: the value it asks for (from the rows of
+ * its picture through the elevation's registration), the value the scene measures before and after, and whether the
+ * after is the closer. A changed hash or a new object is not an improvement; neither is a value applied to the document
+ * that the scene does not show.
+ */
+export type PropertyCheck = { property: string; target: number | string; before: number | string | null; after: number | string | null; state: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE' }
+export const PROPERTY_TOLERANCE_M = 0.1
+export function checkProperties(c: ReviewCorrection, frame: { mPerPx: number; alongAtPx0: number; zeroRowPx: number } | undefined, side: string, before: SceneMeasure | undefined, after: SceneMeasure | undefined): PropertyCheck[] {
+  if (!frame || !before || !after) return []
+  const m = Math.abs(frame.mPerPx)
+  const yOf = (row: number): number => (frame.zeroRowPx - row) * m
+  const alongOf = (col: number): number => frame.mPerPx * col + frame.alongAtPx0
+  const sb = before.sides.find((x) => x.side === side)
+  const sa = after.sides.find((x) => x.side === side)
+  const out: PropertyCheck[] = []
+  const num = (property: string, target: number, b: number | null | undefined, a: number | null | undefined): void => {
+    if (a === null || a === undefined) return void out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: null, state: 'NOT_MEASURABLE' })
+    const eb = b === null || b === undefined ? Infinity : Math.abs(b - target)
+    const ea = Math.abs(a - target)
+    out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: a, state: ea <= PROPERTY_TOLERANCE_M || ea < eb - 0.03 ? 'IMPROVED' : 'NOT_IMPROVED' })
+  }
+  if (c.op === 'SET_FEATURE' && c.kind === 'GABLE_FRAME') {
+    if (typeof c.bandPx === 'number') num('frame band (vertical)', c.bandPx * m, sb?.frame?.bandVQ1, sa?.frame?.bandVQ1)
+    if (typeof c.legLeftBottomY === 'number') num('frame left leg end', yOf(c.legLeftBottomY), sb?.frame?.legLeftBottom, sa?.frame?.legLeftBottom)
+    if (typeof c.legRightBottomY === 'number') num('frame right leg end', yOf(c.legRightBottomY), sb?.frame?.legRightBottom, sa?.frame?.legRightBottom)
+    if (!sa?.frame) out.push({ property: 'frame present', target: 'yes', before: sb?.frame ? 'yes' : 'no', after: 'no', state: 'NOT_IMPROVED' })
+    else if (!sb?.frame) out.push({ property: 'frame present', target: 'yes', before: 'no', after: 'yes', state: 'IMPROVED' })
+  }
+  if (c.op === 'SET_FEATURE' && (c.kind === 'BALCONY' || c.kind === 'LOGGIA') && c.box) {
+    const a = [alongOf(c.box.x0), alongOf(c.box.x1)].sort((p, q) => p - q)
+    const pick = (s: typeof sa): NonNullable<NonNullable<typeof sa>['railings']>[number] | undefined => (s?.railings ?? []).filter((r) => r.alongTo > a[0] && r.alongFrom < a[1]).sort((p, q) => Math.abs((p.alongFrom + p.alongTo) / 2 - (a[0] + a[1]) / 2) - Math.abs((q.alongFrom + q.alongTo) / 2 - (a[0] + a[1]) / 2))[0]
+    const rb = pick(sb)
+    const ra = pick(sa)
+    if (typeof c.railing === 'string') {
+      const want = c.railing === 'SOLID' ? 'NONE' : c.railing
+      out.push({ property: 'railing infill', target: want, before: rb?.infill ?? null, after: ra?.infill ?? null, state: !ra ? 'NOT_MEASURABLE' : ra.infill === want ? 'IMPROVED' : 'NOT_IMPROVED' })
+    }
+    if (typeof c.railingTopY === 'number') num('railing top', yOf(c.railingTopY), rb?.topY, ra?.topY)
+  }
+  if (c.op === 'SET_OPENING_HEAD' && typeof c.headLeftY === 'number' && typeof c.headRightY === 'number') {
+    // the shaped holes of that side; the one nearest the head's columns, before and after
+    const near = (s: typeof sa): { leftTopY: number; rightTopY: number } | undefined => (s?.shapedOpenings ?? [])[0] && [...(s?.shapedOpenings ?? [])].sort((p, q) => Math.abs(p.leftTopY - yOf(c.headLeftY as number)) - Math.abs(q.leftTopY - yOf(c.headLeftY as number)))[0]
+    const hb = near(sb)
+    const ha = near(sa)
+    num('head at its left side', yOf(c.headLeftY), hb?.leftTopY, ha?.leftTopY)
+    num('head at its right side', yOf(c.headRightY), hb?.rightTopY, ha?.rightTopY)
+  }
+  return out
+}
+/** v3.54.8 — what else a correction may not move: every hole of every other side stays (within 5 cm). */
+export function neighboursKept(before: SceneMeasure | undefined, after: SceneMeasure | undefined, side: string): { ok: boolean; why?: string } {
+  if (!before || !after) return { ok: true }
+  for (const s of ['FRONT', 'RIGHT', 'REAR', 'LEFT'].filter((x) => x !== side)) {
+    // each hole the side had stays where it was (a hole gained is not a neighbour lost)
+    const a = before.openings.filter((o) => o.side === s).map((o) => o.alongM ?? 0)
+    const b = after.openings.filter((o) => o.side === s).map((o) => o.alongM ?? 0)
+    const lost = a.filter((x) => !b.some((y) => Math.abs(x - y) <= 0.05))
+    if (lost.length > 0) return { ok: false, why: `the ${s.toLowerCase()} side lost or moved ${lost.length} of its ${a.length} opening(s)` }
+  }
+  return { ok: true }
+}
+
 /** v3.54.7 — one side as sent for comparison: the elevation and the model drawn in its frame, by hash. */
 export type ReviewPair = { round: number; side: string; elevation?: string; picture?: number; sourceSha256?: string; renderSha256: string; modelHash: string; registered: boolean; frame?: { mPerPx: number; alongAtPx0: number; zeroRowPx: number; width: number; height: number }; why?: string }
 export type DefectRecord = ReviewDefect & { round: number; elevation?: string; region: Region | null; revisionBefore: string; modelBefore: string; before: RegionMeasure | null; after?: RegionMeasure | null; modelAfter?: string; addressedBy: string[]; state: 'OPEN' | 'IMPROVED' | 'NOT_IMPROVED' | 'UNRESOLVED' | 'NOT_MEASURABLE' | 'SUPPLEMENT_ASKED' | 'MEASURED_PRESENT'; note?: string }
+/** v3.54.8 — one round as it ran: the model it showed, the revision it was asked about, what came back and what it made. */
+export type ReviewRound = { round: number; inputModelHash: string; baseRevision: string; renderSha256: string[]; sourceSha256: string[]; verdict: string; answerRevision: string; stale: boolean; staleWhy?: string; applied: number; outputRevision: string; outputModelHash: string }
 export type Supplement = { round: number; elevation: string; side: string; asked: string[]; answer: 'APPLIED' | 'REJECTED' | 'NOT_SENT' | 'NOTHING_NEW'; code?: string; effect: string }
 
 /** v3.54.7 — a targeted re-reading of ONE elevation for the characteristic features a review found missing. */
@@ -366,7 +438,7 @@ export const SUPPLEMENT_TOOL = {
 type SupplementAnswer = { features: Array<Record<string, unknown> & { id: string; kind: string; box: { x0: number; y0: number; x1: number; y1: number } }>; heads: Array<{ id: string; headLeftY: number; headRightY: number; apexX?: number | null; topY?: number | null }> }
 const CHARACTERISTIC = new Set(['GABLE_FRAME', 'LOGGIA_OR_RECESS', 'SUPPORTS', 'GLAZING_SHAPE', 'BALCONY'])
 
-export async function reviewHouse(input: { ctx: ReadingContext; selection: Selection; facadesSent: SentPicture[]; observationsDocument: unknown; compiled: CompiledHouse; modelId: string; writeView?: (name: string, png: Uint8Array) => void }): Promise<{ compiled: CompiledHouse; observationsDocument: unknown; proposals: Proposal[]; rounds: number; verdicts: string[]; defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[] }> {
+export async function reviewHouse(input: { ctx: ReadingContext; selection: Selection; facadesSent: SentPicture[]; observationsDocument: unknown; compiled: CompiledHouse; modelId: string; writeView?: (name: string, png: Uint8Array) => void }): Promise<{ compiled: CompiledHouse; observationsDocument: unknown; proposals: Proposal[]; rounds: number; verdicts: string[]; defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[]; roundLog: ReviewRound[] }> {
   let doc = input.observationsDocument
   let compiled = input.compiled
   const proposals: Proposal[] = []
@@ -374,6 +446,7 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
   const defects: DefectRecord[] = []
   const pairs: ReviewPair[] = []
   const supplements: Supplement[] = []
+  const roundLog: ReviewRound[] = []
   let rounds = 0
   let closeUps: Array<{ picture: number; box: { x0: number; y0: number; x1: number; y1: number } }> = []
   const elevations = input.selection.elevations.map((p) => sentPicture(p, 'detail'))
@@ -428,6 +501,16 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
         pairs.push({ round, side: fo.side, elevation: fo.elevation, picture: n, sourceSha256: shaOf(sp.jpegBase64), renderSha256: r.sha256, modelHash: String(compiled.modelHash), registered: true, frame: fo.frame })
         pairLines.push(`picture ${n} (${fo.side}) ↔ model ${fo.side} in the same frame`)
       }
+      // v3.54.8: in the first round, unasked, the gable frame of each elevation that reads one — the KEY feature whose
+      // band, legs and ridge joint a whole-side picture is too small to judge — enlarged, source and model in one frame
+      if (round === 1 && closeUps.length === 0) {
+        for (const e of (doc as Obs).observations.elevations) {
+          const n = elevations.findIndex((x) => x.picture.id === e.picture) + 1
+          const fr = e.features.find((x) => x.kind === 'GABLE_FRAME') as { box?: { x0: number; y0: number; x1: number; y1: number } } | undefined
+          const k = elevations[n - 1]?.scale ?? 1
+          if (n > 0 && fr?.box && closeUps.length < 2) closeUps.push({ picture: n, box: { x0: fr.box.x0 * k, y0: fr.box.y0 * k, x1: fr.box.x1 * k, y1: fr.box.y1 * k } })
+        }
+      }
       // close-ups asked for in the previous round: the region of the elevation and of the model, enlarged, in one frame
       for (const c of closeUps.slice(0, 3)) {
         const fo = frameOf(compiled, c.picture)
@@ -457,10 +540,11 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
 What the program found:
 - overall ${m?.exteriorWalls ? `${m.exteriorWalls.widthM.toFixed(2)} m wide × ${m.exteriorWalls.depthM.toFixed(2)} m deep` : 'not measured'}; top ${m?.heightAboveTerrainM !== null && m?.heightAboveTerrainM !== undefined ? `${m.heightAboveTerrainM.toFixed(2)} m above the terrain` : 'unknown'}
 - bodies: ${g ? g.bodies.map((b) => `${b.id} ${b.role} levels ${b.storeys.join('+')} roof ${b.roof.kind}${b.roof.ridgeAxis ? ` ridge ${b.roof.ridgeAxis === 'X' ? 'ALONG_FRONT' : 'FRONT_TO_BACK'}` : ''} top +${(b.roof.ridgeY.value ?? 0).toFixed(2)}`).join('; ') : 'none'}
+- façade as built: ${(m?.sides ?? []).flatMap((sd) => [...(sd.frame ? [`${sd.side} frame band ${sd.frame.bandVQ1 ?? '?'} m (vertical), legs end at +${sd.frame.legLeftBottom ?? '?'} / +${sd.frame.legRightBottom ?? '?'} m, ${sd.frame.apexContinuous ? 'joined' : 'NOT joined'} at the ridge`] : []), ...(sd.railings ?? []).map((r) => `${sd.side} railing ${r.infill} ${r.alongFrom.toFixed(1)}–${r.alongTo.toFixed(1)} m top +${r.topY.toFixed(2)}`)]).join('; ') || 'no frame, no railing'}${(g?.portals ?? []).length ? `; portal band(s) ${(g?.portals ?? []).map((pb) => `${pb.side} +${pb.soffitY.value}–+${pb.topY.value}`).join(', ')}` : '; no portal band'}
 - checks failed: ${checks.filter((c) => c.status === 'FAIL').map((c) => `${c.what}: ${c.measured}`).join(' | ').slice(0, 900) || 'none'}
 - not built, and why: ${compiled.document.verification.held.map((h) => `${h.ref} (${h.code}: ${h.why.slice(0, 110)})`).join(' | ').slice(0, 1500) || 'nothing'}
 - what was read on the elevations (boxes in pixels of the pictures as sent): ${listing.join(' || ').slice(0, 2400)}
-Compare each elevation with the model's same side, in this order: which side is which and the overall proportions; the bodies; the heights of walls, eaves and ridges; the roofs; frames around gables, recesses and loggias, balconies and their supports; where the openings are and the shape of their heads; dormers, canopies. Call review_model. Record every important difference in defects, with its region as a box in the elevation picture's pixels, what it means and how much it matters; a feature that makes the house recognisable (a gable frame, a recessed loggia or portal, the shape of a large glazing, the garage) is KEY. Give a correction only where what was READ from a picture is wrong or missing and the picture shows the right value; at most ${REVIEW_MAX_CORRECTIONS}, the ones that matter most first. A wall that was not built cannot take an opening: fix what holds the wall (its body, its roof, the head of the glazing) before adding an opening to it again. A reading of the wrong kind (a balcony on posts that the picture shows recessed) is corrected by SET_FEATURE with the same id and the right kind. If you cannot tell from these pictures, ask for closeUps. If the model already agrees, answer MATCHES with no corrections.`
+Compare each elevation with the model's same side, in this order: which side is which and the overall proportions; the bodies; the heights of walls, eaves and ridges; the roofs; frames around gables (the band's thickness, where EACH leg ends, the joint at the ridge), recesses and loggias, balconies and their supports, the infill of railings (glass, bars, solid), a band heading an open front (portal); where the openings are and the shape of their heads; dormers, canopies. Call review_model. Record every important difference in defects, with its region as a box in the elevation picture's pixels, what it means and how much it matters; a feature that makes the house recognisable (a gable frame, a recessed loggia or portal, the shape of a large glazing, the garage) is KEY. Give a correction only where what was READ from a picture is wrong or missing and the picture shows the right value; at most ${REVIEW_MAX_CORRECTIONS}, the ones that matter most first. A wall that was not built cannot take an opening: fix what holds the wall (its body, its roof, the head of the glazing) before adding an opening to it again. A reading of the wrong kind (a balcony on posts that the picture shows recessed) is corrected by SET_FEATURE with the same id and the right kind. If you cannot tell from these pictures, ask for closeUps. If the model already agrees, answer MATCHES with no corrections.`
     let answer: ReviewAnswer
     try {
       answer = await ask<ReviewAnswer>(input.ctx, 'REVIEW', round, text, elevations, REVIEW_TOOL, [...extra, ...views.map((v) => ({ label: `The MODEL — ${v.name === 'SIDES' ? 'its four sides: FRONT, RIGHT, REAR, LEFT' : 'from above, and four views around it'}:`, mediaType: 'image/png', base64: Buffer.from(v.png).toString('base64'), width: v.name === 'SIDES' ? 2080 : 2600, height: 520 }))], false)
@@ -471,8 +555,15 @@ Compare each elevation with the model's same side, in this order: which side is 
     rounds = round
     verdicts.push(answer.verdict)
     if (!Array.isArray(answer.corrections)) answer.corrections = []
+    const roundPairs = pairs.filter((p) => p.round === round)
+    const logRound = (stale: boolean, staleWhy?: string): void => void roundLog.push({ round, inputModelHash: String(compiled.modelHash), baseRevision: revision, renderSha256: roundPairs.map((p) => p.renderSha256), sourceSha256: roundPairs.map((p) => String(p.sourceSha256 ?? '')), verdict: answer.verdict, answerRevision: String(answer.revision), stale, ...(staleWhy ? { staleWhy } : {}), applied: 0, outputRevision: revision, outputModelHash: String(compiled.modelHash) })
     if (answer.revision !== revision) {
-      proposals.push({ round, op: 'REVIEW', subject: 'the whole round', why: `the answer names revision ${String(answer.revision).slice(0, 20)}, the house is at ${revision}`, state: 'REJECTED', code: 'STALE_DEPENDENCY', consumer: 'reviewHouse', effect: 'no correction applied' })
+      // v3.54.8: which one it is — a recorded answer replayed against another revision (the answer is old), or a fresh
+      // answer that names a revision this round did not send (revision management)
+      const recorded = !!input.ctx.replay?.('REVIEW', round)
+      const why = recorded ? `a recorded answer about revision ${String(answer.revision).slice(0, 12)} replayed against ${revision}: the answer is older than this house` : `a fresh answer names revision ${String(answer.revision).slice(0, 12)}; this round sent ${revision}`
+      proposals.push({ round, op: 'REVIEW', subject: 'the whole round', why: `the answer names revision ${String(answer.revision).slice(0, 20)}, the house is at ${revision}`, state: 'REJECTED', code: 'STALE_DEPENDENCY', consumer: 'reviewHouse', effect: `no correction applied — ${why}` })
+      logRound(true, why)
       break
     }
     const corrections = (answer.corrections ?? []).slice(0, REVIEW_MAX_CORRECTIONS)
@@ -534,6 +625,23 @@ Compare each elevation with the model's same side, in this order: which side is 
         return pic ? (doc as Obs).observations.elevations.find((e) => e.picture === pic.picture.id)?.id : undefined
       })()
       let verdict = acceptCorrection(compiled, after, removesOnly ? 'REMOVE_OPENING' : items.some((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE') ? 'MIXED' : items[0].op, target, subjects.map((x) => x.replace(/\s*\(.*\)$/, '')), [...new Set(items.flatMap((c) => (c.op === 'SET_ROOF' ? ['eavesY', 'ridgeY', 'box'].filter((k) => (c as Record<string, unknown>)[k] !== undefined) : [])))])
+      // v3.54.8 — the properties each correction sets, measured on the scene before and after; the other sides kept
+      const checks: PropertyCheck[][] = items.map((c) => {
+        const fo = typeof c.picture === 'number' ? frameOf(compiled, c.picture) : undefined
+        return checkProperties(c, fo?.frame, String(fo?.side ?? ''), compiled.measured, after.measured)
+      })
+      const corrSide = (() => {
+        const c = items[0]
+        return typeof c.picture === 'number' ? String(frameOf(compiled, c.picture)?.side ?? '') : ''
+      })()
+      // (only for a correction that works inside one side — a feature, a head: one that says which side an elevation is,
+      // or reshapes a body, moves other sides' openings by what it means)
+      if (verdict.ok && corrSide && items.every((c) => c.op === 'SET_FEATURE' || c.op === 'SET_OPENING_HEAD')) {
+        const kept = neighboursKept(compiled.measured, after.measured, corrSide)
+        if (!kept.ok) verdict = { ok: false, code: 'NEIGHBOUR_CHANGED', why: `the correction changes what it does not name: ${kept.why}` }
+      }
+      const measuredChecks = checks.flat().filter((x) => x.state !== 'NOT_MEASURABLE')
+      if (verdict.ok && measuredChecks.length > 0 && !measuredChecks.some((x) => x.state === 'IMPROVED')) verdict = { ok: false, code: 'NO_IMPROVEMENT', why: `applied to the observations, but the property it sets is no closer to it on the built model: ${measuredChecks.map((x) => `${x.property} ${String(x.before)} → ${String(x.after)} (target ${String(x.target)})`).join('; ').slice(0, 300)}` }
       // v3.54.7 — a correction that answers a defect stands only if that defect's region measures better on the new model
       const mine = defectsOf(items)
       if (verdict.ok && mine.length > 0) {
@@ -555,7 +663,11 @@ Compare each elevation with the model's same side, in this order: which side is 
         }
       }
       for (const d of mine) d.addressedBy.push(...subjects.map((x) => `${x}${group ? ` [${group}]` : ''} → ${verdict.ok ? 'APPLIED' : verdict.code}`))
-      items.forEach((c, i) => proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}) }))
+      items.forEach((c, i) => {
+        const pc = checks[i] ?? []
+        const imp = pc.length === 0 || pc.every((x) => x.state === 'NOT_MEASURABLE') ? 'NOT_MEASURABLE' : pc.some((x) => x.state === 'IMPROVED') ? 'IMPROVED' : 'NOT_IMPROVED'
+        proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}), ...(pc.length ? { properties: pc } : {}), improved: imp, inputModelHash: String(compiled.modelHash), outputModelHash: String(after.modelHash) })
+      })
       if (!verdict.ok) return false
       doc = next
       compiled = after
@@ -612,10 +724,12 @@ Compare each elevation with the model's same side, in this order: which side is 
         if (r) applied += 1
       }
     }
+    logRound(false)
+    Object.assign(roundLog[roundLog.length - 1], { applied, outputRevision: revisionOf(doc), outputModelHash: String(compiled.modelHash) })
     if (Array.isArray(answer.closeUps) && answer.closeUps.length > 0) closeUps = answer.closeUps.slice(0, 3)
     if (answer.verdict === 'MATCHES' || (applied === 0 && closeUps.length === 0)) break
   }
-  return { compiled, observationsDocument: doc, proposals, rounds, verdicts, defects, pairs, supplements }
+  return { compiled, observationsDocument: doc, proposals, rounds, verdicts, defects, pairs, supplements, roundLog }
 
   async function supplement(n: number, ds: DefectRecord[], round: number): Promise<boolean> {
     const sp = elevations[n - 1]
@@ -647,10 +761,10 @@ Call describe_characteristic_features: every gable frame (with the vertical thic
     const B = (b: { x0: number; y0: number; x1: number; y1: number }) => ({ x0: r1(Math.min(b.x0, b.x1)), y0: r1(Math.min(b.y0, b.y1)), x1: r1(Math.max(b.x0, b.x1)), y1: r1(Math.max(b.y0, b.y1)) })
     const overlap = (a: { x0: number; x1: number }, b: { x0: number; x1: number }): number => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) / Math.max(1e-9, Math.min(a.x1 - a.x0, b.x1 - b.x0))
     for (const f of Array.isArray(ans.features) ? ans.features : []) {
-      if (!['GABLE_FRAME', 'LOGGIA', 'BALCONY', 'CANOPY'].includes(f.kind) || !f.box) continue
+      if (!['GABLE_FRAME', 'LOGGIA', 'BALCONY', 'CANOPY', 'PORTAL_BAND'].includes(f.kind) || !f.box) continue
       if (f.kind === 'GABLE_FRAME' && !(typeof f.bandPx === 'number' && f.bandPx > 0)) continue
       const box = B(f.box)
-      const entry: Record<string, unknown> = { id: '', kind: f.kind, box, ...(typeof f.bodyId === 'string' ? { bodyId: f.bodyId } : {}), ...(typeof f.bandPx === 'number' && f.bandPx > 0 ? { bandPx: r1(f.bandPx) } : {}), ...(typeof f.legPx === 'number' && f.legPx > 0 ? { legPx: r1(f.legPx) } : {}), ...(typeof f.legBottomY === 'number' ? { legBottomY: r1(f.legBottomY) } : {}), ...(typeof f.posts === 'boolean' ? { posts: f.posts } : f.kind === 'LOGGIA' ? { posts: false } : {}), origin: undefined }
+      const entry: Record<string, unknown> = { id: '', kind: f.kind, box, ...(typeof f.bodyId === 'string' ? { bodyId: f.bodyId } : {}), ...(typeof f.bandPx === 'number' && f.bandPx > 0 ? { bandPx: r1(f.bandPx) } : {}), ...(typeof f.legPx === 'number' && f.legPx > 0 ? { legPx: r1(f.legPx) } : {}), ...(typeof f.legBottomY === 'number' ? { legBottomY: r1(f.legBottomY) } : {}), ...(typeof f.posts === 'boolean' ? { posts: f.posts } : f.kind === 'LOGGIA' ? { posts: false } : {}), ...(typeof f.legLeftBottomY === 'number' ? { legLeftBottomY: r1(f.legLeftBottomY) } : {}), ...(typeof f.legRightBottomY === 'number' ? { legRightBottomY: r1(f.legRightBottomY) } : {}), ...(f.railing === 'GLASS' || f.railing === 'BARS' || f.railing === 'SOLID' || f.railing === 'NONE' ? { railing: f.railing, railingFrom: 'READ' } : {}), ...(typeof f.railingTopY === 'number' ? { railingTopY: r1(f.railingTopY) } : {}), origin: undefined }
       delete entry.origin
       // a balcony or loggia over the same stretch REPLACES the reading that was there (one interpretation of one place)
       const same = e2.features.findIndex((x) => (x.kind === f.kind || (['BALCONY', 'LOGGIA'].includes(String(x.kind)) && ['BALCONY', 'LOGGIA'].includes(f.kind))) && overlap(x.box as { x0: number; x1: number }, box) > 0.5)
@@ -678,6 +792,19 @@ Call describe_characteristic_features: every gable frame (with the vertical thic
     }
     const after = compileHouse(JSON.parse(JSON.stringify(next)), input.modelId)
     let verdict = acceptCorrection(compiled, after, 'SET_FEATURE', el.id)
+    // v3.54.8: the properties the re-reading sets, as corrections would set them, measured before and after
+    const fo = frameOf(compiled, n)
+    const pseudo: ReviewCorrection[] = [
+      ...(Array.isArray(ans.features) ? ans.features : []).map((f) => ({ op: 'SET_FEATURE', why: '', picture: n, kind: f.kind, box: f.box, ...(typeof f.bandPx === 'number' ? { bandPx: f.bandPx } : {}), ...(typeof f.legLeftBottomY === 'number' ? { legLeftBottomY: f.legLeftBottomY } : {}), ...(typeof f.legRightBottomY === 'number' ? { legRightBottomY: f.legRightBottomY } : {}), ...(typeof f.railing === 'string' ? { railing: f.railing } : {}), ...(typeof f.railingTopY === 'number' ? { railingTopY: f.railingTopY } : {}) }) as ReviewCorrection),
+      ...(Array.isArray(ans.heads) ? ans.heads : []).map((h) => ({ op: 'SET_OPENING_HEAD', why: '', picture: n, id: h.id, headLeftY: h.headLeftY, headRightY: h.headRightY }) as ReviewCorrection),
+    ]
+    const props = pseudo.flatMap((c) => checkProperties(c, fo?.frame, String(fo?.side ?? ''), compiled.measured, after.measured))
+    const propsMeasured = props.filter((x) => x.state !== 'NOT_MEASURABLE')
+    if (verdict.ok && fo?.side) {
+      const kept = neighboursKept(compiled.measured, after.measured, String(fo.side))
+      if (!kept.ok) verdict = { ok: false, code: 'NEIGHBOUR_CHANGED', why: `the re-reading changes what it does not name: ${kept.why}` }
+    }
+    if (verdict.ok && propsMeasured.length > 0 && !propsMeasured.some((x) => x.state === 'IMPROVED')) verdict = { ok: false, code: 'NO_IMPROVEMENT', why: `the properties it sets are no closer on the built model: ${propsMeasured.map((x) => `${x.property} ${String(x.before)} → ${String(x.after)} (target ${String(x.target)})`).join('; ').slice(0, 300)}` }
     const judged = ds.map((d) => {
       const am = regionMeasure(after.measured, d.side, regionOf(after, d.picture, d.box) ?? d.region)
       return { d, am, j: judgeDefect(d, d.before, am) }
@@ -687,7 +814,7 @@ Call describe_characteristic_features: every gable frame (with the vertical thic
     rec.answer = verdict.ok ? 'APPLIED' : 'REJECTED'
     if (!verdict.ok) rec.code = verdict.code
     rec.effect = verdict.ok ? verdict.effect : verdict.why
-    proposals.push({ round, op: 'SUPPLEMENT', subject: el.id, why: asked.join(' | ').slice(0, 240), state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: 'reviewHouse/supplement → resolveHouse/features+openings', effect: rec.effect, baseRevision: revisionOf(doc), ...(verdict.ok ? { revision: revisionOf(next) } : {}) })
+    proposals.push({ round, op: 'SUPPLEMENT', subject: el.id, why: asked.join(' | ').slice(0, 240), state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: 'reviewHouse/supplement → resolveHouse/features+openings', effect: rec.effect, baseRevision: revisionOf(doc), ...(verdict.ok ? { revision: revisionOf(next) } : {}), ...(props.length ? { properties: props } : {}), improved: props.length === 0 || propsMeasured.length === 0 ? 'NOT_MEASURABLE' : propsMeasured.some((x) => x.state === 'IMPROVED') ? 'IMPROVED' : 'NOT_IMPROVED', inputModelHash: String(compiled.modelHash), outputModelHash: String(after.modelHash) })
     for (const x of judged) {
       x.d.addressedBy.push(`supplement ${el.id} → ${verdict.ok ? 'APPLIED' : verdict.code}`)
       if (verdict.ok) {

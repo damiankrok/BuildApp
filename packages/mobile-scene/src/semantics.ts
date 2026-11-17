@@ -222,6 +222,8 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
     case 'WALL_PANEL':
       // A panel is wall: a parapet or a dormer cheek in the building's render,
       // a gable infill in timber boarding, a garage parapet in the secondary finish.
+      // A gable frame (v3.54.8) frames the facade, as a free member does.
+      if (upper(facts.role) === 'GABLE_FRAME') return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'FACADE_FRAME'
       if (CLADDING_MATERIAL.test(material)) return 'WALL_CLADDING'
       return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'WALL_MAIN'
     case 'PLATFORM':

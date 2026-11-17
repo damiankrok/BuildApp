@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.3.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.4.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -162,7 +162,7 @@ const ElevationOpening = z
 const ElevationFeature = z
   .object({
     id: Id,
-    kind: z.enum(['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'CHIMNEY', 'BAY', 'OTHER']),
+    kind: z.enum(['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'PORTAL_BAND', 'CHIMNEY', 'BAY', 'OTHER']),
     box: Box,
     bodyId: Id.optional(),
     /** For a dormer: the row where its own roof begins (its eaves), and its apex. */
@@ -174,6 +174,14 @@ const ElevationFeature = z
     legBottomY: z.number().finite().optional(),
     /** v0.3, BALCONY / LOGGIA / CANOPY: whether the picture shows posts under it. */
     posts: z.boolean().optional(),
+    /** v0.4, GABLE_FRAME: the row each leg ends at, separately (a leg may stand on the ground, the other on a slab or a lower roof). */
+    legLeftBottomY: z.number().finite().optional(),
+    legRightBottomY: z.number().finite().optional(),
+    /** v0.4, BALCONY / LOGGIA: the infill of its railing as drawn, the row of the railing's top, and where the kind came from (READ: a field of the answer; NOTE: recognised in the answer's note text, by `railingNote`). */
+    railing: z.enum(['GLASS', 'BARS', 'SOLID', 'NONE']).optional(),
+    railingFrom: z.enum(['READ', 'NOTE']).optional(),
+    railingNote: z.string().optional(),
+    railingTopY: z.number().finite().optional(),
     note: z.string().optional(),
     certainty: z.enum(['CERTAIN', 'LIKELY', 'UNSURE']).default('LIKELY'),
   })
@@ -316,8 +324,25 @@ const DormerSchema = z
   .strict()
 export type HouseDormer = z.infer<typeof DormerSchema>
 
+/** v0.4 — a typed value that is not a number: its value (null = not known), where it came from, how. */
+const KindValueSchema = <T extends [string, ...string[]]>(values: T) => z.object({ value: z.enum(values).nullable(), basis: z.enum(['READ', 'NOTE', 'DEFAULT', 'UNKNOWN']), how: z.string().optional(), refs: z.array(z.string()).optional() }).strict()
 const BalconySchema = z
-  .object({ id: Id, level: z.number().int(), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, thicknessM: NumSchema, railing: z.boolean().default(true), /** Posts it stands on (a balcony over a portico): plan points, from the terrain to its underside. */ posts: z.array(Vec2).default([]), basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .object({
+    id: Id,
+    level: z.number().int(),
+    rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(),
+    topY: NumSchema,
+    thicknessM: NumSchema,
+    railing: z.boolean().default(true),
+    /** v0.4: the railing's infill as the source shows it (null: not known — the builder then draws its convention and says so). */
+    railingInfill: KindValueSchema(['GLASS', 'BARS', 'SOLID', 'NONE']).optional(),
+    /** v0.4: the railing's height above the slab, read or conventional (basis DEFAULT). */
+    railingHeightM: NumSchema.optional(),
+    /** Posts it stands on (a balcony over a portico): plan points, from the terrain to its underside. */
+    posts: z.array(Vec2).default([]),
+    basis: BasisSchema,
+    refs: z.array(z.string()).default([]),
+  })
   .strict()
 const CanopySchema = z
   .object({ id: Id, kind: z.enum(['ENTRANCE_CANOPY', 'PORCH_ROOF', 'PORTICO', 'CARPORT', 'COVERED_TERRACE']), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), undersideY: NumSchema, thicknessM: NumSchema, posts: z.array(Vec2).default([]), basis: BasisSchema, refs: z.array(z.string()).default([]) })
@@ -334,11 +359,26 @@ const FrameSchema = z
     depthM: NumSchema,
     /** The legs' width as the elevation shows them, when it shows legs; the plan's returns build them. */
     legM: NumSchema.optional(),
+    /** v0.4: the band as read — its vertical thickness in pixels, the elevation's scale and the pitch it was turned across the rake by. */
+    bandPx: z.number().finite().positive().optional(),
+    bandMPerPx: z.number().finite().positive().optional(),
+    /** v0.4: the height above ±0,00 each leg ends at, left and right as a viewer outside sees the side (null: not known). */
+    legLeftBottomY: NumSchema.optional(),
+    legRightBottomY: NumSchema.optional(),
     basis: BasisSchema,
     refs: z.array(z.string()).default([]),
   })
   .strict()
 export type HouseFrame = z.infer<typeof FrameSchema>
+/**
+ * v0.4 — a portal band: the head of an open front (an entrance under a slab, a garage door under a flat roof) as the
+ * elevation draws it, one continuous band from `start` to `end` along the side's outer plane, from its soffit to its top,
+ * standing `depthM` back from the outer plane (over a recess: to its back wall).
+ */
+const PortalSchema = z
+  .object({ id: Id, side: SideSchema, start: Vec2, end: Vec2, topY: NumSchema, soffitY: NumSchema, depthM: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .strict()
+export type HousePortal = z.infer<typeof PortalSchema>
 const ChimneySchema = z.object({ id: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
 
 /** A window lying in a roof slope: its plan rectangle on that slope. */
@@ -361,6 +401,7 @@ const GeometrySchema = z
     chimneys: z.array(ChimneySchema).default([]),
     rooflights: z.array(RooflightSchema).default([]),
     frames: z.array(FrameSchema).default([]),
+    portals: z.array(PortalSchema).default([]),
     /** What exists and is NOT part of this document's check: the interior is kept as the builder finds it, never certified here. */
     interior: z.object({ status: z.enum(['NOT_BUILT', 'NOT_CHECKED']), note: z.string().optional() }).strict().default({ status: 'NOT_BUILT' }),
   })
@@ -479,7 +520,7 @@ export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
     /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
-    schemaVersion: z.enum(['0.1.0', '0.2.0', HOUSE_DOCUMENT_VERSION]),
+    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),

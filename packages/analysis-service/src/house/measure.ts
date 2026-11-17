@@ -55,7 +55,14 @@ export function measureScene(bundle: MobileSceneBundle, geometry?: HouseGeometry
     if (bs.length === 0) return null
     return { x0: Math.min(...bs.map((b) => b.x0)), x1: Math.max(...bs.map((b) => b.x1)), y0: Math.min(...bs.map((b) => b.y0)), y1: Math.max(...bs.map((b) => b.y1)), z0: Math.min(...bs.map((b) => b.z0)), z1: Math.max(...bs.map((b) => b.z1)) }
   }
-  const walls = of((k) => k.startsWith('wall|') && !k.includes('INTERIOR'))
+  // v3.54.8: a gable frame's plate standing in the outline's returns is part of the exterior's extent; one standing proud
+  // in front of the outline (a frame with no returns) is not — the side's plane stays the walls' own
+  const wallsOnly = of((k) => k.startsWith('wall|') && !k.includes('INTERIOR'))
+  const planPts = (geometry?.outlines ?? []).flatMap((o) => o.polygon)
+  // (without the agreed plan — a model alone — its floor slabs carry the outline)
+  const ref = planPts.length >= 3 ? { x0: Math.min(...planPts.map((q) => q.x)), x1: Math.max(...planPts.map((q) => q.x)), z0: Math.min(...planPts.map((q) => q.z)), z1: Math.max(...planPts.map((q) => q.z)) } : of((k) => /^slab/i.test(k)) ?? wallsOnly
+  const plates = Object.entries(objects).filter(([id]) => kinds.get(id) === 'wallPanel|FACADE_FRAME').map(([, b]) => b).filter((b) => ref && b.x0 >= ref.x0 - 0.05 && b.x1 <= ref.x1 + 0.05 && b.z0 >= ref.z0 - 0.05 && b.z1 <= ref.z1 + 0.05)
+  const walls = wallsOnly && plates.length ? [wallsOnly, ...plates].reduce((a, b) => ({ x0: Math.min(a.x0, b.x0), x1: Math.max(a.x1, b.x1), y0: Math.min(a.y0, b.y0), y1: Math.max(a.y1, b.y1), z0: Math.min(a.z0, b.z0), z1: Math.max(a.z1, b.z1) })) : wallsOnly
   const roofs = of((k) => /^roof/i.test(k))
   const all = of(() => true)
   const roofTopByBody: Record<string, number> = {}
@@ -147,15 +154,84 @@ export function measureScene(bundle: MobileSceneBundle, geometry?: HouseGeometry
  *   - openings whose head is not level: the top of the hole at its two jambs differs by more than `rakedM`.
  * Along a side is measured as for openings: from the left end of the walls as a viewer outside sees them.
  */
+/**
+ * v3.54.8 — what a frame's front face is, by property: the band measured VERTICALLY at a quarter and three quarters of
+ * its span (and square to the rake: × cos of the rake's pitch), the outer contour's top at the apex, whether the band is
+ * continuous through the apex, how far the frame stands above the roof's top (a protruding end at the ridge), and where
+ * each leg ends. Measured on the outward faces within the frame's band of the outer plane, of the frame's pieces (trim,
+ * frame plates, returns finished as members) — the same for any model.
+ */
+export type FrameProperties = { bandVQ1: number | null; bandVQ3: number | null; pitchDeg: number | null; bandPerp: number | null; apexAlong: number; apexTop: number; apexContinuous: boolean; protrusionM: number; legLeftBottom: number | null; legRightBottom: number | null; innerQ1: number | null }
 export type SideFeatures = {
   side: SceneSide
-  frame: { pieces: number; alongFrom: number; alongTo: number; bottomY: number; topY: number; depthM: number } | null
+  frame: ({ pieces: number; alongFrom: number; alongTo: number; bottomY: number; topY: number; depthM: number } & Partial<FrameProperties>) | null
+  /** v3.54.8: railings by side — their infill as built (GLASS / BARS / NONE), extent and top. */
+  railings?: Array<{ id: string; alongFrom: number; alongTo: number; infill: 'GLASS' | 'BARS' | 'NONE'; topY: number; bottomY: number }>
   balconies: Array<{ id: string; alongFrom: number; alongTo: number; projectsM: number; recessed: boolean; posts: number }>
   shapedOpenings: Array<{ id: string; alongFrom: number; alongTo: number; leftTopY: number; rightTopY: number; peakY: number }>
 }
 export const FEATURE_RULER = { frameBandM: 1.6, frameRiseM: 1.0, recessedM: 0.15, rakedM: 0.25, postNearM: 0.4 } as const
 
-type MeshLike = { objectId?: string; objectKind?: string; semanticGroup?: string; positions: number[] }
+type MeshLike = { objectId?: string; objectKind?: string; semanticGroup?: string; part?: string; positions: number[] }
+const OUTWARD: Record<SceneSide, { x: number; z: number }> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, LEFT: { x: -1, z: 0 }, RIGHT: { x: 1, z: 0 } }
+type Tri2 = [number, number, number, number, number, number]
+/** The triangles of meshes that face outward on `side` and lie within `[vMin, vMax]` metres in from its outer plane, as (along, y). */
+export function outwardTriangles(meshes: readonly MeshLike[], W: Bounds, side: SceneSide, vMin: number, vMax: number): Tri2[] {
+  const n = OUTWARD[side]
+  const along = (x: number, z: number): number => (side === 'FRONT' ? x - W.x0 : side === 'REAR' ? W.x1 - x : side === 'LEFT' ? W.z1 - z : z - W.z0)
+  const vIn = (x: number, z: number): number => (side === 'FRONT' ? z - W.z0 : side === 'REAR' ? W.z1 - z : side === 'LEFT' ? x - W.x0 : W.x1 - x)
+  const out: Tri2[] = []
+  for (const m of meshes) {
+    const p = m.positions
+    for (let i = 0; i + 8 < p.length; i += 9) {
+      const ux = p[i + 3] - p[i], uy = p[i + 4] - p[i + 1], uz = p[i + 5] - p[i + 2]
+      const vx = p[i + 6] - p[i], vy = p[i + 7] - p[i + 1], vz = p[i + 8] - p[i + 2]
+      const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx
+      const l = Math.hypot(nx, ny, nz) || 1
+      if ((nx * n.x + nz * n.z) / l < 0.7) continue
+      const v = vIn((p[i] + p[i + 3] + p[i + 6]) / 3, (p[i + 2] + p[i + 5] + p[i + 8]) / 3)
+      if (v < vMin || v > vMax) continue
+      out.push([along(p[i], p[i + 2]), p[i + 1], along(p[i + 3], p[i + 5]), p[i + 4], along(p[i + 6], p[i + 8]), p[i + 7]])
+    }
+  }
+  return out
+}
+/** Where the vertical line at `a` crosses the triangles: merged [lo, hi] intervals, low to high. */
+export function intervalsAt(tris: readonly Tri2[], a: number, gap = 0.02): Array<[number, number]> {
+  const segs: Array<[number, number]> = []
+  for (const t of tris) {
+    const ys: number[] = []
+    for (const [i, j] of [[0, 2], [2, 4], [4, 0]] as const) {
+      const a0 = t[i], y0 = t[i + 1], a1 = t[j], y1 = t[j + 1]
+      if ((a0 - a) * (a1 - a) > 0 || Math.abs(a1 - a0) < 1e-9) continue
+      ys.push(y0 + ((a - a0) / (a1 - a0)) * (y1 - y0))
+    }
+    if (ys.length >= 2) segs.push([Math.min(...ys), Math.max(...ys)])
+  }
+  segs.sort((p, q) => p[0] - q[0])
+  const out: Array<[number, number]> = []
+  for (const sg of segs) {
+    const last = out[out.length - 1]
+    if (last && sg[0] <= last[1] + gap) last[1] = Math.max(last[1], sg[1])
+    else out.push([sg[0], sg[1]])
+  }
+  return out
+}
+/**
+ * v3.54.8 — the head over an open front, along one side between `a0` and `a1`: at every `step`, the face nearest the
+ * outer plane (within `vMax`) that crosses `probeY` (a height inside the band) — its bottom (the soffit) and top. A sample
+ * with no face there is a break in the band.
+ */
+export function portalProfile(bundle: MobileSceneBundle, W: Bounds, side: SceneSide, a0: number, a1: number, probeY: number, step = 0.25, vMax = 0.3): Array<{ a: number; soffit: number | null; top: number | null }> {
+  const tris = outwardTriangles(bundle.scene.meshes as unknown as MeshLike[], W, side, -0.6, vMax)
+  const out: Array<{ a: number; soffit: number | null; top: number | null }> = []
+  for (let a = a0 + step / 2; a < a1; a += step) {
+    const hit = intervalsAt(tris, a).find(([lo, hi]) => lo <= probeY && hi >= probeY)
+    out.push({ a: r3(a), soffit: hit ? r3(hit[0]) : null, top: hit ? r3(hit[1]) : null })
+  }
+  return out
+}
+
 export function sideFeatures(bundle: MobileSceneBundle, W: Bounds, openings: readonly SceneOpening[]): SideFeatures[] {
   const meshes = bundle.scene.meshes as unknown as MeshLike[]
   const boxOf = (ps: number[]): Bounds => {
@@ -179,7 +255,70 @@ export function sideFeatures(bundle: MobileSceneBundle, W: Bounds, openings: rea
     const a = [along(side, b.x0, b.z0), along(side, b.x1, b.z1)].sort((p, q) => p - q)
     return [r3(a[0]), r3(a[1])]
   }
-  const trims = meshes.filter((m) => m.semanticGroup === 'ROOF_TRIM').map((m) => boxOf(m.positions))
+  // a frame's pieces: roof trim, frame plates and free members (FACADE_FRAME); only rising pieces across the side detect one
+  const trimMeshes = meshes.filter((m) => m.semanticGroup === 'ROOF_TRIM' || m.semanticGroup === 'FACADE_FRAME')
+  const trims = trimMeshes.map((m) => boxOf(m.positions))
+  const roofTop = Math.max(...meshes.filter((m) => /^ROOF_MAIN$|^FLAT_ROOF$/.test(m.semanticGroup ?? '')).map((m) => boxOf(m.positions).y1), -Infinity)
+  const frameProperties = (side: SceneSide, f: { alongFrom: number; alongTo: number; depthM: number }): FrameProperties => {
+    const near = trimMeshes.filter((m) => {
+      const o = outOf(side, boxOf(m.positions))
+      return o.far >= -FEATURE_RULER.frameBandM && o.near <= 0.6
+    })
+    const tris = outwardTriangles(near, W, side, -0.6, 0.3)
+    const top = (a: number): number | null => {
+      const iv = intervalsAt(tris, a)
+      return iv.length ? iv[iv.length - 1][1] : null
+    }
+    const L = f.alongTo - f.alongFrom
+    let apexAlong = f.alongFrom + L / 2
+    let apexTop = -Infinity
+    for (let k = 1; k < 100; k += 1) {
+      const a = f.alongFrom + (L * k) / 100
+      const t = top(a)
+      if (t !== null && t > apexTop + 1e-6) {
+        apexTop = t
+        apexAlong = a
+      }
+    }
+    const bandAt = (a: number): number | null => {
+      const iv = intervalsAt(tris, a)
+      return iv.length ? r3(iv[iv.length - 1][1] - iv[iv.length - 1][0]) : null
+    }
+    const q1 = f.alongFrom + 0.25 * L
+    const q3 = f.alongFrom + 0.75 * L
+    const t1 = top(q1)
+    const pitch = t1 !== null && Math.abs(apexAlong - q1) > 0.1 ? (Math.atan2(apexTop - t1, Math.abs(apexAlong - q1)) * 180) / Math.PI : null
+    const bV1 = bandAt(q1)
+    const bV3 = bandAt(q3)
+    const apexIv = intervalsAt(tris, apexAlong)
+    const apexContinuous = [-0.05, 0, 0.05].every((d) => {
+      const iv = intervalsAt(tris, apexAlong + d)
+      return iv.length > 0 && iv[iv.length - 1][1] - iv[iv.length - 1][0] > 0.2
+    })
+    // a leg ends where the rising frame ends: a level band under it (a portal head, a fascia) is not the leg
+    const legTris = outwardTriangles(near.filter((m) => { const b = boxOf(m.positions); return b.y1 - b.y0 >= FEATURE_RULER.frameRiseM }), W, side, -0.6, 0.3)
+    const legBottom = (a: number): number | null => {
+      const iv = intervalsAt(legTris, a)
+      return iv.length ? r3(iv[0][0]) : null
+    }
+    void apexIv
+    return {
+      bandVQ1: bV1,
+      bandVQ3: bV3,
+      pitchDeg: pitch === null ? null : r3(pitch),
+      bandPerp: pitch === null || bV1 === null ? null : r3(bV1 * Math.cos((pitch * Math.PI) / 180)),
+      apexAlong: r3(apexAlong),
+      apexTop: r3(apexTop),
+      apexContinuous,
+      protrusionM: Number.isFinite(roofTop) ? r3(apexTop - roofTop) : 0,
+      legLeftBottom: legBottom(f.alongFrom + 0.12),
+      legRightBottom: legBottom(f.alongTo - 0.12),
+      innerQ1: t1 !== null && bV1 !== null ? r3(t1 - bV1) : null,
+    }
+  }
+  // railings: each one's infill as built, by side
+  const railingGroups = new Map<string, MeshLike[]>()
+  for (const m of meshes) if (m.objectKind === 'railing' && m.objectId) railingGroups.set(m.objectId, [...(railingGroups.get(m.objectId) ?? []), m])
   const balconies = new Map<string, Bounds>()
   for (const m of meshes) {
     if (m.objectKind !== 'balcony' || !m.objectId) continue
@@ -203,12 +342,13 @@ export function sideFeatures(bundle: MobileSceneBundle, W: Bounds, openings: rea
       const deep = alongX ? b.z1 - b.z0 : b.x1 - b.x0
       return b.y1 - b.y0 >= FEATURE_RULER.frameRiseM && o.far >= -FEATURE_RULER.frameBandM && o.near <= 0.6 && across > deep
     })
-    const frame = mine.length
+    const frame0 = mine.length
       ? (() => {
           const ss = mine.map((b) => span(side, b))
           return { pieces: mine.length, alongFrom: Math.min(...ss.map((x) => x[0])), alongTo: Math.max(...ss.map((x) => x[1])), bottomY: r3(Math.min(...mine.map((b) => b.y0))), topY: r3(Math.max(...mine.map((b) => b.y1))), depthM: r3(Math.max(...mine.map((b) => (alongX ? b.z1 - b.z0 : b.x1 - b.x0)))) }
         })()
       : null
+    const frame = frame0 ? { ...frame0, ...frameProperties(side, frame0) } : null
     const bal: SideFeatures['balconies'] = []
     for (const [id, b] of balconies) {
       const o = outOf(side, b)
@@ -242,6 +382,17 @@ export function sideFeatures(bundle: MobileSceneBundle, W: Bounds, openings: rea
       if (Number.isFinite(left) && Number.isFinite(right) && (Math.abs(left - right) > FEATURE_RULER.rakedM || peak - Math.max(left, right) > FEATURE_RULER.rakedM)) shaped.push({ id: op.id, alongFrom: r3(a0), alongTo: r3(a1), leftTopY: r3(left), rightTopY: r3(right), peakY: r3(peak) })
     }
     void alongX
-    return { side, frame, balconies: bal.sort((p, q) => p.alongFrom - q.alongFrom), shapedOpenings: shaped }
+    const railings: NonNullable<SideFeatures['railings']> = []
+    for (const [id, ms] of railingGroups) {
+      const b = ms.map((m) => boxOf(m.positions)).reduce((p, q) => ({ x0: Math.min(p.x0, q.x0), x1: Math.max(p.x1, q.x1), y0: Math.min(p.y0, q.y0), y1: Math.max(p.y1, q.y1), z0: Math.min(p.z0, q.z0), z1: Math.max(p.z1, q.z1) }))
+      const o = outOf(side, b)
+      if (o.far < -1.6 || o.near > 4) continue
+      if (SIDES.filter((x) => x !== side).some((x) => outOf(x, b).far > o.far + 0.05)) continue
+      const infillMesh = ms.find((m) => m.part === 'RAILING_INFILL')
+      const infill = !infillMesh ? 'NONE' : infillMesh.semanticGroup === 'WINDOW_GLASS' ? 'GLASS' : 'BARS'
+      const [a0, a1] = span(side, b)
+      railings.push({ id, alongFrom: a0, alongTo: a1, infill, topY: r3(b.y1), bottomY: r3(b.y0) })
+    }
+    return { side, frame, balconies: bal.sort((p, q) => p.alongFrom - q.alongFrom), shapedOpenings: shaped, railings: railings.sort((p, q) => p.alongFrom - q.alongFrom) }
   })
 }

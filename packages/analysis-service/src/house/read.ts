@@ -23,11 +23,11 @@ import type { HousePicture, SentPicture } from './pictures.js'
 import type { ConsultantModel, ModelTurn } from '../consult/loop.js'
 
 export const HOUSE_READING_CONTRACT = 'buildapp.house-reading'
-export const HOUSE_READING_VERSION = '0.3.0'
+export const HOUSE_READING_VERSION = '0.4.0'
 export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1, /** v3.54.5: targeted requests for elevation pictures the first reading left undescribed — one per picture, never two for one. */ facadeFollowUps: 4 } as const
 
 export type ReadingStep = 'INVENTORY' | 'PLAN' | 'FACADES' | 'REVIEW'
-export type ReadingRecord = { step: ReadingStep; round?: number; model: string; requestId?: string; usage: ModelTurn['usage']; latencyMs?: number; pictures: Array<{ id: string; assetId: string; sentWidth: number; sentHeight: number; sha256: string }>; promptSha256: string; answer: unknown; stopReason?: string }
+export type ReadingRecord = { step: ReadingStep; round?: number; model: string; requestId?: string; usage: ModelTurn['usage']; latencyMs?: number; pictures: Array<{ id: string; assetId: string; sentWidth: number; sentHeight: number; sha256: string }>; promptSha256: string; /** v3.54.8: which tool answered — the full or the slim facade tool, under the strict grammar or not. */ toolVariant?: string; answer: unknown; stopReason?: string }
 export type ReadingSpend = { reserve(model: string, usd: number, note: string): { id: string; usd: number }; settle(reservation: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string): void }
 export type ReadingPrice = { inputUsdPerMTok: number; outputUsdPerMTok: number }
 export class ReadingFailed extends Error {
@@ -250,7 +250,7 @@ export const READING_TOOLS = {
                   required: ['id', 'kind', 'box', 'bodyId', 'note'],
                   properties: {
                     id: bodyId,
-                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'CHIMNEY', 'BAY', 'OTHER'], description: 'WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves (often with a balcony door). ROOF_DORMER_*: a dormer standing on the slope, set back from the wall, its foot above the eaves. CROSS_GABLE: a front-facing gable as wide as a wing, rising from the facade. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing that PROJECTS in front of the wall. LOGGIA: a balcony or porch RECESSED into the house, behind the plane of the wall or of a frame around it (its sides are walls). GABLE_FRAME: a thick frame edging a gable end — a band along both rakes standing proud of or in front of the gable wall, clearly thicker than a plain roof edge, often continuing down both sides as legs (wall returns) beside a recessed wall or loggia. Give eavesY and apexY for every dormer and cross gable.' },
+                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'PORTAL_BAND', 'CHIMNEY', 'BAY', 'OTHER'], description: 'PORTAL_BAND: the continuous head over an open front — the band (beam, fascia, slab edge) over a recessed entrance, a passage or a garage door, drawn as one band; its box is the band itself: y0 its top, y1 its underside (soffit). WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves (often with a balcony door). ROOF_DORMER_*: a dormer standing on the slope, set back from the wall, its foot above the eaves. CROSS_GABLE: a front-facing gable as wide as a wing, rising from the facade. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing that PROJECTS in front of the wall. LOGGIA: a balcony or porch RECESSED into the house, behind the plane of the wall or of a frame around it (its sides are walls). GABLE_FRAME: a thick frame edging a gable end — a band along both rakes standing proud of or in front of the gable wall, clearly thicker than a plain roof edge, often continuing down both sides as legs (wall returns) beside a recessed wall or loggia. Give eavesY and apexY for every dormer and cross gable.' },
                     box: { ...box, description: 'For a dormer: x0..x1 are the outer faces of its own two side WALLS (not the wider overhang of its roof), y0 its apex, y1 the foot of its front wall. For a balcony: its slab and railing. For a loggia: its mouth (the opening in the front plane). For a gable frame: its OUTER outline (y0 the top of the band at the apex, y1 the foot of its legs or the eaves). For a canopy: the roof plate. For a chimney: the stack above the roof.' },
                     bodyId: bodyId,
                     eavesY: { type: ['number', 'null'], description: 'Dormers only: the row where the dormer\'s own roof meets the top of its SIDE WALLS (not the lower tip of its overhanging roof).' },
@@ -259,6 +259,10 @@ export const READING_TOOLS = {
                     legPx: { type: ['number', 'null'], description: 'GABLE_FRAME only: the width of each leg (the frame\'s side running down), in pixels; null when the frame has no legs.' },
                     legBottomY: { type: ['number', 'null'], description: 'GABLE_FRAME only: the row where its legs end (the ground, a floor, a roof below); null when it has no legs.' },
                     posts: { type: ['boolean', 'null'], description: 'BALCONY / LOGGIA / CANOPY: true only when the picture SHOWS posts or columns under it; false when none are drawn.' },
+                    legLeftBottomY: { type: ['number', 'null'], description: 'GABLE_FRAME only: the row where its LEFT leg ends (the ground, a slab, a lower roof); null when it has no left leg or its end is hidden.' },
+                    legRightBottomY: { type: ['number', 'null'], description: 'GABLE_FRAME only: the row where its RIGHT leg ends; the two legs may end at different rows.' },
+                    railing: { type: 'string', enum: ['GLASS', 'BARS', 'SOLID', 'NONE'], description: 'BALCONY / LOGGIA: the infill of its railing as drawn — GLASS (glass panels), BARS (balusters or bars), SOLID (a solid parapet), NONE (no railing); leave it out when it cannot be seen.' },
+                    railingTopY: { type: ['number', 'null'], description: 'BALCONY / LOGGIA: the row of the railing\'s top edge; null when not seen.' },
                     note: { type: 'string', maxLength: 160 },
                   },
                 },
@@ -321,7 +325,7 @@ export type FacadesAnswer = {
     limits?: string
     bodies: Array<{ bodyId: string; leftX: number; rightX: number; eavesY: number | null; ridgeY: number | null }>
     openings: Array<{ kind: string; box: BoxPx; bodyId: string; level: number; inFeature?: string; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null }>
-    features: Array<{ id: string; kind: string; box: BoxPx; bodyId: string; eavesY?: number | null; apexY?: number | null; bandPx?: number | null; legPx?: number | null; legBottomY?: number | null; posts?: boolean | null; note: string }>
+    features: Array<{ id: string; kind: string; box: BoxPx; bodyId: string; eavesY?: number | null; apexY?: number | null; bandPx?: number | null; legPx?: number | null; legBottomY?: number | null; legLeftBottomY?: number | null; legRightBottomY?: number | null; posts?: boolean | null; railing?: string | null; railingTopY?: number | null; note: string }>
   }>
   unknowns: string[]
 }
@@ -461,7 +465,7 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
   const input = (turn.usage.inputTokens ?? 0) + (turn.usage.cacheReadInputTokens ?? 0) + (turn.usage.cacheCreationInputTokens ?? 0)
   if (reservation) ctx.spend?.settle(reservation, { usd: usd(ctx.price, input, turn.usage.outputTokens ?? 0), inputTokens: input, outputTokens: turn.usage.outputTokens ?? 0 }, `house reading ${step}`)
   const call = turn.content.find((b) => (b as { type?: string }).type === 'tool_use' && (b as { name?: string }).name === tool.name) as { input?: unknown } | undefined
-  const record: ReadingRecord = { step, ...(round ? { round } : {}), model: turn.model, ...(turn.requestId ? { requestId: turn.requestId } : {}), usage: turn.usage, ...(turn.latencyMs !== undefined ? { latencyMs: turn.latencyMs } : {}), pictures: pictures.map((p) => ({ id: p.picture.id, assetId: p.picture.assetId, sentWidth: p.width, sentHeight: p.height, sha256: sha(Buffer.from(p.jpegBase64, 'base64')) })), promptSha256: sha(`${READER_SYSTEM}\n${text}\n${JSON.stringify(tool)}`), answer: call?.input ?? null, ...(turn.stopReason ? { stopReason: turn.stopReason } : {}) }
+  const record: ReadingRecord = { step, ...(round ? { round } : {}), model: turn.model, ...(turn.requestId ? { requestId: turn.requestId } : {}), usage: turn.usage, ...(turn.latencyMs !== undefined ? { latencyMs: turn.latencyMs } : {}), pictures: pictures.map((p) => ({ id: p.picture.id, assetId: p.picture.assetId, sentWidth: p.width, sentHeight: p.height, sha256: sha(Buffer.from(p.jpegBase64, 'base64')) })), promptSha256: sha(`${READER_SYSTEM}\n${text}\n${JSON.stringify(tool)}`), toolVariant: `${tool === fallback ? 'SLIM' : 'FULL'}_${strictNow ? 'STRICT' : 'NON_STRICT'}`, answer: call?.input ?? null, ...(turn.stopReason ? { stopReason: turn.stopReason } : {}) }
   ctx.record(record)
   if (turn.stopReason === 'max_tokens') throw new ReadingFailed('PARSE_REJECTED', `${step}: the answer was cut at the output limit`)
   if (!call || typeof call.input !== 'object' || call.input === null) throw new ReadingFailed('PARSE_REJECTED', `${step}: the answer is not a call of ${tool.name}${turn.stopReason ? ` (stop reason ${turn.stopReason})` : ''}`)
@@ -528,7 +532,7 @@ ${facts(published)}
 Call describe_facades:
 - levels: every level mark and height printed on the section(s), with what it marks;
 - roofs: the roof of each body;
-- elevations: one entry per elevation picture — EVERY elevation picture listed above gets its own entry. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box — for a glazing whose top follows the roof slope, also the rows of its top edge at both sides (headLeftY, headRightY) — and the features: gable frames (a thick band along the rakes, with its band thickness and its legs), loggias and recessed portals (behind the wall plane), balconies (supports only when drawn), dormers, canopies, chimneys.
+- elevations: one entry per elevation picture — EVERY elevation picture listed above gets its own entry. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box — for a glazing whose top follows the roof slope, also the rows of its top edge at both sides (headLeftY, headRightY) — and the features: gable frames (a thick band along the rakes, with its band thickness and where EACH leg ends), loggias and recessed portals (behind the wall plane), the continuous band heading an open front (PORTAL_BAND: its top and its underside), balconies (supports only when drawn; the railing's infill — glass, bars, solid — and its top row), dormers, canopies, chimneys.
 A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.
 For each elevation say whether it is blind (no opening at all) and what limits your reading of it.`
   const tool = withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))

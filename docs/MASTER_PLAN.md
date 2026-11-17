@@ -1,8 +1,8 @@
-# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.7
+# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.8
 
-Data: 17.11.2026. **Aktywna kampania v3.54.7 obejmuje wierność elewacji i naprawę rozbieżności po recenzji. Ostatnia dostawa analizatora to v3.54.6. Końcowy host zbudowano z f9cb3ef. Pilot jest domyślnie wyłączony, a Android ma własną weryfikację.**
+Data: 17.11.2026. **Aktywna kampania v3.54.8 obejmuje zgodność parametrów odczytu API z finalną geometrią. Ostatnia dostawa analizatora to v3.54.7 (raport 65d8a06, finalny host z 59d115e). Pilot jest domyślnie wyłączony, a Android ma własną weryfikację.**
 
-Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
+Ta wersja planu powstała w repozytorium z promptu v3.54.8 (BuildPlan_Prompt_Fable_v3.54.8_Parametry_API_Do_Geometrii.md), bo plik Master Planu v3.54.8 nie został dołączony do zlecenia; § 2 streszcza ten prompt i nie dodaje wymagań spoza niego. Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
 
 ## 1. Cel i hierarchia informacji
 
@@ -22,7 +22,15 @@ Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak
 
 ## 2. Aktualny priorytet
 
-**Priorytet v3.54.7 po ocenie OWNER-a.** Zwiększyć wierność architektury zewnętrznej i doprowadzać ważne uwagi recenzji do sprawdzonej zmiany sceny. Marcówki GE pokazują, że obrys rzutu, typ dachu i liczba otworów nie wystarczają do oceny domu. Sprawdzać ramę szczytu, pas portalu, cofnięcie loggii, podziały i lica garażu oraz kształt szklenia. Uzupełnić ten kierunek przypadkami Pliszki i Alaski. Zachować dobre cechy LOCAL jako podstawę do porównania i możliwej korekty w ramach istniejących struktur i uprawnień projektu.
+**Priorytet v3.54.8.** Każda wartość, którą źródło podaje i odczyt API przekazuje, ma dojść do finalnej geometrii jako ta wartość albo zostać zatrzymana z jawnym powodem. Na Marcówkach GE: wypełnienie balustrady (szkło zostaje szkłem, konwencja jest nazwana), oba końce nóg ramy osobno, pas ramy mierzony pionowo i prostopadle do połaci, jeden styk w kalenicy, pas portalu nad wejściem i garażem, pełny zasięg płyty loggii pod nogą ramy, obie wysokości głowic. Dla każdego parametru: region źródła, surowa odpowiedź, pole typowane, wartość uzgodniona, wartość programu, pomiar geometrii, pierwsza funkcja, w której się gubi.
+
+**Recenzja v3.54.8.** Uwaga jest rozstrzygnięta dopiero, gdy zgłoszona własność zmieniła się w finalnej geometrii (APPLIED i IMPROVED osobno), sąsiedzi są zachowani, a runda zapisuje model wejściowy, rewizję bazową, hashe źródła i renderu, rewizję wyjściową i wynik; STALE_DEPENDENCY rozróżnia starą odpowiedź od błędu zarządzania rewizją. MEASURED_PRESENT potwierdza tylko istnienie.
+
+**Miary v3.54.8.** Historyczne 16 cech zostaje osobno; obok szczegółowa ocena (szerokość pasa, kontur, styk kalenicy, końce nóg, typ i wysokość balustrady, ciągłość portalu, zasięg płyty, głowice) z tolerancjami ustalonymi przed porównaniem i z dowodem na wstrzykniętych usterkach. LOCAL jest kontrolą zdolności, nie źródłem prawdy.
+
+**Budżet v3.54.8.** Księgi 22,047354 z 24,11036 USD, nominalnie 2,063006 USD; projektowe 100 USD nie zmienia pułapu. Niezatwierdzony koszt zostaje w rezerwie. ForgeShape tylko do odczytu; prywatny benchmark H2 i zbiór OWNER-a poza zakresem.
+
+**Checkpoint v3.54.7 (kontekst).** Priorytet v3.54.7 po ocenie OWNER-a: Zwiększyć wierność architektury zewnętrznej i doprowadzać ważne uwagi recenzji do sprawdzonej zmiany sceny. Marcówki GE pokazują, że obrys rzutu, typ dachu i liczba otworów nie wystarczają do oceny domu. Sprawdzać ramę szczytu, pas portalu, cofnięcie loggii, podziały i lica garażu oraz kształt szklenia. Uzupełnić ten kierunek przypadkami Pliszki i Alaski. Zachować dobre cechy LOCAL jako podstawę do porównania i możliwej korekty w ramach istniejących struktur i uprawnień projektu.
 
 **Checkpoint v3.54.6.** Trzy świeże wejściowo równoważne odczyty Marcówek dały różne modele, a sześć odtworzeń zapisanych odpowiedzi było identycznych we właściwych parach. W tych trzech próbach wybrano LOCAL jako podgląd częściowy. W pięciu recenzjach zapisano DIFFERS. Recenzent zauważył ramę w jednej rundzie i opisał błędne balkony na słupach, ale operacje nie obejmowały odtworzenia ramy ani naprawy loggii. Nazwane elementy częściowo pojawiały się w notatkach bez geometrycznego odpowiednika. Niektóre poprawki otworów blokowała odrzucona ściana przy wąskim uskoku. Końcowy host z f9cb3ef sprawdził ponowne użycie zaakceptowanej rewizji bez API. Użycie zapisanej rewizji zapewnia spójność, a jej jakość podlega osobnej ocenie.
 

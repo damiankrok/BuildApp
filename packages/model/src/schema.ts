@@ -856,7 +856,8 @@ export const WallPanelSchema = z
   .object({
     ...base,
     levelId: IdSchema,
-    role: z.enum(['PARAPET', 'DORMER_CHEEK', 'GABLE_INFILL', 'UPSTAND', 'KNEE_WALL', 'SCREEN', 'UNKNOWN_PANEL']),
+    /** GABLE_FRAME (v3.54.8): the frame edging a gable end — its band along the rakes and its legs — as one plate in the face plane. */
+    role: z.enum(['PARAPET', 'DORMER_CHEEK', 'GABLE_INFILL', 'UPSTAND', 'KNEE_WALL', 'SCREEN', 'GABLE_FRAME', 'UNKNOWN_PANEL']),
     start: Vec2Schema,
     end: Vec2Schema,
     thickness: positive,

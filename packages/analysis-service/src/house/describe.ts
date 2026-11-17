@@ -41,6 +41,27 @@ function heightLiteral(literal: string): number | null {
 }
 
 /** The answers as the observation layer of a house document. What cannot be taken is named in `notes`, never repaired. */
+/**
+ * v3.54.8 — a railing's infill: the typed field of the answer when it gives one (READ); else, for an answer that said it
+ * only in words, recognised in its note by a fixed pattern (NOTE) with the words it matched kept — the provenance and the
+ * scope of the recognition are in the document, and nothing else of the note is read. A railing neither field nor note
+ * names stays unknown.
+ */
+export const RAILING_NOTE_PATTERNS: ReadonlyArray<{ kind: 'GLASS' | 'BARS'; re: RegExp }> = [
+  { kind: 'GLASS', re: /\bglass(?:[- ](?:rail(?:ing|ed|s)?|balustrad(?:e|es|ing)|parapet|guard(?:rail)?|panels? (?:railing|balustrade)))|\bglazed (?:rail(?:ing)?|balustrad(?:e|ing)|parapet)/i },
+  { kind: 'BARS', re: /\b(?:balusters?|spindles?|(?:metal|steel|iron) bars?)\b/i },
+]
+function railingOf(x: { kind: string; railing?: string | null; railingTopY?: number | null; note?: string }, k: number): { railing?: 'GLASS' | 'BARS' | 'SOLID' | 'NONE'; railingFrom?: 'READ' | 'NOTE'; railingNote?: string; railingTopY?: number } {
+  if (x.kind !== 'BALCONY' && x.kind !== 'LOGGIA') return {}
+  const top = typeof x.railingTopY === 'number' ? { railingTopY: Math.round(x.railingTopY * k * 10) / 10 } : {}
+  if (x.railing === 'GLASS' || x.railing === 'BARS' || x.railing === 'SOLID' || x.railing === 'NONE') return { railing: x.railing, railingFrom: 'READ', ...top }
+  for (const p of RAILING_NOTE_PATTERNS) {
+    const m = p.re.exec(x.note ?? '')
+    if (m) return { railing: p.kind, railingFrom: 'NOTE', railingNote: m[0], ...top }
+  }
+  return top
+}
+
 export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }> }): { document: unknown; notes: ConversionNote[] } {
   const notes: ConversionNote[] = []
   const { selection, answers } = input
@@ -125,7 +146,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
       const features = (e.features ?? []).flatMap((x, j) => {
         const id = idOk(x.id) && !featureIds.has(x.id.toLowerCase()) ? x.id.toLowerCase() : `feature-${j + 1}`
         featureIds.add(id)
-        return [{ id, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.eavesY === 'number' ? { eavesY: r1(x.eavesY * k) } : {}), ...(typeof x.apexY === 'number' ? { apexY: r1(x.apexY * k) } : {}), ...(typeof x.bandPx === 'number' && x.bandPx > 0 ? { bandPx: r1(x.bandPx * k) } : {}), ...(typeof x.legPx === 'number' && x.legPx > 0 ? { legPx: r1(x.legPx * k) } : {}), ...(typeof x.legBottomY === 'number' ? { legBottomY: r1(x.legBottomY * k) } : {}), ...(typeof x.posts === 'boolean' ? { posts: x.posts } : {}), ...(x.note ? { note: x.note } : {}) }]
+        return [{ id, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.eavesY === 'number' ? { eavesY: r1(x.eavesY * k) } : {}), ...(typeof x.apexY === 'number' ? { apexY: r1(x.apexY * k) } : {}), ...(typeof x.bandPx === 'number' && x.bandPx > 0 ? { bandPx: r1(x.bandPx * k) } : {}), ...(typeof x.legPx === 'number' && x.legPx > 0 ? { legPx: r1(x.legPx * k) } : {}), ...(typeof x.legBottomY === 'number' ? { legBottomY: r1(x.legBottomY * k) } : {}), ...(typeof x.posts === 'boolean' ? { posts: x.posts } : {}), ...(typeof x.legLeftBottomY === 'number' ? { legLeftBottomY: r1(x.legLeftBottomY * k) } : {}), ...(typeof x.legRightBottomY === 'number' ? { legRightBottomY: r1(x.legRightBottomY * k) } : {}), ...railingOf(x, k), ...(x.note ? { note: x.note } : {}) }]
       })
       const bodies = (e.bodies ?? []).flatMap((b) => {
         const eb = bodyOf(b.bodyId)
@@ -282,6 +303,7 @@ export function compileHouse(input: unknown, modelId: string): CompiledHouse {
     doc.verification.held.push({ ref: r.id ?? r.type, code: above ? 'HELD_BY_DEPENDENCY' : 'COMPILE_CONFLICT', why: `${above ? 'it stands above the top of its wall: the dormer or gable it belongs to was not read or is not built — ' : ''}${r.codes.join(',')}: ${r.message.slice(0, 200)}` })
   }
   for (const a of built.approximated) doc.verification.knownDefects.push({ code: 'OPENING_APPROXIMATED', what: `${a.id}: ${a.what}` })
+  for (const n of built.builderNotes ?? []) doc.verification.knownDefects.push({ code: n.code, what: n.what.slice(0, 500) })
   for (const e of compileErrors) doc.verification.held.push({ ref: e.objectId ?? e.code, code: e.code === 'OPENING_ABOVE_WALL_TOP' ? 'HELD_BY_DEPENDENCY' : 'COMPILE_CONFLICT', why: `${e.code === 'OPENING_ABOVE_WALL_TOP' ? 'it stands above the top of its wall: the dormer or gable it belongs to was not read or is not built — ' : ''}${e.code}: ${e.message}` })
   accountForBuild(doc, built, measured)
   const modelHash = createHash('sha256').update(modelJson).digest('hex')
@@ -331,6 +353,41 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
     return { ...base, built: b, cut: { widthM: hole.widthM, heightM: hole.heightM, bottomY: hole.bottomY, alongSideM: hole.alongM }, fit, ...(why ? { why: why.slice(0, 300) } : {}) }
   })
   v.checks.push({ id: 'openings-cut', scope: 'COMPILE', what: 'each opening the program cut is a hole of that size in the compiled scene', expected: 'width and height of the hole within 2 cm of what was cut', measured: `${cut - mismatched} of ${cut} holes agree; ${g.openings.length - cut} agreed opening(s) were not cut`, status: cut === 0 ? 'NOT_CHECKED' : mismatched === 0 ? 'PASS' : 'FAIL', blocks: mismatched === 0 ? [] : ['quantities'] })
+  // v3.54.8 — data boundary: each accepted façade value has its built value in the compiled scene or an explicit
+  // absence (a held record with its reason); one lost or overwritten between the program and the scene is a FAIL
+  {
+    const lost: string[] = []
+    let agreed = 0
+    const sideOf = (rid: string) => measured.sides.find((sd) => sd.railings?.some((r) => r.id === rid))
+    for (const b of g.balconies) {
+      if (!b.railing) continue
+      const rid = `${b.id}-railing`
+      const want = b.railingInfill?.value === 'GLASS' ? 'GLASS' : b.railingInfill?.value === 'NONE' || b.railingInfill?.value === 'SOLID' ? 'NONE' : 'BARS'
+      const r = sideOf(rid)?.railings?.find((x) => x.id === rid)
+      if (!r) {
+        if (!has(rid) && !v.held.some((h) => h.ref.includes(b.id))) lost.push(`${b.id}: a railing agreed, none built and no reason held`)
+        continue
+      }
+      agreed += 1
+      if (r.infill !== want) lost.push(`${b.id}: infill agreed ${b.railingInfill?.value ?? 'not read'} (${want}), built ${r.infill}`)
+    }
+    for (const f of g.frames) {
+      const sd = measured.sides.find((x) => x.side === f.side)
+      for (const [leg, key] of [['legLeftBottomY', 'legLeftBottom'], ['legRightBottomY', 'legRightBottom']] as const) {
+        const rec = v.parameters.find((q) => q.path === `geometry.frames[${f.id}].${leg}`)
+        if (!rec) continue
+        if (rec.state !== 'ACCEPTED' || typeof rec.built !== 'number') continue
+        agreed += 1
+        const got = sd?.frame?.[key]
+        if (typeof got !== 'number' || Math.abs(got - rec.built) > 0.1) lost.push(`${f.id}: ${leg} built ${rec.built.toFixed(2)} m, the scene's leg ends at ${typeof got === 'number' ? got.toFixed(2) : 'nothing'}`)
+      }
+    }
+    for (const pb of g.portals ?? []) {
+      if (has(pb.id)) agreed += 1
+      else if (!v.held.some((h) => h.ref.includes(pb.id))) lost.push(`${pb.id}: a portal band agreed, not built, no reason held`)
+    }
+    if (agreed + lost.length > 0) v.checks.push({ id: 'facade-values-built', scope: 'COMPILE', what: 'each accepted railing infill, frame leg end and portal band is in the compiled scene as agreed, or held with its reason', expected: 'built as agreed (legs within 0.10 m) or an explicit absence', measured: lost.length === 0 ? `${agreed} agreed value(s) built as agreed` : lost.join('; ').slice(0, 600), status: lost.length === 0 ? 'PASS' : 'FAIL', blocks: lost.length === 0 ? [] : ['quantities'] })
+  }
   for (const view of v.views) {
     if (!view.elevation) {
       view.build = 'NOT_BUILT'
@@ -497,7 +554,7 @@ export function deliveredQuality(decision: Arbitration, defects: readonly Review
   // the last record of each defect stands
   const last = new Map<string, ReviewDefectLike>()
   for (const d of defects) last.set(`${d.side}|${d.feature}|${d.meaning}`, d)
-  if (decision.accepted === 'DESCRIBED') for (const d of last.values()) if (d.weight !== 'MINOR' && d.state !== 'IMPROVED' && d.state !== 'MEASURED_PRESENT') at(d.side).openDefects.push(`${d.id} ${d.feature} ${d.meaning} (${d.weight}, ${d.state})`)
+  if (decision.accepted === 'DESCRIBED') for (const d of last.values()) if (d.weight !== 'MINOR' && d.state !== 'IMPROVED') at(d.side).openDefects.push(`${d.id} ${d.feature} ${d.meaning} (${d.weight}, ${d.state})`)
   const sides = [...bySide.values()].sort((p, q) => p.side.localeCompare(q.side))
   const notAssessable = decision.unknown.filter((u) => /^(FRONT|REAR|LEFT|RIGHT):/.test(u))
   const checked = decision.findings.some((x) => x.featureSide)

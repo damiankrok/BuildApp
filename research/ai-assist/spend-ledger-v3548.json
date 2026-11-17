@@ -1,0 +1,49 @@
+{
+ "schema": "buildapp.ai-spend-ledger.v3548",
+ "currency": "USD",
+ "costBasis": "USAGE_PRICED",
+ "billing": "NOT_RECONCILED_WITH_INVOICE",
+ "priceSource": "list prices as in apps/analyzer-api HOUSE_READER_PRICES: Sonnet 5.5 $2/$10 per MTok",
+ "openingUsd": 22.047354,
+ "openingNote": "the cumulative books as v3.54.7 left them (22.047354 USD); this ledger lists the v3.54.8 requests only; ceiling 24.11036 USD cumulative",
+ "entries": [
+  {
+   "at": "2026-11-17T20:12:54.824Z",
+   "phase": "dev",
+   "house": "marcowki-ge",
+   "variant": "H",
+   "note": "house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch97LgZLdbMWWzuTppns4",
+   "inputTokens": 13782,
+   "outputTokens": 6146,
+   "costUsd": 0.089024
+  },
+  {
+   "at": "2026-11-17T20:13:18.986Z",
+   "phase": "dev",
+   "house": "marcowki-ge",
+   "variant": "H",
+   "note": "house reading REVIEW round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch97PrELqq6LPqR5RuhQs",
+   "inputTokens": 20847,
+   "outputTokens": 2809,
+   "costUsd": 0.069784
+  },
+  {
+   "at": "2026-11-17T20:13:36.492Z",
+   "phase": "dev",
+   "house": "marcowki-ge",
+   "variant": "H",
+   "note": "house reading REVIEW round 2",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch97RZiDoeQc1o8YiBLkp",
+   "inputTokens": 17282,
+   "outputTokens": 1901,
+   "costUsd": 0.053574
+  }
+ ],
+ "totalUsd": 0.212382,
+ "requests": 3
+}
