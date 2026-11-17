@@ -397,6 +397,20 @@ describe('v3.54.7 (D41) the choice and the delivered quality hold both models to
     expect(d.findings.some((x) => x.featureSide)).toBe(false)
     expect(deliveredQuality(d).status).toBe('FEATURES_NOT_CHECKED')
   })
+  it('LOCAL is protected: a frame LOCAL built, which the description neither reads nor denies, keeps LOCAL against a plain description', () => {
+    const h = compileHouse(gableFront(), 't')
+    const d = arbitrate(h, localOf(framed(), true), PUBLISHED)
+    const f = d.findings.find((x) => x.featureSide === 'FRONT')
+    expect(f?.fact).toMatch(/LOCAL's, unconfirmed/)
+    expect(f?.localOk).toBe(true)
+    expect(f?.describedOk).toBe(false)
+    expect(d.accepted).toBe('LOCAL')
+  })
+  it('counter: the same frame in the description as well is no finding — LOCAL is not protected against a description that has it', () => {
+    const h = framed()
+    const d = arbitrate(h, localOf(framed(), true), PUBLISHED)
+    expect(d.findings.filter((x) => /unconfirmed/.test(x.fact))).toEqual([])
+  })
   it('a KEY defect the review left open binds the described house: FEATURES_PARTIAL, named', () => {
     const h = compileHouse(gableFront(), 't')
     const open = [{ id: 'd1', side: 'FRONT', feature: 'GABLE_FRAME', meaning: 'MISSING', weight: 'KEY', state: 'NOT_IMPROVED', round: 1 }]

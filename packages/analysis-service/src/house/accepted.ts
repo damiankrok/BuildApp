@@ -1,7 +1,7 @@
 /**
  * v3.54.6 (D39) — an accepted revision of a described house, reused by the next analysis of the same source.
  *
- * Three readings of one page by the provider give three houses (Marcówki GE: three model hashes, the first difference at
+ * Three readings of one page by the provider give three houses (on the v3.54.6 DEV house: three model hashes, the first difference at
  * the first answer); one reading replayed gives one house, bit for bit. So the reading is the thing that is kept: an
  * accepted revision is the recorded answers of the reading whose house was accepted, under a BINDING of everything
  * that changes the house built from them —

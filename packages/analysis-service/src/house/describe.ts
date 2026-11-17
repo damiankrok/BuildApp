@@ -14,7 +14,7 @@ import { parseModel, serializeModel } from '@buildapp/model'
 import { compileBuilding } from '@buildapp/geometry'
 import { buildMobileSceneBundle } from '@buildapp/mobile-scene'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
-import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, heightAgainstFigure, housePoly, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
+import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, heightAgainstFigure, housePoly, outlineSteps, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
 import type { HouseDocument } from '@buildapp/reconstruction'
 import { buildHouse, headCapFor } from './build.js'
 import type { BuiltHouse, HeadCap } from './build.js'
@@ -711,6 +711,23 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
     }
     findings.push({ fact: `${c.feature.toLowerCase().replace('_', ' ')} on the ${c.side.toLowerCase()} side`, source: c.from, local: theirs.says, described: mine.says, localOk: theirs.ok, describedOk: mine.ok, featureSide: c.side })
   }
+  // v3.54.7 — LOCAL is protected: a characteristic feature LOCAL built from the same source, which the description's
+  // reading neither shows nor denies on that side, is not dropped by replacing LOCAL with the description. It is held as a
+  // finding LOCAL meets by construction (its source is LOCAL's own reading, said), so the description replaces LOCAL
+  // only by meeting it too, or by LOCAL failing more of what the source does say.
+  const claimed = new Set(featureClaims(described.document, review.defects ?? []).map((c) => `${c.side}|${c.feature}`))
+  for (const ls of local.sides ?? []) {
+    const own: FeatureClaim[] = []
+    if (ls.frame) own.push({ side: ls.side, feature: 'GABLE_FRAME', from: `LOCAL's reading of the source built a gable frame on the ${ls.side.toLowerCase()} side; the description's reading says nothing of it` })
+    if (ls.balconies.some((b) => b.recessed && b.posts === 0)) own.push({ side: ls.side, feature: 'LOGGIA', from: `LOCAL's reading of the source built a recessed loggia on the ${ls.side.toLowerCase()} side; the description's reading says nothing of it` })
+    if (ls.shapedOpenings.length > 0) own.push({ side: ls.side, feature: 'SHAPED_GLAZING', count: ls.shapedOpenings.length, from: `LOCAL's reading of the source built ${ls.shapedOpenings.length} glazing(s) with a raked or pointed head on the ${ls.side.toLowerCase()} side; the description's reading says nothing of them` })
+    for (const c of own) {
+      if (claimed.has(`${c.side}|${c.feature}`)) continue
+      const mine = claimMet(c, m.sides)
+      if (!mine || mine.ok) continue
+      findings.push({ fact: `${c.feature.toLowerCase().replace('_', ' ')} on the ${c.side.toLowerCase()} side (LOCAL's, unconfirmed)`, source: c.from, local: 'built by LOCAL', described: mine.says, localOk: true, describedOk: false, featureSide: c.side })
+    }
+  }
   // the ridge above ±0,00, from the section: a fact of its own, with or without a height on the page
   const ridge = supportedRidge(described.document)
   if (ridge) {
@@ -735,7 +752,11 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
   }
   // the same area in the same box is not yet the same house: a body on the other side (a mirrored plan) has both
   if (ground && local.groundPolygons && local.groundPolygons.length > 0) {
-    const share = outlineOverlap([ground], local.groundPolygons)
+    // v3.54.7: the same definition on both sides — walled floor. LOCAL's ground slabs are the floor behind the walls;
+    // the traced outline also holds the solid returns of a recess (outline steps), which enclose no floor: they are
+    // taken off before the two are set against their front-left corners (else a 1 m return shifts the whole outline)
+    const core = outlineSteps(ground.map((p) => ({ x: p.x, z: p.z })), g.wallThicknessM.value ?? 0.45).core
+    const share = outlineOverlap([core], local.groundPolygons)
     findings.push({ fact: 'where the walled outline lies', source: 'traced outline verified against the printed dimensions', local: `${(share * 100).toFixed(0)} % of the two outlines coincide, each set against its own front-left corner`, described: 'the traced outline', localOk: share >= ARBITRATION.outlineOverlap, describedOk: true })
   }
   unknown.push(...notAssessable)
