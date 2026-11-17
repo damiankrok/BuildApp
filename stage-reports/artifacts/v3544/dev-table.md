@@ -1,0 +1,11 @@
+| dom | LOCAL (A1) | H: wymiary × wys. | obrys i metryka | wysokości | dach | otwory zbudowane / odczytane | brakujące (kody) | przyjęty | koszt USD |
+|---|---|---|---|---|---|---|---|---|---|
+| confirm-archon-dom-w-majeranku-2-g2 | 19.51 × 8.57 m, szczyt +8.20 | 19.50 × 9.32 m, 8.52 m n.t. | 5/0 | 1/0 | main:GABLE, garage:GABLE, main-bay:FLAT | 12 / 16 | COMPILE_CONFLICT 10, WRONG_READ 7, SOURCE_UNKNOWN 5, WRONG_BINDING 2, CAPABILITY_MISSING 2 | DESCRIBED | 0.208 |
+| confirm-dobredomy-gracja-i-mala-ii | 12.06 × 13.43 m, szczyt +2.80 | 16.82 × 10.12 m, 8.58 m n.t. | 6/0 | 2/0 | main:GABLE, garage:GABLE, main-bay:FLAT | 16 / 21 | COMPILE_CONFLICT 6, WRONG_BINDING 2, SOURCE_UNKNOWN 1 | DESCRIBED | 0.311 |
+| confirm-architecturaldesigns-22192sl | brak modelu (METRIC_RESOLUTION_INCONCLUSIVE) | 19.91 × 12.80 m, 8.995 m n.t. | 5/0 | 0/0 | garage:GABLE, main:GABLE | 6 / 16 | HELD_BY_DEPENDENCY 16, COMPILE_CONFLICT 6, SOURCE_UNKNOWN 2, CAPABILITY_MISSING 1, WRONG_READ 1 | DESCRIBED | 0.201 |
+| projekt-dom-w-supertuniach-2-e-m9022920a5fcb6 | brak modelu (METRIC_RESOLUTION_INCONCLUSIVE) | 6.90 × 13.50 m, 5.29 m n.t. | 5/0 | 1/0 | main:GABLE | 6 / 13 | HELD_BY_DEPENDENCY 15, SOURCE_UNKNOWN 5, CAPABILITY_MISSING 1, WRONG_BINDING 1 | DESCRIBED | 0.179 |
+| projekt-dom-w-toreniach-3-e-me822857280738 | 7.39 × 12.50 m, szczyt +5.72 | 7.90 × 12.50 m, 6.04 m n.t. | 6/0 | 1/0 | main:GABLE | 5 / 8 | SOURCE_UNKNOWN 4, CAPABILITY_MISSING 4, COMPILE_CONFLICT 1 | DESCRIBED | 0.162 |
+| final-archon-dom-w-kuklikach | 7.56 × 8.76 m, szczyt +4.98 | 7.56 × 8.76 m, 5.85 m n.t. | 5/0 | 1/0 | main:HIP | 6 / 6 | SOURCE_UNKNOWN 6, CAPABILITY_MISSING 2 | LOCAL | 0.154 |
+| final-domywstylu-madera | 11.09 × 18.57 m, szczyt +6.00 | 15.57 × 19.01 m, 6.69 m n.t. | 4/0 | 2/0 | main:GABLE, garage:FLAT | 0 / 4 | HELD_BY_DEPENDENCY 7, COMPILE_CONFLICT 2 | LOCAL | 0.147 |
+| final-archon-dom-w-aksamitkach | brak modelu (METRIC_RESOLUTION_INCONCLUSIVE) | 13.22 × 8.82 m, 8.84 m n.t. | 6/0 | 1/0 | MAIN:GABLE, MAIN-bay:FLAT | 14 / 19 | SOURCE_UNKNOWN 8, CAPABILITY_MISSING 3, WRONG_BINDING 3, COMPILE_CONFLICT 3, WRONG_READ 2 | DESCRIBED | 0.349 |
+| final-houseplans-sp318422 | brak modelu (METRIC_RESOLUTION_INCONCLUSIVE) | 14.02 × 9.58 m, 7.671 m n.t. | 5/0 | 1/0 | main:GABLE, garage:GABLE | 0 / 0 | SOURCE_UNKNOWN 1 | DESCRIBED | 0.108 |

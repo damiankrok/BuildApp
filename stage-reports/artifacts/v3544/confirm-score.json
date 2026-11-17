@@ -1,0 +1,513 @@
+{
+ "scorer": "v3544/score.ts",
+ "tolerances": {
+  "extentM": 0.35,
+  "extentShare": 0.04,
+  "heightM": 0.6,
+  "ridgeM": 0.5,
+  "garageOverlap": 0.5,
+  "openingsAbs": 2,
+  "openingsShare": 0.25,
+  "garageDoorMinWidthM": 2.2,
+  "entranceMaxWidthM": 1.6,
+  "defaultTerrainDepthM": 0.3
+ },
+ "rows": [
+  {
+   "house": "c4-archon-lubczyku-2",
+   "publisher": "www.archon.pl",
+   "localBuilt": true,
+   "accepted": "DESCRIBED",
+   "why": "LOCAL contradicts the source where the description meets it: walled ground outline 115.3 m² against traced outline verified against the printed dimensions: 134.9 m²; where the walled outline lies 75 % of the two outlines coincide, each set against its own front-left corner against traced outline verified against the printed dimensions",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 15.93 / 15.92; depth 8.68 / 10.02",
+     "HEIGHT": "top 8.87 above the terrain / 8.87",
+     "ROOF": "FLAT NA / GABLE ALONG_FRONT",
+     "GARAGE": "FRONT 0.80–0.96 / FRONT 0.80–0.97",
+     "OPENINGS": "Fg 3/4 Fu 0/2 Rg 4/2 Ru 0/1 Lg 3/4 Lu 2/2 Rg 1/1 Ru 1/1: off by 7 of 17",
+     "DORMERS": "0 / 2"
+    },
+    "passed": 2,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 15.92 / 15.92; depth 10.02 / 10.02",
+     "HEIGHT": "top 8.87 above the terrain / 8.87",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "FRONT 0.82–0.97 / FRONT 0.80–0.97",
+     "OPENINGS": "Fg 4/4 Fu 1/2 Rg 0/2 Ru 0/1 Lg 0/4 Lu 0/2 Rg 0/1 Ru 0/1: off by 12 of 17",
+     "DORMERS": "1 / 2"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 4,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-archon-frizeach-g2e",
+   "publisher": "www.archon.pl",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "LOCAL meets every source fact the description meets: a correct base is kept",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 19.49 / 19.50; depth 13.50 / 13.50",
+     "HEIGHT": "top 7.10 above the terrain / 7.10",
+     "ROOF": "FLAT NA / GABLE ALONG_FRONT",
+     "GARAGE": "FRONT 0.38–0.64 / FRONT 0.38–0.64",
+     "OPENINGS": "Fg 4/5 Fu 0/0 Rg 4/4 Ru 0/0 Lg 5/5 Lu 0/0 Rg 1/1 Ru 0/0: off by 1 of 15",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 5,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 19.50 / 19.50; depth 13.50 / 13.50",
+     "HEIGHT": "top 7.10 above the terrain / 7.10",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "no garage door / FRONT 0.38–0.64",
+     "OPENINGS": "Fg 0/5 Fu 0/0 Rg 4/4 Ru 0/0 Lg 5/5 Lu 0/0 Rg 1/1 Ru 0/0: off by 5 of 15",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 5,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-dobredomy-abakus",
+   "publisher": "www.dobredomy.pl",
+   "localBuilt": false,
+   "accepted": "DESCRIBED",
+   "why": "the description passes its source checks and there is no LOCAL model",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 11.47 / 10.72; depth 10.84 / 10.12",
+     "HEIGHT": "top 6.81 above the terrain / 6.80",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 3/4 Fu 0/0 Rg 3/3 Ru 0/0 Lg 0/3 Lu 0/0 Rg 3/3 Ru 0/0: off by 4 of 13",
+     "DORMERS": "1 / 0"
+    },
+    "passed": 3,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 3,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-dobredomy-pallas",
+   "publisher": "www.dobredomy.pl",
+   "localBuilt": true,
+   "accepted": "DESCRIBED",
+   "why": "LOCAL contradicts the source where the description meets it: building height 5.90 m against published 8.5 m",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 16.54 / 15.52; depth 10.41 / 11.53",
+     "HEIGHT": "top 3.25 above the terrain / 8.50",
+     "ROOF": "FLAT NA / GABLE ALONG_FRONT",
+     "GARAGE": "FRONT 0.33–0.50, FRONT 0.51–0.75 / FRONT 0.81–0.96",
+     "OPENINGS": "Fg 6/4 Fu 3/2 Rg 6/6 Ru 3/0 Lg 2/1 Lu 1/2 Rg 3/0 Ru 2/0: off by 13 of 15",
+     "DORMERS": "0 / 2"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 16.48 / 15.52; depth 10.43 / 11.53",
+     "HEIGHT": "top 8.42 above the terrain / 8.50",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "no garage door / FRONT 0.81–0.96",
+     "OPENINGS": "Fg 0/4 Fu 0/2 Rg 0/6 Ru 0/0 Lg 1/1 Lu 2/2 Rg 0/0 Ru 0/0: off by 12 of 15",
+     "DORMERS": "0 / 2"
+    },
+    "passed": 2,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 2,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-lipinscy-oslo",
+   "publisher": "lipinscy.pl",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "LOCAL meets every source fact the description meets: a correct base is kept",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "FAIL",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 8.55 / 8.55; depth 7.05 / 7.05",
+     "HEIGHT": "top 17.09 above the terrain / 7.09",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 3/3 Fu 0/0 Rg 2/2 Ru 1/1 Lg 0/0 Lu 1/1 Rg 1/1 Ru 1/1: off by 0 of 9",
+     "DORMERS": "0 / 1"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 8.55 / 8.55; depth 7.05 / 7.05",
+     "HEIGHT": "top 7.09 above the terrain / 7.09",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 3/3 Fu 0/0 Rg 2/2 Ru 1/1 Lg 0/0 Lu 1/1 Rg 1/1 Ru 1/1: off by 0 of 9",
+     "DORMERS": "0 / 1"
+    },
+    "passed": 5,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 4,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "FAIL",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-lipinscy-dublin",
+   "publisher": "lipinscy.pl",
+   "localBuilt": false,
+   "accepted": "DESCRIBED",
+   "why": "the description passes its source checks and there is no LOCAL model",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    },
+    "detail": {
+     "METRIC": "width 13.00 / 13.00; depth 10.04 / 10.04",
+     "HEIGHT": "top 9.21 above the terrain / 9.21",
+     "ROOF": "GABLE ALONG_FRONT / GABLE ALONG_FRONT",
+     "GARAGE": "FRONT 0.76–0.95 / FRONT 0.76–0.96",
+     "OPENINGS": "Fg 4/4 Fu 2/2 Rg 3/3 Ru 2/2 Lg 2/2 Lu 2/2 Rg 0/0 Ru 0/0: off by 0 of 15",
+     "DORMERS": "0 / 0"
+    },
+    "passed": 6,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 6,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "PASS",
+     "DORMERS": "PASS"
+    }
+   },
+   "improved": true,
+   "faithful": true,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-architecturaldesigns-51853hz",
+   "publisher": "www.architecturaldesigns.com",
+   "localBuilt": true,
+   "accepted": "LOCAL",
+   "why": "the description did not resolve to a geometry: a metric for the plan",
+   "local": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 22.47 / 22.86; depth 19.43 / 18.90",
+     "HEIGHT": "top 3.10 above the terrain / 8.53",
+     "ROOF": "FLAT NA / GABLE ALONG_FRONT",
+     "GARAGE": "REAR 0.11–0.26 / RIGHT 0.08–0.36",
+     "OPENINGS": "Fg 4/6 Fu 0/2 Rg 9/8 Ru 0/0 Lg 0/3 Lu 0/0 Rg 12/5 Ru 0/0: off by 15 of 24",
+     "DORMERS": "0 / 1"
+    },
+    "passed": 1,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "no model",
+     "HEIGHT": "no model",
+     "ROOF": "no model",
+     "GARAGE": "no model",
+     "OPENINGS": "no model",
+     "DORMERS": "no model"
+    },
+    "passed": 0,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 1,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "FAIL",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": false,
+   "faithful": false,
+   "criticalRegressions": []
+  },
+  {
+   "house": "c4-studioatrium-wena",
+   "publisher": "www.studioatrium.pl",
+   "localBuilt": true,
+   "accepted": "DESCRIBED",
+   "why": "LOCAL contradicts the source where the description meets it: overall width 6.49 m against printed \"8.80\" = 8.8 m; overall depth 15.20 m against printed \"11.20\" = 11.2 m; building height no roof built against published 8.46 m; where the walled outline lies 59 % of the two outlines coincide, each set against its own front-left corner against traced outline verified against the printed dimensions",
+   "local": {
+    "groups": {
+     "METRIC": "FAIL",
+     "HEIGHT": "FAIL",
+     "ROOF": "FAIL",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 6.49 / 8.80; depth 15.20 / 11.20",
+     "HEIGHT": "top 5.90 above the terrain / 8.46",
+     "ROOF": "NONE NA / GABLE FRONT_TO_BACK",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 3/2 Fu 3/2 Rg 1/2 Ru 0/2 Lg 0/3 Lu 1/1 Rg 8/3 Ru 1/0: off by 14 of 15",
+     "DORMERS": "0 / 1"
+    },
+    "passed": 1,
+    "applicable": 6
+   },
+   "described": {
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    },
+    "detail": {
+     "METRIC": "width 8.80 / 8.80; depth 11.20 / 11.20",
+     "HEIGHT": "top 8.39 above the terrain / 8.46",
+     "ROOF": "GABLE FRONT_TO_BACK / GABLE FRONT_TO_BACK",
+     "GARAGE": "0 garage door(s) / none",
+     "OPENINGS": "Fg 2/2 Fu 2/2 Rg 0/2 Ru 0/2 Lg 0/3 Lu 0/1 Rg 0/3 Ru 0/0: off by 11 of 15",
+     "DORMERS": "0 / 1"
+    },
+    "passed": 4,
+    "applicable": 6
+   },
+   "final": {
+    "passed": 4,
+    "applicable": 6,
+    "groups": {
+     "METRIC": "PASS",
+     "HEIGHT": "PASS",
+     "ROOF": "PASS",
+     "GARAGE": "PASS",
+     "OPENINGS": "FAIL",
+     "DORMERS": "FAIL"
+    }
+   },
+   "improved": true,
+   "faithful": false,
+   "criticalRegressions": []
+  }
+ ]
+}

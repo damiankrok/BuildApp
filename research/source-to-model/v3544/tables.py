@@ -7,6 +7,10 @@
 import json, os, sys
 from collections import Counter, defaultdict
 
+LEDGER = []
+try: LEDGER = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'ai-assist', 'spend-ledger-v3544.json')))['entries']
+except Exception: pass
+
 def load(p):
     try: return json.load(open(p))
     except Exception: return None
@@ -34,7 +38,8 @@ def houses(lst, hroot, lroot, score=None):
         g = doc.get('geometry') or {}
         roofs = ', '.join(f"{b['id']}:{b['roof']['kind']}" for b in g.get('bodies', []))
         held = Counter(x['code'] for x in t.get('held', []))
-        cost = sum((load(os.path.join(hroot, h, 'answers', f)) or {}).get('usage', {}).get('inputTokens', 0) * 2e-6 + (load(os.path.join(hroot, h, 'answers', f)) or {}).get('usage', {}).get('outputTokens', 0) * 1e-5 for f in (os.listdir(os.path.join(hroot, h, 'answers')) if os.path.isdir(os.path.join(hroot, h, 'answers')) else []))
+        # what the campaign ledger booked for this house (every live request, smoke and repeats included)
+        cost = sum((e.get('costUsd') or 0) for e in LEDGER if e.get('house') == h)
         dims = f"{s.get('widthM'):.2f} × {s.get('depthM'):.2f} m, {s.get('heightAboveTerrainM')} m n.t." if s.get('widthM') else s.get('status', '—')
         sco = sc.get(h)
         extra = f" · ocena LOCAL {sco['local']['passed']}/{sco['local']['applicable']} → H {sco['described']['passed']}/{sco['described']['applicable']}" if sco else ''
