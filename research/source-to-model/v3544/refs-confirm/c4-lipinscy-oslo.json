@@ -1,0 +1,47 @@
+{
+ "house": "c4-lipinscy-oslo",
+ "publisher": "lipinscy.pl",
+ "url": "https://lipinscy.pl/projekt/oslo",
+ "packageContentHash": "b48e904afb93fef07478c3d42b7bbf445e77fb255145464a0a61ad19464a6b5f",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The ground plan marks the entrance with a black arrow at the bottom edge, pointing at the door of room 1.1 under the porch 1.6; the front elevation shows that door under a gabled porch between two windows.",
+ "overall": {
+  "widthM": 8.55,
+  "widthPrintedAs": "855",
+  "depthM": 7.05,
+  "depthPrintedAs": "705",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "The plain rectangular walled outline only. A further 105 is printed for the open entrance porch (1.6) in front; the side terrace (1.7) is not dimensioned. Neither is included."
+ },
+ "heights": {
+  "buildingHeightM": 7.09,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 6.79,
+  "upperFloorLevelM": 2.94,
+  "terrainBelowGroundFloorM": 0.30
+ },
+ "outlineShape": "RECTANGLE",
+ "outlineNote": "One plain rectangle 8.55 x 7.05 with an open gabled entrance porch at the middle of the front and an open terrace on the right side.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the whole house", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "entrance porch", "role": "OTHER", "sideOfMain": "FRONT", "position": "open porch on two posts at the middle of the front wall, over the entrance door", "levels": 1, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "NONE", "alongShare": null },
+ "entrance": { "side": "FRONT", "alongShare": [0.44, 0.56] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "REAR": { "elevationPublished": true, "openingsGround": 2, "openingsUpper": 1, "dormers": [ { "kind": "WALL", "form": "SHED", "alongShare": [0.34, 0.60] } ], "balconies": 0, "roofWindows": 0 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 0, "openingsUpper": 1, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 1, "openingsUpper": 1, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 1,
+ "uncertain": [
+  "Page text gives 'Wysokosc kalenicy 7,09 m'; the section prints ridge +6,79 and terrain -0,30, so the page figure is the ridge above terrain and is used as the building height.",
+  "Rear dormer kind: the section and the attic plan put its window wall in the plane of the rear wall (so WALL), but on the rear elevation a strip of roof with an unbroken eaves line runs below the window, so it looks like a dormer standing on the slope; ROOF would also be defensible.",
+  "Rear dormer position: read from the rear elevation ([0.34, 0.60] incl. cheeks, slightly left of centre seen from the rear); the stair window on the attic plan sits slightly left of centre seen from the FRONT, which mirrored would give about [0.40, 0.66]. The two sources disagree by about 0.5 m.",
+  "The paired casement in the rear dormer is counted as one upper opening; each gable has one upper window.",
+  "The entrance porch gable is an open roof on posts, not a dormer; the front slope has no dormer and no roof window."
+ ]
+}

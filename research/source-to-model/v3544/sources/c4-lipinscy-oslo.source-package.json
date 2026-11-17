@@ -1,0 +1,1506 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-lmp26-d30f7c01fa",
+  "canonicalUrl": "https://lipinscy.pl/projekt/oslo",
+  "fetchedUrl": "https://lipinscy.pl/projekt/oslo/",
+  "pageHash": "b59927ff0e27bb1a4bd99cbf1c1fb2b3297b850e5123ec761a2d1c8159f8f423",
+  "project": {
+    "externalId": "LMP26",
+    "name": "Projekt Oslo - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-1f690becba",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5276-projects-thumb-gallery-small-jpeg-bbff460e84",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5276_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3090,
+          "byteHash": "15a70b0d06538cd8e9ed1e6dcab3589e7ddc1cf845370078c91aa165f8e62b4d",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5276-projects-thumb-gallery-small-jpeg-bbff460e84",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-21228840ba",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5274-projects-thumb-gallery-small-jpeg-146130360a",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5274_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3211,
+          "byteHash": "442a3b1a1050edd562f10cac83133a4c34419646ab47d11cbe61d73b7b51e6c7",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5274-projects-thumb-gallery-small-jpeg-146130360a",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-27273cd966",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5272-projects-thumb-gallery-small-jpeg-79e4c15836",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5272_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3257,
+          "byteHash": "2bcba63a6cfd8d51431990499f057b4dc9c8c11fd4058e7450f25ed38f24b077",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5272-projects-thumb-gallery-small-jpeg-79e4c15836",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-2a485e6481",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5280-projects-thumb-gallery-small-jpeg-b0541a28bb",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5280_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3052,
+          "byteHash": "418407e597d48243d3505d0f9a4fa69c7272689584fd2918d542fe3fcc7cc6cd",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5280-projects-thumb-gallery-small-jpeg-b0541a28bb",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-5696c297b1",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-og2-vp-2a18ce3c72",
+          "url": "https://lipinscy.pl/upload/media/projects/5276/lmp026_og2_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 156190,
+          "byteHash": "b9098891aac634bd36b076e162500a19c1db24e7f767de1c92bd0adfd5e719c8",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmp026-og2-vp-2a18ce3c72",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-760974d83a",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 45,50 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-r1-pdf-235a580c06",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/31227/lmp026_r1-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 44450,
+          "byteHash": "dbff20d65c725949fb4b6fb6df20c331d5480c7ab1713e5da7b550e5a8e91e11",
+          "decoded": {
+            "width": 1107,
+            "height": 1000
+          },
+          "declaredMismatch": false,
+          "aspect": 1.107
+        },
+        {
+          "id": "var-thumb-31227-floorplanpdf-thumb-png-ff8b782003",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31227_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 107920,
+          "byteHash": "e501b5d25b9590b4bd582b50b7c2a990503e67441b05f38c27172b5fe597d940",
+          "decoded": {
+            "width": 340,
+            "height": 307
+          },
+          "declared": {
+            "width": 1107,
+            "height": 1000
+          },
+          "declaredMismatch": true,
+          "aspect": 1.107492
+        }
+      ],
+      "selectedVariantId": "var-lmp026-r1-pdf-235a580c06",
+      "selectionReason": "largest decoded raster of 2 variants: 1107x1000 over 340x307"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-86af5dd702",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-fr2-vp-34fe5e8b31",
+          "url": "https://lipinscy.pl/upload/media/projects/5272/lmp026_fr2_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 158875,
+          "byteHash": "05a21c2920685a2e264344cd625c1cd83ca6d92a5ec8e7db15b68d881c22e8dc",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmp026-fr2-vp-34fe5e8b31",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-89f53a8c70",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-fr1-vp-f1a2140ebf",
+          "url": "https://lipinscy.pl/upload/media/projects/5270/lmp026_fr1_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 163107,
+          "byteHash": "5e330c501053cb5300fc260a0ce41f9b2c58645efa5f97c1b098981917fb3d3e",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmp026-fr1-vp-f1a2140ebf",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-9a94c328ff",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-wn01-vp-7bfd45a33a",
+          "url": "https://lipinscy.pl/upload/media/projects/5278/lmp026_wn01_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 98685,
+          "byteHash": "d838082b930954f3cdcbdeb9c817206507ed59962affb05061caef43f92d0668",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-lmp026-wn01-vp-7bfd45a33a",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-a3d5506b5e",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-wn02-vp-13eb6d38b3",
+          "url": "https://lipinscy.pl/upload/media/projects/5280/lmp026_wn02_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 104243,
+          "byteHash": "8e91a4233a3c53625a70067ddf8030f49dfd64a50c34a13628764dd78eddc815",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-lmp026-wn02-vp-13eb6d38b3",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-a718b3260f",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5270-projects-thumb-gallery-small-jpeg-15062c6b22",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5270_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3264,
+          "byteHash": "0d1ed019915c9c0e817be7afa5dba6de5a3504564a11fce65608b59c3a413118",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5270-projects-thumb-gallery-small-jpeg-15062c6b22",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-d00773155e",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Poddasze 25,50 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-r2-pdf-85fd36ea7b",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/31229/lmp026_r2-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 25764,
+          "byteHash": "760309ef3be9409ac50be372ad6bae7d3dea55a643d8e6ddce40d94f8f6350ce",
+          "decoded": {
+            "width": 953,
+            "height": 919
+          },
+          "declaredMismatch": false,
+          "aspect": 1.036997
+        },
+        {
+          "id": "var-thumb-31229-floorplanpdf-thumb-png-d1de165a82",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31229_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 109996,
+          "byteHash": "71e978609256543141ad31da7aa7d21697b8f3ddfae42ec778a1237ab0c47427",
+          "decoded": {
+            "width": 340,
+            "height": 328
+          },
+          "declared": {
+            "width": 953,
+            "height": 919
+          },
+          "declaredMismatch": true,
+          "aspect": 1.036585
+        }
+      ],
+      "selectedVariantId": "var-lmp026-r2-pdf-85fd36ea7b",
+      "selectionReason": "largest decoded raster of 2 variants: 953x919 over 340x328"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-d9f304f5e3",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Oslo wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Oslo wymiary działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "confidence": 0.62
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-rd-500-pdf-88dc8e33a4",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26105/lmp026_rd_500-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 9527,
+          "byteHash": "e93e0e0652ff5297f85f5e82c754ec0e131fd38977cbd19cb7c6a154056f3ab9",
+          "decoded": {
+            "width": 770,
+            "height": 738
+          },
+          "declaredMismatch": false,
+          "aspect": 1.04336
+        },
+        {
+          "id": "var-thumb-26105-plotpdf-thumb-png-2763622223",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26105_plotpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 62232,
+          "byteHash": "4f528fa6b3406b6e4f71bc7e23637a5a8a62f4b19e03083c7a0f838b8181b3e1",
+          "decoded": {
+            "width": 340,
+            "height": 326
+          },
+          "declared": {
+            "width": 770,
+            "height": 738
+          },
+          "declaredMismatch": true,
+          "aspect": 1.042945
+        }
+      ],
+      "selectedVariantId": "var-lmp026-rd-500-pdf-88dc8e33a4",
+      "selectionReason": "largest decoded raster of 2 variants: 770x738 over 340x326"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-dfbb1daab4",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-5278-projects-thumb-gallery-small-jpeg-f7a43f7863",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/06/thumb_5278_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 3036,
+          "byteHash": "fa64412f4420b8cb2748e4d79f088bc877e17276f1d38b50f4d04704347d3171",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-5278-projects-thumb-gallery-small-jpeg-f7a43f7863",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-elewacja-lewa-048a000ae3",
+      "caption": "Gotowy projekt domu Oslo elewacja lewa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18389 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Oslo elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-18389-facades-thumb-gallery-small-jpeg-84bc5480b5",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18389_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 2406,
+          "byteHash": "1dc20eb0c5b5909a6ded3e18c1a346f761a14bfdb8bc5262a420a691a3b65d0f",
+          "decoded": {
+            "width": 120,
+            "height": 94
+          },
+          "declaredMismatch": false,
+          "aspect": 1.276596
+        }
+      ],
+      "selectedVariantId": "var-thumb-18389-facades-thumb-gallery-small-jpeg-84bc5480b5",
+      "selectionReason": "only variant (120x94, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-elewacja-prawa-2500e39e5a",
+      "caption": "Gotowy projekt domu Oslo elewacja prawa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20178 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Oslo elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-20178-facades-thumb-gallery-small-jpeg-c74816b0b0",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20178_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 2599,
+          "byteHash": "92e5b2d20ce8045b8a27c5822d330b87537a459bad4a93be3db5e01e3cb32046",
+          "decoded": {
+            "width": 120,
+            "height": 94
+          },
+          "declaredMismatch": false,
+          "aspect": 1.276596
+        }
+      ],
+      "selectedVariantId": "var-thumb-20178-facades-thumb-gallery-small-jpeg-c74816b0b0",
+      "selectionReason": "only variant (120x94, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-elewacja-przod-c522564431",
+      "caption": "Gotowy projekt domu Oslo elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 17493 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Oslo elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-17493-facades-thumb-gallery-small-jpeg-5b2f7d1396",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17493_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 2703,
+          "byteHash": "998dbe77e970c954f6b92033f02a8089e634a0dd830ba2b9e15c9b9ee276183c",
+          "decoded": {
+            "width": 120,
+            "height": 82
+          },
+          "declaredMismatch": false,
+          "aspect": 1.463415
+        }
+      ],
+      "selectedVariantId": "var-thumb-17493-facades-thumb-gallery-small-jpeg-5b2f7d1396",
+      "selectionReason": "only variant (120x82, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-elewacja-ty-4946bfbf39",
+      "caption": "Gotowy projekt domu Oslo elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19284 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Oslo elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-19284-facades-thumb-gallery-small-jpeg-58ca058e3d",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19284_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 2609,
+          "byteHash": "1b2e6f3dc9ae8f9dcf641d826c798397ef5556580c21684d1a3d24ae775145de",
+          "decoded": {
+            "width": 120,
+            "height": 82
+          },
+          "declaredMismatch": false,
+          "aspect": 1.463415
+        }
+      ],
+      "selectedVariantId": "var-thumb-19284-facades-thumb-gallery-small-jpeg-58ca058e3d",
+      "selectionReason": "only variant (120x82, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-fa817dac16",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Oslo przekrój\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-px-pdf-578cc4c9b3",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/24358/lmp026_px-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 16290,
+          "byteHash": "d7ba86f900e3359cab4a058e2234f654a5b6bf0081d2d61c144c555cc0d117f1",
+          "decoded": {
+            "width": 770,
+            "height": 647
+          },
+          "declaredMismatch": false,
+          "aspect": 1.190108
+        },
+        {
+          "id": "var-thumb-24358-crossviewpdf-thumb-png-55cc9496b9",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24358_crossviewpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 63509,
+          "byteHash": "2fa90b71e71bf533fcd2f2fb70c9aea5aba0a717392a2f5e158587d3de77c772",
+          "decoded": {
+            "width": 340,
+            "height": 286
+          },
+          "declared": {
+            "width": 770,
+            "height": 647
+          },
+          "declaredMismatch": true,
+          "aspect": 1.188811
+        }
+      ],
+      "selectedVariantId": "var-lmp026-px-pdf-578cc4c9b3",
+      "selectionReason": "largest decoded raster of 2 variants: 770x647 over 340x286"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-febb88e680",
+      "caption": "Gotowy projekt domu Oslo",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-lmp026-og1-vp-0ac2c912e6",
+          "url": "https://lipinscy.pl/upload/media/projects/5274/lmp026_og1_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 160557,
+          "byteHash": "514bb0bde62ff807148adbdba676671f27fae340412585696361fdd9de1fc814",
+          "decoded": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.498829
+        }
+      ],
+      "selectedVariantId": "var-lmp026-og1-vp-0ac2c912e6",
+      "selectionReason": "only variant (1280x854, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-przekroj-0088a016f1",
+      "caption": "Gotowy projekt domu Oslo przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Oslo przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24358-crossviewpdf-thumb-gallery-small-png-3e5877065d",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24358_crossviewpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 8728,
+          "byteHash": "b621e7247bfce88dcf2a25c38ca43ba829e25074150115f4db77e6292e5f370b",
+          "decoded": {
+            "width": 120,
+            "height": 101
+          },
+          "declaredMismatch": false,
+          "aspect": 1.188119
+        }
+      ],
+      "selectedVariantId": "var-thumb-24358-crossviewpdf-thumb-gallery-small-png-3e5877065d",
+      "selectionReason": "only variant (120x101, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-przekroj-09084dd176",
+      "caption": "Gotowy projekt domu Oslo przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Oslo przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-24358-crossviewpdf-thumb-gallery-big-v2-pn-5d19379daf",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/25/thumb_24358_crossviewpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 1820549,
+          "byteHash": "8b979735d7d6dbc3b5206f730dc3d732f6f318d324428641ff45f8461c6f564b",
+          "decoded": {
+            "width": 735,
+            "height": 618
+          },
+          "declaredMismatch": false,
+          "aspect": 1.18932
+        }
+      ],
+      "selectedVariantId": "var-thumb-24358-crossviewpdf-thumb-gallery-big-v2-pn-5d19379daf",
+      "selectionReason": "only variant (735x618, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-rzut-parter-1ee136b2e6",
+      "caption": "Gotowy projekt domu Oslo rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31227-floorplanpdf-thumb-gallery-small-png-648e30d71c",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31227_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 15787,
+          "byteHash": "e5fe9a5ba5f73e66493c941cc4f1a78460bf0da22ecd7a8b2704a32042e3e3c1",
+          "decoded": {
+            "width": 120,
+            "height": 108
+          },
+          "declaredMismatch": false,
+          "aspect": 1.111111
+        }
+      ],
+      "selectedVariantId": "var-thumb-31227-floorplanpdf-thumb-gallery-small-png-648e30d71c",
+      "selectionReason": "only variant (120x108, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-rzut-parter-b3dc9a7ca5",
+      "caption": "Gotowy projekt domu Oslo rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Oslo rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31227-floorplanpdf-thumb-gallery-big-v2-pn-3a821217c2",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31227_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 1961672,
+          "byteHash": "1838b09d4cff9bd2d1b1a0a34b42c0d05842716ed7269f3f733515125450c541",
+          "decoded": {
+            "width": 736,
+            "height": 665
+          },
+          "declaredMismatch": false,
+          "aspect": 1.106767
+        }
+      ],
+      "selectedVariantId": "var-thumb-31227-floorplanpdf-thumb-gallery-big-v2-pn-3a821217c2",
+      "selectionReason": "only variant (736x665, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-rzut-poddasze-08a8e92528",
+      "caption": "Gotowy projekt domu Oslo rzut Poddasze",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31229-floorplanpdf-thumb-gallery-big-v2-pn-fd3b0ef8f8",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31229_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 2094409,
+          "byteHash": "a5fe030000e407eb15bb96ad1bbe93a8d9834ac5019bf10e9ef68e9fc4740992",
+          "decoded": {
+            "width": 736,
+            "height": 710
+          },
+          "declaredMismatch": false,
+          "aspect": 1.03662
+        }
+      ],
+      "selectedVariantId": "var-thumb-31229-floorplanpdf-thumb-gallery-big-v2-pn-fd3b0ef8f8",
+      "selectionReason": "only variant (736x710, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-rzut-poddasze-8d5f628c4f",
+      "caption": "Gotowy projekt domu Oslo rzut Poddasze",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Gotowy projekt domu Oslo rzut Poddasze\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-31229-floorplanpdf-thumb-gallery-small-png-c4a3bb1e41",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/32/thumb_31229_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 15503,
+          "byteHash": "cafa58e7e50b2924683ef935cc7c036cd7f7b36f375789e6ac92f9ae8189aa86",
+          "decoded": {
+            "width": 120,
+            "height": 116
+          },
+          "declaredMismatch": false,
+          "aspect": 1.034483
+        }
+      ],
+      "selectedVariantId": "var-thumb-31229-floorplanpdf-thumb-gallery-small-png-c4a3bb1e41",
+      "selectionReason": "only variant (120x116, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-wymiary-dzia-ki-3581fed655",
+      "caption": "Gotowy projekt domu Oslo wymiary działki ",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Oslo wymiary działki \")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Oslo wymiary działki \")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26105-plotpdf-thumb-gallery-small-png-003afed287",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26105_plotpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 7786,
+          "byteHash": "ffc7b02909e01e89a608ccc0ad6dc6f90b981755b0d18d407d839cfc8dce359d",
+          "decoded": {
+            "width": 120,
+            "height": 115
+          },
+          "declaredMismatch": false,
+          "aspect": 1.043478
+        }
+      ],
+      "selectedVariantId": "var-thumb-26105-plotpdf-thumb-gallery-small-png-003afed287",
+      "selectionReason": "only variant (120x115, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-oslo-wymiary-dzia-ki-49d08f4e4b",
+      "caption": "Gotowy projekt domu Oslo wymiary działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Oslo wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Oslo wymiary działki\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26105-plotpdf-thumb-gallery-big-v2-png-0d5d5b766d",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26105_plotpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/png",
+          "byteLength": 2079660,
+          "byteHash": "d846a99c6384395edd378e6751dbb30c7f510d9485663b463435d64e6db586e4",
+          "decoded": {
+            "width": 736,
+            "height": 705
+          },
+          "declaredMismatch": false,
+          "aspect": 1.043972
+        }
+      ],
+      "selectedVariantId": "var-thumb-26105-plotpdf-thumb-gallery-big-v2-png-0d5d5b766d",
+      "selectionReason": "only variant (736x705, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-oslo-2aea1e79cd",
+      "caption": "Projekt domu Oslo",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Oslo elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-e2-vp-a0530b6964",
+          "url": "https://lipinscy.pl/upload/media/facades/18389/lmp026_e2_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 16055,
+          "byteHash": "278333c20507dc4f1b609f54bb21ece5ad44c35f58443c2102f6db85b1b54f57",
+          "decoded": {
+            "width": 509,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.2725
+        },
+        {
+          "id": "var-thumb-18389-admin-jpeg-76d9889838",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18389_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 7865,
+          "byteHash": "8e5509bf6c82daa71fb84d0631033db318c746a293ce9df4e1af86cf72b0a16d",
+          "decoded": {
+            "width": 200,
+            "height": 157
+          },
+          "declared": {
+            "width": 509,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.273885
+        }
+      ],
+      "selectedVariantId": "var-lmp026-e2-vp-a0530b6964",
+      "selectionReason": "largest decoded raster of 2 variants: 509x400 over 200x157"
+    },
+    {
+      "id": "asset-projekt-domu-oslo-2b458ce679",
+      "caption": "Projekt domu Oslo",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Oslo elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-e1-vp-73f5bb4bb3",
+          "url": "https://lipinscy.pl/upload/media/facades/17493/lmp026_e1_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 29711,
+          "byteHash": "a94c0fc43c9a3992bacb03eace93ee70fd206f2e1df99157d0d91eafa1c3520b",
+          "decoded": {
+            "width": 584,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.46
+        },
+        {
+          "id": "var-thumb-17493-admin-jpeg-e7ff5fd51b",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/18/thumb_17493_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 9443,
+          "byteHash": "122f25098008c49664b87c6073602ce952e7e5b1e515fd2b2089cf40681a2650",
+          "decoded": {
+            "width": 200,
+            "height": 137
+          },
+          "declared": {
+            "width": 584,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.459854
+        }
+      ],
+      "selectedVariantId": "var-lmp026-e1-vp-73f5bb4bb3",
+      "selectionReason": "largest decoded raster of 2 variants: 584x400 over 200x137"
+    },
+    {
+      "id": "asset-projekt-domu-oslo-7779d887fb",
+      "caption": "Projekt domu Oslo",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Oslo elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-e3-vp-cba9e3d07f",
+          "url": "https://lipinscy.pl/upload/media/facades/19284/lmp026_e3_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 29798,
+          "byteHash": "cceade93ac3afd95fff368b9f46d6fcbd6f22b17b383e45583e8399cf36000e1",
+          "decoded": {
+            "width": 584,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.46
+        },
+        {
+          "id": "var-thumb-19284-admin-jpeg-907ec7d38f",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19284_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 8842,
+          "byteHash": "ebfc3ee07acd827b336670aec40358208368393bc82364ac14fad7c0fdf4c566",
+          "decoded": {
+            "width": 200,
+            "height": 137
+          },
+          "declared": {
+            "width": 584,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.459854
+        }
+      ],
+      "selectedVariantId": "var-lmp026-e3-vp-cba9e3d07f",
+      "selectionReason": "largest decoded raster of 2 variants: 584x400 over 200x137"
+    },
+    {
+      "id": "asset-projekt-domu-oslo-db8e432f9b",
+      "caption": "Projekt domu Oslo",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Oslo elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Oslo elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-lmp026-e4-vp-5874adbba1",
+          "url": "https://lipinscy.pl/upload/media/facades/20178/lmp026_e4_vp",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 17335,
+          "byteHash": "9399ec403d75f3b7bf82d833775f97cf1e783b2403c79e6920d07c568a70d4b7",
+          "decoded": {
+            "width": 509,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.2725
+        },
+        {
+          "id": "var-thumb-20178-admin-jpeg-1c4674b61a",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20178_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/oslo",
+          "mediaType": "image/jpeg",
+          "byteLength": 8442,
+          "byteHash": "f8c1ad45760b066cf4cd7f7272101633ec9974658e4e875782c79fbf388bccf3",
+          "decoded": {
+            "width": 200,
+            "height": 157
+          },
+          "declared": {
+            "width": 509,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.273885
+        }
+      ],
+      "selectedVariantId": "var-lmp026-e4-vp-5874adbba1",
+      "selectionReason": "largest decoded raster of 2 variants: 509x400 over 200x157"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 60.43,
+      "unit": "m2",
+      "raw": "60,43m²"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "value": 84.64,
+      "unit": "m2",
+      "raw": "84,64m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 115.4,
+      "unit": "m2",
+      "raw": "115,40m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 45,
+      "unit": "deg",
+      "raw": "45°"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 71,
+      "unit": "m2",
+      "raw": "71m²"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "tak budowalem ten domek , niestety rozkład salonu przez schody nie daje mozliwosci postawienja stołu czy telewizora , nie mowiąc juz o sofie naroznikowej . 2 m. dłuzszy to bylby idealny , a w budowie to juz minimalna większe koszty a tak niestety domek dla krasnoludkow , moze jeszcze gdyby schody dac w ganku , mieszkałem w nim 4 lata , niestety nie praktyczny rozkład do umeblowanja , salon to wielka klatka schodowa z aneksem kuchennym to wszystko , wydłuzyc o 2 m. to byłby naprawde tani fajny w realizacji i praktyczny dom"
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "45°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Mały dom z poddaszem użytkowym, tani w budowie, z trzema sypialniami"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/oslo/Wdzięczny, mały domek dla niedużej rodziny. Na niewielkiej powierzchni zgrabnie zakomponowano cztery pokoje kuchnię, łazienkę i pomieszczenie gospodarcze. Z zadaszonego ganku przechodzi się do wiatrołapu, przy którym jest łazienka z kotłem c. o. Pokój dzienny stanowi przestrzeń integrującą życie rodziny. Jest tu miejsce na kominek, kącik wypoczynkowy, stół jadalniany i wydzieloną część kuchenną. Obok znajduje się jedna sypialnia. Drewniane schody prowadzą na poddasze, gdzie są dwie sypialnie i garderoba. Sypialnie są wystarczająco wygodne i ustawne, a garderoba bardzo praktyczna."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/06/46a8888e1870f4db681be6173036c5a02179e4c6.jpeg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/5270/lmp026_fr1_vp: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "b48e904afb93fef07478c3d42b7bbf445e77fb255145464a0a61ad19464a6b5f"
+}

@@ -1,0 +1,1020 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-www-studioatrium-pl-92e4695309",
+  "canonicalUrl": "https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+  "pageHash": "3cc1cb51972ede35b78bdf810602bd5bbfeb60af44f1365a604a3fc1b801a6ca",
+  "project": {
+    "name": "Projekt domu Wena",
+    "publisher": "studioatrium.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-elewacja-domu-wena-1-13bbc4faeb",
+      "caption": "Elewacja domu Wena - 1",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956129c31827\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Elewacja domu Wena - 1\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-5956129c31827-jpg-21b2333857",
+          "url": "https://media.studioatrium.pl/project/738/elewacja-5956129c31827.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 21003,
+          "byteHash": "e281b899b522dc4a38d7b1c3149e25f549053e45c7171bfaeb0d3d9855a669ca",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-5956129c31827-jpg-21b2333857",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-domu-wena-2-de444dfdfc",
+      "caption": "Elewacja domu Wena - 2",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956129c560f4\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Elewacja domu Wena - 2\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-5956129c560f4-jpg-39c53b4165",
+          "url": "https://media.studioatrium.pl/project/738/elewacja-5956129c560f4.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 27330,
+          "byteHash": "284608db71ddd930f292df2c1c03897d7fc160fc7b56fba7dfe5bc7923533891",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-5956129c560f4-jpg-39c53b4165",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-domu-wena-3-e40b52f5a1",
+      "caption": "Elewacja domu Wena - 3",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956129c7a97f\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Elewacja domu Wena - 3\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-5956129c7a97f-jpg-f7a9e81f83",
+          "url": "https://media.studioatrium.pl/project/738/elewacja-5956129c7a97f.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 23637,
+          "byteHash": "f27d0b1e868233bee0c1987d229d8bdfeb395b89242ce33c5a1af4aeae8c48d8",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-5956129c7a97f-jpg-f7a9e81f83",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-elewacja-domu-wena-4-a6d0b7581d",
+      "caption": "Elewacja domu Wena - 4",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"elewacja 5956129c9e224\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Elewacja domu Wena - 4\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-elewacja-5956129c9e224-jpg-f523612759",
+          "url": "https://media.studioatrium.pl/project/738/elewacja-5956129c9e224.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 32030,
+          "byteHash": "a0ab96a62ceb16005e4a0c68aa7376f8131797f198dcd8c0fbea80189d903efc",
+          "decoded": {
+            "width": 1024,
+            "height": 683
+          },
+          "declaredMismatch": false,
+          "aspect": 1.499268
+        }
+      ],
+      "selectedVariantId": "var-elewacja-5956129c9e224-jpg-f523612759",
+      "selectionReason": "only variant (1024x683, decoded from bytes)"
+    },
+    {
+      "id": "asset-generowanie-pliku-7541ac17b9",
+      "caption": "Generowanie pliku",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-loader-gif-22db5820a5",
+          "url": "https://www.studioatrium.pl/img/loader.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/gif",
+          "byteLength": 673,
+          "byteHash": "9db486efc49e6d43525a174416f8a1d4999627d7e8728c4c323228f1aa568967",
+          "decoded": {
+            "width": 16,
+            "height": 16
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-loader-gif-22db5820a5",
+      "selectionReason": "only variant (16x16, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-parteru-wena-ab2d334a08",
+      "caption": "Rzut parteru - Wena",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607f0f1797\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607f0f1797\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut parteru - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut parteru - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Rzut parteru - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parteru\" in \"Rzut parteru - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Dom z poddaszem użytkowym, 4 sypialniami i przestronnym, niezadaszonym tarasem\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Dom z poddaszem użytkowym, 4 sypialniami i przestronnym, niezadaszonym tarasem\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-595607f0f1797-png-9f5a32a702",
+          "url": "https://media.studioatrium.pl/project/738/rzut-595607f0f1797.png",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/png",
+          "byteLength": 87364,
+          "byteHash": "61bcf3f5ba31d791dc8efec80f67378f99bca00cf7b1a56fc77a3d753f64e5a3",
+          "decoded": {
+            "width": 1001,
+            "height": 1296
+          },
+          "declaredMismatch": false,
+          "aspect": 0.772377
+        }
+      ],
+      "selectedVariantId": "var-rzut-595607f0f1797-png-9f5a32a702",
+      "selectionReason": "only variant (1001x1296, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-poddasza-wena-69e208c1f5",
+      "caption": "Rzut poddasza - Wena",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607f1d189c\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"rzut 595607f1d189c\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut poddasza - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Rzut poddasza - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Rzut poddasza - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasza\" in \"Rzut poddasza - Wena\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 71,45 m²\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 71,45 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-595607f1d189c-png-b528766654",
+          "url": "https://media.studioatrium.pl/project/738/rzut-595607f1d189c.png",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/png",
+          "byteLength": 84124,
+          "byteHash": "91ec09bd9fc868ba7dbc27d85902144323bcf87483547e9ce1d3cbc0ce3860ce",
+          "decoded": {
+            "width": 820,
+            "height": 965
+          },
+          "declaredMismatch": false,
+          "aspect": 0.849741
+        }
+      ],
+      "selectedVariantId": "var-rzut-595607f1d189c-png-b528766654",
+      "selectionReason": "only variant (820x965, decoded from bytes)"
+    },
+    {
+      "id": "asset-waiter-blue-gif-57c8c7de8f",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Poddasze 65,35 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-waiter-blue-gif-8b0babfa97",
+          "url": "https://www.studioatrium.pl/img/waiter-blue.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/gif",
+          "byteLength": 3208,
+          "byteHash": "98b3c8d8db7281e3772cdae94ad6e3f7c25495314a1e2170fac6b9417ff32f5e",
+          "decoded": {
+            "width": 32,
+            "height": 32
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-waiter-blue-gif-8b0babfa97",
+      "selectionReason": "only variant (32x32, decoded from bytes)"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-wena-8511424252",
+      "caption": "Wizualizacja projektu domu Wena",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 1350 5954e87e9d1c3\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 5954e87e9d1c3\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wena-wizualizacja-5954e87e9d1c3-jpg-2c19c82667",
+          "url": "https://media.studioatrium.pl/project/738/wena-wizualizacja-5954e87e9d1c3.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 422140,
+          "byteHash": "54462ab108b2c1044f7d672dcd3f81329ff23bb91523c96770e81befdadd5e71",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-wena-wizualizacja-1350-5954e87e9d1c3-jpg-ba86752bcc",
+          "url": "https://media.studioatrium.pl/project/738/wena-wizualizacja-1350-5954e87e9d1c3.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 210329,
+          "byteHash": "2155656883b264b12a294ee5a387b8584d613e537189bbde4d0bacc46a7045a8",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declared": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wena-wizualizacja-5954e87e9d1c3-jpg-2c19c82667",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-wena-b11c36d3ea",
+      "caption": "Wizualizacja projektu domu Wena",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 5954e88134db6\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wena-wizualizacja-5954e88134db6-jpg-5b00bd373d",
+          "url": "https://media.studioatrium.pl/project/738/wena-wizualizacja-5954e88134db6.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 408440,
+          "byteHash": "62cb2e2c75eb0344cfe8651cd1a28a9f03ff1164ed5a94f338cad48d18f43c35",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-dummy-jpg-723026fe84",
+          "url": "https://www.studioatrium.pl/img/dummy.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 8391,
+          "byteHash": "6a6ad05d24d761d4b6b367a8c7828044f07542d84c5784f18b5825fc708bcc8a",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declared": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wena-wizualizacja-5954e88134db6-jpg-5b00bd373d",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wizualizacja-projektu-domu-wena-b22376c74c",
+      "caption": "Wizualizacja projektu domu Wena",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 1350 5954e87c01c99\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 1350 5954e87c01c99\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 1350 5954e87c01c99\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"wena wizualizacja 5954e87c01c99\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem WENA - wizualizacja 1 Wizualizacja pro\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Projekty domów - Projekt domu z poddaszem WENA - wizualizacja 1 Wizualizacja pro\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"wizualizacja\" in \"Wizualizacja projektu domu Wena\")",
+          "confidence": 0.82
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem WENA - wizualizacja 1 Wizualizacja pro\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekty domów - Projekt domu z poddaszem WENA - wizualizacja 1 Wizualizacja pro\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-wena-wizualizacja-5954e87c01c99-jpg-188d4c2aee",
+          "url": "https://media.studioatrium.pl/project/738/wena-wizualizacja-5954e87c01c99.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 484785,
+          "byteHash": "560999fa28264e4d917341fe6493c6ce30f13e9e0ff75b96178e2fd1714d84f9",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        },
+        {
+          "id": "var-wena-wizualizacja-1350-5954e87c01c99-jpg-44a1ae9ae1",
+          "url": "https://media.studioatrium.pl/project/738/wena-wizualizacja-1350-5954e87c01c99.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 241939,
+          "byteHash": "75f3bf04567136a21f4c62d810d2fd99b8dc4b254efb290bab5c39cea81837e5",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wena-wizualizacja-5954e87c01c99-jpg-188d4c2aee",
+      "selectionReason": "largest decoded raster of 2 variants: 1920x1280 over 1350x900"
+    },
+    {
+      "id": "asset-wnetrze-domu-wena-0e3cbe289e",
+      "caption": "Wnętrze domu Wena: ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-1350-5956309d28cfc-jpg-d0b795d602",
+          "url": "https://media.studioatrium.pl/project/738/interior/wnetrze-1350-5956309d28cfc.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 128249,
+          "byteHash": "7456361b5f2b378cbdd46121b19a7a35f6c5f8ae4fc915bc8be9b6a3d0aaf673",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-1350-5956309d28cfc-jpg-d0b795d602",
+      "selectionReason": "only variant (1350x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-wnetrze-domu-wena-4d693b8b9c",
+      "caption": "Wnętrze domu Wena: ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-1350-5956309e5ed6c-jpg-f440871c3f",
+          "url": "https://media.studioatrium.pl/project/738/interior/wnetrze-1350-5956309e5ed6c.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 80012,
+          "byteHash": "32e0eba83d3220b14d3b2daa60a578a4dbcafa68a5481c21acd3456898a56f1d",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-1350-5956309e5ed6c-jpg-f440871c3f",
+      "selectionReason": "only variant (1350x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-wnetrze-domu-wena-9c309660f9",
+      "caption": "Wnętrze domu Wena: ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-1350-5956309c879a5-jpg-3315902fb1",
+          "url": "https://media.studioatrium.pl/project/738/interior/wnetrze-1350-5956309c879a5.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 131259,
+          "byteHash": "8ac500582813f0b9792ac1c14418d6fb4a2c69e549eba9cf4abac5d0a6dbd331",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-1350-5956309c879a5-jpg-3315902fb1",
+      "selectionReason": "only variant (1350x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-wnetrze-domu-wena-a9bc4889f0",
+      "caption": "Wnętrze domu Wena: ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-59563099a3022-jpg-f3b617ad52",
+          "url": "https://media.studioatrium.pl/project/738/interior/wnetrze-59563099a3022.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 273184,
+          "byteHash": "6447c42556387ea5eb60c157135ed602a76cb89eb73f1e6b993e7b63a857f73f",
+          "decoded": {
+            "width": 1920,
+            "height": 1280
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-59563099a3022-jpg-f3b617ad52",
+      "selectionReason": "only variant (1920x1280, decoded from bytes)"
+    },
+    {
+      "id": "asset-wnetrze-domu-wena-d0de5a4892",
+      "caption": "Wnętrze domu Wena: ",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wnetrze-1350-5956309dbd85d-jpg-c8538276f1",
+          "url": "https://media.studioatrium.pl/project/738/interior/wnetrze-1350-5956309dbd85d.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/jpeg",
+          "byteLength": 125244,
+          "byteHash": "119ba14ab8caed56651fa8888f71e97d15b0dbbd92c35cae1ff5be795fee8017",
+          "decoded": {
+            "width": 1350,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-wnetrze-1350-5956309dbd85d-jpg-c8538276f1",
+      "selectionReason": "only variant (1350x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-zobacz-galerie-projektu-wena-ae98ecd3ad",
+      "caption": "Zobacz galerię projektu Wena",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-finger-png-4c3ec8d5a5",
+          "url": "https://www.studioatrium.pl/img/finger.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+          "mediaType": "image/png",
+          "byteLength": 5050,
+          "byteHash": "280b256ffccbf48c8b2e8acab725410940ad9bf1d1cfa2bb849bea8799384366",
+          "decoded": {
+            "width": 90,
+            "height": 100
+          },
+          "declaredMismatch": false,
+          "aspect": 0.9
+        }
+      ],
+      "selectedVariantId": "var-finger-png-4c3ec8d5a5",
+      "selectionReason": "only variant (90x100, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "wysokość budynku",
+      "value": 8.46,
+      "unit": "m",
+      "raw": "8,46 m"
+    },
+    {
+      "key": "building_length",
+      "label": "długość budynku",
+      "value": 15.2,
+      "unit": "m",
+      "raw": "15,20 m"
+    },
+    {
+      "key": "building_width",
+      "label": "szerokość budynku",
+      "value": 8.8,
+      "unit": "m",
+      "raw": "8,80 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "pow. zabudowy",
+      "value": 104.4,
+      "unit": "m2",
+      "raw": "104,40 m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "pow. dachu",
+      "value": 119,
+      "unit": "m2",
+      "raw": "119,00 m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "kąt nachylenia dachu",
+      "value": 40,
+      "unit": "deg",
+      "raw": "40 °"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 136.8,
+      "unit": "m2",
+      "raw": "136,80 m²"
+    },
+    {
+      "key": "volume",
+      "label": "kubatura brutto",
+      "value": 654.3,
+      "unit": "none",
+      "raw": "654,30 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Na pierwszy rzut oka zachwyca kolorystyka – dwa odcienie brązu, ciepły i zimny, jasna elewacja i kamienne zdobienia. Niewątpliwą ozdobą jest specyficzna lukarna, wkomponowana w dach oraz częściowo w ścianę domu, gdzie mieści się jeden z czterech pokojów na poddaszu. Nie zapomniano również o praktycznej garderobie w sypialni małżeńskiej. Spore obszary przeszkleń, zastosowane na parterze, optycznie powiększają dom i sprawiają, że pokoje na dole „wychodzą” wprost do ogrodu. Dom dość wąski od frontu, sprzyja zatem działkom o takim układzie. Wena z powodzeniem pomieści pięcioosobowe rodziny."
+    },
+    {
+      "key": "roof",
+      "label": "kąt nachylenia dachu",
+      "text": "40 °"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Projekt domu Wena o powierzchni użytkowej 136,8 m2. Dom z poddaszem użytkowym, 4 sypialniami i przestronnym, niezadaszonym tarasem"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Dom z poddaszem użytkowym, 4 sypialniami i przestronnym, niezadaszonym tarasem"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "ATTIC",
+      "index": 1,
+      "label": "hall z komunikacją",
+      "area": 8.25,
+      "raw": "1 hall z komunikacją | 8,25"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 2,
+      "label": "łazienka",
+      "area": 6.7,
+      "raw": "2 łazienka | 6,70"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 3,
+      "label": "garderoba",
+      "area": 5.45,
+      "raw": "3 garderoba | 5,45"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 4,
+      "label": "pokój",
+      "area": 11,
+      "raw": "4 pokój | 11,00"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 5,
+      "label": "pokój",
+      "area": 14,
+      "raw": "5 pokój | 14,00"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 6,
+      "label": "pokój",
+      "area": 10.65,
+      "raw": "6 pokój | 10,65"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 7,
+      "label": "pokój",
+      "area": 9.3,
+      "raw": "7 pokój | 9,30"
+    },
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "przedsionek",
+      "area": 4.2,
+      "raw": "1 przedsionek | 4,20"
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "hall z komunikacją",
+      "area": 8,
+      "raw": "2 hall z komunikacją | 8,00"
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "łazienka",
+      "area": 2.6,
+      "raw": "3 łazienka | 2,60"
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "kotłownia",
+      "area": 3.5,
+      "raw": "4 kotłownia | 3,50"
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "kuchnia",
+      "area": 13.35,
+      "raw": "5 kuchnia | 13,35"
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "pokój dzienny z jadalnią",
+      "area": 28,
+      "raw": "6 pokój dzienny z jadalnią | 28,00"
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "pokój",
+      "area": 11.8,
+      "raw": "7 pokój | 11,80"
+    }
+  ],
+  "failures": [],
+  "contentHash": "c11dcec0d011f30315affd691c84909b61157412b0aad4dfd063ce1020cc6bb4"
+}

@@ -1,0 +1,2198 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-51853hz-681d5f9892",
+  "canonicalUrl": "https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+  "pageHash": "d99e0c328a417f8901c5a3a72dccba74f7cbc3408c23d139b0f76f24e9058b8a",
+  "project": {
+    "externalId": "51853HZ",
+    "name": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage",
+    "publisher": "architecturaldesigns.com"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-51853hz-day-1611670584-jpg-f7e2313b22",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-day-1611670584-jpg-63d2bc84a7",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_day_1611670584.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 240564,
+          "byteHash": "94df7b17f045fb273291845c5e6e03619bca11063bb7f471ff5ef271e982b4b4",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-day-1611670584-jpg-63d2bc84a7",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-dusk-1611670584-jpg-66bfa9cb87",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-51853hz-dusk-1611670584-jpg-fb8fe56e5f",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_dusk_1611670584.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 194417,
+          "byteHash": "ceb22bbf4469e16ddca7b419e9e10b20367f14018d0dfaa4a8b36d8fb9eb5dfd",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-dusk-1611670584-jpg-fb8fe56e5f",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-front-1611670555-jpg-593f01b779",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"51853hz front 1611670555\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-front-1611670555-jpg-53bc5ceb48",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Front_1611670555.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 280294,
+          "byteHash": "d52cf75916b516f2ae904ee0a0e414e56ee38a3e92040995757f2ef6b6949fd2",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-front-1611670555-jpg-53bc5ceb48",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-left-1611670557-jpg-ebfe616720",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"51853hz left 1611670557\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-left-1611670557-jpg-c09f2530a3",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Left_1611670557.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 232400,
+          "byteHash": "36e58a72bc3c930f155b617eaebf6281237408b875e52eb748f2468bce6f0c9f",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-left-1611670557-jpg-c09f2530a3",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-002-1621968660-jpg-d6170dc0b2",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 002 1621968660\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-002-1621968660-jpg-24ed501551",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_002_1621968660.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 256245,
+          "byteHash": "b0b31a90825e05a8d77438005db4cc5699ab59efa394c1bdc5ab6d5c1a9801f4",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-002-1621968660-jpg-24ed501551",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-003-1621968626-jpg-a6561e797c",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 003 1621968626\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-003-1621968626-jpg-be8771f1d3",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_003_1621968626.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 270605,
+          "byteHash": "3b8a0ba7bf89d3434fc64ba3de2720a100df631947478c97799db437d48c5b34",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-003-1621968626-jpg-be8771f1d3",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-004-1621968627-jpg-09d0a1b722",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 004 1621968627\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-004-1621968627-jpg-82971835cc",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_004_1621968627.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 231030,
+          "byteHash": "6b1c45372705caec140c39f739e2fe3fa26c3fbc40a5d5e33e67197cfd7fb827",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-004-1621968627-jpg-82971835cc",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-005-1621968628-jpg-40e92d067b",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 005 1621968628\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-005-1621968628-jpg-ce4e27c847",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_005_1621968628.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 113815,
+          "byteHash": "9d260771c00bc0b220e3b24c6a246989ce35a0aa73bcd56ba5d844d5eeb2c183",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declaredMismatch": false,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-005-1621968628-jpg-ce4e27c847",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-006-1621968629-jpg-a5e9cf46bd",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 006 1621968629\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-006-1621968629-jpg-bba15968da",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_006_1621968629.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 128229,
+          "byteHash": "78e930e24782c2d0e7367c3cf65e61b766a222fa3930ad93ab3a48cf687caa98",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declaredMismatch": false,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-006-1621968629-jpg-bba15968da",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-007-1621968630-jpg-487bf0f775",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 007 1621968630\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-007-1621968630-jpg-ad50011220",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_007_1621968630.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 131372,
+          "byteHash": "c2ea70e5fae9fa5c344b8a15d237c375cd1163334ae2ee5e0fdcd6da90445a1f",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declaredMismatch": false,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-007-1621968630-jpg-ad50011220",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-008-1621968631-jpg-1ca5213128",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 008 1621968631\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-008-1621968631-jpg-15c3fb7c36",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_008_1621968631.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 124236,
+          "byteHash": "633796993a7b9f49dc1789f9ad65716ffd003029f9b26e02da4758e5d146391c",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declaredMismatch": false,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-008-1621968631-jpg-15c3fb7c36",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-009-1621968632-jpg-e1382ccf46",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 009 1621968632\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-009-1621968632-jpg-f62a9bd2ff",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_009_1621968632.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 146838,
+          "byteHash": "ac66fff5a3c95c2399416c19ea9c3f5a3f7cc8c3d7e5f923949dd7eded9b01f2",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declaredMismatch": false,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-009-1621968632-jpg-f62a9bd2ff",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-nu-render-010-1621972951-jpg-2c858cbf68",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 010 1621972951\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-010-1621972951-jpg-71ecefe918",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_nu-render_010_1621972951.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 267984,
+          "byteHash": "d2ca141c2766ae520193b76cdad005444db74db9cc64baf3b936eea3748a0755",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-010-1621972951-jpg-71ecefe918",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-rear-1611670557-jpg-3f849679ff",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"51853hz rear 1611670557\")",
+          "confidence": 0.9
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-rear-1611670557-jpg-e4670faa99",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Rear_1611670557.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 263875,
+          "byteHash": "ade6cd7ea28009c6dc4aed049cb2ecd0c529d06f5f3d6d92900018f5235d4596",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-rear-1611670557-jpg-e4670faa99",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-render-01-1649274063-jpg-b512f2e51c",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz render 01 1649274063\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-render-01-1649274063-jpg-5a40db5a73",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Render-01_1649274063.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 227642,
+          "byteHash": "aada891a4462e6ae7d17fbbd44492b356f67f4faadced469b77bdbf094fa7a0f",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-render-01-1649274063-jpg-5a40db5a73",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-51853hz-right-1611670558-jpg-86e8b8839f",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"51853hz right 1611670558\")",
+          "confidence": 0.85
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-right-1611670558-jpg-1d1af3ecbd",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Right_1611670558.jpg",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 234256,
+          "byteHash": "6a0dd39d3c91983dbc746fc54a7b9c61f1e12c249d4eaeb19ede4d3c7f79ed94",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-right-1611670558-jpg-1d1af3ecbd",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-bedroom-interior-with-vaulted-beamed-ceiling-fou-b4cd13bcbb",
+      "caption": "Bedroom interior with vaulted beamed ceiling, four-poster bed, two windows, and a dresser.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 009 1621968632\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-009-1621968632-jpg-0cd0ca0d40",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_009_1621968632.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 107375,
+          "byteHash": "ced93cdaa8be5806af8cac052ace30ffd5f5c8c22aa193eb43124801168a49a7",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-009-1621968632-jpg-0cd0ca0d40",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-customer-reviews-cfe8f338e9",
+      "caption": "Customer Reviews",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan Collections\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-1198-sa-seal-gif-7058007598",
+          "url": "https://www.shopperapproved.com/seal/37222/1198-sa-seal.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 6182,
+          "byteHash": "f9ab419474fa280068077ba8c5fdeb98c6809cab29ddb14464a8ea7cb0cfb517",
+          "decoded": {
+            "width": 166,
+            "height": 56
+          },
+          "declared": {
+            "width": 166,
+            "height": 56
+          },
+          "declaredMismatch": false,
+          "aspect": 2.964286
+        }
+      ],
+      "selectedVariantId": "var-1198-sa-seal-gif-7058007598",
+      "selectionReason": "only variant (166x56, decoded from bytes)"
+    },
+    {
+      "id": "asset-front-elevation-drawing-of-a-one-story-house-pla-65947569f4",
+      "caption": "Front elevation drawing of a one-story house plan with a covered porch, dormer, and gabled sections.",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"sections\" in \"Front elevation drawing of a one-story house plan with a covered porch, dormer, \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"51853hz front 1611670555\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Front elevation drawing of a one-story house plan with a covered porch, dormer, \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-front-1611670555-jpg-9b6ec39d60",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Front_1611670555.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 68190,
+          "byteHash": "7049befce6f41dc81318d8641ca146c2eff0b8e3da5d645ec4609a69f77c1356",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-front-1611670555-jpg-9b6ec39d60",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-house-plan-exterior-featuring-a-farmhouse-style-0866a570fe",
+      "caption": "House plan exterior featuring a Farmhouse style with a front porch, gables, and dormers. The home is two stories with a dark roof.",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"House plan exterior featuring a Farmhouse style with a front porch, gables, and \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-day-1611670584-jpg-c6087e1f39",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_day_1611670584.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 170892,
+          "byteHash": "41ccb3dcb63abe0bb1cd3820945a3790a2f38634bc5802bf17202f38a16b91c4",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-day-1611670584-jpg-c6087e1f39",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-house-plan-exterior-modern-farmhouse-style-two-s-d0a51781d6",
+      "caption": "House plan exterior: Modern Farmhouse style, two stories, with a covered porch, dormer, and gabled wings.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz render 01 1649274063\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-render-01-1649274063-jpg-65f26e12a7",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Render-01_1649274063.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 158605,
+          "byteHash": "76710cdc85bab2e73b00d076662dfbaf8ef1c8532595919e0481ab4a3ff12b4e",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-render-01-1649274063-jpg-65f26e12a7",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-interior-view-of-a-bedroom-featuring-a-wood-four-281037e7ec",
+      "caption": "Interior view of a bedroom featuring a wood four-poster bed, exposed ceiling beams, and wall art.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 008 1621968631\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-008-1621968631-jpg-bc7ed79583",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_008_1621968631.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 92186,
+          "byteHash": "8c333fcaaa2993d594b621b3eda7b7a67893f0a4645611078dbd3819a51eae67",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-008-1621968631-jpg-bc7ed79583",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-kitchen-with-island-pendant-lights-white-cabinet-bd0fbbce75",
+      "caption": "Kitchen with island, pendant lights, white cabinetry, and stainless steel appliances.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 005 1621968628\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-005-1621968628-jpg-252ea01054",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_005_1621968628.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 83393,
+          "byteHash": "ef48add9248581b92af696388bf39ff89474b6e10ed3e4bade9b3bf4bdaa51be",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-005-1621968628-jpg-252ea01054",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-left-elevation-of-a-house-plan-featuring-gabled-c8dd07bfa5",
+      "caption": "Left elevation of a house plan featuring gabled roofs, a dormer window, and a covered porch with columns.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Left elevation of a house plan featuring gabled roofs, a dormer window, and a co\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"51853hz left 1611670557\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"left\" in \"Left elevation of a house plan featuring gabled roofs, a dormer window, and a co\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-left-1611670557-jpg-0c992c5f6f",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Left_1611670557.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 49905,
+          "byteHash": "c3d146b26448f9e15426480d67a00e67436b16c3aa18fe2b6a3f7124ba8cfa87",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-left-1611670557-jpg-0c992c5f6f",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-living-room-with-vaulted-ceiling-fireplace-built-b99f2e626c",
+      "caption": "Living room with vaulted ceiling, fireplace, built-in bookshelves, and French doors.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 007 1621968630\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-007-1621968630-jpg-c377df741d",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_007_1621968630.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 94959,
+          "byteHash": "088930db33c75bc9b8b884d3d5582478a3d3652b4285518885dd6f93d316f16c",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-007-1621968630-jpg-c377df741d",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-main-level-e7b08e6ff4",
+      "caption": "Main Level",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"floor plan\" in \"Floor Plan\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-f1-1611673922-gif-b599446a36",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1_1611673922.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 131129,
+          "byteHash": "dd822f1777564b270ae4830937444ebd9baf14393503b1197a5c69ef5b42b3c8",
+          "decoded": {
+            "width": 850,
+            "height": 704
+          },
+          "declared": {
+            "width": 750,
+            "height": 450
+          },
+          "declaredMismatch": true,
+          "aspect": 1.207386
+        }
+      ],
+      "selectedVariantId": "var-51853hz-f1-1611673922-gif-b599446a36",
+      "selectionReason": "only variant (850x704, decoded from bytes)"
+    },
+    {
+      "id": "asset-modern-farmhouse-house-plan-exterior-with-a-larg-b2b7c89b63",
+      "caption": "Modern Farmhouse house plan exterior with a large gabled front, covered porch, and white board-and-batten siding.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 010 1621972951\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Modern Farmhouse house plan exterior with a large gabled front, covered porch, a\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-010-1621972951-jpg-5cc92d7c9f",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_010_1621972951.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 183423,
+          "byteHash": "819893618e263ea6c03a4c31b2c9065a9f04ae2fe829f5351bbac96ced244d2b",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-010-1621972951-jpg-5cc92d7c9f",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-modern-farmhouse-house-plan-exterior-with-a-wrap-ff9c033d52",
+      "caption": "Modern Farmhouse house plan exterior with a wrap-around porch, multiple gables, dormer window, and board and batten siding.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 004 1621968627\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-004-1621968627-jpg-ed90381c8b",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_004_1621968627.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 160132,
+          "byteHash": "f51bea75046bb5ddf0a5b5d75145aaa84c4bbbe7867198f6717f9c11a45baaf3",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-004-1621968627-jpg-ed90381c8b",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-modern-farmhouse-house-plan-exterior-with-covere-5bb78d07ac",
+      "caption": "Modern Farmhouse house plan exterior with covered front porch, metal roof accents, gable dormers, and board and batten siding.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 002 1621968660\")",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Modern Farmhouse house plan exterior with covered front porch, metal roof accent\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-002-1621968660-jpg-c2786b3f8a",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_002_1621968660.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 177991,
+          "byteHash": "f21a16e4b18bac4e0c2a887b0a396ce887050cc9aa0dd55be77a4b19944330a3",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-002-1621968660-jpg-c2786b3f8a",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-modern-farmhouse-house-plan-exterior-with-wrapar-7a867649ee",
+      "caption": "Modern Farmhouse house plan exterior with wraparound porch, multiple gables, and dormer windows.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 003 1621968626\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-003-1621968626-jpg-9fd65c3374",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_003_1621968626.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 187331,
+          "byteHash": "0f1a0887525dd381817fef6582b628727f33968b4a97f9e89d2fc60b3acc311b",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-003-1621968626-jpg-9fd65c3374",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-modern-farmhouse-style-house-plan-exterior-with-e80b9e00e7",
+      "caption": "Modern Farmhouse style house plan exterior with gables, dormers, a covered porch, and board and batten siding.",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-51853hz-dusk-1611670584-jpg-a93a7974d1",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_dusk_1611670584.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 140946,
+          "byteHash": "302b17bcdfc43cea7eb387c12eea1e51313eb251a1134f0bbf903bcfcfdb448e",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-dusk-1611670584-jpg-a93a7974d1",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-open-concept-great-room-with-vaulted-ceiling-fir-a06d0c0ed9",
+      "caption": "Open concept great room with vaulted ceiling, fireplace, built-in shelving, and adjacent kitchen with island.",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"wizualizacja\" / \"render\" / \"widok\" names a visualisation (matched \"render\" in \"51853hz nu render 006 1621968629\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-nu-render-006-1621968629-jpg-600ac3bbe4",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_006_1621968629.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 91878,
+          "byteHash": "be64a3d3b360f879d1f714a46c953b4168addbb0b6b61b3e96a2c1bcfe44b2ac",
+          "decoded": {
+            "width": 1200,
+            "height": 774
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.550388
+        }
+      ],
+      "selectedVariantId": "var-51853hz-nu-render-006-1621968629-jpg-600ac3bbe4",
+      "selectionReason": "only variant (1200x774, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-069b912d23",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Main Level - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-f1-1611673922-gif-e5d800504d",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/325007076/original/51853HZ_F1_1611673922.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 85071,
+          "byteHash": "7de2f3f4b6bcd638d77f4a42259672ac18e96f61770aeb468c5daa3748f924a4",
+          "decoded": {
+            "width": 800,
+            "height": 662
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.208459
+        }
+      ],
+      "selectedVariantId": "var-51853hz-f1-1611673922-gif-e5d800504d",
+      "selectionReason": "only variant (800x662, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-1907f77c26",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Unfinished Basement  - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"basement\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"basement\" in \"Unfinished Basement\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-unfinished-1628626610-gif-e640b183d2",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 23581,
+          "byteHash": "39d4eae239e5bd028b007ebcad3cb0b1df6c9ce90258d8ad55fd15c3a96818a7",
+          "decoded": {
+            "width": 800,
+            "height": 712
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.123596
+        }
+      ],
+      "selectedVariantId": "var-51853hz-unfinished-1628626610-gif-e640b183d2",
+      "selectionReason": "only variant (800x712, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-1d71f8d8b6",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Bonus Level - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-bonus-1611673928-gif-7aee22076c",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 39554,
+          "byteHash": "99309673a7dc0f791fcf33a072ca1a0b257db02bf371f08c9997c9d8f828a3e3",
+          "decoded": {
+            "width": 850,
+            "height": 704
+          },
+          "declaredMismatch": false,
+          "aspect": 1.207386
+        }
+      ],
+      "selectedVariantId": "var-51853hz-bonus-1611673928-gif-7aee22076c",
+      "selectionReason": "only variant (850x704, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-37ba8b314c",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Main Level Basement Stairs Location - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-f1wstairs-1611673932-gif-620ca0970f",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 88718,
+          "byteHash": "705e65718bce9613a9f9eee75c49e9d56aed96f1b6e588415ddfece2cb259356",
+          "decoded": {
+            "width": 850,
+            "height": 757
+          },
+          "declaredMismatch": false,
+          "aspect": 1.122853
+        }
+      ],
+      "selectedVariantId": "var-51853hz-f1wstairs-1611673932-gif-620ca0970f",
+      "selectionReason": "only variant (850x757, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-648160e2e8",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Main Level - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-f1-1611673922-gif-6c65799992",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_F1_1611673922.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 131217,
+          "byteHash": "9c9e5f1b72a309bfc7ba62e04f55cb15af29c825655533dff6c5c372369262b1",
+          "decoded": {
+            "width": 850,
+            "height": 704
+          },
+          "declaredMismatch": false,
+          "aspect": 1.207386
+        }
+      ],
+      "selectedVariantId": "var-51853hz-f1-1611673922-gif-6c65799992",
+      "selectionReason": "only variant (850x704, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-6e2df92d48",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Unfinished Basement - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"basement\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piwnica\" / \"basement\" is a basement (matched \"basement\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-unfinished-1628626610-gif-6ee4ba7267",
+          "url": "https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif",
+          "discoveredVia": "STRUCTURED_DATA_IMAGE:ld+json[Product].image@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/gif",
+          "byteLength": 46876,
+          "byteHash": "9e2655c6a729edb929d8772cadf5666f6c645f6700d3ee48973d2c382a267134",
+          "decoded": {
+            "width": 850,
+            "height": 757
+          },
+          "declaredMismatch": false,
+          "aspect": 1.122853
+        }
+      ],
+      "selectedVariantId": "var-51853hz-unfinished-1628626610-gif-6ee4ba7267",
+      "selectionReason": "only variant (850x757, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-7eaeed79d0",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Bonus Level - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-bonus-1611673928-gif-572b900233",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 38458,
+          "byteHash": "abfc668e018edebbe6ce013d3c2a2eb0fc66c269e1ce30b4ac0ce7ce71e956a8",
+          "decoded": {
+            "width": 800,
+            "height": 662
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.208459
+        }
+      ],
+      "selectedVariantId": "var-51853hz-bonus-1611673928-gif-572b900233",
+      "selectionReason": "only variant (800x662, decoded from bytes)"
+    },
+    {
+      "id": "asset-plan-51853hz-3-bed-country-farmhouse-plan-with-b-b4bec8a0c5",
+      "caption": "Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Plan - Main Level Basement Stairs Location - Cape Cod, Cottage, Country, Farmhouse, Modern Farmhouse, New American, Southern, Traditional",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"plan\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Plan 51853HZ: 3-Bed Country Farmhouse Plan with Bonus Over The Garage - Floor Pl\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"main level\" in \"Main Level Basement Stairs Location\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-f1wstairs-1611673932-gif-ba2d635876",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=800,fit=scale-down,quality=85,format=auto/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 60341,
+          "byteHash": "44d0202084dc92fd6940c112ad085ffd5251b9b41e666853c366f0314a579515",
+          "decoded": {
+            "width": 800,
+            "height": 712
+          },
+          "declared": {
+            "width": 800
+          },
+          "declaredMismatch": false,
+          "aspect": 1.123596
+        }
+      ],
+      "selectedVariantId": "var-51853hz-f1wstairs-1611673932-gif-ba2d635876",
+      "selectionReason": "only variant (800x712, decoded from bytes)"
+    },
+    {
+      "id": "asset-rear-elevation-drawing-of-a-one-story-house-plan-f68741b39d",
+      "caption": "Rear elevation drawing of a one-story house plan with gabled front and numerous windows along the back.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Rear elevation drawing of a one-story house plan with gabled front and numerous \")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"rear\" in \"51853hz rear 1611670557\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"front\" in \"Rear elevation drawing of a one-story house plan with gabled front and numerous \")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-rear-1611670557-jpg-8eef74d246",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Rear_1611670557.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 58199,
+          "byteHash": "fae84f75c80da1d162e1a2325e394484910a99f78450c834aec57496293a4d08",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-rear-1611670557-jpg-8eef74d246",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    },
+    {
+      "id": "asset-right-elevation-of-a-house-plan-showing-a-two-ca-0090420d73",
+      "caption": "Right elevation of a house plan showing a two-car garage, gable, and two windows.",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elevation\" in \"Right elevation of a house plan showing a two-car garage, gable, and two windows\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"51853hz right 1611670558\")",
+          "confidence": 0.85
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"right\" in \"Right elevation of a house plan showing a two-car garage, gable, and two windows\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-51853hz-right-1611670558-jpg-5e081faf5a",
+          "url": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Right_1611670558.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+          "mediaType": "image/jpeg",
+          "byteLength": 46953,
+          "byteHash": "994f992e01b9f190616b773a22181b3941ab41e0e29f53017428ceb082bc75cd",
+          "decoded": {
+            "width": 1200,
+            "height": 800
+          },
+          "declared": {
+            "width": 640
+          },
+          "declaredMismatch": true,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-51853hz-right-1611670558-jpg-5e081faf5a",
+      "selectionReason": "only variant (1200x800, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "building_length",
+      "label": "Depth",
+      "value": 18.898,
+      "unit": "m",
+      "raw": "62' 0\""
+    },
+    {
+      "key": "building_width",
+      "label": "Width",
+      "value": 22.86,
+      "unit": "m",
+      "raw": "75' 0\""
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "All house plans are copyright ©2026 by the architects and designers. All other content copyright ©2026 Architectural Designs."
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation Types",
+      "text": "Slab, Basement, Crawl, Walkout"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "This beautiful 3-bed one-story country farmhouse has board and batten siding, exposed rafter tails, a shed dormer (it lets light into the attic) and three gables giving it great curb appeal. Inside, an open floor plan beckons.&nbsp;The great room will catch your eye as soon as you enter with its vaulted ceiling (17'7\" to top of vault) and oversized windows to the rear porch. A pair of French doors open to the 11'-deep rear porch.In the kitchen you'll be able to entertain while you cook with an eat at bar at the island (3'10\" by 9') and exemplary walk in pantry with lots of shelving and upper and lower cabinets.&nbsp;And when its time to unwind, retreat to your primary suite with a vaulted ceiling (15'8\" to top of vault) and a large bath and closet. The bathroom has two vanities, an enclosed toilet, and both a tub and shower (46\" by 72\").Across the home, two bedrooms each have walk-in closets and a shared bath with two sinks.Stairs by the family entry by the garage take you to the bonus room with bathroom over the garage. This space could be used as a 4th bedroom, a play room, a study or storage and adds 344 square feet when finished.Related Plan: Get and alternate layout with 4-bedrooms on the main level with plan&nbsp;51913HZ&nbsp;(2,258 sq. ft)"
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1080",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1200",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=2048",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=640",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=750",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=828",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/format=auto",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=60",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=70",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/quality=75",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_day_1611670584.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_dusk_1611670584.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1_1611673922.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Front_1611670555.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "SECTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Left_1611670557.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_002_1621968660.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_003_1621968626.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_004_1621968627.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_005_1621968628.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_006_1621968629.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_007_1621968630.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_008_1621968631.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_009_1621968632.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_nu-render_010_1621972951.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Rear_1611670557.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Render-01_1649274063.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Right_1611670558.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "ELEVATION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.architecturaldesigns.com/house-plans/slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "IMG_SRCSET",
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Bonus_1611673928.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1_1611673922.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1_1611673922.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_F1wStairs_1611673932.gif: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.architecturaldesigns.com/cdn-cgi/image/width=3840,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://assets.architecturaldesigns.com/cdn-cgi/image/width=1920,quality=75,format=auto,slow-connection-quality=50/plan_assets/325007076/original/51853HZ_Unfinished_1628626610.gif: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "f0a1dd998383cd1b568c5381b0b6fe214622a9c9e2d0d656ed3d0f4ec7791906"
+}

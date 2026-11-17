@@ -1,0 +1,51 @@
+{
+ "house": "c4-dobredomy-pallas",
+ "publisher": "www.dobredomy.pl",
+ "url": "https://www.dobredomy.pl/projekt/pallas",
+ "packageContentHash": "662ef9739d894fcdc69e65bcb8bb093ee3154b3d4a15ed5f55eab76a8db9024b",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door of the wiatrolap and the garage door both open through the bottom walls of the ground-plan picture, the site-plan picture has its entry arrow and driveway at the bottom, and the front elevation (przod) shows the porch, the door and the garage gate.",
+ "overall": {
+  "widthM": 15.52,
+  "widthPrintedAs": "1552",
+  "depthM": 11.53,
+  "depthPrintedAs": "1153",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Printed on the site-plan picture (rzut dzialki); the floor plans carry no dimensions. Width 1552 bounds the walls from the left gable to the right wall of the attached garage (the left balcony is outside it). Depth 1153 runs from the rear wall to the front of the open columned entrance porch, so it takes in MORE than the walled outline: scaled on the floor plan against the printed width, the walls alone (rear wall to the front wall of the wiatrolap/bedroom part) span about 9.8 m."
+ },
+ "heights": {
+  "buildingHeightM": 8.5,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 7.97,
+  "upperFloorLevelM": 3.04,
+  "terrainBelowGroundFloorM": 0.45
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Rectangular main body whose front-right part (wiatrolap and bedroom) steps forward of the living-room wall, with a narrower garage attached on the right, set back from both the rear and the front walls.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "left and centre of the front, about three quarters of the width", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "garage", "role": "GARAGE", "sideOfMain": "RIGHT", "position": "attached to the right gable of the main body, set back at front and rear", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": true },
+  { "name": "entrance porch", "role": "OTHER", "sideOfMain": "FRONT", "position": "open porch on two brick columns in front of the entrance door, left of centre of the front", "levels": 1, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "FRONT", "alongShare": [0.81, 0.96] },
+ "entrance": { "side": "FRONT", "alongShare": [0.35, 0.43] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 2, "dormers": [ { "kind": "ROOF", "form": "GABLE", "alongShare": [0.11, 0.22] }, { "kind": "WALL", "form": "GABLE", "alongShare": [0.56, 0.70] } ], "balconies": 1, "roofWindows": 2 },
+  "REAR": { "elevationPublished": true, "openingsGround": 6, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 4 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 1, "openingsUpper": 2, "dormers": [], "balconies": 1, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 0, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 3,
+ "uncertain": [
+  "The floor plans have no printed dimensions; overall size comes only from the site-plan picture. The walled depth (about 9.8 m) is a scale reading, not a printed figure, so depthM keeps the printed 11.53 that includes the open porch.",
+  "The section prints 842 from terrain (-0,45) to ridge (+7,97); the page text gives 8.5 m.",
+  "Garage part levels = 2 because the attic plan shows a 'strych' (storage attic, 11.4 m2) over the garage, reached from the upper hall and lit by one roof window on each slope; it is not a habitable room, so 1 would also be defensible.",
+  "FRONT balconies = 1 is the small railing in front of the balcony door of the right dormer: the elevation shows a bulging railing on a thin projecting ledge, the attic plan draws no slab, so it may be only a French balcony (0).",
+  "Left front dormer read as ROOF (roof tiles and a continuous eaves line run below it; under it is the open arcade of the covered terrace), right front dormer read as WALL (its wall continues down into the bedroom facade and the eaves are interrupted); on the attic plan both dormer fronts lie on the same line.",
+  "FRONT ground count of 4 = terrace door of the living room (set back under the arcade), entrance door, bedroom window, garage door; the round feature in the porch gable is decoration, not counted.",
+  "REAR ground count of 6 = two small garage windows plus four windows of the main body (bathroom and utility windows stand side by side and read as a pair).",
+  "Side elevations are captioned only 'elewacja boczna'; assigned from the plan: the gable with one window below and two balcony doors with a curved balcony above is LEFT, the blank garage gable is RIGHT."
+ ]
+}

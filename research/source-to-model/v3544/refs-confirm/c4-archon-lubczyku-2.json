@@ -1,0 +1,49 @@
+{
+ "house": "c4-archon-lubczyku-2",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+ "packageContentHash": "ba7b1db361dc700985894ab167d1bd01a566581f696598cbe108deea29de78b3",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door (160/210, into Wiatrolap) and the garage door (260/229) are both in the bottom wall of the ground-plan sheet, and the captioned front elevation shows the same door and garage gate.",
+ "overall": {
+  "widthM": 15.92,
+  "widthPrintedAs": "1592 (= 100 + 1152 + 340)",
+  "depthM": 10.02,
+  "depthPrintedAs": "1002 (= 922 + 80)",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width takes in the bay window projecting 100 on the left, the main body 1152 and the garage 340 on the right. Depth takes in the main body 922 plus the 80 forward projection of the living room on the front; the garage is shallower and lies inside that depth. Terraces and entrance steps are not included."
+ },
+ "heights": {
+  "buildingHeightM": 8.87,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 8.40,
+  "upperFloorLevelM": 3.06,
+  "terrainBelowGroundFloorM": 0.47
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Rectangular main body with a narrower garage attached on the right (set back at front and rear), a living-room part stepping 80 forward on the front, a recessed entrance between it and the garage, and a three-sided bay window on the left side.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the left and centre of the front, 11.52 wide", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "garage", "role": "GARAGE", "sideOfMain": "RIGHT", "position": "attached to the right gable of the main body, 3.40 wide, set back a little from the front and rear walls of the main body", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": true },
+  { "name": "bay", "role": "BAY", "sideOfMain": "LEFT", "position": "three-sided bay window on the left gable wall, towards the rear half (kitchen), projecting 1.00", "levels": 1, "roof": "FLAT", "ridge": "NA", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "FRONT", "alongShare": [0.80, 0.97] },
+ "entrance": { "side": "FRONT", "alongShare": [0.62, 0.72] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 2, "dormers": [ { "kind": "WALL", "form": "GABLE", "alongShare": [0.27, 0.58] } ], "balconies": 1, "roofWindows": 1 },
+  "REAR": { "elevationPublished": true, "openingsGround": 2, "openingsUpper": 1, "dormers": [ { "kind": "WALL", "form": "GABLE", "alongShare": [0.54, 0.70] } ], "balconies": 0, "roofWindows": 2 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 2, "dormers": [], "balconies": 1, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 1, "openingsUpper": 1, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 3,
+ "uncertain": [
+  "The two side elevations are both captioned only 'elewacja boczna'; they were assigned from the plan: the one with the bay window, terrace door and long balcony is LEFT, the one with the garage gable is RIGHT.",
+  "LEFT ground count of 4 = the three panes of the bay window (90/170, 120/170, 90/170) counted as three openings plus the terrace door 270/230; the two angled bay panes are also visible obliquely on the front and rear elevations and are not counted there.",
+  "FRONT upper count of 2 = the two balcony doors 150/220 printed on the attic plan inside the front gable dormer; on the elevation they read as one paired opening.",
+  "The room over the garage (attic room 4, with a balcony door 150/220 in the right gable and a roof window to the front) makes the garage part two-level; its balcony door has only a balustrade, not a balcony slab, so RIGHT balconies is 0.",
+  "The front part that carries the gable dormer is the living-room projection (80 forward); it is recorded as a wall dormer on the main roof, not as a separate body.",
+  "Section prints -0,47 for the terrain (and -0,51 for a lowered floor at the foot of the stair); 8.40 + 0.47 = 8.87 agrees with the page's building height."
+ ]
+}

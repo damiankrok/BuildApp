@@ -1,0 +1,1800 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m12620a35f9d2d-66260bf1d4",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+  "pageHash": "47efe7f72a19657f85294a40929ed379a8bdec4c545c6b0c560c0b56a50dd41d",
+  "project": {
+    "externalId": "m12620a35f9d2d",
+    "name": "Projekt domu Dom w lubczyku 2 Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-boczna-37c7f1bf89",
+      "caption": "gotowy projekt Dom w lubczyku 2 elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-20adce19c00a55acb-ed9ed40763",
+          "url": "https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-20adce19c00a55acb7e8107aa46740b4__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 366421,
+          "byteHash": "fd8d8dfd37bf654d629512969215e5169eb166b87f6e0859d642bc3a5c74d33b",
+          "decoded": {
+            "width": 1280,
+            "height": 657
+          },
+          "declaredMismatch": false,
+          "aspect": 1.94825
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-3-658c40eb59",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-31951f6d3a4cf4b228b3540ce414303b__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 64475,
+          "byteHash": "eeb5c1a3360051df88fd59131d2a424b7c15e5abf5a93c99978a48793f1c31f1",
+          "decoded": {
+            "width": 550,
+            "height": 282
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.950355
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-20adce19c00a55acb-ed9ed40763",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x657 over 550x282"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-boczna-df730eae7f",
+      "caption": "gotowy projekt Dom w lubczyku 2 elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w lubczyku 2 elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-098b7cef1adb34810-aba7e6eb74",
+          "url": "https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-098b7cef1adb34810c66f84a42306b6d__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 377195,
+          "byteHash": "b9835d49c90ba00d95f8a6c5869b966c21474c226530e32452eba672ee071c61",
+          "decoded": {
+            "width": 1280,
+            "height": 657
+          },
+          "declaredMismatch": false,
+          "aspect": 1.94825
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-a-dababd983c",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-a7b208791652b11cb1441db81d69d789__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 66157,
+          "byteHash": "4f0cbd1a2016ef95ec1ed53ab8cf823b20098ccd1e6a0c665d0365263dd5b436",
+          "decoded": {
+            "width": 550,
+            "height": 282
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.950355
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-098b7cef1adb34810-aba7e6eb74",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x657 over 550x282"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-frontow-833dc6c6f0",
+      "caption": "gotowy projekt Dom w lubczyku 2 elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w lubczyku 2 elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w lubczyku 2 elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-5d5b42435bc33f6ad-141f2a66fe",
+          "url": "https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-5d5b42435bc33f6ad3cb69a2b45edfb0__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 337697,
+          "byteHash": "ab9cac05dac053eada964527daeb73eb2cc31b291a8cd94de5be72f586eb7321",
+          "decoded": {
+            "width": 1280,
+            "height": 657
+          },
+          "declaredMismatch": false,
+          "aspect": 1.94825
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-lubczyku-2-ver-2-891d10904f",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-frontowa-projekt-dom-w-lubczyku-2-ver-2-faabba3f2161a1c38d2dcaa8a5a3d051__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 62487,
+          "byteHash": "9bc888713d228c234d822db020351195523cb43bc0581c0bf8d86c0640b05c47",
+          "decoded": {
+            "width": 550,
+            "height": 282
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.950355
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-5d5b42435bc33f6ad-141f2a66fe",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x657 over 550x282"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-elewacja-ogrodow-3dd75adabe",
+      "caption": "gotowy projekt Dom w lubczyku 2 elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w lubczyku 2 elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w lubczyku 2 elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w lubczyku 2 elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-fd23a2352dc4fda87-f3a534eaa7",
+          "url": "https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-fd23a2352dc4fda871ed63e820117fe2__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 324878,
+          "byteHash": "4057a3d3049288507d553f72b6a9ba293dae922bbb79cf674b91d32038c39e23",
+          "decoded": {
+            "width": 1280,
+            "height": 657
+          },
+          "declaredMismatch": false,
+          "aspect": 1.94825
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-lubczyku-2-ver-2-0b19ba2604",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-ogrodowa-projekt-dom-w-lubczyku-2-ver-2-9f2ddef761bc487ba6cfb8353e583e37__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 60386,
+          "byteHash": "0038519e907ceca72cabd35a20832204cfdaf3b10442f24dafcd10693f4634da",
+          "decoded": {
+            "width": 550,
+            "height": 282
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 1.950355
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-fd23a2352dc4fda87-f3a534eaa7",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x657 over 550x282"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-przekroj-budynku-eef95d8988",
+      "caption": "gotowy projekt Dom w lubczyku 2 przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w lubczyku 2 przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w lubczyku 2 przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w lubczyku 2 przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-5677d5b864",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-10ac4e8ff0a9683ce8631fa69daa6960__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m12620a35f9d2d/przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-10ac4e8ff0a9683ce8631fa69daa6960__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 84666,
+          "byteHash": "e89ac2856ef4ab1237a26a907d9451c4aa984cf0f10ca8757812918a4d2dafa9",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-bd78be9748",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-10ac4e8ff0a9683ce8631fa69daa6960__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 22158,
+          "byteHash": "575d9b3dc6cf3955c858ce7cad455cc03fd5f3d55edbbedcfc6fe2968d00159a",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-lubczyku-2-ver-2-5677d5b864",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-rzut-parteru-89db49e5af",
+      "caption": "gotowy projekt Dom w lubczyku 2 rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-9cea-2299570a8b",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-9cea935cc813b7aea25de5ac944c530a__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 45550,
+          "byteHash": "dcf84af5ddab5f48e38cd988ce4272e3e3717205037d4061947c0c51078012fd",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-9cea-2299570a8b",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-rzut-poddasza-b8685eaccd",
+      "caption": "gotowy projekt Dom w lubczyku 2 rzut poddasza",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-e01-c48176c963",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-e01fdc3bd98ea9f8fd1b56cf5efe5d9e__707.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 40398,
+          "byteHash": "8dca4ecc39a49b93f20772775e24ad5369cc93d1b111fdb15413b66ae4a1db87",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-e01-c48176c963",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-sytuacja-0f54235298",
+      "caption": "gotowy projekt Dom w lubczyku 2 sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w lubczyku 2 sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a-cf767ee9ff",
+          "url": "https://www.archon.pl/images/products/m12620a35f9d2d/sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a4be92dfa89151d040f1a2c1c__255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 49297,
+          "byteHash": "787761e9bbe1dda6ba7bbbc9e66f4143b1437c0d60a508a725b997d8c57f8f8f",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a-cf767ee9ff",
+      "selectionReason": "only variant (344x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-lubczyku-2-widok-1-075e04483c",
+      "caption": "gotowy projekt Dom w lubczyku 2 widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w lubczyku 2 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-lubczyku-2-ver-2-983fcf36e-753d3aea1e",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-1-projekt-dom-w-lubczyku-2-ver-2-983fcf36ef0f24436f169d358fa4d06c__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 11471,
+          "byteHash": "bb71ceb2911f935f74cfeeef503e4ad6d0e797680eb2a38810242150112b0ea7",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-lubczyku-2-ver-2-983fcf36e-753d3aea1e",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-5aba243fb6",
+      "caption": "projekt Dom w lubczyku 2",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-lubczyku-2-ver-2-b83c47cd7-0a33828fd7",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-2-projekt-dom-w-lubczyku-2-ver-2-b83c47cd7a6e42f8f55f16728af89cea__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 41707,
+          "byteHash": "b7c0201bbcbdd0a52a818dcdd9fd4e2f9944dbd72d7e2d9c198501ba5ccd1cdf",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-lubczyku-2-ver-2-b83c47cd7-0a33828fd7",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-7e1a3f424c",
+      "caption": "projekt Dom w lubczyku 2",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-97db-fbd9fc53b7",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-97db177d1992757a2cab8bdaf89a21c5__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/related?scope=similar",
+          "mediaType": "image/gif",
+          "byteLength": 31281,
+          "byteHash": "04794fa0bd2b17bf191550d15a873cf6bc8b25ca818d09c561fd91bdad76a010",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-97db-fbd9fc53b7",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-ca9c050d5a",
+      "caption": "projekt Dom w lubczyku 2",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-a2b-351ac02de1",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-a2b887466cffb05617120a7bd38165b2__270.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/related?scope=similar",
+          "mediaType": "image/gif",
+          "byteLength": 24948,
+          "byteHash": "f519a536394e574814e480c75edc872026009318f926d8a2dccbce05ac7c7794",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-a2b-351ac02de1",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-e1508529e9",
+      "caption": "projekt Dom w lubczyku 2",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-f634f6c40b11a83ad-f3718d5efa",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-f634f6c40b11a83adde4b1521028bdfb__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m12620a35f9d2d/related?scope=similar",
+          "mediaType": "image/jpeg",
+          "byteLength": 41268,
+          "byteHash": "ffaa56195c0f11f09e3978673578214c4b355849eed93b8fd7f14e3a8cbc3cf4",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-f634f6c40b11a83ad-f3718d5efa",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-ver-2-d4f1d7d02b",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-e51b83c0e8abd8018-24ea8b6584",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/s/projekt-dom-w-lubczyku-2-ver-2-e51b83c0e8abd8018d99c0ce9cec3f89__26634.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 434765,
+          "byteHash": "acd67308a61116aa261606ec47b2f2d354082fd887b65a5e1e914928922a4414",
+          "decoded": {
+            "width": 1280,
+            "height": 960
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-e51b83c0e8abd8018-24ea8b6584",
+      "selectionReason": "only variant (1280x960, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-lubczyku-2-ver-2-e91ba3fe41",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-ed5365a4a4fe97a64-de24dd360f",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/s/projekt-dom-w-lubczyku-2-ver-2-ed5365a4a4fe97a64bece60b56b52dcf__26633.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 514104,
+          "byteHash": "f88113bdf78f6716da23f95e86d978ddaef1abe8a150d4b5f89ade8a901550c1",
+          "decoded": {
+            "width": 1280,
+            "height": 960
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-ed5365a4a4fe97a64-de24dd360f",
+      "selectionReason": "only variant (1280x960, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-0744696e92",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-2c5e115c6d0a89f8c-15aac6da39",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-2c5e115c6d0a89f8cab778c8193ab7d5__11817.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/gif",
+          "byteLength": 73133,
+          "byteHash": "cc2a19b17fedbfb7513f696b0418f7880b7be13c54714a14d636eb7722dd0117",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-2c5e115c6d0a89f8c-15aac6da39",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-39d6fa3f0e",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w lubczyku 2 rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-lub-03b52fc509",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-poddasza-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2-063d9e351681107beb3913eea1b168f8__11917.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/gif",
+          "byteLength": 73644,
+          "byteHash": "a3195d4693ec5f05345fd44d80c16e8609290e9ab8f96e8893d8062bcd063857",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-lub-03b52fc509",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-c490ba4781",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-lubczyku-2-ver-2-2e16d183e7b1d44b2-638d7fb5b0",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-2e16d183e7b1d44b272bd148bd296f11__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/gif",
+          "byteLength": 88916,
+          "byteHash": "5c7c7d6781260e12c80d77bf68bc17083d430c53e9424a42ecd8ff179c2f382c",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-lubczyku-2-ver-2-2e16d183e7b1d44b2-638d7fb5b0",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-fffe38960b",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m12620a35f9d2d/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w lubczyku 2 rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-lubc-38cc85782c",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-parteru-z-powierzchniami-projekt-dom-w-lubczyku-2-ver-2-b00bd0af5f4dfbf2c5bdaf0ba4ef8702__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/gif",
+          "byteLength": 93664,
+          "byteHash": "18015e5399b2deb942947bfc89ca2141e74daf3e8d54f2d9e75fefb55798f417",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-lubc-38cc85782c",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-lubczyku-2-ver-2-a630858663",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w lubczyku 2 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-lubczyku-2-ver-2-5984d8011-da9f7f03c9",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-1-projekt-dom-w-lubczyku-2-ver-2-5984d80111ed64b8178483974063a63c__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 227139,
+          "byteHash": "b6965d21d9130c03bc13dc9b8706c9f2261e935044c41bd9683f146d1c6f6f5d",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-lubczyku-2-ver-2-5984d8011-da9f7f03c9",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-lubczyku-2-ver-2-c8866b532d",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-lubczyku-2-ver-2\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w lubczyku 2 widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-lubczyku-2-ver-2-90a4c08ce-6168adf204",
+          "url": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-2-projekt-dom-w-lubczyku-2-ver-2-90a4c08ce591242199ee7e47f55e119d__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-lubczyku-2-ver-2-m12620a35f9d2d",
+          "mediaType": "image/jpeg",
+          "byteLength": 234938,
+          "byteHash": "74e0534bd672f29211d12a57354801379064099ca2bae69a837645a5ca5298fc",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-lubczyku-2-ver-2-90a4c08ce-6168adf204",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 3.54,
+      "unit": "m2",
+      "raw": "3,54 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.87,
+      "unit": "m",
+      "raw": "8,87 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 209.07,
+      "unit": "m2",
+      "raw": "209,07 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 139.72,
+      "unit": "m2",
+      "raw": "139,72 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 20.13,
+      "unit": "m2",
+      "raw": "20,13 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu, strychu",
+      "value": 146.31,
+      "unit": "m2",
+      "raw": "146,31 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 254.4,
+      "unit": "m2",
+      "raw": "254,4 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 274.13,
+      "unit": "m2",
+      "raw": "274,13 m&sup2;"
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "value": 180.8,
+      "unit": "m2",
+      "raw": "180,8 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 927.8,
+      "unit": "none",
+      "raw": "927,8 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Jest to dom, zwracający uwagę piękną elewacją frontową - centralnie zlokalizowany ryzalit z dużymi oknami, szeroki balkon, wejście do domu poprzedzone podcieniem z charakterystycznym łukiem i kolumną. Dzięki lokalizacji strefy dziennej z przodu domu, jest idealny na działki z wjazdem od południa, wówczas salon z częścią jadalną będzie optymalnie nasłoneczniony. Kuchnia posiada wykusz, w którym można zlokalizować podręczny stół lub powiększyć ilość szafek kuchennych. Na poddaszu znajdują się 3 sypialnie, łazienka i garderoba oraz przestronny strych - jako dodatkowe miejsce do przechowywania lub jako pomieszczenie rekreacyjne. Jest to dom o ciekawie ukształtowanych wnętrzach, rozbudowanej strefie gospodarczej i tradycyjnym charakterze."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "gęstożebrowy"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "95 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano w następujących pomieszczeniach: PARTER: Wiatrołap (1), Kuchnia (4), Łazienka (6); PODDASZE: Łazienka (3)"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 42 st. , więźba drewniana, dachówka ceramiczna, okno dachowe VELUX"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop gęstożebrowy Teriva , 146.31 m² + 20.13 m² + 15.5 m² + 3.54 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek, garaż, strych"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "ATTIC",
+      "index": 1,
+      "label": "Schody",
+      "area": 4.68,
+      "raw": "1. Schody | 4,68 | "
+    },
+    {
+      "storey": "ATTIC",
+      "index": 2,
+      "label": "Hol",
+      "area": 6.87,
+      "raw": "2. Hol | 6,87 | "
+    },
+    {
+      "storey": "ATTIC",
+      "index": 3,
+      "label": "Łazienka",
+      "area": 7.65,
+      "raw": "3. Łazienka | 7,65 | (11,78)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 4,
+      "label": "Strych ocieplony",
+      "area": 15.5,
+      "raw": "4. Strych ocieplony | 15,50 | (23,19)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 5,
+      "label": "Garderoba",
+      "area": 4.74,
+      "raw": "5. Garderoba | 4,74 | (6,27)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 6,
+      "label": "Pokój",
+      "area": 13.45,
+      "raw": "6. Pokój | 13,45 | (15,00)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 7,
+      "label": "Pokój",
+      "area": 19.78,
+      "raw": "7. Pokój | 19,78 | (23,01)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 8,
+      "label": "Pokój",
+      "area": 10.64,
+      "raw": "8. Pokój | 10,64 | (13,92)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 5.15,
+      "raw": "1. Wiatrołap | 5,15 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 8.81,
+      "raw": "2. Hol | 8,81 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Salon",
+      "area": 33.19,
+      "raw": "3. Salon | 33,19 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Kuchnia",
+      "area": 16.41,
+      "raw": "4. Kuchnia | 16,41 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Spiżarnia",
+      "area": 2.28,
+      "raw": "5. Spiżarnia | 2,28 | (4,46)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 3.18,
+      "raw": "6. Łazienka | 3,18 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Pokój",
+      "area": 9.48,
+      "raw": "7. Pokój | 9,48 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Kotłownia z pralnią",
+      "area": 3.54,
+      "raw": "8. Kotłownia z pralnią | 3,54 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Garaż",
+      "area": 20.13,
+      "raw": "9. Garaż | 20,13 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-f634f6c40b11a83adde4b1521028bdfb__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-97db177d1992757a2cab8bdaf89a21c5__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-parteru-projekt-dom-w-lubczyku-2-ver-2-9cea935cc813b7aea25de5ac944c530a__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-a2b887466cffb05617120a7bd38165b2__11270.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/rzut-poddasza-projekt-dom-w-lubczyku-2-ver-2-e01fdc3bd98ea9f8fd1b56cf5efe5d9e__11707.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a4be92dfa89151d040f1a2c1c__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-1-projekt-dom-w-lubczyku-2-ver-2-5984d80111ed64b8178483974063a63c__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-1-projekt-dom-w-lubczyku-2-ver-2-983fcf36ef0f24436f169d358fa4d06c__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-2-projekt-dom-w-lubczyku-2-ver-2-90a4c08ce591242199ee7e47f55e119d__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/widok-2-projekt-dom-w-lubczyku-2-ver-2-b83c47cd7a6e42f8f55f16728af89cea__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://www.archon.pl/images/products/m12620a35f9d2d/sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a4be92dfa89151d040f1a2c1c__11255.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "SITE_PLAN"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-31951f6d3a4cf4b228b3540ce414303b__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-20adce19c00a55acb7e8107aa46740b4__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-boczna-projekt-dom-w-lubczyku-2-ver-2-a7b208791652b11cb1441db81d69d789__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-098b7cef1adb34810c66f84a42306b6d__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-frontowa-projekt-dom-w-lubczyku-2-ver-2-faabba3f2161a1c38d2dcaa8a5a3d051__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-5d5b42435bc33f6ad3cb69a2b45edfb0__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/elewacja-ogrodowa-projekt-dom-w-lubczyku-2-ver-2-9f2ddef761bc487ba6cfb8353e583e37__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m12620a35f9d2d/projekt-dom-w-lubczyku-2-ver-2-fd23a2352dc4fda871ed63e820117fe2__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m12620a35f9d2d/sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a4be92dfa89151d040f1a2c1c__255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m12620a35f9d2d/sytuacja-projekt-dom-w-lubczyku-2-ver-2-09dbf35a4be92dfa89151d040f1a2c1c__255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "ba7b1db361dc700985894ab167d1bd01a566581f696598cbe108deea29de78b3"
+}

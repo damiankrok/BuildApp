@@ -1,0 +1,48 @@
+{
+ "house": "c4-lipinscy-dublin",
+ "publisher": "lipinscy.pl",
+ "url": "https://lipinscy.pl/projekt/dublin",
+ "packageContentHash": "df864b7d747fbc4797a60295ffa0747003a82ffb04ce8694d87d6bb895276c66",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The ground plan marks the entrance with a black arrow at the bottom edge, pointing at the recessed door of room 1.1, and the garage door opening is in the bottom wall of the garage 1.8; the front elevation shows the door and the garage gate.",
+ "overall": {
+  "widthM": 13.00,
+  "widthPrintedAs": "1300",
+  "depthM": 10.04,
+  "depthPrintedAs": "1004",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width takes in the two-storey main body and the single-storey garage attached on the right. Depth is the main body from rear wall to front wall; the garage is shorter and lies inside it. The front entrance terrace (1.9) and the rear terrace (1.10) are not included."
+ },
+ "heights": {
+  "buildingHeightM": 9.21,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 8.91,
+  "upperFloorLevelM": 3.02,
+  "terrainBelowGroundFloorM": 0.30
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "A near-square two-storey main body with a small entrance recess in the front wall, and a narrower single-storey garage attached to the right wall, set back from both the front and the rear walls of the main body.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the left part of the front, about 9.3 of the 13.0 width", "levels": 2, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "garage", "role": "GARAGE", "sideOfMain": "RIGHT", "position": "attached to the right wall of the main body, set back at front and rear", "levels": 1, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "FRONT", "alongShare": [0.76, 0.96] },
+ "entrance": { "side": "FRONT", "alongShare": [0.33, 0.42] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 2, "dormers": [], "balconies": 0, "roofWindows": 2 },
+  "REAR": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 2, "dormers": [], "balconies": 0, "roofWindows": 2 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 2, "openingsUpper": 2, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 0, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 0,
+ "uncertain": [
+  "Page text gives 'Wysokosc kalenicy 9,21 m'; the section prints ridge +8,91 and terrain -0,30, so the page figure is the ridge above terrain and is used as the building height.",
+  "REAR ground count of 3 = garage slot window, the narrow glazed door/window of room 1.5 and the large living-room glazing counted as ONE opening (the plan draws one continuous opening with a mullion; the elevation shows two framed panels side by side, so 4 is possible). The living-room glazing wraps the rear-left corner; its left-wall part is counted under LEFT.",
+  "The two roof windows on each slope light the roof space above the full upper storey (the section shows no room there); they are counted as roof windows, not as upper openings.",
+  "Garage door position differs slightly between the plan (about 0.75-0.94 of the front) and the front elevation (about 0.78-0.97); the middle is given.",
+  "No chimney stack is drawn on any elevation or on the section; only a thin flue pipe is visible near the garage, so chimneys is given as 0.",
+  "Timber panels beside some windows are cladding/sliding shutters, not openings."
+ ]
+}

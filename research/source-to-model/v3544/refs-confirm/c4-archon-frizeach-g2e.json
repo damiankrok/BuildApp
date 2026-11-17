@@ -1,0 +1,47 @@
+{
+ "house": "c4-archon-frizeach-g2e",
+ "publisher": "www.archon.pl",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+ "packageContentHash": "ec638c2d140f2b9769b565fb946a762c57c8afd8f44322f6b090193444c2ef50",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The double garage door (500/225) is in the bottom wall of the plan sheet and the entrance door (160/210, into Wiatrolap) faces the bottom edge in the corner beside the garage; the captioned front elevation shows both.",
+ "overall": {
+  "widthM": 19.50,
+  "widthPrintedAs": "1950 (= 645 + 690 + 615)",
+  "depthM": 13.50,
+  "depthPrintedAs": "1350 (= 960 + 390)",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width is the long main bar (19.50). Depth takes in the main bar (9.60) plus the garage projecting 3.90 to the front. The rear terrace with pergola is not included."
+ },
+ "heights": {
+  "buildingHeightM": 7.10,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 6.78,
+  "upperFloorLevelM": null,
+  "terrainBelowGroundFloorM": 0.32
+ },
+ "outlineShape": "T",
+ "outlineNote": "A long single-storey bar 19.50 x 9.60 with a 6.90 wide garage block projecting 3.90 forward from the middle of the front wall.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the whole width of the house, the rear 9.60 of the depth", "levels": 1, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "garage", "role": "GARAGE", "sideOfMain": "FRONT", "position": "projects forward from the middle of the front wall (from 6.45 to 13.35 of the 19.50 width); its rear part lies under the main roof", "levels": 1, "roof": "FLAT", "ridge": "NA", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "FRONT", "alongShare": [0.38, 0.64] },
+ "entrance": { "side": "FRONT", "alongShare": [0.25, 0.33] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 5, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "REAR": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 5, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 1, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 2,
+ "uncertain": [
+  "The two side elevations are captioned only 'elewacja boczna'; assigned from the plan: the one with the large living-room glazing and the garage's glazed side is LEFT, the one with a single bathroom window is RIGHT.",
+  "LEFT ground count of 5 = three openings in the main gable wall (260/230, 100/230, 120/140) plus two tall glazed openings 90/210 in the left wall of the projecting garage block, which face left towards the entrance forecourt; whether those two are doors or fixed glazing cannot be told (they are drawn as glazing).",
+  "FRONT ground count of 5 = kitchen window 240/140, entrance door 160/210, garage door 500/225 and two windows 100/140 on the right (joined on the elevation by a dark panel that is not an opening).",
+  "The entrance door sits in the front wall of the main bar, recessed 3.90 behind the garage front; its alongShare is measured on the full 19.50 front extent.",
+  "The gable triangles are drawn in dark cladding with no openings; there is no usable attic shown, so the house is taken as one level."
+ ]
+}

@@ -1,0 +1,1793 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-m9532962898e5c-bedb2e0898",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+  "pageHash": "9fd9945e8a6793936b435fa202ff2674167635d6390581a0933481acb267623e",
+  "project": {
+    "externalId": "m9532962898e5c",
+    "name": "Projekt domu Dom we frizeach (G2E) Opis projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-dodatkowa-wiz-611ec3882c",
+      "caption": "gotowy projekt Dom we frizeach (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-cdaeae13596f7e337bbe-b38fade331",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/fm/projekt-dom-we-frizeach-g2e-cdaeae13596f7e337bbe156425465c5e__59497.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 496121,
+          "byteHash": "910b8e5970f72efbfa6008d48b88338e7a6c2d1c7f74a9562e5ad4b2ae6b5fa9",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-cdaeae13596f7e337bbe-b38fade331",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-dodatkowa-wiz-66bf44bca6",
+      "caption": "gotowy projekt Dom we frizeach (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-bc858b2fa3df11a2e684-5055d051b1",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/fm/projekt-dom-we-frizeach-g2e-bc858b2fa3df11a2e6844ccdd148b0e9__59499.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 548062,
+          "byteHash": "c50241078f7da28a0672059c84361b01c4016befcaf6aa948d48c2fa513fa33d",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-bc858b2fa3df11a2e684-5055d051b1",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-dodatkowa-wiz-7af59eb8f0",
+      "caption": "gotowy projekt Dom we frizeach (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-b47018223c430eb82015-81877df511",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/fm/projekt-dom-we-frizeach-g2e-b47018223c430eb820157bff675b0e82__59498.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 482199,
+          "byteHash": "f7d2491175983308b41a574876aac8acd9979e880535281e5932d329b0052f5e",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-b47018223c430eb82015-81877df511",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-dodatkowa-wiz-af3e2f0e23",
+      "caption": "gotowy projekt Dom we frizeach (G2E) dodatkowa wizualizacja",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) dodatkowa wizualizacja\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-d1fae0c4757d713826f7-16b49060e7",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/fm/projekt-dom-we-frizeach-g2e-d1fae0c4757d713826f71cf35f9d1158__59496.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/carousel_images",
+          "mediaType": "image/jpeg",
+          "byteLength": 547328,
+          "byteHash": "aa14552bd60de023a3c0ae98fa47edbdda86f8c0940eed47e55130eca6db21bd",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declared": {
+            "width": 116,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-d1fae0c4757d713826f7-16b49060e7",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-bocz-c912e86df2",
+      "caption": "gotowy projekt Dom we frizeach (G2E) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-b845c027ddc32c5d25d2-c6085cdc93",
+          "url": "https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-b845c027ddc32c5d25d2d57bc207b2e2__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 799055,
+          "byteHash": "cb0cb8fa5c1bd2481a240453d1725a14aed02b0c68575f9a4c92cbc50d281a36",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-we-frizeach-g2e-22bc-3b8cac35b3",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-boczna-projekt-dom-we-frizeach-g2e-22bc295d62898268c08dc289ed7873d1__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 160035,
+          "byteHash": "1372d26a4c123599ed001a702d63e17f3a5a5af66f963b352a3f832e40b20813",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-b845c027ddc32c5d25d2-c6085cdc93",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-bocz-cd414789e7",
+      "caption": "gotowy projekt Dom we frizeach (G2E) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom we frizeach (g2e) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-7e14e94acc1e7013fbe4-490898aacf",
+          "url": "https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-7e14e94acc1e7013fbe40dc0b0535063__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 844479,
+          "byteHash": "226a2fc0a9e48474363b973839673acd5f02553f6c541fd1cff0e5f0cf7d8a44",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-we-frizeach-g2e-db4a-73728ae810",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-boczna-projekt-dom-we-frizeach-g2e-db4a6ef4be447f1be945c748459d66e7__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 170897,
+          "byteHash": "9d2ac0e32699c32b723ef743e1ba5a6dedc2fa3ec6caa686e5ba9193e56f6e13",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-7e14e94acc1e7013fbe4-490898aacf",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-fron-93bfea3927",
+      "caption": "gotowy projekt Dom we frizeach (G2E) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom we frizeach (g2e) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom we frizeach (g2e) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-e4bc128aa4bba2d3d991-776f891e84",
+          "url": "https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-e4bc128aa4bba2d3d99111fe3db97987__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 670790,
+          "byteHash": "76f0f3f36b2f3160ee67502aafcdaf3a436f19eedec1a2b379928238b1ee5906",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-we-frizeach-g2e-32-8212f58a82",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-frontowa-projekt-dom-we-frizeach-g2e-329f5cc37ecca51d60dbd3a21e7cb2ad__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 133052,
+          "byteHash": "22486e766f78bf580645146af5f61e3c382dabd1914a1f2a660cd9000c29f774",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-e4bc128aa4bba2d3d991-776f891e84",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-elewacja-ogro-3d373451b9",
+      "caption": "gotowy projekt Dom we frizeach (G2E) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom we frizeach (g2e) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom we frizeach (g2e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom we frizeach (g2e) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-f33d1d27db63378db163-c15e86ff34",
+          "url": "https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-f33d1d27db63378db163363afc6941fb__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 738058,
+          "byteHash": "4dcf6aa7cba5f4b750092f505e2499819c4d1225750023cb50fb4cfe5c5160e4",
+          "decoded": {
+            "width": 1280,
+            "height": 513
+          },
+          "declaredMismatch": false,
+          "aspect": 2.495127
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-we-frizeach-g2e-3c-27d594c6b3",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-ogrodowa-projekt-dom-we-frizeach-g2e-3c78d92ea9cff93ea95c6b35f1f4e32a__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 146307,
+          "byteHash": "89cef65d5aa262a252d56718fec8dcb7fdaf022dd5dcdd5c4a4d381d45ebbebf",
+          "decoded": {
+            "width": 550,
+            "height": 220
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.5
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-f33d1d27db63378db163-c15e86ff34",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-przekroj-budy-0ef6c56c2c",
+      "caption": "gotowy projekt Dom we frizeach (G2E) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom we frizeach (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom we frizeach (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom we frizeach (g2e) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-we-frizeach-g2e-0ea-8826271467",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/przekroj-budynku-projekt-dom-we-frizeach-g2e-0eacb02fb31bfcca41abd7b84f4ea365__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m9532962898e5c/przekroj-budynku-projekt-dom-we-frizeach-g2e-0eacb02fb31bfcca41abd7b84f4ea365__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 58290,
+          "byteHash": "c61d3d36545dd611bfe87a26b67b5587f228ca23f5f74ae48a5c67c72bdf5ef4",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-we-frizeach-g2e-0ea-324d33e0de",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/przekroj-budynku-projekt-dom-we-frizeach-g2e-0eacb02fb31bfcca41abd7b84f4ea365__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 14451,
+          "byteHash": "7088eec5d896bc81f274b8e2994d32fc7eef5f24bf0cd3874b5f03af6efc40c5",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-we-frizeach-g2e-0ea-8826271467",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-rzut-parteru-fb794e1245",
+      "caption": "gotowy projekt Dom we frizeach (G2E) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-we-frizeach-g2e-ccf98cd-eb1bb297c1",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/rzut-parteru-projekt-dom-we-frizeach-g2e-ccf98cd499db93f4c4d4dc329ed09d09__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 56691,
+          "byteHash": "34d7b0b1e1de691d50c3301eb1d311399ff2078dd3ea7c7080435053950d00b4",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-we-frizeach-g2e-ccf98cd-eb1bb297c1",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-sytuacja-34dbb1c28e",
+      "caption": "gotowy projekt Dom we frizeach (G2E) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom we frizeach (g2e) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom we frizeach (g2e) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-c7c98f04911e65f52d8f-02debcff6c",
+          "url": "https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-c7c98f04911e65f52d8f420bfd1356fb__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 190600,
+          "byteHash": "8653ca28c4b501ab52ce25b742e4c2f7232e5bb2eb711e197db3c950b3475fa2",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-we-frizeach-g2e-fa8793b7961-7617c5e57c",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/sytuacja-projekt-dom-we-frizeach-g2e-fa8793b79612eedc61479573e26378ce__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 43118,
+          "byteHash": "c683e15d33c1b51803f1a9668a3875979a699d0fa75253085e59d11e68236b66",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-c7c98f04911e65f52d8f-02debcff6c",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-we-frizeach-g2e-widok-1-bb737f1831",
+      "caption": "gotowy projekt Dom we frizeach (G2E) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-we-frizeach-g2e-1f5c6cb60159-3bd34c62e8",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/widok-1-projekt-dom-we-frizeach-g2e-1f5c6cb60159a7160dc022a11cebe6c6__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 8724,
+          "byteHash": "147b0de2d42012d517b3437f9e38bbecbed7f93396c623e30a3f46f2099a29fc",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-we-frizeach-g2e-1f5c6cb60159-3bd34c62e8",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-04cb6a76cc4accd73b4f-721017262e",
+      "caption": "Projekt dom we frizeach g2e 04cb6a76cc4accd73b4fcb1d96cdf9e9  59494",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-04cb6a76cc4accd73b4f-5248faad61",
+          "url": "https://cdn1.archon.pl/images/products/m9532962898e5c/i/projekt-dom-we-frizeach-g2e-04cb6a76cc4accd73b4fcb1d96cdf9e9__59494.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m9532962898e5c/image/59494?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 513272,
+          "byteHash": "7d14720d3edafe038a4b3acdc8bac2b59de61adbbc99e322cdba1efbc52d7742",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-04cb6a76cc4accd73b4f-5248faad61",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-1dc50a2ece",
+      "caption": "projekt Dom we frizeach (G2E)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-we-frizeach-g2e-d527b2315f2d-11f6d570ce",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/widok-2-projekt-dom-we-frizeach-g2e-d527b2315f2d129281786036e96e52c9__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 29651,
+          "byteHash": "fbbc2179711ecb9fe1205388847fbb71cfb0428267fe7c147316e4c475d3e46a",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-we-frizeach-g2e-d527b2315f2d-11f6d570ce",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-543da4161a",
+      "caption": "projekt Dom we frizeach (G2E)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-bf2d3f3c85ee94404301-809d9951bd",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-bf2d3f3c85ee9440430199b8642f2659__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 28669,
+          "byteHash": "063e67a1e846282a9f9830d4f0f15ddd4396425c7c5ea4cab95fedd8d0a92455",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-bf2d3f3c85ee94404301-809d9951bd",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-5b220670e4",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) wizualizacja kuchni 1 widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-a273599deefc62b3a906-52fc2a3fad",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/k3/projekt-dom-we-frizeach-g2e-a273599deefc62b3a9069680d22d8ee1__61256.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 203375,
+          "byteHash": "ceecbd654f56385fffc99e9cd0afb274918208a3220ae4a940ef8ff518598580",
+          "decoded": {
+            "width": 1139,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.335287
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-a273599deefc62b3a906-52fc2a3fad",
+      "selectionReason": "only variant (1139x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-6aef431e12",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-a01ebc181356ba3391d8-9415906021",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/l3/projekt-dom-we-frizeach-g2e-a01ebc181356ba3391d8a4ab4486ee25__61257.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 131584,
+          "byteHash": "d05374249653bfa54ae209d40259d9d0b354a425863d4d1258aae5d81f77cd98",
+          "decoded": {
+            "width": 569,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 0.667057
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-a01ebc181356ba3391d8-9415906021",
+      "selectionReason": "only variant (569x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-70be4f313a",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) strefa dzienna (wizualizacja 1 widok 3)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-d7bfc303d64975f7560c-c6a603e197",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/w1/projekt-dom-we-frizeach-g2e-d7bfc303d64975f7560c8e36a0e2f1e2__61255.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 292637,
+          "byteHash": "8ce3182ab2e47b6e9a2a6101f46a2dcb0788066eb48f06950b4d41d83f1be1de",
+          "decoded": {
+            "width": 1516,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777257
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-d7bfc303d64975f7560c-c6a603e197",
+      "selectionReason": "only variant (1516x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-a60d06b5f6",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-825d3173dcde83d1043b-79a939808d",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/w1/projekt-dom-we-frizeach-g2e-825d3173dcde83d1043bc7bdb37f6587__61253.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 301829,
+          "byteHash": "ccae113cde0b21b59d6970f51a4e96a5363ad88f1173ac3fa6251ec0d6b74876",
+          "decoded": {
+            "width": 1517,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.778429
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-825d3173dcde83d1043b-79a939808d",
+      "selectionReason": "only variant (1517x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-d75832a85b",
+      "caption": "projekt Dom we frizeach (G2E)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-we-frizeach-g2e-db50052-36ea18a50e",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/rzut-parteru-projekt-dom-we-frizeach-g2e-db500525ada378d265d693b19a5e88e0__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m9532962898e5c/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 36312,
+          "byteHash": "cac9910b7b5a6ee6f1a6e20e0ff2bd76227e35475ebbe3d1376cde1f6ad16a66",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-we-frizeach-g2e-db50052-36ea18a50e",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-we-frizeach-g2e-f34be8d23d",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-9021a9002c908335d151-294609944c",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/w1/projekt-dom-we-frizeach-g2e-9021a9002c908335d1512ab4fb14d4d5__61254.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 260458,
+          "byteHash": "a10b5ec83517c4d20928f5a4a6742091fa5083be5407b5bca30b2b9bf273aa98",
+          "decoded": {
+            "width": 1137,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332943
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-9021a9002c908335d151-294609944c",
+      "selectionReason": "only variant (1137x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-9bfaf6b2a0",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m9532962898e5c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m9532962898e5c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-we-fri-10d5c37ca7",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/rzut-parteru-z-powierzchniami-projekt-dom-we-frizeach-g2e-18295f5fc235084848371c6bab3f147d__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/gif",
+          "byteLength": 110209,
+          "byteHash": "309f045a3b1606f82b4041838bf9c0d5c2089c127739c5d105d753f9f7637d08",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-we-fri-10d5c37ca7",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-aa1a8ea71c",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m9532962898e5c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m9532962898e5c/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom we frizeach (g2e) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-we-frizeach-g2e-6a373bf09795a54e1551-424994dc2b",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-6a373bf09795a54e15510e2a41de0481__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/gif",
+          "byteLength": 109379,
+          "byteHash": "aa8b2d3928e2f3c0efb5520b256d42710ea6fb3b135f7b0819732f6ccee74d6e",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-we-frizeach-g2e-6a373bf09795a54e1551-424994dc2b",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-we-frizeach-g2e-8e7a9b298b",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-we-frizeach-g2e-9b7b6d55960e-5becbd5a46",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/widok-1-projekt-dom-we-frizeach-g2e-9b7b6d55960ea61b1e7509d5a72f7186__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 505136,
+          "byteHash": "e83aea643314be6ee7e1a917d78bf2e16ae17c8666e788c843fcfb4d48c17818",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-we-frizeach-g2e-9b7b6d55960e-5becbd5a46",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-we-frizeach-g2e-844a5f6b81",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-we-frizeach-g2e\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom we frizeach (g2e) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-we-frizeach-g2e-d5487e31410d-a2151e5cd8",
+          "url": "https://assets.archon.pl/images/products/m9532962898e5c/widok-2-projekt-dom-we-frizeach-g2e-d5487e31410d31f4b7f2bbee8e5581ad__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-we-frizeach-g2e-m9532962898e5c",
+          "mediaType": "image/jpeg",
+          "byteLength": 487695,
+          "byteHash": "c05fab5979aa888937c8e6e221f1f509ce976c52969d28cb27b40d5d5b59aceb",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-we-frizeach-g2e-d5487e31410d-a2151e5cd8",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 8.46,
+      "unit": "m2",
+      "raw": "8,46 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 7.1,
+      "unit": "m",
+      "raw": "7,1 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 173,
+      "unit": "m2",
+      "raw": "173,0 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 214.77,
+      "unit": "m2",
+      "raw": "214,77 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 37.92,
+      "unit": "m2",
+      "raw": "37,92 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "value": 126.62,
+      "unit": "m2",
+      "raw": "126,62 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 267.71,
+      "unit": "m2",
+      "raw": "267,71 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 214.77,
+      "unit": "m2",
+      "raw": "214,77 m&sup2;"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 173,
+      "unit": "m2",
+      "raw": "173,0 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 1158.36,
+      "unit": "none",
+      "raw": "1158,36 m&sup3;"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom we frizeach (G2E) to nowoczesny projekt domu parterowego , który łączy prostą, elegancką architekturę z funkcjonalnym układem pomieszczeń. Zwarta bryła na rzucie prostokąta z dwuspadowym dachem oraz dwustanowiskowym garażem wysuniętym przed elewację frontową nadaje budynkowi wyrazisty charakter i podkreśla jego współczesny styl. Efektowne wejście z naświetlem bocznym oraz zadaszenie nad strefą wejściową tworzą reprezentacyjną przestrzeń, a wygodny wiatrołap ułatwia codzienne korzystanie z domu. Dom we frizeach (G2E) został zaprojektowany z myślą o rodzinach poszukujących praktycznych i estetycznych rozwiązań, dlatego jego wnętrze oferuje wyraźny podział na część dzienną, prywatną i gospodarczą. Sercem domu jest przestronny salon o powierzchni przekraczającej 30 m² z kominkiem oraz wyjściem na taras osłonięty pergolą, który staje się naturalnym przedłużeniem strefy wypoczynku. Duża, ponad 12-metrowa kuchnia z efektownym oknem narożnym i pojemnym półwyspem dla co najmniej trzech osób zapewnia komfort wspólnego gotowania i codziennych spotkań, a bezpośrednie połączenie ze spiżarnią ułatwia organizację zapasów. Dom we frizeach (G2E) oferuje również trzy przestronne sypialnie, w tym wygodny apartament gospodarzy z własną garderobą, co podnosi funkcjonalność części prywatnej. W projekcie przewidziano dwie łazienki oraz praktyczną strefę gospodarczą, w której kotłownia z piecem na pellet, pralnia i dodatkowa łazienka zostały zgrupowane w jednej części domu, dzięki czemu codzienne obowiązki pozostają oddzielone od przestrzeni przeznaczonej do wypoczynku. Dwustanowiskowy garaż zapewnia dużą ilość miejsca nie tylko dla samochodów, ale również na przechowywanie sprzętu i akcesoriów. Dodatkowym atutem jest zastosowanie wentylacji mechaniczznej z odzyskiem ciepła, czyli rekuperacji, która wspiera energooszczędną eksploatację budynku i dba o wysoką jakość powietrza we wnętrzach. Dom we frizeach (G2E) to projekt domu, który wyróżnia się przemyślanym układem funkcjonalnym, atrakcyjną architekturą oraz rozwiązaniami odpowiadającymi współczesnym oczekiwaniom inwestorów. Jeśli interesują Cię nowoczesne projekty domów łączące estetykę z praktycznością, Dom we frizeach (G2E) będzie propozycją, która spełni wymagania nawet najbardziej wymagających użytkowników."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "na pellet + alternatywnie gazowy"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "other",
+      "label": "zadaszenie tarasu",
+      "text": "pergola"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy z okapami, nachylenie 30 st. , więźba drewniana, blachodachówka / dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 126.62 m² + 37.92 m² + 8.46 m² , 4 pokoje, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 7.5,
+      "raw": "1. Wiatrołap | 7,50 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Kuchnia",
+      "area": 12.52,
+      "raw": "2. Kuchnia | 12,52 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Spiżarnia",
+      "area": 1.75,
+      "raw": "3. Spiżarnia | 1,75 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Salon + Jadalnia",
+      "area": 31.88,
+      "raw": "4. Salon + Jadalnia | 31,88 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Korytarz",
+      "area": 14.63,
+      "raw": "5. Korytarz | 14,63 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Pokój",
+      "area": 12.03,
+      "raw": "6. Pokój | 12,03 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Pokój",
+      "area": 12.01,
+      "raw": "7. Pokój | 12,01 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Pokój",
+      "area": 12.01,
+      "raw": "8. Pokój | 12,01 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Garderoba",
+      "area": 4.94,
+      "raw": "9. Garderoba | 4,94 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 10,
+      "label": "Łazienka",
+      "area": 5.93,
+      "raw": "10. Łazienka | 5,93 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 11,
+      "label": "Pralnia",
+      "area": 8.07,
+      "raw": "11. Pralnia | 8,07 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 12,
+      "label": "Kotłownia",
+      "area": 8.46,
+      "raw": "12. Kotłownia | 8,46 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 13,
+      "label": "Garaż",
+      "area": 37.92,
+      "raw": "13. Garaż | 37,92 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 14,
+      "label": "Łazienka",
+      "area": 3.35,
+      "raw": "14. Łazienka | 3,35 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-bf2d3f3c85ee9440430199b8642f2659__11252.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/rzut-parteru-projekt-dom-we-frizeach-g2e-ccf98cd499db93f4c4d4dc329ed09d09__11706.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/rzut-parteru-projekt-dom-we-frizeach-g2e-db500525ada378d265d693b19a5e88e0__11269.gif",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/widok-1-projekt-dom-we-frizeach-g2e-1f5c6cb60159a7160dc022a11cebe6c6__11259.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/widok-1-projekt-dom-we-frizeach-g2e-9b7b6d55960ea61b1e7509d5a72f7186__11289.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/widok-2-projekt-dom-we-frizeach-g2e-d527b2315f2d129281786036e96e52c9__11260.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/widok-2-projekt-dom-we-frizeach-g2e-d5487e31410d31f4b7f2bbee8e5581ad__11290.jpg",
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "status": 404,
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      }
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-boczna-projekt-dom-we-frizeach-g2e-22bc295d62898268c08dc289ed7873d1__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-b845c027ddc32c5d25d2d57bc207b2e2__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-boczna-projekt-dom-we-frizeach-g2e-db4a6ef4be447f1be945c748459d66e7__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-7e14e94acc1e7013fbe40dc0b0535063__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-frontowa-projekt-dom-we-frizeach-g2e-329f5cc37ecca51d60dbd3a21e7cb2ad__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-e4bc128aa4bba2d3d99111fe3db97987__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/elewacja-ogrodowa-projekt-dom-we-frizeach-g2e-3c78d92ea9cff93ea95c6b35f1f4e32a__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-f33d1d27db63378db163363afc6941fb__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m9532962898e5c/sytuacja-projekt-dom-we-frizeach-g2e-fa8793b79612eedc61479573e26378ce__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m9532962898e5c/projekt-dom-we-frizeach-g2e-c7c98f04911e65f52d8f420bfd1356fb__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "ec638c2d140f2b9769b565fb946a762c57c8afd8f44322f6b090193444c2ef50"
+}

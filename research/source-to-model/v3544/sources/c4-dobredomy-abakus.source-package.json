@@ -1,0 +1,816 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0",
+  "id": "src-www-dobredomy-pl-dcfc9250c7",
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/abakus",
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/abakus/",
+  "pageHash": "f825b93db9d19d3af5ebc5015b5c336cd1fbfa88daab40d0a253f9b4b9ec968b",
+  "project": {
+    "name": "Projekt domu Abakus",
+    "publisher": "dobredomy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-abakus-elewacja-boczna-0822d6a895",
+      "caption": "Abakus · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Abakus · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Abakus · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-e2-jpg-ef3a270dfc",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_e2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 29542,
+          "byteHash": "0dec1a51195752952cbe3713d708cacaad8cbb686c81baf97b8704a2fc28b6b9",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-abakus-e2-jpg-ef3a270dfc",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-elewacja-boczna-8565a5e96a",
+      "caption": "Abakus · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Abakus · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Abakus · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-e3-jpg-37285d05fc",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_e3.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 29025,
+          "byteHash": "db4f6864f1a1d5b885b3e7a9583506f0d1812f2cc5fc8267681f157e6e07cfec",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-abakus-e3-jpg-37285d05fc",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-elewacja-przod-473a9eee2b",
+      "caption": "Abakus · Elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Abakus · Elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Abakus · Elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-e1-jpg-d7d28747b7",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_e1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 53897,
+          "byteHash": "41c5e7cbc1f5536c8876f21d5104ee1d3a9a7db5da1b9a21b7e11ee07b4268de",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-abakus-e1-jpg-d7d28747b7",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-elewacja-ty-18257d1196",
+      "caption": "Abakus · Elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Abakus · Elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Abakus · Elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-e4-jpg-20eeb1ebb0",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_e4.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 59940,
+          "byteHash": "c7337c717e266a271937e19b2d4f0b0008eba2ef808165cd3bd9157f1a157486",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-abakus-e4-jpg-20eeb1ebb0",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-przekroje-086095293c",
+      "caption": "Abakus · Przekroje",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Abakus · Przekroje\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-p1-jpg-28f22c25f6",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_p1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 59366,
+          "byteHash": "97d848265a24e90f2376e12de1e8e99d5fc19afa0078e03ca340a26a24c96521",
+          "decoded": {
+            "width": 1531,
+            "height": 716
+          },
+          "declaredMismatch": false,
+          "aspect": 2.138268
+        }
+      ],
+      "selectedVariantId": "var-abakus-p1-jpg-28f22c25f6",
+      "selectionReason": "only variant (1531x716, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-rzut-dzia-ki-e6f0936677",
+      "caption": "Abakus · Rzut działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Abakus · Rzut działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-s-jpg-a01c7b9f13",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_s.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 44426,
+          "byteHash": "3773fca892c989a14adc36be224bfa6e50e210fd338b23084b844f5c03b4ec8a",
+          "decoded": {
+            "width": 964,
+            "height": 859
+          },
+          "declaredMismatch": false,
+          "aspect": 1.122235
+        }
+      ],
+      "selectedVariantId": "var-abakus-s-jpg-a01c7b9f13",
+      "selectionReason": "only variant (964x859, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-rzut-parter-4c5ec26362",
+      "caption": "Abakus · Rzut parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Abakus · Rzut parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Abakus · Rzut parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-r1-jpg-a040ff593c",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_r1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 126057,
+          "byteHash": "c0636a7a4d49282bff2bfda6a282ed18997f9fb0a913da36cd941f50d818edb4",
+          "decoded": {
+            "width": 964,
+            "height": 870
+          },
+          "declaredMismatch": false,
+          "aspect": 1.108046
+        }
+      ],
+      "selectedVariantId": "var-abakus-r1-jpg-a040ff593c",
+      "selectionReason": "only variant (964x870, decoded from bytes)"
+    },
+    {
+      "id": "asset-abakus-w1-jpg-e7134c6872",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-w1-jpg-97cd3a71b8",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/abakus_w1.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 547992,
+          "byteHash": "78205a3bbb2b5d1652721605719de4823408914ffce8fb2204a10ee4652e839a",
+          "decoded": {
+            "width": 1865,
+            "height": 1200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.554167
+        }
+      ],
+      "selectedVariantId": "var-abakus-w1-jpg-97cd3a71b8",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)"
+    },
+    {
+      "id": "asset-newsletter-115423e4f1",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/png",
+          "byteLength": 61287,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/webp",
+          "byteLength": 23380,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-2122c17c71",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-jpg-b3083b8576",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 66219,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        },
+        {
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/webp",
+          "byteLength": 14602,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        }
+      ],
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-598a2abb68",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/png",
+          "byteLength": 55569,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/webp",
+          "byteLength": 18930,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-prezentacja-e019163552",
+      "caption": "Prezentacja",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 71506,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "decoded": {
+            "width": 417,
+            "height": 565
+          },
+          "declaredMismatch": false,
+          "aspect": 0.738053
+        }
+      ],
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-e25becc350",
+      "caption": "Projekt domu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/png",
+          "byteLength": 160714,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "decoded": {
+            "width": 315,
+            "height": 203
+          },
+          "declaredMismatch": false,
+          "aspect": 1.551724
+        }
+      ],
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-ma-ego-domu-parterowego-bez-garazu-na-wa-c4909c4004",
+      "caption": "Projekt małego domu parterowego, bez garażu, na wąską działkę, z dachem dwuspadowym Abakus",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialke\" in \"Projekt małego domu parterowego, bez garażu, na wąską działkę, z dachem dwuspado\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-w2-jpg-p-prslide-8a1052fc19",
+          "url": "https://www.dobredomy.pl/img/projekty/abakus/abakus_w2.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 178673,
+          "byteHash": "f77628607140feae81b20ed934f5d7a9750873abcfe8d52bce595abcb9c5c52c",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-abakus-w2-jpg-p-prslide-8a1052fc19",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-ma-ego-domu-parterowego-bez-garazu-na-wa-e9700d2315",
+      "caption": "Projekt małego domu parterowego, bez garażu, na wąską działkę, z dachem dwuspadowym Abakus",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialke\" in \"Projekt małego domu parterowego, bez garażu, na wąską działkę, z dachem dwuspado\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-abakus-w1-jpg-p-prslide-6378cf3641",
+          "url": "https://www.dobredomy.pl/img/projekty/abakus/abakus_w1.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 170717,
+          "byteHash": "ddcca6f271ceae562f6009c15160dad1cc9bf17f718af0098824b705012e1305",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-abakus-w1-jpg-p-prslide-6378cf3641",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-wycena-fb105e7612",
+      "caption": "Wycena",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/abakus",
+          "mediaType": "image/jpeg",
+          "byteLength": 53872,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "value": 1,
+      "unit": "count",
+      "raw": "1"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 6.8,
+      "unit": "m",
+      "raw": "6,80 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 106.2,
+      "unit": "m2",
+      "raw": "106,20 m²"
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "value": 18.12,
+      "unit": "m",
+      "raw": "18,12 m"
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "value": 18.72,
+      "unit": "m",
+      "raw": "18,72 m"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "value": 30,
+      "unit": "deg",
+      "raw": "30°"
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "value": 2,
+      "unit": "count",
+      "raw": "2"
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "value": 150.8,
+      "unit": "m2",
+      "raw": "150,80 m²"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 71.5,
+      "unit": "m2",
+      "raw": "71,50 m²"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "value": 208.9,
+      "unit": "none",
+      "raw": "208,90 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "30°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Projekt domu Abakus został zaprojektowany z myślą o 2-4-osobowej rodzinie. Abakus jest przytulnym, parterowym domem idealnie pasującym na małą działkę. Do wnętrza domu zaprasza przyjazna weranda. W holu przewidziano sporo miejsca na zabudowane szafy, stąd też jest przejście do kuchni ze spiżarnią, łazienki, kotłowni i dwóch sypialni. Ozdobą domu jest obszerny salon z kominkiem, połączony z jadalnią i wyjściem na taras. Dodatkową atrakcją jest to, że sypialnia rodziców posiada osobne wyjście na zacieniony taras."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [],
+  "documents": [
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/Pliki%20do%20pobrania/abakus_pk.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "BASE",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "mediaType": "application/pdf",
+      "byteLength": 62592,
+      "byteHash": "14d2119e52f75db060113faf170bcdd0130f293268781eaa1e730c8039e24625",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/Pliki%20do%20pobrania/abakus_pkdwg.dwg",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "variant": "UNKNOWN",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "mediaType": "image/vnd.dwg",
+      "byteLength": 165856,
+      "byteHash": "b2d42b037a4313602a260acbc027ab5e46c3d1308ef87fa5b427cda1fd39dccd",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/abakus/Pliki%20do%20pobrania/abakus_pkl.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "MIRRORED",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "mediaType": "application/pdf",
+      "byteLength": 63524,
+      "byteHash": "b9db72980577101e4f4fa00af65a590473c2190e1d0b53faf0a4dffc51834f81",
+      "status": "FETCHED"
+    }
+  ],
+  "contentHash": "75eeadff54787709ce4a6046e0a3fcf61f3de0c05fbe5fdf09d49f5b9a1dbee2"
+}

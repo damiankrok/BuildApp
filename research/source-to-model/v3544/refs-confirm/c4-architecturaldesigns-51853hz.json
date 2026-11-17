@@ -1,0 +1,55 @@
+{
+ "house": "c4-architecturaldesigns-51853hz",
+ "publisher": "www.architecturaldesigns.com",
+ "url": "https://www.architecturaldesigns.com/house-plans/3-bed-country-farmhouse-plan-with-bonus-over-the-garage-51853hz",
+ "packageContentHash": "f0a1dd998383cd1b568c5381b0b6fe214622a9c9e2d0d656ed3d0f4ec7791906",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The Main Level plan has FRONT PORCH and FOYER with the front door along its bottom edge and REAR PORCH at the top; the drawing captioned FRONT ELEVATION shows that porch and door.",
+ "overall": {
+  "widthM": 22.86,
+  "widthPrintedAs": "75' 0\"",
+  "depthM": 18.90,
+  "depthPrintedAs": "62' 0\"",
+  "basis": "PAGE_TEXT",
+  "includes": "Page text only (Width 75' 0\", Depth 62' 0\"); the plan itself prints room sizes but no overall dimensions. The plan picture's bounding box has the same proportion (about 1.21), so the figures are read as the whole outline: width from the left bedroom wing to the right wall of the garage / primary suite, depth from the rear wall of the primary bedroom to the front wall of the garage. Both porches lie inside that box."
+ },
+ "heights": {
+  "buildingHeightM": 8.53,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": null,
+  "upperFloorLevelM": null,
+  "terrainBelowGroundFloorM": null
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Central living block flanked by a bedroom wing on the left and a deeper right wing that runs the full depth (garage at the front, primary suite at the rear); the rear has a notch for the covered rear porch and the front steps forward in stages from the bedroom wing to the garage.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the centre (great room, kitchen, dining, foyer), highest roof", "levels": 1, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "bedroom wing", "role": "WING", "sideOfMain": "LEFT", "position": "left end of the front, with a front-facing cross gable over bedroom 2", "levels": 1, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": true },
+  { "name": "garage", "role": "GARAGE", "sideOfMain": "RIGHT", "position": "front part of the right wing, projecting furthest forward; two nested front-facing gables; bonus room above", "levels": 2, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": true },
+  { "name": "primary suite wing", "role": "WING", "sideOfMain": "RIGHT", "position": "rear part of the right wing, projecting behind the rear wall of the centre, with a rear-facing gable", "levels": 1, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": true },
+  { "name": "front porch", "role": "OTHER", "sideOfMain": "FRONT", "position": "open porch on posts across the centre of the front, between the bedroom wing and the garage", "levels": 1, "roof": "SHED", "ridge": "NA", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "RIGHT", "alongShare": [0.08, 0.36] },
+ "entrance": { "side": "FRONT", "alongShare": [0.43, 0.48] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 6, "openingsUpper": 2, "dormers": [ { "kind": "WALL", "form": "SHED", "alongShare": [0.53, 0.65] } ], "balconies": 0, "roofWindows": 0 },
+  "REAR": { "elevationPublished": true, "openingsGround": 8, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 5, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 0,
+ "uncertain": [
+  "No section is published and the plan prints no overall dimensions; width, depth and 'Max Ridge Height 28' 0\"' are page text. What the ridge height is measured from is not stated, so ridge above ground floor, terrain and the bonus-floor level are left null.",
+  "The garage and the primary suite lie under ONE continuous roof with a front-to-back ridge (the right elevation shows a single long slope); they are listed as two bodies only because their roles differ.",
+  "The bedroom wing roof has its ridge along the front, lower than the main ridge, with a front-facing cross gable over bedroom 2; on the left elevation its end is a small gable above a hip skirt (Dutch gable).",
+  "FRONT ground count of 6 = bedroom-2 window, window and door and window under the porch, one window in the smaller garage gable, one paired window in the larger garage gable. The closed pair of shutters between the bedroom gable and the porch has no glazing on the render and is not counted. Gable louvre vents are not counted on any side.",
+  "FRONT upper count of 2 = the bonus-room window in the large right gable plus the three-sash window of the shed dormer counted as one unit (4 if each sash is counted). The page says the dormer only lets light into the attic; there is no room behind it.",
+  "Dormer kind WALL: on the bonus-level plan and the render its front wall stands on the line of the foyer front wall above the porch roof, interrupting the main eaves; ROOF would also be defensible.",
+  "RIGHT ground count of 5 = two garage door leaves drawn side by side on the right elevation (the plan draws one car bay outline, so it may be a single double door: then 4) plus three windows of the primary bath area.",
+  "REAR ground count of 8 = three in the primary-bedroom gable (one small high window, two windows), the dining triple window as one, and on the great-room wall two paired windows and one pair of French doors, plus the bedroom-3 window.",
+  "LEFT count is what the left elevation shows (two windows and one small high window). The plan also draws a window in the dining room wall that faces left onto the rear porch; it is hidden on the elevation and not counted.",
+  "Fireplace is described as non-vented gas logs and no chimney is drawn."
+ ]
+}

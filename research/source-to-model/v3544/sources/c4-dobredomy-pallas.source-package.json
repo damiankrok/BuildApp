@@ -1,0 +1,881 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0",
+  "id": "src-www-dobredomy-pl-a7007bf943",
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/pallas",
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/pallas/",
+  "pageHash": "08037d27abeb1c7c5de8f0d2f0fa8087dab921b8c0f56cf3feb897fe1eae4f67",
+  "project": {
+    "name": "Projekt domu Pallas",
+    "publisher": "dobredomy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-newsletter-115423e4f1",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/png",
+          "byteLength": 61287,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/webp",
+          "byteLength": 23380,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-2122c17c71",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-jpg-b3083b8576",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 66219,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        },
+        {
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/webp",
+          "byteLength": 14602,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "decoded": {
+            "width": 640,
+            "height": 373
+          },
+          "declaredMismatch": false,
+          "aspect": 1.715818
+        }
+      ],
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-newsletter-598a2abb68",
+      "caption": "Newsletter",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/png",
+          "byteLength": 55569,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        },
+        {
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/webp",
+          "byteLength": 18930,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash"
+    },
+    {
+      "id": "asset-pallas-elewacja-boczna-7778967efc",
+      "caption": "Pallas · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Pallas · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Pallas · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-e3-jpg-b7364c1032",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_e3.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 38957,
+          "byteHash": "650bd7b44da4b4fe278b608627883effe9543f140c336365a25ae5696c8aa147",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-pallas-e3-jpg-b7364c1032",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-elewacja-boczna-b6a5726f34",
+      "caption": "Pallas · Elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Pallas · Elewacja boczna\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Pallas · Elewacja boczna\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-e2-jpg-55554b48dd",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_e2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 37414,
+          "byteHash": "f3aa915086096b26e7b10f40b467cd11e3b736c52d65d121bd857cbd534f6819",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-pallas-e2-jpg-55554b48dd",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-elewacja-przod-e2a74584d1",
+      "caption": "Pallas · Elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Pallas · Elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Pallas · Elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-e1-jpg-590a010ff8",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_e1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 66627,
+          "byteHash": "97f713b7eddf4d035a91955e7cff66ba47b5c7f9c36629959e8f5df95f0c3c52",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-pallas-e1-jpg-590a010ff8",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-elewacja-ty-fbe7819104",
+      "caption": "Pallas · Elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Pallas · Elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Pallas · Elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-e4-jpg-e72039ba4c",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_e4.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 65182,
+          "byteHash": "0bc69a42d882668e017401bfc9396910173f23ae62e0e1c9588c9362e184d5bc",
+          "decoded": {
+            "width": 709,
+            "height": 309
+          },
+          "declaredMismatch": false,
+          "aspect": 2.294498
+        }
+      ],
+      "selectedVariantId": "var-pallas-e4-jpg-e72039ba4c",
+      "selectionReason": "only variant (709x309, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-przekroje-4b90bcfd38",
+      "caption": "Pallas · Przekroje",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Pallas · Przekroje\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-p1-jpg-2664819e0e",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_p1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 101134,
+          "byteHash": "6b4928ed5b79783e11a31a4d1ee72c278b94fd0ed71f1e502f6254485395abc5",
+          "decoded": {
+            "width": 1428,
+            "height": 865
+          },
+          "declaredMismatch": false,
+          "aspect": 1.650867
+        }
+      ],
+      "selectedVariantId": "var-pallas-p1-jpg-2664819e0e",
+      "selectionReason": "only variant (1428x865, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-rzut-dzia-ki-2d3f3b931c",
+      "caption": "Pallas · Rzut działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Pallas · Rzut działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-s-jpg-f877c3535d",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_s.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 55660,
+          "byteHash": "1b28ed83f099b1e7fa9fcdf4aac666a8e6bbf14224599ebdcff588365a0cf5aa",
+          "decoded": {
+            "width": 1100,
+            "height": 953
+          },
+          "declaredMismatch": false,
+          "aspect": 1.15425
+        }
+      ],
+      "selectedVariantId": "var-pallas-s-jpg-f877c3535d",
+      "selectionReason": "only variant (1100x953, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-rzut-parter-fc36a6440b",
+      "caption": "Pallas · Rzut parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Pallas · Rzut parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Pallas · Rzut parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-r1-jpg-25e17d0067",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_r1.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 198524,
+          "byteHash": "8544ae4be16028ed7a48f20d00881e7e9ec11bf90e1354e2c5fb16e85c75066e",
+          "decoded": {
+            "width": 1727,
+            "height": 1261
+          },
+          "declaredMismatch": false,
+          "aspect": 1.369548
+        }
+      ],
+      "selectedVariantId": "var-pallas-r1-jpg-25e17d0067",
+      "selectionReason": "only variant (1727x1261, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-rzut-poddasze-c89cc841d0",
+      "caption": "Pallas · Rzut poddasze",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Pallas · Rzut poddasze\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Pallas · Rzut poddasze\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-r2-jpg-f841f4ae93",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_r2.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 212945,
+          "byteHash": "6aec2e5aacf0ceaddd5ca4bf034fac9f00b121c3754eafbd2208299dea694c83",
+          "decoded": {
+            "width": 1727,
+            "height": 1261
+          },
+          "declaredMismatch": false,
+          "aspect": 1.369548
+        }
+      ],
+      "selectedVariantId": "var-pallas-r2-jpg-f841f4ae93",
+      "selectionReason": "only variant (1727x1261, decoded from bytes)"
+    },
+    {
+      "id": "asset-pallas-w1-jpg-5eb15ec3d1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "confidence": 0.4
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-w1-jpg-537a57870a",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/pallas_w1.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 623149,
+          "byteHash": "b2b12875f89bbaf4e3f20b8bac83ae8c517fbb497aaf0ac4e0910eb9acb44132",
+          "decoded": {
+            "width": 1865,
+            "height": 1200
+          },
+          "declaredMismatch": false,
+          "aspect": 1.554167
+        }
+      ],
+      "selectedVariantId": "var-pallas-w1-jpg-537a57870a",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)"
+    },
+    {
+      "id": "asset-prezentacja-e019163552",
+      "caption": "Prezentacja",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 71506,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "decoded": {
+            "width": 417,
+            "height": 565
+          },
+          "declaredMismatch": false,
+          "aspect": 0.738053
+        }
+      ],
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-e25becc350",
+      "caption": "Projekt domu",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/png",
+          "byteLength": 160714,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "decoded": {
+            "width": 315,
+            "height": 203
+          },
+          "declaredMismatch": false,
+          "aspect": 1.551724
+        }
+      ],
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-3774110fb3",
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Pallas",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Pal\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-w1-jpg-p-prslide-10c39a4e30",
+          "url": "https://www.dobredomy.pl/img/projekty/pallas/pallas_w1.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 158269,
+          "byteHash": "5ff2901bf9276264bec97b3a9cd945a225e07556fd11f55fb62aa6355cca1290",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-pallas-w1-jpg-p-prslide-10c39a4e30",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-f236fa5042",
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Pallas",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "ATTIC",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem dwuspadowym Pal\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-pallas-w2-jpg-p-prslide-4f3fdd12cd",
+          "url": "https://www.dobredomy.pl/img/projekty/pallas/pallas_w2.jpg?p=prslide",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 155202,
+          "byteHash": "1d6ebac34777346475a7dbe1664013d9049dad5da078826ee7251c75ea3b9d12",
+          "decoded": {
+            "width": 784,
+            "height": 504
+          },
+          "declaredMismatch": false,
+          "aspect": 1.555556
+        }
+      ],
+      "selectedVariantId": "var-pallas-w2-jpg-p-prslide-4f3fdd12cd",
+      "selectionReason": "only variant (784x504, decoded from bytes)"
+    },
+    {
+      "id": "asset-wycena-fb105e7612",
+      "caption": "Wycena",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/pallas",
+          "mediaType": "image/jpeg",
+          "byteLength": 53872,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "decoded": {
+            "width": 239,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.5975
+        }
+      ],
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "value": 2,
+      "unit": "count",
+      "raw": "2"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.5,
+      "unit": "m",
+      "raw": "8,50 m"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 147.8,
+      "unit": "m2",
+      "raw": "147,80 m²"
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "value": 20.9,
+      "unit": "m2",
+      "raw": "20,90 m²"
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "value": 18.53,
+      "unit": "m",
+      "raw": "18,53 m"
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "value": 22.52,
+      "unit": "m",
+      "raw": "22,52 m"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "value": 40,
+      "unit": "deg",
+      "raw": "40°"
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "value": 4,
+      "unit": "count",
+      "raw": "4"
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "value": 255.4,
+      "unit": "m2",
+      "raw": "255,40 m²"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 147.8,
+      "unit": "m2",
+      "raw": "147,80 m²"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "value": 562.8,
+      "unit": "none",
+      "raw": "562,80 m³"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "roof",
+      "label": "Główny kąt nachylenia dachu",
+      "text": "40°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Ciekawy projekt domu Pallas ucieszy inwestorów posiadających działkę z wjazdem od południa. Układ funkcjonalny projektu Pallas został opracowany z myślą o 4-6-osobowej rodzinie. Na parterze zlokalizowano pokój dzienny połączony z kuchnią i jadalnią, łazienkę, spiżarnię, pomieszczenie gospodarcze oraz dodatkowy pokój. Garaż jednostanowiskowy dostępny poprzez pomieszczenie gospodarcze. Na poddaszu znajdują się trzy przestronne sypialnie, łazienka, pralnia oraz strych, który można zaadaptować na dodatkowy pokój. Centralnie usytuowany kominek pozwala na wykonanie ogrzewania kominkowego. Projekt dostępny w wersji z dwustanowiskowym garażem - Pallas II oraz bez garażu - Pallas III."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [],
+  "documents": [
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/Pliki%20do%20pobrania/pallas_ch.pdf",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "variant": "UNKNOWN",
+      "caption": "Charakterystyka energetyczna",
+      "status": "NOT_FETCHED",
+      "code": "NOT_A_DRAWING"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/Pliki%20do%20pobrania/pallas_pk.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "BASE",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "mediaType": "application/pdf",
+      "byteLength": 62776,
+      "byteHash": "fd163d5370967ba1b451606a0b570bc6ca595c1f803f80c12e392af8ad3bea19",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/Pliki%20do%20pobrania/pallas_pkdwg.dwg",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "variant": "UNKNOWN",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "mediaType": "image/vnd.dwg",
+      "byteLength": 1710048,
+      "byteHash": "ada4b4da70f8d5a49f75ad1bedc70405611664a80401ffc34e5df9ef4ab380bf",
+      "status": "FETCHED"
+    },
+    {
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/pallas/Pliki%20do%20pobrania/pallas_pkl.pdf",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "variant": "MIRRORED",
+      "statedScale": "1:500",
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "mediaType": "application/pdf",
+      "byteLength": 64726,
+      "byteHash": "b0b772bdcfc379345d0351569566224ebcde1b84f0d9b5a29f7e65c33a98d6f8",
+      "status": "FETCHED"
+    }
+  ],
+  "contentHash": "662ef9739d894fcdc69e65bcb8bb093ee3154b3d4a15ed5f55eab76a8db9024b"
+}

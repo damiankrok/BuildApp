@@ -1,0 +1,47 @@
+{
+ "house": "c4-dobredomy-abakus",
+ "publisher": "www.dobredomy.pl",
+ "url": "https://www.dobredomy.pl/projekt/abakus",
+ "packageContentHash": "75eeadff54787709ce4a6046e0a3fcf61f3de0c05fbe5fdf09d49f5b9a1dbee2",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door into the wiatrolap opens onto the covered porch along the bottom edge of the ground-plan picture, and the site-plan picture puts its entry arrow at the bottom; the front elevation (przod) shows that door between two small windows.",
+ "overall": {
+  "widthM": 10.72,
+  "widthPrintedAs": "1072",
+  "depthM": 10.12,
+  "depthPrintedAs": "1012",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Printed on the site-plan picture (rzut dzialki), not on the floor plan, which carries no dimensions. Both figures bound the dashed wall outline: the depth runs from the rear living-room bay to the front wall of the right-hand bedroom block. The roof overhang, the front porch and the rear terraces lie outside the wall outline but inside the same bounding box corners."
+ },
+ "heights": {
+  "buildingHeightM": 6.8,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": 6.36,
+  "upperFloorLevelM": null,
+  "terrainBelowGroundFloorM": 0.45
+ },
+ "outlineShape": "STEPPED",
+ "outlineNote": "Two blocks side by side and offset front-to-back (left block with kitchen and living room sits further back, right bedroom block further forward), plus a shallow living-room bay stepping out of the rear wall; a porch fills the front-left recess and a covered terrace the rear-right recess, all under one roof.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the whole house; one roof covers both offset blocks, the front porch and the rear-right terrace", "levels": 1, "roof": "GABLE", "ridge": "ALONG_FRONT", "lowerThanMain": false },
+  { "name": "rear bay", "role": "BAY", "sideOfMain": "REAR", "position": "rectangular living-room projection on the rear wall, roughly the middle third of the width (left of centre seen from the front), with its own small cross gable", "levels": 1, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": true }
+ ],
+ "garageDoor": { "side": "NONE", "alongShare": null },
+ "entrance": { "side": "FRONT", "alongShare": [0.24, 0.32] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 4, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "REAR": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 0 }
+ },
+ "chimneys": 2,
+ "uncertain": [
+  "The floor plan has no printed dimensions; overall size comes only from the site-plan picture (1072 x 1012 between plot offsets of 400).",
+  "The section prints 681 from terrain (-0,45) to ridge (+6,36); the page text gives 6.8 m.",
+  "The two side elevations are both captioned 'elewacja boczna'; assigned from the plan: two bedroom windows plus a recessed terrace door = RIGHT, two small windows (pantry, kitchen) plus a recessed porch window = LEFT.",
+  "LEFT count of 3 includes the utility-room (pom. gosp.) window that faces left inside the front porch recess; RIGHT count of 3 includes the living-room door that faces right inside the rear terrace recess. Without those recessed openings the gable walls have 2 each.",
+  "The rear gable over the living-room bay is the roof of a ground-level projection in a single-storey house; it is listed as a body, not as a dormer."
+ ]
+}

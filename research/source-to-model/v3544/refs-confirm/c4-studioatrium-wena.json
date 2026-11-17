@@ -1,0 +1,49 @@
+{
+ "house": "c4-studioatrium-wena",
+ "publisher": "www.studioatrium.pl",
+ "url": "https://www.studioatrium.pl/projekty-domow/Wena,738.html",
+ "packageContentHash": "c11dcec0d011f30315affd691c84909b61157412b0aad4dfd063ce1020cc6bb4",
+ "reader": "source-only reader (publisher pictures + page facts); no analyzer, solver or model output was run or seen",
+ "readOn": "2026-11-17",
+ "frontPlanEdge": "BOTTOM",
+ "frontHow": "The entrance door of room 1 opens through the bottom wall of the ground plan into the recessed corner porch (entry arrows at the bottom-right corner), the page says the ridge is perpendicular to the road, and the elevation with the entrance door is the narrow gable wall.",
+ "overall": {
+  "widthM": 8.80,
+  "widthPrintedAs": "8.80",
+  "depthM": 11.20,
+  "depthPrintedAs": "11.20 (within 15.20 = 11.20 + 4.00)",
+  "basis": "PRINTED_ON_PLAN",
+  "includes": "Width 8.80 is the gable (front) wall. Depth 11.20 is the walled house; the plan's overall 15.20 and the page text 'dlugosc budynku 15,20 m' take in MORE: a 4.00 deep open rear terrace with a screen wall. The upper floor is wider than the ground floor: a box projecting 1.30 over the left wall makes it 10.10 (printed on the attic plan); that overhang is not in the 8.80."
+ },
+ "heights": {
+  "buildingHeightM": 8.46,
+  "buildingHeightBasis": "PAGE_TEXT",
+  "ridgeAboveGroundFloorM": null,
+  "upperFloorLevelM": null,
+  "terrainBelowGroundFloorM": null
+ },
+ "outlineShape": "RECTANGLE",
+ "outlineNote": "A narrow rectangle 8.80 x 11.20 with its gable to the front; the front-right corner is cut out as a recessed entrance porch under the main roof (one corner column), and the rear terrace is open.",
+ "bodies": [
+  { "name": "main", "role": "MAIN", "sideOfMain": "NA", "position": "the whole house", "levels": 2, "roof": "GABLE", "ridge": "FRONT_TO_BACK", "lowerThanMain": false }
+ ],
+ "garageDoor": { "side": "NONE", "alongShare": null },
+ "entrance": { "side": "FRONT", "alongShare": [0.81, 0.93] },
+ "sides": {
+  "FRONT": { "elevationPublished": true, "openingsGround": 2, "openingsUpper": 2, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "REAR": { "elevationPublished": true, "openingsGround": 2, "openingsUpper": 2, "dormers": [], "balconies": 0, "roofWindows": 0 },
+  "LEFT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 1, "dormers": [ { "kind": "WALL", "form": "OTHER", "alongShare": [0.30, 0.70] } ], "balconies": 0, "roofWindows": 0 },
+  "RIGHT": { "elevationPublished": true, "openingsGround": 3, "openingsUpper": 0, "dormers": [], "balconies": 0, "roofWindows": 3 }
+ },
+ "chimneys": 2,
+ "uncertain": [
+  "The four elevation pictures are captioned only 'Elewacja domu Wena - 1..4'; sides were assigned from the plans: 1 = FRONT (gable with entrance door and slot window), 2 = RIGHT (long side with the porch recess at its left end and roof windows), 3 = REAR (gable with the living-room glazing), 4 = LEFT (long side with the timber box).",
+  "No section is published; only the page's building height 8.46 m is available, and what it is measured from is not stated.",
+  "The LEFT dormer is a flat-roofed timber-clad box (attic room 5, 4.50 long) that projects 1.30 beyond the left wall and overhangs the terrace doors; it is recorded as a WALL dormer of form OTHER rather than as a separate body.",
+  "RIGHT ground count of 3 = two windows (room 1 and room 7) plus the small window of room 4 that faces right inside the entrance porch recess; on the elevation the recess shows only as a dark slot, so 2 is possible.",
+  "RIGHT roofWindows 3 = two roof windows low on the slope plus one small one near the ridge, which may be a roof-access hatch.",
+  "The upper gable openings (two on the front, two on the rear) have railings in front of them and no balcony slab on the attic plan; they are taken as French balconies, so balconies is 0.",
+  "REAR ground count of 2 = the room-7 window and the large glazed unit with a door in the living room, counted as one opening.",
+  "The stone-clad block beside the rear terrace on elevations 2 and 4 is the terrace screen wall, not part of the walled house."
+ ]
+}

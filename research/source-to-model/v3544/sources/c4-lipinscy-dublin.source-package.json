@@ -1,0 +1,1359 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0",
+  "id": "src-lipinscy-pl-366f4f610a",
+  "canonicalUrl": "https://lipinscy.pl/projekt/dublin",
+  "fetchedUrl": "https://lipinscy.pl/projekt/dublin/",
+  "pageHash": "582cc7679522b06a42ac9653f4f808bc2357dc75901b14745cd983909b1919ba",
+  "project": {
+    "name": "Projekt Dublin - Lipińscy Domy",
+    "publisher": "lipinscy.pl"
+  },
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.3.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-039e55c041",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcp350-og1-ms-6ca18994b5",
+          "url": "https://lipinscy.pl/upload/media/projects/36284/dcp350_og1_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 195624,
+          "byteHash": "b32db1d0648d35888c1904167f4124ec430f15d84273a6712f738acd4ad55801",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcp350-og1-ms-6ca18994b5",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-4aab683e49",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcp350-fr2-ms-1be82147eb",
+          "url": "https://lipinscy.pl/upload/media/projects/36282/dcp350_fr2_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 178651,
+          "byteHash": "e76c017ec43376669afa8cb8878a507d9336f7e3719ac3fcb4a238ad59271fc4",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcp350-fr2-ms-1be82147eb",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-5c4cff8cdc",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-dcp350-fr1-ms-cfa60b46c2",
+          "url": "https://lipinscy.pl/upload/media/projects/36280/dcp350_fr1_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 191500,
+          "byteHash": "9e94cf95e12c82a503ec3bc1562acaeff943870018d2df69c4e3a1d5d3e6fc41",
+          "decoded": {
+            "width": 1280,
+            "height": 849
+          },
+          "declaredMismatch": false,
+          "aspect": 1.507656
+        }
+      ],
+      "selectedVariantId": "var-dcp350-fr1-ms-cfa60b46c2",
+      "selectionReason": "only variant (1280x849, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-64bc72931d",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-36280-projects-thumb-gallery-small-jpeg-6d1c14c858",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/37/thumb_36280_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 3200,
+          "byteHash": "4f3a25d9ffe0c0bf5c7c9b4a277cc44fb1e11c8b066da4c76a35094d064b2c00",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-36280-projects-thumb-gallery-small-jpeg-6d1c14c858",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-6b72bf9376",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Dublin przekrój\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Przekrój\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-px-pdf-c311ec8789",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/25110/dcp350-ec348_px-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 10008,
+          "byteHash": "451f9daf4eefa636917afa15198ee876bdfb0850fff53cb8472e403ac5b5b078",
+          "decoded": {
+            "width": 770,
+            "height": 503
+          },
+          "declaredMismatch": false,
+          "aspect": 1.530815
+        },
+        {
+          "id": "var-thumb-25110-crossviewpdf-thumb-png-22b9dc2eec",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25110_crossviewpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 44124,
+          "byteHash": "dfcd86ef11df48a121bdb13b32e035ccda1a0364e2d76fe70c0075987ca22981",
+          "decoded": {
+            "width": 340,
+            "height": 222
+          },
+          "declared": {
+            "width": 770,
+            "height": 503
+          },
+          "declaredMismatch": true,
+          "aspect": 1.531532
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-px-pdf-c311ec8789",
+      "selectionReason": "largest decoded raster of 2 variants: 770x503 over 340x222"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-845765623a",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Dublin wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Dublin wymiary działki\")",
+          "confidence": 0.84
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Wymiary działki\")",
+          "confidence": 0.62
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-rd-500-pdf-799072e0f4",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/26867/dcp350-ec348_rd_500-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 9479,
+          "byteHash": "90619f50c218434960b043e86dedd6a719bbb18e9c9d233516c81113f54fa339",
+          "decoded": {
+            "width": 770,
+            "height": 737
+          },
+          "declaredMismatch": false,
+          "aspect": 1.044776
+        },
+        {
+          "id": "var-thumb-26867-plotpdf-thumb-png-c25410bfe4",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26867_plotpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 60458,
+          "byteHash": "dca2a34b3f25167140057388a9bdf376862509b06535c34ad5dae4fe8469b098",
+          "decoded": {
+            "width": 340,
+            "height": 325
+          },
+          "declared": {
+            "width": 770,
+            "height": 737
+          },
+          "declaredMismatch": true,
+          "aspect": 1.046154
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-rd-500-pdf-799072e0f4",
+      "selectionReason": "largest decoded raster of 2 variants: 770x737 over 340x325"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-8763c99ac6",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Parter 89,24 m²\")",
+          "confidence": 0.64
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-r1-pdf-b4dccf98cd",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/32911/dcp350-ec348_r1-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 45456,
+          "byteHash": "b2a98fdacb685634a433c8dd20649604343e2170e701c7267acfc37ff37d6bc5",
+          "decoded": {
+            "width": 863,
+            "height": 1000
+          },
+          "declaredMismatch": false,
+          "aspect": 0.863
+        },
+        {
+          "id": "var-thumb-32911-floorplanpdf-thumb-png-75b1484149",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32911_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 143554,
+          "byteHash": "352a7eb86f5599ab8b7c4bb13de7283d8a099a0e51b2226674fed457a86e2c95",
+          "decoded": {
+            "width": 340,
+            "height": 394
+          },
+          "declared": {
+            "width": 863,
+            "height": 1000
+          },
+          "declaredMismatch": true,
+          "aspect": 0.862944
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-r1-pdf-b4dccf98cd",
+      "selectionReason": "largest decoded raster of 2 variants: 863x1000 over 340x394"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-acd421ce92",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-36284-projects-thumb-gallery-small-jpeg-4210a2ff21",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/37/thumb_36284_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 3208,
+          "byteHash": "ab5474339738c2673747c4bad1b72259164b2f1c245d7a8607559e30acb57d45",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-36284-projects-thumb-gallery-small-jpeg-4210a2ff21",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-d1dab7dc85",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-36282-projects-thumb-gallery-small-jpeg-9ccc3b767b",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/37/thumb_36282_projects_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 3191,
+          "byteHash": "50b2f66739b5f0f3c9ac3b809ef64a1f6fc32f6075a39d3e671c7b42751636ae",
+          "decoded": {
+            "width": 120,
+            "height": 80
+          },
+          "declaredMismatch": false,
+          "aspect": 1.5
+        }
+      ],
+      "selectedVariantId": "var-thumb-36282-projects-thumb-gallery-small-jpeg-9ccc3b767b",
+      "selectionReason": "only variant (120x80, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-elewacja-lewa-8e1b16eb3a",
+      "caption": "Gotowy projekt domu Dublin elewacja lewa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 19129 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Dublin elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-19129-facades-thumb-gallery-small-jpeg-df2b82d4db",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19129_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 1870,
+          "byteHash": "384c69df18c230f8acab265acea6b2f40bcf09bc22cb0887fbc665d304c55bd9",
+          "decoded": {
+            "width": 119,
+            "height": 70
+          },
+          "declaredMismatch": false,
+          "aspect": 1.7
+        }
+      ],
+      "selectedVariantId": "var-thumb-19129-facades-thumb-gallery-small-jpeg-df2b82d4db",
+      "selectionReason": "only variant (119x70, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-elewacja-prawa-725599cbd8",
+      "caption": "Gotowy projekt domu Dublin elewacja prawa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20918 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Dublin elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-20918-facades-thumb-gallery-small-jpeg-f7216a648a",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20918_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 1568,
+          "byteHash": "8b41de36ed8120283679c935c800ae16062018c5656d2287ca7218b919c87c29",
+          "decoded": {
+            "width": 120,
+            "height": 71
+          },
+          "declaredMismatch": false,
+          "aspect": 1.690141
+        }
+      ],
+      "selectedVariantId": "var-thumb-20918-facades-thumb-gallery-small-jpeg-f7216a648a",
+      "selectionReason": "only variant (120x71, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-elewacja-przod-e1b322b4d7",
+      "caption": "Gotowy projekt domu Dublin elewacja przód",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 18234 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Dublin elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-18234-facades-thumb-gallery-small-jpeg-0bd4a555a7",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18234_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 2984,
+          "byteHash": "b13f387833b27073cf34ad080348e6296f4683ab891628e4a8763946022057b1",
+          "decoded": {
+            "width": 119,
+            "height": 84
+          },
+          "declaredMismatch": false,
+          "aspect": 1.416667
+        }
+      ],
+      "selectedVariantId": "var-thumb-18234-facades-thumb-gallery-small-jpeg-0bd4a555a7",
+      "selectionReason": "only variant (119x84, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-elewacja-ty-95d866f9d9",
+      "caption": "Gotowy projekt domu Dublin elewacja tył",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"facades\" in \"thumb 20023 facades thumb gallery small\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Dublin elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-20023-facades-thumb-gallery-small-jpeg-7c5f2d2a12",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20023_facades_thumb_gallery_small.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 3054,
+          "byteHash": "6cfaea0657e361d07c403591b3a4b16a89d38bd79f4d70cf2817e745eb5cab1b",
+          "decoded": {
+            "width": 119,
+            "height": 85
+          },
+          "declaredMismatch": false,
+          "aspect": 1.4
+        }
+      ],
+      "selectedVariantId": "var-thumb-20023-facades-thumb-gallery-small-jpeg-7c5f2d2a12",
+      "selectionReason": "only variant (119x85, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-f25403cec4",
+      "caption": "Gotowy projekt domu Dublin",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.81
+        },
+        {
+          "dimension": "storey",
+          "signal": "context",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Piętro 72,74 m²\")",
+          "confidence": 0.6
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-r2-pdf-d8b9972708",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/32913/dcp350-ec348_r2-pdf",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 26125,
+          "byteHash": "3e36aeea02a07f4f2f95f15388865e4ab335260f21883ae0f5d0df1dc6084b0d",
+          "decoded": {
+            "width": 817,
+            "height": 664
+          },
+          "declaredMismatch": false,
+          "aspect": 1.230422
+        },
+        {
+          "id": "var-thumb-32913-floorplanpdf-thumb-png-ce824de70d",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32913_floorplanpdf_thumb.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 107099,
+          "byteHash": "738b80d2f89e9326a7d56deecb63d3905ec9ede58843bcbffab2724d85e2fe23",
+          "decoded": {
+            "width": 340,
+            "height": 276
+          },
+          "declared": {
+            "width": 817,
+            "height": 664
+          },
+          "declaredMismatch": true,
+          "aspect": 1.231884
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-r2-pdf-d8b9972708",
+      "selectionReason": "largest decoded raster of 2 variants: 817x664 over 340x276"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-przekroj-74641b97b6",
+      "caption": "Gotowy projekt domu Dublin przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Dublin przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-25110-crossviewpdf-thumb-gallery-big-v2-pn-051a0ecdfb",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25110_crossviewpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 1418908,
+          "byteHash": "94e6af3f18a04b2dc821a1000d57acd0c7bafd6e93982c15b28b37ccd8ef9551",
+          "decoded": {
+            "width": 736,
+            "height": 481
+          },
+          "declaredMismatch": false,
+          "aspect": 1.530146
+        }
+      ],
+      "selectedVariantId": "var-thumb-25110-crossviewpdf-thumb-gallery-big-v2-pn-051a0ecdfb",
+      "selectionReason": "only variant (736x481, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-przekroj-db2ba4973e",
+      "caption": "Gotowy projekt domu Dublin przekrój",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroj\" in \"Gotowy projekt domu Dublin przekrój\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-25110-crossviewpdf-thumb-gallery-small-png-fc90803cf2",
+          "url": "https://lipinscy.pl/upload/media/crossviewpdf/0001/26/thumb_25110_crossviewpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 5738,
+          "byteHash": "04c5d637e86d27c625c9a1976bba351de3bccfcee7374ee2e9b71d1993d760f3",
+          "decoded": {
+            "width": 119,
+            "height": 78
+          },
+          "declaredMismatch": false,
+          "aspect": 1.525641
+        }
+      ],
+      "selectedVariantId": "var-thumb-25110-crossviewpdf-thumb-gallery-small-png-fc90803cf2",
+      "selectionReason": "only variant (119x78, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-rzut-parter-5ce719dbef",
+      "caption": "Gotowy projekt domu Dublin rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32911-floorplanpdf-thumb-gallery-big-v2-pn-da91d71958",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32911_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 2516221,
+          "byteHash": "af9b17b8aced8f4d0557869e6649635252e5e669dd288ea26d6e7a9ddc961ecd",
+          "decoded": {
+            "width": 736,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 0.862837
+        }
+      ],
+      "selectedVariantId": "var-thumb-32911-floorplanpdf-thumb-gallery-big-v2-pn-da91d71958",
+      "selectionReason": "only variant (736x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-rzut-parter-b9bfb070eb",
+      "caption": "Gotowy projekt domu Dublin rzut Parter",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Gotowy projekt domu Dublin rzut Parter\")",
+          "confidence": 0.87
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32911-floorplanpdf-thumb-gallery-small-png-6cfe21a213",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32911_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 20330,
+          "byteHash": "11b51d5ba9d85de97082a453521263357dd9a176e8ca8f1b8e364c80bfab5c1f",
+          "decoded": {
+            "width": 120,
+            "height": 139
+          },
+          "declaredMismatch": false,
+          "aspect": 0.863309
+        }
+      ],
+      "selectedVariantId": "var-thumb-32911-floorplanpdf-thumb-gallery-small-png-6cfe21a213",
+      "selectionReason": "only variant (120x139, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-rzut-pietro-56e6e9a761",
+      "caption": "Gotowy projekt domu Dublin rzut Piętro",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32913-floorplanpdf-thumb-gallery-small-png-ef8403e28d",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32913_floorplanpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 15408,
+          "byteHash": "344ff0c35533cf8d278433959f1b5861db6fd98eac04ebc170010a00e3ecfb8e",
+          "decoded": {
+            "width": 120,
+            "height": 98
+          },
+          "declaredMismatch": false,
+          "aspect": 1.22449
+        }
+      ],
+      "selectedVariantId": "var-thumb-32913-floorplanpdf-thumb-gallery-small-png-ef8403e28d",
+      "selectionReason": "only variant (120x98, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-rzut-pietro-94dd54ad18",
+      "caption": "Gotowy projekt domu Dublin rzut Piętro",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"piętro\" / \"first floor\" is an upper storey (matched \"pietro\" in \"Gotowy projekt domu Dublin rzut Piętro\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-32913-floorplanpdf-thumb-gallery-big-v2-pn-34004a58ed",
+          "url": "https://lipinscy.pl/upload/media/floorplanpdf/0001/33/thumb_32913_floorplanpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 1764039,
+          "byteHash": "1121115912c8ff10ee15d8dd9dc1781a3932f598528fb64349b977d870ea5509",
+          "decoded": {
+            "width": 736,
+            "height": 598
+          },
+          "declaredMismatch": false,
+          "aspect": 1.230769
+        }
+      ],
+      "selectedVariantId": "var-thumb-32913-floorplanpdf-thumb-gallery-big-v2-pn-34004a58ed",
+      "selectionReason": "only variant (736x598, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-wymiary-dzia-ki-3a8262aa1b",
+      "caption": "Gotowy projekt domu Dublin wymiary działki ",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Dublin wymiary działki \")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Dublin wymiary działki \")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26867-plotpdf-thumb-gallery-small-png-18b247f986",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26867_plotpdf_thumb_gallery_small.png",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 7776,
+          "byteHash": "96c4ad53fd542df3111abea985cc3b107a9011bfe09e29aaf100917eeca55ad2",
+          "decoded": {
+            "width": 120,
+            "height": 115
+          },
+          "declaredMismatch": false,
+          "aspect": 1.043478
+        }
+      ],
+      "selectedVariantId": "var-thumb-26867-plotpdf-thumb-gallery-small-png-18b247f986",
+      "selectionReason": "only variant (120x115, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-dublin-wymiary-dzia-ki-f23d21dfb6",
+      "caption": "Gotowy projekt domu Dublin wymiary działki",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "caption",
+          "detail": "\"wymiary\" / \"dimensions\" is the dimensioned copy (matched \"wymiary\" in \"Gotowy projekt domu Dublin wymiary działki\")",
+          "confidence": 0.76
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Gotowy projekt domu Dublin wymiary działki\")",
+          "confidence": 0.84
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-thumb-26867-plotpdf-thumb-gallery-big-v2-png-31f6cbf182",
+          "url": "https://lipinscy.pl/upload/media/plotpdf/0001/27/thumb_26867_plotpdf_thumb_gallery_big_v2.png",
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/png",
+          "byteLength": 2076715,
+          "byteHash": "c822b1b94e682f37db6099b3cd516141633ef7ad690397e0038145e2c4f1f4c9",
+          "decoded": {
+            "width": 736,
+            "height": 704
+          },
+          "declaredMismatch": false,
+          "aspect": 1.045455
+        }
+      ],
+      "selectedVariantId": "var-thumb-26867-plotpdf-thumb-gallery-big-v2-png-31f6cbf182",
+      "selectionReason": "only variant (736x704, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-domu-luton-54e6bdc37c",
+      "caption": "Gotowy projekt domu Luton",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-thumb-8817-projects-thumb-jpeg-b5893ad00a",
+          "url": "https://lipinscy.pl/upload/media/projects/0001/09/thumb_8817_projects_thumb.jpeg",
+          "discoveredVia": "IMG_LAZY_ATTR:img[data-src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 32484,
+          "byteHash": "b752f316134cc49ce24397ff22cee483e8bf616ea1e9ec23e3d2fb9967612bf0",
+          "decoded": {
+            "width": 340,
+            "height": 227
+          },
+          "declared": {
+            "width": 1280,
+            "height": 854
+          },
+          "declaredMismatch": true,
+          "aspect": 1.497797
+        }
+      ],
+      "selectedVariantId": "var-thumb-8817-projects-thumb-jpeg-b5893ad00a",
+      "selectionReason": "only variant (340x227, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-domu-dublin-5b27fd97ab",
+      "caption": "Projekt domu Dublin",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja przód\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Gotowy projekt domu Dublin elewacja przód\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-e1-ms-b2f7d5d17f",
+          "url": "https://lipinscy.pl/upload/media/facades/18234/dcp350-ec348_e1_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 22987,
+          "byteHash": "2a644d2857c244f66ecad664b1798292fee913ebdb9a0ef2031bb6c5e4062138",
+          "decoded": {
+            "width": 569,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.4225
+        },
+        {
+          "id": "var-thumb-18234-admin-jpeg-721c117d69",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/19/thumb_18234_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 10556,
+          "byteHash": "f734bc48652bb4974ee2f497ce84e1b95f3eb3cc189669d27b3cded74feb0bc0",
+          "decoded": {
+            "width": 200,
+            "height": 141
+          },
+          "declared": {
+            "width": 569,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.41844
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-e1-ms-b2f7d5d17f",
+      "selectionReason": "largest decoded raster of 2 variants: 569x400 over 200x141"
+    },
+    {
+      "id": "asset-projekt-domu-dublin-5ca4c57934",
+      "caption": "Projekt domu Dublin",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_LEFT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja lewa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"lewa\" / \"left\" is the left side (matched \"lewa\" in \"Gotowy projekt domu Dublin elewacja lewa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-e2-ms-f1348e6ca1",
+          "url": "https://lipinscy.pl/upload/media/facades/19129/dcp350-ec348_e2_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 12309,
+          "byteHash": "892f4f8442def481b97073662a56553af644ced2049e025f8c969b7d266b7439",
+          "decoded": {
+            "width": 682,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.705
+        },
+        {
+          "id": "var-thumb-19129-admin-jpeg-f09d561a98",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/20/thumb_19129_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 5300,
+          "byteHash": "c29e364c95eb001d37690d6612c4e522f71421bd74a69b79f7d3bdeeb2ab5ad6",
+          "decoded": {
+            "width": 199,
+            "height": 117
+          },
+          "declared": {
+            "width": 682,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.700855
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-e2-ms-f1348e6ca1",
+      "selectionReason": "largest decoded raster of 2 variants: 682x400 over 199x117"
+    },
+    {
+      "id": "asset-projekt-domu-dublin-cbb0ae57ed",
+      "caption": "Projekt domu Dublin",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja tył\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Gotowy projekt domu Dublin elewacja tył\")",
+          "confidence": 0.86
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-e3-ms-132edc1db4",
+          "url": "https://lipinscy.pl/upload/media/facades/20023/dcp350-ec348_e3_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 24611,
+          "byteHash": "d2fed111121c0258ae7f88ace1f7bbf7863e235e862493b930a81bd9ac44fad8",
+          "decoded": {
+            "width": 562,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.405
+        },
+        {
+          "id": "var-thumb-20023-admin-jpeg-f411b995df",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20023_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 11339,
+          "byteHash": "f5bf0dddd0a4d8ddc82f1eeaf472ecb8dc0a63cb464d972840fa37841b6e6026",
+          "decoded": {
+            "width": 200,
+            "height": 142
+          },
+          "declared": {
+            "width": 562,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.408451
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-e3-ms-132edc1db4",
+      "selectionReason": "largest decoded raster of 2 variants: 562x400 over 200x142"
+    },
+    {
+      "id": "asset-projekt-domu-dublin-f54d47d2b9",
+      "caption": "Projekt domu Dublin",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_RIGHT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Gotowy projekt domu Dublin elewacja prawa\")",
+          "confidence": 0.87
+        },
+        {
+          "dimension": "document",
+          "signal": "context",
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "confidence": 0.64
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"prawa\" / \"right\" is the right side (matched \"prawa\" in \"Gotowy projekt domu Dublin elewacja prawa\")",
+          "confidence": 0.81
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-dcp350-ec348-e4-ms-3be525475c",
+          "url": "https://lipinscy.pl/upload/media/facades/20918/dcp350-ec348_e4_ms",
+          "discoveredVia": "ANCHOR_HREF:a[href][lightbox]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 8809,
+          "byteHash": "a9dcfa64a4cdff6f62a02e26f31b3d517b59b6ed2b198f819accce3a4e0cad59",
+          "decoded": {
+            "width": 676,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 1.69
+        },
+        {
+          "id": "var-thumb-20918-admin-jpeg-524a2b8388",
+          "url": "https://lipinscy.pl/upload/media/facades/0001/21/thumb_20918_admin.jpeg",
+          "discoveredVia": "IMG_SRC:img[src]@https://lipinscy.pl/projekt/dublin",
+          "mediaType": "image/jpeg",
+          "byteLength": 3995,
+          "byteHash": "652f759e78c0795e07a670f04d12a4c3256f4a994c1320e9932b519116500b6c",
+          "decoded": {
+            "width": 199,
+            "height": 118
+          },
+          "declared": {
+            "width": 676,
+            "height": 400
+          },
+          "declaredMismatch": true,
+          "aspect": 1.686441
+        }
+      ],
+      "selectedVariantId": "var-dcp350-ec348-e4-ms-3be525475c",
+      "selectionReason": "largest decoded raster of 2 variants: 676x400 over 199x118"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 119,
+      "unit": "m2",
+      "raw": "119m²"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto",
+      "value": 164.08,
+      "unit": "m2",
+      "raw": "164,08m²"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 131,
+      "unit": "m2",
+      "raw": "131m²"
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Kąt nachylenia dachu",
+      "value": 30,
+      "unit": "deg",
+      "raw": "30°"
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "value": 142.47,
+      "unit": "m2",
+      "raw": "142,47m²"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu Dublin to nowoczesny budynek z pełnym piętrem i skośnym dachem dwuspadowym - funkcjonalny, wygodny dom dwukondygnacyjny, o zwartej bryle, z wyraźnym podziałem na część dzienną i nocną. Na parterze zaplanowano zamkniętą, dużą kuchnię, obszerny salon doświetlony dużym, narożnym oknem, gabinet, pomieszczenie gospodarcze i łazienkę. Piętro przeznaczono na trzy ustawne sypialnie, wygodną łazienkę oraz pomieszczenie gospodarcze, mogące służyć jako pralnia. Ozdobą domu jest taras od strony ogrodowej, który dzięki przeszkleniu staje się przedłużeniem salonu. Przy budynku przewidziano garaż na jedno auto. Jasna elewacja została urozmaicona drewnianymi akcentami, co nadaje budynku nowoczesnego rysu. Projekt przewiduje energooszczędne rozwiązania, dzięki czemu pozwala na oszczędności w ogrzewaniu oraz zdrowy klimat wnętrz bez przeciągów poprzez zastosowanie rekuperacji. Duże okna, przez które wpada naturalne światło, podkreślają nowoczesny charakter projektu i nastawienie projektantów na zapewnienie jak największego komfortu mieszkańcom. Poprzednia nazwa projektu: Dbały - EC348."
+    },
+    {
+      "key": "roof",
+      "label": "Kąt nachylenia dachu",
+      "text": "30°"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Nowoczesny dom piętrowy, z dachem dwuspadowym, z dużym narożnikowym przeszkleniem salonu, mieści trzy sypialnie, gabinet, trzy łazienki, garaż."
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "https://lipinscy.pl/projekt/dublin/Projekt domu Dublin to nowoczesny budynek z pełnym piętrem i skośnym dachem dwuspadowym - funkcjonalny, wygodny dom dwukondygnacyjny, o zwartej bryle, z wyraźnym podziałem na część dzienną i nocną. Na parterze zaplanowano zamkniętą, dużą kuchnię, obszerny salon doświetlony dużym, narożnym oknem, gabinet, pomieszczenie gospodarcze i łazienkę. Piętro przeznaczono na trzy ustawne sypialnie, wygodną łazienkę oraz pomieszczenie gospodarcze, mogące służyć jako pralnia. Ozdobą domu jest taras od strony ogrodowej, który dzięki przeszkleniu staje się przedłużeniem salonu. Przy budynku przewidziano garaż na jedno auto. Jasna elewacja została urozmaicona drewnianymi akcentami, co nadaje budynku nowoczesnego rysu. Projekt przewiduje energooszczędne rozwiązania, dzięki czemu pozwala na oszczędności w ogrzewaniu oraz zdrowy klimat wnętrz bez przeciągów poprzez zastosowanie rekuperacji. Duże okna, przez które wpada naturalne światło, podkreślają nowoczesny charakter projektu i nastawienie projektantów na zapewnienie jak największego komfortu mieszkańcom.<br> Poprzednia nazwa projektu: Dbały - EC348."
+    }
+  ],
+  "publishedRooms": [],
+  "failures": [
+    {
+      "stage": "ROLE",
+      "target": "https://lipinscy.pl/upload/media/projects/0001/37/a0c651106b71dfbd4f7306cb9422572bc75f53fa.jpeg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://lipinscy.pl/upload/media/projects/36280/dcp350_fr1_ms: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "df864b7d747fbc4797a60295ffa0747003a82ffb04ce8694d87d6bb895276c66"
+}
