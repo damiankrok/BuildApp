@@ -1,20 +1,21 @@
-v3.54.4 confirmation protocol seal — written 2026-11-17T05:19:27Z, before any confirmation house was processed by the described path
-frozen code commit: a6ac849a665a0cb41f5762752c626e77d430b981
+v3.54.4 confirmation protocol seal — written 2026-11-17T05:31:34Z, before any confirmation house was processed by the described path
+frozen code commit: 3c531aee0e4f269e0df079c1daf06ca99affc96d
+(sealed first on a6ac849a665a0cb41f5762752c626e77d430b981 at 05:19Z; sealed again after a move of build.ts between packages and two comment edits, with no behaviour change, found by the architecture tests)
 model: claude-sonnet-5-5
 
 sha256 of the frozen files:
 9bd563c891356e154110d203ceddb418592ea24a866e79d9f4742a5789888485  packages/analysis-service/src/house/read.ts
 02e3d30903e58339d4f75ceeb51e7a5c00638112b38a6d6cec17b711a7829ab7  packages/analysis-service/src/house/review.ts
-75be9d02806ecc1618be6548df3f230d1bad4d6ff2afc9a3b8447b3a1814f788  packages/analysis-service/src/house/describe.ts
+446939afe8fe7f642760d96f62c2ca06483aeb7d7be5a2f55a1fdba03a4e840d  packages/analysis-service/src/house/describe.ts
+7cdedd0905bfbb1384615a0adcbe3c4d148831be69cb30dc038f0db471430ed0  packages/analysis-service/src/house/build.ts
 83bdb5207369a105957ff30ee29fb556882a5c89dab2444388d165444159a515  packages/analysis-service/src/house/pictures.ts
 9e07b8466ada036f58c2adbc3a2f1a2bccb90a7aff6c5ac6e03886a50513e3e6  packages/analysis-service/src/house/measure.ts
 5b097678ee9cd46d2e50372ba5702e8cd44ae30e4b799b7904e85ce7fdea63b1  packages/reconstruction/src/house/document.ts
 919b739836c11b86559cbb8a20c923c5c42a0fd4b3ff4d67ad9b96657d194ecd  packages/reconstruction/src/house/resolve.ts
 256e0f30b933ab0ec283619a2017d0781a798b1de0c70252d038257e58bb0734  packages/reconstruction/src/house/program.ts
-c49caf435e0010d4922808bbba038c67ad6a91d7bd9793f5f574d49f33ede218  packages/reconstruction/src/house/build.ts
 678f73da22f999ffae463a1c662097ed87a45b49a8923a2ed2b0498ff821168e  packages/reconstruction/src/house/poly.ts
-341e058469648c4ff6cecc0c1180e8226fb42718d954391f7cfef55af55875ec  packages/reconstruction/src/v2/reconstruct-v2.ts
-73e76628ea39f56d4298d81189ae2a830c9b92af770e7acdef7e66b9c1a37f9d  packages/reconstruction/src/v2/roof-datum.ts
+3ccc41ac35659963ef90324ebea609added28ae601c699636ae1335063576deb  packages/reconstruction/src/v2/reconstruct-v2.ts
+bda51b68b31466619ed0f879a617206b6bc3f7d4bdd40fee77d1505af444a24f  packages/reconstruction/src/v2/roof-datum.ts
 8642bae051dd436a403bfc72095f1ec1b7a0de8870364016b20104daa19c06b8  research/source-to-model/v3544/house-run.ts
 6795833bfa9fec1a3dfadf8884a273b624a197c031f0a97bbc1d0841a2b9394a  research/source-to-model/v3544/score.ts
 91dfa4f57d33da167120ee991ccb342431b40c087afe0c7a635db8ebd21ef51f  stage-reports/artifacts/v3544/PROTOCOL_V3544.md
