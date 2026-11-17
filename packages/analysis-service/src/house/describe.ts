@@ -14,8 +14,10 @@ import { parseModel, serializeModel } from '@buildapp/model'
 import { compileBuilding } from '@buildapp/geometry'
 import { buildMobileSceneBundle } from '@buildapp/mobile-scene'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
-import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, buildHouse, housePoly, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
-import type { BuiltHouse, HouseDocument } from '@buildapp/reconstruction'
+import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, housePoly, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
+import type { HouseDocument } from '@buildapp/reconstruction'
+import { buildHouse } from './build.js'
+import type { BuiltHouse } from './build.js'
 import { measureScene } from './measure.js'
 import type { SceneMeasure } from './measure.js'
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, levelLiteralToMetres, literalToMetres } from './read.js'
@@ -30,7 +32,7 @@ const idOk = (s: string): boolean => /^[A-Za-z0-9][A-Za-z0-9_.:-]{0,79}$/.test(s
 const r1 = (v: number): number => Math.round(v * 10) / 10
 const LEVEL_MARKS = new Set(['GROUND_FLOOR', 'UPPER_FLOOR', 'RIDGE', 'EAVES', 'TERRAIN', 'FLOOR_BELOW_ZERO'])
 
-/** A height printed on a section ("272", "8,58", "858") to metres: a bare whole number is centimetres. */
+/** A height printed on a section (a decimal number of metres, or a bare whole number) to metres: a bare whole number is centimetres. */
 function heightLiteral(literal: string): number | null {
   const t = literal.trim().replace(/\s+/g, '')
   if (/^\d+[.,]\d+m?$/.test(t)) return Number(t.replace('m', '').replace(',', '.'))

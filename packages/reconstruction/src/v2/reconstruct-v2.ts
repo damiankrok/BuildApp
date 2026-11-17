@@ -320,6 +320,8 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // with that independent scale (`layout.ts` `axisLadder`, since v3.54.2 candidate 3, then unversioned); (b) roof features a
 // validated correction names are built into the building (`roof-feature.ts`). Without consulted evidence and without
 // corrections the geometry is the 2.43.0 geometry; the model hash is compared apart from this version (the candidate's).
+// 2.45.0 (v3.54.4): a level mark above the published building height is not used (`levelDatumsAbovePublishedHeight`): a
+// section mark misread ten metres too high no longer becomes a storey. Without a published height nothing changes.
 export const SOLVER_V2_VERSION = '2.45.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */

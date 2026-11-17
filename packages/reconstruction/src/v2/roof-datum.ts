@@ -163,9 +163,9 @@ export function topDatumBelowPublishedHeight(input: {
 export const PUBLISHED_HEIGHT_OVER_TOLERANCE_M = 0.3
 
 /**
- * v3.54.4 (a section whose marks +8,13, +6,49 and +3,04 were read as +18,11, +16,49 and +12,04: the stroke of the level
- * marker before the digits taken for a digit 1; the top one became a storey 18 m high under a page that publishes a
- * building 8,60 m tall). `topDatumBelowPublishedHeight` refuses a top datum BELOW what the published height leaves; this
+ * v3.54.4 (a section whose level marks were each read ten metres too high: the stroke of the level marker before the
+ * digits taken for a digit 1; the top one became a storey twice as tall as the building the page publishes).
+ * `topDatumBelowPublishedHeight` refuses a top datum BELOW what the published height leaves; this
  * is the other side. The published building height is measured from the terrain, which lies at or below ±0,00, so no
  * floor, eave or ridge of the building stands higher above ±0,00 than that height. A level mark above it (by more than
  * a rounding of the page) is not a height of this building — a misread, a mark of a mast or of another drawing — and is

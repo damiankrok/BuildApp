@@ -10,9 +10,8 @@ import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
 import { createEmptyModel } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import type { HouseDocument } from './document.js'
-import { HOUSE_BUILDER_LABEL, houseProgram } from './program.js'
-import type { HouseProgram } from './program.js'
+import { HOUSE_BUILDER_LABEL, houseProgram } from '@buildapp/reconstruction'
+import type { HouseDocument, HouseProgram } from '@buildapp/reconstruction'
 
 export type KernelRefusal = { id: string | null; type: string; codes: string[]; message: string; dropped: string[] }
 export type BuiltHouse = HouseProgram & { model: CanonicalBuildingModel; fitted: BuildingCommand[]; kernelRefusals: KernelRefusal[]; complete: boolean }
