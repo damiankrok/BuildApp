@@ -20,9 +20,11 @@ import type { HouseBody, HouseDocument, HouseGeometry, HouseParameterRecord, Num
 import { TRACE_CODES } from './document.js'
 import { bbox, canonical, clipConvex, clipHalfPlane, contains, edgeOf, isSimple, offset, onBoundary, pt, sharedStretches, signedArea } from './poly.js'
 import type { P2 } from './poly.js'
+import { outlineSteps } from './steps.js'
+import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.2.0' as const
+export const HOUSE_BUILDER_VERSION = '0.3.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
@@ -170,8 +172,18 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const box = bbox(b.poly)
     const fills = Math.abs(signedArea(b.poly)) / Math.max(1e-9, (box.x1 - box.x0) * (box.z1 - box.z0))
     const roofPoly = b.roof.kind !== 'FLAT' && fills >= ROOF_RECTANGLE_FILL && fills < 1 - 1e-6 ? [pt(box.x0, box.z0), pt(box.x1, box.z0), pt(box.x1, box.z1), pt(box.x0, box.z1)] : b.poly
+    // v3.54.7: a gable end with a frame has no verge overhang — the frame is the roof's edge, in the outer plane
+    const framedSides = new Set<string>((g.frames ?? []).filter((f) => f.bodyId === b.id).map((f) => f.side))
+    const sideOfEdge = (e: { a: P2; b: P2; u: P2 }): string | undefined => {
+      const m = { x: (e.a.x + e.b.x) / 2, z: (e.a.z + e.b.z) / 2 }
+      if (Math.abs(e.u.x) > 0.99) return Math.abs(m.z - box.z0) < 0.05 ? 'FRONT' : Math.abs(m.z - box.z1) < 0.05 ? 'REAR' : undefined
+      if (Math.abs(e.u.z) > 0.99) return Math.abs(m.x - box.x0) < 0.05 ? 'LEFT' : Math.abs(m.x - box.x1) < 0.05 ? 'RIGHT' : undefined
+      return undefined
+    }
     const dist = roofPoly.map((_, i) => {
       const e = edgeOf(roofPoly, i)
+      const s0 = sideOfEdge(e)
+      if (s0 && framedSides.has(s0)) return 0
       const mine = ridgeOf.get(b.id) ?? 0
       const along = bodies.filter((o) => o.id !== b.id && (ridgeOf.get(o.id) ?? 0) >= mine - 1e-6).reduce((s, o) => s + sharedStretches(e.a, e.b, o.poly).reduce((q, [lo, hi]) => q + hi - lo, 0), 0)
       return along > e.len * 0.5 ? 0 : overhang
@@ -241,17 +253,31 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
 
   // --- the walls each body builds: the taller body first, whole; a lower one only where no taller one already stands ---
   type Body = (typeof bodies)[number]
-  type Phys = { id: string; body: Body; a: P2; b: P2; len: number; u: P2; out: P2; edge: number; atStartVertex: boolean; atEndVertex: boolean }
+  type Phys = { id: string; body: Body; a: P2; b: P2; len: number; u: P2; out: P2; edge: number; atStartVertex: boolean; atEndVertex: boolean; /** v3.54.7: a solid return (a step of the outline), as thick as the step is deep */ pierM?: number }
   const phys: Phys[] = []
+  // v3.54.7 — the steps of a body's outline narrower than two walls are its returns: the ring runs along the recessed
+  // line (`core`) and each step is one solid wall as thick as it is deep (`steps.ts`)
+  const coreOf = new Map<string, P2[]>()
+  const stepsOf = new Map<string, OutlineStep[]>()
+  for (const b of bodies) {
+    if (b.role === 'BAY') {
+      coreOf.set(b.id, b.poly)
+      continue
+    }
+    const r = outlineSteps(b.poly, thick(b.role))
+    coreOf.set(b.id, r.core)
+    stepsOf.set(b.id, r.steps)
+  }
   const ringed = new Set<string>()
   const order = [...bodies].filter((b) => planesOf.has(b.id)).sort((p, q) => (ridgeOf.get(q.id) ?? 0) - (ridgeOf.get(p.id) ?? 0) || (p.role === 'MAIN' ? -1 : q.role === 'MAIN' ? 1 : Math.abs(signedArea(q.poly)) - Math.abs(signedArea(p.poly))))
   order.forEach((b, k) => {
     const earlier = order.slice(0, k)
     let whole = true
     const mine: Phys[] = []
-    for (let i = 0; i < b.poly.length; i += 1) {
-      const e = edgeOf(b.poly, i)
-      const shared = earlier.flatMap((o) => sharedStretches(e.a, e.b, o.poly)).sort((p, q) => p[0] - q[0])
+    const ring = coreOf.get(b.id) ?? b.poly
+    for (let i = 0; i < ring.length; i += 1) {
+      const e = edgeOf(ring, i)
+      const shared = earlier.flatMap((o) => sharedStretches(e.a, e.b, coreOf.get(o.id) ?? o.poly)).sort((p, q) => p[0] - q[0])
       const built: Array<[number, number]> = []
       let at = 0
       for (const [lo, hi] of shared) {
@@ -266,6 +292,13 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     }
     if (whole) ringed.add(b.id)
     phys.push(...mine)
+    ;(stepsOf.get(b.id) ?? []).forEach((st, k) => {
+      // the step's face is an edge of the body's own outline: its direction and outward normal are that edge's
+      const at = b.poly.findIndex((q, n) => Math.hypot(q.x - st.a.x, q.z - st.a.z) < 1e-6 && Math.hypot(b.poly[(n + 1) % b.poly.length].x - st.b.x, b.poly[(n + 1) % b.poly.length].z - st.b.z) < 1e-6)
+      if (at < 0) return
+      const e = edgeOf(b.poly, at)
+      phys.push({ id: `w-${b.id}-ret-${k}`, body: b, a: e.a, b: e.b, len: e.len, u: e.u, out: e.out, edge: -1 - k, atStartVertex: false, atEndVertex: false, pierM: r6(st.depthM) })
+    })
   })
   // a host wall of the document (an edge of a level's outline) is a stretch of one built wall
   type Host = { id: string; level: number; index: number; body: Body; a: P2; b: P2; len: number; u: P2; out: P2; phys: Phys; shift: number }
@@ -275,6 +308,14 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const e = edgeOf(poly, i)
       const m = { x: (e.a.x + e.b.x) / 2, z: (e.a.z + e.b.z) / 2 }
       const w = phys.find((x) => x.body.storeys.includes(level) && x.u.x * e.u.x + x.u.z * e.u.z > 0.99 && sharedStretches(x.a, x.b, [e.a, e.b]).length > 0 && Math.abs((m.x - x.a.x) * x.out.x + (m.z - x.a.z) * x.out.z) < 0.03 && (m.x - x.a.x) * x.u.x + (m.z - x.a.z) * x.u.z > -0.03 && (m.x - x.a.x) * x.u.x + (m.z - x.a.z) * x.u.z < x.len + 0.03)
+      // v3.54.7: the sides of a step are inside its return: they are built, as the return's ends
+      const onReturn = !w && phys.some((x) => {
+        if (!x.pierM || !x.body.storeys.includes(level)) return false
+        const v = (m.x - x.a.x) * -x.out.x + (m.z - x.a.z) * -x.out.z
+        const t = (m.x - x.a.x) * x.u.x + (m.z - x.a.z) * x.u.z
+        return v > -0.03 && v < x.pierM + 0.03 && t > -0.03 && t < x.len + 0.03
+      })
+      if (onReturn) return void used(`geometry.outlines[${level}].polygon[${i}]`, 'houseProgram/returns', [])
       if (!w) return void refuse(`geometry.outlines[${level}].polygon[${i}]`, 'WRONG_BINDING', 'this edge of the outline lies on no wall of a body that has a storey here')
       hosts.push({ id: `wall-${level}-${i}`, level, index: i, body: w.body, a: e.a, b: e.b, len: e.len, u: e.u, out: e.out, phys: w, shift: (e.a.x - w.a.x) * w.u.x + (e.a.z - w.a.z) * w.u.z })
     })
@@ -405,6 +446,68 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     planesOut.push({ id: p.id, bodyId: p.bodyId, key: p.key })
   }
 
+  // --- v3.54.7: gable frames — a verge board along each rake of a body's gable end, on the roof's edge in its outer plane
+  const SIDE_N: Record<string, P2> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, LEFT: { x: -1, z: 0 }, RIGHT: { x: 1, z: 0 } }
+  for (const f of g.frames ?? []) {
+    const path = `geometry.frames[${f.id}]`
+    const band = need(f.bandM, `${path}.bandM`)
+    const depth = need(f.depthM, `${path}.depthM`)
+    const own = planes.filter((q) => q.bodyId === f.bodyId)
+    const n = SIDE_N[f.side]
+    if (band === undefined || depth === undefined) continue
+    if (own.length === 0 || !n) {
+      refuse(path, 'WRONG_BINDING', `body ${f.bodyId} has no roof planes to edge`)
+      continue
+    }
+    const dotN = (q: P2): number => q.x * n.x + q.z * n.z
+    const edge = Math.max(...own.flatMap((q) => q.boundary.map(dotN)))
+    const ids: string[] = []
+    for (const pl of own) {
+      const on = pl.boundary.filter((q) => dotN(q) >= edge - 0.01)
+      if (on.length < 2) continue
+      // the rake: from its low end (the eaves) to its high end, on the plane's top surface in the outer plane
+      const ends = on.map((q) => ({ q, y: topAt(pl, q) })).sort((p, q) => p.y - q.y)
+      const hi = ends[ends.length - 1]
+      // the frame stands on the body's walls: its low end is where the rake crosses the side wall's outer face, not the
+      // end of the eaves' overhang
+      const bodyBox = bbox(bodies.find((x) => x.id === f.bodyId)?.poly ?? pl.boundary)
+      const across = (q: P2): number => (n.x === 0 ? q.x : q.z)
+      const [c0, c1] = n.x === 0 ? [bodyBox.x0, bodyBox.x1] : [bodyBox.z0, bodyBox.z1]
+      const lo0 = ends[0]
+      const ca = across(lo0.q)
+      const cb = across(hi.q)
+      const target = ca < c0 ? c0 : ca > c1 ? c1 : ca
+      const t = Math.abs(cb - ca) < 1e-9 ? 0 : Math.min(1, Math.max(0, (target - ca) / (cb - ca)))
+      const loQ = { x: lo0.q.x + (hi.q.x - lo0.q.x) * t, z: lo0.q.z + (hi.q.z - lo0.q.z) * t }
+      const lo = { q: loQ, y: topAt(pl, loQ) }
+      if (hi.y - lo.y < 0.3) continue
+      const run = Math.hypot(hi.q.x - lo.q.x, hi.q.z - lo.q.z)
+      const rise = hi.y - lo.y
+      const L = Math.hypot(run, rise)
+      const cos = run / L
+      const width = r6(band * cos)
+      // the band hangs under the roof's top surface: its centreline half its width below the rake, square to it, and half
+      // its depth in from the outer plane
+      const h = { x: (hi.q.x - lo.q.x) / run, z: (hi.q.z - lo.q.z) / run }
+      const down = { h: -(rise / L) * (width / 2), y: -(run / L) * (width / 2) }
+      const inX = -n.x * (depth / 2)
+      const inZ = -n.z * (depth / 2)
+      const P = (e: { q: P2; y: number }) => ({ x: r6(e.q.x + h.x * down.h + inX), y: r6(e.y + down.y), z: r6(e.q.z + h.z * down.h + inZ) })
+      // its square low end stands on the wall: the band's lower outer corner, not its top edge, meets the side wall's face
+      const shift = Math.min(run, 2 * Math.abs(down.h))
+      const start = P({ q: { x: lo.q.x + h.x * shift, z: lo.q.z + h.z * shift }, y: lo.y + (rise / run) * shift })
+      const id = `${f.id}-${pl.key}`
+      push({ type: 'createLinearSolid', id, levelId: pl.levelId, hostId: pl.id, start, end: P(hi), width, depth: r6(depth), role: 'VERGE_BOARD', materialId: MATERIALS_V2.member })
+      ids.push(id)
+    }
+    if (ids.length === 0) {
+      refuse(path, 'REPRESENTATION_LIMIT', `no rake of body ${f.bodyId}'s roof ends on its ${f.side.toLowerCase()} side`)
+      continue
+    }
+    used(`${path}.bandM`, 'houseProgram/gableFrame', ids, f.bandM)
+    used(`${path}.depthM`, 'houseProgram/gableFrame', ids, f.depthM)
+  }
+
   // --- per level: the slab; per body: its walls, from the floor of its lowest storey to its roof --------------------------
   for (const [level, poly] of [...outlineAt.entries()].sort((p, q) => p[0] - q[0])) {
     const l = levelAt.get(level)
@@ -422,9 +525,10 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   const ownsStart = new Set<string>()
   const ownsEnd = new Set<string>()
   const rank = new Map(order.map((b, k) => [b.id, k]))
-  for (const w of phys) {
+  for (const w of phys.filter((x) => !x.pierM)) {
     for (const [end, at] of [['START', w.a], ['END', w.b]] as const) {
       const hit = phys
+        .filter((x) => !x.pierM)
         .filter((x) => (rank.get(x.body.id) ?? 0) < (rank.get(w.body.id) ?? 0))
         .map((x) => ({ x, d: Math.abs((at.x - x.a.x) * x.out.x + (at.z - x.a.z) * x.out.z), t: (at.x - x.a.x) * x.u.x + (at.z - x.a.z) * x.u.z, par: Math.abs(x.u.x * w.u.x + x.u.z * w.u.z) }))
         .filter((q) => q.d < 0.05 && q.t > -0.05 && q.t < q.x.len + 0.05 && q.par < 0.9)
@@ -447,7 +551,8 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const high = Math.max(ridge, ...planes.filter((p) => extra.includes(p.id)).map((p) => p.datum.y))
     const height = r6(high - base.elevation + (b.roof.kind === 'FLAT' ? 0 : OVER_RIDGE_M))
     const topProfile = { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: [...own.map((p) => p.id), ...extra] }
-    const mine = phys.filter((w) => w.body.id === b.id)
+    const mine = phys.filter((w) => w.body.id === b.id && !w.pierM)
+    const piers = phys.filter((w) => w.body.id === b.id && w.pierM)
     mine.forEach((w, n) => {
       const prev = joinedBefore(mine, n)
       const closes = n === mine.length - 1 && n > 0 && joined(w, mine[0])
@@ -458,7 +563,12 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const endJunction = closes ? { kind: 'CORNER' as const, with: { wallId: mine[0].id, end: 'START' as const }, owner: cornerOwner(w, mine[0]) === w ? ('SELF' as const) : ('OTHER' as const) } : eHost ? { kind: 'BUTT' as const, againstWallId: eHost.id } : undefined
       push({ type: 'createWall', id: w.id, levelId: base.id, start: w.a, end: w.b, thickness: r6(thick(w.body.role)), height, baseOffset: 0, kind: 'EXTERIOR', topProfile, materialId: MATERIALS_V2.wall, ...(startJunction ? { startJunction } : {}), ...(endJunction ? { endJunction } : {}) })
     })
-    wallIdsOf.set(b.id, mine.map((w) => w.id))
+    // the returns: solid, as thick as their step is deep, under the same roof; they meet the ring at its outer face
+    for (const w of piers) {
+      push({ type: 'createWall', id: w.id, levelId: base.id, start: w.a, end: w.b, thickness: w.pierM as number, height, baseOffset: 0, kind: 'EXTERIOR', topProfile, materialId: MATERIALS_V2.wall })
+      used(`geometry.bodies[${b.id}].outline`, 'houseProgram/returns', [w.id])
+    }
+    wallIdsOf.set(b.id, [...mine, ...piers].map((w) => w.id))
     used(`geometry.bodies[${b.id}].storeys`, 'houseProgram/walls', mine.map((w) => w.id))
   }
   used('geometry.wallThicknessM', 'houseProgram/walls', phys.map((w) => w.id), g.wallThicknessM)
@@ -567,14 +677,49 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       continue
     }
     const door = o.kind !== 'WINDOW'
-    push({ type: 'cutOpening', id: o.id, wallId: q.w.id, kind: door ? 'DOOR' : 'WINDOW', offset: r6(q.from - q.s0), sill: q.sillOnWall, width: r6(width), height: r6(q.height) })
+    // v3.54.7: under a raked or pointed head a door is cut and filled as fixed glazing (a leaf takes a level head only)
+    const glazedHead = !!o.head && o.kind !== 'GARAGE_DOOR'
     const frame = { frameDepth: r6(Math.min(0.12, T * 0.4)), frameInset: r6(Math.min(0.1, T * 0.25)) }
     const panes = Math.max(1, o.panes ?? Math.round(width / 0.9))
-    if (o.kind === 'WINDOW') push({ type: 'placeWindow', id: `${o.id}-window`, openingId: o.id, ...frame, divisions: panes, materialId: MATERIALS_V2.glass })
-    else if (o.kind === 'GARAGE_DOOR') push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', materialId: MATERIALS_V2.gate })
-    else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, assembly: { panels: Array.from({ length: panes }, () => ({ kind: 'GLAZED' as const, fraction: 1 / panes })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
-    else push({ type: 'placeDoor', id: `${o.id}-leaf`, openingId: o.id, ...frame, materialId: MATERIALS_V2.timber })
-    const ids = [o.id, door ? `${o.id}-leaf` : `${o.id}-window`]
+    // v3.54.7 — the head as the elevation draws it: RAKED is one trapezoid; POINTED is two raked halves beside a mullion
+    // (the kernel's head is one straight line): the halves are `<id>` and `<id>--b`, one opening in the record
+    const fill = (id: string, w: number): void => {
+      const pn = Math.max(1, Math.round((panes * w) / Math.max(width, 0.01)))
+      // v3.54.7: a door leaf takes a level head only — under a raked or pointed head the hole is filled with fixed
+      // glazing (the opening's kind is kept; how it opens is not modelled)
+      if (o.kind === 'WINDOW' || glazedHead) push({ type: 'placeWindow', id: `${id}-window`, openingId: id, ...frame, divisions: pn, materialId: MATERIALS_V2.glass })
+      else if (o.kind === 'GARAGE_DOOR') push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', materialId: MATERIALS_V2.gate })
+      else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, assembly: { panels: Array.from({ length: pn }, () => ({ kind: 'GLAZED' as const, fraction: 1 / pn })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
+      else push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, materialId: MATERIALS_V2.timber })
+    }
+    const off = r6(q.from - q.s0)
+    const hd = o.head
+    const far = hd?.kind === 'RAKED' ? need(hd.heightFarM, `${path}.head.heightFarM`) : undefined
+    const apexAt = hd?.kind === 'POINTED' ? need(hd.apexAtM, `${path}.head.apexAtM`) : undefined
+    const apex = hd?.kind === 'POINTED' ? need(hd.apexM, `${path}.head.apexM`) : undefined
+    const ids = [o.id, door && !glazedHead ? `${o.id}-leaf` : `${o.id}-window`]
+    // the head's shape over what was cut (a trim at a corner keeps its slope: heights at the cut ends are on the read line)
+    const hAt = (along: number): number => (hd?.kind === 'RAKED' && far !== undefined ? q.height + ((far - q.height) * (along - (q.agreedFrom - q.s0))) / q.agreedWidth : q.height)
+    const m = OPENING_FIT.pierM
+    if (hd?.kind === 'POINTED' && apexAt !== undefined && apex !== undefined && apexAt - m / 2 > 0.3 && q.agreedWidth - apexAt - m / 2 > 0.3 && Math.abs(width - q.agreedWidth) < 1e-6) {
+      const w1 = r6(apexAt - m / 2)
+      const w2 = r6(q.agreedWidth - apexAt - m / 2)
+      const at1 = q.height + ((apex - q.height) * w1) / apexAt
+      const at2 = q.height + ((apex - q.height) * w2) / (q.agreedWidth - apexAt)
+      push({ type: 'cutOpening', id: o.id, wallId: q.w.id, kind: door && !glazedHead ? 'DOOR' : 'WINDOW', offset: off, sill: q.sillOnWall, width: w1, height: r6(q.height), head: { kind: 'RAKED', heightFar: r6(at1) } })
+      fill(o.id, w1)
+      push({ type: 'cutOpening', id: `${o.id}--b`, wallId: q.w.id, kind: door && !glazedHead ? 'DOOR' : 'WINDOW', offset: r6(off + w1 + m), sill: q.sillOnWall, width: w2, height: r6(at2), head: { kind: 'RAKED', heightFar: r6(q.height) } })
+      fill(`${o.id}--b`, w2)
+      ids.push(`${o.id}--b`)
+      approximated.push({ id: o.id, what: `a pointed head drawn as two raked halves beside a ${m.toFixed(2)} m mullion (the kernel's head is one straight line); the apex ${apex.toFixed(2)} m above the sill is not cut: the halves rise to ${at1.toFixed(2)} and ${at2.toFixed(2)} m` })
+      used(`${path}.head`, 'houseProgram/cutOpening(POINTED as two RAKED)', [o.id, `${o.id}--b`])
+    } else {
+      const head = hd?.kind === 'RAKED' && far !== undefined ? { kind: 'RAKED' as const, heightFar: r6(hAt(off + width)) } : undefined
+      push({ type: 'cutOpening', id: o.id, wallId: q.w.id, kind: door && !glazedHead ? 'DOOR' : 'WINDOW', offset: off, sill: q.sillOnWall, width: r6(width), height: r6(head ? hAt(off) : q.height), ...(head ? { head } : {}) })
+      fill(o.id, width)
+      if (hd?.kind === 'RAKED') used(`${path}.head`, 'houseProgram/cutOpening(RAKED)', [o.id])
+      if (hd?.kind === 'POINTED') refuse(`${path}.head`, 'REPRESENTATION_LIMIT', 'a pointed head too narrow for two halves and a mullion, or trimmed at a corner: cut with a level head at its sides\' height')
+    }
     const dFrom = q.from - q.agreedFrom
     const dWidth = width - q.agreedWidth
     const why = q.notes.join('; ')

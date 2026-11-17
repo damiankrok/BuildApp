@@ -23,7 +23,7 @@ import type { HousePicture, SentPicture } from './pictures.js'
 import type { ConsultantModel, ModelTurn } from '../consult/loop.js'
 
 export const HOUSE_READING_CONTRACT = 'buildapp.house-reading'
-export const HOUSE_READING_VERSION = '0.2.0'
+export const HOUSE_READING_VERSION = '0.3.0'
 export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1, /** v3.54.5: targeted requests for elevation pictures the first reading left undescribed — one per picture, never two for one. */ facadeFollowUps: 4 } as const
 
 export type ReadingStep = 'INVENTORY' | 'PLAN' | 'FACADES' | 'REVIEW'
@@ -235,6 +235,9 @@ export const READING_TOOLS = {
                     bodyId: bodyId,
                     level: { type: 'integer', minimum: 0, maximum: 3, description: 'The storey its sill stands in (0 = ground).' },
                     inFeature: { type: 'string', maxLength: 24, description: 'The id of the dormer it is in, when it is in one.' },
+                    headLeftY: { type: ['number', 'null'], description: 'ONLY when its top edge is not level (a glazing under a roof slope, in a gable): the row of its top edge at its LEFT side. Null for a level head.' },
+                    headRightY: { type: ['number', 'null'], description: 'With headLeftY: the row of its top edge at its RIGHT side.' },
+                    apexX: { type: ['number', 'null'], description: 'ONLY for a glazing whose top rises to a point between its sides (both halves follow the gable): the column of that point; its row is box.y0. Null otherwise.' },
                   },
                 },
               },
@@ -247,11 +250,15 @@ export const READING_TOOLS = {
                   required: ['id', 'kind', 'box', 'bodyId', 'note'],
                   properties: {
                     id: bodyId,
-                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'CHIMNEY', 'BAY', 'OTHER'], description: 'WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves (often with a balcony door). ROOF_DORMER_*: a dormer standing on the slope, set back from the wall, its foot above the eaves. CROSS_GABLE: a front-facing gable as wide as a wing, rising from the facade. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing. Give eavesY and apexY for every dormer and cross gable.' },
-                    box: { ...box, description: 'For a dormer: x0..x1 are the outer faces of its own two side WALLS (not the wider overhang of its roof), y0 its apex, y1 the foot of its front wall. For a balcony: its slab and railing. For a canopy: the roof plate. For a chimney: the stack above the roof.' },
+                    kind: { type: 'string', enum: ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'CHIMNEY', 'BAY', 'OTHER'], description: 'WALL_DORMER_GABLE: a gabled dormer whose front wall continues the facade wall up through the eaves (often with a balcony door). ROOF_DORMER_*: a dormer standing on the slope, set back from the wall, its foot above the eaves. CROSS_GABLE: a front-facing gable as wide as a wing, rising from the facade. CANOPY: a small roof over an open porch. BALCONY: a slab with a railing that PROJECTS in front of the wall. LOGGIA: a balcony or porch RECESSED into the house, behind the plane of the wall or of a frame around it (its sides are walls). GABLE_FRAME: a thick frame edging a gable end — a band along both rakes standing proud of or in front of the gable wall, clearly thicker than a plain roof edge, often continuing down both sides as legs (wall returns) beside a recessed wall or loggia. Give eavesY and apexY for every dormer and cross gable.' },
+                    box: { ...box, description: 'For a dormer: x0..x1 are the outer faces of its own two side WALLS (not the wider overhang of its roof), y0 its apex, y1 the foot of its front wall. For a balcony: its slab and railing. For a loggia: its mouth (the opening in the front plane). For a gable frame: its OUTER outline (y0 the top of the band at the apex, y1 the foot of its legs or the eaves). For a canopy: the roof plate. For a chimney: the stack above the roof.' },
                     bodyId: bodyId,
                     eavesY: { type: ['number', 'null'], description: 'Dormers only: the row where the dormer\'s own roof meets the top of its SIDE WALLS (not the lower tip of its overhanging roof).' },
                     apexY: { type: ['number', 'null'], description: 'Dormers only: the row of its apex or top.' },
+                    bandPx: { type: ['number', 'null'], description: 'GABLE_FRAME only: the thickness of the band along the rakes, in pixels, measured straight down (vertically) from its top edge to its lower edge.' },
+                    legPx: { type: ['number', 'null'], description: 'GABLE_FRAME only: the width of each leg (the frame\'s side running down), in pixels; null when the frame has no legs.' },
+                    legBottomY: { type: ['number', 'null'], description: 'GABLE_FRAME only: the row where its legs end (the ground, a floor, a roof below); null when it has no legs.' },
+                    posts: { type: ['boolean', 'null'], description: 'BALCONY / LOGGIA / CANOPY: true only when the picture SHOWS posts or columns under it; false when none are drawn.' },
                     note: { type: 'string', maxLength: 160 },
                   },
                 },
@@ -313,8 +320,8 @@ export type FacadesAnswer = {
     blind?: boolean
     limits?: string
     bodies: Array<{ bodyId: string; leftX: number; rightX: number; eavesY: number | null; ridgeY: number | null }>
-    openings: Array<{ kind: string; box: BoxPx; bodyId: string; level: number; inFeature?: string }>
-    features: Array<{ id: string; kind: string; box: BoxPx; bodyId: string; eavesY?: number | null; apexY?: number | null; note: string }>
+    openings: Array<{ kind: string; box: BoxPx; bodyId: string; level: number; inFeature?: string; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null }>
+    features: Array<{ id: string; kind: string; box: BoxPx; bodyId: string; eavesY?: number | null; apexY?: number | null; bandPx?: number | null; legPx?: number | null; legBottomY?: number | null; posts?: boolean | null; note: string }>
   }>
   unknowns: string[]
 }
@@ -396,6 +403,7 @@ export function strictTool<T extends { name: string; description: string; input_
 /** One step: at most one billed request (and one transport retry), the answer checked to be the tool call asked for. */
 export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: number, text: string, pictures: SentPicture[], firstTool: { name: string; description: string; input_schema: unknown }, extra: Array<{ label: string; mediaType: string; base64: string; width: number; height: number }> = [], strict = true, /** A smaller tool of the same name, sent once if the provider refuses the first one's grammar (an unbilled refusal). */ fallback?: { name: string; description: string; input_schema: unknown }): Promise<T> {
   let tool = firstTool
+  let strictNow = strict
   const recorded = ctx.replay?.(step, round)
   if (recorded) {
     // a recorded answer speaks of the pictures of ITS request, by number: it is not an answer about other pictures
@@ -423,13 +431,21 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
   let lastError: Error | undefined
   for (let attempt = 0; attempt <= HOUSE_READING_LIMITS.transportRetries && !turn; attempt += 1) {
     try {
-      turn = await ctx.modelFor(step).send({ system: READER_SYSTEM, messages: [{ role: 'user', content }], tools: [strict ? strictTool(tool) : tool], ...(ctx.signal ? { signal: ctx.signal } : {}) })
+      turn = await ctx.modelFor(step).send({ system: READER_SYSTEM, messages: [{ role: 'user', content }], tools: [strictNow ? strictTool(tool) : tool], ...(ctx.signal ? { signal: ctx.signal } : {}) })
     } catch (e) {
       lastError = e as Error
       const reason = (e as { reason?: string }).reason
       // a schema the provider's grammar cannot hold is refused before billing: the smaller tool is sent instead, once
       if (fallback && tool !== fallback && /grammar is too large|too complex/i.test(String((e as Error).message))) {
         tool = fallback
+        attempt -= 1
+        continue
+      }
+      // v3.54.7: when the smaller tool's grammar is refused as well, the whole tool is sent once without a strict
+      // grammar — its answer is held to the schema by the converter, as every non-strict answer is
+      if (strictNow && /grammar is too large|too complex/i.test(String((e as Error).message))) {
+        tool = firstTool
+        strictNow = false
         attempt -= 1
         continue
       }
@@ -512,7 +528,7 @@ ${facts(published)}
 Call describe_facades:
 - levels: every level mark and height printed on the section(s), with what it marks;
 - roofs: the roof of each body;
-- elevations: one entry per elevation picture — EVERY elevation picture listed above gets its own entry. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box, and the roof features (dormers, balconies, canopies, chimneys).
+- elevations: one entry per elevation picture — EVERY elevation picture listed above gets its own entry. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box — for a glazing whose top follows the roof slope, also the rows of its top edge at both sides (headLeftY, headRightY) — and the features: gable frames (a thick band along the rakes, with its band thickness and its legs), loggias and recessed portals (behind the wall plane), balconies (supports only when drawn), dormers, canopies, chimneys.
 A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.
 For each elevation say whether it is blind (no opening at all) and what limits your reading of it.`
   const tool = withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))

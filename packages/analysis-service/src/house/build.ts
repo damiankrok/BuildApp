@@ -28,7 +28,9 @@ const DEPENDS = ['openingId', 'hostId', 'roofOpeningId', 'hostPlaneId', 'wallId'
 export type HeadCap = { heightM: number; why: string }
 export const HEAD_CLEARANCE_M = 0.05
 
-export function headCapFor(cmd: { sill: number; height: number }, kernelMessage: string): { ok: true; cap: HeadCap } | { ok: false; why: string } | undefined {
+export function headCapFor(cmd: { sill: number; height: number; head?: { kind: string } }, kernelMessage: string): { ok: true; cap: HeadCap } | { ok: false; why: string } | undefined {
+  // v3.54.7: a head that is not level is the shape the elevation drew; lowering it to a level line would undo it
+  if (cmd.head && cmd.head.kind !== 'LEVEL') return undefined
   const m = /whose top is only (-?[0-9.]+) m there/.exec(kernelMessage)
   if (!m) return undefined
   const top = Number(m[1])

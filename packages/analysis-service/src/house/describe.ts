@@ -19,7 +19,7 @@ import type { HouseDocument } from '@buildapp/reconstruction'
 import { buildHouse, headCapFor } from './build.js'
 import type { BuiltHouse, HeadCap } from './build.js'
 import { measureScene } from './measure.js'
-import type { SceneMeasure, SceneOpening } from './measure.js'
+import type { SceneMeasure, SceneOpening, SideFeatures } from './measure.js'
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, levelLiteralToMetres, literalToMetres } from './read.js'
 import type { FacadeCoverage, FacadesAnswer, InventoryAnswer, PlanAnswer, Selection } from './read.js'
 import type { SentPicture } from './pictures.js'
@@ -125,7 +125,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
       const features = (e.features ?? []).flatMap((x, j) => {
         const id = idOk(x.id) && !featureIds.has(x.id.toLowerCase()) ? x.id.toLowerCase() : `feature-${j + 1}`
         featureIds.add(id)
-        return [{ id, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.eavesY === 'number' ? { eavesY: r1(x.eavesY * k) } : {}), ...(typeof x.apexY === 'number' ? { apexY: r1(x.apexY * k) } : {}), ...(x.note ? { note: x.note } : {}) }]
+        return [{ id, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.eavesY === 'number' ? { eavesY: r1(x.eavesY * k) } : {}), ...(typeof x.apexY === 'number' ? { apexY: r1(x.apexY * k) } : {}), ...(typeof x.bandPx === 'number' && x.bandPx > 0 ? { bandPx: r1(x.bandPx * k) } : {}), ...(typeof x.legPx === 'number' && x.legPx > 0 ? { legPx: r1(x.legPx * k) } : {}), ...(typeof x.legBottomY === 'number' ? { legBottomY: r1(x.legBottomY * k) } : {}), ...(typeof x.posts === 'boolean' ? { posts: x.posts } : {}), ...(x.note ? { note: x.note } : {}) }]
       })
       const bodies = (e.bodies ?? []).flatMap((b) => {
         const eb = bodyOf(b.bodyId)
@@ -135,7 +135,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
         }
         return [{ bodyId: eb, leftX: r1(Math.min(b.leftX, b.rightX) * k), rightX: r1(Math.max(b.leftX, b.rightX) * k), eavesY: typeof b.eavesY === 'number' ? r1(b.eavesY * k) : null, ridgeY: typeof b.ridgeY === 'number' ? r1(b.ridgeY * k) : null }]
       })
-      const openings = (e.openings ?? []).map((x, j) => ({ id: `o${j + 1}`, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.level === 'number' ? { level: x.level } : {}), ...(x.inFeature && featureIds.has(x.inFeature.toLowerCase()) ? { inFeature: x.inFeature.toLowerCase() } : {}) }))
+      const openings = (e.openings ?? []).map((x, j) => ({ id: `o${j + 1}`, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.level === 'number' ? { level: x.level } : {}), ...(x.inFeature && featureIds.has(x.inFeature.toLowerCase()) ? { inFeature: x.inFeature.toLowerCase() } : {}), ...(typeof x.headLeftY === 'number' && typeof x.headRightY === 'number' ? { headLeftY: r1(x.headLeftY * k), headRightY: r1(x.headRightY * k) } : {}), ...(typeof x.apexX === 'number' ? { apexX: r1(x.apexX * k) } : {}) }))
       const cov = input.coverage?.find((c) => c.pictureId === sent.picture.id)
       elevations.push({ id: `el-${sent.picture.id}`, picture: sent.picture.id, side: e.side, sideHow: e.sideHow ?? '', alternatives: (e.alternatives ?? []).filter((s) => s !== e.side), mirrored: e.mirrored === true, groundY: r1(e.groundY * k), bodies, openings, features, origin: 'API', ...(typeof e.floorY === 'number' ? { floorY: r1(e.floorY * k) } : {}), ...(typeof e.blind === 'boolean' ? { blind: e.blind } : {}), ...(e.limits === 'NONE' || e.limits === 'PARTLY_HIDDEN' || e.limits === 'TOO_SMALL' ? { limits: e.limits } : {}), ...(cov?.readIn ? { readIn: cov.readIn } : {}) })
     })
@@ -260,7 +260,7 @@ export function compileHouse(input: unknown, modelId: string): CompiledHouse {
   const capWhy = new Map<string, string>()
   for (const e of compileErrors) {
     if (e.code !== 'OPENING_ABOVE_WALL_TOP' || !e.objectId) continue
-    const cmd = built.fitted.find((c) => (c as unknown as { type: string; id?: string }).type === 'cutOpening' && (c as unknown as { id?: string }).id === e.objectId) as unknown as { sill: number; height: number } | undefined
+    const cmd = built.fitted.find((c) => (c as unknown as { type: string; id?: string }).type === 'cutOpening' && (c as unknown as { id?: string }).id === e.objectId) as unknown as { sill: number; height: number; head?: { kind: string } } | undefined
     const r = cmd ? headCapFor(cmd, e.message) : undefined
     if (r?.ok) caps.set(e.objectId, r.cap)
     else if (r) capWhy.set(e.objectId, r.why)
@@ -320,7 +320,11 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
     const hei = builtOf(`geometry.openings[${o.id}].heightM`)
     const b = { offsetM: off?.built ?? agreed.offsetM, widthM: wid?.built ?? agreed.widthM, heightM: hei?.fit ? (hei.built ?? agreed.heightM) : agreed.heightM, sillM: agreed.sillM }
     cut += 1
-    if (Math.abs(hole.widthM - b.widthM) > 0.02 || Math.abs(hole.heightM - b.heightM) > 0.02) mismatched += 1
+    // v3.54.7: a raked head's hole is as tall as its taller end; a pointed one as its apex (both measured from the sill)
+    // (what was CUT: a pointed head is two raked halves beside a mullion, whose tops stop short of the apex)
+    const cuts = built.fitted.filter((c) => (c as { type?: string }).type === 'cutOpening' && ((c as { id?: string }).id === o.id || (c as { id?: string }).id === `${o.id}--b`)) as unknown as Array<{ height: number; head?: { kind: string; heightFar?: number } }>
+    const tall = o.head && cuts.length > 0 ? Math.max(...cuts.map((c) => Math.max(c.height, c.head?.heightFar ?? c.height))) : b.heightM
+    if (Math.abs(hole.widthM - b.widthM) > 0.02 || Math.abs(hole.heightM - tall) > 0.02) mismatched += 1
     const fits = [wid?.fit, off?.fit, hei?.fit]
     const fit = (fits.includes('APPROXIMATED') ? 'APPROXIMATED' : fits.includes('ADJUSTED') ? 'ADJUSTED' : 'EXACT') as 'EXACT' | 'ADJUSTED' | 'APPROXIMATED'
     const why = [wid?.why, off?.why, hei?.fit ? hei.why : undefined].filter(Boolean).join('; ') || undefined
@@ -414,6 +418,8 @@ export type LocalMeasure = {
   interiorWalls?: number
   /** v3.54.6: LOCAL's holes by side, measured by the same ruler as the described house's. */
   openings?: SceneOpening[]
+  /** v3.54.7: LOCAL's characteristic features by side, by the same ruler (`sideFeatures`). */
+  sides?: SideFeatures[]
 }
 
 /** How much two ground outlines are the same shape in the same place, each set against its own front-left corner: area in both over area in either. */
@@ -440,7 +446,7 @@ export function outlineOverlap(a: Array<Array<{ x: number; z: number }>>, b: Arr
   }
   return either === 0 ? 0 : both / either
 }
-export type ArbitrationFinding = { fact: string; source: string; local: string; described: string; localOk: boolean; describedOk: boolean }
+export type ArbitrationFinding = { fact: string; source: string; local: string; described: string; localOk: boolean; describedOk: boolean; /** v3.54.7: the side of a characteristic feature (D41). */ featureSide?: string }
 export type ArbitrationCode =
   | 'DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS'
   | 'LOCAL_MEETS_SOURCE'
@@ -467,6 +473,40 @@ export type Arbitration = {
   unknown: string[]
   /** What happens to an interior LOCAL had when the described exterior stands. */
   interior: string
+  /** v3.54.7 (D40/D41): the quality of what was delivered — its characteristic features per side, and the review's defects still open. */
+  quality?: DeliveredQuality
+}
+export type DeliveredQuality = {
+  status: 'FEATURES_CHECKED' | 'FEATURES_PARTIAL' | 'FEATURES_NOT_CHECKED'
+  why: string
+  sides: Array<{ side: string; met: string[]; failing: string[]; openDefects: string[] }>
+  notAssessable: string[]
+}
+
+/**
+ * v3.54.7 — the quality status of the delivered model: every characteristic feature the source shows met by the model
+ * handed back, and no KEY or MAJOR defect of the review left open on it, is FEATURES_CHECKED; a feature failing or a
+ * defect open is FEATURES_PARTIAL and names them; no feature to check is FEATURES_NOT_CHECKED — not "correct". The
+ * review's defects are about the described house: they bind only when it is the one delivered.
+ */
+export function deliveredQuality(decision: Arbitration, defects: readonly ReviewDefectLike[] = []): DeliveredQuality {
+  const who = decision.accepted === 'DESCRIBED' ? 'describedOk' : 'localOk'
+  const bySide = new Map<string, { side: string; met: string[]; failing: string[]; openDefects: string[] }>()
+  const at = (side: string) => bySide.get(side) ?? (bySide.set(side, { side, met: [], failing: [], openDefects: [] }).get(side) as { side: string; met: string[]; failing: string[]; openDefects: string[] })
+  for (const f of decision.findings.filter((x) => x.featureSide)) (f[who] ? at(f.featureSide as string).met : at(f.featureSide as string).failing).push(`${f.fact}: ${decision.accepted === 'DESCRIBED' ? f.described : f.local}`.slice(0, 200))
+  // the last record of each defect stands
+  const last = new Map<string, ReviewDefectLike>()
+  for (const d of defects) last.set(`${d.side}|${d.feature}|${d.meaning}`, d)
+  if (decision.accepted === 'DESCRIBED') for (const d of last.values()) if (d.weight !== 'MINOR' && d.state !== 'IMPROVED' && d.state !== 'MEASURED_PRESENT') at(d.side).openDefects.push(`${d.id} ${d.feature} ${d.meaning} (${d.weight}, ${d.state})`)
+  const sides = [...bySide.values()].sort((p, q) => p.side.localeCompare(q.side))
+  const notAssessable = decision.unknown.filter((u) => /^(FRONT|REAR|LEFT|RIGHT):/.test(u))
+  const checked = decision.findings.some((x) => x.featureSide)
+  const failing = sides.flatMap((x) => x.failing)
+  const open = sides.flatMap((x) => x.openDefects)
+  if (decision.accepted === 'NONE') return { status: 'FEATURES_NOT_CHECKED', why: 'no model was delivered', sides, notAssessable }
+  if (failing.length || open.length) return { status: 'FEATURES_PARTIAL', why: `the delivered model (${decision.accepted}) ${[failing.length ? `fails ${failing.length} characteristic feature(s) the source shows` : '', open.length ? `keeps ${open.length} review defect(s) open` : ''].filter(Boolean).join(' and ')}`, sides, notAssessable }
+  if (!checked) return { status: 'FEATURES_NOT_CHECKED', why: 'no characteristic feature was read or reported for this source: nothing of the form was checked beyond the massing facts', sides, notAssessable }
+  return { status: 'FEATURES_CHECKED', why: `every characteristic feature read on the source is met by the delivered model (${decision.accepted}) and no important review defect is open${notAssessable.length ? `; ${notAssessable.length} side(s) not assessable` : ''}`, sides, notAssessable }
 }
 
 /**
@@ -509,7 +549,66 @@ export function supportedRidge(doc: HouseDocument): { valueM: number; literal: s
  * What neither can be held against (an unbuilt dormer, a held opening) is `unknown`: it limits the model, it does not
  * choose one.
  */
-export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefined, published: Published): Arbitration {
+/**
+ * v3.54.7 (D41) — the characteristic features a source shows on a side, as claims both models are held to by the same
+ * scene ruler (`SideFeatures`): from what was READ on the elevations (a gable frame, a loggia, a balcony drawn without
+ * supports, a glazing whose head follows the roof), and from the defects a review recorded against the source (a frame
+ * MISSING from the model is a frame the source shows). The absence of a feature is never claimed: a model is not
+ * faulted here for a frame the source does not show (that is the review's to find, as an EXTRA defect).
+ */
+export type FeatureClaim = { side: string; feature: 'GABLE_FRAME' | 'LOGGIA' | 'NO_SUPPORTS' | 'SHAPED_GLAZING'; from: string; count?: number }
+export type ReviewDefectLike = { id: string; side: string; feature: string; meaning: string; weight: string; state: string; round: number }
+export function featureClaims(doc: HouseDocument, defects: readonly ReviewDefectLike[] = []): FeatureClaim[] {
+  const out: FeatureClaim[] = []
+  const add = (c: FeatureClaim): void => {
+    if (!['FRONT', 'REAR', 'LEFT', 'RIGHT'].includes(c.side) || out.some((x) => x.side === c.side && x.feature === c.feature)) return
+    out.push(c)
+  }
+  for (const el of doc.observations.elevations) {
+    const view = (doc.verification.views ?? []).find((v) => v.elevation === el.id)
+    const side = String(view?.side ?? el.side)
+    for (const f of el.features) {
+      if (f.kind === 'GABLE_FRAME') add({ side, feature: 'GABLE_FRAME', from: `elevation ${el.id} reads a gable frame (${f.id})` })
+      if (f.kind === 'LOGGIA') add({ side, feature: 'LOGGIA', from: `elevation ${el.id} reads a recessed loggia (${f.id})` })
+      if ((f.kind === 'LOGGIA' || f.kind === 'BALCONY') && f.posts === false) add({ side, feature: 'NO_SUPPORTS', from: `elevation ${el.id} draws ${f.id} without supports` })
+    }
+    const shaped = el.openings.filter((o) => (typeof o.headLeftY === 'number' && typeof o.headRightY === 'number' && Math.abs(o.headLeftY - o.headRightY) > 2) || typeof o.apexX === 'number')
+    if (shaped.length > 0) add({ side, feature: 'SHAPED_GLAZING', from: `elevation ${el.id} reads ${shaped.length} glazing(s) whose head follows the roof (${shaped.map((o) => o.id).join(', ')})`, count: shaped.length })
+  }
+  // the last round's record of a defect is what stands; a defect a correction fixed still says what the source shows
+  for (const d of defects) {
+    if (d.weight === 'MINOR') continue
+    const from = `review defect ${d.id} (round ${d.round}, ${d.weight}): the source shows it on ${d.side.toLowerCase()}`
+    if (d.feature === 'GABLE_FRAME' && d.meaning !== 'EXTRA') add({ side: d.side, feature: 'GABLE_FRAME', from })
+    if (d.feature === 'LOGGIA_OR_RECESS' && d.meaning !== 'EXTRA') add({ side: d.side, feature: 'LOGGIA', from })
+    if (d.feature === 'SUPPORTS' && d.meaning === 'EXTRA') add({ side: d.side, feature: 'NO_SUPPORTS', from })
+    if (d.feature === 'GLAZING_SHAPE' && d.meaning !== 'EXTRA') add({ side: d.side, feature: 'SHAPED_GLAZING', from })
+  }
+  return out
+}
+export function claimMet(c: FeatureClaim, sides: readonly SideFeatures[] | undefined): { ok: boolean; says: string } | undefined {
+  const s = sides?.find((x) => x.side === c.side)
+  if (!sides) return undefined
+  if (!s) return { ok: false, says: 'that side not measured' }
+  switch (c.feature) {
+    case 'GABLE_FRAME':
+      return s.frame ? { ok: true, says: `frame of ${s.frame.pieces} piece(s), ${s.frame.depthM.toFixed(2)} m deep, ${s.frame.bottomY.toFixed(2)}–${s.frame.topY.toFixed(2)} m` } : { ok: false, says: 'no frame on that gable (plain roof edge)' }
+    case 'LOGGIA': {
+      const l = s.balconies.filter((b) => b.recessed && b.posts === 0)
+      return l.length ? { ok: true, says: `${l.length} recessed slab(s) without supports` } : { ok: false, says: s.balconies.length ? `balcony ${s.balconies.map((b) => `${b.id} ${b.recessed ? 'in the plane' : `${b.projectsM.toFixed(2)} m out`}${b.posts ? ` on ${b.posts} post(s)` : ''}`).join(', ')}` : 'no balcony or loggia' }
+    }
+    case 'NO_SUPPORTS': {
+      const p = s.balconies.filter((b) => b.posts > 0)
+      return p.length ? { ok: false, says: `${p.map((b) => `${b.id} on ${b.posts} post(s)`).join(', ')}` } : { ok: true, says: 'no free supports' }
+    }
+    case 'SHAPED_GLAZING': {
+      const need = c.count ?? 1
+      return s.shapedOpenings.length >= need ? { ok: true, says: `${s.shapedOpenings.length} hole(s) with a raked or pointed head` } : { ok: false, says: `${s.shapedOpenings.length} of ${need} hole(s) with a raked or pointed head (the rest level or not cut)` }
+    }
+  }
+}
+
+export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefined, published: Published, review: { defects?: readonly ReviewDefectLike[] } = {}): Arbitration {
   const findings: ArbitrationFinding[] = []
   const g = described.document.geometry
   const m = described.measured
@@ -600,6 +699,17 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
     }
     const theirs = openingsAgainstElevation(read, (local.openings ?? []).filter((x) => x.side === view.side))
     findings.push({ fact: `openings on the ${view.side.toLowerCase()} side`, source: `${read.length} opening(s) on registered elevation ${view.elevation}`, local: `${theirs.matched} of ${read.length} there, ${theirs.extra} not on the elevation`, described: `${mine.matched} of ${read.length} there, ${mine.extra} not on the elevation`, localOk: theirs.ok, describedOk: mine.ok })
+  }
+  // v3.54.7 (D41) — the characteristic features the source shows, each held against both compiled models by one ruler
+  for (const c of featureClaims(described.document, review.defects ?? [])) {
+    const mine = claimMet(c, m.sides)
+    const theirs = claimMet(c, local.sides)
+    if (!mine) continue
+    if (!theirs) {
+      notAssessable.push(`${c.side}: LOCAL's ${c.feature.toLowerCase().replace('_', ' ')} was not measured — not held against ${c.from}`)
+      continue
+    }
+    findings.push({ fact: `${c.feature.toLowerCase().replace('_', ' ')} on the ${c.side.toLowerCase()} side`, source: c.from, local: theirs.says, described: mine.says, localOk: theirs.ok, describedOk: mine.ok, featureSide: c.side })
   }
   // the ridge above ±0,00, from the section: a fact of its own, with or without a height on the page
   const ridge = supportedRidge(described.document)

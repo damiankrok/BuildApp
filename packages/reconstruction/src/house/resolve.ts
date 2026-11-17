@@ -16,14 +16,17 @@ import type { Basis, HouseCheck, HouseDocument, HouseGeometry, HouseObservations
 import { num, unknown } from './document.js'
 import { area, bbox, canonical, contains, edgeOf, isSimple, onBoundary, pt, squareUp, unionTiling } from './poly.js'
 import type { P2 } from './poly.js'
+import { outlineSteps, straightenJogs } from './steps.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.3.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.4.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
   /** Two printed dimensions on the two axes of one plan may differ this much in the scale they give (the drawing is one scale). */
   isotropy: 0.03,
+  /** v3.54.7: the shortest side a shaped hole keeps: a triangle's sharp corner is cut there (said). */
+  openingMinSideM: 0.3,
   /** A dimension line's end counts as standing on the outline's end within this share of the extent (and never under 6 px). */
   dimensionOnOutline: 0.015,
   /** The bodies traced one by one must cover the whole traced outline within this share of its area. */
@@ -260,6 +263,16 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       bodyPolys[raw.length - 1] = bay
       knownDefects.push({ code: 'BAY_SPLIT_FROM_BODY', what: `body ${b.id}: a splayed bay of ${area(bay).toFixed(1)} m² traced inside its outline is built as a body of its own` })
     })
+  })
+  // v3.54.7: a jog of a wall line shallower than a wall is thick is not buildable (the joining wall is consumed by its
+  // corners); the shorter stretch goes onto the line of the longer, and the change is said
+  bodyPolys.forEach((poly, i) => {
+    if (raw[i].role === 'BAY') return
+    const others = bodyPolys.filter((_, k) => k !== i)
+    const j = straightenJogs(poly, RESOLVE.defaults.wallThicknessM, (q) => others.some((o) => onBoundary(o, q, 0.05) >= 0))
+    if (j.jogs.length === 0) return
+    bodyPolys[i] = canonical(j.poly)
+    for (const g of j.jogs) knownDefects.push({ code: 'OUTLINE_JOG_STRAIGHTENED', what: `body ${raw[i].id}: a ${g.offsetM.toFixed(2)} m jog of its wall line at (${g.at.x.toFixed(2)}, ${g.at.z.toFixed(2)}) is shallower than a wall (${RESOLVE.defaults.wallThicknessM} m): the ${g.movedLengthM.toFixed(2)} m stretch is drawn on the line of the ${g.keptLengthM.toFixed(2)} m one` })
   })
   const bad = bodyPolys.findIndex((p) => !isSimple(p))
   if (bad >= 0) {
@@ -716,6 +729,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     return pick ? { h: pick.h, a0: pick.a0, sign: pick.a1 >= pick.a0 ? 1 : -1, cos: pick.cos } : undefined
   }
   const rooflights: HouseGeometry['rooflights'] = []
+  const frames: HouseGeometry['frames'] = []
   const chimneys: HouseGeometry['chimneys'] = []
   /** The slope of a pitched body that falls toward `side`: plan distance from its ridge for a height, and the plan point for an along-position. */
   const slopeToward = (body: HouseGeometry['bodies'][number], side: HouseSide): { half: number; fromRidge: (y: number) => number; at: (along: number, d: number) => P2; ridgeLine: number } | undefined => {
@@ -757,6 +771,39 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     }
     return undefined
   }
+  /**
+   * v3.54.7 — the recess of the body in front of wall `h` over from..to: the body's steps (returns) whose faces stand
+   * out from `h`'s line in its outward direction bound it; with a step on one side only, the recess runs to the end of
+   * the wall's stretch. Its depth is the steps' (the plan's), its span the part of from..to between them.
+   */
+  const recessAt = (h: { a: P2; u: P2; out: P2; len?: number; bodyId?: string }, from: number, to: number): { rect: { x0: number; z0: number; x1: number; z1: number }; depthM: number; why: string } | undefined => {
+    const hl = (h as { len?: number }).len ?? Infinity
+    const steps = raw.flatMap((b, k) => (b.role === 'BAY' ? [] : outlineSteps(bodyPolys[k], D.wallThicknessM).steps))
+      .map((st) => {
+        const nx = st.b.z - st.a.z
+        const nz = -(st.b.x - st.a.x)
+        const l = Math.hypot(nx, nz) || 1
+        const along = [st.a, st.b].map((q) => (q.x - h.a.x) * h.u.x + (q.z - h.a.z) * h.u.z).sort((p, q) => p - q)
+        const v = (st.a.x - h.a.x) * h.out.x + (st.a.z - h.a.z) * h.out.z
+        return { st, cos: Math.abs((nx / l) * h.out.x + (nz / l) * h.out.z), lo: along[0], hi: along[1], v }
+      })
+      .filter((x) => x.cos > 0.99 && Math.abs(x.v - x.st.depthM) < 0.12 && x.st.depthM >= 0.3)
+    if (steps.length === 0) return undefined
+    const mid = (from + to) / 2
+    const left = steps.filter((x) => x.hi <= mid + 0.05).sort((p, q) => q.hi - p.hi)[0]
+    const right = steps.filter((x) => x.lo >= mid - 0.05).sort((p, q) => p.lo - q.lo)[0]
+    if (!left && !right) return undefined
+    const lo = left ? left.hi : 0
+    const hi = right ? right.lo : Number.isFinite(hl) ? hl : to
+    const s0 = Math.max(from, lo)
+    const s1 = Math.min(to, hi)
+    if (s1 - s0 < 0.5 * (to - from)) return undefined
+    const depthM = Math.min(...[left, right].filter((x): x is NonNullable<typeof x> => !!x).map((x) => x.st.depthM))
+    // the span read on the elevation, within the recess; the depth the plan's returns give
+    const p0 = { x: h.a.x + h.u.x * s0, z: h.a.z + h.u.z * s0 }
+    const p1 = { x: h.a.x + h.u.x * s1 + h.out.x * depthM, z: h.a.z + h.u.z * s1 + h.out.z * depthM }
+    return { rect: { x0: r3(Math.min(p0.x, p1.x)), z0: r3(Math.min(p0.z, p1.z)), x1: r3(Math.max(p0.x, p1.x)), z1: r3(Math.max(p0.z, p1.z)) }, depthM, why: `${left ? 'a return on its left' : 'the wall\'s end on its left'}, ${right ? 'a return on its right' : 'the wall\'s end on its right'}` }
+  }
   const featuresBlocked = !bodiesOk || !heightsOk
   for (const r of regs.filter((x) => x.ok)) {
     const { obs, side } = r
@@ -792,6 +839,40 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
           continue
         }
         dormers.push({ id: `dormer-${side.toLowerCase()}-${dormers.filter((d) => d.id.startsWith(`dormer-${side.toLowerCase()}`)).length + 1}`, bodyId: body.id, kind: onWall ? 'WALL_GABLE' : f.kind === 'ROOF_DORMER_GABLE' ? 'ROOF_GABLE' : 'ROOF_SHED', hostWall: at.h.id, fromM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], r3(2 * r.s)), toM: num(r3(from + (a[1] - a[0])), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], r3(2 * r.s)), eaveY: num(r3(r.yOf(eaves)), 'DERIVED', `the row its own roof begins at on elevation ${obs.id}`, [ref], 0.15), ridgeY: num(r3(r.yOf(apex)), 'DERIVED', `its apex on elevation ${obs.id}`, [ref], 0.15), refs: [ref] })
+      } else if (f.kind === 'GABLE_FRAME') {
+        // v3.54.7 — a frame along the rakes of a gable END on this side: the body's ridge must run toward this side
+        const body = bodies.find((b) => b.id === (f.bodyId ?? mainId))
+        const gableHere = !!body && body.roof.kind === 'GABLE' && body.roof.ridgeAxis === (side === 'FRONT' || side === 'REAR' ? 'Z' : 'X')
+        if (!body || !gableHere) {
+          held.push({ ref, code: 'WRONG_BINDING', why: `a gable frame on the ${side.toLowerCase()} side, where ${body ? `body ${body.id} shows no gable end` : 'no body is named'}` })
+          continue
+        }
+        if (frames.some((q) => q.bodyId === body.id && q.side === side)) continue
+        const bandPx = typeof f.bandPx === 'number' ? f.bandPx : undefined
+        if (bandPx === undefined) {
+          held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a gable frame without the thickness of its band: what to build is not read' })
+          continue
+        }
+        // how deep it runs back into the roof: the depth of the returns the plan shows on this side, or not known
+        const k = raw.findIndex((b) => b.id === body.id)
+        const n = SIDE_NORMAL[side]
+        const cen = k >= 0 ? { x: bodyPolys[k].reduce((q, v) => q + v.x, 0) / bodyPolys[k].length, z: bodyPolys[k].reduce((q, v) => q + v.z, 0) / bodyPolys[k].length } : { x: 0, z: 0 }
+        const ret = k >= 0 ? outlineSteps(bodyPolys[k], D.wallThicknessM).steps.filter((st) => Math.abs((st.b.z - st.a.z) * n.x - (st.b.x - st.a.x) * n.z) > 0.99 * Math.hypot(st.b.x - st.a.x, st.b.z - st.a.z) && ((st.a.x + st.b.x) / 2 - cen.x) * n.x + ((st.a.z + st.b.z) / 2 - cen.z) * n.z > 0) : []
+        const depthM = ret.length > 0 ? num(r3(Math.min(...ret.map((x) => x.depthM))), 'DERIVED', `the depth of the returns the plan shows on the ${side.toLowerCase()} side`, [ref]) : num(0.3, 'DEFAULT', 'how far the band runs back into the roof is not on the elevation: a display assumption')
+        frames.push({ id: `frame-${body.id}-${side.toLowerCase()}`, bodyId: body.id, side, bandM: num(r3(bandPx * r.s), 'DERIVED', `its band, ${bandPx.toFixed(0)} px on elevation ${obs.id} at its scale`, [ref], r3(Math.max(0.05, 3 * r.s))), depthM, ...(typeof f.legPx === 'number' ? { legM: num(r3(f.legPx * r.s), 'DERIVED', `its legs on elevation ${obs.id}`, [ref], r3(Math.max(0.05, 3 * r.s))) } : {}), basis: 'DERIVED', refs: [ref] })
+        if (depthM.basis === 'DEFAULT') knownDefects.push({ code: 'FRAME_DEPTH_ASSUMED', what: `${ref}: the frame's depth into the roof is not read; ${depthM.value} m is drawn — a display assumption` })
+      } else if (f.kind === 'LOGGIA') {
+        // a loggia is IN the house: its depth is the recess the plan shows; with none on the plan, nothing is invented
+        const level = levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(f.box.y1) + 0.6).sort((p, q) => q.index - p.index)[0]
+        const at = level ? hostAt(side, level.index, (a[0] + a[1]) / 2, f.bodyId, [a[0], a[1]]) : undefined
+        const from = at ? (at.sign > 0 ? a[0] - at.a0 : at.a0 - a[1]) : 0
+        const rec = at && at.cos >= 0.99 ? recessAt(at.h, from, from + a[1] - a[0]) : undefined
+        if (!level || !at || !rec) {
+          held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a loggia where the plan shows no recess: how deep it goes into the house is not known, and it is not drawn as a projecting balcony' })
+          continue
+        }
+        if (level.index > 0) balconies.push({ id: `balcony-${side.toLowerCase()}-${balconies.length + 1}`, level: level.index, rect: rec.rect, topY: num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey'), thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: [], basis: 'DERIVED', refs: [ref] })
+        knownDefects.push({ code: 'BALCONY_IN_RECESS', what: `${ref}: a loggia in the ${rec.depthM.toFixed(2)} m recess of the ${side.toLowerCase()} wall (${rec.why}), no post` })
       } else if (f.kind === 'BALCONY') {
         const level = levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(f.box.y1) + 0.6).sort((p, q) => q.index - p.index)[0]
         const at = level ? hostAt(side, level.index, (a[0] + a[1]) / 2, f.bodyId, [a[0], a[1]]) : undefined
@@ -805,11 +886,21 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         const q = { x: p1.x + at.h.out.x * D.balconyDepthM, z: p1.z + at.h.out.z * D.balconyDepthM }
         const id = `balcony-${side.toLowerCase()}-${balconies.length + 1}`
         const topY = num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey')
+        // v3.54.7 — a balcony in a recess of the body (the wall it is on stands back between returns that run out to the
+        // outer plane) is a LOGGIA: its slab fills the recess from the wall to the returns' faces, it stands on the walls
+        // and the returns, with no post; its railing is at the mouth. The recess is on the plan; nothing is assumed.
+        const loggia = recessAt(at.h, from, from + a[1] - a[0])
+        if (loggia) {
+          balconies.push({ id, level: level.index, rect: loggia.rect, topY, thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: [], basis: 'DERIVED', refs: [ref] })
+          knownDefects.push({ code: 'BALCONY_IN_RECESS', what: `${ref}: in the ${loggia.depthM.toFixed(2)} m recess of the ${side.toLowerCase()} wall between its returns (${loggia.why}): a loggia, no post` })
+          continue
+        }
         // a balcony over a roofed open zone of the ground plan is that zone's roof: its depth and its posts are on the plan
         const over = level.index > 0 ? zoneAt(at.h, from, from + a[1] - a[0]) : undefined
         if (over && !over.zone.usedBy) {
           over.zone.usedBy = id
-          balconies.push({ id, level: level.index, rect: over.rect, topY, thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: over.posts, basis: 'DERIVED', refs: [ref, over.zone.id] })
+          // v3.54.7: posts only where the picture does not say there are none
+          balconies.push({ id, level: level.index, rect: over.rect, topY, thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: f.posts === false ? [] : over.posts, basis: 'DERIVED', refs: [ref, over.zone.id] })
           continue
         }
         balconies.push({ id, level: level.index, rect: { x0: r3(Math.min(p0.x, q.x)), z0: r3(Math.min(p0.z, q.z)), x1: r3(Math.max(p0.x, q.x)), z1: r3(Math.max(p0.z, q.z)) }, topY: num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey'), thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: [], basis: 'ESTIMATED', refs: [ref] })
@@ -872,7 +963,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
           return Math.abs(ql - ll) * Math.abs(r.s) <= 0.15 && Math.abs(qr - lr) * Math.abs(r.s) <= 0.15 && gap >= -0.02 && gap < RESOLVE.transomM
         })
         if (!up) continue
-        lo.x = { ...lo.x, box: { x0: Math.min(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y0: Math.min(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1), x1: Math.max(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y1: Math.max(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1) } }
+        lo.x = { ...lo.x, box: { x0: Math.min(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y0: Math.min(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1), x1: Math.max(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y1: Math.max(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1) }, ...(typeof up.x.headLeftY === 'number' ? { headLeftY: up.x.headLeftY, headRightY: up.x.headRightY, ...(typeof up.x.apexX === 'number' ? { apexX: up.x.apexX } : {}) } : {}) }
         lo.also.push(`${obs.id}/${up.x.id}`, ...up.also)
         knownDefects.push({ code: 'OPENING_TRANSOM', what: `${obs.id}/${up.x.id} stands over ${obs.id}/${lo.x.id} at its width with less than a lintel (${RESOLVE.transomM} m) between them: the upper light of one opening, cut as one` })
         panels.splice(panels.indexOf(up), 1)
@@ -927,7 +1018,35 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       }
       // what the reading can tell: two pixels of the picture, and the residual its picture registered to the plan with
       const u = r3(Math.min(RESOLVE.elevationAlongM, Math.max(0.05, 2 * r.s, r.res)))
-      openings.push({ id: `opening-${side.toLowerCase()}-${openings.filter((q) => q.id.startsWith(`opening-${side.toLowerCase()}`)).length + 1}`, kind: x.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', level: level.index, hostWall: at.h.id, offsetM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], u), widthM: num(r3(width), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], u), heightM: num(r3(headY - (door && sill < 0.25 ? (level.elevation.value ?? 0) : sillY)), 'DERIVED', `its head and sill rows on elevation ${obs.id}`, [ref], u), sillM: num(door && sill < 0.25 ? 0 : r3(sill), 'DERIVED', door && sill < 0.25 ? 'a door: its threshold at the floor' : `its sill row on elevation ${obs.id} above the floor of its storey`, [ref], u), ...(panes > 1 ? { panes } : {}), refs: [ref, ...also] })
+      // v3.54.7 — a head that is not level, as the elevation draws it: RAKED (its top edge falls from one side to the
+      // other) or POINTED (both sides rise to an apex). The opening's near end is its offset's end on the host wall.
+      const base = door && sill < 0.25 ? (level.elevation.value ?? 0) : sillY
+      let heightNear = headY - base
+      let head: NonNullable<HouseGeometry['openings'][number]['head']> | undefined
+      if (typeof x.headLeftY === 'number' && typeof x.headRightY === 'number') {
+        let yl = r.yOf(x.headLeftY) - base
+        let yr = r.yOf(x.headRightY) - base
+        const nearIsLeft = at.sign > 0
+        // a glazing whose head runs down to its sill is a triangle: a hole needs a side, so its sharp corner is cut at
+        // OPENING_MIN_SIDE_M — an approximation of the shape, said — instead of drawing the whole head level
+        const top = headY - base
+        if (Math.min(yl, yr) > -0.15 && Math.min(yl, yr) < RESOLVE.openingMinSideM && Math.max(yl, yr) <= top + 0.15 && Math.max(yl, yr) >= 2 * RESOLVE.openingMinSideM) {
+          knownDefects.push({ code: 'OPENING_HEAD_CORNER_CUT', what: `${ref}: its head runs down to ${Math.max(0, Math.min(yl, yr)).toFixed(2)} m above its sill (a triangle); the hole's low side is cut at ${RESOLVE.openingMinSideM} m — area added ≈ ${(0.5 * (RESOLVE.openingMinSideM - Math.max(0, Math.min(yl, yr))) * ((a[1] - a[0]) / at.cos) * (RESOLVE.openingMinSideM / Math.max(yl, yr))).toFixed(2)} m²` })
+          if (yl < yr) yl = RESOLVE.openingMinSideM
+          else yr = RESOLVE.openingMinSideM
+        }
+        if (Math.min(yl, yr) < 0.3 || Math.max(yl, yr) > headY - base + 0.15) knownDefects.push({ code: 'OPENING_HEAD_INCONSISTENT', what: `${ref}: its head rows put the top edge ${Math.min(yl, yr).toFixed(2)}–${Math.max(yl, yr).toFixed(2)} m above its sill, outside its own box: the head is drawn level` })
+        else if (typeof x.apexX === 'number' && x.apexX > x.box.x0 + 2 && x.apexX < x.box.x1 - 2) {
+          heightNear = Math.min(yl, yr)
+          const ax = r.alongOf(x.apexX)
+          const apexAt = (nearIsLeft ? ax - a[0] : a[1] - ax) / at.cos
+          head = { kind: 'POINTED', apexAtM: num(r3(apexAt), 'DERIVED', `its apex column on elevation ${obs.id}`, [ref], u), apexM: num(r3(headY - base), 'DERIVED', `its apex row on elevation ${obs.id}`, [ref], u) }
+        } else if (Math.abs(yl - yr) > 0.15) {
+          heightNear = nearIsLeft ? yl : yr
+          head = { kind: 'RAKED', heightFarM: num(r3(nearIsLeft ? yr : yl), 'DERIVED', `its top edge at its far side on elevation ${obs.id}`, [ref], u) }
+        }
+      }
+      openings.push({ id: `opening-${side.toLowerCase()}-${openings.filter((q) => q.id.startsWith(`opening-${side.toLowerCase()}`)).length + 1}`, kind: x.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', level: level.index, hostWall: at.h.id, offsetM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], u), widthM: num(r3(width), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], u), heightM: num(r3(heightNear), 'DERIVED', head ? `its head at its near side and its sill row on elevation ${obs.id}` : `its head and sill rows on elevation ${obs.id}`, [ref], u), sillM: num(door && sill < 0.25 ? 0 : r3(sill), 'DERIVED', door && sill < 0.25 ? 'a door: its threshold at the floor' : `its sill row on elevation ${obs.id} above the floor of its storey`, [ref], u), ...(panes > 1 ? { panes } : {}), ...(head ? { head } : {}), refs: [ref, ...also] })
     }
   }
 
@@ -1016,6 +1135,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     canopies,
     chimneys,
     rooflights,
+    frames,
     interior: { status: 'NOT_BUILT', note: 'this document describes the exterior; the interior is not built from it and is not checked' },
   }
   const coverage: HouseVerification['coverage'] = {

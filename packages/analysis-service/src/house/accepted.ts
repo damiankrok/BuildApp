@@ -26,7 +26,7 @@ export const ACCEPTED_REVISION_SCHEMA = 'buildapp.accepted-house-revision' as co
 export const ACCEPTED_REVISION_VERSION = '1.0.0' as const
 
 export type AcceptedBinding = { variant: string; pictures: string; reader: string; resolver: string; builder: string; settings: string }
-export type AcceptedRevision = { schema: typeof ACCEPTED_REVISION_SCHEMA; version: typeof ACCEPTED_REVISION_VERSION; key: string; binding: AcceptedBinding; acceptedAt: string; modelHash: string; records: ReadingRecord[] }
+export type AcceptedRevision = { schema: typeof ACCEPTED_REVISION_SCHEMA; version: typeof ACCEPTED_REVISION_VERSION; key: string; binding: AcceptedBinding; acceptedAt: string; modelHash: string; /** v3.54.7: the quality status the delivered model had when it was accepted (D40/D41). */ quality?: string; records: ReadingRecord[] }
 export type AcceptedRevisionStore = {
   get(key: string): AcceptedRevision | undefined
   /** The revisions accepted for one source variant, newest last. */
@@ -36,7 +36,7 @@ export type AcceptedRevisionStore = {
 }
 /** What became of the accepted-revision rule on one analysis. */
 export type AcceptedReuse =
-  | { state: 'REUSED'; key: string; acceptedAt: string; sameGeometry: boolean }
+  | { state: 'REUSED'; key: string; acceptedAt: string; sameGeometry: boolean; /** v3.54.7: whether the replay reaches the same quality status as when it was accepted. */ sameQuality?: boolean }
   | { state: 'NEW_CANDIDATE'; key: string; why: 'NO_ACCEPTED_REVISION' | 'BINDING_DIFFERS' | 'REANALYSIS_ASKED'; differs: Array<keyof AcceptedBinding>; previous?: string }
   | { state: 'ACCEPTED_NOW'; key: string; /** set when another revision of this variant was accepted under another binding: it is kept */ differs?: Array<keyof AcceptedBinding>; previous?: string }
 

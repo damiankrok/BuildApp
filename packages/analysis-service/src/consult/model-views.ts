@@ -31,8 +31,8 @@ const hex = (c: string | undefined): V3 => {
 
 type Tri = { p: V3[]; c: V3 }
 
-function draw(data: Uint8ClampedArray, W: number, ox: number, oy: number, tw: number, th: number, tris: readonly Tri[], scale: number, mx: number, my: number, cy: number): void {
-  const depth = new Float64Array(tw * th).fill(-Infinity)
+function draw(data: Uint8ClampedArray, W: number, ox: number, oy: number, tw: number, th: number, tris: readonly Tri[], scale: number, mx: number, my: number, cy: number, depthShade?: (z: number) => number, depthOut?: Float64Array): void {
+  const depth = depthOut ?? new Float64Array(tw * th).fill(-Infinity)
   const light: V3 = [0.35, 0.8, 0.5]
   for (const t of tris) {
     const s = t.p.map((q) => [tw / 2 + (q[0] - mx) * scale, cy - (q[1] - my) * scale, q[2]] as V3)
@@ -60,9 +60,10 @@ function draw(data: Uint8ClampedArray, W: number, ox: number, oy: number, tw: nu
         if (z <= depth[k]) continue
         depth[k] = z
         const o = ((oy + y) * W + ox + x) * 4
-        data[o] = Math.min(255, t.c[0] * shade)
-        data[o + 1] = Math.min(255, t.c[1] * shade)
-        data[o + 2] = Math.min(255, t.c[2] * shade)
+        const f = depthShade ? shade * depthShade(z) : shade
+        data[o] = Math.min(255, t.c[0] * f)
+        data[o + 1] = Math.min(255, t.c[1] * f)
+        data[o + 2] = Math.min(255, t.c[2] * f)
         data[o + 3] = 255
       }
     }
@@ -148,4 +149,67 @@ export function renderModelViews(bundle: MobileSceneBundle, tile = 420): ModelVi
     out.push({ name: 'AROUND', png, width: W, height: tile, labels: `five tiles ${tile} px wide, left to right: TOP (the front at the bottom), then axonometrics from the front-right, front-left, rear-left and rear-right corners`, sha256: sha(png) })
   }
   return out
+}
+
+/**
+ * v3.54.7 — one side of the model drawn IN THE FRAME OF ITS ELEVATION: the same width and height in pixels as the
+ * elevation picture as sent, the model's along-the-side metres placed on the columns the registration gives them
+ * (`along = mPerPx·col + alongAtPx0`) and its heights on the rows (`row = zeroRowPx − y/|mPerPx|`). A region named in
+ * pixels of the elevation is then the same region of the model: the comparison of source and render needs no second
+ * guess of where things are. Orthographic; the same flat colours as `renderModelViews`. Along a side is measured as the
+ * scene ruler measures it (from the left end of the exterior walls as a viewer outside sees them), so `walls` is the
+ * box of the exterior walls of the same scene.
+ */
+/** v3.54.7: how much a face is darkened at SIDE_DEPTH_SPAN_M or more behind the nearest face of its side. */
+export const SIDE_DEPTH_SHADE = 0.4
+export const SIDE_DEPTH_SPAN_M = 2.5
+/** v3.54.7: a step in depth larger than this between neighbouring pixels is drawn as an edge. */
+export const SIDE_EDGE_STEP_M = 0.15
+export type SideFrame = { width: number; height: number; mPerPx: number; alongAtPx0: number; zeroRowPx: number }
+export function renderSideInFrame(bundle: MobileSceneBundle, side: 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT', walls: { x0: number; x1: number; z0: number; z1: number }, frame: SideFrame): { png: Uint8Array; sha256: string; width: number; height: number } {
+  const colours = new Map<string, V3>()
+  for (const m of (bundle as unknown as { materials?: Array<{ id: string; color?: string }> }).materials ?? []) colours.set(m.id, hex(m.color))
+  const along = (x: number, z: number): number => (side === 'FRONT' ? x - walls.x0 : side === 'REAR' ? walls.x1 - x : side === 'LEFT' ? walls.z1 - z : z - walls.z0)
+  const toward = (x: number, z: number): number => (side === 'FRONT' ? -z : side === 'REAR' ? z : side === 'LEFT' ? -x : x)
+  const sgn = frame.mPerPx < 0 ? -1 : 1
+  const m = Math.abs(frame.mPerPx) || 1e-9
+  const tris: Tri[] = []
+  for (const mesh of bundle.scene.meshes) {
+    const c = colours.get(mesh.materialId ?? '') ?? [200, 200, 200]
+    for (let i = 0; i + 8 < mesh.positions.length; i += 9) {
+      const p = [0, 1, 2].map((k) => {
+        const x = mesh.positions[i + k * 3]
+        const y = mesh.positions[i + k * 3 + 1]
+        const z = mesh.positions[i + k * 3 + 2]
+        return [sgn * along(x, z), y, toward(x, z)] as V3
+      })
+      tris.push({ p, c })
+    }
+  }
+  const W = Math.max(1, Math.round(frame.width))
+  const H = Math.max(1, Math.round(frame.height))
+  const data = new Uint8ClampedArray(W * H * 4).fill(255)
+  // col = (along − a0)/mPerPx  ⇔  W/2 + (sgn·along − mx)/m with mx = sgn·a0 + (W/2)·m
+  // An orthographic side shows every face parallel to it in one shade, wherever it stands: a frame 1 m proud of the wall
+  // it frames, a loggia's back wall, a recessed portal would all read as one flat wall. Faces are darkened with their
+  // distance behind the nearest face of the side (up to SIDE_DEPTH_SHADE over SIDE_DEPTH_SPAN_M) — a cue of geometry,
+  // not a colour the source did not give.
+  let near = -Infinity
+  for (const t of tris) for (const q of t.p) near = Math.max(near, q[2])
+  const depth = new Float64Array(W * H).fill(-Infinity)
+  draw(data, W, 0, 0, W, H, tris, 1 / m, sgn * frame.alongAtPx0 + (W / 2) * m, 0, frame.zeroRowPx, (z) => 1 - SIDE_DEPTH_SHADE * Math.min(1, Math.max(0, near - z) / SIDE_DEPTH_SPAN_M), depth)
+  // and an outline wherever the surface steps in depth by more than SIDE_EDGE_STEP_M (a frame standing proud of its wall,
+  // the mouth of a recess, the house against the sky): the edges an elevation drawing draws
+  const step = (a: number, b: number): boolean => (Number.isFinite(a) !== Number.isFinite(b)) || (Number.isFinite(a) && Math.abs(a - b) > SIDE_EDGE_STEP_M)
+  const edge = new Uint8Array(W * H)
+  for (let y = 0; y < H; y += 1) {
+    for (let x = 0; x < W; x += 1) {
+      const k = y * W + x
+      if (!Number.isFinite(depth[k])) continue
+      if ((x + 1 < W && step(depth[k], depth[k + 1])) || (y + 1 < H && step(depth[k], depth[k + W])) || (x > 0 && step(depth[k], depth[k - 1])) || (y > 0 && step(depth[k], depth[k - W]))) edge[k] = 1
+    }
+  }
+  for (let k = 0; k < W * H; k += 1) if (edge[k]) data.set([60, 60, 60], k * 4)
+  const png = encodePng({ width: W, height: H, data })
+  return { png, sha256: sha(png), width: W, height: H }
 }

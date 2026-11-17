@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.2.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.3.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -152,18 +152,28 @@ const ElevationOpening = z
     level: z.number().int().optional(),
     inFeature: Id.optional(),
     certainty: z.enum(['CERTAIN', 'LIKELY', 'UNSURE']).default('LIKELY'),
+    /** v0.3: a head that is not level: the rows of its top edge at its left and right sides; a pointed one, the column of its apex (its row is box.y0). */
+    headLeftY: z.number().finite().optional(),
+    headRightY: z.number().finite().optional(),
+    apexX: z.number().finite().optional(),
   })
   .strict()
 
 const ElevationFeature = z
   .object({
     id: Id,
-    kind: z.enum(['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'CHIMNEY', 'BAY', 'OTHER']),
+    kind: z.enum(['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'CROSS_GABLE', 'CANOPY', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'CHIMNEY', 'BAY', 'OTHER']),
     box: Box,
     bodyId: Id.optional(),
     /** For a dormer: the row where its own roof begins (its eaves), and its apex. */
     eavesY: z.number().finite().nullable().optional(),
     apexY: z.number().finite().nullable().optional(),
+    /** v0.3, GABLE_FRAME: the band's thickness along the rakes (vertical, px), each leg's width (px), the row its legs end at. */
+    bandPx: z.number().finite().positive().optional(),
+    legPx: z.number().finite().positive().optional(),
+    legBottomY: z.number().finite().optional(),
+    /** v0.3, BALCONY / LOGGIA / CANOPY: whether the picture shows posts under it. */
+    posts: z.boolean().optional(),
     note: z.string().optional(),
     certainty: z.enum(['CERTAIN', 'LIKELY', 'UNSURE']).default('LIKELY'),
   })
@@ -281,6 +291,8 @@ const OpeningSchema = z
     /** Above the finished floor of its level. */
     sillM: NumSchema,
     panes: z.number().int().min(1).optional(),
+    /** v0.3: a head that is not level. RAKED: the height above the sill at the far end (offset + width); `heightM` is the near end. POINTED: both sides at `heightM`, rising to `apexM` above the sill at `apexAtM` from the start. */
+    head: z.discriminatedUnion('kind', [z.object({ kind: z.literal('RAKED'), heightFarM: NumSchema }).strict(), z.object({ kind: z.literal('POINTED'), apexAtM: NumSchema, apexM: NumSchema }).strict()]).optional(),
     refs: z.array(z.string()).default([]),
   })
   .strict()
@@ -310,6 +322,23 @@ const BalconySchema = z
 const CanopySchema = z
   .object({ id: Id, kind: z.enum(['ENTRANCE_CANOPY', 'PORCH_ROOF', 'PORTICO', 'CARPORT', 'COVERED_TERRACE']), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), undersideY: NumSchema, thicknessM: NumSchema, posts: z.array(Vec2).default([]), basis: BasisSchema, refs: z.array(z.string()).default([]) })
   .strict()
+/** v0.3 — a gable frame: the band along both rakes of a body's gable end on one side, and its legs (the returns, on the plan). */
+const FrameSchema = z
+  .object({
+    id: Id,
+    bodyId: Id,
+    side: SideSchema,
+    /** The band's thickness measured vertically, and across the rake (its width seen square to the slope). */
+    bandM: NumSchema,
+    /** How far the band stands back from the gable's outer plane into the roof (along the ridge). */
+    depthM: NumSchema,
+    /** The legs' width as the elevation shows them, when it shows legs; the plan's returns build them. */
+    legM: NumSchema.optional(),
+    basis: BasisSchema,
+    refs: z.array(z.string()).default([]),
+  })
+  .strict()
+export type HouseFrame = z.infer<typeof FrameSchema>
 const ChimneySchema = z.object({ id: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
 
 /** A window lying in a roof slope: its plan rectangle on that slope. */
@@ -331,6 +360,7 @@ const GeometrySchema = z
     canopies: z.array(CanopySchema).default([]),
     chimneys: z.array(ChimneySchema).default([]),
     rooflights: z.array(RooflightSchema).default([]),
+    frames: z.array(FrameSchema).default([]),
     /** What exists and is NOT part of this document's check: the interior is kept as the builder finds it, never certified here. */
     interior: z.object({ status: z.enum(['NOT_BUILT', 'NOT_CHECKED']), note: z.string().optional() }).strict().default({ status: 'NOT_BUILT' }),
   })
@@ -449,7 +479,7 @@ export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
     /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
-    schemaVersion: z.enum(['0.1.0', HOUSE_DOCUMENT_VERSION]),
+    schemaVersion: z.enum(['0.1.0', '0.2.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),

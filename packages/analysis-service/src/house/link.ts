@@ -29,6 +29,7 @@ import { MODEL_ASSESSMENT_SCHEMA_VERSION } from '../assessment/types.js'
 import type { ModelAssessment } from '../assessment/types.js'
 import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } from './describe.js'
 import type { Arbitration, CompiledHouse, LocalMeasure } from './describe.js'
+import { deliveredQuality } from './describe.js'
 import { measureScene } from './measure.js'
 import { housePictures } from './pictures.js'
 import { acceptedBinding, bindingDiffers } from './accepted.js'
@@ -36,6 +37,7 @@ import type { AcceptedReuse, AcceptedRevision, AcceptedRevisionStore } from './a
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
 import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
+import type { DefectRecord, ReviewPair, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
 export const HOUSE_PATH_VERSION = '0.2.0'
@@ -58,6 +60,8 @@ export type HouseLinkOutcome = {
   described: { status: 'BUILT' | 'NOT_RESOLVED' | 'PARSE_REJECTED' | 'NOT_READ'; why?: string; modelHash?: string }
   records: ReadingRecord[]
   proposals: Proposal[]
+  /** v3.54.7: the review as data — its defects (with regions measured before and after), the source/render pairs by hash, the targeted re-readings. */
+  review?: { defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[] }
   /** v3.54.6 (D39): whether an accepted revision was reused, a new candidate read beside it, or this one accepted now. */
   reuse?: AcceptedReuse
   error?: AnalysisError
@@ -72,7 +76,7 @@ function localMeasure(run: AnalysisRun): LocalMeasure | undefined {
   const groundLevel = [...model.levels].sort((p, q) => p.elevation - q.elevation).find((l) => l.elevation >= -0.01)?.id
   const ground = model.slabs.filter((s) => s.levelId === groundLevel)
   const shoelace = (p: ReadonlyArray<{ x: number; z: number }>): number => Math.abs(p.reduce((s, a, i) => s + a.x * p[(i + 1) % p.length].z - p[(i + 1) % p.length].x * a.z, 0)) / 2
-  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))), levelElevations: model.levels.map((l) => l.elevation), rooms: (model as unknown as { rooms?: unknown[] }).rooms?.length ?? 0, interiorWalls: model.walls.filter((w) => (w as unknown as { kind?: string }).kind === 'INTERIOR').length, openings: m.openings }
+  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))), levelElevations: model.levels.map((l) => l.elevation), rooms: (model as unknown as { rooms?: unknown[] }).rooms?.length ?? 0, interiorWalls: model.walls.filter((w) => (w as unknown as { kind?: string }).kind === 'INTERIOR').length, openings: m.openings, sides: m.sides }
 }
 
 /** The described house in the drawings path's result contract: sealed candidate, model, scene, what is known of it. */
@@ -234,6 +238,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   const startedAt = now().toISOString()
   const records: ReadingRecord[] = []
   let proposals: Proposal[] = []
+  let reviewOut: { defects: DefectRecord[]; pairs: ReviewPair[]; supplements: Supplement[] } = { defects: [], pairs: [], supplements: [] }
   let localRun: AnalysisRun | undefined
   let localError: AnalysisError | undefined
   let pkg: SourcePackage | undefined
@@ -289,28 +294,32 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
         const reviewed = await reviewHouse({ ctx, selection, facadesSent: facades.sent, observationsDocument: converted.document, compiled, modelId: identity.modelId })
         compiled = reviewed.compiled
         proposals = reviewed.proposals
+        reviewOut = { defects: reviewed.defects, pairs: reviewed.pairs, supplements: reviewed.supplements }
       }
     } else compiled = compileHouse(documentFromReading({ ...base, answers: { inventory: inventory.answer, plan: plan.answer } }).document, identity.modelId)
   } catch (e) {
     if (options.signal?.aborted) throw e
     return none(e instanceof ReadingFailed ? `${e.code}: ${e.message.slice(0, 200)}` : `the reading failed: ${String((e as Error)?.message ?? e).slice(0, 200)}`, 'NOT_READ')
   }
-  const decision = arbitrate(compiled, localRun ? localMeasure(localRun) : undefined, published)
+  const decision = arbitrate(compiled, localRun ? localMeasure(localRun) : undefined, published, { defects: reviewOut.defects })
+  decision.quality = deliveredQuality(decision, reviewOut.defects)
   // the model handed back, whichever it is (the described house, or LOCAL kept): what the revision is held to
   const deliveredHash = decision.accepted === 'DESCRIBED' ? compiled.modelHash : decision.accepted === 'LOCAL' && localRun ? sha256Hex(serializeModel(localRun.result.model)) : undefined
-  if (reused) reuse = { state: 'REUSED', key: reused.key, acceptedAt: reused.acceptedAt, sameGeometry: deliveredHash === reused.modelHash }
+  if (reused) reuse = { state: 'REUSED', key: reused.key, acceptedAt: reused.acceptedAt, sameGeometry: deliveredHash === reused.modelHash, ...(reused.quality ? { sameQuality: reused.quality === decision.quality.status } : {}) }
   // the house handed back is the accepted revision of its binding (a partial preview stays one, and says so); an earlier
   // revision is never replaced, and a re-analysis asked for stays a candidate beside it
   else if (describer.accepted && bindingKey && bindingNow && !describer.reanalyse && deliveredHash && !describer.accepted.get(bindingKey)) {
-    if (describer.accepted.put({ schema: 'buildapp.accepted-house-revision', version: '1.0.0', key: bindingKey, binding: bindingNow, acceptedAt: now().toISOString(), modelHash: deliveredHash, records })) reuse = { state: 'ACCEPTED_NOW', key: bindingKey, ...(reuse?.state === 'NEW_CANDIDATE' && reuse.previous ? { differs: reuse.differs, previous: reuse.previous } : {}) }
+    if (describer.accepted.put({ schema: 'buildapp.accepted-house-revision', version: '1.0.0', key: bindingKey, binding: bindingNow, acceptedAt: now().toISOString(), modelHash: deliveredHash, quality: decision.quality.status, records })) reuse = { state: 'ACCEPTED_NOW', key: bindingKey, ...(reuse?.state === 'NEW_CANDIDATE' && reuse.previous ? { differs: reuse.differs, previous: reuse.previous } : {}) }
   }
   const describedStatus = compiled.rejected ? 'PARSE_REJECTED' : compiled.bundle ? 'BUILT' : 'NOT_RESOLVED'
   // which house stood is part of the document, whichever it was
   const doc = compiled.document
   if (!compiled.rejected) {
     doc.verification.knownDefects.push({ code: `ACCEPTED_${decision.accepted}`, what: `${decision.code}${decision.partial ? ' (PARTIAL PREVIEW)' : ''}: ${decision.why}`.slice(0, 500) })
-    if (reuse) doc.verification.knownDefects.push({ code: `REVISION_${reuse.state}`, what: (reuse.state === 'REUSED' ? `the accepted revision ${reuse.key} (${reuse.acceptedAt}) was replayed: no request; ${reuse.sameGeometry ? 'the same model' : 'A DIFFERENT MODEL — the replay does not reproduce it'}` : reuse.state === 'ACCEPTED_NOW' ? `this reading is the accepted revision ${reuse.key}${reuse.previous ? ` of its binding; ${(reuse.differs ?? []).join(', ')} differ from ${reuse.previous}, which is kept` : ''}` : `a new candidate ${reuse.key} (${reuse.why}${reuse.differs.length ? `: ${reuse.differs.join(', ')} differ from ${reuse.previous}` : ''}); the earlier revision is kept`).slice(0, 400) })
+    if (reuse) doc.verification.knownDefects.push({ code: `REVISION_${reuse.state}`, what: (reuse.state === 'REUSED' ? `the accepted revision ${reuse.key} (${reuse.acceptedAt}) was replayed: no request; ${reuse.sameGeometry ? 'the same model' : 'A DIFFERENT MODEL — the replay does not reproduce it'}${reuse.sameQuality === false ? '; A DIFFERENT QUALITY STATUS than when it was accepted' : reuse.sameQuality ? '; the same quality status' : ''}` : reuse.state === 'ACCEPTED_NOW' ? `this reading is the accepted revision ${reuse.key}${reuse.previous ? ` of its binding; ${(reuse.differs ?? []).join(', ')} differ from ${reuse.previous}, which is kept` : ''}` : `a new candidate ${reuse.key} (${reuse.why}${reuse.differs.length ? `: ${reuse.differs.join(', ')} differ from ${reuse.previous}` : ''}); the earlier revision is kept`).slice(0, 400) })
     if (decision.accepted === 'DESCRIBED') doc.verification.knownDefects.push({ code: 'INTERIOR', what: decision.interior.slice(0, 400) })
+    // v3.54.7 (D40): what of the form reached the user, and every important defect of the review still open on it
+    doc.verification.knownDefects.push({ code: `QUALITY_${decision.quality.status}`, what: `${decision.quality.why}${decision.quality.sides.length ? ` — ${decision.quality.sides.map((x) => `${x.side}: ${[x.met.length ? `${x.met.length} met` : '', x.failing.length ? `failing ${x.failing.join('; ')}` : '', x.openDefects.length ? `open ${x.openDefects.join('; ')}` : ''].filter(Boolean).join(', ')}`).join(' | ')}` : ''}`.slice(0, 900) })
   }
   const houseText = compiled.rejected ? undefined : `${JSON.stringify(doc)}\n`
   const described = { status: describedStatus as HouseLinkOutcome['described']['status'], ...(compiled.modelHash ? { modelHash: compiled.modelHash } : {}), ...(compiled.rejected ? { why: compiled.rejected.slice(0, 3).join('; ') } : {}) }
@@ -329,7 +338,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     const supersededLocalText = localRun && lm && (lm.rooms ?? 0) + (lm.interiorWalls ?? 0) > 0 ? serializeModel(localRun.result.model) : undefined
     decision.delivered = deliveredCheck('DESCRIBED', run.result.model, compiled.modelHash ?? '')
     if (!decision.delivered.same) doc.verification.knownDefects.push({ code: 'DELIVERED_DIFFERS', what: `the model handed back (${decision.delivered.modelHash.slice(0, 12)}) is not the one the choice measured (${(compiled.modelHash ?? '').slice(0, 12)})` })
-    return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals, ...(reuse ? { reuse } : {}) }
+    return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals, review: reviewOut, ...(reuse ? { reuse } : {}) }
   }
-  return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(reuse ? { reuse } : {}), ...(localError && !localRun ? { error: localError } : {}) }
+  return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, review: reviewOut, ...(reuse ? { reuse } : {}), ...(localError && !localRun ? { error: localError } : {}) }
 }
