@@ -22,7 +22,7 @@ import type { StructuredVision, VisionReasoner } from '@buildapp/source-vision'
 import type { ResultFiles } from './store.js'
 
 /** `describe`: this submission carried the pilot's access token, so the host's paid house reader may be used for it. */
-export type JobInput = { jobId: string; url: string; workDir: string; describe?: boolean }
+export type JobInput = { jobId: string; url: string; workDir: string; describe?: boolean; /** v3.54.6 (D39): read afresh beside an accepted revision. */ reanalyse?: boolean }
 
 export type JobControl = { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void; onDescribing?: (event: DescribingEvent) => void }
 
@@ -43,7 +43,7 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
     const outcome = await describeLink(
       { kind: 'URL', url: input.url },
       { adapters: wiring.adapters, deps: wiring.deps, policy: wiring.policy, cache: fileByteCache(join(input.workDir, 'bytes')), jobId: input.jobId, signal: control.signal, progress: control.onProgress, telemetry: control.onTelemetry },
-      wiring.houseDescription,
+      input.reanalyse === true ? { ...wiring.houseDescription, reanalyse: true } : wiring.houseDescription,
     )
     if (outcome.run) return { ...analysisFilesOf(outcome.run), ...(outcome.houseText ? { house: outcome.houseText } : {}), ...(outcome.supersededLocalText ? { superseded: outcome.supersededLocalText } : {}) }
     throw outcome.error ?? new AnalysisError('ANALYSIS_FAILED', `neither LOCAL nor the whole-house description gave a model: ${outcome.decision.why}`.slice(0, 300))

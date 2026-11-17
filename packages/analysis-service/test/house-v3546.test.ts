@@ -3,7 +3,8 @@
  * each with a counter-trial. The fixture is the hand-checked description of one house (MANUAL_DIAGNOSTIC, test path
  * only); every case damages or extends it in one named way. Pictures are synthetic rasters. No test calls a provider.
  */
-import { readFileSync } from 'node:fs'
+import { mkdtempSync, readdirSync, readFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { encodeJpeg, startDecoders } from '@buildapp/source-package'
@@ -14,7 +15,8 @@ import { arbitrate, compileHouse, openingsAgainstElevation } from '../src/house/
 import type { CompiledHouse, LocalMeasure } from '../src/house/describe.js'
 import { headCapFor } from '../src/house/build.js'
 import { greyShare, housePictures, PICTURE_LIMITS, renditionKey } from '../src/house/pictures.js'
-import type { PackageAsset } from '../src/house/pictures.js'
+import type { HousePicture, PackageAsset } from '../src/house/pictures.js'
+import { acceptedBinding, bindingDiffers, fileAcceptedStore } from '../src/house/accepted.js'
 import { acceptCorrection } from '../src/house/review.js'
 
 const ROOT = join(__dirname, '..', '..', '..')
@@ -168,7 +170,7 @@ describe('v3.54.6 which pictures are sent when the limit takes a choice', () => 
     expect(greyShare(render(1))).toBeLessThan(0.3)
   })
   it('cause: renditions of one picture no longer fill the limit, and unclassified drawings go before renders', async () => {
-    const items = [{ id: 'plan', role: 'FLOOR_PLAN', url: 'https://x/plan/aaaaaaaaaaaaaaaaaaaaaaaa.png', r: drawing(0, 600, 600) }]
+    const items: Array<{ id: string; role?: string; url: string; r: Raster }> = [{ id: 'plan', role: 'FLOOR_PLAN', url: 'https://x/plan/aaaaaaaaaaaaaaaaaaaaaaaa.png', r: drawing(0, 600, 600) }]
     // 21 renders, each also in a smaller size under the same file name, and 4 small unlabelled elevations
     for (let k = 0; k < 21; k += 1) {
       const name = `render${k}`.padEnd(24, 'r')
@@ -185,7 +187,7 @@ describe('v3.54.6 which pictures are sent when the limit takes a choice', () => 
     expect(skipped.filter((s) => s.code === 'LIMIT').every((s) => /its role is not known/.test(s.why))).toBe(true)
   })
   it('counter: under the limit nothing is chosen — every picture is sent in the order of before', async () => {
-    const items = [
+    const items: Array<{ id: string; role?: string; url: string; r: Raster }> = [
       { id: 'plan', role: 'FLOOR_PLAN', url: 'https://x/plan/aaaaaaaaaaaaaaaaaaaaaaaa.png', r: drawing(0, 600, 600) },
       { id: 'big', url: 'https://x/1200/bbbbbbbbbbbbbbbbbbbbbbbb.jpg', r: render(1) },
       { id: 'big-small', url: 'https://x/736/bbbbbbbbbbbbbbbbbbbbbbbb.jpg', r: { ...render(2), width: 640, height: 420 } },
@@ -197,7 +199,7 @@ describe('v3.54.6 which pictures are sent when the limit takes a choice', () => 
     expect(skipped).toHaveLength(0)
   })
   it('counter: a package of interior renders and no elevation sends no render ahead of a drawing and invents no elevation', async () => {
-    const items = [{ id: 'plan', role: 'FLOOR_PLAN', url: 'https://x/plan/aaaaaaaaaaaaaaaaaaaaaaaa.png', r: drawing(0, 600, 600) }]
+    const items: Array<{ id: string; role?: string; url: string; r: Raster }> = [{ id: 'plan', role: 'FLOOR_PLAN', url: 'https://x/plan/aaaaaaaaaaaaaaaaaaaaaaaa.png', r: drawing(0, 600, 600) }]
     for (let k = 0; k < 30; k += 1) items.push({ id: `room${k}`, url: `https://x/r/${`room${k}`.padEnd(24, 'q')}.jpg`, r: render(k) })
     const { assets, source } = build(items)
     const { pictures, skipped } = await housePictures(assets, source)
@@ -276,5 +278,33 @@ describe('v3.54.6 the choice holds both models against the same elevations', () 
     expect(check(h, 'elevation-el-front')?.status).toBe('FAIL')
     const d = arbitrate(h, { ...GOOD_LOCAL, openings: [] }, PUBLISHED)
     expect(d.findings.some((f) => /openings on the front side/.test(f.fact))).toBe(false)
+  })
+})
+
+describe('v3.54.6 (D39) an accepted revision is kept under its binding', () => {
+  const pic = (byteHash: string, document = 'ELEVATION') => ({ byteHash, pageRole: { document, view: 'FRONT', storey: 'NOT_APPLICABLE' } }) as unknown as HousePicture
+  const base = { adapterId: 'archon.pl', externalId: 'x1', pictures: [pic('a'), pic('b', 'FLOOR_PLAN')], published: [{ key: 'building_height', value: 8 }], reader: 'r@1', resolver: '0.3.0', builder: '0.2.0', model: 'm', review: true }
+  it('the same source, pictures, versions and settings give the same key, in any picture order', () => {
+    expect(acceptedBinding(base).key).toBe(acceptedBinding({ ...base, pictures: [...base.pictures].reverse() }).key)
+  })
+  it('each thing that changes the house built from the answers changes the key, and is named', () => {
+    const k = acceptedBinding(base)
+    for (const [over, field] of [[{ pictures: [pic('a'), pic('c', 'FLOOR_PLAN')] }, 'pictures'], [{ pictures: [pic('a', 'SECTION'), pic('b', 'FLOOR_PLAN')] }, 'pictures'], [{ resolver: '0.4.0' }, 'resolver'], [{ builder: '0.3.0' }, 'builder'], [{ review: false }, 'settings'], [{ externalId: 'x2' }, 'variant'], [{ published: [] }, 'pictures']] as const) {
+      const o = acceptedBinding({ ...base, ...(over as object) })
+      expect(o.key).not.toBe(k.key)
+      expect(bindingDiffers(k.binding, o.binding)).toEqual([field])
+    }
+  })
+  it('a revision once accepted is never replaced; a store holds no address, path or key', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'accepted-'))
+    const store = fileAcceptedStore(dir)
+    const { key, binding } = acceptedBinding(base)
+    const rev = { schema: 'buildapp.accepted-house-revision' as const, version: '1.0.0' as const, key, binding, acceptedAt: '2026-11-17T00:00:00.000Z', modelHash: 'h1', records: [] }
+    expect(store.put(rev)).toBe(true)
+    expect(store.put({ ...rev, modelHash: 'h2' })).toBe(false)
+    expect(fileAcceptedStore(dir).get(key)?.modelHash).toBe('h1')
+    expect(fileAcceptedStore(dir).forVariant(binding.variant).map((r) => r.key)).toEqual([key])
+    expect(readdirSync(dir).every((f) => /^(variant-)?[0-9a-f]{32}\.json$/.test(f))).toBe(true)
+    expect(fileAcceptedStore(dir).get('../etc/passwd')).toBeUndefined()
   })
 })

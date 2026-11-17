@@ -36,7 +36,7 @@ export const RESOLVE = {
   /**
    * v3.54.6: the drawings of one set share a scale. An elevation whose inner body ends miss the plan (a roof read for a
    * wall, a plan's body division drawn by eye) registers on its OUTER ends alone only when the scale those give agrees
-   * with the scale of an elevation of the same set registered on three or more ends within this share, and its ridge
+   * with the scale of the set's best-registered elevation (three or more ends, the smallest worst residual) within this share, and its ridge
    * height at that scale agrees as well. 3 %: the front and rear of the hand-checked Gracja set, both registered on six
    * ends, differ by 2.5 % (3.306 against 3.226 cm/px) — the spread of one publisher's set; a wall end misread by a roof
    * overhang moves the scale by 9–10 % (Alaska), well outside it.
@@ -408,10 +408,23 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const innerRes = Math.max(0, ...misses.map((m) => Math.abs(m.d)))
     return { s, t, maxRes: Math.max(0.05, Math.abs(s / sRef - 1) * (hi - lo)), n: 2, ends: 'OUTER', inner: misses.map((m) => `${m.what} ${m.d >= 0 ? '+' : ''}${m.d.toFixed(2)} m`).join(', '), innerRes }
   }
-  const fit = (obs: (typeof o.elevations)[number], side: HouseSide): { s: number; t: number; maxRes: number; n: number; ends: 'WHOLE' | 'VISIBLE' } | undefined => {
+  /**
+   * v3.54.6: two readings of the body columns (the whole body, the part of it nearest the viewer) that BOTH fit are two
+   * hypotheses a residual alone does not decide: the scale of the set does (the closer one stands). Without it the
+   * lower residual does — and the registration of such an elevation waits for the set's scale (`ambiguous`).
+   */
+  const fit = (obs: (typeof o.elevations)[number], side: HouseSide, sRef?: number): { s: number; t: number; maxRes: number; n: number; ends: 'WHOLE' | 'VISIBLE'; ambiguous?: boolean } | undefined => {
     const whole = fitWith(obs, side, bodyExtent)
     const seen = fitWith(obs, side, visibleExtent)
-    if (!seen || (whole && whole.maxRes <= seen.maxRes + 1e-6)) return whole ? { ...whole, ends: 'WHOLE' } : undefined
+    const span = side === 'FRONT' || side === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
+    const fits = (f: { maxRes: number; s: number } | undefined): boolean => !!f && f.s > 0 && f.maxRes <= Math.max(RESOLVE.elevationAlongM, RESOLVE.elevationAlongShare * span)
+    if (!seen) return whole ? { ...whole, ends: 'WHOLE' } : undefined
+    if (!whole) return { ...seen, ends: 'VISIBLE' }
+    if (fits(whole) && fits(seen) && Math.abs(whole.s / seen.s - 1) > RESOLVE.sharedScale) {
+      if (sRef !== undefined && Number.isFinite(sRef)) return Math.abs(seen.s / sRef - 1) < Math.abs(whole.s / sRef - 1) ? { ...seen, ends: 'VISIBLE' } : { ...whole, ends: 'WHOLE' }
+      return whole.maxRes <= seen.maxRes + 1e-6 ? { ...whole, ends: 'WHOLE', ambiguous: true } : { ...seen, ends: 'VISIBLE', ambiguous: true }
+    }
+    if (whole.maxRes <= seen.maxRes + 1e-6) return { ...whole, ends: 'WHOLE' }
     return { ...seen, ends: 'VISIBLE' }
   }
   const fitWith = (obs: (typeof o.elevations)[number], side: HouseSide, extentOf: (side: HouseSide, id: string) => [number, number] | undefined): { s: number; t: number; maxRes: number; n: number } | undefined => {
@@ -472,7 +485,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const tries: HouseSide[] = [obs.side, ...obs.alternatives.filter((a) => a !== obs.side)]
     let best: { side: HouseSide; f: NonNullable<ReturnType<typeof fit>> | NonNullable<ReturnType<typeof fitOuter>> } | undefined
     for (const side of tries) {
-      const f = fit(obs, side)
+      const f = fit(obs, side, sRef)
       if (!f || f.s <= 0) continue
       const span = side === 'FRONT' || side === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
       if (f.maxRes <= Math.max(RESOLVE.elevationAlongM, RESOLVE.elevationAlongShare * span) && (!best || f.maxRes < best.f.maxRes)) best = { side, f }
@@ -493,7 +506,12 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     }
     // A stated side that does not register is NOT tried on the other sides: a mirrored front elevation fits the rear of
     // the plan perfectly, and would put a mirrored house's openings there. It is held, and said.
-    const f0 = fit(obs, obs.side)
+    const f0 = fit(obs, obs.side, sRef)
+    // two fits at two scales wait for the set's scale; so does a stated side whose inner ends miss (below)
+    if (best && sRef === undefined && 'ambiguous' in best.f && best.f.ambiguous) {
+      deferred.push(obs)
+      return
+    }
     // v3.54.6: the stated side, in the plan's order, whose inner ends miss: tried again on its outer ends once the set's
     // scale is known from the elevations that register on their own (never another side: see above)
     if (!best && f0 && f0.s > 0 && sRef === undefined) {
@@ -555,8 +573,9 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   }
   for (const obs of o.elevations) registerOne(obs)
   {
-    const scales = regs.filter((r) => r.ok && r.n >= 3).map((r) => r.s).sort((p, q) => p - q)
-    const sRef = scales.length ? scales[Math.floor((scales.length - 1) / 2)] : NaN
+    // the set's scale is that of its best-registered elevation: the most wall ends, then the smallest worst residual
+    const best = regs.filter((r) => r.ok && r.n >= 3).sort((p, q) => p.res - q.res || q.n - p.n)[0]
+    const sRef = best ? best.s : NaN
     for (const obs of deferred) registerOne(obs, sRef)
   }
   // One picture per side (v3.54.5). Two pictures that both register as the same side are not two sides: the one the

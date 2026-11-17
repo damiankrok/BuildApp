@@ -35,6 +35,7 @@ export class JobRunner {
   private readonly urls = new Map<string, string>()
   /** Jobs whose submission was allowed the paid house reader. In memory only: the permission is never stored. */
   private readonly paid = new Set<string>()
+  private readonly reanalyse = new Set<string>()
   private readonly running = new Map<string, AbortController>()
   private readonly done = new Set<Promise<void>>()
   private closed = false
@@ -52,7 +53,7 @@ export class JobRunner {
   }
 
   /** Accept a validated URL. Throws `QueueFull` when there is no room. */
-  async submit(url: string, options: { describe?: boolean } = {}): Promise<JobRecord> {
+  async submit(url: string, options: { describe?: boolean; reanalyse?: boolean } = {}): Promise<JobRecord> {
     if (this.closed) throw new QueueFull()
     // room for `concurrency` running jobs and `maxQueued` waiting behind them
     if (this.running.size + this.queue.length >= this.limits.concurrency + this.limits.maxQueued) throw new QueueFull()
@@ -60,6 +61,7 @@ export class JobRunner {
     await this.store.create(job)
     this.urls.set(job.jobId, url)
     if (options.describe === true) this.paid.add(job.jobId)
+    if (options.describe === true && options.reanalyse === true) this.reanalyse.add(job.jobId)
     this.queue.push(job.jobId)
     this.pump()
     return job
@@ -100,9 +102,10 @@ export class JobRunner {
       const url = this.urls.get(jobId)!
       this.urls.delete(jobId)
       const describe = this.paid.delete(jobId)
+      const reanalyse = this.reanalyse.delete(jobId)
       const controller = new AbortController()
       this.running.set(jobId, controller)
-      const task = this.run(jobId, url, controller, describe).finally(() => {
+      const task = this.run(jobId, url, controller, describe, reanalyse).finally(() => {
         this.running.delete(jobId)
         this.done.delete(task)
         this.pump()
@@ -111,7 +114,7 @@ export class JobRunner {
     }
   }
 
-  private async run(jobId: string, url: string, controller: AbortController, describe = false): Promise<void> {
+  private async run(jobId: string, url: string, controller: AbortController, describe = false, reanalyse = false): Promise<void> {
     const stamp = (): string => this.now().toISOString()
     const timer = setTimeout(() => controller.abort(new DOMException('job time limit', 'TimeoutError')), this.limits.jobTimeoutMs)
     let pending: Promise<unknown> = Promise.resolve()
@@ -132,7 +135,7 @@ export class JobRunner {
     let failure: unknown
     try {
       const workDir = await this.store.workspace(jobId)
-      const output = await this.executor.execute({ jobId, url, workDir, ...(describe ? { describe: true } : {}) }, { signal: controller.signal, onProgress, onTelemetry, onDescribing })
+      const output = await this.executor.execute({ jobId, url, workDir, ...(describe ? { describe: true } : {}), ...(describe && reanalyse ? { reanalyse: true } : {}) }, { signal: controller.signal, onProgress, onTelemetry, onDescribing })
       if (controller.signal.aborted) throw toAnalysisError(controller.signal.reason, controller.signal)
       await pending
       await this.store.saveResult(jobId, output)

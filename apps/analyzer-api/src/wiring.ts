@@ -8,7 +8,7 @@ import { anthropicStructuredVision, anthropicVisionReasoner } from '@buildapp/so
 import { join } from 'node:path'
 import type { AnalysisWiring } from './executor.js'
 import { DEFAULT_SPEND_LIMITS, HOUSE_READER_PRICES, openSpendLedger, spendGuardedStructuredVision } from './house-reader-spend.js'
-import { HOUSE_READING_LIMITS, anthropicConsultant } from '@buildapp/analysis-service'
+import { HOUSE_READING_LIMITS, anthropicConsultant, fileAcceptedStore } from '@buildapp/analysis-service'
 import type { ReadingStep } from '@buildapp/analysis-service'
 import type { SpendLimits } from './house-reader-spend.js'
 
@@ -91,6 +91,8 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
       const transports = new Map<ReadingStep, ReturnType<typeof anthropicConsultant>>()
       return {
         houseDescription: {
+          // v3.54.6 (D39): accepted revisions in the host's private data directory (hash-named files, no address or key)
+          accepted: fileAcceptedStore(join(env.ANALYZER_DATA_DIR?.trim() || '.data/analyzer', 'accepted-house-revisions')),
           modelFor: (step: ReadingStep) => {
             if (!transports.has(step)) transports.set(step, anthropicConsultant({ model: plan.model, maxOutputTokens: HOUSE_READING_LIMITS.maxOutputTokens[step], timeoutMs: 300_000 }))
             return transports.get(step) as ReturnType<typeof anthropicConsultant>

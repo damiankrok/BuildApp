@@ -225,7 +225,9 @@ export function createApiServer(deps: ApiDeps): Server {
       if (!submitted.ok) throw new HttpError(429, 'RATE_LIMITED', 'this client has started too many analyses recently; try again later', { 'retry-after': String(submitted.retryAfterS) })
       let job: JobRecord
       try {
-        job = await runner.submit(url.toString(), { describe: describe === 'GRANTED' })
+        // v3.54.6 (D39): `reanalyse: true` reads afresh beside an accepted revision — only for an allowed submission
+        const reanalyse = describe === 'GRANTED' && (body as { reanalyse?: unknown }).reanalyse === true
+        job = await runner.submit(url.toString(), { describe: describe === 'GRANTED', ...(reanalyse ? { reanalyse: true } : {}) })
       } catch (e) {
         if (e instanceof QueueFull) throw new HttpError(503, 'QUEUE_FULL', 'the analyzer is busy; try again in a few minutes', { 'retry-after': '120' })
         throw e

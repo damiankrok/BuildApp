@@ -31,13 +31,21 @@ import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } fro
 import type { Arbitration, CompiledHouse, LocalMeasure } from './describe.js'
 import { measureScene } from './measure.js'
 import { housePictures } from './pictures.js'
+import { acceptedBinding, bindingDiffers } from './accepted.js'
+import type { AcceptedReuse, AcceptedRevision, AcceptedRevisionStore } from './accepted.js'
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
 import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
 import type { Proposal } from './review.js'
 
 export const HOUSE_PATH_VERSION = '0.2.0'
-export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & { review?: boolean }
+export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
+  review?: boolean
+  /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */
+  accepted?: AcceptedRevisionStore
+  /** v3.54.6: a re-analysis asked for — read afresh as a separate candidate, the accepted revision kept. */
+  reanalyse?: boolean
+}
 export type HouseLinkOutcome = {
   /** The accepted run's result and scene, in the drawings path's contract; absent when neither path gave a model. */
   run?: Pick<AnalysisRun, 'result' | 'sceneText'>
@@ -50,6 +58,8 @@ export type HouseLinkOutcome = {
   described: { status: 'BUILT' | 'NOT_RESOLVED' | 'PARSE_REJECTED' | 'NOT_READ'; why?: string; modelHash?: string }
   records: ReadingRecord[]
   proposals: Proposal[]
+  /** v3.54.6 (D39): whether an accepted revision was reused, a new candidate read beside it, or this one accepted now. */
+  reuse?: AcceptedReuse
   error?: AnalysisError
 }
 
@@ -242,9 +252,28 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   const ctx: ReadingContext = { modelFor: describer.modelFor, price: describer.price, ...(describer.spend ? { spend: describer.spend } : {}), record: (r) => void records.push(r), ...(options.signal ? { signal: options.signal } : {}) }
   const identity = { ...identityOf(pkg, options.adapters), ...options.identity }
   let compiled: CompiledHouse
+  let reused: AcceptedRevision | undefined
+  let reuse: AcceptedReuse | undefined
+  let bindingKey: string | undefined
+  let bindingNow: AcceptedRevision['binding'] | undefined
   try {
     const { pictures, skipped } = await housePictures(pkg.assets as never, options.cache)
     const notSent = skipped
+    // v3.54.6 (D39): an accepted revision under this binding is replayed — the same answers, the same house, no request
+    if (describer.accepted) {
+      const b = acceptedBinding({ adapterId: pkg.adapter.id, externalId: pkg.project.externalId ?? pkg.canonicalUrl, pictures, published, reader: `${HOUSE_READING_CONTRACT}@${HOUSE_READING_VERSION}`, resolver: HOUSE_RESOLVER_VERSION, builder: HOUSE_BUILDER_VERSION, model: ctx.modelFor('PLAN').model, review: describer.review !== false })
+      bindingKey = b.key
+      bindingNow = b.binding
+      const hit = describer.reanalyse ? undefined : describer.accepted.get(b.key)
+      if (hit) {
+        reused = hit
+        ctx.replay = (step, round) => hit.records.find((r) => r.step === step && (r.round ?? 0) === (round ?? 0))
+        ctx.replayOnly = true
+      } else {
+        const previous = describer.accepted.forVariant(b.binding.variant).slice(-1)[0]
+        reuse = { state: 'NEW_CANDIDATE', key: b.key, why: describer.reanalyse ? 'REANALYSIS_ASKED' : previous ? 'BINDING_DIFFERS' : 'NO_ACCEPTED_REVISION', differs: previous ? bindingDiffers(previous.binding, b.binding) : [], ...(previous ? { previous: previous.key } : {}) }
+      }
+    }
     const inventory = await readInventory(ctx, pictures, `publisher: ${pkg.project.publisher}`)
     if (!inventory.selection) return none(inventory.why ?? 'no ground-floor plan among the pictures', 'NOT_READ')
     const selection = inventory.selection
@@ -267,11 +296,20 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     return none(e instanceof ReadingFailed ? `${e.code}: ${e.message.slice(0, 200)}` : `the reading failed: ${String((e as Error)?.message ?? e).slice(0, 200)}`, 'NOT_READ')
   }
   const decision = arbitrate(compiled, localRun ? localMeasure(localRun) : undefined, published)
+  // the model handed back, whichever it is (the described house, or LOCAL kept): what the revision is held to
+  const deliveredHash = decision.accepted === 'DESCRIBED' ? compiled.modelHash : decision.accepted === 'LOCAL' && localRun ? sha256Hex(serializeModel(localRun.result.model)) : undefined
+  if (reused) reuse = { state: 'REUSED', key: reused.key, acceptedAt: reused.acceptedAt, sameGeometry: deliveredHash === reused.modelHash }
+  // the house handed back is the accepted revision of its binding (a partial preview stays one, and says so); an earlier
+  // revision is never replaced, and a re-analysis asked for stays a candidate beside it
+  else if (describer.accepted && bindingKey && bindingNow && !describer.reanalyse && deliveredHash && !describer.accepted.get(bindingKey)) {
+    if (describer.accepted.put({ schema: 'buildapp.accepted-house-revision', version: '1.0.0', key: bindingKey, binding: bindingNow, acceptedAt: now().toISOString(), modelHash: deliveredHash, records })) reuse = { state: 'ACCEPTED_NOW', key: bindingKey, ...(reuse?.state === 'NEW_CANDIDATE' && reuse.previous ? { differs: reuse.differs, previous: reuse.previous } : {}) }
+  }
   const describedStatus = compiled.rejected ? 'PARSE_REJECTED' : compiled.bundle ? 'BUILT' : 'NOT_RESOLVED'
   // which house stood is part of the document, whichever it was
   const doc = compiled.document
   if (!compiled.rejected) {
     doc.verification.knownDefects.push({ code: `ACCEPTED_${decision.accepted}`, what: `${decision.code}${decision.partial ? ' (PARTIAL PREVIEW)' : ''}: ${decision.why}`.slice(0, 500) })
+    if (reuse) doc.verification.knownDefects.push({ code: `REVISION_${reuse.state}`, what: (reuse.state === 'REUSED' ? `the accepted revision ${reuse.key} (${reuse.acceptedAt}) was replayed: no request; ${reuse.sameGeometry ? 'the same model' : 'A DIFFERENT MODEL — the replay does not reproduce it'}` : reuse.state === 'ACCEPTED_NOW' ? `this reading is the accepted revision ${reuse.key}${reuse.previous ? ` of its binding; ${(reuse.differs ?? []).join(', ')} differ from ${reuse.previous}, which is kept` : ''}` : `a new candidate ${reuse.key} (${reuse.why}${reuse.differs.length ? `: ${reuse.differs.join(', ')} differ from ${reuse.previous}` : ''}); the earlier revision is kept`).slice(0, 400) })
     if (decision.accepted === 'DESCRIBED') doc.verification.knownDefects.push({ code: 'INTERIOR', what: decision.interior.slice(0, 400) })
   }
   const houseText = compiled.rejected ? undefined : `${JSON.stringify(doc)}\n`
@@ -291,7 +329,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     const supersededLocalText = localRun && lm && (lm.rooms ?? 0) + (lm.interiorWalls ?? 0) > 0 ? serializeModel(localRun.result.model) : undefined
     decision.delivered = deliveredCheck('DESCRIBED', run.result.model, compiled.modelHash ?? '')
     if (!decision.delivered.same) doc.verification.knownDefects.push({ code: 'DELIVERED_DIFFERS', what: `the model handed back (${decision.delivered.modelHash.slice(0, 12)}) is not the one the choice measured (${(compiled.modelHash ?? '').slice(0, 12)})` })
-    return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals }
+    return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals, ...(reuse ? { reuse } : {}) }
   }
-  return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(localError && !localRun ? { error: localError } : {}) }
+  return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(reuse ? { reuse } : {}), ...(localError && !localRun ? { error: localError } : {}) }
 }
