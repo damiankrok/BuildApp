@@ -1,0 +1,106 @@
+{
+  "schema": "buildapp.house-document",
+  "schemaVersion": "0.1.0",
+  "id": "manual-gracja",
+  "origin": "MANUAL_DIAGNOSTIC",
+  "source": {
+    "sourcePackageHash": "8ab439011270534fd4ac1b691da5dd82d5ab9ede324d1bb011f6b392eebfd34e",
+    "project": "confirm-dobredomy-gracja-i-mala-ii",
+    "pictures": [
+      { "id": "plan0", "assetId": "asset-gracja-ma-a-ii-rzut-parter-35ca2fb86f", "role": "PLAN", "level": 0, "widthPx": 1883, "heightPx": 1600 },
+      { "id": "plan1", "assetId": "asset-gracja-ma-a-ii-rzut-poddasze-473128f22f", "role": "PLAN", "level": 1, "widthPx": 1883, "heightPx": 1600, "note": "read for which bodies have an attic storey and where the dormers are; not traced" },
+      { "id": "section", "assetId": "asset-gracja-ma-a-ii-przekroje-1003c2e842", "role": "SECTION", "widthPx": 2047, "heightPx": 1075 },
+      { "id": "front", "assetId": "asset-gracja-ma-a-ii-elewacja-przod-d9a66fad12", "role": "ELEVATION", "widthPx": 700, "heightPx": 304 },
+      { "id": "rear", "assetId": "asset-gracja-ma-a-ii-elewacja-ty-f95eb1d662", "role": "ELEVATION", "widthPx": 700, "heightPx": 304 }
+    ],
+    "missing": [
+      { "what": "the two side elevations (published; not read for this diagnostic: their openings are not in it)", "status": "NOT_SENT" }
+    ]
+  },
+  "reader": { "engine": "operator, by eye on the published pictures", "at": "2026-11-17" },
+  "observations": {
+    "front": { "planEdge": "BOTTOM", "how": "the entrance door and the garage door are on the sheet's bottom side; the front elevation shows the garage on the right, as the plan does", "origin": "MANUAL" },
+    "dimensions": [
+      { "id": "dim-width", "picture": "plan0", "literal": "16,82", "unit": "m", "valueM": 16.82, "from": { "x": 335, "y": 80 }, "to": { "x": 1770, "y": 80 }, "measures": "OVERALL", "includes": "from the face of the bay window on the left to the garage's right wall", "origin": "MANUAL" },
+      { "id": "dim-depth", "picture": "plan0", "literal": "10,12", "unit": "m", "valueM": 10.12, "from": { "x": 80, "y": 523 }, "to": { "x": 80, "y": 1387 }, "measures": "OVERALL", "includes": "from the rear wall of the living room to the front wall of the kitchen block", "origin": "MANUAL" }
+    ],
+    "levels": [
+      { "id": "lv-zero", "picture": "section", "literal": "±0,00", "valueM": 0, "meaning": "GROUND_FLOOR", "level": 0, "origin": "MANUAL" },
+      { "id": "lv-attic", "picture": "section", "literal": "+3,04", "valueM": 3.04, "meaning": "UPPER_FLOOR", "level": 1, "origin": "MANUAL" },
+      { "id": "lv-ridge", "picture": "section", "literal": "+8,13", "valueM": 8.13, "meaning": "RIDGE", "bodyId": "main", "origin": "MANUAL" },
+      { "id": "lv-ridge-garage", "picture": "section", "literal": "+6,49", "valueM": 6.49, "meaning": "RIDGE", "bodyId": "garage", "origin": "MANUAL" },
+      { "id": "lv-terrain", "picture": "section", "literal": "-0,45", "valueM": -0.45, "meaning": "TERRAIN", "origin": "MANUAL" },
+      { "id": "lv-garage-floor", "picture": "section", "literal": "-0,30", "valueM": -0.3, "meaning": "FLOOR_BELOW_ZERO", "bodyId": "garage", "origin": "MANUAL" },
+      { "id": "lv-total", "picture": "section", "literal": "858", "valueM": 8.58, "meaning": "TOTAL_HEIGHT", "origin": "MANUAL" },
+      { "id": "lv-clear0", "picture": "section", "literal": "276", "valueM": 2.76, "meaning": "CLEAR_HEIGHT", "level": 0, "origin": "MANUAL" },
+      { "id": "lv-clear1", "picture": "section", "literal": "270", "valueM": 2.7, "meaning": "CLEAR_HEIGHT", "level": 1, "origin": "MANUAL" },
+      { "id": "lv-pitch", "picture": "section", "literal": "40°", "valueM": 40, "meaning": "ROOF_PITCH_DEG", "origin": "MANUAL" }
+    ],
+    "outlines": [
+      { "id": "ol-whole", "picture": "plan0", "level": 0, "what": "WHOLE", "polygon": [ { "x": 553, "y": 523 }, { "x": 1262, "y": 523 }, { "x": 1262, "y": 653 }, { "x": 1772, "y": 653 }, { "x": 1772, "y": 1258 }, { "x": 955, "y": 1258 }, { "x": 955, "y": 1387 }, { "x": 425, "y": 1387 }, { "x": 425, "y": 1060 }, { "x": 338, "y": 985 }, { "x": 338, "y": 880 }, { "x": 425, "y": 795 }, { "x": 553, "y": 795 } ], "origin": "MANUAL", "note": "outer wall faces; terraces, steps and the driveway are not the building" },
+      { "id": "ol-main", "picture": "plan0", "level": 0, "what": "BODY", "bodyId": "main", "role": "MAIN", "storeys": [0, 1], "polygon": [ { "x": 553, "y": 523 }, { "x": 1262, "y": 523 }, { "x": 1262, "y": 1258 }, { "x": 955, "y": 1258 }, { "x": 955, "y": 1387 }, { "x": 425, "y": 1387 }, { "x": 425, "y": 795 }, { "x": 553, "y": 795 } ], "origin": "MANUAL" },
+      { "id": "ol-garage", "picture": "plan0", "level": 0, "what": "BODY", "bodyId": "garage", "role": "GARAGE", "storeys": [0, 1], "polygon": [ { "x": 1262, "y": 653 }, { "x": 1772, "y": 653 }, { "x": 1772, "y": 1258 }, { "x": 1262, "y": 1258 } ], "origin": "MANUAL", "note": "two cars; the attic plan shows a loft (strych) over it, under its own roof" },
+      { "id": "ol-bay", "picture": "plan0", "level": 0, "what": "BODY", "bodyId": "bay", "role": "BAY", "storeys": [0], "polygon": [ { "x": 425, "y": 1060 }, { "x": 338, "y": 985 }, { "x": 338, "y": 880 }, { "x": 425, "y": 795 } ], "origin": "MANUAL", "note": "a splayed bay window off the dining area; the attic plan shows a balcony over it" }
+    ],
+    "roofs": [
+      { "id": "roof-main", "bodyId": "main", "kind": "GABLE", "ridge": "ALONG_FRONT", "pictures": ["front", "rear", "plan1"], "origin": "MANUAL" },
+      { "id": "roof-garage", "bodyId": "garage", "kind": "GABLE", "ridge": "ALONG_FRONT", "pictures": ["front", "rear", "section"], "origin": "MANUAL", "note": "a lower roof of its own, its ridge at +6,49" },
+      { "id": "roof-bay", "bodyId": "bay", "kind": "FLAT", "ridge": "NA", "pictures": ["plan1", "front"], "origin": "MANUAL", "note": "the balcony over the bay" }
+    ],
+    "elevations": [
+      {
+        "id": "el-front", "picture": "front", "side": "FRONT", "sideHow": "garage door and entrance; the garage on the right as on the plan", "groundY": 298,
+        "bodies": [
+          { "bodyId": "bay", "leftX": 95, "rightX": 126, "eavesY": null, "ridgeY": 200 },
+          { "bodyId": "main", "leftX": 126, "rightX": 424, "eavesY": 197, "ridgeY": 45 },
+          { "bodyId": "garage", "leftX": 424, "rightX": 603, "eavesY": 208, "ridgeY": 97 }
+        ],
+        "openings": [
+          { "id": "w1", "kind": "WINDOW", "box": { "x0": 150, "y0": 222, "x1": 196, "y1": 266 }, "bodyId": "main", "level": 0 },
+          { "id": "w2", "kind": "WINDOW", "box": { "x0": 240, "y0": 222, "x1": 290, "y1": 260 }, "bodyId": "main", "level": 0 },
+          { "id": "d1", "kind": "DOOR", "box": { "x0": 322, "y0": 228, "x1": 356, "y1": 292 }, "bodyId": "main", "level": 0 },
+          { "id": "w3", "kind": "WINDOW", "box": { "x0": 372, "y0": 222, "x1": 402, "y1": 258 }, "bodyId": "main", "level": 0 },
+          { "id": "g1", "kind": "GARAGE_DOOR", "box": { "x0": 440, "y0": 232, "x1": 576, "y1": 298 }, "bodyId": "garage", "level": 0 },
+          { "id": "bd1", "kind": "GLAZED_DOOR", "box": { "x0": 243, "y0": 132, "x1": 288, "y1": 196 }, "bodyId": "main", "level": 1, "inFeature": "dormer" }
+        ],
+        "features": [
+          { "id": "dormer", "kind": "WALL_DORMER_GABLE", "box": { "x0": 216, "y0": 83, "x1": 315, "y1": 197 }, "bodyId": "main", "eavesY": 138, "apexY": 83, "note": "its wall continues the facade; a balcony before it" },
+          { "id": "balcony", "kind": "BALCONY", "box": { "x0": 222, "y0": 168, "x1": 312, "y1": 200 }, "bodyId": "main" }
+        ],
+        "origin": "MANUAL"
+      },
+      {
+        "id": "el-rear", "picture": "rear", "side": "REAR", "sideHow": "the garage on the left, as the plan seen from behind", "groundY": 298,
+        "bodies": [
+          { "bodyId": "garage", "leftX": 86, "rightX": 270, "eavesY": 207, "ridgeY": 97 },
+          { "bodyId": "main", "leftX": 270, "rightX": 575, "eavesY": 197, "ridgeY": 45 },
+          { "bodyId": "bay", "leftX": 575, "rightX": 607, "eavesY": null, "ridgeY": 200 }
+        ],
+        "openings": [
+          { "id": "w1", "kind": "WINDOW", "box": { "x0": 152, "y0": 235, "x1": 176, "y1": 265 }, "bodyId": "garage", "level": 0 },
+          { "id": "w2", "kind": "WINDOW", "box": { "x0": 188, "y0": 235, "x1": 212, "y1": 265 }, "bodyId": "garage", "level": 0 },
+          { "id": "d1", "kind": "DOOR", "box": { "x0": 228, "y0": 238, "x1": 258, "y1": 298 }, "bodyId": "garage", "level": 0 },
+          { "id": "w3", "kind": "WINDOW", "box": { "x0": 310, "y0": 220, "x1": 360, "y1": 270 }, "bodyId": "main", "level": 0 },
+          { "id": "d2", "kind": "GLAZED_DOOR", "box": { "x0": 412, "y0": 222, "x1": 456, "y1": 292 }, "bodyId": "main", "level": 0 },
+          { "id": "d3", "kind": "GLAZED_DOOR", "box": { "x0": 535, "y0": 220, "x1": 562, "y1": 292 }, "bodyId": "main", "level": 0 },
+          { "id": "bd1", "kind": "GLAZED_DOOR", "box": { "x0": 412, "y0": 132, "x1": 456, "y1": 196 }, "bodyId": "main", "level": 1, "inFeature": "dormer" }
+        ],
+        "features": [
+          { "id": "dormer", "kind": "WALL_DORMER_GABLE", "box": { "x0": 385, "y0": 83, "x1": 478, "y1": 197 }, "bodyId": "main", "eavesY": 137, "apexY": 83 },
+          { "id": "balcony", "kind": "BALCONY", "box": { "x0": 388, "y0": 165, "x1": 474, "y1": 200 }, "bodyId": "main" }
+        ],
+        "origin": "MANUAL"
+      }
+    ],
+    "published": [
+      { "key": "building_height", "value": 8.6, "unit": "m", "raw": "8,60 m" },
+      { "key": "footprint_area", "value": 144.5, "unit": "m2", "raw": "144,50 m²" },
+      { "key": "roof_pitch", "value": 40, "unit": "deg", "raw": "40°" }
+    ],
+    "unknowns": [
+      "the eaves height is not printed (the section is cut along the ridge): it follows from the ridge, the pitch and the span",
+      "wall thickness and floor build-up are not read",
+      "the side elevations' openings, the chimneys, the roof windows, the entrance canopy and its columns are not in this diagnostic"
+    ]
+  }
+}

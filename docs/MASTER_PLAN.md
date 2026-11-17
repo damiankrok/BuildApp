@@ -1,6 +1,6 @@
-# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.3
+# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.4
 
-Data: 16.11.2026. **Po pilocie i dodatku v3.54.2 aktywny etap v3.54.3 domyka pętlę lokalnych korekt: spójne zależności metryki, kontrolowane poprawki geometrii, ponowna budowa i kontrola końcowej sceny. Analizator tworzy dom; API wnosi obserwacje i propozycje. Ostatnie przekazane APK według raportów: 1339. Nowe style, pilot hosta i Android wymagają własnych dowodów weryfikacji.**
+Data: 17.11.2026. **Aktywna kampania v3.54.4: wspólny źródłowy opis całego domu, poprawna geometria z tego opisu i kontrola końcowej sceny. OWNER rozszerzył rolę API: może opisywać cały budynek i jego parametry z pochodzeniem. Analizator uzgadnia, buduje i weryfikuje. Ostatnie raportowane APK: 1339; v3.54.3 potwierdził lokalną integrację hosta, nie jakość uniwersalnego analizatora ani Androida.**
 
 Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
 
@@ -22,27 +22,25 @@ Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak
 
 ## 2. Aktualny priorytet
 
-**Decyzja OWNER-a — v3.54.3, 16.11.2026.** Wykonać większą kampanię analizy i implementacji. Zakończyć utratę poprawnych obserwacji w dalszych etapach i wdrożyć działającą pętlę korekty gotowego modelu. API nadal nie tworzy całego HouseDescription ani nie zastępuje LOCAL. Wykonawca może zmienić kilka zależnych modułów, w tym reprezentację potwierdzonej cechy architektonicznej, jeśli obecna uniemożliwia jej zbudowanie. Nie kończyć na kolejnym odczycie liczby lub samym CAPABILITY_MISSING.
+**Decyzja OWNER-a — v3.54.4, 17.11.2026.** Wykonać większą kampanię analizy i implementacji kompletnego zewnętrza. API może opisać cały dom z właściwych rzutów, przekrojów i elewacji, podać wydrukowane wymiary oraz zaproponować wspólną hipotezę semantyczną. Analizator uzgadnia dowody, deterministycznie buduje i kontroluje wynik. Zastępuje to wcześniejszy zakaz pełnego opisu z v3.54.2–v3.54.3, ale nie dopuszcza bezkrytycznego nadpisania dobrego LOCAL swobodnym opisem AI.
 
-**Stan odczytany na 258a3a9.** Pełny raport v3.54.2 i późniejszy dodatek opisują różne checkpointy. W zamrożonym pilocie API pomogło ustalić skalę w pięciu domach i wykrywało rzeczywiste wady modeli, lecz nie poprawiło geometrii. sp318422 był fałszywie przyjęty ze zbyt dużą głębokością mimo prawidłowej skali. Późniejsza kontrola zasięgu cofnęła to przyjęcie. Rozwój składania planu pozwolił zbudować Aksamitki około 12,32 × 8,82 m, z brakującym wykuszem wobec całkowitej szerokości 13,22 m. Próg 10% wybrany po wyniku jest zmianą rozwojową, nie dowodem potwierdzającym. Scena nadal pomija charakterystyczny element dachu nad wejściem. W dodatku nie było nowych wywołań API, więc kontrola końcowej sceny przez konsultanta nie jest wykazana.
+**Stan z raportu v3.54.3.** Dostawa 0d4a057, zamrożony kandydat aabc044, solver 2.44.0. Host lokalnie potwierdzony. Aksamitki otrzymały przybliżoną lukarnę, sp318422 poprawne wymiary, Supertunie model częściowy. Na ośmiu nowych domach brak potwierdzonego zysku całego domu; trzy lukarny zbudowane, jedna zgodna ze scorerem. Dwie spełniły kryterium szkody mimo braku utraty modeli. Gracja ma 12,06 × 13,43 m wobec 16,82 × 10,12 m i brak garażu; przyczyna nadmiernej wysokości wymaga osobnego śladu. 22192sl zgłaszał zgodny obrys na podstawie rzutu, mimo brakującej bryły w scenie. Te wyniki pochodzą z raportu, nie z nowego uruchomienia koordynatora.
 
-**Pierwsze blokady do potwierdzenia i naprawy.** Poprawna nowa metryka mogła współistnieć z pochodnymi łańcuchami wyliczonymi pod starą skalą. Polityka przyjęcia była powiązana ze wzrostem pewności skali, a propozycje kontroli dachu/obrysu/otworów nie miały konsumentów. Trzeba sprawdzić te ustalenia na rzeczywistym HEAD i przeprowadzić dowód aż do finalnej geometrii. Samo odrzucenie błędnego modelu jest poprawą ochrony jakości, lecz nie zastępuje zbudowania prawidłowego elementu.
+**Najpierw rozstrzygający eksperyment.** Przygotować źródłowo sprawdzone specyfikacje Gracji i Aksamitek, z jawnymi niewiadomymi, oznaczone MANUAL_DIAGNOSTIC. Podać je temu samemu adapterowi/builderowi co dane API. Ustalić, czy poprawne dane prowadzą do poprawnej bryły, wysokości i otworów. Jeśli nie, naprawić reprezentację lub builder w tej kampanii. Ręczne specyfikacje nie trafiają do automatycznej ścieżki produkcyjnej i nie liczą się jako skuteczność AI.
 
-**Zakres kampanii.** (A) spójna rewizja metryki i pełne przeliczenie zależności; (B) przyjmowanie korekt według zmienianej właściwości, z ochroną niezależnych poprawnych danych; (C) faktyczna pętla kontroli czterech stron, korekty i ponownej budowy; (D) charakterystyczna cecha dachu Aksamitek i druga rodzina lokalnej korekty wynikająca z dowodu; (E) rzeczywisty host end-to-end oraz niezależne potwierdzenie na innych rodzinach i wydawcach. Dopuszczona jest minimalna zmiana modelu semantycznego i kompilatora. Niedopuszczone są hardcode domu, generowanie całego modelu przez API oraz dekoracyjny mesh zastępujący brak architektury.
+**Wspólny dokument.** Wersjonowany house.json obejmuje źródła/obserwacje/ograniczenia, uzgodnioną geometrię i weryfikację. To dokument analizy i kontrakt wymiany z adapterem do istniejącej domeny, nie drugi niezależny model prawdy. Poziomy, wieloboki brył, ściany, otwory, dachy, lukarny, wykusze i garaże mają stabilne ID, relacje, jednostki oraz pochodzenie per parametr. PRINTED, DERIVED, ESTIMATED, DEFAULT i UNKNOWN pozostają rozdzielone.
 
-**Aksamitki.** Określenie „jaskółka” jest wskazaniem widocznego braku, nie narzuconą klasą obiektu. Wykonawca ustala ze źródeł, czy to lukarna, poprzeczny szczyt/ryzalit, daszek lub ich układ. Wymagany jest poprawny host, poziom, połączenie połaci i relacja z bryłą/balkonem. Zgodność głównej kalenicy nie oznacza zgodnego dachu. Jeżeli źródła nie zawierają wymiarów, jawne przybliżenie wizualne nie uzyskuje prawa do dokładnego obmiaru.
+**Zakres kampanii.** Ustalić źródłową orientację i metrykę; zbudować komplet brył i poziomów; spójne dachy; otwory ze wspólnie zarejestrowanych elewacji; cechy zależne na prawidłowych hostach. Dozwolona jest zmiana powiązanych modułów, schematu i kompilatora potrzebna do tego wyniku. Nie kończyć na nowym JSON-ie, liście CAPABILITY_MISSING ani detalu dobudowanym do znanej błędnej bryły. Wnętrza zachować i kontrolować regresję, lecz pełną ocenę wnętrz raportować osobno.
 
-**Kolejność i zakres oceny.** Rozwój na znanych przypadkach: Aksamitki, sp318422, Supertunie, Madera, Torenie, Kukliki i potrzebny przypadek spoza ARCHON. Po działającej integracji i regresji zamrozić kandydata. Potwierdzenie: osiem nowych rodzin od co najmniej trzech wydawców, minimum cztery spoza ARCHON, dobranych według cech źródeł przed wynikami; także negatywy. Domy z v3542 i jego dodatków są znane. Nie wymagać nowego holdoutu po każdej zmianie rozwojowej i nie szukać domów aż do uzyskania sukcesu. Brak transferu ogranicza deklarację i rollout, nie nakazuje automatycznego usunięcia sprawdzonego kodu za flagą.
+**Odczyt API.** Najpierw źródła bez sugerowania błędnego LOCAL; następnie uzgodnienie z lokalnymi dowodami i kontrola końcowej sceny. API może zwracać metry z jednostkowanego wydruku i hipotezy geometryczne. Każda zaakceptowana wartość przechodzi do rzeczywistego konsumenta, a nie jedynie do logu. LOCAL nie ma pierwszeństwa tylko przez własną etykietę STRONG. API nie ma pierwszeństwa przez confidence. Rozstrzyga źródłowy dowód i spójność niezależnych ograniczeń.
 
-**Porównania.** A0 — przypięta baza; A1 — nowy kod bez konsultanta; R — kontrola bez zmian; C — kontrolowane korekty. Naprawa wspólnego modułu może celowo zmienić A1. Porównać wpływ samego analizatora i dodatkowy wpływ konsultanta. Replay daje dowód deterministycznego konsumenta; świeże wywołanie jest potrzebne do recenzji nowych renderów. Ocena końcowa ma niezależne źródłowe referencje, nie tylko werdykt tego samego API.
+**Porównania i zakres.** A0: baza; A1: nowy kod bez API; M: ręczna diagnostyka buildera; H: automatyczny pełny opis + uzgodnienie + budowa; replay H: odtworzenie odpowiedzi. Rozwój na znanych domach, potem jedna zamrożona próba 8 nowych rodzin od minimum 4 wydawców, co najmniej 5 spoza ARCHON. Sukces transferu kampanii: poprawa całego ocenianego zewnętrza co najmniej 3/8 domów u minimum 2 wydawców, w tym jednego spoza ARCHON, bez nowych krytycznych regresji. Poprawa względna i wierne zewnętrze są oddzielnymi wynikami. Brak okazji do aktywacji ogranicza wniosek, nie nakazuje wycofania kodu za flagą.
 
-**Budżet i dostęp.** Większy limit Fable/Claude Code nie zmienia automatycznie pułapu płatnego API. Zgoda OWNER-a na projektowy limit 100 USD nadal obowiązuje. Według księgi v3542 koszt wraz z rezerwacją to 6,243534 USD, pozostałe do limitu projektu 93,756466 USD. Wykorzystać pozostałą część istniejącego pułapu kampanii 24,11036 USD narastająco, czyli przy tym stanie 17,866826 USD. Nie resetować księgi ani dopisywać nowego limitu 20 USD. Aktualne zużycie uzgodnić na wejściu; wartości nie są potwierdzonym saldem dostawcy. Pierwsza nowa partia live do 3 USD, potem praca w pozostałym pułapie bez pytania o każdy call.
+**Budżet.** Istniejąca zgoda na projektowe 100 USD pozostaje. Obowiązuje dotychczasowy pułap kampanii 24,11036 USD narastająco. Raport v3543 podaje 9,963222 USD, więc nominalnie pozostaje 14,147138 USD; uzgodnić faktyczne zużycie/rezerwacje na wejściu. Pierwsza partia live do 2 USD; do 6 USD dostępnej puli przeznaczyć na potwierdzenie. Nie resetować księgi, nie zwiększać limitu i nie pytać o każdy call. Brak sekretu blokuje jedynie live, nie prace lokalne.
 
-**Dostawa.** Pełny samodzielny raport w GitHubie: stage-reports/SOURCE_TO_MODEL_V3543.md, krótki README_V3543.md, aktualny PROJECT_STATUS i HANDOFF. Prywatne plansze ŹRÓDŁO | PRZED | PO pokazują faktyczne końcowe sceny, w tym zbliżenia cechy dachu i wykusza; oryginały i payloady pozostają poza Gitem. Host musi przejść rzeczywisty entrypoint od strony do zapisu/wczytania sceny dla korekty, kontroli i wyniku częściowego. Android bez urządzenia pozostaje NOT_VERIFIED. Nie utożsamiać pilota hostowego z działaniem konsultanta w LOCAL telefonu.
+**Dokument wykonawczy.** BuildPlan_Prompt_Fable_v3.54.4_Wspolny_Opis_Domu.md. Raport: stage-reports/SOURCE_TO_MODEL_V3544.md i README_V3544.md. Gałąź claude/new-session-3kzcgh, commit/push z [skip ci], bez merge/PR. ForgeShape tylko do odczytu. H2 i prywatny benchmark OWNER-a poza zakresem. Uzgodnić aktualny HEAD, nie cofać nowszej pracy do wskazanego checkpointu.
 
-**Dokument wykonawczy.** BuildPlan_Prompt_Fable_v3.54.3_Pelna_Petla_Korekt.md. Gałąź claude/new-session-3kzcgh, commit/push z [skip ci], bez merge/PR. ForgeShape tylko do odczytu. H2 i prywatny benchmark OWNER-a poza zakresem. Wykonawca uzgadnia rzeczywisty HEAD i nie cofa nowszej pracy tylko do checkpointu 258a3a9.
-
-**Wyglądy aplikacji.** Raportowano sześć dodatkowych stylów Androida obok trzech istniejących, bez weryfikacji na telefonie i bez nowego APK. Zachować kod i propozycje, nie traktować podglądu z osobnego rasteryzatora jako testu renderera Androida. Obecna kampania nie zamawia kolejnych stylów. Wygląd nie może maskować brakującej geometrii; profil oceny jest neutralny i stały.
+**Historia decyzji.** v3.54.3 ograniczał API do lokalnych korekt i wdrożył działającą pętlę, lecz wynik nie potwierdził całej geometrii nowych domów. Ten zakres i jego stary zakaz pełnego opisu są zakończonym checkpointem; bieżące uprawnienia określają niniejszy §2 oraz §7.
 
 ### Checkpointy v3.54.1–v3.54.2 — kontekst historyczny
 
@@ -66,7 +64,7 @@ Weryfikacja scorera v3542 rozdzieliła zgodność głównej kalenicy od artefakt
 
 ### Stan potwierdzony przed kampanią v3.54
 
-Poniższe wyniki i kolejność v3.53 opisują bazę oraz wcześniejszy backlog. To historyczny backlog; aktualną kolejność prac określa decyzja v3.54.3 powyżej.
+Poniższe wyniki i kolejność v3.53 opisują bazę oraz wcześniejszy backlog. To historyczny backlog; aktualną kolejność prac określa decyzja v3.54.4 powyżej.
 
 **Baza produkcyjna.** APK 1339 arm64 z `459cc2d`, kod `5240d7e`. Solver 2.43.0, topologia wymiarów 1.6.0, solver metryczny 1.8.0, resolver planu 1.6.0, usługa 1.11.0. Etap v3.53.14 (`226c9ac`) zamknięto jako diagnozę. Kryterium wydania wymaga zaobserwowanej poprawy normalnej ścieżki aż do sceny, więc obowiązuje 1339. Bilans 67/80 modeli, 13 odmów i 99/169 pomieszczeń pochodzi z v3.53.13. Macierzy, sprawdzania typów, pełnej regresji ani świeżej próby nie powtarzano w v3.53.14. [Raport v3.53.14](https://github.com/damiankrok/BuildApp/blob/226c9ac/stage-reports/SOURCE_TO_MODEL_V35314.md)
 
@@ -219,7 +217,7 @@ Analizator:
 
 Kontrakt kamer do wdrożenia i pomiaru: rozróżniać ORTHOGRAPHIC_TECHNICAL, PERSPECTIVE_PINHOLE, PERSPECTIVE_SHIFTED, PLANAR_DIAGRAM i UNKNOWN. Per widok przechowywać parametry wewnętrzne/zewnętrzne, principal-point shift, kotwice, residual reprojekcji, ocenę sylwetki/krawędzi/widoczności i confidence. Dopuszczać top-K, jeśli źródło nie rozstrzyga. Jedna wspólna hipoteza budynku ma osobną kamerę dla każdego renderu. Po korekcie ponownie dopasować dotknięte kamery i zachować silniejsze źródła. Nie stosować liniowego przeliczenia pikseli perspektywy na metry przed oceną kamery.
 
-**Aktualna rola API (§2 i §7).** API wnosi lokalne obserwacje i propozycje korekt, a analizator tworzy geometrię. Przed budową można skonsultować wymiar lub brakującą granicę; po budowie trzeba porównać źródła z renderami właściwej rewizji. Zmiana wchodzi przed zależną decyzją i unieważnia odpowiednie cache. Globalny opis całego domu nie może zastąpić LOCAL w wariancie konsultacyjnym. Przy odmowie nadal wolno przyjąć popartą źródłem obserwację i ponowić analizę.
+**Aktualna rola API (§2 i §7).** API opisuje źródłowo cały budynek lub jego części i proponuje obserwacje/hipotezy, a analizator je uzgadnia i buduje. Wspólny dokument obejmuje obserwacje, geometrię i weryfikację, ze śladem aż do sceny. Błędny LOCAL można zastąpić lepiej udokumentowanym kandydatem; niezależne poprawne własności zachowują ochronę. Wymiary drukowane, wyliczone, oszacowania i niewiadome pozostają rozdzielone. Nowa rewizja przelicza zależności i jest porównywana ze źródłami po kompilacji.
 
 Zachowany kierunek source-fusion: adaptery → źródła/obserwacje → graf dowodów i ograniczenia → hipoteza semantyczna → deterministyczny kompilator → weryfikacja/korekta. To granice odpowiedzialności, nie zakaz porównania innej kolejności wnioskowania. Ręcznie zbudowany model referencyjny pozostaje debug/test/eval, bez runtime gold ani automatycznego zaliczania zgodności. Opcjonalny VisualInterpreter może wnosić maski/keypointy i obserwacje, nie zapisywać bezpośrednio kanonicznej prawdy. Przenośną wartością są matematyka kamer, klasyfikacja źródeł, graf, solvery, ocena widoków i schematy; badawczy web UI nie narzuca platformy produktu.
 
@@ -237,7 +235,7 @@ Topologia pomieszczeń dotyczy kondygnacji i jej rzeczywistych przegród, otwor�
 
 Kształt zaobserwowany na obrazie, strona/identyfikacja, kotwica metryczna i zastosowana geometria są oddzielne. Utrata jednej kotwicy nie dowodzi płaskiego dachu ani braku balkonu. Ograniczenie kompilacji/łączenia nie może po cichu zmieniać rozpoznanej architektury na łatwiejszą. Wczesna hipoteza nie zwalnia z kontroli hostów, podpór, skali i źródeł.
 
-C1a/C1b/C2 pozostają bazą o ograniczonym zakresie, nie dowodem pełnego rozumienia domu. Wolno przebudować koordynację czytania źródeł i minimalnie rozszerzyć reprezentację potwierdzonego elementu. Historyczne A/C/B i globalny strukturalny opis domu były wariantami porównawczymi; aktualny zakres API wyznacza §7. Wpływ odczytu, arbitrażu, konsumenta i kompilacji rozdzielać w eksperymencie, a cały efekt oceniać na finalnym domu. Zachować jeden model, jego tożsamość i deterministyczną kompilację; nie wymagać nowego ogólnego frameworka.
+C1a/C1b/C2 pozostają bazą o ograniczonym zakresie, nie dowodem pełnego rozumienia domu. Wolno przebudować koordynację czytania źródeł oraz rozszerzyć reprezentację i builder potrzebne do całego ocenianego zewnętrza, bez nieuzasadnionego przepisywania kernela. Historyczne A/C/B i globalny strukturalny opis domu były wariantami porównawczymi; aktualny zakres API wyznacza §7. Wpływ odczytu, arbitrażu, konsumenta i kompilacji rozdzielać w eksperymencie, a cały efekt oceniać na finalnym domu. Zachować jeden model, jego tożsamość i deterministyczną kompilację; nie wymagać nowego ogólnego frameworka.
 
 ## 5. Co ma być trwałe, co wolno wymienić
 
@@ -288,77 +286,67 @@ Analizator i viewer mogą rozwijać się oddzielnie przez wspólny kontrakt mode
 
 Dostawa obejmuje klikalny podgląd, planszę czterech propozycji, czytelne ujęcia obu stanów, instrukcję i spis interakcji. Produkcyjny wygląd wymaga późniejszego wyboru OWNER-a; prototyp nie oznacza wydania Androida. Raport rozdziela preferencje wizualne, zgodność danych, zmierzoną wydajność w danym środowisku i nieweryfikowane zachowanie telefonu. Zakres produktu z §3 pozostaje zachowany.
 
-## 7. Pomoc AI i kontrola modelu
+## 7. Pomoc AI, wspólny opis domu i kontrola modelu
 
-**Obowiązujący kontrakt: analizator buduje, API pomaga sprawdzić i poprawić.** API nie generuje pełnego HouseDescription/modelu ani nie podmienia całego wyniku LOCAL. Dotyczy to również przypadku odmowy. Nie usuwać bez audytu historycznej ścieżki opisu, ale oddzielić ją flagą, zachować do odtworzenia i udowodnić, że nie uruchamia się w wariancie konsultacyjnym. Globalny opis z v3.54.1 nie jest domyślnym kierunkiem rozwoju.
+**Obowiązujący kontrakt v3.54.4.** API może odczytywać i opisywać cały dom, podawać wymiary ze źródeł oraz proponować pełną hipotezę semantyczną. Analizator waliduje, uzgadnia, buduje i kompiluje. Poprzedni zakaz pełnego opisu z D20 jest zastąpiony D29. Surowy opis nie jest automatycznie prawdą, a stary swobodny HouseDescription nie zastępuje bez kontroli wyniku LOCAL. Nie uruchamiać dwóch konkurencyjnych czytników płatnych niejawnie w jednym jobie.
 
-API może: odczytać niepewny napis, ustalić jednostkę/znaczenie, sprawdzić zależności innych wymiarów, wskazać lokalny element źródła, porównać stronę modelu ze źródłem, wykryć rozbieżność, poprosić o dowód i zaproponować ograniczoną korektę. Analizator wiąże obserwację z domeną i przelicza model. Nie otrzymujemy gwarancji wiernej rekonstrukcji danych, których źródła nie pokazują.
+### 7.1 Wspólny dokument i pochodzenie
 
-### 7.1 Dane, widoki i pytania
+Jeden wersjonowany house.json zawiera: (1) źródła, obserwacje, relacje i ograniczenia; (2) uzgodnioną geometrię semantyczną; (3) wynik weryfikacji i stan użycia. Adapter wiąże go z istniejącą domeną i kompilatorem, zamiast tworzyć drugi rozbieżny dom. Zachować ID i relacje kosztów, dokumentów, historii i korekt użytkownika.
 
-Rozdzielić konsultację przed budową od review po budowie. Pierwsza pracuje na źródle i niepewności; druga na źródle i renderach określonej rewizji. Przy odmowie używać nakładek/danych pośrednich, bez renderu nieistniejącego domu. W review cztery źródłowe elewacje zestawiać z odpowiadającymi widokami modelu; brakujące strony pozostają oznaczone. Rzut, przekrój i widok góry uzupełniają rozstrzygnięcie, gdy same elewacje nie wystarczają.
+Per parametr zapisywać jednostkę, znaczenie, obiekt/poziom/lica, źródło i region, rewizję, pochodzenie, zależności oraz niepewność. API może odczytać 1682 cm i zapisać 16,82 m; literalny tekst i konwersja pozostają. PRINTED, DERIVED, ESTIMATED, DEFAULT, UNKNOWN nie są zamienne. Brak nie jest zerem, a default wizualny nie staje się danymi do zakupowego obmiaru. Wymiary całkowite, korpusu, dachu, podcienia i powierzchnie o różnych definicjach są oddzielne.
 
-Strony domu nie stają się automatycznie stronami świata. Uzgodnić wariant, lustro, kondygnację, wejście/garaż/taras, ramę i kamery. Nie wyprowadzać metrów liniowo z pikseli perspektywy. Porównanie PRZED/PO zachowuje wspólne kamery, skalę i orientację. Dodatkowy kadr musi mieć oryginał, kontekst i pełną transformację.
+Schemat obejmuje poziomy, wieloboki kondygnacji i pustki, bryły/skrzydła/wykusze, ściany z licami, otwory z hostem i rzędną, połacie/kalenice/okapy/spadki, lukarny różnych rodzajów, balkony/portyki/podpory/kominy oraz istniejące wnętrza. Zakres odczytu, zbudowania i sprawdzenia każdej rodziny jest jawny. CAPABILITY_MISSING w aktywnym zakresie oznacza niedokończony konsument, nie sukces.
 
-Odczyt dosłowny, wartość wyliczona z sumy, oszacowanie i wartość przyjęta mają różne pochodzenie. Zgodna suma wymiarów nie dowodzi, że każdy składnik odczytano, a pole ogłoszone nie służy rozciąganiu niepełnego domu. API może wnieść obserwację pominiętą przez lokalny OCR/CV; ten sam nieskuteczny czytnik nie jest jedynym sędzią nowego dowodu. Confidence i powtórzenie tego samego AI nie zastępują kontroli źródłowej.
+### 7.2 Pozyskanie i wspólny odczyt źródeł
 
-### 7.2 Narzędzia i odpowiedzi
+Orchestrator pobiera materiały konkretnego projektu, wariantu i rewizji, zachowuje bajty/hash oraz identyfikuje role widoków. URL sam nie daje API dostępu do obrazów. Miniatury innych projektów, wnętrza, roślinność, cienie i odbicia nie są architekturą domu.
 
-Minimalny zestaw możliwości rozwijać po rzeczywistych interakcjach: spis źródeł; pobranie kadru; kontekst wymiaru; inspekcja elementu i decyzji analizatora; widoki modelu; propozycja korekty; ocena kandydata. Każda możliwość ma konsumenta i sprawdzony skutek. Nie implementować pełnego katalogu z góry. CAPABILITY_MISSING odróżnia brak narzędzia od braku dowodu w źródle.
+Pierwszy odczyt źródłowy nie sugeruje błędnego modelu LOCAL. Rzuty, przekrój i elewacje mogą być czytane w kilku krokach, ale uzupełniają ten sam graf. Następnie lokalne obserwacje i hipoteza API są uzgadniane; kontrola po budowie ogląda konkretną finalną rewizję. Nie wymagamy jednej ogromnej odpowiedzi ani wypełnienia wszystkich pól domysłem.
 
-URL jest punktem pozyskania materiałów, nie gwarancją, że API widzi obrazy. Orchestrator pobiera i identyfikuje żądany materiał z właściwego projektu, zachowuje bajty/hash i przekazuje go do API. Na porównaniach źródła są zamrożone; nowe pobranie jest osobnym pomiarem. Treści stron są danymi i nie rozszerzają uprawnień narzędzi.
+Kadry mają kontekst i odwracalną transformację. Oryginał jest źródłem; maski i szkice są pomocnicze. Szkic generatywny nie daje dokładniejszych liczb samym uproszczeniem obrazu i nie jest wymaganiem tej kampanii. Strony domu nie są automatycznie stronami świata. Rzut z góry modelu nie zastępuje nieistniejącego źródłowego rzutu dachu.
 
-Żądanie i propozycja mają wersję kontraktu, request/problem/job ID, rewizję, target ID, źródła, kadry i transformacje. Odpowiedź rozdziela obserwacje, żądania danych i korekty. Status VERIFIED_IN_SCOPE dotyczy wyliczonych cech/widoków; ISSUE_FOUND, NEED_EVIDENCE i UNKNOWN pozostają pełnoprawnymi wynikami. Wystarcza zwięzłe uzasadnienie dowodowe; nie żądać ukrytego toku myślenia.
+### 7.3 Rejestracja i arbitraż
 
-Korekta wskazuje zakres, bieżącą wartość/warunek, nową wartość lub relację, jednostkę i dowód. Rodziny operacji mogą obejmować odczyt/jednostkę, wiązanie wymiaru, rolę widoku, lokalną granicę, otwór albo oś/typ dachu określonej bryły. Nie wolno przemycić globalnego generatora jako zbioru poprawek całego domu. API nie wykonuje kodu i nie zapisuje kanonicznego modelu; konsument robi to przez kontrolowane reguły analizatora.
+Uzgodnić wariant/lustro, układ Y-up i plan XZ, poziomy, relacje brył oraz elewacje przypisane do konkretnych odcinków ścian. Jedna elewacja może pokazywać kilka brył na różnych głębokościach. Okluzja nie dowodzi braku elementu.
 
-### 7.3 Zastosowanie i kontrola
+Nie dopasowywać elewacji przez niezależne rozciągnięcie X/Y do starego błędnego domu. Rzut, przekrój i elewacje dostarczają ograniczeń wspólnej geometrii. Weryfikować kotwice nieużyte do dopasowania. Perspektywa wymaga właściwego modelu kamery; przy jego braku pozostawić ocenę topologii/proporcji lub UNKNOWN. Nie tworzyć metrów z niekalibrowanej perspektywy.
 
-Snapshot → walidacja → kandydat → przeliczenie zależności → kompilacja → kontrola źródłowa → accept/rollback. Wartość sprawdzić w finalnym elemencie oraz scenie; odczyt przyjęty, lecz nadpisany dalej, nie jest sukcesem. Zachować ID, provenance, surowe odpowiedzi i log wszystkich decyzji.
+API nie wygrywa dzięki confidence, a LOCAL dzięki własnej etykiecie STRONG. Nowy niezależny dowód może podważyć lokalną skalę, orientację lub obrys. Nie wymagaj, by ten sam nieskuteczny czytnik rozpoznał ponownie fakt wskazany przez API. Wymagaj sprawdzalnego źródła, właściwego wiązania i spójności niezależnych ograniczeń. Powtórzenie AI, kopia tego samego druku i pochodna już użytej skali nie są niezależnymi świadkami.
 
-Walidacja obejmuje typ, jednostkę, target, rewizję, dozwolony zakres i źródła; nie potwierdza prawdy samą składnią. Przyjęcie hipotezy i uznanie jej za wymiar do obmiaru są osobnymi decyzjami. Przy konflikcie zachować alternatywy i oznaczyć ograniczenie. Nie dopasowywać geometrii do ogłoszonego pola i nie zwężać otworów po cichu dla poprawnej kompilacji.
+### 7.4 Konsument, budowa i pętla
 
-Korekta trafia przed właściwy resolver/dekompozycję/kompilację, unieważnia zależny cache i nie niszczy niezależnego potwierdzonego dowodu. Nie wymaga, by poprzedni błędny model zgadzał się z proponowaną poprawą. Sprzeczność z silniejszym dowodem wymaga wyjaśnienia, nie ślepego pierwszeństwa AI lub LOCAL.
+Snapshot → walidacja → uzgodniony kandydat → przeliczenie zależności → budowa → kompilacja → kontrola źródłowa → accept/rollback. Pole dokumentu ma wskazanego konsumenta i ślad do finalnego parametru oraz geometrii. Legacy heurystyka nie może po cichu nadpisać zaakceptowanych danych. Wartości pochodne starej rewizji przelicza się; surowe obserwacje pozostają.
 
-Pilot: domyślnie dwie rundy zmieniające model, do czterech dodatkowych żądań dowodu na rundę i jedno ponowienie transportu. Koszt i czas mają ograniczenia. Brak nowego dowodu, powtarzanie propozycji albo niejednoznaczny wynik kończą pętlę z ostatnim dobrym/oznaczonym częściowym wynikiem. Błąd sieci nie kasuje działającego modelu.
+Kolejność zatwierdzania: tożsamość/wariant, orientacja/metryka, komplet brył/poziomy, dachy, otwory, cechy zależne i detale. Zbierać obserwacje wolno wcześniej. Znana wada hosta wstrzymuje zależną cechę, nie wszystkie niezależne fakty całego domu. Zebrane propozycje zachowuje się do ponownego związania po naprawie gospodarza.
 
-### 7.3a Spójna rewizja zależności i akceptacja per właściwość — v3.54.3
+Obrys jakościowy porównuje końcową geometrię właściwego obiektu i poziomu z równoważnym źródłem, nie tylko obrys pośredni rzutu. Równy bbox nie dowodzi garażu ani właściwego kształtu. Otwór musi należeć do właściwej ściany, lukarna do właściwego dachu; nie używać łatwiejszego prymitywu bez jawnego przybliżenia.
 
-Zmiana metryki/wiązania wymiaru przelicza wszystkie zależne interpretacje, łańcuchy, rejestracje i geometrię. Surowe obserwacje są zachowane; pochodna z poprzedniej skali nie może służyć jako niezależny dowód przeciw nowej. Każdy użyty wynik pochodny wskazuje aktywną rewizję albo jawnie niezależne pochodzenie. Ciepły cache nie może dawać innego modelu niż odtworzenie z surowych danych. Wersja algorytmu zmienia się wraz z zachowaniem; byte-identical geometrii oceniamy osobno od metadanych wersji.
+Narzędzia: spis/kadry źródeł, kontekst pomiaru, inspekcja elementu i jego decyzji, strukturalny opis/hipoteza domu, rozwiązanie kandydata z konfliktami, widoki rewizji, korekta i ocena. Rozwijać istniejące interfejsy. API nie wykonuje kodu i nie edytuje referencji ani księgi. Potrzebne krótkie uzasadnienie źródłowe, nie prywatny tok myślenia.
 
-Przyjęcie obserwacji, przyjęcie kandydata i dopuszczenie ilości są osobnymi decyzjami. Poprawka dachu lub otworu nie wymaga wzrostu pewności skali. Wymaga źródłowo potwierdzonej korzyści dotyczącej poprawianej cechy i ochrony niezależnych poprawnych własności. Poprawny JSON, confidence i nowy hash nie wystarczają. Rollback kandydata nie kasuje nowego poprawnego faktu ze źródeł.
+Domyślnie dwie rundy korekt po odczycie, do czterech dodatkowych kadrów na rundę, jedno retry transportowe; DEV może mieć jawne dodatkowe eksperymenty w budżecie. ID, source hash i baseRevision są obowiązkowe. Stara propozycja wymaga ponownego związania; operacje są idempotentne. Brak nowego dowodu, konflikt, koszt/czas lub anulowanie kończą pętlę z uczciwym częściowym wynikiem.
 
-Zasięg porównuje zgodny obiekt, poziom, oś i lica. Wymiar korpusu nie jest automatycznie całkowitym; bbox płyt z tarasami nie jest automatycznie obrysem ścian. Znany brak wykusza nie jest niepewnością do ukrycia progiem 10%. Model może być użytecznym podglądem częściowym, bez uznania go za wierny lub właściwy do obmiaru.
+### 7.5 Obmiar i monitorowanie
 
-Kontrola po budowie ma konsumentów i ograniczoną kolejkę korekt. Po zastosowaniu zmiany analizator przebudowuje model, renderuje właściwą rewizję i ponawia kontrolę. Brak konsumenta jest nazwaną luką implementacji; w aktywnym zakresie nie jest docelowym zachowaniem. API może wskazać pominiętą cechę przez region/host, a analizator tworzy jej stabilne ID i geometrię. Niedopuszczony pozostaje globalny generator domu.
+Przyjęcie obserwacji, kandydata i dopuszczenie ilości są osobne. Rollback nie kasuje poprawnego faktu. Podgląd częściowy może pozostać dostępny, ale sprzeczna skala, brak skrzydła czy niezweryfikowana wysokość ograniczają odpowiednie ilości. COMPLETED nie oznacza wiernej sceny, ACCEPT nie oznacza poprawnego całego domu.
 
-### 7.4 Monitoring i niezależna ocena
+Claude Code zapisuje: rzeczywiście wysłane źródła → raw/parsed odpowiedź → wiązanie → konsument → finalna liczba/obiekt → mesh → ocena. Rozróżnia błędny odczyt, wiązanie, brak konsumenta, nadpisanie, starą pochodną, ograniczenie reprezentacji, konflikt kompilacji i brak informacji w źródle.
 
-Claude Code instrumentuje pętlę, rejestruje rzeczywiście wysłane dane i tool calls, identyfikuje konsumenta i miejsce utraty informacji. Nie podpowiada ręcznie wartości z referencji w przebiegu zaliczanym jako automatyczny. Ręczne diagnozy mają osobną etykietę. Referencje oceny nie trafiają do API.
+Ręcznie sprawdzony opis służy diagnostyce buildera przez te same interfejsy; nie jest produkcyjnym fallbackiem ani dowodem automatycznego rozpoznania. Referencje ocen nie trafiają do API. Replay potwierdza deterministyczność konsumenta, a świeży bieg bada wariancję. Recenzja tego samego API nie zastępuje niezależnej kontroli sceny.
 
-Raport odróżnia błędny odczyt, błędne wiązanie, brak narzędzia, odrzucenie, brak konsumenta, późniejsze nadpisanie, stary cache, ograniczenie reprezentacji i konflikt kompilacji. Wyniki muszą rozstrzygnąć, jakie dane i operacje API rzeczywiście potrzebuje, które są zbędne oraz kiedy warto konsultować. Na znanych domach rozwijać potrzebne narzędzia i konsumentów; potwierdzenie odbywa się raz na zamrożonym kandydacie, według aktywnego zlecenia §2.
+### 7.6 Budżet i dostęp
 
-### 7.5 Budżet i dostęp
+OWNER autoryzował projektowy limit 100 USD. Kontynuowany pułap kampanii to 24,11036 USD narastająco, a raportowana księga v3543 wynosi 9,963222 USD: nominalnie pozostaje 14,147138 USD. Na wejściu uzgodnić aktualne rezerwacje i koszty. Pierwszy smoke do 2 USD, do 6 USD dostępnej puli odłożyć na ocenę końcową. Nie zerować księgi, nie podnosić limitów, nie pytać o każdy call i nie uruchamiać płatnego hostingu/generatora obrazów w ramach tego zlecenia.
 
-OWNER autoryzował klucz projektu z limitem **100 USD**. Większy limit wykonawcy Fable/Claude Code nie jest zwiększeniem limitu API. Aktywny etap kontynuuje pozostałą część pułapu kampanii 24,11036 USD narastająco: przy raportowanym koszcie i rezerwie 6,243534 USD pozostaje 17,866826 USD. Pierwsza nowa partia live do 3 USD, następne w granicach pozostałego pułapu. Nie zerować księgi, nie naliczać nowego dodatkowego budżetu 20 USD i nie pytać ponownie o każdy call/dom. Sprawdzić aktualne zużycie oraz aktywne rezerwacje; nie zwiększać limitów konta i nie uruchamiać płatnego hostingu/generatora obrazów.
+Użyć istniejącego sekretu środowiskowego. Nie kopiować klucza do raportu, rozmowy, Git, ZIP ani APK. Brak sekretu blokuje live, nie prace offline. Model i taryfę sprawdzić w oficjalnej dokumentacji przed wywołaniami, rezerwując maksymalny koszt odpowiedzi/narzędzi/retry. Nieznane rozliczenia zachować w rezerwie.
 
-Klucz korzysta z istniejącej konfiguracji/środowiska, np. BUILDPLAN_ANTHROPIC_API_KEY; nie wolno go wypisywać ani kopiować do artefaktów, Git czy APK. Nie uzależniać prac od ponownej zgody, osobnego konta lub rotacji jako nowego wymogu tego zlecenia. Faktyczny brak dostępu blokuje wyłącznie live calls; prace offline i integracyjne trwają.
+Księga jest szacunkiem na podstawie usage, nie potwierdzonym saldem dostawcy. Historyczne S53 2,72807938 USD / 92 wpisy pozostaje osobną nieuzgodnioną historią CLI_TOKEN_ESTIMATE, bez automatycznego doliczania do zapłaconego API. Nowe obrazy/pytania wymagają nowego kontekstu; stare odpowiedzi nie są recenzją nowej sceny.
 
-Rezerwować koszt przed żądaniem, uwzględniając obrazy, maksymalne wyjście, narzędzia, cache/retry i nieznane rozliczenie timeout. Sprawdzić dostępny model i bieżącą taryfę w oficjalnym źródle. v3.54.1 raportuje około 4,11036 USD / 132 żądania, a v3542 dalsze 1,987078 USD i 0,146096 USD rezerwy dla przerwanego żądania, łącznie 6,243534 USD. To księga szacunkowa, nie rachunek końcowy. Nie zerować ani podwójnie doliczać wcześniejszych kosztów. S53: 92 wpisy i 2,72807938 USD CLI_TOKEN_ESTIMATE, billing UNCONFIRMED, pozostają osobną historią bez automatycznego traktowania jako zapłaconych wywołań API. Limit to nie saldo; uwzględniać dostępne informacje o wykorzystaniu i rezerwach.
-
-Surowe odpowiedzi odtwarzać offline przy zmianach parsera lub konsumenta. Nowe obrazy/model/pytanie wymagają nowego kontekstu, a starej odpowiedzi nie nazywać oceną nowej rewizji. Klucz na serwerze/brokerze, Claude Code wyłącznie narzędziem rozwoju. Brak API zachowuje użyteczny wynik LOCAL z jawnymi ograniczeniami. Test hosta i test Androida mają osobne statusy.
-
-### Porównanie czytania oryginału i przygotowania obrazów
-
-IU-02 na pięciu domach DEV uzyskał 36 odczytów otworów i 15 zarejestrowanych widoków na surowych elewacjach wobec 21 i 11 po zastąpieniu ich czystymi obrazami. Zmieniały się m.in. linia gruntu, sylwetka i sygnał szkła. Oryginał zachowuje geometrię źródła. Maski, kadry i szkice mają własne pochodzenie i przechodzą kontrolę zgodności z oryginałem, zanim wpłyną na model. [Audyt N9-00, § 6](https://github.com/damiankrok/BuildApp/blob/1e41324/stage-reports/STAGE_BUILDPLAN_N9_00_SYSTEM_AUDIT.md#6-dlaczego-imagesketch-pogarszało-analizę)
-
-Porównać na tych samych źródłach bazę lokalną, pytanie z oryginalnym obrazem oraz to samo pytanie z oryginałem i kadrem lub maską. Przygotowanie ma mieć jawny koszt lokalny i zachowaną transformację, a maska niepewności nie może usuwać geometrii ukrytej pod znakiem wodnym. Szkic wygenerowany osobnym narzędziem to odrębny wariant tylko wtedy, gdy jest dostępny w ustalonym zakresie. Zmierzyć przesunięcia konturu, gruntu i otworów, utratę detali, rejestrację i wynik sceny. [Dokumentacja współrzędnych Claude API](https://platform.claude.com/docs/en/build-with-claude/vision-coordinates)
-
-Najpierw rozstrzygać klasę i relację (np. szklenie między ościeżami, słupy otwartego podcienia, logo poza bryłą, linia całkowita). Dla liczb pytać o dosłowny zapis, jednostkę i odniesienie na rysunku. Wymiary w metrach wynikają z potwierdzonej skali i geometrii, a proporcje oszacowane z wizualizacji są wskazówką wizualną. Mierzyć rozpoznanie prawdy, fałszywe propozycje, UNKNOWN, zmianę sceny, koszt i p50/p95 czasu na wystarczającym zbiorze, z jawnym N. Do APK nie trafiają klucze ani prototyp badawczy. Odtwarzalne próby korzystają z hasha źródła, transformacji, pytania, schematu i modelu API.
+Pilot pozostaje za flagą i tokenem, domyślnie wyłączony. Klucz na hoście, Claude Code narzędziem rozwoju. Nie ma domyślnego wdrożenia AI na telefonie. Status hosta, bundla, ładowania sceny i UI Androida jest oddzielny.
 
 ## 8. Kryteria pomiaru i odbioru
 
-**Odbiór kampanii v3.54.3.** Porównać A0 (baza), A1 (nowy analizator bez konsultanta), R (kontrola bez stosowania) i C (korekta). Potrzebne są: spójność zależnych danych metrycznych; rzeczywista poprawka geometrii po kontroli modelu; przyjęcie według zmienianej cechy; Aksamitki prześledzone do charakterystycznego elementu dachu; druga rodzina korekty; ochrona prawidłowych danych; trzy pełne przebiegi hosta i zamrożone potwierdzenie według §2. Ograniczenia lub wynik negatywny ujawnić, nie zastępować ich poprawnym odczytem lub zielonym testem.
+**Odbiór kampanii v3.54.4.** A0/A1/M/H oraz replay, z ręczną diagnostyką M wyłączoną z wyników automatycznych. Wymagane: przyczyna proporcji i wysokości Gracji; poprawna budowa z poprawnego opisu; źródłowy pełny opis API konsumowany aż do sceny; komplet brył/poziomów/dachów/otworów w ocenianym zakresie; ochrona niezależnych poprawnych danych; trzy przebiegi hosta; jedna zamrożona próba 8 rodzin według §2 i promptu. Poprawa względna nie jest ukończeniem wiernego zewnętrza. Każdy próg i zakres odniesienia ustalić przed oceną, z surowymi błędami i odmowami w mianowniku.
 
 Statusy IMPLEMENTATION_COMPLETE, HOST_INTEGRATION_VERIFIED, QUALITY_GAIN, TRANSFER_EVIDENCE i ANDROID_VERIFIED mają własne dowody. Brak transferu nie nakazuje usunięcia działającej implementacji za flagą, ale nie uzasadnia powszechnego rollout. Model ze znanym istotnym brakiem pozostaje częściowy, nawet gdy ogólna tolerancja zasięgu jest spełniona. Metryki dachu obejmują charakterystyczne cechy, hosty i połączenia, nie tylko oś głównej kalenicy.
 
@@ -439,14 +427,14 @@ Zachowane dawne ID: **DEC-SOURCE-PROVIDER-AGNOSTIC-001** (§ 3.8), **DEC-SINGLE-
 | D11 | Wspólne dopuszczenie korekty, per-param provenance i jawne capabilities | Wdrożone w ograniczonym zakresieC1/C2; braki dostępu/balkonu i pozostałych rodzin pozostają |
 | D08 | Dokładne L/R, mixed regions, ściany/słupy/balkony/lukarny nadal wymagają miernika | Otwarte |
 | D12 | Utrzymać istniejący kernel; ForgeShape przede wszystkim jako wzorzec stabilnych refs, port dopiero po mierzalnym problemie geometrii | Rekomendacja audytu 3 |
-| D13 | Globalny opis domu AI jest historycznym pilotem hostowym v3.54.1; nie zastępuje LOCAL w aktualnym wariancie konsultacyjnym | Czytnik live naprawiony; kierunek zastąpiony przez D20. Ścieżka Android nadal niepotwierdzona |
+| D13 | Swobodny HouseDescription z v3.54.1 jest historycznym wariantem; nie ma bezwarunkowego pierwszeństwa nad LOCAL | Aktualny pełny opis źródłowy i jego walidacja według D29; Android nadal niepotwierdzony |
 | D14 | Brak skali blokuje dokładny obmiar, lecz nie musi kasować obserwacji topologii; kandydat nie jest drugim modelem prawdy | Doprecyzowanie istniejącego wymagania |
 | D15 | Oddzielne statusy SLICE/CAMPAIGN/VERIFICATION, checkpoint nie kończy kampanii | Ujęte w nowym protokole i promptcie |
 | D16 | Role macroF1, kompletne przypisanie i dokładność/pokrycie liczb mają osobne mianowniki; bez zmiany historycznych wyników | Doprecyzowane w § 8 |
 | D17 | Wektory, OCR/CV i AI to dostępne narzędzia; wybór i kolejność po rozstrzygającym eksperymencie | Swoboda metody w zleceniu v3.53, bez pierwszeństwa konkretnego czytnika |
 | D18 | Powstanie modelu, jakość skali i jakość całego zewnętrza to różne wyniki | Aktywne doprecyzowanie pomiaru ANY-LINK; bez przeliczania starych wyników |
-| D19 | Claude Code prowadzi diagnozę, implementację i pomiar zgodnie z aktualnym zleceniem; koordynator otrzymuje raport decyzyjny | v3.54.3: większa kampania domknięcia konsumentów i kontroli sceny, bez wymuszania uniwersalnego rollout |
-| D20 | Analizator tworzy model; API konsultuje odczyty i kontroluje źródło–model, proponując ograniczone korekty | Nowa decyzja OWNER-a v3.54.2, zastępuje globalne generowanie w aktywnym kierunku |
+| D19 | Claude Code prowadzi diagnozę, implementację i pomiar, koordynator otrzymuje raport decyzyjny | v3.54.4: wspólny opis i kompletna geometria, bez wymuszania uniwersalnego rollout |
+| D20 | Historyczne ograniczenie API do lokalnych odczytów i korekt v3.54.2–v3.54.3 | Zastąpione D29; analizator nadal buduje i waliduje |
 | D21 | Każda korekta ma rewizję, dowód, konsumenta, przeliczenie i accept/rollback; monitoring ujawnia nadpisanie lub brak efektu | Obowiązkowy dowód integracji, nie tylko poprawnej odpowiedzi API |
 | D22 | Sześć DEV i cztery potwierdzające było protokołem v3542 | Zakończony checkpoint; aktualny podział i kryteria określa §2 |
 | D23 | Nowa metryka unieważnia i przelicza zależne łańcuchy/rejestracje/geometrię | Wymaganie v3.54.3; surowe obserwacje i niezależne fakty pozostają |
@@ -455,6 +443,11 @@ Zachowane dawne ID: **DEC-SOURCE-PROVIDER-AGNOSTIC-001** (§ 3.8), **DEC-SINGLE-
 | D26 | Znane braki geometrii pozostają jawne, bez ukrywania progiem zasięgu | Osobno podgląd częściowy, zgodność źródłowa i użycie ilości |
 | D27 | Rozwój na znanych domach, potem jedna zamrożona próba wielu wydawców | Brak obowiązku nowej próby po każdym roboczym wariancie; pierwszy wynik zachowany |
 | D28 | Pełny raport tekstowy w repo, prywatne plansze i źródła poza Git | Link do przypiętego commitu i raportu wystarcza do przekazania koordynatorowi |
+| D29 | API może opisać cały dom, wymiary i relacje ze źródeł; uzgodniony house.json prowadzi do istniejącego modelu i kompilatora | Decyzja OWNER-a 17.11.2026; zastępuje zakaz z D20 |
+| D30 | Najpierw sprawdzenie buildera ręcznym źródłowym opisem, potem ten sam przepływ automatyczny | MANUAL_DIAGNOSTIC nie liczy się jako automatyczne rozpoznanie |
+| D31 | Metry z wydruku dozwolone dla API, pochodzenie i znaczenie per parametr obowiązkowe | LOCAL STRONG i confidence AI nie są samodzielnym arbitrem |
+| D32 | Kontrola finalnej geometrii oraz zależności hosta przed przyjęciem cechy | Brak zmiany rozmiaru/utraty modelu nie dowodzi braku szkody |
+| D33 | Wspólna rejestracja rzutów, przekrojów i elewacji bez dopasowania do błędnego modelu | Otwory, poziomy, bryły i dachy mają jedną spójną ramę |
 
 Etapy 1–4 dały plan i prompt; po nich wdrożono ograniczoneC1/C2 i rozszerzano źródła. Ostateczny wybór strategii inference nadal wymaga pomiaru. Przegląd 1327 nie wdraża nowego kodu. Lokalne sprzeczności podczas retencji rozstrzygnięto jawnie: brutto pozostaje zatwierdzone, paleta zastępuje dawny zakaz koloru, aktualne zlecenie zastępuje dawne NEXT i blokady technologii. Szczegóły w rejestrze retencji.
 
@@ -580,3 +573,10 @@ Uzgodniono pełny raport v3.54 i mapę modułów z fragmentami aktualnej bramki 
 ### Kontrola aktualizacji v3.54.3
 
 Uzgodniono raport v3542 wraz z dodatkiem na 258a3a9 i ograniczenia kodu konsultanta. Zmieniono aktywny priorytet, budżet kontynuacji, porównania i kryteria odbioru. Dodano kontrakt spójnych zależności metrycznych, przyjmowanie per właściwość i obowiązek pełnej pętli geometrii; Aksamitki są przypadkiem DEV, a próg 10% nie jest dowodem walidacji. Zachowano produkt, koszty FREE, timeline, dokumenty, PROJECT/AS-BUILT, portowalność, źródłową neutralność i ograniczenie API do konsultacji. Historyczne zlecenia nie zastępują aktywnego zakresu. Zachowano propozycje wyglądu bez ponownego zlecania redesignu. Dokument stanowi plan; implementacja v3.54.3 nie została wykonana przez koordynatora.
+
+
+### Kontrola aktualizacji v3.54.4 — 17.11.2026
+
+Zaktualizowano aktywny priorytet §2, rolę API w §4, kontrakt §7, odbiór §8 i decyzje D13/D19/D20/D29–D33. Zakaz pełnego opisu zastąpiono źródłowym opisem całego domu, z walidacją i deterministycznym budowaniem. Zmieniono budżet nominalny według raportu v3543, bez zwiększenia pułapu. Wprowadzono diagnostykę poprawny opis→builder, obowiązek śladu wysokości Gracji i ocenę geometrii po kompilacji.
+
+Cały katalog produktu §3 zachowano bajtowo względem v3.54.3: koszty, dokumenty, timeline, PROJECT/AS-BUILT, FREE/PRO, stabilne ID, recovery, neutralność wydawców i pomysły. Zachowano §5–6, §9 i dotychczasowy rejestr historii od §11. Historyczne kontrole opisują dawne wersje, nie nowe wyniki. Ta aktualizacja jest zleceniem i planem, nie dowodem implementacji, uruchomienia API, poprawy modeli ani wydania APK.
