@@ -18,7 +18,7 @@ import { area, bbox, canonical, contains, edgeOf, isSimple, onBoundary, pt, squa
 import type { P2 } from './poly.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.2.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.3.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
@@ -33,19 +33,51 @@ export const RESOLVE = {
   elevationAlongShare: 0.04,
   /** The ridge height an elevation shows at that same scale must agree with the house's ridge height within this share. */
   elevationRise: 0.12,
+  /**
+   * v3.54.6: the drawings of one set share a scale. An elevation whose inner body ends miss the plan (a roof read for a
+   * wall, a plan's body division drawn by eye) registers on its OUTER ends alone only when the scale those give agrees
+   * with the scale of an elevation of the same set registered on three or more ends within this share, and its ridge
+   * height at that scale agrees as well. 3 %: the front and rear of the hand-checked Gracja set, both registered on six
+   * ends, differ by 2.5 % (3.306 against 3.226 cm/px) — the spread of one publisher's set; a wall end misread by a roof
+   * overhang moves the scale by 9–10 % (Alaska), well outside it.
+   */
+  sharedScale: 0.03,
   /** The printed total height and the published building height must agree with ridge − terrain within this (m). */
   heightAgreeM: 0.35,
   /** A printed ridge may leave the eaves this far above one storey over the top floor before it is not this roof's ridge. */
   ridgeOverStoreyM: 1.2,
   /** A door threshold or a ridge anchor is taken as the picture's ±0,00 only within this of what the ground line gives (m). */
   datumAgreeM: 0.6,
+  /** v3.54.6: how far below ±0,00 the terrain may lie when no terrain mark is printed (a building height is ridge − terrain). */
+  terrainUnknownMaxM: 1.2,
   /** Two boxes read side by side at one height with less than this between them are the panels of ONE opening: half a brick — no masonry pier is thinner. */
   mullionM: 0.125,
+  /**
+   * v3.54.6: two boxes one above the other, at one width, with less than this between them are ONE opening divided by a
+   * transom: the wall band over an opening carries a lintel, and no lintel is this thin.
+   */
+  transomM: 0.2,
   /** Wall lines of traced outlines closer than this are one line (a reader's pixel is 1–2 cm; its hand is ±10 px). */
   mergeCoordinatesM: 0.2,
   bay: { maxDepthM: 2.5, maxWidthM: 6, maxShare: 0.2 },
   defaults: { wallThicknessM: 0.4, slabThicknessM: 0.3, storeyHeightM: 2.8, kneeWallM: 1.0, pitchDeg: 35, overhangM: 0.5, terrainY: -0.3, sillM: 0.9, balconyDepthM: 1.2 },
 } as const
+
+/**
+ * v3.54.6 — one definition of a building's height against a figure the source gives for it (a published "building height",
+ * a total height printed on a section): the figure is the top of the roof above the TERRAIN. The model knows the top above
+ * ±0,00; the terrain below ±0,00 is known only when a mark is printed. Without one, the figure is met when the terrain it
+ * implies (figure − top) lies between 0 and `terrainUnknownMaxM` below ±0,00 — within the tolerance — and the check says
+ * that the terrain is not known. The same function is used for the described house and for LOCAL.
+ */
+export function heightAgainstFigure(topAboveZeroM: number, terrain: { value: number | null; basis: string }, figureM: number, tolM: number): { ok: boolean; heightM: number | null; implied: number; says: string } {
+  if (terrain.value !== null && terrain.basis === 'PRINTED') {
+    const h = topAboveZeroM - terrain.value
+    return { ok: Math.abs(h - figureM) <= tolM, heightM: h, implied: -terrain.value, says: `${h.toFixed(2)} m above the printed terrain (${terrain.value.toFixed(2)})` }
+  }
+  const implied = figureM - topAboveZeroM
+  return { ok: implied >= -tolM && implied <= RESOLVE.terrainUnknownMaxM + tolM, heightM: null, implied, says: `top +${topAboveZeroM.toFixed(2)} m above ±0,00; no terrain mark: the figure implies the terrain ${implied.toFixed(2)} m below ±0,00 (allowed 0–${RESOLVE.terrainUnknownMaxM} m ± ${tolM} m)` }
+}
 
 export type ResolveResult = { geometry?: HouseGeometry; verification: HouseVerification }
 
@@ -307,10 +339,10 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const pitchObs = lv('ROOF_PITCH_DEG')[0]
   const pitchPub = o.published.find((p) => p.key === 'roof_pitch')
   const publishedHeight = o.published.find((p) => p.key === 'building_height')
-  const total = lv('TOTAL_HEIGHT')[0]
+  const total = lv('TOTAL_HEIGHT').filter((x) => ['SECTION', 'ELEVATION'].includes(pictures.get(x.picture)?.role ?? ''))[0]
   const mainId = raw.find((b) => b.role === 'MAIN')?.id ?? raw.slice().sort((p, q) => area(bodyPolys[raw.indexOf(q)]) - area(bodyPolys[raw.indexOf(p)]))[0].id
   // --- 5. elevations registered to the bodies (needed by the roofs of bodies no section measures) ---
-  type Reg = { obs: (typeof o.elevations)[number]; side: HouseSide; s: number; t: number; ok: boolean; why: string; yOf: (py: number) => number; alongOf: (px: number) => number; res: number; n: number; unresolved?: string; zeroRow: number; zeroHow: string }
+  type Reg = { obs: (typeof o.elevations)[number]; side: HouseSide; s: number; t: number; ok: boolean; why: string; yOf: (py: number) => number; alongOf: (px: number) => number; res: number; n: number; unresolved?: string; zeroRow: number; zeroHow: string; ends?: 'OUTER' }
   const alongOfPoint = (side: HouseSide, p: P2): number => (side === 'FRONT' ? p.x - gb.x0 : side === 'REAR' ? gb.x1 - p.x : side === 'LEFT' ? gb.z1 - p.z : p.z - gb.z0)
   const bodyExtent = (side: HouseSide, id: string): [number, number] | undefined => {
     const i = raw.findIndex((b) => b.id === id)
@@ -318,10 +350,74 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const a = (tracedPolys[i] ?? bodyPolys[i]).map((p) => alongOfPoint(side, p))
     return [Math.min(...a), Math.max(...a)]
   }
-  const fit = (obs: (typeof o.elevations)[number], side: HouseSide): { s: number; t: number; maxRes: number; n: number } | undefined => {
+  /**
+   * v3.54.6 — the stretch of a side over which a body is the NEAREST to the viewer. A body partly behind another (a main
+   * house behind a garage set forward) shows its wall only there at the ground, and a reader may give the columns of
+   * that visible part rather than of the whole body. Both readings are plan facts; registration tries both.
+   */
+  const visibleExtent = (side: HouseSide, id: string): [number, number] | undefined => {
+    const span = side === 'FRONT' || side === 'REAR' ? gb.x1 - gb.x0 : gb.z1 - gb.z0
+    const depthAt = (p: P2): number => (side === 'FRONT' ? p.z : side === 'REAR' ? -p.z : side === 'LEFT' ? p.x : -p.x)
+    const N = 120
+    let lo = Infinity
+    let hi = -Infinity
+    for (let k = 0; k < N; k += 1) {
+      const a = ((k + 0.5) / N) * span
+      let pick: { id: string; d: number } | undefined
+      raw.forEach((b, i) => {
+        const poly = bodyPolys[i]
+        for (let j = 0; j < poly.length; j += 1) {
+          const p = poly[j]
+          const q = poly[(j + 1) % poly.length]
+          const ap = alongOfPoint(side, p)
+          const aq = alongOfPoint(side, q)
+          if (Math.min(ap, aq) > a || Math.max(ap, aq) < a || Math.abs(ap - aq) < 1e-9) continue
+          const t = (a - ap) / (aq - ap)
+          const d = depthAt({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t })
+          if (!pick || d < pick.d - 1e-6) pick = { id: b.id, d }
+        }
+      })
+      if (pick?.id === id) {
+        lo = Math.min(lo, (k / N) * span)
+        hi = Math.max(hi, ((k + 1) / N) * span)
+      }
+    }
+    return lo < hi ? [lo, hi] : undefined
+  }
+  /**
+   * v3.54.6 — the outer ends alone, at a scale the set's other elevations confirm. The inner ends are measured against
+   * that fit and named (`inner`), never used: which of the two (the elevation's column, the plan's division) is wrong
+   * the picture does not say.
+   */
+  const fitOuter = (obs: (typeof o.elevations)[number], side: HouseSide, sRef: number): { s: number; t: number; maxRes: number; n: number; ends: 'OUTER'; inner: string; innerRes: number } | undefined => {
+    if (!Number.isFinite(sRef) || obs.mirrored || obs.bodies.length === 0) return undefined
+    const ex = obs.bodies.map((b) => ({ b, e: bodyExtent(side, b.bodyId) }))
+    if (ex.some((x) => !x.e)) return undefined
+    const lo = Math.min(...ex.map((x) => (x.e as [number, number])[0]))
+    const hi = Math.max(...ex.map((x) => (x.e as [number, number])[1]))
+    const p0 = Math.min(...obs.bodies.map((b) => Math.min(b.leftX, b.rightX)))
+    const p1 = Math.max(...obs.bodies.map((b) => Math.max(b.leftX, b.rightX)))
+    if (p1 - p0 < 1) return undefined
+    const s = (hi - lo) / (p1 - p0)
+    if (Math.abs(s / sRef - 1) > RESOLVE.sharedScale) return undefined
+    const t = lo - s * p0
+    const misses = ex.flatMap(({ b, e }) => [
+      { what: `${b.bodyId} left`, d: s * b.leftX + t - (e as [number, number])[0] },
+      { what: `${b.bodyId} right`, d: s * b.rightX + t - (e as [number, number])[1] },
+    ]).filter((m) => Math.abs(m.d) > RESOLVE.elevationAlongM)
+    const innerRes = Math.max(0, ...misses.map((m) => Math.abs(m.d)))
+    return { s, t, maxRes: Math.max(0.05, Math.abs(s / sRef - 1) * (hi - lo)), n: 2, ends: 'OUTER', inner: misses.map((m) => `${m.what} ${m.d >= 0 ? '+' : ''}${m.d.toFixed(2)} m`).join(', '), innerRes }
+  }
+  const fit = (obs: (typeof o.elevations)[number], side: HouseSide): { s: number; t: number; maxRes: number; n: number; ends: 'WHOLE' | 'VISIBLE' } | undefined => {
+    const whole = fitWith(obs, side, bodyExtent)
+    const seen = fitWith(obs, side, visibleExtent)
+    if (!seen || (whole && whole.maxRes <= seen.maxRes + 1e-6)) return whole ? { ...whole, ends: 'WHOLE' } : undefined
+    return { ...seen, ends: 'VISIBLE' }
+  }
+  const fitWith = (obs: (typeof o.elevations)[number], side: HouseSide, extentOf: (side: HouseSide, id: string) => [number, number] | undefined): { s: number; t: number; maxRes: number; n: number } | undefined => {
     const pts: Array<[number, number]> = []
     for (const b of obs.bodies) {
-      const ext = bodyExtent(side, b.bodyId)
+      const ext = extentOf(side, b.bodyId)
       if (!ext) continue
       const [l, r] = obs.mirrored ? [b.rightX, b.leftX] : [b.leftX, b.rightX]
       pts.push([l, ext[0]], [r, ext[1]])
@@ -364,16 +460,17 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const ridgePrintedMain = ridges.find((r) => r.bodyId === mainId) ?? (ridges.length > 0 ? ridges.slice().sort((p, q) => (q.valueM as number) - (p.valueM as number))[0] : undefined)
   const regs: Reg[] = []
   const notRegistered: Array<{ obs: (typeof o.elevations)[number]; why: string }> = []
-  for (const obs of o.elevations) {
+  const deferred: Array<(typeof o.elevations)[number]> = []
+  const registerOne = (obs: (typeof o.elevations)[number], sRef?: number): void => {
     const pic = pictures.get(obs.picture)
     if (obs.projection !== 'ORTHOGRAPHIC' || pic?.thisHouse === false) {
       check(`elevation-${obs.id}`, 'ORIENTATION', `elevation ${obs.id} registers to the plan`, 'an orthographic picture of this house', obs.projection !== 'ORTHOGRAPHIC' ? `${obs.projection}: no metre is read off it` : 'a picture of another house', 'FAIL', ['openings', 'features'])
       for (const x of [...obs.openings, ...obs.features]) held.push({ ref: `${obs.id}/${x.id}`, code: 'HELD_BY_DEPENDENCY', why: obs.projection !== 'ORTHOGRAPHIC' ? 'seen on a perspective picture: presence only, no position in metres' : 'seen on a picture of another house' })
       notRegistered.push({ obs, why: obs.projection !== 'ORTHOGRAPHIC' ? 'a perspective picture: no metre is read off it' : 'a picture of another house' })
-      continue
+      return
     }
     const tries: HouseSide[] = [obs.side, ...obs.alternatives.filter((a) => a !== obs.side)]
-    let best: { side: HouseSide; f: NonNullable<ReturnType<typeof fit>> } | undefined
+    let best: { side: HouseSide; f: NonNullable<ReturnType<typeof fit>> | NonNullable<ReturnType<typeof fitOuter>> } | undefined
     for (const side of tries) {
       const f = fit(obs, side)
       if (!f || f.s <= 0) continue
@@ -397,15 +494,25 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     // A stated side that does not register is NOT tried on the other sides: a mirrored front elevation fits the rear of
     // the plan perfectly, and would put a mirrored house's openings there. It is held, and said.
     const f0 = fit(obs, obs.side)
+    // v3.54.6: the stated side, in the plan's order, whose inner ends miss: tried again on its outer ends once the set's
+    // scale is known from the elevations that register on their own (never another side: see above)
+    if (!best && f0 && f0.s > 0 && sRef === undefined) {
+      deferred.push(obs)
+      return
+    }
+    const fo = !best && f0 && f0.s > 0 && sRef !== undefined ? fitOuter(obs, obs.side, sRef) : undefined
+    if (!best && fo) best = { side: obs.side, f: fo }
     if (!best) {
-      const why = !f0 ? 'no body of the plan is named on it' : f0.s <= 0 ? 'its bodies stand in the opposite order to the plan seen from that side: mirrored, or another side' : `its wall ends land ${f0.maxRes.toFixed(2)} m off the bodies' ends at one scale`
+      const why = !f0 ? 'no body of the plan is named on it' : f0.s <= 0 ? 'its bodies stand in the opposite order to the plan seen from that side: mirrored, or another side' : `its wall ends land ${f0.maxRes.toFixed(2)} m off the bodies' ends at one scale${sRef !== undefined && Number.isFinite(sRef) ? `, and its outer ends give a scale ${((((): number => { const xs = obs.bodies.flatMap((b) => [b.leftX, b.rightX]); const ex = obs.bodies.map((b) => bodyExtent(obs.side, b.bodyId)).filter((e): e is [number, number] => !!e); return ex.length ? (Math.max(...ex.map((e) => e[1])) - Math.min(...ex.map((e) => e[0]))) / Math.max(1, Math.max(...xs) - Math.min(...xs)) / sRef - 1 : NaN })()) * 100).toFixed(1)} % off the set's ${(sRef * 100).toFixed(3)} cm/px` : ', and no elevation of the set registers on three or more ends to give the set\'s scale'}`
       check(`elevation-${obs.id}`, 'ORIENTATION', `elevation ${obs.id} (${obs.side}) registers to the plan's bodies`, 'its wall ends on the bodies\' ends at ONE scale, in the plan\'s order', why, 'FAIL', ['openings', 'features'])
       knownDefects.push({ code: 'ELEVATION_NOT_REGISTERED', what: `${obs.id} (${obs.side}): ${why}; its ${obs.openings.length} opening(s) and ${obs.features.length} feature(s) are held` })
       for (const x of [...obs.openings, ...obs.features]) held.push({ ref: `${obs.id}/${x.id}`, code: 'HELD_BY_DEPENDENCY', why: `elevation ${obs.id} does not register to the plan: ${why}` })
       notRegistered.push({ obs, why })
-      continue
+      return
     }
     const { side, f } = best
+    if (f.ends === 'OUTER') knownDefects.push({ code: 'ELEVATION_INNER_ENDS_OFF', what: `${obs.id} (${side}): registered on its two outer ends at the set's scale (${(f.s * 100).toFixed(3)} cm/px); its inner body ends miss the plan's: ${f.inner}. Which is wrong — the column read on the elevation (a roof read for a wall) or the plan's division between the bodies — the picture does not say; neither is used` })
+    if (f.ends === 'VISIBLE') knownDefects.push({ code: 'ELEVATION_ENDS_VISIBLE', what: `${obs.id}: its body columns are the ends of what each body shows nearest the viewer, not of the whole body (a body stands partly behind another)` })
     // Where ±0,00 is on this picture (v3.54.5). The row read as the ground line is the terrain on one drawing and the
     // floor line on another; taking it for the terrain put every window a terrain step too low and cut every door that
     // much too short. The thresholds of the ground-floor doors ARE the floor: with one read, the datum is theirs.
@@ -436,13 +543,21 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       riseOk = Math.abs(seen - refRidge) <= RESOLVE.elevationRise * Math.max(1, refRidge - (terrainY.value ?? 0))
       riseSays = `the ridge row gives +${seen.toFixed(2)} m at the along scale; the ${ridgePrintedMain ? 'section prints' : 'published height gives'} +${refRidge.toFixed(2)} m`
     }
-    const ok = riseOk !== false
-    check(`elevation-${obs.id}`, 'ORIENTATION', `elevation ${obs.id} (${side}${side !== obs.side ? `, stated ${obs.side}` : ''}) registers to the plan's bodies`, `wall ends within ${RESOLVE.elevationAlongM} m at one scale; the ridge height at that scale within ${RESOLVE.elevationRise * 100} %`, `${f.n} wall ends, worst ${f.maxRes.toFixed(2)} m, ${(f.s * 100).toFixed(3)} cm/px; ${riseSays}`, ok ? (riseOk === undefined && f.n <= 2 ? 'UNKNOWN' : 'PASS') : 'FAIL', ok ? [] : ['openings', 'features'])
+    // on its outer ends alone the ridge is the one independent anchor left: without it agreeing the picture is not registered
+    const ok = f.ends === 'OUTER' ? riseOk === true : riseOk !== false
+    if (f.ends === 'OUTER' && riseOk !== true) riseSays = `${riseSays}; registered on its outer ends only, which needs the ridge to agree`
+    check(`elevation-${obs.id}`, 'ORIENTATION', `elevation ${obs.id} (${side}${side !== obs.side ? `, stated ${obs.side}` : ''}) registers to the plan's bodies`, f.ends === 'OUTER' ? `its two outer ends at the set's scale within ${RESOLVE.sharedScale * 100} %; the ridge height at that scale within ${RESOLVE.elevationRise * 100} %` : `wall ends within ${RESOLVE.elevationAlongM} m at one scale; the ridge height at that scale within ${RESOLVE.elevationRise * 100} %`, f.ends === 'OUTER' ? `outer ends, ${(f.s * 100).toFixed(3)} cm/px; inner ends off: ${f.inner}; ${riseSays}` : `${f.n} wall ends, worst ${f.maxRes.toFixed(2)} m, ${(f.s * 100).toFixed(3)} cm/px; ${riseSays}`, ok ? (riseOk === undefined && f.n <= 2 ? 'UNKNOWN' : 'PASS') : 'FAIL', ok ? [] : ['openings', 'features'])
     if (!ok) {
       knownDefects.push({ code: 'ELEVATION_SCALE_INCONSISTENT', what: `${obs.id}: ${riseSays}: the picture is not at one scale with the plan (cropped, perspective or another variant); what is on it is held` })
       for (const x of [...obs.openings, ...obs.features]) held.push({ ref: `${obs.id}/${x.id}`, code: 'HELD_BY_DEPENDENCY', why: `elevation ${obs.id}: ${riseSays}` })
     }
-    regs.push({ obs, side, s: f.s, t: f.t, ok, why: riseSays, yOf, alongOf: (px: number) => f.s * px + f.t, res: f.maxRes, n: f.n, zeroRow: zero.row, zeroHow: zero.how })
+    regs.push({ obs, side, s: f.s, t: f.t, ok, why: riseSays, yOf, alongOf: (px: number) => f.s * px + f.t, res: f.maxRes, n: f.n, zeroRow: zero.row, zeroHow: zero.how, ...(f.ends === 'OUTER' ? { ends: 'OUTER' as const } : {}) })
+  }
+  for (const obs of o.elevations) registerOne(obs)
+  {
+    const scales = regs.filter((r) => r.ok && r.n >= 3).map((r) => r.s).sort((p, q) => p - q)
+    const sRef = scales.length ? scales[Math.floor((scales.length - 1) / 2)] : NaN
+    for (const obs of deferred) registerOne(obs, sRef)
   }
   // One picture per side (v3.54.5). Two pictures that both register as the same side are not two sides: the one the
   // page's own caption names for that side stands, else the better fit; the other is not built from — its side is not
@@ -519,9 +634,16 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const mainBody = bodies.find((b) => b.id === mainId)
   const mainRidge = mainBody?.roof.ridgeY.value ?? null
   if (mainRidge !== null && terrainY.value !== null) {
-    const built = mainRidge - terrainY.value
-    if (total) check('height-printed', 'LEVELS', 'ridge − terrain against the total height printed on the section', `${total.valueM} m (${total.literal})`, `${built.toFixed(2)} m`, Math.abs(built - (total.valueM as number)) <= RESOLVE.heightAgreeM ? 'PASS' : 'FAIL', Math.abs(built - (total.valueM as number)) <= RESOLVE.heightAgreeM ? [] : ['roofs', 'features'])
-    if (publishedHeight) check('height-published', 'LEVELS', 'ridge − terrain against the published building height', `${publishedHeight.value} m`, `${built.toFixed(2)} m`, Math.abs(built - publishedHeight.value) <= RESOLVE.heightAgreeM + 0.25 ? 'PASS' : 'FAIL', Math.abs(built - publishedHeight.value) <= RESOLVE.heightAgreeM + 0.25 ? [] : ['roofs', 'features'])
+    // v3.54.6: one definition for both figures (heightAgainstFigure); a total height counts as printed only on a section
+    // or an elevation — the page's own "building height" repeated by the reader on a plan is the published figure, once
+    if (total) {
+      const r = heightAgainstFigure(mainRidge, terrainY, total.valueM as number, RESOLVE.heightAgreeM)
+      check('height-printed', 'LEVELS', `ridge − terrain against the total height printed on ${pictures.get(total.picture)?.role === 'ELEVATION' ? 'an elevation' : 'the section'} (${total.picture})`, `${total.valueM} m (${total.literal})`, r.says, r.ok ? 'PASS' : 'FAIL', r.ok ? [] : ['roofs', 'features'])
+    }
+    if (publishedHeight) {
+      const r = heightAgainstFigure(mainRidge, terrainY, publishedHeight.value, RESOLVE.heightAgreeM + 0.25)
+      check('height-published', 'LEVELS', 'ridge − terrain against the building height published on the page', `${publishedHeight.value} m`, r.says, r.ok ? 'PASS' : 'FAIL', r.ok ? [] : ['roofs', 'features'])
+    }
     if (!total && !publishedHeight) check('height', 'LEVELS', 'the house\'s height against an independent figure', 'a printed total height or a published building height', 'neither is given', 'UNKNOWN')
   }
   // v3.54.5 — a printed ridge mark must be a roof this house can have: the printed pitch over the plan's span leaves the
@@ -719,6 +841,26 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         last.panes += 1
       } else panels.push({ x, also: [], panes: 1 })
     }
+    // v3.54.6 — a transom: a glazing over a door or a window, as wide, with less than a lintel between them, is the upper
+    // light of one hole (a tall gable glazing read as a door and a window above it)
+    for (let merged = true; merged; ) {
+      merged = false
+      for (const lo of panels) {
+        const up = panels.find((q) => {
+          if (q === lo || family(q.x.kind) === 'G' || family(lo.x.kind) === 'G' || q.x.kind === 'ROOF_WINDOW' || lo.x.kind === 'ROOF_WINDOW' || (q.x.level ?? -1) !== (lo.x.level ?? -1) || (q.x.inFeature ?? '') !== (lo.x.inFeature ?? '')) return false
+          const ql = Math.min(q.x.box.x0, q.x.box.x1), qr = Math.max(q.x.box.x0, q.x.box.x1), ll = Math.min(lo.x.box.x0, lo.x.box.x1), lr = Math.max(lo.x.box.x0, lo.x.box.x1)
+          const gap = (Math.min(lo.x.box.y0, lo.x.box.y1) - Math.max(q.x.box.y0, q.x.box.y1)) * Math.abs(r.s)
+          return Math.abs(ql - ll) * Math.abs(r.s) <= 0.15 && Math.abs(qr - lr) * Math.abs(r.s) <= 0.15 && gap >= -0.02 && gap < RESOLVE.transomM
+        })
+        if (!up) continue
+        lo.x = { ...lo.x, box: { x0: Math.min(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y0: Math.min(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1), x1: Math.max(lo.x.box.x0, lo.x.box.x1, up.x.box.x0, up.x.box.x1), y1: Math.max(lo.x.box.y0, lo.x.box.y1, up.x.box.y0, up.x.box.y1) } }
+        lo.also.push(`${obs.id}/${up.x.id}`, ...up.also)
+        knownDefects.push({ code: 'OPENING_TRANSOM', what: `${obs.id}/${up.x.id} stands over ${obs.id}/${lo.x.id} at its width with less than a lintel (${RESOLVE.transomM} m) between them: the upper light of one opening, cut as one` })
+        panels.splice(panels.indexOf(up), 1)
+        merged = true
+        break
+      }
+    }
     for (const { x, also, panes } of panels) {
       const ref = `${obs.id}/${x.id}`
       if (!bodiesOk) {
@@ -832,7 +974,12 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       const state = named.answer === 'NOT_SENT' ? ('NOT_SENT' as const) : ('SENT_NOT_ANSWERED' as const)
       return { ...base, state, why: `${byCaption ? `picture ${named.picture}, captioned as this side,` : `${undescribed.length} elevation picture(s) of a side not known`} ${named.answer === 'NOT_SENT' ? 'was not sent' : named.answer === 'REPLAY_WITHOUT_FOLLOW_UP' ? 'was sent and not described; the recorded reading holds no follow-up for it' : 'was sent and not described'}${named.why ? `: ${named.why}` : ''}`, ...(byCaption ? { picture: named.picture } : {}) }
     }
-    return { ...base, state: 'NO_SOURCE' as const, why: o.elevations.length === 0 && doc.source.views.every((v) => v.role !== 'ELEVATION') ? 'the page publishes no elevation' : 'no published elevation shows this side' }
+    // v3.54.6: NO_SOURCE says how far it was looked for — the pictures sent, and those the limit left out unread
+    const unsentNamed = (doc.source.missing ?? []).filter((m) => m.status === 'NOT_SENT' && /^elevation picture /.test(m.what)).length
+    const unsentUnknown = (doc.source.missing ?? []).filter((m) => m.status === 'NOT_SENT' && /picture\(s\) of unresolved role not sent/.test(m.what)).map((m) => Number(/^(\d+)/.exec(m.what)?.[1] ?? 0)).reduce((p, q) => p + q, 0)
+    if (unsentNamed > 0) return { ...base, state: 'NOT_SENT' as const, why: `${unsentNamed} elevation picture(s) the page names were not sent (the picture limit): this side may be on one of them` }
+    const scope = `searched: ${doc.source.pictures.length} picture(s) sent${unsentUnknown > 0 ? `; ${unsentUnknown} of unresolved role not sent (the picture limit) — one of them may show this side: uncertain` : ''}`
+    return { ...base, state: 'NO_SOURCE' as const, why: `${o.elevations.length === 0 && doc.source.views.every((v) => v.role !== 'ELEVATION') ? 'the page publishes no elevation' : 'no published elevation shows this side'} (${scope})` }
   })
 
   for (const z of openZones) if (!z.usedBy) held.push({ ref: z.id, code: 'SOURCE_UNKNOWN', why: 'a roofed open zone traced on the plan; no registered elevation shows a balcony or a canopy over it' })

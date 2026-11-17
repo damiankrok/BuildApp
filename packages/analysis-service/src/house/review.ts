@@ -123,8 +123,14 @@ export function applyCorrection(doc: unknown, c: ReviewCorrection, sent: SentPic
     }
     case 'SET_ELEVATION_BODY': {
       if (!el) return needEl() as { code: string; why: string }
-      if (!c.bodyId || !bodies.has(c.bodyId) || typeof c.leftX !== 'number' || typeof c.rightX !== 'number') return { code: 'WRONG_BINDING', why: `no body ${c.bodyId} on the plan, or no wall ends` }
-      const entry = { bodyId: c.bodyId, leftX: r1(Math.min(c.leftX, c.rightX)), rightX: r1(Math.max(c.leftX, c.rightX)), eavesY: typeof c.eavesY === 'number' ? r1(c.eavesY) : null, ridgeY: typeof c.ridgeY === 'number' ? r1(c.ridgeY) : null }
+      // v3.54.6: the reviewer names a body's wall ends as a box (x0..x1, its apex at y0) as often as by columns; both
+      // say the same thing. A body the plan has not is a binding error; a correction without ends is a parse error.
+      if (!c.bodyId || !bodies.has(c.bodyId)) return { code: 'WRONG_BINDING', why: `no body ${c.bodyId} on the plan (bodies: ${[...bodies].join(', ')})` }
+      const left = typeof c.leftX === 'number' ? c.leftX : c.box?.x0
+      const right = typeof c.rightX === 'number' ? c.rightX : c.box?.x1
+      if (typeof left !== 'number' || typeof right !== 'number') return { code: 'PARSE_REJECTED', why: 'a body correction needs its two wall ends (leftX/rightX or a box)' }
+      const top = typeof c.ridgeY === 'number' ? c.ridgeY : typeof c.apexY === 'number' ? c.apexY : c.box ? Math.min(c.box.y0, c.box.y1) : null
+      const entry = { bodyId: c.bodyId, leftX: r1(Math.min(left, right)), rightX: r1(Math.max(left, right)), eavesY: typeof c.eavesY === 'number' ? r1(c.eavesY) : null, ridgeY: typeof top === 'number' ? r1(top) : null }
       const i = el.bodies.findIndex((b) => b.bodyId === c.bodyId)
       if (i >= 0) el.bodies[i] = entry
       else el.bodies.push(entry)
@@ -197,13 +203,25 @@ const score = (h: CompiledHouse): { failing: Set<string>; trouble: number; built
 })
 
 /** Whether a correction's result stands, by the program's own measures; the code names why not. */
-export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op: string): { ok: true; effect: string } | { ok: false; code: string; why: string } {
+export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op: string, target?: string, refs: string[] = [], unconsumed: string[] = []): { ok: true; effect: string } | { ok: false; code: string; why: string } {
   if (after.rejected) return { ok: false, code: 'PARSE_REJECTED', why: after.rejected.slice(0, 2).join('; ') }
   if (!after.bundle) return { ok: false, code: 'HELD_BY_DEPENDENCY', why: 'the corrected observations no longer resolve to a geometry' }
   const a = score(before)
   const b = score(after)
   if (after.modelHash === before.modelHash) {
-    // nothing was built of it: say what stopped it, when the builder said
+    // nothing was built of it. v3.54.6: the first actual point of loss, in order — the elevation it is on does not
+    // register (its content cannot reach a wall), the builder held what it made, or the operation changed nothing
+    const unregistered = (after.document.verification.views ?? []).filter((v) => v.elevation && !v.registered && v.why)
+    if (target && unregistered.some((v) => v.elevation === target)) {
+      const v = unregistered.find((x) => x.elevation === target)
+      return { ok: false, code: 'HELD_BY_DEPENDENCY', why: `applied to the observations, but elevation ${target} does not register to the plan (${String(v?.why).slice(0, 160)}): nothing on it reaches a wall` }
+    }
+    // an opening it set that was agreed and not cut: what stopped the cut (its host wall refused, a conflict) is the reason
+    const notCut = (after.document.verification.openings ?? []).filter((x) => x.ref && refs.includes(x.ref) && x.fit === 'NOT_BUILT' && x.why)
+    if (notCut.length > 0) return { ok: false, code: 'HELD_BY_DEPENDENCY', why: `applied to the observations and agreed, but not cut: ${notCut[0].ref}: ${String(notCut[0].why).slice(0, 200)}` }
+    // what it said that would have changed the model has no consumer: a missing capability, not a correction without effect
+    if (unconsumed.length > 0) return { ok: false, code: 'CAPABILITY_MISSING', why: `the built model is the same with it: what it sets that the builder reads was already drawn so; its ${unconsumed.join(', ')} have no consumer in ${op}` }
+    // say what stopped it, when the builder said
     const known = new Set(before.document.verification.held.map((h) => `${h.ref}|${h.code}`))
     const stopped = after.document.verification.held.filter((h) => !known.has(`${h.ref}|${h.code}`))[0]
     return stopped ? { ok: false, code: stopped.code, why: `not built: ${stopped.ref}: ${stopped.why.slice(0, 200)}` } : { ok: false, code: 'NOT_CONSUMED', why: 'the built model is the same with it: the correction reached no geometry' }
@@ -275,9 +293,20 @@ Compare the model with the elevations, side by side, in this order: which side i
         next = r.doc
         subjects.push(r.subject)
       }
+      // an operation that leaves the observations as they were restates the current reading: nothing to apply
+      if (revisionOf(next) === base) {
+        const dropped = items.flatMap((c) => (c.op === 'SET_ROOF' ? ['eavesY', 'ridgeY', 'box'].filter((k) => (c as Record<string, unknown>)[k] !== undefined) : []))
+        items.forEach((c, i) => proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: 'REJECTED', code: dropped.length ? 'CAPABILITY_MISSING' : 'NO_CHANGE', consumer: CONSUMER[c.op] ?? 'none', effect: dropped.length ? `it restates what was read; its ${[...new Set(dropped)].join(', ')} have no consumer in ${c.op}` : 'it restates what was read: the observations are unchanged', ...(group ? { group } : {}), baseRevision: base }))
+        return false
+      }
       const after = compileHouse(JSON.parse(JSON.stringify(next)), input.modelId)
       const removesOnly = items.every((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE')
-      const verdict = acceptCorrection(compiled, after, removesOnly ? 'REMOVE_OPENING' : items.some((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE') ? 'MIXED' : items[0].op)
+      const target = (() => {
+        const c = items[0]
+        const pic = typeof c.picture === 'number' ? elevations[c.picture - 1] : undefined
+        return pic ? (doc as Obs).observations.elevations.find((e) => e.picture === pic.picture.id)?.id : undefined
+      })()
+      const verdict = acceptCorrection(compiled, after, removesOnly ? 'REMOVE_OPENING' : items.some((c) => c.op === 'REMOVE_OPENING' || c.op === 'REMOVE_FEATURE') ? 'MIXED' : items[0].op, target, subjects.map((x) => x.replace(/\s*\(.*\)$/, '')), [...new Set(items.flatMap((c) => (c.op === 'SET_ROOF' ? ['eavesY', 'ridgeY', 'box'].filter((k) => (c as Record<string, unknown>)[k] !== undefined) : [])))])
       items.forEach((c, i) => proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}) }))
       if (!verdict.ok) return false
       doc = next

@@ -14,12 +14,12 @@ import { parseModel, serializeModel } from '@buildapp/model'
 import { compileBuilding } from '@buildapp/geometry'
 import { buildMobileSceneBundle } from '@buildapp/mobile-scene'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
-import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, housePoly, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
+import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, heightAgainstFigure, housePoly, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
 import type { HouseDocument } from '@buildapp/reconstruction'
-import { buildHouse } from './build.js'
-import type { BuiltHouse } from './build.js'
+import { buildHouse, headCapFor } from './build.js'
+import type { BuiltHouse, HeadCap } from './build.js'
 import { measureScene } from './measure.js'
-import type { SceneMeasure } from './measure.js'
+import type { SceneMeasure, SceneOpening } from './measure.js'
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, levelLiteralToMetres, literalToMetres } from './read.js'
 import type { FacadeCoverage, FacadesAnswer, InventoryAnswer, PlanAnswer, Selection } from './read.js'
 import type { SentPicture } from './pictures.js'
@@ -41,7 +41,7 @@ function heightLiteral(literal: string): number | null {
 }
 
 /** The answers as the observation layer of a house document. What cannot be taken is named in `notes`, never repaired. */
-export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string }> }): { document: unknown; notes: ConversionNote[] } {
+export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }> }): { document: unknown; notes: ConversionNote[] } {
   const notes: ConversionNote[] = []
   const { selection, answers } = input
   const plan = answers.plan
@@ -152,7 +152,10 @@ export function documentFromReading(input: { id: string; project?: string; sourc
     ...selection.sections.map((p) => ({ picture: p.id, role: 'SECTION' as const, asked: f ? 1 : 0, answer: f ? (levels.some((l) => (l as { picture: string }).picture === p.id) ? ('DESCRIBED' as const) : ('ASKED_NOT_ANSWERED' as const)) : ('NOT_ASKED' as const) })),
   ]
   const missing = [
-    ...(input.skipped ?? []).filter((x) => x.role === 'ELEVATION' || x.role === 'SECTION').map((x) => ({ what: `${x.role?.toLowerCase()} picture ${x.assetId.slice(-40)}: ${x.why}`, status: 'NOT_READABLE' as const })),
+    // v3.54.6: a drawing the page names that the picture limit left out was NOT SENT, not unpublished; pictures of unknown
+    // role the limit left out are counted, so that a side without a source says how far it was looked for
+    ...(input.skipped ?? []).filter((x) => (x.role === 'ELEVATION' || x.role === 'SECTION') && x.code !== 'SAME_PICTURE').map((x) => ({ what: `${x.role?.toLowerCase()} picture ${x.assetId.slice(-40)}: ${x.why}`, status: x.code === 'LIMIT' ? ('NOT_SENT' as const) : ('NOT_READABLE' as const) })),
+    ...((n) => (n > 0 ? [{ what: `${n} picture(s) of unresolved role not sent: more than the reading takes — whether one of them shows a side is not known`, status: 'NOT_SENT' as const }] : []))((input.skipped ?? []).filter((x) => x.code === 'LIMIT' && x.role !== 'ELEVATION' && x.role !== 'SECTION' && x.role !== 'FLOOR_PLAN').length),
     ...(selection.sections.length === 0 ? [{ what: 'a section', status: 'NOT_PUBLISHED' as const }] : []),
     ...(selection.elevations.length === 0 ? [{ what: 'elevations', status: 'NOT_PUBLISHED' as const }] : []),
     ...(!f ? [{ what: 'the section and the elevations were not read', status: 'NOT_SENT' as const }] : []),
@@ -246,11 +249,30 @@ export function compileHouse(input: unknown, modelId: string): CompiledHouse {
   const registrations = checks.filter((c) => c.scope === 'ORIENTATION' && c.id.startsWith('elevation-'))
   if (registrations.length > 0 && registrations.every((c) => c.status === 'FAIL')) failed.push({ scope: 'ORIENTATION', what: 'no elevation registers to the plan: which side is which is not verified', measured: registrations.map((c) => c.measured).join(' | ').slice(0, 300), expected: 'at least one elevation at the plan\'s scale' })
   if (!doc.geometry) return { document: doc, compileErrors: [], failed }
-  const built = buildHouse(doc, modelId)
-  const modelJson = serializeModel(built.model)
-  const scene = compileBuilding(parseModel(modelJson) as never)
+  const errorsOf = (sc: ReturnType<typeof compileBuilding>): CompiledHouse['compileErrors'] => sc.diagnostics.filter((d) => d.severity === 'ERROR').map((d) => ({ code: d.code, ...((d as { objectId?: string }).objectId ? { objectId: (d as { objectId?: string }).objectId } : {}), message: String((d as { message?: string }).message ?? '').slice(0, 240) }))
+  let built = buildHouse(doc, modelId)
+  let modelJson = serializeModel(built.model)
+  let scene = compileBuilding(parseModel(modelJson) as never)
+  let compileErrors = errorsOf(scene)
+  // v3.54.6: a head above its wall's top, measured by the compiler, is lowered to it once — within the opening rule — and
+  // the house built and compiled again; what the rule does not allow stays out, with the measure that says why
+  const caps = new Map<string, HeadCap>()
+  const capWhy = new Map<string, string>()
+  for (const e of compileErrors) {
+    if (e.code !== 'OPENING_ABOVE_WALL_TOP' || !e.objectId) continue
+    const cmd = built.fitted.find((c) => (c as unknown as { type: string; id?: string }).type === 'cutOpening' && (c as unknown as { id?: string }).id === e.objectId) as unknown as { sill: number; height: number } | undefined
+    const r = cmd ? headCapFor(cmd, e.message) : undefined
+    if (r?.ok) caps.set(e.objectId, r.cap)
+    else if (r) capWhy.set(e.objectId, r.why)
+  }
+  if (caps.size > 0) {
+    built = buildHouse(doc, modelId, caps)
+    modelJson = serializeModel(built.model)
+    scene = compileBuilding(parseModel(modelJson) as never)
+    compileErrors = errorsOf(scene)
+  }
+  for (const e of compileErrors) if (e.objectId && capWhy.has(e.objectId)) e.message = `${e.message} — ${capWhy.get(e.objectId)}`.slice(0, 600)
   const bundle = buildMobileSceneBundle(built.model, { scene })
-  const compileErrors = scene.diagnostics.filter((d) => d.severity === 'ERROR').map((d) => ({ code: d.code, ...((d as { objectId?: string }).objectId ? { objectId: (d as { objectId?: string }).objectId } : {}), message: String((d as { message?: string }).message ?? '').slice(0, 240) }))
   const measured = measureScene(bundle, doc.geometry)
   doc.verification.parameters = [...doc.verification.parameters, ...built.trace]
   for (const r of built.refusals) doc.verification.held.push({ ref: r.path, code: r.code, why: r.why })
@@ -288,16 +310,20 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
     const hole = measured.openings.find((x) => x.id === o.id)
     const base = { id: o.id, ...(o.refs[0] ? { ref: o.refs[0] } : {}), ...(hole?.side ? { side: hole.side } : sideOfWall.get(o.hostWall) ? { side: sideOfWall.get(o.hostWall) } : {}), hostWall: o.hostWall, level: o.level, kind: o.kind, agreed }
     if (!cutIds.has(o.id) || !hole) {
-      const why = v.held.find((h) => h.ref === o.id || h.ref === `geometry.openings[${o.id}]`)?.why
+      // v3.54.6: an opening dropped with the wall it was cut in says so — the kernel's refusal of its host is its reason
+      const host = built.kernelRefusals.find((r) => r.dropped.includes(o.id))
+      const why = v.held.find((h) => h.ref === o.id || h.ref === `geometry.openings[${o.id}]`)?.why ?? (host ? `its host wall ${host.id} was refused by the kernel (${host.codes.join(', ')}): ${host.message.slice(0, 160)} — the opening went with it` : undefined)
       return { ...base, built: null, cut: null, fit: 'NOT_BUILT' as const, ...(why ? { why: why.slice(0, 300) } : {}) }
     }
     const off = builtOf(`geometry.openings[${o.id}].offsetM`)
     const wid = builtOf(`geometry.openings[${o.id}].widthM`)
-    const b = { offsetM: off?.built ?? agreed.offsetM, widthM: wid?.built ?? agreed.widthM, heightM: agreed.heightM, sillM: agreed.sillM }
+    const hei = builtOf(`geometry.openings[${o.id}].heightM`)
+    const b = { offsetM: off?.built ?? agreed.offsetM, widthM: wid?.built ?? agreed.widthM, heightM: hei?.fit ? (hei.built ?? agreed.heightM) : agreed.heightM, sillM: agreed.sillM }
     cut += 1
     if (Math.abs(hole.widthM - b.widthM) > 0.02 || Math.abs(hole.heightM - b.heightM) > 0.02) mismatched += 1
-    const fit = (wid?.fit === 'APPROXIMATED' || off?.fit === 'APPROXIMATED' ? 'APPROXIMATED' : wid?.fit === 'ADJUSTED' || off?.fit === 'ADJUSTED' ? 'ADJUSTED' : 'EXACT') as 'EXACT' | 'ADJUSTED' | 'APPROXIMATED'
-    const why = wid?.why ?? off?.why
+    const fits = [wid?.fit, off?.fit, hei?.fit]
+    const fit = (fits.includes('APPROXIMATED') ? 'APPROXIMATED' : fits.includes('ADJUSTED') ? 'ADJUSTED' : 'EXACT') as 'EXACT' | 'ADJUSTED' | 'APPROXIMATED'
+    const why = [wid?.why, off?.why, hei?.fit ? hei.why : undefined].filter(Boolean).join('; ') || undefined
     return { ...base, built: b, cut: { widthM: hole.widthM, heightM: hole.heightM, bottomY: hole.bottomY, alongSideM: hole.alongM }, fit, ...(why ? { why: why.slice(0, 300) } : {}) }
   })
   v.checks.push({ id: 'openings-cut', scope: 'COMPILE', what: 'each opening the program cut is a hole of that size in the compiled scene', expected: 'width and height of the hole within 2 cm of what was cut', measured: `${cut - mismatched} of ${cut} holes agree; ${g.openings.length - cut} agreed opening(s) were not cut`, status: cut === 0 ? 'NOT_CHECKED' : mismatched === 0 ? 'PASS' : 'FAIL', blocks: mismatched === 0 ? [] : ['quantities'] })
@@ -339,7 +365,40 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
 // the decision between the described house and LOCAL's
 // ---------------------------------------------------------------------------------------------------------------------
 
-export const ARBITRATION = { extentShare: 0.04, extentM: 0.35, heightM: 0.45, footprintShare: 0.12, outlineOverlap: 0.85, levelM: 0.35 } as const
+export const ARBITRATION = {
+  extentShare: 0.04,
+  extentM: 0.35,
+  heightM: 0.45,
+  footprintShare: 0.12,
+  outlineOverlap: 0.85,
+  levelM: 0.35,
+  /**
+   * v3.54.6 — the openings a registered elevation shows, held against each model's holes on that side: a hole is that
+   * opening when its middle lies within `openingAlongM` (or a quarter of its width) along the side; a side is met when
+   * `openingMatchShare` of what the elevation shows is there and no more than `openingFalseShare` of it (and at least one)
+   * is extra.
+   */
+  openingAlongM: 0.5,
+  openingMatchShare: 0.7,
+  openingFalseShare: 0.3,
+} as const
+
+/** v3.54.6 — what one registered elevation shows, against one model's holes on that side. */
+export function openingsAgainstElevation(read: Array<{ a0: number; a1: number }>, holes: ReadonlyArray<SceneOpening>): { matched: number; extra: number; ok: boolean } {
+  const free = holes.filter((h) => h.alongM !== null).map((h) => ({ c: (h.alongM as number) + h.widthM / 2, w: h.widthM, used: false }))
+  let matched = 0
+  for (const r of [...read].sort((p, q) => p.a0 - q.a0)) {
+    const c = (r.a0 + r.a1) / 2
+    const tol = Math.max(ARBITRATION.openingAlongM, 0.25 * (r.a1 - r.a0))
+    const best = free.filter((h) => !h.used && Math.abs(h.c - c) <= tol).sort((p, q) => Math.abs(p.c - c) - Math.abs(q.c - c))[0]
+    if (best) {
+      best.used = true
+      matched += 1
+    }
+  }
+  const extra = free.filter((h) => !h.used).length
+  return { matched, extra, ok: matched >= Math.ceil(ARBITRATION.openingMatchShare * read.length) && extra <= Math.max(1, Math.floor(ARBITRATION.openingFalseShare * read.length)) }
+}
 export type LocalMeasure = {
   widthM: number
   depthM: number
@@ -353,6 +412,8 @@ export type LocalMeasure = {
   levelElevations?: number[]
   rooms?: number
   interiorWalls?: number
+  /** v3.54.6: LOCAL's holes by side, measured by the same ruler as the described house's. */
+  openings?: SceneOpening[]
 }
 
 /** How much two ground outlines are the same shape in the same place, each set against its own front-left corner: area in both over area in either. */
@@ -390,6 +451,11 @@ export type ArbitrationCode =
   | 'BOTH_CONTRADICT'
   | 'NO_MODEL'
 export type Arbitration = {
+  /**
+   * v3.54.6 — the check made on the revision actually handed back (D38): its model hash against the one the decision
+   * measured, and its extents and top measured again on it. Set by the link, not by `arbitrate`.
+   */
+  delivered?: { which: 'DESCRIBED' | 'LOCAL'; modelHash: string; measuredModelHash: string; same: boolean; widthM: number | null; depthM: number | null; topM: number | null }
   accepted: 'DESCRIBED' | 'LOCAL' | 'NONE'
   why: string
   findings: ArbitrationFinding[]
@@ -459,9 +525,15 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
   const fmt = (v: number | null): string => (v === null ? 'not built' : `${v.toFixed(2)} m`)
   // --- the facts LOCAL can be held against even when the description gives no geometry: what the PAGE states -----------
   const localAlone: string[] = []
+  // v3.54.6: one definition of the building height for both models (`heightAgainstFigure`): the figure is the top above
+  // the terrain, and a terrain the source does not print is a band, not a convention added to one model only
+  const terrainOf = (): { value: number | null; basis: string } => (g?.terrainY ? { value: g.terrainY.value, basis: g.terrainY.basis } : { value: null, basis: 'DEFAULT' })
+  // LOCAL's own height above the terrain, when it knows its terrain, is that figure's quantity already; else its top above ±0,00
+  const localHeight = (l: LocalMeasure, figure: number): { ok: boolean; says: string } | undefined =>
+    l.heightAboveTerrainM !== null ? { ok: Math.abs(l.heightAboveTerrainM - figure) <= ARBITRATION.heightM, says: `${l.heightAboveTerrainM.toFixed(2)} m above its own terrain` } : l.topAboveGroundFloorM !== null ? heightAgainstFigure(l.topAboveGroundFloorM, terrainOf(), figure, ARBITRATION.heightM) : undefined
   if (local && H.length === 1) {
-    const loc = local.heightAboveTerrainM ?? (local.topAboveGroundFloorM !== null ? local.topAboveGroundFloorM + 0.3 : null)
-    if (local.roofPlanes === 0 || loc === null || Math.abs(loc - H[0].value) > ARBITRATION.heightM + 0.3) localAlone.push(`building height ${local.roofPlanes === 0 ? 'no roof built' : fmt(loc)} against published ${H[0].value} m`)
+    const h = localHeight(local, H[0].value)
+    if (local.roofPlanes === 0 || !h || !h.ok) localAlone.push(`building height ${local.roofPlanes === 0 ? 'no roof built' : h ? h.says : 'not built'} against published ${H[0].value} m`)
   }
   const rejectedWhy = described.rejected
     ? `the description was rejected by the document schema: ${described.rejected.slice(0, 2).join('; ')}`
@@ -477,7 +549,12 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
   }
   if (!g || !m || !m.exteriorWalls) return out(local ? 'LOCAL' : 'NONE', local ? 'DESCRIBED_REJECTED_LOCAL_KEPT' : 'NO_MODEL', 'the description gave no measured scene')
   const unknown = [...new Set(described.document.verification.held.map((h) => h.code))].map((c) => `${described.document.verification.held.filter((h) => h.code === c).length} item(s) read and not built (${c})`)
-  if (!local) return out('DESCRIBED', 'DESCRIBED_ONLY', 'the description passes its source checks and there is no LOCAL model', false, [], unknown)
+  // v3.54.6: a plan whose scale no printed dimension gives is not verified in metres — the elevations register at whatever
+  // scale the plan has, so they cannot confirm it: what is delivered then is a partial preview, said
+  const metric = described.document.verification.checks.find((c) => c.id === 'metric')
+  const metricUnverified = metric?.status === 'UNKNOWN' ? `the plan's scale is not verified: ${metric.measured}` : undefined
+  if (metricUnverified) unknown.unshift(metricUnverified)
+  if (!local) return out('DESCRIBED', 'DESCRIBED_ONLY', `the description passes its source checks and there is no LOCAL model${metricUnverified ? `; ${metricUnverified} — shown as a partial preview` : ''}`, !!metricUnverified, [], unknown)
   const walls = m.exteriorWalls
   const near = (a: number, b: number): boolean => Math.abs(a - b) <= Math.max(ARBITRATION.extentM, ARBITRATION.extentShare * b)
   const obs = described.document.observations
@@ -492,9 +569,37 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
     findings.push({ fact: isWidth ? 'overall width' : 'overall depth', source: `printed "${d.literal}" = ${value} m`, local: fmt(localV), described: fmt(mine), localOk: near(localV, value), describedOk: near(mine, value) })
   }
   if (H.length === 1) {
-    const mine = m.heightAboveTerrainM
-    const loc = local.heightAboveTerrainM ?? (local.topAboveGroundFloorM !== null ? local.topAboveGroundFloorM + 0.3 : null)
-    findings.push({ fact: 'building height above the terrain', source: `published ${H[0].value} m`, local: local.roofPlanes === 0 ? 'no roof built' : fmt(loc), described: fmt(mine), localOk: local.roofPlanes > 0 && loc !== null && Math.abs(loc - H[0].value) <= ARBITRATION.heightM + 0.3, describedOk: mine !== null && Math.abs(mine - H[0].value) <= ARBITRATION.heightM })
+    const topMine = m.roofTopY ?? m.buildingTopY
+    const hMine = topMine !== null ? heightAgainstFigure(topMine, terrainOf(), H[0].value, ARBITRATION.heightM) : undefined
+    const hLocal = localHeight(local, H[0].value)
+    findings.push({ fact: 'building height above the terrain', source: `published ${H[0].value} m (one definition for both: top above ±0,00 against the figure and the terrain)`, local: local.roofPlanes === 0 ? 'no roof built' : hLocal ? hLocal.says : 'not built', described: hMine ? hMine.says : 'not built', localOk: local.roofPlanes > 0 && !!hLocal?.ok, describedOk: !!hMine?.ok })
+  }
+  // v3.54.6 — the openings each registered elevation shows, against each model's holes on that side: the same evidence
+  // for both. An elevation that does not register gives no positions, and a side without one is not compared.
+  const notAssessable: string[] = []
+  for (const view of described.document.verification.views ?? []) {
+    if (!view.elevation) continue
+    const tf = view.transform
+    if (!view.registered || !tf) {
+      if (view.read.openings > 0) notAssessable.push(`${view.side}: elevation ${view.elevation} does not register — its openings are not held against either model`)
+      continue
+    }
+    const el = obs.elevations.find((e) => e.id === view.elevation)
+    if (!el) continue
+    const boxOf = new Map(el.openings.map((x) => [`${el.id}/${x.id}`, x.box]))
+    const read = g.openings.filter((o) => o.refs.some((r) => boxOf.has(r))).map((o) => {
+      const xs = o.refs.flatMap((r) => (boxOf.has(r) ? [(boxOf.get(r) as { x0: number }).x0, (boxOf.get(r) as { x1: number }).x1] : []))
+      const a = [Math.min(...xs), Math.max(...xs)].map((px) => tf.mPerPx * px + tf.alongAtPx0).sort((p, q) => p - q)
+      return { a0: a[0], a1: a[1] }
+    })
+    if (read.length === 0) continue
+    const mine = openingsAgainstElevation(read, m.openings.filter((x) => x.side === view.side))
+    if (!local.openings) {
+      notAssessable.push(`${view.side}: LOCAL's holes were not measured — its openings are not held against elevation ${view.elevation}`)
+      continue
+    }
+    const theirs = openingsAgainstElevation(read, (local.openings ?? []).filter((x) => x.side === view.side))
+    findings.push({ fact: `openings on the ${view.side.toLowerCase()} side`, source: `${read.length} opening(s) on registered elevation ${view.elevation}`, local: `${theirs.matched} of ${read.length} there, ${theirs.extra} not on the elevation`, described: `${mine.matched} of ${read.length} there, ${mine.extra} not on the elevation`, localOk: theirs.ok, describedOk: mine.ok })
   }
   // the ridge above ±0,00, from the section: a fact of its own, with or without a height on the page
   const ridge = supportedRidge(described.document)
@@ -523,6 +628,7 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
     const share = outlineOverlap([ground], local.groundPolygons)
     findings.push({ fact: 'where the walled outline lies', source: 'traced outline verified against the printed dimensions', local: `${(share * 100).toFixed(0)} % of the two outlines coincide, each set against its own front-left corner`, described: 'the traced outline', localOk: share >= ARBITRATION.outlineOverlap, describedOk: true })
   }
+  unknown.push(...notAssessable)
   const say = (f: ArbitrationFinding, who: 'local' | 'described'): string => `${f.fact} ${f[who]} against ${f.source}`
   const localBad = findings.filter((f) => !f.localOk)
   const describedBad = findings.filter((f) => !f.describedOk)

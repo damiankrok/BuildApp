@@ -10,7 +10,7 @@ import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
 import { createEmptyModel, physicalCore, resolveWallTopology } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
-import { HOUSE_BUILDER_LABEL, fitOpening, houseProgram } from '@buildapp/reconstruction'
+import { HOUSE_BUILDER_LABEL, OPENING_FIT, fitOpening, houseProgram } from '@buildapp/reconstruction'
 import type { HouseDocument, HouseProgram } from '@buildapp/reconstruction'
 
 export type KernelRefusal = { id: string | null; type: string; codes: string[]; message: string; dropped: string[] }
@@ -19,8 +19,38 @@ export type BuiltHouse = HouseProgram & { model: CanonicalBuildingModel; fitted:
 const MAX_CUTS = 60
 const DEPENDS = ['openingId', 'hostId', 'roofOpeningId', 'hostPlaneId', 'wallId', 'roofId'] as const
 
-export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
+/**
+ * v3.54.6 — a head the compiled scene could not hold under its wall's top (a gable glazing read as one box up to the
+ * apex) lowered to that top: the kernel's own measure of the lowest top over the opening's width, less a clearance.
+ * Only as far as the opening rule allows a bounded change (`approxM`, `approxShare` of the height); drawn as an
+ * APPROXIMATED opening and said. Beyond that the opening stays out and the reason is given.
+ */
+export type HeadCap = { heightM: number; why: string }
+export const HEAD_CLEARANCE_M = 0.05
+
+export function headCapFor(cmd: { sill: number; height: number }, kernelMessage: string): { ok: true; cap: HeadCap } | { ok: false; why: string } | undefined {
+  const m = /whose top is only (-?[0-9.]+) m there/.exec(kernelMessage)
+  if (!m) return undefined
+  const top = Number(m[1])
+  const height = Math.round((top - HEAD_CLEARANCE_M - cmd.sill) * 1e6) / 1e6
+  const lower = cmd.height - height
+  const bound = Math.min(OPENING_FIT.approxM, OPENING_FIT.approxShare * cmd.height)
+  if (height <= 0.3 || lower > bound + 1e-9) return { ok: false, why: `its head would have to come ${lower.toFixed(2)} m lower to stand under the wall's top (${top.toFixed(3)} m over its width): more than the ${bound.toFixed(2)} m an opening may be approximated by — what was read reaches above the wall it is on (a roof, a gable or a dormer read as glazing, or a gable not built)` }
+  return { ok: true, cap: { heightM: height, why: `read ${cmd.height.toFixed(2)} m high up to ${(cmd.sill + cmd.height).toFixed(2)} m, above the top of its wall over its width (${top.toFixed(3)} m at its lowest — a glazing whose head follows a gable, read as one box to the apex); drawn ${lower.toFixed(2)} m lower with a level head ${HEAD_CLEARANCE_M} m under that top — its shape under the gable is not drawn` } }
+}
+
+export function buildHouse(doc: HouseDocument, modelId: string, caps?: Map<string, HeadCap>): BuiltHouse {
   const made = houseProgram(doc)
+  if (caps && caps.size > 0) {
+    made.program = made.program.map((c) => {
+      const o = c as unknown as { type: string; id?: string; height?: number }
+      const cap = o.id ? caps.get(o.id) : undefined
+      if (o.type !== 'cutOpening' || !o.id || !cap) return c
+      for (const t of made.trace) if (t.path === `geometry.openings[${o.id}].heightM`) Object.assign(t, { built: cap.heightM, fit: 'APPROXIMATED', code: 'OVERRIDDEN', delta: Math.round((cap.heightM - (o.height ?? 0)) * 1e6) / 1e6, why: cap.why })
+      if (!made.approximated.some((a) => a.id === o.id)) made.approximated.push({ id: o.id, what: cap.why })
+      return { ...(c as unknown as Record<string, unknown>), height: cap.heightM } as unknown as BuildingCommand
+    })
+  }
   let current = made.program
   const kernelRefusals: KernelRefusal[] = []
   let model = createEmptyModel(modelId, HOUSE_BUILDER_LABEL)

@@ -22,7 +22,7 @@ import { bbox, canonical, clipConvex, clipHalfPlane, contains, edgeOf, isSimple,
 import type { P2 } from './poly.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.1.0' as const
+export const HOUSE_BUILDER_VERSION = '0.2.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]

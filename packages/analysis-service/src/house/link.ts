@@ -12,6 +12,7 @@
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import { buildMobileSceneBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
 import { parseModel, serializeModel } from '@buildapp/model'
+import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { BuildingCommand } from '@buildapp/commands'
 import { HOUSE_BUILDER_LABEL, HOUSE_BUILDER_VERSION, HOUSE_RESOLVER_VERSION, sealCandidate } from '@buildapp/reconstruction'
 import type { ReconstructionCandidate } from '@buildapp/reconstruction'
@@ -61,7 +62,7 @@ function localMeasure(run: AnalysisRun): LocalMeasure | undefined {
   const groundLevel = [...model.levels].sort((p, q) => p.elevation - q.elevation).find((l) => l.elevation >= -0.01)?.id
   const ground = model.slabs.filter((s) => s.levelId === groundLevel)
   const shoelace = (p: ReadonlyArray<{ x: number; z: number }>): number => Math.abs(p.reduce((s, a, i) => s + a.x * p[(i + 1) % p.length].z - p[(i + 1) % p.length].x * a.z, 0)) / 2
-  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))), levelElevations: model.levels.map((l) => l.elevation), rooms: (model as unknown as { rooms?: unknown[] }).rooms?.length ?? 0, interiorWalls: model.walls.filter((w) => (w as unknown as { kind?: string }).kind === 'INTERIOR').length }
+  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))), levelElevations: model.levels.map((l) => l.elevation), rooms: (model as unknown as { rooms?: unknown[] }).rooms?.length ?? 0, interiorWalls: model.walls.filter((w) => (w as unknown as { kind?: string }).kind === 'INTERIOR').length, openings: m.openings }
 }
 
 /** The described house in the drawings path's result contract: sealed candidate, model, scene, what is known of it. */
@@ -243,8 +244,7 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   let compiled: CompiledHouse
   try {
     const { pictures, skipped } = await housePictures(pkg.assets as never, options.cache)
-    const roleOf = new Map(pkg.assets.map((a) => [a.id, a.roles.document === 'ELEVATION' || a.roles.document === 'SECTION' ? a.roles.document : undefined]))
-    const notSent = skipped.map((x) => ({ ...x, ...(roleOf.get(x.assetId) ? { role: roleOf.get(x.assetId) as string } : {}) }))
+    const notSent = skipped
     const inventory = await readInventory(ctx, pictures, `publisher: ${pkg.project.publisher}`)
     if (!inventory.selection) return none(inventory.why ?? 'no ground-floor plan among the pictures', 'NOT_READ')
     const selection = inventory.selection
@@ -276,11 +276,21 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
   }
   const houseText = compiled.rejected ? undefined : `${JSON.stringify(doc)}\n`
   const described = { status: describedStatus as HouseLinkOutcome['described']['status'], ...(compiled.modelHash ? { modelHash: compiled.modelHash } : {}), ...(compiled.rejected ? { why: compiled.rejected.slice(0, 3).join('; ') } : {}) }
+  // v3.54.6 (D38): the revision handed back is measured again — the model whose facts the choice compared, and no other
+  const deliveredCheck = (which: 'DESCRIBED' | 'LOCAL', model: CanonicalBuildingModel, measuredModelHash: string): NonNullable<Arbitration['delivered']> => {
+    const text = serializeModel(model)
+    const modelHash = sha256Hex(text)
+    const m = measureScene(buildMobileSceneBundle(model, { scene: compileBuilding(parseModel(text) as never) }))
+    return { which, modelHash, measuredModelHash, same: modelHash === measuredModelHash, widthM: m.exteriorWalls?.widthM ?? null, depthM: m.exteriorWalls?.depthM ?? null, topM: m.roofTopY ?? m.buildingTopY }
+  }
+  if (decision.accepted === 'LOCAL' && localRun) decision.delivered = deliveredCheck('LOCAL', localRun.result.model, sha256Hex(serializeModel(localRun.result.model)))
   if (decision.accepted === 'DESCRIBED') {
     const run = houseResult({ pkg, identity, sourceUrl: input.kind === 'URL' ? input.url : pkg.canonicalUrl, jobId: options.jobId ?? null, compiled, decision, records, readerModel: ctx.modelFor('PLAN').model, startedAt, now })
     // LOCAL's rooms and interior walls are not attached to another outline unchecked, and they are not thrown away
     const lm = localRun ? localMeasure(localRun) : undefined
     const supersededLocalText = localRun && lm && (lm.rooms ?? 0) + (lm.interiorWalls ?? 0) > 0 ? serializeModel(localRun.result.model) : undefined
+    decision.delivered = deliveredCheck('DESCRIBED', run.result.model, compiled.modelHash ?? '')
+    if (!decision.delivered.same) doc.verification.knownDefects.push({ code: 'DELIVERED_DIFFERS', what: `the model handed back (${decision.delivered.modelHash.slice(0, 12)}) is not the one the choice measured (${(compiled.modelHash ?? '').slice(0, 12)})` })
     return { run, ...(houseText ? { houseText } : {}), ...(supersededLocalText ? { supersededLocalText } : {}), decision, local, described, records, proposals }
   }
   return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(localError && !localRun ? { error: localError } : {}) }
