@@ -477,6 +477,7 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
     const views = renderModelViews(compiled.bundle, 520)
     for (const v of views) input.writeView?.(`review-${round}-${v.name}.png`, v.png)
     const revision = revisionOf(doc)
+    const roundInputModel = String(compiled.modelHash)
     const o = (doc as Obs).observations
     const m = compiled.measured
     const g = compiled.document.geometry
@@ -556,7 +557,7 @@ Compare each elevation with the model's same side, in this order: which side is 
     verdicts.push(answer.verdict)
     if (!Array.isArray(answer.corrections)) answer.corrections = []
     const roundPairs = pairs.filter((p) => p.round === round)
-    const logRound = (stale: boolean, staleWhy?: string): void => void roundLog.push({ round, inputModelHash: String(compiled.modelHash), baseRevision: revision, renderSha256: roundPairs.map((p) => p.renderSha256), sourceSha256: roundPairs.map((p) => String(p.sourceSha256 ?? '')), verdict: answer.verdict, answerRevision: String(answer.revision), stale, ...(staleWhy ? { staleWhy } : {}), applied: 0, outputRevision: revision, outputModelHash: String(compiled.modelHash) })
+    const logRound = (stale: boolean, staleWhy?: string): void => void roundLog.push({ round, inputModelHash: roundInputModel, baseRevision: revision, renderSha256: roundPairs.map((p) => p.renderSha256), sourceSha256: roundPairs.map((p) => String(p.sourceSha256 ?? '')), verdict: answer.verdict, answerRevision: String(answer.revision), stale, ...(staleWhy ? { staleWhy } : {}), applied: 0, outputRevision: revision, outputModelHash: String(compiled.modelHash) })
     if (answer.revision !== revision) {
       // v3.54.8: which one it is — a recorded answer replayed against another revision (the answer is old), or a fresh
       // answer that names a revision this round did not send (revision management)

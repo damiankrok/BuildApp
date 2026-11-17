@@ -11,7 +11,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
-import { compileHouse, RAILING_NOTE_PATTERNS } from '../src/house/describe.js'
+import { compileHouse, deliveredQuality, RAILING_NOTE_PATTERNS } from '../src/house/describe.js'
 import type { CompiledHouse } from '../src/house/describe.js'
 import { checkProperties, neighboursKept, reviewHouse } from '../src/house/review.js'
 import type { ReviewAnswer } from '../src/house/review.js'
@@ -187,6 +187,17 @@ describe('v3.54.8 the portal band over an open front', () => {
     expect(h.built?.fitted.some((c) => (c as { id?: string }).id?.startsWith(`${p?.id}-`))).toBe(true)
     expect(check(h)?.status).toBe('PASS')
   })
+  it('a band read across a stretch where the plan has wall stands only over the open front — no second solid in the wall', () => {
+    const doc = gableFront()
+    // read from the main body's flush front (columns 126–316, the plan's wall at z = 0) across to the garage
+    el(doc, 'el-front').features.push({ ...PORTAL, box: { ...PORTAL.box, x0: 140 } })
+    const h = compileHouse(doc, 't')
+    const p = h.document.geometry?.portals[0]
+    const solids = (h.built?.fitted ?? []).filter((c) => (c as { id?: string }).id?.startsWith(`${p?.id}-`)) as unknown as Array<{ start: { x: number }; end: { x: number } }>
+    expect(solids.length).toBeGreaterThan(0)
+    // the main body's front stands at z = 0 up to x 7.24 m: the band begins where the front opens
+    expect(Math.min(...solids.flatMap((c) => [c.start.x, c.end.x]))).toBeGreaterThan(7.1)
+  })
   it('counter: a "band" with its soffit below a door head is not a head over an open front — held', () => {
     const doc = gableFront()
     el(doc, 'el-front').features.push({ ...PORTAL, box: { ...PORTAL.box, y0: 250, y1: 270 } })
@@ -256,6 +267,32 @@ describe('v3.54.8 the review: per property, per revision', () => {
     expect(r.roundLog[0]?.staleWhy).toMatch(/recorded answer/)
     expect(r.roundLog[0]?.inputModelHash).toBe(compiled.modelHash)
   })
+  it('a round that applies a correction logs the model it was shown and the model it made — two hashes, two revisions', async () => {
+    const raster = (w: number, h: number): Raster => ({ width: w, height: h, data: new Uint8ClampedArray(w * h * 4).fill(240) })
+    const pic = (id: string, n: number): HousePicture => ({ n, id, assetId: `a-${id}`, caption: '', pageRole: { document: 'ELEVATION', storey: '', view: '' }, width: 700, height: 304, byteHash: `h-${id}`, raster: raster(700, 304) })
+    const selection: Selection = { ground: pic('plan0', 1), upperPlans: [], sections: [], elevations: [pic('front', 4), pic('rear', 5)], views: [], notThisHouse: [] }
+    const doc = gableFront()
+    const { createHash } = await import('node:crypto')
+    const revision = createHash('sha256').update(JSON.stringify(doc.observations, (k, v) => (k === 'readIn' ? undefined : v))).digest('hex').slice(0, 12)
+    const answer: ReviewAnswer = { revision, verdict: 'DIFFERS', differences: [], defects: [{ id: 'd1', side: 'FRONT', picture: 1, box: { x0: 120, y0: 40, x1: 430, y1: 300 }, feature: 'GABLE_FRAME', meaning: 'MISSING', weight: 'KEY', evidence: 'a band along both rakes', fix: 'CORRECTION', corrections: [0] }], corrections: [{ op: 'SET_FEATURE', why: 'frame', picture: 1, id: 'frame', kind: 'GABLE_FRAME', box: FRAME.box, bodyId: 'main', bandPx: 10, legPx: 8 }] }
+    const ctx: ReadingContext = {
+      modelFor: () => ({ model: 'none', send: async () => { throw new Error('no provider in tests') } }) as never,
+      price: { inputUsdPerMTok: 0, outputUsdPerMTok: 0 },
+      replayOnly: true,
+      replay: (_s, round): ReadingRecord | undefined => (round === 1 ? { step: 'REVIEW', round, model: 'none', usage: { inputTokens: 0, outputTokens: 0 }, pictures: selection.elevations.map((p) => ({ id: p.id, assetId: p.assetId, sentWidth: p.width, sentHeight: p.height, sha256: '' })), promptSha256: '', answer } : undefined),
+      record: () => {},
+    }
+    const compiled = compileHouse(JSON.parse(JSON.stringify(doc)), 't')
+    const r = await reviewHouse({ ctx, selection, facadesSent: [], observationsDocument: doc, compiled, modelId: 't' })
+    const first = r.roundLog[0]
+    expect(first?.applied).toBe(1)
+    expect(first?.inputModelHash).toBe(compiled.modelHash)
+    expect(first?.outputModelHash).toBe(r.compiled.modelHash)
+    expect(first?.inputModelHash).not.toBe(first?.outputModelHash)
+    expect(first?.baseRevision).toBe(revision)
+    expect(first?.outputRevision).not.toBe(revision)
+    expect(first?.renderSha256.length).toBeGreaterThan(0)
+  })
 })
 
 describe('v3.54.8 the tools the provider is sent are schemas it takes', () => {
@@ -278,5 +315,16 @@ describe('v3.54.8 the tools the provider is sent are schemas it takes', () => {
     walk(REVIEW_TOOL, 'REVIEW')
     walk(SUPPLEMENT_TOOL, 'SUPPLEMENT')
     expect(bad).toEqual([])
+  })
+})
+
+describe('v3.54.8 the quality status says what was not checked, and why', () => {
+  it('a refused description\'s readings are named as not held — never as "nothing was read"', () => {
+    const base = { accepted: 'LOCAL', findings: [], unknown: [] } as unknown as Parameters<typeof deliveredQuality>[0]
+    const refused = deliveredQuality({ ...base, code: 'DESCRIBED_REJECTED_LOCAL_KEPT' } as never)
+    expect(refused.status).toBe('FEATURES_NOT_CHECKED')
+    expect(refused.why).toMatch(/failed its own source checks/)
+    const plain = deliveredQuality({ ...base, code: 'LOCAL_MEETS_SOURCE' } as never)
+    expect(plain.why).toMatch(/no characteristic feature was read/)
   })
 })

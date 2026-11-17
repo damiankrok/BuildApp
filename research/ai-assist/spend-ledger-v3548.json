@@ -42,8 +42,56 @@
    "inputTokens": 17282,
    "outputTokens": 1901,
    "costUsd": 0.053574
+  },
+  {
+   "at": "2026-11-17T20:41:02.197Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 86fd69f): house reading INVENTORY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:34dbfef7f887cbec",
+   "inputTokens": 6993,
+   "outputTokens": 1778,
+   "costUsd": 0.031766
+  },
+  {
+   "at": "2026-11-17T20:41:32.979Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 86fd69f): house reading PLAN",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:0bf4ce3fc085fb79",
+   "inputTokens": 7385,
+   "outputTokens": 4063,
+   "costUsd": 0.0554
+  },
+  {
+   "at": "2026-11-17T20:42:17.783Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 86fd69f): house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:3d8e843af4923081",
+   "inputTokens": 13773,
+   "outputTokens": 6679,
+   "costUsd": 0.094336
+  },
+  {
+   "at": "2026-11-17T20:43:05.649Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 86fd69f): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:07657a8ca0d636c6",
+   "inputTokens": 21185,
+   "outputTokens": 5954,
+   "costUsd": 0.10191
   }
  ],
- "totalUsd": 0.212382,
- "requests": 3
+ "totalUsd": 0.495794,
+ "requests": 7
 }

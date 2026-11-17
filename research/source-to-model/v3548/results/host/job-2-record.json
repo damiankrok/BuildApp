@@ -1,0 +1,125 @@
+{
+ "name": "job-2",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+ "withToken": true,
+ "jobId": "70ed1d80cf507e18d4cc4b4fea49d992",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 165,
+ "booksDeltaUsd": 0,
+ "booksDeltaRequests": 0,
+ "facadeValues": {
+  "status": "PASS",
+  "measured": "8 agreed value(s) built as agreed"
+ },
+ "quality": {
+  "code": "QUALITY_FEATURES_NOT_CHECKED",
+  "what": "no characteristic feature was read or reported for this source: nothing of the form was checked beyond the massing facts"
+ },
+ "revision": {
+  "code": "REVISION_REUSED",
+  "what": "the accepted revision a7d09c6ad0e12e4d70212fcf345b5d52 (2026-11-17T20:43:05.851Z) was replayed: no request; the same model; the same quality status"
+ },
+ "decisionCode": "DESCRIBED_REJECTED_LOCAL_KEPT",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "PARTIAL",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_PARTIAL",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "RIGHT: PARTIAL — the reader stated a part of this side is hidden on the picture",
+   "FRONT: read, BUILT_PARTIAL: 5 of 8 built (not built: el-p12/chimney (SOURCE_UNKNOWN))",
+   "REAR: read, BUILT_PARTIAL: 5 of 8 built (not built: el-p10/chimney (SOURCE_UNKNOWN))",
+   "LEFT: read, BUILT_PARTIAL: 2 of 5 built (not built: el-p9/dark-panel-l (CAPABILITY_MISSING), el-p9/o3 (WRONG_READ), el-p9/o4 (WRONG_READ))"
+  ]
+ },
+ "openingFits": {
+  "EXACT": 11
+ },
+ "houseSha256": "2a2d2506d702c512ec9e301a558077e0e261cd75599908eeceaf72131b699f22",
+ "stood": "ACCEPTED_LOCAL",
+ "why": "DESCRIBED_REJECTED_LOCAL_KEPT: the description fails its own source checks: the plan has one scale on its two axes (2.6431 and 2.4381 cm/px (ratio 1.0841); the printed 1205 cm = 12.05 m ends on the traced outline's two ends (456 px); the printed 1260 cm = 12.6 m over its own 517 px (it does not end ",
+ "checks": {
+  "pass": 10,
+  "fail": 3
+ },
+ "held": 11,
+ "counts": {
+  "assets": 20,
+  "assetsByDocument": {
+   "ELEVATION": 4,
+   "SECTION": 1,
+   "FLOOR_PLAN": 8,
+   "SITE_PLAN": 1,
+   "PERSPECTIVE_RENDER": 4,
+   "UNKNOWN": 2
+  },
+  "observations": 683,
+  "frames": 18,
+  "metricEvidence": 145,
+  "callouts": 57,
+  "commands": 224,
+  "masses": 2,
+  "openings": 12,
+  "rooms": 13,
+  "balconies": 2,
+  "terraces": 2,
+  "railings": 2,
+  "chimneys": 2,
+  "rooflights": 3,
+  "meshes": 168,
+  "triangles": 5254
+ },
+ "commit": "86fd69f",
+ "modelHash": "07b91e89cc034837e3e79c7cf0489066b06439506242ab60d8f17271ac3b80b5",
+ "modelSha256": "07b91e89cc034837e3e79c7cf0489066b06439506242ab60d8f17271ac3b80b5",
+ "sceneSha256": "3fab3a0819d806a6e8b266cdc58a82e973c278143c615dbf766d107ab0b5236a",
+ "sceneContentHash": "785f5fd9bf4400141dd8586473a5411d09290a69d80aca6dc2b1012cc6b0101b",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "9f8cdc5ac7030f25e5d0d7e4dea8bce148cdbece5cd7dfefc4cafee5dc34046d",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "MATCHES",
+   "builtM2": 130.7065,
+   "publishedM2": 131.16,
+   "share": 0.996542
+  },
+  "scale": {
+   "status": "MEASURED",
+   "builtCmPerPx": 2.6426,
+   "measuredCmPerPx": 2.642489,
+   "ratio": 1.000042,
+   "confidence": "STRONG"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "USABLE_IN_SCOPE",
+  "reasons": []
+ }
+}

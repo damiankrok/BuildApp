@@ -914,9 +914,36 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const under = pl.datum.y - pl.thickness
       if (under >= top || under <= soffit) continue
       const vs = pl.boundary.map((q) => -((q.x - pb.start.x) * n.x + (q.z - pb.start.z) * n.z))
-      if (Math.min(...vs) > depth + 0.05 || Math.max(...vs) < -0.05) continue
-      const a = pl.boundary.map(alongOf)
-      cuts.push({ a: Math.max(0, Math.min(...a)), b: Math.min(len, Math.max(...a)), top: under })
+      // (a roof that only touches the band's back face is beside it, not in it)
+      if (Math.min(...vs) > depth - 0.05 || Math.max(...vs) < 0.05) continue
+      // only where the roof covers the band's own footprint (its middle line): a roof that reaches the plane over a
+      // return and steps back elsewhere covers the band over the return alone
+      const at = (s0: number): P2 => pt(pb.start.x + u.x * s0 - n.x * (depth / 2), pb.start.z + u.z * s0 - n.z * (depth / 2))
+      let run: number | null = null
+      for (let s0 = 0; s0 <= len + 1e-9; s0 += 0.05) {
+        const inside = contains(pl.boundary, at(Math.min(s0, len)))
+        if (inside && run === null) run = s0
+        if ((!inside || s0 + 0.05 > len + 1e-9) && run !== null) {
+          const end = inside ? len : s0
+          if (end - run >= 0.05) cuts.push({ a: Math.max(0, run - 0.025), b: Math.min(len, end), top: under })
+          run = null
+        }
+      }
+    }
+    // (and none where the ground plan's outline stands under its footprint: there a wall (a return) is the head's face)
+    {
+      const ground = outlineAt.get(0) ?? []
+      const mid = (s0: number): P2 => pt(pb.start.x + u.x * s0 - n.x * (depth / 2), pb.start.z + u.z * s0 - n.z * (depth / 2))
+      let run: number | null = null
+      for (let s0 = 0; s0 <= len + 1e-9; s0 += 0.05) {
+        const inside = ground.length >= 3 && contains(ground, mid(Math.min(s0, len)))
+        if (inside && run === null) run = s0
+        if ((!inside || s0 + 0.05 > len + 1e-9) && run !== null) {
+          const end = inside ? len : s0
+          if (end - run >= 0.05) cuts.push({ a: Math.max(0, run - 0.025), b: Math.min(len, end), top: soffit })
+          run = null
+        }
+      }
     }
     const marks = [...new Set([0, len, ...cuts.flatMap((c) => [c.a, c.b])])].filter((x) => x >= 0 && x <= len).sort((p, q) => p - q)
     const ids: string[] = []

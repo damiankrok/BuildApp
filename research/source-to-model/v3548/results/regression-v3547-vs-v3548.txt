@@ -1,0 +1,45 @@
+c4-archon-frizeach-g2e         SAME 
+   was ('LOCAL', 'LOCAL_MEETS_SOURCE', '', 0, 0, 9, '{"ADJUSTED": 1, "APPROXIMATED": 2, "EXACT": 11, "NOT_BUILT": 1}', '74549911') 
+   now ('LOCAL', 'LOCAL_MEETS_SOURCE', '', 0, 0, 9, '{"ADJUSTED": 1, "APPROXIMATED": 2, "EXACT": 11, "NOT_BUILT": 1}', '74549911') FEATURES_NOT_CHECKED
+c4-archon-lubczyku-2           SAME 
+   was ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 0, 3, 12, '{"ADJUSTED": 1, "APPROXIMATED": 2, "EXACT": 12, "NOT_BUILT": 3}', '1b682de2') 
+   now ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 0, 3, 12, '{"ADJUSTED": 1, "APPROXIMATED": 2, "EXACT": 12, "NOT_BUILT": 3}', '1b682de2') FEATURES_PARTIAL
+c4-dobredomy-pallas            DIFF 
+   was ('DESCRIBED', 'DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS', '', 1, 1, 8, '{"APPROXIMATED": 1, "EXACT": 13, "NOT_BUILT": 1}', 'f16b7bd3') 
+   now ('DESCRIBED', 'DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS', '', 1, 1, 10, '{"APPROXIMATED": 1, "EXACT": 13, "NOT_BUILT": 1}', '10e1ea38') FEATURES_NOT_CHECKED
+c4-lipinscy-dublin             SAME 
+   was ('DESCRIBED', 'DESCRIBED_ONLY', '', 0, 0, 3, '{"APPROXIMATED": 2, "EXACT": 11, "NOT_BUILT": 2}', '79b0eb1c') 
+   now ('DESCRIBED', 'DESCRIBED_ONLY', '', 0, 0, 3, '{"APPROXIMATED": 2, "EXACT": 11, "NOT_BUILT": 2}', '79b0eb1c') FEATURES_NOT_CHECKED
+c4-lipinscy-oslo               SAME 
+   was ('LOCAL', 'BOTH_CONTRADICT', 'P', 1, 1, 6, '{"EXACT": 8, "NOT_BUILT": 1}', '14e1f8d8') 
+   now ('LOCAL', 'BOTH_CONTRADICT', 'P', 1, 1, 6, '{"EXACT": 8, "NOT_BUILT": 1}', '14e1f8d8') FEATURES_NOT_CHECKED
+c4-studioatrium-wena           SAME 
+   was ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 3, 0, 10, '{"EXACT": 13, "NOT_BUILT": 4}', '0c453fc1') 
+   now ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 3, 0, 10, '{"EXACT": 13, "NOT_BUILT": 4}', '0c453fc1') FEATURES_PARTIAL
+c5-architecturaldesigns-550029 SAME 
+   was ('DESCRIBED', 'DESCRIBED_ONLY', 'P', 4, 1, 36, '{"ADJUSTED": 1, "APPROXIMATED": 1, "EXACT": 18, "NOT_BUILT": 11}', '59198b02') 
+   now ('DESCRIBED', 'DESCRIBED_ONLY', 'P', 4, 1, 36, '{"ADJUSTED": 1, "APPROXIMATED": 1, "EXACT": 18, "NOT_BUILT": 11}', '59198b02') FEATURES_NOT_CHECKED
+c5-archon-anodach-3-g2e        SAME 
+   was ('DESCRIBED', 'DESCRIBED_ONLY', '', 0, 0, 10, '{"APPROXIMATED": 1, "EXACT": 10, "NOT_BUILT": 2}', '3cad37e8') 
+   now ('DESCRIBED', 'DESCRIBED_ONLY', '', 0, 0, 10, '{"APPROXIMATED": 1, "EXACT": 10, "NOT_BUILT": 2}', '3cad37e8') FEATURES_NOT_CHECKED
+c5-archon-malaxisach-2-e       SAME 
+   was ('NONE', 'NO_MODEL', '', 0, 0, 15, '{"APPROXIMATED": 1, "EXACT": 8}', 'd57371fe') 
+   now ('NONE', 'NO_MODEL', '', 0, 0, 15, '{"APPROXIMATED": 1, "EXACT": 8}', 'd57371fe') FEATURES_NOT_CHECKED
+c5-dobredomy-kardamon          SAME 
+   was ('DESCRIBED', 'DESCRIBED_ONLY', 'P', 2, 1, 15, '{"ADJUSTED": 1, "APPROXIMATED": 4, "EXACT": 10, "NOT_BUILT": 2}', '47ed7050') 
+   now ('DESCRIBED', 'DESCRIBED_ONLY', 'P', 2, 1, 15, '{"ADJUSTED": 1, "APPROXIMATED": 4, "EXACT": 10, "NOT_BUILT": 2}', '423132ed') FEATURES_NOT_CHECKED
+c5-extradom-mirabelka-4        SAME 
+   was (None, None, '', None, None, None, 'null', None) 
+   now (None, None, '', None, None, None, 'null', None) None
+c5-extradom-tracja-2           SAME 
+   was (None, None, '', None, None, None, 'null', None) 
+   now (None, None, '', None, None, None, 'null', None) None
+c5-lipinscy-alaska             SAME 
+   was ('DESCRIBED', 'DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS', '', 0, 0, 5, '{"APPROXIMATED": 1, "EXACT": 10}', '0b765a5a') 
+   now ('DESCRIBED', 'DESCRIBED_MEETS_SOURCE_LOCAL_CONTRADICTS', '', 0, 0, 5, '{"APPROXIMATED": 1, "EXACT": 10}', '0b765a5a') FEATURES_NOT_CHECKED
+c5-studioatrium-pliszka-v-plus SAME 
+   was ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 1, 1, 10, '{"ADJUSTED": 2, "APPROXIMATED": 2, "EXACT": 6, "NOT_BUILT": 1}', 'dc13c1f5') 
+   now ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 1, 1, 10, '{"ADJUSTED": 2, "APPROXIMATED": 2, "EXACT": 6, "NOT_BUILT": 1}', 'dc13c1f5') FEATURES_NOT_CHECKED
+c5-lipinscy-alaska             SAME 
+   was ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 0, 0, 6, '{"EXACT": 11}', '41135503') 
+   now ('DESCRIBED', 'BOTH_CONTRADICT', 'P', 0, 0, 6, '{"EXACT": 11}', '891d6afd') FEATURES_PARTIAL

@@ -562,6 +562,9 @@ export function deliveredQuality(decision: Arbitration, defects: readonly Review
   const open = sides.flatMap((x) => x.openDefects)
   if (decision.accepted === 'NONE') return { status: 'FEATURES_NOT_CHECKED', why: 'no model was delivered', sides, notAssessable }
   if (failing.length || open.length) return { status: 'FEATURES_PARTIAL', why: `the delivered model (${decision.accepted}) ${[failing.length ? `fails ${failing.length} characteristic feature(s) the source shows` : '', open.length ? `keeps ${open.length} review defect(s) open` : ''].filter(Boolean).join(' and ')}`, sides, notAssessable }
+  // (v3.54.8: when the description itself was refused, what it read on the elevations was not held against anything —
+  // said as that, not as "nothing was read")
+  if (!checked && /^DESCRIBED_REJECTED/.test(String(decision.code))) return { status: 'FEATURES_NOT_CHECKED', why: `the description failed its own source checks, so the characteristic features it read on the elevations were not held against the delivered model (${decision.accepted}); nothing of the form was checked beyond the massing facts`, sides, notAssessable }
   if (!checked) return { status: 'FEATURES_NOT_CHECKED', why: 'no characteristic feature was read or reported for this source: nothing of the form was checked beyond the massing facts', sides, notAssessable }
   return { status: 'FEATURES_CHECKED', why: `every characteristic feature read on the source is met by the delivered model (${decision.accepted}) and no important review defect is open${notAssessable.length ? `; ${notAssessable.length} side(s) not assessable` : ''}`, sides, notAssessable }
 }

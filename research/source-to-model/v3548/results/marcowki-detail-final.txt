@@ -1,0 +1,364 @@
+LOCAL                    27/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   OK  front frame band (vertical)                target 0.82                                           model 0.792
+   OK  front frame band (across the slope)        target 0.64                                           model 0.607
+   OK  front frame inner contour at ¼             target 5.473                                          model 5.501
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.95}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   OK  rear frame band (vertical)                 target 0.82                                           model 0.79
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.605
+   OK  rear frame inner contour at ¼              target 5.473                                          model 5.503
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.1}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 3.97
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 3.984
+   OK  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 32/33 probes; soffit median 2.32
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.31–7.90 m
+   OK  front-gable head high end                  target 6.26                                           model 6.26
+   OK  front-gable head low end                   target 4.02                                           model 3.994
+   OK  rear-gable-w head high end                 target 6.09                                           model 6.1
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.137
+   OK  rear-gable-e head high end                 target 6.09                                           model 6.09
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.137
+   OK  rear living glazing head                   target 2.3                                            model 2.3
+H-L1@65d8a06             8/27 (+2 unassessable)
+   NO  front frame pieces                         target 1                                              model 2
+   OK  front frame band (vertical)                target 0.82                                           model 0.879
+   NO  front frame band (across the slope)        target 0.64                                           model 0.782
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.775
+   NO  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': -0.035, 'apexAlong': 4.4
+   NO  front frame left leg end                   target 0.0                                            model 4.852
+   NO  front frame right leg end                  target 3.06                                           model 4.852
+   NO  rear frame pieces                          target 1                                              model 2
+   OK  rear frame band (vertical)                 target 0.82                                           model 0.882
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.676
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.774
+   NO  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': -0.034, 'apexAlong': 7.6
+   NO  rear frame left leg end                    target 0.0                                            model 4.853
+   NO  rear frame right leg end                   target 0.0                                            model 4.854
+   OK  front railings over the slab               target 1                                              model 1
+   NO  front railing infill                       target GLASS                                          model BARS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   NO  rear railing infill                        target GLASS                                          model BARS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   NO  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.22 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+H-L1@86fd69f             16/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.98
+   NO  front frame band (across the slope)        target 0.64                                           model 0.751
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.311
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+H-host2@65d8a06          5/27 (+2 unassessable)
+   NO  front frame pieces                         target 1                                              model 2
+   NO  front frame band (vertical)                target 0.82                                           model 0.676
+   NO  front frame band (across the slope)        target 0.64                                           model 0.523
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.894
+   NO  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': -0.02, 'apexAlong': 3.63
+   NO  front frame left leg end                   target 0.0                                            model 4.768
+   NO  front frame right leg end                  target 3.06                                           model 4.768
+   NO  rear frame pieces                          target 1                                              model 2
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.934
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.715
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.743
+   NO  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': -0.012, 'apexAlong': 7.6
+   NO  rear frame left leg end                    target 0.0                                            model 4.875
+   NO  rear frame right leg end                   target 0.0                                            model 4.875
+   NO  front railings over the slab               target 1                                              model 0
+   NO  front railing infill                       target GLASS                                          model None
+   ?   front railing top                          target 3.93                                           model None
+   OK  rear railings over the slab                target 1                                              model 1
+   NO  rear railing infill                        target GLASS                                          model BARS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   NO  front slab full extent                     target 3.25–7.90 m                                    model 3.35–5.22 m
+   NO  front-gable head high end                  target 6.26                                           model None
+   NO  front-gable head low end                   target 4.02                                           model None
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.841
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.205
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.841
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.205
+   OK  rear living glazing head                   target 2.3                                            model 2.411
+H-host2@86fd69f          17/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.676
+   NO  front frame band (across the slope)        target 0.64                                           model 0.518
+   OK  front frame inner contour at ¼             target 5.471                                          model 5.615
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   NO  front frame right leg end                  target 3.06                                           model 4.057
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.934
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.716
+   OK  rear frame inner contour at ¼              target 5.471                                          model 5.357
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   NO  front slab full extent                     target 3.25–7.90 m                                    model 3.35–5.22 m
+   NO  front-gable head high end                  target 6.26                                           model None
+   NO  front-gable head low end                   target 4.02                                           model None
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.841
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.205
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.841
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.205
+   OK  rear living glazing head                   target 2.3                                            model 2.411
+H-LIVE1-before-review    18/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.927
+   OK  front frame band (across the slope)        target 0.64                                           model 0.71
+   OK  front frame inner contour at ¼             target 5.471                                          model 5.364
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.966
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.74
+   OK  rear frame inner contour at ¼              target 5.471                                          model 5.325
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 3.891
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 3.882
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.27
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.24–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.081
+   NO  front-gable head low end                   target 4.02                                           model 4.224
+   NO  rear-gable-w head high end                 target 6.09                                           model None
+   NO  rear-gable-w head low end                  target 4.13                                           model None
+   NO  rear-gable-e head high end                 target 6.09                                           model None
+   NO  rear-gable-e head low end                  target 4.13                                           model None
+   OK  rear living glazing head                   target 2.3                                            model 2.373
+H-LIVE1-after-review     20/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.927
+   OK  front frame band (across the slope)        target 0.64                                           model 0.71
+   OK  front frame inner contour at ¼             target 5.471                                          model 5.364
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.966
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.74
+   OK  rear frame inner contour at ¼              target 5.471                                          model 5.325
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 3.891
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 3.882
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.27
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.24–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.081
+   NO  front-gable head low end                   target 4.02                                           model 4.224
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.848
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.182
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.848
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.182
+   OK  rear living glazing head                   target 2.3                                            model 2.373
+DIAG-legs                16/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.98
+   NO  front frame band (across the slope)        target 0.64                                           model 0.751
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.311
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+DIAG-band                22/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   OK  front frame band (vertical)                target 0.82                                           model 0.828
+   OK  front frame band (across the slope)        target 0.64                                           model 0.634
+   OK  front frame inner contour at ¼             target 5.471                                          model 5.463
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   OK  rear frame band (vertical)                 target 0.82                                           model 0.831
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.637
+   OK  rear frame inner contour at ¼              target 5.471                                          model 5.46
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+DIAG-portal              16/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.98
+   NO  front frame band (across the slope)        target 0.64                                           model 0.751
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.311
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 4.16
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 4.16
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.22
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+DIAG-rail                16/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   NO  front frame band (vertical)                target 0.82                                           model 0.98
+   NO  front frame band (across the slope)        target 0.64                                           model 0.751
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.311
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 3.887
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 3.899
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 0/33 probes; soffit median -0.30
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+DIAG-all                 22/27 (+2 unassessable)
+   OK  front frame pieces                         target 1                                              model 1
+   OK  front frame band (vertical)                target 0.82                                           model 0.828
+   OK  front frame band (across the slope)        target 0.64                                           model 0.634
+   OK  front frame inner contour at ¼             target 5.471                                          model 5.463
+   OK  front frame joint at the ridge             target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 3.954}
+   OK  front frame left leg end                   target 0.0                                            model 0
+   OK  front frame right leg end                  target 3.06                                           model 3.06
+   OK  rear frame pieces                          target 1                                              model 1
+   OK  rear frame band (vertical)                 target 0.82                                           model 0.831
+   OK  rear frame band (across the slope)         target 0.64                                           model 0.637
+   OK  rear frame inner contour at ¼              target 5.471                                          model 5.46
+   OK  rear frame joint at the ridge              target continuous, ≤ 0.05 m above the roof, at the ri model {'continuous': True, 'protrusionM': 0, 'apexAlong': 8.096}
+   OK  rear frame left leg end                    target 0.0                                            model 0
+   OK  rear frame right leg end                   target 0.0                                            model 0
+   OK  front railings over the slab               target 1                                              model 1
+   OK  front railing infill                       target GLASS                                          model GLASS
+   ?   front railing top                          target 3.93                                           model 3.887
+   OK  rear railings over the slab                target 1                                              model 1
+   OK  rear railing infill                        target GLASS                                          model GLASS
+   ?   rear railing top                           target 3.93                                           model 3.899
+   NO  front band continuity (loggia + portal)    target 3.25–12.05 m, soffit 2.28, top 3.07            model 18/33 probes; soffit median 2.22
+   OK  front slab full extent                     target 3.25–7.90 m                                    model 3.25–7.91 m
+   NO  front-gable head high end                  target 6.26                                           model 6.084
+   NO  front-gable head low end                   target 4.02                                           model 4.187
+   NO  rear-gable-w head high end                 target 6.09                                           model 5.832
+   OK  rear-gable-w head low end                  target 4.13                                           model 4.272
+   NO  rear-gable-e head high end                 target 6.09                                           model 5.713
+   OK  rear-gable-e head low end                  target 4.13                                           model 4.272
+   OK  rear living glazing head                   target 2.3                                            model 2.153
+fault bars instead of glass                front railing infill                     True -> False  detected=True
+fault right extent, wrong band width       front frame band (vertical)              True -> False  detected=True
+fault a corner standing above the ridge    front frame joint at the ridge           True -> False  detected=True
+fault no band over the portal              front band continuity (loggia + portal)  True -> False  detected=True

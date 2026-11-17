@@ -1,0 +1,64 @@
+[
+ {
+  "round": 1,
+  "op": "SET_OPENING_HEAD",
+  "subject": "el-p10/o3 (head)",
+  "why": "Left rear gable glazing: its head follows the left rake, low at x≈545 (row ≈337) and rising to row ≈227 at x≈697 beside the dark centre panel.",
+  "state": "APPLIED",
+  "consumer": "resolveHouse/openings(head) → houseProgram/cutOpening(RAKED|POINTED)",
+  "effect": "model c63dc815fd → 8c974082d3; failing checks 0 → 0; held or refused 12 → 8; meshes 67 → 75",
+  "group": "defect-d1",
+  "baseRevision": "bd4f08fc1080",
+  "revision": "f03f8b06a682",
+  "properties": [
+   {
+    "property": "head at its left side",
+    "target": 3.995,
+    "before": null,
+    "after": 4.182,
+    "state": "IMPROVED"
+   },
+   {
+    "property": "head at its right side",
+    "target": 5.865,
+    "before": null,
+    "after": 5.848,
+    "state": "IMPROVED"
+   }
+  ],
+  "improved": "IMPROVED",
+  "inputModelHash": "c63dc815fd1ad44c37f498c3811ad1b8ab28fba236c4158c29b72e64b976024b",
+  "outputModelHash": "8c974082d36330d3887fb3d7ca777c0ee95172b7f589607b13f9c6f93bc26346"
+ },
+ {
+  "round": 1,
+  "op": "SET_OPENING_HEAD",
+  "subject": "el-p10/o4 (head)",
+  "why": "Right rear gable glazing: its head is high at x≈780 (row ≈227) and falls along the right rake to row ≈337 at x≈932.",
+  "state": "APPLIED",
+  "consumer": "resolveHouse/openings(head) → houseProgram/cutOpening(RAKED|POINTED)",
+  "effect": "model c63dc815fd → 8c974082d3; failing checks 0 → 0; held or refused 12 → 8; meshes 67 → 75",
+  "group": "defect-d1",
+  "baseRevision": "bd4f08fc1080",
+  "revision": "f03f8b06a682",
+  "properties": [
+   {
+    "property": "head at its left side",
+    "target": 5.865,
+    "before": null,
+    "after": 5.848,
+    "state": "IMPROVED"
+   },
+   {
+    "property": "head at its right side",
+    "target": 3.995,
+    "before": null,
+    "after": 4.182,
+    "state": "IMPROVED"
+   }
+  ],
+  "improved": "IMPROVED",
+  "inputModelHash": "c63dc815fd1ad44c37f498c3811ad1b8ab28fba236c4158c29b72e64b976024b",
+  "outputModelHash": "8c974082d36330d3887fb3d7ca777c0ee95172b7f589607b13f9c6f93bc26346"
+ }
+]

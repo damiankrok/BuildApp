@@ -1,0 +1,3045 @@
+{
+ "schema": "buildapp.v3548-marcowki-detail/1",
+ "tolerances": {
+  "bandM": 0.1,
+  "yM": 0.15,
+  "alongM": 0.15,
+  "jointM": 0.05,
+  "portalShare": 0.9
+ },
+ "models": {
+  "LOCAL": {
+   "note": "model LOCAL/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 27,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.792,
+     "error": 0.028,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.607,
+     "error": 0.033,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.473,
+     "model": 5.501,
+     "error": 0.028,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.95
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.79,
+     "error": 0.03,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.605,
+     "error": 0.035,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.473,
+     "model": 5.503,
+     "error": 0.03,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.1
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 3.97,
+     "error": 0.04,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 3.984,
+     "error": 0.054,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "32/33 probes; soffit median 2.32",
+     "error": null,
+     "ok": true,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.31–7.90 m",
+     "error": 0.06,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.26,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 3.994,
+     "error": 0.026,
+     "ok": true,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 6.1,
+     "error": 0.01,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.137,
+     "error": 0.007,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 6.09,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.137,
+     "error": 0.007,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.3,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-L1@65d8a06": {
+   "note": "model B-L1/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 8,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 2,
+     "error": null,
+     "ok": false,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.879,
+     "error": 0.059,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.782,
+     "error": 0.142,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.775,
+     "error": 0.304,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": -0.035,
+      "apexAlong": 4.428
+     },
+     "error": 0.035,
+     "ok": false,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 4.852,
+     "error": 4.852,
+     "ok": false,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 4.852,
+     "error": 1.792,
+     "ok": false,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 2,
+     "error": null,
+     "ok": false,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.882,
+     "error": 0.062,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.676,
+     "error": 0.036,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.774,
+     "error": 0.303,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": -0.034,
+      "apexAlong": 7.622
+     },
+     "error": 0.034,
+     "ok": false,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 4.853,
+     "error": 4.853,
+     "ok": false,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 4.854,
+     "error": 4.854,
+     "ok": false,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "BARS",
+     "error": null,
+     "ok": false,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "BARS",
+     "error": null,
+     "ok": false,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.22 m",
+     "error": 0.684,
+     "ok": false,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-L1@86fd69f": {
+   "note": "model NF-L1/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 16,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.98,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.751,
+     "error": 0.111,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.311,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.983,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.753,
+     "error": 0.113,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.308,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-host2@65d8a06": {
+   "note": "model B-H2/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 5,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 2,
+     "error": null,
+     "ok": false,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.676,
+     "error": 0.144,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.523,
+     "error": 0.117,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.894,
+     "error": 0.423,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": -0.02,
+      "apexAlong": 3.638
+     },
+     "error": 0.02,
+     "ok": false,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 4.768,
+     "error": 4.768,
+     "ok": false,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 4.768,
+     "error": 1.708,
+     "ok": false,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 2,
+     "error": null,
+     "ok": false,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.934,
+     "error": 0.114,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.715,
+     "error": 0.075,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.743,
+     "error": 0.272,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": -0.012,
+      "apexAlong": 7.622
+     },
+     "error": 0.012,
+     "ok": false,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 4.875,
+     "error": 4.875,
+     "ok": false,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 4.875,
+     "error": 4.875,
+     "ok": false,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 0,
+     "error": null,
+     "ok": false,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": null,
+     "error": null,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "BARS",
+     "error": null,
+     "ok": false,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.35–5.22 m",
+     "error": 2.68,
+     "ok": false,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.841,
+     "error": 0.249,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.205,
+     "error": 0.075,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.841,
+     "error": 0.249,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.205,
+     "error": 0.075,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.411,
+     "error": 0.111,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-host2@86fd69f": {
+   "note": "model NF-H2/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 17,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.676,
+     "error": 0.144,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.518,
+     "error": 0.122,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.615,
+     "error": 0.144,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 4.057,
+     "error": 0.997,
+     "ok": false,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.934,
+     "error": 0.114,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.716,
+     "error": 0.076,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.357,
+     "error": 0.114,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.35–5.22 m",
+     "error": 2.68,
+     "ok": false,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.841,
+     "error": 0.249,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.205,
+     "error": 0.075,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.841,
+     "error": 0.249,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.205,
+     "error": 0.075,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.411,
+     "error": 0.111,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-LIVE1-before-review": {
+   "note": "compiled from the observations of LIVE1rc/marcowki-ge/house-first.json",
+   "modelHash": "5018c8ccbb4e9d0897790056a44f6ae8c025328436afaf6123b37a2795da6411",
+   "built": true,
+   "met": 18,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.927,
+     "error": 0.107,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.71,
+     "error": 0.07,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.364,
+     "error": 0.107,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.966,
+     "error": 0.146,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.74,
+     "error": 0.1,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.325,
+     "error": 0.146,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 3.891,
+     "error": 0.039,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 3.882,
+     "error": 0.048,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "18/33 probes; soffit median 2.27",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.24–7.91 m",
+     "error": 0.014,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.081,
+     "error": 0.179,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.224,
+     "error": 0.204,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": null,
+     "error": null,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.373,
+     "error": 0.073,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "H-LIVE1-after-review": {
+   "note": "model LIVE1rc/marcowki-ge/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 20,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.927,
+     "error": 0.107,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.71,
+     "error": 0.07,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.364,
+     "error": 0.107,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.966,
+     "error": 0.146,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.74,
+     "error": 0.1,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.325,
+     "error": 0.146,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 3.891,
+     "error": 0.039,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 3.882,
+     "error": 0.048,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "18/33 probes; soffit median 2.27",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.24–7.91 m",
+     "error": 0.014,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.081,
+     "error": 0.179,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.224,
+     "error": 0.204,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.848,
+     "error": 0.242,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.182,
+     "error": 0.052,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.848,
+     "error": 0.242,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.182,
+     "error": 0.052,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.373,
+     "error": 0.073,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "DIAG-legs": {
+   "note": "model diag/D-legs/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 16,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.98,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.751,
+     "error": 0.111,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.311,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.983,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.753,
+     "error": 0.113,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.308,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "DIAG-band": {
+   "note": "model diag/D-band/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 22,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.828,
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.634,
+     "error": 0.006,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.463,
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.831,
+     "error": 0.011,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.637,
+     "error": 0.003,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.46,
+     "error": 0.011,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "DIAG-portal": {
+   "note": "model diag/D-portal/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 16,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.98,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.751,
+     "error": 0.111,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.311,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.983,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.753,
+     "error": 0.113,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.308,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 4.16,
+     "error": 0.23,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "18/33 probes; soffit median 2.22",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "DIAG-rail": {
+   "note": "model diag/D-rail/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 16,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.98,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.751,
+     "error": 0.111,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.311,
+     "error": 0.16,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.983,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.753,
+     "error": 0.113,
+     "ok": false,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.308,
+     "error": 0.163,
+     "ok": false,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 3.887,
+     "error": 0.043,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 3.899,
+     "error": 0.031,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "0/33 probes; soffit median -0.30",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  },
+  "DIAG-all": {
+   "note": "model diag/D-all/model.json",
+   "modelHash": null,
+   "built": true,
+   "met": 22,
+   "of": 27,
+   "unassessable": 2,
+   "rows": [
+    {
+     "feature": "front frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "front frame band (vertical)",
+     "target": 0.82,
+     "model": 0.828,
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "front frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.634,
+     "error": 0.006,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "front frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.463,
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "front frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 3.954
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "front frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "front frame right leg end",
+     "target": 3.06,
+     "model": 3.06,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+    },
+    {
+     "feature": "rear frame pieces",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+    },
+    {
+     "feature": "rear frame band (vertical)",
+     "target": 0.82,
+     "model": 0.831,
+     "error": 0.011,
+     "ok": true,
+     "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+    },
+    {
+     "feature": "rear frame band (across the slope)",
+     "target": 0.64,
+     "model": 0.637,
+     "error": 0.003,
+     "ok": true,
+     "truth": "T2-UNRES-VERGE-DEPTH face width"
+    },
+    {
+     "feature": "rear frame inner contour at ¼",
+     "target": 5.471,
+     "model": 5.46,
+     "error": 0.011,
+     "ok": true,
+     "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+    },
+    {
+     "feature": "rear frame joint at the ridge",
+     "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+     "model": {
+      "continuous": true,
+      "protrusionM": 0,
+      "apexAlong": 8.096
+     },
+     "error": 0,
+     "ok": true,
+     "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+    },
+    {
+     "feature": "rear frame left leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "returns to the ground (T2-RECESS-*)"
+    },
+    {
+     "feature": "rear frame right leg end",
+     "target": 0.0,
+     "model": 0,
+     "error": 0.0,
+     "ok": true,
+     "truth": "T2-RECESS-REAR east return to the ground"
+    },
+    {
+     "feature": "front railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-FRONT"
+    },
+    {
+     "feature": "front railing top",
+     "target": 3.93,
+     "model": 3.887,
+     "error": 0.043,
+     "ok": null,
+     "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "rear railings over the slab",
+     "target": 1,
+     "model": 1,
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing infill",
+     "target": "GLASS",
+     "model": "GLASS",
+     "error": null,
+     "ok": true,
+     "truth": "T2-RAILING-REAR"
+    },
+    {
+     "feature": "rear railing top",
+     "target": 3.93,
+     "model": 3.899,
+     "error": 0.031,
+     "ok": null,
+     "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+    },
+    {
+     "feature": "front band continuity (loggia + portal)",
+     "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+     "model": "18/33 probes; soffit median 2.22",
+     "error": null,
+     "ok": false,
+     "truth": "T2-FACADE-FRONT-BAND"
+    },
+    {
+     "feature": "front slab full extent",
+     "target": "3.25–7.90 m",
+     "model": "3.25–7.91 m",
+     "error": 0.008,
+     "ok": true,
+     "truth": "T2-BALCONY-FRONT"
+    },
+    {
+     "feature": "front-gable head high end",
+     "target": 6.26,
+     "model": 6.084,
+     "error": 0.176,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "front-gable head low end",
+     "target": 4.02,
+     "model": 4.187,
+     "error": 0.167,
+     "ok": false,
+     "truth": "T2-OPEN-FRONT-GABLE"
+    },
+    {
+     "feature": "rear-gable-w head high end",
+     "target": 6.09,
+     "model": 5.832,
+     "error": 0.258,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-w head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-W"
+    },
+    {
+     "feature": "rear-gable-e head high end",
+     "target": 6.09,
+     "model": 5.713,
+     "error": 0.377,
+     "ok": false,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear-gable-e head low end",
+     "target": 4.13,
+     "model": 4.272,
+     "error": 0.142,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GABLE-E"
+    },
+    {
+     "feature": "rear living glazing head",
+     "target": 2.3,
+     "model": 2.153,
+     "error": 0.147,
+     "ok": true,
+     "truth": "T2-OPEN-REAR-GLAZING 470/230"
+    }
+   ]
+  }
+ },
+ "faults": {
+  "on": "LOCAL",
+  "cases": [
+   {
+    "fault": "bars instead of glass",
+    "row": "front railing infill",
+    "before": true,
+    "after": false,
+    "detected": true
+   },
+   {
+    "fault": "right extent, wrong band width",
+    "row": "front frame band (vertical)",
+    "before": true,
+    "after": false,
+    "detected": true
+   },
+   {
+    "fault": "a corner standing above the ridge",
+    "row": "front frame joint at the ridge",
+    "before": true,
+    "after": false,
+    "detected": true
+   },
+   {
+    "fault": "no band over the portal",
+    "row": "front band continuity (loggia + portal)",
+    "before": true,
+    "after": false,
+    "detected": true
+   }
+  ]
+ }
+}

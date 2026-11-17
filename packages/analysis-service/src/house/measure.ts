@@ -176,7 +176,7 @@ type MeshLike = { objectId?: string; objectKind?: string; semanticGroup?: string
 const OUTWARD: Record<SceneSide, { x: number; z: number }> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, LEFT: { x: -1, z: 0 }, RIGHT: { x: 1, z: 0 } }
 type Tri2 = [number, number, number, number, number, number]
 /** The triangles of meshes that face outward on `side` and lie within `[vMin, vMax]` metres in from its outer plane, as (along, y). */
-export function outwardTriangles(meshes: readonly MeshLike[], W: Bounds, side: SceneSide, vMin: number, vMax: number): Tri2[] {
+export function outwardTriangles(meshes: readonly MeshLike[], W: Bounds, side: SceneSide, vMin: number, vMax: number, /** a face across the side either way round (material, whatever its winding) */ eitherWay = false): Tri2[] {
   const n = OUTWARD[side]
   const along = (x: number, z: number): number => (side === 'FRONT' ? x - W.x0 : side === 'REAR' ? W.x1 - x : side === 'LEFT' ? W.z1 - z : z - W.z0)
   const vIn = (x: number, z: number): number => (side === 'FRONT' ? z - W.z0 : side === 'REAR' ? W.z1 - z : side === 'LEFT' ? x - W.x0 : W.x1 - x)
@@ -188,7 +188,8 @@ export function outwardTriangles(meshes: readonly MeshLike[], W: Bounds, side: S
       const vx = p[i + 6] - p[i], vy = p[i + 7] - p[i + 1], vz = p[i + 8] - p[i + 2]
       const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx
       const l = Math.hypot(nx, ny, nz) || 1
-      if ((nx * n.x + nz * n.z) / l < 0.7) continue
+      const facing = (nx * n.x + nz * n.z) / l
+      if (eitherWay ? Math.abs(facing) < 0.7 : facing < 0.7) continue
       const v = vIn((p[i] + p[i + 3] + p[i + 6]) / 3, (p[i + 2] + p[i + 5] + p[i + 8]) / 3)
       if (v < vMin || v > vMax) continue
       out.push([along(p[i], p[i + 2]), p[i + 1], along(p[i + 3], p[i + 5]), p[i + 4], along(p[i + 6], p[i + 8]), p[i + 7]])
@@ -223,7 +224,8 @@ export function intervalsAt(tris: readonly Tri2[], a: number, gap = 0.02): Array
  * with no face there is a break in the band.
  */
 export function portalProfile(bundle: MobileSceneBundle, W: Bounds, side: SceneSide, a0: number, a1: number, probeY: number, step = 0.25, vMax = 0.3): Array<{ a: number; soffit: number | null; top: number | null }> {
-  const tris = outwardTriangles(bundle.scene.meshes as unknown as MeshLike[], W, side, -0.6, vMax)
+  // (either way round: a roof slab's edge whose faces are wound inward is still the head's material in that plane)
+  const tris = outwardTriangles(bundle.scene.meshes as unknown as MeshLike[], W, side, -0.6, vMax, true)
   const out: Array<{ a: number; soffit: number | null; top: number | null }> = []
   for (let a = a0 + step / 2; a < a1; a += step) {
     const hit = intervalsAt(tris, a).find(([lo, hi]) => lo <= probeY && hi >= probeY)
