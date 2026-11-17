@@ -475,5 +475,34 @@ Call describe_facades:
 - roofs: the roof of each body;
 - elevations: one entry per elevation picture. Name the side by matching it to the plan (which body is on the left, where the garage door, the entrance, a bay are). For each body seen: the columns of its two WALL ends, the rows of its eaves and ridge. Then every opening as a box, and the roof features (dormers, balconies, canopies, chimneys).
 A side elevation of a gable roof shows the gable triangle: eavesY null, ridgeY the apex.`
-  return { answer: await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))), sent }
+  const tool = withBodyIds(READING_TOOLS.FACADES, plan.bodies.map((b) => b.id))
+  const answer = await ask<FacadesAnswer>(ctx, 'FACADES', 0, text, sent, tool)
+  // v3.54.4, after the first confirmation (three of eight houses came back with one of four elevations described): an
+  // elevation picture that was sent and not described is asked for once more, alone with the plan. One extra request at
+  // most; what comes back is added to the first answer under the first request's picture numbers.
+  const first = 2 + nS
+  const described = new Set((answer.elevations ?? []).map((e) => e.picture))
+  const missing = selection.elevations.map((p, i) => ({ p, n: first + i })).filter((x) => !described.has(x.n))
+  if (missing.length > 0 && (answer.elevations ?? []).length > 0) {
+    const again = [sent[0], ...missing.map((x) => sent[x.n - 1])]
+    const sides = (answer.elevations ?? []).map((e) => e.side).join(', ')
+    const more = `Picture 1: the ground-floor plan (for reference; its front facade lies along its ${plan.front.planEdge} edge). Pictures 2–${again.length}: ${missing.length === 1 ? 'an elevation' : 'elevations'} of the same house that ${missing.length === 1 ? 'was' : 'were'} not described yet (already described: ${sides}).
+The bodies read on the plan (use these ids): ${plan.bodies.map((b) => `${b.id} (${b.role}, levels ${b.storeys.join('+')})`).join('; ')}.
+${bodiesInMetres}
+Call describe_facades with one entry in "elevations" for EACH of pictures 2–${again.length}: the side, the columns of each body's two WALL ends, the rows of its eaves and ridge, every opening as a box, the roof features. Leave "levels" and "roofs" empty.`
+    try {
+      const extra = await ask<FacadesAnswer>(ctx, 'FACADES', 1, more, again, tool)
+      for (const e of extra.elevations ?? []) {
+        const at = missing[e.picture - 2]
+        if (at && !described.has(at.n)) {
+          described.add(at.n)
+          answer.elevations.push({ ...e, picture: at.n })
+        }
+      }
+    } catch (e) {
+      if (!(e instanceof ReadingFailed)) throw e
+      // the first answer stands; the missing elevations stay missing and the document says so
+    }
+  }
+  return { answer, sent }
 }

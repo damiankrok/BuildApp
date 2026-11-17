@@ -1,20 +1,49 @@
-# v3.54.4: hand-off (WORK_IN_PROGRESS; text only; no key, no publisher image)
+# v3.54.4: hand-off (final state; text only; no key, no publisher image)
 
-## Base
-- Base commit pinned: `0d4a057ff1ffe5dec07dd04e543ed39a308c4ee1` (delivery of v3.54.3; candidate `aabc044`; solver 2.44.0). Worktree clean at start (2026-11-17).
-- Books at start: `/home/user/rd/v3542/books`, 9.963222 USD cumulative, 134 requests, no open reservation. Ceiling 24.11036.
-- Master Plan v3.54.4 installed at `docs/MASTER_PLAN.md` (D29–D33).
-- Private work dir: `/home/user/rd/v3544/`. Key: `/root/.config/buildplan/campaign-key` (never printed).
+Report: `stage-reports/SOURCE_TO_MODEL_V3544.md`. OWNER index: `stage-reports/README_V3544.md`.
+Protocol and seal: `stage-reports/artifacts/v3544/PROTOCOL_V3544.md`, `PROTOCOL.seal`.
 
-## Findings so far (measured on saved bytes)
-### Gracja (confirm-dobredomy-gracja-i-mala-ii), LOCAL re-run `/home/user/rd/v3544/A1/gracja` = saved model hash 4d674d44b4cc
-- HEIGHT. The section prints +8,13 (ridge), +6,49 (garage ridge), +3,04 (attic floor), ±0,00, −0,30, −0,45, total 858, clear 276 / 270 / 238, pitch 40°.
-  The numeric reader read the level marks as "+18,11", "+16,49", "+11.04" (chain-corrected to 12.04): the marker's stroke before the digits is read as a digit 1.
-  `reconstruct-v2.ts` ~l.975: top storey height = ridge datum − floor = 18.11 m (one level "Ground" 18.11 m; walls 18.61 m; attached flat roof at 12.04 m).
-  The published building height 8.60 m and the printed 858 on the same sheet did not bound it (`topDatumBelowPublishedHeight` only handles a datum BELOW the published height).
-  Not a scale, unit, camera or board-fit effect.
-- WIDTH/DEPTH. No dimension chain on the colour plan (only 16,82 and 10,12 overall). `PUBLISHED_FOOTPRINT_SCALE`: the walled outline the reader found (a fragment: 3 regions, no garage) was scaled until its area equals the published 144.5 m²: 4.196 cm/px at the 860 px reading, where the printed 16,82 m spans 656 px → 2.564 cm/px. Lengths ×1.636 on a fragment → 12.06 × 13.43 m.
-- v3.54.3 report error to correct: "36 % too short" used `metric.cmPerPixel` (1.649, never the built scale). The built scale was 4.196.
-- Also: only one storey built (attic plan not stacked: NO_MASS_REACHES_UP), elevations not registered.
-### Gracja source facts for the manual spec (px in the 1883×1600 ground plan; 16,82 m ↔ x 335..1770 → 1.1721 cm/px; 10,12 m ↔ y 523..1387)
-- garage right, set back at the rear (top y≈653) and flush with the entrance block at the front (y≈1258); kitchen block projects to y≈1387; bay window on the left (x≈340..425, y≈800..1060); living room top wall y≈523 from x≈553 to 1262.
+## Base and state
+- Base commit: `0d4a057ff1ffe5dec07dd04e543ed39a308c4ee1` (delivery of v3.54.3). Branch `claude/new-session-3kzcgh`, no merge, no PR.
+- Frozen code commit of the confirmation: `3c531aee…` (sealed in `PROTOCOL.seal`); first result kept in `ee89085`.
+- After the confirmation one change was made to the reader (a single follow-up request for elevation pictures that were
+  sent and not described, `readFacades`, recorded as `FACADES` round 1). It was tried on three confirmation houses as a
+  post-confirmation trial and is NOT confirmed on new houses.
+- Statuses: IMPLEMENTATION_COMPLETE; BUILDER_VERIFIED_IN_SCOPE; HOST_INTEGRATION_VERIFIED (local); QUALITY_GAIN on DEV;
+  TRANSFER_EVIDENCE by the frozen criterion (improved 5/8, 4 publishers, 0 critical regressions; faithful 1/8);
+  ANDROID NOT_VERIFIED (no APK, app unchanged).
+
+## Books
+- Books directory: `/home/user/rd/v3542/books` (continued, never reset). Ledger in Git: `research/ai-assist/spend-ledger-v3544.json`.
+- Start 9.963222 USD; now 14.453496 USD of the 24.11036 USD ceiling; remaining 9.656864 USD.
+- This campaign: 4.490274 USD, 95 requests (smoke 0.311212/5, dev 1.508186/36, host-e2e 0.673052/12, confirm 1.563904/34,
+  post-confirm 0.433920/8). No open reservation.
+- Key: environment secret read from `/root/.config/buildplan/campaign-key` into `BUILDPLAN_ANTHROPIC_API_KEY` for one
+  command at a time; never printed, never in Git, ZIP or logs.
+
+## Where things are
+- Document, resolver, builder: `packages/reconstruction/src/house/{document,resolve,program,poly}.ts`.
+- Reading, conversion, decision, review, kernel build loop, scene measure, host path:
+  `packages/analysis-service/src/house/{read,pictures,describe,review,build,measure,link}.ts`.
+- Host: `apps/analyzer-api/src/{executor,wiring,store,http}.ts` (`ANALYZER_HOUSE_DESCRIPTION=pilot`, `/v1/analyses/:id/house`).
+- LOCAL fix: `packages/reconstruction/src/v2/roof-datum.ts` (`levelDatumsAbovePublishedHeight`), solver 2.45.0.
+- Tests: `packages/analysis-service/test/house-v3544.test.ts` (25).
+- Private work (outside Git): `/home/user/rd/v3544/` — `M/` manual builds, `H1` DEV live answers (replay root), `H6` latest
+  DEV replay, `CONFIRM/` frozen confirmation, `POST/` post-confirmation trial, `boards/`, `host*/`, `report/`.
+
+## Commands
+- Build a house from a document (no network): `npx tsx research/source-to-model/v3544/build-house.ts --doc <house.json> --out <dir>`.
+- Run the described path on a list of source packages:
+  `npx tsx research/source-to-model/v3544/house-run.ts --list <file> --out <dir> --phase <name> --max-usd <n> [--local <dir>] [--replay <dir>] [--no-review] [--plan-only]`.
+  `--replay <dir>` uses saved answers and spends nothing; a changed picture list is refused (STALE_DEPENDENCY).
+- Score against references: `npx tsx research/source-to-model/v3544/score.ts --list <file> --refs <dir> --h <runs dir> --local <dir> --out <json>`.
+- Tables: `/usr/bin/python3 -I research/source-to-model/v3544/tables.py {houses|proposals|transfer} …`; boards: `make-boards.sh`.
+- Host E2E (local, paid with a key, free without): `node research/source-to-model/v3544/host-e2e.mjs --out <dir> --data <host data dir> --max-usd <cumulative ceiling>`.
+
+## Open, in order of value
+1. Confirm the follow-up request for missing elevations on eight NEW families (est. 1.6–2 USD).
+2. Level marks of the section as a fact in the decision against LOCAL (Oslo: LOCAL 17 m tall was kept because no height is published).
+3. Shed and box dormers, sloped canopies in the builder (CAPABILITY_MISSING today).
+4. Plans without printed dimensions (Abakus, Pallas, 51853hz): scale stays ESTIMATED or there is no geometry.
+5. Front elevation registration when the plan is drawn rotated (Frizea).
+6. Show the house document and the decision in the Android app (needs a new APK).

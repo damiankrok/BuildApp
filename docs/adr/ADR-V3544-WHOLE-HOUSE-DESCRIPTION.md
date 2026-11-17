@@ -39,3 +39,14 @@ The newer instruction wins (repo rule: the latest explicit OWNER instruction det
   version. The two do not run side by side on one job.
 - Statements of v3.54.3 that rest on the old restriction (protocol §1, report §15.6 "nie pozwalałbym API generować
   domu") are history, not current rules; the report of v3.54.4 says where they were revised.
+
+## Outcome (2026-11-17)
+
+Implemented as decided. The contract is `buildapp.house-document` 0.1.0 with the reading contract
+`buildapp.house-reading` 0.1.0; the pilot flag is `ANALYZER_HOUSE_DESCRIPTION=pilot`. The decision between the described
+house and LOCAL is made on source facts (`arbitrate`): printed overall dimensions verified on the traced outline, the
+published building height, the area and the place of the walled outline. First frozen confirmation: improved whole
+exterior on 5 of 8 new houses with no critical regression; a faithful exterior on 1 of 8
+(`stage-reports/SOURCE_TO_MODEL_V3544.md`). The kernel build loop lives in the analysis service: the reconstruction
+package still only emits commands.
+

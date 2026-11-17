@@ -12,6 +12,24 @@
 
 ## Current summary (read first)
 
+- **v3.54.4 (2026-11-17): the whole-house description** (OWNER brief v3.54.4, Master Plan v3.54.4 at `docs/MASTER_PLAN.md`,
+  ADR `docs/adr/ADR-V3544-WHOLE-HOUSE-DESCRIPTION.md`; IMPLEMENTATION_COMPLETE, BUILDER_VERIFIED_IN_SCOPE,
+  HOST_INTEGRATION_VERIFIED locally, QUALITY_GAIN on DEV, TRANSFER_EVIDENCE confirmed by the frozen criterion — improved
+  whole exterior on 5 of 8 new houses, 4 publishers, 0 critical regressions — with a faithful exterior on 1 of 8;
+  ANDROID NOT_VERIFIED, no APK). Report `stage-reports/SOURCE_TO_MODEL_V3544.md`, OWNER summary
+  `stage-reports/README_V3544.md`, hand-off `research/source-to-model/v3544/HANDOFF.md`.
+  What exists now: one versioned house document (`buildapp.house-document` 0.1.0: observations in picture pixels, agreed
+  geometry in metres with a basis per number, verification with per-parameter consumers and holds); a deterministic
+  resolver and a polygon builder that emits kernel commands directly (bodies of different heights with butt junctions,
+  bays, roofs per body, wall dormers by shared topology, openings in real walls, rooflights, chimneys, balcony on posts);
+  a whole-house reading by the API in controlled steps with strict tool grammar; a review of the built scene with typed
+  corrections accepted one by one; a decision between the described house and LOCAL on source facts (LOCAL stays where
+  it meets them); the host pilot `ANALYZER_HOUSE_DESCRIPTION=pilot` storing `house.json` beside the result. LOCAL: a level
+  mark above the published building height is not used (solver 2.45.0; the cause of the 18 m Gracja).
+  Known limits: openings (3/8) and dormers (2/8) do not transfer yet; in 3 of 8 confirmation houses the API described one
+  of four elevations (a one-time follow-up request was added after the confirmation and is not confirmed on new houses);
+  plans without printed dimensions give an estimated scale or no geometry; the described house is an exterior only.
+  Spend 4.490274 USD (95 requests); books 14.453496 of 24.11036 USD.
 - **v3.54.3 (2026-11-16): the full correction loop, source → analyzer → model** (OWNER brief v3.54.3, Master Plan v3.54.3 at
   `docs/MASTER_PLAN.md`; IMPLEMENTATION_COMPLETE, HOST_INTEGRATION_VERIFIED locally, QUALITY_GAIN on DEV, TRANSFER of quality
   NOT_CONFIRMED, ANDROID NOT_VERIFIED; no APK). Report `stage-reports/SOURCE_TO_MODEL_V3543.md`, OWNER summary

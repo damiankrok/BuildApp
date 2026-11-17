@@ -1074,8 +1074,104 @@
    "inputTokens": 10000,
    "outputTokens": 3614,
    "costUsd": 0.05614
+  },
+  {
+   "at": "2026-11-17T05:45:10.554Z",
+   "phase": "post-confirm",
+   "house": "c4-archon-lubczyku-2",
+   "variant": "H",
+   "note": "house reading FACADES round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yAEsHb3Ep2R6eqWwHh",
+   "inputTokens": 8135,
+   "outputTokens": 5711,
+   "costUsd": 0.07338
+  },
+  {
+   "at": "2026-11-17T05:45:30.215Z",
+   "phase": "post-confirm",
+   "house": "c4-archon-lubczyku-2",
+   "variant": "H",
+   "note": "house reading REVIEW round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yDvHhaRey3uHxcp5LH",
+   "inputTokens": 10921,
+   "outputTokens": 1925,
+   "costUsd": 0.041092
+  },
+  {
+   "at": "2026-11-17T05:45:58.302Z",
+   "phase": "post-confirm",
+   "house": "c4-dobredomy-pallas",
+   "variant": "H",
+   "note": "house reading FACADES round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yFZqhLzMmHkaC5iL1w",
+   "inputTokens": 8048,
+   "outputTokens": 2765,
+   "costUsd": 0.043746
+  },
+  {
+   "at": "2026-11-17T05:46:45.738Z",
+   "phase": "post-confirm",
+   "house": "c4-dobredomy-pallas",
+   "variant": "H",
+   "note": "house reading REVIEW round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yHQo2eNyJsjcNv3oWn",
+   "inputTokens": 10221,
+   "outputTokens": 5166,
+   "costUsd": 0.072102
+  },
+  {
+   "at": "2026-11-17T05:47:09.223Z",
+   "phase": "post-confirm",
+   "house": "c4-dobredomy-pallas",
+   "variant": "H",
+   "note": "house reading REVIEW round 2",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yLsCMfNGDmSrsEsHLd",
+   "inputTokens": 10220,
+   "outputTokens": 2627,
+   "costUsd": 0.04671
+  },
+  {
+   "at": "2026-11-17T05:47:52.486Z",
+   "phase": "post-confirm",
+   "house": "c4-studioatrium-wena",
+   "variant": "H",
+   "note": "house reading FACADES round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yNqHKR54ZgfGK5R4nQ",
+   "inputTokens": 7307,
+   "outputTokens": 4579,
+   "costUsd": 0.060404
+  },
+  {
+   "at": "2026-11-17T05:48:23.029Z",
+   "phase": "post-confirm",
+   "house": "c4-studioatrium-wena",
+   "variant": "H",
+   "note": "house reading REVIEW round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yRpXGa6PYsUFdS8peZ",
+   "inputTokens": 9902,
+   "outputTokens": 3357,
+   "costUsd": 0.053374
+  },
+  {
+   "at": "2026-11-17T05:48:47.034Z",
+   "phase": "post-confirm",
+   "house": "c4-studioatrium-wena",
+   "variant": "H",
+   "note": "house reading REVIEW round 2",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7yU3wUSEAAF7EkkL8Rg",
+   "inputTokens": 9851,
+   "outputTokens": 2341,
+   "costUsd": 0.043112
   }
  ],
- "totalUsd": 4.056354,
- "requests": 87
+ "totalUsd": 4.490274,
+ "requests": 95
 }
