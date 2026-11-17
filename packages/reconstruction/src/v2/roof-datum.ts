@@ -159,6 +159,27 @@ export function topDatumBelowPublishedHeight(input: {
   return `the published building height ${H} m over ${terrain} leaves ${left} m above the highest datum read (+${input.topDatum.toFixed(2)}), more than a roof build-up of ${CONVENTIONS.roofThickness} m, and the section draws ink ${input.drawnRise.toFixed(2)} m above that datum across part of the building's width: a roof stands above it, so it is not the ridge`
 }
 
+/** v3.54.4: how far above the published building height a level mark may stand and still be a height of the building. */
+export const PUBLISHED_HEIGHT_OVER_TOLERANCE_M = 0.3
+
+/**
+ * v3.54.4 (a section whose marks +8,13, +6,49 and +3,04 were read as +18,11, +16,49 and +12,04: the stroke of the level
+ * marker before the digits taken for a digit 1; the top one became a storey 18 m high under a page that publishes a
+ * building 8,60 m tall). `topDatumBelowPublishedHeight` refuses a top datum BELOW what the published height leaves; this
+ * is the other side. The published building height is measured from the terrain, which lies at or below ±0,00, so no
+ * floor, eave or ridge of the building stands higher above ±0,00 than that height. A level mark above it (by more than
+ * a rounding of the page) is not a height of this building — a misread, a mark of a mast or of another drawing — and is
+ * not used. Exactly one published height in metres is required; with none, nothing is refused.
+ */
+export function levelDatumsAbovePublishedHeight<T extends { id: string; value: number }>(levels: ReadonlyArray<T>, publishedFacts: ReadonlyArray<{ key: string; value: number; unit: string }>): { refused: T[]; heightM: number } | undefined {
+  const heights = publishedFacts.filter((f) => f.key === 'building_height' && f.unit === 'm')
+  if (heights.length !== 1) return undefined
+  const H = heights[0].value
+  if (!(H >= 3 && H <= 20)) return undefined
+  const refused = levels.filter((e) => e.value > H + PUBLISHED_HEIGHT_OVER_TOLERANCE_M)
+  return refused.length > 0 ? { refused, heightM: H } : undefined
+}
+
 /** E13: how far the published building height may differ from the ridge over a ground mark for that mark to be its base. */
 export const PUBLISHED_HEIGHT_BASE_TOLERANCE_M = 0.05
 

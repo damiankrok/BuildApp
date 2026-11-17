@@ -1,0 +1,73 @@
+{
+ "schema": "buildapp.ai-spend-ledger.v3544",
+ "currency": "USD",
+ "costBasis": "USAGE_PRICED",
+ "billing": "NOT_RECONCILED_WITH_INVOICE",
+ "priceSource": "list prices as in apps/analyzer-api HOUSE_READER_PRICES: Sonnet 5.5 $2/$10 per MTok",
+ "openingUsd": 9.963222,
+ "openingNote": "the cumulative books as v3.54.3 left them (134 requests on the books file; 9.963222 USD); this ledger lists the v3.54.4 requests only; ceiling 24.11036 USD cumulative",
+ "entries": [
+  {
+   "at": "2026-11-17T04:22:50.781Z",
+   "phase": "smoke",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "variant": "H",
+   "note": "house reading INVENTORY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7rw2KRFKW535tdv7SMh",
+   "inputTokens": 6403,
+   "outputTokens": 1464,
+   "costUsd": 0.027446
+  },
+  {
+   "at": "2026-11-17T04:23:09.826Z",
+   "phase": "smoke",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "variant": "H",
+   "note": "house reading PLAN",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7rwjK1mxPbtK6b3oNd7",
+   "inputTokens": 6236,
+   "outputTokens": 2596,
+   "costUsd": 0.038432
+  },
+  {
+   "at": "2026-11-17T04:24:01.596Z",
+   "phase": "smoke",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "variant": "H",
+   "note": "house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7ryB4LnB17EXQwrp69e",
+   "inputTokens": 12405,
+   "outputTokens": 7788,
+   "costUsd": 0.10269
+  },
+  {
+   "at": "2026-11-17T04:26:38.474Z",
+   "phase": "smoke",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "variant": "H",
+   "note": "house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7sAn7YXV2DM9Tc4Hx9u",
+   "inputTokens": 12069,
+   "outputTokens": 6754,
+   "costUsd": 0.091678
+  },
+  {
+   "at": "2026-11-17T04:36:34.601Z",
+   "phase": "smoke",
+   "house": "confirm-dobredomy-gracja-i-mala-ii",
+   "variant": "H",
+   "note": "house reading REVIEW round 1",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011Ch7sxCXz3egsh1UYU82Zr",
+   "inputTokens": 10718,
+   "outputTokens": 2953,
+   "costUsd": 0.050966
+  }
+ ],
+ "totalUsd": 0.311212,
+ "requests": 5
+}

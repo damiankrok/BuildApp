@@ -117,7 +117,7 @@ import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt, neutralBands, topNeutralInkRow } from './scan.js'
-import { approximateRidgeDatum, printedTerrainOf, topDatumBelowPublishedHeight } from './roof-datum.js'
+import { approximateRidgeDatum, levelDatumsAbovePublishedHeight, printedTerrainOf, topDatumBelowPublishedHeight } from './roof-datum.js'
 import { viewAudit } from './view-audit.js'
 import { measureOpeningOnView, scanFacadeOpenings } from './facade-openings.js'
 import type { FacadeBand, FacadeView, FacadeOpeningReading, FacadeOpeningRejection } from './facade-openings.js'
@@ -320,7 +320,7 @@ export const PARTY_GAP_NOT_A_DOOR_M = 2 * DOOR_MAX_WIDTH_M
 // with that independent scale (`layout.ts` `axisLadder`, since v3.54.2 candidate 3, then unversioned); (b) roof features a
 // validated correction names are built into the building (`roof-feature.ts`). Without consulted evidence and without
 // corrections the geometry is the 2.43.0 geometry; the model hash is compared apart from this version (the candidate's).
-export const SOLVER_V2_VERSION = '2.44.0' as const
+export const SOLVER_V2_VERSION = '2.45.0' as const
 
 /** 005L: two pieces of one storey's footprint nearer than a room's narrowest span (`minBodySpanM`, never under 1 m) meet. */
 const PIECES_MEET_M = 1
@@ -511,6 +511,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const { graph } = options
   // Replaced only when the plan resolver re-read the base plan at another scale (005A).
   let metrics = options.metrics
+  // v3.54.4: a level mark above the published building height is not a height of this building (`roof-datum.ts`)
+  const overHeight = levelDatumsAbovePublishedHeight(metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM'), options.publishedAreas ?? [])
+  if (overHeight) {
+    const refusedIds = new Set(overHeight.refused.map((e) => e.id))
+    metrics = { ...metrics, evidence: metrics.evidence.filter((e) => !refusedIds.has(e.id)) }
+  }
   options.onPhase?.('REGISTRATION')
   const keep = options.frameFilter
   const ctx = emptySolverRecord()
@@ -521,6 +527,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     return recorder.gap(g)
   }
   const frameById = new Map(graph.coordinateFrames.map((f) => [f.id, f]))
+  if (overHeight) {
+    const marks = overHeight.refused.map((e) => `+${e.value.toFixed(2)}`).join(', ')
+    gap({ what: `the level mark${overHeight.refused.length > 1 ? 's' : ''} ${marks}`, reason: `above the published building height ${overHeight.heightM} m, which is measured from the terrain: not a height of this building (a misread mark); not used`, status: 'REFUSED', observationIds: [], evidenceIds: overHeight.refused.map((e) => e.id) })
+    step({ stage: 'levels', what: 'level marks above the published building height refused', method: 'DIRECT', detail: `${marks} against ${overHeight.heightM} m`, inputs: overHeight.refused.length, outputs: 0 })
+  }
 
 
   // ---------------------------------------------------------------------------

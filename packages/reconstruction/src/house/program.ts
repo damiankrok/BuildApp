@@ -426,21 +426,28 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       continue
     }
     const offsetM = need(o.offsetM, `${path}.offsetM`)
-    const width = need(o.widthM, `${path}.widthM`)
+    const stated = need(o.widthM, `${path}.widthM`)
     const height = need(o.heightM, `${path}.heightM`)
     const sill = need(o.sillM, `${path}.sillM`)
-    if (offsetM === undefined || width === undefined || height === undefined || sill === undefined) continue
+    if (offsetM === undefined || stated === undefined || height === undefined || sill === undefined) continue
     // a wall's core stops a wall thickness short of each corner: an opening is kept clear of it, and the move is said
-    const under = wallUnder(h, offsetM, offsetM + width)
+    const under = wallUnder(h, offsetM, offsetM + stated)
     if (!under) {
-      refuse(path, 'WRONG_BINDING', `no built wall stands under ${offsetM.toFixed(2)}..${(offsetM + width).toFixed(2)} m of ${h.id}`)
+      refuse(path, 'WRONG_BINDING', `no built wall stands under ${offsetM.toFixed(2)}..${(offsetM + stated).toFixed(2)} m of ${h.id}`)
       continue
     }
     const lo = under.s0 + T + 0.05
     const hi = under.s1 - T - 0.05
+    let width = stated
     if (width > hi - lo) {
-      refuse(path, 'COMPILE_CONFLICT', `${width.toFixed(2)} m wide in a wall whose clear length is ${(hi - lo).toFixed(2)} m`)
-      continue
+      // a window that fills a short wall (the face of a bay): cut as wide as the wall's core allows, and said
+      if (hi - lo >= 0.5 && hi - lo >= 0.5 * width) {
+        width = hi - lo
+        trace.push({ path: `${path}.widthM`, state: 'ACCEPTED', code: 'COMPILE_CONFLICT', why: `${stated.toFixed(2)} m wide as read; ${width.toFixed(2)} m is the clear length of its wall: cut that wide`, consumer: 'houseProgram/cutOpening', programIds: [o.id], meshIds: [o.id] })
+      } else {
+        refuse(path, 'COMPILE_CONFLICT', `${width.toFixed(2)} m wide in a wall whose clear length is ${(hi - lo).toFixed(2)} m`)
+        continue
+      }
     }
     const at = Math.min(hi - width, Math.max(lo, offsetM))
     const l = levelAt.get(Math.min(...under.w.body.storeys))
@@ -471,6 +478,13 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     const r = b.rect
     push({ type: 'createBalcony', id: b.id, levelId: l.id, kind: 'BALCONY', footprint: { minX: r6(Math.min(r.x0, r.x1)), maxX: r6(Math.max(r.x0, r.x1)), minZ: r6(Math.min(r.z0, r.z1)), maxZ: r6(Math.max(r.z0, r.z1)) }, topOffset: r6(topY - l.elevation), thickness: r6(thickness), materialId: MATERIALS_V2.slab })
     const ids = [b.id]
+    const terrainUnder = g.terrainY.value ?? 0
+    const ground = levelAt.get(0)
+    b.posts.forEach((q, i) => {
+      if (!ground) return
+      push({ type: 'createColumn', id: `${b.id}-post-${i}`, levelId: ground.id, role: 'POST', base: pt(q.x, q.z), baseOffset: r6(terrainUnder - ground.elevation), height: r6(topY - thickness - terrainUnder), width: 0.3, depth: 0.3, hostId: b.id, materialId: MATERIALS_V2.member })
+      ids.push(`${b.id}-post-${i}`)
+    })
     if (b.railing) {
       // the railing runs round the edges that do not lie against the house
       const outer = outlineAt.get(b.level) ?? outlineAt.get(0) ?? []
@@ -510,6 +524,20 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     })
     used(`${path}.rect`, 'houseProgram/canopy', ids)
     used(`${path}.undersideY`, 'houseProgram/canopy', ids, c.undersideY)
+  }
+  for (const w of g.rooflights) {
+    const path = `geometry.rooflights[${w.id}]`
+    const r = w.rect
+    const m = { x: (r.x0 + r.x1) / 2, z: (r.z0 + r.z1) / 2 }
+    const corners = [pt(r.x0, r.z0), pt(r.x1, r.z0), pt(r.x1, r.z1), pt(r.x0, r.z1)]
+    const plane = planes.find((p) => p.bodyId === w.bodyId && p.pitchDeg > 0.5 && !p.key.startsWith('dormer:') && contains(p.boundary, m) && corners.every((c) => contains(p.boundary, c)))
+    if (!plane) {
+      refuse(path, 'COMPILE_CONFLICT', 'no single roof plane of its body lies under the whole of it (a dormer or the ridge stands there)')
+      continue
+    }
+    push({ type: 'cutRoofOpening', id: w.id, roofId: plane.id, kind: 'ROOFLIGHT', footprint: { minX: r6(Math.min(r.x0, r.x1)), maxX: r6(Math.max(r.x0, r.x1)), minZ: r6(Math.min(r.z0, r.z1)), maxZ: r6(Math.max(r.z0, r.z1)) }, cut: 'VERTICAL' })
+    push({ type: 'placeRooflight', id: `${w.id}-unit`, roofOpeningId: w.id, materialId: MATERIALS_V2.glass })
+    used(`${path}.rect`, 'houseProgram/rooflight', [w.id, `${w.id}-unit`, plane.id])
   }
   for (const c of g.chimneys) {
     const path = `geometry.chimneys[${c.id}]`

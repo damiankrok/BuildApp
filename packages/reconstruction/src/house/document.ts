@@ -292,12 +292,15 @@ const DormerSchema = z
 export type HouseDormer = z.infer<typeof DormerSchema>
 
 const BalconySchema = z
-  .object({ id: Id, level: z.number().int(), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, thicknessM: NumSchema, railing: z.boolean().default(true), basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .object({ id: Id, level: z.number().int(), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, thicknessM: NumSchema, railing: z.boolean().default(true), /** Posts it stands on (a balcony over a portico): plan points, from the terrain to its underside. */ posts: z.array(Vec2).default([]), basis: BasisSchema, refs: z.array(z.string()).default([]) })
   .strict()
 const CanopySchema = z
   .object({ id: Id, kind: z.enum(['ENTRANCE_CANOPY', 'PORCH_ROOF', 'PORTICO', 'CARPORT', 'COVERED_TERRACE']), rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), undersideY: NumSchema, thicknessM: NumSchema, posts: z.array(Vec2).default([]), basis: BasisSchema, refs: z.array(z.string()).default([]) })
   .strict()
 const ChimneySchema = z.object({ id: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
+
+/** A window lying in a roof slope: its plan rectangle on that slope. */
+const RooflightSchema = z.object({ id: Id, bodyId: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
 
 const GeometrySchema = z
   .object({
@@ -314,6 +317,7 @@ const GeometrySchema = z
     balconies: z.array(BalconySchema).default([]),
     canopies: z.array(CanopySchema).default([]),
     chimneys: z.array(ChimneySchema).default([]),
+    rooflights: z.array(RooflightSchema).default([]),
     /** What exists and is NOT part of this document's check: the interior is kept as the builder finds it, never certified here. */
     interior: z.object({ status: z.enum(['NOT_BUILT', 'NOT_CHECKED']), note: z.string().optional() }).strict().default({ status: 'NOT_BUILT' }),
   })
@@ -410,7 +414,7 @@ export function parseHouseDocument(input: unknown): { ok: true; document: HouseD
   if (g) {
     dup('levels', g.levels.map((l) => l.id))
     dup('bodies', g.bodies.map((b) => b.id))
-    dup('geometry objects', [...g.openings, ...g.dormers, ...g.balconies, ...g.canopies, ...g.chimneys].map((x) => x.id))
+    dup('geometry objects', [...g.openings, ...g.dormers, ...g.balconies, ...g.canopies, ...g.chimneys, ...g.rooflights].map((x) => x.id))
     const levels = new Set(g.levels.map((l) => l.index))
     for (const b of g.bodies) for (const s of b.storeys) if (!levels.has(s)) issues.push(`body ${b.id} has a storey on level ${s}, which does not exist`)
     for (const ol of g.outlines) if (!levels.has(ol.level)) issues.push(`an outline is given for level ${ol.level}, which does not exist`)

@@ -35,6 +35,9 @@ export const RESOLVE = {
   elevationRise: 0.12,
   /** The printed total height and the published building height must agree with ridge − terrain within this (m). */
   heightAgreeM: 0.35,
+  /** Wall lines of traced outlines closer than this are one line (a reader's pixel is 1–2 cm; its hand is ±10 px). */
+  mergeCoordinatesM: 0.2,
+  bay: { maxDepthM: 2.5, maxWidthM: 6, maxShare: 0.2 },
   defaults: { wallThicknessM: 0.4, slabThicknessM: 0.3, storeyHeightM: 2.8, kneeWallM: 1.0, pitchDeg: 35, overhangM: 0.5, terrainY: -0.3, sillM: 0.9, balconyDepthM: 1.2 },
 } as const
 
@@ -42,6 +45,50 @@ export type ResolveResult = { geometry?: HouseGeometry; verification: HouseVerif
 
 const r3 = (v: number): number => Math.round(v * 1000) / 1000
 const SIDE_NORMAL: Record<HouseSide, P2> = { FRONT: { x: 0, z: -1 }, REAR: { x: 0, z: 1 }, LEFT: { x: -1, z: 0 }, RIGHT: { x: 1, z: 0 } }
+
+/** A body outline without its splayed bays, and the bays: each chain that leaves a straight wall line by a slanted wall and returns to it. */
+export function splitBays(poly: P2[]): { core: P2[]; bays: P2[][] } {
+  const n = poly.length
+  const slanted = (i: number): boolean => {
+    const a = poly[i]
+    const b = poly[(i + 1) % n]
+    const dx = Math.abs(b.x - a.x)
+    const dz = Math.abs(b.z - a.z)
+    return Math.min(dx, dz) > 0.105 * Math.max(dx, dz)
+  }
+  const total = area(poly)
+  const bays: P2[][] = []
+  const drop = new Set<number>()
+  for (let i = 0; i < n; i += 1) {
+    if (!slanted(i) || drop.has(i) || drop.has((i + 1) % n)) continue
+    // from vertex i, follow until the outline is back on the line vertex i stands on
+    const start = poly[i]
+    for (let len = 2; len <= 5 && len < n - 2; len += 1) {
+      const e = (i + len) % n
+      const end = poly[e]
+      const onX = Math.abs(end.x - start.x) < 0.08
+      const onZ = Math.abs(end.z - start.z) < 0.08
+      if (!onX && !onZ) continue
+      if (!slanted((e + n - 1) % n)) continue
+      const chain = Array.from({ length: len + 1 }, (_, k) => poly[(i + k) % n])
+      const width = Math.hypot(end.x - start.x, end.z - start.z)
+      const depth = Math.max(...chain.map((q) => (onX ? Math.abs(q.x - start.x) : Math.abs(q.z - start.z))))
+      const a = area(chain)
+      if (width > RESOLVE.bay.maxWidthM || depth > RESOLVE.bay.maxDepthM || depth < 0.3 || a > RESOLVE.bay.maxShare * total || a < 0.3) continue
+      // the bay must stand OUT of the body: the chord start→end lies inside or on the outline
+      const mid = { x: (start.x + end.x) / 2, z: (start.z + end.z) / 2 }
+      const bayMid = chain.reduce((s, q) => ({ x: s.x + q.x / chain.length, z: s.z + q.z / chain.length }), { x: 0, z: 0 })
+      const probe = { x: mid.x + (mid.x - bayMid.x) * 0.2, z: mid.z + (mid.z - bayMid.z) * 0.2 }
+      if (!contains(poly, probe)) continue
+      bays.push(canonical(chain))
+      for (let k = 1; k < len; k += 1) drop.add((i + k) % n)
+      break
+    }
+  }
+  if (bays.length === 0) return { core: poly, bays }
+  const core = canonical(poly.filter((_, i) => !drop.has(i)))
+  return isSimple(core) && core.length >= 3 ? { core, bays } : { core: poly, bays: [] }
+}
 
 export function resolveHouse(doc: HouseDocument): ResolveResult {
   const o: HouseObservations = doc.observations
@@ -158,9 +205,24 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   })
   if (raw.length === 0 && whole) raw.push({ id: 'main', role: 'MAIN', storeys: [...new Set([0, ...(whole.storeys ?? [])])], px: whole.polygon, ref: whole.id })
   const wholeM = whole ? canonical(whole.polygon.map(toModel)) : undefined
-  const squared = squareUp([...raw.map((b) => canonical(b.px.map(toModel))), ...(wholeM ? [wholeM] : [])])
-  const bodyPolys = raw.map((_, i) => canonical(squared[i]))
-  const wholeSq = wholeM ? canonical(squared[squared.length - 1]) : undefined
+  const squaredAll = squareUp([...raw.map((b) => canonical(b.px.map(toModel))), ...(wholeM ? [wholeM] : [])], 6, RESOLVE.mergeCoordinatesM)
+  const wholeSq = wholeM ? canonical(squaredAll[squaredAll.length - 1]) : undefined
+  // A splayed bay traced as part of a body is its own body: its walls are not that body's eaves walls and the body's
+  // roof does not widen over it. The chain between two corners of one straight wall line, leaving it by a slanted wall
+  // and coming back by another, is cut off along that line.
+  const bodyPolys: P2[][] = []
+  // as traced, bays included: what an elevation's wall ends of that body stand on
+  const tracedPolys: P2[][] = []
+  raw.slice().forEach((b, i) => {
+    const cut = splitBays(canonical(squaredAll[i]))
+    bodyPolys[i] = cut.core
+    tracedPolys[i] = canonical(squaredAll[i])
+    cut.bays.forEach((bay, n) => {
+      raw.push({ id: `${b.id}-bay${cut.bays.length > 1 ? `-${n + 1}` : ''}`, role: 'BAY', storeys: [Math.min(...b.storeys)], px: b.px, ref: b.ref })
+      bodyPolys[raw.length - 1] = bay
+      knownDefects.push({ code: 'BAY_SPLIT_FROM_BODY', what: `body ${b.id}: a splayed bay of ${area(bay).toFixed(1)} m² traced inside its outline is built as a body of its own` })
+    })
+  })
   const bad = bodyPolys.findIndex((p) => !isSimple(p))
   if (bad >= 0) {
     check('bodies', 'BODIES', 'every body outline is a simple polygon', 'simple polygons', `body ${raw[bad].id} is not`, 'FAIL', ['geometry'])
@@ -237,7 +299,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const bodyExtent = (side: HouseSide, id: string): [number, number] | undefined => {
     const i = raw.findIndex((b) => b.id === id)
     if (i < 0) return undefined
-    const a = bodyPolys[i].map((p) => alongOfPoint(side, p))
+    const a = (tracedPolys[i] ?? bodyPolys[i]).map((p) => alongOfPoint(side, p))
     return [Math.min(...a), Math.max(...a)]
   }
   const fit = (obs: (typeof o.elevations)[number], side: HouseSide): { s: number; t: number; maxRes: number; n: number } | undefined => {
@@ -307,8 +369,9 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const poly = bodyPolys[i]
     const bb = bbox(poly)
     const ro = o.roofs.find((r) => r.bodyId === b.id)
-    const kind = ro && (ro.kind === 'GABLE' || ro.kind === 'HIP' || ro.kind === 'SHED' || ro.kind === 'FLAT') ? ro.kind : 'GABLE'
-    if (!ro || kind !== ro.kind) knownDefects.push({ code: 'ROOF_KIND_ASSUMED', what: `body ${b.id}: ${ro ? `the roof was read as ${ro.kind}` : 'no roof was read'}; a gable is drawn — a stand-in, said, not a reading` })
+    const kind = ro && (ro.kind === 'GABLE' || ro.kind === 'HIP' || ro.kind === 'SHED' || ro.kind === 'FLAT') ? ro.kind : b.role === 'BAY' ? 'FLAT' : 'GABLE'
+    if (b.role === 'BAY' && !ro) knownDefects.push({ code: 'ROOF_KIND_ASSUMED', what: `body ${b.id}: no roof was read for this bay; a flat top at its storey's ceiling is drawn — a stand-in, said, not a reading` })
+    else if (!ro || kind !== ro.kind) knownDefects.push({ code: 'ROOF_KIND_ASSUMED', what: `body ${b.id}: ${ro ? `the roof was read as ${ro.kind}` : 'no roof was read'}; a gable is drawn — a stand-in, said, not a reading` })
     const ridgeAxis: 'X' | 'Z' = ro?.ridge === 'ALONG_FRONT' ? 'X' : ro?.ridge === 'FRONT_TO_BACK' ? 'Z' : bb.x1 - bb.x0 >= bb.z1 - bb.z0 ? 'X' : 'Z'
     const pitchDeg: Num = kind === 'FLAT' ? num(0, 'DERIVED', 'a flat roof') : pitchObs ? num(pitchObs.valueM as number, 'PRINTED', `the pitch printed on the section: ${pitchObs.literal}`, [pitchObs.id]) : pitchPub ? num(pitchPub.value, 'PRINTED', `the published roof pitch ${pitchPub.raw ?? pitchPub.value}`) : num(D.pitchDeg, 'DEFAULT', 'no pitch printed or published: a convention')
     const half = (ridgeAxis === 'X' ? bb.z1 - bb.z0 : bb.x1 - bb.x0) / 2
@@ -353,7 +416,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   }
   const depthOf = (side: HouseSide, p: P2): number => (side === 'FRONT' ? p.z : side === 'REAR' ? -p.z : side === 'LEFT' ? p.x : -p.x)
   /** The wall of `level` that faces `side` and holds the along-position; the nearest to the viewer, or the named body's. */
-  const hostAt = (side: HouseSide, level: number, along: number, bodyId?: string): { h: ReturnType<typeof hostsOf>[number]; a0: number; sign: number; cos: number } | undefined => {
+  const hostAt = (side: HouseSide, level: number, along: number, bodyId?: string, span?: [number, number]): { h: ReturnType<typeof hostsOf>[number]; a0: number; sign: number; cos: number } | undefined => {
     const n = SIDE_NORMAL[side]
     const cands = hostsOf(level)
       .map((h) => {
@@ -363,13 +426,55 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         return { h, cos, a0, a1, lo: Math.min(a0, a1), hi: Math.max(a0, a1), depth: Math.min(depthOf(side, h.a), depthOf(side, h.b)) }
       })
       .filter((c) => c.cos > 0.5 && along >= c.lo - 0.05 && along <= c.hi + 0.05)
-    const named = bodyId ? cands.filter((c) => c.h.bodyId === bodyId) : []
-    const pick = (named.length > 0 ? named : cands).sort((p, q) => p.depth - q.depth)[0]
+    // a wall that holds the whole of what is placed comes before one that only holds its middle (a short return wall nearer the viewer)
+    const whole = span ? cands.filter((c) => c.lo <= span[0] + 0.1 && c.hi >= span[1] - 0.1 && c.hi - c.lo >= span[1] - span[0] + 2 * (RESOLVE.defaults.wallThicknessM + 0.05)) : []
+    const pool = whole.length > 0 ? whole : cands
+    const named = bodyId ? pool.filter((c) => c.h.bodyId === bodyId) : []
+    const pick = (named.length > 0 ? named : pool).sort((p, q) => p.depth - q.depth)[0]
     return pick ? { h: pick.h, a0: pick.a0, sign: pick.a1 >= pick.a0 ? 1 : -1, cos: pick.cos } : undefined
+  }
+  const rooflights: HouseGeometry['rooflights'] = []
+  const chimneys: HouseGeometry['chimneys'] = []
+  /** The slope of a pitched body that falls toward `side`: plan distance from its ridge for a height, and the plan point for an along-position. */
+  const slopeToward = (body: HouseGeometry['bodies'][number], side: HouseSide): { half: number; fromRidge: (y: number) => number; at: (along: number, d: number) => P2; ridgeLine: number } | undefined => {
+    const axis = body.roof.ridgeAxis
+    const pitch = body.roof.pitchDeg.value
+    const ridgeY = body.roof.ridgeY.value
+    if ((body.roof.kind !== 'GABLE' && body.roof.kind !== 'HIP') || !axis || !pitch || ridgeY === null) return undefined
+    if ((axis === 'X') !== (side === 'FRONT' || side === 'REAR')) return undefined
+    const bb = bbox(body.outline)
+    const tan = Math.tan((pitch * Math.PI) / 180)
+    const ridgeLine = axis === 'X' ? (bb.z0 + bb.z1) / 2 : (bb.x0 + bb.x1) / 2
+    const half = (axis === 'X' ? bb.z1 - bb.z0 : bb.x1 - bb.x0) / 2
+    const out = side === 'FRONT' || side === 'LEFT' ? -1 : 1
+    // along-positions run west→east on FRONT, east→west on REAR, rear→front on LEFT, front→rear on RIGHT
+    const along = (a: number): number => (side === 'FRONT' ? gb.x0 + a : side === 'REAR' ? gb.x1 - a : side === 'LEFT' ? gb.z1 - a : gb.z0 + a)
+    return { half, ridgeLine, fromRidge: (y) => (ridgeY - y) / tan, at: (a, d) => (axis === 'X' ? { x: along(a), z: ridgeLine + out * d } : { x: ridgeLine + out * d, z: along(a) }) }
   }
   const openings: HouseGeometry['openings'] = []
   const dormers: HouseGeometry['dormers'] = []
   const balconies: HouseGeometry['balconies'] = []
+  const canopies: HouseGeometry['canopies'] = []
+  // roofed open zones traced on the ground plan (a porch, a portico, a covered terrace): what stands over one is on an elevation
+  const openZones = o.outlines.filter((x) => x.what === 'OPEN' && x.level === 0).map((x) => ({ id: x.id, poly: canonical(x.polygon.map(toModel)), usedBy: undefined as string | undefined }))
+  /** The open zone that lies against wall `h` under the stretch from..to of it: its rectangle and its outer corners. */
+  const zoneAt = (h: { a: P2; u: P2; out: P2 }, from: number, to: number): { zone: (typeof openZones)[number]; rect: { x0: number; z0: number; x1: number; z1: number }; posts: P2[] } | undefined => {
+    for (const zone of openZones) {
+      const uv = zone.poly.map((q) => ({ u: (q.x - h.a.x) * h.u.x + (q.z - h.a.z) * h.u.z, v: (q.x - h.a.x) * h.out.x + (q.z - h.a.z) * h.out.z, q }))
+      const u0 = Math.min(...uv.map((q) => q.u))
+      const u1 = Math.max(...uv.map((q) => q.u))
+      const v0 = Math.min(...uv.map((q) => q.v))
+      const v1 = Math.max(...uv.map((q) => q.v))
+      const overlap = Math.min(u1, to) - Math.max(u0, from)
+      if (Math.abs(v0) > 0.35 || v1 < 0.4 || overlap < 0.5 * Math.min(to - from, u1 - u0)) continue
+      const corner = (u: number, v: number): P2 => ({ x: h.a.x + h.u.x * u + h.out.x * v, z: h.a.z + h.u.z * u + h.out.z * v })
+      const a = corner(u0, 0)
+      const b = corner(u1, v1)
+      const inset = 0.15
+      return { zone, rect: { x0: r3(Math.min(a.x, b.x)), z0: r3(Math.min(a.z, b.z)), x1: r3(Math.max(a.x, b.x)), z1: r3(Math.max(a.z, b.z)) }, posts: [corner(u0 + inset, v1 - inset), corner(u1 - inset, v1 - inset)].map((q) => ({ x: r3(q.x), z: r3(q.z) })) }
+    }
+    return undefined
+  }
   const featuresBlocked = !bodiesOk || !heightsOk
   for (const r of regs.filter((x) => x.ok)) {
     const { obs, side } = r
@@ -382,24 +487,29 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         continue
       }
       const a = [r.alongOf(f.box.x0), r.alongOf(f.box.x1)].sort((p, q) => p - q)
-      if (f.kind === 'WALL_DORMER_GABLE' || f.kind === 'ROOF_DORMER_GABLE' || f.kind === 'ROOF_DORMER_SHED') {
+      if (f.kind === 'WALL_DORMER_GABLE' || f.kind === 'CROSS_GABLE' || f.kind === 'ROOF_DORMER_GABLE' || f.kind === 'ROOF_DORMER_SHED') {
         const body = bodies.find((b) => b.id === (f.bodyId ?? mainId))
-        const at = body ? hostAt(side, Math.max(...body.storeys), (a[0] + a[1]) / 2, body.id) : undefined
+        const at = body ? hostAt(side, Math.max(...body.storeys), (a[0] + a[1]) / 2, body.id, [a[0], a[1]]) : undefined
         if (!body || !at || at.cos < 0.99) {
           held.push({ ref, code: 'WRONG_BINDING', why: 'no eaves wall of its body faces this side at its place' })
           continue
         }
         const from = at.sign > 0 ? a[0] - at.a0 : at.a0 - a[1]
         const apex = f.apexY ?? f.box.y0
-        const eaves = f.eavesY ?? null
+        let eaves = f.eavesY ?? null
+        if (eaves === null && apex !== null && body.roof.pitchDeg.value) {
+          // not read: a dormer roof of the host roof's pitch, from its apex down to its two sides
+          eaves = apex + (((a[1] - a[0]) / 2) * Math.tan((body.roof.pitchDeg.value * Math.PI) / 180)) / Math.abs(r.s)
+          knownDefects.push({ code: 'DORMER_EAVES_ASSUMED', what: `${ref}: where its own roof meets its side walls was not read; drawn at the host roof's pitch from its apex` })
+        }
         if (eaves === null || apex === null) {
           held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'where its own roof begins was not read' })
           continue
         }
-        dormers.push({ id: `dormer-${side.toLowerCase()}-${dormers.filter((d) => d.id.startsWith(`dormer-${side.toLowerCase()}`)).length + 1}`, bodyId: body.id, kind: f.kind === 'WALL_DORMER_GABLE' ? 'WALL_GABLE' : f.kind === 'ROOF_DORMER_GABLE' ? 'ROOF_GABLE' : 'ROOF_SHED', hostWall: at.h.id, fromM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], r3(2 * r.s)), toM: num(r3(from + (a[1] - a[0])), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], r3(2 * r.s)), eaveY: num(r3(r.yOf(eaves)), 'DERIVED', `the row its own roof begins at on elevation ${obs.id}`, [ref], 0.15), ridgeY: num(r3(r.yOf(apex)), 'DERIVED', `its apex on elevation ${obs.id}`, [ref], 0.15), refs: [ref] })
+        dormers.push({ id: `dormer-${side.toLowerCase()}-${dormers.filter((d) => d.id.startsWith(`dormer-${side.toLowerCase()}`)).length + 1}`, bodyId: body.id, kind: f.kind === 'WALL_DORMER_GABLE' || f.kind === 'CROSS_GABLE' ? 'WALL_GABLE' : f.kind === 'ROOF_DORMER_GABLE' ? 'ROOF_GABLE' : 'ROOF_SHED', hostWall: at.h.id, fromM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], r3(2 * r.s)), toM: num(r3(from + (a[1] - a[0])), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], r3(2 * r.s)), eaveY: num(r3(r.yOf(eaves)), 'DERIVED', `the row its own roof begins at on elevation ${obs.id}`, [ref], 0.15), ridgeY: num(r3(r.yOf(apex)), 'DERIVED', `its apex on elevation ${obs.id}`, [ref], 0.15), refs: [ref] })
       } else if (f.kind === 'BALCONY') {
         const level = levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(f.box.y1) + 0.6).sort((p, q) => q.index - p.index)[0]
-        const at = level ? hostAt(side, level.index, (a[0] + a[1]) / 2, f.bodyId) : undefined
+        const at = level ? hostAt(side, level.index, (a[0] + a[1]) / 2, f.bodyId, [a[0], a[1]]) : undefined
         if (!level || !at || at.cos < 0.99) {
           held.push({ ref, code: 'WRONG_BINDING', why: 'no wall faces this side at its place' })
           continue
@@ -408,8 +518,44 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         const p0 = { x: at.h.a.x + at.h.u.x * from, z: at.h.a.z + at.h.u.z * from }
         const p1 = { x: at.h.a.x + at.h.u.x * (from + a[1] - a[0]), z: at.h.a.z + at.h.u.z * (from + a[1] - a[0]) }
         const q = { x: p1.x + at.h.out.x * D.balconyDepthM, z: p1.z + at.h.out.z * D.balconyDepthM }
-        balconies.push({ id: `balcony-${side.toLowerCase()}-${balconies.length + 1}`, level: level.index, rect: { x0: r3(Math.min(p0.x, q.x)), z0: r3(Math.min(p0.z, q.z)), x1: r3(Math.max(p0.x, q.x)), z1: r3(Math.max(p0.z, q.z)) }, topY: num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey'), thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, basis: 'ESTIMATED', refs: [ref] })
+        const id = `balcony-${side.toLowerCase()}-${balconies.length + 1}`
+        const topY = num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey')
+        // a balcony over a roofed open zone of the ground plan is that zone's roof: its depth and its posts are on the plan
+        const over = level.index > 0 ? zoneAt(at.h, from, from + a[1] - a[0]) : undefined
+        if (over && !over.zone.usedBy) {
+          over.zone.usedBy = id
+          balconies.push({ id, level: level.index, rect: over.rect, topY, thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: over.posts, basis: 'DERIVED', refs: [ref, over.zone.id] })
+          continue
+        }
+        balconies.push({ id, level: level.index, rect: { x0: r3(Math.min(p0.x, q.x)), z0: r3(Math.min(p0.z, q.z)), x1: r3(Math.max(p0.x, q.x)), z1: r3(Math.max(p0.z, q.z)) }, topY: num(level.elevation.value ?? 0, level.elevation.basis === 'UNKNOWN' ? 'DEFAULT' : level.elevation.basis, 'at the floor of its storey'), thicknessM: num(0.2, 'DEFAULT', 'a conventional slab'), railing: true, posts: [], basis: 'ESTIMATED', refs: [ref] })
         knownDefects.push({ code: 'BALCONY_DEPTH_ASSUMED', what: `${ref}: an elevation shows a balcony's width, not how far it projects: ${D.balconyDepthM} m is drawn` })
+      } else if (f.kind === 'CANOPY') {
+        const at = hostAt(side, 0, (a[0] + a[1]) / 2, f.bodyId)
+        const from = at ? (at.sign > 0 ? a[0] - at.a0 : at.a0 - a[1]) : 0
+        const over = at && at.cos >= 0.99 ? zoneAt(at.h, from, from + a[1] - a[0]) : undefined
+        if (!over || over.zone.usedBy) {
+          held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a canopy on an elevation without a roofed open zone traced under it on the plan: how far it projects is not known' })
+          continue
+        }
+        const id = `canopy-${side.toLowerCase()}-${canopies.length + 1}`
+        over.zone.usedBy = id
+        canopies.push({ id, kind: 'PORCH_ROOF', rect: over.rect, undersideY: num(r3(r.yOf(f.box.y1)), 'DERIVED', `its underside row on elevation ${obs.id}`, [ref], 0.15), thicknessM: num(0.2, 'DEFAULT', 'a conventional plate'), posts: over.posts, basis: 'DERIVED', refs: [ref, over.zone.id] })
+      } else if (f.kind === 'CHIMNEY') {
+        // an elevation shows where along the ridge a chimney stands and how high; not how far from the ridge: it is drawn on it
+        const body = bodies.find((b) => b.id === (f.bodyId ?? mainId))
+        const slope = body ? slopeToward(body, side) : undefined
+        if (!body || !slope) {
+          held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a chimney seen from a gable end, or on a roof without a ridge: where it stands along the building is not on this picture' })
+          continue
+        }
+        const w = Math.min(1.2, Math.max(0.4, a[1] - a[0]))
+        const c = slope.at((a[0] + a[1]) / 2, 0)
+        const axisX = body.roof.ridgeAxis === 'X'
+        const rect = axisX ? { x0: r3(c.x - w / 2), z0: r3(c.z - 0.3), x1: r3(c.x + w / 2), z1: r3(c.z + 0.3) } : { x0: r3(c.x - 0.3), z0: r3(c.z - w / 2), x1: r3(c.x + 0.3), z1: r3(c.z + w / 2) }
+        // the same chimney seen from the other side of the ridge is one chimney
+        if (chimneys.some((q) => Math.abs((q.rect.x0 + q.rect.x1) / 2 - (rect.x0 + rect.x1) / 2) < 0.8 && Math.abs((q.rect.z0 + q.rect.z1) / 2 - (rect.z0 + rect.z1) / 2) < 0.8)) continue
+        chimneys.push({ id: `chimney-${chimneys.length + 1}`, rect, topY: num(r3(r.yOf(Math.min(f.box.y0, f.box.y1))), 'DERIVED', `its top row on elevation ${obs.id}`, [ref], 0.2), basis: 'ESTIMATED', refs: [ref] })
+        knownDefects.push({ code: 'CHIMNEY_DEPTH_ASSUMED', what: `${ref}: an elevation shows where along the ridge a chimney stands, not how far from it: it is drawn on the ridge` })
       } else held.push({ ref, code: 'CAPABILITY_MISSING', why: `${f.kind}: seen on the elevation; this resolver places no ${f.kind.toLowerCase()} from one elevation (its depth is not on the picture)` })
     }
     for (const x of obs.openings) {
@@ -419,7 +565,23 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         continue
       }
       if (x.kind === 'ROOF_WINDOW') {
-        held.push({ ref, code: 'CAPABILITY_MISSING', why: 'a roof window: seen; not placed by this resolver' })
+        // on the slope that faces this side: its two columns give where along the eaves, its two rows how far up the slope
+        const body = bodies.find((b) => b.id === (x.bodyId ?? mainId))
+        const slope = body ? slopeToward(body, side) : undefined
+        if (!body || !slope || !heightsOk) {
+          held.push({ ref, code: !heightsOk ? 'HELD_BY_DEPENDENCY' : 'WRONG_BINDING', why: !heightsOk ? 'the heights contradict the source: nothing is placed on a roof in doubt' : 'no roof slope of its body faces this side' })
+          continue
+        }
+        const al = [r.alongOf(x.box.x0), r.alongOf(x.box.x1)].sort((p, q) => p - q)
+        const d0 = slope.fromRidge(r.yOf(Math.min(x.box.y0, x.box.y1)))
+        const d1 = slope.fromRidge(r.yOf(Math.max(x.box.y0, x.box.y1)))
+        if (!(d0 > 0.25 && d1 > d0 + 0.3 && d1 < slope.half + 0.2 && al[1] - al[0] > 0.3)) {
+          held.push({ ref, code: 'WRONG_READ', why: `its rows put it ${d0.toFixed(2)}–${d1.toFixed(2)} m from the ridge of a slope ${slope.half.toFixed(2)} m long in plan: not on that slope` })
+          continue
+        }
+        const p0 = slope.at(al[0], d0)
+        const p1 = slope.at(al[1], d1)
+        rooflights.push({ id: `rooflight-${side.toLowerCase()}-${rooflights.length + 1}`, bodyId: body.id, rect: { x0: r3(Math.min(p0.x, p1.x)), z0: r3(Math.min(p0.z, p1.z)), x1: r3(Math.max(p0.x, p1.x)), z1: r3(Math.max(p0.z, p1.z)) }, basis: 'DERIVED', refs: [ref] })
         continue
       }
       const a = [r.alongOf(x.box.x0), r.alongOf(x.box.x1)].sort((p, q) => p - q)
@@ -428,7 +590,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       const level = x.level !== undefined ? levels.find((l) => l.index === x.level) : levels.filter((l) => (l.elevation.value ?? 0) <= sillY + 0.35).sort((p, q) => q.index - p.index)[0]
       // the wall that holds it: the top storey's wall holds what stands in a dormer above the eaves
       const wallLevel = level && outlines.some((q) => q.level === level.index) ? level.index : Math.max(...outlines.map((q) => q.level))
-      const at = hostAt(side, wallLevel, (a[0] + a[1]) / 2, x.bodyId)
+      const at = hostAt(side, wallLevel, (a[0] + a[1]) / 2, x.bodyId, [a[0], a[1]])
       if (!level || !at) {
         held.push({ ref, code: 'WRONG_BINDING', why: `no wall of level ${wallLevel} faces ${side} at ${((a[0] + a[1]) / 2).toFixed(2)} m along it` })
         continue
@@ -446,6 +608,34 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     }
   }
 
+  // An opening seen inside a wall dormer stands under that dormer's roof: a reading of where the dormer's roof begins that
+  // would put the roof through the opening is moved up until the opening fits (the row read was the tip of the overhanging
+  // roof, not the top of the dormer's side wall). Bounded; a larger disagreement is left for the compiler to name.
+  for (const d of dormers) {
+    if (d.kind !== 'WALL_GABLE' || d.fromM.value === null || d.toM.value === null || d.eaveY.value === null || d.ridgeY.value === null) continue
+    const from = Math.min(d.fromM.value, d.toM.value)
+    const to = Math.max(d.fromM.value, d.toM.value)
+    const half = (to - from) / 2
+    let eave = d.eaveY.value
+    for (const x of openings) {
+      if (x.hostWall !== d.hostWall || x.offsetM.value === null || x.widthM.value === null || x.sillM.value === null || x.heightM.value === null) continue
+      const lo = x.offsetM.value
+      const hi = lo + x.widthM.value
+      if (hi <= from || lo >= to) continue
+      const floor = levels.find((l) => l.index === x.level)?.elevation.value
+      if (floor === null || floor === undefined) continue
+      const head = floor + x.sillM.value + x.heightM.value
+      const k = Math.max(0, Math.min(0.95, Math.min(lo - from, to - hi) / half))
+      const need = (head + 0.4 - d.ridgeY.value * k) / (1 - k)
+      if (need > eave) eave = need
+    }
+    if (eave > d.eaveY.value + 1e-6 && eave - d.eaveY.value <= 0.8 && eave < d.ridgeY.value - 0.3) {
+      knownDefects.push({ code: 'DORMER_EAVES_RAISED', what: `${d.id}: its roof was read as beginning at +${d.eaveY.value.toFixed(2)} m, which would cut the opening seen in it; drawn from +${eave.toFixed(2)} m, under which the opening fits` })
+      d.eaveY = num(r3(eave), 'DERIVED', `raised from the row read (+${d.eaveY.value.toFixed(2)} m) so that the opening seen in it stands under its roof`, d.refs, 0.3)
+    }
+  }
+
+  for (const z of openZones) if (!z.usedBy) held.push({ ref: z.id, code: 'SOURCE_UNKNOWN', why: 'a roofed open zone traced on the plan; no registered elevation shows a balcony or a canopy over it' })
   const geometry: HouseGeometry = {
     frame: { units: 'm', up: 'Y', plan: 'XZ', origin: 'x = 0 at the leftmost outer wall face seen from the front; z = 0 at the frontmost outer wall face; y = 0 at the finished ground floor', front: `the plan's ${edge} edge` },
     wallThicknessM: num(D.wallThicknessM, 'DEFAULT', 'the wall thickness is not read: a convention'),
@@ -457,8 +647,9 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     openings,
     dormers,
     balconies,
-    canopies: [],
-    chimneys: [],
+    canopies,
+    chimneys,
+    rooflights,
     interior: { status: 'NOT_BUILT', note: 'this document describes the exterior; the interior is not built from it and is not checked' },
   }
   const coverage: HouseVerification['coverage'] = {

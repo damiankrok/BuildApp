@@ -36,6 +36,19 @@ export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
     const failed = current[r.failedAt] as unknown as { id?: string; type: string }
     const failure = r.results[r.failedAt] as unknown as { errors: Array<{ code: string; message: string }> }
     const id = failed.id ?? null
+    // a wall whose end could not be butted against its neighbour (it meets it in a corner another wall owns) stands
+    // without that junction rather than not at all
+    const junctionCodes = failure.errors.filter((e) => e.code === 'BUTT_OFF_HOST' || e.code === 'T_JUNCTION_POSITION')
+    if (failed.type === 'createWall' && junctionCodes.length > 0) {
+      const wall = JSON.parse(JSON.stringify(current[r.failedAt])) as Record<string, unknown>
+      const before = Object.keys(wall).length
+      for (const e of junctionCodes) delete wall[e.message.includes('-j-start') ? 'startJunction' : 'endJunction']
+      if (Object.keys(wall).length < before) {
+        kernelRefusals.push({ id, type: 'createWall/junction', codes: junctionCodes.map((e) => e.code), message: junctionCodes.map((e) => e.message).join('; ').slice(0, 400), dropped: [] })
+        current = current.map((c, i) => (i === r.failedAt ? (wall as unknown as BuildingCommand) : c))
+        continue
+      }
+    }
     const dropped: string[] = []
     const next: BuildingCommand[] = []
     current.forEach((c, i) => {

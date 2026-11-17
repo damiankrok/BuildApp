@@ -1,0 +1,88 @@
+{
+  "schema": "buildapp.house-document",
+  "schemaVersion": "0.1.0",
+  "id": "manual-aksamitki",
+  "origin": "MANUAL_DIAGNOSTIC",
+  "source": {
+    "sourcePackageHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "project": "archon-dom-w-aksamitkach-2",
+    "pictures": [
+      { "id": "plan0", "assetId": "ground.png", "role": "PLAN", "level": 0, "widthPx": 550, "heightPx": 550 },
+      { "id": "plan1", "assetId": "attic.png", "role": "PLAN", "level": 1, "widthPx": 550, "heightPx": 550, "note": "read for the attic storey and the balcony over the entrance; not traced" },
+      { "id": "section", "assetId": "h-2-przekroj-budy-861d447fd9.jpg", "role": "SECTION", "widthPx": 400, "heightPx": 300 },
+      { "id": "front", "assetId": "h-2-elewacja-fron-fbfc47a1e3.jpg", "role": "ELEVATION", "widthPx": 1280, "heightPx": 770 },
+      { "id": "rear", "assetId": "h-2-elewacja-ogro-24a37ca49b.jpg", "role": "ELEVATION", "widthPx": 1280, "heightPx": 770 }
+    ],
+    "missing": [{ "what": "the two side elevations (published; not read for this diagnostic)", "status": "NOT_SENT" }]
+  },
+  "reader": { "engine": "operator, by eye on the published pictures, wall faces measured on the plan's pixels", "at": "2026-11-17" },
+  "observations": {
+    "front": { "planEdge": "BOTTOM", "how": "the entrance door, the porch and the garage door are on the sheet's bottom side; the front elevation shows the garage on the right and the bay on the left, as the plan does", "origin": "MANUAL" },
+    "dimensions": [
+      { "id": "dim-width", "picture": "plan0", "literal": "1322", "unit": "cm", "valueM": 13.22, "from": { "x": 105, "y": 440 }, "to": { "x": 521, "y": 440 }, "measures": "OVERALL", "includes": "from the face of the bay on the left to the right wall", "origin": "MANUAL" },
+      { "id": "dim-width-main", "picture": "plan0", "literal": "1232", "unit": "cm", "valueM": 12.32, "from": { "x": 134, "y": 412 }, "to": { "x": 521, "y": 412 }, "measures": "BODY", "bodyId": "main", "includes": "the main rectangle without the bay", "origin": "MANUAL" },
+      { "id": "dim-bay", "picture": "plan0", "literal": "90", "unit": "cm", "valueM": 0.9, "from": { "x": 105, "y": 412 }, "to": { "x": 134, "y": 412 }, "measures": "PART", "bodyId": "bay", "includes": "how far the bay stands out of the left wall", "origin": "MANUAL" },
+      { "id": "dim-depth", "picture": "plan0", "literal": "882", "unit": "cm", "valueM": 8.82, "from": { "x": 50, "y": 57 }, "to": { "x": 50, "y": 332 }, "measures": "OVERALL", "includes": "from the rear wall to the front wall; the porch is not in it", "origin": "MANUAL" }
+    ],
+    "levels": [
+      { "id": "lv-zero", "picture": "section", "literal": "±0,00", "valueM": 0, "meaning": "GROUND_FLOOR", "level": 0, "origin": "MANUAL" },
+      { "id": "lv-attic", "picture": "section", "literal": "+3,06", "valueM": 3.06, "meaning": "UPPER_FLOOR", "level": 1, "origin": "MANUAL" },
+      { "id": "lv-ridge", "picture": "section", "literal": "+8,37", "valueM": 8.37, "meaning": "RIDGE", "bodyId": "main", "origin": "MANUAL" },
+      { "id": "lv-eaves", "picture": "section", "literal": "+3,15", "valueM": 3.15, "meaning": "EAVES", "bodyId": "main", "origin": "MANUAL" },
+      { "id": "lv-terrain", "picture": "section", "literal": "-0,47", "valueM": -0.47, "meaning": "TERRAIN", "origin": "MANUAL" },
+      { "id": "lv-garage-floor", "picture": "section", "literal": "-0,15", "valueM": -0.15, "meaning": "FLOOR_BELOW_ZERO", "origin": "MANUAL" },
+      { "id": "lv-clear0", "picture": "section", "literal": "272", "valueM": 2.72, "meaning": "CLEAR_HEIGHT", "level": 0, "origin": "MANUAL" },
+      { "id": "lv-clear1", "picture": "section", "literal": "285", "valueM": 2.85, "meaning": "CLEAR_HEIGHT", "level": 1, "origin": "MANUAL" },
+      { "id": "lv-knee", "picture": "section", "literal": "110", "valueM": 1.1, "meaning": "KNEE_WALL", "level": 1, "origin": "MANUAL" }
+    ],
+    "outlines": [
+      { "id": "ol-whole", "picture": "plan0", "level": 0, "what": "WHOLE", "polygon": [{ "x": 134, "y": 57 }, { "x": 521, "y": 57 }, { "x": 521, "y": 332 }, { "x": 134, "y": 332 }, { "x": 134, "y": 188 }, { "x": 105, "y": 165 }, { "x": 105, "y": 124 }, { "x": 134, "y": 100 }], "origin": "MANUAL", "note": "outer wall faces; the terrace, the porch and the steps are not the walled outline" },
+      { "id": "ol-main", "picture": "plan0", "level": 0, "what": "BODY", "bodyId": "main", "role": "MAIN", "storeys": [0, 1], "polygon": [{ "x": 134, "y": 57 }, { "x": 521, "y": 57 }, { "x": 521, "y": 332 }, { "x": 134, "y": 332 }], "origin": "MANUAL", "note": "one rectangle under one roof; the garage is inside it, on the right" },
+      { "id": "ol-bay", "picture": "plan0", "level": 0, "what": "BODY", "bodyId": "bay", "role": "BAY", "storeys": [0], "polygon": [{ "x": 134, "y": 188 }, { "x": 105, "y": 165 }, { "x": 105, "y": 124 }, { "x": 134, "y": 100 }], "origin": "MANUAL", "note": "a splayed bay off the dining room on the left side; a terrace with a balustrade on top of it" },
+      { "id": "ol-porch", "picture": "plan0", "level": 0, "what": "OPEN", "role": "PORCH", "polygon": [{ "x": 262, "y": 332 }, { "x": 388, "y": 332 }, { "x": 388, "y": 372 }, { "x": 262, "y": 372 }], "origin": "MANUAL", "note": "the portico before the entrance: two posts at its outer corners; the balcony of the attic is its roof" }
+    ],
+    "roofs": [
+      { "id": "roof-main", "bodyId": "main", "kind": "GABLE", "ridge": "ALONG_FRONT", "pictures": ["front", "rear", "section"], "origin": "MANUAL" },
+      { "id": "roof-bay", "bodyId": "bay", "kind": "FLAT", "ridge": "NA", "pictures": ["front", "rear"], "origin": "MANUAL", "note": "the terrace over the bay" }
+    ],
+    "elevations": [
+      {
+        "id": "el-front", "picture": "front", "side": "FRONT", "sideHow": "entrance, portico and garage door; the garage on the right as on the plan", "groundY": 733,
+        "bodies": [
+          { "bodyId": "bay", "leftX": 258, "rightX": 317, "eavesY": null, "ridgeY": 510 },
+          { "bodyId": "main", "leftX": 317, "rightX": 1100, "eavesY": 505, "ridgeY": 172 }
+        ],
+        "openings": [
+          { "id": "w1", "kind": "WINDOW", "box": { "x0": 410, "y0": 556, "x1": 523, "y1": 656 }, "bodyId": "main", "level": 0 },
+          { "id": "d1", "kind": "DOOR", "box": { "x0": 677, "y0": 567, "x1": 740, "y1": 703 }, "bodyId": "main", "level": 0 },
+          { "id": "g1", "kind": "GARAGE_DOOR", "box": { "x0": 887, "y0": 556, "x1": 1040, "y1": 712 }, "bodyId": "main", "level": 0 },
+          { "id": "bd1", "kind": "GLAZED_DOOR", "box": { "x0": 622, "y0": 370, "x1": 695, "y1": 500 }, "bodyId": "main", "level": 1, "inFeature": "dormer" },
+          { "id": "bd2", "kind": "GLAZED_DOOR", "box": { "x0": 720, "y0": 370, "x1": 795, "y1": 500 }, "bodyId": "main", "level": 1, "inFeature": "dormer" }
+        ],
+        "features": [
+          { "id": "dormer", "kind": "WALL_DORMER_GABLE", "box": { "x0": 598, "y0": 268, "x1": 818, "y1": 505 }, "bodyId": "main", "eavesY": 366, "apexY": 268, "note": "its wall continues the facade over the entrance; two balcony doors in it; its roof meets its side walls at row 366 (the tips of its overhanging roof reach down to row 405)" },
+          { "id": "balcony", "kind": "BALCONY", "box": { "x0": 592, "y0": 470, "x1": 825, "y1": 515 }, "bodyId": "main", "note": "over the portico, on its two posts" }
+        ],
+        "origin": "MANUAL"
+      },
+      {
+        "id": "el-rear", "picture": "rear", "side": "REAR", "sideHow": "the garden side: no door on the ground storey here, the bay on the right", "groundY": 733,
+        "bodies": [
+          { "bodyId": "main", "leftX": 178, "rightX": 958, "eavesY": 505, "ridgeY": 172 },
+          { "bodyId": "bay", "leftX": 958, "rightX": 1018, "eavesY": null, "ridgeY": 510 }
+        ],
+        "openings": [
+          { "id": "w1", "kind": "WINDOW", "box": { "x0": 312, "y0": 556, "x1": 387, "y1": 630 }, "bodyId": "main", "level": 0 },
+          { "id": "w2", "kind": "WINDOW", "box": { "x0": 645, "y0": 556, "x1": 720, "y1": 630 }, "bodyId": "main", "level": 0 }
+        ],
+        "features": [],
+        "origin": "MANUAL"
+      }
+    ],
+    "published": [
+      { "key": "building_height", "value": 8.84, "unit": "m", "raw": "8,84 m" },
+      { "key": "roof_pitch", "value": 45, "unit": "deg", "raw": "45°" }
+    ],
+    "unknowns": ["the side elevations were not read: the gable windows and the bay's own windows are not in this description"]
+  }
+}
