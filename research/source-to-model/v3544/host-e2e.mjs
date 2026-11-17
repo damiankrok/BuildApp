@@ -1,0 +1,175 @@
+#!/usr/bin/env node
+/**
+ * v3.54.4 — the host's real public entrypoint, end to end, for the whole-house description pilot.
+ *
+ *   node research/source-to-model/v3544/host-e2e.mjs --out <dir> --data <host data dir> --max-usd <cumulative ceiling>
+ *        --spent-usd <the campaign books' balance now> [--timeout-s 1500] [--default <url>] <project url> ...
+ *
+ * Starts the built server (apps/analyzer-api/dist/server.mjs — build it first) on a free loopback port with the pilot
+ * switched on, then for each project URL: POST /v1/analyses with the pilot's access token → poll the status → GET the
+ * result summary, the scene, the model and the HOUSE DOCUMENT → check the scene's and the model's bytes against the
+ * summary's hashes, reload the scene, and check that the house document says which house stood and that the result is
+ * that house's (the described one, or LOCAL kept). `--default <url>` also
+ * submits one job WITHOUT the token and checks that it runs on the drawings' path alone and books no request.
+ *
+ * The provider key is read by the server from BUILDPLAN_ANTHROPIC_API_KEY in the environment this script is started
+ * with; it is never an argument and never printed. The access token is random, made here, held in memory, and never
+ * written anywhere. Everything written under --out is text: status records, summaries, hashes, the books' journal.
+ */
+import { spawn } from 'node:child_process'
+import { createHash, randomBytes } from 'node:crypto'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { createServer } from 'node:net'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const argv = process.argv.slice(2)
+const value = (name) => {
+  const i = argv.indexOf(`--${name}`)
+  return i >= 0 ? argv[i + 1] : undefined
+}
+const flags = new Set(['out', 'data', 'max-usd', 'spent-usd', 'timeout-s', 'default'])
+const urls = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && flags.has(argv[i - 1].slice(2))))
+const out = value('out')
+const dataDir = value('data')
+if (!out || !dataDir || !value('max-usd') || !value('spent-usd')) throw new Error('give --out, --data, --max-usd and --spent-usd')
+mkdirSync(out, { recursive: true })
+mkdirSync(dataDir, { recursive: true })
+const here = dirname(fileURLToPath(import.meta.url))
+const server = join(here, '../../../apps/analyzer-api/dist/server.mjs')
+const key = process.env.BUILDPLAN_ANTHROPIC_API_KEY ?? ''
+const token = randomBytes(24).toString('hex')
+const scrub = (t) => (key ? String(t).split(key).join('[key]') : String(t)).split(token).join('[token]')
+const log = (line) => process.stdout.write(`${scrub(line)}\n`)
+const sha256 = (b) => createHash('sha256').update(b).digest('hex')
+const timeoutS = Number(value('timeout-s') ?? '1500')
+
+const port = await new Promise((resolve) => {
+  const s = createServer().listen(0, '127.0.0.1', () => {
+    const { port: p } = s.address()
+    s.close(() => resolve(p))
+  })
+})
+const env = { ...process.env, PORT: String(port), HOST: '127.0.0.1', ANALYZER_DATA_DIR: dataDir, ANALYZER_HOUSE_DESCRIPTION: 'pilot', ANALYZER_HOUSE_READER: 'live', ANALYZER_HOUSE_READER_MAX_USD: value('max-usd'), ANALYZER_HOUSE_READER_SPENT_USD: value('spent-usd'), ANALYZER_HOUSE_READER_TOKEN: token, ANALYZER_HOUSE_READER_MAX_REQUESTS_PER_DAY: '200', ANALYZER_JOB_TIMEOUT_MS: String(timeoutS * 1000), ANALYZER_RATE_LIMIT_MAX: '50' }
+const serverLog = []
+const child = spawn(process.execPath, [server], { env, stdio: ['ignore', 'pipe', 'pipe'] })
+child.stdout.on('data', (d) => serverLog.push(scrub(d)))
+child.stderr.on('data', (d) => serverLog.push(scrub(d)))
+const base = `http://127.0.0.1:${port}`
+const call = async (path, init) => {
+  const res = await fetch(`${base}${path}`, init)
+  const buf = Buffer.from(await res.arrayBuffer())
+  let json = {}
+  try {
+    json = JSON.parse(buf.toString('utf8'))
+  } catch {}
+  return { status: res.status, json, buf, headers: res.headers }
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+const failures = []
+const check = (ok, what) => {
+  log(`${ok ? 'ok  ' : 'FAIL'} ${what}`)
+  if (!ok) failures.push(what)
+}
+const booksOf = () => {
+  const f = join(dataDir, 'house-reader-spend.json')
+  return existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : null
+}
+
+try {
+  for (let i = 0; i < 100; i += 1) {
+    try {
+      if ((await call('/health')).status === 200) break
+    } catch {}
+    await sleep(200)
+  }
+  const health = await call('/health')
+  check(health.status === 200, `the host answers /health (analyzer ${JSON.stringify(health.json.analyzer ?? {})})`)
+  writeFileSync(join(out, 'health.json'), `${JSON.stringify(health.json, null, 1)}\n`)
+
+  const runOne = async (url, name, withToken) => {
+    const dir = join(out, name)
+    mkdirSync(dir, { recursive: true })
+    const before = booksOf()
+    const t0 = Date.now()
+    const sub = await call('/v1/analyses', { method: 'POST', headers: { 'content-type': 'application/json', ...(withToken ? { authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ url }) })
+    check(sub.status === 202, `${name}: POST /v1/analyses → ${sub.status}`)
+    if (sub.status !== 202) {
+      writeFileSync(join(dir, 'submit.json'), `${JSON.stringify(sub.json, null, 1)}\n`)
+      return
+    }
+    const id = sub.json.jobId
+    let status
+    for (;;) {
+      status = (await call(`/v1/analyses/${id}`)).json
+      if (['COMPLETED', 'FAILED', 'CANCELLED'].includes(status.status)) break
+      if (Date.now() - t0 > timeoutS * 1000) break
+      await sleep(5000)
+    }
+    writeFileSync(join(dir, 'status.json'), `${scrub(JSON.stringify(status, null, 1))}\n`)
+    const after = booksOf()
+    // before the first request the host has no books file yet: its opening balance is the --spent-usd it was started with
+    const spent = after ? Math.round((after.cumulativeUsd - (before ? before.cumulativeUsd : Number(value('spent-usd')))) * 1e6) / 1e6 : 0
+    log(`${name}: ${status.status}${status.error ? ` ${status.error.code}` : ''} in ${Math.round((Date.now() - t0) / 1000)} s; books +${spent} USD, +${(after?.requests ?? 0) - (before?.requests ?? 0)} requests`)
+    const record = { name, url, withToken, jobId: id, status: status.status, error: status.error ? { code: status.error.code, message: String(status.error.message ?? '').slice(0, 400) } : null, seconds: Math.round((Date.now() - t0) / 1000), booksDeltaUsd: spent, booksDeltaRequests: (after?.requests ?? 0) - (before?.requests ?? 0) }
+    if (status.status === 'COMPLETED') {
+      const result = await call(`/v1/analyses/${id}/result`)
+      const scene = await call(`/v1/analyses/${id}/scene`)
+      const model = await call(`/v1/analyses/${id}/model`)
+      writeFileSync(join(dir, 'result.json'), `${scrub(JSON.stringify(result.json, null, 1))}\n`)
+      writeFileSync(join(dir, 'model.json'), model.buf)
+      writeFileSync(join(dir, 'scene.json'), scene.buf)
+      const r = result.json
+      check(result.status === 200 && scene.status === 200 && model.status === 200, `${name}: result, scene and model are served`)
+      check(sha256(scene.buf) === r.sceneSha256 && scene.headers.get('x-content-sha256') === r.sceneSha256, `${name}: the scene's bytes are the summary's sceneSha256 and the response header's`)
+      check(sha256(model.buf) === r.modelSha256, `${name}: the model's bytes are the summary's modelSha256`)
+      // the scene read back as a client reads it: its own content hash names the same bundle
+      const bundle = JSON.parse(scene.buf.toString('utf8'))
+      check(bundle.contentHash === r.sceneContentHash && Array.isArray(bundle.scene?.meshes) && bundle.scene.meshes.length > 0, `${name}: the scene reloads (${bundle.scene?.meshes?.length ?? 0} meshes) with the summary's content hash`)
+      const house = await call(`/v1/analyses/${id}/house`)
+      if (withToken) {
+        check(house.status === 200, `${name}: the house document is served (${house.status})`)
+        if (house.status === 200) {
+          writeFileSync(join(dir, 'house.json'), house.buf)
+          const doc = JSON.parse(house.buf.toString('utf8'))
+          const stood = (doc.verification?.knownDefects ?? []).find((d) => String(d.code).startsWith('ACCEPTED_'))
+          const described = String(r.analyzer?.service ?? '').startsWith('house-')
+          check(doc.schema === 'buildapp.house-document' && Array.isArray(doc.observations?.outlines) && doc.observations.outlines.length > 0, `${name}: the house document reloads (${doc.observations?.outlines?.length ?? 0} outlines, ${doc.observations?.elevations?.length ?? 0} elevations, ${doc.verification?.checks?.length ?? 0} checks)`)
+          check(!!stood, `${name}: the house document says which house stood (${stood?.code ?? 'nothing'})`)
+          check(stood?.code === (described ? 'ACCEPTED_DESCRIBED' : 'ACCEPTED_LOCAL'), `${name}: the served result is the house that stood (${r.analyzer?.service}; ${stood?.code})`)
+          if (described) check((r.warningDetails ?? []).some((w) => w.code === 'MODEL_FROM_WHOLE_HOUSE_DESCRIPTION') && (r.warningDetails ?? []).some((w) => w.code === 'HOUSE_DECISION'), `${name}: the result says it is the described exterior and why it stands`)
+          const again = await call(`/v1/analyses/${id}/house`)
+          check(sha256(again.buf) === sha256(house.buf), `${name}: the house document read twice is the same bytes (${sha256(house.buf).slice(0, 12)})`)
+          Object.assign(record, { houseSha256: sha256(house.buf), stood: stood?.code ?? null, why: String(stood?.what ?? '').slice(0, 300), checks: { pass: (doc.verification?.checks ?? []).filter((c) => c.status === 'PASS').length, fail: (doc.verification?.checks ?? []).filter((c) => c.status === 'FAIL').length }, held: (doc.verification?.held ?? []).length, counts: r.counts })
+        }
+      } else {
+        check(house.status === 404, `${name}: without the token there is no house document (${house.status})`)
+        check(!String(r.analyzer?.service ?? '').startsWith('house-'), `${name}: without the token the job ran on the drawings' path alone (${r.analyzer?.service})`)
+        check(spent === 0 && record.booksDeltaRequests === 0, `${name}: without the token no request was booked`)
+      }
+      Object.assign(record, { modelHash: r.modelHash, modelSha256: r.modelSha256, sceneSha256: r.sceneSha256, sceneContentHash: r.sceneContentHash, analyzer: r.analyzer, sourcePackageHash: r.sourcePackageHash, measurement: r.measurement ?? null })
+    } else if (withToken) {
+      const res = await call(`/v1/analyses/${id}/result`)
+      check(res.status === 410 || res.status === 409, `${name}: a job that did not complete serves no result (${res.status})`)
+    }
+    writeFileSync(join(dir, 'record.json'), `${scrub(JSON.stringify(record, null, 1))}\n`)
+  }
+
+  let n = 0
+  for (const url of urls) await runOne(url, `job-${(n += 1)}`, true)
+  if (value('default')) await runOne(value('default'), 'job-default-no-token', false)
+  const journal = join(dataDir, 'house-reader-spend.journal.jsonl')
+  if (existsSync(journal)) {
+    const lines = readFileSync(journal, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
+    // the OPENED line is the books' own first line and has no purpose: only requests are counted
+    const purposes = [...new Set(lines.filter((l) => l.event !== 'OPENED').map((l) => l.purpose))]
+    check(purposes.every((p) => p === 'CONSULTATION'), `the host's books hold the pilot's requests only (${purposes.join(', ') || 'none'})`)
+    writeFileSync(join(out, 'host-books-journal.jsonl'), `${lines.map((l) => scrub(JSON.stringify(l))).join('\n')}\n`)
+    writeFileSync(join(out, 'host-books.json'), `${JSON.stringify(booksOf(), null, 1)}\n`)
+  }
+} finally {
+  child.kill('SIGTERM')
+  writeFileSync(join(out, 'server.log'), serverLog.join(''))
+  log(failures.length === 0 ? 'ALL CHECKS PASSED' : `FAILED: ${failures.length} check(s)`)
+}
+process.exit(failures.length === 0 ? 0 : 1)

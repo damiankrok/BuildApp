@@ -515,6 +515,10 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     if (!l || under === undefined || thickness === undefined) continue
     const r = c.rect
     const terrain = g.terrainY.value ?? 0
+    if (under - terrain < 1.8) {
+      refuse(path, 'WRONG_READ', `its underside at +${under.toFixed(2)} m is ${(under - terrain).toFixed(2)} m over the terrain: not a roof one walks under`)
+      continue
+    }
     const plate = [pt(r.x0, r.z0), pt(r.x1, r.z0), pt(r.x1, r.z1), pt(r.x0, r.z1)]
     push({ type: 'createRoofPlane', id: c.id, levelId: l.id, boundary: signedArea(plate) < 0 ? plate.reverse() : plate, datum: { x: r6((r.x0 + r.x1) / 2), y: r6(under + thickness), z: r6((r.z0 + r.z1) / 2) }, pitchDeg: 0, downslope: { x: 0, z: -1 }, thickness: r6(thickness), materialId: MATERIALS_V2.roof })
     const ids = [c.id]

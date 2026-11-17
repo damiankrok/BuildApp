@@ -1,0 +1,275 @@
+/**
+ * v3.54.4 pilot — one link through LOCAL and through the whole-house description, and the house that stands.
+ *
+ *   LOCAL (the drawings' path, unchanged)  ──┐
+ *                                            ├─ arbitrate on source facts ─→ one accepted model, scene and summary
+ *   reading → house document → resolve/build ┘      + the house document (observations, geometry, verification)
+ *
+ * The reader is asked without being shown LOCAL's result. LOCAL may fail (a page whose plan scale it cannot establish):
+ * the description is then the only model. LOCAL stays wherever it meets the source facts the description meets. The
+ * house document is kept either way — it says what was read, what was agreed, what was held and which house stood.
+ */
+import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
+import { buildMobileSceneBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
+import { parseModel, serializeModel } from '@buildapp/model'
+import type { BuildingCommand } from '@buildapp/commands'
+import { HOUSE_BUILDER_LABEL, HOUSE_BUILDER_VERSION, HOUSE_RESOLVER_VERSION, sealCandidate } from '@buildapp/reconstruction'
+import type { ReconstructionCandidate } from '@buildapp/reconstruction'
+import { sha256Hex, stableJson } from '@buildapp/source-common'
+import type { SourcePackage } from '@buildapp/source-package'
+import { AnalysisError } from '../errors.js'
+import { identityOf } from '../identity.js'
+import type { AnalysisIdentity } from '../identity.js'
+import { runAnalysis } from '../run.js'
+import type { AnalysisInput, AnalysisOptions, AnalysisRun } from '../run.js'
+import type { LinkAnalysisResult } from '../result.js'
+import type { AnalysisWarning } from '../warnings.js'
+import { MODEL_ASSESSMENT_SCHEMA_VERSION } from '../assessment/types.js'
+import type { ModelAssessment } from '../assessment/types.js'
+import { arbitrate, compileHouse, documentFromReading } from './describe.js'
+import type { Arbitration, CompiledHouse, LocalMeasure } from './describe.js'
+import { measureScene } from './measure.js'
+import { housePictures } from './pictures.js'
+import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
+import type { ReadingContext, ReadingRecord } from './read.js'
+import { reviewHouse } from './review.js'
+import type { Proposal } from './review.js'
+
+export const HOUSE_PATH_VERSION = '0.1.0'
+export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & { review?: boolean }
+export type HouseLinkOutcome = {
+  /** The accepted run's result and scene, in the drawings path's contract; absent when neither path gave a model. */
+  run?: Pick<AnalysisRun, 'result' | 'sceneText'>
+  /** The house document as text, when the reading reached one. */
+  houseText?: string
+  decision: Arbitration
+  local: { built: boolean; code?: string }
+  described: { status: 'BUILT' | 'NOT_RESOLVED' | 'PARSE_REJECTED' | 'NOT_READ'; why?: string; modelHash?: string }
+  records: ReadingRecord[]
+  proposals: Proposal[]
+  error?: AnalysisError
+}
+
+const WARN = (code: string, severity: AnalysisWarning['severity'], message: string): AnalysisWarning => ({ code, severity, message })
+
+function localMeasure(run: AnalysisRun): LocalMeasure | undefined {
+  const model = run.result.model
+  const m = measureScene(buildMobileSceneBundle(model, { scene: compileBuilding(parseModel(serializeModel(model)) as never) }))
+  if (!m.exteriorWalls) return undefined
+  const groundLevel = [...model.levels].sort((p, q) => p.elevation - q.elevation).find((l) => l.elevation >= -0.01)?.id
+  const ground = model.slabs.filter((s) => s.levelId === groundLevel)
+  const shoelace = (p: ReadonlyArray<{ x: number; z: number }>): number => Math.abs(p.reduce((s, a, i) => s + a.x * p[(i + 1) % p.length].z - p[(i + 1) % p.length].x * a.z, 0)) / 2
+  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.roofTopY ?? m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: model.roofPlanes.length + model.roofs.length, groundPolygons: ground.map((x) => x.polygon.map((p) => ({ x: p.x, z: p.z }))) }
+}
+
+/** The described house in the drawings path's result contract: sealed candidate, model, scene, what is known of it. */
+export function houseResult(input: { pkg: SourcePackage; identity: AnalysisIdentity; sourceUrl: string; jobId: string | null; compiled: CompiledHouse; decision: Arbitration; records: ReadingRecord[]; readerModel: string; startedAt: string; now: () => Date }): Pick<AnalysisRun, 'result' | 'sceneText'> {
+  const { pkg, identity, compiled } = input
+  const built = compiled.built
+  if (!built || !compiled.document.geometry) throw new AnalysisError('ANALYSIS_FAILED', 'the described house has no built model')
+  const doc = compiled.document
+  const g = compiled.document.geometry
+  const v = doc.verification
+  const observationsHash = sha256Hex(stableJson(doc.observations))
+  const geometryHash = sha256Hex(stableJson(g))
+  const unresolved = [
+    ...v.held.map((h, i) => ({ id: `house-held-${i + 1}`, what: h.ref, reason: `${h.code}: ${h.why}`.slice(0, 300), status: (h.code === 'CAPABILITY_MISSING' || h.code === 'SOURCE_UNKNOWN' ? 'NOT_ATTEMPTED' : 'REFUSED') as 'NOT_ATTEMPTED' | 'REFUSED', observationIds: [] })),
+    ...doc.observations.unknowns.map((u, i) => ({ id: `house-unknown-${i + 1}`, what: u.slice(0, 200), reason: 'the sources do not let the reader tell', status: 'MISSING' as const, observationIds: [] })),
+  ]
+  const { candidate, model } = sealCandidate(
+    {
+      schema: 'buildapp.reconstruction-candidate',
+      schemaVersion: '1.1.0',
+      label: identity.label,
+      modelId: identity.modelId,
+      sourcePackageId: pkg.id,
+      sourcePackageHash: pkg.contentHash,
+      observationGraphId: `${HOUSE_READING_CONTRACT}-${HOUSE_READING_VERSION}`,
+      observationGraphHash: observationsHash,
+      metricEvidenceId: 'house-document-dimensions',
+      metricEvidenceHash: sha256Hex(stableJson({ dimensions: doc.observations.dimensions, levels: doc.observations.levels, published: doc.observations.published })),
+      hypothesisSetId: 'house-document-geometry',
+      hypothesisSetHash: geometryHash,
+      structuralLayoutId: 'house-document-bodies',
+      structuralLayoutHash: sha256Hex(stableJson(g.bodies)),
+      structuralStatus: 'STRUCTURAL_LAYOUT_PARTIAL',
+      solver: { name: 'house-document', version: `${HOUSE_RESOLVER_VERSION}+builder-${HOUSE_BUILDER_VERSION}` },
+      program: built.fitted as BuildingCommand[],
+      quantities: [],
+      contradictions: [],
+      unresolved,
+      traces: [],
+      steps: [],
+      residuals: { metricRmsM: 0, metricMaxM: 0, hard: 0, soft: 0, unresolved: unresolved.length },
+    } as unknown as Omit<ReconstructionCandidate, 'id' | 'contentHash' | 'modelHash'>,
+    identity.slug,
+  )
+  const modelText = serializeModel(model)
+  const scene = compileBuilding(parseModel(modelText) as never)
+  const bundle = buildMobileSceneBundle(model, { scene })
+  const sceneText = serializeBundle(bundle)
+  const closure = geometryClosureAudit(model, scene)
+  const compileErrors = scene.diagnostics.filter((x) => x.severity === 'ERROR')
+  const exteriorErrors = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
+  const passed = v.checks.filter((c) => c.status === 'PASS').length
+  const failedChecks = v.checks.filter((c) => c.status === 'FAIL')
+  const warningDetails: AnalysisWarning[] = [
+    WARN('MODEL_FROM_WHOLE_HOUSE_DESCRIPTION', 'LIMITING', `This exterior was built from a description of the page's drawings read as a whole (${input.records.length} reading step(s), by ${input.readerModel}); the program checked it against the printed dimensions, levels and elevations (${passed} checks passed, ${failedChecks.length} failed) and built only what it could place. The interior is not built.`),
+    WARN('HOUSE_DECISION', 'INFO', `Which model stands: ${input.decision.why}`.slice(0, 600)),
+    ...(failedChecks.length > 0 ? [WARN('HOUSE_CHECKS_FAILED', 'LIMITING', failedChecks.map((c) => `${c.what}: ${c.measured}`).join('; ').slice(0, 600))] : []),
+    ...(v.held.length > 0 ? [WARN('HOUSE_ITEMS_NOT_BUILT', 'LIMITING', `${v.held.length} item(s) read on the sources were not built: ${v.held.slice(0, 6).map((h) => `${h.ref} (${h.code})`).join('; ')}${v.held.length > 6 ? '; …' : ''}`)] : []),
+    ...v.knownDefects.slice(0, 8).map((d) => WARN(`HOUSE_${d.code}`, 'INFO', d.what.slice(0, 300))),
+    ...(v.quantities !== 'USABLE_IN_SCOPE' ? [WARN('HOUSE_QUANTITIES_LIMITED', 'LIMITING', `Quantities from this model: ${v.quantities}. It is a model for viewing the exterior, not a bill of quantities.`)] : []),
+  ]
+  const byDocument: Record<string, number> = {}
+  for (const a of pkg.assets) byDocument[a.roles.document] = (byDocument[a.roles.document] ?? 0) + 1
+  const technicalErrors = compileErrors.length + exteriorErrors + built.kernelRefusals.length
+  const pictures = doc.source.pictures.filter((p) => p.thisHouse !== false)
+  const uncheckedItems = pictures.map((p) => ({ kind: (p.role === 'PLAN' ? 'PLAN' : p.role === 'ELEVATION' ? 'ELEVATION' : p.role === 'SECTION' ? 'SECTION' : 'PERSPECTIVE') as 'PLAN' | 'ELEVATION' | 'SECTION' | 'PERSPECTIVE', extent: 'NONE' as const, assetId: p.assetId ?? p.id, reason: 'read by the whole-house reader; checked by the resolver against printed dimensions and against the other pictures, not pixel by pixel' }))
+  const byKind: Record<string, number> = {}
+  for (const u of uncheckedItems) byKind[u.kind] = (byKind[u.kind] ?? 0) + 1
+  const assessment = {
+    schema: 'buildapp.model-assessment',
+    schemaVersion: MODEL_ASSESSMENT_SCHEMA_VERSION,
+    technicalValidity: {
+      status: technicalErrors > 0 ? 'ERRORS' : 'VALID',
+      errors: technicalErrors,
+      warnings: scene.diagnostics.filter((x) => x.severity === 'WARNING').length,
+      checks: [
+        { check: 'PROGRAM_REFUSALS', errors: built.kernelRefusals.length, warnings: 0, findings: built.kernelRefusals.slice(0, 12).map((r) => ({ code: r.codes[0] ?? 'REFUSED', severity: 'ERROR' as const, ...(r.id ? { objectId: r.id } : {}), message: r.message })) },
+        { check: 'COMPILER', errors: compileErrors.length, warnings: 0, findings: compileErrors.slice(0, 12).map((e) => ({ code: e.code, severity: 'ERROR' as const, message: String((e as { message?: string }).message ?? '') })) },
+        { check: 'CLOSURE', errors: exteriorErrors, warnings: 0, findings: [] },
+      ],
+      note: 'technical validity of the described house: what the validator, the compiler and the joint audit say of it',
+    },
+    decompositionCompleteness: { verdict: 'NOT_ASSESSED', basis: 'ACCEPTED_DECOMPOSITION', meaning: 'no room decomposition: the described house is its exterior' },
+    sourceFidelity: { status: 'UNCHECKED', relations: [], counts: { PASS: 0, CONFLICT: 0, UNCHECKED: uncheckedItems.length }, conflicts: [], meaning: `the house document's own checks stand in the warnings (${passed} passed, ${failedChecks.length} failed); the drawings path's pixel relations were not run on this model` },
+    sourceUnchecked: { items: uncheckedItems, counts: { total: uncheckedItems.length, byKind, none: uncheckedItems.length, partial: 0 } },
+    previewAvailable: true,
+    elevationRegistration: { views: [], counts: { before: { FULL: 0, ALONG_ONLY: 0, VERTICAL_ONLY: 0, UNREGISTERED: 0 }, after: { FULL: 0, ALONG_ONLY: 0, VERTICAL_ONLY: 0, UNREGISTERED: 0 } }, slots: { before: 0, after: 0 }, lost: [], datums: { ridgeY: null, topFloorY: null }, note: 'the house document registers its elevations to its plan itself (verification.checks)' },
+    summary: `Described exterior: ${passed} source checks passed, ${failedChecks.length} failed, ${v.held.length} item(s) not built, ${technicalErrors} technical error(s).`,
+  } as unknown as ModelAssessment
+  const result: LinkAnalysisResult = {
+    schema: 'buildapp.link-analysis-result',
+    schemaVersion: '1.0.0',
+    jobId: input.jobId,
+    sourceUrl: input.sourceUrl,
+    canonicalUrl: pkg.canonicalUrl,
+    title: identity.title,
+    label: `${identity.title} (${HOUSE_BUILDER_LABEL.toLowerCase()})`,
+    modelId: identity.modelId,
+    publisher: pkg.project.publisher,
+    adapter: { id: pkg.adapter.id, version: pkg.adapter.version },
+    sourcePackageId: pkg.id,
+    sourcePackageHash: pkg.contentHash,
+    observationGraphHash: observationsHash,
+    metricEvidenceHash: candidate.metricEvidenceHash,
+    candidateHash: candidate.contentHash,
+    modelHash: candidate.modelHash,
+    modelSha256: sha256(modelText),
+    sceneContentHash: bundle.contentHash,
+    sceneSha256: sha256(sceneText),
+    sceneBytes: Buffer.byteLength(sceneText, 'utf8'),
+    counts: {
+      assets: pkg.assets.length,
+      assetsByDocument: byDocument,
+      observations: doc.observations.dimensions.length + doc.observations.levels.length + doc.observations.outlines.length + doc.observations.elevations.reduce((s, e) => s + e.bodies.length + e.openings.length + e.features.length, 0),
+      frames: pictures.length,
+      metricEvidence: doc.observations.dimensions.length + doc.observations.levels.length,
+      callouts: 0,
+      commands: candidate.program.length,
+      masses: g.bodies.length,
+      openings: model.openings.length,
+      rooms: 0,
+      balconies: model.balconies.length,
+      terraces: 0,
+      railings: model.railings.length,
+      chimneys: model.chimneys.length,
+      rooflights: model.rooflights.length,
+      meshes: bundle.scene.meshes.length,
+      triangles: bundle.scene.meshes.reduce((a, m) => a + m.positions.length / 9, 0),
+    },
+    quality: { levels: { L0: g.bodies.length + model.openings.length, L1: 0, L2: 0 }, byFamily: {} },
+    unresolved: unresolved.map((u) => ({ what: u.what, reason: u.reason, status: u.status })),
+    warnings: warningDetails.map((w) => w.message),
+    warningDetails,
+    preview: {
+      outcome: built.kernelRefusals.length > 0 || compileErrors.length > 0 ? 'PARTIAL_3D_PREVIEW' : 'COMPLETE',
+      built: { wallRings: model.wallRings.length, walls: model.walls.length, slabs: model.slabs.length, roofs: model.roofs.length, roofPlanes: model.roofPlanes.length, openings: model.openings.length, rooms: 0 },
+      provisional: [{ code: 'EXTERIOR_ONLY', what: 'the interior is not built: walls, roofs and openings of the exterior only' }, ...v.knownDefects.slice(0, 6).map((d) => ({ code: d.code, what: d.what.slice(0, 200) }))],
+      partial: null,
+    } as unknown as LinkAnalysisResult['preview'],
+    sourceBasis: null,
+    vision: { mode: 'LIVE_PROVIDER', provider: `anthropic-messages:${input.readerModel}`, attempted: input.records.length, accepted: 1 },
+    verification: { replay: 'BYTE_IDENTICAL', residuals: 0, residualsOutsideTolerance: failedChecks.length, closure: { exteriorErrors, exteriorFindings: closure.metrics.exteriorFindingCount, interiorFindings: closure.metrics.interiorFindingCount } },
+    assessment,
+    analyzer: { service: `house-${HOUSE_PATH_VERSION}`, solver: `house-document-${HOUSE_RESOLVER_VERSION}+builder-${HOUSE_BUILDER_VERSION}+reading-${HOUSE_READING_VERSION}` },
+    startedAt: input.startedAt,
+    completedAt: input.now().toISOString(),
+    candidate,
+    model,
+    scene: bundle,
+  }
+  return { result, sceneText }
+}
+
+/** One link: LOCAL, the whole-house description, and the decision. Never throws for a failed reading: LOCAL then stands. */
+export async function describeLink(input: AnalysisInput, options: AnalysisOptions, describer: HouseDescriber): Promise<HouseLinkOutcome> {
+  const now = options.now ?? (() => new Date())
+  const startedAt = now().toISOString()
+  const records: ReadingRecord[] = []
+  let proposals: Proposal[] = []
+  let localRun: AnalysisRun | undefined
+  let localError: AnalysisError | undefined
+  let pkg: SourcePackage | undefined
+  try {
+    localRun = await runAnalysis(input, options)
+    pkg = localRun.pkg
+  } catch (e) {
+    if (options.signal?.aborted || !(e instanceof AnalysisError)) throw e
+    localError = e
+    pkg = e.attachments?.pkg
+  }
+  const local = { built: !!localRun, ...(localError ? { code: localError.detail.reasonCode ?? localError.code } : {}) }
+  const none = (why: string, status: HouseLinkOutcome['described']['status']): HouseLinkOutcome => ({ ...(localRun ? { run: localRun } : {}), decision: { accepted: localRun ? 'LOCAL' : 'NONE', why, findings: [] }, local, described: { status, why }, records, proposals, ...(localError && !localRun ? { error: localError } : {}) })
+  if (!pkg) return none('no source package was sealed: nothing to read', 'NOT_READ')
+  const published = (pkg.publishedFacts ?? []).filter((f) => typeof f.value === 'number' && Number.isFinite(f.value)).map((f) => ({ key: f.key, value: f.value as number, unit: String(f.unit ?? ''), ...(f.raw ? { raw: String(f.raw) } : {}) }))
+  const ctx: ReadingContext = { modelFor: describer.modelFor, price: describer.price, ...(describer.spend ? { spend: describer.spend } : {}), record: (r) => void records.push(r), ...(options.signal ? { signal: options.signal } : {}) }
+  const identity = { ...identityOf(pkg, options.adapters), ...options.identity }
+  let compiled: CompiledHouse
+  try {
+    const { pictures } = await housePictures(pkg.assets as never, options.cache)
+    const inventory = await readInventory(ctx, pictures, `publisher: ${pkg.project.publisher}`)
+    if (!inventory.selection) return none(inventory.why ?? 'no ground-floor plan among the pictures', 'NOT_READ')
+    const selection = inventory.selection
+    const plan = await readPlan(ctx, selection, published)
+    const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10) }
+    if (selection.elevations.length + selection.sections.length > 0) {
+      const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, identity.modelId)
+      const bodiesInMetres = planOnly.document.geometry ? `On the plan, in metres (x from the building's left end seen from the front, z from the front back): ${planOnly.document.geometry.bodies.map((b) => `${b.id}: x ${Math.min(...b.outline.map((p) => p.x)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.x)).toFixed(1)}, z ${Math.min(...b.outline.map((p) => p.z)).toFixed(1)}–${Math.max(...b.outline.map((p) => p.z)).toFixed(1)}`).join('; ')}.` : ''
+      const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
+      const converted = documentFromReading({ ...base, facadesSent: facades.sent, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
+      compiled = compileHouse(JSON.parse(JSON.stringify(converted.document)), identity.modelId)
+      if (describer.review !== false && compiled.bundle) {
+        const reviewed = await reviewHouse({ ctx, selection, facadesSent: facades.sent, observationsDocument: converted.document, compiled, modelId: identity.modelId })
+        compiled = reviewed.compiled
+        proposals = reviewed.proposals
+      }
+    } else compiled = compileHouse(documentFromReading({ ...base, answers: { inventory: inventory.answer, plan: plan.answer } }).document, identity.modelId)
+  } catch (e) {
+    if (options.signal?.aborted) throw e
+    return none(e instanceof ReadingFailed ? `${e.code}: ${e.message.slice(0, 200)}` : `the reading failed: ${String((e as Error)?.message ?? e).slice(0, 200)}`, 'NOT_READ')
+  }
+  const decision = arbitrate(compiled, localRun ? localMeasure(localRun) : undefined, published)
+  const describedStatus = compiled.rejected ? 'PARSE_REJECTED' : compiled.bundle ? 'BUILT' : 'NOT_RESOLVED'
+  // which house stood is part of the document, whichever it was
+  const doc = compiled.document
+  if (!compiled.rejected) doc.verification.knownDefects.push({ code: `ACCEPTED_${decision.accepted}`, what: decision.why.slice(0, 400) })
+  const houseText = compiled.rejected ? undefined : `${JSON.stringify(doc)}\n`
+  const described = { status: describedStatus as HouseLinkOutcome['described']['status'], ...(compiled.modelHash ? { modelHash: compiled.modelHash } : {}), ...(compiled.rejected ? { why: compiled.rejected.slice(0, 3).join('; ') } : {}) }
+  if (decision.accepted === 'DESCRIBED') {
+    const run = houseResult({ pkg, identity, sourceUrl: input.kind === 'URL' ? input.url : pkg.canonicalUrl, jobId: options.jobId ?? null, compiled, decision, records, readerModel: ctx.modelFor('PLAN').model, startedAt, now })
+    return { run, ...(houseText ? { houseText } : {}), decision, local, described, records, proposals }
+  }
+  return { ...(localRun ? { run: localRun } : {}), ...(houseText ? { houseText } : {}), decision, local, described, records, proposals, ...(localError && !localRun ? { error: localError } : {}) }
+}

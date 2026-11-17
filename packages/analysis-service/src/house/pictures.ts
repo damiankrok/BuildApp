@@ -31,7 +31,7 @@ export type HousePicture = {
 }
 export type SentPicture = { picture: HousePicture; width: number; height: number; scale: number; jpegBase64: string }
 
-export const PICTURE_LIMITS = { minSidePx: 280, maxPictures: 24, detailLongSidePx: 1568, thumbLongSidePx: 512, enlargeBelowPx: 900, enlargeFactor: 2 } as const
+export const PICTURE_LIMITS = { minSidePx: 280, minDrawingSidePx: 180, maxPictures: 24, detailLongSidePx: 1568, thumbLongSidePx: 512, enlargeBelowPx: 900, enlargeFactor: 2 } as const
 
 function resize(src: Raster, width: number, height: number): Raster {
   const out = new Uint8ClampedArray(width * height * 4)
@@ -100,7 +100,10 @@ export async function housePictures(assets: ReadonlyArray<PackageAsset>, bytes: 
       skipped.push({ assetId: a.id, why: `more than ${PICTURE_LIMITS.maxPictures} pictures: not sent` })
       continue
     }
-    if (v.decoded && Math.min(v.decoded.width, v.decoded.height) < PICTURE_LIMITS.minSidePx) {
+    // a picture the page names as a drawing is taken smaller than one it does not name
+    const named = ['FLOOR_PLAN', 'ELEVATION', 'SECTION'].includes(a.roles?.document ?? '')
+    const minSide = named ? PICTURE_LIMITS.minDrawingSidePx : PICTURE_LIMITS.minSidePx
+    if (v.decoded && Math.min(v.decoded.width, v.decoded.height) < minSide) {
       skipped.push({ assetId: a.id, why: 'too small to be a drawing of the house' })
       continue
     }
@@ -117,7 +120,7 @@ export async function housePictures(assets: ReadonlyArray<PackageAsset>, bytes: 
       skipped.push({ assetId: a.id, why: `not decoded: ${(e as Error).message.slice(0, 80)}` })
       continue
     }
-    if (Math.min(raster.width, raster.height) < PICTURE_LIMITS.minSidePx) {
+    if (Math.min(raster.width, raster.height) < minSide) {
       skipped.push({ assetId: a.id, why: 'too small to be a drawing of the house' })
       continue
     }

@@ -4,7 +4,7 @@
  *   BUILDPLAN_ANTHROPIC_API_KEY=… npx vite-node research/source-to-model/v3544/house-run.ts -- \
  *       --list <file: "<slug> <source-package.json> <cache dir>" per line> --out <dir> --phase <smoke|dev|confirm> \
  *       --max-usd <cumulative ceiling on the books> [--local <root of LOCAL runs, <root>/<slug>/model.json>] \
- *       [--replay <root of an earlier run>] [--only <slug>] [--no-review]
+ *       [--replay <root of an earlier run>] [--reuse <root> --fresh STEP,STEP] [--only <slug>] [--no-review] [--plan-only]
  *
  * Every billed request is reserved in the cumulative books before it is sent and written to the campaign ledger when it
  * returns. With --replay no request is sent: the recorded answers go through today's converter, resolver and builder.
@@ -70,7 +70,7 @@ function localMeasureOf(dir: string): LocalMeasure | undefined {
   const shoelace = (p: Array<{ x: number; z: number }>): number => Math.abs(p.reduce((s, a, i) => s + a.x * p[(i + 1) % p.length].z - p[(i + 1) % p.length].x * a.z, 0)) / 2
   const ground = (raw.slabs ?? []).filter((s) => s.levelId === groundLevel)
   if (!m.exteriorWalls) return undefined
-  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: (raw.roofPlanes ?? []).length + (raw.roofs ?? []).length }
+  return { widthM: m.exteriorWalls.widthM, depthM: m.exteriorWalls.depthM, heightAboveTerrainM: null, topAboveGroundFloorM: m.buildingTopY, groundAreaM2: ground.length ? ground.reduce((s, x) => s + shoelace(x.polygon), 0) : null, roofPlanes: (raw.roofPlanes ?? []).length + (raw.roofs ?? []).length, groundPolygons: ground.map((x) => x.polygon) }
 }
 
 async function main(): Promise<void> {
@@ -150,7 +150,8 @@ async function main(): Promise<void> {
       let compiled: CompiledHouse
       let notes: ReturnType<typeof documentFromReading>['notes'] = []
       let observationsDocument: unknown
-      if (selection.elevations.length + selection.sections.length > 0) {
+      // --plan-only (ablation): the plan's dimensions, outline and bodies alone, as if no section or elevation was read
+      if (!flag('plan-only') && selection.elevations.length + selection.sections.length > 0) {
         const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
         const converted = documentFromReading({ ...base, facadesSent: facades.sent, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
         notes = converted.notes

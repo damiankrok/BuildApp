@@ -27,9 +27,9 @@ import { isTerminal } from '@buildapp/analysis-service'
 import { JOB_ID_PATTERN, failJob } from './job.js'
 import type { JobRecord } from './job.js'
 
-export type ResultPart = 'summary' | 'scene' | 'model' | 'candidate'
+export type ResultPart = 'summary' | 'scene' | 'model' | 'candidate' | 'house'
 
-export type ResultFiles = { summary: string; scene: string; model: string; candidate: string }
+export type ResultFiles = { summary: string; scene: string; model: string; candidate: string; /** v3.54.4: the house document, for a job that went through the whole-house description. */ house?: string }
 
 export interface AnalysisJobStore {
   create(job: JobRecord): Promise<void>
@@ -47,7 +47,7 @@ export interface AnalysisJobStore {
   clearWorkspace(jobId: string): Promise<void>
 }
 
-const FILE_OF: Record<ResultPart, string> = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json' }
+const FILE_OF: Record<ResultPart, string> = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json', house: 'house.json' }
 
 const checkId = (jobId: string): string => {
   if (!JOB_ID_PATTERN.test(jobId)) throw new Error('invalid job id')
@@ -139,6 +139,7 @@ export class FileJobStore implements AnalysisJobStore {
   async saveResult(jobId: string, files: ResultFiles): Promise<void> {
     const dir = this.dirOf(jobId)
     await this.serial(jobId, async () => {
+      if (files.house !== undefined) await this.writeAtomic(join(dir, FILE_OF.house), files.house)
       for (const part of ['scene', 'model', 'candidate', 'summary'] as const) await this.writeAtomic(join(dir, FILE_OF[part]), files[part])
     })
   }

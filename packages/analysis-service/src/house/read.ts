@@ -356,6 +356,10 @@ export function strictTool<T extends { name: string; description: string; input_
 export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: number, text: string, pictures: SentPicture[], tool: { name: string; description: string; input_schema: unknown }, extra: Array<{ label: string; mediaType: string; base64: string; width: number; height: number }> = [], strict = true): Promise<T> {
   const recorded = ctx.replay?.(step, round)
   if (recorded) {
+    // a recorded answer speaks of the pictures of ITS request, by number: it is not an answer about other pictures
+    const then = recorded.pictures.map((p) => p.assetId).join('|')
+    const now = pictures.map((p) => p.picture.assetId).join('|')
+    if (then !== now) throw new ReadingFailed('NOT_SENT', `replay: ${step} was recorded for other pictures than this request has (STALE_DEPENDENCY)`)
     ctx.record({ ...recorded, usage: { inputTokens: 0, outputTokens: 0 } })
     return recorded.answer as T
   }

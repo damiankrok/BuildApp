@@ -50,23 +50,41 @@ export function buildHouse(doc: HouseDocument, modelId: string): BuiltHouse {
       }
     }
     const dropped: string[] = []
+    // what stood on the refused object goes with it, and what stood on that (an opening's window with the opening);
+    // a wall that only met it at a junction stays, without the junction
+    const gone = new Set<string>(id ? [id] : [])
+    for (let grew = true; grew; ) {
+      grew = false
+      current.forEach((c, i) => {
+        const o = c as unknown as Record<string, unknown> & { id?: string }
+        if (i === r.failedAt || !o.id || gone.has(o.id)) return
+        if (DEPENDS.some((k) => typeof o[k] === 'string' && gone.has(o[k] as string))) {
+          gone.add(o.id)
+          grew = true
+        }
+      })
+    }
     const next: BuildingCommand[] = []
     current.forEach((c, i) => {
       const o = c as unknown as Record<string, unknown> & { id?: string; type: string }
       if (i === r.failedAt) return
-      if (id && DEPENDS.some((k) => o[k] === id)) return void dropped.push(o.id ?? o.type)
+      if (o.id && o.id !== id && gone.has(o.id)) return void dropped.push(o.id)
+      if (!o.id && DEPENDS.some((k) => typeof o[k] === 'string' && gone.has(o[k] as string))) return void dropped.push(o.type)
       if (id) {
-        // a wall that died into the refused plane dies into the others
         const strip = (w: { topProfile?: { kind: string; planeIds?: string[] } }): void => {
-          if (w.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds?.includes(id)) {
-            const rest = w.topProfile.planeIds.filter((p) => p !== id)
+          if (w.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds?.some((p) => gone.has(p))) {
+            const rest = w.topProfile.planeIds.filter((p) => !gone.has(p))
             if (rest.length > 0) w.topProfile = { ...w.topProfile, planeIds: rest }
             else delete w.topProfile
           }
         }
-        const copy = JSON.parse(JSON.stringify(o)) as typeof o & { walls?: Array<{ topProfile?: { kind: string; planeIds?: string[] } }> }
+        const copy = JSON.parse(JSON.stringify(o)) as typeof o & { walls?: Array<{ topProfile?: { kind: string; planeIds?: string[] } }>; startJunction?: { with?: { wallId?: string }; againstWallId?: string }; endJunction?: { with?: { wallId?: string }; againstWallId?: string } }
         strip(copy as never)
         for (const w of copy.walls ?? []) strip(w)
+        for (const k of ['startJunction', 'endJunction'] as const) {
+          const j = copy[k]
+          if (j && ((j.with?.wallId && gone.has(j.with.wallId)) || (j.againstWallId && gone.has(j.againstWallId)))) delete copy[k]
+        }
         return void next.push(copy as unknown as BuildingCommand)
       }
       next.push(c)

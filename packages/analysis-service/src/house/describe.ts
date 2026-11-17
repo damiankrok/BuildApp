@@ -198,8 +198,33 @@ export function compileHouse(input: unknown, modelId: string): CompiledHouse {
 // the decision between the described house and LOCAL's
 // ---------------------------------------------------------------------------------------------------------------------
 
-export const ARBITRATION = { extentShare: 0.04, extentM: 0.35, heightM: 0.45, footprintShare: 0.12 } as const
-export type LocalMeasure = { widthM: number; depthM: number; heightAboveTerrainM: number | null; topAboveGroundFloorM: number | null; groundAreaM2: number | null; roofPlanes: number }
+export const ARBITRATION = { extentShare: 0.04, extentM: 0.35, heightM: 0.45, footprintShare: 0.12, outlineOverlap: 0.85 } as const
+export type LocalMeasure = { widthM: number; depthM: number; heightAboveTerrainM: number | null; topAboveGroundFloorM: number | null; groundAreaM2: number | null; roofPlanes: number; /** The ground slab outline(s), in LOCAL's own frame (x right seen from the front, z back). */ groundPolygons?: Array<Array<{ x: number; z: number }>> }
+
+/** How much two ground outlines are the same shape in the same place, each set against its own front-left corner: area in both over area in either. */
+export function outlineOverlap(a: Array<Array<{ x: number; z: number }>>, b: Array<Array<{ x: number; z: number }>>, cell = 0.15): number {
+  const norm = (polys: Array<Array<{ x: number; z: number }>>): { polys: Array<Array<{ x: number; z: number }>>; w: number; d: number } => {
+    const xs = polys.flat().map((p) => p.x)
+    const zs = polys.flat().map((p) => p.z)
+    const x0 = Math.min(...xs)
+    const z0 = Math.min(...zs)
+    return { polys: polys.map((poly) => poly.map((p) => ({ x: p.x - x0, z: p.z - z0 }))), w: Math.max(...xs) - x0, d: Math.max(...zs) - z0 }
+  }
+  const A = norm(a)
+  const B = norm(b)
+  const inside = (polys: Array<Array<{ x: number; z: number }>>, p: { x: number; z: number }): boolean => polys.some((poly) => housePoly.contains(poly, p))
+  let both = 0
+  let either = 0
+  for (let x = cell / 2; x < Math.max(A.w, B.w); x += cell) {
+    for (let z = cell / 2; z < Math.max(A.d, B.d); z += cell) {
+      const ia = inside(A.polys, { x, z })
+      const ib = inside(B.polys, { x, z })
+      if (ia && ib) both += 1
+      if (ia || ib) either += 1
+    }
+  }
+  return either === 0 ? 0 : both / either
+}
 export type ArbitrationFinding = { fact: string; source: string; local: string; described: string; localOk: boolean; describedOk: boolean }
 export type Arbitration = { accepted: 'DESCRIBED' | 'LOCAL' | 'NONE'; why: string; findings: ArbitrationFinding[] }
 
@@ -242,6 +267,11 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
   if (typeof area === 'number' && local.groundAreaM2 !== null) {
     const ok = Math.abs(local.groundAreaM2 - area) <= ARBITRATION.footprintShare * area
     findings.push({ fact: 'walled ground outline', source: `traced outline verified against the printed dimensions: ${area.toFixed(1)} m²`, local: `${local.groundAreaM2.toFixed(1)} m²`, described: `${area.toFixed(1)} m²`, localOk: ok, describedOk: true })
+  }
+  // the same area in the same box is not yet the same house: a body on the other side (a mirrored plan) has both
+  if (ground && local.groundPolygons && local.groundPolygons.length > 0) {
+    const share = outlineOverlap([ground], local.groundPolygons)
+    findings.push({ fact: 'where the walled outline lies', source: 'traced outline verified against the printed dimensions', local: `${(share * 100).toFixed(0)} % of the two outlines coincide, each set against its own front-left corner`, described: 'the traced outline', localOk: share >= ARBITRATION.outlineOverlap, describedOk: true })
   }
   const localFails = findings.filter((f) => !f.localOk && f.describedOk)
   const describedFails = findings.filter((f) => !f.describedOk)

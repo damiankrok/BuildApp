@@ -259,6 +259,16 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     const modelX = (edge === 'BOTTOM' || edge === 'TOP') === alongSheetH
     const ext = modelX ? gb.x1 - gb.x0 : gb.z1 - gb.z0
     const err = Math.abs(ext - (d.valueM as number))
+    // a printed overall dimension whose line runs past the traced walls (it takes in a porch, a terrace, steps) measures
+    // more than the walled outline: at the plan's own scale its line is longer than the outline by what it takes in.
+    // That is not a contradiction; an outline LONGER than a printed overall dimension is.
+    const pxLen = alongSheetH ? Math.abs(d.to.x - d.from.x) : Math.abs(d.to.y - d.from.y)
+    const pxOutline = alongSheetH ? box.x1 - box.x0 : box.y1 - box.y0
+    const lineM = pxLen * (alongSheetH ? mppH : mppV)
+    if (err > Math.max(0.1, 0.01 * (d.valueM as number)) && ext < (d.valueM as number) && pxLen > pxOutline * 1.03 && Math.abs(lineM - (d.valueM as number)) <= 0.04 * (d.valueM as number)) {
+      check(`extent-${d.id}`, 'METRIC', `the outline's ${modelX ? 'width' : 'depth'} against the printed ${d.literal}`, `${d.valueM} m (what it includes: ${d.includes ?? 'not said'})`, `${ext.toFixed(2)} m of walls; the dimension line is ${lineM.toFixed(2)} m long at the plan's scale and runs ${(lineM - ext).toFixed(2)} m past the walled outline: it measures more than the walls`, 'PASS')
+      continue
+    }
     check(`extent-${d.id}`, 'METRIC', `the outline's ${modelX ? 'width' : 'depth'} against the printed ${d.literal}`, `${d.valueM} m (what it includes: ${d.includes ?? 'the walled outline'})`, `${ext.toFixed(2)} m`, err <= Math.max(0.1, 0.01 * (d.valueM as number)) ? 'PASS' : 'FAIL', err <= Math.max(0.1, 0.01 * (d.valueM as number)) ? [] : ['quantities'])
   }
   const footprint = o.published.find((p) => p.key === 'footprint_area')
@@ -496,6 +506,9 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         }
         const from = at.sign > 0 ? a[0] - at.a0 : at.a0 - a[1]
         const apex = f.apexY ?? f.box.y0
+        // a gabled dormer whose front comes down to the eaves of its roof stands on the wall, not on the slope
+        const eavesRow = obs.bodies.find((x) => x.bodyId === body.id)?.eavesY
+        const onWall = f.kind === 'WALL_DORMER_GABLE' || f.kind === 'CROSS_GABLE' || (f.kind === 'ROOF_DORMER_GABLE' && typeof eavesRow === 'number' && r.yOf(Math.max(f.box.y0, f.box.y1)) <= r.yOf(eavesRow) + 0.35)
         let eaves = f.eavesY ?? null
         if (eaves === null && apex !== null && body.roof.pitchDeg.value) {
           // not read: a dormer roof of the host roof's pitch, from its apex down to its two sides
@@ -506,7 +519,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
           held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'where its own roof begins was not read' })
           continue
         }
-        dormers.push({ id: `dormer-${side.toLowerCase()}-${dormers.filter((d) => d.id.startsWith(`dormer-${side.toLowerCase()}`)).length + 1}`, bodyId: body.id, kind: f.kind === 'WALL_DORMER_GABLE' || f.kind === 'CROSS_GABLE' ? 'WALL_GABLE' : f.kind === 'ROOF_DORMER_GABLE' ? 'ROOF_GABLE' : 'ROOF_SHED', hostWall: at.h.id, fromM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], r3(2 * r.s)), toM: num(r3(from + (a[1] - a[0])), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], r3(2 * r.s)), eaveY: num(r3(r.yOf(eaves)), 'DERIVED', `the row its own roof begins at on elevation ${obs.id}`, [ref], 0.15), ridgeY: num(r3(r.yOf(apex)), 'DERIVED', `its apex on elevation ${obs.id}`, [ref], 0.15), refs: [ref] })
+        dormers.push({ id: `dormer-${side.toLowerCase()}-${dormers.filter((d) => d.id.startsWith(`dormer-${side.toLowerCase()}`)).length + 1}`, bodyId: body.id, kind: onWall ? 'WALL_GABLE' : f.kind === 'ROOF_DORMER_GABLE' ? 'ROOF_GABLE' : 'ROOF_SHED', hostWall: at.h.id, fromM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], r3(2 * r.s)), toM: num(r3(from + (a[1] - a[0])), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], r3(2 * r.s)), eaveY: num(r3(r.yOf(eaves)), 'DERIVED', `the row its own roof begins at on elevation ${obs.id}`, [ref], 0.15), ridgeY: num(r3(r.yOf(apex)), 'DERIVED', `its apex on elevation ${obs.id}`, [ref], 0.15), refs: [ref] })
       } else if (f.kind === 'BALCONY') {
         const level = levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(f.box.y1) + 0.6).sort((p, q) => q.index - p.index)[0]
         const at = level ? hostAt(side, level.index, (a[0] + a[1]) / 2, f.bodyId, [a[0], a[1]]) : undefined

@@ -20,7 +20,7 @@ export const MODEL_VIEWS_PROFILE = 'neutral-flat/1' as const
 
 type V3 = [number, number, number]
 type View = { name: string; project: (p: V3) => V3 }
-export type ModelViewPicture = { name: 'SIDES' | 'AROUND'; png: Uint8Array; width: number; height: number; labels: string; sha256: string }
+export type ModelViewPicture = { name: 'SIDES' | 'AROUND'; png: Uint8Array; width: number; height: number; labels: string; sha256: string; /** SIDES only (v3.54.4): pixels per metre and the row of the ground floor level (y = 0), for a ruler drawn beside the picture. */ frame?: { pxPerM: number; rowOfZero: number; tile: number } }
 
 const hex = (c: string | undefined): V3 => {
   const m = /^#?([0-9a-f]{6})$/i.exec(c ?? '')
@@ -120,7 +120,7 @@ export function renderModelViews(bundle: MobileSceneBundle, tile = 420): ModelVi
     // one ground line for the four: the scene's lowest point sits the same distance above each tile's bottom
     drawn.forEach((d, i) => draw(data, W, i * tile, 0, tile, th, d.tris, scale, (d.lo[0] + d.hi[0]) / 2, lowY, th - tile * 0.05))
     const png = encodePng({ width: W, height: th, data })
-    out.push({ name: 'SIDES', png, width: W, height: th, labels: `four tiles ${tile} px wide, left to right: FRONT, RIGHT, REAR, LEFT — orthographic, all at one scale and on one ground line`, sha256: sha(png) })
+    out.push({ name: 'SIDES', png, width: W, height: th, labels: `four tiles ${tile} px wide, left to right: FRONT, RIGHT, REAR, LEFT — orthographic, all at one scale and on one ground line`, sha256: sha(png), frame: { pxPerM: scale, rowOfZero: th - tile * 0.05 - (0 - cy - lowY) * scale, tile } })
   }
   {
     const ay = (35 * Math.PI) / 180

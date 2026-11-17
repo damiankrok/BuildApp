@@ -8,7 +8,8 @@ import { anthropicStructuredVision, anthropicVisionReasoner } from '@buildapp/so
 import { join } from 'node:path'
 import type { AnalysisWiring } from './executor.js'
 import { DEFAULT_SPEND_LIMITS, HOUSE_READER_PRICES, openSpendLedger, spendGuardedStructuredVision } from './house-reader-spend.js'
-import { anthropicConsultant } from '@buildapp/analysis-service'
+import { HOUSE_READING_LIMITS, anthropicConsultant } from '@buildapp/analysis-service'
+import type { ReadingStep } from '@buildapp/analysis-service'
 import type { SpendLimits } from './house-reader-spend.js'
 
 const count = (value: string | undefined, fallback: number, max: number): number => {
@@ -65,6 +66,17 @@ export function consultantPlan(env: Record<string, string | undefined> = process
   return reader.on ? { on: true, why: 'consultant pilot on' } : { on: false, why: reader.why }
 }
 
+/**
+ * v3.54.4 pilot: `ANALYZER_HOUSE_DESCRIPTION=pilot` (with the same ceiling, books and access token as the house reader)
+ * gives an allowed job the whole-house description beside LOCAL. Off by default; it takes the place of the consultant
+ * and of the house reader, never runs with them.
+ */
+export function houseDescriptionPlan(env: Record<string, string | undefined> = process.env): { on: boolean; why: string } {
+  if (env.ANALYZER_HOUSE_DESCRIPTION !== 'pilot') return { on: false, why: 'ANALYZER_HOUSE_DESCRIPTION is not "pilot"' }
+  const reader = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })
+  return reader.on ? { on: true, why: 'whole-house description pilot on' } : { on: false, why: reader.why }
+}
+
 export const productionWiring = (env: Record<string, string | undefined> = process.env): AnalysisWiring => ({
   adapters: productionAdapters(),
   ...(legacyVisionOn(env) ? { vision: anthropicVisionReasoner({}) } : {}),
@@ -73,6 +85,27 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
   // holds it. Every request is reserved in the host's spend books before it is sent (`house-reader-spend.ts`), and a
   // job reaches the reader only when its submission carried the pilot's access token (`executeJob`).
   ...(() => {
+    if (houseDescriptionPlan(env).on) {
+      const plan = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })
+      const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })
+      const transports = new Map<ReadingStep, ReturnType<typeof anthropicConsultant>>()
+      return {
+        houseDescription: {
+          modelFor: (step: ReadingStep) => {
+            if (!transports.has(step)) transports.set(step, anthropicConsultant({ model: plan.model, maxOutputTokens: HOUSE_READING_LIMITS.maxOutputTokens[step], timeoutMs: 300_000 }))
+            return transports.get(step) as ReturnType<typeof anthropicConsultant>
+          },
+          price: HOUSE_READER_PRICES[plan.model],
+          spend: {
+            reserve: (m: string, usd: number) => {
+              const r = ledger.reserve('CONSULTATION', m, usd)
+              return { id: r.id, usd: r.reservedUsd }
+            },
+            settle: (r: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string) => ledger.settle({ id: r.id, purpose: 'CONSULTATION', model: plan.model, reservedUsd: r.usd }, actual, note),
+          },
+        },
+      }
+    }
     // v3.54.2: the consultant pilot, when switched on, takes the place of the house reader
     if (consultantPlan(env).on) {
       const plan = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })

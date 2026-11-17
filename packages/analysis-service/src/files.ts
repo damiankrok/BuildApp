@@ -23,6 +23,8 @@ export type AnalysisFiles = {
   /** The sealed ReconstructionCandidate, canonical JSON. */
   candidate: string
   parsed: LinkAnalysisSummary
+  /** v3.54.4: the house document of a job that went through the whole-house description (absent otherwise). */
+  house?: string
 }
 
 export function analysisFilesOf(run: Pick<AnalysisRun, 'result' | 'sceneText'>): AnalysisFiles {
