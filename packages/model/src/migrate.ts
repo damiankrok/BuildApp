@@ -55,6 +55,14 @@
  * not its floor. A 1.6.0 file has none; every room keeps its whole outline as
  * floor, and it compiles to exactly the geometry it compiled to before.
  *
+ * 1.7.0 -> 1.8.0 (v3.54.9): wall panels gained the GABLE_FRAME role — the
+ * frame edging a gable end as one plate. A 1.7.0 file has none and compiles to
+ * exactly the geometry it compiled to before. The house path of v3.54.8
+ * (builder 0.4.0) wrote GABLE_FRAME panels while the file still stated 1.7.0;
+ * such a file is the only known mislabel and is read as what it is — a 1.8.0
+ * building, byte for byte — with its own note saying so. A file stating 1.6.0 or
+ * older that carries the role is refused as any mislabelled newer file is.
+ *
  * A file that states an older version but already carries a newer version's
  * collections (or fields) is refused: it would be a mislabelled newer file.
  */
@@ -87,6 +95,18 @@ export const MIGRATION_NOTE_1_5_0 =
 
 export const MIGRATION_NOTE_1_6_0 = 'migrated from schema 1.6.0 to 1.7.0: the file carried no room holes; every room keeps its whole outline as floor'
 
+export const MIGRATION_NOTE_1_7_0 = 'migrated from schema 1.7.0 to 1.8.0: the file carried no gable-frame panels; the building is unchanged'
+
+/** v3.54.9: a 1.7.0 file the v3.54.8 house path wrote with GABLE_FRAME panels — read as 1.8.0, unchanged, and said. */
+export const MIGRATION_NOTE_1_7_0_GABLE_FRAME =
+  'restated from schema 1.7.0 to 1.8.0: the file carried GABLE_FRAME wall panels, a role schema 1.8.0 introduced (written by the v3.54.8 house path before the version was raised); nothing else differs and the building is unchanged'
+
+const gableFrameAt = (o: Record<string, unknown>): string | undefined => {
+  const panels = Array.isArray(o.wallPanels) ? (o.wallPanels as unknown[]) : []
+  const i = panels.findIndex((p) => !!p && typeof p === 'object' && (p as Record<string, unknown>).role === 'GABLE_FRAME')
+  return i >= 0 ? `wallPanels.${i}.role GABLE_FRAME` : undefined
+}
+
 /** The collections schema 1.6.0 added, in the order the migration adds them. */
 export const COLLECTIONS_ADDED_IN_1_6_0 = ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] as const
 
@@ -99,6 +119,8 @@ type Step = {
   message: string
   /** Fields the older version cannot carry: the path of the first one present, if any. */
   newField?: (o: Record<string, unknown>) => string | undefined
+  /** A known mislabel this step reads as the newer version: the note and message said instead, when it applies. */
+  restates?: (o: Record<string, unknown>) => { note: string; message: string } | undefined
 }
 
 const STEPS: Step[] = [
@@ -153,7 +175,19 @@ const STEPS: Step[] = [
     newField: (o) => {
       const rooms = Array.isArray(o.rooms) ? (o.rooms as unknown[]) : []
       const i = rooms.findIndex((r) => !!r && typeof r === 'object' && 'holes' in (r as Record<string, unknown>))
-      return i >= 0 ? `rooms.${i}.holes` : undefined
+      // a 1.6.0 file cannot carry the 1.8.0 role either (only 1.7.0 was ever written with it)
+      return i >= 0 ? `rooms.${i}.holes` : gableFrameAt(o)
+    },
+  },
+  {
+    from: '1.7.0',
+    to: '1.8.0',
+    newCollections: [],
+    note: MIGRATION_NOTE_1_7_0,
+    message: 'model migrated from schema 1.7.0 to 1.8.0: no wall panel is a gable frame; the building is unchanged',
+    restates: (o) => {
+      const at = gableFrameAt(o)
+      return at ? { note: MIGRATION_NOTE_1_7_0_GABLE_FRAME, message: `model restated from schema 1.7.0 to 1.8.0: ${at} is a 1.8.0 role the v3.54.8 house path wrote under 1.7.0; the building is unchanged` } : undefined
     },
   },
 ]
@@ -217,11 +251,12 @@ export function migrateModelInput(raw: unknown): MigrationResult {
     if (step.from !== v) continue
     const meta = (current.meta && typeof current.meta === 'object' ? (current.meta as Record<string, unknown>) : {}) as { createdWith?: unknown; notes?: unknown }
     const notes = Array.isArray(meta.notes) ? [...(meta.notes as unknown[])] : []
-    notes.push(step.note)
+    const said = step.restates?.(current) ?? { note: step.note, message: step.message }
+    notes.push(said.note)
     const added: Record<string, unknown> = {}
     for (const c of step.newCollections) added[c] = []
     current = { ...current, ...added, schemaVersion: step.to, meta: { ...meta, notes } }
-    issues.push({ code: 'SCHEMA_MIGRATED', severity: 'WARNING', message: step.message, path: 'schemaVersion' })
+    issues.push({ code: 'SCHEMA_MIGRATED', severity: 'WARNING', message: said.message, path: 'schemaVersion' })
     v = step.to
   }
   return { input: current, migrated: true, fromVersion: version, issues }

@@ -122,12 +122,14 @@ describe('the reseal log', () => {
     '1.5.0': { previous: '1.4.0', collections: ['terraces'] },
     '1.6.0': { previous: '1.5.0', collections: ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] },
     '1.7.0': { previous: '1.6.0', collections: [] },
+    // v3.54.9: the GABLE_FRAME wall-panel role, no collection
+    '1.8.0': { previous: '1.7.0', collections: [] },
   }
 
   const ARTIFACT = 'stage-reports/artifacts/analyzer-v2/marcowki-auto-v2.json'
 
-  it('records the restatements: two under 1.5.0, three under 1.6.0 and 1.7.0, and the analyzer-v2 copy of auto v3 under each', () => {
-    expect(log.map((e) => `${e.id}@${e.toSchema}`)).toEqual(['marcowki-auto@1.5.0', 'marcowki-auto-v2@1.5.0', 'marcowki-auto@1.6.0', 'marcowki-auto-v2@1.6.0', 'marcowki-auto-v3@1.6.0', `${ARTIFACT}@1.6.0`, 'marcowki-auto@1.7.0', 'marcowki-auto-v2@1.7.0', 'marcowki-auto-v3@1.7.0', `${ARTIFACT}@1.7.0`])
+  it('records the restatements: two under 1.5.0, three under 1.6.0, 1.7.0 and 1.8.0, and the analyzer-v2 copy of auto v3 under each', () => {
+    expect(log.map((e) => `${e.id}@${e.toSchema}`)).toEqual(['marcowki-auto@1.5.0', 'marcowki-auto-v2@1.5.0', 'marcowki-auto@1.6.0', 'marcowki-auto-v2@1.6.0', 'marcowki-auto-v3@1.6.0', `${ARTIFACT}@1.6.0`, 'marcowki-auto@1.7.0', 'marcowki-auto-v2@1.7.0', 'marcowki-auto-v3@1.7.0', `${ARTIFACT}@1.7.0`, 'marcowki-auto@1.8.0', 'marcowki-auto-v2@1.8.0', 'marcowki-auto-v3@1.8.0', `${ARTIFACT}@1.8.0`])
   })
 
   it('the analyzer-v2 artifact was restated exactly as the sealed auto v3 it is a copy of, and still is that copy', () => {

@@ -19,7 +19,7 @@ import type { PlanSheetInput } from '../src/index.js'
 import { bandQuad, wallAxes } from '../src/assessment/plan-geometry.js'
 
 const root = join(__dirname, '..', '..', '..')
-const demo = (): CanonicalBuildingModel => parseModel(readFileSync(join(root, 'packages/model/test/fixtures/demo-house-1.7.0.json'), 'utf8'))
+const demo = (): CanonicalBuildingModel => parseModel(readFileSync(join(root, 'packages/model/test/fixtures/demo-house-1.8.0.json'), 'utf8'))
 
 // --- a synthetic plan sheet --------------------------------------------------
 

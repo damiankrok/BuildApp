@@ -116,10 +116,29 @@ export const REVIEW_TOOL = {
 export type ReviewCorrection = { op: string; why: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null; bandPx?: number | null; legPx?: number | null; posts?: boolean | null; legLeftBottomY?: number | null; legRightBottomY?: number | null; railing?: string | null; railingTopY?: number | null }
 export type ReviewDefect = { id: string; side: string; picture?: number; box?: { x0: number; y0: number; x1: number; y1: number }; feature: string; meaning: string; weight: 'KEY' | 'MAJOR' | 'MINOR'; evidence: string; fix: 'CORRECTION' | 'NEEDS_CLOSE_UP' | 'UNRESOLVED'; corrections?: number[] }
 export type ReviewAnswer = { revision: string; verdict: 'MATCHES' | 'DIFFERS'; differences: Array<{ scope: string; what: string }>; corrections: ReviewCorrection[]; defects?: ReviewDefect[]; closeUps?: Array<{ picture: number; box: { x0: number; y0: number; x1: number; y1: number } }> }
-export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string; /** v3.54.8: what the correction set, against the built model: each target property, its error before and after, and whether it moved toward the source. */ properties?: PropertyCheck[]; improved?: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE'; inputModelHash?: string; outputModelHash?: string }
+export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string; /** v3.54.8: what the correction set, against the built model: each target property, its error before and after, and whether it moved toward the source. */ properties?: PropertyCheck[]; improved?: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE'; /** v3.54.9: every measured property within tolerance of its target, or not; and the final independent measure. */ tolerance?: 'WITHIN_TOLERANCE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE'; verified?: 'VERIFIED_IN_SCOPE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE'; inputModelHash?: string; outputModelHash?: string }
 
 type Obs = { observations: { elevations: Array<Record<string, unknown> & { id: string; picture: string; bodies: Array<Record<string, unknown>>; openings: Array<Record<string, unknown>>; features: Array<Record<string, unknown>> }>; roofs: Array<Record<string, unknown>>; outlines: Array<Record<string, unknown>> } }
 /** The revision of the observations: what was read, not the bookkeeping of which request read it. */
+/**
+ * v3.54.9 — the revision of a document as a describer before v3.54.8 would have written it: the railing a feature's
+ * own note names (`railingFrom: 'NOTE'`, derived by `describe` from text the reading already held) taken out. A recorded
+ * answer whose revision equals this one was given about the same reading; only the derivation since differs.
+ */
+export const legacyRevisionOf = (doc: unknown): string =>
+  createHash('sha256')
+    .update(
+      JSON.stringify((doc as Obs).observations, function (k, v) {
+        if (k === 'readIn') return undefined
+        if (v && typeof v === 'object' && !Array.isArray(v) && (v as Record<string, unknown>).railingFrom === 'NOTE') {
+          const { railing: _r, railingFrom: _f, railingNote: _n, ...rest } = v as Record<string, unknown>
+          return rest
+        }
+        return v
+      }),
+    )
+    .digest('hex')
+    .slice(0, 12)
 const revisionOf = (doc: unknown): string => createHash('sha256').update(JSON.stringify((doc as Obs).observations, (k, v) => (k === 'readIn' ? undefined : v))).digest('hex').slice(0, 12)
 const OPENING_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR']
 const FEATURE_KINDS = ['WALL_DORMER_GABLE', 'ROOF_DORMER_GABLE', 'ROOF_DORMER_SHED', 'BALCONY', 'LOGGIA', 'GABLE_FRAME', 'PORTAL_BAND', 'CANOPY']
@@ -257,7 +276,8 @@ export function applyCorrection(doc: unknown, c0: ReviewCorrection, sent: SentPi
 
 const partNotRead = (path: string, code: string): boolean => (code === 'SOURCE_UNKNOWN' || code === 'WRONG_READ') && /^geometry\.frames\[[^\]]+\]\.leg(Left|Right)BottomY$/.test(path)
 const score = (h: CompiledHouse): { failing: Set<string>; trouble: number; built: number } => ({
-  failing: new Set(h.document.verification.checks.filter((c) => c.status === 'FAIL').map((c) => c.id)),
+  // v3.54.9: the interior's placement is not the exterior's correctness — a correction is not judged by it
+  failing: new Set(h.document.verification.checks.filter((c) => c.status === 'FAIL' && c.scope !== 'INTERIOR').map((c) => c.id)),
   // (v3.54.8: a part of a built element the source does not show — a frame leg with nothing read under it — is an
   // explicit absence, held with its reason, not a conflict: it does not count against the correction that built the element)
   trouble: (h.built?.kernelRefusals.length ?? 0) + (h.built?.refusals.filter((r) => !partNotRead(r.path, r.code)).length ?? 0) + h.compileErrors.length + h.document.verification.held.filter((x) => !partNotRead(x.ref, x.code)).length,
@@ -352,7 +372,14 @@ export function judgeDefect(d: Pick<ReviewDefect, 'feature' | 'meaning'>, before
  * after is the closer. A changed hash or a new object is not an improvement; neither is a value applied to the document
  * that the scene does not show.
  */
-export type PropertyCheck = { property: string; target: number | string; before: number | string | null; after: number | string | null; state: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE' }
+/**
+ * v3.54.9 (D46) — four different facts: APPLIED (the operation was carried out: a proposal's state), IMPROVED (the
+ * property's error is smaller than before — never claimed against nothing: a property that did not exist before is
+ * IMPROVED only if it now stands within tolerance), WITHIN_TOLERANCE (it stands within PROPERTY_TOLERANCE_M of the
+ * target), and VERIFIED_IN_SCOPE (an independent final measure of the delivered scene, after every round, still finds it
+ * within tolerance — of the corrected TARGET, which may itself be wrong: agreement with the source is measured apart).
+ */
+export type PropertyCheck = { property: string; target: number | string; before: number | string | null; after: number | string | null; state: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE'; tolerance?: 'WITHIN_TOLERANCE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE' }
 export const PROPERTY_TOLERANCE_M = 0.1
 export function checkProperties(c: ReviewCorrection, frame: { mPerPx: number; alongAtPx0: number; zeroRowPx: number } | undefined, side: string, before: SceneMeasure | undefined, after: SceneMeasure | undefined): PropertyCheck[] {
   if (!frame || !before || !after) return []
@@ -363,10 +390,12 @@ export function checkProperties(c: ReviewCorrection, frame: { mPerPx: number; al
   const sa = after.sides.find((x) => x.side === side)
   const out: PropertyCheck[] = []
   const num = (property: string, target: number, b: number | null | undefined, a: number | null | undefined): void => {
-    if (a === null || a === undefined) return void out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: null, state: 'NOT_MEASURABLE' })
-    const eb = b === null || b === undefined ? Infinity : Math.abs(b - target)
+    if (a === null || a === undefined) return void out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: null, state: 'NOT_MEASURABLE', tolerance: 'NOT_MEASURABLE' })
     const ea = Math.abs(a - target)
-    out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: a, state: ea <= PROPERTY_TOLERANCE_M || ea < eb - 0.03 ? 'IMPROVED' : 'NOT_IMPROVED' })
+    const within = ea <= PROPERTY_TOLERANCE_M
+    // against nothing measured before, only a property that now stands within tolerance is an improvement
+    const improved = b === null || b === undefined ? within : ea < Math.abs(b - target) - 0.03
+    out.push({ property, target: Math.round(target * 1000) / 1000, before: b ?? null, after: a, state: improved ? 'IMPROVED' : 'NOT_IMPROVED', tolerance: within ? 'WITHIN_TOLERANCE' : 'OUTSIDE_TOLERANCE' })
   }
   if (c.op === 'SET_FEATURE' && c.kind === 'GABLE_FRAME') {
     if (typeof c.bandPx === 'number') num('frame band (vertical)', c.bandPx * m, sb?.frame?.bandVQ1, sa?.frame?.bandVQ1)
@@ -411,9 +440,9 @@ export function neighboursKept(before: SceneMeasure | undefined, after: SceneMea
 
 /** v3.54.7 — one side as sent for comparison: the elevation and the model drawn in its frame, by hash. */
 export type ReviewPair = { round: number; side: string; elevation?: string; picture?: number; sourceSha256?: string; renderSha256: string; modelHash: string; registered: boolean; frame?: { mPerPx: number; alongAtPx0: number; zeroRowPx: number; width: number; height: number }; why?: string }
-export type DefectRecord = ReviewDefect & { round: number; elevation?: string; region: Region | null; revisionBefore: string; modelBefore: string; before: RegionMeasure | null; after?: RegionMeasure | null; modelAfter?: string; addressedBy: string[]; state: 'OPEN' | 'IMPROVED' | 'NOT_IMPROVED' | 'UNRESOLVED' | 'NOT_MEASURABLE' | 'SUPPLEMENT_ASKED' | 'MEASURED_PRESENT'; note?: string }
+export type DefectRecord = ReviewDefect & { round: number; elevation?: string; region: Region | null; revisionBefore: string; modelBefore: string; before: RegionMeasure | null; after?: RegionMeasure | null; modelAfter?: string; addressedBy: string[]; state: 'OPEN' | 'IMPROVED' | 'NOT_IMPROVED' | 'UNRESOLVED' | 'NOT_MEASURABLE' | 'SUPPLEMENT_ASKED' | 'MEASURED_PRESENT'; note?: string; /** v3.54.9: the final independent measure of the properties set for it, on the delivered scene after every round. A defect OUTSIDE_TOLERANCE stays open whatever the verdict. */ final?: 'VERIFIED_IN_SCOPE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE' }
 /** v3.54.8 — one round as it ran: the model it showed, the revision it was asked about, what came back and what it made. */
-export type ReviewRound = { round: number; inputModelHash: string; baseRevision: string; renderSha256: string[]; sourceSha256: string[]; verdict: string; answerRevision: string; stale: boolean; staleWhy?: string; applied: number; outputRevision: string; outputModelHash: string }
+export type ReviewRound = { round: number; inputModelHash: string; baseRevision: string; renderSha256: string[]; sourceSha256: string[]; verdict: string; answerRevision: string; stale: boolean; staleWhy?: string; /** v3.54.9: a recorded answer bound to this revision (`legacyRevisionOf`): the revision it named. */ reboundFrom?: string; applied: number; outputRevision: string; outputModelHash: string; /** v3.54.9: a MATCHES verdict given while defects of earlier rounds are still open or measured no better — the verdict does not close them. */ openAtVerdict?: string[] }
 export type Supplement = { round: number; elevation: string; side: string; asked: string[]; answer: 'APPLIED' | 'REJECTED' | 'NOT_SENT' | 'NOTHING_NEW'; code?: string; effect: string }
 
 /** v3.54.7 — a targeted re-reading of ONE elevation for the characteristic features a review found missing. */
@@ -447,6 +476,8 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
   const pairs: ReviewPair[] = []
   const supplements: Supplement[] = []
   const roundLog: ReviewRound[] = []
+  // v3.54.9: what each applied correction set, to be measured once more on the delivered scene after every round
+  const finalChecks: Array<{ c: ReviewCorrection; picture?: number; defects: DefectRecord[]; proposal: number }> = []
   let rounds = 0
   let closeUps: Array<{ picture: number; box: { x0: number; y0: number; x1: number; y1: number } }> = []
   const elevations = input.selection.elevations.map((p) => sentPicture(p, 'detail'))
@@ -557,11 +588,20 @@ Compare each elevation with the model's same side, in this order: which side is 
     verdicts.push(answer.verdict)
     if (!Array.isArray(answer.corrections)) answer.corrections = []
     const roundPairs = pairs.filter((p) => p.round === round)
-    const logRound = (stale: boolean, staleWhy?: string): void => void roundLog.push({ round, inputModelHash: roundInputModel, baseRevision: revision, renderSha256: roundPairs.map((p) => p.renderSha256), sourceSha256: roundPairs.map((p) => String(p.sourceSha256 ?? '')), verdict: answer.verdict, answerRevision: String(answer.revision), stale, ...(staleWhy ? { staleWhy } : {}), applied: 0, outputRevision: revision, outputModelHash: String(compiled.modelHash) })
+    const logRound = (stale: boolean, staleWhy?: string): void => void roundLog.push({ round, inputModelHash: roundInputModel, baseRevision: revision, renderSha256: roundPairs.map((p) => p.renderSha256), sourceSha256: roundPairs.map((p) => String(p.sourceSha256 ?? '')), verdict: answer.verdict, answerRevision: namedRevision, stale, ...(staleWhy ? { staleWhy } : {}), ...(rebound ? { reboundFrom: namedRevision, answerRevision: revision } : {}), applied: 0, outputRevision: revision, outputModelHash: String(compiled.modelHash), ...(answer.verdict === 'MATCHES' && defects.some((d) => d.state !== 'IMPROVED' && d.state !== 'MEASURED_PRESENT') ? { openAtVerdict: defects.filter((d) => d.state !== 'IMPROVED' && d.state !== 'MEASURED_PRESENT').map((d) => `${d.id} ${d.feature} ${d.meaning} ${d.weight} ${d.state}`) } : {}) })
+    // v3.54.9: a recorded answer about the same reading, written before the railing a note names was derived into the
+    // observations, is bound to this revision — said in the round log; a fresh answer naming another revision never is
+    const recordedAnswer = !!input.ctx.replay?.('REVIEW', round)
+    const namedRevision = String(answer.revision)
+    const rebound = answer.revision !== revision && recordedAnswer && legacyRevisionOf(doc) === answer.revision
+    if (rebound) {
+      proposals.push({ round, op: 'REVIEW', subject: 'the whole round', why: `the recorded answer names revision ${String(answer.revision).slice(0, 12)}; the house is at ${revision}, which is that revision with only the railings its own notes name derived since (v3.54.8)`, state: 'APPLIED', code: 'REBOUND', consumer: 'reviewHouse', effect: `the recorded answer is bound to ${revision}; every correction is still accepted only on its own measure` })
+      answer.revision = revision
+    }
     if (answer.revision !== revision) {
       // v3.54.8: which one it is — a recorded answer replayed against another revision (the answer is old), or a fresh
       // answer that names a revision this round did not send (revision management)
-      const recorded = !!input.ctx.replay?.('REVIEW', round)
+      const recorded = recordedAnswer
       const why = recorded ? `a recorded answer about revision ${String(answer.revision).slice(0, 12)} replayed against ${revision}: the answer is older than this house` : `a fresh answer names revision ${String(answer.revision).slice(0, 12)}; this round sent ${revision}`
       proposals.push({ round, op: 'REVIEW', subject: 'the whole round', why: `the answer names revision ${String(answer.revision).slice(0, 20)}, the house is at ${revision}`, state: 'REJECTED', code: 'STALE_DEPENDENCY', consumer: 'reviewHouse', effect: `no correction applied — ${why}` })
       logRound(true, why)
@@ -667,7 +707,10 @@ Compare each elevation with the model's same side, in this order: which side is 
       items.forEach((c, i) => {
         const pc = checks[i] ?? []
         const imp = pc.length === 0 || pc.every((x) => x.state === 'NOT_MEASURABLE') ? 'NOT_MEASURABLE' : pc.some((x) => x.state === 'IMPROVED') ? 'IMPROVED' : 'NOT_IMPROVED'
-        proposals.push({ round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}), ...(pc.length ? { properties: pc } : {}), improved: imp, inputModelHash: String(compiled.modelHash), outputModelHash: String(after.modelHash) })
+        const measured = pc.filter((x) => x.tolerance && x.tolerance !== 'NOT_MEASURABLE')
+        const tol = measured.length === 0 ? 'NOT_MEASURABLE' : measured.every((x) => x.tolerance === 'WITHIN_TOLERANCE') ? 'WITHIN_TOLERANCE' : 'OUTSIDE_TOLERANCE'
+        if (verdict.ok && pc.length) finalChecks.push({ c, picture: c.picture, defects: mine.map((d) => d), proposal: proposals.length })
+        proposals.push({ tolerance: tol, round, op: c.op, subject: subjects[i], why: c.why, state: verdict.ok ? 'APPLIED' : 'REJECTED', ...(verdict.ok ? {} : { code: verdict.code }), consumer: CONSUMER[c.op] ?? 'none', effect: verdict.ok ? verdict.effect : verdict.why, ...(group ? { group } : {}), baseRevision: base, ...(verdict.ok ? { revision: revisionOf(next) } : {}), ...(pc.length ? { properties: pc } : {}), improved: imp, inputModelHash: String(compiled.modelHash), outputModelHash: String(after.modelHash) })
       })
       if (!verdict.ok) return false
       doc = next
@@ -729,6 +772,16 @@ Compare each elevation with the model's same side, in this order: which side is 
     Object.assign(roundLog[roundLog.length - 1], { applied, outputRevision: revisionOf(doc), outputModelHash: String(compiled.modelHash) })
     if (Array.isArray(answer.closeUps) && answer.closeUps.length > 0) closeUps = answer.closeUps.slice(0, 3)
     if (answer.verdict === 'MATCHES' || (applied === 0 && closeUps.length === 0)) break
+  }
+  // v3.54.9 (D46) — the final independent measure: each applied correction's properties on the scene that is delivered,
+  // after every round (a later correction may have moved them). A verdict of MATCHES does not clear what is measured.
+  for (const f of finalChecks) {
+    const fo = typeof f.picture === 'number' ? frameOf(compiled, f.picture) : undefined
+    const pc = checkProperties(f.c, fo?.frame, String(fo?.side ?? ''), compiled.measured, compiled.measured).filter((x) => x.tolerance && x.tolerance !== 'NOT_MEASURABLE')
+    const v = pc.length === 0 ? 'NOT_MEASURABLE' : pc.every((x) => x.tolerance === 'WITHIN_TOLERANCE') ? 'VERIFIED_IN_SCOPE' : 'OUTSIDE_TOLERANCE'
+    const pr = proposals[f.proposal]
+    if (pr) pr.verified = v
+    for (const d of f.defects) d.final = d.final === 'OUTSIDE_TOLERANCE' ? 'OUTSIDE_TOLERANCE' : v === 'OUTSIDE_TOLERANCE' ? 'OUTSIDE_TOLERANCE' : d.final ?? v
   }
   return { compiled, observationsDocument: doc, proposals, rounds, verdicts, defects, pairs, supplements, roundLog }
 

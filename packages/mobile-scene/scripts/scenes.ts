@@ -29,7 +29,9 @@ export const ASSET_DIR = join(ROOT, 'apps/android/app/src/main/assets/scenes')
  * review, pinned by the SHA-256 of its canonical serialization: a file that does not reproduce exactly that
  * model is refused here, so the phone never shows a building other than the one the stage reports measured.
  * N8-03D2: both files restated from schema 1.6.0 to 1.7.0 — the version string alone; with it put back they hash to
- * the pins sealed under 1.6.0 (jarzmianki 4ced0179…, gożdzikowce a612a399…).
+ * the pins sealed under 1.6.0 (jarzmianki 4ced0179…, gożdzikowce a612a399…). v3.54.9: all four owner models restated
+ * from 1.7.0 to 1.8.0 the same way (version string alone; 1.7.0 pins: jarzmianki c65724e9…, goździkowce 5ca1594a…,
+ * marcowki-h-v3548 1e20fb73…, marcowki-local-v3548 07b91e89…).
  */
 export function sealedOwnerModel(key: string, sha256: string, dir = 'owner-005t'): CanonicalBuildingModel {
   const model = parseModel(readFileSync(join(ROOT, 'packages/candidates/src', dir, `${key}.model.json`), 'utf8'))
@@ -52,13 +54,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-h-v3548',
     title: 'Marcówki — opis H v3.54.8',
     subtitle: 'KANDYDAT z odczytu API po recenzji (nie oddany): rama z nogami, szkło, pas portalu; głowice za nisko',
-    build: () => sealedOwnerModel('marcowki-h-v3548', '1e20fb737ed65b283cdf213e7f18d8fc75762c669675c1198a3b34686a197403', 'owner-v3548'),
+    build: () => sealedOwnerModel('marcowki-h-v3548', '11285686983d92e921fecfa5eb2846a46c1aca40223aff23bf8b8e3a87d51899', 'owner-v3548'),
   },
   {
     key: 'marcowki-local-v3548',
     title: 'Marcówki — LOCAL v3.54.8',
     subtitle: 'Model oddany przez host 05faa4e (LOCAL) — do porównania z opisem H',
-    build: () => sealedOwnerModel('marcowki-local-v3548', '07b91e89cc034837e3e79c7cf0489066b06439506242ab60d8f17271ac3b80b5', 'owner-v3548'),
+    build: () => sealedOwnerModel('marcowki-local-v3548', '36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86', 'owner-v3548'),
   },
   // BUILDPLAN-OWNER-005T: two development rows the analyzer now builds, listed first so the owner finds them at
   // once. Approximate models for a visual review — each carries LIMITING warnings in its stage report.
@@ -66,13 +68,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'jarzmianki-005t-visual',
     title: 'Dom w jarzmiankach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji (6 ostrzeżeń ograniczających)',
-    build: () => sealedOwnerModel('jarzmianki-005t-visual', 'c65724e9f358a56c417352bff95267ce81ab8da1597e91c4ff36315b4f91e4ee'),
+    build: () => sealedOwnerModel('jarzmianki-005t-visual', '240403af9c80e6fa68245497c978cc92f3b5a4ef60d217e5b2fc8ebafaec7dd4'),
   },
   {
     key: 'gozdzikowce-005t-visual',
     title: 'Dom w goździkowcach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji; dach z przybliżonej kalenicy',
-    build: () => sealedOwnerModel('gozdzikowce-005t-visual', '5ca1594a330cca0ec0e63dbd6797d6cad637e03425fa07486bfa7bb71ba815a4'),
+    build: () => sealedOwnerModel('gozdzikowce-005t-visual', '944ea8250d97e2ed1f6963915c56203057f93079a5ff8f2e4009b9b63520ae6b'),
   },
   {
     key: 'marcowki',

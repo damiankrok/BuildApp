@@ -46,6 +46,8 @@ const ADDED_BY: Record<string, { previous: string; collections: Array<keyof Cano
   '1.6.0': { previous: '1.5.0', collections: ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] },
   // N8-03D2: an optional field (Room.holes), no collection: a restatement only changes the version string
   '1.7.0': { previous: '1.6.0', collections: [] },
+  // v3.54.9: a wall-panel role (GABLE_FRAME), no collection: a restatement only changes the version string
+  '1.8.0': { previous: '1.7.0', collections: [] },
 }
 
 type LogEntry = { id: string; file: string; fromSchema: string; toSchema: string; from: { id: string; contentHash: string; modelHash: string }; to: { id: string; contentHash: string; modelHash: string }; why: string }

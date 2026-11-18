@@ -16,10 +16,11 @@ import type { Basis, HouseCheck, HouseDocument, HouseGeometry, HouseObservations
 import { num, unknown } from './document.js'
 import { area, bbox, canonical, contains, edgeOf, isSimple, onBoundary, pt, squareUp, unionTiling } from './poly.js'
 import type { P2 } from './poly.js'
+import { resolveInterior } from './interior.js'
 import { outlineSteps, straightenJogs } from './steps.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.5.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.6.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
@@ -319,6 +320,49 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     if (err > Math.max(0.1, 0.01 * (d.valueM as number)) && ext < (d.valueM as number) && pxLen > pxOutline * 1.03 && Math.abs(lineM - (d.valueM as number)) <= 0.04 * (d.valueM as number)) {
       check(`extent-${d.id}`, 'METRIC', `the outline's ${modelX ? 'width' : 'depth'} against the printed ${d.literal}`, `${d.valueM} m (what it includes: ${d.includes ?? 'not said'})`, `${ext.toFixed(2)} m of walls; the dimension line is ${lineM.toFixed(2)} m long at the plan's scale and runs ${(lineM - ext).toFixed(2)} m past the walled outline: it measures more than the walls`, 'PASS')
       continue
+    }
+    // v3.54.9 — like with like by the dimension's own ends: where both ends stand on walls of the outline across its
+    // axis, the dimension measures the span between those walls; parts of the outline beyond its ends (returns,
+    // a porch) are not in it — the chain beyond them is its own dimension. Compared there, not on the bounding box.
+    if (err > Math.max(0.1, 0.01 * (d.valueM as number))) {
+      const a = toModel(d.from)
+      const b = toModel(d.to)
+      const ca = modelX ? a.x : a.z
+      const cb = modelX ? b.x : b.z
+      const tol = Math.max(0.15, 3 * Math.max(mppH, mppV))
+      const poly = ground.polygon
+      const across = (c: number): number | undefined => {
+        let best: number | undefined
+        for (let i = 0; i < poly.length; i += 1) {
+          const p = poly[i]
+          const q = poly[(i + 1) % poly.length]
+          const cross = modelX ? Math.abs(p.x - q.x) < 1e-6 : Math.abs(p.z - q.z) < 1e-6
+          const at = modelX ? p.x : p.z
+          if (cross && Math.abs(at - c) <= tol && (best === undefined || Math.abs(at - c) < Math.abs(best - c))) best = at
+        }
+        return best
+      }
+      const ea = across(ca)
+      const eb = across(cb)
+      // …but only a dimension of the main walls: a body lying mostly beyond its ends (a garage, a wing) is not a return,
+      // and an OVERALL dimension that leaves a body out is a body's dimension taken for the whole house
+      const lo = ea !== undefined && eb !== undefined ? Math.min(ea, eb) - tol : 0
+      const hi = ea !== undefined && eb !== undefined ? Math.max(ea, eb) + tol : 0
+      const bodyLeftOut = bodyPolys.some((poly, i) => {
+        if (raw[i].role === 'BAY' || !raw[i].storeys.includes(0)) return false
+        const bb = bbox(poly)
+        const [u0, u1] = modelX ? [bb.x0, bb.x1] : [bb.z0, bb.z1]
+        const inside = Math.max(0, Math.min(u1, hi) - Math.max(u0, lo))
+        return u1 - u0 > 0 && inside / (u1 - u0) < 0.5
+      })
+      if (ea !== undefined && eb !== undefined && !bodyLeftOut) {
+        const span = Math.abs(eb - ea)
+        const e2 = Math.abs(span - (d.valueM as number))
+        if (e2 <= Math.max(0.1, 0.01 * (d.valueM as number))) {
+          check(`extent-${d.id}`, 'METRIC', `the outline's ${modelX ? 'width' : 'depth'} against the printed ${d.literal}`, `${d.valueM} m between the walls its two ends stand on`, `${span.toFixed(2)} m between the outline's walls at ${r3(Math.min(ea, eb))} and ${r3(Math.max(ea, eb))} m; the outline runs ${(ext - span).toFixed(2)} m past its ends (parts the dimension does not take in)`, 'PASS')
+          continue
+        }
+      }
     }
     check(`extent-${d.id}`, 'METRIC', `the outline's ${modelX ? 'width' : 'depth'} against the printed ${d.literal}`, `${d.valueM} m (what it includes: ${d.includes ?? 'the walled outline'})`, `${ext.toFixed(2)} m`, err <= Math.max(0.1, 0.01 * (d.valueM as number)) ? 'PASS' : 'FAIL', err <= Math.max(0.1, 0.01 * (d.valueM as number)) ? [] : ['quantities'])
   }
@@ -1035,7 +1079,15 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         continue
       }
       const a = [r.alongOf(x.box.x0), r.alongOf(x.box.x1)].sort((p, q) => p - q)
-      const sillY = r.yOf(x.box.y1)
+      // v3.54.9 — an opening whose bottom edge is a railing's top on the same elevation (over most of its width) shows no
+      // sill: the railing hides it. A glazing standing on that balcony's floor is taken down to the floor — an assumption,
+      // said — instead of a sill at the railing's top (which put a raked head's low end at a false "triangle" corner).
+      const hiddenBy = x.kind !== 'DOOR' && x.kind !== 'GARAGE_DOOR'
+        ? obs.features.find((f) => (f.kind === 'BALCONY' || f.kind === 'LOGGIA') && typeof f.railingTopY === 'number' && Math.min(f.box.x1, x.box.x1) - Math.max(f.box.x0, x.box.x0) >= 0.8 * (x.box.x1 - x.box.x0) && Math.abs(Math.max(x.box.y0, x.box.y1) - (f.railingTopY as number)) <= Math.max(4, 0.06 / Math.abs(r.s)))
+        : undefined
+      const railFloor = hiddenBy ? levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(hiddenBy.railingTopY as number) - 0.3).sort((p, q) => q.index - p.index)[0] : undefined
+      const sillY = hiddenBy && railFloor && railFloor.elevation.value !== null ? railFloor.elevation.value : r.yOf(x.box.y1)
+      if (hiddenBy && railFloor) knownDefects.push({ code: 'OPENING_SILL_HIDDEN_BY_RAILING', what: `${ref}: its bottom edge (row ${Math.max(x.box.y0, x.box.y1).toFixed(0)}) is the top of the railing ${hiddenBy.id} (row ${(hiddenBy.railingTopY as number).toFixed(0)}): its sill is not seen; taken at the floor +${(railFloor.elevation.value ?? 0).toFixed(2)} m behind the railing — an assumption` })
       const headY = r.yOf(x.box.y0)
       const level = x.level !== undefined ? levels.find((l) => l.index === x.level) : levels.filter((l) => (l.elevation.value ?? 0) <= sillY + 0.35).sort((p, q) => q.index - p.index)[0]
       // the wall that holds it: the top storey's wall holds what stands in a dormer above the eaves
@@ -1083,7 +1135,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
           head = { kind: 'RAKED', heightFarM: num(r3(nearIsLeft ? yr : yl), 'DERIVED', `its top edge at its far side on elevation ${obs.id}`, [ref], u) }
         }
       }
-      openings.push({ id: `opening-${side.toLowerCase()}-${openings.filter((q) => q.id.startsWith(`opening-${side.toLowerCase()}`)).length + 1}`, kind: x.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', level: level.index, hostWall: at.h.id, offsetM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], u), widthM: num(r3(width), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], u), heightM: num(r3(heightNear), 'DERIVED', head ? `its head at its near side and its sill row on elevation ${obs.id}` : `its head and sill rows on elevation ${obs.id}`, [ref], u), sillM: num(door && sill < 0.25 ? 0 : r3(sill), 'DERIVED', door && sill < 0.25 ? 'a door: its threshold at the floor' : `its sill row on elevation ${obs.id} above the floor of its storey`, [ref], u), ...(panes > 1 ? { panes } : {}), ...(head ? { head } : {}), refs: [ref, ...also] })
+      openings.push({ id: `opening-${side.toLowerCase()}-${openings.filter((q) => q.id.startsWith(`opening-${side.toLowerCase()}`)).length + 1}`, kind: x.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', level: level.index, hostWall: at.h.id, offsetM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], u), widthM: num(r3(width), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], u), heightM: num(r3(heightNear), 'DERIVED', head ? `its head at its near side and its sill row on elevation ${obs.id}` : `its head and sill rows on elevation ${obs.id}`, [ref], u), sillM: hiddenBy && railFloor ? num(r3(sill), 'ESTIMATED', `its bottom edge is the top of ${obs.id}/${hiddenBy.id}'s railing: the sill is hidden; it is taken at the balcony's floor — an assumption`, [ref], u) : num(door && sill < 0.25 ? 0 : r3(sill), 'DERIVED', door && sill < 0.25 ? 'a door: its threshold at the floor' : `its sill row on elevation ${obs.id} above the floor of its storey`, [ref], u), ...(panes > 1 ? { panes } : {}), ...(head ? { head } : {}), refs: [ref, ...also] })
     }
   }
 
@@ -1174,7 +1226,14 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     rooflights,
     frames,
     portals,
-    interior: { status: 'NOT_BUILT', note: 'this document describes the exterior; the interior is not built from it and is not checked' },
+    interior: { status: 'NOT_BUILT', note: 'no interior source: the reading describes the exterior and no other source of these pages gave an interior', levels: [] },
+  }
+  // v3.54.9 — an interior from another source of the same pages, placed only through a checked transform
+  if (doc.interiorSource) {
+    const ir = resolveInterior(doc.interiorSource, geometry)
+    geometry.interior = ir.interior
+    for (const c of ir.checks) checks.push({ ...c, scope: 'INTERIOR', blocks: [] })
+    knownDefects.push(...ir.knownDefects)
   }
   const coverage: HouseVerification['coverage'] = {
     metric: sH && sV ? 'CHECKED' : sH || sV ? 'PARTLY_CHECKED' : 'NOT_CHECKED',

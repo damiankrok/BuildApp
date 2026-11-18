@@ -37,10 +37,11 @@ import type { AcceptedReuse, AcceptedRevision, AcceptedRevisionStore } from './a
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
 import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
+import { interiorSourceOf } from './interior-source.js'
 import type { DefectRecord, ReviewPair, ReviewRound, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.4.0'
+export const HOUSE_PATH_VERSION = '0.5.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
   review?: boolean
   /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */
@@ -131,7 +132,7 @@ export function houseResult(input: { pkg: SourcePackage; identity: AnalysisIdent
   const passed = v.checks.filter((c) => c.status === 'PASS').length
   const failedChecks = v.checks.filter((c) => c.status === 'FAIL')
   const warningDetails: AnalysisWarning[] = [
-    WARN('MODEL_FROM_WHOLE_HOUSE_DESCRIPTION', 'LIMITING', `This exterior was built from a description of the page's drawings read as a whole (${input.records.length} reading step(s), by ${input.readerModel}); the program checked it against the printed dimensions, levels and elevations (${passed} checks passed, ${failedChecks.length} failed) and built only what it could place. The interior is not built.`),
+    WARN('MODEL_FROM_WHOLE_HOUSE_DESCRIPTION', 'LIMITING', `This exterior was built from a description of the page's drawings read as a whole (${input.records.length} reading step(s), by ${input.readerModel}); the program checked it against the printed dimensions, levels and elevations (${passed} checks passed, ${failedChecks.length} failed) and built only what it could place. ${(() => { const gi = doc.geometry?.interior; return gi && (gi.status === 'BUILT' || gi.status === 'PARTIAL') ? `The interior comes from LOCAL's reading of the plans, placed through a checked transform (${gi.status}).` : 'The interior is not built.' })()}`),
     WARN('HOUSE_DECISION', input.decision.partial ? 'LIMITING' : 'INFO', `Which model stands (${input.decision.code}${input.decision.partial ? ', a PARTIAL preview' : ''}): ${input.decision.why}`.slice(0, 600)),
     ...(v.status ? [WARN('HOUSE_STATUS', v.status.exterior === 'COMPLETE_IN_SCOPE' ? 'INFO' : 'LIMITING', `Sources: ${v.status.sources}. Built geometry: ${v.status.geometry}. Exterior: ${v.status.exterior}.${v.status.missing.length ? ` Not accounted for: ${v.status.missing.slice(0, 6).join(' | ')}` : ''}`.slice(0, 700))] : []),
     WARN('HOUSE_INTERIOR', 'INFO', input.decision.interior.slice(0, 400)),
@@ -215,7 +216,7 @@ export function houseResult(input: { pkg: SourcePackage; identity: AnalysisIdent
     preview: {
       outcome: built.kernelRefusals.length > 0 || compileErrors.length > 0 ? 'PARTIAL_3D_PREVIEW' : 'COMPLETE',
       built: { wallRings: model.wallRings.length, walls: model.walls.length, slabs: model.slabs.length, roofs: model.roofs.length, roofPlanes: model.roofPlanes.length, openings: model.openings.length, rooms: 0 },
-      provisional: [{ code: 'EXTERIOR_ONLY', what: 'the interior is not built: walls, roofs and openings of the exterior only' }, ...v.knownDefects.slice(0, 6).map((d) => ({ code: d.code, what: d.what.slice(0, 200) }))],
+      provisional: [...((): Array<{ code: string; what: string }> => { const gi = doc.geometry?.interior; return gi && (gi.status === 'BUILT' || gi.status === 'PARTIAL') ? [{ code: 'INTERIOR_FROM_LOCAL', what: `the interior is LOCAL's, placed through a checked transform (${gi.status}): ${String(gi.note ?? '').slice(0, 160)}` }] : [{ code: 'EXTERIOR_ONLY', what: 'the interior is not built: walls, roofs and openings of the exterior only' }] })(), ...v.knownDefects.slice(0, 6).map((d) => ({ code: d.code, what: d.what.slice(0, 200) }))],
       partial: null,
     } as unknown as LinkAnalysisResult['preview'],
     sourceBasis: null,
@@ -283,7 +284,9 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
     if (!inventory.selection) return none(inventory.why ?? 'no ground-floor plan among the pictures', 'NOT_READ')
     const selection = inventory.selection
     const plan = await readPlan(ctx, selection, published)
-    const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10), skipped: notSent }
+    // v3.54.9: LOCAL's interior goes into the document as a source; the resolver places it only through a checked transform
+    const interiorSource = localRun ? interiorSourceOf(localRun.result.model, serializeModel(localRun.result.model)) : undefined
+    const base = { id: `h-${identity.slug}`.slice(0, 80), project: pkg.project.name, sourcePackageHash: pkg.contentHash, model: ctx.modelFor('PLAN').model, selection, planSent: plan.sent, published, at: startedAt.slice(0, 10), skipped: notSent, ...(interiorSource ? { interiorSource } : {}) }
     if (selection.elevations.length + selection.sections.length > 0) {
       const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, identity.modelId)
       const bodiesInMetres = planOnly.document.geometry ? planFactsForFacades(planOnly.document.geometry) : ''

@@ -24,7 +24,7 @@ import { outlineSteps } from './steps.js'
 import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.4.0' as const
+export const HOUSE_BUILDER_VERSION = '0.5.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
@@ -601,7 +601,10 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     if (!l) continue
     // an upper floor lies inside the walls, which run past it from the ground to the roof
     const inside = level === 0 ? poly : offset(poly, poly.map(() => -(T - 0.02)))
-    push({ type: 'createSlab', id: `slab-${level}`, levelId: l.id, polygon: inside.length >= 3 && isSimple(inside) && signedArea(inside) > 1 ? inside : poly, topOffset: 0, thickness: r6(level === 0 ? Math.max(slabT, 0.3) : slabT), materialId: MATERIALS_V2.slab })
+    // v3.54.9: the openings in this floor the interior names (a stair well, a void): no floor is laid over them
+    const holes = level === 0 ? [] : (g.interior?.levels ?? []).filter((x) => x.level === level).flatMap((x) => x.voids).map((v) => (signedArea(v.map((q) => pt(q.x, q.z))) < 0 ? [...v].reverse() : v).map((q) => pt(r6(q.x), r6(q.z))))
+    push({ type: 'createSlab', id: `slab-${level}`, levelId: l.id, polygon: inside.length >= 3 && isSimple(inside) && signedArea(inside) > 1 ? inside : poly, ...(holes.length ? { holes } : {}), topOffset: 0, thickness: r6(level === 0 ? Math.max(slabT, 0.3) : slabT), materialId: MATERIALS_V2.slab })
+    if (holes.length) used('geometry.interior.voids', 'houseProgram/createSlab(holes)', [`slab-${level}`])
     used(`geometry.outlines[${level}]`, 'houseProgram/createSlab', [`slab-${level}`])
   }
   // Where a lower body's wall stops against a taller body's wall, that wall must be whole there: it owns its corner.
@@ -662,6 +665,46 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     }
     wallIdsOf.set(b.id, [...mine, ...piers.filter((w) => !framedPiers.has(w.id))].map((w) => w.id))
     used(`geometry.bodies[${b.id}].storeys`, 'houseProgram/walls', mine.map((w) => w.id))
+  }
+  // --- v3.54.9: the interior, as the resolver placed it (partitions per level, their doors, rooms, stairs) -----------
+  const interior = g.interior
+  if (interior && (interior.status === 'BUILT' || interior.status === 'PARTIAL')) {
+    push({ type: 'defineMaterial', id: MATERIALS_V2.partition, name: 'Partition', color: '#d9d5cc' })
+    for (const lv of interior.levels) {
+      const l = levelAt.get(lv.level)
+      if (!l) continue
+      const above = [...levelAt.entries()].filter(([k]) => k > lv.level).sort((p, q) => p[0] - q[0])[0]?.[1]
+      for (const w of lv.walls) {
+        const mid = pt((w.a.x + w.b.x) / 2, (w.a.z + w.b.z) / 2)
+        // under the floor above where there is one over it; on a top storey, up to its body's roof planes
+        const body = bodies.find((b) => b.storeys.includes(lv.level) && contains(b.poly, mid))
+        const topHere = !body || Math.max(...body.storeys) === lv.level
+        const own = body ? planesOf.get(body.id) ?? [] : []
+        const ridge = body ? ridgeOf.get(body.id) : undefined
+        const underRoof = topHere && own.length > 0 && ridge !== undefined && body?.roof.kind !== 'FLAT'
+        const height = underRoof ? r6((ridge as number) - l.elevation + OVER_RIDGE_M) : above ? r6(above.elevation - l.elevation - slabT) : r6(l.height)
+        if (height < 1) {
+          refuse(`geometry.interior.levels[${lv.level}].walls[${w.id}]`, 'REPRESENTATION_LIMIT', `${height.toFixed(2)} m of room under the floor above: not a partition`)
+          continue
+        }
+        push({ type: 'createWall', id: w.id, levelId: l.id, start: pt(w.a.x, w.a.z), end: pt(w.b.x, w.b.z), thickness: r6(w.thickness), height, baseOffset: 0, kind: 'INTERIOR', ...(underRoof ? { topProfile: { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds: own.map((p) => p.id) } } : {}), materialId: MATERIALS_V2.partition })
+        for (const d of lv.doors.filter((x) => x.wallId === w.id)) {
+          const dh = Math.min(d.height, r6(height - 0.1))
+          push({ type: 'cutOpening', id: d.id, wallId: w.id, kind: 'DOOR', offset: r6(d.offset), sill: 0, width: r6(d.width), height: r6(dh) })
+          push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, frameDepth: r6(Math.min(0.1, w.thickness * 0.6)), frameInset: 0.01, leafThickness: r6(Math.min(0.045, w.thickness * 0.3)), materialId: MATERIALS_V2.timber })
+        }
+      }
+      used(`geometry.interior.levels[${lv.level}].walls`, 'houseProgram/interior(createWall INTERIOR)', lv.walls.map((w) => w.id))
+      if (lv.doors.length) used(`geometry.interior.levels[${lv.level}].doors`, 'houseProgram/interior(cutOpening DOOR)', lv.doors.map((d) => d.id))
+      for (const r of lv.rooms) push({ type: 'createRoom', id: r.id, levelId: l.id, polygon: r.polygon.map((q) => pt(r6(q.x), r6(q.z))), ...(r.holes && r.holes.length ? { holes: r.holes.map((h) => h.map((q) => pt(r6(q.x), r6(q.z)))) } : {}), ...(r.usage ? { usage: r.usage } : {}) })
+      if (lv.rooms.length) used(`geometry.interior.levels[${lv.level}].rooms`, 'houseProgram/interior(createRoom)', lv.rooms.map((r) => r.id))
+      for (const st of lv.stairs) {
+        const top = levelAt.get(st.toLevel)
+        if (!top) continue
+        push({ type: 'createStair', id: st.id, levelId: l.id, toLevelId: top.id, start: pt(r6(st.start.x), r6(st.start.z)), direction: st.direction, width: r6(st.width), ...(st.waist ? { waist: st.waist } : {}), ...(st.footprint ? { footprint: st.footprint } : {}), segments: st.segments })
+        used(`geometry.interior.levels[${lv.level}].stairs`, 'houseProgram/interior(createStair)', [st.id])
+      }
+    }
   }
   used('geometry.wallThicknessM', 'houseProgram/walls', phys.map((w) => w.id), g.wallThicknessM)
   used('geometry.slabThicknessM', 'houseProgram/createSlab', [...outlineAt.keys()].map((k) => `slab-${k}`), g.slabThicknessM)

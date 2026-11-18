@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.7.0' as const
+export const MODEL_SCHEMA_VERSION = '1.8.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -856,7 +856,7 @@ export const WallPanelSchema = z
   .object({
     ...base,
     levelId: IdSchema,
-    /** GABLE_FRAME (v3.54.8): the frame edging a gable end — its band along the rakes and its legs — as one plate in the face plane. */
+    /** GABLE_FRAME (v3.54.8, schema 1.8.0): the frame edging a gable end — its band along the rakes and its legs — as one plate in the face plane. */
     role: z.enum(['PARAPET', 'DORMER_CHEEK', 'GABLE_INFILL', 'UPSTAND', 'KNEE_WALL', 'SCREEN', 'GABLE_FRAME', 'UNKNOWN_PANEL']),
     start: Vec2Schema,
     end: Vec2Schema,

@@ -168,6 +168,74 @@
     },
     "toSchema": "1.7.0",
     "why": "restated under model schema 1.7.0: the program is unchanged, and the model it builds, with the empty collections 1.6.0→1.7.0 added removed, hashes to the sealed 731b045edcb18790"
+  },
+  {
+    "file": "marcowki-auto.json",
+    "from": {
+      "contentHash": "3f771f1b3601664d602bdb859486c4337c28367a200a4e9367a671b8dacd64ee",
+      "id": "candidate-marcowki-3f771f1b3601664d",
+      "modelHash": "01cc2a91778270ffc8a9bc0f4b0157d41a3b6802511fed169600aa9cc8f2c85d"
+    },
+    "fromSchema": "1.7.0",
+    "id": "marcowki-auto",
+    "to": {
+      "contentHash": "2eef91de20581fd075803ce94f15d2ce10d375fcd50b87d1326587f44d8bf2e1",
+      "id": "candidate-marcowki-2eef91de20581fd0",
+      "modelHash": "1e9ae71f01f580f8bd81fa149b04b936e00955b370d0be0edc79485e5c860ca4"
+    },
+    "toSchema": "1.8.0",
+    "why": "restated under model schema 1.8.0: the program is unchanged, and the model it builds, with the empty collections 1.7.0→1.8.0 added removed, hashes to the sealed 01cc2a91778270ff"
+  },
+  {
+    "file": "marcowki-auto-v2.json",
+    "from": {
+      "contentHash": "70147e12844b49c2a79ec7042bc80646710fc3bbeaa57b5e4839c8e3b20adc3e",
+      "id": "candidate-marcowki-70147e12844b49c2",
+      "modelHash": "d0828c516043669bdeb405d0c46a4b867e0b6acc1c01a6ab04852cd7ba2f1eb1"
+    },
+    "fromSchema": "1.7.0",
+    "id": "marcowki-auto-v2",
+    "to": {
+      "contentHash": "520408b19c92a7ab096b69ed69c192613a22b44d9d3646542ad63e19a3315edd",
+      "id": "candidate-marcowki-520408b19c92a7ab",
+      "modelHash": "aea766e72389a3139f388947f153cb58c4c47f098f41d27e73f7f512d3a48e7f"
+    },
+    "toSchema": "1.8.0",
+    "why": "restated under model schema 1.8.0: the program is unchanged, and the model it builds, with the empty collections 1.7.0→1.8.0 added removed, hashes to the sealed d0828c516043669b"
+  },
+  {
+    "file": "marcowki-auto-v3.json",
+    "from": {
+      "contentHash": "d92d27850db94e29721911b8dbd1384e8afa62124c7f95d6478aee5f88348b21",
+      "id": "candidate-marcowki-d92d27850db94e29",
+      "modelHash": "b392a2c9ba510cb2b991b4cc5f8c54eb6c6a712e6bc838df645e15e2f1315146"
+    },
+    "fromSchema": "1.7.0",
+    "id": "marcowki-auto-v3",
+    "to": {
+      "contentHash": "bfa593c603d9bfca2e536979b350a1ed7750aad96e82bace099af9c311f2115d",
+      "id": "candidate-marcowki-bfa593c603d9bfca",
+      "modelHash": "4efc6f0ce879fbe8783f818d23c036ed42e6c0af4b5e9f1ac71a150ff9163715"
+    },
+    "toSchema": "1.8.0",
+    "why": "restated under model schema 1.8.0: the program is unchanged, and the model it builds, with the empty collections 1.7.0→1.8.0 added removed, hashes to the sealed b392a2c9ba510cb2"
+  },
+  {
+    "file": "stage-reports/artifacts/analyzer-v2/marcowki-auto-v2.json",
+    "from": {
+      "contentHash": "d92d27850db94e29721911b8dbd1384e8afa62124c7f95d6478aee5f88348b21",
+      "id": "candidate-marcowki-d92d27850db94e29",
+      "modelHash": "b392a2c9ba510cb2b991b4cc5f8c54eb6c6a712e6bc838df645e15e2f1315146"
+    },
+    "fromSchema": "1.7.0",
+    "id": "stage-reports/artifacts/analyzer-v2/marcowki-auto-v2.json",
+    "to": {
+      "contentHash": "bfa593c603d9bfca2e536979b350a1ed7750aad96e82bace099af9c311f2115d",
+      "id": "candidate-marcowki-bfa593c603d9bfca",
+      "modelHash": "4efc6f0ce879fbe8783f818d23c036ed42e6c0af4b5e9f1ac71a150ff9163715"
+    },
+    "toSchema": "1.8.0",
+    "why": "restated under model schema 1.8.0: the program is unchanged, and the model it builds, with the empty collections 1.7.0→1.8.0 added removed, hashes to the sealed b392a2c9ba510cb2"
   }
 ]
 

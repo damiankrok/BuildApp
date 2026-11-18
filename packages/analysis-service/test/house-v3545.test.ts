@@ -320,7 +320,7 @@ describe('v3.54.5 which house stands', () => {
   })
   it('an interior is not lost silently: what LOCAL held is said, and nothing is said to be removed when LOCAL stands', () => {
     const replaced = arbitrate(described, { ...GOOD_LOCAL, topAboveGroundFloorM: 18.11, heightAboveTerrainM: 18.5, rooms: 7, interiorWalls: 9 }, PUBLISHED)
-    expect(replaced.interior).toMatch(/7 room\(s\) and 9 interior wall\(s\).*NOT carried.*superseded/)
+    expect(replaced.interior).toMatch(/7 room\(s\) and 9 interior wall\(s\).*NOT (carried|placed).*superseded/)
     expect(arbitrate(described, GOOD_LOCAL, PUBLISHED).interior).toMatch(/nothing is removed/)
   })
 })

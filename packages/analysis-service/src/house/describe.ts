@@ -62,7 +62,7 @@ function railingOf(x: { kind: string; railing?: string | null; railingTopY?: num
   return top
 }
 
-export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }> }): { document: unknown; notes: ConversionNote[] } {
+export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }>; /** v3.54.9: an interior from another source of the same pages (LOCAL), placed by the resolver only through a checked transform. */ interiorSource?: unknown }): { document: unknown; notes: ConversionNote[] } {
   const notes: ConversionNote[] = []
   const { selection, answers } = input
   const plan = answers.plan
@@ -189,6 +189,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
     source: { ...(input.sourcePackageHash ? { sourcePackageHash: input.sourcePackageHash } : {}), ...(input.project ? { project: input.project } : {}), pictures, missing, views },
     reader: { engine: `${HOUSE_READING_CONTRACT}@${HOUSE_READING_VERSION}`, model: input.model, ...(input.at ? { at: input.at } : {}) },
     observations: { front: { planEdge: plan.front?.planEdge, how: plan.front?.how ?? '', origin: 'API' }, dimensions, levels, outlines, elevations, roofs, published, unknowns: [...(plan.unknowns ?? []), ...(f?.unknowns ?? [])].slice(0, 16) },
+    ...(input.interiorSource ? { interiorSource: input.interiorSource } : {}),
   }
   return { document, notes }
 }
@@ -415,7 +416,7 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
     computation: built.complete ? 'DONE' : 'PARTIAL',
     sources,
     geometry,
-    exterior: sources === 'READ_COMPLETE' && withSource.length === 4 && geometry === 'BUILT_COMPLETE' && v.knownDefects.length === 0 && !v.checks.some((c) => c.status === 'FAIL') ? 'COMPLETE_IN_SCOPE' : 'PARTIAL',
+    exterior: sources === 'READ_COMPLETE' && withSource.length === 4 && geometry === 'BUILT_COMPLETE' && v.knownDefects.filter((d) => !d.code.startsWith('INTERIOR_')).length === 0 && !v.checks.some((c) => c.status === 'FAIL' && c.scope !== 'INTERIOR') ? 'COMPLETE_IN_SCOPE' : 'PARTIAL',
     missing: missing.slice(0, 24),
   }
   // a side that was not read or not built limits what may be measured off the model on that side
@@ -554,7 +555,8 @@ export function deliveredQuality(decision: Arbitration, defects: readonly Review
   // the last record of each defect stands
   const last = new Map<string, ReviewDefectLike>()
   for (const d of defects) last.set(`${d.side}|${d.feature}|${d.meaning}`, d)
-  if (decision.accepted === 'DESCRIBED') for (const d of last.values()) if (d.weight !== 'MINOR' && d.state !== 'IMPROVED') at(d.side).openDefects.push(`${d.id} ${d.feature} ${d.meaning} (${d.weight}, ${d.state})`)
+  // (v3.54.9: an IMPROVED defect whose final measure is outside tolerance is still open — the verdict does not close it)
+  if (decision.accepted === 'DESCRIBED') for (const d of last.values()) if (d.weight !== 'MINOR' && (d.state !== 'IMPROVED' || d.final === 'OUTSIDE_TOLERANCE')) at(d.side).openDefects.push(`${d.id} ${d.feature} ${d.meaning} (${d.weight}, ${d.state}${d.final ? `, final ${d.final}` : ''})`)
   const sides = [...bySide.values()].sort((p, q) => p.side.localeCompare(q.side))
   const notAssessable = decision.unknown.filter((u) => /^(FRONT|REAR|LEFT|RIGHT):/.test(u))
   const checked = decision.findings.some((x) => x.featureSide)
@@ -617,7 +619,7 @@ export function supportedRidge(doc: HouseDocument): { valueM: number; literal: s
  * faulted here for a frame the source does not show (that is the review's to find, as an EXTRA defect).
  */
 export type FeatureClaim = { side: string; feature: 'GABLE_FRAME' | 'LOGGIA' | 'NO_SUPPORTS' | 'SHAPED_GLAZING'; from: string; count?: number }
-export type ReviewDefectLike = { id: string; side: string; feature: string; meaning: string; weight: string; state: string; round: number }
+export type ReviewDefectLike = { id: string; side: string; feature: string; meaning: string; weight: string; state: string; round: number; final?: string }
 export function featureClaims(doc: HouseDocument, defects: readonly ReviewDefectLike[] = []): FeatureClaim[] {
   const out: FeatureClaim[] = []
   const add = (c: FeatureClaim): void => {
@@ -677,7 +679,11 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
     const walls = local?.interiorWalls ?? 0
     if (accepted !== 'DESCRIBED') return accepted === 'LOCAL' ? 'LOCAL stands with whatever interior it has: nothing is removed' : 'no model stands'
     if (!local) return 'there was no LOCAL model: no interior existed to carry over'
-    return rooms + walls === 0 ? 'LOCAL held no rooms or interior walls: nothing of an interior is lost' : `LOCAL held ${rooms} room(s) and ${walls} interior wall(s); the described house is an exterior and they are NOT carried into it (their fit to the new outline is not checked) — LOCAL's model is kept beside the result as the superseded revision`
+    if (rooms + walls === 0) return 'LOCAL held no rooms or interior walls: nothing of an interior is lost'
+    // v3.54.9: LOCAL's interior placed into the described house through a checked transform (or why not)
+    const gi = described.document.geometry?.interior
+    if (gi && (gi.status === 'BUILT' || gi.status === 'PARTIAL')) return `LOCAL held ${rooms} room(s) and ${walls} interior wall(s); they are placed into the described house through a checked transform (${gi.transform?.how ?? ''}): ${gi.note ?? ''}${gi.status === 'PARTIAL' ? ' — what was not placed is named with its reason' : ''}; LOCAL's model is kept beside the result as the superseded revision`
+    return `LOCAL held ${rooms} room(s) and ${walls} interior wall(s); they are NOT placed into the described house (${gi?.note ?? 'no interior source in the document'}) — LOCAL's model is kept beside the result as the superseded revision`
   }
   const out = (accepted: Arbitration['accepted'], code: ArbitrationCode, why: string, partial = false, contradictions: string[] = [], unknown: string[] = []): Arbitration => ({ accepted, code, why, findings, partial, contradictions, unknown, interior: interiorOf(accepted) })
   const H = published.filter((p) => p.key === 'building_height' && p.unit === 'm')

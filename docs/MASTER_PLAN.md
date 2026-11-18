@@ -1,8 +1,8 @@
-# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.8
+# PLANER KOSZTÓW BUDOWY / BuildPlan — MASTER PLAN v3.54.9
 
-Data: 17.11.2026. **Aktywna kampania v3.54.8 obejmuje zgodność parametrów odczytu API z finalną geometrią. Ostatnia dostawa analizatora to v3.54.7 (raport 65d8a06, finalny host z 59d115e). Pilot jest domyślnie wyłączony, a Android ma własną weryfikację.**
+Data: 18.11.2026. **Aktywna kampania v3.54.9: źródłowe pomiary wysunięć i proporcji, wnętrza każdej udokumentowanej kondygnacji oraz dokładne kąty i kształty przeszkleń. Raportowana dostawa v3548: kod 86fd69f, finalny host 05faa4e, raport 100f63e. Pilot domyślnie wyłączony. Android ma własną weryfikację.**
 
-Ta wersja planu powstała w repozytorium z promptu v3.54.8 (BuildPlan_Prompt_Fable_v3.54.8_Parametry_API_Do_Geometrii.md), bo plik Master Planu v3.54.8 nie został dołączony do zlecenia; § 2 streszcza ten prompt i nie dodaje wymagań spoza niego. Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
+Pełny v3.47 pozostaje osobnym archiwum. Bieżącą kolejność prac określa § 2. Dawne NEXT/CURRENT i opisy konkretnej dostawy zachowują kontekst historyczny.
 
 ## 1. Cel i hierarchia informacji
 
@@ -22,25 +22,23 @@ Nowsze jawne polecenie OWNER-a rozstrzyga sprzeczność starszego zlecenia. Brak
 
 ## 2. Aktualny priorytet
 
-**Priorytet v3.54.8.** Każda wartość, którą źródło podaje i odczyt API przekazuje, ma dojść do finalnej geometrii jako ta wartość albo zostać zatrzymana z jawnym powodem. Na Marcówkach GE: wypełnienie balustrady (szkło zostaje szkłem, konwencja jest nazwana), oba końce nóg ramy osobno, pas ramy mierzony pionowo i prostopadle do połaci, jeden styk w kalenicy, pas portalu nad wejściem i garażem, pełny zasięg płyty loggii pod nogą ramy, obie wysokości głowic. Dla każdego parametru: region źródła, surowa odpowiedź, pole typowane, wartość uzgodniona, wartość programu, pomiar geometrii, pierwsza funkcja, w której się gubi.
+**Decyzja OWNER-a z 18.11.2026.** Wykorzystać dostępne rzuty i wymiary do sprawdzania proporcji przed zatwierdzeniem geometrycznej części house.json. Osobno ustalać wysunięcie pasa/ramy/portalu, jego szerokość i wysokość. Model ma zawierać wnętrza wszystkich kondygnacji, których plany są dostępne. Tylne przeszklenia mają mieć właściwy kształt, położenie, obie rzędne głowicy i kąt. Zlecenie obejmuje analizę, implementację oraz końcowy pomiar całej tej ścieżki, a nie tylko dodatkowy opis API.
 
-**Recenzja v3.54.8.** Uwaga jest rozstrzygnięta dopiero, gdy zgłoszona własność zmieniła się w finalnej geometrii (APPLIED i IMPROVED osobno), sąsiedzi są zachowani, a runda zapisuje model wejściowy, rewizję bazową, hashe źródła i renderu, rewizję wyjściową i wynik; STALE_DEPENDENCY rozróżnia starą odpowiedź od błędu zarządzania rewizją. MEASURED_PRESENT potwierdza tylko istnienie.
+**Checkpoint v3548.** Z raportu i paczki: LOCAL Marcówek uzyskuje 27/27 szczegółowych cech i historyczne 16/16. Ten sam stary odczyt na nowym kodzie rośnie do 16/27. LIVE1 po recenzji daje 21/27, przy zapisanym INVENTORY/PLAN i nowych FACADES/REVIEW. Świeży finalny host daje H 17/27 i odrzuca go na głębokości 13,52 m wobec drukowanych 12,60 m; oddaje LOCAL. Poprawiono szkło, niezależne nogi i ciągłość ramy, portal i zakres loggii. To postęp w zakresie DEV; bez świeżej próby uogólnienia. Komin ma obserwację, lecz nadal nie został zbudowany. Android niezweryfikowany.
 
-**Miary v3.54.8.** Historyczne 16 cech zostaje osobno; obok szczegółowa ocena (szerokość pasa, kontur, styk kalenicy, końce nóg, typ i wysokość balustrady, ciągłość portalu, zasięg płyty, głowice) z tolerancjami ustalonymi przed porównaniem i z dowodem na wstrzykniętych usterkach. LOCAL jest kontrolą zdolności, nie źródłem prawdy.
+**Wady wymagające zamknięcia.** Recenzent zapisał MATCHES przy pozostających mierzalnych różnicach. Jedna zastosowana korekta głowicy ma cel około 3,995 m i wynik około 4,182 m, a ślad oznacza ją jako IMPROVED. DIAG-all 23/27 nie podstawił poprawnych głowic, więc nie rozstrzyga przyczyny czterech pozostałych błędów. Trzeba sprawdzić konsumenta na poprawnym wejściu i dopiero potem przypisać błąd odczytowi. Brak wnętrza H wymaga odrębnego śladu, od rzeczywiście wysłanych rzutów po widoczność pomieszczeń w scenie.
 
-**Budżet v3.54.8.** Księgi 22,047354 z 24,11036 USD, nominalnie 2,063006 USD; projektowe 100 USD nie zmienia pułapu. Niezatwierdzony koszt zostaje w rezerwie. ForgeShape tylko do odczytu; prywatny benchmark H2 i zbiór OWNER-a poza zakresem.
+**Wspólny pomiar.** Drukowane rozpiętości, końce/lica, łańcuchy i przekroje tworzą ograniczenia. Proporcje ze skalibrowanego rzutu są dozwolone z pochodzeniem DERIVED i niepewnością. Wymiar działki kalibruje właściwy rysunek sytuacyjny, nie osobny rzut domu. Szerokość widoczna w elewacji nie określa wysunięcia przed lico. Perspektywa wymaga kamery albo ograniczonej oceny jakościowej. Sprawdzić znaczenie 12,60 m oraz zasięg 13,52 m przed dopasowaniem geometrii. Nie wszystkie brakujące wymiary dają się wywieść z jednej szerokości.
 
-**Checkpoint v3.54.7 (kontekst).** Priorytet v3.54.7 po ocenie OWNER-a: Zwiększyć wierność architektury zewnętrznej i doprowadzać ważne uwagi recenzji do sprawdzonej zmiany sceny. Marcówki GE pokazują, że obrys rzutu, typ dachu i liczba otworów nie wystarczają do oceny domu. Sprawdzać ramę szczytu, pas portalu, cofnięcie loggii, podziały i lica garażu oraz kształt szklenia. Uzupełnić ten kierunek przypadkami Pliszki i Alaski. Zachować dobre cechy LOCAL jako podstawę do porównania i możliwej korekty w ramach istniejących struktur i uprawnień projektu.
+**Wnętrza są aktywnym zakresem.** Każda dostępna kondygnacja ma rozliczenie pobrania, wysłania, odczytu i zbudowania. Obejmuje ściany i pokoje/strefy, drzwi i przejścia, schody, pustki i otwory stropowe oraz relacje poziomów. API i LOCAL uzupełniają ten sam dokument i model. Poprawne wnętrza LOCAL zachowują ochronę; przeniesienie wymaga zgodności wariantu, orientacji, metryki i obrysu. Samo zachowanie starej rewizji obok pustego H nie zalicza zbudowanego wnętrza. Kontrola odbywa się osobno dla każdej kondygnacji, przy ukrytym dachu i na przekrojach.
 
-**Checkpoint v3.54.6.** Trzy świeże wejściowo równoważne odczyty Marcówek dały różne modele, a sześć odtworzeń zapisanych odpowiedzi było identycznych we właściwych parach. W tych trzech próbach wybrano LOCAL jako podgląd częściowy. W pięciu recenzjach zapisano DIFFERS. Recenzent zauważył ramę w jednej rundzie i opisał błędne balkony na słupach, ale operacje nie obejmowały odtworzenia ramy ani naprawy loggii. Nazwane elementy częściowo pojawiały się w notatkach bez geometrycznego odpowiednika. Niektóre poprawki otworów blokowała odrzucona ściana przy wąskim uskoku. Końcowy host z f9cb3ef sprawdził ponowne użycie zaakceptowanej rewizji bez API. Użycie zapisanej rewizji zapewnia spójność, a jej jakość podlega osobnej ocenie.
+**Dokładność i recenzja.** API wskazuje rodzaj i region cechy; dostępna metoda lokalna doprecyzowuje krawędzie w oryginalnym rastrze i kontroluje transformacje. Skośne otwory mają poligon i właściwy lokalny układ ściany, nie automatyczny kąt dachu. APPLIED, IMPROVED, osiągnięcie tolerancji i niezależne potwierdzenie źródłowe są odrębne. MATCHES nie unieważnia błędów pomiaru. Po korekcie przebudować zależności i ocenić aktualny render. Pętla ma dodawać lub poprawiać dane ze skutkiem w geometrii.
 
-**Zakres.** Obserwacje z czterech par zdjęcie źródła i odpowiadający render są powiązane ze stroną i regionem. Dla ważnej różnicy recenzja prowadzi do poprawionej obserwacji, operacji na określonej geometrii, celowanego uzupełnienia źródeł albo jawnej blokady. Budowniczy rozwiązuje przyczynę w kolejności bryła, host, otwór i elementy zależne. Po przebudowie wymagana jest ponowna ocena zmienionego regionu. Dobry LOCAL jest kontrolą zachowania ważnych cech. Zachować osobne wyniki dla LOCAL, kandydata H i faktycznej dostawy użytkownikowi. Zgodność najważniejszych cech musi być potwierdzona osobno od rozpoznania pomieszczeń, dokładności ilości i fotorealizmu.
+**Zgodność i regresja.** Rozstrzygnąć nową rolę GABLE_FRAME przy schemacie modelu 1.7.0: wersja/migracja/czytniki i round-trip. Wyjaśnić utraconą poprawkę dachu garażu Pallasa po STALE_DEPENDENCY bez wyłączania ochrony rewizji. Niezmieniona decyzja selektora nie dowodzi zachowania jakości. Najpierw odtworzenia i poprawne wejścia diagnostyczne, potem finalny automatyczny przepływ. Marcówki, istniejący dom dwukondygnacyjny z pustką schodową oraz kontrole dobierać według wpływu modułów; źródła rozstrzygają, LOCAL nie jest samodzielną referencją.
 
-**Odbiór.** Marcówki GE: dwa szczyty, rama i pozycja loggii, otwory skośne, garaż i ściana po lewej stronie. Pliszka: połączenie dwóch szczytów z garażem i wnęką, przeszklenia i proporcje istotne dla sylwetki. Alaska: docelowy kształt szklenia i zachowanie potwierdzonej kalenicy. Zmierzyć wpływ recenzji na końcową geometrię i odróżnić samą zmianę dokumentu. Najpierw odtworzenia, potem celowane próby żywe po uruchomieniu ścieżki. Znane domy są DEV.
+**Budżet.** Raportowana księga 22,937928 USD z pułapu 24,11036 USD; nominalnie 1,172432 USD. Uzgodnić koszty i rezerwacje. Implementacja i regresja offline poprzedzają maksymalnie jeden zaplanowany pełny job finalnego hosta, o ile mieści się w aktualnej puli. Większy zakres wnętrz nie upoważnia do przekroczenia pułapu. Brak środków ogranicza live, nie prace offline.
 
-**Budżet.** Księga v3546 to 20,655864 USD, pułap 24,11036 USD, nominalnie pozostało 3,454496 USD. Rozliczać rezerwacje, brak dowodu i korzyść kolejnej rundy. Pilot pozostaje domyślnie wyłączony.
-
-**Realizacja.** BuildPlan_Prompt_Fable_v3.54.7_Wiernosc_Elewacji_i_Naprawa.md. Raport, indeks, stan i HANDOFF v3547 oraz prywatne plansze. Gałąź claude/new-session-3kzcgh, bez merge i PR. ForgeShape tylko do odczytu. Prywatny benchmark OWNER-a poza kampanią.
+**Dokument wykonawczy.** BuildPlan_Prompt_Fable_v3.54.9_Metryka_Wnetrza_Przeszklenia.md. Raport SOURCE_TO_MODEL_V3549.md, indeks README_V3549.md, PROJECT_STATUS.md, ADR i HANDOFF. Do repo przekazać pełny dołączony Master Plan, zamiast odtwarzać go z promptu. Praca na claude/new-session-3kzcgh, commit/push [skip ci], bez merge i PR. ForgeShape tylko do odczytu; H2 i benchmark OWNER-a poza zakresem. Dokument jest zleceniem wdrożenia i pomiaru, nie deklaracją wykonania tych zmian.
 
 ### Checkpointy v3.54.1–v3.54.2 — kontekst historyczny
 
@@ -288,7 +286,7 @@ Dostawa obejmuje klikalny podgląd, planszę czterech propozycji, czytelne ujęc
 
 ## 7. Pomoc AI, wspólny opis domu i kontrola modelu
 
-**Obowiązujący kontrakt v3.54.7.** API może odczytywać i opisywać cały dom, podawać wymiary ze źródeł oraz proponować pełną hipotezę semantyczną. Analizator waliduje, uzgadnia, buduje i kompiluje. Poprzedni zakaz pełnego opisu z D20 jest zastąpiony D29. Surowy opis nie jest automatycznie prawdą, a stary swobodny HouseDescription nie zastępuje bez kontroli wyniku LOCAL. Nie uruchamiać dwóch konkurencyjnych czytników płatnych niejawnie w jednym jobie.
+**Obowiązujący kontrakt v3.54.9.** API może odczytywać i opisywać cały dom, podawać wymiary ze źródeł oraz proponować pełną hipotezę semantyczną. Analizator waliduje, uzgadnia, buduje i kompiluje. Poprzedni zakaz pełnego opisu z D20 jest zastąpiony D29. Surowy opis nie jest automatycznie prawdą, a stary swobodny HouseDescription nie zastępuje bez kontroli wyniku LOCAL. Nie uruchamiać dwóch konkurencyjnych czytników płatnych niejawnie w jednym jobie.
 
 ### 7.1 Wspólny dokument i pochodzenie
 
@@ -336,7 +334,7 @@ Ręcznie sprawdzony opis służy diagnostyce buildera przez te same interfejsy; 
 
 ### 7.6 Budżet i dostęp
 
-OWNER autoryzował projektowy limit 100 USD. Przy obecnym pułapie kampanii 24,11036 USD i księdze v3546 w wysokości 20,655864 USD pozostaje nominalnie 3,454496 USD. Sprawdzić księgę i rezerwacje przed każdym płatnym etapem. Najpierw odtworzenia i sprawdzenie działania lokalnego. Płatne próby są celowane i podlegają pułapowi kampanii.
+OWNER autoryzował projektowy limit 100 USD. Pułap kampanii to 24,11036 USD, a raportowana księga v3548 wynosi 22,937928 USD. Pozostaje nominalnie 1,172432 USD. Na wejściu uzgodnić aktualne rezerwacje. Najpierw odtworzenia i testy offline. Celowany live po działającym konsumentcie wymaga rezerwacji maksymalnego kosztu. Zachować dotychczasową autoryzację i historię księgi.
 
 Użyć istniejącego sekretu środowiskowego. Nie kopiować klucza do raportu, rozmowy, Git, ZIP ani APK. Brak sekretu blokuje live, nie prace offline. Model i taryfę sprawdzić w oficjalnej dokumentacji przed wywołaniami, rezerwując maksymalny koszt odpowiedzi/narzędzi/retry. Nieznane rozliczenia zachować w rezerwie.
 
@@ -368,11 +366,31 @@ Dla każdej dostępnej strony zapisać skojarzenie obrazu ze sceną, rewizję i 
 
 Dla braku otworu na odrzuconej ścianie zacząć od poprawnego hosta. Wyznaczyć ciągłość ramy szczytowej, przebieg lica i cofnięcie loggii przed doborem jej stropu, szklenia i balustrady. Nie nadawać nieudokumentowanej głębokości ani podpór. Elementy cienkie, grube i wykończenie mogą mieć podobny kolor, ale mają różne skutki dla geometrii. Porównać kandydatów po kompilacji oraz rewizję oddaną po selekcji. Zapis zaakceptowanej rewizji przechowuje też status jakości i powody ograniczeń.
 
+### 7.10 Zgodność parametrów z geometrią
+
+Dla ważnej cechy odczytanej ze źródła śledzić wartość surową, znaczenie i jednostkę, pole po parsowaniu, geometrię uzgodnioną, parametr programu i wartość zbudowaną. Domyślna wartość nie przesłania obserwacji. Dane nieobsługiwane zachować z powodem. Typ balustrady, niezależny zakres nóg, kontury ramy i rzędne głowic są przykładami parametrów wymagających rzeczywistego konsumenta.
+
+Obecność elementu jest jednym z pomiarów. Poprawna rama wymaga kontroli wewnętrznego i zewnętrznego konturu, szerokości pasów, styków i zakończeń. Poprawna loggia wymaga właściwego zakresu, cofnięcia i relacji z elementami na innych wysokościach. Poprawna balustrada uwzględnia wypełnienie. Pomiar regionalny recenzji odpowiada właściwości wskazanej w wadzie. Nowa recenzja używa aktualnej rewizji i renderu, a ślad odróżnia wykonanie operacji od wykazanej poprawy geometrii.
+
+### 7.11 Wspólne ograniczenia metryczne i dokładne kontury — v3.54.9
+
+Raw obserwacje API pozostają oddzielone od uzgodnionej geometrii house.json. Przed przyjęciem geometrii kontrolować jednostki, obiekt i lica wymiaru, końce, sumy łańcuchów, skale widoków oraz zasięgi. Wymiary korpusu, całego domu, wysunięć, dachu i działki mają odrębną semantykę. Wymiar działki nie kalibruje osobnej grafiki rzutu. Odcinek wyliczony proporcjonalnie ze skalibrowanego rzutu jest DERIVED z wzorem i niepewnością. Wysunięcie przed lico, szerokość widoczna i wysokość nie są zamiennymi wymiarami.
+
+Odczyt semantyczny wskazuje właściwy kontur, a lokalizacja w oryginalnym rastrze może go doprecyzować. Zachować odwracalną transformację crop/resize, właściwe krawędzie i niepewność rastra. Krawędź cienia, szkła, otworu i ramy wymaga rozróżnienia. Nie wytwarzać metryki przez dowolne rozciągnięcie osi ani z niekalibrowanej perspektywy. Kotwice niewykorzystane do dopasowania sprawdzają wynik, jeżeli są dostępne.
+
+Skośne przeszklenie ma host, poziom, lokalny układ ściany i poligon; oba końce głowicy, jej kąt i kierunek są mierzone po kompilacji. Zgodność z parametrem operacji i zgodność parametru ze źródłem mają osobne dowody. IMPROVED może nadal oznaczać błąd poza tolerancją. Recenzja MATCHES nie podnosi jakości wbrew kontroli końcowej; defekt pozostaje otwarty. Poprawne wejście diagnostyczne obejmuje wszystkie oceniane współrzędne, zanim rozstrzygnie się błąd buildera lub odczytu.
+
+### 7.12 Wszystkie kondygnacje i rzeczywiste wnętrza — v3.54.9
+
+Dostępny rzut każdej kondygnacji ma sourceId/hash, skalę i poziom oraz stan pobrania, wysłania, odczytu i budowy. Brak miejsca w requestcie nie jest brakiem źródła. Wspólny house.json obejmuje obrys, przegrody z grubością/licami, poligony pokoi i stref, drzwi/przejścia, schody, pustki i otwory stropowe, z pochodzeniem i niepewnością. Numery/nazwy/pola deklarowane są oddzielne od geometrii. Otwarta strefa nie dostaje nieistniejącej przegrody, a pustka podłogi.
+
+Istniejące poprawne wnętrza mają ochronę i stabilne ID. Ich przeniesienie do poprawionego zewnętrza wymaga sprawdzonego wariantu, lustra, poziomu, skali i zgodności lic. Niezgodne wnętrze podlega naprawie z rzutu, a nie wklejeniu według bbox. Brak wnętrz LOCAL przy dostępnych planach wymaga odczytu i konsumenta; zapis etykiet w JSON nie jest zbudowaniem pomieszczeń. Weryfikacja obejmuje każdy poziom przy ukrytym dachu, nakładkę na rzut, topologię przejść i przekrój schodów/pustek. Recenzja zewnętrza nie weryfikuje wnętrza.
+
 ## 8. Kryteria pomiaru i odbioru
 
-**Odbiór v3.54.7.** Wymagane dowody obejmują scenę z poprawioną ważną cechą elewacji, wynik pomiaru przed i po, rzeczywistą ścieżkę od odczytu do wyrenderowania oraz brak degradacji dobrze zbudowanych elementów. Mierzyć osobno lokalnego kandydata, kandydata H i oddaną rewizję. Dobór LOCAL może poprawić dostawę, ale nie jest dowodem wierności H. Rozliczyć zakresy źródła, niewiadome i aktualną obsługę typów geometrii. Znane domy są próbą DEV. Wynik automatyczny, podstawienie diagnostyczne i odczyt na żywo mają własne dowody.
+**Odbiór v3.54.9.** Zmierzony przepływ od rzutów i wymiarów do wysunięć oraz proporcji zewnętrza, wszystkich udokumentowanych kondygnacji i rzeczywistych wnętrz, a także poprawnych kształtów i kątów przeszkleń. Referencje, tolerancje i niepewność ustalić przed oceną. Obok historycznych zestawów 16 i 27 cech prowadzić odrębne nowe miary wnętrz, wysunięcia i kształtu otworów. Poprawa jednego zakresu nie zalicza innego. Raport rozdziela materiał wysłany i odczytany, zastosowanie, poprawę, osiągnięcie tolerancji i źródłowe potwierdzenie finalnej sceny. Ręczne podstawienia, replay i świeży host mają osobne wyniki. Dobór LOCAL może chronić użytkownika, lecz nie zastępuje dowodu poprawy H. Znane rodziny to DEV, brak świeżej próby ogranicza dowód transferu.
 
-Statusy IMPLEMENTATION_COMPLETE, FACADE_COVERAGE_VERIFIED, OPENING_GEOMETRY_VERIFIED, SELECTION_VERIFIED, HOST_INTEGRATION_VERIFIED, QUALITY_GAIN, TRANSFER_EVIDENCE i ANDROID_VERIFIED mają własne dowody. Brak transferu nie nakazuje usunięcia działającej implementacji za flagą, ale nie uzasadnia powszechnego rollout. Model ze znanym istotnym brakiem pozostaje częściowy, nawet gdy ogólna tolerancja zasięgu jest spełniona. Metryki dachu obejmują charakterystyczne cechy, hosty i połączenia, nie tylko oś głównej kalenicy.
+Statusy IMPLEMENTATION_COMPLETE, SOURCE_FLOOR_COVERAGE_VERIFIED, INTERIOR_GEOMETRY_VERIFIED, FACADE_COVERAGE_VERIFIED, OPENING_GEOMETRY_VERIFIED, SELECTION_VERIFIED, HOST_INTEGRATION_VERIFIED, QUALITY_GAIN, TRANSFER_EVIDENCE i ANDROID_VERIFIED mają własne dowody. Brak transferu nie nakazuje usunięcia działającej implementacji za flagą, ale nie uzasadnia powszechnego rollout. Model ze znanym istotnym brakiem pozostaje częściowy, nawet gdy ogólna tolerancja zasięgu jest spełniona. Metryki dachu obejmują charakterystyczne cechy, hosty i połączenia, nie tylko oś głównej kalenicy.
 
 Sprawdzić mierniki przed oceną: reprezentacje kalenicy roofs/roofPlanes/roofEdges, osie/lustro, jednostki, semantyka obrysu oraz zgodność grup porównania. Korekta błędnej referencji/scorera jest osobnym wynikiem, nie poprawą analizatora. Pełna recenzja czterech stron nie potwierdza niepokazanych wnętrz. Sama liczba otworów, zgodny bbox lub dobry kolor nie zaliczają ich położenia i geometrii. Metryki użyte do przyjęcia poprawki nie mogą być jej jedynym niezależnym testem końcowym.
 
@@ -480,6 +498,12 @@ Zachowane dawne ID: **DEC-SOURCE-PROVIDER-AGNOSTIC-001** (§ 3.8), **DEC-SINGLE-
 | D39 | Ten sam zaakceptowany wariant i przypięta rewizja dają tę samą geometrię uprawnionym zadaniom. Świeży odczyt daje osobnego kandydata | Aktywna v3.54.6 |
 | D40 | Ważne różnice elewacji mają obszar i dowód oraz prowadzą do sprawdzonej naprawy albo jawnego ograniczenia oddanej sceny | Aktywna v3.54.7 |
 | D41 | Wynik jakości obejmuje formę charakterystyczną, wnęki i kształt otworów po kompilacji. LOCAL i H są oceniane również osobno | Aktywna v3.54.7 |
+| D42 | Odczytana właściwość aktywnego zakresu ma ślad do parametru i geometrii. Domyślna wartość nie przesłania obserwacji | Aktywna v3.54.8 |
+| D43 | Recenzja weryfikuje geometrię i relacje właściwe dla wady. Istnienie elementu i zmiana hasha są pomiarami częściowymi | Aktywna v3.54.8 |
+| D44 | Wymiary mają zakres i lica; proporcje po kalibracji są DERIVED. Wysunięcie pasa wymaga źródła właściwego dla głębokości | Aktywna v3.54.9 |
+| D45 | Każda dostępna kondygnacja jest rozliczana od źródła do zbudowanego wnętrza w tym samym modelu, z ochroną poprawnych ID i relacji | Aktywna v3.54.9 |
+| D46 | Wykonanie, poprawa, tolerancja i niezależna zgodność źródłowa są odrębne; MATCHES nie unieważnia błędu końcowego pomiaru | Aktywna v3.54.9 |
+| D47 | Zmiana schematu ma kompatybilność/migrację; niezmieniona selekcja nie zalicza utraty poprawki w replay. Ochrona rewizji pozostaje | Aktywna v3.54.9 |
 
 Etapy 1–4 dały plan i prompt; po nich wdrożono ograniczoneC1/C2 i rozszerzano źródła. Ostateczny wybór strategii inference nadal wymaga pomiaru. Przegląd 1327 nie wdraża nowego kodu. Lokalne sprzeczności podczas retencji rozstrzygnięto jawnie: brutto pozostaje zatwierdzone, paleta zastępuje dawny zakaz koloru, aktualne zlecenie zastępuje dawne NEXT i blokady technologii. Szczegóły w rejestrze retencji.
 
@@ -626,3 +650,13 @@ Po audycie paczki v3545 zapisano decyzję o debugowaniu i naprawie ścieżki od 
 ### Kontrola aktualizacji v3.54.7 — 17.11.2026
 
 Uzgodniono raport v3546, plansze i surowe recenzje Marcówek. Zaktualizowano priorytet, budżet i odbiór. Dodano §7.9 oraz D40–D41. Poprzednie wymagania produktu oraz wcześniejsza historia są zachowane.
+
+
+### Kontrola aktualizacji v3.54.8 — 17.11.2026
+
+Po ocenie raportu i paczki v3547 OWNER zatwierdził naprawę przekazywania parametrów API do geometrii. Uzgodniono utratę rodzaju balustrady, ograniczenia miernika 16 cech oraz zależności ramy, portalu, loggii i szklenia. Zmieniono §2, §7.6 i aktywny odbiór §8, dodano §7.10 oraz D42–D43. Katalog produktu i wcześniejsza historia są zachowane. Dokument jest zleceniem kolejnej implementacji i pomiaru.
+
+
+### Kontrola aktualizacji v3.54.9 — 18.11.2026
+
+Po raporcie i paczce v3548 oraz uwagach OWNER-a o wymiarach, braku wnętrza H i kątach tylnych okien zaktualizowano §2, §7.6 i aktywny odbiór §8, dodano §7.11–7.12 oraz D44–D47. Rozdzielono LIVE1 z zapisanym PLAN od świeżego finalnego hosta, wskazano niepełny zakres ręcznej próby głowic i różnicę między IMPROVED a osiągnięciem celu. Księgę zaktualizowano bez zwiększenia pułapu. §1, pełny katalog produktu §3, §4–6, §9, §11 i dotychczasowa historia pozostają bajtowo zgodne z v3.54.8. Przygotowano zlecenie implementacji; nie wykonano tu zmian produkcyjnych, testów analizatora, wywołań API ani APK.

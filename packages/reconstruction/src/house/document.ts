@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.4.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.5.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -384,6 +384,82 @@ const ChimneySchema = z.object({ id: Id, rect: z.object({ x0: z.number(), z0: z.
 /** A window lying in a roof slope: its plan rectangle on that slope. */
 const RooflightSchema = z.object({ id: Id, bodyId: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
 
+// ---------------------------------------------------------------------------------------------------------------------
+// v3.54.9 — the interior: its source (in that source's own frame) and the agreed interior (in the house's frame)
+// ---------------------------------------------------------------------------------------------------------------------
+
+const StairSegmentLike = z.union([
+  z.object({ kind: z.literal('FLIGHT'), risers: z.number().int().min(1), going: z.number().positive() }).strict(),
+  z.object({ kind: z.literal('WINDER'), risers: z.number().int().min(1), turn: z.enum(['LEFT', 'RIGHT']), angleDeg: z.union([z.literal(90), z.literal(180)]) }).strict(),
+  z.object({ kind: z.literal('LANDING'), length: z.number().positive(), turn: z.enum(['NONE', 'LEFT', 'RIGHT']), onRiser: z.literal(true).optional() }).strict(),
+])
+const InteriorWall = z.object({ id: Id, a: Vec2, b: Vec2, thickness: z.number().positive() }).strict()
+const InteriorDoor = z.object({ id: Id, wallId: Id, offset: z.number().min(0), width: z.number().positive(), height: z.number().positive() }).strict()
+const InteriorRoom = z.object({ id: Id, polygon: z.array(Vec2).min(3), holes: z.array(z.array(Vec2).min(3)).optional(), usage: z.string().optional() }).strict()
+const InteriorStair = z
+  .object({ id: Id, toLevel: z.number().int(), start: Vec2, direction: z.enum(['PLUS_X', 'MINUS_X', 'PLUS_Z', 'MINUS_Z']), width: z.number().positive(), waist: z.number().positive().optional(), footprint: z.object({ minX: z.number(), maxX: z.number(), minZ: z.number(), maxZ: z.number() }).strict().optional(), segments: z.array(StairSegmentLike).min(1) })
+  .strict()
+
+/**
+ * Where an interior comes from, in that source's own frame: a model built from the same pages (LOCAL), named by its hash.
+ * It is a source, not the house: the resolver places it in the house only through a verified transform.
+ */
+export const InteriorSourceSchema = z
+  .object({
+    origin: z.enum(['LOCAL']),
+    modelHash: z.string(),
+    /** The source's outer extent (its exterior walls, outer faces) and its ground footprint, to register it against the house. */
+    extent: z.object({ x0: z.number(), x1: z.number(), z0: z.number(), z1: z.number() }).strict(),
+    footprint: z.array(z.array(Vec2).min(3)).min(1),
+    /** The source's exterior wall thickness (its partitions meet the inner faces of these). */
+    exteriorThicknessM: z.number().positive(),
+    /** The centres of the openings in its exterior walls, per level: a second, independent check of which way it lies. */
+    exteriorOpenings: z.array(z.object({ level: z.number().int(), at: Vec2, door: z.boolean().optional() }).strict()).default([]),
+    levels: z.array(
+      z
+        .object({
+          index: z.number().int(),
+          elevation: z.number(),
+          walls: z.array(InteriorWall).default([]),
+          doors: z.array(InteriorDoor).default([]),
+          rooms: z.array(InteriorRoom).default([]),
+          stairs: z.array(InteriorStair.extend({ toLevel: z.number().int() })).default([]),
+          /** Openings in this level's floor (a stair well, a void over a double-height room). */
+          voids: z.array(z.array(Vec2).min(3)).default([]),
+        })
+        .strict(),
+    ),
+  })
+  .strict()
+export type HouseInteriorSource = z.infer<typeof InteriorSourceSchema>
+
+const InteriorLevel = z
+  .object({
+    level: z.number().int(),
+    walls: z.array(InteriorWall.extend({ how: z.string().optional() })).default([]),
+    doors: z.array(InteriorDoor).default([]),
+    rooms: z.array(InteriorRoom).default([]),
+    stairs: z.array(InteriorStair).default([]),
+    voids: z.array(z.array(Vec2).min(3)).default([]),
+    /** What of the source's level was not placed, and why (outside the outline, a door that no longer fits its wall …). */
+    dropped: z.array(z.object({ id: z.string(), kind: z.string(), why: z.string() }).strict()).default([]),
+  })
+  .strict()
+const InteriorSchema = z
+  .object({
+    /** NOT_BUILT: no interior source or none placed. BUILT / PARTIAL: placed through a verified transform. */
+    status: z.enum(['NOT_BUILT', 'NOT_CHECKED', 'BUILT', 'PARTIAL']),
+    note: z.string().optional(),
+    source: z.object({ origin: z.string(), modelHash: z.string() }).strict().optional(),
+    transform: z
+      .object({ mirrorX: z.boolean(), mirrorZ: z.boolean(), scale: z.number().positive(), dx: z.number(), dz: z.number(), axisRatio: z.number(), overlap: z.number(), levels: z.array(z.object({ source: z.number().int(), house: z.number().int(), elevationGapM: z.number() }).strict()), how: z.string() })
+      .strict()
+      .optional(),
+    levels: z.array(InteriorLevel).default([]),
+  })
+  .strict()
+export type HouseInterior = z.infer<typeof InteriorSchema>
+
 const GeometrySchema = z
   .object({
     frame: z.object({ units: z.literal('m'), up: z.literal('Y'), plan: z.literal('XZ'), origin: z.string(), front: z.string() }).strict(),
@@ -403,7 +479,7 @@ const GeometrySchema = z
     frames: z.array(FrameSchema).default([]),
     portals: z.array(PortalSchema).default([]),
     /** What exists and is NOT part of this document's check: the interior is kept as the builder finds it, never certified here. */
-    interior: z.object({ status: z.enum(['NOT_BUILT', 'NOT_CHECKED']), note: z.string().optional() }).strict().default({ status: 'NOT_BUILT' }),
+    interior: InteriorSchema.default({ status: 'NOT_BUILT', levels: [] }),
   })
   .strict()
 export type HouseGeometry = z.infer<typeof GeometrySchema>
@@ -480,7 +556,7 @@ const OpeningRecord = z
   .strict()
 export type HouseOpeningRecord = z.infer<typeof OpeningRecord>
 
-const CheckRecord = z.object({ id: Id, what: z.string(), expected: z.string(), measured: z.string(), status: z.enum(['PASS', 'FAIL', 'NOT_CHECKED', 'UNKNOWN']), scope: z.enum(['IDENTITY', 'ORIENTATION', 'METRIC', 'BODIES', 'LEVELS', 'ROOFS', 'OPENINGS', 'FEATURES', 'COMPILE']), blocks: z.array(z.string()).default([]) }).strict()
+const CheckRecord = z.object({ id: Id, what: z.string(), expected: z.string(), measured: z.string(), status: z.enum(['PASS', 'FAIL', 'NOT_CHECKED', 'UNKNOWN']), scope: z.enum(['IDENTITY', 'ORIENTATION', 'METRIC', 'BODIES', 'LEVELS', 'ROOFS', 'OPENINGS', 'FEATURES', 'COMPILE', 'INTERIOR']), blocks: z.array(z.string()).default([]) }).strict()
 
 const VerificationSchema = z
   .object({
@@ -520,7 +596,7 @@ export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
     /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
-    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', HOUSE_DOCUMENT_VERSION]),
+    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', '0.4.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),
@@ -539,6 +615,8 @@ export const HouseDocumentSchema = z
       .strict(),
     reader: z.object({ engine: z.string(), model: z.string().optional(), prompt: z.string().optional(), at: z.string().optional() }).strict().optional(),
     observations: ObservationsSchema,
+    /** v3.54.9: an interior from another source of the same pages (LOCAL), in its own frame; not an observation of the reading. */
+    interiorSource: InteriorSourceSchema.optional(),
     /** Absent until the resolver agreed one: observations alone are not a house. */
     geometry: GeometrySchema.optional(),
     verification: VerificationSchema.default({}),
