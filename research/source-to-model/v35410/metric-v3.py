@@ -92,7 +92,7 @@ def zones(house, model):
     regions = [r for r in (model or {}).get('surfaceRegions', []) if str(r.get('materialId', '')).startswith('mat-zone-')]
     pairs = {(z['material'], z['tone']) for z in zs}
     ids = {f"mat-zone-{m}-{t}".lower() for m, t in pairs}
-    consistent = all(r['materialId'] in mats for r in regions) and all(i in mats for i in ids)
+    consistent = (all(r['materialId'] in mats for r in regions) and all(i in mats for i in ids)) if model else None
     colours = {i: mats[i].get('color') or mats[i].get('baseColor') for i in ids if i in mats}
     return {'descriptive': True, 'zones': len(zs), 'bySide': by, 'materials': sorted(ids), 'colours': colours, 'zoneRegions': len(regions), 'paletteConsistent': consistent}
 
@@ -117,7 +117,12 @@ def main():
         model = house = None
         if label in extra:
             parts = extra[label].split(',')
-            model = json.load(open(parts[0]))
+            first = json.load(open(parts[0]))
+            # a house document alone (the model before review is compiled by measure-features, not saved): zones only
+            if first.get('schema') == 'buildapp.house-document':
+                house = first
+            else:
+                model = first
             if len(parts) > 1:
                 house = json.load(open(parts[1]))
         s27 = detail.score(f, I)
