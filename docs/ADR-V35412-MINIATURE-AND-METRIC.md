@@ -38,3 +38,20 @@ Gotowe: karta, scorer (`visual-miniature.py`, self-test), parowanie (`match-pict
 (`SKETCH_PROTOCOL.md`). Linia bazowa miniatury: LOCAL A, LOCAL oddany i H v3.54.11 — RECOGNISABLE 14/14; H v3.54.10 —
 RECOGNISABLE z brakującym pasem; kontrola v3.54.11 z białym tłem — NOT_RECOGNISABLE (obie ramy). Eksperyment B czeka na
 cztery pliki wejściowe OWNER-a, których nie było w sesji.
+
+## Dopisek v3.54.12-REAL (po wyniku na rzeczywistych szkicach)
+
+6. **Szkic jest kanałem klas wykończeń, nie źródłem geometrii.** Na Marcówkach szkice bez zmian pogorszyły LOCAL
+   (inna proporcja pionu frontu → zgubiona loggia), a z poprawioną rejestracją dały tę samą tożsamość co oryginały
+   i lepsze klasy materiału (strefy 14/14 vs 12/14). Kontrpróby: zmiana palety zmienia tylko materiały, brak ramy
+   usuwa ramę. Dlatego automatyczny szkic, jeśli powstanie, wchodzi jako dodatkowa, zarejestrowana warstwa klas ze
+   stałą paletą i bramkami (rejestracja, karta tożsamości, spójność czterech stron), a geometrię dalej czyta
+   analizator z oryginału.
+7. **Adaptery za flagą, domyślnie wyłączone.** `elevationVerticalFromDatums` (osobna skala pionu z kalenicy
+   i terenu, gdy grunt mija o > 0,3 m; granica 15 %) i `upperStoreyFinishes` (wykończenia wnęk kondygnacji wyższych).
+   Bez flag wynik jest bajt w bajt taki jak wcześniej. Włączenie domyślne wymaga osobnej decyzji (fałszywy ciemny pas
+   na fotografii szczytu przy drugiej fladze).
+8. **Czoło ściany jest hostem wykończenia** (`SurfaceRegion.face: START | END`, addytywnie); budowniczy H wykańcza
+   tylko czoła odsłonięte, objęte strefą. Domyślne malowanie domów bez stref się nie zmienia.
+9. **Domyślny model produktu pozostaje A**; B-both jest sceną eksperymentu w APK 1343. Automatyzacja szkiców jest
+   propozycją z kosztem (SOURCE_TO_MODEL_V35412, rozdz. 14), nie zakupem ani zgodą.

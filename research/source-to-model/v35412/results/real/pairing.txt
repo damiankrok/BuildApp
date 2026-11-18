@@ -1,0 +1,354 @@
+1000090696.jpg (1536, 1005) -> MATCH: ch-ge-elewacja-fron-ee81d52db6/var-projekt-dom-w-marcow crop 0.6264 (whole 0.4768); ch-ge-elewacja-fron-ee81d52db6/var-elewacja-frontowa-pr crop 0.6256 (whole 0.473); ch-ge-elewacja-ogro-77ee09534e/var-projekt-dom-w-marcow crop 0.5082 (whole 0.384); margin to another asset 0.118
+1000090699.jpg (1536, 1071) -> AMBIGUOUS: ch-ge-elewacja-ogro-77ee09534e/var-elewacja-ogrodowa-pr crop 0.5556 (whole 0.3696); ch-ge-elewacja-ogro-77ee09534e/var-projekt-dom-w-marcow crop 0.5338 (whole 0.3653); ch-ge-elewacja-fron-ee81d52db6/var-elewacja-frontowa-pr crop 0.4625 (whole 0.3393); margin to another asset 0.093
+Uproszczona elewacja domu z garażem.png (1550, 1014) -> AMBIGUOUS: rcowkach-ge-widok-1-f72054e154/var-widok-1-projekt-dom- crop 0.6653 (whole 0.4835); dom-w-marcowkach-ge-89e35336fb/var-widok-1-projekt-dom- crop 0.6599 (whole 0.4827); ch-ge-elewacja-fron-ee81d52db6/var-projekt-dom-w-marcow crop 0.5839 (whole 0.4089); margin to another asset 0.005
+Kolorowa tylna elewacja domu z balkonem.png (1502, 1047) -> MATCH: ch-ge-elewacja-ogro-77ee09534e/var-elewacja-ogrodowa-pr crop 0.6896 (whole 0.3091); ch-ge-elewacja-ogro-77ee09534e/var-projekt-dom-w-marcow crop 0.677 (whole 0.3123); rcowkach-ge-widok-1-f72054e154/var-widok-1-projekt-dom- crop 0.4764 (whole 0.2375); margin to another asset 0.213
+{
+ "1000090696.jpg": {
+  "size": [
+   1536,
+   1005
+  ],
+  "sha256": "aebf92bfcf67ecffcc418d69a36fb3d6113b24bb65d28a190afc5a78d8dca209",
+  "trimBox": [
+   0,
+   0,
+   1536,
+   1005
+  ],
+  "state": "MATCH",
+  "mirrorWarning": false,
+  "top": [
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+    "hash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+    "ncc": 0.4768,
+    "nccFlipped": 0.3554,
+    "cropNcc": 0.6264,
+    "cropNccMirrored": 0.516,
+    "cropAt": [
+     0.65,
+     0.1875,
+     0.08108108108108109
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+    "hash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+    "ncc": 0.473,
+    "nccFlipped": 0.3545,
+    "cropNcc": 0.6256,
+    "cropNccMirrored": 0.5103,
+    "cropAt": [
+     0.65,
+     0.1875,
+     0.08108108108108109
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+    "hash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+    "ncc": 0.384,
+    "nccFlipped": 0.3978,
+    "cropNcc": 0.5082,
+    "cropNccMirrored": 0.5039,
+    "cropAt": [
+     0.65,
+     0.275,
+     0.08108108108108109
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+    "hash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+    "ncc": 0.4349,
+    "nccFlipped": 0.2969,
+    "cropNcc": 0.4723,
+    "cropNccMirrored": 0.4316,
+    "cropAt": [
+     0.55,
+     0.35,
+     0.35
+    ]
+   },
+   {
+    "asset": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+    "hash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+    "ncc": 0.4346,
+    "nccFlipped": 0.2967,
+    "cropNcc": 0.4689,
+    "cropNccMirrored": 0.4279,
+    "cropAt": [
+     0.55,
+     0.35,
+     0.35
+    ]
+   }
+  ]
+ },
+ "1000090699.jpg": {
+  "size": [
+   1536,
+   1071
+  ],
+  "sha256": "6cfa4757934d3b17a42e760608679d09972261a773799d247bd12abcfc58446c",
+  "trimBox": [
+   0,
+   0,
+   1536,
+   1071
+  ],
+  "state": "AMBIGUOUS",
+  "mirrorWarning": false,
+  "top": [
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b-48cdba522f",
+    "hash": "f156ae82210a277f04aeaec210724204b78a4153da9393820ab3b6980debb13b",
+    "ncc": 0.3696,
+    "nccFlipped": 0.2576,
+    "cropNcc": 0.5556,
+    "cropNccMirrored": 0.4888,
+    "cropAt": [
+     0.55,
+     0.1875,
+     0.16363636363636364
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+    "hash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+    "ncc": 0.3653,
+    "nccFlipped": 0.2562,
+    "cropNcc": 0.5338,
+    "cropNccMirrored": 0.4567,
+    "cropAt": [
+     0.55,
+     0.1875,
+     0.16216216216216217
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+    "hash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+    "ncc": 0.3393,
+    "nccFlipped": 0.2921,
+    "cropNcc": 0.4625,
+    "cropNccMirrored": 0.4628,
+    "cropAt": [
+     0.45,
+     0.425,
+     0.32432432432432434
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+    "hash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+    "ncc": 0.3395,
+    "nccFlipped": 0.2974,
+    "cropNcc": 0.4619,
+    "cropNccMirrored": 0.4708,
+    "cropAt": [
+     0.45,
+     0.425,
+     0.32432432432432434
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+    "hash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+    "ncc": 0.2185,
+    "nccFlipped": 0.4516,
+    "cropNcc": 0.4427,
+    "cropNccMirrored": 0.4462,
+    "cropAt": [
+     0.45,
+     0.4125,
+     0.4166666666666667
+    ]
+   }
+  ]
+ },
+ "Uproszczona elewacja domu z gara\u017cem.png": {
+  "size": [
+   1550,
+   1014
+  ],
+  "sha256": "c868bf59895caa8f67a861111939bdb85b65d866c2c7cee5f6076345274c8938",
+  "trimBox": [
+   207,
+   58,
+   1428,
+   960
+  ],
+  "state": "AMBIGUOUS",
+  "mirrorWarning": false,
+  "top": [
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+    "hash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+    "ncc": 0.4835,
+    "nccFlipped": 0.4001,
+    "cropNcc": 0.6653,
+    "cropNccMirrored": 0.6384,
+    "cropAt": [
+     0.75,
+     0.0875,
+     0.08333333333333333
+    ]
+   },
+   {
+    "asset": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+    "hash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+    "ncc": 0.4827,
+    "nccFlipped": 0.399,
+    "cropNcc": 0.6599,
+    "cropNccMirrored": 0.6357,
+    "cropAt": [
+     0.75,
+     0.0875,
+     0.08333333333333333
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+    "hash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+    "ncc": 0.4089,
+    "nccFlipped": 0.4206,
+    "cropNcc": 0.5839,
+    "cropNccMirrored": 0.558,
+    "cropAt": [
+     0.55,
+     0.325,
+     0.08108108108108109
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+    "hash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+    "ncc": 0.4048,
+    "nccFlipped": 0.415,
+    "cropNcc": 0.5776,
+    "cropNccMirrored": 0.5532,
+    "cropAt": [
+     0.55,
+     0.4,
+     0.08108108108108109
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+    "hash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+    "ncc": 0.42,
+    "nccFlipped": 0.4138,
+    "cropNcc": 0.5248,
+    "cropNccMirrored": 0.5989,
+    "cropAt": [
+     0.45,
+     0.4,
+     0.21621621621621623
+    ]
+   }
+  ]
+ },
+ "Kolorowa tylna elewacja domu z balkonem.png": {
+  "size": [
+   1502,
+   1047
+  ],
+  "sha256": "2e7b59bdc2954fa06c87ab9378a321456e2cd99fb55f394ac276debb37540272",
+  "trimBox": [
+   122,
+   101,
+   1406,
+   979
+  ],
+  "state": "MATCH",
+  "mirrorWarning": false,
+  "top": [
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b-48cdba522f",
+    "hash": "f156ae82210a277f04aeaec210724204b78a4153da9393820ab3b6980debb13b",
+    "ncc": 0.3091,
+    "nccFlipped": 0.2312,
+    "cropNcc": 0.6896,
+    "cropNccMirrored": 0.6181,
+    "cropAt": [
+     0.55,
+     0.2125,
+     0.16363636363636364
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "variant": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+    "hash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+    "ncc": 0.3123,
+    "nccFlipped": 0.2371,
+    "cropNcc": 0.677,
+    "cropNccMirrored": 0.6119,
+    "cropAt": [
+     0.55,
+     0.2125,
+     0.16216216216216217
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+    "hash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+    "ncc": 0.2375,
+    "nccFlipped": 0.3744,
+    "cropNcc": 0.4764,
+    "cropNccMirrored": 0.5646,
+    "cropAt": [
+     0.45,
+     0.55,
+     0.2833333333333333
+    ]
+   },
+   {
+    "asset": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+    "variant": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+    "hash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+    "ncc": 0.2363,
+    "nccFlipped": 0.374,
+    "cropNcc": 0.4738,
+    "cropNccMirrored": 0.5602,
+    "cropAt": [
+     0.45,
+     0.55,
+     0.2833333333333333
+    ]
+   },
+   {
+    "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "variant": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+    "hash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+    "ncc": 0.258,
+    "nccFlipped": 0.3194,
+    "cropNcc": 0.4708,
+    "cropNccMirrored": 0.5162,
+    "cropAt": [
+     0.55,
+     0.1125,
+     0.16216216216216217
+    ]
+   }
+  ]
+ }
+}

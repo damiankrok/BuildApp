@@ -1,0 +1,188 @@
+{
+ "schema": "buildapp.v35412-sketch-registration/1",
+ "similarity": {
+  "scale": 0.577762,
+  "rotationDeg": -0.72,
+  "tx": 252.23,
+  "ty": 55.31,
+  "meanAnchorResidualPx": 12.62
+ },
+ "affine": {
+  "matrix": [
+   [
+    0.589308,
+    0.014668,
+    238.263089
+   ],
+   [
+    0.000711,
+    0.540935,
+    69.30959
+   ]
+  ],
+  "scaleX": 0.589308,
+  "scaleY": 0.541134,
+  "xyRatio": 1.089,
+  "shearCos": 0.0283
+ },
+ "reflectionNeeded": false,
+ "verdict": "PROPORTIONS_CHANGED",
+ "note": "the transform maps sketch pixels to original pixels; CHECK rows are what the sketch changed beyond a crop/resize",
+ "pairs": [
+  {
+   "name": "ground-left (frame outer, x=0)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 18.32,
+   "residualAffinePx": 1.76,
+   "dxSimilarityPx": 6.02,
+   "dySimilarityPx": 17.31,
+   "residualSimilarityM": 0.312,
+   "dxSimilarityM": 0.102
+  },
+  {
+   "name": "ground-right (garage outer, x=12.05)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 15.35,
+   "residualAffinePx": 3.49,
+   "dxSimilarityPx": -12.69,
+   "dySimilarityPx": 8.63,
+   "residualSimilarityM": 0.261,
+   "dxSimilarityM": -0.216
+  },
+  {
+   "name": "ridge apex (outer)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 18.96,
+   "residualAffinePx": 2.66,
+   "dxSimilarityPx": 4.29,
+   "dySimilarityPx": -18.47,
+   "residualSimilarityM": 0.323,
+   "dxSimilarityM": 0.073
+  },
+  {
+   "name": "frame left eave (x=0, y=4.67)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 3.03,
+   "residualAffinePx": 6.29,
+   "dxSimilarityPx": 2.37,
+   "dySimilarityPx": 1.89,
+   "residualSimilarityM": 0.052,
+   "dxSimilarityM": 0.04
+  },
+  {
+   "name": "frame right eave (x=7.9, y=4.67)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 9.01,
+   "residualAffinePx": 8.05,
+   "dxSimilarityPx": 6.95,
+   "dySimilarityPx": -5.74,
+   "residualSimilarityM": 0.153,
+   "dxSimilarityM": 0.118
+  },
+  {
+   "name": "garage top right (12.05, 3.09)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 15.46,
+   "residualAffinePx": 8.4,
+   "dxSimilarityPx": -15.12,
+   "dySimilarityPx": -3.2,
+   "residualSimilarityM": 0.263,
+   "dxSimilarityM": -0.257
+  },
+  {
+   "name": "garage top at the body (7.9, 3.09)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 8.2,
+   "residualAffinePx": 10.49,
+   "dxSimilarityPx": 8.19,
+   "dySimilarityPx": -0.43,
+   "residualSimilarityM": 0.139,
+   "dxSimilarityM": 0.139
+  },
+  {
+   "name": "garage door left top (8.55, 2.25)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 34.09,
+   "residualAffinePx": 31.09,
+   "dxSimilarityPx": -33.97,
+   "dySimilarityPx": 2.8,
+   "residualSimilarityM": 0.58,
+   "dxSimilarityM": -0.578
+  },
+  {
+   "name": "garage door right top (11.3, 2.25)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 10.24,
+   "residualAffinePx": 3.62,
+   "dxSimilarityPx": -10.23,
+   "dySimilarityPx": 0.47,
+   "residualSimilarityM": 0.174,
+   "dxSimilarityM": -0.174
+  },
+  {
+   "name": "portal band left bottom (3.25, 2.28)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 5.85,
+   "residualAffinePx": 5.57,
+   "dxSimilarityPx": -2.6,
+   "dySimilarityPx": 5.24,
+   "residualSimilarityM": 0.099,
+   "dxSimilarityM": -0.044
+  },
+  {
+   "name": "frame inner apex (3.95, 7.12)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 7.45,
+   "residualAffinePx": 7.34,
+   "dxSimilarityPx": 5.07,
+   "dySimilarityPx": -5.46,
+   "residualSimilarityM": 0.127,
+   "dxSimilarityM": 0.086
+  },
+  {
+   "name": "frame inner left at ±0 (0.61, 0)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 19.55,
+   "residualAffinePx": 6.23,
+   "dxSimilarityPx": 9.98,
+   "dySimilarityPx": 16.81,
+   "residualSimilarityM": 0.332,
+   "dxSimilarityM": 0.17
+  },
+  {
+   "name": "left window left top (1.4, 2.3)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 8.94,
+   "residualAffinePx": 4.88,
+   "dxSimilarityPx": 7.94,
+   "dySimilarityPx": 4.11,
+   "residualSimilarityM": 0.152,
+   "dxSimilarityM": 0.135
+  },
+  {
+   "name": "front raked glazing high corner (3.95, 6.26)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 12.63,
+   "residualAffinePx": 4.44,
+   "dxSimilarityPx": 9.13,
+   "dySimilarityPx": -8.73,
+   "residualSimilarityM": 0.215,
+   "dxSimilarityM": 0.155
+  },
+  {
+   "name": "loggia railing top right (7.26, 3.97)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 7.7,
+   "residualAffinePx": 8.64,
+   "dxSimilarityPx": 7.57,
+   "dySimilarityPx": -1.4,
+   "residualSimilarityM": 0.131,
+   "dxSimilarityM": 0.129
+  }
+ ],
+ "original": "front-orig-130edece.png",
+ "sketch": "Uproszczona elewacja domu z garażem.png",
+ "warped": "Uproszczona elewacja domu z garażem.registered-similarity.png (similarity only; no local deformation)",
+ "originalSha256": "5f6e8a15dc1ef76b4796fa86d03d031c83f7b36faeaae86728053c527b6cb154",
+ "sketchSha256": "c868bf59895caa8f67a861111939bdb85b65d866c2c7cee5f6076345274c8938"
+}

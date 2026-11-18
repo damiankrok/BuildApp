@@ -12,13 +12,33 @@
 
 ## Current summary (read first)
 
+- **v3.54.12-REAL (2026-11-18): the OWNER's colour sketches through the real LOCAL; confirmed barriers repaired behind
+  flags; the H wall-cap strip fixed; APK 1343** (resume ZIP with the four images and Master Plan v3.54.12, copied in
+  full to `docs/MASTER_PLAN.md`). Code `59b9af1`, scenes `11186ca`. Report addendum REAL_OWNER_INPUTS in
+  `stage-reports/SOURCE_TO_MODEL_V35412.md` (ch. 8–15; the BLOCKED_INPUTS history kept). Pairing: front original and
+  rear sketch MATCH; registration: the front sketch is 8.9 % taller than its width says (PROPORTIONS_CHANGED), the rear
+  CROP_AND_SCALE. LOCAL on unchanged sketches: B 13/14 recognisable (front loggia lost), 16-feature 11/15, B1 the same,
+  B2 = A. First wrong decisions: elevation registration (one scale; ground −0.98 vs −0.32 m, +3.06 lands 0.45 m high,
+  the fascia reader drops the band) and the finish reader reading ground-storey recesses only. Experimental flags,
+  OFF by default (A byte-identical): `elevationVerticalFromDatums`, `upperStoreyFinishes`. B-both (sketches + both
+  flags) 14/14, zone points 14/14 (A 12/14), 27/27, 16-feature 15/16 (garage door head 2.75 vs 2.25). Counter-trials:
+  palette swap keeps the architecture (zones 11/14); a sketch without the frame loses the frame (NOT_RECOGNISABLE) —
+  colour does not create architecture. Surface region `face: START|END` (wall end cap; additive) and H builder 0.8.0
+  finishing exposed caps: the 0.40 m light strip is dark; H v3.54.12 differs from v3.54.11 only by six cap regions;
+  regression R-DEV/R-CNEW/LAr SAME. Product default stays A; B-both is the experiment scene. APK 1343 (arm64, preview
+  signature, `a40528a5…`): scenes "H v3.54.12 (czoło ściany)" and "LOCAL + szkice OWNER-a (eksperyment)" first, the
+  1342 scenes byte-identical; ANDROID_UI_NOT_VERIFIED. Automation (OWNER's target: an image tool/API turns all four
+  elevations into colour sketches): proposal only, ~0.3–0.9 USD per house (Claude read-to-SVG with local render, or
+  Gemini 3.1 Flash Image edits), fixed palette, registration and identity gates, cross-side consistency; nothing bought,
+  0 USD spent.
+
 - **v3.54.12 (2026-11-18): colour sketch as LOCAL input and a recognisable miniature — prepared, experiment B not
   run** (prompt v3.54.12; no Master Plan v3.54.12 attached, so `docs/MASTER_PLAN.md` stays v3.54.11 and the OWNER's
   §0 decision — a recognisable miniature is the visual goal; accepted simplifications such as the garage door nearer
   the wall edge; mirror, missing wing, other roof or lost frame destroy identity — is recorded in
   `docs/ADR-V35412-MINIATURE-AND-METRIC.md`). The four OWNER images named in the prompt were not in the session; no
   substitute was used. Added (research only, production unchanged, 0 USD): identity card
-  `research/source-to-model/v35412/identity-marcowki.json` (14 features, 5 critical, executor-proposed tolerances,
+  `research/source-to-model/v35412/identity-marcowki.json` (14 features, 6 critical — earlier stated as 5 by mistake, the card unchanged —, executor-proposed tolerances,
   written before scoring), `visual-miniature.py` (VISUAL_MINIATURE separate from METRIC_EVIDENCE), `match-picture.py`,
   `register-sketch.py`, `sketch-package.ts`, `run-sketch.sh`, `SKETCH_PROTOCOL.md`. Baseline: LOCAL A, LOCAL delivered,
   H v3.54.11 RECOGNISABLE 14/14; H v3.54.10 13/14 (dark band missing); v3.54.11 white-fill control NOT_RECOGNISABLE

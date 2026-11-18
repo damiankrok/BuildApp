@@ -1,26 +1,24 @@
-# v3.54.12 hand-off
+# v3.54.12 hand-off (REAL — after the OWNER's images)
 
-Base `8119d85` (v3.54.11, APK 1342). This stage: research tools and documents only; production code unchanged; 0 USD.
-**Blocked on inputs:** the four OWNER images named in the prompt (`1000090696.jpg`, `1000090699.jpg`, `Uproszczona
-elewacja domu z garażem.png`, `Kolorowa tylna elewacja domu z balkonem.png`) were not in the session.
+Base `8119d85` (v3.54.11, APK 1342) → `41eb90a` (prepared, inputs missing) → `59b9af1` (barriers behind flags, wall
+end cap, Master Plan v3.54.12) → `11186ca` (scenes) → docs. 0 USD. APK 1343 `a40528a5…` (arm64, preview signature).
 
-## When the images arrive
+## State
 
-1. Pair by content: `/usr/bin/python3 -I research/source-to-model/v35412/match-picture.py
-   research/source-to-model/v3546/sources/marcowki-ge.source-package.json /home/user/rd/v3546/marcowki/cache <images…>`
-   (front = asset `…elewacja-fron-ee81d52db6`, rear = `…elewacja-ogro-77ee09534e`; the selected 1280-px variants).
-2. Register each sketch on building points (ground ends, outer corners, ridge apex, frame breaks as ANCHOR; garage
-   door left edge, portal end, frame band, rear raked glazings as CHECK): write `points.json`, then
-   `register-sketch.py points.json <dir> --warp` (front original 0.017 m/px in the board frame; give `mPerPxOriginal`).
-3. `research/source-to-model/v35412/run-sketch.sh "<front sketch>" "<rear sketch>" /home/user/rd/v35412/B` — B, B1, B2,
-   scenes, VISUAL_MINIATURE (`identity-marcowki.json`) and the metric diagnostics in one go (~20 min, 0 USD).
-4. Boards: `v3548/board-frames.ts --frames /home/user/rd/v35411/HM4/marcowki-ge/house.json …` with A and B models, then
-   compose source | sketch | A | B | chosen as in v3.54.11 (`/home/user/rd/v35411/boards`).
-5. If B is worse: trace the first wrong LOCAL decision (frame reader on the elevation first — the synthetic smoke run
-   shows the frame comes from the elevation only), then one MANUAL_DIAGNOSTIC with the right contour at that boundary.
+- The OWNER's images: `/home/user/v35412-start/BuildPlan-V35412-START/images/` (outside Git; also in the private ZIP).
+  Pairs: `1000090696.jpg` ↔ front (MATCH), `Kolorowa tylna…` ↔ rear (MATCH); `1000090699.jpg` and the front sketch
+  AMBIGUOUS by content, assigned by building points (`results/real/registration-*.json`).
+- Runs (`/home/user/rd/v35412/`): `OWNER-REAL/run-B|B1|B2` (unchanged sketches), `FLAG/` (vertical flag),
+  `FLAG2/A-off|A-both|B-both` (both flags), `counter/` (palette, no frame), `HC1|HC2` (H with caps), `REG/` (regression
+  replays), `metric/` (all scores), `boards/`.
+- Flags (default OFF): `--elevation-vertical-datums`, `--upper-storey-finishes` on `second-house.ts` / `runAnalysis`
+  options `elevationVerticalFromDatums`, `upperStoreyFinishes`.
+- Scenes: `marcowki-h-v35412` (seal `452165d1…`), `marcowki-local-szkice-v35412` (`1d5d7713…` = FLAG2/B-both).
 
-## Private data (outside Git, `/home/user/rd/v35412/`)
+## Next (needs the OWNER)
 
-- `metric/`: baseline features, zone points and miniature scores (A, delivered LOCAL, H v3.54.10/11, v3.54.11 controls).
-- `SMOKE/` + `SMOKE.log`: the full pipeline on explicitly SYNTHETIC stand-ins (not OWNER sketches; not a result).
-- `typecheck.log`.
+1. Decide the automation pilot (report ch. 14): recommended variant 2 (Claude reads regions to bounded SVG, rendered
+   locally in the original's frame) on two houses from different publishers, with palette/frame counter-trials; the
+   pool (0.301978 USD) covers at most one house.
+2. Whether `upperStoreyFinishes` may go default-on: first fix the false dark run on photographic gables (A-both 13/14).
+3. Garage door head in B-both (2.75 vs 2.25): a sketch simplification the card allows but the metric does not.

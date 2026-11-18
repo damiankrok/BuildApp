@@ -1,0 +1,188 @@
+{
+ "schema": "buildapp.v35412-sketch-registration/1",
+ "similarity": {
+  "scale": 0.562363,
+  "rotationDeg": -0.016,
+  "tx": 184.4,
+  "ty": 41.86,
+  "meanAnchorResidualPx": 2.47
+ },
+ "affine": {
+  "matrix": [
+   [
+    0.563573,
+    -0.001286,
+    184.362444
+   ],
+   [
+    -0.001256,
+    0.557554,
+    45.529572
+   ]
+  ],
+  "scaleX": 0.563574,
+  "scaleY": 0.557556,
+  "xyRatio": 1.0108,
+  "shearCos": -0.0045
+ },
+ "reflectionNeeded": false,
+ "verdict": "CROP_AND_SCALE",
+ "note": "the transform maps sketch pixels to original pixels; CHECK rows are what the sketch changed beyond a crop/resize",
+ "pairs": [
+  {
+   "name": "ground at garage outer (x=12.05)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 1.75,
+   "residualAffinePx": 0.24,
+   "dxSimilarityPx": 1.47,
+   "dySimilarityPx": 0.96,
+   "residualSimilarityM": 0.03,
+   "dxSimilarityM": 0.025
+  },
+  {
+   "name": "ground at body west outer (x=0)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 0.85,
+   "residualAffinePx": 1.67,
+   "dxSimilarityPx": -0.39,
+   "dySimilarityPx": 0.75,
+   "residualSimilarityM": 0.014,
+   "dxSimilarityM": -0.007
+  },
+  {
+   "name": "ridge apex (outer)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 5.35,
+   "residualAffinePx": 3.18,
+   "dxSimilarityPx": -0.91,
+   "dySimilarityPx": -5.28,
+   "residualSimilarityM": 0.091,
+   "dxSimilarityM": -0.015
+  },
+  {
+   "name": "frame eave at x=7.9",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 3.13,
+   "residualAffinePx": 3.95,
+   "dxSimilarityPx": -0.57,
+   "dySimilarityPx": 3.08,
+   "residualSimilarityM": 0.053,
+   "dxSimilarityM": -0.01
+  },
+  {
+   "name": "frame eave at x=0",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 2.98,
+   "residualAffinePx": 2.91,
+   "dxSimilarityPx": -0.47,
+   "dySimilarityPx": 2.95,
+   "residualSimilarityM": 0.051,
+   "dxSimilarityM": -0.008
+  },
+  {
+   "name": "garage top outer (12.05, 3.09)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 1.85,
+   "residualAffinePx": 0.92,
+   "dxSimilarityPx": 1.42,
+   "dySimilarityPx": -1.2,
+   "residualSimilarityM": 0.031,
+   "dxSimilarityM": 0.024
+  },
+  {
+   "name": "garage top at the body (7.9, 3.09)",
+   "kind": "ANCHOR",
+   "residualSimilarityPx": 1.38,
+   "residualAffinePx": 1.44,
+   "dxSimilarityPx": -0.54,
+   "dySimilarityPx": -1.27,
+   "residualSimilarityM": 0.023,
+   "dxSimilarityM": -0.009
+  },
+  {
+   "name": "frame inner apex (3.95, 7.12)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 3.76,
+   "residualAffinePx": 5.25,
+   "dxSimilarityPx": -0.89,
+   "dySimilarityPx": 3.65,
+   "residualSimilarityM": 0.064,
+   "dxSimilarityM": -0.015
+  },
+  {
+   "name": "frame inner edge west (0.61, 0)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 5.5,
+   "residualAffinePx": 5.48,
+   "dxSimilarityPx": -5.44,
+   "dySimilarityPx": 0.77,
+   "residualSimilarityM": 0.093,
+   "dxSimilarityM": -0.092
+  },
+  {
+   "name": "frame inner edge east (7.29, 0)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 4.65,
+   "residualAffinePx": 3.99,
+   "dxSimilarityPx": 4.56,
+   "dySimilarityPx": 0.88,
+   "residualSimilarityM": 0.079,
+   "dxSimilarityM": 0.077
+  },
+  {
+   "name": "terrace glazing left top (6.95, 2.3)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 4.94,
+   "residualAffinePx": 4.57,
+   "dxSimilarityPx": 4.67,
+   "dySimilarityPx": 1.6,
+   "residualSimilarityM": 0.084,
+   "dxSimilarityM": 0.079
+  },
+  {
+   "name": "terrace glazing right top (2.25, 2.3)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 3.01,
+   "residualAffinePx": 2.32,
+   "dxSimilarityPx": -2.6,
+   "dySimilarityPx": 1.53,
+   "residualSimilarityM": 0.051,
+   "dxSimilarityM": -0.044
+  },
+  {
+   "name": "raked E high end (4.61, 6.09)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 6.65,
+   "residualAffinePx": 5.31,
+   "dxSimilarityPx": -1.24,
+   "dySimilarityPx": -6.53,
+   "residualSimilarityM": 0.113,
+   "dxSimilarityM": -0.021
+  },
+  {
+   "name": "raked W high end (3.29, 6.09)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 6.55,
+   "residualAffinePx": 5.54,
+   "dxSimilarityPx": 0.15,
+   "dySimilarityPx": -6.55,
+   "residualSimilarityM": 0.111,
+   "dxSimilarityM": 0.003
+  },
+  {
+   "name": "garage side door left top (10.9, 2.1)",
+   "kind": "CHECK",
+   "residualSimilarityPx": 7.12,
+   "residualAffinePx": 6.6,
+   "dxSimilarityPx": 5.51,
+   "dySimilarityPx": -4.51,
+   "residualSimilarityM": 0.121,
+   "dxSimilarityM": 0.093
+  }
+ ],
+ "original": "x2-84ebf5b3.png",
+ "sketch": "Kolorowa tylna elewacja domu z balkonem.png",
+ "warped": "Kolorowa tylna elewacja domu z balkonem.registered-similarity.png (similarity only; no local deformation)",
+ "originalSha256": "ce41a94e805dc796dec73b248228b6333b4bd68b1cc84e329e717abd6e2795b6",
+ "sketchSha256": "2e7b59bdc2954fa06c87ab9378a321456e2cd99fb55f394ac276debb37540272"
+}

@@ -1,0 +1,184 @@
+{
+ "original": "front-orig-130edece.png",
+ "sketch": "Uproszczona elewacja domu z garażem.png",
+ "mPerPxOriginal": 0.017007,
+ "originalNote": "cached published front elevation, 1280-px variant 130edece…; points from T2-REG-FRONT and the sealed truth (±0 row 572)",
+ "sketchNote": "points read on a 50-px grid of the sketch; ±0 = top of the drawn plinth (row 927)",
+ "pairs": [
+  {
+   "name": "ground-left (frame outer, x=0)",
+   "o": [
+    376.0,
+    572.0
+   ],
+   "s": [
+    213,
+    927
+   ]
+  },
+  {
+   "name": "ground-right (garage outer, x=12.05)",
+   "o": [
+    1084.5,
+    572.0
+   ],
+   "s": [
+    1407,
+    927
+   ]
+  },
+  {
+   "name": "ridge apex (outer)",
+   "o": [
+    608.3,
+    104.5
+   ],
+   "s": [
+    623,
+    61
+   ]
+  },
+  {
+   "name": "frame left eave (x=0, y=4.67)",
+   "o": [
+    376.0,
+    297.4
+   ],
+   "s": [
+    213,
+    425
+   ]
+  },
+  {
+   "name": "frame right eave (x=7.9, y=4.67)",
+   "o": [
+    840.5,
+    297.4
+   ],
+   "s": [
+    1025,
+    422
+   ]
+  },
+  {
+   "name": "garage top right (12.05, 3.09)",
+   "o": [
+    1084.5,
+    390.3
+   ],
+   "s": [
+    1407,
+    592
+   ]
+  },
+  {
+   "name": "garage top at the body (7.9, 3.09)",
+   "o": [
+    840.5,
+    390.3
+   ],
+   "s": [
+    1025,
+    592
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "garage door left top (8.55, 2.25)",
+   "o": [
+    878.7,
+    439.7
+   ],
+   "s": [
+    1017,
+    683
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "garage door right top (11.3, 2.25)",
+   "o": [
+    1040.4,
+    439.7
+   ],
+   "s": [
+    1338,
+    683
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "portal band left bottom (3.25, 2.28)",
+   "o": [
+    567.1,
+    437.9
+   ],
+   "s": [
+    532,
+    678
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "frame inner apex (3.95, 7.12)",
+   "o": [
+    608.3,
+    153.3
+   ],
+   "s": [
+    623,
+    168
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "frame inner left at ±0 (0.61, 0)",
+   "o": [
+    411.9,
+    572.0
+   ],
+   "s": [
+    282,
+    927
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "left window left top (1.4, 2.3)",
+   "o": [
+    458.3,
+    436.8
+   ],
+   "s": [
+    362,
+    672
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "front raked glazing high corner (3.95, 6.26)",
+   "o": [
+    608.3,
+    203.9
+   ],
+   "s": [
+    629,
+    250
+   ]
+  },
+  {
+   "kind": "CHECK",
+   "name": "loggia railing top right (7.26, 3.97)",
+   "o": [
+    802.9,
+    338.6
+   ],
+   "s": [
+    960,
+    500
+   ]
+  }
+ ],
+ "originalSha256": "5f6e8a15dc1ef76b4796fa86d03d031c83f7b36faeaae86728053c527b6cb154",
+ "sketchSha256": "c868bf59895caa8f67a861111939bdb85b65d866c2c7cee5f6076345274c8938"
+}
