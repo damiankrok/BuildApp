@@ -1,5 +1,29 @@
 [
   {
+    "key": "marcowki-h-v35412",
+    "title": "Marcówki — H v3.54.12 (czoło ściany)",
+    "subtitle": "KANDYDAT H (nie oddany): jak v3.54.11, plus wykończenie odsłoniętych czół ścian w strefie (ciemny pas 0,40 m między wejściem a garażem); bez kominów",
+    "asset": "marcowki-h-v35412.scene.json",
+    "modelId": "house-marcowki-ge",
+    "modelSchemaVersion": "1.8.0",
+    "contentHash": "2d5576a96acbcaeee280afef2e30fe5e78a3d7cc6a2a7979e577f6d235b38107",
+    "meshCount": 172,
+    "triangleCount": 4912,
+    "objectCount": 129
+  },
+  {
+    "key": "marcowki-local-szkice-v35412",
+    "title": "Marcówki — LOCAL + szkice OWNER-a (eksperyment)",
+    "subtitle": "EKSPERYMENT: LOCAL z kolorowymi szkicami frontu i tyłu (2 z 4 elewacji) i dwiema flagami; nie jest modelem oddanym",
+    "asset": "marcowki-local-szkice-v35412.scene.json",
+    "modelId": "m-analysis-m2fa281446a8ca",
+    "modelSchemaVersion": "1.8.0",
+    "contentHash": "aaf571688156de847661e44a18db0e8fe59db7c5f5604500ba84be7ed3c7d409",
+    "meshCount": 169,
+    "triangleCount": 5382,
+    "objectCount": 124
+  },
+  {
     "key": "marcowki-h-v35411",
     "title": "Marcówki — H po naprawie v3.54.11",
     "subtitle": "KANDYDAT H (nie oddany) po naprawie materiałów: ciemne pasy portalu ze strefy źródła; reszta jak v3.54.10; bez kominów",

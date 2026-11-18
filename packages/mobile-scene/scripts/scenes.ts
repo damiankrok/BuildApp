@@ -47,6 +47,23 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.12: the same live reading replayed on the code with the wall-cap finish (59b9af1): six exposed wall end caps in
+  // a zone take its finish (the 0.40 m strip between entrance and garage); everything else as v3.54.11
+  {
+    key: 'marcowki-h-v35412',
+    title: 'Marcówki — H v3.54.12 (czoło ściany)',
+    subtitle: 'KANDYDAT H (nie oddany): jak v3.54.11, plus wykończenie odsłoniętych czół ścian w strefie (ciemny pas 0,40 m między wejściem a garażem); bez kominów',
+    build: () => sealedOwnerModel('marcowki-h-v35412', '452165d13263b268ffaebd8c5f134cd96202f7fc36c2b8ea1f05274ac5e50fea', 'owner-v35412'),
+  },
+  // v3.54.12 (experiment, not delivered): LOCAL on the source package with the front and rear elevations replaced by the
+  // OWNER's colour sketches (MIXED: 2 of 4), with the experimental flags elevationVerticalFromDatums and
+  // upperStoreyFinishes; plans, sections and the other elevations as published.
+  {
+    key: 'marcowki-local-szkice-v35412',
+    title: 'Marcówki — LOCAL + szkice OWNER-a (eksperyment)',
+    subtitle: 'EKSPERYMENT: LOCAL z kolorowymi szkicami frontu i tyłu (2 z 4 elewacji) i dwiema flagami; nie jest modelem oddanym',
+    build: () => sealedOwnerModel('marcowki-local-szkice-v35412', '1d5d7713bda542289c42ab4e8e4878931bc52c0c802e1e19ebd3318c052eb0f9', 'owner-v35412'),
+  },
   // v3.54.11: the same live reading (397a809's answers) built by the repaired code (84de494): the portal bands take
   // their source zone's finish (D53); everything else of the v3.54.10 candidate is unchanged — a third scene, the two
   // checkpoints below kept for comparison

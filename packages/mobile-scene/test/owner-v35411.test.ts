@@ -22,10 +22,10 @@ describe('v3.54.11 the repaired H scene', () => {
     expect(new Set(bands(before))).toEqual(new Set(['mat-member']))
     expect([fixed.rooms.length, fixed.walls.length, fixed.chimneys.length]).toEqual([15, 29, 0])
   })
-  it('is listed first, as a candidate after the repair', () => {
+  it('is listed after the two v3.54.12 scenes, as a candidate after the repair', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index[0].key).toBe('marcowki-h-v35411')
-    expect(index[0].title).toContain('po naprawie')
-    expect(index[0].subtitle).toContain('KANDYDAT')
+    expect(index[2].key).toBe('marcowki-h-v35411')
+    expect(index[2].title).toContain('po naprawie')
+    expect(index[2].subtitle).toContain('KANDYDAT')
   })
 })
