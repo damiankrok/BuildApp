@@ -1,0 +1,270 @@
+[
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 1,
+  "op": "SET_ZONE",
+  "subject": "el-p12/z1 (zone)",
+  "why": "The timber cladding stands only left of the portal band at ground level. Below the band the wall is dark plaster.",
+  "state": "APPLIED",
+  "consumer": "resolveHouse/zones → houseProgram/createSurfaceRegion",
+  "effect": "model 5dc9020271 → 33e12848e1; failing checks 0 → 0; held or refused 8 → 8; meshes 165 → 166",
+  "group": "defect-d1",
+  "baseRevision": "02d35f705383",
+  "revision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "5dc902027129df37d711ce63cbfe43831e5ce0c8c71a1c7be9bd7ac1021718ab",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 1,
+  "op": "SET_ZONE",
+  "subject": "el-p12/z3r (zone)",
+  "why": "The timber above the portal band, in the gable, continues to the right-hand frame leg.",
+  "state": "APPLIED",
+  "consumer": "resolveHouse/zones → houseProgram/createSurfaceRegion",
+  "effect": "model 5dc9020271 → 33e12848e1; failing checks 0 → 0; held or refused 8 → 8; meshes 165 → 166",
+  "group": "defect-d1",
+  "baseRevision": "02d35f705383",
+  "revision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "5dc902027129df37d711ce63cbfe43831e5ce0c8c71a1c7be9bd7ac1021718ab",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 1,
+  "op": "SET_ZONE",
+  "subject": "el-p11/z1 (zone)",
+  "why": "The garage side wall is dark plaster, from the roof edge at y 392 to the ground.",
+  "state": "REJECTED",
+  "code": "NOT_CONSUMED",
+  "consumer": "resolveHouse/zones → houseProgram/createSurfaceRegion",
+  "effect": "the built model is the same with it: the correction reached no geometry",
+  "baseRevision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "round": 11,
+  "op": "SUPPLEMENT",
+  "subject": "el-p10",
+  "why": "d4: GLAZING_SHAPE WRONG_SHAPE — The elevation shows dark infill and framing around the raked glazing, with mullions, and a grey panel in the middle. The model has plain glass filling the whole",
+  "state": "REJECTED",
+  "code": "COMPILE_CONFLICT",
+  "consumer": "reviewHouse/supplement → resolveHouse/features+openings",
+  "effect": "with it the scene has fewer objects (162 against 166)",
+  "baseRevision": "0c8e1ab0e6a1",
+  "properties": [
+   {
+    "property": "frame band (vertical)",
+    "target": 0.986,
+    "before": 0.983,
+    "after": 0.983,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "frame left leg end",
+    "target": -0.077,
+    "before": 0,
+    "after": 0,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "frame right leg end",
+    "target": -0.111,
+    "before": 0,
+    "after": 0,
+    "state": "NOT_IMPROVED",
+    "tolerance": "OUTSIDE_TOLERANCE"
+   },
+   {
+    "property": "railing infill",
+    "target": "GLASS",
+    "before": "GLASS",
+    "after": null,
+    "state": "NOT_MEASURABLE"
+   },
+   {
+    "property": "railing top",
+    "target": 3.901,
+    "before": 3.89,
+    "after": null,
+    "state": "NOT_MEASURABLE",
+    "tolerance": "NOT_MEASURABLE"
+   },
+   {
+    "property": "head at its left side",
+    "target": 4.207,
+    "before": 3.986,
+    "after": 4.278,
+    "state": "IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "head at its right side",
+    "target": 5.839,
+    "before": 6.09,
+    "after": 6.09,
+    "state": "NOT_IMPROVED",
+    "tolerance": "OUTSIDE_TOLERANCE"
+   },
+   {
+    "property": "head at its left side",
+    "target": 5.839,
+    "before": 6.09,
+    "after": 6.09,
+    "state": "NOT_IMPROVED",
+    "tolerance": "OUTSIDE_TOLERANCE"
+   },
+   {
+    "property": "head at its right side",
+    "target": 4.207,
+    "before": 3.89,
+    "after": 4.195,
+    "state": "IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   }
+  ],
+  "improved": "IMPROVED",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "3dfbe1c98beb06b7e253672afbb5a8a4506bbd75e48369a1dabcfd277106e396"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 2,
+  "op": "SET_ZONE",
+  "subject": "el-p11/z1 (zone)",
+  "why": "The garage side wall is dark plaster in the source and light in the model.",
+  "state": "REJECTED",
+  "code": "NOT_CONSUMED",
+  "consumer": "resolveHouse/zones → houseProgram/createSurfaceRegion",
+  "effect": "the built model is the same with it: the correction reached no geometry",
+  "baseRevision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 2,
+  "op": "SET_OPENING_DETAIL",
+  "subject": "el-p10/o3 (detail)",
+  "why": "The left rear gable glazing has a vertical mullion at about x=646.",
+  "state": "REJECTED",
+  "code": "NOT_CONSUMED",
+  "consumer": "resolveHouse/openings(contour, hidden row, divisions) → houseProgram/placeWindow|placeDoor",
+  "effect": "the built model is the same with it: the correction reached no geometry",
+  "group": "defect-d4",
+  "baseRevision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 2,
+  "op": "SET_OPENING_DETAIL",
+  "subject": "el-p10/o4 (detail)",
+  "why": "The right rear gable glazing has a vertical mullion at about x=835.",
+  "state": "REJECTED",
+  "code": "NOT_CONSUMED",
+  "consumer": "resolveHouse/openings(contour, hidden row, divisions) → houseProgram/placeWindow|placeDoor",
+  "effect": "the built model is the same with it: the correction reached no geometry",
+  "group": "defect-d4",
+  "baseRevision": "0c8e1ab0e6a1",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38"
+ },
+ {
+  "round": 21,
+  "op": "SUPPLEMENT",
+  "subject": "el-p10",
+  "why": "d4: GLAZING_SHAPE WRONG_SHAPE — The source rear gable glazing is two raked groups with mullions, with dark plaster between them. The model shows plain blue triangles with no mullions.",
+  "state": "APPLIED",
+  "consumer": "reviewHouse/supplement → resolveHouse/features+openings",
+  "effect": "model 33e12848e1 → 826085f562; failing checks 0 → 0; held or refused 8 → 8; meshes 166 → 166",
+  "baseRevision": "0c8e1ab0e6a1",
+  "revision": "c0adc5905b3a",
+  "properties": [
+   {
+    "property": "frame band (vertical)",
+    "target": 0.986,
+    "before": 0.983,
+    "after": 0.983,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "frame left leg end",
+    "target": -0.06,
+    "before": 0,
+    "after": 0,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "frame right leg end",
+    "target": -0.06,
+    "before": 0,
+    "after": 0,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "railing infill",
+    "target": "GLASS",
+    "before": "GLASS",
+    "after": "GLASS",
+    "state": "IMPROVED"
+   },
+   {
+    "property": "railing top",
+    "target": 3.901,
+    "before": 3.89,
+    "after": 3.89,
+    "state": "NOT_IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "head at its left side",
+    "target": 4.139,
+    "before": 3.986,
+    "after": 4.214,
+    "state": "IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   },
+   {
+    "property": "head at its right side",
+    "target": 5.839,
+    "before": 6.09,
+    "after": 6.09,
+    "state": "NOT_IMPROVED",
+    "tolerance": "OUTSIDE_TOLERANCE"
+   },
+   {
+    "property": "head at its left side",
+    "target": 5.839,
+    "before": 6.09,
+    "after": 6.09,
+    "state": "NOT_IMPROVED",
+    "tolerance": "OUTSIDE_TOLERANCE"
+   },
+   {
+    "property": "head at its right side",
+    "target": 4.139,
+    "before": 3.89,
+    "after": 4.128,
+    "state": "IMPROVED",
+    "tolerance": "WITHIN_TOLERANCE"
+   }
+  ],
+  "improved": "IMPROVED",
+  "inputModelHash": "33e12848e145dd91a56e2a426089f13600aebea792b43b9170955fa22ddfbd38",
+  "outputModelHash": "826085f562528b1666ea8a4e673c83e2ff446abd0b080dc719b191db2cee990a"
+ }
+]

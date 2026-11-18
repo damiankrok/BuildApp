@@ -1,0 +1,132 @@
+{
+ "schema": "buildapp.ai-spend-ledger.v35410",
+ "currency": "USD",
+ "costBasis": "USAGE_PRICED",
+ "billing": "NOT_RECONCILED_WITH_INVOICE",
+ "openingUsd": 23.2994,
+ "openingNote": "the cumulative books as v3.54.9 left them (23.2994 USD); this ledger lists the v3.54.10 requests only; ceiling 24.11036 USD cumulative",
+ "entries": [
+  {
+   "at": "2026-11-18T08:24:38.551Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading INVENTORY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:49b06a6d766a90e5",
+   "inputTokens": 6993,
+   "outputTokens": 1864,
+   "costUsd": 0.032626
+  },
+  {
+   "at": "2026-11-18T08:25:07.390Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading PLAN",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:78827da86e0c36f5",
+   "inputTokens": 7385,
+   "outputTokens": 3711,
+   "costUsd": 0.05188
+  },
+  {
+   "at": "2026-11-18T08:25:49.422Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading FACADES",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:5412eea5c082b501",
+   "inputTokens": 13774,
+   "outputTokens": 5881,
+   "costUsd": 0.086358
+  },
+  {
+   "at": "2026-11-18T08:26:05.749Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading DETAILS",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:523d38a0a3014ac8",
+   "inputTokens": 7075,
+   "outputTokens": 2341,
+   "costUsd": 0.03756
+  },
+  {
+   "at": "2026-11-18T08:26:34.085Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading STOREY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:bec7e5a5702a9bb2",
+   "inputTokens": 5648,
+   "outputTokens": 3514,
+   "costUsd": 0.046436
+  },
+  {
+   "at": "2026-11-18T08:26:48.503Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading STOREY",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:ac2e49533f11780f",
+   "inputTokens": 5652,
+   "outputTokens": 2335,
+   "costUsd": 0.034654
+  },
+  {
+   "at": "2026-11-18T08:27:36.488Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:137ecff1e0fc3919",
+   "inputTokens": 25461,
+   "outputTokens": 5388,
+   "costUsd": 0.104802
+  },
+  {
+   "at": "2026-11-18T08:27:49.384Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:64b938d46c805b5b",
+   "inputTokens": 4148,
+   "outputTokens": 1495,
+   "costUsd": 0.023246
+  },
+  {
+   "at": "2026-11-18T08:28:11.680Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:68dd9503f5bf7bef",
+   "inputTokens": 20071,
+   "outputTokens": 2814,
+   "costUsd": 0.068282
+  },
+  {
+   "at": "2026-11-18T08:28:23.667Z",
+   "phase": "host-e2e",
+   "house": "-",
+   "variant": "HOST",
+   "note": "final host E2E (build of 397a809): house reading REVIEW",
+   "model": "claude-sonnet-5-5",
+   "requestId": "host:f629636b73b6451d",
+   "inputTokens": 4144,
+   "outputTokens": 1485,
+   "costUsd": 0.023138
+  }
+ ],
+ "totalUsd": 0.508982,
+ "requests": 10
+}

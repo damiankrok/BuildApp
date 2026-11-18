@@ -1,0 +1,254 @@
+{
+ "name": "job-1",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+ "withToken": true,
+ "jobId": "d10da82bddabd2abd263f195dd379566",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 160,
+ "booksDeltaUsd": 0,
+ "booksDeltaRequests": 0,
+ "interiorNotServed": "LOCAL stood: the served model carries LOCAL's own interior, not the described house's",
+ "interior": {
+  "status": "BUILT",
+  "note": "placed from LOCAL (36f522a4eb21) through a checked transform: 44 element(s) placed, 0 not; plan readings: storey 0 NOT_PLACED, storey 1 PLACED (+1 partition(s), +0 door(s), +2 room(s))",
+  "transform": {
+   "mirrorX": false,
+   "mirrorZ": false,
+   "scale": 0.994383,
+   "overlap": 0.981804
+  },
+  "levels": [
+   {
+    "level": 0,
+    "walls": 11,
+    "doors": 5,
+    "rooms": 7,
+    "stairs": 1,
+    "voids": 0,
+    "dropped": 0
+   },
+   {
+    "level": 1,
+    "walls": 10,
+    "doors": 5,
+    "rooms": 8,
+    "stairs": 0,
+    "voids": 1,
+    "dropped": 0
+   }
+  ],
+  "modelInteriorWalls": 20,
+  "modelRooms": 13
+ },
+ "v35410": {
+  "zones": 16,
+  "zoneMaterials": [],
+  "zonesBySide": {
+   "LEFT": 2,
+   "REAR": 5,
+   "RIGHT": 4,
+   "FRONT": 5
+  },
+  "labelsRead": [
+   "470/230",
+   "300/230",
+   "90/230",
+   "140/140",
+   "110/230",
+   "105/210",
+   "275/225",
+   "100/210",
+   "234/303",
+   "234/303",
+   "270/320",
+   "78/118",
+   "78/118",
+   "78/118"
+  ],
+  "labelsBound": [
+   {
+    "opening": "opening-rear-2",
+    "literal": "234/303",
+    "sets": [
+     "widthM",
+     "head.heightFarM"
+    ]
+   },
+   {
+    "opening": "opening-rear-4",
+    "literal": "234/303",
+    "sets": [
+     "widthM",
+     "heightM"
+    ]
+   },
+   {
+    "opening": "opening-front-2",
+    "literal": "270/320",
+    "sets": [
+     "widthM",
+     "heightM"
+    ]
+   }
+  ],
+  "labelDefects": [
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_PLACED",
+   "LABEL_NOT_BOUND",
+   "LABEL_NOT_BOUND",
+   "LABEL_NOT_BOUND"
+  ],
+  "storeysRead": [
+   {
+    "level": 0,
+    "partitions": 8,
+    "doors": 6,
+    "rooms": 9
+   },
+   {
+    "level": 1,
+    "partitions": 9,
+    "doors": 9,
+    "rooms": 9
+   }
+  ],
+  "interiorRead": [
+   {
+    "level": 0,
+    "status": "NOT_PLACED",
+    "how": "the interior source does not register to the house's outline"
+   },
+   {
+    "level": 1,
+    "status": "PLACED",
+    "how": "one scale 1.0000 from the two extents (x 1.0054, z 0.9946), shifted onto the outline's corner; as drawn (footprint overlap 94.8 %); merged with the LOCAL import (nothing it placed removed)",
+    "added": {
+     "walls": 1,
+     "doors": 0,
+     "rooms": 2,
+     "voids": 0
+    }
+   }
+  ]
+ },
+ "facadeValues": {
+  "status": "PASS",
+  "measured": "8 agreed value(s) built as agreed"
+ },
+ "quality": {
+  "code": "QUALITY_FEATURES_CHECKED",
+  "what": "every characteristic feature read on the source is met by the delivered model (LOCAL) and no important review defect is open — FRONT: 3 met | LEFT: 1 met | REAR: 4 met"
+ },
+ "revision": {
+  "code": "REVISION_REUSED",
+  "what": "the accepted revision a6852d241fb215e9c2ddbca8ac2f6454 (2026-11-18T08:28:23.880Z) was replayed: no request; the same model; the same quality status"
+ },
+ "decisionCode": "LOCAL_MEETS_SOURCE",
+ "views": [
+  {
+   "side": "FRONT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "RIGHT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "REAR",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_PARTIAL"
+  },
+  {
+   "side": "LEFT",
+   "state": "READ_COMPLETE",
+   "build": "BUILT_COMPLETE"
+  }
+ ],
+ "houseStatus": {
+  "computation": "DONE",
+  "sources": "READ_COMPLETE",
+  "geometry": "BUILT_PARTIAL",
+  "exterior": "PARTIAL",
+  "missing": [
+   "FRONT: read, BUILT_PARTIAL: 5 of 8 built (not built: el-p12/chim-f (SOURCE_UNKNOWN))",
+   "RIGHT: read, BUILT_PARTIAL: 2 of 4 built (not built: el-p11/roofel-1 (CAPABILITY_MISSING), el-p11/roofel-2 (CAPABILITY_MISSING))",
+   "REAR: read, BUILT_PARTIAL: 5 of 8 built (not built: el-p10/chim-r (SOURCE_UNKNOWN))"
+  ]
+ },
+ "openingFits": {
+  "EXACT": 11
+ },
+ "houseSha256": "c4060747200b7270507cbf3cdbf1951c75400776371ef6c4be060fd5d9791eb5",
+ "stood": "ACCEPTED_LOCAL",
+ "why": "LOCAL_MEETS_SOURCE: LOCAL meets every source fact the description meets: a correct base is kept",
+ "checks": {
+  "pass": 18,
+  "fail": 1
+ },
+ "held": 7,
+ "counts": {
+  "assets": 20,
+  "assetsByDocument": {
+   "ELEVATION": 4,
+   "SECTION": 1,
+   "FLOOR_PLAN": 8,
+   "SITE_PLAN": 1,
+   "PERSPECTIVE_RENDER": 4,
+   "UNKNOWN": 2
+  },
+  "observations": 683,
+  "frames": 18,
+  "metricEvidence": 145,
+  "callouts": 57,
+  "commands": 224,
+  "masses": 2,
+  "openings": 12,
+  "rooms": 13,
+  "balconies": 2,
+  "terraces": 2,
+  "railings": 2,
+  "chimneys": 2,
+  "rooflights": 3,
+  "meshes": 168,
+  "triangles": 5254
+ },
+ "commit": "62350cc",
+ "modelHash": "36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86",
+ "modelSha256": "36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86",
+ "sceneSha256": "3954152fd322650cdf4fc1f3247f7676cd77c08a6564e8f3ff967982a9be68db",
+ "sceneContentHash": "75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "9f8cdc5ac7030f25e5d0d7e4dea8bce148cdbece5cd7dfefc4cafee5dc34046d",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "MATCHES",
+   "builtM2": 130.7065,
+   "publishedM2": 131.16,
+   "share": 0.996542
+  },
+  "scale": {
+   "status": "MEASURED",
+   "builtCmPerPx": 2.6426,
+   "measuredCmPerPx": 2.642489,
+   "ratio": 1.000042,
+   "confidence": "STRONG"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "USABLE_IN_SCOPE",
+  "reasons": []
+ }
+}

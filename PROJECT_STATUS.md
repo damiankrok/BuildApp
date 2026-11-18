@@ -12,6 +12,29 @@
 
 ## Current summary (read first)
 
+- **v3.54.10 (2026-11-18): one versioned reading contract, the right windows, consistent elevations** (prompt
+  v3.54.10; the Master Plan v3.54.10 was NOT attached, so `docs/MASTER_PLAN.md` stays v3.54.9). Code `397a809`
+  (live job host), `d43eebe`, `62350cc` (final host). Report `stage-reports/SOURCE_TO_MODEL_V35410.md`, OWNER index
+  `stage-reports/README_V35410.md`, ADR `docs/ADR-V35410-READING-CONTRACT-OPENINGS-ZONES.md`, hand-off
+  `research/source-to-model/v35410/HANDOFF.md`. What exists now: reading contract 0.5.0 (`contract.ts`: answers
+  conformed to the tool schema they were asked with, nested too, NON_STRICT and replays included; raw answer kept beside
+  the normalised one; one migration JSON_TEXT@1; stable opening ids from the program's order, answer order kept for
+  older recordings; capability inventory); new steps DETAILS (opening contour FRAME/GLASS/EXPOSED, hidden part,
+  mullions/transoms/leaves, finish zones, chimneys) and STOREY (per-storey partitions, doors, rooms, stairs, voids,
+  printed opening callouts); consumers: callouts bound to the opening of that wall and storey (width/height PRINTED;
+  a raked glazing keeps its high-end jamb), divisions as read, glass-only trace widened by a frame profile (ESTIMATED),
+  hidden raked ends ESTIMATED, finish zones as surface regions in style `low-poly@1` (presentation only; overlaps of
+  different finishes undrawn and named), gable-view chimneys fused with the side view, plan interiors merged into the
+  LOCAL import without removing it; review round 1 adds storey plans beside the model's storey cut and crops of the
+  bound callouts; ops SET_OPENING_DETAIL / SET_ZONE / REMOVE_ZONE. Document 0.6.0, resolver 0.7.0, builder 0.6.0,
+  house path 0.6.0, model schema unchanged; scorer v3. Marcówki GE, one live job (10 requests, 0.508982 USD): all
+  three raked glazings within tolerance (rear 2.34 × 6.09 PRINTED, low ends 1.068 after review), terrace 2 leaves,
+  16 finish zones, attic 8/9 source rooms; open: frame band read 0.98 vs 0.82, chimneys 0/2 (side view reads them as
+  OTHER), ground plan not registered (gross outline, 87.6 % < 90 %) so callout 470/230 and the ground interior from the
+  plan did not enter; LOCAL delivered (27/27), H-PO 21/27. Final host E2E on `62350cc` ALL CHECKS PASSED, reuse 0 USD,
+  no-token no requests. Books 23.808382 of 24.11036 USD. Private package `/home/user/BuildPlan-V35410-Private.zip`.
+  No APK.
+
 - **v3.54.9 (2026-11-18): one metric, the interior of every storey, exact glazing** (prompt v3.54.9 with Master Plan
   v3.54.9 copied in full to `docs/MASTER_PLAN.md`; code `39fec90` — final host built from it). Report
   `stage-reports/SOURCE_TO_MODEL_V3549.md`, OWNER index `stage-reports/README_V3549.md`, ADR

@@ -1,0 +1,47 @@
+v3.54.9 regression replays (same recorded answers) vs v3.54.10 final code (R-DEV2 / R-CNEW2 / LAr2): status, checks, refusals, compile errors, held, extent, model hash
+R-DEV  c4-archon-frizeach-g2e               DIFF
+   v3549  BUILT checks 16/0 refusals 0 compileErrors 0 held 9 19.5x13.5x7.1 5a735f6794e0
+   v35410 BUILT checks 16/0 refusals 0 compileErrors 0 held 7 19.5x13.5x7.1 1bcebbcfda7a
+R-DEV  c4-archon-lubczyku-2                 DIFF
+   v3549  BUILT checks 12/2 refusals 3 compileErrors 0 held 12 15.92x10.02x8.87 134dc67a820f
+   v35410 BUILT checks 12/2 refusals 3 compileErrors 0 held 8 15.92x10.02x8.87 accb70c87dbd
+R-DEV  c4-dobredomy-pallas                  DIFF
+   v3549  BUILT checks 13/0 refusals 2 compileErrors 1 held 9 16.476x10.43x8.42 2f7d93bedbcd
+   v35410 BUILT checks 13/0 refusals 2 compileErrors 1 held 6 16.476x10.43x8.42 af8742333082
+R-DEV  c4-lipinscy-dublin                   SAME
+   v3549  BUILT checks 13/0 refusals 0 compileErrors 0 held 3 13x10.04x9.21 ee0f5715a810
+   v35410 BUILT checks 13/0 refusals 0 compileErrors 0 held 3 13x10.04x9.21 ee0f5715a810
+R-DEV  c4-lipinscy-oslo                     DIFF
+   v3549  BUILT checks 14/2 refusals 1 compileErrors 1 held 6 8.55x7.05x7.09 96c16e5166e7
+   v35410 BUILT checks 14/2 refusals 1 compileErrors 1 held 5 8.55x7.05x7.09 d90983350fba
+R-DEV  c4-studioatrium-wena                 DIFF
+   v3549  BUILT checks 14/1 refusals 0 compileErrors 3 held 10 8.8x11.2x8.392 5fd836471895
+   v35410 BUILT checks 14/1 refusals 0 compileErrors 3 held 9 8.8x11.2x8.392 9d0d00e1d656
+R-CNEW c5-architecturaldesigns-550029lan    SAME
+   v3549  BUILT checks 5/0 refusals 1 compileErrors 4 held 36 18.765x18.989x14.79 2e202871c572
+   v35410 BUILT checks 5/0 refusals 1 compileErrors 4 held 36 18.765x18.989x14.79 2e202871c572
+R-CNEW c5-archon-anodach-3-g2e              DIFF
+   v3549  BUILT checks 13/0 refusals 0 compileErrors 0 held 10 14x19.25x7.29 0af8577e9232
+   v35410 BUILT checks 13/0 refusals 0 compileErrors 0 held 7 14x19.25x7.29 d3b7781d7fc1
+R-CNEW c5-archon-malaxisach-2-e             SAME
+   v3549  BUILT checks 11/3 refusals 0 compileErrors 0 held 15 17.043x12.455x6.15 9ebf82ed5885
+   v35410 BUILT checks 11/3 refusals 0 compileErrors 0 held 15 17.043x12.455x6.15 9ebf82ed5885
+R-CNEW c5-dobredomy-kardamon                DIFF
+   v3549  BUILT checks 11/0 refusals 1 compileErrors 2 held 15 19.578x19.272x8.36 734f13da8293
+   v35410 BUILT checks 11/0 refusals 1 compileErrors 2 held 14 19.578x19.272x8.36 48f90fc95202
+R-CNEW c5-extradom-mirabelka-4              SAME
+   v3549  NOT_SENT checks None/None refusals None compileErrors None held None NonexNonexNone -
+   v35410 NOT_SENT checks None/None refusals None compileErrors None held None NonexNonexNone -
+R-CNEW c5-extradom-tracja-2                 SAME
+   v3549  NOT_SENT checks None/None refusals None compileErrors None held None NonexNonexNone -
+   v35410 NOT_SENT checks None/None refusals None compileErrors None held None NonexNonexNone -
+R-CNEW c5-lipinscy-alaska                   SAME
+   v3549  BUILT checks 10/1 refusals 0 compileErrors 0 held 5 17.24x7.64x6.13 4b0d9d148171
+   v35410 BUILT checks 10/1 refusals 0 compileErrors 0 held 5 17.24x7.64x6.13 4b0d9d148171
+R-CNEW c5-studioatrium-pliszka-v-plus       DIFF
+   v3549  BUILT checks 13/1 refusals 1 compileErrors 1 held 10 11.45x18.95x6.348 99079e34dd60
+   v35410 BUILT checks 13/1 refusals 1 compileErrors 1 held 8 11.45x18.95x6.348 5436d294d705
+LAr    c5-lipinscy-alaska                   SAME
+   v3549  BUILT checks 13/1 refusals 0 compileErrors 0 held 6 17.24x7.64x6.13 ce4513a445f2
+   v35410 BUILT checks 13/1 refusals 0 compileErrors 0 held 6 17.24x7.64x6.13 ce4513a445f2
+Hash differs on 8 of 15 houses; in each the only geometry difference is geometry.chimneys (chimneys seen from a gable end now fused with the side view; held SOURCE_UNKNOWN before) — bodies, outlines, openings, frames, portals, interior byte-identical (checked per house); geometry.zones is the new empty list. The fused positions have no source truth for these houses: unverified.

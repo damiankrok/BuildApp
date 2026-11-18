@@ -1,0 +1,5 @@
+DIAG2: 27-rows 24/27 | terrace 5.135..9.835 (4.7×2.3) leaves 2 OK | FRONT-GABLE: w 2.7/2.7 ∠40.87° OK; REAR-GABLE-W: w 2.34/2.34 ∠42.67° NO lowEnd,angle; REAR-GABLE-E: w 2.34/2.34 ∠41.76° OK
+   zones 11 (FRONT:5, LEFT:1, REAR:5) materials ['mat-zone-board_cladding-dark', 'mat-zone-plaster-dark', 'mat-zone-wood-warm'] consistent True
+   storey 0: rooms 7/10 matched 7 missing 3 merged 1 cover 0.926 partitions 11 doors 5 comps 2 shaft None
+   storey 1: rooms 8/9 matched 8 missing 1 merged 0 cover 0.904 partitions 11 doors 6 comps 2 shaft 0.66
+   chimneys model 2 / source 2

@@ -1,0 +1,2294 @@
+{
+ "schema": "buildapp.v35410-marcowki-metric/3",
+ "tolerances": {
+  "TOL_X": 0.15,
+  "TOL_Y": 0.15,
+  "TOL_W": 0.15,
+  "TOL_ANGLE_DEG": 2.5
+ },
+ "models": {
+  "LOCAL": {
+   "rows27": {
+    "met": 27,
+    "of": 27
+   },
+   "glazing3": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "callout": "270/320",
+     "truthWidthM": 2.7,
+     "built": true,
+     "model": {
+      "alongFrom": 3.925,
+      "alongTo": 6.625,
+      "widthM": 2.7,
+      "angleDeg": 40.01
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.025,
+      "jambB": 0.025,
+      "highEnd": 0.0,
+      "lowEnd": 0.026,
+      "angleDeg": 0.33
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 8.754,
+      "alongTo": 11.094,
+      "widthM": 2.34,
+      "angleDeg": 39.99
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.006,
+      "jambB": 0.006,
+      "highEnd": 0.01,
+      "lowEnd": 0.007,
+      "angleDeg": 0.04
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 5.132,
+      "alongTo": 7.472,
+      "widthM": 2.34,
+      "angleDeg": 39.85
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.032,
+      "jambB": 0.032,
+      "highEnd": 0.0,
+      "lowEnd": 0.007,
+      "angleDeg": 0.1
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "terrace": {
+    "id": "T2-OPEN-REAR-GLAZING",
+    "truth": {
+     "interval": [
+      2.25,
+      6.95
+     ],
+     "widthM": 4.7,
+     "sillY": 0.0,
+     "headY": 2.3,
+     "leaves": 2
+    },
+    "built": true,
+    "model": {
+     "alongFrom": 5.084,
+     "alongTo": 9.784,
+     "widthM": 4.7,
+     "sillY": 0,
+     "headY": 2.3,
+     "leaves": 1,
+     "kind": "WINDOW"
+    },
+    "error": {
+     "jambA": 0.016,
+     "jambB": 0.016,
+     "width": 0.0,
+     "sill": 0.0,
+     "head": 0.0
+    },
+    "ok": {
+     "jambs": true,
+     "width": true,
+     "sill": true,
+     "head": true,
+     "leaves": false
+    }
+   },
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      14.601
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      0.001
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.966,
+        "shapeError": 0.034,
+        "areaModelM2": 24.24,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": -0.18,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.958,
+        "shapeError": 0.042,
+        "areaModelM2": 9.03,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.4,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.945,
+        "shapeError": 0.055,
+        "areaModelM2": 5.71,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.44,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.75,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.22,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.895,
+        "shapeError": 0.105,
+        "areaModelM2": 3.76,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.36,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.892,
+        "shapeError": 0.108,
+        "areaModelM2": 3.48,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.34,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.589,
+        "shapeError": 0.411,
+        "areaModelM2": 47.28,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 17.67,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.123,
+      "meanAbsAreaErrorM2": 2.8,
+      "floorCoverage": 0.92,
+      "floorOutsideSource": 0.4,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.957,
+        "shapeError": 0.043,
+        "areaModelM2": 6.61,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.3,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.943,
+        "shapeError": 0.057,
+        "areaModelM2": 14.65,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.8,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.861,
+        "shapeError": 0.139,
+        "areaModelM2": 7.43,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -1.14,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.796,
+        "shapeError": 0.204,
+        "areaModelM2": 13.08,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 1.9,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.664,
+        "shapeError": 0.336,
+        "areaModelM2": 7.38,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.7,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.597,
+        "shapeError": 0.403,
+        "areaModelM2": 18.28,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 5.55,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.197,
+      "meanAbsAreaErrorM2": 1.73,
+      "floorCoverage": 0.871,
+      "floorOutsideSource": 0.37,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.65
+     }
+    ]
+   },
+   "chimneys": {
+    "truth": [
+     {
+      "id": "T2-CHIMNEY-1",
+      "truth": {
+       "x": [
+        5.46,
+        6.07
+       ],
+       "z": [
+        8.62,
+        9.05
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     },
+     {
+      "id": "T2-CHIMNEY-2",
+      "truth": {
+       "x": [
+        5.42,
+        5.99
+       ],
+       "z": [
+        4.15,
+        4.7
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     }
+    ],
+    "modelChimneys": [
+     {
+      "id": "chimney-0",
+      "footprint": {
+       "maxX": 6.062791,
+       "maxZ": 9.172218,
+       "minX": 5.43289,
+       "minZ": 8.435684
+      }
+     },
+     {
+      "id": "chimney-1",
+      "footprint": {
+       "maxX": 5.984053,
+       "maxZ": 4.831926,
+       "minX": 5.43289,
+       "minZ": 4.174306
+      }
+     }
+    ]
+   }
+  },
+  "H-v3549": {
+   "rows27": {
+    "met": 22,
+    "of": 27
+   },
+   "glazing3": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "callout": "270/320",
+     "truthWidthM": 2.7,
+     "built": true,
+     "model": {
+      "alongFrom": 3.995,
+      "alongTo": 6.489,
+      "widthM": 2.494,
+      "angleDeg": 40.87
+     },
+     "error": {
+      "width": 0.206,
+      "jambA": 0.045,
+      "jambB": 0.161,
+      "highEnd": 0.178,
+      "lowEnd": 0.096,
+      "angleDeg": 1.19
+     },
+     "ok": {
+      "width": false,
+      "jambs": false,
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 8.808,
+      "alongTo": 11.385,
+      "widthM": 2.577,
+      "angleDeg": 35.89
+     },
+     "error": {
+      "width": 0.237,
+      "jambA": 0.048,
+      "jambB": 0.285,
+      "highEnd": 0.242,
+      "lowEnd": 0.147,
+      "angleDeg": 4.06
+     },
+     "ok": {
+      "width": false,
+      "jambs": false,
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 4.824,
+      "alongTo": 7.401,
+      "widthM": 2.577,
+      "angleDeg": 35.89
+     },
+     "error": {
+      "width": 0.237,
+      "jambA": 0.276,
+      "jambB": 0.039,
+      "highEnd": 0.242,
+      "lowEnd": 0.147,
+      "angleDeg": 4.06
+     },
+     "ok": {
+      "width": false,
+      "jambs": false,
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    }
+   ],
+   "terrace": {
+    "id": "T2-OPEN-REAR-GLAZING",
+    "truth": {
+     "interval": [
+      2.25,
+      6.95
+     ],
+     "widthM": 4.7,
+     "sillY": 0.0,
+     "headY": 2.3,
+     "leaves": 2
+    },
+    "built": true,
+    "model": {
+     "alongFrom": 5.214,
+     "alongTo": 9.757,
+     "widthM": 4.543,
+     "sillY": 0,
+     "headY": 2.373,
+     "leaves": 5,
+     "kind": "DOOR"
+    },
+    "error": {
+     "jambA": 0.114,
+     "jambB": 0.043,
+     "width": 0.157,
+     "sill": 0.0,
+     "head": 0.073
+    },
+    "ok": {
+     "jambs": true,
+     "width": false,
+     "sill": true,
+     "head": true,
+     "leaves": false
+    }
+   },
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      13.49
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      -1.11
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.952,
+        "shapeError": 0.048,
+        "areaModelM2": 24.61,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": 0.19,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.948,
+        "shapeError": 0.052,
+        "areaModelM2": 9.45,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": 0.02,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.81,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.16,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 3.9,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.22,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.89,
+        "shapeError": 0.11,
+        "areaModelM2": 5.91,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.24,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.849,
+        "shapeError": 0.151,
+        "areaModelM2": 3.55,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.27,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.593,
+        "shapeError": 0.407,
+        "areaModelM2": 47.91,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 18.3,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.139,
+      "meanAbsAreaErrorM2": 2.77,
+      "floorCoverage": 0.926,
+      "floorOutsideSource": 1.7,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.951,
+        "shapeError": 0.049,
+        "areaModelM2": 14.89,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.56,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.905,
+        "shapeError": 0.095,
+        "areaModelM2": 6.75,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.16,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.86,
+        "shapeError": 0.14,
+        "areaModelM2": 7.64,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -0.93,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.778,
+        "shapeError": 0.222,
+        "areaModelM2": 13.63,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 2.45,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.647,
+        "shapeError": 0.353,
+        "areaModelM2": 7.51,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.83,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.587,
+        "shapeError": 0.413,
+        "areaModelM2": 19.07,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 6.34,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.212,
+      "meanAbsAreaErrorM2": 1.88,
+      "floorCoverage": 0.881,
+      "floorOutsideSource": 1.69,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.66
+     }
+    ]
+   },
+   "chimneys": {
+    "truth": [
+     {
+      "id": "T2-CHIMNEY-1",
+      "truth": {
+       "x": [
+        5.46,
+        6.07
+       ],
+       "z": [
+        8.62,
+        9.05
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     },
+     {
+      "id": "T2-CHIMNEY-2",
+      "truth": {
+       "x": [
+        5.42,
+        5.99
+       ],
+       "z": [
+        4.15,
+        4.7
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     }
+    ],
+    "modelChimneys": []
+   },
+   "zones": {
+    "descriptive": true,
+    "zones": 0,
+    "bySide": {},
+    "materials": [],
+    "colours": {},
+    "zoneRegions": 0,
+    "paletteConsistent": true
+   }
+  },
+  "H-PRZED": {
+   "rows27": {
+    "met": 20,
+    "of": 27
+   },
+   "glazing3": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "callout": "270/320",
+     "truthWidthM": 2.7,
+     "built": true,
+     "model": {
+      "alongFrom": 3.95,
+      "alongTo": 6.65,
+      "widthM": 2.7,
+      "angleDeg": 40.97
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.0,
+      "jambB": 0.0,
+      "highEnd": 0.0,
+      "lowEnd": 0.105,
+      "angleDeg": 1.29
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 8.808,
+      "alongTo": 11.148,
+      "widthM": 2.34,
+      "angleDeg": 43.23
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.048,
+      "jambB": 0.048,
+      "highEnd": 0.0,
+      "lowEnd": 0.24,
+      "angleDeg": 3.28
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": false,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 5.028,
+      "alongTo": 7.368,
+      "widthM": 2.34,
+      "angleDeg": 41.96
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.072,
+      "jambB": 0.072,
+      "highEnd": 0.0,
+      "lowEnd": 0.144,
+      "angleDeg": 2.01
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "terrace": {
+    "id": "T2-OPEN-REAR-GLAZING",
+    "truth": {
+     "interval": [
+      2.25,
+      6.95
+     ],
+     "widthM": 4.7,
+     "sillY": 0.0,
+     "headY": 2.3,
+     "leaves": 2
+    },
+    "built": true,
+    "model": {
+     "alongFrom": 5.13,
+     "alongTo": 9.758,
+     "widthM": 4.628,
+     "sillY": 0,
+     "headY": 2.398,
+     "leaves": null,
+     "kind": "DOOR"
+    },
+    "error": {
+     "jambA": 0.03,
+     "jambB": 0.042,
+     "width": 0.072,
+     "sill": 0.0,
+     "head": 0.098
+    },
+    "ok": {
+     "jambs": true,
+     "width": true,
+     "sill": true,
+     "head": true,
+     "leaves": false
+    }
+   },
+   "zones": {
+    "descriptive": true,
+    "zones": 15,
+    "bySide": {
+     "LEFT": [
+      {
+       "id": "zone-left-1",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        5.47,
+        10.8
+       ],
+       "heightM": [
+        -0.03,
+        2.25
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-left-2",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        14.44
+       ],
+       "heightM": [
+        4.3,
+        4.65
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "REAR": [
+      {
+       "id": "zone-rear-3",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        4.14
+       ],
+       "heightM": [
+        -0.06,
+        3.04
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-4",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        5.02,
+        6.6
+       ],
+       "heightM": [
+        -0.04,
+        2.43
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-5",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.04,
+        0.34
+       ],
+       "heightM": [
+        -0.04,
+        2.43
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-6",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.04,
+        6.6
+       ],
+       "heightM": [
+        2.43,
+        3.03
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-7",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        2.63,
+        4.02
+       ],
+       "heightM": [
+        3.89,
+        6.13
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "RIGHT": [
+      {
+       "id": "zone-right-8",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.0,
+        8.4
+       ],
+       "heightM": [
+        -0.05,
+        3.01
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-9",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        1.2
+       ],
+       "heightM": [
+        -0.05,
+        2.21
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-10",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.0,
+        1.0
+       ],
+       "heightM": [
+        4.27,
+        4.62
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-11",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        13.43
+       ],
+       "heightM": [
+        4.27,
+        4.62
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "FRONT": [
+      {
+       "id": "zone-front-12",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.01,
+        2.58
+       ],
+       "heightM": [
+        -0.03,
+        3.06
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-13",
+       "level": 1,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.01,
+        6.54
+       ],
+       "heightM": [
+        3.06,
+        6.95
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-14",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        6.54,
+        10.65
+       ],
+       "heightM": [
+        -0.05,
+        3.02
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-15",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        0.71
+       ],
+       "heightM": [
+        -0.05,
+        3.02
+       ],
+       "basis": "DERIVED"
+      }
+     ]
+    },
+    "materials": [
+     "mat-zone-plaster-dark",
+     "mat-zone-wood-warm"
+    ],
+    "colours": {},
+    "zoneRegions": 0,
+    "paletteConsistent": null
+   }
+  },
+  "H-PO": {
+   "rows27": {
+    "met": 21,
+    "of": 27
+   },
+   "glazing3": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "callout": "270/320",
+     "truthWidthM": 2.7,
+     "built": true,
+     "model": {
+      "alongFrom": 3.95,
+      "alongTo": 6.65,
+      "widthM": 2.7,
+      "angleDeg": 40.97
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.0,
+      "jambB": 0.0,
+      "highEnd": 0.0,
+      "lowEnd": 0.105,
+      "angleDeg": 1.29
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 8.808,
+      "alongTo": 11.148,
+      "widthM": 2.34,
+      "angleDeg": 39.98
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.048,
+      "jambB": 0.048,
+      "highEnd": 0.0,
+      "lowEnd": 0.002,
+      "angleDeg": 0.03
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 5.028,
+      "alongTo": 7.368,
+      "widthM": 2.34,
+      "angleDeg": 38.72
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.072,
+      "jambB": 0.072,
+      "highEnd": 0.0,
+      "lowEnd": 0.084,
+      "angleDeg": 1.23
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "terrace": {
+    "id": "T2-OPEN-REAR-GLAZING",
+    "truth": {
+     "interval": [
+      2.25,
+      6.95
+     ],
+     "widthM": 4.7,
+     "sillY": 0.0,
+     "headY": 2.3,
+     "leaves": 2
+    },
+    "built": true,
+    "model": {
+     "alongFrom": 5.13,
+     "alongTo": 9.758,
+     "widthM": 4.628,
+     "sillY": 0,
+     "headY": 2.398,
+     "leaves": 2,
+     "kind": "DOOR"
+    },
+    "error": {
+     "jambA": 0.03,
+     "jambB": 0.042,
+     "width": 0.072,
+     "sill": 0.0,
+     "head": 0.098
+    },
+    "ok": {
+     "jambs": true,
+     "width": true,
+     "sill": true,
+     "head": true,
+     "leaves": true
+    }
+   },
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      13.414
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      -1.186
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.946,
+        "shapeError": 0.054,
+        "areaModelM2": 24.09,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": -0.33,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.937,
+        "shapeError": 0.063,
+        "areaModelM2": 9.19,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.24,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.904,
+        "shapeError": 0.096,
+        "areaModelM2": 5.81,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.34,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.8,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.17,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.893,
+        "shapeError": 0.107,
+        "areaModelM2": 3.56,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.25,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.881,
+        "shapeError": 0.119,
+        "areaModelM2": 3.83,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.29,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.577,
+        "shapeError": 0.423,
+        "areaModelM2": 47.32,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 17.71,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.138,
+      "meanAbsAreaErrorM2": 2.76,
+      "floorCoverage": 0.916,
+      "floorOutsideSource": 1.24,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 8,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-3",
+        "label": "Garderoba (south-west)",
+        "model": "main-room-1-0-p1-r3",
+        "iou": 0.952,
+        "shapeError": 0.048,
+        "areaModelM2": 6.83,
+        "areaTruthM2": 6.79,
+        "areaErrorM2": 0.04,
+        "publishedM2": 5.19
+       },
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.927,
+        "shapeError": 0.073,
+        "areaModelM2": 14.51,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.94,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.921,
+        "shapeError": 0.079,
+        "areaModelM2": 11.08,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": -0.1,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.898,
+        "shapeError": 0.102,
+        "areaModelM2": 6.71,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.21,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-8",
+        "label": "Garderoba (north-east)",
+        "model": "main-room-1-4-p1-r8",
+        "iou": 0.88,
+        "shapeError": 0.12,
+        "areaModelM2": 3.06,
+        "areaTruthM2": 2.64,
+        "areaErrorM2": 0.42,
+        "publishedM2": 1.62
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.85,
+        "shapeError": 0.15,
+        "areaModelM2": 7.55,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -1.02,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.819,
+        "shapeError": 0.181,
+        "areaModelM2": 11.19,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": -1.54,
+        "publishedM2": 10.25
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.647,
+        "shapeError": 0.353,
+        "areaModelM2": 7.51,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.83,
+        "publishedM2": 6.17
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [],
+      "meanShapeError": 0.138,
+      "meanAbsAreaErrorM2": 0.64,
+      "floorCoverage": 0.867,
+      "floorOutsideSource": 1.69,
+      "partitions": 10,
+      "doors": 5,
+      "passages": 4,
+      "components": 4,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.66
+     }
+    ]
+   },
+   "chimneys": {
+    "truth": [
+     {
+      "id": "T2-CHIMNEY-1",
+      "truth": {
+       "x": [
+        5.46,
+        6.07
+       ],
+       "z": [
+        8.62,
+        9.05
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     },
+     {
+      "id": "T2-CHIMNEY-2",
+      "truth": {
+       "x": [
+        5.42,
+        5.99
+       ],
+       "z": [
+        4.15,
+        4.7
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     }
+    ],
+    "modelChimneys": []
+   },
+   "zones": {
+    "descriptive": true,
+    "zones": 16,
+    "bySide": {
+     "LEFT": [
+      {
+       "id": "zone-left-1",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        5.47,
+        10.8
+       ],
+       "heightM": [
+        -0.03,
+        2.25
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-left-2",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        14.44
+       ],
+       "heightM": [
+        4.3,
+        4.65
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "REAR": [
+      {
+       "id": "zone-rear-3",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        4.14
+       ],
+       "heightM": [
+        -0.06,
+        3.04
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-4",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        5.02,
+        6.6
+       ],
+       "heightM": [
+        -0.04,
+        2.43
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-5",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.04,
+        0.34
+       ],
+       "heightM": [
+        -0.04,
+        2.43
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-6",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.04,
+        6.6
+       ],
+       "heightM": [
+        2.43,
+        3.03
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-rear-7",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        2.63,
+        4.02
+       ],
+       "heightM": [
+        3.89,
+        6.13
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "RIGHT": [
+      {
+       "id": "zone-right-8",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.0,
+        8.4
+       ],
+       "heightM": [
+        -0.05,
+        3.01
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-9",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        1.2
+       ],
+       "heightM": [
+        -0.05,
+        2.21
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-10",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0.0,
+        1.0
+       ],
+       "heightM": [
+        4.27,
+        4.62
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-right-11",
+       "level": 1,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        13.43
+       ],
+       "heightM": [
+        4.27,
+        4.62
+       ],
+       "basis": "DERIVED"
+      }
+     ],
+     "FRONT": [
+      {
+       "id": "zone-front-12",
+       "level": 0,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.01,
+        2.58
+       ],
+       "heightM": [
+        -0.03,
+        3.06
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-13",
+       "level": 1,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        0.01,
+        2.58
+       ],
+       "heightM": [
+        3.06,
+        6.95
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-14",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        2.58,
+        10.65
+       ],
+       "heightM": [
+        -0.05,
+        3.02
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-15",
+       "level": 0,
+       "material": "PLASTER",
+       "tone": "DARK",
+       "alongM": [
+        0,
+        0.71
+       ],
+       "heightM": [
+        -0.05,
+        3.02
+       ],
+       "basis": "DERIVED"
+      },
+      {
+       "id": "zone-front-16",
+       "level": 1,
+       "material": "WOOD",
+       "tone": "WARM",
+       "alongM": [
+        2.58,
+        6.54
+       ],
+       "heightM": [
+        3.06,
+        6.95
+       ],
+       "basis": "DERIVED"
+      }
+     ]
+    },
+    "materials": [
+     "mat-zone-plaster-dark",
+     "mat-zone-wood-warm"
+    ],
+    "colours": {
+     "mat-zone-plaster-dark": "#3a3a3c",
+     "mat-zone-wood-warm": "#b07a4a"
+    },
+    "zoneRegions": 16,
+    "paletteConsistent": true
+   }
+  },
+  "ODDANY": {
+   "rows27": {
+    "met": 27,
+    "of": 27
+   },
+   "glazing3": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "callout": "270/320",
+     "truthWidthM": 2.7,
+     "built": true,
+     "model": {
+      "alongFrom": 3.925,
+      "alongTo": 6.625,
+      "widthM": 2.7,
+      "angleDeg": 40.01
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.025,
+      "jambB": 0.025,
+      "highEnd": 0.0,
+      "lowEnd": 0.026,
+      "angleDeg": 0.33
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 8.754,
+      "alongTo": 11.094,
+      "widthM": 2.34,
+      "angleDeg": 39.78
+     },
+     "error": {
+      "width": 0.0,
+      "jambA": 0.006,
+      "jambB": 0.006,
+      "highEnd": 0.01,
+      "lowEnd": 0.022,
+      "angleDeg": 0.17
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "callout": "234/303",
+     "truthWidthM": 2.34,
+     "built": true,
+     "model": {
+      "alongFrom": 5.147,
+      "alongTo": 7.457,
+      "widthM": 2.31,
+      "angleDeg": 40.0
+     },
+     "error": {
+      "width": 0.03,
+      "jambA": 0.047,
+      "jambB": 0.017,
+      "highEnd": 0.0,
+      "lowEnd": 0.022,
+      "angleDeg": 0.05
+     },
+     "ok": {
+      "width": true,
+      "jambs": true,
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "terrace": {
+    "id": "T2-OPEN-REAR-GLAZING",
+    "truth": {
+     "interval": [
+      2.25,
+      6.95
+     ],
+     "widthM": 4.7,
+     "sillY": 0.0,
+     "headY": 2.3,
+     "leaves": 2
+    },
+    "built": true,
+    "model": {
+     "alongFrom": 5.084,
+     "alongTo": 9.784,
+     "widthM": 4.7,
+     "sillY": 0,
+     "headY": 2.3,
+     "leaves": 1,
+     "kind": "WINDOW"
+    },
+    "error": {
+     "jambA": 0.016,
+     "jambB": 0.016,
+     "width": 0.0,
+     "sill": 0.0,
+     "head": 0.0
+    },
+    "ok": {
+     "jambs": true,
+     "width": true,
+     "sill": true,
+     "head": true,
+     "leaves": false
+    }
+   },
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      14.601
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      0.001
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.966,
+        "shapeError": 0.034,
+        "areaModelM2": 24.24,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": -0.18,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.958,
+        "shapeError": 0.042,
+        "areaModelM2": 9.03,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.4,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.945,
+        "shapeError": 0.055,
+        "areaModelM2": 5.71,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.44,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.75,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.22,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.895,
+        "shapeError": 0.105,
+        "areaModelM2": 3.76,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.36,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.892,
+        "shapeError": 0.108,
+        "areaModelM2": 3.48,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.34,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.589,
+        "shapeError": 0.411,
+        "areaModelM2": 47.28,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 17.67,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.123,
+      "meanAbsAreaErrorM2": 2.8,
+      "floorCoverage": 0.92,
+      "floorOutsideSource": 0.4,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.957,
+        "shapeError": 0.043,
+        "areaModelM2": 6.61,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.3,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.943,
+        "shapeError": 0.057,
+        "areaModelM2": 14.65,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.8,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.861,
+        "shapeError": 0.139,
+        "areaModelM2": 7.43,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -1.14,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.796,
+        "shapeError": 0.204,
+        "areaModelM2": 13.08,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 1.9,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.664,
+        "shapeError": 0.336,
+        "areaModelM2": 7.38,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.7,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.597,
+        "shapeError": 0.403,
+        "areaModelM2": 18.28,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 5.55,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.197,
+      "meanAbsAreaErrorM2": 1.73,
+      "floorCoverage": 0.871,
+      "floorOutsideSource": 0.37,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.65
+     }
+    ]
+   },
+   "chimneys": {
+    "truth": [
+     {
+      "id": "T2-CHIMNEY-1",
+      "truth": {
+       "x": [
+        5.46,
+        6.07
+       ],
+       "z": [
+        8.62,
+        9.05
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     },
+     {
+      "id": "T2-CHIMNEY-2",
+      "truth": {
+       "x": [
+        5.42,
+        5.99
+       ],
+       "z": [
+        4.15,
+        4.7
+       ],
+       "topY": 7.86,
+       "slope": "EAST"
+      }
+     }
+    ],
+    "modelChimneys": [
+     {
+      "id": "chimney-0",
+      "footprint": {
+       "maxX": 6.062791,
+       "maxZ": 9.172218,
+       "minX": 5.43289,
+       "minZ": 8.435684
+      }
+     },
+     {
+      "id": "chimney-1",
+      "footprint": {
+       "maxX": 5.984053,
+       "maxZ": 4.831926,
+       "minX": 5.43289,
+       "minZ": 4.174306
+      }
+     }
+    ]
+   }
+  }
+ }
+}

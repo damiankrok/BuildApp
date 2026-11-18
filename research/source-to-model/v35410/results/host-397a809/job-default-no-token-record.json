@@ -1,0 +1,41 @@
+{
+ "name": "job-default-no-token",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+ "withToken": false,
+ "jobId": "b0c52fee61183f0f84105fd2f0cbb347",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 165,
+ "booksDeltaUsd": 0,
+ "booksDeltaRequests": 0,
+ "commit": "397a809",
+ "modelHash": "36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86",
+ "modelSha256": "36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86",
+ "sceneSha256": "3954152fd322650cdf4fc1f3247f7676cd77c08a6564e8f3ff967982a9be68db",
+ "sceneContentHash": "75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "9f8cdc5ac7030f25e5d0d7e4dea8bce148cdbece5cd7dfefc4cafee5dc34046d",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "MATCHES",
+   "builtM2": 130.7065,
+   "publishedM2": 131.16,
+   "share": 0.996542
+  },
+  "scale": {
+   "status": "MEASURED",
+   "builtCmPerPx": 2.6426,
+   "measuredCmPerPx": 2.642489,
+   "ratio": 1.000042,
+   "confidence": "STRONG"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "USABLE_IN_SCOPE",
+  "reasons": []
+ }
+}
