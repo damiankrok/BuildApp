@@ -163,7 +163,10 @@ try {
           const partitions = (served.walls ?? []).filter((w) => w.kind === 'INTERIOR').length
           const rooms = (served.rooms ?? []).length
           check(!!interior && ['NOT_BUILT', 'NOT_CHECKED', 'BUILT', 'PARTIAL'].includes(interior.status), `${name}: the house document says what happened to the interior (${interior?.status ?? 'nothing'}${interior?.note ? `: ${String(interior.note).slice(0, 120)}` : ''})`)
-          if (interior && (interior.status === 'BUILT' || interior.status === 'PARTIAL')) {
+          // the described house's interior is in the served model only when the described house is what is served (v3.54.10:
+          // with plan readings merged it is no longer LOCAL's import, so with LOCAL standing it is said, not compared)
+          if (!described && interior) record.interiorNotServed = 'LOCAL stood: the served model carries LOCAL\'s own interior, not the described house\'s'
+          if (described && interior && (interior.status === 'BUILT' || interior.status === 'PARTIAL')) {
             const placedWalls = (interior.levels ?? []).reduce((a, l) => a + (l.walls?.length ?? 0), 0)
             const placedRooms = (interior.levels ?? []).reduce((a, l) => a + (l.rooms?.length ?? 0), 0)
             check(partitions >= placedWalls && rooms >= placedRooms && placedWalls + placedRooms > 0, `${name}: the placed interior is in the served model (${placedWalls} partition(s), ${placedRooms} room(s) placed; model ${partitions} INTERIOR wall(s), ${rooms} room(s))`)

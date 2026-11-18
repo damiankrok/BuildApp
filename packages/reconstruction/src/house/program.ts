@@ -1089,9 +1089,15 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     let start = a0
     let k = 0
     const made: string[] = []
-    while (a1 - start > 0.1 && k < 6) {
+    let steps = 0
+    while (a1 - start > 0.1 && k < 6 && steps < 2000) {
+      steps += 1
       const under = wallUnder(h, start, Math.min(a1, start + 0.2))
-      if (!under) break
+      // a stretch of the host edge with no wall built under it (a return, a recess behind a portal) is passed over
+      if (!under) {
+        start += 0.05
+        continue
+      }
       const s0 = Math.max(start, under.s0)
       const s1 = Math.min(a1, under.s1)
       start = under.s1 + 1e-3

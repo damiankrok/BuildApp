@@ -175,6 +175,22 @@ describe('v3.54.10 divisions, hidden ends and finish zones reach the program', (
     expect(shape(h)).toBe(shape(plain))
     expect(h.compileErrors).toEqual([])
   })
+  it('cause: two zones of different finish over one stretch of a wall: the stretch is drawn by neither and said; same finish may overlap', () => {
+    const two = (m2: string) => {
+      const doc = manual()
+      front(doc).zones = [
+        { id: 'z1', material: 'WOOD', tone: 'WARM', box: { x0: 126, y0: 160, x1: 260, y1: 298 }, bodyId: 'main', certainty: 'LIKELY' },
+        { id: 'z2', material: m2, tone: m2 === 'WOOD' ? 'WARM' : 'DARK', box: { x0: 200, y0: 160, x1: 330, y1: 298 }, bodyId: 'main', certainty: 'LIKELY' },
+      ]
+      return resolved(doc)
+    }
+    const r = two('PLASTER')
+    expect(r.verification.knownDefects.some((k) => k.code === 'ZONE_OVERLAP')).toBe(true)
+    const byWall = new Map<string, Array<{ a0: number; a1: number; m: string }>>()
+    for (const z of r.geometry.zones) byWall.set(`${z.hostWall}/${z.level}`, [...(byWall.get(`${z.hostWall}/${z.level}`) ?? []), { a0: Math.min(z.a0, z.a1), a1: Math.max(z.a0, z.a1), m: `${z.material}-${z.tone}` }])
+    for (const list of byWall.values()) for (const p of list) for (const q of list) if (p !== q && p.m !== q.m) expect(Math.min(p.a1, q.a1) - Math.max(p.a0, q.a0)).toBeLessThan(0.1)
+    expect(two('WOOD').verification.knownDefects.some((k) => k.code === 'ZONE_OVERLAP')).toBe(false)
+  })
   it('counter: a zone the reader was not sure of (a shadow, a reflection) is not drawn', () => {
     const doc = manual()
     front(doc).zones = [{ id: 'z1', material: 'PLASTER', tone: 'DARK', box: { x0: 126, y0: 160, x1: 230, y1: 298 }, certainty: 'UNSURE' }]

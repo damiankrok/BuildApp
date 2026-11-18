@@ -1230,6 +1230,38 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       if (placed === 0) held.push({ ref: zref, code: 'WRONG_BINDING', why: 'no wall facing this side stands under the zone' })
     }
   }
+  // v3.54.10 — two zones of different finish read over the same stretch of one wall are a contradiction, not two layers:
+  // the stretch both claim is drawn by neither (each keeps what only it claims) and is said; one finish is never chosen
+  // for the reader. Zones of the same finish may overlap.
+  for (let i = 0; i < zones.length; i += 1) {
+    for (let j = i + 1; j < zones.length; j += 1) {
+      const p = zones[i]
+      const q = zones[j]
+      if (p.hostWall !== q.hostWall || p.level !== q.level || (p.material === q.material && p.tone === q.tone)) continue
+      const lo = Math.max(Math.min(p.a0, p.a1), Math.min(q.a0, q.a1))
+      const hi = Math.min(Math.max(p.a0, p.a1), Math.max(q.a0, q.a1))
+      const bLo = Math.max(p.b0, q.b0)
+      const bHi = Math.min(p.b1, q.b1)
+      if (hi - lo < 0.1 || bHi - bLo < 0.1) continue
+      knownDefects.push({ code: 'ZONE_OVERLAP', what: `${p.id} (${p.material} ${p.tone}, ${p.refs.join(', ')}) and ${q.id} (${q.material} ${q.tone}, ${q.refs.join(', ')}) both claim ${lo.toFixed(2)}–${hi.toFixed(2)} m along ${p.hostWall}, ${bLo.toFixed(2)}–${bHi.toFixed(2)} m up: the stretch is drawn by neither` })
+      const cut = (z: (typeof zones)[number]): Array<(typeof zones)[number]> => {
+        const a0 = Math.min(z.a0, z.a1)
+        const a1 = Math.max(z.a0, z.a1)
+        const parts: Array<[number, number]> = [[a0, lo], [hi, a1]].filter(([x, y]) => y - x >= 0.1) as Array<[number, number]>
+        const fresh = (base: string): string => {
+          let n = 2
+          while (zones.some((w) => w.id === `${base}-p${n}`)) n += 1
+          return `${base}-p${n}`
+        }
+        return parts.map(([x, y], k) => ({ ...z, id: k === 0 ? z.id : fresh(z.id), a0: r3(x), a1: r3(y) }))
+      }
+      const np = cut(p)
+      const nq = cut(q)
+      zones.splice(j, 1, ...nq)
+      zones.splice(i, 1, ...np)
+      j = i
+    }
+  }
 
   // An opening seen inside a wall dormer stands under that dormer's roof: a reading of where the dormer's roof begins that
   // would put the roof through the opening is moved up until the opening fits (the row read was the tip of the overhanging
