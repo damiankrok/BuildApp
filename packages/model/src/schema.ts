@@ -670,7 +670,13 @@ export const SurfaceRegionSchema = z
   .object({
     ...base,
     hostId: IdSchema,
-    face: z.enum(['OUTER', 'INNER']),
+    /**
+     * OUTER / INNER: a face along the wall (`a` along it). START / END (v3.54.12, optional and additive: every
+     * earlier model stays valid and compiles unchanged): the wall's end cap — the face across its thickness where its
+     * material stops, e.g. the end of a wall that owns a corner and so stands in the plane of the facade it meets;
+     * there `a` runs ACROSS the thickness, 0 at the outer face to the thickness at the inner face.
+     */
+    face: z.enum(['OUTER', 'INNER', 'START', 'END']),
     rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
     materialId: IdSchema,
   })

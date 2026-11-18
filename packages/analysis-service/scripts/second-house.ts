@@ -109,6 +109,10 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
   // 005K, research only: `--drawn-gap-rule ON` measures the experimental boundary rule; the product never sets it
   const drawnGapRule = value(argv, 'drawn-gap-rule') === 'ON' ? ('ON' as const) : ('OFF' as const)
   if (drawnGapRule === 'ON') log('drawn-gap rule: ON (005K experiment)')
+  const verticalDatums = argv.includes('--elevation-vertical-datums')
+  if (verticalDatums) log('elevation vertical from datums: ON (v3.54.12 experiment)')
+  const upperFinishes = argv.includes('--upper-storey-finishes')
+  if (upperFinishes) log('upper-storey finishes: ON (v3.54.12 experiment)')
   // each picture at its frame's size (a plan read at a reading size is resampled to it): see source-cv/reading-size.ts
   const rasters = frameRasters()
   const rasterOf = (hash: string): Raster | undefined => rasters.get(hash)
@@ -149,7 +153,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const entries: AnalysisTrace['entries'] = []
     try {
       const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(process.env.BUILDAPP_FEATURE_TRACE ? { featureTrace: (r: Record<string, unknown>) => features.push(r) } : {}), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(value(argv, 'roof-features') ? { roofFeatures: JSON.parse(readFileSync(value(argv, 'roof-features') as string, 'utf8')) } : {}), ...(process.env.BUILDAPP_SOLVER_DEBUG ? { debug: (s: string) => { if (s.includes(process.env.BUILDAPP_SOLVER_DEBUG as string)) process.stderr.write(`debug: ${s}\n`) } } : {}) })
+      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e), ...(process.env.BUILDAPP_FEATURE_TRACE ? { featureTrace: (r: Record<string, unknown>) => features.push(r) } : {}), ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(verticalDatums ? { elevationVerticalFromDatums: true } : {}), ...(upperFinishes ? { upperStoreyFinishes: true } : {}), ...(value(argv, 'roof-features') ? { roofFeatures: JSON.parse(readFileSync(value(argv, 'roof-features') as string, 'utf8')) } : {}), ...(process.env.BUILDAPP_SOLVER_DEBUG ? { debug: (s: string) => { if (s.includes(process.env.BUILDAPP_SOLVER_DEBUG as string)) process.stderr.write(`debug: ${s}\n`) } } : {}) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
       if (r.roofFeatures) write('roof-features.json', r.roofFeatures)
@@ -248,7 +252,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       },
       recogniser,
       ...(content ? { content } : {}),
-      ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}),
+      ...(drawnGapRule === 'ON' ? { drawnGapRule } : {}), ...(verticalDatums ? { elevationVerticalFromDatums: true } : {}), ...(upperFinishes ? { upperStoreyFinishes: true } : {}),
       // v3.54.2 pilot, research only: `--consulted <readings.json>` hands the run a consultant's label readings
       ...(argv.includes('--cross-axis') ? { crossAxisWitness: true } : {}),
       ...(value(argv, 'consulted-spans') ? { consultedSpans: JSON.parse(readFileSync(value(argv, 'consulted-spans') as string, 'utf8')) as ConsultedSpan[] } : {}),

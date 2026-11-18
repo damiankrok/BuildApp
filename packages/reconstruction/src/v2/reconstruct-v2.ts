@@ -386,6 +386,17 @@ export type ReconstructionV2Options = {
   checkpoint?: Checkpoint
   /** 005K, experimental: the boundary's drawn-gap rule (`PlanDecompositionOptions.drawnGapRule`). OFF unless asked for; the product never asks. */
   drawnGapRule?: 'OFF' | 'ON'
+  /**
+   * v3.54.12, experimental: an elevation whose silhouette misses the terrain datum by more than 0.3 m under one scale
+   * gets a separate vertical scale from the ridge and terrain datums (bounded to 15 %). For redrawn elevations whose
+   * proportions differ from the published picture. OFF unless asked for; the product never asks.
+   */
+  elevationVerticalFromDatums?: boolean
+  /**
+   * v3.54.12, experimental: finish regions are read on upper-storey recessed walls too (a gable's cladding behind its
+   * frame); before, only the ground storey's. OFF unless asked for; the product never asks.
+   */
+  upperStoreyFinishes?: boolean
 }
 
 /** One step of the solver, as the service's trace records it. */
@@ -1106,13 +1117,13 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       viewRefusals.set(r.frameId, !raster ? 'its pixels were not available' : 'no ridge datum was read from a section, and an elevation is hung from it')
       continue
     }
-    let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM)
+    let reg = registerElevationV2({ id: r.frameId, assetId: r.assetId }, r.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM, options.elevationVerticalFromDatums === true)
     options.debug?.(`elevation-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} ridge ${ridgeY} terrain ${terrain} -> ${reg ? `${reg.mpp} m/px ground ${reg.bottomY}` : 'none'}`)
     // EXTERIOR-COMPLETE: a silhouette that fits no span may draw the unit beside its faded neighbour (`twin-elevation.ts`):
     // the unit's half is registered as a silhouette would be, and taken only when it fits.
     if (!reg) {
       const twin = readTwinHalf(raster, r.extent)
-      const half = twin ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, twin.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
+      const half = twin ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, twin.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM, options.elevationVerticalFromDatums === true) : undefined
       options.debug?.(`twin-elevation ${r.side} ${r.frameId}: ${twin ? `${twin.half} half ${twin.extent.x0}..${twin.extent.x1} (spreads ${twin.spreads.join('/')}) -> ${half ? `${half.mpp} m/px ground ${half.bottomY}` : 'none'}` : 'not a pair'}`)
       if (twin && half) reg = { ...half, why: `${half.why}; ${twin.why}` }
     }
@@ -1126,7 +1137,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         skyMasks.set(raster, mask)
       }
       const outline = silhouetteOverBackground(raster, mask, r.extent.y1)
-      const again = outline ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, outline.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
+      const again = outline ? registerElevationV2({ id: r.frameId, assetId: r.assetId }, outline.extent, r.side, r.sideConfidence, r.sideWhy, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM, options.elevationVerticalFromDatums === true) : undefined
       options.debug?.(`elevation-registration ${r.side} ${r.frameId} over the background: ${outline ? `${outline.extent.x0},${outline.extent.y0}..${outline.extent.x1},${outline.extent.y1}` : 'none'} -> ${again ? `${again.mpp} m/px ground ${again.bottomY}` : 'none'}`)
       if (outline && again) reg = { ...again, why: `${again.why}; ${outline.why}` }
     }
@@ -1429,7 +1440,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const mirrored = sides.map((v) => {
       const reg = elevations.find((e) => e.frameId === v.view.registration.frameId)
       const other = v.view.side === 'LEFT' ? 'RIGHT' : 'LEFT'
-      const again = reg ? registerElevationV2({ id: reg.frameId, assetId: reg.assetId }, reg.extent, other, reg.sideConfidence, `${reg.sideWhy}; mirrored to the ${other.toLowerCase()} wall by the main body's side profile`, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM) : undefined
+      const again = reg ? registerElevationV2({ id: reg.frameId, assetId: reg.assetId }, reg.extent, other, reg.sideConfidence, `${reg.sideWhy}; mirrored to the ${other.toLowerCase()} wall by the main body's side profile`, world, ridgeY, sideEaves, terrain, false, sectionEaves?.overhangM, options.elevationVerticalFromDatums === true) : undefined
       return again ? { v, reg: again, view: elevationFrameFromV2(again, world) } : undefined
     })
     const pairs = mirrored.filter((m): m is NonNullable<typeof m> => m !== undefined)
@@ -1497,7 +1508,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // The mate's ground row is its silhouette's top put on the ridge; where its own gable outline places the apex,
         // that row is the ridge instead (gableApexRow), for both views of the sheet.
         const apex = gableApexRow(outlineOf(mateMask), mainRoof.pitchDeg)
-        const sheetMate: ElevationRegistrationV2 = apex ? { ...mateReg, zeroRow: round6(apex.row + ridgeY / mateReg.mpp), why: `${mateReg.why}; ${apex.why}, which is the ridge datum` } : mateReg
+        const sheetMate: ElevationRegistrationV2 = apex ? { ...mateReg, mppV: undefined, zeroRow: round6(apex.row + ridgeY / mateReg.mpp), why: `${mateReg.why}; ${apex.why}, which is the ridge datum` } : mateReg
         const ridgeAtNow = mainRoof.ridgeAt
         const built = (side: 'LEFT' | 'RIGHT') => sameSheetSideRegistration({ id: frame.id, assetId: frame.assetId }, side, sheetMate, mate.v.view, outlineOf(mateMask), outlineOf(mask), ridgeAtNow, r.why)
         const reg = built(mateReg.side === 'LEFT' ? 'RIGHT' : 'LEFT')
@@ -1589,7 +1600,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         // Along the house the gable axis is the middle of the outline the base plan draws, where the plans measure from
         // (a symmetric gable's ridge); it stands only within 0.3 m of the roof's own ridge line.
         if (drawnMidZ === undefined || Math.abs(drawnMidZ - mainRoof.ridgeAt) > 0.3) continue
-        const reg: ElevationRegistrationV2 = { ...side.reg, mpp: ref.mpp, zeroRow: round6(apex.row + ridgeY / ref.mpp), alongSign: sign, alongAtLeft: round6(drawnMidZ - sign * (axis - side.reg.extent.x0) * ref.mpp), spanWhy: `the sheet scale of ${ref.frameId} (${ref.side.toLowerCase()}), whose ridge row is this view's gable apex`, why: `${apex.why}; at the ${ref.mpp} m/px of the ${ref.side.toLowerCase()} view of the same sheet, with the gable axis at column ${axis.toFixed(1)} over the middle of the base plan's drawn outline, z ${drawnMidZ}` }
+        const reg: ElevationRegistrationV2 = { ...side.reg, mpp: ref.mpp, mppV: undefined, zeroRow: round6(apex.row + ridgeY / ref.mpp), alongSign: sign, alongAtLeft: round6(drawnMidZ - sign * (axis - side.reg.extent.x0) * ref.mpp), spanWhy: `the sheet scale of ${ref.frameId} (${ref.side.toLowerCase()}), whose ridge row is this view's gable apex`, why: `${apex.why}; at the ${ref.mpp} m/px of the ${ref.side.toLowerCase()} view of the same sheet, with the gable axis at column ${axis.toFixed(1)} over the middle of the base plan's drawn outline, z ${drawnMidZ}` }
         openingViewOverrides.set(reg.frameId, { view: elevationFrameFromV2(reg, world), raster: side.raster, bandOnly: true })
         step({ stage: 'registration', what: `the ${reg.side.toLowerCase()} view at the sheet scale, for its openings`, method: 'DIRECT', detail: reg.why, inputs: 1, outputs: 1 })
       }
@@ -2763,7 +2774,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (!l) continue
     for (const v of viewsOf(recess.side)) {
       for (const open of recess.open) {
-        const fascia = readFasciaBand(v.raster, v.view, { along0: open.from, along1: open.to }, l.elevation, recess.mouthAt)
+        const fascia = readFasciaBand(v.raster, v.view, { along0: open.from, along1: open.to }, l.elevation, recess.mouthAt, options.debug ? (s) => options.debug?.(`balcony ${recess.side} storey ${recess.storeyIndex} ${open.from.toFixed(2)}..${open.to.toFixed(2)} (frame ${v.view.registration.frameId}): ${s}`) : undefined)
         if (!fascia) continue
         // Where along the mouth the fascia actually runs: the columns that carry the band.
         const extent = fasciaExtent(v.raster, v.view, open, fascia.y)
@@ -2988,25 +2999,29 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     balconies,
   })
   const surfaceRegions: BuildingV2['surfaceRegions'] = []
-  for (const recess of recesses.filter((r) => r.storeyIndex === 0)) {
+  // v3.54.12 (flag `upperStoreyFinishes`, default off): the recessed wall of an upper storey (a gable behind its frame)
+  // is read as well, sampled above a balustrade's height, and its region reaches the wall's own top (the gable line).
+  for (const recess of recesses.filter((r) => r.storeyIndex === 0 || (options.upperStoreyFinishes === true && r.storeyIndex > 0))) {
+    const upper = recess.storeyIndex > 0
     for (const v of viewsOf(recess.side)) {
       for (const open of recess.open) {
-        const l = levelOf(0)
+        const l = levelOf(recess.storeyIndex)
         if (!l) continue
         const alongX = recess.side === 'FRONT' || recess.side === 'REAR'
-        const massOn = masses.find((m) => m.storeys.includes(0) && (recess.side === 'FRONT' ? Math.abs(m.z0 - recess.backAt) < 0.1 : recess.side === 'REAR' ? Math.abs(m.z1 - recess.backAt) < 0.1 : true) && open.from < (alongX ? m.x1 : m.z1) && open.to > (alongX ? m.x0 : m.z0))
+        const massOn = masses.find((m) => m.storeys.includes(recess.storeyIndex) && (recess.side === 'FRONT' ? Math.abs(m.z0 - recess.backAt) < 0.1 : recess.side === 'REAR' ? Math.abs(m.z1 - recess.backAt) < 0.1 : true) && open.from < (alongX ? m.x1 : m.z1) && open.to > (alongX ? m.x0 : m.z0))
         if (!massOn) continue
         const clipped: [number, number] = [Math.max(open.from, alongX ? massOn.x0 : massOn.z0), Math.min(open.to, alongX ? massOn.x1 : massOn.z1)]
         if (clipped[1] - clipped[0] < 0.5) continue
         // The recessed wall's finishes, run by run along it; its openings are glass, not wall.
-        const skip = openings.filter((o) => o.facade === recess.side && o.storeyIndex === 0).map((o) => o.interval)
-        const runs = readFinishRuns(v.view, v.raster, clipped, [l.elevation + 0.4, l.elevation + 2.0], skip)
+        const skip = openings.filter((o) => o.facade === recess.side && o.storeyIndex === recess.storeyIndex).map((o) => o.interval)
+        const runs = readFinishRuns(v.view, v.raster, clipped, upper ? [l.elevation + 1.1, l.elevation + 2.3] : [l.elevation + 0.4, l.elevation + 2.0], skip)
         const bodyTone = massTones.find((t) => t.massId === massOn.id && t.storeyIndex === undefined)?.tone
         for (const run of runs) {
           if (run.to - run.from < 0.5 || run.tone === 'LIGHT' || run.tone === bodyTone) continue
-          const id = `finish-${recess.side.toLowerCase()}-${Math.round(run.from * 100)}`
+          const id = `finish-${recess.side.toLowerCase()}-${upper ? `s${recess.storeyIndex}-` : ''}${Math.round(run.from * 100)}`
           const featureId = feature('SURFACE_REGION', id, {}, [sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'finish tone of the recessed wall', run.share)], 'VISUAL_SEMANTIC', `the recessed wall reads ${run.tone.toLowerCase()} from ${run.from.toFixed(2)} to ${run.to.toFixed(2)} (${Math.round(run.share * 100)} % of the columns' samples agree)`, { storeyIndex: 0 })
-          surfaceRegions.push({ id, wallRef: { massId: massOn.id, storeyIndex: 0, side: recess.side }, along: [run.from, run.to], y: [l.elevation, l.elevation + l.height], tone: run.tone, featureId })
+          const topY = upper && mainRoof ? Math.max(l.elevation + l.height, mainRoof.ridgeY) : l.elevation + l.height
+          surfaceRegions.push({ id, wallRef: { massId: massOn.id, storeyIndex: recess.storeyIndex, side: recess.side }, along: [run.from, run.to], y: [l.elevation, topY], tone: run.tone, featureId })
         }
       }
       break

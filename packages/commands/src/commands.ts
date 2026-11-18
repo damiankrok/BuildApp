@@ -408,7 +408,8 @@ export const CreateSurfaceRegionSchema = z
     type: z.literal('createSurfaceRegion'),
     ...withId,
     hostId: IdSchema,
-    face: z.enum(['OUTER', 'INNER']).default('OUTER'),
+    /** START / END: the wall's end cap (v3.54.12); `rect.a` then runs across the thickness from the outer face. */
+    face: z.enum(['OUTER', 'INNER', 'START', 'END']).default('OUTER'),
     rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
     materialId: IdSchema,
   })

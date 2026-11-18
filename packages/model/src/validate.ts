@@ -509,9 +509,11 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
       err('INVALID_RECT', `surface region ${r.id}: rect a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} has no area`, r.id, 'rect')
       continue
     }
-    const L = wallLength(host)
+    // on an end cap (START / END) `a` runs across the wall's thickness; on a face, along its length
+    const cap = r.face === 'START' || r.face === 'END'
+    const L = cap ? host.thickness : wallLength(host)
     if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > host.height + EPS) {
-      err('SURFACE_REGION_OUTSIDE_HOST', `surface region ${r.id} spans a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} on wall ${host.id}, which is ${fmt(L)} x ${fmt(host.height)}`, r.id, 'rect')
+      err('SURFACE_REGION_OUTSIDE_HOST', `surface region ${r.id} spans a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} on ${cap ? `the ${r.face.toLowerCase()} cap of ` : ''}wall ${host.id}, which is ${fmt(L)} x ${fmt(host.height)}`, r.id, 'rect')
     }
   }
   for (const s of m.linearSolids) {

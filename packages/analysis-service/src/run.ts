@@ -99,6 +99,10 @@ export type AnalysisOptions = {
    * product ever runs — the boundary reads exactly as before; the research harness asks for ON to measure the rule.
    */
   drawnGapRule?: 'OFF' | 'ON'
+  /** v3.54.12, research only: a separate vertical scale for an elevation from the ridge and terrain datums (`ReconstructionV2Options.elevationVerticalFromDatums`). The product never sets it. */
+  elevationVerticalFromDatums?: boolean
+  /** v3.54.12, research only: finish regions on upper-storey recessed walls too (`ReconstructionV2Options.upperStoreyFinishes`). */
+  upperStoreyFinishes?: boolean
   /**
    * v3.54.2 pilot: a consultant's literal readings of named dimension labels (`@buildapp/source-metrics` consulted.ts),
    * each a third witness heard before a frame's scale is solved. Absent — the default and all the product runs — the
@@ -580,6 +584,8 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       },
       trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
       ...(options.drawnGapRule === 'ON' ? { drawnGapRule: 'ON' as const } : {}),
+      ...(options.elevationVerticalFromDatums === true ? { elevationVerticalFromDatums: true } : {}),
+      ...(options.upperStoreyFinishes === true ? { upperStoreyFinishes: true } : {}),
       ...(options.roofFeatures && options.roofFeatures.length > 0 ? { roofFeatures: options.roofFeatures } : {}),
       ...(options.glazedEnds && options.glazedEnds.length > 0 ? { glazedEnds: options.glazedEnds } : {}),
     })

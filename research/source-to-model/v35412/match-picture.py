@@ -5,7 +5,8 @@ source package's pictures by CONTENT, not by file name or order.
     /usr/bin/python3 -I research/source-to-model/v35412/match-picture.py <package.json> <cache dir> <image> [<image> …]
     /usr/bin/python3 -I research/source-to-model/v35412/match-picture.py --self-test
 
-Each image is trimmed of uniform borders (screenshot bars, a caption strip below a flat band is reported, not cut),
+Each image is searched as a CROP of every candidate (scale and position, coarse grid: a screenshot is a crop) and
+also compared whole;  (screenshot bars, a caption strip below a flat band is reported, not cut),
 then compared with every ELEVATION / PERSPECTIVE_RENDER variant of the package: grey thumbnails at a common size
 (normalised cross-correlation) and the left-right flipped candidate too (a high flipped score is a mirror warning).
 Prints the ranking with the margin to the second; a small margin is reported as AMBIGUOUS, never decided. The
@@ -71,6 +72,32 @@ def candidates(pkg, cache_dir):
     return out
 
 
+def crop_search(q, c, widths=(0.45, 0.55, 0.65, 0.75, 0.85, 1.0), cw=240):
+    """the query as a crop of the candidate: the candidate at a fixed width, the query scaled so it spans a share of
+    it, slid over a coarse grid; best normalised cross-correlation and where. A screenshot is a crop; a whole-picture
+    thumbnail comparison is not crop-invariant."""
+    cg = np.asarray(ImageOps.grayscale(c).resize((cw, max(8, round(c.height * cw / c.width))), Image.BILINEAR), float)
+    best = (-1.0, None)
+    for f in widths:
+        qw = max(8, round(cw * f))
+        qh = max(8, round(q.height * qw / q.width))
+        if qh > cg.shape[0] + 2:
+            continue
+        qa = np.asarray(ImageOps.grayscale(q).resize((qw, qh), Image.BILINEAR), float)
+        qa = qa - qa.mean()
+        qn = np.linalg.norm(qa) or 1.0
+        for y in range(0, max(1, cg.shape[0] - qh + 1), 3):
+            for x in range(0, max(1, cw - qw + 1), 3):
+                win = cg[y:y + qh, x:x + qw]
+                if win.shape != qa.shape:
+                    continue
+                w = win - win.mean()
+                v = float((w * qa).sum() / (qn * (np.linalg.norm(w) or 1.0)))
+                if v > best[0]:
+                    best = (v, (f, x / cw, y / cg.shape[0]))
+    return best
+
+
 def rank(img, cands):
     q, box = trim(img.convert('RGB'))
     tq = thumb(q)
@@ -78,8 +105,11 @@ def rank(img, cands):
     for aid, vid, h, p in cands:
         c, _ = trim(Image.open(p).convert('RGB'))
         tc = thumb(c)
-        rows.append({'asset': aid, 'variant': vid, 'hash': h, 'ncc': round(ncc(tq, tc), 4), 'nccFlipped': round(ncc(tq, thumb(ImageOps.mirror(c))), 4)})
-    rows.sort(key=lambda r: -r['ncc'])
+        cs, where = crop_search(q, c)
+        csf, _ = crop_search(ImageOps.mirror(q), c)
+        rows.append({'asset': aid, 'variant': vid, 'hash': h, 'ncc': round(ncc(tq, tc), 4), 'nccFlipped': round(ncc(tq, thumb(ImageOps.mirror(c))), 4),
+                     'cropNcc': round(cs, 4), 'cropNccMirrored': round(csf, 4), 'cropAt': where})
+    rows.sort(key=lambda r: -r['cropNcc'])
     return rows, box
 
 
@@ -108,13 +138,13 @@ def main():
         img = Image.open(p)
         rows, box = rank(img, cands)
         top = rows[:5]
-        margin = top[0]['ncc'] - top[1]['ncc'] if len(top) > 1 else 1.0
-        same_asset = len(top) > 1 and top[0]['asset'] == top[1]['asset']
-        state = 'MATCH' if (margin > 0.08 or same_asset) and top[0]['ncc'] > 0.5 else 'AMBIGUOUS'
-        mirror = top[0]['nccFlipped'] > top[0]['ncc']
+        other = next((r for r in top[1:] if r['asset'] != top[0]['asset']), None)
+        margin = top[0]['cropNcc'] - other['cropNcc'] if other else 1.0
+        state = 'MATCH' if margin > 0.08 and top[0]['cropNcc'] > 0.6 else 'AMBIGUOUS'
+        mirror = top[0]['cropNccMirrored'] > top[0]['cropNcc']
         res[os.path.basename(p)] = {'size': list(img.size), 'sha256': hashlib.sha256(open(p, 'rb').read()).hexdigest(), 'trimBox': box,
                                     'state': state, 'mirrorWarning': mirror, 'top': top}
-        print(f"{os.path.basename(p)} {img.size} -> {state}{' MIRROR?' if mirror else ''}: " + '; '.join(f"{r['asset'][-30:]}/{r['variant'][:24]} {r['ncc']}" for r in top[:3]))
+        print(f"{os.path.basename(p)} {img.size} -> {state}{' MIRROR?' if mirror else ''}: " + '; '.join(f"{r['asset'][-30:]}/{r['variant'][:24]} crop {r['cropNcc']} (whole {r['ncc']})" for r in top[:3]) + (f"; margin to another asset {margin:.3f}" if other else ''))
     print(json.dumps(res, indent=1))
 
 

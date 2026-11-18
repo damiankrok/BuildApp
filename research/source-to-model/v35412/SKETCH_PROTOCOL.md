@@ -35,7 +35,7 @@ Verdict per sketch: CROP_AND_SCALE / PROPORTIONS_CHANGED / MIRRORED. Parts the s
 are RECONSTRUCTED/APPROXIMATE, never observed.
 
 **Measures (fixed now).** Two separate results:
-1. VISUAL_MINIATURE — `visual-miniature.py` on the fixed card (14 features, 5 critical); the denominator never
+1. VISUAL_MINIATURE — `visual-miniature.py` on the fixed card (14 features, 6 critical; "5" in the first version of this protocol was a counting error, the card is unchanged); the denominator never
    shrinks; tolerances are the executor's proposal.
 2. METRIC_EVIDENCE — kept apart and diagnostic: 16 features v1 (+ portal v1.1), 27 detail rows, 14 zone points.
    A visual result never sets EXACT/MEASURED or quantities-usable, and no sketch-derived value enters cost/quantity

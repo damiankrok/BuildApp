@@ -388,6 +388,13 @@ export type ElevationRegistrationV2 = {
   sideWhy: string
   /** One scale for both axes: a published render is isotropic. */
   mpp: number
+  /**
+   * v3.54.12 (flag `verticalFromDatums`, default off): a separate vertical scale, set only when the uniform scale
+   * leaves the silhouette's bottom far from the terrain datum (a redrawn elevation whose proportions differ from the
+   * published one). The apex then lands on the ridge datum and the bottom on the terrain datum; along the facade the
+   * width scale `mpp` stays. Absent on every registration made without the flag.
+   */
+  mppV?: number
   /** The silhouette's box in pixels. */
   extent: PixelRect
   /** World coordinate along the facade at the extent's left edge, and its direction (+1 or −1 per pixel). */
@@ -406,6 +413,11 @@ export type ElevationRegistrationV2 = {
   confidence: number
   why: string
 }
+
+/** v3.54.12: the ground error under one scale above which a separate vertical scale is considered (flag only). */
+export const VERTICAL_DATUM_MIN_ERROR_M = 0.3
+/** v3.54.12: the largest relative difference between the vertical and the width scale taken from the datums. */
+export const VERTICAL_DATUM_MAX_ANISOTROPY = 0.15
 
 /** 005Y: the largest ground error at which a span including the section's eaves registers a render. */
 const SECTION_EAVES_MAX_GROUND_ERROR_M = 0.3
@@ -443,6 +455,8 @@ export function registerElevationV2(
    * walls plus that projection on both sides; each span is offered with it as well as without, and the ground decides.
    */
   sectionEavesM?: number,
+  /** v3.54.12: allow a separate vertical scale from the ridge and terrain datums when the uniform scale misses (flag). */
+  verticalFromDatums = false,
 ): ElevationRegistrationV2 | undefined {
   const widthPx = extent.x1 - extent.x0
   const heightPx = extent.y1 - extent.y0
@@ -483,7 +497,15 @@ export function registerElevationV2(
   // lands the ground well, so a silhouette widened by a tree is not read as eaves.
   if (best.eavesM !== undefined && best.err > SECTION_EAVES_MAX_GROUND_ERROR_M) return undefined
   const mpp = best.mpp
-  const zeroRow = extent.y1 + best.bottomY / mpp
+  // v3.54.12 (flag): the ground missed by more than VERTICAL_DATUM_MIN_ERROR_M under one scale — the drawing's
+  // vertical runs at its own scale. Two datums (ridge at the apex row, terrain at the bottom row) fix it, within a
+  // bounded anisotropy; along the facade nothing changes. Never for a span that includes section eaves.
+  const mppV =
+    verticalFromDatums && terrainY !== undefined && best.eavesM === undefined && best.err > VERTICAL_DATUM_MIN_ERROR_M
+      ? (ridgeY - terrainY) / heightPx
+      : undefined
+  const anisotropic = mppV !== undefined && Math.abs(mppV / mpp - 1) <= VERTICAL_DATUM_MAX_ANISOTROPY ? mppV : undefined
+  const zeroRow = anisotropic !== undefined ? extent.y1 + (terrainY as number) / anisotropic : extent.y1 + best.bottomY / mpp
   // Direction along the facade seen from outside: FRONT west→east, REAR east→west, LEFT (west wall) rear→front, RIGHT (east wall) front→rear.
   const alongAtLeft = side === 'FRONT' ? best.along0 : side === 'REAR' ? best.along1 : side === 'LEFT' ? best.along1 : best.along0
   const alongSign: 1 | -1 = side === 'FRONT' || side === 'RIGHT' ? 1 : -1
@@ -494,6 +516,7 @@ export function registerElevationV2(
     sideConfidence,
     sideWhy,
     mpp: round6(mpp),
+    ...(anisotropic !== undefined ? { mppV: round6(anisotropic) } : {}),
     extent,
     alongAtLeft: round6(alongAtLeft),
     alongSign,
@@ -504,7 +527,7 @@ export function registerElevationV2(
     bottomY: round6(best.bottomY),
     anisotropyCheck: round6(best.err),
     confidence: round6(Math.max(0.2, Math.min(0.9, sideConfidence * (1 - best.err)))),
-    why: `${widthPx} px across is ${best.why}, so ${mpp.toFixed(6)} m/px; the apex at row ${extent.y0} is the ridge datum ${ridgeY} and the silhouette's bottom then lands at ${best.bottomY.toFixed(2)} m${terrainY !== undefined ? ` against the terrain datum ${terrainY}` : ''}`,
+    why: `${widthPx} px across is ${best.why}, so ${mpp.toFixed(6)} m/px; the apex at row ${extent.y0} is the ridge datum ${ridgeY} and the silhouette's bottom then lands at ${best.bottomY.toFixed(2)} m${terrainY !== undefined ? ` against the terrain datum ${terrainY}` : ''}${anisotropic !== undefined ? `; VERTICAL_FROM_DATUMS: the drawing's vertical runs at its own scale, ${anisotropic.toFixed(6)} m/px (${((anisotropic / mpp - 1) * 100).toFixed(1)} % from the width's), so the apex is the ridge and the bottom the terrain` : mppV !== undefined ? `; a vertical scale from the datums (${mppV.toFixed(6)} m/px) would differ from the width's by more than ${VERTICAL_DATUM_MAX_ANISOTROPY * 100} %: not taken` : ''}`,
   }
 }
 
@@ -514,8 +537,9 @@ export function elevationFrameFromV2(registration: ElevationRegistrationV2, worl
   const planeAt = registration.side === 'FRONT' ? e.z0 : registration.side === 'REAR' ? e.z1 : registration.side === 'LEFT' ? e.x0 : e.x1
   const alongOf = (px: number): number => round6(registration.alongAtLeft + registration.alongSign * (px - registration.extent.x0) * registration.mpp)
   const pxOf = (along: number): number => round6(registration.extent.x0 + (registration.alongSign * (along - registration.alongAtLeft)) / registration.mpp)
-  const yOf = (py: number): number => round6((registration.zeroRow - py) * registration.mpp)
-  const pyOf = (y: number): number => round6(registration.zeroRow - y / registration.mpp)
+  const mppV = registration.mppV ?? registration.mpp
+  const yOf = (py: number): number => round6((registration.zeroRow - py) * mppV)
+  const pyOf = (y: number): number => round6(registration.zeroRow - y / mppV)
   const legacy: ElevationRegistration = {
     frameId: registration.frameId,
     assetId: registration.assetId,
@@ -523,12 +547,12 @@ export function elevationFrameFromV2(registration: ElevationRegistrationV2, worl
     sideWhy: registration.sideWhy,
     sideConfidence: registration.sideConfidence,
     metresPerPixelU: registration.mpp,
-    metresPerPixelV: registration.mpp,
+    metresPerPixelV: mppV,
     extent: registration.extent,
     extentWhy: 'the silhouette of the render',
     spanM: registration.spanM,
-    heightM: round6((registration.extent.y1 - registration.extent.y0) * registration.mpp),
-    anisotropy: 1,
+    heightM: round6((registration.extent.y1 - registration.extent.y0) * mppV),
+    anisotropy: round6(mppV / registration.mpp),
     overhangM: 0,
     confidence: registration.confidence,
     why: registration.why,

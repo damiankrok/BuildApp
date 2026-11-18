@@ -67,6 +67,45 @@ const area = (p: readonly AB[]): number => {
   return Math.abs(s) / 2
 }
 
+/**
+ * v3.54.12 — a finish on a wall's END CAP (`face` START or END): the face across the wall's thickness where its
+ * material stops, e.g. the end of a wall that holds a corner and so stands in the plane of the facade it meets. The
+ * rect's `a` is ACROSS the thickness here (0 = the outer face, T = the inner face), `b` up as on the faces. The cap
+ * plane is the wall's resolved end cut (`extent`), so a cap hidden by the neighbour that owns the corner is skinned
+ * inside it and stays invisible; nothing is drawn where the wall's material is not. Openings do not cross a cap.
+ */
+function compileEndCapRegion(
+  out: Triangle[],
+  region: SurfaceRegion,
+  f: ReturnType<typeof wallFrame>,
+  T: number,
+  ctx: { top: TopFunction; extent: WallExtent },
+): Triangle[] {
+  const start = region.face === 'START'
+  const cut = start ? ctx.extent.start : ctx.extent.end
+  const sign = start ? -1 : 1
+  const p0 = Math.max(region.rect.a0, 0)
+  const p1 = Math.min(region.rect.a1, T)
+  const b0 = Math.max(region.rect.b0, 0)
+  if (p1 - p0 <= EPS || T <= EPS) return out
+  const aAt = (p: number): number => cut.outer + ((cut.inner - cut.outer) * p) / T
+  const topAt = (p: number): number => Math.min(region.rect.b1, ctx.top(aAt(p), p))
+  const t0 = topAt(p0)
+  const t1 = topAt(p1)
+  if (Math.max(t0, t1) - b0 <= 1e-6) return out
+  // local frame: a across the thickness (world −n), b up, the extrusion away from the cap along the wall's axis
+  const frame = { u: { x: -f.n.x, y: -f.n.y, z: -f.n.z }, up: f.up, n: { x: -sign * f.u.x, y: -sign * f.u.y, z: -sign * f.u.z } }
+  const point = (p: number, b: number, s: number): Vec3 => wallPoint(f, aAt(p) + sign * s, b, p)
+  const poly: AB[] = [
+    { a: p0, b: b0 },
+    { a: p1, b: b0 },
+    { a: p1, b: Math.max(b0, t1) },
+    { a: p0, b: Math.max(b0, t0) },
+  ]
+  extrudeLocalRegion(out, frame, point, poly, [], SURFACE_REGION_OFFSET, SURFACE_REGION_OFFSET + SURFACE_REGION_SKIN)
+  return out
+}
+
 export function compileSurfaceRegion(
   region: SurfaceRegion,
   wall: Wall,
@@ -76,6 +115,7 @@ export function compileSurfaceRegion(
   const out: Triangle[] = []
   const f = wallFrame(wall, level)
   const T = wall.thickness
+  if (region.face === 'START' || region.face === 'END') return compileEndCapRegion(out, region, f, T, ctx)
   const outer = region.face === 'OUTER'
   const cFace = outer ? 0 : T
   const cLo = outer ? -(SURFACE_REGION_OFFSET + SURFACE_REGION_SKIN) : T + SURFACE_REGION_OFFSET

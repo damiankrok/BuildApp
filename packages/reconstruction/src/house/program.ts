@@ -24,7 +24,7 @@ import { outlineSteps } from './steps.js'
 import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.7.0' as const
+export const HOUSE_BUILDER_VERSION = '0.8.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
@@ -1129,6 +1129,59 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const id = k === 1 ? z.id : `${z.id}-${k}`
       push({ type: 'createSurfaceRegion', id, hostId: under.w.id, face: 'OUTER', rect: { a0: r6(s0 - under.s0), a1: r6(s1 - under.s0), b0: r6(b0), b1: r6(b1) }, materialId: mat.id })
       made.push(`${id} on ${under.w.id}`)
+    }
+    // v3.54.12 — the zone also reaches the END CAP of a wall perpendicular to the host whose start or end stands on
+    // the host's outer line inside the zone (a wall that owns the corner shows its cap in the facade's plane: before,
+    // that strip kept the wall's own material between two finished stretches). Only where the cap lies in the zone;
+    // the cap's height is cut like a face's. Only an exposed cap (a free end, or a corner this wall owns) is finished.
+    for (const w of phys) {
+      if (!w.body.storeys.includes(h.level) || Math.abs(w.u.x * h.u.x + w.u.z * h.u.z) > 0.01) continue
+      type J = { kind?: string; owner?: string } | undefined
+      const wc = program.find((c) => c.type === 'createWall' && c.id === w.id) as { start?: P2; end?: P2; thickness?: number; height?: number; startJunction?: J; endJunction?: J } | undefined
+      if (!wc?.start || !wc.end || !wc.thickness) continue
+      for (const [face, pt, j] of [['START', wc.start, wc.startJunction], ['END', wc.end, wc.endJunction]] as const) {
+        // the cap is exposed only at a free end or at a corner this wall owns; a butt or a corner owned by the other wall
+        // hides it inside that wall
+        if (j && !(j.kind === 'CORNER' && j.owner === 'SELF')) continue
+        // a corner may be declared by the OTHER wall (its junction names this wall's end): exposed only if this wall
+        // owns it there (the other declares owner OTHER)
+        const declaredBy = program.find((c) => {
+          if (c.type !== 'createWall') return false
+          const cw = c as { startJunction?: { kind?: string; with?: { wallId?: string; end?: string } }; endJunction?: { kind?: string; with?: { wallId?: string; end?: string } } }
+          return [cw.startJunction, cw.endJunction].some((q) => q?.kind === 'CORNER' && q.with?.wallId === w.id && q.with?.end === face)
+        }) as { startJunction?: { with?: { wallId?: string; end?: string }; owner?: string }; endJunction?: { with?: { wallId?: string; end?: string }; owner?: string } } | undefined
+        if (declaredBy) {
+          const q = [declaredBy.startJunction, declaredBy.endJunction].find((x) => x?.with?.wallId === w.id && x?.with?.end === face)
+          if (q?.owner !== 'OTHER') continue
+        }
+        if (Math.abs((pt.x - h.a.x) * h.out.x + (pt.z - h.a.z) * h.out.z) > 0.03) continue
+        // across the thickness: from the outer face (the wall's line) inward, i.e. against the wall's outward normal
+        const len = Math.hypot(wc.end.x - wc.start.x, wc.end.z - wc.start.z)
+        const ux = (wc.end.x - wc.start.x) / len
+        const uz = (wc.end.z - wc.start.z) / len
+        const inward = { x: -uz, z: ux }
+        const sOut = (pt.x - h.a.x) * h.u.x + (pt.z - h.a.z) * h.u.z
+        const dir = inward.x * h.u.x + inward.z * h.u.z
+        if (Math.abs(dir) < 0.99) continue
+        const sIn = sOut + dir * wc.thickness
+        const lo = Math.max(a0, Math.min(sOut, sIn))
+        const hi = Math.min(a1, Math.max(sOut, sIn))
+        if (hi - lo < 0.05) continue
+        const p0 = Math.max(0, Math.min((lo - sOut) / dir, (hi - sOut) / dir))
+        const p1 = Math.min(wc.thickness, Math.max((lo - sOut) / dir, (hi - sOut) / dir))
+        const l = levelAt.get(Math.min(...w.body.storeys))
+        if (!l) continue
+        const b0 = Math.max(0, z.b0 - l.elevation)
+        const b1 = Math.min(wc.height ?? Number.POSITIVE_INFINITY, z.b1 - l.elevation)
+        if (b1 - b0 < 0.1) continue
+        if (!zoneMats.has(mat.id)) {
+          push({ type: 'defineMaterial', id: mat.id, name: mat.name, color: mat.color })
+          zoneMats.add(mat.id)
+        }
+        const id = `${z.id}-cap-${w.id}`
+        push({ type: 'createSurfaceRegion', id, hostId: w.id, face, rect: { a0: r6(p0), a1: r6(p1), b0: r6(b0), b1: r6(b1) }, materialId: mat.id })
+        made.push(`${id} on ${w.id} (${face.toLowerCase()} cap)`)
+      }
     }
     if (made.length === 0) refuse(path, 'WRONG_BINDING', `no built wall stands under ${a0.toFixed(2)}..${a1.toFixed(2)} m of ${h.id} with height for the zone`)
     else used(path, `createSurfaceRegion ${made.join(', ')} in ${mat.name} (${STYLE_PROFILE.id})`, made.map((m) => m.split(' ')[0]))
