@@ -11,14 +11,18 @@ import org.junit.Test
 class OwnerCheckpointV35410ScenesTest {
 
     @Test
-    fun `the candidate and the delivered model are listed first under their own titles`() {
-        assertEquals(listOf("marcowki-h-v35410", "marcowki-local-v35410"), TestScenes.index.take(2).map { it.key })
-        assertTrue(TestScenes.index[0].title.contains("kandydat"))
-        assertTrue(TestScenes.index[1].title.contains("LOCAL oddany"))
+    fun `the candidate and the delivered model are listed under their own titles, after the repaired H`() {
+        assertEquals("marcowki-h-v35411", TestScenes.index[0].key)
+        assertTrue(TestScenes.index[0].title.contains("po naprawie"))
+        assertEquals(listOf("marcowki-h-v35410", "marcowki-local-v35410"), TestScenes.index.subList(1, 3).map { it.key })
+        assertTrue(TestScenes.index[1].title.contains("kandydat"))
+        assertTrue(TestScenes.index[2].title.contains("LOCAL oddany"))
     }
 
     @Test
     fun `each parses into the scene the checkpoint sealed`() {
+        val repaired = TestScenes.bundle("marcowki-h-v35411")
+        assertEquals("a4915b99ce974189", repaired.contentHash.take(16))
         val h = TestScenes.bundle("marcowki-h-v35410")
         val local = TestScenes.bundle("marcowki-local-v35410")
         assertEquals("530a890050472e5150c8a5016faacaf8da83d776afd0252f960cd878f015dc4e", h.contentHash)

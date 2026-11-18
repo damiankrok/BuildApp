@@ -78,7 +78,7 @@ object TestScenes {
         // (v3.54.8, v3.54.10); the H candidate of v3.54.10 carries LOCAL's interior partitions under their LOCAL ids
         // (kept on purpose when the interior is placed, D51) — so it shares that vocabulary too
         // and the two 005T development houses the same analyzer built (other pages: the same naming, other sets)
-        setOf("marcowki-auto-v2", "marcowki-auto-v3", "marcowki-local-v3548", "marcowki-local-v35410", "marcowki-h-v35410", "jarzmianki-005t-visual", "gozdzikowce-005t-visual"),
+        setOf("marcowki-auto-v2", "marcowki-auto-v3", "marcowki-local-v3548", "marcowki-local-v35410", "marcowki-h-v35410", "marcowki-h-v35411", "jarzmianki-005t-visual", "gozdzikowce-005t-visual"),
     )
 
     fun sameAnalyzer(a: String, b: String): Boolean = analyzerLineages.any { a in it && b in it }

@@ -1,0 +1,2940 @@
+{
+  "assemblies": [],
+  "balconies": [
+    {
+      "footprint": {
+        "maxX": 7.908225,
+        "maxZ": 0.997,
+        "minX": 3.223,
+        "minZ": 0
+      },
+      "id": "balcony-front-2",
+      "kind": "BALCONY",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "thickness": 0.2,
+      "topOffset": 0
+    },
+    {
+      "footprint": {
+        "maxX": 7.225,
+        "maxZ": 14.437,
+        "minX": 0.665,
+        "minZ": 13.414
+      },
+      "id": "balcony-rear-1",
+      "kind": "BALCONY",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "thickness": 0.2,
+      "topOffset": 0
+    }
+  ],
+  "building": {
+    "id": "bld-house",
+    "name": "MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.078868,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-0-leaf",
+      "leafThickness": 0.039434,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.078868,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-1-leaf",
+      "leafThickness": 0.039434,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.078868,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-2-leaf",
+      "leafThickness": 0.039434,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.078868,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-3-leaf",
+      "leafThickness": 0.039434,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-3",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.063095,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-4-leaf",
+      "leafThickness": 0.031547,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-4",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.062707,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-0-leaf",
+      "leafThickness": 0.031354,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.062707,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-1-leaf",
+      "leafThickness": 0.031354,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.062707,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-2-leaf",
+      "leafThickness": 0.031354,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.09406,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-3",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.062707,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-4-leaf",
+      "leafThickness": 0.031354,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-4",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "GLAZED"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-front-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-front-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-front-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-front-3",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-front-4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "opening-front-4",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-left-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-left-1",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 0.498,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.502,
+            "kind": "GLAZED"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-rear-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-rear-3",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 0.497,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.503,
+            "kind": "GLAZED"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-right-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-right-1",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "house-marcowki-ge",
+  "levels": [
+    {
+      "buildingId": "bld-house",
+      "elevation": 0,
+      "height": 3.06,
+      "id": "L0",
+      "index": 0,
+      "name": "Ground"
+    },
+    {
+      "buildingId": "bld-house",
+      "elevation": 3.06,
+      "height": 2.96,
+      "id": "L1",
+      "index": 1,
+      "name": "Level 1"
+    }
+  ],
+  "linearSolids": [
+    {
+      "depth": 0.997,
+      "end": {
+        "x": 7.908225,
+        "y": 2.5605,
+        "z": 0.4985
+      },
+      "id": "portal-front-2-1",
+      "levelId": "L0",
+      "materialId": "mat-zone-plaster-dark",
+      "role": "FASCIA",
+      "start": {
+        "x": 3.223,
+        "y": 2.5605,
+        "z": 0.4985
+      },
+      "width": 0.599
+    },
+    {
+      "depth": 0.997,
+      "end": {
+        "x": 11.298,
+        "y": 2.6495,
+        "z": 0.4985
+      },
+      "id": "portal-front-2-2",
+      "levelId": "L0",
+      "materialId": "mat-zone-plaster-dark",
+      "role": "FASCIA",
+      "start": {
+        "x": 7.908225,
+        "y": 2.6495,
+        "z": 0.4985
+      },
+      "width": 0.777
+    },
+    {
+      "depth": 1.023,
+      "end": {
+        "x": 0.665,
+        "y": 2.646,
+        "z": 13.9255
+      },
+      "id": "portal-rear-1-1",
+      "levelId": "L0",
+      "materialId": "mat-zone-plaster-dark",
+      "role": "FASCIA",
+      "start": {
+        "x": 7.225,
+        "y": 2.646,
+        "z": 13.9255
+      },
+      "width": 0.428
+    }
+  ],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#ece9e2",
+      "id": "mat-member",
+      "name": "Facade member"
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering"
+    },
+    {
+      "color": "#c9c6c0",
+      "id": "mat-slab",
+      "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Paving"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-zone-plaster-dark",
+      "name": "Dark plaster"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-zone-wood-warm",
+      "name": "Timber cladding"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ",
+  "openings": [
+    {
+      "height": 2.1,
+      "id": "main-idoor-0-0",
+      "kind": "DOOR",
+      "offset": 2.288645,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-0",
+      "width": 0.86927
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-0-1",
+      "kind": "DOOR",
+      "offset": 3.447671,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-0",
+      "width": 0.842928
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-0-2",
+      "kind": "DOOR",
+      "offset": 0.81352,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-5",
+      "width": 0.895611
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-0-3",
+      "kind": "DOOR",
+      "offset": 0.130092,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-3",
+      "width": 0.658537
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-0-4",
+      "kind": "DOOR",
+      "offset": 0.734263,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-6",
+      "width": 0.896609
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-1-0",
+      "kind": "DOOR",
+      "offset": 0.076722,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-2",
+      "width": 0.889339
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-1-1",
+      "kind": "DOOR",
+      "offset": 2.273913,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-2",
+      "width": 0.88934
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-1-2",
+      "kind": "DOOR",
+      "offset": 3.843336,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-2",
+      "width": 0.88934
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-1-3",
+      "kind": "DOOR",
+      "offset": 0.624422,
+      "sill": 0,
+      "wallId": "main-iwall-1-x-3",
+      "width": 0.887347
+    },
+    {
+      "height": 2.1,
+      "id": "main-idoor-1-4",
+      "kind": "DOOR",
+      "offset": 0.089419,
+      "sill": 0,
+      "wallId": "main-nib-1-1",
+      "width": 0.913445
+    },
+    {
+      "height": 2.228,
+      "id": "opening-front-1",
+      "kind": "DOOR",
+      "offset": 1.451565,
+      "sill": 0,
+      "wallId": "w-main-0",
+      "width": 0.979
+    },
+    {
+      "head": {
+        "heightFar": 0.855,
+        "kind": "RAKED"
+      },
+      "height": 3.2,
+      "id": "opening-front-2",
+      "kind": "WINDOW",
+      "offset": 3.949565,
+      "sill": 3.06,
+      "wallId": "w-main-0",
+      "width": 2.7
+    },
+    {
+      "height": 2.025,
+      "id": "opening-front-3",
+      "kind": "DOOR",
+      "offset": 4.202565,
+      "sill": 0,
+      "wallId": "w-main-0",
+      "width": 0.624
+    },
+    {
+      "height": 2.228,
+      "id": "opening-front-4",
+      "kind": "DOOR",
+      "offset": 0.56434,
+      "sill": 0,
+      "wallId": "w-garage-3",
+      "width": 2.818
+    },
+    {
+      "height": 2.239,
+      "id": "opening-left-1",
+      "kind": "DOOR",
+      "offset": 3.60461,
+      "sill": 0,
+      "wallId": "w-main-3",
+      "width": 0.838
+    },
+    {
+      "height": 1.341,
+      "id": "opening-left-2",
+      "kind": "WINDOW",
+      "offset": 5.31461,
+      "sill": 0.864,
+      "wallId": "w-main-3",
+      "width": 1.375
+    },
+    {
+      "height": 2.034,
+      "id": "opening-rear-1",
+      "kind": "WINDOW",
+      "offset": 1.18,
+      "sill": 0,
+      "wallId": "w-garage-1",
+      "width": 0.949
+    },
+    {
+      "head": {
+        "heightFar": 3.03,
+        "kind": "RAKED"
+      },
+      "height": 1.068,
+      "id": "opening-rear-2",
+      "kind": "WINDOW",
+      "offset": 0.886565,
+      "sill": 3.06,
+      "wallId": "w-main-2",
+      "width": 2.34
+    },
+    {
+      "height": 2.398,
+      "id": "opening-rear-3",
+      "kind": "DOOR",
+      "offset": 0.988565,
+      "sill": 0,
+      "wallId": "w-main-2",
+      "width": 4.628
+    },
+    {
+      "head": {
+        "heightFar": 1.068,
+        "kind": "RAKED"
+      },
+      "height": 3.03,
+      "id": "opening-rear-4",
+      "kind": "WINDOW",
+      "offset": 4.666565,
+      "sill": 3.06,
+      "wallId": "w-main-2",
+      "width": 2.34
+    },
+    {
+      "height": 2.208,
+      "id": "opening-right-1",
+      "kind": "DOOR",
+      "offset": 8.623529,
+      "sill": 0,
+      "wallId": "w-main-1",
+      "width": 2.894
+    }
+  ],
+  "platforms": [],
+  "railings": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.189,
+        "z": 0.997
+      },
+      "height": 0.822,
+      "hostId": "balcony-front-2",
+      "id": "balcony-front-2-railing",
+      "infill": "GLASS",
+      "levelId": "L1",
+      "materialId": "mat-glass",
+      "path": [
+        {
+          "x": 3.223,
+          "z": 0.997
+        },
+        {
+          "x": 3.223,
+          "z": 0
+        },
+        {
+          "x": 7.189,
+          "z": 0
+        },
+        {
+          "x": 7.189,
+          "z": 0.997
+        }
+      ],
+      "postSpacing": 1.2,
+      "start": {
+        "x": 3.223,
+        "z": 0.997
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.665,
+        "z": 14.437
+      },
+      "height": 0.83,
+      "hostId": "balcony-rear-1",
+      "id": "balcony-rear-1-railing",
+      "infill": "GLASS",
+      "levelId": "L1",
+      "materialId": "mat-glass",
+      "path": [
+        {
+          "x": 7.225,
+          "z": 14.437
+        },
+        {
+          "x": 0.665,
+          "z": 14.437
+        }
+      ],
+      "postSpacing": 1.2,
+      "start": {
+        "x": 7.225,
+        "z": 14.437
+      }
+    }
+  ],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 1.224,
+        "maxZ": 7.965,
+        "minX": 0.385,
+        "minZ": 7.177
+      },
+      "id": "rooflight-left-1",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-low"
+    },
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 1.244,
+        "maxZ": 5.785,
+        "minX": 0.305,
+        "minZ": 4.913
+      },
+      "id": "rooflight-left-2",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-low"
+    },
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 7.607,
+        "maxZ": 5.756,
+        "minX": 6.729,
+        "minZ": 4.986
+      },
+      "id": "rooflight-right-3",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-high"
+    }
+  ],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 11.301996,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 8.401745
+        },
+        {
+          "x": 7.908225,
+          "z": 8.401745
+        },
+        {
+          "x": 7.908225,
+          "z": 0.997216
+        },
+        {
+          "x": 11.301996,
+          "z": 0.997216
+        }
+      ],
+      "datum": {
+        "x": 9.979113,
+        "y": 3.031,
+        "z": 4.200873
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "id": "roof-garage-flat",
+      "levelId": "L0",
+      "materialId": "mat-roof",
+      "pitchDeg": 0,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 3.954113,
+          "z": 0.987
+        },
+        {
+          "x": 7.908225,
+          "z": 0.987
+        },
+        {
+          "x": 7.908225,
+          "z": 13.424391
+        },
+        {
+          "x": 3.954113,
+          "z": 13.424391
+        }
+      ],
+      "datum": {
+        "x": 3.954113,
+        "y": 7.95,
+        "z": 7.218696
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "id": "roof-main-high",
+      "levelId": "L1",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 0,
+          "z": 0.987
+        },
+        {
+          "x": 3.954113,
+          "z": 0.987
+        },
+        {
+          "x": 3.954113,
+          "z": 13.424391
+        },
+        {
+          "x": 0,
+          "z": 13.424391
+        }
+      ],
+      "datum": {
+        "x": 3.954113,
+        "y": 7.95,
+        "z": 7.218696
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "id": "roof-main-low",
+      "levelId": "L1",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-left-1-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-left-1"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-left-2-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-left-2"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-right-3-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-right-3"
+    }
+  ],
+  "roofs": [],
+  "rooms": [
+    {
+      "id": "attached-0-room-0-0",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 7.829723,
+          "z": 1.397216
+        },
+        {
+          "x": 11.508939,
+          "z": 1.397216
+        },
+        {
+          "x": 11.508939,
+          "z": 8.001745
+        },
+        {
+          "x": 7.829723,
+          "z": 8.001745
+        }
+      ]
+    },
+    {
+      "id": "main-room-0-0",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 0.486356,
+          "z": 1.397216
+        },
+        {
+          "x": 3.320347,
+          "z": 1.397216
+        },
+        {
+          "x": 3.320347,
+          "z": 3.659854
+        },
+        {
+          "x": 3.220909,
+          "z": 3.659854
+        },
+        {
+          "x": 3.220909,
+          "z": 4.604518
+        },
+        {
+          "x": 3.320347,
+          "z": 4.604518
+        },
+        {
+          "x": 3.320347,
+          "z": 4.654237
+        },
+        {
+          "x": 0.4,
+          "z": 4.654237
+        }
+      ],
+      "usage": "Pokój"
+    },
+    {
+      "id": "main-room-0-1",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 3.469505,
+          "z": 1.397216
+        },
+        {
+          "x": 5.259394,
+          "z": 1.397216
+        },
+        {
+          "x": 5.259394,
+          "z": 2.16828
+        },
+        {
+          "x": 5.209675,
+          "z": 2.16828
+        },
+        {
+          "x": 5.209675,
+          "z": 3.112944
+        },
+        {
+          "x": 5.309113,
+          "z": 3.112944
+        },
+        {
+          "x": 5.309113,
+          "z": 3.460978
+        },
+        {
+          "x": 5.110236,
+          "z": 3.460978
+        },
+        {
+          "x": 5.110236,
+          "z": 3.361539
+        },
+        {
+          "x": 4.165573,
+          "z": 3.361539
+        },
+        {
+          "x": 4.165573,
+          "z": 3.460978
+        },
+        {
+          "x": 3.469505,
+          "z": 3.460978
+        }
+      ]
+    },
+    {
+      "id": "main-room-0-2",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 5.45827,
+          "z": 1.397216
+        },
+        {
+          "x": 7.397317,
+          "z": 1.397216
+        },
+        {
+          "x": 7.397317,
+          "z": 4.50508
+        },
+        {
+          "x": 5.905743,
+          "z": 4.50508
+        },
+        {
+          "x": 5.905743,
+          "z": 4.206765
+        },
+        {
+          "x": 5.45827,
+          "z": 4.206765
+        },
+        {
+          "x": 5.45827,
+          "z": 3.610135
+        },
+        {
+          "x": 5.50799,
+          "z": 3.610135
+        },
+        {
+          "x": 5.50799,
+          "z": 3.460978
+        },
+        {
+          "x": 5.45827,
+          "z": 3.460978
+        },
+        {
+          "x": 5.45827,
+          "z": 3.112944
+        },
+        {
+          "x": 5.557709,
+          "z": 3.112944
+        },
+        {
+          "x": 5.557709,
+          "z": 2.16828
+        },
+        {
+          "x": 5.45827,
+          "z": 2.16828
+        }
+      ]
+    },
+    {
+      "id": "main-room-0-3",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 3.469505,
+          "z": 3.610135
+        },
+        {
+          "x": 4.165573,
+          "z": 3.610135
+        },
+        {
+          "x": 4.165573,
+          "z": 3.709573
+        },
+        {
+          "x": 5.110236,
+          "z": 3.709573
+        },
+        {
+          "x": 5.110236,
+          "z": 3.610135
+        },
+        {
+          "x": 5.309113,
+          "z": 3.610135
+        },
+        {
+          "x": 5.309113,
+          "z": 5.748058
+        },
+        {
+          "x": 6.353215,
+          "z": 5.748058
+        },
+        {
+          "x": 6.353215,
+          "z": 6.24525
+        },
+        {
+          "x": 6.253777,
+          "z": 6.24525
+        },
+        {
+          "x": 6.253777,
+          "z": 7.239633
+        },
+        {
+          "x": 5.309113,
+          "z": 7.239633
+        },
+        {
+          "x": 5.309113,
+          "z": 7.537948
+        },
+        {
+          "x": 5.209675,
+          "z": 7.537948
+        },
+        {
+          "x": 5.209675,
+          "z": 8.234016
+        },
+        {
+          "x": 5.309113,
+          "z": 8.234016
+        },
+        {
+          "x": 5.309113,
+          "z": 8.731207
+        },
+        {
+          "x": 5.557709,
+          "z": 8.731207
+        },
+        {
+          "x": 5.557709,
+          "z": 9.029522
+        },
+        {
+          "x": 6.0549,
+          "z": 9.029522
+        },
+        {
+          "x": 6.0549,
+          "z": 8.731207
+        },
+        {
+          "x": 7.508225,
+          "z": 8.731207
+        },
+        {
+          "x": 7.347598,
+          "z": 13.014001
+        },
+        {
+          "x": 0.486356,
+          "z": 13.014001
+        },
+        {
+          "x": 0.4,
+          "z": 6.344688
+        },
+        {
+          "x": 4.115853,
+          "z": 6.344688
+        },
+        {
+          "x": 4.115853,
+          "z": 6.195531
+        },
+        {
+          "x": 3.469505,
+          "z": 6.195531
+        },
+        {
+          "x": 3.469505,
+          "z": 5.698339
+        },
+        {
+          "x": 3.568943,
+          "z": 5.698339
+        },
+        {
+          "x": 3.568943,
+          "z": 4.803395
+        },
+        {
+          "x": 3.469505,
+          "z": 4.803395
+        },
+        {
+          "x": 3.469505,
+          "z": 4.604518
+        },
+        {
+          "x": 3.568943,
+          "z": 4.604518
+        },
+        {
+          "x": 3.568943,
+          "z": 3.659854
+        },
+        {
+          "x": 3.469505,
+          "z": 3.659854
+        }
+      ]
+    },
+    {
+      "id": "main-room-0-4",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 0.4,
+          "z": 4.853114
+        },
+        {
+          "x": 3.220909,
+          "z": 4.853114
+        },
+        {
+          "x": 3.220909,
+          "z": 5.698339
+        },
+        {
+          "x": 3.320347,
+          "z": 5.698339
+        },
+        {
+          "x": 3.320347,
+          "z": 6.195531
+        },
+        {
+          "x": 0.4,
+          "z": 6.195531
+        }
+      ]
+    },
+    {
+      "id": "main-room-0-5",
+      "levelId": "L0",
+      "polygon": [
+        {
+          "x": 5.45827,
+          "z": 7.438509
+        },
+        {
+          "x": 7.397317,
+          "z": 7.438509
+        },
+        {
+          "x": 7.508225,
+          "z": 8.383173
+        },
+        {
+          "x": 6.452653,
+          "z": 8.383173
+        },
+        {
+          "x": 6.452653,
+          "z": 8.333454
+        },
+        {
+          "x": 6.253777,
+          "z": 8.333454
+        },
+        {
+          "x": 6.253777,
+          "z": 8.383173
+        },
+        {
+          "x": 6.0549,
+          "z": 8.383173
+        },
+        {
+          "x": 6.0549,
+          "z": 8.333454
+        },
+        {
+          "x": 5.557709,
+          "z": 8.333454
+        },
+        {
+          "x": 5.557709,
+          "z": 8.383173
+        },
+        {
+          "x": 5.45827,
+          "z": 8.383173
+        },
+        {
+          "x": 5.45827,
+          "z": 8.234016
+        },
+        {
+          "x": 5.557709,
+          "z": 8.234016
+        },
+        {
+          "x": 5.557709,
+          "z": 7.537948
+        },
+        {
+          "x": 5.45827,
+          "z": 7.537948
+        }
+      ]
+    },
+    {
+      "id": "main-room-1-0",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 3.41747,
+          "z": 1.397216
+        },
+        {
+          "x": 7.421167,
+          "z": 1.397216
+        },
+        {
+          "x": 7.508225,
+          "z": 4.132509
+        },
+        {
+          "x": 3.41747,
+          "z": 4.132509
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "id": "main-room-1-0-p1-r3",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 0.486332,
+          "z": 1.397216
+        },
+        {
+          "x": 3.346491,
+          "z": 1.397216
+        },
+        {
+          "x": 3.346491,
+          "z": 3.774989
+        },
+        {
+          "x": 0.4,
+          "z": 3.774989
+        }
+      ],
+      "usage": "wardrobe"
+    },
+    {
+      "id": "main-room-1-1",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 0.4,
+          "z": 3.958169
+        },
+        {
+          "x": 3.270628,
+          "z": 3.958169
+        },
+        {
+          "x": 3.270628,
+          "z": 4.952552
+        },
+        {
+          "x": 3.469505,
+          "z": 4.952552
+        },
+        {
+          "x": 3.469505,
+          "z": 4.853114
+        },
+        {
+          "x": 3.817539,
+          "z": 4.853114
+        },
+        {
+          "x": 3.817539,
+          "z": 4.902833
+        },
+        {
+          "x": 3.7181,
+          "z": 4.902833
+        },
+        {
+          "x": 3.7181,
+          "z": 5.847497
+        },
+        {
+          "x": 3.817539,
+          "z": 5.847497
+        },
+        {
+          "x": 3.817539,
+          "z": 6.344688
+        },
+        {
+          "x": 0.4,
+          "z": 6.344688
+        }
+      ],
+      "usage": "Łazienka"
+    },
+    {
+      "id": "main-room-1-2",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 4.961079,
+          "z": 4.853114
+        },
+        {
+          "x": 7.508225,
+          "z": 4.853114
+        },
+        {
+          "x": 7.508225,
+          "z": 5.698339
+        },
+        {
+          "x": 5.259394,
+          "z": 5.698339
+        },
+        {
+          "x": 5.259394,
+          "z": 8.383173
+        },
+        {
+          "x": 5.060517,
+          "z": 8.383173
+        },
+        {
+          "x": 5.060517,
+          "z": 9.675871
+        },
+        {
+          "x": 5.010798,
+          "z": 9.675871
+        },
+        {
+          "x": 5.010798,
+          "z": 9.626152
+        },
+        {
+          "x": 4.066134,
+          "z": 9.626152
+        },
+        {
+          "x": 4.066134,
+          "z": 8.681488
+        },
+        {
+          "x": 3.966696,
+          "z": 8.681488
+        },
+        {
+          "x": 3.966696,
+          "z": 8.631769
+        },
+        {
+          "x": 4.016415,
+          "z": 8.631769
+        },
+        {
+          "x": 4.016415,
+          "z": 8.482612
+        },
+        {
+          "x": 3.966696,
+          "z": 8.482612
+        },
+        {
+          "x": 3.966696,
+          "z": 8.035139
+        },
+        {
+          "x": 4.066134,
+          "z": 8.035139
+        },
+        {
+          "x": 4.066134,
+          "z": 7.090475
+        },
+        {
+          "x": 3.966696,
+          "z": 7.090475
+        },
+        {
+          "x": 3.966696,
+          "z": 6.493846
+        },
+        {
+          "x": 4.016415,
+          "z": 6.493846
+        },
+        {
+          "x": 4.016415,
+          "z": 6.344688
+        },
+        {
+          "x": 3.966696,
+          "z": 6.344688
+        },
+        {
+          "x": 3.966696,
+          "z": 5.847497
+        },
+        {
+          "x": 4.066134,
+          "z": 5.847497
+        },
+        {
+          "x": 4.066134,
+          "z": 4.952552
+        },
+        {
+          "x": 4.961079,
+          "z": 4.952552
+        }
+      ],
+      "usage": "Korytarz"
+    },
+    {
+      "id": "main-room-1-3",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 0.4,
+          "z": 6.493846
+        },
+        {
+          "x": 3.817539,
+          "z": 6.493846
+        },
+        {
+          "x": 3.817539,
+          "z": 7.090475
+        },
+        {
+          "x": 3.7181,
+          "z": 7.090475
+        },
+        {
+          "x": 3.7181,
+          "z": 8.035139
+        },
+        {
+          "x": 3.817539,
+          "z": 8.035139
+        },
+        {
+          "x": 3.817539,
+          "z": 8.482612
+        },
+        {
+          "x": 0.4,
+          "z": 8.482612
+        }
+      ],
+      "usage": "Pralnia"
+    },
+    {
+      "id": "main-room-1-4",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 3.945863,
+          "z": 9.852827
+        },
+        {
+          "x": 5.134091,
+          "z": 9.852827
+        },
+        {
+          "x": 7.508225,
+          "z": 9.852827
+        },
+        {
+          "x": 7.421167,
+          "z": 13.014001
+        },
+        {
+          "x": 3.945863,
+          "z": 13.014001
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "id": "main-room-1-4-p1-r8",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 5.163008,
+          "z": 8.496355
+        },
+        {
+          "x": 7.508225,
+          "z": 8.496355
+        },
+        {
+          "x": 7.508225,
+          "z": 9.810766
+        },
+        {
+          "x": 5.163008,
+          "z": 9.810766
+        }
+      ],
+      "usage": "wardrobe"
+    },
+    {
+      "id": "main-room-1-5",
+      "levelId": "L1",
+      "polygon": [
+        {
+          "x": 0.4,
+          "z": 8.631769
+        },
+        {
+          "x": 3.817539,
+          "z": 8.631769
+        },
+        {
+          "x": 3.817539,
+          "z": 8.681488
+        },
+        {
+          "x": 3.7181,
+          "z": 8.681488
+        },
+        {
+          "x": 3.7181,
+          "z": 9.626152
+        },
+        {
+          "x": 3.817539,
+          "z": 9.626152
+        },
+        {
+          "x": 3.817539,
+          "z": 13.014001
+        },
+        {
+          "x": 0.486356,
+          "z": 13.014001
+        }
+      ],
+      "usage": "Pokój"
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.8.0",
+  "slabs": [
+    {
+      "id": "slab-0",
+      "levelId": "L0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0.997216
+        },
+        {
+          "x": 11.301996,
+          "z": 0.997216
+        },
+        {
+          "x": 11.301996,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 8.401745
+        },
+        {
+          "x": 7.908225,
+          "z": 8.401745
+        },
+        {
+          "x": 7.908225,
+          "z": 14.437391
+        },
+        {
+          "x": 7.26066,
+          "z": 14.437391
+        },
+        {
+          "x": 7.26066,
+          "z": 13.414001
+        },
+        {
+          "x": 0.647565,
+          "z": 13.414001
+        },
+        {
+          "x": 0.647565,
+          "z": 14.437391
+        },
+        {
+          "x": 0,
+          "z": 14.437391
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    },
+    {
+      "holes": [
+        [
+          {
+            "x": 5.259352,
+            "z": 5.812705
+          },
+          {
+            "x": 7.3298,
+            "z": 5.812705
+          },
+          {
+            "x": 7.3298,
+            "z": 8.496212
+          },
+          {
+            "x": 5.259352,
+            "z": 8.496212
+          }
+        ]
+      ],
+      "id": "slab-1",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0.997216
+        },
+        {
+          "x": 7.908225,
+          "z": 0.997216
+        },
+        {
+          "x": 7.908225,
+          "z": 14.437391
+        },
+        {
+          "x": 7.26066,
+          "z": 14.437391
+        },
+        {
+          "x": 7.26066,
+          "z": 13.414001
+        },
+        {
+          "x": 0.647565,
+          "z": 13.414001
+        },
+        {
+          "x": 0.647565,
+          "z": 14.437391
+        },
+        {
+          "x": 0,
+          "z": 14.437391
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [
+    {
+      "baseOffset": 0,
+      "direction": "PLUS_X",
+      "footprint": {
+        "maxX": 7.36927,
+        "maxZ": 8.398218,
+        "minX": 5.280186,
+        "minZ": 4.794867
+      },
+      "id": "stair-main",
+      "kind": "FLIGHTS",
+      "levelId": "L0",
+      "segments": [
+        {
+          "going": 0.262895,
+          "kind": "FLIGHT",
+          "risers": 5
+        },
+        {
+          "kind": "LANDING",
+          "length": 1.017838,
+          "onRiser": true,
+          "turn": "LEFT"
+        },
+        {
+          "going": 0.261279,
+          "kind": "FLIGHT",
+          "risers": 7
+        },
+        {
+          "kind": "LANDING",
+          "length": 1.017838,
+          "onRiser": true,
+          "turn": "LEFT"
+        },
+        {
+          "going": 0.267811,
+          "kind": "FLIGHT",
+          "risers": 5
+        }
+      ],
+      "start": {
+        "x": 5.299851,
+        "z": 5.812705
+      },
+      "toLevelId": "L1",
+      "topOffset": 0,
+      "waist": 0.18,
+      "width": 1.017838
+    }
+  ],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "face": "OUTER",
+      "hostId": "w-main-0",
+      "id": "zone-front-12",
+      "materialId": "mat-zone-wood-warm",
+      "rect": {
+        "a0": 0.658565,
+        "a1": 3.223565,
+        "b0": 0,
+        "b1": 3.06
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-0",
+      "id": "zone-front-13",
+      "materialId": "mat-zone-wood-warm",
+      "rect": {
+        "a0": 0.658565,
+        "a1": 3.223565,
+        "b0": 3.06,
+        "b1": 6.953
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-0",
+      "id": "zone-front-14",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 3.223565,
+        "a1": 7.908225,
+        "b0": 0,
+        "b1": 3.021
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-garage-3",
+      "id": "zone-front-14-2",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0.001,
+        "a1": 3.39334,
+        "b0": 0,
+        "b1": 3.021
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-garage-ret-0",
+      "id": "zone-front-15",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0,
+        "a1": 0.714,
+        "b0": 0,
+        "b1": 3.021
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-0",
+      "id": "zone-front-16",
+      "materialId": "mat-zone-wood-warm",
+      "rect": {
+        "a0": 3.223565,
+        "a1": 7.189565,
+        "b0": 3.06,
+        "b1": 6.953
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-3",
+      "id": "zone-left-1",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 4.44261,
+        "a1": 9.77561,
+        "b0": 0,
+        "b1": 2.255
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-3",
+      "id": "zone-left-2",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0,
+        "a1": 12.416785,
+        "b0": 4.301,
+        "b1": 4.653
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-garage-1",
+      "id": "zone-rear-3",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0,
+        "a1": 4.141775,
+        "b0": 0,
+        "b1": 3.031
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-2",
+      "id": "zone-rear-4",
+      "materialId": "mat-zone-wood-warm",
+      "rect": {
+        "a0": 5.667565,
+        "a1": 7.243565,
+        "b0": 0,
+        "b1": 2.432
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-2",
+      "id": "zone-rear-5",
+      "materialId": "mat-zone-wood-warm",
+      "rect": {
+        "a0": 0.683565,
+        "a1": 0.988565,
+        "b0": 0,
+        "b1": 2.432
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-2",
+      "id": "zone-rear-6",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0.683565,
+        "a1": 7.243565,
+        "b0": 2.432,
+        "b1": 3.026
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-2",
+      "id": "zone-rear-7",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 3.276565,
+        "a1": 4.666565,
+        "b0": 3.89,
+        "b1": 6.128
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-1",
+      "id": "zone-right-11",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0,
+        "a1": 12.416785,
+        "b0": 4.266,
+        "b1": 4.618
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-garage-0",
+      "id": "zone-right-8",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 0,
+        "a1": 7.401784,
+        "b0": 0,
+        "b1": 3.011
+      }
+    },
+    {
+      "face": "OUTER",
+      "hostId": "w-main-1",
+      "id": "zone-right-9",
+      "materialId": "mat-zone-plaster-dark",
+      "rect": {
+        "a0": 7.404529,
+        "a1": 8.606529,
+        "b0": 0,
+        "b1": 2.208
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "againstWallId": "w-main-1",
+      "id": "w-garage-1-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "w-garage-1"
+      }
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-garage-1"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-garage-0"
+      },
+      "id": "w-garage-1-j-start",
+      "kind": "CORNER",
+      "owner": "w-garage-0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "w-garage-3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "w-garage-0"
+      },
+      "id": "w-garage-3-j-end",
+      "kind": "CORNER",
+      "owner": "w-garage-0",
+      "tolerance": 0.001
+    },
+    {
+      "againstWallId": "w-main-1",
+      "id": "w-garage-3-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "w-garage-3"
+      }
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-1"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-0"
+      },
+      "id": "w-main-1-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-1",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-2"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-1"
+      },
+      "id": "w-main-2-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "w-main-3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "w-main-0"
+      },
+      "id": "w-main-3-j-end",
+      "kind": "CORNER",
+      "owner": "w-main-0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-3"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-2"
+      },
+      "id": "w-main-3-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [
+    {
+      "bottom": [
+        {
+          "u": 0,
+          "y": 0
+        },
+        {
+          "u": 0.647565,
+          "y": 0
+        },
+        {
+          "u": 0.647665,
+          "y": 4.196561
+        },
+        {
+          "u": 3.954113,
+          "y": 6.971
+        },
+        {
+          "u": 7.250125,
+          "y": 4.205318
+        },
+        {
+          "u": 7.250225,
+          "y": 3.06
+        },
+        {
+          "u": 7.908225,
+          "y": 3.06
+        }
+      ],
+      "end": {
+        "x": 7.908225,
+        "z": 0
+      },
+      "id": "frame-main-front-plate",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "GABLE_FRAME",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.987,
+      "top": [
+        {
+          "u": 0,
+          "y": 4.632105
+        },
+        {
+          "u": 3.954113,
+          "y": 7.95
+        },
+        {
+          "u": 7.908225,
+          "y": 4.632106
+        }
+      ]
+    },
+    {
+      "bottom": [
+        {
+          "u": 0,
+          "y": 0
+        },
+        {
+          "u": 0.647565,
+          "y": 0
+        },
+        {
+          "u": 0.647665,
+          "y": 4.192562
+        },
+        {
+          "u": 3.954112,
+          "y": 6.967
+        },
+        {
+          "u": 7.26056,
+          "y": 4.192561
+        },
+        {
+          "u": 7.26066,
+          "y": 0
+        },
+        {
+          "u": 7.908225,
+          "y": 0
+        }
+      ],
+      "end": {
+        "x": 0,
+        "z": 14.437391
+      },
+      "id": "frame-main-rear-plate",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "GABLE_FRAME",
+      "start": {
+        "x": 7.908225,
+        "z": 14.437391
+      },
+      "thickness": 1.013,
+      "top": [
+        {
+          "u": 0,
+          "y": 4.632106
+        },
+        {
+          "u": 3.954112,
+          "y": 7.95
+        },
+        {
+          "u": 7.908225,
+          "y": 4.632105
+        }
+      ]
+    }
+  ],
+  "wallRings": [],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.508225,
+        "z": 8.400835
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-0",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.338066,
+        "z": 8.400835
+      },
+      "thickness": 0.315474
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.419271,
+        "z": 7.281606
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-1",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.364436,
+        "z": 7.281606
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.233959,
+        "z": 6.675751
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-2",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.447169,
+        "z": 6.675751
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.098636,
+        "z": 6.201604
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-3",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.4,
+        "z": 6.201604
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.308577,
+        "z": 4.673797
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-4",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.4,
+        "z": 4.673797
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.400363,
+        "z": 4.529048
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-5",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.364436,
+        "z": 4.529048
+      },
+      "thickness": 0.262895
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.310168,
+        "z": 3.462062
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-x-6",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.469856,
+        "z": 3.462062
+      },
+      "thickness": 0.105158
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.45494,
+        "z": 6.186689
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-z-0",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.45494,
+        "z": 1.397216
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.432254,
+        "z": 7.26669
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-z-10",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.432254,
+        "z": 6.293669
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.456531,
+        "z": 8.385919
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-z-3",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.456531,
+        "z": 7.427969
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.456531,
+        "z": 4.514133
+      },
+      "height": 2.76,
+      "id": "main-iwall-0-z-5",
+      "kind": "INTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.456531,
+        "z": 1.397216
+      },
+      "thickness": 0.131447
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.834542,
+        "z": 8.506065
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-x-0",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.4,
+        "z": 8.506065
+      },
+      "thickness": 0.104512,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.508225,
+        "z": 8.401451
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-x-1",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.115291,
+        "z": 8.401451
+      },
+      "thickness": 0.13064,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.834542,
+        "z": 6.387344
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-x-2",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.4,
+        "z": 6.387344
+      },
+      "thickness": 0.104512,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.508225,
+        "z": 4.687166
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-x-3",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.446932,
+        "z": 4.687166
+      },
+      "thickness": 0.156767,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.28646,
+        "z": 3.797811
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-x-5",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.4,
+        "z": 3.797811
+      },
+      "thickness": 0.13064,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.432016,
+        "z": 4.909413
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-z-0",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.432016,
+        "z": 2.895321
+      },
+      "thickness": 0.13064,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.95397,
+        "z": 13.014001
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-z-2",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.95397,
+        "z": 4.858848
+      },
+      "thickness": 0.104512,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.232808,
+        "z": 9.826938
+      },
+      "height": 5.39,
+      "id": "main-iwall-1-z-6",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.232808,
+        "z": 8.547007
+      },
+      "thickness": 0.13064,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.087252,
+        "z": 9.722367
+      },
+      "height": 5.39,
+      "id": "main-nib-1-1",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 3.968886,
+        "z": 9.722367
+      },
+      "thickness": 0.104512,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.486332,
+        "z": 1.397216
+      },
+      "height": 5.39,
+      "id": "plan-p1-w9",
+      "kind": "INTERIOR",
+      "levelId": "L1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.486332,
+        "z": 3.730491
+      },
+      "thickness": 0.06,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 8.401745
+      },
+      "height": 3.031,
+      "id": "w-garage-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.05,
+        "z": 0.997216
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 8.401745
+      },
+      "height": 3.031,
+      "id": "w-garage-1",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.05,
+        "z": 8.401745
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 0.997216
+      },
+      "height": 3.031,
+      "id": "w-garage-3",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 0.997216
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 0
+      },
+      "height": 3.031,
+      "id": "w-garage-ret-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.301996,
+        "z": 0
+      },
+      "thickness": 0.997216,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 0.997216
+      },
+      "height": 8.45,
+      "id": "w-main-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0.997216
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 13.414001
+      },
+      "height": 8.45,
+      "id": "w-main-1",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 0.997216
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 13.414001
+      },
+      "height": 8.45,
+      "id": "w-main-2",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 13.414001
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0.997216
+      },
+      "height": 8.45,
+      "id": "w-main-3",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 13.414001
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 2,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-front-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-front-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-left-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-left-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-1-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-1"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-2"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-4-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-4"
+    }
+  ]
+}

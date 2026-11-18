@@ -47,6 +47,15 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.11: the same live reading (397a809's answers) built by the repaired code (84de494): the portal bands take
+  // their source zone's finish (D53); everything else of the v3.54.10 candidate is unchanged — a third scene, the two
+  // checkpoints below kept for comparison
+  {
+    key: 'marcowki-h-v35411',
+    title: 'Marcówki — H po naprawie v3.54.11',
+    subtitle: 'KANDYDAT H (nie oddany) po naprawie materiałów: ciemne pasy portalu ze strefy źródła; reszta jak v3.54.10; bez kominów',
+    build: () => sealedOwnerModel('marcowki-h-v35411', '35602721f8b82487b6beed21c854ba7188fdca0e504f9d2106eedbe97e02ee6a', 'owner-v35411'),
+  },
   // v3.54.11 (D52): the v3.54.10 checkpoint, exactly as in BuildPlan-V35410-Private.zip (SHA-256 4a75033c…): the H
   // candidate after the final replay (code 62350cc; the live job 397a809's answers; 15 rooms, 29 walls, 0 chimneys) and
   // the LOCAL model the host delivered (13 rooms, 40 walls, 2 chimneys) — sealed by the SHA-256 of their canonical

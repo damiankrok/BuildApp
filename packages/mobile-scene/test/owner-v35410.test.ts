@@ -30,11 +30,12 @@ describe('v3.54.11 the v3.54.10 checkpoint scenes', () => {
     expect([m.rooms.length, m.walls.length, m.chimneys.length]).toEqual([13, 40, 2])
     expect(asset('marcowki-local-v35410').contentHash).toBe('75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45')
   })
-  it('both are first in the app index, titled as the candidate and as the delivered model', () => {
+  it('both are in the app index after the repaired H, titled as the candidate and as the delivered model', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string; contentHash: string }>
-    expect(index.slice(0, 2).map((e) => e.key)).toEqual(['marcowki-h-v35410', 'marcowki-local-v35410'])
-    expect(index[0].title).toContain('kandydat')
-    expect(index[0].subtitle).toContain('KANDYDAT')
-    expect(index[1].title).toContain('LOCAL oddany')
+    // v3.54.11: after the repaired H (listed first), the two checkpoints in their order
+    expect(index.slice(1, 3).map((e) => e.key)).toEqual(['marcowki-h-v35410', 'marcowki-local-v35410'])
+    expect(index[1].title).toContain('kandydat')
+    expect(index[1].subtitle).toContain('KANDYDAT')
+    expect(index[2].title).toContain('LOCAL oddany')
   })
 })
