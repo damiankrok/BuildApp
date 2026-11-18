@@ -283,7 +283,9 @@ class DownloadedScenesTest {
     fun `the viewer lists bundled scenes unchanged and in order, then downloaded analyses`() {
         val bundled = BundledScenes { TestScenes.text(it) }
         val before = SceneRepository(bundled, store).entries()
-        assertEquals(listOf("marcowki", "marcowki-auto-v3", "marcowki-auto", "marcowki-auto-v2", "demo"), before.map { it.key })
+        // the bundled scenes are the shipped index, in its order (owner review scenes first, then the earlier five)
+        assertEquals(TestScenes.index.map { it.key }, before.map { it.key })
+        assertEquals(listOf("marcowki", "marcowki-auto-v3", "marcowki-auto", "marcowki-auto-v2", "demo"), before.map { it.key }.takeLast(5))
         assertTrue(before.all { it.source == SceneSourceKind.BUNDLED })
         assertEquals(TestScenes.index.map { it.title }, before.map { it.title })
 
@@ -292,14 +294,14 @@ class DownloadedScenesTest {
         now = 20
         val b = saved(store.save(otherBytes, null, otherRecord))
         val after = SceneRepository(bundled, store).entries()
-        assertEquals(before, after.take(5))
-        assertEquals(listOf(b.key, a.key), after.drop(5).map { it.key })
-        assertTrue(after.drop(5).all { it.source == SceneSourceKind.DOWNLOADED })
+        assertEquals(before, after.take(before.size))
+        assertEquals(listOf(b.key, a.key), after.drop(before.size).map { it.key })
+        assertTrue(after.drop(before.size).all { it.source == SceneSourceKind.DOWNLOADED })
         assertEquals("Dom w marcówkach (GE)", after.last().title)
 
         // Loading dispatches to the right source.
         val repository = SceneRepository(bundled, store)
-        val reference = repository.load(after.first()) as SceneLoadResult.Ok
+        val reference = repository.load(after.first { it.key == "marcowki" }) as SceneLoadResult.Ok
         assertEquals("marcowki", reference.scene.key)
         val analysis = repository.load(after.last()) as SceneLoadResult.Ok
         assertEquals(a.key, analysis.scene.key)
@@ -308,7 +310,7 @@ class DownloadedScenesTest {
     @Test
     fun `without a downloaded store the viewer lists only the bundled scenes`() {
         val repository = SceneRepository(BundledScenes { TestScenes.text(it) })
-        assertEquals(5, repository.entries().size)
+        assertEquals(TestScenes.index.size, repository.entries().size)
         val entry = repository.entries().first()
         assertTrue(repository.load(entry) is SceneLoadResult.Ok)
         assertNull(DownloadedScenes(AnalyzerFixtures.tempDir()).find("analysis-000000000000"))

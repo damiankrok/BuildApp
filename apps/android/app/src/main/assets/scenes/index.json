@@ -1,5 +1,29 @@
 [
   {
+    "key": "marcowki-h-v35410",
+    "title": "Marcówki — H v3.54.10, kandydat",
+    "subtitle": "KANDYDAT z odczytu API po recenzji (nie oddany), kod 62350cc: wnętrze, strefy wykończenia, skośne okna z opisów rzutu; bez kominów, pas portalu jasny",
+    "asset": "marcowki-h-v35410.scene.json",
+    "modelId": "house-marcowki-ge",
+    "modelSchemaVersion": "1.8.0",
+    "contentHash": "530a890050472e5150c8a5016faacaf8da83d776afd0252f960cd878f015dc4e",
+    "meshCount": 166,
+    "triangleCount": 4840,
+    "objectCount": 123
+  },
+  {
+    "key": "marcowki-local-v35410",
+    "title": "Marcówki — LOCAL oddany przez host",
+    "subtitle": "Model oddany użytkownikowi przez host v3.54.10 (397a809 / d43eebe / 62350cc, ten sam): LOCAL — do porównania z kandydatem H",
+    "asset": "marcowki-local-v35410.scene.json",
+    "modelId": "m-analysis-m2fa281446a8ca",
+    "modelSchemaVersion": "1.8.0",
+    "contentHash": "75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45",
+    "meshCount": 168,
+    "triangleCount": 5254,
+    "objectCount": 122
+  },
+  {
     "key": "marcowki-h-v3548",
     "title": "Marcówki — opis H v3.54.8",
     "subtitle": "KANDYDAT z odczytu API po recenzji (nie oddany): rama z nogami, szkło, pas portalu; głowice za nisko",

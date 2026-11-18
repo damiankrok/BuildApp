@@ -47,6 +47,22 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.11 (D52): the v3.54.10 checkpoint, exactly as in BuildPlan-V35410-Private.zip (SHA-256 4a75033c…): the H
+  // candidate after the final replay (code 62350cc; the live job 397a809's answers; 15 rooms, 29 walls, 0 chimneys) and
+  // the LOCAL model the host delivered (13 rooms, 40 walls, 2 chimneys) — sealed by the SHA-256 of their canonical
+  // serialization; the v3.54.8 pair below stays as it was.
+  {
+    key: 'marcowki-h-v35410',
+    title: 'Marcówki — H v3.54.10, kandydat',
+    subtitle: 'KANDYDAT z odczytu API po recenzji (nie oddany), kod 62350cc: wnętrze, strefy wykończenia, skośne okna z opisów rzutu; bez kominów, pas portalu jasny',
+    build: () => sealedOwnerModel('marcowki-h-v35410', '826085f562528b1666ea8a4e673c83e2ff446abd0b080dc719b191db2cee990a', 'owner-v35410'),
+  },
+  {
+    key: 'marcowki-local-v35410',
+    title: 'Marcówki — LOCAL oddany przez host',
+    subtitle: 'Model oddany użytkownikowi przez host v3.54.10 (397a809 / d43eebe / 62350cc, ten sam): LOCAL — do porównania z kandydatem H',
+    build: () => sealedOwnerModel('marcowki-local-v35410', '36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86', 'owner-v35410'),
+  },
   // v3.54.8 (owner request): the house described from the API's reading after its review, and the model the final host
   // (05faa4e) delivered for the same page (LOCAL), side by side — sealed by the SHA-256 of their canonical
   // serialization as they came out of the runs (`packages/candidates/src/owner-v3548/`, numbers and ids only).

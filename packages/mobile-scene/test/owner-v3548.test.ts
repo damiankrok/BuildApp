@@ -18,10 +18,12 @@ describe('v3.54.8 owner review scenes', () => {
     expect(m.some((x) => x.semanticGroup === 'FACADE_FRAME')).toBe(true)
     expect(m.some((x) => x.objectKind === 'railing' && x.part === 'RAILING_INFILL' && x.semanticGroup === 'WINDOW_GLASS')).toBe(true)
   })
-  it('both are in the app index, first, marked as a candidate and as the delivered model', () => {
+  it('both are in the app index, marked as a candidate and as the delivered model', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string }>
-    expect(index.slice(0, 2).map((e) => e.key)).toEqual(['marcowki-h-v3548', 'marcowki-local-v3548'])
-    expect(index[0].subtitle).toContain('KANDYDAT')
-    expect(index[1].subtitle).toContain('oddany')
+    // v3.54.11: right after the v3.54.10 checkpoint pair
+    const at = index.findIndex((e) => e.key === 'marcowki-h-v3548')
+    expect(index.slice(at, at + 2).map((e) => e.key)).toEqual(['marcowki-h-v3548', 'marcowki-local-v3548'])
+    expect(index[at].subtitle).toContain('KANDYDAT')
+    expect(index[at + 1].subtitle).toContain('oddany')
   })
 })

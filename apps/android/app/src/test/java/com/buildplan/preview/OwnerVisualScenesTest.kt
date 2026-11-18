@@ -15,9 +15,11 @@ class OwnerVisualScenesTest {
     private val keys = listOf("jarzmianki-005t-visual", "gozdzikowce-005t-visual")
 
     @Test
-    fun `the two owner scenes are listed first and say they are approximate`() {
-        assertEquals(keys, TestScenes.index.take(2).map { it.key })
-        for (entry in TestScenes.index.take(2)) assertTrue(entry.subtitle, entry.subtitle.contains("MODEL ORIENTACYJNY"))
+    fun `the two owner scenes are listed together and say they are approximate`() {
+        // (the owner's later review scenes — v3.54.8, v3.54.10 — are listed before them; this pair keeps its order)
+        val at = TestScenes.index.indexOfFirst { it.key == keys[0] }
+        assertEquals(keys, TestScenes.index.subList(at, at + 2).map { it.key })
+        for (entry in TestScenes.index.subList(at, at + 2)) assertTrue(entry.subtitle, entry.subtitle.contains("MODEL ORIENTACYJNY"))
     }
 
     @Test
