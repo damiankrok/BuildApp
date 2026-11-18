@@ -343,7 +343,10 @@ urządzenia). Wyrównanie LOAD 0x1000 w `libnode.so` i `libbuildapp_node_bridge.
 
 **Testy:** nowe — czoło ściany (kompilacja, walidacja, domyślne OUTER), emisja tylko odsłoniętych czół, rejestracja
 pionu z rzędnych (4), sceny v3.54.12 (4); mobile-scene 95/95, Android `testDebugUnitTest` zielone; pakiety dotknięte
-zmianą: 1917 testów zielonych. Pełna macierz: `results/real/matrix-final.txt`.
+zmianą: 1917 testów zielonych. Pełna macierz na finalnym kodzie: **4253 passed, 17 failed, 11 skipped (4290)**;
+15 to dokładnie zestaw środowiska bazowego z v3.54.11, dwa to testy `apps/analyzer-api/test/worker.test.ts`, które
+przekroczyły 120 s pod obciążeniem pełnej macierzy — ten plik uruchomiony osobno: 3/3 w 21 s (kodu nie dotykano).
+Typecheck: OK. `results/real/matrix-final.txt`.
 
 **Otwarte:** nadproże bramy w B-both (szkic rysuje bramę wyższą — uproszczenie, którego karta nie zabrania, ale
 obmiar tak); drugi dom ze szkicami (brak wejść); boczne elewacje jako szkice; pilot automatyzacji (decyzja OWNER-a,
