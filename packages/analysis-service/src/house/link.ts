@@ -27,21 +27,21 @@ import type { LinkAnalysisResult } from '../result.js'
 import type { AnalysisWarning } from '../warnings.js'
 import { MODEL_ASSESSMENT_SCHEMA_VERSION } from '../assessment/types.js'
 import type { ModelAssessment } from '../assessment/types.js'
-import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } from './describe.js'
+import { arbitrate, compileHouse, documentFromReading, extrasInput, planFactsForFacades } from './describe.js'
 import type { Arbitration, CompiledHouse, LocalMeasure } from './describe.js'
 import { deliveredQuality } from './describe.js'
 import { measureScene } from './measure.js'
 import { housePictures } from './pictures.js'
 import { acceptedBinding, bindingDiffers } from './accepted.js'
 import type { AcceptedReuse, AcceptedRevision, AcceptedRevisionStore } from './accepted.js'
-import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readFacades, readInventory, readPlan } from './read.js'
+import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, ReadingFailed, readExtras, readFacades, readInventory, readPlan } from './read.js'
 import type { ReadingContext, ReadingRecord } from './read.js'
 import { reviewHouse } from './review.js'
 import { interiorSourceOf } from './interior-source.js'
 import type { DefectRecord, ReviewPair, ReviewRound, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.5.0'
+export const HOUSE_PATH_VERSION = '0.6.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
   review?: boolean
   /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */
@@ -291,7 +291,10 @@ export async function describeLink(input: AnalysisInput, options: AnalysisOption
       const planOnly = compileHouse(documentFromReading({ ...base, answers: { plan: plan.answer } }).document, identity.modelId)
       const bodiesInMetres = planOnly.document.geometry ? planFactsForFacades(planOnly.document.geometry) : ''
       const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
-      const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
+      // v3.54.10: DETAILS and one STOREY reading per plan (an accepted revision recorded before them says they were not read)
+      const extras = await readExtras(ctx, selection, facades, plan.answer.bodies.map((b) => b.id))
+      const ex = extrasInput(extras, records)
+      const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, ...(ex.detailsSent ? { detailsSent: ex.detailsSent } : {}), idRule: ex.idRule, notRead: ex.notRead, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer, ...ex.answers } })
       compiled = compileHouse(JSON.parse(JSON.stringify(converted.document)), identity.modelId)
       if (describer.review !== false && compiled.bundle) {
         const reviewed = await reviewHouse({ ctx, selection, facadesSent: facades.sent, observationsDocument: converted.document, compiled, modelId: identity.modelId })

@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.5.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.6.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -156,6 +156,42 @@ const ElevationOpening = z
     headLeftY: z.number().finite().optional(),
     headRightY: z.number().finite().optional(),
     apexX: z.number().finite().optional(),
+    /** v0.6: what its box traces — the frame (the opening in the wall), only the glass, or only the part EXPOSED above something in front of it. Absent: not said (a reading before v0.6). */
+    contour: z.enum(['FRAME', 'GLASS', 'EXPOSED', 'UNSURE']).optional(),
+    /** v0.6: the row below which something in front (a railing) hides it, and what. */
+    hiddenBelowY: z.number().finite().optional(),
+    hiddenBy: Id.optional(),
+    /** v0.6: the columns of the vertical profiles between panes, the rows of horizontal ones, and how many panes of a glazed door open. */
+    mullionsX: z.array(z.number().finite()).optional(),
+    transomsY: z.array(z.number().finite()).optional(),
+    doorLeaves: z.number().int().min(0).optional(),
+  })
+  .strict()
+
+/** v0.6 — a finish zone of a wall read on an elevation: colour and material as a surface, never a body or a wall. */
+const ElevationZone = z
+  .object({ id: Id, material: z.enum(['PLASTER', 'BOARD_CLADDING', 'WOOD', 'STONE', 'BRICK', 'METAL', 'CONCRETE', 'OTHER']), tone: z.enum(['LIGHT', 'MID', 'DARK', 'WARM', 'UNKNOWN']), box: Box, bodyId: Id.optional(), certainty: z.enum(['CERTAIN', 'LIKELY', 'UNSURE']), note: z.string().optional() })
+  .strict()
+
+/** v0.6 — a printed callout of an exterior opening on a floor plan ("234/303"): literal as printed, where, and the program's reading of it. */
+const LabelObservation = z
+  .object({ id: Id, picture: Id, level: z.number().int(), literal: z.string(), at: Px, wall: z.enum(['FRONT', 'REAR', 'LEFT', 'RIGHT', 'UNSURE']), kind: z.string(), widthM: z.number().positive().nullable(), heightM: z.number().positive().nullable(), origin: Origin })
+  .strict()
+
+/** v0.6 — one floor plan's interior as read (pixels of that plan picture, oriented as printed), for the resolver to register and place. */
+const StoreyObservation = z
+  .object({
+    id: Id,
+    picture: Id,
+    level: z.number().int(),
+    frontEdge: z.enum(['BOTTOM', 'TOP', 'LEFT', 'RIGHT']),
+    outline: z.array(Px).min(3),
+    partitions: z.array(z.object({ id: Id, a: Px, b: Px, thicknessPx: z.number().positive().optional() }).strict()).default([]),
+    doors: z.array(z.object({ id: Id, at: Px, widthPx: z.number().positive().optional() }).strict()).default([]),
+    rooms: z.array(z.object({ id: Id, polygon: z.array(Px).min(3), name: z.string(), number: z.string().optional(), areaLiteral: z.string().optional(), open: z.boolean().default(false) }).strict()).default([]),
+    stairs: z.array(z.array(Px).min(3)).default([]),
+    voids: z.array(z.array(Px).min(3)).default([]),
+    origin: Origin,
   })
   .strict()
 
@@ -203,6 +239,8 @@ const ElevationObservation = z
     bodies: z.array(ElevationBody),
     openings: z.array(ElevationOpening).default([]),
     features: z.array(ElevationFeature).default([]),
+    /** v0.6: finish zones of its walls. */
+    zones: z.array(ElevationZone).default([]),
     origin: Origin,
     /** v0.2. The row of the finished ground floor, when the reader could tell it from the terrain line. */
     floorY: z.number().finite().optional(),
@@ -244,6 +282,10 @@ const ObservationsSchema = z
     relations: z.array(z.object({ kind: z.string(), a: z.string(), b: z.string(), note: z.string().optional() }).strict()).default([]),
     conflicts: z.array(Conflict).default([]),
     unknowns: z.array(z.string()).default([]),
+    /** v0.6: printed callouts of exterior openings on the floor plans. */
+    labels: z.array(LabelObservation).default([]),
+    /** v0.6: each floor plan's interior as read. */
+    storeys: z.array(StoreyObservation).default([]),
   })
   .strict()
 
@@ -301,6 +343,12 @@ const OpeningSchema = z
     panes: z.number().int().min(1).optional(),
     /** v0.3: a head that is not level. RAKED: the height above the sill at the far end (offset + width); `heightM` is the near end. POINTED: both sides at `heightM`, rising to `apexM` above the sill at `apexAtM` from the start. */
     head: z.discriminatedUnion('kind', [z.object({ kind: z.literal('RAKED'), heightFarM: NumSchema }).strict(), z.object({ kind: z.literal('POINTED'), apexAtM: NumSchema, apexM: NumSchema }).strict()]).optional(),
+    /** v0.6: the frame as the elevation shows it, kept beside a rough opening a printed callout gives (two definitions, two constraints). */
+    frame: z.object({ offsetM: z.number(), widthM: z.number(), contour: z.string() }).strict().optional(),
+    /** v0.6: the printed callout this opening is bound to, and what it set. */
+    label: z.object({ id: Id, literal: z.string(), sets: z.array(z.string()), how: z.string() }).strict().optional(),
+    /** v0.6: the divisions of its glazing as read (fractions of its width from its start), or a convention said as one. */
+    divisions: z.object({ mullions: z.array(z.number()), transoms: z.number().int().min(0).default(0), doorLeaves: z.number().int().min(0).optional(), basis: z.enum(['READ', 'DEFAULT']), how: z.string() }).strict().optional(),
     refs: z.array(z.string()).default([]),
   })
   .strict()
@@ -406,7 +454,7 @@ const InteriorStair = z
  */
 export const InteriorSourceSchema = z
   .object({
-    origin: z.enum(['LOCAL']),
+    origin: z.enum(['LOCAL', 'PLAN']),
     modelHash: z.string(),
     /** The source's outer extent (its exterior walls, outer faces) and its ground footprint, to register it against the house. */
     extent: z.object({ x0: z.number(), x1: z.number(), z0: z.number(), z1: z.number() }).strict(),
@@ -443,6 +491,8 @@ const InteriorLevel = z
     voids: z.array(z.array(Vec2).min(3)).default([]),
     /** What of the source's level was not placed, and why (outside the outline, a door that no longer fits its wall …). */
     dropped: z.array(z.object({ id: z.string(), kind: z.string(), why: z.string() }).strict()).default([]),
+    /** v0.6: where this level's elements come from: LOCAL (an import through a checked transform), PLAN (read from this storey's plan), or both merged. */
+    origin: z.enum(['LOCAL', 'PLAN', 'LOCAL+PLAN']).optional(),
   })
   .strict()
 const InteriorSchema = z
@@ -456,9 +506,16 @@ const InteriorSchema = z
       .strict()
       .optional(),
     levels: z.array(InteriorLevel).default([]),
+    /** v0.6: what the plan readings gave per storey (placed or not, and why), beside the LOCAL import. */
+    read: z.array(z.object({ level: z.number().int(), status: z.enum(['PLACED', 'NOT_PLACED', 'NOT_READ']), how: z.string(), added: z.object({ walls: z.number().int(), doors: z.number().int(), rooms: z.number().int(), voids: z.number().int() }).strict().optional() }).strict()).optional(),
   })
   .strict()
 export type HouseInterior = z.infer<typeof InteriorSchema>
+
+/** v0.6 — a finish zone agreed on a wall: host wall, along its outer face from its start, heights above its level's floor. */
+const ZoneSchema = z
+  .object({ id: Id, side: SideSchema, hostWall: Id, level: z.number().int(), a0: z.number(), a1: z.number(), b0: z.number(), b1: z.number(), material: z.string(), tone: z.string(), basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .strict()
 
 const GeometrySchema = z
   .object({
@@ -480,6 +537,8 @@ const GeometrySchema = z
     portals: z.array(PortalSchema).default([]),
     /** What exists and is NOT part of this document's check: the interior is kept as the builder finds it, never certified here. */
     interior: InteriorSchema.default({ status: 'NOT_BUILT', levels: [] }),
+    /** v0.6: finish zones of the walls (presentation: never a body, a wall or a room). */
+    zones: z.array(ZoneSchema).default([]),
   })
   .strict()
 export type HouseGeometry = z.infer<typeof GeometrySchema>
@@ -596,7 +655,7 @@ export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
     /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
-    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', '0.4.0', HOUSE_DOCUMENT_VERSION]),
+    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', '0.4.0', '0.5.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),

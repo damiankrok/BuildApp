@@ -17,7 +17,7 @@
  */
 import { createHash } from 'node:crypto'
 import { encodeJpeg } from '@buildapp/source-package'
-import { renderModelViews, renderSideInFrame } from '../consult/model-views.js'
+import { renderModelViews, renderSideInFrame, renderStoreyCut } from '../consult/model-views.js'
 import { compileHouse } from './describe.js'
 import type { SceneMeasure, SceneSide } from './measure.js'
 import type { CompiledHouse } from './describe.js'
@@ -77,7 +77,7 @@ export const REVIEW_TOOL = {
           additionalProperties: false,
           required: ['op', 'why'],
           properties: {
-            op: { type: 'string', enum: ['SET_ELEVATION_SIDE', 'SET_ROOF', 'SET_BODY_STOREYS', 'SET_ELEVATION_BODY', 'ADD_OPENING', 'REMOVE_OPENING', 'SET_OPENING_HEAD', 'SET_FEATURE', 'REMOVE_FEATURE'] },
+            op: { type: 'string', enum: ['SET_ELEVATION_SIDE', 'SET_ROOF', 'SET_BODY_STOREYS', 'SET_ELEVATION_BODY', 'ADD_OPENING', 'REMOVE_OPENING', 'SET_OPENING_HEAD', 'SET_FEATURE', 'REMOVE_FEATURE', 'SET_OPENING_DETAIL', 'SET_ZONE', 'REMOVE_ZONE'], description: 'v3.54.10: SET_OPENING_DETAIL — for a listed opening (id): contour, hiddenBelowY, mullionsX. SET_ZONE — a finish zone of the wall (box, material, tone; id of a listed zone to replace it). REMOVE_ZONE — a listed zone (id).' },
             why: { type: 'string', maxLength: 240 },
             group: { type: 'string', maxLength: 16, description: 'The same short label on corrections that are only right TOGETHER (narrow one opening and add the one beside it; remove a dormer and add the windows it hid). They are applied as one change: all or none.' },
             picture: { type: 'integer', minimum: 1, description: 'The elevation picture (its number in THIS message).' },
@@ -106,6 +106,11 @@ export const REVIEW_TOOL = {
             box: box,
             level: { type: 'integer', minimum: 0, maximum: 3 },
             apexY: { type: ['number', 'null'] },
+            contour: { type: 'string', enum: ['FRAME', 'GLASS', 'EXPOSED'], description: 'SET_OPENING_DETAIL: what the opening\'s box traces.' },
+            hiddenBelowY: { type: ['number', 'null'], description: 'SET_OPENING_DETAIL: the row below which something in front hides it.' },
+            mullionsX: { type: 'array', items: { type: 'number' }, description: 'SET_OPENING_DETAIL: the columns of the vertical profiles between its panes.' },
+            material: { type: 'string', enum: ['PLASTER', 'BOARD_CLADDING', 'WOOD', 'STONE', 'BRICK', 'METAL', 'CONCRETE', 'OTHER'], description: 'SET_ZONE: the finish.' },
+            tone: { type: 'string', enum: ['LIGHT', 'MID', 'DARK', 'WARM', 'UNKNOWN'], description: 'SET_ZONE: its tone.' },
           },
         },
       },
@@ -113,7 +118,7 @@ export const REVIEW_TOOL = {
   },
 } as const
 
-export type ReviewCorrection = { op: string; why: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null; bandPx?: number | null; legPx?: number | null; posts?: boolean | null; legLeftBottomY?: number | null; legRightBottomY?: number | null; railing?: string | null; railingTopY?: number | null }
+export type ReviewCorrection = { op: string; why: string; contour?: string; hiddenBelowY?: number | null; mullionsX?: number[]; material?: string; tone?: string; group?: string; picture?: number; side?: string; mirrored?: boolean; bodyId?: string; roofKind?: string; ridge?: string; storeys?: number[]; leftX?: number; rightX?: number; eavesY?: number | null; ridgeY?: number | null; id?: string; kind?: string; box?: { x0: number; y0: number; x1: number; y1: number }; level?: number; apexY?: number | null; headLeftY?: number | null; headRightY?: number | null; apexX?: number | null; bandPx?: number | null; legPx?: number | null; posts?: boolean | null; legLeftBottomY?: number | null; legRightBottomY?: number | null; railing?: string | null; railingTopY?: number | null }
 export type ReviewDefect = { id: string; side: string; picture?: number; box?: { x0: number; y0: number; x1: number; y1: number }; feature: string; meaning: string; weight: 'KEY' | 'MAJOR' | 'MINOR'; evidence: string; fix: 'CORRECTION' | 'NEEDS_CLOSE_UP' | 'UNRESOLVED'; corrections?: number[] }
 export type ReviewAnswer = { revision: string; verdict: 'MATCHES' | 'DIFFERS'; differences: Array<{ scope: string; what: string }>; corrections: ReviewCorrection[]; defects?: ReviewDefect[]; closeUps?: Array<{ picture: number; box: { x0: number; y0: number; x1: number; y1: number } }> }
 export type Proposal = { round: number; op: string; subject: string; why: string; state: 'APPLIED' | 'REJECTED'; code?: string; consumer: string; effect: string; /** v3.54.5: the transaction it belonged to, and the observations revision it was made against and (when applied) led to. */ group?: string; baseRevision?: string; revision?: string; /** v3.54.8: what the correction set, against the built model: each target property, its error before and after, and whether it moved toward the source. */ properties?: PropertyCheck[]; improved?: 'IMPROVED' | 'NOT_IMPROVED' | 'NOT_MEASURABLE'; /** v3.54.9: every measured property within tolerance of its target, or not; and the final independent measure. */ tolerance?: 'WITHIN_TOLERANCE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE'; verified?: 'VERIFIED_IN_SCOPE' | 'OUTSIDE_TOLERANCE' | 'NOT_MEASURABLE'; inputModelHash?: string; outputModelHash?: string }
@@ -269,6 +274,39 @@ export function applyCorrection(doc: unknown, c0: ReviewCorrection, sent: SentPi
       for (const x of el.openings) if (x.inFeature === c.id) delete x.inFeature
       return { doc: next, subject: `${el.id}/${c.id}` }
     }
+    // v3.54.10 — the details of an opening (what its box traces, what hides it, its divisions) and the finish zones of
+    // a wall, as typed records with consumers (resolveHouse openings/zones → houseProgram divisions / surface regions)
+    case 'SET_OPENING_DETAIL': {
+      if (!el) return needEl() as { code: string; why: string }
+      const o2 = el.openings.find((x) => x.id === c.id) as Record<string, unknown> | undefined
+      if (!o2) return { code: 'WRONG_BINDING', why: `no opening ${c.id} on ${el.id}` }
+      if (!c.contour && c.hiddenBelowY === undefined && !Array.isArray(c.mullionsX)) return { code: 'PARSE_REJECTED', why: 'an opening detail needs a contour, a hidden row or the profiles' }
+      if (c.contour) o2.contour = c.contour
+      if (typeof c.hiddenBelowY === 'number') o2.hiddenBelowY = r1(c.hiddenBelowY)
+      else if (c.hiddenBelowY === null) delete o2.hiddenBelowY
+      if (Array.isArray(c.mullionsX)) o2.mullionsX = c.mullionsX.map(r1)
+      return { doc: next, subject: `${el.id}/${String(o2.id)} (detail)` }
+    }
+    case 'SET_ZONE': {
+      if (!el) return needEl() as { code: string; why: string }
+      if (!c.box || !c.material || !c.tone) return { code: 'PARSE_REJECTED', why: 'a zone needs its box, material and tone' }
+      const zs = ((el as Record<string, unknown>).zones ?? []) as Array<Record<string, unknown>>
+      const entry = { id: '', material: c.material, tone: c.tone, box: B(c.box), ...(c.bodyId && bodies.has(c.bodyId) ? { bodyId: c.bodyId } : {}), certainty: 'LIKELY', note: 'set by the review' }
+      const at = c.id ? zs.findIndex((x) => x.id === c.id) : -1
+      if (c.id && at < 0) return { code: 'WRONG_BINDING', why: `no zone ${c.id} on ${el.id}` }
+      if (at >= 0) zs[at] = { ...entry, id: String(zs[at].id) }
+      else zs.push({ ...entry, id: `z${zs.length + 1}r` })
+      ;(el as Record<string, unknown>).zones = zs
+      return { doc: next, subject: `${el.id}/${at >= 0 ? String(zs[at].id) : String(zs[zs.length - 1].id)} (zone)` }
+    }
+    case 'REMOVE_ZONE': {
+      if (!el) return needEl() as { code: string; why: string }
+      const zs = ((el as Record<string, unknown>).zones ?? []) as Array<Record<string, unknown>>
+      const i = zs.findIndex((x) => x.id === c.id)
+      if (i < 0) return { code: 'WRONG_BINDING', why: `no zone ${c.id} on ${el.id}` }
+      zs.splice(i, 1)
+      return { doc: next, subject: `${el.id}/${c.id} (zone removed)` }
+    }
     default:
       return { code: 'CAPABILITY_MISSING', why: `no consumer for a correction of kind ${c.op}` }
   }
@@ -316,7 +354,7 @@ export function acceptCorrection(before: CompiledHouse, after: CompiledHouse, op
   return { ok: true, effect: `model ${String(before.modelHash).slice(0, 10)} → ${String(after.modelHash).slice(0, 10)}; failing checks ${a.failing.size} → ${b.failing.size}; held or refused ${a.trouble} → ${b.trouble}; meshes ${a.built} → ${b.built}` }
 }
 
-const CONSUMER: Record<string, string> = { SET_OPENING_HEAD: 'resolveHouse/openings(head) → houseProgram/cutOpening(RAKED|POINTED)', SET_ELEVATION_SIDE: 'resolveHouse/registration', SET_ROOF: 'resolveHouse/roofs → houseProgram/roofPlanes', SET_BODY_STOREYS: 'resolveHouse/bodies → houseProgram/walls', SET_ELEVATION_BODY: 'resolveHouse/registration+heights', ADD_OPENING: 'resolveHouse/openings → houseProgram/cutOpening', REMOVE_OPENING: 'resolveHouse/openings', SET_FEATURE: 'resolveHouse/features → houseProgram/wallDormer|balcony|loggia|gableFrame|canopy', REMOVE_FEATURE: 'resolveHouse/features' }
+const CONSUMER: Record<string, string> = { SET_OPENING_DETAIL: 'resolveHouse/openings(contour, hidden row, divisions) → houseProgram/placeWindow|placeDoor', SET_ZONE: 'resolveHouse/zones → houseProgram/createSurfaceRegion', REMOVE_ZONE: 'resolveHouse/zones', SET_OPENING_HEAD: 'resolveHouse/openings(head) → houseProgram/cutOpening(RAKED|POINTED)', SET_ELEVATION_SIDE: 'resolveHouse/registration', SET_ROOF: 'resolveHouse/roofs → houseProgram/roofPlanes', SET_BODY_STOREYS: 'resolveHouse/bodies → houseProgram/walls', SET_ELEVATION_BODY: 'resolveHouse/registration+heights', ADD_OPENING: 'resolveHouse/openings → houseProgram/cutOpening', REMOVE_OPENING: 'resolveHouse/openings', SET_FEATURE: 'resolveHouse/features → houseProgram/wallDormer|balcony|loggia|gableFrame|canopy', REMOVE_FEATURE: 'resolveHouse/features' }
 
 /** v3.54.7 — what a region of one side of a compiled model holds of the features a defect can be about, by one ruler. */
 export type RegionMeasure = { frame: boolean; framePieces: number; balconies: Array<{ id: string; recessed: boolean; posts: number; projectsM: number }>; shaped: string[]; holes: string[] }
@@ -559,6 +597,48 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
       }
     }
     closeUps = []
+    // v3.54.10 — the interior is reviewed on what shows it: in the first round, each storey with an interior beside
+    // its published plan, the model's storey seen from above without the roof (walls cut at 1.2 m) — not one more
+    // elevation. Adaptive: only storeys that hold an interior and have a plan picture are sent.
+    const storeyLines: string[] = []
+    const gi = compiled.document.geometry?.interior
+    if (round === 1 && compiled.bundle && gi && gi.levels.some((l) => l.walls.length + l.rooms.length > 0)) {
+      const plans = [input.selection.ground, ...input.selection.upperPlans.slice(0, 1)]
+      const lvMeta = (compiled.bundle as unknown as { levels?: Array<{ id: string; index: number; elevation: number }> }).levels ?? []
+      for (const lv of gi.levels) {
+        const plan = plans[lv.level]
+        const meta = lvMeta.find((q) => q.index === lv.level)
+        if (!plan || !meta || lv.walls.length + lv.rooms.length === 0) continue
+        const sp = sentPicture(plan, 'context')
+        const r = renderStoreyCut(compiled.bundle, meta.id, meta.elevation)
+        input.writeView?.(`review-${round}-storey-${lv.level}.png`, r.png)
+        extra.push({ label: `STOREY ${lv.level}: the published plan of that storey —`, mediaType: 'image/jpeg', base64: sp.jpegBase64, width: sp.width, height: sp.height })
+        extra.push({ label: `and the MODEL's storey ${lv.level} seen from above without the roof (walls cut at 1.2 m: exterior dark, partitions grey, doors brown; rooms pale blue; front at the bottom):`, mediaType: 'image/png', base64: Buffer.from(r.png).toString('base64'), width: r.width, height: r.height })
+        pairs.push({ round, side: `STOREY-${lv.level}`, elevation: `plan-${plan.id}`, picture: 0, sourceSha256: shaOf(sp.jpegBase64), renderSha256: r.sha256, modelHash: String(compiled.modelHash), registered: false, why: 'storey plan and the model storey from above (no common frame: compare the partitions, doors, rooms and the stair opening)' })
+        storeyLines.push(`storey ${lv.level}: ${lv.walls.length} partition(s), ${lv.doors.length} door(s), ${lv.rooms.length} room(s), ${lv.voids.length} floor opening(s) (${lv.origin ?? 'LOCAL'})`)
+      }
+    }
+    // v3.54.10 — a printed callout that set an opening is reviewed where it is printed: in the first round, its storey
+    // plan cut round the callout (at most four), named with the opening it was bound to and what it set
+    const labelLines: string[] = []
+    if (round === 1) {
+      const labelsRead = (((doc as Obs).observations as { labels?: unknown[] }).labels ?? []) as Array<{ id: string; picture: string; level: number; literal: string; at: { x: number; y: number } }>
+      const plans = [input.selection.ground, ...input.selection.upperPlans]
+      for (const q of (compiled.document.geometry?.openings ?? []).filter((x) => x.label).slice(0, 4)) {
+        const lb = labelsRead.find((x) => x.id === q.label?.id)
+        const plan = lb ? plans.find((p) => p?.id === lb.picture) : undefined
+        if (!lb || !plan) continue
+        const sp = sentPicture(plan, 'detail')
+        const half = 90
+        const bx = { x0: Math.max(0, lb.at.x * sp.scale - half), y0: Math.max(0, lb.at.y * sp.scale - half), x1: Math.min(sp.width, lb.at.x * sp.scale + half), y1: Math.min(sp.height, lb.at.y * sp.scale + half) }
+        if (bx.x1 - bx.x0 < 8 || bx.y1 - bx.y0 < 8) continue
+        const crop = cropSent(sp, bx, 2)
+        input.writeView?.(`review-${round}-callout-${lb.id}.jpg`, Buffer.from(crop.jpegBase64, 'base64'))
+        extra.push({ label: `PLAN CALLOUT "${lb.literal}" (storey ${lb.level} plan, cut round where it is printed, ×2) — bound to ${q.id}, it set ${q.label?.sets.join(', ')}:`, mediaType: 'image/jpeg', base64: crop.jpegBase64, width: crop.width, height: crop.height })
+        pairs.push({ round, side: `LABEL-${lb.id}`, elevation: `plan-${plan.id}`, picture: 0, sourceSha256: shaOf(crop.jpegBase64), renderSha256: '', modelHash: String(compiled.modelHash), registered: false, why: `the callout ${lb.literal} and the opening ${q.id} it was bound to` })
+        labelLines.push(`${lb.id} "${lb.literal}" → ${q.id} (${q.label?.sets.join(', ')})`)
+      }
+    }
     const listing = o.elevations.map((e) => {
       const n = elevations.findIndex((s) => s.picture.id === e.picture) + 1
       const k = elevations[n - 1]?.scale ?? 1
@@ -566,9 +646,9 @@ export async function reviewHouse(input: { ctx: ReadingContext; selection: Selec
         const q = b as { x0: number; y0: number; x1: number; y1: number } | undefined
         return q ? `[${Math.round(q.x0 * k)},${Math.round(q.y0 * k)},${Math.round(q.x1 * k)},${Math.round(q.y1 * k)}]` : ''
       }
-      return `picture ${n}: read as ${String(e.side)}${e.mirrored ? ' (mirrored)' : ''}; openings ${e.openings.map((x) => `${String(x.id)}=${String(x.kind)}${bx(x.box)}${typeof x.headLeftY === 'number' ? ' (raked head)' : ''}`).join(', ') || 'none'}; features ${e.features.map((x) => `${String(x.id)}=${String(x.kind)}${bx(x.box)}${x.posts === true ? ' on posts' : ''}`).join(', ') || 'none'}`
+      return `picture ${n}: read as ${String(e.side)}${e.mirrored ? ' (mirrored)' : ''}; openings ${e.openings.map((x) => `${String(x.id)}=${String(x.kind)}${bx(x.box)}${typeof x.headLeftY === 'number' ? ' (raked head)' : ''}${(x as { contour?: string }).contour ? ` traces ${(x as { contour?: string }).contour}` : ''}${Array.isArray((x as { mullionsX?: number[] }).mullionsX) && ((x as { mullionsX?: number[] }).mullionsX ?? []).length ? ` ${((x as { mullionsX?: number[] }).mullionsX ?? []).length + 1} panes` : ''}`).join(', ') || 'none'}; zones ${(((e as { zones?: Array<{ id: string; material: string; tone: string; box: unknown }> }).zones ?? []).map((z) => `${z.id}=${z.tone} ${z.material}${bx(z.box)}`).join(', ')) || 'none'}; features ${e.features.map((x) => `${String(x.id)}=${String(x.kind)}${bx(x.box)}${x.posts === true ? ' on posts' : ''}`).join(', ') || 'none'}`
     })
-    const text = `Revision ${revision}. Pictures 1–${elevations.length}: the published elevations. Then the MODEL the program built from your reading: ${extra.length ? `each side drawn in the frame of its elevation (${pairLines.join('; ')}), then ` : ''}its four sides in one row in the order FRONT, RIGHT, REAR, LEFT, and a view from above with four views around it. The model is a plain massing model: no materials, no terrain, no interior.
+    const text = `Revision ${revision}. Pictures 1–${elevations.length}: the published elevations. Then the MODEL the program built from your reading: ${extra.length ? `each side drawn in the frame of its elevation (${pairLines.join('; ')}), then ` : ''}its four sides in one row in the order FRONT, RIGHT, REAR, LEFT, and a view from above with four views around it. The model is a simplified massing model in one low-poly style: finish zones read on the walls are drawn as flat colours (light render, dark cladding, timber); no terrain.${storeyLines.length ? ` Then, for each storey with an interior: its published plan and the model's storey from above without the roof (${storeyLines.join('; ')}).` : ''}${labelLines.length ? ` Then each printed callout that set an opening's rough size (width × height in cm), cut from its plan: ${labelLines.join('; ')} — check it belongs to that opening.` : ''}
 What the program found:
 - overall ${m?.exteriorWalls ? `${m.exteriorWalls.widthM.toFixed(2)} m wide × ${m.exteriorWalls.depthM.toFixed(2)} m deep` : 'not measured'}; top ${m?.heightAboveTerrainM !== null && m?.heightAboveTerrainM !== undefined ? `${m.heightAboveTerrainM.toFixed(2)} m above the terrain` : 'unknown'}
 - bodies: ${g ? g.bodies.map((b) => `${b.id} ${b.role} levels ${b.storeys.join('+')} roof ${b.roof.kind}${b.roof.ridgeAxis ? ` ridge ${b.roof.ridgeAxis === 'X' ? 'ALONG_FRONT' : 'FRONT_TO_BACK'}` : ''} top +${(b.roof.ridgeY.value ?? 0).toFixed(2)}`).join('; ') : 'none'}

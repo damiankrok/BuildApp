@@ -19,13 +19,15 @@ import type { HouseDocument } from '@buildapp/reconstruction'
 import { buildHouse, headCapFor } from './build.js'
 import type { BuiltHouse, HeadCap } from './build.js'
 import { measureScene } from './measure.js'
+import { stableOpeningOrder } from './contract.js'
+import type { DetailsAnswer, ExtraReading, ReadingRecord, StoreyAnswer } from './read.js'
 import type { SceneMeasure, SceneOpening, SideFeatures } from './measure.js'
 import { HOUSE_READING_CONTRACT, HOUSE_READING_VERSION, levelLiteralToMetres, literalToMetres } from './read.js'
 import type { FacadeCoverage, FacadesAnswer, InventoryAnswer, PlanAnswer, Selection } from './read.js'
 import type { SentPicture } from './pictures.js'
 
 export type Published = ReadonlyArray<{ key: string; value: number; unit: string; raw?: string }>
-export type ReadingAnswers = { inventory?: InventoryAnswer; plan: PlanAnswer; facades?: FacadesAnswer }
+export type ReadingAnswers = { inventory?: InventoryAnswer; plan: PlanAnswer; facades?: FacadesAnswer; /** v3.54.10 */ details?: DetailsAnswer; storeys?: Array<{ level: number; pictureId: string; scale: number; answer: StoreyAnswer }> }
 export type ConversionNote = { code: 'PARSE_REJECTED' | 'WRONG_READ' | 'WRONG_BINDING' | 'SOURCE_UNKNOWN'; ref: string; why: string }
 
 const idOk = (s: string): boolean => /^[A-Za-z0-9][A-Za-z0-9_.:-]{0,79}$/.test(s)
@@ -62,7 +64,7 @@ function railingOf(x: { kind: string; railing?: string | null; railingTopY?: num
   return top
 }
 
-export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }>; /** v3.54.9: an interior from another source of the same pages (LOCAL), placed by the resolver only through a checked transform. */ interiorSource?: unknown }): { document: unknown; notes: ConversionNote[] } {
+export function documentFromReading(input: { id: string; project?: string; sourcePackageHash?: string; model: string; selection: Selection; planSent: SentPicture[]; facadesSent?: SentPicture[]; /** v3.54.10: the pictures the DETAILS step was sent, in its order. */ detailsSent?: SentPicture[]; /** v3.54.10: STABLE (ids by the program's order) for readings of contract 0.5.0; ANSWER_ORDER keeps the rule an older recording was made (and reviewed) with. */ idRule?: 'STABLE' | 'ANSWER_ORDER'; /** v3.54.10: steps that were not read (a recording made before them, a refusal), said in the document. */ notRead?: Array<{ step: string; why: string }>; answers: ReadingAnswers; published: Published; at?: string; /** Which elevation pictures were asked about, how often, and with what result (`readFacades`). */ coverage?: FacadeCoverage[]; /** Pictures of the package that were not sent at all, with the reason. */ skipped?: Array<{ assetId: string; why: string; role?: string; code?: string }>; /** v3.54.9: an interior from another source of the same pages (LOCAL), placed by the resolver only through a checked transform. */ interiorSource?: unknown }): { document: unknown; notes: ConversionNote[] } {
   const notes: ConversionNote[] = []
   const { selection, answers } = input
   const plan = answers.plan
@@ -156,9 +158,42 @@ export function documentFromReading(input: { id: string; project?: string; sourc
         }
         return [{ bodyId: eb, leftX: r1(Math.min(b.leftX, b.rightX) * k), rightX: r1(Math.max(b.leftX, b.rightX) * k), eavesY: typeof b.eavesY === 'number' ? r1(b.eavesY * k) : null, ridgeY: typeof b.ridgeY === 'number' ? r1(b.ridgeY * k) : null }]
       })
-      const openings = (e.openings ?? []).map((x, j) => ({ id: `o${j + 1}`, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.level === 'number' ? { level: x.level } : {}), ...(x.inFeature && featureIds.has(x.inFeature.toLowerCase()) ? { inFeature: x.inFeature.toLowerCase() } : {}), ...(typeof x.headLeftY === 'number' && typeof x.headRightY === 'number' ? { headLeftY: r1(x.headLeftY * k), headRightY: r1(x.headRightY * k) } : {}), ...(typeof x.apexX === 'number' ? { apexX: r1(x.apexX * k) } : {}) }))
+      // v3.54.10: ids by the program's stable order (storey, left, top, right, kind), never by the answer's order; the
+      // DETAILS step spoke of these ids, and is joined on them through the picture's stable id
+      const det = answers.details?.elevations.find((d) => input.detailsSent?.[d.picture - 1]?.picture.id === sent.picture.id)
+      const kd = det ? 1 / (input.detailsSent?.[det.picture - 1]?.scale ?? sent.scale) : k
+      const order = input.idRule === 'ANSWER_ORDER' ? (e.openings ?? []).map((_, jj) => jj) : stableOpeningOrder(e.openings ?? [])
+      const openings = order.map((jj, j) => ({ x: (e.openings ?? [])[jj], j, d: det?.openings.find((q) => q.id === `o${j + 1}`) })).map(({ x, j, d }) => ({ id: `o${j + 1}`, kind: x.kind, box: B(x.box), ...(bodyOf(x.bodyId) ? { bodyId: bodyOf(x.bodyId) } : {}), ...(typeof x.level === 'number' ? { level: x.level } : {}), ...(x.inFeature && featureIds.has(x.inFeature.toLowerCase()) ? { inFeature: x.inFeature.toLowerCase() } : {}), ...(typeof x.headLeftY === 'number' && typeof x.headRightY === 'number' ? { headLeftY: r1(x.headLeftY * k), headRightY: r1(x.headRightY * k) } : {}), ...(typeof x.apexX === 'number' ? { apexX: r1(x.apexX * k) } : {}), ...(d ? { ...(d.contour ? { contour: d.contour } : {}), ...(typeof d.hiddenBelowY === 'number' ? { hiddenBelowY: r1(d.hiddenBelowY * kd) } : {}), ...(typeof d.hiddenBy === 'string' && featureIds.has(d.hiddenBy.toLowerCase()) ? { hiddenBy: d.hiddenBy.toLowerCase() } : {}), mullionsX: (d.mullionsX ?? []).map((m) => r1(m * kd)), transomsY: (d.transomsY ?? []).map((m) => r1(m * kd)), ...(typeof d.doorLeaves === 'number' ? { doorLeaves: d.doorLeaves } : {}) } : {}) }))
+      const zones = (det?.zones ?? []).map((z, j) => ({ id: `z${j + 1}`, material: z.material, tone: z.tone, box: { x0: r1(Math.min(z.box.x0, z.box.x1) * kd), y0: r1(Math.min(z.box.y0, z.box.y1) * kd), x1: r1(Math.max(z.box.x0, z.box.x1) * kd), y1: r1(Math.max(z.box.y0, z.box.y1) * kd) }, ...(bodyOf(z.bodyId) ? { bodyId: bodyOf(z.bodyId) } : {}), certainty: z.certainty, ...(z.note ? { note: z.note } : {}) }))
+      // chimney stacks the DETAILS step saw, unless the facade reading already has one there
+      for (const [j, c] of (det?.chimneys ?? []).entries()) {
+        const x0 = Math.min(c.leftX, c.rightX) * kd
+        const x1 = Math.max(c.leftX, c.rightX) * kd
+        if (features.some((f) => f.kind === 'CHIMNEY' && Math.min(f.box.x1, x1) - Math.max(f.box.x0, x0) > 0.5 * (x1 - x0))) continue
+        const main = (plan.bodies ?? []).find((b) => b.role === 'MAIN')?.id
+        features.push({ id: `stack-${j + 1}`, kind: 'CHIMNEY', box: { x0: r1(x0), y0: r1(c.topY * kd), x1: r1(x1), y1: r1(c.topY * kd) }, ...(bodyOf(main) ? { bodyId: bodyOf(main) } : {}), note: 'a chimney stack read in the DETAILS step' } as (typeof features)[number])
+      }
       const cov = input.coverage?.find((c) => c.pictureId === sent.picture.id)
-      elevations.push({ id: `el-${sent.picture.id}`, picture: sent.picture.id, side: e.side, sideHow: e.sideHow ?? '', alternatives: (e.alternatives ?? []).filter((s) => s !== e.side), mirrored: e.mirrored === true, groundY: r1(e.groundY * k), bodies, openings, features, origin: 'API', ...(typeof e.floorY === 'number' ? { floorY: r1(e.floorY * k) } : {}), ...(typeof e.blind === 'boolean' ? { blind: e.blind } : {}), ...(e.limits === 'NONE' || e.limits === 'PARTLY_HIDDEN' || e.limits === 'TOO_SMALL' ? { limits: e.limits } : {}), ...(cov?.readIn ? { readIn: cov.readIn } : {}) })
+      elevations.push({ id: `el-${sent.picture.id}`, picture: sent.picture.id, side: e.side, sideHow: e.sideHow ?? '', alternatives: (e.alternatives ?? []).filter((s) => s !== e.side), mirrored: e.mirrored === true, groundY: r1(e.groundY * k), bodies, openings, features, ...(zones.length ? { zones } : {}), origin: 'API', ...(typeof e.floorY === 'number' ? { floorY: r1(e.floorY * k) } : {}), ...(typeof e.blind === 'boolean' ? { blind: e.blind } : {}), ...(e.limits === 'NONE' || e.limits === 'PARTLY_HIDDEN' || e.limits === 'TOO_SMALL' ? { limits: e.limits } : {}), ...(cov?.readIn ? { readIn: cov.readIn } : {}) })
+    })
+  }
+  // v3.54.10 — each floor plan's interior as read, and the printed callouts of exterior openings on it (pixels of the
+  // published plan picture; the program reads each literal: two whole numbers in cm "w/h", or nothing)
+  const storeys: unknown[] = []
+  const labels: unknown[] = []
+  for (const st of answers.storeys ?? []) {
+    const ks = 1 / st.scale
+    const S = (p: { x: number; y: number }) => ({ x: r1(p.x * ks), y: r1(p.y * ks) })
+    const a = st.answer
+    if (!Array.isArray(a.outline) || a.outline.length < 3) {
+      notes.push({ code: 'PARSE_REJECTED', ref: `storey ${st.level}`, why: 'no outline of the storey: its interior cannot be registered' })
+      continue
+    }
+    storeys.push({ id: `storey-${st.level}`, picture: st.pictureId, level: st.level, frontEdge: a.frontEdge, outline: a.outline.map(S), partitions: (a.partitions ?? []).map((w, i) => ({ id: `p${st.level}-w${i + 1}`, a: S(w.a), b: S(w.b), ...(typeof w.thicknessPx === 'number' && w.thicknessPx > 0 ? { thicknessPx: r1(w.thicknessPx * ks) } : {}) })), doors: (a.doors ?? []).map((d, i) => ({ id: `p${st.level}-d${i + 1}`, at: S(d.at), ...(typeof d.widthPx === 'number' && d.widthPx > 0 ? { widthPx: r1(d.widthPx * ks) } : {}) })), rooms: (a.rooms ?? []).filter((r) => Array.isArray(r.polygon) && r.polygon.length >= 3).map((r, i) => ({ id: `p${st.level}-r${i + 1}`, polygon: r.polygon.map(S), name: r.name ?? '', ...(r.number ? { number: r.number } : {}), ...(r.areaLiteral ? { areaLiteral: r.areaLiteral } : {}), open: r.open === true })), stairs: (a.stairs ?? []).filter((q) => q.length >= 3).map((q) => q.map(S)), voids: (a.voids ?? []).filter((q) => q.length >= 3).map((q) => q.map(S)), origin: 'API' })
+    ;(a.labels ?? []).forEach((l, i) => {
+      const m = /^\s*(\d{2,3})\s*[/x×]\s*(\d{2,3})\s*$/.exec(l.literal ?? '')
+      labels.push({ id: `label-${st.level}-${i + 1}`, picture: st.pictureId, level: st.level, literal: l.literal ?? '', at: S(l.at), wall: l.wall, kind: l.kind, widthM: m ? Number(m[1]) / 100 : null, heightM: m ? Number(m[2]) / 100 : null, origin: 'API' })
+      if (!m) notes.push({ code: 'SOURCE_UNKNOWN', ref: `label ${l.literal}`, why: 'not two whole numbers in cm (w/h): kept as printed, not read as sizes' })
     })
   }
   const published = input.published.filter((p) => ['building_height', 'footprint_area', 'roof_pitch', 'building_width', 'building_depth'].includes(p.key)).map((p) => ({ key: p.key, value: p.value, unit: p.unit, ...(p.raw ? { raw: p.raw } : {}) }))
@@ -180,6 +215,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
     ...(selection.sections.length === 0 ? [{ what: 'a section', status: 'NOT_PUBLISHED' as const }] : []),
     ...(selection.elevations.length === 0 ? [{ what: 'elevations', status: 'NOT_PUBLISHED' as const }] : []),
     ...(!f ? [{ what: 'the section and the elevations were not read', status: 'NOT_SENT' as const }] : []),
+    ...(input.notRead ?? []).map((x) => ({ what: `${x.step} not read: ${x.why}`.slice(0, 300), status: 'NOT_SENT' as const })),
   ]
   const document = {
     schema: HOUSE_DOCUMENT_SCHEMA,
@@ -188,7 +224,7 @@ export function documentFromReading(input: { id: string; project?: string; sourc
     origin: 'API_SOURCE_DESCRIPTION',
     source: { ...(input.sourcePackageHash ? { sourcePackageHash: input.sourcePackageHash } : {}), ...(input.project ? { project: input.project } : {}), pictures, missing, views },
     reader: { engine: `${HOUSE_READING_CONTRACT}@${HOUSE_READING_VERSION}`, model: input.model, ...(input.at ? { at: input.at } : {}) },
-    observations: { front: { planEdge: plan.front?.planEdge, how: plan.front?.how ?? '', origin: 'API' }, dimensions, levels, outlines, elevations, roofs, published, unknowns: [...(plan.unknowns ?? []), ...(f?.unknowns ?? [])].slice(0, 16) },
+    observations: { front: { planEdge: plan.front?.planEdge, how: plan.front?.how ?? '', origin: 'API' }, dimensions, levels, outlines, elevations, roofs, published, unknowns: [...(plan.unknowns ?? []), ...(f?.unknowns ?? []), ...(answers.details?.unknowns ?? []), ...(answers.storeys ?? []).flatMap((x) => x.answer.unknowns ?? [])].slice(0, 16), ...(labels.length ? { labels } : {}), ...(storeys.length ? { storeys } : {}) },
     ...(input.interiorSource ? { interiorSource: input.interiorSource } : {}),
   }
   return { document, notes }
@@ -836,4 +872,19 @@ export function arbitrate(described: CompiledHouse, local: LocalMeasure | undefi
   const takeDescribed = describedBad.length < localBad.length
   const bad = takeDescribed ? describedBad.map((f) => say(f, 'described')) : localBad.map((f) => say(f, 'local'))
   return out(takeDescribed ? 'DESCRIBED' : 'LOCAL', 'BOTH_CONTRADICT', `both models contradict the source (LOCAL: ${localBad.map((f) => say(f, 'local')).join('; ')} | described: ${describedBad.map((f) => say(f, 'described')).join('; ')}); the one with fewer contradictions is shown as a partial preview, not as a correct house`, true, bad, unknown)
+}
+
+/**
+ * v3.54.10 — what the new reading steps add to `documentFromReading`'s input: their answers (joined by stable picture
+ * ids), the id rule of the facade reading (STABLE for a reading of this contract; an older recording keeps ANSWER_ORDER,
+ * the rule its review answers name ids by), and the steps not read, said.
+ */
+export function extrasInput(extras: ExtraReading, records: readonly ReadingRecord[]): { detailsSent?: SentPicture[]; idRule: 'STABLE' | 'ANSWER_ORDER'; notRead: Array<{ step: string; why: string }>; answers: Pick<ReadingAnswers, 'details' | 'storeys'> } {
+  const facades = records.find((r) => r.step === 'FACADES' && !r.round)
+  return {
+    ...(extras.details ? { detailsSent: extras.details.sent } : {}),
+    idRule: facades?.contract === HOUSE_READING_VERSION ? 'STABLE' : 'ANSWER_ORDER',
+    notRead: extras.absent,
+    answers: { ...(extras.details ? { details: extras.details.answer } : {}), storeys: extras.storeys.map((x) => ({ level: x.level, pictureId: x.picture.id, scale: x.sent[0].scale, answer: x.answer })) },
+  }
 }

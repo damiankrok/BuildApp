@@ -14,13 +14,13 @@
  */
 import type { Basis, HouseCheck, HouseDocument, HouseGeometry, HouseObservations, HouseSide, HouseVerification, HouseViewRecord, Num } from './document.js'
 import { num, unknown } from './document.js'
-import { area, bbox, canonical, contains, edgeOf, isSimple, onBoundary, pt, squareUp, unionTiling } from './poly.js'
+import { area, bbox, canonical, contains, edgeOf, isSimple, onBoundary, pt, squareUp, toSegment, unionTiling } from './poly.js'
 import type { P2 } from './poly.js'
-import { resolveInterior } from './interior.js'
+import { interiorFromStoreys, placeThrough, resolveInterior, storeyFrame } from './interior.js'
 import { outlineSteps, straightenJogs } from './steps.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.6.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.7.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
@@ -28,6 +28,9 @@ export const RESOLVE = {
   isotropy: 0.03,
   /** v3.54.7: the shortest side a shaped hole keeps: a triangle's sharp corner is cut there (said). */
   openingMinSideM: 0.3,
+  /** v3.54.10: a box the reader traced round the glass only lies inside the rough opening by one frame profile on each
+   * side; the profile is not drawn there, so this default (the window frame's own width) is added and said ESTIMATED. */
+  glassToRoughM: 0.07,
   /** A dimension line's end counts as standing on the outline's end within this share of the extent (and never under 6 px). */
   dimensionOnOutline: 0.015,
   /** The bodies traced one by one must cover the whole traced outline within this share of its area. */
@@ -776,6 +779,10 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const frames: HouseGeometry['frames'] = []
   const portals: HouseGeometry['portals'] = []
   const chimneys: HouseGeometry['chimneys'] = []
+  const zones: HouseGeometry['zones'] = []
+  /** v3.54.10: chimneys seen from a gable end: where they stand across the ridge is read; along it, only a side view tells. */
+  const gableChimneys: Array<{ ref: string; side: HouseSide; bodyId: string; across: number; w: number; topY: number }> = []
+  const pointOfAlong = (side: HouseSide, a: number): number => (side === 'FRONT' ? gb.x0 + a : side === 'REAR' ? gb.x1 - a : side === 'LEFT' ? gb.z1 - a : gb.z0 + a)
   /** The slope of a pitched body that falls toward `side`: plan distance from its ridge for a height, and the plan point for an along-position. */
   const slopeToward = (body: HouseGeometry['bodies'][number], side: HouseSide): { half: number; fromRidge: (y: number) => number; at: (along: number, d: number) => P2; ridgeLine: number } | undefined => {
     const axis = body.roof.ridgeAxis
@@ -991,7 +998,10 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         const body = bodies.find((b) => b.id === (f.bodyId ?? mainId))
         const slope = body ? slopeToward(body, side) : undefined
         if (!body || !slope) {
-          held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a chimney seen from a gable end, or on a roof without a ridge: where it stands along the building is not on this picture' })
+          // v3.54.10: from a gable end the picture gives where it stands ACROSS the ridge and how high; kept for a side
+          // view to give where along the ridge (fused below), or held when none does
+          if (body && body.roof.ridgeAxis && (body.roof.kind === 'GABLE' || body.roof.kind === 'HIP')) gableChimneys.push({ ref, side, bodyId: body.id, across: pointOfAlong(side, (a[0] + a[1]) / 2), w: Math.min(1.2, Math.max(0.4, a[1] - a[0])), topY: r.yOf(Math.min(f.box.y0, f.box.y1)) })
+          else held.push({ ref, code: 'SOURCE_UNKNOWN', why: 'a chimney on a roof without a ridge: where it stands along the building is not on this picture' })
           continue
         }
         const w = Math.min(1.2, Math.max(0.4, a[1] - a[0]))
@@ -1082,13 +1092,21 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       // v3.54.9 — an opening whose bottom edge is a railing's top on the same elevation (over most of its width) shows no
       // sill: the railing hides it. A glazing standing on that balcony's floor is taken down to the floor — an assumption,
       // said — instead of a sill at the railing's top (which put a raked head's low end at a false "triangle" corner).
-      const hiddenBy = x.kind !== 'DOOR' && x.kind !== 'GARAGE_DOOR'
+      // v3.54.10 — what the reader SAID hides it (DETAILS: a row and the feature) comes first; the v3.54.9 inference
+      // (its bottom edge on a railing's top row) stays for readings that do not say
+      const hidRow = typeof x.hiddenBelowY === 'number' ? x.hiddenBelowY : undefined
+      const hidTol = Math.max(3, 0.05 / Math.abs(r.s))
+      const saidHidden = hidRow !== undefined && x.kind !== 'DOOR' && x.kind !== 'GARAGE_DOOR' && Math.max(x.box.y0, x.box.y1) >= hidRow - hidTol ? { id: x.hiddenBy ?? 'what is in front of it', railingTopY: hidRow } : undefined
+      const hiddenBy = saidHidden ?? (x.kind !== 'DOOR' && x.kind !== 'GARAGE_DOOR'
         ? obs.features.find((f) => (f.kind === 'BALCONY' || f.kind === 'LOGGIA') && typeof f.railingTopY === 'number' && Math.min(f.box.x1, x.box.x1) - Math.max(f.box.x0, x.box.x0) >= 0.8 * (x.box.x1 - x.box.x0) && Math.abs(Math.max(x.box.y0, x.box.y1) - (f.railingTopY as number)) <= Math.max(4, 0.06 / Math.abs(r.s)))
-        : undefined
+        : undefined)
       const railFloor = hiddenBy ? levels.filter((l) => (l.elevation.value ?? 0) <= r.yOf(hiddenBy.railingTopY as number) - 0.3).sort((p, q) => q.index - p.index)[0] : undefined
       const sillY = hiddenBy && railFloor && railFloor.elevation.value !== null ? railFloor.elevation.value : r.yOf(x.box.y1)
       if (hiddenBy && railFloor) knownDefects.push({ code: 'OPENING_SILL_HIDDEN_BY_RAILING', what: `${ref}: its bottom edge (row ${Math.max(x.box.y0, x.box.y1).toFixed(0)}) is the top of the railing ${hiddenBy.id} (row ${(hiddenBy.railingTopY as number).toFixed(0)}): its sill is not seen; taken at the floor +${(railFloor.elevation.value ?? 0).toFixed(2)} m behind the railing — an assumption` })
-      const headY = r.yOf(x.box.y0)
+      // v3.54.10: with what its box traces said (DETAILS), a head row above the box is the head's high point — the box
+      // was drawn round the part below it (EXPOSED or the glass); an older reading keeps its box top
+      const headTopRow = x.contour && typeof x.headLeftY === 'number' && typeof x.headRightY === 'number' ? Math.min(x.box.y0, x.headLeftY, x.headRightY) : x.box.y0
+      const headY = r.yOf(headTopRow)
       const level = x.level !== undefined ? levels.find((l) => l.index === x.level) : levels.filter((l) => (l.elevation.value ?? 0) <= sillY + 0.35).sort((p, q) => q.index - p.index)[0]
       // the wall that holds it: the top storey's wall holds what stands in a dormer above the eaves
       const wallLevel = level && outlines.some((q) => q.level === level.index) ? level.index : Math.max(...outlines.map((q) => q.level))
@@ -1136,6 +1154,80 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         }
       }
       openings.push({ id: `opening-${side.toLowerCase()}-${openings.filter((q) => q.id.startsWith(`opening-${side.toLowerCase()}`)).length + 1}`, kind: x.kind as 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR', level: level.index, hostWall: at.h.id, offsetM: num(r3(from), 'DERIVED', `its two sides on elevation ${obs.id}, at the plan's scale`, [ref], u), widthM: num(r3(width), 'DERIVED', `its two sides on elevation ${obs.id}`, [ref], u), heightM: num(r3(heightNear), 'DERIVED', head ? `its head at its near side and its sill row on elevation ${obs.id}` : `its head and sill rows on elevation ${obs.id}`, [ref], u), sillM: hiddenBy && railFloor ? num(r3(sill), 'ESTIMATED', `its bottom edge is the top of ${obs.id}/${hiddenBy.id}'s railing: the sill is hidden; it is taken at the balcony's floor — an assumption`, [ref], u) : num(door && sill < 0.25 ? 0 : r3(sill), 'DERIVED', door && sill < 0.25 ? 'a door: its threshold at the floor' : `its sill row on elevation ${obs.id} above the floor of its storey`, [ref], u), ...(panes > 1 ? { panes } : {}), ...(head ? { head } : {}), refs: [ref, ...also] })
+      const made = openings[openings.length - 1]
+      // v3.54.10 — a head end at or below the row that hides the opening (or on a box that traces only what is EXPOSED)
+      // is the edge of what hides it, not the glass: kept as read, said ESTIMATED, never presented as seen
+      if (made.head?.kind === 'RAKED' && typeof x.headLeftY === 'number' && typeof x.headRightY === 'number' && (hidRow !== undefined || x.contour === 'EXPOSED')) {
+        const lowRow = Math.max(x.headLeftY, x.headRightY)
+        const edge = hidRow ?? Math.max(x.box.y0, x.box.y1)
+        if (lowRow >= edge - hidTol) {
+          const farIsLow = made.head.heightFarM.value !== null && made.heightM.value !== null && made.head.heightFarM.value < made.heightM.value
+          const why = `its low end (row ${lowRow.toFixed(0)}) is at the edge of what hides it (row ${edge.toFixed(0)}${x.hiddenBy ? `, ${x.hiddenBy}` : ''}): where the glass ends is not seen`
+          if (farIsLow) made.head.heightFarM = { ...made.head.heightFarM, basis: 'ESTIMATED', how: why }
+          else made.heightM = { ...made.heightM, basis: 'ESTIMATED', how: why }
+          knownDefects.push({ code: 'OPENING_HEAD_END_HIDDEN', what: `${ref}: ${why}` })
+        }
+      }
+      if (x.contour) made.frame = { offsetM: made.offsetM.value ?? 0, widthM: made.widthM.value ?? 0, contour: x.contour }
+      // v3.54.10 — the glass is not the hole: a box traced round the glass only is widened by one frame profile on each
+      // side (and above; below too for a window) — the profile a default, the result ESTIMATED, the trace kept as frame
+      if (x.contour === 'GLASS' && made.offsetM.value !== null && made.widthM.value !== null && made.heightM.value !== null) {
+        const f = RESOLVE.glassToRoughM
+        const why = `the reader traced the glass only; the rough opening is taken one frame profile (${f} m, a default) wider on each side`
+        made.offsetM = num(r3(made.offsetM.value - f), 'ESTIMATED', why, made.offsetM.refs, made.offsetM.uncertainty)
+        made.widthM = num(r3(made.widthM.value + 2 * f), 'ESTIMATED', why, made.widthM.refs, made.widthM.uncertainty)
+        const lower = x.kind === 'WINDOW' && made.sillM.value !== null && made.sillM.value >= f
+        if (lower) made.sillM = num(r3((made.sillM.value as number) - f), 'ESTIMATED', why, made.sillM.refs, made.sillM.uncertainty)
+        made.heightM = num(r3(made.heightM.value + f + (lower ? f : 0)), 'ESTIMATED', why, made.heightM.refs, made.heightM.uncertainty)
+        if (made.head?.kind === 'RAKED' && made.head.heightFarM.value !== null) made.head = { ...made.head, heightFarM: num(r3(made.head.heightFarM.value + f + (lower ? f : 0)), 'ESTIMATED', why, made.head.heightFarM.refs, made.head.heightFarM.uncertainty) }
+        knownDefects.push({ code: 'OPENING_GLASS_CONTOUR', what: `${ref}: ${why}` })
+      }
+      // v3.54.10 — the glazing's divisions as read (profiles between panes, as fractions of the box from its start on the wall)
+      if (Array.isArray(x.mullionsX)) {
+        const x0 = Math.min(x.box.x0, x.box.x1)
+        const wpx = Math.abs(x.box.x1 - x.box.x0) || 1
+        const fr = x.mullionsX.map((m) => (m - x0) / wpx).filter((f) => f > 0.03 && f < 0.97).sort((p, q) => p - q)
+        const onWall = at.sign > 0 ? fr : fr.map((f) => 1 - f).reverse()
+        made.divisions = { mullions: onWall.map(r3), transoms: (x.transomsY ?? []).length, ...(typeof x.doorLeaves === 'number' ? { doorLeaves: x.doorLeaves } : {}), basis: 'READ', how: `${fr.length} profile(s) between panes read on elevation ${obs.id}` }
+      }
+    }
+    // v3.54.10 — the finish zones of this elevation's walls: each one on every wall of every storey it spans that faces
+    // this side, along that wall's outer face (from its start) and between heights above ±0.00. A surface, never a body.
+    for (const zn of obs.zones ?? []) {
+      const zref = `${obs.id}/${zn.id}`
+      if (zn.certainty === 'UNSURE') {
+        held.push({ ref: zref, code: 'SOURCE_UNKNOWN', why: 'a finish zone the reader was not sure of: not drawn' })
+        continue
+      }
+      const za = [r.alongOf(zn.box.x0), r.alongOf(zn.box.x1)].sort((p, q) => p - q)
+      const yTop = r.yOf(Math.min(zn.box.y0, zn.box.y1))
+      const yBot = Math.max(terrainY.value ?? 0, r.yOf(Math.max(zn.box.y0, zn.box.y1)))
+      if (za[1] - za[0] < 0.2 || yTop - yBot < 0.2) {
+        held.push({ ref: zref, code: 'PARSE_REJECTED', why: `${(za[1] - za[0]).toFixed(2)} × ${(yTop - yBot).toFixed(2)} m is not a zone` })
+        continue
+      }
+      const n = SIDE_NORMAL[side]
+      let placed = 0
+      for (const lv of levels) {
+        const lo = lv.index === 0 ? Math.min(0, yBot) : (lv.elevation.value ?? 0)
+        const next = levels.find((q) => q.index === lv.index + 1)
+        const hi = next ? (next.elevation.value ?? lo + 3) : yTop
+        if (Math.min(yTop, hi) - Math.max(yBot, lo) < 0.1) continue
+        // the walls of this storey facing the side, the one nearest the viewer at each place
+        const facing = hostsOf(lv.index).map((h) => ({ h, cos: h.out.x * n.x + h.out.z * n.z, a0: alongOfPoint(side, h.a), a1: alongOfPoint(side, h.b), depth: Math.min(depthOf(side, h.a), depthOf(side, h.b)) })).filter((c) => c.cos > 0.5)
+        for (const c of facing) {
+          const lo2 = Math.max(Math.min(c.a0, c.a1), za[0])
+          const hi2 = Math.min(Math.max(c.a0, c.a1), za[1])
+          if (hi2 - lo2 < 0.15) continue
+          if (facing.some((q) => q !== c && q.depth < c.depth - 0.05 && Math.min(Math.max(q.a0, q.a1), hi2) - Math.max(Math.min(q.a0, q.a1), lo2) > 0.8 * (hi2 - lo2))) continue
+          const sign = c.a1 >= c.a0 ? 1 : -1
+          const from = (sign > 0 ? lo2 - c.a0 : c.a0 - hi2) / c.cos
+          const to = (sign > 0 ? hi2 - c.a0 : c.a0 - lo2) / c.cos
+          zones.push({ id: `zone-${side.toLowerCase()}-${zones.length + 1}`, side, hostWall: c.h.id, level: lv.index, a0: r3(from), a1: r3(to), b0: r3(Math.max(yBot, lo)), b1: r3(Math.min(yTop, hi)), material: zn.material, tone: zn.tone, basis: 'DERIVED', refs: [zref] })
+          placed += 1
+        }
+      }
+      if (placed === 0) held.push({ ref: zref, code: 'WRONG_BINDING', why: 'no wall facing this side stands under the zone' })
     }
   }
 
@@ -1209,6 +1301,107 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     return { ...base, state: 'NO_SOURCE' as const, why: `${o.elevations.length === 0 && doc.source.views.every((v) => v.role !== 'ELEVATION') ? 'the page publishes no elevation' : 'no published elevation shows this side'} (${scope})` }
   })
 
+  // v3.54.10 — printed callouts of exterior openings on the floor plans ("234/303": width/height in cm of the opening in
+  // the wall). Each is placed on its plan (the ground plan by the plan's own metric; another storey's plan through the
+  // checked transform of its outline), bound to the opening of that wall and storey it stands at, and sets that
+  // opening's width and its (highest) height as PRINTED; the elevation's frame stays beside it as its own constraint.
+  // A callout that fits no opening, or contradicts it beyond what two definitions explain, is said, not forced.
+  const bound = new Set<string>()
+  for (const lb of o.labels ?? []) {
+    if (lb.widthM === null || lb.heightM === null) continue
+    const st = (o.storeys ?? []).find((q) => q.level === lb.level && q.picture === lb.picture)
+    let P: P2 | undefined
+    // the storey reading's own registration when there is one (the same transform its partitions take); else, on the
+    // ground plan the PLAN step registered, that plan's metric
+    if (!st && lb.level === 0 && lb.picture === o.outlines.find((q) => q.what === 'WHOLE')?.picture) P = toModel(lb.at)
+    else if (st) {
+      const fr = storeyFrame(st, { outlines, levels, wallThicknessM: num(D.wallThicknessM, 'DEFAULT') })
+      const ir = fr ? resolveInterior(fr.src, { outlines, levels, wallThicknessM: num(D.wallThicknessM, 'DEFAULT') }, { registerLevel: lb.level, oriented: true }) : undefined
+      if (fr && ir?.interior.transform) P = placeThrough(fr.src, ir.interior.transform, fr.map(lb.at))
+    }
+    if (!P) {
+      knownDefects.push({ code: 'LABEL_NOT_PLACED', what: `${lb.id} "${lb.literal}": its plan is not registered to the house, so where it stands is not known` })
+      continue
+    }
+    const near = hostsOf(lb.level)
+      .map((h) => ({ h, ...toSegment(P as P2, h.a, h.b) }))
+      .filter((c) => c.d <= 1.2 && (lb.wall === 'UNSURE' || SIDE_NORMAL[lb.wall].x * c.h.out.x + SIDE_NORMAL[lb.wall].z * c.h.out.z > 0.5))
+      .sort((p, q) => p.d - q.d)[0]
+    if (!near) {
+      knownDefects.push({ code: 'LABEL_NOT_BOUND', what: `${lb.id} "${lb.literal}": no exterior wall of storey ${lb.level}${lb.wall !== 'UNSURE' ? ` facing ${lb.wall}` : ''} within 1.2 m of where it is printed` })
+      continue
+    }
+    const t = near.t * near.h.len
+    const fam = (k: string): string => (k === 'GARAGE_DOOR' ? 'G' : 'W')
+    const cand = openings
+      .filter((q) => q.hostWall === near.h.id && q.level === lb.level && !bound.has(q.id) && (lb.kind === 'UNSURE' || fam(lb.kind) === fam(q.kind)) && q.offsetM.value !== null && q.widthM.value !== null)
+      .map((q) => ({ q, c: (q.offsetM.value as number) + (q.widthM.value as number) / 2, w: q.widthM.value as number }))
+      .filter((x) => Math.abs(x.c - t) <= x.w / 2 + 0.4)
+      .sort((p, q) => Math.abs(p.c - t) - Math.abs(q.c - t))[0]
+    if (!cand) {
+      knownDefects.push({ code: 'LABEL_NOT_BOUND', what: `${lb.id} "${lb.literal}": printed at ${t.toFixed(2)} m along ${near.h.id}; no opening read on that wall stands there` })
+      continue
+    }
+    const q = cand.q
+    const highIsFar = q.head?.kind === 'RAKED' && q.head.heightFarM.value !== null && q.heightM.value !== null && q.head.heightFarM.value > q.heightM.value
+    const high = highIsFar && q.head?.kind === 'RAKED' ? (q.head.heightFarM.value as number) : (q.heightM.value ?? 0)
+    if (Math.abs(cand.w - lb.widthM) > 0.5 || (q.head?.kind !== 'POINTED' && Math.abs(high - lb.heightM) > 0.6)) {
+      knownDefects.push({ code: 'LABEL_CONFLICT', what: `${lb.id} "${lb.literal}" at ${q.id}: the elevation gives ${cand.w.toFixed(2)} × ${high.toFixed(2)} m, the callout ${lb.widthM.toFixed(2)} × ${lb.heightM.toFixed(2)} m — more than two definitions of one opening explain; not bound` })
+      continue
+    }
+    bound.add(q.id)
+    const how = `printed callout "${lb.literal}" on the storey ${lb.level} plan, bound by where it stands on ${near.h.id} (${t.toFixed(2)} m)`
+    if (!q.frame) q.frame = { offsetM: q.offsetM.value as number, widthM: cand.w, contour: 'UNSTATED' }
+    const sets = ['widthM']
+    // where it stands: a raked glazing keeps the jamb at its high end — the full-height edge the elevation shows whole;
+    // its low end is where a railing, a shadow or the slope meets it, the end a narrower callout says was read too far.
+    // A level head keeps its centre.
+    const raked = q.head?.kind === 'RAKED' && q.head.heightFarM.value !== null && q.heightM.value !== null
+    const start = q.offsetM.value as number
+    const placed = raked ? (highIsFar ? start + cand.w - lb.widthM : start) : cand.c - lb.widthM / 2
+    q.offsetM = num(r3(placed), 'DERIVED', `${raked ? `its high-end jamb where the elevation shows it (the ${highIsFar ? 'far' : 'near'} side)` : 'centred where the elevation shows it'}; width from ${how}`, [...(q.offsetM.refs ?? []), lb.id], q.offsetM.uncertainty)
+    q.widthM = num(lb.widthM, 'PRINTED', how, [...(q.widthM.refs ?? []), lb.id])
+    // a head the elevation draws sloping that could not be built (its rows outside its own box) has no known shape:
+    // the callout's height is not put on a level head (it would draw a tall rectangle) — said
+    const seen = q.refs.map((ref) => o.elevations.flatMap((e) => e.openings.map((x) => ({ x, ref: `${e.id}/${x.id}` }))).find((y) => y.ref === ref)?.x).find(Boolean)
+    const slopeUnbuilt = !q.head && typeof seen?.headLeftY === 'number' && typeof seen?.headRightY === 'number' && Math.abs(seen.headLeftY - seen.headRightY) > 3
+    if (slopeUnbuilt) knownDefects.push({ code: 'LABEL_HEIGHT_NOT_APPLIED', what: `${lb.id} "${lb.literal}" at ${q.id}: its height (${lb.heightM.toFixed(2)} m, the highest point) is not applied — the elevation draws a sloping head that could not be built, and a level head at that height is not the opening` })
+    else if (q.head?.kind === 'RAKED' && highIsFar) {
+      q.head = { ...q.head, heightFarM: num(lb.heightM, 'PRINTED', `its highest point: ${how}`, [...(q.head.heightFarM.refs ?? []), lb.id]) }
+      sets.push('head.heightFarM')
+    } else if (q.head?.kind !== 'POINTED') {
+      q.heightM = num(lb.heightM, 'PRINTED', `${q.head ? 'its highest point: ' : ''}${how}`, [...(q.heightM.refs ?? []), lb.id])
+      sets.push('heightM')
+    }
+    q.label = { id: lb.id, literal: lb.literal, sets, how }
+    q.refs = [...q.refs, lb.id]
+  }
+  for (const lb of o.labels ?? []) if (lb.widthM !== null && ![...openings].some((q) => q.label?.id === lb.id) && !knownDefects.some((k) => k.what.startsWith(`${lb.id} `))) knownDefects.push({ code: 'LABEL_NOT_BOUND', what: `${lb.id} "${lb.literal}": not bound` })
+
+  // v3.54.10 — a chimney seen from a gable end and one seen from a side are one chimney when the side view has one to
+  // give: across the ridge from the gable view, along it from the side view (DERIVED from both). Front-end views take the
+  // side-view chimneys nearest the front, rear-end views those nearest the rear; nothing is paired twice.
+  if (gableChimneys.length > 0) {
+    const sideMade = chimneys.filter((c) => c.basis === 'ESTIMATED' && !c.refs.some((q) => gableChimneys.some((g) => g.ref === q)))
+    const used = new Set<string>()
+    for (const g of [...gableChimneys].sort((p, q) => (p.side === q.side ? 0 : p.side === 'FRONT' || p.side === 'LEFT' ? -1 : 1))) {
+      const body = bodies.find((b) => b.id === g.bodyId)
+      const axisZ = body?.roof.ridgeAxis === 'Z'
+      const along = (c: (typeof chimneys)[number]): number => (axisZ ? (c.rect.z0 + c.rect.z1) / 2 : (c.rect.x0 + c.rect.x1) / 2)
+      const nearFirst = g.side === 'FRONT' || g.side === 'LEFT'
+      const pick = sideMade.filter((c) => !used.has(c.id)).sort((p, q) => (nearFirst ? along(p) - along(q) : along(q) - along(p)))[0]
+      if (!pick) {
+        held.push({ ref: g.ref, code: 'SOURCE_UNKNOWN', why: 'a chimney seen from a gable end: where it stands along the ridge is on no side view' })
+        continue
+      }
+      used.add(pick.id)
+      const half = g.w / 2
+      pick.rect = axisZ ? { x0: r3(g.across - half), z0: pick.rect.z0, x1: r3(g.across + half), z1: pick.rect.z1 } : { x0: pick.rect.x0, z0: r3(g.across - half), x1: pick.rect.x1, z1: r3(g.across + half) }
+      pick.basis = 'DERIVED'
+      pick.refs = [...pick.refs, g.ref]
+      knownDefects.push({ code: 'CHIMNEY_FROM_TWO_VIEWS', what: `${pick.id}: across the ridge from ${g.ref}, along it from ${pick.refs[0]}` })
+    }
+  }
   for (const z of openZones) if (!z.usedBy) held.push({ ref: z.id, code: 'SOURCE_UNKNOWN', why: 'a roofed open zone traced on the plan; no registered elevation shows a balcony or a canopy over it' })
   const geometry: HouseGeometry = {
     frame: { units: 'm', up: 'Y', plan: 'XZ', origin: 'x = 0 at the leftmost outer wall face seen from the front; z = 0 at the frontmost outer wall face; y = 0 at the finished ground floor', front: `the plan's ${edge} edge` },
@@ -1226,6 +1419,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     rooflights,
     frames,
     portals,
+    zones,
     interior: { status: 'NOT_BUILT', note: 'no interior source: the reading describes the exterior and no other source of these pages gave an interior', levels: [] },
   }
   // v3.54.9 — an interior from another source of the same pages, placed only through a checked transform
@@ -1234,6 +1428,13 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
     geometry.interior = ir.interior
     for (const c of ir.checks) checks.push({ ...c, scope: 'INTERIOR', blocks: [] })
     knownDefects.push(...ir.knownDefects)
+  }
+  // v3.54.10 — each storey's own plan reading, placed by the same checked transform and merged with any import
+  if ((o.storeys ?? []).length > 0) {
+    const pr = interiorFromStoreys(o.storeys ?? [], geometry, geometry.interior)
+    geometry.interior = pr.interior
+    for (const c of pr.checks) checks.push({ ...c, scope: 'INTERIOR', blocks: [] })
+    knownDefects.push(...pr.knownDefects)
   }
   const coverage: HouseVerification['coverage'] = {
     metric: sH && sV ? 'CHECKED' : sH || sV ? 'PARTLY_CHECKED' : 'NOT_CHECKED',

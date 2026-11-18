@@ -24,7 +24,7 @@ import { outlineSteps } from './steps.js'
 import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.5.0' as const
+export const HOUSE_BUILDER_VERSION = '0.6.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
@@ -815,7 +815,13 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     // v3.54.7: under a raked or pointed head a door is cut and filled as fixed glazing (a leaf takes a level head only)
     const glazedHead = !!o.head && o.kind !== 'GARAGE_DOOR'
     const frame = { frameDepth: r6(Math.min(0.12, T * 0.4)), frameInset: r6(Math.min(0.1, T * 0.25)) }
-    const panes = Math.max(1, o.panes ?? Math.round(width / 0.9))
+    // v3.54.10 — the divisions READ on the elevation (profiles between panes) when the reading gives them; else the
+    // sashes the reading boxed as one hole; only with neither, a convention (one pane per 0.9 m), said as one
+    const readDiv = o.divisions?.basis === 'READ' ? o.divisions : undefined
+    const panes = readDiv ? readDiv.mullions.length + 1 : Math.max(1, o.panes ?? Math.round(width / 0.9))
+    const fractions = readDiv && readDiv.mullions.length > 0 ? [0, ...readDiv.mullions, 1].slice(1).map((f, i, all) => r6(f - (i === 0 ? 0 : all[i - 1]))) : undefined
+    if (!readDiv && o.panes === undefined && o.kind !== 'DOOR' && o.kind !== 'GARAGE_DOOR') used(`${path}.divisions`, `${panes} pane(s) by convention (one per 0.9 m of width): the reading gives no divisions`, [o.id])
+    else if (readDiv) used(`${path}.divisions`, `${panes} pane(s) as read (${readDiv.how})${fractions && o.kind === 'WINDOW' && fractions.some((f) => Math.abs(f - 1 / panes) > 0.1) ? '; the kernel spaces window panes evenly: the read positions are an approximation in a window' : ''}`, [o.id])
     // v3.54.7 — the head as the elevation draws it: RAKED is one trapezoid; POINTED is two raked halves beside a mullion
     // (the kernel's head is one straight line): the halves are `<id>` and `<id>--b`, one opening in the record
     const fill = (id: string, w: number): void => {
@@ -824,7 +830,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       // glazing (the opening's kind is kept; how it opens is not modelled)
       if (o.kind === 'WINDOW' || glazedHead) push({ type: 'placeWindow', id: `${id}-window`, openingId: id, ...frame, divisions: pn, materialId: MATERIALS_V2.glass })
       else if (o.kind === 'GARAGE_DOOR') push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 }, usage: 'GARAGE', materialId: MATERIALS_V2.gate })
-      else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, assembly: { panels: Array.from({ length: pn }, () => ({ kind: 'GLAZED' as const, fraction: 1 / pn })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
+      else if (o.kind === 'GLAZED_DOOR') push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, assembly: { panels: fractions && w === width ? fractions.map((f) => ({ kind: 'GLAZED' as const, fraction: f })) : Array.from({ length: pn }, () => ({ kind: 'GLAZED' as const, fraction: 1 / pn })), mullionWidth: 0.04 }, materialId: MATERIALS_V2.glass })
       else push({ type: 'placeDoor', id: `${id}-leaf`, openingId: id, ...frame, materialId: MATERIALS_V2.timber })
     }
     const off = r6(q.from - q.s0)
@@ -1065,7 +1071,68 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     used(`${path}.rect`, 'houseProgram/placeChimney', [c.id])
     used(`${path}.topY`, 'houseProgram/placeChimney', [c.id], c.topY)
   }
+  // v3.54.10 — finish zones: surface regions on the walls' outer faces in the style profile's colours. A surface only:
+  // no wall, body or room is added, and the openings stay cut through it.
+  const zoneMats = new Set<string>()
+  for (const z of g.zones ?? []) {
+    const path = `geometry.zones[${z.id}]`
+    const h = hosts.find((x) => x.id === z.hostWall)
+    if (!h) {
+      refuse(path, 'WRONG_BINDING', `host wall ${z.hostWall} is not a built wall`)
+      continue
+    }
+    const a0 = Math.max(0, Math.min(z.a0, z.a1))
+    const a1 = Math.min(h.len, Math.max(z.a0, z.a1))
+    // a zone along a host may run over more than one built wall (a front over the house and the garage): one region per
+    // wall, each cut to that wall's extent and to its height (a zone never reaches above the wall it is on)
+    const mat = styleMaterial(z.material, z.tone)
+    let start = a0
+    let k = 0
+    const made: string[] = []
+    while (a1 - start > 0.1 && k < 6) {
+      const under = wallUnder(h, start, Math.min(a1, start + 0.2))
+      if (!under) break
+      const s0 = Math.max(start, under.s0)
+      const s1 = Math.min(a1, under.s1)
+      start = under.s1 + 1e-3
+      k += 1
+      const l = levelAt.get(Math.min(...under.w.body.storeys))
+      const wc = program.find((c) => c.type === 'createWall' && c.id === under.w.id) as { height?: number; topProfile?: unknown } | undefined
+      const profileTop = Array.isArray((wc?.topProfile as { points?: unknown })?.points) ? Math.max(...((wc?.topProfile as { points: Array<{ y?: number }> }).points.map((p) => p.y ?? 0))) : undefined
+      const top = Math.max(wc?.height ?? Number.POSITIVE_INFINITY, profileTop ?? 0)
+      if (!l || s1 - s0 < 0.1) continue
+      const b0 = Math.max(0, z.b0 - l.elevation)
+      const b1 = Math.min(top, z.b1 - l.elevation)
+      if (b1 - b0 < 0.1) continue
+      if (!zoneMats.has(mat.id)) {
+        push({ type: 'defineMaterial', id: mat.id, name: mat.name, color: mat.color })
+        zoneMats.add(mat.id)
+      }
+      const id = k === 1 ? z.id : `${z.id}-${k}`
+      push({ type: 'createSurfaceRegion', id, hostId: under.w.id, face: 'OUTER', rect: { a0: r6(s0 - under.s0), a1: r6(s1 - under.s0), b0: r6(b0), b1: r6(b1) }, materialId: mat.id })
+      made.push(`${id} on ${under.w.id}`)
+    }
+    if (made.length === 0) refuse(path, 'WRONG_BINDING', `no built wall stands under ${a0.toFixed(2)}..${a1.toFixed(2)} m of ${h.id} with height for the zone`)
+    else used(path, `createSurfaceRegion ${made.join(', ')} in ${mat.name} (${STYLE_PROFILE.id})`, made.map((m) => m.split(' ')[0]))
+  }
   return { program, trace, refusals, planes: planesOut, hostWalls, approximated, builderNotes, fits }
+}
+
+/**
+ * v3.54.10 — the presentation style a finish zone's material and tone map to: a small fixed palette, one colour per
+ * role, the same on every side (never the colour of a photograph's light). A tone not read is a named neutral.
+ */
+export const STYLE_PROFILE = { id: 'low-poly@1', neutral: '#cfcac1' } as const
+export function styleMaterial(material: string, tone: string): { id: string; name: string; color: string } {
+  const id = `mat-zone-${material.toLowerCase()}-${tone.toLowerCase()}`
+  const wood = material === 'WOOD' || tone === 'WARM'
+  const color = wood
+    ? '#b07a4a'
+    : tone === 'DARK'
+      ? material === 'METAL' || material === 'BOARD_CLADDING' ? '#3b3d40' : '#3a3a3c'
+      : material === 'STONE' ? '#a39d92' : material === 'BRICK' ? '#9c5a43' : tone === 'MID' ? '#8e8983' : tone === 'LIGHT' ? '#ece9e2' : STYLE_PROFILE.neutral
+  const name = wood ? 'Timber cladding' : `${tone === 'UNKNOWN' ? 'Neutral (tone not read)' : tone.charAt(0) + tone.slice(1).toLowerCase()} ${material.toLowerCase().replace('_', ' ')}`
+  return { id, name, color }
 }
 
 export type { HouseGeometry, HouseBody }

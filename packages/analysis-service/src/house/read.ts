@@ -10,24 +10,29 @@
  *                 body, the openings and the roof features.
  *   3b. FACADES-n (v3.54.5) the program compares the elevation pictures it sent with the ones the answer describes and
  *                 asks for each undescribed one alone, with the plan: one targeted request per picture, counted.
- *   4. REVIEW     the built model's own views beside the sources: differences, and replacement observation records.
+ *   4. DETAILS    (v3.54.10) about the openings already read, by the ids the program gave them: which contour each box
+ *                 traces, what hides part of it, its glazing divisions; the finish zones of each wall; chimneys.
+ *   5. STOREY-n   (v3.54.10) one request per floor plan: partitions, doors, rooms and open zones, stairs, floor
+ *                 openings and the printed callouts of exterior openings.
+ *   6. REVIEW     the built model's own views beside the sources: differences, and replacement observation records.
  *
  * The reader reports what is on the pictures, in the pixels of the pictures it was sent. It gives no metres of its own
  * except printed numbers (which the program parses again), places nothing in the model, and never sees LOCAL's result,
  * a reference or a benchmark answer. What it answers is data: checked against the schema, converted to the published
  * pictures' pixels, and handed to the deterministic resolver, which accepts, holds or refuses each part.
  */
+import { CONFORM_RULES_VERSION, conformAnswer, schemaFields, stableOpeningOrder } from './contract.js'
 import { createHash } from 'node:crypto'
 import { sentPicture } from './pictures.js'
 import type { HousePicture, SentPicture } from './pictures.js'
 import type { ConsultantModel, ModelTurn } from '../consult/loop.js'
 
 export const HOUSE_READING_CONTRACT = 'buildapp.house-reading'
-export const HOUSE_READING_VERSION = '0.4.0'
-export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1, /** v3.54.5: targeted requests for elevation pictures the first reading left undescribed — one per picture, never two for one. */ facadeFollowUps: 4 } as const
+export const HOUSE_READING_VERSION = '0.5.0'
+export const HOUSE_READING_LIMITS = { maxOutputTokens: { INVENTORY: 3000, PLAN: 6000, FACADES: 12000, REVIEW: 8000, DETAILS: 8000, STOREY: 8000 }, plans: 3, sections: 2, elevations: 4, views: 2, reviewRounds: 2, transportRetries: 1, /** v3.54.5: targeted requests for elevation pictures the first reading left undescribed — one per picture, never two for one. */ facadeFollowUps: 4 } as const
 
-export type ReadingStep = 'INVENTORY' | 'PLAN' | 'FACADES' | 'REVIEW'
-export type ReadingRecord = { step: ReadingStep; round?: number; model: string; requestId?: string; usage: ModelTurn['usage']; latencyMs?: number; pictures: Array<{ id: string; assetId: string; sentWidth: number; sentHeight: number; sha256: string }>; promptSha256: string; /** v3.54.8: which tool answered — the full or the slim facade tool, under the strict grammar or not. */ toolVariant?: string; answer: unknown; stopReason?: string }
+export type ReadingStep = 'INVENTORY' | 'PLAN' | 'FACADES' | 'REVIEW' | 'DETAILS' | 'STOREY'
+export type ReadingRecord = { step: ReadingStep; round?: number; model: string; requestId?: string; usage: ModelTurn['usage']; latencyMs?: number; pictures: Array<{ id: string; assetId: string; sentWidth: number; sentHeight: number; sha256: string }>; promptSha256: string; /** v3.54.8: which tool answered — the full or the slim facade tool, under the strict grammar or not. */ toolVariant?: string; answer: unknown; stopReason?: string; /** v3.54.10: the request's contract and variant, the fields that variant offers and those it lacks against the full tool, the raw answer as given, and what conformance changed. */ contract?: string; toolSha256?: string; fields?: string[]; absentFields?: string[]; rawAnswer?: unknown; conform?: { rules: string; issues: Array<{ path: string; code: string; why: string }>; migrations: Array<{ path: string; rule: string }> } }
 export type ReadingSpend = { reserve(model: string, usd: number, note: string): { id: string; usd: number }; settle(reservation: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string): void }
 export type ReadingPrice = { inputUsdPerMTok: number; outputUsdPerMTok: number }
 export class ReadingFailed extends Error {
@@ -274,6 +279,124 @@ export const READING_TOOLS = {
       },
     },
   },
+  /**
+   * v3.54.10 — the details of the openings already read and the finish zones of each elevation, asked AFTER the facade
+   * reading, about its openings by the ids the program gave them. A separate small grammar: the facade tool is at the
+   * provider's grammar limit, so new fields are a step of their own completing the same document.
+   */
+  DETAILS: {
+    name: 'describe_details',
+    description: 'For each elevation picture: what the box of each listed opening traces, what hides part of it, its glazing divisions; the finish zones of its walls; chimneys seen on it. Coordinates are pixels of the picture named.',
+    input_schema: {
+      type: 'object',
+      additionalProperties: false,
+      required: ['elevations', 'unknowns'],
+      properties: {
+        elevations: {
+          type: 'array',
+          maxItems: 4,
+          items: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['picture', 'openings', 'zones', 'chimneys'],
+            properties: {
+              picture: { type: 'integer', minimum: 1 },
+              openings: {
+                type: 'array',
+                maxItems: 40,
+                items: {
+                  type: 'object',
+                  additionalProperties: false,
+                  required: ['id', 'contour', 'hiddenBelowY', 'hiddenBy', 'mullionsX', 'transomsY', 'doorLeaves'],
+                  properties: {
+                    id: { type: 'string', maxLength: 8, description: 'The id given in the list (o1, o2, …).' },
+                    contour: { type: 'string', enum: ['FRAME', 'GLASS', 'EXPOSED', 'UNSURE'], description: 'What its listed box traces: FRAME = the outer edge of the window or door frame (the opening in the wall); GLASS = only the glass inside the frame; EXPOSED = only the part visible above or beside something in front of it (a railing, a wall).' },
+                    hiddenBelowY: { type: ['number', 'null'], description: 'The row below which the opening is hidden by something in front of it (a railing, a parapet); null when nothing hides it.' },
+                    hiddenBy: { type: ['string', 'null'], description: 'The id of the feature that hides it (a balcony), or null.' },
+                    mullionsX: { type: 'array', maxItems: 12, items: { type: 'number' }, description: 'The columns of the VERTICAL frame profiles between panes inside the opening (not its two outer edges). Empty when it is one pane.' },
+                    transomsY: { type: 'array', maxItems: 6, items: { type: 'number' }, description: 'The rows of HORIZONTAL profiles inside it. Empty when none.' },
+                    doorLeaves: { type: ['integer', 'null'], description: 'For a glazed door: how many of its panes open as doors; null when not seen.' },
+                  },
+                },
+              },
+              zones: {
+                type: 'array',
+                maxItems: 12,
+                description: 'Areas of the walls with a finish different from the plain main wall finish (a dark render band, timber cladding, stone), each as its box. Not glass, not the roof, not shadows, not reflections, not text or logos.',
+                items: {
+                  type: 'object',
+                  additionalProperties: false,
+                  required: ['material', 'tone', 'box', 'bodyId', 'certainty', 'note'],
+                  properties: {
+                    material: { type: 'string', enum: ['PLASTER', 'BOARD_CLADDING', 'WOOD', 'STONE', 'BRICK', 'METAL', 'CONCRETE', 'OTHER'] },
+                    tone: { type: 'string', enum: ['LIGHT', 'MID', 'DARK', 'WARM', 'UNKNOWN'] },
+                    box: { ...box, description: 'The zone on the wall: its left and right columns, its top and bottom rows.' },
+                    bodyId: bodyId,
+                    certainty: { type: 'string', enum: ['CERTAIN', 'LIKELY', 'UNSURE'] },
+                    note: { type: 'string', maxLength: 120 },
+                  },
+                },
+              },
+              chimneys: {
+                type: 'array',
+                maxItems: 4,
+                description: 'Each chimney stack above the roof on this picture.',
+                items: { type: 'object', additionalProperties: false, required: ['leftX', 'rightX', 'topY'], properties: { leftX: { type: 'number' }, rightX: { type: 'number' }, topY: { type: 'number' } } },
+              },
+            },
+          },
+        },
+        unknowns: { type: 'array', maxItems: 8, items: { type: 'string', maxLength: 200 } },
+      },
+    },
+  },
+  /** v3.54.10 — ONE floor plan's interior (asked once per storey plan): partitions, doors, rooms and zones, stairs, floor openings, opening callouts. */
+  STOREY: {
+    name: 'describe_storey',
+    description: 'What ONE floor plan (picture 1) shows inside the building. All coordinates are pixels of picture 1.',
+    input_schema: {
+      type: 'object',
+      additionalProperties: false,
+      required: ['storey', 'frontEdge', 'outline', 'partitions', 'doors', 'rooms', 'stairs', 'voids', 'labels', 'unknowns'],
+      properties: {
+        storey: { type: 'string', enum: ['BASEMENT', 'GROUND', 'UPPER', 'ATTIC'] },
+        frontEdge: { type: 'string', enum: ['BOTTOM', 'TOP', 'LEFT', 'RIGHT'], description: 'The edge of the picture the FRONT (entrance side) lies along.' },
+        outline: { ...polygon, description: 'The outer faces of the exterior walls of THIS storey, corner by corner.' },
+        partitions: {
+          type: 'array',
+          maxItems: 60,
+          description: 'Each straight interior wall as the line through its middle, end to end (where it meets another wall, at that wall).',
+          items: { type: 'object', additionalProperties: false, required: ['a', 'b', 'thicknessPx'], properties: { a: px, b: px, thicknessPx: { type: ['number', 'null'] } } },
+        },
+        doors: {
+          type: 'array',
+          maxItems: 40,
+          description: 'Each door or passage IN AN INTERIOR WALL (also between the house and an attached garage): the middle of its gap.',
+          items: { type: 'object', additionalProperties: false, required: ['at', 'widthPx'], properties: { at: px, widthPx: { type: ['number', 'null'] } } },
+        },
+        rooms: {
+          type: 'array',
+          maxItems: 30,
+          description: 'Each room, and each functional zone of an open space (a kitchen open to the living room) as its own entry with open true.',
+          items: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['polygon', 'name', 'number', 'areaLiteral', 'open'],
+            properties: { polygon: polygon, name: { type: 'string', maxLength: 40 }, number: { type: ['string', 'null'], maxLength: 8 }, areaLiteral: { type: ['string', 'null'], maxLength: 16, description: 'The printed area exactly as printed, or null.' }, open: { type: 'boolean', description: 'True for a zone of an open space with no wall between it and its neighbour.' } },
+          },
+        },
+        stairs: { type: 'array', maxItems: 4, items: polygon, description: 'The outline of each stair run as drawn.' },
+        voids: { type: 'array', maxItems: 6, items: polygon, description: 'Openings in THIS floor (a stair hole seen from above, a double-height void) — only on an upper-storey plan.' },
+        labels: {
+          type: 'array',
+          maxItems: 30,
+          description: 'Each printed callout of a window or door in an EXTERIOR wall (like "110/230"), exactly as printed, where it is printed, and the wall it belongs to.',
+          items: { type: 'object', additionalProperties: false, required: ['literal', 'at', 'wall', 'kind'], properties: { literal: { type: 'string', maxLength: 16 }, at: px, wall: { type: 'string', enum: ['FRONT', 'REAR', 'LEFT', 'RIGHT', 'UNSURE'] }, kind: { type: 'string', enum: ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR', 'UNSURE'] } } },
+        },
+        unknowns: { type: 'array', maxItems: 8, items: { type: 'string', maxLength: 200 } },
+      },
+    },
+  },
 } as const
 
 /**
@@ -329,6 +452,30 @@ export type FacadesAnswer = {
   }>
   unknowns: string[]
 }
+
+export type DetailsAnswer = {
+  elevations: Array<{
+    picture: number
+    openings: Array<{ id: string; contour: 'FRAME' | 'GLASS' | 'EXPOSED' | 'UNSURE'; hiddenBelowY: number | null; hiddenBy: string | null; mullionsX: number[]; transomsY: number[]; doorLeaves: number | null }>
+    zones: Array<{ material: string; tone: string; box: BoxPx; bodyId: string; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; note: string }>
+    chimneys: Array<{ leftX: number; rightX: number; topY: number }>
+  }>
+  unknowns: string[]
+}
+export type StoreyAnswer = {
+  storey: 'BASEMENT' | 'GROUND' | 'UPPER' | 'ATTIC'
+  frontEdge: 'BOTTOM' | 'TOP' | 'LEFT' | 'RIGHT'
+  outline: Px[]
+  partitions: Array<{ a: Px; b: Px; thicknessPx: number | null }>
+  doors: Array<{ at: Px; widthPx: number | null }>
+  rooms: Array<{ polygon: Px[]; name: string; number: string | null; areaLiteral: string | null; open: boolean }>
+  stairs: Px[][]
+  voids: Px[][]
+  labels: Array<{ literal: string; at: Px; wall: 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT' | 'UNSURE'; kind: string }>
+  unknowns: string[]
+}
+/** v3.54.10 — what the new steps returned, and what they could not: a replay of a reading recorded before them holds none, and says so. */
+export type ExtraReading = { details?: { answer: DetailsAnswer; sent: SentPicture[] }; storeys: Array<{ level: number; picture: HousePicture; answer: StoreyAnswer; sent: SentPicture[] }>; absent: Array<{ step: string; why: string }> }
 
 /** A printed length to metres, by the program: the reader's own conversion is compared with it, never trusted alone. */
 export function literalToMetres(literal: string, unit: string): number | null {
@@ -414,8 +561,15 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
     const then = recorded.pictures.map((p) => p.assetId).join('|')
     const now = pictures.map((p) => p.picture.assetId).join('|')
     if (then !== now) throw new ReadingFailed('NOT_SENT', `replay: ${step} was recorded for other pictures than this request has (STALE_DEPENDENCY)`)
-    ctx.record({ ...recorded, usage: { inputTokens: 0, outputTokens: 0 } })
-    return recorded.answer as T
+    // v3.54.10: a recorded answer is held to the same schema as a live one; a recording made under an older contract
+    // keeps the fields that contract had (said), and never gains a field it did not record
+    const legacy = recorded.contract !== HOUSE_READING_VERSION
+    // validated against the variant it was recorded with (a SLIM answer against the slim tool)
+    const variantTool = recorded.toolVariant?.startsWith('SLIM') && fallback ? fallback : firstTool
+    const c = conformAnswer(variantTool.input_schema, recorded.rawAnswer ?? recorded.answer, { keepUnknown: legacy, lenientRequired: legacy })
+    ctx.record({ ...recorded, usage: { inputTokens: 0, outputTokens: 0 }, conform: { rules: `${CONFORM_RULES_VERSION}${legacy ? ' (replay of an older contract: its own fields kept)' : ''}`, issues: c.issues, migrations: c.migrations } })
+    if (c.value === undefined) throw new ReadingFailed('PARSE_REJECTED', `replay: ${step} does not conform to the tool (${c.issues.slice(0, 3).map((x) => `${x.path} ${x.code}`).join('; ')})`)
+    return c.value as T
   }
   if (ctx.replayOnly) throw new ReadingFailed('NOT_SENT', `replay: no recorded answer for ${step}${round ? ` round ${round}` : ''}`)
   const content: unknown[] = []
@@ -465,23 +619,19 @@ export async function ask<T>(ctx: ReadingContext, step: ReadingStep, round: numb
   const input = (turn.usage.inputTokens ?? 0) + (turn.usage.cacheReadInputTokens ?? 0) + (turn.usage.cacheCreationInputTokens ?? 0)
   if (reservation) ctx.spend?.settle(reservation, { usd: usd(ctx.price, input, turn.usage.outputTokens ?? 0), inputTokens: input, outputTokens: turn.usage.outputTokens ?? 0 }, `house reading ${step}`)
   const call = turn.content.find((b) => (b as { type?: string }).type === 'tool_use' && (b as { name?: string }).name === tool.name) as { input?: unknown } | undefined
-  const record: ReadingRecord = { step, ...(round ? { round } : {}), model: turn.model, ...(turn.requestId ? { requestId: turn.requestId } : {}), usage: turn.usage, ...(turn.latencyMs !== undefined ? { latencyMs: turn.latencyMs } : {}), pictures: pictures.map((p) => ({ id: p.picture.id, assetId: p.picture.assetId, sentWidth: p.width, sentHeight: p.height, sha256: sha(Buffer.from(p.jpegBase64, 'base64')) })), promptSha256: sha(`${READER_SYSTEM}\n${text}\n${JSON.stringify(tool)}`), toolVariant: `${tool === fallback ? 'SLIM' : 'FULL'}_${strictNow ? 'STRICT' : 'NON_STRICT'}`, answer: call?.input ?? null, ...(turn.stopReason ? { stopReason: turn.stopReason } : {}) }
+  // v3.54.10: the raw answer as given — a deep copy taken before anything reads it — and the same answer conformed to
+  // the schema of the tool that was sent (the validation, the one migration and every dropped item are recorded)
+  const rawAnswer = call?.input === undefined ? null : structuredClone(call.input)
+  const conformed = call && typeof call.input === 'object' && call.input !== null ? conformAnswer(tool.input_schema, rawAnswer) : undefined
+  const fullFields = schemaFields(firstTool.input_schema)
+  const sentFields = schemaFields(tool.input_schema)
+  const register = { contract: HOUSE_READING_VERSION, toolSha256: sha(JSON.stringify(tool)), fields: sentFields, absentFields: fullFields.filter((f) => !sentFields.includes(f)), rawAnswer, ...(conformed ? { conform: { rules: CONFORM_RULES_VERSION, issues: conformed.issues, migrations: conformed.migrations } } : {}) }
+  const record: ReadingRecord = { ...register, step, ...(round ? { round } : {}), model: turn.model, ...(turn.requestId ? { requestId: turn.requestId } : {}), usage: turn.usage, ...(turn.latencyMs !== undefined ? { latencyMs: turn.latencyMs } : {}), pictures: pictures.map((p) => ({ id: p.picture.id, assetId: p.picture.assetId, sentWidth: p.width, sentHeight: p.height, sha256: sha(Buffer.from(p.jpegBase64, 'base64')) })), promptSha256: sha(`${READER_SYSTEM}\n${text}\n${JSON.stringify(tool)}`), toolVariant: `${tool === fallback ? 'SLIM' : 'FULL'}_${strictNow ? 'STRICT' : 'NON_STRICT'}`, answer: conformed?.value ?? null, ...(turn.stopReason ? { stopReason: turn.stopReason } : {}) }
   ctx.record(record)
   if (turn.stopReason === 'max_tokens') throw new ReadingFailed('PARSE_REJECTED', `${step}: the answer was cut at the output limit`)
   if (!call || typeof call.input !== 'object' || call.input === null) throw new ReadingFailed('PARSE_REJECTED', `${step}: the answer is not a call of ${tool.name}${turn.stopReason ? ` (stop reason ${turn.stopReason})` : ''}`)
-  // a non-strict answer may carry an array as its JSON text: taken as the array it spells, or refused
-  const fields = call.input as Record<string, unknown>
-  for (const [k, v] of Object.entries(fields)) {
-    if (typeof v !== 'string' || !/^\s*[[{]/.test(v)) continue
-    const expected = ((tool.input_schema as { properties?: Record<string, { type?: unknown }> }).properties ?? {})[k]?.type
-    if (expected !== 'array' && expected !== 'object') continue
-    try {
-      fields[k] = JSON.parse(v)
-    } catch {
-      throw new ReadingFailed('PARSE_REJECTED', `${step}: field ${k} is not the ${String(expected)} asked for`)
-    }
-  }
-  return fields as T
+  if (!conformed || conformed.value === undefined) throw new ReadingFailed('PARSE_REJECTED', `${step}: the answer does not have the shape of ${tool.name} (${(conformed?.issues ?? []).slice(0, 3).map((x) => `${x.path} ${x.code}`).join('; ')})`)
+  return conformed.value as T
 }
 
 export type Selection = { ground: HousePicture; upperPlans: HousePicture[]; sections: HousePicture[]; elevations: HousePicture[]; views: HousePicture[]; notThisHouse: HousePicture[]; /** Elevation pictures of this house beyond the number one reading takes: seen in the inventory, not sent for measuring. */ unsentElevations?: HousePicture[] }
@@ -608,4 +758,73 @@ Call describe_elevation for picture 2: the side it shows (match it to the plan),
     }
   }
   return { answer, sent, coverage }
+}
+
+/**
+ * v3.54.10 — DETAILS: the openings already read on each elevation, listed by the ids the program gives them (its stable
+ * order, `stableOpeningOrder`), are asked about once more: which contour the box traces, what hides part of it, the
+ * profiles between panes; with the finish zones and the chimneys of each wall. The same pictures at the same size as
+ * the facade reading, so its boxes are in the same pixels.
+ */
+export async function readDetails(ctx: ReadingContext, selection: Selection, facades: FacadesAnswer, facadesSent: SentPicture[], bodyIds: readonly string[]): Promise<{ answer: DetailsAnswer; sent: SentPicture[] }> {
+  const nS = selection.sections.length
+  const sent = selection.elevations.map((p) => facadesSent.find((x) => x.picture.id === p.id) ?? sentPicture(p, 'detail'))
+  const lines = selection.elevations.map((p, i) => {
+    const e = facades.elevations.find((x) => x.picture === 2 + nS + i)
+    if (!e) return `Picture ${i + 1}: (not described before — list nothing for its openings)`
+    const order = stableOpeningOrder(e.openings ?? [])
+    const list = order.map((j, k) => {
+      const o = e.openings[j]
+      return `o${k + 1} ${o.kind} box x ${Math.round(o.box.x0)}–${Math.round(o.box.x1)}, y ${Math.round(o.box.y0)}–${Math.round(o.box.y1)} (storey ${o.level})`
+    })
+    const feats = (e.features ?? []).filter((f) => f.kind === 'BALCONY' || f.kind === 'LOGGIA').map((f) => f.id)
+    return `Picture ${i + 1} (${e.side} elevation): ${list.length ? list.join('; ') : 'no openings listed'}${feats.length ? `. Balconies/loggias on it: ${feats.join(', ')}` : ''}.`
+  })
+  const text = `Pictures 1–${sent.length}: the elevations of one house, as read before. For each, the openings found then, with the ids the program gave them:
+${lines.join('\n')}
+Call describe_details, one entry per picture:
+- for EACH listed opening (by its id): which contour its box traces (FRAME, GLASS or EXPOSED — only the part visible above a railing), the row below which something in front of it hides it (and which feature), the columns of the vertical profiles between its panes, the rows of horizontal profiles, and for a glazed door how many panes open as doors;
+- the finish zones of the walls that differ from the plain wall finish (a dark band, timber, stone) as boxes, with material and tone — never glass, roof, shadow, reflection or a logo;
+- each chimney stack above the roof.`
+  const tool = withBodyIds(READING_TOOLS.DETAILS, bodyIds)
+  return { answer: await ask<DetailsAnswer>(ctx, 'DETAILS', 0, text, sent, tool), sent }
+}
+
+/** v3.54.10 — STOREY-n: one floor plan at a time (ground plan as 0, each upper plan as its storey), at full detail. */
+export async function readStorey(ctx: ReadingContext, picture: HousePicture, level: number): Promise<{ answer: StoreyAnswer; sent: SentPicture[] }> {
+  const sent = [sentPicture(picture, 'detail')]
+  const text = `Picture 1 is a floor plan of one storey of a house (${level === 0 ? 'the ground floor' : `storey ${level} above the ground`}).
+Call describe_storey: the outer wall faces of this storey; every interior wall as its middle line end to end; every door or passage in an interior wall (also into an attached garage); every room and every functional zone of an open space (open true, and no wall invented between zones); stair runs; openings in this floor; and each printed callout of an exterior window or door exactly as printed, where it is printed and on which wall. Printed numbers are copied exactly as printed.`
+  return { answer: await ask<StoreyAnswer>(ctx, 'STOREY', level, text, sent, READING_TOOLS.STOREY), sent }
+}
+
+/**
+ * The new steps together. A recording made before them holds no answer for them: the replay says that they were not
+ * read in that recording (never that the source has nothing), and the house is built without them.
+ */
+export async function readExtras(ctx: ReadingContext, selection: Selection, facades: { answer: FacadesAnswer; sent: SentPicture[] } | undefined, bodyIds: readonly string[], opt: { details?: boolean; storeys?: boolean } = {}): Promise<ExtraReading> {
+  const out: ExtraReading = { storeys: [], absent: [] }
+  const absentWhy = (e: unknown): string => (e instanceof ReadingFailed ? (ctx.replayOnly ? `not in the recording replayed (it was made before this step existed): ${e.message.slice(0, 120)}` : e.message.slice(0, 200)) : String(e))
+  if (opt.details !== false && facades) {
+    try {
+      out.details = await readDetails(ctx, selection, facades.answer, facades.sent, bodyIds)
+    } catch (e) {
+      if (!(e instanceof ReadingFailed)) throw e
+      out.absent.push({ step: 'DETAILS', why: absentWhy(e) })
+    }
+  }
+  if (opt.storeys !== false) {
+    // the first plan of the storey above (a second plan of that storey is the same storey, labelled differently): one request per storey
+    const plans = [{ p: selection.ground, level: 0 }, ...selection.upperPlans.slice(0, 1).map((p) => ({ p, level: 1 }))]
+    for (const { p, level } of plans) {
+      try {
+        const r = await readStorey(ctx, p, level)
+        out.storeys.push({ level, picture: p, ...r })
+      } catch (e) {
+        if (!(e instanceof ReadingFailed)) throw e
+        out.absent.push({ step: `STOREY-${level}`, why: absentWhy(e) })
+      }
+    }
+  }
+  return out
 }

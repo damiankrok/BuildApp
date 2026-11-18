@@ -213,3 +213,100 @@ export function renderSideInFrame(bundle: MobileSceneBundle, side: 'FRONT' | 'RI
   const png = encodePng({ width: W, height: H, data })
   return { png, sha256: sha(png), width: W, height: H }
 }
+
+/**
+ * v3.54.10 — one storey of the model seen from above with nothing above it: the floor and rooms of that storey filled,
+ * every wall cut at `cutM` above its floor drawn as a dark line (partitions grey), door leaves cut at 1 m drawn brown.
+ * Front at the bottom, as plans are printed. The roof is never drawn: what is missing here is missing in the model, not
+ * hidden by the renderer. A function of the scene alone (its hash names what the reviewer saw).
+ */
+export function renderStoreyCut(bundle: MobileSceneBundle, levelId: string, elevation: number, cutM = 1.2, size = 640): { png: Uint8Array; sha256: string; width: number; height: number; pxPerM: number } {
+  const b = bundle.scene.bounds
+  const x0 = (b?.min.x ?? 0) - 0.5
+  const x1 = (b?.max.x ?? 10) + 0.5
+  const z0 = (b?.min.z ?? 0) - 0.5
+  const z1 = (b?.max.z ?? 10) + 0.5
+  const s = size / Math.max(x1 - x0, z1 - z0)
+  const W = Math.ceil((x1 - x0) * s)
+  const H = Math.ceil((z1 - z0) * s)
+  const data = new Uint8ClampedArray(W * H * 4).fill(255)
+  const colours = new Map<string, V3>()
+  for (const m of (bundle as unknown as { materials?: Array<{ id: string; color?: string }> }).materials ?? []) colours.set(m.id, hex(m.color))
+  const P = (x: number, z: number): [number, number] => [(x - x0) * s, (z1 - z) * s]
+  const fill = (a: [number, number], c2: [number, number], d: [number, number], col: V3): void => {
+    const minX = Math.max(0, Math.floor(Math.min(a[0], c2[0], d[0])))
+    const maxX = Math.min(W - 1, Math.ceil(Math.max(a[0], c2[0], d[0])))
+    const minY = Math.max(0, Math.floor(Math.min(a[1], c2[1], d[1])))
+    const maxY = Math.min(H - 1, Math.ceil(Math.max(a[1], c2[1], d[1])))
+    const area = (c2[0] - a[0]) * (d[1] - a[1]) - (d[0] - a[0]) * (c2[1] - a[1])
+    if (Math.abs(area) < 1e-9) return
+    for (let y = minY; y <= maxY; y += 1)
+      for (let x = minX; x <= maxX; x += 1) {
+        const px = x + 0.5
+        const py = y + 0.5
+        const w0 = ((c2[0] - px) * (d[1] - py) - (d[0] - px) * (c2[1] - py)) / area
+        const w1 = ((d[0] - px) * (a[1] - py) - (a[0] - px) * (d[1] - py)) / area
+        if (w0 < -1e-6 || w1 < -1e-6 || 1 - w0 - w1 < -1e-6) continue
+        const o = (y * W + x) * 4
+        data[o] = col[0]
+        data[o + 1] = col[1]
+        data[o + 2] = col[2]
+      }
+  }
+  const line = (a: [number, number], c2: [number, number], col: V3, wpx: number): void => {
+    const n = Math.ceil(Math.hypot(c2[0] - a[0], c2[1] - a[1])) + 1
+    for (let i = 0; i <= n; i += 1) {
+      const x = a[0] + ((c2[0] - a[0]) * i) / n
+      const y = a[1] + ((c2[1] - a[1]) * i) / n
+      for (let dx = -wpx; dx <= wpx; dx += 1)
+        for (let dy = -wpx; dy <= wpx; dy += 1) {
+          const xi = Math.round(x + dx)
+          const yi = Math.round(y + dy)
+          if (xi < 0 || yi < 0 || xi >= W || yi >= H) continue
+          const o = (yi * W + xi) * 4
+          data[o] = col[0]
+          data[o + 1] = col[1]
+          data[o + 2] = col[2]
+        }
+    }
+  }
+  const tris = (positions: number[]): Array<[V3, V3, V3]> => {
+    const out: Array<[V3, V3, V3]> = []
+    for (let i = 0; i + 8 < positions.length; i += 9) out.push([[positions[i], positions[i + 1], positions[i + 2]], [positions[i + 3], positions[i + 4], positions[i + 5]], [positions[i + 6], positions[i + 7], positions[i + 8]]])
+    return out
+  }
+  const cut = (t: [V3, V3, V3], y: number): [number, number][] | undefined => {
+    const pts: [number, number][] = []
+    for (const [a, c2] of [[t[0], t[1]], [t[1], t[2]], [t[2], t[0]]] as Array<[V3, V3]>) {
+      if ((a[1] - y) * (c2[1] - y) < 0) {
+        const k = (y - a[1]) / (c2[1] - a[1])
+        pts.push(P(a[0] + k * (c2[0] - a[0]), a[2] + k * (c2[2] - a[2])))
+      }
+    }
+    return pts.length === 2 ? pts : undefined
+  }
+  const meshes = bundle.scene.meshes as Array<{ objectKind?: string; levelId?: string; semanticGroup?: string; materialId?: string; positions: number[]; part?: string }>
+  for (const m of meshes) {
+    if (m.levelId !== levelId || (m.objectKind !== 'slab' && m.objectKind !== 'room')) continue
+    const col: V3 = m.objectKind === 'room' ? [214, 228, 240] : [232, 232, 228]
+    for (const t of tris(m.positions)) if (Math.abs(t[0][1] - t[1][1]) < 1e-6 && Math.abs(t[1][1] - t[2][1]) < 1e-6 && Math.abs(t[0][1] - elevation) < 0.5) fill(P(t[0][0], t[0][2]), P(t[1][0], t[1][2]), P(t[2][0], t[2][2]), col)
+  }
+  for (const m of meshes) {
+    if (m.objectKind !== 'wall' && m.objectKind !== 'wallPanel') continue
+    const interior = m.semanticGroup === 'WALL_INTERIOR'
+    if (interior && m.levelId !== levelId) continue
+    for (const t of tris(m.positions)) {
+      const seg = cut(t, elevation + cutM)
+      if (seg) line(seg[0], seg[1], interior ? [120, 120, 120] : [30, 30, 30], interior ? 1 : 2)
+    }
+  }
+  for (const m of meshes) {
+    if (m.levelId !== levelId || m.objectKind !== 'door') continue
+    for (const t of tris(m.positions)) {
+      const seg = cut(t, elevation + 1.0)
+      if (seg) line(seg[0], seg[1], [176, 122, 74], 1)
+    }
+  }
+  const png = encodePng({ width: W, height: H, data })
+  return { png, sha256: createHash('sha256').update(png).digest('hex'), width: W, height: H, pxPerM: s }
+}

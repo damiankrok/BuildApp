@@ -10,7 +10,7 @@
  * a partition, room or stair outside the new outline is dropped with its reason; a door is kept on its partition only
  * where it still fits. Identities are the source's (rooms keep their ids, and with them their links).
  */
-import type { HouseGeometry, HouseInterior, HouseInteriorSource } from './document.js'
+import type { HouseGeometry, HouseInterior, HouseInteriorSource, HouseObservations } from './document.js'
 import { bbox, contains, offset, pt, signedArea, toSegment } from './poly.js'
 import type { P2 } from './poly.js'
 
@@ -61,11 +61,12 @@ const coveredByAny = (a: readonly P2[], bs: readonly P2[][]): number => {
 
 export type InteriorResolution = { interior: HouseInterior; checks: Array<{ id: string; what: string; expected: string; measured: string; status: 'PASS' | 'FAIL' | 'UNKNOWN' }>; knownDefects: Array<{ code: string; what: string }> }
 
-export function resolveInterior(src: HouseInteriorSource, g: Pick<HouseGeometry, 'outlines' | 'levels' | 'wallThicknessM'> & { openings?: HouseGeometry['openings'] }): InteriorResolution {
+export function resolveInterior(src: HouseInteriorSource, g: Pick<HouseGeometry, 'outlines' | 'levels' | 'wallThicknessM'> & { openings?: HouseGeometry['openings'] }, opt: { registerLevel?: number; /** v3.54.10: the source's orientation is read (a plan's front edge), not guessed: no mirror is tried. */ oriented?: boolean } = {}): InteriorResolution {
   const checks: InteriorResolution['checks'] = []
   const knownDefects: InteriorResolution['knownDefects'] = []
   const none = (note: string): InteriorResolution => ({ interior: { status: 'NOT_BUILT', note, source: { origin: src.origin, modelHash: src.modelHash }, levels: [] }, checks, knownDefects })
-  const ground = g.outlines.find((o) => o.level === 0)?.polygon.map((p) => pt(p.x, p.z))
+  // the outline it registers to: the ground's (LOCAL's footprint), or the storey's own for one plan read alone (v3.54.10)
+  const ground = g.outlines.find((o) => o.level === (opt.registerLevel ?? 0))?.polygon.map((p) => pt(p.x, p.z))
   if (!ground) return none('the house has no ground outline to place an interior in')
   const H = bbox(ground)
   const S = src.extent
@@ -85,7 +86,7 @@ export function resolveInterior(src: HouseInteriorSource, g: Pick<HouseGeometry,
     const v = t.mirrorZ ? S.z1 - p.z : p.z - S.z0
     return pt(r6(t.dx + u * t.scale), r6(t.dz + v * t.scale))
   }
-  const tried = [make(false, false), make(true, false), make(false, true), make(true, true)].map((t) => {
+  const tried = (opt.oriented ? [make(false, false)] : [make(false, false), make(true, false), make(false, true), make(true, true)]).map((t) => {
     const fp = src.footprint.map((poly) => poly.map(apply(t)))
     const out = coveredByAny(ground, fp)
     const into = Math.min(...fp.map((poly) => covered(poly, ground)))
@@ -127,7 +128,7 @@ export function resolveInterior(src: HouseInteriorSource, g: Pick<HouseGeometry,
   if (doorDecides) tied.splice(0, tied.length, ...byDoor)
   const byOpenings = byAll || doorDecides
   const best = byOpenings ? tied[0] : tried[0]
-  const second = byOpenings ? { overlap: tried[0].overlap - 0.03 - 1e-9, t: tied[1].t } : tried[1]
+  const second = byOpenings ? { overlap: tried[0].overlap - 0.03 - 1e-9, t: tied[1].t } : (tried[1] ?? { overlap: 0, t: tried[0].t })
   if (tied.length > 1) checks.push({ id: 'interior-orientation', what: 'which way the interior source lies, where the outline alone does not say', expected: 'the house\'s exterior openings (its elevations) and the source\'s (its plan) within 0.35 m on average one way round, the next ≥ 0.15 m further apart — or, where they are symmetric, its doors within 0.5 m one way round and ≥ 0.5 m further the next', measured: tied.map((x) => `${x.t.mirrorX || x.t.mirrorZ ? `mirrored${x.t.mirrorX ? ' x' : ''}${x.t.mirrorZ ? ' z' : ''}` : 'as drawn'} openings ${x.openings.toFixed(2)} m, doors ${Number.isFinite(x.doors) ? `${x.doors.toFixed(2)} m` : 'none'}`).join('; ') + (doorDecides ? '; the doors decide (the openings alone do not)' : '') + ` (${centres.length} opening(s) of the house)`, status: byOpenings ? 'PASS' : 'FAIL' })
   checks.push({ id: 'interior-register', what: 'the interior source lies on the house\'s ground outline', expected: `its footprint and the outline cover each other ≥ ${INTERIOR_RULES.overlap * 100} %, one way round clearly best`, measured: `${(best.overlap * 100).toFixed(1)} % ${best.t.mirrorX || best.t.mirrorZ ? `mirrored${best.t.mirrorX ? ' in x' : ''}${best.t.mirrorZ ? ' in z' : ''}` : 'as drawn'}; next way round ${(second.overlap * 100).toFixed(1)} %`, status: best.overlap >= INTERIOR_RULES.overlap && best.overlap - second.overlap >= 0.03 ? 'PASS' : 'FAIL' })
   if (best.overlap < INTERIOR_RULES.overlap || best.overlap - second.overlap < 0.03) {
@@ -291,4 +292,252 @@ export function resolveInterior(src: HouseInteriorSource, g: Pick<HouseGeometry,
     checks,
     knownDefects,
   }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// v3.54.10 — the interior read from each storey's own plan, placed by the same checked transform, and merged with an
+// import from LOCAL without removing what the import placed.
+// ---------------------------------------------------------------------------------------------------------------------
+
+type StoreyObs = NonNullable<HouseObservations['storeys']>[number]
+export const PLAN_INTERIOR_RULES = {
+  /** A partition thickness the plan does not give, and a door width: conventions, said. */
+  partitionM: 0.12,
+  doorWidthM: 0.9,
+  doorHeightM: 2.05,
+  /** A door belongs to the partition whose middle line passes within this distance of it. */
+  doorToWallM: 0.4,
+  /** Two partitions are one when parallel (within 10°), this close and overlapping half the shorter. */
+  sameWallM: 0.25,
+  /** A plan room splits an imported room when this share of it lies inside that room. */
+  splitShare: 0.7,
+} as const
+
+/** Pixels of a plan as printed → the house's orientation (x left→right seen from the front, z from the front back). */
+function oriented(edge: StoreyObs['frontEdge'], p: { x: number; y: number }): P2 {
+  return edge === 'BOTTOM' ? pt(p.x, -p.y) : edge === 'TOP' ? pt(-p.x, p.y) : edge === 'LEFT' ? pt(p.y, p.x) : pt(-p.y, -p.x)
+}
+
+/** One storey's plan reading as an interior source (pre-scaled to metres by its outline against the house's), for `resolveInterior`. */
+export function storeySource(st: StoreyObs, g: Pick<HouseGeometry, 'outlines' | 'levels' | 'wallThicknessM'>): HouseInteriorSource | undefined {
+  return storeyFrame(st, g)?.src
+}
+/** The same, with the map from the plan's pixels into the source's frame (for points read on that plan, like callouts). */
+export function storeyFrame(st: StoreyObs, g: Pick<HouseGeometry, 'outlines' | 'levels' | 'wallThicknessM'>): { src: HouseInteriorSource; map: (p: { x: number; y: number }) => { x: number; z: number } } | undefined {
+  const house = g.outlines.find((o) => o.level === st.level)?.polygon
+  const lvl = g.levels.find((l) => l.index === st.level)
+  if (!house || !lvl) return undefined
+  const O = (p: { x: number; y: number }) => oriented(st.frontEdge, p)
+  const out = st.outline.map(O)
+  const S = bbox(out)
+  const H = bbox(house.map((p) => pt(p.x, p.z)))
+  const s = ((H.x1 - H.x0) / Math.max(1e-6, S.x1 - S.x0) + (H.z1 - H.z0) / Math.max(1e-6, S.z1 - S.z0)) / 2
+  const M = (p: { x: number; y: number }): { x: number; z: number } => {
+    const q = O(p)
+    return { x: r6(q.x * s), z: r6(q.z * s) }
+  }
+  const walls = st.partitions.map((w) => ({ id: w.id, a: M(w.a), b: M(w.b), thickness: r6(Math.min(0.3, Math.max(0.06, w.thicknessPx ? w.thicknessPx * s : PLAN_INTERIOR_RULES.partitionM))) }))
+  const doors = st.doors.flatMap((d) => {
+    const c = M(d.at)
+    const best = walls.map((w) => ({ w, ...toSegment(pt(c.x, c.z), pt(w.a.x, w.a.z), pt(w.b.x, w.b.z)) })).filter((x) => x.d <= PLAN_INTERIOR_RULES.doorToWallM).sort((p, q) => p.d - q.d)[0]
+    if (!best) return []
+    const L = Math.hypot(best.w.b.x - best.w.a.x, best.w.b.z - best.w.a.z)
+    const width = d.widthPx ? d.widthPx * s : PLAN_INTERIOR_RULES.doorWidthM
+    return [{ id: d.id, wallId: best.w.id, offset: r6(Math.max(0, best.t * L - width / 2)), width: r6(width), height: PLAN_INTERIOR_RULES.doorHeightM }]
+  })
+  const ext = out.map((p) => pt(p.x * s, p.z * s))
+  const E = bbox(ext)
+  const src: HouseInteriorSource = {
+    origin: 'PLAN',
+    modelHash: `${st.picture}#${st.id}`,
+    extent: { x0: E.x0, x1: E.x1, z0: E.z0, z1: E.z1 },
+    footprint: [ext.map((p) => ({ x: r6(p.x), z: r6(p.z) }))],
+    exteriorThicknessM: g.wallThicknessM.value ?? 0.4,
+    exteriorOpenings: [],
+    levels: [{ index: st.level, elevation: lvl.elevation.value ?? 0, walls, doors, rooms: st.rooms.map((r) => ({ id: r.id, polygon: r.polygon.map(M), ...(r.name ? { usage: r.name } : {}) })), stairs: [], voids: st.voids.map((v) => v.map(M)) }],
+  }
+  return { src, map: M }
+}
+
+/** A point of an interior source's frame placed through the transform `resolveInterior` chose for it. */
+export function placeThrough(src: HouseInteriorSource, t: { mirrorX: boolean; mirrorZ: boolean; scale: number; dx: number; dz: number }, p: { x: number; z: number }): P2 {
+  const S = src.extent
+  const u = t.mirrorX ? S.x1 - p.x : p.x - S.x0
+  const v = t.mirrorZ ? S.z1 - p.z : p.z - S.z0
+  return pt(r6(t.dx + u * t.scale), r6(t.dz + v * t.scale))
+}
+
+/** Is wall b the same partition as wall a (parallel, close, overlapping)? */
+function sameWall(a: { a: { x: number; z: number }; b: { x: number; z: number } }, b: { a: { x: number; z: number }; b: { x: number; z: number } }): boolean {
+  const ua = { x: a.b.x - a.a.x, z: a.b.z - a.a.z }
+  const ub = { x: b.b.x - b.a.x, z: b.b.z - b.a.z }
+  const la = Math.hypot(ua.x, ua.z)
+  const lb = Math.hypot(ub.x, ub.z)
+  if (la < 1e-6 || lb < 1e-6) return false
+  if (Math.abs(ua.x * ub.z - ua.z * ub.x) / (la * lb) > Math.sin((10 * Math.PI) / 180)) return false
+  const ta = toSegment(pt(b.a.x, b.a.z), pt(a.a.x, a.a.z), pt(a.b.x, a.b.z))
+  const tb = toSegment(pt(b.b.x, b.b.z), pt(a.a.x, a.a.z), pt(a.b.x, a.b.z))
+  // perpendicular distance of b's line from a's, and the overlap of their projections on a
+  const dist = Math.abs(((b.a.x - a.a.x) * ua.z - (b.a.z - a.a.z) * ua.x) / la)
+  const t0 = Math.max(0, Math.min(ta.t, tb.t))
+  const t1 = Math.min(1, Math.max(ta.t, tb.t))
+  return dist <= PLAN_INTERIOR_RULES.sameWallM && (t1 - t0) * la >= 0.5 * Math.min(la, lb)
+}
+
+/**
+ * Merge a storey's plan reading into what an import placed on that level. Nothing the import placed is removed: a plan
+ * partition that is not already there is added (with its doors), a door the plan shows on a partition the import has
+ * without a door there is added, an imported room the plan's partitions split is replaced by the plan's rooms inside it
+ * (the largest keeps the imported id, so links to it survive), floor openings the import lacks are added. Open zones
+ * never add a wall.
+ */
+export function mergePlanLevel(local: HouseInterior['levels'][number] | undefined, plan: HouseInterior['levels'][number], openRooms: ReadonlySet<string>): { level: HouseInterior['levels'][number]; added: { walls: number; doors: number; rooms: number; voids: number } } {
+  if (!local) return { level: { ...plan, origin: 'PLAN' }, added: { walls: plan.walls.length, doors: plan.doors.length, rooms: plan.rooms.length, voids: plan.voids.length } }
+  const lv: HouseInterior['levels'][number] = { ...local, walls: [...local.walls], doors: [...local.doors], rooms: [...local.rooms], voids: [...local.voids], dropped: [...local.dropped], origin: 'LOCAL+PLAN' }
+  const added = { walls: 0, doors: 0, rooms: 0, voids: 0 }
+  const newWalls = new Set<string>()
+  for (const w of plan.walls) {
+    const twin = local.walls.find((x) => sameWall(x, w))
+    if (twin) {
+      for (const d of plan.doors.filter((q) => q.wallId === w.id)) {
+        // the door's middle on the plan partition, then on the imported twin
+        const L = Math.hypot(w.b.x - w.a.x, w.b.z - w.a.z) || 1
+        const m = pt(w.a.x + ((w.b.x - w.a.x) * (d.offset + d.width / 2)) / L, w.a.z + ((w.b.z - w.a.z) * (d.offset + d.width / 2)) / L)
+        const on = toSegment(m, pt(twin.a.x, twin.a.z), pt(twin.b.x, twin.b.z))
+        const TL = Math.hypot(twin.b.x - twin.a.x, twin.b.z - twin.a.z)
+        const at = on.t * TL
+        if (local.doors.some((q) => q.wallId === twin.id && Math.abs(q.offset + q.width / 2 - at) < 0.6)) continue
+        const off = at - d.width / 2
+        if (off < 0.05 || off + d.width > TL - 0.05) continue
+        lv.doors.push({ id: `${twin.id}-${d.id}`, wallId: twin.id, offset: r6(off), width: d.width, height: d.height })
+        added.doors += 1
+      }
+      continue
+    }
+    // the parts of it a collinear partition already holds are not built twice: only the rest is added, in pieces
+    const WL = Math.hypot(w.b.x - w.a.x, w.b.z - w.a.z)
+    const wu = { x: (w.b.x - w.a.x) / (WL || 1), z: (w.b.z - w.a.z) / (WL || 1) }
+    const taken: Array<[number, number]> = []
+    for (const x of local.walls) {
+      const xl = Math.hypot(x.b.x - x.a.x, x.b.z - x.a.z) || 1
+      if (Math.abs((wu.x * (x.b.z - x.a.z) - wu.z * (x.b.x - x.a.x)) / xl) > Math.sin((10 * Math.PI) / 180)) continue
+      const dist = Math.abs((x.a.x - w.a.x) * wu.z - (x.a.z - w.a.z) * wu.x)
+      if (dist > (x.thickness + w.thickness) / 2 + 0.02) continue
+      const t0 = (x.a.x - w.a.x) * wu.x + (x.a.z - w.a.z) * wu.z
+      const t1 = (x.b.x - w.a.x) * wu.x + (x.b.z - w.a.z) * wu.z
+      const lo = Math.max(0, Math.min(t0, t1) - w.thickness / 2)
+      const hi = Math.min(WL, Math.max(t0, t1) + w.thickness / 2)
+      if (hi - lo > 0.01) taken.push([lo, hi])
+    }
+    taken.sort((p, q) => p[0] - q[0])
+    const free: Array<[number, number]> = []
+    let cur = 0
+    for (const [lo, hi] of taken) {
+      if (lo > cur) free.push([cur, lo])
+      cur = Math.max(cur, hi)
+    }
+    if (cur < WL) free.push([cur, WL])
+    const pieces = free.filter(([lo, hi]) => hi - lo >= 0.3)
+    if (pieces.length !== 1 || pieces[0][1] - pieces[0][0] < WL - 0.01) {
+      newWalls.delete(w.id)
+      pieces.forEach(([lo, hi], k) => {
+        const piece = { ...w, id: `${w.id}-${k + 1}`, a: { x: r6(w.a.x + wu.x * lo), z: r6(w.a.z + wu.z * lo) }, b: { x: r6(w.a.x + wu.x * hi), z: r6(w.a.z + wu.z * hi) }, how: `${w.how ? `${w.how}; ` : ''}the part ${lo.toFixed(2)}–${hi.toFixed(2)} m not already built` }
+        lv.walls.push({ ...piece, id: `plan-${piece.id}`, how: `from the storey's plan reading; ${piece.how}` })
+        added.walls += 1
+        for (const d of plan.doors.filter((q) => q.wallId === w.id && q.offset >= lo && q.offset + q.width <= hi)) {
+          lv.doors.push({ ...d, id: `plan-${d.id}`, wallId: `plan-${piece.id}`, offset: r6(d.offset - lo) })
+          added.doors += 1
+        }
+      })
+      for (const d of plan.doors.filter((q) => q.wallId === w.id && !pieces.some(([lo, hi]) => q.offset >= lo && q.offset + q.width <= hi))) lv.dropped.push({ id: d.id, kind: 'door', why: `its partition ${w.id} is partly built already; the door does not lie wholly on the part added nor on a partition there` })
+      continue
+    }
+    // an end that stops on a partition already there is a butt joint: brought back to that partition's face (never
+    // into it — the kernel refuses two walls sharing plan area — and never removed)
+    const ends = [w.a, w.b].map((end, i) => {
+      const other = i === 0 ? w.b : w.a
+      const L = Math.hypot(other.x - end.x, other.z - end.z) || 1
+      const u = { x: (other.x - end.x) / L, z: (other.z - end.z) / L }
+      for (const x of local.walls) {
+        const on = toSegment(pt(end.x, end.z), pt(x.a.x, x.a.z), pt(x.b.x, x.b.z))
+        const reach = x.thickness / 2 + w.thickness / 2 + 0.03
+        if (on.d > reach || on.t < -0.02 || on.t > 1.02) continue
+        const xl = Math.hypot(x.b.x - x.a.x, x.b.z - x.a.z) || 1
+        const along = Math.abs((u.x * (x.b.x - x.a.x) + u.z * (x.b.z - x.a.z)) / xl)
+        if (along > 0.2) continue
+        // the signed distance of the end from the other wall's middle line, moved to its face plus a hair
+        const nx = -(x.b.z - x.a.z) / xl
+        const nz = (x.b.x - x.a.x) / xl
+        const sd = (end.x - x.a.x) * nx + (end.z - x.a.z) * nz
+        const side = Math.sign((other.x - x.a.x) * nx + (other.z - x.a.z) * nz) || 1
+        const want = side * (x.thickness / 2 + 0.002)
+        const dt = (want - sd) / (u.x * nx + u.z * nz || 1)
+        return { p: { x: r6(end.x + u.x * dt), z: r6(end.z + u.z * dt) }, how: `end ${i === 0 ? 'a' : 'b'} butts on ${x.id}` }
+      }
+      return { p: end, how: '' }
+    })
+    const hows = ends.map((e) => e.how).filter(Boolean)
+    lv.walls.push({ ...w, a: ends[0].p, b: ends[1].p, id: `plan-${w.id}`, how: `from the storey's plan reading${w.how ? `; ${w.how}` : ''}${hows.length ? `; ${hows.join('; ')}` : ''}` })
+    newWalls.add(w.id)
+    added.walls += 1
+    for (const d of plan.doors.filter((q) => q.wallId === w.id)) {
+      lv.doors.push({ ...d, id: `plan-${d.id}`, wallId: `plan-${w.id}` })
+      added.doors += 1
+    }
+  }
+  if (added.walls > 0) {
+    const rooms: typeof lv.rooms = []
+    for (const r of lv.rooms) {
+      const inside = plan.rooms.filter((p) => !openRooms.has(p.id) && covered(p.polygon, r.polygon) >= PLAN_INTERIOR_RULES.splitShare)
+      if (inside.length < 2) {
+        rooms.push(r)
+        continue
+      }
+      const byArea = [...inside].sort((p, q) => Math.abs(signedArea(q.polygon)) - Math.abs(signedArea(p.polygon)))
+      byArea.forEach((p, i) => rooms.push({ id: i === 0 ? r.id : `${r.id}-${p.id}`, polygon: p.polygon, ...(p.usage ?? r.usage ? { usage: (p.usage ?? r.usage) as string } : {}) }))
+      added.rooms += byArea.length - 1
+    }
+    lv.rooms = rooms
+  }
+  if (local.voids.length === 0 && plan.voids.length > 0) {
+    lv.voids.push(...plan.voids)
+    added.voids += plan.voids.length
+  }
+  return { level: lv, added }
+}
+
+/** The plan readings of every storey, placed and merged into `interior` (which may hold a LOCAL import). */
+export function interiorFromStoreys(storeys: readonly StoreyObs[], g: Pick<HouseGeometry, 'outlines' | 'levels' | 'wallThicknessM'>, interior: HouseInterior): InteriorResolution {
+  const checks: InteriorResolution['checks'] = []
+  const knownDefects: InteriorResolution['knownDefects'] = []
+  const out: HouseInterior = { ...interior, levels: [...interior.levels], read: [...(interior.read ?? [])] }
+  for (const st of storeys) {
+    const src = storeySource(st, g)
+    if (!src) {
+      out.read?.push({ level: st.level, status: 'NOT_PLACED', how: `the house has no level ${st.level} outline to register the plan on` })
+      continue
+    }
+    const ir = resolveInterior(src, g, { registerLevel: st.level, oriented: true })
+    checks.push(...ir.checks.map((c) => ({ ...c, id: `${c.id}-plan-${st.level}` })))
+    const placed = ir.interior.levels.find((l) => l.level === st.level)
+    if (ir.interior.transform && (!placed || placed.walls.length + placed.rooms.length + placed.doors.length + placed.voids.length === 0)) {
+      out.read?.push({ level: st.level, status: 'PLACED', how: `${ir.interior.transform.how}; registered, nothing of its interior to place`, added: { walls: 0, doors: 0, rooms: 0, voids: 0 } })
+      continue
+    }
+    if (!placed || ir.interior.status === 'NOT_BUILT') {
+      knownDefects.push(...ir.knownDefects.map((k) => ({ ...k, what: `storey ${st.level} plan: ${k.what}` })))
+      out.read?.push({ level: st.level, status: 'NOT_PLACED', how: ir.interior.note ?? 'not placed' })
+      continue
+    }
+    const at = out.levels.findIndex((l) => l.level === st.level)
+    const merged = mergePlanLevel(at >= 0 ? out.levels[at] : undefined, placed, new Set(st.rooms.filter((r) => r.open).map((r) => r.id)))
+    if (at >= 0) out.levels[at] = merged.level
+    else out.levels.push(merged.level)
+    out.read?.push({ level: st.level, status: 'PLACED', how: `${ir.interior.transform?.how ?? ''}; ${merged.level.origin === 'PLAN' ? 'the level comes from the plan reading' : 'merged with the LOCAL import (nothing it placed removed)'}`, added: merged.added })
+  }
+  out.levels.sort((p, q) => p.level - q.level)
+  const any = out.levels.some((l) => l.walls.length + l.rooms.length > 0)
+  if (any && out.status === 'NOT_BUILT') out.status = 'PARTIAL'
+  if (out.read?.some((r) => r.status === 'PLACED')) out.note = `${out.note ? `${out.note}; ` : ''}plan readings: ${out.read.map((r) => `storey ${r.level} ${r.status}${r.added ? ` (+${r.added.walls} partition(s), +${r.added.doors} door(s), +${r.added.rooms} room(s))` : ''}`).join(', ')}`
+  return { interior: out, checks, knownDefects }
 }

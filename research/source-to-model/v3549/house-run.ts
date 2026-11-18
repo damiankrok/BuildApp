@@ -24,9 +24,9 @@ import { buildMobileSceneBundle, serializeBundle } from '@buildapp/mobile-scene'
 import { anthropicConsultant } from '../../../packages/analysis-service/src/consult/anthropic.js'
 import { renderModelViews } from '../../../packages/analysis-service/src/consult/model-views.js'
 import { housePictures } from '../../../packages/analysis-service/src/house/pictures.js'
-import { HOUSE_READING_LIMITS, ReadingFailed, readFacades, readInventory, readPlan } from '../../../packages/analysis-service/src/house/read.js'
+import { HOUSE_READING_LIMITS, ReadingFailed, readExtras, readFacades, readInventory, readPlan } from '../../../packages/analysis-service/src/house/read.js'
 import type { ReadingContext, ReadingRecord, ReadingStep } from '../../../packages/analysis-service/src/house/read.js'
-import { arbitrate, compileHouse, documentFromReading, planFactsForFacades } from '../../../packages/analysis-service/src/house/describe.js'
+import { arbitrate, compileHouse, documentFromReading, extrasInput, planFactsForFacades } from '../../../packages/analysis-service/src/house/describe.js'
 import type { CompiledHouse, LocalMeasure } from '../../../packages/analysis-service/src/house/describe.js'
 import { deliveredQuality } from '../../../packages/analysis-service/src/house/describe.js'
 import type { DefectRecord } from '../../../packages/analysis-service/src/house/review.js'
@@ -164,7 +164,11 @@ async function main(): Promise<void> {
       // --plan-only (ablation): the plan's dimensions, outline and bodies alone, as if no section or elevation was read
       if (!flag('plan-only') && selection.elevations.length + selection.sections.length > 0) {
         const facades = await readFacades(ctx, selection, plan.answer, bodiesInMetres, published)
-        const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer } })
+        // v3.54.10: DETAILS and one STOREY reading per plan; a recording made before them says they were not read
+        const extras = await readExtras(ctx, selection, facades, plan.answer.bodies.map((b) => b.id))
+        const ex = extrasInput(extras, records)
+        summary.extras = { details: !!extras.details, storeys: extras.storeys.map((x) => x.level), absent: extras.absent, idRule: ex.idRule }
+        const converted = documentFromReading({ ...base, facadesSent: facades.sent, coverage: facades.coverage, ...(ex.detailsSent ? { detailsSent: ex.detailsSent } : {}), idRule: ex.idRule, notRead: ex.notRead, answers: { inventory: inventory.answer, plan: plan.answer, facades: facades.answer, ...ex.answers } })
         summary.facadeCoverage = facades.coverage
         notes = converted.notes
         observationsDocument = converted.document
