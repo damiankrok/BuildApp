@@ -1,0 +1,18 @@
+# v3.54.11 regression: recorded answers replayed on caecb9a/84de494 code vs the same replays on v3.54.10 (62350cc); model.json byte comparison
+R-DEV c4-archon-frizeach-g2e SAME
+R-DEV c4-archon-lubczyku-2 SAME
+R-DEV c4-dobredomy-pallas SAME
+R-DEV c4-lipinscy-dublin SAME
+R-DEV c4-lipinscy-oslo SAME
+R-DEV c4-studioatrium-wena SAME
+R-CNEW c5-architecturaldesigns-550029lan SAME
+R-CNEW c5-archon-anodach-3-g2e SAME
+R-CNEW c5-archon-malaxisach-2-e SAME
+R-CNEW c5-dobredomy-kardamon SAME
+R-CNEW c5-extradom-mirabelka-4 no model in either (replay NOT_SENT: the recording's INVENTORY does not match the selection, as on v3.54.10)
+R-CNEW c5-extradom-tracja-2 no model in either (replay NOT_SENT: the recording's INVENTORY does not match the selection, as on v3.54.10)
+R-CNEW c5-lipinscy-alaska SAME
+R-CNEW c5-studioatrium-pliszka-v-plus SAME
+LAr c5-lipinscy-alaska SAME
+
+Marcówki GE H: the v3.54.10 live recording replayed (HM1..HM4, identical models): geometry unchanged, the portal band members take the zone finish (mat-zone-plaster-dark) — the intended change.

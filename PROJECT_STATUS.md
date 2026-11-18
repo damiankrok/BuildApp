@@ -12,6 +12,23 @@
 
 ## Current summary (read first)
 
+- **v3.54.11 (2026-11-18): APK with the real H, finish on the right element, LOCAL on image layers** (prompt
+  v3.54.11 with Master Plan v3.54.11 copied in full to `docs/MASTER_PLAN.md`). Code `38592f7`, `caecb9a`, `84de494`,
+  `d88f13c` (APK 1342 built from it). Report `stage-reports/SOURCE_TO_MODEL_V35411.md`, OWNER index
+  `stage-reports/README_V35411.md`, ADR `docs/ADR-V35411-ELEMENT-FINISH-APK-IMAGE-LAYERS.md`, hand-off
+  `research/source-to-model/v35411/HANDOFF.md`. What exists now: sealed scenes "Marcówki — H po naprawie v3.54.11"
+  (`35602721…`), "Marcówki — H v3.54.10, kandydat" (`826085f5…`, the ZIP's replay model) and "Marcówki — LOCAL oddany
+  przez host" (`36f522a4…`) listed first; scene-list tests read the shipped index. APK 1341 (two scenes) and 1342
+  (three; arm64, preview signature v2, SHA-256 `8cbad72d…5242`) verified after extraction; ANDROID_UI_NOT_VERIFIED.
+  D53: a finish zone covering ≥ 60 % of a portal band's face is that element's finish (whole FASCIA member);
+  `ELEMENT_FINISH_CONFLICT`, `ZONE_BODY_SPAN`, `ELEMENT_FINISH_PARTIAL` said; the gable frame stays light; document
+  0.7.0, resolver 0.8.0, builder 0.7.0, house path 0.7.0, model schema unchanged. Zone points on the H scene 11/14 →
+  14/14; scorer v1.1 (portal soffit 2.261, truth 2.28) beside v1 (2.781 = garage roof plate). Image layers (A / B-auto
+  / B-mask, sky-fill causal trial; Marcówki, Frizeach, Pallas, Oslo): no B variant improves LOCAL; the hand mask equals
+  the originals, the automatic white fill erases Marcówki's white gable frame; no preprocessor in production, C and the
+  API region reading not run. 0 USD; books unchanged 23.808382 of 24.11036 USD. Private package
+  `/home/user/BuildPlan-V35411-Private.zip`.
+
 - **v3.54.10 (2026-11-18): one versioned reading contract, the right windows, consistent elevations** (prompt
   v3.54.10; the Master Plan v3.54.10 arrived after the report and is copied in full to `docs/MASTER_PLAN.md`;
   reconciliation with D48–D51 in report §16). Code `397a809`

@@ -2,12 +2,12 @@
  * v3.54.11 — derived source packages for the LOCAL image-layer experiment (protocol: LAYERS_PROTOCOL.md).
  *
  *   npx vite-node research/source-to-model/v35411/layers.ts -- --package <pkg.json> --cache <dir> --mode auto|mask
- *        [--masks <masks.json>] --out <dir>
+ *        [--masks <masks.json>] [--fill r,g,b] --out <dir>
  *
  * Every photographic picture (ELEVATION, PERSPECTIVE_RENDER) is replaced, in every variant, by a derivative of its
  * own decoded pixels; plans, sections, site plans and anything else are passed through byte for byte. The derivative:
  *  - auto: pixels that are sky-blue or vegetation-green AND connected to the picture's border through such pixels are
- *    set to flat white (the background). Nothing else changes — white clouds, the building, its glass, any logo stay.
+ *    set to a flat fill (`--fill r,g,b`, default white: the background). Nothing else changes — white clouds, the building, its glass, any logo stay.
  *  - mask (MANUAL_MASK_DIAGNOSTIC): every pixel outside a hand-traced building polygon (masks.json, in the selected
  *    variant's pixels, scaled to each variant) is set to flat white. A picture with no polygon is passed through.
  * Inside the kept region every pixel is the original decoded pixel (stored as PNG: lossless). The derivative has its
@@ -33,6 +33,9 @@ const pkgPath = value('package') as string
 const cacheDir = value('cache') as string
 const mode = value('mode') as 'auto' | 'mask'
 const out = value('out') as string
+// the flat colour of the suppressed background (default white). v3.54.11 causal trial: a white fill erases the outer edge
+// of a white member (a gable frame) against the background; a flat colour no building tone takes keeps that edge
+const fill = (value('fill') ?? '255,255,255').split(',').map(Number) as [number, number, number]
 const masks = value('masks') ? (JSON.parse(readFileSync(value('masks') as string, 'utf8')) as Record<string, { polygons: Array<Array<[number, number]>> }>) : {}
 if (!pkgPath || !cacheDir || !out || (mode !== 'auto' && mode !== 'mask')) throw new Error('give --package, --cache, --mode auto|mask, --out')
 
@@ -135,10 +138,10 @@ async function main(): Promise<void> {
       let changed = 0
       for (let i = 0; i < r.width * r.height; i += 1)
         if (bg[i]) {
-          if (d[4 * i] !== 255 || d[4 * i + 1] !== 255 || d[4 * i + 2] !== 255) changed += 1
-          d[4 * i] = 255
-          d[4 * i + 1] = 255
-          d[4 * i + 2] = 255
+          if (d[4 * i] !== fill[0] || d[4 * i + 1] !== fill[1] || d[4 * i + 2] !== fill[2]) changed += 1
+          d[4 * i] = fill[0]
+          d[4 * i + 1] = fill[1]
+          d[4 * i + 2] = fill[2]
           d[4 * i + 3] = 255
         }
       const dr: Raster = { width: r.width, height: r.height, data: d }
@@ -157,6 +160,7 @@ async function main(): Promise<void> {
       const bytes = encodePng(dr)
       const h = sha(bytes)
       const url = `https://derived.invalid/${mode}/${h}.png`
+      const fillName = fill.join(',') === '255,255,255' ? 'white' : `rgb(${fill.join(',')})`
       await outCacheApi.put(url, bytes, 'image/png')
       writeFileSync(join(out, 'derived', `${asset.id}-${v.id}.png`), bytes)
       const mask: Raster = { width: r.width, height: r.height, data: new Uint8ClampedArray(r.width * r.height * 4) }
@@ -168,7 +172,7 @@ async function main(): Promise<void> {
         mask.data[4 * i + 3] = 255
       }
       writeFileSync(join(out, 'derived', `${asset.id}-${v.id}.mask.png`), encodePng(mask))
-      record.push({ asset: asset.id, variant: v.id, role: asset.roles.document, original: v.byteHash, available: true, derived: true, method: mode === 'auto' ? 'AUTO_BACKGROUND_SKY_VEGETATION@1' : 'MANUAL_MASK_DIAGNOSTIC@1', transform: 'identity: same size and frame; suppressed pixels set to white', derivedHash: h, url, pixels: r.width * r.height, suppressed: Array.from(bg).reduce((a, b) => a + b, 0), changed, edgesAdded: added, edgesKeptInsideKept: `${keptSame}/${keptAll}` })
+      record.push({ asset: asset.id, variant: v.id, role: asset.roles.document, original: v.byteHash, available: true, derived: true, method: mode === 'auto' ? 'AUTO_BACKGROUND_SKY_VEGETATION@1' : 'MANUAL_MASK_DIAGNOSTIC@1', transform: `identity: same size and frame; suppressed pixels set to ${fillName}`, derivedHash: h, url, pixels: r.width * r.height, suppressed: Array.from(bg).reduce((a, b) => a + b, 0), changed, edgesAdded: added, edgesKeptInsideKept: `${keptSame}/${keptAll}` })
       variants.push({ ...v, url, mediaType: 'image/png', byteLength: bytes.length, byteHash: h, discoveredVia: `DERIVED:${mode}:${v.byteHash}` })
     }
     // the selected variant keeps its id; ids are names, the bytes are the hash
@@ -178,7 +182,7 @@ async function main(): Promise<void> {
   delete (draft as { contentHash?: string }).contentHash
   const derived = SourcePackageSchema.parse({ ...draft, contentHash: sourcePackageContentHash(draft as never) })
   writeFileSync(join(out, 'package.json'), `${JSON.stringify(derived, null, 1)}\n`)
-  writeFileSync(join(out, 'record.json'), `${JSON.stringify({ schema: 'buildapp.v35411-layers/1', mode, sourcePackage: pkg.contentHash, derivedPackage: derived.contentHash, record }, null, 1)}\n`)
+  writeFileSync(join(out, 'record.json'), `${JSON.stringify({ schema: 'buildapp.v35411-layers/1', mode, fill, sourcePackage: pkg.contentHash, derivedPackage: derived.contentHash, record }, null, 1)}\n`)
   const d = record.filter((x) => x.derived)
   process.stdout.write(`${mode}: ${d.length} variant(s) derived, ${record.filter((x) => x.available === false).length} unavailable; package ${derived.contentHash.slice(0, 12)}\n`)
   for (const x of d) process.stdout.write(`  ${String(x.asset).slice(0, 50)} suppressed ${(Number(x.suppressed) / Number(x.pixels) * 100).toFixed(1)} % edges added ${x.edgesAdded} kept ${x.edgesKeptInsideKept}\n`)

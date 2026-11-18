@@ -1,0 +1,77 @@
+# v3.54.11 — the three Marcówki scenes of APK 1342, one ruler (measured on the sealed models / the APK's scene files)
+
+## 16 features, scorer v1 (historical, unchanged)
+H-v35410                 15/16
+   NO  portal head soffit                   truth 2.28 m (a band 0.79 m deep)                      model 2.78 m
+LOCAL-oddany             16/16
+H-v35411                 15/16
+   NO  portal head soffit                   truth 2.28 m (a band 0.79 m deep)                      model 2.78 m
+
+## portal head, scorer v1 beside v1.1
+H-v35410   v1 (first flat roof plate roof-garage-flat): top 3.031 soffit 2.781 | v1.1: top 3.038 soffit 2.261 [portal-front-2-2 2.261..3.038 cover 0.82, roof-garage-flat 2.781..3.031 cover 1.0] OK (truth top 3.07, soffit 2.28)
+LOCAL-oddany v1 (first flat roof plate roof-attached-0): top 3.06 soffit 2.321 | v1.1: top 3.06 soffit 2.321 [roof-attached-0 2.321..3.06 cover 1.0] OK (truth top 3.07, soffit 2.28)
+H-v35411   v1 (first flat roof plate roof-garage-flat): top 3.031 soffit 2.781 | v1.1: top 3.038 soffit 2.261 [portal-front-2-2 2.261..3.038 cover 0.82, roof-garage-flat 2.781..3.031 cover 1.0] OK (truth top 3.07, soffit 2.28)
+
+## 27 detail rows (v3.54.8 marcowki-detail.py)
+H-v35410                 21/27 (+2 unassessable)
+   NO  front frame band (vertical)                target 0.82                                           model 0.979
+   NO  front frame band (across the slope)        target 0.64                                           model 0.75
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.312
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+LOCAL-oddany             27/27 (+2 unassessable)
+H-v35411                 21/27 (+2 unassessable)
+   NO  front frame band (vertical)                target 0.82                                           model 0.979
+   NO  front frame band (across the slope)        target 0.64                                           model 0.75
+   NO  front frame inner contour at ¼             target 5.471                                          model 5.312
+   NO  rear frame band (vertical)                 target 0.82                                           model 0.983
+   NO  rear frame band (across the slope)         target 0.64                                           model 0.753
+   NO  rear frame inner contour at ¼              target 5.471                                          model 5.308
+
+## finish at the visible surface (zone-refs-marcowki.json, 14 points written before scoring)
+H-v35410: 11/14
+   NO  F-band-entrance    want DARK  got LIGHT portal-front-2-1 (LINEAR_SOLID, mat-member)
+   NO  F-band-garage      want DARK  got LIGHT portal-front-2-2 (LINEAR_SOLID, mat-member)
+   OK  F-wall-entrance    want DARK  got DARK  zone-front-14 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  F-wall-garage      want DARK  got DARK  zone-front-14-2 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  F-wood-ground      want WOOD  got WOOD  zone-front-12 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-wood-ground-2    want WOOD  got WOOD  zone-front-12 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-wood-gable       want WOOD  got WOOD  zone-front-13 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-frame-leg        want LIGHT got LIGHT frame-main-front-plate (WALL_PANEL, mat-member)
+   NO  R-band             want DARK  got LIGHT portal-rear-1-1 (LINEAR_SOLID, mat-member)
+   OK  R-gable-panel      want DARK  got DARK  zone-rear-7 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  R-wood-right       want WOOD  got WOOD  zone-rear-4 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  R-wood-left        want WOOD  got WOOD  zone-rear-5 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  R-garage           want DARK  got DARK  zone-rear-3 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  R-frame-leg        want LIGHT got LIGHT frame-main-rear-plate (WALL_PANEL, mat-member)
+LOCAL-oddany: 12/14
+   OK  F-band-entrance    want DARK  got DARK  balcony-front-1 (BALCONY, mat-render-dark)
+   OK  F-band-garage      want DARK  got DARK  roof-attached-0 (ROOF_TRIM, mat-render-dark)
+   OK  F-wall-entrance    want DARK  got DARK  finish-front-319 (SURFACE_REGION, mat-render-dark)
+   OK  F-wall-garage      want DARK  got DARK  ring-attached-0-0-w0 (WALL, mat-render-dark)
+   OK  F-wood-ground      want WOOD  got WOOD  finish-front-66 (SURFACE_REGION, mat-timber)
+   OK  F-wood-ground-2    want WOOD  got WOOD  finish-front-66 (SURFACE_REGION, mat-timber)
+   NO  F-wood-gable       want WOOD  got LIGHT ring-main-1-w0 (WALL, mat-wall)
+   OK  F-frame-leg        want LIGHT got LIGHT return-front-0-0 (WALL, mat-member)
+   OK  R-band             want DARK  got DARK  balcony-rear-1 (BALCONY, mat-render-dark)
+   NO  R-gable-panel      want DARK  got LIGHT ring-main-1-w2 (WALL, mat-wall)
+   OK  R-wood-right       want WOOD  got WOOD  finish-rear-66 (SURFACE_REGION, mat-timber)
+   OK  R-wood-left        want WOOD  got WOOD  finish-rear-66 (SURFACE_REGION, mat-timber)
+   OK  R-garage           want DARK  got DARK  ring-attached-0-0-w2 (WALL, mat-render-dark)
+   OK  R-frame-leg        want LIGHT got LIGHT return-rear-0-1 (WALL, mat-member)
+H-v35411: 14/14
+   OK  F-band-entrance    want DARK  got DARK  portal-front-2-1 (LINEAR_SOLID, mat-zone-plaster-dark)
+   OK  F-band-garage      want DARK  got DARK  portal-front-2-2 (LINEAR_SOLID, mat-zone-plaster-dark)
+   OK  F-wall-entrance    want DARK  got DARK  zone-front-14 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  F-wall-garage      want DARK  got DARK  zone-front-14-2 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  F-wood-ground      want WOOD  got WOOD  zone-front-12 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-wood-ground-2    want WOOD  got WOOD  zone-front-12 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-wood-gable       want WOOD  got WOOD  zone-front-13 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  F-frame-leg        want LIGHT got LIGHT frame-main-front-plate (WALL_PANEL, mat-member)
+   OK  R-band             want DARK  got DARK  portal-rear-1-1 (LINEAR_SOLID, mat-zone-plaster-dark)
+   OK  R-gable-panel      want DARK  got DARK  zone-rear-7 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  R-wood-right       want WOOD  got WOOD  zone-rear-4 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  R-wood-left        want WOOD  got WOOD  zone-rear-5 (SURFACE_REGION, mat-zone-wood-warm)
+   OK  R-garage           want DARK  got DARK  zone-rear-3 (SURFACE_REGION, mat-zone-plaster-dark)
+   OK  R-frame-leg        want LIGHT got LIGHT frame-main-rear-plate (WALL_PANEL, mat-member)
