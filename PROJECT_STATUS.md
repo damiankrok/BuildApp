@@ -13,7 +13,8 @@
 ## Current summary (read first)
 
 - **v3.54.10 (2026-11-18): one versioned reading contract, the right windows, consistent elevations** (prompt
-  v3.54.10; the Master Plan v3.54.10 was NOT attached, so `docs/MASTER_PLAN.md` stays v3.54.9). Code `397a809`
+  v3.54.10; the Master Plan v3.54.10 arrived after the report and is copied in full to `docs/MASTER_PLAN.md`;
+  reconciliation with D48–D51 in report §16). Code `397a809`
   (live job host), `d43eebe`, `62350cc` (final host). Report `stage-reports/SOURCE_TO_MODEL_V35410.md`, OWNER index
   `stage-reports/README_V35410.md`, ADR `docs/ADR-V35410-READING-CONTRACT-OPENINGS-ZONES.md`, hand-off
   `research/source-to-model/v35410/HANDOFF.md`. What exists now: reading contract 0.5.0 (`contract.ts`: answers

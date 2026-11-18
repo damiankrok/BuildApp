@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { mergePlanLevel, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
+import { parseModel, serializeModel } from '@buildapp/model'
 import { canonicalJson, conformAnswer, READING_CAPABILITIES, schemaFields, stableOpeningOrder } from '../src/house/contract.js'
 import { READING_TOOLS, ask } from '../src/house/read.js'
 import type { ReadingContext, ReadingRecord } from '../src/house/read.js'
@@ -190,6 +191,22 @@ describe('v3.54.10 divisions, hidden ends and finish zones reach the program', (
     for (const z of r.geometry.zones) byWall.set(`${z.hostWall}/${z.level}`, [...(byWall.get(`${z.hostWall}/${z.level}`) ?? []), { a0: Math.min(z.a0, z.a1), a1: Math.max(z.a0, z.a1), m: `${z.material}-${z.tone}` }])
     for (const list of byWall.values()) for (const p of list) for (const q of list) if (p !== q && p.m !== q.m) expect(Math.min(p.a1, q.a1) - Math.max(p.a0, q.a0)).toBeLessThan(0.1)
     expect(two('WOOD').verification.knownDefects.some((k) => k.code === 'ZONE_OVERLAP')).toBe(false)
+  })
+  it('a zone assignment survives save and load: the model written and read back keeps its regions and their materials', () => {
+    const doc = manual()
+    front(doc).zones = [{ id: 'z1', material: 'WOOD', tone: 'WARM', box: { x0: 126, y0: 160, x1: 230, y1: 298 }, bodyId: 'main', certainty: 'LIKELY' }]
+    const h = compileHouse(doc, 'v35410-z-save')
+    expect(h.modelJson).toBeDefined()
+    const once = parseModel(h.modelJson as string)
+    const again = parseModel(serializeModel(once))
+    const zones = (m: typeof once) => (m.surfaceRegions ?? []).filter((r) => String(r.materialId).startsWith('mat-zone-')).map((r) => [r.id, r.hostId, r.materialId, JSON.stringify(r.rect)])
+    expect(zones(once).length).toBeGreaterThan(0)
+    expect(zones(again)).toEqual(zones(once))
+    expect(again.materials.find((m) => m.id === 'mat-zone-wood-warm')).toEqual(once.materials.find((m) => m.id === 'mat-zone-wood-warm'))
+    // and the house document written and read back keeps the zone it was built from
+    const reread = parseHouseDocument(JSON.parse(JSON.stringify(h.document)))
+    expect(reread.ok).toBe(true)
+    if (reread.ok) expect(reread.document.geometry?.zones).toEqual(h.document.geometry?.zones)
   })
   it('counter: a zone the reader was not sure of (a shadow, a reflection) is not drawn', () => {
     const doc = manual()

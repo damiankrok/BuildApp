@@ -5,9 +5,8 @@ Gałąź `claude/new-session-3kzcgh`. Baza: kod / finalny host v3.54.9 `39fec90`
 znalezione na odczycie live), `62350cc` (inwentarz zdolności bez nieistniejących operacji) — **finalny host zbudowany
 z `62350cc`**, oraz commit tego raportu.
 
-**Master Plan v3.54.10 nie został dołączony** — przesłano tylko prompt. Prompt zabrania odtwarzania planu ze skrótu,
-więc `docs/MASTER_PLAN.md` pozostaje w wersji v3.54.9 (pełna kopia z poprzedniego etapu). To jest jawna rozbieżność do
-uzupełnienia przez OWNER-a, nie decyzja.
+**Master Plan v3.54.10** przyszedł po raporcie (najpierw przesłano tylko prompt); skopiowany w całości do
+`docs/MASTER_PLAN.md` (bajt w bajt). Uzgodnienie dostawy z jego §2, §7.13, §7.14, odbiorem §8 i D48–D51 — rozdz. 16.
 
 Wartości wzorcowe (`research/marcowki-v2/marcowki-source-truth-v2.json`) służą wyłącznie ocenie (DEV). Żadna liczba,
 nazwa ani domena projektu nie weszła do kodu produkcyjnego ani do pytań API (`AnalyzerPurityTest`, przegląd diffu).
@@ -198,7 +197,7 @@ kroku)”, zapisany w `extras.absent`.
 
 ## 8. Testy przyczynowe, iniekcja błędów, eksperymenty offline (§8)
 
-`packages/analysis-service/test/house-v35410.test.ts` — 25 testów: zgodność/kolejność kluczy/`JSON_TEXT`/odrzucenie
+`packages/analysis-service/test/house-v35410.test.ts` — 26 testów (25 + zapis/odczyt stref po dołączeniu planu): zgodność/kolejność kluczy/`JSON_TEXT`/odrzucenie
 pozycji/`null`; surowa kopia odpowiedzi; permutacja → te same id; reguła id dla starych nagrań; każde pole nowych
 kroków ma zadeklarowany los; JSON kanoniczny (kolejność wielokąta zachowana); opis z rzutu: przyczyna, opis w złym
 miejscu nie jest wciskany sąsiadowi, konflikt > dwóch definicji nie jest poprawką, skośne: skrajnia przy wysokim
@@ -299,3 +298,22 @@ sprawdzone.
 w bazie w tym środowisku** (testy architektury wymagające commitów bazowych w klonie, skan rozmiaru plików, zapis do
 repozytorium, ICU/hash local-analyzer; przebieg bazowy v3.54.9 miał 19, jego 4 dodatkowe porażki fixture Android są
 od tamtej pory naprawione). Nowych porażek brak. `results/matrix-final.txt`.
+
+## 16. Uzgodnienie z Master Planem v3.54.10 (dołączonym po raporcie)
+
+Plan nie zmienia zakresu promptu; dodaje decyzje D48–D51 i odbiór §8. Stan wobec nich (bez nowych wywołań API):
+
+| wymaganie | stan |
+|---|---|
+| D48 jeden wersjonowany kontrakt; kolejność kluczy nie zmienia wyniku | spełnione: `contract.ts` 0.5.0, testy kolejności/permutacji, R0 bajt w bajt |
+| D49 otwór / rama / szkło / zasłonięcie odrębne; oznaczenie z właściwą rolą | częściowo: opis z rzutu = otwór (`PRINTED`), rama z elewacji zapisana obok (`frame`), szkło (`GLASS` → +profil, `ESTIMATED`), zasłonięcie (`EXPOSED`, `hiddenBelowY`, `hiddenBy`); **kontur szkła nie jest osobnym wielobokiem w dokumencie** — jest regułą adaptera, nie zapisaną miarą |
+| D50 strefy w spójnej palecie; forma i materiał osobno | spełnione: strefy = regiony powierzchni w `low-poly@1`; rama i portal mierzone osobno (27 wierszy, 16 cech); strefa ma ścianę-host i prostokąt w jej układzie (otwory przecinają region w jądrze), **nie wielobok z odjętymi otworami** |
+| §7.14 zapis/wczytanie zachowuje przypisanie | spełnione: test (model zapisany i odczytany — regiony i materiały stref bez zmian; dokument domu — strefy bez zmian); host: dokument czytany dwa razy = te same bajty |
+| §7.14 dane wykończeń odrębne od kosztów | spełnione przez brak powiązania: strefy nie tworzą pozycji ani ilości; relacji z kosztami nie dodano |
+| D51 wnętrze LOCAL ≠ odczyt API; brak LOCAL ≠ brak dokumentacji | spełnione w kodzie: pochodzenie na poziomie (`LOCAL`, `LOCAL+PLAN`, `PLAN`), `interior.read[]` na kondygnację, id elementów z rzutu z prefiksem `plan-`; test: dom bez wnętrza LOCAL dostaje wnętrze z rzutu (`origin PLAN`) przez zwykły resolver i builder; **live na domu bez LOCAL — niezweryfikowane** |
+| §8 oba tylne skośne i dolne tarasowe: kontur, rama, szkło, kąt, pozycja, podziały | tylne skośne: szerokość, ościeża, oba końce, kąt w tolerancji po recenzji; taras: pozycja i podział OK, szerokość −0,07, nadproże +0,10 (w tolerancji), opis 470/230 niepowiązany |
+| §8 historyczne 16 i 27 jako dwa zestawy | 16 cech (v3.54.7): LOCAL 16/16, H-v3549 15/16, H-PRZED 15/16, H-PO 15/16, ODDANY 16/16 (jedyna porażka H: spód pasa portalu 2,78 vs 2,28); 27 wierszy: LOCAL 27, H-v3549 22, H-PRZED 20, H-PO 21, ODDANY 27 — `results/marcowki-features16.json`, `results/marcowki-metric-v1-rows.txt` |
+| §8 weryfikacja H i oddanego osobno | spełnione (rozdz. 1 pkt 8, rozdz. 5) |
+| §2 recenzent z celowanym pakietem (elewacja + oznaczenie z rzutu; rzut + poziom bez dachu) | spełnione w rundzie 1 (rozdz. 1 pkt 6) |
+| §2 maks. jeden job live w puli; rezerwacje uzgodnione | spełnione: 1 job, plan przed, 0,508982 USD |
+| kontrola geometrii w stałym neutralnym świetle; widok produktowy low-poly | tablice w jednym świetle; osobnego widoku produktowego nie renderowano |

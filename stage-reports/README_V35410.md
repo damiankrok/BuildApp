@@ -3,8 +3,8 @@
 Pełny raport: [`SOURCE_TO_MODEL_V35410.md`](SOURCE_TO_MODEL_V35410.md). Gałąź `claude/new-session-3kzcgh`; rewizje
 `397a809` (kod; host jedynego joba live), `d43eebe` (poprawki stref z odczytu live), `62350cc` (**finalny host**) i
 commit raportu. Hand-off: `research/source-to-model/v35410/HANDOFF.md`. ADR:
-`docs/ADR-V35410-READING-CONTRACT-OPENINGS-ZONES.md`. **Master Plan v3.54.10 nie był dołączony** —
-`docs/MASTER_PLAN.md` zostaje w v3.54.9.
+`docs/ADR-V35410-READING-CONTRACT-OPENINGS-ZONES.md`. Master Plan v3.54.10 (dołączony po raporcie, skopiowany
+w całości): `docs/MASTER_PLAN.md`; uzgodnienie z D48–D51 i odbiorem §8 — raport rozdz. 16.
 
 ## W pięciu zdaniach
 
@@ -34,9 +34,10 @@ commit raportu. Hand-off: `research/source-to-model/v35410/HANDOFF.md`. ADR:
 | okna przed → po | raport rozdz. 5; `results/marcowki-metric-v3.{json,txt}` |
 | strefy wykończenia | raport rozdz. 6 |
 | wnętrze z rzutów | raport rozdz. 7 |
-| testy przyczyn i iniekcje | raport rozdz. 8; `packages/analysis-service/test/house-v35410.test.ts` (25) |
+| testy przyczyn i iniekcje | raport rozdz. 8; `packages/analysis-service/test/house-v35410.test.ts` (26) |
 | regresja | raport rozdz. 9; `results/regression-v3549-vs-v35410.txt` |
 | job live, koszty | raport rozdz. 10; `results/live-plan.md`; `research/ai-assist/spend-ledger-v35410.json` |
 | host E2E | `results/host-397a809/` (job live), `results/host-62350cc/` (finalny) |
 | recenzja | `results/marcowki-H-PO-{review,proposals}.json` |
+| uzgodnienie z Master Planem v3.54.10 | raport rozdz. 16 |
 | tablice (źródło | LOCAL | H-v3549 | H-nowy przed | H-PO | ODDANY; zbliżenia; ukośne; kondygnacje) | pakiet prywatny `BuildPlan-V35410-Private.zip` (`boards/`) |

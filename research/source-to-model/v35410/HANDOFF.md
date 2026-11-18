@@ -2,8 +2,8 @@
 
 Revisions: `397a809` (contract 0.5.0, DETAILS/STOREY, consumers; host of the one live job), `d43eebe` (zone consumer
 fixes found on the live read; E2E check scope), `62350cc` (capability inventory; **final host built from it**), then
-the report commit. Base: `911ecb1` (v3.54.9 report; code / final host `39fec90`). Master Plan v3.54.10 was not
-attached: `docs/MASTER_PLAN.md` stays v3.54.9.
+the report commit. Base: `911ecb1` (v3.54.9 report; code / final host `39fec90`). Master Plan v3.54.10 arrived
+after the report: copied in full to `docs/MASTER_PLAN.md` (reconciliation in report §16).
 
 ## Private data (outside Git, `/home/user/rd/v35410/`)
 
@@ -35,4 +35,4 @@ attached: `docs/MASTER_PLAN.md` stays v3.54.9.
 
 23.808382 of 24.11036 USD after this stage (stage 0.508982 USD, 10 requests; ledger
 `research/ai-assist/spend-ledger-v35410.json`). 0.301978 USD left: a second job of this size does not fit.
-Private package: `/home/user/BuildPlan-V35410-Private.zip` (SHA-256 `43c53997cc3dd6b6afb9009eeb3f79c0bfca15edf678e6145b0f3c009e2bf849`).
+Private package: `/home/user/BuildPlan-V35410-Private.zip` (SHA-256 `4a75033c59f767ef3238b19012bacea767a44d1b8da1076334123986d22109ab`).
