@@ -14,7 +14,7 @@ import { parseModel, serializeModel } from '@buildapp/model'
 import { compileBuilding } from '@buildapp/geometry'
 import { buildMobileSceneBundle } from '@buildapp/mobile-scene'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
-import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, heightAgainstFigure, housePoly, outlineSteps, parseHouseDocument, resolveHouse } from '@buildapp/reconstruction'
+import { HOUSE_DOCUMENT_SCHEMA, HOUSE_DOCUMENT_VERSION, heightAgainstFigure, housePoly, outlineSteps, parseHouseDocument, resolveHouse, styleMaterial } from '@buildapp/reconstruction'
 import type { HouseDocument } from '@buildapp/reconstruction'
 import { buildHouse, headCapFor } from './build.js'
 import type { BuiltHouse, HeadCap } from './build.js'
@@ -420,10 +420,27 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
       }
     }
     for (const pb of g.portals ?? []) {
-      if (has(pb.id)) agreed += 1
-      else if (!v.held.some((h) => h.ref.includes(pb.id))) lost.push(`${pb.id}: a portal band agreed, not built, no reason held`)
+      if (!has(pb.id)) {
+        if (!v.held.some((h) => h.ref.includes(pb.id))) lost.push(`${pb.id}: a portal band agreed, not built, no reason held`)
+        continue
+      }
+      agreed += 1
+      // v3.54.11 — the band's OWN members in the scene (not a roof plate or a wall near it): their soffit and top
+      // against the agreed ones, and their material against the finish a zone gave the band
+      const members = Object.entries(measured.objects).filter(([id]) => id.startsWith(`${pb.id}-`))
+      if (members.length > 0) {
+        const soffit = Math.min(...members.map(([, b]) => b.y0))
+        const top = Math.max(...members.map(([, b]) => b.y1))
+        if (pb.soffitY.value !== null && Math.abs(soffit - pb.soffitY.value) > 0.1) lost.push(`${pb.id}: soffit agreed ${pb.soffitY.value.toFixed(2)} m, its members' lowest ${soffit.toFixed(2)} m`)
+        if (pb.topY.value !== null && Math.abs(top - pb.topY.value) > 0.1) lost.push(`${pb.id}: top agreed ${pb.topY.value.toFixed(2)} m, its members' highest ${top.toFixed(2)} m`)
+      }
+      if (pb.finish) {
+        const want = styleMaterial(pb.finish.material, pb.finish.tone).id
+        const mats = new Set((built.model.linearSolids ?? []).filter((x) => x.id.startsWith(`${pb.id}-`)).map((x) => x.materialId))
+        if (mats.size !== 1 || !mats.has(want)) lost.push(`${pb.id}: finish agreed ${want}, its members carry ${[...mats].join(', ') || 'nothing'}`)
+      }
     }
-    if (agreed + lost.length > 0) v.checks.push({ id: 'facade-values-built', scope: 'COMPILE', what: 'each accepted railing infill, frame leg end and portal band is in the compiled scene as agreed, or held with its reason', expected: 'built as agreed (legs within 0.10 m) or an explicit absence', measured: lost.length === 0 ? `${agreed} agreed value(s) built as agreed` : lost.join('; ').slice(0, 600), status: lost.length === 0 ? 'PASS' : 'FAIL', blocks: lost.length === 0 ? [] : ['quantities'] })
+    if (agreed + lost.length > 0) v.checks.push({ id: 'facade-values-built', scope: 'COMPILE', what: 'each accepted railing infill, frame leg end and portal band (its own members: soffit, top, finish) is in the compiled scene as agreed, or held with its reason', expected: 'built as agreed (legs within 0.10 m) or an explicit absence', measured: lost.length === 0 ? `${agreed} agreed value(s) built as agreed` : lost.join('; ').slice(0, 600), status: lost.length === 0 ? 'PASS' : 'FAIL', blocks: lost.length === 0 ? [] : ['quantities'] })
   }
   for (const view of v.views) {
     if (!view.elevation) {

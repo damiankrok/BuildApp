@@ -1,0 +1,23 @@
+{
+ "schema": "buildapp.v35411-zone-references/1",
+ "written": "2026-11-18, before any v3.54.11 model was scored against it",
+ "basis": "VISUAL: read by eye from the publisher's front and rear elevations (DEV; house frame: x east of the west outer face, y above ±0.00); the sealed truth holds only T2-PORTAL-HEAD.soffitFinish = timber (VISUAL)",
+ "classes": "DARK (dark render / cladding), WOOD (warm timber), LIGHT (light render, the white frame), GLASS",
+ "points": [
+  {"id": "F-band-entrance", "side": "FRONT", "x": 5.5, "y": 2.65, "want": "DARK", "element": "portal band face over the entrance"},
+  {"id": "F-band-garage", "side": "FRONT", "x": 9.5, "y": 2.65, "want": "DARK", "element": "portal band face over the garage"},
+  {"id": "F-wall-entrance", "side": "FRONT", "x": 6.0, "y": 1.5, "want": "DARK", "element": "recessed wall right of the entrance door"},
+  {"id": "F-wall-garage", "side": "FRONT", "x": 8.2, "y": 1.5, "want": "DARK", "element": "garage front wall left of the door"},
+  {"id": "F-wood-ground", "side": "FRONT", "x": 3.0, "y": 1.0, "want": "WOOD", "element": "ground wall left of the portal"},
+  {"id": "F-wood-ground-2", "side": "FRONT", "x": 1.1, "y": 1.0, "want": "WOOD", "element": "ground wall beside the frame leg"},
+  {"id": "F-wood-gable", "side": "FRONT", "x": 2.0, "y": 4.5, "want": "WOOD", "element": "gable wall inside the frame"},
+  {"id": "F-frame-leg", "side": "FRONT", "x": 0.3, "y": 2.0, "want": "LIGHT", "element": "gable frame leg"},
+  {"id": "R-band", "side": "REAR", "x": 4.6, "y": 2.75, "want": "DARK", "element": "rear band under the balcony"},
+  {"id": "R-gable-panel", "side": "REAR", "x": 3.9, "y": 5.0, "want": "DARK", "element": "gable wall between the raked glazings"},
+  {"id": "R-wood-right", "side": "REAR", "x": 1.4, "y": 1.2, "want": "WOOD", "element": "wood panel right of the terrace glazing (as seen)"},
+  {"id": "R-wood-left", "side": "REAR", "x": 7.1, "y": 1.2, "want": "WOOD", "element": "narrow wood strip left of the terrace glazing"},
+  {"id": "R-garage", "side": "REAR", "x": 11.4, "y": 1.5, "want": "DARK", "element": "garage rear wall"},
+  {"id": "R-frame-leg", "side": "REAR", "x": 7.75, "y": 1.5, "want": "LIGHT", "element": "gable frame leg"}
+ ],
+ "notRepresentable": [{"id": "F-soffit-entrance", "want": "WOOD", "why": "the band's soffit is timber (truth, VISUAL from the render); an elevation does not show it and a linear member has one material"}]
+}

@@ -24,7 +24,7 @@
 import { z } from 'zod'
 
 export const HOUSE_DOCUMENT_SCHEMA = 'buildapp.house-document' as const
-export const HOUSE_DOCUMENT_VERSION = '0.6.0' as const
+export const HOUSE_DOCUMENT_VERSION = '0.7.0' as const
 
 export const BasisSchema = z.enum(['PRINTED', 'DERIVED', 'ESTIMATED', 'DEFAULT', 'UNKNOWN'])
 export type Basis = z.infer<typeof BasisSchema>
@@ -423,8 +423,12 @@ export type HouseFrame = z.infer<typeof FrameSchema>
  * elevation draws it, one continuous band from `start` to `end` along the side's outer plane, from its soffit to its top,
  * standing `depthM` back from the outer plane (over a recess: to its back wall).
  */
+/** v0.7 — the finish a source zone gives a physical element (the whole member: its face, soffit and returns alike). */
+const ElementFinishSchema = z
+  .object({ material: z.string(), tone: z.string(), coverage: z.number(), basis: BasisSchema, how: z.string(), refs: z.array(z.string()).default([]) })
+  .strict()
 const PortalSchema = z
-  .object({ id: Id, side: SideSchema, start: Vec2, end: Vec2, topY: NumSchema, soffitY: NumSchema, depthM: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .object({ id: Id, side: SideSchema, start: Vec2, end: Vec2, topY: NumSchema, soffitY: NumSchema, depthM: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]), finish: ElementFinishSchema.optional() })
   .strict()
 export type HousePortal = z.infer<typeof PortalSchema>
 const ChimneySchema = z.object({ id: Id, rect: z.object({ x0: z.number(), z0: z.number(), x1: z.number(), z1: z.number() }).strict(), topY: NumSchema, basis: BasisSchema, refs: z.array(z.string()).default([]) }).strict()
@@ -514,7 +518,7 @@ export type HouseInterior = z.infer<typeof InteriorSchema>
 
 /** v0.6 — a finish zone agreed on a wall: host wall, along its outer face from its start, heights above its level's floor. */
 const ZoneSchema = z
-  .object({ id: Id, side: SideSchema, hostWall: Id, level: z.number().int(), a0: z.number(), a1: z.number(), b0: z.number(), b1: z.number(), material: z.string(), tone: z.string(), basis: BasisSchema, refs: z.array(z.string()).default([]) })
+  .object({ id: Id, side: SideSchema, hostWall: Id, level: z.number().int(), a0: z.number(), a1: z.number(), b0: z.number(), b1: z.number(), material: z.string(), tone: z.string(), basis: BasisSchema, refs: z.array(z.string()).default([]), /** v0.7: the body the reader named, and the body of the wall it lies on when that is another one (said, never silently taken). */ bodyRead: Id.optional(), bodyOfWall: Id.optional() })
   .strict()
 
 const GeometrySchema = z
@@ -655,7 +659,7 @@ export const HouseDocumentSchema = z
   .object({
     schema: z.literal(HOUSE_DOCUMENT_SCHEMA),
     /** 0.1.0 documents (v3.54.4) are a subset of 0.2.0 and are still read. */
-    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', '0.4.0', '0.5.0', HOUSE_DOCUMENT_VERSION]),
+    schemaVersion: z.enum(['0.1.0', '0.2.0', '0.3.0', '0.4.0', '0.5.0', '0.6.0', HOUSE_DOCUMENT_VERSION]),
     id: Id,
     /** MANUAL_DIAGNOSTIC: a hand-checked description on the test path — never a product result, never an AI result. */
     origin: z.enum(['API_SOURCE_DESCRIPTION', 'MANUAL_DIAGNOSTIC']),

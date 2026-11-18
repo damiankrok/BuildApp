@@ -41,7 +41,7 @@ import { interiorSourceOf } from './interior-source.js'
 import type { DefectRecord, ReviewPair, ReviewRound, Supplement } from './review.js'
 import type { Proposal } from './review.js'
 
-export const HOUSE_PATH_VERSION = '0.6.0'
+export const HOUSE_PATH_VERSION = '0.7.0'
 export type HouseDescriber = Pick<ReadingContext, 'modelFor' | 'price' | 'spend'> & {
   review?: boolean
   /** v3.54.6 (D39): the host's accepted revisions; with one under this analysis' binding, its answers are replayed. */

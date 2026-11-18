@@ -24,7 +24,7 @@ import { outlineSteps } from './steps.js'
 import type { OutlineStep } from './steps.js'
 
 export const HOUSE_BUILDER_NAME = 'reconstruction.house-builder' as const
-export const HOUSE_BUILDER_VERSION = '0.6.0' as const
+export const HOUSE_BUILDER_VERSION = '0.7.0' as const
 export const HOUSE_BUILDER_LABEL = 'MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ'
 
 type Code = (typeof TRACE_CODES)[number]
@@ -929,6 +929,8 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   // --- v3.54.8: portal bands — one head over an open front, along the outer plane from its soffit to its top and back
   // over the recess it heads. Where a balcony slab already stands in the band's height the band stops under it (one
   // solid in one place): the slab's own edge is the band there.
+  // v3.54.10/11: the style-profile materials defined so far (a finish zone's, an element finish's), each defined once
+  const zoneMats = new Set<string>()
   for (const pb of g.portals ?? []) {
     const path = `geometry.portals[${pb.id}]`
     const top = need(pb.topY, `${path}.topY`)
@@ -996,6 +998,16 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     }
     const marks = [...new Set([0, len, ...cuts.flatMap((c) => [c.a, c.b])])].filter((x) => x >= 0 && x <= len).sort((p, q) => p - q)
     const ids: string[] = []
+    // v3.54.11 — the band's own finish where a source zone gives it one; otherwise the light member it was
+    let bandMat: string = MATERIALS_V2.member
+    if (pb.finish) {
+      const fm = styleMaterial(pb.finish.material, pb.finish.tone)
+      if (!zoneMats.has(fm.id)) {
+        push({ type: 'defineMaterial', id: fm.id, name: fm.name, color: fm.color })
+        zoneMats.add(fm.id)
+      }
+      bandMat = fm.id
+    }
     for (let i = 0; i + 1 < marks.length; i += 1) {
       const a = marks[i]
       const b2 = marks[i + 1]
@@ -1007,7 +1019,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
       const yc = (t + soffit) / 2
       const at = (s0: number): { x: number; y: number; z: number } => ({ x: r6(pb.start.x + u.x * s0 - n.x * (depth / 2)), y: r6(yc), z: r6(pb.start.z + u.z * s0 - n.z * (depth / 2)) })
       const id = `${pb.id}-${ids.length + 1}`
-      push({ type: 'createLinearSolid', id, levelId: l0.id, start: at(a), end: at(b2), width: r6(t - soffit), depth: r6(depth), role: 'FASCIA', materialId: MATERIALS_V2.member })
+      push({ type: 'createLinearSolid', id, levelId: l0.id, start: at(a), end: at(b2), width: r6(t - soffit), depth: r6(depth), role: 'FASCIA', materialId: bandMat })
       ids.push(id)
     }
     if (ids.length === 0) {
@@ -1017,6 +1029,7 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
     used(`${path}.topY`, 'houseProgram/portalBand', ids, pb.topY)
     used(`${path}.soffitY`, 'houseProgram/portalBand', ids, pb.soffitY)
     used(`${path}.depthM`, 'houseProgram/portalBand', ids, pb.depthM)
+    if (pb.finish) used(`${path}.finish`, `houseProgram/portalBand material ${bandMat} (${STYLE_PROFILE.id}) on the whole member`, ids)
   }
   for (const c of g.canopies) {
     const path = `geometry.canopies[${c.id}]`
@@ -1073,7 +1086,6 @@ export function houseProgram(doc: HouseDocument): HouseProgram {
   }
   // v3.54.10 — finish zones: surface regions on the walls' outer faces in the style profile's colours. A surface only:
   // no wall, body or room is added, and the openings stay cut through it.
-  const zoneMats = new Set<string>()
   for (const z of g.zones ?? []) {
     const path = `geometry.zones[${z.id}]`
     const h = hosts.find((x) => x.id === z.hostWall)

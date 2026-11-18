@@ -20,7 +20,7 @@ import { interiorFromStoreys, placeThrough, resolveInterior, storeyFrame } from 
 import { outlineSteps, straightenJogs } from './steps.js'
 
 export const HOUSE_RESOLVER_NAME = 'reconstruction.house-resolver' as const
-export const HOUSE_RESOLVER_VERSION = '0.7.0' as const
+export const HOUSE_RESOLVER_VERSION = '0.8.0' as const
 
 /** Fixed before any confirmation; each with what it means. */
 export const RESOLVE = {
@@ -780,6 +780,9 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
   const portals: HouseGeometry['portals'] = []
   const chimneys: HouseGeometry['chimneys'] = []
   const zones: HouseGeometry['zones'] = []
+  // v3.54.11 — each zone as read, in its side's frame (along the side, heights above ±0.00): what the elements of that
+  // side (a portal band) are bound to; walls take the zone through `zones`
+  const zoneRects: Array<{ side: HouseSide; ref: string; a0: number; a1: number; y0: number; y1: number; material: string; tone: string }> = []
   /** v3.54.10: chimneys seen from a gable end: where they stand across the ridge is read; along it, only a side view tells. */
   const gableChimneys: Array<{ ref: string; side: HouseSide; bodyId: string; across: number; w: number; topY: number }> = []
   const pointOfAlong = (side: HouseSide, a: number): number => (side === 'FRONT' ? gb.x0 + a : side === 'REAR' ? gb.x1 - a : side === 'LEFT' ? gb.z1 - a : gb.z0 + a)
@@ -1206,6 +1209,7 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
         held.push({ ref: zref, code: 'PARSE_REJECTED', why: `${(za[1] - za[0]).toFixed(2)} × ${(yTop - yBot).toFixed(2)} m is not a zone` })
         continue
       }
+      zoneRects.push({ side, ref: zref, a0: za[0], a1: za[1], y0: yBot, y1: yTop, material: zn.material, tone: zn.tone })
       const n = SIDE_NORMAL[side]
       let placed = 0
       for (const lv of levels) {
@@ -1223,7 +1227,10 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
           const sign = c.a1 >= c.a0 ? 1 : -1
           const from = (sign > 0 ? lo2 - c.a0 : c.a0 - hi2) / c.cos
           const to = (sign > 0 ? hi2 - c.a0 : c.a0 - lo2) / c.cos
-          zones.push({ id: `zone-${side.toLowerCase()}-${zones.length + 1}`, side, hostWall: c.h.id, level: lv.index, a0: r3(from), a1: r3(to), b0: r3(Math.max(yBot, lo)), b1: r3(Math.min(yTop, hi)), material: zn.material, tone: zn.tone, basis: 'DERIVED', refs: [zref] })
+          // the body the reader named is kept; a wall of another body under the zone is said, not silently taken
+          const otherBody = zn.bodyId && c.h.bodyId && c.h.bodyId !== zn.bodyId ? c.h.bodyId : undefined
+          zones.push({ id: `zone-${side.toLowerCase()}-${zones.length + 1}`, side, hostWall: c.h.id, level: lv.index, a0: r3(from), a1: r3(to), b0: r3(Math.max(yBot, lo)), b1: r3(Math.min(yTop, hi)), material: zn.material, tone: zn.tone, basis: 'DERIVED', refs: [zref], ...(zn.bodyId ? { bodyRead: zn.bodyId } : {}), ...(otherBody ? { bodyOfWall: otherBody } : {}) })
+          if (otherBody) knownDefects.push({ code: 'ZONE_BODY_SPAN', what: `${zref} (read on body ${zn.bodyId}) lies on ${c.h.id}, a wall of body ${otherBody}, ${r3(from)}–${r3(to)} m along it: the reader's box runs over both` })
           placed += 1
         }
       }
@@ -1260,6 +1267,37 @@ export function resolveHouse(doc: HouseDocument): ResolveResult {
       zones.splice(j, 1, ...nq)
       zones.splice(i, 1, ...np)
       j = i
+    }
+  }
+
+  // v3.54.11 — a physical element takes the finish of the zone that covers its face on the elevation: a portal band
+  // (its FASCIA members) is not a wall, so a zone drawn on walls never reached it. The whole member takes the material
+  // (an elevation shows its face only — a soffit or a return of another finish is not read there and is not invented);
+  // two zones of different finish that each cover most of the face are a conflict, said, and the band keeps its own.
+  const FINISH_COVER = 0.6
+  for (const pt0 of portals) {
+    const a = [alongOfPoint(pt0.side, pt0.start), alongOfPoint(pt0.side, pt0.end)].sort((p, q) => p - q)
+    const y0 = pt0.soffitY.value
+    const y1 = pt0.topY.value
+    if (y0 === null || y1 === null || y1 - y0 < 0.05 || a[1] - a[0] < 0.1) continue
+    const area = (a[1] - a[0]) * (y1 - y0)
+    const byFinish = new Map<string, { material: string; tone: string; cover: number; refs: string[] }>()
+    for (const z of zoneRects.filter((q) => q.side === pt0.side)) {
+      const w = Math.min(a[1], z.a1) - Math.max(a[0], z.a0)
+      const h = Math.min(y1, z.y1) - Math.max(y0, z.y0)
+      if (w <= 0 || h <= 0) continue
+      const key = `${z.material}/${z.tone}`
+      const e = byFinish.get(key) ?? { material: z.material, tone: z.tone, cover: 0, refs: [] }
+      e.cover = Math.min(1, e.cover + (w * h) / area)
+      e.refs.push(z.ref)
+      byFinish.set(key, e)
+    }
+    const covering = [...byFinish.values()].filter((e) => e.cover >= FINISH_COVER)
+    if (covering.length === 1) {
+      const e = covering[0]
+      pt0.finish = { material: e.material, tone: e.tone, coverage: r3(e.cover), basis: 'DERIVED', how: `the zone(s) ${e.refs.join(', ')} cover ${(e.cover * 100).toFixed(0)} % of the band's face on the ${pt0.side} elevation; the whole member takes it (its soffit and returns are not seen on an elevation)`, refs: e.refs }
+    } else if (covering.length > 1) {
+      knownDefects.push({ code: 'ELEMENT_FINISH_CONFLICT', what: `${pt0.id}: ${covering.map((e) => `${e.material} ${e.tone} (${(e.cover * 100).toFixed(0)} %, ${e.refs.join(', ')})`).join(' and ')} each cover most of its face: no finish is chosen for the reader` })
     }
   }
 
