@@ -1,0 +1,1234 @@
+{
+  "assemblies": [],
+  "balconies": [
+    {
+      "footprint": {
+        "maxX": 7.908225,
+        "maxZ": 0.961,
+        "minX": 3.236,
+        "minZ": 0
+      },
+      "id": "balcony-front-2",
+      "kind": "BALCONY",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "thickness": 0.2,
+      "topOffset": 0
+    },
+    {
+      "footprint": {
+        "maxX": 7.225,
+        "maxZ": 14.493,
+        "minX": 0.665,
+        "minZ": 13.49
+      },
+      "id": "balcony-rear-1",
+      "kind": "BALCONY",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "thickness": 0.2,
+      "topOffset": 0
+    }
+  ],
+  "building": {
+    "id": "bld-house",
+    "name": "MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-front-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-front-3",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "kind": "PANEL"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-front-4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-gate",
+      "openAngle": 0,
+      "openingId": "opening-front-4",
+      "swing": "IN",
+      "usage": "GARAGE"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-left-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-left-1",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 0.2,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.2,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.2,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.2,
+            "kind": "GLAZED"
+          },
+          {
+            "fraction": 0.2,
+            "kind": "GLAZED"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-rear-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-rear-3",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "house-marcowki-ge",
+  "levels": [
+    {
+      "buildingId": "bld-house",
+      "elevation": 0,
+      "height": 3.06,
+      "id": "L0",
+      "index": 0,
+      "name": "Ground"
+    },
+    {
+      "buildingId": "bld-house",
+      "elevation": 3.06,
+      "height": 2.8,
+      "id": "L1",
+      "index": 1,
+      "name": "Level 1"
+    }
+  ],
+  "linearSolids": [
+    {
+      "depth": 0.961,
+      "end": {
+        "x": 7.908225,
+        "y": 2.5665,
+        "z": 0.4805
+      },
+      "id": "portal-front-2-1",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "FASCIA",
+      "start": {
+        "x": 3.236,
+        "y": 2.5665,
+        "z": 0.4805
+      },
+      "width": 0.587
+    },
+    {
+      "depth": 0.961,
+      "end": {
+        "x": 11.311,
+        "y": 2.6605,
+        "z": 0.4805
+      },
+      "id": "portal-front-2-2",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "FASCIA",
+      "start": {
+        "x": 7.908225,
+        "y": 2.6605,
+        "z": 0.4805
+      },
+      "width": 0.775
+    },
+    {
+      "depth": 1.003,
+      "end": {
+        "x": 0.665,
+        "y": 2.6505,
+        "z": 13.9915
+      },
+      "id": "portal-rear-1-1",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "FASCIA",
+      "start": {
+        "x": 7.225,
+        "y": 2.6505,
+        "z": 13.9915
+      },
+      "width": 0.419
+    }
+  ],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#ece9e2",
+      "id": "mat-member",
+      "name": "Facade member"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering"
+    },
+    {
+      "color": "#c9c6c0",
+      "id": "mat-slab",
+      "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Paving"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "MODEL Z UZGODNIONEGO OPISU ŹRÓDEŁ",
+  "openings": [
+    {
+      "height": 2.208,
+      "id": "opening-front-1",
+      "kind": "WINDOW",
+      "offset": 1.466565,
+      "sill": 0.031,
+      "wallId": "w-main-0",
+      "width": 0.977
+    },
+    {
+      "head": {
+        "heightFar": 0.3,
+        "kind": "RAKED"
+      },
+      "height": 2.157,
+      "id": "opening-front-2",
+      "kind": "WINDOW",
+      "offset": 3.994565,
+      "sill": 3.924,
+      "wallId": "w-main-0",
+      "width": 2.494
+    },
+    {
+      "height": 2.037,
+      "id": "opening-front-3",
+      "kind": "DOOR",
+      "offset": 4.213565,
+      "sill": 0,
+      "wallId": "w-main-0",
+      "width": 0.624
+    },
+    {
+      "height": 2.239,
+      "id": "opening-front-4",
+      "kind": "DOOR",
+      "offset": 0.56934,
+      "sill": 0,
+      "wallId": "w-garage-3",
+      "width": 2.798
+    },
+    {
+      "height": 2.224,
+      "id": "opening-left-1",
+      "kind": "DOOR",
+      "offset": 3.626158,
+      "sill": 0,
+      "wallId": "w-main-3",
+      "width": 0.892
+    },
+    {
+      "height": 1.313,
+      "id": "opening-left-2",
+      "kind": "WINDOW",
+      "offset": 5.360158,
+      "sill": 0.878,
+      "wallId": "w-main-3",
+      "width": 1.363
+    },
+    {
+      "height": 2.034,
+      "id": "opening-rear-1",
+      "kind": "WINDOW",
+      "offset": 1.18,
+      "sill": 0,
+      "wallId": "w-garage-1",
+      "width": 0.949
+    },
+    {
+      "head": {
+        "heightFar": 1.966,
+        "kind": "RAKED"
+      },
+      "height": 0.3,
+      "id": "opening-rear-2",
+      "kind": "WINDOW",
+      "offset": 0.682639,
+      "sill": 3.882,
+      "wallId": "w-main-2",
+      "width": 2.577
+    },
+    {
+      "height": 2.373,
+      "id": "opening-rear-3",
+      "kind": "DOOR",
+      "offset": 1.072639,
+      "sill": 0,
+      "wallId": "w-main-2",
+      "width": 4.543
+    },
+    {
+      "head": {
+        "heightFar": 0.3,
+        "kind": "RAKED"
+      },
+      "height": 1.966,
+      "id": "opening-rear-4",
+      "kind": "WINDOW",
+      "offset": 4.666639,
+      "sill": 3.882,
+      "wallId": "w-main-2",
+      "width": 2.577
+    },
+    {
+      "height": 2.22,
+      "id": "opening-right-1",
+      "kind": "WINDOW",
+      "offset": 8.704292,
+      "sill": 0,
+      "wallId": "w-main-1",
+      "width": 2.91
+    }
+  ],
+  "platforms": [],
+  "railings": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.196,
+        "z": 0.961
+      },
+      "height": 0.831,
+      "hostId": "balcony-front-2",
+      "id": "balcony-front-2-railing",
+      "infill": "GLASS",
+      "levelId": "L1",
+      "materialId": "mat-glass",
+      "path": [
+        {
+          "x": 3.236,
+          "z": 0.961
+        },
+        {
+          "x": 3.236,
+          "z": 0
+        },
+        {
+          "x": 7.196,
+          "z": 0
+        },
+        {
+          "x": 7.196,
+          "z": 0.961
+        }
+      ],
+      "postSpacing": 1.2,
+      "start": {
+        "x": 3.236,
+        "z": 0.961
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.665,
+        "z": 14.493
+      },
+      "height": 0.822,
+      "hostId": "balcony-rear-1",
+      "id": "balcony-rear-1-railing",
+      "infill": "GLASS",
+      "levelId": "L1",
+      "materialId": "mat-glass",
+      "path": [
+        {
+          "x": 7.225,
+          "z": 14.493
+        },
+        {
+          "x": 0.665,
+          "z": 14.493
+        }
+      ],
+      "postSpacing": 1.2,
+      "start": {
+        "x": 7.225,
+        "z": 14.493
+      }
+    }
+  ],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 1.243,
+        "maxZ": 7.978,
+        "minX": 0.38,
+        "minZ": 7.187
+      },
+      "id": "rooflight-left-1",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-low"
+    },
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 1.263,
+        "maxZ": 5.807,
+        "minX": 0.3,
+        "minZ": 4.898
+      },
+      "id": "rooflight-left-2",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-low"
+    },
+    {
+      "cut": "VERTICAL",
+      "footprint": {
+        "maxX": 7.576,
+        "maxZ": 5.796,
+        "minX": 6.674,
+        "minZ": 5.006
+      },
+      "id": "rooflight-right-3",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main-high"
+    }
+  ],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 11.301996,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 8.407019
+        },
+        {
+          "x": 7.908225,
+          "z": 8.407019
+        },
+        {
+          "x": 7.908225,
+          "z": 0.960727
+        },
+        {
+          "x": 11.301996,
+          "z": 0.960727
+        }
+      ],
+      "datum": {
+        "x": 9.979113,
+        "y": 3.048,
+        "z": 4.20351
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "id": "roof-garage-flat",
+      "levelId": "L0",
+      "materialId": "mat-roof",
+      "pitchDeg": 0,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 3.954113,
+          "z": 0.951
+        },
+        {
+          "x": 7.908225,
+          "z": 0.951
+        },
+        {
+          "x": 7.908225,
+          "z": 13.499501
+        },
+        {
+          "x": 3.954113,
+          "z": 13.499501
+        }
+      ],
+      "datum": {
+        "x": 3.954113,
+        "y": 7.95,
+        "z": 7.246251
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "id": "roof-main-high",
+      "levelId": "L1",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": 0,
+          "z": 0.951
+        },
+        {
+          "x": 3.954113,
+          "z": 0.951
+        },
+        {
+          "x": 3.954113,
+          "z": 13.499501
+        },
+        {
+          "x": 0,
+          "z": 13.499501
+        }
+      ],
+      "datum": {
+        "x": 3.954113,
+        "y": 7.95,
+        "z": 7.246251
+      },
+      "downslope": {
+        "x": -1,
+        "z": 0
+      },
+      "id": "roof-main-low",
+      "levelId": "L1",
+      "materialId": "mat-roof",
+      "pitchDeg": 40,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-left-1-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-left-1"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-left-2-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-left-2"
+    },
+    {
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rooflight-right-3-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-right-3"
+    }
+  ],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.7.0",
+  "slabs": [
+    {
+      "id": "slab-0",
+      "levelId": "L0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0.960727
+        },
+        {
+          "x": 11.301996,
+          "z": 0.960727
+        },
+        {
+          "x": 11.301996,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 0
+        },
+        {
+          "x": 12.05,
+          "z": 8.407019
+        },
+        {
+          "x": 7.908225,
+          "z": 8.407019
+        },
+        {
+          "x": 7.908225,
+          "z": 14.492501
+        },
+        {
+          "x": 7.231586,
+          "z": 14.492501
+        },
+        {
+          "x": 7.231586,
+          "z": 13.489659
+        },
+        {
+          "x": 0.647565,
+          "z": 13.489659
+        },
+        {
+          "x": 0.647565,
+          "z": 14.492501
+        },
+        {
+          "x": 0,
+          "z": 14.492501
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    },
+    {
+      "id": "slab-1",
+      "levelId": "L1",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0
+        },
+        {
+          "x": 0.647565,
+          "z": 0.960727
+        },
+        {
+          "x": 7.908225,
+          "z": 0.960727
+        },
+        {
+          "x": 7.908225,
+          "z": 14.492501
+        },
+        {
+          "x": 7.231586,
+          "z": 14.492501
+        },
+        {
+          "x": 7.231586,
+          "z": 13.489659
+        },
+        {
+          "x": 0.647565,
+          "z": 13.489659
+        },
+        {
+          "x": 0.647565,
+          "z": 14.492501
+        },
+        {
+          "x": 0,
+          "z": 14.492501
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "againstWallId": "w-main-1",
+      "id": "w-garage-1-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "w-garage-1"
+      }
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-garage-1"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-garage-0"
+      },
+      "id": "w-garage-1-j-start",
+      "kind": "CORNER",
+      "owner": "w-garage-0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "w-garage-3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "w-garage-0"
+      },
+      "id": "w-garage-3-j-end",
+      "kind": "CORNER",
+      "owner": "w-garage-0",
+      "tolerance": 0.001
+    },
+    {
+      "againstWallId": "w-main-1",
+      "id": "w-garage-3-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "w-garage-3"
+      }
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-1"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-0"
+      },
+      "id": "w-main-1-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-1",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-2"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-1"
+      },
+      "id": "w-main-2-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "w-main-3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "w-main-0"
+      },
+      "id": "w-main-3-j-end",
+      "kind": "CORNER",
+      "owner": "w-main-0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "w-main-3"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "w-main-2"
+      },
+      "id": "w-main-3-j-start",
+      "kind": "CORNER",
+      "owner": "w-main-2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [
+    {
+      "bottom": [
+        {
+          "u": 0,
+          "y": 0
+        },
+        {
+          "u": 0.647565,
+          "y": 0
+        },
+        {
+          "u": 0.647665,
+          "y": 4.248561
+        },
+        {
+          "u": 3.954113,
+          "y": 7.023
+        },
+        {
+          "u": 7.234125,
+          "y": 4.270743
+        },
+        {
+          "u": 7.234225,
+          "y": 3.06
+        },
+        {
+          "u": 7.908225,
+          "y": 3.06
+        }
+      ],
+      "end": {
+        "x": 7.908225,
+        "z": 0
+      },
+      "id": "frame-main-front-plate",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "GABLE_FRAME",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.951,
+      "top": [
+        {
+          "u": 0,
+          "y": 4.632105
+        },
+        {
+          "u": 3.954113,
+          "y": 7.95
+        },
+        {
+          "u": 7.908225,
+          "y": 4.632106
+        }
+      ]
+    },
+    {
+      "bottom": [
+        {
+          "u": 0,
+          "y": 0
+        },
+        {
+          "u": 0.676639,
+          "y": 0
+        },
+        {
+          "u": 0.676739,
+          "y": 4.233958
+        },
+        {
+          "u": 3.954112,
+          "y": 6.984
+        },
+        {
+          "u": 7.26056,
+          "y": 4.209561
+        },
+        {
+          "u": 7.26066,
+          "y": 0
+        },
+        {
+          "u": 7.908225,
+          "y": 0
+        }
+      ],
+      "end": {
+        "x": 0,
+        "z": 14.492501
+      },
+      "id": "frame-main-rear-plate",
+      "levelId": "L0",
+      "materialId": "mat-member",
+      "role": "GABLE_FRAME",
+      "start": {
+        "x": 7.908225,
+        "z": 14.492501
+      },
+      "thickness": 0.993,
+      "top": [
+        {
+          "u": 0,
+          "y": 4.632106
+        },
+        {
+          "u": 3.954112,
+          "y": 7.95
+        },
+        {
+          "u": 7.908225,
+          "y": 4.632105
+        }
+      ]
+    }
+  ],
+  "wallRings": [],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 8.407019
+      },
+      "height": 3.048,
+      "id": "w-garage-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.05,
+        "z": 0.960727
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 8.407019
+      },
+      "height": 3.048,
+      "id": "w-garage-1",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 12.05,
+        "z": 8.407019
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 0.960727
+      },
+      "height": 3.048,
+      "id": "w-garage-3",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 0.960727
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 0
+      },
+      "height": 3.048,
+      "id": "w-garage-ret-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.301996,
+        "z": 0
+      },
+      "thickness": 0.960727,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-garage-flat"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 0.960727
+      },
+      "height": 8.45,
+      "id": "w-main-0",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0.960727
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.908225,
+        "z": 13.489659
+      },
+      "height": 8.45,
+      "id": "w-main-1",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 0.960727
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 13.489659
+      },
+      "height": 8.45,
+      "id": "w-main-2",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 7.908225,
+        "z": 13.489659
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0.960727
+      },
+      "height": 8.45,
+      "id": "w-main-3",
+      "kind": "EXTERIOR",
+      "levelId": "L0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 13.489659
+      },
+      "thickness": 0.4,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-low",
+          "roof-main-high"
+        ]
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-front-1-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-front-1"
+    },
+    {
+      "divisions": 3,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-front-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-front-2"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-left-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-left-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-1-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-1"
+    },
+    {
+      "divisions": 3,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-2-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-2"
+    },
+    {
+      "divisions": 3,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-rear-4-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-rear-4"
+    },
+    {
+      "divisions": 3,
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-right-1-window",
+      "materialId": "mat-glass",
+      "openingId": "opening-right-1"
+    }
+  ]
+}

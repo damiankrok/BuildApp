@@ -31,8 +31,8 @@ export const ASSET_DIR = join(ROOT, 'apps/android/app/src/main/assets/scenes')
  * N8-03D2: both files restated from schema 1.6.0 to 1.7.0 — the version string alone; with it put back they hash to
  * the pins sealed under 1.6.0 (jarzmianki 4ced0179…, gożdzikowce a612a399…).
  */
-export function sealedOwnerModel(key: string, sha256: string): CanonicalBuildingModel {
-  const model = parseModel(readFileSync(join(ROOT, 'packages/candidates/src/owner-005t', `${key}.model.json`), 'utf8'))
+export function sealedOwnerModel(key: string, sha256: string, dir = 'owner-005t'): CanonicalBuildingModel {
+  const model = parseModel(readFileSync(join(ROOT, 'packages/candidates/src', dir, `${key}.model.json`), 'utf8'))
   const actual = createHash('sha256').update(serializeModel(model)).digest('hex')
   if (actual !== sha256) throw new Error(`sealed owner model ${key}: SHA-256 ${actual}, expected ${sha256}`)
   return model
@@ -45,6 +45,21 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.8 (owner request): the house described from the API's reading after its review, and the model the final host
+  // (05faa4e) delivered for the same page (LOCAL), side by side — sealed by the SHA-256 of their canonical
+  // serialization as they came out of the runs (`packages/candidates/src/owner-v3548/`, numbers and ids only).
+  {
+    key: 'marcowki-h-v3548',
+    title: 'Marcówki — opis H v3.54.8',
+    subtitle: 'KANDYDAT z odczytu API po recenzji (nie oddany): rama z nogami, szkło, pas portalu; głowice za nisko',
+    build: () => sealedOwnerModel('marcowki-h-v3548', '1e20fb737ed65b283cdf213e7f18d8fc75762c669675c1198a3b34686a197403', 'owner-v3548'),
+  },
+  {
+    key: 'marcowki-local-v3548',
+    title: 'Marcówki — LOCAL v3.54.8',
+    subtitle: 'Model oddany przez host 05faa4e (LOCAL) — do porównania z opisem H',
+    build: () => sealedOwnerModel('marcowki-local-v3548', '07b91e89cc034837e3e79c7cf0489066b06439506242ab60d8f17271ac3b80b5', 'owner-v3548'),
+  },
   // BUILDPLAN-OWNER-005T: two development rows the analyzer now builds, listed first so the owner finds them at
   // once. Approximate models for a visual review — each carries LIMITING warnings in its stage report.
   {
