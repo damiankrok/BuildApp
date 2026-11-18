@@ -37,3 +37,4 @@ APK 1342 built from it), then the report commit. Base: `62350cc` (code/host v3.5
 ## Books
 
 Unchanged: 23.808382 of 24.11036 USD (0.301978 USD left). No request was sent in v3.54.11.
+Private package: `/home/user/BuildPlan-V35411-Private.zip` (SHA-256 `20e45226ba08382ac76bf779c50754f1af217c308cffc1ddc683c1d143ea33e3`; manifest verified after unzip; 0 key hits).
