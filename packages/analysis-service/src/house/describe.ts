@@ -432,7 +432,14 @@ function accountForBuild(doc: HouseDocument, built: BuiltHouse, measured: SceneM
         const soffit = Math.min(...members.map(([, b]) => b.y0))
         const top = Math.max(...members.map(([, b]) => b.y1))
         if (pb.soffitY.value !== null && Math.abs(soffit - pb.soffitY.value) > 0.1) lost.push(`${pb.id}: soffit agreed ${pb.soffitY.value.toFixed(2)} m, its members' lowest ${soffit.toFixed(2)} m`)
-        if (pb.topY.value !== null && Math.abs(top - pb.topY.value) > 0.1) lost.push(`${pb.id}: top agreed ${pb.topY.value.toFixed(2)} m, its members' highest ${top.toFixed(2)} m`)
+        // the band is cut under a slab that stands in it (a balcony): there the slab's edge is the band's upper part —
+        // its top is built, by another element with its own material (said: one material per slab, its top not seen)
+        const box = { x0: Math.min(...members.map(([, b]) => b.x0)), x1: Math.max(...members.map(([, b]) => b.x1)), z0: Math.min(...members.map(([, b]) => b.z0)), z1: Math.max(...members.map(([, b]) => b.z1)) }
+        const slabAbove = pb.topY.value !== null && top < pb.topY.value - 0.1 ? Object.entries(measured.objects).sort(([p], [q]) => Number(!p.startsWith('balcony')) - Number(!q.startsWith('balcony')) || p.localeCompare(q)).find(([id, b]) => /^(balcony|slab|terrace)/.test(id) && b.y0 <= top + 0.05 && b.y1 >= (pb.topY.value as number) - 0.1 && Math.min(b.x1, box.x1) - Math.max(b.x0, box.x0) > 0.5 * (box.x1 - box.x0) && Math.min(b.z1, box.z1) - Math.max(b.z0, box.z0) > 0) : undefined
+        if (slabAbove) {
+          const fin = pb.finish ? styleMaterial(pb.finish.material, pb.finish.tone).id : undefined
+          v.knownDefects.push({ code: 'ELEMENT_FINISH_PARTIAL', what: `${pb.id}: its upper ${(Math.min(slabAbove[1].y1, pb.topY.value as number) - top).toFixed(2)} m is the edge of ${slabAbove[0]} (the band is cut under it)${fin ? `; the band is ${fin}, the slab keeps its own material — one material per slab, its top (a floor) is not seen on an elevation` : ''}` })
+        } else if (pb.topY.value !== null && Math.abs(top - pb.topY.value) > 0.1) lost.push(`${pb.id}: top agreed ${pb.topY.value.toFixed(2)} m, its members' highest ${top.toFixed(2)} m`)
       }
       if (pb.finish) {
         const want = styleMaterial(pb.finish.material, pb.finish.tone).id
