@@ -12,6 +12,19 @@
 
 ## Current summary (read first)
 
+- **v3.54.12 (2026-11-18): colour sketch as LOCAL input and a recognisable miniature — prepared, experiment B not
+  run** (prompt v3.54.12; no Master Plan v3.54.12 attached, so `docs/MASTER_PLAN.md` stays v3.54.11 and the OWNER's
+  §0 decision — a recognisable miniature is the visual goal; accepted simplifications such as the garage door nearer
+  the wall edge; mirror, missing wing, other roof or lost frame destroy identity — is recorded in
+  `docs/ADR-V35412-MINIATURE-AND-METRIC.md`). The four OWNER images named in the prompt were not in the session; no
+  substitute was used. Added (research only, production unchanged, 0 USD): identity card
+  `research/source-to-model/v35412/identity-marcowki.json` (14 features, 5 critical, executor-proposed tolerances,
+  written before scoring), `visual-miniature.py` (VISUAL_MINIATURE separate from METRIC_EVIDENCE), `match-picture.py`,
+  `register-sketch.py`, `sketch-package.ts`, `run-sketch.sh`, `SKETCH_PROTOCOL.md`. Baseline: LOCAL A, LOCAL delivered,
+  H v3.54.11 RECOGNISABLE 14/14; H v3.54.10 13/14 (dark band missing); v3.54.11 white-fill control NOT_RECOGNISABLE
+  (both frames). Found: the 0.40 m end face of `w-main-1` shows light between entrance and garage in both H scenes
+  (finish regions host only OUTER/INNER faces) — named. No new APK; APK 1342 stands.
+
 - **v3.54.11 (2026-11-18): APK with the real H, finish on the right element, LOCAL on image layers** (prompt
   v3.54.11 with Master Plan v3.54.11 copied in full to `docs/MASTER_PLAN.md`). Code `38592f7`, `caecb9a`, `84de494`,
   `d88f13c` (APK 1342 built from it). Report `stage-reports/SOURCE_TO_MODEL_V35411.md`, OWNER index

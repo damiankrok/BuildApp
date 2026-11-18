@@ -1,0 +1,132 @@
+{
+ "schema": "buildapp.v35411-zone-refs/1",
+ "refs": "research/source-to-model/v35412/probe-pillar.json",
+ "models": {
+  "H-v35410": {
+   "met": 1,
+   "of": 3,
+   "rows": [
+    {
+     "id": "F-pillar-1.0",
+     "side": "FRONT",
+     "element": "between entrance recess and garage door, ground floor",
+     "want": "DARK",
+     "got": "LIGHT",
+     "ok": false,
+     "objectId": "w-main-1",
+     "part": "WALL",
+     "materialId": "mat-wall",
+     "color": "#e8e4dc"
+    },
+    {
+     "id": "F-pillar-2.0",
+     "side": "FRONT",
+     "element": "same, higher",
+     "want": "DARK",
+     "got": "LIGHT",
+     "ok": false,
+     "objectId": "w-main-1",
+     "part": "WALL",
+     "materialId": "mat-wall",
+     "color": "#e8e4dc"
+    },
+    {
+     "id": "F-garage-wall",
+     "side": "FRONT",
+     "element": "garage front left of the door",
+     "want": "DARK",
+     "got": "DARK",
+     "ok": true,
+     "objectId": "zone-front-14-2",
+     "part": "SURFACE_REGION",
+     "materialId": "mat-zone-plaster-dark",
+     "color": "#3a3a3c"
+    }
+   ]
+  },
+  "LOCAL-oddany": {
+   "met": 3,
+   "of": 3,
+   "rows": [
+    {
+     "id": "F-pillar-1.0",
+     "side": "FRONT",
+     "element": "between entrance recess and garage door, ground floor",
+     "want": "DARK",
+     "got": "DARK",
+     "ok": true,
+     "objectId": "finish-front-319",
+     "part": "SURFACE_REGION",
+     "materialId": "mat-render-dark",
+     "color": "#3a3a3c"
+    },
+    {
+     "id": "F-pillar-2.0",
+     "side": "FRONT",
+     "element": "same, higher",
+     "want": "DARK",
+     "got": "DARK",
+     "ok": true,
+     "objectId": "finish-front-319",
+     "part": "SURFACE_REGION",
+     "materialId": "mat-render-dark",
+     "color": "#3a3a3c"
+    },
+    {
+     "id": "F-garage-wall",
+     "side": "FRONT",
+     "element": "garage front left of the door",
+     "want": "DARK",
+     "got": "DARK",
+     "ok": true,
+     "objectId": "ring-attached-0-0-w0",
+     "part": "WALL",
+     "materialId": "mat-render-dark",
+     "color": "#3a3a3c"
+    }
+   ]
+  },
+  "H-v35411": {
+   "met": 1,
+   "of": 3,
+   "rows": [
+    {
+     "id": "F-pillar-1.0",
+     "side": "FRONT",
+     "element": "between entrance recess and garage door, ground floor",
+     "want": "DARK",
+     "got": "LIGHT",
+     "ok": false,
+     "objectId": "w-main-1",
+     "part": "WALL",
+     "materialId": "mat-wall",
+     "color": "#e8e4dc"
+    },
+    {
+     "id": "F-pillar-2.0",
+     "side": "FRONT",
+     "element": "same, higher",
+     "want": "DARK",
+     "got": "LIGHT",
+     "ok": false,
+     "objectId": "w-main-1",
+     "part": "WALL",
+     "materialId": "mat-wall",
+     "color": "#e8e4dc"
+    },
+    {
+     "id": "F-garage-wall",
+     "side": "FRONT",
+     "element": "garage front left of the door",
+     "want": "DARK",
+     "got": "DARK",
+     "ok": true,
+     "objectId": "zone-front-14-2",
+     "part": "SURFACE_REGION",
+     "materialId": "mat-zone-plaster-dark",
+     "color": "#3a3a3c"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,12 @@
+H-v35410: 1/3
+   NO  F-pillar-1.0       want DARK  got LIGHT w-main-1 (WALL, mat-wall)
+   NO  F-pillar-2.0       want DARK  got LIGHT w-main-1 (WALL, mat-wall)
+   OK  F-garage-wall      want DARK  got DARK  zone-front-14-2 (SURFACE_REGION, mat-zone-plaster-dark)
+LOCAL-oddany: 3/3
+   OK  F-pillar-1.0       want DARK  got DARK  finish-front-319 (SURFACE_REGION, mat-render-dark)
+   OK  F-pillar-2.0       want DARK  got DARK  finish-front-319 (SURFACE_REGION, mat-render-dark)
+   OK  F-garage-wall      want DARK  got DARK  ring-attached-0-0-w0 (WALL, mat-render-dark)
+H-v35411: 1/3
+   NO  F-pillar-1.0       want DARK  got LIGHT w-main-1 (WALL, mat-wall)
+   NO  F-pillar-2.0       want DARK  got LIGHT w-main-1 (WALL, mat-wall)
+   OK  F-garage-wall      want DARK  got DARK  zone-front-14-2 (SURFACE_REGION, mat-zone-plaster-dark)

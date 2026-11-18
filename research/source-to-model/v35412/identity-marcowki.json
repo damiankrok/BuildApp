@@ -1,0 +1,269 @@
+{
+ "schema": "buildapp.v35412-house-identity/1",
+ "house": "marcowki-ge (DEV, known)",
+ "writtenBefore": "any VISUAL_MINIATURE score of v3.54.12 (2026-11-18); the values are the sealed source truth's (research/marcowki-v2/marcowki-source-truth-v2.json), restated in each side's frame",
+ "frames": "along = metres from the side's left end as seen from outside (FRONT: x; REAR: 12.05 - x); y = metres above +-0,00. The same frames as measure-features.ts `sides`/`openings`.",
+ "tolerancesAreExecutorProposal": true,
+ "tolerancesNote": "Working visual tolerances proposed by the executor (v3.54.12), sized to the element and its role in recognising the house; NOT an OWNER requirement and NOT a measurement tolerance. A value outside the tolerance but within twice it is APPROXIMATE; beyond that, or the feature absent, is MISSING; a feature present in the wrong place/kind/orientation is CONTRADICTORY.",
+ "states": [
+  "PRESERVED",
+  "APPROXIMATE",
+  "MISSING",
+  "CONTRADICTORY"
+ ],
+ "features": [
+  {
+   "id": "ID-BODIES",
+   "what": "a gable main body and a lower flat-roofed garage wing beside it, the whole 12.05 m wide",
+   "check": "envelopeWidth",
+   "expect": 12.05,
+   "tol": 0.6,
+   "critical": true,
+   "refs": [
+    "T2-MASS-MAIN",
+    "T2-MASS-GARAGE",
+    "T2-MASS-ENVELOPE"
+   ]
+  },
+  {
+   "id": "ID-GARAGE-SIDE",
+   "what": "the garage wing on the RIGHT of the front (flat roof over 7.9-12.05 along the front)",
+   "check": "garageSide",
+   "side": "FRONT",
+   "expect": [
+    7.9,
+    12.05
+   ],
+   "tol": 0.6,
+   "critical": true,
+   "mirrorIsContradiction": true,
+   "refs": [
+    "T2-ROOF-GARAGE"
+   ]
+  },
+  {
+   "id": "ID-ROOF",
+   "what": "gable roof, ridge perpendicular to the front, about 40 deg, ridge at 7.95",
+   "check": "roofGable",
+   "expectPitch": 40,
+   "tolPitch": 5,
+   "expectRidgeY": 7.95,
+   "tolRidgeY": 0.5,
+   "critical": true,
+   "refs": [
+    "T2-ROOF-MAIN",
+    "T2-PAGE-ROOF"
+   ]
+  },
+  {
+   "id": "ID-FRAME-FRONT",
+   "what": "the front gable frame standing about 1 m proud of the recessed gable, over the main body",
+   "check": "frame",
+   "side": "FRONT",
+   "expect": [
+    0.0,
+    7.9
+   ],
+   "expectDepth": 1.0,
+   "tol": 0.6,
+   "tolDepth": 0.3,
+   "critical": true,
+   "refs": [
+    "T2-RECESS-FRONT-ATTIC",
+    "T2-ROOF-EXTENT",
+    "T2-ROOF-VERGE-MEMBER"
+   ]
+  },
+  {
+   "id": "ID-FRAME-REAR",
+   "what": "the rear gable frame, same form",
+   "check": "frame",
+   "side": "REAR",
+   "expect": [
+    4.15,
+    12.05
+   ],
+   "expectDepth": 1.0,
+   "tol": 0.6,
+   "tolDepth": 0.3,
+   "critical": true,
+   "refs": [
+    "T2-RECESS-REAR",
+    "T2-ROOF-EXTENT"
+   ]
+  },
+  {
+   "id": "ID-LOGGIA-FRONT",
+   "what": "the front loggia: a slab in the recess with a glass railing at +3.06",
+   "check": "loggia",
+   "side": "FRONT",
+   "expect": [
+    3.25,
+    7.9
+   ],
+   "tol": 0.6,
+   "critical": false,
+   "refs": [
+    "T2-RECESS-FRONT-ATTIC"
+   ]
+  },
+  {
+   "id": "ID-LOGGIA-REAR",
+   "what": "the rear loggia/balcony in the recess across the gable, glass railing",
+   "check": "loggia",
+   "side": "REAR",
+   "expect": [
+    4.76,
+    11.44
+   ],
+   "tol": 0.6,
+   "critical": false,
+   "refs": [
+    "T2-RECESS-REAR"
+   ]
+  },
+  {
+   "id": "ID-GLAZING-FRONT-GABLE",
+   "what": "the large raked glazing of the front gable (high end on the left)",
+   "check": "raked",
+   "side": "FRONT",
+   "expect": [
+    3.95,
+    6.65
+   ],
+   "expectHigh": "LEFT",
+   "tol": 0.5,
+   "critical": false,
+   "refs": [
+    "T2-OPEN-FRONT-GABLE"
+   ]
+  },
+  {
+   "id": "ID-GLAZING-REAR-GABLE",
+   "what": "two raked glazings of the rear gable, high ends at the middle",
+   "check": "rakedPair",
+   "side": "REAR",
+   "expect": [
+    [
+     5.1,
+     7.44
+    ],
+    [
+     8.76,
+     11.1
+    ]
+   ],
+   "tol": 0.5,
+   "critical": false,
+   "refs": [
+    "T2-OPEN-REAR-GABLE-W",
+    "T2-OPEN-REAR-GABLE-E"
+   ]
+  },
+  {
+   "id": "ID-TERRACE-GLAZING",
+   "what": "the large terrace glazing of the rear ground floor (about 4.7 m)",
+   "check": "opening",
+   "side": "REAR",
+   "expect": [
+    5.1,
+    9.8
+   ],
+   "minWidth": 3.5,
+   "tol": 0.6,
+   "critical": false,
+   "refs": [
+    "T2-OPEN-REAR-GLAZING"
+   ]
+  },
+  {
+   "id": "ID-GARAGE-DOOR",
+   "what": "the wide garage door in the garage front",
+   "check": "opening",
+   "side": "FRONT",
+   "expect": [
+    8.55,
+    11.3
+   ],
+   "minWidth": 2.2,
+   "tol": 0.6,
+   "critical": false,
+   "refs": [
+    "T2-OPEN-GARAGE-DOOR"
+   ],
+   "ownerAcceptedSimplification": "its left edge may sit nearer the wall's vertical edge (OWNER, v3.54.12 §0)"
+  },
+  {
+   "id": "ID-PORTAL-BAND",
+   "what": "a dark band over the open ground floor of entrance and garage, continuous where the source shows it",
+   "check": "zone",
+   "points": [
+    "F-band-entrance",
+    "F-band-garage"
+   ],
+   "critical": false,
+   "refs": [
+    "T2-ROOF-GARAGE"
+   ]
+  },
+  {
+   "id": "ID-PALETTE",
+   "what": "light frame, dark ground floor and garage, warm wood zones front and rear, dark rear band and gable panel",
+   "check": "zonesAll",
+   "minShare": 0.75,
+   "critical": false,
+   "refs": [
+    "research/source-to-model/v35411/zone-refs-marcowki.json"
+   ]
+  },
+  {
+   "id": "ID-NO-NEW-LARGE-OPENINGS",
+   "what": "no large opening (>= 2 m wide) on a side where the source has none at that place",
+   "check": "noFalseLarge",
+   "minWidth": 2.0,
+   "critical": true,
+   "refs": [
+    "T2-OPEN-FRONT-GABLE",
+    "T2-OPEN-GARAGE-DOOR",
+    "T2-OPEN-REAR-GABLE-W",
+    "T2-OPEN-REAR-GABLE-E",
+    "T2-OPEN-REAR-GLAZING",
+    "T2-OPEN-EAST-LIVING"
+   ],
+   "allowed": {
+    "FRONT": [
+     [
+      3.95,
+      6.65
+     ],
+     [
+      8.55,
+      11.3
+     ]
+    ],
+    "REAR": [
+     [
+      5.1,
+      7.44
+     ],
+     [
+      8.76,
+      11.1
+     ],
+     [
+      5.1,
+      9.8
+     ]
+    ],
+    "RIGHT": [
+     [
+      9.7,
+      12.7
+     ]
+    ],
+    "LEFT": []
+   },
+   "frameNote": "RIGHT = the east side seen from outside: along = z from the front plane; LEFT = the west side: along = 14.6 - z"
+  }
+ ]
+}
