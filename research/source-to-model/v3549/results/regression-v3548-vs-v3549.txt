@@ -1,0 +1,22 @@
+# v3.54.8 (05faa4e/e2b3b58) vs v3.54.9 (39fec90): the same recorded answers replayed; 0 USD
+
+## R-DEV
+c4-archon-frizeach-g2e             SAME | accepted LOCAL->LOCAL | failed 0->0 | kernel 0->0 | compile 0->0 | W×D×H 19.5×13.5×7.1 -> 19.5×13.5×7.1 | walls 7->25 | interior BUILT: placed from LOCAL (6ecb0aed9bac) through a checked transform: 37 element(s) placed, 0 not
+c4-archon-lubczyku-2               SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 3->3 | compile 0->0 | W×D×H 15.92×10.02×8.87 -> 15.92×10.02×8.87 | walls 15->15 | interior NOT_BUILT: the interior source and the house disagree on the metric (two scales); not stretched
+c4-dobredomy-pallas                DIFF | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 1->2 | compile 1->1 | W×D×H 16.476×10.43×8.42 -> 16.476×10.43×8.42 | walls 9->14 | interior PARTIAL: placed from LOCAL (d130de11e686) through a checked transform: 8 element(s) placed, 2 not
+c4-lipinscy-dublin                 SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 0->0 | compile 0->0 | W×D×H 13×10.04×9.21 -> 13×10.04×9.21 | walls 11->11 | interior NOT_BUILT: no interior source: the reading describes the exterior and no other source of these pages gave an interior
+c4-lipinscy-oslo                   SAME | accepted LOCAL->LOCAL | failed 0->0 | kernel 1->1 | compile 1->1 | W×D×H 8.55×7.05×7.09 -> 8.55×7.05×7.09 | walls 4->4 | interior NOT_BUILT: the interior source does not register to the house's outline
+c4-studioatrium-wena               SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 0->0 | compile 3->3 | W×D×H 8.8×11.2×8.392 -> 8.8×11.2×8.392 | walls 6->6 | interior NOT_BUILT: the interior source and the house disagree on the metric (two scales); not stretched
+
+## R-CNEW
+c5-architecturaldesigns-550029lan  SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 1->1 | compile 4->4 | W×D×H 18.765×18.989×14.79 -> 18.765×18.989×14.79 | walls 10->10 | interior NOT_BUILT: no interior source: the reading describes the exterior and no other source of these pages gave an interior
+c5-archon-anodach-3-g2e            SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 0->0 | compile 0->0 | W×D×H 14×19.25×7.29 -> 14×19.25×7.29 | walls 10->10 | interior NOT_BUILT: no interior source: the reading describes the exterior and no other source of these pages gave an interior
+c5-archon-malaxisach-2-e           DIFF | accepted NONE->NONE | failed 2->1 | kernel 0->0 | compile 0->0 | W×D×H 17.043×12.455×6.15 -> 17.043×12.455×6.15 | walls 10->10 | interior NOT_BUILT: no interior source: the reading describes the exterior and no other source of these pages gave an interior
+c5-dobredomy-kardamon              SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 1->1 | compile 2->2 | W×D×H 19.578×19.272×8.36 -> 19.578×19.272×8.36 | walls 18->18 | interior NOT_BUILT: no interior source: the reading describes the exterior and no other source of these pages gave an interior
+c5-extradom-mirabelka-4            SAME | accepted None->None | failed None->None | kernel None->None | compile None->None | W×D×H None×None×None -> None×None×None | walls None->None | interior None: 
+c5-extradom-tracja-2               SAME | accepted None->None | failed None->None | kernel None->None | compile None->None | W×D×H None×None×None -> None×None×None | walls None->None | interior None: 
+c5-lipinscy-alaska                 SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 0->0 | compile 0->0 | W×D×H 17.24×7.64×6.13 -> 17.24×7.64×6.13 | walls 4->4 | interior NOT_BUILT: the interior source and the house disagree on the metric (two scales); not stretched
+c5-studioatrium-pliszka-v-plus     SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 1->1 | compile 1->1 | W×D×H 11.45×18.95×6.348 -> 11.45×18.95×6.348 | walls 11->11 | interior NOT_BUILT: the interior source does not register to the house's outline
+
+## LAr
+c5-lipinscy-alaska                 SAME | accepted DESCRIBED->DESCRIBED | failed 0->0 | kernel 0->0 | compile 0->0 | W×D×H 17.24×7.64×6.13 -> 17.24×7.64×6.13 | walls 4->4 | interior NOT_BUILT: the interior source and the house disagree on the metric (two scales); not stretched

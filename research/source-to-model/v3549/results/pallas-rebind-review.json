@@ -1,0 +1,52 @@
+{
+ "roundLog": [
+  {
+   "round": 1,
+   "inputModelHash": "8293d235e8c7c8e7c6bbe87860e827d018ffd33d4b8c6b976ed998c495c4795b",
+   "baseRevision": "46823377fb21",
+   "renderSha256": [
+    "3b27f74fe16a738be51c5b6d2b508edbed72ecad611d6ade79054187a9cb1400",
+    "0f9e9909c2fc924a18ac36c86c0373c3a739676a25f06918f75c70d570f9f2b7",
+    "91edc4dae1d1e0445c93f50dea2771ed630d0782ac793961b087a5fcf376039b",
+    "a2db3ed10d503b4a04c539333074fb644e487ce5b1df76e9969b3c7140dee0c8"
+   ],
+   "sourceSha256": [
+    "6b3517f26c9c8b2d5877888b9efc31b0b3abc84518b4b85f00c042dc68e8a330",
+    "ba4472271d2852664ce1f9eac41171786bccd8453953be521e2de4d30a65410d",
+    "a85717e6d79e624fb4f2c61e1496cf2a16dd02ea53a0efc0a947b2abfc916cd2",
+    "4dd37094fe04bc135fbc7e3cb94599a9fabb0805f3a1093f7b67400babd385e7"
+   ],
+   "verdict": "DIFFERS",
+   "answerRevision": "46823377fb21",
+   "stale": false,
+   "reboundFrom": "9e19b92fd0e1",
+   "applied": 1,
+   "outputRevision": "bdee37deca36",
+   "outputModelHash": "2f7d93bedbcd686199be784a38d7a96305e669a654be1bf45f85d1307610e7d0"
+  },
+  {
+   "round": 2,
+   "inputModelHash": "2f7d93bedbcd686199be784a38d7a96305e669a654be1bf45f85d1307610e7d0",
+   "baseRevision": "bdee37deca36",
+   "renderSha256": [
+    "9b7cb8dfc9499b8349a161f11414177f9f574bab96dd7aee914fe6be7e8a374b",
+    "209c5987225e4e30d445ea39b44f460736bacbaec16c9aec7a0f38090eaeebdb",
+    "b19066942deb6eb217754583ee8467ad86f588b5ca629e6d7ef6ca8ae3b046e9",
+    "ae7b6b44de61386e8bb228a8636425e4fac322caad1953b36ef10dcc9de0c102"
+   ],
+   "sourceSha256": [
+    "6b3517f26c9c8b2d5877888b9efc31b0b3abc84518b4b85f00c042dc68e8a330",
+    "ba4472271d2852664ce1f9eac41171786bccd8453953be521e2de4d30a65410d",
+    "a85717e6d79e624fb4f2c61e1496cf2a16dd02ea53a0efc0a947b2abfc916cd2",
+    "4dd37094fe04bc135fbc7e3cb94599a9fabb0805f3a1093f7b67400babd385e7"
+   ],
+   "verdict": "DIFFERS",
+   "answerRevision": "bdee37deca36",
+   "stale": false,
+   "reboundFrom": "4d871cc7bfb4",
+   "applied": 0,
+   "outputRevision": "bdee37deca36",
+   "outputModelHash": "2f7d93bedbcd686199be784a38d7a96305e669a654be1bf45f85d1307610e7d0"
+  }
+ ]
+}

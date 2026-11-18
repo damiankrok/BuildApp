@@ -1,0 +1,48 @@
+[
+ {
+  "round": 1,
+  "op": "REVIEW",
+  "subject": "the whole round",
+  "why": "the recorded answer names revision 9e19b92fd0e1; the house is at 46823377fb21, which is that revision with only the railings its own notes name derived since (v3.54.8)",
+  "state": "APPLIED",
+  "code": "REBOUND",
+  "consumer": "reviewHouse",
+  "effect": "the recorded answer is bound to 46823377fb21; every correction is still accepted only on its own measure"
+ },
+ {
+  "tolerance": "NOT_MEASURABLE",
+  "round": 1,
+  "op": "SET_ROOF",
+  "subject": "roof of garage",
+  "why": "The garage roof is a slope facing front, with its gable end visible on the right side. The ridge runs along the front, not front to back.",
+  "state": "APPLIED",
+  "consumer": "resolveHouse/roofs \u2192 houseProgram/roofPlanes",
+  "effect": "model 8293d235e8 \u2192 2f7d93bedb; failing checks 0 \u2192 0; held or refused 15 \u2192 13; meshes 91 \u2192 97",
+  "baseRevision": "46823377fb21",
+  "revision": "bdee37deca36",
+  "improved": "NOT_MEASURABLE",
+  "inputModelHash": "8293d235e8c7c8e7c6bbe87860e827d018ffd33d4b8c6b976ed998c495c4795b",
+  "outputModelHash": "2f7d93bedbcd686199be784a38d7a96305e669a654be1bf45f85d1307610e7d0"
+ },
+ {
+  "round": 2,
+  "op": "REVIEW",
+  "subject": "the whole round",
+  "why": "the recorded answer names revision 4d871cc7bfb4; the house is at bdee37deca36, which is that revision with only the railings its own notes name derived since (v3.54.8)",
+  "state": "APPLIED",
+  "code": "REBOUND",
+  "consumer": "reviewHouse",
+  "effect": "the recorded answer is bound to bdee37deca36; every correction is still accepted only on its own measure"
+ },
+ {
+  "round": 2,
+  "op": "SET_FEATURE",
+  "subject": "balcony_left",
+  "why": "On the left gable wall the balcony is in front of the two first-floor glazed doors, mid-wall, not at the edge of the building.",
+  "state": "REJECTED",
+  "code": "PARSE_REJECTED",
+  "consumer": "resolveHouse/features \u2192 houseProgram/wallDormer|balcony|loggia|gableFrame|canopy",
+  "effect": "a feature needs an id, a kind this builder has and a box",
+  "baseRevision": "bdee37deca36"
+ }
+]

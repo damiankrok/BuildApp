@@ -12,6 +12,26 @@
 
 ## Current summary (read first)
 
+- **v3.54.9 (2026-11-18): one metric, the interior of every storey, exact glazing** (prompt v3.54.9 with Master Plan
+  v3.54.9 copied in full to `docs/MASTER_PLAN.md`; code `39fec90` — final host built from it). Report
+  `stage-reports/SOURCE_TO_MODEL_V3549.md`, OWNER index `stage-reports/README_V3549.md`, ADR
+  `docs/ADR-V3549-METRIC-INTERIOR-GLAZING.md`, hand-off `research/source-to-model/v3549/HANDOFF.md`. What exists now:
+  house document 0.5.0 with a top-level `interiorSource` (LOCAL's partitions, doors, rooms, stairs, slab openings per
+  level) and `geometry.interior` placed by `resolveInterior` only through a checked transform (one scale, mirror decided
+  by outline overlap then exterior openings/doors, levels by elevation, partitions snapped to inner faces, room ids
+  kept; metric conflict / no registration / undecided mirror → `NOT_BUILT` with the reason); the builder consumes it
+  (INTERIOR partitions, doors, rooms with holes, stairs, slab openings); interior checks have scope `INTERIOR` and never
+  fail the exterior or move the choice; an OVERALL dimension compared with the walls its ends stand on unless a body
+  lies beyond them; a sill hidden by a railing taken at the balcony floor (ESTIMATED); review states APPLIED / IMPROVED
+  / WITHIN_TOLERANCE / VERIFIED_IN_SCOPE with a final measure on the delivered scene, MATCHES-with-open-defects logged;
+  recorded review answers rebound only to their own reading (`legacyRevisionOf`; Pallas garage roof restored); model
+  schema 1.8.0 (`GABLE_FRAME`) with an explicit 1.7.0 restatement; resolver 0.6.0, builder 0.5.0, house path 0.5.0;
+  scorer v2 (head ends at their places + angle, interior per storey vs source rooms). Marcówki GE: H-PO 22/27 with 44
+  interior elements (7/10 + 6/9 source rooms matched), LOCAL 27/27; final host E2E ALL CHECKS PASSED — the description
+  passes its own checks (15/0, 13.52-vs-12.60 gone), LOCAL delivered on fewer contradictions, reuse 0 USD, no-token job.
+  Open: H frame band +0.11 m and high head ends −0.24 m (reading), reviewer not yet given storey plans. Books 23.2994 of
+  24.11036 USD.
+
 - **v3.54.8 (2026-11-17): API parameters to final geometry** (prompt v3.54.8; Master Plan v3.54.8 written into
   `docs/MASTER_PLAN.md` from the prompt, the plan file was not attached; revisions `86fd69f`, `05faa4e` — final host
   built from it). Report `stage-reports/SOURCE_TO_MODEL_V3548.md`, OWNER index `stage-reports/README_V3548.md`, ADR

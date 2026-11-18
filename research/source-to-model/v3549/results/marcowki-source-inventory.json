@@ -1,0 +1,564 @@
+{
+ "package": "src-m2fa281446a8ca-c0499d9df3",
+ "pageHash": "a65b79e25a4f2105255ce0e0bed116ecdf131b1a0f6a2a5583bd24ac5ff08d64",
+ "steps": [
+  "FACADES",
+  "INVENTORY",
+  "PLAN",
+  "REVIEW-1",
+  "REVIEW-2"
+ ],
+ "pictures": [
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "view": "SIDE_UNSPECIFIED",
+   "picture": "p11",
+   "level": null,
+   "original": {
+    "width": 1280,
+    "height": 597
+   },
+   "byteHash": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 1280,
+     "height": 597,
+     "sha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 239,
+     "sha256": "54f10d685766db1da67f79812322923614c07e8dae078da3262a184ba827f0a0"
+    },
+    {
+     "step": "REVIEW-1",
+     "width": 1280,
+     "height": 597,
+     "sha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3"
+    },
+    {
+     "step": "REVIEW-2",
+     "width": 1280,
+     "height": 597,
+     "sha256": "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3"
+    }
+   ],
+   "readInto": [
+    "elevations"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "view": "SIDE_UNSPECIFIED",
+   "picture": "p9",
+   "level": null,
+   "original": {
+    "width": 1280,
+    "height": 598
+   },
+   "byteHash": "0015dfde66b5657c771e703e2cfdb3e068f6e30ff2f8e1435ce950e98a3b11c6",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 1280,
+     "height": 598,
+     "sha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 239,
+     "sha256": "7f65995ec6e741b823daf2301cca5ce3e706b319dd1099f822458284cba102e2"
+    },
+    {
+     "step": "REVIEW-1",
+     "width": 1280,
+     "height": 598,
+     "sha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc"
+    },
+    {
+     "step": "REVIEW-2",
+     "width": 1280,
+     "height": 598,
+     "sha256": "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc"
+    }
+   ],
+   "readInto": [
+    "elevations"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "view": "FRONT",
+   "picture": "p12",
+   "level": null,
+   "original": {
+    "width": 1280,
+    "height": 597
+   },
+   "byteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 1280,
+     "height": 597,
+     "sha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 239,
+     "sha256": "46ed637ddf8c02c0738c1cbc39576fd25ac06e75b5a6dd5e7959f129314b3e6d"
+    },
+    {
+     "step": "REVIEW-1",
+     "width": 1280,
+     "height": 597,
+     "sha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d"
+    },
+    {
+     "step": "REVIEW-2",
+     "width": 1280,
+     "height": 597,
+     "sha256": "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d"
+    }
+   ],
+   "readInto": [
+    "elevations"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+   "document": "ELEVATION",
+   "storey": "NOT_APPLICABLE",
+   "view": "REAR",
+   "picture": "p10",
+   "level": null,
+   "original": {
+    "width": 1280,
+    "height": 598
+   },
+   "byteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 1280,
+     "height": 598,
+     "sha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 239,
+     "sha256": "1767678194ade71d20769eb4768939b2c7fddedda196fb608db2c0980f4e449c"
+    },
+    {
+     "step": "REVIEW-1",
+     "width": 1280,
+     "height": 598,
+     "sha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc"
+    },
+    {
+     "step": "REVIEW-2",
+     "width": 1280,
+     "height": 598,
+     "sha256": "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc"
+    }
+   ],
+   "readInto": [
+    "elevations"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+   "document": "SECTION",
+   "storey": "NOT_APPLICABLE",
+   "view": "NOT_APPLICABLE",
+   "picture": "p13",
+   "level": null,
+   "original": {
+    "width": 1138,
+    "height": 854
+   },
+   "byteHash": "2201a9c1186d2f0cd4e10a747ce39f1b36d08d48781fca980bcdf22b2d27e188",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 1138,
+     "height": 854,
+     "sha256": "89ecc540dbf3f8804d8a777a85f41b774b9ff3ca036f97d58ba76c64fbf29c8a"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 384,
+     "sha256": "0f145d4c36331b31ac8c3b29425e56c0af5e479346bc4920a28c4a9e6e81b913"
+    }
+   ],
+   "readInto": [
+    "levels"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+   "document": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "a7acc5460db7462e8eae44ab3702a321e9a4ccf8c0adefdc11dd763a4e7462b2"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+   "document": "FLOOR_PLAN",
+   "storey": "ATTIC",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "84d0fa78475780d6a6d6ddee4a1153b944da1cb03d0e3473547f5f46cc3db077"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+   "document": "SITE_PLAN",
+   "storey": "UNKNOWN",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 440,
+     "height": 512,
+     "sha256": "1e24e31597b7420151b7b0ae97ad9e606a79cdc698768963a5239979e0daad64"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "view": "UNKNOWN",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [],
+   "readInto": [],
+   "state": "NOT_SENT"
+  },
+  {
+   "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+   "document": "FLOOR_PLAN",
+   "storey": "ATTIC",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 400,
+     "height": 400,
+     "sha256": "6288ff2775595a3f5c3a855aff3ac880daf76e9e2020c106065cf6a5a2846a5a"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-projekt-dom-w-marcowkach-ge-0b42f7006f",
+   "document": "UNKNOWN",
+   "storey": "UNKNOWN",
+   "view": "UNKNOWN",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 400,
+     "height": 300,
+     "sha256": "2abaeff9dda6c2d4aca230856f1247c2ed82319f167667938f9c4ab2ad146233"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "view": "UNKNOWN",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 400,
+     "height": 300,
+     "sha256": "c01ada8ad888a390e25d12b32d4e2fbd78b3635cde5d8d4a3f4537b65c46950c"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+   "document": "UNKNOWN",
+   "storey": "UNKNOWN",
+   "view": "UNKNOWN",
+   "picture": "p17",
+   "level": null,
+   "original": {
+    "width": 1600,
+    "height": 900
+   },
+   "byteHash": "685a5d68132e3c53f28763ac61edb4a2ea285cb629b8153bdb4c40182977d5a1",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 800,
+     "height": 450,
+     "sha256": "a6e8ea98f1424760dd38249f570b05e3dd6b9c21be847c2a342f10cedb12f7ad"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 288,
+     "sha256": "cfb63e89ccf36bb91d38206086e97723cf9776c3a29d6a9562218932c94e2a5c"
+    }
+   ],
+   "readInto": [],
+   "state": "KEPT_NOT_READ"
+  },
+  {
+   "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+   "document": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 400,
+     "height": 400,
+     "sha256": "c7ec3415deddb5d4af2c0521ce766a510f1b4f494e39dd8063c2df585a1c73ac"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-rzut-117027f690",
+   "document": "FLOOR_PLAN",
+   "storey": "ATTIC",
+   "view": "NOT_APPLICABLE",
+   "picture": "p1",
+   "level": 1,
+   "original": {
+    "width": 853,
+    "height": 853
+   },
+   "byteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46",
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "533b0cb4f45741436f5988b3348384183cf7d041445e7069239df651637665cc"
+    },
+    {
+     "step": "PLAN",
+     "width": 800,
+     "height": 800,
+     "sha256": "353bac87f93f3d898ca0e36767991562958073e81323f3e9e9b6592e5cf11a70"
+    }
+   ],
+   "readInto": [],
+   "state": "KEPT_NOT_READ"
+  },
+  {
+   "assetId": "asset-rzut-19a11bc745",
+   "document": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "view": "NOT_APPLICABLE",
+   "picture": "p2",
+   "level": 0,
+   "original": {
+    "width": 1568,
+    "height": 1568
+   },
+   "byteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 800,
+     "height": 800,
+     "sha256": "91aa2471c9cd690f9ae29bcb046980b75346a2ee7508831ab25d1c0defc97c1b"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "23f228c2b2a0a49dbb223b0fe379b6d413cbb975bb4fd0517f0661afc48de1c3"
+    },
+    {
+     "step": "PLAN",
+     "width": 1568,
+     "height": 1568,
+     "sha256": "f148b5007fe5359e6907163eb6e8b1965ad3bb34b19614d005702f32ddfea690"
+    }
+   ],
+   "readInto": [
+    "dimensions",
+    "levels",
+    "outlines"
+   ],
+   "state": "READ"
+  },
+  {
+   "assetId": "asset-rzut-aa1526220f",
+   "document": "FLOOR_PLAN",
+   "storey": "GROUND",
+   "view": "NOT_APPLICABLE",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "37dddd8ef404f8b50764987a5405c613481cde3706987e87be1b9d03a97a91d6"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  },
+  {
+   "assetId": "asset-rzut-f028d28aba",
+   "document": "FLOOR_PLAN",
+   "storey": "ATTIC",
+   "view": "NOT_APPLICABLE",
+   "picture": "p4",
+   "level": 2,
+   "original": {
+    "width": 853,
+    "height": 853
+   },
+   "byteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f",
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 512,
+     "sha256": "abd70ee10f719a6c3c2b97dc277d0be4722754702731f1d8e781a565422482d7"
+    },
+    {
+     "step": "PLAN",
+     "width": 800,
+     "height": 800,
+     "sha256": "a3ecac61fa119d0569148fed0b07346e4747005e00422250277873d93fcfa732"
+    }
+   ],
+   "readInto": [],
+   "state": "KEPT_NOT_READ"
+  },
+  {
+   "assetId": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "view": "UNKNOWN",
+   "picture": "p14",
+   "level": null,
+   "original": {
+    "width": 800,
+    "height": 600
+   },
+   "byteHash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+   "sent": [
+    {
+     "step": "FACADES",
+     "width": 800,
+     "height": 600,
+     "sha256": "4124c76476749e20ec603098321001f92cddeb733499283d70a155c5331da57a"
+    },
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 384,
+     "sha256": "c14c21dd4c87efc8781f532bcc6ad46761c902ccf15ce5dab51c80006cddfa97"
+    }
+   ],
+   "readInto": [],
+   "state": "KEPT_NOT_READ"
+  },
+  {
+   "assetId": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+   "document": "PERSPECTIVE_RENDER",
+   "storey": "NOT_APPLICABLE",
+   "view": "UNKNOWN",
+   "picture": null,
+   "level": null,
+   "original": null,
+   "byteHash": null,
+   "sent": [
+    {
+     "step": "INVENTORY",
+     "width": 512,
+     "height": 384,
+     "sha256": "2d8780da7dfb7c5331f6655454b666ff099eee7b78d6367ebf0057b0f579b1c6"
+    }
+   ],
+   "readInto": [],
+   "state": "SENT_NOT_READ"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+{ "label": "all head ends from the sealed truth in each elevation's own rows: rear W/E 6.09->4.13 (rows 212.7/328.3), front 6.26->4.02 (rows 201.4/334.3)",
+  "elevations": {
+    "el-p10": { "openings": { "o3": { "headLeftY": 328.3, "headRightY": 212.7, "box": { "x0": 545, "y0": 212.7, "x1": 697, "y1": 343 } },
+                              "o4": { "headLeftY": 212.7, "headRightY": 328.3, "box": { "x0": 780, "y0": 212.7, "x1": 932, "y1": 343 } } } },
+    "el-p12": { "openings": { "o4": { "headLeftY": 201.4, "headRightY": 334.3, "box": { "x0": 612, "y0": 201.4, "x1": 760, "y1": 340 } } } } } }

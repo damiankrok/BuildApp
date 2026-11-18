@@ -1,0 +1,93 @@
+{
+ "defects": [
+  {
+   "id": "d1",
+   "side": "REAR",
+   "feature": "GLAZING_SHAPE",
+   "meaning": "MISSING",
+   "weight": "KEY",
+   "state": "IMPROVED",
+   "final": "VERIFIED_IN_SCOPE",
+   "round": 1,
+   "fix": "CORRECTION"
+  },
+  {
+   "id": "d2",
+   "side": "LEFT",
+   "feature": "OTHER",
+   "meaning": "MISSING",
+   "weight": "MINOR",
+   "state": "UNRESOLVED",
+   "final": null,
+   "round": 1,
+   "fix": "UNRESOLVED"
+  },
+  {
+   "id": "d3",
+   "side": "RIGHT",
+   "feature": "ROOF",
+   "meaning": "MISSING",
+   "weight": "MINOR",
+   "state": "UNRESOLVED",
+   "final": null,
+   "round": 1,
+   "fix": "UNRESOLVED"
+  }
+ ],
+ "roundLog": [
+  {
+   "round": 1,
+   "inputModelHash": "2b5df57fc7a4382bd3d76a1865b7cfbcb91b0203bdc5530e94caa90b16dad186",
+   "baseRevision": "bd4f08fc1080",
+   "renderSha256": [
+    "08949c2ebbb749bc630bc723f32433002f9180a6d14ca17f2597cfb1d4895cd4",
+    "ad90e1e74b21af4992c68d184e665e153334ca2ce60ccf902c926e1df02ebe84",
+    "470222bbd9456598d89535171caf5bab2bfa2206593c0820714ec1f027a72dfe",
+    "131a12290662c7ef61b50443ab1bc20e75e5d7d3133b888eabfdc5d1f0d6823c",
+    "157aeb6cd661843a0079d3b7914b3d052c9f0be69bd8fa9f84abd7c75a341f61",
+    "5ebd75f480486ae7b6ec721d9fed9b1ea63668e4e2f1e0fafb127210f03efcc1"
+   ],
+   "sourceSha256": [
+    "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d",
+    "debbf6a7ad86edf5ad55a77f2e6d65f19701338b3024a51ff71a84b19ace77cc",
+    "1ffab14a70fdae68313491609ad6365fa32e078e1b318b7c4e7854c75270acce"
+   ],
+   "verdict": "DIFFERS",
+   "answerRevision": "bd4f08fc1080",
+   "stale": false,
+   "applied": 2,
+   "outputRevision": "f03f8b06a682",
+   "outputModelHash": "eb7103421a019d13752515e9e840f15936f1a03d03f3092cd5232076d97193f0"
+  },
+  {
+   "round": 2,
+   "inputModelHash": "eb7103421a019d13752515e9e840f15936f1a03d03f3092cd5232076d97193f0",
+   "baseRevision": "f03f8b06a682",
+   "renderSha256": [
+    "08949c2ebbb749bc630bc723f32433002f9180a6d14ca17f2597cfb1d4895cd4",
+    "6e35deb249a3214151b83a2f5dd95511533a519b37da95455d1ef69a39861558",
+    "56746f8ae05cb6388f57bff638a96d4a7fca93bbd3e0a70171e0b2e78eda4ace",
+    "131a12290662c7ef61b50443ab1bc20e75e5d7d3133b888eabfdc5d1f0d6823c"
+   ],
+   "sourceSha256": [
+    "da650608f7e29da01a3e3d94c5843d6ef4a591d6e85988be0414988e48f936cc",
+    "e938e52652493a07ba003a5ea8e3f113cbffb13ba804e591ae4e6b20e2ecd3fc",
+    "ebc1d46061248cf345f782372eb5dfe24e3c240ec7a9b90b2a2137ea1568d1d3",
+    "e8d47b382f9d2e501da971eb93d843028a2226bb322f6161fa1c33c33e19598d"
+   ],
+   "verdict": "MATCHES",
+   "answerRevision": "f03f8b06a682",
+   "stale": false,
+   "applied": 0,
+   "outputRevision": "f03f8b06a682",
+   "outputModelHash": "eb7103421a019d13752515e9e840f15936f1a03d03f3092cd5232076d97193f0",
+   "openAtVerdict": [
+    "d2 OTHER MISSING MINOR UNRESOLVED",
+    "d3 ROOF MISSING MINOR UNRESOLVED"
+   ]
+  }
+ ]
+}

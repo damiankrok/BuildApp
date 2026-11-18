@@ -1,0 +1,2850 @@
+{
+ "schema": "buildapp.v3549-marcowki-metric/2",
+ "tolerances": {
+  "TOL_Y": 0.15,
+  "TOL_ANGLE_DEG": 2.5,
+  "IOU_MATCH": 0.3,
+  "GRID_M": 0.05
+ },
+ "models": {
+  "LOCAL": {
+   "rows27": {
+    "met": 27,
+    "of": 27,
+    "unassessable": 2,
+    "rows": [
+     {
+      "feature": "front frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "front frame band (vertical)",
+      "target": 0.82,
+      "model": 0.792,
+      "error": 0.028,
+      "ok": true,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "front frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.607,
+      "error": 0.033,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "front frame inner contour at ¼",
+      "target": 5.473,
+      "model": 5.501,
+      "error": 0.028,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "front frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 3.95
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "front frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "front frame right leg end",
+      "target": 3.06,
+      "model": 3.06,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+     },
+     {
+      "feature": "rear frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "rear frame band (vertical)",
+      "target": 0.82,
+      "model": 0.79,
+      "error": 0.03,
+      "ok": true,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "rear frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.605,
+      "error": 0.035,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "rear frame inner contour at ¼",
+      "target": 5.473,
+      "model": 5.503,
+      "error": 0.03,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "rear frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 8.1
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "rear frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "rear frame right leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-REAR east return to the ground"
+     },
+     {
+      "feature": "front railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing top",
+      "target": 3.93,
+      "model": 3.97,
+      "error": 0.04,
+      "ok": null,
+      "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "rear railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing top",
+      "target": 3.93,
+      "model": 3.984,
+      "error": 0.054,
+      "ok": null,
+      "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "front band continuity (loggia + portal)",
+      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+      "model": "32/33 probes; soffit median 2.32",
+      "error": null,
+      "ok": true,
+      "truth": "T2-FACADE-FRONT-BAND"
+     },
+     {
+      "feature": "front slab full extent",
+      "target": "3.25–7.90 m",
+      "model": "3.31–7.90 m",
+      "error": 0.06,
+      "ok": true,
+      "truth": "T2-BALCONY-FRONT"
+     },
+     {
+      "feature": "front-gable head high end",
+      "target": 6.26,
+      "model": 6.26,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "front-gable head low end",
+      "target": 4.02,
+      "model": 3.994,
+      "error": 0.026,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "rear-gable-w head high end",
+      "target": 6.09,
+      "model": 6.1,
+      "error": 0.01,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-w head low end",
+      "target": 4.13,
+      "model": 4.137,
+      "error": 0.007,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-e head high end",
+      "target": 6.09,
+      "model": 6.09,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear-gable-e head low end",
+      "target": 4.13,
+      "model": 4.137,
+      "error": 0.007,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear living glazing head",
+      "target": 2.3,
+      "model": 2.3,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GLAZING 470/230"
+     }
+    ]
+   },
+   "glazing": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "truth": {
+      "highEndAlong": 3.95,
+      "highY": 6.26,
+      "lowY": 4.02,
+      "angleDeg": 39.68,
+      "callout": "270/320",
+      "lowEndAlong": 6.65
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-front-4-0",
+      "alongFrom": 3.925,
+      "alongTo": 6.625,
+      "yAtHighEnd": 6.26,
+      "yAtLowEnd": 3.994,
+      "angleDeg": 40.01
+     },
+     "error": {
+      "highEnd": 0.0,
+      "lowEnd": 0.026,
+      "angleDeg": 0.33
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "truth": {
+      "highEndAlong": 8.76,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 11.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-rear-6-0",
+      "alongFrom": 8.754,
+      "alongTo": 11.094,
+      "yAtHighEnd": 6.1,
+      "yAtLowEnd": 4.137,
+      "angleDeg": 39.99
+     },
+     "error": {
+      "highEnd": 0.01,
+      "lowEnd": 0.007,
+      "angleDeg": 0.04
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "truth": {
+      "highEndAlong": 7.44,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 5.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-rear-6-1",
+      "alongFrom": 5.132,
+      "alongTo": 7.472,
+      "yAtHighEnd": 6.09,
+      "yAtLowEnd": 4.137,
+      "angleDeg": 39.85
+     },
+     "error": {
+      "highEnd": 0.0,
+      "lowEnd": 0.007,
+      "angleDeg": 0.1
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      14.601
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      0.001
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.966,
+        "shapeError": 0.034,
+        "areaModelM2": 24.24,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": -0.18,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.958,
+        "shapeError": 0.042,
+        "areaModelM2": 9.03,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.4,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.945,
+        "shapeError": 0.055,
+        "areaModelM2": 5.71,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.44,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.75,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.22,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.895,
+        "shapeError": 0.105,
+        "areaModelM2": 3.76,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.36,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.892,
+        "shapeError": 0.108,
+        "areaModelM2": 3.48,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.34,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.589,
+        "shapeError": 0.411,
+        "areaModelM2": 47.28,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 17.67,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.123,
+      "meanAbsAreaErrorM2": 2.8,
+      "floorCoverage": 0.92,
+      "floorOutsideSource": 0.4,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.957,
+        "shapeError": 0.043,
+        "areaModelM2": 6.61,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.3,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.943,
+        "shapeError": 0.057,
+        "areaModelM2": 14.65,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.8,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.861,
+        "shapeError": 0.139,
+        "areaModelM2": 7.43,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -1.14,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.796,
+        "shapeError": 0.204,
+        "areaModelM2": 13.08,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 1.9,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.664,
+        "shapeError": 0.336,
+        "areaModelM2": 7.38,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.7,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.597,
+        "shapeError": 0.403,
+        "areaModelM2": 18.28,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 5.55,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.197,
+      "meanAbsAreaErrorM2": 1.73,
+      "floorCoverage": 0.871,
+      "floorOutsideSource": 0.37,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.65
+     }
+    ]
+   }
+  },
+  "H-PRZED": {
+   "rows27": {
+    "met": 21,
+    "of": 27,
+    "unassessable": 2,
+    "rows": [
+     {
+      "feature": "front frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "front frame band (vertical)",
+      "target": 0.82,
+      "model": 0.927,
+      "error": 0.107,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "front frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.71,
+      "error": 0.07,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "front frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.364,
+      "error": 0.107,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "front frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 3.954
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "front frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "front frame right leg end",
+      "target": 3.06,
+      "model": 3.06,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+     },
+     {
+      "feature": "rear frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "rear frame band (vertical)",
+      "target": 0.82,
+      "model": 0.966,
+      "error": 0.146,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "rear frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.74,
+      "error": 0.1,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "rear frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.325,
+      "error": 0.146,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "rear frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 8.096
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "rear frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "rear frame right leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-REAR east return to the ground"
+     },
+     {
+      "feature": "front railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing top",
+      "target": 3.93,
+      "model": 3.891,
+      "error": 0.039,
+      "ok": null,
+      "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "rear railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing top",
+      "target": 3.93,
+      "model": 3.882,
+      "error": 0.048,
+      "ok": null,
+      "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "front band continuity (loggia + portal)",
+      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+      "model": "31/33 probes; soffit median 2.27",
+      "error": null,
+      "ok": true,
+      "truth": "T2-FACADE-FRONT-BAND"
+     },
+     {
+      "feature": "front slab full extent",
+      "target": "3.25–7.90 m",
+      "model": "3.24–7.91 m",
+      "error": 0.014,
+      "ok": true,
+      "truth": "T2-BALCONY-FRONT"
+     },
+     {
+      "feature": "front-gable head high end",
+      "target": 6.26,
+      "model": 6.081,
+      "error": 0.179,
+      "ok": false,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "front-gable head low end",
+      "target": 4.02,
+      "model": 4.224,
+      "error": 0.204,
+      "ok": false,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "rear-gable-w head high end",
+      "target": 6.09,
+      "model": 5.848,
+      "error": 0.242,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-w head low end",
+      "target": 4.13,
+      "model": 4.182,
+      "error": 0.052,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-e head high end",
+      "target": 6.09,
+      "model": 5.848,
+      "error": 0.242,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear-gable-e head low end",
+      "target": 4.13,
+      "model": 4.182,
+      "error": 0.052,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear living glazing head",
+      "target": 2.3,
+      "model": 2.373,
+      "error": 0.073,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GLAZING 470/230"
+     }
+    ]
+   },
+   "glazing": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "truth": {
+      "highEndAlong": 3.95,
+      "highY": 6.26,
+      "lowY": 4.02,
+      "angleDeg": 39.68,
+      "callout": "270/320",
+      "lowEndAlong": 6.65
+     },
+     "built": true,
+     "model": {
+      "id": "opening-front-2",
+      "alongFrom": 3.995,
+      "alongTo": 6.489,
+      "yAtHighEnd": 6.081,
+      "yAtLowEnd": 4.224,
+      "angleDeg": 36.67
+     },
+     "error": {
+      "highEnd": 0.179,
+      "lowEnd": 0.204,
+      "angleDeg": 3.01
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": false,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "truth": {
+      "highEndAlong": 8.76,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 11.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-4",
+      "alongFrom": 8.808,
+      "alongTo": 11.385,
+      "yAtHighEnd": 5.848,
+      "yAtLowEnd": 4.182,
+      "angleDeg": 32.88
+     },
+     "error": {
+      "highEnd": 0.242,
+      "lowEnd": 0.052,
+      "angleDeg": 7.07
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "truth": {
+      "highEndAlong": 7.44,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 5.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-2",
+      "alongFrom": 4.824,
+      "alongTo": 7.401,
+      "yAtHighEnd": 5.848,
+      "yAtLowEnd": 4.182,
+      "angleDeg": 32.88
+     },
+     "error": {
+      "highEnd": 0.242,
+      "lowEnd": 0.052,
+      "angleDeg": 7.07
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    }
+   ],
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      13.49
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      -1.11
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 0,
+      "truthRooms": 10,
+      "matched": [],
+      "missing": [
+       "T2-ROOM-G-1 Wiatrołap",
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-4 Salon + Jadalnia",
+       "T2-ROOM-G-5 Spiżarnia",
+       "T2-ROOM-G-6 Łazienka",
+       "T2-ROOM-G-7 Pokój",
+       "T2-ROOM-G-8 Kotłownia",
+       "T2-ROOM-G-9 Garaż",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [],
+      "meanShapeError": null,
+      "meanAbsAreaErrorM2": null,
+      "floorCoverage": 0.0,
+      "floorOutsideSource": 0.0,
+      "partitions": 0,
+      "doors": 0,
+      "passages": 0,
+      "components": 0,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 0,
+      "truthRooms": 9,
+      "matched": [],
+      "missing": [
+       "T2-ROOM-U-1 Korytarz",
+       "T2-ROOM-U-2 Pokój (south)",
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-4 Łazienka",
+       "T2-ROOM-U-5 Pralnia",
+       "T2-ROOM-U-6 Pokój (north-west)",
+       "T2-ROOM-U-7 Pokój (north-east)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [],
+      "meanShapeError": null,
+      "meanAbsAreaErrorM2": null,
+      "floorCoverage": 0.0,
+      "floorOutsideSource": 0.0,
+      "partitions": 0,
+      "doors": 0,
+      "passages": 0,
+      "components": 0,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     }
+    ]
+   },
+   "interiorPlacement": {
+    "status": "NOT_BUILT",
+    "note": "this document describes the exterior; the interior is not built from it and is not checked",
+    "transform": null,
+    "dropped": []
+   }
+  },
+  "H-PO": {
+   "rows27": {
+    "met": 22,
+    "of": 27,
+    "unassessable": 2,
+    "rows": [
+     {
+      "feature": "front frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "front frame band (vertical)",
+      "target": 0.82,
+      "model": 0.927,
+      "error": 0.107,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "front frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.71,
+      "error": 0.07,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "front frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.364,
+      "error": 0.107,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "front frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 3.954
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "front frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "front frame right leg end",
+      "target": 3.06,
+      "model": 3.06,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+     },
+     {
+      "feature": "rear frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "rear frame band (vertical)",
+      "target": 0.82,
+      "model": 0.966,
+      "error": 0.146,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "rear frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.74,
+      "error": 0.1,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "rear frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.325,
+      "error": 0.146,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "rear frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 8.096
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "rear frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "rear frame right leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-REAR east return to the ground"
+     },
+     {
+      "feature": "front railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing top",
+      "target": 3.93,
+      "model": 3.891,
+      "error": 0.039,
+      "ok": null,
+      "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "rear railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing top",
+      "target": 3.93,
+      "model": 3.882,
+      "error": 0.048,
+      "ok": null,
+      "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "front band continuity (loggia + portal)",
+      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+      "model": "31/33 probes; soffit median 2.27",
+      "error": null,
+      "ok": true,
+      "truth": "T2-FACADE-FRONT-BAND"
+     },
+     {
+      "feature": "front slab full extent",
+      "target": "3.25–7.90 m",
+      "model": "3.24–7.91 m",
+      "error": 0.014,
+      "ok": true,
+      "truth": "T2-BALCONY-FRONT"
+     },
+     {
+      "feature": "front-gable head high end",
+      "target": 6.26,
+      "model": 6.082,
+      "error": 0.178,
+      "ok": false,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "front-gable head low end",
+      "target": 4.02,
+      "model": 3.924,
+      "error": 0.096,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "rear-gable-w head high end",
+      "target": 6.09,
+      "model": 5.848,
+      "error": 0.242,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-w head low end",
+      "target": 4.13,
+      "model": 3.983,
+      "error": 0.147,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-e head high end",
+      "target": 6.09,
+      "model": 5.848,
+      "error": 0.242,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear-gable-e head low end",
+      "target": 4.13,
+      "model": 3.983,
+      "error": 0.147,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear living glazing head",
+      "target": 2.3,
+      "model": 2.373,
+      "error": 0.073,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GLAZING 470/230"
+     }
+    ]
+   },
+   "glazing": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "truth": {
+      "highEndAlong": 3.95,
+      "highY": 6.26,
+      "lowY": 4.02,
+      "angleDeg": 39.68,
+      "callout": "270/320",
+      "lowEndAlong": 6.65
+     },
+     "built": true,
+     "model": {
+      "id": "opening-front-2",
+      "alongFrom": 3.995,
+      "alongTo": 6.489,
+      "yAtHighEnd": 6.082,
+      "yAtLowEnd": 3.924,
+      "angleDeg": 40.87
+     },
+     "error": {
+      "highEnd": 0.178,
+      "lowEnd": 0.096,
+      "angleDeg": 1.19
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "truth": {
+      "highEndAlong": 8.76,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 11.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-4",
+      "alongFrom": 8.808,
+      "alongTo": 11.385,
+      "yAtHighEnd": 5.848,
+      "yAtLowEnd": 3.983,
+      "angleDeg": 35.89
+     },
+     "error": {
+      "highEnd": 0.242,
+      "lowEnd": 0.147,
+      "angleDeg": 4.06
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "truth": {
+      "highEndAlong": 7.44,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 5.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-2",
+      "alongFrom": 4.824,
+      "alongTo": 7.401,
+      "yAtHighEnd": 5.848,
+      "yAtLowEnd": 3.983,
+      "angleDeg": 35.89
+     },
+     "error": {
+      "highEnd": 0.242,
+      "lowEnd": 0.147,
+      "angleDeg": 4.06
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": false,
+      "sense": true
+     }
+    }
+   ],
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      13.49
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      -1.11
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.952,
+        "shapeError": 0.048,
+        "areaModelM2": 24.61,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": 0.19,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.948,
+        "shapeError": 0.052,
+        "areaModelM2": 9.45,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": 0.02,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.81,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.16,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 3.9,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.22,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.89,
+        "shapeError": 0.11,
+        "areaModelM2": 5.91,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.24,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.849,
+        "shapeError": 0.151,
+        "areaModelM2": 3.55,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.27,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.593,
+        "shapeError": 0.407,
+        "areaModelM2": 47.91,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 18.3,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.139,
+      "meanAbsAreaErrorM2": 2.77,
+      "floorCoverage": 0.926,
+      "floorOutsideSource": 1.7,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.951,
+        "shapeError": 0.049,
+        "areaModelM2": 14.89,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.56,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.905,
+        "shapeError": 0.095,
+        "areaModelM2": 6.75,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.16,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.86,
+        "shapeError": 0.14,
+        "areaModelM2": 7.64,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -0.93,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.778,
+        "shapeError": 0.222,
+        "areaModelM2": 13.63,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 2.45,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.647,
+        "shapeError": 0.353,
+        "areaModelM2": 7.51,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.83,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.587,
+        "shapeError": 0.413,
+        "areaModelM2": 19.07,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 6.34,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.212,
+      "meanAbsAreaErrorM2": 1.88,
+      "floorCoverage": 0.881,
+      "floorOutsideSource": 1.69,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.66
+     }
+    ]
+   },
+   "interiorPlacement": {
+    "status": "BUILT",
+    "note": "placed from LOCAL (2bf773280194) through a checked transform: 44 element(s) placed, 0 not",
+    "transform": {
+     "mirrorX": false,
+     "mirrorZ": false,
+     "scale": 0.99627,
+     "dx": 0,
+     "dz": 0,
+     "axisRatio": 0.007488,
+     "overlap": 0.980257,
+     "levels": [
+      {
+       "source": 0,
+       "house": 0,
+       "elevationGapM": 0
+      },
+      {
+       "source": 1,
+       "house": 1,
+       "elevationGapM": 0
+      }
+     ],
+     "how": "one scale 0.9963 from the two extents (x 1.0000, z 0.9925), shifted onto the outline's corner; as drawn (footprint overlap 98.0 %)"
+    },
+    "dropped": []
+   }
+  },
+  "H-host": {
+   "rows27": {
+    "met": 16,
+    "of": 27,
+    "unassessable": 2,
+    "rows": [
+     {
+      "feature": "front frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "front frame band (vertical)",
+      "target": 0.82,
+      "model": 0.979,
+      "error": 0.159,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "front frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.75,
+      "error": 0.11,
+      "ok": false,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "front frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.312,
+      "error": 0.159,
+      "ok": false,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "front frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 3.954
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "front frame left leg end",
+      "target": 0.0,
+      "model": -0.042,
+      "error": 0.042,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "front frame right leg end",
+      "target": 3.06,
+      "model": 3.06,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+     },
+     {
+      "feature": "rear frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "rear frame band (vertical)",
+      "target": 0.82,
+      "model": 0.983,
+      "error": 0.163,
+      "ok": false,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "rear frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.753,
+      "error": 0.113,
+      "ok": false,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "rear frame inner contour at ¼",
+      "target": 5.471,
+      "model": 5.308,
+      "error": 0.163,
+      "ok": false,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "rear frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 8.096
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "rear frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "rear frame right leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-REAR east return to the ground"
+     },
+     {
+      "feature": "front railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing top",
+      "target": 3.93,
+      "model": 3.89,
+      "error": 0.04,
+      "ok": null,
+      "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "rear railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing top",
+      "target": 3.93,
+      "model": 3.899,
+      "error": 0.031,
+      "ok": null,
+      "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "front band continuity (loggia + portal)",
+      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+      "model": "31/33 probes; soffit median 2.27",
+      "error": null,
+      "ok": true,
+      "truth": "T2-FACADE-FRONT-BAND"
+     },
+     {
+      "feature": "front slab full extent",
+      "target": "3.25–7.90 m",
+      "model": "3.22–7.91 m",
+      "error": 0.027,
+      "ok": true,
+      "truth": "T2-BALCONY-FRONT"
+     },
+     {
+      "feature": "front-gable head high end",
+      "target": 6.26,
+      "model": 6.067,
+      "error": 0.193,
+      "ok": false,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "front-gable head low end",
+      "target": 4.02,
+      "model": 3.958,
+      "error": 0.062,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "rear-gable-w head high end",
+      "target": 6.09,
+      "model": 5.832,
+      "error": 0.258,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-w head low end",
+      "target": 4.13,
+      "model": 3.967,
+      "error": 0.163,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-e head high end",
+      "target": 6.09,
+      "model": 5.832,
+      "error": 0.258,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear-gable-e head low end",
+      "target": 4.13,
+      "model": 3.967,
+      "error": 0.163,
+      "ok": false,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear living glazing head",
+      "target": 2.3,
+      "model": 2.407,
+      "error": 0.107,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GLAZING 470/230"
+     }
+    ]
+   },
+   "glazing": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "truth": {
+      "highEndAlong": 3.95,
+      "highY": 6.26,
+      "lowY": 4.02,
+      "angleDeg": 39.68,
+      "callout": "270/320",
+      "lowEndAlong": 6.65
+     },
+     "built": true,
+     "model": {
+      "id": "opening-front-2",
+      "alongFrom": 3.949,
+      "alongTo": 6.514,
+      "yAtHighEnd": 6.067,
+      "yAtLowEnd": 3.958,
+      "angleDeg": 39.43
+     },
+     "error": {
+      "highEnd": 0.193,
+      "lowEnd": 0.062,
+      "angleDeg": 0.25
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "truth": {
+      "highEndAlong": 8.76,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 11.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-4",
+      "alongFrom": 8.808,
+      "alongTo": 11.385,
+      "yAtHighEnd": 5.832,
+      "yAtLowEnd": 3.967,
+      "angleDeg": 35.89
+     },
+     "error": {
+      "highEnd": 0.258,
+      "lowEnd": 0.163,
+      "angleDeg": 4.06
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": false,
+      "angle": false,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "truth": {
+      "highEndAlong": 7.44,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 5.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-rear-2",
+      "alongFrom": 4.875,
+      "alongTo": 7.367,
+      "yAtHighEnd": 5.832,
+      "yAtLowEnd": 3.967,
+      "angleDeg": 36.81
+     },
+     "error": {
+      "highEnd": 0.258,
+      "lowEnd": 0.163,
+      "angleDeg": 3.14
+     },
+     "ok": {
+      "highEnd": false,
+      "lowEnd": false,
+      "angle": false,
+      "sense": true
+     }
+    }
+   ],
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      13.49
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      -1.11
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.966,
+        "shapeError": 0.034,
+        "areaModelM2": 24.61,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": 0.19,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.954,
+        "shapeError": 0.046,
+        "areaModelM2": 9.39,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.04,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.904,
+        "shapeError": 0.096,
+        "areaModelM2": 5.81,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.34,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.898,
+        "shapeError": 0.102,
+        "areaModelM2": 1.81,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.16,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 3.9,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.22,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.869,
+        "shapeError": 0.131,
+        "areaModelM2": 3.47,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.35,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.594,
+        "shapeError": 0.406,
+        "areaModelM2": 47.93,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 18.32,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.131,
+      "meanAbsAreaErrorM2": 2.8,
+      "floorCoverage": 0.928,
+      "floorOutsideSource": 1.27,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.962,
+        "shapeError": 0.038,
+        "areaModelM2": 15.07,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.38,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.911,
+        "shapeError": 0.089,
+        "areaModelM2": 6.8,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.11,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.863,
+        "shapeError": 0.137,
+        "areaModelM2": 7.67,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -0.9,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.788,
+        "shapeError": 0.212,
+        "areaModelM2": 13.49,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 2.31,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.635,
+        "shapeError": 0.365,
+        "areaModelM2": 7.28,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.6,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.593,
+        "shapeError": 0.407,
+        "areaModelM2": 18.81,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 6.08,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.208,
+      "meanAbsAreaErrorM2": 1.73,
+      "floorCoverage": 0.882,
+      "floorOutsideSource": 1.22,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.648
+     }
+    ]
+   },
+   "interiorPlacement": {
+    "status": "BUILT",
+    "note": "placed from LOCAL (36f522a4eb21) through a checked transform: 44 element(s) placed, 0 not",
+    "transform": {
+     "mirrorX": false,
+     "mirrorZ": false,
+     "scale": 0.997171,
+     "dx": 0,
+     "dz": 0,
+     "axisRatio": 0.005673,
+     "overlap": 0.97598,
+     "levels": [
+      {
+       "source": 0,
+       "house": 0,
+       "elevationGapM": 0
+      },
+      {
+       "source": 1,
+       "house": 1,
+       "elevationGapM": 0
+      }
+     ],
+     "how": "one scale 0.9972 from the two extents (x 1.0000, z 0.9943), shifted onto the outline's corner; as drawn (footprint overlap 97.6 %)"
+    },
+    "dropped": []
+   }
+  },
+  "ODDANY": {
+   "rows27": {
+    "met": 27,
+    "of": 27,
+    "unassessable": 2,
+    "rows": [
+     {
+      "feature": "front frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "front frame band (vertical)",
+      "target": 0.82,
+      "model": 0.792,
+      "error": 0.028,
+      "ok": true,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "front frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.607,
+      "error": 0.033,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "front frame inner contour at ¼",
+      "target": 5.473,
+      "model": 5.501,
+      "error": 0.028,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "front frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 3.95
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "front frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "front frame right leg end",
+      "target": 3.06,
+      "model": 3.06,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-FRONT-ATTIC eastReturnBaseY"
+     },
+     {
+      "feature": "rear frame pieces",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "one assembly (T2-ASSEMBLY-*-GABLE-FRAME)"
+     },
+     {
+      "feature": "rear frame band (vertical)",
+      "target": 0.82,
+      "model": 0.79,
+      "error": 0.03,
+      "ok": true,
+      "truth": "T2-ROOF-VERGE-MEMBER (48–49 px)"
+     },
+     {
+      "feature": "rear frame band (across the slope)",
+      "target": 0.64,
+      "model": 0.605,
+      "error": 0.035,
+      "ok": true,
+      "truth": "T2-UNRES-VERGE-DEPTH face width"
+     },
+     {
+      "feature": "rear frame inner contour at ¼",
+      "target": 5.473,
+      "model": 5.503,
+      "error": 0.03,
+      "ok": true,
+      "truth": "T2-LEVEL-RIDGE, T2-ROOF-MAIN pitch, band"
+     },
+     {
+      "feature": "rear frame joint at the ridge",
+      "target": "continuous, ≤ 0.05 m above the roof, at the ridge",
+      "model": {
+       "continuous": true,
+       "protrusionM": 0,
+       "apexAlong": 8.1
+      },
+      "error": 0,
+      "ok": true,
+      "truth": "T2-ASSEMBLY-*-GABLE-FRAME: the rakes meet at the ridge"
+     },
+     {
+      "feature": "rear frame left leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "returns to the ground (T2-RECESS-*)"
+     },
+     {
+      "feature": "rear frame right leg end",
+      "target": 0.0,
+      "model": 0,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-RECESS-REAR east return to the ground"
+     },
+     {
+      "feature": "front railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-FRONT"
+     },
+     {
+      "feature": "front railing top",
+      "target": 3.93,
+      "model": 3.97,
+      "error": 0.04,
+      "ok": null,
+      "truth": "T2-RAILING-FRONT (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "rear railings over the slab",
+      "target": 1,
+      "model": 1,
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing infill",
+      "target": "GLASS",
+      "model": "GLASS",
+      "error": null,
+      "ok": true,
+      "truth": "T2-RAILING-REAR"
+     },
+     {
+      "feature": "rear railing top",
+      "target": 3.93,
+      "model": 3.984,
+      "error": 0.054,
+      "ok": null,
+      "truth": "T2-RAILING-REAR (height: T2-UNRES-RAILING-HEIGHT)"
+     },
+     {
+      "feature": "front band continuity (loggia + portal)",
+      "target": "3.25–12.05 m, soffit 2.28, top 3.07",
+      "model": "32/33 probes; soffit median 2.32",
+      "error": null,
+      "ok": true,
+      "truth": "T2-FACADE-FRONT-BAND"
+     },
+     {
+      "feature": "front slab full extent",
+      "target": "3.25–7.90 m",
+      "model": "3.31–7.90 m",
+      "error": 0.06,
+      "ok": true,
+      "truth": "T2-BALCONY-FRONT"
+     },
+     {
+      "feature": "front-gable head high end",
+      "target": 6.26,
+      "model": 6.26,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "front-gable head low end",
+      "target": 4.02,
+      "model": 3.994,
+      "error": 0.026,
+      "ok": true,
+      "truth": "T2-OPEN-FRONT-GABLE"
+     },
+     {
+      "feature": "rear-gable-w head high end",
+      "target": 6.09,
+      "model": 6.1,
+      "error": 0.01,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-w head low end",
+      "target": 4.13,
+      "model": 4.152,
+      "error": 0.022,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-W"
+     },
+     {
+      "feature": "rear-gable-e head high end",
+      "target": 6.09,
+      "model": 6.09,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear-gable-e head low end",
+      "target": 4.13,
+      "model": 4.152,
+      "error": 0.022,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GABLE-E"
+     },
+     {
+      "feature": "rear living glazing head",
+      "target": 2.3,
+      "model": 2.3,
+      "error": 0.0,
+      "ok": true,
+      "truth": "T2-OPEN-REAR-GLAZING 470/230"
+     }
+    ]
+   },
+   "glazing": [
+    {
+     "id": "T2-OPEN-FRONT-GABLE",
+     "truth": {
+      "highEndAlong": 3.95,
+      "highY": 6.26,
+      "lowY": 4.02,
+      "angleDeg": 39.68,
+      "callout": "270/320",
+      "lowEndAlong": 6.65
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-front-4-0",
+      "alongFrom": 3.925,
+      "alongTo": 6.625,
+      "yAtHighEnd": 6.26,
+      "yAtLowEnd": 3.994,
+      "angleDeg": 40.01
+     },
+     "error": {
+      "highEnd": 0.0,
+      "lowEnd": 0.026,
+      "angleDeg": 0.33
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-W",
+     "truth": {
+      "highEndAlong": 8.76,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 11.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-rear-6-0",
+      "alongFrom": 8.754,
+      "alongTo": 11.094,
+      "yAtHighEnd": 6.1,
+      "yAtLowEnd": 4.152,
+      "angleDeg": 39.78
+     },
+     "error": {
+      "highEnd": 0.01,
+      "lowEnd": 0.022,
+      "angleDeg": 0.17
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    },
+    {
+     "id": "T2-OPEN-REAR-GABLE-E",
+     "truth": {
+      "highEndAlong": 7.44,
+      "highY": 6.09,
+      "lowY": 4.13,
+      "angleDeg": 39.95,
+      "callout": "234/303",
+      "lowEndAlong": 5.1
+     },
+     "built": true,
+     "model": {
+      "id": "opening-1-rear-6-1",
+      "alongFrom": 5.147,
+      "alongTo": 7.457,
+      "yAtHighEnd": 6.09,
+      "yAtLowEnd": 4.152,
+      "angleDeg": 40.0
+     },
+     "error": {
+      "highEnd": 0.0,
+      "lowEnd": 0.022,
+      "angleDeg": 0.05
+     },
+     "ok": {
+      "highEnd": true,
+      "lowEnd": true,
+      "angle": true,
+      "sense": true
+     }
+    }
+   ],
+   "interior": {
+    "built": true,
+    "registration": {
+     "modelExtent": [
+      12.05,
+      14.601
+     ],
+     "truthExtent": [
+      12.05,
+      14.6
+     ],
+     "residual": [
+      0.0,
+      0.001
+     ]
+    },
+    "storeys": [
+     {
+      "storey": 0,
+      "modelRooms": 7,
+      "truthRooms": 10,
+      "matched": [
+       {
+        "truth": "T2-ROOM-G-9",
+        "label": "Garaż",
+        "model": "attached-0-room-0-0",
+        "iou": 0.966,
+        "shapeError": 0.034,
+        "areaModelM2": 24.24,
+        "areaTruthM2": 24.42,
+        "areaErrorM2": -0.18,
+        "publishedM2": 24.1
+       },
+       {
+        "truth": "T2-ROOM-G-7",
+        "label": "Pokój",
+        "model": "main-room-0-0",
+        "iou": 0.958,
+        "shapeError": 0.042,
+        "areaModelM2": 9.03,
+        "areaTruthM2": 9.43,
+        "areaErrorM2": -0.4,
+        "publishedM2": 9.18
+       },
+       {
+        "truth": "T2-ROOM-G-8",
+        "label": "Kotłownia",
+        "model": "main-room-0-2",
+        "iou": 0.945,
+        "shapeError": 0.055,
+        "areaModelM2": 5.71,
+        "areaTruthM2": 6.15,
+        "areaErrorM2": -0.44,
+        "publishedM2": 5.8
+       },
+       {
+        "truth": "T2-ROOM-G-5",
+        "label": "Spiżarnia",
+        "model": "main-room-0-5",
+        "iou": 0.896,
+        "shapeError": 0.104,
+        "areaModelM2": 1.75,
+        "areaTruthM2": 1.97,
+        "areaErrorM2": -0.22,
+        "publishedM2": 1.44
+       },
+       {
+        "truth": "T2-ROOM-G-6",
+        "label": "Łazienka",
+        "model": "main-room-0-4",
+        "iou": 0.895,
+        "shapeError": 0.105,
+        "areaModelM2": 3.76,
+        "areaTruthM2": 4.12,
+        "areaErrorM2": -0.36,
+        "publishedM2": 3.95
+       },
+       {
+        "truth": "T2-ROOM-G-1",
+        "label": "Wiatrołap",
+        "model": "main-room-0-1",
+        "iou": 0.892,
+        "shapeError": 0.108,
+        "areaModelM2": 3.48,
+        "areaTruthM2": 3.82,
+        "areaErrorM2": -0.34,
+        "publishedM2": 3.7
+       },
+       {
+        "truth": "T2-ROOM-G-4",
+        "label": "Salon + Jadalnia",
+        "model": "main-room-0-3",
+        "iou": 0.589,
+        "shapeError": 0.411,
+        "areaModelM2": 47.28,
+        "areaTruthM2": 29.61,
+        "areaErrorM2": 17.67,
+        "publishedM2": 29.52
+       }
+      ],
+      "missing": [
+       "T2-ROOM-G-2 Hol",
+       "T2-ROOM-G-3 Kuchnia",
+       "T2-ROOM-G-STAIR Schody (shaft, no number on the ground table)"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-0-3",
+        "over": [
+         "T2-ROOM-G-2",
+         "T2-ROOM-G-3",
+         "T2-ROOM-G-4"
+        ]
+       }
+      ],
+      "meanShapeError": 0.123,
+      "meanAbsAreaErrorM2": 2.8,
+      "floorCoverage": 0.92,
+      "floorOutsideSource": 0.4,
+      "partitions": 11,
+      "doors": 5,
+      "passages": 5,
+      "components": 2,
+      "slabOpenings": 0,
+      "stairShaftIoU": null
+     },
+     {
+      "storey": 1,
+      "modelRooms": 6,
+      "truthRooms": 9,
+      "matched": [
+       {
+        "truth": "T2-ROOM-U-5",
+        "label": "Pralnia",
+        "model": "main-room-1-3",
+        "iou": 0.957,
+        "shapeError": 0.043,
+        "areaModelM2": 6.61,
+        "areaTruthM2": 6.91,
+        "areaErrorM2": -0.3,
+        "publishedM2": 5.59
+       },
+       {
+        "truth": "T2-ROOM-U-6",
+        "label": "Pokój (north-west)",
+        "model": "main-room-1-5",
+        "iou": 0.943,
+        "shapeError": 0.057,
+        "areaModelM2": 14.65,
+        "areaTruthM2": 15.45,
+        "areaErrorM2": -0.8,
+        "publishedM2": 12.57
+       },
+       {
+        "truth": "T2-ROOM-U-4",
+        "label": "Łazienka",
+        "model": "main-room-1-1",
+        "iou": 0.861,
+        "shapeError": 0.139,
+        "areaModelM2": 7.43,
+        "areaTruthM2": 8.57,
+        "areaErrorM2": -1.14,
+        "publishedM2": 6.4
+       },
+       {
+        "truth": "T2-ROOM-U-7",
+        "label": "Pokój (north-east)",
+        "model": "main-room-1-4",
+        "iou": 0.796,
+        "shapeError": 0.204,
+        "areaModelM2": 13.08,
+        "areaTruthM2": 11.18,
+        "areaErrorM2": 1.9,
+        "publishedM2": 9.02
+       },
+       {
+        "truth": "T2-ROOM-U-1",
+        "label": "Korytarz",
+        "model": "main-room-1-2",
+        "iou": 0.664,
+        "shapeError": 0.336,
+        "areaModelM2": 7.38,
+        "areaTruthM2": 6.68,
+        "areaErrorM2": 0.7,
+        "publishedM2": 6.17
+       },
+       {
+        "truth": "T2-ROOM-U-2",
+        "label": "Pokój (south)",
+        "model": "main-room-1-0",
+        "iou": 0.597,
+        "shapeError": 0.403,
+        "areaModelM2": 18.28,
+        "areaTruthM2": 12.73,
+        "areaErrorM2": 5.55,
+        "publishedM2": 10.25
+       }
+      ],
+      "missing": [
+       "T2-ROOM-U-3 Garderoba (south-west)",
+       "T2-ROOM-U-8 Garderoba (north-east)",
+       "T2-ROOM-U-9 Schody"
+      ],
+      "extra": [],
+      "merged": [
+       {
+        "model": "main-room-1-0",
+        "over": [
+         "T2-ROOM-U-2",
+         "T2-ROOM-U-3"
+        ]
+       },
+       {
+        "model": "main-room-1-4",
+        "over": [
+         "T2-ROOM-U-7",
+         "T2-ROOM-U-8"
+        ]
+       }
+      ],
+      "meanShapeError": 0.197,
+      "meanAbsAreaErrorM2": 1.73,
+      "floorCoverage": 0.871,
+      "floorOutsideSource": 0.37,
+      "partitions": 9,
+      "doors": 5,
+      "passages": 5,
+      "components": 1,
+      "slabOpenings": 1,
+      "stairShaftIoU": 0.65
+     }
+    ]
+   }
+  }
+ },
+ "storeys": {
+  "ATTIC": {
+   "available": 4,
+   "sentTo": [
+    "INVENTORY",
+    "PLAN"
+   ],
+   "readInto": [],
+   "states": [
+    "SENT_NOT_READ",
+    "SENT_NOT_READ",
+    "KEPT_NOT_READ",
+    "KEPT_NOT_READ"
+   ]
+  },
+  "GROUND": {
+   "available": 4,
+   "sentTo": [
+    "FACADES",
+    "INVENTORY",
+    "PLAN"
+   ],
+   "readInto": [
+    "dimensions",
+    "levels",
+    "outlines"
+   ],
+   "states": [
+    "SENT_NOT_READ",
+    "SENT_NOT_READ",
+    "READ",
+    "SENT_NOT_READ"
+   ]
+  },
+  "UNKNOWN": {
+   "available": 1,
+   "sentTo": [
+    "INVENTORY"
+   ],
+   "readInto": [],
+   "states": [
+    "SENT_NOT_READ"
+   ]
+  }
+ }
+}
