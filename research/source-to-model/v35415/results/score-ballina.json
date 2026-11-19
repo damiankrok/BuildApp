@@ -332,11 +332,11 @@
     "bodies": 1,
     "chimneys": 0,
     "rooms": 7,
-    "doors": 7,
+    "doors": 8,
     "perSide": {
      "FRONT": {
-      "windows": 5,
-      "doors": 0,
+      "windows": 4,
+      "doors": 1,
       "gates": 0
      },
      "REAR": {
@@ -410,8 +410,8 @@
      "why": "+0.000 against 5.54 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
     },
     "front-openings": {
-     "verdict": "PARTIAL",
-     "measured": "5 w + 0 d",
+     "verdict": "PASS",
+     "measured": "4 w + 1 d",
      "why": "4 windows + 1 door"
     },
     "rear-openings": {
@@ -491,8 +491,8 @@
   },
   {
    "label": "L-MS",
-   "pass": "8",
-   "partial": "2",
+   "pass": "9",
+   "partial": "1",
    "fail": "1",
    "manual": "8",
    "of": "19"

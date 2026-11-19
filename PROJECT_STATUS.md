@@ -12,6 +12,21 @@
 
 ## Current summary (read first)
 
+- **v3.54.15 (2026-11-19): API ↔ analyzer communication — response contract, uncertainty, use of the data in the final
+  model; measured prompt caching; APK 1346** (Master Plan v3.54.15). Report `stage-reports/SOURCE_TO_MODEL_V35415.md`,
+  index `README_V35415.md`, ADR `docs/ADR-V35415-RESPONSE-CONTRACT-LEVELS-CACHE.md`, hand-off
+  `research/source-to-model/v35415/HANDOFF.md`, inventory `research/source-to-model/v35415/INVENTORY.md`.
+  Contracts: dimension observation 1.2.0 (role, ft-in), elevation sketch 1.1.0 / parser 4 (fate per element, raw kept),
+  strict tools (sticky fallback when the grammar is too large), `stop_reason` named. Levels read by the API on a section
+  reach the model through the section's own ladder: Ballina ridge 5.54 / eaves 3.373 (a roof; v3.54.14 had none), fresh
+  control Murcja (first result on the frozen code) storeys 2.80 / 4.30 instead of LOCAL's 12.72. Views: side labels bind
+  the side; a view the ridge cannot hang falls back to the wall band's corners. LOCAL solver 1.9.0 (vertical label way
+  up by ratio to the other axis); `metric-verify/2` shows the API only LOCAL's claims. Sketches: four images of six houses
+  with per-property verdicts, gallery and boards (private ZIP). Cache: −19.4 % on four sketches; cross-job reads on the
+  host. Host E2E on `5d4321c` ALL PASSED (new job ACCEPT 0.225 USD; same URL reused 0 USD / 0 requests; no token 0
+  requests). Stage spend 1.891759 USD of the 3.934654 pool. Scenes `ballina-v35415` (ODDANY), `murcja-v35415` (KONTROLA)
+  first.
+
 - **v3.54.14 R2 (2026-11-19): metric consultant with witnesses, automatic sketches with a proportion check, Bakopy
   (DEV) and a new simple house; APK 1345** (Master Plan v3.54.14 R2 in full). Report
   `stage-reports/SOURCE_TO_MODEL_V35414.md`, index `README_V35414.md`, ADR
