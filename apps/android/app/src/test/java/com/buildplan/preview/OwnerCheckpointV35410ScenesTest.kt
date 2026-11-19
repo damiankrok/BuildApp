@@ -25,11 +25,12 @@ class OwnerCheckpointV35410ScenesTest {
     @Test
     fun `each parses into the scene the checkpoint sealed`() {
         val repaired = TestScenes.bundle("marcowki-h-v35411")
-        assertEquals("a4915b99ce974189", repaired.contentHash.take(16))
+        // v3.54.13: the same meshes, restated under model schema 1.9.0 (only the version and the hashes changed)
+        assertEquals("bb28634aadabfd6d", repaired.contentHash.take(16))
         val h = TestScenes.bundle("marcowki-h-v35410")
         val local = TestScenes.bundle("marcowki-local-v35410")
-        assertEquals("530a890050472e5150c8a5016faacaf8da83d776afd0252f960cd878f015dc4e", h.contentHash)
-        assertEquals("75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45", local.contentHash)
+        assertEquals("b2a7bcab9ffd81115d943e076d88d8aeb5d487923e8189149978badc1082891a", h.contentHash)
+        assertEquals("8a37c476325b82d6a9a43b08c185d49d4b48bb825f04279f871901d38fa1b4fe", local.contentHash)
         for (b in listOf(h, local)) {
             val kinds = b.scene.meshes.map { it.objectKind }.toSet()
             assertTrue(kinds.toString(), kinds.any { it.contains("room", ignoreCase = true) })

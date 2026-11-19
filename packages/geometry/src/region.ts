@@ -48,10 +48,13 @@ function uAt(p: P2, q: P2, v: number): number {
   return p.u + ((v - p.v) * (q.u - p.u)) / (q.v - p.v)
 }
 
-export function tessellateRegion(outerIn: readonly P2[], holesIn: ReadonlyArray<readonly P2[]>): Tessellation {
+export function tessellateRegion(outerIn: readonly P2[], holesIn: ReadonlyArray<readonly P2[]>, extraOutersIn: ReadonlyArray<readonly P2[]> = []): Tessellation {
   const outer = signedArea(outerIn) >= 0 ? [...outerIn] : [...outerIn].reverse()
   const holes = holesIn.map((h) => (signedArea(h) <= 0 ? [...h] : [...h].reverse()))
-  const loops = [outer, ...holes]
+  // v3.54.13: further outer loops, disjoint or meeting the first along shared edges (a region cut into strips): a
+  // shared edge is crossed twice and cancels under the even-odd rule, and its two opposite boundary segments cancel too
+  const extra = extraOutersIn.map((o) => (signedArea(o) >= 0 ? [...o] : [...o].reverse()))
+  const loops = [outer, ...extra, ...holes]
   type Edge = { p: P2; q: P2 }
   const edges: Edge[] = []
   for (const loop of loops) for (let i = 0; i < loop.length; i++) edges.push({ p: loop[i], q: loop[(i + 1) % loop.length] })
@@ -188,10 +191,12 @@ export function extrudeLocalRegion(
   holes: ReadonlyArray<readonly { a: number; b: number }[]>,
   c0: number,
   c1: number,
+  extraOuters: ReadonlyArray<readonly { a: number; b: number }[]> = [],
 ): void {
   const t = tessellateRegion(
     outer.map((p) => ({ u: p.a, v: p.b })),
     holes.map((h) => h.map((p) => ({ u: p.a, v: p.b }))),
+    extraOuters.map((o) => o.map((p) => ({ u: p.a, v: p.b }))),
   )
   const lo = Math.min(c0, c1)
   const hi = Math.max(c0, c1)

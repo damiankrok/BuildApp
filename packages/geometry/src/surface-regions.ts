@@ -67,6 +67,67 @@ const area = (p: readonly AB[]): number => {
   return Math.abs(s) / 2
 }
 
+/** Sutherland–Hodgman clip of any polygon by one half-plane `inside(p) >= 0` (a line given as a signed distance). */
+function clipHalf(poly: AB[], dist: (p: AB) => number): AB[] {
+  const out: AB[] = []
+  for (let i = 0; i < poly.length; i++) {
+    const p = poly[i]
+    const q = poly[(i + 1) % poly.length]
+    const dp = dist(p)
+    const dq = dist(q)
+    if (dp >= -EPS) out.push(p)
+    if ((dp > EPS && dq < -EPS) || (dp < -EPS && dq > EPS)) {
+      const t = dp / (dp - dq)
+      out.push({ a: p.a + t * (q.a - p.a), b: p.b + t * (q.b - p.b) })
+    }
+  }
+  return dedupe(out)
+}
+function dedupe(pts: AB[]): AB[] {
+  const d: AB[] = []
+  for (const p of pts) {
+    const last = d[d.length - 1]
+    if (!last || Math.abs(last.a - p.a) > EPS || Math.abs(last.b - p.b) > EPS) d.push(p)
+  }
+  if (d.length > 1 && Math.abs(d[0].a - d[d.length - 1].a) <= EPS && Math.abs(d[0].b - d[d.length - 1].b) <= EPS) d.pop()
+  return d
+}
+/** Clip a polygon by a convex one (counter-clockwise or not: its orientation is taken from its area). */
+function clipConvex(poly: AB[], convex: readonly AB[]): AB[] {
+  const ccw = signed(convex) >= 0
+  let out = poly
+  for (let i = 0; i < convex.length && out.length >= 3; i++) {
+    const p = convex[i]
+    const q = convex[(i + 1) % convex.length]
+    const s = ccw ? 1 : -1
+    out = clipHalf(out, (x) => s * ((q.a - p.a) * (x.b - p.b) - (q.b - p.b) * (x.a - p.a)))
+  }
+  return out
+}
+const signed = (p: readonly AB[]): number => {
+  let s = 0
+  for (let i = 0; i < p.length; i++) {
+    const x = p[i]
+    const y = p[(i + 1) % p.length]
+    s += x.a * y.b - y.a * x.b
+  }
+  return s / 2
+}
+/** Insert a vertex wherever an edge crosses one of the vertical lines `a = u` (computed from the original edge). */
+function splitAtVerticals(poly: readonly AB[], us: readonly number[]): AB[] {
+  const out: AB[] = []
+  for (let i = 0; i < poly.length; i++) {
+    const p = poly[i]
+    const q = poly[(i + 1) % poly.length]
+    out.push(p)
+    const lo = Math.min(p.a, q.a)
+    const hi = Math.max(p.a, q.a)
+    const cut = us.filter((u) => u > lo + EPS && u < hi - EPS).sort((x, y) => (p.a < q.a ? x - y : y - x))
+    for (const u of cut) out.push({ a: u, b: p.b + ((u - p.a) * (q.b - p.b)) / (q.a - p.a) })
+  }
+  return dedupe(out)
+}
+
 /**
  * v3.54.12 — a finish on a wall's END CAP (`face` START or END): the face across the wall's thickness where its
  * material stops, e.g. the end of a wall that holds a corner and so stands in the plane of the facade it meets. The
@@ -151,6 +212,43 @@ export function compileSurfaceRegion(
     else runs.push([breaks[i], breaks[i + 1]])
   }
   const point = (a: number, b: number, c: number): Vec3 => wallPoint(f, a, b, c)
+  // schema 1.9.0: the region's outline, cut to where the face has material (between its ends, under its top) strip by
+  // strip — under each strip the top is one straight line, so the strip is convex and clips the outline exactly — the
+  // strips' pieces one region (their shared edges cancel), every opening it overlaps left out of it
+  if (region.outline) {
+    const pieces: AB[][] = []
+    const outline = splitAtVerticals(region.outline, breaks)
+    for (const [ua, ub] of runs) {
+      const us = breaks.filter((u) => u >= ua - EPS && u <= ub + EPS)
+      for (let i = 0; i + 1 < us.length; i++) {
+        const u0 = us[i]
+        const u1 = us[i + 1]
+        if (u1 - u0 <= EPS) continue
+        const strip: AB[] = [
+          { a: u0, b: b0 },
+          { a: u1, b: b0 },
+          { a: u1, b: Math.min(b1, top(u1)) },
+          { a: u0, b: Math.min(b1, top(u0)) },
+        ]
+        const piece = clipConvex(outline, strip)
+        if (piece.length >= 3 && Math.abs(signed(piece)) > 1e-9) pieces.push(piece)
+      }
+    }
+    if (pieces.length === 0) return out
+    const holes: AB[][] = []
+    for (const o of ctx.openings) {
+      const hole = clipConvex(region.outline, [
+        { a: o.offset, b: o.sill },
+        { a: o.offset + o.width, b: o.sill },
+        { a: o.offset + o.width, b: openingHeadAt(o, o.offset + o.width) },
+        { a: o.offset, b: openingHeadAt(o, o.offset) },
+      ])
+      const inFace = clipToRect(hole, a0, a1, b0, b1)
+      if (inFace.length >= 3 && area(inFace) > 1e-9) holes.push(inFace)
+    }
+    extrudeLocalRegion(out, f, point, pieces[0], holes, cLo, cHi, pieces.slice(1))
+    return out
+  }
   for (const [ua, ub] of runs) {
     const us = breaks.filter((u) => u >= ua - EPS && u <= ub + EPS)
     const poly: AB[] = [

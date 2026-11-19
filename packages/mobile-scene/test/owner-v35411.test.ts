@@ -8,7 +8,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 
-const H11 = '35602721f8b82487b6beed21c854ba7188fdca0e504f9d2106eedbe97e02ee6a'
+const H11 = '56c343b8424d5da8179a9acb715992ec746a38bd9ec931b6ce6cee13f61ace09'
 
 describe('v3.54.11 the repaired H scene', () => {
   it('is the sealed model and nothing else', () => {
@@ -16,7 +16,7 @@ describe('v3.54.11 the repaired H scene', () => {
   })
   it('its portal bands carry the zone finish; the checkpoint candidate\'s were the light member', () => {
     const fixed = sealedOwnerModel('marcowki-h-v35411', H11, 'owner-v35411')
-    const before = sealedOwnerModel('marcowki-h-v35410', '826085f562528b1666ea8a4e673c83e2ff446abd0b080dc719b191db2cee990a', 'owner-v35410')
+    const before = sealedOwnerModel('marcowki-h-v35410', 'd8c2d422edfc88132fac650b870dd072e3ba872cf95b9745e75d0b9a1fb3243e', 'owner-v35410')
     const bands = (m: typeof fixed) => m.linearSolids.filter((x) => x.role === 'FASCIA' && x.id.startsWith('portal-')).map((x) => x.materialId)
     expect(new Set(bands(fixed))).toEqual(new Set(['mat-zone-plaster-dark']))
     expect(new Set(bands(before))).toEqual(new Set(['mat-member']))

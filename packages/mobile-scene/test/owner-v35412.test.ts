@@ -8,9 +8,9 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 
-const H12 = '452165d13263b268ffaebd8c5f134cd96202f7fc36c2b8ea1f05274ac5e50fea'
-const S12 = '1d5d7713bda542289c42ab4e8e4878931bc52c0c802e1e19ebd3318c052eb0f9'
-const H11 = '35602721f8b82487b6beed21c854ba7188fdca0e504f9d2106eedbe97e02ee6a'
+const H12 = '28c2b99bc7d0c1c6dd2c15765f4bc780b4f8ca6b12b7fa83c43bc98a7ec70bf4'
+const S12 = '21e77523aebe7aa5c7293d2c1e6c92eacc8ce4cc93c78fc5dba04ea750f68a65'
+const H11 = '56c343b8424d5da8179a9acb715992ec746a38bd9ec931b6ce6cee13f61ace09'
 
 describe('v3.54.12 scenes', () => {
   it('are the sealed models and nothing else', () => {

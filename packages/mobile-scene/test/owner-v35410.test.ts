@@ -10,8 +10,8 @@ import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 
 type Mesh = { semanticGroup?: string; objectKind?: string; materialId?: string }
 const asset = (key: string) => JSON.parse(readFileSync(join(ASSET_DIR, `${key}.scene.json`), 'utf8')) as { contentHash: string; scene: { meshes: Mesh[] } }
-const H = '826085f562528b1666ea8a4e673c83e2ff446abd0b080dc719b191db2cee990a'
-const L = '36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86'
+const H = 'd8c2d422edfc88132fac650b870dd072e3ba872cf95b9745e75d0b9a1fb3243e'
+const L = 'b68f41e18efdefaa2c8dc18301938c6d81bea799a92f6085c43674961ac39626'
 
 describe('v3.54.11 the v3.54.10 checkpoint scenes', () => {
   it('refuse a model that is not the sealed one', () => {
@@ -23,12 +23,12 @@ describe('v3.54.11 the v3.54.10 checkpoint scenes', () => {
     expect([m.rooms.length, m.walls.length, m.chimneys.length]).toEqual([15, 29, 0])
     expect(m.materials.some((x) => x.id === 'mat-zone-plaster-dark')).toBe(true)
     expect((m.surfaceRegions ?? []).filter((r) => String(r.materialId).startsWith('mat-zone-')).length).toBeGreaterThan(0)
-    expect(asset('marcowki-h-v35410').contentHash).toBe('530a890050472e5150c8a5016faacaf8da83d776afd0252f960cd878f015dc4e')
+    expect(asset('marcowki-h-v35410').contentHash).toBe('b2a7bcab9ffd81115d943e076d88d8aeb5d487923e8189149978badc1082891a')
   })
   it('the delivered LOCAL: 13 rooms, 40 walls, 2 chimneys; its scene is the scene the host served', () => {
     const m = sealedOwnerModel('marcowki-local-v35410', L, 'owner-v35410')
     expect([m.rooms.length, m.walls.length, m.chimneys.length]).toEqual([13, 40, 2])
-    expect(asset('marcowki-local-v35410').contentHash).toBe('75f62f773a514dc007c437a984192aecb16ef77ea8aacce51306a56962c4ee45')
+    expect(asset('marcowki-local-v35410').contentHash).toBe('8a37c476325b82d6a9a43b08c185d49d4b48bb825f04279f871901d38fa1b4fe')
   })
   it('both are in the app index after the repaired H, titled as the candidate and as the delivered model', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string; contentHash: string }>

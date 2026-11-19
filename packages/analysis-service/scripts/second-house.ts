@@ -166,6 +166,10 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       if (process.env.BUILDAPP_FEATURE_TRACE) write('body-recovery.json', r.bodyRecovery)
       // v3.51: the solved feature graph (per-parameter provenance, the accepted decisions) of this very model, for the C1/C2 measures
       if (process.env.BUILDAPP_FEATURE_TRACE) write('feature-graph.json', r.featureGraph)
+      // v3.54.13: what each registered elevation drew for each plan opening and the corrections it made (N7-P2), and the
+      // finish regions as the solver built them, for the per-property trace of an opening's height and of a zone's outline
+      if (process.env.BUILDAPP_FEATURE_TRACE) write('facade-alignment.json', r.facadeAlignment)
+      if (process.env.BUILDAPP_FEATURE_TRACE) write('surface-regions.json', r.building.surfaceRegions)
       // v3.53.6: the storey as read — bodies, shared walls, partitions, doors and rooms in world metres — and each plan
       // frame's map from world to sheet pixels (sampled: the map may be piecewise), for source–model overlays
       if (process.env.BUILDAPP_FEATURE_TRACE) {

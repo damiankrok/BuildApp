@@ -411,6 +411,8 @@ export const CreateSurfaceRegionSchema = z
     /** START / END: the wall's end cap (v3.54.12); `rect.a` then runs across the thickness from the outer face. */
     face: z.enum(['OUTER', 'INNER', 'START', 'END']).default('OUTER'),
     rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
+    /** v3.54.13 (model schema 1.9.0): the region's real outline in the face's (a, b), inside `rect`; OUTER / INNER only. */
+    outline: z.array(z.object({ a: finite, b: finite }).strict()).min(3).optional(),
     materialId: IdSchema,
   })
   .strict()

@@ -515,6 +515,11 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > host.height + EPS) {
       err('SURFACE_REGION_OUTSIDE_HOST', `surface region ${r.id} spans a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} on ${cap ? `the ${r.face.toLowerCase()} cap of ` : ''}wall ${host.id}, which is ${fmt(L)} x ${fmt(host.height)}`, r.id, 'rect')
     }
+    // schema 1.9.0: an outline is a simple polygon of area inside its rect, on a face along the wall
+    if (r.outline) {
+      const why = outlineProblem(r.outline, r.rect, cap)
+      if (why) err('SURFACE_REGION_OUTLINE_INVALID', `surface region ${r.id}: its outline ${why}`, r.id, 'outline')
+    }
   }
   for (const s of m.linearSolids) {
     needSources(s.id, s.evidence?.sourceIds)
@@ -611,4 +616,35 @@ export function assertValidModel(input: unknown): CanonicalBuildingModel {
     throw new Error(`invalid CanonicalBuildingModel:\n${r.issues.map((i) => `  [${i.code}] ${i.message}`).join('\n')}`)
   }
   return r.model
+}
+
+/** v3.54.13: why a surface region's outline is not a simple polygon of area inside its rect on a face (undefined: it is). */
+export function outlineProblem(outline: ReadonlyArray<{ a: number; b: number }>, rect: { a0: number; a1: number; b0: number; b1: number }, cap: boolean): string | undefined {
+  if (cap) return 'is on an end cap, where only a rect is allowed'
+  const n = outline.length
+  if (n < 3) return 'has fewer than three corners'
+  for (const p of outline) if (p.a < rect.a0 - 1e-6 || p.a > rect.a1 + 1e-6 || p.b < rect.b0 - 1e-6 || p.b > rect.b1 + 1e-6) return `leaves its rect at (${p.a}, ${p.b})`
+  let area = 0
+  for (let i = 0; i < n; i++) {
+    const p = outline[i]
+    const q = outline[(i + 1) % n]
+    area += p.a * q.b - q.a * p.b
+  }
+  if (Math.abs(area) / 2 <= 1e-9) return 'has no area'
+  const cross = (o: { a: number; b: number }, p: { a: number; b: number }, q: { a: number; b: number }): number => (p.a - o.a) * (q.b - o.b) - (p.b - o.b) * (q.a - o.a)
+  for (let i = 0; i < n; i++) {
+    const p1 = outline[i]
+    const p2 = outline[(i + 1) % n]
+    for (let j = i + 1; j < n; j++) {
+      if (j === i || (j + 1) % n === i || (i + 1) % n === j) continue
+      const q1 = outline[j]
+      const q2 = outline[(j + 1) % n]
+      const d1 = cross(q1, q2, p1)
+      const d2 = cross(q1, q2, p2)
+      const d3 = cross(p1, p2, q1)
+      const d4 = cross(p1, p2, q2)
+      if (((d1 > 1e-12 && d2 < -1e-12) || (d1 < -1e-12 && d2 > 1e-12)) && ((d3 > 1e-12 && d4 < -1e-12) || (d3 < -1e-12 && d4 > 1e-12))) return `crosses itself (edges ${i} and ${j})`
+    }
+  }
+  return undefined
 }

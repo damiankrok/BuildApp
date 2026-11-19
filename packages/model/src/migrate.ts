@@ -63,6 +63,14 @@
  * building, byte for byte — with its own note saying so. A file stating 1.6.0 or
  * older that carries the role is refused as any mislabelled newer file is.
  *
+ * 1.8.0 -> 1.9.0 (v3.54.13): surface regions gained `outline` (a polygon inside
+ * the rect) and the end-cap faces START / END. A 1.8.0 file has neither and
+ * compiles to exactly the geometry it compiled to before. The house path of
+ * v3.54.12 (builder 0.8.0) wrote START / END regions while the file still stated
+ * 1.8.0 — a reader of 1.8.0 refuses that face — so such a file is read as what it
+ * is, a 1.9.0 building byte for byte, with its own note. A 1.8.0 file with an
+ * outline, or a file stating 1.7.0 or older with either, is refused.
+ *
  * A file that states an older version but already carries a newer version's
  * collections (or fields) is refused: it would be a mislabelled newer file.
  */
@@ -96,6 +104,20 @@ export const MIGRATION_NOTE_1_5_0 =
 export const MIGRATION_NOTE_1_6_0 = 'migrated from schema 1.6.0 to 1.7.0: the file carried no room holes; every room keeps its whole outline as floor'
 
 export const MIGRATION_NOTE_1_7_0 = 'migrated from schema 1.7.0 to 1.8.0: the file carried no gable-frame panels; the building is unchanged'
+
+export const MIGRATION_NOTE_1_8_0 = 'migrated from schema 1.8.0 to 1.9.0: the file carried no surface-region outline or end-cap face; the building is unchanged'
+
+/** v3.54.13: a 1.8.0 file the v3.54.12 house path wrote with START / END regions — read as 1.9.0, unchanged, and said. */
+export const MIGRATION_NOTE_1_8_0_END_CAP =
+  'restated from schema 1.8.0 to 1.9.0: the file carried end-cap surface regions (face START / END), a face schema 1.9.0 introduced (written by the v3.54.12 house path before the version was raised); nothing else differs and the building is unchanged'
+
+const regionField = (o: Record<string, unknown>, test: (r: Record<string, unknown>) => boolean, what: (i: number, r: Record<string, unknown>) => string): string | undefined => {
+  const regions = Array.isArray(o.surfaceRegions) ? (o.surfaceRegions as unknown[]) : []
+  const i = regions.findIndex((r) => !!r && typeof r === 'object' && test(r as Record<string, unknown>))
+  return i >= 0 ? what(i, regions[i] as Record<string, unknown>) : undefined
+}
+const endCapAt = (o: Record<string, unknown>): string | undefined => regionField(o, (r) => r.face === 'START' || r.face === 'END', (i, r) => `surfaceRegions.${i}.face ${String(r.face)}`)
+const outlineAt = (o: Record<string, unknown>): string | undefined => regionField(o, (r) => 'outline' in r, (i) => `surfaceRegions.${i}.outline`)
 
 /** v3.54.9: a 1.7.0 file the v3.54.8 house path wrote with GABLE_FRAME panels — read as 1.8.0, unchanged, and said. */
 export const MIGRATION_NOTE_1_7_0_GABLE_FRAME =
@@ -176,7 +198,7 @@ const STEPS: Step[] = [
       const rooms = Array.isArray(o.rooms) ? (o.rooms as unknown[]) : []
       const i = rooms.findIndex((r) => !!r && typeof r === 'object' && 'holes' in (r as Record<string, unknown>))
       // a 1.6.0 file cannot carry the 1.8.0 role either (only 1.7.0 was ever written with it)
-      return i >= 0 ? `rooms.${i}.holes` : gableFrameAt(o)
+      return i >= 0 ? `rooms.${i}.holes` : gableFrameAt(o) ?? endCapAt(o) ?? outlineAt(o)
     },
   },
   {
@@ -185,9 +207,23 @@ const STEPS: Step[] = [
     newCollections: [],
     note: MIGRATION_NOTE_1_7_0,
     message: 'model migrated from schema 1.7.0 to 1.8.0: no wall panel is a gable frame; the building is unchanged',
+    // a 1.7.0 file cannot carry the 1.9.0 fields (only 1.8.0 was ever written with an end cap)
+    newField: (o) => endCapAt(o) ?? outlineAt(o),
     restates: (o) => {
       const at = gableFrameAt(o)
       return at ? { note: MIGRATION_NOTE_1_7_0_GABLE_FRAME, message: `model restated from schema 1.7.0 to 1.8.0: ${at} is a 1.8.0 role the v3.54.8 house path wrote under 1.7.0; the building is unchanged` } : undefined
+    },
+  },
+  {
+    from: '1.8.0',
+    to: '1.9.0',
+    newCollections: [],
+    note: MIGRATION_NOTE_1_8_0,
+    message: 'model migrated from schema 1.8.0 to 1.9.0: no surface region has an outline or an end-cap face; the building is unchanged',
+    newField: outlineAt,
+    restates: (o) => {
+      const at = endCapAt(o)
+      return at ? { note: MIGRATION_NOTE_1_8_0_END_CAP, message: `model restated from schema 1.8.0 to 1.9.0: ${at} is a 1.9.0 face the v3.54.12 house path wrote under 1.8.0; the building is unchanged` } : undefined
     },
   },
 ]

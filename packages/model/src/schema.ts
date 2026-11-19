@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.8.0' as const
+export const MODEL_SCHEMA_VERSION = '1.9.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -671,13 +671,20 @@ export const SurfaceRegionSchema = z
     ...base,
     hostId: IdSchema,
     /**
-     * OUTER / INNER: a face along the wall (`a` along it). START / END (v3.54.12, optional and additive: every
-     * earlier model stays valid and compiles unchanged): the wall's end cap — the face across its thickness where its
+     * OUTER / INNER: a face along the wall (`a` along it). START / END (v3.54.12; schema 1.9.0 — the v3.54.12 house
+     * path wrote them under 1.8.0, a mislabel migrate.ts restates): the wall's end cap — the face across its thickness where its
      * material stops, e.g. the end of a wall that owns a corner and so stands in the plane of the facade it meets;
      * there `a` runs ACROSS the thickness, 0 at the outer face to the thickness at the inner face.
      */
     face: z.enum(['OUTER', 'INNER', 'START', 'END']),
     rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
+    /**
+     * Schema 1.9.0 (v3.54.13), optional: the region's real outline on an OUTER / INNER face, a simple polygon in the
+     * face's (a, b) — a gable's raked edge, a step between storeys, the finish around a glazing — inside `rect`, which
+     * stays its bounding box. Absent: the whole rect, as before. Openings are still left out by the compiler and the
+     * wall's top still bounds it; an outline is colour, never geometry. Not on an end cap.
+     */
+    outline: z.array(z.object({ a: finite, b: finite }).strict()).min(3).optional(),
     materialId: IdSchema,
   })
   .strict()

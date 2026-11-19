@@ -12,7 +12,7 @@ import { MODEL_SCHEMA_VERSION, loadModel, serializeModel } from '../src/index.js
  * edge members and railing paths) and STAGE BUILDAPP-03G (1.6.0, roof planes,
  * roof edges, wall panels, platforms, step runs, assemblies and
  * relationships — all empty in the demo) and STAGE BUILDPLAN N8-03D2 (1.7.0,
- * room holes — none in the demo) and v3.54.9 (1.8.0, the GABLE_FRAME wall-panel role — none in the demo). Each frozen file is the fixed baseline the next
+ * room holes — none in the demo) and v3.54.9 (1.8.0, the GABLE_FRAME wall-panel role — none in the demo) and v3.54.13 (1.9.0, surface-region outlines and end caps — none in the demo). Each frozen file is the fixed baseline the next
  * schema version migrates, the way 1.0.0 was frozen before 00A.
  * `packages/demo/test` asserts the current fixture equals the demo the DSL
  * builds today; `migration.test.ts` migrates the older ones.
@@ -25,10 +25,11 @@ const FIXTURE_1_5_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.5.0.js
 const FIXTURE_1_6_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.6.0.json')
 const FIXTURE_1_7_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.7.0.json')
 const FIXTURE_1_8_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.8.0.json')
+const FIXTURE_1_9_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.9.0.json')
 
 describe('frozen fixtures', () => {
-  it('the 1.8.0 fixture is the current schema version and loads without migration or issues, byte-stable', () => {
-    const text = readFileSync(FIXTURE_1_8_0, 'utf8')
+  it('the 1.9.0 fixture is the current schema version and loads without migration or issues, byte-stable', () => {
+    const text = readFileSync(FIXTURE_1_9_0, 'utf8')
     const raw = JSON.parse(text) as { schemaVersion: string; wallJunctions: unknown[]; wallRings: unknown[]; roofOpenings: unknown[]; rooflights: unknown[]; surfaceRegions: unknown[]; linearSolids: unknown[]; terraces: unknown[] }
     expect(raw.schemaVersion).toBe(MODEL_SCHEMA_VERSION)
     expect(raw.wallJunctions.length).toBeGreaterThan(0)
@@ -46,7 +47,8 @@ describe('frozen fixtures', () => {
     expect(serializeModel(r.model)).toBe(text)
   })
 
-  it('the 1.1.0 … 1.7.0 fixtures are kept as migration baselines and are untouched', () => {
+  it('the 1.1.0 … 1.8.0 fixtures are kept as migration baselines and are untouched', () => {
+    expect((JSON.parse(readFileSync(FIXTURE_1_8_0, 'utf8')) as { schemaVersion: string }).schemaVersion).toBe('1.8.0')
     expect((JSON.parse(readFileSync(FIXTURE_1_7_0, 'utf8')) as { schemaVersion: string }).schemaVersion).toBe('1.7.0')
     const raw16 = JSON.parse(readFileSync(FIXTURE_1_6_0, 'utf8')) as { schemaVersion: string; rooms: Array<{ holes?: unknown }> }
     expect(raw16.schemaVersion).toBe('1.6.0')

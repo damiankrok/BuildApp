@@ -32,6 +32,8 @@ export const ASSET_DIR = join(ROOT, 'apps/android/app/src/main/assets/scenes')
  * the pins sealed under 1.6.0 (jarzmianki 4ced0179…, gożdzikowce a612a399…). v3.54.9: all four owner models restated
  * from 1.7.0 to 1.8.0 the same way (version string alone; 1.7.0 pins: jarzmianki c65724e9…, goździkowce 5ca1594a…,
  * marcowki-h-v3548 1e20fb73…, marcowki-local-v3548 07b91e89…).
+ * v3.54.13: all owner models restated from 1.8.0 to 1.9.0 the same way (version string alone; for marcowki-h-v35412 the
+ * restatement of the end-cap faces it carried under 1.8.0). 1.8.0 pins: gozdzikowce-005t-visual 944ea825…, jarzmianki-005t-visual 240403af…, marcowki-h-v35410 826085f5…, marcowki-local-v35410 36f522a4…, marcowki-h-v35411 35602721…, marcowki-h-v35412 452165d1…, marcowki-local-szkice-v35412 1d5d7713…, marcowki-h-v3548 11285686…, marcowki-local-v3548 36f522a4….
  */
 export function sealedOwnerModel(key: string, sha256: string, dir = 'owner-005t'): CanonicalBuildingModel {
   const model = parseModel(readFileSync(join(ROOT, 'packages/candidates/src', dir, `${key}.model.json`), 'utf8'))
@@ -53,7 +55,7 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-h-v35412',
     title: 'Marcówki — H v3.54.12 (czoło ściany)',
     subtitle: 'KANDYDAT H (nie oddany): jak v3.54.11, plus wykończenie odsłoniętych czół ścian w strefie (ciemny pas 0,40 m między wejściem a garażem); bez kominów',
-    build: () => sealedOwnerModel('marcowki-h-v35412', '452165d13263b268ffaebd8c5f134cd96202f7fc36c2b8ea1f05274ac5e50fea', 'owner-v35412'),
+    build: () => sealedOwnerModel('marcowki-h-v35412', '28c2b99bc7d0c1c6dd2c15765f4bc780b4f8ca6b12b7fa83c43bc98a7ec70bf4', 'owner-v35412'),
   },
   // v3.54.12 (experiment, not delivered): LOCAL on the source package with the front and rear elevations replaced by the
   // OWNER's colour sketches (MIXED: 2 of 4), with the experimental flags elevationVerticalFromDatums and
@@ -62,7 +64,7 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-local-szkice-v35412',
     title: 'Marcówki — LOCAL + szkice OWNER-a (eksperyment)',
     subtitle: 'EKSPERYMENT: LOCAL z kolorowymi szkicami frontu i tyłu (2 z 4 elewacji) i dwiema flagami; nie jest modelem oddanym',
-    build: () => sealedOwnerModel('marcowki-local-szkice-v35412', '1d5d7713bda542289c42ab4e8e4878931bc52c0c802e1e19ebd3318c052eb0f9', 'owner-v35412'),
+    build: () => sealedOwnerModel('marcowki-local-szkice-v35412', '21e77523aebe7aa5c7293d2c1e6c92eacc8ce4cc93c78fc5dba04ea750f68a65', 'owner-v35412'),
   },
   // v3.54.11: the same live reading (397a809's answers) built by the repaired code (84de494): the portal bands take
   // their source zone's finish (D53); everything else of the v3.54.10 candidate is unchanged — a third scene, the two
@@ -71,7 +73,7 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-h-v35411',
     title: 'Marcówki — H po naprawie v3.54.11',
     subtitle: 'KANDYDAT H (nie oddany) po naprawie materiałów: ciemne pasy portalu ze strefy źródła; reszta jak v3.54.10; bez kominów',
-    build: () => sealedOwnerModel('marcowki-h-v35411', '35602721f8b82487b6beed21c854ba7188fdca0e504f9d2106eedbe97e02ee6a', 'owner-v35411'),
+    build: () => sealedOwnerModel('marcowki-h-v35411', '56c343b8424d5da8179a9acb715992ec746a38bd9ec931b6ce6cee13f61ace09', 'owner-v35411'),
   },
   // v3.54.11 (D52): the v3.54.10 checkpoint, exactly as in BuildPlan-V35410-Private.zip (SHA-256 4a75033c…): the H
   // candidate after the final replay (code 62350cc; the live job 397a809's answers; 15 rooms, 29 walls, 0 chimneys) and
@@ -81,13 +83,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-h-v35410',
     title: 'Marcówki — H v3.54.10, kandydat',
     subtitle: 'KANDYDAT z odczytu API po recenzji (nie oddany), kod 62350cc: wnętrze, strefy wykończenia, skośne okna z opisów rzutu; bez kominów, pas portalu jasny',
-    build: () => sealedOwnerModel('marcowki-h-v35410', '826085f562528b1666ea8a4e673c83e2ff446abd0b080dc719b191db2cee990a', 'owner-v35410'),
+    build: () => sealedOwnerModel('marcowki-h-v35410', 'd8c2d422edfc88132fac650b870dd072e3ba872cf95b9745e75d0b9a1fb3243e', 'owner-v35410'),
   },
   {
     key: 'marcowki-local-v35410',
     title: 'Marcówki — LOCAL oddany przez host',
     subtitle: 'Model oddany użytkownikowi przez host v3.54.10 (397a809 / d43eebe / 62350cc, ten sam): LOCAL — do porównania z kandydatem H',
-    build: () => sealedOwnerModel('marcowki-local-v35410', '36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86', 'owner-v35410'),
+    build: () => sealedOwnerModel('marcowki-local-v35410', 'b68f41e18efdefaa2c8dc18301938c6d81bea799a92f6085c43674961ac39626', 'owner-v35410'),
   },
   // v3.54.8 (owner request): the house described from the API's reading after its review, and the model the final host
   // (05faa4e) delivered for the same page (LOCAL), side by side — sealed by the SHA-256 of their canonical
@@ -96,13 +98,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'marcowki-h-v3548',
     title: 'Marcówki — opis H v3.54.8',
     subtitle: 'KANDYDAT z odczytu API po recenzji (nie oddany): rama z nogami, szkło, pas portalu; głowice za nisko',
-    build: () => sealedOwnerModel('marcowki-h-v3548', '11285686983d92e921fecfa5eb2846a46c1aca40223aff23bf8b8e3a87d51899', 'owner-v3548'),
+    build: () => sealedOwnerModel('marcowki-h-v3548', '37e24eed80fc694b9b9dbdf0ed4d0a02a267f61960f84dd6a5092641662a92ae', 'owner-v3548'),
   },
   {
     key: 'marcowki-local-v3548',
     title: 'Marcówki — LOCAL v3.54.8',
     subtitle: 'Model oddany przez host 05faa4e (LOCAL) — do porównania z opisem H',
-    build: () => sealedOwnerModel('marcowki-local-v3548', '36f522a4eb21a4eedf34bb8fd60fd7c59e4460d251ad3443cc04c7a0ce93fc86', 'owner-v3548'),
+    build: () => sealedOwnerModel('marcowki-local-v3548', 'b68f41e18efdefaa2c8dc18301938c6d81bea799a92f6085c43674961ac39626', 'owner-v3548'),
   },
   // BUILDPLAN-OWNER-005T: two development rows the analyzer now builds, listed first so the owner finds them at
   // once. Approximate models for a visual review — each carries LIMITING warnings in its stage report.
@@ -110,13 +112,13 @@ export const SCENES: readonly SceneSpec[] = [
     key: 'jarzmianki-005t-visual',
     title: 'Dom w jarzmiankach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji (6 ostrzeżeń ograniczających)',
-    build: () => sealedOwnerModel('jarzmianki-005t-visual', '240403af9c80e6fa68245497c978cc92f3b5a4ef60d217e5b2fc8ebafaec7dd4'),
+    build: () => sealedOwnerModel('jarzmianki-005t-visual', '74d173c8fc9a867eb82a52eeb0dd67bbb630baece0208d30143a53cd8d2413b2'),
   },
   {
     key: 'gozdzikowce-005t-visual',
     title: 'Dom w goździkowcach (005T)',
     subtitle: 'MODEL ORIENTACYJNY — nie do kosztorysu, wymaga weryfikacji; dach z przybliżonej kalenicy',
-    build: () => sealedOwnerModel('gozdzikowce-005t-visual', '944ea8250d97e2ed1f6963915c56203057f93079a5ff8f2e4009b9b63520ae6b'),
+    build: () => sealedOwnerModel('gozdzikowce-005t-visual', '748694916af02f71e70f2421b21d18e8db0e2fe86719f15cbb466f605a178b55'),
   },
   {
     key: 'marcowki',

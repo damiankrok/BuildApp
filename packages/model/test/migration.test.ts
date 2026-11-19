@@ -10,6 +10,8 @@ import {
   MIGRATION_NOTE_1_5_0,
   MIGRATION_NOTE_1_6_0,
   MIGRATION_NOTE_1_7_0,
+  MIGRATION_NOTE_1_8_0,
+  MIGRATION_NOTE_1_8_0_END_CAP,
   MIGRATION_NOTE_1_7_0_GABLE_FRAME,
   MODEL_SCHEMA_VERSION,
   createEmptyModel,
@@ -35,14 +37,16 @@ const FIXTURE_1_5_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.5.0.js
 const FIXTURE_1_6_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.6.0.json')
 /** The same house as N8-03D2 persisted it (schema 1.7.0, no gable-frame panels). */
 const FIXTURE_1_7_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.7.0.json')
+/** The same house as v3.54.9 persisted it (schema 1.8.0, no surface-region outline or end cap). */
+const FIXTURE_1_8_0 = resolve(import.meta.dirname, 'fixtures/demo-house-1.8.0.json')
 const NEW_IN_1_6_0 = ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] as const
 const text = (p: string): string => readFileSync(p, 'utf8')
 
-describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 -> 1.6.0 -> 1.7.0 -> 1.8.0', () => {
-  it('the current schema version is 1.8.0 and new models carry empty topology, roof-opening, surface-region, linear-solid, terrace and architectural collections', () => {
-    expect(MODEL_SCHEMA_VERSION).toBe('1.8.0')
+describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 -> 1.6.0 -> 1.7.0 -> 1.8.0 -> 1.9.0', () => {
+  it('the current schema version is 1.9.0 and new models carry empty topology, roof-opening, surface-region, linear-solid, terrace and architectural collections', () => {
+    expect(MODEL_SCHEMA_VERSION).toBe('1.9.0')
     const m = createEmptyModel('x', 'x')
-    expect(m.schemaVersion).toBe('1.8.0')
+    expect(m.schemaVersion).toBe('1.9.0')
     for (const c of NEW_IN_1_6_0) expect(m[c], c).toEqual([])
     expect(m.terraces).toEqual([])
     expect(m.wallJunctions).toEqual([])
@@ -70,8 +74,9 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
+      ['SCHEMA_MIGRATED', 'WARNING'],
     ])
-    expect(r.model.schemaVersion).toBe('1.8.0')
+    expect(r.model.schemaVersion).toBe('1.9.0')
     expect(r.model.wallJunctions).toEqual([])
     expect(r.model.wallRings).toEqual([])
     expect(r.model.roofOpenings).toEqual([])
@@ -85,6 +90,7 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     expect(r.model.meta.notes).toContain(MIGRATION_NOTE_1_5_0)
     expect(r.model.meta.notes).toContain(MIGRATION_NOTE_1_6_0)
     expect(r.model.meta.notes).toContain(MIGRATION_NOTE_1_7_0)
+    expect(r.model.meta.notes).toContain(MIGRATION_NOTE_1_8_0)
     for (const c of NEW_IN_1_6_0) expect(r.model[c], c).toEqual([])
     expect(r.model.linearSolids).toEqual([])
     expect(r.model.terraces).toEqual([])
@@ -96,7 +102,7 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     expect(r.issues.some((i) => i.code === 'WALLS_OVERLAP')).toBe(false)
     // re-saving writes a 1.6.0 file that loads without any migration
     const saved = serializeModel(r.model)
-    expect(saved).toContain('"schemaVersion": "1.8.0"')
+    expect(saved).toContain('"schemaVersion": "1.9.0"')
     const again = loadModel(saved)
     expect(again.ok && again.issues).toEqual([])
   })
@@ -117,13 +123,14 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
+      ['SCHEMA_MIGRATED', 'WARNING'],
     ])
-    expect(r.model.schemaVersion).toBe('1.8.0')
+    expect(r.model.schemaVersion).toBe('1.9.0')
     expect(r.model.roofOpenings).toEqual([])
     expect(r.model.rooflights).toEqual([])
     expect(r.model.surfaceRegions).toEqual([])
     expect(r.model.linearSolids).toEqual([])
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_1_0, MIGRATION_NOTE_1_2_0, MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_1_0, MIGRATION_NOTE_1_2_0, MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     expect(r.model.wallJunctions).toHaveLength(raw.wallJunctions.length)
     expect(r.model.openings).toHaveLength(raw.openings.length)
     for (const o of r.model.openings) {
@@ -131,7 +138,7 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       expect(o.leaves).toBeUndefined()
     }
     const saved = serializeModel(r.model)
-    expect(saved).toContain('"schemaVersion": "1.8.0"')
+    expect(saved).toContain('"schemaVersion": "1.9.0"')
     expect(loadModel(saved).issues).toEqual([])
   })
 
@@ -149,18 +156,19 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
+      ['SCHEMA_MIGRATED', 'WARNING'],
     ])
-    expect(r.model.schemaVersion).toBe('1.8.0')
+    expect(r.model.schemaVersion).toBe('1.9.0')
     expect(r.model.surfaceRegions).toEqual([])
     expect(r.model.linearSolids).toEqual([])
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_2_0, MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_2_0, MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     expect(r.model.slabs).toHaveLength(raw.slabs.length)
     for (const s of r.model.slabs) expect(s.holes).toBeUndefined()
     for (const o of r.model.roofOpenings) expect(o.cut).toBeUndefined()
     for (const d of r.model.doors) expect(d.assembly).toBeUndefined()
     for (const s of r.model.stairs) expect(s.kind).toBe('PLACEHOLDER')
     const saved = serializeModel(r.model)
-    expect(saved).toContain('"schemaVersion": "1.8.0"')
+    expect(saved).toContain('"schemaVersion": "1.9.0"')
     expect(loadModel(saved).issues).toEqual([])
   })
 
@@ -177,13 +185,14 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
+      ['SCHEMA_MIGRATED', 'WARNING'],
     ])
-    expect(r.model.schemaVersion).toBe('1.8.0')
+    expect(r.model.schemaVersion).toBe('1.9.0')
     expect(r.model.linearSolids).toEqual([])
     expect(r.model.surfaceRegions).toHaveLength(raw.surfaceRegions.length)
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_3_0, MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     const saved = serializeModel(r.model)
-    expect(saved).toContain('"schemaVersion": "1.8.0"')
+    expect(saved).toContain('"schemaVersion": "1.9.0"')
     expect(loadModel(saved).issues).toEqual([])
   })
 
@@ -199,17 +208,18 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
       ['SCHEMA_MIGRATED', 'WARNING'],
+      ['SCHEMA_MIGRATED', 'WARNING'],
     ])
-    expect(r.model.schemaVersion).toBe('1.8.0')
+    expect(r.model.schemaVersion).toBe('1.9.0')
     expect(r.model.terraces).toEqual([])
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_4_0, MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     for (const roof of r.model.roofs) {
       expect(roof.edgeMembers).toBeUndefined()
       expect(roof.plateInset).toBeUndefined()
     }
     for (const railing of r.model.railings) expect(railing.path).toBeUndefined()
     const saved = serializeModel(r.model)
-    expect(saved).toContain('"schemaVersion": "1.8.0"')
+    expect(saved).toContain('"schemaVersion": "1.9.0"')
     expect(loadModel(saved).issues).toEqual([])
   })
 
@@ -220,9 +230,9 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     const r = loadModel(text(FIXTURE_1_5_0))
     expect(r.ok).toBe(true)
     if (!r.ok) return
-    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING']])
-    expect(r.model.schemaVersion).toBe('1.8.0')
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING']])
+    expect(r.model.schemaVersion).toBe('1.9.0')
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_5_0, MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     for (const c of NEW_IN_1_6_0) expect(r.model[c], c).toEqual([])
     for (const s of r.model.linearSolids) expect(s.role).toBeUndefined()
     // the building is the same building: take the added collections out, restore the version, and it is the 1.5.0 file's content
@@ -282,9 +292,9 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     const r = loadModel(text(FIXTURE_1_6_0))
     expect(r.ok).toBe(true)
     if (!r.ok) return
-    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING']])
-    expect(r.model.schemaVersion).toBe('1.8.0')
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0])
+    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING']])
+    expect(r.model.schemaVersion).toBe('1.9.0')
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_6_0, MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     for (const room of r.model.rooms) expect(room.holes).toBeUndefined()
     const saved = JSON.parse(serializeModel(r.model)) as Record<string, unknown>
     saved.schemaVersion = '1.6.0'
@@ -307,9 +317,9 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     const r = loadModel(text(FIXTURE_1_7_0))
     expect(r.ok).toBe(true)
     if (!r.ok) return
-    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING']])
-    expect(r.model.schemaVersion).toBe('1.8.0')
-    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_7_0])
+    expect(r.issues.map((i) => [i.code, i.severity])).toEqual([['SCHEMA_MIGRATED', 'WARNING'], ['SCHEMA_MIGRATED', 'WARNING']])
+    expect(r.model.schemaVersion).toBe('1.9.0')
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_7_0, MIGRATION_NOTE_1_8_0])
     const saved = JSON.parse(serializeModel(r.model)) as Record<string, unknown>
     saved.schemaVersion = '1.7.0'
     saved.meta = { ...(saved.meta as object), notes: [] }
@@ -322,11 +332,12 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     const withFrame = { ...raw, wallPanels: [panel] }
     const m = migrateModelInput(withFrame)
     expect(m.migrated).toBe(true)
-    expect(m.issues).toHaveLength(1)
+    // v3.54.13: then the ordinary 1.8.0 -> 1.9.0 step
+    expect(m.issues).toHaveLength(2)
     expect(m.issues[0].message).toContain('wallPanels.0.role GABLE_FRAME')
     const out = m.input as Record<string, unknown> & { meta: { notes: string[] } }
-    expect(out.schemaVersion).toBe('1.8.0')
-    expect(out.meta.notes).toEqual([MIGRATION_NOTE_1_7_0_GABLE_FRAME])
+    expect(out.schemaVersion).toBe('1.9.0')
+    expect(out.meta.notes).toEqual([MIGRATION_NOTE_1_7_0_GABLE_FRAME, MIGRATION_NOTE_1_8_0])
     expect(out.wallPanels).toEqual([panel])
   })
 
@@ -339,14 +350,48 @@ describe('schema evolution 1.0.0 -> 1.1.0 -> 1.2.0 -> 1.3.0 -> 1.4.0 -> 1.5.0 ->
     expect(r.issues[0].message).toContain('GABLE_FRAME')
   })
 
+  it('v3.54.13: a 1.8.0 file without an outline or an end cap migrates through one reported step, the building unchanged', () => {
+    const raw = JSON.parse(text(FIXTURE_1_8_0)) as Record<string, unknown>
+    const r = loadModel(text(FIXTURE_1_8_0))
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.issues.map((i) => i.code)).toEqual(['SCHEMA_MIGRATED'])
+    expect(r.model.meta.notes).toEqual([MIGRATION_NOTE_1_8_0])
+    const saved = JSON.parse(serializeModel(r.model)) as Record<string, unknown>
+    saved.schemaVersion = '1.8.0'
+    saved.meta = { ...(saved.meta as object), notes: [] }
+    expect(saved).toEqual({ ...raw, meta: { ...(raw.meta as object), notes: [] } })
+  })
+
+  it('v3.54.13: a 1.8.0 file the v3.54.12 house path wrote with an end-cap region is restated as 1.9.0 with its own note; an outline under 1.8.0, or an end cap under 1.7.0, is refused', () => {
+    const raw = JSON.parse(text(FIXTURE_1_8_0)) as Record<string, unknown> & { walls: Array<{ id: string }> }
+    const cap = { id: 'cap', hostId: raw.walls[0].id, face: 'END', rect: { a0: 0, a1: 0.1, b0: 0, b1: 1 }, materialId: 'm' }
+    const m = migrateModelInput({ ...raw, surfaceRegions: [cap] })
+    expect(m.migrated).toBe(true)
+    expect(m.issues).toHaveLength(1)
+    expect(m.issues[0].message).toContain('surfaceRegions.0.face END')
+    const out = m.input as Record<string, unknown> & { meta: { notes: string[] } }
+    expect(out.schemaVersion).toBe('1.9.0')
+    expect(out.meta.notes).toEqual([MIGRATION_NOTE_1_8_0_END_CAP])
+    expect(out.surfaceRegions).toEqual([cap])
+    const outlined = validateModel({ ...raw, surfaceRegions: [{ ...cap, face: 'OUTER', outline: [{ a: 0, b: 0 }, { a: 0.1, b: 0 }, { a: 0, b: 1 }] }] })
+    expect(outlined.ok).toBe(false)
+    expect(outlined.issues[0]).toMatchObject({ code: 'SCHEMA', path: 'schemaVersion' })
+    expect(outlined.issues[0].message).toContain('surfaceRegions.0.outline')
+    const old = JSON.parse(text(FIXTURE_1_7_0)) as Record<string, unknown>
+    const refused = validateModel({ ...old, surfaceRegions: [cap] })
+    expect(refused.ok).toBe(false)
+    expect(refused.issues[0].message).toContain('surfaceRegions.0.face END')
+  })
+
   it('unknown schema versions are refused by name, never reinterpreted', () => {
-    for (const v of ['0.9.0', '1.9.0', '2.0.0', 1.1]) {
+    for (const v of ['0.9.0', '1.10.0', '2.0.0', 1.1]) {
       const raw = JSON.parse(text(FIXTURE_1_0_0)) as Record<string, unknown>
       raw.schemaVersion = v
       const r = validateModel(raw)
       expect(r.ok, String(v)).toBe(false)
       expect(r.issues[0].code).toBe('UNSUPPORTED_SCHEMA_VERSION')
-      expect(r.issues[0].message).toContain('1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0, 1.6.0, 1.7.0, 1.8.0')
+      expect(r.issues[0].message).toContain('1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0, 1.6.0, 1.7.0, 1.8.0, 1.9.0')
     }
   })
 

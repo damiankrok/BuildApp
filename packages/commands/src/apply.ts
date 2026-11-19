@@ -470,7 +470,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return
     }
     case 'createSurfaceRegion':
-      add('surfaceRegions', 'surfaceRegion', { id: c.id, ...common(c), hostId: c.hostId, face: c.face, rect: c.rect, materialId: c.materialId })
+      add('surfaceRegions', 'surfaceRegion', { id: c.id, ...common(c), hostId: c.hostId, face: c.face, rect: c.rect, ...(c.outline ? { outline: c.outline } : {}), materialId: c.materialId })
       return
     case 'createLinearSolid':
       add('linearSolids', 'linearSolid', { id: c.id, ...common(c), levelId: c.levelId, hostId: c.hostId, start: c.start, end: c.end, width: c.width, depth: c.depth, rollDeg: c.rollDeg, role: c.role, materialId: c.materialId })
