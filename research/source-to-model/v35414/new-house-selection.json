@@ -1,0 +1,424 @@
+{
+ "seed": "7c7a5b8fa86ada2039e2427f1a6ac2b1dda47c600e5b6e30e4051abffd3c03ae",
+ "start": 446,
+ "poolSize": 460,
+ "opened": [
+  {
+   "url": "https://lipinscy.pl/projekt/alamo/",
+   "opened": true,
+   "packageId": "src-dcp300-555c42fa48",
+   "contentHash": "b6d47025688a314695366e976a91ac8e173d686cd7a4c345e01e1dc7a2a38c29",
+   "pageHash": "3f56cca56bb4256147c19d201cb203cfc95f51eb714ed7b7cafb18ddabedd7eb",
+   "assets": 27,
+   "facts": {
+    "footprint_area": 76.2,
+    "house_net_area": 108.89,
+    "roof_pitch": 45,
+    "usable_area": 92.97
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/insbruck/",
+   "opened": true,
+   "packageId": "src-lmp320-9370b713dd",
+   "contentHash": "3d740b2836605f3cd4751c266778a068de93ef7ea2e3c1a3b77351dda237a56f",
+   "pageHash": "c494d6aac4b1ddd802273fe8a786cba9aef0cd5b5d7b08d71fc85cd8b988b394",
+   "assets": 27,
+   "facts": {
+    "footprint_area": 144.72,
+    "house_net_area": 197.72,
+    "roof_pitch": 30,
+    "usable_area": 169.66
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": true,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/tilburg-ii/",
+   "opened": true,
+   "packageId": "src-dcbl49-0937951dfa",
+   "contentHash": "ec5268a23bf90c1ac5b79b2800adc415ab56db6d8f14d172efe5e2534a79e6f3",
+   "pageHash": "cdf51cacf2bee1cad7d12f3ecd5142590cdfc5145ab19e719eeeb0f7dbde648c",
+   "assets": 24,
+   "facts": {
+    "roof_pitch": 40
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "footprint None; no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/garaz-g04a/",
+   "opened": true,
+   "packageId": "src-g04a-7058d9039a",
+   "contentHash": "7db0a90c8b3b6b790019669ccd1689b952026d28a35336599027f763438de428",
+   "pageHash": "90c6cd5eab1fdee80d3c29f9a870b0130bf29df3c3e4f7e4f63427cbddccb553",
+   "assets": 13,
+   "facts": {
+    "footprint_area": 47.1,
+    "garage_area": 34.74,
+    "house_net_area": 34.74,
+    "roof_pitch": 35,
+    "usable_area": 34.74
+   },
+   "elevationViews": [],
+   "upperNamed": false,
+   "refused": "elevations []; no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/rodez-ii/",
+   "opened": true,
+   "packageId": "src-dcp328a-1c97254247",
+   "contentHash": "34c2b17adeae5d6ac5ac97d570acb8a6657850f85f508f3f26211ef6489a0306",
+   "pageHash": "75c275d6b8c8d3b3bc973afa3213df2036a0209a8ac7eee890497d8ce52083bf",
+   "assets": 30,
+   "facts": {
+    "footprint_area": 136.13,
+    "house_net_area": 184.83,
+    "roof_pitch": 35,
+    "usable_area": 155.44
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/dijon-vi/",
+   "opened": true,
+   "packageId": "src-dcp234e-4061aa6523",
+   "contentHash": "ff87fc9e5e60fd78cc1a5dc575e68dfa71bbf3138e1b3bb8ad022d22f713661b",
+   "pageHash": "333f4b44e917ece9d82dfe9df1bd306ab2fa14485e0e4e12d9a9497c7b3d1073",
+   "assets": 35,
+   "facts": {
+    "footprint_area": 183.35,
+    "house_net_area": 281.9,
+    "roof_pitch": 40,
+    "usable_area": 185.1
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "footprint 183.35; no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/dayton/",
+   "opened": true,
+   "packageId": "src-dcp261-f8c53a1580",
+   "contentHash": "dbeb8ba74a355e7c9e65f28ec08d25367db348a2ef7d1623eabfb5715536b2bd",
+   "pageHash": "288fab3d9683e744054ba3ec3bef26a3e654a2f280f83fe8d13a2b464eed9387",
+   "assets": 25,
+   "facts": {
+    "footprint_area": 164.12,
+    "house_net_area": 245.6,
+    "roof_pitch": 40,
+    "usable_area": 168.13
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "footprint 164.12; no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/sanremo/",
+   "opened": true,
+   "packageId": "src-dcp309-de3a1bf022",
+   "contentHash": "15eed5e663196576efe1c4d9a31d8dd31dda638e91ef49dbd62f96212870fc6c",
+   "pageHash": "adefaa4066a3c93c77f9c6b30ca98b126ae9da896c488f8eaf7df1b8951a491c",
+   "assets": 24,
+   "facts": {
+    "footprint_area": 142.5,
+    "house_net_area": 216.49,
+    "roof_pitch": 40,
+    "usable_area": 155.84
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/fulton-ii/",
+   "opened": true,
+   "packageId": "src-lmp342a-0d95e35c72",
+   "contentHash": "f3ae314f22b4344320ff05fbf7fa305f7fde4a2067b84bef17cc370c63416ffa",
+   "pageHash": "9ab39d16aa10eed60ce549f513b9233827cf21b5ad1be9d818b209ebc2ede7f4",
+   "assets": 26,
+   "facts": {
+    "footprint_area": 127.06,
+    "house_net_area": 174.87,
+    "roof_pitch": 40,
+    "usable_area": 136.89
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/garaz-g12/",
+   "opened": true,
+   "packageId": "src-g12-1551ae429e",
+   "contentHash": "19abb25ab3862b2bc8e1562c729d39de91e9097ed18046d32ba134c9ac238487",
+   "pageHash": "18a98eca4906ffe84cd0de39458bc02fc1925c68170d0e80fb2d4c40a1720b7a",
+   "assets": 5,
+   "facts": {
+    "footprint_area": 54.3,
+    "garage_area": 43.72,
+    "house_net_area": 43.72,
+    "roof_pitch": 35,
+    "usable_area": 43.72
+   },
+   "elevationViews": [],
+   "upperNamed": false,
+   "refused": "no section; elevations []; no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/miluza-ii/",
+   "opened": true,
+   "packageId": "src-lmp244a-64c650ed67",
+   "contentHash": "ef5ae938ff4e3db5b98f1bc80e5db952e565ee16518a32c100ac83daa905ed67",
+   "pageHash": "8544a4b269ee6d31b1257acd018b544f094663c356733073db7b4cdbb5396bc7",
+   "assets": 24,
+   "facts": {
+    "footprint_area": 118.6,
+    "house_net_area": 185.77,
+    "roof_area": 229.42,
+    "roof_pitch": 45,
+    "usable_area": 136.38
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/garaz-g39/",
+   "opened": true,
+   "packageId": "src-g39-560be5939e",
+   "contentHash": "6201cdb992710535dfd4e2aa08abbe3b29049ac8023f6b93a1ad11a4956c5ec2",
+   "pageHash": "0c8aafe8f74bae7812173f26c34735c2e8d9a7dcfd4ebfeb9e06c33ae1728cd6",
+   "assets": 7,
+   "facts": {
+    "footprint_area": 85.38,
+    "garage_area": 73.65,
+    "house_net_area": 73.65,
+    "roof_pitch": 40,
+    "usable_area": 73.65
+   },
+   "elevationViews": [],
+   "upperNamed": false,
+   "refused": "no section; elevations []; no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/bradfield-ii/",
+   "opened": true,
+   "packageId": "src-dcbl48-6cc7a20ab6",
+   "contentHash": "f1deffc6e354aede5b2d7bf0bc761c4d51458110e603c5be63d91c1d260ab83a",
+   "pageHash": "05b448e803d19ef5a78ff6bcfb8bd7e73642853963ba38bb099261ec9e96f98a",
+   "assets": 25,
+   "facts": {
+    "roof_pitch": 40
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "footprint None; no gable roof named; a garage named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/amarante-ii/",
+   "opened": true,
+   "packageId": "src-dcb152a-3a1493eaff",
+   "contentHash": "a01a6a3b84c9242deb1801790bcb9e764e2b7e8afa33ba8c60675ce846d0bbd4",
+   "pageHash": "1cda897fcf21fc66277c07f746488165ae4ed6131b96a61f8d9db37e89294ce9",
+   "assets": 21,
+   "facts": {
+    "footprint_area": 129.22,
+    "house_net_area": 99.85,
+    "roof_area": 149.21,
+    "roof_pitch": 30,
+    "usable_area": 99.85
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/alaska/",
+   "opened": false,
+   "refused": "family alaska excluded (seen in development)"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/arosa/",
+   "opened": true,
+   "packageId": "src-lmb115-a2bf59fb94",
+   "contentHash": "12a171a2e7b563410803c4d24a0b7b7e1bcd52b678efc4350320b3fef86de9c8",
+   "pageHash": "b6b12c22afda83ed3e497a6cb06d9653ed103f79607b094f7d9c5fcded649aab",
+   "assets": 30,
+   "facts": {
+    "footprint_area": 149.48,
+    "house_net_area": 120.43,
+    "roof_area": 220.07,
+    "roof_pitch": 30,
+    "usable_area": 120.43
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/corte-iv/",
+   "opened": true,
+   "packageId": "src-lmb62c-f436b50344",
+   "contentHash": "d1b070d9a85f064997c3643cb25a29fac4e1caaab9997587876ff963affae9e7",
+   "pageHash": "a58f39accd9671b7c8946f5566abb1f5ee1453ce4b352014b4775a5027cf2cdb",
+   "assets": 26,
+   "facts": {
+    "footprint_area": 97.26,
+    "house_net_area": 77.4,
+    "roof_area": 148.4,
+    "roof_pitch": 35,
+    "usable_area": 71.76
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/lucca/",
+   "opened": true,
+   "packageId": "src-lmb71-e66407f267",
+   "contentHash": "89d9d3f3fb150fe47b9d268c475567043f133048e489c7d149e7590cba28afe1",
+   "pageHash": "fdf1d599c44fefcace4a4fd391e20dbf5ff1805960ce38533505019094f81e5e",
+   "assets": 27,
+   "facts": {
+    "footprint_area": 69.94,
+    "house_net_area": 53.58,
+    "roof_area": 114.7,
+    "roof_pitch": 30,
+    "usable_area": 53.58
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": "no gable roof named"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/mindelo/",
+   "opened": false,
+   "refused": "family mindelo excluded (seen in development)"
+  },
+  {
+   "url": "https://lipinscy.pl/projekt/ballina/",
+   "opened": true,
+   "packageId": "src-dcb155-5fd3ca5338",
+   "contentHash": "ee4f8a9a2fdc1e30edbd95e25bdefa0c56bad8fe80cc216a0f64cc7324fab06a",
+   "pageHash": "b6fbe25f5adbfd0cc3d1f2f96e188ff375fad246bf51911a943e3a64c545dd48",
+   "assets": 32,
+   "facts": {
+    "footprint_area": 111.25,
+    "house_net_area": 87.23,
+    "roof_area": 159.6,
+    "roof_pitch": 28,
+    "usable_area": 87.23
+   },
+   "elevationViews": [
+    "FRONT",
+    "REAR",
+    "SIDE_LEFT",
+    "SIDE_RIGHT"
+   ],
+   "upperNamed": false,
+   "refused": null
+  }
+ ],
+ "chosen": {
+  "url": "https://lipinscy.pl/projekt/ballina/",
+  "opened": true,
+  "packageId": "src-dcb155-5fd3ca5338",
+  "contentHash": "ee4f8a9a2fdc1e30edbd95e25bdefa0c56bad8fe80cc216a0f64cc7324fab06a",
+  "pageHash": "b6fbe25f5adbfd0cc3d1f2f96e188ff375fad246bf51911a943e3a64c545dd48",
+  "assets": 32,
+  "facts": {
+   "footprint_area": 111.25,
+   "house_net_area": 87.23,
+   "roof_area": 159.6,
+   "roof_pitch": 28,
+   "usable_area": 87.23
+  },
+  "elevationViews": [
+   "FRONT",
+   "REAR",
+   "SIDE_LEFT",
+   "SIDE_RIGHT"
+  ],
+  "upperNamed": false,
+  "refused": null
+ }
+}

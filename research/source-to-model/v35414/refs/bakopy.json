@@ -1,0 +1,40 @@
+{
+  "house": "archon.pl projekt-dom-w-bakopach-g2e-mbb9288266b05e",
+  "status": "DEV — known since 1317 (garage, main roof over the garage and the approach, wing cross gable were developed on it); not a fresh holdout",
+  "source": { "packageId": "src-mbb9288266b05e-af69b49926", "contentHash": "b7d5d8d4644322e1ce200e1e5361f64b5e83bbe908bfbd780a5b186079ed4188", "pageHash": "450f95481d61ac3b…", "variant": "G2E (the white-walled renders are another colour variant, not used); no mirror variant", "assetsVerified": "36 of 36 variants present, byte hashes equal" },
+  "writtenFrom": "stage-reports/artifacts/exterior-complete/source-elements-bakopy.json (written from the originals on 2026-11-04, before the E7 fixes), with its printed numbers restated as rows",
+  "tolerances": { "METRIC_printed_m": 0.05, "MINIATURE_position_m": 0.30, "MINIATURE_height_m": 0.15, "pitch_deg": 3, "count": 0 },
+  "dimensions": [
+    { "id": "outline-x", "printed": "690 + 810 = 1500", "scope": "whole house, outer faces (bottom chain)", "valueM": 15.0 },
+    { "id": "outline-z", "printed": "640 + 860 + 625 = 2125", "scope": "whole house, outer faces (right chain)", "valueM": 21.25 },
+    { "id": "main-body-x", "printed": "860", "scope": "long body width", "valueM": 8.6 },
+    { "id": "wing", "printed": "640 × 860", "scope": "living wing", "valueM": [6.4, 8.6] },
+    { "id": "garage", "printed": "690 × 625", "scope": "garage body", "valueM": [6.9, 6.25] },
+    { "id": "eaves", "printed": "+3,27", "scope": "eaves above ±0.00", "valueM": 3.27 },
+    { "id": "ridge", "printed": "+6,28", "scope": "main ridge above ±0.00", "valueM": 6.28 },
+    { "id": "pitch", "printed": "35°", "scope": "main roof pitch", "valueDeg": 35 },
+    { "id": "gate", "printed": "500/225", "scope": "garage gate (structural opening)", "valueM": [5.0, 2.25] },
+    { "id": "entrance", "printed": "105/210", "scope": "entrance door", "valueM": [1.05, 2.1] }
+  ],
+  "rows": [
+    { "id": "storeys", "kind": "MINIATURE", "check": "one storey, roof space open over the living room" },
+    { "id": "outline-x", "kind": "METRIC", "check": "15.00 ± 0.05 (miniature ± 0.30)" },
+    { "id": "outline-z", "kind": "METRIC", "check": "21.25 ± 0.05 (miniature ± 0.30)" },
+    { "id": "main-body", "kind": "MINIATURE", "check": "long body 8.60 wide along z" },
+    { "id": "main-roof", "kind": "MINIATURE", "check": "long gable roof, ridge along z, over the garage and the covered approach" },
+    { "id": "ridge", "kind": "METRIC", "check": "+6.28 ± 0.05 (miniature ± 0.15)" },
+    { "id": "eaves", "kind": "METRIC", "check": "+3.27 ± 0.05 (miniature ± 0.15)" },
+    { "id": "pitch", "kind": "METRIC", "check": "35° ± 3°" },
+    { "id": "living-wing", "kind": "MINIATURE", "check": "wing 6.40 × 8.60 on the east" },
+    { "id": "wing-roof", "kind": "MINIATURE", "check": "cross gable over the wing, ridge along x, tall glazed east gable" },
+    { "id": "garage", "kind": "MINIATURE", "check": "garage 6.90 × 6.25 at the front-west" },
+    { "id": "garage-gate", "kind": "METRIC", "check": "one sectional gate 5.00 × 2.25 in the garage front" },
+    { "id": "entrance", "kind": "MINIATURE", "check": "entrance door 1.05 × 2.10 set back at the house front beside the garage" },
+    { "id": "covered-approach", "kind": "MINIATURE", "check": "open covered approach under the main roof, no walls of its own" },
+    { "id": "terrace-pergola", "kind": "MINIATURE", "check": "garden terrace under a separate pergola" },
+    { "id": "openings-front", "kind": "MINIATURE", "check": "garage gate, entrance door, kitchen window" },
+    { "id": "openings-garden", "kind": "MINIATURE", "check": "bedroom terrace doors ×2, 4.00 × 2.30 glazing onto the pergola terrace, small windows" },
+    { "id": "chimneys", "kind": "MINIATURE", "check": "two chimneys through the main roof" },
+    { "id": "palette", "kind": "MINIATURE", "check": "anthracite render and roof, vertical timber on the garage gable, the wing gable and panels beside openings" }
+  ]
+}
