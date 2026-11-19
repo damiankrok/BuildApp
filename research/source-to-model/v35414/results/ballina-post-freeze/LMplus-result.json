@@ -1,0 +1,87 @@
+{
+  "counts": {
+    "AGREES": 0,
+    "CORRECTED": 1,
+    "NEW_SPAN": 1,
+    "NOT_MATCHED": 13,
+    "RETAINED": 0,
+    "UNRESOLVED": 0
+  },
+  "decision": "ACCEPT",
+  "final": {
+    "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+    "masses": 1,
+    "metric": {
+      "cmPerPixelX": 1.95279,
+      "cmPerPixelY": 1.945107,
+      "confidence": "SUPPORTED",
+      "relation": "REPLACED"
+    },
+    "modelHash": "7d7b182030ac87cc1a6efc83e30d43717724979436ed746937e71d6f4d819c2d",
+    "outcome": "COMPLETED",
+    "outline": {
+      "x": {
+        "envelopePx": [
+          48,
+          723
+        ],
+        "offM": 0.28,
+        "spanM": 13.65,
+        "spanPx": [
+          36,
+          735
+        ],
+        "status": "SHORT",
+        "why": "the built outline runs 48..723 px where the printed 13.65 m is drawn 36..735 px: about 0.28 m of what the dimension measures is not built"
+      },
+      "y": {
+        "envelopePx": [
+          168.5,
+          575.5
+        ],
+        "offM": 0.22,
+        "spanM": 8.15,
+        "spanPx": [
+          157,
+          576
+        ],
+        "status": "SHORT",
+        "why": "the built outline runs 168.5..575.5 px where the printed 8.15 m is drawn 157..576 px: about 0.22 m of what the dimension measures is not built"
+      }
+    }
+  },
+  "house": "ballina",
+  "local": {
+    "code": "RECONSTRUCTION_FAILED",
+    "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+    "metric": {
+      "cmPerPixelX": 1.945107,
+      "cmPerPixelY": 1.945107,
+      "confidence": "INCONCLUSIVE",
+      "relation": "LEGACY_UNCONFIRMED"
+    },
+    "outcome": "FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTERING_VIEWS"
+  },
+  "measured": {
+    "after": {
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 2.8,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 16,
+      "outlineX": 13.65,
+      "outlineZ": 8.15,
+      "walls": 4
+    }
+  },
+  "seconds": 221,
+  "sketches": null,
+  "usd": 0,
+  "why": "a refusal (METRIC_RESOLUTION_INCONCLUSIVE) became a model on a scale its readings settle (SUPPORTED)"
+}
+

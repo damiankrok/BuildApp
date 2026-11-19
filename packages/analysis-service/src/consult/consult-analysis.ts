@@ -529,7 +529,8 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const reads = await readDimensions(ctx, frames)
     const table = localTableOf(local.metrics, frames.map((f) => f.frameId))
     const checks = await verifyLocal(ctx, frames, table)
-    const resolution = resolveMetric({ metrics: local.metrics, table, reads, checks, consultant: { engine: `metric-consultant.${mModel.id}`, model: mModel.model } })
+    const footprint = local.pkg.publishedFacts.find((f) => f.key === 'footprint_area' && f.unit === 'm2')?.value
+    const resolution = resolveMetric({ metrics: local.metrics, table, reads, checks, consultant: { engine: `metric-consultant.${mModel.id}`, model: mModel.model }, ...(typeof footprint === 'number' ? { publishedFootprintM2: footprint } : {}) })
     const mUsd = [...reads, ...checks].reduce((a, r) => a + r.usd, 0)
     usd += mUsd
     const measuredBefore = local.run ? measureBuilt(local.run.reconstruction.model, compileBuilding(local.run.reconstruction.model)) : undefined

@@ -146,3 +146,31 @@ describe('v3.54.14 metric consultant — the candidate', () => {
     expect(compareMetricRead(state('a', 'SUPPORTED'), state('a', 'SUPPORTED'), 1).decision).toBe('NO_CHANGE')
   })
 })
+
+describe('v3.54.14 resolver 1.1.0 — the page\'s published footprint as a witness', () => {
+  // a 13.65 × 8.15 rectangle drawn at ~1.95 cm/px: the width line 0..700 px, the depth line 100..518 px; the analyzer
+  // read the depth label as 518 (digits swapped), the API as 815
+  const depthItem = L('D1', '518', 518, 774, 100, 518, 'cd', { axis: 'Y', box: { x0: 774, y0: 290, x1: 800, y1: 340 } })
+  const width = obs('1365', 13.65, [304, 50, 366, 73], { scope: 'WHOLE_HOUSE', axis: 'HORIZONTAL', ends: { from: [0, 77], to: [700, 77] } })
+  const depth = (lit = '815', v = 8.15, to = 518) => obs(lit, v, [774, 290, 800, 340], { scope: 'WHOLE_HOUSE', axis: 'VERTICAL', ends: { from: [787, 100], to: [787, to] } })
+  const run = (extra: { footprint?: number; d?: ReturnType<typeof obs>; item?: LocalItem }) => resolveMetric({ metrics: metrics(), table: [extra.item ?? depthItem], reads: read([width, extra.d ?? depth()]), checks: [], consultant, ...(extra.footprint !== undefined ? { publishedFootprintM2: extra.footprint } : {}) })
+  it('corrects a whole-house dimension when both printed overalls give the page\'s area at one drawing scale', () => {
+    const r = run({ footprint: 111.25 })
+    const d = r.decisions.find((x) => x.itemId === 'D1')
+    expect(d?.decision).toBe('CORRECTED')
+    expect(d?.witness).toBe('FOOTPRINT')
+    expect(r.readings.map((x) => x.literal)).toEqual(['815'])
+    // both overalls go to the metric layer as measured spans on their own lines (the width had no label of the analyzer)
+    expect(r.spans.map((x) => x.literal).sort()).toEqual(['1365', '815'])
+    expect(r.resolverVersion).toBe('1.1.0')
+  })
+  it('counter-trials: no page area, another area, two scales, or the analyzer\'s reading also fitting — no witness', () => {
+    expect(run({}).decisions.find((x) => x.itemId === 'D1')?.decision).toBe('UNRESOLVED')
+    expect(run({ footprint: 120 }).decisions.find((x) => x.itemId === 'D1')?.decision).toBe('UNRESOLVED')
+    // the depth line drawn at another scale (the API's 815 does not measure on this picture as the width does)
+    expect(run({ footprint: 111.25, d: depth('815', 8.15, 400) }).decisions.find((x) => x.itemId === 'D1')?.decision).toBe('UNRESOLVED')
+    // the analyzer's own reading gives the area too: nothing to witness between them
+    const fits = L('D1', '814', 814, 774, 100, 518, 'cd', { axis: 'Y', box: { x0: 774, y0: 290, x1: 800, y1: 340 } })
+    expect(run({ footprint: 111.25, item: fits }).decisions.find((x) => x.itemId === 'D1')?.decision).not.toBe('CORRECTED')
+  })
+})

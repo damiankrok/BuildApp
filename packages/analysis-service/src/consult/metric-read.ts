@@ -37,7 +37,7 @@ export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as 
 export const DIMENSION_OBSERVATION_VERSION = '1.0.0' as const
 export const METRIC_READ_PROMPT_VERSION = 'metric-read/1' as const
 export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/1' as const
-export const METRIC_RESOLVER_VERSION = '1.0.0' as const
+export const METRIC_RESOLVER_VERSION = '1.1.0' as const
 export const VERIFY_MAX_ITEMS = 40
 
 const finite = z.number().finite()
@@ -420,7 +420,7 @@ const centre = (b: { x0: number; y0: number; x1: number; y1: number }): [number,
  *           and not the analyzer's.
  * The second request's DISAGREES is recorded, never counted as a witness (the same reader twice is one reader).
  */
-export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readonly LocalItem[]; reads: readonly IndependentRead[]; checks: readonly LocalCheck[]; consultant: { engine: string; model: string } }): MetricResolution {
+export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readonly LocalItem[]; reads: readonly IndependentRead[]; checks: readonly LocalCheck[]; consultant: { engine: string; model: string }; /** v1.1.0: the page's published footprint area (m²), text beside the drawings — a witness neither reader produced. */ publishedFootprintM2?: number }): MetricResolution {
   const decisions: MetricDecision[] = []
   const readings: ConsultedReading[] = []
   const spans: ConsultedSpan[] = []
@@ -453,7 +453,8 @@ export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readon
       if (t.status !== 'ACCEPTED' && t.latticeId) readings.push({ proposalId: `mr:${match.id}`, frameId: t.frameId, latticeId: t.latticeId, literal: match.literal.replace(/\s/g, ''), consultant: input.consultant })
       continue
     }
-    const witness = witnessOf(input.metrics, input.table, t, apiCm)
+    const scaleOrChain = witnessOf(input.metrics, input.table, t, apiCm)
+    const witness = scaleOrChain.ok ? scaleOrChain : footprintWitness(match, obsAll, t, input.publishedFootprintM2) ?? scaleOrChain
     if (!witness.ok) {
       decisions.push({ ...base, decision: 'UNRESOLVED', why: `the API reads ${apiCm} cm, the analyzer ${t.valueCm ?? 'nothing'}: ${witness.why}${verdict?.verdict === 'DISAGREES' ? '; the check also disagrees, but the same reader twice is not a second witness' : ''}` })
       continue
@@ -464,6 +465,12 @@ export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readon
     }
     readings.push({ proposalId: `mr:${match.id}`, frameId: t.frameId, latticeId: t.latticeId, literal: match.literal.replace(/\s/g, ''), consultant: input.consultant })
     decisions.push({ ...base, decision: 'CORRECTED', witness: witness.kind, why: witness.why })
+    // v1.1.0: a whole-house dimension witnessed by the page's area is also measured on its own line (its ends), so the
+    // metric layer can weigh it beside the other overall as two consulted dimensions on different lines
+    if (witness.kind === 'FOOTPRINT' && match.ends) {
+      used.add(`span:${match.id}`)
+      spans.push({ proposalId: `ms:${match.id}`, frameId: match.frameId, literal: match.literal.replace(/\s/g, ''), unit: match.unit === 'm' ? 'm' : match.unit === 'mm' ? 'mm' : 'cm', from: { x: match.ends.from[0], y: match.ends.from[1] }, to: { x: match.ends.to[0], y: match.ends.to[1] }, consultant: input.consultant })
+    }
   }
   // API dimensions the analyzer has no label for: whole dimensions and body spans with both ends, handed as spans
   for (const o of obsAll) {
@@ -474,6 +481,30 @@ export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readon
     decisions.push({ observationId: o.id, frameId: o.frameId, api: o.literal, decision: 'NEW_SPAN', why: `a printed ${o.scope.toLowerCase().replace(/_/g, ' ')} dimension the analyzer read no label for: handed as a span, the metric layer snaps and judges it` })
   }
   return { resolverVersion: METRIC_RESOLVER_VERSION, decisions, readings, spans }
+}
+
+/**
+ * v1.1.0 FOOTPRINT: a whole-house dimension read by the API is witnessed by the page's published footprint area when
+ * the perpendicular whole-house dimension printed on the same drawing, multiplied by it, gives that area (0.5 %), the two
+ * lines measure both readings at one scale of the picture (3 %), and the analyzer's own reading does not give the area.
+ * The area is printed text beside the drawings, read by neither reader: the same reader's two labels are no witness of
+ * each other, but both agreeing with the page's area at one drawing scale is. A footprint that is not a rectangle (a
+ * wing, a recess) has no such product, so nothing is witnessed there.
+ */
+function footprintWitness(o: DimensionObservation, all: readonly DimensionObservation[], t: LocalItem, footprintM2: number | undefined): { ok: true; kind: 'FOOTPRINT'; why: string } | undefined {
+  if (!footprintM2 || footprintM2 <= 0 || o.scope !== 'WHOLE_HOUSE' || !o.ends || o.value === null || o.status !== 'PRINTED') return undefined
+  const len = (x: DimensionObservation): number => (x.ends ? Math.hypot(x.ends.to[0] - x.ends.from[0], x.ends.to[1] - x.ends.from[1]) : 0)
+  const cm = (x: DimensionObservation): number => Math.round((x.value as number) * 1000) / 10
+  const other = all.find((q) => q.id !== o.id && q.frameId === o.frameId && q.kind === 'LENGTH' && q.scope === 'WHOLE_HOUSE' && q.status === 'PRINTED' && q.value !== null && q.ends && q.axis !== o.axis && q.axis !== 'OBLIQUE' && o.axis !== 'OBLIQUE')
+  if (!other || len(o) < 20 || len(other) < 20) return undefined
+  const kA = cm(o) / len(o)
+  const kB = cm(other) / len(other)
+  if (Math.abs(kA - kB) / Math.max(kA, kB) > 0.03) return undefined
+  const tol = Math.max(0.005 * footprintM2, 0.1)
+  const area = (cm(o) * cm(other)) / 1e4
+  const localArea = t.valueCm !== undefined ? (t.valueCm * cm(other)) / 1e4 : undefined
+  if (Math.abs(area - footprintM2) > tol || (localArea !== undefined && Math.abs(localArea - footprintM2) <= tol)) return undefined
+  return { ok: true, kind: 'FOOTPRINT', why: `the page's published footprint ${footprintM2} m² is ${cm(o)} × ${cm(other)} cm (${area.toFixed(3)} m²), both lines at one scale of the drawing (${kA.toFixed(4)} / ${kB.toFixed(4)} cm/px); ${t.valueCm ?? 'no reading'} would give ${localArea?.toFixed(2) ?? '—'} m²` }
 }
 
 function witnessOf(metrics: MetricEvidenceSet, table: readonly LocalItem[], t: LocalItem, apiCm: number): { ok: true; kind: 'CHAIN' | 'SCALE'; why: string } | { ok: false; why: string } {
