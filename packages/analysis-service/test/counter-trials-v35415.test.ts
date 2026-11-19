@@ -63,3 +63,19 @@ describe('v3.54.15 counter-trial: another palette with the same form', () => {
     expect(classes(light)).not.toEqual(classes(timber))
   })
 })
+
+describe('v3.54.15 counter-trial: another unit system (feet and inches)', () => {
+  it('a literal with its own foot and inch marks is parsed by them, whatever unit the answer named; a malformed one is not', async () => {
+    const { feetInches, valueOfLiteral } = await import('../src/consult/metric-read.js')
+    expect(feetInches(`45'-6"`)).toBeCloseTo(13.8684, 6)
+    expect(feetInches(`10' 0"`)).toBeCloseTo(3.048, 6)
+    expect(feetInches(`3'-4 1/2"`)).toBeCloseTo(1.0287, 6)
+    expect(feetInches(`12'`)).toBeCloseTo(3.6576, 6)
+    expect(valueOfLiteral(`45'-6"`, 'none', 'LENGTH')).toBeCloseTo(13.8684, 6)
+    expect(valueOfLiteral(`45'-6"`, 'cm', 'LENGTH')).toBeCloseTo(13.8684, 6)
+    // inches of 12 or more are not feet-inches; a cm label stays cm; an ft-in claim without marks has no value
+    expect(feetInches(`10'-14"`)).toBeUndefined()
+    expect(valueOfLiteral('1365', 'cm', 'LENGTH')).toBeCloseTo(13.65, 6)
+    expect(valueOfLiteral('1365', 'ft-in', 'LENGTH')).toBeUndefined()
+  })
+})

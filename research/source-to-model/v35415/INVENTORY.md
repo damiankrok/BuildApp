@@ -1,0 +1,37 @@
+# v3.54.15 §3 — information inventory: from the source to the measured scene
+
+One row per class of information the API is asked for or LOCAL reads. For each: where it is in the source, who reads
+it, the raw contract, how it is canonicalized, who resolves it, which model field holds it, which consumer uses it,
+whether it reaches the scene, and how the scene is measured. **Loss** names the first place the information was lost
+on v3.54.14 (the base) and what v3.54.15 did about it. Evidence is from the runs named in the last column
+(`/home/user/rd/v35414`, `/home/user/rd/v35415`, outside Git) and from the tests named.
+
+Loss vocabulary (§3): NOT_RECEIVED · NOT_READ · NO_FIELD · WRONG_FORMAT · MISINTERPRETED · NO_CONSUMER · REJECTED ·
+ACCEPTED_WITHOUT_EFFECT · — (none).
+
+| class | source → reader | raw contract → canonical | resolver | model field → consumer → scene | measure | loss on v3.54.14 | v3.54.15 | evidence |
+|---|---|---|---|---|---|---|---|---|
+| plan dimension label (LENGTH) | plan → LOCAL recogniser; API `metric-read/2` | `DimensionObservation` 1.1.0 (literal, unit, scope, axis, ends, box) → stable id | `resolveMetric` 1.2.0: CHAIN / SCALE / FOOTPRINT witness | consulted reading → metric layer (scale) → outline, walls | `measureBuilt` outlineX/Z | Ballina: LOCAL refused (518 for 815) — repaired in 3.54.14; Bakopy: corrections counted on readings LOCAL never claimed | CORRECTED only with an independent witness; fact trace `LENGTH:*` | Ballina LM 815 CHANGED; Bakopy live 14 × NO_EFFECT (scale held) |
+| LOCAL's reading the other way up (`0051`, `518`) | plan → LOCAL orientation choice | `orientationDecisions` per chain | — | shown to the API as "the analyzer read" | — | **MISINTERPRETED**: a reading in the orientation LOCAL had rejected was presented as LOCAL's claim (Bakopy: 8 "corrections" of `080`, `088`, `014`, `049`, `0051`…) | `metric-verify/2`: only readings in the decided way up; an undecided chain shows both (`otherWayUp`); solver 1.9.0 (v-b) decides a long vertical label by its ratio to the other axis (5 % / 15 % / 3×) | `local-table-v35415.test.ts`, `metric-solution.test.ts`; Bakopy live: AGREES 18, CORRECTED 0, same model |
+| level mark (LEVEL) — floor, terrain, ceiling, eaves, ridge, chimney | section → LOCAL datum reader; API `metric-read/2` with `role` | `role` from the API field or the hint (`roleFrom`) | the section's own ladder (`checkLevelReadings`: symbol, ladder, printed zero); supersedes unvalidated template datums | `LEVEL_DATUM` → levels, ridge datum → roof, elevation registration | levels, ridge, eaves | **NO_CONSUMER** (Ballina: ±0,00/−0,30/+5,54 read and never used; template +15.50 stood for +5,54) | consulted levels admitted by the drawing reach `extract.ts`; fates ADMITTED / REFUSED / NOT_CONSUMED | Ballina: ridge 5.54 CHANGED (absent → 5.54), eaves 3.373, implied pitch ≈ 28° = the page's; +2,80 REFUSED (NO_SYMBOL); −0,30 NOT_CONSUMED (terrain: registration only) |
+| ceiling (CEILING) | section | role CEILING | never the eaves (`ridgeAndEaves`) | no model field | — | NO_FIELD (named) | named NOT_CONSUMED / REFUSED, never promoted to eaves or storey height | `counter-trials-v35415.test.ts` |
+| roof angle (ANGLE) | section label / page | `ANGLE` observation | a witness of the pitch the roof already carries; never alone a height | `roofs[].pitchDeg` (own authority: printed / published) | pitch | ACCEPTED_WITHOUT_EFFECT (by design) | fact trace CONFIRMED or NOT_CONSUMED, never "consumed" | Bakopy live `ANGLE:CONFIRMED` 1 |
+| page footprint area | page text | `publishedFacts` | FOOTPRINT witness only for two WHOLE_HOUSE overalls at one drawing scale | — (witness only) | — | — | counter-trial: a BODY dimension is no footprint witness | `metric-read-v35414.test.ts` |
+| elevation view registration | elevations → LOCAL solver | frame roles (FRONT / REAR / SIDE_LEFT / SIDE_RIGHT / SIDE_UNSPECIFIED) | `registerElevations`, `registerElevationV2` on the ridge datum | facade alignment → openings, finishes, sketch projection | view audit | **REJECTED** (new in 3.54.15 part 1): once Ballina had a ridge, the full side drawings measured onto the wrong axis, a 120 px thumbnail took a side, and REAR was lost | side labels believed as front/rear are; a view the ridge cannot hang falls back to the wall-band corners (positions only) | Ballina: 4 of 4 facades (FRONT silhouette, sides band, REAR positions); Bakopy byte-identical; `side-label-v35415.test.ts` |
+| sketch silhouette, ground row | elevation → API `elevation-sketch` | contract 1.1.0, parser 4: OBJECT / TUPLE / BARE_POLYGON / UNKNOWN, fate per element, raw kept | `checkProportions`: registration, vertical (ridge/eaves by role), form, finish | — (the proportions check) | residuals | WRONG_FORMAT (Ballina EAST tuples lost) | NORMALIZED adapter for unambiguous tuples; truncation / refusal / no tool call named | `sketch-contract-v35415.test.ts` |
+| sketch wall finish zones | elevation → API | `walls[]` (class, polygon, host, visibility) | finish ACCEPTED when registration and vertical hold | `surfaceRegions` (appearance consumer) → mesh colour | region areas | — | per-property: finish taken even when the form is refused | Ballina: FRONT/EAST/WEST regions CHANGED; REAR accepted but its view is positions-only → NOT_CONSUMED (named) |
+| sketch openings | elevation → API | `openings[]` (kind, polygon, host) | form: same level, centre ±0.15 m, width ±0.3 m against the model's | the form reader re-reads the rendered sketch → openings | opening count/positions | ACCEPTED_WITHOUT_EFFECT (3.54.14 accepted sketches without looking at opening positions) | a moved opening with the same count refuses the form (PARTIAL) | Bakopy live: WEST/REAR/EAST PARTIAL (openings 0.16–0.57 m off), finish kept |
+| sketch elements (balcony, railing, chimney, …) | elevation → API | `elements[]` (kind, polygon) | — | only through the rendered form picture when a sketch is ACCEPTED | — | **NO_CONSUMER** (named, not changed in 3.54.15) | drawn in the sketch PNG/SVG; no geometry consumer | — |
+| roof polygons in the sketch | elevation → API | `roofs[]` | a "wall" zone with IoU > 0.9 to a roof is the roof, refused without counting as lost form | drawn | — | MISINTERPRETED (a roof listed as a wall zone) | refused with its reason | `sketch-contract-v35415.test.ts` |
+| response envelope | transport | `stop_reason`, tool call, usage | — | — | — | TRUNCATED / refusal / missing call indistinguishable from "nothing seen" | `IndependentRead.response`, sketch `account.response`, `failed` with a code | tests above |
+| usage and cost | transport → ledger | input, output, cache write 5m/1h, cache read | `cost.ts` one price per model and TTL | ledger v35415 | USD | one old multiplier; replays booked as reserved failures | NOT_SENT for replays (0 USD); cache split booked | `transport-cache-v35415.test.ts`, `results/cache-trial-ballina.json` |
+
+## What still does not reach geometry (named, not hidden)
+
+- **CEILING** marks: no model field (a storey's ceiling height is not modelled separately from its wall top).
+- **Terrain** level: used by the registration of the views, not carried by any element.
+- **Sketch elements** (balconies, railings, chimneys from the API): drawn, no geometry consumer.
+- **REAR of Ballina**: registered for positions only (its silhouette is traced only to row 194 of 400), so its finish
+  zones and heights are not placed.
+- **Sketch form on Bakopy**: refused on three sides because the API's openings sit 0.16–0.57 m off the model's; the
+  model's openings stand.

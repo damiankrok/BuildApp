@@ -35,8 +35,8 @@ import { reserveOf } from './cost.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 
 export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as const
-export const DIMENSION_OBSERVATION_VERSION = '1.1.0' as const
-export const METRIC_READ_PROMPT_VERSION = 'metric-read/2' as const
+export const DIMENSION_OBSERVATION_VERSION = '1.2.0' as const
+export const METRIC_READ_PROMPT_VERSION = 'metric-read/3' as const
 export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/2' as const
 export const METRIC_RESOLVER_VERSION = '1.2.0' as const
 export const VERIFY_MAX_ITEMS = 40
@@ -44,7 +44,8 @@ export const VERIFY_MAX_ITEMS = 40
 const finite = z.number().finite()
 const P = z.tuple([finite, finite])
 const KINDS = ['LENGTH', 'LEVEL', 'ANGLE', 'AREA'] as const
-const UNITS = ['cm', 'm', 'mm', 'deg', 'm2', 'none'] as const
+/** 1.2.0 adds ft-in: a literal with explicit foot and inch marks (45'-6") — unambiguous, parsed from its own marks. */
+const UNITS = ['cm', 'm', 'mm', 'ft-in', 'deg', 'm2', 'none'] as const
 const STOREYS = ['GROUND', 'UPPER', 'ATTIC', 'BASEMENT', 'ROOF', 'UNKNOWN'] as const
 const AXES = ['HORIZONTAL', 'VERTICAL', 'OBLIQUE', 'NONE'] as const
 const SCOPES = ['WHOLE_HOUSE', 'BODY', 'WING', 'ROOM', 'OPENING', 'SEGMENT', 'WALL_THICKNESS', 'LEVEL', 'HEIGHT', 'OTHER', 'UNKNOWN'] as const
@@ -132,7 +133,7 @@ const READ_TOOL = {
           properties: {
             kind: { enum: KINDS },
             literal: { type: 'string', description: 'the text exactly as printed: its digits, sign and decimal separator (for example 1365, 4,50, +5,54, 28°)' },
-            unit: { enum: UNITS, description: 'the unit the drawing uses for this text: cm for whole centimetres, m when a decimal comma/point is printed in metres, deg for an angle' },
+            unit: { enum: UNITS, description: 'the unit the drawing uses for this text: cm for whole centimetres, m when a decimal comma/point is printed in metres, ft-in for feet and inches (45\'-6"), deg for an angle' },
             value: { type: ['number', 'null'], description: 'the printed value converted to metres (a level in metres above ±0.00, an angle in degrees); null when you cannot read it' },
             labelBox: { type: 'array', items: { type: 'number' }, minItems: 4, maxItems: 4, description: 'x0, y0, x1, y1 of the TEXT in pixels of this picture' },
             ends: { type: ['object', 'null'], additionalProperties: false, required: ['from', 'to'], properties: { from: { type: 'array', items: { type: 'number' }, minItems: 2, maxItems: 2 }, to: { type: 'array', items: { type: 'number' }, minItems: 2, maxItems: 2 } }, description: 'for a LENGTH: the two ends of its dimension line in pixels of this picture (where the extension lines or ticks cross it); null for a level or an angle' },
@@ -155,7 +156,7 @@ export const METRIC_READ_SYSTEM = `You read printed dimensions from one architec
 
 Report, with report_dimensions, every dimension line with its number, every level mark (for example ±0,00, +2,80, +5,54, −0,30), and every printed angle. For each:
 - literal: exactly as printed (digits, sign, decimal comma or point). Never round, never convert in the literal, never complete a digit you cannot see. Illegible: status UNKNOWN, value null.
-- value: the same number in metres (centimetre labels like 1365 → 13.65; 4,50 → 4.5; a level +5,54 → 5.54; an angle → degrees).
+- value: the same number in metres (centimetre labels like 1365 → 13.65; 4,50 → 4.5; a level +5,54 → 5.54; feet and inches 45'-6" → 13.8684, unit ft-in; an angle → degrees).
 - labelBox: the box of the TEXT, and ends: the two ends of its dimension line, both in pixels of the picture you were sent (x right, y down). Point at where the line meets its extension lines or ticks, not at the walls.
 - scope: WHOLE_HOUSE only for the outermost overall dimension of the building; a chain's pieces are SEGMENT; a room's inside size ROOM; an opening's width OPENING; a section's height between two levels HEIGHT; a level mark LEVEL.
 - reference: OUTER_FACE when the line runs from outer wall face to outer wall face; INNER_FACE for inside sizes; AXIS for axis-to-axis; for levels FINISHED_LEVEL / STRUCTURAL_LEVEL / TERRAIN.
@@ -333,7 +334,22 @@ export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): 
 }
 
 /** A printed literal's value: cm labels → m, decimal metres, signed levels, degrees. Undefined when it is not a number. */
+/** Feet and inches by their own marks: 45'-6", 10' 0", 3'-4 1/2", 12'. Undefined when the text has no foot mark. */
+export function feetInches(literal: string): number | undefined {
+  const m = /^(\d+)\s*['′]\s*-?\s*(?:(\d+)(?:\s+(\d+)\/(\d+))?\s*["″]?)?$/.exec(literal.trim())
+  if (!m) return undefined
+  const inches = Number(m[1]) * 12 + (m[2] ? Number(m[2]) : 0) + (m[3] && m[4] && Number(m[4]) > 0 ? Number(m[3]) / Number(m[4]) : 0)
+  if (m[2] && Number(m[2]) >= 12) return undefined
+  return Math.round(inches * 0.0254 * 1e6) / 1e6
+}
+
 export function valueOfLiteral(literal: string, unit: (typeof UNITS)[number], kind: (typeof KINDS)[number]): number | undefined {
+  // 1.2.0: a printed foot mark is its own unit, whatever unit the answer named (the marks are unambiguous)
+  if (kind === 'LENGTH' || kind === 'LEVEL') {
+    const fi = feetInches(literal)
+    if (fi !== undefined) return fi
+    if (unit === 'ft-in') return undefined
+  }
   const t = literal.replace(/\s/g, '').replace('−', '-').replace('±', '').replace(/°$/, '').replace(/m2$|m²$/, '')
   if (!/^[+-]?[0-9]+([.,][0-9]+)?$/.test(t)) return undefined
   const n = Number(t.replace(',', '.'))
