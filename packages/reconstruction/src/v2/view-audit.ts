@@ -96,7 +96,7 @@ export function viewAudit(input: {
     const corners = input.horizontalOnly?.get(f.id)
     if (!reg && !band && corners) {
       seenAsset.add(f.assetId)
-      out.push({ ...base, use: 'POSITIONS_ONLY', side: corners.side, sideBasis: isSide(f.roles.view) || f.roles.view === 'FRONT' || f.roles.view === 'REAR' ? 'LABELLED' : 'FIRST_READING', sideConfidence: corners.sideConfidence, mpp: corners.mpp, spanM: corners.spanM, spanWhy: corners.spanWhy, confidence: corners.confidence, openingHeights: 'REFUSED', why: corners.why, lost: ['every height on this view (no ridge datum: the ground row is the drawn terrain line)', 'the roof outline, rooflights, chimneys and wall tones on this view'] })
+      out.push({ ...base, use: 'POSITIONS_ONLY', side: corners.side, sideBasis: isSide(f.roles.view) || f.roles.view === 'FRONT' || f.roles.view === 'REAR' ? 'LABELLED' : 'FIRST_READING', sideConfidence: corners.sideConfidence, mpp: corners.mpp, spanM: corners.spanM, spanWhy: corners.spanWhy, confidence: corners.confidence, openingHeights: 'REFUSED', why: corners.why, lost: ['every height on this view (registered on its wall band’s ends: the ground row is the drawn terrain line)', 'the roof outline, rooflights, chimneys and wall tones on this view'] })
       continue
     }
     const r = reg ?? band

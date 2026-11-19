@@ -98,3 +98,24 @@ describe('v3.54.15 a strict grammar the provider will not compile', () => {
     expect(m).toBe(1)
   })
 })
+
+describe('v3.54.15 a refused strict grammar stays refused for the conversation', () => {
+  it('the next turn with the same tools goes without strict at once (its thinking blocks stay bound to the same tools)', async () => {
+    const strictFlags: boolean[] = []
+    const tooLarge = Object.assign(new Error('400 The compiled grammar is too large, which would cause performance issues.'), { status: 400 })
+    const create = async (body: Record<string, unknown>) => {
+      const strict = (body.tools as Array<{ strict?: boolean }>)[0].strict === true
+      strictFlags.push(strict)
+      if (strict) throw tooLarge
+      return { content: [], stop_reason: 'end_turn', model: 'claude-sonnet-5-5', usage: { input_tokens: 10, output_tokens: 2 } }
+    }
+    const t = anthropicConsultant({ apiKey: 'test-key', strict: true, createClient: async () => ({ messages: { create } }) })
+    await t.send({ system: 'S', messages, tools: [tool] })
+    const second = await t.send({ system: 'S', messages, tools: [tool] })
+    expect(strictFlags).toEqual([true, false, false])
+    expect(second.strictFallback).toMatch(/refused earlier/)
+    // another tool set on the same transport still tries strict first
+    await t.send({ system: 'S', messages, tools: [{ ...tool, name: 'other' }] }).catch(() => undefined)
+    expect(strictFlags[3]).toBe(true)
+  })
+})

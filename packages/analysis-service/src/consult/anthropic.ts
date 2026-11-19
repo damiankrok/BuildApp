@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 /**
  * v3.54.2 pilot — the consultant's transport to the provider's Messages API, server-side only.
  *
@@ -56,6 +57,8 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
     })
   let client: Promise<MessagesLike> | undefined
   const scrub = (text: string): string => (key ? text.split(key).join('[key]') : text)
+  /** v3.54.15: the tool sets (by content hash) whose strict grammar the provider refused on this transport. */
+  const strictRefused = new Set<string>()
   return {
     id: 'anthropic-messages',
     model,
@@ -70,15 +73,21 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
       let r: Awaited<ReturnType<MessagesLike['messages']['create']>>
       let strictFallback: string | undefined
       const body = (strict: boolean) => requestBody({ model, maxOutputTokens, system, messages, tools, ...(options.effort ? { effort: options.effort } : {}), ...(strict ? { strict: true } : {}), ...(options.cache ? { cache: options.cache } : {}) })
+      // a tool set whose strict grammar the provider refused stays non-strict on this transport: every turn of a
+      // conversation must offer the same tools, or its earlier thinking blocks no longer bind (preserved thinking)
+      const toolsKey = createHash('sha256').update(JSON.stringify(tools)).digest('hex')
+      const sticky = strictRefused.has(toolsKey)
+      if (sticky) strictFallback = 'this tool set\'s strict grammar was refused earlier on this transport: sent without strict'
       try {
         try {
-          r = await (await client).messages.create(body(options.strict === true), signal ? { signal } : undefined)
+          r = await (await client).messages.create(body(options.strict === true && !sticky), signal ? { signal } : undefined)
         } catch (e) {
           // v3.54.15: a strict grammar the provider will not compile (a large answer schema with several tools) is refused
           // unbilled (400); that one request goes again without `strict` — the answer is still validated here — and says so
           const status = (e as { status?: unknown }).status
           if (!(options.strict === true && status === 400 && STRICT_TOO_LARGE.test((e as Error).message))) throw e
           strictFallback = scrub((e as Error).message).slice(0, 200)
+          strictRefused.add(toolsKey)
           r = await (await client).messages.create(body(false), signal ? { signal } : undefined)
         }
       } catch (e) {

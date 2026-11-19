@@ -90,12 +90,20 @@ const cw = join(process.cwd(), '.cache', 'numeric-recogniser-ort', `image-role-w
 await bundleImageRoleWorker(cw)
 const content = workerImageEmbedder({ workerUrl: pathToFileURL(cw), paths: workspaceImageRolePaths() })
 const events: unknown[] = []
-const spend = argv.includes('--live') || argv.includes('--sketch-live') ? ledgerSpend({ phase: sketchTransport ? 'metric-read+sketches' : 'metric-read', house, variant: sketchTransport ? 'L-MS' : 'L-M' }) : undefined
+// v3.54.15: the consultant's label rounds on a live Sonnet transport (as the host's pilot runs them), the metric facts replayed
+let loopTransport: ConsultantModel | undefined
+if (argv.includes('--loop-live')) {
+  const live = anthropicConsultant({ model: 'claude-sonnet-5-5', ...transportOpts })
+  if (!live.available()) throw new Error('no API key in this process environment: --loop-live refused')
+  const loopTurns: Recorded[] = []
+  loopTransport = { ...live, send: async (req) => { try { const t = await live.send(req); loopTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'loop' }, turn: t }); writeFileSync(join(out, 'loop-turns.json'), `${JSON.stringify(loopTurns, null, 1)}\n`); return t } catch (e) { writeFileSync(join(out, 'loop-error.txt'), `${String((e as Error).message)}\n`); throw e } } }
+}
+const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') ? ledgerSpend({ phase: sketchTransport ? 'metric-read+sketches' : 'metric-read', house, variant: sketchTransport ? 'L-MS' : 'L-M' }) : undefined
 const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },
   { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(opt('cache') as string), offline: true, recogniser, content, ...(process.env.BUILDPLAN_DEBUG === '1' ? { debug: (m: string) => process.stderr.write(`DBG ${m}\n`) } : {}) },
-  { model: transport, metricModel: transport, price: PRICES[modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: 0, maxGeometryRounds: 0, check: 'OFF', keepLocalModel: true, ...(spend ? { spend } : {}), record: (e) => events.push(e) },
+  { model: loopTransport ?? transport, metricModel: transport, price: loopTransport ? PRICES['claude-sonnet-5-5'] : PRICES[modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: loopTransport ? 2 : 0, maxGeometryRounds: 0, check: 'OFF', keepLocalModel: true, ...(spend ? { spend } : {}), record: (e) => events.push(e) },
 )
 writeFileSync(join(out, 'metric-read.json'), `${stableJson(r.metricRead ?? null)}\n`)
 if (r.sketches) {

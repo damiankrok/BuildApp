@@ -15,8 +15,8 @@
   "sourcePackageId": "src-larchfield-lf01-26525596d2",
   "sourcePackageHash": "4e40736479d51c0e42b2ac5b766c070d28204701cc2fb0850134ff974f7cfe8b",
   "observationGraphHash": "5f377e03bdfa9c88f3e147564d8f990615ffb0880ffac4d388c0d3687bd245c4",
-  "metricEvidenceHash": "bff61231a44f6972e35524d2784dfd09e085c064977efba99c59ee48583430b0",
-  "candidateHash": "a6fe26fa690fb04429e5f00db1f24fd15a1996b90052ccc2f517a479cdfd112d",
+  "metricEvidenceHash": "f12b7176d37ecdd9ae748ad645fc09f739468b55f9d1c6849e96e19612bd2649",
+  "candidateHash": "3d2d953a60f68ec87930d920c0586dceff1db82fd81e3a4ed73294d923520394",
   "modelHash": "8efe7dac4319ff15aae349ed1e9bc0e961d421807182730bb13e70d71ef0177c",
   "modelSha256": "8efe7dac4319ff15aae349ed1e9bc0e961d421807182730bb13e70d71ef0177c",
   "sceneContentHash": "61535bcfe24f47d0bfac71b6ee62f414c2a382ea7c3d977120d9e2755aaaefb5",
@@ -699,7 +699,7 @@
                 "side": "LEFT"
               },
               "measured": {
-                "use": "NOT_REGISTERED"
+                "use": "POSITIONS_ONLY"
               },
               "tolerance": {},
               "coverage": {
@@ -707,18 +707,19 @@
                 "heights": "NONE",
                 "executed": 0
               },
-              "code": "VIEW_NOT_REGISTERED",
-              "why": "LEFT elevation frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain); its source axes: ALONG_ONLY (ALONG SPAN_ONLY, VERTICAL VALID) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
+              "code": "VIEW_PARTLY_REGISTERED",
+              "why": "LEFT elevation frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd: registered on its wall band’s ends (no ridge datum, or one that could not hang it): positions along the facade only (the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on); its source axes: UNREGISTERED (ALONG DISPUTED, VERTICAL UNAVAILABLE) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
               "evidence": [
-                "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
-                "lost: the source-view checks of that facade"
+                "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 1 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL",
+                "lost: every height on this view (registered on its wall band’s ends: the ground row is the drawn terrain line)",
+                "lost: the roof outline, rooflights, chimneys and wall tones on this view"
               ],
               "axes": {
-                "class": "ALONG_ONLY",
-                "side": "AXIS_ONLY LEFT_OR_RIGHT",
-                "along": "SPAN_ONLY",
-                "vertical": "REGISTERED",
-                "scale": "ISOTROPY_PLAUSIBLE"
+                "class": "UNREGISTERED",
+                "side": "REGISTERED LEFT",
+                "along": "UNCHECKED",
+                "vertical": "UNCHECKED",
+                "scale": "UNCHECKED"
               }
             },
             {
@@ -733,7 +734,7 @@
                 "side": "RIGHT"
               },
               "measured": {
-                "use": "NOT_REGISTERED"
+                "use": "POSITIONS_ONLY"
               },
               "tolerance": {},
               "coverage": {
@@ -741,18 +742,19 @@
                 "heights": "NONE",
                 "executed": 0
               },
-              "code": "VIEW_NOT_REGISTERED",
-              "why": "RIGHT elevation frame-asset-elewacja-prawa-7bcce1b6da-635a23984e: not registered: nothing on it was compared (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain); its source axes: ALONG_ONLY (ALONG SPAN_ONLY, VERTICAL VALID) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
+              "code": "VIEW_PARTLY_REGISTERED",
+              "why": "RIGHT elevation frame-asset-elewacja-prawa-7bcce1b6da-635a23984e: registered on its wall band’s ends (no ridge datum, or one that could not hang it): positions along the facade only (the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on); its source axes: UNREGISTERED (ALONG DISPUTED, VERTICAL UNAVAILABLE) — R5 compares only views the solver measured residuals on, so no comparison is executed here",
               "evidence": [
-                "lost: the openings of its facade as this view draws them (widths, sills and heads come from the plan and callouts alone)",
-                "lost: the source-view checks of that facade"
+                "facade alignment on this view (evidence only, plan-located): 0 CONFIRMED_MATCH, 0 CONFLICT, 0 NOT_OBSERVED, 0 MISSING_IN_MODEL",
+                "lost: every height on this view (registered on its wall band’s ends: the ground row is the drawn terrain line)",
+                "lost: the roof outline, rooflights, chimneys and wall tones on this view"
               ],
               "axes": {
-                "class": "ALONG_ONLY",
-                "side": "AXIS_ONLY LEFT_OR_RIGHT",
-                "along": "SPAN_ONLY",
-                "vertical": "REGISTERED",
-                "scale": "ISOTROPY_PLAUSIBLE"
+                "class": "UNREGISTERED",
+                "side": "REGISTERED RIGHT",
+                "along": "UNCHECKED",
+                "vertical": "UNCHECKED",
+                "scale": "UNCHECKED"
               }
             },
             {
@@ -983,19 +985,19 @@
           "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
           "side": "LEFT",
           "axes": {
-            "along": "SPAN_ONLY",
-            "height": "FULL"
+            "along": "DISPUTED",
+            "height": "NONE"
           },
-          "extent": "NONE",
-          "what": "LEFT elevation (NOT_REGISTERED)",
-          "why": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+          "extent": "PARTIAL",
+          "what": "LEFT elevation (POSITIONS_ONLY)",
+          "why": "the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on the wall band's two ends (the walled sp",
           "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys",
           "registration": {
-            "class": "ALONG_ONLY",
-            "side": "AXIS_ONLY LEFT_OR_RIGHT",
-            "along": "SPAN_ONLY",
-            "vertical": "REGISTERED",
-            "scale": "ISOTROPY_PLAUSIBLE"
+            "class": "UNREGISTERED",
+            "side": "REGISTERED LEFT",
+            "along": "UNCHECKED",
+            "vertical": "UNCHECKED",
+            "scale": "UNCHECKED"
           }
         },
         {
@@ -1003,19 +1005,19 @@
           "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
           "side": "RIGHT",
           "axes": {
-            "along": "SPAN_ONLY",
-            "height": "FULL"
+            "along": "DISPUTED",
+            "height": "NONE"
           },
-          "extent": "NONE",
-          "what": "RIGHT elevation (NOT_REGISTERED)",
-          "why": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+          "extent": "PARTIAL",
+          "what": "RIGHT elevation (POSITIONS_ONLY)",
+          "why": "the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on the wall band's two ends (the walled sp",
           "couldCheck": "silhouette width and steps, eaves and ridge heights, the opening rows of its facade (MISSING_IN_MODEL / EXTRA_IN_MODEL), roof outline and chimneys",
           "registration": {
-            "class": "ALONG_ONLY",
-            "side": "AXIS_ONLY LEFT_OR_RIGHT",
-            "along": "SPAN_ONLY",
-            "vertical": "REGISTERED",
-            "scale": "ISOTROPY_PLAUSIBLE"
+            "class": "UNREGISTERED",
+            "side": "REGISTERED RIGHT",
+            "along": "UNCHECKED",
+            "vertical": "UNCHECKED",
+            "scale": "UNCHECKED"
           }
         },
         {
@@ -1057,8 +1059,8 @@
           "ELEVATION": 4,
           "SECTION": 1
         },
-        "none": 4,
-        "partial": 1
+        "none": 2,
+        "partial": 3
       }
     },
     "previewAvailable": true,
@@ -1182,125 +1184,84 @@
           },
           "extentWhy": "the traced silhouette of the drawing",
           "solver": {
-            "use": "NOT_REGISTERED",
-            "side": "LEFT"
+            "use": "POSITIONS_ONLY",
+            "side": "LEFT",
+            "mpp": 0.023077,
+            "openingHeights": "REFUSED"
           },
           "side": {
-            "state": "AXIS_ONLY",
-            "value": "LEFT_OR_RIGHT",
-            "basis": "LABEL_ELIMINATION",
-            "confidence": 0.6,
-            "why": "the other sheets are labelled FRONT, REAR: this view shows the left or the right wall, and with another unlabelled sheet on that axis which of the two is not stated — the hand is UNKNOWN",
+            "state": "REGISTERED",
+            "value": "LEFT",
+            "basis": "SOLVER_FIRST_READING",
+            "confidence": 0.4,
+            "why": "the solver read it as the left view (FIRST_READING)",
+            "anchors": [],
+            "alternatives": []
+          },
+          "along": {
+            "state": "UNCHECKED",
+            "spanM": 7.2,
+            "uncertaintyM": 0.046154,
+            "why": "contested: the solver's registration gives 0.023077 m/px, but this view's wall band gives 0.026277 m/px (13.86662 % apart) and the opposite view frame-asset-elewacja-prawa-7bcce1b6da-635a23984e's band agrees with it (0.026277 m/px): two band readings against one, and neither scale is taken",
             "anchors": [
               {
-                "kind": "LABEL_ELIMINATION",
-                "what": "the other sheets are labelled FRONT, REAR",
-                "independentOfModel": true
+                "kind": "SOLVER_REGISTRATION",
+                "what": "the 7.20 m walled depth across the wall band, columns 101..413",
+                "m": 0.023077,
+                "independentOfModel": false
+              },
+              {
+                "kind": "PLAN_WALLED_SPAN",
+                "what": "the 7.2 m walled depth the plan measures",
+                "m": 7.2,
+                "independentOfModel": false
               }
             ],
             "alternatives": [
               {
-                "id": "side-FRONT",
-                "value": "FRONT",
-                "measure": null,
-                "why": "another sheet is labelled FRONT"
-              },
-              {
-                "id": "side-REAR",
-                "value": "REAR",
-                "measure": null,
-                "why": "another sheet is labelled REAR"
-              }
-            ]
-          },
-          "along": {
-            "state": "SPAN_ONLY",
-            "mpp": 0.026277,
-            "spanM": 7.2,
-            "bandPx": {
-              "x0": 120,
-              "x1": 394,
-              "rows": 162
-            },
-            "uncertaintyM": 0.052554,
-            "why": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
-            "anchors": [
-              {
-                "kind": "WALL_BAND_ENDS",
-                "what": "a band of wall over 162 rows, read across five columns",
-                "px": {
-                  "x0": 120,
-                  "x1": 394
-                },
-                "independentOfModel": true
-              },
-              {
-                "kind": "PLAN_WALLED_SPAN",
-                "what": "the 7.2 m walled depth the plan's chains measure",
-                "m": 7.2,
-                "independentOfModel": false
-              },
-              {
-                "kind": "SIBLING_SHEETS",
-                "what": "the opposite view frame-asset-elewacja-prawa-7bcce1b6da-635a23984e shows the same span at 0.026277 m/px (0 %)",
-                "independentOfModel": true
+                "id": "wall-band",
+                "value": "120..394",
+                "measure": 0.026277,
+                "why": "the multi-column wall band, for comparison"
               }
             ],
-            "alternatives": []
+            "dispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023077 m/px against this view's wall band 0.026277 m/px and the opposite view's 0.026277 m/px"
           },
           "vertical": {
-            "state": "REGISTERED",
+            "state": "UNCHECKED",
             "apexRow": 119.068182,
-            "groundRow": 421,
-            "zeroRow": 420.472452,
-            "groundY": -0.013862,
-            "groundErrorM": 0,
-            "why": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)",
+            "why": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale",
             "anchors": [
               {
-                "kind": "PRINTED_RIDGE_DATUM",
-                "what": "the section’s highest datum",
-                "m": 7.92,
-                "independentOfModel": true
-              },
-              {
                 "kind": "DRAWN_APEX",
-                "what": "gable slopes: two slopes (-0.613636 and 0.613636 px/px) meet at column 256.777778, row 119.068182; 1 columns above them (a chimney on a slope, the apex cap) left out",
+                "what": "two slopes (-0.613636 and 0.613636 px/px) meet at column 256.777778, row 119.068182; 1 columns above them (a chimney on a slope, the apex cap) left out",
                 "px": 119.068182,
-                "independentOfModel": true
-              },
-              {
-                "kind": "DRAWN_GROUND",
-                "what": "the building outline’s bottom row",
-                "px": 421,
                 "independentOfModel": true
               }
             ],
             "alternatives": []
           },
           "scale": {
-            "state": "ISOTROPY_PLAUSIBLE",
-            "mpp": 0.026277,
-            "why": "the along scale puts the drawn ground where a plinth can be; no terrain is printed to verify it"
+            "state": "UNCHECKED",
+            "why": "neither axis has a scale"
           },
-          "class": "ALONG_ONLY",
+          "class": "UNREGISTERED",
           "checkable": {
-            "along": [
-              "the facade’s width (the hand unknown: no position)"
-            ],
-            "vertical": [
-              "the eaves and the ridge (the facade unknown: no opening)"
-            ],
-            "slots": 3
+            "along": [],
+            "vertical": [],
+            "slots": 0
           },
           "validity": {
-            "along": "SPAN_ONLY",
-            "vertical": "VALID",
-            "hand": "UNKNOWN",
+            "along": "DISPUTED",
+            "vertical": "UNAVAILABLE",
+            "hand": "KNOWN",
             "why": {
-              "along": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
-              "vertical": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)"
+              "along": "SOLVER_REGISTRATION_CONTESTED: solver 0.023077 m/px against this view's wall band 0.026277 m/px and the opposite view's 0.026277 m/px",
+              "vertical": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
             }
+          },
+          "solverAgreement": {
+            "mppRatio": 1.138666
           }
         },
         {
@@ -1319,125 +1280,84 @@
           },
           "extentWhy": "the traced silhouette of the drawing",
           "solver": {
-            "use": "NOT_REGISTERED",
-            "side": "RIGHT"
+            "use": "POSITIONS_ONLY",
+            "side": "RIGHT",
+            "mpp": 0.023077,
+            "openingHeights": "REFUSED"
           },
           "side": {
-            "state": "AXIS_ONLY",
-            "value": "LEFT_OR_RIGHT",
-            "basis": "LABEL_ELIMINATION",
-            "confidence": 0.6,
-            "why": "the other sheets are labelled FRONT, REAR: this view shows the left or the right wall, and with another unlabelled sheet on that axis which of the two is not stated — the hand is UNKNOWN",
+            "state": "REGISTERED",
+            "value": "RIGHT",
+            "basis": "SOLVER_FIRST_READING",
+            "confidence": 0.65,
+            "why": "the solver read it as the right view (FIRST_READING)",
+            "anchors": [],
+            "alternatives": []
+          },
+          "along": {
+            "state": "UNCHECKED",
+            "spanM": 7.2,
+            "uncertaintyM": 0.046154,
+            "why": "contested: the solver's registration gives 0.023077 m/px, but this view's wall band gives 0.026277 m/px (13.86662 % apart) and the opposite view frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd's band agrees with it (0.026277 m/px): two band readings against one, and neither scale is taken",
             "anchors": [
               {
-                "kind": "LABEL_ELIMINATION",
-                "what": "the other sheets are labelled FRONT, REAR",
-                "independentOfModel": true
+                "kind": "SOLVER_REGISTRATION",
+                "what": "the 7.20 m walled depth across the wall band, columns 101..413",
+                "m": 0.023077,
+                "independentOfModel": false
+              },
+              {
+                "kind": "PLAN_WALLED_SPAN",
+                "what": "the 7.2 m walled depth the plan measures",
+                "m": 7.2,
+                "independentOfModel": false
               }
             ],
             "alternatives": [
               {
-                "id": "side-FRONT",
-                "value": "FRONT",
-                "measure": null,
-                "why": "another sheet is labelled FRONT"
-              },
-              {
-                "id": "side-REAR",
-                "value": "REAR",
-                "measure": null,
-                "why": "another sheet is labelled REAR"
-              }
-            ]
-          },
-          "along": {
-            "state": "SPAN_ONLY",
-            "mpp": 0.026277,
-            "spanM": 7.2,
-            "bandPx": {
-              "x0": 120,
-              "x1": 394,
-              "rows": 162
-            },
-            "uncertaintyM": 0.052554,
-            "why": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
-            "anchors": [
-              {
-                "kind": "WALL_BAND_ENDS",
-                "what": "a band of wall over 162 rows, read across five columns",
-                "px": {
-                  "x0": 120,
-                  "x1": 394
-                },
-                "independentOfModel": true
-              },
-              {
-                "kind": "PLAN_WALLED_SPAN",
-                "what": "the 7.2 m walled depth the plan's chains measure",
-                "m": 7.2,
-                "independentOfModel": false
-              },
-              {
-                "kind": "SIBLING_SHEETS",
-                "what": "the opposite view frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd shows the same span at 0.026277 m/px (0 %)",
-                "independentOfModel": true
+                "id": "wall-band",
+                "value": "120..394",
+                "measure": 0.026277,
+                "why": "the multi-column wall band, for comparison"
               }
             ],
-            "alternatives": []
+            "dispute": "SOLVER_REGISTRATION_CONTESTED: solver 0.023077 m/px against this view's wall band 0.026277 m/px and the opposite view's 0.026277 m/px"
           },
           "vertical": {
-            "state": "REGISTERED",
+            "state": "UNCHECKED",
             "apexRow": 119.068182,
-            "groundRow": 421,
-            "zeroRow": 420.472452,
-            "groundY": -0.013862,
-            "groundErrorM": 0,
-            "why": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)",
+            "why": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale",
             "anchors": [
               {
-                "kind": "PRINTED_RIDGE_DATUM",
-                "what": "the section’s highest datum",
-                "m": 7.92,
-                "independentOfModel": true
-              },
-              {
                 "kind": "DRAWN_APEX",
-                "what": "gable slopes: two slopes (-0.613636 and 0.613636 px/px) meet at column 256.777778, row 119.068182; 1 columns above them (a chimney on a slope, the apex cap) left out",
+                "what": "two slopes (-0.613636 and 0.613636 px/px) meet at column 256.777778, row 119.068182; 1 columns above them (a chimney on a slope, the apex cap) left out",
                 "px": 119.068182,
-                "independentOfModel": true
-              },
-              {
-                "kind": "DRAWN_GROUND",
-                "what": "the building outline’s bottom row",
-                "px": 421,
                 "independentOfModel": true
               }
             ],
             "alternatives": []
           },
           "scale": {
-            "state": "ISOTROPY_PLAUSIBLE",
-            "mpp": 0.026277,
-            "why": "the along scale puts the drawn ground where a plinth can be; no terrain is printed to verify it"
+            "state": "UNCHECKED",
+            "why": "neither axis has a scale"
           },
-          "class": "ALONG_ONLY",
+          "class": "UNREGISTERED",
           "checkable": {
-            "along": [
-              "the facade’s width (the hand unknown: no position)"
-            ],
-            "vertical": [
-              "the eaves and the ridge (the facade unknown: no opening)"
-            ],
-            "slots": 3
+            "along": [],
+            "vertical": [],
+            "slots": 0
           },
           "validity": {
-            "along": "SPAN_ONLY",
-            "vertical": "VALID",
-            "hand": "UNKNOWN",
+            "along": "DISPUTED",
+            "vertical": "UNAVAILABLE",
+            "hand": "KNOWN",
             "why": {
-              "along": "the wall band's ends (columns 120..394) are the 7.2 m walled depth: 0.026277 m/px; the hand is unknown, so the span and scale stand and no position along the facade is read",
-              "vertical": "the ridge datum 7.92 m at the apex (row 119.068182) and the along scale put the drawn ground at -0.013862 m, within a plinth below ±0.00 (no terrain printed)"
+              "along": "SOLVER_REGISTRATION_CONTESTED: solver 0.023077 m/px against this view's wall band 0.026277 m/px and the opposite view's 0.026277 m/px",
+              "vertical": "the apex is drawn, but with no along scale and no printed terrain there is one datum and no scale"
             }
+          },
+          "solverAgreement": {
+            "mppRatio": 1.138666
           }
         },
         {
@@ -1546,20 +1466,20 @@
       "counts": {
         "before": {
           "FULL": 2,
-          "ALONG_ONLY": 0,
+          "ALONG_ONLY": 2,
           "VERTICAL_ONLY": 0,
-          "UNREGISTERED": 2
+          "UNREGISTERED": 0
         },
         "after": {
           "FULL": 0,
-          "ALONG_ONLY": 2,
+          "ALONG_ONLY": 0,
           "VERTICAL_ONLY": 0,
-          "UNREGISTERED": 2
+          "UNREGISTERED": 4
         }
       },
       "slots": {
-        "before": 28,
-        "after": 6
+        "before": 35,
+        "after": 0
       },
       "lost": [
         {
@@ -1567,6 +1487,18 @@
           "before": "FULL",
           "after": "UNREGISTERED",
           "why": "ALONG: contested: the solver's registration gives 0.023821 m/px, but this view's wall band gives 0.026301 m/px (10.410982 % apart) and the opposite view frame-asset-elewacja-tylna-99385ddca6-f14d035c06's band agrees with it (0.026301 m/px): two band readings against one, and neither scale is taken"
+        },
+        {
+          "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
+          "before": "ALONG_ONLY",
+          "after": "UNREGISTERED",
+          "why": "ALONG: contested: the solver's registration gives 0.023077 m/px, but this view's wall band gives 0.026277 m/px (13.86662 % apart) and the opposite view frame-asset-elewacja-prawa-7bcce1b6da-635a23984e's band agrees with it (0.026277 m/px): two band readings against one, and neither scale is taken"
+        },
+        {
+          "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
+          "before": "ALONG_ONLY",
+          "after": "UNREGISTERED",
+          "why": "ALONG: contested: the solver's registration gives 0.023077 m/px, but this view's wall band gives 0.026277 m/px (13.86662 % apart) and the opposite view frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd's band agrees with it (0.026277 m/px): two band readings against one, and neither scale is taken"
         },
         {
           "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
@@ -1595,7 +1527,7 @@
           },
           {
             "frameId": "frame-asset-elewacja-lewa-edc4129d06-c7ec4b3dfd",
-            "potential": 3,
+            "potential": 0,
             "executed": 0,
             "independent": 0,
             "excluded": {
@@ -1603,11 +1535,11 @@
               "UNAVAILABLE": 0,
               "CIRCULAR": 0
             },
-            "why": "UNCHECKED VIEW_NOT_REGISTERED"
+            "why": "UNCHECKED VIEW_PARTLY_REGISTERED"
           },
           {
             "frameId": "frame-asset-elewacja-prawa-7bcce1b6da-635a23984e",
-            "potential": 3,
+            "potential": 0,
             "executed": 0,
             "independent": 0,
             "excluded": {
@@ -1615,7 +1547,7 @@
               "UNAVAILABLE": 0,
               "CIRCULAR": 0
             },
-            "why": "UNCHECKED VIEW_NOT_REGISTERED"
+            "why": "UNCHECKED VIEW_PARTLY_REGISTERED"
           },
           {
             "frameId": "frame-asset-elewacja-tylna-99385ddca6-f14d035c06",
@@ -1631,14 +1563,14 @@
           }
         ],
         "totals": {
-          "potential": 6,
+          "potential": 0,
           "executed": 0,
           "independent": 0,
           "rawObserved": 4
         }
       }
     },
-    "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; elevations: 0 full, 2 along only, 0 vertical only, 2 unregistered; elevation comparisons: 6 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case"
+    "summary": "technically valid; reading completeness COMPLETE; source fidelity UNCHECKED: 0 conflict(s), 5 pass, 4 unchecked; 5 source item(s) not compared; elevations: 0 full, 0 along only, 0 vertical only, 4 unregistered; elevation comparisons: 0 potential, 0 executed on valid axes, 0 independent; the 3D model is shown in every case"
   },
   "sources": {
     "classifier": null,
@@ -1684,7 +1616,7 @@
         "reader": "facade",
         "side": "LEFT",
         "sideBasis": "FIRST_READING",
-        "why": "not registered: its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+        "why": "positions only: the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on the wall band's two ends (the walled span the plan measures) for positions along the facade only; the ground row is the drawn terrain line, so no height is read",
         "readings": []
       },
       {
@@ -1706,7 +1638,7 @@
         "reader": "facade",
         "side": "RIGHT",
         "sideBasis": "FIRST_READING",
-        "why": "not registered: its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain",
+        "why": "positions only: the ridge datum could not hang it (its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain): registered on the wall band's two ends (the walled span the plan measures) for positions along the facade only; the ground row is the drawn terrain line, so no height is read",
         "readings": []
       },
       {

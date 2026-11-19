@@ -108,7 +108,7 @@ export function elevationRelation(input: {
       : []
     if (v.use === 'DUPLICATE') continue
     if (v.use !== 'REGISTERED' || !registered.has(v.frameId)) {
-      const reach = v.use === 'OPENINGS_ONLY' ? 'registered on its wall band: read for its facade’s openings, never compared for silhouette or heights' : v.use === 'POSITIONS_ONLY' ? 'registered on its wall band’s ends without a ridge datum: positions along the facade only' : 'not registered: nothing on it was compared'
+      const reach = v.use === 'OPENINGS_ONLY' ? 'registered on its wall band: read for its facade’s openings, never compared for silhouette or heights' : v.use === 'POSITIONS_ONLY' ? 'registered on its wall band’s ends (no ridge datum, or one that could not hang it): positions along the facade only' : 'not registered: nothing on it was compared'
       const adj = input.adjudication?.get(v.frameId)
       const axesSaid = adj ? `; its source axes: ${adj.class} (ALONG ${adj.along}, VERTICAL ${adj.vertical}) — R5 compares only views the solver measured residuals on, so no comparison is executed here` : ''
       items.push({ status: 'UNCHECKED', objects: [v.frameId], source, measured: { use: v.use }, tolerance: {}, coverage: { silhouette: 'NONE', heights: v.use === 'OPENINGS_ONLY' && v.openingHeights === 'READ' ? 'OPENINGS_ONLY' : 'NONE', executed: 0 }, code: v.use === 'NOT_REGISTERED' ? 'VIEW_NOT_REGISTERED' : 'VIEW_PARTLY_REGISTERED', why: `${v.side ?? v.labelledView} elevation ${v.frameId}: ${reach}${v.why ? ` (${v.why.slice(0, 200)})` : ''}${axesSaid}`, evidence: [...alignEvidence, ...v.lost.map((l) => `lost: ${l}`)] })

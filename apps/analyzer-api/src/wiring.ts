@@ -133,7 +133,10 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
           variant: 'C' as const,
           // v3.54.14: accepted consulted revisions in the host's private data directory (hash-named, answers only)
           accepted: { store: fileAcceptedConsultStore(join(env.ANALYZER_DATA_DIR?.trim() || '.data/analyzer', 'accepted-consulted-revisions')) },
-          ...(metricOn ? { metricRead: 'ON' as const, metricModel: anthropicConsultant({ model: metricModelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium', ...transportOpts }), metricPrice: priceOf(metricModelId) } : {}),
+          // v3.54.15 (measured): the metric read stays non-strict unless `ANALYZER_STRICT_METRIC=on` — under strict decoding
+          // the nullable dimension-line ends came back null on Ballina twice (research and host), which loses the witness
+          // that settles its scale; without strict the same read returns them (research/source-to-model/v35415/results)
+          ...(metricOn ? { metricRead: 'ON' as const, metricModel: anthropicConsultant({ model: metricModelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium', ...(env.ANALYZER_STRICT_METRIC === 'on' ? transportOpts : cacheTtl ? { cache: { ttl: cacheTtl } } : {}) }), metricPrice: priceOf(metricModelId) } : {}),
           // v3.54.14: `ANALYZER_SKETCHES=on` adds the four automatic sketches (form + finish) on the same metric facts
           ...(env.ANALYZER_SKETCHES === 'on' ? { sketches: 'ON' as const, sketchModel: anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium', ...transportOpts }), sketchPrice: priceOf('claude-sonnet-5-5') } : {}),
           spend: {
