@@ -1,0 +1,515 @@
+{
+ "schema": "buildapp.sketch-delivery.v35415",
+ "houses": {
+  "ballina": [
+   {
+    "side": "FRONT",
+    "origin": "RUN_CHECKED",
+    "facade": "FRONT",
+    "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+    "verdict": "ACCEPTED",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "ACCEPTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01489 m/px from the wall ends; ground line within the terrain window 0 m within 0.110 m",
+    "source": "sources/ballina/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 5,
+     "roofs": 1,
+     "elements": 2
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "RUN_CHECKED",
+    "facade": "EAST",
+    "frameId": "frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01476 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m; form not taken: 1 opening(s) off the model's (opening-window-17-11 0.62 m)",
+    "source": "sources/ballina/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 1,
+     "roofs": 1,
+     "elements": 2
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "RUN_CHECKED",
+    "facade": "REAR",
+    "frameId": "frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+    "verdict": "ACCEPTED",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "ACCEPTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01476 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m",
+    "source": "sources/ballina/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 3,
+     "roofs": 1,
+     "elements": 4
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "RUN_CHECKED",
+    "facade": "WEST",
+    "frameId": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+    "verdict": "ACCEPTED",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "ACCEPTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01474 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m",
+    "source": "sources/ballina/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 1,
+     "roofs": 2,
+     "elements": 2
+    }
+   }
+  ],
+  "bakopy": [
+   {
+    "side": "FRONT",
+    "origin": "RUN_CHECKED",
+    "facade": "FRONT",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-fcc668ca45",
+    "verdict": "REJECTED",
+    "properties": {
+     "finish": "REJECTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "CONTRADICTED"
+    },
+    "why": "at one scale: ground line within the terrain window off by 0.197 m (tolerance 0.127 m): not stretched to fit",
+    "source": "sources/bakopy/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 3,
+     "roofs": 1,
+     "elements": 2
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "RUN_CHECKED",
+    "facade": "EAST",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-ed8402da03",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01992 m/px from the wall ends; eaves line at one scale -0.017 m, ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-40-14 0.161 m, opening-glazed_door-47-14 0.219 m)",
+    "source": "sources/bakopy/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 5,
+     "openings": 3,
+     "roofs": 2,
+     "elements": 3
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "RUN_CHECKED",
+    "facade": "REAR",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-72219efc04",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01938 m/px from the wall ends; eaves line at one scale -0.051 m, ground line within the terrain window 0.096 m within 0.128 m; form not taken: 1 opening(s) off the model's (opening-window-34-14 0.565 m)",
+    "source": "sources/bakopy/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 3,
+     "roofs": 2,
+     "elements": 4
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "RUN_CHECKED",
+    "facade": "WEST",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-3acf297a3d",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.02001 m/px from the wall ends; eaves line at one scale -0.111 m, ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-34-14 0.407 m, opening-window-14-13 0.585 m)",
+    "source": "sources/bakopy/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 4,
+     "openings": 4,
+     "roofs": 1,
+     "elements": 3
+    }
+   }
+  ],
+  "murcja": [
+   {
+    "side": "FRONT",
+    "origin": "RUN_CHECKED",
+    "facade": "FRONT",
+    "frameId": "frame-asset-projekt-domu-murcja-3016fe0f0d-49b3e55fac",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.02012 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 3 opening(s) off the model's (opening-window-18-12 0.51 m, opening-window-4-12 0.549 m, opening-window-5-5 0.197 m)",
+    "source": "sources/murcja/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 4,
+     "openings": 8,
+     "roofs": 2,
+     "elements": 6
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "RUN_CHECKED",
+    "facade": "EAST",
+    "frameId": "frame-asset-projekt-domu-murcja-5cfc1a76d0-0e87e3642d",
+    "verdict": "ACCEPTED",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "ACCEPTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.01992 m/px from the wall ends; ground line within the terrain window 0.007 m within 0.130 m",
+    "source": "sources/murcja/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 1,
+     "roofs": 3,
+     "elements": 4
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "RUN_CHECKED",
+    "facade": "REAR",
+    "frameId": "frame-asset-projekt-domu-murcja-4fe8bd8330-fe055c88bb",
+    "verdict": "PARTIAL",
+    "properties": {
+     "finish": "ACCEPTED",
+     "form": "REJECTED",
+     "registration": "ACCEPTED",
+     "vertical": "VERIFIED"
+    },
+    "why": "one scale 0.02009 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-20-13 0.784 m, opening-window-22-5 0.22 m)",
+    "source": "sources/murcja/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 5,
+     "openings": 5,
+     "roofs": 3,
+     "elements": 4
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-projekt-domu-murcja-e45a6ae218",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "the run registered no view of this side; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/murcja/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 2,
+     "roofs": 3,
+     "elements": 5
+    }
+   }
+  ],
+  "coastal": [
+   {
+    "side": "FRONT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-550029lan-front-elevation-jpg-fea73cc2b3",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/coastal/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 4,
+     "openings": 10,
+     "roofs": 4,
+     "elements": 4
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-550029lan-right-elevation-jpg-4621fa0ff4",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/coastal/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 10,
+     "roofs": 6,
+     "elements": 6
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-550029lan-rear-elevation-jpg-38858f438b",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/coastal/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 4,
+     "openings": 8,
+     "roofs": 5,
+     "elements": 3
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-550029lan-left-elevation-jpg-61c3e15ed3",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/coastal/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 4,
+     "openings": 9,
+     "roofs": 5,
+     "elements": 3
+    }
+   }
+  ],
+  "kardamon": [
+   {
+    "side": "FRONT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-kardamon-elewacja-przod-784b4d2db5",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/kardamon/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 6,
+     "roofs": 3,
+     "elements": 1
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-kardamon-elewacja-boczna-b92bff783b",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against; the source labels this drawing only as a side elevation: which side it is was not stated (taken in the package order)",
+    "source": "sources/kardamon/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 7,
+     "roofs": 1,
+     "elements": 1
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-kardamon-elewacja-ty-eca21b6d75",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/kardamon/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 8,
+     "roofs": 1,
+     "elements": 2
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-kardamon-elewacja-boczna-f0c12fe9d3",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against; the source labels this drawing only as a side elevation: which side it is was not stated (taken in the package order)",
+    "source": "sources/kardamon/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 6,
+     "openings": 1,
+     "roofs": 2,
+     "elements": 1
+    }
+   }
+  ],
+  "marcowki": [
+   {
+    "side": "FRONT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/marcowki/FRONT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 4,
+     "roofs": 2,
+     "elements": 3
+    }
+   },
+   {
+    "side": "RIGHT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against; the source labels this drawing only as a side elevation: which side it is was not stated (taken in the package order)",
+    "source": "sources/marcowki/RIGHT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 2,
+     "openings": 4,
+     "roofs": 1,
+     "elements": 0
+    }
+   },
+   {
+    "side": "REAR",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against",
+    "source": "sources/marcowki/REAR.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 5,
+     "openings": 4,
+     "roofs": 0,
+     "elements": 2
+    }
+   },
+   {
+    "side": "LEFT",
+    "origin": "SKETCH_ONLY",
+    "frameId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "verdict": "UNCHECKED",
+    "properties": null,
+    "why": "LOCAL built no model, so no view was registered; read directly from the labelled elevation; nothing to check its proportions against; the source labels this drawing only as a side elevation: which side it is was not stated (taken in the package order)",
+    "source": "sources/marcowki/LEFT.jpg",
+    "refused": 0,
+    "normalized": 0,
+    "completeness": "COMPLETE",
+    "counts": {
+     "walls": 3,
+     "openings": 3,
+     "roofs": 1,
+     "elements": 2
+    }
+   }
+  ]
+ }
+}

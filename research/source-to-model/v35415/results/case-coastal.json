@@ -1,0 +1,45 @@
+{
+ "house": "coastal",
+ "run": "coastal/LM-r",
+ "result": {
+  "counts": {
+   "AGREES": 0,
+   "CORRECTED": 0,
+   "NEW_SPAN": 0,
+   "NOT_MATCHED": 3,
+   "RETAINED": 0,
+   "UNRESOLVED": 6
+  },
+  "decision": "NO_CHANGE",
+  "final": {
+   "code": "RECONSTRUCTION_FAILED",
+   "frameId": "frame-asset-main-level-97631c258c-d56dc869fd",
+   "metric": {
+    "confidence": "INCONCLUSIVE",
+    "relation": "NO_SCALE"
+   },
+   "outcome": "FAILED",
+   "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "stage": "REGISTERING_VIEWS"
+  },
+  "house": "coastal",
+  "local": {
+   "code": "RECONSTRUCTION_FAILED",
+   "frameId": "frame-asset-main-level-97631c258c-d56dc869fd",
+   "metric": {
+    "confidence": "INCONCLUSIVE",
+    "relation": "NO_SCALE"
+   },
+   "outcome": "FAILED",
+   "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "stage": "REGISTERING_VIEWS"
+  },
+  "measured": {},
+  "seconds": 352,
+  "sketches": null,
+  "usd": 0,
+  "why": "the resolver handed the analyzer nothing: every API reading agreed, was unresolved without a witness, or had no label"
+ },
+ "factTraceCounts": {},
+ "factTraceRows": []
+}

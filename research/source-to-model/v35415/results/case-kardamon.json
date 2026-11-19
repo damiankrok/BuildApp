@@ -1,0 +1,49 @@
+{
+ "house": "kardamon",
+ "run": "kardamon/LMS-live",
+ "result": {
+  "counts": {
+   "AGREES": 0,
+   "CORRECTED": 0,
+   "NEW_SPAN": 0,
+   "NOT_MATCHED": 3,
+   "RETAINED": 0,
+   "UNRESOLVED": 0
+  },
+  "decision": "NO_CHANGE",
+  "final": {
+   "code": "RECONSTRUCTION_FAILED",
+   "frameId": "frame-asset-kardamon-rzut-parter-3c0be0830c-7e9ddfde68",
+   "metric": {
+    "cmPerPixelX": 2.119565,
+    "cmPerPixelY": 2.119565,
+    "confidence": "INCONCLUSIVE",
+    "relation": "LEGACY_UNCONFIRMED"
+   },
+   "outcome": "FAILED",
+   "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "stage": "REGISTERING_VIEWS"
+  },
+  "house": "kardamon",
+  "local": {
+   "code": "RECONSTRUCTION_FAILED",
+   "frameId": "frame-asset-kardamon-rzut-parter-3c0be0830c-7e9ddfde68",
+   "metric": {
+    "cmPerPixelX": 2.119565,
+    "cmPerPixelY": 2.119565,
+    "confidence": "INCONCLUSIVE",
+    "relation": "LEGACY_UNCONFIRMED"
+   },
+   "outcome": "FAILED",
+   "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "stage": "REGISTERING_VIEWS"
+  },
+  "measured": {},
+  "seconds": 113,
+  "sketches": null,
+  "usd": 0.065698,
+  "why": "the resolver handed the analyzer nothing: every API reading agreed, was unresolved without a witness, or had no label"
+ },
+ "factTraceCounts": {},
+ "factTraceRows": []
+}

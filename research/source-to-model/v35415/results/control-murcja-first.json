@@ -1,0 +1,397 @@
+{
+ "house": "murcja (lipinscy.pl, control)",
+ "note": "the FIRST result, on the frozen code (4dd06ae); kept as it is",
+ "result": {
+  "counts": {
+   "AGREES": 2,
+   "CORRECTED": 0,
+   "NEW_SPAN": 0,
+   "NOT_MATCHED": 8,
+   "RETAINED": 0,
+   "UNRESOLVED": 0
+  },
+  "decision": "ACCEPT",
+  "final": {
+   "frameId": "frame-asset-gotowy-projekt-domu-murcja-0dd9637679-2f701c9453",
+   "masses": 1,
+   "metric": {
+    "cmPerPixelX": 1.516718,
+    "cmPerPixelY": 1.516718,
+    "confidence": "WEAK",
+    "relation": "CONFIRMED"
+   },
+   "modelHash": "15d8c96e1882c0f396934894c009b215236927a4fd26d43596798df47860ad28",
+   "outcome": "COMPLETED"
+  },
+  "house": "murcja",
+  "local": {
+   "frameId": "frame-asset-gotowy-projekt-domu-murcja-0dd9637679-2f701c9453",
+   "masses": 1,
+   "metric": {
+    "cmPerPixelX": 1.516718,
+    "cmPerPixelY": 1.516718,
+    "confidence": "WEAK",
+    "relation": "CONFIRMED"
+   },
+   "modelHash": "5beb2ccd6a77f2e9739af65223d8b99bb7faf663092c76cb817600a45f1c8296",
+   "outcome": "COMPLETED"
+  },
+  "measured": {
+   "after": {
+    "eaves": 3.848,
+    "levels": [
+     {
+      "elevation": 0,
+      "height": 2.8,
+      "id": "lvl-0"
+     },
+     {
+      "elevation": 2.8,
+      "height": 4.3,
+      "id": "lvl-1"
+     }
+    ],
+    "openings": 23,
+    "outlineX": 11.55,
+    "outlineZ": 7.75,
+    "ridge": 7.1,
+    "walls": 8
+   },
+   "before": {
+    "eaves": 13.848,
+    "levels": [
+     {
+      "elevation": 0,
+      "height": 12.72,
+      "id": "lvl-0"
+     },
+     {
+      "elevation": 12.72,
+      "height": 12.72,
+      "id": "lvl-1"
+     }
+    ],
+    "openings": 23,
+    "outlineX": 11.55,
+    "outlineZ": 7.75,
+    "ridge": 17.1,
+    "walls": 8
+   }
+  },
+  "seconds": 411,
+  "sketches": {
+   "accepted": [
+    "FRONT:PARTIAL",
+    "REAR:PARTIAL",
+    "EAST:ACCEPTED"
+   ],
+   "finish": {
+    "decision": "ACCEPT",
+    "why": "the finish zones were applied in the same candidate"
+   },
+   "form": {
+    "decision": "ACCEPT",
+    "measuredAfter": {
+     "eaves": 3.848,
+     "levels": [
+      {
+       "elevation": 0,
+       "height": 2.8,
+       "id": "lvl-0"
+      },
+      {
+       "elevation": 2.8,
+       "height": 4.3,
+       "id": "lvl-1"
+      }
+     ],
+     "openings": 23,
+     "outlineX": 11.55,
+     "outlineZ": 7.75,
+     "ridge": 7.1,
+     "walls": 8
+    },
+    "measuredBefore": {
+     "eaves": 3.848,
+     "levels": [
+      {
+       "elevation": 0,
+       "height": 2.8,
+       "id": "lvl-0"
+      },
+      {
+       "elevation": 2.8,
+       "height": 4.3,
+       "id": "lvl-1"
+      }
+     ],
+     "openings": 23,
+     "outlineX": 11.55,
+     "outlineZ": 7.75,
+     "ridge": 7.1,
+     "walls": 8
+    },
+    "why": "1 sketch(es) read by the shape reader; outline 11.55 × 7.75, storeys, exterior walls and openings kept (openings 23 → 23)"
+   },
+   "usd": 0.036141
+  },
+  "usd": 0.134519,
+  "why": "4 printed reading(s) handed with a witness were applied by the metric layer; the scale WEAK → WEAK, the outline not contradicted"
+ },
+ "factTraceCounts": {
+  "LEVEL:CHANGED": 1,
+  "LEVEL:CONFIRMED": 1,
+  "LEVEL:NOT_CONSUMED": 2,
+  "LEVEL:REFUSED": 2,
+  "SKETCH_FINISH:CHANGED": 3,
+  "SKETCH_FORM:CONFIRMED": 1
+ },
+ "factTraceRows": [
+  {
+   "after": 0,
+   "before": 0,
+   "class": "LEVEL",
+   "closure": "CONFIRMED",
+   "elementIds": [
+    "lvl-0"
+   ],
+   "id": "ml:dim-48ba5b62-level-000-26-29",
+   "literal": "±0,00",
+   "param": "level lvl-0 elevation",
+   "status": "ADMITTED",
+   "value": 0,
+   "why": "level lvl-0 elevation already 0",
+   "witnesses": "admitted by the section's ladder as 0 m"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "NOT_CONSUMED",
+   "elementIds": [],
+   "id": "ml:dim-48ba5b62-level-045-45-31",
+   "literal": "-0,45",
+   "param": null,
+   "status": "ADMITTED",
+   "value": -0.45,
+   "why": "a level below ±0,00 (the terrain): the registration of the views uses it, no element of the model carries it",
+   "witnesses": "admitted by the section's ladder as -0.45 m"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-48ba5b62-level-272-26-23",
+   "literal": "+2,72",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found",
+   "witnesses": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "NOT_CONSUMED",
+   "elementIds": [],
+   "id": "ml:dim-48ba5b62-level-305-26-17",
+   "literal": "+3,05",
+   "param": null,
+   "status": "ADMITTED",
+   "value": 3.05,
+   "why": "admitted, and no parameter of the model carries this height",
+   "witnesses": "admitted by the section's ladder as 3.05 m"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-48ba5b62-level-565-22-12",
+   "literal": "+5,65",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found",
+   "witnesses": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found"
+  },
+  {
+   "after": 7.1,
+   "before": 17.1,
+   "class": "LEVEL",
+   "closure": "CHANGED",
+   "elementIds": [
+    "roof-main"
+   ],
+   "id": "ml:dim-48ba5b62-level-710-19-1",
+   "literal": "+7,10",
+   "param": "ridge",
+   "status": "ADMITTED",
+   "value": 7.1,
+   "why": "ridge 17.1 → 7.1",
+   "witnesses": "admitted by the section's ladder as 7.1 m"
+  },
+  {
+   "after": 2,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-front-ring-main-0-w0-brick-0",
+    "appearance-front-ring-main-0-w0-brick-1"
+   ],
+   "id": "sketch-FRONT",
+   "literal": "FRONT",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "2 surface region(s) from this sketch",
+   "witnesses": "one scale 0.02012 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 3 opening(s) off the model's (opening-window-18-12 0.51 m, opening-window-4-12 0.549 m, opening-window-5-5 0.197 m)"
+  },
+  {
+   "after": 3,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-rear-ring-main-0-w2-brick-0",
+    "appearance-rear-ring-main-0-w2-timber-0",
+    "appearance-rear-ring-main-1-w2-timber-0"
+   ],
+   "id": "sketch-REAR",
+   "literal": "REAR",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "3 surface region(s) from this sketch",
+   "witnesses": "one scale 0.02009 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-20-13 0.784 m, opening-window-22-5 0.22 m)"
+  },
+  {
+   "after": 2,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-east-ring-main-0-w1-timber-0",
+    "appearance-east-ring-main-1-w1-timber-0"
+   ],
+   "id": "sketch-EAST",
+   "literal": "EAST",
+   "param": "finish zones",
+   "status": "ACCEPTED",
+   "value": "ACCEPTED",
+   "why": "2 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01992 m/px from the wall ends; ground line within the terrain window 0.007 m within 0.130 m"
+  },
+  {
+   "after": "{\"outlineX\":11.55,\"outlineZ\":7.75,\"levels\":[{\"id\":\"lvl-0\",\"elevation\":0,\"height\":2.8},{\"id\":\"lvl-1\",\"elevation\":2.8,\"height\":4.3}],\"ridge\":7.1,\"eaves\":3.848,\"openings\":23,\"walls\":8}",
+   "before": "{\"outlineX\":11.55,\"outlineZ\":7.75,\"levels\":[{\"id\":\"lvl-0\",\"elevation\":0,\"height\":2.8},{\"id\":\"lvl-1\",\"elevation\":2.8,\"height\":4.3}],\"ridge\":7.1,\"eaves\":3.848,\"openings\":23,\"walls\":8}",
+   "class": "SKETCH_FORM",
+   "closure": "CONFIRMED",
+   "elementIds": [],
+   "id": "sketch-form",
+   "literal": "form",
+   "param": "outline, storeys, walls, openings",
+   "status": "ACCEPT",
+   "value": "ACCEPT",
+   "why": "1 sketch(es) read by the shape reader; outline 11.55 × 7.75, storeys, exterior walls and openings kept (openings 23 → 23)",
+   "witnesses": "1 sketch(es) read by the shape reader; outline 11.55 × 7.75, storeys, exterior walls and openings kept (openings 23 → 23)"
+  }
+ ],
+ "idx": [
+  {
+   "side": "FRONT",
+   "origin": "RUN_CHECKED",
+   "facade": "FRONT",
+   "frameId": "frame-asset-projekt-domu-murcja-3016fe0f0d-49b3e55fac",
+   "verdict": "PARTIAL",
+   "properties": {
+    "finish": "ACCEPTED",
+    "form": "REJECTED",
+    "registration": "ACCEPTED",
+    "vertical": "VERIFIED"
+   },
+   "why": "one scale 0.02012 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 3 opening(s) off the model's (opening-window-18-12 0.51 m, opening-window-4-12 0.549 m, opening-window-5-5 0.197 m)",
+   "source": "sources/murcja/FRONT.jpg",
+   "refused": 0,
+   "normalized": 0,
+   "completeness": "COMPLETE",
+   "counts": {
+    "walls": 4,
+    "openings": 8,
+    "roofs": 2,
+    "elements": 6
+   }
+  },
+  {
+   "side": "RIGHT",
+   "origin": "RUN_CHECKED",
+   "facade": "EAST",
+   "frameId": "frame-asset-projekt-domu-murcja-5cfc1a76d0-0e87e3642d",
+   "verdict": "ACCEPTED",
+   "properties": {
+    "finish": "ACCEPTED",
+    "form": "ACCEPTED",
+    "registration": "ACCEPTED",
+    "vertical": "VERIFIED"
+   },
+   "why": "one scale 0.01992 m/px from the wall ends; ground line within the terrain window 0.007 m within 0.130 m",
+   "source": "sources/murcja/RIGHT.jpg",
+   "refused": 0,
+   "normalized": 0,
+   "completeness": "COMPLETE",
+   "counts": {
+    "walls": 2,
+    "openings": 1,
+    "roofs": 3,
+    "elements": 4
+   }
+  },
+  {
+   "side": "REAR",
+   "origin": "RUN_CHECKED",
+   "facade": "REAR",
+   "frameId": "frame-asset-projekt-domu-murcja-4fe8bd8330-fe055c88bb",
+   "verdict": "PARTIAL",
+   "properties": {
+    "finish": "ACCEPTED",
+    "form": "REJECTED",
+    "registration": "ACCEPTED",
+    "vertical": "VERIFIED"
+   },
+   "why": "one scale 0.02009 m/px from the wall ends; ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-20-13 0.784 m, opening-window-22-5 0.22 m)",
+   "source": "sources/murcja/REAR.jpg",
+   "refused": 0,
+   "normalized": 0,
+   "completeness": "COMPLETE",
+   "counts": {
+    "walls": 5,
+    "openings": 5,
+    "roofs": 3,
+    "elements": 4
+   }
+  },
+  {
+   "side": "LEFT",
+   "origin": "SKETCH_ONLY",
+   "frameId": "asset-projekt-domu-murcja-e45a6ae218",
+   "verdict": "UNCHECKED",
+   "properties": null,
+   "why": "the run registered no view of this side; read directly from the labelled elevation; nothing to check its proportions against",
+   "source": "sources/murcja/LEFT.jpg",
+   "refused": 0,
+   "normalized": 0,
+   "completeness": "COMPLETE",
+   "counts": {
+    "walls": 3,
+    "openings": 2,
+    "roofs": 3,
+    "elements": 5
+   }
+  }
+ ]
+}

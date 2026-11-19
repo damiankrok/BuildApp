@@ -1,0 +1,365 @@
+{
+ "house": "ballina",
+ "run": "ballina/LMS-r",
+ "result": {
+  "counts": {
+   "AGREES": 0,
+   "CORRECTED": 1,
+   "NEW_SPAN": 1,
+   "NOT_MATCHED": 9,
+   "RETAINED": 0,
+   "UNRESOLVED": 0
+  },
+  "decision": "ACCEPT",
+  "final": {
+   "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "masses": 1,
+   "metric": {
+    "cmPerPixelX": 1.95279,
+    "cmPerPixelY": 1.945107,
+    "confidence": "SUPPORTED",
+    "relation": "REPLACED"
+   },
+   "modelHash": "77b1b2322c44b7d84848d98b00eb5ffbecab63b7012251ca53c23488c7af22fd",
+   "outcome": "COMPLETED",
+   "outline": {
+    "x": {
+     "envelopePx": [
+      48,
+      723
+     ],
+     "offM": 0.28,
+     "spanM": 13.65,
+     "spanPx": [
+      36,
+      735
+     ],
+     "status": "SHORT",
+     "why": "the built outline runs 48..723 px where the printed 13.65 m is drawn 36..735 px: about 0.28 m of what the dimension measures is not built"
+    },
+    "y": {
+     "envelopePx": [
+      168.5,
+      575.5
+     ],
+     "offM": 0.22,
+     "spanM": 8.15,
+     "spanPx": [
+      157,
+      576
+     ],
+     "status": "SHORT",
+     "why": "the built outline runs 168.5..575.5 px where the printed 8.15 m is drawn 157..576 px: about 0.22 m of what the dimension measures is not built"
+    }
+   }
+  },
+  "house": "ballina",
+  "local": {
+   "code": "RECONSTRUCTION_FAILED",
+   "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "metric": {
+    "cmPerPixelX": 1.945107,
+    "cmPerPixelY": 1.945107,
+    "confidence": "INCONCLUSIVE",
+    "relation": "LEGACY_UNCONFIRMED"
+   },
+   "outcome": "FAILED",
+   "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+   "stage": "REGISTERING_VIEWS"
+  },
+  "measured": {
+   "after": {
+    "eaves": 3.373,
+    "levels": [
+     {
+      "elevation": 0,
+      "height": 5.54,
+      "id": "lvl-0"
+     }
+    ],
+    "openings": 16,
+    "outlineX": 13.65,
+    "outlineZ": 8.15,
+    "ridge": 5.54,
+    "walls": 4
+   }
+  },
+  "seconds": 289,
+  "sketches": {
+   "accepted": [
+    "FRONT:ACCEPTED",
+    "EAST:PARTIAL",
+    "WEST:ACCEPTED",
+    "REAR:ACCEPTED"
+   ],
+   "finish": {
+    "decision": "ACCEPT",
+    "why": "the finish zones applied on the model that stood; its usable geometry unchanged"
+   },
+   "form": {
+    "decision": "ROLLBACK",
+    "measuredAfter": {
+     "eaves": 3.373,
+     "levels": [
+      {
+       "elevation": 0,
+       "height": 5.54,
+       "id": "lvl-0"
+      }
+     ],
+     "openings": 16,
+     "outlineX": 13.65,
+     "outlineZ": 8.15,
+     "ridge": 5.54,
+     "walls": 4
+    },
+    "measuredBefore": {
+     "eaves": 3.373,
+     "levels": [
+      {
+       "elevation": 0,
+       "height": 5.54,
+       "id": "lvl-0"
+      }
+     ],
+     "openings": 16,
+     "outlineX": 13.65,
+     "outlineZ": 8.15,
+     "ridge": 5.54,
+     "walls": 4
+    },
+    "why": "the sketches cost 1 opening(s) of the model before lost or moved (opening-0-front-0-3): the model before stands"
+   },
+   "usd": 0
+  },
+  "usd": 0,
+  "why": "a refusal (METRIC_RESOLUTION_INCONCLUSIVE) became a model on a scale its readings settle (SUPPORTED)"
+ },
+ "factTraceCounts": {
+  "LENGTH:CHANGED": 1,
+  "LEVEL:CHANGED": 2,
+  "LEVEL:NOT_CONSUMED": 1,
+  "LEVEL:REFUSED": 1,
+  "SKETCH_FINISH:CHANGED": 3,
+  "SKETCH_FINISH:NOT_CONSUMED": 1,
+  "SKETCH_FORM:REFUSED": 1,
+  "SPAN:REFUSED": 2
+ },
+ "factTraceRows": [
+  {
+   "after": 0,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "CHANGED",
+   "elementIds": [
+    "lvl-0"
+   ],
+   "id": "ml:dim-d248de58-level-000-28-19",
+   "literal": "±0,00",
+   "param": "level lvl-0 elevation",
+   "status": "ADMITTED",
+   "value": 0,
+   "why": "level lvl-0 elevation absent (no model) → 0",
+   "witnesses": "admitted by the section's ladder as 0 m"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "NOT_CONSUMED",
+   "elementIds": [],
+   "id": "ml:dim-d248de58-level-030-45-20",
+   "literal": "-0,30",
+   "param": null,
+   "status": "ADMITTED",
+   "value": -0.3,
+   "why": "a level below ±0,00 (the terrain): the registration of the views uses it, no element of the model carries it",
+   "witnesses": "admitted by the section's ladder as -0.3 m"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-d248de58-level-280-28-14",
+   "literal": "+2,80",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found",
+   "witnesses": "NO_SYMBOL: no level symbol below the numeric reader's own ink there or the box in the drawing: the row it marks is not found"
+  },
+  {
+   "after": 5.54,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "CHANGED",
+   "elementIds": [
+    "roof-main"
+   ],
+   "id": "ml:dim-d248de58-level-554-23-1",
+   "literal": "+5,54",
+   "param": "ridge",
+   "status": "ADMITTED",
+   "value": 5.54,
+   "why": "ridge absent (no model) → 5.54",
+   "witnesses": "admitted by the section's ladder as 5.54 m"
+  },
+  {
+   "after": "13.65 × 8.15",
+   "before": null,
+   "class": "LENGTH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "lvl-0",
+    "main-idoor-0-0",
+    "main-idoor-0-1",
+    "main-idoor-0-2",
+    "main-idoor-0-3",
+    "main-idoor-0-4",
+    "main-idoor-0-5",
+    "main-idoor-0-6",
+    "main-iwall-0-x-0",
+    "main-iwall-0-x-3",
+    "main-iwall-0-x-7",
+    "main-iwall-0-x-9",
+    "main-iwall-0-z-0",
+    "main-iwall-0-z-11",
+    "main-iwall-0-z-13",
+    "main-iwall-0-z-15",
+    "main-iwall-0-z-5",
+    "main-iwall-0-z-6",
+    "main-iwall-0-z-7",
+    "main-iwall-0-z-8",
+    "opening-0-east-1-0",
+    "opening-0-front-0-0",
+    "opening-0-front-0-1",
+    "opening-0-front-0-2",
+    "opening-0-front-0-3",
+    "opening-0-front-0-4",
+    "opening-0-rear-2-0",
+    "opening-0-rear-2-1",
+    "opening-0-rear-2-2",
+    "ring-main-0",
+    "ring-main-0-w0",
+    "ring-main-0-w1",
+    "ring-main-0-w2",
+    "ring-main-0-w3",
+    "roof-main",
+    "slab-main-0"
+   ],
+   "id": "mr:dim-f87ef37a-length-815-49-23",
+   "literal": "815",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 8.15,
+   "why": "consulted (mr:dim-f87ef37a-length-815-49-23): the label is printed 815; before, it was read 518 AMBIGUOUS (NOT_CORROBORATING), and 518 stays a candidate — the chains decide the scale",
+   "witnesses": "FOOTPRINT: the page's published footprint 111.25 m² is 815 × 1365 cm (111.248 m²), both lines at one scale of the drawing (1.9313 / 1.9472 cm/px); 518 would give 70.71 m²"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "SPAN",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ms:dim-f87ef37a-length-1365-21-4",
+   "literal": "",
+   "param": null,
+   "status": "ADMITTED",
+   "value": null,
+   "why": "2 consulted dimensions on different lines agree: 815 cm / 419 px (Y), 1365 cm / 699 px (X)",
+   "witnesses": "2 consulted dimensions on different lines agree: 815 cm / 419 px (Y), 1365 cm / 699 px (X)"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "SPAN",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ms:dim-f87ef37a-length-815-49-23",
+   "literal": "",
+   "param": null,
+   "status": "ADMITTED",
+   "value": null,
+   "why": "2 consulted dimensions on different lines agree: 815 cm / 419 px (Y), 1365 cm / 699 px (X)",
+   "witnesses": "2 consulted dimensions on different lines agree: 815 cm / 419 px (Y), 1365 cm / 699 px (X)"
+  },
+  {
+   "after": 1,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-front-ring-main-0-w0-brick-0"
+   ],
+   "id": "sketch-FRONT",
+   "literal": "FRONT",
+   "param": "finish zones",
+   "status": "ACCEPTED",
+   "value": "ACCEPTED",
+   "why": "1 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01489 m/px from the wall ends; ground line within the terrain window 0 m within 0.110 m"
+  },
+  {
+   "after": 1,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-east-ring-main-0-w1-brick-0"
+   ],
+   "id": "sketch-EAST",
+   "literal": "EAST",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "1 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01476 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m; form not taken: 1 opening(s) off the model's (opening-window-17-11 0.62 m)"
+  },
+  {
+   "after": 1,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-west-ring-main-0-w3-brick-0"
+   ],
+   "id": "sketch-WEST",
+   "literal": "WEST",
+   "param": "finish zones",
+   "status": "ACCEPTED",
+   "value": "ACCEPTED",
+   "why": "1 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01474 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m"
+  },
+  {
+   "after": 0,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "NOT_CONSUMED",
+   "elementIds": [],
+   "id": "sketch-REAR",
+   "literal": "REAR",
+   "param": "finish zones",
+   "status": "ACCEPTED",
+   "value": "ACCEPTED",
+   "why": "accepted, and no region of it reached the model",
+   "witnesses": "one scale 0.01476 m/px from the wall ends; ground line within the terrain window 0 m within 0.109 m"
+  },
+  {
+   "after": "{\"outlineX\":13.65,\"outlineZ\":8.15,\"levels\":[{\"id\":\"lvl-0\",\"elevation\":0,\"height\":5.54}],\"ridge\":5.54,\"eaves\":3.373,\"openings\":16,\"walls\":4}",
+   "before": "{\"outlineX\":13.65,\"outlineZ\":8.15,\"levels\":[{\"id\":\"lvl-0\",\"elevation\":0,\"height\":5.54}],\"ridge\":5.54,\"eaves\":3.373,\"openings\":16,\"walls\":4}",
+   "class": "SKETCH_FORM",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "sketch-form",
+   "literal": "form",
+   "param": "outline, storeys, walls, openings",
+   "status": "ROLLBACK",
+   "value": "ROLLBACK",
+   "why": "the sketches cost 1 opening(s) of the model before lost or moved (opening-0-front-0-3): the model before stands",
+   "witnesses": "the sketches cost 1 opening(s) of the model before lost or moved (opening-0-front-0-3): the model before stands"
+  }
+ ]
+}

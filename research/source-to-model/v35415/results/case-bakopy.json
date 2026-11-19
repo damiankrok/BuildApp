@@ -1,0 +1,498 @@
+{
+ "house": "bakopy",
+ "run": "bakopy/LMS-live",
+ "result": {
+  "counts": {
+   "AGREES": 18,
+   "CORRECTED": 0,
+   "NEW_SPAN": 3,
+   "NOT_MATCHED": 43,
+   "RETAINED": 0,
+   "UNRESOLVED": 3
+  },
+  "decision": "NO_CHANGE",
+  "final": {
+   "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+   "masses": 3,
+   "metric": {
+    "cmPerPixelX": 3.30198,
+    "cmPerPixelY": 3.304485,
+    "confidence": "STRONG",
+    "relation": "CONFIRMED"
+   },
+   "modelHash": "b877ec6b0dd71e2456fb59a0fad6f46e316c6adbe6a04a79e49f0613381736b3",
+   "outcome": "COMPLETED"
+  },
+  "house": "bakopy",
+  "local": {
+   "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+   "masses": 3,
+   "metric": {
+    "cmPerPixelX": 3.30198,
+    "cmPerPixelY": 3.304485,
+    "confidence": "STRONG",
+    "relation": "CONFIRMED"
+   },
+   "modelHash": "b877ec6b0dd71e2456fb59a0fad6f46e316c6adbe6a04a79e49f0613381736b3",
+   "outcome": "COMPLETED"
+  },
+  "measured": {
+   "after": {
+    "eaves": 3.238,
+    "levels": [
+     {
+      "elevation": 0,
+      "height": 6.28,
+      "id": "lvl-0"
+     }
+    ],
+    "openings": 29,
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "ridge": 6.281,
+    "walls": 12
+   },
+   "before": {
+    "eaves": 3.238,
+    "levels": [
+     {
+      "elevation": 0,
+      "height": 6.28,
+      "id": "lvl-0"
+     }
+    ],
+    "openings": 29,
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "ridge": 6.281,
+    "walls": 12
+   }
+  },
+  "seconds": 788,
+  "sketches": {
+   "accepted": [
+    "WEST:PARTIAL",
+    "REAR:PARTIAL",
+    "EAST:PARTIAL",
+    "FRONT:REJECTED"
+   ],
+   "finish": {
+    "decision": "ACCEPT",
+    "why": "the finish zones applied on the model that stood; its usable geometry unchanged"
+   },
+   "form": {
+    "decision": "NOT_RUN",
+    "why": "no sketch passed the form check (finish only)"
+   },
+   "usd": 0.041742
+  },
+  "usd": 0.352153,
+  "why": "the same model, byte for byte"
+ },
+ "factTraceCounts": {
+  "ANGLE:CONFIRMED": 1,
+  "LENGTH:NO_EFFECT": 14,
+  "LEVEL:REFUSED": 4,
+  "SKETCH_FINISH:CHANGED": 3,
+  "SKETCH_FINISH:REFUSED": 1,
+  "SKETCH_FORM:REFUSED": 1,
+  "SPAN:REFUSED": 3
+ },
+ "factTraceRows": [
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-1c6d1497-level-000-55-37",
+   "literal": "±0,00",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "the same printed label the recogniser read and the drawing admitted: one value per label",
+   "witnesses": "the same printed label the recogniser read and the drawing admitted: one value per label"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-1c6d1497-level-032-68-38",
+   "literal": "-0,32",
+   "param": null,
+   "status": "NOT_CONSUMED",
+   "value": null,
+   "why": "the section did not take it (the analyzer admitted levels of its own there, or the frame is not a section)",
+   "witnesses": "the section did not take it (the analyzer admitted levels of its own there, or the frame is not a section)"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-1c6d1497-level-327-65-24",
+   "literal": "+3,27",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "the same printed label the recogniser read and the drawing admitted: one value per label",
+   "witnesses": "the same printed label the recogniser read and the drawing admitted: one value per label"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "LEVEL",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ml:dim-1c6d1497-level-628-47-12",
+   "literal": "+6,28",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "the same printed label the recogniser read and the drawing admitted: one value per label",
+   "witnesses": "the same printed label the recogniser read and the drawing admitted: one value per label"
+  },
+  {
+   "after": 35,
+   "before": null,
+   "class": "ANGLE",
+   "closure": "CONFIRMED",
+   "elementIds": [
+    "roof-main"
+   ],
+   "id": "dim-1c6d1497-angle-35-54-17",
+   "literal": "35°",
+   "param": "roof pitch",
+   "status": "READ",
+   "value": 35,
+   "why": "the roof carries this pitch on its own authority (printed or published); the API angle witnesses it — it does not, alone, confirm a height",
+   "witnesses": "roof-main: 35° gable on the authority of published specification; the side renders span the walled depth only; it runs on over attached-1: the left, right views show the body's top level at 6.28 m, the main ridge (6.28 m, within 0.48 m), running along it, and the body stands within the main roof's width (0.00..8.69 across its ridge) against the low end of its ridge: the main roof runs on over the body"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-149-8-5",
+   "literal": "149",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 1.49,
+   "why": "consulted (mr:dim-665d8ad5-length-149-8-5): the label is printed 149 (as the external reader also read it, with confidence: CLEAR); before, it was read 149 SUPPORTED (LEADS), and 105 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 149 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-171-15-30",
+   "literal": "171",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 1.71,
+   "why": "consulted (mr:dim-665d8ad5-length-171-15-30): the label is printed 171 (as both readers also read it, with confidence: CLEAR); before, it was read 171 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 171 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-180-19-27",
+   "literal": "180",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 1.8,
+   "why": "consulted (mr:dim-665d8ad5-length-180-19-27): the label is printed 180 (as both readers also read it, with confidence: CLEAR); before, it was read 180 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 180 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-184-16-27",
+   "literal": "184",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 1.84,
+   "why": "consulted (mr:dim-665d8ad5-length-184-16-27): the label is printed 184 (as the external reader also read it, with confidence: CLEAR); before, it was read 184 SUPPORTED (LEADS), and 164 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 184 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-2125-42-23",
+   "literal": "2125",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 21.25,
+   "why": "consulted (mr:dim-665d8ad5-length-2125-42-23): the label is printed 2125 (as both readers also read it, with confidence: CLEAR); before, it was read 2125 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 2125 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-253-7-28",
+   "literal": "253",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 2.53,
+   "why": "consulted (mr:dim-665d8ad5-length-253-7-28): the label is printed 253 (as the external reader also read it, with confidence: CLEAR); before, it was read 253 SUPPORTED (LEADS), and 217 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 253 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-326-16-13",
+   "literal": "326",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 3.26,
+   "why": "consulted (mr:dim-665d8ad5-length-326-16-13): the label is printed 326 (as the external reader also read it, with confidence: CLEAR); before, it was read 326 SUPPORTED (LEADS), and 726 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 326 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-380-8-21",
+   "literal": "380",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 3.8,
+   "why": "consulted (mr:dim-665d8ad5-length-380-8-21): the label is printed 380 (as the external reader also read it, with confidence: CLEAR); before, it was read 380 SUPPORTED (LEADS), and 960 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 380 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-448-29-27",
+   "literal": "448",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 4.48,
+   "why": "consulted (mr:dim-665d8ad5-length-448-29-27): the label is printed 448 (as both readers also read it, with confidence: CLEAR); before, it was read 448 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 448 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-458-14-8",
+   "literal": "458",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 4.58,
+   "why": "consulted (mr:dim-665d8ad5-length-458-14-8): the label is printed 458 (as both readers also read it, with confidence: CLEAR); before, it was read 458 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 458 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-600-11-40",
+   "literal": "600",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 6,
+   "why": "consulted (mr:dim-665d8ad5-length-600-11-40): the label is printed 600 (as the external reader also read it, with confidence: CLEAR); before, it was read 600 SUPPORTED (LEADS), and 610 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 600 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-640-27-1",
+   "literal": "640",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 6.4,
+   "why": "consulted (mr:dim-665d8ad5-length-640-27-1): the label is printed 640 (as the external reader also read it, with confidence: CLEAR); before, it was read 640 SUPPORTED (LEADS), and 610 stays a candidate — the chains decide the scale",
+   "witnesses": "AGREES: both read 640 cm (the analyzer's own status: RAW)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-660-7-33",
+   "literal": "660",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 6.6,
+   "why": "consulted (mr:dim-665d8ad5-length-660-7-33): the label is printed 660 (as the external reader also read it, with confidence: CLEAR); before, it was read 660 SUPPORTED (LEADS) — the chains decide the scale",
+   "witnesses": "AGREES: both read 660 cm (the analyzer's own status: REJECTED)"
+  },
+  {
+   "after": "14.919 × 21.25",
+   "before": "14.919 × 21.25",
+   "class": "LENGTH",
+   "closure": "NO_EFFECT",
+   "elementIds": [],
+   "id": "mr:dim-665d8ad5-length-860-13-1",
+   "literal": "860",
+   "param": "the plan scale (outline)",
+   "status": "APPLIED",
+   "value": 8.6,
+   "why": "consulted (mr:dim-665d8ad5-length-860-13-1): the label is printed 860 (as both readers also read it, with confidence: CLEAR); before, it was read 860 CLEAR (AGREES) — the chains decide the scale",
+   "witnesses": "AGREES: both read 860 cm (the analyzer's own status: RAW)"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "SPAN",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ms:dim-665d8ad5-length-50-33-52",
+   "literal": "",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "TOO_SHORT: 15 px; a span shorter than 60 px states no scale worth checking",
+   "witnesses": "TOO_SHORT: 15 px; a span shorter than 60 px states no scale worth checking"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "SPAN",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ms:dim-665d8ad5-length-690-12-50",
+   "literal": "",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "SNAP_FAILED: no ink stroke across the line, and no end of a line, within 12 px of the second end",
+   "witnesses": "SNAP_FAILED: no ink stroke across the line, and no end of a line, within 12 px of the second end"
+  },
+  {
+   "after": null,
+   "before": null,
+   "class": "SPAN",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "ms:dim-665d8ad5-length-810-27-50",
+   "literal": "",
+   "param": null,
+   "status": "REFUSED",
+   "value": null,
+   "why": "SNAP_FAILED: no ink stroke across the line, and no end of a line, within 12 px of the first end",
+   "witnesses": "SNAP_FAILED: no ink stroke across the line, and no end of a line, within 12 px of the first end"
+  },
+  {
+   "after": 4,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-west-ring-main-0-w3-dark-render-0",
+    "appearance-west-ring-main-0-w3-timber-0",
+    "appearance-west-ring-main-0-w3-timber-1",
+    "appearance-west-ring-main-0-w3-timber-2"
+   ],
+   "id": "sketch-WEST",
+   "literal": "WEST",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "4 surface region(s) from this sketch",
+   "witnesses": "one scale 0.02001 m/px from the wall ends; eaves line at one scale -0.111 m, ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-34-14 0.407 m, opening-window-14-13 0.585 m)"
+  },
+  {
+   "after": 4,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-rear-ring-main-0-w2-dark-render-0",
+    "appearance-rear-ring-main-0-w2-dark-render-1",
+    "appearance-rear-ring-attached-0-0-w2-dark-render-0",
+    "appearance-rear-ring-attached-0-0-w2-timber-0"
+   ],
+   "id": "sketch-REAR",
+   "literal": "REAR",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "4 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01938 m/px from the wall ends; eaves line at one scale -0.051 m, ground line within the terrain window 0.096 m within 0.128 m; form not taken: 1 opening(s) off the model's (opening-window-34-14 0.565 m)"
+  },
+  {
+   "after": 4,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "CHANGED",
+   "elementIds": [
+    "appearance-east-ring-main-0-w1-dark-render-0",
+    "appearance-east-ring-main-0-w1-timber-0",
+    "appearance-east-ring-attached-0-0-w1-timber-0",
+    "appearance-east-ring-attached-1-0-w1-timber-0"
+   ],
+   "id": "sketch-EAST",
+   "literal": "EAST",
+   "param": "finish zones",
+   "status": "PARTIAL",
+   "value": "PARTIAL",
+   "why": "4 surface region(s) from this sketch",
+   "witnesses": "one scale 0.01992 m/px from the wall ends; eaves line at one scale -0.017 m, ground line within the terrain window 0 m within 0.130 m; form not taken: 2 opening(s) off the model's (opening-glazed_door-40-14 0.161 m, opening-glazed_door-47-14 0.219 m)"
+  },
+  {
+   "after": 0,
+   "before": null,
+   "class": "SKETCH_FINISH",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "sketch-FRONT",
+   "literal": "FRONT",
+   "param": "finish zones",
+   "status": "REJECTED",
+   "value": "REJECTED",
+   "why": "the sketch's finish was not accepted (REJECTED)",
+   "witnesses": "at one scale: ground line within the terrain window off by 0.197 m (tolerance 0.127 m): not stretched to fit"
+  },
+  {
+   "after": "{}",
+   "before": "{}",
+   "class": "SKETCH_FORM",
+   "closure": "REFUSED",
+   "elementIds": [],
+   "id": "sketch-form",
+   "literal": "form",
+   "param": "outline, storeys, walls, openings",
+   "status": "NOT_RUN",
+   "value": "NOT_RUN",
+   "why": "no sketch passed the form check (finish only)",
+   "witnesses": "no sketch passed the form check (finish only)"
+  }
+ ]
+}
