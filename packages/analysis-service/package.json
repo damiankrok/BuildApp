@@ -10,6 +10,7 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
+    "@buildapp/commands": "*",
     "@buildapp/geometry": "*",
     "@buildapp/mobile-scene": "*",
     "@buildapp/model": "*",

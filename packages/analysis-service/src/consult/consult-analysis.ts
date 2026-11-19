@@ -43,6 +43,17 @@ import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import type { SketchReading } from './sketch-step.js'
 import { usableGeometryFingerprint } from '../appearance/consumer.js'
 import type { LabelProblem } from './problems.js'
+import { serializeModel } from '@buildapp/model'
+import type { CanonicalBuildingModel } from '@buildapp/model'
+import { sha256Hex } from '@buildapp/source-common'
+import { renderStoreyCut } from './model-views.js'
+import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
+import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, viewsOfRun } from './correct/execute.js'
+import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
+import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
+import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
+import { QUALITY_VERSION, qualityOf, settleDefects } from './correct/quality.js'
+import type { DefectEntry, QualitySummary } from './correct/quality.js'
 
 export type ConsultantWiring = {
   model: ConsultantModel
@@ -84,10 +95,20 @@ export type ConsultantWiring = {
    * answers are recorded and kept when the analysis completes with no transport failure. `reanalyse` reads afresh.
    */
   accepted?: { store: AcceptedConsultStore; reanalyse?: boolean }
+  /**
+   * v3.54.16: the sketches' typed openings and chimneys handed to the correction executor as proposals (each judged
+   * against the original picture). Default ON when sketches are read; OFF keeps them a reading only.
+   */
+  sketchCorrections?: 'ON' | 'OFF'
 }
 
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
-export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number }
+export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
+  /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[] } }
+
+/** v3.54.16: one run of the correction executor: where it ran, on which revision, and every patch's and transaction's fate. */
+export type CorrectionRun = { stage: string; baseRevision: string; revision: string; delivered: boolean; records: PatchRecord[]; transactions: TransactionRecord[]; why?: string }
 
 /** v3.54.14: what the metric consultant read, checked, decided and what the analyzer built from it. */
 export type MetricReadSummary = {
@@ -181,6 +202,10 @@ export type GeometryRound = {
   why: string
   afterRevision?: string
   usd: number
+  /** v3.54.16: the look's defects, and the registry operations the correction executor ran for it. */
+  defects?: NonNullable<ConsultantReview['defects']>
+  patches?: PatchRecord[]
+  transactions?: TransactionRecord[]
 }
 
 /** v3.54.3: what the source check established, in the result an app consumes — findings open and corrected, by name. */
@@ -205,6 +230,10 @@ export type SourceCheckSummary = {
   scaleContradiction?: { modelCmPerPixel: number; consultedCmPerPixelX: number | null; consultedCmPerPixelY: number | null; ratio: number; refusal: string; dimensions: Array<{ literal: string; unit: string }> }
   /** Defects known and not corrected, each by code: what an app must show beside the model. */
   knownDefects: Array<{ code: string; what: string }>
+  /** v3.54.16: the quality of the delivered revision, apart from CHECKED and from reuse (`correct/quality.ts`). */
+  quality?: QualitySummary
+  /** v3.54.16: every run of the correction executor (sketch channel, looks, rebinds) with each patch's and transaction's fate. */
+  correctionRuns?: CorrectionRun[]
   /**
    * The model's quality, one axis at a time (never one grade): what ran, how the scale was settled, the outline against
    * the printed dimensions, the roof and the openings as the look found them, the interior (which no look certifies),
@@ -216,7 +245,8 @@ export type SourceCheckSummary = {
     outline: 'MATCHES' | 'MATCHES_WITHIN_A_WALL' | 'SHORT' | 'BEYOND' | 'NOT_COMPARED'
     roof: 'NO_DIFFERENCE_REPORTED' | 'CORRECTED_APPROXIMATE' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
     openings: 'NO_DIFFERENCE_REPORTED' | 'DIFFERENCE_OPEN' | 'NOT_CHECKED'
-    interior: 'NOT_CHECKED'
+    /** v3.54.16: REVIEWED_FROM_PLANS — the last look was shown each storey without its roof and lists the interior as checked. */
+    interior: 'NOT_CHECKED' | 'REVIEWED_FROM_PLANS'
     quantities: string
     sourceCheck: SourceCheckSummary['status']
   }
@@ -244,6 +274,9 @@ export type ConsultationSummary = {
   sketches?: { sides: string[]; form: string; finish: string; usd: number }
   /** v3.54.14: the accepted-revision rule on this path (`accepted-consult.ts`), when the host keeps a store. */
   accepted?: ConsultReuse
+  /** v3.54.16: the quality of the delivered revision (never inferred from `accepted`) and the patches the executor kept. */
+  quality?: { state: string; reasons: string[]; reviewCompleted: boolean; openKey: number; closedVerified: number }
+  corrections?: { runs: number; committed: number; refused: number; registry: string }
 }
 
 export type ConsultedAnalysis = {
@@ -281,7 +314,14 @@ const CONF_RANK: Record<string, number> = { INCONCLUSIVE: 0, WEAK: 1, SUPPORTED:
 
 type Local = { run?: AnalysisRun; error?: AnalysisError; pkg?: SourcePackage; graph?: SourceObservationGraph; metrics?: MetricEvidenceSet; plans?: PlanDiagnosticsReport }
 
+/** v3.54.16: how each run was made, so the correction executor's model can be delivered through the same run (`patchedModel`). */
+const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOptions }>()
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
+  const l = await attemptRaw(input, options)
+  lineage.set(l, { input, options })
+  return l
+}
+async function attemptRaw(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
   try {
     const run = await runAnalysis(input, options)
     return { run, pkg: run.pkg, graph: run.graph, metrics: run.metrics, plans: run.planDiagnostics }
@@ -449,7 +489,7 @@ async function checkSources(l: Local, options: AnalysisOptions): Promise<CheckSo
     if (!f || !fr?.raster) return
     // the whole picture, downscaled by a whole factor only when it is larger than the provider would keep: the pixels
     // the consultant reports are then the pixels it was sent, and the transform back to the frame is stated
-    out.push({ img: overviewOf(fr.raster, frameId, []), raster: fr.raster, what, frameId, projection: f.roles.projection, label })
+    out.push({ img: overviewOf(fr.raster, frameId, []), raster: fr.raster, what, frameId, projection: f.roles.projection, label, sourceByteHash: f.variantByteHash })
   }
   const base = l.plans?.selectedPlanFrameId ?? undefined
   if (base) await add(base, 'PLAN', 'the floor plan the model was built from (its lowest storey); the house FRONT is at the bottom of this sheet')
@@ -487,9 +527,9 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const b = consultBinding({
       sourcePackageHash: local.pkg.contentHash,
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
-      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION].join(','),
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION, `registry${CORRECTION_REGISTRY_VERSION}`, `executor${CORRECTION_EXECUTOR_VERSION}`, `gate${SOURCE_GATE_VERSION}`, `sketchProposals${SKETCH_PROPOSALS_VERSION}`, `quality${QUALITY_VERSION}`].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
-      settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'}`,
+      settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'};sketchCorrections=${wiring.sketchCorrections ?? 'ON'}`,
     })
     const stored = wiring.accepted.reanalyse ? undefined : wiring.accepted.store.get(b.key)
     acceptedState = { key: b.key, binding: b.binding, ...(stored ? { reused: stored } : { why: wiring.accepted.reanalyse ? 'REANALYSIS_ASKED' as const : 'NO_ACCEPTED_REVISION' as const }) }
@@ -768,31 +808,134 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     }
   }
 
+  // --- v3.54.16: the correction executor on the model that stands ------------------------------------------------------
+  // `base` is the analyzer's own run the delivered model was patched from (undefined: `good` is unpatched); `committed`
+  // are the proposals whose transactions were kept, in source terms, so a rebuilt base can take them again.
+  let base: Local | undefined
+  let committed: CorrectionProposal[] = []
+  const correctionRuns: CorrectionRun[] = []
+  const seenPatch = new Set<string>()
+  let sourcesAll: CheckSource[] | undefined
+  const sourcesOf = async (l: Local): Promise<CheckSource[]> => (sourcesAll ??= await checkSources(l, options))
+  const picturesOf = (sources: readonly CheckSource[]): BindPicture[] => sources.flatMap((src, i) => (src.what === 'ELEVATION' && src.sourceByteHash ? [{ n: i + 1, frameId: src.frameId, projection: src.projection, transform: { x0: src.img.transform.x0, y0: src.img.transform.y0, scale: src.img.transform.scale }, raster: src.raster, sourceByteHash: src.sourceByteHash }] : []))
+  // printed values someone other than a proposer read: the analyzer's level marks and the independent metric read
+  const witnessesOf = (l: Local): PrintedWitness[] => [
+    ...((l.metrics as { evidence?: Array<{ kind: string; value?: number; frameId?: string }> } | undefined)?.evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && typeof e.value === 'number').map((e) => ({ valueM: e.value as number, unit: 'm' as const, frameId: e.frameId ?? '', by: 'ANALYZER' as const })),
+    ...(metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => (o.kind === 'LEVEL' || o.kind === 'ANGLE') && typeof o.value === 'number').map((o) => ({ valueM: o.value as number, unit: o.kind === 'ANGLE' ? ('deg' as const) : ('m' as const), frameId: r.frameId, by: 'METRIC_READ' as const, literal: o.literal }))),
+  ]
+  const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
+    if (!l.run) return undefined
+    const pictures = picturesOf(await sourcesOf(l))
+    const out = executeCorrections({ model: l.run.reconstruction.model, views: viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen })
+    correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
+    record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
+    return out
+  }
+  /** The executor's model delivered through the same run as its base (compile, assessment, scene); checked byte for byte. */
+  const materialize = async (from: Local, model: CanonicalBuildingModel): Promise<Local | undefined> => {
+    const lin = lineage.get(from)
+    if (!lin || !from.run) return undefined
+    const l = await attempt(lin.input, { ...lin.options, patchedModel: { baseSha256: sha256Hex(serializeModel(from.run.reconstruction.model)), model } })
+    const ok = l.run !== undefined && sha256Hex(serializeModel(l.run.reconstruction.model)) === sha256Hex(serializeModel(model))
+    record({ at: now().toISOString(), kind: 'CORRECTIONS_DELIVERED', ok, revision: l.run ? modelRevision(l.run.reconstruction.model) : null })
+    if (ok && correctionRuns.length > 0) correctionRuns[correctionRuns.length - 1].delivered = true
+    return ok ? l : undefined
+  }
+  /** The committed proposals taken again by a new base (a rebuild), each bound against it; those that no longer bind are named. */
+  const rebase = async (newBase: Local, stage: string): Promise<Local> => {
+    if (committed.length === 0 || !newBase.run) {
+      base = undefined
+      return newBase
+    }
+    const rev = modelRevision(newBase.run.reconstruction.model)
+    const again = committed.map((p) => ({ ...p, proposalId: `${p.proposalId}@${rev}`, baseRevision: rev }))
+    const out = await executeOn(newBase, again, stage, new Set())
+    const kept = out ? out.records.filter((r) => r.status === 'COMMITTED').map((r) => r.proposalId) : []
+    committed = committed.filter((p) => kept.includes(`${p.proposalId}@${rev}`))
+    if (!out || kept.length === 0) {
+      base = undefined
+      return newBase
+    }
+    const m = await materialize(newBase, out.model)
+    if (!m) {
+      committed = []
+      base = undefined
+      return newBase
+    }
+    base = newBase
+    return m
+  }
+  if ((wiring.sketchCorrections ?? 'ON') === 'ON' && wiring.variant !== 'R' && sketchSummary && good.run) {
+    const run = good.run
+    const rev = modelRevision(run.reconstruction.model)
+    const views = viewsOfRun(run.reconstruction.facadeAlignment.views)
+    const accounts = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, run.reconstruction.model, views, rev))
+    const proposals = accounts.flatMap((a) => a.proposals)
+    const sem: NonNullable<SketchSummary['semantic']> = { version: SKETCH_PROPOSALS_VERSION, decision: 'NOT_RUN', why: '', accounts: accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped })), records: [], transactions: [] }
+    sketchSummary.semantic = sem
+    if (proposals.length === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
+    else {
+      const out = await executeOn(good, proposals, 'SKETCH')
+      sem.records = out?.records ?? []
+      sem.transactions = out?.transactions ?? []
+      const kept = (out?.records ?? []).filter((r) => r.status === 'COMMITTED')
+      const m = out && kept.length > 0 ? await materialize(good, out.model) : undefined
+      if (m && out) {
+        base = good
+        good = m
+        goodState = stateOf(m)
+        committed = proposals.filter((p) => kept.some((r) => r.proposalId === p.proposalId))
+        sem.decision = 'APPLIED'
+        sem.why = `${kept.length} of ${proposals.length} sketch proposal(s) kept, each against the original elevation; revision ${out.baseRevision} → ${out.revision}`
+      } else {
+        sem.decision = 'NONE_KEPT'
+        sem.why = kept.length > 0 ? 'the kept patches could not be delivered through the run (the base did not rebuild byte for byte)' : `none of ${proposals.length} sketch proposal(s) passed the source gate and the measure`
+      }
+    }
+  }
+
   // --- geometry: the model that stands against the source's plans and elevations; each look may change it ------------
   const geometry: GeometryRound[] = []
   const features: RoofFeatureCorrection[] = []
-  const metricOn = consultedOn()
   const maxGeometry = wiring.maxGeometryRounds ?? 2
   const viewsOf = wiring.views ?? ((run: AnalysisRun): ModelViewPicture[] => renderModelViews(run.result.scene))
-  let lastApplied: Array<{ id: string; what: string }> = []
+  // v3.54.16: each storey from above with nothing over it, so rooms and partitions can be held against the plans
+  const storeysOf = (run: AnalysisRun): Array<{ png: Uint8Array; width: number; height: number; labels: string; name: string; sha256: string }> => {
+    if (wiring.views) return []
+    try {
+      return [...run.reconstruction.model.levels].sort((a, b) => a.index - b.index).map((l) => {
+        const c = renderStoreyCut(run.result.scene, l.id, l.elevation)
+        return { png: c.png, width: c.width, height: c.height, sha256: c.sha256, name: `STOREY ${l.index}`, labels: `storey ${l.index} (${l.name ?? l.id}) of the model from above with nothing over it: walls cut at 1.2 m, rooms filled, front at the bottom as the plans are printed` }
+      })
+    } catch {
+      return []
+    }
+  }
+  let lastApplied: Array<{ id: string; what: string; kind: 'ROOF_FEATURE' | 'PATCH'; proposalId?: string }> = []
   let lastRefused: Array<{ targetId: string; why: string }> = []
   let previous: { good: Local; state: RunState; features: RoofFeatureCorrection[] } | undefined
   const seenG = new Set<string>()
   let lastReview: ModelCheckResult | undefined
   let lastCheckedRevision: string | null = null
+  const defectLedger: DefectEntry[] = []
+  let prevLook: { look: number; defects: NonNullable<ConsultantReview['defects']>; proposals: Array<{ proposalId: string; defectId?: string }>; records: PatchRecord[] } | undefined
+  let lastLookNumber = 0
+  let pendingAtLimit = 0
+  let attemptedForKey = 0
+  let committedForKey = 0
   if ((wiring.check ?? 'ON') === 'ON' && good.run && good.pkg && good.graph) {
     const pkg = good.pkg
     const graph = good.graph
-    const sources = await checkSources(good, options)
+    const sources = await sourcesOf(good)
     for (let g = 1; g <= maxGeometry + 1 && sources.length > 0; g += 1) {
       const run = good.run as AnalysisRun
-      const revision = run.reconstruction.candidate.modelHash.slice(0, 12)
+      const revision = modelRevision(run.reconstruction.model)
       const rec: GeometryRound = { round: g, revision, status: null, pictures: [], observations: [], reviewed: [], verdicts: [], corrections: [], outcomes: [], decision: 'NOT_RUN', why: '', usd: 0 }
       geometry.push(rec)
       let res: ModelCheckResult
       try {
-        const views = viewsOf(run)
-        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
+        const views = [...viewsOf(run), ...storeysOf(run)]
+        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied.map((a) => ({ id: a.id, what: a.what })) } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
       } catch (e) {
         rec.decision = 'CHECK_FAILED'
         rec.why = `${(e as Error).name}: ${(e as Error).message.slice(0, 300)} — the model before the look stands`
@@ -811,95 +954,172 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       }
       lastReview = res
       lastCheckedRevision = revision
+      lastLookNumber = g
       rec.status = res.review.status
       rec.observations = res.review.observations
-      // what the look says of the features the round before built: one the source does not show is taken out again
+      rec.defects = res.review.defects ?? []
+      // the defects of the look before, settled by what THIS look says of the elements their patches built
+      const reviewedNow = new Map((res.review.appliedReview ?? []).map((a) => [a.id, a.verdict as string]))
+      if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, reviewedNow, revision, false))
+      prevLook = undefined
+      // what the look says of the features and patches the round before applied: one the source does not show is undone
       if (lastApplied.length > 0) {
         rec.reviewed = reviewOutcome(lastApplied.map((a) => a.id), res.review.appliedReview)
-        const drop = rec.reviewed.filter((r) => !r.keep).map((r) => r.id)
         record({ at: now().toISOString(), kind: 'APPLIED_REVIEW', round: g, reviewed: rec.reviewed })
-        if (drop.length > 0 && previous) {
-          const kept = features.filter((f) => !drop.includes(f.id))
+        const drop = rec.reviewed.filter((r) => !r.keep).map((r) => r.id)
+        const dropFeatures = drop.filter((id) => lastApplied.some((a) => a.id === id && a.kind === 'ROOF_FEATURE'))
+        const dropPatches = lastApplied.filter((a) => a.kind === 'PATCH' && drop.includes(a.id)).map((a) => a.proposalId)
+        if (dropFeatures.length > 0 && previous) {
+          const kept = features.filter((f) => !dropFeatures.includes(f.id))
           let back: Local | undefined
           if (kept.length === previous.features.length) back = previous.good
           else {
-            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, consultedLevels: levels, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: kept, ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
-            back = again.run ? again : previous.good
+            const unpatched = base ?? good
+            const lin = lineage.get(unpatched)
+            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...(lin?.options ?? options), patchedModel: undefined, roofFeatures: kept })
+            back = again.run ? await rebase(again, `UNDO-ROOF-${g}`) : previous.good
           }
           good = back
           goodState = stateOf(good)
           features.splice(0, features.length, ...(back === previous.good ? previous.features : kept))
           rec.decision = 'ROLLBACK'
-          rec.why = `the look at revision ${revision} says ${drop.join(', ')} is not what the drawings show (${rec.reviewed.filter((r) => !r.keep).map((r) => `${r.verdict}: ${r.note}`).join('; ').slice(0, 300)}): taken out again`
-          rec.afterRevision = good.run?.reconstruction.candidate.modelHash.slice(0, 12)
+          rec.why = `the look at revision ${revision} says ${dropFeatures.join(', ')} is not what the drawings show (${rec.reviewed.filter((r) => !r.keep).map((r) => `${r.verdict}: ${r.note}`).join('; ').slice(0, 300)}): taken out again`
+          rec.afterRevision = good.run ? modelRevision(good.run.reconstruction.model) : undefined
           record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why, afterRevision: rec.afterRevision })
-          // the model the consultant looked at is no longer the one delivered
           lastCheckedRevision = null
           break
         }
+        if (dropPatches.length > 0) {
+          committed = committed.filter((p) => !dropPatches.includes(p.proposalId))
+          good = await rebase(base ?? good, `UNDO-${g}`)
+          goodState = stateOf(good)
+          rec.decision = 'ROLLBACK'
+          rec.why = `the look at revision ${revision} says ${drop.join(', ')} is not what the drawings show: the patch(es) ${dropPatches.join(', ')} undone, the others re-applied`
+          rec.afterRevision = good.run ? modelRevision(good.run.reconstruction.model) : undefined
+          record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why, afterRevision: rec.afterRevision })
+          lastApplied = []
+          lastCheckedRevision = null
+          continue
+        }
       }
-      // new proposals: validated and bound by the analyzer; ids are the consultant's within one look, so the loop scopes them
+      // new proposals: dormers to the roof-feature consumer; registry operations to the correction executor; ids scoped
       const pictures: CheckPicture[] = res.pictures
       const registeredSides = new Map(run.reconstruction.registrations.elevations.map((e) => [e.frameId, e.side as string]))
       const present = new Set((run.reconstruction.building.dormers ?? []).map((d) => d.id))
       const corrections: RoofFeatureCorrection[] = []
+      const patchProposals: CorrectionProposal[] = []
       for (const p of res.review.proposedCorrections) {
-        const bound = bindRoofFeature({ ...p, proposalId: `g${g}:${p.proposalId}` }, { revision, pictures, registeredSides, present, seen: seenG })
+        const id = `g${g}:${p.proposalId}`
+        if (p.operation !== 'ROOF_FEATURE') {
+          patchProposals.push({ proposalId: id, baseRevision: p.baseRevision, operation: p.operation, targetId: p.targetId, ...(p.defectId ? { defectId: p.defectId } : {}), ...(p.group ? { group: `g${g}:${p.group}` } : {}), ...(p.patch ? { patch: p.patch } : {}), uncertainty: p.uncertainty, justification: p.justification, origin: 'REVIEW' })
+          continue
+        }
+        const bound = bindRoofFeature({ ...p, proposalId: id }, { revision, pictures, registeredSides, present, seen: seenG })
         if (bound.correction && corrections.some((c) => c.id === bound.correction?.id)) bound.verdict = { ...bound.verdict, status: 'REJECTED', code: 'ALREADY_PRESENT', why: `a second proposal for ${bound.correction.id} in one look` }
         else if (bound.correction) corrections.push(bound.correction)
         rec.verdicts.push(bound.verdict)
       }
-      record({ at: now().toISOString(), kind: 'GEOMETRY_VALIDATION', round: g, revision, status: res.review.status, verdicts: rec.verdicts, observations: rec.observations })
+      const keyDefects = new Set((res.review.defects ?? []).filter((d) => d.severity === 'KEY').map((d) => d.id))
+      record({ at: now().toISOString(), kind: 'GEOMETRY_VALIDATION', round: g, revision, status: res.review.status, verdicts: rec.verdicts, patches: patchProposals.map((p) => p.proposalId), defects: res.review.defects ?? [], observations: rec.observations })
       if (g > maxGeometry) {
         rec.decision = 'REVIEW_ONLY'
-        rec.why = `the last look: it reviews what was applied; ${corrections.length} further proposal(s) are recorded and not applied (round limit ${maxGeometry})`
+        pendingAtLimit = corrections.length + patchProposals.length
+        rec.why = `the last look: it reviews what was applied; ${pendingAtLimit} further proposal(s) are recorded and not applied (round limit ${maxGeometry})`
         for (const vv of rec.verdicts) if (vv.status === 'ACCEPTED') Object.assign(vv, { status: 'HELD', why: `${vv.why} — not applied: the round limit is reached` })
+        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, true))
         record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
         break
       }
       if (wiring.variant === 'R') {
         rec.decision = 'NOT_RUN'
         rec.why = 'variant R: the proposals are recorded and never consumed'
+        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, false))
         record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
         break
       }
+      // registry operations, on the model that stands
+      let appliedPatches: typeof lastApplied = []
+      let patchOut: CorrectionOutcome | undefined
+      if (patchProposals.length > 0) {
+        patchOut = await executeOn(good, patchProposals, `LOOK-${g}`)
+        rec.patches = patchOut?.records ?? []
+        rec.transactions = patchOut?.transactions ?? []
+        const kept = rec.patches.filter((r) => r.status === 'COMMITTED')
+        attemptedForKey += patchProposals.filter((p) => p.defectId && keyDefects.has(p.defectId)).length
+        if (patchOut && kept.length > 0) {
+          const from = base ?? good
+          const m = await materialize(from, patchOut.model)
+          if (m) {
+            base = from
+            good = m
+            goodState = stateOf(m)
+            committed.push(...patchProposals.filter((p) => kept.some((r) => r.proposalId === p.proposalId)))
+            committedForKey += patchProposals.filter((p) => p.defectId && keyDefects.has(p.defectId) && kept.some((r) => r.proposalId === p.proposalId)).length
+            appliedPatches = kept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId})`, kind: 'PATCH' as const, proposalId: r.proposalId }))
+          } else for (const r of kept) Object.assign(r, { status: 'ROLLED_BACK', code: 'NOT_DELIVERED', why: `${r.why}; the patched model could not be delivered through the run (its base did not rebuild byte for byte)` })
+        }
+      }
+      prevLook = { look: g, defects: res.review.defects ?? [], proposals: patchProposals.map((p) => ({ proposalId: p.proposalId, ...(p.defectId ? { defectId: p.defectId } : {}) })), records: rec.patches ?? [] }
+      lastRefused = (rec.patches ?? []).filter((r) => r.status !== 'COMMITTED').map((r) => ({ targetId: r.targetId, why: `${r.operation} ${r.status}${r.code ? ` ${r.code}` : ''}: ${r.why}`.slice(0, 300) }))
       if (corrections.length === 0) {
+        if (appliedPatches.length > 0) {
+          rec.decision = 'ACCEPT'
+          rec.why = `${appliedPatches.length} patch(es) applied through the correction executor (${appliedPatches.map((a) => a.id).join(', ')}); the next look reviews revision ${good.run ? modelRevision(good.run.reconstruction.model) : '?'}`
+          rec.afterRevision = good.run ? modelRevision(good.run.reconstruction.model) : undefined
+          lastApplied = appliedPatches
+          lastCheckedRevision = null
+          record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
+          continue
+        }
         rec.decision = lastApplied.length > 0 ? 'REVIEW_ONLY' : 'NO_CHANGE'
-        rec.why = lastApplied.length > 0 ? 'the look reviews what was applied and proposes nothing the analyzer can apply' : 'no proposal the analyzer can apply: the model stands, the findings stay on the record'
+        rec.why = lastApplied.length > 0 ? 'the look reviews what was applied and proposes nothing the analyzer can apply' : patchProposals.length > 0 ? `no proposal was kept (${(rec.patches ?? []).map((r) => `${r.proposalId} ${r.status}`).join(', ').slice(0, 300)}): the model stands, the findings stay on the record` : 'no proposal the analyzer can apply: the model stands, the findings stay on the record'
         record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
         break
       }
       rec.corrections = corrections
-      // the candidate: the same package, graph and metric revision; the analyzer rebuilds with the features so far and these
-      const beforeG = geometryStateOf(run, features.map((f) => f.id))
-      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, consultedLevels: levels, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: [...features, ...corrections], ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
+      // dormers: the analyzer rebuilds the UNPATCHED run that stands with them (all its own inputs kept); the committed
+      // patches are then bound again on the rebuilt model and delivered with it
+      const unpatched = base ?? good
+      const lin = lineage.get(unpatched)
+      const beforeG = geometryStateOf(unpatched.run as AnalysisRun, features.map((f) => f.id))
+      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...(lin?.options ?? options), patchedModel: undefined, roofFeatures: [...features, ...corrections] })
       const outcomes = candidate.run?.reconstruction.roofFeatures ?? []
       rec.outcomes = outcomes.filter((o) => corrections.some((c) => c.id === o.id))
       const afterG = candidate.run ? geometryStateOf(candidate.run, [...features, ...corrections].map((f) => f.id)) : undefined
       const decision = compareGeometry(beforeG, afterG, corrections, rec.outcomes, candidate.error ? `${candidate.error.failure().code}/${candidate.error.failure().reasonCode ?? ''}` : undefined)
       rec.decision = decision.decision
-      rec.why = decision.why
-      rec.afterRevision = candidate.run?.reconstruction.candidate.modelHash.slice(0, 12)
+      rec.why = decision.why + (appliedPatches.length > 0 ? `; and ${appliedPatches.length} patch(es) applied through the correction executor` : '')
+      lastRefused = [...lastRefused, ...decision.refused.map((r) => ({ targetId: r.id, why: `${r.code ?? ''} ${r.why}`.trim() })), ...rec.verdicts.filter((x) => x.status === 'REJECTED' || x.status === 'HELD').map((x) => ({ targetId: x.targetId, why: `${x.code ?? x.status}: ${x.why}` }))]
+      if (decision.decision === 'ACCEPT') {
+        previous = { good, state: goodState, features: [...features] }
+        good = await rebase(candidate, `REBASE-${g}`)
+        goodState = stateOf(good)
+        const builtNow = corrections.filter((c) => decision.applied.includes(c.id))
+        features.push(...builtNow)
+        lastApplied = [...builtNow.map((c) => ({ id: c.id, what: `a ${c.kind.toLowerCase().replace(/_/g, ' ')} on the ${c.side.toLowerCase()} side, ${Math.round(c.fromShare * 100)}–${Math.round(c.toShare * 100)} % along it`, kind: 'ROOF_FEATURE' as const })), ...appliedPatches]
+      } else lastApplied = appliedPatches
+      rec.afterRevision = good.run ? modelRevision(good.run.reconstruction.model) : undefined
       record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why, revision, afterRevision: rec.afterRevision, corrections, outcomes: rec.outcomes, before: beforeG, after: afterG ?? null })
-      lastRefused = [...decision.refused.map((r) => ({ targetId: r.id, why: `${r.code ?? ''} ${r.why}`.trim() })), ...rec.verdicts.filter((x) => x.status === 'REJECTED' || x.status === 'HELD').map((x) => ({ targetId: x.targetId, why: `${x.code ?? x.status}: ${x.why}` }))]
-      if (decision.decision !== 'ACCEPT') {
-        // a correction the analyzer refused with a reason is new evidence for the consultant: one more look, told why,
-        // while rounds remain; anything else (a rollback, nothing built and nothing said) ends the looks
-        if (decision.decision === 'NO_CHANGE' && decision.refused.length > 0 && g < maxGeometry) continue
-        break
+      if (lastApplied.length > 0) {
+        lastCheckedRevision = null
+        continue
       }
-      previous = { good, state: goodState, features: [...features] }
-      good = candidate
-      goodState = stateOf(candidate)
-      const builtNow = corrections.filter((c) => decision.applied.includes(c.id))
-      features.push(...builtNow)
-      lastApplied = builtNow.map((c) => ({ id: c.id, what: `a ${c.kind.toLowerCase().replace(/_/g, ' ')} on the ${c.side.toLowerCase()} side, ${Math.round(c.fromShare * 100)}–${Math.round(c.toShare * 100)} % along it` }))
-      // the delivered revision has not been looked at yet: the next look is of exactly this revision
-      lastCheckedRevision = null
+      // a dormer the analyzer refused with a reason is new evidence: one more look, told why, while rounds remain
+      if (decision.decision === 'NO_CHANGE' && decision.refused.length > 0 && g < maxGeometry) continue
+      break
     }
   }
+  // the last proposing look's defects, when no later look judged what it applied
+  if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, undefined, undefined, false))
   const finalState = stateOf(good)
   const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision, rounds) : undefined
+  if (sourceCheck) {
+    const last = defectLedger.filter((d) => d.look === lastLookNumber)
+    const contradictions = sourceCheck.knownDefects.filter((k) => /^OUTLINE_(SHORT|BEYOND)|^SCALE_CONTRADICTED/.test(k.code)).length
+    sourceCheck.quality = qualityOf({ looked: sourceCheck.looks > 0, checkedRevision: sourceCheck.checkedRevision, deliveredRevision: sourceCheck.deliveredRevision, lastStatus: sourceCheck.reviewStatus, defects: last, allDefects: defectLedger, measuredContradictions: contradictions, pendingAtLimit, attemptedForKey, committedForKey })
+    sourceCheck.correctionRuns = correctionRuns
+    for (const d of last.filter((x) => x.settlement !== 'CLOSED_VERIFIED')) if (!sourceCheck.knownDefects.some((k) => k.what.startsWith(d.id))) sourceCheck.knownDefects.push({ code: `DEFECT_${d.settlement}`, what: `${d.id} (${d.severity}, ${d.scope}): ${d.about}`.slice(0, 400) })
+  }
   // the result an app consumes says what was checked, what was corrected and what is known wrong — not only the trace
   if (good.run && sourceCheck) {
     ;(good.run.result as { sourceCheck?: SourceCheckSummary }).sourceCheck = sourceCheck
@@ -920,7 +1140,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   // v3.54.14: what became of the accepted-revision rule; a fresh, complete, failure-free consultation is kept
   let accepted: ConsultReuse | undefined
   if (acceptedState && wiring.accepted) {
-    const deliveredHash = good.run?.reconstruction.candidate.modelHash ?? ''
+    const deliveredHash = good.run?.result.modelSha256 ?? ''
     if (acceptedState.reused) accepted = { state: 'REUSED', key: acceptedState.key, acceptedAt: acceptedState.reused.acceptedAt, sameGeometry: deliveredHash !== '' && deliveredHash === acceptedState.reused.modelHash, answersReplayed: replayCounter.replayed, missing: replayCounter.missing }
     else if (!good.run || finalState.outcome !== 'COMPLETED') accepted = { state: 'NOT_ACCEPTED', key: acceptedState.key, why: 'the analysis did not complete: nothing kept' }
     else if (transportFailures.count > 0) accepted = { state: 'NOT_ACCEPTED', key: acceptedState.key, why: `${transportFailures.count} request(s) failed in transport: a replay would not be this analysis` }
@@ -931,7 +1151,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     }
     record({ at: now().toISOString(), kind: 'ACCEPTED_REVISION', ...accepted })
   }
-  const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}) }
+  const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}), ...(sourceCheck?.quality ? { quality: { state: sourceCheck.quality.state, reasons: sourceCheck.quality.reasons, reviewCompleted: sourceCheck.quality.reviewCompleted, openKey: sourceCheck.quality.openKey, closedVerified: sourceCheck.quality.closedVerified } } : {}), corrections: { runs: correctionRuns.length, committed: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status === 'COMMITTED').length, 0), refused: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status !== 'COMMITTED').length, 0), registry: CORRECTION_REGISTRY_VERSION } }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
   return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), globalDescription: 'DISABLED' }
@@ -961,7 +1181,8 @@ export function scaleContradictionOf(rounds: readonly RoundRecord[], delivered: 
 }
 
 export function sourceCheckOf(good: Local, state: RunState, geometry: readonly GeometryRound[], features: readonly RoofFeatureCorrection[], last: ModelCheckResult | undefined, checkedRevision: string | null, rounds: readonly RoundRecord[] = []): SourceCheckSummary {
-  const delivered = good.run?.reconstruction.candidate.modelHash.slice(0, 12) ?? null
+  // v3.54.16: a revision is the model's own bytes (patches and finishes included), not the solver's candidate hash
+  const delivered = good.run ? modelRevision(good.run.reconstruction.model) : null
   const looked = geometry.filter((g) => g.status !== null)
   const corrections: SourceCheckSummary['corrections'] = []
   for (const g of geometry) {
@@ -974,6 +1195,8 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
       corrections.push({ proposalId: v.proposalId, operation: v.operation, targetId: v.targetId, ...(v.featureId ? { featureId: v.featureId } : {}), state, ...(v.code ? { code: v.code } : {}), ...(review && kept ? { review: review.verdict } : {}), why: state === 'REFUSED_BY_ANALYZER' ? `${outcome?.code ?? ''}: ${outcome?.why ?? ''}` : v.why })
     }
   }
+  // v3.54.16: the registry operations of each look, by their executor record
+  for (const g of geometry) for (const r of g.patches ?? []) corrections.push({ proposalId: r.proposalId, operation: r.operation, targetId: r.targetId, ...(r.bound?.ids[0] ? { featureId: r.bound.ids[0] } : {}), state: r.status === 'COMMITTED' ? 'APPLIED' : r.status === 'UNSUPPORTED_OPERATION' ? 'NO_CONSUMER' : r.status === 'HELD' || r.status === 'NEEDS_EVIDENCE' ? 'HELD' : r.status === 'ROLLED_BACK' || r.status === 'GROUP_ROLLED_BACK' || r.status === 'NO_EFFECT' ? 'ROLLED_BACK' : 'REJECTED', ...(r.code ? { code: r.code } : {}), why: r.why })
   const knownDefects: SourceCheckSummary['knownDefects'] = []
   for (const a of state.outline ? [state.outline.x, state.outline.y] : []) if (a.status === 'SHORT' || a.status === 'BEYOND') knownDefects.push({ code: a.status === 'SHORT' ? 'OUTLINE_SHORT_OF_PRINTED_DIMENSION' : 'OUTLINE_BEYOND_PRINTED_DIMENSION', what: a.why })
   for (const a of state.outline ? [state.outline.x, state.outline.y] : []) if (a.status === 'MATCHES' && (a.offM ?? 0) > 0) knownDefects.push({ code: 'OUTLINE_WITHIN_A_WALL_OF_PRINTED_DIMENSION', what: a.why })
@@ -999,8 +1222,8 @@ export function sourceCheckOf(good: Local, state: RunState, geometry: readonly G
     scale: { status: contradiction ? 'CONTRADICTED' : (m?.scale.status ?? 'NOT_ASSESSED'), confidence: state.metric?.confidence ?? null, settledBy: contradiction ? 'CONTRADICTED' : !settled ? 'UNSETTLED' : consultedScale ? 'CONSULTED_DIMENSIONS' : 'OWN_READINGS' },
     outline: worst,
     roof: looked.length === 0 ? 'NOT_CHECKED' : open(['ROOF_FEATURE', 'ROOF_FORM']) ? 'DIFFERENCE_OPEN' : features.length > 0 ? 'CORRECTED_APPROXIMATE' : 'NO_DIFFERENCE_REPORTED',
-    openings: looked.length === 0 ? 'NOT_CHECKED' : open(['OPENING', 'MISSING_ELEMENT', 'ASSIGN_VIEW']) ? 'DIFFERENCE_OPEN' : 'NO_DIFFERENCE_REPORTED',
-    interior: 'NOT_CHECKED',
+    openings: looked.length === 0 ? 'NOT_CHECKED' : open(['OPENING', 'MISSING_ELEMENT', 'ASSIGN_VIEW', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING']) ? 'DIFFERENCE_OPEN' : 'NO_DIFFERENCE_REPORTED',
+    interior: looked.length > 0 && (last?.pictures ?? []).some((p) => p.label.startsWith('STOREY')) && (last?.review?.checked ?? []).some((c) => /interior|room|partition|storey|wnętrz|pomieszcz/i.test(c)) ? 'REVIEWED_FROM_PLANS' : 'NOT_CHECKED',
     quantities: contradiction ? 'NOT_USABLE' : worst === 'SHORT' || worst === 'BEYOND' || worst === 'MATCHES_WITHIN_A_WALL' ? (m?.quantities === 'NOT_USABLE' ? 'NOT_USABLE' : 'LIMITED') : (m?.quantities ?? 'NOT_ASSESSED'),
     sourceCheck: status,
   }

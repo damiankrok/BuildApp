@@ -9,8 +9,13 @@
  */
 // 0.2.0 (v3.54.3): geometry corrections after the build (ROOF_FEATURE with a `feature`, bound by the analyzer), the review
 // of applied corrections (`appliedReview`), and a problem id on every proposal's record.
-export const CONSULTANT_CONTRACT_VERSION = '0.2.0' as const
-export const CONSULTANT_PROMPT_VERSION = '0.3.0' as const
+// 0.3.0 (v3.54.16): the post-build check proposes operations of the correction registry (`correct/registry.ts`) with a
+// typed `patch`, a `defectId` and an optional `group`, and reports every difference in `defects` — supported or not.
+import { DEFECT_SCHEMA, PATCH_SCHEMA } from './correct/registry.js'
+import type { PatchFields, ReviewDefect } from './correct/registry.js'
+
+export const CONSULTANT_CONTRACT_VERSION = '0.3.0' as const
+export const CONSULTANT_PROMPT_VERSION = '0.4.0' as const
 
 export const REVIEW_STATUSES = ['VERIFIED_IN_SCOPE', 'ISSUE_FOUND', 'NEED_EVIDENCE', 'UNKNOWN'] as const
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number]
@@ -83,6 +88,12 @@ export type ProposedCorrection = {
   feature?: ProposedFeature
   /** CLASSIFY_BOUNDARY (v3.54.3): what closes the building on one side of the plan sheet. */
   boundary?: ProposedBoundary
+  /** v3.54.16: an operation of the correction registry — its typed fields (`correct/registry.ts`). */
+  patch?: PatchFields
+  /** v3.54.16: the reported defect this proposal corrects. */
+  defectId?: string
+  /** v3.54.16: proposals that only make sense together share one group and are kept or undone together. */
+  group?: string
   evidence: Array<{ sourceId: string; region?: Region }>
   justification: string
   alternatives: Array<{ literal: string; why: string }>
@@ -99,6 +110,8 @@ export type ConsultantReview = {
   notChecked: string[]
   /** v3.54.3: the consultant's verdict on each correction the analyzer applied since its last look. */
   appliedReview?: AppliedReview[]
+  /** v3.54.16: every difference found, with an id, whether or not an operation can correct it. */
+  defects?: ReviewDefect[]
 }
 
 /** The answer tool's input schema: the whole review in one call. Kept small (no unions beyond enums). */
@@ -154,6 +167,9 @@ export const REVIEW_SCHEMA = {
             additionalProperties: false,
           },
           boundary: { type: 'object', properties: { side: { type: 'string', enum: [...SHEET_SIDES] }, class: { type: 'string', enum: [...BOUNDARY_CLASSES] }, region: REGION_SCHEMA }, required: ['side', 'class', 'region'], additionalProperties: false },
+          patch: PATCH_SCHEMA,
+          defectId: { type: 'string' },
+          group: { type: 'string' },
           evidence: { type: 'array', items: { type: 'object', properties: { sourceId: { type: 'string' }, region: REGION_SCHEMA }, required: ['sourceId'], additionalProperties: false } },
           justification: { type: 'string' },
           alternatives: { type: 'array', items: { type: 'object', properties: { literal: { type: 'string' }, why: { type: 'string' } }, required: ['literal', 'why'], additionalProperties: false } },
@@ -170,6 +186,7 @@ export const REVIEW_SCHEMA = {
       type: 'array',
       items: { type: 'object', properties: { id: { type: 'string' }, verdict: { type: 'string', enum: ['MATCHES', 'ACCEPTABLE_APPROXIMATION', 'WRONG_PLACE', 'WRONG_SIZE', 'WRONG_KIND', 'SHOULD_NOT_EXIST', 'NOT_VISIBLE'] }, note: { type: 'string' } }, required: ['id', 'verdict', 'note'], additionalProperties: false },
     },
+    defects: { type: 'array', items: DEFECT_SCHEMA },
   },
   required: ['status', 'observations', 'requestedEvidence', 'proposedCorrections', 'checked', 'notChecked'],
   additionalProperties: false,

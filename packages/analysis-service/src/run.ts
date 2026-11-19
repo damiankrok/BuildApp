@@ -158,6 +158,13 @@ export type AnalysisOptions = {
    * Applied before `appearance`. Absent: as before.
    */
   wallTonesFrom?: { model: CanonicalBuildingModel; acceptedSides: readonly Facade[] }
+  /**
+   * v3.54.16: the model the correction executor (`consult/correct/execute.ts`) built from this run's own model — the same
+   * model with committed patches, made by the commands the analyzer emits. Delivered instead of the reconstruction's
+   * model only when that model is byte for byte the executor's base (`baseSha256` of its serialization); otherwise the
+   * patches belong to another revision and are not applied (the trace says so and the result keeps the base).
+   */
+  patchedModel?: { baseSha256: string; model: CanonicalBuildingModel }
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -628,6 +635,13 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
     if (options.appearance && options.appearance.observations.length > 0) {
       const applied = applyAppearance(reconstruction.model, options.appearance.observations, (_f, h) => options.appearance?.projections[h])
       ;(reconstruction as { model: typeof reconstruction.model }).model = applied.model
+    }
+    if (options.patchedModel) {
+      const base = sha256(serializeModel(reconstruction.model))
+      if (base === options.patchedModel.baseSha256) {
+        ;(reconstruction as { model: typeof reconstruction.model }).model = options.patchedModel.model
+        trace.record('BUILDING_MODEL', 'CORRECTIONS', 'PASSED', { patched: 1 })
+      } else trace.record('BUILDING_MODEL', 'CORRECTIONS', 'DEGRADED', { patched: 0 }, { reasonCode: 'PATCH_BASE_MISMATCH', detail: `the corrections were made on ${options.patchedModel.baseSha256.slice(0, 12)}; this run built ${base.slice(0, 12)}` })
     }
     const model = reconstruction.model
     const modelText = serializeModel(model)
