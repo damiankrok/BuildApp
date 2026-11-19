@@ -38,3 +38,7 @@ its support over the picture's own null boxes ≥ 2, overlap with the proposal �
 delivered revision. Quality is reported per family as the quality state, its reasons, the defects with their
 settlements, and separately what the miniature shows (form, openings, finishes, interior) — never a single grade, and a
 result from one family is not TRANSFER_EVIDENCE for every source.
+
+**A pool that yields no accepted candidate** gives no trial family for that publisher: it is named as missing, never
+replaced by hand. (Noted before the walk: of the ARCHON listing's 34 pages, 33 are families seen before, so that pool
+has a single candidate; the Studio Atrium list has 97 unseen of 106.)

@@ -971,6 +971,12 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   let pendingAtLimit = 0
   let attemptedForKey = 0
   let committedForKey = 0
+  // v3.54.16: the sketch channel's patches are what the first look reviews as applied — each is settled by that look
+  const sketchKept = (sketchSummary?.semantic?.decision === 'APPLIED' ? sketchSummary.semantic.records : []).filter((r) => r.status === 'COMMITTED' && committed.some((p) => p.proposalId === r.proposalId))
+  if (sketchKept.length > 0) {
+    lastApplied = sketchKept.map((r) => ({ id: r.bound?.ids[0] ?? r.targetId, what: `${r.operation} on the ${(r.bound?.side ?? r.targetId).toLowerCase()} side (${r.bound?.ids[0] ?? r.targetId}), from the sketch of that elevation`, kind: 'PATCH' as const, proposalId: r.proposalId }))
+    prevLook = { look: 0, defects: sketchKept.map((r) => ({ id: `S:${r.proposalId.slice(-24)}`, about: `${r.operation} ${r.targetId} from the sketch of ${r.bound?.side ?? '?'}`, scope: (r.bound?.side ?? 'WHOLE') as 'FRONT', severity: 'MAJOR' as const, certainty: 'LIKELY' as const, operation: r.operation as 'ADD_OPENING' })), proposals: sketchKept.map((r) => ({ proposalId: r.proposalId, defectId: `S:${r.proposalId.slice(-24)}` })), records: sketchKept }
+  }
   if ((wiring.check ?? 'ON') === 'ON' && good.run && good.pkg && good.graph) {
     const pkg = good.pkg
     const graph = good.graph
