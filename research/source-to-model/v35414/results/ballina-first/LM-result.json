@@ -1,0 +1,44 @@
+{
+  "counts": {
+    "AGREES": 0,
+    "CORRECTED": 0,
+    "NEW_SPAN": 1,
+    "NOT_MATCHED": 13,
+    "RETAINED": 0,
+    "UNRESOLVED": 1
+  },
+  "decision": "NO_CHANGE",
+  "final": {
+    "code": "RECONSTRUCTION_FAILED",
+    "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+    "metric": {
+      "cmPerPixelX": 1.945107,
+      "cmPerPixelY": 1.945107,
+      "confidence": "INCONCLUSIVE",
+      "relation": "LEGACY_UNCONFIRMED"
+    },
+    "outcome": "FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTERING_VIEWS"
+  },
+  "house": "ballina",
+  "local": {
+    "code": "RECONSTRUCTION_FAILED",
+    "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+    "metric": {
+      "cmPerPixelX": 1.945107,
+      "cmPerPixelY": 1.945107,
+      "confidence": "INCONCLUSIVE",
+      "relation": "LEGACY_UNCONFIRMED"
+    },
+    "outcome": "FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTERING_VIEWS"
+  },
+  "measured": {},
+  "seconds": 248,
+  "sketches": null,
+  "usd": 0.08873999999999999,
+  "why": "still refused (METRIC_RESOLUTION_INCONCLUSIVE), the scale INCONCLUSIVE as before"
+}
+

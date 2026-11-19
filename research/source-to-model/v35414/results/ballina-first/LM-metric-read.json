@@ -1,0 +1,724 @@
+{
+  "applied": {
+    "readings": [],
+    "spans": [
+      {
+        "proposalId": "ms:dim-f87ef37a-length-1365-21-4",
+        "status": "REFUSED",
+        "valueCm": 1365,
+        "why": "ONE_WITNESS: 1 consulted dimension measured; a scale needs two on different lines that agree"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+      "promptVersion": "metric-verify/1",
+      "raw": {
+        "verdicts": [
+          {
+            "itemId": "L14",
+            "sourceLiteral": "815",
+            "verdict": "AGREES",
+            "why": "Right-side vertical overall dimension printed '815'; its dimension line runs from about y=157 to 576, matching the cyan segment."
+          },
+          {
+            "itemId": "L12",
+            "proposal": {
+              "literal": "815",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "815",
+            "verdict": "DISAGREES",
+            "why": "The same right-side vertical dimension is printed '815', not '518' (the digits were read in reverse order). The line is correct."
+          },
+          {
+            "itemId": "L13",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Box sits on the bathtub symbol in room 1.3; there is no printed dimension there."
+          },
+          {
+            "itemId": "L7",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Same bathtub symbol in room 1.3; not a dimension."
+          },
+          {
+            "itemId": "L8",
+            "sourceLiteral": "1.9",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "'1.9' is the room number of the living room; the cyan segment is the sofa edge, not a dimension line."
+          },
+          {
+            "itemId": "L9",
+            "sourceLiteral": "1.9",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Room number '1.9', not a dimension; the segment is the sofa edge."
+          },
+          {
+            "itemId": "L3",
+            "sourceLiteral": "1.5",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Box is on the room number '1.5' (WC); there is no dimension there."
+          },
+          {
+            "itemId": "L6",
+            "sourceLiteral": "1.5",
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Room number '1.5', not a dimension."
+          },
+          {
+            "itemId": "L11",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Box is on the stove burner symbol in the kitchen; not a dimension."
+          },
+          {
+            "itemId": "L4",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Stove burner symbol; not a dimension."
+          },
+          {
+            "itemId": "L10",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Stove burner symbol at the kitchen counter; not a dimension."
+          },
+          {
+            "itemId": "L5",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Stove burner symbol; not a dimension."
+          },
+          {
+            "itemId": "L1",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Box sits at the bottom of the wardrobe in room 1.4 near the wall; there is no printed dimension."
+          },
+          {
+            "itemId": "L2",
+            "sourceLiteral": null,
+            "verdict": "INSUFFICIENT_EVIDENCE",
+            "why": "Same wardrobe and wall spot; not a dimension."
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChBykjxDjReBLjBRbVagM",
+      "usd": 0.045464,
+      "verdicts": [
+        {
+          "itemId": "L14",
+          "sourceLiteral": "815",
+          "verdict": "AGREES",
+          "why": "Right-side vertical overall dimension printed '815'; its dimension line runs from about y=157 to 576, matching the cyan segment."
+        },
+        {
+          "itemId": "L12",
+          "proposal": {
+            "literal": "815",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "815",
+          "verdict": "DISAGREES",
+          "why": "The same right-side vertical dimension is printed '815', not '518' (the digits were read in reverse order). The line is correct."
+        },
+        {
+          "itemId": "L13",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Box sits on the bathtub symbol in room 1.3; there is no printed dimension there."
+        },
+        {
+          "itemId": "L7",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Same bathtub symbol in room 1.3; not a dimension."
+        },
+        {
+          "itemId": "L8",
+          "sourceLiteral": "1.9",
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "'1.9' is the room number of the living room; the cyan segment is the sofa edge, not a dimension line."
+        },
+        {
+          "itemId": "L9",
+          "sourceLiteral": "1.9",
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Room number '1.9', not a dimension; the segment is the sofa edge."
+        },
+        {
+          "itemId": "L3",
+          "sourceLiteral": "1.5",
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Box is on the room number '1.5' (WC); there is no dimension there."
+        },
+        {
+          "itemId": "L6",
+          "sourceLiteral": "1.5",
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Room number '1.5', not a dimension."
+        },
+        {
+          "itemId": "L11",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Box is on the stove burner symbol in the kitchen; not a dimension."
+        },
+        {
+          "itemId": "L4",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Stove burner symbol; not a dimension."
+        },
+        {
+          "itemId": "L10",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Stove burner symbol at the kitchen counter; not a dimension."
+        },
+        {
+          "itemId": "L5",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Stove burner symbol; not a dimension."
+        },
+        {
+          "itemId": "L1",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Box sits at the bottom of the wardrobe in room 1.4 near the wall; there is no printed dimension."
+        },
+        {
+          "itemId": "L2",
+          "sourceLiteral": null,
+          "verdict": "INSUFFICIENT_EVIDENCE",
+          "why": "Same wardrobe and wall spot; not a dimension."
+        }
+      ]
+    }
+  ],
+  "decision": "NO_CHANGE",
+  "frames": [
+    {
+      "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+      "kind": "PLAN",
+      "storey": "GROUND"
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+      "kind": "SECTION",
+      "storey": "UNKNOWN"
+    }
+  ],
+  "measured": {},
+  "model": "claude-opus-5-5",
+  "promptVersions": {
+    "read": "metric-read/1",
+    "verify": "metric-verify/1"
+  },
+  "reads": [
+    {
+      "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+      "model": "claude-opus-5-5",
+      "observations": [
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              36,
+              77
+            ],
+            "to": [
+              737,
+              77
+            ]
+          },
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "hostHint": "overall width, top",
+          "id": "dim-f87ef37a-length-1365-21-4",
+          "image": {
+            "height": 714,
+            "scale": 1,
+            "sha256": "4c76d01e5e69551c012f360dd4088cc0a1a7972337596952cc3389b8bf287789",
+            "width": 800
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            304,
+            50,
+            366,
+            73
+          ],
+          "literal": "1365",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "WHOLE_HOUSE",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 13.65
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              787,
+              155
+            ],
+            "to": [
+              787,
+              577
+            ]
+          },
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+          "hostHint": "overall depth, right side",
+          "id": "dim-f87ef37a-length-815-49-23",
+          "image": {
+            "height": 714,
+            "scale": 1,
+            "sha256": "4c76d01e5e69551c012f360dd4088cc0a1a7972337596952cc3389b8bf287789",
+            "width": 800
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            774,
+            343,
+            800,
+            396
+          ],
+          "literal": "815",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "WHOLE_HOUSE",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 8.15
+        }
+      ],
+      "promptVersion": "metric-read/1",
+      "raw": {
+        "items": [
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                36,
+                77
+              ],
+              "to": [
+                737,
+                77
+              ]
+            },
+            "hostHint": "overall width, top",
+            "kind": "LENGTH",
+            "labelBox": [
+              304,
+              50,
+              366,
+              73
+            ],
+            "literal": "1365",
+            "reference": "OUTER_FACE",
+            "scope": "WHOLE_HOUSE",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 13.65
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                787,
+                155
+              ],
+              "to": [
+                787,
+                577
+              ]
+            },
+            "hostHint": "overall depth, right side",
+            "kind": "LENGTH",
+            "labelBox": [
+              774,
+              343,
+              800,
+              396
+            ],
+            "literal": "815",
+            "reference": "OUTER_FACE",
+            "scope": "WHOLE_HOUSE",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 8.15
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChByk365bnna3j1WkwBWR",
+      "usd": 0.022364
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+      "model": "claude-opus-5-5",
+      "observations": [
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+          "hostHint": "ground floor",
+          "id": "dim-d248de58-level-000-28-19",
+          "image": {
+            "height": 402,
+            "scale": 1,
+            "sha256": "e3a2b5805c8f042be1e965bc8fce9bd360b4f77763d9de1e64dbac3fd33f791c",
+            "width": 770
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            405,
+            298,
+            480,
+            321
+          ],
+          "literal": "±0,00",
+          "reference": "FINISHED_LEVEL",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "m",
+          "value": 0
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+          "hostHint": "terrain outside",
+          "id": "dim-d248de58-level-030-45-20",
+          "image": {
+            "height": 402,
+            "scale": 1,
+            "sha256": "e3a2b5805c8f042be1e965bc8fce9bd360b4f77763d9de1e64dbac3fd33f791c",
+            "width": 770
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            686,
+            314,
+            762,
+            336
+          ],
+          "literal": "-0,30",
+          "reference": "TERRAIN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "m",
+          "value": -0.3
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+          "hostHint": "ceiling level",
+          "id": "dim-d248de58-level-280-28-14",
+          "image": {
+            "height": 402,
+            "scale": 1,
+            "sha256": "e3a2b5805c8f042be1e965bc8fce9bd360b4f77763d9de1e64dbac3fd33f791c",
+            "width": 770
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            405,
+            213,
+            480,
+            236
+          ],
+          "literal": "+2,80",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "m",
+          "value": 2.8
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+          "hostHint": "ridge top",
+          "id": "dim-d248de58-level-554-23-1",
+          "image": {
+            "height": 402,
+            "scale": 1,
+            "sha256": "e3a2b5805c8f042be1e965bc8fce9bd360b4f77763d9de1e64dbac3fd33f791c",
+            "width": 770
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            336,
+            8,
+            384,
+            30
+          ],
+          "literal": "+5,54",
+          "reference": "FINISHED_LEVEL",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "ROOF",
+          "unit": "m",
+          "value": 5.54
+        }
+      ],
+      "promptVersion": "metric-read/1",
+      "raw": {
+        "items": [
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "ridge top",
+            "kind": "LEVEL",
+            "labelBox": [
+              336,
+              8,
+              384,
+              30
+            ],
+            "literal": "+5,54",
+            "reference": "FINISHED_LEVEL",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "ROOF",
+            "unit": "m",
+            "value": 5.54
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "ceiling level",
+            "kind": "LEVEL",
+            "labelBox": [
+              405,
+              213,
+              480,
+              236
+            ],
+            "literal": "+2,80",
+            "reference": "UNKNOWN",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "m",
+            "value": 2.8
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "ground floor",
+            "kind": "LEVEL",
+            "labelBox": [
+              405,
+              298,
+              480,
+              321
+            ],
+            "literal": "±0,00",
+            "reference": "FINISHED_LEVEL",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "m",
+            "value": 0
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "terrain outside",
+            "kind": "LEVEL",
+            "labelBox": [
+              686,
+              314,
+              762,
+              336
+            ],
+            "literal": "-0,30",
+            "reference": "TERRAIN",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "m",
+            "value": -0.3
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChBykSZhygnEzB3eA7q43",
+      "usd": 0.020912
+    }
+  ],
+  "resolution": {
+    "decisions": [
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L1",
+        "local": "11",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L2",
+        "local": "11",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L3",
+        "local": "113",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L4",
+        "local": "13",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L5",
+        "local": "13",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L6",
+        "local": "137",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L7",
+        "local": "13",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L8",
+        "local": "1.9",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L9",
+        "local": "1.9",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L10",
+        "local": "41",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L11",
+        "local": "41",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "815",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L12",
+        "local": "518",
+        "observationId": "dim-f87ef37a-length-815-49-23",
+        "verdict": "DISAGREES",
+        "why": "the API reads 815 cm, the analyzer 518: no closing chain and no scale settled by other labels on this frame: no witness; the check also disagrees, but the same reader twice is not a second witness"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L13",
+        "local": "43",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "itemId": "L14",
+        "local": "815",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "1365",
+        "decision": "NEW_SPAN",
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "observationId": "dim-f87ef37a-length-1365-21-4",
+        "why": "a printed whole house dimension the analyzer read no label for: handed as a span, the metric layer snaps and judges it"
+      }
+    ],
+    "readings": [],
+    "resolverVersion": "1.0.0",
+    "spans": [
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+        "from": {
+          "x": 36,
+          "y": 77
+        },
+        "literal": "1365",
+        "proposalId": "ms:dim-f87ef37a-length-1365-21-4",
+        "to": {
+          "x": 737,
+          "y": 77
+        },
+        "unit": "cm"
+      }
+    ]
+  },
+  "resolverVersion": "1.0.0",
+  "usd": 0.08874,
+  "why": "still refused (METRIC_RESOLUTION_INCONCLUSIVE), the scale INCONCLUSIVE as before"
+}
+

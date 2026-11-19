@@ -98,9 +98,48 @@
    "inputTokens": 2671,
    "outputTokens": 687,
    "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:34:28.390Z",
+   "phase": "metric-read",
+   "house": "ballina",
+   "variant": "L-M",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.337592,
+   "costUsd": 0.022364,
+   "inputTokens": 2966,
+   "outputTokens": 525,
+   "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:34:32.457Z",
+   "phase": "metric-read",
+   "house": "ballina",
+   "variant": "L-M",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.337564,
+   "costUsd": 0.020912,
+   "inputTokens": 2623,
+   "outputTokens": 521,
+   "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:34:46.665Z",
+   "phase": "metric-read",
+   "house": "ballina",
+   "variant": "L-M",
+   "note": "metric verify frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.336116,
+   "costUsd": 0.045464,
+   "inputTokens": 2531,
+   "outputTokens": 1767,
+   "status": "SETTLED"
   }
  ],
- "totalUsd": 24.191818,
- "stageSpentUsd": 0.337206,
- "requests": 7
+ "totalUsd": 24.280558,
+ "stageSpentUsd": 0.425946,
+ "requests": 10
 }
