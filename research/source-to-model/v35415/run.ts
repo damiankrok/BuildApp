@@ -25,6 +25,7 @@ import { anthropicConsultant } from '../../../packages/analysis-service/src/cons
 import { CONSULT_PRICES } from '../../../packages/analysis-service/src/consult/cost.js'
 import { consultAnalysis } from '../../../packages/analysis-service/src/consult/consult-analysis.js'
 import type { ConsultantModel, ModelTurn } from '../../../packages/analysis-service/src/consult/loop.js'
+import { factTrace } from './fact-trace.js'
 import { ledgerSpend } from './ledger.js'
 import { renderSketchPng, renderSketchSvg } from '../../../packages/analysis-service/src/appearance/elevation-sketch.js'
 
@@ -71,7 +72,7 @@ if (argv.includes('--sketch-live')) {
 if (argv.includes('--live')) {
   const live = anthropicConsultant({ model: modelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium', ...transportOpts })
   if (!live.available()) throw new Error('no API key in this process environment: --live refused')
-  transport = { ...live, send: async (req) => { const t = await live.send(req); turns.push({ request: { systemSha: req.system.slice(0, 40), note: 'live' }, turn: t }); writeFileSync(join(out, 'turns.json'), `${JSON.stringify(turns, null, 1)}\n`); return t } }
+  transport = { ...live, send: async (req) => { const t0m = Date.now(); const t = await live.send(req); turns.push({ request: { systemSha: req.system.slice(0, 40), note: 'live', latencyMs: Date.now() - t0m, at: new Date(t0m).toISOString() }, turn: t }); writeFileSync(join(out, 'turns.json'), `${JSON.stringify(turns, null, 1)}\n`); return t } }
 } else if (opt('replay')) {
   const rec = JSON.parse(readFileSync(opt('replay') as string, 'utf8')) as Recorded[]
   let i = 0
@@ -94,7 +95,7 @@ const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },
   { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(opt('cache') as string), offline: true, recogniser, content, ...(process.env.BUILDPLAN_DEBUG === '1' ? { debug: (m: string) => process.stderr.write(`DBG ${m}\n`) } : {}) },
-  { model: transport, metricModel: transport, price: PRICES[modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: 0, maxGeometryRounds: 0, check: 'OFF', ...(spend ? { spend } : {}), record: (e) => events.push(e) },
+  { model: transport, metricModel: transport, price: PRICES[modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: 0, maxGeometryRounds: 0, check: 'OFF', keepLocalModel: true, ...(spend ? { spend } : {}), record: (e) => events.push(e) },
 )
 writeFileSync(join(out, 'metric-read.json'), `${stableJson(r.metricRead ?? null)}\n`)
 if (r.sketches) {
@@ -110,6 +111,9 @@ if (r.sketches) {
   }
 }
 writeFileSync(join(out, 'events.json'), `${JSON.stringify(events, null, 1)}\n`)
+const trace = factTrace({ metricRead: r.metricRead, sketches: r.sketches, localModel: r.localModel as Record<string, unknown> | undefined, finalModel: r.run?.reconstruction.model as unknown as Record<string, unknown> | undefined })
+writeFileSync(join(out, 'fact-trace.json'), `${stableJson(trace)}\n`)
+if (r.localModel) writeFileSync(join(out, 'local-model.json'), `${JSON.stringify(r.localModel)}\n`)
 if (r.run) {
   writeFileSync(join(out, 'model.json'), serializeModel(r.run.reconstruction.model))
   writeFileSync(join(out, 'scene.json'), r.run.sceneText)

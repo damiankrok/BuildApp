@@ -53,6 +53,8 @@ export type ConsultantWiring = {
   maxRounds?: number
   /** v3.54.3: at most this many rounds that may change the built geometry after the check (two); a last look reviews the last one. */
   maxGeometryRounds?: number
+  /** v3.54.15 (research): also return LOCAL's own model, so a fact trace can compare the parameters before and after. */
+  keepLocalModel?: boolean
   /** R: ask and record only. C: consume. */
   variant: 'R' | 'C'
   record?: (e: ConsultEvent) => void
@@ -252,6 +254,8 @@ export type ConsultedAnalysis = {
   run?: AnalysisRun
   error?: AnalysisError
   local: RunState
+  /** v3.54.15: LOCAL's model, when the wiring asked to keep it (`keepLocalModel`). */
+  localModel?: unknown
   final: RunState
   rounds: RoundRecord[]
   readings: ConsultedReading[]
@@ -930,7 +934,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}) }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */
