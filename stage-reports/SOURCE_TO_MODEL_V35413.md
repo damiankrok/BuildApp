@@ -166,7 +166,12 @@ same siatki i semantyka. Parser scen Androida (JVM, `BundleParserTest`) czyta ka
 Testy: kontur (kompilacja, walidacja, otwory), migracja 1.9.0, konsument/czytnik/maski/arbitraż (12), sceny
 (owner-v35413), Android `testDebugUnitTest` zielone. Pełna macierz na kodzie etapu: 4280 passed, 20 failed — 15 to
 zestaw środowiska bazowego, 5 to fiksury Androida z napisem 1.8.0 (odtworzone narzędziami repo: tylko hashe i wersja;
-te pliki 10/10). Typecheck OK. `results/matrix-final.txt`. Regresja: `results/regression.txt`.
+te pliki 10/10). Typecheck OK. `results/matrix-final.txt`.
+
+Regresja (`results/regression.txt`, odtworzenie solvera bez API, 0 USD): R-DEV 6/6, R-CNEW 6/8, LAr 1/1 —
+każdy model identyczny poza napisem wersji schematu (1.8.0 → 1.9.0); dwa domy R-CNEW (Extradom Tracja 2, Mirabelka 4)
+bez modelu w obu etapach (nagranie STALE_DEPENDENCY, jak w v3.54.12). Zmiana etapu nie przesuwa żadnej liczby poza
+konsumentem wyglądu, który działa tylko na jawne wejście.
 
 ## 11. Otwarte
 
