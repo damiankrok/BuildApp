@@ -36,12 +36,15 @@ export type VisibilityMap = {
   meshes: CompiledMesh[]
 }
 
-/** The parts that are never a surface a finish is seen on (rooms are inside; regions are what we are about to replace). */
-const IGNORED = new Set(['ROOM_FLOOR', 'SURFACE_REGION'])
+/**
+ * The parts that are never a surface a finish is seen on: rooms are inside, regions are what the consumer replaces, and
+ * a balustrade's glass infill is seen through (the wall behind it is what carries the finish).
+ */
+const IGNORED = new Set(['ROOM_FLOOR', 'SURFACE_REGION', 'RAILING_INFILL'])
 
-export function visibilityMap(scene: CompiledScene, facade: Facade, cellM = 0.02): VisibilityMap {
+export function visibilityMap(scene: CompiledScene, facade: Facade, cellM = 0.02, options: { withRegions?: boolean } = {}): VisibilityMap {
   const ax = facadeAxes(facade)
-  const meshes = scene.meshes.filter((m) => !IGNORED.has(m.part))
+  const meshes = scene.meshes.filter((m) => !IGNORED.has(m.part) || (options.withRegions === true && m.part === 'SURFACE_REGION'))
   let a0 = Infinity
   let a1 = -Infinity
   let y0 = Infinity

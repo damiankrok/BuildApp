@@ -81,6 +81,36 @@ export function fillHoles(g: Grid): Grid {
 export function open(g: Grid, r: number): Grid {
   return dilate(erode(g, r), r)
 }
+/** Dilation by a (2r+1)² box, separable (rows then columns): fast on a large drawing. */
+export function dilateBox(g: Grid, r: number): Grid {
+  const tmp = grid(g.w, g.h)
+  for (let j = 0; j < g.h; j++) {
+    let last = -Infinity
+    for (let i = 0; i < g.w; i++) {
+      if (g.data[j * g.w + i]) last = i
+      if (i - last <= r) tmp.data[j * g.w + i] = 1
+    }
+    last = Infinity
+    for (let i = g.w - 1; i >= 0; i--) {
+      if (g.data[j * g.w + i]) last = i
+      if (last - i <= r) tmp.data[j * g.w + i] = 1
+    }
+  }
+  const out = grid(g.w, g.h)
+  for (let i = 0; i < g.w; i++) {
+    let last = -Infinity
+    for (let j = 0; j < g.h; j++) {
+      if (tmp.data[j * g.w + i]) last = j
+      if (j - last <= r) out.data[j * g.w + i] = 1
+    }
+    last = Infinity
+    for (let j = g.h - 1; j >= 0; j--) {
+      if (tmp.data[j * g.w + i]) last = j
+      if (last - j <= r) out.data[j * g.w + i] = 1
+    }
+  }
+  return out
+}
 export function close(g: Grid, r: number): Grid {
   return erode(dilate(g, r), r)
 }

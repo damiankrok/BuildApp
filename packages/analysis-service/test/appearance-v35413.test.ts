@@ -141,7 +141,7 @@ describe('v3.54.13 masks', () => {
 describe('v3.54.13 per-property arbitration', () => {
   const withOpening = (height: number, status: string): CanonicalBuildingModel => {
     const m = house()
-    m.openings = m.openings.map((o) => ({ ...o, height, evidence: { status: 'SOURCE_DERIVED', properties: { height: status, sill: 'SOURCE_DERIVED', width: 'SOURCE_EXACT', offset: 'SOURCE_DERIVED' } } }))
+    m.openings = m.openings.map((o) => ({ ...o, height, evidence: { status: 'SOURCE_DERIVED', properties: { height: status, sill: 'SOURCE_DERIVED', width: 'SOURCE_EXACT', offset: 'SOURCE_DERIVED' } } }) as never)
     return m
   }
   const src = (h: string) => ({ packageId: 'p', assets: { plan: 'p1', front: h } })

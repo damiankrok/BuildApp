@@ -10,7 +10,7 @@
  * line. Each class's connected parts become outlines in the drawing's pixels.
  */
 import type { AppearanceClass, AppearanceRegion } from './contract.js'
-import { components, count, fillHoles, grid, open, simplifyLoop, traceOuter } from './mask.js'
+import { components, count, dilateBox, fillHoles, grid, open, simplifyLoop, traceOuter } from './mask.js'
 import type { Grid } from './mask.js'
 
 export const SKETCH_READER_VERSION = '1.0.0' as const
@@ -97,7 +97,7 @@ function kmeans(px: Array<[number, number, number]>, k: number): Array<[number, 
 
 export type SketchReading = { regions: AppearanceRegion[]; clusters: ClusterNaming[]; width: number; height: number }
 
-export function readSketch(img: RasterRGBA, options: { clusters?: number; minAreaPx?: number; lineWidthPx?: number } = {}): SketchReading {
+export function readSketch(img: RasterRGBA, options: { clusters?: number; minAreaPx?: number; lineWidthPx?: number; frameWidthPx?: number } = {}): SketchReading {
   const { width: W, height: H, data } = img
   const k = options.clusters ?? 8
   const minArea = options.minAreaPx ?? 400
@@ -165,6 +165,17 @@ export function readSketch(img: RasterRGBA, options: { clusters?: number; minAre
   const CLASSES: AppearanceClass[] = ['TIMBER', 'GLASS', 'LIGHT_RENDER', 'DARK_RENDER', 'METAL', 'UNKNOWN']
   const classOf = new Uint8Array(W * H).fill(255)
   for (let i = 0; i < W * H; i++) if (label[i] !== 255) classOf[i] = CLASSES.indexOf(named[label[i]].class)
+  // 2b. an opening's frame belongs to the opening: dark pixels within `frameR` of glass are the glazing's frame bars,
+  // not a dark finish on the wall (the consumer gives the wall round an opening the finish next to it)
+  const frameR = options.frameWidthPx ?? 6
+  {
+    const glassC = CLASSES.indexOf('GLASS')
+    const darkC = CLASSES.indexOf('DARK_RENDER')
+    const glass: Grid = grid(W, H)
+    for (let i = 0; i < W * H; i++) if (classOf[i] === glassC) glass.data[i] = 1
+    const near = dilateBox(glass, frameR)
+    for (let i = 0; i < W * H; i++) if (classOf[i] === darkC && near.data[i]) classOf[i] = glassC
+  }
   // 3. the drawing's lines: what an opening of the class masks removes (thin), given to the nearest surviving class
   const kept = new Uint8Array(W * H).fill(255)
   for (let c = 0; c < CLASSES.length; c++) {

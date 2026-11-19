@@ -1,0 +1,34 @@
+{
+  "schema": "buildapp.v35413-boundary-refs/1",
+  "note": "MANUAL_REFERENCE: material outlines traced by hand on the publisher's ORIGINAL front and rear elevations (the 1280-px variants), in their own pixels, read on a 1.6x enlargement with a 25-px grid (about ±3 px). Written before any C model was scored against it. Openings and glass inside an outline are not scored (the compiler cuts them). A small set of the boundaries that matter, not every centimetre.",
+  "sides": {
+    "FRONT": {
+      "sourceByteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+      "regions": [
+        { "id": "F-timber", "class": "TIMBER", "what": "the timber from the ground to the gable under the frame, stopped on the ground storey by the dark entrance block and on the upper by the frame", "polygon": [[414, 573], [566, 573], [566, 392], [802, 392], [802, 323], [608, 159], [414, 323]] },
+        { "id": "F-dark", "class": "DARK_RENDER", "what": "the dark entrance block, portal band and garage front", "polygon": [[566, 573], [1083, 573], [1083, 392], [566, 392]] },
+        { "id": "F-frame", "class": "LIGHT_RENDER", "what": "the white gable frame: both legs and the band along the rakes", "polygon": [[375, 573], [414, 573], [414, 323], [608, 159], [802, 323], [802, 392], [841, 392], [841, 300], [608, 101], [375, 300]] }
+      ],
+      "boundaries": [
+        { "id": "F-timber|dark", "what": "timber to dark entrance block, ground storey", "between": ["TIMBER", "DARK_RENDER"] },
+        { "id": "F-timber|frame", "what": "timber to the frame's inner edge, both storeys and the rakes", "between": ["TIMBER", "LIGHT_RENDER"] }
+      ],
+      "continuity": [{ "id": "F-timber-through-floor", "class": "TIMBER", "atY": 3.06, "alongPx": [430, 560] }]
+    },
+    "REAR": {
+      "sourceByteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+      "regions": [
+        { "id": "R-dark-gable", "class": "DARK_RENDER", "what": "the dark gable panel under the frame, between the two raked glazings, down to the balcony slab", "polygon": [[544, 392], [932, 392], [932, 324], [737, 159], [544, 324]] },
+        { "id": "R-dark-band", "class": "DARK_RENDER", "what": "the dark band under the balcony", "polygon": [[544, 392], [932, 392], [932, 427], [544, 427]] },
+        { "id": "R-timber", "class": "TIMBER", "what": "the timber of the ground storey round the terrace glazing", "polygon": [[544, 427], [932, 427], [932, 574], [544, 574]] },
+        { "id": "R-garage", "class": "DARK_RENDER", "what": "the dark garage wing (its visible part)", "polygon": [[330, 392], [505, 392], [505, 574], [330, 574]] },
+        { "id": "R-frame", "class": "LIGHT_RENDER", "what": "the white gable frame", "polygon": [[505, 574], [544, 574], [544, 324], [737, 159], [932, 324], [932, 574], [972, 574], [972, 301], [737, 101], [505, 301]] }
+      ],
+      "boundaries": [
+        { "id": "R-band|timber", "what": "dark band to timber under the balcony", "between": ["DARK_RENDER", "TIMBER"] },
+        { "id": "R-gable|frame", "what": "dark gable to the frame's inner edge along the rakes", "between": ["DARK_RENDER", "LIGHT_RENDER"] }
+      ],
+      "continuity": []
+    }
+  }
+}
