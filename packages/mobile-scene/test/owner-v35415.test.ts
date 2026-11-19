@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ASSET_DIR, sealedOwnerModel } from '../scripts/scenes.js'
 
-const BALLINA = '03d4a742399a91a8fb79e77ef04925dfcb0a521f27b1dd402bcf0e3712bf7585'
+const BALLINA = 'bce37b2b92fc53ef22ee946503186a7b90d9c3b6be50b4512b6c1f94ab959b43'
 const MURCJA = '4f84df37a80d16088105f269e0fcc15a4e19ebbd7e4a2d908e3456dd3407b840'
 
 describe('v3.54.15 scenes', () => {
@@ -25,6 +25,8 @@ describe('v3.54.15 scenes', () => {
     expect(b.levels[0].height).toBeCloseTo(5.54, 6)
     expect(b.openings.length).toBe(v35414.openings.length)
     expect(b.surfaceRegions.length).toBeGreaterThan(0)
+    // after the freeze (named): the entrance door stays a door — its sill was read inside the front view's ground error
+    expect(b.openings.find((o) => o.id === 'opening-0-front-0-3')?.kind).toBe('DOOR')
   })
   it('Murcja: two storeys of 2.80 and 4.30 m (LOCAL alone read 12.72 m), not a tower', () => {
     const m = sealedOwnerModel('murcja-v35415', MURCJA, 'owner-v35415')

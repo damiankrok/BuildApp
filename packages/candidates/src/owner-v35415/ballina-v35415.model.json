@@ -91,6 +91,18 @@
       "openAngle": 0,
       "openingId": "main-idoor-0-6",
       "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-front-0-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-front-0-3",
+      "swing": "IN"
     }
   ],
   "evidenceSources": [],
@@ -349,7 +361,7 @@
         "properties": {
           "head": "SOURCE_DERIVED",
           "height": "VISUAL_INFERRED",
-          "kind": "VISUAL_INFERRED",
+          "kind": "ASSUMED",
           "offset": "SOURCE_DERIVED",
           "sill": "VISUAL_INFERRED",
           "width": "SOURCE_DERIVED"
@@ -391,7 +403,7 @@
         "properties": {
           "head": "SOURCE_DERIVED",
           "height": "VISUAL_INFERRED",
-          "kind": "VISUAL_INFERRED",
+          "kind": "SOURCE_DERIVED",
           "offset": "SOURCE_DERIVED",
           "sill": "VISUAL_INFERRED",
           "width": "SOURCE_DERIVED"
@@ -400,7 +412,7 @@
       },
       "height": 2.27968,
       "id": "opening-0-front-0-3",
-      "kind": "WINDOW",
+      "kind": "DOOR",
       "offset": 8.670386,
       "sill": 0.182583,
       "wallId": "ring-main-0-w0",
@@ -412,7 +424,7 @@
         "properties": {
           "head": "SOURCE_DERIVED",
           "height": "VISUAL_INFERRED",
-          "kind": "VISUAL_INFERRED",
+          "kind": "ASSUMED",
           "offset": "SOURCE_DERIVED",
           "sill": "VISUAL_INFERRED",
           "width": "SOURCE_DERIVED"
@@ -2383,16 +2395,6 @@
       "id": "opening-0-front-0-2-unit",
       "materialId": "mat-glass",
       "openingId": "opening-0-front-0-2"
-    },
-    {
-      "divisions": 1,
-      "frameDepth": 0.08,
-      "frameInset": 0.12,
-      "frameWidth": 0.07,
-      "glassThickness": 0.024,
-      "id": "opening-0-front-0-3-unit",
-      "materialId": "mat-glass",
-      "openingId": "opening-0-front-0-3"
     },
     {
       "divisions": 1,

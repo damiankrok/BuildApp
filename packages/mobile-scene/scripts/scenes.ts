@@ -56,8 +56,8 @@ export const SCENES: readonly SceneSpec[] = [
   {
     key: 'ballina-v35415',
     title: 'Ballina — v3.54.15: dach z rzędnych przekroju (oddany)',
-    subtitle: 'ODDANY: kalenica 5,54 i okap 3,37 z rzędnych API przyjętych przez przekrój; wykończenia ze szkiców; okno lewe i strop +2,80 nazwane jako luki',
-    build: () => sealedOwnerModel('ballina-v35415', '03d4a742399a91a8fb79e77ef04925dfcb0a521f27b1dd402bcf0e3712bf7585', 'owner-v35415'),
+    subtitle: 'ODDANY: kalenica 5,54 i okap 3,37 z rzędnych API przyjętych przez przekrój; drzwi wejściowe z rzutu; wykończenia ze szkiców; okno lewe i strop +2,80 nazwane jako luki',
+    build: () => sealedOwnerModel('ballina-v35415', 'bce37b2b92fc53ef22ee946503186a7b90d9c3b6be50b4512b6c1f94ab959b43', 'owner-v35415'),
   },
   // v3.54.15 (Murcja, the fresh public control, first result on the frozen code): LOCAL alone read 12.72 m storeys and a
   // 17.1 m ridge; with the section's level marks admitted: storeys 2.80 / 4.30, ridge 7.10, eaves 3.848; finishes from
