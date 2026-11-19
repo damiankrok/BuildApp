@@ -61,7 +61,11 @@ export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
 /** 1.6.0 (EXTERIOR-COMPLETE, Zefiranty): two tokens one pass read apart are two inks; no third token joins their text regions. */
 /** 1.7.0 (v3.45): of the readings of one span on twin lines the best-read counts, then the heaviest. */
 /** 1.8.0 (v3.53.13): an ink is not neutralised by a vote with no reading of its own that solved the ink's span from the ink itself; on a line joined across a cover, a label a hidden tick would make a part's number is AMBIGUOUS (`hiddenSplitExplains`). */
-export const METRIC_SOLVER_VERSION = '1.8.0' as const
+export const METRIC_SOLVER_VERSION = '1.9.0' as const
+/** v3.54.15 (v-b): which way up a vertical chain reads, by its readings' ratio to the other axis's scale. */
+export const ORIENTATION_RATIO_FIT = 0.05
+export const ORIENTATION_RATIO_FAR = 0.15
+export const ORIENTATION_RATIO_MARGIN = 3
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -907,6 +911,21 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       if (ra !== rb || la !== lb) {
         const o = ra > rb || (ra === rb && la > lb) ? a : b
         choices[c] = { orientation: o, decidedBy: 'OTHER_AXIS_SCALE', why: `at the horizontal labels' ${xScale.cm} cm/px, ${ra !== rb ? `${Math.max(ra, rb)} of its labels as read` : `${Math.max(la, lb)} of its labels within ${METRIC_BOUNDS.latticeSubstitutions} digits`} fit read ${o === a ? 'bottom to top' : 'top to bottom'}, against ${ra !== rb ? Math.min(ra, rb) : Math.min(la, lb)} the other way; the vertical readings therefore witness nothing about isotropy` }
+        continue
+      }
+    }
+    // (v-b) v3.54.15: the same scale, by ratio. A long overall dimension misses the absolute pixel tolerance by the
+    // sheet's slight unevenness, yet its two readings are not close calls: "815" and "518" over one line differ by a
+    // third. Where one way up lies within ORIENTATION_RATIO_FIT of the horizontal scale and the other at least
+    // ORIENTATION_RATIO_MARGIN times as far and beyond ORIENTATION_RATIO_FAR, that way up is taken — through the scale,
+    // as (v) is, so its readings witness nothing about isotropy. No digit order is assumed: each way up is its own read.
+    if (xScale) {
+      const off = (o: TextOrientation): number => Math.min(Infinity, ...obsOn(c, o).filter((x) => x.px > 0).map((x) => Math.abs(x.cm / xScale.cm / x.px - 1)))
+      const [oa, ob] = [off(a), off(b)]
+      const near = oa <= ob ? a : b
+      const [best, other] = oa <= ob ? [oa, ob] : [ob, oa]
+      if (best <= ORIENTATION_RATIO_FIT && other >= ORIENTATION_RATIO_FAR && other >= ORIENTATION_RATIO_MARGIN * Math.max(best, 1e-3)) {
+        choices[c] = { orientation: near, decidedBy: 'OTHER_AXIS_SCALE', why: `at the horizontal labels' ${xScale.cm} cm/px, read ${near === a ? 'bottom to top' : 'top to bottom'} a label lies ${round6(best * 100)} % from that scale, against ${round6(other * 100)} % the other way; the vertical readings therefore witness nothing about isotropy` }
         continue
       }
     }

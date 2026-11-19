@@ -230,7 +230,16 @@ export function registerElevations(frames: ReadonlyArray<{ frame: SourceCoordina
   return { registrations, refused: refused.sort((a, b) => a.frameId.localeCompare(b.frameId)) }
 }
 
-const labelled = (frame: SourceCoordinateFrame): boolean => frame.roles.view === 'FRONT' || frame.roles.view === 'REAR' || frame.roles.view === 'LEFT' || frame.roles.view === 'RIGHT'
+/**
+ * The wall a publisher's label names. v3.54.15: "elewacja lewa / prawa" (SIDE_LEFT / SIDE_RIGHT) is a label as "frontowa"
+ * is — the rest of the solver already treats it as one (it is never mirrored by the roof profile or moved by the side
+ * walls' openings) — so it is believed here too, instead of the width measured on a scale the ridge datum may not yet fit.
+ */
+const declaredSide = (frame: SourceCoordinateFrame): BuildingSide | undefined => {
+  const v = frame.roles.view as string
+  return v === 'FRONT' || v === 'REAR' ? v : v === 'SIDE_LEFT' || v === 'LEFT' ? 'LEFT' : v === 'SIDE_RIGHT' || v === 'RIGHT' ? 'RIGHT' : undefined
+}
+const labelled = (frame: SourceCoordinateFrame): boolean => declaredSide(frame) !== undefined
 
 /**
  * Which wall an elevation shows.
@@ -241,10 +250,8 @@ const labelled = (frame: SourceCoordinateFrame): boolean => frame.roles.view ===
  * the overhang, and a width SHORTER than a wall cannot be that wall at all.
  */
 function chooseSide(frame: SourceCoordinateFrame, widthM: number, massing: MassingFacts, taken: ReadonlySet<BuildingSide>): { side: BuildingSide | undefined; why: string; confidence: number } {
-  const declared = frame.roles.view
-  if (declared === 'FRONT' || declared === 'REAR' || declared === 'LEFT' || declared === 'RIGHT') {
-    if (!taken.has(declared)) return { side: declared, why: `the publisher labels this drawing the ${declared.toLowerCase()} elevation`, confidence: 0.9 }
-  }
+  const declared = declaredSide(frame)
+  if (declared && !taken.has(declared)) return { side: declared, why: `the publisher labels this drawing the ${declared.toLowerCase()} elevation`, confidence: declared === 'LEFT' || declared === 'RIGHT' ? 0.7 : 0.9 }
   const options: Array<{ pair: BuildingSide[]; span: number; label: string }> = [
     { pair: ['FRONT', 'REAR'], span: massing.width, label: 'the footprint width' },
     { pair: ['LEFT', 'RIGHT'], span: massing.depth, label: 'the footprint depth' },

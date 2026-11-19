@@ -250,13 +250,19 @@ describe('EXTERIOR-COMPLETE: a sheet sets its vertical text one way', () => {
     expect(ys.map((d) => d.chosen)).toEqual(['ROTATED_CW', 'ROTATED_CW', 'ROTATED_CW', 'ROTATED_CW'])
     expect(ys.every((d) => d.decidedBy === 'OTHER_AXIS_SCALE')).toBe(true)
   })
-  it('with the sheet split between the two ways, nothing decides for it', () => {
-    // one short chain reads top to bottom at the horizontal scale: 2 against 1 is no way up for the sheet
+  it('with the sheet split between the two ways, the sheet decides nothing for it — its own ratio to the scale does', () => {
+    // one short chain reads top to bottom at the horizontal scale: 2 against 1 is no way up for the sheet.
+    // v3.54.15: until 3.54.14 the long chain stayed UNDECIDED here. Its own two readings are not a close call, though:
+    // "900" lies 0.9 % from the horizontal scale, "600" the other way up 33 % — so it is decided by that ratio (v-b),
+    // through the scale, and not by the sheet's way up.
     const split = [cw[0], cw[1], vLabel('100', 500, 300, 350, 'ROTATED_CCW'), cw[3]]
     const other = [ccw[0], ccw[1], vLabel('700', 500, 300, 350, 'ROTATED_CW'), ccw[3]]
     const { solution } = solve(chains, [across, ...split], [across, ...split, ...other])
     const long = solution.orientationDecisions.find((d) => d.axis === 'Y' && d.chainId === ids(chains)[4])
-    expect(long?.decidedBy).toBe('UNDECIDED')
+    expect(long?.chosen).toBe('ROTATED_CW')
+    expect(long?.decidedBy).toBe('OTHER_AXIS_SCALE')
+    expect(long?.why).toMatch(/% from that scale/)
+    expect(long?.why).not.toMatch(/chains on this sheet/)
   })
 })
 
@@ -340,5 +346,28 @@ describe('post-review (005B): readings that are not counted never erase a counte
     expect(counted?.independentGroups).toBe(2)
     expect(solution.cmPerPixelX).toBeCloseTo(2, 3)
     expect(solution.confidence).not.toBe('INCONCLUSIVE')
+  })
+})
+
+describe('v3.54.15 which way up a long vertical label reads, by its ratio to the other axis', () => {
+  // horizontal 1100 over 550 px: 2.00 cm/px. One long vertical chain, 50..470 px (420 px), on a sheet resized a
+  // fraction unevenly: read bottom to top "815" puts it 3 % from that scale (12.5 px, past the pixel tolerance); read the
+  // other way the same ink is "518", 38 % off. No digit order is assumed — each way up is its own reading.
+  const chains = [hChain(760, [100, 650]), vChain(700, [50, 470])]
+  const across = hLabel('1100', 760, 100, 650)
+  it('the way up that lies near the other axis\'s scale is taken, through that scale', () => {
+    const cw = vLabel('815', 700, 50, 470, 'ROTATED_CW')
+    const ccw = vLabel('518', 700, 50, 470, 'ROTATED_CCW')
+    const { solution } = solve(chains, [across, ccw], [across, cw, ccw])
+    const y = solution.orientationDecisions.find((d) => d.axis === 'Y')
+    expect(y?.chosen).toBe('ROTATED_CW')
+    expect(y?.decidedBy).toBe('OTHER_AXIS_SCALE')
+    expect(y?.why).toMatch(/% from that scale/)
+  })
+  it('counter-trial: two readings both near the scale decide nothing by ratio', () => {
+    const cw = vLabel('815', 700, 50, 470, 'ROTATED_CW')
+    const ccw = vLabel('860', 700, 50, 470, 'ROTATED_CCW')
+    const { solution } = solve(chains, [across, ccw], [across, cw, ccw])
+    expect(solution.orientationDecisions.find((d) => d.axis === 'Y')?.why ?? '').not.toMatch(/% from that scale/)
   })
 })

@@ -37,7 +37,7 @@ import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as const
 export const DIMENSION_OBSERVATION_VERSION = '1.1.0' as const
 export const METRIC_READ_PROMPT_VERSION = 'metric-read/2' as const
-export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/1' as const
+export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/2' as const
 export const METRIC_RESOLVER_VERSION = '1.2.0' as const
 export const VERIFY_MAX_ITEMS = 40
 
@@ -347,21 +347,38 @@ export function valueOfLiteral(literal: string, unit: (typeof UNITS)[number], ki
 
 // ---- the analyzer's table ---------------------------------------------------------------------------------------
 
-export type LocalItem = { itemId: string; frameId: string; dimensionId: string; latticeId?: string; literal: string; valueCm?: number; status: string; axis: 'X' | 'Y'; fromPx: number; toPx: number; atPx?: number; box?: { x0: number; y0: number; x1: number; y1: number }; chainId?: string }
+export type LocalItem = { itemId: string; frameId: string; dimensionId: string; latticeId?: string; literal: string; valueCm?: number; status: string; axis: 'X' | 'Y'; fromPx: number; toPx: number; atPx?: number; box?: { x0: number; y0: number; x1: number; y1: number }; chainId?: string; /** v3.54.15: the chain's way up was not settled; the label's reading the other way up. */ otherWayUp?: string }
 
-/** What the analyzer read on the given frames: every dimension observation, its label's box, the line it measured. */
+/**
+ * What the analyzer read on the given frames: every dimension observation in the way up its chain decided, its label's
+ * box, the line it measured.
+ *
+ * v3.54.15: a reading the analyzer made the OTHER way up from the one its chain decided on evidence is not the analyzer's
+ * claim — "0051" is "1500" read half a turn round on a sheet whose horizontal text was found upright — and is not shown
+ * as one. Where no evidence settled the way up (`UNDECIDED`), the item is shown with the label's reading the other way
+ * up beside it, so the check sees both and settles it from the drawing. The item ids count every observation, so an id
+ * means the same observation whatever is left out.
+ */
 export function localTableOf(metrics: MetricEvidenceSet, frameIds: readonly string[]): LocalItem[] {
   const lat = new Map((metrics.numericLattices ?? []).map((l) => [l.id, l]))
   const chains = new Map((metrics.chains ?? []).map((c) => [c.id, c]))
+  const decided = new Map((metrics.metricSolutions ?? []).flatMap((s) => (s.orientationDecisions ?? []).map((o) => [o.chainId, o] as const)))
+  const all = metrics.dimensionObservations ?? []
   const out: LocalItem[] = []
   let n = 0
-  for (const d of metrics.dimensionObservations ?? []) {
+  for (const d of all) {
     if (!frameIds.includes(d.frameId)) continue
+    n++
+    const way = (d as { orientation?: string }).orientation
+    const decision = d.chainId ? decided.get(d.chainId) : undefined
+    if (decision && way && decision.chosen && decision.decidedBy !== 'UNDECIDED' && way !== decision.chosen) continue
+    const other = decision && way && decision.decidedBy === 'UNDECIDED'
+      ? all.find((x) => x.frameId === d.frameId && x.chainId === d.chainId && (x as { orientation?: string }).orientation !== way && x.fromPx === d.fromPx && x.toPx === d.toPx)?.rawText
+      : undefined
     const latticeId = (d as { ocr?: { latticeId?: string } }).ocr?.latticeId
     const l = latticeId ? lat.get(latticeId) : undefined
     const chain = d.chainId ? chains.get(d.chainId) : undefined
-    n++
-    out.push({ itemId: `L${n}`, frameId: d.frameId, dimensionId: d.id, ...(latticeId ? { latticeId } : {}), literal: d.rawText, ...(typeof d.valueCm === 'number' ? { valueCm: d.valueCm } : {}), status: d.status, axis: d.axis as 'X' | 'Y', fromPx: d.fromPx, toPx: d.toPx, ...(chain ? { atPx: (chain as { baselinePx: number }).baselinePx } : {}), ...(l ? { box: l.box } : {}), ...(d.chainId ? { chainId: d.chainId } : {}) })
+    out.push({ itemId: `L${n}`, frameId: d.frameId, dimensionId: d.id, ...(latticeId ? { latticeId } : {}), literal: d.rawText, ...(typeof d.valueCm === 'number' ? { valueCm: d.valueCm } : {}), status: d.status, axis: d.axis as 'X' | 'Y', fromPx: d.fromPx, toPx: d.toPx, ...(chain ? { atPx: (chain as { baselinePx: number }).baselinePx } : {}), ...(l ? { box: l.box } : {}), ...(d.chainId ? { chainId: d.chainId } : {}), ...(other !== undefined && other !== d.rawText ? { otherWayUp: other } : {}) })
   }
   return out
 }
@@ -396,7 +413,7 @@ export async function verifyLocal(ctx: Ctx, frames: readonly MetricFrame[], tabl
         if (t.atPx !== undefined) for (let s = Math.min(t.fromPx, t.toPx); s <= Math.max(t.fromPx, t.toPx); s++) for (const d of [-1, 0, 1]) (t.axis === 'X' ? put(s, t.atPx + d, [0, 190, 230]) : put(t.atPx + d, s, [0, 190, 230]))
       }
     })
-    const lines = items.map((t) => `${t.itemId}: box at (${Math.round((t.box as NonNullable<LocalItem['box']>).x0 / pic.scale)}, ${Math.round((t.box as NonNullable<LocalItem['box']>).y0 / pic.scale)}) px; the analyzer read "${t.literal}"${t.valueCm !== undefined ? ` = ${t.valueCm} cm` : ''}; status ${t.status}; ${t.atPx !== undefined ? `measured line along ${t.axis === 'X' ? 'x' : 'y'} from ${Math.round(t.fromPx / pic.scale)} to ${Math.round(t.toPx / pic.scale)} px` : 'no measured line'}`)
+    const lines = items.map((t) => `${t.itemId}: box at (${Math.round((t.box as NonNullable<LocalItem['box']>).x0 / pic.scale)}, ${Math.round((t.box as NonNullable<LocalItem['box']>).y0 / pic.scale)}) px; the analyzer read "${t.literal}"${t.valueCm !== undefined ? ` = ${t.valueCm} cm` : ''}${t.otherWayUp !== undefined ? ` (which way up it reads was not settled: the other way up it reads "${t.otherWayUp}")` : ''}; status ${t.status}; ${t.atPx !== undefined ? `measured line along ${t.axis === 'X' ? 'x' : 'y'} from ${Math.round(t.fromPx / pic.scale)} to ${Math.round(t.toPx / pic.scale)} px` : 'no measured line'}`)
     const content = [
       { type: 'text', text: `The analyzer's readings on this ${f.kind === 'PLAN' ? 'floor plan' : 'section'} (picture ${pic.width} × ${pic.height} px):\n${lines.join('\n')}` },
       { type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pic.png).toString('base64') } },

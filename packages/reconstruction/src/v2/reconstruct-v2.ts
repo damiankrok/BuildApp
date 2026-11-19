@@ -1106,6 +1106,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   })()
   /** N7-P2 (A): why an elevation the 03R pass saw was not registered here, by frame. */
   const viewRefusals = new Map<string, string>()
+  /** v3.54.15: the views the ridge datum could not hang (see the corner registrations below). */
+  const ridgeRefusedIds = new Set<string>()
   for (const r of legacy) {
     if (!r.side) {
       viewRefusals.set(r.frameId, `no side could be assigned to it${r.sideWhy ? `: ${r.sideWhy}` : ''}`)
@@ -1176,6 +1178,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (!reg) {
       gap({ what: `a v2 registration for the ${r.side.toLowerCase()} elevation`, reason: 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       viewRefusals.set(r.frameId, 'its silhouette fits neither the walled nor the characteristic span with the ridge at its apex, and no wall band of it lands the ground on the terrain')
+      ridgeRefusedIds.add(r.frameId)
       continue
     }
     elevations.push(reg)
@@ -1216,10 +1219,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // the model does not supply: the wall band's two ends are the walled span the plan measures. Such a view is read for
   // where the openings are along the facade and how wide — never for their heights (its ground row is the drawn terrain
   // line, the plinth unknown) — and for nothing else.
+  // v3.54.15: a datum the house gains must not cost it a view. A view the ridge datum could not hang (its silhouette
+  // fits no span with the ridge at its apex, and no wall band of it lands on the terrain) is registered as it was before
+  // there was a datum: on its wall band's ends, for positions along the facade only, and named as such.
   const cornerRegistrations: ElevationRegistrationV2[] = []
-  if (ridgeY === undefined) {
+  const ridgeRefused = (frameId: string): boolean => ridgeY !== undefined && ridgeRefusedIds.has(frameId)
+  if (ridgeY === undefined || legacy.some((r) => r.side && ridgeRefused(r.frameId))) {
     for (const r of legacy) {
       if (!r.side) continue
+      if (ridgeY !== undefined && !ridgeRefused(r.frameId)) continue
+      if (ridgeY !== undefined && elevations.some((e) => e.side === r.side)) continue
+      const refusedBy = ridgeY === undefined ? undefined : viewRefusals.get(r.frameId)
       const frame = frameById.get(r.frameId)
       const raster = frame ? options.raster(frame) : undefined
       if (!frame || !raster) continue
@@ -1229,16 +1239,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         .sort((a, b) => b.x1 - b.x0 - (a.x1 - a.x0) || a.x0 - b.x0)[0]
       options.debug?.(`corner-registration ${r.side} ${r.frameId} extent ${r.extent.x0},${r.extent.y0}..${r.extent.x1},${r.extent.y1} bands ${allBands.map((b) => `${b.x0}..${b.x1}@${b.share.toFixed(2)}`).join(' ')} -> ${band ? `${band.x0}..${band.x1}` : 'none'}`)
       if (!band) {
-        viewRefusals.set(r.frameId, 'no ridge datum to hang it from, and no band of wall across its silhouette to register its walls\u2019 ends on')
+        viewRefusals.set(r.frameId, refusedBy ? `${refusedBy}; nor a band of wall across its silhouette to register its walls\u2019 ends on` : 'no ridge datum to hang it from, and no band of wall across its silhouette to register its walls\u2019 ends on')
         continue
       }
+      if (refusedBy) viewRefusals.delete(r.frameId)
       const frontRear = r.side === 'FRONT' || r.side === 'REAR'
       const span = frontRear ? { a0: world.walled.x0, a1: world.walled.x1 } : { a0: world.walled.z0, a1: world.walled.z1 }
       const mpp = round6((span.a1 - span.a0) / (band.x1 - band.x0))
       const alongSign: 1 | -1 = r.side === 'FRONT' || r.side === 'RIGHT' ? 1 : -1
       const groundY = terrain ?? 0
-      cornerRegistrations.push({ frameId: r.frameId, assetId: r.assetId, side: r.side, sideConfidence: r.sideConfidence, sideWhy: r.sideWhy, mpp, extent: { ...r.extent, x0: band.x0, x1: band.x1 }, alongAtLeft: round6(alongSign === 1 ? span.a0 : span.a1), alongSign, zeroRow: round6(r.extent.y1 + groundY / mpp), spanM: round6(span.a1 - span.a0), spanWhy: `the ${(span.a1 - span.a0).toFixed(2)} m walled ${frontRear ? 'width' : 'depth'} across the wall band, columns ${band.x0}..${band.x1}`, bottomY: groundY, anisotropyCheck: 0, confidence: round6(Math.min(0.5, r.sideConfidence * 0.6)), why: `no ridge datum: registered on the wall band's two ends (the walled span the plan measures) for positions along the facade only; the ground row is the drawn terrain line, so no height is read` })
-      step({ stage: 'registration', what: `the ${r.side.toLowerCase()} elevation registered on its walls' ends, for positions along the facade only`, method: 'DIRECT', detail: `${mpp} m/px over the ${(span.a1 - span.a0).toFixed(2)} m walled span; no ridge datum, so no height is read on it`, inputs: 1, outputs: 1 })
+      cornerRegistrations.push({ frameId: r.frameId, assetId: r.assetId, side: r.side, sideConfidence: r.sideConfidence, sideWhy: r.sideWhy, mpp, extent: { ...r.extent, x0: band.x0, x1: band.x1 }, alongAtLeft: round6(alongSign === 1 ? span.a0 : span.a1), alongSign, zeroRow: round6(r.extent.y1 + groundY / mpp), spanM: round6(span.a1 - span.a0), spanWhy: `the ${(span.a1 - span.a0).toFixed(2)} m walled ${frontRear ? 'width' : 'depth'} across the wall band, columns ${band.x0}..${band.x1}`, bottomY: groundY, anisotropyCheck: 0, confidence: round6(Math.min(0.5, r.sideConfidence * 0.6)), why: `${refusedBy ? `the ridge datum could not hang it (${refusedBy})` : 'no ridge datum'}: registered on the wall band's two ends (the walled span the plan measures) for positions along the facade only; the ground row is the drawn terrain line, so no height is read` })
+      step({ stage: 'registration', what: `the ${r.side.toLowerCase()} elevation registered on its walls' ends, for positions along the facade only`, method: 'DIRECT', detail: `${mpp} m/px over the ${(span.a1 - span.a0).toFixed(2)} m walled span; ${refusedBy ? 'the ridge datum could not hang it' : 'no ridge datum'}, so no height is read on it`, inputs: 1, outputs: 1 })
     }
   }
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
