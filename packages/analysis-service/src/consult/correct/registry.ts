@@ -42,8 +42,8 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     family: 'VIEW',
     consumer: 'correct/bind registerView (the elevation registration the patch binder uses; axis and mirror checked against the side\'s walled span)',
     measure: "the drawn wall ends at one scale against the side's walled length (axis residual), the ground row inside the picture",
-    params: ['picture', 'side', 'mirrored', 'wallLeftX', 'wallRightX', 'groundY'],
-    prompt: 'ASSIGN_VIEW — a source elevation shows a model side the analyzer did not register: picture, side, mirrored, wallLeftX/wallRightX (the outer corners of that side\'s walls in the picture) and groundY (the ground line). Give it the same `group` as the openings you then place through that picture.',
+    params: ['picture', 'side', 'mirrored', 'wallLeftX', 'wallRightX', 'groundY', 'eavesY'],
+    prompt: 'ASSIGN_VIEW — a source elevation shows a model side the analyzer did not register: picture, side, mirrored, wallLeftX/wallRightX (the outer corners of that side\'s walls in the picture), groundY (the ground line) and eavesY (where the walls meet the roof at the sides). Give it the same `group` as the openings you then place through that picture.',
   },
   SET_PARAMETER: {
     op: 'SET_PARAMETER',
@@ -139,6 +139,7 @@ export const PATCH_SCHEMA = {
     wallLeftX: { type: 'number' },
     wallRightX: { type: 'number' },
     groundY: { type: 'number' },
+    eavesY: { type: 'number' },
     depthPicture: { type: 'integer' },
     depthBox: REGION,
     property: { type: 'string', enum: [...PARAMETER_PROPERTIES] },
@@ -182,6 +183,7 @@ export type PatchFields = {
   wallLeftX?: number
   wallRightX?: number
   groundY?: number
+  eavesY?: number
   depthPicture?: number
   depthBox?: { x0: number; y0: number; x1: number; y1: number }
   property?: ParameterProperty

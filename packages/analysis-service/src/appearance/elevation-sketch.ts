@@ -424,7 +424,9 @@ export type ProportionCheck = {
   residuals: Array<{ anchor: string; sketchM: number; expectedM: number; residualM: number; within: boolean }>
   local: Array<{ anchor: string; residualPx: number; residualM: number }>
   /** v3.54.15: OFF — matched, but its centre stands farther from the model's than the tolerance: it decides the form. */
-  openings: Array<{ sketchId: string; modelId?: string; centreResidualM?: number; widthResidualM?: number; status: 'MATCHED' | 'OFF' | 'NOT_IN_MODEL' }>
+  openings: Array<{ sketchId: string; modelId?: string; centreResidualM?: number; widthResidualM?: number; heightResidualM?: number; status: 'MATCHED' | 'OFF' | 'NOT_IN_MODEL' }>
+  /** v3.54.16: the model's openings on this side no sketch opening was matched to (named; a sketch may miss an opening). */
+  missingInSketch?: string[]
   why: string
 }
 
@@ -474,15 +476,36 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
     const ends = [colOf(e.alongMin), colOf(e.alongMax)].sort((a, b) => a - b)
     for (const [anchor, px, exp] of [['left wall end', left, ends[0]], ['right wall end', right, ends[1]], ...(s.groundRow !== null ? [['ground row', s.groundRow, e.local.zeroRow]] : [])] as Array<[string, number, number]>) local.push({ anchor, residualPx: Math.round((px - exp) * 10) / 10, residualM: Math.round((px - exp) * e.local.mpp * 1000) / 1000 })
   }
-  const openings: ProportionCheck['openings'] = s.openings.map((o) => {
+  // v3.54.16: openings matched ONE TO ONE by their overlap in metres (largest first, each used once); a matched pair is
+  // OFF when its centre (along AND up), its width or its height differ by more than the tolerance — a window 8 m wide
+  // against one of 2 m, or one a storey higher, is not the same opening because the centres along agree
+  const sk = s.openings.map((o) => {
     const xs = o.polygon.map((p) => alongAtPx0 + e.alongSign * mpp * p[0])
-    const lo = Math.min(...xs)
-    const hi = Math.max(...xs)
-    const best = e.openings.map((m) => ({ m, d: Math.abs((m.a0 + m.a1) / 2 - (lo + hi) / 2) })).sort((p, q) => p.d - q.d)[0]
-    if (!best || best.d > Math.max(0.6, (hi - lo) / 2)) return { sketchId: o.id, status: 'NOT_IN_MODEL' as const }
-    const off = best.d > Math.max(tolM, 0.15)
-    return { sketchId: o.id, modelId: best.m.id, centreResidualM: Math.round(best.d * 1000) / 1000, widthResidualM: Math.round((hi - lo - (best.m.a1 - best.m.a0)) * 1000) / 1000, status: off ? ('OFF' as const) : ('MATCHED' as const) }
+    const ys = o.polygon.map((p) => yOf(p[1]))
+    return { id: o.id, a0: Math.min(...xs), a1: Math.max(...xs), b0: Math.min(...ys), b1: Math.max(...ys) }
   })
+  const ov = (p: { a0: number; a1: number; b0: number; b1: number }, q: { a0: number; a1: number; b0: number; b1: number }): number => {
+    const i = Math.max(0, Math.min(p.a1, q.a1) - Math.max(p.a0, q.a0)) * Math.max(0, Math.min(p.b1, q.b1) - Math.max(p.b0, q.b0))
+    const u = (p.a1 - p.a0) * (p.b1 - p.b0) + (q.a1 - q.a0) * (q.b1 - q.b0) - i
+    return u > 0 ? i / u : 0
+  }
+  const pairs = sk.flatMap((a, i) => e.openings.map((m, j) => ({ i, j, v: ov(a, m) }))).filter((x) => x.v > 0.05).sort((x, y) => y.v - x.v)
+  const partner = new Map<number, number>()
+  const usedM = new Set<number>()
+  for (const x of pairs) if (!partner.has(x.i) && !usedM.has(x.j)) { partner.set(x.i, x.j); usedM.add(x.j) }
+  const sizeTol = (size: number): number => Math.max(tolM, 0.1 * size)
+  const openings: ProportionCheck['openings'] = sk.map((a, i) => {
+    const j = partner.get(i)
+    if (j === undefined) return { sketchId: a.id, status: 'NOT_IN_MODEL' as const }
+    const m = e.openings[j]
+    const dA = Math.abs((m.a0 + m.a1) / 2 - (a.a0 + a.a1) / 2)
+    const dB = Math.abs((m.b0 + m.b1) / 2 - (a.b0 + a.b1) / 2)
+    const dW = a.a1 - a.a0 - (m.a1 - m.a0)
+    const dH = a.b1 - a.b0 - (m.b1 - m.b0)
+    const off = Math.hypot(dA, dB) > Math.max(tolM, 0.15) || Math.abs(dW) > sizeTol(m.a1 - m.a0) || Math.abs(dH) > sizeTol(m.b1 - m.b0)
+    return { sketchId: a.id, modelId: m.id, centreResidualM: Math.round(Math.hypot(dA, dB) * 1000) / 1000, widthResidualM: Math.round(dW * 1000) / 1000, heightResidualM: Math.round(dH * 1000) / 1000, status: off ? ('OFF' as const) : ('MATCHED' as const) }
+  })
+  const missingInSketch = e.openings.filter((_, j) => !usedM.has(j)).map((m) => m.id)
   const bad = residuals.filter((r) => !r.within)
   const verified = residuals.length > 0 && bad.length === 0
   const vert: ProportionCheck['properties']['vertical'] = bad.length > 0 ? 'CONTRADICTED' : verified ? 'VERIFIED' : 'UNVERIFIED'
@@ -500,6 +523,7 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
     residuals,
     local,
     openings,
+    ...(missingInSketch.length > 0 ? { missingInSketch } : {}),
     why: verdict === 'REJECTED' ? `at one scale: ${bad.map((b) => `${b.anchor} off by ${b.residualM} m`).join(', ')} (tolerance ${tolM.toFixed(3)} m): not stretched to fit` : `one scale ${mpp.toFixed(5)} m/px from the wall ends; ${residuals.length > 0 ? `${residuals.map((r) => `${r.anchor} ${r.residualM} m`).join(', ')} within ${tolM.toFixed(3)} m` : 'no vertical anchor'}${form === 'ACCEPTED' ? '' : `; form not taken: ${formWhy}`}`,
   }
 }

@@ -166,6 +166,8 @@ export function compareHypotheses(r: Raster, proposed: Box, current: Box | undef
     return { winner: 'UNDECIDED', proposed: p, why: `the source draws something weak in the proposed box (z ${p.z}, between ${SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN} and ${SUPPORT_Z_MIN}): not enough to add an element, not enough to say there is none` }
   }
   const cz = c.z ?? 0
+  // a proposal the picture shows nothing at is refused whatever the model's element scores: it cannot be the source's
+  if (p.z < SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN) return { winner: 'CURRENT', proposed: p, current: c, why: `the source draws nothing distinct in the proposed box (z ${p.z} < ${SUPPORT_Z_MIN - HYPOTHESIS_Z_MARGIN}); the model's element (z ${cz}) is kept` }
   if (p.supported && (p.z - cz >= HYPOTHESIS_Z_MARGIN || !(c.supported ?? false))) return { winner: 'PROPOSED', proposed: p, current: c, why: `the source supports the proposal (z ${p.z}) ${c.supported ? `better than the model's element (z ${cz})` : `and not the model's element (z ${cz})`}` }
   if ((c.supported ?? false) && (cz - p.z >= HYPOTHESIS_Z_MARGIN || !p.supported)) return { winner: 'CURRENT', proposed: p, current: c, why: `the source supports the model's element (z ${cz}) ${p.supported ? 'better than' : 'and not'} the proposal (z ${p.z}): the model stands` }
   return { winner: 'UNDECIDED', proposed: p, current: c, why: `the picture does not decide between the model's element (z ${cz}) and the proposal (z ${p.z}): both stay named, neither is chosen` }

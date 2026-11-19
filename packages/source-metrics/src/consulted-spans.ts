@@ -34,6 +34,13 @@ export type ConsultedSpan = {
 }
 export type SnappedSpan = { proposalId: string; axis: 'X' | 'Y'; valueCm: number; fromPx: number; toPx: number; atPx: number; lengthPx: number; cmPerPx: number }
 /** `axis`, `fromPx`, `toPx`, `atPx` (v3.54.3): where the analyzer measured the dimension on the plan — the two snapped ends and its line — so a consumer compares like with like. */
+/**
+ * v3.54.16: the producers' own words for "taken into the metric revision": a consulted READING is APPLIED, a consulted
+ * SPAN is ADMITTED (`AGREES_ONLY` agrees with what the analyzer already holds and changes nothing). Every auditor reads
+ * acceptance through this one list, never by one producer's spelling.
+ */
+export const CONSULTED_ACCEPTED_STATUSES = ['APPLIED', 'ADMITTED'] as const
+export const isConsultedAccepted = (status: string | undefined): boolean => (CONSULTED_ACCEPTED_STATUSES as readonly string[]).includes(status ?? '')
 export type SpanOutcome = { proposalId: string; status: 'ADMITTED' | 'AGREES_ONLY' | 'REFUSED'; why: string; valueCm?: number; lengthPx?: number; cmPerPx?: number; axis?: 'X' | 'Y'; fromPx?: number; toPx?: number; atPx?: number }
 
 const FT_IN = /^(\d{1,3})\s*['′]\s*-?\s*(?:(\d{1,2}(?:\.\d+)?|\d{1,2}\s+\d\/\d)\s*(?:["″]|''))?$/

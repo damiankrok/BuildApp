@@ -168,6 +168,13 @@ const boxOfSpan = (v: BindView, s: { a0: number; a1: number; y0: number; y1: num
   const xs = [pxOf(v.projection, s.a0), pxOf(v.projection, s.a1)]
   return { x0: Math.min(...xs), x1: Math.max(...xs), y0: pyOf(v.projection, s.y1), y1: pyOf(v.projection, s.y0) }
 }
+/** v3.54.16: the model's EXTERIOR openings on one side, in metres along the side's axis and up (interior doors never). */
+export function sideOpeningSpans(m: CanonicalBuildingModel, side: Side): Array<{ id: string; a0: number; a1: number; b0: number; b1: number }> {
+  return m.openings.flatMap((o) => {
+    const s = openingSpan(m, o)
+    return s && s.side === side ? [{ id: o.id, a0: s.a0, a1: s.a1, b0: s.y0, b1: s.y1 }] : []
+  })
+}
 /** The model's openings drawn on one view, as boxes in its frame pixels. */
 export function openingBoxes(m: CanonicalBuildingModel, v: BindView): Array<{ id: string; box: Box }> {
   return m.openings.flatMap((o) => {
@@ -564,7 +571,7 @@ function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pi
   // the axis: the drawn height of the walls at this scale against the model's — a wrong side has the wrong width
   const tops = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side && !w.topProfile).map((w) => levelOf(m, w.levelId).elevation + w.baseOffset + w.height)
   const view: BindView = { side, frameId: pic.frameId, projection, heights: true, origin: 'ASSIGNED', alongErrorM: Math.max(0.03, 3 * mpp), heightErrorM: 0.3 }
-  const record = { bound: { frameId: pic.frameId, side, ids: [pic.frameId], values: { mpp: r6(mpp), alongAtPx0: projection.alongAtPx0, zeroRow: projection.zeroRow } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash } }
+  const record: Pick<PatchRecord, 'source'> & { bound: NonNullable<PatchRecord['bound']> } = { bound: { frameId: pic.frameId, side, ids: [pic.frameId], values: { mpp: r6(mpp), alongAtPx0: projection.alongAtPx0, zeroRow: projection.zeroRow } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash } }
   if (!(left >= -2 && right <= pic.raster.width + 2 && ground <= pic.raster.height + 2 && ground > 0)) return { status: 'INVALID', code: 'OUT_OF_PICTURE', why: 'the anchors lie outside the picture', record }
   const held = ctx.views.find((v) => v.frameId === pic.frameId)
   // the mirror and the side: the model's own openings on that side, drawn through this registration and through its mirror,
@@ -584,6 +591,17 @@ function bindView(ctx: Ctx, p: CorrectionProposal): { view: BindView; record: Pi
   if (tops.length > 0 && view.heights) {
     const drawnTop = pyOf(projection, Math.max(...tops))
     if (drawnTop < 0) return { status: 'REJECTED_BY_SOURCE', code: 'AXIS_MISMATCH', why: `at the scale the ${side.toLowerCase()} side's ${(range.hi - range.lo).toFixed(2)} m gives this picture, its walls would rise above the picture: the drawing is not that side`, record: { ...record, gate } }
+  }
+  // the axis, measured: at the scale this side's walled length gives the picture, the model's eaves (the side walls'
+  // storey top) must land on the eaves row the proposal names — a drawing of the other axis has the other length
+  if (typeof f.eavesY === 'number') {
+    const sideWalls = exteriorWalls(m).filter((w) => sideOfWall(m, w) === side)
+    const eavesM = Math.max(...sideWalls.map((w) => { const lv = levelOf(m, w.levelId); return lv.elevation + w.baseOffset + (w.topProfile ? lv.height : w.height) }))
+    const want = toFrameY(pic, p, f.eavesY)
+    const got = pyOf(projection, eavesM)
+    const tol = Math.max(3, 0.05 * Math.abs(ground - want))
+    record.bound.values = { ...record.bound.values, eavesRowModel: r6(got), eavesRowDrawn: r6(want) }
+    if (Math.abs(got - want) > tol) return { status: 'REJECTED_BY_SOURCE', code: 'AXIS_MISMATCH', why: `at ${mpp.toFixed(5)} m/px (the ${side.toLowerCase()} side's ${(range.hi - range.lo).toFixed(2)} m across the drawn walls) the model's eaves at ${eavesM.toFixed(2)} m land on row ${got.toFixed(0)}, the drawing's on row ${want.toFixed(0)} (tolerance ${tol.toFixed(0)} px): the picture is not that side at that scale`, record: { ...record, gate } }
   }
   if (held && held.side !== side && held.origin === 'ANALYZER' && gate.winner !== 'PROPOSED') return { status: 'NEEDS_EVIDENCE', code: 'VIEW_CONFLICT', why: `the analyzer registered picture ${pic.n} as the ${held.side.toLowerCase()} side; the source does not show the proposed side better (${gate.why})`, record: { ...record, gate } }
   return { view, record: { ...record, gate }, why: `picture ${pic.n} registered as the ${side.toLowerCase()} side at ${mpp.toFixed(5)} m/px${f.mirrored ? ', mirrored' : ''}; ${gate.why}` }

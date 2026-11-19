@@ -9,6 +9,7 @@
  *   4. FINISH: the accepted sketches' wall zones on the model that stands, each by the sketch's own registration
  *      (usable-geometry fingerprint guarded by the consumer).
  */
+import { sideOfFacade, sideOpeningSpans } from './correct/execute.js'
 import { compileBuilding } from '@buildapp/geometry'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
@@ -23,7 +24,8 @@ import { measureBuilt } from './metric-read.js'
 import type { BuiltMeasure, IndependentRead } from './metric-read.js'
 import type { ConsultSpend, ConsultantModel, Price } from './loop.js'
 
-export const SKETCH_STEP_VERSION = '1.1.0' as const
+// 1.2.0 (v3.54.16): a side's openings are its exterior walls' openings; openings matched one to one (checkProportions)
+export const SKETCH_STEP_VERSION = '1.2.0' as const
 
 export type SketchStepInput = {
   metrics: MetricEvidenceSet
@@ -76,22 +78,50 @@ function sideFacts(model: CanonicalBuildingModel, facade: Facade): { lo: number;
       openings.push({ id: m.openingId, a0: Math.min(...as), a1: Math.max(...as), b0: Math.min(...ys), b1: Math.max(...ys) })
     }
   }
-  return { lo, hi, openings }
+  // v3.54.16: the openings a side shows are the EXTERIOR openings of its walls (an interior door facing the same way is
+  // not on this facade); taken from the model's own walls, not from which way a glass triangle happens to face
+  const side = sideOfFacade(facade)
+  return { lo, hi, openings: side ? sideOpeningSpans(model, side) : openings }
 }
 
 /**
- * The ridge and the eaves among the agreed level marks, by their role — never "the highest mark" (a chimney top, a
- * ceiling, another body's level is not the ridge), never a ceiling for the eaves. Two different values for one role are
- * a dispute between witnesses: that role is left unset, not settled by the nearer or the larger.
+ * The ridge and the eaves among the agreed level marks, by their role AND the body/roof each is printed on — never "the
+ * highest mark" of any role (a chimney top, a ceiling, another body's level is not the ridge), never a ceiling for the
+ * eaves. v3.54.16: two ridges of two named bodies (a main roof and a wing) are not a dispute: each body keeps its own,
+ * and the elevation's apex — its highest roof point — is the highest of them, its lowest roof edge the lowest eaves.
+ * Two different values for one role on the SAME body, or on marks that name no body, are a dispute between witnesses:
+ * that role is left unset, not settled by the nearer or the larger.
  */
-export function ridgeAndEaves(agreed: ReadonlyArray<{ role?: string | null; value: number | null }>): { ridge?: number; eaves?: number } {
-  const byRole = (role: string): number | undefined => {
-    const vs = [...new Set(agreed.filter((o) => o.role === role && o.value !== null).map((o) => o.value as number))]
-    return vs.length === 1 ? vs[0] : undefined
+export function ridgeAndEaves(agreed: ReadonlyArray<{ role?: string | null; value: number | null; hostHint?: string | null; body?: string | null }>): { ridge?: number; eaves?: number; byHost?: Array<{ host: string; role: string; value: number }>; disputes?: string[] } {
+  const hostOf = (o: { hostHint?: string | null; body?: string | null }): string => (o.body ?? o.hostHint ?? '').trim().toLowerCase()
+  const disputes: string[] = []
+  const byHost: Array<{ host: string; role: string; value: number }> = []
+  const pick = (role: string, extreme: 'MAX' | 'MIN'): number | undefined => {
+    const marks = agreed.filter((o) => o.role === role && o.value !== null)
+    const values = [...new Set(marks.map((o) => o.value as number))]
+    if (values.length <= 1) return values[0]
+    // per named body: one value each, or that body's role is in dispute
+    const hosts = new Map<string, Set<number>>()
+    for (const o of marks) hosts.set(hostOf(o), (hosts.get(hostOf(o)) ?? new Set()).add(o.value as number))
+    if (hosts.has('')) {
+      disputes.push(`${role}: ${values.join(' / ')} m on marks that name no body`)
+      return undefined
+    }
+    const settled: number[] = []
+    for (const [h, vs] of hosts) {
+      if (vs.size > 1) {
+        disputes.push(`${role} of ${h}: ${[...vs].join(' / ')} m`)
+        return undefined
+      }
+      const v = [...vs][0]
+      byHost.push({ host: h, role, value: v })
+      settled.push(v)
+    }
+    return extreme === 'MAX' ? Math.max(...settled) : Math.min(...settled)
   }
-  const ridge = byRole('RIDGE')
-  const eaves = byRole('EAVES')
-  return { ...(ridge !== undefined ? { ridge } : {}), ...(eaves !== undefined ? { eaves } : {}) }
+  const ridge = pick('RIDGE', 'MAX')
+  const eaves = pick('EAVES', 'MIN')
+  return { ...(ridge !== undefined ? { ridge } : {}), ...(eaves !== undefined ? { eaves } : {}), ...(byHost.length > 0 ? { byHost } : {}), ...(disputes.length > 0 ? { disputes } : {}) }
 }
 
 /** Steps 1–2: read every registered elevation, draw it, check its proportions; what passes is handed out. */
@@ -155,4 +185,38 @@ export function judgeForm(before: CanonicalBuildingModel, after: CanonicalBuildi
   if (lost.length > 0) return { decision: 'ROLLBACK', why: `the sketches cost ${lost.join(', ')}: the model before stands`, measuredBefore, measuredAfter, changed }
   if (!changed) return { decision: 'ROLLBACK', why: 'the same usable geometry: nothing of the form changed', measuredBefore, measuredAfter, changed }
   return { decision: 'ACCEPT', why: `${sketches} sketch(es) read by the shape reader; outline ${measuredAfter.outlineX} × ${measuredAfter.outlineZ}, storeys, exterior walls and openings kept (openings ${measuredBefore.openings} → ${measuredAfter.openings})`, measuredBefore, measuredAfter, changed }
+}
+
+/**
+ * v3.54.16 §7 — the observations of a house LOCAL built no model of: each labelled elevation (FRONT, REAR, SIDE_LEFT,
+ * SIDE_RIGHT; the largest picture of each) read by the same reader into typed contours, recorded UNCHECKED with the
+ * anchors that are missing for them to place anything (no registration, no plan scale, no section datum). Extraction
+ * does not wait for a model; it never pretends to be a model either.
+ */
+export type UnregisteredSketchInput = {
+  frames: ReadonlyArray<{ frameId: string; view: string; projection: string; width: number; height: number }>
+  rasterOf: SketchStepInput['rasterOf']
+  ctx: SketchStepInput['ctx']
+  missingAnchors: readonly string[]
+}
+const FACADE_OF_LABEL: Record<string, Facade> = { FRONT: 'FRONT', REAR: 'REAR', SIDE_LEFT: 'WEST', SIDE_RIGHT: 'EAST' }
+export async function readUnregisteredSketches(input: UnregisteredSketchInput): Promise<{ sketches: SketchReading['sketches']; missingAnchors: string[]; usd: number; sides: Array<{ facade: Facade; frameId?: string; status: 'READ' | 'FAILED' | 'MISSING_SOURCE'; why: string }> }> {
+  const sketches: SketchReading['sketches'] = []
+  const sides: Array<{ facade: Facade; frameId?: string; status: 'READ' | 'FAILED' | 'MISSING_SOURCE'; why: string }> = []
+  for (const [label, facade] of Object.entries(FACADE_OF_LABEL)) {
+    const best = input.frames.filter((f) => f.projection === 'ORTHOGRAPHIC_ELEVATION' && f.view === label).sort((a, b) => b.width * b.height - a.width * a.height)[0]
+    if (!best) {
+      sides.push({ facade, status: 'MISSING_SOURCE', why: `the source labels no ${label} elevation` })
+      continue
+    }
+    const fr = await input.rasterOf(best.frameId)
+    if (!fr) {
+      sides.push({ facade, frameId: best.frameId, status: 'FAILED', why: "the elevation could not be decoded from the run's bytes" })
+      continue
+    }
+    const r = await readElevationSketch(input.ctx, { frameId: best.frameId, raster: fr.raster, caption: fr.caption })
+    sketches.push({ facade, frameId: best.frameId, ...(r.sketch ? { sketch: r.sketch } : {}), raw: r.raw, usd: r.usd, ...(r.failed ? { failed: r.failed } : {}), ...(r.requestId ? { requestId: r.requestId } : {}) })
+    sides.push({ facade, frameId: best.frameId, status: r.sketch ? 'READ' : 'FAILED', why: r.sketch ? `read UNCHECKED: nothing to check its proportions against (${input.missingAnchors.join(', ')})` : r.failed ?? 'no sketch' })
+  }
+  return { sketches, missingAnchors: [...input.missingAnchors], usd: Math.round(sketches.reduce((a, s) => a + s.usd, 0) * 1e6) / 1e6, sides }
 }

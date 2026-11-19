@@ -34,7 +34,7 @@ import { labelProblemOf } from './problems.js'
 import { compileBuilding } from '@buildapp/geometry'
 import { METRIC_READ_PROMPT_VERSION, METRIC_RESOLVER_VERSION, METRIC_VERIFY_PROMPT_VERSION, localTableOf, measureBuilt, readDimensions, resolveMetric, verifyLocal } from './metric-read.js'
 import type { BuiltMeasure, IndependentRead, LocalCheck, MetricFrame, MetricResolution } from './metric-read.js'
-import { SKETCH_STEP_VERSION, judgeForm, readSketches } from './sketch-step.js'
+import { SKETCH_STEP_VERSION, judgeForm, readSketches, readUnregisteredSketches } from './sketch-step.js'
 import { CHOOSE_VERSION } from './choose.js'
 import { ACCEPTED_CONSULT_SCHEMA, ACCEPTED_CONSULT_VERSION, consultBinding, recordingModel, replayModel } from './accepted-consult.js'
 import type { AcceptedConsultRevision, AcceptedConsultStore, ConsultReuse, RecordedAnswer } from './accepted-consult.js'
@@ -280,6 +280,8 @@ export type ConsultationSummary = {
 }
 
 export type ConsultedAnalysis = {
+  /** v3.54.16 §7: the labelled elevations read when LOCAL built no model, UNCHECKED, with the anchors that are missing. */
+  sketchesWithoutModel?: { sketches: SketchReading['sketches']; missingAnchors: string[]; usd: number; sides: Array<{ facade: string; frameId?: string; status: string; why: string }> }
   contract: string
   prompt: string
   variant: 'R' | 'C'
@@ -495,7 +497,12 @@ async function checkSources(l: Local, options: AnalysisOptions): Promise<CheckSo
   if (base) await add(base, 'PLAN', 'the floor plan the model was built from (its lowest storey); the house FRONT is at the bottom of this sheet')
   const otherPlans = (l.run?.reconstruction.registrations.plans ?? []).filter((p) => p.frameId !== base).slice(0, 2)
   for (const p of otherPlans) await add(p.frameId, 'PLAN', `another floor plan of the same house (storey index ${p.storeyIndex})`)
-  for (const f of l.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_ELEVATION').slice(0, 6)) {
+  // v3.54.16: the elevations the analyzer registered first, then the largest — never the page's thumbnails because they
+  // come first in the package (a 120 px copy shows the reviewer nothing a correction could be placed from)
+  const registered = new Set((l.run?.reconstruction.facadeAlignment.views ?? []).map((v) => v.frameId))
+  const area = (f: { size?: { width: number; height: number } }): number => (f.size?.width ?? 0) * (f.size?.height ?? 0)
+  const elevations = l.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_ELEVATION').sort((a, b) => Number(registered.has(b.id)) - Number(registered.has(a.id)) || area(b) - area(a) || a.id.localeCompare(b.id))
+  for (const f of elevations.slice(0, 6)) {
     const role = f.roles.view && f.roles.view !== 'NOT_APPLICABLE' && f.roles.view !== 'UNKNOWN' ? `; the publisher's caption says ${f.roles.view}` : ''
     await add(f.id, 'ELEVATION', `a publisher's elevation drawing${role} (which model side it shows is for you to establish)`)
   }
@@ -617,6 +624,32 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   }
   // v3.54.14 (L-MS): the sketches, on the model that stands and its metric facts
   let sketchSummary: SketchSummary | undefined
+  // v3.54.16 §7: no model — the labelled elevations are still read into observations, with the missing anchors named
+  let unregisteredSketches: Awaited<ReturnType<typeof readUnregisteredSketches>> | undefined
+  if (wiring.sketches === 'ON' && !good.run && good.pkg && good.graph) {
+    const pkg0 = good.pkg
+    const graph0 = good.graph
+    const missingAnchors = [
+      ...(local.error ? [`LOCAL built no model (${local.error.failure().code}${local.error.failure().reasonCode ? `/${local.error.failure().reasonCode}` : ''})`] : []),
+      'no elevation is registered to a side (no model to register it against)',
+      ...((CONF_RANK[localState.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2 ? [] : ['the plan scale is not settled']),
+      ...(graph0.coordinateFrames.some((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION') ? [] : ['the source has no section (no ridge or level datum)']),
+    ]
+    unregisteredSketches = await readUnregisteredSketches({
+      frames: graph0.coordinateFrames.map((f) => ({ frameId: f.id, view: String(f.roles.view), projection: String(f.roles.projection), width: f.size?.width ?? 0, height: f.size?.height ?? 0 })),
+      rasterOf: async (frameId) => {
+        const f = graph0.coordinateFrames.find((x) => x.id === frameId)
+        const fr = f ? await frameRaster(pkg0, graph0, frameId, options) : undefined
+        if (!f || !fr?.raster) return undefined
+        const asset = pkg0.assets.find((a) => a.id === f.assetId)
+        return { raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash }
+      },
+      ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) },
+      missingAnchors,
+    })
+    usd += unregisteredSketches.usd
+    record({ at: now().toISOString(), kind: 'SKETCHES_WITHOUT_MODEL', sides: unregisteredSketches.sides, missingAnchors })
+  }
   if (wiring.sketches === 'ON' && good.run && good.pkg && good.graph && good.metrics) {
     const run0 = good.run
     const pkg0 = good.pkg
@@ -818,6 +851,21 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   let sourcesAll: CheckSource[] | undefined
   const sourcesOf = async (l: Local): Promise<CheckSource[]> => (sourcesAll ??= await checkSources(l, options))
   const picturesOf = (sources: readonly CheckSource[]): BindPicture[] => sources.flatMap((src, i) => (src.what === 'ELEVATION' && src.sourceByteHash ? [{ n: i + 1, frameId: src.frameId, projection: src.projection, transform: { x0: src.img.transform.x0, y0: src.img.transform.y0, scale: src.img.transform.scale }, raster: src.raster, sourceByteHash: src.sourceByteHash }] : []))
+  // every registered elevation can be bound by its frame (a sketch's own frame), numbered only when the reviewer saw it
+  let extraPictures: BindPicture[] | undefined
+  const allPicturesOf = async (l: Local): Promise<BindPicture[]> => {
+    const shown = picturesOf(await sourcesOf(l))
+    if (!extraPictures) {
+      extraPictures = []
+      for (const v of l.run?.reconstruction.facadeAlignment.views ?? []) {
+        if (shown.some((p) => p.frameId === v.frameId) || !l.pkg || !l.graph) continue
+        const f = l.graph.coordinateFrames.find((x) => x.id === v.frameId)
+        const fr = f ? await frameRaster(l.pkg, l.graph, v.frameId, options) : undefined
+        if (f && fr?.raster) extraPictures.push({ n: 0, frameId: f.id, projection: f.roles.projection, transform: { x0: 0, y0: 0, scale: 1 }, raster: fr.raster, sourceByteHash: f.variantByteHash })
+      }
+    }
+    return [...shown, ...extraPictures]
+  }
   // printed values someone other than a proposer read: the analyzer's level marks and the independent metric read
   const witnessesOf = (l: Local): PrintedWitness[] => [
     ...((l.metrics as { evidence?: Array<{ kind: string; value?: number; frameId?: string }> } | undefined)?.evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && typeof e.value === 'number').map((e) => ({ valueM: e.value as number, unit: 'm' as const, frameId: e.frameId ?? '', by: 'ANALYZER' as const })),
@@ -825,7 +873,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   ]
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
-    const pictures = picturesOf(await sourcesOf(l))
+    const pictures = await allPicturesOf(l)
     const out = executeCorrections({ model: l.run.reconstruction.model, views: viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
@@ -1154,7 +1202,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}), ...(sourceCheck?.quality ? { quality: { state: sourceCheck.quality.state, reasons: sourceCheck.quality.reasons, reviewCompleted: sourceCheck.quality.reviewCompleted, openKey: sourceCheck.quality.openKey, closedVerified: sourceCheck.quality.closedVerified } } : {}), corrections: { runs: correctionRuns.length, committed: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status === 'COMMITTED').length, 0), refused: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status !== 'COMMITTED').length, 0), registry: CORRECTION_REGISTRY_VERSION } }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */
