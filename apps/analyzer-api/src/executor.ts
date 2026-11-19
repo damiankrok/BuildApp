@@ -54,7 +54,8 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
     const consulted = await consultAnalysis(
       { kind: 'URL', url: input.url },
       { adapters: wiring.adapters, deps: wiring.deps, policy: wiring.policy, cache: fileByteCache(join(input.workDir, 'bytes')), jobId: input.jobId, signal: control.signal, progress: control.onProgress, telemetry: control.onTelemetry },
-      wiring.consultant,
+      // v3.54.14: a re-analysis asked for reads afresh beside the accepted consulted revision
+      input.reanalyse === true && wiring.consultant.accepted ? { ...wiring.consultant, accepted: { ...wiring.consultant.accepted, reanalyse: true } } : wiring.consultant,
     )
     if (consulted.run) return analysisFilesOf(consulted.run)
     throw consulted.error ?? new AnalysisError('ANALYSIS_FAILED', 'the consultation ended with neither a model nor a refusal')

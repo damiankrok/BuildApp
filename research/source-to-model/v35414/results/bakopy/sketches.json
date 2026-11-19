@@ -1,0 +1,3562 @@
+{
+  "finish": {
+    "decision": "ACCEPT",
+    "why": "the finish zones were applied in the same candidate"
+  },
+  "form": {
+    "decision": "ACCEPT",
+    "measuredAfter": {
+      "eaves": 3.238,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    },
+    "measuredBefore": {
+      "eaves": 3.238,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    },
+    "why": "3 sketch(es) read by the shape reader; outline 14.919 × 21.25, storeys, exterior walls and openings kept (openings 29 → 29)"
+  },
+  "reading": {
+    "appearance": {
+      "observations": [
+        {
+          "facade": "WEST",
+          "observationId": "sketch-5ece1f9d-9bb8799bfd15-appearance",
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1",
+            "version": "1.0.0"
+          },
+          "regions": [
+            {
+              "class": "DARK_RENDER",
+              "outline": [
+                [
+                  52,
+                  243
+                ],
+                [
+                  1112,
+                  243
+                ],
+                [
+                  1112,
+                  399
+                ],
+                [
+                  52,
+                  399
+                ]
+              ],
+              "regionId": "wall-dark_render-24-13",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  380,
+                  285
+                ],
+                [
+                  449,
+                  285
+                ],
+                [
+                  449,
+                  399
+                ],
+                [
+                  380,
+                  399
+                ]
+              ],
+              "regionId": "wall-timber-17-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  558,
+                  285
+                ],
+                [
+                  653,
+                  285
+                ],
+                [
+                  653,
+                  399
+                ],
+                [
+                  558,
+                  399
+                ]
+              ],
+              "regionId": "wall-timber-25-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  704,
+                  285
+                ],
+                [
+                  787,
+                  285
+                ],
+                [
+                  787,
+                  399
+                ],
+                [
+                  704,
+                  399
+                ]
+              ],
+              "regionId": "wall-timber-31-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  655,
+                  286
+                ],
+                [
+                  701,
+                  286
+                ],
+                [
+                  701,
+                  397
+                ],
+                [
+                  655,
+                  397
+                ]
+              ],
+              "regionId": "opening-glazed_door-28-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  789,
+                  286
+                ],
+                [
+                  835,
+                  286
+                ],
+                [
+                  835,
+                  397
+                ],
+                [
+                  789,
+                  397
+                ]
+              ],
+              "regionId": "opening-glazed_door-34-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  272,
+                  286
+                ],
+                [
+                  378,
+                  286
+                ],
+                [
+                  378,
+                  352
+                ],
+                [
+                  272,
+                  352
+                ]
+              ],
+              "regionId": "opening-window-14-13",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  451,
+                  286
+                ],
+                [
+                  556,
+                  286
+                ],
+                [
+                  556,
+                  352
+                ],
+                [
+                  451,
+                  352
+                ]
+              ],
+              "regionId": "opening-window-21-13",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            }
+          ],
+          "schema": "buildapp.appearance-observation",
+          "schemaVersion": "1.1.0",
+          "source": {
+            "imageHeight": 415,
+            "imageSha256": "9bb8799bfd155cf104ee096c68048ace80c3c1f28dfaf03751927d96f6708526",
+            "imageWidth": 1280,
+            "sourceByteHash": "5ce58f7a8b617bc5275fe8898bf3caf4038c9175a2769ae78319e0371cfce0d8",
+            "sourceHeight": 415,
+            "sourceWidth": 1280
+          },
+          "toSource": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "toSourceResidualPx": 0,
+          "toSourceWhy": "contours read on the original elevation itself, in its frame pixels (no map)"
+        },
+        {
+          "facade": "REAR",
+          "observationId": "sketch-688912c6-5efba8a34834-appearance",
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1",
+            "version": "1.0.0"
+          },
+          "regions": [
+            {
+              "class": "DARK_RENDER",
+              "outline": [
+                [
+                  259,
+                  238
+                ],
+                [
+                  598,
+                  238
+                ],
+                [
+                  598,
+                  395
+                ],
+                [
+                  259,
+                  395
+                ]
+              ],
+              "regionId": "wall-dark_render-18-13",
+              "uncertaintyPx": 3,
+              "visibility": "PARTLY_OCCLUDED"
+            },
+            {
+              "class": "DARK_RENDER",
+              "outline": [
+                [
+                  600,
+                  235
+                ],
+                [
+                  815,
+                  90
+                ],
+                [
+                  1033,
+                  237
+                ],
+                [
+                  1033,
+                  398
+                ],
+                [
+                  600,
+                  398
+                ]
+              ],
+              "regionId": "wall-dark_render-34-11",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  291,
+                  278
+                ],
+                [
+                  377,
+                  278
+                ],
+                [
+                  377,
+                  392
+                ],
+                [
+                  291,
+                  392
+                ]
+              ],
+              "regionId": "wall-timber-14-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  392,
+                  283
+                ],
+                [
+                  583,
+                  283
+                ],
+                [
+                  583,
+                  390
+                ],
+                [
+                  392,
+                  390
+                ]
+              ],
+              "regionId": "opening-glazed_wall-20-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  803,
+                  283
+                ],
+                [
+                  838,
+                  283
+                ],
+                [
+                  838,
+                  394
+                ],
+                [
+                  803,
+                  394
+                ]
+              ],
+              "regionId": "opening-window-34-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  866,
+                  283
+                ],
+                [
+                  901,
+                  283
+                ],
+                [
+                  901,
+                  394
+                ],
+                [
+                  866,
+                  394
+                ]
+              ],
+              "regionId": "opening-window-37-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            }
+          ],
+          "schema": "buildapp.appearance-observation",
+          "schemaVersion": "1.1.0",
+          "source": {
+            "imageHeight": 410,
+            "imageSha256": "5efba8a34834fbe66b348cb409371ee6651690c5c5c3adfc3bcd05ce7d039c1f",
+            "imageWidth": 1280,
+            "sourceByteHash": "d19de6409f1646deb41f60dc14a562e8327211a96a55a34c90949beac1d780bc",
+            "sourceHeight": 410,
+            "sourceWidth": 1280
+          },
+          "toSource": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "toSourceResidualPx": 0,
+          "toSourceWhy": "contours read on the original elevation itself, in its frame pixels (no map)"
+        },
+        {
+          "facade": "EAST",
+          "observationId": "sketch-1000746d-fd9ac88bfae7-appearance",
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1",
+            "version": "1.0.0"
+          },
+          "regions": [
+            {
+              "class": "DARK_RENDER",
+              "outline": [
+                [
+                  490,
+                  240
+                ],
+                [
+                  705,
+                  90
+                ],
+                [
+                  920,
+                  240
+                ],
+                [
+                  920,
+                  396
+                ],
+                [
+                  490,
+                  396
+                ]
+              ],
+              "regionId": "wall-dark_render-29-11",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "outline": [
+                [
+                  1060,
+                  260
+                ],
+                [
+                  1220,
+                  260
+                ],
+                [
+                  1220,
+                  396
+                ],
+                [
+                  1060,
+                  396
+                ]
+              ],
+              "regionId": "wall-dark_render-48-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  185,
+                  260
+                ],
+                [
+                  282,
+                  260
+                ],
+                [
+                  282,
+                  396
+                ],
+                [
+                  185,
+                  396
+                ]
+              ],
+              "regionId": "wall-timber-10-14",
+              "uncertaintyPx": 3,
+              "visibility": "PARTLY_OCCLUDED"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  296,
+                  260
+                ],
+                [
+                  485,
+                  260
+                ],
+                [
+                  485,
+                  396
+                ],
+                [
+                  296,
+                  396
+                ]
+              ],
+              "regionId": "wall-timber-16-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  518,
+                  244
+                ],
+                [
+                  705,
+                  120
+                ],
+                [
+                  737,
+                  145
+                ],
+                [
+                  737,
+                  396
+                ],
+                [
+                  518,
+                  396
+                ]
+              ],
+              "regionId": "wall-timber-27-11",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "outline": [
+                [
+                  1016,
+                  280
+                ],
+                [
+                  1056,
+                  280
+                ],
+                [
+                  1056,
+                  394
+                ],
+                [
+                  1016,
+                  394
+                ]
+              ],
+              "regionId": "wall-timber-43-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  928,
+                  282
+                ],
+                [
+                  1013,
+                  282
+                ],
+                [
+                  1013,
+                  392
+                ],
+                [
+                  928,
+                  392
+                ]
+              ],
+              "regionId": "opening-glazed_door-40-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  1086,
+                  284
+                ],
+                [
+                  1168,
+                  284
+                ],
+                [
+                  1168,
+                  392
+                ],
+                [
+                  1086,
+                  392
+                ]
+              ],
+              "regionId": "opening-glazed_door-47-14",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "GLASS",
+              "hostHint": "OPENING",
+              "outline": [
+                [
+                  740,
+                  172
+                ],
+                [
+                  872,
+                  250
+                ],
+                [
+                  872,
+                  392
+                ],
+                [
+                  740,
+                  392
+                ]
+              ],
+              "regionId": "opening-glazed_wall-34-13",
+              "uncertaintyPx": 3,
+              "visibility": "VISIBLE"
+            }
+          ],
+          "schema": "buildapp.appearance-observation",
+          "schemaVersion": "1.1.0",
+          "source": {
+            "imageHeight": 411,
+            "imageSha256": "fd9ac88bfae7a1a7f28105ab2dd4511d5a1eebb985c67c7dd94afda590c9c54d",
+            "imageWidth": 1280,
+            "sourceByteHash": "0e96b5bd7b6c7ba9bf2719a71a554631ae585efeefd2b4fdb7a14ca6e0cab7ad",
+            "sourceHeight": 411,
+            "sourceWidth": 1280
+          },
+          "toSource": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "toSourceResidualPx": 0,
+          "toSourceWhy": "contours read on the original elevation itself, in its frame pixels (no map)"
+        }
+      ],
+      "projections": {
+        "0e96b5bd7b6c7ba9bf2719a71a554631ae585efeefd2b4fdb7a14ca6e0cab7ad": {
+          "alongAtPx0": -3.7983091787439616,
+          "alongSign": 1,
+          "mpp": 0.020531400966183576,
+          "zeroRow": 390.8729411764706
+        },
+        "5ce58f7a8b617bc5275fe8898bf3caf4038c9175a2769ae78319e0371cfce0d8": {
+          "alongAtPx0": 22.29245283018868,
+          "alongSign": -1,
+          "mpp": 0.020047169811320754,
+          "zeroRow": 398.2611764705883
+        },
+        "d19de6409f1646deb41f60dc14a562e8327211a96a55a34c90949beac1d780bc": {
+          "alongAtPx0": 19.911607515503878,
+          "alongSign": -1,
+          "mpp": 0.01927551550387597,
+          "zeroRow": 407.8019220672569
+        }
+      }
+    },
+    "printedLevels": [
+      {
+        "hint": "ground floor",
+        "literal": "±0,00",
+        "value": 0
+      },
+      {
+        "hint": "terrain",
+        "literal": "-0,32",
+        "value": -0.32
+      },
+      {
+        "hint": "eaves",
+        "literal": "+3,27",
+        "value": 3.27
+      },
+      {
+        "hint": "ridge top",
+        "literal": "+6,28",
+        "value": 6.28
+      }
+    ],
+    "sketches": [
+      {
+        "check": {
+          "local": [
+            {
+              "anchor": "left wall end",
+              "residualM": 0.293,
+              "residualPx": 15
+            },
+            {
+              "anchor": "right wall end",
+              "residualM": -0.254,
+              "residualPx": -13
+            },
+            {
+              "anchor": "ground row",
+              "residualM": -0.264,
+              "residualPx": -13.5
+            }
+          ],
+          "openings": [
+            {
+              "sketchId": "opening-glazed_door-28-14",
+              "status": "NOT_IN_MODEL"
+            },
+            {
+              "centreResidualM": 0.396,
+              "modelId": "opening-0-front-4-0",
+              "sketchId": "opening-glazed_door-34-14",
+              "status": "MATCHED",
+              "widthResidualM": 0.898
+            },
+            {
+              "centreResidualM": 0.556,
+              "modelId": "opening-0-east-1-1",
+              "sketchId": "opening-window-14-13",
+              "status": "MATCHED",
+              "widthResidualM": 1.237
+            },
+            {
+              "sketchId": "opening-window-21-13",
+              "status": "NOT_IN_MODEL"
+            }
+          ],
+          "projection": {
+            "alongAtPx0": 22.29245283018868,
+            "alongSign": -1,
+            "mpp": 0.020047169811320754,
+            "zeroRow": 398.2611764705883
+          },
+          "residuals": [
+            {
+              "anchor": "eaves line at one scale",
+              "expectedM": 3.27,
+              "residualM": -0.097,
+              "sketchM": 3.173,
+              "within": true
+            },
+            {
+              "anchor": "ground line within the terrain window",
+              "expectedM": -0.015,
+              "residualM": 0,
+              "sketchM": -0.015,
+              "within": true
+            }
+          ],
+          "toleranceM": 0.13,
+          "verdict": "ACCEPTED",
+          "why": "one scale 0.02005 m/px from the wall ends; eaves line at one scale -0.097 m, ground line within the terrain window 0 m within 0.130 m"
+        },
+        "facade": "WEST",
+        "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-3acf297a3d",
+        "raw": {
+          "elements": [
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  716,
+                  60
+                ],
+                [
+                  757,
+                  60
+                ],
+                [
+                  757,
+                  113
+                ],
+                [
+                  716,
+                  113
+                ]
+              ]
+            },
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  512,
+                  71
+                ],
+                [
+                  545,
+                  71
+                ],
+                [
+                  545,
+                  84
+                ],
+                [
+                  512,
+                  84
+                ]
+              ]
+            },
+            {
+              "kind": "STEPS",
+              "polygon": [
+                [
+                  620,
+                  399
+                ],
+                [
+                  885,
+                  399
+                ],
+                [
+                  885,
+                  414
+                ],
+                [
+                  620,
+                  414
+                ]
+              ]
+            }
+          ],
+          "groundRow": 399,
+          "openings": [
+            {
+              "host": "main",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  272,
+                  286
+                ],
+                [
+                  378,
+                  286
+                ],
+                [
+                  378,
+                  352
+                ],
+                [
+                  272,
+                  352
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  451,
+                  286
+                ],
+                [
+                  556,
+                  286
+                ],
+                [
+                  556,
+                  352
+                ],
+                [
+                  451,
+                  352
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  655,
+                  286
+                ],
+                [
+                  701,
+                  286
+                ],
+                [
+                  701,
+                  397
+                ],
+                [
+                  655,
+                  397
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  789,
+                  286
+                ],
+                [
+                  835,
+                  286
+                ],
+                [
+                  835,
+                  397
+                ],
+                [
+                  789,
+                  397
+                ]
+              ]
+            }
+          ],
+          "roofs": [
+            [
+              [
+                44,
+                85
+              ],
+              [
+                1125,
+                85
+              ],
+              [
+                1127,
+                240
+              ],
+              [
+                44,
+                240
+              ]
+            ]
+          ],
+          "silhouette": [
+            [
+              44,
+              85
+            ],
+            [
+              1125,
+              85
+            ],
+            [
+              1125,
+              399
+            ],
+            [
+              50,
+              399
+            ]
+          ],
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "polygon": [
+                [
+                  52,
+                  243
+                ],
+                [
+                  1112,
+                  243
+                ],
+                [
+                  1112,
+                  399
+                ],
+                [
+                  52,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  380,
+                  285
+                ],
+                [
+                  449,
+                  285
+                ],
+                [
+                  449,
+                  399
+                ],
+                [
+                  380,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  558,
+                  285
+                ],
+                [
+                  653,
+                  285
+                ],
+                [
+                  653,
+                  399
+                ],
+                [
+                  558,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  704,
+                  285
+                ],
+                [
+                  787,
+                  285
+                ],
+                [
+                  787,
+                  399
+                ],
+                [
+                  704,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "requestId": "req_011ChBufPzL1BnQUReTtEDcm",
+        "sketch": {
+          "elements": [
+            {
+              "id": "element-chimney-22-3",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  512,
+                  71
+                ],
+                [
+                  545,
+                  71
+                ],
+                [
+                  545,
+                  84
+                ],
+                [
+                  512,
+                  84
+                ]
+              ]
+            },
+            {
+              "id": "element-chimney-31-4",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  716,
+                  60
+                ],
+                [
+                  757,
+                  60
+                ],
+                [
+                  757,
+                  113
+                ],
+                [
+                  716,
+                  113
+                ]
+              ]
+            },
+            {
+              "id": "element-steps-31-17",
+              "kind": "STEPS",
+              "polygon": [
+                [
+                  620,
+                  399
+                ],
+                [
+                  885,
+                  399
+                ],
+                [
+                  885,
+                  414
+                ],
+                [
+                  620,
+                  414
+                ]
+              ]
+            }
+          ],
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-3acf297a3d",
+          "groundRow": 399,
+          "openings": [
+            {
+              "host": "main",
+              "id": "opening-glazed_door-28-14",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  655,
+                  286
+                ],
+                [
+                  701,
+                  286
+                ],
+                [
+                  701,
+                  397
+                ],
+                [
+                  655,
+                  397
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "id": "opening-glazed_door-34-14",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  789,
+                  286
+                ],
+                [
+                  835,
+                  286
+                ],
+                [
+                  835,
+                  397
+                ],
+                [
+                  789,
+                  397
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "id": "opening-window-14-13",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  272,
+                  286
+                ],
+                [
+                  378,
+                  286
+                ],
+                [
+                  378,
+                  352
+                ],
+                [
+                  272,
+                  352
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "id": "opening-window-21-13",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  451,
+                  286
+                ],
+                [
+                  556,
+                  286
+                ],
+                [
+                  556,
+                  352
+                ],
+                [
+                  451,
+                  352
+                ]
+              ]
+            }
+          ],
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1"
+          },
+          "refused": [
+            "roof 0: given as a bare polygon, read as {polygon} (normalized, not refused)"
+          ],
+          "roofs": [
+            {
+              "id": "roof-24-7",
+              "polygon": [
+                [
+                  44,
+                  85
+                ],
+                [
+                  1125,
+                  85
+                ],
+                [
+                  1127,
+                  240
+                ],
+                [
+                  44,
+                  240
+                ]
+              ]
+            }
+          ],
+          "schema": "buildapp.elevation-sketch",
+          "schemaVersion": "1.0.0",
+          "silhouette": [
+            [
+              44,
+              85
+            ],
+            [
+              1125,
+              85
+            ],
+            [
+              1125,
+              399
+            ],
+            [
+              50,
+              399
+            ]
+          ],
+          "sketchId": "sketch-5ece1f9d-9bb8799bfd15",
+          "source": {
+            "height": 415,
+            "imageSha256": "9bb8799bfd155cf104ee096c68048ace80c3c1f28dfaf03751927d96f6708526",
+            "scale": 1,
+            "width": 1280
+          },
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "id": "wall-dark_render-24-13",
+              "polygon": [
+                [
+                  52,
+                  243
+                ],
+                [
+                  1112,
+                  243
+                ],
+                [
+                  1112,
+                  399
+                ],
+                [
+                  52,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-17-14",
+              "polygon": [
+                [
+                  380,
+                  285
+                ],
+                [
+                  449,
+                  285
+                ],
+                [
+                  449,
+                  399
+                ],
+                [
+                  380,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-25-14",
+              "polygon": [
+                [
+                  558,
+                  285
+                ],
+                [
+                  653,
+                  285
+                ],
+                [
+                  653,
+                  399
+                ],
+                [
+                  558,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-31-14",
+              "polygon": [
+                [
+                  704,
+                  285
+                ],
+                [
+                  787,
+                  285
+                ],
+                [
+                  787,
+                  399
+                ],
+                [
+                  704,
+                  399
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "usd": 0
+      },
+      {
+        "check": {
+          "local": [
+            {
+              "anchor": "left wall end",
+              "residualM": 0,
+              "residualPx": 0
+            },
+            {
+              "anchor": "right wall end",
+              "residualM": 3.012,
+              "residualPx": 130
+            },
+            {
+              "anchor": "ground row",
+              "residualM": 0.902,
+              "residualPx": 38.9
+            }
+          ],
+          "openings": [
+            {
+              "sketchId": "opening-glazed_wall-20-14",
+              "status": "NOT_IN_MODEL"
+            },
+            {
+              "centreResidualM": 0.563,
+              "modelId": "main-idoor-0-0",
+              "sketchId": "opening-window-34-14",
+              "status": "MATCHED",
+              "widthResidualM": 0.635
+            },
+            {
+              "sketchId": "opening-window-37-14",
+              "status": "NOT_IN_MODEL"
+            }
+          ],
+          "projection": {
+            "alongAtPx0": 19.911607515503878,
+            "alongSign": -1,
+            "mpp": 0.01927551550387597,
+            "zeroRow": 407.8019220672569
+          },
+          "residuals": [
+            {
+              "anchor": "eaves line at one scale",
+              "expectedM": 3.27,
+              "residualM": -0.036,
+              "sketchM": 3.234,
+              "within": true
+            },
+            {
+              "anchor": "ground line within the terrain window",
+              "expectedM": 0.1,
+              "residualM": 0.089,
+              "sketchM": 0.189,
+              "within": true
+            }
+          ],
+          "toleranceM": 0.127,
+          "verdict": "ACCEPTED",
+          "why": "one scale 0.01928 m/px from the wall ends; eaves line at one scale -0.036 m, ground line within the terrain window 0.089 m within 0.127 m"
+        },
+        "facade": "REAR",
+        "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-72219efc04",
+        "raw": {
+          "elements": [
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  627,
+                  69
+                ],
+                [
+                  660,
+                  69
+                ],
+                [
+                  660,
+                  125
+                ],
+                [
+                  627,
+                  125
+                ]
+              ]
+            },
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  828,
+                  59
+                ],
+                [
+                  860,
+                  59
+                ],
+                [
+                  860,
+                  105
+                ],
+                [
+                  828,
+                  105
+                ]
+              ]
+            },
+            {
+              "kind": "TERRACE",
+              "polygon": [
+                [
+                  135,
+                  394
+                ],
+                [
+                  595,
+                  394
+                ],
+                [
+                  595,
+                  402
+                ],
+                [
+                  135,
+                  402
+                ]
+              ]
+            }
+          ],
+          "groundRow": 398,
+          "openings": [
+            {
+              "host": "main",
+              "kind": "GLAZED_WALL",
+              "polygon": [
+                [
+                  392,
+                  283
+                ],
+                [
+                  583,
+                  283
+                ],
+                [
+                  583,
+                  390
+                ],
+                [
+                  392,
+                  390
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  803,
+                  283
+                ],
+                [
+                  838,
+                  283
+                ],
+                [
+                  838,
+                  394
+                ],
+                [
+                  803,
+                  394
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  866,
+                  283
+                ],
+                [
+                  901,
+                  283
+                ],
+                [
+                  901,
+                  394
+                ],
+                [
+                  866,
+                  394
+                ]
+              ]
+            }
+          ],
+          "roofs": [
+            [
+              [
+                259,
+                82
+              ],
+              [
+                810,
+                82
+              ],
+              [
+                600,
+                235
+              ],
+              [
+                259,
+                235
+              ]
+            ],
+            [
+              [
+                815,
+                84
+              ],
+              [
+                1035,
+                237
+              ],
+              [
+                1030,
+                240
+              ],
+              [
+                812,
+                90
+              ]
+            ]
+          ],
+          "silhouette": [
+            [
+              259,
+              82
+            ],
+            [
+              810,
+              82
+            ],
+            [
+              815,
+              84
+            ],
+            [
+              1035,
+              237
+            ],
+            [
+              1033,
+              398
+            ],
+            [
+              259,
+              398
+            ]
+          ],
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "gable",
+              "polygon": [
+                [
+                  600,
+                  235
+                ],
+                [
+                  815,
+                  90
+                ],
+                [
+                  1033,
+                  237
+                ],
+                [
+                  1033,
+                  398
+                ],
+                [
+                  600,
+                  398
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  291,
+                  278
+                ],
+                [
+                  377,
+                  278
+                ],
+                [
+                  377,
+                  392
+                ],
+                [
+                  291,
+                  392
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "polygon": [
+                [
+                  259,
+                  238
+                ],
+                [
+                  598,
+                  238
+                ],
+                [
+                  598,
+                  395
+                ],
+                [
+                  259,
+                  395
+                ]
+              ],
+              "visibility": "PARTLY_OCCLUDED"
+            }
+          ]
+        },
+        "requestId": "req_011ChBufjBzKbbNLhCA2E3RW",
+        "sketch": {
+          "elements": [
+            {
+              "id": "element-chimney-27-4",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  627,
+                  69
+                ],
+                [
+                  660,
+                  69
+                ],
+                [
+                  660,
+                  125
+                ],
+                [
+                  627,
+                  125
+                ]
+              ]
+            },
+            {
+              "id": "element-chimney-35-3",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  828,
+                  59
+                ],
+                [
+                  860,
+                  59
+                ],
+                [
+                  860,
+                  105
+                ],
+                [
+                  828,
+                  105
+                ]
+              ]
+            },
+            {
+              "id": "element-terrace-15-17",
+              "kind": "TERRACE",
+              "polygon": [
+                [
+                  135,
+                  394
+                ],
+                [
+                  595,
+                  394
+                ],
+                [
+                  595,
+                  402
+                ],
+                [
+                  135,
+                  402
+                ]
+              ]
+            }
+          ],
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-72219efc04",
+          "groundRow": 398,
+          "openings": [
+            {
+              "host": "main",
+              "id": "opening-glazed_wall-20-14",
+              "kind": "GLAZED_WALL",
+              "polygon": [
+                [
+                  392,
+                  283
+                ],
+                [
+                  583,
+                  283
+                ],
+                [
+                  583,
+                  390
+                ],
+                [
+                  392,
+                  390
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "id": "opening-window-34-14",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  803,
+                  283
+                ],
+                [
+                  838,
+                  283
+                ],
+                [
+                  838,
+                  394
+                ],
+                [
+                  803,
+                  394
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "id": "opening-window-37-14",
+              "kind": "WINDOW",
+              "polygon": [
+                [
+                  866,
+                  283
+                ],
+                [
+                  901,
+                  283
+                ],
+                [
+                  901,
+                  394
+                ],
+                [
+                  866,
+                  394
+                ]
+              ]
+            }
+          ],
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1"
+          },
+          "refused": [
+            "roof 0: given as a bare polygon, read as {polygon} (normalized, not refused)",
+            "roof 1: given as a bare polygon, read as {polygon} (normalized, not refused)"
+          ],
+          "roofs": [
+            {
+              "id": "roof-20-7",
+              "polygon": [
+                [
+                  259,
+                  82
+                ],
+                [
+                  810,
+                  82
+                ],
+                [
+                  600,
+                  235
+                ],
+                [
+                  259,
+                  235
+                ]
+              ]
+            },
+            {
+              "id": "roof-38-7",
+              "polygon": [
+                [
+                  815,
+                  84
+                ],
+                [
+                  1035,
+                  237
+                ],
+                [
+                  1030,
+                  240
+                ],
+                [
+                  812,
+                  90
+                ]
+              ]
+            }
+          ],
+          "schema": "buildapp.elevation-sketch",
+          "schemaVersion": "1.0.0",
+          "silhouette": [
+            [
+              259,
+              82
+            ],
+            [
+              810,
+              82
+            ],
+            [
+              815,
+              84
+            ],
+            [
+              1035,
+              237
+            ],
+            [
+              1033,
+              398
+            ],
+            [
+              259,
+              398
+            ]
+          ],
+          "sketchId": "sketch-688912c6-5efba8a34834",
+          "source": {
+            "height": 410,
+            "imageSha256": "5efba8a34834fbe66b348cb409371ee6651690c5c5c3adfc3bcd05ce7d039c1f",
+            "scale": 1,
+            "width": 1280
+          },
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "id": "wall-dark_render-18-13",
+              "polygon": [
+                [
+                  259,
+                  238
+                ],
+                [
+                  598,
+                  238
+                ],
+                [
+                  598,
+                  395
+                ],
+                [
+                  259,
+                  395
+                ]
+              ],
+              "visibility": "PARTLY_OCCLUDED"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "gable",
+              "id": "wall-dark_render-34-11",
+              "polygon": [
+                [
+                  600,
+                  235
+                ],
+                [
+                  815,
+                  90
+                ],
+                [
+                  1033,
+                  237
+                ],
+                [
+                  1033,
+                  398
+                ],
+                [
+                  600,
+                  398
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-14-14",
+              "polygon": [
+                [
+                  291,
+                  278
+                ],
+                [
+                  377,
+                  278
+                ],
+                [
+                  377,
+                  392
+                ],
+                [
+                  291,
+                  392
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "usd": 0
+      },
+      {
+        "check": {
+          "local": [
+            {
+              "anchor": "left wall end",
+              "residualM": 0.528,
+              "residualPx": 27
+            },
+            {
+              "anchor": "right wall end",
+              "residualM": -0.489,
+              "residualPx": -25
+            },
+            {
+              "anchor": "ground row",
+              "residualM": -0.298,
+              "residualPx": -15.2
+            }
+          ],
+          "openings": [
+            {
+              "centreResidualM": 0.205,
+              "modelId": "opening-0-east-1-1",
+              "sketchId": "opening-glazed_door-40-14",
+              "status": "MATCHED",
+              "widthResidualM": 0.857
+            },
+            {
+              "centreResidualM": 0.272,
+              "modelId": "opening-0-east-1-0",
+              "sketchId": "opening-glazed_door-47-14",
+              "status": "MATCHED",
+              "widthResidualM": 0.018
+            },
+            {
+              "sketchId": "opening-glazed_wall-34-13",
+              "status": "NOT_IN_MODEL"
+            }
+          ],
+          "projection": {
+            "alongAtPx0": -3.7983091787439616,
+            "alongSign": 1,
+            "mpp": 0.020531400966183576,
+            "zeroRow": 390.8729411764706
+          },
+          "residuals": [
+            {
+              "anchor": "eaves line at one scale",
+              "expectedM": 3.27,
+              "residualM": -0.09,
+              "sketchM": 3.18,
+              "within": true
+            },
+            {
+              "anchor": "ground line within the terrain window",
+              "expectedM": -0.105,
+              "residualM": 0,
+              "sketchM": -0.105,
+              "within": true
+            }
+          ],
+          "toleranceM": 0.132,
+          "verdict": "ACCEPTED",
+          "why": "one scale 0.02053 m/px from the wall ends; eaves line at one scale -0.09 m, ground line within the terrain window 0 m within 0.132 m"
+        },
+        "facade": "EAST",
+        "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-ed8402da03",
+        "raw": {
+          "elements": [
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  524,
+                  61
+                ],
+                [
+                  565,
+                  61
+                ],
+                [
+                  565,
+                  84
+                ],
+                [
+                  524,
+                  84
+                ]
+              ]
+            },
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  736,
+                  70
+                ],
+                [
+                  767,
+                  70
+                ],
+                [
+                  767,
+                  120
+                ],
+                [
+                  736,
+                  105
+                ]
+              ]
+            },
+            {
+              "kind": "TERRACE",
+              "polygon": [
+                [
+                  700,
+                  394
+                ],
+                [
+                  1198,
+                  394
+                ],
+                [
+                  1198,
+                  402
+                ],
+                [
+                  700,
+                  402
+                ]
+              ]
+            }
+          ],
+          "groundRow": 396,
+          "openings": [
+            {
+              "host": "gable",
+              "kind": "GLAZED_WALL",
+              "polygon": [
+                [
+                  740,
+                  172
+                ],
+                [
+                  872,
+                  250
+                ],
+                [
+                  872,
+                  392
+                ],
+                [
+                  740,
+                  392
+                ]
+              ]
+            },
+            {
+              "host": "wing",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  928,
+                  282
+                ],
+                [
+                  1013,
+                  282
+                ],
+                [
+                  1013,
+                  392
+                ],
+                [
+                  928,
+                  392
+                ]
+              ]
+            },
+            {
+              "host": "wing",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  1086,
+                  284
+                ],
+                [
+                  1168,
+                  284
+                ],
+                [
+                  1168,
+                  392
+                ],
+                [
+                  1086,
+                  392
+                ]
+              ]
+            }
+          ],
+          "roofs": [
+            [
+              [
+                158,
+                85
+              ],
+              [
+                1230,
+                85
+              ],
+              [
+                1230,
+                236
+              ],
+              [
+                920,
+                236
+              ],
+              [
+                705,
+                88
+              ],
+              [
+                490,
+                236
+              ],
+              [
+                158,
+                236
+              ]
+            ]
+          ],
+          "silhouette": [
+            [
+              158,
+              85
+            ],
+            [
+              700,
+              85
+            ],
+            [
+              705,
+              86
+            ],
+            [
+              920,
+              236
+            ],
+            [
+              920,
+              240
+            ],
+            [
+              1230,
+              240
+            ],
+            [
+              1230,
+              85
+            ],
+            [
+              1230,
+              396
+            ],
+            [
+              158,
+              396
+            ]
+          ],
+          "walls": [
+            {
+              "class": "TIMBER",
+              "host": "gable",
+              "polygon": [
+                [
+                  518,
+                  244
+                ],
+                [
+                  705,
+                  120
+                ],
+                [
+                  737,
+                  145
+                ],
+                [
+                  737,
+                  396
+                ],
+                [
+                  518,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  296,
+                  260
+                ],
+                [
+                  485,
+                  260
+                ],
+                [
+                  485,
+                  396
+                ],
+                [
+                  296,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "polygon": [
+                [
+                  185,
+                  260
+                ],
+                [
+                  282,
+                  260
+                ],
+                [
+                  282,
+                  396
+                ],
+                [
+                  185,
+                  396
+                ]
+              ],
+              "visibility": "PARTLY_OCCLUDED"
+            },
+            {
+              "class": "TIMBER",
+              "host": "wing",
+              "polygon": [
+                [
+                  1016,
+                  280
+                ],
+                [
+                  1056,
+                  280
+                ],
+                [
+                  1056,
+                  394
+                ],
+                [
+                  1016,
+                  394
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "gable frame",
+              "polygon": [
+                [
+                  490,
+                  240
+                ],
+                [
+                  705,
+                  90
+                ],
+                [
+                  920,
+                  240
+                ],
+                [
+                  920,
+                  396
+                ],
+                [
+                  490,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "wing",
+              "polygon": [
+                [
+                  1060,
+                  260
+                ],
+                [
+                  1220,
+                  260
+                ],
+                [
+                  1220,
+                  396
+                ],
+                [
+                  1060,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "requestId": "req_011ChBug4pSahDpBTdKajnN2",
+        "sketch": {
+          "elements": [
+            {
+              "id": "element-chimney-23-3",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  524,
+                  61
+                ],
+                [
+                  565,
+                  61
+                ],
+                [
+                  565,
+                  84
+                ],
+                [
+                  524,
+                  84
+                ]
+              ]
+            },
+            {
+              "id": "element-chimney-31-4",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  736,
+                  70
+                ],
+                [
+                  767,
+                  70
+                ],
+                [
+                  767,
+                  120
+                ],
+                [
+                  736,
+                  105
+                ]
+              ]
+            },
+            {
+              "id": "element-terrace-40-17",
+              "kind": "TERRACE",
+              "polygon": [
+                [
+                  700,
+                  394
+                ],
+                [
+                  1198,
+                  394
+                ],
+                [
+                  1198,
+                  402
+                ],
+                [
+                  700,
+                  402
+                ]
+              ]
+            }
+          ],
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-ed8402da03",
+          "groundRow": 396,
+          "openings": [
+            {
+              "host": "wing",
+              "id": "opening-glazed_door-40-14",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  928,
+                  282
+                ],
+                [
+                  1013,
+                  282
+                ],
+                [
+                  1013,
+                  392
+                ],
+                [
+                  928,
+                  392
+                ]
+              ]
+            },
+            {
+              "host": "wing",
+              "id": "opening-glazed_door-47-14",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  1086,
+                  284
+                ],
+                [
+                  1168,
+                  284
+                ],
+                [
+                  1168,
+                  392
+                ],
+                [
+                  1086,
+                  392
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "id": "opening-glazed_wall-34-13",
+              "kind": "GLAZED_WALL",
+              "polygon": [
+                [
+                  740,
+                  172
+                ],
+                [
+                  872,
+                  250
+                ],
+                [
+                  872,
+                  392
+                ],
+                [
+                  740,
+                  392
+                ]
+              ]
+            }
+          ],
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1"
+          },
+          "refused": [
+            "roof 0: given as a bare polygon, read as {polygon} (normalized, not refused)"
+          ],
+          "roofs": [
+            {
+              "id": "roof-29-7",
+              "polygon": [
+                [
+                  158,
+                  85
+                ],
+                [
+                  1230,
+                  85
+                ],
+                [
+                  1230,
+                  236
+                ],
+                [
+                  920,
+                  236
+                ],
+                [
+                  705,
+                  88
+                ],
+                [
+                  490,
+                  236
+                ],
+                [
+                  158,
+                  236
+                ]
+              ]
+            }
+          ],
+          "schema": "buildapp.elevation-sketch",
+          "schemaVersion": "1.0.0",
+          "silhouette": [
+            [
+              158,
+              85
+            ],
+            [
+              700,
+              85
+            ],
+            [
+              705,
+              86
+            ],
+            [
+              920,
+              236
+            ],
+            [
+              920,
+              240
+            ],
+            [
+              1230,
+              240
+            ],
+            [
+              1230,
+              85
+            ],
+            [
+              1230,
+              396
+            ],
+            [
+              158,
+              396
+            ]
+          ],
+          "sketchId": "sketch-1000746d-fd9ac88bfae7",
+          "source": {
+            "height": 411,
+            "imageSha256": "fd9ac88bfae7a1a7f28105ab2dd4511d5a1eebb985c67c7dd94afda590c9c54d",
+            "scale": 1,
+            "width": 1280
+          },
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "gable frame",
+              "id": "wall-dark_render-29-11",
+              "polygon": [
+                [
+                  490,
+                  240
+                ],
+                [
+                  705,
+                  90
+                ],
+                [
+                  920,
+                  240
+                ],
+                [
+                  920,
+                  396
+                ],
+                [
+                  490,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "wing",
+              "id": "wall-dark_render-48-14",
+              "polygon": [
+                [
+                  1060,
+                  260
+                ],
+                [
+                  1220,
+                  260
+                ],
+                [
+                  1220,
+                  396
+                ],
+                [
+                  1060,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-10-14",
+              "polygon": [
+                [
+                  185,
+                  260
+                ],
+                [
+                  282,
+                  260
+                ],
+                [
+                  282,
+                  396
+                ],
+                [
+                  185,
+                  396
+                ]
+              ],
+              "visibility": "PARTLY_OCCLUDED"
+            },
+            {
+              "class": "TIMBER",
+              "host": "main",
+              "id": "wall-timber-16-14",
+              "polygon": [
+                [
+                  296,
+                  260
+                ],
+                [
+                  485,
+                  260
+                ],
+                [
+                  485,
+                  396
+                ],
+                [
+                  296,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "gable",
+              "id": "wall-timber-27-11",
+              "polygon": [
+                [
+                  518,
+                  244
+                ],
+                [
+                  705,
+                  120
+                ],
+                [
+                  737,
+                  145
+                ],
+                [
+                  737,
+                  396
+                ],
+                [
+                  518,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "wing",
+              "id": "wall-timber-43-14",
+              "polygon": [
+                [
+                  1016,
+                  280
+                ],
+                [
+                  1056,
+                  280
+                ],
+                [
+                  1056,
+                  394
+                ],
+                [
+                  1016,
+                  394
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "usd": 0
+      },
+      {
+        "check": {
+          "local": [
+            {
+              "anchor": "left wall end",
+              "residualM": 0.096,
+              "residualPx": 5
+            },
+            {
+              "anchor": "right wall end",
+              "residualM": -0.058,
+              "residualPx": -3
+            },
+            {
+              "anchor": "ground row",
+              "residualM": -0.243,
+              "residualPx": -12.6
+            }
+          ],
+          "openings": [
+            {
+              "sketchId": "opening-door-25-14",
+              "status": "NOT_IN_MODEL"
+            },
+            {
+              "centreResidualM": 0.231,
+              "modelId": "main-idoor-0-0",
+              "sketchId": "opening-gate-17-14",
+              "status": "MATCHED",
+              "widthResidualM": 4.701
+            },
+            {
+              "sketchId": "opening-glazed_door-35-14",
+              "status": "NOT_IN_MODEL"
+            }
+          ],
+          "residuals": [
+            {
+              "anchor": "eaves line at one scale",
+              "expectedM": 3.27,
+              "residualM": -0.176,
+              "sketchM": 3.094,
+              "within": false
+            },
+            {
+              "anchor": "ground line within the terrain window",
+              "expectedM": 0.1,
+              "residualM": 0.158,
+              "sketchM": 0.258,
+              "within": false
+            }
+          ],
+          "toleranceM": 0.128,
+          "verdict": "REJECTED",
+          "why": "at one scale: eaves line at one scale off by -0.176 m, ground line within the terrain window off by 0.158 m (tolerance 0.128 m): not stretched to fit"
+        },
+        "facade": "FRONT",
+        "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-fcc668ca45",
+        "raw": {
+          "elements": [
+            {
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  399,
+                  62
+                ],
+                [
+                  431,
+                  62
+                ],
+                [
+                  431,
+                  110
+                ],
+                [
+                  399,
+                  110
+                ]
+              ]
+            }
+          ],
+          "groundRow": 396,
+          "openings": [
+            {
+              "host": "gable",
+              "kind": "GATE",
+              "polygon": [
+                [
+                  278,
+                  284
+                ],
+                [
+                  522,
+                  284
+                ],
+                [
+                  522,
+                  395
+                ],
+                [
+                  278,
+                  395
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "kind": "DOOR",
+              "polygon": [
+                [
+                  576,
+                  292
+                ],
+                [
+                  622,
+                  292
+                ],
+                [
+                  622,
+                  394
+                ],
+                [
+                  576,
+                  394
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  768,
+                  284
+                ],
+                [
+                  914,
+                  284
+                ],
+                [
+                  914,
+                  393
+                ],
+                [
+                  768,
+                  393
+                ]
+              ]
+            }
+          ],
+          "roofs": [
+            [
+              [
+                450,
+                86
+              ],
+              [
+                1000,
+                86
+              ],
+              [
+                1000,
+                238
+              ],
+              [
+                660,
+                238
+              ],
+              [
+                660,
+                230
+              ]
+            ],
+            [
+              [
+                226,
+                240
+              ],
+              [
+                440,
+                86
+              ],
+              [
+                450,
+                92
+              ],
+              [
+                660,
+                238
+              ],
+              [
+                630,
+                240
+              ],
+              [
+                445,
+                120
+              ],
+              [
+                258,
+                250
+              ],
+              [
+                258,
+                240
+              ]
+            ]
+          ],
+          "silhouette": [
+            [
+              226,
+              240
+            ],
+            [
+              440,
+              86
+            ],
+            [
+              1000,
+              86
+            ],
+            [
+              1000,
+              396
+            ],
+            [
+              226,
+              396
+            ]
+          ],
+          "walls": [
+            {
+              "class": "TIMBER",
+              "host": "gable",
+              "polygon": [
+                [
+                  258,
+                  250
+                ],
+                [
+                  445,
+                  120
+                ],
+                [
+                  575,
+                  215
+                ],
+                [
+                  575,
+                  396
+                ],
+                [
+                  258,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "gable",
+              "polygon": [
+                [
+                  230,
+                  245
+                ],
+                [
+                  258,
+                  250
+                ],
+                [
+                  258,
+                  396
+                ],
+                [
+                  230,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "polygon": [
+                [
+                  575,
+                  240
+                ],
+                [
+                  660,
+                  240
+                ],
+                [
+                  660,
+                  396
+                ],
+                [
+                  575,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "polygon": [
+                [
+                  660,
+                  242
+                ],
+                [
+                  998,
+                  242
+                ],
+                [
+                  998,
+                  396
+                ],
+                [
+                  660,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "requestId": "req_011ChBugUsYpm5ZY7HQPzch8",
+        "sketch": {
+          "elements": [
+            {
+              "id": "element-chimney-17-4",
+              "kind": "CHIMNEY",
+              "polygon": [
+                [
+                  399,
+                  62
+                ],
+                [
+                  431,
+                  62
+                ],
+                [
+                  431,
+                  110
+                ],
+                [
+                  399,
+                  110
+                ]
+              ]
+            }
+          ],
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-fcc668ca45",
+          "groundRow": 396,
+          "openings": [
+            {
+              "host": "main",
+              "id": "opening-door-25-14",
+              "kind": "DOOR",
+              "polygon": [
+                [
+                  576,
+                  292
+                ],
+                [
+                  622,
+                  292
+                ],
+                [
+                  622,
+                  394
+                ],
+                [
+                  576,
+                  394
+                ]
+              ]
+            },
+            {
+              "host": "gable",
+              "id": "opening-gate-17-14",
+              "kind": "GATE",
+              "polygon": [
+                [
+                  278,
+                  284
+                ],
+                [
+                  522,
+                  284
+                ],
+                [
+                  522,
+                  395
+                ],
+                [
+                  278,
+                  395
+                ]
+              ]
+            },
+            {
+              "host": "main",
+              "id": "opening-glazed_door-35-14",
+              "kind": "GLAZED_DOOR",
+              "polygon": [
+                [
+                  768,
+                  284
+                ],
+                [
+                  914,
+                  284
+                ],
+                [
+                  914,
+                  393
+                ],
+                [
+                  768,
+                  393
+                ]
+              ]
+            }
+          ],
+          "producer": {
+            "kind": "API_CONTOUR_READING",
+            "model": "claude-sonnet-5-5",
+            "promptVersion": "elevation-sketch/1"
+          },
+          "refused": [
+            "roof 0: given as a bare polygon, read as {polygon} (normalized, not refused)",
+            "roof 1: given as a bare polygon, read as {polygon} (normalized, not refused)"
+          ],
+          "roofs": [
+            {
+              "id": "roof-18-8",
+              "polygon": [
+                [
+                  226,
+                  240
+                ],
+                [
+                  440,
+                  86
+                ],
+                [
+                  450,
+                  92
+                ],
+                [
+                  660,
+                  238
+                ],
+                [
+                  630,
+                  240
+                ],
+                [
+                  445,
+                  120
+                ],
+                [
+                  258,
+                  250
+                ],
+                [
+                  258,
+                  240
+                ]
+              ]
+            },
+            {
+              "id": "roof-31-7",
+              "polygon": [
+                [
+                  450,
+                  86
+                ],
+                [
+                  1000,
+                  86
+                ],
+                [
+                  1000,
+                  238
+                ],
+                [
+                  660,
+                  238
+                ],
+                [
+                  660,
+                  230
+                ]
+              ]
+            }
+          ],
+          "schema": "buildapp.elevation-sketch",
+          "schemaVersion": "1.0.0",
+          "silhouette": [
+            [
+              226,
+              240
+            ],
+            [
+              440,
+              86
+            ],
+            [
+              1000,
+              86
+            ],
+            [
+              1000,
+              396
+            ],
+            [
+              226,
+              396
+            ]
+          ],
+          "sketchId": "sketch-b329dfad-4b54deef82b8",
+          "source": {
+            "height": 411,
+            "imageSha256": "4b54deef82b8daeb94354207a147e9b4a4c5388bd6abadf3c8dba6aaee3d8c40",
+            "scale": 1,
+            "width": 1280
+          },
+          "walls": [
+            {
+              "class": "DARK_RENDER",
+              "host": "gable",
+              "id": "wall-dark_render-10-13",
+              "polygon": [
+                [
+                  230,
+                  245
+                ],
+                [
+                  258,
+                  250
+                ],
+                [
+                  258,
+                  396
+                ],
+                [
+                  230,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "id": "wall-dark_render-26-13",
+              "polygon": [
+                [
+                  575,
+                  240
+                ],
+                [
+                  660,
+                  240
+                ],
+                [
+                  660,
+                  396
+                ],
+                [
+                  575,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "DARK_RENDER",
+              "host": "main",
+              "id": "wall-dark_render-35-13",
+              "polygon": [
+                [
+                  660,
+                  242
+                ],
+                [
+                  998,
+                  242
+                ],
+                [
+                  998,
+                  396
+                ],
+                [
+                  660,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            },
+            {
+              "class": "TIMBER",
+              "host": "gable",
+              "id": "wall-timber-18-11",
+              "polygon": [
+                [
+                  258,
+                  250
+                ],
+                [
+                  445,
+                  120
+                ],
+                [
+                  575,
+                  215
+                ],
+                [
+                  575,
+                  396
+                ],
+                [
+                  258,
+                  396
+                ]
+              ],
+              "visibility": "VISIBLE"
+            }
+          ]
+        },
+        "usd": 0
+      }
+    ],
+    "usd": 0,
+    "version": "1.0.0"
+  },
+  "usd": 0
+}
+

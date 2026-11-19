@@ -17,7 +17,7 @@ import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { frameRasters } from '@buildapp/source-cv'
 import { AnalysisError, toAnalysisError } from '../errors.js'
-import { runAnalysis } from '../run.js'
+import { ANALYSIS_SERVICE_VERSION, runAnalysis } from '../run.js'
 import type { AnalysisInput, AnalysisOptions, AnalysisRun } from '../run.js'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION } from './contract.js'
 import type { ConsultantReview } from './contract.js'
@@ -31,6 +31,17 @@ import { renderModelViews } from './model-views.js'
 import type { ModelViewPicture } from './model-views.js'
 import type { ReviewObservation } from './contract.js'
 import { labelProblemOf } from './problems.js'
+import { compileBuilding } from '@buildapp/geometry'
+import { METRIC_READ_PROMPT_VERSION, METRIC_RESOLVER_VERSION, METRIC_VERIFY_PROMPT_VERSION, localTableOf, measureBuilt, readDimensions, resolveMetric, verifyLocal } from './metric-read.js'
+import type { BuiltMeasure, IndependentRead, LocalCheck, MetricFrame, MetricResolution } from './metric-read.js'
+import { SKETCH_STEP_VERSION, judgeForm, readSketches } from './sketch-step.js'
+import { CHOOSE_VERSION } from './choose.js'
+import { ACCEPTED_CONSULT_SCHEMA, ACCEPTED_CONSULT_VERSION, consultBinding, recordingModel, replayModel } from './accepted-consult.js'
+import type { AcceptedConsultRevision, AcceptedConsultStore, ConsultReuse, RecordedAnswer } from './accepted-consult.js'
+import { ELEVATION_SKETCH_PARSER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION } from '../appearance/elevation-sketch.js'
+import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
+import type { SketchReading } from './sketch-step.js'
+import { usableGeometryFingerprint } from '../appearance/consumer.js'
 import type { LabelProblem } from './problems.js'
 
 export type ConsultantWiring = {
@@ -49,6 +60,48 @@ export type ConsultantWiring = {
   check?: 'ON' | 'OFF'
   /** Another renderer for the check's model views (research boards); absent: `renderModelViews` of the run's scene. */
   views?: (run: AnalysisRun) => ModelViewPicture[]
+  /**
+   * v3.54.14: the metric consultant (`metric-read.ts`) before the label rounds — an independent read of every storey's
+   * plan and a section, a check of the analyzer's readings, the deterministic resolver, and a candidate the analyzer
+   * rebuilds from what the resolver hands it. OFF by default. Its own transport may be another model than the rounds'.
+   */
+  metricRead?: 'ON' | 'OFF'
+  metricModel?: ConsultantModel
+  metricPrice?: Price
+  /**
+   * v3.54.14 (L-MS): the four automatic sketches (`sketch-step.ts`) on the model that stands after the metric step:
+   * read, drawn, proportion-checked; a candidate the shape reader builds with them (form) and their finish zones, on
+   * the same metric facts. OFF by default.
+   */
+  sketches?: 'ON' | 'OFF'
+  sketchModel?: ConsultantModel
+  sketchPrice?: Price
+  /**
+   * v3.54.14: the host's accepted revisions of consulted analyses (`accepted-consult.ts`). With one under this
+   * analysis' binding, its stored answers stand in for every transport (no request, no reservation); without one, the
+   * answers are recorded and kept when the analysis completes with no transport failure. `reanalyse` reads afresh.
+   */
+  accepted?: { store: AcceptedConsultStore; reanalyse?: boolean }
+}
+
+/** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
+export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number }
+
+/** v3.54.14: what the metric consultant read, checked, decided and what the analyzer built from it. */
+export type MetricReadSummary = {
+  promptVersions: { read: string; verify: string }
+  resolverVersion: string
+  model: string
+  frames: Array<{ frameId: string; kind: MetricFrame['kind']; storey: string }>
+  reads: IndependentRead[]
+  checks: LocalCheck[]
+  resolution: MetricResolution
+  /** ACCEPT: the candidate is the model now; ROLLBACK / NO_CHANGE: LOCAL's stands; NOT_RUN: variant R or nothing handed. */
+  decision: 'ACCEPT' | 'ROLLBACK' | 'NO_CHANGE' | 'NOT_RUN'
+  why: string
+  applied: { readings: Array<{ proposalId: string; status: string; why: string; valueCm?: number }>; spans: Array<{ proposalId: string; status: string; why: string; valueCm?: number }> }
+  measured: { before?: BuiltMeasure; after?: BuiltMeasure }
+  usd: number
 }
 
 /** One axis of the built wall outline against the consulted dimension that frames it, in the plan's own pixels. */
@@ -183,6 +236,12 @@ export type ConsultationSummary = {
   boundary: { decision: string; why: string; sides: string[] } | null
   looks: Array<{ round: number; revision: string; status: string | null; decision: string; why: string }>
   roofFeatures: string[]
+  /** v3.54.14: the metric consultant's outcome, when it ran (the full record is the analysis's `metricRead`). */
+  metricRead?: { decision: string; why: string; corrected: number; agrees: number; unresolved: number; newSpans: number; usd: number }
+  /** v3.54.14: the sketch step's outcome, when it ran (the full record is the analysis's `sketches`). */
+  sketches?: { sides: string[]; form: string; finish: string; usd: number }
+  /** v3.54.14: the accepted-revision rule on this path (`accepted-consult.ts`), when the host keeps a store. */
+  accepted?: ConsultReuse
 }
 
 export type ConsultedAnalysis = {
@@ -206,6 +265,10 @@ export type ConsultedAnalysis = {
   roofFeatures: RoofFeatureCorrection[]
   sourceCheck?: SourceCheckSummary
   consultation?: ConsultationSummary
+  /** v3.54.14: the metric consultant's record, when it ran. */
+  metricRead?: MetricReadSummary
+  /** v3.54.14: the sketch step's record, when it ran. */
+  sketches?: SketchSummary
   /** Proof for the brief: the global house-description branch was never entered on this path. */
   globalDescription: 'DISABLED'
 }
@@ -334,6 +397,29 @@ function compareRunsScale(before: RunState, after: RunState): { decision: RoundR
   return { decision: 'ROLLBACK', why: 'a different model with no better-settled scale and no outline that agrees better with the printed dimensions: kept the one before' }
 }
 
+/**
+ * v3.54.14: ACCEPT / ROLLBACK of the metric consultant's candidate. Everything `compareRuns` accepts is accepted; besides,
+ * at a scale no less settled and not moved when it was settled, with an outline the printed dimensions do not
+ * contradict, a candidate stands when the metric layer APPLIED at least one reading (or ADMITTED a span) the resolver
+ * handed it with a witness — a printed value the drawing corroborates may change the model at the same scale.
+ */
+export function compareMetricRead(before: RunState, after: RunState, applied: number): { decision: 'ACCEPT' | 'ROLLBACK' | 'NO_CHANGE'; why: string } {
+  const v = compareRuns(before, after)
+  if (v.decision === 'ACCEPT') return { decision: 'ACCEPT', why: v.why }
+  if (before.outcome !== 'COMPLETED' || after.outcome !== 'COMPLETED') return { decision: v.decision === 'NO_CHANGE' ? 'NO_CHANGE' : 'ROLLBACK', why: v.why }
+  if (before.modelHash === after.modelHash) return { decision: 'NO_CHANGE', why: 'the same model, byte for byte' }
+  if (applied === 0) return { decision: 'ROLLBACK', why: 'the metric layer applied none of the readings handed to it: a changed model with no applied reading is not the correction' }
+  const rb = CONF_RANK[before.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0
+  const ra = CONF_RANK[after.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0
+  if (ra < rb) return { decision: 'ROLLBACK', why: `the scale is less settled than before (${before.metric?.confidence} → ${after.metric?.confidence})` }
+  const x0 = before.metric?.cmPerPixelX ?? 0
+  const x1 = after.metric?.cmPerPixelX ?? 0
+  if (rb >= 2 && x0 > 0 && Math.abs(Math.log(x1 / x0)) > 0.03) return { decision: 'ROLLBACK', why: `the candidate moves a settled scale (${x0} → ${x1} cm/px)` }
+  const contra = outlineContradiction(after)
+  if (contra) return { decision: 'ROLLBACK', why: contra }
+  return { decision: 'ACCEPT', why: `${applied} printed reading(s) handed with a witness were applied by the metric layer; the scale ${before.metric?.confidence ?? 'none'} → ${after.metric?.confidence ?? 'none'}, the outline not contradicted` }
+}
+
 async function frameRaster(pkg: SourcePackage, graph: SourceObservationGraph, frameId: string, options: AnalysisOptions) {
   await startDecoders()
   const frame = graph.coordinateFrames.find((f) => f.id === frameId)
@@ -388,6 +474,28 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
   const localState = stateOf(local)
   record({ at: now().toISOString(), kind: 'LOCAL', state: localState })
+  // v3.54.14: an accepted revision of this binding answers every request; otherwise the answers are recorded
+  const answers: RecordedAnswer[] = []
+  const transportFailures = { count: 0 }
+  const replayCounter = { replayed: 0, missing: 0 }
+  let acceptedState: { key: string; binding: ReturnType<typeof consultBinding>['binding']; reused?: AcceptedConsultRevision; why?: 'NO_ACCEPTED_REVISION' | 'REANALYSIS_ASKED' } | undefined
+  if (wiring.accepted && local.pkg) {
+    const b = consultBinding({
+      sourcePackageHash: local.pkg.contentHash,
+      analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
+      consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION].join(','),
+      models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
+      settings: `variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'}`,
+    })
+    const stored = wiring.accepted.reanalyse ? undefined : wiring.accepted.store.get(b.key)
+    acceptedState = { key: b.key, binding: b.binding, ...(stored ? { reused: stored } : { why: wiring.accepted.reanalyse ? 'REANALYSIS_ASKED' as const : 'NO_ACCEPTED_REVISION' as const }) }
+    const { spend: _unbooked, ...rest } = wiring
+    void _unbooked
+    wiring = stored
+      ? { ...rest, model: replayModel(wiring.model, 'ROUNDS', stored.answers, replayCounter), ...(wiring.metricModel ? { metricModel: replayModel(wiring.metricModel, 'METRIC', stored.answers, replayCounter) } : {}), ...(wiring.sketchModel ? { sketchModel: replayModel(wiring.sketchModel, 'SKETCH', stored.answers, replayCounter) } : {}) }
+      : { ...wiring, model: recordingModel(wiring.model, 'ROUNDS', answers, transportFailures), ...(wiring.metricModel ? { metricModel: recordingModel(wiring.metricModel, 'METRIC', answers, transportFailures) } : {}), ...(wiring.sketchModel ? { sketchModel: recordingModel(wiring.sketchModel, 'SKETCH', answers, transportFailures) } : {}) }
+    record({ at: now().toISOString(), kind: 'ACCEPTED_REVISION', key: b.key, state: stored ? 'REUSED' : 'NEW_CANDIDATE', ...(stored ? { acceptedAt: stored.acceptedAt } : {}) })
+  }
   let good: Local = local
   let goodState = localState
   const rounds: RoundRecord[] = []
@@ -396,6 +504,105 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const seen = new Set<string>()
   let usd = 0
   let basis: Local = local
+  // v3.54.14: the metric consultant, before the label rounds
+  let metricRead: MetricReadSummary | undefined
+  if (wiring.metricRead === 'ON' && local.pkg && local.graph && local.metrics) {
+    const mModel = wiring.metricModel ?? wiring.model
+    const mPrice = wiring.metricPrice ?? wiring.price
+    const frames: MetricFrame[] = []
+    const addFrame = async (frameId: string, kind: MetricFrame['kind']): Promise<void> => {
+      const f = local.graph?.coordinateFrames.find((x) => x.id === frameId)
+      if (!f || frames.some((x) => x.frameId === frameId)) return
+      const fr = await frameRaster(local.pkg as SourcePackage, local.graph as SourceObservationGraph, frameId, options)
+      if (!fr?.raster) return
+      const asset = local.pkg?.assets.find((a) => a.id === f.assetId)
+      frames.push({ frameId, kind, storey: (['GROUND', 'UPPER', 'ATTIC', 'BASEMENT'].includes(String(f.roles.storey)) ? f.roles.storey : 'UNKNOWN') as MetricFrame['storey'], raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120) })
+    }
+    const base = local.plans?.selectedPlanFrameId ?? undefined
+    if (base) await addFrame(base, 'PLAN')
+    for (const pl of (local.run?.reconstruction.registrations.plans ?? []).filter((x) => x.frameId !== base).slice(0, 2)) await addFrame(pl.frameId, 'PLAN')
+    const sections = local.graph.coordinateFrames.filter((x) => x.roles.projection === 'ORTHOGRAPHIC_SECTION')
+    const regSection = local.run?.reconstruction.registrations.section?.frameId
+    const section = sections.find((x) => x.id === regSection) ?? sections[0]
+    if (section) await addFrame(section.id, 'SECTION')
+    const ctx = { model: mModel, price: mPrice, ...(wiring.spend ? { spend: wiring.spend } : {}), record: (e: { at: string; kind: string; [k: string]: unknown }) => record(e), ...(options.signal ? { signal: options.signal } : {}), now }
+    const reads = await readDimensions(ctx, frames)
+    const table = localTableOf(local.metrics, frames.map((f) => f.frameId))
+    const checks = await verifyLocal(ctx, frames, table)
+    const resolution = resolveMetric({ metrics: local.metrics, table, reads, checks, consultant: { engine: `metric-consultant.${mModel.id}`, model: mModel.model } })
+    const mUsd = [...reads, ...checks].reduce((a, r) => a + r.usd, 0)
+    usd += mUsd
+    const measuredBefore = local.run ? measureBuilt(local.run.reconstruction.model, compileBuilding(local.run.reconstruction.model)) : undefined
+    metricRead = { promptVersions: { read: METRIC_READ_PROMPT_VERSION, verify: METRIC_VERIFY_PROMPT_VERSION }, resolverVersion: METRIC_RESOLVER_VERSION, model: mModel.model, frames: frames.map((f) => ({ frameId: f.frameId, kind: f.kind, storey: f.storey })), reads, checks, resolution, decision: 'NOT_RUN', why: '', applied: { readings: [], spans: [] }, measured: { ...(measuredBefore ? { before: measuredBefore } : {}) }, usd: Math.round(mUsd * 1e6) / 1e6 }
+    if (wiring.variant === 'R') metricRead.why = 'variant R: read, checked and resolved; nothing handed to the analyzer'
+    else if (resolution.readings.length === 0 && resolution.spans.length === 0) {
+      metricRead.decision = 'NO_CHANGE'
+      metricRead.why = 'the resolver handed the analyzer nothing: every API reading agreed, was unresolved without a witness, or had no label'
+    } else {
+      const candidate = await attempt({ kind: 'PACKAGE', pkg: local.pkg, graph: local.graph }, { ...options, consulted: resolution.readings, consultedSpans: resolution.spans, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
+      const after = stateOf(candidate)
+      const appliedR = (candidate.metrics?.consultedReadings ?? []).map((o) => ({ proposalId: o.proposalId, status: o.status, why: o.why, ...(o.valueCm !== undefined ? { valueCm: o.valueCm } : {}) }))
+      const appliedS = (candidate.metrics?.consultedSpans ?? []).map((o) => ({ proposalId: o.proposalId, status: o.status, why: o.why, ...(o.valueCm !== undefined ? { valueCm: o.valueCm } : {}) }))
+      metricRead.applied = { readings: appliedR, spans: appliedS }
+      const n = appliedR.filter((o) => o.status === 'APPLIED').length + appliedS.filter((o) => o.status === 'ADMITTED').length
+      const v = compareMetricRead(goodState, after, n)
+      metricRead.decision = v.decision
+      metricRead.why = v.why
+      if (candidate.run) metricRead.measured.after = measureBuilt(candidate.run.reconstruction.model, compileBuilding(candidate.run.reconstruction.model))
+      record({ at: now().toISOString(), kind: 'METRIC_READ_ROUND', decision: v.decision, why: v.why, before: goodState, after })
+      if (v.decision === 'ACCEPT') {
+        good = candidate
+        goodState = after
+        basis = candidate
+        readings.push(...resolution.readings)
+        spans.push(...resolution.spans)
+      }
+    }
+  }
+  // v3.54.14 (L-MS): the sketches, on the model that stands and its metric facts
+  let sketchSummary: SketchSummary | undefined
+  if (wiring.sketches === 'ON' && good.run && good.pkg && good.graph && good.metrics) {
+    const run0 = good.run
+    const pkg0 = good.pkg
+    const graph0 = good.graph
+    const metrics0 = good.metrics
+    const rasterOf = async (frameId: string) => {
+      const f = graph0.coordinateFrames.find((x) => x.id === frameId)
+      const fr = f ? await frameRaster(pkg0, graph0, frameId, options) : undefined
+      if (!f || !fr?.raster) return undefined
+      const asset = pkg0.assets.find((a) => a.id === f.assetId)
+      return { raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash }
+    }
+    const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
+    usd += reading.usd
+    const { elevationSketches, ...kept } = reading
+    sketchSummary = { reading: kept, form: { decision: 'NOT_RUN', why: '' }, finish: { decision: 'NOT_RUN', why: '' }, usd: reading.usd }
+    if (wiring.variant === 'R') sketchSummary.form.why = sketchSummary.finish.why = 'variant R: read and checked; nothing handed to the analyzer'
+    else if (elevationSketches.length === 0) sketchSummary.form.why = sketchSummary.finish.why = 'no sketch passed the proportion check'
+    else {
+      const base = { ...options, ...(readings.length > 0 ? { consulted: readings } : {}), ...(spans.length > 0 ? { consultedSpans: spans } : {}), ...(readings.length + spans.length > 0 ? { crossAxisWitness: true } : {}), reuseMetrics: metrics0, roofFeatures: undefined, glazedEnds: undefined }
+      const acceptedSides = reading.sketches.filter((s) => s.check?.verdict === 'ACCEPTED').map((s) => s.facade)
+      const withForm = await attempt({ kind: 'PACKAGE', pkg: pkg0, graph: graph0 }, { ...base, elevationSketches, appearance: reading.appearance, wallTonesFrom: { model: run0.reconstruction.model, acceptedSides } })
+      const j = judgeForm(run0.reconstruction.model, withForm.run?.reconstruction.model, elevationSketches.length)
+      sketchSummary.form = { decision: j.decision, why: j.why, measuredBefore: j.measuredBefore, ...(j.measuredAfter ? { measuredAfter: j.measuredAfter } : {}) }
+      record({ at: now().toISOString(), kind: 'SKETCH_FORM', decision: j.decision, why: j.why })
+      if (j.decision === 'ACCEPT') {
+        good = withForm
+        goodState = stateOf(withForm)
+        basis = withForm
+        sketchSummary.finish = { decision: 'ACCEPT', why: 'the finish zones were applied in the same candidate' }
+      } else {
+        const finishOnly = await attempt({ kind: 'PACKAGE', pkg: pkg0, graph: graph0 }, { ...base, appearance: reading.appearance })
+        const same = finishOnly.run && usableGeometryFingerprint(finishOnly.run.reconstruction.model) === usableGeometryFingerprint(run0.reconstruction.model)
+        sketchSummary.finish = same ? { decision: 'ACCEPT', why: 'the finish zones applied on the model that stood; its usable geometry unchanged' } : { decision: 'ROLLBACK', why: 'the finish-only candidate did not reproduce the model that stood' }
+        if (same) {
+          good = finishOnly
+          goodState = stateOf(finishOnly)
+          basis = finishOnly
+        }
+      }
+    }
+  }
   for (let round = 1; round <= maxRounds; round += 1) {
     const { pkg, graph, metrics } = basis
     const frameId = basis.plans?.selectedPlanFrameId ?? undefined
@@ -693,10 +900,24 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       m.quantities = 'NOT_USABLE'
     }
   }
-  const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id) }
+  // v3.54.14: what became of the accepted-revision rule; a fresh, complete, failure-free consultation is kept
+  let accepted: ConsultReuse | undefined
+  if (acceptedState && wiring.accepted) {
+    const deliveredHash = good.run?.reconstruction.candidate.modelHash ?? ''
+    if (acceptedState.reused) accepted = { state: 'REUSED', key: acceptedState.key, acceptedAt: acceptedState.reused.acceptedAt, sameGeometry: deliveredHash !== '' && deliveredHash === acceptedState.reused.modelHash, answersReplayed: replayCounter.replayed, missing: replayCounter.missing }
+    else if (!good.run || finalState.outcome !== 'COMPLETED') accepted = { state: 'NOT_ACCEPTED', key: acceptedState.key, why: 'the analysis did not complete: nothing kept' }
+    else if (transportFailures.count > 0) accepted = { state: 'NOT_ACCEPTED', key: acceptedState.key, why: `${transportFailures.count} request(s) failed in transport: a replay would not be this analysis` }
+    else if (answers.length === 0) accepted = { state: 'NOT_ACCEPTED', key: acceptedState.key, why: 'no request was answered: nothing to keep' }
+    else {
+      const kept = wiring.accepted.store.put({ schema: ACCEPTED_CONSULT_SCHEMA, version: ACCEPTED_CONSULT_VERSION, key: acceptedState.key, binding: acceptedState.binding, acceptedAt: now().toISOString(), modelHash: deliveredHash, answers })
+      accepted = kept ? { state: 'ACCEPTED_NOW', key: acceptedState.key, answers: answers.length } : { state: 'NEW_CANDIDATE', key: acceptedState.key, why: acceptedState.why ?? 'NO_ACCEPTED_REVISION' }
+    }
+    record({ at: now().toISOString(), kind: 'ACCEPTED_REVISION', ...accepted })
+  }
+  const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}) }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */

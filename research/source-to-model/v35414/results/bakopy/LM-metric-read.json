@@ -1,0 +1,4739 @@
+{
+  "applied": {
+    "readings": [
+      {
+        "proposalId": "mr:dim-665d8ad5-length-140-8-8",
+        "status": "APPLIED",
+        "valueCm": 140,
+        "why": "consulted (mr:dim-665d8ad5-length-140-8-8): the label is printed 140; before, it was read 401 AMBIGUOUS (NOT_COMPARABLE), and 401 stays a candidate — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-149-8-5",
+        "status": "APPLIED",
+        "valueCm": 149,
+        "why": "consulted (mr:dim-665d8ad5-length-149-8-5): the label is printed 149 (as the external reader also read it, with confidence: CLEAR); before, it was read 149 SUPPORTED (LEADS), and 105 stays a candidate — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-1500-19-52",
+        "status": "APPLIED",
+        "valueCm": 1500,
+        "why": "consulted (mr:dim-665d8ad5-length-1500-19-52): the label is printed 1500; before, it was read 0051 AMBIGUOUS (NOT_COMPARABLE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-171-15-30",
+        "status": "APPLIED",
+        "valueCm": 171,
+        "why": "consulted (mr:dim-665d8ad5-length-171-15-30): the label is printed 171 (as the lattice also read it, without confidence); before, it was read 171 AMBIGUOUS (NOT_COMPARABLE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-2125-42-24",
+        "status": "APPLIED",
+        "valueCm": 2125,
+        "why": "consulted (mr:dim-665d8ad5-length-2125-42-24): the label is printed 2125 (as both readers also read it, with confidence: CLEAR); before, it was read 2125 CLEAR (AGREES) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-380-8-20",
+        "status": "APPLIED",
+        "valueCm": 380,
+        "why": "consulted (mr:dim-665d8ad5-length-380-8-20): the label is printed 380 (as the external reader also read it, with confidence: CLEAR); before, it was read 380 SUPPORTED (LEADS), and 960 stays a candidate — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-625-41-38",
+        "status": "APPLIED",
+        "valueCm": 625,
+        "why": "consulted (mr:dim-665d8ad5-length-625-41-38): the label is printed 625; before, it was read 479 AMBIGUOUS (NOT_COMPARABLE), and 479 stays a candidate — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-640-26-1",
+        "status": "APPLIED",
+        "valueCm": 640,
+        "why": "consulted (mr:dim-665d8ad5-length-640-26-1): the label is printed 640; before, it was read 014 AMBIGUOUS (NO_VALUE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-640-41-10",
+        "status": "APPLIED",
+        "valueCm": 640,
+        "why": "consulted (mr:dim-665d8ad5-length-640-41-10): the label is printed 640; before, it was read 049 AMBIGUOUS (NO_VALUE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-690-11-50",
+        "status": "APPLIED",
+        "valueCm": 690,
+        "why": "consulted (mr:dim-665d8ad5-length-690-11-50): the label is printed 690; before, it was read 080 AMBIGUOUS (NO_VALUE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-810-25-50",
+        "status": "APPLIED",
+        "valueCm": 810,
+        "why": "consulted (mr:dim-665d8ad5-length-810-25-50): the label is printed 810 (as both readers also read it, with confidence: CLEAR); before, it was read 810 CLEAR (AGREES) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-860-13-1",
+        "status": "APPLIED",
+        "valueCm": 860,
+        "why": "consulted (mr:dim-665d8ad5-length-860-13-1): the label is printed 860; before, it was read 048 AMBIGUOUS (NO_VALUE) — the chains decide the scale"
+      },
+      {
+        "proposalId": "mr:dim-665d8ad5-length-860-41-24",
+        "status": "APPLIED",
+        "valueCm": 860,
+        "why": "consulted (mr:dim-665d8ad5-length-860-41-24): the label is printed 860; before, it was read 088 AMBIGUOUS (NO_VALUE) — the chains decide the scale"
+      }
+    ],
+    "spans": [
+      {
+        "proposalId": "ms:dim-665d8ad5-length-50-33-52",
+        "status": "REFUSED",
+        "why": "TOO_SHORT: 15 px; a span shorter than 60 px states no scale worth checking"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+      "promptVersion": "metric-verify/1",
+      "raw": {
+        "verdicts": [
+          {
+            "itemId": "L118",
+            "proposal": {
+              "literal": "2125",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "2125",
+            "verdict": "DISAGREES",
+            "why": "The outer right vertical chain is labelled 2125 (640+860+625), and that label's line runs from 54 to 701 px. The analyzer read 1217 instead."
+          },
+          {
+            "itemId": "L46",
+            "sourceLiteral": "2125",
+            "verdict": "AGREES",
+            "why": "The outer right label reads 2125, and its line runs the full height from 54 to 701 px."
+          },
+          {
+            "itemId": "L11",
+            "proposal": {
+              "literal": "1500",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "1500",
+            "verdict": "DISAGREES",
+            "why": "The bottom overall label reads 1500, not 0051. The 1500 line runs from 68 to about 524 px, and the separate 50 piece continues to 538 px."
+          },
+          {
+            "itemId": "L44",
+            "proposal": {
+              "literal": "1500",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "1500",
+            "verdict": "DISAGREES",
+            "why": "The bottom label reads 1500, not 1100. The segment ending at 538 px also takes in the extra 50 piece."
+          },
+          {
+            "itemId": "L10",
+            "proposal": {
+              "literal": "1500",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "1500",
+            "verdict": "DISAGREES",
+            "why": "The line from 68 to 524 px is the right one (690+810), but the label reads 1500, not 0051."
+          },
+          {
+            "itemId": "L45",
+            "proposal": {
+              "literal": "1500",
+              "scope": "WHOLE_HOUSE"
+            },
+            "sourceLiteral": "1500",
+            "verdict": "DISAGREES",
+            "why": "The line from 68 to 524 px is the right one, but the label reads 1500, not 1100."
+          },
+          {
+            "itemId": "L2",
+            "proposal": {
+              "literal": "860",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "860",
+            "verdict": "DISAGREES",
+            "why": "The middle segment of the right-side chain is labelled 860 (rotated), not 088. Its line runs from 249 to 511 px."
+          },
+          {
+            "itemId": "L69",
+            "sourceLiteral": "860",
+            "verdict": "AGREES",
+            "why": "The middle label of the right chain reads 860, and its line runs from 249 to 511 px."
+          },
+          {
+            "itemId": "L20",
+            "proposal": {
+              "literal": "860",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "860",
+            "verdict": "DISAGREES",
+            "why": "The top-left chain label reads 860, not 048. Its line runs from 68 to 330 px."
+          },
+          {
+            "itemId": "L34",
+            "sourceLiteral": "860",
+            "verdict": "AGREES",
+            "why": "The top label reads 860, and its line runs from 68 to 330 px."
+          },
+          {
+            "itemId": "L12",
+            "sourceLiteral": "810",
+            "verdict": "AGREES",
+            "why": "The bottom-right chain label reads 810, and its line runs from 279 to 526 px."
+          },
+          {
+            "itemId": "L14",
+            "proposal": {
+              "literal": "810",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "810",
+            "verdict": "DISAGREES",
+            "why": "The label reads 810, not 018 (the digits are reversed)."
+          },
+          {
+            "itemId": "L1",
+            "proposal": {
+              "literal": "690",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "690",
+            "verdict": "DISAGREES",
+            "why": "The bottom-left chain label reads 690, not 080. Its line runs from 68 to 279 px."
+          },
+          {
+            "itemId": "L3",
+            "sourceLiteral": "690",
+            "verdict": "AGREES",
+            "why": "The bottom-left label reads 690, and its line runs from 68 to 279 px."
+          },
+          {
+            "itemId": "L19",
+            "proposal": {
+              "literal": "640",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "640",
+            "verdict": "DISAGREES",
+            "why": "The top segment of the right chain is labelled 640, not 049. Its line runs from 54 to 249 px."
+          },
+          {
+            "itemId": "L97",
+            "sourceLiteral": "640",
+            "verdict": "AGREES",
+            "why": "The upper right chain label reads 640, and its line runs from 54 to 249 px."
+          },
+          {
+            "itemId": "L13",
+            "proposal": {
+              "literal": "640",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "640",
+            "verdict": "DISAGREES",
+            "why": "The top-right chain label reads 640, not 014. Its line runs from 330 to 524 px."
+          },
+          {
+            "itemId": "L96",
+            "sourceLiteral": "640",
+            "verdict": "AGREES",
+            "why": "The top label reads 640, and its line runs from 330 to 524 px."
+          },
+          {
+            "itemId": "L108",
+            "sourceLiteral": "625",
+            "verdict": "AGREES",
+            "why": "The lower right chain label reads 625, and its line runs from 511 to 701 px."
+          },
+          {
+            "itemId": "L65",
+            "proposal": {
+              "literal": "625",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "625",
+            "verdict": "DISAGREES",
+            "why": "The label reads 625, not 479. The 479 is from the window tag 280/479 elsewhere on the drawing."
+          },
+          {
+            "itemId": "L21",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The garage (room 16) depth label reads 660, not 044. The 487–658 px segment is also only about 171 px, too short for 660 at this scale (about 200 px)."
+          },
+          {
+            "itemId": "L36",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The text 660 is right, but the 487–658 px segment works out to about 560 cm. The 660 garage depth should run about 200 px, from the wall at roughly 500 px down to about 700 px."
+          },
+          {
+            "itemId": "L26",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The room 8 width label reads 458, not 854."
+          },
+          {
+            "itemId": "L56",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The text 458 is right, but the 138–298 px span starts in room 10. Room 8 runs from about 178 to 318 px, which is about 140 px for 458 cm."
+          },
+          {
+            "itemId": "L22",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The garage label reads 660, not 044. The 449–599 px segment is not the garage depth line."
+          },
+          {
+            "itemId": "L38",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The text 660 is right, but the 449–599 px segment reaches into room 13 and stops short of the garage's far wall."
+          },
+          {
+            "itemId": "L116",
+            "proposal": {
+              "literal": "380",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "380",
+            "verdict": "DISAGREES",
+            "why": "The room 12 label reads 380, but the 261–400 px span (139 px, about 455 cm) is too long for 380 cm."
+          },
+          {
+            "itemId": "L27",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The label reads 458, not 854. The 178–298 px span also stops short of room 8's right wall at about 318 px."
+          },
+          {
+            "itemId": "L54",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The text 458 is right, but the 178–298 px segment (120 px, about 394 cm) is too short for 458 cm."
+          },
+          {
+            "itemId": "L114",
+            "sourceLiteral": "380",
+            "verdict": "AGREES",
+            "why": "The room 12 label reads 380, and the 281–400 px span (about 119 px) fits 380 cm at this scale."
+          },
+          {
+            "itemId": "L80",
+            "proposal": {
+              "literal": "124",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "124",
+            "verdict": "DISAGREES",
+            "why": "The label at this place in room 3 reads 124, not 11."
+          },
+          {
+            "itemId": "L98",
+            "proposal": {
+              "literal": "124",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "124",
+            "verdict": "DISAGREES",
+            "why": "The label in room 3 reads 124, not 74."
+          },
+          {
+            "itemId": "L23",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The garage label reads 660, not 044. The 487–599 px segment is far too short for it."
+          },
+          {
+            "itemId": "L35",
+            "proposal": {
+              "literal": "660",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "660",
+            "verdict": "DISAGREES",
+            "why": "The text 660 is right, but the 487–599 px segment (112 px) does not match the 660 garage depth, which should be about 200 px."
+          },
+          {
+            "itemId": "L31",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The label reads 458, not 854. The 138–245 px span is not room 8's width."
+          },
+          {
+            "itemId": "L55",
+            "proposal": {
+              "literal": "458",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "458",
+            "verdict": "DISAGREES",
+            "why": "The text 458 is right, but the 138–245 px segment (107 px) does not match room 8's width, which should be about 140 px."
+          },
+          {
+            "itemId": "L29",
+            "proposal": {
+              "literal": "600",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "600",
+            "verdict": "DISAGREES",
+            "why": "The garage width label reads 600, not 014."
+          },
+          {
+            "itemId": "L88",
+            "proposal": {
+              "literal": "600",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "600",
+            "verdict": "DISAGREES",
+            "why": "The text 600 is right, but the 126–233 px segment (107 px) is too short. The garage interior runs from about 80 to 265 px, which is about 183 px."
+          },
+          {
+            "itemId": "L78",
+            "proposal": {
+              "literal": "325",
+              "scope": "ROOM"
+            },
+            "sourceLiteral": "325",
+            "verdict": "DISAGREES",
+            "why": "The rotated label beside room 4 reads 325, not 43."
+          },
+          {
+            "itemId": "L103",
+            "proposal": {
+              "literal": "124",
+              "scope": "SEGMENT"
+            },
+            "sourceLiteral": "124",
+            "verdict": "DISAGREES",
+            "why": "The label in room 3 reads 124, not 74."
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChBtXjJar5CK7xdPLhqWZ",
+      "usd": 0.128976,
+      "verdicts": [
+        {
+          "itemId": "L118",
+          "proposal": {
+            "literal": "2125",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "2125",
+          "verdict": "DISAGREES",
+          "why": "The outer right vertical chain is labelled 2125 (640+860+625), and that label's line runs from 54 to 701 px. The analyzer read 1217 instead."
+        },
+        {
+          "itemId": "L46",
+          "sourceLiteral": "2125",
+          "verdict": "AGREES",
+          "why": "The outer right label reads 2125, and its line runs the full height from 54 to 701 px."
+        },
+        {
+          "itemId": "L11",
+          "proposal": {
+            "literal": "1500",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "1500",
+          "verdict": "DISAGREES",
+          "why": "The bottom overall label reads 1500, not 0051. The 1500 line runs from 68 to about 524 px, and the separate 50 piece continues to 538 px."
+        },
+        {
+          "itemId": "L44",
+          "proposal": {
+            "literal": "1500",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "1500",
+          "verdict": "DISAGREES",
+          "why": "The bottom label reads 1500, not 1100. The segment ending at 538 px also takes in the extra 50 piece."
+        },
+        {
+          "itemId": "L10",
+          "proposal": {
+            "literal": "1500",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "1500",
+          "verdict": "DISAGREES",
+          "why": "The line from 68 to 524 px is the right one (690+810), but the label reads 1500, not 0051."
+        },
+        {
+          "itemId": "L45",
+          "proposal": {
+            "literal": "1500",
+            "scope": "WHOLE_HOUSE"
+          },
+          "sourceLiteral": "1500",
+          "verdict": "DISAGREES",
+          "why": "The line from 68 to 524 px is the right one, but the label reads 1500, not 1100."
+        },
+        {
+          "itemId": "L2",
+          "proposal": {
+            "literal": "860",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "860",
+          "verdict": "DISAGREES",
+          "why": "The middle segment of the right-side chain is labelled 860 (rotated), not 088. Its line runs from 249 to 511 px."
+        },
+        {
+          "itemId": "L69",
+          "sourceLiteral": "860",
+          "verdict": "AGREES",
+          "why": "The middle label of the right chain reads 860, and its line runs from 249 to 511 px."
+        },
+        {
+          "itemId": "L20",
+          "proposal": {
+            "literal": "860",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "860",
+          "verdict": "DISAGREES",
+          "why": "The top-left chain label reads 860, not 048. Its line runs from 68 to 330 px."
+        },
+        {
+          "itemId": "L34",
+          "sourceLiteral": "860",
+          "verdict": "AGREES",
+          "why": "The top label reads 860, and its line runs from 68 to 330 px."
+        },
+        {
+          "itemId": "L12",
+          "sourceLiteral": "810",
+          "verdict": "AGREES",
+          "why": "The bottom-right chain label reads 810, and its line runs from 279 to 526 px."
+        },
+        {
+          "itemId": "L14",
+          "proposal": {
+            "literal": "810",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "810",
+          "verdict": "DISAGREES",
+          "why": "The label reads 810, not 018 (the digits are reversed)."
+        },
+        {
+          "itemId": "L1",
+          "proposal": {
+            "literal": "690",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "690",
+          "verdict": "DISAGREES",
+          "why": "The bottom-left chain label reads 690, not 080. Its line runs from 68 to 279 px."
+        },
+        {
+          "itemId": "L3",
+          "sourceLiteral": "690",
+          "verdict": "AGREES",
+          "why": "The bottom-left label reads 690, and its line runs from 68 to 279 px."
+        },
+        {
+          "itemId": "L19",
+          "proposal": {
+            "literal": "640",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "640",
+          "verdict": "DISAGREES",
+          "why": "The top segment of the right chain is labelled 640, not 049. Its line runs from 54 to 249 px."
+        },
+        {
+          "itemId": "L97",
+          "sourceLiteral": "640",
+          "verdict": "AGREES",
+          "why": "The upper right chain label reads 640, and its line runs from 54 to 249 px."
+        },
+        {
+          "itemId": "L13",
+          "proposal": {
+            "literal": "640",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "640",
+          "verdict": "DISAGREES",
+          "why": "The top-right chain label reads 640, not 014. Its line runs from 330 to 524 px."
+        },
+        {
+          "itemId": "L96",
+          "sourceLiteral": "640",
+          "verdict": "AGREES",
+          "why": "The top label reads 640, and its line runs from 330 to 524 px."
+        },
+        {
+          "itemId": "L108",
+          "sourceLiteral": "625",
+          "verdict": "AGREES",
+          "why": "The lower right chain label reads 625, and its line runs from 511 to 701 px."
+        },
+        {
+          "itemId": "L65",
+          "proposal": {
+            "literal": "625",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "625",
+          "verdict": "DISAGREES",
+          "why": "The label reads 625, not 479. The 479 is from the window tag 280/479 elsewhere on the drawing."
+        },
+        {
+          "itemId": "L21",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The garage (room 16) depth label reads 660, not 044. The 487–658 px segment is also only about 171 px, too short for 660 at this scale (about 200 px)."
+        },
+        {
+          "itemId": "L36",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The text 660 is right, but the 487–658 px segment works out to about 560 cm. The 660 garage depth should run about 200 px, from the wall at roughly 500 px down to about 700 px."
+        },
+        {
+          "itemId": "L26",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The room 8 width label reads 458, not 854."
+        },
+        {
+          "itemId": "L56",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The text 458 is right, but the 138–298 px span starts in room 10. Room 8 runs from about 178 to 318 px, which is about 140 px for 458 cm."
+        },
+        {
+          "itemId": "L22",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The garage label reads 660, not 044. The 449–599 px segment is not the garage depth line."
+        },
+        {
+          "itemId": "L38",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The text 660 is right, but the 449–599 px segment reaches into room 13 and stops short of the garage's far wall."
+        },
+        {
+          "itemId": "L116",
+          "proposal": {
+            "literal": "380",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "380",
+          "verdict": "DISAGREES",
+          "why": "The room 12 label reads 380, but the 261–400 px span (139 px, about 455 cm) is too long for 380 cm."
+        },
+        {
+          "itemId": "L27",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The label reads 458, not 854. The 178–298 px span also stops short of room 8's right wall at about 318 px."
+        },
+        {
+          "itemId": "L54",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The text 458 is right, but the 178–298 px segment (120 px, about 394 cm) is too short for 458 cm."
+        },
+        {
+          "itemId": "L114",
+          "sourceLiteral": "380",
+          "verdict": "AGREES",
+          "why": "The room 12 label reads 380, and the 281–400 px span (about 119 px) fits 380 cm at this scale."
+        },
+        {
+          "itemId": "L80",
+          "proposal": {
+            "literal": "124",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "124",
+          "verdict": "DISAGREES",
+          "why": "The label at this place in room 3 reads 124, not 11."
+        },
+        {
+          "itemId": "L98",
+          "proposal": {
+            "literal": "124",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "124",
+          "verdict": "DISAGREES",
+          "why": "The label in room 3 reads 124, not 74."
+        },
+        {
+          "itemId": "L23",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The garage label reads 660, not 044. The 487–599 px segment is far too short for it."
+        },
+        {
+          "itemId": "L35",
+          "proposal": {
+            "literal": "660",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "660",
+          "verdict": "DISAGREES",
+          "why": "The text 660 is right, but the 487–599 px segment (112 px) does not match the 660 garage depth, which should be about 200 px."
+        },
+        {
+          "itemId": "L31",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The label reads 458, not 854. The 138–245 px span is not room 8's width."
+        },
+        {
+          "itemId": "L55",
+          "proposal": {
+            "literal": "458",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "458",
+          "verdict": "DISAGREES",
+          "why": "The text 458 is right, but the 138–245 px segment (107 px) does not match room 8's width, which should be about 140 px."
+        },
+        {
+          "itemId": "L29",
+          "proposal": {
+            "literal": "600",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "600",
+          "verdict": "DISAGREES",
+          "why": "The garage width label reads 600, not 014."
+        },
+        {
+          "itemId": "L88",
+          "proposal": {
+            "literal": "600",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "600",
+          "verdict": "DISAGREES",
+          "why": "The text 600 is right, but the 126–233 px segment (107 px) is too short. The garage interior runs from about 80 to 265 px, which is about 183 px."
+        },
+        {
+          "itemId": "L78",
+          "proposal": {
+            "literal": "325",
+            "scope": "ROOM"
+          },
+          "sourceLiteral": "325",
+          "verdict": "DISAGREES",
+          "why": "The rotated label beside room 4 reads 325, not 43."
+        },
+        {
+          "itemId": "L103",
+          "proposal": {
+            "literal": "124",
+            "scope": "SEGMENT"
+          },
+          "sourceLiteral": "124",
+          "verdict": "DISAGREES",
+          "why": "The label in room 3 reads 124, not 74."
+        }
+      ]
+    }
+  ],
+  "decision": "ACCEPT",
+  "frames": [
+    {
+      "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+      "kind": "PLAN",
+      "storey": "GROUND"
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+      "kind": "SECTION",
+      "storey": "UNKNOWN"
+    }
+  ],
+  "measured": {
+    "after": {
+      "eaves": 2.896,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    },
+    "before": {
+      "eaves": 2.896,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    }
+  },
+  "model": "claude-opus-5-5",
+  "promptVersions": {
+    "read": "metric-read/1",
+    "verify": "metric-verify/1"
+  },
+  "reads": [
+    {
+      "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+      "model": "claude-opus-5-5",
+      "observations": [
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "door room 13, 100x230",
+          "id": "dim-665d8ad5-length-100230-3-28",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            37,
+            432,
+            62,
+            452
+          ],
+          "literal": "100/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "garage side door 100x230",
+          "id": "dim-665d8ad5-length-100230-3-33",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            37,
+            516,
+            62,
+            536
+          ],
+          "literal": "100/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "entrance door 105x210",
+          "id": "dim-665d8ad5-length-105210-18-33",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            284,
+            517,
+            307,
+            537
+          ],
+          "literal": "105/210",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 3 width",
+          "id": "dim-665d8ad5-length-124-22-27",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            345,
+            420,
+            365,
+            432
+          ],
+          "literal": "124",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.24
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "hall 2",
+          "id": "dim-665d8ad5-length-125-15-23",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            228,
+            360,
+            242,
+            378
+          ],
+          "literal": "125",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.25
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 14 depth",
+          "id": "dim-665d8ad5-length-130-15-26",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            230,
+            412,
+            242,
+            428
+          ],
+          "literal": "130",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.3
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 10 depth",
+          "id": "dim-665d8ad5-length-140-8-8",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            112,
+            127,
+            132
+          ],
+          "literal": "140",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.4
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 9 depth",
+          "id": "dim-665d8ad5-length-149-8-5",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            72,
+            127,
+            92
+          ],
+          "literal": "149",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.49
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              68,
+              838
+            ],
+            "to": [
+              525,
+              838
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "overall width",
+          "id": "dim-665d8ad5-length-1500-19-52",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            282,
+            820,
+            320,
+            834
+          ],
+          "literal": "1500",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "WHOLE_HOUSE",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 15
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 15 depth",
+          "id": "dim-665d8ad5-length-171-15-30",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            230,
+            468,
+            244,
+            488
+          ],
+          "literal": "171",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.71
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 1 width",
+          "id": "dim-665d8ad5-length-180-18-27",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            285,
+            420,
+            305,
+            432
+          ],
+          "literal": "180",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.8
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "door room 7, 180x230",
+          "id": "dim-665d8ad5-length-180230-23-14",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            361,
+            206,
+            386,
+            226
+          ],
+          "literal": "180/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "door room 8 to terrace 180x230",
+          "id": "dim-665d8ad5-length-180230-23-7",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            361,
+            106,
+            386,
+            126
+          ],
+          "literal": "180/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 14 width",
+          "id": "dim-665d8ad5-length-184-16-27",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            245,
+            420,
+            267,
+            432
+          ],
+          "literal": "184",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 1.84
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              680,
+              52
+            ],
+            "to": [
+              680,
+              700
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "overall depth",
+          "id": "dim-665d8ad5-length-2125-42-24",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            668,
+            365,
+            684,
+            400
+          ],
+          "literal": "2125",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "WHOLE_HOUSE",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 21.25
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "window room 11, 220x140",
+          "id": "dim-665d8ad5-length-220140-3-14",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            37,
+            215,
+            62,
+            235
+          ],
+          "literal": "220/140",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "window room 12, 220x140",
+          "id": "dim-665d8ad5-length-220140-3-21",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            37,
+            326,
+            62,
+            346
+          ],
+          "literal": "220/140",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 6 depth",
+          "id": "dim-665d8ad5-length-243-15-20",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            228,
+            312,
+            242,
+            334
+          ],
+          "literal": "243",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 2.43
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 13 depth",
+          "id": "dim-665d8ad5-length-253-8-28",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            437,
+            127,
+            457
+          ],
+          "literal": "253",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 2.53
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "living room side glazing 280x470",
+          "id": "dim-665d8ad5-length-280470-34-20",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            528,
+            304,
+            553,
+            326
+          ],
+          "literal": "280/470",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 10 width",
+          "id": "dim-665d8ad5-length-300-10-8",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            146,
+            124,
+            166,
+            136
+          ],
+          "literal": "300",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "kitchen window 300x230",
+          "id": "dim-665d8ad5-length-300230-28-33",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            428,
+            522,
+            453,
+            544
+          ],
+          "literal": "300/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 6 width",
+          "id": "dim-665d8ad5-length-304-16-21",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            245,
+            326,
+            267,
+            338
+          ],
+          "literal": "304",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.04
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 4 depth",
+          "id": "dim-665d8ad5-length-325-30-28",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            470,
+            436,
+            484,
+            458
+          ],
+          "literal": "325",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.25
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 7 width",
+          "id": "dim-665d8ad5-length-326-16-13",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            243,
+            206,
+            265,
+            218
+          ],
+          "literal": "326",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.26
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 7 depth",
+          "id": "dim-665d8ad5-length-340-15-14",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            228,
+            218,
+            242,
+            238
+          ],
+          "literal": "340",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.4
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 8 depth",
+          "id": "dim-665d8ad5-length-341-15-9",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            233,
+            135,
+            247,
+            155
+          ],
+          "literal": "341",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.41
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 11 depth",
+          "id": "dim-665d8ad5-length-380-8-14",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            215,
+            127,
+            240
+          ],
+          "literal": "380",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.8
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 12 depth",
+          "id": "dim-665d8ad5-length-380-8-20",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            312,
+            127,
+            337
+          ],
+          "literal": "380",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 3.8
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "living room glazing 400x230",
+          "id": "dim-665d8ad5-length-400230-25-15",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            386,
+            222,
+            411,
+            242
+          ],
+          "literal": "400/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 13 width",
+          "id": "dim-665d8ad5-length-432-12-27",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            176,
+            420,
+            198,
+            432
+          ],
+          "literal": "432",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 4.32
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 5 depth",
+          "id": "dim-665d8ad5-length-445-30-23",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            470,
+            358,
+            484,
+            380
+          ],
+          "literal": "445",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 4.45
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 4 width",
+          "id": "dim-665d8ad5-length-448-29-27",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            458,
+            420,
+            480,
+            432
+          ],
+          "literal": "448",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 4.48
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 8 width",
+          "id": "dim-665d8ad5-length-458-14-8",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            206,
+            124,
+            226,
+            136
+          ],
+          "literal": "458",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 4.58
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              525,
+              838
+            ],
+            "to": [
+              540,
+              838
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "bottom right offset",
+          "id": "dim-665d8ad5-length-50-33-52",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            527,
+            820,
+            542,
+            834
+          ],
+          "literal": "50",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 0.5
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "garage door 500x225",
+          "id": "dim-665d8ad5-length-500225-11-45",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            158,
+            706,
+            183,
+            726
+          ],
+          "literal": "500/225",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              85,
+              652
+            ],
+            "to": [
+              275,
+              652
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "garage 16 width",
+          "id": "dim-665d8ad5-length-600-11-40",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            160,
+            641,
+            182,
+            653
+          ],
+          "literal": "600",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              660,
+              505
+            ],
+            "to": [
+              660,
+              700
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "right chain bottom, garage",
+          "id": "dim-665d8ad5-length-625-41-38",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            643,
+            595,
+            657,
+            620
+          ],
+          "literal": "625",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.25
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              330,
+              19
+            ],
+            "to": [
+              525,
+              19
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "top chain, terrace part",
+          "id": "dim-665d8ad5-length-640-26-1",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            400,
+            4,
+            430,
+            18
+          ],
+          "literal": "640",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.4
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              660,
+              52
+            ],
+            "to": [
+              660,
+              245
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "right chain top",
+          "id": "dim-665d8ad5-length-640-41-10",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            643,
+            140,
+            657,
+            170
+          ],
+          "literal": "640",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.4
+        },
+        {
+          "axis": "HORIZONTAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "room 5 width",
+          "id": "dim-665d8ad5-length-650-27-21",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            422,
+            326,
+            444,
+            338
+          ],
+          "literal": "650",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.5
+        },
+        {
+          "axis": "VERTICAL",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "garage 16 depth",
+          "id": "dim-665d8ad5-length-660-8-33",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            113,
+            518,
+            127,
+            540
+          ],
+          "literal": "660",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "ROOM",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.6
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              68,
+              816
+            ],
+            "to": [
+              278,
+              816
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "bottom chain left",
+          "id": "dim-665d8ad5-length-690-11-50",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            160,
+            800,
+            192,
+            814
+          ],
+          "literal": "690",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 6.9
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "window room 9, 80 wide x 230 high",
+          "id": "dim-665d8ad5-length-80230-10-2",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            144,
+            26,
+            168,
+            46
+          ],
+          "literal": "80/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "window room 10, 80x230",
+          "id": "dim-665d8ad5-length-80230-12-2",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            186,
+            26,
+            210,
+            46
+          ],
+          "literal": "80/230",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OPENING",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": null
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              278,
+              816
+            ],
+            "to": [
+              525,
+              816
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "bottom chain right",
+          "id": "dim-665d8ad5-length-810-25-50",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            388,
+            800,
+            420,
+            814
+          ],
+          "literal": "810",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 8.1
+        },
+        {
+          "axis": "HORIZONTAL",
+          "ends": {
+            "from": [
+              68,
+              19
+            ],
+            "to": [
+              330,
+              19
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "top chain, left part",
+          "id": "dim-665d8ad5-length-860-13-1",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            185,
+            4,
+            215,
+            18
+          ],
+          "literal": "860",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 8.6
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              660,
+              245
+            ],
+            "to": [
+              660,
+              505
+            ]
+          },
+          "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+          "hostHint": "right chain middle",
+          "id": "dim-665d8ad5-length-860-41-24",
+          "image": {
+            "height": 853,
+            "scale": 1,
+            "sha256": "b92b473d5d6248bc30df5359fa6df3f4a59edac829f9e172f3aa95ca0552dacf",
+            "width": 853
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            643,
+            370,
+            657,
+            400
+          ],
+          "literal": "860",
+          "reference": "OUTER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "SEGMENT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 8.6
+        }
+      ],
+      "promptVersion": "metric-read/1",
+      "raw": {
+        "items": [
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                68,
+                19
+              ],
+              "to": [
+                330,
+                19
+              ]
+            },
+            "hostHint": "top chain, left part",
+            "kind": "LENGTH",
+            "labelBox": [
+              185,
+              4,
+              215,
+              18
+            ],
+            "literal": "860",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 8.6
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                330,
+                19
+              ],
+              "to": [
+                525,
+                19
+              ]
+            },
+            "hostHint": "top chain, terrace part",
+            "kind": "LENGTH",
+            "labelBox": [
+              400,
+              4,
+              430,
+              18
+            ],
+            "literal": "640",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.4
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                660,
+                52
+              ],
+              "to": [
+                660,
+                245
+              ]
+            },
+            "hostHint": "right chain top",
+            "kind": "LENGTH",
+            "labelBox": [
+              643,
+              140,
+              657,
+              170
+            ],
+            "literal": "640",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.4
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                660,
+                245
+              ],
+              "to": [
+                660,
+                505
+              ]
+            },
+            "hostHint": "right chain middle",
+            "kind": "LENGTH",
+            "labelBox": [
+              643,
+              370,
+              657,
+              400
+            ],
+            "literal": "860",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 8.6
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                660,
+                505
+              ],
+              "to": [
+                660,
+                700
+              ]
+            },
+            "hostHint": "right chain bottom, garage",
+            "kind": "LENGTH",
+            "labelBox": [
+              643,
+              595,
+              657,
+              620
+            ],
+            "literal": "625",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.25
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                680,
+                52
+              ],
+              "to": [
+                680,
+                700
+              ]
+            },
+            "hostHint": "overall depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              668,
+              365,
+              684,
+              400
+            ],
+            "literal": "2125",
+            "reference": "OUTER_FACE",
+            "scope": "WHOLE_HOUSE",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 21.25
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                68,
+                816
+              ],
+              "to": [
+                278,
+                816
+              ]
+            },
+            "hostHint": "bottom chain left",
+            "kind": "LENGTH",
+            "labelBox": [
+              160,
+              800,
+              192,
+              814
+            ],
+            "literal": "690",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.9
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                278,
+                816
+              ],
+              "to": [
+                525,
+                816
+              ]
+            },
+            "hostHint": "bottom chain right",
+            "kind": "LENGTH",
+            "labelBox": [
+              388,
+              800,
+              420,
+              814
+            ],
+            "literal": "810",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 8.1
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                68,
+                838
+              ],
+              "to": [
+                525,
+                838
+              ]
+            },
+            "hostHint": "overall width",
+            "kind": "LENGTH",
+            "labelBox": [
+              282,
+              820,
+              320,
+              834
+            ],
+            "literal": "1500",
+            "reference": "OUTER_FACE",
+            "scope": "WHOLE_HOUSE",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 15
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                525,
+                838
+              ],
+              "to": [
+                540,
+                838
+              ]
+            },
+            "hostHint": "bottom right offset",
+            "kind": "LENGTH",
+            "labelBox": [
+              527,
+              820,
+              542,
+              834
+            ],
+            "literal": "50",
+            "reference": "OUTER_FACE",
+            "scope": "SEGMENT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 0.5
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 9 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              72,
+              127,
+              92
+            ],
+            "literal": "149",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.49
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 10 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              112,
+              127,
+              132
+            ],
+            "literal": "140",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.4
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 10 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              146,
+              124,
+              166,
+              136
+            ],
+            "literal": "300",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 8 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              206,
+              124,
+              226,
+              136
+            ],
+            "literal": "458",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 4.58
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 8 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              233,
+              135,
+              247,
+              155
+            ],
+            "literal": "341",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.41
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 7 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              243,
+              206,
+              265,
+              218
+            ],
+            "literal": "326",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.26
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 7 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              228,
+              218,
+              242,
+              238
+            ],
+            "literal": "340",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.4
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 11 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              215,
+              127,
+              240
+            ],
+            "literal": "380",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.8
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 12 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              312,
+              127,
+              337
+            ],
+            "literal": "380",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.8
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 6 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              228,
+              312,
+              242,
+              334
+            ],
+            "literal": "243",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.43
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 6 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              245,
+              326,
+              267,
+              338
+            ],
+            "literal": "304",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.04
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 5 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              422,
+              326,
+              444,
+              338
+            ],
+            "literal": "650",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.5
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 5 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              470,
+              358,
+              484,
+              380
+            ],
+            "literal": "445",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 4.45
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "hall 2",
+            "kind": "LENGTH",
+            "labelBox": [
+              228,
+              360,
+              242,
+              378
+            ],
+            "literal": "125",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.25
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 13 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              176,
+              420,
+              198,
+              432
+            ],
+            "literal": "432",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 4.32
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 13 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              437,
+              127,
+              457
+            ],
+            "literal": "253",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.53
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 14 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              230,
+              412,
+              242,
+              428
+            ],
+            "literal": "130",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.3
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 14 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              245,
+              420,
+              267,
+              432
+            ],
+            "literal": "184",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.84
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 15 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              230,
+              468,
+              244,
+              488
+            ],
+            "literal": "171",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.71
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 1 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              285,
+              420,
+              305,
+              432
+            ],
+            "literal": "180",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.8
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 3 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              345,
+              420,
+              365,
+              432
+            ],
+            "literal": "124",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.24
+          },
+          {
+            "axis": "HORIZONTAL",
+            "hostHint": "room 4 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              458,
+              420,
+              480,
+              432
+            ],
+            "literal": "448",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 4.48
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "room 4 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              470,
+              436,
+              484,
+              458
+            ],
+            "literal": "325",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3.25
+          },
+          {
+            "axis": "VERTICAL",
+            "hostHint": "garage 16 depth",
+            "kind": "LENGTH",
+            "labelBox": [
+              113,
+              518,
+              127,
+              540
+            ],
+            "literal": "660",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6.6
+          },
+          {
+            "axis": "HORIZONTAL",
+            "ends": {
+              "from": [
+                85,
+                652
+              ],
+              "to": [
+                275,
+                652
+              ]
+            },
+            "hostHint": "garage 16 width",
+            "kind": "LENGTH",
+            "labelBox": [
+              160,
+              641,
+              182,
+              653
+            ],
+            "literal": "600",
+            "reference": "INNER_FACE",
+            "scope": "ROOM",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 6
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "window room 9, 80 wide x 230 high",
+            "kind": "LENGTH",
+            "labelBox": [
+              144,
+              26,
+              168,
+              46
+            ],
+            "literal": "80/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 0.8
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "window room 10, 80x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              186,
+              26,
+              210,
+              46
+            ],
+            "literal": "80/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 0.8
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "door room 8 to terrace 180x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              361,
+              106,
+              386,
+              126
+            ],
+            "literal": "180/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.8
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "door room 7, 180x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              361,
+              206,
+              386,
+              226
+            ],
+            "literal": "180/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.8
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "living room glazing 400x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              386,
+              222,
+              411,
+              242
+            ],
+            "literal": "400/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 4
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "living room side glazing 280x470",
+            "kind": "LENGTH",
+            "labelBox": [
+              528,
+              304,
+              553,
+              326
+            ],
+            "literal": "280/470",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.8
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "window room 11, 220x140",
+            "kind": "LENGTH",
+            "labelBox": [
+              37,
+              215,
+              62,
+              235
+            ],
+            "literal": "220/140",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.2
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "window room 12, 220x140",
+            "kind": "LENGTH",
+            "labelBox": [
+              37,
+              326,
+              62,
+              346
+            ],
+            "literal": "220/140",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.2
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "door room 13, 100x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              37,
+              432,
+              62,
+              452
+            ],
+            "literal": "100/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "garage side door 100x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              37,
+              516,
+              62,
+              536
+            ],
+            "literal": "100/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "entrance door 105x210",
+            "kind": "LENGTH",
+            "labelBox": [
+              284,
+              517,
+              307,
+              537
+            ],
+            "literal": "105/210",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 1.05
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "kitchen window 300x230",
+            "kind": "LENGTH",
+            "labelBox": [
+              428,
+              522,
+              453,
+              544
+            ],
+            "literal": "300/230",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 3
+          },
+          {
+            "axis": "NONE",
+            "hostHint": "garage door 500x225",
+            "kind": "LENGTH",
+            "labelBox": [
+              158,
+              706,
+              183,
+              726
+            ],
+            "literal": "500/225",
+            "reference": "UNKNOWN",
+            "scope": "OPENING",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 5
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChBtUNZaEZEAmLSmWysAF",
+      "usd": 0.126748
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+      "model": "claude-opus-5-5",
+      "observations": [
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "roof pitch",
+          "id": "dim-1c6d1497-angle-35-54-17",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "ANGLE",
+          "labelBox": [
+            843,
+            258,
+            890,
+            292
+          ],
+          "literal": "35°",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "OTHER",
+          "status": "PRINTED",
+          "storey": "ROOF",
+          "unit": "deg",
+          "value": 35
+        },
+        {
+          "axis": "VERTICAL",
+          "ends": {
+            "from": [
+              762,
+              443
+            ],
+            "to": [
+              762,
+              620
+            ]
+          },
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "ground floor clear room height",
+          "id": "dim-1c6d1497-length-280-47-33",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "LENGTH",
+          "labelBox": [
+            728,
+            503,
+            772,
+            552
+          ],
+          "literal": "280",
+          "reference": "INNER_FACE",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "HEIGHT",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "cm",
+          "value": 2.8
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "ground floor",
+          "id": "dim-1c6d1497-level-000-55-37",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            843,
+            575,
+            916,
+            604
+          ],
+          "literal": "±0,00",
+          "reference": "FINISHED_LEVEL",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "m",
+          "value": 0
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "terrain",
+          "id": "dim-1c6d1497-level-032-68-38",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            1048,
+            595,
+            1116,
+            624
+          ],
+          "literal": "-0,32",
+          "reference": "TERRAIN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "GROUND",
+          "unit": "m",
+          "value": -0.32
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "eaves",
+          "id": "dim-1c6d1497-level-327-65-24",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            1010,
+            368,
+            1084,
+            396
+          ],
+          "literal": "+3,27",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "ROOF",
+          "unit": "m",
+          "value": 3.27
+        },
+        {
+          "axis": "NONE",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-przekroj-444b607b2e",
+          "hostHint": "ridge top",
+          "id": "dim-1c6d1497-level-628-47-12",
+          "image": {
+            "height": 854,
+            "scale": 1,
+            "sha256": "d225fe2950cdf88709cd9e22c2a305a47cb0db01ce9f6bebf9fa43c8dd621471",
+            "width": 1138
+          },
+          "kind": "LEVEL",
+          "labelBox": [
+            710,
+            176,
+            782,
+            206
+          ],
+          "literal": "+6,28",
+          "reference": "UNKNOWN",
+          "schema": "buildapp.dimension-observation",
+          "schemaVersion": "1.0.0",
+          "scope": "LEVEL",
+          "status": "PRINTED",
+          "storey": "ROOF",
+          "unit": "m",
+          "value": 6.28
+        }
+      ],
+      "promptVersion": "metric-read/1",
+      "raw": {
+        "items": [
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "ridge top",
+            "kind": "LEVEL",
+            "labelBox": [
+              710,
+              176,
+              782,
+              206
+            ],
+            "literal": "+6,28",
+            "note": null,
+            "reference": "UNKNOWN",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "ROOF",
+            "unit": "m",
+            "value": 6.28
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "roof pitch",
+            "kind": "ANGLE",
+            "labelBox": [
+              843,
+              258,
+              890,
+              292
+            ],
+            "literal": "35°",
+            "note": null,
+            "reference": "UNKNOWN",
+            "scope": "OTHER",
+            "status": "PRINTED",
+            "storey": "ROOF",
+            "unit": "deg",
+            "value": 35
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "eaves",
+            "kind": "LEVEL",
+            "labelBox": [
+              1010,
+              368,
+              1084,
+              396
+            ],
+            "literal": "+3,27",
+            "note": null,
+            "reference": "UNKNOWN",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "ROOF",
+            "unit": "m",
+            "value": 3.27
+          },
+          {
+            "axis": "VERTICAL",
+            "ends": {
+              "from": [
+                762,
+                443
+              ],
+              "to": [
+                762,
+                620
+              ]
+            },
+            "hostHint": "ground floor clear room height",
+            "kind": "LENGTH",
+            "labelBox": [
+              728,
+              503,
+              772,
+              552
+            ],
+            "literal": "280",
+            "note": null,
+            "reference": "INNER_FACE",
+            "scope": "HEIGHT",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "cm",
+            "value": 2.8
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "ground floor",
+            "kind": "LEVEL",
+            "labelBox": [
+              843,
+              575,
+              916,
+              604
+            ],
+            "literal": "±0,00",
+            "note": null,
+            "reference": "FINISHED_LEVEL",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "m",
+            "value": 0
+          },
+          {
+            "axis": "NONE",
+            "ends": null,
+            "hostHint": "terrain",
+            "kind": "LEVEL",
+            "labelBox": [
+              1048,
+              595,
+              1116,
+              624
+            ],
+            "literal": "-0,32",
+            "note": null,
+            "reference": "TERRAIN",
+            "scope": "LEVEL",
+            "status": "PRINTED",
+            "storey": "GROUND",
+            "unit": "m",
+            "value": -0.32
+          }
+        ]
+      },
+      "refused": [],
+      "requestId": "req_011ChBtXFYk1FNEpfp6nUxA6",
+      "usd": 0.029592
+    }
+  ],
+  "resolution": {
+    "decisions": [
+      {
+        "api": "690",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L1",
+        "local": "080",
+        "observationId": "dim-665d8ad5-length-690-11-50",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 697.7 cm at the scale other labels settle (3.3020 cm/px, STRONG): 690 fits, 80 does not",
+        "witness": "SCALE"
+      },
+      {
+        "api": "860",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L2",
+        "local": "088",
+        "observationId": "dim-665d8ad5-length-860-41-24",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 865.8 cm at the scale other labels settle (3.3045 cm/px, STRONG): 860 fits, 88 does not",
+        "witness": "SCALE"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L3",
+        "local": "690",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "184",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L4",
+        "local": "191",
+        "observationId": "dim-665d8ad5-length-184-16-27",
+        "why": "the API reads 184 cm, the analyzer 191: at the settled scale the line measures 198.1 cm: the API's 184 does not fit either"
+      },
+      {
+        "api": "180",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L5",
+        "local": "581",
+        "observationId": "dim-665d8ad5-length-180-18-27",
+        "why": "the API reads 180 cm, the analyzer 581: at the settled scale the line measures 229.5 cm: the API's 180 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L6",
+        "local": "191",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L7",
+        "local": "581",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L8",
+        "local": "581",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "140",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L9",
+        "local": "401",
+        "observationId": "dim-665d8ad5-length-140-8-8",
+        "why": "the label's line measures 137.9 cm at the scale other labels settle (3.3045 cm/px, STRONG): 140 fits, 401 does not",
+        "witness": "SCALE"
+      },
+      {
+        "api": "1500",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L10",
+        "local": "0051",
+        "observationId": "dim-665d8ad5-length-1500-19-52",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 1505.7 cm at the scale other labels settle (3.3020 cm/px, STRONG): 1500 fits, 51 does not",
+        "witness": "SCALE"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L11",
+        "local": "0051",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "810",
+        "decision": "AGREES",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L12",
+        "local": "810",
+        "observationId": "dim-665d8ad5-length-810-25-50",
+        "verdict": "AGREES",
+        "why": "both read 810 cm (the analyzer's own status: RAW)"
+      },
+      {
+        "api": "640",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L13",
+        "local": "014",
+        "observationId": "dim-665d8ad5-length-640-26-1",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 642.2 cm at the scale other labels settle (3.3020 cm/px, STRONG): 640 fits, 14 does not",
+        "witness": "SCALE"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L14",
+        "local": "018",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "448",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L15",
+        "local": "837",
+        "observationId": "dim-665d8ad5-length-448-29-27",
+        "why": "the API reads 448 cm, the analyzer 837: at the settled scale the line measures 297.2 cm: the API's 448 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L16",
+        "local": "837",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L17",
+        "local": "837",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L18",
+        "local": "837",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "640",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L19",
+        "local": "049",
+        "observationId": "dim-665d8ad5-length-640-41-10",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 644.4 cm at the scale other labels settle (3.3045 cm/px, STRONG): 640 fits, 49 does not",
+        "witness": "SCALE"
+      },
+      {
+        "api": "860",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L20",
+        "local": "048",
+        "observationId": "dim-665d8ad5-length-860-13-1",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 863.5 cm at the scale other labels settle (3.3020 cm/px, STRONG): 860 fits, 48 does not",
+        "witness": "SCALE"
+      },
+      {
+        "api": "660",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L21",
+        "local": "044",
+        "observationId": "dim-665d8ad5-length-660-8-33",
+        "verdict": "DISAGREES",
+        "why": "the API reads 660 cm, the analyzer 44: at the settled scale the line measures 563.7 cm: the API's 660 does not fit either; the check also disagrees, but the same reader twice is not a second witness"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L22",
+        "local": "044",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L23",
+        "local": "044",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L24",
+        "local": "044",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "600",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L25",
+        "local": "014",
+        "observationId": "dim-665d8ad5-length-600-11-40",
+        "why": "the API reads 600 cm, the analyzer 14: at the settled scale the line measures 118.9 cm: the API's 600 does not fit either"
+      },
+      {
+        "api": "458",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L26",
+        "local": "854",
+        "observationId": "dim-665d8ad5-length-458-14-8",
+        "verdict": "DISAGREES",
+        "why": "the API reads 458 cm, the analyzer 854: at the settled scale the line measures 528.3 cm: the API's 458 does not fit either; the check also disagrees, but the same reader twice is not a second witness"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L27",
+        "local": "854",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L28",
+        "local": "014",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L29",
+        "local": "014",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L30",
+        "local": "854",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L31",
+        "local": "854",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L32",
+        "local": "014",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L33",
+        "local": "014",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L34",
+        "local": "860",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L35",
+        "local": "660",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L36",
+        "local": "660",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L37",
+        "local": "660",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L38",
+        "local": "660",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "125",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L39",
+        "local": "53",
+        "observationId": "dim-665d8ad5-length-125-15-23",
+        "why": "the API reads 125 cm, the analyzer 53: at the settled scale the line measures 163.4 cm: the API's 125 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L40",
+        "local": "53",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L41",
+        "local": "140",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "149",
+        "decision": "AGREES",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L42",
+        "local": "149",
+        "observationId": "dim-665d8ad5-length-149-8-5",
+        "why": "both read 149 cm (the analyzer's own status: REJECTED)"
+      },
+      {
+        "api": "171",
+        "decision": "AGREES",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L43",
+        "local": "171",
+        "observationId": "dim-665d8ad5-length-171-15-30",
+        "why": "both read 171 cm (the analyzer's own status: RAW)"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L44",
+        "local": "1100",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L45",
+        "local": "1100",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "2125",
+        "decision": "AGREES",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L46",
+        "local": "2125",
+        "observationId": "dim-665d8ad5-length-2125-42-24",
+        "verdict": "AGREES",
+        "why": "both read 2125 cm (the analyzer's own status: REJECTED)"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L47",
+        "local": "13",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L48",
+        "local": "13",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L49",
+        "local": "51",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L50",
+        "local": "51",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "445",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L51",
+        "local": "1330",
+        "observationId": "dim-665d8ad5-length-445-30-23",
+        "why": "the API reads 445 cm, the analyzer 1330: at the settled scale the line measures 318.7 cm: the API's 445 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L52",
+        "local": "1330",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L53",
+        "local": "14",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L54",
+        "local": "458",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L55",
+        "local": "458",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L56",
+        "local": "458",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L57",
+        "local": "458",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L58",
+        "local": "137",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "253",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L59",
+        "local": "152",
+        "observationId": "dim-665d8ad5-length-253-8-28",
+        "why": "the API reads 253 cm, the analyzer 152: at the settled scale the line measures 178.3 cm: the API's 253 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L60",
+        "local": "152",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L61",
+        "local": "448",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L62",
+        "local": "448",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L63",
+        "local": "448",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L64",
+        "local": "448",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "625",
+        "decision": "CORRECTED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L65",
+        "local": "479",
+        "observationId": "dim-665d8ad5-length-625-41-38",
+        "verdict": "DISAGREES",
+        "why": "the label's line measures 627.9 cm at the scale other labels settle (3.3045 cm/px, STRONG): 625 fits, 479 does not",
+        "witness": "SCALE"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L66",
+        "local": "171",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L67",
+        "local": "184",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L68",
+        "local": "184",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L69",
+        "local": "860",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L70",
+        "local": "180",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L71",
+        "local": "180",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L72",
+        "local": "180",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L73",
+        "local": "21.13",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L74",
+        "local": "21.13",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L75",
+        "local": "43.51",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L76",
+        "local": "43.51",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "326",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L77",
+        "local": "471",
+        "observationId": "dim-665d8ad5-length-326-16-13",
+        "why": "the API reads 326 cm, the analyzer 471: at the settled scale the line measures 297.2 cm: the API's 326 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L78",
+        "local": "43",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L79",
+        "local": "43",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L80",
+        "local": "11",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L81",
+        "local": "11",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L82",
+        "local": "11",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L83",
+        "local": "11",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L84",
+        "local": "11",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L85",
+        "local": "41",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L86",
+        "local": "41",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L87",
+        "local": "541",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L88",
+        "local": "600",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L89",
+        "local": "600",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L90",
+        "local": "600",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L91",
+        "local": "600",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L92",
+        "local": "600",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L93",
+        "local": "61",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L94",
+        "local": "61",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L95",
+        "local": "61",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L96",
+        "local": "640",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L97",
+        "local": "640",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L98",
+        "local": "74",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L99",
+        "local": "71",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L100",
+        "local": "74",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L101",
+        "local": "74",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L102",
+        "local": "74",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L103",
+        "local": "74",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L104",
+        "local": "71",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "341",
+        "decision": "UNRESOLVED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L105",
+        "local": "75",
+        "observationId": "dim-665d8ad5-length-341-15-9",
+        "why": "the API reads 341 cm, the analyzer 75: at the settled scale the line measures 44.6 cm: the API's 341 does not fit either"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L106",
+        "local": "253",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L107",
+        "local": "253",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L108",
+        "local": "625",
+        "verdict": "AGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L109",
+        "local": "52",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L110",
+        "local": "52",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L111",
+        "local": "29",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L112",
+        "local": "29",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L113",
+        "local": "29",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "380",
+        "decision": "AGREES",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L114",
+        "local": "380",
+        "observationId": "dim-665d8ad5-length-380-8-20",
+        "verdict": "AGREES",
+        "why": "both read 380 cm (the analyzer's own status: REJECTED)"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L115",
+        "local": "380",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L116",
+        "local": "380",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L117",
+        "local": "326",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "decision": "NOT_MATCHED",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "itemId": "L118",
+        "local": "1217",
+        "verdict": "DISAGREES",
+        "why": "the independent read reported no dimension at this label: the analyzer's reading stands"
+      },
+      {
+        "api": "50",
+        "decision": "NEW_SPAN",
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "observationId": "dim-665d8ad5-length-50-33-52",
+        "why": "a printed segment dimension the analyzer read no label for: handed as a span, the metric layer snaps and judges it"
+      }
+    ],
+    "readings": [
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-000-182d074912",
+        "literal": "690",
+        "proposalId": "mr:dim-665d8ad5-length-690-11-50"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-000-43f758d313",
+        "literal": "860",
+        "proposalId": "mr:dim-665d8ad5-length-860-41-24"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-001-f92946496d",
+        "literal": "140",
+        "proposalId": "mr:dim-665d8ad5-length-140-8-8"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-0051-3c6d436a8d",
+        "literal": "1500",
+        "proposalId": "mr:dim-665d8ad5-length-1500-19-52"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-010-9cd4cd9f47",
+        "literal": "810",
+        "proposalId": "mr:dim-665d8ad5-length-810-25-50"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-014-943848ec49",
+        "literal": "640",
+        "proposalId": "mr:dim-665d8ad5-length-640-26-1"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-039-5a4a51fabc",
+        "literal": "640",
+        "proposalId": "mr:dim-665d8ad5-length-640-41-10"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-040-546e61a8e0",
+        "literal": "860",
+        "proposalId": "mr:dim-665d8ad5-length-860-13-1"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-105-bd21b486f3",
+        "literal": "149",
+        "proposalId": "mr:dim-665d8ad5-length-149-8-5"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-11-e2e11c4028",
+        "literal": "171",
+        "proposalId": "mr:dim-665d8ad5-length-171-15-30"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-1115-11d39f1622",
+        "literal": "2125",
+        "proposalId": "mr:dim-665d8ad5-length-2125-42-24"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-170-c4646193c8",
+        "literal": "625",
+        "proposalId": "mr:dim-665d8ad5-length-625-41-38"
+      },
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "latticeId": "ocr-lattice-910-52cf006a74",
+        "literal": "380",
+        "proposalId": "mr:dim-665d8ad5-length-380-8-20"
+      }
+    ],
+    "resolverVersion": "1.0.0",
+    "spans": [
+      {
+        "consultant": {
+          "engine": "metric-consultant.anthropic-messages",
+          "model": "claude-opus-5-5"
+        },
+        "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+        "from": {
+          "x": 525,
+          "y": 838
+        },
+        "literal": "50",
+        "proposalId": "ms:dim-665d8ad5-length-50-33-52",
+        "to": {
+          "x": 540,
+          "y": 838
+        },
+        "unit": "cm"
+      }
+    ]
+  },
+  "resolverVersion": "1.0.0",
+  "usd": 0.285316,
+  "why": "13 printed reading(s) handed with a witness were applied by the metric layer; the scale STRONG → STRONG, the outline not contradicted"
+}
+

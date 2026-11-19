@@ -14,6 +14,11 @@
  * adapters it trusts and supplies the byte cache the run may use; the API gives
  * each job an empty cache of its own, so no job ever reads another's bytes.
  */
+import { applyAppearance } from './appearance/consumer.js'
+import type { Facade } from './appearance/visibility.js'
+import { chooseDelivered } from './consult/choose.js'
+import type { ElevationProjection } from './appearance/consumer.js'
+import type { AppearanceObservation } from './appearance/contract.js'
 import { stableJson } from '@buildapp/source-common'
 import { frameRasters } from '@buildapp/source-cv'
 import type { Checkpoint } from '@buildapp/source-common'
@@ -39,6 +44,7 @@ import type { ConsultedReading, ConsultedSpan, LabelRecogniser, MetricEvidenceSe
 import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result, RoofFeatureCorrection } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
+import type { CanonicalBuildingModel } from '@buildapp/model'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import type { ClosureReport } from '@buildapp/geometry'
 import { buildMobileSceneBundle, loadBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
@@ -131,6 +137,25 @@ export type AnalysisOptions = {
    * candidate never borrows another source's metric revision.
    */
   reuseMetrics?: MetricEvidenceSet
+  /**
+   * v3.54.14 (L-MS): a flat-colour sketch of an elevation, drawn locally from the API's typed contours at the frame's
+   * exact size (`appearance/elevation-sketch.ts`), read by the SOLVER in place of that elevation's original picture.
+   * The metric layer never sees it (a run that passes sketches passes `reuseMetrics` too, so its printed facts are the
+   * run's it is compared with). Absent — the default — the run is what it was.
+   */
+  elevationSketches?: ReadonlyArray<{ frameId: string; raster: ReturnType<typeof decodeImage> }>
+  /**
+   * v3.54.14 (L-MS): finish outlines applied to the reconstructed model before its scene is compiled — appearance
+   * observations (`appearance/contract.ts`) with each one's registration, keyed by its source byte hash. The consumer
+   * refuses any change to the usable geometry, so every measurement stays the reconstruction's. Absent: as before.
+   */
+  appearance?: { observations: readonly AppearanceObservation[]; projections: Readonly<Record<string, ElevationProjection>> }
+  /**
+   * v3.54.14 (L-MS, `consult/choose.ts`): with sketches read by the solver, a wall's own tone may change only on a side
+   * whose sketch passed the proportion check; on any other side it stays the model's the sketches were compared with.
+   * Applied before `appearance`. Absent: as before.
+   */
+  wallTonesFrom?: { model: CanonicalBuildingModel; acceptedSides: readonly Facade[] }
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -557,6 +582,8 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
     liveView.emit({ step: 'SOLVING', stage: 'REGISTERING_VIEWS', sheet: null, detail: 'registering the views and building the house from what was read' })
     let resolving = false
+    const sketchOf = new Map((options.elevationSketches ?? []).map((x) => [x.frameId, x.raster]))
+    const solverRaster = sketchOf.size === 0 ? raster : (frame: { variantByteHash: string; id?: string }): ReturnType<typeof decodeImage> | undefined => (frame.id !== undefined && sketchOf.get(frame.id)) || raster(frame)
     const reconstruction = reconstructV2({
       debug: options.debug,
       modelId: identity.modelId,
@@ -566,7 +593,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       sourcePackageHash: pkg.contentHash,
       graph,
       metrics,
-      raster,
+      raster: solverRaster,
       publishedAreas: pkg.publishedFacts,
       publishedRooms: pkg.publishedRooms,
       onPhase: (phase) => {
@@ -590,6 +617,15 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
       ...(options.glazedEnds && options.glazedEnds.length > 0 ? { glazedEnds: options.glazedEnds } : {}),
     })
     throwIfAborted(signal)
+    if (options.wallTonesFrom) {
+      const chosen = chooseDelivered({ metricModel: options.wallTonesFrom.model, formModel: reconstruction.model, formAccepted: true, acceptedSides: options.wallTonesFrom.acceptedSides })
+      ;(reconstruction as { model: typeof reconstruction.model }).model = chosen.model
+      if (chosen.record.kept.length > 0) trace.record('BUILDING_MODEL', 'WALL_TONES', 'PASSED', { kept: chosen.record.kept.length })
+    }
+    if (options.appearance && options.appearance.observations.length > 0) {
+      const applied = applyAppearance(reconstruction.model, options.appearance.observations, (_f, h) => options.appearance?.projections[h])
+      ;(reconstruction as { model: typeof reconstruction.model }).model = applied.model
+    }
     const model = reconstruction.model
     const modelText = serializeModel(model)
     const reconstructionMs = lap()

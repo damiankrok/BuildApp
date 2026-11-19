@@ -42,6 +42,7 @@ export const CLASS_MATERIAL: Partial<Record<AppearanceClass, { id: string; name:
   TIMBER: { id: 'mat-timber', name: 'Timber cladding', color: '#b07a4a' },
   DARK_RENDER: { id: 'mat-render-dark', name: 'Dark render', color: '#3a3a3c' },
   LIGHT_RENDER: { id: 'mat-wall', name: 'Rendered wall', color: '#e8e4dc' },
+  BRICK: { id: 'mat-brick', name: 'Facing brick', color: '#9a7b66' },
 }
 
 export type AppearanceTraceRegion = { regionId: string; hostId: string; face: 'OUTER'; class: AppearanceClass; materialId: string; areaM2: number; corners: number; fromRegions: string[] }
@@ -79,7 +80,7 @@ export function usableGeometryFingerprint(model: CanonicalBuildingModel): string
 }
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
-const CLASS_CODE: AppearanceClass[] = ['UNKNOWN', 'LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'GLASS', 'ROOF', 'METAL', 'BACKGROUND']
+const CLASS_CODE: AppearanceClass[] = ['UNKNOWN', 'LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'GLASS', 'ROOF', 'METAL', 'BACKGROUND', 'BRICK']
 
 export function applyAppearance(
   modelIn: CanonicalBuildingModel,
@@ -195,7 +196,7 @@ export function applyAppearance(
       // observation draws on it: every cell takes the finish nearest to it in the drawing (a breadth-first growth from
       // the cells the drawing gives a finish), so two finishes meet on one shared edge — no gap showing the wall, no
       // overlap of two skins — and glass or metal the drawing shows where the model has wall takes its neighbour's finish
-      const FINISHES = ['TIMBER', 'DARK_RENDER', 'LIGHT_RENDER'] as const
+      const FINISHES = ['TIMBER', 'DARK_RENDER', 'LIGHT_RENDER', 'BRICK'] as const
       const lab = new Int8Array(vis.w * vis.h).fill(-1)
       const allowed = (k: number): boolean => ownOrOpening.data[k] === 1 && covered.data[k] === 1
       let frontier: number[] = []
@@ -227,7 +228,7 @@ export function applyAppearance(
         for (const comp of components(m)) {
           const n = count(comp)
           if (n * cellM * cellM >= minArea) continue
-          const border = [0, 0, 0]
+          const border = FINISHES.map(() => 0)
           for (let k = 0; k < lab.length; k++) {
             if (!comp.data[k]) continue
             const i = k % vis.w

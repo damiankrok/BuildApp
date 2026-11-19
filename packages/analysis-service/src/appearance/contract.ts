@@ -22,7 +22,8 @@ export const APPEARANCE_OBSERVATION_VERSION = '1.1.0' as const
 export const APPEARANCE_OBSERVATION_VERSIONS_READ = ['1.0.0', '1.1.0'] as const
 
 /** Material classes: what a surface IS (render, timber, glass…), never a product's RGB. */
-export const APPEARANCE_CLASSES = ['LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'GLASS', 'ROOF', 'METAL', 'BACKGROUND', 'UNKNOWN'] as const
+/** 1.1.0 adds BRICK (a facing brick finish; a 1.0.0 observation never carries it). */
+export const APPEARANCE_CLASSES = ['LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'GLASS', 'ROOF', 'METAL', 'BACKGROUND', 'UNKNOWN', 'BRICK'] as const
 export type AppearanceClass = (typeof APPEARANCE_CLASSES)[number]
 
 const finite = z.number().finite()

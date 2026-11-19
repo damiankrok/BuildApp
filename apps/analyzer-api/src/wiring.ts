@@ -8,7 +8,7 @@ import { anthropicStructuredVision, anthropicVisionReasoner } from '@buildapp/so
 import { join } from 'node:path'
 import type { AnalysisWiring } from './executor.js'
 import { DEFAULT_SPEND_LIMITS, HOUSE_READER_PRICES, openSpendLedger, spendGuardedStructuredVision } from './house-reader-spend.js'
-import { HOUSE_READING_LIMITS, anthropicConsultant, fileAcceptedStore } from '@buildapp/analysis-service'
+import { HOUSE_READING_LIMITS, anthropicConsultant, fileAcceptedConsultStore, fileAcceptedStore } from '@buildapp/analysis-service'
 import type { ReadingStep } from '@buildapp/analysis-service'
 import type { SpendLimits } from './house-reader-spend.js'
 
@@ -114,17 +114,30 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
       const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })
       const model = anthropicConsultant({ model: plan.model })
       const price = HOUSE_READER_PRICES[plan.model]
+      // v3.54.14: `ANALYZER_METRIC_CONSULTANT=on` adds the metric consultant (independent read of the printed dimensions,
+      // check of the analyzer's readings, deterministic resolver) before the label rounds, in the same books and ceiling;
+      // its model is `ANALYZER_METRIC_CONSULTANT_MODEL` (default claude-opus-5-5), refused when its price is not known
+      const metricModelId = env.ANALYZER_METRIC_CONSULTANT_MODEL?.trim() || 'claude-opus-5-5'
+      const modelOfReservation = new Map<string, string>()
+      const metricOn = env.ANALYZER_METRIC_CONSULTANT === 'on' && Boolean(HOUSE_READER_PRICES[metricModelId])
       return {
         consultant: {
           model,
           price,
           variant: 'C' as const,
+          // v3.54.14: accepted consulted revisions in the host's private data directory (hash-named, answers only)
+          accepted: { store: fileAcceptedConsultStore(join(env.ANALYZER_DATA_DIR?.trim() || '.data/analyzer', 'accepted-consulted-revisions')) },
+          ...(metricOn ? { metricRead: 'ON' as const, metricModel: anthropicConsultant({ model: metricModelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium' }), metricPrice: HOUSE_READER_PRICES[metricModelId] } : {}),
+          // v3.54.14: `ANALYZER_SKETCHES=on` adds the four automatic sketches (form + finish) on the same metric facts
+          ...(env.ANALYZER_SKETCHES === 'on' ? { sketches: 'ON' as const, sketchModel: anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium' }), sketchPrice: HOUSE_READER_PRICES['claude-sonnet-5-5'] } : {}),
           spend: {
             reserve: (m: string, usd: number) => {
               const r = ledger.reserve('CONSULTATION', m, usd)
+              modelOfReservation.set(r.id, m)
               return { id: r.id, usd: r.reservedUsd }
             },
-            settle: (r: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string) => ledger.settle({ id: r.id, purpose: 'CONSULTATION', model: plan.model, reservedUsd: r.usd }, actual, note),
+            // the model a reservation was made for is the one it is settled under (the metric consultant may use another)
+            settle: (r: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string) => ledger.settle({ id: r.id, purpose: 'CONSULTATION', model: modelOfReservation.get(r.id) ?? plan.model, reservedUsd: r.usd }, actual, note),
           },
         },
       }

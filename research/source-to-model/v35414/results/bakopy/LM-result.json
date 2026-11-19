@@ -1,0 +1,72 @@
+{
+  "counts": {
+    "AGREES": 5,
+    "CORRECTED": 8,
+    "NEW_SPAN": 1,
+    "NOT_MATCHED": 94,
+    "RETAINED": 0,
+    "UNRESOLVED": 11
+  },
+  "decision": "ACCEPT",
+  "final": {
+    "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+    "masses": 3,
+    "metric": {
+      "cmPerPixelX": 3.30198,
+      "cmPerPixelY": 3.304485,
+      "confidence": "STRONG",
+      "relation": "CONFIRMED"
+    },
+    "modelHash": "b002826bd97e080d785942df72ac27457d80d3b7c6a2bb017a04a8dd6d299ad0",
+    "outcome": "COMPLETED"
+  },
+  "house": "bakopy",
+  "local": {
+    "frameId": "frame-asset-rzut-ae1cfaa426-3f4ae744e6",
+    "masses": 3,
+    "metric": {
+      "cmPerPixelX": 3.30198,
+      "cmPerPixelY": 3.304485,
+      "confidence": "STRONG",
+      "relation": "CONFIRMED"
+    },
+    "modelHash": "b877ec6b0dd71e2456fb59a0fad6f46e316c6adbe6a04a79e49f0613381736b3",
+    "outcome": "COMPLETED"
+  },
+  "measured": {
+    "after": {
+      "eaves": 2.896,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    },
+    "before": {
+      "eaves": 2.896,
+      "levels": [
+        {
+          "elevation": 0,
+          "height": 6.28,
+          "id": "lvl-0"
+        }
+      ],
+      "openings": 29,
+      "outlineX": 14.919,
+      "outlineZ": 21.25,
+      "ridge": 6.281,
+      "walls": 12
+    }
+  },
+  "seconds": 615,
+  "usd": 0.285316,
+  "why": "13 printed reading(s) handed with a witness were applied by the metric layer; the scale STRONG → STRONG, the outline not contradicted"
+}
+
