@@ -201,3 +201,21 @@ były najpierw zaksięgowane jako niepowodzenie (powtórka raportuje zerowe zuż
   9 pokoi (jest 7), okno w zachodnim szczycie.
 - LOCAL: pionowe etykiety czytane odwrotnie (0051/1500, 518/815) — przyczyna wielu nierozstrzygniętych.
 - Kandydat formy zmienia tony ścian globalnie; wybór per stronę to łata na wyjściu, nie przyczyna.
+
+## 11. Testy, regresja, APK
+
+- Jednostkowe etapu: konsument wyglądu 1.1.0 (7), metryka (14, w tym FOOTPRINT z kontrpróbami), szkic (6), wybór (2),
+  zaakceptowane rewizje (2), sceny `owner-v35414` (5) i przesunięte testy kolejności.
+- Pełna macierz (`results/matrix-final.txt`): **4321 passed, 15 failed** — dokładnie zestaw środowiska bazowego z
+  v3.54.11/13; żadnej nowej porażki, 5 fiksur Androida, które padały w v3.54.13, przechodzi. Typecheck OK.
+- Regresja ścieżki LOCAL: Bakopy L0 na kodzie końcowym — **ten sam hash modelu `b877ec6b…`** co na początku etapu;
+  resolver 1.1.0 na Bakopach — ten sam hash modelu L-M.
+- Android `testDebugUnitTest`: 479 testów, 0 porażek — po dwóch poprawkach przeglądarki, które ujawniły nowe sceny:
+  parterowy dom nie dostaje pustej warstwy „poddasze” (`Visibility.availableModes`, ta sama reguła co preset rzutu
+  poddasza), a dach 300,79 m² Bakop mieści się w budżecie 40 000 trójkątów pokrycia przez jednolicie większy moduł
+  dachówki (moduł jest założeniem wyświetlania; dachy w budżecie bez zmian).
+- **APK 1345** (`BuildPlan-Model-Preview-1345-arm64-v8a.apk`, SHA-256 `19698eba…`, z commita `228f693`, podpis v2
+  `6e48fac4…0da`, zipalign -c -P 16 4 OK, klucz 0 trafień): 19 scen wypakowanych = repozytorium; sceny 1–3 to
+  `marcowki-c-v35414` (ODDANY), `bakopy-v35414` (ODDANY, DEV), `ballina-v35414` (CZĘŚCIOWY), dalej sceny z APK 1344
+  bez zmian. ANDROID_UI_NOT_VERIFIED — brak urządzenia/emulatora w tym środowisku; sprawdzono pliki APK, parser scen
+  i renderowanie trybów na JVM.
