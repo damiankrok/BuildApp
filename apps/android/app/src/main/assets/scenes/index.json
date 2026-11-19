@@ -1,5 +1,41 @@
 [
   {
+    "key": "marcowki-c-v35414",
+    "title": "Marcówki — poprawka v3.54.14 (oddany)",
+    "subtitle": "ODDANY: geometria bez zmian; bez jasnej linii na +3,06, drewno i rama ciągłe za balkonem, bez plam za balustradą",
+    "asset": "marcowki-c-v35414.scene.json",
+    "modelId": "m-analysis-m2fa281446a8ca",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "3dc4d3bb843dc58c144459aec9cf9591da93f564681df35c9cbe7d30aea0ffb7",
+    "meshCount": 180,
+    "triangleCount": 15574,
+    "objectCount": 134
+  },
+  {
+    "key": "bakopy-v35414",
+    "title": "Bakopy — analizator z metryką API i szkicami (oddany, DEV)",
+    "subtitle": "ODDANY (DEV): LOCAL + 13 odczytów API ze świadkiem + 3 zaakceptowane szkice (komin, drewno); front bez szkicu",
+    "asset": "bakopy-v35414.scene.json",
+    "modelId": "m-analysis-mbb9288266b05e",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "ba4e6f4e5557a58ed51e84ad274da8df5864517b07a5e2be12d6e352d91e81e2",
+    "meshCount": 174,
+    "triangleCount": 11512,
+    "objectCount": 118
+  },
+  {
+    "key": "ballina-v35414",
+    "title": "Ballina — nowy dom, po zamrożeniu (częściowy, bez dachu)",
+    "subtitle": "CZĘŚCIOWY: pierwszy bieg zamrożony = odmowa; po zamrożeniu obrys 13,65 × 8,15 z metryki API i pola zabudowy; dach nieodczytany",
+    "asset": "ballina-v35414.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "9eb313a2170aae8b32785d33ab78940ea9b8329dcee2ceb0bfbe2f73b8fb3a81",
+    "meshCount": 80,
+    "triangleCount": 2064,
+    "objectCount": 56
+  },
+  {
     "key": "marcowki-c-v35413",
     "title": "Marcówki — kontury wykończeń v3.54.13 (oddany)",
     "subtitle": "ODDANY: geometria LOCAL z oryginałów bez zmian; wykończenia z konturów: przód i tył ze szkiców OWNER-a, boki z odczytu elewacji",

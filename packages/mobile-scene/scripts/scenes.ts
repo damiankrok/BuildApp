@@ -49,6 +49,35 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.14 (delivered): the v3.54.13 miniature with the OWNER's three phone defects fixed in the appearance consumer
+  // 1.1.0 — no bare strip at the +3.06 joint (off-grid floor joint), the timber and the white frame continuous behind
+  // the balcony and the balustrade (occluded cells join the wall's partition), no dark patches behind the front railing
+  // (no seed in the registration's uncertainty band). Usable geometry unchanged (fingerprint 0e493584fb4f7203).
+  {
+    key: 'marcowki-c-v35414',
+    title: 'Marcówki — poprawka v3.54.14 (oddany)',
+    subtitle: 'ODDANY: geometria bez zmian; bez jasnej linii na +3,06, drewno i rama ciągłe za balkonem, bez plam za balustradą',
+    build: () => sealedOwnerModel('marcowki-c-v35414', 'a66428c88135d1ad2d30678943acd0ea4746d4d2977b96a9b37d16f48759a0f5', 'owner-v35414'),
+  },
+  // v3.54.14 (Bakopy, DEV, delivered): LOCAL's geometry with the metric consultant's 13 witnessed readings (sub-cm..3 cm
+  // interior changes), the form candidate read with three accepted automatic sketches (a chimney), their finishes
+  // (timber on the wing gable, the approach bay and the west panels); the FRONT walls kept at their tone before the
+  // sketches — the front sketch failed the proportion check (consult/choose.ts)
+  {
+    key: 'bakopy-v35414',
+    title: 'Bakopy — analizator z metryką API i szkicami (oddany, DEV)',
+    subtitle: 'ODDANY (DEV): LOCAL + 13 odczytów API ze świadkiem + 3 zaakceptowane szkice (komin, drewno); front bez szkicu',
+    build: () => sealedOwnerModel('bakopy-v35414', '1813e748c435df6c3b648b847e2df49ab62a0e5acd8bf0658a6dc9a8456edfd9', 'owner-v35414'),
+  },
+  // v3.54.14 (Ballina, the new simple house, AFTER the freeze): its first frozen run was a refusal (kept as recorded);
+  // resolver 1.1.0 witnessed the API's printed overalls 1365 × 815 by the page's footprint 111.25 m² and the metric
+  // layer settled the scale: walls, openings and rooms at 13.65 × 8.15 — no roof (the heights have no second witness)
+  {
+    key: 'ballina-v35414',
+    title: 'Ballina — nowy dom, po zamrożeniu (częściowy, bez dachu)',
+    subtitle: 'CZĘŚCIOWY: pierwszy bieg zamrożony = odmowa; po zamrożeniu obrys 13,65 × 8,15 z metryki API i pola zabudowy; dach nieodczytany',
+    build: () => sealedOwnerModel('ballina-v35414', '7d7b182030ac87cc1a6efc83e30d43717724979436ed746937e71d6f4d819c2d', 'owner-v35414'),
+  },
   // v3.54.13 (delivered miniature): the delivered LOCAL geometry read on the ORIGINAL sources (v3.54.11 A, every
   // wall, opening, room, stair and id unchanged — the usable-geometry fingerprint is A's), its finishes replaced by
   // material outlines (model schema 1.9.0): front and rear from the OWNER's sketches (local sketch reader), the two sides

@@ -137,9 +137,100 @@
    "inputTokens": 2531,
    "outputTokens": 1767,
    "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:55:20.067Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.337592,
+   "costUsd": 0,
+   "inputTokens": 0,
+   "outputTokens": 0,
+   "status": "FAILED_KEPT_RESERVED"
+  },
+  {
+   "at": "2026-11-19T08:55:20.098Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.337564,
+   "costUsd": 0,
+   "inputTokens": 0,
+   "outputTokens": 0,
+   "status": "FAILED_KEPT_RESERVED"
+  },
+  {
+   "at": "2026-11-19T08:55:20.156Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "metric verify frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "model": "claude-opus-5-5",
+   "reservedUsd": 0.336116,
+   "costUsd": 0,
+   "inputTokens": 0,
+   "outputTokens": 0,
+   "status": "FAILED_KEPT_RESERVED"
+  },
+  {
+   "at": "2026-11-19T08:57:24.310Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "elevation sketch frame-asset-projekt-domu-ballina-4ad8008b13-43667fe722",
+   "model": "claude-sonnet-5-5",
+   "reservedUsd": 0.068136,
+   "costUsd": 0.011874,
+   "inputTokens": 2487,
+   "outputTokens": 690,
+   "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:57:28.059Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "elevation sketch frame-asset-projekt-domu-ballina-8bf1b53e8a-6edbd2ea62",
+   "model": "claude-sonnet-5-5",
+   "reservedUsd": 0.068136,
+   "costUsd": 0.009674,
+   "inputTokens": 2427,
+   "outputTokens": 482,
+   "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:57:31.389Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "elevation sketch frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+   "model": "claude-sonnet-5-5",
+   "reservedUsd": 0.068136,
+   "costUsd": 0.010094,
+   "inputTokens": 2442,
+   "outputTokens": 521,
+   "status": "SETTLED"
+  },
+  {
+   "at": "2026-11-19T08:57:36.026Z",
+   "phase": "metric-read+sketches",
+   "house": "ballina",
+   "variant": "L-MS",
+   "note": "elevation sketch frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+   "model": "claude-sonnet-5-5",
+   "reservedUsd": 0.068136,
+   "costUsd": 0.012834,
+   "inputTokens": 2502,
+   "outputTokens": 783,
+   "status": "SETTLED"
   }
  ],
- "totalUsd": 24.280558,
- "stageSpentUsd": 0.425946,
- "requests": 10
+ "totalUsd": 24.325034,
+ "stageSpentUsd": 0.470422,
+ "requests": 17
 }

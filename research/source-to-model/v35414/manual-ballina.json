@@ -1,0 +1,36 @@
+{
+ "L-Mplus": {
+  "roof-form": {
+   "verdict": "FAIL",
+   "why": "no roof built: the levels (+2.80 ceiling, +5.54 ridge) were read by the API alone (LOCAL read no level mark on the section), so no height has a second witness"
+  },
+  "front-finish": {
+   "verdict": "FAIL",
+   "why": "plain grey walls: no render/brick split, no plinth"
+  },
+  "rear-finish": {
+   "verdict": "FAIL",
+   "why": "plain grey walls: no brick panel, no plinth"
+  },
+  "right-finish": {
+   "verdict": "FAIL",
+   "why": "plain grey: no brick half"
+  },
+  "left-finish": {
+   "verdict": "PARTIAL",
+   "why": "plain wall as the source's render, but a grey tone and no brick plinth strip"
+  },
+  "roof-finish": {
+   "verdict": "FAIL",
+   "why": "no roof"
+  },
+  "doors": {
+   "verdict": "PASS",
+   "why": "TOP/obliques: the bedrooms, bathroom, WC and utility open off the corridor and hall (8 doors)"
+  },
+  "terraces": {
+   "verdict": "FAIL",
+   "why": "no terrace built front or rear"
+  }
+ }
+}
