@@ -24,7 +24,8 @@ const answer = (dx = 0, sx = 1) => ({
 const fake = (input: unknown): ConsultantModel => ({ id: 'fake', model: 'fake', maxOutputTokens: 1000, send: async (): Promise<ModelTurn> => ({ content: [{ type: 'tool_use', id: 't', name: 'report_elevation', input } as never], usage: { inputTokens: 900, outputTokens: 400 }, model: 'fake', latencyMs: 1 }) })
 const price = { inputUsdPerMTok: 2, outputUsdPerMTok: 10 }
 const frame = { frameId: 'E', raster: raster(700, 560), caption: 'elewacja frontowa' }
-const expect0 = { alongSign: 1, alongMin: 0, alongMax: 10, ridge: 5.5, eaves: 2.9, local: { mpp: 0.02, alongAtPx0: -2, zeroRow: 500 }, openings: [{ id: 'w1', a0: 1, a1: 2, b0: 2, b1: 3.2 }, { id: 'd1', a0: 6.4, a1: 7.3, b0: 0, b1: 2.1 }] }
+// v3.54.16: w1 at the height the sketch draws it (rows 400..460 = 0.8..2.0 m); heights now decide a match as widths do
+const expect0 = { alongSign: 1, alongMin: 0, alongMax: 10, ridge: 5.5, eaves: 2.9, local: { mpp: 0.02, alongAtPx0: -2, zeroRow: 500 }, openings: [{ id: 'w1', a0: 1, a1: 2, b0: 0.8, b1: 2 }, { id: 'd1', a0: 6.4, a1: 7.3, b0: 0, b1: 2.1 }] }
 const read = async (input: unknown): Promise<ElevationSketch> => (await readElevationSketch({ model: fake(input), price }, frame)).sketch as ElevationSketch
 
 describe('v3.54.14 the elevation sketch', () => {

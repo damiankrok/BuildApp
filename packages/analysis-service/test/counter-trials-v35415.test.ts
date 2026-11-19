@@ -39,7 +39,7 @@ describe('v3.54.15 counter-trial: which mark is the ridge and which the eaves', 
     expect(ridgeAndEaves([{ role: 'EAVES', value: 3.27 }, { role: 'CEILING', value: 2.8 }])).toEqual({ eaves: 3.27 })
   })
   it('two witnesses disputing the ridge leave it unset — the nearer or the larger is not chosen', () => {
-    expect(ridgeAndEaves([{ role: 'RIDGE', value: 5.54 }, { role: 'RIDGE', value: 6.1 }])).toEqual({})
+    expect(ridgeAndEaves([{ role: 'RIDGE', value: 5.54 }, { role: 'RIDGE', value: 6.1 }])).toEqual({ disputes: ['RIDGE: 5.54 / 6.1 m on marks that name no body'] }) // v3.54.16: the dispute is named, the ridge still unset
     // the same value twice is one statement, not a dispute
     expect(ridgeAndEaves([{ role: 'RIDGE', value: 5.54 }, { role: 'RIDGE', value: 5.54 }])).toEqual({ ridge: 5.54 })
   })

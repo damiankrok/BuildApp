@@ -509,7 +509,11 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
   const bad = residuals.filter((r) => !r.within)
   const verified = residuals.length > 0 && bad.length === 0
   const vert: ProportionCheck['properties']['vertical'] = bad.length > 0 ? 'CONTRADICTED' : verified ? 'VERIFIED' : 'UNVERIFIED'
-  const off = openings.filter((o) => o.status === 'OFF')
+  // v3.54.16: an opening of the sketch without a partner while one of the model's on this side has none either is the
+  // same disagreement as OFF (an opening moved past any overlap): the raster form path is not taken — the openings are
+  // adjudicated one by one against the source by the semantic channel (`correct/from-sketch.ts`)
+  const unpaired = openings.filter((o) => o.status === 'NOT_IN_MODEL').length > 0 && missingInSketch.length > 0 ? openings.filter((o) => o.status === 'NOT_IN_MODEL') : []
+  const off = [...openings.filter((o) => o.status === 'OFF'), ...unpaired]
   const lostForm = s.account.completeness !== 'COMPLETE'
   const finish = vert === 'CONTRADICTED' ? 'REJECTED' : 'ACCEPTED'
   const form = vert === 'VERIFIED' && off.length === 0 && !lostForm ? 'ACCEPTED' : 'REJECTED'

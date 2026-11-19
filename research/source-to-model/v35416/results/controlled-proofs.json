@@ -1,0 +1,1056 @@
+{
+ "proof1-sketch-left-window-ballina": {
+  "baseRevision": "bce37b2b92fc",
+  "revision": "5d6c24038712",
+  "injected": [],
+  "records": [
+   {
+    "proposalId": "s:west-window",
+    "operation": "ADD_OPENING",
+    "targetId": "LEFT",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 11.92,
+     "nullBoxes": 42,
+     "why": "the source draws an element in the proposed box (z 11.92 \u2265 2 over 42 same-size boxes on that band)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 451.99999999999994,
+      "x1": 484.99999999999994,
+      "y0": 222.0000146654884,
+      "y1": 318.00001466548844
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 11.92,
+     "sourceVerified": true,
+     "why": "built op-fix-left-9f5ca1 on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 11.92"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+     "side": "LEFT",
+     "box": {
+      "x0": 452,
+      "y0": 222,
+      "x1": 485,
+      "y1": 318
+     },
+     "hostId": "ring-main-0-w3",
+     "ids": [
+      "op-fix-left-9f5ca1"
+     ],
+     "values": {
+      "offset": 3.942548,
+      "width": 0.485463,
+      "sill": 0.89072,
+      "height": 1.412256
+     }
+    }
+   },
+   {
+    "proposalId": "c:west-false",
+    "operation": "ADD_OPENING",
+    "targetId": "LEFT",
+    "origin": "CONTROL",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "SOURCE_SHOWS_NO_OPENING",
+    "why": "the source draws nothing distinct in the proposed box (z -0.35 < 2 over 35 same-size boxes on that band)",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": -0.35,
+     "nullBoxes": 35,
+     "why": "the source draws nothing distinct in the proposed box (z -0.35 < 2 over 35 same-size boxes on that band)"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+     "side": "LEFT",
+     "box": {
+      "x0": 250,
+      "y0": 222,
+      "x1": 283,
+      "y1": 318
+     },
+     "hostId": "ring-main-0-w3",
+     "ids": [
+      "op-fix-left-1f5c7e"
+     ],
+     "values": {
+      "offset": 0.970926,
+      "width": 0.485463,
+      "sill": 0.89072,
+      "height": 1.412256
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 2 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:op-fix-left-9f5ca1",
+     "windows:op-fix-left-9f5ca1-unit"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx2",
+    "decision": "REFUSED",
+    "why": "c:west-false: SOURCE_SHOWS_NO_OPENING \u2014 the source draws nothing distinct in the proposed box (z -0.35 < 2 over 35 same-size boxes on that band)",
+    "changed": [],
+    "collateral": []
+   }
+  ]
+ },
+ "proof2-move-0.6m-ballina": {
+  "baseRevision": "a8442715df35",
+  "revision": "eb82a42262a7",
+  "injected": [
+   {
+    "type": "moveFeature",
+    "targetId": "opening-0-front-0-0",
+    "dAlong": 0.6
+   }
+  ],
+  "records": [
+   {
+    "proposalId": "ctl:fix-front-0-0",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "origin": "CONTROL",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 7.55,
+     "currentZ": 1.73,
+     "nullBoxes": 117,
+     "why": "the source supports the proposal (z 7.55) and not the model's element (z 1.73)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 174.99999999999997,
+      "x1": 261.99999999999994,
+      "y0": 223.00001134868052,
+      "y1": 310.0000113486806
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 7.35,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.35"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 175,
+      "y0": 223,
+      "x1": 262,
+      "y1": 310
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-0"
+     ],
+     "values": {
+      "offset": 2.20844,
+      "width": 1.239576,
+      "sill": 1.179943,
+      "height": 1.239576
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-0"
+    ],
+    "collateral": []
+   }
+  ]
+ },
+ "proof2-width-2.6m-ballina": {
+  "baseRevision": "2282fdfcb879",
+  "revision": "eb82a42262a7",
+  "injected": [
+   {
+    "type": "resizeFeature",
+    "targetId": "opening-0-front-0-0",
+    "width": 2.6
+   }
+  ],
+  "records": [
+   {
+    "proposalId": "ctl:fix-front-0-0",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "origin": "CONTROL",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 7.55,
+     "currentZ": 2.39,
+     "nullBoxes": 117,
+     "why": "the source supports the proposal (z 7.55) better than the model's element (z 2.39)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 174.99999999999997,
+      "x1": 261.99999999999994,
+      "y0": 223.00001134868052,
+      "y1": 310.0000113486806
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 7.35,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.35"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 175,
+      "y0": 223,
+      "x1": 262,
+      "y1": 310
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-0"
+     ],
+     "values": {
+      "offset": 2.20844,
+      "width": 1.239576,
+      "sill": 1.179943,
+      "height": 1.239576
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-0"
+    ],
+    "collateral": []
+   }
+  ]
+ },
+ "proof2-sill-1.6m-ballina": {
+  "baseRevision": "167fe0611662",
+  "revision": "eb82a42262a7",
+  "injected": [
+   {
+    "type": "setProperty",
+    "targetId": "opening-0-front-0-0",
+    "property": "sill",
+    "value": 1.6
+   }
+  ],
+  "records": [
+   {
+    "proposalId": "ctl:fix-front-0-0",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "origin": "CONTROL",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 7.58,
+     "currentZ": 2.65,
+     "nullBoxes": 121,
+     "why": "the source supports the proposal (z 7.58) better than the model's element (z 2.65)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 174.99999999999997,
+      "x1": 261.99999999999994,
+      "y0": 223.00001134868052,
+      "y1": 310.0000113486806
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 7.35,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.35"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 175,
+      "y0": 223,
+      "x1": 262,
+      "y1": 310
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-0"
+     ],
+     "values": {
+      "offset": 2.20844,
+      "width": 1.239576,
+      "sill": 1.179943,
+      "height": 1.239576
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-0"
+    ],
+    "collateral": []
+   }
+  ]
+ },
+ "proof2-counter-wrong-move-ballina": {
+  "baseRevision": "eb82a42262a7",
+  "revision": "eb82a42262a7",
+  "injected": [],
+  "records": [
+   {
+    "proposalId": "ctl:bad-front-0-0",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "origin": "CONTROL",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "MODEL_BETTER_SUPPORTED",
+    "why": "the source supports the model's element (z 7.35) and not the proposal (z 1.81): the model stands",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": 1.81,
+     "currentZ": 7.35,
+     "nullBoxes": 117,
+     "why": "the source supports the model's element (z 7.35) and not the proposal (z 1.81): the model stands"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 217,
+      "y0": 223,
+      "x1": 304,
+      "y1": 310
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-0"
+     ],
+     "values": {
+      "offset": 2.806856,
+      "width": 1.239576,
+      "sill": 1.179943,
+      "height": 1.239576
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "REFUSED",
+    "why": "ctl:bad-front-0-0: MODEL_BETTER_SUPPORTED \u2014 the source supports the model's element (z 7.35) and not the proposal (z 1.81): the model stands",
+    "changed": [],
+    "collateral": []
+   }
+  ]
+ },
+ "proof3-chimney-and-bad-window-murcja": {
+  "baseRevision": "4f84df37a80d",
+  "revision": "e03a78260266",
+  "injected": [],
+  "records": [
+   {
+    "proposalId": "ctl:chimney-rear",
+    "operation": "ADD_CHIMNEY",
+    "targetId": "REAR",
+    "origin": "CONTROL",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 2.86,
+     "nullBoxes": 87,
+     "why": "the source draws an element in the proposed box (z 2.86 \u2265 2 over 87 same-size boxes on that band)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 385,
+      "x1": 402.00000000000006,
+      "y0": 14.999976979555697,
+      "y1": 25
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 3.01,
+     "sourceVerified": true,
+     "why": "built chimney-fix-rear-df6c9b drawn back into the source: overlap 1.00, support z 3.01"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-murcja-4fe8bd8330-fe055c88bb",
+     "side": "REAR",
+     "box": {
+      "x0": 385,
+      "y0": 15,
+      "x1": 402,
+      "y1": 25
+     },
+     "ids": [
+      "chimney-fix-rear-df6c9b"
+     ],
+     "depth": "DISPLAY_ASSUMPTION",
+     "values": {
+      "a0": 4.24236,
+      "a1": 4.587443,
+      "top": 7.282772,
+      "meet": 7.079782
+     }
+    }
+   },
+   {
+    "proposalId": "ctl:bad-window-rear",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-rear-2-1",
+    "origin": "CONTROL",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "MODEL_BETTER_SUPPORTED",
+    "why": "the source draws nothing distinct in the proposed box (z -0.78 < 1); the model's element (z 0.38) is kept",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": -0.78,
+     "currentZ": 0.38,
+     "nullBoxes": 12,
+     "why": "the source draws nothing distinct in the proposed box (z -0.78 < 1); the model's element (z 0.38) is kept"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-murcja-4fe8bd8330-fe055c88bb",
+     "side": "REAR",
+     "box": {
+      "x0": 220,
+      "y0": 257,
+      "x1": 288,
+      "y1": 324
+     },
+     "hostId": "ring-main-0-w2",
+     "ids": [
+      "opening-0-rear-2-1"
+     ],
+     "values": {
+      "offset": 3.613222,
+      "width": 1.380332,
+      "sill": 1.010381,
+      "height": 1.360033
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "chimneys:chimney-fix-rear-df6c9b"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx2",
+    "decision": "REFUSED",
+    "why": "ctl:bad-window-rear: MODEL_BETTER_SUPPORTED \u2014 the source draws nothing distinct in the proposed box (z -0.78 < 1); the model's element (z 0.38) is kept",
+    "changed": [],
+    "collateral": []
+   }
+  ]
+ },
+ "proof3-chimney-bakopy": {
+  "baseRevision": "6d5426d22e62",
+  "revision": "1a2276a42163",
+  "injected": [],
+  "records": [
+   {
+    "proposalId": "s:front-ch17",
+    "operation": "ADD_CHIMNEY",
+    "targetId": "FRONT",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 8.4,
+     "nullBoxes": 62,
+     "why": "the source draws an element in the proposed box (z 8.4 \u2265 2 over 62 same-size boxes on that band)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 399.00000000000006,
+      "x1": 431,
+      "y0": 62.00002334661394,
+      "y1": 110
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 8.4,
+     "sourceVerified": true,
+     "why": "built chimney-fix-front-b1e6b3 drawn back into the source: overlap 1.00, support z 8.4"
+    },
+    "bound": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-fcc668ca45",
+     "side": "FRONT",
+     "box": {
+      "x0": 399,
+      "y0": 62,
+      "x1": 431,
+      "y1": 110
+     },
+     "ids": [
+      "chimney-fix-front-b1e6b3"
+     ],
+     "depth": "DISPLAY_ASSUMPTION",
+     "values": {
+      "a0": 3.345324,
+      "a1": 3.960556,
+      "top": 6.664573,
+      "meet": 5.741725
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-ch26",
+    "operation": "ADD_CHIMNEY",
+    "targetId": "FRONT",
+    "origin": "SKETCH",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "SOURCE_SHOWS_NO_STACK",
+    "why": "the source draws nothing distinct in the proposed box (z 1.67 < 2 over 61 same-size boxes on that band)",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": 1.67,
+     "nullBoxes": 61,
+     "why": "the source draws nothing distinct in the proposed box (z 1.67 < 2 over 61 same-size boxes on that band)"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-gotowy-projekt-dom-w-bakopach-g2e-elewacja-fcc668ca45",
+     "side": "FRONT",
+     "box": {
+      "x0": 599,
+      "y0": 72,
+      "x1": 631,
+      "y1": 85
+     },
+     "ids": [
+      "chimney-fix-front-7cc160"
+     ],
+     "depth": "DISPLAY_ASSUMPTION",
+     "values": {
+      "a0": 7.190524,
+      "a1": 7.805756,
+      "top": 6.472313,
+      "meet": 6.222375
+     }
+    }
+   },
+   {
+    "proposalId": "c:front-bad-window",
+    "operation": "ADD_OPENING",
+    "targetId": "FRONT",
+    "origin": "CONTROL",
+    "status": "NEEDS_EVIDENCE",
+    "code": "VIEW_WITHOUT_HEIGHTS",
+    "why": "picture 6 is registered without heights low on the front side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+    "gate": null,
+    "measure": null,
+    "bound": null
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "chimneys:chimney-fix-front-b1e6b3"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx2",
+    "decision": "REFUSED",
+    "why": "s:front-ch26: SOURCE_SHOWS_NO_STACK \u2014 the source draws nothing distinct in the proposed box (z 1.67 < 2 over 61 same-size boxes on that band)",
+    "changed": [],
+    "collateral": []
+   },
+   {
+    "txId": "tx3",
+    "decision": "REFUSED",
+    "why": "c:front-bad-window: VIEW_WITHOUT_HEIGHTS \u2014 picture 6 is registered without heights low on the front side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+    "changed": [],
+    "collateral": []
+   }
+  ]
+ },
+ "sketch-channel-ballina-all": {
+  "baseRevision": "bce37b2b92fc",
+  "revision": "eb82a42262a7",
+  "injected": [],
+  "records": [
+   {
+    "proposalId": "s:west-window",
+    "operation": "ADD_OPENING",
+    "targetId": "LEFT",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 6.64,
+     "nullBoxes": 312,
+     "why": "the source draws an element in the proposed box (z 6.64 \u2265 2 over 312 same-size boxes on that band)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 451.99999999999994,
+      "x1": 484.99999999999994,
+      "y0": 222.0000146654884,
+      "y1": 318.00001466548844
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 6.64,
+     "sourceVerified": true,
+     "why": "built op-fix-left-9f5ca1 on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 6.64"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+     "side": "LEFT",
+     "box": {
+      "x0": 452,
+      "y0": 222,
+      "x1": 485,
+      "y1": 318
+     },
+     "hostId": "ring-main-0-w3",
+     "ids": [
+      "op-fix-left-9f5ca1"
+     ],
+     "values": {
+      "offset": 3.942548,
+      "width": 0.485463,
+      "sill": 0.89072,
+      "height": 1.412256
+     }
+    }
+   },
+   {
+    "proposalId": "c:west-false",
+    "operation": "ADD_OPENING",
+    "targetId": "LEFT",
+    "origin": "CONTROL",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "SOURCE_SHOWS_NO_OPENING",
+    "why": "the source draws nothing distinct in the proposed box (z -0.99 < 2 over 284 same-size boxes on that band)",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": -0.99,
+     "nullBoxes": 284,
+     "why": "the source draws nothing distinct in the proposed box (z -0.99 < 2 over 284 same-size boxes on that band)"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-9bc50ce570-4ec95ea616",
+     "side": "LEFT",
+     "box": {
+      "x0": 250,
+      "y0": 222,
+      "x1": 283,
+      "y1": 318
+     },
+     "hostId": "ring-main-0-w3",
+     "ids": [
+      "op-fix-left-1f5c7e"
+     ],
+     "values": {
+      "offset": 0.970926,
+      "width": 0.485463,
+      "sill": 0.89072,
+      "height": 1.412256
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-w17",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-1",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 3.37,
+     "currentZ": 0.39,
+     "nullBoxes": 238,
+     "why": "the source supports the proposal (z 3.37) and not the model's element (z 0.39)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 376.9999999999999,
+      "x1": 427.99999999999994,
+      "y0": 222.00001134868054,
+      "y1": 313.0000113486805
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 3.35,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-1 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.35"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 377,
+      "y0": 222,
+      "x1": 428,
+      "y1": 313
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-1"
+     ],
+     "values": {
+      "offset": 5.086536,
+      "width": 0.726648,
+      "sill": 1.137199,
+      "height": 1.296568
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-w35",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-4",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 3.71,
+     "currentZ": 0.78,
+     "nullBoxes": 104,
+     "why": "the source supports the proposal (z 3.71) and not the model's element (z 0.78)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 787.9999999999999,
+      "x1": 876.9999999999999,
+      "y0": 224.00001134868054,
+      "y1": 312.0000113486805
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 3.54,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-4 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.54"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 788,
+      "y0": 224,
+      "x1": 877,
+      "y1": 312
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-4"
+     ],
+     "values": {
+      "offset": 10.942464,
+      "width": 1.268072,
+      "sill": 1.151447,
+      "height": 1.253824
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-w9",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 7.86,
+     "currentZ": 5.61,
+     "nullBoxes": 112,
+     "why": "the source supports the proposal (z 7.86) better than the model's element (z 5.61)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 174.99999999999997,
+      "x1": 261.99999999999994,
+      "y0": 223.00001134868052,
+      "y1": 310.0000113486806
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 7.82,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.82"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 175,
+      "y0": 223,
+      "x1": 262,
+      "y1": 310
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-0"
+     ],
+     "values": {
+      "offset": 2.20844,
+      "width": 1.239576,
+      "sill": 1.179943,
+      "height": 1.239576
+     }
+    }
+   },
+   {
+    "proposalId": "c:front-shift",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-2",
+    "origin": "CONTROL",
+    "status": "REJECTED_BY_SOURCE",
+    "code": "MODEL_BETTER_SUPPORTED",
+    "why": "the source supports the model's element (z 2.27) and not the proposal (z 1.35): the model stands",
+    "gate": {
+     "winner": "CURRENT",
+     "proposedZ": 1.35,
+     "currentZ": 2.27,
+     "nullBoxes": 356,
+     "why": "the source supports the model's element (z 2.27) and not the proposal (z 1.35): the model stands"
+    },
+    "measure": null,
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 587,
+      "y0": 238,
+      "x1": 625,
+      "y1": 330
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-2"
+     ],
+     "values": {
+      "offset": 8.078616,
+      "width": 0.541424,
+      "sill": 0.894983,
+      "height": 1.310816
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-w22",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-2",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 4.12,
+     "currentZ": 2.18,
+     "nullBoxes": 559,
+     "why": "the source supports the proposal (z 4.12) better than the model's element (z 2.18)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 520,
+      "x1": 547,
+      "y0": 224.00001134868054,
+      "y1": 311.0000113486806
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 4.04,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-2 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 4.04"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 520,
+      "y0": 224,
+      "x1": 547,
+      "y1": 311
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-2"
+     ],
+     "values": {
+      "offset": 7.124,
+      "width": 0.384696,
+      "sill": 1.165695,
+      "height": 1.239576
+     }
+    }
+   },
+   {
+    "proposalId": "s:front-d27",
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-3",
+    "origin": "SKETCH",
+    "status": "COMMITTED",
+    "code": null,
+    "why": "applied, compiled and measured",
+    "gate": {
+     "winner": "PROPOSED",
+     "proposedZ": 7.2,
+     "currentZ": 2.31,
+     "nullBoxes": 119,
+     "why": "the source supports the proposal (z 7.2) better than the model's element (z 2.31)"
+    },
+    "measure": {
+     "builtBox": {
+      "x0": 614,
+      "x1": 676.0000000000001,
+      "y0": 240.00001134868057,
+      "y1": 378.0000113486805
+     },
+     "iouWithProposal": 1,
+     "builtSupportZ": 7.15,
+     "sourceVerified": true,
+     "why": "built opening-0-front-0-3 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.15"
+    },
+    "bound": {
+     "frameId": "frame-asset-projekt-domu-ballina-dadaa064eb-f826ba3795",
+     "side": "FRONT",
+     "box": {
+      "x0": 614,
+      "y0": 240,
+      "x1": 676,
+      "y1": 378
+     },
+     "hostId": "ring-main-0-w0",
+     "ids": [
+      "opening-0-front-0-3"
+     ],
+     "values": {
+      "offset": 8.463312,
+      "width": 0.883376,
+      "sill": 0.211079,
+      "height": 1.966224
+     }
+    }
+   }
+  ],
+  "transactions": [
+   {
+    "txId": "tx1",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 2 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:op-fix-left-9f5ca1",
+     "windows:op-fix-left-9f5ca1-unit"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx2",
+    "decision": "REFUSED",
+    "why": "c:west-false: SOURCE_SHOWS_NO_OPENING \u2014 the source draws nothing distinct in the proposed box (z -0.99 < 2 over 284 same-size boxes on that band)",
+    "changed": [],
+    "collateral": []
+   },
+   {
+    "txId": "tx3",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-1"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx4",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-4"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx5",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-0"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx6",
+    "decision": "REFUSED",
+    "why": "c:front-shift: MODEL_BETTER_SUPPORTED \u2014 the source supports the model's element (z 2.27) and not the proposal (z 1.35): the model stands",
+    "changed": [],
+    "collateral": []
+   },
+   {
+    "txId": "tx7",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 1 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "openings:opening-0-front-0-2"
+    ],
+    "collateral": []
+   },
+   {
+    "txId": "tx8",
+    "decision": "COMMITTED",
+    "why": "1 patch(es) applied; 2 object(s) changed, all inside the transaction's dependency set; exterior joint errors 0 \u2192 0",
+    "changed": [
+     "doors:opening-0-front-0-3-leaf",
+     "openings:opening-0-front-0-3"
+    ],
+    "collateral": []
+   }
+  ]
+ }
+}

@@ -84,10 +84,13 @@ async function facts(): Promise<{ eaves: string; gableEnd: string; pictureFor: (
   const axis = b.mainRoof?.ridgeAxis ?? b.planeRoofs?.[0]?.ridgeAxis
   expect(axis, 'the synthetic house has a pitched main roof').toBeDefined()
   const eavesSides = axis === 'X' ? ['FRONT', 'REAR'] : ['LEFT', 'RIGHT']
-  const frames = run.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION')
+  // v3.54.16: the reviewer is shown the elevations the analyzer registered first, then the largest (`checkSources`)
+  const shown = new Set(run.reconstruction.facadeAlignment.views.map((v) => v.frameId))
+  const area = (f: { size?: { width: number; height: number } }): number => (f.size?.width ?? 0) * (f.size?.height ?? 0)
+  const frames = run.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION').sort((a, b) => Number(shown.has(b.id)) - Number(shown.has(a.id)) || area(b) - area(a) || a.id.localeCompare(b.id)).slice(0, 6)
   expect(frames.length, 'the synthetic page publishes elevation drawings').toBeGreaterThan(0)
   const registered = new Map(run.reconstruction.registrations.elevations.map((e) => [e.frameId, e.side as string]))
-  // sources are numbered: the plan, the other plans, then the elevations in the graph's order
+  // sources are numbered: the plan, the other plans, then the elevations in that order
   const first = 1 + run.reconstruction.registrations.plans.length
   const pictureFor = (side: string) => (l: Look): number => {
     const i = frames.findIndex((f) => registered.get(f.id) === side)
