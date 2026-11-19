@@ -1,0 +1,501 @@
+{
+ "house": "lipinscy.pl/projekt/ballina",
+ "refs": "research/source-to-model/v35414/refs/ballina.json",
+ "variants": {
+  "v35414": {
+   "facts": {
+    "outlineX": 13.65,
+    "outlineZ": 8.15,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 2.8
+     }
+    ],
+    "openings": 16,
+    "walls": 4,
+    "gateWidths": [],
+    "pitchDeg": null,
+    "bodies": 1,
+    "chimneys": 0,
+    "rooms": 7,
+    "doors": 8,
+    "perSide": {
+     "FRONT": {
+      "windows": 4,
+      "doors": 1,
+      "gates": 0
+     },
+     "REAR": {
+      "windows": 3,
+      "doors": 0,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 0,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 0,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-wall": 1
+     },
+     "REAR": {
+      "mat-wall": 1
+     },
+     "EAST": {
+      "mat-wall": 1
+     },
+     "WEST": {
+      "mat-wall": 1
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "body": {
+     "verdict": "PASS",
+     "measured": "1 wall ring(s)",
+     "why": "one body"
+    },
+    "outline-x": {
+     "verdict": "PASS",
+     "measured": "13.650",
+     "why": "+0.000 against 13.65 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "8.150",
+     "why": "+0.000 against 8.15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "roof-form": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "pitch": {
+     "verdict": "FAIL",
+     "measured": "undefined",
+     "why": "not built / not measurable"
+    },
+    "ridge": {
+     "verdict": "FAIL",
+     "measured": "undefined",
+     "why": "not built / not measurable"
+    },
+    "front-openings": {
+     "verdict": "PASS",
+     "measured": "4 w + 1 d",
+     "why": "4 windows + 1 door"
+    },
+    "rear-openings": {
+     "verdict": "PASS",
+     "measured": "3 w + 0 d",
+     "why": "2 windows + 1 terrace glazing"
+    },
+    "left-openings": {
+     "verdict": "FAIL",
+     "measured": "0 w + 0 d",
+     "why": "1 window"
+    },
+    "right-openings": {
+     "verdict": "PASS",
+     "measured": "1 w + 0 d",
+     "why": "1 window"
+    },
+    "front-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rear-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "right-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "left-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "roof-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rooms": {
+     "verdict": "PARTIAL",
+     "measured": "7 rooms",
+     "why": "9 rooms on the plan (count only; names and shapes not checked)"
+    },
+    "doors": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "terraces": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    }
+   }
+  },
+  "L-M": {
+   "facts": {
+    "outlineX": 13.65,
+    "outlineZ": 8.15,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 5.54
+     }
+    ],
+    "ridge": 5.54,
+    "eaves": 3.373,
+    "openings": 16,
+    "walls": 4,
+    "gateWidths": [],
+    "pitchDeg": 28,
+    "bodies": 1,
+    "chimneys": 0,
+    "rooms": 7,
+    "doors": 7,
+    "perSide": {
+     "FRONT": {
+      "windows": 5,
+      "doors": 0,
+      "gates": 0
+     },
+     "REAR": {
+      "windows": 3,
+      "doors": 0,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 0,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 0,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-wall": 1
+     },
+     "REAR": {
+      "mat-wall": 1
+     },
+     "EAST": {
+      "mat-wall": 1
+     },
+     "WEST": {
+      "mat-wall": 1
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "body": {
+     "verdict": "PASS",
+     "measured": "1 wall ring(s)",
+     "why": "one body"
+    },
+    "outline-x": {
+     "verdict": "PASS",
+     "measured": "13.650",
+     "why": "+0.000 against 13.65 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "8.150",
+     "why": "+0.000 against 8.15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "roof-form": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "28.000",
+     "why": "+0.000 against 28 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "5.540",
+     "why": "+0.000 against 5.54 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "front-openings": {
+     "verdict": "PARTIAL",
+     "measured": "5 w + 0 d",
+     "why": "4 windows + 1 door"
+    },
+    "rear-openings": {
+     "verdict": "PASS",
+     "measured": "3 w + 0 d",
+     "why": "2 windows + 1 terrace glazing"
+    },
+    "left-openings": {
+     "verdict": "FAIL",
+     "measured": "0 w + 0 d",
+     "why": "1 window"
+    },
+    "right-openings": {
+     "verdict": "PASS",
+     "measured": "1 w + 0 d",
+     "why": "1 window"
+    },
+    "front-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rear-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "right-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "left-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "roof-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rooms": {
+     "verdict": "PARTIAL",
+     "measured": "7 rooms",
+     "why": "9 rooms on the plan (count only; names and shapes not checked)"
+    },
+    "doors": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "terraces": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    }
+   }
+  },
+  "L-MS": {
+   "facts": {
+    "outlineX": 13.65,
+    "outlineZ": 8.15,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 5.54
+     }
+    ],
+    "ridge": 5.54,
+    "eaves": 3.373,
+    "openings": 16,
+    "walls": 4,
+    "gateWidths": [],
+    "pitchDeg": 28,
+    "bodies": 1,
+    "chimneys": 0,
+    "rooms": 7,
+    "doors": 7,
+    "perSide": {
+     "FRONT": {
+      "windows": 5,
+      "doors": 0,
+      "gates": 0
+     },
+     "REAR": {
+      "windows": 3,
+      "doors": 0,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 0,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 0,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-wall": 0.52,
+      "mat-brick": 0.48
+     },
+     "REAR": {
+      "mat-wall": 1
+     },
+     "EAST": {
+      "mat-wall": 0.74,
+      "mat-brick": 0.26
+     },
+     "WEST": {
+      "mat-wall": 0.97,
+      "mat-brick": 0.03
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "body": {
+     "verdict": "PASS",
+     "measured": "1 wall ring(s)",
+     "why": "one body"
+    },
+    "outline-x": {
+     "verdict": "PASS",
+     "measured": "13.650",
+     "why": "+0.000 against 13.65 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "8.150",
+     "why": "+0.000 against 8.15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "roof-form": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "28.000",
+     "why": "+0.000 against 28 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "5.540",
+     "why": "+0.000 against 5.54 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "front-openings": {
+     "verdict": "PARTIAL",
+     "measured": "5 w + 0 d",
+     "why": "4 windows + 1 door"
+    },
+    "rear-openings": {
+     "verdict": "PASS",
+     "measured": "3 w + 0 d",
+     "why": "2 windows + 1 terrace glazing"
+    },
+    "left-openings": {
+     "verdict": "FAIL",
+     "measured": "0 w + 0 d",
+     "why": "1 window"
+    },
+    "right-openings": {
+     "verdict": "PASS",
+     "measured": "1 w + 0 d",
+     "why": "1 window"
+    },
+    "front-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rear-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "right-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "left-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "roof-finish": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "rooms": {
+     "verdict": "PARTIAL",
+     "measured": "7 rooms",
+     "why": "9 rooms on the plan (count only; names and shapes not checked)"
+    },
+    "doors": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "terraces": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    }
+   }
+  }
+ },
+ "table": [
+  {
+   "label": "v35414",
+   "pass": "7",
+   "partial": "1",
+   "fail": "3",
+   "manual": "8",
+   "of": "19"
+  },
+  {
+   "label": "L-M",
+   "pass": "8",
+   "partial": "2",
+   "fail": "1",
+   "manual": "8",
+   "of": "19"
+  },
+  {
+   "label": "L-MS",
+   "pass": "8",
+   "partial": "2",
+   "fail": "1",
+   "manual": "8",
+   "of": "19"
+  }
+ ]
+}

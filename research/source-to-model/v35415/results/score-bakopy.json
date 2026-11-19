@@ -1,0 +1,701 @@
+{
+ "house": "archon.pl projekt-dom-w-bakopach-g2e-mbb9288266b05e",
+ "refs": "research/source-to-model/v35414/refs/bakopy.json",
+ "variants": {
+  "v35414": {
+   "facts": {
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 6.28
+     }
+    ],
+    "ridge": 6.281,
+    "eaves": 3.238,
+    "openings": 29,
+    "walls": 12,
+    "gateWidths": [
+     5.019496
+    ],
+    "pitchDeg": 35,
+    "bodies": 3,
+    "chimneys": 1,
+    "rooms": 14,
+    "doors": 20,
+    "perSide": {
+     "FRONT": {
+      "windows": 0,
+      "doors": 4,
+      "gates": 1
+     },
+     "REAR": {
+      "windows": 1,
+      "doors": 2,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 6,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 4,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-render-dark": 0.56,
+      "mat-render-mid": 0.44,
+      "mat-partition": 0
+     },
+     "REAR": {
+      "mat-render-dark": 0.99,
+      "mat-render-mid": 0.01
+     },
+     "EAST": {
+      "mat-timber": 0.55,
+      "mat-render-dark": 0.36,
+      "mat-wall": 0.05,
+      "mat-render-mid": 0.04,
+      "mat-partition": 0
+     },
+     "WEST": {
+      "mat-render-dark": 0.76,
+      "mat-timber": 0.19,
+      "mat-wall": 0.02,
+      "mat-render-mid": 0.02
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "outline-x": {
+     "verdict": "PARTIAL",
+     "measured": "14.919",
+     "why": "-0.081 against 15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "21.250",
+     "why": "+0.000 against 21.25 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "main-body": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "main-roof": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "6.281",
+     "why": "+0.001 against 6.28 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "eaves": {
+     "verdict": "PASS",
+     "measured": "3.238",
+     "why": "-0.032 against 3.27 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "35.000",
+     "why": "+0.000 against 35 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "living-wing": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "wing-roof": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "garage": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "garage-gate": {
+     "verdict": "PASS",
+     "measured": "5.019",
+     "why": "one garage gate, width 5.019 against 5"
+    },
+    "entrance": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "covered-approach": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "terrace-pergola": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "openings-front": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "openings-garden": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    },
+    "chimneys": {
+     "verdict": "PARTIAL",
+     "measured": "1",
+     "why": "two chimneys in the source"
+    },
+    "palette": {
+     "verdict": "MANUAL",
+     "measured": "—",
+     "why": "needs a look at the boards (no manual verdict written yet)"
+    }
+   }
+  },
+  "L0": {
+   "facts": {
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 6.28
+     }
+    ],
+    "ridge": 6.281,
+    "eaves": 3.238,
+    "openings": 29,
+    "walls": 12,
+    "gateWidths": [
+     5.019496
+    ],
+    "pitchDeg": 35,
+    "bodies": 3,
+    "chimneys": 0,
+    "rooms": 14,
+    "doors": 20,
+    "perSide": {
+     "FRONT": {
+      "windows": 0,
+      "doors": 4,
+      "gates": 1
+     },
+     "REAR": {
+      "windows": 1,
+      "doors": 2,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 6,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 4,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-render-dark": 0.69,
+      "mat-render-mid": 0.31,
+      "mat-partition": 0
+     },
+     "REAR": {
+      "mat-render-mid": 1
+     },
+     "EAST": {
+      "mat-render-mid": 0.72,
+      "mat-render-dark": 0.28,
+      "mat-partition": 0
+     },
+     "WEST": {
+      "mat-render-mid": 0.67,
+      "mat-render-dark": 0.33
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "outline-x": {
+     "verdict": "PARTIAL",
+     "measured": "14.919",
+     "why": "-0.081 against 15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "21.250",
+     "why": "+0.000 against 21.25 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "main-body": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP and obliques: one long body along z the full depth, about 8.6 m wide (left two strips of the top view)"
+    },
+    "main-roof": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: one gable roof with its ridge along z over the garage and the approach the whole length; FRONT/REAR gable ends"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "6.281",
+     "why": "+0.001 against 6.28 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "eaves": {
+     "verdict": "PASS",
+     "measured": "3.238",
+     "why": "-0.032 against 3.27 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "35.000",
+     "why": "+0.000 against 35 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "living-wing": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: the wing on the east (x+) side at the rear, about 6.4 × 8.6"
+    },
+    "wing-roof": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the cross gable with its ridge along x is there (EAST, obliques); the tall glazed east gable is not — the EAST face has a low window band where the source has the full-height glazed triangle"
+    },
+    "garage": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT and front-left oblique: the garage at the front-west under the main roof with its gate"
+    },
+    "garage-gate": {
+     "verdict": "PASS",
+     "measured": "5.019",
+     "why": "one garage gate, width 5.019 against 5"
+    },
+    "entrance": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: the entrance door beside the garage, set back (front-left oblique)"
+    },
+    "covered-approach": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the main roof runs over the approach (TOP), but the EAST face of that bay is a solid wall where the source shows an open approach with timber slats"
+    },
+    "terrace-pergola": {
+     "verdict": "FAIL",
+     "measured": "—",
+     "why": "MANUAL: no pergola in any view; the source's garden terrace pergola is not built"
+    },
+    "openings-front": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: garage gate, entrance door and the kitchen window, in place"
+    },
+    "openings-garden": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: REAR/WEST: the large glazing and the terrace doors are there as openings, but the 4.00 × 2.30 glazing onto the pergola terrace cannot be told from the other wide window without the pergola; small windows present"
+    },
+    "chimneys": {
+     "verdict": "FAIL",
+     "measured": "0",
+     "why": "two chimneys in the source"
+    },
+    "palette": {
+     "verdict": "FAIL",
+     "measured": "—",
+     "why": "MANUAL: walls mid grey-brown, roof dark: no timber anywhere (garage gable, wing gable, panels beside openings all render)"
+    }
+   }
+  },
+  "L-M": {
+   "facts": {
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 6.28
+     }
+    ],
+    "ridge": 6.281,
+    "eaves": 3.238,
+    "openings": 29,
+    "walls": 12,
+    "gateWidths": [
+     5.019496
+    ],
+    "pitchDeg": 35,
+    "bodies": 3,
+    "chimneys": 0,
+    "rooms": 14,
+    "doors": 20,
+    "perSide": {
+     "FRONT": {
+      "windows": 0,
+      "doors": 4,
+      "gates": 1
+     },
+     "REAR": {
+      "windows": 1,
+      "doors": 2,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 6,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 4,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-render-dark": 0.69,
+      "mat-render-mid": 0.31,
+      "mat-partition": 0
+     },
+     "REAR": {
+      "mat-render-mid": 1
+     },
+     "EAST": {
+      "mat-render-mid": 0.72,
+      "mat-render-dark": 0.28,
+      "mat-partition": 0
+     },
+     "WEST": {
+      "mat-render-mid": 0.67,
+      "mat-render-dark": 0.33
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "outline-x": {
+     "verdict": "PARTIAL",
+     "measured": "14.919",
+     "why": "-0.081 against 15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "21.250",
+     "why": "+0.000 against 21.25 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "main-body": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP and obliques: one long body along z the full depth, about 8.6 m wide (left two strips of the top view)"
+    },
+    "main-roof": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: one gable roof with its ridge along z over the garage and the approach the whole length; FRONT/REAR gable ends"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "6.281",
+     "why": "+0.001 against 6.28 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "eaves": {
+     "verdict": "PASS",
+     "measured": "3.238",
+     "why": "-0.032 against 3.27 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "35.000",
+     "why": "+0.000 against 35 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "living-wing": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: the wing on the east (x+) side at the rear, about 6.4 × 8.6"
+    },
+    "wing-roof": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the cross gable with its ridge along x is there (EAST, obliques); the tall glazed east gable is not — the EAST face has a low window band where the source has the full-height glazed triangle"
+    },
+    "garage": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT and front-left oblique: the garage at the front-west under the main roof with its gate"
+    },
+    "garage-gate": {
+     "verdict": "PASS",
+     "measured": "5.019",
+     "why": "one garage gate, width 5.019 against 5"
+    },
+    "entrance": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: the entrance door beside the garage, set back (front-left oblique)"
+    },
+    "covered-approach": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the main roof runs over the approach (TOP), but the EAST face of that bay is a solid wall where the source shows an open approach with timber slats"
+    },
+    "terrace-pergola": {
+     "verdict": "FAIL",
+     "measured": "—",
+     "why": "MANUAL: no pergola in any view; the source's garden terrace pergola is not built"
+    },
+    "openings-front": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: garage gate, entrance door and the kitchen window, in place"
+    },
+    "openings-garden": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: REAR/WEST: the large glazing and the terrace doors are there as openings, but the 4.00 × 2.30 glazing onto the pergola terrace cannot be told from the other wide window without the pergola; small windows present"
+    },
+    "chimneys": {
+     "verdict": "FAIL",
+     "measured": "0",
+     "why": "two chimneys in the source"
+    },
+    "palette": {
+     "verdict": "FAIL",
+     "measured": "—",
+     "why": "MANUAL: walls mid grey-brown, roof dark: no timber anywhere (garage gable, wing gable, panels beside openings all render)"
+    }
+   }
+  },
+  "L-MS": {
+   "facts": {
+    "outlineX": 14.919,
+    "outlineZ": 21.25,
+    "levels": [
+     {
+      "id": "lvl-0",
+      "elevation": 0,
+      "height": 6.28
+     }
+    ],
+    "ridge": 6.281,
+    "eaves": 3.238,
+    "openings": 29,
+    "walls": 12,
+    "gateWidths": [
+     5.019496
+    ],
+    "pitchDeg": 35,
+    "bodies": 3,
+    "chimneys": 0,
+    "rooms": 14,
+    "doors": 20,
+    "perSide": {
+     "FRONT": {
+      "windows": 0,
+      "doors": 4,
+      "gates": 1
+     },
+     "REAR": {
+      "windows": 1,
+      "doors": 2,
+      "gates": 0
+     },
+     "EAST": {
+      "windows": 1,
+      "doors": 6,
+      "gates": 0
+     },
+     "WEST": {
+      "windows": 4,
+      "doors": 0,
+      "gates": 0
+     }
+    },
+    "shares": {
+     "FRONT": {
+      "mat-render-dark": 0.69,
+      "mat-render-mid": 0.31,
+      "mat-partition": 0
+     },
+     "REAR": {
+      "mat-render-dark": 0.88,
+      "mat-timber": 0.07,
+      "mat-render-mid": 0.05
+     },
+     "EAST": {
+      "mat-timber": 0.46,
+      "mat-render-mid": 0.29,
+      "mat-render-dark": 0.25,
+      "mat-partition": 0
+     },
+     "WEST": {
+      "mat-render-dark": 0.76,
+      "mat-timber": 0.19,
+      "mat-render-mid": 0.05
+     }
+    }
+   },
+   "rows": {
+    "storeys": {
+     "verdict": "PASS",
+     "measured": "1 storey(s)",
+     "why": "one storey expected"
+    },
+    "outline-x": {
+     "verdict": "PARTIAL",
+     "measured": "14.919",
+     "why": "-0.081 against 15 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "outline-z": {
+     "verdict": "PASS",
+     "measured": "21.250",
+     "why": "+0.000 against 21.25 (METRIC ±0.05, miniature ±0.3; PARTIAL = miniature only)"
+    },
+    "main-body": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP and obliques: one long body along z the full depth, about 8.6 m wide (left two strips of the top view)"
+    },
+    "main-roof": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: one gable roof with its ridge along z over the garage and the approach the whole length; FRONT/REAR gable ends"
+    },
+    "ridge": {
+     "verdict": "PASS",
+     "measured": "6.281",
+     "why": "+0.001 against 6.28 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "eaves": {
+     "verdict": "PASS",
+     "measured": "3.238",
+     "why": "-0.032 against 3.27 (METRIC ±0.05, miniature ±0.15; PARTIAL = miniature only)"
+    },
+    "pitch": {
+     "verdict": "PASS",
+     "measured": "35.000",
+     "why": "+0.000 against 35 (METRIC ±1, miniature ±3; PARTIAL = miniature only)"
+    },
+    "living-wing": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: TOP: the wing on the east (x+) side at the rear, about 6.4 × 8.6"
+    },
+    "wing-roof": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the cross gable with its ridge along x is there (EAST, obliques); the tall glazed east gable is not — the EAST face has a low window band where the source has the full-height glazed triangle"
+    },
+    "garage": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT and front-left oblique: the garage at the front-west under the main roof with its gate"
+    },
+    "garage-gate": {
+     "verdict": "PASS",
+     "measured": "5.019",
+     "why": "one garage gate, width 5.019 against 5"
+    },
+    "entrance": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: the entrance door beside the garage, set back (front-left oblique)"
+    },
+    "covered-approach": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: the main roof runs over the approach (TOP), but the EAST face of that bay is a solid wall where the source shows an open approach with timber slats"
+    },
+    "terrace-pergola": {
+     "verdict": "FAIL",
+     "measured": "—",
+     "why": "MANUAL: no pergola in any view; the source's garden terrace pergola is not built"
+    },
+    "openings-front": {
+     "verdict": "PASS",
+     "measured": "—",
+     "why": "MANUAL: FRONT: garage gate, entrance door and the kitchen window, in place"
+    },
+    "openings-garden": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: REAR/WEST: the large glazing and the terrace doors are there as openings, but the 4.00 × 2.30 glazing onto the pergola terrace cannot be told from the other wide window without the pergola; small windows present"
+    },
+    "chimneys": {
+     "verdict": "FAIL",
+     "measured": "0",
+     "why": "two chimneys in the source"
+    },
+    "palette": {
+     "verdict": "PARTIAL",
+     "measured": "—",
+     "why": "MANUAL: anthracite walls and roof; timber on the east wing gable, on the approach bay and on the panels beside the west openings — as the source; but the garage's front gable is light grey where the source has timber (the front sketch was REJECTED, the tone came from the form candidate: a regression against L0's dark gable)"
+    }
+   }
+  }
+ },
+ "table": [
+  {
+   "label": "v35414",
+   "pass": "6",
+   "partial": "2",
+   "fail": "0",
+   "manual": "11",
+   "of": "19"
+  },
+  {
+   "label": "L0",
+   "pass": "12",
+   "partial": "4",
+   "fail": "3",
+   "manual": "0",
+   "of": "19"
+  },
+  {
+   "label": "L-M",
+   "pass": "12",
+   "partial": "4",
+   "fail": "3",
+   "manual": "0",
+   "of": "19"
+  },
+  {
+   "label": "L-MS",
+   "pass": "12",
+   "partial": "5",
+   "fail": "2",
+   "manual": "0",
+   "of": "19"
+  }
+ ]
+}
