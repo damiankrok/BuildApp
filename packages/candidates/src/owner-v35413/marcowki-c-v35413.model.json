@@ -2128,6 +2128,184 @@
   "surfaceRegions": [
     {
       "evidence": {
+        "interpretation": "a light render outline from c-live-east-93e150872f59-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-front-1-1",
+      "id": "appearance-east-return-front-1-1-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.1,
+          "b": 0.79
+        },
+        {
+          "a": 0.991425,
+          "b": 0.79
+        },
+        {
+          "a": 0.991425,
+          "b": 0.01
+        },
+        {
+          "a": 0.1,
+          "b": 0.01
+        }
+      ],
+      "rect": {
+        "a0": 0.1,
+        "a1": 0.991425,
+        "b0": 0.01,
+        "b1": 0.79
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-east-93e150872f59-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-rear-0-1",
+      "id": "appearance-east-return-rear-0-1-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.968575,
+          "b": 3.06
+        },
+        {
+          "a": 0.968575,
+          "b": 0.01
+        },
+        {
+          "a": 0.008575,
+          "b": 0.01
+        },
+        {
+          "a": 0.008575,
+          "b": 3.06
+        }
+      ],
+      "rect": {
+        "a0": 0.008575,
+        "a1": 0.968575,
+        "b0": 0.01,
+        "b1": 3.06
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-east-93e150872f59-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-rear-1-1",
+      "id": "appearance-east-return-rear-1-1-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.008575,
+          "b": 0.79
+        },
+        {
+          "a": 0.968575,
+          "b": 0.79
+        },
+        {
+          "a": 0.968575,
+          "b": 0.01
+        },
+        {
+          "a": 0.008575,
+          "b": 0.01
+        }
+      ],
+      "rect": {
+        "a0": 0.008575,
+        "a1": 0.968575,
+        "b0": 0.01,
+        "b1": 0.79
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-east-93e150872f59-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-attached-0-0-w1",
+      "id": "appearance-east-ring-attached-0-0-w1-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.488575,
+          "b": 3.11
+        },
+        {
+          "a": 7.028575,
+          "b": 3.11
+        },
+        {
+          "a": 7.028575,
+          "b": 3.05
+        },
+        {
+          "a": 0.488575,
+          "b": 3.05
+        }
+      ],
+      "rect": {
+        "a0": 0.488575,
+        "a1": 7.028575,
+        "b0": 3.05,
+        "b1": 3.11
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from c-live-east-93e150872f59-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w1-0",
+      "id": "appearance-east-ring-main-0-w1-0-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 0.487678,
+          "b": 3.03
+        },
+        {
+          "a": 0.507678,
+          "b": 3.03
+        },
+        {
+          "a": 0.507678,
+          "b": 2.25
+        },
+        {
+          "a": 1.707678,
+          "b": 2.25
+        },
+        {
+          "a": 1.707678,
+          "b": 0.01
+        },
+        {
+          "a": 0.487678,
+          "b": 0.01
+        }
+      ],
+      "rect": {
+        "a0": 0.487678,
+        "a1": 1.707678,
+        "b0": 0.01,
+        "b1": 3.03
+      }
+    },
+    {
+      "evidence": {
         "interpretation": "a dark render outline from c-offline-front-c868bf59895c (LOCAL_SKETCH_SEGMENTATION): colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
@@ -7188,6 +7366,176 @@
         "a1": 1.58,
         "b0": 0.01,
         "b1": 0.29
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-west-0015dfde66b5-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-front-0-0",
+      "id": "appearance-west-return-front-0-0-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0,
+          "b": 3.06
+        },
+        {
+          "a": 0,
+          "b": 0.11
+        },
+        {
+          "a": 0.951425,
+          "b": 0.11
+        },
+        {
+          "a": 0.951425,
+          "b": 3.06
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 0.951425,
+        "b0": 0.11,
+        "b1": 3.06
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-west-0015dfde66b5-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-front-1-0",
+      "id": "appearance-west-return-front-1-0-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.951425,
+          "b": 0.79
+        },
+        {
+          "a": 0,
+          "b": 0.79
+        },
+        {
+          "a": 0,
+          "b": 0.01
+        },
+        {
+          "a": 0.951425,
+          "b": 0.01
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 0.951425,
+        "b0": 0.01,
+        "b1": 0.79
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-west-0015dfde66b5-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-rear-0-0",
+      "id": "appearance-west-return-rear-0-0-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 0.301425,
+          "b": 3.06
+        },
+        {
+          "a": 0.301425,
+          "b": 0.11
+        },
+        {
+          "a": 1.001425,
+          "b": 0.11
+        },
+        {
+          "a": 1.001425,
+          "b": 3.06
+        }
+      ],
+      "rect": {
+        "a0": 0.301425,
+        "a1": 1.001425,
+        "b0": 0.11,
+        "b1": 3.06
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a light render outline from c-live-west-0015dfde66b5-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "return-rear-1-0",
+      "id": "appearance-west-return-rear-1-0-light-render-0",
+      "materialId": "mat-wall",
+      "outline": [
+        {
+          "a": 1.001425,
+          "b": 0.79
+        },
+        {
+          "a": 0.301425,
+          "b": 0.79
+        },
+        {
+          "a": 0.301425,
+          "b": 0.01
+        },
+        {
+          "a": 1.001425,
+          "b": 0.01
+        }
+      ],
+      "rect": {
+        "a0": 0.301425,
+        "a1": 1.001425,
+        "b0": 0.01,
+        "b1": 0.79
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a dark render outline from c-live-west-0015dfde66b5-appearance-contours-1 (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w3",
+      "id": "appearance-west-ring-main-0-w3-dark-render-0",
+      "materialId": "mat-render-dark",
+      "outline": [
+        {
+          "a": 9.971425,
+          "b": 2.33
+        },
+        {
+          "a": 4.711425,
+          "b": 2.33
+        },
+        {
+          "a": 4.711425,
+          "b": 0.11
+        },
+        {
+          "a": 9.971425,
+          "b": 0.11
+        }
+      ],
+      "rect": {
+        "a0": 4.711425,
+        "a1": 9.971425,
+        "b0": 0.11,
+        "b1": 2.33
       }
     }
   ],

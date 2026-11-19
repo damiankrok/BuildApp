@@ -50,14 +50,15 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  */
 export const SCENES: readonly SceneSpec[] = [
   // v3.54.13 (delivered miniature): the delivered LOCAL geometry read on the ORIGINAL sources (v3.54.11 A, every
-  // wall, opening, room, stair and id unchanged — the usable-geometry fingerprint is A's), its finishes replaced by the
-  // material outlines the OWNER's front and rear sketches carry: read by the local sketch reader, registered on the
-  // elevation and split among the surfaces the model shows (model schema 1.9.0 outlines). The gate keeps its 2.20 m.
+  // wall, opening, room, stair and id unchanged — the usable-geometry fingerprint is A's), its finishes replaced by
+  // material outlines (model schema 1.9.0): front and rear from the OWNER's sketches (local sketch reader), the two sides
+  // — which have no sketch — from the API reading of their original elevations; each registered on its elevation and
+  // split among the surfaces the model shows. The gate keeps its 2.20 m.
   {
-    key: 'marcowki-c-offline-v35413',
-    title: 'Marcówki — kontury ze szkiców v3.54.13 (oddany)',
-    subtitle: 'ODDANY: geometria LOCAL z oryginałów bez zmian, wykończenia z konturów szkiców OWNER-a (przód i tył); drewno ciągłe od parteru do szczytu',
-    build: () => sealedOwnerModel('marcowki-c-offline-v35413', '22ef694e218be7ce68f897229e69163f64db6c62440df91b76a376e087b9ea5e', 'owner-v35413'),
+    key: 'marcowki-c-v35413',
+    title: 'Marcówki — kontury wykończeń v3.54.13 (oddany)',
+    subtitle: 'ODDANY: geometria LOCAL z oryginałów bez zmian; wykończenia z konturów: przód i tył ze szkiców OWNER-a, boki z odczytu elewacji',
+    build: () => sealedOwnerModel('marcowki-c-v35413', 'a56676b9bf0249ba14534aa5135c7326ac8877827a76c571a34ecb735b0b3e68', 'owner-v35413'),
   },
   // v3.54.13 (experiment): the same geometry, its finishes from the four ORIGINAL elevations read by the provider's
   // API into the appearance contract (outlines and classes as JSON, no raster edited; 4 requests, 0.04623 USD)

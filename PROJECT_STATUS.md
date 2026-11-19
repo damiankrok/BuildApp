@@ -12,6 +12,23 @@
 
 ## Current summary (read first)
 
+- **v3.54.13 (2026-11-19): finish outlines, protection of geometry, four automatic elevations; APK 1344** (Master
+  Plan v3.54.13 in full). Report `stage-reports/SOURCE_TO_MODEL_V35413.md`, index `README_V35413.md`, ADR
+  `docs/ADR-V35413-OUTLINES-AND-PROPERTY-ARBITRATION.md`, hand-off `research/source-to-model/v35413/HANDOFF.md`.
+  Cause of the colour steps: LOCAL's finish reader samples one horizontal band per storey (1-D runs), the contract held
+  only a rect, storeys were estimated apart. Model schema **1.9.0**: `SurfaceRegion.outline` (simple polygon in the
+  face's (a, b) inside its rect) and START/END under an explicit version (migration restates the v3.54.12 end caps
+  written under 1.8.0; candidates and owner models resealed, every scene's meshes unchanged). Appearance module
+  (`analysis-service/src/appearance`): AppearanceObservation 1.0.0, a local sketch reader, the consumer (outline
+  registered once on the elevation, split among surfaces the compiled scene shows; geometry fingerprint enforced),
+  per-property arbitration (RETAINED/CORRECTED/UNSUPPORTED/UNRESOLVED, witness check). Gate: lost 2.20 because its
+  only witness was the original front; C keeps 2.20, B-guarded RETAINED. Delivered `marcowki-c-v35413`: LOCAL A
+  geometry, outlines from the OWNER's sketches (front, rear) and the API reading (sides): identity 14/14, zones 14/14,
+  16/16, 27/27, pixel agreement 0.956/0.953 (A 0.739/0.771), timber continuity 0.992 (A 0). C-live: four originals →
+  JSON outlines, 4 requests, 0.04623 USD (books 23.854612 / 24.11036), four-side check 7/7, rear weaker (0.839).
+  Counter-trials incl. a 0.5 m shifted edge (zones 14/14, boundary F1 0.28). Pallas: manual outline through the same
+  consumer, fingerprint unchanged (MANUAL_DIAGNOSTIC). APK 1344 (arm64, preview signature); ANDROID_UI_NOT_VERIFIED.
+
 - **v3.54.12-REAL (2026-11-18): the OWNER's colour sketches through the real LOCAL; confirmed barriers repaired behind
   flags; the H wall-cap strip fixed; APK 1343** (resume ZIP with the four images and Master Plan v3.54.12, copied in
   full to `docs/MASTER_PLAN.md`). Code `59b9af1`, scenes `11186ca`. Report addendum REAL_OWNER_INPUTS in

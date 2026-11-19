@@ -13,7 +13,7 @@ class OwnerCheckpointV35410ScenesTest {
     @Test
     fun `the candidate and the delivered model are listed under their own titles, after the repaired H`() {
         // v3.54.13: the delivered miniature and the four-side reading come first
-        assertEquals(listOf("marcowki-c-offline-v35413", "marcowki-c-live-v35413"), TestScenes.index.subList(0, 2).map { it.key })
+        assertEquals(listOf("marcowki-c-v35413", "marcowki-c-live-v35413"), TestScenes.index.subList(0, 2).map { it.key })
         assertTrue(TestScenes.index[0].subtitle.contains("ODDANY"))
         // v3.54.12: the H candidate with the end caps and the sketch experiment, then the repaired H
         assertEquals(listOf("marcowki-h-v35412", "marcowki-local-szkice-v35412"), TestScenes.index.subList(2, 4).map { it.key })
