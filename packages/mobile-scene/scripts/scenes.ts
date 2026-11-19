@@ -49,6 +49,46 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.16 (Ballina, delivered by the final host job on f75d205): the correction executor's patches from the sketches —
+  // five front openings and one on the right moved/resized against the source, the missing left window added — each
+  // gated on the original picture, built, measured back, and closed by a look at the delivered revision (7 CLOSED_VERIFIED).
+  // Open, named: the rear sliding door (no proposal), solar panels (unsupported), brick plinth (no proposal).
+  {
+    key: 'ballina-v35416',
+    title: 'Ballina — v3.54.16: korekty wykonawcy (oddany, host)',
+    subtitle: 'ODDANY: 7 korekt otworów ze szkiców przez wspólnego wykonawcę, zamkniętych recenzją dostarczonej rewizji; otwarte: drzwi tarasowe, panele (nieobsługiwane), cokół',
+    build: () => sealedOwnerModel('ballina-v35416', '7f4bb112baeeb76716225cd1434f292143eb4530eb49aaef12fc0f2481230d84', 'owner-v35416'),
+  },
+  // v3.54.16 (Murcja, DEV replay of recorded answers through the new sketch channel): the rear chimney added, two
+  // openings updated; the other proposals refused by the source or waiting for evidence. Not a host job.
+  {
+    key: 'murcja-v35416',
+    title: 'Murcja — v3.54.16: komin i otwory z kanału szkicu (odtworzenie DEV)',
+    subtitle: 'ROZWÓJ: odtworzenie zapisanych odpowiedzi; komin z tyłu dodany (bramka źródła), 2 otwory poprawione, reszta odrzucona lub bez dowodu',
+    build: () => sealedOwnerModel('murcja-v35416', '2064fd05ab839e8313111acaec9137f1931d557511b158b871f85687e3a3f5c4', 'owner-v35416'),
+  },
+  // v3.54.16 controlled proof 2 (a TEST, not a house result): the front window moved 0.6 m by injection, then repaired by
+  // UPDATE_OPENING against the source picture; the two scenes are after and before.
+  {
+    key: 'ballina-test-after-v35416',
+    title: 'Ballina — TEST: zły otwór naprawiony względem źródła',
+    subtitle: 'TEST KONTROLOWANY: okno frontu po naprawie (UPDATE_OPENING, z źródła 7,55 vs 1,73); nie jest wynikiem domu',
+    build: () => sealedOwnerModel('ballina-test-after-v35416', 'eb82a42262a782756dec04178ef1ce574218faa6032b1fbbb8c0b63e9b7ab265', 'owner-v35416'),
+  },
+  {
+    key: 'ballina-test-before-v35416',
+    title: 'Ballina — TEST: otwór celowo przesunięty o 0,6 m',
+    subtitle: 'TEST KONTROLOWANY: stan przed naprawą, wstrzyknięty błąd; nie jest wynikiem domu',
+    build: () => sealedOwnerModel('ballina-test-before-v35416', 'a8442715df35e2b798da3cd0b484cb4660fa4e3a4acfd3f5ac729de4227307ee', 'owner-v35416'),
+  },
+  // v3.54.16 frozen trial, Studio Atrium Alaska, first result kept as is: a flat box where the source has a gable; the
+  // reviewer named ROOF_FORM (KEY) as UNSUPPORTED — the registry cannot change a roof form.
+  {
+    key: 'alaska-trial-v35416',
+    title: 'Alaska (Studio Atrium) — próba v3.54.16, pierwszy wynik',
+    subtitle: 'PRÓBA ZAMROŻONA: pierwszy wynik; brak dachu dwuspadowego (forma dachu nieobsługiwana), jakość UNSUPPORTED_OPERATION',
+    build: () => sealedOwnerModel('alaska-trial-v35416', 'cafedeaac44f2f8ea507a535eabdc5ce53c5a1ac74703607b6475f59620625b4', 'owner-v35416'),
+  },
   // v3.54.15 (Ballina, the regression house): the consultant's level marks admitted by the section's own ladder reach
   // the model — the ridge datum 5.54 (the template's +15.50 overruled), eaves 3.373, the gable at the page's 28°; the
   // full side drawings registered by their labels; finishes from three sketches (the form sketch rolled back: it would

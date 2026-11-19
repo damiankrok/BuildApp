@@ -1,5 +1,65 @@
 [
   {
+    "key": "ballina-v35416",
+    "title": "Ballina — v3.54.16: korekty wykonawcy (oddany, host)",
+    "subtitle": "ODDANY: 7 korekt otworów ze szkiców przez wspólnego wykonawcę, zamkniętych recenzją dostarczonej rewizji; otwarte: drzwi tarasowe, panele (nieobsługiwane), cokół",
+    "asset": "ballina-v35416.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "9bd3e45f5880e93b627fc533450dfbf006c33123aee9419c383a2cf50162e979",
+    "meshCount": 87,
+    "triangleCount": 4324,
+    "objectCount": 62
+  },
+  {
+    "key": "murcja-v35416",
+    "title": "Murcja — v3.54.16: komin i otwory z kanału szkicu (odtworzenie DEV)",
+    "subtitle": "ROZWÓJ: odtworzenie zapisanych odpowiedzi; komin z tyłu dodany (bramka źródła), 2 otwory poprawione, reszta odrzucona lub bez dowodu",
+    "asset": "murcja-v35416.scene.json",
+    "modelId": "m-analysis-u41e59d24c796",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "1652fe8172f6bc75f19180bb663b1f966064bf82ba3c6245304139bb1b7fb36f",
+    "meshCount": 145,
+    "triangleCount": 6488,
+    "objectCount": 112
+  },
+  {
+    "key": "ballina-test-after-v35416",
+    "title": "Ballina — TEST: zły otwór naprawiony względem źródła",
+    "subtitle": "TEST KONTROLOWANY: okno frontu po naprawie (UPDATE_OPENING, z źródła 7,55 vs 1,73); nie jest wynikiem domu",
+    "asset": "ballina-test-after-v35416.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "6a84d1bb741ab5382a7a4d9858cc2b0a8a9803e4795aa1aec2058eded33f98af",
+    "meshCount": 87,
+    "triangleCount": 3434,
+    "objectCount": 62
+  },
+  {
+    "key": "ballina-test-before-v35416",
+    "title": "Ballina — TEST: otwór celowo przesunięty o 0,6 m",
+    "subtitle": "TEST KONTROLOWANY: stan przed naprawą, wstrzyknięty błąd; nie jest wynikiem domu",
+    "asset": "ballina-test-before-v35416.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "8c3647f72f9bc375a8fdd9b98710a528e1a4e8500fa19a7fc65ca5b8e8d6e16d",
+    "meshCount": 87,
+    "triangleCount": 3434,
+    "objectCount": 62
+  },
+  {
+    "key": "alaska-trial-v35416",
+    "title": "Alaska (Studio Atrium) — próba v3.54.16, pierwszy wynik",
+    "subtitle": "PRÓBA ZAMROŻONA: pierwszy wynik; brak dachu dwuspadowego (forma dachu nieobsługiwana), jakość UNSUPPORTED_OPERATION",
+    "asset": "alaska-trial-v35416.scene.json",
+    "modelId": "m-analysis-u8fba8e6a95bb",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "123e97c13a288ffd1a010988fc6ea1234afc042ea9f2e22aa1aba1e281e4edf8",
+    "meshCount": 134,
+    "triangleCount": 5968,
+    "objectCount": 96
+  },
+  {
     "key": "ballina-v35415",
     "title": "Ballina — v3.54.15: dach z rzędnych przekroju (oddany)",
     "subtitle": "ODDANY: kalenica 5,54 i okap 3,37 z rzędnych API przyjętych przez przekrój; drzwi wejściowe z rzutu; wykończenia ze szkiców; okno lewe i strop +2,80 nazwane jako luki",
