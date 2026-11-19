@@ -1172,6 +1172,11 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const contradictions = sourceCheck.knownDefects.filter((k) => /^OUTLINE_(SHORT|BEYOND)|^SCALE_CONTRADICTED/.test(k.code)).length
     sourceCheck.quality = qualityOf({ looked: sourceCheck.looks > 0, checkedRevision: sourceCheck.checkedRevision, deliveredRevision: sourceCheck.deliveredRevision, lastStatus: sourceCheck.reviewStatus, defects: last, allDefects: defectLedger, measuredContradictions: contradictions, pendingAtLimit, attemptedForKey, committedForKey })
     sourceCheck.correctionRuns = correctionRuns
+    // v3.54.16 (after the freeze, named): the axes read the last look's defect ledger too — a difference reported with
+    // no executable proposal (an UNSUPPORTED roof form, an opening on a view without heights) is still open on its axis
+    const openOn = (f: (d: DefectEntry) => boolean): boolean => last.some((d) => d.settlement !== 'CLOSED_VERIFIED' && f(d))
+    if (openOn((d) => d.scope === 'ROOF' || d.family === 'ROOF_FORM' || d.operation === 'ROOF_FEATURE')) sourceCheck.axes.roof = 'DIFFERENCE_OPEN'
+    if (openOn((d) => /OPENING/.test(d.operation))) sourceCheck.axes.openings = 'DIFFERENCE_OPEN'
     for (const d of last.filter((x) => x.settlement !== 'CLOSED_VERIFIED')) if (!sourceCheck.knownDefects.some((k) => k.what.startsWith(d.id))) sourceCheck.knownDefects.push({ code: `DEFECT_${d.settlement}`, what: `${d.id} (${d.severity}, ${d.scope}): ${d.about}`.slice(0, 400) })
   }
   // the result an app consumes says what was checked, what was corrected and what is known wrong — not only the trace
