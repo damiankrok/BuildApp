@@ -82,6 +82,16 @@ for (const spec of all('side')) {
   observations.push(obs)
   readings[facade] = { clusters: reading.clusters, regions: reading.regions.map((r) => ({ regionId: r.regionId, class: r.class, corners: r.outline.length })), readMs: ms }
 }
+// --observations <file>: apply an observation set as given (a stored reading replayed, or a counter-trial edited by hand)
+const given = opt('observations')
+if (given) {
+  const set = JSON.parse(readFileSync(given, 'utf8')) as AppearanceObservation[]
+  observations.push(...set)
+  for (const o of set) {
+    const view = alignment.views.find((v) => v.facade === o.facade)
+    if (view) projOf.set(`${o.facade}|${o.source.sourceByteHash}`, view.projection)
+  }
+}
 writeFileSync(join(out, 'observations.json'), `${stableJson(observations)}\n`)
 writeFileSync(join(out, 'readings.json'), `${stableJson(readings)}\n`)
 const r = applyAppearance(base, observations, (f, h) => projOf.get(`${f}|${h}`))

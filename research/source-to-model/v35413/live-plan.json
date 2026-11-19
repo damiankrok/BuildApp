@@ -1,0 +1,55 @@
+{
+  "booksBefore": {
+    "ceilingUsd": 24.11036,
+    "leftUsd": 0.301978,
+    "spentUsd": 23.808382
+  },
+  "contract": "buildapp.appearance-observation 1.0.0 (classes LIGHT_RENDER, DARK_RENDER, TIMBER, GLASS, ROOF, METAL, BACKGROUND, UNKNOWN)",
+  "inputBoundTokensPerRequest": 4000,
+  "maxTokensPerRequest": 4000,
+  "model": "claude-sonnet-5-5",
+  "priceUsdPerMTok": {
+    "inPerM": 2,
+    "outPerM": 10
+  },
+  "promptVersion": "appearance-contours-1",
+  "requests": "4 (one per original elevation) + at most 1 retry in total",
+  "safety": "no code, SVG or markup from the reply is executed; only JSON numbers and enumerated strings are kept, validated against the contract; points outside the picture are refused",
+  "schema": "buildapp.v35413-live-plan/1",
+  "sources": [
+    {
+      "facade": "FRONT",
+      "note": "the source variant decoded to PNG (same pixels), sent at its own size: no resize, no padding",
+      "sentImageSha256": "5f6e8a15dc1ef76b4796fa86d03d031c83f7b36faeaae86728053c527b6cb154",
+      "size": "1280x597",
+      "sourceByteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142"
+    },
+    {
+      "facade": "REAR",
+      "note": "the source variant decoded to PNG (same pixels), sent at its own size: no resize, no padding",
+      "sentImageSha256": "ce41a94e805dc796dec73b248228b6333b4bd68b1cc84e329e717abd6e2795b6",
+      "size": "1280x598",
+      "sourceByteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e"
+    },
+    {
+      "facade": "EAST",
+      "note": "the source variant decoded to PNG (same pixels), sent at its own size: no resize, no padding",
+      "sentImageSha256": "7abfeb2ba4b1a7899d29c8348fe16cb298908494189208be6df479338da823fb",
+      "size": "1280x597",
+      "sourceByteHash": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd"
+    },
+    {
+      "facade": "WEST",
+      "note": "the source variant decoded to PNG (same pixels), sent at its own size: no resize, no padding",
+      "sentImageSha256": "b002ac6c172e69b0b46b286f967e696aacc30534e6e90e80aac2fdef5118c6df",
+      "size": "1280x598",
+      "sourceByteHash": "0015dfde66b5657c771e703e2cfdb3e068f6e30ff2f8e1435ce950e98a3b11c6"
+    }
+  ],
+  "system": "You read architectural elevation pictures and return the outlines of finish materials as JSON. Reply with one JSON object and nothing else.",
+  "thinking": "between_tools (no extended thinking), effort medium",
+  "userTemplate": "This is the {facade} elevation of a single-family house, {W}×{H} pixels.\nTrace the outlines of the FINISH MATERIALS on the building's visible facade surfaces, in this image's own pixel coordinates (x to the right from the left edge, y down from the top edge; integers).\nClasses: LIGHT_RENDER (light or white render, a light frame), DARK_RENDER (dark grey or anthracite render or cladding), TIMBER (wood cladding), GLASS (windows, glazed doors, glass balustrades), ROOF (roof covering), METAL (gates, metal sheet, gutters, flashings).\nRules: one region per continuous area of one material; a region continues across a floor line when the material does — do not split it at storeys, and do not join areas the picture separates. Sky, trees, ground, shadows, reflections and any watermark or logo are not materials: leave them out. Mark a region PARTLY_OCCLUDED where a tree or an object hides part of it, UNCERTAIN where you are unsure. uncertaintyPx is your honest edge error in pixels. hostHint is one of WALL, FRAME, BAND, SLAB, ROOF, OPENING, GATE.\nAt most 16 regions, at most 24 points per outline, each outline a simple polygon.\nReturn exactly: {\"regions\":[{\"regionId\":\"r1\",\"class\":\"TIMBER\",\"outline\":[[x,y],...],\"visibility\":\"VISIBLE\",\"uncertaintyPx\":6,\"hostHint\":\"WALL\"}]}",
+  "worstCaseUsdPerRequest": 0.048,
+  "worstCaseUsdTotal": 0.24
+}
+
