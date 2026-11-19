@@ -1,0 +1,39 @@
+ok   the host answers /health (analyzer {"service":"1.11.0","solver":"2.45.0"})
+ok   job-1: POST /v1/analyses → 202
+job-1: COMPLETED in 626 s; books +0.594924 USD, +12 requests
+ok   job-1: result, scene and model are served
+ok   job-1: the scene's bytes are the summary's sceneSha256 and the response header's
+ok   job-1: the model's bytes are the summary's modelSha256
+ok   job-1: the scene reloads (157 meshes) with the summary's content hash
+ok   job-1: the result came through the consultant's path; the global description is DISABLED
+ok   job-1: no vision reasoner or house reader was attempted (vision {"mode":"REPLAYED_GRAPH","provider":null,"attempted":0,"accepted":0})
+ok   job-1: the consumed result carries the source check (CHECKED, 0 known defects)
+ok   job-1: the metric consultant ran (ROLLBACK: 8 corrected, 3 agree)
+ok   job-1: the sketch step ran (WEST:REJECTED REAR:ACCEPTED EAST:ACCEPTED FRONT:REJECTED; form ACCEPT, finish ACCEPT)
+ok   job-1: the accepted-revision rule was applied (ACCEPTED_NOW)
+ok   job-1-repeat: POST /v1/analyses → 202
+job-1-repeat: COMPLETED in 430 s; books +0 USD, +0 requests
+ok   job-1-repeat: result, scene and model are served
+ok   job-1-repeat: the scene's bytes are the summary's sceneSha256 and the response header's
+ok   job-1-repeat: the model's bytes are the summary's modelSha256
+ok   job-1-repeat: the scene reloads (157 meshes) with the summary's content hash
+ok   job-1-repeat: the result came through the consultant's path; the global description is DISABLED
+ok   job-1-repeat: no vision reasoner or house reader was attempted (vision {"mode":"REPLAYED_GRAPH","provider":null,"attempted":0,"accepted":0})
+ok   job-1-repeat: the consumed result carries the source check (CHECKED, 0 known defects)
+ok   job-1-repeat: the metric consultant ran (ROLLBACK: 8 corrected, 3 agree)
+ok   job-1-repeat: the sketch step ran (WEST:REJECTED REAR:ACCEPTED EAST:ACCEPTED FRONT:REJECTED; form ACCEPT, finish ACCEPT)
+ok   job-1-repeat: the accepted-revision rule was applied (REUSED)
+ok   the first run's consultation was accepted (ACCEPTED_NOW)
+ok   the second run of the same URL reused the accepted revision (REUSED, 12 answers replayed, 0 missing, same geometry true)
+ok   the second run booked nothing (0 USD, 0 requests)
+ok   the second run served the same model and scene bytes
+ok   job-default-no-token: POST /v1/analyses → 202
+job-default-no-token: COMPLETED in 165 s; books +0 USD, +0 requests
+ok   job-default-no-token: result, scene and model are served
+ok   job-default-no-token: the scene's bytes are the summary's sceneSha256 and the response header's
+ok   job-default-no-token: the model's bytes are the summary's modelSha256
+ok   job-default-no-token: the scene reloads (144 meshes) with the summary's content hash
+ok   job-default-no-token: without the token the job ran on the drawings' path alone (no consultation in the result)
+ok   job-default-no-token: without the token no request was booked
+ok   the host's books hold CONSULTATION requests only (CONSULTATION): the house reader was never asked
+ALL CHECKS PASSED

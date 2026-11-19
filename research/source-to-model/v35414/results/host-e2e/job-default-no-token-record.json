@@ -1,0 +1,45 @@
+{
+ "name": "job-default-no-token",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-bakopach-g2e-mbb9288266b05e",
+ "withToken": false,
+ "jobId": "5b5a8b5717f6c245b82953d5287704ed",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 165,
+ "booksDeltaUsd": 0,
+ "booksDeltaRequests": 0,
+ "modelHash": "b59715a9fafa4323d7e167785923888429cb6016a44d2094dd058cdfe745610c",
+ "modelSha256": "b59715a9fafa4323d7e167785923888429cb6016a44d2094dd058cdfe745610c",
+ "sceneSha256": "b2a622e4960e219e1b27c3c09483f59dbdf46add889a753b029c7f2f7b112dcb",
+ "sceneContentHash": "ae37ffe7e006550a0294a562c7d1d44bcb28871cd931005bd93c7c4870d886ed",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "6d5420327dee3c539e0039f13b133e58e08a660df668c13ac22969eecdae75dc",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "NEAR",
+   "builtM2": 183.916735,
+   "publishedM2": 227.89,
+   "share": 0.807042
+  },
+  "scale": {
+   "status": "MEASURED",
+   "builtCmPerPx": 3.3019,
+   "measuredCmPerPx": 3.30198,
+   "ratio": 0.999976,
+   "confidence": "STRONG"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "LIMITED",
+  "reasons": [
+   {
+    "code": "COVERAGE_NEAR",
+    "consequence": "the model covers 183.9 m² against the 227.89 m² the publisher prints (81 %): something drawn is missing or something built is not drawn"
+   }
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "name": "job-1",
+ "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-bakopach-g2e-mbb9288266b05e",
+ "withToken": true,
+ "jobId": "027030786bad6edb69853cf754de65f8",
+ "status": "COMPLETED",
+ "error": null,
+ "seconds": 626,
+ "booksDeltaUsd": 0.594924,
+ "booksDeltaRequests": 12,
+ "consultation": {
+  "schemaVersion": "1.0.0",
+  "contract": "0.2.0",
+  "prompt": "0.3.0",
+  "variant": "C",
+  "model": "claude-sonnet-5-5",
+  "usd": 0.594924,
+  "globalDescription": "DISABLED",
+  "local": {
+   "outcome": "COMPLETED",
+   "reasonCode": null,
+   "modelHash": "b59715a9fafa4323d7e167785923888429cb6016a44d2094dd058cdfe745610c"
+  },
+  "metricRounds": [
+   {
+    "round": 1,
+    "decision": "ROLLBACK",
+    "why": "the candidate refuses (RECONSTRUCTION_FAILED/PLAN_RESOLUTION_INCONCLUSIVE) where LOCAL built a model"
+   }
+  ],
+  "boundary": null,
+  "looks": [
+   {
+    "round": 1,
+    "revision": "8f25272106ab",
+    "status": "ISSUE_FOUND",
+    "decision": "NO_CHANGE",
+    "why": "no proposal the analyzer can apply: the model stands, the findings stay on the record"
+   }
+  ],
+  "roofFeatures": [],
+  "metricRead": {
+   "decision": "ROLLBACK",
+   "why": "the scale is less settled than before (STRONG → SUPPORTED)",
+   "corrected": 8,
+   "agrees": 3,
+   "unresolved": 12,
+   "newSpans": 1,
+   "usd": 0.27776
+  },
+  "sketches": {
+   "sides": [
+    "WEST:REJECTED",
+    "REAR:ACCEPTED",
+    "EAST:ACCEPTED",
+    "FRONT:REJECTED"
+   ],
+   "form": "ACCEPT",
+   "finish": "ACCEPT",
+   "usd": 0.05236
+  },
+  "accepted": {
+   "state": "ACCEPTED_NOW",
+   "key": "a5cc0638b9f23d60348cc31c7ba58381",
+   "answers": 12
+  }
+ },
+ "sourceCheck": {
+  "status": "CHECKED",
+  "checkedRevision": "8f25272106ab",
+  "deliveredRevision": "8f25272106ab",
+  "corrections": [],
+  "knownDefects": []
+ },
+ "dormersInModel": [],
+ "modelHash": "8f25272106abc1f311e2ac5e32287828b4ab780ecb1b41cbcf1f3724c9f28222",
+ "modelSha256": "8115ee653b9362c0f9bdc10f02e59fa7b47be6392a6cabbe44a3ac709074351f",
+ "sceneSha256": "a661902edd66b2c3de9e188c511fcc7c56481578e195aec4700ea62eaf07ef36",
+ "sceneContentHash": "d1fb8dba850adcff1791ed8c147d9d7d6cecf66dca54193ef5b4a57eb0af2842",
+ "analyzer": {
+  "service": "1.11.0",
+  "solver": "2.45.0"
+ },
+ "sourcePackageHash": "6d5420327dee3c539e0039f13b133e58e08a660df668c13ac22969eecdae75dc",
+ "measurement": {
+  "schemaVersion": "1.0.0",
+  "run": "COMPLETED",
+  "coverage": {
+   "status": "NEAR",
+   "builtM2": 183.916735,
+   "publishedM2": 227.89,
+   "share": 0.807042
+  },
+  "scale": {
+   "status": "MEASURED",
+   "builtCmPerPx": 3.3019,
+   "measuredCmPerPx": 3.30198,
+   "ratio": 0.999976,
+   "confidence": "STRONG"
+  },
+  "completeness": "COMPLETE_WITH_OPEN_QUESTIONS",
+  "quantities": "LIMITED",
+  "reasons": [
+   {
+    "code": "COVERAGE_NEAR",
+    "consequence": "the model covers 183.9 m² against the 227.89 m² the publisher prints (81 %): something drawn is missing or something built is not drawn"
+   }
+  ]
+ }
+}
