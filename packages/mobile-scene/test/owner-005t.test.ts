@@ -19,8 +19,8 @@ describe('005T owner visual scenes', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string; modelId: string }>
     // (v3.54.8: the owner's two v3.54.8 review scenes go before them; the 005T pair and the five earlier keep their order)
     // (v3.54.11: the v3.54.10 checkpoint pair goes first; everything after it keeps its order)
-    // (v3.54.14: corrected Marcówki, Bakopy and Ballina go first)
-    expect(index.map((e) => e.key)).toEqual(['marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414', 'marcowki-c-v35413', 'marcowki-c-live-v35413', 'marcowki-h-v35412', 'marcowki-local-szkice-v35412', 'marcowki-h-v35411', 'marcowki-h-v35410', 'marcowki-local-v35410', 'marcowki-h-v3548', 'marcowki-local-v3548', 'jarzmianki-005t-visual', 'gozdzikowce-005t-visual', 'marcowki', 'marcowki-auto-v3', 'marcowki-auto', 'marcowki-auto-v2', 'demo'])
+    // (v3.54.15: Ballina with its roof and the control Murcja go first; then v3.54.14's corrected Marcówki, Bakopy and Ballina)
+    expect(index.map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415', 'marcowki-c-v35414', 'bakopy-v35414', 'ballina-v35414', 'marcowki-c-v35413', 'marcowki-c-live-v35413', 'marcowki-h-v35412', 'marcowki-local-szkice-v35412', 'marcowki-h-v35411', 'marcowki-h-v35410', 'marcowki-local-v35410', 'marcowki-h-v3548', 'marcowki-local-v3548', 'jarzmianki-005t-visual', 'gozdzikowce-005t-visual', 'marcowki', 'marcowki-auto-v3', 'marcowki-auto', 'marcowki-auto-v2', 'demo'])
     for (const o of OWNER) {
       const entry = index.find((e) => e.key === o.key)
       expect(entry?.subtitle).toContain('MODEL ORIENTACYJNY')

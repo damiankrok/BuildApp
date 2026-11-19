@@ -1,5 +1,29 @@
 [
   {
+    "key": "ballina-v35415",
+    "title": "Ballina — v3.54.15: dach z rzędnych przekroju (oddany)",
+    "subtitle": "ODDANY: kalenica 5,54 i okap 3,37 z rzędnych API przyjętych przez przekrój; wykończenia ze szkiców; okno lewe i strop +2,80 nazwane jako luki",
+    "asset": "ballina-v35415.scene.json",
+    "modelId": "m-analysis-dcb155",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "ca1c2743dfbf6d0aa2c62cb32596d58d1f4ba73d197277d5d4f048f7830eff1d",
+    "meshCount": 83,
+    "triangleCount": 3146,
+    "objectCount": 60
+  },
+  {
+    "key": "murcja-v35415",
+    "title": "Murcja — kontrola v3.54.15, pierwszy wynik (kontrolny)",
+    "subtitle": "KONTROLA: pierwszy wynik po zamrożeniu; wysokości z rzędnych przekroju (LOCAL: 12,72 m kondygnacji); lewa elewacja niezarejestrowana",
+    "asset": "murcja-v35415.scene.json",
+    "modelId": "m-analysis-u41e59d24c796",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "1dbd7e95fba4936b44872751c8628527ad870582423e0778eeef1356c64633e4",
+    "meshCount": 140,
+    "triangleCount": 5768,
+    "objectCount": 107
+  },
+  {
     "key": "marcowki-c-v35414",
     "title": "Marcówki — poprawka v3.54.14 (oddany)",
     "subtitle": "ODDANY: geometria bez zmian; bez jasnej linii na +3,06, drewno i rama ciągłe za balkonem, bez plam za balustradą",

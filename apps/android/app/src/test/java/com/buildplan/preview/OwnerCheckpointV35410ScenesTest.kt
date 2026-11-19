@@ -13,20 +13,24 @@ class OwnerCheckpointV35410ScenesTest {
     @Test
     fun `the candidate and the delivered model are listed under their own titles, after the repaired H`() {
         // v3.54.14: corrected Marcówki, Bakopy (DEV) and Ballina (new, partial) come first
-        assertEquals(listOf("marcowki-c-v35414", "bakopy-v35414", "ballina-v35414"), TestScenes.index.subList(0, 3).map { it.key })
+        // v3.54.15: Ballina with its roof from the section's levels (delivered) and the control Murcja (first result) come first
+        assertEquals(listOf("ballina-v35415", "murcja-v35415"), TestScenes.index.subList(0, 2).map { it.key })
         assertTrue(TestScenes.index[0].subtitle.contains("ODDANY"))
-        assertTrue(TestScenes.index[2].subtitle.contains("CZĘŚCIOWY"))
+        assertTrue(TestScenes.index[1].subtitle.contains("KONTROLA"))
+        assertEquals(listOf("marcowki-c-v35414", "bakopy-v35414", "ballina-v35414"), TestScenes.index.subList(2, 5).map { it.key })
+        assertTrue(TestScenes.index[2].subtitle.contains("ODDANY"))
+        assertTrue(TestScenes.index[4].subtitle.contains("CZĘŚCIOWY"))
         // v3.54.13: the delivered miniature and the four-side reading
-        assertEquals(listOf("marcowki-c-v35413", "marcowki-c-live-v35413"), TestScenes.index.subList(3, 5).map { it.key })
-        assertTrue(TestScenes.index[3].subtitle.contains("ODDANY"))
+        assertEquals(listOf("marcowki-c-v35413", "marcowki-c-live-v35413"), TestScenes.index.subList(5, 7).map { it.key })
+        assertTrue(TestScenes.index[5].subtitle.contains("ODDANY"))
         // v3.54.12: the H candidate with the end caps and the sketch experiment, then the repaired H
-        assertEquals(listOf("marcowki-h-v35412", "marcowki-local-szkice-v35412"), TestScenes.index.subList(5, 7).map { it.key })
-        assertTrue(TestScenes.index[6].subtitle.contains("EKSPERYMENT"))
-        assertEquals("marcowki-h-v35411", TestScenes.index[7].key)
-        assertTrue(TestScenes.index[7].title.contains("po naprawie"))
-        assertEquals(listOf("marcowki-h-v35410", "marcowki-local-v35410"), TestScenes.index.subList(8, 10).map { it.key })
-        assertTrue(TestScenes.index[8].title.contains("kandydat"))
-        assertTrue(TestScenes.index[9].title.contains("LOCAL oddany"))
+        assertEquals(listOf("marcowki-h-v35412", "marcowki-local-szkice-v35412"), TestScenes.index.subList(7, 9).map { it.key })
+        assertTrue(TestScenes.index[8].subtitle.contains("EKSPERYMENT"))
+        assertEquals("marcowki-h-v35411", TestScenes.index[9].key)
+        assertTrue(TestScenes.index[9].title.contains("po naprawie"))
+        assertEquals(listOf("marcowki-h-v35410", "marcowki-local-v35410"), TestScenes.index.subList(10, 12).map { it.key })
+        assertTrue(TestScenes.index[10].title.contains("kandydat"))
+        assertTrue(TestScenes.index[11].title.contains("LOCAL oddany"))
     }
 
     @Test

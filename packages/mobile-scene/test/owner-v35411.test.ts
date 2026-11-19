@@ -24,8 +24,8 @@ describe('v3.54.11 the repaired H scene', () => {
   })
   it('is listed after the v3.54.13 and v3.54.12 scenes, as a candidate after the repair', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index[7].key).toBe('marcowki-h-v35411')
-    expect(index[7].title).toContain('po naprawie')
-    expect(index[7].subtitle).toContain('KANDYDAT')
+    expect(index[9].key).toBe('marcowki-h-v35411')
+    expect(index[9].title).toContain('po naprawie')
+    expect(index[9].subtitle).toContain('KANDYDAT')
   })
 })

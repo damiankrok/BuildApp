@@ -1,0 +1,8369 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "bld-auto-v2",
+    "name": "Murcja - Lipińscy Domy (analysis)"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.072802,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-0-leaf",
+      "leafThickness": 0.036401,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072802,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-1-leaf",
+      "leafThickness": 0.036401,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-2-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-4-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-4",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-5-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-5",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072802,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-6-leaf",
+      "leafThickness": 0.036401,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-6",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072876,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-0-leaf",
+      "leafThickness": 0.036438,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.081986,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-1-leaf",
+      "leafThickness": 0.040993,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.054657,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-2-leaf",
+      "leafThickness": 0.027329,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072876,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-3-leaf",
+      "leafThickness": 0.036438,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-3",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-u41e59d24c796",
+  "levels": [
+    {
+      "buildingId": "bld-auto-v2",
+      "elevation": 0,
+      "height": 2.8,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Ground"
+    },
+    {
+      "buildingId": "bld-auto-v2",
+      "elevation": 2.8,
+      "height": 4.3,
+      "id": "lvl-1",
+      "index": 1,
+      "name": "Level 1"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#9a7b66",
+      "id": "mat-brick",
+      "name": "Facing brick"
+    },
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-gate",
+      "name": "Garage door"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#ece9e2",
+      "id": "mat-member",
+      "name": "Facade member"
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#8e8983",
+      "id": "mat-render-mid",
+      "name": "Grey render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering"
+    },
+    {
+      "color": "#c9c6c0",
+      "id": "mat-slab",
+      "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Terrace paving"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber cladding"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Murcja - Lipińscy Domy (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a 0.79 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-0",
+      "kind": "DOOR",
+      "offset": 0.940468,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-0",
+      "width": 0.788649
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.83 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-1",
+      "kind": "DOOR",
+      "offset": 0.318516,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-0",
+      "width": 0.834209
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.27 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-2",
+      "kind": "DOOR",
+      "offset": 2.320793,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-2",
+      "width": 1.274064
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.93 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-4",
+      "kind": "DOOR",
+      "offset": 5.369446,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-2",
+      "width": 0.865214
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.83 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-5",
+      "kind": "DOOR",
+      "offset": 0.06,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-5",
+      "width": 0.834208
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.89 m doorway between two nibs standing off the walls either side, its swing drawn (100 % of its arc a drawn line, a 0.86 m leaf): a door set between two walls that run on past it",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-6",
+      "kind": "DOOR",
+      "offset": 0.129074,
+      "sill": 0,
+      "wallId": "main-nib-0-6",
+      "width": 0.894814
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.84 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-0",
+      "kind": "DOOR",
+      "offset": 3.047257,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-0",
+      "width": 0.835834
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.84 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-1",
+      "kind": "DOOR",
+      "offset": 3.047257,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-5",
+      "width": 0.835834
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.83 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-2",
+      "kind": "DOOR",
+      "offset": 0.12903,
+      "sill": 0,
+      "wallId": "main-iwall-1-x-2",
+      "width": 0.827402
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.77 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-3",
+      "kind": "DOOR",
+      "offset": 1.296922,
+      "sill": 0,
+      "wallId": "main-iwall-1-x-6",
+      "width": 0.773539
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.14 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-0",
+      "kind": "WINDOW",
+      "offset": 0.59153,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 1.137558
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.44 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-1",
+      "kind": "WINDOW",
+      "offset": 2.654301,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 1.440906
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.93 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-2",
+      "kind": "WINDOW",
+      "offset": 5.308601,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 0.925214
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.08 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-3",
+      "kind": "WINDOW",
+      "offset": 7.523046,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 1.076889
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.44 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-front-0-4",
+      "kind": "WINDOW",
+      "offset": 9.312804,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w0",
+      "width": 1.440906
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.19 m gap in the rear wall of main on storey 0, no callout read, 2.41 m tall on the elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "VISUAL_INFERRED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.411012,
+      "id": "opening-0-rear-2-0",
+      "kind": "WINDOW",
+      "offset": 7.196947,
+      "sill": 0,
+      "wallId": "ring-main-0-w2",
+      "width": 3.185161
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.38 m gap in the rear wall of main on storey 0, no callout read, 1.54 m tall on the elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "VISUAL_INFERRED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "VISUAL_INFERRED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 1.542724,
+      "id": "opening-0-rear-2-1",
+      "kind": "WINDOW",
+      "offset": 1.524327,
+      "sill": 0.868288,
+      "wallId": "ring-main-0-w2",
+      "width": 1.380236
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.09 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-0-west-3-0",
+      "kind": "WINDOW",
+      "offset": 2.760274,
+      "sill": 0.9,
+      "wallId": "ring-main-0-w3",
+      "width": 1.091977
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.38 m gap in the east wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-1-east-5-0",
+      "kind": "WINDOW",
+      "offset": 3.175954,
+      "sill": 0.9,
+      "wallId": "ring-main-1-w1",
+      "width": 1.382925
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.41 m gap in the west wall of main on storey 1, no callout read, not read on an elevation; on a gable end its head rakes from 5.00 to 3.81",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "head": {
+        "heightFar": 1.3,
+        "kind": "RAKED"
+      },
+      "height": 0.3,
+      "id": "opening-1-west-7-0",
+      "kind": "WINDOW",
+      "offset": 1.017953,
+      "sill": 0.9,
+      "wallId": "ring-main-1-w3",
+      "width": 1.413319
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.74 m gap in the west wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 1.3,
+      "id": "opening-1-west-7-1",
+      "kind": "WINDOW",
+      "offset": 2.887181,
+      "sill": 0.9,
+      "wallId": "ring-main-1-w3",
+      "width": 0.744652
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.15 m gap in the west wall of main on storey 1, printed 116/110, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "SOURCE_EXACT",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_EXACT"
+        },
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 1.1,
+      "id": "opening-1-west-7-2",
+      "kind": "WINDOW",
+      "offset": 3.644515,
+      "sill": 1.1,
+      "wallId": "ring-main-1-w3",
+      "width": 1.16
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.55 m gap in the west wall of main on storey 1, no callout read, not read on an elevation; on a gable end its head rakes from 5.00 to 3.70",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "ASSUMED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "head": {
+        "heightFar": 0.3,
+        "kind": "RAKED"
+      },
+      "height": 1.3,
+      "id": "opening-1-west-7-3",
+      "kind": "WINDOW",
+      "offset": 5.197122,
+      "sill": 0.9,
+      "wallId": "ring-main-1-w3",
+      "width": 1.550092
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 1.048489,
+      "evidence": {
+        "interpretation": "40° gable on the authority of published specification; the side renders span the walled depth only",
+        "properties": {
+          "footprint": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_EXACT"
+      },
+      "footprint": {
+        "maxX": 11.55,
+        "maxZ": 7.75,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-main",
+      "kind": "GABLE",
+      "levelId": "lvl-1",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 40,
+      "ridgeAxis": "X",
+      "thickness": 0.28
+    }
+  ],
+  "rooms": [
+    {
+      "evidence": {
+        "interpretation": "4.07 m² enclosed by 8 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-0",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 0.273006,
+          "z": 0.273006
+        },
+        {
+          "x": 1.823006,
+          "z": 0.273006
+        },
+        {
+          "x": 1.823006,
+          "z": 1.223006
+        },
+        {
+          "x": 1.773006,
+          "z": 1.223006
+        },
+        {
+          "x": 1.773006,
+          "z": 2.023006
+        },
+        {
+          "x": 1.823006,
+          "z": 2.023006
+        },
+        {
+          "x": 1.823006,
+          "z": 2.923006
+        },
+        {
+          "x": 0.273006,
+          "z": 2.923006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "3.84 m² enclosed by 20 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-1",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 1.973006,
+          "z": 0.273006
+        },
+        {
+          "x": 4.473006,
+          "z": 0.273006
+        },
+        {
+          "x": 4.473006,
+          "z": 0.973006
+        },
+        {
+          "x": 2.173006,
+          "z": 0.973006
+        },
+        {
+          "x": 2.173006,
+          "z": 2.173006
+        },
+        {
+          "x": 4.473006,
+          "z": 2.173006
+        },
+        {
+          "x": 4.473006,
+          "z": 2.573006
+        },
+        {
+          "x": 4.173006,
+          "z": 2.573006
+        },
+        {
+          "x": 4.173006,
+          "z": 2.723006
+        },
+        {
+          "x": 4.473006,
+          "z": 2.723006
+        },
+        {
+          "x": 4.473006,
+          "z": 2.923006
+        },
+        {
+          "x": 3.873006,
+          "z": 2.923006
+        },
+        {
+          "x": 3.873006,
+          "z": 2.973006
+        },
+        {
+          "x": 2.623006,
+          "z": 2.973006
+        },
+        {
+          "x": 2.623006,
+          "z": 2.923006
+        },
+        {
+          "x": 1.973006,
+          "z": 2.923006
+        },
+        {
+          "x": 1.973006,
+          "z": 2.023006
+        },
+        {
+          "x": 2.023006,
+          "z": 2.023006
+        },
+        {
+          "x": 2.023006,
+          "z": 1.223006
+        },
+        {
+          "x": 1.973006,
+          "z": 1.223006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "4.98 m² enclosed by 12 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-2",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 4.673006,
+          "z": 0.273006
+        },
+        {
+          "x": 6.673006,
+          "z": 0.273006
+        },
+        {
+          "x": 6.673006,
+          "z": 2.873006
+        },
+        {
+          "x": 6.573006,
+          "z": 2.873006
+        },
+        {
+          "x": 6.573006,
+          "z": 2.973006
+        },
+        {
+          "x": 5.673006,
+          "z": 2.973006
+        },
+        {
+          "x": 5.673006,
+          "z": 2.923006
+        },
+        {
+          "x": 4.673006,
+          "z": 2.923006
+        },
+        {
+          "x": 4.673006,
+          "z": 2.173006
+        },
+        {
+          "x": 4.973006,
+          "z": 2.173006
+        },
+        {
+          "x": 4.973006,
+          "z": 0.973006
+        },
+        {
+          "x": 4.673006,
+          "z": 0.973006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "5.05 m² enclosed by 12 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-3",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 6.823006,
+          "z": 0.273006
+        },
+        {
+          "x": 8.723006,
+          "z": 0.273006
+        },
+        {
+          "x": 8.723006,
+          "z": 2.573006
+        },
+        {
+          "x": 8.673006,
+          "z": 2.573006
+        },
+        {
+          "x": 8.673006,
+          "z": 2.723006
+        },
+        {
+          "x": 8.723006,
+          "z": 2.723006
+        },
+        {
+          "x": 8.723006,
+          "z": 2.923006
+        },
+        {
+          "x": 7.823006,
+          "z": 2.923006
+        },
+        {
+          "x": 7.823006,
+          "z": 2.973006
+        },
+        {
+          "x": 7.073006,
+          "z": 2.973006
+        },
+        {
+          "x": 7.073006,
+          "z": 2.873006
+        },
+        {
+          "x": 6.823006,
+          "z": 2.873006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "9.70 m² enclosed by 18 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-4",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 8.973006,
+          "z": 0.273006
+        },
+        {
+          "x": 11.273006,
+          "z": 0.273006
+        },
+        {
+          "x": 11.273006,
+          "z": 2.923006
+        },
+        {
+          "x": 11.023006,
+          "z": 2.923006
+        },
+        {
+          "x": 11.023006,
+          "z": 3.223006
+        },
+        {
+          "x": 11.273006,
+          "z": 3.223006
+        },
+        {
+          "x": 11.273006,
+          "z": 4.373006
+        },
+        {
+          "x": 8.623006,
+          "z": 4.373006
+        },
+        {
+          "x": 8.623006,
+          "z": 4.273006
+        },
+        {
+          "x": 8.673006,
+          "z": 4.273006
+        },
+        {
+          "x": 8.673006,
+          "z": 3.323006
+        },
+        {
+          "x": 8.623006,
+          "z": 3.323006
+        },
+        {
+          "x": 8.623006,
+          "z": 3.223006
+        },
+        {
+          "x": 8.973006,
+          "z": 3.223006
+        },
+        {
+          "x": 8.973006,
+          "z": 2.723006
+        },
+        {
+          "x": 9.023006,
+          "z": 2.723006
+        },
+        {
+          "x": 9.023006,
+          "z": 2.573006
+        },
+        {
+          "x": 8.973006,
+          "z": 2.573006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "29.71 m² enclosed by 28 wall faces; several published rooms may share it (open plan)",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-5",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 2.623006,
+          "z": 3.173006
+        },
+        {
+          "x": 3.873006,
+          "z": 3.173006
+        },
+        {
+          "x": 3.873006,
+          "z": 3.223006
+        },
+        {
+          "x": 5.223006,
+          "z": 3.223006
+        },
+        {
+          "x": 5.223006,
+          "z": 3.823006
+        },
+        {
+          "x": 5.373006,
+          "z": 3.823006
+        },
+        {
+          "x": 5.373006,
+          "z": 3.223006
+        },
+        {
+          "x": 5.673006,
+          "z": 3.223006
+        },
+        {
+          "x": 5.673006,
+          "z": 3.173006
+        },
+        {
+          "x": 6.573006,
+          "z": 3.173006
+        },
+        {
+          "x": 6.573006,
+          "z": 3.223006
+        },
+        {
+          "x": 7.073006,
+          "z": 3.223006
+        },
+        {
+          "x": 7.073006,
+          "z": 3.173006
+        },
+        {
+          "x": 7.823006,
+          "z": 3.173006
+        },
+        {
+          "x": 7.823006,
+          "z": 3.223006
+        },
+        {
+          "x": 8.473006,
+          "z": 3.223006
+        },
+        {
+          "x": 8.473006,
+          "z": 3.323006
+        },
+        {
+          "x": 8.423006,
+          "z": 3.323006
+        },
+        {
+          "x": 8.423006,
+          "z": 4.273006
+        },
+        {
+          "x": 8.473006,
+          "z": 4.273006
+        },
+        {
+          "x": 8.473006,
+          "z": 4.373006
+        },
+        {
+          "x": 8.423006,
+          "z": 4.373006
+        },
+        {
+          "x": 8.423006,
+          "z": 4.323006
+        },
+        {
+          "x": 7.223006,
+          "z": 4.323006
+        },
+        {
+          "x": 7.223006,
+          "z": 7.473006
+        },
+        {
+          "x": 0.273006,
+          "z": 7.473006
+        },
+        {
+          "x": 0.273006,
+          "z": 3.223006
+        },
+        {
+          "x": 2.623006,
+          "z": 3.223006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "11.02 m² enclosed by 6 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-6",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 8.423006,
+          "z": 4.523006
+        },
+        {
+          "x": 11.273006,
+          "z": 4.523006
+        },
+        {
+          "x": 11.273006,
+          "z": 7.473006
+        },
+        {
+          "x": 7.523006,
+          "z": 7.473006
+        },
+        {
+          "x": 7.523006,
+          "z": 4.573006
+        },
+        {
+          "x": 8.423006,
+          "z": 4.573006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "6.37 m² enclosed by 16 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-0",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 0.650296,
+          "z": 0.273006
+        },
+        {
+          "x": 11.300296,
+          "z": 0.273006
+        },
+        {
+          "x": 11.300296,
+          "z": 0.873006
+        },
+        {
+          "x": 7.350296,
+          "z": 0.873006
+        },
+        {
+          "x": 7.350296,
+          "z": 0.823006
+        },
+        {
+          "x": 7.200296,
+          "z": 0.823006
+        },
+        {
+          "x": 7.200296,
+          "z": 0.873006
+        },
+        {
+          "x": 4.600296,
+          "z": 0.873006
+        },
+        {
+          "x": 4.600296,
+          "z": 0.823006
+        },
+        {
+          "x": 4.400296,
+          "z": 0.823006
+        },
+        {
+          "x": 4.400296,
+          "z": 0.873006
+        },
+        {
+          "x": 4.300296,
+          "z": 0.873006
+        },
+        {
+          "x": 4.300296,
+          "z": 0.823006
+        },
+        {
+          "x": 4.150296,
+          "z": 0.823006
+        },
+        {
+          "x": 4.150296,
+          "z": 0.873006
+        },
+        {
+          "x": 0.650296,
+          "z": 0.873006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "9.05 m² enclosed by 14 wall faces",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "main-room-1-1",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 0.650296,
+          "z": 1.023006
+        },
+        {
+          "x": 2.150296,
+          "z": 1.023006
+        },
+        {
+          "x": 2.150296,
+          "z": 6.423006
+        },
+        {
+          "x": 4.150296,
+          "z": 6.423006
+        },
+        {
+          "x": 4.150296,
+          "z": 6.723006
+        },
+        {
+          "x": 0.650296,
+          "z": 6.723006
+        },
+        {
+          "x": 0.650296,
+          "z": 2.973006
+        },
+        {
+          "x": 1.050296,
+          "z": 2.973006
+        },
+        {
+          "x": 1.050296,
+          "z": 2.823006
+        },
+        {
+          "x": 0.650296,
+          "z": 2.823006
+        },
+        {
+          "x": 0.650296,
+          "z": 2.673006
+        },
+        {
+          "x": 1.050296,
+          "z": 2.673006
+        },
+        {
+          "x": 1.050296,
+          "z": 2.573006
+        },
+        {
+          "x": 0.650296,
+          "z": 2.573006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "2.36 m² enclosed by 14 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-2",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 6.300296,
+          "z": 1.023006
+        },
+        {
+          "x": 7.200296,
+          "z": 1.023006
+        },
+        {
+          "x": 7.200296,
+          "z": 2.673006
+        },
+        {
+          "x": 6.750296,
+          "z": 2.673006
+        },
+        {
+          "x": 6.750296,
+          "z": 2.773006
+        },
+        {
+          "x": 7.200296,
+          "z": 2.773006
+        },
+        {
+          "x": 7.200296,
+          "z": 2.823006
+        },
+        {
+          "x": 6.750296,
+          "z": 2.823006
+        },
+        {
+          "x": 6.750296,
+          "z": 2.973006
+        },
+        {
+          "x": 7.200296,
+          "z": 2.973006
+        },
+        {
+          "x": 7.200296,
+          "z": 3.773006
+        },
+        {
+          "x": 6.400296,
+          "z": 3.773006
+        },
+        {
+          "x": 6.400296,
+          "z": 3.723006
+        },
+        {
+          "x": 6.300296,
+          "z": 3.723006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "22.13 m² enclosed by 26 wall faces; several published rooms may share it (open plan)",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-3",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 7.350296,
+          "z": 1.023006
+        },
+        {
+          "x": 11.300296,
+          "z": 1.023006
+        },
+        {
+          "x": 11.300296,
+          "z": 5.123006
+        },
+        {
+          "x": 10.450296,
+          "z": 5.123006
+        },
+        {
+          "x": 10.450296,
+          "z": 5.273006
+        },
+        {
+          "x": 11.300296,
+          "z": 5.273006
+        },
+        {
+          "x": 11.300296,
+          "z": 6.723006
+        },
+        {
+          "x": 7.400296,
+          "z": 6.723006
+        },
+        {
+          "x": 7.400296,
+          "z": 5.273006
+        },
+        {
+          "x": 8.100296,
+          "z": 5.273006
+        },
+        {
+          "x": 8.100296,
+          "z": 5.123006
+        },
+        {
+          "x": 7.400296,
+          "z": 5.123006
+        },
+        {
+          "x": 7.400296,
+          "z": 4.023006
+        },
+        {
+          "x": 7.350296,
+          "z": 4.023006
+        },
+        {
+          "x": 7.350296,
+          "z": 3.923006
+        },
+        {
+          "x": 7.400296,
+          "z": 3.923006
+        },
+        {
+          "x": 7.400296,
+          "z": 3.773006
+        },
+        {
+          "x": 7.350296,
+          "z": 3.773006
+        },
+        {
+          "x": 7.350296,
+          "z": 2.973006
+        },
+        {
+          "x": 7.400296,
+          "z": 2.973006
+        },
+        {
+          "x": 7.400296,
+          "z": 2.823006
+        },
+        {
+          "x": 7.350296,
+          "z": 2.823006
+        },
+        {
+          "x": 7.350296,
+          "z": 2.773006
+        },
+        {
+          "x": 7.400296,
+          "z": 2.773006
+        },
+        {
+          "x": 7.400296,
+          "z": 2.673006
+        },
+        {
+          "x": 7.350296,
+          "z": 2.673006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "4.04 m² enclosed by 6 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-4",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 6.300296,
+          "z": 3.923006
+        },
+        {
+          "x": 7.200296,
+          "z": 3.923006
+        },
+        {
+          "x": 7.200296,
+          "z": 7.473006
+        },
+        {
+          "x": 5.500296,
+          "z": 7.473006
+        },
+        {
+          "x": 5.500296,
+          "z": 6.423006
+        },
+        {
+          "x": 6.300296,
+          "z": 6.423006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "1.04 m² enclosed by 8 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-5",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 4.300296,
+          "z": 6.423006
+        },
+        {
+          "x": 5.300296,
+          "z": 6.423006
+        },
+        {
+          "x": 5.300296,
+          "z": 7.473006
+        },
+        {
+          "x": 4.300296,
+          "z": 7.473006
+        },
+        {
+          "x": 4.300296,
+          "z": 6.873006
+        },
+        {
+          "x": 4.350296,
+          "z": 6.873006
+        },
+        {
+          "x": 4.350296,
+          "z": 6.723006
+        },
+        {
+          "x": 4.300296,
+          "z": 6.723006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "2.10 m² enclosed by 4 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-6",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 0.650296,
+          "z": 6.873006
+        },
+        {
+          "x": 4.150296,
+          "z": 6.873006
+        },
+        {
+          "x": 4.150296,
+          "z": 7.473006
+        },
+        {
+          "x": 0.650296,
+          "z": 7.473006
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "2.34 m² enclosed by 4 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-1-7",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 7.400296,
+          "z": 6.873006
+        },
+        {
+          "x": 11.300296,
+          "z": 6.873006
+        },
+        {
+          "x": 11.300296,
+          "z": 7.473006
+        },
+        {
+          "x": 7.400296,
+          "z": 7.473006
+        }
+      ]
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.9.0",
+  "slabs": [
+    {
+      "id": "slab-main-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 11.55,
+          "z": 0
+        },
+        {
+          "x": 11.55,
+          "z": 7.75
+        },
+        {
+          "x": 0,
+          "z": 7.75
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    },
+    {
+      "evidence": {
+        "interpretation": "the floor of storey 1",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "holes": [
+        [
+          {
+            "x": 2.200098,
+            "z": 1.016145
+          },
+          {
+            "x": 6.279317,
+            "z": 1.016145
+          },
+          {
+            "x": 6.279317,
+            "z": 6.397714
+          },
+          {
+            "x": 2.200098,
+            "z": 6.397714
+          }
+        ]
+      ],
+      "id": "slab-main-1",
+      "levelId": "lvl-1",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0.273006,
+          "z": 0.273006
+        },
+        {
+          "x": 11.276994,
+          "z": 0.273006
+        },
+        {
+          "x": 11.276994,
+          "z": 7.476994
+        },
+        {
+          "x": 0.273006,
+          "z": 7.476994
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [
+    {
+      "baseOffset": 0,
+      "direction": "PLUS_X",
+      "evidence": {
+        "interpretation": "2 tread ladders (7 risers plus x at 0.284 m, 6 risers plus z at 0.258 m) with 1 corner square between them (winders: 5 tread lines fan from the newel at 17°, 29°, 41°, 55°, 79° (ink on 76, 73, 75, 82, 70 % of each ray), splitting the quarter turn into 6 wedges); 18 risers over 2.80 m = 0.156 m each; the arrowhead at (5.869796, 6.86882) fixes the climb",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "footprint": {
+        "maxX": 4.899809,
+        "maxZ": 3.459302,
+        "minX": 2.200098,
+        "minZ": 1.175362
+      },
+      "id": "stair-main",
+      "kind": "FLIGHTS",
+      "levelId": "lvl-0",
+      "segments": [
+        {
+          "going": 0.284381,
+          "kind": "FLIGHT",
+          "risers": 6
+        },
+        {
+          "angleDeg": 90,
+          "kind": "WINDER",
+          "risers": 6,
+          "turn": "LEFT"
+        },
+        {
+          "going": 0.258103,
+          "kind": "FLIGHT",
+          "risers": 6
+        }
+      ],
+      "start": {
+        "x": 2.200098,
+        "z": 2.168787
+      },
+      "toLevelId": "lvl-1",
+      "topOffset": 0,
+      "waist": 0.18,
+      "width": 0.993425
+    }
+  ],
+  "stepRuns": [],
+  "surfaceRegions": [
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-8e2bd9f1-4adacf18696b-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w1",
+      "id": "appearance-east-ring-main-0-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 7.5,
+          "b": 2.8
+        },
+        {
+          "a": 7.5,
+          "b": 2.52
+        },
+        {
+          "a": 0.26,
+          "b": 2.52
+        },
+        {
+          "a": 0.26,
+          "b": 2.8
+        }
+      ],
+      "rect": {
+        "a0": 0.26,
+        "a1": 7.5,
+        "b0": 2.52,
+        "b1": 2.8
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-8e2bd9f1-4adacf18696b-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-1-w1",
+      "id": "appearance-east-ring-main-1-w1-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.84,
+          "b": 3.92
+        },
+        {
+          "a": 3.88,
+          "b": 3.92
+        },
+        {
+          "a": 3.88,
+          "b": 3.9
+        },
+        {
+          "a": 3.9,
+          "b": 3.9
+        },
+        {
+          "a": 3.9,
+          "b": 3.88
+        },
+        {
+          "a": 3.94,
+          "b": 3.88
+        },
+        {
+          "a": 3.94,
+          "b": 3.86
+        },
+        {
+          "a": 3.96,
+          "b": 3.86
+        },
+        {
+          "a": 3.96,
+          "b": 3.84
+        },
+        {
+          "a": 3.98,
+          "b": 3.84
+        },
+        {
+          "a": 3.98,
+          "b": 3.82
+        },
+        {
+          "a": 4.02,
+          "b": 3.82
+        },
+        {
+          "a": 4.02,
+          "b": 3.8
+        },
+        {
+          "a": 4.04,
+          "b": 3.8
+        },
+        {
+          "a": 4.04,
+          "b": 3.78
+        },
+        {
+          "a": 4.06,
+          "b": 3.78
+        },
+        {
+          "a": 4.06,
+          "b": 3.76
+        },
+        {
+          "a": 4.1,
+          "b": 3.76
+        },
+        {
+          "a": 4.1,
+          "b": 3.74
+        },
+        {
+          "a": 4.12,
+          "b": 3.74
+        },
+        {
+          "a": 4.12,
+          "b": 3.72
+        },
+        {
+          "a": 4.14,
+          "b": 3.72
+        },
+        {
+          "a": 4.14,
+          "b": 3.7
+        },
+        {
+          "a": 4.18,
+          "b": 3.7
+        },
+        {
+          "a": 4.18,
+          "b": 3.68
+        },
+        {
+          "a": 4.2,
+          "b": 3.68
+        },
+        {
+          "a": 4.2,
+          "b": 3.66
+        },
+        {
+          "a": 4.24,
+          "b": 3.66
+        },
+        {
+          "a": 4.24,
+          "b": 3.64
+        },
+        {
+          "a": 4.26,
+          "b": 3.64
+        },
+        {
+          "a": 4.26,
+          "b": 3.62
+        },
+        {
+          "a": 4.28,
+          "b": 3.62
+        },
+        {
+          "a": 4.28,
+          "b": 3.6
+        },
+        {
+          "a": 4.3,
+          "b": 3.6
+        },
+        {
+          "a": 4.3,
+          "b": 3.58
+        },
+        {
+          "a": 4.34,
+          "b": 3.58
+        },
+        {
+          "a": 4.34,
+          "b": 3.56
+        },
+        {
+          "a": 4.36,
+          "b": 3.56
+        },
+        {
+          "a": 4.36,
+          "b": 3.54
+        },
+        {
+          "a": 4.38,
+          "b": 3.54
+        },
+        {
+          "a": 4.38,
+          "b": 3.52
+        },
+        {
+          "a": 4.4,
+          "b": 3.52
+        },
+        {
+          "a": 4.4,
+          "b": 3.5
+        },
+        {
+          "a": 4.42,
+          "b": 3.5
+        },
+        {
+          "a": 4.42,
+          "b": 3.48
+        },
+        {
+          "a": 4.46,
+          "b": 3.48
+        },
+        {
+          "a": 4.46,
+          "b": 3.46
+        },
+        {
+          "a": 4.48,
+          "b": 3.46
+        },
+        {
+          "a": 4.48,
+          "b": 3.44
+        },
+        {
+          "a": 4.5,
+          "b": 3.44
+        },
+        {
+          "a": 4.5,
+          "b": 3.42
+        },
+        {
+          "a": 4.52,
+          "b": 3.42
+        },
+        {
+          "a": 4.52,
+          "b": 3.4
+        },
+        {
+          "a": 4.54,
+          "b": 3.4
+        },
+        {
+          "a": 4.54,
+          "b": 3.38
+        },
+        {
+          "a": 4.58,
+          "b": 3.38
+        },
+        {
+          "a": 4.58,
+          "b": 3.36
+        },
+        {
+          "a": 4.6,
+          "b": 3.36
+        },
+        {
+          "a": 4.6,
+          "b": 3.34
+        },
+        {
+          "a": 4.62,
+          "b": 3.34
+        },
+        {
+          "a": 4.62,
+          "b": 3.32
+        },
+        {
+          "a": 4.64,
+          "b": 3.32
+        },
+        {
+          "a": 4.64,
+          "b": 3.3
+        },
+        {
+          "a": 4.66,
+          "b": 3.3
+        },
+        {
+          "a": 4.66,
+          "b": 3.28
+        },
+        {
+          "a": 4.7,
+          "b": 3.28
+        },
+        {
+          "a": 4.7,
+          "b": 3.26
+        },
+        {
+          "a": 4.72,
+          "b": 3.26
+        },
+        {
+          "a": 4.72,
+          "b": 3.24
+        },
+        {
+          "a": 4.74,
+          "b": 3.24
+        },
+        {
+          "a": 4.74,
+          "b": 3.22
+        },
+        {
+          "a": 4.76,
+          "b": 3.22
+        },
+        {
+          "a": 4.76,
+          "b": 3.2
+        },
+        {
+          "a": 4.78,
+          "b": 3.2
+        },
+        {
+          "a": 4.78,
+          "b": 3.18
+        },
+        {
+          "a": 4.8,
+          "b": 3.18
+        },
+        {
+          "a": 4.8,
+          "b": 3.16
+        },
+        {
+          "a": 4.84,
+          "b": 3.16
+        },
+        {
+          "a": 4.84,
+          "b": 3.14
+        },
+        {
+          "a": 4.86,
+          "b": 3.14
+        },
+        {
+          "a": 4.86,
+          "b": 3.12
+        },
+        {
+          "a": 4.88,
+          "b": 3.12
+        },
+        {
+          "a": 4.88,
+          "b": 3.1
+        },
+        {
+          "a": 4.9,
+          "b": 3.1
+        },
+        {
+          "a": 4.9,
+          "b": 3.08
+        },
+        {
+          "a": 4.92,
+          "b": 3.08
+        },
+        {
+          "a": 4.92,
+          "b": 3.06
+        },
+        {
+          "a": 4.96,
+          "b": 3.06
+        },
+        {
+          "a": 4.96,
+          "b": 3.04
+        },
+        {
+          "a": 4.98,
+          "b": 3.04
+        },
+        {
+          "a": 4.98,
+          "b": 3.02
+        },
+        {
+          "a": 5,
+          "b": 3.02
+        },
+        {
+          "a": 5,
+          "b": 3
+        },
+        {
+          "a": 5.02,
+          "b": 3
+        },
+        {
+          "a": 5.02,
+          "b": 2.98
+        },
+        {
+          "a": 5.04,
+          "b": 2.98
+        },
+        {
+          "a": 5.04,
+          "b": 2.96
+        },
+        {
+          "a": 5.08,
+          "b": 2.96
+        },
+        {
+          "a": 5.08,
+          "b": 2.94
+        },
+        {
+          "a": 5.1,
+          "b": 2.94
+        },
+        {
+          "a": 5.1,
+          "b": 2.92
+        },
+        {
+          "a": 5.12,
+          "b": 2.92
+        },
+        {
+          "a": 5.12,
+          "b": 2.9
+        },
+        {
+          "a": 5.14,
+          "b": 2.9
+        },
+        {
+          "a": 5.14,
+          "b": 2.88
+        },
+        {
+          "a": 5.16,
+          "b": 2.88
+        },
+        {
+          "a": 5.16,
+          "b": 2.86
+        },
+        {
+          "a": 5.2,
+          "b": 2.86
+        },
+        {
+          "a": 5.2,
+          "b": 2.84
+        },
+        {
+          "a": 5.22,
+          "b": 2.84
+        },
+        {
+          "a": 5.22,
+          "b": 2.82
+        },
+        {
+          "a": 5.24,
+          "b": 2.82
+        },
+        {
+          "a": 5.24,
+          "b": 2.8
+        },
+        {
+          "a": 5.26,
+          "b": 2.8
+        },
+        {
+          "a": 5.26,
+          "b": 2.78
+        },
+        {
+          "a": 5.28,
+          "b": 2.78
+        },
+        {
+          "a": 5.28,
+          "b": 2.76
+        },
+        {
+          "a": 5.32,
+          "b": 2.76
+        },
+        {
+          "a": 5.32,
+          "b": 2.74
+        },
+        {
+          "a": 5.34,
+          "b": 2.74
+        },
+        {
+          "a": 5.34,
+          "b": 2.72
+        },
+        {
+          "a": 5.36,
+          "b": 2.72
+        },
+        {
+          "a": 5.36,
+          "b": 2.7
+        },
+        {
+          "a": 5.38,
+          "b": 2.7
+        },
+        {
+          "a": 5.38,
+          "b": 2.68
+        },
+        {
+          "a": 5.4,
+          "b": 2.68
+        },
+        {
+          "a": 5.4,
+          "b": 2.66
+        },
+        {
+          "a": 5.42,
+          "b": 2.66
+        },
+        {
+          "a": 5.42,
+          "b": 2.64
+        },
+        {
+          "a": 5.46,
+          "b": 2.64
+        },
+        {
+          "a": 5.46,
+          "b": 2.62
+        },
+        {
+          "a": 5.48,
+          "b": 2.62
+        },
+        {
+          "a": 5.48,
+          "b": 2.6
+        },
+        {
+          "a": 5.5,
+          "b": 2.6
+        },
+        {
+          "a": 5.5,
+          "b": 2.58
+        },
+        {
+          "a": 5.52,
+          "b": 2.58
+        },
+        {
+          "a": 5.52,
+          "b": 2.56
+        },
+        {
+          "a": 5.54,
+          "b": 2.56
+        },
+        {
+          "a": 5.54,
+          "b": 2.54
+        },
+        {
+          "a": 5.58,
+          "b": 2.54
+        },
+        {
+          "a": 5.58,
+          "b": 2.52
+        },
+        {
+          "a": 5.6,
+          "b": 2.52
+        },
+        {
+          "a": 5.6,
+          "b": 2.5
+        },
+        {
+          "a": 5.62,
+          "b": 2.5
+        },
+        {
+          "a": 5.62,
+          "b": 2.48
+        },
+        {
+          "a": 5.64,
+          "b": 2.48
+        },
+        {
+          "a": 5.64,
+          "b": 2.46
+        },
+        {
+          "a": 5.66,
+          "b": 2.46
+        },
+        {
+          "a": 5.66,
+          "b": 2.44
+        },
+        {
+          "a": 5.7,
+          "b": 2.44
+        },
+        {
+          "a": 5.7,
+          "b": 2.42
+        },
+        {
+          "a": 5.72,
+          "b": 2.42
+        },
+        {
+          "a": 5.72,
+          "b": 2.4
+        },
+        {
+          "a": 5.74,
+          "b": 2.4
+        },
+        {
+          "a": 5.74,
+          "b": 2.38
+        },
+        {
+          "a": 5.76,
+          "b": 2.38
+        },
+        {
+          "a": 5.76,
+          "b": 2.36
+        },
+        {
+          "a": 5.78,
+          "b": 2.36
+        },
+        {
+          "a": 5.78,
+          "b": 2.34
+        },
+        {
+          "a": 5.82,
+          "b": 2.34
+        },
+        {
+          "a": 5.82,
+          "b": 2.32
+        },
+        {
+          "a": 5.84,
+          "b": 2.32
+        },
+        {
+          "a": 5.84,
+          "b": 2.3
+        },
+        {
+          "a": 5.86,
+          "b": 2.3
+        },
+        {
+          "a": 5.86,
+          "b": 2.28
+        },
+        {
+          "a": 5.88,
+          "b": 2.28
+        },
+        {
+          "a": 5.88,
+          "b": 2.26
+        },
+        {
+          "a": 5.9,
+          "b": 2.26
+        },
+        {
+          "a": 5.9,
+          "b": 2.24
+        },
+        {
+          "a": 5.94,
+          "b": 2.24
+        },
+        {
+          "a": 5.94,
+          "b": 2.22
+        },
+        {
+          "a": 5.96,
+          "b": 2.22
+        },
+        {
+          "a": 5.96,
+          "b": 2.2
+        },
+        {
+          "a": 5.98,
+          "b": 2.2
+        },
+        {
+          "a": 5.98,
+          "b": 2.18
+        },
+        {
+          "a": 6,
+          "b": 2.18
+        },
+        {
+          "a": 6,
+          "b": 2.16
+        },
+        {
+          "a": 6.02,
+          "b": 2.16
+        },
+        {
+          "a": 6.02,
+          "b": 2.14
+        },
+        {
+          "a": 6.04,
+          "b": 2.14
+        },
+        {
+          "a": 6.04,
+          "b": 2.12
+        },
+        {
+          "a": 6.08,
+          "b": 2.12
+        },
+        {
+          "a": 6.08,
+          "b": 2.1
+        },
+        {
+          "a": 6.1,
+          "b": 2.1
+        },
+        {
+          "a": 6.1,
+          "b": 2.08
+        },
+        {
+          "a": 6.12,
+          "b": 2.08
+        },
+        {
+          "a": 6.12,
+          "b": 2.06
+        },
+        {
+          "a": 6.14,
+          "b": 2.06
+        },
+        {
+          "a": 6.14,
+          "b": 2.04
+        },
+        {
+          "a": 6.16,
+          "b": 2.04
+        },
+        {
+          "a": 6.16,
+          "b": 2.02
+        },
+        {
+          "a": 6.2,
+          "b": 2.02
+        },
+        {
+          "a": 6.2,
+          "b": 2
+        },
+        {
+          "a": 6.22,
+          "b": 2
+        },
+        {
+          "a": 6.22,
+          "b": 1.98
+        },
+        {
+          "a": 6.24,
+          "b": 1.98
+        },
+        {
+          "a": 6.24,
+          "b": 1.96
+        },
+        {
+          "a": 6.26,
+          "b": 1.96
+        },
+        {
+          "a": 6.26,
+          "b": 1.94
+        },
+        {
+          "a": 6.28,
+          "b": 1.94
+        },
+        {
+          "a": 6.28,
+          "b": 1.92
+        },
+        {
+          "a": 6.32,
+          "b": 1.92
+        },
+        {
+          "a": 6.32,
+          "b": 1.9
+        },
+        {
+          "a": 6.34,
+          "b": 1.9
+        },
+        {
+          "a": 6.34,
+          "b": 1.88
+        },
+        {
+          "a": 6.36,
+          "b": 1.88
+        },
+        {
+          "a": 6.36,
+          "b": 1.86
+        },
+        {
+          "a": 6.38,
+          "b": 1.86
+        },
+        {
+          "a": 6.38,
+          "b": 1.84
+        },
+        {
+          "a": 6.4,
+          "b": 1.84
+        },
+        {
+          "a": 6.4,
+          "b": 1.82
+        },
+        {
+          "a": 6.44,
+          "b": 1.82
+        },
+        {
+          "a": 6.44,
+          "b": 1.8
+        },
+        {
+          "a": 6.46,
+          "b": 1.8
+        },
+        {
+          "a": 6.46,
+          "b": 1.78
+        },
+        {
+          "a": 6.48,
+          "b": 1.78
+        },
+        {
+          "a": 6.48,
+          "b": 1.76
+        },
+        {
+          "a": 6.5,
+          "b": 1.76
+        },
+        {
+          "a": 6.5,
+          "b": 1.74
+        },
+        {
+          "a": 6.52,
+          "b": 1.74
+        },
+        {
+          "a": 6.52,
+          "b": 1.72
+        },
+        {
+          "a": 6.54,
+          "b": 1.72
+        },
+        {
+          "a": 6.54,
+          "b": 1.7
+        },
+        {
+          "a": 6.58,
+          "b": 1.7
+        },
+        {
+          "a": 6.58,
+          "b": 1.68
+        },
+        {
+          "a": 6.6,
+          "b": 1.68
+        },
+        {
+          "a": 6.6,
+          "b": 1.66
+        },
+        {
+          "a": 6.62,
+          "b": 1.66
+        },
+        {
+          "a": 6.62,
+          "b": 1.64
+        },
+        {
+          "a": 6.64,
+          "b": 1.64
+        },
+        {
+          "a": 6.64,
+          "b": 1.62
+        },
+        {
+          "a": 6.66,
+          "b": 1.62
+        },
+        {
+          "a": 6.66,
+          "b": 1.6
+        },
+        {
+          "a": 6.7,
+          "b": 1.6
+        },
+        {
+          "a": 6.7,
+          "b": 1.58
+        },
+        {
+          "a": 6.72,
+          "b": 1.58
+        },
+        {
+          "a": 6.72,
+          "b": 1.56
+        },
+        {
+          "a": 6.74,
+          "b": 1.56
+        },
+        {
+          "a": 6.74,
+          "b": 1.54
+        },
+        {
+          "a": 6.76,
+          "b": 1.54
+        },
+        {
+          "a": 6.76,
+          "b": 1.52
+        },
+        {
+          "a": 6.78,
+          "b": 1.52
+        },
+        {
+          "a": 6.78,
+          "b": 1.5
+        },
+        {
+          "a": 6.82,
+          "b": 1.5
+        },
+        {
+          "a": 6.82,
+          "b": 1.48
+        },
+        {
+          "a": 6.84,
+          "b": 1.48
+        },
+        {
+          "a": 6.84,
+          "b": 1.46
+        },
+        {
+          "a": 6.86,
+          "b": 1.46
+        },
+        {
+          "a": 6.86,
+          "b": 1.44
+        },
+        {
+          "a": 6.88,
+          "b": 1.44
+        },
+        {
+          "a": 6.88,
+          "b": 1.42
+        },
+        {
+          "a": 6.9,
+          "b": 1.42
+        },
+        {
+          "a": 6.9,
+          "b": 1.4
+        },
+        {
+          "a": 6.94,
+          "b": 1.4
+        },
+        {
+          "a": 6.94,
+          "b": 1.38
+        },
+        {
+          "a": 6.96,
+          "b": 1.38
+        },
+        {
+          "a": 6.96,
+          "b": 1.36
+        },
+        {
+          "a": 6.98,
+          "b": 1.36
+        },
+        {
+          "a": 6.98,
+          "b": 1.34
+        },
+        {
+          "a": 7,
+          "b": 1.34
+        },
+        {
+          "a": 7,
+          "b": 1.32
+        },
+        {
+          "a": 7.02,
+          "b": 1.32
+        },
+        {
+          "a": 7.02,
+          "b": 1.3
+        },
+        {
+          "a": 7.06,
+          "b": 1.3
+        },
+        {
+          "a": 7.06,
+          "b": 1.28
+        },
+        {
+          "a": 7.08,
+          "b": 1.28
+        },
+        {
+          "a": 7.08,
+          "b": 1.26
+        },
+        {
+          "a": 7.1,
+          "b": 1.26
+        },
+        {
+          "a": 7.1,
+          "b": 1.24
+        },
+        {
+          "a": 7.12,
+          "b": 1.24
+        },
+        {
+          "a": 7.12,
+          "b": 1.22
+        },
+        {
+          "a": 7.14,
+          "b": 1.22
+        },
+        {
+          "a": 7.14,
+          "b": 1.2
+        },
+        {
+          "a": 7.16,
+          "b": 1.2
+        },
+        {
+          "a": 7.16,
+          "b": 1.18
+        },
+        {
+          "a": 7.2,
+          "b": 1.18
+        },
+        {
+          "a": 7.2,
+          "b": 1.16
+        },
+        {
+          "a": 7.22,
+          "b": 1.16
+        },
+        {
+          "a": 7.22,
+          "b": 1.14
+        },
+        {
+          "a": 7.24,
+          "b": 1.14
+        },
+        {
+          "a": 7.24,
+          "b": 1.12
+        },
+        {
+          "a": 7.26,
+          "b": 1.12
+        },
+        {
+          "a": 7.26,
+          "b": 1.1
+        },
+        {
+          "a": 7.28,
+          "b": 1.1
+        },
+        {
+          "a": 7.28,
+          "b": 1.08
+        },
+        {
+          "a": 7.32,
+          "b": 1.08
+        },
+        {
+          "a": 7.32,
+          "b": 1.06
+        },
+        {
+          "a": 7.34,
+          "b": 1.06
+        },
+        {
+          "a": 7.34,
+          "b": 1.04
+        },
+        {
+          "a": 7.36,
+          "b": 1.04
+        },
+        {
+          "a": 7.36,
+          "b": 1.02
+        },
+        {
+          "a": 7.38,
+          "b": 1.02
+        },
+        {
+          "a": 7.38,
+          "b": 1
+        },
+        {
+          "a": 7.4,
+          "b": 1
+        },
+        {
+          "a": 7.4,
+          "b": 0.98
+        },
+        {
+          "a": 7.44,
+          "b": 0.98
+        },
+        {
+          "a": 7.44,
+          "b": 0.96
+        },
+        {
+          "a": 7.46,
+          "b": 0.96
+        },
+        {
+          "a": 7.46,
+          "b": 0.94
+        },
+        {
+          "a": 7.48,
+          "b": 0.94
+        },
+        {
+          "a": 7.48,
+          "b": 0.92
+        },
+        {
+          "a": 7.5,
+          "b": 0.92
+        },
+        {
+          "a": 7.5,
+          "b": 0
+        },
+        {
+          "a": 0.26,
+          "b": 0
+        },
+        {
+          "a": 0.26,
+          "b": 0.92
+        },
+        {
+          "a": 0.28,
+          "b": 0.92
+        },
+        {
+          "a": 0.28,
+          "b": 0.94
+        },
+        {
+          "a": 0.3,
+          "b": 0.94
+        },
+        {
+          "a": 0.3,
+          "b": 0.96
+        },
+        {
+          "a": 0.32,
+          "b": 0.96
+        },
+        {
+          "a": 0.32,
+          "b": 0.98
+        },
+        {
+          "a": 0.34,
+          "b": 0.98
+        },
+        {
+          "a": 0.34,
+          "b": 1
+        },
+        {
+          "a": 0.36,
+          "b": 1
+        },
+        {
+          "a": 0.36,
+          "b": 1.02
+        },
+        {
+          "a": 0.38,
+          "b": 1.02
+        },
+        {
+          "a": 0.38,
+          "b": 1.04
+        },
+        {
+          "a": 0.42,
+          "b": 1.04
+        },
+        {
+          "a": 0.42,
+          "b": 1.06
+        },
+        {
+          "a": 0.44,
+          "b": 1.06
+        },
+        {
+          "a": 0.44,
+          "b": 1.08
+        },
+        {
+          "a": 0.46,
+          "b": 1.08
+        },
+        {
+          "a": 0.46,
+          "b": 1.1
+        },
+        {
+          "a": 0.48,
+          "b": 1.1
+        },
+        {
+          "a": 0.48,
+          "b": 1.12
+        },
+        {
+          "a": 0.5,
+          "b": 1.12
+        },
+        {
+          "a": 0.5,
+          "b": 1.14
+        },
+        {
+          "a": 0.54,
+          "b": 1.14
+        },
+        {
+          "a": 0.54,
+          "b": 1.16
+        },
+        {
+          "a": 0.56,
+          "b": 1.16
+        },
+        {
+          "a": 0.56,
+          "b": 1.18
+        },
+        {
+          "a": 0.58,
+          "b": 1.18
+        },
+        {
+          "a": 0.58,
+          "b": 1.2
+        },
+        {
+          "a": 0.6,
+          "b": 1.2
+        },
+        {
+          "a": 0.6,
+          "b": 1.22
+        },
+        {
+          "a": 0.62,
+          "b": 1.22
+        },
+        {
+          "a": 0.62,
+          "b": 1.24
+        },
+        {
+          "a": 0.66,
+          "b": 1.24
+        },
+        {
+          "a": 0.66,
+          "b": 1.26
+        },
+        {
+          "a": 0.68,
+          "b": 1.26
+        },
+        {
+          "a": 0.68,
+          "b": 1.28
+        },
+        {
+          "a": 0.7,
+          "b": 1.28
+        },
+        {
+          "a": 0.7,
+          "b": 1.3
+        },
+        {
+          "a": 0.72,
+          "b": 1.3
+        },
+        {
+          "a": 0.72,
+          "b": 1.32
+        },
+        {
+          "a": 0.74,
+          "b": 1.32
+        },
+        {
+          "a": 0.74,
+          "b": 1.34
+        },
+        {
+          "a": 0.78,
+          "b": 1.34
+        },
+        {
+          "a": 0.78,
+          "b": 1.36
+        },
+        {
+          "a": 0.8,
+          "b": 1.36
+        },
+        {
+          "a": 0.8,
+          "b": 1.38
+        },
+        {
+          "a": 0.82,
+          "b": 1.38
+        },
+        {
+          "a": 0.82,
+          "b": 1.4
+        },
+        {
+          "a": 0.84,
+          "b": 1.4
+        },
+        {
+          "a": 0.84,
+          "b": 1.42
+        },
+        {
+          "a": 0.86,
+          "b": 1.42
+        },
+        {
+          "a": 0.86,
+          "b": 1.44
+        },
+        {
+          "a": 0.9,
+          "b": 1.44
+        },
+        {
+          "a": 0.9,
+          "b": 1.46
+        },
+        {
+          "a": 0.92,
+          "b": 1.46
+        },
+        {
+          "a": 0.92,
+          "b": 1.48
+        },
+        {
+          "a": 0.94,
+          "b": 1.48
+        },
+        {
+          "a": 0.94,
+          "b": 1.5
+        },
+        {
+          "a": 0.96,
+          "b": 1.5
+        },
+        {
+          "a": 0.96,
+          "b": 1.52
+        },
+        {
+          "a": 0.98,
+          "b": 1.52
+        },
+        {
+          "a": 0.98,
+          "b": 1.54
+        },
+        {
+          "a": 1,
+          "b": 1.54
+        },
+        {
+          "a": 1,
+          "b": 1.56
+        },
+        {
+          "a": 1.04,
+          "b": 1.56
+        },
+        {
+          "a": 1.04,
+          "b": 1.58
+        },
+        {
+          "a": 1.06,
+          "b": 1.58
+        },
+        {
+          "a": 1.06,
+          "b": 1.6
+        },
+        {
+          "a": 1.08,
+          "b": 1.6
+        },
+        {
+          "a": 1.08,
+          "b": 1.62
+        },
+        {
+          "a": 1.1,
+          "b": 1.62
+        },
+        {
+          "a": 1.1,
+          "b": 1.64
+        },
+        {
+          "a": 1.12,
+          "b": 1.64
+        },
+        {
+          "a": 1.12,
+          "b": 1.66
+        },
+        {
+          "a": 1.16,
+          "b": 1.66
+        },
+        {
+          "a": 1.16,
+          "b": 1.68
+        },
+        {
+          "a": 1.18,
+          "b": 1.68
+        },
+        {
+          "a": 1.18,
+          "b": 1.7
+        },
+        {
+          "a": 1.2,
+          "b": 1.7
+        },
+        {
+          "a": 1.2,
+          "b": 1.72
+        },
+        {
+          "a": 1.22,
+          "b": 1.72
+        },
+        {
+          "a": 1.22,
+          "b": 1.74
+        },
+        {
+          "a": 1.24,
+          "b": 1.74
+        },
+        {
+          "a": 1.24,
+          "b": 1.76
+        },
+        {
+          "a": 1.28,
+          "b": 1.76
+        },
+        {
+          "a": 1.28,
+          "b": 1.78
+        },
+        {
+          "a": 1.3,
+          "b": 1.78
+        },
+        {
+          "a": 1.3,
+          "b": 1.8
+        },
+        {
+          "a": 1.32,
+          "b": 1.8
+        },
+        {
+          "a": 1.32,
+          "b": 1.82
+        },
+        {
+          "a": 1.34,
+          "b": 1.82
+        },
+        {
+          "a": 1.34,
+          "b": 1.84
+        },
+        {
+          "a": 1.36,
+          "b": 1.84
+        },
+        {
+          "a": 1.36,
+          "b": 1.86
+        },
+        {
+          "a": 1.4,
+          "b": 1.86
+        },
+        {
+          "a": 1.4,
+          "b": 1.88
+        },
+        {
+          "a": 1.42,
+          "b": 1.88
+        },
+        {
+          "a": 1.42,
+          "b": 1.9
+        },
+        {
+          "a": 1.44,
+          "b": 1.9
+        },
+        {
+          "a": 1.44,
+          "b": 1.92
+        },
+        {
+          "a": 1.46,
+          "b": 1.92
+        },
+        {
+          "a": 1.46,
+          "b": 1.94
+        },
+        {
+          "a": 1.48,
+          "b": 1.94
+        },
+        {
+          "a": 1.48,
+          "b": 1.96
+        },
+        {
+          "a": 1.5,
+          "b": 1.96
+        },
+        {
+          "a": 1.5,
+          "b": 1.98
+        },
+        {
+          "a": 1.54,
+          "b": 1.98
+        },
+        {
+          "a": 1.54,
+          "b": 2
+        },
+        {
+          "a": 1.56,
+          "b": 2
+        },
+        {
+          "a": 1.56,
+          "b": 2.02
+        },
+        {
+          "a": 1.58,
+          "b": 2.02
+        },
+        {
+          "a": 1.58,
+          "b": 2.04
+        },
+        {
+          "a": 1.6,
+          "b": 2.04
+        },
+        {
+          "a": 1.6,
+          "b": 2.06
+        },
+        {
+          "a": 1.62,
+          "b": 2.06
+        },
+        {
+          "a": 1.62,
+          "b": 2.08
+        },
+        {
+          "a": 1.66,
+          "b": 2.08
+        },
+        {
+          "a": 1.66,
+          "b": 2.1
+        },
+        {
+          "a": 1.68,
+          "b": 2.1
+        },
+        {
+          "a": 1.68,
+          "b": 2.12
+        },
+        {
+          "a": 1.7,
+          "b": 2.12
+        },
+        {
+          "a": 1.7,
+          "b": 2.14
+        },
+        {
+          "a": 1.72,
+          "b": 2.14
+        },
+        {
+          "a": 1.72,
+          "b": 2.16
+        },
+        {
+          "a": 1.74,
+          "b": 2.16
+        },
+        {
+          "a": 1.74,
+          "b": 2.18
+        },
+        {
+          "a": 1.78,
+          "b": 2.18
+        },
+        {
+          "a": 1.78,
+          "b": 2.2
+        },
+        {
+          "a": 1.8,
+          "b": 2.2
+        },
+        {
+          "a": 1.8,
+          "b": 2.22
+        },
+        {
+          "a": 1.82,
+          "b": 2.22
+        },
+        {
+          "a": 1.82,
+          "b": 2.24
+        },
+        {
+          "a": 1.84,
+          "b": 2.24
+        },
+        {
+          "a": 1.84,
+          "b": 2.26
+        },
+        {
+          "a": 1.86,
+          "b": 2.26
+        },
+        {
+          "a": 1.86,
+          "b": 2.28
+        },
+        {
+          "a": 1.9,
+          "b": 2.28
+        },
+        {
+          "a": 1.9,
+          "b": 2.3
+        },
+        {
+          "a": 1.92,
+          "b": 2.3
+        },
+        {
+          "a": 1.92,
+          "b": 2.32
+        },
+        {
+          "a": 1.94,
+          "b": 2.32
+        },
+        {
+          "a": 1.94,
+          "b": 2.34
+        },
+        {
+          "a": 1.96,
+          "b": 2.34
+        },
+        {
+          "a": 1.96,
+          "b": 2.36
+        },
+        {
+          "a": 1.98,
+          "b": 2.36
+        },
+        {
+          "a": 1.98,
+          "b": 2.38
+        },
+        {
+          "a": 2.02,
+          "b": 2.38
+        },
+        {
+          "a": 2.02,
+          "b": 2.4
+        },
+        {
+          "a": 2.04,
+          "b": 2.4
+        },
+        {
+          "a": 2.04,
+          "b": 2.42
+        },
+        {
+          "a": 2.06,
+          "b": 2.42
+        },
+        {
+          "a": 2.06,
+          "b": 2.44
+        },
+        {
+          "a": 2.08,
+          "b": 2.44
+        },
+        {
+          "a": 2.08,
+          "b": 2.46
+        },
+        {
+          "a": 2.1,
+          "b": 2.46
+        },
+        {
+          "a": 2.1,
+          "b": 2.48
+        },
+        {
+          "a": 2.12,
+          "b": 2.48
+        },
+        {
+          "a": 2.12,
+          "b": 2.5
+        },
+        {
+          "a": 2.16,
+          "b": 2.5
+        },
+        {
+          "a": 2.16,
+          "b": 2.52
+        },
+        {
+          "a": 2.18,
+          "b": 2.52
+        },
+        {
+          "a": 2.18,
+          "b": 2.54
+        },
+        {
+          "a": 2.2,
+          "b": 2.54
+        },
+        {
+          "a": 2.2,
+          "b": 2.56
+        },
+        {
+          "a": 2.22,
+          "b": 2.56
+        },
+        {
+          "a": 2.22,
+          "b": 2.58
+        },
+        {
+          "a": 2.24,
+          "b": 2.58
+        },
+        {
+          "a": 2.24,
+          "b": 2.6
+        },
+        {
+          "a": 2.28,
+          "b": 2.6
+        },
+        {
+          "a": 2.28,
+          "b": 2.62
+        },
+        {
+          "a": 2.3,
+          "b": 2.62
+        },
+        {
+          "a": 2.3,
+          "b": 2.64
+        },
+        {
+          "a": 2.32,
+          "b": 2.64
+        },
+        {
+          "a": 2.32,
+          "b": 2.66
+        },
+        {
+          "a": 2.34,
+          "b": 2.66
+        },
+        {
+          "a": 2.34,
+          "b": 2.68
+        },
+        {
+          "a": 2.36,
+          "b": 2.68
+        },
+        {
+          "a": 2.36,
+          "b": 2.7
+        },
+        {
+          "a": 2.4,
+          "b": 2.7
+        },
+        {
+          "a": 2.4,
+          "b": 2.72
+        },
+        {
+          "a": 2.42,
+          "b": 2.72
+        },
+        {
+          "a": 2.42,
+          "b": 2.74
+        },
+        {
+          "a": 2.44,
+          "b": 2.74
+        },
+        {
+          "a": 2.44,
+          "b": 2.76
+        },
+        {
+          "a": 2.46,
+          "b": 2.76
+        },
+        {
+          "a": 2.46,
+          "b": 2.78
+        },
+        {
+          "a": 2.48,
+          "b": 2.78
+        },
+        {
+          "a": 2.48,
+          "b": 2.8
+        },
+        {
+          "a": 2.52,
+          "b": 2.8
+        },
+        {
+          "a": 2.52,
+          "b": 2.82
+        },
+        {
+          "a": 2.54,
+          "b": 2.82
+        },
+        {
+          "a": 2.54,
+          "b": 2.84
+        },
+        {
+          "a": 2.56,
+          "b": 2.84
+        },
+        {
+          "a": 2.56,
+          "b": 2.86
+        },
+        {
+          "a": 2.58,
+          "b": 2.86
+        },
+        {
+          "a": 2.58,
+          "b": 2.88
+        },
+        {
+          "a": 2.6,
+          "b": 2.88
+        },
+        {
+          "a": 2.6,
+          "b": 2.9
+        },
+        {
+          "a": 2.64,
+          "b": 2.9
+        },
+        {
+          "a": 2.64,
+          "b": 2.92
+        },
+        {
+          "a": 2.66,
+          "b": 2.92
+        },
+        {
+          "a": 2.66,
+          "b": 2.94
+        },
+        {
+          "a": 2.68,
+          "b": 2.94
+        },
+        {
+          "a": 2.68,
+          "b": 2.96
+        },
+        {
+          "a": 2.7,
+          "b": 2.96
+        },
+        {
+          "a": 2.7,
+          "b": 2.98
+        },
+        {
+          "a": 2.72,
+          "b": 2.98
+        },
+        {
+          "a": 2.72,
+          "b": 3
+        },
+        {
+          "a": 2.74,
+          "b": 3
+        },
+        {
+          "a": 2.74,
+          "b": 3.02
+        },
+        {
+          "a": 2.78,
+          "b": 3.02
+        },
+        {
+          "a": 2.78,
+          "b": 3.04
+        },
+        {
+          "a": 2.8,
+          "b": 3.04
+        },
+        {
+          "a": 2.8,
+          "b": 3.06
+        },
+        {
+          "a": 2.82,
+          "b": 3.06
+        },
+        {
+          "a": 2.82,
+          "b": 3.08
+        },
+        {
+          "a": 2.84,
+          "b": 3.08
+        },
+        {
+          "a": 2.84,
+          "b": 3.1
+        },
+        {
+          "a": 2.86,
+          "b": 3.1
+        },
+        {
+          "a": 2.86,
+          "b": 3.12
+        },
+        {
+          "a": 2.9,
+          "b": 3.12
+        },
+        {
+          "a": 2.9,
+          "b": 3.14
+        },
+        {
+          "a": 2.92,
+          "b": 3.14
+        },
+        {
+          "a": 2.92,
+          "b": 3.16
+        },
+        {
+          "a": 2.94,
+          "b": 3.16
+        },
+        {
+          "a": 2.94,
+          "b": 3.18
+        },
+        {
+          "a": 2.96,
+          "b": 3.18
+        },
+        {
+          "a": 2.96,
+          "b": 3.2
+        },
+        {
+          "a": 2.98,
+          "b": 3.2
+        },
+        {
+          "a": 2.98,
+          "b": 3.22
+        },
+        {
+          "a": 3.02,
+          "b": 3.22
+        },
+        {
+          "a": 3.02,
+          "b": 3.24
+        },
+        {
+          "a": 3.04,
+          "b": 3.24
+        },
+        {
+          "a": 3.04,
+          "b": 3.26
+        },
+        {
+          "a": 3.06,
+          "b": 3.26
+        },
+        {
+          "a": 3.06,
+          "b": 3.28
+        },
+        {
+          "a": 3.08,
+          "b": 3.28
+        },
+        {
+          "a": 3.08,
+          "b": 3.3
+        },
+        {
+          "a": 3.1,
+          "b": 3.3
+        },
+        {
+          "a": 3.1,
+          "b": 3.32
+        },
+        {
+          "a": 3.14,
+          "b": 3.32
+        },
+        {
+          "a": 3.14,
+          "b": 3.34
+        },
+        {
+          "a": 3.16,
+          "b": 3.34
+        },
+        {
+          "a": 3.16,
+          "b": 3.36
+        },
+        {
+          "a": 3.18,
+          "b": 3.36
+        },
+        {
+          "a": 3.18,
+          "b": 3.38
+        },
+        {
+          "a": 3.2,
+          "b": 3.38
+        },
+        {
+          "a": 3.2,
+          "b": 3.4
+        },
+        {
+          "a": 3.22,
+          "b": 3.4
+        },
+        {
+          "a": 3.22,
+          "b": 3.42
+        },
+        {
+          "a": 3.24,
+          "b": 3.42
+        },
+        {
+          "a": 3.24,
+          "b": 3.44
+        },
+        {
+          "a": 3.28,
+          "b": 3.44
+        },
+        {
+          "a": 3.28,
+          "b": 3.46
+        },
+        {
+          "a": 3.3,
+          "b": 3.46
+        },
+        {
+          "a": 3.3,
+          "b": 3.48
+        },
+        {
+          "a": 3.32,
+          "b": 3.48
+        },
+        {
+          "a": 3.32,
+          "b": 3.5
+        },
+        {
+          "a": 3.34,
+          "b": 3.5
+        },
+        {
+          "a": 3.34,
+          "b": 3.52
+        },
+        {
+          "a": 3.36,
+          "b": 3.52
+        },
+        {
+          "a": 3.36,
+          "b": 3.54
+        },
+        {
+          "a": 3.4,
+          "b": 3.54
+        },
+        {
+          "a": 3.4,
+          "b": 3.56
+        },
+        {
+          "a": 3.42,
+          "b": 3.56
+        },
+        {
+          "a": 3.42,
+          "b": 3.58
+        },
+        {
+          "a": 3.44,
+          "b": 3.58
+        },
+        {
+          "a": 3.44,
+          "b": 3.6
+        },
+        {
+          "a": 3.46,
+          "b": 3.6
+        },
+        {
+          "a": 3.46,
+          "b": 3.62
+        },
+        {
+          "a": 3.48,
+          "b": 3.62
+        },
+        {
+          "a": 3.48,
+          "b": 3.64
+        },
+        {
+          "a": 3.52,
+          "b": 3.64
+        },
+        {
+          "a": 3.52,
+          "b": 3.66
+        },
+        {
+          "a": 3.54,
+          "b": 3.66
+        },
+        {
+          "a": 3.54,
+          "b": 3.68
+        },
+        {
+          "a": 3.56,
+          "b": 3.68
+        },
+        {
+          "a": 3.56,
+          "b": 3.7
+        },
+        {
+          "a": 3.58,
+          "b": 3.7
+        },
+        {
+          "a": 3.58,
+          "b": 3.72
+        },
+        {
+          "a": 3.6,
+          "b": 3.72
+        },
+        {
+          "a": 3.6,
+          "b": 3.74
+        },
+        {
+          "a": 3.64,
+          "b": 3.74
+        },
+        {
+          "a": 3.64,
+          "b": 3.76
+        },
+        {
+          "a": 3.66,
+          "b": 3.76
+        },
+        {
+          "a": 3.66,
+          "b": 3.78
+        },
+        {
+          "a": 3.68,
+          "b": 3.78
+        },
+        {
+          "a": 3.68,
+          "b": 3.8
+        },
+        {
+          "a": 3.72,
+          "b": 3.8
+        },
+        {
+          "a": 3.72,
+          "b": 3.82
+        },
+        {
+          "a": 3.74,
+          "b": 3.82
+        },
+        {
+          "a": 3.74,
+          "b": 3.84
+        },
+        {
+          "a": 3.76,
+          "b": 3.84
+        },
+        {
+          "a": 3.76,
+          "b": 3.86
+        },
+        {
+          "a": 3.8,
+          "b": 3.86
+        },
+        {
+          "a": 3.8,
+          "b": 3.88
+        },
+        {
+          "a": 3.82,
+          "b": 3.88
+        },
+        {
+          "a": 3.82,
+          "b": 3.9
+        },
+        {
+          "a": 3.84,
+          "b": 3.9
+        }
+      ],
+      "rect": {
+        "a0": 0.26,
+        "a1": 7.5,
+        "b0": 0,
+        "b1": 3.92
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-0f5a04bb-75b678b19d31-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "appearance-front-ring-main-0-w0-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 4.44,
+          "b": 2.52
+        },
+        {
+          "a": 7.06,
+          "b": 2.52
+        },
+        {
+          "a": 7.06,
+          "b": 2.5
+        },
+        {
+          "a": 7.08,
+          "b": 2.5
+        },
+        {
+          "a": 7.08,
+          "b": 0.08
+        },
+        {
+          "a": 7.06,
+          "b": 0.08
+        },
+        {
+          "a": 7.06,
+          "b": 0.06
+        },
+        {
+          "a": 4.44,
+          "b": 0.06
+        },
+        {
+          "a": 4.44,
+          "b": 0.08
+        },
+        {
+          "a": 4.42,
+          "b": 0.08
+        },
+        {
+          "a": 4.42,
+          "b": 2.5
+        },
+        {
+          "a": 4.44,
+          "b": 2.5
+        }
+      ],
+      "rect": {
+        "a0": 4.42,
+        "a1": 7.08,
+        "b0": 0.06,
+        "b1": 2.52
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-0f5a04bb-75b678b19d31-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "appearance-front-ring-main-0-w0-brick-1",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 0,
+          "b": 0.08
+        },
+        {
+          "a": 11.55,
+          "b": 0.08
+        },
+        {
+          "a": 11.55,
+          "b": 0
+        },
+        {
+          "a": 0,
+          "b": 0
+        }
+      ],
+      "rect": {
+        "a0": 0,
+        "a1": 11.55,
+        "b0": 0,
+        "b1": 0.08
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a brick outline from sketch-61338873-d0b71aa74c42-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-brick-0",
+      "materialId": "mat-brick",
+      "outline": [
+        {
+          "a": 11.55,
+          "b": 2.22
+        },
+        {
+          "a": 10.19,
+          "b": 2.22
+        },
+        {
+          "a": 10.19,
+          "b": 2.2
+        },
+        {
+          "a": 10.17,
+          "b": 2.2
+        },
+        {
+          "a": 10.17,
+          "b": 2.18
+        },
+        {
+          "a": 10.15,
+          "b": 2.18
+        },
+        {
+          "a": 10.15,
+          "b": 2.16
+        },
+        {
+          "a": 10.13,
+          "b": 2.16
+        },
+        {
+          "a": 10.13,
+          "b": 2.14
+        },
+        {
+          "a": 10.11,
+          "b": 2.14
+        },
+        {
+          "a": 10.11,
+          "b": 2.08
+        },
+        {
+          "a": 10.09,
+          "b": 2.08
+        },
+        {
+          "a": 10.09,
+          "b": 2.06
+        },
+        {
+          "a": 10.07,
+          "b": 2.06
+        },
+        {
+          "a": 10.07,
+          "b": 2.04
+        },
+        {
+          "a": 10.05,
+          "b": 2.04
+        },
+        {
+          "a": 10.05,
+          "b": 2.02
+        },
+        {
+          "a": 10.03,
+          "b": 2.02
+        },
+        {
+          "a": 10.03,
+          "b": 2
+        },
+        {
+          "a": 10.01,
+          "b": 2
+        },
+        {
+          "a": 10.01,
+          "b": 1.98
+        },
+        {
+          "a": 9.99,
+          "b": 1.98
+        },
+        {
+          "a": 9.99,
+          "b": 1.96
+        },
+        {
+          "a": 9.97,
+          "b": 1.96
+        },
+        {
+          "a": 9.97,
+          "b": 1.94
+        },
+        {
+          "a": 9.95,
+          "b": 1.94
+        },
+        {
+          "a": 9.95,
+          "b": 1.92
+        },
+        {
+          "a": 9.93,
+          "b": 1.92
+        },
+        {
+          "a": 9.93,
+          "b": 1.9
+        },
+        {
+          "a": 9.91,
+          "b": 1.9
+        },
+        {
+          "a": 9.91,
+          "b": 1.88
+        },
+        {
+          "a": 9.89,
+          "b": 1.88
+        },
+        {
+          "a": 9.89,
+          "b": 1.86
+        },
+        {
+          "a": 9.87,
+          "b": 1.86
+        },
+        {
+          "a": 9.87,
+          "b": 1.84
+        },
+        {
+          "a": 9.85,
+          "b": 1.84
+        },
+        {
+          "a": 9.85,
+          "b": 1.82
+        },
+        {
+          "a": 9.83,
+          "b": 1.82
+        },
+        {
+          "a": 9.83,
+          "b": 1.8
+        },
+        {
+          "a": 9.81,
+          "b": 1.8
+        },
+        {
+          "a": 9.81,
+          "b": 1.78
+        },
+        {
+          "a": 9.79,
+          "b": 1.78
+        },
+        {
+          "a": 9.79,
+          "b": 1.76
+        },
+        {
+          "a": 9.77,
+          "b": 1.76
+        },
+        {
+          "a": 9.77,
+          "b": 1.74
+        },
+        {
+          "a": 9.75,
+          "b": 1.74
+        },
+        {
+          "a": 9.75,
+          "b": 1.72
+        },
+        {
+          "a": 9.73,
+          "b": 1.72
+        },
+        {
+          "a": 9.73,
+          "b": 1.7
+        },
+        {
+          "a": 9.71,
+          "b": 1.7
+        },
+        {
+          "a": 9.71,
+          "b": 1.68
+        },
+        {
+          "a": 9.69,
+          "b": 1.68
+        },
+        {
+          "a": 9.69,
+          "b": 1.66
+        },
+        {
+          "a": 9.67,
+          "b": 1.66
+        },
+        {
+          "a": 9.67,
+          "b": 1.64
+        },
+        {
+          "a": 9.65,
+          "b": 1.64
+        },
+        {
+          "a": 9.65,
+          "b": 1.62
+        },
+        {
+          "a": 9.63,
+          "b": 1.62
+        },
+        {
+          "a": 9.63,
+          "b": 1.6
+        },
+        {
+          "a": 9.61,
+          "b": 1.6
+        },
+        {
+          "a": 9.61,
+          "b": 1.58
+        },
+        {
+          "a": 9.59,
+          "b": 1.58
+        },
+        {
+          "a": 9.59,
+          "b": 1.56
+        },
+        {
+          "a": 9.57,
+          "b": 1.56
+        },
+        {
+          "a": 9.57,
+          "b": 1.54
+        },
+        {
+          "a": 9.55,
+          "b": 1.54
+        },
+        {
+          "a": 9.55,
+          "b": 1.52
+        },
+        {
+          "a": 9.53,
+          "b": 1.52
+        },
+        {
+          "a": 9.53,
+          "b": 1.5
+        },
+        {
+          "a": 9.51,
+          "b": 1.5
+        },
+        {
+          "a": 9.51,
+          "b": 1.48
+        },
+        {
+          "a": 9.49,
+          "b": 1.48
+        },
+        {
+          "a": 9.49,
+          "b": 1.46
+        },
+        {
+          "a": 9.47,
+          "b": 1.46
+        },
+        {
+          "a": 9.47,
+          "b": 1.44
+        },
+        {
+          "a": 9.45,
+          "b": 1.44
+        },
+        {
+          "a": 9.45,
+          "b": 1.42
+        },
+        {
+          "a": 9.43,
+          "b": 1.42
+        },
+        {
+          "a": 9.43,
+          "b": 1.4
+        },
+        {
+          "a": 9.41,
+          "b": 1.4
+        },
+        {
+          "a": 9.41,
+          "b": 1.38
+        },
+        {
+          "a": 9.39,
+          "b": 1.38
+        },
+        {
+          "a": 9.39,
+          "b": 1.36
+        },
+        {
+          "a": 9.37,
+          "b": 1.36
+        },
+        {
+          "a": 9.37,
+          "b": 1.34
+        },
+        {
+          "a": 9.35,
+          "b": 1.34
+        },
+        {
+          "a": 9.35,
+          "b": 1.32
+        },
+        {
+          "a": 9.33,
+          "b": 1.32
+        },
+        {
+          "a": 9.33,
+          "b": 1.3
+        },
+        {
+          "a": 9.31,
+          "b": 1.3
+        },
+        {
+          "a": 9.31,
+          "b": 1.28
+        },
+        {
+          "a": 9.29,
+          "b": 1.28
+        },
+        {
+          "a": 9.29,
+          "b": 1.26
+        },
+        {
+          "a": 9.27,
+          "b": 1.26
+        },
+        {
+          "a": 9.27,
+          "b": 1.24
+        },
+        {
+          "a": 9.25,
+          "b": 1.24
+        },
+        {
+          "a": 9.25,
+          "b": 1.22
+        },
+        {
+          "a": 9.23,
+          "b": 1.22
+        },
+        {
+          "a": 9.23,
+          "b": 1.2
+        },
+        {
+          "a": 9.21,
+          "b": 1.2
+        },
+        {
+          "a": 9.21,
+          "b": 1.18
+        },
+        {
+          "a": 9.19,
+          "b": 1.18
+        },
+        {
+          "a": 9.19,
+          "b": 1.16
+        },
+        {
+          "a": 9.17,
+          "b": 1.16
+        },
+        {
+          "a": 9.17,
+          "b": 1.14
+        },
+        {
+          "a": 9.15,
+          "b": 1.14
+        },
+        {
+          "a": 9.15,
+          "b": 1.12
+        },
+        {
+          "a": 9.13,
+          "b": 1.12
+        },
+        {
+          "a": 9.13,
+          "b": 1.1
+        },
+        {
+          "a": 9.11,
+          "b": 1.1
+        },
+        {
+          "a": 9.11,
+          "b": 1.08
+        },
+        {
+          "a": 9.09,
+          "b": 1.08
+        },
+        {
+          "a": 9.09,
+          "b": 1.06
+        },
+        {
+          "a": 9.07,
+          "b": 1.06
+        },
+        {
+          "a": 9.07,
+          "b": 1.04
+        },
+        {
+          "a": 9.05,
+          "b": 1.04
+        },
+        {
+          "a": 9.05,
+          "b": 1.02
+        },
+        {
+          "a": 9.03,
+          "b": 1.02
+        },
+        {
+          "a": 9.03,
+          "b": 1
+        },
+        {
+          "a": 9.01,
+          "b": 1
+        },
+        {
+          "a": 9.01,
+          "b": 0.98
+        },
+        {
+          "a": 8.99,
+          "b": 0.98
+        },
+        {
+          "a": 8.99,
+          "b": 0.96
+        },
+        {
+          "a": 8.97,
+          "b": 0.96
+        },
+        {
+          "a": 8.97,
+          "b": 0.94
+        },
+        {
+          "a": 8.95,
+          "b": 0.94
+        },
+        {
+          "a": 8.95,
+          "b": 0.92
+        },
+        {
+          "a": 8.93,
+          "b": 0.92
+        },
+        {
+          "a": 8.93,
+          "b": 0.9
+        },
+        {
+          "a": 8.91,
+          "b": 0.9
+        },
+        {
+          "a": 8.91,
+          "b": 0.88
+        },
+        {
+          "a": 8.89,
+          "b": 0.88
+        },
+        {
+          "a": 8.89,
+          "b": 0.86
+        },
+        {
+          "a": 8.87,
+          "b": 0.86
+        },
+        {
+          "a": 8.87,
+          "b": 0.84
+        },
+        {
+          "a": 8.85,
+          "b": 0.84
+        },
+        {
+          "a": 8.85,
+          "b": 0.82
+        },
+        {
+          "a": 8.83,
+          "b": 0.82
+        },
+        {
+          "a": 8.83,
+          "b": 0.8
+        },
+        {
+          "a": 8.79,
+          "b": 0.8
+        },
+        {
+          "a": 8.79,
+          "b": 0.82
+        },
+        {
+          "a": 8.77,
+          "b": 0.82
+        },
+        {
+          "a": 8.77,
+          "b": 0.84
+        },
+        {
+          "a": 8.75,
+          "b": 0.84
+        },
+        {
+          "a": 8.75,
+          "b": 0.86
+        },
+        {
+          "a": 8.73,
+          "b": 0.86
+        },
+        {
+          "a": 8.73,
+          "b": 0.88
+        },
+        {
+          "a": 8.71,
+          "b": 0.88
+        },
+        {
+          "a": 8.71,
+          "b": 0.9
+        },
+        {
+          "a": 8.69,
+          "b": 0.9
+        },
+        {
+          "a": 8.69,
+          "b": 0.92
+        },
+        {
+          "a": 8.67,
+          "b": 0.92
+        },
+        {
+          "a": 8.67,
+          "b": 0.94
+        },
+        {
+          "a": 8.65,
+          "b": 0.94
+        },
+        {
+          "a": 8.65,
+          "b": 0.96
+        },
+        {
+          "a": 8.63,
+          "b": 0.96
+        },
+        {
+          "a": 8.63,
+          "b": 0.98
+        },
+        {
+          "a": 8.61,
+          "b": 0.98
+        },
+        {
+          "a": 8.61,
+          "b": 1
+        },
+        {
+          "a": 8.59,
+          "b": 1
+        },
+        {
+          "a": 8.59,
+          "b": 1.02
+        },
+        {
+          "a": 8.57,
+          "b": 1.02
+        },
+        {
+          "a": 8.57,
+          "b": 1.04
+        },
+        {
+          "a": 8.55,
+          "b": 1.04
+        },
+        {
+          "a": 8.55,
+          "b": 1.06
+        },
+        {
+          "a": 8.53,
+          "b": 1.06
+        },
+        {
+          "a": 8.53,
+          "b": 1.08
+        },
+        {
+          "a": 8.51,
+          "b": 1.08
+        },
+        {
+          "a": 8.51,
+          "b": 1.1
+        },
+        {
+          "a": 8.49,
+          "b": 1.1
+        },
+        {
+          "a": 8.49,
+          "b": 1.12
+        },
+        {
+          "a": 8.47,
+          "b": 1.12
+        },
+        {
+          "a": 8.47,
+          "b": 1.14
+        },
+        {
+          "a": 8.45,
+          "b": 1.14
+        },
+        {
+          "a": 8.45,
+          "b": 1.16
+        },
+        {
+          "a": 8.43,
+          "b": 1.16
+        },
+        {
+          "a": 8.43,
+          "b": 1.18
+        },
+        {
+          "a": 8.41,
+          "b": 1.18
+        },
+        {
+          "a": 8.41,
+          "b": 1.2
+        },
+        {
+          "a": 8.39,
+          "b": 1.2
+        },
+        {
+          "a": 8.39,
+          "b": 1.22
+        },
+        {
+          "a": 8.37,
+          "b": 1.22
+        },
+        {
+          "a": 8.37,
+          "b": 1.24
+        },
+        {
+          "a": 8.35,
+          "b": 1.24
+        },
+        {
+          "a": 8.35,
+          "b": 1.26
+        },
+        {
+          "a": 8.33,
+          "b": 1.26
+        },
+        {
+          "a": 8.33,
+          "b": 1.28
+        },
+        {
+          "a": 8.31,
+          "b": 1.28
+        },
+        {
+          "a": 8.31,
+          "b": 1.3
+        },
+        {
+          "a": 8.29,
+          "b": 1.3
+        },
+        {
+          "a": 8.29,
+          "b": 1.32
+        },
+        {
+          "a": 8.27,
+          "b": 1.32
+        },
+        {
+          "a": 8.27,
+          "b": 1.34
+        },
+        {
+          "a": 8.25,
+          "b": 1.34
+        },
+        {
+          "a": 8.25,
+          "b": 1.36
+        },
+        {
+          "a": 8.23,
+          "b": 1.36
+        },
+        {
+          "a": 8.23,
+          "b": 1.38
+        },
+        {
+          "a": 8.21,
+          "b": 1.38
+        },
+        {
+          "a": 8.21,
+          "b": 1.4
+        },
+        {
+          "a": 8.19,
+          "b": 1.4
+        },
+        {
+          "a": 8.19,
+          "b": 1.42
+        },
+        {
+          "a": 8.17,
+          "b": 1.42
+        },
+        {
+          "a": 8.17,
+          "b": 1.44
+        },
+        {
+          "a": 8.15,
+          "b": 1.44
+        },
+        {
+          "a": 8.15,
+          "b": 1.46
+        },
+        {
+          "a": 8.13,
+          "b": 1.46
+        },
+        {
+          "a": 8.13,
+          "b": 1.48
+        },
+        {
+          "a": 8.11,
+          "b": 1.48
+        },
+        {
+          "a": 8.11,
+          "b": 1.5
+        },
+        {
+          "a": 8.09,
+          "b": 1.5
+        },
+        {
+          "a": 8.09,
+          "b": 1.52
+        },
+        {
+          "a": 8.07,
+          "b": 1.52
+        },
+        {
+          "a": 8.07,
+          "b": 1.54
+        },
+        {
+          "a": 8.05,
+          "b": 1.54
+        },
+        {
+          "a": 8.05,
+          "b": 1.56
+        },
+        {
+          "a": 8.03,
+          "b": 1.56
+        },
+        {
+          "a": 8.03,
+          "b": 1.58
+        },
+        {
+          "a": 8.01,
+          "b": 1.58
+        },
+        {
+          "a": 8.01,
+          "b": 1.6
+        },
+        {
+          "a": 7.99,
+          "b": 1.6
+        },
+        {
+          "a": 7.99,
+          "b": 1.62
+        },
+        {
+          "a": 7.97,
+          "b": 1.62
+        },
+        {
+          "a": 7.97,
+          "b": 1.64
+        },
+        {
+          "a": 7.95,
+          "b": 1.64
+        },
+        {
+          "a": 7.95,
+          "b": 1.66
+        },
+        {
+          "a": 7.93,
+          "b": 1.66
+        },
+        {
+          "a": 7.93,
+          "b": 1.68
+        },
+        {
+          "a": 7.91,
+          "b": 1.68
+        },
+        {
+          "a": 7.91,
+          "b": 1.7
+        },
+        {
+          "a": 7.89,
+          "b": 1.7
+        },
+        {
+          "a": 7.89,
+          "b": 1.72
+        },
+        {
+          "a": 7.87,
+          "b": 1.72
+        },
+        {
+          "a": 7.87,
+          "b": 1.74
+        },
+        {
+          "a": 7.85,
+          "b": 1.74
+        },
+        {
+          "a": 7.85,
+          "b": 1.76
+        },
+        {
+          "a": 7.83,
+          "b": 1.76
+        },
+        {
+          "a": 7.83,
+          "b": 1.78
+        },
+        {
+          "a": 7.81,
+          "b": 1.78
+        },
+        {
+          "a": 7.81,
+          "b": 1.8
+        },
+        {
+          "a": 7.79,
+          "b": 1.8
+        },
+        {
+          "a": 7.79,
+          "b": 1.82
+        },
+        {
+          "a": 7.77,
+          "b": 1.82
+        },
+        {
+          "a": 7.77,
+          "b": 1.84
+        },
+        {
+          "a": 7.75,
+          "b": 1.84
+        },
+        {
+          "a": 7.75,
+          "b": 1.86
+        },
+        {
+          "a": 7.73,
+          "b": 1.86
+        },
+        {
+          "a": 7.73,
+          "b": 1.88
+        },
+        {
+          "a": 7.71,
+          "b": 1.88
+        },
+        {
+          "a": 7.71,
+          "b": 1.9
+        },
+        {
+          "a": 7.69,
+          "b": 1.9
+        },
+        {
+          "a": 7.69,
+          "b": 1.92
+        },
+        {
+          "a": 7.67,
+          "b": 1.92
+        },
+        {
+          "a": 7.67,
+          "b": 1.94
+        },
+        {
+          "a": 7.65,
+          "b": 1.94
+        },
+        {
+          "a": 7.65,
+          "b": 1.96
+        },
+        {
+          "a": 7.63,
+          "b": 1.96
+        },
+        {
+          "a": 7.63,
+          "b": 1.98
+        },
+        {
+          "a": 7.61,
+          "b": 1.98
+        },
+        {
+          "a": 7.61,
+          "b": 2
+        },
+        {
+          "a": 7.59,
+          "b": 2
+        },
+        {
+          "a": 7.59,
+          "b": 2.02
+        },
+        {
+          "a": 7.57,
+          "b": 2.02
+        },
+        {
+          "a": 7.57,
+          "b": 2.04
+        },
+        {
+          "a": 7.55,
+          "b": 2.04
+        },
+        {
+          "a": 7.55,
+          "b": 2.06
+        },
+        {
+          "a": 7.53,
+          "b": 2.06
+        },
+        {
+          "a": 7.53,
+          "b": 2.08
+        },
+        {
+          "a": 7.51,
+          "b": 2.08
+        },
+        {
+          "a": 7.51,
+          "b": 2.1
+        },
+        {
+          "a": 7.49,
+          "b": 2.1
+        },
+        {
+          "a": 7.49,
+          "b": 2.12
+        },
+        {
+          "a": 7.47,
+          "b": 2.12
+        },
+        {
+          "a": 7.47,
+          "b": 2.14
+        },
+        {
+          "a": 7.45,
+          "b": 2.14
+        },
+        {
+          "a": 7.45,
+          "b": 2.16
+        },
+        {
+          "a": 7.43,
+          "b": 2.16
+        },
+        {
+          "a": 7.43,
+          "b": 2.18
+        },
+        {
+          "a": 7.41,
+          "b": 2.18
+        },
+        {
+          "a": 7.41,
+          "b": 2.2
+        },
+        {
+          "a": 7.39,
+          "b": 2.2
+        },
+        {
+          "a": 7.39,
+          "b": 2.22
+        },
+        {
+          "a": 3.91,
+          "b": 2.22
+        },
+        {
+          "a": 3.91,
+          "b": 0
+        },
+        {
+          "a": 11.55,
+          "b": 0
+        }
+      ],
+      "rect": {
+        "a0": 3.91,
+        "a1": 11.55,
+        "b0": 0,
+        "b1": 2.22
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-61338873-d0b71aa74c42-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "appearance-rear-ring-main-0-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 3.89,
+          "b": 2.8
+        },
+        {
+          "a": 3.89,
+          "b": 2.72
+        },
+        {
+          "a": 0.05,
+          "b": 2.72
+        },
+        {
+          "a": 0.05,
+          "b": 2.7
+        },
+        {
+          "a": 0.03,
+          "b": 2.7
+        },
+        {
+          "a": 0.03,
+          "b": 2.22
+        },
+        {
+          "a": 1.73,
+          "b": 2.22
+        },
+        {
+          "a": 1.73,
+          "b": 2.2
+        },
+        {
+          "a": 1.75,
+          "b": 2.2
+        },
+        {
+          "a": 1.75,
+          "b": 2.18
+        },
+        {
+          "a": 1.77,
+          "b": 2.18
+        },
+        {
+          "a": 1.77,
+          "b": 2.16
+        },
+        {
+          "a": 1.79,
+          "b": 2.16
+        },
+        {
+          "a": 1.79,
+          "b": 2.14
+        },
+        {
+          "a": 1.81,
+          "b": 2.14
+        },
+        {
+          "a": 1.81,
+          "b": 2.12
+        },
+        {
+          "a": 1.83,
+          "b": 2.12
+        },
+        {
+          "a": 1.83,
+          "b": 2.1
+        },
+        {
+          "a": 1.85,
+          "b": 2.1
+        },
+        {
+          "a": 1.85,
+          "b": 2.08
+        },
+        {
+          "a": 1.87,
+          "b": 2.08
+        },
+        {
+          "a": 1.87,
+          "b": 2.06
+        },
+        {
+          "a": 1.89,
+          "b": 2.06
+        },
+        {
+          "a": 1.89,
+          "b": 2.04
+        },
+        {
+          "a": 1.91,
+          "b": 2.04
+        },
+        {
+          "a": 1.91,
+          "b": 2.02
+        },
+        {
+          "a": 1.93,
+          "b": 2.02
+        },
+        {
+          "a": 1.93,
+          "b": 2
+        },
+        {
+          "a": 1.95,
+          "b": 2
+        },
+        {
+          "a": 1.95,
+          "b": 1.98
+        },
+        {
+          "a": 1.97,
+          "b": 1.98
+        },
+        {
+          "a": 1.97,
+          "b": 1.96
+        },
+        {
+          "a": 1.99,
+          "b": 1.96
+        },
+        {
+          "a": 1.99,
+          "b": 1.94
+        },
+        {
+          "a": 2.01,
+          "b": 1.94
+        },
+        {
+          "a": 2.01,
+          "b": 1.92
+        },
+        {
+          "a": 2.03,
+          "b": 1.92
+        },
+        {
+          "a": 2.03,
+          "b": 1.9
+        },
+        {
+          "a": 2.05,
+          "b": 1.9
+        },
+        {
+          "a": 2.05,
+          "b": 1.88
+        },
+        {
+          "a": 2.07,
+          "b": 1.88
+        },
+        {
+          "a": 2.07,
+          "b": 1.86
+        },
+        {
+          "a": 2.09,
+          "b": 1.86
+        },
+        {
+          "a": 2.09,
+          "b": 1.84
+        },
+        {
+          "a": 2.11,
+          "b": 1.84
+        },
+        {
+          "a": 2.11,
+          "b": 1.82
+        },
+        {
+          "a": 2.13,
+          "b": 1.82
+        },
+        {
+          "a": 2.13,
+          "b": 1.8
+        },
+        {
+          "a": 2.15,
+          "b": 1.8
+        },
+        {
+          "a": 2.15,
+          "b": 1.78
+        },
+        {
+          "a": 2.17,
+          "b": 1.78
+        },
+        {
+          "a": 2.17,
+          "b": 1.76
+        },
+        {
+          "a": 2.19,
+          "b": 1.76
+        },
+        {
+          "a": 2.19,
+          "b": 1.74
+        },
+        {
+          "a": 2.21,
+          "b": 1.74
+        },
+        {
+          "a": 2.21,
+          "b": 1.72
+        },
+        {
+          "a": 2.23,
+          "b": 1.72
+        },
+        {
+          "a": 2.23,
+          "b": 1.74
+        },
+        {
+          "a": 2.25,
+          "b": 1.74
+        },
+        {
+          "a": 2.25,
+          "b": 1.76
+        },
+        {
+          "a": 2.27,
+          "b": 1.76
+        },
+        {
+          "a": 2.27,
+          "b": 1.78
+        },
+        {
+          "a": 2.29,
+          "b": 1.78
+        },
+        {
+          "a": 2.29,
+          "b": 1.8
+        },
+        {
+          "a": 2.31,
+          "b": 1.8
+        },
+        {
+          "a": 2.31,
+          "b": 1.82
+        },
+        {
+          "a": 2.33,
+          "b": 1.82
+        },
+        {
+          "a": 2.33,
+          "b": 1.84
+        },
+        {
+          "a": 2.35,
+          "b": 1.84
+        },
+        {
+          "a": 2.35,
+          "b": 1.86
+        },
+        {
+          "a": 2.37,
+          "b": 1.86
+        },
+        {
+          "a": 2.37,
+          "b": 1.88
+        },
+        {
+          "a": 2.39,
+          "b": 1.88
+        },
+        {
+          "a": 2.39,
+          "b": 1.9
+        },
+        {
+          "a": 2.41,
+          "b": 1.9
+        },
+        {
+          "a": 2.41,
+          "b": 1.92
+        },
+        {
+          "a": 2.43,
+          "b": 1.92
+        },
+        {
+          "a": 2.43,
+          "b": 1.94
+        },
+        {
+          "a": 2.45,
+          "b": 1.94
+        },
+        {
+          "a": 2.45,
+          "b": 1.96
+        },
+        {
+          "a": 2.47,
+          "b": 1.96
+        },
+        {
+          "a": 2.47,
+          "b": 1.98
+        },
+        {
+          "a": 2.49,
+          "b": 1.98
+        },
+        {
+          "a": 2.49,
+          "b": 2
+        },
+        {
+          "a": 2.51,
+          "b": 2
+        },
+        {
+          "a": 2.51,
+          "b": 2.02
+        },
+        {
+          "a": 2.53,
+          "b": 2.02
+        },
+        {
+          "a": 2.53,
+          "b": 2.04
+        },
+        {
+          "a": 2.55,
+          "b": 2.04
+        },
+        {
+          "a": 2.55,
+          "b": 2.06
+        },
+        {
+          "a": 2.57,
+          "b": 2.06
+        },
+        {
+          "a": 2.57,
+          "b": 2.08
+        },
+        {
+          "a": 2.59,
+          "b": 2.08
+        },
+        {
+          "a": 2.59,
+          "b": 2.1
+        },
+        {
+          "a": 2.61,
+          "b": 2.1
+        },
+        {
+          "a": 2.61,
+          "b": 2.12
+        },
+        {
+          "a": 2.63,
+          "b": 2.12
+        },
+        {
+          "a": 2.63,
+          "b": 2.14
+        },
+        {
+          "a": 2.65,
+          "b": 2.14
+        },
+        {
+          "a": 2.65,
+          "b": 2.16
+        },
+        {
+          "a": 2.67,
+          "b": 2.16
+        },
+        {
+          "a": 2.67,
+          "b": 2.18
+        },
+        {
+          "a": 2.69,
+          "b": 2.18
+        },
+        {
+          "a": 2.69,
+          "b": 2.2
+        },
+        {
+          "a": 2.71,
+          "b": 2.2
+        },
+        {
+          "a": 2.71,
+          "b": 2.22
+        },
+        {
+          "a": 7.39,
+          "b": 2.22
+        },
+        {
+          "a": 7.39,
+          "b": 2.2
+        },
+        {
+          "a": 7.41,
+          "b": 2.2
+        },
+        {
+          "a": 7.41,
+          "b": 2.18
+        },
+        {
+          "a": 7.43,
+          "b": 2.18
+        },
+        {
+          "a": 7.43,
+          "b": 2.16
+        },
+        {
+          "a": 7.45,
+          "b": 2.16
+        },
+        {
+          "a": 7.45,
+          "b": 2.14
+        },
+        {
+          "a": 7.47,
+          "b": 2.14
+        },
+        {
+          "a": 7.47,
+          "b": 2.12
+        },
+        {
+          "a": 7.49,
+          "b": 2.12
+        },
+        {
+          "a": 7.49,
+          "b": 2.1
+        },
+        {
+          "a": 7.51,
+          "b": 2.1
+        },
+        {
+          "a": 7.51,
+          "b": 2.08
+        },
+        {
+          "a": 7.53,
+          "b": 2.08
+        },
+        {
+          "a": 7.53,
+          "b": 2.06
+        },
+        {
+          "a": 7.55,
+          "b": 2.06
+        },
+        {
+          "a": 7.55,
+          "b": 2.04
+        },
+        {
+          "a": 7.57,
+          "b": 2.04
+        },
+        {
+          "a": 7.57,
+          "b": 2.02
+        },
+        {
+          "a": 7.59,
+          "b": 2.02
+        },
+        {
+          "a": 7.59,
+          "b": 2
+        },
+        {
+          "a": 7.61,
+          "b": 2
+        },
+        {
+          "a": 7.61,
+          "b": 1.98
+        },
+        {
+          "a": 7.63,
+          "b": 1.98
+        },
+        {
+          "a": 7.63,
+          "b": 1.96
+        },
+        {
+          "a": 7.65,
+          "b": 1.96
+        },
+        {
+          "a": 7.65,
+          "b": 1.94
+        },
+        {
+          "a": 7.67,
+          "b": 1.94
+        },
+        {
+          "a": 7.67,
+          "b": 1.92
+        },
+        {
+          "a": 7.69,
+          "b": 1.92
+        },
+        {
+          "a": 7.69,
+          "b": 1.9
+        },
+        {
+          "a": 7.71,
+          "b": 1.9
+        },
+        {
+          "a": 7.71,
+          "b": 1.88
+        },
+        {
+          "a": 7.73,
+          "b": 1.88
+        },
+        {
+          "a": 7.73,
+          "b": 1.86
+        },
+        {
+          "a": 7.75,
+          "b": 1.86
+        },
+        {
+          "a": 7.75,
+          "b": 1.84
+        },
+        {
+          "a": 7.77,
+          "b": 1.84
+        },
+        {
+          "a": 7.77,
+          "b": 1.82
+        },
+        {
+          "a": 7.79,
+          "b": 1.82
+        },
+        {
+          "a": 7.79,
+          "b": 1.8
+        },
+        {
+          "a": 7.81,
+          "b": 1.8
+        },
+        {
+          "a": 7.81,
+          "b": 1.78
+        },
+        {
+          "a": 7.83,
+          "b": 1.78
+        },
+        {
+          "a": 7.83,
+          "b": 1.76
+        },
+        {
+          "a": 7.85,
+          "b": 1.76
+        },
+        {
+          "a": 7.85,
+          "b": 1.74
+        },
+        {
+          "a": 7.87,
+          "b": 1.74
+        },
+        {
+          "a": 7.87,
+          "b": 1.72
+        },
+        {
+          "a": 7.89,
+          "b": 1.72
+        },
+        {
+          "a": 7.89,
+          "b": 1.7
+        },
+        {
+          "a": 7.91,
+          "b": 1.7
+        },
+        {
+          "a": 7.91,
+          "b": 1.68
+        },
+        {
+          "a": 7.93,
+          "b": 1.68
+        },
+        {
+          "a": 7.93,
+          "b": 1.66
+        },
+        {
+          "a": 7.95,
+          "b": 1.66
+        },
+        {
+          "a": 7.95,
+          "b": 1.64
+        },
+        {
+          "a": 7.97,
+          "b": 1.64
+        },
+        {
+          "a": 7.97,
+          "b": 1.62
+        },
+        {
+          "a": 7.99,
+          "b": 1.62
+        },
+        {
+          "a": 7.99,
+          "b": 1.6
+        },
+        {
+          "a": 8.01,
+          "b": 1.6
+        },
+        {
+          "a": 8.01,
+          "b": 1.58
+        },
+        {
+          "a": 8.03,
+          "b": 1.58
+        },
+        {
+          "a": 8.03,
+          "b": 1.56
+        },
+        {
+          "a": 8.05,
+          "b": 1.56
+        },
+        {
+          "a": 8.05,
+          "b": 1.54
+        },
+        {
+          "a": 8.07,
+          "b": 1.54
+        },
+        {
+          "a": 8.07,
+          "b": 1.52
+        },
+        {
+          "a": 8.09,
+          "b": 1.52
+        },
+        {
+          "a": 8.09,
+          "b": 1.5
+        },
+        {
+          "a": 8.11,
+          "b": 1.5
+        },
+        {
+          "a": 8.11,
+          "b": 1.48
+        },
+        {
+          "a": 8.13,
+          "b": 1.48
+        },
+        {
+          "a": 8.13,
+          "b": 1.46
+        },
+        {
+          "a": 8.15,
+          "b": 1.46
+        },
+        {
+          "a": 8.15,
+          "b": 1.44
+        },
+        {
+          "a": 8.17,
+          "b": 1.44
+        },
+        {
+          "a": 8.17,
+          "b": 1.42
+        },
+        {
+          "a": 8.19,
+          "b": 1.42
+        },
+        {
+          "a": 8.19,
+          "b": 1.4
+        },
+        {
+          "a": 8.21,
+          "b": 1.4
+        },
+        {
+          "a": 8.21,
+          "b": 1.38
+        },
+        {
+          "a": 8.23,
+          "b": 1.38
+        },
+        {
+          "a": 8.23,
+          "b": 1.36
+        },
+        {
+          "a": 8.25,
+          "b": 1.36
+        },
+        {
+          "a": 8.25,
+          "b": 1.34
+        },
+        {
+          "a": 8.27,
+          "b": 1.34
+        },
+        {
+          "a": 8.27,
+          "b": 1.32
+        },
+        {
+          "a": 8.29,
+          "b": 1.32
+        },
+        {
+          "a": 8.29,
+          "b": 1.3
+        },
+        {
+          "a": 8.31,
+          "b": 1.3
+        },
+        {
+          "a": 8.31,
+          "b": 1.28
+        },
+        {
+          "a": 8.33,
+          "b": 1.28
+        },
+        {
+          "a": 8.33,
+          "b": 1.26
+        },
+        {
+          "a": 8.35,
+          "b": 1.26
+        },
+        {
+          "a": 8.35,
+          "b": 1.24
+        },
+        {
+          "a": 8.37,
+          "b": 1.24
+        },
+        {
+          "a": 8.37,
+          "b": 1.22
+        },
+        {
+          "a": 8.39,
+          "b": 1.22
+        },
+        {
+          "a": 8.39,
+          "b": 1.2
+        },
+        {
+          "a": 8.41,
+          "b": 1.2
+        },
+        {
+          "a": 8.41,
+          "b": 1.18
+        },
+        {
+          "a": 8.43,
+          "b": 1.18
+        },
+        {
+          "a": 8.43,
+          "b": 1.16
+        },
+        {
+          "a": 8.45,
+          "b": 1.16
+        },
+        {
+          "a": 8.45,
+          "b": 1.14
+        },
+        {
+          "a": 8.47,
+          "b": 1.14
+        },
+        {
+          "a": 8.47,
+          "b": 1.12
+        },
+        {
+          "a": 8.49,
+          "b": 1.12
+        },
+        {
+          "a": 8.49,
+          "b": 1.1
+        },
+        {
+          "a": 8.51,
+          "b": 1.1
+        },
+        {
+          "a": 8.51,
+          "b": 1.08
+        },
+        {
+          "a": 8.53,
+          "b": 1.08
+        },
+        {
+          "a": 8.53,
+          "b": 1.06
+        },
+        {
+          "a": 8.55,
+          "b": 1.06
+        },
+        {
+          "a": 8.55,
+          "b": 1.04
+        },
+        {
+          "a": 8.57,
+          "b": 1.04
+        },
+        {
+          "a": 8.57,
+          "b": 1.02
+        },
+        {
+          "a": 8.59,
+          "b": 1.02
+        },
+        {
+          "a": 8.59,
+          "b": 1
+        },
+        {
+          "a": 8.61,
+          "b": 1
+        },
+        {
+          "a": 8.61,
+          "b": 0.98
+        },
+        {
+          "a": 8.63,
+          "b": 0.98
+        },
+        {
+          "a": 8.63,
+          "b": 0.96
+        },
+        {
+          "a": 8.65,
+          "b": 0.96
+        },
+        {
+          "a": 8.65,
+          "b": 0.94
+        },
+        {
+          "a": 8.67,
+          "b": 0.94
+        },
+        {
+          "a": 8.67,
+          "b": 0.92
+        },
+        {
+          "a": 8.69,
+          "b": 0.92
+        },
+        {
+          "a": 8.69,
+          "b": 0.9
+        },
+        {
+          "a": 8.71,
+          "b": 0.9
+        },
+        {
+          "a": 8.71,
+          "b": 0.88
+        },
+        {
+          "a": 8.73,
+          "b": 0.88
+        },
+        {
+          "a": 8.73,
+          "b": 0.86
+        },
+        {
+          "a": 8.75,
+          "b": 0.86
+        },
+        {
+          "a": 8.75,
+          "b": 0.84
+        },
+        {
+          "a": 8.77,
+          "b": 0.84
+        },
+        {
+          "a": 8.77,
+          "b": 0.82
+        },
+        {
+          "a": 8.79,
+          "b": 0.82
+        },
+        {
+          "a": 8.79,
+          "b": 0.8
+        },
+        {
+          "a": 8.83,
+          "b": 0.8
+        },
+        {
+          "a": 8.83,
+          "b": 0.82
+        },
+        {
+          "a": 8.85,
+          "b": 0.82
+        },
+        {
+          "a": 8.85,
+          "b": 0.84
+        },
+        {
+          "a": 8.87,
+          "b": 0.84
+        },
+        {
+          "a": 8.87,
+          "b": 0.86
+        },
+        {
+          "a": 8.89,
+          "b": 0.86
+        },
+        {
+          "a": 8.89,
+          "b": 0.88
+        },
+        {
+          "a": 8.91,
+          "b": 0.88
+        },
+        {
+          "a": 8.91,
+          "b": 0.9
+        },
+        {
+          "a": 8.93,
+          "b": 0.9
+        },
+        {
+          "a": 8.93,
+          "b": 0.92
+        },
+        {
+          "a": 8.95,
+          "b": 0.92
+        },
+        {
+          "a": 8.95,
+          "b": 0.94
+        },
+        {
+          "a": 8.97,
+          "b": 0.94
+        },
+        {
+          "a": 8.97,
+          "b": 0.96
+        },
+        {
+          "a": 8.99,
+          "b": 0.96
+        },
+        {
+          "a": 8.99,
+          "b": 0.98
+        },
+        {
+          "a": 9.01,
+          "b": 0.98
+        },
+        {
+          "a": 9.01,
+          "b": 1
+        },
+        {
+          "a": 9.03,
+          "b": 1
+        },
+        {
+          "a": 9.03,
+          "b": 1.02
+        },
+        {
+          "a": 9.05,
+          "b": 1.02
+        },
+        {
+          "a": 9.05,
+          "b": 1.04
+        },
+        {
+          "a": 9.07,
+          "b": 1.04
+        },
+        {
+          "a": 9.07,
+          "b": 1.06
+        },
+        {
+          "a": 9.09,
+          "b": 1.06
+        },
+        {
+          "a": 9.09,
+          "b": 1.08
+        },
+        {
+          "a": 9.11,
+          "b": 1.08
+        },
+        {
+          "a": 9.11,
+          "b": 1.1
+        },
+        {
+          "a": 9.13,
+          "b": 1.1
+        },
+        {
+          "a": 9.13,
+          "b": 1.12
+        },
+        {
+          "a": 9.15,
+          "b": 1.12
+        },
+        {
+          "a": 9.15,
+          "b": 1.14
+        },
+        {
+          "a": 9.17,
+          "b": 1.14
+        },
+        {
+          "a": 9.17,
+          "b": 1.16
+        },
+        {
+          "a": 9.19,
+          "b": 1.16
+        },
+        {
+          "a": 9.19,
+          "b": 1.18
+        },
+        {
+          "a": 9.21,
+          "b": 1.18
+        },
+        {
+          "a": 9.21,
+          "b": 1.2
+        },
+        {
+          "a": 9.23,
+          "b": 1.2
+        },
+        {
+          "a": 9.23,
+          "b": 1.22
+        },
+        {
+          "a": 9.25,
+          "b": 1.22
+        },
+        {
+          "a": 9.25,
+          "b": 1.24
+        },
+        {
+          "a": 9.27,
+          "b": 1.24
+        },
+        {
+          "a": 9.27,
+          "b": 1.26
+        },
+        {
+          "a": 9.29,
+          "b": 1.26
+        },
+        {
+          "a": 9.29,
+          "b": 1.28
+        },
+        {
+          "a": 9.31,
+          "b": 1.28
+        },
+        {
+          "a": 9.31,
+          "b": 1.3
+        },
+        {
+          "a": 9.33,
+          "b": 1.3
+        },
+        {
+          "a": 9.33,
+          "b": 1.32
+        },
+        {
+          "a": 9.35,
+          "b": 1.32
+        },
+        {
+          "a": 9.35,
+          "b": 1.34
+        },
+        {
+          "a": 9.37,
+          "b": 1.34
+        },
+        {
+          "a": 9.37,
+          "b": 1.36
+        },
+        {
+          "a": 9.39,
+          "b": 1.36
+        },
+        {
+          "a": 9.39,
+          "b": 1.38
+        },
+        {
+          "a": 9.41,
+          "b": 1.38
+        },
+        {
+          "a": 9.41,
+          "b": 1.4
+        },
+        {
+          "a": 9.43,
+          "b": 1.4
+        },
+        {
+          "a": 9.43,
+          "b": 1.42
+        },
+        {
+          "a": 9.45,
+          "b": 1.42
+        },
+        {
+          "a": 9.45,
+          "b": 1.44
+        },
+        {
+          "a": 9.47,
+          "b": 1.44
+        },
+        {
+          "a": 9.47,
+          "b": 1.46
+        },
+        {
+          "a": 9.49,
+          "b": 1.46
+        },
+        {
+          "a": 9.49,
+          "b": 1.48
+        },
+        {
+          "a": 9.51,
+          "b": 1.48
+        },
+        {
+          "a": 9.51,
+          "b": 1.5
+        },
+        {
+          "a": 9.53,
+          "b": 1.5
+        },
+        {
+          "a": 9.53,
+          "b": 1.52
+        },
+        {
+          "a": 9.55,
+          "b": 1.52
+        },
+        {
+          "a": 9.55,
+          "b": 1.54
+        },
+        {
+          "a": 9.57,
+          "b": 1.54
+        },
+        {
+          "a": 9.57,
+          "b": 1.56
+        },
+        {
+          "a": 9.59,
+          "b": 1.56
+        },
+        {
+          "a": 9.59,
+          "b": 1.58
+        },
+        {
+          "a": 9.61,
+          "b": 1.58
+        },
+        {
+          "a": 9.61,
+          "b": 1.6
+        },
+        {
+          "a": 9.63,
+          "b": 1.6
+        },
+        {
+          "a": 9.63,
+          "b": 1.62
+        },
+        {
+          "a": 9.65,
+          "b": 1.62
+        },
+        {
+          "a": 9.65,
+          "b": 1.64
+        },
+        {
+          "a": 9.67,
+          "b": 1.64
+        },
+        {
+          "a": 9.67,
+          "b": 1.66
+        },
+        {
+          "a": 9.69,
+          "b": 1.66
+        },
+        {
+          "a": 9.69,
+          "b": 1.68
+        },
+        {
+          "a": 9.71,
+          "b": 1.68
+        },
+        {
+          "a": 9.71,
+          "b": 1.7
+        },
+        {
+          "a": 9.73,
+          "b": 1.7
+        },
+        {
+          "a": 9.73,
+          "b": 1.72
+        },
+        {
+          "a": 9.75,
+          "b": 1.72
+        },
+        {
+          "a": 9.75,
+          "b": 1.74
+        },
+        {
+          "a": 9.77,
+          "b": 1.74
+        },
+        {
+          "a": 9.77,
+          "b": 1.76
+        },
+        {
+          "a": 9.79,
+          "b": 1.76
+        },
+        {
+          "a": 9.79,
+          "b": 1.78
+        },
+        {
+          "a": 9.81,
+          "b": 1.78
+        },
+        {
+          "a": 9.81,
+          "b": 1.8
+        },
+        {
+          "a": 9.83,
+          "b": 1.8
+        },
+        {
+          "a": 9.83,
+          "b": 1.82
+        },
+        {
+          "a": 9.85,
+          "b": 1.82
+        },
+        {
+          "a": 9.85,
+          "b": 1.84
+        },
+        {
+          "a": 9.87,
+          "b": 1.84
+        },
+        {
+          "a": 9.87,
+          "b": 1.86
+        },
+        {
+          "a": 9.89,
+          "b": 1.86
+        },
+        {
+          "a": 9.89,
+          "b": 1.88
+        },
+        {
+          "a": 9.91,
+          "b": 1.88
+        },
+        {
+          "a": 9.91,
+          "b": 1.9
+        },
+        {
+          "a": 9.93,
+          "b": 1.9
+        },
+        {
+          "a": 9.93,
+          "b": 1.92
+        },
+        {
+          "a": 9.95,
+          "b": 1.92
+        },
+        {
+          "a": 9.95,
+          "b": 1.94
+        },
+        {
+          "a": 9.97,
+          "b": 1.94
+        },
+        {
+          "a": 9.97,
+          "b": 1.96
+        },
+        {
+          "a": 9.99,
+          "b": 1.96
+        },
+        {
+          "a": 9.99,
+          "b": 1.98
+        },
+        {
+          "a": 10.01,
+          "b": 1.98
+        },
+        {
+          "a": 10.01,
+          "b": 2
+        },
+        {
+          "a": 10.03,
+          "b": 2
+        },
+        {
+          "a": 10.03,
+          "b": 2.02
+        },
+        {
+          "a": 10.05,
+          "b": 2.02
+        },
+        {
+          "a": 10.05,
+          "b": 2.04
+        },
+        {
+          "a": 10.07,
+          "b": 2.04
+        },
+        {
+          "a": 10.07,
+          "b": 2.06
+        },
+        {
+          "a": 10.09,
+          "b": 2.06
+        },
+        {
+          "a": 10.09,
+          "b": 2.08
+        },
+        {
+          "a": 10.11,
+          "b": 2.08
+        },
+        {
+          "a": 10.11,
+          "b": 2.14
+        },
+        {
+          "a": 10.13,
+          "b": 2.14
+        },
+        {
+          "a": 10.13,
+          "b": 2.16
+        },
+        {
+          "a": 10.15,
+          "b": 2.16
+        },
+        {
+          "a": 10.15,
+          "b": 2.18
+        },
+        {
+          "a": 10.17,
+          "b": 2.18
+        },
+        {
+          "a": 10.17,
+          "b": 2.2
+        },
+        {
+          "a": 10.19,
+          "b": 2.2
+        },
+        {
+          "a": 10.19,
+          "b": 2.22
+        },
+        {
+          "a": 11.55,
+          "b": 2.22
+        },
+        {
+          "a": 11.55,
+          "b": 2.72
+        },
+        {
+          "a": 6.59,
+          "b": 2.72
+        },
+        {
+          "a": 6.59,
+          "b": 2.8
+        }
+      ],
+      "rect": {
+        "a0": 0.03,
+        "a1": 11.55,
+        "b0": 0.8,
+        "b1": 2.8
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a timber outline from sketch-61338873-d0b71aa74c42-appearance (API_CONTOUR_READING): colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-1-w2",
+      "id": "appearance-rear-ring-main-1-w2-timber-0",
+      "materialId": "mat-timber",
+      "outline": [
+        {
+          "a": 6.57,
+          "b": 0.7
+        },
+        {
+          "a": 3.91,
+          "b": 0.7
+        },
+        {
+          "a": 3.91,
+          "b": 0.68
+        },
+        {
+          "a": 3.89,
+          "b": 0.68
+        },
+        {
+          "a": 3.89,
+          "b": 0
+        },
+        {
+          "a": 6.59,
+          "b": 0
+        },
+        {
+          "a": 6.59,
+          "b": 0.68
+        },
+        {
+          "a": 6.57,
+          "b": 0.68
+        }
+      ],
+      "rect": {
+        "a0": 3.89,
+        "a1": 6.59,
+        "b0": 0,
+        "b1": 0.7
+      }
+    }
+  ],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w0"
+      },
+      "id": "ring-main-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w1"
+      },
+      "id": "ring-main-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w2"
+      },
+      "id": "ring-main-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w3"
+      },
+      "id": "ring-main-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w0"
+      },
+      "id": "ring-main-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w1"
+      },
+      "id": "ring-main-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w2"
+      },
+      "id": "ring-main-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w3"
+      },
+      "id": "ring-main-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "11.55 × 7.75 m body from the plan's printed chains and wall bands",
+        "status": "SOURCE_EXACT"
+      },
+      "id": "ring-main-0",
+      "junctionIds": [
+        "ring-main-0-j0",
+        "ring-main-0-j1",
+        "ring-main-0-j2",
+        "ring-main-0-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-main-0-w0",
+        "ring-main-0-w1",
+        "ring-main-0-w2",
+        "ring-main-0-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "storey 1's own walls, 11.17 × 7.75 m: the walled region of that storey's plan, registered onto the body below, where it stands on the body",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-main-1",
+      "junctionIds": [
+        "ring-main-1-j0",
+        "ring-main-1-j1",
+        "ring-main-1-j2",
+        "ring-main-1-j3"
+      ],
+      "levelId": "lvl-1",
+      "wallIds": [
+        "ring-main-1-w0",
+        "ring-main-1-w1",
+        "ring-main-1-w2",
+        "ring-main-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.261994,
+        "z": 4.390653
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.250033,
+        "z": 4.390653
+      },
+      "thickness": 0.121336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.582666,
+        "z": 2.934681
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 2 door gaps",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.288006,
+        "z": 2.934681
+      },
+      "thickness": 0.273006,
+      "topProfile": {
+        "kind": "POLYLINE",
+        "points": [
+          {
+            "height": 2.52,
+            "u": 0
+          },
+          {
+            "height": 2.52,
+            "u": 3.618378
+          },
+          {
+            "height": 1.997778,
+            "u": 3.618378
+          },
+          {
+            "height": 1.997778,
+            "u": 4.611803
+          },
+          {
+            "height": 2.52,
+            "u": 4.611803
+          },
+          {
+            "height": 2.52,
+            "u": 6.29466
+          }
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.963953,
+        "z": 2.934681
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.037689,
+        "z": 2.934681
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.261994,
+        "z": 2.934681
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 11.057058,
+        "z": 2.934681
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.482147,
+        "z": 2.601026
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-8",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.186212,
+        "z": 2.601026
+      },
+      "thickness": 0.075835,
+      "topProfile": {
+        "kind": "POLYLINE",
+        "points": [
+          {
+            "height": 1.842222,
+            "u": 0
+          },
+          {
+            "height": 1.842222,
+            "u": 0.295935
+          }
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.964181,
+        "z": 2.919681
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 1.964181,
+        "z": 0.288006
+      },
+      "thickness": 0.121336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.663984,
+        "z": 2.919681
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-4",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.663984,
+        "z": 0.288006
+      },
+      "thickness": 0.166837,
+      "topProfile": {
+        "kind": "POLYLINE",
+        "points": [
+          {
+            "height": 2.52,
+            "u": 0
+          },
+          {
+            "height": 2.52,
+            "u": 0.887356
+          },
+          {
+            "height": 1.064444,
+            "u": 0.887356
+          },
+          {
+            "height": 1.064444,
+            "u": 1.880781
+          },
+          {
+            "height": 1.686667,
+            "u": 1.880781
+          },
+          {
+            "height": 1.686667,
+            "u": 2.138884
+          },
+          {
+            "height": 1.842222,
+            "u": 2.138884
+          },
+          {
+            "height": 1.842222,
+            "u": 2.396987
+          },
+          {
+            "height": 1.997778,
+            "u": 2.396987
+          },
+          {
+            "height": 1.997778,
+            "u": 2.631675
+          }
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.346518,
+        "z": 3.791585
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.346518,
+        "z": 3.222687
+      },
+      "thickness": 0.121336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.817759,
+        "z": 3.200098
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.817759,
+        "z": 0.288006
+      },
+      "thickness": 0.121336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.515459,
+        "z": 7.46184
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-7",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.515459,
+        "z": 4.526989
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.971534,
+        "z": 2.919681
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-8",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.971534,
+        "z": 0.288006
+      },
+      "thickness": 0.227505
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.163568,
+        "z": 6.739704
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.665296,
+        "z": 6.739704
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.261994,
+        "z": 6.739704
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.378856,
+        "z": 6.739704
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.212214,
+        "z": 2.864459
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-10",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.79501,
+        "z": 2.864459
+      },
+      "thickness": 0.091095,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.212214,
+        "z": 2.682081
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-11",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.79501,
+        "z": 2.682081
+      },
+      "thickness": 0.06073,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.031386,
+        "z": 2.590907
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-12",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.665296,
+        "z": 2.590907
+      },
+      "thickness": 0.075913,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.261994,
+        "z": 0.873677
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-14",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.665296,
+        "z": 0.873677
+      },
+      "thickness": 0.136643,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.33146,
+        "z": 5.159204
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.315028,
+        "z": 5.159204
+      },
+      "thickness": 0.091095,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.053907,
+        "z": 5.144021
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-4",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.378856,
+        "z": 5.144021
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.261994,
+        "z": 5.144021
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 10.450361,
+        "z": 5.144021
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.212214,
+        "z": 3.776293
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.315028,
+        "z": 3.776293
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 1.031386,
+        "z": 2.864459
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-x-8",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.665296,
+        "z": 2.864459
+      },
+      "thickness": 0.091095,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.300028,
+        "z": 7.461994
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-z-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.300028,
+        "z": 1.025319
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.573049,
+        "z": 3.761293
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-z-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.573049,
+        "z": 1.025319
+      },
+      "thickness": 0.136643,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.46792,
+        "z": 7.461994
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-z-3",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 5.46792,
+        "z": 5.090774
+      },
+      "thickness": 0.12146,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.363857,
+        "z": 7.461994
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.3,
+      "id": "main-iwall-1-z-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 7.363857,
+        "z": 1.025319
+      },
+      "thickness": 0.136643,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.6151,
+        "z": 4.375653
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-nib-0-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.6151,
+        "z": 3.222687
+      },
+      "thickness": 0.121336
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.55,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.55,
+        "z": 7.75
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.55,
+        "z": 0
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 7.75
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.55,
+        "z": 7.75
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-render-mid",
+      "start": {
+        "x": 0,
+        "z": 7.75
+      },
+      "thickness": 0.273006
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.55,
+        "z": 0
+      },
+      "height": 4.3,
+      "id": "ring-main-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0.37729,
+        "z": 0
+      },
+      "thickness": 0.273006,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 11.55,
+        "z": 7.75
+      },
+      "height": 4.3,
+      "id": "ring-main-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.55,
+        "z": 0
+      },
+      "thickness": 0.273006,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.37729,
+        "z": 7.75
+      },
+      "height": 4.3,
+      "id": "ring-main-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 11.55,
+        "z": 7.75
+      },
+      "thickness": 0.273006,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0.37729,
+        "z": 0
+      },
+      "height": 4.3,
+      "id": "ring-main-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-render-mid",
+      "start": {
+        "x": 0.37729,
+        "z": 7.75
+      },
+      "thickness": 0.273006,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-3-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-3"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-4-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-4"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-rear-2-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-rear-2-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-west-3-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-west-3-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-east-5-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-east-5-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-3-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-3"
+    }
+  ]
+}

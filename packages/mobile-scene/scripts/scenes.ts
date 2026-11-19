@@ -49,6 +49,25 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.15 (Ballina, the regression house): the consultant's level marks admitted by the section's own ladder reach
+  // the model — the ridge datum 5.54 (the template's +15.50 overruled), eaves 3.373, the gable at the page's 28°; the
+  // full side drawings registered by their labels; finishes from three sketches (the form sketch rolled back: it would
+  // have cost an opening). The LEFT window and the ceiling (+2,80, no symbol) are named gaps.
+  {
+    key: 'ballina-v35415',
+    title: 'Ballina — v3.54.15: dach z rzędnych przekroju (oddany)',
+    subtitle: 'ODDANY: kalenica 5,54 i okap 3,37 z rzędnych API przyjętych przez przekrój; wykończenia ze szkiców; okno lewe i strop +2,80 nazwane jako luki',
+    build: () => sealedOwnerModel('ballina-v35415', '03d4a742399a91a8fb79e77ef04925dfcb0a521f27b1dd402bcf0e3712bf7585', 'owner-v35415'),
+  },
+  // v3.54.15 (Murcja, the fresh public control, first result on the frozen code): LOCAL alone read 12.72 m storeys and a
+  // 17.1 m ridge; with the section's level marks admitted: storeys 2.80 / 4.30, ridge 7.10, eaves 3.848; finishes from
+  // three sketches; the left side not registered (named). Kept as its first result.
+  {
+    key: 'murcja-v35415',
+    title: 'Murcja — kontrola v3.54.15, pierwszy wynik (kontrolny)',
+    subtitle: 'KONTROLA: pierwszy wynik po zamrożeniu; wysokości z rzędnych przekroju (LOCAL: 12,72 m kondygnacji); lewa elewacja niezarejestrowana',
+    build: () => sealedOwnerModel('murcja-v35415', '4f84df37a80d16088105f269e0fcc15a4e19ebbd7e4a2d908e3456dd3407b840', 'owner-v35415'),
+  },
   // v3.54.14 (delivered): the v3.54.13 miniature with the OWNER's three phone defects fixed in the appearance consumer
   // 1.1.0 — no bare strip at the +3.06 joint (off-grid floor joint), the timber and the white frame continuous behind
   // the balcony and the balustrade (occluded cells join the wall's partition), no dark patches behind the front railing
