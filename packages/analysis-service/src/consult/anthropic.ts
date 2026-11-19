@@ -32,6 +32,9 @@ export function strictInputSchema(schema: unknown): unknown {
   return out
 }
 
+/** v3.54.15: the provider's refusal of a strict grammar it cannot compile (too large); retried once without `strict`. */
+export const STRICT_TOO_LARGE = /compiled grammar is too large|reduce the number of strict tools/i
+
 /** The request body as sent (exported for the transport tests): strict tools and the cache breakpoint when asked. */
 export function requestBody(input: { model: string; maxOutputTokens: number; system: string; messages: unknown[]; tools: unknown[]; effort?: 'low' | 'medium' | 'high'; strict?: boolean; cache?: { ttl: '5m' | '1h' } }): Record<string, unknown> {
   const tools = input.strict ? input.tools.map((t) => ({ ...(t as Record<string, unknown>), input_schema: strictInputSchema((t as { input_schema?: unknown }).input_schema), strict: true })) : input.tools
@@ -65,8 +68,19 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
       client ??= create(key, timeoutMs)
       const started = Date.now()
       let r: Awaited<ReturnType<MessagesLike['messages']['create']>>
+      let strictFallback: string | undefined
+      const body = (strict: boolean) => requestBody({ model, maxOutputTokens, system, messages, tools, ...(options.effort ? { effort: options.effort } : {}), ...(strict ? { strict: true } : {}), ...(options.cache ? { cache: options.cache } : {}) })
       try {
-        r = await (await client).messages.create(requestBody({ model, maxOutputTokens, system, messages, tools, ...(options.effort ? { effort: options.effort } : {}), ...(options.strict ? { strict: true } : {}), ...(options.cache ? { cache: options.cache } : {}) }), signal ? { signal } : undefined)
+        try {
+          r = await (await client).messages.create(body(options.strict === true), signal ? { signal } : undefined)
+        } catch (e) {
+          // v3.54.15: a strict grammar the provider will not compile (a large answer schema with several tools) is refused
+          // unbilled (400); that one request goes again without `strict` — the answer is still validated here — and says so
+          const status = (e as { status?: unknown }).status
+          if (!(options.strict === true && status === 400 && STRICT_TOO_LARGE.test((e as Error).message))) throw e
+          strictFallback = scrub((e as Error).message).slice(0, 200)
+          r = await (await client).messages.create(body(false), signal ? { signal } : undefined)
+        }
       } catch (e) {
         const status = (e as { status?: unknown }).status
         const unbilled = typeof status === 'number' && [400, 401, 403, 404, 413, 429].includes(status)
@@ -80,6 +94,7 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
         ...(r._request_id ? { requestId: r._request_id } : {}),
         model: r.model ?? model,
         latencyMs: Date.now() - started,
+        ...(strictFallback ? { strictFallback } : {}),
       }
     },
   }

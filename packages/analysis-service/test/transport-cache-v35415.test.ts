@@ -69,3 +69,32 @@ describe('v3.54.15 one price for every step', () => {
     expect(reserveOf(CONSULT_PRICES['claude-sonnet-5-5'], 1000, 100, { ttl: '1h' })).toBeCloseTo((1000 * 4 + 100 * 10) / 1e6, 9)
   })
 })
+
+describe('v3.54.15 a strict grammar the provider will not compile', () => {
+  const tooLarge = Object.assign(new Error('400 {"type":"error","error":{"type":"invalid_request_error","message":"The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the number of strict tools."}}'), { status: 400 })
+  it('is sent once more without strict, the answer kept and the fallback named on the turn', async () => {
+    const sent: Array<Record<string, unknown>> = []
+    const create = async (body: Record<string, unknown>) => {
+      sent.push(body)
+      if ((body.tools as Array<{ strict?: boolean }>)[0].strict) throw tooLarge
+      return { content: [], stop_reason: 'end_turn', model: 'claude-sonnet-5-5', usage: { input_tokens: 10, output_tokens: 2 } }
+    }
+    const t = anthropicConsultant({ apiKey: 'test-key', strict: true, createClient: async () => ({ messages: { create } }) })
+    const turn = await t.send({ system: 'S', messages, tools: [tool] })
+    expect(sent).toHaveLength(2)
+    expect((sent[1].tools as Array<{ strict?: boolean }>)[0].strict).toBeUndefined()
+    expect(turn.strictFallback).toMatch(/compiled grammar is too large/)
+  })
+  it('counter-trial: another 400 is not retried; without strict nothing is retried', async () => {
+    let n = 0
+    const other = Object.assign(new Error('400 invalid image'), { status: 400 })
+    const create = async () => { n += 1; throw other }
+    const t = anthropicConsultant({ apiKey: 'test-key', strict: true, createClient: async () => ({ messages: { create } }) })
+    await expect(t.send({ system: 'S', messages, tools: [tool] })).rejects.toThrow(/REJECTED_UNBILLED|invalid image/)
+    expect(n).toBe(1)
+    let m = 0
+    const plain = anthropicConsultant({ apiKey: 'test-key', createClient: async () => ({ messages: { create: async () => { m += 1; throw tooLarge } } }) })
+    await expect(plain.send({ system: 'S', messages, tools: [tool] })).rejects.toThrow()
+    expect(m).toBe(1)
+  })
+})

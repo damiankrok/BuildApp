@@ -26,7 +26,7 @@ import type { ToolImage } from './tools.js'
 // ---------------------------------------------------------------------------------------------------------------
 
 export type ContentBlock = { type: string; text?: string; id?: string; name?: string; input?: unknown }
-export type ModelTurn = { content: ContentBlock[]; usage: TurnUsage; stopReason?: string; requestId?: string; model: string; latencyMs: number }
+export type ModelTurn = { content: ContentBlock[]; usage: TurnUsage; stopReason?: string; requestId?: string; model: string; latencyMs: number; /** v3.54.15: the provider could not compile this request's strict grammar; it was sent again without `strict` (local validation still applies). */ strictFallback?: string }
 /** One billed request: system, the whole conversation so far, the tools offered. The transport holds the key. */
 export type ConsultantModel = {
   id: string

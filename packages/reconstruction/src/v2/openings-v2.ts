@@ -455,6 +455,11 @@ export type OpeningReadingInput = {
   garageStated?: boolean
   /** EXTERIOR-COMPLETE: the facade's registered views refused for opening heights, used only to read what fills an opening. */
   faceViews?: Array<{ view: ElevationFrameV2; raster: Raster }>
+  /**
+   * v3.54.15: how far each registered view puts the ground from the section's terrain datum (m), by frame. A sill read
+   * on that view within this distance of the floor does not tell a door from a window: the plan's own symbols decide.
+   */
+  groundErrorByFrame?: ReadonlyMap<string, number>
   /** v3.46: the wall's plan gaps when the caller has found them already (to decide callout ownership across the storey). */
   gaps?: ReturnType<typeof planGaps>
   /** v3.46: which gap each callout of the storey belongs to (`calloutOwners`), keyed by `gapOwnerKey`. */
@@ -651,6 +656,17 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       unresolved.push(...raked.notes)
     }
     // --- family
+    // v3.54.15: a sill read on a view whose ground is itself uncertain by more than the sill's height above the floor
+    // says nothing about whether the opening reaches the floor; its kind is the plan's (door symbol, swing, glazing), as
+    // when nothing read its heights. The heights stay as read; only the family is not taken from them.
+    const groundError = elevation ? input.groundErrorByFrame?.get(elevation.frameId) ?? 0 : 0
+    const sillAbove = sillY - host.floorY
+    const kindByPlan = !!elevation && read?.sill === 'IMAGE_METRIC_REGISTERED' && sillAbove >= REACHES_FLOOR_M && sillAbove <= groundError
+    if (kindByPlan) {
+      doorSwing = doorSwingDrawn(input.planRaster, symPlan, symHost, interval, symT)
+      doorBySymbol = widthM <= DOOR_MAX_WIDTH_M && !glazingDrawn(input.planRaster, symPlan, symHost, interval, symT) && !glazingLinesDrawn(input.planRaster, symPlan, symHost, interval, symT, bandCentre) && (doorSwing || host.storeyIndex === 0)
+      unresolved.push(`kind (its sill ${sillAbove.toFixed(2)} m above the floor was read on a view whose ground is ${groundError.toFixed(2)} m from the section's terrain: the plan's symbols decide door or window)`)
+    }
     const mouth = input.vehicleMouth
     const mouthGap = !!mouth && host.storeyIndex === 0 && Math.min(hi, mouth.to) - Math.max(lo, mouth.from) >= 0.8 * Math.max(widthPlan, mouth.to - mouth.from) && !glazingDrawn(input.planRaster, symPlan, symHost, interval, symT)
     const reachesFloor = sillY - host.floorY < REACHES_FLOOR_M
@@ -661,7 +677,7 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       widthM,
       sillAboveFloorM: sillY - host.floorY,
       heightM: headY - sillY,
-      heightsAssumed,
+      heightsAssumed: heightsAssumed || kindByPlan,
       doorBySymbol,
       doorSwing,
       ...(mouthGap && mouth ? { vehicleMouth: { why: mouth.why } } : {}),
