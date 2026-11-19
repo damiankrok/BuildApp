@@ -76,6 +76,7 @@ for (const spec of all('side')) {
     source: { sourceByteHash, imageSha256: createHash('sha256').update(bytes).digest('hex'), imageWidth: png.width, imageHeight: png.height, sourceWidth: sw, sourceHeight: sh },
     toSource: reg.affine.matrix,
     toSourceWhy: `affine fitted on ${anchors.length} building anchors located on both images (v3.54.12 register-sketch points, located by hand); registration verdict ${reg.verdict}; anchor residuals ${anchors.map((a) => a.residualAffinePx.toFixed(1)).join(', ')} px`,
+    toSourceResidualPx: Math.max(0, ...anchors.map((a) => a.residualAffinePx)),
     regions: reading.regions,
     producer: { kind: 'LOCAL_SKETCH_SEGMENTATION', version: SKETCH_READER_VERSION },
   }

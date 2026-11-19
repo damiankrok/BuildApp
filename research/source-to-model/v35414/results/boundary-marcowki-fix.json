@@ -1,0 +1,118 @@
+{
+  "results": {
+    "delivered-v35413": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.81,
+            "precision": 1,
+            "predPx": 181,
+            "recall": 0.68,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.976,
+            "precision": 0.982,
+            "predPx": 758,
+            "recall": 0.97,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.992
+        },
+        "iou": {
+          "DARK_RENDER": 0.939,
+          "LIGHT_RENDER": 0.951,
+          "TIMBER": 0.894
+        },
+        "pixelAgreement": 0.956,
+        "scoredPx": 161317
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 385,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.845,
+            "precision": 0.801,
+            "predPx": 963,
+            "recall": 0.894,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.93,
+          "LIGHT_RENDER": 0.917,
+          "TIMBER": 0.977
+        },
+        "pixelAgreement": 0.953,
+        "scoredPx": 129982
+      }
+    },
+    "fixed-v35414": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.983,
+            "precision": 1,
+            "predPx": 251,
+            "recall": 0.966,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 771,
+            "recall": 1,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 1
+        },
+        "iou": {
+          "DARK_RENDER": 0.985,
+          "LIGHT_RENDER": 0.951,
+          "TIMBER": 0.947
+        },
+        "pixelAgreement": 0.975,
+        "scoredPx": 161317
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 387,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 843,
+            "recall": 1,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.939,
+          "LIGHT_RENDER": 0.928,
+          "TIMBER": 0.977
+        },
+        "pixelAgreement": 0.958,
+        "scoredPx": 129982
+      }
+    }
+  },
+  "tolM": 0.1
+}
+

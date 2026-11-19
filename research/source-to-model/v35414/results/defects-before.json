@@ -1,0 +1,1083 @@
+{
+ "label": "before",
+ "model": "packages/candidates/src/owner-v35413/marcowki-c-v35413.model.json",
+ "FRONT": {
+  "frame": {
+   "a0": -0.025,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 607,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [
+   {
+    "surface": "WALL:ring-main-0-w0[mat-wall] between mat-render-dark",
+    "cells": 9,
+    "yMin": 0.05999954315025491,
+    "yMax": 0.05999954315025491,
+    "aMin": 7.725,
+    "aMax": 7.885,
+    "areaM2": 0.004
+   },
+   {
+    "surface": "WALL:ring-main-0-w0[mat-wall] between mat-timber",
+    "cells": 8,
+    "yMin": 0.039999543150254446,
+    "yMax": 0.35999954315025473,
+    "aMin": 0.725,
+    "aMax": 3.225,
+    "areaM2": 0.003
+   }
+  ],
+  "wallBehindObstruction": [
+   {
+    "where": "BALCONY in front of ring-main-0-w0[mat-wall]",
+    "cells": 8436,
+    "coveredByWallRegion": 0,
+    "uncovered": 8436,
+    "regionMaterials": {}
+   },
+   {
+    "where": "RAILING_POST in front of ring-main-1-w0[mat-wall]",
+    "cells": 180,
+    "coveredByWallRegion": 43,
+    "uncovered": 137,
+    "regionMaterials": {
+     "mat-render-dark": 43
+    }
+   },
+   {
+    "where": "RAILING_RAIL in front of ring-main-1-w0[mat-wall]",
+    "cells": 110,
+    "coveredByWallRegion": 0,
+    "uncovered": 110,
+    "regionMaterials": {}
+   }
+  ],
+  "probes": [
+   {
+    "along": 3.49,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.025",
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.075",
+     "WALL:ring-main-1-w0[mat-wall] d=0.991",
+     "WALL:ring-main-1-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-1-x-3[mat-partition] d=4.714"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.025",
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.075",
+     "WALL:ring-main-1-w0[mat-wall] d=0.991",
+     "WALL:ring-main-1-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-1-x-3[mat-partition] d=4.714"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "SLAB:slab-main-1[mat-slab] d=1.481",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:ring-main-0-w1-party-attached-0[mat-wall] d=1.481"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "SLAB:slab-main-1[mat-slab] d=1.481"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:ring-main-0-w1-party-attached-0[mat-wall] d=1.481"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-3[mat-partition] d=6.237"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-z-5[mat-partition] d=1.496"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:ring-main-0-w1-party-attached-0[mat-wall] d=1.481"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-3[mat-partition] d=6.237"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-6[mat-partition] d=3.482"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-z-5[mat-partition] d=1.496"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:main-iwall-0-x-5[mat-partition] d=4.555"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=1.481",
+     "WALL:ring-main-0-w1-party-attached-0[mat-wall] d=1.481"
+    ]
+   }
+  ]
+ },
+ "REAR": {
+  "frame": {
+   "a0": -0.025,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 607,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [
+   {
+    "surface": "RAILING_RAIL:railing-rear-1[mat-glass] between mat-render-dark",
+    "cells": 140,
+    "yMin": 3.9599995431502553,
+    "yMax": 3.979999543150255,
+    "aMin": 0.725,
+    "aMax": 4.5649999999999995,
+    "areaM2": 0.056
+   },
+   {
+    "surface": "WALL:ring-main-0-w2[mat-wall] between mat-timber",
+    "cells": 3,
+    "yMin": 0.09999954315025494,
+    "yMax": 0.13999954315025498,
+    "aMin": 0.705,
+    "aMax": 0.705,
+    "areaM2": 0.001
+   },
+   {
+    "surface": "WALL:ring-main-1-w2[mat-wall] between mat-render-dark",
+    "cells": 2,
+    "yMin": 6.6599995431502546,
+    "yMax": 6.6599995431502546,
+    "aMin": 3.585,
+    "aMax": 3.605,
+    "areaM2": 0.001
+   }
+  ],
+  "wallBehindObstruction": [
+   {
+    "where": "BALCONY in front of ring-main-0-w2[mat-wall]",
+    "cells": 8910,
+    "coveredByWallRegion": 0,
+    "uncovered": 8910,
+    "regionMaterials": {}
+   },
+   {
+    "where": "RAILING_POST in front of ring-main-1-w2[mat-wall]",
+    "cells": 361,
+    "coveredByWallRegion": 88,
+    "uncovered": 273,
+    "regionMaterials": {
+     "mat-render-dark": 88
+    }
+   },
+   {
+    "where": "RAILING_RAIL in front of ring-main-1-w2[mat-wall]",
+    "cells": 179,
+    "coveredByWallRegion": 0,
+    "uncovered": 179,
+    "regionMaterials": {}
+   }
+  ],
+  "probes": [
+   {
+    "along": 3.49,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-3[mat-partition] d=-4.871"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "DOOR_LEAF:main-idoor-1-4-leaf@main-nib-1-1[mat-timber] d=-9.835"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-1[mat-partition] d=-8.580"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.76,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-0[mat-partition] d=-8.659"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.56,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-0[mat-partition] d=-8.659"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.36,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-0[mat-partition] d=-8.659"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.16,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-1-x-0[mat-partition] d=-8.659"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "SLAB:slab-main-1[mat-slab] d=-13.102"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "SLAB:slab-main-1[mat-slab] d=-13.102",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.102",
+     "WALL:main-iwall-0-x-3[mat-partition] d=-6.369"
+    ]
+   }
+  ]
+ },
+ "EAST": {
+  "frame": {
+   "a0": -0.02,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 838,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [],
+  "wallBehindObstruction": [],
+  "probes": []
+ },
+ "WEST": {
+  "frame": {
+   "a0": -0.02,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 838,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [],
+  "wallBehindObstruction": [],
+  "probes": []
+ },
+ "seams": [
+  {
+   "lower": "return-front-0-0",
+   "upper": "return-front-1-0",
+   "sharedM": 0.99,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0.95,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "return-rear-0-0",
+   "upper": "return-rear-1-0",
+   "sharedM": 1.01,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0.7,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "return-rear-0-1",
+   "upper": "return-rear-1-1",
+   "sharedM": 1.01,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0.96,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "ring-main-0-w0",
+   "upper": "ring-main-1-w0",
+   "sharedM": 7.9,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 2.66,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.09
+  },
+  {
+   "lower": "ring-main-0-w1-0",
+   "upper": "ring-main-1-w1",
+   "sharedM": 5.58,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0
+  },
+  {
+   "lower": "ring-main-0-w2",
+   "upper": "ring-main-1-w2",
+   "sharedM": 7.9,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0
+  },
+  {
+   "lower": "ring-main-0-w3",
+   "upper": "ring-main-1-w3",
+   "sharedM": 12.6,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0
+  }
+ ]
+}

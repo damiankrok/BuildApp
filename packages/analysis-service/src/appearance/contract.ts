@@ -14,7 +14,12 @@
 import { z } from 'zod'
 
 export const APPEARANCE_OBSERVATION_SCHEMA = 'buildapp.appearance-observation' as const
-export const APPEARANCE_OBSERVATION_VERSION = '1.0.0' as const
+/**
+ * 1.1.0 (v3.54.14): `toSourceResidualPx`, the largest residual of the map's fit, as a number the consumer uses (it was
+ * prose in `toSourceWhy`). Compatible: a 1.0.0 observation still parses, with no residual known.
+ */
+export const APPEARANCE_OBSERVATION_VERSION = '1.1.0' as const
+export const APPEARANCE_OBSERVATION_VERSIONS_READ = ['1.0.0', '1.1.0'] as const
 
 /** Material classes: what a surface IS (render, timber, glass…), never a product's RGB. */
 export const APPEARANCE_CLASSES = ['LIGHT_RENDER', 'DARK_RENDER', 'TIMBER', 'GLASS', 'ROOF', 'METAL', 'BACKGROUND', 'UNKNOWN'] as const
@@ -47,7 +52,7 @@ export type AppearanceRegion = z.infer<typeof AppearanceRegionSchema>
 export const AppearanceObservationSchema = z
   .object({
     schema: z.literal(APPEARANCE_OBSERVATION_SCHEMA),
-    schemaVersion: z.literal(APPEARANCE_OBSERVATION_VERSION),
+    schemaVersion: z.enum(APPEARANCE_OBSERVATION_VERSIONS_READ),
     observationId: z.string().regex(/^[A-Za-z0-9_.:-]+$/),
     /** The facade the picture shows, in the solver's terms. */
     facade: z.enum(['FRONT', 'REAR', 'EAST', 'WEST']),
@@ -68,6 +73,11 @@ export const AppearanceObservationSchema = z
     toSource: z.tuple([z.tuple([finite, finite, finite]), z.tuple([finite, finite, finite])]),
     /** How the map was found and how well it fits (anchor residuals), or why it is the identity. */
     toSourceWhy: z.string(),
+    /**
+     * 1.1.0: the largest residual of the map's fit on its anchors, in the SOURCE elevation's pixels (0 for the
+     * identity). A boundary of the picture is known on the source only to within this plus the region's own uncertainty.
+     */
+    toSourceResidualPx: z.number().nonnegative().optional(),
     regions: z.array(AppearanceRegionSchema),
     producer: z
       .object({

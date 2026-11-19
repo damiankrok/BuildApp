@@ -34,7 +34,21 @@ export type VisibilityMap = {
   /** Index into `meshes` of the nearest mesh per cell, −1 where nothing is seen. */
   mesh: Int32Array
   meshes: CompiledMesh[]
+  /**
+   * v3.54.14 — the second layer. Where a balustrade (its posts, rails or glass) or a balcony stands in front, the index
+   * into `meshes` of the first surface behind it (at most `OCCLUDER_DEPTH_M` deeper), −1 elsewhere. The elevation shows
+   * the balustrade there, not that surface: what the surface carries is not observed at the cell, though it exists and
+   * has a finish (the wall behind a post is one wall with the wall beside the post).
+   */
+  behind: Int32Array
+  /** The part of the occluder in front of `behind` (an index into `OCCLUDER_PARTS`), −1 elsewhere. */
+  occluder: Int8Array
 }
+
+/** What stands in front of a facade's walls without being a facade: a balustrade and the balcony it stands on. */
+export const OCCLUDER_PARTS = ['RAILING_POST', 'RAILING_RAIL', 'RAILING_INFILL', 'BALCONY'] as const
+/** How far behind an occluder a surface may stand and still be the one it hides (a balcony is about a metre deep). */
+export const OCCLUDER_DEPTH_M = 2.0
 
 /**
  * The parts that are never a surface a finish is seen on: rooms are inside, regions are what the consumer replaces, and
@@ -62,7 +76,16 @@ export function visibilityMap(scene: CompiledScene, facade: Facade, cellM = 0.02
   const h = Math.max(1, Math.ceil((y1 - y0) / cellM) + 2)
   const depth = new Float64Array(w * h).fill(Infinity)
   const mesh = new Int32Array(w * h).fill(-1)
-  meshes.forEach((m, mi) => {
+  // the second layer: the nearest occluder (glass included) and the nearest surface that is not one
+  const occDepth = new Float64Array(w * h).fill(Infinity)
+  const occPart = new Int8Array(w * h).fill(-1)
+  const solidDepth = new Float64Array(w * h).fill(Infinity)
+  const solidMesh = new Int32Array(w * h).fill(-1)
+  const occIndex = (m: CompiledMesh): number => (OCCLUDER_PARTS as readonly string[]).indexOf(m.part)
+  const infill = scene.meshes.filter((m) => m.part === 'RAILING_INFILL')
+  const all = [...meshes.map((m, mi) => ({ m, mi })), ...infill.map((m) => ({ m, mi: -1 }))]
+  all.forEach(({ m, mi }) => {
+    const oi = occIndex(m)
     for (const t of m.triangles) {
       const P = [t.a, t.b, t.c].map((p) => ({ u: (ax.along(p.x, p.z) - a0) / cellM, v: (y1 - p.y) / cellM, d: ax.depth(p.x, p.z) }))
       const den = (P[1].v - P[2].v) * (P[0].u - P[2].u) + (P[2].u - P[1].u) * (P[0].v - P[2].v)
@@ -81,6 +104,16 @@ export function visibilityMap(scene: CompiledScene, facade: Facade, cellM = 0.02
           if (l0 < -1e-9 || l1 < -1e-9 || l2 < -1e-9) continue
           const d = l0 * P[0].d + l1 * P[1].d + l2 * P[2].d
           const k = j * w + i
+          if (oi >= 0) {
+            if (d < occDepth[k] - 1e-6) {
+              occDepth[k] = d
+              occPart[k] = oi
+            }
+          } else if (d < solidDepth[k] - 1e-6) {
+            solidDepth[k] = d
+            solidMesh[k] = mi
+          }
+          if (mi < 0) continue // glass infill: seen through, never the nearest surface
           // nearer wins; on a tie (coplanar faces) the earlier mesh stays: the order is the compiler's, deterministic
           if (d < depth[k] - 1e-6) {
             depth[k] = d
@@ -90,7 +123,14 @@ export function visibilityMap(scene: CompiledScene, facade: Facade, cellM = 0.02
       }
     }
   })
-  return { facade, cellM, a0, y1, w, h, mesh, meshes }
+  const behind = new Int32Array(w * h).fill(-1)
+  const occluder = new Int8Array(w * h).fill(-1)
+  for (let k = 0; k < behind.length; k++) {
+    if (solidMesh[k] < 0 || occDepth[k] >= solidDepth[k] - 1e-6 || solidDepth[k] - occDepth[k] > OCCLUDER_DEPTH_M) continue
+    behind[k] = solidMesh[k]
+    occluder[k] = occPart[k]
+  }
+  return { facade, cellM, a0, y1, w, h, mesh, meshes, behind, occluder }
 }
 
 /** Cell indices → elevation metres (along, up) of the cell's centre, and back. */

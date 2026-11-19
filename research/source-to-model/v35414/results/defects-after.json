@@ -1,0 +1,1092 @@
+{
+ "label": "after",
+ "model": "<private>/v35414/marc-fix/model.json",
+ "FRONT": {
+  "frame": {
+   "a0": -0.025,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 607,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [
+   {
+    "surface": "RAILING_RAIL:railing-front-1[mat-glass] between mat-timber",
+    "cells": 110,
+    "yMin": 3.939999543150255,
+    "yMax": 3.9599995431502553,
+    "aMin": 3.4050000000000002,
+    "aMax": 7.185,
+    "areaM2": 0.044
+   },
+   {
+    "surface": "WALL:ring-main-0-w0[mat-wall] between mat-timber",
+    "cells": 8,
+    "yMin": 0.23999954315025462,
+    "yMax": 0.3799995431502552,
+    "aMin": 0.725,
+    "aMax": 0.725,
+    "areaM2": 0.003
+   }
+  ],
+  "wallBehindObstruction": [
+   {
+    "where": "BALCONY in front of ring-main-0-w0[mat-wall]",
+    "cells": 8436,
+    "coveredByWallRegion": 8436,
+    "uncovered": 0,
+    "regionMaterials": {
+     "mat-timber": 703,
+     "mat-render-dark": 7733
+    }
+   },
+   {
+    "where": "RAILING_POST in front of ring-main-1-w0[mat-wall]",
+    "cells": 180,
+    "coveredByWallRegion": 180,
+    "uncovered": 0,
+    "regionMaterials": {
+     "mat-timber": 180
+    }
+   },
+   {
+    "where": "RAILING_RAIL in front of ring-main-1-w0[mat-wall]",
+    "cells": 110,
+    "coveredByWallRegion": 110,
+    "uncovered": 0,
+    "regionMaterials": {
+     "mat-timber": 110
+    }
+   }
+  ],
+  "probes": [
+   {
+    "along": 3.49,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.025",
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.075",
+     "SURFACE_REGION:appearance-front-ring-main-1-w0-timber-0@ring-main-1-w0[mat-timber] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-1-w0-timber-0@ring-main-1-w0[mat-timber] d=0.988",
+     "WALL:ring-main-1-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.025",
+     "RAILING_RAIL:railing-front-1[mat-glass] d=0.075",
+     "SURFACE_REGION:appearance-front-ring-main-1-w0-timber-0@ring-main-1-w0[mat-timber] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-1-w0-timber-0@ring-main-1-w0[mat-timber] d=0.988",
+     "WALL:ring-main-1-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-timber-0@ring-main-0-w0[mat-timber] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   },
+   {
+    "along": 7.48,
+    "y": 2.36,
+    "stack": [
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.000",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.986",
+     "SURFACE_REGION:appearance-front-ring-main-0-w0-dark-render-0@ring-main-0-w0[mat-render-dark] d=0.988",
+     "WALL:ring-main-0-w0[mat-wall] d=0.991",
+     "BALCONY:balcony-front-1[mat-render-dark] d=0.991"
+    ]
+   }
+  ]
+ },
+ "REAR": {
+  "frame": {
+   "a0": -0.025,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 607,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [
+   {
+    "surface": "RAILING_RAIL:railing-rear-1[mat-glass] between mat-render-dark",
+    "cells": 166,
+    "yMin": 3.9599995431502553,
+    "yMax": 3.979999543150255,
+    "aMin": 0.725,
+    "aMax": 7.165,
+    "areaM2": 0.066
+   },
+   {
+    "surface": "WALL:ring-main-1-w2[mat-wall] between mat-render-dark",
+    "cells": 5,
+    "yMin": 5.819999543150255,
+    "yMax": 6.919999543150255,
+    "aMin": 2.5250000000000004,
+    "aMax": 3.805,
+    "areaM2": 0.002
+   },
+   {
+    "surface": "WALL:ring-main-0-w2[mat-wall] between mat-timber",
+    "cells": 1,
+    "yMin": 0.09999954315025494,
+    "yMax": 0.09999954315025494,
+    "aMin": 0.705,
+    "aMax": 0.705,
+    "areaM2": 0
+   }
+  ],
+  "wallBehindObstruction": [
+   {
+    "where": "BALCONY in front of ring-main-0-w2[mat-wall]",
+    "cells": 8910,
+    "coveredByWallRegion": 8776,
+    "uncovered": 134,
+    "regionMaterials": {
+     "mat-timber": 8776
+    }
+   },
+   {
+    "where": "RAILING_POST in front of ring-main-1-w2[mat-wall]",
+    "cells": 361,
+    "coveredByWallRegion": 272,
+    "uncovered": 89,
+    "regionMaterials": {
+     "mat-render-dark": 272
+    }
+   },
+   {
+    "where": "RAILING_RAIL in front of ring-main-1-w2[mat-wall]",
+    "cells": 179,
+    "coveredByWallRegion": 170,
+    "uncovered": 9,
+    "regionMaterials": {
+     "mat-render-dark": 170
+    }
+   }
+  ],
+  "probes": [
+   {
+    "along": 3.49,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 3.96,
+    "stack": [
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_RAIL:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.76,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.56,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.36,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 3.16,
+    "stack": [
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.576",
+     "RAILING_POST:railing-rear-1[mat-glass] d=-14.526",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-1-w2-dark-render-0@ring-main-1-w2[mat-render-dark] d=-13.594",
+     "WALL:ring-main-1-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.96,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 4.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 4.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 5.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 5.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 6.48,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 6.98,
+    "y": 2.76,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591"
+    ]
+   },
+   {
+    "along": 0.98,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 1.99,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 2.99,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   },
+   {
+    "along": 3.49,
+    "y": 2.56,
+    "stack": [
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-14.601",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.596",
+     "SURFACE_REGION:appearance-rear-ring-main-0-w2-timber-0@ring-main-0-w2[mat-timber] d=-13.594",
+     "WALL:ring-main-0-w2[mat-wall] d=-13.591",
+     "BALCONY:balcony-rear-1[mat-render-dark] d=-13.591"
+    ]
+   }
+  ]
+ },
+ "EAST": {
+  "frame": {
+   "a0": -0.02,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 838,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [],
+  "wallBehindObstruction": [],
+  "probes": []
+ },
+ "WEST": {
+  "frame": {
+   "a0": -0.02,
+   "y1": 7.969999543150255,
+   "cellM": 0.02,
+   "w": 838,
+   "h": 418,
+   "note": "columns grow with the facade axis of appearance/visibility.ts; the pictures are mirrored for REAR and EAST so the viewer sees them as from outside"
+  },
+  "lines": [],
+  "wallBehindObstruction": [],
+  "probes": []
+ },
+ "seams": [
+  {
+   "lower": "return-front-0-0",
+   "upper": "return-front-1-0",
+   "sharedM": 0.99,
+   "sameFinishBothSidesM": 0.95,
+   "lowerFinishUpperBareM": 0.02,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "return-rear-0-0",
+   "upper": "return-rear-1-0",
+   "sharedM": 1.01,
+   "sameFinishBothSidesM": 0.7,
+   "lowerFinishUpperBareM": 0.03,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "return-rear-0-1",
+   "upper": "return-rear-1-1",
+   "sharedM": 1.01,
+   "sameFinishBothSidesM": 0.96,
+   "lowerFinishUpperBareM": 0.03,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "ring-main-0-w0",
+   "upper": "ring-main-1-w0",
+   "sharedM": 7.9,
+   "sameFinishBothSidesM": 3.4,
+   "lowerFinishUpperBareM": 0.66,
+   "upperFinishLowerBareM": 0.02,
+   "differentFinishM": 3.18,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "ring-main-0-w1-0",
+   "upper": "ring-main-1-w1",
+   "sharedM": 5.58,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0
+  },
+  {
+   "lower": "ring-main-0-w2",
+   "upper": "ring-main-1-w2",
+   "sharedM": 7.9,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0.06,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 6.46,
+   "largestBareStripAboveJointM": 0.01
+  },
+  {
+   "lower": "ring-main-0-w3",
+   "upper": "ring-main-1-w3",
+   "sharedM": 12.6,
+   "sameFinishBothSidesM": 0,
+   "lowerFinishUpperBareM": 0,
+   "upperFinishLowerBareM": 0,
+   "differentFinishM": 0,
+   "largestBareStripAboveJointM": 0
+  }
+ ]
+}

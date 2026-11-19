@@ -18,12 +18,21 @@ import type { CanonicalBuildingModel, SurfaceRegion, Wall } from '@buildapp/mode
 import { sha256Hex, stableJson } from '@buildapp/source-common'
 import { applyAffine, parseAppearanceObservation } from './contract.js'
 import type { AppearanceClass, AppearanceObservation } from './contract.js'
-import { components, count, fillHoles, fillPolygon, grid, simplifyLoop, traceOuter } from './mask.js'
+import { components, count, dilateBox, fillHoles, fillPolygon, grid, simplifyLoop, traceOuter } from './mask.js'
 import type { Grid } from './mask.js'
-import { elevationToCell, facadeAxes, visibilityMap } from './visibility.js'
+import { OCCLUDER_PARTS, elevationToCell, facadeAxes, visibilityMap } from './visibility.js'
 import type { VisibilityMap } from './visibility.js'
 
-export const APPEARANCE_CONSUMER_VERSION = '1.0.0' as const
+/**
+ * 1.1.0 (v3.54.14): the wall behind a balustrade or a balcony keeps one finish with the wall beside it — the cells it
+ * hides join the wall's partition as not observed (never seeds: the drawing shows the balustrade there) and take the
+ * finish of the same wall's nearest observed cells, counted as inferred; and a finish reaches its wall's very edge (a
+ * part touching the wall's boundary is extended by one cell before the clip to the wall), so two walls stacked at a
+ * floor show no bare strip between their finishes. A wall cell nearer to a balustrade or a balcony than the drawing's
+ * position is known (the region's uncertainty plus the map's residual, on the source) seeds no finish: its colour may
+ * be the neighbour's (a dark balcony band drawn a few pixels high), so it takes the finish of the wall's reliable cells.
+ */
+export const APPEARANCE_CONSUMER_VERSION = '1.1.0' as const
 
 /** The solver's registration of a source elevation (facadeAlignment.views[].projection): pixels → facade metres. */
 export type ElevationProjection = { alongAtPx0: number; alongSign: number; mpp: number; zeroRow: number; mppV?: number }
@@ -47,6 +56,15 @@ export type AppearanceTrace = {
   skipped: Array<{ hostId: string; class: AppearanceClass; why: string }>
   /** Classes drawn on surfaces that are not walls (a frame, a band, glass): left to those elements' own materials. */
   notOnWalls: Array<{ class: AppearanceClass; meshPart: string; cells: number }>
+  /**
+   * 1.1.0: the finish given to a wall where a balustrade or a balcony hides it in the elevation — inferred, not observed.
+   * Per wall and finish: the cells, and how the same wall's observed finish stands on their column: the same finish
+   * above and below (continued), the finish on one side only (the hidden strip reaches the wall's edge), or two different
+   * finishes (a boundary may run behind the balustrade: where it runs is not known; the split is the nearest-cell one).
+   */
+  /** 1.1.0: the band next to a balustrade or a balcony where the drawing seeds no finish (its position uncertainty). */
+  seedBandM?: number
+  inferredUnderOcclusion: Array<{ hostId: string; class: AppearanceClass; occluders: string[]; cells: number; areaM2: number; sameBothSides: number; oneSide: number; differentSides: number }>
 }
 
 export type AppearanceResult = { model: CanonicalBuildingModel; traces: AppearanceTrace[]; fingerprintBefore: string; fingerprintAfter: string }
@@ -82,7 +100,7 @@ export function applyAppearance(
     // what the model shows from this side, its finish regions left out
     const bare = { ...model, surfaceRegions: [] }
     const vis = visibilityMap(compileBuilding(bare), obs.facade, cellM)
-    const trace: AppearanceTrace = { consumerVersion: APPEARANCE_CONSUMER_VERSION, observationId: obs.observationId, facade: obs.facade, producer: obs.producer, cellM, added: [], removed: [], skipped: [], notOnWalls: [] }
+    const trace: AppearanceTrace = { consumerVersion: APPEARANCE_CONSUMER_VERSION, observationId: obs.observationId, facade: obs.facade, producer: obs.producer, cellM, added: [], removed: [], skipped: [], notOnWalls: [], inferredUnderOcclusion: [] }
     // 1. the observation's classes on the facade grid, one source polygon each (larger first, a smaller one inside wins)
     const cls = grid(vis.w, vis.h)
     const covered = grid(vis.w, vis.h)
@@ -104,6 +122,21 @@ export function applyAppearance(
       for (const h of r.holes ?? []) fillPolygon(cls, toGrid(h), 0)
       sourceOf.set(code, [...(sourceOf.get(code) ?? []), r.regionId])
     }
+    // 1b. (1.1.0) how far a boundary of the drawing may be from where the model's surfaces meet, in cells: the regions'
+    // own uncertainty taken to the source, plus the map's residual on its anchors, in metres on the facade
+    const scaleToSource = Math.sqrt(Math.abs(obs.toSource[0][0] * obs.toSource[1][1] - obs.toSource[0][1] * obs.toSource[1][0]))
+    const uncertaintyPx = Math.max(0, ...obs.regions.map((r) => r.uncertaintyPx)) * scaleToSource + (obs.toSourceResidualPx ?? 0)
+    const bandCells = Math.max(1, Math.ceil((uncertaintyPx * proj.mpp) / cellM))
+    // the cells next to a balustrade or a balcony, within that band
+    const nearOccluder = (() => {
+      const occ = grid(vis.w, vis.h)
+      for (let k = 0; k < vis.mesh.length; k++) {
+        const m = vis.mesh[k] >= 0 ? vis.meshes[vis.mesh[k]] : undefined
+        if ((m && (OCCLUDER_PARTS as readonly string[]).includes(m.part)) || vis.behind[k] >= 0) occ.data[k] = 1
+      }
+      return dilateBox(occ, bandCells)
+    })()
+    trace.seedBandM = r6(bandCells * cellM)
     // 2. the walls this side shows with their outer face toward the viewer
     const ax = facadeAxes(obs.facade)
     const facing = model.walls.filter((w) => {
@@ -138,9 +171,17 @@ export function applyAppearance(
     for (const w of facing) {
       const own = grid(vis.w, vis.h)
       const ownOrOpening = grid(vis.w, vis.h)
+      // 1.1.0: the cells where this wall stands behind a balustrade or a balcony: part of the wall, not observed on it
+      const hidden = grid(vis.w, vis.h)
       let coveredHere = 0
       for (let k = 0; k < vis.mesh.length; k++) {
         const mw = vis.mesh[k] >= 0 ? meshWall(vis.mesh[k]) : undefined
+        const hw = vis.behind[k] >= 0 ? meshWall(vis.behind[k]) : undefined
+        if (hw && hw.wallId === w.id) {
+          ownOrOpening.data[k] = 1
+          hidden.data[k] = 1
+          continue
+        }
         if (!mw || mw.wallId !== w.id) continue
         ownOrOpening.data[k] = 1
         if (!mw.dontCare) own.data[k] = 1
@@ -159,7 +200,7 @@ export function applyAppearance(
       const allowed = (k: number): boolean => ownOrOpening.data[k] === 1 && covered.data[k] === 1
       let frontier: number[] = []
       for (let k = 0; k < lab.length; k++) {
-        if (!own.data[k] || !covered.data[k]) continue
+        if (!own.data[k] || !covered.data[k] || nearOccluder.data[k]) continue
         const f = FINISHES.indexOf(CLASS_CODE[cls.data[k]] as (typeof FINISHES)[number])
         if (f >= 0) {
           lab[k] = f
@@ -177,6 +218,55 @@ export function applyAppearance(
           }
         }
         frontier = next
+      }
+      // 1.1.0: a part under the area floor is absorbed by the finish it borders most on this wall (its cells would else
+      // show the bare wall — a light patch the drawing never had); one with no finish beside it keeps the floor rule
+      for (let f = 0; f < FINISHES.length; f++) {
+        const m = grid(vis.w, vis.h)
+        for (let k = 0; k < lab.length; k++) if (lab[k] === f) m.data[k] = 1
+        for (const comp of components(m)) {
+          const n = count(comp)
+          if (n * cellM * cellM >= minArea) continue
+          const border = [0, 0, 0]
+          for (let k = 0; k < lab.length; k++) {
+            if (!comp.data[k]) continue
+            const i = k % vis.w
+            for (const q of [i > 0 ? k - 1 : -1, i < vis.w - 1 ? k + 1 : -1, k - vis.w, k + vis.w]) if (q >= 0 && q < lab.length && lab[q] >= 0 && lab[q] !== f) border[lab[q]]++
+          }
+          const to = border.indexOf(Math.max(...border))
+          if (border[to] === 0) continue
+          for (let k = 0; k < lab.length; k++) if (comp.data[k]) lab[k] = to
+          trace.skipped.push({ hostId: w.id, class: FINISHES[f], why: `a part of ${(n * cellM * cellM).toFixed(2)} m², under the ${minArea} m² floor, is given to the ${FINISHES[to].toLowerCase().replace(/_/g, ' ')} it borders (no bare wall left)` })
+        }
+      }
+      // 1.1.0: what the hidden cells were given, and how the same wall's observed finish stands on their column
+      {
+        const stat = new Map<number, { cells: number; same: number; one: number; diff: number; occ: Set<string> }>()
+        const seenLab = (k: number): number => (hidden.data[k] ? -2 : lab[k])
+        for (let k = 0; k < lab.length; k++) {
+          if (!hidden.data[k] || lab[k] < 0) continue
+          const e = stat.get(lab[k]) ?? { cells: 0, same: 0, one: 0, diff: 0, occ: new Set<string>() }
+          stat.set(lab[k], e)
+          e.cells++
+          if (vis.occluder[k] >= 0) e.occ.add(OCCLUDER_PARTS[vis.occluder[k]])
+          let up = -1
+          for (let q = k - vis.w; q >= 0; q -= vis.w) {
+            const v = seenLab(q)
+            if (v === -2) continue
+            up = v
+            break
+          }
+          let down = -1
+          for (let q = k + vis.w; q < lab.length; q += vis.w) {
+            const v = seenLab(q)
+            if (v === -2) continue
+            down = v
+            break
+          }
+          if (up >= 0 && down >= 0) (up === down ? e.same++ : e.diff++)
+          else e.one++
+        }
+        for (const [f, e] of [...stat].sort((a, b) => a[0] - b[0])) trace.inferredUnderOcclusion.push({ hostId: w.id, class: FINISHES[f], occluders: [...e.occ].sort(), cells: e.cells, areaM2: r6(e.cells * cellM * cellM), sameBothSides: e.same, oneSide: e.one, differentSides: e.diff })
       }
       // the parts, largest first: a part enclosing a smaller part of another finish absorbs it (an island), named
       type Part = { f: number; comp: Grid; filled: Grid; n: number }
@@ -210,7 +300,17 @@ export function applyAppearance(
           continue
         }
         const code = CLASS_CODE.indexOf(cname)
-        const outline = localOutline(part.filled, vis, w, levelOf.get(w.levelId)?.elevation ?? 0)
+        // 1.1.0: one cell more wherever the part borders cells no finish of this wall takes (the wall's boundary, a
+        // neighbouring wall, the floor joint): the clip to the wall's own rectangle then puts the edge on the wall's
+        // edge, not on a cell edge up to 2 cm short of it
+        const grown = grid(vis.w, vis.h)
+        grown.data.set(part.filled.data)
+        for (let k = 0; k < grown.data.length; k++) {
+          if (!part.filled.data[k]) continue
+          const i = k % vis.w
+          for (const q of [i > 0 ? k - 1 : -1, i < vis.w - 1 ? k + 1 : -1, k - vis.w, k + vis.w]) if (q >= 0 && q < lab.length && lab[q] < 0 && !taken.data[q]) grown.data[q] = 1
+        }
+        const outline = localOutline(fillHoles(grown), vis, w, levelOf.get(w.levelId)?.elevation ?? 0)
         if (!outline) {
           trace.skipped.push({ hostId: w.id, class: cname, why: 'no simple outline survives on the wall (a sliver)' })
           continue
@@ -226,7 +326,7 @@ export function applyAppearance(
           rect,
           outline,
           materialId: mat.id,
-          evidence: { status: 'VISUAL_INFERRED', interpretation: `a ${cname.toLowerCase().replace(/_/g, ' ')} outline from ${obs.observationId} (${obs.producer.kind}): colour, not geometry` },
+          evidence: { status: 'VISUAL_INFERRED', interpretation: `a ${cname.toLowerCase().replace(/_/g, ' ')} outline from ${obs.observationId} (${obs.producer.kind}): colour, not geometry${inferredNote(trace, w.id, cname, cellM)}` },
         } as SurfaceRegion)
         trace.added.push({ regionId: id, hostId: w.id, face: 'OUTER', class: cname, materialId: mat.id, areaM2: r6(polyArea(outline)), corners: outline.length, fromRegions: sourceOf.get(code) ?? [] })
         if (!model.materials.some((x) => x.id === mat.id)) model.materials.push({ id: mat.id, name: mat.name, color: mat.color })
@@ -243,6 +343,13 @@ export function applyAppearance(
   const fingerprintAfter = usableGeometryFingerprint(model)
   if (fingerprintAfter !== fingerprintBefore) throw new Error('the appearance consumer changed the geometry fingerprint: refused')
   return { model, traces, fingerprintBefore, fingerprintAfter }
+}
+
+/** The part of a region that was hidden behind a balustrade or a balcony, said in its evidence. */
+function inferredNote(trace: AppearanceTrace, hostId: string, cname: AppearanceClass, cellM: number): string {
+  const e = trace.inferredUnderOcclusion.find((x) => x.hostId === hostId && x.class === cname)
+  if (!e) return ''
+  return `; ${(e.cells * cellM * cellM).toFixed(2)} m² of it stands behind ${e.occluders.join(', ').toLowerCase().replace(/_/g, ' ')} and is inferred from the same wall's observed finish, not observed${e.differentSides > 0 ? ` (on ${(e.differentSides * cellM * cellM).toFixed(2)} m² two different finishes border the hidden strip: the boundary there is not known)` : ''}`
 }
 
 const polyArea = (p: ReadonlyArray<{ a: number; b: number }>): number => Math.abs(p.reduce((s, q, i) => s + q.a * p[(i + 1) % p.length].b - p[(i + 1) % p.length].a * q.b, 0)) / 2
