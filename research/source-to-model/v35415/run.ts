@@ -1,5 +1,5 @@
 /**
- * v3.54.15 (from v3.54.14) — one house through the SAME service path the host runs; v3.54.15 adds --strict, --cache 5m|1h on live transports, replayed answers booked NOT_SENT, and every sketch written as PNG + SVG + canonical JSON (with the fate of each element) + its raw answer. L-M (`consultAnalysis`), with the metric consultant
+ * v3.54.15 (from v3.54.14) — one house through the SAME service path the host runs; v3.54.15 adds --strict, --prompt-cache 5m|1h on live transports (not --cache, which names the byte cache), replayed answers booked NOT_SENT, and every sketch written as PNG + SVG + canonical JSON (with the fate of each element) + its raw answer. L-M (`consultAnalysis`), with the metric consultant
  * ON and nothing else of the consultant (no label rounds, no post-build check), so its effect is its own.
  *
  *   npx vite-node research/source-to-model/v35415/run.ts -- --url <page> --cache <dir> --out <dir> --house <name>
@@ -36,10 +36,12 @@ const house = opt('house') ?? 'house'
 const modelId = opt('model') ?? 'claude-opus-5-5'
 const PRICES = CONSULT_PRICES
 const strict = argv.includes('--strict')
-const cacheTtl = opt('cache') === '5m' || opt('cache') === '1h' ? (opt('cache') as '5m' | '1h') : undefined
+const cacheTtl = opt('prompt-cache') === '5m' || opt('prompt-cache') === '1h' ? (opt('prompt-cache') as '5m' | '1h') : undefined
+if (argv.includes('--prompt-cache') && !cacheTtl) throw new Error(`--prompt-cache takes 5m or 1h, not ${opt('prompt-cache')}`)
+process.stderr.write(`transport: strict=${strict} promptCache=${cacheTtl ?? 'off'}\n`)
 const transportOpts = { ...(strict ? { strict: true } : {}), ...(cacheTtl ? { cache: { ttl: cacheTtl } } : {}) }
 
-type Recorded = { request: { systemSha: string; note: string }; turn: ModelTurn }
+type Recorded = { request: { systemSha: string; note: string; latencyMs?: number; at?: string }; turn: ModelTurn }
 const turns: Recorded[] = []
 let transport: ConsultantModel
 // L-MS: the sketch step's own transport (Sonnet), live or replayed; the metric facts stay L-M's (its turns replayed)
@@ -48,7 +50,7 @@ let sketchTransport: ConsultantModel | undefined
 if (argv.includes('--sketch-live')) {
   const live = anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium', ...transportOpts })
   if (!live.available()) throw new Error('no API key in this process environment: --sketch-live refused')
-  sketchTransport = { ...live, send: async (req) => { const t = await live.send(req); sketchTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'live' }, turn: t }); writeFileSync(join(out, 'sketch-turns.json'), `${JSON.stringify(sketchTurns, null, 1)}\n`); return t } }
+  sketchTransport = { ...live, send: async (req) => { const t0s = Date.now(); const t = await live.send(req); sketchTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'live', latencyMs: Date.now() - t0s, at: new Date(t0s).toISOString() }, turn: t }); writeFileSync(join(out, 'sketch-turns.json'), `${JSON.stringify(sketchTurns, null, 1)}\n`); return t } }
 } else if (opt('sketch-replay')) {
   // v3.54.15: a recorded answer is replayed for the SAME picture only (the hash of the image bytes in the request,
   // matched to the recorded sketch's imageSha256 in --sketch-map <sketches.json>), never by position: a run that

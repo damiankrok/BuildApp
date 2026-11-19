@@ -61,7 +61,7 @@ export const ElevationSketchSchema = z
 export type ElevationSketch = z.infer<typeof ElevationSketchSchema>
 
 const polyProp = (desc: string) => ({ type: 'array', description: desc, items: { type: 'array', items: { type: 'number' }, minItems: 2, maxItems: 2 }, minItems: 3 })
-const TOOL = {
+export const TOOL = {
   name: 'report_elevation',
   description: 'Report the elevation as contours in pixels of the picture you were sent.',
   input_schema: {

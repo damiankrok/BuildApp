@@ -1,0 +1,153 @@
+{
+ "what": "v3.54.15 measured prompt caching: the four Ballina elevation sketches (claude-sonnet-5-5, strict tools, effort medium), the same pictures and prefix, sent once without and once with one 5-minute breakpoint on tools+system",
+ "prefixTokens": {
+  "counter": "messages.countTokens (not billed)",
+  "claude-sonnet-5-5": {
+   "strict": 1793,
+   "nonStrict": 1918
+  },
+  "claude-opus-5-5": {
+   "strict": 1793,
+   "nonStrict": 1918
+  },
+  "cachedAsReported": 1725
+ },
+ "price": {
+  "model": "claude-sonnet-5-5",
+  "inputPerMTok": 2.0,
+  "cacheWrite5mPerMTok": 2.5,
+  "cacheWrite1hPerMTok": 4.0,
+  "cacheReadPerMTok": 0.1,
+  "outputPerMTok": 10.0
+ },
+ "uncached": {
+  "requests": 4,
+  "usd": 0.043506,
+  "inputTokens": 9358,
+  "cacheCreation5mInputTokens": 0,
+  "cacheReadInputTokens": 0,
+  "outputTokens": 2479,
+  "latencyMsMean": 4786,
+  "turns": [
+   {
+    "at": "2026-11-19T14:22:14.929Z",
+    "latencyMs": 6031,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 2377,
+     "outputTokens": 730,
+     "cacheReadInputTokens": 0,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:22:21.145Z",
+    "latencyMs": 4447,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 2302,
+     "outputTokens": 541,
+     "cacheReadInputTokens": 0,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:22:25.680Z",
+    "latencyMs": 3912,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 2317,
+     "outputTokens": 518,
+     "cacheReadInputTokens": 0,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:22:29.745Z",
+    "latencyMs": 4753,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 2362,
+     "outputTokens": 690,
+     "cacheReadInputTokens": 0,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   }
+  ]
+ },
+ "cached5m": {
+  "requests": 4,
+  "usd": 0.035048,
+  "inputTokens": 2458,
+  "cacheCreation5mInputTokens": 1725,
+  "cacheReadInputTokens": 5175,
+  "outputTokens": 2530,
+  "latencyMsMean": 4195,
+  "turns": [
+   {
+    "at": "2026-11-19T14:28:33.007Z",
+    "latencyMs": 4725,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 652,
+     "outputTokens": 730,
+     "cacheReadInputTokens": 0,
+     "cacheCreationInputTokens": 1725,
+     "cacheCreation5mInputTokens": 1725,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:28:37.868Z",
+    "latencyMs": 4300,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 577,
+     "outputTokens": 536,
+     "cacheReadInputTokens": 1725,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:28:42.239Z",
+    "latencyMs": 3512,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 592,
+     "outputTokens": 535,
+     "cacheReadInputTokens": 1725,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   },
+   {
+    "at": "2026-11-19T14:28:45.856Z",
+    "latencyMs": 4243,
+    "stopReason": "tool_use",
+    "usage": {
+     "inputTokens": 637,
+     "outputTokens": 729,
+     "cacheReadInputTokens": 1725,
+     "cacheCreationInputTokens": 0,
+     "cacheCreation5mInputTokens": 0,
+     "cacheCreation1hInputTokens": 0
+    }
+   }
+  ]
+ },
+ "note": "the first live attempt (uncached) was meant to be cached: --cache named both the byte cache and the TTL, so no breakpoint was sent; the flag is now --prompt-cache and an invalid value stops the run. That attempt is kept as the uncached control. Latency over four requests each is not a measurement of a latency effect.",
+ "replay": "replays and accepted-revision reuse are booked NOT_SENT at 0 USD and are not cache hits",
+ "savingUsd": 0.008458,
+ "savingShare": 0.1944
+}
