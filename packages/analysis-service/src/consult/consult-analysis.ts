@@ -10,7 +10,7 @@
  * and records, and never re-runs; C consumes. A failure of the consultant (transport, budget, no answer) leaves the
  * LOCAL result exactly as it was. No global house description is ever asked for on this path.
  */
-import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedLevel, ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { PlanDiagnosticsReport } from '@buildapp/reconstruction'
 import { decodeImage, startDecoders } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
@@ -99,7 +99,7 @@ export type MetricReadSummary = {
   /** ACCEPT: the candidate is the model now; ROLLBACK / NO_CHANGE: LOCAL's stands; NOT_RUN: variant R or nothing handed. */
   decision: 'ACCEPT' | 'ROLLBACK' | 'NO_CHANGE' | 'NOT_RUN'
   why: string
-  applied: { readings: Array<{ proposalId: string; status: string; why: string; valueCm?: number }>; spans: Array<{ proposalId: string; status: string; why: string; valueCm?: number }> }
+  applied: { readings: Array<{ proposalId: string; status: string; why: string; valueCm?: number }>; spans: Array<{ proposalId: string; status: string; why: string; valueCm?: number }>; levels?: Array<{ proposalId: string; literal: string; status: string; why: string; valueM?: number }> }
   measured: { before?: BuiltMeasure; after?: BuiltMeasure }
   usd: number
 }
@@ -485,7 +485,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       analyzer: `${ANALYSIS_SERVICE_VERSION}/${SOLVER_V2_VERSION}`,
       consultant: [CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, METRIC_READ_PROMPT_VERSION, METRIC_VERIFY_PROMPT_VERSION, METRIC_RESOLVER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION, `parser${ELEVATION_SKETCH_PARSER_VERSION}`, SKETCH_STEP_VERSION, CHOOSE_VERSION, ACCEPTED_CONSULT_VERSION].join(','),
       models: { ROUNDS: wiring.model.model, ...(wiring.metricRead === 'ON' ? { METRIC: (wiring.metricModel ?? wiring.model).model } : {}), ...(wiring.sketches === 'ON' ? { SKETCH: (wiring.sketchModel ?? wiring.model).model } : {}) },
-      settings: `variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'}`,
+      settings: `strict=${wiring.model.strict === true || wiring.metricModel?.strict === true || wiring.sketchModel?.strict === true ? 'on' : 'off'};variant=${wiring.variant};metric=${wiring.metricRead ?? 'OFF'};sketches=${wiring.sketches ?? 'OFF'};rounds=${maxRounds};geometryRounds=${wiring.maxGeometryRounds ?? '-'};check=${wiring.check ?? 'ON'}`,
     })
     const stored = wiring.accepted.reanalyse ? undefined : wiring.accepted.store.get(b.key)
     acceptedState = { key: b.key, binding: b.binding, ...(stored ? { reused: stored } : { why: wiring.accepted.reanalyse ? 'REANALYSIS_ASKED' as const : 'NO_ACCEPTED_REVISION' as const }) }
@@ -501,6 +501,8 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const rounds: RoundRecord[] = []
   const readings: ConsultedReading[] = []
   const spans: ConsultedSpan[] = []
+  // v3.54.15: printed level marks the metric consultant handed (admitted, or refused, by the section's own ladder)
+  const levels: ConsultedLevel[] = []
   const seen = new Set<string>()
   let usd = 0
   let basis: Local = local
@@ -536,16 +538,24 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const measuredBefore = local.run ? measureBuilt(local.run.reconstruction.model, compileBuilding(local.run.reconstruction.model)) : undefined
     metricRead = { promptVersions: { read: METRIC_READ_PROMPT_VERSION, verify: METRIC_VERIFY_PROMPT_VERSION }, resolverVersion: METRIC_RESOLVER_VERSION, model: mModel.model, frames: frames.map((f) => ({ frameId: f.frameId, kind: f.kind, storey: f.storey })), reads, checks, resolution, decision: 'NOT_RUN', why: '', applied: { readings: [], spans: [] }, measured: { ...(measuredBefore ? { before: measuredBefore } : {}) }, usd: Math.round(mUsd * 1e6) / 1e6 }
     if (wiring.variant === 'R') metricRead.why = 'variant R: read, checked and resolved; nothing handed to the analyzer'
-    else if (resolution.readings.length === 0 && resolution.spans.length === 0) {
+    else if (resolution.readings.length === 0 && resolution.spans.length === 0 && (resolution.levels ?? []).length === 0) {
       metricRead.decision = 'NO_CHANGE'
       metricRead.why = 'the resolver handed the analyzer nothing: every API reading agreed, was unresolved without a witness, or had no label'
     } else {
-      const candidate = await attempt({ kind: 'PACKAGE', pkg: local.pkg, graph: local.graph }, { ...options, consulted: resolution.readings, consultedSpans: resolution.spans, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
+      const candidate = await attempt({ kind: 'PACKAGE', pkg: local.pkg, graph: local.graph }, { ...options, consulted: resolution.readings, consultedSpans: resolution.spans, consultedLevels: resolution.levels ?? [], crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
       const after = stateOf(candidate)
       const appliedR = (candidate.metrics?.consultedReadings ?? []).map((o) => ({ proposalId: o.proposalId, status: o.status, why: o.why, ...(o.valueCm !== undefined ? { valueCm: o.valueCm } : {}) }))
       const appliedS = (candidate.metrics?.consultedSpans ?? []).map((o) => ({ proposalId: o.proposalId, status: o.status, why: o.why, ...(o.valueCm !== undefined ? { valueCm: o.valueCm } : {}) }))
-      metricRead.applied = { readings: appliedR, spans: appliedS }
-      const n = appliedR.filter((o) => o.status === 'APPLIED').length + appliedS.filter((o) => o.status === 'ADMITTED').length
+      // v3.54.15: each handed level's fate — admitted by the drawing (LEVEL_DATUM from the consultant), or refused with why
+      const admittedLevels = (candidate.metrics?.evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && e.provenance.extractor === 'VISION_VALIDATED' && /metric-consultant|claude/.test(e.provenance.detail ?? '') )
+      const refusedLevels = (candidate.metrics?.unresolved ?? []).filter((u) => u.id.startsWith('gap-consulted-levels') || /consultant's \d+ level mark/.test(u.what))
+      const appliedL = (resolution.levels ?? []).map((l) => {
+        const hit = admittedLevels.find((e) => e.frameId === l.frameId && e.textBox && Math.abs((e.textBox.x0 + e.textBox.x1) / 2 - (l.box.x0 + l.box.x1) / 2) < 30 && Math.abs((e.textBox.y0 + e.textBox.y1) / 2 - (l.box.y0 + l.box.y1) / 2) < 30)
+        const gap = (candidate.metrics?.unresolved ?? []).find((u) => u.frameId === l.frameId && u.what.includes(`"${l.literal}"`)) ?? refusedLevels.find((u) => u.frameId === l.frameId)
+        return { proposalId: l.proposalId, literal: l.literal, status: hit ? 'ADMITTED' : gap ? 'REFUSED' : 'NOT_CONSUMED', why: hit ? `admitted by the section's ladder as ${hit.value} m` : gap ? gap.reason : 'the section did not take it (the analyzer admitted levels of its own there, or the frame is not a section)', ...(hit && typeof hit.value === 'number' ? { valueM: hit.value } : {}) }
+      })
+      metricRead.applied = { readings: appliedR, spans: appliedS, levels: appliedL }
+      const n = appliedR.filter((o) => o.status === 'APPLIED').length + appliedS.filter((o) => o.status === 'ADMITTED').length + appliedL.filter((o) => o.status === 'ADMITTED').length
       const v = compareMetricRead(goodState, after, n)
       metricRead.decision = v.decision
       metricRead.why = v.why
@@ -557,6 +567,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
         basis = candidate
         readings.push(...resolution.readings)
         spans.push(...resolution.spans)
+        levels.push(...(resolution.levels ?? []))
       }
     }
   }
@@ -579,15 +590,16 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const { elevationSketches, ...kept } = reading
     sketchSummary = { reading: kept, form: { decision: 'NOT_RUN', why: '' }, finish: { decision: 'NOT_RUN', why: '' }, usd: reading.usd }
     if (wiring.variant === 'R') sketchSummary.form.why = sketchSummary.finish.why = 'variant R: read and checked; nothing handed to the analyzer'
-    else if (elevationSketches.length === 0) sketchSummary.form.why = sketchSummary.finish.why = 'no sketch passed the proportion check'
+    else if (elevationSketches.length === 0 && reading.appearance.observations.length === 0) sketchSummary.form.why = sketchSummary.finish.why = 'no sketch passed the proportion check'
     else {
-      const base = { ...options, ...(readings.length > 0 ? { consulted: readings } : {}), ...(spans.length > 0 ? { consultedSpans: spans } : {}), ...(readings.length + spans.length > 0 ? { crossAxisWitness: true } : {}), reuseMetrics: metrics0, roofFeatures: undefined, glazedEnds: undefined }
-      const acceptedSides = reading.sketches.filter((s) => s.check?.verdict === 'ACCEPTED').map((s) => s.facade)
-      const withForm = await attempt({ kind: 'PACKAGE', pkg: pkg0, graph: graph0 }, { ...base, elevationSketches, appearance: reading.appearance, wallTonesFrom: { model: run0.reconstruction.model, acceptedSides } })
-      const j = judgeForm(run0.reconstruction.model, withForm.run?.reconstruction.model, elevationSketches.length)
-      sketchSummary.form = { decision: j.decision, why: j.why, measuredBefore: j.measuredBefore, ...(j.measuredAfter ? { measuredAfter: j.measuredAfter } : {}) }
-      record({ at: now().toISOString(), kind: 'SKETCH_FORM', decision: j.decision, why: j.why })
-      if (j.decision === 'ACCEPT') {
+      const base = { ...options, ...(readings.length > 0 ? { consulted: readings } : {}), ...(spans.length > 0 ? { consultedSpans: spans } : {}), ...(levels.length > 0 ? { consultedLevels: levels } : {}), ...(readings.length + spans.length > 0 ? { crossAxisWitness: true } : {}), reuseMetrics: metrics0, roofFeatures: undefined, glazedEnds: undefined }
+      const acceptedSides = reading.sketches.filter((s) => s.check?.properties.finish === 'ACCEPTED').map((s) => s.facade)
+      // v3.54.15: with no sketch whose form passed, only the finish is tried (PARTIAL sketches)
+      const withForm = elevationSketches.length > 0 ? await attempt({ kind: 'PACKAGE', pkg: pkg0, graph: graph0 }, { ...base, elevationSketches, appearance: reading.appearance, wallTonesFrom: { model: run0.reconstruction.model, acceptedSides } }) : undefined
+      const j = withForm ? judgeForm(run0.reconstruction.model, withForm.run?.reconstruction.model, elevationSketches.length) : { decision: 'ROLLBACK' as const, why: 'no sketch passed the form check (finish only)', measuredBefore: undefined, measuredAfter: undefined }
+      sketchSummary.form = { decision: withForm ? j.decision : 'NOT_RUN', why: j.why, ...(j.measuredBefore ? { measuredBefore: j.measuredBefore } : {}), ...(j.measuredAfter ? { measuredAfter: j.measuredAfter } : {}) }
+      record({ at: now().toISOString(), kind: 'SKETCH_FORM', decision: sketchSummary.form.decision, why: j.why })
+      if (withForm && j.decision === 'ACCEPT') {
         good = withForm
         goodState = stateOf(withForm)
         basis = withForm
@@ -663,7 +675,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       break
     }
     // the candidate: the same frozen package and graph, the consulted readings, the solver's cross-axis rule
-    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
+    const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: merged, consultedSpans: mergedSpans, consultedLevels: levels, crossAxisWitness: true, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
     const after = stateOf(candidate)
     rec.after = after
     const verdict = compareRuns(goodState, after)
@@ -730,7 +742,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
               rec.why = 'no side is classified as closed by glazing: the refusal stands, the classification stays on the record'
             } else {
               const ends = v.sides.map((side) => ({ frameId, side }))
-              const candidate = await attempt({ kind: 'PACKAGE', pkg: at.pkg, graph: at.graph }, { ...options, ...(consultedOn() ? { consulted: readings, consultedSpans: spans, crossAxisWitness: true } : {}), reuseMetrics: at.metrics, glazedEnds: ends, roofFeatures: undefined })
+              const candidate = await attempt({ kind: 'PACKAGE', pkg: at.pkg, graph: at.graph }, { ...options, ...(consultedOn() ? { consulted: readings, consultedSpans: spans, consultedLevels: levels, crossAxisWitness: true } : {}), reuseMetrics: at.metrics, glazedEnds: ends, roofFeatures: undefined })
               const after = stateOf(candidate)
               rec.after = after
               const verdict = compareRuns(goodState, after)
@@ -807,7 +819,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
           let back: Local | undefined
           if (kept.length === previous.features.length) back = previous.good
           else {
-            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: kept, ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
+            const again = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, consultedLevels: levels, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: kept, ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
             back = again.run ? again : previous.good
           }
           good = back
@@ -856,7 +868,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       rec.corrections = corrections
       // the candidate: the same package, graph and metric revision; the analyzer rebuilds with the features so far and these
       const beforeG = geometryStateOf(run, features.map((f) => f.id))
-      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: [...features, ...corrections], ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
+      const candidate = await attempt({ kind: 'PACKAGE', pkg, graph }, { ...options, consulted: readings, consultedSpans: spans, consultedLevels: levels, ...(metricOn ? { crossAxisWitness: true } : {}), reuseMetrics: good.metrics, roofFeatures: [...features, ...corrections], ...(glazedEnds.length > 0 ? { glazedEnds } : {}) })
       const outcomes = candidate.run?.reconstruction.roofFeatures ?? []
       rec.outcomes = outcomes.filter((o) => corrections.some((c) => c.id === o.id))
       const afterG = candidate.run ? geometryStateOf(candidate.run, [...features, ...corrections].map((f) => f.id)) : undefined

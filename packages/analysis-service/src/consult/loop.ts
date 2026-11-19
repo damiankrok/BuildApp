@@ -10,6 +10,8 @@
  * The proposals of step 2 are validated (`validateProposals`); the valid ones become `ConsultedReading`s, the analyzer
  * runs again with them, and `compareRuns` keeps the new result or rolls back to the one before.
  */
+import { costOf, reserveOf } from './cost.js'
+import type { Price, TurnUsage } from './cost.js'
 import { lengthCmOf } from '@buildapp/source-metrics'
 import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { Raster } from '@buildapp/source-cv'
@@ -24,12 +26,16 @@ import type { ToolImage } from './tools.js'
 // ---------------------------------------------------------------------------------------------------------------
 
 export type ContentBlock = { type: string; text?: string; id?: string; name?: string; input?: unknown }
-export type ModelTurn = { content: ContentBlock[]; usage: { inputTokens?: number; outputTokens?: number; cacheReadInputTokens?: number; cacheCreationInputTokens?: number }; stopReason?: string; requestId?: string; model: string; latencyMs: number }
+export type ModelTurn = { content: ContentBlock[]; usage: TurnUsage; stopReason?: string; requestId?: string; model: string; latencyMs: number }
 /** One billed request: system, the whole conversation so far, the tools offered. The transport holds the key. */
 export type ConsultantModel = {
   id: string
   model: string
   maxOutputTokens: number
+  /** v3.54.15: the prompt-cache TTL this transport writes with (absent: no caching requested); the reservation uses it. */
+  cache?: { ttl: '5m' | '1h' }
+  /** v3.54.15: the answer tools go strict (the provider enforces their schema); part of an accepted revision's binding. */
+  strict?: boolean
   send(request: { system: string; messages: unknown[]; tools: unknown[]; signal?: AbortSignal }): Promise<ModelTurn>
 }
 export class ConsultantUnavailable extends Error {
@@ -44,10 +50,16 @@ export class ConsultantUnavailable extends Error {
 /** The books: reserve before sending, settle to what it cost; an unknown cost keeps the reservation. */
 export type ConsultSpend = {
   reserve(model: string, usd: number, note: string): { id: string; usd: number }
-  settle(reservation: { id: string; usd: number }, actual: { usd: number; inputTokens: number; outputTokens: number } | 'NOT_SENT', note?: string): void
+  settle(reservation: { id: string; usd: number }, actual: SettledUsage | 'NOT_SENT', note?: string): void
 }
-export type Price = { inputUsdPerMTok: number; outputUsdPerMTok: number }
-const usdOf = (p: Price, input: number, output: number): number => Math.round(((input * p.inputUsdPerMTok + output * p.outputUsdPerMTok) / 1e6) * 1e6) / 1e6
+/** v3.54.15: what a settled request cost, with the cache split (`cost.ts`). */
+export type SettledUsage = { usd: number; inputTokens: number; outputTokens: number; cacheReadInputTokens?: number; cacheCreation5mInputTokens?: number; cacheCreation1hInputTokens?: number }
+export type { Price } from './cost.js'
+/** The settled record of one answered request: its tokens, cache split included, and the cost by `cost.ts`. */
+export function settledOf(price: Price, u: TurnUsage): SettledUsage {
+  const c = costOf(price, u)
+  return { usd: c.usd, inputTokens: c.tokens.input, outputTokens: c.tokens.output, cacheReadInputTokens: c.tokens.cacheRead, cacheCreation5mInputTokens: c.tokens.cacheWrite5m, cacheCreation1hInputTokens: c.tokens.cacheWrite1h }
+}
 /** Generous: a picture's tokens on any current model at ≤ 1400 px, and characters per token taken low. */
 const TOKENS_PER_PICTURE = 2600
 const CHARS_PER_TOKEN = 2.5
@@ -238,7 +250,7 @@ async function send(input: ConsultInput, messages: unknown[], tools: unknown[], 
   const text = JSON.stringify(messages)
   const pictures = (text.match(/"type":"image"/g) ?? []).length
   const textChars = text.length - [...text.matchAll(/"data":"[^"]*"/g)].reduce((a, m) => a + m[0].length, 0) + system.length + JSON.stringify(tools).length
-  const reserveUsd = usdOf(input.price, pictures * TOKENS_PER_PICTURE + Math.ceil(textChars / CHARS_PER_TOKEN) + 1500, input.model.maxOutputTokens)
+  const reserveUsd = reserveOf(input.price, pictures * TOKENS_PER_PICTURE + Math.ceil(textChars / CHARS_PER_TOKEN) + 1500, input.model.maxOutputTokens, input.model.cache)
   let attempt = 0
   for (;;) {
     attempt += 1
@@ -249,9 +261,10 @@ async function send(input: ConsultInput, messages: unknown[], tools: unknown[], 
       const it = turn.usage.inputTokens
       const ot = turn.usage.outputTokens
       const known = typeof it === 'number' && typeof ot === 'number'
-      const usd = known ? usdOf(input.price, it, ot) : reserveUsd
+      const settled = known ? settledOf(input.price, turn.usage) : undefined
+      const usd = settled ? settled.usd : reserveUsd
       if (reservation) {
-        if (known) input.spend?.settle(reservation, { usd, inputTokens: it, outputTokens: ot })
+        if (settled) input.spend?.settle(reservation, settled)
         // an answer without its usage has an unknown cost: the reservation stands
       }
       input.record({ at: now().toISOString(), kind: 'RESPONSE', note, attempt, requestId: turn.requestId ?? null, model: turn.model, usage: turn.usage, usd, stopReason: turn.stopReason ?? null, latencyMs: turn.latencyMs, content: turn.content })

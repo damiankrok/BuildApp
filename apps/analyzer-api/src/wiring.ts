@@ -8,7 +8,7 @@ import { anthropicStructuredVision, anthropicVisionReasoner } from '@buildapp/so
 import { join } from 'node:path'
 import type { AnalysisWiring } from './executor.js'
 import { DEFAULT_SPEND_LIMITS, HOUSE_READER_PRICES, openSpendLedger, spendGuardedStructuredVision } from './house-reader-spend.js'
-import { HOUSE_READING_LIMITS, anthropicConsultant, fileAcceptedConsultStore, fileAcceptedStore } from '@buildapp/analysis-service'
+import { CONSULT_PRICES, HOUSE_READING_LIMITS, anthropicConsultant, fileAcceptedConsultStore, fileAcceptedStore } from '@buildapp/analysis-service'
 import type { ReadingStep } from '@buildapp/analysis-service'
 import type { SpendLimits } from './house-reader-spend.js'
 
@@ -112,8 +112,14 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
     if (consultantPlan(env).on) {
       const plan = houseReaderPlan({ ...env, ANALYZER_HOUSE_READER: 'live' })
       const ledger = openSpendLedger({ dir: plan.dir, limits: plan.limits, openingUsd: plan.openingUsd })
-      const model = anthropicConsultant({ model: plan.model })
-      const price = HOUSE_READER_PRICES[plan.model]
+      // v3.54.15 (opt-in): `ANALYZER_STRICT_TOOLS=on` sends every answer tool strict; `ANALYZER_PROMPT_CACHE=5m|1h`
+      // puts one cache breakpoint on the stable prefix (tools + system) — priced by `CONSULT_PRICES` (writes per TTL, reads)
+      const strict = env.ANALYZER_STRICT_TOOLS === 'on'
+      const cacheTtl: '5m' | '1h' | undefined = env.ANALYZER_PROMPT_CACHE === '5m' ? '5m' : env.ANALYZER_PROMPT_CACHE === '1h' ? '1h' : undefined
+      const transportOpts = { ...(strict ? { strict: true } : {}), ...(cacheTtl ? { cache: { ttl: cacheTtl } } : {}) }
+      const priceOf = (m: string) => CONSULT_PRICES[m] ?? HOUSE_READER_PRICES[m]
+      const model = anthropicConsultant({ model: plan.model, ...transportOpts })
+      const price = priceOf(plan.model)
       // v3.54.14: `ANALYZER_METRIC_CONSULTANT=on` adds the metric consultant (independent read of the printed dimensions,
       // check of the analyzer's readings, deterministic resolver) before the label rounds, in the same books and ceiling;
       // its model is `ANALYZER_METRIC_CONSULTANT_MODEL` (default claude-opus-5-5), refused when its price is not known
@@ -127,9 +133,9 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
           variant: 'C' as const,
           // v3.54.14: accepted consulted revisions in the host's private data directory (hash-named, answers only)
           accepted: { store: fileAcceptedConsultStore(join(env.ANALYZER_DATA_DIR?.trim() || '.data/analyzer', 'accepted-consulted-revisions')) },
-          ...(metricOn ? { metricRead: 'ON' as const, metricModel: anthropicConsultant({ model: metricModelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium' }), metricPrice: HOUSE_READER_PRICES[metricModelId] } : {}),
+          ...(metricOn ? { metricRead: 'ON' as const, metricModel: anthropicConsultant({ model: metricModelId, maxOutputTokens: 16000, timeoutMs: 300_000, effort: 'medium', ...transportOpts }), metricPrice: priceOf(metricModelId) } : {}),
           // v3.54.14: `ANALYZER_SKETCHES=on` adds the four automatic sketches (form + finish) on the same metric facts
-          ...(env.ANALYZER_SKETCHES === 'on' ? { sketches: 'ON' as const, sketchModel: anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium' }), sketchPrice: HOUSE_READER_PRICES['claude-sonnet-5-5'] } : {}),
+          ...(env.ANALYZER_SKETCHES === 'on' ? { sketches: 'ON' as const, sketchModel: anthropicConsultant({ model: 'claude-sonnet-5-5', maxOutputTokens: 6000, timeoutMs: 240_000, effort: 'medium', ...transportOpts }), sketchPrice: priceOf('claude-sonnet-5-5') } : {}),
           spend: {
             reserve: (m: string, usd: number) => {
               const r = ledger.reserve('CONSULTATION', m, usd)

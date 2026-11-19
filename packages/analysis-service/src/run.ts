@@ -40,7 +40,7 @@ import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { nullVisionReasoner } from '@buildapp/source-vision'
 import type { VisionReasoner } from '@buildapp/source-vision'
 import { extractMetricEvidenceAsync } from '@buildapp/source-metrics'
-import type { ConsultedReading, ConsultedSpan, LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedLevel, ConsultedReading, ConsultedSpan, LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result, RoofFeatureCorrection } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
@@ -119,6 +119,8 @@ export type AnalysisOptions = {
   crossAxisWitness?: boolean
   /** v3.54.2 pilot: a consultant's whole printed dimensions (`consulted-spans.ts`). Absent: off, as before. */
   consultedSpans?: readonly ConsultedSpan[]
+  /** v3.54.15: a consultant's level marks on sections (`ConsultedLevel`), admitted only by the same drawing. Absent: off. */
+  consultedLevels?: readonly ConsultedLevel[]
   /**
    * v3.54.3: secondary roof features a validated correction names (`@buildapp/reconstruction` roof-feature.ts), built
    * into the building before it is emitted, each applied or refused with a typed reason (`AnalysisRun.reconstruction
@@ -544,6 +546,7 @@ async function runAnalysisAt(input: AnalysisInput, options: AnalysisOptions, rea
         ...(options.consulted && options.consulted.length > 0 ? { consulted: options.consulted } : {}),
         ...(options.crossAxisWitness ? { crossAxisWitness: true } : {}),
         ...(options.consultedSpans && options.consultedSpans.length > 0 ? { consultedSpans: options.consultedSpans } : {}),
+        ...(options.consultedLevels && options.consultedLevels.length > 0 ? { consultedLevels: options.consultedLevels } : {}),
         recogniser: timed,
         signal,
         onRecognise: (e) => checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } }),

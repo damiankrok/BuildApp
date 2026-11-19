@@ -162,7 +162,7 @@ describe('v3.54.14 resolver 1.1.0 — the page\'s published footprint as a witne
     expect(r.readings.map((x) => x.literal)).toEqual(['815'])
     // both overalls go to the metric layer as measured spans on their own lines (the width had no label of the analyzer)
     expect(r.spans.map((x) => x.literal).sort()).toEqual(['1365', '815'])
-    expect(r.resolverVersion).toBe('1.1.0')
+    expect(r.resolverVersion).toBe('1.2.0')
   })
   it('counter-trials: no page area, another area, two scales, or the analyzer\'s reading also fitting — no witness', () => {
     expect(run({}).decisions.find((x) => x.itemId === 'D1')?.decision).toBe('UNRESOLVED')

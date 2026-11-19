@@ -1,0 +1,118 @@
+[
+ {
+  "i": 0,
+  "facade": "REAR",
+  "before": {
+   "walls": 3,
+   "openings": 3,
+   "roofs": 1
+  },
+  "after": {
+   "walls": 3,
+   "openings": 3,
+   "roofs": 1
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "elements[2]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "roofs[0]:ACCEPTED/OBJECT",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ },
+ {
+  "i": 1,
+  "facade": "EAST",
+  "before": {
+   "walls": 0,
+   "openings": 0,
+   "roofs": 2
+  },
+  "after": {
+   "walls": 2,
+   "openings": 1,
+   "roofs": 2
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:NORMALIZED/TUPLE",
+   "elements[1]:NORMALIZED/TUPLE",
+   "openings[0]:NORMALIZED/TUPLE",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "roofs[1]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:NORMALIZED/TUPLE",
+   "walls[1]:NORMALIZED/TUPLE"
+  ],
+  "failed": null
+ },
+ {
+  "i": 2,
+  "facade": "WEST",
+  "before": {
+   "walls": 2,
+   "openings": 1,
+   "roofs": 2
+  },
+  "after": {
+   "walls": 2,
+   "openings": 1,
+   "roofs": 2
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "roofs[1]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ },
+ {
+  "i": 3,
+  "facade": "FRONT",
+  "before": {
+   "walls": 4,
+   "openings": 5,
+   "roofs": 1
+  },
+  "after": {
+   "walls": 3,
+   "openings": 5,
+   "roofs": 1
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "openings[3]:ACCEPTED/OBJECT",
+   "openings[4]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:REFUSED/OBJECT the zone is the roof's own polygon: a roof, not a wall finish",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT",
+   "walls[3]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ }
+]

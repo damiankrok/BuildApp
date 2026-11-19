@@ -82,17 +82,33 @@ describe('v3.54.14 the elevation sketch', () => {
     expect(shifted.local.find((l) => l.anchor === 'left wall end')?.residualPx).toBeCloseTo(12, 3)
   })
 
-  it('an opening moved inside a correct silhouette is recorded with its residual; one the model lacks is kept, named', async () => {
+  it('an opening moved inside a correct silhouette (same count, same box) decides the form: PARTIAL, finish only; one the model lacks is kept, named', async () => {
     const moved = answer()
     moved.openings[0].polygon = rect(170, 400, 220, 460)
     const c = checkProportions(await read(moved), expect0)
-    expect(c.verdict).toBe('ACCEPTED')
+    // v3.54.15: the residual is not a dead metric — the form is refused, the finish still taken
+    expect(c.verdict).toBe('PARTIAL')
+    expect(c.properties).toMatchObject({ form: 'REJECTED', finish: 'ACCEPTED', vertical: 'VERIFIED' })
     const w = c.openings.find((o) => o.modelId === 'w1')
+    expect(w?.status).toBe('OFF')
     expect(w?.centreResidualM).toBeCloseTo(0.4, 3)
+    // the true one is ACCEPTED on the same facts
+    expect(checkProportions(await read(answer()), expect0).verdict).toBe('ACCEPTED')
     const extra = answer()
     extra.openings.push({ kind: 'WINDOW', polygon: rect(520, 400, 560, 460), host: 'main' })
     const e = checkProportions(await read(extra), expect0)
     expect(e.openings.filter((o) => o.status === 'NOT_IN_MODEL')).toHaveLength(1)
+  })
+
+  it('v3.54.15: no ridge admitted — the finish by the sketch\'s own ground line (PARTIAL), never the form; a contradicted witness rejects all', async () => {
+    const { ridge: _r, eaves: _e, ...noVertical } = expect0
+    void _r
+    void _e
+    const p = checkProportions(await read(answer()), noVertical)
+    expect(p.verdict).toBe('PARTIAL')
+    expect(p.properties).toMatchObject({ vertical: 'UNVERIFIED', form: 'REJECTED', finish: 'ACCEPTED' })
+    expect(p.projection?.zeroRow).toBe(500)
+    expect(checkProportions(await read(answer(0, 1.08)), expect0).properties.finish).toBe('REJECTED')
   })
 
   it('its wall zones become an appearance observation of contract 1.1.0, brick included', async () => {

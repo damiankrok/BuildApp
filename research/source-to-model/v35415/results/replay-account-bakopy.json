@@ -1,0 +1,128 @@
+[
+ {
+  "i": 0,
+  "facade": "WEST",
+  "before": {
+   "walls": 4,
+   "openings": 4,
+   "roofs": 1
+  },
+  "after": {
+   "walls": 4,
+   "openings": 4,
+   "roofs": 1
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "elements[2]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "openings[3]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT",
+   "walls[3]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ },
+ {
+  "i": 1,
+  "facade": "REAR",
+  "before": {
+   "walls": 3,
+   "openings": 3,
+   "roofs": 2
+  },
+  "after": {
+   "walls": 3,
+   "openings": 3,
+   "roofs": 2
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "elements[2]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "roofs[1]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ },
+ {
+  "i": 2,
+  "facade": "EAST",
+  "before": {
+   "walls": 6,
+   "openings": 3,
+   "roofs": 1
+  },
+  "after": {
+   "walls": 6,
+   "openings": 3,
+   "roofs": 1
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "elements[1]:ACCEPTED/OBJECT",
+   "elements[2]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT",
+   "walls[3]:ACCEPTED/OBJECT",
+   "walls[4]:ACCEPTED/OBJECT",
+   "walls[5]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ },
+ {
+  "i": 3,
+  "facade": "FRONT",
+  "before": {
+   "walls": 4,
+   "openings": 3,
+   "roofs": 2
+  },
+  "after": {
+   "walls": 4,
+   "openings": 3,
+   "roofs": 2
+  },
+  "completeness": "COMPLETE",
+  "reasons": [],
+  "fates": [
+   "elements[0]:ACCEPTED/OBJECT",
+   "openings[0]:ACCEPTED/OBJECT",
+   "openings[1]:ACCEPTED/OBJECT",
+   "openings[2]:ACCEPTED/OBJECT",
+   "roofs[0]:NORMALIZED/BARE_POLYGON",
+   "roofs[1]:NORMALIZED/BARE_POLYGON",
+   "silhouette:ACCEPTED/OBJECT",
+   "walls[0]:ACCEPTED/OBJECT",
+   "walls[1]:ACCEPTED/OBJECT",
+   "walls[2]:ACCEPTED/OBJECT",
+   "walls[3]:ACCEPTED/OBJECT"
+  ],
+  "failed": null
+ }
+]

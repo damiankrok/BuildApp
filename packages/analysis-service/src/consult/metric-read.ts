@@ -24,20 +24,21 @@
  */
 import { createHash } from 'node:crypto'
 import { z } from 'zod'
-import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { ConsultedLevel, ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { Raster } from '@buildapp/source-cv'
 import { encodePng } from '../diagnostics.js'
 import type { CompiledScene } from '@buildapp/geometry'
 import { MAX_SIDE } from './tools.js'
-import { ConsultantUnavailable } from './loop.js'
+import { ConsultantUnavailable, settledOf } from './loop.js'
+import { reserveOf } from './cost.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 
 export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as const
-export const DIMENSION_OBSERVATION_VERSION = '1.0.0' as const
-export const METRIC_READ_PROMPT_VERSION = 'metric-read/1' as const
+export const DIMENSION_OBSERVATION_VERSION = '1.1.0' as const
+export const METRIC_READ_PROMPT_VERSION = 'metric-read/2' as const
 export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/1' as const
-export const METRIC_RESOLVER_VERSION = '1.1.0' as const
+export const METRIC_RESOLVER_VERSION = '1.2.0' as const
 export const VERIFY_MAX_ITEMS = 40
 
 const finite = z.number().finite()
@@ -49,6 +50,20 @@ const AXES = ['HORIZONTAL', 'VERTICAL', 'OBLIQUE', 'NONE'] as const
 const SCOPES = ['WHOLE_HOUSE', 'BODY', 'WING', 'ROOM', 'OPENING', 'SEGMENT', 'WALL_THICKNESS', 'LEVEL', 'HEIGHT', 'OTHER', 'UNKNOWN'] as const
 const REFERENCES = ['OUTER_FACE', 'INNER_FACE', 'AXIS', 'FINISHED_LEVEL', 'STRUCTURAL_LEVEL', 'TERRAIN', 'UNKNOWN'] as const
 const STATUSES = ['PRINTED', 'DERIVED', 'ESTIMATED', 'UNKNOWN'] as const
+/** 1.1.0: what a LEVEL marks (a ceiling is not the eaves, the terrain is not ±0,00) and what an ANGLE is. */
+export const MARK_ROLES = ['FLOOR', 'TERRAIN', 'CEILING', 'EAVES', 'RIDGE', 'CHIMNEY', 'ROOF_PITCH', 'OTHER', 'UNKNOWN'] as const
+export type MarkRole = (typeof MARK_ROLES)[number]
+/**
+ * The role a 1.0.0 answer (no role field) stated only in its free hint, read by a fixed vocabulary — `roleFrom: HINT`,
+ * never stronger than the API's own field. A hint that names none of them, or two, gives no role.
+ */
+export function roleOfHint(kind: string, hint: string | undefined): MarkRole | undefined {
+  if (!hint) return undefined
+  const h = hint.toLowerCase()
+  const hits = ([['RIDGE', /ridge|kalenic/], ['EAVES', /eave|okap/], ['CEILING', /ceiling|sufit|strop/], ['TERRAIN', /terrain|teren|grunt|ground level outside/], ['CHIMNEY', /chimney|komin/], ['FLOOR', /ground floor|floor level|parter|posadzk|±\s*0|finished floor|\bfloor\b/], ['ROOF_PITCH', /pitch|slope|nachyl|spadek/]] as Array<[MarkRole, RegExp]>).filter(([, re]) => re.test(h)).map(([r]) => r)
+  const usable = hits.filter((r) => (kind === 'ANGLE' ? r === 'ROOF_PITCH' : r !== 'ROOF_PITCH'))
+  return usable.length === 1 ? usable[0] : undefined
+}
 
 /** One printed dimension as the API reported it, in the frame's pixels (canonical). */
 export const DimensionObservationSchema = z
@@ -73,6 +88,9 @@ export const DimensionObservationSchema = z
     status: z.enum(STATUSES),
     hostHint: z.string().max(120).optional(),
     note: z.string().max(300).optional(),
+    /** 1.1.0: the role of a LEVEL / ANGLE, and where it came from (the API's field, or its 1.0.0 hint by vocabulary). */
+    role: z.enum(MARK_ROLES).optional(),
+    roleFrom: z.enum(['API', 'HINT']).optional(),
   })
   .strict()
 export type DimensionObservation = z.infer<typeof DimensionObservationSchema>
@@ -93,6 +111,7 @@ const RawItem = z
     status: z.enum(STATUSES),
     hostHint: z.string().max(120).nullable().optional(),
     note: z.string().max(300).nullable().optional(),
+    role: z.enum(MARK_ROLES).nullable().optional(),
   })
   .strict()
 
@@ -123,6 +142,7 @@ const READ_TOOL = {
             reference: { enum: REFERENCES, description: 'what its ends rest on: outer faces of walls, inner faces, axes; for a level, finished or structural level or terrain' },
             status: { enum: STATUSES, description: 'PRINTED when the number is printed on the drawing; DERIVED/ESTIMATED only if you computed or guessed it (say how in note); UNKNOWN if illegible' },
             hostHint: { type: ['string', 'null'], description: 'short: which wall, room or opening (e.g. "front wall, overall", "living room width")' },
+            role: { enum: [...MARK_ROLES, null], description: 'for a LEVEL: what it marks — FLOOR (a finished floor, ±0,00 included), TERRAIN (the ground outside), CEILING, EAVES (the roof edge), RIDGE, CHIMNEY (its top); for an ANGLE: ROOF_PITCH; null for a LENGTH or an AREA' },
             note: { type: ['string', 'null'] },
           },
         },
@@ -178,7 +198,6 @@ export type MetricReadRecord = { at: string; kind: string; [k: string]: unknown 
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; record?: (e: MetricReadRecord) => void; signal?: AbortSignal; now?: () => Date }
 
 const sha = (b: Uint8Array | string): string => createHash('sha256').update(b).digest('hex')
-const usdOf = (p: Price, i: number, o: number): number => Math.round(((i * p.inputUsdPerMTok + o * p.outputUsdPerMTok) / 1e6) * 1e6) / 1e6
 
 /** The picture sent: the frame's raster, downscaled by a whole factor above MAX_SIDE (frame = picture × scale). */
 export function pictureOf(raster: Raster, mark?: (data: Uint8ClampedArray, w: number, h: number, scale: number) => void): { png: Uint8Array; width: number; height: number; scale: number } {
@@ -200,14 +219,13 @@ export function pictureOf(raster: Raster, mark?: (data: Uint8ClampedArray, w: nu
 
 async function send(ctx: Ctx, note: string, system: string, content: unknown[], tool: unknown, pictures: number): Promise<{ turn: ModelTurn; usd: number } | { failed: string }> {
   const textChars = system.length + JSON.stringify(content.filter((c) => (c as { type: string }).type === 'text')).length + JSON.stringify(tool).length
-  const reserveUsd = usdOf(ctx.price, Math.ceil(textChars / 2.5) + pictures * 2600, ctx.model.maxOutputTokens)
+  const reserveUsd = reserveOf(ctx.price, Math.ceil(textChars / 2.5) + pictures * 2600, ctx.model.maxOutputTokens, ctx.model.cache)
   const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, note)
   try {
     const turn = await ctx.model.send({ system, messages: [{ role: 'user', content }], tools: [tool], ...(ctx.signal ? { signal: ctx.signal } : {}) })
-    const it = turn.usage.inputTokens ?? 0
-    const ot = turn.usage.outputTokens ?? 0
-    const usd = usdOf(ctx.price, it + (turn.usage.cacheCreationInputTokens ?? 0) * 1.25 + (turn.usage.cacheReadInputTokens ?? 0) * 0.1, ot)
-    if (reservation) ctx.spend?.settle(reservation, { usd, inputTokens: it, outputTokens: ot })
+    const settled = settledOf(ctx.price, turn.usage)
+    const usd = settled.usd
+    if (reservation) ctx.spend?.settle(reservation, settled)
     return { turn, usd }
   } catch (e) {
     const reason = e instanceof ConsultantUnavailable ? e.reason : 'TRANSPORT'
@@ -236,7 +254,15 @@ function stableIds(frameId: string, items: Array<Omit<DimensionObservation, 'id'
   return items.map((o, i) => ({ ...o, id: id[i] }) as DimensionObservation).sort((a, b) => (a.id < b.id ? -1 : 1))
 }
 
-export type IndependentRead = { frameId: string; raw: unknown; observations: DimensionObservation[]; refused: string[]; usd: number; requestId?: string; model: string; promptVersion: string }
+export type IndependentRead = { frameId: string; raw: unknown; observations: DimensionObservation[]; refused: string[]; usd: number; requestId?: string; model: string; promptVersion: string; /** v3.54.15: COMPLETE, TRUNCATED (partial), REFUSED or NO_TOOL_CALL — the response as a whole. */ response?: 'COMPLETE' | 'TRUNCATED' | 'REFUSED' | 'NO_TOOL_CALL' }
+
+/** The role of a LEVEL / ANGLE: the API's own field (1.1.0), else its 1.0.0 hint by vocabulary; never for a LENGTH. */
+function roleFields(kind: string, role: MarkRole | undefined, hint: string | undefined): { role?: MarkRole; roleFrom?: 'API' | 'HINT' } {
+  if (kind !== 'LEVEL' && kind !== 'ANGLE') return {}
+  if (role && role !== 'UNKNOWN') return { role, roleFrom: 'API' }
+  const h = roleOfHint(kind, hint)
+  return h ? { role: h, roleFrom: 'HINT' } : {}
+}
 
 /** Stage 1: one request per frame, nothing of the analyzer's in it. */
 export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): Promise<IndependentRead[]> {
@@ -256,8 +282,12 @@ export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): 
     const raw = toolInput(r.turn, READ_TOOL.name)
     const refused: string[] = []
     const items: Array<Omit<DimensionObservation, 'id'>> = []
-    const list = (raw as { items?: unknown[] } | undefined)?.items
-    if (!Array.isArray(list)) refused.push('no report_dimensions answer')
+    // v3.54.15: the response as a whole — a refusal, a missing tool call and a cut-off answer are named, never an empty read
+    const response: IndependentRead['response'] = r.turn.stopReason === 'refusal' ? 'REFUSED' : r.turn.stopReason === 'max_tokens' ? 'TRUNCATED' : raw === undefined ? 'NO_TOOL_CALL' : 'COMPLETE'
+    if (response === 'REFUSED') refused.push('REFUSED: the provider refused the answer (stop_reason refusal); nothing of it is read')
+    if (response === 'TRUNCATED') refused.push('TRUNCATED: the answer was cut off at max_tokens; the items after the cut are missing (the read is partial)')
+    const list = response === 'REFUSED' ? undefined : (raw as { items?: unknown[] } | undefined)?.items
+    if (!Array.isArray(list) && response !== 'REFUSED') refused.push(`NO_TOOL_CALL: no report_dimensions answer${r.turn.stopReason ? ` (stop_reason ${r.turn.stopReason})` : ''}`)
     for (const [n, it] of (Array.isArray(list) ? list : []).entries()) {
       const p = RawItem.safeParse(it)
       if (!p.success) {
@@ -292,11 +322,12 @@ export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): 
         status: v.status,
         ...(v.hostHint ? { hostHint: v.hostHint } : {}),
         ...(v.note ? { note: v.note } : {}),
+        ...roleFields(v.kind, v.role ?? undefined, v.hostHint ?? undefined),
       })
     }
     const observations = stableIds(f.frameId, items).map((o) => DimensionObservationSchema.parse(o))
     ctx.record?.({ at: (ctx.now ?? (() => new Date()))().toISOString(), kind: 'METRIC_READ', frameId: f.frameId, observations: observations.length, refused: refused.length, usd: r.usd })
-    out.push({ frameId: f.frameId, raw, observations, refused, usd: r.usd, ...(r.turn.requestId ? { requestId: r.turn.requestId } : {}), model: r.turn.model, promptVersion: METRIC_READ_PROMPT_VERSION })
+    out.push({ frameId: f.frameId, raw, observations, refused, usd: r.usd, response, ...(r.turn.requestId ? { requestId: r.turn.requestId } : {}), model: r.turn.model, promptVersion: METRIC_READ_PROMPT_VERSION })
   }
   return out
 }
@@ -403,11 +434,11 @@ export type MetricDecision = {
   local?: string
   api?: string
   verdict?: LocalVerdict['verdict']
-  decision: 'AGREES' | 'CORRECTED' | 'RETAINED' | 'UNRESOLVED' | 'NEW_SPAN' | 'NOT_MATCHED'
+  decision: 'AGREES' | 'CORRECTED' | 'RETAINED' | 'UNRESOLVED' | 'NEW_SPAN' | 'NOT_MATCHED' | 'LEVEL_HANDED'
   witness?: string
   why: string
 }
-export type MetricResolution = { resolverVersion: string; decisions: MetricDecision[]; readings: ConsultedReading[]; spans: ConsultedSpan[] }
+export type MetricResolution = { resolverVersion: string; decisions: MetricDecision[]; readings: ConsultedReading[]; spans: ConsultedSpan[]; /** 1.2.0: printed level marks handed to the section's ladder (admitted or refused by the drawing, not here). */ levels?: ConsultedLevel[] }
 
 const centre = (b: { x0: number; y0: number; x1: number; y1: number }): [number, number] => [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]
 
@@ -480,7 +511,16 @@ export function resolveMetric(input: { metrics: MetricEvidenceSet; table: readon
     spans.push({ proposalId: `ms:${o.id}`, frameId: o.frameId, literal: o.literal.replace(/\s/g, ''), unit: o.unit === 'm' ? 'm' : o.unit === 'mm' ? 'mm' : 'cm', from: { x: o.ends.from[0], y: o.ends.from[1] }, to: { x: o.ends.to[0], y: o.ends.to[1] }, consultant: input.consultant })
     decisions.push({ observationId: o.id, frameId: o.frameId, api: o.literal, decision: 'NEW_SPAN', why: `a printed ${o.scope.toLowerCase().replace(/_/g, ' ')} dimension the analyzer read no label for: handed as a span, the metric layer snaps and judges it` })
   }
-  return { resolverVersion: METRIC_RESOLVER_VERSION, decisions, readings, spans }
+  // 1.2.0: every printed level mark with a text box is handed to the section it was read on; the drawing decides
+  // (`external-levels.ts`: the level symbol under it, one ladder, a printed ±0,00). No LOCAL agreement is required —
+  // the witness is the drawing's own geometry, not a second reader.
+  const levels: ConsultedLevel[] = []
+  for (const o of obsAll) {
+    if (o.kind !== 'LEVEL' || o.status !== 'PRINTED' || o.value === null) continue
+    levels.push({ proposalId: `ml:${o.id}`, frameId: o.frameId, literal: o.literal.trim(), box: { x0: o.labelBox[0], y0: o.labelBox[1], x1: o.labelBox[2], y1: o.labelBox[3] }, model: input.consultant.model })
+    decisions.push({ observationId: o.id, frameId: o.frameId, api: o.literal, decision: 'LEVEL_HANDED', why: `a printed level mark (${o.value} m${o.role ? `, ${o.role}` : ''}): handed to the section's ladder, which admits it only by the drawing` })
+  }
+  return { resolverVersion: METRIC_RESOLVER_VERSION, decisions, readings, spans, levels }
 }
 
 /**

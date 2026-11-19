@@ -58,6 +58,7 @@ import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './spe
 import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import { checkLevelReadings, levelEvidenceFromReadings, supersededLevels } from './external-levels.js'
+import type { ConsultedLevel } from './external-levels.js'
 import { LEVEL_MARKS_NAME, LEVEL_MARKS_VERSION, levelCrops, levelLabels, levelReadingsFrom } from './level-marks.js'
 import { angleLabels, judgeAngles, SECTION_ANGLES_NAME, SECTION_ANGLES_VERSION, SLOPE_TOLERANCE_DEG } from './section-angles.js'
 import { judgeSectionHeights, sectionHeightCrops, sectionHeightLabels, segmentOf, SECTION_HEIGHTS_NAME, SECTION_HEIGHTS_VERSION } from './section-heights.js'
@@ -119,6 +120,12 @@ export type ExtractOptions = {
   crossAxisWitness?: boolean
   /** v3.54.2 pilot: a consultant's whole printed dimensions (`consulted-spans.ts`), measured on the plan's own strokes. Absent: off. */
   consultedSpans?: readonly ConsultedSpan[]
+  /**
+   * v3.54.15: a consultant's level marks read on a section (the API's independent read: literal and text box), admitted
+   * only by the same drawing as any second reader's (`external-levels.ts`: the level symbol under the box, one ladder,
+   * a printed ±0,00) — on a section where the analyzer itself admitted no level. Absent: off, as before.
+   */
+  consultedLevels?: readonly ConsultedLevel[]
 }
 
 /** Orthographic sheets carry printed measurements; renders and site plans do not, and reading numbers off them invents scale. */
@@ -1177,6 +1184,53 @@ function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRec
             status: 'AMBIGUOUS',
           })
         }
+      }
+    }
+
+    // --- v3.54.15: the consultant's level marks, admitted by the same drawing, where the analyzer admitted none ---
+    const myLevels = (options.consultedLevels ?? []).filter((l) => l.frameId === frame.id)
+    // a section whose levels the drawing already validated (recogniser) keeps them; the template's unvalidated datums do not
+    // stand against marks the drawing admits: those off the admitted ladder, or on the same label, are dropped and named
+    const validatedHere = evidence.some((e) => e.frameId === frame.id && e.kind === 'LEVEL_DATUM' && (e.provenance.extractor === 'RECOGNISER_VALIDATED' || e.provenance.extractor === 'VISION_VALIDATED'))
+    if (plane === 'SECTION_HY' && myLevels.length > 0 && !validatedHere) {
+      const sectionTokens = read.raw ?? read.tokens
+      const readings = myLevels.map((l) => ({ text: l.literal, boxPx: l.box, classConfidence: 1 }))
+      const verdict = checkLevelReadings(raster, readings, undefined, sectionTokens.map((t) => t.box))
+      if (verdict.admitted && verdict.zeroAnchor === 'PRINTED_ZERO') {
+        const made = levelEvidenceFromReadings(frame, readings, verdict, { id: 'metric-consultant', model: myLevels[0].model, kind: 'VISION' })
+        const overruled = new Map(supersededLevels(evidence.filter((e) => e.frameId === frame.id), frame.id, readings, verdict).map((x) => [x.evidenceId, x.why]))
+        for (let i = evidence.length - 1; i >= 0; i -= 1) {
+          const e = evidence[i]
+          if (e.frameId !== frame.id || e.kind !== 'LEVEL_DATUM' || !overruled.has(e.id)) continue
+          unresolved.push({
+            id: stableId('gap', 'level-overruled', { frameId: frame.id, evidenceId: e.id }),
+            what: `the template's reading "${e.rawText ?? e.value}" of a level mark on ${frame.assetId}`,
+            frameId: frame.id,
+            reason: `${overruled.get(e.id)} (the consultant's marks admitted by the drawing)`,
+            status: 'AMBIGUOUS',
+            ocrTokenIds: e.ocrTokenIds,
+          })
+          evidence.splice(i, 1)
+        }
+        evidence.push(...made.evidence)
+        levelMarksAdmitted += made.evidence.length
+        if (!levelRegistration && made.registration) levelRegistration = made.registration
+        // each mark the ladder did not take is named with its own reason (one gap per mark, by its printed text)
+        for (const c of verdict.checks) if (c.status !== 'ON_LADDER') unresolved.push({
+          id: stableId('gap', 'consulted-level', { frameId: frame.id, text: c.text, index: c.index }),
+          what: `the consultant's level mark "${c.text}" on ${frame.assetId}`,
+          frameId: frame.id,
+          reason: `${c.status}: ${c.why}`,
+          status: 'AMBIGUOUS',
+        })
+      } else {
+        unresolved.push({
+          id: stableId('gap', 'consulted-levels', { frameId: frame.id }),
+          what: `the consultant's ${myLevels.length} level mark(s) on ${frame.assetId}`,
+          frameId: frame.id,
+          reason: `not admitted by the drawing: ${verdict.why}; ${verdict.checks.map((c) => `"${c.text}" ${c.status}`).join(', ')}`,
+          status: 'AMBIGUOUS',
+        })
       }
     }
 

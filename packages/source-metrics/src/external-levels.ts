@@ -46,6 +46,8 @@ const MIN_PAIR_ROWS = 10
 export const PUBLISHED_HEIGHT_TOLERANCE_M = 0.02
 
 export type ExternalLevelReading = { text: string; boxPx: PixelRect; classConfidence: number }
+/** v3.54.15: a consultant's level mark on a section, as the metric consultant read it (`analysis-service` metric-read.ts). */
+export type ConsultedLevel = { proposalId: string; frameId: string; literal: string; box: PixelRect; model: string }
 export type LevelReadingCheck = {
   index: number
   text: string

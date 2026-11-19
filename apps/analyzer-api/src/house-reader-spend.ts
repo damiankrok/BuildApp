@@ -256,9 +256,19 @@ export function openSpendLedger(options: { dir: string; limits: SpendLimits; ope
         // allowed to be booked BELOW zero or to hide an overrun: a cost above the reservation is booked as it is
         const cost = actual === 'NOT_SENT' ? 0 : round6(Math.max(0, actual.usd))
         const next: SpendState = { ...state, cumulativeUsd: round6(Math.max(state.openingUsd, state.cumulativeUsd - reservation.reservedUsd + cost)), updatedAt: at }
-        store(next, { event: actual === 'NOT_SENT' ? 'RELEASED' : 'SETTLED', id: reservation.id, at, purpose: reservation.purpose, model: reservation.model, reservedUsd: reservation.reservedUsd, usd: cost, ...(actual !== 'NOT_SENT' ? { inputTokens: actual.inputTokens ?? null, outputTokens: actual.outputTokens ?? null } : {}), ...(note ? { note } : {}), cumulativeUsd: next.cumulativeUsd })
+        store(next, { event: actual === 'NOT_SENT' ? 'RELEASED' : 'SETTLED', id: reservation.id, at, purpose: reservation.purpose, model: reservation.model, reservedUsd: reservation.reservedUsd, usd: cost, ...(actual !== 'NOT_SENT' ? { inputTokens: actual.inputTokens ?? null, outputTokens: actual.outputTokens ?? null, ...cacheSplit(actual) } : {}), ...(note ? { note } : {}), cumulativeUsd: next.cumulativeUsd })
       }),
   }
+}
+
+/** v3.54.15: the cache split of a settled request, when the caller reports one (`analysis-service` cost.ts). */
+function cacheSplit(actual: object): Record<string, number> {
+  const a = actual as { cacheReadInputTokens?: unknown; cacheCreation5mInputTokens?: unknown; cacheCreation1hInputTokens?: unknown }
+  const out: Record<string, number> = {}
+  if (typeof a.cacheReadInputTokens === 'number') out.cacheReadInputTokens = a.cacheReadInputTokens
+  if (typeof a.cacheCreation5mInputTokens === 'number') out.cacheCreation5mInputTokens = a.cacheCreation5mInputTokens
+  if (typeof a.cacheCreation1hInputTokens === 'number') out.cacheCreation1hInputTokens = a.cacheCreation1hInputTokens
+  return out
 }
 
 /** The conservative cost of a request: what is reserved before it is sent. */

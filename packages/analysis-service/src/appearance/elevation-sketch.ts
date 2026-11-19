@@ -19,14 +19,15 @@ import { encodePng } from '../diagnostics.js'
 import { fillPolygon, grid } from './mask.js'
 import { APPEARANCE_OBSERVATION_SCHEMA, APPEARANCE_OBSERVATION_VERSION } from './contract.js'
 import type { AppearanceObservation } from './contract.js'
-import { ConsultantUnavailable } from '../consult/loop.js'
+import { ConsultantUnavailable, settledOf } from '../consult/loop.js'
+import { reserveOf } from '../consult/cost.js'
 import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from '../consult/loop.js'
 
 export const ELEVATION_SKETCH_SCHEMA = 'buildapp.elevation-sketch' as const
-export const ELEVATION_SKETCH_VERSION = '1.0.0' as const
+export const ELEVATION_SKETCH_VERSION = '1.1.0' as const
 export const ELEVATION_SKETCH_PROMPT_VERSION = 'elevation-sketch/1' as const
-/** 2: a roof given as a bare polygon is read as one (recorded); the eaves are tested on roof contours only. */
-export const ELEVATION_SKETCH_PARSER_VERSION = 2 as const
+/** 2: a roof given as a bare polygon is read as one (recorded). 3 (v3.54.15): unambiguous tuples normalized, a fate per element, completeness, stop_reason. */
+export const ELEVATION_SKETCH_PARSER_VERSION = 3 as const
 export const SKETCH_RENDERER_VERSION = '1.0.0' as const
 
 const finite = z.number().finite()
@@ -53,6 +54,8 @@ export const ElevationSketchSchema = z
     elements: z.array(z.object({ id: z.string(), kind: z.enum(ELEMENT_KINDS), polygon: Poly }).strict()),
     producer: z.object({ kind: z.literal('API_CONTOUR_READING'), model: z.string(), promptVersion: z.string() }).strict(),
     refused: z.array(z.string()),
+    /** 1.1.0: the fate of every element of the raw answer and the answer's completeness (`canonicalizeElevationAnswer`). */
+    account: z.object({ parserVersion: z.number().int(), response: z.enum(['COMPLETE', 'TRUNCATED']), completeness: z.enum(['COMPLETE', 'PARTIAL']), reasons: z.array(z.string()), elements: z.array(z.object({ path: z.string(), part: z.enum(['roof', 'wall', 'opening', 'element', 'silhouette', 'groundRow']), form: z.enum(['OBJECT', 'TUPLE', 'BARE_POLYGON', 'UNKNOWN']), fate: z.enum(['ACCEPTED', 'NORMALIZED', 'REFUSED']), reason: z.string().optional(), id: z.string().optional() }).strict()), unknownFields: z.array(z.string()) }).strict(),
   })
   .strict()
 export type ElevationSketch = z.infer<typeof ElevationSketchSchema>
@@ -91,7 +94,6 @@ export type SketchFrame = { frameId: string; raster: Raster; caption: string }
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }
 
 const sha = (b: Uint8Array | string): string => createHash('sha256').update(b).digest('hex')
-const usdOf = (p: Price, i: number, o: number): number => Math.round(((i * p.inputUsdPerMTok + o * p.outputUsdPerMTok) / 1e6) * 1e6) / 1e6
 const MAX_SIDE = 1400
 
 function downscaled(r: Raster): { png: Uint8Array; width: number; height: number; scale: number } {
@@ -130,7 +132,7 @@ export async function readElevationSketch(ctx: Ctx, f: SketchFrame): Promise<Ske
     { type: 'text', text: `An elevation of a house — "${f.caption}". The picture is ${pic.width} × ${pic.height} px.` },
     { type: 'image', source: { type: 'base64', media_type: 'image/png', data: Buffer.from(pic.png).toString('base64') } },
   ]
-  const reserveUsd = usdOf(ctx.price, Math.ceil((ELEVATION_SKETCH_SYSTEM.length + JSON.stringify(TOOL).length) / 2.5) + 2600, ctx.model.maxOutputTokens)
+  const reserveUsd = reserveOf(ctx.price, Math.ceil((ELEVATION_SKETCH_SYSTEM.length + JSON.stringify(TOOL).length) / 2.5) + 2600, ctx.model.maxOutputTokens, ctx.model.cache)
   const reservation = ctx.spend?.reserve(ctx.model.model, reserveUsd, `elevation sketch ${f.frameId}`)
   let turn: ModelTurn
   try {
@@ -140,73 +142,165 @@ export async function readElevationSketch(ctx: Ctx, f: SketchFrame): Promise<Ske
     if (reservation) ctx.spend?.settle(reservation, reason === 'NO_CREDENTIALS' || reason === 'REJECTED_UNBILLED' || reason === 'BUDGET' ? 'NOT_SENT' : { usd: reserveUsd, inputTokens: 0, outputTokens: 0 }, reason)
     return { raw: null, usd: 0, failed: `${reason}: ${(e as Error).message.slice(0, 200)}` }
   }
-  const it = turn.usage.inputTokens ?? 0
-  const ot = turn.usage.outputTokens ?? 0
-  const usd = usdOf(ctx.price, it, ot)
-  if (reservation) ctx.spend?.settle(reservation, { usd, inputTokens: it, outputTokens: ot })
-  const raw = (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === TOOL.name)?.input as Record<string, unknown> | undefined
-  if (!raw) return { raw: turn.content, usd, failed: 'no report_elevation answer', ...(turn.requestId ? { requestId: turn.requestId } : {}) }
-  const refused: string[] = []
+  const settled = settledOf(ctx.price, turn.usage)
+  const usd = settled.usd
+  if (reservation) ctx.spend?.settle(reservation, settled)
+  const raw = (turn.content as Array<{ type: string; name?: string; input?: unknown }>).find((b) => b.type === 'tool_use' && b.name === TOOL.name)?.input
+  const c = canonicalizeElevationAnswer({ raw, stopReason: turn.stopReason, frameId: f.frameId, picture: { width: pic.width, height: pic.height, scale: pic.scale, sha256: sha(pic.png) }, frame: { width: f.raster.width, height: f.raster.height }, model: turn.model })
+  return { ...(c.sketch ? { sketch: c.sketch } : {}), raw: raw ?? turn.content, usd, ...(c.failed ? { failed: c.failed } : {}), ...(turn.requestId ? { requestId: turn.requestId } : {}) }
+}
+
+/**
+ * v3.54.15 — the answer as the contract holds it (parser 3, contract 1.1.0): pure, deterministic, replayable on recorded
+ * answers. Every element of the raw answer gets its fate:
+ *  - OBJECT — read as given; NORMALIZED — an unambiguous historical form read losslessly (a tuple whose positions are
+ *    the schema's `required` order, every position type-checked; a roof given as a bare polygon), the form recorded;
+ *  - REFUSED — with its reason (not a polygon, a corner outside the picture, an unknown class/kind, an unknown form,
+ *    a wall zone that is the roof's own polygon). Nothing is dropped without a fate; unknown top-level fields are named.
+ * Completeness: COMPLETE when no wall or opening (the form-bearing parts) was refused and the response was not cut
+ * off; else PARTIAL with the reasons. A refusal or a missing tool call gives no sketch, with its reason.
+ */
+export type ElementFate = { path: string; part: 'roof' | 'wall' | 'opening' | 'element' | 'silhouette' | 'groundRow'; form: 'OBJECT' | 'TUPLE' | 'BARE_POLYGON' | 'UNKNOWN'; fate: 'ACCEPTED' | 'NORMALIZED' | 'REFUSED'; reason?: string; id?: string }
+export type SketchAccount = { parserVersion: number; response: 'COMPLETE' | 'TRUNCATED'; completeness: 'COMPLETE' | 'PARTIAL'; reasons: string[]; elements: ElementFate[]; unknownFields: string[] }
+
+const TUPLE_ORDER: Record<'walls' | 'openings' | 'elements', readonly string[]> = { walls: ['class', 'polygon', 'host', 'visibility'], openings: ['kind', 'polygon', 'host'], elements: ['kind', 'polygon'] }
+
+export function canonicalizeElevationAnswer(input: { raw: unknown; stopReason?: string; frameId: string; picture: { width: number; height: number; scale: number; sha256: string }; frame: { width: number; height: number }; model: string }): { sketch?: ElevationSketch; account: SketchAccount; failed?: string } {
+  const account: SketchAccount = { parserVersion: ELEVATION_SKETCH_PARSER_VERSION, response: input.stopReason === 'max_tokens' ? 'TRUNCATED' : 'COMPLETE', completeness: 'COMPLETE', reasons: [], elements: [], unknownFields: [] }
+  if (input.stopReason === 'refusal') return { account, failed: 'REFUSED: the provider refused the answer (stop_reason refusal)' }
+  if (!input.raw || typeof input.raw !== 'object' || Array.isArray(input.raw)) return { account, failed: `NO_TOOL_CALL: no report_elevation answer${input.stopReason ? ` (stop_reason ${input.stopReason})` : ''}` }
+  const raw = input.raw as Record<string, unknown>
+  account.unknownFields = Object.keys(raw).filter((k) => !['groundRow', 'silhouette', 'roofs', 'walls', 'openings', 'elements'].includes(k)).sort()
+  const pic = input.picture
   const k = pic.scale
-  const inside = (p: number[]): boolean => p[0] >= -4 && p[1] >= -4 && p[0] <= pic.width + 4 && p[1] <= pic.height + 4
-  const poly = (v: unknown, what: string): Array<[number, number]> | undefined => {
+  const inside = (q: number[]): boolean => q[0] >= -4 && q[1] >= -4 && q[0] <= pic.width + 4 && q[1] <= pic.height + 4
+  const polyOf = (v: unknown): { ok: Array<[number, number]> } | { why: string } => {
     const r = Poly.safeParse(v)
-    if (!r.success) {
-      refused.push(`${what}: not a polygon`)
-      return undefined
-    }
-    if (!r.data.every(inside)) {
-      refused.push(`${what}: a corner outside the picture`)
-      return undefined
-    }
-    return r.data.map(([x, y]) => [x * k, y * k] as [number, number])
+    if (!r.success) return { why: 'not a polygon' }
+    if (!r.data.every(inside)) return { why: 'a corner outside the picture' }
+    return { ok: r.data.map(([x, y]) => [x * k, y * k] as [number, number]) }
   }
   const taken = new Set<string>()
-  const list = (v: unknown): Array<Record<string, unknown>> => (Array.isArray(v) ? (v as Array<Record<string, unknown>>) : [])
-  // a roof given as a bare polygon (the points without the {polygon} object around them) is the same statement; it is
-  // read as one and the normalization is recorded
-  const roofs = list(raw.roofs).flatMap((r, i) => {
-    const bare = Array.isArray(r)
-    if (bare) refused.push(`roof ${i}: given as a bare polygon, read as {polygon} (normalized, not refused)`)
-    const p = poly(bare ? r : r.polygon, `roof ${i}`)
-    return p ? [{ id: idOf('roof', p, taken), polygon: p }] : []
+  const list = (key: string): unknown[] => {
+    const v = raw[key]
+    if (v === undefined || v === null) return []
+    if (!Array.isArray(v)) {
+      account.elements.push({ path: key, part: key.slice(0, -1) as ElementFate['part'], form: 'UNKNOWN', fate: 'REFUSED', reason: 'not a list' })
+      return []
+    }
+    return v
+  }
+  /** An object as given, or an unambiguous tuple mapped by the schema's `required` order with every position checked. */
+  const objectOf = (key: 'walls' | 'openings' | 'elements', e: unknown, check: (o: Record<string, unknown>) => boolean): { o: Record<string, unknown>; form: ElementFate['form'] } | undefined => {
+    if (e && typeof e === 'object' && !Array.isArray(e)) return { o: e as Record<string, unknown>, form: 'OBJECT' }
+    if (!Array.isArray(e)) return undefined
+    const order = TUPLE_ORDER[key]
+    if (e.length !== order.length && !(key === 'walls' && e.length === order.length - 1)) return undefined
+    const o = Object.fromEntries(order.map((name, i) => [name, e[i]]))
+    return check(o) ? { o, form: 'TUPLE' } : undefined
+  }
+  const isPolyLike = (v: unknown): boolean => Poly.safeParse(v).success
+  const roofs: ElevationSketch['roofs'] = []
+  list('roofs').forEach((r, i) => {
+    const bare = Array.isArray(r) && isPolyLike(r)
+    const form: ElementFate['form'] = bare ? 'BARE_POLYGON' : r && typeof r === 'object' && !Array.isArray(r) ? 'OBJECT' : 'UNKNOWN'
+    if (form === 'UNKNOWN') return void account.elements.push({ path: `roofs[${i}]`, part: 'roof', form, fate: 'REFUSED', reason: 'unknown form' })
+    const p = polyOf(bare ? r : (r as Record<string, unknown>).polygon)
+    if ('why' in p) return void account.elements.push({ path: `roofs[${i}]`, part: 'roof', form, fate: 'REFUSED', reason: p.why })
+    const id = idOf('roof', p.ok, taken)
+    roofs.push({ id, polygon: p.ok })
+    account.elements.push({ path: `roofs[${i}]`, part: 'roof', form, fate: bare ? 'NORMALIZED' : 'ACCEPTED', id })
   })
-  const walls = list(raw.walls).flatMap((r, i) => {
-    const p = poly(r.polygon, `wall ${i}`)
-    const cls = WALL_CLASSES.includes(r.class as never) ? (r.class as (typeof WALL_CLASSES)[number]) : undefined
-    if (!cls) refused.push(`wall ${i}: class ${String(r.class)}`)
-    return p && cls ? [{ id: idOf(`wall-${cls.toLowerCase()}`, p, taken), class: cls, polygon: p, host: String(r.host ?? '').slice(0, 60), visibility: (VIS.includes(r.visibility as never) ? r.visibility : 'UNKNOWN') as (typeof VIS)[number] }] : []
+  const sameAsRoof = (q: Array<[number, number]>): boolean => roofs.some((r) => polygonIou(r.polygon, q) > 0.9)
+  const walls: ElevationSketch['walls'] = []
+  list('walls').forEach((e, i) => {
+    const got = objectOf('walls', e, (o) => typeof o.class === 'string' && isPolyLike(o.polygon) && (o.host === undefined || typeof o.host === 'string') && (o.visibility === undefined || typeof o.visibility === 'string'))
+    if (!got) return void account.elements.push({ path: `walls[${i}]`, part: 'wall', form: 'UNKNOWN', fate: 'REFUSED', reason: 'unknown form' })
+    const cls = WALL_CLASSES.includes(got.o.class as never) ? (got.o.class as (typeof WALL_CLASSES)[number]) : undefined
+    const p = polyOf(got.o.polygon)
+    const why = !cls ? `class ${String(got.o.class)}` : 'why' in p ? p.why : sameAsRoof(p.ok) ? 'the zone is the roof\'s own polygon: a roof, not a wall finish' : undefined
+    if (why || !cls || 'why' in p) return void account.elements.push({ path: `walls[${i}]`, part: 'wall', form: got.form, fate: 'REFUSED', reason: why ?? 'refused' })
+    const id = idOf(`wall-${cls.toLowerCase()}`, p.ok, taken)
+    walls.push({ id, class: cls, polygon: p.ok, host: String(got.o.host ?? '').slice(0, 60), visibility: (VIS.includes(got.o.visibility as never) ? got.o.visibility : 'UNKNOWN') as (typeof VIS)[number] })
+    account.elements.push({ path: `walls[${i}]`, part: 'wall', form: got.form, fate: got.form === 'OBJECT' ? 'ACCEPTED' : 'NORMALIZED', id })
   })
-  const openings = list(raw.openings).flatMap((r, i) => {
-    const p = poly(r.polygon, `opening ${i}`)
-    const kind = OPENING_KINDS.includes(r.kind as never) ? (r.kind as (typeof OPENING_KINDS)[number]) : undefined
-    if (!kind) refused.push(`opening ${i}: kind ${String(r.kind)}`)
-    return p && kind ? [{ id: idOf(`opening-${kind.toLowerCase()}`, p, taken), kind, polygon: p, host: String(r.host ?? '').slice(0, 60) }] : []
+  const openings: ElevationSketch['openings'] = []
+  list('openings').forEach((e, i) => {
+    const got = objectOf('openings', e, (o) => typeof o.kind === 'string' && isPolyLike(o.polygon) && (o.host === undefined || typeof o.host === 'string'))
+    if (!got) return void account.elements.push({ path: `openings[${i}]`, part: 'opening', form: 'UNKNOWN', fate: 'REFUSED', reason: 'unknown form' })
+    const kind = OPENING_KINDS.includes(got.o.kind as never) ? (got.o.kind as (typeof OPENING_KINDS)[number]) : undefined
+    const p = polyOf(got.o.polygon)
+    if (!kind || 'why' in p) return void account.elements.push({ path: `openings[${i}]`, part: 'opening', form: got.form, fate: 'REFUSED', reason: !kind ? `kind ${String(got.o.kind)}` : 'why' in p ? p.why : 'refused' })
+    const id = idOf(`opening-${kind.toLowerCase()}`, p.ok, taken)
+    openings.push({ id, kind, polygon: p.ok, host: String(got.o.host ?? '').slice(0, 60) })
+    account.elements.push({ path: `openings[${i}]`, part: 'opening', form: got.form, fate: got.form === 'OBJECT' ? 'ACCEPTED' : 'NORMALIZED', id })
   })
-  const elements = list(raw.elements).flatMap((r, i) => {
-    const p = poly(r.polygon, `element ${i}`)
-    const kind = ELEMENT_KINDS.includes(r.kind as never) ? (r.kind as (typeof ELEMENT_KINDS)[number]) : 'OTHER'
-    return p ? [{ id: idOf(`element-${kind.toLowerCase()}`, p, taken), kind, polygon: p }] : []
+  const elements: ElevationSketch['elements'] = []
+  list('elements').forEach((e, i) => {
+    const got = objectOf('elements', e, (o) => typeof o.kind === 'string' && isPolyLike(o.polygon))
+    if (!got) return void account.elements.push({ path: `elements[${i}]`, part: 'element', form: 'UNKNOWN', fate: 'REFUSED', reason: 'unknown form' })
+    const p = polyOf(got.o.polygon)
+    if ('why' in p) return void account.elements.push({ path: `elements[${i}]`, part: 'element', form: got.form, fate: 'REFUSED', reason: p.why })
+    const kind = ELEMENT_KINDS.includes(got.o.kind as never) ? (got.o.kind as (typeof ELEMENT_KINDS)[number]) : 'OTHER'
+    const id = idOf(`element-${kind.toLowerCase()}`, p.ok, taken)
+    elements.push({ id, kind, polygon: p.ok })
+    account.elements.push({ path: `elements[${i}]`, part: 'element', form: got.form, fate: got.form === 'OBJECT' && kind === got.o.kind ? 'ACCEPTED' : 'NORMALIZED', ...(kind !== got.o.kind ? { reason: `kind ${String(got.o.kind)} read as OTHER` } : {}), id })
   })
-  const silhouette = raw.silhouette === null ? null : poly(raw.silhouette, 'silhouette') ?? null
+  let silhouette: Array<[number, number]> | null = null
+  if (raw.silhouette !== null && raw.silhouette !== undefined) {
+    const p = polyOf(raw.silhouette)
+    if ('why' in p) account.elements.push({ path: 'silhouette', part: 'silhouette', form: 'UNKNOWN', fate: 'REFUSED', reason: p.why })
+    else {
+      silhouette = p.ok
+      account.elements.push({ path: 'silhouette', part: 'silhouette', form: 'OBJECT', fate: 'ACCEPTED' })
+    }
+  }
   const gr = typeof raw.groundRow === 'number' && Number.isFinite(raw.groundRow) ? raw.groundRow * k : null
+  if (raw.groundRow !== null && gr === null) account.elements.push({ path: 'groundRow', part: 'groundRow', form: 'UNKNOWN', fate: 'REFUSED', reason: 'not a number' })
+  // a zone that only repeats the roof's polygon loses nothing of the form (the roof carries it): refused, not a loss
+  const lostForm = account.elements.filter((e) => e.fate === 'REFUSED' && (e.part === 'wall' || e.part === 'opening') && !/roof's own polygon/.test(e.reason ?? ''))
+  if (lostForm.length > 0) account.reasons.push(`${lostForm.length} wall/opening element(s) refused: ${lostForm.map((e) => `${e.path} ${e.reason}`).join('; ')}`)
+  if (account.response === 'TRUNCATED') account.reasons.push('the answer was cut off at max_tokens: elements after the cut are missing')
+  if (account.unknownFields.length > 0) account.reasons.push(`unknown fields ignored: ${account.unknownFields.join(', ')}`)
+  account.completeness = lostForm.length > 0 || account.response === 'TRUNCATED' ? 'PARTIAL' : 'COMPLETE'
   const byId = <T extends { id: string }>(a: T[]): T[] => [...a].sort((x, y) => (x.id < y.id ? -1 : 1))
   const sketch = ElevationSketchSchema.parse({
     schema: ELEVATION_SKETCH_SCHEMA,
     schemaVersion: ELEVATION_SKETCH_VERSION,
-    sketchId: `sketch-${sha(f.frameId).slice(0, 8)}-${sha(pic.png).slice(0, 12)}`,
-    frameId: f.frameId,
-    source: { imageSha256: sha(pic.png), width: f.raster.width, height: f.raster.height, scale: k },
+    sketchId: `sketch-${sha(input.frameId).slice(0, 8)}-${pic.sha256.slice(0, 12)}`,
+    frameId: input.frameId,
+    source: { imageSha256: pic.sha256, width: input.frame.width, height: input.frame.height, scale: k },
     groundRow: gr,
     silhouette,
     roofs: byId(roofs),
     walls: byId(walls),
     openings: byId(openings),
     elements: byId(elements),
-    producer: { kind: 'API_CONTOUR_READING', model: turn.model, promptVersion: ELEVATION_SKETCH_PROMPT_VERSION },
-    refused,
+    producer: { kind: 'API_CONTOUR_READING', model: input.model, promptVersion: ELEVATION_SKETCH_PROMPT_VERSION },
+    refused: account.elements.filter((e) => e.fate !== 'ACCEPTED').map((e) => `${e.path}: ${e.fate}${e.form !== 'OBJECT' ? ` (${e.form})` : ''}${e.reason ? ` — ${e.reason}` : ''}`),
+    account: { ...account, elements: [...account.elements].sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0)) },
   })
-  return { sketch, raw, usd, ...(turn.requestId ? { requestId: turn.requestId } : {}) }
+  return { sketch, account: sketch.account }
+}
+
+/** Intersection over union of two simple polygons, by sampling on a 4 px grid of their joint box (deterministic). */
+function polygonIou(a: ReadonlyArray<readonly [number, number]>, b: ReadonlyArray<readonly [number, number]>): number {
+  const inPoly = (p: ReadonlyArray<readonly [number, number]>, x: number, y: number): boolean => {
+    let c = false
+    for (let i = 0, j = p.length - 1; i < p.length; j = i++) if (p[i][1] > y !== p[j][1] > y && x < ((p[j][0] - p[i][0]) * (y - p[i][1])) / (p[j][1] - p[i][1]) + p[i][0]) c = !c
+    return c
+  }
+  const xs = [...a, ...b].map((p) => p[0])
+  const ys = [...a, ...b].map((p) => p[1])
+  let both = 0
+  let any = 0
+  for (let y = Math.min(...ys); y <= Math.max(...ys); y += 4) for (let x = Math.min(...xs); x <= Math.max(...xs); x += 4) {
+    const ia = inPoly(a, x, y)
+    const ib = inPoly(b, x, y)
+    if (ia && ib) both++
+    if (ia || ib) any++
+  }
+  return any === 0 ? 0 : both / any
 }
 
 /** The fixed low-poly palette of the sketch (and of the finish classes it carries). */
@@ -279,6 +373,20 @@ export function renderSketch(s: ElevationSketch): Raster {
 }
 export const renderSketchPng = (s: ElevationSketch): Uint8Array => encodePng(renderSketch(s))
 
+/** v3.54.15: the same drawing as a deterministic SVG (same order, palette and outlines as `renderSketch`). */
+export function renderSketchSvg(s: ElevationSketch): string {
+  const rgb = (c: readonly number[]): string => `rgb(${c[0]},${c[1]},${c[2]})`
+  const pts = (p: ReadonlyArray<readonly [number, number]>): string => p.map(([x, y]) => `${Math.round(x * 10) / 10},${Math.round(y * 10) / 10}`).join(' ')
+  const area = (p: ReadonlyArray<readonly [number, number]>): number => Math.abs(p.reduce((a, q, i) => a + q[0] * p[(i + 1) % p.length][1] - p[(i + 1) % p.length][0] * q[1], 0)) / 2
+  const stroke = `stroke="${rgb(SKETCH_PALETTE.outline)}" stroke-width="1"`
+  const shapes: string[] = []
+  for (const w of [...s.walls].sort((a, b) => area(b.polygon) - area(a.polygon) || (a.id < b.id ? -1 : 1))) shapes.push(`<polygon id="${w.id}" points="${pts(w.polygon)}" fill="${rgb(SKETCH_PALETTE[w.class])}" ${stroke}/>`)
+  for (const r of s.roofs) shapes.push(`<polygon id="${r.id}" points="${pts(r.polygon)}" fill="${rgb(SKETCH_PALETTE.roof)}" ${stroke}/>`)
+  for (const e of s.elements) shapes.push(e.kind === 'RAILING' || e.kind === 'GUTTER_DOWNPIPE' ? `<polygon id="${e.id}" points="${pts(e.polygon)}" fill="none" ${stroke}/>` : `<polygon id="${e.id}" points="${pts(e.polygon)}" fill="${rgb(SKETCH_PALETTE.element)}" ${stroke}/>`)
+  for (const o of s.openings) shapes.push(`<polygon id="${o.id}" points="${pts(o.polygon)}" fill="${rgb(SKETCH_PALETTE[o.kind])}" ${stroke}/>`)
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${s.source.width}" height="${s.source.height}" viewBox="0 0 ${s.source.width} ${s.source.height}"><rect width="100%" height="100%" fill="${rgb(SKETCH_PALETTE.background)}"/>${shapes.join('')}</svg>\n`
+}
+
 export type ProportionExpectation = {
   /** Along this side: which way metres grow across the picture (from the solver's side assignment) and the model's
    * extent of its outer wall faces (from the plans). */
@@ -294,25 +402,34 @@ export type ProportionExpectation = {
   local?: { mpp: number; alongAtPx0: number; zeroRow: number }
 }
 export type ProportionCheck = {
-  verdict: 'ACCEPTED' | 'REJECTED'
+  /**
+   * v3.54.15, per property: ACCEPTED — form and finish; PARTIAL — the finish (its zones on the surfaces the side's
+   * horizontal registration and its own ground line place) but not the form, because no vertical witness exists (no
+   * ridge or eaves admitted by the drawing) or the answer lost form elements or an opening stands elsewhere than the
+   * model's; REJECTED — a witness that exists contradicts the sketch (anisotropy, ground line), or nothing to scale by.
+   */
+  verdict: 'ACCEPTED' | 'PARTIAL' | 'REJECTED'
+  properties: { registration: 'ACCEPTED' | 'REJECTED'; vertical: 'VERIFIED' | 'UNVERIFIED' | 'CONTRADICTED'; form: 'ACCEPTED' | 'REJECTED'; finish: 'ACCEPTED' | 'REJECTED' }
   /** The sketch's own registration: one scale for both axes from its wall ends against the plans' extent, ±0.00 from
-   * its ridge against the section — what the finish consumer maps it with. */
+   * its ridge against the section (else its own ground line) — what the finish consumer maps it with. */
   projection?: { alongAtPx0: number; alongSign: number; mpp: number; zeroRow: number }
   toleranceM: number
   residuals: Array<{ anchor: string; sketchM: number; expectedM: number; residualM: number; within: boolean }>
   local: Array<{ anchor: string; residualPx: number; residualM: number }>
-  openings: Array<{ sketchId: string; modelId?: string; centreResidualM?: number; widthResidualM?: number; status: 'MATCHED' | 'NOT_IN_MODEL' }>
+  /** v3.54.15: OFF — matched, but its centre stands farther from the model's than the tolerance: it decides the form. */
+  openings: Array<{ sketchId: string; modelId?: string; centreResidualM?: number; widthResidualM?: number; status: 'MATCHED' | 'OFF' | 'NOT_IN_MODEL' }>
   why: string
 }
 
 /**
- * Proportions against metric facts that are not the sketch: one scale from its wall ends against the plans' extent,
- * ±0.00 placed by its ridge against the section; then the anisotropy test — at that one scale its eaves line must land
- * on the model's eaves and its ground line within the terrain window (−0.60…+0.10 m). Tolerance: the sketch's edge
- * uncertainty (3 px of the frame, or twice its downscale, plus one) at that scale, plus 5 cm for the metric facts.
- * A sketch that fails is REJECTED — never stretched to fit (no second scale is fitted). The solver's registration of
- * the original is compared for the record only. Openings are matched at the sketch's own registration; an opening the
- * model lacks is kept and named (it is what a sketch may teach the shape reader).
+ * Proportions against metric facts that are not the sketch: one scale from its wall ends against the plans' extent;
+ * ±0.00 placed by its ridge against the section when a ridge is admitted (else by its own ground line, which then is
+ * not a test); the anisotropy test — at that one scale its eaves line must land on the eaves and its ground line within
+ * the terrain window (−0.60…+0.10 m). Tolerance: the sketch's edge uncertainty (3 px of the frame, or twice its
+ * downscale, plus one) at that scale, plus 5 cm for the metric facts. A sketch that a witness contradicts is REJECTED —
+ * never stretched to fit (no second scale is fitted). With no vertical witness the form is not taken but the finish
+ * may be (PARTIAL). Openings are matched at the sketch's own registration: one standing off the model's decides the
+ * form; one the model lacks is kept and named (it is what a sketch may teach the shape reader).
  */
 export function checkProportions(s: ElevationSketch, e: ProportionExpectation): ProportionCheck {
   const tolPx = Math.max(3, 2 * s.source.scale) + 1
@@ -320,13 +437,15 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
   const roofPts = [...(s.silhouette ?? []), ...s.roofs.flatMap((r) => r.polygon)]
   const residuals: ProportionCheck['residuals'] = []
   const local: ProportionCheck['local'] = []
-  if (wallPts.length === 0 || roofPts.length === 0 || e.ridge === undefined) return { verdict: 'REJECTED', toleranceM: 0, residuals, local, openings: [], why: wallPts.length === 0 ? 'no wall contour to take a scale from' : roofPts.length === 0 ? 'no roof contour' : 'no ridge from the section to place ±0.00' }
+  const rejected = (why: string): ProportionCheck => ({ verdict: 'REJECTED', properties: { registration: 'REJECTED', vertical: 'UNVERIFIED', form: 'REJECTED', finish: 'REJECTED' }, toleranceM: 0, residuals, local, openings: [], why })
+  if (wallPts.length === 0) return rejected('no wall contour to take a scale from')
+  const vertical = e.ridge !== undefined && roofPts.length > 0 ? 'RIDGE' : s.groundRow !== null ? 'GROUND' : undefined
+  if (!vertical) return rejected(roofPts.length === 0 ? 'no roof contour and no ground line to place ±0.00' : 'no ridge admitted by the drawing and no ground line to place ±0.00')
   const left = Math.min(...wallPts.map((p) => p[0]))
   const right = Math.max(...wallPts.map((p) => p[0]))
   const mpp = (e.alongMax - e.alongMin) / Math.max(1, right - left)
   const alongAtPx0 = e.alongSign > 0 ? e.alongMin - mpp * left : e.alongMax + mpp * left
-  const ridgeRow = Math.min(...roofPts.map((p) => p[1]))
-  const zeroRow = ridgeRow + e.ridge / mpp
+  const zeroRow = vertical === 'RIDGE' ? Math.min(...roofPts.map((p) => p[1])) + (e.ridge as number) / mpp : (s.groundRow as number)
   const tolM = tolPx * mpp + 0.05
   const yOf = (row: number): number => (zeroRow - row) * mpp
   const push = (anchor: string, sketchM: number, expectedM: number, within: boolean): void => {
@@ -338,7 +457,8 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
     const y = yOf(eavesRow)
     push('eaves line at one scale', y, e.eaves, Math.abs(y - e.eaves) <= tolM)
   }
-  if (s.groundRow !== null) {
+  // the ground line is a test only when ±0.00 came from elsewhere (the ridge); placed by it, it tests nothing
+  if (s.groundRow !== null && vertical === 'RIDGE') {
     const y = yOf(s.groundRow)
     push('ground line within the terrain window', y, Math.min(Math.max(y, -0.6), 0.1), y >= -0.6 - tolM && y <= 0.1 + tolM)
   }
@@ -353,18 +473,27 @@ export function checkProportions(s: ElevationSketch, e: ProportionExpectation): 
     const hi = Math.max(...xs)
     const best = e.openings.map((m) => ({ m, d: Math.abs((m.a0 + m.a1) / 2 - (lo + hi) / 2) })).sort((p, q) => p.d - q.d)[0]
     if (!best || best.d > Math.max(0.6, (hi - lo) / 2)) return { sketchId: o.id, status: 'NOT_IN_MODEL' as const }
-    return { sketchId: o.id, modelId: best.m.id, centreResidualM: Math.round(best.d * 1000) / 1000, widthResidualM: Math.round((hi - lo - (best.m.a1 - best.m.a0)) * 1000) / 1000, status: 'MATCHED' as const }
+    const off = best.d > Math.max(tolM, 0.15)
+    return { sketchId: o.id, modelId: best.m.id, centreResidualM: Math.round(best.d * 1000) / 1000, widthResidualM: Math.round((hi - lo - (best.m.a1 - best.m.a0)) * 1000) / 1000, status: off ? ('OFF' as const) : ('MATCHED' as const) }
   })
   const bad = residuals.filter((r) => !r.within)
-  const ok = bad.length === 0 && residuals.length >= 1
+  const verified = residuals.length > 0 && bad.length === 0
+  const vert: ProportionCheck['properties']['vertical'] = bad.length > 0 ? 'CONTRADICTED' : verified ? 'VERIFIED' : 'UNVERIFIED'
+  const off = openings.filter((o) => o.status === 'OFF')
+  const lostForm = s.account.completeness !== 'COMPLETE'
+  const finish = vert === 'CONTRADICTED' ? 'REJECTED' : 'ACCEPTED'
+  const form = vert === 'VERIFIED' && off.length === 0 && !lostForm ? 'ACCEPTED' : 'REJECTED'
+  const verdict: ProportionCheck['verdict'] = finish === 'REJECTED' ? 'REJECTED' : form === 'ACCEPTED' ? 'ACCEPTED' : 'PARTIAL'
+  const formWhy = form === 'ACCEPTED' ? '' : [vert !== 'VERIFIED' ? `no vertical witness (${vertical === 'GROUND' ? '±0.00 from the sketch\'s own ground line' : 'nothing tested'})` : '', off.length > 0 ? `${off.length} opening(s) off the model's (${off.map((o) => `${o.sketchId} ${o.centreResidualM} m`).join(', ')})` : '', lostForm ? `the answer is PARTIAL (${s.account.reasons.join('; ')})` : ''].filter(Boolean).join('; ')
   return {
-    verdict: ok ? 'ACCEPTED' : 'REJECTED',
-    ...(ok ? { projection: { alongAtPx0, alongSign: e.alongSign, mpp, zeroRow } } : {}),
+    verdict,
+    properties: { registration: 'ACCEPTED', vertical: vert, form, finish },
+    ...(finish === 'ACCEPTED' ? { projection: { alongAtPx0, alongSign: e.alongSign, mpp, zeroRow } } : {}),
     toleranceM: Math.round(tolM * 1000) / 1000,
     residuals,
     local,
     openings,
-    why: ok ? `one scale ${mpp.toFixed(5)} m/px from the wall ends; ${residuals.map((r) => `${r.anchor} ${r.residualM} m`).join(', ')} within ${tolM.toFixed(3)} m` : residuals.length === 0 ? 'no anchor to test the one scale against' : `at one scale: ${bad.map((b) => `${b.anchor} off by ${b.residualM} m`).join(', ')} (tolerance ${tolM.toFixed(3)} m): not stretched to fit`,
+    why: verdict === 'REJECTED' ? `at one scale: ${bad.map((b) => `${b.anchor} off by ${b.residualM} m`).join(', ')} (tolerance ${tolM.toFixed(3)} m): not stretched to fit` : `one scale ${mpp.toFixed(5)} m/px from the wall ends; ${residuals.length > 0 ? `${residuals.map((r) => `${r.anchor} ${r.residualM} m`).join(', ')} within ${tolM.toFixed(3)} m` : 'no vertical anchor'}${form === 'ACCEPTED' ? '' : `; form not taken: ${formWhy}`}`,
   }
 }
 
