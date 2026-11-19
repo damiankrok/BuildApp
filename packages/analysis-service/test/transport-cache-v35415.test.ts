@@ -99,6 +99,23 @@ describe('v3.54.15 a strict grammar the provider will not compile', () => {
   })
 })
 
+describe('v3.54.16 a strict schema with too many optional parameters (the final host job\'s refusal)', () => {
+  it('takes the same single fallback without strict, and the refusal is named on the turn', async () => {
+    const refusal = Object.assign(new Error('400 {"type":"error","error":{"type":"invalid_request_error","message":"Schemas contains too many optional parameters (32), which would make grammar compilation inefficient. Reduce the number of optional parameters in your tool schemas (limit: 24)."}}'), { status: 400 })
+    const strictFlags: boolean[] = []
+    const create = async (body: Record<string, unknown>) => {
+      const strict = (body.tools as Array<{ strict?: boolean }>)[0].strict === true
+      strictFlags.push(strict)
+      if (strict) throw refusal
+      return { content: [], stop_reason: 'end_turn', model: 'claude-sonnet-5-5', usage: { input_tokens: 10, output_tokens: 2 } }
+    }
+    const t = anthropicConsultant({ apiKey: 'test-key', strict: true, createClient: async () => ({ messages: { create } }) })
+    const turn = await t.send({ system: 'S', messages, tools: [tool] })
+    expect(strictFlags).toEqual([true, false])
+    expect(turn.strictFallback).toMatch(/too many optional parameters/)
+  })
+})
+
 describe('v3.54.15 a refused strict grammar stays refused for the conversation', () => {
   it('the next turn with the same tools goes without strict at once (its thinking blocks stay bound to the same tools)', async () => {
     const strictFlags: boolean[] = []

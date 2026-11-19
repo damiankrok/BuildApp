@@ -33,8 +33,10 @@ export function strictInputSchema(schema: unknown): unknown {
   return out
 }
 
-/** v3.54.15: the provider's refusal of a strict grammar it cannot compile (too large); retried once without `strict`. */
-export const STRICT_TOO_LARGE = /compiled grammar is too large|reduce the number of strict tools/i
+/** v3.54.15: the provider's refusal of a strict grammar it cannot compile (too large); retried once without `strict`.
+ * v3.54.16 (found by the final host job, named): the refusal of a schema with more optional parameters than the strict
+ * grammar compiles (the reviewer's patch fields) is the same unbilled refusal and takes the same single fallback. */
+export const STRICT_TOO_LARGE = /compiled grammar is too large|reduce the number of strict tools|too many optional parameters/i
 
 /** The request body as sent (exported for the transport tests): strict tools and the cache breakpoint when asked. */
 export function requestBody(input: { model: string; maxOutputTokens: number; system: string; messages: unknown[]; tools: unknown[]; effort?: 'low' | 'medium' | 'high'; strict?: boolean; cache?: { ttl: '5m' | '1h' } }): Record<string, unknown> {
