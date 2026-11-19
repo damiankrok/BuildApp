@@ -45,13 +45,13 @@ for r, (name, get) in enumerate(rows):
     for i in range(0, len(name), 18): d.text((4, y + CH // 2 + (i // 18) * 12), name[i:i + 18], fill=(40, 40, 160))
     for c, s in enumerate(SIDES):
         x = LEFT + c * (CW + 6); im = get(s)
-        if name.startswith('SKETCH'):
+        if get is sketch:
             v = verdict.get(s, {}); tag = v.get('verdict', 'MISSING_SOURCE')
             d.rectangle((x, y + CH + 2, x + CW, y + CH + HEAD - 4), fill=COLOUR.get(tag, (110, 110, 110)))
             props = v.get('properties') or {}
             d.text((x + 4, y + CH + 4), tag + ('  ' + ' '.join(f"{k[:4]}:{str(props[k])[:4]}" for k in ('form', 'finish', 'vertical', 'registration') if k in props) if props else ''), fill=(255, 255, 255))
         if im is None:
-            d.rectangle((x, y, x + CW, y + CH), fill=(232, 232, 232)); d.text((x + 8, y + 8), 'none' if not name.startswith('SKETCH') else verdict.get(s, {}).get('verdict', 'none'), fill=(80, 80, 80)); continue
+            d.rectangle((x, y, x + CW, y + CH), fill=(232, 232, 232)); d.text((x + 8, y + 8), 'none' if get is not sketch else verdict.get(s, {}).get('verdict', 'none'), fill=(80, 80, 80)); continue
         im.thumbnail((CW, CH)); board.paste(im, (x + (CW - im.width) // 2, y + (CH - im.height) // 2))
 board.save(out + '-sides.png')
 tiles = [(l, Image.open(os.path.join(views, f'AROUND-{l}.png')).convert('RGB')) for l in labels if os.path.exists(os.path.join(views, f'AROUND-{l}.png'))]

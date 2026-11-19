@@ -33,10 +33,10 @@ describe('v3.54.15 scenes', () => {
     expect(m.levels.map((l) => [l.elevation, l.height])).toEqual([[0, 2.8], [2.8, 4.3]])
     expect(m.roofs.length).toBeGreaterThan(0)
   })
-  it('the two scenes come first: Ballina delivered, then the control labelled as such', () => {
+  it('the two scenes follow v3.54.16\'s five: Ballina delivered, then the control labelled as such', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; subtitle: string }>
-    expect(index.slice(0, 2).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
-    expect(index[0].subtitle).toContain('ODDANY')
-    expect(index[1].subtitle).toContain('KONTROLA')
+    expect(index.slice(5, 7).map((e) => e.key)).toEqual(['ballina-v35415', 'murcja-v35415'])
+    expect(index[5].subtitle).toContain('ODDANY')
+    expect(index[6].subtitle).toContain('KONTROLA')
   })
 })
