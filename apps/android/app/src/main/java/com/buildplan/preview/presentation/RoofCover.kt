@@ -247,6 +247,9 @@ object RoofCover {
     /** Eight for the tile, eight for the skirt. */
     const val TRIANGLES_PER_TILE: Int = (VERTICES_ACROSS - 1) * 4
 
+    /** v3.54.14: the covering triangles a phone draws per scene at most (see [of]). */
+    const val TRIANGLE_BUDGET: Int = 40_000
+
     /** Plane grouping: normals within this cosine and offsets within this many metres are one plane. */
     private const val PLANE_DOT = 0.99995
     private const val PLANE_OFFSET = 0.002
@@ -260,13 +263,32 @@ object RoofCover {
     /** The least a tile-top triangle may face along the plane's normal (cosine): the barrel's steepest facet is far above it. */
     private const val MIN_TOP_FACING = 0.8
 
-    /** Every roof covering in [scene], one batch per roof object that has a coverable plane. */
+    /**
+     * Every roof covering in [scene], one batch per roof object that has a coverable plane.
+     *
+     * v3.54.14: a phone draws at most [TRIANGLE_BUDGET] covering triangles per scene. A roof whose tiles at
+     * [spec]'s module would pass it (a 300 m² roof, as on a large bungalow) is laid with the module scaled up
+     * uniformly — width, length, exposure and the tail's rounding by one factor — until the estimate fits; the
+     * module is a display assumption, so every plane of the scene takes the same larger tile and nothing of the
+     * roof changes. A roof within the budget is laid exactly at [spec].
+     */
     fun of(scene: ModelScene, spec: RoofCoverSpec = RoofCoverSpec.DEFAULT): List<RoofCoverBatch> {
         val blockers = blockersOf(scene)
+        val laid = withinBudget(scene, spec)
         return scene.objects.mapNotNull { obj ->
-            val planes = planesOf(obj, spec)
-            if (planes.isEmpty()) null else cover(obj.id, planes, spec, blockers)
+            val planes = planesOf(obj, laid)
+            if (planes.isEmpty()) null else cover(obj.id, planes, laid, blockers)
         }
+    }
+
+    /** [spec], or [spec] with its module scaled so that the scene's estimated covering fits [TRIANGLE_BUDGET]. */
+    fun withinBudget(scene: ModelScene, spec: RoofCoverSpec = RoofCoverSpec.DEFAULT): RoofCoverSpec {
+        val area = scene.objects.flatMap { planesOf(it, spec) }.sumOf { it.area }
+        // the estimate a laid covering stays under: the tiles of the area at the module, 5 % trimmed, ten spare
+        val estimate = (area / (spec.moduleWidth * spec.exposure) * 1.05 + 10) * TRIANGLES_PER_TILE
+        if (estimate <= TRIANGLE_BUDGET) return spec
+        val k = sqrt(estimate / TRIANGLE_BUDGET) * 1.0001
+        return spec.copy(moduleWidth = spec.moduleWidth * k, moduleLength = spec.moduleLength * k, exposure = spec.exposure * k, tailRound = spec.tailRound * k)
     }
 
     /** The coverable planes of one object, in first-triangle order. */

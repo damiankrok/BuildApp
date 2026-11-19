@@ -143,39 +143,39 @@
    "phase": "metric-read+sketches",
    "house": "ballina",
    "variant": "L-MS",
-   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a \u2014 replayed from the recorded L-M answer (turns.json): no request left the host; first booked as a failure because a replay reports zero usage, relabelled",
    "model": "claude-opus-5-5",
    "reservedUsd": 0.337592,
    "costUsd": 0,
    "inputTokens": 0,
    "outputTokens": 0,
-   "status": "FAILED_KEPT_RESERVED"
+   "status": "NOT_SENT"
   },
   {
    "at": "2026-11-19T08:55:20.098Z",
    "phase": "metric-read+sketches",
    "house": "ballina",
    "variant": "L-MS",
-   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0",
+   "note": "metric read frame-asset-gotowy-projekt-domu-ballina-837dbd6340-90a17654a0 \u2014 replayed from the recorded L-M answer (turns.json): no request left the host; first booked as a failure because a replay reports zero usage, relabelled",
    "model": "claude-opus-5-5",
    "reservedUsd": 0.337564,
    "costUsd": 0,
    "inputTokens": 0,
    "outputTokens": 0,
-   "status": "FAILED_KEPT_RESERVED"
+   "status": "NOT_SENT"
   },
   {
    "at": "2026-11-19T08:55:20.156Z",
    "phase": "metric-read+sketches",
    "house": "ballina",
    "variant": "L-MS",
-   "note": "metric verify frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a",
+   "note": "metric verify frame-asset-gotowy-projekt-domu-ballina-ed44d5d4d5-eef1b11c2a \u2014 replayed from the recorded L-M answer (turns.json): no request left the host; first booked as a failure because a replay reports zero usage, relabelled",
    "model": "claude-opus-5-5",
    "reservedUsd": 0.336116,
    "costUsd": 0,
    "inputTokens": 0,
    "outputTokens": 0,
-   "status": "FAILED_KEPT_RESERVED"
+   "status": "NOT_SENT"
   },
   {
    "at": "2026-11-19T08:57:24.310Z",
@@ -388,5 +388,5 @@
  ],
  "totalUsd": 24.919958,
  "stageSpentUsd": 1.065346,
- "requests": 29
+ "requests": 26
 }

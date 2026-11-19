@@ -47,6 +47,7 @@ import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.ViewerState
+import com.buildplan.preview.scene.Visibility
 import com.buildplan.preview.scene.VisibilityMode
 
 /** The rail's tools, grouped by meaning: how it looks, what is shown, where the camera is, fit. */
@@ -259,7 +260,7 @@ private fun LayersPane(
     onShowAll: () -> Unit,
     onSelectElement: (String) -> Unit,
 ) {
-    for (mode in VisibilityMode.entries) {
+    for (mode in Visibility.availableModes(scene)) {
         PanelOption(stringResource(mode.labelRes()), selected = mode == state.visibility && !state.isIsolating, onClick = { onVisibility(mode) })
     }
     PanelRule()

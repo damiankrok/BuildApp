@@ -236,6 +236,23 @@ class RoofCoverTest {
     }
 
     @Test
+    fun `a roof past the phone budget takes a uniformly larger module and one within it is laid exactly at the spec`() {
+        val small = gableScene()
+        assertEquals(spec, RoofCover.withinBudget(small, spec))
+        val big = PresentationFixtures.scene(
+            "fixture-big-gable",
+            listOf(Mesh("roof-a", "roof", "ROOF", PresentationFixtures.gableRoof(span = 11.0, length = 30.0, pitchDeg = 35.0, eaveY = 3.0, yawDeg = 0.0), levelId = null, semanticGroup = "ROOF_MAIN")),
+        )
+        val laid = RoofCover.withinBudget(big, spec)
+        assertTrue(laid.moduleWidth > spec.moduleWidth)
+        assertEquals(laid.moduleWidth / spec.moduleWidth, laid.exposure / spec.exposure, 1e-9)
+        assertEquals(laid.moduleWidth / spec.moduleWidth, laid.moduleLength / spec.moduleLength, 1e-9)
+        assertEquals(spec.camber, laid.camber, 0.0)
+        val triangles = RoofCover.of(big).sumOf { it.triangleCount }
+        assertTrue("$triangles covering triangles", triangles in 1..RoofCover.TRIANGLE_BUDGET)
+    }
+
+    @Test
     fun `the dormer fixture tiles its dormer roofs and leaves the cut under them bare`() {
         val scene = TestScenes.fixture("roof-dormer-gable")
         val batches = RoofCover.of(scene).associateBy { it.objectId }

@@ -258,7 +258,10 @@ class AutoCandidateRenderingTest(private val key: String) {
         // Reference and Demo behave exactly as they did; the candidate now
         // joins them instead of being the one model that draws a bare roof.
         for (scene in TestScenes.all) {
-            for (mode in VisibilityMode.entries) {
+            // v3.54.14: every mode the app OFFERS for the scene (a single-storey house is not offered the upper layer)
+            val offered = Visibility.availableModes(scene)
+            assertEquals("${scene.key}: the upper layer is offered exactly when there is a storey above the lowest", scene.levels.size > 1, VisibilityMode.UPPER_ONLY in offered)
+            for (mode in offered) {
                 val shown = entitiesInScene(scene, mode)
                 assertTrue("${scene.key} renders nothing under $mode", shown.isNotEmpty())
                 assertTrue(

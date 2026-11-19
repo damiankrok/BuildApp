@@ -12,6 +12,22 @@
 
 ## Current summary (read first)
 
+- **v3.54.14 R2 (2026-11-19): metric consultant with witnesses, automatic sketches with a proportion check, Bakopy
+  (DEV) and a new simple house; APK 1345** (Master Plan v3.54.14 R2 in full). Report
+  `stage-reports/SOURCE_TO_MODEL_V35414.md`, index `README_V35414.md`, ADR
+  `docs/ADR-V35414-METRIC-CONSULTANT-SKETCHES-CHOICE.md`, hand-off `research/source-to-model/v35414/HANDOFF.md`.
+  Marcówki: the OWNER's three phone defects fixed in appearance consumer 1.1.0 (joint off the 2 cm grid, occluded
+  cells join the wall's partition, no seeds in the registration's uncertainty band); geometry fingerprint unchanged.
+  `consult/metric-read.ts`: the API reads every plan and section independently, then checks LOCAL's labels; the
+  deterministic resolver corrects only with a CHAIN, SCALE or (1.1.0, after the freeze) FOOTPRINT witness, else
+  UNRESOLVED. Bakopy: 8 labels corrected (SCALE), 5 agree, 11 unresolved; small effect on the body (scale already
+  STRONG), outline X 14.919 vs 15.00 is a builder loss. Sketches (`elevation-sketch.ts`, `sketch-step.ts`): typed JSON
+  drawn locally, checked against levels both readers agree on; Bakopy 3/4 accepted → a chimney and timber finishes;
+  `choose.ts` keeps wall tones on sides with no accepted sketch. Bakopy L0/L-M 12/4/3, L-MS/DELIVERED 12/6/1 of 19.
+  New house Lipińscy Ballina: first run on the frozen code `d2a30a6` refused (kept); after the freeze the page's
+  footprint witnessed the API's 1365 × 815 → model 13.65 × 8.15 exactly, no roof (heights only from the API), 8/2/9.
+  Host: accepted consulted revisions (`accepted-consult.ts`) — a second run of the same URL replays at 0 USD.
+  Scenes `marcowki-c-v35414` (ODDANY), `bakopy-v35414` (ODDANY, DEV), `ballina-v35414` (CZĘŚCIOWY) first.
 - **v3.54.13 (2026-11-19): finish outlines, protection of geometry, four automatic elevations; APK 1344** (Master
   Plan v3.54.13 in full). Report `stage-reports/SOURCE_TO_MODEL_V35413.md`, index `README_V35413.md`, ADR
   `docs/ADR-V35413-OUTLINES-AND-PROPERTY-ARBITRATION.md`, hand-off `research/source-to-model/v35413/HANDOFF.md`.

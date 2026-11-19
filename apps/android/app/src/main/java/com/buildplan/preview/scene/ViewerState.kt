@@ -58,6 +58,7 @@ data class ViewerState(
      * fight each other.
      */
     fun withVisibility(scene: ModelScene, mode: VisibilityMode): ViewerState {
+        if (mode !in Visibility.availableModes(scene)) return this
         val next = copy(visibility = mode, isolatedObjectId = null)
         return if (next.selectedObjectId != null && !next.isVisible(scene, next.selectedObjectId)) next.clearSelection() else next
     }

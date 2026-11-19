@@ -33,6 +33,13 @@ object Visibility {
      * `isolated` overrides the mode entirely: isolating is the user saying
      * "just this one", and it should not also have to satisfy a storey filter.
      */
+    /**
+     * v3.54.14: the modes [scene] can show. "Only the storeys above the lowest" needs a storey above the lowest — the
+     * same rule as the attic-plan preset — so a single-storey house (a bungalow) is never offered an empty layer.
+     */
+    fun availableModes(scene: ModelScene): List<VisibilityMode> =
+        VisibilityMode.entries.filter { it != VisibilityMode.UPPER_ONLY || scene.levels.size > 1 }
+
     fun visibleObjectIds(scene: ModelScene, mode: VisibilityMode, isolated: String? = null): Set<String> {
         if (isolated != null && scene.objectById(isolated) != null) return setOf(isolated)
         val ground = scene.groundLevelId
