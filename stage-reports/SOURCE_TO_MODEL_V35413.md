@@ -2,7 +2,7 @@
 
 Gałąź `claude/new-session-3kzcgh`. Baza `2c21ce1` (v3.54.12-REAL, APK 1343). Commity etapu: `10cb387` (schemat 1.9.0,
 kontur, migracja, reseal, moduł wyglądu), część 2 (ramy okien w czytniku, miara granic, arbitraż B), `65bcea4` (C
-zmierzone i zapieczętowane), commit sceny oddanej i dokumentów. Master Plan v3.54.13 skopiowany w całości do
+zmierzone i zapieczętowane), `7f46a4b` (scena oddana, dokumenty), `1ba317c` (fiksury Androida 1.9.0; z niego APK 1344). Master Plan v3.54.13 skopiowany w całości do
 `docs/MASTER_PLAN.md`. **Koszt etapu: 0,04623 USD** (4 żądania C-live; księga 23,854612 z 24,11036 USD, pułap nie
 podniesiony; `research/ai-assist/spend-ledger-v35413.json`).
 
@@ -158,10 +158,15 @@ To dowód przenośności konsumenta i ochrony geometrii — **nie** transferu au
 
 ## 10. APK, testy, regresja
 
-APK 1344 (podpis `6e48fac4…`, arm64, zipalign OK, klucz 0 trafień, LOAD 0x1000 w dwóch bibliotekach jak wcześniej):
-sceny wypakowane = repozytorium, sceny z 1343 te same siatki. ANDROID_UI_NOT_VERIFIED. Testy: kontur (kompilacja,
-walidacja, otwory), migracja 1.9.0, konsument/czytnik/maski/arbitraż (12), sceny (owner-v35413), Android
-testDebugUnitTest. Pełna macierz i regresja: `results/matrix-final.txt`, `results/regression.txt`.
+APK 1344 (SHA-256 `a886e4a2…`, commit `1ba317c`, podpis `6e48fac4…`, arm64, zipalign OK, klucz 0 trafień, LOAD 0x1000
+w dwóch bibliotekach jak wcześniej): 17 scen wypakowanych = repozytorium; scena 1 `marcowki-c-v35413` (model
+`a56676b9…`, scena `fd1465f0…`) ma 22 skóry konturów na czterech stronach, dwie kondygnacje i dach; sceny z 1343 — te
+same siatki i semantyka. Parser scen Androida (JVM, `BundleParserTest`) czyta każdą scenę. ANDROID_UI_NOT_VERIFIED.
+
+Testy: kontur (kompilacja, walidacja, otwory), migracja 1.9.0, konsument/czytnik/maski/arbitraż (12), sceny
+(owner-v35413), Android `testDebugUnitTest` zielone. Pełna macierz na kodzie etapu: 4280 passed, 20 failed — 15 to
+zestaw środowiska bazowego, 5 to fiksury Androida z napisem 1.8.0 (odtworzone narzędziami repo: tylko hashe i wersja;
+te pliki 10/10). Typecheck OK. `results/matrix-final.txt`. Regresja: `results/regression.txt`.
 
 ## 11. Otwarte
 
