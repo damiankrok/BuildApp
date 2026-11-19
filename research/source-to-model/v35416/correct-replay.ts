@@ -75,16 +75,19 @@ const draw = (data: Uint8ClampedArray, w: number, h: number, b: { x0: number; y0
     if (x < 0 || y < 0 || x >= w || y >= h) return
     data.set([...c, 255], (y * w + x) * 4)
   }
-  const [x0, y0, x1, y1] = [Math.round(b.x0) - inset, Math.round(b.y0) - inset, Math.round(b.x1) + inset, Math.round(b.y1) + inset]
-  for (let x = x0; x <= x1; x += 1) { put(x, y0); put(x, y1) }
-  for (let y = y0; y <= y1; y += 1) { put(x0, y); put(x1, y) }
+  // three pixels wide, so the box survives the boards' downscale
+  for (let t = 0; t < 3; t += 1) {
+    const [x0, y0, x1, y1] = [Math.round(b.x0) - inset - t, Math.round(b.y0) - inset - t, Math.round(b.x1) + inset + t, Math.round(b.y1) + inset + t]
+    for (let x = x0; x <= x1; x += 1) { put(x, y0); put(x, y1) }
+    for (let y = y0; y <= y1; y += 1) { put(x0, y); put(x1, y) }
+  }
 }
 for (const v of outcome.views) {
   const pic = pictures.find((p) => p.frameId === v.frameId)
   if (!pic) continue
   const data = new Uint8ClampedArray(pic.raster.data)
   for (const o of openingBoxes(before, v)) draw(data, pic.raster.width, pic.raster.height, o.box, [220, 30, 30], 2)
-  for (const o of openingBoxes(outcome.model, v)) draw(data, pic.raster.width, pic.raster.height, o.box, [20, 170, 60], 0)
+  if (outcome.revision !== revision) for (const o of openingBoxes(outcome.model, v)) draw(data, pic.raster.width, pic.raster.height, o.box, [20, 170, 60], 0)
   for (const r of outcome.records.filter((x) => x.bound?.frameId === v.frameId && x.bound.box)) draw(data, pic.raster.width, pic.raster.height, r.bound?.box as never, r.status === 'COMMITTED' ? [20, 90, 220] : [240, 160, 0], 4)
   writeFileSync(join(out, `overlay-${v.side}.png`), encodePng({ width: pic.raster.width, height: pic.raster.height, data }))
 }

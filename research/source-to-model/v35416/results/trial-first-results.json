@@ -1,0 +1,205 @@
+{
+ "schema": "v35416-trial-first-results",
+ "frozenCommit": "fae7624",
+ "rule": "research/source-to-model/v35416/trial/TRIAL_SELECTION.md",
+ "note": "first result of each family, kept as is; nothing was tuned on it. The axes/ledger inconsistency seen on Alaska (roof axis NO_DIFFERENCE_REPORTED while a KEY ROOF_FORM defect is open) is fixed after the trial and labelled DEV; this record keeps the frozen output.",
+ "families": {
+  "layla": {
+   "resultKeys": [
+    "corrections",
+    "counts",
+    "decision",
+    "final",
+    "house",
+    "local",
+    "measured",
+    "modelSha256",
+    "quality",
+    "seconds",
+    "sketches",
+    "usd",
+    "why"
+   ],
+   "modelSha256": null,
+   "usd": 0.31486900000000007,
+   "why": "still refused (PLAN_LAYOUT_REJECTED), the scale STRONG as before",
+   "quality": null,
+   "axes": null,
+   "sketchesWithoutModel": {
+    "count": null
+   },
+   "corrections": {
+    "looks": [],
+    "runs": [],
+    "sketchChannel": null
+   }
+  },
+  "alaska": {
+   "resultKeys": [
+    "corrections",
+    "counts",
+    "decision",
+    "final",
+    "house",
+    "local",
+    "measured",
+    "modelSha256",
+    "quality",
+    "seconds",
+    "sketches",
+    "usd",
+    "why"
+   ],
+   "modelSha256": "cafedeaac44f2f8ea507a535eabdc5ce53c5a1ac74703607b6475f59620625b4",
+   "usd": 0.14684999999999998,
+   "why": "a refusal (METRIC_RESOLUTION_INCONCLUSIVE) became a model on a scale its readings settle (SUPPORTED)",
+   "quality": {
+    "appliedNotReviewed": 0,
+    "closedVerified": 0,
+    "defects": [
+     {
+      "about": "Main gable roof with ridge along the long axis is missing; the model has a flat box. Chimneys are also missing.",
+      "certainty": "CERTAIN",
+      "family": "ROOF_FORM",
+      "id": "L1:D1",
+      "look": 1,
+      "operation": "UNSUPPORTED",
+      "scope": "ROOF",
+      "settlement": "UNSUPPORTED_OPERATION",
+      "severity": "KEY",
+      "why": "no operation of the registry changes ROOF_FORM: named, not corrected"
+     },
+     {
+      "about": "Gable end walls have the wrong shape, openings and finishes; the source has a timber gable with a white frame, a door and a single upper window.",
+      "certainty": "LIKELY",
+      "family": "OUTLINE_REGION",
+      "id": "L1:D2",
+      "look": 1,
+      "operation": "UNSUPPORTED",
+      "scope": "LEFT",
+      "settlement": "UNSUPPORTED_OPERATION",
+      "severity": "MAJOR",
+      "why": "no operation of the registry changes OUTLINE_REGION: named, not corrected"
+     },
+     {
+      "about": "Finishes on the long sides: timber upper area and window bands in the model versus white render above a timber band with 4 windows in the source.",
+      "certainty": "LIKELY",
+      "id": "L1:D3",
+      "look": 1,
+      "operation": "SET_FINISH",
+      "scope": "FRONT",
+      "settlement": "NO_PROPOSAL",
+      "severity": "MAJOR",
+      "why": "reported without a proposal the analyzer could apply"
+     }
+    ],
+    "openKey": 1,
+    "openOther": 2,
+    "reasons": [
+     "UNSUPPORTED_OPERATION"
+    ],
+    "reviewCompleted": true,
+    "state": "UNSUPPORTED_OPERATION",
+    "version": "1.0.0",
+    "why": "the delivered revision was looked at; 3 difference(s) open (1 KEY): L1:D1 UNSUPPORTED_OPERATION, L1:D2 UNSUPPORTED_OPERATION, L1:D3 NO_PROPOSAL; 0 closed on a verified revision"
+   },
+   "axes": {
+    "interior": "NOT_CHECKED",
+    "openings": "NO_DIFFERENCE_REPORTED",
+    "outline": "MATCHES",
+    "quantities": "LIMITED",
+    "roof": "NO_DIFFERENCE_REPORTED",
+    "run": "COMPLETED",
+    "scale": {
+     "confidence": "SUPPORTED",
+     "settledBy": "CONSULTED_DIMENSIONS",
+     "status": "UNVERIFIED"
+    },
+    "sourceCheck": "CHECKED"
+   },
+   "corrections": {
+    "size": 29693
+   }
+  }
+ },
+ "selection": {
+  "archon": {
+   "seed": "5e76665d742a891cd8af4630cf3a90253b699e06210c47564fe385c62caa8108",
+   "start": 24,
+   "poolSize": 34,
+   "chosen": "https://www.archon.pl/projekty-domow/projekt-willa-layla-g2ae-m6a929b0c79fda",
+   "opened": [
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-layla-g2ae-m6a929b0c79fda",
+     "opened": true,
+     "refused": null,
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1
+    }
+   ],
+   "skippedSeenBefore": 9
+  },
+  "studioatrium": {
+   "seed": "d0372e1887a98c073e15bcbbfef9ce44c0fec88743e72145361b8086887137a9",
+   "start": 33,
+   "poolSize": 106,
+   "chosen": "https://www.studioatrium.pl/projekty-domow/Alaska,1612.html",
+   "opened": [
+    {
+     "url": "https://www.studioatrium.pl/projekty-domow/Alabaster,1311.html",
+     "opened": true,
+     "refused": "0 labelled elevations",
+     "elevations": [],
+     "plans": [
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 0
+    },
+    {
+     "url": "https://www.studioatrium.pl/projekty-domow/Aladyn,1151.html",
+     "opened": true,
+     "refused": "0 labelled elevations",
+     "elevations": [],
+     "plans": [
+      "GROUND",
+      "UPPER"
+     ],
+     "sections": 0
+    },
+    {
+     "url": "https://www.studioatrium.pl/projekty-domow/Alaska,1612.html",
+     "opened": true,
+     "refused": null,
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "ATTIC"
+     ],
+     "sections": 0
+    }
+   ],
+   "skippedSeenBefore": 0
+  }
+ }
+}
