@@ -1,0 +1,19 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  8 failed | 371 passed | 1 skipped (380)
+      Tests  16 failed | 4381 passed | 11 skipped (4408)
+ FAIL  apps/local-analyzer/test/program.test.ts > the bundle, run as the phone runs it, gives the desktop pipeline’s building > Larchfield: every hash equal to the desktop runAnalysis
+ FAIL  apps/local-analyzer/test/text.test.ts > NFD: exactly what ICU computes > for strings whose combining marks need canonical reordering
+ FAIL  tests/architecture/analyzer-api.test.ts > the service source itself > never returns a secret: no environment variable is read into a response
+ FAIL  tests/architecture/compound-facade.test.ts > 005N §30 M10 the reading has no special cases > its numbers are a frozen set: a wall, a half, a step, nothing that fits a sheet
+ FAIL  tests/architecture/presentation.test.ts > the ported presentation is generic > carries none of the donor reference model coordinates
+ FAIL  tests/architecture/presentation.test.ts > the ported presentation is generic > finds the ported files
+ FAIL  tests/architecture/reference.test.ts > the reference boundary > 4. the reference model IS its command replay, and it is an ordinary model: it saves, reloads and compiles without the package
+ FAIL  tests/architecture/reference.test.ts > the reference boundary > 7. the schema migrations change no geometry: the frozen 1.1.0 … 1.5.0 demo files compile to exactly the current demo scene
+ FAIL  tests/architecture/research-isolation.test.ts > 005M production cannot reach the visual-referee v2 bake-off, and no weight enters the repository > no tracked file anywhere is the size of a model (post-review E2-5: a raw binary with no magic number)
+ FAIL  tests/architecture/research-isolation.test.ts > IU-01 production cannot reach the image-role research, and it commits no pixels or weights > every writer of pixels, embeddings or the fitted head refuses a destination inside the repository
+ FAIL  tests/architecture/research-isolation.test.ts > IU-02 production cannot reach the geometry-first research, and its writers refuse the repository > every IU-02 writer of pixels, features, masks, the head or results refuses a destination inside the repository
+ FAIL  tests/architecture/research-isolation.test.ts > IU-03A production cannot reach the routing/evidence research, and its writers refuse the repository > every IU-03A writer refuses a destination inside the repository
+ FAIL  tests/architecture/wall-strip.test.ts > 005Q no canonical schema change > packages/model and packages/commands are byte for byte as at the 005Q base (04d5568; needs the base in the clone)
+ FAIL  tests/architecture/wall-strip.test.ts > 005Q one new bound, and the layout says it changed > against the 005Q base, WALL_STRIP_BOUNDS is the only new named constant in the layout, and the version moved from 1.1.0
+ FAIL  tests/architecture/wall-strip.test.ts > 005Q the gap is AMBIGUOUS and N1 never raises a provenance > against the 005Q base, no file N1 touched says SOURCE_EXACT more often than it did
+ FAIL  tests/architecture/wall-strip.test.ts > 005Q the gap is AMBIGUOUS and N1 never raises a provenance > emit writes SOURCE_DERIVED for an open ring, and the SOURCE_EXACT ring only on the other branch, as before

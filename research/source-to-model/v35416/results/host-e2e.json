@@ -1,0 +1,1122 @@
+{
+ "schema": "v35416-host-e2e",
+ "finalCode": "f75d205",
+ "runs": [
+  {
+   "run": "first (build 5a79add)",
+   "log": [
+    "ok   the host answers /health (analyzer {\"service\":\"1.11.0\",\"solver\":\"2.45.0\"})",
+    "ok   job-1: POST /v1/analyses \u2192 202",
+    "job-1: COMPLETED in 225 s; books +0.117669 USD, +9 requests",
+    "ok   job-1: result, scene and model are served",
+    "ok   job-1: the scene's bytes are the summary's sceneSha256 and the response header's",
+    "ok   job-1: the model's bytes are the summary's modelSha256",
+    "ok   job-1: the scene reloads (86 meshes) with the summary's content hash",
+    "ok   job-1: the result came through the consultant's path; the global description is DISABLED",
+    "ok   job-1: no vision reasoner or house reader was attempted (vision {\"mode\":\"REPLAYED_GRAPH\",\"provider\":null,\"attempted\":0,\"accepted\":0})",
+    "ok   job-1: the consumed result carries the source check (NOT_CHECKED, 9 known defects)",
+    "ok   job-1: the metric consultant ran (ACCEPT: 1 corrected, 0 agree)",
+    "ok   job-1: the sketch step ran (FRONT:PARTIAL EAST:PARTIAL WEST:ACCEPTED REAR:PARTIAL; form ROLLBACK, finish ACCEPT)",
+    "ok   job-1: the accepted-revision rule was applied (NOT_ACCEPTED)",
+    "ok   job-1: the result names the correction registry (1.0.0)",
+    "ok   job-1: at least one patch was COMMITTED by the shared executor and delivered (SKETCH:UPDATE_OPENING opening-0-front-0-0, SKETCH:UPDATE_OPENING opening-0-front-0-3, SKETCH:UPDATE_OPENING opening-0-front-0-1, SKETCH:UPDATE_OPENING opening-0-front-0-4, SKETCH:UPDATE_OPENING opening-0-front-0-2, SKETCH:UPDATE_OPENING opening-0-east-1-0, SKETCH:ADD_OPENING LEFT)",
+    "FAIL job-1: a look judged the delivered revision that carries the patches (checked null, delivered f2eb6ba7ad34)",
+    "ok   job-1: the result carries a quality state of its own (NOT_REVIEWED: no look at the model succeeded)",
+    "ok   job-1-repeat: POST /v1/analyses \u2192 202",
+    "job-1-repeat: COMPLETED in 230 s; books +0.091067 USD, +9 requests",
+    "ok   job-1-repeat: result, scene and model are served",
+    "ok   job-1-repeat: the scene's bytes are the summary's sceneSha256 and the response header's",
+    "ok   job-1-repeat: the model's bytes are the summary's modelSha256",
+    "ok   job-1-repeat: the scene reloads (87 meshes) with the summary's content hash",
+    "ok   job-1-repeat: the result came through the consultant's path; the global description is DISABLED",
+    "ok   job-1-repeat: no vision reasoner or house reader was attempted (vision {\"mode\":\"REPLAYED_GRAPH\",\"provider\":null,\"attempted\":0,\"accepted\":0})",
+    "ok   job-1-repeat: the consumed result carries the source check (NOT_CHECKED, 9 known defects)",
+    "ok   job-1-repeat: the metric consultant ran (ACCEPT: 1 corrected, 0 agree)",
+    "ok   job-1-repeat: the sketch step ran (FRONT:PARTIAL EAST:PARTIAL WEST:ACCEPTED REAR:PARTIAL; form ROLLBACK, finish ACCEPT)",
+    "ok   job-1-repeat: the accepted-revision rule was applied (NOT_ACCEPTED)",
+    "ok   job-1-repeat: the result names the correction registry (1.0.0)",
+    "ok   job-1-repeat: at least one patch was COMMITTED by the shared executor and delivered (SKETCH:UPDATE_OPENING opening-0-front-0-0, SKETCH:UPDATE_OPENING opening-0-front-0-3, SKETCH:UPDATE_OPENING opening-0-front-0-1, SKETCH:UPDATE_OPENING opening-0-front-0-4, SKETCH:UPDATE_OPENING opening-0-front-0-2, SKETCH:UPDATE_OPENING opening-0-east-1-0, SKETCH:ADD_OPENING LEFT)",
+    "FAIL job-1-repeat: a look judged the delivered revision that carries the patches (checked null, delivered 674b80156b4c)",
+    "ok   job-1-repeat: the result carries a quality state of its own (NOT_REVIEWED: no look at the model succeeded)",
+    "FAIL the first run's consultation was accepted (NOT_ACCEPTED: 2 request(s) failed in transport: a replay would not be this analysis)",
+    "FAIL the second run of the same URL reused the accepted revision (NOT_ACCEPTED, undefined answers replayed, undefined missing, same geometry undefined)",
+    "FAIL the second run booked nothing (0.091067 USD, 9 requests)",
+    "FAIL the second run served the same model and scene bytes",
+    "ok   the reuse kept the quality state and its defect list (NOT_REVIEWED; 7 defects): reuse did not improve the label",
+    "ok   job-default-no-token: POST /v1/analyses \u2192 202",
+    "job-default-no-token: FAILED RECONSTRUCTION_FAILED in 80 s; books +0 USD, +0 requests",
+    "ok   the host's books hold CONSULTATION requests only (CONSULTATION): the house reader was never asked",
+    "FAILED: 6 check(s)",
+    "exit 1"
+   ],
+   "jobs": {
+    "job-1": {
+     "modelSha256": "f2eb6ba7ad343a0eb29fe69a83221478ac11c40a86a17aa77936f618b2a844f5",
+     "sceneSha256": "4b333d3069670a3525e0a123f5c611d1a8bd7fa169614e5e267774579c252d33",
+     "usd": 0.117669,
+     "accepted": null,
+     "looks": [
+      {
+       "round": 1,
+       "status": null,
+       "decision": "CHECK_FAILED",
+       "revision": "f2eb6ba7ad34",
+       "why": "ConsultantUnavailable: HTTP 400: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many optional parameters (32), which would make grammar compilation inefficient. Reduce the number of optional parameters in your tool schemas (limit: 24).\"},\"request_id\":\"req_011ChD1fFJ9WVsctJYRmp5 \u2014 the model before the look stands"
+      }
+     ],
+     "sourceCheck": {
+      "status": "NOT_CHECKED",
+      "checkedRevision": null,
+      "deliveredRevision": "f2eb6ba7ad34",
+      "axes": {
+       "run": "COMPLETED",
+       "scale": {
+        "status": "UNVERIFIED",
+        "confidence": "SUPPORTED",
+        "settledBy": "CONSULTED_DIMENSIONS"
+       },
+       "outline": "SHORT",
+       "roof": "NOT_CHECKED",
+       "openings": "DIFFERENCE_OPEN",
+       "interior": "NOT_CHECKED",
+       "quantities": "LIMITED",
+       "sourceCheck": "NOT_CHECKED"
+      },
+      "quality": {
+       "version": "1.0.0",
+       "reviewCompleted": false,
+       "state": "NOT_REVIEWED",
+       "reasons": [
+        "NOT_REVIEWED",
+        "BUDGET_OR_ROUND_LIMIT"
+       ],
+       "openKey": 0,
+       "openOther": 7,
+       "closedVerified": 0,
+       "appliedNotReviewed": 7,
+       "defects": [
+        {
+         "id": "L0:S::upd:opening-window-9-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-0 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:5:upd:opening-door-27-13",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-3 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-17-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-1 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-35-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-4 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-22-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-2 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-16-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-east-1-0 from the sketch of RIGHT",
+         "scope": "RIGHT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:add:opening-window-20-11",
+         "look": 0,
+         "about": "ADD_OPENING LEFT from the sketch of LEFT",
+         "scope": "LEFT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "ADD_OPENING",
+         "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        }
+       ],
+       "why": "no look at the model succeeded"
+      }
+     },
+     "committed": [
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 8.18) better than the model's element (z 5.61)",
+       "measure": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 8.23"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-3",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 7.18) better than the model's element (z 2.21)",
+       "measure": "built opening-0-front-0-3 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.14"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-1",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.35) and not the model's element (z 0.31)",
+       "measure": "built opening-0-front-0-1 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.35"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-4",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.04) and not the model's element (z 0.78)",
+       "measure": "built opening-0-front-0-4 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.04"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-2",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 4.23) better than the model's element (z 2.23)",
+       "measure": "built opening-0-front-0-2 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 4.14"
+      },
+      {
+       "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-east-1-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 10.09) better than the model's element (z 8.74)",
+       "measure": "built opening-0-east-1-0 on ring-main-0-w1 drawn back into the source: overlap 1.00 with the proposal, support z 10.07"
+      },
+      {
+       "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+       "operation": "ADD_OPENING",
+       "targetId": "LEFT",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source draws an element in the proposed box (z 5.77 \u2265 2 over 354 same-size boxes on that band)",
+       "measure": "built op-fix-left-a1f43c on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 5.77"
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-glazed_door-10-13",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-23-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-33-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      }
+     ]
+    },
+    "job-1-repeat": {
+     "modelSha256": "674b80156b4cd60045c99de328f284bc60c4d812f3dff5b885fefe26a2b8dba7",
+     "sceneSha256": "159e462ad440dd9341cd4efd4e41739e7a134dd11cfccd9bbd7f14dcf4a38454",
+     "usd": 0.091067,
+     "accepted": null,
+     "looks": [
+      {
+       "round": 1,
+       "status": null,
+       "decision": "CHECK_FAILED",
+       "revision": "674b80156b4c",
+       "why": "ConsultantUnavailable: HTTP 400: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Schemas contains too many optional parameters (32), which would make grammar compilation inefficient. Reduce the number of optional parameters in your tool schemas (limit: 24).\"},\"request_id\":\"req_011ChD1wxZJBdkB3cudWLH \u2014 the model before the look stands"
+      }
+     ],
+     "sourceCheck": {
+      "status": "NOT_CHECKED",
+      "checkedRevision": null,
+      "deliveredRevision": "674b80156b4c",
+      "axes": {
+       "run": "COMPLETED",
+       "scale": {
+        "status": "UNVERIFIED",
+        "confidence": "SUPPORTED",
+        "settledBy": "CONSULTED_DIMENSIONS"
+       },
+       "outline": "SHORT",
+       "roof": "NOT_CHECKED",
+       "openings": "DIFFERENCE_OPEN",
+       "interior": "NOT_CHECKED",
+       "quantities": "LIMITED",
+       "sourceCheck": "NOT_CHECKED"
+      },
+      "quality": {
+       "version": "1.0.0",
+       "reviewCompleted": false,
+       "state": "NOT_REVIEWED",
+       "reasons": [
+        "NOT_REVIEWED",
+        "BUDGET_OR_ROUND_LIMIT"
+       ],
+       "openKey": 0,
+       "openOther": 7,
+       "closedVerified": 0,
+       "appliedNotReviewed": 7,
+       "defects": [
+        {
+         "id": "L0:S::upd:opening-window-9-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-0 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:5:upd:opening-door-27-13",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-3 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-17-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-1 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-35-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-4 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-22-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-2 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:upd:opening-window-16-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-east-1-0 from the sketch of RIGHT",
+         "scope": "RIGHT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        },
+        {
+         "id": "L0:S:add:opening-window-20-11",
+         "look": 0,
+         "about": "ADD_OPENING LEFT from the sketch of LEFT",
+         "scope": "LEFT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "ADD_OPENING",
+         "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "APPLIED_NOT_REVIEWED",
+         "why": "applied, compiled and measured; no look at the new revision has judged it"
+        }
+       ],
+       "why": "no look at the model succeeded"
+      }
+     },
+     "committed": [
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 8.18) better than the model's element (z 5.61)",
+       "measure": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 8.23"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-3",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 7.18) better than the model's element (z 2.21)",
+       "measure": "built opening-0-front-0-3 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.14"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-1",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.34) and not the model's element (z 0.31)",
+       "measure": "built opening-0-front-0-1 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.34"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-4",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.1) and not the model's element (z 0.78)",
+       "measure": "built opening-0-front-0-4 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.03"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-2",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 4.25) better than the model's element (z 2.23)",
+       "measure": "built opening-0-front-0-2 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 4.16"
+      },
+      {
+       "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-east-1-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 10.09) better than the model's element (z 8.74)",
+       "measure": "built opening-0-east-1-0 on ring-main-0-w1 drawn back into the source: overlap 1.00 with the proposal, support z 10.07"
+      },
+      {
+       "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+       "operation": "ADD_OPENING",
+       "targetId": "LEFT",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source draws an element in the proposed box (z 6.82 \u2265 2 over 312 same-size boxes on that band)",
+       "measure": "built op-fix-left-a1f43c on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 6.82"
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-glazed_door-10-13",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-23-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-33-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      }
+     ]
+    }
+   }
+  },
+  {
+   "run": "final (build f75d205)",
+   "log": [
+    "ok   the host answers /health (analyzer {\"service\":\"1.11.0\",\"solver\":\"2.45.0\"})",
+    "ok   job-1: POST /v1/analyses \u2192 202",
+    "job-1: COMPLETED in 340 s; books +0.240094 USD, +10 requests",
+    "ok   job-1: result, scene and model are served",
+    "ok   job-1: the scene's bytes are the summary's sceneSha256 and the response header's",
+    "ok   job-1: the model's bytes are the summary's modelSha256",
+    "ok   job-1: the scene reloads (87 meshes) with the summary's content hash",
+    "ok   job-1: the result came through the consultant's path; the global description is DISABLED",
+    "ok   job-1: no vision reasoner or house reader was attempted (vision {\"mode\":\"REPLAYED_GRAPH\",\"provider\":null,\"attempted\":0,\"accepted\":0})",
+    "ok   job-1: the consumed result carries the source check (CHECKED, 5 known defects)",
+    "ok   job-1: the metric consultant ran (ACCEPT: 1 corrected, 0 agree)",
+    "ok   job-1: the sketch step ran (FRONT:PARTIAL EAST:PARTIAL WEST:ACCEPTED REAR:PARTIAL; form ROLLBACK, finish ACCEPT)",
+    "ok   job-1: the accepted-revision rule was applied (ACCEPTED_NOW)",
+    "ok   job-1: the result names the correction registry (1.0.0)",
+    "ok   job-1: at least one patch was COMMITTED by the shared executor and delivered (SKETCH:UPDATE_OPENING opening-0-front-0-0, SKETCH:UPDATE_OPENING opening-0-front-0-3, SKETCH:UPDATE_OPENING opening-0-front-0-1, SKETCH:UPDATE_OPENING opening-0-front-0-4, SKETCH:UPDATE_OPENING opening-0-front-0-2, SKETCH:UPDATE_OPENING opening-0-east-1-0, SKETCH:ADD_OPENING LEFT)",
+    "ok   job-1: a look judged the delivered revision that carries the patches (checked 7f4bb112baee, delivered 7f4bb112baee)",
+    "ok   job-1: the result carries a quality state of its own (RECOGNIZABLE_PARTIAL: the delivered revision was looked at; 3 difference(s) open (0 KEY): L1:D1 NO_PROPOSAL, L1:D2 UNSUPPORTED_OPERATION, L1:D3 NO_PROPOSAL; 7 closed on a verified revision; 2 measured contradiction(s) the review does not cancel)",
+    "ok   job-1-repeat: POST /v1/analyses \u2192 202",
+    "job-1-repeat: COMPLETED in 250 s; books +0 USD, +0 requests",
+    "ok   job-1-repeat: result, scene and model are served",
+    "ok   job-1-repeat: the scene's bytes are the summary's sceneSha256 and the response header's",
+    "ok   job-1-repeat: the model's bytes are the summary's modelSha256",
+    "ok   job-1-repeat: the scene reloads (87 meshes) with the summary's content hash",
+    "ok   job-1-repeat: the result came through the consultant's path; the global description is DISABLED",
+    "ok   job-1-repeat: no vision reasoner or house reader was attempted (vision {\"mode\":\"REPLAYED_GRAPH\",\"provider\":null,\"attempted\":0,\"accepted\":0})",
+    "ok   job-1-repeat: the consumed result carries the source check (CHECKED, 5 known defects)",
+    "ok   job-1-repeat: the metric consultant ran (ACCEPT: 1 corrected, 0 agree)",
+    "ok   job-1-repeat: the sketch step ran (FRONT:PARTIAL EAST:PARTIAL WEST:ACCEPTED REAR:PARTIAL; form ROLLBACK, finish ACCEPT)",
+    "ok   job-1-repeat: the accepted-revision rule was applied (REUSED)",
+    "ok   job-1-repeat: the result names the correction registry (1.0.0)",
+    "ok   job-1-repeat: at least one patch was COMMITTED by the shared executor and delivered (SKETCH:UPDATE_OPENING opening-0-front-0-0, SKETCH:UPDATE_OPENING opening-0-front-0-3, SKETCH:UPDATE_OPENING opening-0-front-0-1, SKETCH:UPDATE_OPENING opening-0-front-0-4, SKETCH:UPDATE_OPENING opening-0-front-0-2, SKETCH:UPDATE_OPENING opening-0-east-1-0, SKETCH:ADD_OPENING LEFT)",
+    "ok   job-1-repeat: a look judged the delivered revision that carries the patches (checked 7f4bb112baee, delivered 7f4bb112baee)",
+    "ok   job-1-repeat: the result carries a quality state of its own (RECOGNIZABLE_PARTIAL: the delivered revision was looked at; 3 difference(s) open (0 KEY): L1:D1 NO_PROPOSAL, L1:D2 UNSUPPORTED_OPERATION, L1:D3 NO_PROPOSAL; 7 closed on a verified revision; 2 measured contradiction(s) the review does not cancel)",
+    "ok   the first run's consultation was accepted (ACCEPTED_NOW)",
+    "ok   the second run of the same URL reused the accepted revision (REUSED, 10 answers replayed, 0 missing, same geometry true)",
+    "ok   the second run booked nothing (0 USD, 0 requests)",
+    "ok   the second run served the same model and scene bytes",
+    "ok   the reuse kept the quality state and its defect list (RECOGNIZABLE_PARTIAL; 10 defects): reuse did not improve the label",
+    "ok   job-default-no-token: POST /v1/analyses \u2192 202",
+    "job-default-no-token: FAILED RECONSTRUCTION_FAILED in 75 s; books +0 USD, +0 requests",
+    "ok   the host's books hold CONSULTATION requests only (CONSULTATION): the house reader was never asked",
+    "ALL CHECKS PASSED",
+    "exit 0"
+   ],
+   "jobs": {
+    "job-1": {
+     "modelSha256": "7f4bb112baeeb76716225cd1434f292143eb4530eb49aaef12fc0f2481230d84",
+     "sceneSha256": "16ea95c161de48c4272adc2939ee139740129406e6fd1e257514c0e3ee64a901",
+     "usd": 0.240094,
+     "accepted": null,
+     "looks": [
+      {
+       "round": 1,
+       "status": "ISSUE_FOUND",
+       "decision": "REVIEW_ONLY",
+       "revision": "7f4bb112baee",
+       "why": "the look reviews what was applied and proposes nothing the analyzer can apply"
+      }
+     ],
+     "sourceCheck": {
+      "status": "CHECKED",
+      "checkedRevision": "7f4bb112baee",
+      "deliveredRevision": "7f4bb112baee",
+      "axes": {
+       "run": "COMPLETED",
+       "scale": {
+        "status": "UNVERIFIED",
+        "confidence": "SUPPORTED",
+        "settledBy": "CONSULTED_DIMENSIONS"
+       },
+       "outline": "SHORT",
+       "roof": "DIFFERENCE_OPEN",
+       "openings": "DIFFERENCE_OPEN",
+       "interior": "REVIEWED_FROM_PLANS",
+       "quantities": "LIMITED",
+       "sourceCheck": "CHECKED"
+      },
+      "quality": {
+       "version": "1.0.0",
+       "reviewCompleted": true,
+       "state": "RECOGNIZABLE_PARTIAL",
+       "reasons": [
+        "RECOGNIZABLE_PARTIAL"
+       ],
+       "openKey": 0,
+       "openOther": 3,
+       "closedVerified": 7,
+       "appliedNotReviewed": 0,
+       "defects": [
+        {
+         "id": "L0:S::upd:opening-window-9-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-0 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:5:upd:opening-door-27-13",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-3 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-17-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-1 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-35-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-4 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-22-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-2 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-16-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-east-1-0 from the sketch of RIGHT",
+         "scope": "RIGHT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:add:opening-window-20-11",
+         "look": 0,
+         "about": "ADD_OPENING LEFT from the sketch of LEFT",
+         "scope": "LEFT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "ADD_OPENING",
+         "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L1:D1",
+         "look": 1,
+         "about": "Rear left opening is a window with a raised sill. The source shows a floor-to-head glazed sliding door.",
+         "scope": "REAR",
+         "severity": "MINOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "family": "OTHER",
+         "settlement": "NO_PROPOSAL",
+         "why": "reported without a proposal the analyzer could apply"
+        },
+        {
+         "id": "L1:D2",
+         "look": 1,
+         "about": "Solar panel array on the rear roof slope is missing.",
+         "scope": "ROOF",
+         "severity": "MINOR",
+         "certainty": "CERTAIN",
+         "operation": "UNSUPPORTED",
+         "family": "ROOF_FORM",
+         "settlement": "UNSUPPORTED_OPERATION",
+         "why": "no operation of the registry changes ROOF_FORM: named, not corrected"
+        },
+        {
+         "id": "L1:D3",
+         "look": 1,
+         "about": "Brick plinth and the brick patch between the rear windows are missing. The roof is dark grey where the source is dark brown.",
+         "scope": "REAR",
+         "severity": "MINOR",
+         "certainty": "LIKELY",
+         "operation": "SET_FINISH",
+         "family": "OTHER",
+         "settlement": "NO_PROPOSAL",
+         "why": "reported without a proposal the analyzer could apply"
+        }
+       ],
+       "why": "the delivered revision was looked at; 3 difference(s) open (0 KEY): L1:D1 NO_PROPOSAL, L1:D2 UNSUPPORTED_OPERATION, L1:D3 NO_PROPOSAL; 7 closed on a verified revision; 2 measured contradiction(s) the review does not cancel"
+      }
+     },
+     "committed": [
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 8.18) better than the model's element (z 5.61)",
+       "measure": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 8.23"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-3",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 7.18) better than the model's element (z 2.21)",
+       "measure": "built opening-0-front-0-3 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.14"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-1",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.33) and not the model's element (z 0.31)",
+       "measure": "built opening-0-front-0-1 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.32"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-4",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 2.99) and not the model's element (z 0.78)",
+       "measure": "built opening-0-front-0-4 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 2.91"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-2",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 4.2) better than the model's element (z 2.23)",
+       "measure": "built opening-0-front-0-2 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 4.12"
+      },
+      {
+       "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-east-1-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 10.05) better than the model's element (z 8.74)",
+       "measure": "built opening-0-east-1-0 on ring-main-0-w1 drawn back into the source: overlap 1.00 with the proposal, support z 9.96"
+      },
+      {
+       "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+       "operation": "ADD_OPENING",
+       "targetId": "LEFT",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source draws an element in the proposed box (z 5.59 \u2265 2 over 354 same-size boxes on that band)",
+       "measure": "built op-fix-left-a1f43c on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 5.59"
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-glazed_door-10-13",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-23-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-33-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      }
+     ]
+    },
+    "job-1-repeat": {
+     "modelSha256": "7f4bb112baeeb76716225cd1434f292143eb4530eb49aaef12fc0f2481230d84",
+     "sceneSha256": "16ea95c161de48c4272adc2939ee139740129406e6fd1e257514c0e3ee64a901",
+     "usd": 0,
+     "accepted": null,
+     "looks": [
+      {
+       "round": 1,
+       "status": "ISSUE_FOUND",
+       "decision": "REVIEW_ONLY",
+       "revision": "7f4bb112baee",
+       "why": "the look reviews what was applied and proposes nothing the analyzer can apply"
+      }
+     ],
+     "sourceCheck": {
+      "status": "CHECKED",
+      "checkedRevision": "7f4bb112baee",
+      "deliveredRevision": "7f4bb112baee",
+      "axes": {
+       "run": "COMPLETED",
+       "scale": {
+        "status": "UNVERIFIED",
+        "confidence": "SUPPORTED",
+        "settledBy": "CONSULTED_DIMENSIONS"
+       },
+       "outline": "SHORT",
+       "roof": "DIFFERENCE_OPEN",
+       "openings": "DIFFERENCE_OPEN",
+       "interior": "REVIEWED_FROM_PLANS",
+       "quantities": "LIMITED",
+       "sourceCheck": "CHECKED"
+      },
+      "quality": {
+       "version": "1.0.0",
+       "reviewCompleted": true,
+       "state": "RECOGNIZABLE_PARTIAL",
+       "reasons": [
+        "RECOGNIZABLE_PARTIAL"
+       ],
+       "openKey": 0,
+       "openOther": 3,
+       "closedVerified": 7,
+       "appliedNotReviewed": 0,
+       "defects": [
+        {
+         "id": "L0:S::upd:opening-window-9-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-0 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:5:upd:opening-door-27-13",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-3 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-17-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-1 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-35-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-4 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-22-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-front-0-2 from the sketch of FRONT",
+         "scope": "FRONT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:upd:opening-window-16-11",
+         "look": 0,
+         "about": "UPDATE_OPENING opening-0-east-1-0 from the sketch of RIGHT",
+         "scope": "RIGHT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L0:S:add:opening-window-20-11",
+         "look": 0,
+         "about": "ADD_OPENING LEFT from the sketch of LEFT",
+         "scope": "LEFT",
+         "severity": "MAJOR",
+         "certainty": "LIKELY",
+         "operation": "ADD_OPENING",
+         "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+         "patchStatus": "COMMITTED",
+         "settlement": "CLOSED_VERIFIED",
+         "verifiedOn": "7f4bb112baee",
+         "why": "applied; the look at the new revision says MATCHES; the source measure supports the built element"
+        },
+        {
+         "id": "L1:D1",
+         "look": 1,
+         "about": "Rear left opening is a window with a raised sill. The source shows a floor-to-head glazed sliding door.",
+         "scope": "REAR",
+         "severity": "MINOR",
+         "certainty": "LIKELY",
+         "operation": "UPDATE_OPENING",
+         "family": "OTHER",
+         "settlement": "NO_PROPOSAL",
+         "why": "reported without a proposal the analyzer could apply"
+        },
+        {
+         "id": "L1:D2",
+         "look": 1,
+         "about": "Solar panel array on the rear roof slope is missing.",
+         "scope": "ROOF",
+         "severity": "MINOR",
+         "certainty": "CERTAIN",
+         "operation": "UNSUPPORTED",
+         "family": "ROOF_FORM",
+         "settlement": "UNSUPPORTED_OPERATION",
+         "why": "no operation of the registry changes ROOF_FORM: named, not corrected"
+        },
+        {
+         "id": "L1:D3",
+         "look": 1,
+         "about": "Brick plinth and the brick patch between the rear windows are missing. The roof is dark grey where the source is dark brown.",
+         "scope": "REAR",
+         "severity": "MINOR",
+         "certainty": "LIKELY",
+         "operation": "SET_FINISH",
+         "family": "OTHER",
+         "settlement": "NO_PROPOSAL",
+         "why": "reported without a proposal the analyzer could apply"
+        }
+       ],
+       "why": "the delivered revision was looked at; 3 difference(s) open (0 KEY): L1:D1 NO_PROPOSAL, L1:D2 UNSUPPORTED_OPERATION, L1:D3 NO_PROPOSAL; 7 closed on a verified revision; 2 measured contradiction(s) the review does not cancel"
+      }
+     },
+     "committed": [
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-9-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 8.18) better than the model's element (z 5.61)",
+       "measure": "built opening-0-front-0-0 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 8.23"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-door-27-13",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-3",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 7.18) better than the model's element (z 2.21)",
+       "measure": "built opening-0-front-0-3 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 7.14"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-17-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-1",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 3.33) and not the model's element (z 0.31)",
+       "measure": "built opening-0-front-0-1 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 3.32"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-35-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-4",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 2.99) and not the model's element (z 0.78)",
+       "measure": "built opening-0-front-0-4 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 2.91"
+      },
+      {
+       "proposalId": "sk:f826ba3795:upd:opening-window-22-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-front-0-2",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 4.2) better than the model's element (z 2.23)",
+       "measure": "built opening-0-front-0-2 on ring-main-0-w0 drawn back into the source: overlap 1.00 with the proposal, support z 4.12"
+      },
+      {
+       "proposalId": "sk:6edbd2ea62:upd:opening-window-16-11",
+       "operation": "UPDATE_OPENING",
+       "targetId": "opening-0-east-1-0",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source supports the proposal (z 10.05) better than the model's element (z 8.74)",
+       "measure": "built opening-0-east-1-0 on ring-main-0-w1 drawn back into the source: overlap 1.00 with the proposal, support z 9.96"
+      },
+      {
+       "proposalId": "sk:4ec95ea616:add:opening-window-20-11",
+       "operation": "ADD_OPENING",
+       "targetId": "LEFT",
+       "status": "COMMITTED",
+       "why": "applied, compiled and measured",
+       "gate": "the source draws an element in the proposed box (z 5.59 \u2265 2 over 354 same-size boxes on that band)",
+       "measure": "built op-fix-left-a1f43c on ring-main-0-w3 drawn back into the source: overlap 1.00 with the proposal, support z 5.59"
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-glazed_door-10-13",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-23-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      },
+      {
+       "proposalId": "sk:43667fe722:add:opening-window-33-11",
+       "operation": "ADD_OPENING",
+       "targetId": "REAR",
+       "status": "NEEDS_EVIDENCE",
+       "why": "picture 3 is registered without heights low on the rear side's walls (its ground misses the terrain datum): a sill and a head cannot be read from it",
+       "gate": null,
+       "measure": null
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

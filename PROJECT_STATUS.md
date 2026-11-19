@@ -12,6 +12,21 @@
 
 ## Current summary (read first)
 
+- **v3.54.16 (2026-11-19): one correction executor — consultant → operation on an element → model → source measure →
+  review of the new revision; APK 1347** (Master Plan v3.54.16, after the Council audit of `5d4321c`). Report
+  `stage-reports/SOURCE_TO_MODEL_V35416.md`, index `stage-reports/README_V35416.md`, ADR
+  `docs/ADR-V35416-CORRECTION-EXECUTOR.md`, hand-off `research/source-to-model/v35416/HANDOFF.md`. Registry 1.0.0
+  (ASSIGN_VIEW, SET_PARAMETER, ADD/UPDATE/REMOVE_OPENING, ADD/UPDATE_CHIMNEY, SET_FINISH, ROOF_FEATURE) on the run's
+  canonical model through `@buildapp/commands` / `applyAppearance`; source gate on the original picture instead of the
+  0.30 m LOCAL guard; transactions with measure and rollback; sketch channel before the review; quality states apart
+  from completion and CAN_REUSE. Proofs: missing window (DEV live CLOSED_VERIFIED), controlled wrong opening repaired
+  past the old guard + counter-trial refused, chimney kept / bad window refused independently; extraction without a
+  model. Frozen trial (`fae7624`): Layla (ARCHON) no model, 4 sketches; Alaska (Studio Atrium) model, roof form
+  UNSUPPORTED. Host E2E on `f75d205` ALL PASSED: 7 Ballina opening corrections committed, delivered and
+  CLOSED_VERIFIED (RECOGNIZABLE_PARTIAL), reuse 0 USD / 0 requests, no token 0 requests — after the first host run
+  found a strict-schema refusal (fixed, named). Stage spend 1.00064 USD; books 27.812357 / 28.854612. Scenes
+  `ballina-v35416` (ODDANY), `murcja-v35416` (ROZWÓJ), TEST pair, `alaska-trial-v35416` (PRÓBA) first.
+
 - **v3.54.15 (2026-11-19): API ↔ analyzer communication — response contract, uncertainty, use of the data in the final
   model; measured prompt caching; APK 1346** (Master Plan v3.54.15). Report `stage-reports/SOURCE_TO_MODEL_V35415.md`,
   index `README_V35415.md`, ADR `docs/ADR-V35415-RESPONSE-CONTRACT-LEVELS-CACHE.md`, hand-off

@@ -20,7 +20,24 @@ wydawców, modele, nagrania odpowiedzi i plansze — poza Gitem, w prywatnym ZIP
 | ROOF_FEATURE | dotychczasowy konsument lukarn (v3.54.3) | podpięty do tego samego rejestru | bez zmian |
 | forma dachu, obrys, balkon, pergola, panele, wnętrze | — | nazywane jako `UNSUPPORTED`, nigdy nie oferowane | **nieobsługiwane** |
 
-HOST_TABLE_PLACEHOLDER
+**Pokaz na hoście (kod końcowy `f75d205`, publiczny punkt wejścia, Ballina, żywy bieg):**
+
+| element | korekta | bramka źródła (z: propozycja / model) | pomiar po budowie | recenzja nowej rewizji |
+|---|---|---|---|---|
+| `opening-0-front-0-0` | UPDATE (szkic frontu) | 8,18 / 5,61 | IoU 1,00, z 8,23 | CLOSED_VERIFIED |
+| `opening-0-front-0-3` (drzwi) | UPDATE | 7,18 / 2,21 | IoU 1,00, z 7,14 | CLOSED_VERIFIED |
+| `opening-0-front-0-1` | UPDATE | 3,35 / 0,31 | IoU 1,00, z 3,35 | CLOSED_VERIFIED |
+| `opening-0-front-0-4` | UPDATE | 3,04 / 0,78 | IoU 1,00, z 3,04 | CLOSED_VERIFIED |
+| `opening-0-front-0-2` | UPDATE | 4,23 / 2,23 | IoU 1,00, z 4,14 | CLOSED_VERIFIED |
+| `opening-0-east-1-0` | UPDATE (szkic prawej) | 10,09 / 8,74 | IoU 1,00, z 10,07 | CLOSED_VERIFIED |
+| nowe okno lewe | ADD (szkic lewej) | 5,77 na 354 polach | IoU 1,00, z 5,77 | CLOSED_VERIFIED |
+| 3 otwory tyłu | ADD | — | — | NEEDS_EVIDENCE: widok tyłu bez wysokości (grunt poza datum) |
+
+Każda transakcja: „1 łatka; zmienione obiekty wyłącznie w zbiorze zależności; błędy złączy 0 → 0”. Recenzja (Sonnet
+5.5) obejrzała dostarczoną rewizję `7f4bb112baee` i znalazła 3 różnice nadal otwarte: drzwi tarasowe z tyłu (bez
+wykonywalnej propozycji), panele PV (nieobsługiwane), cokół z cegły (wykończenie bez propozycji). Jakość
+**RECOGNIZABLE_PARTIAL**, 7 zamkniętych na zweryfikowanej rewizji, 2 sprzeczności pomiarowe obrysu (krótszy o 0,28 /
+0,22 m od wydrukowanego wymiaru) nie są kasowane przez recenzję.
 
 ## 1. Co zmieniono (krótko)
 
@@ -99,7 +116,24 @@ elewacji). Pierwszy wynik zachowany jak jest (`results/trial-first-results.json`
 
 ## 4. Finalny host
 
-HOST_SECTION_PLACEHOLDER
+Dwa biegi na publicznym punkcie wejścia hosta (`dist/server.mjs`, pilot za flagą i tokenem, strict tools, cache
+5 min), Ballina; rekordy tekstowe: `research/source-to-model/v35416/results/host-e2e.json`.
+
+1. **Pierwszy bieg (build `5a79add`)**: wykonawca zatwierdził i dostarczył 7 korekt, ale **każda recenzja padła**
+   (HTTP 400: „too many optional parameters (32) … limit 24” — pola łatki w schemacie recenzenta przy strict).
+   Wynik uczciwie oznaczony: NOT_REVIEWED, 7 × APPLIED_NOT_REVIEWED, NOT_ACCEPTED; powtórka tego samego URL nie
+   mogła użyć ponownie (0,091 USD, inne bajty — odpowiedzi na żywo nie są deterministyczne). Koszt 0,208736 USD.
+   Kontrola E2E wykryła to sama (6 FAIL), nic nie zostało ukryte.
+2. **Poprawka (`f75d205`, kod końcowy)**: ta odmowa dostawcy (nieopłacona) przechodzi tę samą jedyną ścieżkę zapasową
+   bez strict co „grammar too large” (odpowiedź nadal walidowana lokalnie); test.
+3. **Bieg końcowy (build `f75d205`)**: **ALL CHECKS PASSED.** Nowy realny job: 7 korekt przez wspólnego wykonawcę,
+   recenzja dostarczonej rewizji (checked = delivered = `7f4bb112baee`), 7 CLOSED_VERIFIED, jakość
+   RECOGNIZABLE_PARTIAL, ACCEPTED_NOW, 0,240094 USD / 10 żądań. Ten sam URL ponownie: REUSED, 10 odpowiedzi
+   odtworzonych, 0 USD / 0 żądań, te same bajty modelu i sceny, ta sama jakość i lista defektów (ponowne użycie nie
+   poprawia etykiety). Bez tokenu: 0 żądań (LOCAL sam — RECONSTRUCTION_FAILED, jak dotąd). Księgi hosta tylko
+   CONSULTATION.
+
+Wydatek etapu: **1,00064 USD** (pula etapu 2,042895); księgi **27,812357 / 28,854612 USD**. Nowej puli nie otwierano.
 
 ## 5. Relacja do audytu Council
 
@@ -125,4 +159,22 @@ HOST_SECTION_PLACEHOLDER
 - Live odpowiedzi nie są deterministyczne: dwa biegi tego samego URL bez akceptacji dają różne modele; ponowne
   użycie działa tylko dla przyjętej rewizji.
 
-MATRIX_PLACEHOLDER
+## 7. Testy, APK, dostawa
+
+- Macierz na kodzie końcowym: **4381 passed, 16 failed** — dokładnie 16 znanych błędów bazy (local-analyzer
+  program/text, architecture: analyzer-api, compound-facade, presentation ×2, reference ×2, research-isolation ×4,
+  wall-strip ×4), ta sama lista co przy zamrożeniu (`results/matrix-final.txt`, `matrix-freeze.txt`).
+  `analysis-service` 561/561, `mobile-scene` 112/112, Android `testDebugUnitTest` zielone.
+- **APK 1347** (`BuildPlan-Model-Preview-1347-arm64-v8a.apk`, z `f75d205` + sceny), sha256
+  `23355ad7695f7d1247f3e1c755762d30e28e07bc9b320a6f945c6affea394573`; aapt2: `com.buildplan.preview`,
+  versionCode 1347; pięć nowych scen na początku indeksu; skan klucza: 0 trafień.
+- Prywatny ZIP: szkice 7 domów × 4 strony (PNG/SVG/JSON, raw, normalized, rejected, MISSING_SOURCE), źródła,
+  `gallery.html` z decyzjami wykonawcy i jakością, plansze (źródło | szkic | przed | po | oddany; perspektywy;
+  kondygnacje bez dachu; nakładki dowodów), modele i sceny, nagrania odpowiedzi, rekordy hosta, księga, raporty, APK.
+
+## 8. Werdykt
+
+IMPLEMENTATION_COMPLETE dla zakresu §4 z zastrzeżeniami: pętla jest zamknięta od końca do końca dla otworów (host,
+żywy bieg, recenzja nowej rewizji), kominy działają na zapisanych odpowiedziach, a SET_PARAMETER, ASSIGN_VIEW,
+SET_FINISH, REMOVE_OPENING i UPDATE_CHIMNEY są wykazane tylko na danych kontrolowanych. Forma dachu pozostaje
+nieobsługiwana — w próbie (Alaska) to był najważniejszy brak. Zieleń techniczna nie oznacza „to jest mój dom”.
