@@ -27,7 +27,7 @@ export const ELEVATION_SKETCH_SCHEMA = 'buildapp.elevation-sketch' as const
 export const ELEVATION_SKETCH_VERSION = '1.1.0' as const
 export const ELEVATION_SKETCH_PROMPT_VERSION = 'elevation-sketch/1' as const
 /** 2: a roof given as a bare polygon is read as one (recorded). 3 (v3.54.15): unambiguous tuples normalized, a fate per element, completeness, stop_reason. */
-export const ELEVATION_SKETCH_PARSER_VERSION = 3 as const
+export const ELEVATION_SKETCH_PARSER_VERSION = 4 as const
 export const SKETCH_RENDERER_VERSION = '1.0.0' as const
 
 const finite = z.number().finite()
@@ -163,6 +163,8 @@ export async function readElevationSketch(ctx: Ctx, f: SketchFrame): Promise<Ske
 export type ElementFate = { path: string; part: 'roof' | 'wall' | 'opening' | 'element' | 'silhouette' | 'groundRow'; form: 'OBJECT' | 'TUPLE' | 'BARE_POLYGON' | 'UNKNOWN'; fate: 'ACCEPTED' | 'NORMALIZED' | 'REFUSED'; reason?: string; id?: string }
 export type SketchAccount = { parserVersion: number; response: 'COMPLETE' | 'TRUNCATED'; completeness: 'COMPLETE' | 'PARTIAL'; reasons: string[]; elements: ElementFate[]; unknownFields: string[] }
 
+/** The positions a tuple must give (class/kind and polygon); the rest of TUPLE_ORDER is optional and trails. */
+const TUPLE_REQUIRED = 2
 const TUPLE_ORDER: Record<'walls' | 'openings' | 'elements', readonly string[]> = { walls: ['class', 'polygon', 'host', 'visibility'], openings: ['kind', 'polygon', 'host'], elements: ['kind', 'polygon'] }
 
 export function canonicalizeElevationAnswer(input: { raw: unknown; stopReason?: string; frameId: string; picture: { width: number; height: number; scale: number; sha256: string }; frame: { width: number; height: number }; model: string }): { sketch?: ElevationSketch; account: SketchAccount; failed?: string } {
@@ -191,12 +193,15 @@ export function canonicalizeElevationAnswer(input: { raw: unknown; stopReason?: 
     return v
   }
   /** An object as given, or an unambiguous tuple mapped by the schema's `required` order with every position checked. */
-  const objectOf = (key: 'walls' | 'openings' | 'elements', e: unknown, check: (o: Record<string, unknown>) => boolean): { o: Record<string, unknown>; form: ElementFate['form'] } | undefined => {
-    if (e && typeof e === 'object' && !Array.isArray(e)) return { o: e as Record<string, unknown>, form: 'OBJECT' }
+  // parser 4 (v3.54.15): an object's fields are type-checked as a tuple's are (a host given as a number is a wrong field,
+  // not a body named "7"); a tuple may leave out its trailing optional positions (host, visibility) — [kind, polygon]
+  // is as unambiguous as the object without a host — and the missing ones stay empty, never invented
+  const objectOf = (key: 'walls' | 'openings' | 'elements', e: unknown, check: (o: Record<string, unknown>) => boolean): { o: Record<string, unknown>; form: ElementFate['form']; wrongField?: true } | undefined => {
+    if (e && typeof e === 'object' && !Array.isArray(e)) return check(e as Record<string, unknown>) ? { o: e as Record<string, unknown>, form: 'OBJECT' } : { o: e as Record<string, unknown>, form: 'OBJECT', wrongField: true }
     if (!Array.isArray(e)) return undefined
     const order = TUPLE_ORDER[key]
-    if (e.length !== order.length && !(key === 'walls' && e.length === order.length - 1)) return undefined
-    const o = Object.fromEntries(order.map((name, i) => [name, e[i]]))
+    if (e.length < TUPLE_REQUIRED || e.length > order.length) return undefined
+    const o = Object.fromEntries(order.slice(0, e.length).map((name, i) => [name, e[i]]))
     return check(o) ? { o, form: 'TUPLE' } : undefined
   }
   const isPolyLike = (v: unknown): boolean => Poly.safeParse(v).success
@@ -216,6 +221,7 @@ export function canonicalizeElevationAnswer(input: { raw: unknown; stopReason?: 
   list('walls').forEach((e, i) => {
     const got = objectOf('walls', e, (o) => typeof o.class === 'string' && isPolyLike(o.polygon) && (o.host === undefined || typeof o.host === 'string') && (o.visibility === undefined || typeof o.visibility === 'string'))
     if (!got) return void account.elements.push({ path: `walls[${i}]`, part: 'wall', form: 'UNKNOWN', fate: 'REFUSED', reason: 'unknown form' })
+    if (got.wrongField) return void account.elements.push({ path: `walls[${i}]`, part: 'wall', form: 'OBJECT', fate: 'REFUSED', reason: 'a field of the wrong type (class, polygon, host or visibility)' })
     const cls = WALL_CLASSES.includes(got.o.class as never) ? (got.o.class as (typeof WALL_CLASSES)[number]) : undefined
     const p = polyOf(got.o.polygon)
     const why = !cls ? `class ${String(got.o.class)}` : 'why' in p ? p.why : sameAsRoof(p.ok) ? 'the zone is the roof\'s own polygon: a roof, not a wall finish' : undefined
@@ -228,6 +234,7 @@ export function canonicalizeElevationAnswer(input: { raw: unknown; stopReason?: 
   list('openings').forEach((e, i) => {
     const got = objectOf('openings', e, (o) => typeof o.kind === 'string' && isPolyLike(o.polygon) && (o.host === undefined || typeof o.host === 'string'))
     if (!got) return void account.elements.push({ path: `openings[${i}]`, part: 'opening', form: 'UNKNOWN', fate: 'REFUSED', reason: 'unknown form' })
+    if (got.wrongField) return void account.elements.push({ path: `openings[${i}]`, part: 'opening', form: 'OBJECT', fate: 'REFUSED', reason: 'a field of the wrong type (kind, polygon or host)' })
     const kind = OPENING_KINDS.includes(got.o.kind as never) ? (got.o.kind as (typeof OPENING_KINDS)[number]) : undefined
     const p = polyOf(got.o.polygon)
     if (!kind || 'why' in p) return void account.elements.push({ path: `openings[${i}]`, part: 'opening', form: got.form, fate: 'REFUSED', reason: !kind ? `kind ${String(got.o.kind)}` : 'why' in p ? p.why : 'refused' })

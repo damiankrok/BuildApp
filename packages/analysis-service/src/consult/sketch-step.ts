@@ -79,6 +79,21 @@ function sideFacts(model: CanonicalBuildingModel, facade: Facade): { lo: number;
   return { lo, hi, openings }
 }
 
+/**
+ * The ridge and the eaves among the agreed level marks, by their role — never "the highest mark" (a chimney top, a
+ * ceiling, another body's level is not the ridge), never a ceiling for the eaves. Two different values for one role are
+ * a dispute between witnesses: that role is left unset, not settled by the nearer or the larger.
+ */
+export function ridgeAndEaves(agreed: ReadonlyArray<{ role?: string | null; value: number | null }>): { ridge?: number; eaves?: number } {
+  const byRole = (role: string): number | undefined => {
+    const vs = [...new Set(agreed.filter((o) => o.role === role && o.value !== null).map((o) => o.value as number))]
+    return vs.length === 1 ? vs[0] : undefined
+  }
+  const ridge = byRole('RIDGE')
+  const eaves = byRole('EAVES')
+  return { ...(ridge !== undefined ? { ridge } : {}), ...(eaves !== undefined ? { eaves } : {}) }
+}
+
 /** Steps 1–2: read every registered elevation, draw it, check its proportions; what passes is handed out. */
 export async function readSketches(input: SketchStepInput): Promise<SketchReading> {
   // v3.54.15: a printed level is usable when the run that stands holds it as a LEVEL_DATUM — admitted by the drawing
@@ -86,14 +101,7 @@ export async function readSketches(input: SketchStepInput): Promise<SketchReadin
   const admitted = ((input.metrics as { evidence?: Array<{ kind: string; value?: number }> }).evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && typeof e.value === 'number').map((e) => e.value as number)
   const agreed = (input.metricReads ?? []).flatMap((r) => r.observations).filter((o) => o.kind === 'LEVEL' && o.value !== null && admitted.some((v) => Math.abs(v - (o.value as number)) <= 0.005))
   const printedLevels = agreed.map((o) => ({ literal: o.literal, value: o.value as number, hint: o.hostHint ?? '', ...(o.role ? { role: o.role, roleFrom: o.roleFrom ?? 'API' } : {}) }))
-  // the ridge and the eaves by their role, never "the highest mark" (a chimney top or another body's level is not the ridge);
-  // two different values for one role are a dispute: no ridge
-  const byRole = (role: string): number | undefined => {
-    const vs = [...new Set(agreed.filter((o) => o.role === role).map((o) => o.value as number))]
-    return vs.length === 1 ? vs[0] : undefined
-  }
-  const ridge = byRole('RIDGE')
-  const eaves = byRole('EAVES')
+  const { ridge, eaves } = ridgeAndEaves(agreed)
   const sketches: SketchReading['sketches'] = []
   const elevationSketches: SketchReading['elevationSketches'] = []
   const appearance: SketchReading['appearance'] = { observations: [], projections: {} }

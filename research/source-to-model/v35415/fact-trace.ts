@@ -51,8 +51,14 @@ export function factTrace(input: { metricRead?: any; sketches?: any; localModel?
   const roofs = ((final?.roofs as Array<{ id: string; pitchDeg?: number; evidence?: { interpretation?: string } }> | undefined) ?? [])
   const levels = after.levels ?? []
   for (const l of mr?.applied?.levels ?? []) {
-    const v = typeof l.valueM === 'number' ? l.valueM : null
-    if (l.status !== 'ADMITTED' || v === null) {
+    const literalValue = ((): number | null => {
+      const t = String(l.literal ?? '').replace(/\s/g, '').replace('−', '-').replace('±', '')
+      return /^[+-]?[0-9]+([.,][0-9]+)?$/.test(t) ? Number(t.replace(',', '.')) : null
+    })()
+    // the same printed label LOCAL already read and the drawing admitted: one value per label — a witness of it
+    const heldByLocal = l.status === 'REFUSED' && /the same printed label/.test(String(l.why)) && literalValue !== null
+    const v = typeof l.valueM === 'number' ? l.valueM : heldByLocal ? literalValue : null
+    if ((l.status !== 'ADMITTED' && !heldByLocal) || v === null) {
       rows.push({ class: 'LEVEL', id: l.proposalId, literal: l.literal, value: v, witnesses: l.why, status: l.status, param: null, before: null, after: null, elementIds: [], closure: 'REFUSED', why: l.why })
       continue
     }
@@ -64,7 +70,7 @@ export function factTrace(input: { metricRead?: any; sketches?: any; localModel?
       rows.push({ class: 'LEVEL', id: l.proposalId, literal: l.literal, value: v, witnesses: l.why, status: l.status, param: null, before: null, after: null, elementIds: [], closure: 'NOT_CONSUMED', why: v < 0 ? 'a level below ±0,00 (the terrain): the registration of the views uses it, no element of the model carries it' : 'admitted, and no parameter of the model carries this height' })
       continue
     }
-    const changed = target.b === undefined || !near(target.b, v, 0.02)
+    const changed = !heldByLocal && (target.b === undefined || !near(target.b, v, 0.02))
     rows.push({ class: 'LEVEL', id: l.proposalId, literal: l.literal, value: v, witnesses: l.why, status: l.status, param: target.param, before: target.b ?? null, after: target.a ?? null, elementIds: target.el, closure: changed ? 'CHANGED' : 'CONFIRMED', why: changed ? `${target.param} ${target.b ?? 'absent (no model)'} → ${target.a}` : `${target.param} already ${target.b}` })
   }
   // the API's roof angles: a witness of the pitch the roof carries, or not carried

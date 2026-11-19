@@ -174,3 +174,17 @@ describe('v3.54.14 resolver 1.1.0 — the page\'s published footprint as a witne
     expect(run({ footprint: 111.25, item: fits }).decisions.find((x) => x.itemId === 'D1')?.decision).not.toBe('CORRECTED')
   })
 })
+
+describe('v3.54.15 counter-trial: a body dimension is not the whole house', () => {
+  // the same 13.65 × 8.15 product as the page's footprint, but the API scopes the width to one BODY: the footprint
+  // product is a witness only of the two whole-house overalls, so nothing is corrected
+  const depthItem = L('D1', '518', 518, 774, 100, 518, 'cd', { axis: 'Y', box: { x0: 774, y0: 290, x1: 800, y1: 340 } })
+  const body = obs('1365', 13.65, [304, 50, 366, 73], { scope: 'BODY', axis: 'HORIZONTAL', ends: { from: [0, 77], to: [700, 77] } })
+  const depth = obs('815', 8.15, [774, 290, 800, 340], { scope: 'WHOLE_HOUSE', axis: 'VERTICAL', ends: { from: [787, 100], to: [787, 518] } })
+  it('no FOOTPRINT witness when one of the two is a body, not the whole', () => {
+    const r = resolveMetric({ metrics: metrics(), table: [depthItem], reads: read([body, depth]), checks: [], consultant, publishedFootprintM2: 111.25 })
+    const d = r.decisions.find((x) => x.itemId === 'D1')
+    expect(d?.decision).not.toBe('CORRECTED')
+    expect(d?.witness).not.toBe('FOOTPRINT')
+  })
+})
