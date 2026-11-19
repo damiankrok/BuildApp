@@ -1,0 +1,91 @@
+{
+ "A": {
+  "comparison": [
+   {
+    "codes": [
+     "HEAD_MISMATCH"
+    ],
+    "delta": {
+     "centreM": -0.008666,
+     "headM": -0.546942,
+     "sillM": 0,
+     "widthM": 0.081304
+    },
+    "facade": "FRONT",
+    "model": {
+     "from": 8.560083,
+     "headY": 2.75,
+     "sillY": 0,
+     "source": {
+      "head": "UNRESOLVED",
+      "sill": "SOURCE_DERIVED",
+      "width": "SOURCE_EXACT"
+     },
+     "to": 11.310083,
+     "widthM": 2.75
+    },
+    "openingId": "opening-0-front-8-0",
+    "readingId": "fm-opening-0-front-8-0",
+    "status": "CONFLICT",
+    "storeyIndex": 0,
+    "tolerance": {
+     "alongM": 0.1,
+     "heightM": 0.1
+    },
+    "view": {
+     "from": 8.510765,
+     "headY": 2.203058,
+     "heightsTrusted": true,
+     "kind": "GLAZED_DOOR",
+     "mullions": 0,
+     "sillY": 0,
+     "to": 11.342069,
+     "uncertaintyM": {
+      "along": 0.067412,
+      "height": 0.083706
+     },
+     "widthM": 2.831304
+    }
+   }
+  ],
+  "corrections": [
+   {
+    "after": 2.2,
+    "before": 2.75,
+    "calloutHeightCm": 220,
+    "facade": "FRONT",
+    "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+    "openingId": "opening-0-front-8-0",
+    "property": "head",
+    "provenance": "SOURCE_CORROBORATED",
+    "readingId": "fm-opening-0-front-8-0",
+    "why": "the printed height read 275 or 220 alike; on the front view, registered on the ridge datum, the opening measures 2.20 m tall at the plan's gap, which fits the printed 220 only: head 2.20 m"
+   }
+  ]
+ },
+ "Bboth": {
+  "comparison": [
+   {
+    "codes": [],
+    "facade": "FRONT",
+    "model": {
+     "from": 8.560083,
+     "headY": 2.75,
+     "sillY": 0,
+     "source": {
+      "head": "UNRESOLVED",
+      "sill": "SOURCE_DERIVED",
+      "width": "SOURCE_EXACT"
+     },
+     "to": 11.310083,
+     "widthM": 2.75
+    },
+    "note": "not read on the view: no opening stands out from the wall there in a way the readers accept (a recess in shadow, a member in front, glass the wall\u2019s colour); neither confirmed nor contradicted",
+    "openingId": "opening-0-front-8-0",
+    "status": "NOT_OBSERVED",
+    "storeyIndex": 0
+   }
+  ],
+  "corrections": []
+ }
+}

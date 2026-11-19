@@ -30,10 +30,10 @@ describe('v3.54.12 scenes', () => {
     const s = sealedOwnerModel('marcowki-local-szkice-v35412', S12, 'owner-v35412')
     expect([s.rooms.length, s.walls.length, s.chimneys.length]).toEqual([13, 40, 2])
   })
-  it('are listed first, the H candidate then the experiment, labelled as such', () => {
+  it('are listed after the v3.54.13 scenes, the H candidate then the experiment, labelled as such', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(0, 2).map((e) => e.key)).toEqual(['marcowki-h-v35412', 'marcowki-local-szkice-v35412'])
-    expect(index[0].subtitle).toContain('KANDYDAT')
-    expect(index[1].subtitle).toContain('EKSPERYMENT')
+    expect(index.slice(2, 4).map((e) => e.key)).toEqual(['marcowki-h-v35412', 'marcowki-local-szkice-v35412'])
+    expect(index[2].subtitle).toContain('KANDYDAT')
+    expect(index[3].subtitle).toContain('EKSPERYMENT')
   })
 })

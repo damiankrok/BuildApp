@@ -1,0 +1,5 @@
+A: FRONT agree 0.739 IoU TIMBE 0.302 DARK_ 0.986 LIGHT 0.478 | F1 F-timber|dark 0.815 F-timber|frame 0.359 | cont 0  ||  REAR agree 0.771 IoU DARK_ 0.572 TIMBE 0.964 LIGHT 0.611 | F1 R-band|timber 1 R-gable|frame 0.46
+B-both: FRONT agree 0.909 IoU TIMBE 0.774 DARK_ 0.982 LIGHT 0.739 | F1 F-timber|dark 0.91 F-timber|frame 0.66 | cont 0.786  ||  REAR agree 0.909 IoU DARK_ 0.851 TIMBE 0.945 LIGHT 0.814 | F1 R-band|timber 1 R-gable|frame 0.671
+B-guarded: FRONT agree 0.909 IoU TIMBE 0.774 DARK_ 0.982 LIGHT 0.739 | F1 F-timber|dark 0.91 F-timber|frame 0.66 | cont 0.786  ||  REAR agree 0.909 IoU DARK_ 0.851 TIMBE 0.945 LIGHT 0.814 | F1 R-band|timber 1 R-gable|frame 0.671
+C-offline: FRONT agree 0.956 IoU TIMBE 0.895 DARK_ 0.941 LIGHT 0.951 | F1 F-timber|dark 0.804 F-timber|frame 0.975 | cont 0.992  ||  REAR agree 0.952 IoU DARK_ 0.928 TIMBE 0.974 LIGHT 0.916 | F1 R-band|timber 1 R-gable|frame 0.846
+C-live: FRONT agree 0.958 IoU TIMBE 0.903 DARK_ 0.992 LIGHT 0.875 | F1 F-timber|dark 0.828 F-timber|frame 0.96 | cont 1  ||  REAR agree 0.839 IoU DARK_ 0.762 TIMBE 0.776 LIGHT 0.7 | F1 R-band|timber 0 R-gable|frame 0.441

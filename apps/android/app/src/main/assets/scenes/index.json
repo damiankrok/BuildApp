@@ -1,5 +1,29 @@
 [
   {
+    "key": "marcowki-c-offline-v35413",
+    "title": "Marcówki — kontury ze szkiców v3.54.13 (oddany)",
+    "subtitle": "ODDANY: geometria LOCAL z oryginałów bez zmian, wykończenia z konturów szkiców OWNER-a (przód i tył); drewno ciągłe od parteru do szczytu",
+    "asset": "marcowki-c-offline-v35413.scene.json",
+    "modelId": "m-analysis-m2fa281446a8ca",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "94bfac1d96e2c245acad723a011028b700312034058bc05b255a953e3381b11e",
+    "meshCount": 177,
+    "triangleCount": 14350,
+    "objectCount": 131
+  },
+  {
+    "key": "marcowki-c-live-v35413",
+    "title": "Marcówki — kontury z odczytu 4 elewacji (eksperyment)",
+    "subtitle": "EKSPERYMENT: ta sama geometria, wykończenia z automatycznego odczytu czterech oryginalnych elewacji (kontury i klasy JSON)",
+    "asset": "marcowki-c-live-v35413.scene.json",
+    "modelId": "m-analysis-m2fa281446a8ca",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "04ad37fac1589d9c34531f6386272602f9f7b4c6946df767723bd0be8b01cda9",
+    "meshCount": 181,
+    "triangleCount": 9792,
+    "objectCount": 135
+  },
+  {
     "key": "marcowki-h-v35412",
     "title": "Marcówki — H v3.54.12 (czoło ściany)",
     "subtitle": "KANDYDAT H (nie oddany): jak v3.54.11, plus wykończenie odsłoniętych czół ścian w strefie (ciemny pas 0,40 m między wejściem a garażem); bez kominów",

@@ -49,6 +49,24 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.13 (delivered miniature): the delivered LOCAL geometry read on the ORIGINAL sources (v3.54.11 A, every
+  // wall, opening, room, stair and id unchanged — the usable-geometry fingerprint is A's), its finishes replaced by the
+  // material outlines the OWNER's front and rear sketches carry: read by the local sketch reader, registered on the
+  // elevation and split among the surfaces the model shows (model schema 1.9.0 outlines). The gate keeps its 2.20 m.
+  {
+    key: 'marcowki-c-offline-v35413',
+    title: 'Marcówki — kontury ze szkiców v3.54.13 (oddany)',
+    subtitle: 'ODDANY: geometria LOCAL z oryginałów bez zmian, wykończenia z konturów szkiców OWNER-a (przód i tył); drewno ciągłe od parteru do szczytu',
+    build: () => sealedOwnerModel('marcowki-c-offline-v35413', '22ef694e218be7ce68f897229e69163f64db6c62440df91b76a376e087b9ea5e', 'owner-v35413'),
+  },
+  // v3.54.13 (experiment): the same geometry, its finishes from the four ORIGINAL elevations read by the provider's
+  // API into the appearance contract (outlines and classes as JSON, no raster edited; 4 requests, 0.04623 USD)
+  {
+    key: 'marcowki-c-live-v35413',
+    title: 'Marcówki — kontury z odczytu 4 elewacji (eksperyment)',
+    subtitle: 'EKSPERYMENT: ta sama geometria, wykończenia z automatycznego odczytu czterech oryginalnych elewacji (kontury i klasy JSON)',
+    build: () => sealedOwnerModel('marcowki-c-live-v35413', '8a6c0cfe4b1f4bde50e6dea164ef79cfb2d9e6fdd78e847e2465636079701014', 'owner-v35413'),
+  },
   // v3.54.12: the same live reading replayed on the code with the wall-cap finish (59b9af1): six exposed wall end caps in
   // a zone take its finish (the 0.40 m strip between entrance and garage); everything else as v3.54.11
   {

@@ -1,0 +1,566 @@
+{
+ "fingerprintAfter": "0e493584fb4f7203adeb79d4fe8110209d32c039b8f68862ad6352beaf028c6a",
+ "fingerprintBefore": "0e493584fb4f7203adeb79d4fe8110209d32c039b8f68862ad6352beaf028c6a",
+ "traces": [
+  {
+   "added": [
+    {
+     "areaM2": 11.0002,
+     "class": "DARK_RENDER",
+     "corners": 28,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-0",
+      "dark-render-1"
+     ],
+     "hostId": "ring-main-0-w0",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-front-ring-main-0-w0-dark-render-0"
+    },
+    {
+     "areaM2": 7.5504,
+     "class": "TIMBER",
+     "corners": 28,
+     "face": "OUTER",
+     "fromRegions": [
+      "timber-0"
+     ],
+     "hostId": "ring-main-0-w0",
+     "materialId": "mat-timber",
+     "regionId": "appearance-front-ring-main-0-w0-timber-0"
+    },
+    {
+     "areaM2": 13.4164,
+     "class": "TIMBER",
+     "corners": 558,
+     "face": "OUTER",
+     "fromRegions": [
+      "timber-0"
+     ],
+     "hostId": "ring-main-1-w0",
+     "materialId": "mat-timber",
+     "regionId": "appearance-front-ring-main-1-w0-timber-0"
+    },
+    {
+     "areaM2": 0.7912,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-0",
+      "dark-render-1"
+     ],
+     "hostId": "ring-main-1-w0",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-front-ring-main-1-w0-dark-render-0"
+    },
+    {
+     "areaM2": 0.7912,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-0",
+      "dark-render-1"
+     ],
+     "hostId": "ring-main-1-w0",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-front-ring-main-1-w0-dark-render-1"
+    }
+   ],
+   "cellM": 0.02,
+   "consumerVersion": "1.0.0",
+   "facade": "FRONT",
+   "notOnWalls": [
+    {
+     "cells": 14316,
+     "class": "LIGHT_RENDER",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 8436,
+     "class": "DARK_RENDER",
+     "meshPart": "BALCONY"
+    },
+    {
+     "cells": 7592,
+     "class": "LIGHT_RENDER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 7547,
+     "class": "DARK_RENDER",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 6451,
+     "class": "METAL",
+     "meshPart": "TERRACE"
+    },
+    {
+     "cells": 3285,
+     "class": "DARK_RENDER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 2077,
+     "class": "METAL",
+     "meshPart": "CHIMNEY"
+    },
+    {
+     "cells": 1348,
+     "class": "GLASS",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 563,
+     "class": "METAL",
+     "meshPart": "SLAB"
+    },
+    {
+     "cells": 480,
+     "class": "GLASS",
+     "meshPart": "RAILING_POST"
+    },
+    {
+     "cells": 461,
+     "class": "GLASS",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 366,
+     "class": "GLASS",
+     "meshPart": "RAILING_RAIL"
+    },
+    {
+     "cells": 131,
+     "class": "DARK_RENDER",
+     "meshPart": "CHIMNEY"
+    },
+    {
+     "cells": 117,
+     "class": "METAL",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 86,
+     "class": "TIMBER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 54,
+     "class": "GLASS",
+     "meshPart": "SLAB"
+    },
+    {
+     "cells": 47,
+     "class": "DARK_RENDER",
+     "meshPart": "SLAB"
+    },
+    {
+     "cells": 29,
+     "class": "GLASS",
+     "meshPart": "TERRACE"
+    },
+    {
+     "cells": 20,
+     "class": "METAL",
+     "meshPart": "WINDOW_GLASS"
+    },
+    {
+     "cells": 19,
+     "class": "GLASS",
+     "meshPart": "WINDOW_GLASS"
+    },
+    {
+     "cells": 15,
+     "class": "DARK_RENDER",
+     "meshPart": "RAILING_POST"
+    },
+    {
+     "cells": 8,
+     "class": "GLASS",
+     "meshPart": "CHIMNEY"
+    }
+   ],
+   "observationId": "c-offline-front-c868bf59895c",
+   "producer": {
+    "kind": "LOCAL_SKETCH_SEGMENTATION",
+    "version": "1.0.0"
+   },
+   "removed": [
+    {
+     "hostId": "ring-main-0-w0",
+     "regionId": "finish-front-319",
+     "why": "replaced by the local sketch segmentation outlines of c-offline-front-c868bf59895c on this face"
+    },
+    {
+     "hostId": "ring-main-0-w0",
+     "regionId": "finish-front-66",
+     "why": "replaced by the local sketch segmentation outlines of c-offline-front-c868bf59895c on this face"
+    }
+   ],
+   "skipped": [
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-attached-0-0-w0",
+     "why": "0.01 m\u00b2 of other finishes inside this dark render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-attached-0-0-w0",
+     "why": "the wall's own material is already mat-render-dark"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-attached-0-0-w0",
+     "why": "the wall's own material is already mat-render-dark"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-main-0-w0",
+     "why": "0.00 m\u00b2 of other finishes inside this dark render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "TIMBER",
+     "hostId": "ring-main-0-w0",
+     "why": "0.00 m\u00b2 of other finishes inside this timber part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-0-w0",
+     "why": "the wall's own material is already mat-wall"
+    },
+    {
+     "class": "TIMBER",
+     "hostId": "ring-main-1-w0",
+     "why": "0.02 m\u00b2 of other finishes inside this timber part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-1-w0",
+     "why": "the wall's own material is already mat-wall"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-main-1-w0",
+     "why": "a part of 0.01 m\u00b2, under the 0.15 m\u00b2 floor: the wall's own material stays there"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-main-1-w0",
+     "why": "a part of 0.01 m\u00b2, under the 0.15 m\u00b2 floor: the wall's own material stays there"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-1-w0",
+     "why": "a part of 0.01 m\u00b2, under the 0.15 m\u00b2 floor: the wall's own material stays there"
+    }
+   ]
+  },
+  {
+   "added": [
+    {
+     "areaM2": 16.3184,
+     "class": "TIMBER",
+     "corners": 12,
+     "face": "OUTER",
+     "fromRegions": [
+      "timber-0"
+     ],
+     "hostId": "ring-main-0-w2",
+     "materialId": "mat-timber",
+     "regionId": "appearance-rear-ring-main-0-w2-timber-0"
+    },
+    {
+     "areaM2": 10.5148,
+     "class": "DARK_RENDER",
+     "corners": 534,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-0"
+    },
+    {
+     "areaM2": 0.792,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-1"
+    },
+    {
+     "areaM2": 0.792,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-2"
+    },
+    {
+     "areaM2": 0.7744,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-3"
+    },
+    {
+     "areaM2": 0.7744,
+     "class": "DARK_RENDER",
+     "corners": 4,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-4"
+    },
+    {
+     "areaM2": 0.2096,
+     "class": "DARK_RENDER",
+     "corners": 28,
+     "face": "OUTER",
+     "fromRegions": [
+      "dark-render-2",
+      "dark-render-1",
+      "dark-render-3",
+      "dark-render-0",
+      "dark-render-4"
+     ],
+     "hostId": "ring-main-1-w2",
+     "materialId": "mat-render-dark",
+     "regionId": "appearance-rear-ring-main-1-w2-dark-render-5"
+    }
+   ],
+   "cellM": 0.02,
+   "consumerVersion": "1.0.0",
+   "facade": "REAR",
+   "notOnWalls": [
+    {
+     "cells": 13138,
+     "class": "LIGHT_RENDER",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 12452,
+     "class": "LIGHT_RENDER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 8335,
+     "class": "DARK_RENDER",
+     "meshPart": "BALCONY"
+    },
+    {
+     "cells": 3419,
+     "class": "GLASS",
+     "meshPart": "TERRACE"
+    },
+    {
+     "cells": 2436,
+     "class": "GLASS",
+     "meshPart": "SLAB"
+    },
+    {
+     "cells": 2354,
+     "class": "GLASS",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 2206,
+     "class": "DARK_RENDER",
+     "meshPart": "CHIMNEY"
+    },
+    {
+     "cells": 1023,
+     "class": "TIMBER",
+     "meshPart": "TERRACE"
+    },
+    {
+     "cells": 648,
+     "class": "GLASS",
+     "meshPart": "RAILING_POST"
+    },
+    {
+     "cells": 620,
+     "class": "GLASS",
+     "meshPart": "RAILING_RAIL"
+    },
+    {
+     "cells": 396,
+     "class": "DARK_RENDER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 334,
+     "class": "TIMBER",
+     "meshPart": "BALCONY"
+    },
+    {
+     "cells": 198,
+     "class": "GLASS",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 160,
+     "class": "LIGHT_RENDER",
+     "meshPart": "BALCONY"
+    },
+    {
+     "cells": 92,
+     "class": "LIGHT_RENDER",
+     "meshPart": "RAILING_POST"
+    },
+    {
+     "cells": 78,
+     "class": "GLASS",
+     "meshPart": "BALCONY"
+    },
+    {
+     "cells": 60,
+     "class": "DARK_RENDER",
+     "meshPart": "ROOF_TRIM"
+    },
+    {
+     "cells": 49,
+     "class": "DARK_RENDER",
+     "meshPart": "SLAB"
+    },
+    {
+     "cells": 36,
+     "class": "DARK_RENDER",
+     "meshPart": "RAILING_POST"
+    },
+    {
+     "cells": 36,
+     "class": "GLASS",
+     "meshPart": "DOOR_PANEL"
+    },
+    {
+     "cells": 30,
+     "class": "TIMBER",
+     "meshPart": "WALL"
+    },
+    {
+     "cells": 8,
+     "class": "DARK_RENDER",
+     "meshPart": "DOOR_PANEL"
+    },
+    {
+     "cells": 5,
+     "class": "GLASS",
+     "meshPart": "CHIMNEY"
+    },
+    {
+     "cells": 2,
+     "class": "LIGHT_RENDER",
+     "meshPart": "RAILING_RAIL"
+    }
+   ],
+   "observationId": "c-offline-rear-2e7b59bdc295",
+   "producer": {
+    "kind": "LOCAL_SKETCH_SEGMENTATION",
+    "version": "1.0.0"
+   },
+   "removed": [
+    {
+     "hostId": "ring-main-0-w2",
+     "regionId": "finish-rear-66",
+     "why": "replaced by the local sketch segmentation outlines of c-offline-rear-2e7b59bdc295 on this face"
+    }
+   ],
+   "skipped": [
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-attached-0-0-w2",
+     "why": "0.02 m\u00b2 of other finishes inside this dark render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-attached-0-0-w2",
+     "why": "the wall's own material is already mat-render-dark"
+    },
+    {
+     "class": "TIMBER",
+     "hostId": "ring-main-0-w2",
+     "why": "0.00 m\u00b2 of other finishes inside this timber part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-0-w2",
+     "why": "the wall's own material is already mat-wall"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-0-w2",
+     "why": "a part of 0.15 m\u00b2, under the 0.15 m\u00b2 floor: the wall's own material stays there"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-main-1-w2",
+     "why": "0.00 m\u00b2 of other finishes inside this dark render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-1-w2",
+     "why": "0.00 m\u00b2 of other finishes inside this light render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-1-w2",
+     "why": "the wall's own material is already mat-wall"
+    },
+    {
+     "class": "DARK_RENDER",
+     "hostId": "ring-main-1-w2",
+     "why": "0.00 m\u00b2 of other finishes inside this dark render part are given to it (an outline carries no holes)"
+    },
+    {
+     "class": "LIGHT_RENDER",
+     "hostId": "ring-main-1-w2",
+     "why": "the wall's own material is already mat-wall"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "sides": {
+  "FRONT": {
+   "alongM": [
+    0.034,
+    11.999
+   ],
+   "widthM": 11.966,
+   "groundM": 0.029,
+   "topM": 7.984,
+   "roofTopM": 7.984,
+   "roofEdgeM": 4.546,
+   "wallTopM": 7.984,
+   "uncM": 0.134
+  },
+  "REAR": {
+   "alongM": [
+    0.0,
+    11.949
+   ],
+   "widthM": 11.949,
+   "groundM": 0.034,
+   "topM": 7.984,
+   "roofTopM": 7.984,
+   "roofEdgeM": 4.606,
+   "wallTopM": 7.984,
+   "uncM": 0.169
+  },
+  "EAST": {
+   "alongM": [
+    0.067,
+    14.584
+   ],
+   "widthM": 14.517,
+   "groundM": -0.307,
+   "topM": 7.916,
+   "roofTopM": 7.916,
+   "roofEdgeM": 4.66,
+   "wallTopM": 4.66,
+   "uncM": 0.117
+  },
+  "WEST": {
+   "alongM": [
+    0.016,
+    14.337
+   ],
+   "widthM": 14.32,
+   "groundM": 0.103,
+   "topM": 7.933,
+   "roofTopM": 7.933,
+   "roofEdgeM": 4.705,
+   "wallTopM": 4.705,
+   "uncM": 0.203
+  }
+ },
+ "checks": [
+  {
+   "check": "width front = rear",
+   "a": 11.966,
+   "b": 11.949,
+   "diffM": 0.017,
+   "tolM": 0.303,
+   "ok": true,
+   "why": "the same building seen from both ends"
+  },
+  {
+   "check": "ground front = rear",
+   "a": 0.029,
+   "b": 0.034,
+   "diffM": 0.005,
+   "tolM": 0.303,
+   "ok": true,
+   "why": "one terrain datum"
+  },
+  {
+   "check": "apex front = rear",
+   "a": 7.984,
+   "b": 7.984,
+   "diffM": 0.0,
+   "tolM": 0.303,
+   "ok": true,
+   "why": "one ridge"
+  },
+  {
+   "check": "depth east = west",
+   "a": 14.517,
+   "b": 14.32,
+   "diffM": 0.197,
+   "tolM": 0.32,
+   "ok": true,
+   "why": "the same building seen from both sides"
+  },
+  {
+   "check": "eave east = west",
+   "a": 4.66,
+   "b": 4.705,
+   "diffM": 0.045,
+   "tolM": 0.32,
+   "ok": true,
+   "why": "a symmetric roof edge"
+  },
+  {
+   "check": "ridge front apex = east roof top",
+   "a": 7.984,
+   "b": 7.916,
+   "diffM": 0.068,
+   "tolM": 0.251,
+   "ok": true,
+   "why": "the ridge seen end-on and along"
+  },
+  {
+   "check": "ridge front apex = west roof top",
+   "a": 7.984,
+   "b": 7.933,
+   "diffM": 0.051,
+   "tolM": 0.337,
+   "ok": true,
+   "why": "the ridge seen end-on and along"
+  }
+ ]
+}

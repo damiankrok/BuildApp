@@ -1,0 +1,342 @@
+{
+  "results": {
+    "C-offline": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.804,
+            "precision": 1,
+            "predPx": 180,
+            "recall": 0.673,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.975,
+            "precision": 0.98,
+            "predPx": 758,
+            "recall": 0.97,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.992
+        },
+        "iou": {
+          "DARK_RENDER": 0.941,
+          "LIGHT_RENDER": 0.951,
+          "TIMBER": 0.895
+        },
+        "pixelAgreement": 0.956,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.802,
+            "predPx": 954,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    },
+    "CT-hue-15": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.505,
+            "precision": 0.404,
+            "predPx": 438,
+            "recall": 0.673,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.944,
+            "precision": 0.956,
+            "predPx": 744,
+            "recall": 0.932,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.992
+        },
+        "iou": {
+          "DARK_RENDER": 0.924,
+          "LIGHT_RENDER": 0.949,
+          "TIMBER": 0.876
+        },
+        "pixelAgreement": 0.948,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.801,
+            "predPx": 952,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    },
+    "CT-hue20": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.716,
+            "precision": 0.919,
+            "predPx": 136,
+            "recall": 0.586,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.945,
+            "precision": 0.921,
+            "predPx": 808,
+            "recall": 0.97,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.985
+        },
+        "iou": {
+          "DARK_RENDER": 0.94,
+          "LIGHT_RENDER": 0.949,
+          "TIMBER": 0.893
+        },
+        "pixelAgreement": 0.955,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.845,
+            "precision": 0.801,
+            "predPx": 949,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    },
+    "CT-no-frame": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.758,
+            "precision": 0.939,
+            "predPx": 181,
+            "recall": 0.635,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.559,
+            "precision": 0.538,
+            "predPx": 783,
+            "recall": 0.582,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.985
+        },
+        "iou": {
+          "DARK_RENDER": 0.94,
+          "LIGHT_RENDER": 0.88,
+          "TIMBER": 0.857
+        },
+        "pixelAgreement": 0.939,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.802,
+            "predPx": 954,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    },
+    "CT-palette": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0,
+            "precision": 0,
+            "predPx": 0,
+            "recall": 0,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0,
+            "precision": 0,
+            "predPx": 0,
+            "recall": 0,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0
+        },
+        "iou": {
+          "DARK_RENDER": 0.862,
+          "LIGHT_RENDER": 0.432,
+          "TIMBER": 0
+        },
+        "pixelAgreement": 0.629,
+        "scoredPx": 161567
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.802,
+            "predPx": 954,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    },
+    "CT-shifted": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.282,
+            "precision": 0.266,
+            "predPx": 267,
+            "recall": 0.301,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.985,
+            "precision": 1,
+            "predPx": 743,
+            "recall": 0.97,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 1
+        },
+        "iou": {
+          "DARK_RENDER": 0.903,
+          "LIGHT_RENDER": 0.952,
+          "TIMBER": 0.863
+        },
+        "pixelAgreement": 0.941,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.802,
+            "predPx": 954,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    }
+  },
+  "tolM": 0.1
+}
+

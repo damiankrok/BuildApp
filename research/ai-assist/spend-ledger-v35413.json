@@ -1,0 +1,65 @@
+{
+ "schema": "buildapp.ai-spend-ledger.v35413",
+ "currency": "USD",
+ "costBasis": "USAGE_PRICED",
+ "billing": "NOT_RECONCILED_WITH_INVOICE",
+ "openingUsd": 23.808382,
+ "ceilingUsd": 24.11036,
+ "openingNote": "the cumulative books as v3.54.10 left them (v3.54.11 and v3.54.12 spent nothing); this ledger lists the v3.54.13 requests only; ceiling 24.11036 USD cumulative, not raised",
+ "entries": [
+  {
+   "at": "2026-11-19T04:19:22.683Z",
+   "phase": "c-live",
+   "house": "marcowki-ge",
+   "variant": "C-live FRONT",
+   "note": "appearance contours (appearance-contours-1), 7096 ms, stop end_turn",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011ChBeHi6PvpHY84vchNy6V",
+   "inputTokens": 1571,
+   "outputTokens": 926,
+   "costUsd": 0.012402,
+   "reservedUsd": 0.048
+  },
+  {
+   "at": "2026-11-19T04:19:29.682Z",
+   "phase": "c-live",
+   "house": "marcowki-ge",
+   "variant": "C-live REAR",
+   "note": "appearance contours (appearance-contours-1), 6944 ms, stop end_turn",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011ChBeJD6QvkA32Me8sk4WT",
+   "inputTokens": 1572,
+   "outputTokens": 1133,
+   "costUsd": 0.014474,
+   "reservedUsd": 0.048
+  },
+  {
+   "at": "2026-11-19T04:19:33.755Z",
+   "phase": "c-live",
+   "house": "marcowki-ge",
+   "variant": "C-live EAST",
+   "note": "appearance contours (appearance-contours-1), 4004 ms, stop end_turn",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011ChBeJixmHbXZBRg7bVGWh",
+   "inputTokens": 1571,
+   "outputTokens": 620,
+   "costUsd": 0.009342,
+   "reservedUsd": 0.048
+  },
+  {
+   "at": "2026-11-19T04:19:39.565Z",
+   "phase": "c-live",
+   "house": "marcowki-ge",
+   "variant": "C-live WEST",
+   "note": "appearance contours (appearance-contours-1), 5655 ms, stop end_turn",
+   "model": "claude-sonnet-5-5",
+   "requestId": "req_011ChBeK27tYNRiBHvMtWXHz",
+   "inputTokens": 1571,
+   "outputTokens": 687,
+   "costUsd": 0.010012,
+   "reservedUsd": 0.048
+  }
+ ],
+ "totalUsd": 23.854612,
+ "requests": 4
+}

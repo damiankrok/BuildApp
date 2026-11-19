@@ -1,0 +1,286 @@
+{
+  "results": {
+    "A": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.815,
+            "precision": 1,
+            "predPx": 179,
+            "recall": 0.688,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.359,
+            "precision": 0.567,
+            "predPx": 328,
+            "recall": 0.262,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0
+        },
+        "iou": {
+          "DARK_RENDER": 0.986,
+          "LIGHT_RENDER": 0.478,
+          "TIMBER": 0.302
+        },
+        "pixelAgreement": 0.739,
+        "scoredPx": 161567
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 393,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.46,
+            "precision": 0.743,
+            "predPx": 350,
+            "recall": 0.333,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.572,
+          "LIGHT_RENDER": 0.611,
+          "TIMBER": 0.964
+        },
+        "pixelAgreement": 0.771,
+        "scoredPx": 129967
+      }
+    },
+    "B-both": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.91,
+            "precision": 1,
+            "predPx": 221,
+            "recall": 0.835,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.66,
+            "precision": 0.726,
+            "predPx": 636,
+            "recall": 0.604,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.786
+        },
+        "iou": {
+          "DARK_RENDER": 0.982,
+          "LIGHT_RENDER": 0.739,
+          "TIMBER": 0.774
+        },
+        "pixelAgreement": 0.909,
+        "scoredPx": 160686
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 393,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.671,
+            "precision": 0.816,
+            "predPx": 565,
+            "recall": 0.57,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.851,
+          "LIGHT_RENDER": 0.814,
+          "TIMBER": 0.945
+        },
+        "pixelAgreement": 0.909,
+        "scoredPx": 129577
+      }
+    },
+    "B-guarded": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.91,
+            "precision": 1,
+            "predPx": 221,
+            "recall": 0.835,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.66,
+            "precision": 0.726,
+            "predPx": 636,
+            "recall": 0.604,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.786
+        },
+        "iou": {
+          "DARK_RENDER": 0.982,
+          "LIGHT_RENDER": 0.739,
+          "TIMBER": 0.774
+        },
+        "pixelAgreement": 0.909,
+        "scoredPx": 161371
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 393,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.671,
+            "precision": 0.816,
+            "predPx": 565,
+            "recall": 0.57,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.851,
+          "LIGHT_RENDER": 0.814,
+          "TIMBER": 0.945
+        },
+        "pixelAgreement": 0.909,
+        "scoredPx": 129677
+      }
+    },
+    "C-live": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.828,
+            "precision": 1,
+            "predPx": 180,
+            "recall": 0.707,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.96,
+            "precision": 0.989,
+            "predPx": 719,
+            "recall": 0.933,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 1
+        },
+        "iou": {
+          "DARK_RENDER": 0.992,
+          "LIGHT_RENDER": 0.875,
+          "TIMBER": 0.903
+        },
+        "pixelAgreement": 0.958,
+        "scoredPx": 161317
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 0,
+            "precision": 0,
+            "predPx": 0,
+            "recall": 0,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.441,
+            "precision": 0.433,
+            "predPx": 877,
+            "recall": 0.45,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.762,
+          "LIGHT_RENDER": 0.7,
+          "TIMBER": 0.776
+        },
+        "pixelAgreement": 0.839,
+        "scoredPx": 129982
+      }
+    },
+    "C-offline": {
+      "FRONT": {
+        "boundaryF1": {
+          "F-timber|dark": {
+            "f1": 0.804,
+            "precision": 1,
+            "predPx": 180,
+            "recall": 0.673,
+            "refPx": 266
+          },
+          "F-timber|frame": {
+            "f1": 0.975,
+            "precision": 0.98,
+            "predPx": 758,
+            "recall": 0.97,
+            "refPx": 705
+          }
+        },
+        "continuity": {
+          "F-timber-through-floor": 0.992
+        },
+        "iou": {
+          "DARK_RENDER": 0.941,
+          "LIGHT_RENDER": 0.951,
+          "TIMBER": 0.895
+        },
+        "pixelAgreement": 0.956,
+        "scoredPx": 161568
+      },
+      "REAR": {
+        "boundaryF1": {
+          "R-band|timber": {
+            "f1": 1,
+            "precision": 1,
+            "predPx": 384,
+            "recall": 1,
+            "refPx": 388
+          },
+          "R-gable|frame": {
+            "f1": 0.846,
+            "precision": 0.802,
+            "predPx": 954,
+            "recall": 0.895,
+            "refPx": 774
+          }
+        },
+        "continuity": {},
+        "iou": {
+          "DARK_RENDER": 0.928,
+          "LIGHT_RENDER": 0.916,
+          "TIMBER": 0.974
+        },
+        "pixelAgreement": 0.952,
+        "scoredPx": 129967
+      }
+    }
+  },
+  "tolM": 0.1
+}
+

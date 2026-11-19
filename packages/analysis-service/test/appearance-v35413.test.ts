@@ -79,6 +79,16 @@ describe('v3.54.13 the appearance consumer', () => {
     expect(b.model).toEqual(a.model)
   })
 
+  it('a real step between storeys stays where the source puts it (nothing straightens it)', () => {
+    // timber 0..3 on the ground storey, 0..5 on the upper one: one source outline with a step at the floor line
+    const stepped = { regionId: 'r-step', class: 'TIMBER' as const, outline: [px(1, 0), px(3, 0), px(3, 3), px(5, 3), px(5, 5.5), px(1, 5.5)], visibility: 'VISIBLE' as const, uncertaintyPx: 2 }
+    const r = run([stepped])
+    const t0 = r.model.surfaceRegions.find((x) => x.hostId === 'w0' && x.materialId === 'mat-timber')
+    const t1 = r.model.surfaceRegions.find((x) => x.hostId === 'w1' && x.materialId === 'mat-timber')
+    expect(t0?.rect.a1).toBeCloseTo(3, 1)
+    expect(t1?.rect.a1).toBeCloseTo(5, 1)
+  })
+
   it('an unregistered elevation is refused, never guessed', () => {
     expect(() => applyAppearance(house(), [obs([timber])], () => undefined)).toThrow(/not registered/)
   })
@@ -118,6 +128,14 @@ describe('v3.54.13 the sketch reader', () => {
     // the timber field is 30..100 with its lines split down the middle
     expect(Math.min(...xs)).toBeGreaterThanOrEqual(28)
     expect(Math.max(...xs)).toBeLessThanOrEqual(102)
+  })
+  it('a soft shadow on light render is not a dark render', () => {
+    const img = draw([210, 160, 100])
+    // a shadow band across the light frame: 30 % darker, still a mid neutral
+    for (let y = 60; y < 75; y++) for (let x = 20; x < 30; x++) img.data.set([165, 163, 160, 255], 4 * (y * img.width + x))
+    const r = readSketch(img, { minAreaPx: 20 })
+    const dark = r.regions.filter((x) => x.class === 'DARK_RENDER')
+    expect(dark.every((d) => Math.min(...d.outline.map((p) => p[0])) >= 95)).toBe(true)
   })
   it('another shade of timber is still timber; a timber turned blue is not', () => {
     expect(readSketch(draw([190, 120, 70]), { minAreaPx: 100 }).regions.some((x) => x.class === 'TIMBER')).toBe(true)
