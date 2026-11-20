@@ -38,3 +38,21 @@ gate. 2) Live `continues`/`resolved` (needs ≥ 1.5 USD worst case at host confi
 **Rerun at 0 USD.** `npx vite-node research/source-to-model/v35417/r2/index-proof.ts`, `.../r2/sketch-delivery.ts`
 (replays retained answers), `/usr/bin/python3 -I .../r2/boards-gallery.py <delivery dir>`; replay a recorded failed job
 with `readExchangeRecord(dir)` → `replayModel(..., rec.answers)`.
+
+## R3 (overhang, chimneys, heights behind pots, dimensions — OWNER 2026-11-20, +40 USD cap)
+
+**Done.** Elevations registered from the sketch (eaves or ridge checked, re-derived on the working model); unlabelled
+sides decided or left open; SET_ROOF_OVERHANG (verges end by end, eaves capped to clear another body); chimney fusion
+across perpendicular views with front/rear twins; roof meet line on parametric roofs; printed overall dimensions
+correct the outline; metric-read/5 (`ends` required); sketch prompt 2; reviewer prompt 0.8.0; REMOVE/`absorbs` from
+sketches; SET_ROOF keeps partitions and material. Live: Aurora 3 chimneys verified + overhangs; Alaska scale and 2
+chimneys; 0.958076 USD spent (books 29.500933 of 68.542857).
+
+**Still open, in order.** 1) Ballina live: orientation check compared the eaves view's fascia with the gable view's
+band over the walls (ops 1.4.0 reads the gable at its roof's ends — confirm on the live turns). 2) Source gate on
+crowded facades (Aurora front, Alaska) leaves window fixes NEEDS_EVIDENCE — do not loosen. 3) Alaska entrance and
+terrace doors. 4) Roof material of a body built without LOCAL. 5) ≥ 3 rectangles.
+
+**Rerun at 0 USD.** `run.ts --replay <live>/turns.json --sketch-replay <live>/sketch-turns.json --sketch-map
+<live>/sketches.json --check-replay <live>/check-turns.json` on `rd/v35417/r3/live/{aurora-2,alaska-2,ballina-1}`;
+boards: `r3/boards-r3.ts` then `r3/boards-r3.py`.

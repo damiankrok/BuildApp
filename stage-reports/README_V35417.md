@@ -33,3 +33,15 @@
   `sketch-delivery-status.json`, `gallery-link-check.json`
 - Macierz: `stage-reports/artifacts/v35417-r2/matrix-r2-summary.json`
 - Prywatny ZIP R2 (poza Gitem): części < 30 MB, `MANIFEST-R2.txt` z sumami SHA-256
+
+## R3 — okap, kominy, wysokości za donicami, wymiary (OWNER, +40 USD)
+
+- Raport: `stage-reports/SOURCE_TO_MODEL_V35417_R3.md` (werdykt, biegi na żywo, tabela R3, regresja Balliny, otwarte)
+- Kod: `consult/correct/{execute,from-sketch,chimney-fusion,registry}.ts`, `consult/massing/{massing,ops}.ts`,
+  `consult/consult-analysis.ts`, `appearance/elevation-sketch.ts` (szkic 2), `consult/metric-read.ts` (metric-read/5),
+  `consult/{loop,contract,element-index}.ts`
+- Testy: `packages/analysis-service/test/{sketch-registration-v35417r3,correct-v35416,massing-v35417,metric-read-v35414}.test.ts`
+- Badania: `research/source-to-model/v35417/r3/` — `diag-heights.ts`, `source-inventory.ts`, `probe-overhang.ts`,
+  `boards-r3.ts`, `boards-r3.py`; księga `research/ai-assist/spend-ledger-v35417r3.json`
+- Macierz: `stage-reports/artifacts/v35417-r3/matrix-r3-summary.json`
+- Prywatny ZIP R3 (poza Gitem): `MANIFEST-R3.txt` z sumami SHA-256

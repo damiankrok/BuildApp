@@ -880,3 +880,13 @@ wynik (test kontrolowany); indeks elementów w wiadomości recenzenta z kontr-pr
 z wiarygodnością przed komendą; szkice i galeria 4 stron. Otwarte: pozytywna ścieżka indeksu na prawdziwym domu
 (rejestracja wysokości widoku), dowód na żywo `continues`/`resolved`, obrysy ≥ 3 prostokątów, otwory przy TURNED_90.
 Raport: `stage-reports/SOURCE_TO_MODEL_V35417_R2.md`. Plan v3.54.17 powyżej pozostaje bez zmian.
+
+## Punkt kontrolny v3.54.17 R3 (20.11.2026)
+
+Na pytanie OWNER-a o okap, kominy, wysokości za donicami i pełne wymiary, z dodatkowym pułapem +40 USD (księga 28,542857
+→ 29,500933 z 68,542857 USD). Dostarczone: rejestracja elewacji ze szkicu, operacja okapu z ograniczeniem do zasięgu
+mijającego inną bryłę, fuzja kominów z dwóch widoków, odczyt metryki z wymaganymi końcami linii (metric-read/5),
+prompt szkicu 2, prompt recenzenta 0.8.0, usuwanie i wchłanianie otworów ze szkicu z bramką oryginału. Na żywo: Aurora
+z trzema kominami i okapem, Alaska ze skalą i dwoma kominami. Otwarte: okap Balliny (kontrola orientacji), bramka na
+zatłoczonych elewacjach, drzwi Alaski, materiał dachu bez LOCAL, obrysy ≥ 3 prostokątów. Raport:
+`stage-reports/SOURCE_TO_MODEL_V35417_R3.md`. Plan v3.54.17 powyżej pozostaje bez zmian.

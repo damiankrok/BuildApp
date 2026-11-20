@@ -72,7 +72,11 @@ dach bez materiału (jasny) i za mało okien na froncie.
   `resolve-v35417`, `consult-v3543`, `sketch-contract-v35415`, `massing-delivery-v35417`, `exchange-record-v35417`: zielone.
 - `analysis-service` + `analyzer-api` (750): 2 porażki w `worker.test.ts` pod obciążeniem (dwie powtórki w tle);
   uruchomione osobno przechodzą (3/3).
-- Pełna macierz: <!-- MATRIX -->
+- Pełna macierz (4499 testów: 4463 zaliczonych, 16 porażek, 11 pominiętych):
+  `stage-reports/artifacts/v35417-r3/matrix-r3-summary.json`. Każda porażka jest w pliku z listy bazowej:
+  research-isolation 4, wall-strip 4, reference 2, presentation 2, analyzer-api 1, compound-facade 1, text 1, program 1
+  (R2: 18 w tych samych plikach). Jeden nieobsłużony błąd to timeout RPC wątku vitest pod obciążeniem (obok macierzy
+  liczyły się trzy powtórki). Nowych porażek nie ma.
 
 ## Regresje 0 USD
 

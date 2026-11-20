@@ -77,3 +77,25 @@ Prostokątna/ortogonalna bryła z rzutu; jeden dwuspad o stałej osi; dwie poł�
   rejestr 1.2.0). `targetId` musi być id z indeksu. Brak wiązania i brak prymitywu to różne blokery.
 - **Orientacja i pomiar per bryła** z przesłonięciem (`ops.ts` 1.1.0). Mapowanie TURNED_90 jest jedno i wspólne. Przy
   TURNED_90 otwory ze szkiców są pomijane z nazwą. Wiarygodność SET_ROOF jest sprawdzana przed komendą, bez przycinania.
+
+## R3 (okap, kominy, wysokości za donicami, pełne wymiary — OWNER 2026-11-20, +40 USD)
+
+- **Elewacja rejestrowana ze szkicu** (`registerFromSketch`): końce ścian na stronie planu, ziemia prowadzona za
+  donicami, skala izotropowa; rejestracja tylko, gdy okap modelu trafia w wiersz okapu szkicu, a gdy okap chowa się pod
+  podbitką — kalenica modelu w szczyt rysunku. Wykonawca liczy ją ponownie na modelu roboczym (`derivedViews`); kolejność
+  widoków: ASSIGNED > ANALYZER z wysokościami > SKETCH > ANALYZER bez wysokości. Strony bez etykiety: jedyne przypisanie,
+  przy którym wszystkie się rejestrują, albo nic.
+- **Okap to osobna operacja** `SET_ROOF_OVERHANG` (rejestr 1.3.0 → 1.4.0 z `absorbs`): z widoku okapowego wysunięcia
+  szczytów koniec po końcu (kalenica wydłużona), z widoku szczytowego okap — ograniczony do zasięgu, który mija dach
+  i ściany innej bryły (obie wartości w zapisie). `plateInset` jako okap jednostronny odrzucony: ściany idące za dachem
+  wchodzą w połać.
+- **Komin to jeden obiekt z dwóch widoków** (`chimney-fusion` 1.1.0): para widok okapowy × szczytowy po wysokości i
+  połaci, bliźniaki przód/tył to ten sam komin; bez drugiego widoku głębokość z linii styku z dachem, także dachu
+  parametrycznego.
+- **Odczyt metryki** `metric-read/5`: każdy wymiar z miejscem i końcami linii; `ends` wymagane w narzędziu (opcjonalne
+  pole było pomijane na żywo i plan nie dostawał skali). Wymiar drukowany koryguje obrys.
+- **Otwory ze szkicu:** usunięcie tylko tam, gdzie szkic widzi ścianę, rozstrzyga oryginał; jedno okno źródła nad kilkoma
+  modelu → `absorbs` w jednej transakcji; relacje usuwanego otworu idą z nim.
+- **SET_ROOF** zachowuje ściany wewnętrzne idące za dachem i materiał dachu; widok szczytowy czyta okap na końcach
+  własnego dachu (ops 1.4.0).
+- Konsekwencja: bramki źródłowej nie luzuję — na zatłoczonych elewacjach poprawki okien zostają NEEDS_EVIDENCE.
