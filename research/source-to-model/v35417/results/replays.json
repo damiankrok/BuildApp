@@ -1,0 +1,107 @@
+{
+ "schema": "v35417-replays",
+ "cost": "0 USD (recorded answers: metric v3.54.14 LM, sketches v3.54.15 LMS-live; frozen bytes v3.54.14 ballina-cache)",
+ "code": "14a34bf (frozen be023c9 + selection)",
+ "ballina-sketch-channel": {
+  "modelSha256": "fa31a591ac19b357fb8c157a8ed242b753f50fc57c6af8fa99260a26d53e1cc9",
+  "sameAsV35416": true,
+  "records": [
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-0",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 8.18
+   },
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-3",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 7.18
+   },
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-1",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 3.34
+   },
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-4",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 3.1
+   },
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-front-0-2",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 4.31
+   },
+   {
+    "operation": "UPDATE_OPENING",
+    "targetId": "opening-0-east-1-0",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 10.1
+   },
+   {
+    "operation": "ADD_OPENING",
+    "targetId": "LEFT",
+    "status": "COMMITTED",
+    "code": null,
+    "proposedZ": 6.64
+   },
+   {
+    "operation": "ADD_OPENING",
+    "targetId": "REAR",
+    "status": "NEEDS_EVIDENCE",
+    "code": "VIEW_WITHOUT_HEIGHTS",
+    "proposedZ": null
+   },
+   {
+    "operation": "ADD_OPENING",
+    "targetId": "REAR",
+    "status": "NEEDS_EVIDENCE",
+    "code": "VIEW_WITHOUT_HEIGHTS",
+    "proposedZ": null
+   },
+   {
+    "operation": "ADD_OPENING",
+    "targetId": "REAR",
+    "status": "NEEDS_EVIDENCE",
+    "code": "VIEW_WITHOUT_HEIGHTS",
+    "proposedZ": null
+   }
+  ],
+  "roofChannel": {
+   "orientation": {
+    "assignment": "UNDECIDED",
+    "labelled": {
+     "eavesM": [
+      2.65,
+      3.03,
+      3.06,
+      2.66
+     ],
+     "spreadM": 0.41
+    },
+    "turned": {
+     "eavesM": [
+      1.58,
+      5.08,
+      5.12,
+      1.59
+     ],
+     "spreadM": 3.54
+    },
+    "why": "neither the labelled sides (2.65 / 3.03 / 3.06 / 2.66 m) nor the turned ones (1.58 / 5.08 / 5.12 / 1.59 m) agree on the eaves: the side each elevation draws is not settled"
+   },
+   "proposals": 0,
+   "why": "the views do not agree on the eaves under either side assignment: no SET_ROOF is proposed (silence, not a guess)"
+  }
+ }
+}
