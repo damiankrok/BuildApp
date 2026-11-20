@@ -50,7 +50,9 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
-import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { CORRECTION_EXECUTOR_VERSION, elementExists, executeCorrections, modelRevision, sideOfFacade, viewsOfRun } from './correct/execute.js'
+import { elementIndexOf } from './element-index.js'
+import type { ElementIndex } from './element-index.js'
 import { identityOf } from '../identity.js'
 import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
@@ -61,7 +63,7 @@ import { massingRun } from './massing-result.js'
 import type { PlanOutlineRead } from './plan-outline.js'
 import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
-import type { DefectEntry, DefectResolution, QualitySummary } from './correct/quality.js'
+import type { DefectEntry, DefectResolution, ListedElements, QualitySummary } from './correct/quality.js'
 
 export type ConsultantWiring = {
   model: ConsultantModel
@@ -372,6 +374,8 @@ const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOpti
  * v3.54.17 R2: a run made of the body BUILD_MASSING built without LOCAL (`massing-result.ts`): the elevations' registrations
  * the executor binds through, and how a patched model of it is delivered again (the same envelope, never LOCAL's rebuild).
  */
+/** v3.54.17 R2: an element index as the defect ledger reads it (id → type). */
+const listedOf = (index: ElementIndex | undefined): ListedElements | undefined => (index ? new Map(index.elements.map((e) => [e.id, e.type])) : undefined)
 const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined }>()
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
   const l = await attemptRaw(input, options)
@@ -1030,6 +1034,10 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const picturesOf = (sources: readonly CheckSource[]): BindPicture[] => sources.flatMap((src, i) => (src.what === 'ELEVATION' && src.sourceByteHash ? [{ n: i + 1, frameId: src.frameId, projection: src.projection, transform: { x0: src.img.transform.x0, y0: src.img.transform.y0, scale: src.img.transform.scale }, raster: src.raster, sourceByteHash: src.sourceByteHash }] : []))
   // every registered elevation can be bound by its frame (a sketch's own frame), numbered only when the reviewer saw it
   let extraPictures: BindPicture[] | undefined
+  // v3.54.17 R2: every id an element index has listed, with the last revision that held it (a later proposal naming a
+  // vanished one is STALE_TARGET), and the index of the look that stands
+  const listedAt = new Map<string, string>()
+  let lookIndex: ElementIndex | undefined
   const allPicturesOf = async (l: Local): Promise<BindPicture[]> => {
     const shown = picturesOf(await sourcesOf(l))
     if (!extraPictures) {
@@ -1056,7 +1064,9 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
-    const out = executeCorrections({ model: l.run.reconstruction.model, views: massingOf.get(l)?.views ?? viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen })
+    const m0 = l.run.reconstruction.model
+    const retiredIds = new Map([...listedAt].filter(([id]) => !elementExists(m0, id)))
+    const out = executeCorrections({ model: m0, views: massingOf.get(l)?.views ?? viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen, ...(retiredIds.size > 0 ? { retiredIds } : {}) })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
@@ -1163,7 +1173,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const resolutions: DefectResolution[] = []
   const lookRevision = new Map<number, string>()
   const OPEN_NOW = new Set(['DISPUTED', 'APPLIED_REVIEW_DISAGREES', 'REJECTED_BY_SOURCE', 'NEEDS_EVIDENCE', 'UNSUPPORTED_OPERATION', 'NO_PROPOSAL', 'REFUSED', 'ROUND_LIMIT', 'APPLIED_NOT_REVIEWED'])
-  let prevLook: { look: number; defects: NonNullable<ConsultantReview['defects']>; proposals: Array<{ proposalId: string; defectId?: string }>; records: PatchRecord[] } | undefined
+  let prevLook: { look: number; defects: NonNullable<ConsultantReview['defects']>; proposals: Array<{ proposalId: string; defectId?: string }>; records: PatchRecord[]; listed?: ListedElements } | undefined
   let lastLookNumber = 0
   let pendingAtLimit = 0
   let attemptedForKey = 0
@@ -1187,11 +1197,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       let res: ModelCheckResult
       try {
         const views = [...viewsOf(run), ...storeysOf(run)]
+        // v3.54.17 R2: the editable elements of exactly this revision, by id, placed in the SIDES picture
+        lookIndex = elementIndexOf(run.reconstruction.model, views.find((v) => v.name === 'SIDES') as ModelViewPicture | undefined)
+        for (const e of lookIndex.elements) listedAt.set(e.id, revision)
         // A1: every earlier defect still open is listed by its id — the look restates it, resolves it, or leaves it open
         const settledOpen = reconcileLedger(defectLedger, resolutions, lookRevision, lastLookNumber).filter((d) => OPEN_NOW.has(d.settlement))
         const pendingOpen = prevLook ? prevLook.defects.filter((d) => !(prevLook?.proposals.some((x) => x.defectId === d.id && prevLook?.records.some((r) => r.status === 'COMMITTED' && (r.proposalId === x.proposalId || r.proposalId.endsWith(`:${x.proposalId}`)))) ?? false)).map((d) => ({ id: `L${prevLook?.look}:${d.id}`, about: d.about, scope: d.scope, severity: d.severity })) : []
         const openDefects = [...settledOpen.map((d) => ({ id: d.key, about: d.about, scope: d.scope, severity: d.severity })), ...pendingOpen].filter((d, i, a) => a.findIndex((x) => x.id === d.id) === i && !d.id.startsWith('L0:'))
-        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied.map((a) => ({ id: a.id, what: a.what })) } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), ...(openDefects.length > 0 ? { openDefects } : {}), model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
+        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied.map((a) => ({ id: a.id, what: a.what })) } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), ...(openDefects.length > 0 ? { openDefects } : {}), elements: lookIndex, model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
       } catch (e) {
         rec.decision = 'CHECK_FAILED'
         rec.why = `${(e as Error).name}: ${(e as Error).message.slice(0, 300)} — the model before the look stands`
@@ -1218,7 +1231,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       rec.defects = res.review.defects ?? []
       // the defects of the look before, settled by what THIS look says of the elements their patches built
       const reviewedNow = new Map((res.review.appliedReview ?? []).map((a) => [a.id, a.verdict as string]))
-      if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, reviewedNow, revision, false))
+      if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, reviewedNow, revision, false, prevLook.listed))
       prevLook = undefined
       // what the look says of the features and patches the round before applied: one the source does not show is undone
       if (lastApplied.length > 0) {
@@ -1284,14 +1297,14 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         pendingAtLimit = corrections.length + patchProposals.length
         rec.why = `the last look: it reviews what was applied; ${pendingAtLimit} further proposal(s) are recorded and not applied (round limit ${maxGeometry})`
         for (const vv of rec.verdicts) if (vv.status === 'ACCEPTED') Object.assign(vv, { status: 'HELD', why: `${vv.why} — not applied: the round limit is reached` })
-        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, true))
+        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, true, listedOf(lookIndex)))
         record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
         break
       }
       if (wiring.variant === 'R') {
         rec.decision = 'NOT_RUN'
         rec.why = 'variant R: the proposals are recorded and never consumed'
-        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, false))
+        defectLedger.push(...settleDefects(g, res.review.defects ?? [], [], [], undefined, undefined, false, listedOf(lookIndex)))
         record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
         break
       }
@@ -1317,7 +1330,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
           } else for (const r of kept) Object.assign(r, { status: 'ROLLED_BACK', code: 'NOT_DELIVERED', why: `${r.why}; the patched model could not be delivered through the run (its base did not rebuild byte for byte)` })
         }
       }
-      prevLook = { look: g, defects: res.review.defects ?? [], proposals: patchProposals.map((p) => ({ proposalId: p.proposalId, ...(p.defectId ? { defectId: p.defectId } : {}) })), records: rec.patches ?? [] }
+      prevLook = { look: g, defects: res.review.defects ?? [], proposals: patchProposals.map((p) => ({ proposalId: p.proposalId, ...(p.defectId ? { defectId: p.defectId } : {}) })), records: rec.patches ?? [], listed: listedOf(lookIndex) }
       lastRefused = (rec.patches ?? []).filter((r) => r.status !== 'COMMITTED').map((r) => ({ targetId: r.targetId, why: `${r.operation} ${r.status}${r.code ? ` ${r.code}` : ''}: ${r.why}`.slice(0, 300) }))
       if (corrections.length === 0) {
         if (appliedPatches.length > 0) {
@@ -1383,7 +1396,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     }
   }
   // the last proposing look's defects, when no later look judged what it applied
-  if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, undefined, undefined, false))
+  if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, undefined, undefined, false, prevLook.listed))
   stage('DELIVERY')
   const finalState = stateOf(good)
   const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision, rounds) : undefined

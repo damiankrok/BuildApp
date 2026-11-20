@@ -17,6 +17,8 @@ import { lengthCmOf } from '@buildapp/source-metrics'
 import type { ConsultedReading, ConsultedSpan, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { Raster } from '@buildapp/source-cv'
 import { CONSULTANT_CONTRACT_VERSION, CONSULTANT_PROMPT_VERSION, CORRECTION_OPERATIONS, REVIEW_SCHEMA, REVIEW_TOOL_NAME, parseReview } from './contract.js'
+import { elementIndexText } from './element-index.js'
+import type { ElementIndex } from './element-index.js'
 import type { ConsultantReview, ProposedCorrection, ReadingDirection, Region } from './contract.js'
 import type { LabelProblem } from './problems.js'
 import { MAX_REGION_PX, cropOf, labelCropOf, measurementContextOf, overviewOf } from './tools.js'
@@ -521,6 +523,7 @@ In submit_review:
 - status: VERIFIED_IN_SCOPE when every property you could check agrees (list them in checked, the rest in notChecked); ISSUE_FOUND when you found differences; NEED_EVIDENCE if a picture is unreadable; UNKNOWN otherwise.
 - observations: one per difference and one per verified property: about (side / element / property), seen (source versus model), certainty.
 - defects: EVERY difference you find, each with an id (D1, D2, …), its scope (a side, ROOF, INTERIOR or WHOLE), severity (KEY for what makes the house recognisable or a missing/wrong main element, MAJOR, MINOR), certainty, and the operation that would correct it — or UNSUPPORTED with its family when no operation below can.
+- The message gives the MODEL ELEMENT INDEX of this revision: every editable element's id, type, body, host, level, side, position along the side (metres and share from the side's left end as seen from outside) and heights, and where it is drawn in the SIDES picture. A targetId of UPDATE_OPENING, REMOVE_OPENING, UPDATE_CHIMNEY, SET_PARAMETER, SET_ROOF or SET_OUTLINE must be an id of that index — never an id you made up, one from an earlier revision or one from an applied patch. Bind each difference you see to its element by side, position and height; give that id as the defect's targetId. When a listed operation would correct the difference but you cannot tell which listed element it is, keep that operation in the defect, leave targetId empty and set blocker: AMBIGUOUS_TARGET (two or more could be it), NO_LISTED_ELEMENT (the index lists none there; an opening the model lacks is ADD_OPENING) or NEEDS_EVIDENCE. Such a difference is never UNSUPPORTED: UNSUPPORTED is only for what no listed operation can express.
 - proposedCorrections: only for a defect you are sure of and the source shows clearly, each one LOCAL, at most one per defect (defectId). operation is one of the operations listed below; targetId names the side or the listed element; proposed.literal states it in a few words (unit "unknown"); patch holds its typed fields; evidence names the pictures.
 ${capabilityPrompt()}
 - ROOF_FEATURE is for a roof element the drawings show on a slope of the main roof and the model lacks: a GABLE_DORMER (its own small gable roof, front wall on the slope or continuing the facade), a SHED_DORMER (one flatter slope) or a FLAT_DORMER. Use CROSS_GABLE for a wing with its own gable that the plan shows as a projecting body or that spans most of a side, CANOPY for a roof over an open area without walls, OTHER otherwise. Do not propose a roof window (a pane in the plane of the roof), a chimney, a plain gable end of the main roof, or timber decoration as a ROOF_FEATURE. Fill "feature" with numbers measured in ONE source elevation picture, in that picture's pixels (x to the right, y down):
@@ -552,6 +555,8 @@ export type ModelCheckInput = {
   refused?: ReadonlyArray<{ targetId: string; why: string }>
   /** v3.54.16 (contract 0.4.0): defects of earlier looks that are still open, by their ledger ids. */
   openDefects?: ReadonlyArray<{ id: string; about: string; scope: string; severity: string }>
+  /** v3.54.17 R2 (contract 0.6.0): the editable elements of this revision by id (`element-index.ts`), sent in the message. */
+  elements?: ElementIndex
   model: ConsultantModel
   price: Price
   spend?: ConsultSpend
@@ -582,9 +587,13 @@ export async function checkModel(input: ModelCheckInput): Promise<ModelCheckResu
   if (input.applied && input.applied.length > 0) content.push({ type: 'text', text: `Since your last look the analyzer applied: ${input.applied.map((a) => `${a.id} (${a.what})`).join('; ')}. Review each in appliedReview against the drawings.` })
   if (input.refused && input.refused.length > 0) content.push({ type: 'text', text: `The analyzer refused, with its reasons: ${input.refused.map((r) => `${r.targetId} — ${r.why}`).join('; ').slice(0, 1500)}.` })
   if (input.openDefects && input.openDefects.length > 0) content.push({ type: 'text', text: `Defects of earlier looks still open (restate with continues, or resolve explicitly): ${input.openDefects.map((d) => `${d.id} [${d.severity}, ${d.scope}] ${d.about}`).join('; ').slice(0, 2000)}.` })
+  // v3.54.17 R2: the ids the operations name, for exactly this revision (an index of another revision is not sent)
+  const sidesN = pictures.find((p) => p.what === 'MODEL_VIEWS' && p.label.startsWith('SIDES'))?.n
+  const indexText = input.elements && input.elements.revision === input.baseRevision ? elementIndexText(input.elements, sidesN) : undefined
+  if (indexText) content.push({ type: 'text', text: indexText })
   content.push({ type: 'text', text: `Check the model against the drawings and answer with ${REVIEW_TOOL_NAME}.` })
   const messages: unknown[] = [{ role: 'user', content }]
-  input.record({ at: now().toISOString(), kind: 'SENT_MODEL_CHECK', baseRevision: input.baseRevision, pictures, applied: input.applied ?? [], refused: input.refused ?? [], openDefects: input.openDefects ?? [] })
+  input.record({ at: now().toISOString(), kind: 'SENT_MODEL_CHECK', baseRevision: input.baseRevision, pictures, applied: input.applied ?? [], refused: input.refused ?? [], openDefects: input.openDefects ?? [], ...(indexText && input.elements ? { elementIndex: { version: input.elements.version, revision: input.elements.revision, sha256: input.elements.sha256, elements: input.elements.elements.length, text: indexText } } : { elementIndex: null }) })
   const consultInput = { problem: { problemId: 'model-check', kind: 'SCALE_UNSETTLED', frameId: '', assetId: '', labels: [], analyzerWhy: '' } as unknown as LabelProblem, metrics: {} as MetricEvidenceSet, raster: { width: 1, height: 1, data: new Uint8ClampedArray(4) }, baseRevision: input.baseRevision, model: input.model, price: input.price, ...(input.spend ? { spend: input.spend } : {}), record: input.record, ...(input.signal ? { signal: input.signal } : {}), now }
   const evidence: EvidenceHandler = (raw) => {
     const r = raw as Region & { picture?: number; why?: string }

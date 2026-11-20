@@ -186,7 +186,7 @@ const pyOf = (p: Projection, y: number): number => p.zeroRow - y / (p.mppV ?? p.
 export const tolPxOf = (v: BindView): number => Math.max(2, Math.min(8, Math.ceil(Math.max(v.alongErrorM, 0.03) / v.projection.mpp)))
 
 /** Where along its side an opening of the model is, and how high. */
-function openingSpan(m: CanonicalBuildingModel, o: Opening): { side: Side; a0: number; a1: number; y0: number; y1: number; wall: Wall } | undefined {
+export function openingSpan(m: CanonicalBuildingModel, o: Opening): { side: Side; a0: number; a1: number; y0: number; y1: number; wall: Wall } | undefined {
   const w = m.walls.find((x) => x.id === o.wallId)
   if (!w || w.kind !== 'EXTERIOR') return undefined
   const side = sideOfWall(m, w)
@@ -739,6 +739,20 @@ export type ExecuteInput = {
   seen?: Set<string>
   /** v3.54.17: the plan outline and the elevation silhouettes BUILD_MASSING reads. */
   massing?: MassingObservations
+  /**
+   * v3.54.17 R2: ids an element index listed for an earlier revision and that no longer exist (an opening rebuilt under
+   * another id, a wall renamed by a migration), with the revision that last held them: a proposal naming one is refused
+   * as STALE_TARGET, not as a made-up id.
+   */
+  retiredIds?: ReadonlyMap<string, string>
+}
+
+/** v3.54.17 R2: the operations whose targetId must name an element of the model (the element index's ids). */
+const LISTED_TARGET_OPS = new Set(['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE'])
+/** Any element of the model by its id (collections the operations edit, and the wall rings a body is named by). */
+export function elementExists(m: CanonicalBuildingModel, id: string): boolean {
+  const colls = [m.levels, m.walls, m.wallRings, m.openings, m.roofs, m.roofPlanes, m.chimneys] as ReadonlyArray<ReadonlyArray<{ id: string }>>
+  return colls.some((c) => c.some((x) => x.id === id))
 }
 
 const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string } => {
@@ -785,6 +799,13 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     }
     if (p.uncertainty === 'HIGH') {
       rec(p, 'HELD', 'HIGH_UNCERTAINTY', 'HIGH uncertainty: kept as a hypothesis, not applied')
+      continue
+    }
+    // v3.54.17 R2: a listed operation names an element of THIS revision; one that is gone is stale, one never listed is unknown
+    if (LISTED_TARGET_OPS.has(p.operation) && !elementExists(input.model, p.targetId)) {
+      const was = input.retiredIds?.get(p.targetId)
+      if (was) rec(p, 'INVALID', 'STALE_TARGET', `${p.targetId} was an element of revision ${was}; revision ${baseRevision} no longer has it (rebuilt or renamed): name an element of this revision's index`)
+      else rec(p, 'INVALID', 'UNKNOWN_TARGET', `${p.targetId} is not an element of revision ${baseRevision}: a targetId names an id of the element index, never a made-up one`)
       continue
     }
     admitted.push(p)

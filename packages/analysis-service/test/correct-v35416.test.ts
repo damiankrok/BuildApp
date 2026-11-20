@@ -566,3 +566,71 @@ describe('v3.54.16 audit A3: a number is a witness only as a bound observation o
     expect(out.records[0].source?.sourceByteHash).toBe(S)
   })
 })
+
+// ---- v3.54.17 R2 §3: the element index the reviewer is sent, and the counter-trials on binding by id ------------
+import { elementIndexOf, elementIndexText } from '../src/consult/element-index.js'
+import { renderModelViews } from '../src/consult/model-views.js'
+
+describe('v3.54.17 R2 §3: the reviewer binds a defect to a listed id; made-up, stale, similar and wrong-host ids are refused by name', () => {
+  const moved = (): CanonicalBuildingModel => inject(build(program()), [{ type: 'moveFeature', targetId: 'A', dAlong: 0.6 }])
+  it('the index lists every editable element of the revision with side, place from the left, heights and its place in SIDES', () => {
+    const m = moved()
+    const sides = renderModelViews(buildMobileSceneBundle(m, { scene: compileBuilding(m) })).find((v) => v.name === 'SIDES')
+    const idx = elementIndexOf(m, sides)
+    expect(idx.revision).toBe(modelRevision(m))
+    const a = idx.elements.find((e) => e.id === 'A')
+    expect(a).toMatchObject({ type: 'OPENING', kind: 'WINDOW', side: 'FRONT', host: 'g-w0', level: 'l0' })
+    expect(a?.along?.[0]).toBeCloseTo(1.6, 1)
+    expect(a?.heights).toEqual([0.9, 2.1])
+    expect(a?.sidesPx && a.sidesPx.x1 > a.sidesPx.x0 && a.sidesPx.y1 > a.sidesPx.y0).toBe(true)
+    // deterministic: the same revision gives the same index, byte for byte
+    expect(elementIndexOf(m, sides).sha256).toBe(idx.sha256)
+    expect(elementIndexText(idx, 7)).toMatch(/^MODEL ELEMENT INDEX/)
+    expect(elementIndexText(idx, 7)).toContain('A · OPENING/WINDOW · FRONT')
+  })
+  it('a reviewer reading only the index text binds the misplaced window by its id (never patched before): UPDATE_OPENING is kept', () => {
+    const m = moved()
+    const text = elementIndexText(elementIndexOf(m))
+    // the reviewer's side of the contract, done from the text alone: the FRONT window of the ground storey 1.6 m from the left
+    const line = text.split('\n').find((l) => / OPENING\/WINDOW · FRONT /.test(l) && / level l0 /.test(l) && /1\.6–2\.8 m from the left/.test(l)) as string
+    const id = line.split(' · ')[0]
+    expect(id).toBe('A')
+    const out = run(m, [propose(m, { operation: 'UPDATE_OPENING', targetId: id, patch: { box: boxOf(1.0, 2.2, 0.9, 2.1), kind: 'WINDOW' } })])
+    expect(out.records[0]).toMatchObject({ status: 'COMMITTED', targetId: 'A' })
+    expect(out.records[0].gate?.winner).toBe('PROPOSED')
+  })
+  it('counter-trials: a made-up id, an id of an earlier revision, the similar piece beside it, a host on another side', () => {
+    const m = inject(moved(), [{ type: 'cutOpening', id: 'R', wallId: 'g-w2', kind: 'WINDOW', offset: 2.0, sill: 0.9, width: 1.2, height: 1.2 }, { type: 'placeWindow', id: 'R-unit', openingId: 'R' }])
+    const out = run(m, [
+      propose(m, { proposalId: 'made-up', operation: 'UPDATE_OPENING', targetId: 'window-front-1', patch: { box: boxOf(1.0, 2.2, 0.9, 2.1), kind: 'WINDOW' } }),
+      propose(m, { proposalId: 'stale', operation: 'UPDATE_OPENING', targetId: 'A-before-migration', patch: { box: boxOf(1.0, 2.2, 0.9, 2.1), kind: 'WINDOW' } }),
+      propose(m, { proposalId: 'similar', operation: 'UPDATE_OPENING', targetId: 'B', patch: { box: boxOf(1.6, 2.8, 0.9, 2.1), kind: 'WINDOW' } }),
+      propose(m, { proposalId: 'other-side', operation: 'UPDATE_OPENING', targetId: 'R', patch: { box: boxOf(1.0, 2.2, 0.9, 2.1), kind: 'WINDOW' } }),
+    ], { retiredIds: new Map([['A-before-migration', 'r0ld']]) })
+    const by = new Map(out.records.map((r) => [r.proposalId, r]))
+    expect(by.get('made-up')).toMatchObject({ status: 'INVALID', code: 'UNKNOWN_TARGET' })
+    expect(by.get('stale')).toMatchObject({ status: 'INVALID', code: 'STALE_TARGET' })
+    expect(by.get('similar')).toMatchObject({ status: 'DUPLICATE', code: 'OPENING_ALREADY_THERE' })
+    expect(by.get('other-side')).toMatchObject({ status: 'NEEDS_EVIDENCE', code: 'OTHER_SIDE' })
+    expect(serializeModel(out.model)).toBe(serializeModel(m))
+  })
+  it('a defect without a proposal names its blocker: no target given, not in the index, ambiguous, or a listed element called UNSUPPORTED', () => {
+    const m = moved()
+    const listed = new Map(elementIndexOf(m).elements.map((e) => [e.id, e.type]))
+    const d = (id: string, extra: Record<string, unknown>) => ({ id, about: id, scope: 'FRONT' as const, severity: 'KEY' as const, certainty: 'CERTAIN' as const, operation: 'UPDATE_OPENING' as const, ...extra })
+    const out = settleDefects(1, [d('D1', {}), d('D2', { targetId: 'nope' }), d('D3', { blocker: 'AMBIGUOUS_TARGET' }), d('D4', { operation: 'UNSUPPORTED', family: 'OTHER', targetId: 'A' }), d('D5', { targetId: 'A' })] as never, [], [], undefined, undefined, false, listed)
+    expect(out.map((e) => [e.settlement, e.blocker])).toEqual([['NO_PROPOSAL', 'TARGET_NOT_GIVEN'], ['NO_PROPOSAL', 'TARGET_NOT_IN_INDEX'], ['NO_PROPOSAL', 'AMBIGUOUS_TARGET'], ['UNSUPPORTED_OPERATION', 'LISTED_ELEMENT_NAMED'], ['NO_PROPOSAL', 'NOT_PROPOSED']])
+  })
+  it('continues/resolved across looks: an omitted defect stays open, a restatement is not doubled, a SUPERSEDED naming nothing does not close a KEY defect', () => {
+    const e = (look: number, id: string, extra: Partial<DefectEntry> = {}): DefectEntry => ({ id: `L${look}:${id}`, key: `L${look}:${id}`, look, about: `defect ${id}`, scope: 'FRONT', severity: 'KEY', certainty: 'CERTAIN', operation: 'UPDATE_OPENING', settlement: 'NO_PROPOSAL', why: '', ...extra })
+    const ledger = [e(1, 'D1'), e(1, 'D2'), e(1, 'D3'), e(2, 'D9', { about: 'restated in other words', continues: 'L1:D1' })]
+    const revs = new Map([[1, 'r1'], [2, 'r2']])
+    const out = reconcileLedger(ledger, [{ look: 2, revision: 'r2', defectId: 'L1:D3', verdict: 'SUPERSEDED', note: 'replaced', supersededBy: 'D77' }], revs, 2)
+    expect(out.filter((x) => x.key === 'L1:D1')).toHaveLength(1)
+    expect(out.find((x) => x.key === 'L1:D1')?.id).toBe('L2:D9')
+    expect(out.find((x) => x.key === 'L1:D2')?.carriedFrom).toBe(1)
+    const d3 = out.find((x) => x.key === 'L1:D3')
+    expect(d3?.settlement).toBe('NO_PROPOSAL')
+    expect(d3?.carriedFrom).toBe(1)
+  })
+})

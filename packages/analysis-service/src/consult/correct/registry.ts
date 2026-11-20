@@ -7,7 +7,7 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.1.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.2.0' as const
 
 export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
@@ -21,6 +21,8 @@ export type FinishClass = (typeof FINISH_CLASSES)[number]
 export const PATCH_UNITS = ['m', 'cm', 'mm', 'deg'] as const
 
 /** What a reviewer may name as a defect but no consumer can change in this stage: recorded UNSUPPORTED_OPERATION. */
+/** v3.54.17 R2: why a defect a listed operation corrects comes without a proposal (registry 1.2.0). */
+export const DEFECT_BLOCKERS = ['NONE', 'AMBIGUOUS_TARGET', 'NO_LISTED_ELEMENT', 'NEEDS_EVIDENCE'] as const
 export const UNSUPPORTED_FAMILIES = ['ROOF_FORM', 'OUTLINE_REGION', 'BALCONY', 'PERGOLA', 'CANOPY', 'TERRACE', 'INTERIOR', 'OTHER'] as const
 
 export type Capability = {
@@ -51,7 +53,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: 'commands/setProperty on the level, wall, chimney or roof named by targetId, with the dependent level heights and walls restated in the same transaction',
     measure: 'the printed value read again by the analyzer or the independent metric read (a witness that is not this proposal); the compiled scene',
     params: ['property', 'value', 'unit', 'literal', 'sourcePicture', 'box', 'host'],
-    prompt: 'SET_PARAMETER — a PRINTED value the model contradicts: targetId (a listed level, wall, chimney or roof id), property (LEVEL_ELEVATION, WALL_HEIGHT, CHIMNEY_HEIGHT, ROOF_PITCH), value and unit as printed (m, cm, mm, deg), literal (the print exactly), sourcePicture and box (where it is printed), host (the body or wing the mark belongs to, as the drawing names it, when the house has more than one). Never a value you estimated.',
+    prompt: 'SET_PARAMETER — a PRINTED value the model contradicts: targetId (a level, wall, chimney or roof id of the MODEL ELEMENT INDEX), property (LEVEL_ELEVATION, WALL_HEIGHT, CHIMNEY_HEIGHT, ROOF_PITCH), value and unit as printed (m, cm, mm, deg), literal (the print exactly), sourcePicture and box (where it is printed), host (the body or wing the mark belongs to, as the drawing names it, when the house has more than one). Never a value you estimated.',
   },
   ADD_OPENING: {
     op: 'ADD_OPENING',
@@ -67,7 +69,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: 'commands/removeFeature + cutOpening + the same fill, under the SAME id (moved, resized, retyped or re-hosted)',
     measure: "both hypotheses — the model's opening and the proposal — held against the source picture's edges; the proposal is taken only when the source supports it clearly better",
     params: ['picture', 'box', 'kind', 'headLeftY', 'headRightY'],
-    prompt: "UPDATE_OPENING — a listed opening (targetId: its id) stands at the wrong place, size, height or kind: picture, box and kind as for ADD_OPENING. Never add a second opening where one is listed.",
+    prompt: "UPDATE_OPENING — an opening of the MODEL ELEMENT INDEX (targetId: its id there) stands at the wrong place, size, height or kind: picture, box and kind as for ADD_OPENING. Never add a second opening where the index lists one.",
   },
   REMOVE_OPENING: {
     op: 'REMOVE_OPENING',
@@ -75,7 +77,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: 'commands/removeFeature (the opening and its fill)',
     measure: "the source picture at the model's opening: removed only when the source shows no opening there",
     params: ['picture'],
-    prompt: 'REMOVE_OPENING — a listed opening (targetId) that the source elevation does not show: picture (the elevation that shows that wall).',
+    prompt: 'REMOVE_OPENING — an opening of the MODEL ELEMENT INDEX (targetId) that the source elevation does not show: picture (the elevation that shows that wall).',
   },
   ADD_CHIMNEY: {
     op: 'ADD_CHIMNEY',
@@ -91,7 +93,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: 'commands/removeFeature + placeChimney under the same id',
     measure: 'as ADD_CHIMNEY, the model\'s stack and the proposal held against the source',
     params: ['picture', 'box', 'depthPicture', 'depthBox'],
-    prompt: 'UPDATE_CHIMNEY — a listed chimney (targetId) at the wrong place or height: as ADD_CHIMNEY.',
+    prompt: 'UPDATE_CHIMNEY — a chimney of the MODEL ELEMENT INDEX (targetId) at the wrong place or height: as ADD_CHIMNEY.',
   },
   SET_FINISH: {
     op: 'SET_FINISH',
@@ -123,7 +125,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: "commands/removeFeature (the body's roofs and planes) + setProperty (the top storey's wall heights and profiles) + createRoof GABLE|FLAT with capWallIds (massing/ops.ts bindSetRoof)",
     measure: "the model's roof and the proposal's roof as the source elevation draws them, held against the original picture (polygon gate); openings above the new eaves refuse the patch; the built roof drawn back (overlap ≥ 0.8, support)",
     params: ['picture', 'roofKind', 'roofPolygon', 'side', 'wallLeftX', 'wallRightX', 'groundY'],
-    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends) and groundY. A hip roof is UNSUPPORTED.",
+    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends) and groundY. A hip roof is UNSUPPORTED.",
   },
   SET_OUTLINE: {
     op: 'SET_OUTLINE',
@@ -131,7 +133,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: "commands/setProperty on the body's walls (start, end), their openings' offsets and finish regions, resizeFeature on its roof footprint, setProperty on its slabs' and rooms' polygons (massing/ops.ts bindSetOutline)",
     measure: "the walls at the proposed extent and at the model's, held against the source elevation (polygon gate); openings or regions left outside, a party line or a plane roof refuse the patch; the built extent within 1 cm",
     params: ['picture', 'wallLeftX', 'wallRightX'],
-    prompt: "SET_OUTLINE — a body is longer or shorter along one side than the source elevation draws it: targetId (the body's wall ring or a wall of it), picture (a SOURCE elevation of that side), wallLeftX and wallRightX (where that body's walls end in the picture).",
+    prompt: "SET_OUTLINE — a body is longer or shorter along one side than the source elevation draws it: targetId (a wall of that body from the MODEL ELEMENT INDEX), picture (a SOURCE elevation of that side), wallLeftX and wallRightX (where that body's walls end in the picture).",
   },
 }
 
@@ -195,6 +197,8 @@ export const DEFECT_SCHEMA = {
     operation: { type: 'string', enum: [...PATCH_OPERATIONS, 'UNSUPPORTED'] },
     family: { type: 'string', enum: [...UNSUPPORTED_FAMILIES, 'NONE'] },
     continues: { type: 'string', description: 'the id of an open defect listed from an earlier look that this one restates (e.g. "L1:D2")' },
+    targetId: { type: 'string', description: 'the id of the MODEL ELEMENT INDEX element this defect is about; empty when no listed element is' },
+    blocker: { type: 'string', enum: [...DEFECT_BLOCKERS], description: 'why no proposal is given for a difference a listed operation corrects: AMBIGUOUS_TARGET (two or more listed elements could be it), NO_LISTED_ELEMENT (the index lists none there), NEEDS_EVIDENCE (the pictures do not show it clearly enough); NONE otherwise' },
   },
   required: ['id', 'about', 'scope', 'severity', 'certainty', 'operation'],
   additionalProperties: false,
@@ -225,4 +229,4 @@ export type PatchFields = {
   roofPolygon?: Array<[number, number]>
 }
 
-export type ReviewDefect = { id: string; about: string; scope: (typeof DEFECT_SCOPES)[number]; severity: DefectSeverity; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; operation: PatchOperation | 'UNSUPPORTED'; family?: (typeof UNSUPPORTED_FAMILIES)[number] | 'NONE'; continues?: string }
+export type ReviewDefect = { id: string; about: string; scope: (typeof DEFECT_SCOPES)[number]; severity: DefectSeverity; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; operation: PatchOperation | 'UNSUPPORTED'; family?: (typeof UNSUPPORTED_FAMILIES)[number] | 'NONE'; continues?: string; /** v3.54.17 R2 (registry 1.2.0): the indexed element it is about, and why no proposal was given. */ targetId?: string; blocker?: (typeof DEFECT_BLOCKERS)[number] }

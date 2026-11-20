@@ -1,0 +1,42 @@
+MODEL ELEMENT INDEX (index 1.0.0, revision 759d346bc4a9): the editable elements of THIS revision by their ids — the only ids a targetId may name. Positions along a side are metres from that side's left end as seen from outside (as in the SIDES picture and in a source elevation of that side), heights above ±0.00.
+roofed-0 · BODY · rings ; plan 0..15.54 × 1.83..10.73 m; roofs roof-main
+roofed-1 · BODY · rings ; plan 9.04..11.88 × 0..1.83 m; roofs roof-attached-0
+lvl-0 · LEVEL · 0–5.92 m high · storey 0
+ring-main-0-w0-0 · WALL · FRONT · level lvl-0 · 0–9.27 m from the left (0–60 %) · 0–5.92 m high · picture 7 x 21–246, y 21–165 · its top follows the roof
+ring-main-0-w0-1 · WALL · FRONT · level lvl-0 · 11.65–15.54 m from the left (75–100 %) · 0–5.92 m high · picture 7 x 304–399, y 21–165 · its top follows the roof
+ring-main-0-w1 · WALL · RIGHT · level lvl-0 · 1.83–10.73 m from the left (17–100 %) · 0–5.92 m high · picture 7 x 522–738, y 21–165 · its top follows the roof
+ring-main-0-w2 · WALL · REAR · level lvl-0 · 0–15.54 m from the left (0–100 %) · 0–5.92 m high · picture 7 x 861–1239, y 21–165 · its top follows the roof
+ring-main-0-w3 · WALL · LEFT · level lvl-0 · 0–8.9 m from the left (0–100 %) · 0–5.92 m high · picture 7 x 1362–1578, y 21–165 · its top follows the roof
+ring-attached-0-0-w0 · WALL · FRONT · level lvl-0 · 9.04–11.88 m from the left (58–76 %) · 0–2.8 m high · picture 7 x 241–310, y 97–165
+ring-attached-0-0-w1 · WALL · RIGHT · level lvl-0 · 0–1.83 m from the left (0–17 %) · 0–2.8 m high · picture 7 x 477–522, y 97–165
+ring-attached-0-0-w3 · WALL · RIGHT · level lvl-0 · 0–1.83 m from the left (0–17 %) · 0–2.8 m high · picture 7 x 477–522, y 97–165
+main-idoor-0-0 · OPENING/DOOR · host main-iwall-0-x-2 · level lvl-0 · on an interior wall
+main-idoor-0-1 · OPENING/DOOR · host main-iwall-0-x-2 · level lvl-0 · on an interior wall
+main-idoor-0-2 · OPENING/DOOR · host main-iwall-0-x-2 · level lvl-0 · on an interior wall
+main-idoor-0-3 · OPENING/DOOR · host main-iwall-0-x-13 · level lvl-0 · on an interior wall
+opening-0-front-0-0 · OPENING/DOOR · FRONT · host ring-main-0-w0-0 · level lvl-0 · 0.27–1.07 m from the left (2–7 %) · 0–2.1 m high · picture 7 x 28–47, y 114–165
+opening-0-front-0-1 · OPENING/WINDOW · FRONT · host ring-main-0-w0-0 · level lvl-0 · 1.11–2.58 m from the left (7–17 %) · 0.9–2.2 m high · picture 7 x 48–84, y 112–143
+opening-0-front-0-2 · OPENING/WINDOW · FRONT · host ring-main-0-w0-0 · level lvl-0 · 2.6–4.27 m from the left (17–27 %) · 0.9–2.2 m high · picture 7 x 84–125, y 112–143
+opening-0-front-0-3 · OPENING/WINDOW · FRONT · host ring-main-0-w0-0 · level lvl-0 · 4.3–5.77 m from the left (28–37 %) · 0.9–2.2 m high · picture 7 x 126–161, y 112–143
+opening-0-front-0-4 · OPENING/WINDOW · FRONT · host ring-main-0-w0-0 · level lvl-0 · 5.81–7.26 m from the left (37–47 %) · 0.9–2.2 m high · picture 7 x 162–198, y 112–143
+opening-0-front-0-5 · OPENING/WINDOW · FRONT · host ring-main-0-w0-0 · level lvl-0 · 7.3–8.76 m from the left (47–56 %) · 0.9–2.2 m high · picture 7 x 199–234, y 112–143
+opening-0-front-0-8 · OPENING/WINDOW · FRONT · host ring-main-0-w0-1 · level lvl-0 · 13.86–15.28 m from the left (89–98 %) · 0.9–2.2 m high · picture 7 x 358–393, y 112–143
+opening-0-east-1-0 · OPENING/WINDOW · RIGHT · host ring-main-0-w1 · level lvl-0 · 7.64–10.34 m from the left (71–96 %) · 0.9–2.2 m high · picture 7 x 663–729, y 112–143
+opening-0-east-1-1 · OPENING/WINDOW · RIGHT · host ring-main-0-w1 · level lvl-0 · 4.93–7.6 m from the left (46–71 %) · 0.9–2.2 m high · picture 7 x 597–662, y 112–143
+opening-0-east-1-2 · OPENING/WINDOW · RIGHT · host ring-main-0-w1 · level lvl-0 · 3.08–4.9 m from the left (29–46 %) · 0.9–2.2 m high · picture 7 x 552–597, y 112–143
+opening-0-east-1-3 · OPENING/WINDOW · RIGHT · host ring-main-0-w1 · level lvl-0 · 2.19–3.06 m from the left (20–28 %) · 0.9–2.2 m high · picture 7 x 531–552, y 112–143
+opening-0-rear-2-0 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 14.2–15.3 m from the left (91–98 %) · 1.1–2.2 m high · picture 7 x 1206–1233, y 112–138
+opening-0-rear-2-1 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 12.73–14.18 m from the left (82–91 %) · 1.59–2.2 m high · picture 7 x 1171–1206, y 112–127
+opening-0-rear-2-2 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 10.92–12.69 m from the left (70–82 %) · 0.9–2.2 m high · picture 7 x 1127–1170, y 112–143
+opening-0-rear-2-3 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 9.43–10.89 m from the left (61–70 %) · 0.9–2.2 m high · picture 7 x 1090–1126, y 112–143
+opening-0-rear-2-4 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 7–9.38 m from the left (45–60 %) · 0.9–2.2 m high · picture 7 x 1031–1089, y 112–143
+opening-0-rear-2-5 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 4.29–5.95 m from the left (28–38 %) · 0.9–2.2 m high · picture 7 x 965–1006, y 112–143
+opening-0-rear-2-6 · OPENING/DOOR · REAR · host ring-main-0-w2 · level lvl-0 · 3.32–3.92 m from the left (21–25 %) · 0–2.1 m high · picture 7 x 942–956, y 114–165
+opening-0-rear-2-7 · OPENING/WINDOW · REAR · host ring-main-0-w2 · level lvl-0 · 0.21–1.62 m from the left (1–10 %) · 1.59–2.2 m high · picture 7 x 866–900, y 112–127
+opening-0-west-3-0 · OPENING/WINDOW · LEFT · host ring-main-0-w3 · level lvl-0 · 0.39–4.38 m from the left (4–49 %) · 0.9–2.2 m high · picture 7 x 1371–1468, y 112–143
+opening-0-west-3-1 · OPENING/WINDOW · LEFT · host ring-main-0-w3 · level lvl-0 · 4.52–8.55 m from the left (51–96 %) · 0.9–2.2 m high · picture 7 x 1472–1570, y 112–143
+opening-0-front-4-0 · OPENING/WINDOW · FRONT · host ring-attached-0-0-w0 · level lvl-0 · 9.7–11.58 m from the left (62–74 %) · 0.9–2.2 m high · picture 7 x 257–303, y 112–143
+opening-0-east-5-0 · OPENING/DOOR · RIGHT · host ring-attached-0-0-w1 · level lvl-0 · 0.28–1.15 m from the left (3–11 %) · 0–2.1 m high · picture 7 x 484–505, y 114–165
+opening-0-west-7-0 · OPENING/DOOR · RIGHT · host ring-attached-0-0-w3 · level lvl-0 · 0.54–1.16 m from the left (5–11 %) · 0–2.1 m high · picture 7 x 490–506, y 114–165
+roof-main · ROOF/GABLE · body roofed-0 · level lvl-0 · pitch 35°, ridge along X
+roof-attached-0 · ROOF/FLAT · body roofed-1 · level lvl-0 · pitch 0°, ridge along X

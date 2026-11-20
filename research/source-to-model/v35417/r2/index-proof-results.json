@@ -1,0 +1,926 @@
+{
+ "aurora-maxi": {
+  "phaseA_realOutgoingMessage": {
+   "scope": "R2 \u00a73 offline: real revision (accepted answers replayed), reviewer request written and NOT sent; 0 USD",
+   "replay": {
+    "replayed": 4,
+    "missing": 0
+   },
+   "modelSha256": "759d346bc4a91370d4b3afb74465a60e804b209c169d325742729e2493a28bec",
+   "revisionLookedAt": [
+    "759d346bc4a9"
+   ],
+   "elementIndex": [
+    {
+     "version": "1.0.0",
+     "revision": "759d346bc4a9",
+     "sha256": "06f9301878cb6ea73ad8c93178da8e700d05d479e4c3f202b686095321eba63a",
+     "elements": 41
+    }
+   ],
+   "reviewerRequestsNotSent": 2,
+   "indexInOutgoingMessage": true,
+   "frontOpenings": [
+    "opening-0-front-0-0 \u00b7 OPENING/DOOR \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 0.27\u20131.07 m from the left (2\u20137 %) \u00b7 0\u20132.1 m high \u00b7 picture 7 x 28\u201347, y 114\u2013165",
+    "opening-0-front-0-1 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 1.11\u20132.58 m from the left (7\u201317 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 48\u201384, y 112\u2013143",
+    "opening-0-front-0-2 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 2.6\u20134.27 m from the left (17\u201327 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 84\u2013125, y 112\u2013143",
+    "opening-0-front-0-3 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 4.3\u20135.77 m from the left (28\u201337 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 126\u2013161, y 112\u2013143",
+    "opening-0-front-0-4 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 5.81\u20137.26 m from the left (37\u201347 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 162\u2013198, y 112\u2013143",
+    "opening-0-front-0-5 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 7.3\u20138.76 m from the left (47\u201356 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 199\u2013234, y 112\u2013143",
+    "opening-0-front-0-8 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-main-0-w0-1 \u00b7 level lvl-0 \u00b7 13.86\u201315.28 m from the left (89\u201398 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 358\u2013393, y 112\u2013143",
+    "opening-0-front-4-0 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-attached-0-0-w0 \u00b7 level lvl-0 \u00b7 9.7\u201311.58 m from the left (62\u201374 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 257\u2013303, y 112\u2013143"
+   ]
+  },
+  "phaseB_controlled_frontDoor": {
+   "controlled": true,
+   "doorId": "opening-0-front-0-0",
+   "rearId": "opening-0-rear-2-0",
+   "frontPicture": 2,
+   "sketchFrame": "frame-asset-elewacja-frontowa-projektu-aurora-maxi-ii-47285fd06a",
+   "records": [
+    {
+     "proposalId": "g1:ctl-invented",
+     "operation": "UPDATE_OPENING",
+     "targetId": "front-door-1",
+     "status": "INVALID",
+     "code": "UNKNOWN_TARGET",
+     "why": "front-door-1 is not an element of revision 759d346bc4a9: a targetId names an id of the element index, never a made-up one",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-door",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-door",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-door stands or falls together, and g1:ctl-view-g-door was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-similar",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-similar",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-1",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-similar stands or falls together, and g1:ctl-view-g-similar was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-host",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-host",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-rear-2-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-host stands or falls together, and g1:ctl-view-g-host was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    }
+   ],
+   "transactions": [
+    {
+     "txId": "tx1",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-door: AXIS_MISMATCH \u2014 at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale"
+    },
+    {
+     "txId": "tx2",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-similar: AXIS_MISMATCH \u2014 at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale"
+    },
+    {
+     "txId": "tx3",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-host: AXIS_MISMATCH \u2014 at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale"
+    }
+   ],
+   "looks": [
+    {
+     "revision": "759d346bc4a9",
+     "indexLines": 42,
+     "door": "opening-0-front-0-0 \u00b7 OPENING/DOOR \u00b7 FRONT \u00b7 host ring-main-0-w0-0 \u00b7 level lvl-0 \u00b7 0.27\u20131.07 m from the left (2\u20137 %) \u00b7 0\u20132.1 m high \u00b7 picture 7 x 28\u201347, y 114\u2013165"
+    }
+   ],
+   "delivered": {
+    "modelSha256": "759d346bc4a91370d4b3afb74465a60e804b209c169d325742729e2493a28bec"
+   },
+   "defects": [
+    {
+     "id": "L1:D1",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D2",
+     "operation": "UPDATE_OPENING",
+     "targetId": "front-door-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "UNKNOWN_TARGET"
+    },
+    {
+     "id": "L1:D3",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D4",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-rear-2-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D5",
+     "operation": "UPDATE_OPENING",
+     "targetId": null,
+     "settlement": "NO_PROPOSAL",
+     "blocker": "AMBIGUOUS_TARGET",
+     "patchCode": null
+    },
+    {
+     "id": "L1:D6",
+     "operation": "UNSUPPORTED",
+     "targetId": "opening-0-front-0-0",
+     "settlement": "UNSUPPORTED_OPERATION",
+     "blocker": "LISTED_ELEMENT_NAMED",
+     "patchCode": null
+    }
+   ],
+   "quality": {
+    "state": "NO_IMPROVEMENT",
+    "reasons": [
+     "NO_IMPROVEMENT"
+    ]
+   },
+   "replay": {
+    "replayed": 4,
+    "missing": 0
+   }
+  },
+  "phaseC_controlled_registeredSide": {
+   "controlled": true,
+   "candidates": [
+    {
+     "side": "FRONT",
+     "targetId": "opening-0-front-4-0",
+     "iou": 0.08,
+     "sketchKind": "DOOR"
+    },
+    {
+     "side": "REAR",
+     "targetId": "opening-0-rear-2-6",
+     "iou": 0.17,
+     "sketchKind": "GLAZED_WALL"
+    },
+    {
+     "side": "REAR",
+     "targetId": "opening-0-rear-2-1",
+     "iou": 0.38,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "REAR",
+     "targetId": "opening-0-rear-2-3",
+     "iou": 0.41,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "FRONT",
+     "targetId": "opening-0-front-0-8",
+     "iou": 0.42,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "FRONT",
+     "targetId": "opening-0-front-0-3",
+     "iou": 0.45,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "FRONT",
+     "targetId": "opening-0-front-0-1",
+     "iou": 0.45,
+     "sketchKind": "WINDOW"
+    }
+   ],
+   "chosen": {
+    "side": "FRONT",
+    "targetId": "opening-0-front-4-0",
+    "previouslyPatched": false,
+    "iouBefore": 0.08
+   },
+   "records": [
+    {
+     "proposalId": "g1:ctl-made-up",
+     "targetId": "opening-made-up-1",
+     "status": "INVALID",
+     "code": "UNKNOWN_TARGET",
+     "why": "opening-made-up-1 is not an element of revision 759d346bc4a9: a targetId names an id of the element index, never a made-up one",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-correct",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 415 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-correct",
+     "targetId": "opening-0-front-4-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-correct stands or falls together, and g1:ctl-view-g-ctl-correct was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-similar",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 415 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-similar",
+     "targetId": "opening-0-front-0-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-similar stands or falls together, and g1:ctl-view-g-ctl-similar was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-other-side",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 415 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-other-side",
+     "targetId": "main-idoor-0-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-other-side stands or falls together, and g1:ctl-view-g-ctl-other-side was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-probe-FRONT",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02032 m/px (the front side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 265, the drawing's on row 415 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-probe-REAR",
+     "targetId": "REAR",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.02045 m/px (the rear side's 15.54 m across the drawn walls) the model's eaves at 5.92 m land on row 267, the drawing's on row 420 (tolerance 7 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    }
+   ],
+   "looks": [
+    {
+     "revision": "759d346bc4a9",
+     "target": "opening-0-front-4-0 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 host ring-attached-0-0-w0 \u00b7 level lvl-0 \u00b7 9.7\u201311.58 m from the left (62\u201374 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 7 x 257\u2013303, y 112\u2013143",
+     "applied": ""
+    }
+   ],
+   "defects": [
+    {
+     "id": "L1:D1",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-4-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D2",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-made-up-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "UNKNOWN_TARGET"
+    },
+    {
+     "id": "L1:D3",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D4",
+     "operation": "UPDATE_OPENING",
+     "targetId": "main-idoor-0-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D5",
+     "operation": "UPDATE_OPENING",
+     "targetId": null,
+     "settlement": "NO_PROPOSAL",
+     "blocker": "TARGET_NOT_GIVEN",
+     "patchCode": null
+    },
+    {
+     "id": "L1:D6",
+     "operation": "UNSUPPORTED",
+     "targetId": "opening-0-front-4-0",
+     "settlement": "UNSUPPORTED_OPERATION",
+     "blocker": "LISTED_ELEMENT_NAMED",
+     "patchCode": null
+    }
+   ],
+   "quality": {
+    "state": "NO_IMPROVEMENT",
+    "reasons": [
+     "NO_IMPROVEMENT"
+    ]
+   },
+   "delivered": {
+    "modelSha256": "759d346bc4a91370d4b3afb74465a60e804b209c169d325742729e2493a28bec",
+    "revision": "759d346bc4a9"
+   },
+   "replay": {
+    "replayed": 4,
+    "missing": 0
+   }
+  }
+ },
+ "alaska": {
+  "phaseA_realOutgoingMessage": {
+   "scope": "R2 \u00a73 offline: real revision (accepted answers replayed), reviewer request written and NOT sent; 0 USD",
+   "replay": {
+    "replayed": 5,
+    "missing": 0
+   },
+   "modelSha256": "f0c3b54ba93c78465689e25ecfb3f3d149419576dc4a8d0050f9d4d116869a75",
+   "revisionLookedAt": [
+    "f0c3b54ba93c"
+   ],
+   "elementIndex": [
+    {
+     "version": "1.0.0",
+     "revision": "f0c3b54ba93c",
+     "sha256": "00a07c44f60f9c165fe335e0834bf1f5127ee2cd52dc9ea5625c5f5e5c14e831",
+     "elements": 53
+    }
+   ],
+   "reviewerRequestsNotSent": 2,
+   "indexInOutgoingMessage": true,
+   "frontOpenings": [
+    "opening-0-front-0-0 \u00b7 OPENING/DOOR \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 0.23\u20131.18 m from the left (2\u20139 %) \u00b7 0\u20132.1 m high \u00b7 picture 8 x 28\u201355, y 187\u2013247",
+    "opening-0-front-0-1 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 1.22\u20132.4 m from the left (9\u201318 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 56\u201390, y 184\u2013221",
+    "opening-0-front-0-2 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 2.42\u20134.2 m from the left (18\u201332 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 91\u2013142, y 184\u2013221",
+    "opening-0-front-0-3 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 4.25\u20135.41 m from the left (32\u201341 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 143\u2013176, y 184\u2013221",
+    "opening-0-front-0-4 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 5.45\u20137.71 m from the left (41\u201359 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 178\u2013243, y 184\u2013221",
+    "opening-0-front-0-5 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 7.75\u20138.91 m from the left (59\u201368 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 244\u2013277, y 184\u2013221",
+    "opening-0-front-0-6 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 8.95\u201310.73 m from the left (68\u201382 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 278\u2013330, y 184\u2013221",
+    "opening-0-front-0-7 \u00b7 OPENING/WINDOW \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 10.78\u201311.95 m from the left (82\u201391 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 331\u2013364, y 184\u2013221"
+   ]
+  },
+  "phaseB_controlled_frontDoor": {
+   "controlled": true,
+   "doorId": "opening-0-front-0-0",
+   "rearId": "opening-0-rear-2-0",
+   "frontPicture": 4,
+   "sketchFrame": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+   "records": [
+    {
+     "proposalId": "g1:ctl-invented",
+     "operation": "UPDATE_OPENING",
+     "targetId": "front-door-1",
+     "status": "INVALID",
+     "code": "UNKNOWN_TARGET",
+     "why": "front-door-1 is not an element of revision f0c3b54ba93c: a targetId names an id of the element index, never a made-up one",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-door",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-door",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-door stands or falls together, and g1:ctl-view-g-door was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-similar",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-similar",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-1",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-similar stands or falls together, and g1:ctl-view-g-similar was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-host",
+     "operation": "ASSIGN_VIEW",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-host",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-rear-2-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-host stands or falls together, and g1:ctl-view-g-host was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    }
+   ],
+   "transactions": [
+    {
+     "txId": "tx1",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-door: AXIS_MISMATCH \u2014 at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale"
+    },
+    {
+     "txId": "tx2",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-similar: AXIS_MISMATCH \u2014 at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale"
+    },
+    {
+     "txId": "tx3",
+     "decision": "REFUSED",
+     "why": "g1:ctl-view-g-host: AXIS_MISMATCH \u2014 at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 185 (tolerance 19 px): the picture is not that side at that scale"
+    }
+   ],
+   "looks": [
+    {
+     "revision": "f0c3b54ba93c",
+     "indexLines": 54,
+     "door": "opening-0-front-0-0 \u00b7 OPENING/DOOR \u00b7 FRONT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w0 \u00b7 level lvl-0 \u00b7 0.23\u20131.18 m from the left (2\u20139 %) \u00b7 0\u20132.1 m high \u00b7 picture 8 x 28\u201355, y 187\u2013247"
+    }
+   ],
+   "delivered": {
+    "modelSha256": "f0c3b54ba93c78465689e25ecfb3f3d149419576dc4a8d0050f9d4d116869a75"
+   },
+   "defects": [
+    {
+     "id": "L0:S:f-ring-main-0-30f92f6a1b",
+     "operation": "SET_ROOF",
+     "targetId": null,
+     "settlement": "APPLIED_NOT_REVIEWED",
+     "blocker": null,
+     "patchCode": null
+    },
+    {
+     "id": "L1:D1",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D2",
+     "operation": "UPDATE_OPENING",
+     "targetId": "front-door-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "UNKNOWN_TARGET"
+    },
+    {
+     "id": "L1:D3",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-front-0-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D4",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-rear-2-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D5",
+     "operation": "UPDATE_OPENING",
+     "targetId": null,
+     "settlement": "NO_PROPOSAL",
+     "blocker": "AMBIGUOUS_TARGET",
+     "patchCode": null
+    },
+    {
+     "id": "L1:D6",
+     "operation": "UNSUPPORTED",
+     "targetId": "opening-0-front-0-0",
+     "settlement": "UNSUPPORTED_OPERATION",
+     "blocker": "LISTED_ELEMENT_NAMED",
+     "patchCode": null
+    }
+   ],
+   "quality": {
+    "state": "BUDGET_OR_ROUND_LIMIT",
+    "reasons": [
+     "BUDGET_OR_ROUND_LIMIT",
+     "NO_IMPROVEMENT"
+    ]
+   },
+   "replay": {
+    "replayed": 5,
+    "missing": 0
+   }
+  },
+  "phaseC_controlled_registeredSide": {
+   "controlled": true,
+   "candidates": [
+    {
+     "side": "LEFT",
+     "targetId": "opening-0-west-3-1",
+     "iou": 0.07,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "LEFT",
+     "targetId": "opening-0-west-3-0",
+     "iou": 0.09,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "LEFT",
+     "targetId": "opening-0-west-3-0",
+     "iou": 0.09,
+     "sketchKind": "WINDOW"
+    },
+    {
+     "side": "LEFT",
+     "targetId": "opening-0-west-3-1",
+     "iou": 0.13,
+     "sketchKind": "WINDOW"
+    }
+   ],
+   "chosen": {
+    "side": "LEFT",
+    "targetId": "opening-0-west-3-1",
+    "previouslyPatched": false,
+    "iouBefore": 0.07
+   },
+   "records": [
+    {
+     "proposalId": "g1:ctl-made-up",
+     "targetId": "opening-made-up-1",
+     "status": "INVALID",
+     "code": "UNKNOWN_TARGET",
+     "why": "opening-made-up-1 is not an element of revision f0c3b54ba93c: a targetId names an id of the element index, never a made-up one",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-correct",
+     "targetId": "LEFT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.01148 m/px (the left side's 7.90 m across the drawn walls) the model's eaves at 5.60 m land on row 77, the drawing's on row 356 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-correct",
+     "targetId": "opening-0-west-3-1",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-correct stands or falls together, and g1:ctl-view-g-ctl-correct was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-similar",
+     "targetId": "LEFT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.01148 m/px (the left side's 7.90 m across the drawn walls) the model's eaves at 5.60 m land on row 77, the drawing's on row 356 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-similar",
+     "targetId": "opening-0-west-3-0",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-similar stands or falls together, and g1:ctl-view-g-ctl-similar was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-view-g-ctl-other-side",
+     "targetId": "LEFT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.01148 m/px (the left side's 7.90 m across the drawn walls) the model's eaves at 5.60 m land on row 77, the drawing's on row 356 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-other-side",
+     "targetId": "main-idoor-0-1",
+     "status": "GROUP_ROLLED_BACK",
+     "code": "GROUP_MEMBER_REFUSED",
+     "why": "its group g1:g-ctl-other-side stands or falls together, and g1:ctl-view-g-ctl-other-side was refused (AXIS_MISMATCH)",
+     "gate": null,
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-probe-LEFT",
+     "targetId": "LEFT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.01148 m/px (the left side's 7.90 m across the drawn walls) the model's eaves at 5.60 m land on row 77, the drawing's on row 356 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-probe-FRONT",
+     "targetId": "FRONT",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.03169 m/px (the front side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 380, the drawing's on row 355 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": null,
+      "currentZ": null,
+      "nullBoxes": 0,
+      "why": "the model has no opening on that side to test the orientation with"
+     },
+     "measure": null
+    },
+    {
+     "proposalId": "g1:ctl-probe-REAR",
+     "targetId": "REAR",
+     "status": "REJECTED_BY_SOURCE",
+     "code": "AXIS_MISMATCH",
+     "why": "at 0.03153 m/px (the rear side's 13.15 m across the drawn walls) the model's eaves at 5.60 m land on row 379, the drawing's on row 355 (tolerance 10 px): the picture is not that side at that scale",
+     "gate": {
+      "winner": "UNDECIDED",
+      "proposedZ": 0.19,
+      "currentZ": 0,
+      "nullBoxes": 0,
+      "why": "the side's openings drawn through the declared orientation score z 0.19, through its mirror z 0.00"
+     },
+     "measure": null
+    }
+   ],
+   "looks": [
+    {
+     "revision": "f0c3b54ba93c",
+     "target": "opening-0-west-3-1 \u00b7 OPENING/WINDOW \u00b7 LEFT \u00b7 body ring-main-0 \u00b7 host ring-main-0-w3 \u00b7 level lvl-0 \u00b7 4.96\u20137.6 m from the left (63\u201396 %) \u00b7 0.9\u20132.2 m high \u00b7 picture 8 x 1499\u20131575, y 184\u2013221",
+     "applied": "Since your last look the analyzer applied: ring-main-0 (SET_ROOF on the front side (ring-main-0), from the sketch of that elevation). Review each in appliedReview against the drawings."
+    }
+   ],
+   "defects": [
+    {
+     "id": "L0:S:f-ring-main-0-30f92f6a1b",
+     "operation": "SET_ROOF",
+     "targetId": null,
+     "settlement": "APPLIED_NOT_REVIEWED",
+     "blocker": null,
+     "patchCode": null
+    },
+    {
+     "id": "L1:D1",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-west-3-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D2",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-made-up-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "UNKNOWN_TARGET"
+    },
+    {
+     "id": "L1:D3",
+     "operation": "UPDATE_OPENING",
+     "targetId": "opening-0-west-3-0",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D4",
+     "operation": "UPDATE_OPENING",
+     "targetId": "main-idoor-0-1",
+     "settlement": "REFUSED",
+     "blocker": null,
+     "patchCode": "GROUP_MEMBER_REFUSED"
+    },
+    {
+     "id": "L1:D5",
+     "operation": "UPDATE_OPENING",
+     "targetId": null,
+     "settlement": "NO_PROPOSAL",
+     "blocker": "TARGET_NOT_GIVEN",
+     "patchCode": null
+    },
+    {
+     "id": "L1:D6",
+     "operation": "UNSUPPORTED",
+     "targetId": "opening-0-west-3-1",
+     "settlement": "UNSUPPORTED_OPERATION",
+     "blocker": "LISTED_ELEMENT_NAMED",
+     "patchCode": null
+    }
+   ],
+   "quality": {
+    "state": "BUDGET_OR_ROUND_LIMIT",
+    "reasons": [
+     "BUDGET_OR_ROUND_LIMIT",
+     "NO_IMPROVEMENT"
+    ]
+   },
+   "delivered": {
+    "modelSha256": "f0c3b54ba93c78465689e25ecfb3f3d149419576dc4a8d0050f9d4d116869a75",
+    "revision": "f0c3b54ba93c"
+   },
+   "replay": {
+    "replayed": 5,
+    "missing": 0
+   }
+  }
+ },
+ "_note": "CONTROLLED counter-trials (proposals written by the R2 script from the index and the provider own sketch readings), not reviewer answers. No request was sent (0 USD). The reviewer requests were written to the private exchange records and refused unbilled."
+}

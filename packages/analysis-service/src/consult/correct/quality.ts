@@ -25,7 +25,7 @@
 import type { PatchRecord } from './execute.js'
 import type { ReviewDefect } from './registry.js'
 
-export const QUALITY_VERSION = '1.1.0' as const
+export const QUALITY_VERSION = '1.2.0' as const
 
 export const QUALITY_STATES = ['SOURCE_VERIFIED_IN_SCOPE', 'RECOGNIZABLE_PARTIAL', 'NEEDS_EVIDENCE', 'UNSUPPORTED_OPERATION', 'NO_IMPROVEMENT', 'BUDGET_OR_ROUND_LIMIT', 'NOT_REVIEWED'] as const
 export type QualityState = (typeof QUALITY_STATES)[number]
@@ -54,6 +54,16 @@ export type DefectEntry = {
   verifiedOn?: string
   /** The last look that reported it, when a later look looked and did not mention it (omission is not closure). */
   carriedFrom?: number
+  /** v3.54.17 R2 (1.2.0): the indexed element the reviewer bound the defect to. */
+  targetId?: string
+  /**
+   * v3.54.17 R2: why a defect stands without an executable proposal, kept apart: no listed element was named for an
+   * operation that needs one (TARGET_NOT_GIVEN), the id named is not in the revision's index (TARGET_NOT_IN_INDEX), the
+   * reviewer could not tell which (AMBIGUOUS_TARGET) or found none there (NO_LISTED_ELEMENT), the pictures did not show it
+   * (NEEDS_EVIDENCE), it was bound and simply not proposed (NOT_PROPOSED), or no primitive exists (NO_PRIMITIVE —
+   * an UNSUPPORTED defect; LISTED_ELEMENT_NAMED when it names an element listed operations do edit).
+   */
+  blocker?: 'TARGET_NOT_GIVEN' | 'TARGET_NOT_IN_INDEX' | 'AMBIGUOUS_TARGET' | 'NO_LISTED_ELEMENT' | 'NEEDS_EVIDENCE' | 'NOT_PROPOSED' | 'NO_PRIMITIVE' | 'LISTED_ELEMENT_NAMED'
   why: string
 }
 
@@ -83,15 +93,33 @@ export type QualitySummary = {
  * The defects of one look settled from the patch records of that look and the review of the next one.
  * `reviewedNext`: the next look's verdict on each applied element id (MATCHES / ACCEPTABLE_APPROXIMATION keep it closed).
  */
-export function settleDefects(look: number, defects: readonly ReviewDefect[], proposals: ReadonlyArray<{ proposalId: string; defectId?: string }>, records: readonly PatchRecord[], reviewedNext: ReadonlyMap<string, string> | undefined, nextRevision: string | undefined, roundLimited: boolean): DefectEntry[] {
+const LISTED_OPS = new Set(['UPDATE_OPENING', 'REMOVE_OPENING', 'UPDATE_CHIMNEY', 'SET_PARAMETER', 'SET_ROOF', 'SET_OUTLINE'])
+/** v3.54.17 R2: the element index of the revision the look judged: id → type (`element-index.ts`). */
+export type ListedElements = ReadonlyMap<string, string>
+export function settleDefects(look: number, defects: readonly ReviewDefect[], proposals: ReadonlyArray<{ proposalId: string; defectId?: string }>, records: readonly PatchRecord[], reviewedNext: ReadonlyMap<string, string> | undefined, nextRevision: string | undefined, roundLimited: boolean, listed?: ListedElements): DefectEntry[] {
+  const blockerOf = (d: ReviewDefect): NonNullable<DefectEntry['blocker']> => {
+    if (d.operation === 'UNSUPPORTED') return d.targetId && listed?.has(d.targetId) && ['OPENING', 'CHIMNEY', 'ROOF', 'ROOF_PLANE', 'WALL', 'LEVEL'].includes(listed.get(d.targetId) as string) ? 'LISTED_ELEMENT_NAMED' : 'NO_PRIMITIVE'
+    if (d.blocker && d.blocker !== 'NONE') return d.blocker
+    if (LISTED_OPS.has(d.operation)) {
+      if (!d.targetId) return 'TARGET_NOT_GIVEN'
+      if (listed && !listed.has(d.targetId)) return 'TARGET_NOT_IN_INDEX'
+    }
+    return 'NOT_PROPOSED'
+  }
   return defects.map((d) => {
     const p = proposals.find((x) => x.defectId === d.id)
     const r = p ? records.find((x) => x.proposalId === p.proposalId || x.proposalId.endsWith(`:${p.proposalId}`)) : undefined
     const id = `L${look}:${d.id}`
     const continues = (d as { continues?: string }).continues
-    const base = { id, key: id, ...(continues ? { continues } : {}), look, about: d.about, scope: d.scope, severity: d.severity, certainty: d.certainty, operation: d.operation, ...(d.family && d.family !== 'NONE' ? { family: d.family } : {}), ...(p ? { proposalId: p.proposalId } : {}), ...(r ? { patchStatus: r.status, ...(r.code ? { patchCode: r.code } : {}) } : {}) }
-    if (d.operation === 'UNSUPPORTED') return { ...base, settlement: 'UNSUPPORTED_OPERATION' as const, why: `no operation of the registry changes ${d.family ?? 'it'}: named, not corrected` }
-    if (!p) return { ...base, settlement: roundLimited ? ('ROUND_LIMIT' as const) : ('NO_PROPOSAL' as const), why: roundLimited ? 'reported in the last look, when no further round could apply anything' : 'reported without a proposal the analyzer could apply' }
+    const base = { id, key: id, ...(continues ? { continues } : {}), look, about: d.about, scope: d.scope, severity: d.severity, certainty: d.certainty, operation: d.operation, ...(d.family && d.family !== 'NONE' ? { family: d.family } : {}), ...(d.targetId ? { targetId: d.targetId } : {}), ...(p ? { proposalId: p.proposalId } : {}), ...(r ? { patchStatus: r.status, ...(r.code ? { patchCode: r.code } : {}) } : {}) }
+    if (d.operation === 'UNSUPPORTED') {
+      const blocker = blockerOf(d)
+      return { ...base, settlement: 'UNSUPPORTED_OPERATION' as const, blocker, why: blocker === 'LISTED_ELEMENT_NAMED' ? `reported UNSUPPORTED (${d.family ?? 'no family'}) though it names ${d.targetId}, a listed ${String(listed?.get(d.targetId ?? '')).toLowerCase()} that listed operations edit: the reviewer's classification is the blocker, not a missing primitive` : `no operation of the registry changes ${d.family ?? 'it'}: named, not corrected` }
+    }
+    if (!p) {
+      const blocker = blockerOf(d)
+      return { ...base, settlement: roundLimited ? ('ROUND_LIMIT' as const) : ('NO_PROPOSAL' as const), blocker, why: `${roundLimited ? 'reported in the last look, when no further round could apply anything' : 'reported without a proposal the analyzer could apply'}: ${blocker}${blocker === 'TARGET_NOT_IN_INDEX' ? ` (${d.targetId} is not in the revision's element index)` : ''}` }
+    }
     if (!r) return { ...base, settlement: 'REFUSED' as const, why: 'its proposal has no record (not admitted)' }
     if (r.status === 'COMMITTED') {
       const ids = r.bound?.ids ?? []
