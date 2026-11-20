@@ -6,7 +6,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
-import { DIMENSION_OBSERVATION_VERSION, readDimensions, resolveMetric, valueOfLiteral } from '../src/consult/metric-read.js'
+import { DIMENSION_OBSERVATION_VERSION, READ_TOOL, readDimensions, resolveMetric, valueOfLiteral } from '../src/consult/metric-read.js'
 import type { IndependentRead, LocalCheck, LocalItem } from '../src/consult/metric-read.js'
 import { compareMetricRead } from '../src/consult/consult-analysis.js'
 import type { ConsultantModel, ModelTurn } from '../src/consult/loop.js'
@@ -191,5 +191,13 @@ describe('v3.54.15 counter-trial: a body dimension is not the whole house', () =
     const d = r.decisions.find((x) => x.itemId === 'D1')
     expect(d?.decision).not.toBe('CORRECTED')
     expect(d?.witness).not.toBe('FOOTPRINT')
+  })
+})
+
+describe('v3.54.17 R3 metric-read/5: the dimension line\'s ends are a required field of the tool', () => {
+  it('every item states ends (null only for a level, an angle or an area): an optional field the live reads left out', () => {
+    const item = READ_TOOL.input_schema.properties.items.items
+    expect(item.required).toContain('ends')
+    expect(item.properties.ends.type).toEqual(['object', 'null'])
   })
 })

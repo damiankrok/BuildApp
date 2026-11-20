@@ -36,7 +36,8 @@ import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from './loop.js'
 
 export const DIMENSION_OBSERVATION_SCHEMA = 'buildapp.dimension-observation' as const
 export const DIMENSION_OBSERVATION_VERSION = '1.2.0' as const
-export const METRIC_READ_PROMPT_VERSION = 'metric-read/4' as const
+export const METRIC_READ_PROMPT_VERSION = 'metric-read/5' as const
+/** metric-read/5 (v3.54.17 R3): `ends` is a required (nullable) field of every item — under /4 it was asked for in the prompt but optional in the tool, and the live reads left it out, so no printed length could set the plan's scale. */
 export const METRIC_VERIFY_PROMPT_VERSION = 'metric-verify/2' as const
 export const METRIC_RESOLVER_VERSION = '1.2.0' as const
 export const VERIFY_MAX_ITEMS = 40
@@ -116,7 +117,7 @@ const RawItem = z
   })
   .strict()
 
-const READ_TOOL = {
+export const READ_TOOL = {
   name: 'report_dimensions',
   description: 'Report every printed dimension, level mark and angle you can find on this drawing, one item each.',
   input_schema: {
@@ -129,7 +130,7 @@ const READ_TOOL = {
         items: {
           type: 'object',
           additionalProperties: false,
-          required: ['kind', 'literal', 'unit', 'value', 'labelBox', 'storey', 'axis', 'scope', 'reference', 'status'],
+          required: ['kind', 'literal', 'unit', 'value', 'labelBox', 'ends', 'storey', 'axis', 'scope', 'reference', 'status'],
           properties: {
             kind: { enum: KINDS },
             literal: { type: 'string', description: 'the text exactly as printed: its digits, sign and decimal separator (for example 1365, 4,50, +5,54, 28°)' },
