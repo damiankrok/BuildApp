@@ -86,6 +86,29 @@ export function rectOfOutline(outline: ReadonlyArray<{ x: number; z: number }>):
 }
 export const area = (r: Rect): number => (r.maxX - r.minX) * (r.maxZ - r.minZ)
 export const extentOn = (r: Rect, s: Side): { lo: number; hi: number } => (along(s) === 'x' ? { lo: r.minX, hi: r.maxX } : { lo: r.minZ, hi: r.maxZ })
+/**
+ * v3.54.17 R2 (audit §5): the stretches of a body on one side that no other body covers — where what is drawn there can
+ * only be that body (in front of or behind another, a body's columns show the other's walls and roof). A body whose
+ * stretch is wholly shared on a side is not read on that side: hidden, or not told apart, it is named, never measured.
+ */
+export function exclusiveStretches(rect: Rect, others: readonly Rect[], s: Side): Array<{ lo: number; hi: number }> {
+  const e = extentOn(rect, s)
+  let free: Array<{ lo: number; hi: number }> = [e]
+  for (const o of others) {
+    const c = extentOn(o, s)
+    free = free.flatMap((f) => (c.hi <= f.lo + 1e-6 || c.lo >= f.hi - 1e-6 ? [f] : [...(c.lo > f.lo ? [{ lo: f.lo, hi: c.lo }] : []), ...(c.hi < f.hi ? [{ lo: c.hi, hi: f.hi }] : [])]))
+  }
+  return free.filter((f) => f.hi - f.lo > 1e-6)
+}
+/** The longest exclusive stretch, when it is long enough to read a roof over (≥ 1 m and ≥ a quarter of the body's stretch), 5 % in from its ends. */
+export function readableStretch(rect: Rect, others: readonly Rect[], s: Side): { lo: number; hi: number } | undefined {
+  const e = extentOn(rect, s)
+  const best = exclusiveStretches(rect, others, s).sort((a, b) => b.hi - b.lo - (a.hi - a.lo))[0]
+  if (!best || best.hi - best.lo < Math.max(1, 0.25 * (e.hi - e.lo))) return undefined
+  // 5 % in from each end: the columns next to where another body's wall stands still catch its edge
+  const inset = 0.05 * (best.hi - best.lo)
+  return { lo: best.lo + inset, hi: best.hi - inset }
+}
 
 /**
  * 1. An elevation registered by the plan: its building's width in pixels against the outline's extent along that side.

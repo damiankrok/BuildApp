@@ -125,7 +125,7 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     consumer: "commands/removeFeature (the body's roofs and planes) + setProperty (the top storey's wall heights and profiles) + createRoof GABLE|FLAT with capWallIds (massing/ops.ts bindSetRoof)",
     measure: "the model's roof and the proposal's roof as the source elevation draws them, held against the original picture (polygon gate); openings above the new eaves refuse the patch; the built roof drawn back (overlap ≥ 0.8, support)",
     params: ['picture', 'roofKind', 'roofPolygon', 'side', 'wallLeftX', 'wallRightX', 'groundY'],
-    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends) and groundY. A hip roof is UNSUPPORTED.",
+    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id from the MODEL ELEMENT INDEX), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends, or the whole house's with extent HOUSE) and groundY. A hip roof is UNSUPPORTED.",
   },
   SET_OUTLINE: {
     op: 'SET_OUTLINE',
@@ -163,6 +163,7 @@ export const PATCH_SCHEMA = {
     side: { type: 'string', enum: ['FRONT', 'RIGHT', 'REAR', 'LEFT'] },
     mirrored: { type: 'boolean' },
     wallLeftX: { type: 'number' },
+    extent: { type: 'string', enum: ['BODY', 'HOUSE'], description: 'SET_ROOF: whether wallLeftX/wallRightX are that body\'s wall ends (BODY, the default) or the whole house\'s on that side (HOUSE)' },
     wallRightX: { type: 'number' },
     groundY: { type: 'number' },
     eavesY: { type: 'number' },
@@ -205,6 +206,8 @@ export const DEFECT_SCHEMA = {
 } as const
 
 export type PatchFields = {
+  /** v3.54.17 R2: SET_ROOF — the wall ends are the body's (BODY) or the whole house's on that side (HOUSE). */
+  extent?: 'BODY' | 'HOUSE'
   picture?: number
   box?: { x0: number; y0: number; x1: number; y1: number }
   kind?: OpeningPatchKind

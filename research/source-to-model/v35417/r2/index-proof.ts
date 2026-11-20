@@ -66,6 +66,7 @@ const summary = {
 }
 writeFileSync(join(out, 'index-proof.json'), `${JSON.stringify(summary, null, 1)}\n`)
 writeFileSync(join(out, 'events.json'), `${JSON.stringify(events, null, 1)}\n`)
+writeFileSync(join(out, 'sketch-semantic.json'), `${JSON.stringify({ orientation: r.sketches?.semantic?.orientation ?? null, massing: r.sketches?.semantic?.massing ?? null, records: (r.sketches?.semantic?.records ?? []).map((x) => ({ proposalId: x.proposalId, operation: x.operation, status: x.status, code: x.code ?? null, why: x.why.slice(0, 400), values: x.bound?.values ?? null, registration: (x.massing as { registration?: string } | undefined)?.registration ?? null })) }, null, 1)}\n`)
 process.stdout.write(`${JSON.stringify(summary, null, 1)}\n`)
 
 // ---------------------------------------------------------------------------------------------------------------------

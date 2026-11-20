@@ -21,10 +21,13 @@ import type { Poly } from '../correct/source-gate.js'
 import { facadePx, levelOf, openingBoxes, pictureOf, tolPxOf, toFrameX, toFrameY, viewOf } from '../correct/execute.js'
 import type { BindPicture, BindView, Bound, Ctx, CorrectionProposal, Refusal, Side } from '../correct/execute.js'
 import { targetBodies } from '../correct/resolve.js'
-import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, registerByPlan, solveMassing } from './massing.js'
+import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.0.0' as const
+export const MASSING_OPS_VERSION = '1.1.0' as const
+/** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
+export const MAX_OVERHANG_M = 1.0
+export const MAX_PITCH_DEG = 85
 export type MassingObservations = { outline?: OutlineObservation; silhouettes: readonly SilhouetteObservation[] }
 
 const r6 = (v: number): number => Math.round(v * 1e6) / 1e6
@@ -180,8 +183,12 @@ function heightView(ctx: Ctx, p: CorrectionProposal, pic: BindPicture, body: Mod
     const l = toFrameX(pic, p, f.wallLeftX)
     const r = toFrameX(pic, p, f.wallRightX)
     const g = toFrameY(pic, p, f.groundY)
-    const reg = registerByPlan({ observationId: p.proposalId, side, frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, groundRow: g, walls: [[[l, g], [r, g], [r, g - 10], [l, g - 10]]], roofs: [] }, extentOn(body.rect, side))
-    if ('view' in reg) return { view: reg.view, how: `registered by ${body.id}'s plan extent: ${reg.why}` }
+    // v3.54.17 R2: wall ends of the whole house register by the whole house's extent (never by one body's narrow one)
+    const house = f.extent === 'HOUSE'
+    const all = bodiesOf(ctx.model).filter((q) => q.ringIds.length > 0).map((q) => extentOn(q.rect, side))
+    const ext = house ? { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) } : extentOn(body.rect, side)
+    const reg = registerByPlan({ observationId: p.proposalId, side, frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, groundRow: g, walls: [[[l, g], [r, g], [r, g - 10], [l, g - 10]]], roofs: [] }, ext)
+    if ('view' in reg) return { view: reg.view, how: `registered by ${house ? "the house's" : `${body.id}'s`} plan extent: ${reg.why}` }
     return { status: 'NEEDS_EVIDENCE', code: 'NO_HEIGHT_REGISTRATION', why: reg.refused }
   }
   return { status: 'NEEDS_EVIDENCE', code: 'NO_HEIGHT_REGISTRATION', why: `picture ${pic.n} (${pic.frameId}) has no registration with heights: give side, wallLeftX/wallRightX (the body's wall ends) and groundY, and the analyzer registers it by the body's plan extent` }
@@ -205,9 +212,28 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   if ('status' in hv) return hv
   const view = hv.view
   const poly = framePoly(pic, p, f.roofPolygon)
+  // v3.54.17 R2 (audit §5): plausibility BEFORE any command — the kernel stays the last guard, never the only one
+  // (a) one picture, one scale: a registration made for this patch must agree with the one the picture already has
+  const known = viewOf(ctx, pic)
+  if (known && known !== view && known.side === view.side) {
+    const k = view.projection.mpp / known.projection.mpp
+    if (k < 0.85 || k > 1 / 0.85) return { status: 'NEEDS_EVIDENCE', code: 'REGISTRATION_INCONSISTENT', why: `${hv.how} gives ${(view.projection.mpp * 100).toFixed(2)} cm/px, the picture's own registration ${(known.projection.mpp * 100).toFixed(2)} cm/px: two scales of one drawing — the patch's wall ends are not this side's` }
+  }
+  // (b) the body's own stretch on this side: where another body is projected too, what is drawn there is not only this one
   const e = extentOn(body.rect, view.side)
-  const prof = profileOver(view, e.lo, e.hi, { walls: [], roofs: [poly] })
+  const shared = bodies.some((q) => q !== body && q.ringIds.length > 0 && Math.min(e.hi, extentOn(q.rect, view.side).hi) - Math.max(e.lo, extentOn(q.rect, view.side).lo) > 1e-6)
+  const st = shared ? readableStretch(body.rect, bodies.filter((q) => q !== body && q.ringIds.length > 0).map((q) => q.rect), view.side) : e
+  if (!st) return { status: 'NEEDS_EVIDENCE', code: 'BODY_HIDDEN_ON_SIDE', why: `on the ${view.side.toLowerCase()} side ${body.id}'s whole stretch is shared with another body: what is drawn over it may be the other's roof` }
+  const prof = profileOver(view, st.lo, st.hi, { walls: [], roofs: [poly] })
   if (!prof) return { status: 'INVALID', code: 'ROOF_NOT_OVER_BODY', why: `the drawn roof does not stand over ${body.id}'s ${(e.hi - e.lo).toFixed(2)} m on the ${view.side.toLowerCase()} side` }
+  // (c) the drawn roof's width belongs to this body: a gable end as wide as the body's span, slopes not much wider than it
+  {
+    const px = poly.map((q) => q[0])
+    const drawnM = (Math.max(...px) - Math.min(...px)) * view.projection.mpp
+    const stretchM = e.hi - e.lo
+    if (prof.shape === 'TRIANGLE' && (drawnM < 0.75 * stretchM || drawnM > stretchM + 2 * MAX_OVERHANG_M)) return { status: 'NEEDS_EVIDENCE', code: 'ROOF_NOT_THIS_BODY', why: `the drawn gable is ${drawnM.toFixed(2)} m wide, ${body.id} is ${stretchM.toFixed(2)} m on the ${view.side.toLowerCase()} side: not this body's gable at this registration` }
+    if (prof.shape !== 'TRIANGLE' && drawnM > stretchM + 2 * MAX_OVERHANG_M) return { status: 'NEEDS_EVIDENCE', code: 'ROOF_WIDER_THAN_BODY', why: `the drawn roof is ${drawnM.toFixed(2)} m wide over ${body.id}'s ${stretchM.toFixed(2)} m (more than ${MAX_OVERHANG_M} m of overhang a side): another body's roof, or another registration` }
+  }
   const rise = prof.topM - prof.eavesM
   if ((f.roofKind === 'FLAT') !== (rise < MASSING_TOLERANCES.flatRiseM)) return { status: 'INVALID', code: 'KIND_CONTRADICTS_SHAPE', why: `${f.roofKind} proposed, but the drawn roof rises ${rise.toFixed(2)} m over its eaves (flat below ${MASSING_TOLERANCES.flatRiseM} m)` }
   const top = topLevelOf(m, body) as { id: string; elevation: number }
@@ -218,6 +244,8 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const span = axis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX
     spec = { kind: 'GABLE', ridgeAxis: axis, pitchDeg: Math.round(((Math.atan2(rise, span / 2) * 180) / Math.PI) * 10) / 10, eavesM: r6(prof.eavesM), ridgeM: r6(prof.topM) }
   } else spec = { kind: 'FLAT', eavesM: r6(prof.topM) }
+  // (d) a pitch the kernel cannot build is named here, with its inputs — never clamped to a buildable one
+  if (spec.kind === 'GABLE' && !((spec.pitchDeg ?? 0) <= MAX_PITCH_DEG)) return { status: 'NEEDS_EVIDENCE', code: 'IMPLAUSIBLE_PITCH', why: `${(spec.pitchDeg ?? 0).toFixed(1)}° from a rise of ${rise.toFixed(2)} m over half of ${(spec.ridgeAxis === 'X' ? body.rect.maxZ - body.rect.minZ : body.rect.maxX - body.rect.minX).toFixed(2)} m through ${hv.how}: beyond ${MAX_PITCH_DEG}°, the registration or the drawn roof is not this body's` }
   if (!(spec.eavesM - top.elevation > 0.3)) return { status: 'INVALID', code: 'IMPOSSIBLE_EAVES', why: `the drawn eaves at ${spec.eavesM.toFixed(2)} m are not above ${top.id} (${top.elevation.toFixed(2)} m)` }
   // the source decides between the model's roof and the proposal on the original picture
   const proposed = specSilhouette(spec, body.rect, view)
@@ -493,38 +521,84 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
 
 export type SketchForMassing = { facade: string; frameId: string; groundRow: number | null; walls: Poly[]; roofs: Poly[] }
 export type MassingProposalAccount = { frameId: string; side?: Side; proposed: Array<{ bodyId: string; why: string }>; skipped: Array<{ bodyId?: string; why: string }> }
-/** v3.54.17 §6: which model side each labelled elevation draws, decided by the heights the views agree on — apart from the vertical. */
-export type OrientationHypothesis = { assignment: 'AS_LABELLED' | 'TURNED_90' | 'UNDECIDED'; labelled: { eavesM: number[]; spreadM: number | null }; turned: { eavesM: number[]; spreadM: number | null }; why: string }
+/** v3.54.17 §6 / R2: which model side each labelled elevation draws, decided per body by the heights its views agree on. */
+export type OrientationHypothesis = {
+  assignment: 'AS_LABELLED' | 'TURNED_90' | 'UNDECIDED'
+  /** Every body's eaves as each view reads it over the body's own (exclusive) stretch, labelled and turned (R2). */
+  labelled: { eavesM: number[]; spreadM: number | null }
+  turned: { eavesM: number[]; spreadM: number | null }
+  perBody?: Array<{ bodyId: string; labelled: Array<{ frameId: string; side: Side; eavesM: number }>; turned: Array<{ frameId: string; side: Side; eavesM: number }>; hidden: Array<{ frameId: string; side: Side; why: string }>; agreesLabelled: boolean | null; agreesTurned: boolean | null }>
+  /** The bodies whose views agree under the assignment used (UNDECIDED: as labelled) — the only ones a roof proposal may touch. */
+  confirmed?: string[]
+  /** The side each elevation is read as, the ONE mapping every consumer of the sketches uses (roofs and openings). */
+  sideOf?: Record<string, Side>
+  why: string
+}
 const TURN: Record<Side, Side> = { FRONT: 'RIGHT', RIGHT: 'REAR', REAR: 'LEFT', LEFT: 'FRONT' }
+/** Whether a body stands in front of every other body whose stretch it shares on this side (its face nearer the viewer). */
+function inFront(r: Rect, others: readonly Rect[], s: Side): boolean {
+  const e = extentOn(r, s)
+  const face = (q: Rect): number => (s === 'FRONT' ? -q.minZ : s === 'REAR' ? q.maxZ : s === 'LEFT' ? -q.minX : q.maxX)
+  return others.filter((o) => { const c = extentOn(o, s); return Math.min(e.hi, c.hi) - Math.max(e.lo, c.lo) > 1e-6 }).every((o) => face(r) > face(o) + 1e-6)
+}
 
 /**
- * The sides the sketches draw, held against the model's plan: each elevation registered by the model's whole extent on
- * its labelled side gives an eaves height; registered correctly, the views agree (one house, one eaves). Where the labels
- * disagree and the sides turned by 90° agree, the elevations draw the model turned (the model's front is the source's
- * side): the roof is read under the turned assignment and the turn is named as a hypothesis — it never moves a wall.
+ * The sides the sketches draw, held against the model's plan, PER BODY (R2): each elevation is registered by the house's
+ * whole extent on the side it is read as; each body's eaves is then read over the stretch only it occupies on that side
+ * (a body in front of or behind another is not read where they overlap — the lower garage is never compared with the
+ * main roof drawn behind it). A body's views agree or not; the assignment is AS_LABELLED when every body read twice
+ * agrees as labelled, TURNED_90 when they do not and every one agrees turned, else UNDECIDED — and then the bodies that
+ * do agree as labelled stay confirmed: an uncertain fragment does not block an independent, well-confirmed one.
+ * Different eaves of different bodies are never evidence of a turn. The turn never moves a wall.
  */
 export function orientationOf(sketches: readonly SketchForMassing[], m: CanonicalBuildingModel, sideOf: (facade: string) => Side | undefined): OrientationHypothesis {
   const bodies = bodiesOf(m).filter((b) => b.ringIds.length > 0)
-  const eaves = (turn: boolean): number[] => sketches.flatMap((s) => {
-    const lab = sideOf(s.facade)
-    if (!lab || s.groundRow === null || s.walls.length === 0 || s.roofs.length === 0 || bodies.length === 0) return []
-    const side = turn ? TURN[lab] : lab
-    const all = bodies.map((q) => extentOn(q.rect, side))
-    const ext = { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) }
-    const r = registerByPlan({ observationId: 'o', side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: [] }, ext)
-    if (!('view' in r)) return []
-    const prof = profileOver(r.view, ext.lo, ext.hi, { walls: [], roofs: s.roofs })
-    return prof ? [Math.round(prof.eavesM * 100) / 100] : []
-  })
+  type Read = { frameId: string; side: Side; eavesM: number }
+  const per = new Map(bodies.map((b) => [b.id, { labelled: [] as Read[], turned: [] as Read[], hidden: [] as Array<{ frameId: string; side: Side; why: string }> }]))
+  for (const turn of [false, true]) {
+    for (const s of sketches) {
+      const lab = sideOf(s.facade)
+      if (!lab || s.groundRow === null || s.walls.length === 0 || s.roofs.length === 0 || bodies.length === 0) continue
+      const side = turn ? TURN[lab] : lab
+      const all = bodies.map((q) => extentOn(q.rect, side))
+      const ext = { lo: Math.min(...all.map((e) => e.lo)), hi: Math.max(...all.map((e) => e.hi)) }
+      const r = registerByPlan({ observationId: 'o', side, frameId: s.frameId, sourceByteHash: '', groundRow: s.groundRow, walls: s.walls, roofs: [] }, ext)
+      if (!('view' in r)) continue
+      for (const b of bodies) {
+        const others = bodies.filter((q) => q !== b)
+        // where it stands alone on this side; else, when it stands in FRONT of every body sharing its stretch, the whole
+        // stretch with only the roofs no wider than it (a taller roof behind, wider than the body, is not its own)
+        const alone = readableStretch(b.rect, others.map((q) => q.rect), side)
+        const front = !alone && inFront(b.rect, others.map((q) => q.rect), side) ? extentOn(b.rect, side) : undefined
+        const st = alone ?? front
+        if (!st) {
+          if (!turn) per.get(b.id)?.hidden.push({ frameId: s.frameId, side, why: `on the ${side.toLowerCase()} side ${b.id}'s stretch is shared with a body in front of it: hidden or not told apart, not read` })
+          continue
+        }
+        const roofs = front ? s.roofs.filter((poly) => { const xs = poly.map((q) => q[0]); const w = (Math.max(...xs) - Math.min(...xs)) * r.view.projection.mpp; return w <= st.hi - st.lo + 2 * MAX_OVERHANG_M }) : s.roofs
+        const prof = profileOver(r.view, st.lo, st.hi, { walls: [], roofs })
+        if (prof && prof.shape !== 'NONE') per.get(b.id)?.[turn ? 'turned' : 'labelled'].push({ frameId: s.frameId, side, eavesM: Math.round(prof.eavesM * 100) / 100 })
+      }
+    }
+  }
+  const agree = (v: Read[]): boolean | null => {
+    if (v.length < 2) return null
+    const e = v.map((x) => x.eavesM)
+    return Math.max(...e) - Math.min(...e) <= Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * Math.max(...e))
+  }
+  const perBody = bodies.map((b) => { const q = per.get(b.id) as { labelled: Read[]; turned: Read[]; hidden: Array<{ frameId: string; side: Side; why: string }> }; return { bodyId: b.id, labelled: q.labelled, turned: q.turned, hidden: q.hidden, agreesLabelled: agree(q.labelled), agreesTurned: agree(q.turned) } })
+  const flat = (k: 'labelled' | 'turned'): number[] => perBody.flatMap((b) => b[k].map((x) => x.eavesM))
   const spread = (v: number[]): number | null => (v.length >= 2 ? Math.round((Math.max(...v) - Math.min(...v)) * 100) / 100 : null)
-  const ok = (v: number[]): boolean => v.length >= 2 && (spread(v) as number) <= Math.max(MASSING_TOLERANCES.heightAgreeM, MASSING_TOLERANCES.heightAgreeShare * Math.max(...v))
-  const a = eaves(false)
-  const t = eaves(true)
-  const labelled = { eavesM: a, spreadM: spread(a) }
-  const turned = { eavesM: t, spreadM: spread(t) }
-  if (ok(a) || a.length < 2) return { assignment: ok(a) || !ok(t) ? 'AS_LABELLED' : 'TURNED_90', labelled, turned, why: ok(a) ? `the labelled sides agree on the eaves (${a.join(' / ')} m)` : `fewer than two views to compare (${a.join(' / ') || 'none'})` }
-  if (ok(t)) return { assignment: 'TURNED_90', labelled, turned, why: `registered as labelled the views put the eaves at ${a.join(' / ')} m; turned by 90° they agree (${t.join(' / ')} m): the elevations draw the model's sides turned — read so, named, no wall moved` }
-  return { assignment: 'UNDECIDED', labelled, turned, why: `neither the labelled sides (${a.join(' / ')} m) nor the turned ones (${t.join(' / ')} m) agree on the eaves: the side each elevation draws is not settled` }
+  const judged = (k: 'agreesLabelled' | 'agreesTurned') => perBody.filter((b) => b[k] !== null)
+  const allAgree = (k: 'agreesLabelled' | 'agreesTurned'): boolean => judged(k).length > 0 && judged(k).every((b) => b[k] === true)
+  const describe = (k: 'labelled' | 'turned'): string => perBody.filter((b) => b[k].length > 0).map((b) => `${b.bodyId} ${b[k].map((x) => x.eavesM).join('/')} m`).join('; ') || 'none'
+  const mapping = (turn: boolean): Record<string, Side> => Object.fromEntries(sketches.flatMap((s) => { const lab = sideOf(s.facade); return lab ? [[s.frameId, turn ? TURN[lab] : lab]] : [] }))
+  const base = { labelled: { eavesM: flat('labelled'), spreadM: spread(flat('labelled')) }, turned: { eavesM: flat('turned'), spreadM: spread(flat('turned')) }, perBody }
+  if (judged('agreesLabelled').length === 0) return { ...base, assignment: 'AS_LABELLED', confirmed: [], sideOf: mapping(false), why: `no body is read by two views (${describe('labelled')}): read as labelled, nothing confirmed by agreement` }
+  if (allAgree('agreesLabelled')) return { ...base, assignment: 'AS_LABELLED', confirmed: perBody.filter((b) => b.agreesLabelled).map((b) => b.bodyId), sideOf: mapping(false), why: `each body's views agree as labelled (${describe('labelled')})` }
+  if (allAgree('agreesTurned')) return { ...base, assignment: 'TURNED_90', confirmed: perBody.filter((b) => b.agreesTurned).map((b) => b.bodyId), sideOf: mapping(true), why: `as labelled the views disagree on a body (${describe('labelled')}); turned by 90° every body's views agree (${describe('turned')}): the elevations draw the model's sides turned — read so for every consumer, named, no wall moved` }
+  const ok = perBody.filter((b) => b.agreesLabelled === true).map((b) => b.bodyId)
+  return { ...base, assignment: 'UNDECIDED', confirmed: ok, sideOf: mapping(false), why: `neither as labelled (${describe('labelled')}) nor turned (${describe('turned')}) does every body's pair of views agree; ${ok.length > 0 ? `${ok.join(', ')} agree as labelled and stay confirmed` : 'no body is confirmed'}` }
 }
 
 /**
@@ -539,11 +613,12 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
   const best = new Map<string, { score: number; p: CorrectionProposal }>()
   const accounts: MassingProposalAccount[] = []
   const orientation = orientationOf(sketches, m, sideOf)
-  if (orientation.assignment === 'UNDECIDED') return { proposals: [], accounts: sketches.map((s) => ({ frameId: s.frameId, proposed: [], skipped: [{ why: orientation.why }] })), orientation }
+  // R2: UNDECIDED blocks only the bodies whose views disagree; the confirmed ones are proposed for, as labelled
   const turned = orientation.assignment === 'TURNED_90'
+  const allowed = (id: string): boolean => orientation.assignment !== 'UNDECIDED' || (orientation.confirmed ?? []).includes(id)
   for (const s of sketches) {
     const lab = sideOf(s.facade)
-    const side = lab ? (turned ? TURN[lab] : lab) : undefined
+    const side = orientation.sideOf?.[s.frameId] ?? (lab ? (turned ? TURN[lab] : lab) : undefined)
     const acc: MassingProposalAccount = { frameId: s.frameId, ...(side ? { side } : {}), proposed: [], skipped: [] }
     accounts.push(acc)
     if (!side) {
@@ -558,6 +633,16 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
     // a registration the analyzer made is used only where the sides are as labelled (the turn is not its hypothesis)
     const reg = turned ? undefined : views.find((v) => v.frameId === s.frameId && (v.heights || v.roofAnchored))
     for (const b of bodies) {
+      if (!allowed(b.id)) {
+        acc.skipped.push({ bodyId: b.id, why: `ORIENTATION_UNDECIDED for ${b.id}: ${orientation.why}` })
+        continue
+      }
+      // R2: only the stretch this body alone occupies on this side is read (a body in front of or behind another is not)
+      const own = readableStretch(b.rect, bodies.filter((q) => q !== b).map((q) => q.rect), side)
+      if (!own) {
+        acc.skipped.push({ bodyId: b.id, why: `BODY_HIDDEN_ON_SIDE: on the ${side.toLowerCase()} side ${b.id}'s stretch is shared with another body (hidden, or not told apart)` })
+        continue
+      }
       const view = reg ?? (xs.length > 0 ? (() => {
         // the whole house's walls in the sketch against the model's whole extent on that side (the body's own may be hidden)
         const all = bodies.map((q) => extentOn(q.rect, side))
@@ -568,7 +653,7 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         acc.skipped.push({ bodyId: b.id, why: 'the elevation is not registered with heights and its walls cannot register it by the plan' })
         continue
       }
-      const e = extentOn(b.rect, side)
+      const e = own
       const x0 = Math.min(pxOf(view.projection, e.lo), pxOf(view.projection, e.hi))
       const x1 = Math.max(pxOf(view.projection, e.lo), pxOf(view.projection, e.hi))
       // the sketch's roof surfaces over this body: the one that covers most of its stretch
@@ -596,7 +681,6 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         acc.skipped.push({ bodyId: b.id, why: `the drawn roof agrees with the model's (${kind}, overlap ${ov.toFixed(2)})` })
         continue
       }
-      const wx = s.walls.flatMap((w) => w.map((q) => q[0])).filter((x) => x >= x0 - 3 && x <= x1 + 3)
       const p: CorrectionProposal = {
         proposalId: `sk-roof-${b.id}-${s.frameId.slice(-10)}`,
         baseRevision: rev,
@@ -606,7 +690,9 @@ export function roofProposalsFromSketches(sketches: readonly SketchForMassing[],
         origin: 'SKETCH',
         uncertainty: 'MEDIUM',
         justification: `${disagree}; the sketch of the ${lab?.toLowerCase()} elevation${turned ? ` (drawing the model's ${side.toLowerCase()} side: ${orientation.why})` : ''} draws a ${prof.shape.toLowerCase()} ${kind.toLowerCase()} roof over it`,
-        patch: { roofKind: kind, roofPolygon: poly.map((q) => [q[0], q[1]] as [number, number]), side, ...(reg ? {} : { wallLeftX: Math.min(...(wx.length > 0 ? wx : [x0])), wallRightX: Math.max(...(wx.length > 0 ? wx : [x1])), groundY: s.groundRow }) },
+        // R2: the registration the proposal was read through travels with it — the whole house's walls against the whole
+        // house's extent — so the executor reads the same scale (the narrow wall ends of one body gave the 87° annex)
+        patch: { roofKind: kind, roofPolygon: poly.map((q) => [q[0], q[1]] as [number, number]), side, ...(reg ? {} : { wallLeftX: Math.min(...xs), wallRightX: Math.max(...xs), groundY: s.groundRow, extent: 'HOUSE' as const }) },
       }
       // a band (slopes) or a triangle (gable end) is a clear form; a registered view beats one made by the plan
       const score = (prof.shape === 'BAND' || prof.shape === 'TRIANGLE' ? 2 : 1) + (reg ? 1 : 0) + over[0].share

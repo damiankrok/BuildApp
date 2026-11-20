@@ -381,3 +381,90 @@ describe('v3.54.17 §6 orientation apart from the vertical: elevations labelled 
     expect(out.model.roofs[0]).toMatchObject({ kind: 'GABLE', ridgeAxis: 'X' })
   })
 })
+
+// ---- v3.54.17 R2 §4: orientation and measurement per body; the 87° annex at its cause; a plausibility check -------
+describe('v3.54.17 R2 §4: per body, not one eaves for the whole house', () => {
+  const side = (f: string): Side | undefined => (['FRONT', 'RIGHT', 'REAR', 'LEFT'].includes(f) ? (f as Side) : undefined)
+  // the audit's probe: two joined bodies, eaves 3 m and 2 m; the lower one hidden behind the main body on the left
+  const HOUSE: TrueBody = { id: 'house', minX: 0, maxX: 10, minZ: 0, maxZ: 6, eaves: 3, ridge: 5.2, axis: 'X' }
+  const LOW: TrueBody = { id: 'low', minX: 10, maxX: 14, minZ: 0, maxZ: 4, eaves: 2, ridge: 3.4, axis: 'Z' }
+  const sketchesOf = (bodies: TrueBody[], relabel?: Record<Side, Side>) => (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).map((s) => {
+    const shown = s === 'LEFT' ? bodies.filter((b) => b.id !== 'low') : bodies
+    const d = drawnOf(s, shown)
+    return { facade: relabel ? relabel[s] : s, frameId: frameOf(s), groundRow: ZERO, walls: d.walls.map((w) => w.poly), roofs: d.roofs.map((r) => r.poly) }
+  })
+  const model2 = (): CanonicalBuildingModel => modelOf([spec(HOUSE), spec(LOW)])
+  it("the audit's probe: different eaves of two bodies are not a dispute — AS_LABELLED, both bodies confirmed, the hidden one named", async () => {
+    const { orientationOf } = await import('../src/consult/massing/ops.js')
+    const o = orientationOf(sketchesOf([HOUSE, LOW]), model2(), side)
+    expect(o.assignment).toBe('AS_LABELLED')
+    const by = new Map((o.perBody ?? []).map((b) => [b.bodyId, b]))
+    const ids = [...by.keys()]
+    expect(ids).toHaveLength(2)
+    const eaves = (id: string) => (by.get(id)?.labelled ?? []).map((x) => x.eavesM)
+    const main = ids.find((id) => eaves(id).every((e) => near(e, 3, 0.15))) as string
+    const low = ids.find((id) => id !== main) as string
+    expect(eaves(main).length).toBeGreaterThanOrEqual(2)
+    expect(eaves(low).every((e) => near(e, 2, 0.15))).toBe(true)
+    expect(o.confirmed).toEqual(expect.arrayContaining([main, low]))
+    // the lower body is read on the right, where it stands in front; on the left it is behind the main body: named, not read
+    expect((by.get(low)?.hidden ?? []).map((h) => h.side)).toEqual(['LEFT'])
+    expect((by.get(low)?.labelled ?? []).map((x) => x.side)).toContain('RIGHT')
+  })
+  it('the same two bodies labelled one side round are still found turned; the mapping is one for every elevation', async () => {
+    const { orientationOf } = await import('../src/consult/massing/ops.js')
+    const relabel: Record<Side, Side> = { RIGHT: 'FRONT', REAR: 'RIGHT', LEFT: 'REAR', FRONT: 'LEFT' }
+    const o = orientationOf(sketchesOf([HOUSE, LOW], relabel), model2(), side)
+    expect(o.assignment).toBe('TURNED_90')
+    expect(o.sideOf).toEqual({ [frameOf('FRONT')]: 'FRONT', [frameOf('RIGHT')]: 'RIGHT', [frameOf('REAR')]: 'REAR', [frameOf('LEFT')]: 'LEFT' })
+  })
+  it('an uncertain body does not block a well-confirmed one: UNDECIDED names it, the other is still proposed for', async () => {
+    const { orientationOf, roofProposalsFromSketches } = await import('../src/consult/massing/ops.js')
+    const sk = sketchesOf([HOUSE, LOW])
+    // the rear drawing puts the low body 0.9 m higher than the front does: its two views disagree
+    const rear = sk.find((x) => x.facade === 'REAR') as (typeof sk)[number]
+    const shifted = drawnOf('REAR', [HOUSE, { ...LOW, eaves: 2.9, ridge: 4.3 }])
+    rear.walls = shifted.walls.map((w) => w.poly)
+    rear.roofs = shifted.roofs.map((r) => r.poly)
+    const flatMain = modelOf([spec(HOUSE, { kind: 'FLAT', eavesM: 3, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined }), spec(LOW)])
+    const o = orientationOf(sk, flatMain, side)
+    expect(o.assignment).toBe('UNDECIDED')
+    expect(o.confirmed).toHaveLength(1)
+    const { proposals, accounts } = roofProposalsFromSketches(sk, flatMain, [], modelRevision(flatMain), side)
+    expect(proposals.map((p) => p.operation)).toEqual(['SET_ROOF'])
+    expect(accounts.flatMap((a) => a.skipped).some((x) => /ORIENTATION_UNDECIDED/.test(x.why))).toBe(true)
+  })
+  it('the 87° annex at its cause: a body hidden on a side is not proposed for there; a patch forced through it is refused before any command', async () => {
+    const { roofProposalsFromSketches } = await import('../src/consult/massing/ops.js')
+    // a narrow annex in front of the main body on the right side, its own stretch there wholly the main body's
+    const MAIN3: TrueBody = { id: 'm3', minX: 0, maxX: 12.5, minZ: 0, maxZ: 7.9, eaves: 4.2, ridge: 7.8, axis: 'X' }
+    const ANNEX: TrueBody = { id: 'a3', minX: 12.5, maxX: 13.15, minZ: 0, maxZ: 7.27, eaves: 2.8 }
+    const m = modelOf([spec(MAIN3), spec(ANNEX, { kind: 'GABLE', ridgeAxis: 'X', pitchDeg: 30, eavesM: 2.8, ridgeM: 3.0 })])
+    const sk = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).map((s) => { const d = drawnOf(s, [MAIN3, ANNEX]); return { facade: s, frameId: frameOf(s), groundRow: ZERO, walls: d.walls.map((w) => w.poly), roofs: d.roofs.map((r) => r.poly) } })
+    const { proposals, accounts } = roofProposalsFromSketches(sk, m, [], modelRevision(m), side)
+    const annexBody = accounts.flatMap((a) => a.skipped).filter((x) => /BODY_HIDDEN_ON_SIDE/.test(x.why))
+    expect(annexBody.length).toBeGreaterThan(0)
+    expect(proposals.every((p) => !(p.patch as { side?: string } | undefined)?.side || (p.patch as { side?: string }).side !== 'RIGHT' || !String(p.targetId).includes('a3'))).toBe(true)
+    // the host's proposal forced through: the annex on the right, registered by its own narrow wall ends
+    const roofId = m.roofs.find((r) => r.footprint.minX > 12)?.id as string
+    const right = drawnOf('RIGHT', [MAIN3])
+    const forced = propose(m, { operation: 'SET_ROOF', targetId: roofId, frameId: frameOf('RIGHT'), patch: { picture: 2, roofKind: 'GABLE', roofPolygon: right.roofs[0].poly, side: 'RIGHT', wallLeftX: col('RIGHT', 0.3), wallRightX: col('RIGHT', 7.27), groundY: ZERO } })
+    const out = executeCorrections({ model: m, views: [], pictures: pictures([MAIN3, ANNEX]), proposals: [forced] })
+    expect(out.records[0]).toMatchObject({ status: 'NEEDS_EVIDENCE', code: 'BODY_HIDDEN_ON_SIDE' })
+  })
+  it('counter-trial: a very steep but well-documented roof on a small body is built (70°, below the kernel limit) — no clamp, no refusal of small bodies', async () => {
+    const { roofProposalsFromSketches } = await import('../src/consult/massing/ops.js')
+    const MAIN4: TrueBody = { id: 'm4', minX: 0, maxX: 10, minZ: 0, maxZ: 8, eaves: 3.2, ridge: 6.0, axis: 'X' }
+    const TOWER: TrueBody = { id: 't4', minX: 10, maxX: 13, minZ: 0, maxZ: 3, eaves: 3, ridge: 3 + 1.5 * Math.tan((70 * Math.PI) / 180), axis: 'X' }
+    const m = modelOf([spec(MAIN4), spec(TOWER, { kind: 'FLAT', eavesM: 3, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined })])
+    const sk = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).map((s) => { const d = drawnOf(s, [MAIN4, TOWER]); return { facade: s, frameId: frameOf(s), groundRow: ZERO, walls: d.walls.map((w) => w.poly), roofs: d.roofs.map((r) => r.poly) } })
+    const { proposals } = roofProposalsFromSketches(sk, m, [], modelRevision(m), side)
+    const forTower = proposals.filter((p) => m.roofs.find((r) => r.id === p.targetId)?.footprint.minX === 10 || String(p.targetId).includes('t4'))
+    expect(forTower).toHaveLength(1)
+    const out = executeCorrections({ model: m, views: [], pictures: pictures([MAIN4, TOWER]), proposals: forTower })
+    expect(out.records[0].status).toBe('COMMITTED')
+    const built = out.model.roofs.find((r) => r.footprint.minX >= 10 - 1e-6)
+    expect(built).toMatchObject({ kind: 'GABLE', ridgeAxis: 'X' })
+    expect(near(built?.pitchDeg ?? 0, 70, 3)).toBe(true)
+  })
+})

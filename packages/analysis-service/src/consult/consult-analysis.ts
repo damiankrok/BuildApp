@@ -57,6 +57,7 @@ import { identityOf } from '../identity.js'
 import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
+import type { SketchProposalAccount } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
 import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
 import { massingRun } from './massing-result.js'
@@ -1118,9 +1119,12 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     const run = good.run
     const rev = modelRevision(run.reconstruction.model)
     const views = viewsOfRun(run.reconstruction.facadeAlignment.views)
-    const accounts = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, run.reconstruction.model, views, rev))
     // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
     const roofs = roofProposalsFromSketches(sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) })), run.reconstruction.model, views, rev, sideOfFacade)
+    // v3.54.17 R2: ONE side mapping for every consumer of the sketches — under a TURNED_90 hypothesis the openings are not
+    // bound through the analyzer's registrations made as labelled (that would bind them to the other side)
+    const turnedSides = roofs.orientation.assignment === 'TURNED_90'
+    const accounts = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => (turnedSides ? ({ sketchId: x.frameId, frameId: x.frameId, side: roofs.orientation.sideOf?.[x.frameId], proposals: [] as CorrectionProposal[], agreed: [], skipped: [{ sketchId: x.frameId, why: `ORIENTATION_TURNED_90: ${roofs.orientation.why} — this elevation is read as the model's ${(roofs.orientation.sideOf?.[x.frameId] ?? '?').toLowerCase()} side; its openings are not bound through a registration made as labelled` }] }) as SketchProposalAccount : proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, run.reconstruction.model, views, rev)))
     const proposals = [...roofs.proposals, ...accounts.flatMap((a) => a.proposals)]
     const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped })), records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
     sketchSummary.semantic = sem

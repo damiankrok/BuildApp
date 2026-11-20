@@ -1,0 +1,150 @@
+{
+ "orientation": {
+  "labelled": {
+   "eavesM": [
+    2.4,
+    6.87,
+    6.8
+   ],
+   "spreadM": 4.47
+  },
+  "turned": {
+   "eavesM": [
+    3.99,
+    3.86,
+    3.88
+   ],
+   "spreadM": 0.13
+  },
+  "perBody": [
+   {
+    "bodyId": "ring-main-0",
+    "labelled": [
+     {
+      "frameId": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+      "side": "LEFT",
+      "eavesM": 2.4
+     },
+     {
+      "frameId": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+      "side": "FRONT",
+      "eavesM": 6.87
+     },
+     {
+      "frameId": "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+      "side": "REAR",
+      "eavesM": 6.8
+     }
+    ],
+    "turned": [
+     {
+      "frameId": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+      "side": "FRONT",
+      "eavesM": 3.99
+     },
+     {
+      "frameId": "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+      "side": "LEFT",
+      "eavesM": 3.86
+     }
+    ],
+    "hidden": [],
+    "agreesLabelled": false,
+    "agreesTurned": true
+   },
+   {
+    "bodyId": "ring-attached-0-0",
+    "labelled": [],
+    "turned": [
+     {
+      "frameId": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+      "side": "RIGHT",
+      "eavesM": 3.88
+     }
+    ],
+    "hidden": [
+     {
+      "frameId": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+      "side": "LEFT",
+      "why": "on the left side ring-attached-0-0's stretch is shared with a body in front of it: hidden or not told apart, not read"
+     }
+    ],
+    "agreesLabelled": null,
+    "agreesTurned": null
+   }
+  ],
+  "assignment": "TURNED_90",
+  "confirmed": [
+   "ring-main-0"
+  ],
+  "sideOf": {
+   "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b": "FRONT",
+   "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95": "RIGHT",
+   "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e": "LEFT"
+  },
+  "why": "as labelled the views disagree on a body (ring-main-0 2.4/6.87/6.8 m); turned by 90° every body's views agree (ring-main-0 3.99/3.86 m; ring-attached-0-0 3.88 m): the elevations draw the model's sides turned — read so for every consumer, named, no wall moved"
+ },
+ "massing": [
+  {
+   "frameId": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+   "side": "FRONT",
+   "proposed": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "the body has no roof; the sketch of the left elevation (drawing the model's front side: as labelled the views disagree on a body (ring-main-0 2.4/6.87/6.8 m); turned by 90° every body's views agree (ring-main-0 3.99/3.86 m; ring-attached-0-0 3.88 m): the elevations draw the model's sides turned — read so for every consumer, named, no wall moved) draws a band gable roof over it"
+    }
+   ],
+   "skipped": [
+    {
+     "bodyId": "ring-attached-0-0",
+     "why": "BODY_HIDDEN_ON_SIDE: on the front side ring-attached-0-0's stretch is shared with another body (hidden, or not told apart)"
+    }
+   ]
+  },
+  {
+   "frameId": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+   "side": "RIGHT",
+   "proposed": [],
+   "skipped": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "BODY_HIDDEN_ON_SIDE: on the right side ring-main-0's stretch is shared with another body (hidden, or not told apart)"
+    },
+    {
+     "bodyId": "ring-attached-0-0",
+     "why": "BODY_HIDDEN_ON_SIDE: on the right side ring-attached-0-0's stretch is shared with another body (hidden, or not told apart)"
+    }
+   ]
+  },
+  {
+   "frameId": "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+   "side": "LEFT",
+   "proposed": [],
+   "skipped": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "BODY_HIDDEN_ON_SIDE: on the left side ring-main-0's stretch is shared with another body (hidden, or not told apart)"
+    },
+    {
+     "bodyId": "ring-attached-0-0",
+     "why": "BODY_HIDDEN_ON_SIDE: on the left side ring-attached-0-0's stretch is shared with another body (hidden, or not told apart)"
+    }
+   ]
+  }
+ ],
+ "records": [
+  {
+   "proposalId": "sk-roof-ring-main-0-30f92f6a1b",
+   "operation": "SET_ROOF",
+   "status": "COMMITTED",
+   "code": null,
+   "why": "applied, compiled and measured",
+   "values": {
+    "eavesM": 3.994617,
+    "ridgeM": 7.473183,
+    "pitchDeg": 41.4
+   },
+   "registration": "registered by the house's plan extent: 688 px of building against 13.15 m of plan: 1.91 cm/px, vertical the same (isotropic drawing), ground row 565"
+  }
+ ]
+}

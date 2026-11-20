@@ -1,0 +1,275 @@
+{
+ "scope": "production orientationOf after R2 on the audit probe geometry (not a full host)",
+ "differentEaves": {
+  "labelled": {
+   "eavesM": [
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2
+   ],
+   "spreadM": 1
+  },
+  "turned": {
+   "eavesM": [
+    0.86,
+    0.86,
+    4.67,
+    7,
+    1.29,
+    4.67,
+    7
+   ],
+   "spreadM": 6.14
+  },
+  "perBody": [
+   {
+    "bodyId": "main",
+    "labelled": [
+     {
+      "frameId": "front",
+      "side": "FRONT",
+      "eavesM": 3
+     },
+     {
+      "frameId": "rear",
+      "side": "REAR",
+      "eavesM": 3
+     },
+     {
+      "frameId": "right",
+      "side": "RIGHT",
+      "eavesM": 3
+     },
+     {
+      "frameId": "left",
+      "side": "LEFT",
+      "eavesM": 3
+     }
+    ],
+    "turned": [
+     {
+      "frameId": "front",
+      "side": "RIGHT",
+      "eavesM": 0.86
+     },
+     {
+      "frameId": "rear",
+      "side": "LEFT",
+      "eavesM": 0.86
+     },
+     {
+      "frameId": "right",
+      "side": "REAR",
+      "eavesM": 4.67
+     },
+     {
+      "frameId": "left",
+      "side": "FRONT",
+      "eavesM": 7
+     }
+    ],
+    "hidden": [],
+    "agreesLabelled": true,
+    "agreesTurned": false
+   },
+   {
+    "bodyId": "garage",
+    "labelled": [
+     {
+      "frameId": "front",
+      "side": "FRONT",
+      "eavesM": 2
+     },
+     {
+      "frameId": "rear",
+      "side": "REAR",
+      "eavesM": 2
+     },
+     {
+      "frameId": "right",
+      "side": "RIGHT",
+      "eavesM": 2
+     }
+    ],
+    "turned": [
+     {
+      "frameId": "front",
+      "side": "RIGHT",
+      "eavesM": 1.29
+     },
+     {
+      "frameId": "right",
+      "side": "REAR",
+      "eavesM": 4.67
+     },
+     {
+      "frameId": "left",
+      "side": "FRONT",
+      "eavesM": 7
+     }
+    ],
+    "hidden": [
+     {
+      "frameId": "left",
+      "side": "LEFT",
+      "why": "on the left side garage's stretch is shared with a body in front of it: hidden or not told apart, not read"
+     }
+    ],
+    "agreesLabelled": true,
+    "agreesTurned": false
+   }
+  ],
+  "assignment": "AS_LABELLED",
+  "confirmed": [
+   "main",
+   "garage"
+  ],
+  "sideOf": {
+   "front": "FRONT",
+   "rear": "REAR",
+   "right": "RIGHT",
+   "left": "LEFT"
+  },
+  "why": "each body's views agree as labelled (main 3/3/3/3 m; garage 2/2/2 m)"
+ },
+ "equalEavesControl": {
+  "labelled": {
+   "eavesM": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "spreadM": 0
+  },
+  "turned": {
+   "eavesM": [
+    1.29,
+    1.29,
+    7,
+    7,
+    1.29,
+    7,
+    7
+   ],
+   "spreadM": 5.71
+  },
+  "perBody": [
+   {
+    "bodyId": "main",
+    "labelled": [
+     {
+      "frameId": "front",
+      "side": "FRONT",
+      "eavesM": 3
+     },
+     {
+      "frameId": "rear",
+      "side": "REAR",
+      "eavesM": 3
+     },
+     {
+      "frameId": "right",
+      "side": "RIGHT",
+      "eavesM": 3
+     },
+     {
+      "frameId": "left",
+      "side": "LEFT",
+      "eavesM": 3
+     }
+    ],
+    "turned": [
+     {
+      "frameId": "front",
+      "side": "RIGHT",
+      "eavesM": 1.29
+     },
+     {
+      "frameId": "rear",
+      "side": "LEFT",
+      "eavesM": 1.29
+     },
+     {
+      "frameId": "right",
+      "side": "REAR",
+      "eavesM": 7
+     },
+     {
+      "frameId": "left",
+      "side": "FRONT",
+      "eavesM": 7
+     }
+    ],
+    "hidden": [],
+    "agreesLabelled": true,
+    "agreesTurned": false
+   },
+   {
+    "bodyId": "garage",
+    "labelled": [
+     {
+      "frameId": "front",
+      "side": "FRONT",
+      "eavesM": 3
+     },
+     {
+      "frameId": "rear",
+      "side": "REAR",
+      "eavesM": 3
+     },
+     {
+      "frameId": "right",
+      "side": "RIGHT",
+      "eavesM": 3
+     }
+    ],
+    "turned": [
+     {
+      "frameId": "front",
+      "side": "RIGHT",
+      "eavesM": 1.29
+     },
+     {
+      "frameId": "right",
+      "side": "REAR",
+      "eavesM": 7
+     },
+     {
+      "frameId": "left",
+      "side": "FRONT",
+      "eavesM": 7
+     }
+    ],
+    "hidden": [
+     {
+      "frameId": "left",
+      "side": "LEFT",
+      "why": "on the left side garage's stretch is shared with a body in front of it: hidden or not told apart, not read"
+     }
+    ],
+    "agreesLabelled": true,
+    "agreesTurned": false
+   }
+  ],
+  "assignment": "AS_LABELLED",
+  "confirmed": [
+   "main",
+   "garage"
+  ],
+  "sideOf": {
+   "front": "FRONT",
+   "rear": "REAR",
+   "right": "RIGHT",
+   "left": "LEFT"
+  },
+  "why": "each body's views agree as labelled (main 3/3/3/3 m; garage 3/3/3 m)"
+ }
+}
