@@ -230,6 +230,17 @@ describe('v3.54.17 §8 wrong roof: a flat base roof corrected to the gable the e
     expect(out.transactions[0].collateral).toEqual([])
   })
 
+  it('R3: a partition that followed the old roof follows the new one (not left at its flat storey height through it), and the roof keeps its material', () => {
+    const partition = { type: 'createWall', id: 'part-1', levelId: 'lvl-0', start: { x: 5, z: 0.3 }, end: { x: 5, z: 7.7 }, thickness: 0.12, height: 6, kind: 'INTERIOR', topProfile: { kind: 'FOLLOW_ROOF', roofId: 'roof-mass-main' } } as BuildingCommand
+    const base = modelOf([spec(MAIN, { kind: 'FLAT', eavesM: 3.2, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined })], [...window, partition])
+    const m: CanonicalBuildingModel = { ...base, materials: [...base.materials, { id: 'mat-roof', name: 'roof', color: '#55504c' }], roofs: base.roofs.map((r) => ({ ...r, materialId: 'mat-roof' })) }
+    const p = propose(m, { operation: 'SET_ROOF', targetId: 'roof-mass-main', frameId: frameOf('FRONT'), patch: { roofKind: 'GABLE', roofPolygon: front.roofs[0] as Array<[number, number]> } })
+    const out = executeCorrections({ model: m, views, pictures: pics, proposals: [p] })
+    expect(out.records[0].status, out.records[0].why).toBe('COMMITTED')
+    expect(out.model.walls.find((w) => w.id === 'part-1')?.topProfile).toEqual({ kind: 'FOLLOW_ROOF', roofId: 'roof-mass-main' })
+    expect(out.model.roofs.find((r) => r.id === 'roof-mass-main')?.materialId).toBe('mat-roof')
+  })
+
   it('the same correction read on the gable-end elevation (a triangle) gives the same ridge direction', () => {
     const m = wrong()
     const out = executeCorrections({ model: m, views, pictures: pics, proposals: [propose(m, { operation: 'SET_ROOF', targetId: 'roof-mass-main', frameId: frameOf('RIGHT'), patch: { roofKind: 'GABLE', roofPolygon: right.roofs[0] as Array<[number, number]> } })] })

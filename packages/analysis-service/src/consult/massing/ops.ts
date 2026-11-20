@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.2.0' as const
+export const MASSING_OPS_VERSION = '1.3.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export const MAX_OVERHANG_M = 1.0
 export const MAX_PITCH_DEG = 85
@@ -311,7 +311,12 @@ export function bindSetRoof(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   }
   const others2 = bodies.filter((b) => b.id !== body.id).map((b) => b.rect)
   const built = bodyCommands({ id: body.id, rect: body.rect, roof: spec, provenance: {} }, top.id, top.elevation, others2, 0.3).filter((c) => c.type === 'createRoof') as Array<Extract<BuildingCommand, { type: 'createRoof' }>>
-  const roofCmd = { ...built[0], id: keepId, ...(overhangM > 0 ? { overhang: overhangM } : {}), ...(spec.kind === 'GABLE' ? { capWallIds: topWalls.map((w) => w.id) } : {}), evidence: { status: 'SOURCE_DERIVED' as const, source: pic.frameId, locator: `roof polygon on ${pic.frameId}`, interpretation: `${spec.kind}${spec.ridgeAxis ? ` along ${spec.ridgeAxis}` : ''} read from the source elevation through ${hv.how}` } }
+  // v3.54.17 R3: every wall that followed a removed roof (interior partitions under it included) follows the new one —
+  // the cascade leaves them with their flat storey height, which runs up through the new roof — and the roof keeps its
+  // material
+  const followers = m.walls.filter((w) => !topWalls.some((t) => t.id === w.id) && w.topProfile?.kind === 'FOLLOW_ROOF' && removedRoofs.includes(w.topProfile.roofId)).map((w) => w.id)
+  const oldMaterial = m.roofs.find((r) => removedRoofs.includes(r.id) && r.materialId)?.materialId
+  const roofCmd = { ...built[0], id: keepId, ...(oldMaterial && !built[0].materialId ? { materialId: oldMaterial } : {}), ...(overhangM > 0 ? { overhang: overhangM } : {}), ...(spec.kind === 'GABLE' ? { capWallIds: [...topWalls.map((w) => w.id), ...followers] } : {}), evidence: { status: 'SOURCE_DERIVED' as const, source: pic.frameId, locator: `roof polygon on ${pic.frameId}`, interpretation: `${spec.kind}${spec.ridgeAxis ? ` along ${spec.ridgeAxis}` : ''} read from the source elevation through ${hv.how}` } }
   cmds.push(roofCmd as BuildingCommand)
   const removedDeps = m.roofOpenings.filter((o) => removedRoofs.includes(o.roofId) || body.planeIds.includes(o.roofId)).map((o) => o.id)
   // v3.54.17 R3: interior walls under the roof follow its new underside (their tops are capped by it), nothing else of them
