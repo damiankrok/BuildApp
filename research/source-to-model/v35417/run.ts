@@ -118,12 +118,24 @@ if (argv.includes('--check-live')) {
   let i = 0
   checkTransport = { id: 'replay', model: rec[0]?.turn.model ?? modelId, maxOutputTokens: 16000, send: async () => { const r = rec[i++]; if (!r) throw new Error('check replay: no recorded turn left (not sent)'); return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } } } }
 }
-const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }) : undefined
+// v3.54.17: the plan outline read (no-model path), live (recorded to outline-turns.json) or replayed in order
+const outlineTurns: Recorded[] = []
+let outlineTransport: ConsultantModel | undefined
+if (argv.includes('--outline-live')) {
+  const live = anthropicConsultant({ model: modelId, maxOutputTokens: 4000, timeoutMs: 180_000, effort: 'low', ...transportOpts })
+  if (!live.available()) throw new Error('no API key in this process environment: --outline-live refused')
+  outlineTransport = { ...live, send: async (req) => { const t0o = Date.now(); const t = await live.send(req); outlineTurns.push({ request: { systemSha: req.system.slice(0, 40), note: 'outline', latencyMs: Date.now() - t0o, at: new Date(t0o).toISOString() }, turn: t }); writeFileSync(join(out, 'outline-turns.json'), `${JSON.stringify(outlineTurns, null, 1)}\n`); return t } }
+} else if (opt('outline-replay')) {
+  const rec = JSON.parse(readFileSync(opt('outline-replay') as string, 'utf8')) as Recorded[]
+  let i = 0
+  outlineTransport = { id: 'replay', model: rec[0]?.turn.model ?? modelId, maxOutputTokens: 4000, send: async () => { const r = rec[i++]; if (!r) throw new Error('outline replay: no recorded turn left (not sent)'); return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } } } }
+}
+const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') || argv.includes('--outline-live') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : '', argv.includes('--outline-live') ? 'plan-outline' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }) : undefined
 const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },
   { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(opt('cache') as string), offline: true, recogniser, content, ...(process.env.BUILDPLAN_DEBUG === '1' ? { debug: (m: string) => process.stderr.write(`DBG ${m}\n`) } : {}) },
-  { model: loopTransport ?? checkTransport ?? transport, metricModel: transport, price: loopTransport ? PRICES['claude-sonnet-5-5'] : PRICES[opt('check-model') ?? modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: loopTransport ? 2 : 0, maxGeometryRounds: checkTransport ? Number(opt('geometry-rounds') ?? 2) : 0, check: checkTransport ? 'ON' : 'OFF', ...(opt('sketch-corrections') === 'OFF' ? { sketchCorrections: 'OFF' as const } : {}), keepLocalModel: true, ...(spend ? { spend } : {}), record: (e) => events.push(e) },
+  { model: loopTransport ?? checkTransport ?? transport, metricModel: transport, price: loopTransport ? PRICES['claude-sonnet-5-5'] : PRICES[opt('check-model') ?? modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: loopTransport ? 2 : 0, maxGeometryRounds: checkTransport ? Number(opt('geometry-rounds') ?? 2) : 0, check: checkTransport ? 'ON' : 'OFF', ...(opt('sketch-corrections') === 'OFF' ? { sketchCorrections: 'OFF' as const } : {}), keepLocalModel: true, ...(outlineTransport ? { outlineModel: outlineTransport, outlinePrice: PRICES[modelId] } : { massing: 'OFF' as const }), ...(spend ? { spend } : {}), record: (e) => events.push(e) },
 )
 writeFileSync(join(out, 'metric-read.json'), `${stableJson(r.metricRead ?? null)}\n`)
 if (r.sketches) {
@@ -143,6 +155,13 @@ const correctionRuns = r.sourceCheck?.correctionRuns ?? (r as { correctionRuns?:
 writeFileSync(join(out, 'corrections.json'), `${stableJson({ sketchChannel: r.sketches?.semantic ?? null, runs: correctionRuns, looks: r.geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why, afterRevision: g.afterRevision ?? null, defects: g.defects ?? [], patches: (g.patches ?? []).map((p) => ({ proposalId: p.proposalId, operation: p.operation, targetId: p.targetId, status: p.status, code: p.code ?? null, why: p.why })), reviewed: g.reviewed, observations: g.observations })) })}\n`)
 writeFileSync(join(out, 'quality.json'), `${stableJson({ sourceCheck: r.sourceCheck ? { ...r.sourceCheck, correctionRuns: undefined } : null, quality: r.sourceCheck?.quality ?? null })}\n`)
 if (r.sketchesWithoutModel) writeFileSync(join(out, 'sketches-without-model.json'), `${stableJson(r.sketchesWithoutModel)}\n`)
+if (r.massing) {
+  const { model: mm, sceneText: st, plan, ...rest } = r.massing
+  writeFileSync(join(out, 'massing.json'), `${stableJson({ ...rest, plan: plan ?? null })}\n`)
+  if (mm) writeFileSync(join(out, 'massing-model.json'), serializeModel(mm))
+  if (st) writeFileSync(join(out, 'massing-scene.json'), st)
+  console.log(`${house}: massing ${r.massing.decision} — ${r.massing.why.slice(0, 300)}`)
+}
 if (r.run) {
   mkdirSync(join(out, 'views'), { recursive: true })
   for (const v of renderModelViews(r.run.result.scene)) writeFileSync(join(out, 'views', `${v.name}.png`), v.png)

@@ -43,7 +43,8 @@ import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import type { SketchReading } from './sketch-step.js'
 import { usableGeometryFingerprint } from '../appearance/consumer.js'
 import type { LabelProblem } from './problems.js'
-import { serializeModel } from '@buildapp/model'
+import { createEmptyModel, serializeModel } from '@buildapp/model'
+import { buildMobileSceneBundle, serializeBundle } from '@buildapp/mobile-scene'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
@@ -53,6 +54,8 @@ import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, P
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
+import { readPlanOutline } from './plan-outline.js'
+import type { PlanOutlineRead } from './plan-outline.js'
 import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
 import type { DefectEntry, DefectResolution, QualitySummary } from './correct/quality.js'
@@ -102,12 +105,31 @@ export type ConsultantWiring = {
    * against the original picture). Default ON when sketches are read; OFF keeps them a reading only.
    */
   sketchCorrections?: 'ON' | 'OFF'
+  /** v3.54.17: where LOCAL built no model, trace the plan outline and build the mass from it and the elevations (default ON with sketches). */
+  massing?: 'ON' | 'OFF'
+  /** v3.54.17: the plan outline read's own transport (default: the metric read's). */
+  outlineModel?: ConsultantModel
+  outlinePrice?: Price
 }
 
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
   semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis } }
+
+/** v3.54.17: the no-model path's delivery: a mass built from the source, or the anchors it lacks. */
+export type MassingDelivery = {
+  decision: 'BUILT' | 'NOT_BUILT' | 'NOT_RUN'
+  why: string
+  plan?: Omit<PlanOutlineRead, 'raw'> & { raw?: unknown }
+  records: PatchRecord[]
+  transactions: TransactionRecord[]
+  model?: CanonicalBuildingModel
+  sceneText?: string
+  sceneSha256?: string
+  modelSha256?: string
+  usd: number
+}
 
 /** v3.54.16: one run of the correction executor: where it ran, on which revision, and every patch's and transaction's fate. */
 export type CorrectionRun = { stage: string; baseRevision: string; revision: string; delivered: boolean; records: PatchRecord[]; transactions: TransactionRecord[]; why?: string }
@@ -312,6 +334,11 @@ export type ConsultedAnalysis = {
   sketches?: SketchSummary
   /** Proof for the brief: the global house-description branch was never entered on this path. */
   globalDescription: 'DISABLED'
+  /**
+   * v3.54.17: where LOCAL built no model, the body and roof built from the plan outline and the elevations
+   * (BUILD_MASSING on the empty model): the read, the executor's record, and — when committed — the model and its scene.
+   */
+  massing?: MassingDelivery
 }
 
 const CONF_RANK: Record<string, number> = { INCONCLUSIVE: 0, WEAK: 1, SUPPORTED: 2, STRONG: 3 }
@@ -628,6 +655,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   let sketchSummary: SketchSummary | undefined
   // v3.54.16 §7: no model — the labelled elevations are still read into observations, with the missing anchors named
   let unregisteredSketches: Awaited<ReturnType<typeof readUnregisteredSketches>> | undefined
+  let massingDelivery: MassingDelivery | undefined
   if (wiring.sketches === 'ON' && !good.run && good.pkg && good.graph) {
     const pkg0 = good.pkg
     const graph0 = good.graph
@@ -651,6 +679,60 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     })
     usd += unregisteredSketches.usd
     record({ at: now().toISOString(), kind: 'SKETCHES_WITHOUT_MODEL', sides: unregisteredSketches.sides, missingAnchors })
+    // v3.54.17: the body and roof from the plan outline and these elevations, without LOCAL's model or registrations
+    if ((wiring.massing ?? 'ON') === 'ON') {
+      const diag = ((local.error?.failure() as { diagnostics?: Record<string, unknown> } | undefined)?.diagnostics ?? {}) as Record<string, unknown>
+      const planFrame = typeof diag.selectedPlanFrameId === 'string' ? diag.selectedPlanFrameId : undefined
+      const cmPerPx = typeof diag.scaleCmPerPx === 'number' ? diag.scaleCmPerPx : undefined
+      const strong = diag.metricConfidence === 'STRONG' && diag.metricRelation === 'CONFIRMED'
+      const delivery: MassingDelivery = { decision: 'NOT_RUN', why: '', records: [], transactions: [], usd: 0 }
+      massingDelivery = delivery
+      const f = planFrame ? graph0.coordinateFrames.find((x) => x.id === planFrame) : undefined
+      const fr = f ? await frameRaster(pkg0, graph0, f.id, options) : undefined
+      if (!f || !fr?.raster) delivery.why = 'PLAN_OUTLINE: the analyzer selected no plan frame to trace (or its bytes could not be decoded)'
+      else {
+        const published = (pkg0.publishedFacts as Array<{ kind?: string; key?: string; value?: number }> | undefined)?.find((x) => (x.kind ?? x.key) === 'footprint_area')?.value
+        const asset = pkg0.assets.find((a) => a.id === f.assetId)
+        const plan = await readPlanOutline({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: f.id, raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash, ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` } } : {}), ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) })
+        usd += plan.usd
+        delivery.usd += plan.usd
+        delivery.plan = plan
+        record({ at: now().toISOString(), kind: 'PLAN_OUTLINE', frameId: f.id, refused: plan.refused, check: plan.check ?? null, usd: plan.usd })
+        if (!plan.observation) delivery.why = `the plan outline gives no outline in metres: ${plan.refused.join('; ') || 'no read'}${strong ? '' : '; PLAN_SCALE: the analyzer\'s plan scale is not STRONG/CONFIRMED'}`
+        else {
+          const silhouettes = unregisteredSketches.sketches.flatMap((x) => {
+            const side = sideOfFacade(x.facade)
+            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
+            return side && x.sketch ? [{ observationId: `sk-${x.frameId.slice(-12)}`, side, frameId: x.frameId, sourceByteHash: fx?.variantByteHash ?? '', groundRow: x.sketch.groundRow ?? null, walls: x.sketch.walls.map((w) => w.polygon as Array<[number, number]>), roofs: x.sketch.roofs.map((r) => r.polygon as Array<[number, number]>) }] : []
+          })
+          const pictures: BindPicture[] = []
+          for (const [i, x] of unregisteredSketches.sketches.entries()) {
+            const fx = graph0.coordinateFrames.find((q) => q.id === x.frameId)
+            const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
+            if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
+          }
+          const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
+          const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: 'LOCAL built no model; the plan outline and the elevations are read' }], massing: { outline: plan.observation, silhouettes } })
+          delivery.records = out.records
+          delivery.transactions = out.transactions
+          const rec0 = out.records[0]
+          if (rec0?.status === 'COMMITTED') {
+            const scene = compileBuilding(out.model)
+            const sceneText = serializeBundle(buildMobileSceneBundle(out.model, { scene }))
+            delivery.decision = 'BUILT'
+            delivery.model = out.model
+            delivery.sceneText = sceneText
+            delivery.sceneSha256 = sha256Hex(sceneText)
+            delivery.modelSha256 = sha256Hex(serializeModel(out.model))
+            delivery.why = `BUILD_MASSING committed on the empty model: ${rec0.measure?.why ?? ''}`.slice(0, 600)
+          } else {
+            delivery.decision = 'NOT_BUILT'
+            delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
+          }
+          record({ at: now().toISOString(), kind: 'MASSING_WITHOUT_MODEL', decision: delivery.decision, why: delivery.why })
+        }
+      }
+    }
   }
   if (wiring.sketches === 'ON' && good.run && good.pkg && good.graph && good.metrics) {
     const run0 = good.run
@@ -1233,7 +1315,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const consultation: ConsultationSummary = { schemaVersion: '1.0.0', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, model: wiring.model.model, usd: Math.round(usd * 1e6) / 1e6, globalDescription: 'DISABLED', local: { outcome: localState.outcome, reasonCode: localState.reasonCode ?? null, modelHash: localState.modelHash ?? null }, metricRounds: rounds.map((r) => ({ round: r.round, decision: r.decision, why: r.why })), boundary: boundary ? { decision: boundary.decision, why: boundary.why, sides: boundary.sides } : null, looks: geometry.map((g) => ({ round: g.round, revision: g.revision, status: g.status, decision: g.decision, why: g.why })), roofFeatures: features.map((f) => f.id), ...(metricRead ? { metricRead: { decision: metricRead.decision, why: metricRead.why, corrected: metricRead.resolution.decisions.filter((d) => d.decision === 'CORRECTED').length, agrees: metricRead.resolution.decisions.filter((d) => d.decision === 'AGREES').length, unresolved: metricRead.resolution.decisions.filter((d) => d.decision === 'UNRESOLVED').length, newSpans: metricRead.resolution.spans.length, usd: metricRead.usd } } : {}), ...(sketchSummary ? { sketches: { sides: sketchSummary.reading.sketches.map((x) => `${x.facade}:${x.check?.verdict ?? (x.failed ? 'FAILED' : 'NONE')}`), form: sketchSummary.form.decision, finish: sketchSummary.finish.decision, usd: sketchSummary.usd } } : {}), ...(accepted ? { accepted } : {}), ...(sourceCheck?.quality ? { quality: { state: sourceCheck.quality.state, reasons: sourceCheck.quality.reasons, reviewCompleted: sourceCheck.quality.reviewCompleted, openKey: sourceCheck.quality.openKey, closedVerified: sourceCheck.quality.closedVerified } } : {}), corrections: { runs: correctionRuns.length, committed: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status === 'COMMITTED').length, 0), refused: correctionRuns.reduce((a, r) => a + r.records.filter((x) => x.status !== 'COMMITTED').length, 0), registry: CORRECTION_REGISTRY_VERSION } }
   if (good.run) (good.run.result as { consultation?: ConsultationSummary }).consultation = consultation
   record({ at: now().toISOString(), kind: 'FINAL', local: localState, final: finalState, usd, readings, roofFeatures: features, sourceCheck: sourceCheck ?? null })
-  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), globalDescription: 'DISABLED' }
+  return { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, variant: wiring.variant, ...(good.run ? { run: good.run } : {}), ...(good.error ? { error: good.error } : {}), local: localState, ...(wiring.keepLocalModel && local.run ? { localModel: local.run.reconstruction.model } : {}), final: finalState, rounds, readings: good === local ? [] : readings, spans: good === local ? [] : spans, usd, ...(boundary ? { boundary } : {}), geometry, roofFeatures: features, ...(sourceCheck ? { sourceCheck } : {}), consultation, ...(metricRead ? { metricRead } : {}), ...(sketchSummary ? { sketches: sketchSummary } : {}), ...(unregisteredSketches ? { sketchesWithoutModel: unregisteredSketches } : {}), ...(massingDelivery ? { massing: massingDelivery } : {}), globalDescription: 'DISABLED' }
 }
 
 /** What the looks established, for the result: the delivered revision, the findings still open, each correction's fate. */

@@ -429,7 +429,13 @@ export function bindBuildMassing(ctx: Ctx, p: CorrectionProposal): Bound | Refus
   const m = ctx.model
   const obs = ctx.massing
   if (!obs?.outline) return { status: 'NEEDS_EVIDENCE', code: 'NO_OUTLINE', why: 'BUILD_MASSING needs the plan outline (a plan frame read at a measured scale, or the walls of a model): none was observed' }
-  const h: MassingHypothesis = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes })
+  // §6: the side each labelled elevation draws is a hypothesis of its own — solved as labelled and turned by 90°, the
+  // reading whose views agree on every body's heights is taken (ties stay as labelled); the other is kept named
+  const agreeing = (x: MassingHypothesis): number => x.bodies.filter((b) => b.provenance.height?.fidelity === 'SOURCE_DERIVED').length
+  const asLabelled = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes })
+  const turnedH = solveMassing({ outline: obs.outline, silhouettes: obs.silhouettes.map((q) => ({ ...q, side: TURN[q.side] })) })
+  const turn = agreeing(turnedH) > agreeing(asLabelled)
+  const h: MassingHypothesis = turn ? { ...turnedH, alternatives: [...turnedH.alternatives, `the elevations draw the model's sides turned by 90° from their labels: ${agreeing(turnedH)} body/bodies' heights agree so against ${agreeing(asLabelled)} as labelled (the labelled reading is kept as an alternative)`] } : { ...asLabelled, alternatives: [...asLabelled.alternatives, ...(agreeing(turnedH) === agreeing(asLabelled) && turnedH.status === 'BUILDABLE' ? [`turned by 90° the elevations agree as well (${agreeing(turnedH)} body/bodies): the labels are kept`] : [])] }
   const record = { massing: { version: MASSING_OPS_VERSION, hypothesis: h } as Record<string, unknown>, ...(obs.outline.frameId ? { source: { frameId: obs.outline.frameId, sourceByteHash: obs.outline.sourceByteHash } } : {}) }
   if (h.status !== 'BUILDABLE') return { status: h.status === 'UNSUPPORTED_FORM' ? 'UNSUPPORTED_OPERATION' : 'NEEDS_EVIDENCE', code: h.status === 'UNSUPPORTED_FORM' ? 'MASSING_UNSUPPORTED_FORM' : 'MASSING_MISSING_ANCHORS', why: `${h.why}; missing: ${h.missing.map((x) => `${x.anchor} (${x.why})`).join('; ') || 'none'}`, record }
   const existing = bodiesOf(m).filter((b) => b.ringIds.length > 0)
