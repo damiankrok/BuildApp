@@ -847,7 +847,11 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       return { raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash }
     }
     stage('SKETCHES')
-    const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
+    // v3.54.17 R3: every orthographic elevation of the source is read, registered or not (two "side" elevations the
+    // analyzer could not tell apart were never sketched)
+    const registeredFrames = new Set(run0.reconstruction.facadeAlignment.views.map((v) => v.frameId))
+    const unregistered = (graph0.coordinateFrames ?? []).filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION' && f.roles.document === 'ELEVATION' && !registeredFrames.has(f.id)).map((f) => ({ frameId: f.id }))
+    const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), unregistered, ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
     usd += reading.usd
     const { elevationSketches, ...kept } = reading
     sketchSummary = { reading: kept, form: { decision: 'NOT_RUN', why: '' }, finish: { decision: 'NOT_RUN', why: '' }, usd: reading.usd }
@@ -855,7 +859,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     else if (elevationSketches.length === 0 && reading.appearance.observations.length === 0) sketchSummary.form.why = sketchSummary.finish.why = 'no sketch passed the proportion check'
     else {
       const base = { ...options, ...(readings.length > 0 ? { consulted: readings } : {}), ...(spans.length > 0 ? { consultedSpans: spans } : {}), ...(levels.length > 0 ? { consultedLevels: levels } : {}), ...(readings.length + spans.length > 0 ? { crossAxisWitness: true } : {}), reuseMetrics: metrics0, roofFeatures: undefined, glazedEnds: undefined }
-      const acceptedSides = reading.sketches.filter((s) => s.check?.properties.finish === 'ACCEPTED').map((s) => s.facade)
+      const acceptedSides = reading.sketches.flatMap((s) => (s.check?.properties.finish === 'ACCEPTED' && s.facade !== 'SIDE_UNSPECIFIED' ? [s.facade] : []))
       // v3.54.15: with no sketch whose form passed, only the finish is tried (PARTIAL sketches)
       const withForm = elevationSketches.length > 0 ? await attempt({ kind: 'PACKAGE', pkg: pkg0, graph: graph0 }, { ...base, elevationSketches, appearance: reading.appearance, wallTonesFrom: { model: run0.reconstruction.model, acceptedSides } }) : undefined
       const j = withForm ? judgeForm(run0.reconstruction.model, withForm.run?.reconstruction.model, elevationSketches.length) : { decision: 'ROLLBACK' as const, why: 'no sketch passed the form check (finish only)', measuredBefore: undefined, measuredAfter: undefined }
@@ -1165,6 +1169,27 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     // v3.54.17 R3: under TURNED_90 each elevation is registered (from its sketch) on the side the orientation reads, and its
     // openings and stacks are bound through that registration — no longer skipped
     sketchSideOf = turnedSides ? (roofs.orientation.sideOf as Record<string, Side> | undefined) : undefined
+    // v3.54.17 R3: the elevations no caption tells apart ("side" twice): each is tried on every model side no other
+    // elevation shows, all of them at once; a permutation is taken only when it is the only one that registers, or its
+    // drawn openings support it by a clear margin (z ≥ 1 over the next) — otherwise they stay unassigned, by name
+    {
+      const unspecified = sketchSummary.reading.sketches.filter((x) => x.sketch && x.facade === 'SIDE_UNSPECIFIED')
+      const taken = new Set(sketchSummary.reading.sketches.filter((x) => x.facade !== 'SIDE_UNSPECIFIED').map((x) => sketchSideOf?.[x.frameId] ?? sideOfFacade(x.facade)).filter((v): v is Side => !!v))
+      const free = (['FRONT', 'RIGHT', 'REAR', 'LEFT'] as Side[]).filter((sd) => !taken.has(sd))
+      if (unspecified.length > 0 && unspecified.length <= free.length && unspecified.length <= 2) {
+        const pics = await allPicturesOf(good)
+        const perms: Side[][] = unspecified.length === 1 ? free.map((f) => [f]) : free.flatMap((f1) => free.filter((f2) => f2 !== f1).map((f2) => [f1, f2]))
+        const anchorsFor = (frameId: string, side: Side): SketchAnchors | undefined => { const sv = sketchSideOf; sketchSideOf = { ...(sv ?? {}), [frameId]: side }; const a = sketchAnchors().find((q) => q.frameId === frameId); sketchSideOf = sv; return a }
+        const scored = perms.map((perm) => {
+          const regs = unspecified.map((x, i) => { const a = anchorsFor(x.frameId, perm[i]); return a ? registerFromSketch({ model: run.reconstruction.model, views: [...held], pictures: pics, witnesses: [] }, a) : undefined })
+          const ok = regs.every((r) => r && !('status' in r))
+          return { perm, ok, score: regs.reduce((t, r) => t + (r && !('status' in r) ? r.support ?? 0 : 0), 0) }
+        }).filter((q) => q.ok).sort((a, b) => b.score - a.score)
+        const pick = scored.length === 1 || (scored.length > 1 && scored[0].score - scored[1].score >= 1) ? scored[0] : undefined
+        record({ at: now().toISOString(), kind: 'SIDE_OF_UNLABELLED_ELEVATIONS', frames: unspecified.map((x) => x.frameId), options: scored.map((q) => ({ sides: q.perm, support: Math.round(q.score * 100) / 100 })), chosen: pick?.perm ?? null, why: pick ? (scored.length === 1 ? 'the only assignment under which every one registers' : 'the drawn openings support it by a clear margin') : scored.length === 0 ? 'no assignment registers them all' : 'two assignments register and the drawings do not tell them apart: left unassigned (named, not chosen)' })
+        if (pick) sketchSideOf = { ...(sketchSideOf ?? {}), ...Object.fromEntries(unspecified.map((x, i) => [x.frameId, pick.perm[i]])) }
+      }
+    }
     const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: [], records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
     sketchSummary.semantic = sem
     // v3.54.17 R3: two phases. The bodies' roofs first: a wrong eaves height in the model (two full storeys where the

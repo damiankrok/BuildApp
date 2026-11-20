@@ -25,12 +25,14 @@ import type { BuiltMeasure, IndependentRead } from './metric-read.js'
 import type { ConsultSpend, ConsultantModel, Price } from './loop.js'
 
 // 1.2.0 (v3.54.16): a side's openings are its exterior walls' openings; openings matched one to one (checkProportions)
-export const SKETCH_STEP_VERSION = '1.2.0' as const
+export const SKETCH_STEP_VERSION = '1.3.0' as const
 
 export type SketchStepInput = {
   metrics: MetricEvidenceSet
   model: CanonicalBuildingModel
   views: ReadonlyArray<{ facade: Facade; frameId: string; projection: { alongAtPx0: number; alongSign: number; mpp: number; zeroRow: number } }>
+  /** v3.54.17 R3: orthographic elevations the analyzer did not register to a side (e.g. two "side" elevations): read too, unchecked. */
+  unregistered?: ReadonlyArray<{ frameId: string }>
   /** The metric consultant's reads (for the section's printed levels), when it ran. */
   metricReads?: readonly IndependentRead[]
   rasterOf: (frameId: string) => Promise<{ raster: Raster; caption: string; sourceByteHash: string } | undefined>
@@ -39,7 +41,7 @@ export type SketchStepInput = {
 export type SketchReading = {
   version: string
   printedLevels: Array<{ literal: string; value: number; hint: string; role?: string; roleFrom?: string }>
-  sketches: Array<{ facade: Facade; frameId: string; sketch?: ElevationSketch; check?: ProportionCheck; raw?: unknown; usd: number; failed?: string; requestId?: string }>
+  sketches: Array<{ facade: Facade | 'SIDE_UNSPECIFIED'; frameId: string; sketch?: ElevationSketch; check?: ProportionCheck; raw?: unknown; usd: number; failed?: string; requestId?: string }>
   /** For the shape reader: the accepted sketches drawn at their frames' size. */
   elevationSketches: Array<{ frameId: string; raster: Raster }>
   /** For the finish consumer: the accepted sketches' zones and each one's own registration, by source byte hash. */
@@ -155,6 +157,15 @@ export async function readSketches(input: SketchStepInput): Promise<SketchReadin
       appearance.observations.push(sketchToAppearance(r.sketch, view.facade, fr.sourceByteHash))
       appearance.projections[fr.sourceByteHash] = check.projection
     }
+  }
+  // v3.54.17 R3: the elevations nobody registered are read as well (no proportion check: no registration to check against);
+  // which side each shows is decided later, from the sketch itself (consult-analysis), or left open by name
+  for (const u of input.unregistered ?? []) {
+    if (input.views.some((v) => v.frameId === u.frameId)) continue
+    const fr = await input.rasterOf(u.frameId)
+    if (!fr) continue
+    const r = await readElevationSketch(input.ctx, { frameId: u.frameId, raster: fr.raster, caption: fr.caption })
+    sketches.push({ facade: 'SIDE_UNSPECIFIED', frameId: u.frameId, usd: r.usd, ...(r.sketch ? { sketch: r.sketch } : {}), ...(r.failed ? { failed: r.failed } : {}), raw: r.raw, ...(r.requestId ? { requestId: r.requestId } : {}) })
   }
   return { version: SKETCH_STEP_VERSION, printedLevels, sketches, elevationSketches, appearance, usd: Math.round(sketches.reduce((a, s) => a + s.usd, 0) * 1e6) / 1e6 }
 }

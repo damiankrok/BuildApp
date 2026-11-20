@@ -805,10 +805,10 @@ export type SketchAnchors = { frameId: string; side: Side; wallLeftX: number; wa
  * analyzer's own vertical check), and its wall ends span the side the plan measures; the vertical is the horizontal scale
  * (isotropic drawing). The model's eaves must land on the sketch's eaves row or nothing is registered.
  */
-export function registerFromSketch(ctx: Ctx, a: SketchAnchors): { view: BindView; why: string } | Refusal {
+export function registerFromSketch(ctx: Ctx, a: SketchAnchors): { view: BindView; why: string; /** the model's openings drawn through it, against the picture (z; null: none to test) */ support: number | null } | Refusal {
   const p: CorrectionProposal = { proposalId: `sketch-view:${a.frameId}`, baseRevision: modelRevision(ctx.model), operation: 'ASSIGN_VIEW', targetId: a.side, frameId: a.frameId, patch: { side: a.side, wallLeftX: a.wallLeftX, wallRightX: a.wallRightX, groundY: a.groundY, eavesY: a.eavesY }, origin: 'SKETCH', uncertainty: 'MEDIUM', justification: 'the sketch of this elevation: wall ends, ground row and eaves row' }
   const b = bindView(ctx, p)
-  if (!('status' in b)) return { view: { ...b.view, origin: 'SKETCH' }, why: `${b.why}; model eaves on the sketch's eaves row (${String(b.record.bound?.values?.eavesRowModel)} vs ${String(b.record.bound?.values?.eavesRowDrawn)})` }
+  if (!('status' in b)) return { view: { ...b.view, origin: 'SKETCH' }, why: `${b.why}; model eaves on the sketch's eaves row (${String(b.record.bound?.values?.eavesRowModel)} vs ${String(b.record.bound?.values?.eavesRowDrawn)})`, support: b.record.gate?.proposedZ ?? null }
   // an overhang hides the top of the walls under its soffit and fascia: the drawn walls then stop below the model's eaves.
   // The ridge is hidden by nothing — the registration stands when the model's ridge lands on the drawn roof's top instead
   if (b.code !== 'AXIS_MISMATCH' || a.ridgeY === undefined) return b
@@ -819,7 +819,7 @@ export function registerFromSketch(ctx: Ctx, a: SketchAnchors): { view: BindView
   const got = pyOf(noEaves.view.projection, ridgeM)
   const tol = Math.max(3, 0.05 * Math.abs(a.groundY - a.ridgeY))
   if (Math.abs(got - a.ridgeY) > tol) return { ...b, why: `${b.why}; nor does the model's ridge at ${ridgeM.toFixed(2)} m (row ${got.toFixed(0)}) land on the drawn roof's top (row ${a.ridgeY.toFixed(0)}, tolerance ${tol.toFixed(0)} px)` }
-  return { view: { ...noEaves.view, origin: 'SKETCH' }, why: `${noEaves.why}; the model's ridge on the drawn roof's top (row ${got.toFixed(0)} vs ${a.ridgeY.toFixed(0)}) — its eaves row was not (an overhang hides the walls' top): ${b.why}`.slice(0, 600) }
+  return { support: noEaves.record.gate?.proposedZ ?? null, view: { ...noEaves.view, origin: 'SKETCH' }, why: `${noEaves.why}; the model's ridge on the drawn roof's top (row ${got.toFixed(0)} vs ${a.ridgeY.toFixed(0)}) — its eaves row was not (an overhang hides the walls' top): ${b.why}`.slice(0, 600) }
 }
 
 /** v3.54.17 R3: the top of the main pitched roof over `side` (its ridge, the slope's top surface), above ±0.00. */

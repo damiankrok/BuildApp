@@ -25,7 +25,7 @@ import type { ConsultSpend, ConsultantModel, ModelTurn, Price } from '../consult
 
 export const ELEVATION_SKETCH_SCHEMA = 'buildapp.elevation-sketch' as const
 export const ELEVATION_SKETCH_VERSION = '1.1.0' as const
-export const ELEVATION_SKETCH_PROMPT_VERSION = 'elevation-sketch/1' as const
+export const ELEVATION_SKETCH_PROMPT_VERSION = 'elevation-sketch/2' as const
 /** 2: a roof given as a bare polygon is read as one (recorded). 3 (v3.54.15): unambiguous tuples normalized, a fate per element, completeness, stop_reason. */
 export const ELEVATION_SKETCH_PARSER_VERSION = 4 as const
 export const SKETCH_RENDERER_VERSION = '1.0.0' as const
@@ -82,13 +82,14 @@ export const TOOL = {
 export const ELEVATION_SKETCH_SYSTEM = `You turn one architectural elevation of a house into simple typed contours, so a flat-colour sketch can be drawn from them. You do not measure and you do not describe the house.
 
 Give every polygon in pixels of the picture you were sent, by its real corners (a raked glazing keeps its slope; a gable keeps its apex). Keep the drawing's proportions exactly: never widen, straighten or tidy a part.
+Draw the building itself. Things standing in front of it — plant pots, planters, shrubs, bins, garden furniture, fences, cars, people — are not the building: leave them out and continue the walls, the openings and the ground line behind them as the drawing shows them on either side.
 - silhouette: the building's outline (walls and roof) — not trees, not the terrain, not the plot.
-- roofs: each roof surface you see (a slope, a flat roof's edge band).
-- walls: the zones of wall finish, by material: LIGHT_RENDER (light plaster), DARK_RENDER (dark plaster/panels), TIMBER (wood cladding), BRICK (facing brick or clinker), METAL; each zone with its openings inside it (do not cut them out). A finish hidden behind something (a railing, a post) is INFERRED there, never VISIBLE.
+- roofs: each roof surface as drawn, INCLUDING its overhang: the eaves where the roof runs past the wall below, and the verges where it runs past the gable walls at its ends. A roof's corners are the roof's own (its fascia and its ends), never the wall corners under it.
+- walls: the zones of wall finish, by material: LIGHT_RENDER (light plaster), DARK_RENDER (dark plaster/panels), TIMBER (wood cladding), BRICK (facing brick or clinker), METAL; each zone with its openings inside it (do not cut them out). A wall zone ends at the top where the wall meets the underside of the roof (the soffit or the eaves board) — not at the roof's lower edge further out. A finish hidden behind something (a railing, a post, a pot) is INFERRED there, never VISIBLE.
 - openings: every window, door, glazed door, garage gate, glazed wall, by the outline of its frame.
-- elements: balconies, railings, chimneys, canopies, posts, pergolas, frames, bands, plinths, terraces, steps, downpipes, solar panels.
-- groundRow: the row where the building meets the ground (±0.00).
-Leave out what is not part of the building (vegetation, people, cars, sky, shadows, text, dimension lines).`
+- elements: balconies, railings, chimneys (each stack's whole visible box, from its top down to where it meets the roof), canopies, posts, pergolas, frames, bands, plinths, terraces, steps, downpipes, solar panels.
+- groundRow: the row of the ground line at the building's walls (±0.00 or the terrain line drawn there), read where the walls' foot is visible and carried straight across anything in front of them — never the top of a pot, a step or a plant.
+Leave out what is not part of the building (vegetation, plant pots, people, cars, garden furniture, sky, shadows, text, dimension lines).`
 
 export type SketchFrame = { frameId: string; raster: Raster; caption: string }
 type Ctx = { model: ConsultantModel; price: Price; spend?: ConsultSpend; signal?: AbortSignal }

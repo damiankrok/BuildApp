@@ -1,4 +1,5 @@
 /**
+ * v3.54.17 R3: --ledger <json> --opening <usd> --ceiling <usd> book into another ledger (OWNER's +40 USD, 2026-11-20).
  * v3.54.17 (from v3.54.16) — the same runner; the sketch channel now also proposes SET_ROOF per body (massing/ops.ts), books into the v3.54.17 ledger.
  *
  * v3.54.16 (from v3.54.15) — adds the post-build check through the correction executor: --check-live (the reviewer on a live
@@ -132,7 +133,7 @@ if (argv.includes('--outline-live')) {
   let i = 0
   outlineTransport = { id: 'replay', model: rec[0]?.turn.model ?? modelId, maxOutputTokens: 4000, send: async () => { const r = rec[i++]; if (!r) throw new Error('outline replay: no recorded turn left (not sent)'); return { ...r.turn, usage: { inputTokens: 0, outputTokens: 0 } } } }
 }
-const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') || argv.includes('--outline-live') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : '', argv.includes('--outline-live') ? 'plan-outline' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }) : undefined
+const spend = argv.includes('--live') || argv.includes('--sketch-live') || argv.includes('--loop-live') || argv.includes('--check-live') || argv.includes('--outline-live') ? ledgerSpend({ phase: [argv.includes('--live') ? 'metric-read' : '', sketchTransport && argv.includes('--sketch-live') ? 'sketches' : '', checkTransport && argv.includes('--check-live') ? 'check' : '', argv.includes('--outline-live') ? 'plan-outline' : ''].filter(Boolean).join('+') || 'replay', house, variant: opt('variant-label') ?? (checkTransport ? 'L-MS-C' : sketchTransport ? 'L-MS' : 'L-M') }, { ...(opt('ledger') ? { path: opt('ledger') as string } : {}), ...(opt('opening') ? { openingUsd: Number(opt('opening')) } : {}), ...(opt('ceiling') ? { ceilingUsd: Number(opt('ceiling')) } : {}) }) : undefined
 const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },

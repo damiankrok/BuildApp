@@ -1,0 +1,14 @@
+{
+ "schema": "buildapp.ai-spend-ledger.v35417",
+ "currency": "USD",
+ "costBasis": "USAGE_PRICED (official list prices per MTok)",
+ "billing": "NOT_RECONCILED_WITH_INVOICE",
+ "openingUsd": 28.542857,
+ "stageCapUsd": 40,
+ "ceilingUsd": 68.542857,
+ "openingNote": "v3.54.17 R3: the books closed at 28.542857 USD (v3.54.17 + R2, no request in R2). OWNER 2026-11-20 (chat, AskUserQuestion answer '40 USD'): a hard cap of 40 USD more for live tests and prompt work on the analyzer's API requests; ceiling 68.542857 USD. The panel balance is not consent beyond this cap.",
+ "entries": [],
+ "totalUsd": 28.542857,
+ "stageSpentUsd": 0,
+ "requests": 0
+}
