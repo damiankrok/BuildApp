@@ -1,0 +1,166 @@
+{
+ "case": "DEV live reviewer check, Alaska (Sonnet 5.5, host transport, cache 5m); metric read + sketches replayed",
+ "looks": [
+  {
+   "afterRevision": null,
+   "decision": "REVIEW_ONLY",
+   "defects": [
+    {
+     "about": "The long-side windows are a continuous strip of 7, where the source has 4 separate windows. The roof windows are missing.",
+     "certainty": "LIKELY",
+     "family": "OTHER",
+     "id": "D1",
+     "operation": "UNSUPPORTED",
+     "scope": "FRONT",
+     "severity": "MAJOR"
+    },
+    {
+     "about": "The two chimneys are missing or barely visible.",
+     "certainty": "LIKELY",
+     "family": "OTHER",
+     "id": "D2",
+     "operation": "UNSUPPORTED",
+     "scope": "ROOF",
+     "severity": "MINOR"
+    }
+   ],
+   "observations": [
+    {
+     "about": "Model FRONT view",
+     "certainty": "LIKELY",
+     "seen": "The plan front is the long side, with the terrace on the left and 4 windows on the ground floor. It matches picture 3, which shows 4 windows with a timber band and 3 roof windows. The model shows a continuous strip of 7 windows and no roof windows on the front slope."
+    },
+    {
+     "about": "Roof",
+     "certainty": "LIKELY",
+     "seen": "Gable roof with the ridge running along the long axis, as in the drawings. The model's RIGHT and LEFT gable ends are correct. The model has no dormers or roof windows, and the source has small roof windows on both long slopes."
+    },
+    {
+     "about": "Chimneys",
+     "certainty": "LIKELY",
+     "seen": "The source shows two chimneys on the ridge. The model has only thin slivers."
+    },
+    {
+     "about": "Gable ends",
+     "certainty": "LIKELY",
+     "seen": "The source gable ends have a small square upper window and a timber panel inside a white frame. The model's gable ends have a wide upper window and its ground-floor windows are wide strips. The source end has a door on one end and a glazed door on the other."
+    }
+   ],
+   "patches": [],
+   "reviewed": [
+    {
+     "id": "ring-main-0",
+     "keep": true,
+     "note": "The main roof is a gable with the ridge along the long axis, as in the drawings.",
+     "verdict": "ACCEPTABLE_APPROXIMATION"
+    }
+   ],
+   "revision": "fa9be01e4aa5",
+   "round": 1,
+   "status": "ISSUE_FOUND",
+   "why": "the look reviews what was applied and proposes nothing the analyzer can apply"
+  }
+ ],
+ "quality": {
+  "appliedNotReviewed": 0,
+  "closedReviewOnly": 0,
+  "closedVerified": 1,
+  "defects": [
+   {
+    "about": "SET_ROOF ring-main-0 from the sketch of FRONT",
+    "certainty": "LIKELY",
+    "id": "L0:S:f-ring-main-0-30f92f6a1b",
+    "key": "L0:S:f-ring-main-0-30f92f6a1b",
+    "look": 0,
+    "operation": "SET_ROOF",
+    "patchStatus": "COMMITTED",
+    "proposalId": "sk-roof-ring-main-0-30f92f6a1b",
+    "scope": "FRONT",
+    "settlement": "CLOSED_VERIFIED",
+    "severity": "MAJOR",
+    "verifiedOn": "fa9be01e4aa5",
+    "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+   },
+   {
+    "about": "The long-side windows are a continuous strip of 7, where the source has 4 separate windows. The roof windows are missing.",
+    "certainty": "LIKELY",
+    "family": "OTHER",
+    "id": "L1:D1",
+    "key": "L1:D1",
+    "look": 1,
+    "operation": "UNSUPPORTED",
+    "scope": "FRONT",
+    "settlement": "UNSUPPORTED_OPERATION",
+    "severity": "MAJOR",
+    "why": "no operation of the registry changes OTHER: named, not corrected"
+   },
+   {
+    "about": "The two chimneys are missing or barely visible.",
+    "certainty": "LIKELY",
+    "family": "OTHER",
+    "id": "L1:D2",
+    "key": "L1:D2",
+    "look": 1,
+    "operation": "UNSUPPORTED",
+    "scope": "ROOF",
+    "settlement": "UNSUPPORTED_OPERATION",
+    "severity": "MINOR",
+    "why": "no operation of the registry changes OTHER: named, not corrected"
+   }
+  ],
+  "ledger": [
+   {
+    "about": "SET_ROOF ring-main-0 from the sketch of FRONT",
+    "certainty": "LIKELY",
+    "id": "L0:S:f-ring-main-0-30f92f6a1b",
+    "key": "L0:S:f-ring-main-0-30f92f6a1b",
+    "look": 0,
+    "operation": "SET_ROOF",
+    "patchStatus": "COMMITTED",
+    "proposalId": "sk-roof-ring-main-0-30f92f6a1b",
+    "scope": "FRONT",
+    "settlement": "CLOSED_VERIFIED",
+    "severity": "MAJOR",
+    "verifiedOn": "fa9be01e4aa5",
+    "why": "applied; the look at the new revision says ACCEPTABLE_APPROXIMATION; the source measure supports the built element"
+   },
+   {
+    "about": "The long-side windows are a continuous strip of 7, where the source has 4 separate windows. The roof windows are missing.",
+    "certainty": "LIKELY",
+    "family": "OTHER",
+    "id": "L1:D1",
+    "key": "L1:D1",
+    "look": 1,
+    "operation": "UNSUPPORTED",
+    "scope": "FRONT",
+    "settlement": "UNSUPPORTED_OPERATION",
+    "severity": "MAJOR",
+    "why": "no operation of the registry changes OTHER: named, not corrected"
+   },
+   {
+    "about": "The two chimneys are missing or barely visible.",
+    "certainty": "LIKELY",
+    "family": "OTHER",
+    "id": "L1:D2",
+    "key": "L1:D2",
+    "look": 1,
+    "operation": "UNSUPPORTED",
+    "scope": "ROOF",
+    "settlement": "UNSUPPORTED_OPERATION",
+    "severity": "MINOR",
+    "why": "no operation of the registry changes OTHER: named, not corrected"
+   }
+  ],
+  "openKey": 0,
+  "openOther": 2,
+  "reasons": [
+   "RECOGNIZABLE_PARTIAL"
+  ],
+  "reviewCompleted": true,
+  "state": "RECOGNIZABLE_PARTIAL",
+  "version": "1.1.0",
+  "why": "the delivered revision was looked at; 2 difference(s) open (0 KEY): L1:D1 UNSUPPORTED_OPERATION, L1:D2 UNSUPPORTED_OPERATION; 1 closed on a verified revision"
+ },
+ "note": "one look: ISSUE_FOUND with 2 UNSUPPORTED defects, no proposals, so no second look was due: continues/resolved were not exercised live (they need an earlier look with open defects); the SET_ROOF from the sketch channel settled CLOSED_VERIFIED (review ACCEPTABLE_APPROXIMATION + source measure supports the built element)",
+ "usd": 0.049032
+}

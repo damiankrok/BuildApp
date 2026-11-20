@@ -1,0 +1,72 @@
+{
+ "case": "DEV layla (ARCHON): LOCAL refused (PLAN_LAYOUT_REJECTED / FOOTPRINT_AREA_WRONG); metric read and sketches replayed from v3.54.16 (0 USD); plan outline read live once",
+ "plan": {
+  "version": "1.0.0",
+  "promptVersion": "plan-outline/1",
+  "frameId": "frame-asset-rzut-a57fb9cc0c-f3cfd88f50",
+  "outlinePx": [
+   [
+    428,
+    215
+   ],
+   [
+    428,
+    460
+   ],
+   [
+    512,
+    460
+   ],
+   [
+    512,
+    748
+   ],
+   [
+    282,
+    748
+   ],
+   [
+    282,
+    712
+   ],
+   [
+    108,
+    712
+   ],
+   [
+    108,
+    338
+   ],
+   [
+    200,
+    338
+   ],
+   [
+    200,
+    215
+   ]
+  ],
+  "parts": [
+   "MAIN",
+   "GARAGE"
+  ],
+  "check": {
+   "areaM2": 158.5,
+   "publishedM2": 184.87,
+   "share": 0.857
+  },
+  "refused": [],
+  "usd": 0.015928,
+  "requestId": "req_011ChDu5EVPfoFYnij1BMfrW"
+ },
+ "decision": "NOT_BUILT",
+ "why": "UNSUPPORTED_OPERATION MASSING_UNSUPPORTED_FORM: an outline of 10 corners: beyond the supported scope (a rectangle or two joined bodies); missing: SUPPORTED_OUTLINE (an outline of 10 corners: beyond the supported scope (a rectangle or two joined bodies))",
+ "chain": {
+  "source": "YES: 8 plan frames, sections, 4 elevations",
+  "read": "YES: outline 10 corners (MAIN, GARAGE) at the analyzer scale 2.991 cm/px STRONG/CONFIRMED; 158.5 m2 vs 184.87 m2 published (check only)",
+  "bound": "YES: 4 elevation sketches as silhouettes",
+  "consumer": "BUILD_MASSING",
+  "built": "NO",
+  "blocker": "FUNCTION: an outline of three stepped rectangles is beyond the declared scope (<= 2 joined bodies); not missing data, not a missing reader"
+ }
+}
