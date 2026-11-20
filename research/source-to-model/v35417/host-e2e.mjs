@@ -150,7 +150,7 @@ try {
         const runsC = r.sourceCheck?.correctionRuns ?? []
         const committedC = runsC.flatMap((x) => (x.records ?? []).filter((y) => y.status === 'COMMITTED').map((y) => ({ stage: x.stage, ...y })))
         const delivered = runsC.some((x) => x.delivered && (x.records ?? []).some((y) => y.status === 'COMMITTED'))
-        check(r.consultation?.corrections?.registry === '1.0.0', `${name}: the result names the correction registry (${r.consultation?.corrections?.registry})`)
+        check(r.consultation?.corrections?.registry === '1.1.0', `${name}: the result names the correction registry (${r.consultation?.corrections?.registry})`)
         check(committedC.length > 0 && delivered, `${name}: at least one patch was COMMITTED by the shared executor and delivered (${committedC.map((c) => `${c.stage}:${c.operation} ${c.targetId}`).join(', ') || 'none'})`)
         check(r.sourceCheck?.quality?.reviewCompleted === true && r.sourceCheck?.checkedRevision === r.sourceCheck?.deliveredRevision, `${name}: a look judged the delivered revision that carries the patches (checked ${r.sourceCheck?.checkedRevision}, delivered ${r.sourceCheck?.deliveredRevision})`)
         // quality, apart: a state of its own, with its defects
