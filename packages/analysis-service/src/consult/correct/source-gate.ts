@@ -313,6 +313,15 @@ export function supportOfPolygon(r: Raster, poly: Poly, band: { x0: number; x1: 
     if (exclude.some((e) => overlaps(grown, e))) continue
     vals.push(near(q))
   }
+  // a body-scale outline (a roof, a wall mass) has no room to be moved across its own band: its null is then the same
+  // outline displaced by 15–30 % of its size — how much better the drawn place is than a misplaced one
+  if (vals.length < MIN_NULL) {
+    vals.length = 0
+    for (const fx of [-0.3, -0.15, 0, 0.15, 0.3]) for (const fy of [-0.3, -0.15, 0, 0.15, 0.3]) {
+      if (fx === 0 && fy === 0) continue
+      vals.push(near(shiftPoly(poly, Math.round(fx * w), Math.round(fy * h))))
+    }
+  }
   const n = vals.length
   const mean = n > 0 ? vals.reduce((a, v) => a + v, 0) / n : 0
   const std = n > 1 ? Math.sqrt(vals.reduce((a, v) => a + (v - mean) ** 2, 0) / (n - 1)) : 0
@@ -432,4 +441,110 @@ export function compareFill(r: Raster, shape: Shape, proposedKind: keyof typeof 
   if (observed === fp) return { winner: 'PROPOSED', observed, features, why: `the inside shows a ${observed.toLowerCase()} fill (${stats}), as a ${proposedKind} does and a ${currentKind} does not` }
   if (observed === fc) return { winner: 'CURRENT', observed, features, why: `the inside shows a ${observed.toLowerCase()} fill (${stats}), as the model's ${currentKind} does and a ${proposedKind} does not` }
   return { winner: 'UNDECIDED', observed, features, why: `the inside shows a ${observed.toLowerCase()} fill (${stats}), which is neither ${proposedKind} nor ${currentKind}` }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// v3.54.17: body-scale hypotheses (a roof form, a body's extent) decided by the region where they differ
+// ---------------------------------------------------------------------------------------------------------------
+
+export type RegionClass = 'BUILDING' | 'BACKGROUND' | 'MIXED' | 'EMPTY'
+export type RegionVerdict = {
+  winner: 'PROPOSED' | 'CURRENT' | 'UNDECIDED'
+  /** The part only the proposal covers, and the part only the model covers: what each looks like. */
+  proposedOnly: { cls: RegionClass; share: number; n: number }
+  currentOnly: { cls: RegionClass; share: number; n: number }
+  background: { n: number; spread: number }
+  why: string
+  measure: 'REGION'
+}
+/** Fixed before any result: a region is drawn building when this share of it is unlike the drawing's background. */
+export const REGION_BUILDING_SHARE = 0.6
+export const REGION_BACKGROUND_SHARE = 0.25
+const REGION_MIN_AREA_SHARE = 0.01
+
+const inPolyG = (poly: Poly, x: number, y: number): boolean => {
+  let c = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) if (poly[i][1] > y !== poly[j][1] > y && x < ((poly[j][0] - poly[i][0]) * (y - poly[i][1])) / (poly[j][1] - poly[i][1]) + poly[i][0]) c = !c
+  return c
+}
+
+/**
+ * Two hypotheses of a body's silhouette (each a union of polygons in the picture), held against the picture by what
+ * lies where they differ. The background is sampled around both (outside every polygon of `occupied` — the other
+ * bodies the model holds — and above `groundRow`); a pixel unlike it (beyond 3 spreads) is drawn matter. The proposal
+ * wins when what only it covers is drawn matter and what only the model covers is background; the model wins the other
+ * way round; anything else (a tree, a shadow, a line drawing with no fill) does not decide.
+ */
+export function compareRegions(r: Raster, proposed: readonly Poly[], current: readonly Poly[], occupied: readonly Poly[], groundRow: number): RegionVerdict {
+  const all = [...proposed, ...current]
+  const xs = all.flatMap((p) => p.map((q) => q[0]))
+  const ys = all.flatMap((p) => p.map((q) => q[1]))
+  const x0 = Math.max(0, Math.floor(Math.min(...xs)))
+  const x1 = Math.min(r.width - 1, Math.ceil(Math.max(...xs)))
+  const y0 = Math.max(0, Math.floor(Math.min(...ys)))
+  const y1 = Math.min(r.height - 1, Math.ceil(Math.min(Math.max(...ys), groundRow - 1)))
+  const inAny = (ps: readonly Poly[], x: number, y: number): boolean => ps.some((p) => inPolyG(p, x, y))
+  const px = (x: number, y: number): [number, number, number] => {
+    const i = (y * r.width + x) * 4
+    return [r.data[i], r.data[i + 1], r.data[i + 2]]
+  }
+  // the background: a frame around the union, above the ground, outside every hypothesis and every other body
+  const m = Math.max(12, Math.round(0.08 * Math.max(x1 - x0, y1 - y0)))
+  const bg: Array<[number, number, number]> = []
+  const bstep = Math.max(1, Math.round((x1 - x0 + 2 * m) / 120))
+  for (let y = Math.max(0, y0 - m); y <= Math.min(r.height - 1, groundRow - 2); y += bstep) for (let x = Math.max(0, x0 - m); x <= Math.min(r.width - 1, x1 + m); x += bstep) {
+    const ring = x < x0 || x > x1 || y < y0
+    if (!ring || inAny(all, x, y) || inAny(occupied, x, y)) continue
+    bg.push(px(x, y))
+  }
+  const empty = { cls: 'EMPTY' as RegionClass, share: 0, n: 0 }
+  if (bg.length < 30) return { winner: 'UNDECIDED', proposedOnly: empty, currentOnly: empty, background: { n: bg.length, spread: 0 }, why: `only ${bg.length} background samples around the body: the picture's background cannot be told`, measure: 'REGION' }
+  // the background is the frame's dominant colour (paper, sky): other matter in the frame (a roof the hypotheses leave
+  // out, a tree, a neighbour) is an outlier of it, not a widening of it; without a dominant colour nothing is decided
+  const bin = (c: [number, number, number]): number => (c[0] >> 4) * 256 + (c[1] >> 4) * 16 + (c[2] >> 4)
+  const counts = new Map<number, number>()
+  for (const c of bg) counts.set(bin(c), (counts.get(bin(c)) ?? 0) + 1)
+  const top = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0][0]
+  const t3 = [top >> 8, (top >> 4) & 15, top & 15]
+  const core = bg.filter((c) => Math.abs((c[0] >> 4) - t3[0]) <= 1 && Math.abs((c[1] >> 4) - t3[1]) <= 1 && Math.abs((c[2] >> 4) - t3[2]) <= 1)
+  if (core.length < 0.4 * bg.length) return { winner: 'UNDECIDED', proposedOnly: empty, currentOnly: empty, background: { n: bg.length, spread: 0 }, why: `the background around the body has no dominant colour (${Math.round((100 * core.length) / bg.length)} % in its commonest): drawn matter cannot be told from it`, measure: 'REGION' }
+  const mean = [0, 1, 2].map((k) => core.reduce((a, c) => a + c[k], 0) / core.length)
+  const dist = (c: [number, number, number]): number => Math.hypot(c[0] - mean[0], c[1] - mean[1], c[2] - mean[2])
+  const ds = core.map(dist).sort((a, b) => a - b)
+  const spread = Math.max(8, ds[Math.floor(0.9 * (ds.length - 1))])
+  const step = Math.max(1, Math.round(Math.sqrt(((x1 - x0) * (y1 - y0)) / 30000)))
+  let nP = 0
+  let mP = 0
+  let nC = 0
+  let mC = 0
+  let nU = 0
+  for (let y = y0; y <= y1; y += step) for (let x = x0; x <= x1; x += step) {
+    const a = inAny(proposed, x, y)
+    const b = inAny(current, x, y)
+    if (a || b) nU += 1
+    if (a === b) continue
+    const matter = dist(px(x, y)) > 3 * spread ? 1 : 0
+    if (a) {
+      nP += 1
+      mP += matter
+    } else {
+      nC += 1
+      mC += matter
+    }
+  }
+  const cls = (n: number, mm: number): { cls: RegionClass; share: number; n: number } => {
+    if (n < REGION_MIN_AREA_SHARE * Math.max(1, nU)) return { cls: 'EMPTY', share: 0, n }
+    const share = Math.round((mm / n) * 1000) / 1000
+    return { cls: share >= REGION_BUILDING_SHARE ? 'BUILDING' : share <= REGION_BACKGROUND_SHARE ? 'BACKGROUND' : 'MIXED', share, n }
+  }
+  const P = cls(nP, mP)
+  const C = cls(nC, mC)
+  const pOk = P.cls === 'BUILDING' || P.cls === 'EMPTY'
+  const cOk = C.cls === 'BUILDING' || C.cls === 'EMPTY'
+  const pBg = P.cls === 'BACKGROUND' || P.cls === 'EMPTY'
+  const cBg = C.cls === 'BACKGROUND' || C.cls === 'EMPTY'
+  const both = P.cls === 'EMPTY' && C.cls === 'EMPTY'
+  const winner = both ? 'UNDECIDED' : pOk && cBg ? 'PROPOSED' : pBg && cOk ? 'CURRENT' : 'UNDECIDED'
+  const desc = (k: string, v: { cls: RegionClass; share: number }): string => `${k} ${v.cls.toLowerCase()}${v.cls === 'EMPTY' ? '' : ` (${Math.round(v.share * 100)} % drawn matter)`}`
+  return { winner, proposedOnly: P, currentOnly: C, background: { n: bg.length, spread: Math.round(spread * 10) / 10 }, why: `${desc('only the proposal covers', P)}; ${desc('only the model covers', C)}: ${winner === 'PROPOSED' ? 'the source draws the proposal' : winner === 'CURRENT' ? 'the source draws the model' : 'the picture does not decide'}`, measure: 'REGION' }
 }

@@ -84,8 +84,8 @@ const pxRange = (polys: readonly Poly[]): { x0: number; x1: number } | undefined
 export function rectOfOutline(outline: ReadonlyArray<{ x: number; z: number }>): Rect {
   return { minX: Math.min(...outline.map((p) => p.x)), maxX: Math.max(...outline.map((p) => p.x)), minZ: Math.min(...outline.map((p) => p.z)), maxZ: Math.max(...outline.map((p) => p.z)) }
 }
-const area = (r: Rect): number => (r.maxX - r.minX) * (r.maxZ - r.minZ)
-const extentOn = (r: Rect, s: Side): { lo: number; hi: number } => (along(s) === 'x' ? { lo: r.minX, hi: r.maxX } : { lo: r.minZ, hi: r.maxZ })
+export const area = (r: Rect): number => (r.maxX - r.minX) * (r.maxZ - r.minZ)
+export const extentOn = (r: Rect, s: Side): { lo: number; hi: number } => (along(s) === 'x' ? { lo: r.minX, hi: r.maxX } : { lo: r.minZ, hi: r.maxZ })
 
 /**
  * 1. An elevation registered by the plan: its building's width in pixels against the outline's extent along that side.
@@ -108,7 +108,7 @@ const pxOfAlong = (p: Projection, a: number): number => (a - p.alongAtPx0) / (p.
 const yOfRow = (p: Projection, row: number): number => (p.zeroRow - row) * (p.mppV ?? p.mpp)
 
 /** A polygon's covered rows on one pixel column (its lowest and highest edge crossings), or undefined off it. */
-function columnRange(poly: Poly, x: number): [number, number] | undefined {
+export function columnRange(poly: Poly, x: number): [number, number] | undefined {
   let lo = Infinity
   let hi = -Infinity
   for (let i = 0; i < poly.length; i += 1) {
@@ -130,7 +130,7 @@ const COLUMNS = 48
  * The part of one elevation over one body's stretch of its side: top, eaves and the roof's shape, read column by column
  * inside the stretch. `own` are the polygons attributed to this body on this side (see `attribute`).
  */
-function profileOver(view: BindView, a0: number, a1: number, own: { walls: Poly[]; roofs: Poly[] }): { topM: number; eavesM: number; shape: 'TRIANGLE' | 'BAND' | 'TRAPEZOID' | 'NONE'; why: string } | undefined {
+export function profileOver(view: BindView, a0: number, a1: number, own: { walls: Poly[]; roofs: Poly[] }): { topM: number; eavesM: number; shape: 'TRIANGLE' | 'BAND' | 'TRAPEZOID' | 'NONE'; why: string } | undefined {
   const p = view.projection
   const xs = [pxOfAlong(p, a0), pxOfAlong(p, a1)]
   const x0 = Math.min(...xs)
@@ -216,7 +216,7 @@ export function rectanglesOf(outline: ReadonlyArray<{ x: number; z: number }>): 
     return parts.map((r) => {
       const mx = (r.minX + r.maxX) / 2
       const mz = (r.minZ + r.maxZ) / 2
-      if (inside(mx, mz) && inside(r.minX + 1e-3, r.minZ + 1e-3) && inside(r.maxX - 1e-3, r.maxZ - 1e-3) && inside(r.minX + 1e-3, r.maxZ - 1e-3) && inside(r.maxX - 1e-3, r.minZ - 1e-3)) return r
+      if (inside(mx, mz) && inside(r.minX + 1e-3, r.minZ + 1e-3) && inside(r.maxX - 1e-3, r.maxZ - 1e-3) && inside(r.minX + 1e-3, r.maxZ - 1e-3) && inside(r.maxX - 1e-3, r.minZ + 1e-3)) return r
       return axis === 'x' ? (inside(mx, r.minZ + 1e-3) ? { ...r, maxZ: reflex.z } : { ...r, minZ: reflex.z }) : inside(r.minX + 1e-3, mz) ? { ...r, maxX: reflex.x } : { ...r, minX: reflex.x }
     })
   }
@@ -245,17 +245,26 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
   if (byView.size === 0) return { ...base, status: 'INSUFFICIENT', bodies: [], views, missing: [{ anchor: 'ELEVATION_SILHOUETTE', why: 'no elevation could be registered by the plan: no height and no roof form can be read' }], why: 'the outline alone gives a footprint, not a mass' }
   const split = rectanglesOf(input.outline.outline)
   if (split.splits.length === 0) return { ...base, status: 'UNSUPPORTED_FORM', bodies: [], views, missing: [{ anchor: 'SUPPORTED_OUTLINE', why: split.why }], why: split.why }
-  // choose the split whose line an elevation steps at (a body boundary is a change of height); else the larger main body
+  // choose the split whose line an elevation steps at: a body boundary is a jump of the drawn top AT that line (a gable's
+  // slope runs through it continuously); the top is read just either side of the line, on every view that shows it
   const stepAt = (rects: Rect[]): number => {
     if (rects.length < 2) return 0
+    const [ra, rb] = rects
+    const line: { axis: 'x' | 'z'; at: number } | undefined = Math.abs(ra.maxX - rb.minX) < 1e-6 || Math.abs(rb.maxX - ra.minX) < 1e-6 ? { axis: 'x', at: Math.abs(ra.maxX - rb.minX) < 1e-6 ? ra.maxX : rb.maxX } : Math.abs(ra.maxZ - rb.minZ) < 1e-6 || Math.abs(rb.maxZ - ra.minZ) < 1e-6 ? { axis: 'z', at: Math.abs(ra.maxZ - rb.minZ) < 1e-6 ? ra.maxZ : rb.maxZ } : undefined
+    if (!line) return 0
     let score = 0
     for (const { obs, view } of byView.values()) {
-      const [ra, rb] = rects.map((r) => extentOn(r, obs.side))
-      if (Math.abs(ra.lo - rb.lo) < 0.05 && Math.abs(ra.hi - rb.hi) < 0.05) continue // one behind the other on this side
-      const [oa, ob] = attribute(obs, view, [ra, rb])
-      const pa = profileOver(view, ra.lo, ra.hi, oa)
-      const pb = profileOver(view, rb.lo, rb.hi, ob)
-      if (pa && pb && Math.abs(pa.topM - pb.topM) > MASSING_TOLERANCES.heightAgreeM) score += 1
+      if (along(obs.side) !== line.axis) continue
+      const p = view.projection
+      const d = Math.max(0.1, 3 * p.mpp)
+      const topAt = (a: number): number | undefined => {
+        const x = pxOfAlong(p, a)
+        const rows = [...obs.walls, ...obs.roofs].map((q) => columnRange(q, x)?.[0]).filter((v): v is number => v !== undefined)
+        return rows.length > 0 ? yOfRow(p, Math.min(...rows)) : undefined
+      }
+      const l = topAt(line.at - d)
+      const r = topAt(line.at + d)
+      if (l !== undefined && r !== undefined && Math.abs(l - r) > MASSING_TOLERANCES.heightAgreeM) score += 1
     }
     return score
   }
@@ -305,7 +314,7 @@ export function solveMassing(input: MassingInput): MassingHypothesis {
     let roofProv: Prov
     if (rise < MASSING_TOLERANCES.flatRiseM || reads.every((r) => r.p.shape === 'NONE')) {
       roof = { kind: 'FLAT', eavesM: r6(top) }
-      roofProv = { fidelity: hProv.fidelity, source: hProv.source, why: `nothing rises more than ${MASSING_TOLERANCES.flatRiseM} m above the walls: a flat roof at ${top.toFixed(2)} m` }
+      roofProv = { fidelity: hProv.fidelity, source: hProv.source, why: `nothing rises more than ${MASSING_TOLERANCES.flatRiseM} m above the walls: a flat roof, its parapet at ${top.toFixed(2)} m (the plate ${MINIATURE_CONVENTIONS.parapetM} m below: DISPLAY_ASSUMPTION)` }
     } else {
       // the axis: slopes (a band) are seen on the sides along the ridge, the gable end (a triangle) on the sides across it
       const vote = { X: 0, Z: 0 }
@@ -357,18 +366,19 @@ export function bodyCommands(b: BodySpec, levelId: string, levelElevation: numbe
       { type: 'createRoof', id: `roof-${b.id}`, levelId, kind: 'GABLE', footprint: { ...r }, eaveOffset: r6(b.roof.eavesM - levelElevation), pitchDeg: b.roof.pitchDeg ?? 30, ridgeAxis: b.roof.ridgeAxis ?? 'X', overhang: 0, thickness: MINIATURE_CONVENTIONS.roofThicknessM, capWallIds: walls },
     ] as BuildingCommand[]
   }
+  // a flat roof as the elevation draws it: the walls' top is the parapet's; the plate lies a parapet below it
   const top = b.roof.eavesM - levelElevation
   const party = partySides(r, others)
   const half = r6(t / 2)
   return [
-    { type: 'createWallRing', id: ring, levelId, polygon, thickness: t, height: r6(top + MINIATURE_CONVENTIONS.parapetM), baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' },
-    { type: 'createRoof', id: `roof-${b.id}`, levelId, kind: 'FLAT', footprint: { ...r }, eaveOffset: r6(top), pitchDeg: 0, ridgeAxis: 'X', overhang: 0, thickness: MINIATURE_CONVENTIONS.flatRoofThicknessM, plateInset: { minX: party.minX ? 0 : half, maxX: party.maxX ? 0 : half, minZ: party.minZ ? 0 : half, maxZ: party.maxZ ? 0 : half } },
+    { type: 'createWallRing', id: ring, levelId, polygon, thickness: t, height: r6(top), baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE' },
+    { type: 'createRoof', id: `roof-${b.id}`, levelId, kind: 'FLAT', footprint: { ...r }, eaveOffset: r6(top - MINIATURE_CONVENTIONS.parapetM), pitchDeg: 0, ridgeAxis: 'X', overhang: 0, thickness: MINIATURE_CONVENTIONS.flatRoofThicknessM, plateInset: { minX: party.minX ? 0 : half, maxX: party.maxX ? 0 : half, minZ: party.minZ ? 0 : half, maxZ: party.maxZ ? 0 : half } },
   ] as BuildingCommand[]
 }
 
 /** BUILD_MASSING: the whole mass from nothing (no model, or no exterior walls): one level, one ring and one roof per body. */
 export function massingCommands(h: MassingHypothesis, model: CanonicalBuildingModel): BuildingCommand[] {
-  const top = Math.max(...h.bodies.map((b) => (b.roof.kind === 'GABLE' ? b.roof.ridgeM ?? b.roof.eavesM : b.roof.eavesM + MINIATURE_CONVENTIONS.parapetM)))
+  const top = Math.max(...h.bodies.map((b) => (b.roof.kind === 'GABLE' ? b.roof.ridgeM ?? b.roof.eavesM : b.roof.eavesM)))
   const cmds: BuildingCommand[] = []
   if (!model.building) cmds.push({ type: 'createBuilding', id: 'building', name: 'massing' } as BuildingCommand)
   const levelId = model.levels[0]?.id ?? 'lvl-0'

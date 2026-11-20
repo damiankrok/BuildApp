@@ -24,7 +24,7 @@
 import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
-import { serializeModel } from '@buildapp/model'
+import { serializeModel, validateModel } from '@buildapp/model'
 import type { CanonicalBuildingModel, Opening, Wall } from '@buildapp/model'
 import { sha256Hex, stableJson } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-package'
@@ -36,6 +36,8 @@ import type { PatchFields, PatchOperation } from './registry.js'
 import { compareFill, compareHypotheses, iou, isRaked, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
 import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.js'
 import { resolveWitness, WITNESS_RESOLVER_VERSION } from './resolve.js'
+import { bindBuildMassing, bindSetOutline, bindSetRoof } from '../massing/ops.js'
+import type { MassingObservations } from '../massing/ops.js'
 
 export const CORRECTION_EXECUTOR_VERSION = '1.2.0' as const
 
@@ -108,11 +110,13 @@ export type PatchRecord = {
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
   bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
-  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
+  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL' | 'REGION'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
   measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
   /** v3.54.17: how a printed witness was bound to the target (its observation, the body both stand on, the datum). */
   witness?: WitnessResolution
+  /** v3.54.17: the body/roof hypothesis a massing patch built (bodies, provenance, missing anchors, dependants). */
+  massing?: Record<string, unknown>
 }
 export type WitnessResolution = { observationId?: string; frameId: string; bodyId?: string; alongM?: number; targetBodyIds?: string[]; datum: string; resolver: string; why: string }
 
@@ -173,13 +177,13 @@ export function sideRange(m: CanonicalBuildingModel, s: Side): { lo: number; hi:
   const vs = ws.flatMap((w) => [w.start[a], w.end[a]])
   return { lo: Math.min(...vs), hi: Math.max(...vs) }
 }
-const levelOf = (m: CanonicalBuildingModel, id: string): { elevation: number; height: number } => m.levels.find((l) => l.id === id) ?? { elevation: 0, height: 3 }
+export const levelOf = (m: CanonicalBuildingModel, id: string): { elevation: number; height: number } => m.levels.find((l) => l.id === id) ?? { elevation: 0, height: 3 }
 
 const pxOf = (p: Projection, along: number): number => (along - p.alongAtPx0) / (p.alongSign * p.mpp)
 const alongOf = (p: Projection, px: number): number => p.alongAtPx0 + p.alongSign * p.mpp * px
 const yOf = (p: Projection, py: number): number => (p.zeroRow - py) * (p.mppV ?? p.mpp)
 const pyOf = (p: Projection, y: number): number => p.zeroRow - y / (p.mppV ?? p.mpp)
-const tolPxOf = (v: BindView): number => Math.max(2, Math.min(8, Math.ceil(Math.max(v.alongErrorM, 0.03) / v.projection.mpp)))
+export const tolPxOf = (v: BindView): number => Math.max(2, Math.min(8, Math.ceil(Math.max(v.alongErrorM, 0.03) / v.projection.mpp)))
 
 /** Where along its side an opening of the model is, and how high. */
 function openingSpan(m: CanonicalBuildingModel, o: Opening): { side: Side; a0: number; a1: number; y0: number; y1: number; wall: Wall } | undefined {
@@ -250,7 +254,7 @@ const sameShape = (a: Shape, b: Shape): boolean => {
 const headError = (a: Shape, b: Shape): number => (isRaked(a) && isRaked(b) ? Math.max(Math.abs((a.headLeftY as number) - (b.headLeftY as number)), Math.abs((a.headRightY as number) - (b.headRightY as number))) : isRaked(a) || isRaked(b) ? Infinity : Math.max(Math.abs(a.y0 - b.y0), 0))
 
 /** The side's wall area in the view's pixels: its walled range across, ground floor to the lowest wall top up. */
-const facadePx = (m: CanonicalBuildingModel, v: BindView): { x0: number; x1: number; y0?: number; y1?: number } => {
+export const facadePx = (m: CanonicalBuildingModel, v: BindView): { x0: number; x1: number; y0?: number; y1?: number } => {
   const r = sideRange(m, v.side)
   if (!r) return { x0: 0, x1: 0 }
   const xs = [pxOf(v.projection, r.lo), pxOf(v.projection, r.hi)]
@@ -278,32 +282,34 @@ const changedKeys = (a: Map<string, string>, b: Map<string, string>): string[] =
 // binding: one proposal → commands (or an appearance observation), the ids it may change, what to measure
 // ---------------------------------------------------------------------------------------------------------------
 
-type Expect =
+export type Expect =
   | { kind: 'OPENING'; id: string; view: BindView; box: Box; shape: Shape; levelId: string; openingKind: OpeningPatchKindExact; fillChangeFrom?: OpeningPatchKindExact }
   | { kind: 'REMOVED'; id: string }
   | { kind: 'CHIMNEY'; id: string; view: BindView; box: Box }
   | { kind: 'FINISH'; hosts: string[] }
   | { kind: 'PARAM'; targetId: string; property: string; value: number }
   | { kind: 'VIEW'; view: BindView }
+  /** v3.54.17: the body and roof operations measure their own effect on the compiled candidate (massing/ops.ts). */
+  | { kind: 'CUSTOM'; measure: (working: CanonicalBuildingModel, before: CanonicalBuildingModel, pictures: readonly BindPicture[]) => { failure?: string; measure: NonNullable<PatchRecord['measure']> } }
 
-type Bound = { commands: BuildingCommand[]; appearance?: { obs: AppearanceObservation; projection: Projection }; allowed: string[]; expect: Expect; record: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'witness'> }
-type Refusal = { status: PatchStatus; code: string; why: string; record?: Pick<PatchRecord, 'bound' | 'source' | 'gate'> }
+export type Bound = { commands: BuildingCommand[]; appearance?: { obs: AppearanceObservation; projection: Projection }; allowed: string[]; expect: Expect; record: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'witness' | 'massing'>; /** v3.54.17: registrations the patch made (by the plan), kept with it. */ views?: BindView[]; /** v3.54.17: one edit of several objects at once (a moved ring), validated as a whole after the commands. */ transform?: (m: CanonicalBuildingModel) => CanonicalBuildingModel }
+export type Refusal = { status: PatchStatus; code: string; why: string; record?: Pick<PatchRecord, 'bound' | 'source' | 'gate' | 'massing'> }
 
-type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[] }
+export type Ctx = { model: CanonicalBuildingModel; views: BindView[]; pictures: readonly BindPicture[]; witnesses: readonly PrintedWitness[]; massing?: MassingObservations }
 
 const short = (s: string): string => sha256Hex(s).slice(0, 6)
 
-function pictureOf(ctx: Ctx, p: CorrectionProposal, n: number | undefined): BindPicture | undefined {
+export function pictureOf(ctx: Ctx, p: CorrectionProposal, n: number | undefined): BindPicture | undefined {
   if (p.frameId) return ctx.pictures.find((x) => x.frameId === p.frameId)
   return n === undefined ? undefined : ctx.pictures.find((x) => x.n === n)
 }
 const toFrame = (pic: BindPicture, p: CorrectionProposal, b: Box): Box => (p.frameId ? b : { x0: pic.transform.x0 + b.x0 / pic.transform.scale, y0: pic.transform.y0 + b.y0 / pic.transform.scale, x1: pic.transform.x0 + b.x1 / pic.transform.scale, y1: pic.transform.y0 + b.y1 / pic.transform.scale })
-const toFrameY = (pic: BindPicture, p: CorrectionProposal, y: number): number => (p.frameId ? y : pic.transform.y0 + y / pic.transform.scale)
-const toFrameX = (pic: BindPicture, p: CorrectionProposal, x: number): number => (p.frameId ? x : pic.transform.x0 + x / pic.transform.scale)
+export const toFrameY = (pic: BindPicture, p: CorrectionProposal, y: number): number => (p.frameId ? y : pic.transform.y0 + y / pic.transform.scale)
+export const toFrameX = (pic: BindPicture, p: CorrectionProposal, x: number): number => (p.frameId ? x : pic.transform.x0 + x / pic.transform.scale)
 const finiteBox = (b: Box | undefined): b is Box => !!b && [b.x0, b.y0, b.x1, b.y1].every((v) => typeof v === 'number' && Number.isFinite(v)) && b.x1 > b.x0 && b.y1 > b.y0
 const inPicture = (pic: BindPicture, b: Box): boolean => b.x0 >= -2 && b.y0 >= -2 && b.x1 <= pic.raster.width + 2 && b.y1 <= pic.raster.height + 2
 
-function viewOf(ctx: Ctx, pic: BindPicture): BindView | undefined {
+export function viewOf(ctx: Ctx, pic: BindPicture): BindView | undefined {
   return ctx.views.find((v) => v.frameId === pic.frameId && v.origin === 'ASSIGNED') ?? ctx.views.find((v) => v.frameId === pic.frameId)
 }
 
@@ -731,6 +737,8 @@ export type ExecuteInput = {
   witnesses?: readonly PrintedWitness[]
   /** Proposal ids already given in this session (a repeated proposal is not applied twice). */
   seen?: Set<string>
+  /** v3.54.17: the plan outline and the elevation silhouettes BUILD_MASSING reads. */
+  massing?: MassingObservations
 }
 
 const closureErrors = (model: CanonicalBuildingModel): { n: number; scene?: ReturnType<typeof compileBuilding>; failed?: string } => {
@@ -799,7 +807,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const pending: Array<{ p: CorrectionProposal; bound?: Bound; view?: BindView; extra: Partial<PatchRecord> }> = []
     let refusal: { p: CorrectionProposal; r: Refusal } | undefined
     for (const p of ordered) {
-      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [] }
+      const ctx: Ctx = { model: working, views: workingViews, pictures: input.pictures, witnesses: input.witnesses ?? [], ...(input.massing ? { massing: input.massing } : {}) }
       if (p.operation === 'ASSIGN_VIEW') {
         const b = bindView(ctx, p)
         if ('status' in b) {
@@ -811,7 +819,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         continue
       }
       const op = p.operation as PatchOperation
-      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : bindOpening(ctx, p)
+      const b = op === 'SET_FINISH' ? bindFinish(ctx, p) : op === 'SET_PARAMETER' ? bindParameter(ctx, p) : op === 'ADD_CHIMNEY' || op === 'UPDATE_CHIMNEY' ? bindChimney(ctx, p) : op === 'BUILD_MASSING' ? bindBuildMassing(ctx, p) : op === 'SET_ROOF' ? bindSetRoof(ctx, p) : op === 'SET_OUTLINE' ? bindSetOutline(ctx, p) : bindOpening(ctx, p)
       if ('status' in b) {
         refusal = { p, r: b }
         break
@@ -834,6 +842,15 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         }
         working = res.model
       }
+      if (b.transform) {
+        const v = validateModel(b.transform(working))
+        if (!v.ok || !v.model) {
+          refusal = { p, r: { status: 'ROLLED_BACK', code: 'COMMAND_REFUSED', why: `the model refused the edit: ${v.issues.filter((i) => i.severity === 'ERROR').map((i) => `[${i.code}] ${i.message}`).join('; ').slice(0, 300)}`, record: b.record } }
+          break
+        }
+        working = v.model
+      }
+      if (b.views) workingViews = [...workingViews.filter((v) => !b.views?.some((q) => q.frameId === v.frameId)), ...b.views]
       pending.push({ p, bound: b, extra: { ...b.record, commands: b.commands, txId } })
     }
     const tx: TransactionRecord = { txId, patches: members.map((m) => m.proposalId), ...(key.startsWith('group:') ? { group: key.slice(6) } : {}), decision: 'REFUSED', why: '', changed: [], allowed: [], collateral: [], closureBefore: before.n, revisionBefore: modelRevision(model) }
@@ -849,7 +866,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
     const digestsAfter = objectDigests(working)
     const changed = changedKeys(digestsBefore, digestsAfter)
     const allowed = pending.flatMap((x) => x.bound?.allowed ?? [])
-    const ok = (k: string): boolean => allowed.includes(k) || allowed.some((a) => a.endsWith(':*') && k.startsWith(a.slice(0, -1)))
+    const ok = (k: string): boolean => allowed.includes(k) || allowed.some((a) => a.endsWith('*') && k.startsWith(a.slice(0, -1)))
     const collateral = changed.filter((k) => !ok(k))
     tx.changed = changed
     tx.allowed = allowed
@@ -901,6 +918,10 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
         measures.set(x.p.proposalId, { sourceVerified: null, why: `${added} region(s) added; usable geometry ${same ? 'unchanged' : 'CHANGED'}; the finish class, its boundary and its surface are not measured in the picture (a reviewer's agreement closes it only as CLOSED_REVIEW_ONLY)` })
         if (!same) failure = 'a finish changed the usable geometry'
         else if (added === 0 && stableJson(working.surfaceRegions, 0) === stableJson(model.surfaceRegions, 0)) failure = 'NO_EFFECT: the finish consumer added no region (the area falls on no wall face the side shows)'
+      } else if (e.kind === 'CUSTOM') {
+        const r = e.measure(working, model, input.pictures)
+        measures.set(x.p.proposalId, r.measure)
+        if (r.failure) failure = r.failure
       } else if (e.kind === 'PARAM') {
         const hit = Object.values(working as unknown as Record<string, unknown>).flatMap((v) => (Array.isArray(v) ? (v as Array<Record<string, unknown>>) : [])).find((o) => o.id === e.targetId)
         const got = hit?.[e.property]

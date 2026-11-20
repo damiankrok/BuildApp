@@ -7,9 +7,9 @@
  * change is NOT offered as an operation: the reviewer may still report it as a defect (`UNSUPPORTED_FAMILIES`), and the
  * record says so with the reason — it never reads as something the system can correct.
  */
-export const CORRECTION_REGISTRY_VERSION = '1.0.0' as const
+export const CORRECTION_REGISTRY_VERSION = '1.1.0' as const
 
-export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE'] as const
+export const PATCH_OPERATIONS = ['ASSIGN_VIEW', 'SET_PARAMETER', 'ADD_OPENING', 'UPDATE_OPENING', 'REMOVE_OPENING', 'ADD_CHIMNEY', 'UPDATE_CHIMNEY', 'SET_FINISH', 'ROOF_FEATURE', 'BUILD_MASSING', 'SET_ROOF', 'SET_OUTLINE'] as const
 export type PatchOperation = (typeof PATCH_OPERATIONS)[number]
 
 export const OPENING_PATCH_KINDS = ['WINDOW', 'DOOR', 'GLAZED_DOOR', 'GARAGE_DOOR'] as const
@@ -25,7 +25,7 @@ export const UNSUPPORTED_FAMILIES = ['ROOF_FORM', 'OUTLINE_REGION', 'BALCONY', '
 
 export type Capability = {
   op: PatchOperation
-  family: 'VIEW' | 'PARAMETER' | 'OPENING' | 'ELEMENT' | 'FINISH' | 'ROOF_FEATURE'
+  family: 'VIEW' | 'PARAMETER' | 'OPENING' | 'ELEMENT' | 'FINISH' | 'ROOF_FEATURE' | 'BODY' | 'ROOF_FORM' | 'OUTLINE'
   /** The analyzer's consumer that executes it. */
   consumer: string
   /** What is measured on the new revision before the transaction commits. */
@@ -109,6 +109,30 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     params: ['feature'],
     prompt: 'ROOF_FEATURE — a dormer on a slope of the main roof: fill `feature` as described below.',
   },
+  BUILD_MASSING: {
+    op: 'BUILD_MASSING',
+    family: 'BODY',
+    consumer: 'massing/solveMassing → commands/createBuilding + createLevel + createWallRing + createRoof per body (massing/ops.ts bindBuildMassing)',
+    measure: 'the plan outline split into at most two rectangles, each body\'s heights and roof form read from elevations registered by the plan (never by the model\'s roof); the built roof drawn back into each registered source elevation (support); closure errors not increased; existing bodies untouched',
+    params: [],
+    prompt: 'BUILD_MASSING — the model lacks a whole body (a wing, a garage) or has no body at all: targetId WHOLE. The analyzer builds it from the plan outline and the elevation silhouettes it holds; you give nothing else. Missing anchors are named, never filled in.',
+  },
+  SET_ROOF: {
+    op: 'SET_ROOF',
+    family: 'ROOF_FORM',
+    consumer: "commands/removeFeature (the body's roofs and planes) + setProperty (the top storey's wall heights and profiles) + createRoof GABLE|FLAT with capWallIds (massing/ops.ts bindSetRoof)",
+    measure: "the model's roof and the proposal's roof as the source elevation draws them, held against the original picture (polygon gate); openings above the new eaves refuse the patch; the built roof drawn back (overlap ≥ 0.8, support)",
+    params: ['picture', 'roofKind', 'roofPolygon', 'side', 'wallLeftX', 'wallRightX', 'groundY'],
+    prompt: "SET_ROOF — a body's roof has the wrong form, ridge direction or heights (e.g. flat where the elevation draws a gable): targetId (the body's roof, roof plane or wall id), picture (a SOURCE elevation), roofKind (GABLE or FLAT), roofPolygon (the roof's outline in that picture: [[x,y],…], a triangle for a gable end, a band for the slopes). If the picture has no registration with heights, also side, wallLeftX/wallRightX (that body's wall ends) and groundY. A hip roof is UNSUPPORTED.",
+  },
+  SET_OUTLINE: {
+    op: 'SET_OUTLINE',
+    family: 'OUTLINE',
+    consumer: "commands/setProperty on the body's walls (start, end), their openings' offsets and finish regions, resizeFeature on its roof footprint, setProperty on its slabs' and rooms' polygons (massing/ops.ts bindSetOutline)",
+    measure: "the walls at the proposed extent and at the model's, held against the source elevation (polygon gate); openings or regions left outside, a party line or a plane roof refuse the patch; the built extent within 1 cm",
+    params: ['picture', 'wallLeftX', 'wallRightX'],
+    prompt: "SET_OUTLINE — a body is longer or shorter along one side than the source elevation draws it: targetId (the body's wall ring or a wall of it), picture (a SOURCE elevation of that side), wallLeftX and wallRightX (where that body's walls end in the picture).",
+  },
 }
 
 export const isPatchOperation = (op: string): op is PatchOperation => (PATCH_OPERATIONS as readonly string[]).includes(op)
@@ -118,7 +142,7 @@ export function capabilityPrompt(): string {
   return [
     `Operations you may propose (registry ${CORRECTION_REGISTRY_VERSION}; each is executed by the analyzer on the model that stands and measured against the source before it is kept):`,
     ...PATCH_OPERATIONS.map((op) => `- ${CAPABILITIES[op].prompt}`),
-    `Any other difference (${UNSUPPORTED_FAMILIES.join(', ')}) is a defect you report in defects with operation UNSUPPORTED: the analyzer cannot change it in this version, and saying so is the right answer.`,
+    `Any other difference (${UNSUPPORTED_FAMILIES.join(', ')}; ROOF_FORM and OUTLINE_REGION here mean what SET_ROOF and SET_OUTLINE cannot do: a hip or curved roof, a non-rectangular body, a third body) is a defect you report in defects with operation UNSUPPORTED: the analyzer cannot change it in this version, and saying so is the right answer.`,
     'Every coordinate is in the pixels of the picture you name (x to the right, y down); never a size in metres you computed. Independent changes get no group; changes that only make sense together (a view and the openings placed through it, a wall and its openings) share one group string and are kept or undone together.',
   ].join('\n')
 }
@@ -149,6 +173,8 @@ export const PATCH_SCHEMA = {
     sourcePicture: { type: 'integer' },
     host: { type: 'string' },
     material: { type: 'string', enum: [...FINISH_CLASSES] },
+    roofKind: { type: 'string', enum: ['GABLE', 'FLAT'] },
+    roofPolygon: { type: 'array', items: { type: 'array', items: { type: 'number' } } },
   },
   additionalProperties: false,
 } as const
@@ -195,6 +221,8 @@ export type PatchFields = {
   sourcePicture?: number
   host?: string
   material?: FinishClass
+  roofKind?: 'GABLE' | 'FLAT'
+  roofPolygon?: Array<[number, number]>
 }
 
 export type ReviewDefect = { id: string; about: string; scope: (typeof DEFECT_SCOPES)[number]; severity: DefectSeverity; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; operation: PatchOperation | 'UNSUPPORTED'; family?: (typeof UNSUPPORTED_FAMILIES)[number] | 'NONE'; continues?: string }
