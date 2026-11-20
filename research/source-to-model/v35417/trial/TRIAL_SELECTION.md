@@ -23,3 +23,16 @@ budżecie dysku. Pierwszy przyjęty kandydat każdej puli jest rodziną próby. 
 **Co jest uruchamiane i zachowane.** Każda rodzina raz przez hosta z jednego końcowego commita (ta sama ścieżka co w
 produkcie), pierwszy wynik zachowany (wyniki, modele, sceny, szkice, rekordy wykonawcy). Brak modelu LOCAL → ścieżka
 BUILD_MASSING (obrys rzutu + elewacje). Koszt w granicach `LIVE_PLAN.md`.
+
+**Poprawka przed analizą (zapisana jawnie).** Pierwsze przejście selekcji (commit zamrożenia be023c9) wybrało w puli
+ARCHON rodzinę DEV (willa-layla), bo wpis wykluczenia miał inny format niż klucz rodziny selektora
+(`projekt-willa-layla-g2ae`). Wpisy DEV v3.54.17 zostały zapisane w formacie klucza selektora i selekcję powtórzono z tym
+samym ziarnem; żaden kandydat nie był analizowany (tylko pobranie pakietu). Pierwsze przejście jest w `selection-pass1.json`.
+
+**Druga poprawka przed analizą.** Po wykluczeniu rodzin DEV pula ARCHON nie ma żadnej niewidzianej rodziny (0 otwartych).
+Druga rodzina jest więc drugim przyjętym kandydatem tego samego przejścia (to samo ziarno) puli Studio Atrium; obie
+rodziny są spoza dominującego wydawcy ARCHON. Nic nie było analizowane.
+
+**Trzecia poprawka przed analizą.** Drugi przyjęty kandydat (Aurora-maxi-ii-sz) był wariantem pierwszego
+(Aurora-maxi-ii-bis-sz): klucz selektora nie zdejmował tokenu wariantu ze środka nazwy. Dwa warianty jednej rodziny to nie
+dwie rodziny: kandydat, którego nazwa bez tokenów wariantu (gdziekolwiek w nazwie) równa się przyjętej, jest pomijany.

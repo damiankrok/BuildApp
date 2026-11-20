@@ -15,6 +15,8 @@ def family(url):
     n = re.sub(r'-m[0-9a-f]{10,}$', '', n)
     return fam(n)
 out = {'commit': commit, 'rule': 'TRIAL_SELECTION.md', 'publishers': {}}
+# v3.54.17: the ARCHON pool is exhausted by the exclusions, so the Studio Atrium walk gives both families (TRIAL_SELECTION.md)
+want = {'archon': 1, 'studioatrium': 2}
 os.makedirs(work, exist_ok=True)
 for publisher, pool_file in (('archon', 'archon-pool.txt'), ('studioatrium', 'studioatrium-pool.txt')):
     pool = [l.strip() for l in open(os.path.join(here, pool_file)) if l.strip()]
@@ -24,6 +26,10 @@ for publisher, pool_file in (('archon', 'archon-pool.txt'), ('studioatrium', 'st
     opened = 0
     for step in range(len(pool)):
         url = pool[(start + step) % len(pool)]
+        core = lambda u: '-'.join(t for t in family(u).split('-') if not re.fullmatch(r'(i|ii|iii|iv|v|vi|vii|viii|ix|x|\d+[a-z]?|bis|sz|oze|t|n|p|a|b|duo|plus|lux|g\d?[a-z]?e?)', t))
+        if any(core(url) == core(a) for a in rec.get('accepted', [])):
+            rec['opened'].append({'url': url, 'opened': False, 'refused': f'a variant of the accepted family {core(url)}'})
+            continue
         if family(url) in seen:
             rec['opened'].append({'url': url, 'opened': False, 'refused': f'family {family(url)} seen before'})
             continue
@@ -49,8 +55,9 @@ for publisher, pool_file in (('archon', 'archon-pool.txt'), ('studioatrium', 'st
             rec['opened'].append(entry)
             continue
         rec['opened'].append(entry)
-        rec['chosen'] = url
-        break
+        rec.setdefault('accepted', []).append(url)
+        rec['chosen'] = rec['accepted'][0]
+        if len(rec['accepted']) >= want.get(publisher, 1): break
     out['publishers'][publisher] = rec
     print(publisher, rec['chosen'] or 'NONE ACCEPTED', f"({sum(1 for o in rec['opened'] if o.get('opened'))} opened)")
 json.dump(out, open(os.path.join(work, 'selection.json'), 'w'), indent=1)

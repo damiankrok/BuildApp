@@ -1,0 +1,140 @@
+{
+ "commit": "be023c9dc17c4caacc4333035f7cd85f78b721d0",
+ "rule": "TRIAL_SELECTION.md",
+ "publishers": {
+  "archon": {
+   "seed": "81c5c070bba1fb82c62bb4ff7e34cf5922f4400c9d309d6835f6cbceec275ced",
+   "start": 17,
+   "poolSize": 34,
+   "opened": [
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-14-m2e92508962e3c",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-23-g-m4d02600deac64",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-45-g-m4fc27d67d2541",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-45-ge-oze-m6cd289f594f4a",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-54-ma7828c88a1fc4",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-56-g-m7cf2907ca7241",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-61-g-m3d6298d210076",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-malinowkach-mdfe2199f9a105",
+     "opened": false,
+     "refused": "family projekt-dom-w-malinowkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-10-g2e-mcda29b0cec33f",
+     "opened": false,
+     "refused": "family projekt-dom-w-rarytasach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2ae-m113295f6cdcfc",
+     "opened": false,
+     "refused": "family projekt-dom-w-rarytasach-5-g2ae seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-renklodach-15-g2-m89f24fd44ddec",
+     "opened": false,
+     "refused": "family projekt-dom-w-renklodach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-skalnicach-3-ma7c291947b287",
+     "opened": false,
+     "refused": "family projekt-dom-w-skalnicach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-wisteriach-21-m42a2875282921",
+     "opened": false,
+     "refused": "family projekt-dom-w-wisteriach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-zielistkach-23-a-mf8a287cd0a50f",
+     "opened": false,
+     "refused": "family projekt-dom-w-zielistkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-zielistkach-33-e-md7d27b57024a3",
+     "opened": false,
+     "refused": "family projekt-dom-w-zielistkach-33-e seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-zielistkach-34-a-m93629019a269a",
+     "opened": false,
+     "refused": "family projekt-dom-w-zielistkach seen before"
+    },
+    {
+     "url": "https://www.archon.pl/projekty-domow/projekt-willa-layla-g2ae-m6a929b0c79fda",
+     "opened": true,
+     "package": "archon-projekt-willa-layla-g2ae.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR"
+     ],
+     "plans": [
+      "GROUND",
+      "UPPER",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND",
+      "UPPER",
+      "GROUND"
+     ],
+     "sections": 1
+    }
+   ],
+   "chosen": "https://www.archon.pl/projekty-domow/projekt-willa-layla-g2ae-m6a929b0c79fda"
+  },
+  "studioatrium": {
+   "seed": "5b3a90d312ee9a9ccb4a7878c4b464ce118b84c1aaa05cff7508adf9d0bd4247",
+   "start": 85,
+   "poolSize": 106,
+   "opened": [
+    {
+     "url": "https://www.studioatrium.pl/projekty-domow/Aurora-maxi-ii-bis-sz,1795.html",
+     "opened": true,
+     "package": "studioatrium-aurora-maxi-ii-bis-sz.package.json",
+     "elevations": [
+      "SIDE_UNSPECIFIED",
+      "SIDE_UNSPECIFIED",
+      "FRONT",
+      "REAR",
+      "FRONT"
+     ],
+     "plans": [
+      "GROUND"
+     ],
+     "sections": 0
+    }
+   ],
+   "chosen": "https://www.studioatrium.pl/projekty-domow/Aurora-maxi-ii-bis-sz,1795.html"
+  }
+ }
+}
