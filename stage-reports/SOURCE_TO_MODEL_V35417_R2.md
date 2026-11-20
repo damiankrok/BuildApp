@@ -56,7 +56,7 @@ nazwana: **dowód na żywo `continues`/`resolved` i ścieżki pozytywnej §3**.
 - Dotknięte testy: `exchange-record-v35417`, `research-ledger-v35417`, `massing-delivery-v35417`,
   `correct-v35416` (43), `massing-v35417` (24), `metric-read-v35414`, `house-reader-spend` (22), testy `house` (214).
   Wszystkie zielone.
-- Pełna macierz: `stage-reports/artifacts/v35417-r2/matrix-r2-summary.json`. Porażki są tylko w znanych plikach bazy
+- Pełna macierz (4472 testy: 4426 zaliczonych, 18 porażek, 11 pominiętych): `stage-reports/artifacts/v35417-r2/matrix-r2-summary.json`. Porażki są tylko w znanych plikach bazy
   (research-isolation 4, reference 2, analyzer-api 1, wall-strip 4, presentation 2, compound-facade 1, text 1 oraz
   program / worker pod obciążeniem). Każda z nich występuje też w bazie (`rd/v35417/matrix/final.txt`). Nowych porażek
   nie ma.
