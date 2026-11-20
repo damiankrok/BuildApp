@@ -50,8 +50,8 @@ export const CAPABILITIES: Record<PatchOperation, Capability> = {
     family: 'PARAMETER',
     consumer: 'commands/setProperty on the level, wall, chimney or roof named by targetId, with the dependent level heights and walls restated in the same transaction',
     measure: 'the printed value read again by the analyzer or the independent metric read (a witness that is not this proposal); the compiled scene',
-    params: ['property', 'value', 'unit', 'literal', 'sourcePicture', 'box'],
-    prompt: 'SET_PARAMETER — a PRINTED value the model contradicts: targetId (a listed level, wall, chimney or roof id), property (LEVEL_ELEVATION, WALL_HEIGHT, CHIMNEY_HEIGHT, ROOF_PITCH), value and unit as printed (m, cm, mm, deg), literal (the print exactly), sourcePicture and box (where it is printed). Never a value you estimated.',
+    params: ['property', 'value', 'unit', 'literal', 'sourcePicture', 'box', 'host'],
+    prompt: 'SET_PARAMETER — a PRINTED value the model contradicts: targetId (a listed level, wall, chimney or roof id), property (LEVEL_ELEVATION, WALL_HEIGHT, CHIMNEY_HEIGHT, ROOF_PITCH), value and unit as printed (m, cm, mm, deg), literal (the print exactly), sourcePicture and box (where it is printed), host (the body or wing the mark belongs to, as the drawing names it, when the house has more than one). Never a value you estimated.',
   },
   ADD_OPENING: {
     op: 'ADD_OPENING',
@@ -147,6 +147,7 @@ export const PATCH_SCHEMA = {
     unit: { type: 'string', enum: [...PATCH_UNITS] },
     literal: { type: 'string' },
     sourcePicture: { type: 'integer' },
+    host: { type: 'string' },
     material: { type: 'string', enum: [...FINISH_CLASSES] },
   },
   additionalProperties: false,
@@ -167,6 +168,7 @@ export const DEFECT_SCHEMA = {
     certainty: { type: 'string', enum: ['CERTAIN', 'LIKELY', 'UNSURE'] },
     operation: { type: 'string', enum: [...PATCH_OPERATIONS, 'UNSUPPORTED'] },
     family: { type: 'string', enum: [...UNSUPPORTED_FAMILIES, 'NONE'] },
+    continues: { type: 'string', description: 'the id of an open defect listed from an earlier look that this one restates (e.g. "L1:D2")' },
   },
   required: ['id', 'about', 'scope', 'severity', 'certainty', 'operation'],
   additionalProperties: false,
@@ -191,7 +193,8 @@ export type PatchFields = {
   unit?: (typeof PATCH_UNITS)[number]
   literal?: string
   sourcePicture?: number
+  host?: string
   material?: FinishClass
 }
 
-export type ReviewDefect = { id: string; about: string; scope: (typeof DEFECT_SCOPES)[number]; severity: DefectSeverity; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; operation: PatchOperation | 'UNSUPPORTED'; family?: (typeof UNSUPPORTED_FAMILIES)[number] | 'NONE' }
+export type ReviewDefect = { id: string; about: string; scope: (typeof DEFECT_SCOPES)[number]; severity: DefectSeverity; certainty: 'CERTAIN' | 'LIKELY' | 'UNSURE'; operation: PatchOperation | 'UNSUPPORTED'; family?: (typeof UNSUPPORTED_FAMILIES)[number] | 'NONE'; continues?: string }

@@ -78,3 +78,33 @@ the SHA-256 of its serialization (patches and finishes included), not the solver
   is a recorded DISPLAY_ASSUMPTION.
 - The raster form path of the sketches (sketch → PNG → shape reader) is kept for walls and roofs; openings and chimneys
   of a sketch go through the semantic channel and the source gate instead of being guessed again from pixels.
+
+## Addendum (audit of 20.11.2026): the meaning of a correction, not only its integration
+
+The read-only audit of the delivery (`2de3525`) confirmed the integration and found four places where a simple data
+model stood in for the fact it was meant to carry. Decisions, each fixed before running anything against a house:
+
+9. **A defect has one identity across looks (A1).** The quality reads the defects as they stand after every look
+   (`reconcileLedger`), not the last look's list. A defect leaves the open set only by CLOSED_VERIFIED, by an explicit
+   `resolved` statement on a NEW revision (NO_LONGER_DIFFERENT → RESOLVED_BY_REVIEW), or by SUPERSEDED (its identity
+   passes to the named defect). NOT_IN_SOURCE, or NO_LONGER_DIFFERENT about the same revision, is a DISPUTE and stays
+   open. Silence is carried (`carriedFrom`). The reviewer is shown the open defects by id (contract 0.4.0, prompt 0.5.0:
+   `continues`, `resolved`).
+10. **A hypothesis is a shape and a kind (A2).** The sketch channel keeps a raked head's two ends and the exact kind
+    (WINDOW, DOOR, GLAZED_DOOR, GARAGE_DOOR). The source gate (1.1.0) scores both hypotheses as polygons when either is
+    raked — rectangles keep the 1.0.0 scoring byte for byte. A change of kind on the same shape is decided by a separate
+    fill measure (row periodicity for panels, inner structure and tint for glazing), whose bands are fixed in advance;
+    between them, and for two kinds of one fill (WINDOW / GLAZED_DOOR), the picture does not decide. The built opening is
+    measured by its head ends and its kind.
+11. **A witness is an observation, not a number (A3).** A printed value witnesses a parameter only with a role that
+    states that property, an anchor (frame + source byte hash), on the picture the proposal names, and — in a model of
+    more than one body — naming the same body as the proposal. Equal values on different bodies are AMBIGUOUS_WITNESS.
+    The analyzer's own level marks carry no role and therefore never witness a parameter by number alone.
+12. **Closure needs a supporting measure (A4).** CLOSED_VERIFIED requires `sourceVerified === true`; a reviewer's
+    agreement with no source measure is CLOSED_REVIEW_ONLY, which is not open but never SOURCE_VERIFIED_IN_SCOPE. A
+    finish states what it does not measure (class, boundary, surface).
+
+Consequences: executor, gate, sketch channel and quality move to 1.1.0 and the review contract to 0.4.0 / prompt 0.5.0,
+so revisions accepted under the old binding are not reused. The controlled proofs 1–3 rerun on the fixed code give the
+same decisions, z values and revisions (`research/source-to-model/v35416/audit/proofs-rerun.json`). The new contract
+fields have not yet met a real reviewer (no paid call was made for this fix).

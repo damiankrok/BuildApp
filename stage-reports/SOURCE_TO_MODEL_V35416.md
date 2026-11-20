@@ -143,7 +143,7 @@ Wydatek etapu: **1,00064 USD** (pula etapu 2,042895); księgi **27,812357 / 28,8
 | F2 zgodność z LOCAL zamiast źródła | bramka źródła (dwie hipotezy na oryginale, z-score), próg 0,30 m usunięty z tej ścieżki | zamknięte (dowód 2 i kontrpróba) |
 | F3 niepełna bramka geometrii otworów | parowanie 1:1 w metrach, środek wzdłuż i w górę, szerokość, wysokość; brakujące w szkicu liczone | zamknięte (reprodukcja Council w teście) |
 | F4 szkice za późno, semantyka gubiona w pikselach | kanał szkicu przed recenzją, typowane elementy → ten sam wykonawca | zamknięte dla otworów i kominów; ściany/dach nadal przez raster |
-| F5 „brak źródła” vs nieobsługiwany rodzaj | MISSING_SOURCE / FAILED / UNSUPPORTED rozdzielone; ekstrakcja bez modelu | częściowo: nadal brak modelu bez linii wymiarowych |
+| F5 „brak źródła” vs nieobsługiwany rodzaj | MISSING_SOURCE / FAILED / UNSUPPORTED rozdzielone; ekstrakcja bez modelu | częściowo: Coastal i Kardamon bez modelu; Layla bez modelu mimo silnej skali (patrz §6) |
 | F6 jedna kalenica na wiele brył | ridge/eaves per host, spór tylko na jednej bryle | zamknięte na poziomie odczytu; konsument wielu dachów nie zmieniony |
 | F7 recenzja nie obejmuje całego celu | kolory i materiały w recenzji; wnętrze tylko z rzutów; defekty bez propozycji i nieobsługiwane liczone w jakości | częściowo |
 | 5.3 dwa błędy śladu faktu | ADMITTED ≠ REFUSED; skutek związany z parametrem | zamknięte (test) |
@@ -155,7 +155,11 @@ Wydatek etapu: **1,00064 USD** (pula etapu 2,042895); księgi **27,812357 / 28,8
 - Forma dachu, obrys/region, balkon, pergola, panele, wnętrze — tylko nazywane (`UNSUPPORTED_OPERATION`).
 - Widoki zarejestrowane tylko pozycyjnie blokują łatki otworów (NEEDS_EVIDENCE) — Alaska, tył Balliny.
 - SET_PARAMETER, ASSIGN_VIEW, SET_FINISH, REMOVE_OPENING, UPDATE_CHIMNEY — wykazane tylko na danych kontrolowanych.
-- Domy bez linii wymiarowych (Coastal, Kardamon, Layla) — nadal bez modelu, tylko szkice.
+- Domy bez modelu: Coastal i Kardamon (brak rozstrzygniętej skali z linii wymiarowych) oraz **Layla, która ma skalę
+  STRONG / potwierdzoną**, a mimo to LOCAL odrzuca układ rzutu (PLAN_LAYOUT_REJECTED). Wcześniejsze zgrupowanie Layli
+  z domami „bez linii wymiarowych” było błędnym skrótem (audyt 20.11). Wąskim gardłem Layli jest interpretacja rzutu
+  i utworzenie modelu; jej szkice istnieją, ale nie ma konsumenta, który z ich znaczenia i z rzutu złożyłby brakujące
+  części bryły. Więcej rund recenzji tego nie zmieni.
 - Live odpowiedzi nie są deterministyczne: dwa biegi tego samego URL bez akceptacji dają różne modele; ponowne
   użycie działa tylko dla przyjętej rewizji.
 
@@ -172,9 +176,55 @@ Wydatek etapu: **1,00064 USD** (pula etapu 2,042895); księgi **27,812357 / 28,8
   `gallery.html` z decyzjami wykonawcy i jakością, plansze (źródło | szkic | przed | po | oddany; perspektywy;
   kondygnacje bez dachu; nakładki dowodów), modele i sceny, nagrania odpowiedzi, rekordy hosta, księga, raporty, APK.
 
-## 8. Werdykt
+## 8. Werdykt (zawężony po audycie 20.11.2026)
 
-IMPLEMENTATION_COMPLETE dla zakresu §4 z zastrzeżeniami: pętla jest zamknięta od końca do końca dla otworów (host,
-żywy bieg, recenzja nowej rewizji), kominy działają na zapisanych odpowiedziach, a SET_PARAMETER, ASSIGN_VIEW,
-SET_FINISH, REMOVE_OPENING i UPDATE_CHIMNEY są wykazane tylko na danych kontrolowanych. Forma dachu pozostaje
-nieobsługiwana — w próbie (Alaska) to był najważniejszy brak. Zieleń techniczna nie oznacza „to jest mój dom”.
+**Integracja: wykazana.** Pętla konsultant → operacja na elemencie → model → pomiar → recenzja nowej rewizji jest
+zamknięta od końca do końca dla otworów (host, żywy bieg). Kominy działają na zapisanych odpowiedziach. SET_PARAMETER,
+ASSIGN_VIEW, SET_FINISH, REMOVE_OPENING i UPDATE_CHIMNEY są wykazane tylko na danych kontrolowanych.
+
+**Semantyka korekt: odbiór częściowy.** Audyt wykazał w zadeklarowanym zakresie cztery luki znaczenia (A1–A4, §9) —
+naprawione w kodzie bez płatnych wywołań i sprawdzone na kontrpróbach audytu, ale jeszcze nie na żywym hoście.
+IoU 1,00 w tabeli hosta oznacza zgodność zbudowanego elementu z poleceniem, nie niezależny pomiar prawdy źródłowej;
+dowodem źródłowym są osobne wyniki z obrazu (z) i recenzja.
+
+**Bryła i dach: poza wykazanym zakresem.** Forma dachu pozostaje nieobsługiwana — w próbie (Alaska) to był
+najważniejszy brak; Layla nie ma modelu mimo silnej skali. Dwie zamrożone próby są historycznymi porażkami, nie dwiema
+użytecznymi miniaturami. Zieleń techniczna nie oznacza „to jest mój dom”.
+
+## 9. Audyt 20.11.2026: A1–A4 i co zmieniono (bez płatnych wywołań)
+
+Audyt odczytowy dostawy (`2de3525`, ZIP `2cdc3ee4…`) potwierdził postęp w edycji istniejącego modelu i wskazał cztery
+luki w zadeklarowanym zakresie. Każda jest naprawiona i ma test: kontrpróbę audytu w jego brzmieniu oraz poprawny
+odpowiednik (`packages/analysis-service/test/correct-v35416.test.ts`, bloki „audit A1…A4”). Kontrpróby audytu
+uruchomione ponownie na prawdziwych modułach: `research/source-to-model/v35416/audit/probe-results-after.json`.
+
+| luka | było | jest |
+|---|---|---|
+| **A1** wada znika z oceny przez pominięcie | jakość liczona z defektów ostatniego spojrzenia; pominięty KEY dach → SOURCE_VERIFIED_IN_SCOPE, openKey 0 | trwała tożsamość defektu (`key`); zamknięcie tylko przez CLOSED_VERIFIED albo jawne `resolved` (NO_LONGER_DIFFERENT na nowej rewizji → RESOLVED_BY_REVIEW; NOT_IN_SOURCE lub ta sama rewizja → DISPUTED, otwarte); pominięty defekt `carriedFrom`, otwarty. Kontrpróba audytu: **UNSUPPORTED_OPERATION, openKey 1**. Recenzent dostaje listę otwartych defektów (kontrakt 0.4.0, prompt 0.5.0: `continues`, `resolved`) |
+| **A2** typ i kąt okna nie są hipotezami | szkic → bbox, typ WINDOW / nie-WINDOW; bramka i pomiar na prostokątach; ten sam bbox → 17,52 vs 17,52 UNDECIDED | szkic przenosi końce skośnej głowicy i dokładny typ (DOOR / GLAZED_DOOR / GARAGE_DOOR); bramka 1.1.0 ocenia wielokąty, gdy którakolwiek hipoteza jest skośna; zmiana samego typu przy tym samym kształcie idzie przez osobną miarę wypełnienia (`compareFill`: paski, struktura, odcień; pasma ustalone z góry, między nimi UNDECIDED); pomiar po budowie sprawdza końce głowicy i zbudowany typ. Ten sam bbox, inna głowica: oceniane jako wielokąty (na prostokątnym rysunku audytu wygrywa prostokąt, z 16,99 vs 14,76) |
+| **A3** liczba bez roli jako świadek | świadek = wartość + jednostka; +5,50 z przekroju garażu ustawiało ścianę główną; `sourceByteHash` pusty | świadek = obserwacja: rola zgodna z właściwością (FLOOR / EAVES·CEILING / CHIMNEY / ROOF_PITCH), kotwica (ramka + hash bajtów), obraz wskazany w propozycji, przy wielu bryłach ta sama bryła (`host` w propozycji i w obserwacji), dwie równe wartości różnych brył → AMBIGUOUS_WITNESS. Kontrpróba audytu: **NEEDS_EVIDENCE / WITNESS_ROLE_MISMATCH**. Rzędne LOCAL-a bez roli nie są już świadkiem parametru |
+| **A4** CLOSED_VERIFIED bez pomiaru | zamknięcie, gdy `sourceVerified` null; wykończenie bez pomiaru koloru | CLOSED_VERIFIED tylko przy `sourceVerified === true`; null + zgoda recenzenta → CLOSED_REVIEW_ONLY (nie otwarte, ale nigdy SOURCE_VERIFIED_IN_SCOPE); SET_FINISH jawnie: klasa, granica i powierzchnia nie są mierzone |
+
+Wersje: rejestr bez zmian; wykonawca 1.1.0, bramka 1.1.0, kanał szkicu 1.1.0, jakość 1.1.0, kontrakt recenzji 0.4.0 /
+prompt 0.5.0 — klucz zaakceptowanych rewizji się zmienia, więc rewizje przyjęte na starych wersjach nie są ponownie
+używane. Prostokąty liczone są w bramce bajtowo jak w 1.0.0, więc dowody kontrolowane 1–3 i siedem poprawek hosta
+dają te same wyniki. Siedem poprawek hosta miało `sourceVerified: true` — A4 ich nie zmienia.
+
+**Regresja na zapisanych odpowiedziach (0 USD).**
+- Dowody kontrolowane 1–3 przeliczone na poprawionym kodzie: 10/10 decyzji, te same z i te same rewizje modelu
+  (`audit/proofs-rerun.json`).
+- Kanał szkicu Balliny (odtworzenie): te same 10 decyzji (6 UPDATE + 1 ADD przyjęte, 3 ADD tyłu NEEDS_EVIDENCE), ten
+  sam model `fa31a591ac19` (`audit/replays.json`).
+- Pętla recenzji Balliny odtworzona z nagranych odpowiedzi recenzenta: stan bez zmian (RECOGNIZABLE_PARTIAL,
+  1 CLOSED_VERIFIED, 0 KEY), ale otwartych jest 5 zamiast 2. Defekt „parapety okien frontu za nisko” zgłoszony
+  w pierwszym spojrzeniu i pominięty w drugim był w 1.0.0 cicho gubiony — teraz jest przenoszony jako otwarty
+  (`carriedFrom: 1`). Koszt nazwany: nagrane odpowiedzi poprzedzają pole `continues`, więc dwa defekty powtórzone
+  innymi słowami (drzwi tarasowe, panele PV) liczą się podwójnie; nowy prompt każe recenzentowi wskazać `continues`.
+
+**Testy.** Macierz na poprawionym kodzie: 4396 passed (+15 testów audytu), 16 failed — ta sama lista 16 znanych błędów
+bazy co przy dostawie (`audit/matrix-audit.txt`). Kontrpróby audytu: 5/5 zachowują się zgodnie z wymaganiem.
+
+**Czego ta poprawka nie robi.** Nie było nowego biegu hosta ani żadnego płatnego wywołania (0 USD); działanie nowych
+pól kontraktu (`continues`, `resolved`, `host`) z prawdziwym recenzentem nie jest jeszcze wykazane. Nie zmieniono
+zapisanych modeli. Krok 2 audytu (ogólny start i korekta bryły/dachu przy częściowej rekonstrukcji) nie jest częścią
+tej poprawki.

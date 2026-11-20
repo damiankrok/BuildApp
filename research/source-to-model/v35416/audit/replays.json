@@ -1,0 +1,274 @@
+{
+ "schema": "v35416-audit-replays",
+ "cost": "0 USD (recorded answers)",
+ "runs": {
+  "ballina-sketch-channel": {
+   "before_1_0_0": {
+    "modelSha256": "fa31a591ac19b357fb8c157a8ed242b753f50fc57c6af8fa99260a26d53e1cc9",
+    "sketchRecords": [
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-0",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 8.18
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-3",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 7.18
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-1",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 3.34
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-4",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 3.1
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-2",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 4.31
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-east-1-0",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 10.1
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "LEFT",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 6.64
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     }
+    ],
+    "quality": null
+   },
+   "after_1_1_0": {
+    "modelSha256": "fa31a591ac19b357fb8c157a8ed242b753f50fc57c6af8fa99260a26d53e1cc9",
+    "sketchRecords": [
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-0",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 8.18
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-3",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 7.18
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-1",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 3.34
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-4",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 3.1
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-front-0-2",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 4.31
+     },
+     {
+      "operation": "UPDATE_OPENING",
+      "targetId": "opening-0-east-1-0",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 10.1
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "LEFT",
+      "status": "COMMITTED",
+      "code": null,
+      "proposedZ": 6.64
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     },
+     {
+      "operation": "ADD_OPENING",
+      "targetId": "REAR",
+      "status": "NEEDS_EVIDENCE",
+      "code": "VIEW_WITHOUT_HEIGHTS",
+      "proposedZ": null
+     }
+    ],
+    "quality": null
+   }
+  },
+  "ballina-review-loop": {
+   "before_1_0_0": {
+    "modelSha256": "85ffe17035a0a02ea9103292534e725bb4c94c4081992491747d4fa0c0e0ce81",
+    "sketchRecords": [],
+    "quality": {
+     "state": "RECOGNIZABLE_PARTIAL",
+     "openKey": 0,
+     "openOther": 2,
+     "closedVerified": 1,
+     "closedReviewOnly": null,
+     "why": "the delivered revision was looked at; 2 difference(s) open (0 KEY): L2:D1 NO_PROPOSAL, L2:D2 UNSUPPORTED_OPERATION; 1 closed on a verified revision; 2 measured contradiction(s) the review does not cancel",
+     "defects": [
+      {
+       "id": "L1:D1",
+       "key": null,
+       "settlement": "CLOSED_VERIFIED",
+       "carriedFrom": null,
+       "about": "Left end window missing"
+      },
+      {
+       "id": "L1:D2",
+       "key": null,
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": null,
+       "about": "Rear large glazing should be a tall sliding door, not a short window"
+      },
+      {
+       "id": "L1:D3",
+       "key": null,
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": null,
+       "about": "Front window sills too low on the tall windows"
+      },
+      {
+       "id": "L1:D4",
+       "key": null,
+       "settlement": "UNSUPPORTED_OPERATION",
+       "carriedFrom": null,
+       "about": "Solar panels missing on the rear roof slope"
+      },
+      {
+       "id": "L2:D1",
+       "key": null,
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": null,
+       "about": "The rear glazed sliding door is modelled as a raised window, not a floor-length door."
+      },
+      {
+       "id": "L2:D2",
+       "key": null,
+       "settlement": "UNSUPPORTED_OPERATION",
+       "carriedFrom": null,
+       "about": "The solar panel array on the rear roof slope is missing from the model."
+      }
+     ]
+    }
+   },
+   "after_1_1_0": {
+    "modelSha256": "85ffe17035a0a02ea9103292534e725bb4c94c4081992491747d4fa0c0e0ce81",
+    "sketchRecords": [],
+    "quality": {
+     "state": "RECOGNIZABLE_PARTIAL",
+     "openKey": 0,
+     "openOther": 5,
+     "closedVerified": 1,
+     "closedReviewOnly": 0,
+     "why": "the delivered revision was looked at; 5 difference(s) open (0 KEY, 3 carried from earlier looks): L1:D2 NO_PROPOSAL, L1:D3 NO_PROPOSAL, L1:D4 UNSUPPORTED_OPERATION, L2:D1 NO_PROPOSAL; 1 closed on a verified revision; 2 measured contradiction(s) the review does not cancel",
+     "defects": [
+      {
+       "id": "L1:D1",
+       "key": "L1:D1",
+       "settlement": "CLOSED_VERIFIED",
+       "carriedFrom": null,
+       "about": "Left end window missing"
+      },
+      {
+       "id": "L1:D2",
+       "key": "L1:D2",
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": 1,
+       "about": "Rear large glazing should be a tall sliding door, not a short window"
+      },
+      {
+       "id": "L1:D3",
+       "key": "L1:D3",
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": 1,
+       "about": "Front window sills too low on the tall windows"
+      },
+      {
+       "id": "L1:D4",
+       "key": "L1:D4",
+       "settlement": "UNSUPPORTED_OPERATION",
+       "carriedFrom": 1,
+       "about": "Solar panels missing on the rear roof slope"
+      },
+      {
+       "id": "L2:D1",
+       "key": "L2:D1",
+       "settlement": "NO_PROPOSAL",
+       "carriedFrom": null,
+       "about": "The rear glazed sliding door is modelled as a raised window, not a floor-length door."
+      },
+      {
+       "id": "L2:D2",
+       "key": "L2:D2",
+       "settlement": "UNSUPPORTED_OPERATION",
+       "carriedFrom": null,
+       "about": "The solar panel array on the rear roof slope is missing from the model."
+      }
+     ]
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "schema": "v35416-audit-probes-rerun",
+ "auditRecorded": {
+  "vanishedDefect": {
+   "state": "SOURCE_VERIFIED_IN_SCOPE",
+   "openKey": 0,
+   "retainedLedger": [
+    {
+     "id": "L1:roof",
+     "look": 1,
+     "about": "missing gable roof",
+     "scope": "ROOF",
+     "severity": "KEY",
+     "certainty": "CERTAIN",
+     "operation": "UNSUPPORTED",
+     "family": "ROOF_FORM",
+     "settlement": "UNSUPPORTED_OPERATION",
+     "why": "not repaired"
+    }
+   ]
+  },
+  "nullEvidenceClosure": [
+   {
+    "id": "L1:finish",
+    "look": 1,
+    "about": "wrong finish",
+    "scope": "FRONT",
+    "severity": "MAJOR",
+    "certainty": "CERTAIN",
+    "operation": "SET_FINISH",
+    "proposalId": "p",
+    "patchStatus": "COMMITTED",
+    "settlement": "CLOSED_VERIFIED",
+    "verifiedOn": "new-rev",
+    "why": "applied; the look at the new revision says MATCHES; the source measure is not contradicted"
+   }
+  ],
+  "sameBoxTypeOrRakeOnly": {
+   "winner": "UNDECIDED",
+   "proposedZ": 17.52,
+   "currentZ": 17.52
+  },
+  "unrelatedWitness": {
+   "commands": [
+    {
+     "type": "setProperty",
+     "targetId": "wall",
+     "property": "height",
+     "value": 5.5
+    }
+   ],
+   "allowed": [
+    "walls:wall"
+   ],
+   "expect": {
+    "kind": "PARAM",
+    "targetId": "wall",
+    "property": "height",
+    "value": 5.5
+   },
+   "record": {
+    "bound": {
+     "frameId": "garage-section",
+     "ids": [
+      "wall"
+     ],
+     "values": {
+      "valueM": 5.5,
+      "height": 5.5
+     }
+    },
+    "source": {
+     "frameId": "garage-section",
+     "sourceByteHash": ""
+    }
+   }
+  },
+  "rakedSketchProposal": [
+   {
+    "proposalId": "sk:rame-front:add:raked",
+    "baseRevision": "revision",
+    "operation": "ADD_OPENING",
+    "targetId": "FRONT",
+    "frameId": "frame-front",
+    "patch": {
+     "box": {
+      "x0": 10,
+      "y0": 10,
+      "x1": 30,
+      "y1": 60
+     },
+     "kind": "WINDOW"
+    },
+    "origin": "SKETCH",
+    "uncertainty": "MEDIUM",
+    "justification": "the sketch of this elevation draws raked (WINDOW); the model has no opening there"
+   }
+  ]
+ },
+ "afterFix": {
+  "vanishedDefect": {
+   "state": "UNSUPPORTED_OPERATION",
+   "openKey": 1,
+   "current": [
+    {
+     "id": "L1:roof",
+     "settlement": "UNSUPPORTED_OPERATION"
+    }
+   ]
+  },
+  "nullEvidenceClosure": [
+   {
+    "id": "L1:finish",
+    "settlement": "CLOSED_REVIEW_ONLY",
+    "why": "applied; the look at the new revision says MATCHES; no source measure confirms it () — the reviewer's word, not a source verification"
+   }
+  ],
+  "sameBoxTypeOrRakeOnly": {
+   "identicalShapes": {
+    "winner": "UNDECIDED",
+    "measure": "BOX"
+   },
+   "sameBoxOtherHead": {
+    "winner": "CURRENT",
+    "measure": "POLYGON",
+    "proposedZ": 14.76,
+    "currentZ": 16.99
+   }
+  },
+  "unrelatedWitness": [
+   {
+    "status": "NEEDS_EVIDENCE",
+    "code": "WITNESS_ROLE_MISMATCH",
+    "why": "5.5 m is printed (+5.50 on garage-section, role unknown) but not as a EAVES / CEILING mark: an equal number is not a witness of WALL_HEIGHT"
+   }
+  ],
+  "rakedSketchProposal": [
+   {
+    "box": {
+     "x0": 10,
+     "y0": 10,
+     "x1": 30,
+     "y1": 60
+    },
+    "kind": "WINDOW",
+    "headLeftY": 10,
+    "headRightY": 30
+   }
+  ]
+ }
+}

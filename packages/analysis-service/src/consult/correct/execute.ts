@@ -11,6 +11,15 @@
  * refused. Proposals that share a `group` are one transaction and stand or fall together. Nothing here re-runs the
  * analyzer: the model that stands is edited by the same commands the analyzer emits, so its ids, rooms, relations,
  * materials and every element the patch is not about are carried over unchanged — and that is measured, not assumed.
+ *
+ * v3.54.16 audit fixes (executor 1.1.0):
+ *  - A2: an opening hypothesis is its full shape (a raked head's two ends) and its exact kind (WINDOW, DOOR,
+ *    GLAZED_DOOR, GARAGE_DOOR). Place and size are judged by the polygon gate; a change of kind on the same shape by the
+ *    separate fill measure; the built opening is measured by its head ends and its kind, not by its bounding box alone.
+ *  - A3: a printed value witnesses a parameter only as a bound observation — its role matches the property, it is
+ *    anchored to a source frame with a byte hash, it is on the picture the proposal names, and in a model of several
+ *    bodies it names the same body as the proposal. A number that merely equals the proposed one is not a witness;
+ *    two equal numbers on different bodies are ambiguous, never mutual confirmation.
  */
 import { applyCommands } from '@buildapp/commands'
 import type { BuildingCommand } from '@buildapp/commands'
@@ -24,10 +33,10 @@ import { APPEARANCE_OBSERVATION_SCHEMA, APPEARANCE_OBSERVATION_VERSION } from '.
 import type { AppearanceObservation } from '../../appearance/contract.js'
 import { CAPABILITIES, CORRECTION_REGISTRY_VERSION, isPatchOperation } from './registry.js'
 import type { PatchFields, PatchOperation } from './registry.js'
-import { compareHypotheses, iou, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
-import type { Box, HypothesisVerdict } from './source-gate.js'
+import { compareFill, compareHypotheses, iou, isRaked, supportOf, SOURCE_GATE_VERSION } from './source-gate.js'
+import type { Box, FillVerdict, HypothesisVerdict, Shape } from './source-gate.js'
 
-export const CORRECTION_EXECUTOR_VERSION = '1.0.0' as const
+export const CORRECTION_EXECUTOR_VERSION = '1.1.0' as const
 
 export type Side = 'FRONT' | 'RIGHT' | 'REAR' | 'LEFT'
 export const SIDES: readonly Side[] = ['FRONT', 'RIGHT', 'REAR', 'LEFT']
@@ -48,7 +57,22 @@ export type BindView = {
 /** A source picture as the reviewer saw it: its frame, the downscale to that frame, the frame's raster. */
 export type BindPicture = { n: number; frameId: string; projection: string; transform: { x0: number; y0: number; scale: number }; raster: Raster; sourceByteHash: string }
 /** A printed value someone other than the proposer read (the analyzer's metric evidence or the independent metric read). */
-export type PrintedWitness = { valueM: number; unit: 'm' | 'deg'; frameId: string; by: 'ANALYZER' | 'METRIC_READ'; literal?: string }
+export type PrintedWitness = {
+  valueM: number
+  unit: 'm' | 'deg'
+  frameId: string
+  by: 'ANALYZER' | 'METRIC_READ'
+  literal?: string
+  /** v3.54.16 audit A3: what the printed mark marks (FLOOR, EAVES, CEILING, RIDGE, CHIMNEY, ROOF_PITCH …); absent = unknown. */
+  role?: string
+  /** The body or element the mark belongs to, as the source names it (absent = not named). */
+  host?: string
+  /** The datum the level is measured from (±0,00 of the drawing, when known). */
+  datum?: string
+  /** The source variant the mark was read on. */
+  sourceByteHash?: string
+  observationId?: string
+}
 
 export type CorrectionProposal = {
   proposalId: string
@@ -81,8 +105,8 @@ export type PatchRecord = {
   /** What the patch was bound to: the source frame and its pixels, the side, the host, the ids it creates or changes. */
   bound?: { frameId: string; side?: Side; box?: Box; hostId?: string; ids: string[]; depth?: 'SECOND_VIEW' | 'ROOF_MEET_LINE' | 'DISPLAY_ASSUMPTION'; values?: Record<string, number> }
   source?: { frameId: string; sourceByteHash: string; crop?: Box }
-  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string }
-  measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; sourceVerified: boolean | null; why: string }
+  gate?: { winner: HypothesisVerdict['winner']; proposedZ: number | null; currentZ?: number | null; nullBoxes: number; why: string; /** 1.1.0: BOX, POLYGON (a raked head on either side) or FILL (a change of kind on the same shape). */ measure?: 'BOX' | 'POLYGON' | 'FILL'; fill?: Pick<FillVerdict, 'observed' | 'features'> }
+  measure?: { builtBox?: Box; iouWithProposal?: number; builtSupportZ?: number | null; headErrorPx?: number; builtKind?: string; sourceVerified: boolean | null; why: string }
   commands?: BuildingCommand[]
 }
 
@@ -182,6 +206,43 @@ export function openingBoxes(m: CanonicalBuildingModel, v: BindView): Array<{ id
     return s && s.side === v.side ? [{ id: o.id, box: boxOfSpan(v, s) }] : []
   })
 }
+export type OpeningPatchKindExact = 'WINDOW' | 'DOOR' | 'GLAZED_DOOR' | 'GARAGE_DOOR'
+/** A2: the exact kind of a model opening, from its fill (a glazed leaf, a garage door), never WINDOW / not-WINDOW. */
+export function kindOfOpening(m: CanonicalBuildingModel, id: string): OpeningPatchKindExact | undefined {
+  if (m.windows.some((w) => w.openingId === id)) return 'WINDOW'
+  const d = m.doors.find((x) => x.openingId === id)
+  if (!d) return undefined
+  const panels = (d as { assembly?: { panels: Array<{ kind: string; glazing?: string }> } }).assembly?.panels ?? []
+  if ((d as { usage?: string }).usage === 'GARAGE' || (panels.length > 0 && panels.every((p) => p.kind === 'PANEL'))) return 'GARAGE_DOOR'
+  if (panels.some((p) => p.kind === 'LEAF' && p.glazing === 'FULL')) return 'GLAZED_DOOR'
+  return 'DOOR'
+}
+/** A2: a model opening on one view as its shape: its box and, for a raked head, the head's two ends in the frame. */
+export function shapeOfOpening(m: CanonicalBuildingModel, o: Opening, v: BindView): Shape | undefined {
+  const s = openingSpan(m, o)
+  if (!s || s.side !== v.side) return undefined
+  const box = boxOfSpan(v, s)
+  if (o.head?.kind !== 'RAKED') return box
+  const ax = alongAxis(s.side)
+  const L = wallLen(s.wall)
+  const nearAlong = s.wall.start[ax] + ((s.wall.end[ax] - s.wall.start[ax]) * o.offset) / L
+  const base = levelOf(m, s.wall.levelId).elevation + s.wall.baseOffset
+  const yNear = pyOf(v.projection, base + o.sill + o.height)
+  const yFar = pyOf(v.projection, base + o.sill + o.head.heightFar)
+  const nearIsLeft = Math.abs(pxOf(v.projection, nearAlong) - box.x0) <= Math.abs(pxOf(v.projection, nearAlong) - box.x1)
+  const headLeftY = nearIsLeft ? yNear : yFar
+  const headRightY = nearIsLeft ? yFar : yNear
+  return { ...box, y0: Math.min(headLeftY, headRightY), headLeftY, headRightY }
+}
+/** Two opening shapes are the same geometry: one box (overlap ≥ 0.9) and, when raked, the same head ends within tol. */
+const sameShape = (a: Shape, b: Shape): boolean => {
+  if (iou(a, b) < 0.9 || isRaked(a) !== isRaked(b)) return false
+  if (!isRaked(a)) return true
+  const tol = Math.max(2, 0.04 * (a.y1 - a.y0))
+  return Math.abs((a.headLeftY as number) - (b.headLeftY as number)) <= tol && Math.abs((a.headRightY as number) - (b.headRightY as number)) <= tol
+}
+const headError = (a: Shape, b: Shape): number => (isRaked(a) && isRaked(b) ? Math.max(Math.abs((a.headLeftY as number) - (b.headLeftY as number)), Math.abs((a.headRightY as number) - (b.headRightY as number))) : isRaked(a) || isRaked(b) ? Infinity : Math.max(Math.abs(a.y0 - b.y0), 0))
+
 /** The side's wall area in the view's pixels: its walled range across, ground floor to the lowest wall top up. */
 const facadePx = (m: CanonicalBuildingModel, v: BindView): { x0: number; x1: number; y0?: number; y1?: number } => {
   const r = sideRange(m, v.side)
@@ -212,7 +273,7 @@ const changedKeys = (a: Map<string, string>, b: Map<string, string>): string[] =
 // ---------------------------------------------------------------------------------------------------------------
 
 type Expect =
-  | { kind: 'OPENING'; id: string; view: BindView; box: Box; levelId: string }
+  | { kind: 'OPENING'; id: string; view: BindView; box: Box; shape: Shape; levelId: string; openingKind: OpeningPatchKindExact; fillChangeFrom?: OpeningPatchKindExact }
   | { kind: 'REMOVED'; id: string }
   | { kind: 'CHIMNEY'; id: string; view: BindView; box: Box }
   | { kind: 'FINISH'; hosts: string[] }
@@ -305,7 +366,8 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     return { commands: [{ type: 'removeFeature', targetId: target.id, cascade: true }], allowed: [`openings:${target.id}`, ...fills], expect: { kind: 'REMOVED', id: target.id }, record }
   }
   if (!finiteBox(f.box)) return { status: 'INVALID', code: 'NO_BOX', why: `${p.operation} states the opening's box in a source picture (x0 < x1, y0 < y1); this one does not` }
-  const kind = f.kind ?? (existing ? (m.windows.some((w) => w.openingId === existing.id) ? 'WINDOW' : 'DOOR') : undefined)
+  const currentKind = existing ? kindOfOpening(m, existing.id) : undefined
+  const kind = f.kind ?? currentKind
   if (!kind) return { status: 'INVALID', code: 'NO_KIND', why: 'ADD_OPENING names the kind (WINDOW, DOOR, GLAZED_DOOR, GARAGE_DOOR)' }
   const at = elevationOf(ctx, p, f.picture, 'HEIGHTS')
   if ('status' in at) return at
@@ -326,9 +388,22 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const others = openingBoxes(m, view).filter((o) => o.id !== existing?.id)
   const duplicate = others.find((o) => iou(o.box, box) > 0.3)
   if (duplicate) return { status: 'DUPLICATE', code: 'OPENING_ALREADY_THERE', why: `${duplicate.id} already stands there (overlap ${iou(duplicate.box, box).toFixed(2)}): an opening is updated, never doubled` }
-  const currentBox = existing && ofExisting ? boxOfSpan(view, ofExisting) : undefined
-  const g = compareHypotheses(pic.raster, box, currentBox, facadePx(m, view), others.map((o) => o.box), tolPxOf(view))
-  const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, why: g.why }
+  // A2: both hypotheses as full shapes (a raked head's two ends), and the kinds as their own measure
+  const proposedShape: Shape = typeof f.headLeftY === 'number' && typeof f.headRightY === 'number' ? { ...box, headLeftY: toFrameY(pic, p, f.headLeftY), headRightY: toFrameY(pic, p, f.headRightY), y0: Math.min(box.y0, toFrameY(pic, p, f.headLeftY), toFrameY(pic, p, f.headRightY)) } : box
+  const currentShape = existing ? shapeOfOpening(m, existing, view) : undefined
+  let g: HypothesisVerdict
+  let fillFrom: OpeningPatchKindExact | undefined
+  let fillRecord: Pick<FillVerdict, 'observed' | 'features'> | undefined
+  if (existing && currentShape && sameShape(proposedShape, currentShape)) {
+    if (currentKind === kind || !currentKind) return { status: 'NO_EFFECT', code: 'ALREADY_AS_PROPOSED', why: `${existing.id} already stands with this shape and kind (${kind}) on picture ${pic.n}`, record: { bound: { frameId: view.frameId, side: view.side, box, ids: [existing.id] }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box } } }
+    // the same shape, another kind: the position test cannot decide it — the fill of the opening does, or nothing does
+    const fv = compareFill(pic.raster, proposedShape, kind as OpeningPatchKindExact, currentKind)
+    fillFrom = currentKind
+    fillRecord = { observed: fv.observed, features: fv.features }
+    const sup = supportOf(pic.raster, proposedShape, facadePx(m, view), [proposedShape, ...others.map((o) => o.box)], tolPxOf(view))
+    g = { winner: fv.winner, proposed: sup, why: fv.why }
+  } else g = compareHypotheses(pic.raster, proposedShape, currentShape, facadePx(m, view), others.map((o) => o.box), tolPxOf(view))
+  const gate = { winner: g.winner, proposedZ: g.proposed.z, ...(g.current ? { currentZ: g.current.z } : {}), nullBoxes: g.proposed.null.n, why: g.why, measure: fillRecord ? ('FILL' as const) : (g.measure ?? 'BOX'), ...(fillRecord ? { fill: fillRecord } : {}) }
   const id = existing?.id ?? `op-fix-${view.side.toLowerCase()}-${short(p.proposalId)}`
   const L = wallLen(host)
   const ax = alongAxis(view.side)
@@ -352,8 +427,8 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     }
   }
   const record = { bound: { frameId: view.frameId, side: view.side, box, hostId: host.id, ids: [id], values: { offset: u0, width, sill, height } }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box }, gate }
-  if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
-  if (g.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: 'SOURCE_UNDECIDED', why: g.why, record }
+  if (g.winner === 'CURRENT') return { status: 'REJECTED_BY_SOURCE', code: fillRecord ? 'MODEL_FILL_BETTER_SUPPORTED' : existing ? 'MODEL_BETTER_SUPPORTED' : 'SOURCE_SHOWS_NO_OPENING', why: g.why, record }
+  if (g.winner === 'UNDECIDED') return { status: 'NEEDS_EVIDENCE', code: fillRecord ? 'FILL_UNDECIDED' : 'SOURCE_UNDECIDED', why: g.why, record }
   if (u0 < -0.01 || u0 + width > L + 0.01) return { status: 'INVALID', code: 'HOST_TOO_SHORT', why: `${host.id} is ${L.toFixed(2)} m long; the opening would run ${u0.toFixed(2)}..${(u0 + width).toFixed(2)} m along it`, record }
   const oldFills = existing ? [...m.windows.filter((w) => w.openingId === existing.id).map((w) => ({ coll: 'windows', id: w.id })), ...m.doors.filter((d) => d.openingId === existing.id).map((d) => ({ coll: 'doors', id: d.id }))] : []
   const fillId = oldFills[0] && ((oldFills[0].coll === 'windows') === (kind === 'WINDOW')) ? oldFills[0].id : `${id}-${kind === 'WINDOW' ? 'unit' : 'leaf'}`
@@ -362,7 +437,7 @@ function bindOpening(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     { type: 'cutOpening', id, wallId: host.id, kind: kind === 'WINDOW' ? 'WINDOW' : 'DOOR', offset: Math.max(0, u0), sill, width, height, ...(head ? { head } : {}) },
     ...fillCommands(m, id, kind, fillId, host.thickness),
   ]
-  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`], expect: { kind: 'OPENING', id, view, box, levelId: host.levelId }, record }
+  return { commands, allowed: [`openings:${id}`, ...oldFills.map((x) => `${x.coll}:${x.id}`), `${kind === 'WINDOW' ? 'windows' : 'doors'}:${fillId}`], expect: { kind: 'OPENING', id, view, box, shape: head ? proposedShape : box, levelId: host.levelId, openingKind: kind as OpeningPatchKindExact, ...(fillFrom ? { fillChangeFrom: fillFrom } : {}) }, record }
 }
 
 /** Where a stack meets the roof, across the side: the roof planes' height along the line at `along`. */
@@ -499,6 +574,45 @@ function bindFinish(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   return { commands: [], appearance: { obs, projection: view.projection }, allowed: ['surfaceRegions:*', 'materials:*'], expect: { kind: 'FINISH', hosts }, record: { bound: { frameId: view.frameId, side: view.side, box, ids: hosts }, source: { frameId: pic.frameId, sourceByteHash: pic.sourceByteHash, crop: box } } }
 }
 
+/** A3: which printed roles state each property (a ceiling mark is never a floor, a ridge never a wall top). */
+export const WITNESS_ROLES: Record<NonNullable<PatchFields['property']>, readonly string[]> = { LEVEL_ELEVATION: ['FLOOR'], WALL_HEIGHT: ['EAVES', 'CEILING'], CHIMNEY_HEIGHT: ['CHIMNEY'], ROOF_PITCH: ['ROOF_PITCH'] }
+const normHost = (h: string | undefined): string => (h ?? '').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, ' ').trim()
+
+/**
+ * A3: the one printed observation that witnesses `v` for this property, or why there is none: the role must state
+ * the property; the mark must be anchored (a frame and its source byte hash); when the proposal names its picture, the
+ * mark must be on that picture's frame; in a model of more than one body the mark and the proposal must name the same
+ * body; and two candidates that remain on different bodies or pictures are ambiguous — neither is chosen.
+ */
+function bindWitness(ctx: Ctx, f: PatchFields, v: number): { witness: PrintedWitness } | Refusal {
+  const prop = f.property as NonNullable<PatchFields['property']>
+  const unit = prop === 'ROOF_PITCH' ? 'deg' : 'm'
+  const tol = unit === 'deg' ? 0.5 : 0.005
+  const sameValue = ctx.witnesses.filter((w) => w.unit === unit && Math.abs(w.valueM - v) <= tol)
+  if (sameValue.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'NO_INDEPENDENT_WITNESS', why: `${v} ${unit} is not among the printed values the analyzer or the independent metric read hold: the proposer's own reading is not a second witness` }
+  const roles = WITNESS_ROLES[prop]
+  const roled = sameValue.filter((w) => w.role !== undefined && roles.includes(w.role))
+  if (roled.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'WITNESS_ROLE_MISMATCH', why: `${v} ${unit} is printed (${sameValue.map((w) => `${w.literal ?? w.valueM} on ${w.frameId}${w.role ? ` as ${w.role}` : ', role unknown'}`).join('; ').slice(0, 240)}) but not as a ${roles.join(' / ')} mark: an equal number is not a witness of ${prop}` }
+  const anchored = roled.filter((w) => !!w.frameId && !!w.sourceByteHash)
+  if (anchored.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'WITNESS_NOT_ANCHORED', why: `the ${roles.join(' / ')} mark ${v} ${unit} has no source frame and byte hash: it cannot be traced to a picture` }
+  let cand = anchored
+  if (f.sourcePicture !== undefined) {
+    const pic = ctx.pictures.find((x) => x.n === f.sourcePicture)
+    cand = pic ? anchored.filter((w) => w.frameId === pic.frameId) : []
+    if (cand.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'WITNESS_NOT_ON_PICTURE', why: `the proposal reads ${v} ${unit} on picture ${f.sourcePicture}${pic ? ` (${pic.frameId})` : ', which is not a source picture of this check'}; the matching mark is on ${anchored.map((w) => w.frameId).join(', ')}` }
+  }
+  const multiBody = ctx.model.roofs.length > 1 || (ctx.model.roofs.length > 0 && ctx.model.roofPlanes.length > 0)
+  if (multiBody) {
+    const ph = normHost(f.host)
+    if (!ph) return { status: 'NEEDS_EVIDENCE', code: 'HOST_NOT_NAMED', why: `the model has more than one body: the proposal must name the body ${v} ${unit} belongs to` }
+    cand = cand.filter((w) => normHost(w.host) !== '' && (normHost(w.host).includes(ph) || ph.includes(normHost(w.host))))
+    if (cand.length === 0) return { status: 'NEEDS_EVIDENCE', code: 'HOST_NOT_BOUND', why: `no ${roles.join(' / ')} mark of ${v} ${unit} names the body "${f.host}": a value printed for another body does not witness this one` }
+  }
+  const distinct = new Set(cand.map((w) => `${w.frameId}|${normHost(w.host)}`))
+  if (distinct.size > 1) return { status: 'NEEDS_EVIDENCE', code: 'AMBIGUOUS_WITNESS', why: `${v} ${unit} is printed as ${roles.join(' / ')} on ${[...distinct].map((d) => d.replace('|', ' for ') || '?').join(' and ')}: two marks on different bodies or pictures do not confirm each other, and neither is chosen` }
+  return { witness: cand[0] }
+}
+
 function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
   const m = ctx.model
   const f = p.patch ?? {}
@@ -510,14 +624,13 @@ function bindParameter(ctx: Ctx, p: CorrectionProposal): Bound | Refusal {
     const num = Number((f.literal.match(/[-+±]?\d+(?:[.,]\d+)?/)?.[0] ?? 'NaN').replace(',', '.').replace('±', ''))
     if (!Number.isFinite(num) || Math.abs(num - f.value) > 1e-6) return { status: 'INVALID', code: 'LITERAL_MISMATCH', why: `the literal "${f.literal}" does not state the value ${f.value}` }
   }
-  // a witness that is not this proposal: the analyzer's own reading or the independent metric read
-  const unit = f.property === 'ROOF_PITCH' ? 'deg' : 'm'
-  const tol = unit === 'deg' ? 0.5 : 0.005
-  const witness = ctx.witnesses.find((w) => w.unit === unit && Math.abs(w.valueM - v) <= tol)
-  if (!witness) return { status: 'NEEDS_EVIDENCE', code: 'NO_INDEPENDENT_WITNESS', why: `${v} ${unit} is not among the printed values the analyzer or the independent metric read hold: the proposer's own reading is not a second witness` }
+  // A3: a witness is a bound observation someone other than the proposer read — the same value is only one condition
+  const bw = bindWitness(ctx, f, v)
+  if ('status' in bw) return bw
+  const witness = bw.witness
   const allowed: string[] = []
   const commands: BuildingCommand[] = []
-  const source = { frameId: witness.frameId, sourceByteHash: '' }
+  const source = { frameId: witness.frameId, sourceByteHash: witness.sourceByteHash as string }
   if (f.property === 'LEVEL_ELEVATION') {
     const lv = m.levels.find((l) => l.id === p.targetId)
     if (!lv) return { status: 'INVALID', code: 'UNKNOWN_TARGET', why: `${p.targetId} is not a level` }
@@ -754,14 +867,23 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
       if (e.kind === 'OPENING') {
         const o = working.openings.find((q) => q.id === e.id)
         const s = o ? openingSpan(working, o) : undefined
+        const builtShape = o ? shapeOfOpening(working, o, e.view) : undefined
         const built = s ? boxOfSpan(e.view, s) : undefined
         const pic = input.pictures.find((q) => q.frameId === e.view.frameId)
         const ov = built ? iou(built, e.box) : 0
         const others = openingBoxes(working, e.view).filter((q) => q.id !== e.id).map((q) => q.box)
-        const sup = built && pic ? supportOf(pic.raster, built, facadePx(working, e.view), [built, ...others], tolPxOf(e.view)) : undefined
-        measures.set(x.p.proposalId, { ...(built ? { builtBox: built } : {}), iouWithProposal: Math.round(ov * 1000) / 1000, builtSupportZ: sup?.z ?? null, sourceVerified: sup ? sup.supported : null, why: built ? `built ${e.id} on ${s?.wall.id} drawn back into the source: overlap ${ov.toFixed(2)} with the proposal, support z ${sup?.z ?? '—'}` : `${e.id} is not in the candidate` })
+        // A2: the built SHAPE (head ends) back in the source, and the built KIND — not the bounding box alone
+        const sup = builtShape && pic ? supportOf(pic.raster, builtShape, facadePx(working, e.view), [builtShape, ...others], tolPxOf(e.view)) : undefined
+        const builtKind = o ? kindOfOpening(working, o.id) : undefined
+        const fillOk = e.fillChangeFrom && builtShape && pic ? compareFill(pic.raster, builtShape, e.openingKind, e.fillChangeFrom).winner === 'PROPOSED' : true
+        const hErr = builtShape ? headError(builtShape, e.shape) : Infinity
+        const hTol = Math.max(3, 0.05 * (e.box.y1 - e.box.y0))
+        const verified = sup ? (sup.supported === null ? null : sup.supported && fillOk) : null
+        measures.set(x.p.proposalId, { ...(built ? { builtBox: built } : {}), iouWithProposal: Math.round(ov * 1000) / 1000, builtSupportZ: sup?.z ?? null, ...(Number.isFinite(hErr) ? { headErrorPx: Math.round(hErr * 10) / 10 } : {}), ...(builtKind ? { builtKind } : {}), sourceVerified: verified, why: built ? `built ${e.id} (${builtKind ?? '?'}) on ${s?.wall.id} drawn back into the source: overlap ${ov.toFixed(2)} with the proposal${isRaked(e.shape) ? `, head ends within ${Number.isFinite(hErr) ? hErr.toFixed(1) : '∞'} px` : ''}, support z ${sup?.z ?? '—'}${e.fillChangeFrom ? `; fill ${fillOk ? 'shows' : 'does not show'} a ${e.openingKind}` : ''}` : `${e.id} is not in the candidate` })
         if (!built || ov < 0.85) failure = `${e.id} was not built where the proposal binds it (overlap ${ov.toFixed(2)})`
         else if (s && s.wall.levelId !== e.levelId) failure = `${e.id} was built on another storey`
+        else if (isRaked(e.shape) && !(hErr <= hTol)) failure = `${e.id}'s head was not built as proposed (its ends are ${Number.isFinite(hErr) ? hErr.toFixed(1) : 'not'} px off, tolerance ${hTol.toFixed(1)})`
+        else if (builtKind !== e.openingKind) failure = `${e.id} was built as ${builtKind ?? 'nothing'}, not ${e.openingKind}`
       } else if (e.kind === 'REMOVED') {
         if (working.openings.some((q) => q.id === e.id)) failure = `${e.id} is still in the candidate`
         measures.set(x.p.proposalId, { sourceVerified: true, why: `${e.id} and its fill removed` })
@@ -777,7 +899,7 @@ export function executeCorrections(input: ExecuteInput): CorrectionOutcome {
       } else if (e.kind === 'FINISH') {
         const same = usableGeometryFingerprint(working) === usableGeometryFingerprint(model)
         const added = working.surfaceRegions.filter((r) => !model.surfaceRegions.some((q) => q.id === r.id)).length
-        measures.set(x.p.proposalId, { sourceVerified: null, why: `${added} region(s) added; usable geometry ${same ? 'unchanged' : 'CHANGED'}` })
+        measures.set(x.p.proposalId, { sourceVerified: null, why: `${added} region(s) added; usable geometry ${same ? 'unchanged' : 'CHANGED'}; the finish class, its boundary and its surface are not measured in the picture (a reviewer's agreement closes it only as CLOSED_REVIEW_ONLY)` })
         if (!same) failure = 'a finish changed the usable geometry'
         else if (added === 0 && stableJson(working.surfaceRegions, 0) === stableJson(model.surfaceRegions, 0)) failure = 'NO_EFFECT: the finish consumer added no region (the area falls on no wall face the side shows)'
       } else if (e.kind === 'PARAM') {

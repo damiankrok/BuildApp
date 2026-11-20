@@ -11,11 +11,14 @@
 // of applied corrections (`appliedReview`), and a problem id on every proposal's record.
 // 0.3.0 (v3.54.16): the post-build check proposes operations of the correction registry (`correct/registry.ts`) with a
 // typed `patch`, a `defectId` and an optional `group`, and reports every difference in `defects` — supported or not.
+// 0.4.0 (v3.54.16 audit A1): a defect keeps its identity across looks — `continues` names the earlier open defect it
+// restates, and `resolved` states, explicitly, an earlier defect that no longer differs, is not in the source, or is
+// superseded by a defect of this look. Silence about an earlier defect closes nothing.
 import { DEFECT_SCHEMA, PATCH_SCHEMA } from './correct/registry.js'
 import type { PatchFields, ReviewDefect } from './correct/registry.js'
 
-export const CONSULTANT_CONTRACT_VERSION = '0.3.0' as const
-export const CONSULTANT_PROMPT_VERSION = '0.4.0' as const
+export const CONSULTANT_CONTRACT_VERSION = '0.4.0' as const
+export const CONSULTANT_PROMPT_VERSION = '0.5.0' as const
 
 export const REVIEW_STATUSES = ['VERIFIED_IN_SCOPE', 'ISSUE_FOUND', 'NEED_EVIDENCE', 'UNKNOWN'] as const
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number]
@@ -112,7 +115,12 @@ export type ConsultantReview = {
   appliedReview?: AppliedReview[]
   /** v3.54.16: every difference found, with an id, whether or not an operation can correct it. */
   defects?: ReviewDefect[]
+  /** 0.4.0: explicit statements about earlier open defects (by their listed ids). */
+  resolved?: ReviewResolution[]
 }
+
+export const RESOLUTION_VERDICTS = ['NO_LONGER_DIFFERENT', 'NOT_IN_SOURCE', 'SUPERSEDED'] as const
+export type ReviewResolution = { defectId: string; verdict: (typeof RESOLUTION_VERDICTS)[number]; note: string; supersededBy?: string }
 
 /** The answer tool's input schema: the whole review in one call. Kept small (no unions beyond enums). */
 export const REVIEW_TOOL_NAME = 'submit_review' as const
@@ -187,6 +195,10 @@ export const REVIEW_SCHEMA = {
       items: { type: 'object', properties: { id: { type: 'string' }, verdict: { type: 'string', enum: ['MATCHES', 'ACCEPTABLE_APPROXIMATION', 'WRONG_PLACE', 'WRONG_SIZE', 'WRONG_KIND', 'SHOULD_NOT_EXIST', 'NOT_VISIBLE'] }, note: { type: 'string' } }, required: ['id', 'verdict', 'note'], additionalProperties: false },
     },
     defects: { type: 'array', items: DEFECT_SCHEMA },
+    resolved: {
+      type: 'array',
+      items: { type: 'object', properties: { defectId: { type: 'string' }, verdict: { type: 'string', enum: [...RESOLUTION_VERDICTS] }, note: { type: 'string' }, supersededBy: { type: 'string' } }, required: ['defectId', 'verdict', 'note'], additionalProperties: false },
+    },
   },
   required: ['status', 'observations', 'requestedEvidence', 'proposedCorrections', 'checked', 'notChecked'],
   additionalProperties: false,
@@ -219,5 +231,11 @@ export function parseReview(input: unknown): { review: ConsultantReview } | { re
   for (const p of o.proposedCorrections as ProposedCorrection[]) {
     if (!p || typeof p.proposalId !== 'string' || typeof p.operation !== 'string' || typeof p.targetId !== 'string' || !p.proposed || typeof p.proposed.literal !== 'string') return { refused: 'a proposed correction lacks proposalId, operation, targetId or proposed.literal' }
   }
-  return { review: o as ConsultantReview }
+  // 0.4.0: a resolution that does not name an earlier defect and a known verdict is dropped by name, not guessed
+  const review = o as ConsultantReview
+  if (review.resolved !== undefined) {
+    if (!Array.isArray(review.resolved)) return { refused: 'resolved is not a list' }
+    review.resolved = review.resolved.filter((r) => r && typeof r.defectId === 'string' && RESOLUTION_VERDICTS.includes(r.verdict) && typeof r.note === 'string' && (r.verdict !== 'SUPERSEDED' || typeof r.supersededBy === 'string'))
+  }
+  return { review }
 }

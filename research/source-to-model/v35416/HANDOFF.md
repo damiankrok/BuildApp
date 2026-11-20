@@ -26,3 +26,12 @@ went non-strict while the host is strict: run one strict DEV job before the next
 **How to rerun at 0 USD.** `run.ts --replay <turns.json> --sketch-replay <sketch-turns.json> --sketch-map
 <sketches.json>`; executor proofs: `correct-replay.ts`; recorded answers in the private ZIP (`runs/`). Host: build
 `apps/analyzer-api`, then `host-e2e.mjs --commit … --repeat --default <url> <url>` with the key in the environment only.
+
+**Audit of 20.11.2026 (A1–A4), fixed at 0 USD.** Quality reads the reconciled defect ledger (one identity per defect;
+omission carried; disputes open; reviewer-only closures never SOURCE_VERIFIED). Opening hypotheses carry raked head ends
+and exact kinds; the gate scores polygons when either side is raked and decides kind-only changes by the fill measure
+(fixed bands; WINDOW vs GLAZED_DOOR is never decided by fill). Parameter witnesses need role, anchor, picture and body.
+Versions: executor/gate/sketch channel/quality 1.1.0, contract 0.4.0 / prompt 0.5.0 (accepted revisions under the old
+binding are not reused). Not yet shown with a live reviewer: `continues`, `resolved`, `host`. The audit's step 2 (a
+general start and body/roof correction under partial reconstruction) is open and not started. Next delivery must also
+carry the frozen plan/section bytes of the cases (the audit could not replay the plan failures without them).

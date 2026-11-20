@@ -12,6 +12,8 @@
   pierwszy wynik `results/trial-first-results.json`
 - Wyniki: `research/source-to-model/v35416/results/` — `controlled-proofs.json`, `host-e2e.json`,
   `trial-first-results.json`, `matrix-freeze.txt`, `matrix-final.txt`
+- Audyt 20.11.2026 (A1–A4): raport §8–§9, ADR addendum, `research/source-to-model/v35416/audit/` (`rerun-probes.ts`,
+  `probe-results-after.json`, `proofs-rerun.json`, `replays.json`)
 - Hand-off: `research/source-to-model/v35416/HANDOFF.md`
 - Księga: `research/ai-assist/spend-ledger-v35416.json` (etap 1,00064 USD; księgi 27,812357 / 28,854612)
 - Narzędzia: `run.ts`, `correct-replay.ts`, `host-e2e.mjs`, `book-host.ts`, `fact-trace.ts`, `ledger.ts`,

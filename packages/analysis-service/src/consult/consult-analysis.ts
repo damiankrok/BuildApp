@@ -52,8 +52,8 @@ import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, viewsOf
 import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
-import { QUALITY_VERSION, qualityOf, settleDefects } from './correct/quality.js'
-import type { DefectEntry, QualitySummary } from './correct/quality.js'
+import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
+import type { DefectEntry, DefectResolution, QualitySummary } from './correct/quality.js'
 
 export type ConsultantWiring = {
   model: ConsultantModel
@@ -867,10 +867,15 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     return [...shown, ...extraPictures]
   }
   // printed values someone other than a proposer read: the analyzer's level marks and the independent metric read
-  const witnessesOf = (l: Local): PrintedWitness[] => [
-    ...((l.metrics as { evidence?: Array<{ kind: string; value?: number; frameId?: string }> } | undefined)?.evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && typeof e.value === 'number').map((e) => ({ valueM: e.value as number, unit: 'm' as const, frameId: e.frameId ?? '', by: 'ANALYZER' as const })),
-    ...(metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => (o.kind === 'LEVEL' || o.kind === 'ANGLE') && typeof o.value === 'number').map((o) => ({ valueM: o.value as number, unit: o.kind === 'ANGLE' ? ('deg' as const) : ('m' as const), frameId: r.frameId, by: 'METRIC_READ' as const, literal: o.literal }))),
-  ]
+  // v3.54.16 audit A3: each witness keeps what the observation said — its role, its host, its frame and that frame's
+  // source bytes; the analyzer's own level marks carry no role, so they never witness a parameter by number alone
+  const witnessesOf = (l: Local): PrintedWitness[] => {
+    const hashOf = (frameId: string | undefined): string | undefined => (frameId ? l.graph?.coordinateFrames.find((f) => f.id === frameId)?.variantByteHash : undefined)
+    return [
+      ...((l.metrics as { evidence?: Array<{ kind: string; value?: number; frameId?: string }> } | undefined)?.evidence ?? []).filter((e) => e.kind === 'LEVEL_DATUM' && typeof e.value === 'number').map((e) => ({ valueM: e.value as number, unit: 'm' as const, frameId: e.frameId ?? '', by: 'ANALYZER' as const, ...(hashOf(e.frameId) ? { sourceByteHash: hashOf(e.frameId) } : {}) })),
+      ...(metricRead?.reads ?? []).flatMap((r) => r.observations.filter((o) => (o.kind === 'LEVEL' || o.kind === 'ANGLE') && typeof o.value === 'number').map((o) => ({ valueM: o.value as number, unit: o.kind === 'ANGLE' ? ('deg' as const) : ('m' as const), frameId: r.frameId, by: 'METRIC_READ' as const, literal: o.literal, ...(o.role ? { role: o.role } : {}), ...(o.hostHint ? { host: o.hostHint } : {}), ...(hashOf(r.frameId) ? { sourceByteHash: hashOf(r.frameId) } : {}), ...(o.id ? { observationId: o.id } : {}) }))),
+    ]
+  }
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
@@ -966,6 +971,10 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   let lastReview: ModelCheckResult | undefined
   let lastCheckedRevision: string | null = null
   const defectLedger: DefectEntry[] = []
+  // v3.54.16 audit A1: explicit statements of later looks about earlier defects, and the revision each look judged
+  const resolutions: DefectResolution[] = []
+  const lookRevision = new Map<number, string>()
+  const OPEN_NOW = new Set(['DISPUTED', 'APPLIED_REVIEW_DISAGREES', 'REJECTED_BY_SOURCE', 'NEEDS_EVIDENCE', 'UNSUPPORTED_OPERATION', 'NO_PROPOSAL', 'REFUSED', 'ROUND_LIMIT', 'APPLIED_NOT_REVIEWED'])
   let prevLook: { look: number; defects: NonNullable<ConsultantReview['defects']>; proposals: Array<{ proposalId: string; defectId?: string }>; records: PatchRecord[] } | undefined
   let lastLookNumber = 0
   let pendingAtLimit = 0
@@ -989,7 +998,11 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       let res: ModelCheckResult
       try {
         const views = [...viewsOf(run), ...storeysOf(run)]
-        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied.map((a) => ({ id: a.id, what: a.what })) } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
+        // A1: every earlier defect still open is listed by its id — the look restates it, resolves it, or leaves it open
+        const settledOpen = reconcileLedger(defectLedger, resolutions, lookRevision, lastLookNumber).filter((d) => OPEN_NOW.has(d.settlement))
+        const pendingOpen = prevLook ? prevLook.defects.filter((d) => !(prevLook?.proposals.some((x) => x.defectId === d.id && prevLook?.records.some((r) => r.status === 'COMMITTED' && (r.proposalId === x.proposalId || r.proposalId.endsWith(`:${x.proposalId}`)))) ?? false)).map((d) => ({ id: `L${prevLook?.look}:${d.id}`, about: d.about, scope: d.scope, severity: d.severity })) : []
+        const openDefects = [...settledOpen.map((d) => ({ id: d.key, about: d.about, scope: d.scope, severity: d.severity })), ...pendingOpen].filter((d, i, a) => a.findIndex((x) => x.id === d.id) === i && !d.id.startsWith('L0:'))
+        res = await checkModel({ baseRevision: revision, sources, views, ...(lastApplied.length > 0 ? { applied: lastApplied.map((a) => ({ id: a.id, what: a.what })) } : {}), ...(lastRefused.length > 0 ? { refused: lastRefused } : {}), ...(openDefects.length > 0 ? { openDefects } : {}), model: wiring.model, price: wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), limits, record: (e) => record({ ...e, round: `check-${g}` }), ...(options.signal ? { signal: options.signal } : {}), now })
       } catch (e) {
         rec.decision = 'CHECK_FAILED'
         rec.why = `${(e as Error).name}: ${(e as Error).message.slice(0, 300)} — the model before the look stands`
@@ -1009,6 +1022,8 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       lastReview = res
       lastCheckedRevision = revision
       lastLookNumber = g
+      lookRevision.set(g, revision)
+      for (const r of res.review.resolved ?? []) resolutions.push({ look: g, revision, defectId: r.defectId, verdict: r.verdict, note: r.note, ...(r.supersededBy ? { supersededBy: r.supersededBy } : {}) })
       rec.status = res.review.status
       rec.observations = res.review.observations
       rec.defects = res.review.defects ?? []
@@ -1168,13 +1183,14 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   const finalState = stateOf(good)
   const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision, rounds) : undefined
   if (sourceCheck) {
-    const last = defectLedger.filter((d) => d.look === lastLookNumber)
     const contradictions = sourceCheck.knownDefects.filter((k) => /^OUTLINE_(SHORT|BEYOND)|^SCALE_CONTRADICTED/.test(k.code)).length
-    sourceCheck.quality = qualityOf({ looked: sourceCheck.looks > 0, checkedRevision: sourceCheck.checkedRevision, deliveredRevision: sourceCheck.deliveredRevision, lastStatus: sourceCheck.reviewStatus, defects: last, allDefects: defectLedger, measuredContradictions: contradictions, pendingAtLimit, attemptedForKey, committedForKey })
+    // A1: quality reads the defects as they stand after EVERY look, not the last look's list
+    sourceCheck.quality = qualityOf({ looked: sourceCheck.looks > 0, checkedRevision: sourceCheck.checkedRevision, deliveredRevision: sourceCheck.deliveredRevision, lastStatus: sourceCheck.reviewStatus, defects: defectLedger.filter((d) => d.look === lastLookNumber), allDefects: defectLedger, resolutions, lookRevision, lastLook: lastLookNumber, measuredContradictions: contradictions, pendingAtLimit, attemptedForKey, committedForKey })
+    const last = sourceCheck.quality.defects
     sourceCheck.correctionRuns = correctionRuns
     // v3.54.16 (after the freeze, named): the axes read the last look's defect ledger too — a difference reported with
     // no executable proposal (an UNSUPPORTED roof form, an opening on a view without heights) is still open on its axis
-    const openOn = (f: (d: DefectEntry) => boolean): boolean => last.some((d) => d.settlement !== 'CLOSED_VERIFIED' && f(d))
+    const openOn = (f: (d: DefectEntry) => boolean): boolean => last.some((d) => OPEN_NOW.has(d.settlement) && f(d))
     if (openOn((d) => d.scope === 'ROOF' || d.family === 'ROOF_FORM' || d.operation === 'ROOF_FEATURE')) sourceCheck.axes.roof = 'DIFFERENCE_OPEN'
     if (openOn((d) => /OPENING/.test(d.operation))) sourceCheck.axes.openings = 'DIFFERENCE_OPEN'
     for (const d of last.filter((x) => x.settlement !== 'CLOSED_VERIFIED')) if (!sourceCheck.knownDefects.some((k) => k.what.startsWith(d.id))) sourceCheck.knownDefects.push({ code: `DEFECT_${d.settlement}`, what: `${d.id} (${d.severity}, ${d.scope}): ${d.about}`.slice(0, 400) })

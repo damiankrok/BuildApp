@@ -12,6 +12,16 @@
 
 ## Current summary (read first)
 
+- **v3.54.16 audit fixes (2026-11-20): A1–A4 from the read-only audit of `2de3525`, 0 USD.** A defect keeps one
+  identity across looks and closes only by a verified closure or an explicit statement (omission is carried, a
+  disagreement between looks is DISPUTED); opening hypotheses are shapes (raked head ends) with exact kinds, judged by a
+  polygon gate and a separate fill measure; a printed value witnesses a parameter only as a bound observation (role,
+  anchor, picture, body); CLOSED_VERIFIED needs a supporting source measure (else CLOSED_REVIEW_ONLY). Executor / gate /
+  sketch channel / quality 1.1.0, review contract 0.4.0 / prompt 0.5.0. Proofs 1–3 and Ballina's sketch channel replay
+  identically; the review-loop replay keeps a defect 1.0.0 dropped. No host run, APK unchanged (1347). Report §8–§9
+  `stage-reports/SOURCE_TO_MODEL_V35416.md` (verdict narrowed: integration shown, correction semantics partially
+  accepted, form/roof outside the shown scope); audit records `research/source-to-model/v35416/audit/`.
+
 - **v3.54.16 (2026-11-19): one correction executor — consultant → operation on an element → model → source measure →
   review of the new revision; APK 1347** (Master Plan v3.54.16, after the Council audit of `5d4321c`). Report
   `stage-reports/SOURCE_TO_MODEL_V35416.md`, index `stage-reports/README_V35416.md`, ADR
