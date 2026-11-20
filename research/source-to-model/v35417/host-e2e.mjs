@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-* v3.54.17 (from v3.54.16): the same harness on the final v3.54.17 commit; the report reads the body/roof records (SET_ROOF, BUILD_MASSING, SET_OUTLINE) from the served summary. The books are research/ai-assist/spend-ledger-v35417.json (via book-host.ts).
- *
 /**
+ * v3.54.17 (from v3.54.16): the same harness on the final v3.54.17 commit; the report reads the body/roof records (SET_ROOF, BUILD_MASSING, SET_OUTLINE) from the served summary. The books are research/ai-assist/spend-ledger-v35417.json (via book-host.ts).
+ *
  * v3.54.16 (from v3.54.15): integration and quality are checked apart. Integration: the result names the correction
  * registry, at least one patch was COMMITTED by the shared executor and delivered (its revision is the served model's),
  * and a look judged the revision that carries it. Quality: the result carries a quality state of its own (never inferred
