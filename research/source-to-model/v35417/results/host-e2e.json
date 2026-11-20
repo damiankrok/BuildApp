@@ -1,0 +1,39 @@
+{
+ "commit": "14a34bf3cd65166f3b02dbbe39bda00d5fd5ec02",
+ "books": {
+  "opened": 27.877317,
+  "after": 28.542857,
+  "requests": 18,
+  "cap": 28.854612
+ },
+ "jobs": {
+  "job-1 alaska (token)": {
+   "status": "COMPLETED",
+   "model": "f0c3b54ba93c",
+   "mechanism": "SKETCH SET_ROOF ring-main-0 COMMITTED and delivered; GABLE X pitch 42.7, eaves 4.19, ridge 7.84 m (published 7.68 m, 40 deg, never read by the mechanism); region gate PROPOSED (78 %), built body 97 % drawn matter",
+   "annex": "SET_ROOF ring-attached-0-0 proposed 87.1 deg (registered by its own narrow extent), refused by the kernel (pitch <= 85) and rolled back: a binder plausibility check is missing (named)",
+   "quality": "NEEDS_EVIDENCE: 9 differences open (1 KEY), 1 closed on a verified revision"
+  },
+  "job-2 Aurora-maxi-ii-bis-sz (TRIAL, first result)": {
+   "status": "COMPLETED",
+   "model": "01e6b86d1536",
+   "mechanism": "no SET_ROOF/BUILD_MASSING proposal kept (LOCAL gable stood; sketches PARTIAL)",
+   "quality": "UNSUPPORTED_OPERATION: 8 differences open (1 KEY), 0 closed"
+  },
+  "job-3 Aurora-midi-ii (TRIAL, first result)": {
+   "status": "FAILED ANALYSIS_FAILED",
+   "why": "one request (the metric read, 0.034858 USD) then an unclassified exception in the consultant path before any sketch request; LOCAL alone builds a model offline (17.35 x 7.735 m, ridge 5.03 m) and the consultant path without transport completes offline: the failure needs the live answer, which the host does not record (named gap: record consultant answers of a failed job)"
+  },
+  "job-1-repeat": {
+   "status": "COMPLETED",
+   "reuse": "REUSED, 8 answers replayed, 0 USD, 0 requests, same model and scene bytes, quality kept"
+  },
+  "job-default-no-token": {
+   "status": "FAILED RECONSTRUCTION_FAILED",
+   "requests": 0,
+   "usd": 0,
+   "note": "the drawings path alone (LOCAL) refuses Alaska; no request"
+  }
+ },
+ "harness": "4 FAIL lines: 3 are the copied v3.54.16 expectation registry=1.0.0 (the host serves 1.1.0 = correct; harness fixed afterwards, research script only); 1 is the trial job-2 with no committed patch (a true first result)"
+}

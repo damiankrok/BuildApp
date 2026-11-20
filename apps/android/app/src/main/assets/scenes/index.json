@@ -1,5 +1,17 @@
 [
   {
+    "key": "alaska-host-v35417",
+    "title": "Alaska — v3.54.17: dach ze źródła (oddany, host)",
+    "subtitle": "ODDANY: SET_ROOF bryły głównej przez host, kalenica 7,84 m (strona: 7,68), 42,7°; dobudówka odrzucona (87°), jakość NEEDS_EVIDENCE",
+    "asset": "alaska-host-v35417.scene.json",
+    "modelId": "m-analysis-u8fba8e6a95bb",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "f1a2f11c5e2691e55a29d8b3077cfe8291e6a0b109a726161150f2ea8d599d23",
+    "meshCount": 145,
+    "triangleCount": 6164,
+    "objectCount": 99
+  },
+  {
     "key": "alaska-dev-v35417",
     "title": "Alaska — v3.54.17: dach dwuspadowy ze źródła (DEV)",
     "subtitle": "ROZWÓJ: SET_ROOF z elewacji, kalenica 7,48 m (strona: 7,68), 41,4° (strona: 40°); CLOSED_VERIFIED; otwarte: rytm okien, okna dachowe, kominy",
@@ -10,6 +22,18 @@
     "meshCount": 123,
     "triangleCount": 5844,
     "objectCount": 89
+  },
+  {
+    "key": "aurora-maxi-trial-v35417",
+    "title": "Aurora maxi II bis (Studio Atrium) — próba v3.54.17, pierwszy wynik",
+    "subtitle": "PRÓBA ZAMROŻONA: pierwszy wynik przez host; brak zatwierdzonej korekty, 8 różnic otwartych (UNSUPPORTED_OPERATION)",
+    "asset": "aurora-maxi-trial-v35417.scene.json",
+    "modelId": "m-analysis-u3a44cf494a39",
+    "modelSchemaVersion": "1.9.0",
+    "contentHash": "13bad65068ee061d66e1da93a6cac7a2baa66334967e5b58ad94c82ab9951b91",
+    "meshCount": 95,
+    "triangleCount": 2792,
+    "objectCount": 65
   },
   {
     "key": "ballina-v35416",

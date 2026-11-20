@@ -32,8 +32,8 @@ describe('v3.54.12 scenes', () => {
   })
   it('are listed after the v3.54.13 scenes, the H candidate then the experiment, labelled as such', () => {
     const index = JSON.parse(readFileSync(join(ASSET_DIR, 'index.json'), 'utf8')) as Array<{ key: string; title: string; subtitle: string }>
-    expect(index.slice(13, 15).map((e) => e.key)).toEqual(['marcowki-h-v35412', 'marcowki-local-szkice-v35412'])
-    expect(index[13].subtitle).toContain('KANDYDAT')
-    expect(index[14].subtitle).toContain('EKSPERYMENT')
+    expect(index.slice(15, 17).map((e) => e.key)).toEqual(['marcowki-h-v35412', 'marcowki-local-szkice-v35412'])
+    expect(index[15].subtitle).toContain('KANDYDAT')
+    expect(index[16].subtitle).toContain('EKSPERYMENT')
   })
 })

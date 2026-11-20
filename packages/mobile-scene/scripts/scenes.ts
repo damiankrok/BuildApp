@@ -49,6 +49,16 @@ export type SceneSpec = { key: string; title: string; subtitle: string; build: (
  * hash — `bundle.test.ts` holds that.
  */
 export const SCENES: readonly SceneSpec[] = [
+  // v3.54.17 final host job on 14a34bf (Alaska, Studio Atrium): LOCAL + the live metric read built two bodies; the
+  // sketch channel's SET_ROOF gave the main body the gable the elevations draw (region gate PROPOSED, 97 % drawn matter),
+  // delivered and looked at. Publisher's facts (never read): ridge 7.84 vs 7.68 m, pitch 42.7 vs 40°. The annex's
+  // proposal (87° from its own narrow extent) was refused by the kernel and rolled back — named.
+  {
+    key: 'alaska-host-v35417',
+    title: 'Alaska — v3.54.17: dach ze źródła (oddany, host)',
+    subtitle: 'ODDANY: SET_ROOF bryły głównej przez host, kalenica 7,84 m (strona: 7,68), 42,7°; dobudówka odrzucona (87°), jakość NEEDS_EVIDENCE',
+    build: () => sealedOwnerModel('alaska-host-v35417', 'f0c3b54ba93c78465689e25ecfb3f3d149419576dc4a8d0050f9d4d116869a75', 'owner-v35417'),
+  },
   // v3.54.17 (Alaska, Studio Atrium, DEV: the v3.54.16 trial's recorded answers replayed, the reviewer live once): the
   // body had no roof; the sketch channel's SET_ROOF built the gable the elevations draw (read under the 90° turn their
   // heights agree on), gated on the original picture and closed by the look at the delivered revision (CLOSED_VERIFIED).
@@ -59,6 +69,14 @@ export const SCENES: readonly SceneSpec[] = [
     title: 'Alaska — v3.54.17: dach dwuspadowy ze źródła (DEV)',
     subtitle: 'ROZWÓJ: SET_ROOF z elewacji, kalenica 7,48 m (strona: 7,68), 41,4° (strona: 40°); CLOSED_VERIFIED; otwarte: rytm okien, okna dachowe, kominy',
     build: () => sealedOwnerModel('alaska-dev-v35417', 'fa9be01e4aa56d56023990da4146212d65b599cd2d310f3ca26fe76c9b8c06c1', 'owner-v35417'),
+  },
+  // v3.54.17 frozen trial (Studio Atrium Aurora-maxi-ii-bis-sz), first result kept as is: LOCAL's gable model, no
+  // patch kept; 8 differences open (UNSUPPORTED_OPERATION). The second trial family failed on the host (named).
+  {
+    key: 'aurora-maxi-trial-v35417',
+    title: 'Aurora maxi II bis (Studio Atrium) — próba v3.54.17, pierwszy wynik',
+    subtitle: 'PRÓBA ZAMROŻONA: pierwszy wynik przez host; brak zatwierdzonej korekty, 8 różnic otwartych (UNSUPPORTED_OPERATION)',
+    build: () => sealedOwnerModel('aurora-maxi-trial-v35417', '01e6b86d153635a2c344b07b7b5836b48f1145bad4aeb7f0da72cefe9873d4f0', 'owner-v35417'),
   },
   // v3.54.16 (Ballina, delivered by the final host job on f75d205): the correction executor's patches from the sketches —
   // five front openings and one on the right moved/resized against the source, the missing left window added — each
