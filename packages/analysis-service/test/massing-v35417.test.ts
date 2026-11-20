@@ -359,3 +359,25 @@ describe('v3.54.17 §8 independence and data quality', () => {
     expect(h.records[0].code).toBe('HIP_ROOF')
   })
 })
+
+describe('v3.54.17 §6 orientation apart from the vertical: elevations labelled on the turned sides', () => {
+  it('the turned labels are found by the heights the views agree on; the roof proposal is read under them and executes', async () => {
+    const { orientationOf, roofProposalsFromSketches } = await import('../src/consult/massing/ops.js')
+    const truth = [MAIN]
+    const sk = silhouettes(truth)
+    // the source labels each drawing one side further round than the model's sides (its FRONT draws the model's RIGHT)
+    const relabel: Record<Side, Side> = { RIGHT: 'FRONT', REAR: 'RIGHT', LEFT: 'REAR', FRONT: 'LEFT' }
+    const sketches = sk.map((s) => ({ facade: relabel[s.side], frameId: s.frameId, groundRow: s.groundRow, walls: s.walls, roofs: s.roofs }))
+    const m = modelOf([spec(MAIN, { kind: 'FLAT', eavesM: 3.2, ridgeAxis: undefined, ridgeM: undefined, pitchDeg: undefined })])
+    const side = (f: string): Side | undefined => (['FRONT', 'RIGHT', 'REAR', 'LEFT'].includes(f) ? (f as Side) : undefined)
+    const o = orientationOf(sketches, m, side)
+    expect(o.assignment).toBe('TURNED_90')
+    // and as labelled correctly, the same drawings agree as labelled
+    expect(orientationOf(sk.map((s) => ({ facade: s.side, frameId: s.frameId, groundRow: s.groundRow, walls: s.walls, roofs: s.roofs })), m, side).assignment).toBe('AS_LABELLED')
+    const { proposals } = roofProposalsFromSketches(sketches, m, [], modelRevision(m), side)
+    expect(proposals).toHaveLength(1)
+    const out = executeCorrections({ model: m, views: [], pictures: pictures(truth), proposals })
+    expect(out.records[0].status).toBe('COMMITTED')
+    expect(out.model.roofs[0]).toMatchObject({ kind: 'GABLE', ridgeAxis: 'X' })
+  })
+})

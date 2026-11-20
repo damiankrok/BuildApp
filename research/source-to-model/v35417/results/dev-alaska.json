@@ -1,0 +1,126 @@
+{
+ "case": "DEV alaska (Studio Atrium) offline replay of the v3.54.16 trial answers, 0 USD",
+ "orientation": {
+  "assignment": "TURNED_90",
+  "labelled": {
+   "eavesM": [
+    2.4,
+    6.36,
+    6.34
+   ],
+   "spreadM": 3.96
+  },
+  "turned": {
+   "eavesM": [
+    4,
+    3.82,
+    3.81
+   ],
+   "spreadM": 0.19
+  },
+  "why": "registered as labelled the views put the eaves at 2.4 / 6.36 / 6.34 m; turned by 90° they agree (4 / 3.82 / 3.81 m): the elevations draw the model's sides turned — read so, named, no wall moved"
+ },
+ "massingAccounts": [
+  {
+   "frameId": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+   "proposed": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "the body has no roof; the sketch of the left elevation (drawing the model's front side: registered as labelled the views put the eaves at 2.4 / 6.36 / 6.34 m; turned by 90° they agree (4 / 3.82 / 3.81 m): the elevations draw the model's sides turned — read so, named, no wall moved) draws a band gable roof over it"
+    }
+   ],
+   "side": "FRONT",
+   "skipped": []
+  },
+  {
+   "frameId": "frame-asset-elewacja-frontowa-projektu-alaska-fe8773fc-e010262f95",
+   "proposed": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "the body has no roof; the sketch of the front elevation (drawing the model's right side: registered as labelled the views put the eaves at 2.4 / 6.36 / 6.34 m; turned by 90° they agree (4 / 3.82 / 3.81 m): the elevations draw the model's sides turned — read so, named, no wall moved) draws a band gable roof over it"
+    }
+   ],
+   "side": "RIGHT",
+   "skipped": []
+  },
+  {
+   "frameId": "frame-asset-elewacja-tylna-projektu-alaska-d514b2a0c2-5dbc2f769e",
+   "proposed": [
+    {
+     "bodyId": "ring-main-0",
+     "why": "the body has no roof; the sketch of the rear elevation (drawing the model's left side: registered as labelled the views put the eaves at 2.4 / 6.36 / 6.34 m; turned by 90° they agree (4 / 3.82 / 3.81 m): the elevations draw the model's sides turned — read so, named, no wall moved) draws a band gable roof over it"
+    }
+   ],
+   "side": "LEFT",
+   "skipped": []
+  }
+ ],
+ "setRoof": [
+  {
+   "proposalId": "sk-roof-ring-main-0-30f92f6a1b",
+   "status": "COMMITTED",
+   "code": null,
+   "why": "applied, compiled and measured",
+   "gate": {
+    "currentZ": null,
+    "measure": "REGION",
+    "nullBoxes": 1816,
+    "proposedZ": null,
+    "why": "only the proposal covers building (80 % drawn matter); only the model covers empty: the source draws the proposal",
+    "winner": "PROPOSED"
+   },
+   "measure": {
+    "iouWithProposal": 1,
+    "sourceVerified": true,
+    "why": "built roof-ring-main-0 (GABLE) drawn back into frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b: overlap 1.00 with the source's roof; the built body covers 93 % drawn matter"
+   },
+   "massing": {
+    "body": "ring-main-0",
+    "profile": "roof band from row 174 to 356 (width ratio 1.00)",
+    "registration": "registered by ring-main-0's plan extent: 687 px of building against 13.15 m of plan: 1.91 cm/px, vertical the same (isotropic drawing), ground row 565",
+    "spec": {
+     "eavesM": 4.000469,
+     "kind": "GABLE",
+     "pitchDeg": 41.4,
+     "ridgeAxis": "X",
+     "ridgeM": 7.484131
+    },
+    "version": "1.0.0"
+   }
+  }
+ ],
+ "delivered": {
+  "revision": "1 of 18 sketch proposal(s) kept, each against the original elevation; revision cafedeaac44f → fa9be01e4aa5",
+  "roofs": [
+   {
+    "eaveOffset": 1.200469,
+    "evidence": {
+     "interpretation": "GABLE along X read from the source elevation through registered by ring-main-0's plan extent: 687 px of building against 13.15 m of plan: 1.91 cm/px, vertical the same (isotropic drawing), ground row 565",
+     "locator": "roof polygon on frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+     "source": "frame-asset-elewacja-boczna-projektu-alaska-99fa17bb7a-30f92f6a1b",
+     "status": "SOURCE_DERIVED"
+    },
+    "footprint": {
+     "maxX": 13.15,
+     "maxZ": 7.9,
+     "minX": 0,
+     "minZ": 0
+    },
+    "id": "roof-ring-main-0",
+    "kind": "GABLE",
+    "levelId": "lvl-1",
+    "overhang": 0,
+    "pitchDeg": 41.4,
+    "ridgeAxis": "X",
+    "thickness": 0.25
+   }
+  ]
+ },
+ "independentMeasure": {
+  "published_building_height_m": 7.68,
+  "built_ridge_m": 7.484131,
+  "published_roof_pitch_deg": 40,
+  "built_pitch_deg": 41.4,
+  "note": "the published facts are not read by the mechanism; they measure it"
+ }
+}

@@ -17,8 +17,8 @@
 import { DEFECT_SCHEMA, PATCH_SCHEMA } from './correct/registry.js'
 import type { PatchFields, ReviewDefect } from './correct/registry.js'
 
-export const CONSULTANT_CONTRACT_VERSION = '0.4.0' as const
-export const CONSULTANT_PROMPT_VERSION = '0.5.0' as const
+export const CONSULTANT_CONTRACT_VERSION = '0.5.0' as const
+export const CONSULTANT_PROMPT_VERSION = '0.6.0' as const
 
 export const REVIEW_STATUSES = ['VERIFIED_IN_SCOPE', 'ISSUE_FOUND', 'NEED_EVIDENCE', 'UNKNOWN'] as const
 export type ReviewStatus = (typeof REVIEW_STATUSES)[number]

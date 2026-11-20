@@ -48,10 +48,12 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
-import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, viewsOfRun } from './correct/execute.js'
+import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, sideOfFacade, viewsOfRun } from './correct/execute.js'
 import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
+import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
+import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
 import type { DefectEntry, DefectResolution, QualitySummary } from './correct/quality.js'
 
@@ -105,7 +107,7 @@ export type ConsultantWiring = {
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
 export type SketchSummary = { reading: Omit<SketchReading, 'elevationSketches'>; form: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string; measuredBefore?: BuiltMeasure; measuredAfter?: BuiltMeasure }; finish: { decision: 'ACCEPT' | 'ROLLBACK' | 'NOT_RUN'; why: string }; usd: number
   /** v3.54.16: the sketches' elements as proposals of the correction registry, and what the executor did with each. */
-  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[] } }
+  semantic?: { version: string; decision: 'APPLIED' | 'NONE_KEPT' | 'NOT_RUN'; why: string; accounts: Array<{ frameId: string; side?: string; proposals: number; agreed: number; skipped: Array<{ sketchId: string; why: string }> }>; records: PatchRecord[]; transactions: TransactionRecord[]; /** v3.54.17: each sketch held against each body's roof (SET_ROOF proposals or why not), and the side assignment it was read under. */ massing?: MassingProposalAccount[]; orientation?: OrientationHypothesis } }
 
 /** v3.54.16: one run of the correction executor: where it ran, on which revision, and every patch's and transaction's fate. */
 export type CorrectionRun = { stage: string; baseRevision: string; revision: string; delivered: boolean; records: PatchRecord[]; transactions: TransactionRecord[]; why?: string }
@@ -923,8 +925,10 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const rev = modelRevision(run.reconstruction.model)
     const views = viewsOfRun(run.reconstruction.facadeAlignment.views)
     const accounts = sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => proposalsFromSketch(x.sketch as NonNullable<typeof x.sketch>, x.facade, run.reconstruction.model, views, rev))
-    const proposals = accounts.flatMap((a) => a.proposals)
-    const sem: NonNullable<SketchSummary['semantic']> = { version: SKETCH_PROPOSALS_VERSION, decision: 'NOT_RUN', why: '', accounts: accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped })), records: [], transactions: [] }
+    // v3.54.17: the bodies' roofs first — a roof the sketches draw and the model lacks (or has wrong) is a SET_ROOF
+    const roofs = roofProposalsFromSketches(sketchSummary.reading.sketches.filter((x) => x.sketch).map((x) => ({ facade: x.facade, frameId: x.frameId, groundRow: x.sketch?.groundRow ?? null, walls: (x.sketch?.walls ?? []).map((w) => w.polygon as Array<[number, number]>), roofs: (x.sketch?.roofs ?? []).map((r) => r.polygon as Array<[number, number]>) })), run.reconstruction.model, views, rev, sideOfFacade)
+    const proposals = [...roofs.proposals, ...accounts.flatMap((a) => a.proposals)]
+    const sem: NonNullable<SketchSummary['semantic']> = { version: `${SKETCH_PROPOSALS_VERSION}+massing-${MASSING_OPS_VERSION}`, decision: 'NOT_RUN', why: '', accounts: accounts.map((a) => ({ frameId: a.frameId, ...(a.side ? { side: a.side } : {}), proposals: a.proposals.length, agreed: a.agreed.length, skipped: a.skipped })), records: [], transactions: [], massing: roofs.accounts, orientation: roofs.orientation }
     sketchSummary.semantic = sem
     if (proposals.length === 0) sem.why = 'every sketch element agrees with the model, or none has a registry operation'
     else {
