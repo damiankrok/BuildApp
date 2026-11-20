@@ -12,7 +12,7 @@
  */
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
-import { AnalysisError, analyseLink, analysisFilesOf, consultAnalysis, describeLink, toAnalysisError } from '@buildapp/analysis-service'
+import { AnalysisError, analyseLink, analysisFilesOf, consultAnalysis, describeLink, exchangeLog, fileExchangeSink, toAnalysisError } from '@buildapp/analysis-service'
 import type { HouseDescriber } from '@buildapp/analysis-service'
 import type { ConsultantWiring } from '@buildapp/analysis-service'
 import type { AnalysisProgress, AnalysisTelemetry, DescribingEvent, LinkAnalysisSummary } from '@buildapp/analysis-service'
@@ -33,7 +33,7 @@ export interface JobExecutor {
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
-export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.54.4 pilot: the whole-house description; absent, as before. */ houseDescription?: HouseDescriber; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision; /** v3.54.1: read a complete drawings model as well (`analyseLink` readEveryModel); only with a reader, only for an allowed submission. */ readEveryModel?: boolean; /** v3.54.2 pilot: the consultant (`consultAnalysis`); when present it REPLACES the house reader for an allowed submission — the global description branch is never entered on this path. */ consultant?: ConsultantWiring }
+export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner; /** v3.54.4 pilot: the whole-house description; absent, as before. */ houseDescription?: HouseDescriber; /** v3.53: the host's house reader; absent, the drawings' path alone. */ houseReader?: StructuredVision; /** v3.54.1: read a complete drawings model as well (`analyseLink` readEveryModel); only with a reader, only for an allowed submission. */ readEveryModel?: boolean; /** v3.54.2 pilot: the consultant (`consultAnalysis`); when present it REPLACES the house reader for an allowed submission — the global description branch is never entered on this path. */ consultant?: ConsultantWiring; /** v3.54.17 R2: the private directory of the consultant's exchange records, one per job (`exchange-log.ts`); never served. */ exchangeDir?: string }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
 export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: Partial<JobControl>): Promise<JobOutput> {
@@ -51,11 +51,14 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
   // v3.54.2 pilot: an allowed submission on a host with the consultant switched on goes through the consultation loop —
   // LOCAL builds, the consultant reads what LOCAL could not settle, the analyzer re-runs; no house description is asked
   if (wiring.consultant && input.describe === true) {
+    // v3.54.17 R2: every request and answer of this job written as it happens, in the host's private data directory
+    const exchanges = wiring.exchangeDir ? exchangeLog(fileExchangeSink(join(wiring.exchangeDir, input.jobId)), { jobId: input.jobId }) : undefined
+    const consultant = input.reanalyse === true && wiring.consultant.accepted ? { ...wiring.consultant, accepted: { ...wiring.consultant.accepted, reanalyse: true } } : wiring.consultant
     const consulted = await consultAnalysis(
       { kind: 'URL', url: input.url },
       { adapters: wiring.adapters, deps: wiring.deps, policy: wiring.policy, cache: fileByteCache(join(input.workDir, 'bytes')), jobId: input.jobId, signal: control.signal, progress: control.onProgress, telemetry: control.onTelemetry },
       // v3.54.14: a re-analysis asked for reads afresh beside the accepted consulted revision
-      input.reanalyse === true && wiring.consultant.accepted ? { ...wiring.consultant, accepted: { ...wiring.consultant.accepted, reanalyse: true } } : wiring.consultant,
+      exchanges ? { ...consultant, exchanges } : consultant,
     )
     if (consulted.run) return analysisFilesOf(consulted.run)
     throw consulted.error ?? new AnalysisError('ANALYSIS_FAILED', 'the consultation ended with neither a model nor a refusal')

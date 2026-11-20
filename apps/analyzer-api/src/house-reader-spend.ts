@@ -23,9 +23,10 @@
  * own spend limit on the key is the backstop for that, and the deployment notes say to set one.
  * The journal holds amounts, token counts, model names and times — never a key, an address or a picture.
  */
-import { appendFileSync, closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
+import { appendFileSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { randomBytes } from 'node:crypto'
+import { FileLockTimeout, withFileLock, writeDurably } from './file-lock.js'
 import { HouseReaderUnavailable } from '@buildapp/source-vision'
 import type { StructuredVision, StructuredVisionPurpose, StructuredVisionRequest } from '@buildapp/source-vision'
 
@@ -104,9 +105,6 @@ function parseState(text: string): SpendState {
   return s as SpendState
 }
 
-const sleepCell = new Int32Array(new SharedArrayBuffer(4))
-const sleepSync = (ms: number): void => void Atomics.wait(sleepCell, 0, 0, ms)
-
 const LOCK_WAIT_MS = 10_000
 const LOCK_STALE_MS = 30_000
 
@@ -147,39 +145,11 @@ export function openSpendLedger(options: { dir: string; limits: SpendLimits; ope
   const limits = options.limits
 
   const withLock = <T>(body: () => T): T => {
-    mkdirSync(options.dir, { recursive: true })
-    const deadline = Date.now() + LOCK_WAIT_MS
-    for (;;) {
-      try {
-        const fd = openSync(lock, 'wx')
-        writeFileSync(fd, `${process.pid} ${new Date().toISOString()}\n`)
-        closeSync(fd)
-        break
-      } catch (e) {
-        if ((e as NodeJS.ErrnoException).code !== 'EEXIST') throw e
-        // a holder that died: its lock is taken away by exactly one of the waiters (a rename succeeds once)
-        try {
-          if (Date.now() - statSync(lock).mtimeMs > LOCK_STALE_MS) {
-            const aside = `${lock}.stale-${randomBytes(4).toString('hex')}`
-            renameSync(lock, aside)
-            unlinkSync(aside)
-            continue
-          }
-        } catch {
-          // released or taken aside by another in the meantime: try again
-        }
-        if (Date.now() > deadline) throw new SpendLedgerError('LOCK_TIMEOUT', 'the spend books are held by another request for too long')
-        sleepSync(15)
-      }
-    }
     try {
-      return body()
-    } finally {
-      try {
-        unlinkSync(lock)
-      } catch {
-        // already gone: a waiter judged this holder dead; nothing to release
-      }
+      return withFileLock(lock, body, { waitMs: LOCK_WAIT_MS, staleMs: LOCK_STALE_MS })
+    } catch (e) {
+      if (e instanceof FileLockTimeout) throw new SpendLedgerError('LOCK_TIMEOUT', 'the spend books are held by another request for too long')
+      throw e
     }
   }
 
@@ -198,18 +168,6 @@ export function openSpendLedger(options: { dir: string; limits: SpendLimits; ope
     const fresh: SpendState = { schema: 'buildapp.house-reader-spend', version: 1, openedAt: at, openingUsd: opening, cumulativeUsd: opening, requests: 0, descriptions: 0, day: dayOf(now()), dayRequests: 0, dayDescriptions: 0, updatedAt: at }
     store(fresh, { event: 'OPENED', at, openingUsd: opening, maxUsd: limits.maxUsd })
     return fresh
-  }
-
-  const writeDurably = (path: string, text: string): void => {
-    const tmp = `${path}.${process.pid}.${randomBytes(4).toString('hex')}.tmp`
-    const fd = openSync(tmp, 'w')
-    try {
-      writeFileSync(fd, text)
-      fsyncSync(fd)
-    } finally {
-      closeSync(fd)
-    }
-    renameSync(tmp, path)
   }
 
   /** The journal line first (so a state that is lost is known to be lost), then the backup, then the state. */

@@ -21,7 +21,8 @@ import type { ConsultantModel, ModelTurn } from './loop.js'
 export const ACCEPTED_CONSULT_SCHEMA = 'buildapp.accepted-consulted-revision' as const
 export const ACCEPTED_CONSULT_VERSION = '1.0.0' as const
 
-export type ConsultRole = 'ROUNDS' | 'METRIC' | 'SKETCH'
+/** v3.54.17 R2: OUTLINE — the plan-outline read of the no-model path (exchange records; not part of an accepted binding). */
+export type ConsultRole = 'ROUNDS' | 'METRIC' | 'SKETCH' | 'OUTLINE'
 export type ConsultBinding = { source: string; analyzer: string; consultant: string; models: string; settings: string }
 export type RecordedAnswer = { role: ConsultRole; requestSha256: string; turn: ModelTurn }
 export type AcceptedConsultRevision = { schema: typeof ACCEPTED_CONSULT_SCHEMA; version: typeof ACCEPTED_CONSULT_VERSION; key: string; binding: ConsultBinding; acceptedAt: string; modelHash: string; answers: RecordedAnswer[] }

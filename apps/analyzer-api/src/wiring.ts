@@ -127,6 +127,8 @@ export const productionWiring = (env: Record<string, string | undefined> = proce
       const modelOfReservation = new Map<string, string>()
       const metricOn = env.ANALYZER_METRIC_CONSULTANT === 'on' && Boolean(HOUSE_READER_PRICES[metricModelId])
       return {
+        // v3.54.17 R2: each consulted job's requests and answers, kept whatever the job's end (private; never served)
+        exchangeDir: join(env.ANALYZER_DATA_DIR?.trim() || '.data/analyzer', 'consult-exchanges'),
         consultant: {
           model,
           price,

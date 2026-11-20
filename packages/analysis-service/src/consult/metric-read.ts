@@ -296,6 +296,12 @@ export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): 
         continue
       }
       const v = p.data
+      // v3.54.17 R2: a literal of blanks passes the raw schema (min 1) but is empty once trimmed; it was handed to the strict
+      // schema below and threw out of the whole read (and the job): it is refused here, named, like any other bad item
+      if (v.literal.trim().length === 0) {
+        refused.push(`item ${n}: its literal is blank`)
+        continue
+      }
       const box = v.labelBox.map((x) => x * pic.scale) as [number, number, number, number]
       if (box[2] < box[0] || box[3] < box[1] || box[0] < -5 || box[1] < -5 || box[2] > f.raster.width + 5 || box[3] > f.raster.height + 5) {
         refused.push(`item ${n} "${v.literal}": its text box is not inside the picture`)
@@ -326,7 +332,13 @@ export async function readDimensions(ctx: Ctx, frames: readonly MetricFrame[]): 
         ...roleFields(v.kind, v.role ?? undefined, v.hostHint ?? undefined),
       })
     }
-    const observations = stableIds(f.frameId, items).map((o) => DimensionObservationSchema.parse(o))
+    // every item is checked against the observation's own schema; one that fails is refused with its reason, never thrown
+    const observations = stableIds(f.frameId, items).flatMap((o) => {
+      const q = DimensionObservationSchema.safeParse(o)
+      if (q.success) return [q.data]
+      refused.push(`item "${o.literal}": ${q.error.issues[0]?.path.join('.')} ${q.error.issues[0]?.message}`)
+      return []
+    })
     ctx.record?.({ at: (ctx.now ?? (() => new Date()))().toISOString(), kind: 'METRIC_READ', frameId: f.frameId, observations: observations.length, refused: refused.length, usd: r.usd })
     out.push({ frameId: f.frameId, raw, observations, refused, usd: r.usd, response, ...(r.turn.requestId ? { requestId: r.turn.requestId } : {}), model: r.turn.model, promptVersion: METRIC_READ_PROMPT_VERSION })
   }

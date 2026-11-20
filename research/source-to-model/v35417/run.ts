@@ -34,6 +34,8 @@ import { consultAnalysis } from '../../../packages/analysis-service/src/consult/
 import type { ConsultantModel, ModelTurn } from '../../../packages/analysis-service/src/consult/loop.js'
 import { factTrace } from './fact-trace.js'
 import { ledgerSpend } from './ledger.js'
+// v3.54.17 R2: a live run writes every request and answer as it happens (out/exchanges), whatever the run's end
+import { exchangeLog, fileExchangeSink } from '../../../packages/analysis-service/src/consult/exchange-log.js'
 import { renderModelViews } from '../../../packages/analysis-service/src/consult/model-views.js'
 import { renderSketchPng, renderSketchSvg } from '../../../packages/analysis-service/src/appearance/elevation-sketch.js'
 
@@ -135,7 +137,7 @@ const t0 = Date.now()
 const r = await consultAnalysis(
   { kind: 'URL', url: opt('url') as string },
   { adapters: [archonAdapter, genericProjectPageAdapter], cache: fileByteCache(opt('cache') as string), offline: true, recogniser, content, ...(process.env.BUILDPLAN_DEBUG === '1' ? { debug: (m: string) => process.stderr.write(`DBG ${m}\n`) } : {}) },
-  { model: loopTransport ?? checkTransport ?? transport, metricModel: transport, price: loopTransport ? PRICES['claude-sonnet-5-5'] : PRICES[opt('check-model') ?? modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: loopTransport ? 2 : 0, maxGeometryRounds: checkTransport ? Number(opt('geometry-rounds') ?? 2) : 0, check: checkTransport ? 'ON' : 'OFF', ...(opt('sketch-corrections') === 'OFF' ? { sketchCorrections: 'OFF' as const } : {}), keepLocalModel: true, ...(outlineTransport ? { outlineModel: outlineTransport, outlinePrice: PRICES[modelId] } : { massing: 'OFF' as const }), ...(spend ? { spend } : {}), record: (e) => events.push(e) },
+  { model: loopTransport ?? checkTransport ?? transport, metricModel: transport, price: loopTransport ? PRICES['claude-sonnet-5-5'] : PRICES[opt('check-model') ?? modelId], metricPrice: PRICES[modelId], variant: (opt('variant') as 'C' | 'R') ?? 'C', metricRead: 'ON', ...(sketchTransport ? { sketches: 'ON' as const, sketchModel: sketchTransport, sketchPrice: PRICES['claude-sonnet-5-5'] } : {}), maxRounds: loopTransport ? 2 : 0, maxGeometryRounds: checkTransport ? Number(opt('geometry-rounds') ?? 2) : 0, check: checkTransport ? 'ON' : 'OFF', ...(opt('sketch-corrections') === 'OFF' ? { sketchCorrections: 'OFF' as const } : {}), keepLocalModel: true, ...(outlineTransport ? { outlineModel: outlineTransport, outlinePrice: PRICES[modelId] } : { massing: 'OFF' as const }), ...(spend ? { spend } : {}), ...(spend ? { exchanges: exchangeLog(fileExchangeSink(join(out, 'exchanges'))) } : {}), record: (e) => events.push(e) },
 )
 writeFileSync(join(out, 'metric-read.json'), `${stableJson(r.metricRead ?? null)}\n`)
 if (r.sketches) {

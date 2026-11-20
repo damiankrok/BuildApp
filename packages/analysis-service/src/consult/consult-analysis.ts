@@ -36,6 +36,7 @@ import { METRIC_READ_PROMPT_VERSION, METRIC_RESOLVER_VERSION, METRIC_VERIFY_PROM
 import type { BuiltMeasure, IndependentRead, LocalCheck, MetricFrame, MetricResolution } from './metric-read.js'
 import { SKETCH_STEP_VERSION, judgeForm, readSketches, readUnregisteredSketches } from './sketch-step.js'
 import { CHOOSE_VERSION } from './choose.js'
+import type { ExchangeLog } from './exchange-log.js'
 import { ACCEPTED_CONSULT_SCHEMA, ACCEPTED_CONSULT_VERSION, consultBinding, recordingModel, replayModel } from './accepted-consult.js'
 import type { AcceptedConsultRevision, AcceptedConsultStore, ConsultReuse, RecordedAnswer } from './accepted-consult.js'
 import { ELEVATION_SKETCH_PARSER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION } from '../appearance/elevation-sketch.js'
@@ -54,7 +55,7 @@ import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, P
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
-import { readPlanOutline } from './plan-outline.js'
+import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
 import type { PlanOutlineRead } from './plan-outline.js'
 import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
@@ -110,6 +111,12 @@ export type ConsultantWiring = {
   /** v3.54.17: the plan outline read's own transport (default: the metric read's). */
   outlineModel?: ConsultantModel
   outlinePrice?: Price
+  /**
+   * v3.54.17 R2 (audit §6): the private exchange record (`exchange-log.ts`) — every request written before it is sent,
+   * every answer as it is received, every reservation and settlement, the step processing reached and the first loss.
+   * Written whatever the job's end; absent, nothing is recorded beyond the accepted revision (as before).
+   */
+  exchanges?: ExchangeLog
 }
 
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
@@ -545,12 +552,48 @@ async function checkSources(l: Local, options: AnalysisOptions): Promise<CheckSo
  * (R); then, on the model that stands, at most `maxGeometryRounds` checks that may change its geometry and a last look
  * that reviews it. Never throws because of the consultant: its failure is a record, and the result before it stands.
  */
+/**
+ * v3.54.17 R2: with an exchange record, every transport the path may use is wrapped innermost (before the accepted-revision
+ * recorder) and the books beside it; the job's end and its first loss are written whether it returns or throws.
+ */
 export async function consultAnalysis(input: AnalysisInput, options: AnalysisOptions, wiring: ConsultantWiring): Promise<ConsultedAnalysis> {
+  const log = wiring.exchanges
+  if (!log) return consultAnalysisBody(input, options, wiring)
+  const v = { contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, executor: CORRECTION_EXECUTOR_VERSION, registry: CORRECTION_REGISTRY_VERSION }
+  const wrapped: ConsultantWiring = {
+    ...wiring,
+    model: log.wrap(wiring.model, 'ROUNDS', v),
+    ...(wiring.metricModel ? { metricModel: log.wrap(wiring.metricModel, 'METRIC', { ...v, read: METRIC_READ_PROMPT_VERSION, verify: METRIC_VERIFY_PROMPT_VERSION }) } : {}),
+    ...(wiring.sketchModel ? { sketchModel: log.wrap(wiring.sketchModel, 'SKETCH', { ...v, sketch: ELEVATION_SKETCH_PROMPT_VERSION, parser: String(ELEVATION_SKETCH_PARSER_VERSION) }) } : {}),
+    // without its own transport the outline read uses the metric read's (then the rounds'), recorded under that role and
+    // with its step (PLAN_OUTLINE) in the request file
+    ...(wiring.outlineModel ? { outlineModel: log.wrap(wiring.outlineModel, 'OUTLINE', { ...v, outline: PLAN_OUTLINE_VERSION }) } : {}),
+    ...(wiring.spend ? { spend: log.wrapSpend(wiring.spend) } : {}),
+  }
+  try {
+    const out = await consultAnalysisBody(input, options, wrapped)
+    if (out.run) log.end('COMPLETED', { modelSha256: out.run.result.modelSha256, sceneSha256: out.run.result.sceneSha256 })
+    else {
+      const f = out.error?.failure()
+      log.failed(log.current(), out.error ?? new Error('the consultation ended with neither a model nor a refusal'))
+      log.end('FAILED', { code: f?.code ?? 'ANALYSIS_FAILED', reasonCode: f?.reasonCode ?? null })
+    }
+    return out
+  } catch (e) {
+    log.failed(log.current(), e)
+    log.end(options.signal?.aborted ? 'CANCELLED' : 'FAILED')
+    throw e
+  }
+}
+
+async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOptions, wiring: ConsultantWiring): Promise<ConsultedAnalysis> {
+  const stage = (name: string, detail?: Record<string, unknown>): void => wiring.exchanges?.stage(name, detail)
   const record = wiring.record ?? (() => undefined)
   const now = options.now ?? (() => new Date())
   const limits = wiring.limits ?? DEFAULT_CONSULT_LIMITS
   const maxRounds = wiring.maxRounds ?? 2
   record({ at: now().toISOString(), kind: 'PATH', path: 'CONSULTANT', variant: wiring.variant, globalDescription: 'DISABLED', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, model: wiring.model.model })
+  stage('LOCAL')
   const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
   const localState = stateOf(local)
   record({ at: now().toISOString(), kind: 'LOCAL', state: localState })
@@ -572,8 +615,8 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
     const { spend: _unbooked, ...rest } = wiring
     void _unbooked
     wiring = stored
-      ? { ...rest, model: replayModel(wiring.model, 'ROUNDS', stored.answers, replayCounter), ...(wiring.metricModel ? { metricModel: replayModel(wiring.metricModel, 'METRIC', stored.answers, replayCounter) } : {}), ...(wiring.sketchModel ? { sketchModel: replayModel(wiring.sketchModel, 'SKETCH', stored.answers, replayCounter) } : {}) }
-      : { ...wiring, model: recordingModel(wiring.model, 'ROUNDS', answers, transportFailures), ...(wiring.metricModel ? { metricModel: recordingModel(wiring.metricModel, 'METRIC', answers, transportFailures) } : {}), ...(wiring.sketchModel ? { sketchModel: recordingModel(wiring.sketchModel, 'SKETCH', answers, transportFailures) } : {}) }
+      ? { ...rest, model: replayModel(wiring.model, 'ROUNDS', stored.answers, replayCounter), ...(wiring.metricModel ? { metricModel: replayModel(wiring.metricModel, 'METRIC', stored.answers, replayCounter) } : {}), ...(wiring.sketchModel ? { sketchModel: replayModel(wiring.sketchModel, 'SKETCH', stored.answers, replayCounter) } : {}), ...(wiring.outlineModel ? { outlineModel: replayModel(wiring.outlineModel, 'OUTLINE', stored.answers, replayCounter) } : {}) }
+      : { ...wiring, model: recordingModel(wiring.model, 'ROUNDS', answers, transportFailures), ...(wiring.metricModel ? { metricModel: recordingModel(wiring.metricModel, 'METRIC', answers, transportFailures) } : {}), ...(wiring.sketchModel ? { sketchModel: recordingModel(wiring.sketchModel, 'SKETCH', answers, transportFailures) } : {}), ...(wiring.outlineModel ? { outlineModel: recordingModel(wiring.outlineModel, 'OUTLINE', answers, transportFailures) } : {}) }
     record({ at: now().toISOString(), kind: 'ACCEPTED_REVISION', key: b.key, state: stored ? 'REUSED' : 'NEW_CANDIDATE', ...(stored ? { acceptedAt: stored.acceptedAt } : {}) })
   }
   let good: Local = local
@@ -589,6 +632,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
   // v3.54.14: the metric consultant, before the label rounds
   let metricRead: MetricReadSummary | undefined
   if (wiring.metricRead === 'ON' && local.pkg && local.graph && local.metrics) {
+    stage('METRIC_READ')
     const mModel = wiring.metricModel ?? wiring.model
     const mPrice = wiring.metricPrice ?? wiring.price
     const frames: MetricFrame[] = []
@@ -665,6 +709,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       ...((CONF_RANK[localState.metric?.confidence ?? 'INCONCLUSIVE'] ?? 0) >= 2 ? [] : ['the plan scale is not settled']),
       ...(graph0.coordinateFrames.some((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION') ? [] : ['the source has no section (no ridge or level datum)']),
     ]
+    stage('SKETCHES_WITHOUT_MODEL')
     unregisteredSketches = await readUnregisteredSketches({
       frames: graph0.coordinateFrames.map((f) => ({ frameId: f.id, view: String(f.roles.view), projection: String(f.roles.projection), width: f.size?.width ?? 0, height: f.size?.height ?? 0 })),
       rasterOf: async (frameId) => {
@@ -693,6 +738,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       else {
         const published = (pkg0.publishedFacts as Array<{ kind?: string; key?: string; value?: number }> | undefined)?.find((x) => (x.kind ?? x.key) === 'footprint_area')?.value
         const asset = pkg0.assets.find((a) => a.id === f.assetId)
+        stage('PLAN_OUTLINE')
         const plan = await readPlanOutline({ model: wiring.outlineModel ?? wiring.metricModel ?? wiring.model, price: wiring.outlinePrice ?? wiring.metricPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) }, { frameId: f.id, raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash, ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)} with ${String(diag.independentWitnesses ?? '?')} independent witnesses` } } : {}), ...(typeof published === 'number' ? { publishedFootprintM2: published } : {}) })
         usd += plan.usd
         delivery.usd += plan.usd
@@ -711,6 +757,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
             const r = fx ? await frameRaster(pkg0, graph0, fx.id, options) : undefined
             if (fx && r?.raster) pictures.push({ n: i + 1, frameId: fx.id, projection: String(fx.roles.projection), transform: { x0: 0, y0: 0, scale: 1 }, raster: r.raster, sourceByteHash: fx.variantByteHash })
           }
+          stage('BUILD_MASSING')
           const empty = createEmptyModel(`massing-${f.variantByteHash.slice(0, 12)}`, (asset?.caption ?? 'house').slice(0, 60))
           const out = executeCorrections({ model: empty, views: [], pictures, proposals: [{ proposalId: `massing-${f.variantByteHash.slice(0, 12)}`, baseRevision: modelRevision(empty), operation: 'BUILD_MASSING', targetId: 'WHOLE', origin: 'SKETCH', uncertainty: 'MEDIUM', justification: 'LOCAL built no model; the plan outline and the elevations are read' }], massing: { outline: plan.observation, silhouettes } })
           delivery.records = out.records
@@ -746,6 +793,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
       const asset = pkg0.assets.find((a) => a.id === f.assetId)
       return { raster: fr.raster, caption: (asset?.caption ?? '').slice(0, 120), sourceByteHash: f.variantByteHash }
     }
+    stage('SKETCHES')
     const reading = await readSketches({ metrics: metrics0, model: run0.reconstruction.model, views: run0.reconstruction.facadeAlignment.views.map((v) => ({ facade: v.facade, frameId: v.frameId, projection: v.projection })), ...(metricRead ? { metricReads: metricRead.reads } : {}), rasterOf, ctx: { model: wiring.sketchModel ?? wiring.model, price: wiring.sketchPrice ?? wiring.price, ...(wiring.spend ? { spend: wiring.spend } : {}), ...(options.signal ? { signal: options.signal } : {}) } })
     usd += reading.usd
     const { elevationSketches, ...kept } = reading

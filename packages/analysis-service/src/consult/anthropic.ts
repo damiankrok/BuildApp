@@ -17,6 +17,7 @@ import { createHash } from 'node:crypto'
  */
 import { ConsultantUnavailable } from './loop.js'
 import type { ConsultantModel, ModelTurn } from './loop.js'
+import { RAW_ERROR, RAW_RESPONSE } from './exchange-log.js'
 
 type MessagesLike = { messages: { create(body: Record<string, unknown>, opts?: { signal?: AbortSignal }): Promise<{ content: Array<Record<string, unknown>>; usage?: Record<string, unknown>; stop_reason?: string; model?: string; _request_id?: string | null }> } }
 
@@ -96,9 +97,12 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
         const status = (e as { status?: unknown }).status
         const unbilled = typeof status === 'number' && [400, 401, 403, 404, 413, 429].includes(status)
         const timeout = /timed? ?out/i.test((e as Error).message)
-        throw new ConsultantUnavailable(unbilled ? 'REJECTED_UNBILLED' : timeout ? 'TIMEOUT' : 'TRANSPORT', scrub(`${typeof status === 'number' ? `HTTP ${status}: ` : ''}${(e as Error).message}`).slice(0, 400))
+        const failure = new ConsultantUnavailable(unbilled ? 'REJECTED_UNBILLED' : timeout ? 'TIMEOUT' : 'TRANSPORT', scrub(`${typeof status === 'number' ? `HTTP ${status}: ` : ''}${(e as Error).message}`).slice(0, 400))
+        // v3.54.17 R2: the status and the provider's error body, for the exchange record (`exchange-log.ts`); never headers
+        Object.defineProperty(failure, RAW_ERROR, { value: { ...(typeof status === 'number' ? { status } : {}), body: JSON.parse(scrub(JSON.stringify((e as { error?: unknown }).error ?? null))) }, enumerable: false })
+        throw failure
       }
-      return {
+      const turn: ModelTurn = {
         content: r.content as ModelTurn['content'],
         usage: usageOf(r.usage),
         ...(r.stop_reason ? { stopReason: r.stop_reason } : {}),
@@ -107,6 +111,10 @@ export function anthropicConsultant(options: { model?: string; maxOutputTokens?:
         latencyMs: Date.now() - started,
         ...(strictFallback ? { strictFallback } : {}),
       }
+      // v3.54.17 R2: the provider's message as received, for the exchange record; not enumerable, so no other record or
+      // spread that serializes a turn carries a second copy of it
+      Object.defineProperty(turn, RAW_RESPONSE, { value: JSON.parse(JSON.stringify(r)), enumerable: false })
+      return turn
     },
   }
 }

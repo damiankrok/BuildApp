@@ -26,6 +26,11 @@ const price = { inputUsdPerMTok: 4, outputUsdPerMTok: 20 }
 const frame = { frameId: 'F', kind: 'PLAN' as const, storey: 'GROUND' as const, raster: raster(2000, 1000), caption: 'rzut parteru' }
 
 describe('v3.54.14 metric consultant — the independent read', () => {
+  it('v3.54.17 R2: a literal of blanks is refused by name, never thrown out of the read (it used to fail the whole job)', async () => {
+    const [r] = await readDimensions({ model: fake([item('   ', 'cm', null, [100, 50, 140, 60]), item('1365', 'cm', 13.65, [300, 50, 340, 60])]), price }, [frame])
+    expect(r.observations.map((o) => o.literal)).toEqual(['1365'])
+    expect(r.refused.some((x) => /literal is blank/.test(x))).toBe(true)
+  })
   it('sends the frame downscaled by a whole factor and nothing of the analyzer; positions come back in frame pixels', async () => {
     const sent: unknown[] = []
     const [r] = await readDimensions({ model: fake([item('1365', 'cm', 13.65, [100, 50, 140, 60])], sent), price }, [frame])
