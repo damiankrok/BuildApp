@@ -131,7 +131,13 @@ księgi z dysku przed rezerwacją.
 ## 8. Macierz testów
 
 Zamrożenie: 4416 passed / 18 failed (16 znanych bazy + 2 w `worker.test.ts`, który przy pełnym obciążeniu przekracza czas,
-a sam przechodzi 3/3); baza 4396 / 16 (`results/matrix-freeze.txt`). Typecheck czysty.
+a sam przechodzi 3/3); końcowa: **4418 passed / 18 failed** (te same 16 + `worker.test.ts`; +2 to test scen v3.54.17);
+baza 4396 / 16 (`results/matrix-freeze.txt`, `results/matrix-final.txt`). Typecheck czysty. Android `testDebugUnitTest`:
+479 testów, wszystkie przechodzą (po przesunięciu pozycji scen o 3 w `OwnerCheckpointV35410ScenesTest`).
+
+**APK 1348** (`BuildPlan-Model-Preview-1348-arm64-v8a.apk`, sha256 `c959d673…e1324`, z `ceb8a36`, podpis v2 klucza
+podglądu, certyfikat `6e48fac4…ca0da`): sceny `alaska-host-v35417`, `alaska-dev-v35417`, `aurora-maxi-trial-v35417` są
+pierwsze w indeksie i bajt w bajt równe plikom w repozytorium (sprawdzone po rozpakowaniu APK).
 
 ## 9. Co aplikacja buduje, co umie poprawić, czego jeszcze brakuje
 
