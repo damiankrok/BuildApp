@@ -39,10 +39,11 @@ const assetOf = (frameId: string): Asset | undefined => {
 }
 const index: { house: string; before: string | null; final: string | null; sides: Array<Record<string, unknown>> } = { house: opt('house'), before, final, sides: [] }
 const skDir = join(run, 'sketches')
-for (const side of ['FRONT', 'RIGHT', 'REAR', 'LEFT', 'SIDE_UNSPECIFIED']) {
+const named = readdirSync(skDir).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5))
+for (const side of [...new Set(['FRONT', 'RIGHT', 'REAR', 'LEFT', ...named])]) {
   const f = join(skDir, `${side}.json`)
   if (!existsSync(f)) {
-    if (side !== 'SIDE_UNSPECIFIED') index.sides.push({ side, status: 'NOT_SKETCHED', why: 'the run drew no sketch of this side (no orthographic elevation assigned to it)' })
+    index.sides.push({ side, status: 'NOT_SKETCHED', why: 'the run drew no sketch of this side (no orthographic elevation assigned to it)' })
     continue
   }
   const j = JSON.parse(readFileSync(f, 'utf8')) as { sketch?: { frameId?: string }; failed?: unknown }

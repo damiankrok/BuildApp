@@ -24,7 +24,7 @@ import { targetBodies } from '../correct/resolve.js'
 import { area, bodiesOf, bodyCommands, extentOn, MASSING_TOLERANCES, MASSING_VERSION, massingCommands, MINIATURE_CONVENTIONS, profileOver, readableStretch, registerByPlan, solveMassing } from './massing.js'
 import type { BodySpec, Fidelity, MassingHypothesis, ModelBody, OutlineObservation, Rect, RoofSpec, SilhouetteObservation } from './massing.js'
 
-export const MASSING_OPS_VERSION = '1.3.0' as const
+export const MASSING_OPS_VERSION = '1.4.0' as const
 /** v3.54.17 R2: the most overhang a drawn roof may have past its body on a side, and the steepest pitch the kernel builds. */
 export const MAX_OVERHANG_M = 1.0
 export const MAX_PITCH_DEG = 85
@@ -699,7 +699,26 @@ export function orientationOf(sketches: readonly SketchForMassing[], m: Canonica
           continue
         }
         const roofs = front ? s.roofs.filter((poly) => { const xs = poly.map((q) => q[0]); const w = (Math.max(...xs) - Math.min(...xs)) * r.view.projection.mpp; return w <= st.hi - st.lo + 2 * MAX_OVERHANG_M }) : s.roofs
-        const prof = profileOver(r.view, st.lo, st.hi, { walls: [], roofs })
+        let prof = profileOver(r.view, st.lo, st.hi, { walls: [], roofs })
+        // v3.54.17 R3: seen from the gable end, the eaves an eaves view draws (the fascia, past the wall by the overhang and
+        // lower by overhang × slope) stand at the roof's own ends, outside the walls' stretch: read the gable over the full
+        // width of ITS roof (only polygons mostly over this stretch — an annex roof beside it is not this roof's eaves)
+        if (prof?.shape === 'TRIANGLE') {
+          const pr = r.view.projection
+          const spanPx = Math.abs(pr.alongSign * (st.hi - st.lo) / pr.mpp)
+          const toPx = (a: number): number => (a - pr.alongAtPx0) / (pr.alongSign * pr.mpp)
+          const sx0 = Math.min(toPx(st.lo), toPx(st.hi))
+          const sx1 = Math.max(toPx(st.lo), toPx(st.hi))
+          const own = roofs.filter((poly) => { const xs = poly.map((q) => q[0]); return Math.min(Math.max(...xs), sx1) - Math.max(Math.min(...xs), sx0) > 0.5 * spanPx })
+          const xs = own.flatMap((poly) => poly.map((q) => q[0]))
+          if (own.length && xs.length) {
+            const ends = [pr.alongAtPx0 + pr.alongSign * pr.mpp * Math.min(...xs), pr.alongAtPx0 + pr.alongSign * pr.mpp * Math.max(...xs)]
+            const lo = Math.max(Math.min(...ends), st.lo - MAX_OVERHANG_M)
+            const hi = Math.min(Math.max(...ends), st.hi + MAX_OVERHANG_M)
+            const wide = profileOver(r.view, lo, hi, { walls: [], roofs: own })
+            if (wide?.shape === 'TRIANGLE') prof = wide
+          }
+        }
         if (prof && prof.shape !== 'NONE') per.get(b.id)?.[turn ? 'turned' : 'labelled'].push({ frameId: s.frameId, side, eavesM: Math.round(prof.eavesM * 100) / 100 })
       }
     }
