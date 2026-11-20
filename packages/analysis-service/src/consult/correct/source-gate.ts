@@ -20,7 +20,7 @@
  */
 import type { Raster } from '@buildapp/source-package'
 
-export const SOURCE_GATE_VERSION = '1.1.0' as const
+export const SOURCE_GATE_VERSION = '1.2.0' as const
 
 export type Box = { x0: number; y0: number; x1: number; y1: number }
 /** A box whose top edge may be raked: from (x0, headLeftY) to (x1, headRightY); y1 stays the bottom. */
@@ -120,10 +120,17 @@ export function rawSupport(r: Raster, box: Box): number {
 
 /** The raw support of a polygon hypothesis (A2): border steps averaged along each side, inside against its ring. */
 export function rawSupportShape(r: Raster, shape: Shape): number {
+  return rawSupportPolygon(r, polygonOf(shape))
+}
+
+/** v3.54.17 (gate 1.2.0): the raw support of any simple polygon — a roof's gable triangle, its slope band, a body's silhouette. */
+export function rawSupportPolygon(r: Raster, poly: ReadonlyArray<readonly [number, number]>): number {
   const L = lumOf(r)
-  const poly = polygonOf(shape)
+  const xs = poly.map((p) => p[0])
+  const ys = poly.map((p) => p[1])
+  const shape = { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) }
   const w = shape.x1 - shape.x0
-  const h = shape.y1 - Math.min(shape.y0, shape.headLeftY ?? shape.y0, shape.headRightY ?? shape.y0)
+  const h = shape.y1 - shape.y0
   if (w < 3 || h < 3) return 0
   const at = (x: number, y: number): number => L[Math.max(0, Math.min(r.height - 1, Math.round(y))) * r.width + Math.max(0, Math.min(r.width - 1, Math.round(x)))]
   const cx = poly.reduce((a, p) => a + p[0], 0) / poly.length
@@ -257,6 +264,11 @@ function compareHypothesesOn(r: Raster, proposed: Shape, current: Shape | undefi
   const exclude = [proposed, ...(current ? [current] : []), ...others]
   const p = supportOf(r, proposed, facade, exclude, tolPx, asPolygon)
   const c = current ? supportOf(r, current, facade, exclude, tolPx, asPolygon) : undefined
+  return decide(p, c)
+}
+
+/** The one decision rule for two hypotheses (or one, for an addition), whatever they are drawn as. */
+function decide(p: Support, c: Support | undefined): HypothesisVerdict {
   if (p.z === null) return { winner: 'UNDECIDED', proposed: p, ...(c ? { current: c } : {}), why: `too few free same-size places on this wall band (${p.null.n}) to know what the picture draws where nothing stands` }
   if (!c) {
     if (p.supported) return { winner: 'PROPOSED', proposed: p, why: `the source draws an element in the proposed box (z ${p.z} ≥ ${SUPPORT_Z_MIN} over ${p.null.n} same-size boxes on that band)` }
@@ -269,6 +281,53 @@ function compareHypothesesOn(r: Raster, proposed: Shape, current: Shape | undefi
   if (p.supported && (p.z - cz >= HYPOTHESIS_Z_MARGIN || !(c.supported ?? false))) return { winner: 'PROPOSED', proposed: p, current: c, why: `the source supports the proposal (z ${p.z}) ${c.supported ? `better than the model's element (z ${cz})` : `and not the model's element (z ${cz})`}` }
   if ((c.supported ?? false) && (cz - p.z >= HYPOTHESIS_Z_MARGIN || !p.supported)) return { winner: 'CURRENT', proposed: p, current: c, why: `the source supports the model's element (z ${cz}) ${p.supported ? 'better than' : 'and not'} the proposal (z ${p.z}): the model stands` }
   return { winner: 'UNDECIDED', proposed: p, current: c, why: `the picture does not decide between the model's element (z ${cz}) and the proposal (z ${p.z}): both stay named, neither is chosen` }
+}
+
+export type Poly = ReadonlyArray<readonly [number, number]>
+const bboxOf = (poly: Poly): Box => ({ x0: Math.min(...poly.map((p) => p[0])), y0: Math.min(...poly.map((p) => p[1])), x1: Math.max(...poly.map((p) => p[0])), y1: Math.max(...poly.map((p) => p[1])) })
+const shiftPoly = (poly: Poly, dx: number, dy: number): Array<[number, number]> => poly.map(([x, y]) => [x + dx, y + dy] as [number, number])
+
+/** v3.54.17: a polygon's support in standard deviations above the same polygon moved across its band (3 × 3 search, as shapes). */
+export function supportOfPolygon(r: Raster, poly: Poly, band: { x0: number; x1: number; y0?: number; y1?: number }, exclude: readonly Box[], tolPx: number): Support {
+  const t = Math.max(0, Math.round(tolPx))
+  const near = (q: Poly): number => {
+    let best = 0
+    for (const dx of t > 0 ? [-t, 0, t] : [0]) for (const dy of t > 0 ? [-t, 0, t] : [0]) best = Math.max(best, rawSupportPolygon(r, shiftPoly(q, dx, dy)))
+    return best
+  }
+  const raw = near(poly)
+  const b = bboxOf(poly)
+  const w = b.x1 - b.x0
+  const h = b.y1 - b.y0
+  const vals: number[] = []
+  const lo = Math.max(0, Math.floor(band.x0))
+  const hi = Math.min(r.width - 1, Math.ceil(band.x1)) - w
+  const step = Math.max(2, Math.round(w / 3))
+  const top = band.y0 === undefined ? b.y0 : Math.max(0, Math.floor(band.y0))
+  const bottom = band.y1 === undefined ? b.y0 : Math.min(r.height - 1, Math.ceil(band.y1)) - h
+  const rows = [b.y0, ...(bottom > top ? Array.from({ length: Math.floor((bottom - top) / Math.max(2, Math.round(h / 2))) + 1 }, (_, i) => top + i * Math.max(2, Math.round(h / 2))) : [])].filter((y, i, a) => a.indexOf(y) === i)
+  for (const y of rows) for (let x = lo; x <= hi; x += step) {
+    const q = shiftPoly(poly, x - b.x0, y - b.y0)
+    const qb = bboxOf(q)
+    const grown = { x0: qb.x0 - t, y0: qb.y0 - t, x1: qb.x1 + t, y1: qb.y1 + t }
+    if (exclude.some((e) => overlaps(grown, e))) continue
+    vals.push(near(q))
+  }
+  const n = vals.length
+  const mean = n > 0 ? vals.reduce((a, v) => a + v, 0) / n : 0
+  const std = n > 1 ? Math.sqrt(vals.reduce((a, v) => a + (v - mean) ** 2, 0) / (n - 1)) : 0
+  const nb = { mean, std, n }
+  if (n < MIN_NULL) return { raw, z: null, null: nb, supported: null }
+  const z = (raw - mean) / Math.max(std, 0.01)
+  return { raw, z: Math.round(z * 100) / 100, null: nb, supported: z >= SUPPORT_Z_MIN }
+}
+
+/** v3.54.17: two polygon hypotheses (a roof outline proposed, the model's own) held against the same picture, by the one rule. */
+export function comparePolygons(r: Raster, proposed: Poly, current: Poly | undefined, band: { x0: number; x1: number; y0?: number; y1?: number }, others: readonly Box[], tolPx: number): HypothesisVerdict {
+  const exclude = [bboxOf(proposed), ...(current ? [bboxOf(current)] : []), ...others]
+  const p = supportOfPolygon(r, proposed, band, exclude, tolPx)
+  const c = current ? supportOfPolygon(r, current, band, exclude, tolPx) : undefined
+  return { ...decide(p, c), measure: 'POLYGON' }
 }
 
 export const iou = (a: Box, b: Box): number => {
