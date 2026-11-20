@@ -1,0 +1,110 @@
+{
+ "alaska": {
+  "before": true,
+  "final": true,
+  "failedJob": false,
+  "sides": [
+   {
+    "side": "FRONT",
+    "status": "PARTIAL",
+    "why": "one scale 0.03169 m/px from the wall ends; no vertical anchor; form not taken: no vertical witness (±0.00 from the sketch's own ground line); 2 opening(s) off the model's (opening-door-23-20 1.048 m, opening-window-22-13 undefined m)"
+   },
+   {
+    "side": "RIGHT",
+    "status": "NOT_REQUESTED",
+    "why": "the sketch step was not asked about this side: it reads the elevations the analyzer registered to a model side, and none was registered for this one The original shown is labelled by the source only as a side elevation; which side it is was"
+   },
+   {
+    "side": "REAR",
+    "status": "PARTIAL",
+    "why": "one scale 0.03153 m/px from the wall ends; no vertical anchor; form not taken: no vertical witness (±0.00 from the sketch's own ground line); 2 opening(s) off the model's (opening-glazed_door-20-20 1.277 m, opening-window-20-13 undefined m)"
+   },
+   {
+    "side": "LEFT",
+    "status": "PARTIAL",
+    "why": "one scale 0.01148 m/px from the wall ends; no vertical anchor; form not taken: no vertical witness (±0.00 from the sketch's own ground line); 7 opening(s) off the model's (opening-window-12-19 1.058 m, opening-window-33-19 0.673 m, opening-"
+   }
+  ]
+ },
+ "layla": {
+  "before": false,
+  "final": false,
+  "failedJob": false,
+  "sides": [
+   {
+    "side": "FRONT",
+    "status": "READ",
+    "why": "read UNCHECKED: nothing to check its proportions against (LOCAL built no model (RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED), no elevation is registered to a side (no model to register it against))"
+   },
+   {
+    "side": "RIGHT",
+    "status": "READ",
+    "why": "read UNCHECKED: nothing to check its proportions against (LOCAL built no model (RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED), no elevation is registered to a side (no model to register it against)); the source labels this drawing only as a s"
+   },
+   {
+    "side": "REAR",
+    "status": "READ",
+    "why": "read UNCHECKED: nothing to check its proportions against (LOCAL built no model (RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED), no elevation is registered to a side (no model to register it against))"
+   },
+   {
+    "side": "LEFT",
+    "status": "READ",
+    "why": "read UNCHECKED: nothing to check its proportions against (LOCAL built no model (RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED), no elevation is registered to a side (no model to register it against)); the source labels this drawing only as a s"
+   }
+  ]
+ },
+ "aurora-maxi": {
+  "before": true,
+  "final": true,
+  "failedJob": false,
+  "sides": [
+   {
+    "side": "FRONT",
+    "status": "PARTIAL",
+    "why": "one scale 0.02032 m/px from the wall ends; no vertical anchor; form not taken: no vertical witness (±0.00 from the sketch's own ground line); 5 opening(s) off the model's (opening-door-25-20 1.133 m, opening-window-16-19 0.446 m, opening-wi"
+   },
+   {
+    "side": "RIGHT",
+    "status": "NOT_REQUESTED",
+    "why": "the sketch step was not asked about this side: it reads the elevations the analyzer registered to a model side, and none was registered for this one The original shown is labelled by the source only as a side elevation; which side it is was"
+   },
+   {
+    "side": "REAR",
+    "status": "PARTIAL",
+    "why": "one scale 0.02045 m/px from the wall ends; no vertical anchor; form not taken: no vertical witness (±0.00 from the sketch's own ground line); 4 opening(s) off the model's (opening-glazed_wall-12-20 0.735 m, opening-window-26-19 0.488 m, ope"
+   },
+   {
+    "side": "LEFT",
+    "status": "NOT_REQUESTED",
+    "why": "the sketch step was not asked about this side: it reads the elevations the analyzer registered to a model side, and none was registered for this one The original shown is labelled by the source only as a side elevation; which side it is was"
+   }
+  ]
+ },
+ "aurora-midi": {
+  "before": true,
+  "final": false,
+  "failedJob": true,
+  "sides": [
+   {
+    "side": "FRONT",
+    "status": "NOT_REQUESTED",
+    "why": "the job ended FAILED before any sketch request (host job-3 ANALYSIS_FAILED after one paid metric read; its answer was not kept); nothing was read for this side and nothing is drawn"
+   },
+   {
+    "side": "RIGHT",
+    "status": "NOT_REQUESTED",
+    "why": "the job ended FAILED before any sketch request (host job-3 ANALYSIS_FAILED after one paid metric read; its answer was not kept); nothing was read for this side and nothing is drawn The original shown is labelled by the source only as a side"
+   },
+   {
+    "side": "REAR",
+    "status": "NOT_REQUESTED",
+    "why": "the job ended FAILED before any sketch request (host job-3 ANALYSIS_FAILED after one paid metric read; its answer was not kept); nothing was read for this side and nothing is drawn"
+   },
+   {
+    "side": "LEFT",
+    "status": "NOT_REQUESTED",
+    "why": "the job ended FAILED before any sketch request (host job-3 ANALYSIS_FAILED after one paid metric read; its answer was not kept); nothing was read for this side and nothing is drawn The original shown is labelled by the source only as a side"
+   }
+  ]
+ }
+}
