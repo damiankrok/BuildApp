@@ -40,7 +40,7 @@ import type { ExchangeLog } from './exchange-log.js'
 import { ACCEPTED_CONSULT_SCHEMA, ACCEPTED_CONSULT_VERSION, consultBinding, recordingModel, replayModel } from './accepted-consult.js'
 import type { AcceptedConsultRevision, AcceptedConsultStore, ConsultReuse, RecordedAnswer } from './accepted-consult.js'
 import { ELEVATION_SKETCH_PARSER_VERSION, ELEVATION_SKETCH_PROMPT_VERSION } from '../appearance/elevation-sketch.js'
-import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
+import { SOLVER_V2_VERSION, planCounts } from '@buildapp/reconstruction'
 import type { SketchReading } from './sketch-step.js'
 import { usableGeometryFingerprint } from '../appearance/consumer.js'
 import type { LabelProblem } from './problems.js'
@@ -51,11 +51,13 @@ import { sha256Hex } from '@buildapp/source-common'
 import { renderStoreyCut } from './model-views.js'
 import { CORRECTION_REGISTRY_VERSION } from './correct/registry.js'
 import { CORRECTION_EXECUTOR_VERSION, executeCorrections, modelRevision, sideOfFacade, viewsOfRun } from './correct/execute.js'
-import type { BindPicture, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
+import { identityOf } from '../identity.js'
+import type { BindPicture, BindView, CorrectionOutcome, CorrectionProposal, PatchRecord, PrintedWitness, TransactionRecord } from './correct/execute.js'
 import { SOURCE_GATE_VERSION } from './correct/source-gate.js'
 import { SKETCH_PROPOSALS_VERSION, proposalsFromSketch } from './correct/from-sketch.js'
 import { MASSING_OPS_VERSION, roofProposalsFromSketches } from './massing/ops.js'
 import { PLAN_OUTLINE_VERSION, readPlanOutline } from './plan-outline.js'
+import { massingRun } from './massing-result.js'
 import type { PlanOutlineRead } from './plan-outline.js'
 import type { MassingProposalAccount, OrientationHypothesis } from './massing/ops.js'
 import { QUALITY_VERSION, qualityOf, reconcileLedger, settleDefects } from './correct/quality.js'
@@ -117,6 +119,13 @@ export type ConsultantWiring = {
    * Written whatever the job's end; absent, nothing is recorded beyond the accepted revision (as before).
    */
   exchanges?: ExchangeLog
+  /**
+   * v3.54.17 R2 — CONTROLLED TEST ONLY (research and tests; the host never sets it): LOCAL runs as always, and then its
+   * model is withheld, as if LOCAL had failed after reading the plan and its scale, so the path without a LOCAL model
+   * runs on a package whose LOCAL builds. The result says so (reasonCode LOCAL_MODEL_WITHHELD_TEST); it is never an
+   * organic result.
+   */
+  withholdLocalModel?: true
 }
 
 /** v3.54.14: what the sketch step read, accepted and changed (the rasters are not kept: they are redrawn from the sketches). */
@@ -136,6 +145,11 @@ export type MassingDelivery = {
   sceneSha256?: string
   modelSha256?: string
   usd: number
+  /**
+   * v3.54.17 R2: whether the body was handed to the ordinary delivery (`massing-result.ts`): the result, model and scene
+   * the host stores, and the revision the review looks at. Absent before v3.54.17 R2.
+   */
+  delivery?: { delivered: boolean; why: string; modelSha256?: string; sceneSha256?: string; revision?: string }
 }
 
 /** v3.54.16: one run of the correction executor: where it ran, on which revision, and every patch's and transaction's fate. */
@@ -354,6 +368,11 @@ type Local = { run?: AnalysisRun; error?: AnalysisError; pkg?: SourcePackage; gr
 
 /** v3.54.16: how each run was made, so the correction executor's model can be delivered through the same run (`patchedModel`). */
 const lineage = new WeakMap<Local, { input: AnalysisInput; options: AnalysisOptions }>()
+/**
+ * v3.54.17 R2: a run made of the body BUILD_MASSING built without LOCAL (`massing-result.ts`): the elevations' registrations
+ * the executor binds through, and how a patched model of it is delivered again (the same envelope, never LOCAL's rebuild).
+ */
+const massingOf = new WeakMap<Local, { views: BindView[]; rebuild: (model: CanonicalBuildingModel) => Local | undefined }>()
 async function attempt(input: AnalysisInput, options: AnalysisOptions): Promise<Local> {
   const l = await attemptRaw(input, options)
   lineage.set(l, { input, options })
@@ -587,6 +606,7 @@ export async function consultAnalysis(input: AnalysisInput, options: AnalysisOpt
 }
 
 async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOptions, wiring: ConsultantWiring): Promise<ConsultedAnalysis> {
+  const startedAt = (options.now ?? (() => new Date()))().toISOString()
   const stage = (name: string, detail?: Record<string, unknown>): void => wiring.exchanges?.stage(name, detail)
   const record = wiring.record ?? (() => undefined)
   const now = options.now ?? (() => new Date())
@@ -594,7 +614,13 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const maxRounds = wiring.maxRounds ?? 2
   record({ at: now().toISOString(), kind: 'PATH', path: 'CONSULTANT', variant: wiring.variant, globalDescription: 'DISABLED', contract: CONSULTANT_CONTRACT_VERSION, prompt: CONSULTANT_PROMPT_VERSION, model: wiring.model.model })
   stage('LOCAL')
-  const local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
+  let local = await attempt(input, { ...options, consulted: undefined, consultedSpans: undefined, crossAxisWitness: undefined, roofFeatures: undefined, reuseMetrics: undefined, glazedEnds: undefined })
+  if (wiring.withholdLocalModel && local.run) {
+    const r = local.run
+    const withheld = new AnalysisError('ANALYSIS_FAILED', 'CONTROLLED TEST: LOCAL built a model and it was withheld, so the path without a LOCAL model runs (never an organic result)', { reasonCode: 'LOCAL_MODEL_WITHHELD_TEST', diagnostics: planCounts(r.planDiagnostics) })
+    local = { error: withheld, pkg: r.pkg, graph: r.graph, metrics: r.metrics, plans: r.planDiagnostics }
+    record({ at: now().toISOString(), kind: 'LOCAL_MODEL_WITHHELD_TEST', modelHash: r.reconstruction.candidate.modelHash })
+  }
   const localState = stateOf(local)
   record({ at: now().toISOString(), kind: 'LOCAL', state: localState })
   // v3.54.14: an accepted revision of this binding answers every request; otherwise the answers are recorded
@@ -772,6 +798,24 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
             delivery.sceneSha256 = sha256Hex(sceneText)
             delivery.modelSha256 = sha256Hex(serializeModel(out.model))
             delivery.why = `BUILD_MASSING committed on the empty model: ${rec0.measure?.why ?? ''}`.slice(0, 600)
+            // v3.54.17 R2: the body becomes the analysis that stands — an ordinary result through the shared envelope,
+            // delivered by the host and looked at by the review like any model (no rebuild by the drawings' solver)
+            const identity = { ...identityOf(pkg0, options.adapters), ...options.identity }
+            const failure = local.error?.failure()
+            const build = (delivered?: CanonicalBuildingModel): Local | undefined => {
+              const mr = massingRun({ pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}), identity, sourceUrl: input.kind === 'URL' ? input.url : pkg0.canonicalUrl, jobId: options.jobId ?? null, record: rec0, executorModel: out.model, plan: { frameId: plan.frameId, version: plan.version, promptVersion: plan.promptVersion, ...(plan.check ? { check: plan.check } : {}), ...(plan.observation ? { observation: plan.observation } : {}), ...(cmPerPx && strong ? { scale: { mPerPx: cmPerPx / 100, why: `${cmPerPx} cm/px, ${String(diag.metricConfidence)} / ${String(diag.metricRelation)}` } } : {}) }, localFailure: { code: failure?.code ?? 'ANALYSIS_FAILED', reasonCode: failure?.reasonCode ?? null }, outlineModel: (wiring.outlineModel ?? wiring.metricModel ?? wiring.model).model, sketches: { attempted: unregisteredSketches?.sketches.length ?? 0, used: silhouettes.length, frameIds: silhouettes.map((x) => x.frameId) }, ...(delivered ? { delivered } : {}), startedAt, now })
+              if (!mr) return undefined
+              const l: Local = { run: mr.run, pkg: pkg0, graph: graph0, ...(good.metrics ? { metrics: good.metrics } : {}), ...(good.plans ? { plans: good.plans } : {}) }
+              massingOf.set(l, { views: mr.views, rebuild: (m) => build(m) })
+              return l
+            }
+            const m0 = build()
+            if (m0?.run) {
+              good = m0
+              goodState = stateOf(m0)
+              delivery.delivery = { delivered: true, why: 'the body is the analysis that stands: result, model and scene through the shared envelope; the review looks at this revision', modelSha256: m0.run.result.modelSha256, sceneSha256: m0.run.result.sceneSha256, revision: modelRevision(m0.run.reconstruction.model) }
+            } else delivery.delivery = { delivered: false, why: 'the committed record\'s commands do not rebuild the executor\'s model byte for byte: nothing is delivered' }
+            record({ at: now().toISOString(), kind: 'MASSING_DELIVERED', ...delivery.delivery })
           } else {
             delivery.decision = 'NOT_BUILT'
             delivery.why = `${rec0?.status ?? 'NO_RECORD'} ${rec0?.code ?? ''}: ${rec0?.why ?? ''}`.slice(0, 600)
@@ -781,7 +825,8 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
       }
     }
   }
-  if (wiring.sketches === 'ON' && good.run && good.pkg && good.graph && good.metrics) {
+  // v3.54.17 R2: a body built without LOCAL had its elevations read already (without a model): they are not asked again
+  if (wiring.sketches === 'ON' && good.run && good.pkg && good.graph && good.metrics && !massingOf.has(good)) {
     const run0 = good.run
     const pkg0 = good.pkg
     const graph0 = good.graph
@@ -1011,13 +1056,22 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   const executeOn = async (l: Local, proposals: readonly CorrectionProposal[], stage: string, seen: Set<string> = seenPatch): Promise<CorrectionOutcome | undefined> => {
     if (!l.run) return undefined
     const pictures = await allPicturesOf(l)
-    const out = executeCorrections({ model: l.run.reconstruction.model, views: viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen })
+    const out = executeCorrections({ model: l.run.reconstruction.model, views: massingOf.get(l)?.views ?? viewsOfRun(l.run.reconstruction.facadeAlignment.views), pictures, proposals, witnesses: witnessesOf(l), seen })
     correctionRuns.push({ stage, baseRevision: out.baseRevision, revision: out.revision, delivered: false, records: out.records, transactions: out.transactions })
     record({ at: now().toISOString(), kind: 'CORRECTIONS', stage, baseRevision: out.baseRevision, revision: out.revision, records: out.records.map((r) => ({ proposalId: r.proposalId, operation: r.operation, status: r.status, code: r.code ?? null })), transactions: out.transactions.map((t) => ({ txId: t.txId, decision: t.decision, why: t.why })) })
     return out
   }
   /** The executor's model delivered through the same run as its base (compile, assessment, scene); checked byte for byte. */
   const materialize = async (from: Local, model: CanonicalBuildingModel): Promise<Local | undefined> => {
+    // v3.54.17 R2: a body built without LOCAL is delivered again through its own envelope with the patched model
+    const mass = massingOf.get(from)
+    if (mass) {
+      const l = mass.rebuild(model)
+      const ok = l?.run !== undefined && sha256Hex(serializeModel(l.run.reconstruction.model)) === sha256Hex(serializeModel(model))
+      record({ at: now().toISOString(), kind: 'CORRECTIONS_DELIVERED', ok, via: 'MASSING_ENVELOPE', revision: l?.run ? modelRevision(l.run.reconstruction.model) : null })
+      if (ok && correctionRuns.length > 0) correctionRuns[correctionRuns.length - 1].delivered = true
+      return ok ? l : undefined
+    }
     const lin = lineage.get(from)
     if (!lin || !from.run) return undefined
     const l = await attempt(lin.input, { ...lin.options, patchedModel: { baseSha256: sha256Hex(serializeModel(from.run.reconstruction.model)), model } })
@@ -1127,6 +1181,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
     for (let g = 1; g <= maxGeometry + 1 && sources.length > 0; g += 1) {
       const run = good.run as AnalysisRun
       const revision = modelRevision(run.reconstruction.model)
+      stage(`REVIEW-${g}`, { revision })
       const rec: GeometryRound = { round: g, revision, status: null, pictures: [], observations: [], reviewed: [], verdicts: [], corrections: [], outcomes: [], decision: 'NOT_RUN', why: '', usd: 0 }
       geometry.push(rec)
       let res: ModelCheckResult
@@ -1280,6 +1335,21 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
         break
       }
       rec.corrections = corrections
+      // v3.54.17 R2: a roof feature is built by the drawings' solver's rebuild, which a body built without LOCAL does not
+      // have: refused by name (the registry patches of the same look still stand)
+      if (massingOf.has(base ?? good)) {
+        rec.decision = 'ROLLBACK'
+        rec.why = `ROOF_FEATURE_NEEDS_LOCAL_REBUILD: ${corrections.length} roof feature(s) proposed; a model built without LOCAL takes registry patches only${appliedPatches.length > 0 ? `; ${appliedPatches.length} patch(es) applied through the correction executor` : ''}`
+        lastRefused = [...lastRefused, ...corrections.map((c) => ({ targetId: c.id, why: 'ROOF_FEATURE_NEEDS_LOCAL_REBUILD: the roof feature is built by the drawings solver\'s rebuild, which this model (built without LOCAL) does not have' }))]
+        lastApplied = appliedPatches
+        rec.afterRevision = good.run ? modelRevision(good.run.reconstruction.model) : undefined
+        record({ at: now().toISOString(), kind: 'GEOMETRY_ROUND', round: g, decision: rec.decision, why: rec.why })
+        if (lastApplied.length > 0) {
+          lastCheckedRevision = null
+          continue
+        }
+        break
+      }
       // dormers: the analyzer rebuilds the UNPATCHED run that stands with them (all its own inputs kept); the committed
       // patches are then bound again on the rebuilt model and delivered with it
       const unpatched = base ?? good
@@ -1314,6 +1384,7 @@ async function consultAnalysisBody(input: AnalysisInput, options: AnalysisOption
   }
   // the last proposing look's defects, when no later look judged what it applied
   if (prevLook) defectLedger.push(...settleDefects(prevLook.look, prevLook.defects, prevLook.proposals, prevLook.records, undefined, undefined, false))
+  stage('DELIVERY')
   const finalState = stateOf(good)
   const sourceCheck = (wiring.check ?? 'ON') === 'ON' && good.run ? sourceCheckOf(good, finalState, geometry, features, lastReview, lastCheckedRevision, rounds) : undefined
   if (sourceCheck) {
